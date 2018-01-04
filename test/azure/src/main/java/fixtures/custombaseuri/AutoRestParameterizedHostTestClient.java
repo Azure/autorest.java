@@ -25,7 +25,7 @@ public interface AutoRestParameterizedHostTestClient {
      * Sets A string value that is used as a global part of the parameterized host.
      *
      * @param host the host value.
-     * @return the service client itself
+     * @return the service client itself.
      */
     AutoRestParameterizedHostTestClient withHost(String host);
 
@@ -40,7 +40,7 @@ public interface AutoRestParameterizedHostTestClient {
      * Sets Gets or sets the preferred language for the response.
      *
      * @param acceptLanguage the acceptLanguage value.
-     * @return the service client itself
+     * @return the service client itself.
      */
     AutoRestParameterizedHostTestClient withAcceptLanguage(String acceptLanguage);
 
@@ -55,7 +55,7 @@ public interface AutoRestParameterizedHostTestClient {
      * Sets Gets or sets the retry timeout in seconds for Long Running Operations. Default value is 30.
      *
      * @param longRunningOperationRetryTimeout the longRunningOperationRetryTimeout value.
-     * @return the service client itself
+     * @return the service client itself.
      */
     AutoRestParameterizedHostTestClient withLongRunningOperationRetryTimeout(int longRunningOperationRetryTimeout);
 
@@ -70,7 +70,7 @@ public interface AutoRestParameterizedHostTestClient {
      * Sets When set to true a unique x-ms-client-request-id value is generated and included in each request. Default is true.
      *
      * @param generateClientRequestId the generateClientRequestId value.
-     * @return the service client itself
+     * @return the service client itself.
      */
     AutoRestParameterizedHostTestClient withGenerateClientRequestId(boolean generateClientRequestId);
 

@@ -40,7 +40,7 @@ public class LROsDeleteAsyncRetrySucceededHeadersInner {
     /**
      * Get the azureAsyncOperation value.
      *
-     * @return the azureAsyncOperation value
+     * @return the azureAsyncOperation value.
      */
     public String azureAsyncOperation() {
         return this.azureAsyncOperation;
@@ -49,7 +49,7 @@ public class LROsDeleteAsyncRetrySucceededHeadersInner {
     /**
      * Set the azureAsyncOperation value.
      *
-     * @param azureAsyncOperation the azureAsyncOperation value to set
+     * @param azureAsyncOperation the azureAsyncOperation value to set.
      * @return the LROsDeleteAsyncRetrySucceededHeadersInner object itself.
      */
     public LROsDeleteAsyncRetrySucceededHeadersInner withAzureAsyncOperation(String azureAsyncOperation) {
@@ -60,7 +60,7 @@ public class LROsDeleteAsyncRetrySucceededHeadersInner {
     /**
      * Get the location value.
      *
-     * @return the location value
+     * @return the location value.
      */
     public String location() {
         return this.location;
@@ -69,7 +69,7 @@ public class LROsDeleteAsyncRetrySucceededHeadersInner {
     /**
      * Set the location value.
      *
-     * @param location the location value to set
+     * @param location the location value to set.
      * @return the LROsDeleteAsyncRetrySucceededHeadersInner object itself.
      */
     public LROsDeleteAsyncRetrySucceededHeadersInner withLocation(String location) {
@@ -80,7 +80,7 @@ public class LROsDeleteAsyncRetrySucceededHeadersInner {
     /**
      * Get the retryAfter value.
      *
-     * @return the retryAfter value
+     * @return the retryAfter value.
      */
     public Integer retryAfter() {
         return this.retryAfter;
@@ -89,7 +89,7 @@ public class LROsDeleteAsyncRetrySucceededHeadersInner {
     /**
      * Set the retryAfter value.
      *
-     * @param retryAfter the retryAfter value to set
+     * @param retryAfter the retryAfter value to set.
      * @return the LROsDeleteAsyncRetrySucceededHeadersInner object itself.
      */
     public LROsDeleteAsyncRetrySucceededHeadersInner withRetryAfter(Integer retryAfter) {

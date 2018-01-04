@@ -29,9 +29,9 @@ public interface Dates {
     /**
      * Get null date value.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @throws ErrorException thrown if the request is rejected by server
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the LocalDate object if successful.
      */
     LocalDate getNull();
@@ -40,33 +40,33 @@ public interface Dates {
      * Get null date value.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceFuture&lt;LocalDate&gt;} object
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link ServiceFuture&lt;LocalDate&gt;} object.
      */
     ServiceFuture<LocalDate> getNullAsync(final ServiceCallback<LocalDate> serviceCallback);
 
     /**
      * Get null date value.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Maybe&lt;LocalDate&gt;} object if successful.
-     */
-    Maybe<LocalDate> getNullAsync();
-
-    /**
-     * Get null date value.
-     *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, LocalDate&gt;&gt;} object if successful.
      */
     Single<RestResponse<Void, LocalDate>> getNullWithRestResponseAsync();
 
     /**
+     * Get null date value.
+     *
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link Maybe&lt;LocalDate&gt;} object if successful.
+     */
+    Maybe<LocalDate> getNullAsync();
+
+    /**
      * Get invalid date value.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @throws ErrorException thrown if the request is rejected by server
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the LocalDate object if successful.
      */
     LocalDate getInvalidDate();
@@ -75,33 +75,33 @@ public interface Dates {
      * Get invalid date value.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceFuture&lt;LocalDate&gt;} object
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link ServiceFuture&lt;LocalDate&gt;} object.
      */
     ServiceFuture<LocalDate> getInvalidDateAsync(final ServiceCallback<LocalDate> serviceCallback);
 
     /**
      * Get invalid date value.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Maybe&lt;LocalDate&gt;} object if successful.
-     */
-    Maybe<LocalDate> getInvalidDateAsync();
-
-    /**
-     * Get invalid date value.
-     *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, LocalDate&gt;&gt;} object if successful.
      */
     Single<RestResponse<Void, LocalDate>> getInvalidDateWithRestResponseAsync();
 
     /**
+     * Get invalid date value.
+     *
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link Maybe&lt;LocalDate&gt;} object if successful.
+     */
+    Maybe<LocalDate> getInvalidDateAsync();
+
+    /**
      * Get overflow date value.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @throws ErrorException thrown if the request is rejected by server
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the LocalDate object if successful.
      */
     LocalDate getOverflowDate();
@@ -110,33 +110,33 @@ public interface Dates {
      * Get overflow date value.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceFuture&lt;LocalDate&gt;} object
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link ServiceFuture&lt;LocalDate&gt;} object.
      */
     ServiceFuture<LocalDate> getOverflowDateAsync(final ServiceCallback<LocalDate> serviceCallback);
 
     /**
      * Get overflow date value.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Maybe&lt;LocalDate&gt;} object if successful.
-     */
-    Maybe<LocalDate> getOverflowDateAsync();
-
-    /**
-     * Get overflow date value.
-     *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, LocalDate&gt;&gt;} object if successful.
      */
     Single<RestResponse<Void, LocalDate>> getOverflowDateWithRestResponseAsync();
 
     /**
+     * Get overflow date value.
+     *
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link Maybe&lt;LocalDate&gt;} object if successful.
+     */
+    Maybe<LocalDate> getOverflowDateAsync();
+
+    /**
      * Get underflow date value.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @throws ErrorException thrown if the request is rejected by server
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the LocalDate object if successful.
      */
     LocalDate getUnderflowDate();
@@ -145,71 +145,71 @@ public interface Dates {
      * Get underflow date value.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceFuture&lt;LocalDate&gt;} object
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link ServiceFuture&lt;LocalDate&gt;} object.
      */
     ServiceFuture<LocalDate> getUnderflowDateAsync(final ServiceCallback<LocalDate> serviceCallback);
 
     /**
      * Get underflow date value.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Maybe&lt;LocalDate&gt;} object if successful.
-     */
-    Maybe<LocalDate> getUnderflowDateAsync();
-
-    /**
-     * Get underflow date value.
-     *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, LocalDate&gt;&gt;} object if successful.
      */
     Single<RestResponse<Void, LocalDate>> getUnderflowDateWithRestResponseAsync();
 
     /**
+     * Get underflow date value.
+     *
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link Maybe&lt;LocalDate&gt;} object if successful.
+     */
+    Maybe<LocalDate> getUnderflowDateAsync();
+
+    /**
      * Put max date value 9999-12-31.
      *
-     * @param dateBody the LocalDate value
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @throws ErrorException thrown if the request is rejected by server
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
+     * @param dateBody the LocalDate value.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     void putMaxDate(LocalDate dateBody);
 
     /**
      * Put max date value 9999-12-31.
      *
-     * @param dateBody the LocalDate value
+     * @param dateBody the LocalDate value.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceFuture&lt;Void&gt;} object
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
     ServiceFuture<Void> putMaxDateAsync(LocalDate dateBody, final ServiceCallback<Void> serviceCallback);
 
     /**
      * Put max date value 9999-12-31.
      *
-     * @param dateBody the LocalDate value
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Completable} object if successful.
-     */
-    Completable putMaxDateAsync(LocalDate dateBody);
-
-    /**
-     * Put max date value 9999-12-31.
-     *
-     * @param dateBody the LocalDate value
-     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @param dateBody the LocalDate value.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
      */
     Single<RestResponse<Void, Void>> putMaxDateWithRestResponseAsync(LocalDate dateBody);
 
     /**
+     * Put max date value 9999-12-31.
+     *
+     * @param dateBody the LocalDate value.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link Completable} object if successful.
+     */
+    Completable putMaxDateAsync(LocalDate dateBody);
+
+    /**
      * Get max date value 9999-12-31.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @throws ErrorException thrown if the request is rejected by server
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the LocalDate object if successful.
      */
     LocalDate getMaxDate();
@@ -218,71 +218,71 @@ public interface Dates {
      * Get max date value 9999-12-31.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceFuture&lt;LocalDate&gt;} object
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link ServiceFuture&lt;LocalDate&gt;} object.
      */
     ServiceFuture<LocalDate> getMaxDateAsync(final ServiceCallback<LocalDate> serviceCallback);
 
     /**
      * Get max date value 9999-12-31.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Maybe&lt;LocalDate&gt;} object if successful.
-     */
-    Maybe<LocalDate> getMaxDateAsync();
-
-    /**
-     * Get max date value 9999-12-31.
-     *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, LocalDate&gt;&gt;} object if successful.
      */
     Single<RestResponse<Void, LocalDate>> getMaxDateWithRestResponseAsync();
 
     /**
+     * Get max date value 9999-12-31.
+     *
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link Maybe&lt;LocalDate&gt;} object if successful.
+     */
+    Maybe<LocalDate> getMaxDateAsync();
+
+    /**
      * Put min date value 0000-01-01.
      *
-     * @param dateBody the LocalDate value
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @throws ErrorException thrown if the request is rejected by server
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
+     * @param dateBody the LocalDate value.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     void putMinDate(LocalDate dateBody);
 
     /**
      * Put min date value 0000-01-01.
      *
-     * @param dateBody the LocalDate value
+     * @param dateBody the LocalDate value.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceFuture&lt;Void&gt;} object
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
     ServiceFuture<Void> putMinDateAsync(LocalDate dateBody, final ServiceCallback<Void> serviceCallback);
 
     /**
      * Put min date value 0000-01-01.
      *
-     * @param dateBody the LocalDate value
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Completable} object if successful.
-     */
-    Completable putMinDateAsync(LocalDate dateBody);
-
-    /**
-     * Put min date value 0000-01-01.
-     *
-     * @param dateBody the LocalDate value
-     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @param dateBody the LocalDate value.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
      */
     Single<RestResponse<Void, Void>> putMinDateWithRestResponseAsync(LocalDate dateBody);
 
     /**
+     * Put min date value 0000-01-01.
+     *
+     * @param dateBody the LocalDate value.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link Completable} object if successful.
+     */
+    Completable putMinDateAsync(LocalDate dateBody);
+
+    /**
      * Get min date value 0000-01-01.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @throws ErrorException thrown if the request is rejected by server
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the LocalDate object if successful.
      */
     LocalDate getMinDate();
@@ -291,24 +291,24 @@ public interface Dates {
      * Get min date value 0000-01-01.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceFuture&lt;LocalDate&gt;} object
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link ServiceFuture&lt;LocalDate&gt;} object.
      */
     ServiceFuture<LocalDate> getMinDateAsync(final ServiceCallback<LocalDate> serviceCallback);
 
     /**
      * Get min date value 0000-01-01.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Maybe&lt;LocalDate&gt;} object if successful.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link Single&lt;RestResponse&lt;Void, LocalDate&gt;&gt;} object if successful.
      */
-    Maybe<LocalDate> getMinDateAsync();
+    Single<RestResponse<Void, LocalDate>> getMinDateWithRestResponseAsync();
 
     /**
      * Get min date value 0000-01-01.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single&lt;RestResponse&lt;Void, LocalDate&gt;&gt;} object if successful.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link Maybe&lt;LocalDate&gt;} object if successful.
      */
-    Single<RestResponse<Void, LocalDate>> getMinDateWithRestResponseAsync();
+    Maybe<LocalDate> getMinDateAsync();
 }

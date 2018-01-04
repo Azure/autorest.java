@@ -218,9 +218,9 @@ public class MultipleResponsesImpl implements MultipleResponses {
     /**
      * Send a 200 response with valid payload: {'statusCode': '200'}.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @throws ErrorException thrown if the request is rejected by server
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the A object if successful.
      */
     public A get200Model204NoModelDefaultError200Valid() {
@@ -231,8 +231,8 @@ public class MultipleResponsesImpl implements MultipleResponses {
      * Send a 200 response with valid payload: {'statusCode': '200'}.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceFuture} object
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link ServiceFuture&lt;A&gt;} object.
      */
     public ServiceFuture<A> get200Model204NoModelDefaultError200ValidAsync(final ServiceCallback<A> serviceCallback) {
         return ServiceFuture.fromBody(get200Model204NoModelDefaultError200ValidAsync(), serviceCallback);
@@ -241,7 +241,7 @@ public class MultipleResponsesImpl implements MultipleResponses {
     /**
      * Send a 200 response with valid payload: {'statusCode': '200'}.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, A&gt;&gt;} object if successful.
      */
     public Single<RestResponse<Void, A>> get200Model204NoModelDefaultError200ValidWithRestResponseAsync() {
@@ -251,8 +251,8 @@ public class MultipleResponsesImpl implements MultipleResponses {
     /**
      * Send a 200 response with valid payload: {'statusCode': '200'}.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return a {@link Single} emitting the RestResponse<Void, A> object
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link Maybe&lt;A&gt;} object if successful.
      */
     public Maybe<A> get200Model204NoModelDefaultError200ValidAsync() {
         return get200Model204NoModelDefaultError200ValidWithRestResponseAsync()
@@ -270,9 +270,9 @@ public class MultipleResponsesImpl implements MultipleResponses {
     /**
      * Send a 204 response with no payload.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @throws ErrorException thrown if the request is rejected by server
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the A object if successful.
      */
     public A get200Model204NoModelDefaultError204Valid() {
@@ -283,8 +283,8 @@ public class MultipleResponsesImpl implements MultipleResponses {
      * Send a 204 response with no payload.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceFuture} object
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link ServiceFuture&lt;A&gt;} object.
      */
     public ServiceFuture<A> get200Model204NoModelDefaultError204ValidAsync(final ServiceCallback<A> serviceCallback) {
         return ServiceFuture.fromBody(get200Model204NoModelDefaultError204ValidAsync(), serviceCallback);
@@ -293,7 +293,7 @@ public class MultipleResponsesImpl implements MultipleResponses {
     /**
      * Send a 204 response with no payload.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, A&gt;&gt;} object if successful.
      */
     public Single<RestResponse<Void, A>> get200Model204NoModelDefaultError204ValidWithRestResponseAsync() {
@@ -303,8 +303,8 @@ public class MultipleResponsesImpl implements MultipleResponses {
     /**
      * Send a 204 response with no payload.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return a {@link Single} emitting the RestResponse<Void, A> object
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link Maybe&lt;A&gt;} object if successful.
      */
     public Maybe<A> get200Model204NoModelDefaultError204ValidAsync() {
         return get200Model204NoModelDefaultError204ValidWithRestResponseAsync()
@@ -322,9 +322,9 @@ public class MultipleResponsesImpl implements MultipleResponses {
     /**
      * Send a 201 response with valid payload: {'statusCode': '201'}.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @throws ErrorException thrown if the request is rejected by server
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the A object if successful.
      */
     public A get200Model204NoModelDefaultError201Invalid() {
@@ -335,8 +335,8 @@ public class MultipleResponsesImpl implements MultipleResponses {
      * Send a 201 response with valid payload: {'statusCode': '201'}.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceFuture} object
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link ServiceFuture&lt;A&gt;} object.
      */
     public ServiceFuture<A> get200Model204NoModelDefaultError201InvalidAsync(final ServiceCallback<A> serviceCallback) {
         return ServiceFuture.fromBody(get200Model204NoModelDefaultError201InvalidAsync(), serviceCallback);
@@ -345,7 +345,7 @@ public class MultipleResponsesImpl implements MultipleResponses {
     /**
      * Send a 201 response with valid payload: {'statusCode': '201'}.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, A&gt;&gt;} object if successful.
      */
     public Single<RestResponse<Void, A>> get200Model204NoModelDefaultError201InvalidWithRestResponseAsync() {
@@ -355,8 +355,8 @@ public class MultipleResponsesImpl implements MultipleResponses {
     /**
      * Send a 201 response with valid payload: {'statusCode': '201'}.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return a {@link Single} emitting the RestResponse<Void, A> object
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link Maybe&lt;A&gt;} object if successful.
      */
     public Maybe<A> get200Model204NoModelDefaultError201InvalidAsync() {
         return get200Model204NoModelDefaultError201InvalidWithRestResponseAsync()
@@ -374,9 +374,9 @@ public class MultipleResponsesImpl implements MultipleResponses {
     /**
      * Send a 202 response with no payload:.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @throws ErrorException thrown if the request is rejected by server
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the A object if successful.
      */
     public A get200Model204NoModelDefaultError202None() {
@@ -387,8 +387,8 @@ public class MultipleResponsesImpl implements MultipleResponses {
      * Send a 202 response with no payload:.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceFuture} object
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link ServiceFuture&lt;A&gt;} object.
      */
     public ServiceFuture<A> get200Model204NoModelDefaultError202NoneAsync(final ServiceCallback<A> serviceCallback) {
         return ServiceFuture.fromBody(get200Model204NoModelDefaultError202NoneAsync(), serviceCallback);
@@ -397,7 +397,7 @@ public class MultipleResponsesImpl implements MultipleResponses {
     /**
      * Send a 202 response with no payload:.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, A&gt;&gt;} object if successful.
      */
     public Single<RestResponse<Void, A>> get200Model204NoModelDefaultError202NoneWithRestResponseAsync() {
@@ -407,8 +407,8 @@ public class MultipleResponsesImpl implements MultipleResponses {
     /**
      * Send a 202 response with no payload:.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return a {@link Single} emitting the RestResponse<Void, A> object
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link Maybe&lt;A&gt;} object if successful.
      */
     public Maybe<A> get200Model204NoModelDefaultError202NoneAsync() {
         return get200Model204NoModelDefaultError202NoneWithRestResponseAsync()
@@ -426,9 +426,9 @@ public class MultipleResponsesImpl implements MultipleResponses {
     /**
      * Send a 400 response with valid error payload: {'status': 400, 'message': 'client error'}.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @throws ErrorException thrown if the request is rejected by server
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the A object if successful.
      */
     public A get200Model204NoModelDefaultError400Valid() {
@@ -439,8 +439,8 @@ public class MultipleResponsesImpl implements MultipleResponses {
      * Send a 400 response with valid error payload: {'status': 400, 'message': 'client error'}.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceFuture} object
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link ServiceFuture&lt;A&gt;} object.
      */
     public ServiceFuture<A> get200Model204NoModelDefaultError400ValidAsync(final ServiceCallback<A> serviceCallback) {
         return ServiceFuture.fromBody(get200Model204NoModelDefaultError400ValidAsync(), serviceCallback);
@@ -449,7 +449,7 @@ public class MultipleResponsesImpl implements MultipleResponses {
     /**
      * Send a 400 response with valid error payload: {'status': 400, 'message': 'client error'}.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, A&gt;&gt;} object if successful.
      */
     public Single<RestResponse<Void, A>> get200Model204NoModelDefaultError400ValidWithRestResponseAsync() {
@@ -459,8 +459,8 @@ public class MultipleResponsesImpl implements MultipleResponses {
     /**
      * Send a 400 response with valid error payload: {'status': 400, 'message': 'client error'}.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return a {@link Single} emitting the RestResponse<Void, A> object
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link Maybe&lt;A&gt;} object if successful.
      */
     public Maybe<A> get200Model204NoModelDefaultError400ValidAsync() {
         return get200Model204NoModelDefaultError400ValidWithRestResponseAsync()
@@ -478,9 +478,9 @@ public class MultipleResponsesImpl implements MultipleResponses {
     /**
      * Send a 200 response with valid payload: {'statusCode': '200'}.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @throws ErrorException thrown if the request is rejected by server
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the A object if successful.
      */
     public A get200Model201ModelDefaultError200Valid() {
@@ -491,8 +491,8 @@ public class MultipleResponsesImpl implements MultipleResponses {
      * Send a 200 response with valid payload: {'statusCode': '200'}.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceFuture} object
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link ServiceFuture&lt;A&gt;} object.
      */
     public ServiceFuture<A> get200Model201ModelDefaultError200ValidAsync(final ServiceCallback<A> serviceCallback) {
         return ServiceFuture.fromBody(get200Model201ModelDefaultError200ValidAsync(), serviceCallback);
@@ -501,7 +501,7 @@ public class MultipleResponsesImpl implements MultipleResponses {
     /**
      * Send a 200 response with valid payload: {'statusCode': '200'}.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, A&gt;&gt;} object if successful.
      */
     public Single<RestResponse<Void, A>> get200Model201ModelDefaultError200ValidWithRestResponseAsync() {
@@ -511,8 +511,8 @@ public class MultipleResponsesImpl implements MultipleResponses {
     /**
      * Send a 200 response with valid payload: {'statusCode': '200'}.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return a {@link Single} emitting the RestResponse<Void, A> object
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link Maybe&lt;A&gt;} object if successful.
      */
     public Maybe<A> get200Model201ModelDefaultError200ValidAsync() {
         return get200Model201ModelDefaultError200ValidWithRestResponseAsync()
@@ -530,9 +530,9 @@ public class MultipleResponsesImpl implements MultipleResponses {
     /**
      * Send a 201 response with valid payload: {'statusCode': '201', 'textStatusCode': 'Created'}.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @throws ErrorException thrown if the request is rejected by server
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the A object if successful.
      */
     public A get200Model201ModelDefaultError201Valid() {
@@ -543,8 +543,8 @@ public class MultipleResponsesImpl implements MultipleResponses {
      * Send a 201 response with valid payload: {'statusCode': '201', 'textStatusCode': 'Created'}.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceFuture} object
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link ServiceFuture&lt;A&gt;} object.
      */
     public ServiceFuture<A> get200Model201ModelDefaultError201ValidAsync(final ServiceCallback<A> serviceCallback) {
         return ServiceFuture.fromBody(get200Model201ModelDefaultError201ValidAsync(), serviceCallback);
@@ -553,7 +553,7 @@ public class MultipleResponsesImpl implements MultipleResponses {
     /**
      * Send a 201 response with valid payload: {'statusCode': '201', 'textStatusCode': 'Created'}.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, A&gt;&gt;} object if successful.
      */
     public Single<RestResponse<Void, A>> get200Model201ModelDefaultError201ValidWithRestResponseAsync() {
@@ -563,8 +563,8 @@ public class MultipleResponsesImpl implements MultipleResponses {
     /**
      * Send a 201 response with valid payload: {'statusCode': '201', 'textStatusCode': 'Created'}.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return a {@link Single} emitting the RestResponse<Void, A> object
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link Maybe&lt;A&gt;} object if successful.
      */
     public Maybe<A> get200Model201ModelDefaultError201ValidAsync() {
         return get200Model201ModelDefaultError201ValidWithRestResponseAsync()
@@ -582,9 +582,9 @@ public class MultipleResponsesImpl implements MultipleResponses {
     /**
      * Send a 400 response with valid payload: {'code': '400', 'message': 'client error'}.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @throws ErrorException thrown if the request is rejected by server
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the A object if successful.
      */
     public A get200Model201ModelDefaultError400Valid() {
@@ -595,8 +595,8 @@ public class MultipleResponsesImpl implements MultipleResponses {
      * Send a 400 response with valid payload: {'code': '400', 'message': 'client error'}.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceFuture} object
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link ServiceFuture&lt;A&gt;} object.
      */
     public ServiceFuture<A> get200Model201ModelDefaultError400ValidAsync(final ServiceCallback<A> serviceCallback) {
         return ServiceFuture.fromBody(get200Model201ModelDefaultError400ValidAsync(), serviceCallback);
@@ -605,7 +605,7 @@ public class MultipleResponsesImpl implements MultipleResponses {
     /**
      * Send a 400 response with valid payload: {'code': '400', 'message': 'client error'}.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, A&gt;&gt;} object if successful.
      */
     public Single<RestResponse<Void, A>> get200Model201ModelDefaultError400ValidWithRestResponseAsync() {
@@ -615,8 +615,8 @@ public class MultipleResponsesImpl implements MultipleResponses {
     /**
      * Send a 400 response with valid payload: {'code': '400', 'message': 'client error'}.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return a {@link Single} emitting the RestResponse<Void, A> object
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link Maybe&lt;A&gt;} object if successful.
      */
     public Maybe<A> get200Model201ModelDefaultError400ValidAsync() {
         return get200Model201ModelDefaultError400ValidWithRestResponseAsync()
@@ -634,9 +634,9 @@ public class MultipleResponsesImpl implements MultipleResponses {
     /**
      * Send a 200 response with valid payload: {'statusCode': '200'}.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @throws ErrorException thrown if the request is rejected by server
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the Object object if successful.
      */
     public Object get200ModelA201ModelC404ModelDDefaultError200Valid() {
@@ -647,8 +647,8 @@ public class MultipleResponsesImpl implements MultipleResponses {
      * Send a 200 response with valid payload: {'statusCode': '200'}.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceFuture} object
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link ServiceFuture&lt;Object&gt;} object.
      */
     public ServiceFuture<Object> get200ModelA201ModelC404ModelDDefaultError200ValidAsync(final ServiceCallback<Object> serviceCallback) {
         return ServiceFuture.fromBody(get200ModelA201ModelC404ModelDDefaultError200ValidAsync(), serviceCallback);
@@ -657,7 +657,7 @@ public class MultipleResponsesImpl implements MultipleResponses {
     /**
      * Send a 200 response with valid payload: {'statusCode': '200'}.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, Object&gt;&gt;} object if successful.
      */
     public Single<RestResponse<Void, Object>> get200ModelA201ModelC404ModelDDefaultError200ValidWithRestResponseAsync() {
@@ -667,8 +667,8 @@ public class MultipleResponsesImpl implements MultipleResponses {
     /**
      * Send a 200 response with valid payload: {'statusCode': '200'}.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return a {@link Single} emitting the RestResponse<Void, Object> object
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link Maybe&lt;Object&gt;} object if successful.
      */
     public Maybe<Object> get200ModelA201ModelC404ModelDDefaultError200ValidAsync() {
         return get200ModelA201ModelC404ModelDDefaultError200ValidWithRestResponseAsync()
@@ -686,9 +686,9 @@ public class MultipleResponsesImpl implements MultipleResponses {
     /**
      * Send a 200 response with valid payload: {'httpCode': '201'}.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @throws ErrorException thrown if the request is rejected by server
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the Object object if successful.
      */
     public Object get200ModelA201ModelC404ModelDDefaultError201Valid() {
@@ -699,8 +699,8 @@ public class MultipleResponsesImpl implements MultipleResponses {
      * Send a 200 response with valid payload: {'httpCode': '201'}.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceFuture} object
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link ServiceFuture&lt;Object&gt;} object.
      */
     public ServiceFuture<Object> get200ModelA201ModelC404ModelDDefaultError201ValidAsync(final ServiceCallback<Object> serviceCallback) {
         return ServiceFuture.fromBody(get200ModelA201ModelC404ModelDDefaultError201ValidAsync(), serviceCallback);
@@ -709,7 +709,7 @@ public class MultipleResponsesImpl implements MultipleResponses {
     /**
      * Send a 200 response with valid payload: {'httpCode': '201'}.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, Object&gt;&gt;} object if successful.
      */
     public Single<RestResponse<Void, Object>> get200ModelA201ModelC404ModelDDefaultError201ValidWithRestResponseAsync() {
@@ -719,8 +719,8 @@ public class MultipleResponsesImpl implements MultipleResponses {
     /**
      * Send a 200 response with valid payload: {'httpCode': '201'}.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return a {@link Single} emitting the RestResponse<Void, Object> object
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link Maybe&lt;Object&gt;} object if successful.
      */
     public Maybe<Object> get200ModelA201ModelC404ModelDDefaultError201ValidAsync() {
         return get200ModelA201ModelC404ModelDDefaultError201ValidWithRestResponseAsync()
@@ -738,9 +738,9 @@ public class MultipleResponsesImpl implements MultipleResponses {
     /**
      * Send a 200 response with valid payload: {'httpStatusCode': '404'}.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @throws ErrorException thrown if the request is rejected by server
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the Object object if successful.
      */
     public Object get200ModelA201ModelC404ModelDDefaultError404Valid() {
@@ -751,8 +751,8 @@ public class MultipleResponsesImpl implements MultipleResponses {
      * Send a 200 response with valid payload: {'httpStatusCode': '404'}.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceFuture} object
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link ServiceFuture&lt;Object&gt;} object.
      */
     public ServiceFuture<Object> get200ModelA201ModelC404ModelDDefaultError404ValidAsync(final ServiceCallback<Object> serviceCallback) {
         return ServiceFuture.fromBody(get200ModelA201ModelC404ModelDDefaultError404ValidAsync(), serviceCallback);
@@ -761,7 +761,7 @@ public class MultipleResponsesImpl implements MultipleResponses {
     /**
      * Send a 200 response with valid payload: {'httpStatusCode': '404'}.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, Object&gt;&gt;} object if successful.
      */
     public Single<RestResponse<Void, Object>> get200ModelA201ModelC404ModelDDefaultError404ValidWithRestResponseAsync() {
@@ -771,8 +771,8 @@ public class MultipleResponsesImpl implements MultipleResponses {
     /**
      * Send a 200 response with valid payload: {'httpStatusCode': '404'}.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return a {@link Single} emitting the RestResponse<Void, Object> object
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link Maybe&lt;Object&gt;} object if successful.
      */
     public Maybe<Object> get200ModelA201ModelC404ModelDDefaultError404ValidAsync() {
         return get200ModelA201ModelC404ModelDDefaultError404ValidWithRestResponseAsync()
@@ -790,9 +790,9 @@ public class MultipleResponsesImpl implements MultipleResponses {
     /**
      * Send a 400 response with valid payload: {'code': '400', 'message': 'client error'}.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @throws ErrorException thrown if the request is rejected by server
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the Object object if successful.
      */
     public Object get200ModelA201ModelC404ModelDDefaultError400Valid() {
@@ -803,8 +803,8 @@ public class MultipleResponsesImpl implements MultipleResponses {
      * Send a 400 response with valid payload: {'code': '400', 'message': 'client error'}.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceFuture} object
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link ServiceFuture&lt;Object&gt;} object.
      */
     public ServiceFuture<Object> get200ModelA201ModelC404ModelDDefaultError400ValidAsync(final ServiceCallback<Object> serviceCallback) {
         return ServiceFuture.fromBody(get200ModelA201ModelC404ModelDDefaultError400ValidAsync(), serviceCallback);
@@ -813,7 +813,7 @@ public class MultipleResponsesImpl implements MultipleResponses {
     /**
      * Send a 400 response with valid payload: {'code': '400', 'message': 'client error'}.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, Object&gt;&gt;} object if successful.
      */
     public Single<RestResponse<Void, Object>> get200ModelA201ModelC404ModelDDefaultError400ValidWithRestResponseAsync() {
@@ -823,8 +823,8 @@ public class MultipleResponsesImpl implements MultipleResponses {
     /**
      * Send a 400 response with valid payload: {'code': '400', 'message': 'client error'}.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return a {@link Single} emitting the RestResponse<Void, Object> object
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link Maybe&lt;Object&gt;} object if successful.
      */
     public Maybe<Object> get200ModelA201ModelC404ModelDDefaultError400ValidAsync() {
         return get200ModelA201ModelC404ModelDDefaultError400ValidWithRestResponseAsync()
@@ -842,9 +842,9 @@ public class MultipleResponsesImpl implements MultipleResponses {
     /**
      * Send a 202 response with no payload.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @throws ErrorException thrown if the request is rejected by server
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     public void get202None204NoneDefaultError202None() {
         get202None204NoneDefaultError202NoneAsync().blockingAwait();
@@ -854,8 +854,8 @@ public class MultipleResponsesImpl implements MultipleResponses {
      * Send a 202 response with no payload.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceFuture} object
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
     public ServiceFuture<Void> get202None204NoneDefaultError202NoneAsync(final ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(get202None204NoneDefaultError202NoneAsync(), serviceCallback);
@@ -864,7 +864,7 @@ public class MultipleResponsesImpl implements MultipleResponses {
     /**
      * Send a 202 response with no payload.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
      */
     public Single<RestResponse<Void, Void>> get202None204NoneDefaultError202NoneWithRestResponseAsync() {
@@ -874,8 +874,8 @@ public class MultipleResponsesImpl implements MultipleResponses {
     /**
      * Send a 202 response with no payload.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return a {@link Single} emitting the RestResponse<Void, Void> object
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link Completable} object if successful.
      */
     public Completable get202None204NoneDefaultError202NoneAsync() {
         return get202None204NoneDefaultError202NoneWithRestResponseAsync()
@@ -885,9 +885,9 @@ public class MultipleResponsesImpl implements MultipleResponses {
     /**
      * Send a 204 response with no payload.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @throws ErrorException thrown if the request is rejected by server
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     public void get202None204NoneDefaultError204None() {
         get202None204NoneDefaultError204NoneAsync().blockingAwait();
@@ -897,8 +897,8 @@ public class MultipleResponsesImpl implements MultipleResponses {
      * Send a 204 response with no payload.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceFuture} object
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
     public ServiceFuture<Void> get202None204NoneDefaultError204NoneAsync(final ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(get202None204NoneDefaultError204NoneAsync(), serviceCallback);
@@ -907,7 +907,7 @@ public class MultipleResponsesImpl implements MultipleResponses {
     /**
      * Send a 204 response with no payload.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
      */
     public Single<RestResponse<Void, Void>> get202None204NoneDefaultError204NoneWithRestResponseAsync() {
@@ -917,8 +917,8 @@ public class MultipleResponsesImpl implements MultipleResponses {
     /**
      * Send a 204 response with no payload.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return a {@link Single} emitting the RestResponse<Void, Void> object
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link Completable} object if successful.
      */
     public Completable get202None204NoneDefaultError204NoneAsync() {
         return get202None204NoneDefaultError204NoneWithRestResponseAsync()
@@ -928,9 +928,9 @@ public class MultipleResponsesImpl implements MultipleResponses {
     /**
      * Send a 400 response with valid payload: {'code': '400', 'message': 'client error'}.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @throws ErrorException thrown if the request is rejected by server
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     public void get202None204NoneDefaultError400Valid() {
         get202None204NoneDefaultError400ValidAsync().blockingAwait();
@@ -940,8 +940,8 @@ public class MultipleResponsesImpl implements MultipleResponses {
      * Send a 400 response with valid payload: {'code': '400', 'message': 'client error'}.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceFuture} object
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
     public ServiceFuture<Void> get202None204NoneDefaultError400ValidAsync(final ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(get202None204NoneDefaultError400ValidAsync(), serviceCallback);
@@ -950,7 +950,7 @@ public class MultipleResponsesImpl implements MultipleResponses {
     /**
      * Send a 400 response with valid payload: {'code': '400', 'message': 'client error'}.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
      */
     public Single<RestResponse<Void, Void>> get202None204NoneDefaultError400ValidWithRestResponseAsync() {
@@ -960,8 +960,8 @@ public class MultipleResponsesImpl implements MultipleResponses {
     /**
      * Send a 400 response with valid payload: {'code': '400', 'message': 'client error'}.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return a {@link Single} emitting the RestResponse<Void, Void> object
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link Completable} object if successful.
      */
     public Completable get202None204NoneDefaultError400ValidAsync() {
         return get202None204NoneDefaultError400ValidWithRestResponseAsync()
@@ -971,9 +971,9 @@ public class MultipleResponsesImpl implements MultipleResponses {
     /**
      * Send a 202 response with an unexpected payload {'property': 'value'}.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @throws RestException thrown if the request is rejected by server
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws RestException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     public void get202None204NoneDefaultNone202Invalid() {
         get202None204NoneDefaultNone202InvalidAsync().blockingAwait();
@@ -983,8 +983,8 @@ public class MultipleResponsesImpl implements MultipleResponses {
      * Send a 202 response with an unexpected payload {'property': 'value'}.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceFuture} object
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
     public ServiceFuture<Void> get202None204NoneDefaultNone202InvalidAsync(final ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(get202None204NoneDefaultNone202InvalidAsync(), serviceCallback);
@@ -993,7 +993,7 @@ public class MultipleResponsesImpl implements MultipleResponses {
     /**
      * Send a 202 response with an unexpected payload {'property': 'value'}.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
      */
     public Single<RestResponse<Void, Void>> get202None204NoneDefaultNone202InvalidWithRestResponseAsync() {
@@ -1003,8 +1003,8 @@ public class MultipleResponsesImpl implements MultipleResponses {
     /**
      * Send a 202 response with an unexpected payload {'property': 'value'}.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return a {@link Single} emitting the RestResponse<Void, Void> object
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link Completable} object if successful.
      */
     public Completable get202None204NoneDefaultNone202InvalidAsync() {
         return get202None204NoneDefaultNone202InvalidWithRestResponseAsync()
@@ -1014,9 +1014,9 @@ public class MultipleResponsesImpl implements MultipleResponses {
     /**
      * Send a 204 response with no payload.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @throws RestException thrown if the request is rejected by server
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws RestException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     public void get202None204NoneDefaultNone204None() {
         get202None204NoneDefaultNone204NoneAsync().blockingAwait();
@@ -1026,8 +1026,8 @@ public class MultipleResponsesImpl implements MultipleResponses {
      * Send a 204 response with no payload.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceFuture} object
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
     public ServiceFuture<Void> get202None204NoneDefaultNone204NoneAsync(final ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(get202None204NoneDefaultNone204NoneAsync(), serviceCallback);
@@ -1036,7 +1036,7 @@ public class MultipleResponsesImpl implements MultipleResponses {
     /**
      * Send a 204 response with no payload.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
      */
     public Single<RestResponse<Void, Void>> get202None204NoneDefaultNone204NoneWithRestResponseAsync() {
@@ -1046,8 +1046,8 @@ public class MultipleResponsesImpl implements MultipleResponses {
     /**
      * Send a 204 response with no payload.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return a {@link Single} emitting the RestResponse<Void, Void> object
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link Completable} object if successful.
      */
     public Completable get202None204NoneDefaultNone204NoneAsync() {
         return get202None204NoneDefaultNone204NoneWithRestResponseAsync()
@@ -1057,9 +1057,9 @@ public class MultipleResponsesImpl implements MultipleResponses {
     /**
      * Send a 400 response with no payload.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @throws RestException thrown if the request is rejected by server
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws RestException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     public void get202None204NoneDefaultNone400None() {
         get202None204NoneDefaultNone400NoneAsync().blockingAwait();
@@ -1069,8 +1069,8 @@ public class MultipleResponsesImpl implements MultipleResponses {
      * Send a 400 response with no payload.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceFuture} object
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
     public ServiceFuture<Void> get202None204NoneDefaultNone400NoneAsync(final ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(get202None204NoneDefaultNone400NoneAsync(), serviceCallback);
@@ -1079,7 +1079,7 @@ public class MultipleResponsesImpl implements MultipleResponses {
     /**
      * Send a 400 response with no payload.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
      */
     public Single<RestResponse<Void, Void>> get202None204NoneDefaultNone400NoneWithRestResponseAsync() {
@@ -1089,8 +1089,8 @@ public class MultipleResponsesImpl implements MultipleResponses {
     /**
      * Send a 400 response with no payload.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return a {@link Single} emitting the RestResponse<Void, Void> object
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link Completable} object if successful.
      */
     public Completable get202None204NoneDefaultNone400NoneAsync() {
         return get202None204NoneDefaultNone400NoneWithRestResponseAsync()
@@ -1100,9 +1100,9 @@ public class MultipleResponsesImpl implements MultipleResponses {
     /**
      * Send a 400 response with an unexpected payload {'property': 'value'}.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @throws RestException thrown if the request is rejected by server
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws RestException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     public void get202None204NoneDefaultNone400Invalid() {
         get202None204NoneDefaultNone400InvalidAsync().blockingAwait();
@@ -1112,8 +1112,8 @@ public class MultipleResponsesImpl implements MultipleResponses {
      * Send a 400 response with an unexpected payload {'property': 'value'}.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceFuture} object
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
     public ServiceFuture<Void> get202None204NoneDefaultNone400InvalidAsync(final ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(get202None204NoneDefaultNone400InvalidAsync(), serviceCallback);
@@ -1122,7 +1122,7 @@ public class MultipleResponsesImpl implements MultipleResponses {
     /**
      * Send a 400 response with an unexpected payload {'property': 'value'}.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
      */
     public Single<RestResponse<Void, Void>> get202None204NoneDefaultNone400InvalidWithRestResponseAsync() {
@@ -1132,8 +1132,8 @@ public class MultipleResponsesImpl implements MultipleResponses {
     /**
      * Send a 400 response with an unexpected payload {'property': 'value'}.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return a {@link Single} emitting the RestResponse<Void, Void> object
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link Completable} object if successful.
      */
     public Completable get202None204NoneDefaultNone400InvalidAsync() {
         return get202None204NoneDefaultNone400InvalidWithRestResponseAsync()
@@ -1143,9 +1143,9 @@ public class MultipleResponsesImpl implements MultipleResponses {
     /**
      * Send a 200 response with valid payload: {'statusCode': '200'}.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @throws AException thrown if the request is rejected by server
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws AException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the A object if successful.
      */
     public A getDefaultModelA200Valid() {
@@ -1156,8 +1156,8 @@ public class MultipleResponsesImpl implements MultipleResponses {
      * Send a 200 response with valid payload: {'statusCode': '200'}.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceFuture} object
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link ServiceFuture&lt;A&gt;} object.
      */
     public ServiceFuture<A> getDefaultModelA200ValidAsync(final ServiceCallback<A> serviceCallback) {
         return ServiceFuture.fromBody(getDefaultModelA200ValidAsync(), serviceCallback);
@@ -1166,7 +1166,7 @@ public class MultipleResponsesImpl implements MultipleResponses {
     /**
      * Send a 200 response with valid payload: {'statusCode': '200'}.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, A&gt;&gt;} object if successful.
      */
     public Single<RestResponse<Void, A>> getDefaultModelA200ValidWithRestResponseAsync() {
@@ -1176,8 +1176,8 @@ public class MultipleResponsesImpl implements MultipleResponses {
     /**
      * Send a 200 response with valid payload: {'statusCode': '200'}.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return a {@link Single} emitting the RestResponse<Void, A> object
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link Maybe&lt;A&gt;} object if successful.
      */
     public Maybe<A> getDefaultModelA200ValidAsync() {
         return getDefaultModelA200ValidWithRestResponseAsync()
@@ -1195,9 +1195,9 @@ public class MultipleResponsesImpl implements MultipleResponses {
     /**
      * Send a 200 response with no payload.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @throws AException thrown if the request is rejected by server
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws AException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the A object if successful.
      */
     public A getDefaultModelA200None() {
@@ -1208,8 +1208,8 @@ public class MultipleResponsesImpl implements MultipleResponses {
      * Send a 200 response with no payload.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceFuture} object
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link ServiceFuture&lt;A&gt;} object.
      */
     public ServiceFuture<A> getDefaultModelA200NoneAsync(final ServiceCallback<A> serviceCallback) {
         return ServiceFuture.fromBody(getDefaultModelA200NoneAsync(), serviceCallback);
@@ -1218,7 +1218,7 @@ public class MultipleResponsesImpl implements MultipleResponses {
     /**
      * Send a 200 response with no payload.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, A&gt;&gt;} object if successful.
      */
     public Single<RestResponse<Void, A>> getDefaultModelA200NoneWithRestResponseAsync() {
@@ -1228,8 +1228,8 @@ public class MultipleResponsesImpl implements MultipleResponses {
     /**
      * Send a 200 response with no payload.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return a {@link Single} emitting the RestResponse<Void, A> object
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link Maybe&lt;A&gt;} object if successful.
      */
     public Maybe<A> getDefaultModelA200NoneAsync() {
         return getDefaultModelA200NoneWithRestResponseAsync()
@@ -1247,9 +1247,9 @@ public class MultipleResponsesImpl implements MultipleResponses {
     /**
      * Send a 400 response with valid payload: {'statusCode': '400'}.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @throws AException thrown if the request is rejected by server
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws AException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the A object if successful.
      */
     public A getDefaultModelA400Valid() {
@@ -1260,8 +1260,8 @@ public class MultipleResponsesImpl implements MultipleResponses {
      * Send a 400 response with valid payload: {'statusCode': '400'}.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceFuture} object
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link ServiceFuture&lt;A&gt;} object.
      */
     public ServiceFuture<A> getDefaultModelA400ValidAsync(final ServiceCallback<A> serviceCallback) {
         return ServiceFuture.fromBody(getDefaultModelA400ValidAsync(), serviceCallback);
@@ -1270,7 +1270,7 @@ public class MultipleResponsesImpl implements MultipleResponses {
     /**
      * Send a 400 response with valid payload: {'statusCode': '400'}.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, A&gt;&gt;} object if successful.
      */
     public Single<RestResponse<Void, A>> getDefaultModelA400ValidWithRestResponseAsync() {
@@ -1280,8 +1280,8 @@ public class MultipleResponsesImpl implements MultipleResponses {
     /**
      * Send a 400 response with valid payload: {'statusCode': '400'}.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return a {@link Single} emitting the RestResponse<Void, A> object
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link Maybe&lt;A&gt;} object if successful.
      */
     public Maybe<A> getDefaultModelA400ValidAsync() {
         return getDefaultModelA400ValidWithRestResponseAsync()
@@ -1299,9 +1299,9 @@ public class MultipleResponsesImpl implements MultipleResponses {
     /**
      * Send a 400 response with no payload.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @throws AException thrown if the request is rejected by server
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws AException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the A object if successful.
      */
     public A getDefaultModelA400None() {
@@ -1312,8 +1312,8 @@ public class MultipleResponsesImpl implements MultipleResponses {
      * Send a 400 response with no payload.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceFuture} object
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link ServiceFuture&lt;A&gt;} object.
      */
     public ServiceFuture<A> getDefaultModelA400NoneAsync(final ServiceCallback<A> serviceCallback) {
         return ServiceFuture.fromBody(getDefaultModelA400NoneAsync(), serviceCallback);
@@ -1322,7 +1322,7 @@ public class MultipleResponsesImpl implements MultipleResponses {
     /**
      * Send a 400 response with no payload.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, A&gt;&gt;} object if successful.
      */
     public Single<RestResponse<Void, A>> getDefaultModelA400NoneWithRestResponseAsync() {
@@ -1332,8 +1332,8 @@ public class MultipleResponsesImpl implements MultipleResponses {
     /**
      * Send a 400 response with no payload.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return a {@link Single} emitting the RestResponse<Void, A> object
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link Maybe&lt;A&gt;} object if successful.
      */
     public Maybe<A> getDefaultModelA400NoneAsync() {
         return getDefaultModelA400NoneWithRestResponseAsync()
@@ -1351,9 +1351,9 @@ public class MultipleResponsesImpl implements MultipleResponses {
     /**
      * Send a 200 response with invalid payload: {'statusCode': '200'}.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @throws RestException thrown if the request is rejected by server
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws RestException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     public void getDefaultNone200Invalid() {
         getDefaultNone200InvalidAsync().blockingAwait();
@@ -1363,8 +1363,8 @@ public class MultipleResponsesImpl implements MultipleResponses {
      * Send a 200 response with invalid payload: {'statusCode': '200'}.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceFuture} object
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
     public ServiceFuture<Void> getDefaultNone200InvalidAsync(final ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(getDefaultNone200InvalidAsync(), serviceCallback);
@@ -1373,7 +1373,7 @@ public class MultipleResponsesImpl implements MultipleResponses {
     /**
      * Send a 200 response with invalid payload: {'statusCode': '200'}.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
      */
     public Single<RestResponse<Void, Void>> getDefaultNone200InvalidWithRestResponseAsync() {
@@ -1383,8 +1383,8 @@ public class MultipleResponsesImpl implements MultipleResponses {
     /**
      * Send a 200 response with invalid payload: {'statusCode': '200'}.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return a {@link Single} emitting the RestResponse<Void, Void> object
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link Completable} object if successful.
      */
     public Completable getDefaultNone200InvalidAsync() {
         return getDefaultNone200InvalidWithRestResponseAsync()
@@ -1394,9 +1394,9 @@ public class MultipleResponsesImpl implements MultipleResponses {
     /**
      * Send a 200 response with no payload.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @throws RestException thrown if the request is rejected by server
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws RestException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     public void getDefaultNone200None() {
         getDefaultNone200NoneAsync().blockingAwait();
@@ -1406,8 +1406,8 @@ public class MultipleResponsesImpl implements MultipleResponses {
      * Send a 200 response with no payload.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceFuture} object
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
     public ServiceFuture<Void> getDefaultNone200NoneAsync(final ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(getDefaultNone200NoneAsync(), serviceCallback);
@@ -1416,7 +1416,7 @@ public class MultipleResponsesImpl implements MultipleResponses {
     /**
      * Send a 200 response with no payload.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
      */
     public Single<RestResponse<Void, Void>> getDefaultNone200NoneWithRestResponseAsync() {
@@ -1426,8 +1426,8 @@ public class MultipleResponsesImpl implements MultipleResponses {
     /**
      * Send a 200 response with no payload.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return a {@link Single} emitting the RestResponse<Void, Void> object
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link Completable} object if successful.
      */
     public Completable getDefaultNone200NoneAsync() {
         return getDefaultNone200NoneWithRestResponseAsync()
@@ -1437,9 +1437,9 @@ public class MultipleResponsesImpl implements MultipleResponses {
     /**
      * Send a 400 response with valid payload: {'statusCode': '400'}.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @throws RestException thrown if the request is rejected by server
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws RestException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     public void getDefaultNone400Invalid() {
         getDefaultNone400InvalidAsync().blockingAwait();
@@ -1449,8 +1449,8 @@ public class MultipleResponsesImpl implements MultipleResponses {
      * Send a 400 response with valid payload: {'statusCode': '400'}.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceFuture} object
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
     public ServiceFuture<Void> getDefaultNone400InvalidAsync(final ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(getDefaultNone400InvalidAsync(), serviceCallback);
@@ -1459,7 +1459,7 @@ public class MultipleResponsesImpl implements MultipleResponses {
     /**
      * Send a 400 response with valid payload: {'statusCode': '400'}.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
      */
     public Single<RestResponse<Void, Void>> getDefaultNone400InvalidWithRestResponseAsync() {
@@ -1469,8 +1469,8 @@ public class MultipleResponsesImpl implements MultipleResponses {
     /**
      * Send a 400 response with valid payload: {'statusCode': '400'}.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return a {@link Single} emitting the RestResponse<Void, Void> object
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link Completable} object if successful.
      */
     public Completable getDefaultNone400InvalidAsync() {
         return getDefaultNone400InvalidWithRestResponseAsync()
@@ -1480,9 +1480,9 @@ public class MultipleResponsesImpl implements MultipleResponses {
     /**
      * Send a 400 response with no payload.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @throws RestException thrown if the request is rejected by server
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws RestException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     public void getDefaultNone400None() {
         getDefaultNone400NoneAsync().blockingAwait();
@@ -1492,8 +1492,8 @@ public class MultipleResponsesImpl implements MultipleResponses {
      * Send a 400 response with no payload.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceFuture} object
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
     public ServiceFuture<Void> getDefaultNone400NoneAsync(final ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(getDefaultNone400NoneAsync(), serviceCallback);
@@ -1502,7 +1502,7 @@ public class MultipleResponsesImpl implements MultipleResponses {
     /**
      * Send a 400 response with no payload.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
      */
     public Single<RestResponse<Void, Void>> getDefaultNone400NoneWithRestResponseAsync() {
@@ -1512,8 +1512,8 @@ public class MultipleResponsesImpl implements MultipleResponses {
     /**
      * Send a 400 response with no payload.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return a {@link Single} emitting the RestResponse<Void, Void> object
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link Completable} object if successful.
      */
     public Completable getDefaultNone400NoneAsync() {
         return getDefaultNone400NoneWithRestResponseAsync()
@@ -1523,9 +1523,9 @@ public class MultipleResponsesImpl implements MultipleResponses {
     /**
      * Send a 200 response with no payload, when a payload is expected - client should return a null object of thde type for model A.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @throws RestException thrown if the request is rejected by server
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws RestException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the A object if successful.
      */
     public A get200ModelA200None() {
@@ -1536,8 +1536,8 @@ public class MultipleResponsesImpl implements MultipleResponses {
      * Send a 200 response with no payload, when a payload is expected - client should return a null object of thde type for model A.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceFuture} object
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link ServiceFuture&lt;A&gt;} object.
      */
     public ServiceFuture<A> get200ModelA200NoneAsync(final ServiceCallback<A> serviceCallback) {
         return ServiceFuture.fromBody(get200ModelA200NoneAsync(), serviceCallback);
@@ -1546,7 +1546,7 @@ public class MultipleResponsesImpl implements MultipleResponses {
     /**
      * Send a 200 response with no payload, when a payload is expected - client should return a null object of thde type for model A.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, A&gt;&gt;} object if successful.
      */
     public Single<RestResponse<Void, A>> get200ModelA200NoneWithRestResponseAsync() {
@@ -1556,8 +1556,8 @@ public class MultipleResponsesImpl implements MultipleResponses {
     /**
      * Send a 200 response with no payload, when a payload is expected - client should return a null object of thde type for model A.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return a {@link Single} emitting the RestResponse<Void, A> object
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link Maybe&lt;A&gt;} object if successful.
      */
     public Maybe<A> get200ModelA200NoneAsync() {
         return get200ModelA200NoneWithRestResponseAsync()
@@ -1575,9 +1575,9 @@ public class MultipleResponsesImpl implements MultipleResponses {
     /**
      * Send a 200 response with payload {'statusCode': '200'}.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @throws RestException thrown if the request is rejected by server
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws RestException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the A object if successful.
      */
     public A get200ModelA200Valid() {
@@ -1588,8 +1588,8 @@ public class MultipleResponsesImpl implements MultipleResponses {
      * Send a 200 response with payload {'statusCode': '200'}.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceFuture} object
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link ServiceFuture&lt;A&gt;} object.
      */
     public ServiceFuture<A> get200ModelA200ValidAsync(final ServiceCallback<A> serviceCallback) {
         return ServiceFuture.fromBody(get200ModelA200ValidAsync(), serviceCallback);
@@ -1598,7 +1598,7 @@ public class MultipleResponsesImpl implements MultipleResponses {
     /**
      * Send a 200 response with payload {'statusCode': '200'}.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, A&gt;&gt;} object if successful.
      */
     public Single<RestResponse<Void, A>> get200ModelA200ValidWithRestResponseAsync() {
@@ -1608,8 +1608,8 @@ public class MultipleResponsesImpl implements MultipleResponses {
     /**
      * Send a 200 response with payload {'statusCode': '200'}.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return a {@link Single} emitting the RestResponse<Void, A> object
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link Maybe&lt;A&gt;} object if successful.
      */
     public Maybe<A> get200ModelA200ValidAsync() {
         return get200ModelA200ValidWithRestResponseAsync()
@@ -1627,9 +1627,9 @@ public class MultipleResponsesImpl implements MultipleResponses {
     /**
      * Send a 200 response with invalid payload {'statusCodeInvalid': '200'}.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @throws RestException thrown if the request is rejected by server
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws RestException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the A object if successful.
      */
     public A get200ModelA200Invalid() {
@@ -1640,8 +1640,8 @@ public class MultipleResponsesImpl implements MultipleResponses {
      * Send a 200 response with invalid payload {'statusCodeInvalid': '200'}.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceFuture} object
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link ServiceFuture&lt;A&gt;} object.
      */
     public ServiceFuture<A> get200ModelA200InvalidAsync(final ServiceCallback<A> serviceCallback) {
         return ServiceFuture.fromBody(get200ModelA200InvalidAsync(), serviceCallback);
@@ -1650,7 +1650,7 @@ public class MultipleResponsesImpl implements MultipleResponses {
     /**
      * Send a 200 response with invalid payload {'statusCodeInvalid': '200'}.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, A&gt;&gt;} object if successful.
      */
     public Single<RestResponse<Void, A>> get200ModelA200InvalidWithRestResponseAsync() {
@@ -1660,8 +1660,8 @@ public class MultipleResponsesImpl implements MultipleResponses {
     /**
      * Send a 200 response with invalid payload {'statusCodeInvalid': '200'}.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return a {@link Single} emitting the RestResponse<Void, A> object
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link Maybe&lt;A&gt;} object if successful.
      */
     public Maybe<A> get200ModelA200InvalidAsync() {
         return get200ModelA200InvalidWithRestResponseAsync()
@@ -1679,9 +1679,9 @@ public class MultipleResponsesImpl implements MultipleResponses {
     /**
      * Send a 400 response with no payload client should treat as an http error with no error model.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @throws RestException thrown if the request is rejected by server
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws RestException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the A object if successful.
      */
     public A get200ModelA400None() {
@@ -1692,8 +1692,8 @@ public class MultipleResponsesImpl implements MultipleResponses {
      * Send a 400 response with no payload client should treat as an http error with no error model.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceFuture} object
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link ServiceFuture&lt;A&gt;} object.
      */
     public ServiceFuture<A> get200ModelA400NoneAsync(final ServiceCallback<A> serviceCallback) {
         return ServiceFuture.fromBody(get200ModelA400NoneAsync(), serviceCallback);
@@ -1702,7 +1702,7 @@ public class MultipleResponsesImpl implements MultipleResponses {
     /**
      * Send a 400 response with no payload client should treat as an http error with no error model.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, A&gt;&gt;} object if successful.
      */
     public Single<RestResponse<Void, A>> get200ModelA400NoneWithRestResponseAsync() {
@@ -1712,8 +1712,8 @@ public class MultipleResponsesImpl implements MultipleResponses {
     /**
      * Send a 400 response with no payload client should treat as an http error with no error model.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return a {@link Single} emitting the RestResponse<Void, A> object
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link Maybe&lt;A&gt;} object if successful.
      */
     public Maybe<A> get200ModelA400NoneAsync() {
         return get200ModelA400NoneWithRestResponseAsync()
@@ -1731,9 +1731,9 @@ public class MultipleResponsesImpl implements MultipleResponses {
     /**
      * Send a 200 response with payload {'statusCode': '400'}.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @throws RestException thrown if the request is rejected by server
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws RestException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the A object if successful.
      */
     public A get200ModelA400Valid() {
@@ -1744,8 +1744,8 @@ public class MultipleResponsesImpl implements MultipleResponses {
      * Send a 200 response with payload {'statusCode': '400'}.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceFuture} object
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link ServiceFuture&lt;A&gt;} object.
      */
     public ServiceFuture<A> get200ModelA400ValidAsync(final ServiceCallback<A> serviceCallback) {
         return ServiceFuture.fromBody(get200ModelA400ValidAsync(), serviceCallback);
@@ -1754,7 +1754,7 @@ public class MultipleResponsesImpl implements MultipleResponses {
     /**
      * Send a 200 response with payload {'statusCode': '400'}.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, A&gt;&gt;} object if successful.
      */
     public Single<RestResponse<Void, A>> get200ModelA400ValidWithRestResponseAsync() {
@@ -1764,8 +1764,8 @@ public class MultipleResponsesImpl implements MultipleResponses {
     /**
      * Send a 200 response with payload {'statusCode': '400'}.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return a {@link Single} emitting the RestResponse<Void, A> object
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link Maybe&lt;A&gt;} object if successful.
      */
     public Maybe<A> get200ModelA400ValidAsync() {
         return get200ModelA400ValidWithRestResponseAsync()
@@ -1783,9 +1783,9 @@ public class MultipleResponsesImpl implements MultipleResponses {
     /**
      * Send a 200 response with invalid payload {'statusCodeInvalid': '400'}.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @throws RestException thrown if the request is rejected by server
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws RestException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the A object if successful.
      */
     public A get200ModelA400Invalid() {
@@ -1796,8 +1796,8 @@ public class MultipleResponsesImpl implements MultipleResponses {
      * Send a 200 response with invalid payload {'statusCodeInvalid': '400'}.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceFuture} object
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link ServiceFuture&lt;A&gt;} object.
      */
     public ServiceFuture<A> get200ModelA400InvalidAsync(final ServiceCallback<A> serviceCallback) {
         return ServiceFuture.fromBody(get200ModelA400InvalidAsync(), serviceCallback);
@@ -1806,7 +1806,7 @@ public class MultipleResponsesImpl implements MultipleResponses {
     /**
      * Send a 200 response with invalid payload {'statusCodeInvalid': '400'}.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, A&gt;&gt;} object if successful.
      */
     public Single<RestResponse<Void, A>> get200ModelA400InvalidWithRestResponseAsync() {
@@ -1816,8 +1816,8 @@ public class MultipleResponsesImpl implements MultipleResponses {
     /**
      * Send a 200 response with invalid payload {'statusCodeInvalid': '400'}.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return a {@link Single} emitting the RestResponse<Void, A> object
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link Maybe&lt;A&gt;} object if successful.
      */
     public Maybe<A> get200ModelA400InvalidAsync() {
         return get200ModelA400InvalidWithRestResponseAsync()
@@ -1835,9 +1835,9 @@ public class MultipleResponsesImpl implements MultipleResponses {
     /**
      * Send a 202 response with payload {'statusCode': '202'}.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @throws RestException thrown if the request is rejected by server
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws RestException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the A object if successful.
      */
     public A get200ModelA202Valid() {
@@ -1848,8 +1848,8 @@ public class MultipleResponsesImpl implements MultipleResponses {
      * Send a 202 response with payload {'statusCode': '202'}.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceFuture} object
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link ServiceFuture&lt;A&gt;} object.
      */
     public ServiceFuture<A> get200ModelA202ValidAsync(final ServiceCallback<A> serviceCallback) {
         return ServiceFuture.fromBody(get200ModelA202ValidAsync(), serviceCallback);
@@ -1858,7 +1858,7 @@ public class MultipleResponsesImpl implements MultipleResponses {
     /**
      * Send a 202 response with payload {'statusCode': '202'}.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, A&gt;&gt;} object if successful.
      */
     public Single<RestResponse<Void, A>> get200ModelA202ValidWithRestResponseAsync() {
@@ -1868,8 +1868,8 @@ public class MultipleResponsesImpl implements MultipleResponses {
     /**
      * Send a 202 response with payload {'statusCode': '202'}.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return a {@link Single} emitting the RestResponse<Void, A> object
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link Maybe&lt;A&gt;} object if successful.
      */
     public Maybe<A> get200ModelA202ValidAsync() {
         return get200ModelA202ValidWithRestResponseAsync()

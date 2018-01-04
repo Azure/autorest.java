@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 
-namespace AutoRest.Java.DanModel
+namespace AutoRest.Java
 {
     public class JavaFile
     {
@@ -58,7 +58,18 @@ namespace AutoRest.Java.DanModel
         public JavaFile Package(string package)
         {
             this.package = package;
-            this.packageWithPeriodLength = (package == null ? 0 : package.Period().Length);
+            if (string.IsNullOrEmpty(package))
+            {
+                packageWithPeriodLength = 0;
+            }
+            else
+            {
+                packageWithPeriodLength = package.Length;
+                if (!package.EndsWith('.'))
+                {
+                    ++packageWithPeriodLength;
+                }
+            }
             Contents.Package(package);
             return this;
         }

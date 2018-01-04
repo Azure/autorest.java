@@ -47,7 +47,7 @@ public class FlattenedProduct extends Resource {
     /**
      * Get the pname value.
      *
-     * @return the pname value
+     * @return the pname value.
      */
     public String pname() {
         return this.pname;
@@ -56,7 +56,7 @@ public class FlattenedProduct extends Resource {
     /**
      * Set the pname value.
      *
-     * @param pname the pname value to set
+     * @param pname the pname value to set.
      * @return the FlattenedProduct object itself.
      */
     public FlattenedProduct withPname(String pname) {
@@ -67,7 +67,7 @@ public class FlattenedProduct extends Resource {
     /**
      * Get the flattenedProductType value.
      *
-     * @return the flattenedProductType value
+     * @return the flattenedProductType value.
      */
     public String flattenedProductType() {
         return this.flattenedProductType;
@@ -76,7 +76,7 @@ public class FlattenedProduct extends Resource {
     /**
      * Set the flattenedProductType value.
      *
-     * @param flattenedProductType the flattenedProductType value to set
+     * @param flattenedProductType the flattenedProductType value to set.
      * @return the FlattenedProduct object itself.
      */
     public FlattenedProduct withFlattenedProductType(String flattenedProductType) {
@@ -87,7 +87,7 @@ public class FlattenedProduct extends Resource {
     /**
      * Get the provisioningStateValues value.
      *
-     * @return the provisioningStateValues value
+     * @return the provisioningStateValues value.
      */
     public String provisioningStateValues() {
         return this.provisioningStateValues;
@@ -96,7 +96,7 @@ public class FlattenedProduct extends Resource {
     /**
      * Get the provisioningState value.
      *
-     * @return the provisioningState value
+     * @return the provisioningState value.
      */
     public String provisioningState() {
         return this.provisioningState;
@@ -105,7 +105,7 @@ public class FlattenedProduct extends Resource {
     /**
      * Set the provisioningState value.
      *
-     * @param provisioningState the provisioningState value to set
+     * @param provisioningState the provisioningState value to set.
      * @return the FlattenedProduct object itself.
      */
     public FlattenedProduct withProvisioningState(String provisioningState) {

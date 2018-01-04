@@ -36,7 +36,7 @@ public class Product extends Resource {
     /**
      * Get the provisioningState value.
      *
-     * @return the provisioningState value
+     * @return the provisioningState value.
      */
     public String provisioningState() {
         return this.provisioningState;
@@ -45,7 +45,7 @@ public class Product extends Resource {
     /**
      * Set the provisioningState value.
      *
-     * @param provisioningState the provisioningState value to set
+     * @param provisioningState the provisioningState value to set.
      * @return the Product object itself.
      */
     public Product withProvisioningState(String provisioningState) {
@@ -56,7 +56,7 @@ public class Product extends Resource {
     /**
      * Get the provisioningStateValues value.
      *
-     * @return the provisioningStateValues value
+     * @return the provisioningStateValues value.
      */
     public String provisioningStateValues() {
         return this.provisioningStateValues;

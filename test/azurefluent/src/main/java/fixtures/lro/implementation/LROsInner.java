@@ -431,9 +431,9 @@ public class LROsInner {
     /**
      * Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Succeeded’.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @throws CloudException thrown if the request is rejected by server
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws CloudException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the ProductInner object if successful.
      */
     public ProductInner beginPut200Succeeded() {
@@ -444,8 +444,8 @@ public class LROsInner {
      * Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Succeeded’.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceFuture} object
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link ServiceFuture&lt;ProductInner&gt;} object.
      */
     public ServiceFuture<ProductInner> beginPut200SucceededAsync(final ServiceCallback<ProductInner> serviceCallback) {
         return ServiceFutureUtil.fromLRO(beginPut200SucceededAsync(), serviceCallback);
@@ -454,8 +454,8 @@ public class LROsInner {
     /**
      * Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Succeeded’.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable for the request
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the observable for the request.
      */
     public Observable<OperationStatus<ProductInner>> beginPut200SucceededAsync() {
         final ProductInner product = null;
@@ -465,10 +465,10 @@ public class LROsInner {
     /**
      * Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Succeeded’.
      *
-     * @param product Product to put
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @throws CloudException thrown if the request is rejected by server
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
+     * @param product Product to put.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws CloudException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the ProductInner object if successful.
      */
     public ProductInner beginPut200Succeeded(ProductInner product) {
@@ -478,10 +478,10 @@ public class LROsInner {
     /**
      * Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Succeeded’.
      *
-     * @param product Product to put
+     * @param product Product to put.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceFuture} object
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link ServiceFuture&lt;ProductInner&gt;} object.
      */
     public ServiceFuture<ProductInner> beginPut200SucceededAsync(ProductInner product, final ServiceCallback<ProductInner> serviceCallback) {
         return ServiceFutureUtil.fromLRO(beginPut200SucceededAsync(product), serviceCallback);
@@ -490,9 +490,9 @@ public class LROsInner {
     /**
      * Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Succeeded’.
      *
-     * @param product Product to put
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable for the request
+     * @param product Product to put.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the observable for the request.
      */
     public Observable<OperationStatus<ProductInner>> beginPut200SucceededAsync(ProductInner product) {
         Validator.validate(product);
@@ -502,9 +502,9 @@ public class LROsInner {
     /**
      * Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Succeeded’.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @throws CloudException thrown if the request is rejected by server
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws CloudException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the ProductInner object if successful.
      */
     public ProductInner put200Succeeded() {
@@ -515,8 +515,8 @@ public class LROsInner {
      * Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Succeeded’.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceFuture} object
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link ServiceFuture&lt;ProductInner&gt;} object.
      */
     public ServiceFuture<ProductInner> put200SucceededAsync(final ServiceCallback<ProductInner> serviceCallback) {
         return ServiceFuture.fromBody(put200SucceededAsync(), serviceCallback);
@@ -525,7 +525,7 @@ public class LROsInner {
     /**
      * Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Succeeded’.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, ProductInner&gt;&gt;} object if successful.
      */
     public Single<RestResponse<Void, ProductInner>> put200SucceededWithRestResponseAsync() {
@@ -536,8 +536,8 @@ public class LROsInner {
     /**
      * Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Succeeded’.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return a {@link Single} emitting the RestResponse<Void, ProductInner> object
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link Maybe&lt;ProductInner&gt;} object if successful.
      */
     public Maybe<ProductInner> put200SucceededAsync() {
         return put200SucceededWithRestResponseAsync()
@@ -555,10 +555,10 @@ public class LROsInner {
     /**
      * Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Succeeded’.
      *
-     * @param product Product to put
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @throws CloudException thrown if the request is rejected by server
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
+     * @param product Product to put.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws CloudException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the ProductInner object if successful.
      */
     public ProductInner put200Succeeded(ProductInner product) {
@@ -568,10 +568,10 @@ public class LROsInner {
     /**
      * Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Succeeded’.
      *
-     * @param product Product to put
+     * @param product Product to put.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceFuture} object
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link ServiceFuture&lt;ProductInner&gt;} object.
      */
     public ServiceFuture<ProductInner> put200SucceededAsync(ProductInner product, final ServiceCallback<ProductInner> serviceCallback) {
         return ServiceFuture.fromBody(put200SucceededAsync(product), serviceCallback);
@@ -580,8 +580,8 @@ public class LROsInner {
     /**
      * Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Succeeded’.
      *
-     * @param product Product to put
-     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @param product Product to put.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, ProductInner&gt;&gt;} object if successful.
      */
     public Single<RestResponse<Void, ProductInner>> put200SucceededWithRestResponseAsync(ProductInner product) {
@@ -592,9 +592,9 @@ public class LROsInner {
     /**
      * Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Succeeded’.
      *
-     * @param product Product to put
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return a {@link Single} emitting the RestResponse<Void, ProductInner> object
+     * @param product Product to put.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link Maybe&lt;ProductInner&gt;} object if successful.
      */
     public Maybe<ProductInner> put200SucceededAsync(ProductInner product) {
         return put200SucceededWithRestResponseAsync(product)
@@ -612,9 +612,9 @@ public class LROsInner {
     /**
      * Long running put request, service returns a 200 to the initial request, with an entity that does not contain ProvisioningState=’Succeeded’.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @throws CloudException thrown if the request is rejected by server
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws CloudException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the ProductInner object if successful.
      */
     public ProductInner beginPut200SucceededNoState() {
@@ -625,8 +625,8 @@ public class LROsInner {
      * Long running put request, service returns a 200 to the initial request, with an entity that does not contain ProvisioningState=’Succeeded’.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceFuture} object
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link ServiceFuture&lt;ProductInner&gt;} object.
      */
     public ServiceFuture<ProductInner> beginPut200SucceededNoStateAsync(final ServiceCallback<ProductInner> serviceCallback) {
         return ServiceFutureUtil.fromLRO(beginPut200SucceededNoStateAsync(), serviceCallback);
@@ -635,8 +635,8 @@ public class LROsInner {
     /**
      * Long running put request, service returns a 200 to the initial request, with an entity that does not contain ProvisioningState=’Succeeded’.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable for the request
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the observable for the request.
      */
     public Observable<OperationStatus<ProductInner>> beginPut200SucceededNoStateAsync() {
         final ProductInner product = null;
@@ -646,10 +646,10 @@ public class LROsInner {
     /**
      * Long running put request, service returns a 200 to the initial request, with an entity that does not contain ProvisioningState=’Succeeded’.
      *
-     * @param product Product to put
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @throws CloudException thrown if the request is rejected by server
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
+     * @param product Product to put.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws CloudException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the ProductInner object if successful.
      */
     public ProductInner beginPut200SucceededNoState(ProductInner product) {
@@ -659,10 +659,10 @@ public class LROsInner {
     /**
      * Long running put request, service returns a 200 to the initial request, with an entity that does not contain ProvisioningState=’Succeeded’.
      *
-     * @param product Product to put
+     * @param product Product to put.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceFuture} object
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link ServiceFuture&lt;ProductInner&gt;} object.
      */
     public ServiceFuture<ProductInner> beginPut200SucceededNoStateAsync(ProductInner product, final ServiceCallback<ProductInner> serviceCallback) {
         return ServiceFutureUtil.fromLRO(beginPut200SucceededNoStateAsync(product), serviceCallback);
@@ -671,9 +671,9 @@ public class LROsInner {
     /**
      * Long running put request, service returns a 200 to the initial request, with an entity that does not contain ProvisioningState=’Succeeded’.
      *
-     * @param product Product to put
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable for the request
+     * @param product Product to put.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the observable for the request.
      */
     public Observable<OperationStatus<ProductInner>> beginPut200SucceededNoStateAsync(ProductInner product) {
         Validator.validate(product);
@@ -683,9 +683,9 @@ public class LROsInner {
     /**
      * Long running put request, service returns a 200 to the initial request, with an entity that does not contain ProvisioningState=’Succeeded’.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @throws CloudException thrown if the request is rejected by server
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws CloudException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the ProductInner object if successful.
      */
     public ProductInner put200SucceededNoState() {
@@ -696,8 +696,8 @@ public class LROsInner {
      * Long running put request, service returns a 200 to the initial request, with an entity that does not contain ProvisioningState=’Succeeded’.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceFuture} object
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link ServiceFuture&lt;ProductInner&gt;} object.
      */
     public ServiceFuture<ProductInner> put200SucceededNoStateAsync(final ServiceCallback<ProductInner> serviceCallback) {
         return ServiceFuture.fromBody(put200SucceededNoStateAsync(), serviceCallback);
@@ -706,7 +706,7 @@ public class LROsInner {
     /**
      * Long running put request, service returns a 200 to the initial request, with an entity that does not contain ProvisioningState=’Succeeded’.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, ProductInner&gt;&gt;} object if successful.
      */
     public Single<RestResponse<Void, ProductInner>> put200SucceededNoStateWithRestResponseAsync() {
@@ -717,8 +717,8 @@ public class LROsInner {
     /**
      * Long running put request, service returns a 200 to the initial request, with an entity that does not contain ProvisioningState=’Succeeded’.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return a {@link Single} emitting the RestResponse<Void, ProductInner> object
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link Maybe&lt;ProductInner&gt;} object if successful.
      */
     public Maybe<ProductInner> put200SucceededNoStateAsync() {
         return put200SucceededNoStateWithRestResponseAsync()
@@ -736,10 +736,10 @@ public class LROsInner {
     /**
      * Long running put request, service returns a 200 to the initial request, with an entity that does not contain ProvisioningState=’Succeeded’.
      *
-     * @param product Product to put
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @throws CloudException thrown if the request is rejected by server
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
+     * @param product Product to put.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws CloudException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the ProductInner object if successful.
      */
     public ProductInner put200SucceededNoState(ProductInner product) {
@@ -749,10 +749,10 @@ public class LROsInner {
     /**
      * Long running put request, service returns a 200 to the initial request, with an entity that does not contain ProvisioningState=’Succeeded’.
      *
-     * @param product Product to put
+     * @param product Product to put.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceFuture} object
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link ServiceFuture&lt;ProductInner&gt;} object.
      */
     public ServiceFuture<ProductInner> put200SucceededNoStateAsync(ProductInner product, final ServiceCallback<ProductInner> serviceCallback) {
         return ServiceFuture.fromBody(put200SucceededNoStateAsync(product), serviceCallback);
@@ -761,8 +761,8 @@ public class LROsInner {
     /**
      * Long running put request, service returns a 200 to the initial request, with an entity that does not contain ProvisioningState=’Succeeded’.
      *
-     * @param product Product to put
-     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @param product Product to put.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, ProductInner&gt;&gt;} object if successful.
      */
     public Single<RestResponse<Void, ProductInner>> put200SucceededNoStateWithRestResponseAsync(ProductInner product) {
@@ -773,9 +773,9 @@ public class LROsInner {
     /**
      * Long running put request, service returns a 200 to the initial request, with an entity that does not contain ProvisioningState=’Succeeded’.
      *
-     * @param product Product to put
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return a {@link Single} emitting the RestResponse<Void, ProductInner> object
+     * @param product Product to put.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link Maybe&lt;ProductInner&gt;} object if successful.
      */
     public Maybe<ProductInner> put200SucceededNoStateAsync(ProductInner product) {
         return put200SucceededNoStateWithRestResponseAsync(product)
@@ -793,9 +793,9 @@ public class LROsInner {
     /**
      * Long running put request, service returns a 202 to the initial request, with a location header that points to a polling URL that returns a 200 and an entity that doesn't contains ProvisioningState.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @throws CloudException thrown if the request is rejected by server
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws CloudException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the ProductInner object if successful.
      */
     public ProductInner beginPut202Retry200() {
@@ -806,8 +806,8 @@ public class LROsInner {
      * Long running put request, service returns a 202 to the initial request, with a location header that points to a polling URL that returns a 200 and an entity that doesn't contains ProvisioningState.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceFuture} object
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link ServiceFuture&lt;ProductInner&gt;} object.
      */
     public ServiceFuture<ProductInner> beginPut202Retry200Async(final ServiceCallback<ProductInner> serviceCallback) {
         return ServiceFutureUtil.fromLRO(beginPut202Retry200Async(), serviceCallback);
@@ -816,8 +816,8 @@ public class LROsInner {
     /**
      * Long running put request, service returns a 202 to the initial request, with a location header that points to a polling URL that returns a 200 and an entity that doesn't contains ProvisioningState.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable for the request
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the observable for the request.
      */
     public Observable<OperationStatus<ProductInner>> beginPut202Retry200Async() {
         final ProductInner product = null;
@@ -827,10 +827,10 @@ public class LROsInner {
     /**
      * Long running put request, service returns a 202 to the initial request, with a location header that points to a polling URL that returns a 200 and an entity that doesn't contains ProvisioningState.
      *
-     * @param product Product to put
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @throws CloudException thrown if the request is rejected by server
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
+     * @param product Product to put.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws CloudException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the ProductInner object if successful.
      */
     public ProductInner beginPut202Retry200(ProductInner product) {
@@ -840,10 +840,10 @@ public class LROsInner {
     /**
      * Long running put request, service returns a 202 to the initial request, with a location header that points to a polling URL that returns a 200 and an entity that doesn't contains ProvisioningState.
      *
-     * @param product Product to put
+     * @param product Product to put.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceFuture} object
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link ServiceFuture&lt;ProductInner&gt;} object.
      */
     public ServiceFuture<ProductInner> beginPut202Retry200Async(ProductInner product, final ServiceCallback<ProductInner> serviceCallback) {
         return ServiceFutureUtil.fromLRO(beginPut202Retry200Async(product), serviceCallback);
@@ -852,9 +852,9 @@ public class LROsInner {
     /**
      * Long running put request, service returns a 202 to the initial request, with a location header that points to a polling URL that returns a 200 and an entity that doesn't contains ProvisioningState.
      *
-     * @param product Product to put
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable for the request
+     * @param product Product to put.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the observable for the request.
      */
     public Observable<OperationStatus<ProductInner>> beginPut202Retry200Async(ProductInner product) {
         Validator.validate(product);
@@ -864,9 +864,9 @@ public class LROsInner {
     /**
      * Long running put request, service returns a 202 to the initial request, with a location header that points to a polling URL that returns a 200 and an entity that doesn't contains ProvisioningState.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @throws CloudException thrown if the request is rejected by server
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws CloudException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the ProductInner object if successful.
      */
     public ProductInner put202Retry200() {
@@ -877,8 +877,8 @@ public class LROsInner {
      * Long running put request, service returns a 202 to the initial request, with a location header that points to a polling URL that returns a 200 and an entity that doesn't contains ProvisioningState.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceFuture} object
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link ServiceFuture&lt;ProductInner&gt;} object.
      */
     public ServiceFuture<ProductInner> put202Retry200Async(final ServiceCallback<ProductInner> serviceCallback) {
         return ServiceFuture.fromBody(put202Retry200Async(), serviceCallback);
@@ -887,7 +887,7 @@ public class LROsInner {
     /**
      * Long running put request, service returns a 202 to the initial request, with a location header that points to a polling URL that returns a 200 and an entity that doesn't contains ProvisioningState.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, ProductInner&gt;&gt;} object if successful.
      */
     public Single<RestResponse<Void, ProductInner>> put202Retry200WithRestResponseAsync() {
@@ -898,8 +898,8 @@ public class LROsInner {
     /**
      * Long running put request, service returns a 202 to the initial request, with a location header that points to a polling URL that returns a 200 and an entity that doesn't contains ProvisioningState.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return a {@link Single} emitting the RestResponse<Void, ProductInner> object
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link Maybe&lt;ProductInner&gt;} object if successful.
      */
     public Maybe<ProductInner> put202Retry200Async() {
         return put202Retry200WithRestResponseAsync()
@@ -917,10 +917,10 @@ public class LROsInner {
     /**
      * Long running put request, service returns a 202 to the initial request, with a location header that points to a polling URL that returns a 200 and an entity that doesn't contains ProvisioningState.
      *
-     * @param product Product to put
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @throws CloudException thrown if the request is rejected by server
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
+     * @param product Product to put.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws CloudException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the ProductInner object if successful.
      */
     public ProductInner put202Retry200(ProductInner product) {
@@ -930,10 +930,10 @@ public class LROsInner {
     /**
      * Long running put request, service returns a 202 to the initial request, with a location header that points to a polling URL that returns a 200 and an entity that doesn't contains ProvisioningState.
      *
-     * @param product Product to put
+     * @param product Product to put.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceFuture} object
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link ServiceFuture&lt;ProductInner&gt;} object.
      */
     public ServiceFuture<ProductInner> put202Retry200Async(ProductInner product, final ServiceCallback<ProductInner> serviceCallback) {
         return ServiceFuture.fromBody(put202Retry200Async(product), serviceCallback);
@@ -942,8 +942,8 @@ public class LROsInner {
     /**
      * Long running put request, service returns a 202 to the initial request, with a location header that points to a polling URL that returns a 200 and an entity that doesn't contains ProvisioningState.
      *
-     * @param product Product to put
-     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @param product Product to put.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, ProductInner&gt;&gt;} object if successful.
      */
     public Single<RestResponse<Void, ProductInner>> put202Retry200WithRestResponseAsync(ProductInner product) {
@@ -954,9 +954,9 @@ public class LROsInner {
     /**
      * Long running put request, service returns a 202 to the initial request, with a location header that points to a polling URL that returns a 200 and an entity that doesn't contains ProvisioningState.
      *
-     * @param product Product to put
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return a {@link Single} emitting the RestResponse<Void, ProductInner> object
+     * @param product Product to put.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link Maybe&lt;ProductInner&gt;} object if successful.
      */
     public Maybe<ProductInner> put202Retry200Async(ProductInner product) {
         return put202Retry200WithRestResponseAsync(product)
@@ -974,9 +974,9 @@ public class LROsInner {
     /**
      * Long running put request, service returns a 201 to the initial request, with an entity that contains ProvisioningState=’Creating’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Succeeded’.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @throws CloudException thrown if the request is rejected by server
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws CloudException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the ProductInner object if successful.
      */
     public ProductInner beginPut201CreatingSucceeded200() {
@@ -987,8 +987,8 @@ public class LROsInner {
      * Long running put request, service returns a 201 to the initial request, with an entity that contains ProvisioningState=’Creating’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Succeeded’.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceFuture} object
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link ServiceFuture&lt;ProductInner&gt;} object.
      */
     public ServiceFuture<ProductInner> beginPut201CreatingSucceeded200Async(final ServiceCallback<ProductInner> serviceCallback) {
         return ServiceFutureUtil.fromLRO(beginPut201CreatingSucceeded200Async(), serviceCallback);
@@ -997,8 +997,8 @@ public class LROsInner {
     /**
      * Long running put request, service returns a 201 to the initial request, with an entity that contains ProvisioningState=’Creating’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Succeeded’.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable for the request
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the observable for the request.
      */
     public Observable<OperationStatus<ProductInner>> beginPut201CreatingSucceeded200Async() {
         final ProductInner product = null;
@@ -1008,10 +1008,10 @@ public class LROsInner {
     /**
      * Long running put request, service returns a 201 to the initial request, with an entity that contains ProvisioningState=’Creating’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Succeeded’.
      *
-     * @param product Product to put
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @throws CloudException thrown if the request is rejected by server
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
+     * @param product Product to put.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws CloudException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the ProductInner object if successful.
      */
     public ProductInner beginPut201CreatingSucceeded200(ProductInner product) {
@@ -1021,10 +1021,10 @@ public class LROsInner {
     /**
      * Long running put request, service returns a 201 to the initial request, with an entity that contains ProvisioningState=’Creating’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Succeeded’.
      *
-     * @param product Product to put
+     * @param product Product to put.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceFuture} object
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link ServiceFuture&lt;ProductInner&gt;} object.
      */
     public ServiceFuture<ProductInner> beginPut201CreatingSucceeded200Async(ProductInner product, final ServiceCallback<ProductInner> serviceCallback) {
         return ServiceFutureUtil.fromLRO(beginPut201CreatingSucceeded200Async(product), serviceCallback);
@@ -1033,9 +1033,9 @@ public class LROsInner {
     /**
      * Long running put request, service returns a 201 to the initial request, with an entity that contains ProvisioningState=’Creating’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Succeeded’.
      *
-     * @param product Product to put
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable for the request
+     * @param product Product to put.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the observable for the request.
      */
     public Observable<OperationStatus<ProductInner>> beginPut201CreatingSucceeded200Async(ProductInner product) {
         Validator.validate(product);
@@ -1045,9 +1045,9 @@ public class LROsInner {
     /**
      * Long running put request, service returns a 201 to the initial request, with an entity that contains ProvisioningState=’Creating’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Succeeded’.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @throws CloudException thrown if the request is rejected by server
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws CloudException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the ProductInner object if successful.
      */
     public ProductInner put201CreatingSucceeded200() {
@@ -1058,8 +1058,8 @@ public class LROsInner {
      * Long running put request, service returns a 201 to the initial request, with an entity that contains ProvisioningState=’Creating’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Succeeded’.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceFuture} object
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link ServiceFuture&lt;ProductInner&gt;} object.
      */
     public ServiceFuture<ProductInner> put201CreatingSucceeded200Async(final ServiceCallback<ProductInner> serviceCallback) {
         return ServiceFuture.fromBody(put201CreatingSucceeded200Async(), serviceCallback);
@@ -1068,7 +1068,7 @@ public class LROsInner {
     /**
      * Long running put request, service returns a 201 to the initial request, with an entity that contains ProvisioningState=’Creating’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Succeeded’.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, ProductInner&gt;&gt;} object if successful.
      */
     public Single<RestResponse<Void, ProductInner>> put201CreatingSucceeded200WithRestResponseAsync() {
@@ -1079,8 +1079,8 @@ public class LROsInner {
     /**
      * Long running put request, service returns a 201 to the initial request, with an entity that contains ProvisioningState=’Creating’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Succeeded’.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return a {@link Single} emitting the RestResponse<Void, ProductInner> object
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link Maybe&lt;ProductInner&gt;} object if successful.
      */
     public Maybe<ProductInner> put201CreatingSucceeded200Async() {
         return put201CreatingSucceeded200WithRestResponseAsync()
@@ -1098,10 +1098,10 @@ public class LROsInner {
     /**
      * Long running put request, service returns a 201 to the initial request, with an entity that contains ProvisioningState=’Creating’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Succeeded’.
      *
-     * @param product Product to put
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @throws CloudException thrown if the request is rejected by server
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
+     * @param product Product to put.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws CloudException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the ProductInner object if successful.
      */
     public ProductInner put201CreatingSucceeded200(ProductInner product) {
@@ -1111,10 +1111,10 @@ public class LROsInner {
     /**
      * Long running put request, service returns a 201 to the initial request, with an entity that contains ProvisioningState=’Creating’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Succeeded’.
      *
-     * @param product Product to put
+     * @param product Product to put.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceFuture} object
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link ServiceFuture&lt;ProductInner&gt;} object.
      */
     public ServiceFuture<ProductInner> put201CreatingSucceeded200Async(ProductInner product, final ServiceCallback<ProductInner> serviceCallback) {
         return ServiceFuture.fromBody(put201CreatingSucceeded200Async(product), serviceCallback);
@@ -1123,8 +1123,8 @@ public class LROsInner {
     /**
      * Long running put request, service returns a 201 to the initial request, with an entity that contains ProvisioningState=’Creating’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Succeeded’.
      *
-     * @param product Product to put
-     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @param product Product to put.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, ProductInner&gt;&gt;} object if successful.
      */
     public Single<RestResponse<Void, ProductInner>> put201CreatingSucceeded200WithRestResponseAsync(ProductInner product) {
@@ -1135,9 +1135,9 @@ public class LROsInner {
     /**
      * Long running put request, service returns a 201 to the initial request, with an entity that contains ProvisioningState=’Creating’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Succeeded’.
      *
-     * @param product Product to put
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return a {@link Single} emitting the RestResponse<Void, ProductInner> object
+     * @param product Product to put.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link Maybe&lt;ProductInner&gt;} object if successful.
      */
     public Maybe<ProductInner> put201CreatingSucceeded200Async(ProductInner product) {
         return put201CreatingSucceeded200WithRestResponseAsync(product)
@@ -1155,9 +1155,9 @@ public class LROsInner {
     /**
      * Long running put request, service returns a 201 to the initial request, with an entity that contains ProvisioningState=’Updating’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Succeeded’.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @throws CloudException thrown if the request is rejected by server
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws CloudException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the ProductInner object if successful.
      */
     public ProductInner beginPut200UpdatingSucceeded204() {
@@ -1168,8 +1168,8 @@ public class LROsInner {
      * Long running put request, service returns a 201 to the initial request, with an entity that contains ProvisioningState=’Updating’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Succeeded’.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceFuture} object
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link ServiceFuture&lt;ProductInner&gt;} object.
      */
     public ServiceFuture<ProductInner> beginPut200UpdatingSucceeded204Async(final ServiceCallback<ProductInner> serviceCallback) {
         return ServiceFutureUtil.fromLRO(beginPut200UpdatingSucceeded204Async(), serviceCallback);
@@ -1178,8 +1178,8 @@ public class LROsInner {
     /**
      * Long running put request, service returns a 201 to the initial request, with an entity that contains ProvisioningState=’Updating’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Succeeded’.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable for the request
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the observable for the request.
      */
     public Observable<OperationStatus<ProductInner>> beginPut200UpdatingSucceeded204Async() {
         final ProductInner product = null;
@@ -1189,10 +1189,10 @@ public class LROsInner {
     /**
      * Long running put request, service returns a 201 to the initial request, with an entity that contains ProvisioningState=’Updating’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Succeeded’.
      *
-     * @param product Product to put
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @throws CloudException thrown if the request is rejected by server
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
+     * @param product Product to put.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws CloudException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the ProductInner object if successful.
      */
     public ProductInner beginPut200UpdatingSucceeded204(ProductInner product) {
@@ -1202,10 +1202,10 @@ public class LROsInner {
     /**
      * Long running put request, service returns a 201 to the initial request, with an entity that contains ProvisioningState=’Updating’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Succeeded’.
      *
-     * @param product Product to put
+     * @param product Product to put.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceFuture} object
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link ServiceFuture&lt;ProductInner&gt;} object.
      */
     public ServiceFuture<ProductInner> beginPut200UpdatingSucceeded204Async(ProductInner product, final ServiceCallback<ProductInner> serviceCallback) {
         return ServiceFutureUtil.fromLRO(beginPut200UpdatingSucceeded204Async(product), serviceCallback);
@@ -1214,9 +1214,9 @@ public class LROsInner {
     /**
      * Long running put request, service returns a 201 to the initial request, with an entity that contains ProvisioningState=’Updating’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Succeeded’.
      *
-     * @param product Product to put
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable for the request
+     * @param product Product to put.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the observable for the request.
      */
     public Observable<OperationStatus<ProductInner>> beginPut200UpdatingSucceeded204Async(ProductInner product) {
         Validator.validate(product);
@@ -1226,9 +1226,9 @@ public class LROsInner {
     /**
      * Long running put request, service returns a 201 to the initial request, with an entity that contains ProvisioningState=’Updating’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Succeeded’.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @throws CloudException thrown if the request is rejected by server
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws CloudException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the ProductInner object if successful.
      */
     public ProductInner put200UpdatingSucceeded204() {
@@ -1239,8 +1239,8 @@ public class LROsInner {
      * Long running put request, service returns a 201 to the initial request, with an entity that contains ProvisioningState=’Updating’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Succeeded’.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceFuture} object
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link ServiceFuture&lt;ProductInner&gt;} object.
      */
     public ServiceFuture<ProductInner> put200UpdatingSucceeded204Async(final ServiceCallback<ProductInner> serviceCallback) {
         return ServiceFuture.fromBody(put200UpdatingSucceeded204Async(), serviceCallback);
@@ -1249,7 +1249,7 @@ public class LROsInner {
     /**
      * Long running put request, service returns a 201 to the initial request, with an entity that contains ProvisioningState=’Updating’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Succeeded’.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, ProductInner&gt;&gt;} object if successful.
      */
     public Single<RestResponse<Void, ProductInner>> put200UpdatingSucceeded204WithRestResponseAsync() {
@@ -1260,8 +1260,8 @@ public class LROsInner {
     /**
      * Long running put request, service returns a 201 to the initial request, with an entity that contains ProvisioningState=’Updating’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Succeeded’.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return a {@link Single} emitting the RestResponse<Void, ProductInner> object
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link Maybe&lt;ProductInner&gt;} object if successful.
      */
     public Maybe<ProductInner> put200UpdatingSucceeded204Async() {
         return put200UpdatingSucceeded204WithRestResponseAsync()
@@ -1279,10 +1279,10 @@ public class LROsInner {
     /**
      * Long running put request, service returns a 201 to the initial request, with an entity that contains ProvisioningState=’Updating’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Succeeded’.
      *
-     * @param product Product to put
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @throws CloudException thrown if the request is rejected by server
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
+     * @param product Product to put.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws CloudException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the ProductInner object if successful.
      */
     public ProductInner put200UpdatingSucceeded204(ProductInner product) {
@@ -1292,10 +1292,10 @@ public class LROsInner {
     /**
      * Long running put request, service returns a 201 to the initial request, with an entity that contains ProvisioningState=’Updating’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Succeeded’.
      *
-     * @param product Product to put
+     * @param product Product to put.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceFuture} object
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link ServiceFuture&lt;ProductInner&gt;} object.
      */
     public ServiceFuture<ProductInner> put200UpdatingSucceeded204Async(ProductInner product, final ServiceCallback<ProductInner> serviceCallback) {
         return ServiceFuture.fromBody(put200UpdatingSucceeded204Async(product), serviceCallback);
@@ -1304,8 +1304,8 @@ public class LROsInner {
     /**
      * Long running put request, service returns a 201 to the initial request, with an entity that contains ProvisioningState=’Updating’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Succeeded’.
      *
-     * @param product Product to put
-     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @param product Product to put.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, ProductInner&gt;&gt;} object if successful.
      */
     public Single<RestResponse<Void, ProductInner>> put200UpdatingSucceeded204WithRestResponseAsync(ProductInner product) {
@@ -1316,9 +1316,9 @@ public class LROsInner {
     /**
      * Long running put request, service returns a 201 to the initial request, with an entity that contains ProvisioningState=’Updating’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Succeeded’.
      *
-     * @param product Product to put
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return a {@link Single} emitting the RestResponse<Void, ProductInner> object
+     * @param product Product to put.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link Maybe&lt;ProductInner&gt;} object if successful.
      */
     public Maybe<ProductInner> put200UpdatingSucceeded204Async(ProductInner product) {
         return put200UpdatingSucceeded204WithRestResponseAsync(product)
@@ -1336,9 +1336,9 @@ public class LROsInner {
     /**
      * Long running put request, service returns a 201 to the initial request, with an entity that contains ProvisioningState=’Created’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Failed’.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @throws CloudException thrown if the request is rejected by server
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws CloudException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the ProductInner object if successful.
      */
     public ProductInner beginPut201CreatingFailed200() {
@@ -1349,8 +1349,8 @@ public class LROsInner {
      * Long running put request, service returns a 201 to the initial request, with an entity that contains ProvisioningState=’Created’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Failed’.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceFuture} object
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link ServiceFuture&lt;ProductInner&gt;} object.
      */
     public ServiceFuture<ProductInner> beginPut201CreatingFailed200Async(final ServiceCallback<ProductInner> serviceCallback) {
         return ServiceFutureUtil.fromLRO(beginPut201CreatingFailed200Async(), serviceCallback);
@@ -1359,8 +1359,8 @@ public class LROsInner {
     /**
      * Long running put request, service returns a 201 to the initial request, with an entity that contains ProvisioningState=’Created’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Failed’.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable for the request
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the observable for the request.
      */
     public Observable<OperationStatus<ProductInner>> beginPut201CreatingFailed200Async() {
         final ProductInner product = null;
@@ -1370,10 +1370,10 @@ public class LROsInner {
     /**
      * Long running put request, service returns a 201 to the initial request, with an entity that contains ProvisioningState=’Created’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Failed’.
      *
-     * @param product Product to put
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @throws CloudException thrown if the request is rejected by server
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
+     * @param product Product to put.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws CloudException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the ProductInner object if successful.
      */
     public ProductInner beginPut201CreatingFailed200(ProductInner product) {
@@ -1383,10 +1383,10 @@ public class LROsInner {
     /**
      * Long running put request, service returns a 201 to the initial request, with an entity that contains ProvisioningState=’Created’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Failed’.
      *
-     * @param product Product to put
+     * @param product Product to put.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceFuture} object
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link ServiceFuture&lt;ProductInner&gt;} object.
      */
     public ServiceFuture<ProductInner> beginPut201CreatingFailed200Async(ProductInner product, final ServiceCallback<ProductInner> serviceCallback) {
         return ServiceFutureUtil.fromLRO(beginPut201CreatingFailed200Async(product), serviceCallback);
@@ -1395,9 +1395,9 @@ public class LROsInner {
     /**
      * Long running put request, service returns a 201 to the initial request, with an entity that contains ProvisioningState=’Created’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Failed’.
      *
-     * @param product Product to put
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable for the request
+     * @param product Product to put.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the observable for the request.
      */
     public Observable<OperationStatus<ProductInner>> beginPut201CreatingFailed200Async(ProductInner product) {
         Validator.validate(product);
@@ -1407,9 +1407,9 @@ public class LROsInner {
     /**
      * Long running put request, service returns a 201 to the initial request, with an entity that contains ProvisioningState=’Created’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Failed’.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @throws CloudException thrown if the request is rejected by server
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws CloudException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the ProductInner object if successful.
      */
     public ProductInner put201CreatingFailed200() {
@@ -1420,8 +1420,8 @@ public class LROsInner {
      * Long running put request, service returns a 201 to the initial request, with an entity that contains ProvisioningState=’Created’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Failed’.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceFuture} object
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link ServiceFuture&lt;ProductInner&gt;} object.
      */
     public ServiceFuture<ProductInner> put201CreatingFailed200Async(final ServiceCallback<ProductInner> serviceCallback) {
         return ServiceFuture.fromBody(put201CreatingFailed200Async(), serviceCallback);
@@ -1430,7 +1430,7 @@ public class LROsInner {
     /**
      * Long running put request, service returns a 201 to the initial request, with an entity that contains ProvisioningState=’Created’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Failed’.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, ProductInner&gt;&gt;} object if successful.
      */
     public Single<RestResponse<Void, ProductInner>> put201CreatingFailed200WithRestResponseAsync() {
@@ -1441,8 +1441,8 @@ public class LROsInner {
     /**
      * Long running put request, service returns a 201 to the initial request, with an entity that contains ProvisioningState=’Created’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Failed’.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return a {@link Single} emitting the RestResponse<Void, ProductInner> object
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link Maybe&lt;ProductInner&gt;} object if successful.
      */
     public Maybe<ProductInner> put201CreatingFailed200Async() {
         return put201CreatingFailed200WithRestResponseAsync()
@@ -1460,10 +1460,10 @@ public class LROsInner {
     /**
      * Long running put request, service returns a 201 to the initial request, with an entity that contains ProvisioningState=’Created’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Failed’.
      *
-     * @param product Product to put
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @throws CloudException thrown if the request is rejected by server
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
+     * @param product Product to put.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws CloudException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the ProductInner object if successful.
      */
     public ProductInner put201CreatingFailed200(ProductInner product) {
@@ -1473,10 +1473,10 @@ public class LROsInner {
     /**
      * Long running put request, service returns a 201 to the initial request, with an entity that contains ProvisioningState=’Created’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Failed’.
      *
-     * @param product Product to put
+     * @param product Product to put.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceFuture} object
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link ServiceFuture&lt;ProductInner&gt;} object.
      */
     public ServiceFuture<ProductInner> put201CreatingFailed200Async(ProductInner product, final ServiceCallback<ProductInner> serviceCallback) {
         return ServiceFuture.fromBody(put201CreatingFailed200Async(product), serviceCallback);
@@ -1485,8 +1485,8 @@ public class LROsInner {
     /**
      * Long running put request, service returns a 201 to the initial request, with an entity that contains ProvisioningState=’Created’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Failed’.
      *
-     * @param product Product to put
-     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @param product Product to put.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, ProductInner&gt;&gt;} object if successful.
      */
     public Single<RestResponse<Void, ProductInner>> put201CreatingFailed200WithRestResponseAsync(ProductInner product) {
@@ -1497,9 +1497,9 @@ public class LROsInner {
     /**
      * Long running put request, service returns a 201 to the initial request, with an entity that contains ProvisioningState=’Created’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Failed’.
      *
-     * @param product Product to put
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return a {@link Single} emitting the RestResponse<Void, ProductInner> object
+     * @param product Product to put.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link Maybe&lt;ProductInner&gt;} object if successful.
      */
     public Maybe<ProductInner> put201CreatingFailed200Async(ProductInner product) {
         return put201CreatingFailed200WithRestResponseAsync(product)
@@ -1517,9 +1517,9 @@ public class LROsInner {
     /**
      * Long running put request, service returns a 201 to the initial request, with an entity that contains ProvisioningState=’Creating’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Canceled’.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @throws CloudException thrown if the request is rejected by server
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws CloudException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the ProductInner object if successful.
      */
     public ProductInner beginPut200Acceptedcanceled200() {
@@ -1530,8 +1530,8 @@ public class LROsInner {
      * Long running put request, service returns a 201 to the initial request, with an entity that contains ProvisioningState=’Creating’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Canceled’.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceFuture} object
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link ServiceFuture&lt;ProductInner&gt;} object.
      */
     public ServiceFuture<ProductInner> beginPut200Acceptedcanceled200Async(final ServiceCallback<ProductInner> serviceCallback) {
         return ServiceFutureUtil.fromLRO(beginPut200Acceptedcanceled200Async(), serviceCallback);
@@ -1540,8 +1540,8 @@ public class LROsInner {
     /**
      * Long running put request, service returns a 201 to the initial request, with an entity that contains ProvisioningState=’Creating’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Canceled’.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable for the request
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the observable for the request.
      */
     public Observable<OperationStatus<ProductInner>> beginPut200Acceptedcanceled200Async() {
         final ProductInner product = null;
@@ -1551,10 +1551,10 @@ public class LROsInner {
     /**
      * Long running put request, service returns a 201 to the initial request, with an entity that contains ProvisioningState=’Creating’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Canceled’.
      *
-     * @param product Product to put
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @throws CloudException thrown if the request is rejected by server
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
+     * @param product Product to put.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws CloudException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the ProductInner object if successful.
      */
     public ProductInner beginPut200Acceptedcanceled200(ProductInner product) {
@@ -1564,10 +1564,10 @@ public class LROsInner {
     /**
      * Long running put request, service returns a 201 to the initial request, with an entity that contains ProvisioningState=’Creating’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Canceled’.
      *
-     * @param product Product to put
+     * @param product Product to put.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceFuture} object
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link ServiceFuture&lt;ProductInner&gt;} object.
      */
     public ServiceFuture<ProductInner> beginPut200Acceptedcanceled200Async(ProductInner product, final ServiceCallback<ProductInner> serviceCallback) {
         return ServiceFutureUtil.fromLRO(beginPut200Acceptedcanceled200Async(product), serviceCallback);
@@ -1576,9 +1576,9 @@ public class LROsInner {
     /**
      * Long running put request, service returns a 201 to the initial request, with an entity that contains ProvisioningState=’Creating’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Canceled’.
      *
-     * @param product Product to put
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable for the request
+     * @param product Product to put.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the observable for the request.
      */
     public Observable<OperationStatus<ProductInner>> beginPut200Acceptedcanceled200Async(ProductInner product) {
         Validator.validate(product);
@@ -1588,9 +1588,9 @@ public class LROsInner {
     /**
      * Long running put request, service returns a 201 to the initial request, with an entity that contains ProvisioningState=’Creating’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Canceled’.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @throws CloudException thrown if the request is rejected by server
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws CloudException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the ProductInner object if successful.
      */
     public ProductInner put200Acceptedcanceled200() {
@@ -1601,8 +1601,8 @@ public class LROsInner {
      * Long running put request, service returns a 201 to the initial request, with an entity that contains ProvisioningState=’Creating’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Canceled’.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceFuture} object
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link ServiceFuture&lt;ProductInner&gt;} object.
      */
     public ServiceFuture<ProductInner> put200Acceptedcanceled200Async(final ServiceCallback<ProductInner> serviceCallback) {
         return ServiceFuture.fromBody(put200Acceptedcanceled200Async(), serviceCallback);
@@ -1611,7 +1611,7 @@ public class LROsInner {
     /**
      * Long running put request, service returns a 201 to the initial request, with an entity that contains ProvisioningState=’Creating’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Canceled’.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, ProductInner&gt;&gt;} object if successful.
      */
     public Single<RestResponse<Void, ProductInner>> put200Acceptedcanceled200WithRestResponseAsync() {
@@ -1622,8 +1622,8 @@ public class LROsInner {
     /**
      * Long running put request, service returns a 201 to the initial request, with an entity that contains ProvisioningState=’Creating’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Canceled’.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return a {@link Single} emitting the RestResponse<Void, ProductInner> object
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link Maybe&lt;ProductInner&gt;} object if successful.
      */
     public Maybe<ProductInner> put200Acceptedcanceled200Async() {
         return put200Acceptedcanceled200WithRestResponseAsync()
@@ -1641,10 +1641,10 @@ public class LROsInner {
     /**
      * Long running put request, service returns a 201 to the initial request, with an entity that contains ProvisioningState=’Creating’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Canceled’.
      *
-     * @param product Product to put
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @throws CloudException thrown if the request is rejected by server
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
+     * @param product Product to put.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws CloudException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the ProductInner object if successful.
      */
     public ProductInner put200Acceptedcanceled200(ProductInner product) {
@@ -1654,10 +1654,10 @@ public class LROsInner {
     /**
      * Long running put request, service returns a 201 to the initial request, with an entity that contains ProvisioningState=’Creating’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Canceled’.
      *
-     * @param product Product to put
+     * @param product Product to put.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceFuture} object
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link ServiceFuture&lt;ProductInner&gt;} object.
      */
     public ServiceFuture<ProductInner> put200Acceptedcanceled200Async(ProductInner product, final ServiceCallback<ProductInner> serviceCallback) {
         return ServiceFuture.fromBody(put200Acceptedcanceled200Async(product), serviceCallback);
@@ -1666,8 +1666,8 @@ public class LROsInner {
     /**
      * Long running put request, service returns a 201 to the initial request, with an entity that contains ProvisioningState=’Creating’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Canceled’.
      *
-     * @param product Product to put
-     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @param product Product to put.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, ProductInner&gt;&gt;} object if successful.
      */
     public Single<RestResponse<Void, ProductInner>> put200Acceptedcanceled200WithRestResponseAsync(ProductInner product) {
@@ -1678,9 +1678,9 @@ public class LROsInner {
     /**
      * Long running put request, service returns a 201 to the initial request, with an entity that contains ProvisioningState=’Creating’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Canceled’.
      *
-     * @param product Product to put
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return a {@link Single} emitting the RestResponse<Void, ProductInner> object
+     * @param product Product to put.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link Maybe&lt;ProductInner&gt;} object if successful.
      */
     public Maybe<ProductInner> put200Acceptedcanceled200Async(ProductInner product) {
         return put200Acceptedcanceled200WithRestResponseAsync(product)
@@ -1698,9 +1698,9 @@ public class LROsInner {
     /**
      * Long running put request, service returns a 202 to the initial request with location header. Subsequent calls to operation status do not contain location header.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @throws CloudException thrown if the request is rejected by server
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws CloudException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the ProductInner object if successful.
      */
     public ProductInner beginPutNoHeaderInRetry() {
@@ -1711,8 +1711,8 @@ public class LROsInner {
      * Long running put request, service returns a 202 to the initial request with location header. Subsequent calls to operation status do not contain location header.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceFuture} object
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link ServiceFuture&lt;ProductInner&gt;} object.
      */
     public ServiceFuture<ProductInner> beginPutNoHeaderInRetryAsync(final ServiceCallback<ProductInner> serviceCallback) {
         return ServiceFutureUtil.fromLRO(beginPutNoHeaderInRetryAsync(), serviceCallback);
@@ -1721,8 +1721,8 @@ public class LROsInner {
     /**
      * Long running put request, service returns a 202 to the initial request with location header. Subsequent calls to operation status do not contain location header.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable for the request
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the observable for the request.
      */
     public Observable<OperationStatus<ProductInner>> beginPutNoHeaderInRetryAsync() {
         final ProductInner product = null;
@@ -1732,10 +1732,10 @@ public class LROsInner {
     /**
      * Long running put request, service returns a 202 to the initial request with location header. Subsequent calls to operation status do not contain location header.
      *
-     * @param product Product to put
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @throws CloudException thrown if the request is rejected by server
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
+     * @param product Product to put.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws CloudException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the ProductInner object if successful.
      */
     public ProductInner beginPutNoHeaderInRetry(ProductInner product) {
@@ -1745,10 +1745,10 @@ public class LROsInner {
     /**
      * Long running put request, service returns a 202 to the initial request with location header. Subsequent calls to operation status do not contain location header.
      *
-     * @param product Product to put
+     * @param product Product to put.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceFuture} object
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link ServiceFuture&lt;ProductInner&gt;} object.
      */
     public ServiceFuture<ProductInner> beginPutNoHeaderInRetryAsync(ProductInner product, final ServiceCallback<ProductInner> serviceCallback) {
         return ServiceFutureUtil.fromLRO(beginPutNoHeaderInRetryAsync(product), serviceCallback);
@@ -1757,9 +1757,9 @@ public class LROsInner {
     /**
      * Long running put request, service returns a 202 to the initial request with location header. Subsequent calls to operation status do not contain location header.
      *
-     * @param product Product to put
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable for the request
+     * @param product Product to put.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the observable for the request.
      */
     public Observable<OperationStatus<ProductInner>> beginPutNoHeaderInRetryAsync(ProductInner product) {
         Validator.validate(product);
@@ -1769,9 +1769,9 @@ public class LROsInner {
     /**
      * Long running put request, service returns a 202 to the initial request with location header. Subsequent calls to operation status do not contain location header.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @throws CloudException thrown if the request is rejected by server
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws CloudException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the ProductInner object if successful.
      */
     public ProductInner putNoHeaderInRetry() {
@@ -1782,8 +1782,8 @@ public class LROsInner {
      * Long running put request, service returns a 202 to the initial request with location header. Subsequent calls to operation status do not contain location header.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceFuture} object
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link ServiceFuture&lt;ProductInner&gt;} object.
      */
     public ServiceFuture<ProductInner> putNoHeaderInRetryAsync(final ServiceCallback<ProductInner> serviceCallback) {
         return ServiceFuture.fromBody(putNoHeaderInRetryAsync(), serviceCallback);
@@ -1792,7 +1792,7 @@ public class LROsInner {
     /**
      * Long running put request, service returns a 202 to the initial request with location header. Subsequent calls to operation status do not contain location header.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;LROsPutNoHeaderInRetryHeadersInner, ProductInner&gt;&gt;} object if successful.
      */
     public Single<RestResponse<LROsPutNoHeaderInRetryHeadersInner, ProductInner>> putNoHeaderInRetryWithRestResponseAsync() {
@@ -1803,8 +1803,8 @@ public class LROsInner {
     /**
      * Long running put request, service returns a 202 to the initial request with location header. Subsequent calls to operation status do not contain location header.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return a {@link Single} emitting the RestResponse<LROsPutNoHeaderInRetryHeadersInner, ProductInner> object
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link Maybe&lt;ProductInner&gt;} object if successful.
      */
     public Maybe<ProductInner> putNoHeaderInRetryAsync() {
         return putNoHeaderInRetryWithRestResponseAsync()
@@ -1822,10 +1822,10 @@ public class LROsInner {
     /**
      * Long running put request, service returns a 202 to the initial request with location header. Subsequent calls to operation status do not contain location header.
      *
-     * @param product Product to put
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @throws CloudException thrown if the request is rejected by server
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
+     * @param product Product to put.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws CloudException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the ProductInner object if successful.
      */
     public ProductInner putNoHeaderInRetry(ProductInner product) {
@@ -1835,10 +1835,10 @@ public class LROsInner {
     /**
      * Long running put request, service returns a 202 to the initial request with location header. Subsequent calls to operation status do not contain location header.
      *
-     * @param product Product to put
+     * @param product Product to put.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceFuture} object
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link ServiceFuture&lt;ProductInner&gt;} object.
      */
     public ServiceFuture<ProductInner> putNoHeaderInRetryAsync(ProductInner product, final ServiceCallback<ProductInner> serviceCallback) {
         return ServiceFuture.fromBody(putNoHeaderInRetryAsync(product), serviceCallback);
@@ -1847,8 +1847,8 @@ public class LROsInner {
     /**
      * Long running put request, service returns a 202 to the initial request with location header. Subsequent calls to operation status do not contain location header.
      *
-     * @param product Product to put
-     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @param product Product to put.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;LROsPutNoHeaderInRetryHeadersInner, ProductInner&gt;&gt;} object if successful.
      */
     public Single<RestResponse<LROsPutNoHeaderInRetryHeadersInner, ProductInner>> putNoHeaderInRetryWithRestResponseAsync(ProductInner product) {
@@ -1859,9 +1859,9 @@ public class LROsInner {
     /**
      * Long running put request, service returns a 202 to the initial request with location header. Subsequent calls to operation status do not contain location header.
      *
-     * @param product Product to put
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return a {@link Single} emitting the RestResponse<LROsPutNoHeaderInRetryHeadersInner, ProductInner> object
+     * @param product Product to put.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link Maybe&lt;ProductInner&gt;} object if successful.
      */
     public Maybe<ProductInner> putNoHeaderInRetryAsync(ProductInner product) {
         return putNoHeaderInRetryWithRestResponseAsync(product)
@@ -1879,9 +1879,9 @@ public class LROsInner {
     /**
      * Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @throws CloudException thrown if the request is rejected by server
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws CloudException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the ProductInner object if successful.
      */
     public ProductInner beginPutAsyncRetrySucceeded() {
@@ -1892,8 +1892,8 @@ public class LROsInner {
      * Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceFuture} object
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link ServiceFuture&lt;ProductInner&gt;} object.
      */
     public ServiceFuture<ProductInner> beginPutAsyncRetrySucceededAsync(final ServiceCallback<ProductInner> serviceCallback) {
         return ServiceFutureUtil.fromLRO(beginPutAsyncRetrySucceededAsync(), serviceCallback);
@@ -1902,8 +1902,8 @@ public class LROsInner {
     /**
      * Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable for the request
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the observable for the request.
      */
     public Observable<OperationStatus<ProductInner>> beginPutAsyncRetrySucceededAsync() {
         final ProductInner product = null;
@@ -1913,10 +1913,10 @@ public class LROsInner {
     /**
      * Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
-     * @param product Product to put
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @throws CloudException thrown if the request is rejected by server
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
+     * @param product Product to put.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws CloudException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the ProductInner object if successful.
      */
     public ProductInner beginPutAsyncRetrySucceeded(ProductInner product) {
@@ -1926,10 +1926,10 @@ public class LROsInner {
     /**
      * Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
-     * @param product Product to put
+     * @param product Product to put.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceFuture} object
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link ServiceFuture&lt;ProductInner&gt;} object.
      */
     public ServiceFuture<ProductInner> beginPutAsyncRetrySucceededAsync(ProductInner product, final ServiceCallback<ProductInner> serviceCallback) {
         return ServiceFutureUtil.fromLRO(beginPutAsyncRetrySucceededAsync(product), serviceCallback);
@@ -1938,9 +1938,9 @@ public class LROsInner {
     /**
      * Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
-     * @param product Product to put
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable for the request
+     * @param product Product to put.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the observable for the request.
      */
     public Observable<OperationStatus<ProductInner>> beginPutAsyncRetrySucceededAsync(ProductInner product) {
         Validator.validate(product);
@@ -1950,9 +1950,9 @@ public class LROsInner {
     /**
      * Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @throws CloudException thrown if the request is rejected by server
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws CloudException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the ProductInner object if successful.
      */
     public ProductInner putAsyncRetrySucceeded() {
@@ -1963,8 +1963,8 @@ public class LROsInner {
      * Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceFuture} object
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link ServiceFuture&lt;ProductInner&gt;} object.
      */
     public ServiceFuture<ProductInner> putAsyncRetrySucceededAsync(final ServiceCallback<ProductInner> serviceCallback) {
         return ServiceFuture.fromBody(putAsyncRetrySucceededAsync(), serviceCallback);
@@ -1973,7 +1973,7 @@ public class LROsInner {
     /**
      * Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;LROsPutAsyncRetrySucceededHeadersInner, ProductInner&gt;&gt;} object if successful.
      */
     public Single<RestResponse<LROsPutAsyncRetrySucceededHeadersInner, ProductInner>> putAsyncRetrySucceededWithRestResponseAsync() {
@@ -1984,8 +1984,8 @@ public class LROsInner {
     /**
      * Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return a {@link Single} emitting the RestResponse<LROsPutAsyncRetrySucceededHeadersInner, ProductInner> object
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link Maybe&lt;ProductInner&gt;} object if successful.
      */
     public Maybe<ProductInner> putAsyncRetrySucceededAsync() {
         return putAsyncRetrySucceededWithRestResponseAsync()
@@ -2003,10 +2003,10 @@ public class LROsInner {
     /**
      * Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
-     * @param product Product to put
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @throws CloudException thrown if the request is rejected by server
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
+     * @param product Product to put.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws CloudException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the ProductInner object if successful.
      */
     public ProductInner putAsyncRetrySucceeded(ProductInner product) {
@@ -2016,10 +2016,10 @@ public class LROsInner {
     /**
      * Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
-     * @param product Product to put
+     * @param product Product to put.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceFuture} object
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link ServiceFuture&lt;ProductInner&gt;} object.
      */
     public ServiceFuture<ProductInner> putAsyncRetrySucceededAsync(ProductInner product, final ServiceCallback<ProductInner> serviceCallback) {
         return ServiceFuture.fromBody(putAsyncRetrySucceededAsync(product), serviceCallback);
@@ -2028,8 +2028,8 @@ public class LROsInner {
     /**
      * Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
-     * @param product Product to put
-     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @param product Product to put.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;LROsPutAsyncRetrySucceededHeadersInner, ProductInner&gt;&gt;} object if successful.
      */
     public Single<RestResponse<LROsPutAsyncRetrySucceededHeadersInner, ProductInner>> putAsyncRetrySucceededWithRestResponseAsync(ProductInner product) {
@@ -2040,9 +2040,9 @@ public class LROsInner {
     /**
      * Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
-     * @param product Product to put
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return a {@link Single} emitting the RestResponse<LROsPutAsyncRetrySucceededHeadersInner, ProductInner> object
+     * @param product Product to put.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link Maybe&lt;ProductInner&gt;} object if successful.
      */
     public Maybe<ProductInner> putAsyncRetrySucceededAsync(ProductInner product) {
         return putAsyncRetrySucceededWithRestResponseAsync(product)
@@ -2060,9 +2060,9 @@ public class LROsInner {
     /**
      * Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @throws CloudException thrown if the request is rejected by server
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws CloudException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the ProductInner object if successful.
      */
     public ProductInner beginPutAsyncNoRetrySucceeded() {
@@ -2073,8 +2073,8 @@ public class LROsInner {
      * Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceFuture} object
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link ServiceFuture&lt;ProductInner&gt;} object.
      */
     public ServiceFuture<ProductInner> beginPutAsyncNoRetrySucceededAsync(final ServiceCallback<ProductInner> serviceCallback) {
         return ServiceFutureUtil.fromLRO(beginPutAsyncNoRetrySucceededAsync(), serviceCallback);
@@ -2083,8 +2083,8 @@ public class LROsInner {
     /**
      * Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable for the request
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the observable for the request.
      */
     public Observable<OperationStatus<ProductInner>> beginPutAsyncNoRetrySucceededAsync() {
         final ProductInner product = null;
@@ -2094,10 +2094,10 @@ public class LROsInner {
     /**
      * Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
-     * @param product Product to put
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @throws CloudException thrown if the request is rejected by server
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
+     * @param product Product to put.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws CloudException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the ProductInner object if successful.
      */
     public ProductInner beginPutAsyncNoRetrySucceeded(ProductInner product) {
@@ -2107,10 +2107,10 @@ public class LROsInner {
     /**
      * Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
-     * @param product Product to put
+     * @param product Product to put.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceFuture} object
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link ServiceFuture&lt;ProductInner&gt;} object.
      */
     public ServiceFuture<ProductInner> beginPutAsyncNoRetrySucceededAsync(ProductInner product, final ServiceCallback<ProductInner> serviceCallback) {
         return ServiceFutureUtil.fromLRO(beginPutAsyncNoRetrySucceededAsync(product), serviceCallback);
@@ -2119,9 +2119,9 @@ public class LROsInner {
     /**
      * Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
-     * @param product Product to put
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable for the request
+     * @param product Product to put.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the observable for the request.
      */
     public Observable<OperationStatus<ProductInner>> beginPutAsyncNoRetrySucceededAsync(ProductInner product) {
         Validator.validate(product);
@@ -2131,9 +2131,9 @@ public class LROsInner {
     /**
      * Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @throws CloudException thrown if the request is rejected by server
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws CloudException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the ProductInner object if successful.
      */
     public ProductInner putAsyncNoRetrySucceeded() {
@@ -2144,8 +2144,8 @@ public class LROsInner {
      * Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceFuture} object
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link ServiceFuture&lt;ProductInner&gt;} object.
      */
     public ServiceFuture<ProductInner> putAsyncNoRetrySucceededAsync(final ServiceCallback<ProductInner> serviceCallback) {
         return ServiceFuture.fromBody(putAsyncNoRetrySucceededAsync(), serviceCallback);
@@ -2154,7 +2154,7 @@ public class LROsInner {
     /**
      * Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;LROsPutAsyncNoRetrySucceededHeadersInner, ProductInner&gt;&gt;} object if successful.
      */
     public Single<RestResponse<LROsPutAsyncNoRetrySucceededHeadersInner, ProductInner>> putAsyncNoRetrySucceededWithRestResponseAsync() {
@@ -2165,8 +2165,8 @@ public class LROsInner {
     /**
      * Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return a {@link Single} emitting the RestResponse<LROsPutAsyncNoRetrySucceededHeadersInner, ProductInner> object
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link Maybe&lt;ProductInner&gt;} object if successful.
      */
     public Maybe<ProductInner> putAsyncNoRetrySucceededAsync() {
         return putAsyncNoRetrySucceededWithRestResponseAsync()
@@ -2184,10 +2184,10 @@ public class LROsInner {
     /**
      * Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
-     * @param product Product to put
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @throws CloudException thrown if the request is rejected by server
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
+     * @param product Product to put.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws CloudException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the ProductInner object if successful.
      */
     public ProductInner putAsyncNoRetrySucceeded(ProductInner product) {
@@ -2197,10 +2197,10 @@ public class LROsInner {
     /**
      * Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
-     * @param product Product to put
+     * @param product Product to put.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceFuture} object
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link ServiceFuture&lt;ProductInner&gt;} object.
      */
     public ServiceFuture<ProductInner> putAsyncNoRetrySucceededAsync(ProductInner product, final ServiceCallback<ProductInner> serviceCallback) {
         return ServiceFuture.fromBody(putAsyncNoRetrySucceededAsync(product), serviceCallback);
@@ -2209,8 +2209,8 @@ public class LROsInner {
     /**
      * Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
-     * @param product Product to put
-     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @param product Product to put.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;LROsPutAsyncNoRetrySucceededHeadersInner, ProductInner&gt;&gt;} object if successful.
      */
     public Single<RestResponse<LROsPutAsyncNoRetrySucceededHeadersInner, ProductInner>> putAsyncNoRetrySucceededWithRestResponseAsync(ProductInner product) {
@@ -2221,9 +2221,9 @@ public class LROsInner {
     /**
      * Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
-     * @param product Product to put
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return a {@link Single} emitting the RestResponse<LROsPutAsyncNoRetrySucceededHeadersInner, ProductInner> object
+     * @param product Product to put.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link Maybe&lt;ProductInner&gt;} object if successful.
      */
     public Maybe<ProductInner> putAsyncNoRetrySucceededAsync(ProductInner product) {
         return putAsyncNoRetrySucceededWithRestResponseAsync(product)
@@ -2241,9 +2241,9 @@ public class LROsInner {
     /**
      * Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @throws CloudException thrown if the request is rejected by server
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws CloudException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the ProductInner object if successful.
      */
     public ProductInner beginPutAsyncRetryFailed() {
@@ -2254,8 +2254,8 @@ public class LROsInner {
      * Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceFuture} object
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link ServiceFuture&lt;ProductInner&gt;} object.
      */
     public ServiceFuture<ProductInner> beginPutAsyncRetryFailedAsync(final ServiceCallback<ProductInner> serviceCallback) {
         return ServiceFutureUtil.fromLRO(beginPutAsyncRetryFailedAsync(), serviceCallback);
@@ -2264,8 +2264,8 @@ public class LROsInner {
     /**
      * Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable for the request
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the observable for the request.
      */
     public Observable<OperationStatus<ProductInner>> beginPutAsyncRetryFailedAsync() {
         final ProductInner product = null;
@@ -2275,10 +2275,10 @@ public class LROsInner {
     /**
      * Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
-     * @param product Product to put
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @throws CloudException thrown if the request is rejected by server
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
+     * @param product Product to put.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws CloudException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the ProductInner object if successful.
      */
     public ProductInner beginPutAsyncRetryFailed(ProductInner product) {
@@ -2288,10 +2288,10 @@ public class LROsInner {
     /**
      * Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
-     * @param product Product to put
+     * @param product Product to put.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceFuture} object
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link ServiceFuture&lt;ProductInner&gt;} object.
      */
     public ServiceFuture<ProductInner> beginPutAsyncRetryFailedAsync(ProductInner product, final ServiceCallback<ProductInner> serviceCallback) {
         return ServiceFutureUtil.fromLRO(beginPutAsyncRetryFailedAsync(product), serviceCallback);
@@ -2300,9 +2300,9 @@ public class LROsInner {
     /**
      * Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
-     * @param product Product to put
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable for the request
+     * @param product Product to put.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the observable for the request.
      */
     public Observable<OperationStatus<ProductInner>> beginPutAsyncRetryFailedAsync(ProductInner product) {
         Validator.validate(product);
@@ -2312,9 +2312,9 @@ public class LROsInner {
     /**
      * Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @throws CloudException thrown if the request is rejected by server
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws CloudException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the ProductInner object if successful.
      */
     public ProductInner putAsyncRetryFailed() {
@@ -2325,8 +2325,8 @@ public class LROsInner {
      * Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceFuture} object
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link ServiceFuture&lt;ProductInner&gt;} object.
      */
     public ServiceFuture<ProductInner> putAsyncRetryFailedAsync(final ServiceCallback<ProductInner> serviceCallback) {
         return ServiceFuture.fromBody(putAsyncRetryFailedAsync(), serviceCallback);
@@ -2335,7 +2335,7 @@ public class LROsInner {
     /**
      * Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;LROsPutAsyncRetryFailedHeadersInner, ProductInner&gt;&gt;} object if successful.
      */
     public Single<RestResponse<LROsPutAsyncRetryFailedHeadersInner, ProductInner>> putAsyncRetryFailedWithRestResponseAsync() {
@@ -2346,8 +2346,8 @@ public class LROsInner {
     /**
      * Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return a {@link Single} emitting the RestResponse<LROsPutAsyncRetryFailedHeadersInner, ProductInner> object
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link Maybe&lt;ProductInner&gt;} object if successful.
      */
     public Maybe<ProductInner> putAsyncRetryFailedAsync() {
         return putAsyncRetryFailedWithRestResponseAsync()
@@ -2365,10 +2365,10 @@ public class LROsInner {
     /**
      * Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
-     * @param product Product to put
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @throws CloudException thrown if the request is rejected by server
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
+     * @param product Product to put.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws CloudException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the ProductInner object if successful.
      */
     public ProductInner putAsyncRetryFailed(ProductInner product) {
@@ -2378,10 +2378,10 @@ public class LROsInner {
     /**
      * Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
-     * @param product Product to put
+     * @param product Product to put.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceFuture} object
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link ServiceFuture&lt;ProductInner&gt;} object.
      */
     public ServiceFuture<ProductInner> putAsyncRetryFailedAsync(ProductInner product, final ServiceCallback<ProductInner> serviceCallback) {
         return ServiceFuture.fromBody(putAsyncRetryFailedAsync(product), serviceCallback);
@@ -2390,8 +2390,8 @@ public class LROsInner {
     /**
      * Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
-     * @param product Product to put
-     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @param product Product to put.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;LROsPutAsyncRetryFailedHeadersInner, ProductInner&gt;&gt;} object if successful.
      */
     public Single<RestResponse<LROsPutAsyncRetryFailedHeadersInner, ProductInner>> putAsyncRetryFailedWithRestResponseAsync(ProductInner product) {
@@ -2402,9 +2402,9 @@ public class LROsInner {
     /**
      * Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
-     * @param product Product to put
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return a {@link Single} emitting the RestResponse<LROsPutAsyncRetryFailedHeadersInner, ProductInner> object
+     * @param product Product to put.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link Maybe&lt;ProductInner&gt;} object if successful.
      */
     public Maybe<ProductInner> putAsyncRetryFailedAsync(ProductInner product) {
         return putAsyncRetryFailedWithRestResponseAsync(product)
@@ -2422,9 +2422,9 @@ public class LROsInner {
     /**
      * Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @throws CloudException thrown if the request is rejected by server
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws CloudException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the ProductInner object if successful.
      */
     public ProductInner beginPutAsyncNoRetrycanceled() {
@@ -2435,8 +2435,8 @@ public class LROsInner {
      * Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceFuture} object
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link ServiceFuture&lt;ProductInner&gt;} object.
      */
     public ServiceFuture<ProductInner> beginPutAsyncNoRetrycanceledAsync(final ServiceCallback<ProductInner> serviceCallback) {
         return ServiceFutureUtil.fromLRO(beginPutAsyncNoRetrycanceledAsync(), serviceCallback);
@@ -2445,8 +2445,8 @@ public class LROsInner {
     /**
      * Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable for the request
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the observable for the request.
      */
     public Observable<OperationStatus<ProductInner>> beginPutAsyncNoRetrycanceledAsync() {
         final ProductInner product = null;
@@ -2456,10 +2456,10 @@ public class LROsInner {
     /**
      * Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
-     * @param product Product to put
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @throws CloudException thrown if the request is rejected by server
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
+     * @param product Product to put.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws CloudException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the ProductInner object if successful.
      */
     public ProductInner beginPutAsyncNoRetrycanceled(ProductInner product) {
@@ -2469,10 +2469,10 @@ public class LROsInner {
     /**
      * Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
-     * @param product Product to put
+     * @param product Product to put.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceFuture} object
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link ServiceFuture&lt;ProductInner&gt;} object.
      */
     public ServiceFuture<ProductInner> beginPutAsyncNoRetrycanceledAsync(ProductInner product, final ServiceCallback<ProductInner> serviceCallback) {
         return ServiceFutureUtil.fromLRO(beginPutAsyncNoRetrycanceledAsync(product), serviceCallback);
@@ -2481,9 +2481,9 @@ public class LROsInner {
     /**
      * Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
-     * @param product Product to put
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable for the request
+     * @param product Product to put.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the observable for the request.
      */
     public Observable<OperationStatus<ProductInner>> beginPutAsyncNoRetrycanceledAsync(ProductInner product) {
         Validator.validate(product);
@@ -2493,9 +2493,9 @@ public class LROsInner {
     /**
      * Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @throws CloudException thrown if the request is rejected by server
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws CloudException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the ProductInner object if successful.
      */
     public ProductInner putAsyncNoRetrycanceled() {
@@ -2506,8 +2506,8 @@ public class LROsInner {
      * Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceFuture} object
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link ServiceFuture&lt;ProductInner&gt;} object.
      */
     public ServiceFuture<ProductInner> putAsyncNoRetrycanceledAsync(final ServiceCallback<ProductInner> serviceCallback) {
         return ServiceFuture.fromBody(putAsyncNoRetrycanceledAsync(), serviceCallback);
@@ -2516,7 +2516,7 @@ public class LROsInner {
     /**
      * Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;LROsPutAsyncNoRetrycanceledHeadersInner, ProductInner&gt;&gt;} object if successful.
      */
     public Single<RestResponse<LROsPutAsyncNoRetrycanceledHeadersInner, ProductInner>> putAsyncNoRetrycanceledWithRestResponseAsync() {
@@ -2527,8 +2527,8 @@ public class LROsInner {
     /**
      * Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return a {@link Single} emitting the RestResponse<LROsPutAsyncNoRetrycanceledHeadersInner, ProductInner> object
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link Maybe&lt;ProductInner&gt;} object if successful.
      */
     public Maybe<ProductInner> putAsyncNoRetrycanceledAsync() {
         return putAsyncNoRetrycanceledWithRestResponseAsync()
@@ -2546,10 +2546,10 @@ public class LROsInner {
     /**
      * Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
-     * @param product Product to put
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @throws CloudException thrown if the request is rejected by server
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
+     * @param product Product to put.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws CloudException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the ProductInner object if successful.
      */
     public ProductInner putAsyncNoRetrycanceled(ProductInner product) {
@@ -2559,10 +2559,10 @@ public class LROsInner {
     /**
      * Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
-     * @param product Product to put
+     * @param product Product to put.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceFuture} object
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link ServiceFuture&lt;ProductInner&gt;} object.
      */
     public ServiceFuture<ProductInner> putAsyncNoRetrycanceledAsync(ProductInner product, final ServiceCallback<ProductInner> serviceCallback) {
         return ServiceFuture.fromBody(putAsyncNoRetrycanceledAsync(product), serviceCallback);
@@ -2571,8 +2571,8 @@ public class LROsInner {
     /**
      * Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
-     * @param product Product to put
-     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @param product Product to put.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;LROsPutAsyncNoRetrycanceledHeadersInner, ProductInner&gt;&gt;} object if successful.
      */
     public Single<RestResponse<LROsPutAsyncNoRetrycanceledHeadersInner, ProductInner>> putAsyncNoRetrycanceledWithRestResponseAsync(ProductInner product) {
@@ -2583,9 +2583,9 @@ public class LROsInner {
     /**
      * Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
-     * @param product Product to put
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return a {@link Single} emitting the RestResponse<LROsPutAsyncNoRetrycanceledHeadersInner, ProductInner> object
+     * @param product Product to put.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link Maybe&lt;ProductInner&gt;} object if successful.
      */
     public Maybe<ProductInner> putAsyncNoRetrycanceledAsync(ProductInner product) {
         return putAsyncNoRetrycanceledWithRestResponseAsync(product)
@@ -2603,9 +2603,9 @@ public class LROsInner {
     /**
      * Long running put request, service returns a 202 to the initial request with Azure-AsyncOperation header. Subsequent calls to operation status do not contain Azure-AsyncOperation header.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @throws CloudException thrown if the request is rejected by server
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws CloudException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the ProductInner object if successful.
      */
     public ProductInner beginPutAsyncNoHeaderInRetry() {
@@ -2616,8 +2616,8 @@ public class LROsInner {
      * Long running put request, service returns a 202 to the initial request with Azure-AsyncOperation header. Subsequent calls to operation status do not contain Azure-AsyncOperation header.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceFuture} object
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link ServiceFuture&lt;ProductInner&gt;} object.
      */
     public ServiceFuture<ProductInner> beginPutAsyncNoHeaderInRetryAsync(final ServiceCallback<ProductInner> serviceCallback) {
         return ServiceFutureUtil.fromLRO(beginPutAsyncNoHeaderInRetryAsync(), serviceCallback);
@@ -2626,8 +2626,8 @@ public class LROsInner {
     /**
      * Long running put request, service returns a 202 to the initial request with Azure-AsyncOperation header. Subsequent calls to operation status do not contain Azure-AsyncOperation header.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable for the request
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the observable for the request.
      */
     public Observable<OperationStatus<ProductInner>> beginPutAsyncNoHeaderInRetryAsync() {
         final ProductInner product = null;
@@ -2637,10 +2637,10 @@ public class LROsInner {
     /**
      * Long running put request, service returns a 202 to the initial request with Azure-AsyncOperation header. Subsequent calls to operation status do not contain Azure-AsyncOperation header.
      *
-     * @param product Product to put
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @throws CloudException thrown if the request is rejected by server
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
+     * @param product Product to put.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws CloudException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the ProductInner object if successful.
      */
     public ProductInner beginPutAsyncNoHeaderInRetry(ProductInner product) {
@@ -2650,10 +2650,10 @@ public class LROsInner {
     /**
      * Long running put request, service returns a 202 to the initial request with Azure-AsyncOperation header. Subsequent calls to operation status do not contain Azure-AsyncOperation header.
      *
-     * @param product Product to put
+     * @param product Product to put.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceFuture} object
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link ServiceFuture&lt;ProductInner&gt;} object.
      */
     public ServiceFuture<ProductInner> beginPutAsyncNoHeaderInRetryAsync(ProductInner product, final ServiceCallback<ProductInner> serviceCallback) {
         return ServiceFutureUtil.fromLRO(beginPutAsyncNoHeaderInRetryAsync(product), serviceCallback);
@@ -2662,9 +2662,9 @@ public class LROsInner {
     /**
      * Long running put request, service returns a 202 to the initial request with Azure-AsyncOperation header. Subsequent calls to operation status do not contain Azure-AsyncOperation header.
      *
-     * @param product Product to put
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable for the request
+     * @param product Product to put.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the observable for the request.
      */
     public Observable<OperationStatus<ProductInner>> beginPutAsyncNoHeaderInRetryAsync(ProductInner product) {
         Validator.validate(product);
@@ -2674,9 +2674,9 @@ public class LROsInner {
     /**
      * Long running put request, service returns a 202 to the initial request with Azure-AsyncOperation header. Subsequent calls to operation status do not contain Azure-AsyncOperation header.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @throws CloudException thrown if the request is rejected by server
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws CloudException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the ProductInner object if successful.
      */
     public ProductInner putAsyncNoHeaderInRetry() {
@@ -2687,8 +2687,8 @@ public class LROsInner {
      * Long running put request, service returns a 202 to the initial request with Azure-AsyncOperation header. Subsequent calls to operation status do not contain Azure-AsyncOperation header.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceFuture} object
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link ServiceFuture&lt;ProductInner&gt;} object.
      */
     public ServiceFuture<ProductInner> putAsyncNoHeaderInRetryAsync(final ServiceCallback<ProductInner> serviceCallback) {
         return ServiceFuture.fromBody(putAsyncNoHeaderInRetryAsync(), serviceCallback);
@@ -2697,7 +2697,7 @@ public class LROsInner {
     /**
      * Long running put request, service returns a 202 to the initial request with Azure-AsyncOperation header. Subsequent calls to operation status do not contain Azure-AsyncOperation header.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;LROsPutAsyncNoHeaderInRetryHeadersInner, ProductInner&gt;&gt;} object if successful.
      */
     public Single<RestResponse<LROsPutAsyncNoHeaderInRetryHeadersInner, ProductInner>> putAsyncNoHeaderInRetryWithRestResponseAsync() {
@@ -2708,8 +2708,8 @@ public class LROsInner {
     /**
      * Long running put request, service returns a 202 to the initial request with Azure-AsyncOperation header. Subsequent calls to operation status do not contain Azure-AsyncOperation header.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return a {@link Single} emitting the RestResponse<LROsPutAsyncNoHeaderInRetryHeadersInner, ProductInner> object
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link Maybe&lt;ProductInner&gt;} object if successful.
      */
     public Maybe<ProductInner> putAsyncNoHeaderInRetryAsync() {
         return putAsyncNoHeaderInRetryWithRestResponseAsync()
@@ -2727,10 +2727,10 @@ public class LROsInner {
     /**
      * Long running put request, service returns a 202 to the initial request with Azure-AsyncOperation header. Subsequent calls to operation status do not contain Azure-AsyncOperation header.
      *
-     * @param product Product to put
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @throws CloudException thrown if the request is rejected by server
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
+     * @param product Product to put.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws CloudException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the ProductInner object if successful.
      */
     public ProductInner putAsyncNoHeaderInRetry(ProductInner product) {
@@ -2740,10 +2740,10 @@ public class LROsInner {
     /**
      * Long running put request, service returns a 202 to the initial request with Azure-AsyncOperation header. Subsequent calls to operation status do not contain Azure-AsyncOperation header.
      *
-     * @param product Product to put
+     * @param product Product to put.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceFuture} object
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link ServiceFuture&lt;ProductInner&gt;} object.
      */
     public ServiceFuture<ProductInner> putAsyncNoHeaderInRetryAsync(ProductInner product, final ServiceCallback<ProductInner> serviceCallback) {
         return ServiceFuture.fromBody(putAsyncNoHeaderInRetryAsync(product), serviceCallback);
@@ -2752,8 +2752,8 @@ public class LROsInner {
     /**
      * Long running put request, service returns a 202 to the initial request with Azure-AsyncOperation header. Subsequent calls to operation status do not contain Azure-AsyncOperation header.
      *
-     * @param product Product to put
-     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @param product Product to put.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;LROsPutAsyncNoHeaderInRetryHeadersInner, ProductInner&gt;&gt;} object if successful.
      */
     public Single<RestResponse<LROsPutAsyncNoHeaderInRetryHeadersInner, ProductInner>> putAsyncNoHeaderInRetryWithRestResponseAsync(ProductInner product) {
@@ -2764,9 +2764,9 @@ public class LROsInner {
     /**
      * Long running put request, service returns a 202 to the initial request with Azure-AsyncOperation header. Subsequent calls to operation status do not contain Azure-AsyncOperation header.
      *
-     * @param product Product to put
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return a {@link Single} emitting the RestResponse<LROsPutAsyncNoHeaderInRetryHeadersInner, ProductInner> object
+     * @param product Product to put.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link Maybe&lt;ProductInner&gt;} object if successful.
      */
     public Maybe<ProductInner> putAsyncNoHeaderInRetryAsync(ProductInner product) {
         return putAsyncNoHeaderInRetryWithRestResponseAsync(product)
@@ -2784,9 +2784,9 @@ public class LROsInner {
     /**
      * Long running put request with non resource.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @throws CloudException thrown if the request is rejected by server
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws CloudException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the SkuInner object if successful.
      */
     public SkuInner beginPutNonResource() {
@@ -2797,8 +2797,8 @@ public class LROsInner {
      * Long running put request with non resource.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceFuture} object
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link ServiceFuture&lt;SkuInner&gt;} object.
      */
     public ServiceFuture<SkuInner> beginPutNonResourceAsync(final ServiceCallback<SkuInner> serviceCallback) {
         return ServiceFutureUtil.fromLRO(beginPutNonResourceAsync(), serviceCallback);
@@ -2807,8 +2807,8 @@ public class LROsInner {
     /**
      * Long running put request with non resource.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable for the request
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the observable for the request.
      */
     public Observable<OperationStatus<SkuInner>> beginPutNonResourceAsync() {
         final SkuInner sku = null;
@@ -2818,10 +2818,10 @@ public class LROsInner {
     /**
      * Long running put request with non resource.
      *
-     * @param sku sku to put
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @throws CloudException thrown if the request is rejected by server
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
+     * @param sku sku to put.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws CloudException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the SkuInner object if successful.
      */
     public SkuInner beginPutNonResource(SkuInner sku) {
@@ -2831,10 +2831,10 @@ public class LROsInner {
     /**
      * Long running put request with non resource.
      *
-     * @param sku sku to put
+     * @param sku sku to put.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceFuture} object
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link ServiceFuture&lt;SkuInner&gt;} object.
      */
     public ServiceFuture<SkuInner> beginPutNonResourceAsync(SkuInner sku, final ServiceCallback<SkuInner> serviceCallback) {
         return ServiceFutureUtil.fromLRO(beginPutNonResourceAsync(sku), serviceCallback);
@@ -2843,9 +2843,9 @@ public class LROsInner {
     /**
      * Long running put request with non resource.
      *
-     * @param sku sku to put
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable for the request
+     * @param sku sku to put.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the observable for the request.
      */
     public Observable<OperationStatus<SkuInner>> beginPutNonResourceAsync(SkuInner sku) {
         Validator.validate(sku);
@@ -2855,9 +2855,9 @@ public class LROsInner {
     /**
      * Long running put request with non resource.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @throws CloudException thrown if the request is rejected by server
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws CloudException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the SkuInner object if successful.
      */
     public SkuInner putNonResource() {
@@ -2868,8 +2868,8 @@ public class LROsInner {
      * Long running put request with non resource.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceFuture} object
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link ServiceFuture&lt;SkuInner&gt;} object.
      */
     public ServiceFuture<SkuInner> putNonResourceAsync(final ServiceCallback<SkuInner> serviceCallback) {
         return ServiceFuture.fromBody(putNonResourceAsync(), serviceCallback);
@@ -2878,7 +2878,7 @@ public class LROsInner {
     /**
      * Long running put request with non resource.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, SkuInner&gt;&gt;} object if successful.
      */
     public Single<RestResponse<Void, SkuInner>> putNonResourceWithRestResponseAsync() {
@@ -2889,8 +2889,8 @@ public class LROsInner {
     /**
      * Long running put request with non resource.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return a {@link Single} emitting the RestResponse<Void, SkuInner> object
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link Maybe&lt;SkuInner&gt;} object if successful.
      */
     public Maybe<SkuInner> putNonResourceAsync() {
         return putNonResourceWithRestResponseAsync()
@@ -2908,10 +2908,10 @@ public class LROsInner {
     /**
      * Long running put request with non resource.
      *
-     * @param sku sku to put
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @throws CloudException thrown if the request is rejected by server
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
+     * @param sku sku to put.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws CloudException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the SkuInner object if successful.
      */
     public SkuInner putNonResource(SkuInner sku) {
@@ -2921,10 +2921,10 @@ public class LROsInner {
     /**
      * Long running put request with non resource.
      *
-     * @param sku sku to put
+     * @param sku sku to put.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceFuture} object
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link ServiceFuture&lt;SkuInner&gt;} object.
      */
     public ServiceFuture<SkuInner> putNonResourceAsync(SkuInner sku, final ServiceCallback<SkuInner> serviceCallback) {
         return ServiceFuture.fromBody(putNonResourceAsync(sku), serviceCallback);
@@ -2933,8 +2933,8 @@ public class LROsInner {
     /**
      * Long running put request with non resource.
      *
-     * @param sku sku to put
-     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @param sku sku to put.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, SkuInner&gt;&gt;} object if successful.
      */
     public Single<RestResponse<Void, SkuInner>> putNonResourceWithRestResponseAsync(SkuInner sku) {
@@ -2945,9 +2945,9 @@ public class LROsInner {
     /**
      * Long running put request with non resource.
      *
-     * @param sku sku to put
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return a {@link Single} emitting the RestResponse<Void, SkuInner> object
+     * @param sku sku to put.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link Maybe&lt;SkuInner&gt;} object if successful.
      */
     public Maybe<SkuInner> putNonResourceAsync(SkuInner sku) {
         return putNonResourceWithRestResponseAsync(sku)
@@ -2965,9 +2965,9 @@ public class LROsInner {
     /**
      * Long running put request with non resource.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @throws CloudException thrown if the request is rejected by server
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws CloudException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the SkuInner object if successful.
      */
     public SkuInner beginPutAsyncNonResource() {
@@ -2978,8 +2978,8 @@ public class LROsInner {
      * Long running put request with non resource.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceFuture} object
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link ServiceFuture&lt;SkuInner&gt;} object.
      */
     public ServiceFuture<SkuInner> beginPutAsyncNonResourceAsync(final ServiceCallback<SkuInner> serviceCallback) {
         return ServiceFutureUtil.fromLRO(beginPutAsyncNonResourceAsync(), serviceCallback);
@@ -2988,8 +2988,8 @@ public class LROsInner {
     /**
      * Long running put request with non resource.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable for the request
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the observable for the request.
      */
     public Observable<OperationStatus<SkuInner>> beginPutAsyncNonResourceAsync() {
         final SkuInner sku = null;
@@ -2999,10 +2999,10 @@ public class LROsInner {
     /**
      * Long running put request with non resource.
      *
-     * @param sku Sku to put
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @throws CloudException thrown if the request is rejected by server
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
+     * @param sku Sku to put.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws CloudException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the SkuInner object if successful.
      */
     public SkuInner beginPutAsyncNonResource(SkuInner sku) {
@@ -3012,10 +3012,10 @@ public class LROsInner {
     /**
      * Long running put request with non resource.
      *
-     * @param sku Sku to put
+     * @param sku Sku to put.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceFuture} object
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link ServiceFuture&lt;SkuInner&gt;} object.
      */
     public ServiceFuture<SkuInner> beginPutAsyncNonResourceAsync(SkuInner sku, final ServiceCallback<SkuInner> serviceCallback) {
         return ServiceFutureUtil.fromLRO(beginPutAsyncNonResourceAsync(sku), serviceCallback);
@@ -3024,9 +3024,9 @@ public class LROsInner {
     /**
      * Long running put request with non resource.
      *
-     * @param sku Sku to put
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable for the request
+     * @param sku Sku to put.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the observable for the request.
      */
     public Observable<OperationStatus<SkuInner>> beginPutAsyncNonResourceAsync(SkuInner sku) {
         Validator.validate(sku);
@@ -3036,9 +3036,9 @@ public class LROsInner {
     /**
      * Long running put request with non resource.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @throws CloudException thrown if the request is rejected by server
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws CloudException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the SkuInner object if successful.
      */
     public SkuInner putAsyncNonResource() {
@@ -3049,8 +3049,8 @@ public class LROsInner {
      * Long running put request with non resource.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceFuture} object
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link ServiceFuture&lt;SkuInner&gt;} object.
      */
     public ServiceFuture<SkuInner> putAsyncNonResourceAsync(final ServiceCallback<SkuInner> serviceCallback) {
         return ServiceFuture.fromBody(putAsyncNonResourceAsync(), serviceCallback);
@@ -3059,7 +3059,7 @@ public class LROsInner {
     /**
      * Long running put request with non resource.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, SkuInner&gt;&gt;} object if successful.
      */
     public Single<RestResponse<Void, SkuInner>> putAsyncNonResourceWithRestResponseAsync() {
@@ -3070,8 +3070,8 @@ public class LROsInner {
     /**
      * Long running put request with non resource.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return a {@link Single} emitting the RestResponse<Void, SkuInner> object
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link Maybe&lt;SkuInner&gt;} object if successful.
      */
     public Maybe<SkuInner> putAsyncNonResourceAsync() {
         return putAsyncNonResourceWithRestResponseAsync()
@@ -3089,10 +3089,10 @@ public class LROsInner {
     /**
      * Long running put request with non resource.
      *
-     * @param sku Sku to put
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @throws CloudException thrown if the request is rejected by server
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
+     * @param sku Sku to put.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws CloudException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the SkuInner object if successful.
      */
     public SkuInner putAsyncNonResource(SkuInner sku) {
@@ -3102,10 +3102,10 @@ public class LROsInner {
     /**
      * Long running put request with non resource.
      *
-     * @param sku Sku to put
+     * @param sku Sku to put.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceFuture} object
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link ServiceFuture&lt;SkuInner&gt;} object.
      */
     public ServiceFuture<SkuInner> putAsyncNonResourceAsync(SkuInner sku, final ServiceCallback<SkuInner> serviceCallback) {
         return ServiceFuture.fromBody(putAsyncNonResourceAsync(sku), serviceCallback);
@@ -3114,8 +3114,8 @@ public class LROsInner {
     /**
      * Long running put request with non resource.
      *
-     * @param sku Sku to put
-     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @param sku Sku to put.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, SkuInner&gt;&gt;} object if successful.
      */
     public Single<RestResponse<Void, SkuInner>> putAsyncNonResourceWithRestResponseAsync(SkuInner sku) {
@@ -3126,9 +3126,9 @@ public class LROsInner {
     /**
      * Long running put request with non resource.
      *
-     * @param sku Sku to put
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return a {@link Single} emitting the RestResponse<Void, SkuInner> object
+     * @param sku Sku to put.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link Maybe&lt;SkuInner&gt;} object if successful.
      */
     public Maybe<SkuInner> putAsyncNonResourceAsync(SkuInner sku) {
         return putAsyncNonResourceWithRestResponseAsync(sku)
@@ -3146,9 +3146,9 @@ public class LROsInner {
     /**
      * Long running put request with sub resource.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @throws CloudException thrown if the request is rejected by server
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws CloudException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the SubProductInner object if successful.
      */
     public SubProductInner beginPutSubResource() {
@@ -3159,8 +3159,8 @@ public class LROsInner {
      * Long running put request with sub resource.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceFuture} object
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link ServiceFuture&lt;SubProductInner&gt;} object.
      */
     public ServiceFuture<SubProductInner> beginPutSubResourceAsync(final ServiceCallback<SubProductInner> serviceCallback) {
         return ServiceFutureUtil.fromLRO(beginPutSubResourceAsync(), serviceCallback);
@@ -3169,8 +3169,8 @@ public class LROsInner {
     /**
      * Long running put request with sub resource.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable for the request
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the observable for the request.
      */
     public Observable<OperationStatus<SubProductInner>> beginPutSubResourceAsync() {
         final SubProductInner product = null;
@@ -3180,10 +3180,10 @@ public class LROsInner {
     /**
      * Long running put request with sub resource.
      *
-     * @param product Sub Product to put
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @throws CloudException thrown if the request is rejected by server
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
+     * @param product Sub Product to put.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws CloudException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the SubProductInner object if successful.
      */
     public SubProductInner beginPutSubResource(SubProductInner product) {
@@ -3193,10 +3193,10 @@ public class LROsInner {
     /**
      * Long running put request with sub resource.
      *
-     * @param product Sub Product to put
+     * @param product Sub Product to put.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceFuture} object
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link ServiceFuture&lt;SubProductInner&gt;} object.
      */
     public ServiceFuture<SubProductInner> beginPutSubResourceAsync(SubProductInner product, final ServiceCallback<SubProductInner> serviceCallback) {
         return ServiceFutureUtil.fromLRO(beginPutSubResourceAsync(product), serviceCallback);
@@ -3205,9 +3205,9 @@ public class LROsInner {
     /**
      * Long running put request with sub resource.
      *
-     * @param product Sub Product to put
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable for the request
+     * @param product Sub Product to put.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the observable for the request.
      */
     public Observable<OperationStatus<SubProductInner>> beginPutSubResourceAsync(SubProductInner product) {
         Validator.validate(product);
@@ -3217,9 +3217,9 @@ public class LROsInner {
     /**
      * Long running put request with sub resource.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @throws CloudException thrown if the request is rejected by server
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws CloudException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the SubProductInner object if successful.
      */
     public SubProductInner putSubResource() {
@@ -3230,8 +3230,8 @@ public class LROsInner {
      * Long running put request with sub resource.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceFuture} object
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link ServiceFuture&lt;SubProductInner&gt;} object.
      */
     public ServiceFuture<SubProductInner> putSubResourceAsync(final ServiceCallback<SubProductInner> serviceCallback) {
         return ServiceFuture.fromBody(putSubResourceAsync(), serviceCallback);
@@ -3240,7 +3240,7 @@ public class LROsInner {
     /**
      * Long running put request with sub resource.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, SubProductInner&gt;&gt;} object if successful.
      */
     public Single<RestResponse<Void, SubProductInner>> putSubResourceWithRestResponseAsync() {
@@ -3251,8 +3251,8 @@ public class LROsInner {
     /**
      * Long running put request with sub resource.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return a {@link Single} emitting the RestResponse<Void, SubProductInner> object
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link Maybe&lt;SubProductInner&gt;} object if successful.
      */
     public Maybe<SubProductInner> putSubResourceAsync() {
         return putSubResourceWithRestResponseAsync()
@@ -3270,10 +3270,10 @@ public class LROsInner {
     /**
      * Long running put request with sub resource.
      *
-     * @param product Sub Product to put
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @throws CloudException thrown if the request is rejected by server
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
+     * @param product Sub Product to put.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws CloudException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the SubProductInner object if successful.
      */
     public SubProductInner putSubResource(SubProductInner product) {
@@ -3283,10 +3283,10 @@ public class LROsInner {
     /**
      * Long running put request with sub resource.
      *
-     * @param product Sub Product to put
+     * @param product Sub Product to put.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceFuture} object
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link ServiceFuture&lt;SubProductInner&gt;} object.
      */
     public ServiceFuture<SubProductInner> putSubResourceAsync(SubProductInner product, final ServiceCallback<SubProductInner> serviceCallback) {
         return ServiceFuture.fromBody(putSubResourceAsync(product), serviceCallback);
@@ -3295,8 +3295,8 @@ public class LROsInner {
     /**
      * Long running put request with sub resource.
      *
-     * @param product Sub Product to put
-     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @param product Sub Product to put.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, SubProductInner&gt;&gt;} object if successful.
      */
     public Single<RestResponse<Void, SubProductInner>> putSubResourceWithRestResponseAsync(SubProductInner product) {
@@ -3307,9 +3307,9 @@ public class LROsInner {
     /**
      * Long running put request with sub resource.
      *
-     * @param product Sub Product to put
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return a {@link Single} emitting the RestResponse<Void, SubProductInner> object
+     * @param product Sub Product to put.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link Maybe&lt;SubProductInner&gt;} object if successful.
      */
     public Maybe<SubProductInner> putSubResourceAsync(SubProductInner product) {
         return putSubResourceWithRestResponseAsync(product)
@@ -3327,9 +3327,9 @@ public class LROsInner {
     /**
      * Long running put request with sub resource.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @throws CloudException thrown if the request is rejected by server
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws CloudException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the SubProductInner object if successful.
      */
     public SubProductInner beginPutAsyncSubResource() {
@@ -3340,8 +3340,8 @@ public class LROsInner {
      * Long running put request with sub resource.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceFuture} object
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link ServiceFuture&lt;SubProductInner&gt;} object.
      */
     public ServiceFuture<SubProductInner> beginPutAsyncSubResourceAsync(final ServiceCallback<SubProductInner> serviceCallback) {
         return ServiceFutureUtil.fromLRO(beginPutAsyncSubResourceAsync(), serviceCallback);
@@ -3350,8 +3350,8 @@ public class LROsInner {
     /**
      * Long running put request with sub resource.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable for the request
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the observable for the request.
      */
     public Observable<OperationStatus<SubProductInner>> beginPutAsyncSubResourceAsync() {
         final SubProductInner product = null;
@@ -3361,10 +3361,10 @@ public class LROsInner {
     /**
      * Long running put request with sub resource.
      *
-     * @param product Sub Product to put
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @throws CloudException thrown if the request is rejected by server
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
+     * @param product Sub Product to put.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws CloudException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the SubProductInner object if successful.
      */
     public SubProductInner beginPutAsyncSubResource(SubProductInner product) {
@@ -3374,10 +3374,10 @@ public class LROsInner {
     /**
      * Long running put request with sub resource.
      *
-     * @param product Sub Product to put
+     * @param product Sub Product to put.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceFuture} object
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link ServiceFuture&lt;SubProductInner&gt;} object.
      */
     public ServiceFuture<SubProductInner> beginPutAsyncSubResourceAsync(SubProductInner product, final ServiceCallback<SubProductInner> serviceCallback) {
         return ServiceFutureUtil.fromLRO(beginPutAsyncSubResourceAsync(product), serviceCallback);
@@ -3386,9 +3386,9 @@ public class LROsInner {
     /**
      * Long running put request with sub resource.
      *
-     * @param product Sub Product to put
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable for the request
+     * @param product Sub Product to put.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the observable for the request.
      */
     public Observable<OperationStatus<SubProductInner>> beginPutAsyncSubResourceAsync(SubProductInner product) {
         Validator.validate(product);
@@ -3398,9 +3398,9 @@ public class LROsInner {
     /**
      * Long running put request with sub resource.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @throws CloudException thrown if the request is rejected by server
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws CloudException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the SubProductInner object if successful.
      */
     public SubProductInner putAsyncSubResource() {
@@ -3411,8 +3411,8 @@ public class LROsInner {
      * Long running put request with sub resource.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceFuture} object
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link ServiceFuture&lt;SubProductInner&gt;} object.
      */
     public ServiceFuture<SubProductInner> putAsyncSubResourceAsync(final ServiceCallback<SubProductInner> serviceCallback) {
         return ServiceFuture.fromBody(putAsyncSubResourceAsync(), serviceCallback);
@@ -3421,7 +3421,7 @@ public class LROsInner {
     /**
      * Long running put request with sub resource.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, SubProductInner&gt;&gt;} object if successful.
      */
     public Single<RestResponse<Void, SubProductInner>> putAsyncSubResourceWithRestResponseAsync() {
@@ -3432,8 +3432,8 @@ public class LROsInner {
     /**
      * Long running put request with sub resource.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return a {@link Single} emitting the RestResponse<Void, SubProductInner> object
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link Maybe&lt;SubProductInner&gt;} object if successful.
      */
     public Maybe<SubProductInner> putAsyncSubResourceAsync() {
         return putAsyncSubResourceWithRestResponseAsync()
@@ -3451,10 +3451,10 @@ public class LROsInner {
     /**
      * Long running put request with sub resource.
      *
-     * @param product Sub Product to put
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @throws CloudException thrown if the request is rejected by server
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
+     * @param product Sub Product to put.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws CloudException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the SubProductInner object if successful.
      */
     public SubProductInner putAsyncSubResource(SubProductInner product) {
@@ -3464,10 +3464,10 @@ public class LROsInner {
     /**
      * Long running put request with sub resource.
      *
-     * @param product Sub Product to put
+     * @param product Sub Product to put.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceFuture} object
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link ServiceFuture&lt;SubProductInner&gt;} object.
      */
     public ServiceFuture<SubProductInner> putAsyncSubResourceAsync(SubProductInner product, final ServiceCallback<SubProductInner> serviceCallback) {
         return ServiceFuture.fromBody(putAsyncSubResourceAsync(product), serviceCallback);
@@ -3476,8 +3476,8 @@ public class LROsInner {
     /**
      * Long running put request with sub resource.
      *
-     * @param product Sub Product to put
-     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @param product Sub Product to put.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, SubProductInner&gt;&gt;} object if successful.
      */
     public Single<RestResponse<Void, SubProductInner>> putAsyncSubResourceWithRestResponseAsync(SubProductInner product) {
@@ -3488,9 +3488,9 @@ public class LROsInner {
     /**
      * Long running put request with sub resource.
      *
-     * @param product Sub Product to put
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return a {@link Single} emitting the RestResponse<Void, SubProductInner> object
+     * @param product Sub Product to put.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link Maybe&lt;SubProductInner&gt;} object if successful.
      */
     public Maybe<SubProductInner> putAsyncSubResourceAsync(SubProductInner product) {
         return putAsyncSubResourceWithRestResponseAsync(product)
@@ -3508,9 +3508,9 @@ public class LROsInner {
     /**
      * Long running delete request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Accepted’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Succeeded’.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @throws CloudException thrown if the request is rejected by server
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws CloudException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the ProductInner object if successful.
      */
     public ProductInner beginDeleteProvisioning202Accepted200Succeeded() {
@@ -3521,8 +3521,8 @@ public class LROsInner {
      * Long running delete request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Accepted’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Succeeded’.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceFuture} object
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link ServiceFuture&lt;ProductInner&gt;} object.
      */
     public ServiceFuture<ProductInner> beginDeleteProvisioning202Accepted200SucceededAsync(final ServiceCallback<ProductInner> serviceCallback) {
         return ServiceFutureUtil.fromLRO(beginDeleteProvisioning202Accepted200SucceededAsync(), serviceCallback);
@@ -3531,8 +3531,8 @@ public class LROsInner {
     /**
      * Long running delete request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Accepted’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Succeeded’.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable for the request
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the observable for the request.
      */
     public Observable<OperationStatus<ProductInner>> beginDeleteProvisioning202Accepted200SucceededAsync() {
         return service.beginDeleteProvisioning202Accepted200Succeeded(this.client.acceptLanguage());
@@ -3541,9 +3541,9 @@ public class LROsInner {
     /**
      * Long running delete request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Accepted’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Succeeded’.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @throws CloudException thrown if the request is rejected by server
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws CloudException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the ProductInner object if successful.
      */
     public ProductInner deleteProvisioning202Accepted200Succeeded() {
@@ -3554,8 +3554,8 @@ public class LROsInner {
      * Long running delete request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Accepted’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Succeeded’.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceFuture} object
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link ServiceFuture&lt;ProductInner&gt;} object.
      */
     public ServiceFuture<ProductInner> deleteProvisioning202Accepted200SucceededAsync(final ServiceCallback<ProductInner> serviceCallback) {
         return ServiceFuture.fromBody(deleteProvisioning202Accepted200SucceededAsync(), serviceCallback);
@@ -3564,7 +3564,7 @@ public class LROsInner {
     /**
      * Long running delete request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Accepted’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Succeeded’.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;LROsDeleteProvisioning202Accepted200SucceededHeadersInner, ProductInner&gt;&gt;} object if successful.
      */
     public Single<RestResponse<LROsDeleteProvisioning202Accepted200SucceededHeadersInner, ProductInner>> deleteProvisioning202Accepted200SucceededWithRestResponseAsync() {
@@ -3574,8 +3574,8 @@ public class LROsInner {
     /**
      * Long running delete request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Accepted’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Succeeded’.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return a {@link Single} emitting the RestResponse<LROsDeleteProvisioning202Accepted200SucceededHeadersInner, ProductInner> object
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link Maybe&lt;ProductInner&gt;} object if successful.
      */
     public Maybe<ProductInner> deleteProvisioning202Accepted200SucceededAsync() {
         return deleteProvisioning202Accepted200SucceededWithRestResponseAsync()
@@ -3593,9 +3593,9 @@ public class LROsInner {
     /**
      * Long running delete request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Failed’.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @throws CloudException thrown if the request is rejected by server
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws CloudException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the ProductInner object if successful.
      */
     public ProductInner beginDeleteProvisioning202DeletingFailed200() {
@@ -3606,8 +3606,8 @@ public class LROsInner {
      * Long running delete request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Failed’.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceFuture} object
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link ServiceFuture&lt;ProductInner&gt;} object.
      */
     public ServiceFuture<ProductInner> beginDeleteProvisioning202DeletingFailed200Async(final ServiceCallback<ProductInner> serviceCallback) {
         return ServiceFutureUtil.fromLRO(beginDeleteProvisioning202DeletingFailed200Async(), serviceCallback);
@@ -3616,8 +3616,8 @@ public class LROsInner {
     /**
      * Long running delete request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Failed’.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable for the request
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the observable for the request.
      */
     public Observable<OperationStatus<ProductInner>> beginDeleteProvisioning202DeletingFailed200Async() {
         return service.beginDeleteProvisioning202DeletingFailed200(this.client.acceptLanguage());
@@ -3626,9 +3626,9 @@ public class LROsInner {
     /**
      * Long running delete request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Failed’.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @throws CloudException thrown if the request is rejected by server
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws CloudException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the ProductInner object if successful.
      */
     public ProductInner deleteProvisioning202DeletingFailed200() {
@@ -3639,8 +3639,8 @@ public class LROsInner {
      * Long running delete request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Failed’.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceFuture} object
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link ServiceFuture&lt;ProductInner&gt;} object.
      */
     public ServiceFuture<ProductInner> deleteProvisioning202DeletingFailed200Async(final ServiceCallback<ProductInner> serviceCallback) {
         return ServiceFuture.fromBody(deleteProvisioning202DeletingFailed200Async(), serviceCallback);
@@ -3649,7 +3649,7 @@ public class LROsInner {
     /**
      * Long running delete request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Failed’.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;LROsDeleteProvisioning202DeletingFailed200HeadersInner, ProductInner&gt;&gt;} object if successful.
      */
     public Single<RestResponse<LROsDeleteProvisioning202DeletingFailed200HeadersInner, ProductInner>> deleteProvisioning202DeletingFailed200WithRestResponseAsync() {
@@ -3659,8 +3659,8 @@ public class LROsInner {
     /**
      * Long running delete request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Failed’.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return a {@link Single} emitting the RestResponse<LROsDeleteProvisioning202DeletingFailed200HeadersInner, ProductInner> object
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link Maybe&lt;ProductInner&gt;} object if successful.
      */
     public Maybe<ProductInner> deleteProvisioning202DeletingFailed200Async() {
         return deleteProvisioning202DeletingFailed200WithRestResponseAsync()
@@ -3678,9 +3678,9 @@ public class LROsInner {
     /**
      * Long running delete request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Canceled’.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @throws CloudException thrown if the request is rejected by server
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws CloudException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the ProductInner object if successful.
      */
     public ProductInner beginDeleteProvisioning202Deletingcanceled200() {
@@ -3691,8 +3691,8 @@ public class LROsInner {
      * Long running delete request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Canceled’.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceFuture} object
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link ServiceFuture&lt;ProductInner&gt;} object.
      */
     public ServiceFuture<ProductInner> beginDeleteProvisioning202Deletingcanceled200Async(final ServiceCallback<ProductInner> serviceCallback) {
         return ServiceFutureUtil.fromLRO(beginDeleteProvisioning202Deletingcanceled200Async(), serviceCallback);
@@ -3701,8 +3701,8 @@ public class LROsInner {
     /**
      * Long running delete request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Canceled’.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable for the request
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the observable for the request.
      */
     public Observable<OperationStatus<ProductInner>> beginDeleteProvisioning202Deletingcanceled200Async() {
         return service.beginDeleteProvisioning202Deletingcanceled200(this.client.acceptLanguage());
@@ -3711,9 +3711,9 @@ public class LROsInner {
     /**
      * Long running delete request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Canceled’.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @throws CloudException thrown if the request is rejected by server
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws CloudException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the ProductInner object if successful.
      */
     public ProductInner deleteProvisioning202Deletingcanceled200() {
@@ -3724,8 +3724,8 @@ public class LROsInner {
      * Long running delete request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Canceled’.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceFuture} object
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link ServiceFuture&lt;ProductInner&gt;} object.
      */
     public ServiceFuture<ProductInner> deleteProvisioning202Deletingcanceled200Async(final ServiceCallback<ProductInner> serviceCallback) {
         return ServiceFuture.fromBody(deleteProvisioning202Deletingcanceled200Async(), serviceCallback);
@@ -3734,7 +3734,7 @@ public class LROsInner {
     /**
      * Long running delete request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Canceled’.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;LROsDeleteProvisioning202Deletingcanceled200HeadersInner, ProductInner&gt;&gt;} object if successful.
      */
     public Single<RestResponse<LROsDeleteProvisioning202Deletingcanceled200HeadersInner, ProductInner>> deleteProvisioning202Deletingcanceled200WithRestResponseAsync() {
@@ -3744,8 +3744,8 @@ public class LROsInner {
     /**
      * Long running delete request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Canceled’.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return a {@link Single} emitting the RestResponse<LROsDeleteProvisioning202Deletingcanceled200HeadersInner, ProductInner> object
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link Maybe&lt;ProductInner&gt;} object if successful.
      */
     public Maybe<ProductInner> deleteProvisioning202Deletingcanceled200Async() {
         return deleteProvisioning202Deletingcanceled200WithRestResponseAsync()
@@ -3763,9 +3763,9 @@ public class LROsInner {
     /**
      * Long running delete succeeds and returns right away.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @throws CloudException thrown if the request is rejected by server
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws CloudException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     public void beginDelete204Succeeded() {
         beginDelete204SucceededAsync().blockingLast();
@@ -3775,8 +3775,8 @@ public class LROsInner {
      * Long running delete succeeds and returns right away.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceFuture} object
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
     public ServiceFuture<Void> beginDelete204SucceededAsync(final ServiceCallback<Void> serviceCallback) {
         return ServiceFutureUtil.fromLRO(beginDelete204SucceededAsync(), serviceCallback);
@@ -3785,8 +3785,8 @@ public class LROsInner {
     /**
      * Long running delete succeeds and returns right away.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable for the request
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the observable for the request.
      */
     public Observable<OperationStatus<Void>> beginDelete204SucceededAsync() {
         return service.beginDelete204Succeeded(this.client.acceptLanguage());
@@ -3795,9 +3795,9 @@ public class LROsInner {
     /**
      * Long running delete succeeds and returns right away.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @throws CloudException thrown if the request is rejected by server
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws CloudException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     public void delete204Succeeded() {
         delete204SucceededAsync().blockingAwait();
@@ -3807,8 +3807,8 @@ public class LROsInner {
      * Long running delete succeeds and returns right away.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceFuture} object
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
     public ServiceFuture<Void> delete204SucceededAsync(final ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(delete204SucceededAsync(), serviceCallback);
@@ -3817,7 +3817,7 @@ public class LROsInner {
     /**
      * Long running delete succeeds and returns right away.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
      */
     public Single<RestResponse<Void, Void>> delete204SucceededWithRestResponseAsync() {
@@ -3827,8 +3827,8 @@ public class LROsInner {
     /**
      * Long running delete succeeds and returns right away.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return a {@link Single} emitting the RestResponse<Void, Void> object
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link Completable} object if successful.
      */
     public Completable delete204SucceededAsync() {
         return delete204SucceededWithRestResponseAsync()
@@ -3838,9 +3838,9 @@ public class LROsInner {
     /**
      * Long running delete request, service returns a 202 to the initial request. Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Succeeded’.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @throws CloudException thrown if the request is rejected by server
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws CloudException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the ProductInner object if successful.
      */
     public ProductInner beginDelete202Retry200() {
@@ -3851,8 +3851,8 @@ public class LROsInner {
      * Long running delete request, service returns a 202 to the initial request. Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Succeeded’.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceFuture} object
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link ServiceFuture&lt;ProductInner&gt;} object.
      */
     public ServiceFuture<ProductInner> beginDelete202Retry200Async(final ServiceCallback<ProductInner> serviceCallback) {
         return ServiceFutureUtil.fromLRO(beginDelete202Retry200Async(), serviceCallback);
@@ -3861,8 +3861,8 @@ public class LROsInner {
     /**
      * Long running delete request, service returns a 202 to the initial request. Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Succeeded’.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable for the request
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the observable for the request.
      */
     public Observable<OperationStatus<ProductInner>> beginDelete202Retry200Async() {
         return service.beginDelete202Retry200(this.client.acceptLanguage());
@@ -3871,9 +3871,9 @@ public class LROsInner {
     /**
      * Long running delete request, service returns a 202 to the initial request. Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Succeeded’.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @throws CloudException thrown if the request is rejected by server
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws CloudException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the ProductInner object if successful.
      */
     public ProductInner delete202Retry200() {
@@ -3884,8 +3884,8 @@ public class LROsInner {
      * Long running delete request, service returns a 202 to the initial request. Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Succeeded’.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceFuture} object
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link ServiceFuture&lt;ProductInner&gt;} object.
      */
     public ServiceFuture<ProductInner> delete202Retry200Async(final ServiceCallback<ProductInner> serviceCallback) {
         return ServiceFuture.fromBody(delete202Retry200Async(), serviceCallback);
@@ -3894,7 +3894,7 @@ public class LROsInner {
     /**
      * Long running delete request, service returns a 202 to the initial request. Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Succeeded’.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;LROsDelete202Retry200HeadersInner, ProductInner&gt;&gt;} object if successful.
      */
     public Single<RestResponse<LROsDelete202Retry200HeadersInner, ProductInner>> delete202Retry200WithRestResponseAsync() {
@@ -3904,8 +3904,8 @@ public class LROsInner {
     /**
      * Long running delete request, service returns a 202 to the initial request. Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Succeeded’.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return a {@link Single} emitting the RestResponse<LROsDelete202Retry200HeadersInner, ProductInner> object
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link Maybe&lt;ProductInner&gt;} object if successful.
      */
     public Maybe<ProductInner> delete202Retry200Async() {
         return delete202Retry200WithRestResponseAsync()
@@ -3923,9 +3923,9 @@ public class LROsInner {
     /**
      * Long running delete request, service returns a 202 to the initial request. Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Succeeded’.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @throws CloudException thrown if the request is rejected by server
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws CloudException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the ProductInner object if successful.
      */
     public ProductInner beginDelete202NoRetry204() {
@@ -3936,8 +3936,8 @@ public class LROsInner {
      * Long running delete request, service returns a 202 to the initial request. Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Succeeded’.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceFuture} object
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link ServiceFuture&lt;ProductInner&gt;} object.
      */
     public ServiceFuture<ProductInner> beginDelete202NoRetry204Async(final ServiceCallback<ProductInner> serviceCallback) {
         return ServiceFutureUtil.fromLRO(beginDelete202NoRetry204Async(), serviceCallback);
@@ -3946,8 +3946,8 @@ public class LROsInner {
     /**
      * Long running delete request, service returns a 202 to the initial request. Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Succeeded’.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable for the request
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the observable for the request.
      */
     public Observable<OperationStatus<ProductInner>> beginDelete202NoRetry204Async() {
         return service.beginDelete202NoRetry204(this.client.acceptLanguage());
@@ -3956,9 +3956,9 @@ public class LROsInner {
     /**
      * Long running delete request, service returns a 202 to the initial request. Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Succeeded’.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @throws CloudException thrown if the request is rejected by server
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws CloudException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the ProductInner object if successful.
      */
     public ProductInner delete202NoRetry204() {
@@ -3969,8 +3969,8 @@ public class LROsInner {
      * Long running delete request, service returns a 202 to the initial request. Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Succeeded’.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceFuture} object
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link ServiceFuture&lt;ProductInner&gt;} object.
      */
     public ServiceFuture<ProductInner> delete202NoRetry204Async(final ServiceCallback<ProductInner> serviceCallback) {
         return ServiceFuture.fromBody(delete202NoRetry204Async(), serviceCallback);
@@ -3979,7 +3979,7 @@ public class LROsInner {
     /**
      * Long running delete request, service returns a 202 to the initial request. Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Succeeded’.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;LROsDelete202NoRetry204HeadersInner, ProductInner&gt;&gt;} object if successful.
      */
     public Single<RestResponse<LROsDelete202NoRetry204HeadersInner, ProductInner>> delete202NoRetry204WithRestResponseAsync() {
@@ -3989,8 +3989,8 @@ public class LROsInner {
     /**
      * Long running delete request, service returns a 202 to the initial request. Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Succeeded’.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return a {@link Single} emitting the RestResponse<LROsDelete202NoRetry204HeadersInner, ProductInner> object
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link Maybe&lt;ProductInner&gt;} object if successful.
      */
     public Maybe<ProductInner> delete202NoRetry204Async() {
         return delete202NoRetry204WithRestResponseAsync()
@@ -4008,9 +4008,9 @@ public class LROsInner {
     /**
      * Long running delete request, service returns a location header in the initial request. Subsequent calls to operation status do not contain location header.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @throws CloudException thrown if the request is rejected by server
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws CloudException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     public void beginDeleteNoHeaderInRetry() {
         beginDeleteNoHeaderInRetryAsync().blockingLast();
@@ -4020,8 +4020,8 @@ public class LROsInner {
      * Long running delete request, service returns a location header in the initial request. Subsequent calls to operation status do not contain location header.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceFuture} object
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
     public ServiceFuture<Void> beginDeleteNoHeaderInRetryAsync(final ServiceCallback<Void> serviceCallback) {
         return ServiceFutureUtil.fromLRO(beginDeleteNoHeaderInRetryAsync(), serviceCallback);
@@ -4030,8 +4030,8 @@ public class LROsInner {
     /**
      * Long running delete request, service returns a location header in the initial request. Subsequent calls to operation status do not contain location header.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable for the request
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the observable for the request.
      */
     public Observable<OperationStatus<Void>> beginDeleteNoHeaderInRetryAsync() {
         return service.beginDeleteNoHeaderInRetry(this.client.acceptLanguage());
@@ -4040,9 +4040,9 @@ public class LROsInner {
     /**
      * Long running delete request, service returns a location header in the initial request. Subsequent calls to operation status do not contain location header.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @throws CloudException thrown if the request is rejected by server
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws CloudException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     public void deleteNoHeaderInRetry() {
         deleteNoHeaderInRetryAsync().blockingAwait();
@@ -4052,8 +4052,8 @@ public class LROsInner {
      * Long running delete request, service returns a location header in the initial request. Subsequent calls to operation status do not contain location header.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceFuture} object
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
     public ServiceFuture<Void> deleteNoHeaderInRetryAsync(final ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(deleteNoHeaderInRetryAsync(), serviceCallback);
@@ -4062,7 +4062,7 @@ public class LROsInner {
     /**
      * Long running delete request, service returns a location header in the initial request. Subsequent calls to operation status do not contain location header.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;LROsDeleteNoHeaderInRetryHeadersInner, Void&gt;&gt;} object if successful.
      */
     public Single<RestResponse<LROsDeleteNoHeaderInRetryHeadersInner, Void>> deleteNoHeaderInRetryWithRestResponseAsync() {
@@ -4072,8 +4072,8 @@ public class LROsInner {
     /**
      * Long running delete request, service returns a location header in the initial request. Subsequent calls to operation status do not contain location header.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return a {@link Single} emitting the RestResponse<LROsDeleteNoHeaderInRetryHeadersInner, Void> object
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link Completable} object if successful.
      */
     public Completable deleteNoHeaderInRetryAsync() {
         return deleteNoHeaderInRetryWithRestResponseAsync()
@@ -4083,9 +4083,9 @@ public class LROsInner {
     /**
      * Long running delete request, service returns an Azure-AsyncOperation header in the initial request. Subsequent calls to operation status do not contain Azure-AsyncOperation header.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @throws CloudException thrown if the request is rejected by server
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws CloudException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     public void beginDeleteAsyncNoHeaderInRetry() {
         beginDeleteAsyncNoHeaderInRetryAsync().blockingLast();
@@ -4095,8 +4095,8 @@ public class LROsInner {
      * Long running delete request, service returns an Azure-AsyncOperation header in the initial request. Subsequent calls to operation status do not contain Azure-AsyncOperation header.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceFuture} object
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
     public ServiceFuture<Void> beginDeleteAsyncNoHeaderInRetryAsync(final ServiceCallback<Void> serviceCallback) {
         return ServiceFutureUtil.fromLRO(beginDeleteAsyncNoHeaderInRetryAsync(), serviceCallback);
@@ -4105,8 +4105,8 @@ public class LROsInner {
     /**
      * Long running delete request, service returns an Azure-AsyncOperation header in the initial request. Subsequent calls to operation status do not contain Azure-AsyncOperation header.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable for the request
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the observable for the request.
      */
     public Observable<OperationStatus<Void>> beginDeleteAsyncNoHeaderInRetryAsync() {
         return service.beginDeleteAsyncNoHeaderInRetry(this.client.acceptLanguage());
@@ -4115,9 +4115,9 @@ public class LROsInner {
     /**
      * Long running delete request, service returns an Azure-AsyncOperation header in the initial request. Subsequent calls to operation status do not contain Azure-AsyncOperation header.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @throws CloudException thrown if the request is rejected by server
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws CloudException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     public void deleteAsyncNoHeaderInRetry() {
         deleteAsyncNoHeaderInRetryAsync().blockingAwait();
@@ -4127,8 +4127,8 @@ public class LROsInner {
      * Long running delete request, service returns an Azure-AsyncOperation header in the initial request. Subsequent calls to operation status do not contain Azure-AsyncOperation header.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceFuture} object
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
     public ServiceFuture<Void> deleteAsyncNoHeaderInRetryAsync(final ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(deleteAsyncNoHeaderInRetryAsync(), serviceCallback);
@@ -4137,7 +4137,7 @@ public class LROsInner {
     /**
      * Long running delete request, service returns an Azure-AsyncOperation header in the initial request. Subsequent calls to operation status do not contain Azure-AsyncOperation header.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;LROsDeleteAsyncNoHeaderInRetryHeadersInner, Void&gt;&gt;} object if successful.
      */
     public Single<RestResponse<LROsDeleteAsyncNoHeaderInRetryHeadersInner, Void>> deleteAsyncNoHeaderInRetryWithRestResponseAsync() {
@@ -4147,8 +4147,8 @@ public class LROsInner {
     /**
      * Long running delete request, service returns an Azure-AsyncOperation header in the initial request. Subsequent calls to operation status do not contain Azure-AsyncOperation header.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return a {@link Single} emitting the RestResponse<LROsDeleteAsyncNoHeaderInRetryHeadersInner, Void> object
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link Completable} object if successful.
      */
     public Completable deleteAsyncNoHeaderInRetryAsync() {
         return deleteAsyncNoHeaderInRetryWithRestResponseAsync()
@@ -4158,9 +4158,9 @@ public class LROsInner {
     /**
      * Long running delete request, service returns a 202 to the initial request. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @throws CloudException thrown if the request is rejected by server
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws CloudException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     public void beginDeleteAsyncRetrySucceeded() {
         beginDeleteAsyncRetrySucceededAsync().blockingLast();
@@ -4170,8 +4170,8 @@ public class LROsInner {
      * Long running delete request, service returns a 202 to the initial request. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceFuture} object
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
     public ServiceFuture<Void> beginDeleteAsyncRetrySucceededAsync(final ServiceCallback<Void> serviceCallback) {
         return ServiceFutureUtil.fromLRO(beginDeleteAsyncRetrySucceededAsync(), serviceCallback);
@@ -4180,8 +4180,8 @@ public class LROsInner {
     /**
      * Long running delete request, service returns a 202 to the initial request. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable for the request
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the observable for the request.
      */
     public Observable<OperationStatus<Void>> beginDeleteAsyncRetrySucceededAsync() {
         return service.beginDeleteAsyncRetrySucceeded(this.client.acceptLanguage());
@@ -4190,9 +4190,9 @@ public class LROsInner {
     /**
      * Long running delete request, service returns a 202 to the initial request. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @throws CloudException thrown if the request is rejected by server
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws CloudException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     public void deleteAsyncRetrySucceeded() {
         deleteAsyncRetrySucceededAsync().blockingAwait();
@@ -4202,8 +4202,8 @@ public class LROsInner {
      * Long running delete request, service returns a 202 to the initial request. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceFuture} object
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
     public ServiceFuture<Void> deleteAsyncRetrySucceededAsync(final ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(deleteAsyncRetrySucceededAsync(), serviceCallback);
@@ -4212,7 +4212,7 @@ public class LROsInner {
     /**
      * Long running delete request, service returns a 202 to the initial request. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;LROsDeleteAsyncRetrySucceededHeadersInner, Void&gt;&gt;} object if successful.
      */
     public Single<RestResponse<LROsDeleteAsyncRetrySucceededHeadersInner, Void>> deleteAsyncRetrySucceededWithRestResponseAsync() {
@@ -4222,8 +4222,8 @@ public class LROsInner {
     /**
      * Long running delete request, service returns a 202 to the initial request. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return a {@link Single} emitting the RestResponse<LROsDeleteAsyncRetrySucceededHeadersInner, Void> object
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link Completable} object if successful.
      */
     public Completable deleteAsyncRetrySucceededAsync() {
         return deleteAsyncRetrySucceededWithRestResponseAsync()
@@ -4233,9 +4233,9 @@ public class LROsInner {
     /**
      * Long running delete request, service returns a 202 to the initial request. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @throws CloudException thrown if the request is rejected by server
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws CloudException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     public void beginDeleteAsyncNoRetrySucceeded() {
         beginDeleteAsyncNoRetrySucceededAsync().blockingLast();
@@ -4245,8 +4245,8 @@ public class LROsInner {
      * Long running delete request, service returns a 202 to the initial request. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceFuture} object
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
     public ServiceFuture<Void> beginDeleteAsyncNoRetrySucceededAsync(final ServiceCallback<Void> serviceCallback) {
         return ServiceFutureUtil.fromLRO(beginDeleteAsyncNoRetrySucceededAsync(), serviceCallback);
@@ -4255,8 +4255,8 @@ public class LROsInner {
     /**
      * Long running delete request, service returns a 202 to the initial request. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable for the request
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the observable for the request.
      */
     public Observable<OperationStatus<Void>> beginDeleteAsyncNoRetrySucceededAsync() {
         return service.beginDeleteAsyncNoRetrySucceeded(this.client.acceptLanguage());
@@ -4265,9 +4265,9 @@ public class LROsInner {
     /**
      * Long running delete request, service returns a 202 to the initial request. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @throws CloudException thrown if the request is rejected by server
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws CloudException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     public void deleteAsyncNoRetrySucceeded() {
         deleteAsyncNoRetrySucceededAsync().blockingAwait();
@@ -4277,8 +4277,8 @@ public class LROsInner {
      * Long running delete request, service returns a 202 to the initial request. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceFuture} object
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
     public ServiceFuture<Void> deleteAsyncNoRetrySucceededAsync(final ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(deleteAsyncNoRetrySucceededAsync(), serviceCallback);
@@ -4287,7 +4287,7 @@ public class LROsInner {
     /**
      * Long running delete request, service returns a 202 to the initial request. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;LROsDeleteAsyncNoRetrySucceededHeadersInner, Void&gt;&gt;} object if successful.
      */
     public Single<RestResponse<LROsDeleteAsyncNoRetrySucceededHeadersInner, Void>> deleteAsyncNoRetrySucceededWithRestResponseAsync() {
@@ -4297,8 +4297,8 @@ public class LROsInner {
     /**
      * Long running delete request, service returns a 202 to the initial request. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return a {@link Single} emitting the RestResponse<LROsDeleteAsyncNoRetrySucceededHeadersInner, Void> object
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link Completable} object if successful.
      */
     public Completable deleteAsyncNoRetrySucceededAsync() {
         return deleteAsyncNoRetrySucceededWithRestResponseAsync()
@@ -4308,9 +4308,9 @@ public class LROsInner {
     /**
      * Long running delete request, service returns a 202 to the initial request. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @throws CloudException thrown if the request is rejected by server
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws CloudException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     public void beginDeleteAsyncRetryFailed() {
         beginDeleteAsyncRetryFailedAsync().blockingLast();
@@ -4320,8 +4320,8 @@ public class LROsInner {
      * Long running delete request, service returns a 202 to the initial request. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceFuture} object
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
     public ServiceFuture<Void> beginDeleteAsyncRetryFailedAsync(final ServiceCallback<Void> serviceCallback) {
         return ServiceFutureUtil.fromLRO(beginDeleteAsyncRetryFailedAsync(), serviceCallback);
@@ -4330,8 +4330,8 @@ public class LROsInner {
     /**
      * Long running delete request, service returns a 202 to the initial request. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable for the request
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the observable for the request.
      */
     public Observable<OperationStatus<Void>> beginDeleteAsyncRetryFailedAsync() {
         return service.beginDeleteAsyncRetryFailed(this.client.acceptLanguage());
@@ -4340,9 +4340,9 @@ public class LROsInner {
     /**
      * Long running delete request, service returns a 202 to the initial request. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @throws CloudException thrown if the request is rejected by server
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws CloudException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     public void deleteAsyncRetryFailed() {
         deleteAsyncRetryFailedAsync().blockingAwait();
@@ -4352,8 +4352,8 @@ public class LROsInner {
      * Long running delete request, service returns a 202 to the initial request. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceFuture} object
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
     public ServiceFuture<Void> deleteAsyncRetryFailedAsync(final ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(deleteAsyncRetryFailedAsync(), serviceCallback);
@@ -4362,7 +4362,7 @@ public class LROsInner {
     /**
      * Long running delete request, service returns a 202 to the initial request. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;LROsDeleteAsyncRetryFailedHeadersInner, Void&gt;&gt;} object if successful.
      */
     public Single<RestResponse<LROsDeleteAsyncRetryFailedHeadersInner, Void>> deleteAsyncRetryFailedWithRestResponseAsync() {
@@ -4372,8 +4372,8 @@ public class LROsInner {
     /**
      * Long running delete request, service returns a 202 to the initial request. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return a {@link Single} emitting the RestResponse<LROsDeleteAsyncRetryFailedHeadersInner, Void> object
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link Completable} object if successful.
      */
     public Completable deleteAsyncRetryFailedAsync() {
         return deleteAsyncRetryFailedWithRestResponseAsync()
@@ -4383,9 +4383,9 @@ public class LROsInner {
     /**
      * Long running delete request, service returns a 202 to the initial request. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @throws CloudException thrown if the request is rejected by server
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws CloudException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     public void beginDeleteAsyncRetrycanceled() {
         beginDeleteAsyncRetrycanceledAsync().blockingLast();
@@ -4395,8 +4395,8 @@ public class LROsInner {
      * Long running delete request, service returns a 202 to the initial request. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceFuture} object
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
     public ServiceFuture<Void> beginDeleteAsyncRetrycanceledAsync(final ServiceCallback<Void> serviceCallback) {
         return ServiceFutureUtil.fromLRO(beginDeleteAsyncRetrycanceledAsync(), serviceCallback);
@@ -4405,8 +4405,8 @@ public class LROsInner {
     /**
      * Long running delete request, service returns a 202 to the initial request. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable for the request
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the observable for the request.
      */
     public Observable<OperationStatus<Void>> beginDeleteAsyncRetrycanceledAsync() {
         return service.beginDeleteAsyncRetrycanceled(this.client.acceptLanguage());
@@ -4415,9 +4415,9 @@ public class LROsInner {
     /**
      * Long running delete request, service returns a 202 to the initial request. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @throws CloudException thrown if the request is rejected by server
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws CloudException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     public void deleteAsyncRetrycanceled() {
         deleteAsyncRetrycanceledAsync().blockingAwait();
@@ -4427,8 +4427,8 @@ public class LROsInner {
      * Long running delete request, service returns a 202 to the initial request. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceFuture} object
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
     public ServiceFuture<Void> deleteAsyncRetrycanceledAsync(final ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(deleteAsyncRetrycanceledAsync(), serviceCallback);
@@ -4437,7 +4437,7 @@ public class LROsInner {
     /**
      * Long running delete request, service returns a 202 to the initial request. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;LROsDeleteAsyncRetrycanceledHeadersInner, Void&gt;&gt;} object if successful.
      */
     public Single<RestResponse<LROsDeleteAsyncRetrycanceledHeadersInner, Void>> deleteAsyncRetrycanceledWithRestResponseAsync() {
@@ -4447,8 +4447,8 @@ public class LROsInner {
     /**
      * Long running delete request, service returns a 202 to the initial request. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return a {@link Single} emitting the RestResponse<LROsDeleteAsyncRetrycanceledHeadersInner, Void> object
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link Completable} object if successful.
      */
     public Completable deleteAsyncRetrycanceledAsync() {
         return deleteAsyncRetrycanceledWithRestResponseAsync()
@@ -4458,9 +4458,9 @@ public class LROsInner {
     /**
      * Long running post request, service returns a 202 to the initial request, with 'Location' header. Poll returns a 200 with a response body after success.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @throws CloudException thrown if the request is rejected by server
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws CloudException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the SkuInner object if successful.
      */
     public SkuInner beginPost200WithPayload() {
@@ -4471,8 +4471,8 @@ public class LROsInner {
      * Long running post request, service returns a 202 to the initial request, with 'Location' header. Poll returns a 200 with a response body after success.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceFuture} object
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link ServiceFuture&lt;SkuInner&gt;} object.
      */
     public ServiceFuture<SkuInner> beginPost200WithPayloadAsync(final ServiceCallback<SkuInner> serviceCallback) {
         return ServiceFutureUtil.fromLRO(beginPost200WithPayloadAsync(), serviceCallback);
@@ -4481,8 +4481,8 @@ public class LROsInner {
     /**
      * Long running post request, service returns a 202 to the initial request, with 'Location' header. Poll returns a 200 with a response body after success.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable for the request
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the observable for the request.
      */
     public Observable<OperationStatus<SkuInner>> beginPost200WithPayloadAsync() {
         return service.beginPost200WithPayload(this.client.acceptLanguage());
@@ -4491,9 +4491,9 @@ public class LROsInner {
     /**
      * Long running post request, service returns a 202 to the initial request, with 'Location' header. Poll returns a 200 with a response body after success.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @throws CloudException thrown if the request is rejected by server
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws CloudException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the SkuInner object if successful.
      */
     public SkuInner post200WithPayload() {
@@ -4504,8 +4504,8 @@ public class LROsInner {
      * Long running post request, service returns a 202 to the initial request, with 'Location' header. Poll returns a 200 with a response body after success.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceFuture} object
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link ServiceFuture&lt;SkuInner&gt;} object.
      */
     public ServiceFuture<SkuInner> post200WithPayloadAsync(final ServiceCallback<SkuInner> serviceCallback) {
         return ServiceFuture.fromBody(post200WithPayloadAsync(), serviceCallback);
@@ -4514,7 +4514,7 @@ public class LROsInner {
     /**
      * Long running post request, service returns a 202 to the initial request, with 'Location' header. Poll returns a 200 with a response body after success.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, SkuInner&gt;&gt;} object if successful.
      */
     public Single<RestResponse<Void, SkuInner>> post200WithPayloadWithRestResponseAsync() {
@@ -4524,8 +4524,8 @@ public class LROsInner {
     /**
      * Long running post request, service returns a 202 to the initial request, with 'Location' header. Poll returns a 200 with a response body after success.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return a {@link Single} emitting the RestResponse<Void, SkuInner> object
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link Maybe&lt;SkuInner&gt;} object if successful.
      */
     public Maybe<SkuInner> post200WithPayloadAsync() {
         return post200WithPayloadWithRestResponseAsync()
@@ -4543,9 +4543,9 @@ public class LROsInner {
     /**
      * Long running post request, service returns a 202 to the initial request, with 'Location' and 'Retry-After' headers, Polls return a 200 with a response body after success.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @throws CloudException thrown if the request is rejected by server
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws CloudException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     public void beginPost202Retry200() {
         beginPost202Retry200Async().blockingLast();
@@ -4555,8 +4555,8 @@ public class LROsInner {
      * Long running post request, service returns a 202 to the initial request, with 'Location' and 'Retry-After' headers, Polls return a 200 with a response body after success.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceFuture} object
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
     public ServiceFuture<Void> beginPost202Retry200Async(final ServiceCallback<Void> serviceCallback) {
         return ServiceFutureUtil.fromLRO(beginPost202Retry200Async(), serviceCallback);
@@ -4565,8 +4565,8 @@ public class LROsInner {
     /**
      * Long running post request, service returns a 202 to the initial request, with 'Location' and 'Retry-After' headers, Polls return a 200 with a response body after success.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable for the request
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the observable for the request.
      */
     public Observable<OperationStatus<Void>> beginPost202Retry200Async() {
         final ProductInner product = null;
@@ -4576,10 +4576,10 @@ public class LROsInner {
     /**
      * Long running post request, service returns a 202 to the initial request, with 'Location' and 'Retry-After' headers, Polls return a 200 with a response body after success.
      *
-     * @param product Product to put
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @throws CloudException thrown if the request is rejected by server
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
+     * @param product Product to put.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws CloudException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     public void beginPost202Retry200(ProductInner product) {
         beginPost202Retry200Async(product).blockingLast();
@@ -4588,10 +4588,10 @@ public class LROsInner {
     /**
      * Long running post request, service returns a 202 to the initial request, with 'Location' and 'Retry-After' headers, Polls return a 200 with a response body after success.
      *
-     * @param product Product to put
+     * @param product Product to put.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceFuture} object
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
     public ServiceFuture<Void> beginPost202Retry200Async(ProductInner product, final ServiceCallback<Void> serviceCallback) {
         return ServiceFutureUtil.fromLRO(beginPost202Retry200Async(product), serviceCallback);
@@ -4600,9 +4600,9 @@ public class LROsInner {
     /**
      * Long running post request, service returns a 202 to the initial request, with 'Location' and 'Retry-After' headers, Polls return a 200 with a response body after success.
      *
-     * @param product Product to put
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable for the request
+     * @param product Product to put.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the observable for the request.
      */
     public Observable<OperationStatus<Void>> beginPost202Retry200Async(ProductInner product) {
         Validator.validate(product);
@@ -4612,9 +4612,9 @@ public class LROsInner {
     /**
      * Long running post request, service returns a 202 to the initial request, with 'Location' and 'Retry-After' headers, Polls return a 200 with a response body after success.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @throws CloudException thrown if the request is rejected by server
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws CloudException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     public void post202Retry200() {
         post202Retry200Async().blockingAwait();
@@ -4624,8 +4624,8 @@ public class LROsInner {
      * Long running post request, service returns a 202 to the initial request, with 'Location' and 'Retry-After' headers, Polls return a 200 with a response body after success.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceFuture} object
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
     public ServiceFuture<Void> post202Retry200Async(final ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(post202Retry200Async(), serviceCallback);
@@ -4634,7 +4634,7 @@ public class LROsInner {
     /**
      * Long running post request, service returns a 202 to the initial request, with 'Location' and 'Retry-After' headers, Polls return a 200 with a response body after success.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;LROsPost202Retry200HeadersInner, Void&gt;&gt;} object if successful.
      */
     public Single<RestResponse<LROsPost202Retry200HeadersInner, Void>> post202Retry200WithRestResponseAsync() {
@@ -4645,8 +4645,8 @@ public class LROsInner {
     /**
      * Long running post request, service returns a 202 to the initial request, with 'Location' and 'Retry-After' headers, Polls return a 200 with a response body after success.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return a {@link Single} emitting the RestResponse<LROsPost202Retry200HeadersInner, Void> object
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link Completable} object if successful.
      */
     public Completable post202Retry200Async() {
         return post202Retry200WithRestResponseAsync()
@@ -4656,10 +4656,10 @@ public class LROsInner {
     /**
      * Long running post request, service returns a 202 to the initial request, with 'Location' and 'Retry-After' headers, Polls return a 200 with a response body after success.
      *
-     * @param product Product to put
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @throws CloudException thrown if the request is rejected by server
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
+     * @param product Product to put.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws CloudException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     public void post202Retry200(ProductInner product) {
         post202Retry200Async(product).blockingAwait();
@@ -4668,10 +4668,10 @@ public class LROsInner {
     /**
      * Long running post request, service returns a 202 to the initial request, with 'Location' and 'Retry-After' headers, Polls return a 200 with a response body after success.
      *
-     * @param product Product to put
+     * @param product Product to put.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceFuture} object
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
     public ServiceFuture<Void> post202Retry200Async(ProductInner product, final ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(post202Retry200Async(product), serviceCallback);
@@ -4680,8 +4680,8 @@ public class LROsInner {
     /**
      * Long running post request, service returns a 202 to the initial request, with 'Location' and 'Retry-After' headers, Polls return a 200 with a response body after success.
      *
-     * @param product Product to put
-     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @param product Product to put.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;LROsPost202Retry200HeadersInner, Void&gt;&gt;} object if successful.
      */
     public Single<RestResponse<LROsPost202Retry200HeadersInner, Void>> post202Retry200WithRestResponseAsync(ProductInner product) {
@@ -4692,9 +4692,9 @@ public class LROsInner {
     /**
      * Long running post request, service returns a 202 to the initial request, with 'Location' and 'Retry-After' headers, Polls return a 200 with a response body after success.
      *
-     * @param product Product to put
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return a {@link Single} emitting the RestResponse<LROsPost202Retry200HeadersInner, Void> object
+     * @param product Product to put.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link Completable} object if successful.
      */
     public Completable post202Retry200Async(ProductInner product) {
         return post202Retry200WithRestResponseAsync(product)
@@ -4704,9 +4704,9 @@ public class LROsInner {
     /**
      * Long running post request, service returns a 202 to the initial request, with 'Location' header, 204 with noresponse body after success.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @throws CloudException thrown if the request is rejected by server
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws CloudException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the ProductInner object if successful.
      */
     public ProductInner beginPost202NoRetry204() {
@@ -4717,8 +4717,8 @@ public class LROsInner {
      * Long running post request, service returns a 202 to the initial request, with 'Location' header, 204 with noresponse body after success.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceFuture} object
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link ServiceFuture&lt;ProductInner&gt;} object.
      */
     public ServiceFuture<ProductInner> beginPost202NoRetry204Async(final ServiceCallback<ProductInner> serviceCallback) {
         return ServiceFutureUtil.fromLRO(beginPost202NoRetry204Async(), serviceCallback);
@@ -4727,8 +4727,8 @@ public class LROsInner {
     /**
      * Long running post request, service returns a 202 to the initial request, with 'Location' header, 204 with noresponse body after success.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable for the request
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the observable for the request.
      */
     public Observable<OperationStatus<ProductInner>> beginPost202NoRetry204Async() {
         final ProductInner product = null;
@@ -4738,10 +4738,10 @@ public class LROsInner {
     /**
      * Long running post request, service returns a 202 to the initial request, with 'Location' header, 204 with noresponse body after success.
      *
-     * @param product Product to put
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @throws CloudException thrown if the request is rejected by server
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
+     * @param product Product to put.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws CloudException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the ProductInner object if successful.
      */
     public ProductInner beginPost202NoRetry204(ProductInner product) {
@@ -4751,10 +4751,10 @@ public class LROsInner {
     /**
      * Long running post request, service returns a 202 to the initial request, with 'Location' header, 204 with noresponse body after success.
      *
-     * @param product Product to put
+     * @param product Product to put.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceFuture} object
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link ServiceFuture&lt;ProductInner&gt;} object.
      */
     public ServiceFuture<ProductInner> beginPost202NoRetry204Async(ProductInner product, final ServiceCallback<ProductInner> serviceCallback) {
         return ServiceFutureUtil.fromLRO(beginPost202NoRetry204Async(product), serviceCallback);
@@ -4763,9 +4763,9 @@ public class LROsInner {
     /**
      * Long running post request, service returns a 202 to the initial request, with 'Location' header, 204 with noresponse body after success.
      *
-     * @param product Product to put
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable for the request
+     * @param product Product to put.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the observable for the request.
      */
     public Observable<OperationStatus<ProductInner>> beginPost202NoRetry204Async(ProductInner product) {
         Validator.validate(product);
@@ -4775,9 +4775,9 @@ public class LROsInner {
     /**
      * Long running post request, service returns a 202 to the initial request, with 'Location' header, 204 with noresponse body after success.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @throws CloudException thrown if the request is rejected by server
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws CloudException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the ProductInner object if successful.
      */
     public ProductInner post202NoRetry204() {
@@ -4788,8 +4788,8 @@ public class LROsInner {
      * Long running post request, service returns a 202 to the initial request, with 'Location' header, 204 with noresponse body after success.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceFuture} object
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link ServiceFuture&lt;ProductInner&gt;} object.
      */
     public ServiceFuture<ProductInner> post202NoRetry204Async(final ServiceCallback<ProductInner> serviceCallback) {
         return ServiceFuture.fromBody(post202NoRetry204Async(), serviceCallback);
@@ -4798,7 +4798,7 @@ public class LROsInner {
     /**
      * Long running post request, service returns a 202 to the initial request, with 'Location' header, 204 with noresponse body after success.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;LROsPost202NoRetry204HeadersInner, ProductInner&gt;&gt;} object if successful.
      */
     public Single<RestResponse<LROsPost202NoRetry204HeadersInner, ProductInner>> post202NoRetry204WithRestResponseAsync() {
@@ -4809,8 +4809,8 @@ public class LROsInner {
     /**
      * Long running post request, service returns a 202 to the initial request, with 'Location' header, 204 with noresponse body after success.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return a {@link Single} emitting the RestResponse<LROsPost202NoRetry204HeadersInner, ProductInner> object
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link Maybe&lt;ProductInner&gt;} object if successful.
      */
     public Maybe<ProductInner> post202NoRetry204Async() {
         return post202NoRetry204WithRestResponseAsync()
@@ -4828,10 +4828,10 @@ public class LROsInner {
     /**
      * Long running post request, service returns a 202 to the initial request, with 'Location' header, 204 with noresponse body after success.
      *
-     * @param product Product to put
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @throws CloudException thrown if the request is rejected by server
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
+     * @param product Product to put.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws CloudException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the ProductInner object if successful.
      */
     public ProductInner post202NoRetry204(ProductInner product) {
@@ -4841,10 +4841,10 @@ public class LROsInner {
     /**
      * Long running post request, service returns a 202 to the initial request, with 'Location' header, 204 with noresponse body after success.
      *
-     * @param product Product to put
+     * @param product Product to put.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceFuture} object
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link ServiceFuture&lt;ProductInner&gt;} object.
      */
     public ServiceFuture<ProductInner> post202NoRetry204Async(ProductInner product, final ServiceCallback<ProductInner> serviceCallback) {
         return ServiceFuture.fromBody(post202NoRetry204Async(product), serviceCallback);
@@ -4853,8 +4853,8 @@ public class LROsInner {
     /**
      * Long running post request, service returns a 202 to the initial request, with 'Location' header, 204 with noresponse body after success.
      *
-     * @param product Product to put
-     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @param product Product to put.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;LROsPost202NoRetry204HeadersInner, ProductInner&gt;&gt;} object if successful.
      */
     public Single<RestResponse<LROsPost202NoRetry204HeadersInner, ProductInner>> post202NoRetry204WithRestResponseAsync(ProductInner product) {
@@ -4865,9 +4865,9 @@ public class LROsInner {
     /**
      * Long running post request, service returns a 202 to the initial request, with 'Location' header, 204 with noresponse body after success.
      *
-     * @param product Product to put
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return a {@link Single} emitting the RestResponse<LROsPost202NoRetry204HeadersInner, ProductInner> object
+     * @param product Product to put.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link Maybe&lt;ProductInner&gt;} object if successful.
      */
     public Maybe<ProductInner> post202NoRetry204Async(ProductInner product) {
         return post202NoRetry204WithRestResponseAsync(product)
@@ -4885,9 +4885,9 @@ public class LROsInner {
     /**
      * Long running post request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @throws CloudException thrown if the request is rejected by server
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws CloudException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the ProductInner object if successful.
      */
     public ProductInner beginPostAsyncRetrySucceeded() {
@@ -4898,8 +4898,8 @@ public class LROsInner {
      * Long running post request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceFuture} object
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link ServiceFuture&lt;ProductInner&gt;} object.
      */
     public ServiceFuture<ProductInner> beginPostAsyncRetrySucceededAsync(final ServiceCallback<ProductInner> serviceCallback) {
         return ServiceFutureUtil.fromLRO(beginPostAsyncRetrySucceededAsync(), serviceCallback);
@@ -4908,8 +4908,8 @@ public class LROsInner {
     /**
      * Long running post request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable for the request
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the observable for the request.
      */
     public Observable<OperationStatus<ProductInner>> beginPostAsyncRetrySucceededAsync() {
         final ProductInner product = null;
@@ -4919,10 +4919,10 @@ public class LROsInner {
     /**
      * Long running post request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
-     * @param product Product to put
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @throws CloudException thrown if the request is rejected by server
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
+     * @param product Product to put.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws CloudException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the ProductInner object if successful.
      */
     public ProductInner beginPostAsyncRetrySucceeded(ProductInner product) {
@@ -4932,10 +4932,10 @@ public class LROsInner {
     /**
      * Long running post request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
-     * @param product Product to put
+     * @param product Product to put.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceFuture} object
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link ServiceFuture&lt;ProductInner&gt;} object.
      */
     public ServiceFuture<ProductInner> beginPostAsyncRetrySucceededAsync(ProductInner product, final ServiceCallback<ProductInner> serviceCallback) {
         return ServiceFutureUtil.fromLRO(beginPostAsyncRetrySucceededAsync(product), serviceCallback);
@@ -4944,9 +4944,9 @@ public class LROsInner {
     /**
      * Long running post request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
-     * @param product Product to put
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable for the request
+     * @param product Product to put.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the observable for the request.
      */
     public Observable<OperationStatus<ProductInner>> beginPostAsyncRetrySucceededAsync(ProductInner product) {
         Validator.validate(product);
@@ -4956,9 +4956,9 @@ public class LROsInner {
     /**
      * Long running post request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @throws CloudException thrown if the request is rejected by server
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws CloudException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the ProductInner object if successful.
      */
     public ProductInner postAsyncRetrySucceeded() {
@@ -4969,8 +4969,8 @@ public class LROsInner {
      * Long running post request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceFuture} object
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link ServiceFuture&lt;ProductInner&gt;} object.
      */
     public ServiceFuture<ProductInner> postAsyncRetrySucceededAsync(final ServiceCallback<ProductInner> serviceCallback) {
         return ServiceFuture.fromBody(postAsyncRetrySucceededAsync(), serviceCallback);
@@ -4979,7 +4979,7 @@ public class LROsInner {
     /**
      * Long running post request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;LROsPostAsyncRetrySucceededHeadersInner, ProductInner&gt;&gt;} object if successful.
      */
     public Single<RestResponse<LROsPostAsyncRetrySucceededHeadersInner, ProductInner>> postAsyncRetrySucceededWithRestResponseAsync() {
@@ -4990,8 +4990,8 @@ public class LROsInner {
     /**
      * Long running post request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return a {@link Single} emitting the RestResponse<LROsPostAsyncRetrySucceededHeadersInner, ProductInner> object
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link Maybe&lt;ProductInner&gt;} object if successful.
      */
     public Maybe<ProductInner> postAsyncRetrySucceededAsync() {
         return postAsyncRetrySucceededWithRestResponseAsync()
@@ -5009,10 +5009,10 @@ public class LROsInner {
     /**
      * Long running post request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
-     * @param product Product to put
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @throws CloudException thrown if the request is rejected by server
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
+     * @param product Product to put.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws CloudException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the ProductInner object if successful.
      */
     public ProductInner postAsyncRetrySucceeded(ProductInner product) {
@@ -5022,10 +5022,10 @@ public class LROsInner {
     /**
      * Long running post request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
-     * @param product Product to put
+     * @param product Product to put.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceFuture} object
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link ServiceFuture&lt;ProductInner&gt;} object.
      */
     public ServiceFuture<ProductInner> postAsyncRetrySucceededAsync(ProductInner product, final ServiceCallback<ProductInner> serviceCallback) {
         return ServiceFuture.fromBody(postAsyncRetrySucceededAsync(product), serviceCallback);
@@ -5034,8 +5034,8 @@ public class LROsInner {
     /**
      * Long running post request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
-     * @param product Product to put
-     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @param product Product to put.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;LROsPostAsyncRetrySucceededHeadersInner, ProductInner&gt;&gt;} object if successful.
      */
     public Single<RestResponse<LROsPostAsyncRetrySucceededHeadersInner, ProductInner>> postAsyncRetrySucceededWithRestResponseAsync(ProductInner product) {
@@ -5046,9 +5046,9 @@ public class LROsInner {
     /**
      * Long running post request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
-     * @param product Product to put
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return a {@link Single} emitting the RestResponse<LROsPostAsyncRetrySucceededHeadersInner, ProductInner> object
+     * @param product Product to put.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link Maybe&lt;ProductInner&gt;} object if successful.
      */
     public Maybe<ProductInner> postAsyncRetrySucceededAsync(ProductInner product) {
         return postAsyncRetrySucceededWithRestResponseAsync(product)
@@ -5066,9 +5066,9 @@ public class LROsInner {
     /**
      * Long running post request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @throws CloudException thrown if the request is rejected by server
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws CloudException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the ProductInner object if successful.
      */
     public ProductInner beginPostAsyncNoRetrySucceeded() {
@@ -5079,8 +5079,8 @@ public class LROsInner {
      * Long running post request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceFuture} object
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link ServiceFuture&lt;ProductInner&gt;} object.
      */
     public ServiceFuture<ProductInner> beginPostAsyncNoRetrySucceededAsync(final ServiceCallback<ProductInner> serviceCallback) {
         return ServiceFutureUtil.fromLRO(beginPostAsyncNoRetrySucceededAsync(), serviceCallback);
@@ -5089,8 +5089,8 @@ public class LROsInner {
     /**
      * Long running post request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable for the request
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the observable for the request.
      */
     public Observable<OperationStatus<ProductInner>> beginPostAsyncNoRetrySucceededAsync() {
         final ProductInner product = null;
@@ -5100,10 +5100,10 @@ public class LROsInner {
     /**
      * Long running post request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
-     * @param product Product to put
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @throws CloudException thrown if the request is rejected by server
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
+     * @param product Product to put.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws CloudException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the ProductInner object if successful.
      */
     public ProductInner beginPostAsyncNoRetrySucceeded(ProductInner product) {
@@ -5113,10 +5113,10 @@ public class LROsInner {
     /**
      * Long running post request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
-     * @param product Product to put
+     * @param product Product to put.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceFuture} object
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link ServiceFuture&lt;ProductInner&gt;} object.
      */
     public ServiceFuture<ProductInner> beginPostAsyncNoRetrySucceededAsync(ProductInner product, final ServiceCallback<ProductInner> serviceCallback) {
         return ServiceFutureUtil.fromLRO(beginPostAsyncNoRetrySucceededAsync(product), serviceCallback);
@@ -5125,9 +5125,9 @@ public class LROsInner {
     /**
      * Long running post request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
-     * @param product Product to put
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable for the request
+     * @param product Product to put.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the observable for the request.
      */
     public Observable<OperationStatus<ProductInner>> beginPostAsyncNoRetrySucceededAsync(ProductInner product) {
         Validator.validate(product);
@@ -5137,9 +5137,9 @@ public class LROsInner {
     /**
      * Long running post request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @throws CloudException thrown if the request is rejected by server
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws CloudException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the ProductInner object if successful.
      */
     public ProductInner postAsyncNoRetrySucceeded() {
@@ -5150,8 +5150,8 @@ public class LROsInner {
      * Long running post request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceFuture} object
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link ServiceFuture&lt;ProductInner&gt;} object.
      */
     public ServiceFuture<ProductInner> postAsyncNoRetrySucceededAsync(final ServiceCallback<ProductInner> serviceCallback) {
         return ServiceFuture.fromBody(postAsyncNoRetrySucceededAsync(), serviceCallback);
@@ -5160,7 +5160,7 @@ public class LROsInner {
     /**
      * Long running post request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;LROsPostAsyncNoRetrySucceededHeadersInner, ProductInner&gt;&gt;} object if successful.
      */
     public Single<RestResponse<LROsPostAsyncNoRetrySucceededHeadersInner, ProductInner>> postAsyncNoRetrySucceededWithRestResponseAsync() {
@@ -5171,8 +5171,8 @@ public class LROsInner {
     /**
      * Long running post request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return a {@link Single} emitting the RestResponse<LROsPostAsyncNoRetrySucceededHeadersInner, ProductInner> object
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link Maybe&lt;ProductInner&gt;} object if successful.
      */
     public Maybe<ProductInner> postAsyncNoRetrySucceededAsync() {
         return postAsyncNoRetrySucceededWithRestResponseAsync()
@@ -5190,10 +5190,10 @@ public class LROsInner {
     /**
      * Long running post request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
-     * @param product Product to put
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @throws CloudException thrown if the request is rejected by server
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
+     * @param product Product to put.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws CloudException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the ProductInner object if successful.
      */
     public ProductInner postAsyncNoRetrySucceeded(ProductInner product) {
@@ -5203,10 +5203,10 @@ public class LROsInner {
     /**
      * Long running post request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
-     * @param product Product to put
+     * @param product Product to put.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceFuture} object
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link ServiceFuture&lt;ProductInner&gt;} object.
      */
     public ServiceFuture<ProductInner> postAsyncNoRetrySucceededAsync(ProductInner product, final ServiceCallback<ProductInner> serviceCallback) {
         return ServiceFuture.fromBody(postAsyncNoRetrySucceededAsync(product), serviceCallback);
@@ -5215,8 +5215,8 @@ public class LROsInner {
     /**
      * Long running post request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
-     * @param product Product to put
-     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @param product Product to put.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;LROsPostAsyncNoRetrySucceededHeadersInner, ProductInner&gt;&gt;} object if successful.
      */
     public Single<RestResponse<LROsPostAsyncNoRetrySucceededHeadersInner, ProductInner>> postAsyncNoRetrySucceededWithRestResponseAsync(ProductInner product) {
@@ -5227,9 +5227,9 @@ public class LROsInner {
     /**
      * Long running post request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
-     * @param product Product to put
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return a {@link Single} emitting the RestResponse<LROsPostAsyncNoRetrySucceededHeadersInner, ProductInner> object
+     * @param product Product to put.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link Maybe&lt;ProductInner&gt;} object if successful.
      */
     public Maybe<ProductInner> postAsyncNoRetrySucceededAsync(ProductInner product) {
         return postAsyncNoRetrySucceededWithRestResponseAsync(product)
@@ -5247,9 +5247,9 @@ public class LROsInner {
     /**
      * Long running post request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @throws CloudException thrown if the request is rejected by server
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws CloudException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     public void beginPostAsyncRetryFailed() {
         beginPostAsyncRetryFailedAsync().blockingLast();
@@ -5259,8 +5259,8 @@ public class LROsInner {
      * Long running post request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceFuture} object
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
     public ServiceFuture<Void> beginPostAsyncRetryFailedAsync(final ServiceCallback<Void> serviceCallback) {
         return ServiceFutureUtil.fromLRO(beginPostAsyncRetryFailedAsync(), serviceCallback);
@@ -5269,8 +5269,8 @@ public class LROsInner {
     /**
      * Long running post request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable for the request
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the observable for the request.
      */
     public Observable<OperationStatus<Void>> beginPostAsyncRetryFailedAsync() {
         final ProductInner product = null;
@@ -5280,10 +5280,10 @@ public class LROsInner {
     /**
      * Long running post request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
-     * @param product Product to put
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @throws CloudException thrown if the request is rejected by server
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
+     * @param product Product to put.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws CloudException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     public void beginPostAsyncRetryFailed(ProductInner product) {
         beginPostAsyncRetryFailedAsync(product).blockingLast();
@@ -5292,10 +5292,10 @@ public class LROsInner {
     /**
      * Long running post request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
-     * @param product Product to put
+     * @param product Product to put.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceFuture} object
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
     public ServiceFuture<Void> beginPostAsyncRetryFailedAsync(ProductInner product, final ServiceCallback<Void> serviceCallback) {
         return ServiceFutureUtil.fromLRO(beginPostAsyncRetryFailedAsync(product), serviceCallback);
@@ -5304,9 +5304,9 @@ public class LROsInner {
     /**
      * Long running post request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
-     * @param product Product to put
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable for the request
+     * @param product Product to put.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the observable for the request.
      */
     public Observable<OperationStatus<Void>> beginPostAsyncRetryFailedAsync(ProductInner product) {
         Validator.validate(product);
@@ -5316,9 +5316,9 @@ public class LROsInner {
     /**
      * Long running post request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @throws CloudException thrown if the request is rejected by server
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws CloudException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     public void postAsyncRetryFailed() {
         postAsyncRetryFailedAsync().blockingAwait();
@@ -5328,8 +5328,8 @@ public class LROsInner {
      * Long running post request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceFuture} object
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
     public ServiceFuture<Void> postAsyncRetryFailedAsync(final ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(postAsyncRetryFailedAsync(), serviceCallback);
@@ -5338,7 +5338,7 @@ public class LROsInner {
     /**
      * Long running post request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;LROsPostAsyncRetryFailedHeadersInner, Void&gt;&gt;} object if successful.
      */
     public Single<RestResponse<LROsPostAsyncRetryFailedHeadersInner, Void>> postAsyncRetryFailedWithRestResponseAsync() {
@@ -5349,8 +5349,8 @@ public class LROsInner {
     /**
      * Long running post request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return a {@link Single} emitting the RestResponse<LROsPostAsyncRetryFailedHeadersInner, Void> object
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link Completable} object if successful.
      */
     public Completable postAsyncRetryFailedAsync() {
         return postAsyncRetryFailedWithRestResponseAsync()
@@ -5360,10 +5360,10 @@ public class LROsInner {
     /**
      * Long running post request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
-     * @param product Product to put
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @throws CloudException thrown if the request is rejected by server
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
+     * @param product Product to put.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws CloudException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     public void postAsyncRetryFailed(ProductInner product) {
         postAsyncRetryFailedAsync(product).blockingAwait();
@@ -5372,10 +5372,10 @@ public class LROsInner {
     /**
      * Long running post request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
-     * @param product Product to put
+     * @param product Product to put.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceFuture} object
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
     public ServiceFuture<Void> postAsyncRetryFailedAsync(ProductInner product, final ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(postAsyncRetryFailedAsync(product), serviceCallback);
@@ -5384,8 +5384,8 @@ public class LROsInner {
     /**
      * Long running post request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
-     * @param product Product to put
-     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @param product Product to put.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;LROsPostAsyncRetryFailedHeadersInner, Void&gt;&gt;} object if successful.
      */
     public Single<RestResponse<LROsPostAsyncRetryFailedHeadersInner, Void>> postAsyncRetryFailedWithRestResponseAsync(ProductInner product) {
@@ -5396,9 +5396,9 @@ public class LROsInner {
     /**
      * Long running post request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
-     * @param product Product to put
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return a {@link Single} emitting the RestResponse<LROsPostAsyncRetryFailedHeadersInner, Void> object
+     * @param product Product to put.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link Completable} object if successful.
      */
     public Completable postAsyncRetryFailedAsync(ProductInner product) {
         return postAsyncRetryFailedWithRestResponseAsync(product)
@@ -5408,9 +5408,9 @@ public class LROsInner {
     /**
      * Long running post request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @throws CloudException thrown if the request is rejected by server
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws CloudException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     public void beginPostAsyncRetrycanceled() {
         beginPostAsyncRetrycanceledAsync().blockingLast();
@@ -5420,8 +5420,8 @@ public class LROsInner {
      * Long running post request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceFuture} object
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
     public ServiceFuture<Void> beginPostAsyncRetrycanceledAsync(final ServiceCallback<Void> serviceCallback) {
         return ServiceFutureUtil.fromLRO(beginPostAsyncRetrycanceledAsync(), serviceCallback);
@@ -5430,8 +5430,8 @@ public class LROsInner {
     /**
      * Long running post request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable for the request
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the observable for the request.
      */
     public Observable<OperationStatus<Void>> beginPostAsyncRetrycanceledAsync() {
         final ProductInner product = null;
@@ -5441,10 +5441,10 @@ public class LROsInner {
     /**
      * Long running post request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
-     * @param product Product to put
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @throws CloudException thrown if the request is rejected by server
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
+     * @param product Product to put.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws CloudException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     public void beginPostAsyncRetrycanceled(ProductInner product) {
         beginPostAsyncRetrycanceledAsync(product).blockingLast();
@@ -5453,10 +5453,10 @@ public class LROsInner {
     /**
      * Long running post request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
-     * @param product Product to put
+     * @param product Product to put.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceFuture} object
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
     public ServiceFuture<Void> beginPostAsyncRetrycanceledAsync(ProductInner product, final ServiceCallback<Void> serviceCallback) {
         return ServiceFutureUtil.fromLRO(beginPostAsyncRetrycanceledAsync(product), serviceCallback);
@@ -5465,9 +5465,9 @@ public class LROsInner {
     /**
      * Long running post request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
-     * @param product Product to put
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable for the request
+     * @param product Product to put.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the observable for the request.
      */
     public Observable<OperationStatus<Void>> beginPostAsyncRetrycanceledAsync(ProductInner product) {
         Validator.validate(product);
@@ -5477,9 +5477,9 @@ public class LROsInner {
     /**
      * Long running post request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @throws CloudException thrown if the request is rejected by server
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws CloudException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     public void postAsyncRetrycanceled() {
         postAsyncRetrycanceledAsync().blockingAwait();
@@ -5489,8 +5489,8 @@ public class LROsInner {
      * Long running post request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceFuture} object
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
     public ServiceFuture<Void> postAsyncRetrycanceledAsync(final ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(postAsyncRetrycanceledAsync(), serviceCallback);
@@ -5499,7 +5499,7 @@ public class LROsInner {
     /**
      * Long running post request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;LROsPostAsyncRetrycanceledHeadersInner, Void&gt;&gt;} object if successful.
      */
     public Single<RestResponse<LROsPostAsyncRetrycanceledHeadersInner, Void>> postAsyncRetrycanceledWithRestResponseAsync() {
@@ -5510,8 +5510,8 @@ public class LROsInner {
     /**
      * Long running post request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return a {@link Single} emitting the RestResponse<LROsPostAsyncRetrycanceledHeadersInner, Void> object
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link Completable} object if successful.
      */
     public Completable postAsyncRetrycanceledAsync() {
         return postAsyncRetrycanceledWithRestResponseAsync()
@@ -5521,10 +5521,10 @@ public class LROsInner {
     /**
      * Long running post request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
-     * @param product Product to put
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @throws CloudException thrown if the request is rejected by server
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
+     * @param product Product to put.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws CloudException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     public void postAsyncRetrycanceled(ProductInner product) {
         postAsyncRetrycanceledAsync(product).blockingAwait();
@@ -5533,10 +5533,10 @@ public class LROsInner {
     /**
      * Long running post request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
-     * @param product Product to put
+     * @param product Product to put.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceFuture} object
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
     public ServiceFuture<Void> postAsyncRetrycanceledAsync(ProductInner product, final ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(postAsyncRetrycanceledAsync(product), serviceCallback);
@@ -5545,8 +5545,8 @@ public class LROsInner {
     /**
      * Long running post request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
-     * @param product Product to put
-     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @param product Product to put.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;LROsPostAsyncRetrycanceledHeadersInner, Void&gt;&gt;} object if successful.
      */
     public Single<RestResponse<LROsPostAsyncRetrycanceledHeadersInner, Void>> postAsyncRetrycanceledWithRestResponseAsync(ProductInner product) {
@@ -5557,9 +5557,9 @@ public class LROsInner {
     /**
      * Long running post request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
-     * @param product Product to put
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return a {@link Single} emitting the RestResponse<LROsPostAsyncRetrycanceledHeadersInner, Void> object
+     * @param product Product to put.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link Completable} object if successful.
      */
     public Completable postAsyncRetrycanceledAsync(ProductInner product) {
         return postAsyncRetrycanceledWithRestResponseAsync(product)

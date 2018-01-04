@@ -122,9 +122,9 @@ public class Datetimerfc1123sImpl implements Datetimerfc1123s {
     /**
      * Get null datetime value.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @throws ErrorException thrown if the request is rejected by server
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the DateTime object if successful.
      */
     public DateTime getNull() {
@@ -135,8 +135,8 @@ public class Datetimerfc1123sImpl implements Datetimerfc1123s {
      * Get null datetime value.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceFuture} object
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link ServiceFuture&lt;DateTime&gt;} object.
      */
     public ServiceFuture<DateTime> getNullAsync(final ServiceCallback<DateTime> serviceCallback) {
         return ServiceFuture.fromBody(getNullAsync(), serviceCallback);
@@ -145,7 +145,7 @@ public class Datetimerfc1123sImpl implements Datetimerfc1123s {
     /**
      * Get null datetime value.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, DateTime&gt;&gt;} object if successful.
      */
     public Single<RestResponse<Void, DateTime>> getNullWithRestResponseAsync() {
@@ -155,8 +155,8 @@ public class Datetimerfc1123sImpl implements Datetimerfc1123s {
     /**
      * Get null datetime value.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return a {@link Single} emitting the RestResponse<Void, DateTime> object
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link Maybe&lt;DateTime&gt;} object if successful.
      */
     public Maybe<DateTime> getNullAsync() {
         return getNullWithRestResponseAsync()
@@ -174,9 +174,9 @@ public class Datetimerfc1123sImpl implements Datetimerfc1123s {
     /**
      * Get invalid datetime value.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @throws ErrorException thrown if the request is rejected by server
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the DateTime object if successful.
      */
     public DateTime getInvalid() {
@@ -187,8 +187,8 @@ public class Datetimerfc1123sImpl implements Datetimerfc1123s {
      * Get invalid datetime value.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceFuture} object
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link ServiceFuture&lt;DateTime&gt;} object.
      */
     public ServiceFuture<DateTime> getInvalidAsync(final ServiceCallback<DateTime> serviceCallback) {
         return ServiceFuture.fromBody(getInvalidAsync(), serviceCallback);
@@ -197,7 +197,7 @@ public class Datetimerfc1123sImpl implements Datetimerfc1123s {
     /**
      * Get invalid datetime value.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, DateTime&gt;&gt;} object if successful.
      */
     public Single<RestResponse<Void, DateTime>> getInvalidWithRestResponseAsync() {
@@ -207,8 +207,8 @@ public class Datetimerfc1123sImpl implements Datetimerfc1123s {
     /**
      * Get invalid datetime value.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return a {@link Single} emitting the RestResponse<Void, DateTime> object
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link Maybe&lt;DateTime&gt;} object if successful.
      */
     public Maybe<DateTime> getInvalidAsync() {
         return getInvalidWithRestResponseAsync()
@@ -226,9 +226,9 @@ public class Datetimerfc1123sImpl implements Datetimerfc1123s {
     /**
      * Get overflow datetime value.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @throws ErrorException thrown if the request is rejected by server
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the DateTime object if successful.
      */
     public DateTime getOverflow() {
@@ -239,8 +239,8 @@ public class Datetimerfc1123sImpl implements Datetimerfc1123s {
      * Get overflow datetime value.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceFuture} object
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link ServiceFuture&lt;DateTime&gt;} object.
      */
     public ServiceFuture<DateTime> getOverflowAsync(final ServiceCallback<DateTime> serviceCallback) {
         return ServiceFuture.fromBody(getOverflowAsync(), serviceCallback);
@@ -249,7 +249,7 @@ public class Datetimerfc1123sImpl implements Datetimerfc1123s {
     /**
      * Get overflow datetime value.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, DateTime&gt;&gt;} object if successful.
      */
     public Single<RestResponse<Void, DateTime>> getOverflowWithRestResponseAsync() {
@@ -259,8 +259,8 @@ public class Datetimerfc1123sImpl implements Datetimerfc1123s {
     /**
      * Get overflow datetime value.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return a {@link Single} emitting the RestResponse<Void, DateTime> object
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link Maybe&lt;DateTime&gt;} object if successful.
      */
     public Maybe<DateTime> getOverflowAsync() {
         return getOverflowWithRestResponseAsync()
@@ -278,9 +278,9 @@ public class Datetimerfc1123sImpl implements Datetimerfc1123s {
     /**
      * Get underflow datetime value.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @throws ErrorException thrown if the request is rejected by server
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the DateTime object if successful.
      */
     public DateTime getUnderflow() {
@@ -291,8 +291,8 @@ public class Datetimerfc1123sImpl implements Datetimerfc1123s {
      * Get underflow datetime value.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceFuture} object
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link ServiceFuture&lt;DateTime&gt;} object.
      */
     public ServiceFuture<DateTime> getUnderflowAsync(final ServiceCallback<DateTime> serviceCallback) {
         return ServiceFuture.fromBody(getUnderflowAsync(), serviceCallback);
@@ -301,7 +301,7 @@ public class Datetimerfc1123sImpl implements Datetimerfc1123s {
     /**
      * Get underflow datetime value.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, DateTime&gt;&gt;} object if successful.
      */
     public Single<RestResponse<Void, DateTime>> getUnderflowWithRestResponseAsync() {
@@ -311,8 +311,8 @@ public class Datetimerfc1123sImpl implements Datetimerfc1123s {
     /**
      * Get underflow datetime value.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return a {@link Single} emitting the RestResponse<Void, DateTime> object
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link Maybe&lt;DateTime&gt;} object if successful.
      */
     public Maybe<DateTime> getUnderflowAsync() {
         return getUnderflowWithRestResponseAsync()
@@ -330,10 +330,10 @@ public class Datetimerfc1123sImpl implements Datetimerfc1123s {
     /**
      * Put max datetime value Fri, 31 Dec 9999 23:59:59 GMT.
      *
-     * @param datetimeBody the DateTimeRfc1123 value
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @throws ErrorException thrown if the request is rejected by server
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
+     * @param datetimeBody the DateTimeRfc1123 value.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     public void putUtcMaxDateTime(DateTime datetimeBody) {
         putUtcMaxDateTimeAsync(datetimeBody).blockingAwait();
@@ -342,10 +342,10 @@ public class Datetimerfc1123sImpl implements Datetimerfc1123s {
     /**
      * Put max datetime value Fri, 31 Dec 9999 23:59:59 GMT.
      *
-     * @param datetimeBody the DateTimeRfc1123 value
+     * @param datetimeBody the DateTimeRfc1123 value.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceFuture} object
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
     public ServiceFuture<Void> putUtcMaxDateTimeAsync(DateTime datetimeBody, final ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(putUtcMaxDateTimeAsync(datetimeBody), serviceCallback);
@@ -354,8 +354,8 @@ public class Datetimerfc1123sImpl implements Datetimerfc1123s {
     /**
      * Put max datetime value Fri, 31 Dec 9999 23:59:59 GMT.
      *
-     * @param datetimeBody the DateTimeRfc1123 value
-     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @param datetimeBody the DateTimeRfc1123 value.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
      */
     public Single<RestResponse<Void, Void>> putUtcMaxDateTimeWithRestResponseAsync(DateTime datetimeBody) {
@@ -369,9 +369,9 @@ public class Datetimerfc1123sImpl implements Datetimerfc1123s {
     /**
      * Put max datetime value Fri, 31 Dec 9999 23:59:59 GMT.
      *
-     * @param datetimeBody the DateTimeRfc1123 value
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return a {@link Single} emitting the RestResponse<Void, Void> object
+     * @param datetimeBody the DateTimeRfc1123 value.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link Completable} object if successful.
      */
     public Completable putUtcMaxDateTimeAsync(DateTime datetimeBody) {
         return putUtcMaxDateTimeWithRestResponseAsync(datetimeBody)
@@ -381,9 +381,9 @@ public class Datetimerfc1123sImpl implements Datetimerfc1123s {
     /**
      * Get max datetime value fri, 31 dec 9999 23:59:59 gmt.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @throws ErrorException thrown if the request is rejected by server
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the DateTime object if successful.
      */
     public DateTime getUtcLowercaseMaxDateTime() {
@@ -394,8 +394,8 @@ public class Datetimerfc1123sImpl implements Datetimerfc1123s {
      * Get max datetime value fri, 31 dec 9999 23:59:59 gmt.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceFuture} object
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link ServiceFuture&lt;DateTime&gt;} object.
      */
     public ServiceFuture<DateTime> getUtcLowercaseMaxDateTimeAsync(final ServiceCallback<DateTime> serviceCallback) {
         return ServiceFuture.fromBody(getUtcLowercaseMaxDateTimeAsync(), serviceCallback);
@@ -404,7 +404,7 @@ public class Datetimerfc1123sImpl implements Datetimerfc1123s {
     /**
      * Get max datetime value fri, 31 dec 9999 23:59:59 gmt.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, DateTime&gt;&gt;} object if successful.
      */
     public Single<RestResponse<Void, DateTime>> getUtcLowercaseMaxDateTimeWithRestResponseAsync() {
@@ -414,8 +414,8 @@ public class Datetimerfc1123sImpl implements Datetimerfc1123s {
     /**
      * Get max datetime value fri, 31 dec 9999 23:59:59 gmt.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return a {@link Single} emitting the RestResponse<Void, DateTime> object
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link Maybe&lt;DateTime&gt;} object if successful.
      */
     public Maybe<DateTime> getUtcLowercaseMaxDateTimeAsync() {
         return getUtcLowercaseMaxDateTimeWithRestResponseAsync()
@@ -433,9 +433,9 @@ public class Datetimerfc1123sImpl implements Datetimerfc1123s {
     /**
      * Get max datetime value FRI, 31 DEC 9999 23:59:59 GMT.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @throws ErrorException thrown if the request is rejected by server
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the DateTime object if successful.
      */
     public DateTime getUtcUppercaseMaxDateTime() {
@@ -446,8 +446,8 @@ public class Datetimerfc1123sImpl implements Datetimerfc1123s {
      * Get max datetime value FRI, 31 DEC 9999 23:59:59 GMT.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceFuture} object
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link ServiceFuture&lt;DateTime&gt;} object.
      */
     public ServiceFuture<DateTime> getUtcUppercaseMaxDateTimeAsync(final ServiceCallback<DateTime> serviceCallback) {
         return ServiceFuture.fromBody(getUtcUppercaseMaxDateTimeAsync(), serviceCallback);
@@ -456,7 +456,7 @@ public class Datetimerfc1123sImpl implements Datetimerfc1123s {
     /**
      * Get max datetime value FRI, 31 DEC 9999 23:59:59 GMT.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, DateTime&gt;&gt;} object if successful.
      */
     public Single<RestResponse<Void, DateTime>> getUtcUppercaseMaxDateTimeWithRestResponseAsync() {
@@ -466,8 +466,8 @@ public class Datetimerfc1123sImpl implements Datetimerfc1123s {
     /**
      * Get max datetime value FRI, 31 DEC 9999 23:59:59 GMT.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return a {@link Single} emitting the RestResponse<Void, DateTime> object
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link Maybe&lt;DateTime&gt;} object if successful.
      */
     public Maybe<DateTime> getUtcUppercaseMaxDateTimeAsync() {
         return getUtcUppercaseMaxDateTimeWithRestResponseAsync()
@@ -485,10 +485,10 @@ public class Datetimerfc1123sImpl implements Datetimerfc1123s {
     /**
      * Put min datetime value Mon, 1 Jan 0001 00:00:00 GMT.
      *
-     * @param datetimeBody the DateTimeRfc1123 value
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @throws ErrorException thrown if the request is rejected by server
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
+     * @param datetimeBody the DateTimeRfc1123 value.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     public void putUtcMinDateTime(DateTime datetimeBody) {
         putUtcMinDateTimeAsync(datetimeBody).blockingAwait();
@@ -497,10 +497,10 @@ public class Datetimerfc1123sImpl implements Datetimerfc1123s {
     /**
      * Put min datetime value Mon, 1 Jan 0001 00:00:00 GMT.
      *
-     * @param datetimeBody the DateTimeRfc1123 value
+     * @param datetimeBody the DateTimeRfc1123 value.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceFuture} object
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
     public ServiceFuture<Void> putUtcMinDateTimeAsync(DateTime datetimeBody, final ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(putUtcMinDateTimeAsync(datetimeBody), serviceCallback);
@@ -509,8 +509,8 @@ public class Datetimerfc1123sImpl implements Datetimerfc1123s {
     /**
      * Put min datetime value Mon, 1 Jan 0001 00:00:00 GMT.
      *
-     * @param datetimeBody the DateTimeRfc1123 value
-     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @param datetimeBody the DateTimeRfc1123 value.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
      */
     public Single<RestResponse<Void, Void>> putUtcMinDateTimeWithRestResponseAsync(DateTime datetimeBody) {
@@ -524,9 +524,9 @@ public class Datetimerfc1123sImpl implements Datetimerfc1123s {
     /**
      * Put min datetime value Mon, 1 Jan 0001 00:00:00 GMT.
      *
-     * @param datetimeBody the DateTimeRfc1123 value
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return a {@link Single} emitting the RestResponse<Void, Void> object
+     * @param datetimeBody the DateTimeRfc1123 value.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link Completable} object if successful.
      */
     public Completable putUtcMinDateTimeAsync(DateTime datetimeBody) {
         return putUtcMinDateTimeWithRestResponseAsync(datetimeBody)
@@ -536,9 +536,9 @@ public class Datetimerfc1123sImpl implements Datetimerfc1123s {
     /**
      * Get min datetime value Mon, 1 Jan 0001 00:00:00 GMT.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @throws ErrorException thrown if the request is rejected by server
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the DateTime object if successful.
      */
     public DateTime getUtcMinDateTime() {
@@ -549,8 +549,8 @@ public class Datetimerfc1123sImpl implements Datetimerfc1123s {
      * Get min datetime value Mon, 1 Jan 0001 00:00:00 GMT.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceFuture} object
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link ServiceFuture&lt;DateTime&gt;} object.
      */
     public ServiceFuture<DateTime> getUtcMinDateTimeAsync(final ServiceCallback<DateTime> serviceCallback) {
         return ServiceFuture.fromBody(getUtcMinDateTimeAsync(), serviceCallback);
@@ -559,7 +559,7 @@ public class Datetimerfc1123sImpl implements Datetimerfc1123s {
     /**
      * Get min datetime value Mon, 1 Jan 0001 00:00:00 GMT.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, DateTime&gt;&gt;} object if successful.
      */
     public Single<RestResponse<Void, DateTime>> getUtcMinDateTimeWithRestResponseAsync() {
@@ -569,8 +569,8 @@ public class Datetimerfc1123sImpl implements Datetimerfc1123s {
     /**
      * Get min datetime value Mon, 1 Jan 0001 00:00:00 GMT.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return a {@link Single} emitting the RestResponse<Void, DateTime> object
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link Maybe&lt;DateTime&gt;} object if successful.
      */
     public Maybe<DateTime> getUtcMinDateTimeAsync() {
         return getUtcMinDateTimeWithRestResponseAsync()

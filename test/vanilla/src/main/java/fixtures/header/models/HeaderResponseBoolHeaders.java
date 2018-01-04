@@ -25,7 +25,7 @@ public class HeaderResponseBoolHeaders {
     /**
      * Get the value value.
      *
-     * @return the value value
+     * @return the value value.
      */
     public Boolean value() {
         return this.value;
@@ -34,7 +34,7 @@ public class HeaderResponseBoolHeaders {
     /**
      * Set the value value.
      *
-     * @param value the value value to set
+     * @param value the value value to set.
      * @return the HeaderResponseBoolHeaders object itself.
      */
     public HeaderResponseBoolHeaders withValue(Boolean value) {

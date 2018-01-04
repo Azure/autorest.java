@@ -85,10 +85,10 @@ public class SubscriptionInMethodsInner {
     /**
      * POST method with subscriptionId modeled in the method.  pass in subscription id = '1234-5678-9012-3456' to succeed.
      *
-     * @param subscriptionId This should appear as a method parameter, use value '1234-5678-9012-3456'
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @throws ErrorException thrown if the request is rejected by server
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
+     * @param subscriptionId This should appear as a method parameter, use value '1234-5678-9012-3456'.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     public void postMethodLocalValid(String subscriptionId) {
         postMethodLocalValidAsync(subscriptionId).blockingAwait();
@@ -97,10 +97,10 @@ public class SubscriptionInMethodsInner {
     /**
      * POST method with subscriptionId modeled in the method.  pass in subscription id = '1234-5678-9012-3456' to succeed.
      *
-     * @param subscriptionId This should appear as a method parameter, use value '1234-5678-9012-3456'
+     * @param subscriptionId This should appear as a method parameter, use value '1234-5678-9012-3456'.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceFuture} object
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
     public ServiceFuture<Void> postMethodLocalValidAsync(String subscriptionId, final ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(postMethodLocalValidAsync(subscriptionId), serviceCallback);
@@ -109,8 +109,8 @@ public class SubscriptionInMethodsInner {
     /**
      * POST method with subscriptionId modeled in the method.  pass in subscription id = '1234-5678-9012-3456' to succeed.
      *
-     * @param subscriptionId This should appear as a method parameter, use value '1234-5678-9012-3456'
-     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @param subscriptionId This should appear as a method parameter, use value '1234-5678-9012-3456'.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
      */
     public Single<RestResponse<Void, Void>> postMethodLocalValidWithRestResponseAsync(String subscriptionId) {
@@ -123,9 +123,9 @@ public class SubscriptionInMethodsInner {
     /**
      * POST method with subscriptionId modeled in the method.  pass in subscription id = '1234-5678-9012-3456' to succeed.
      *
-     * @param subscriptionId This should appear as a method parameter, use value '1234-5678-9012-3456'
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return a {@link Single} emitting the RestResponse<Void, Void> object
+     * @param subscriptionId This should appear as a method parameter, use value '1234-5678-9012-3456'.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link Completable} object if successful.
      */
     public Completable postMethodLocalValidAsync(String subscriptionId) {
         return postMethodLocalValidWithRestResponseAsync(subscriptionId)
@@ -135,10 +135,10 @@ public class SubscriptionInMethodsInner {
     /**
      * POST method with subscriptionId modeled in the method.  pass in subscription id = null, client-side validation should prevent you from making this call.
      *
-     * @param subscriptionId This should appear as a method parameter, use value null, client-side validation should prvenet the call
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @throws ErrorException thrown if the request is rejected by server
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
+     * @param subscriptionId This should appear as a method parameter, use value null, client-side validation should prvenet the call.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     public void postMethodLocalNull(String subscriptionId) {
         postMethodLocalNullAsync(subscriptionId).blockingAwait();
@@ -147,10 +147,10 @@ public class SubscriptionInMethodsInner {
     /**
      * POST method with subscriptionId modeled in the method.  pass in subscription id = null, client-side validation should prevent you from making this call.
      *
-     * @param subscriptionId This should appear as a method parameter, use value null, client-side validation should prvenet the call
+     * @param subscriptionId This should appear as a method parameter, use value null, client-side validation should prvenet the call.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceFuture} object
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
     public ServiceFuture<Void> postMethodLocalNullAsync(String subscriptionId, final ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(postMethodLocalNullAsync(subscriptionId), serviceCallback);
@@ -159,8 +159,8 @@ public class SubscriptionInMethodsInner {
     /**
      * POST method with subscriptionId modeled in the method.  pass in subscription id = null, client-side validation should prevent you from making this call.
      *
-     * @param subscriptionId This should appear as a method parameter, use value null, client-side validation should prvenet the call
-     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @param subscriptionId This should appear as a method parameter, use value null, client-side validation should prvenet the call.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
      */
     public Single<RestResponse<Void, Void>> postMethodLocalNullWithRestResponseAsync(String subscriptionId) {
@@ -173,9 +173,9 @@ public class SubscriptionInMethodsInner {
     /**
      * POST method with subscriptionId modeled in the method.  pass in subscription id = null, client-side validation should prevent you from making this call.
      *
-     * @param subscriptionId This should appear as a method parameter, use value null, client-side validation should prvenet the call
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return a {@link Single} emitting the RestResponse<Void, Void> object
+     * @param subscriptionId This should appear as a method parameter, use value null, client-side validation should prvenet the call.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link Completable} object if successful.
      */
     public Completable postMethodLocalNullAsync(String subscriptionId) {
         return postMethodLocalNullWithRestResponseAsync(subscriptionId)
@@ -185,10 +185,10 @@ public class SubscriptionInMethodsInner {
     /**
      * POST method with subscriptionId modeled in the method.  pass in subscription id = '1234-5678-9012-3456' to succeed.
      *
-     * @param subscriptionId Should appear as a method parameter -use value '1234-5678-9012-3456'
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @throws ErrorException thrown if the request is rejected by server
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
+     * @param subscriptionId Should appear as a method parameter -use value '1234-5678-9012-3456'.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     public void postPathLocalValid(String subscriptionId) {
         postPathLocalValidAsync(subscriptionId).blockingAwait();
@@ -197,10 +197,10 @@ public class SubscriptionInMethodsInner {
     /**
      * POST method with subscriptionId modeled in the method.  pass in subscription id = '1234-5678-9012-3456' to succeed.
      *
-     * @param subscriptionId Should appear as a method parameter -use value '1234-5678-9012-3456'
+     * @param subscriptionId Should appear as a method parameter -use value '1234-5678-9012-3456'.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceFuture} object
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
     public ServiceFuture<Void> postPathLocalValidAsync(String subscriptionId, final ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(postPathLocalValidAsync(subscriptionId), serviceCallback);
@@ -209,8 +209,8 @@ public class SubscriptionInMethodsInner {
     /**
      * POST method with subscriptionId modeled in the method.  pass in subscription id = '1234-5678-9012-3456' to succeed.
      *
-     * @param subscriptionId Should appear as a method parameter -use value '1234-5678-9012-3456'
-     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @param subscriptionId Should appear as a method parameter -use value '1234-5678-9012-3456'.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
      */
     public Single<RestResponse<Void, Void>> postPathLocalValidWithRestResponseAsync(String subscriptionId) {
@@ -223,9 +223,9 @@ public class SubscriptionInMethodsInner {
     /**
      * POST method with subscriptionId modeled in the method.  pass in subscription id = '1234-5678-9012-3456' to succeed.
      *
-     * @param subscriptionId Should appear as a method parameter -use value '1234-5678-9012-3456'
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return a {@link Single} emitting the RestResponse<Void, Void> object
+     * @param subscriptionId Should appear as a method parameter -use value '1234-5678-9012-3456'.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link Completable} object if successful.
      */
     public Completable postPathLocalValidAsync(String subscriptionId) {
         return postPathLocalValidWithRestResponseAsync(subscriptionId)
@@ -235,10 +235,10 @@ public class SubscriptionInMethodsInner {
     /**
      * POST method with subscriptionId modeled in the method.  pass in subscription id = '1234-5678-9012-3456' to succeed.
      *
-     * @param subscriptionId The subscriptionId, which appears in the path, the value is always '1234-5678-9012-3456'
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @throws ErrorException thrown if the request is rejected by server
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
+     * @param subscriptionId The subscriptionId, which appears in the path, the value is always '1234-5678-9012-3456'.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     public void postSwaggerLocalValid(String subscriptionId) {
         postSwaggerLocalValidAsync(subscriptionId).blockingAwait();
@@ -247,10 +247,10 @@ public class SubscriptionInMethodsInner {
     /**
      * POST method with subscriptionId modeled in the method.  pass in subscription id = '1234-5678-9012-3456' to succeed.
      *
-     * @param subscriptionId The subscriptionId, which appears in the path, the value is always '1234-5678-9012-3456'
+     * @param subscriptionId The subscriptionId, which appears in the path, the value is always '1234-5678-9012-3456'.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceFuture} object
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
     public ServiceFuture<Void> postSwaggerLocalValidAsync(String subscriptionId, final ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(postSwaggerLocalValidAsync(subscriptionId), serviceCallback);
@@ -259,8 +259,8 @@ public class SubscriptionInMethodsInner {
     /**
      * POST method with subscriptionId modeled in the method.  pass in subscription id = '1234-5678-9012-3456' to succeed.
      *
-     * @param subscriptionId The subscriptionId, which appears in the path, the value is always '1234-5678-9012-3456'
-     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @param subscriptionId The subscriptionId, which appears in the path, the value is always '1234-5678-9012-3456'.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
      */
     public Single<RestResponse<Void, Void>> postSwaggerLocalValidWithRestResponseAsync(String subscriptionId) {
@@ -273,9 +273,9 @@ public class SubscriptionInMethodsInner {
     /**
      * POST method with subscriptionId modeled in the method.  pass in subscription id = '1234-5678-9012-3456' to succeed.
      *
-     * @param subscriptionId The subscriptionId, which appears in the path, the value is always '1234-5678-9012-3456'
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return a {@link Single} emitting the RestResponse<Void, Void> object
+     * @param subscriptionId The subscriptionId, which appears in the path, the value is always '1234-5678-9012-3456'.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link Completable} object if successful.
      */
     public Completable postSwaggerLocalValidAsync(String subscriptionId) {
         return postSwaggerLocalValidWithRestResponseAsync(subscriptionId)

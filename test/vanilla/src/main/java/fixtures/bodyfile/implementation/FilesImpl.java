@@ -80,9 +80,9 @@ public class FilesImpl implements Files {
     /**
      * Get file.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @throws ErrorException thrown if the request is rejected by server
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the AsyncInputStream object if successful.
      */
     public AsyncInputStream getFile() {
@@ -93,8 +93,8 @@ public class FilesImpl implements Files {
      * Get file.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceFuture} object
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link ServiceFuture&lt;AsyncInputStream&gt;} object.
      */
     public ServiceFuture<AsyncInputStream> getFileAsync(final ServiceCallback<AsyncInputStream> serviceCallback) {
         return ServiceFuture.fromBody(getFileAsync(), serviceCallback);
@@ -103,7 +103,7 @@ public class FilesImpl implements Files {
     /**
      * Get file.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, AsyncInputStream&gt;&gt;} object if successful.
      */
     public Single<RestResponse<Void, AsyncInputStream>> getFileWithRestResponseAsync() {
@@ -113,8 +113,8 @@ public class FilesImpl implements Files {
     /**
      * Get file.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return a {@link Single} emitting the RestResponse<Void, AsyncInputStream> object
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link Maybe&lt;AsyncInputStream&gt;} object if successful.
      */
     public Maybe<AsyncInputStream> getFileAsync() {
         return getFileWithRestResponseAsync()
@@ -132,9 +132,9 @@ public class FilesImpl implements Files {
     /**
      * Get a large file.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @throws ErrorException thrown if the request is rejected by server
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the AsyncInputStream object if successful.
      */
     public AsyncInputStream getFileLarge() {
@@ -145,8 +145,8 @@ public class FilesImpl implements Files {
      * Get a large file.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceFuture} object
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link ServiceFuture&lt;AsyncInputStream&gt;} object.
      */
     public ServiceFuture<AsyncInputStream> getFileLargeAsync(final ServiceCallback<AsyncInputStream> serviceCallback) {
         return ServiceFuture.fromBody(getFileLargeAsync(), serviceCallback);
@@ -155,7 +155,7 @@ public class FilesImpl implements Files {
     /**
      * Get a large file.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, AsyncInputStream&gt;&gt;} object if successful.
      */
     public Single<RestResponse<Void, AsyncInputStream>> getFileLargeWithRestResponseAsync() {
@@ -165,8 +165,8 @@ public class FilesImpl implements Files {
     /**
      * Get a large file.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return a {@link Single} emitting the RestResponse<Void, AsyncInputStream> object
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link Maybe&lt;AsyncInputStream&gt;} object if successful.
      */
     public Maybe<AsyncInputStream> getFileLargeAsync() {
         return getFileLargeWithRestResponseAsync()
@@ -184,9 +184,9 @@ public class FilesImpl implements Files {
     /**
      * Get empty file.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @throws ErrorException thrown if the request is rejected by server
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the AsyncInputStream object if successful.
      */
     public AsyncInputStream getEmptyFile() {
@@ -197,8 +197,8 @@ public class FilesImpl implements Files {
      * Get empty file.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceFuture} object
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link ServiceFuture&lt;AsyncInputStream&gt;} object.
      */
     public ServiceFuture<AsyncInputStream> getEmptyFileAsync(final ServiceCallback<AsyncInputStream> serviceCallback) {
         return ServiceFuture.fromBody(getEmptyFileAsync(), serviceCallback);
@@ -207,7 +207,7 @@ public class FilesImpl implements Files {
     /**
      * Get empty file.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, AsyncInputStream&gt;&gt;} object if successful.
      */
     public Single<RestResponse<Void, AsyncInputStream>> getEmptyFileWithRestResponseAsync() {
@@ -217,8 +217,8 @@ public class FilesImpl implements Files {
     /**
      * Get empty file.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return a {@link Single} emitting the RestResponse<Void, AsyncInputStream> object
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link Maybe&lt;AsyncInputStream&gt;} object if successful.
      */
     public Maybe<AsyncInputStream> getEmptyFileAsync() {
         return getEmptyFileWithRestResponseAsync()

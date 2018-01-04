@@ -39,7 +39,7 @@ public class ResourceCollection {
     /**
      * Get the productresource value.
      *
-     * @return the productresource value
+     * @return the productresource value.
      */
     public FlattenedProduct productresource() {
         return this.productresource;
@@ -48,7 +48,7 @@ public class ResourceCollection {
     /**
      * Set the productresource value.
      *
-     * @param productresource the productresource value to set
+     * @param productresource the productresource value to set.
      * @return the ResourceCollection object itself.
      */
     public ResourceCollection withProductresource(FlattenedProduct productresource) {
@@ -59,7 +59,7 @@ public class ResourceCollection {
     /**
      * Get the arrayofresources value.
      *
-     * @return the arrayofresources value
+     * @return the arrayofresources value.
      */
     public List<FlattenedProduct> arrayofresources() {
         return this.arrayofresources;
@@ -68,7 +68,7 @@ public class ResourceCollection {
     /**
      * Set the arrayofresources value.
      *
-     * @param arrayofresources the arrayofresources value to set
+     * @param arrayofresources the arrayofresources value to set.
      * @return the ResourceCollection object itself.
      */
     public ResourceCollection withArrayofresources(List<FlattenedProduct> arrayofresources) {
@@ -79,7 +79,7 @@ public class ResourceCollection {
     /**
      * Get the dictionaryofresources value.
      *
-     * @return the dictionaryofresources value
+     * @return the dictionaryofresources value.
      */
     public Map<String, FlattenedProduct> dictionaryofresources() {
         return this.dictionaryofresources;
@@ -88,7 +88,7 @@ public class ResourceCollection {
     /**
      * Set the dictionaryofresources value.
      *
-     * @param dictionaryofresources the dictionaryofresources value to set
+     * @param dictionaryofresources the dictionaryofresources value to set.
      * @return the ResourceCollection object itself.
      */
     public ResourceCollection withDictionaryofresources(Map<String, FlattenedProduct> dictionaryofresources) {

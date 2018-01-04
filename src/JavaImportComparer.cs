@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace AutoRest.Java.DanModel
+namespace AutoRest.Java
 {
     public class JavaImportComparer : IComparer<string>
     {

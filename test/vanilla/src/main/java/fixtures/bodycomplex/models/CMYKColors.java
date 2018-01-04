@@ -41,8 +41,8 @@ public final class CMYKColors extends ExpandableStringEnum<CMYKColors> {
     /**
      * Creates or finds a CMYKColors from its string representation.
      *
-     * @param name a name to look for
-     * @return the corresponding CMYKColors
+     * @param name a name to look for.
+     * @return the corresponding CMYKColors.
      */
     @JsonCreator
     public static CMYKColors fromString(String name) {
@@ -50,7 +50,7 @@ public final class CMYKColors extends ExpandableStringEnum<CMYKColors> {
     }
 
     /**
-     * @return known CMYKColors values
+     * @return known CMYKColors values.
      */
     public static Collection<CMYKColors> values() {
         return values(CMYKColors.class);

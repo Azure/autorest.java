@@ -28,7 +28,7 @@ public class HeaderResponseDatetimeRfc1123Headers {
     /**
      * Get the value value.
      *
-     * @return the value value
+     * @return the value value.
      */
     public DateTime value() {
         if (this.value == null) {
@@ -40,7 +40,7 @@ public class HeaderResponseDatetimeRfc1123Headers {
     /**
      * Set the value value.
      *
-     * @param value the value value to set
+     * @param value the value value to set.
      * @return the HeaderResponseDatetimeRfc1123Headers object itself.
      */
     public HeaderResponseDatetimeRfc1123Headers withValue(DateTime value) {

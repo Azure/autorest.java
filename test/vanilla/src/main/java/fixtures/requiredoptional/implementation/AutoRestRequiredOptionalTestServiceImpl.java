@@ -39,7 +39,7 @@ public class AutoRestRequiredOptionalTestServiceImpl extends ServiceClient imple
      * Sets number of items to skip.
      *
      * @param requiredGlobalPath the requiredGlobalPath value.
-     * @return the service client itself
+     * @return the service client itself.
      */
     public AutoRestRequiredOptionalTestServiceImpl withRequiredGlobalPath(String requiredGlobalPath) {
         this.requiredGlobalPath = requiredGlobalPath;
@@ -64,7 +64,7 @@ public class AutoRestRequiredOptionalTestServiceImpl extends ServiceClient imple
      * Sets number of items to skip.
      *
      * @param requiredGlobalQuery the requiredGlobalQuery value.
-     * @return the service client itself
+     * @return the service client itself.
      */
     public AutoRestRequiredOptionalTestServiceImpl withRequiredGlobalQuery(String requiredGlobalQuery) {
         this.requiredGlobalQuery = requiredGlobalQuery;
@@ -89,7 +89,7 @@ public class AutoRestRequiredOptionalTestServiceImpl extends ServiceClient imple
      * Sets number of items to skip.
      *
      * @param optionalGlobalQuery the optionalGlobalQuery value.
-     * @return the service client itself
+     * @return the service client itself.
      */
     public AutoRestRequiredOptionalTestServiceImpl withOptionalGlobalQuery(int optionalGlobalQuery) {
         this.optionalGlobalQuery = optionalGlobalQuery;

@@ -28,9 +28,9 @@ public interface HttpClientFailures {
     /**
      * Return 400 status code - should be represented in the client as an error.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @throws ErrorException thrown if the request is rejected by server
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the Error object if successful.
      */
     Error head400();
@@ -39,23 +39,15 @@ public interface HttpClientFailures {
      * Return 400 status code - should be represented in the client as an error.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceFuture&lt;Error&gt;} object
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link ServiceFuture&lt;Error&gt;} object.
      */
     ServiceFuture<Error> head400Async(final ServiceCallback<Error> serviceCallback);
 
     /**
      * Return 400 status code - should be represented in the client as an error.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Maybe&lt;Error&gt;} object if successful.
-     */
-    Maybe<Error> head400Async();
-
-    /**
-     * Return 400 status code - should be represented in the client as an error.
-     *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, Error&gt;&gt;} object if successful.
      */
     Single<RestResponse<Void, Error>> head400WithRestResponseAsync();
@@ -63,9 +55,17 @@ public interface HttpClientFailures {
     /**
      * Return 400 status code - should be represented in the client as an error.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @throws ErrorException thrown if the request is rejected by server
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link Maybe&lt;Error&gt;} object if successful.
+     */
+    Maybe<Error> head400Async();
+
+    /**
+     * Return 400 status code - should be represented in the client as an error.
+     *
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the Error object if successful.
      */
     Error get400();
@@ -74,23 +74,15 @@ public interface HttpClientFailures {
      * Return 400 status code - should be represented in the client as an error.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceFuture&lt;Error&gt;} object
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link ServiceFuture&lt;Error&gt;} object.
      */
     ServiceFuture<Error> get400Async(final ServiceCallback<Error> serviceCallback);
 
     /**
      * Return 400 status code - should be represented in the client as an error.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Maybe&lt;Error&gt;} object if successful.
-     */
-    Maybe<Error> get400Async();
-
-    /**
-     * Return 400 status code - should be represented in the client as an error.
-     *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, Error&gt;&gt;} object if successful.
      */
     Single<RestResponse<Void, Error>> get400WithRestResponseAsync();
@@ -98,9 +90,17 @@ public interface HttpClientFailures {
     /**
      * Return 400 status code - should be represented in the client as an error.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @throws ErrorException thrown if the request is rejected by server
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link Maybe&lt;Error&gt;} object if successful.
+     */
+    Maybe<Error> get400Async();
+
+    /**
+     * Return 400 status code - should be represented in the client as an error.
+     *
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the Error object if successful.
      */
     Error put400();
@@ -109,23 +109,15 @@ public interface HttpClientFailures {
      * Return 400 status code - should be represented in the client as an error.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceFuture&lt;Error&gt;} object
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link ServiceFuture&lt;Error&gt;} object.
      */
     ServiceFuture<Error> put400Async(final ServiceCallback<Error> serviceCallback);
 
     /**
      * Return 400 status code - should be represented in the client as an error.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Maybe&lt;Error&gt;} object if successful.
-     */
-    Maybe<Error> put400Async();
-
-    /**
-     * Return 400 status code - should be represented in the client as an error.
-     *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, Error&gt;&gt;} object if successful.
      */
     Single<RestResponse<Void, Error>> put400WithRestResponseAsync();
@@ -133,10 +125,18 @@ public interface HttpClientFailures {
     /**
      * Return 400 status code - should be represented in the client as an error.
      *
-     * @param booleanValue Simple boolean value true
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @throws ErrorException thrown if the request is rejected by server
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link Maybe&lt;Error&gt;} object if successful.
+     */
+    Maybe<Error> put400Async();
+
+    /**
+     * Return 400 status code - should be represented in the client as an error.
+     *
+     * @param booleanValue Simple boolean value true.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the Error object if successful.
      */
     Error put400(Boolean booleanValue);
@@ -144,27 +144,18 @@ public interface HttpClientFailures {
     /**
      * Return 400 status code - should be represented in the client as an error.
      *
-     * @param booleanValue Simple boolean value true
+     * @param booleanValue Simple boolean value true.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceFuture&lt;Error&gt;} object
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link ServiceFuture&lt;Error&gt;} object.
      */
     ServiceFuture<Error> put400Async(Boolean booleanValue, final ServiceCallback<Error> serviceCallback);
 
     /**
      * Return 400 status code - should be represented in the client as an error.
      *
-     * @param booleanValue Simple boolean value true
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Maybe&lt;Error&gt;} object if successful.
-     */
-    Maybe<Error> put400Async(Boolean booleanValue);
-
-    /**
-     * Return 400 status code - should be represented in the client as an error.
-     *
-     * @param booleanValue Simple boolean value true
-     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @param booleanValue Simple boolean value true.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, Error&gt;&gt;} object if successful.
      */
     Single<RestResponse<Void, Error>> put400WithRestResponseAsync(Boolean booleanValue);
@@ -172,9 +163,18 @@ public interface HttpClientFailures {
     /**
      * Return 400 status code - should be represented in the client as an error.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @throws ErrorException thrown if the request is rejected by server
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
+     * @param booleanValue Simple boolean value true.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link Maybe&lt;Error&gt;} object if successful.
+     */
+    Maybe<Error> put400Async(Boolean booleanValue);
+
+    /**
+     * Return 400 status code - should be represented in the client as an error.
+     *
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the Error object if successful.
      */
     Error patch400();
@@ -183,23 +183,15 @@ public interface HttpClientFailures {
      * Return 400 status code - should be represented in the client as an error.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceFuture&lt;Error&gt;} object
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link ServiceFuture&lt;Error&gt;} object.
      */
     ServiceFuture<Error> patch400Async(final ServiceCallback<Error> serviceCallback);
 
     /**
      * Return 400 status code - should be represented in the client as an error.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Maybe&lt;Error&gt;} object if successful.
-     */
-    Maybe<Error> patch400Async();
-
-    /**
-     * Return 400 status code - should be represented in the client as an error.
-     *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, Error&gt;&gt;} object if successful.
      */
     Single<RestResponse<Void, Error>> patch400WithRestResponseAsync();
@@ -207,10 +199,18 @@ public interface HttpClientFailures {
     /**
      * Return 400 status code - should be represented in the client as an error.
      *
-     * @param booleanValue Simple boolean value true
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @throws ErrorException thrown if the request is rejected by server
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link Maybe&lt;Error&gt;} object if successful.
+     */
+    Maybe<Error> patch400Async();
+
+    /**
+     * Return 400 status code - should be represented in the client as an error.
+     *
+     * @param booleanValue Simple boolean value true.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the Error object if successful.
      */
     Error patch400(Boolean booleanValue);
@@ -218,27 +218,18 @@ public interface HttpClientFailures {
     /**
      * Return 400 status code - should be represented in the client as an error.
      *
-     * @param booleanValue Simple boolean value true
+     * @param booleanValue Simple boolean value true.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceFuture&lt;Error&gt;} object
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link ServiceFuture&lt;Error&gt;} object.
      */
     ServiceFuture<Error> patch400Async(Boolean booleanValue, final ServiceCallback<Error> serviceCallback);
 
     /**
      * Return 400 status code - should be represented in the client as an error.
      *
-     * @param booleanValue Simple boolean value true
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Maybe&lt;Error&gt;} object if successful.
-     */
-    Maybe<Error> patch400Async(Boolean booleanValue);
-
-    /**
-     * Return 400 status code - should be represented in the client as an error.
-     *
-     * @param booleanValue Simple boolean value true
-     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @param booleanValue Simple boolean value true.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, Error&gt;&gt;} object if successful.
      */
     Single<RestResponse<Void, Error>> patch400WithRestResponseAsync(Boolean booleanValue);
@@ -246,9 +237,18 @@ public interface HttpClientFailures {
     /**
      * Return 400 status code - should be represented in the client as an error.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @throws ErrorException thrown if the request is rejected by server
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
+     * @param booleanValue Simple boolean value true.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link Maybe&lt;Error&gt;} object if successful.
+     */
+    Maybe<Error> patch400Async(Boolean booleanValue);
+
+    /**
+     * Return 400 status code - should be represented in the client as an error.
+     *
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the Error object if successful.
      */
     Error post400();
@@ -257,23 +257,15 @@ public interface HttpClientFailures {
      * Return 400 status code - should be represented in the client as an error.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceFuture&lt;Error&gt;} object
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link ServiceFuture&lt;Error&gt;} object.
      */
     ServiceFuture<Error> post400Async(final ServiceCallback<Error> serviceCallback);
 
     /**
      * Return 400 status code - should be represented in the client as an error.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Maybe&lt;Error&gt;} object if successful.
-     */
-    Maybe<Error> post400Async();
-
-    /**
-     * Return 400 status code - should be represented in the client as an error.
-     *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, Error&gt;&gt;} object if successful.
      */
     Single<RestResponse<Void, Error>> post400WithRestResponseAsync();
@@ -281,10 +273,18 @@ public interface HttpClientFailures {
     /**
      * Return 400 status code - should be represented in the client as an error.
      *
-     * @param booleanValue Simple boolean value true
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @throws ErrorException thrown if the request is rejected by server
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link Maybe&lt;Error&gt;} object if successful.
+     */
+    Maybe<Error> post400Async();
+
+    /**
+     * Return 400 status code - should be represented in the client as an error.
+     *
+     * @param booleanValue Simple boolean value true.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the Error object if successful.
      */
     Error post400(Boolean booleanValue);
@@ -292,27 +292,18 @@ public interface HttpClientFailures {
     /**
      * Return 400 status code - should be represented in the client as an error.
      *
-     * @param booleanValue Simple boolean value true
+     * @param booleanValue Simple boolean value true.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceFuture&lt;Error&gt;} object
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link ServiceFuture&lt;Error&gt;} object.
      */
     ServiceFuture<Error> post400Async(Boolean booleanValue, final ServiceCallback<Error> serviceCallback);
 
     /**
      * Return 400 status code - should be represented in the client as an error.
      *
-     * @param booleanValue Simple boolean value true
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Maybe&lt;Error&gt;} object if successful.
-     */
-    Maybe<Error> post400Async(Boolean booleanValue);
-
-    /**
-     * Return 400 status code - should be represented in the client as an error.
-     *
-     * @param booleanValue Simple boolean value true
-     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @param booleanValue Simple boolean value true.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, Error&gt;&gt;} object if successful.
      */
     Single<RestResponse<Void, Error>> post400WithRestResponseAsync(Boolean booleanValue);
@@ -320,9 +311,18 @@ public interface HttpClientFailures {
     /**
      * Return 400 status code - should be represented in the client as an error.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @throws ErrorException thrown if the request is rejected by server
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
+     * @param booleanValue Simple boolean value true.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link Maybe&lt;Error&gt;} object if successful.
+     */
+    Maybe<Error> post400Async(Boolean booleanValue);
+
+    /**
+     * Return 400 status code - should be represented in the client as an error.
+     *
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the Error object if successful.
      */
     Error delete400();
@@ -331,23 +331,15 @@ public interface HttpClientFailures {
      * Return 400 status code - should be represented in the client as an error.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceFuture&lt;Error&gt;} object
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link ServiceFuture&lt;Error&gt;} object.
      */
     ServiceFuture<Error> delete400Async(final ServiceCallback<Error> serviceCallback);
 
     /**
      * Return 400 status code - should be represented in the client as an error.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Maybe&lt;Error&gt;} object if successful.
-     */
-    Maybe<Error> delete400Async();
-
-    /**
-     * Return 400 status code - should be represented in the client as an error.
-     *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, Error&gt;&gt;} object if successful.
      */
     Single<RestResponse<Void, Error>> delete400WithRestResponseAsync();
@@ -355,10 +347,18 @@ public interface HttpClientFailures {
     /**
      * Return 400 status code - should be represented in the client as an error.
      *
-     * @param booleanValue Simple boolean value true
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @throws ErrorException thrown if the request is rejected by server
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link Maybe&lt;Error&gt;} object if successful.
+     */
+    Maybe<Error> delete400Async();
+
+    /**
+     * Return 400 status code - should be represented in the client as an error.
+     *
+     * @param booleanValue Simple boolean value true.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the Error object if successful.
      */
     Error delete400(Boolean booleanValue);
@@ -366,37 +366,37 @@ public interface HttpClientFailures {
     /**
      * Return 400 status code - should be represented in the client as an error.
      *
-     * @param booleanValue Simple boolean value true
+     * @param booleanValue Simple boolean value true.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceFuture&lt;Error&gt;} object
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link ServiceFuture&lt;Error&gt;} object.
      */
     ServiceFuture<Error> delete400Async(Boolean booleanValue, final ServiceCallback<Error> serviceCallback);
 
     /**
      * Return 400 status code - should be represented in the client as an error.
      *
-     * @param booleanValue Simple boolean value true
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Maybe&lt;Error&gt;} object if successful.
-     */
-    Maybe<Error> delete400Async(Boolean booleanValue);
-
-    /**
-     * Return 400 status code - should be represented in the client as an error.
-     *
-     * @param booleanValue Simple boolean value true
-     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @param booleanValue Simple boolean value true.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, Error&gt;&gt;} object if successful.
      */
     Single<RestResponse<Void, Error>> delete400WithRestResponseAsync(Boolean booleanValue);
 
     /**
+     * Return 400 status code - should be represented in the client as an error.
+     *
+     * @param booleanValue Simple boolean value true.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link Maybe&lt;Error&gt;} object if successful.
+     */
+    Maybe<Error> delete400Async(Boolean booleanValue);
+
+    /**
      * Return 401 status code - should be represented in the client as an error.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @throws ErrorException thrown if the request is rejected by server
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the Error object if successful.
      */
     Error head401();
@@ -405,33 +405,33 @@ public interface HttpClientFailures {
      * Return 401 status code - should be represented in the client as an error.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceFuture&lt;Error&gt;} object
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link ServiceFuture&lt;Error&gt;} object.
      */
     ServiceFuture<Error> head401Async(final ServiceCallback<Error> serviceCallback);
 
     /**
      * Return 401 status code - should be represented in the client as an error.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Maybe&lt;Error&gt;} object if successful.
-     */
-    Maybe<Error> head401Async();
-
-    /**
-     * Return 401 status code - should be represented in the client as an error.
-     *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, Error&gt;&gt;} object if successful.
      */
     Single<RestResponse<Void, Error>> head401WithRestResponseAsync();
 
     /**
+     * Return 401 status code - should be represented in the client as an error.
+     *
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link Maybe&lt;Error&gt;} object if successful.
+     */
+    Maybe<Error> head401Async();
+
+    /**
      * Return 402 status code - should be represented in the client as an error.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @throws ErrorException thrown if the request is rejected by server
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the Error object if successful.
      */
     Error get402();
@@ -440,33 +440,33 @@ public interface HttpClientFailures {
      * Return 402 status code - should be represented in the client as an error.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceFuture&lt;Error&gt;} object
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link ServiceFuture&lt;Error&gt;} object.
      */
     ServiceFuture<Error> get402Async(final ServiceCallback<Error> serviceCallback);
 
     /**
      * Return 402 status code - should be represented in the client as an error.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Maybe&lt;Error&gt;} object if successful.
-     */
-    Maybe<Error> get402Async();
-
-    /**
-     * Return 402 status code - should be represented in the client as an error.
-     *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, Error&gt;&gt;} object if successful.
      */
     Single<RestResponse<Void, Error>> get402WithRestResponseAsync();
 
     /**
+     * Return 402 status code - should be represented in the client as an error.
+     *
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link Maybe&lt;Error&gt;} object if successful.
+     */
+    Maybe<Error> get402Async();
+
+    /**
      * Return 403 status code - should be represented in the client as an error.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @throws ErrorException thrown if the request is rejected by server
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the Error object if successful.
      */
     Error get403();
@@ -475,33 +475,33 @@ public interface HttpClientFailures {
      * Return 403 status code - should be represented in the client as an error.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceFuture&lt;Error&gt;} object
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link ServiceFuture&lt;Error&gt;} object.
      */
     ServiceFuture<Error> get403Async(final ServiceCallback<Error> serviceCallback);
 
     /**
      * Return 403 status code - should be represented in the client as an error.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Maybe&lt;Error&gt;} object if successful.
-     */
-    Maybe<Error> get403Async();
-
-    /**
-     * Return 403 status code - should be represented in the client as an error.
-     *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, Error&gt;&gt;} object if successful.
      */
     Single<RestResponse<Void, Error>> get403WithRestResponseAsync();
 
     /**
+     * Return 403 status code - should be represented in the client as an error.
+     *
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link Maybe&lt;Error&gt;} object if successful.
+     */
+    Maybe<Error> get403Async();
+
+    /**
      * Return 404 status code - should be represented in the client as an error.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @throws ErrorException thrown if the request is rejected by server
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the Error object if successful.
      */
     Error put404();
@@ -510,23 +510,15 @@ public interface HttpClientFailures {
      * Return 404 status code - should be represented in the client as an error.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceFuture&lt;Error&gt;} object
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link ServiceFuture&lt;Error&gt;} object.
      */
     ServiceFuture<Error> put404Async(final ServiceCallback<Error> serviceCallback);
 
     /**
      * Return 404 status code - should be represented in the client as an error.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Maybe&lt;Error&gt;} object if successful.
-     */
-    Maybe<Error> put404Async();
-
-    /**
-     * Return 404 status code - should be represented in the client as an error.
-     *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, Error&gt;&gt;} object if successful.
      */
     Single<RestResponse<Void, Error>> put404WithRestResponseAsync();
@@ -534,10 +526,18 @@ public interface HttpClientFailures {
     /**
      * Return 404 status code - should be represented in the client as an error.
      *
-     * @param booleanValue Simple boolean value true
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @throws ErrorException thrown if the request is rejected by server
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link Maybe&lt;Error&gt;} object if successful.
+     */
+    Maybe<Error> put404Async();
+
+    /**
+     * Return 404 status code - should be represented in the client as an error.
+     *
+     * @param booleanValue Simple boolean value true.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the Error object if successful.
      */
     Error put404(Boolean booleanValue);
@@ -545,37 +545,37 @@ public interface HttpClientFailures {
     /**
      * Return 404 status code - should be represented in the client as an error.
      *
-     * @param booleanValue Simple boolean value true
+     * @param booleanValue Simple boolean value true.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceFuture&lt;Error&gt;} object
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link ServiceFuture&lt;Error&gt;} object.
      */
     ServiceFuture<Error> put404Async(Boolean booleanValue, final ServiceCallback<Error> serviceCallback);
 
     /**
      * Return 404 status code - should be represented in the client as an error.
      *
-     * @param booleanValue Simple boolean value true
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Maybe&lt;Error&gt;} object if successful.
-     */
-    Maybe<Error> put404Async(Boolean booleanValue);
-
-    /**
-     * Return 404 status code - should be represented in the client as an error.
-     *
-     * @param booleanValue Simple boolean value true
-     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @param booleanValue Simple boolean value true.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, Error&gt;&gt;} object if successful.
      */
     Single<RestResponse<Void, Error>> put404WithRestResponseAsync(Boolean booleanValue);
 
     /**
+     * Return 404 status code - should be represented in the client as an error.
+     *
+     * @param booleanValue Simple boolean value true.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link Maybe&lt;Error&gt;} object if successful.
+     */
+    Maybe<Error> put404Async(Boolean booleanValue);
+
+    /**
      * Return 405 status code - should be represented in the client as an error.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @throws ErrorException thrown if the request is rejected by server
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the Error object if successful.
      */
     Error patch405();
@@ -584,23 +584,15 @@ public interface HttpClientFailures {
      * Return 405 status code - should be represented in the client as an error.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceFuture&lt;Error&gt;} object
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link ServiceFuture&lt;Error&gt;} object.
      */
     ServiceFuture<Error> patch405Async(final ServiceCallback<Error> serviceCallback);
 
     /**
      * Return 405 status code - should be represented in the client as an error.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Maybe&lt;Error&gt;} object if successful.
-     */
-    Maybe<Error> patch405Async();
-
-    /**
-     * Return 405 status code - should be represented in the client as an error.
-     *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, Error&gt;&gt;} object if successful.
      */
     Single<RestResponse<Void, Error>> patch405WithRestResponseAsync();
@@ -608,10 +600,18 @@ public interface HttpClientFailures {
     /**
      * Return 405 status code - should be represented in the client as an error.
      *
-     * @param booleanValue Simple boolean value true
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @throws ErrorException thrown if the request is rejected by server
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link Maybe&lt;Error&gt;} object if successful.
+     */
+    Maybe<Error> patch405Async();
+
+    /**
+     * Return 405 status code - should be represented in the client as an error.
+     *
+     * @param booleanValue Simple boolean value true.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the Error object if successful.
      */
     Error patch405(Boolean booleanValue);
@@ -619,37 +619,37 @@ public interface HttpClientFailures {
     /**
      * Return 405 status code - should be represented in the client as an error.
      *
-     * @param booleanValue Simple boolean value true
+     * @param booleanValue Simple boolean value true.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceFuture&lt;Error&gt;} object
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link ServiceFuture&lt;Error&gt;} object.
      */
     ServiceFuture<Error> patch405Async(Boolean booleanValue, final ServiceCallback<Error> serviceCallback);
 
     /**
      * Return 405 status code - should be represented in the client as an error.
      *
-     * @param booleanValue Simple boolean value true
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Maybe&lt;Error&gt;} object if successful.
-     */
-    Maybe<Error> patch405Async(Boolean booleanValue);
-
-    /**
-     * Return 405 status code - should be represented in the client as an error.
-     *
-     * @param booleanValue Simple boolean value true
-     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @param booleanValue Simple boolean value true.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, Error&gt;&gt;} object if successful.
      */
     Single<RestResponse<Void, Error>> patch405WithRestResponseAsync(Boolean booleanValue);
 
     /**
+     * Return 405 status code - should be represented in the client as an error.
+     *
+     * @param booleanValue Simple boolean value true.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link Maybe&lt;Error&gt;} object if successful.
+     */
+    Maybe<Error> patch405Async(Boolean booleanValue);
+
+    /**
      * Return 406 status code - should be represented in the client as an error.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @throws ErrorException thrown if the request is rejected by server
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the Error object if successful.
      */
     Error post406();
@@ -658,23 +658,15 @@ public interface HttpClientFailures {
      * Return 406 status code - should be represented in the client as an error.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceFuture&lt;Error&gt;} object
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link ServiceFuture&lt;Error&gt;} object.
      */
     ServiceFuture<Error> post406Async(final ServiceCallback<Error> serviceCallback);
 
     /**
      * Return 406 status code - should be represented in the client as an error.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Maybe&lt;Error&gt;} object if successful.
-     */
-    Maybe<Error> post406Async();
-
-    /**
-     * Return 406 status code - should be represented in the client as an error.
-     *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, Error&gt;&gt;} object if successful.
      */
     Single<RestResponse<Void, Error>> post406WithRestResponseAsync();
@@ -682,10 +674,18 @@ public interface HttpClientFailures {
     /**
      * Return 406 status code - should be represented in the client as an error.
      *
-     * @param booleanValue Simple boolean value true
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @throws ErrorException thrown if the request is rejected by server
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link Maybe&lt;Error&gt;} object if successful.
+     */
+    Maybe<Error> post406Async();
+
+    /**
+     * Return 406 status code - should be represented in the client as an error.
+     *
+     * @param booleanValue Simple boolean value true.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the Error object if successful.
      */
     Error post406(Boolean booleanValue);
@@ -693,37 +693,37 @@ public interface HttpClientFailures {
     /**
      * Return 406 status code - should be represented in the client as an error.
      *
-     * @param booleanValue Simple boolean value true
+     * @param booleanValue Simple boolean value true.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceFuture&lt;Error&gt;} object
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link ServiceFuture&lt;Error&gt;} object.
      */
     ServiceFuture<Error> post406Async(Boolean booleanValue, final ServiceCallback<Error> serviceCallback);
 
     /**
      * Return 406 status code - should be represented in the client as an error.
      *
-     * @param booleanValue Simple boolean value true
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Maybe&lt;Error&gt;} object if successful.
-     */
-    Maybe<Error> post406Async(Boolean booleanValue);
-
-    /**
-     * Return 406 status code - should be represented in the client as an error.
-     *
-     * @param booleanValue Simple boolean value true
-     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @param booleanValue Simple boolean value true.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, Error&gt;&gt;} object if successful.
      */
     Single<RestResponse<Void, Error>> post406WithRestResponseAsync(Boolean booleanValue);
 
     /**
+     * Return 406 status code - should be represented in the client as an error.
+     *
+     * @param booleanValue Simple boolean value true.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link Maybe&lt;Error&gt;} object if successful.
+     */
+    Maybe<Error> post406Async(Boolean booleanValue);
+
+    /**
      * Return 407 status code - should be represented in the client as an error.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @throws ErrorException thrown if the request is rejected by server
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the Error object if successful.
      */
     Error delete407();
@@ -732,23 +732,15 @@ public interface HttpClientFailures {
      * Return 407 status code - should be represented in the client as an error.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceFuture&lt;Error&gt;} object
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link ServiceFuture&lt;Error&gt;} object.
      */
     ServiceFuture<Error> delete407Async(final ServiceCallback<Error> serviceCallback);
 
     /**
      * Return 407 status code - should be represented in the client as an error.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Maybe&lt;Error&gt;} object if successful.
-     */
-    Maybe<Error> delete407Async();
-
-    /**
-     * Return 407 status code - should be represented in the client as an error.
-     *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, Error&gt;&gt;} object if successful.
      */
     Single<RestResponse<Void, Error>> delete407WithRestResponseAsync();
@@ -756,10 +748,18 @@ public interface HttpClientFailures {
     /**
      * Return 407 status code - should be represented in the client as an error.
      *
-     * @param booleanValue Simple boolean value true
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @throws ErrorException thrown if the request is rejected by server
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link Maybe&lt;Error&gt;} object if successful.
+     */
+    Maybe<Error> delete407Async();
+
+    /**
+     * Return 407 status code - should be represented in the client as an error.
+     *
+     * @param booleanValue Simple boolean value true.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the Error object if successful.
      */
     Error delete407(Boolean booleanValue);
@@ -767,37 +767,37 @@ public interface HttpClientFailures {
     /**
      * Return 407 status code - should be represented in the client as an error.
      *
-     * @param booleanValue Simple boolean value true
+     * @param booleanValue Simple boolean value true.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceFuture&lt;Error&gt;} object
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link ServiceFuture&lt;Error&gt;} object.
      */
     ServiceFuture<Error> delete407Async(Boolean booleanValue, final ServiceCallback<Error> serviceCallback);
 
     /**
      * Return 407 status code - should be represented in the client as an error.
      *
-     * @param booleanValue Simple boolean value true
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Maybe&lt;Error&gt;} object if successful.
-     */
-    Maybe<Error> delete407Async(Boolean booleanValue);
-
-    /**
-     * Return 407 status code - should be represented in the client as an error.
-     *
-     * @param booleanValue Simple boolean value true
-     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @param booleanValue Simple boolean value true.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, Error&gt;&gt;} object if successful.
      */
     Single<RestResponse<Void, Error>> delete407WithRestResponseAsync(Boolean booleanValue);
 
     /**
+     * Return 407 status code - should be represented in the client as an error.
+     *
+     * @param booleanValue Simple boolean value true.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link Maybe&lt;Error&gt;} object if successful.
+     */
+    Maybe<Error> delete407Async(Boolean booleanValue);
+
+    /**
      * Return 409 status code - should be represented in the client as an error.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @throws ErrorException thrown if the request is rejected by server
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the Error object if successful.
      */
     Error put409();
@@ -806,23 +806,15 @@ public interface HttpClientFailures {
      * Return 409 status code - should be represented in the client as an error.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceFuture&lt;Error&gt;} object
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link ServiceFuture&lt;Error&gt;} object.
      */
     ServiceFuture<Error> put409Async(final ServiceCallback<Error> serviceCallback);
 
     /**
      * Return 409 status code - should be represented in the client as an error.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Maybe&lt;Error&gt;} object if successful.
-     */
-    Maybe<Error> put409Async();
-
-    /**
-     * Return 409 status code - should be represented in the client as an error.
-     *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, Error&gt;&gt;} object if successful.
      */
     Single<RestResponse<Void, Error>> put409WithRestResponseAsync();
@@ -830,10 +822,18 @@ public interface HttpClientFailures {
     /**
      * Return 409 status code - should be represented in the client as an error.
      *
-     * @param booleanValue Simple boolean value true
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @throws ErrorException thrown if the request is rejected by server
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link Maybe&lt;Error&gt;} object if successful.
+     */
+    Maybe<Error> put409Async();
+
+    /**
+     * Return 409 status code - should be represented in the client as an error.
+     *
+     * @param booleanValue Simple boolean value true.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the Error object if successful.
      */
     Error put409(Boolean booleanValue);
@@ -841,37 +841,37 @@ public interface HttpClientFailures {
     /**
      * Return 409 status code - should be represented in the client as an error.
      *
-     * @param booleanValue Simple boolean value true
+     * @param booleanValue Simple boolean value true.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceFuture&lt;Error&gt;} object
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link ServiceFuture&lt;Error&gt;} object.
      */
     ServiceFuture<Error> put409Async(Boolean booleanValue, final ServiceCallback<Error> serviceCallback);
 
     /**
      * Return 409 status code - should be represented in the client as an error.
      *
-     * @param booleanValue Simple boolean value true
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Maybe&lt;Error&gt;} object if successful.
-     */
-    Maybe<Error> put409Async(Boolean booleanValue);
-
-    /**
-     * Return 409 status code - should be represented in the client as an error.
-     *
-     * @param booleanValue Simple boolean value true
-     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @param booleanValue Simple boolean value true.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, Error&gt;&gt;} object if successful.
      */
     Single<RestResponse<Void, Error>> put409WithRestResponseAsync(Boolean booleanValue);
 
     /**
+     * Return 409 status code - should be represented in the client as an error.
+     *
+     * @param booleanValue Simple boolean value true.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link Maybe&lt;Error&gt;} object if successful.
+     */
+    Maybe<Error> put409Async(Boolean booleanValue);
+
+    /**
      * Return 410 status code - should be represented in the client as an error.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @throws ErrorException thrown if the request is rejected by server
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the Error object if successful.
      */
     Error head410();
@@ -880,33 +880,33 @@ public interface HttpClientFailures {
      * Return 410 status code - should be represented in the client as an error.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceFuture&lt;Error&gt;} object
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link ServiceFuture&lt;Error&gt;} object.
      */
     ServiceFuture<Error> head410Async(final ServiceCallback<Error> serviceCallback);
 
     /**
      * Return 410 status code - should be represented in the client as an error.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Maybe&lt;Error&gt;} object if successful.
-     */
-    Maybe<Error> head410Async();
-
-    /**
-     * Return 410 status code - should be represented in the client as an error.
-     *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, Error&gt;&gt;} object if successful.
      */
     Single<RestResponse<Void, Error>> head410WithRestResponseAsync();
 
     /**
+     * Return 410 status code - should be represented in the client as an error.
+     *
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link Maybe&lt;Error&gt;} object if successful.
+     */
+    Maybe<Error> head410Async();
+
+    /**
      * Return 411 status code - should be represented in the client as an error.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @throws ErrorException thrown if the request is rejected by server
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the Error object if successful.
      */
     Error get411();
@@ -915,33 +915,33 @@ public interface HttpClientFailures {
      * Return 411 status code - should be represented in the client as an error.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceFuture&lt;Error&gt;} object
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link ServiceFuture&lt;Error&gt;} object.
      */
     ServiceFuture<Error> get411Async(final ServiceCallback<Error> serviceCallback);
 
     /**
      * Return 411 status code - should be represented in the client as an error.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Maybe&lt;Error&gt;} object if successful.
-     */
-    Maybe<Error> get411Async();
-
-    /**
-     * Return 411 status code - should be represented in the client as an error.
-     *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, Error&gt;&gt;} object if successful.
      */
     Single<RestResponse<Void, Error>> get411WithRestResponseAsync();
 
     /**
+     * Return 411 status code - should be represented in the client as an error.
+     *
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link Maybe&lt;Error&gt;} object if successful.
+     */
+    Maybe<Error> get411Async();
+
+    /**
      * Return 412 status code - should be represented in the client as an error.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @throws ErrorException thrown if the request is rejected by server
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the Error object if successful.
      */
     Error get412();
@@ -950,33 +950,33 @@ public interface HttpClientFailures {
      * Return 412 status code - should be represented in the client as an error.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceFuture&lt;Error&gt;} object
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link ServiceFuture&lt;Error&gt;} object.
      */
     ServiceFuture<Error> get412Async(final ServiceCallback<Error> serviceCallback);
 
     /**
      * Return 412 status code - should be represented in the client as an error.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Maybe&lt;Error&gt;} object if successful.
-     */
-    Maybe<Error> get412Async();
-
-    /**
-     * Return 412 status code - should be represented in the client as an error.
-     *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, Error&gt;&gt;} object if successful.
      */
     Single<RestResponse<Void, Error>> get412WithRestResponseAsync();
 
     /**
+     * Return 412 status code - should be represented in the client as an error.
+     *
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link Maybe&lt;Error&gt;} object if successful.
+     */
+    Maybe<Error> get412Async();
+
+    /**
      * Return 413 status code - should be represented in the client as an error.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @throws ErrorException thrown if the request is rejected by server
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the Error object if successful.
      */
     Error put413();
@@ -985,23 +985,15 @@ public interface HttpClientFailures {
      * Return 413 status code - should be represented in the client as an error.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceFuture&lt;Error&gt;} object
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link ServiceFuture&lt;Error&gt;} object.
      */
     ServiceFuture<Error> put413Async(final ServiceCallback<Error> serviceCallback);
 
     /**
      * Return 413 status code - should be represented in the client as an error.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Maybe&lt;Error&gt;} object if successful.
-     */
-    Maybe<Error> put413Async();
-
-    /**
-     * Return 413 status code - should be represented in the client as an error.
-     *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, Error&gt;&gt;} object if successful.
      */
     Single<RestResponse<Void, Error>> put413WithRestResponseAsync();
@@ -1009,10 +1001,18 @@ public interface HttpClientFailures {
     /**
      * Return 413 status code - should be represented in the client as an error.
      *
-     * @param booleanValue Simple boolean value true
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @throws ErrorException thrown if the request is rejected by server
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link Maybe&lt;Error&gt;} object if successful.
+     */
+    Maybe<Error> put413Async();
+
+    /**
+     * Return 413 status code - should be represented in the client as an error.
+     *
+     * @param booleanValue Simple boolean value true.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the Error object if successful.
      */
     Error put413(Boolean booleanValue);
@@ -1020,37 +1020,37 @@ public interface HttpClientFailures {
     /**
      * Return 413 status code - should be represented in the client as an error.
      *
-     * @param booleanValue Simple boolean value true
+     * @param booleanValue Simple boolean value true.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceFuture&lt;Error&gt;} object
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link ServiceFuture&lt;Error&gt;} object.
      */
     ServiceFuture<Error> put413Async(Boolean booleanValue, final ServiceCallback<Error> serviceCallback);
 
     /**
      * Return 413 status code - should be represented in the client as an error.
      *
-     * @param booleanValue Simple boolean value true
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Maybe&lt;Error&gt;} object if successful.
-     */
-    Maybe<Error> put413Async(Boolean booleanValue);
-
-    /**
-     * Return 413 status code - should be represented in the client as an error.
-     *
-     * @param booleanValue Simple boolean value true
-     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @param booleanValue Simple boolean value true.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, Error&gt;&gt;} object if successful.
      */
     Single<RestResponse<Void, Error>> put413WithRestResponseAsync(Boolean booleanValue);
 
     /**
+     * Return 413 status code - should be represented in the client as an error.
+     *
+     * @param booleanValue Simple boolean value true.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link Maybe&lt;Error&gt;} object if successful.
+     */
+    Maybe<Error> put413Async(Boolean booleanValue);
+
+    /**
      * Return 414 status code - should be represented in the client as an error.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @throws ErrorException thrown if the request is rejected by server
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the Error object if successful.
      */
     Error patch414();
@@ -1059,23 +1059,15 @@ public interface HttpClientFailures {
      * Return 414 status code - should be represented in the client as an error.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceFuture&lt;Error&gt;} object
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link ServiceFuture&lt;Error&gt;} object.
      */
     ServiceFuture<Error> patch414Async(final ServiceCallback<Error> serviceCallback);
 
     /**
      * Return 414 status code - should be represented in the client as an error.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Maybe&lt;Error&gt;} object if successful.
-     */
-    Maybe<Error> patch414Async();
-
-    /**
-     * Return 414 status code - should be represented in the client as an error.
-     *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, Error&gt;&gt;} object if successful.
      */
     Single<RestResponse<Void, Error>> patch414WithRestResponseAsync();
@@ -1083,10 +1075,18 @@ public interface HttpClientFailures {
     /**
      * Return 414 status code - should be represented in the client as an error.
      *
-     * @param booleanValue Simple boolean value true
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @throws ErrorException thrown if the request is rejected by server
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link Maybe&lt;Error&gt;} object if successful.
+     */
+    Maybe<Error> patch414Async();
+
+    /**
+     * Return 414 status code - should be represented in the client as an error.
+     *
+     * @param booleanValue Simple boolean value true.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the Error object if successful.
      */
     Error patch414(Boolean booleanValue);
@@ -1094,37 +1094,37 @@ public interface HttpClientFailures {
     /**
      * Return 414 status code - should be represented in the client as an error.
      *
-     * @param booleanValue Simple boolean value true
+     * @param booleanValue Simple boolean value true.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceFuture&lt;Error&gt;} object
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link ServiceFuture&lt;Error&gt;} object.
      */
     ServiceFuture<Error> patch414Async(Boolean booleanValue, final ServiceCallback<Error> serviceCallback);
 
     /**
      * Return 414 status code - should be represented in the client as an error.
      *
-     * @param booleanValue Simple boolean value true
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Maybe&lt;Error&gt;} object if successful.
-     */
-    Maybe<Error> patch414Async(Boolean booleanValue);
-
-    /**
-     * Return 414 status code - should be represented in the client as an error.
-     *
-     * @param booleanValue Simple boolean value true
-     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @param booleanValue Simple boolean value true.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, Error&gt;&gt;} object if successful.
      */
     Single<RestResponse<Void, Error>> patch414WithRestResponseAsync(Boolean booleanValue);
 
     /**
+     * Return 414 status code - should be represented in the client as an error.
+     *
+     * @param booleanValue Simple boolean value true.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link Maybe&lt;Error&gt;} object if successful.
+     */
+    Maybe<Error> patch414Async(Boolean booleanValue);
+
+    /**
      * Return 415 status code - should be represented in the client as an error.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @throws ErrorException thrown if the request is rejected by server
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the Error object if successful.
      */
     Error post415();
@@ -1133,23 +1133,15 @@ public interface HttpClientFailures {
      * Return 415 status code - should be represented in the client as an error.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceFuture&lt;Error&gt;} object
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link ServiceFuture&lt;Error&gt;} object.
      */
     ServiceFuture<Error> post415Async(final ServiceCallback<Error> serviceCallback);
 
     /**
      * Return 415 status code - should be represented in the client as an error.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Maybe&lt;Error&gt;} object if successful.
-     */
-    Maybe<Error> post415Async();
-
-    /**
-     * Return 415 status code - should be represented in the client as an error.
-     *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, Error&gt;&gt;} object if successful.
      */
     Single<RestResponse<Void, Error>> post415WithRestResponseAsync();
@@ -1157,10 +1149,18 @@ public interface HttpClientFailures {
     /**
      * Return 415 status code - should be represented in the client as an error.
      *
-     * @param booleanValue Simple boolean value true
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @throws ErrorException thrown if the request is rejected by server
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link Maybe&lt;Error&gt;} object if successful.
+     */
+    Maybe<Error> post415Async();
+
+    /**
+     * Return 415 status code - should be represented in the client as an error.
+     *
+     * @param booleanValue Simple boolean value true.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the Error object if successful.
      */
     Error post415(Boolean booleanValue);
@@ -1168,37 +1168,37 @@ public interface HttpClientFailures {
     /**
      * Return 415 status code - should be represented in the client as an error.
      *
-     * @param booleanValue Simple boolean value true
+     * @param booleanValue Simple boolean value true.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceFuture&lt;Error&gt;} object
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link ServiceFuture&lt;Error&gt;} object.
      */
     ServiceFuture<Error> post415Async(Boolean booleanValue, final ServiceCallback<Error> serviceCallback);
 
     /**
      * Return 415 status code - should be represented in the client as an error.
      *
-     * @param booleanValue Simple boolean value true
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Maybe&lt;Error&gt;} object if successful.
-     */
-    Maybe<Error> post415Async(Boolean booleanValue);
-
-    /**
-     * Return 415 status code - should be represented in the client as an error.
-     *
-     * @param booleanValue Simple boolean value true
-     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @param booleanValue Simple boolean value true.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, Error&gt;&gt;} object if successful.
      */
     Single<RestResponse<Void, Error>> post415WithRestResponseAsync(Boolean booleanValue);
 
     /**
+     * Return 415 status code - should be represented in the client as an error.
+     *
+     * @param booleanValue Simple boolean value true.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link Maybe&lt;Error&gt;} object if successful.
+     */
+    Maybe<Error> post415Async(Boolean booleanValue);
+
+    /**
      * Return 416 status code - should be represented in the client as an error.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @throws ErrorException thrown if the request is rejected by server
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the Error object if successful.
      */
     Error get416();
@@ -1207,33 +1207,33 @@ public interface HttpClientFailures {
      * Return 416 status code - should be represented in the client as an error.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceFuture&lt;Error&gt;} object
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link ServiceFuture&lt;Error&gt;} object.
      */
     ServiceFuture<Error> get416Async(final ServiceCallback<Error> serviceCallback);
 
     /**
      * Return 416 status code - should be represented in the client as an error.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Maybe&lt;Error&gt;} object if successful.
-     */
-    Maybe<Error> get416Async();
-
-    /**
-     * Return 416 status code - should be represented in the client as an error.
-     *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, Error&gt;&gt;} object if successful.
      */
     Single<RestResponse<Void, Error>> get416WithRestResponseAsync();
 
     /**
+     * Return 416 status code - should be represented in the client as an error.
+     *
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link Maybe&lt;Error&gt;} object if successful.
+     */
+    Maybe<Error> get416Async();
+
+    /**
      * Return 417 status code - should be represented in the client as an error.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @throws ErrorException thrown if the request is rejected by server
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the Error object if successful.
      */
     Error delete417();
@@ -1242,23 +1242,15 @@ public interface HttpClientFailures {
      * Return 417 status code - should be represented in the client as an error.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceFuture&lt;Error&gt;} object
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link ServiceFuture&lt;Error&gt;} object.
      */
     ServiceFuture<Error> delete417Async(final ServiceCallback<Error> serviceCallback);
 
     /**
      * Return 417 status code - should be represented in the client as an error.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Maybe&lt;Error&gt;} object if successful.
-     */
-    Maybe<Error> delete417Async();
-
-    /**
-     * Return 417 status code - should be represented in the client as an error.
-     *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, Error&gt;&gt;} object if successful.
      */
     Single<RestResponse<Void, Error>> delete417WithRestResponseAsync();
@@ -1266,10 +1258,18 @@ public interface HttpClientFailures {
     /**
      * Return 417 status code - should be represented in the client as an error.
      *
-     * @param booleanValue Simple boolean value true
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @throws ErrorException thrown if the request is rejected by server
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link Maybe&lt;Error&gt;} object if successful.
+     */
+    Maybe<Error> delete417Async();
+
+    /**
+     * Return 417 status code - should be represented in the client as an error.
+     *
+     * @param booleanValue Simple boolean value true.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the Error object if successful.
      */
     Error delete417(Boolean booleanValue);
@@ -1277,37 +1277,37 @@ public interface HttpClientFailures {
     /**
      * Return 417 status code - should be represented in the client as an error.
      *
-     * @param booleanValue Simple boolean value true
+     * @param booleanValue Simple boolean value true.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceFuture&lt;Error&gt;} object
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link ServiceFuture&lt;Error&gt;} object.
      */
     ServiceFuture<Error> delete417Async(Boolean booleanValue, final ServiceCallback<Error> serviceCallback);
 
     /**
      * Return 417 status code - should be represented in the client as an error.
      *
-     * @param booleanValue Simple boolean value true
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Maybe&lt;Error&gt;} object if successful.
-     */
-    Maybe<Error> delete417Async(Boolean booleanValue);
-
-    /**
-     * Return 417 status code - should be represented in the client as an error.
-     *
-     * @param booleanValue Simple boolean value true
-     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @param booleanValue Simple boolean value true.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, Error&gt;&gt;} object if successful.
      */
     Single<RestResponse<Void, Error>> delete417WithRestResponseAsync(Boolean booleanValue);
 
     /**
+     * Return 417 status code - should be represented in the client as an error.
+     *
+     * @param booleanValue Simple boolean value true.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link Maybe&lt;Error&gt;} object if successful.
+     */
+    Maybe<Error> delete417Async(Boolean booleanValue);
+
+    /**
      * Return 429 status code - should be represented in the client as an error.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @throws ErrorException thrown if the request is rejected by server
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the Error object if successful.
      */
     Error head429();
@@ -1316,24 +1316,24 @@ public interface HttpClientFailures {
      * Return 429 status code - should be represented in the client as an error.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceFuture&lt;Error&gt;} object
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link ServiceFuture&lt;Error&gt;} object.
      */
     ServiceFuture<Error> head429Async(final ServiceCallback<Error> serviceCallback);
 
     /**
      * Return 429 status code - should be represented in the client as an error.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Maybe&lt;Error&gt;} object if successful.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link Single&lt;RestResponse&lt;Void, Error&gt;&gt;} object if successful.
      */
-    Maybe<Error> head429Async();
+    Single<RestResponse<Void, Error>> head429WithRestResponseAsync();
 
     /**
      * Return 429 status code - should be represented in the client as an error.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single&lt;RestResponse&lt;Void, Error&gt;&gt;} object if successful.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link Maybe&lt;Error&gt;} object if successful.
      */
-    Single<RestResponse<Void, Error>> head429WithRestResponseAsync();
+    Maybe<Error> head429Async();
 }

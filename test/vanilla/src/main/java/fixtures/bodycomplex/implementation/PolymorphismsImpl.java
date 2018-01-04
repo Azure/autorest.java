@@ -95,9 +95,9 @@ public class PolymorphismsImpl implements Polymorphisms {
     /**
      * Get complex types that are polymorphic.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @throws ErrorException thrown if the request is rejected by server
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the Fish object if successful.
      */
     public Fish getValid() {
@@ -108,8 +108,8 @@ public class PolymorphismsImpl implements Polymorphisms {
      * Get complex types that are polymorphic.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceFuture} object
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link ServiceFuture&lt;Fish&gt;} object.
      */
     public ServiceFuture<Fish> getValidAsync(final ServiceCallback<Fish> serviceCallback) {
         return ServiceFuture.fromBody(getValidAsync(), serviceCallback);
@@ -118,7 +118,7 @@ public class PolymorphismsImpl implements Polymorphisms {
     /**
      * Get complex types that are polymorphic.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, Fish&gt;&gt;} object if successful.
      */
     public Single<RestResponse<Void, Fish>> getValidWithRestResponseAsync() {
@@ -128,8 +128,8 @@ public class PolymorphismsImpl implements Polymorphisms {
     /**
      * Get complex types that are polymorphic.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return a {@link Single} emitting the RestResponse<Void, Fish> object
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link Maybe&lt;Fish&gt;} object if successful.
      */
     public Maybe<Fish> getValidAsync() {
         return getValidWithRestResponseAsync()
@@ -179,10 +179,10 @@ public class PolymorphismsImpl implements Polymorphisms {
      *             'jawsize': 5
      *           }
      *         ]
-     *       };
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @throws ErrorException thrown if the request is rejected by server
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
+     *       };.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     public void putValid(Fish complexBody) {
         putValidAsync(complexBody).blockingAwait();
@@ -223,10 +223,10 @@ public class PolymorphismsImpl implements Polymorphisms {
      *             'jawsize': 5
      *           }
      *         ]
-     *       };
+     *       };.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceFuture} object
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
     public ServiceFuture<Void> putValidAsync(Fish complexBody, final ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(putValidAsync(complexBody), serviceCallback);
@@ -267,8 +267,8 @@ public class PolymorphismsImpl implements Polymorphisms {
      *             'jawsize': 5
      *           }
      *         ]
-     *       };
-     * @throws IllegalArgumentException thrown if parameters fail the validation
+     *       };.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
      */
     public Single<RestResponse<Void, Void>> putValidWithRestResponseAsync(Fish complexBody) {
@@ -314,9 +314,9 @@ public class PolymorphismsImpl implements Polymorphisms {
      *             'jawsize': 5
      *           }
      *         ]
-     *       };
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return a {@link Single} emitting the RestResponse<Void, Void> object
+     *       };.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link Completable} object if successful.
      */
     public Completable putValidAsync(Fish complexBody) {
         return putValidWithRestResponseAsync(complexBody)
@@ -326,9 +326,9 @@ public class PolymorphismsImpl implements Polymorphisms {
     /**
      * Get complex types that are polymorphic, but not at the root of the hierarchy; also have additional properties.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @throws ErrorException thrown if the request is rejected by server
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the Salmon object if successful.
      */
     public Salmon getComplicated() {
@@ -339,8 +339,8 @@ public class PolymorphismsImpl implements Polymorphisms {
      * Get complex types that are polymorphic, but not at the root of the hierarchy; also have additional properties.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceFuture} object
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link ServiceFuture&lt;Salmon&gt;} object.
      */
     public ServiceFuture<Salmon> getComplicatedAsync(final ServiceCallback<Salmon> serviceCallback) {
         return ServiceFuture.fromBody(getComplicatedAsync(), serviceCallback);
@@ -349,7 +349,7 @@ public class PolymorphismsImpl implements Polymorphisms {
     /**
      * Get complex types that are polymorphic, but not at the root of the hierarchy; also have additional properties.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, Salmon&gt;&gt;} object if successful.
      */
     public Single<RestResponse<Void, Salmon>> getComplicatedWithRestResponseAsync() {
@@ -359,8 +359,8 @@ public class PolymorphismsImpl implements Polymorphisms {
     /**
      * Get complex types that are polymorphic, but not at the root of the hierarchy; also have additional properties.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return a {@link Single} emitting the RestResponse<Void, Salmon> object
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link Maybe&lt;Salmon&gt;} object if successful.
      */
     public Maybe<Salmon> getComplicatedAsync() {
         return getComplicatedWithRestResponseAsync()
@@ -378,10 +378,10 @@ public class PolymorphismsImpl implements Polymorphisms {
     /**
      * Put complex types that are polymorphic, but not at the root of the hierarchy; also have additional properties.
      *
-     * @param complexBody the Salmon value
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @throws ErrorException thrown if the request is rejected by server
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
+     * @param complexBody the Salmon value.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     public void putComplicated(Salmon complexBody) {
         putComplicatedAsync(complexBody).blockingAwait();
@@ -390,10 +390,10 @@ public class PolymorphismsImpl implements Polymorphisms {
     /**
      * Put complex types that are polymorphic, but not at the root of the hierarchy; also have additional properties.
      *
-     * @param complexBody the Salmon value
+     * @param complexBody the Salmon value.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceFuture} object
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
     public ServiceFuture<Void> putComplicatedAsync(Salmon complexBody, final ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(putComplicatedAsync(complexBody), serviceCallback);
@@ -402,8 +402,8 @@ public class PolymorphismsImpl implements Polymorphisms {
     /**
      * Put complex types that are polymorphic, but not at the root of the hierarchy; also have additional properties.
      *
-     * @param complexBody the Salmon value
-     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @param complexBody the Salmon value.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
      */
     public Single<RestResponse<Void, Void>> putComplicatedWithRestResponseAsync(Salmon complexBody) {
@@ -417,9 +417,9 @@ public class PolymorphismsImpl implements Polymorphisms {
     /**
      * Put complex types that are polymorphic, but not at the root of the hierarchy; also have additional properties.
      *
-     * @param complexBody the Salmon value
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return a {@link Single} emitting the RestResponse<Void, Void> object
+     * @param complexBody the Salmon value.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link Completable} object if successful.
      */
     public Completable putComplicatedAsync(Salmon complexBody) {
         return putComplicatedWithRestResponseAsync(complexBody)
@@ -454,10 +454,10 @@ public class PolymorphismsImpl implements Polymorphisms {
      *             "age": 105
      *         }
      *     ]
-     * }
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @throws ErrorException thrown if the request is rejected by server
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
+     * }.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     public void putValidMissingRequired(Fish complexBody) {
         putValidMissingRequiredAsync(complexBody).blockingAwait();
@@ -491,10 +491,10 @@ public class PolymorphismsImpl implements Polymorphisms {
      *             "age": 105
      *         }
      *     ]
-     * }
+     * }.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceFuture} object
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
     public ServiceFuture<Void> putValidMissingRequiredAsync(Fish complexBody, final ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(putValidMissingRequiredAsync(complexBody), serviceCallback);
@@ -528,8 +528,8 @@ public class PolymorphismsImpl implements Polymorphisms {
      *             "age": 105
      *         }
      *     ]
-     * }
-     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * }.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
      */
     public Single<RestResponse<Void, Void>> putValidMissingRequiredWithRestResponseAsync(Fish complexBody) {
@@ -568,9 +568,9 @@ public class PolymorphismsImpl implements Polymorphisms {
      *             "age": 105
      *         }
      *     ]
-     * }
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return a {@link Single} emitting the RestResponse<Void, Void> object
+     * }.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link Completable} object if successful.
      */
     public Completable putValidMissingRequiredAsync(Fish complexBody) {
         return putValidMissingRequiredWithRestResponseAsync(complexBody)

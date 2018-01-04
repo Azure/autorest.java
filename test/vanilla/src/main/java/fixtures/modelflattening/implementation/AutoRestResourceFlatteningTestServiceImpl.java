@@ -138,9 +138,9 @@ public class AutoRestResourceFlatteningTestServiceImpl extends ServiceClient imp
     /**
      * Put External Resource as an Array.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @throws ErrorException thrown if the request is rejected by server
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     public void putArray() {
         putArrayAsync().blockingAwait();
@@ -150,8 +150,8 @@ public class AutoRestResourceFlatteningTestServiceImpl extends ServiceClient imp
      * Put External Resource as an Array.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceFuture} object
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
     public ServiceFuture<Void> putArrayAsync(final ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(putArrayAsync(), serviceCallback);
@@ -160,7 +160,7 @@ public class AutoRestResourceFlatteningTestServiceImpl extends ServiceClient imp
     /**
      * Put External Resource as an Array.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
      */
     public Single<RestResponse<Void, Void>> putArrayWithRestResponseAsync() {
@@ -171,8 +171,8 @@ public class AutoRestResourceFlatteningTestServiceImpl extends ServiceClient imp
     /**
      * Put External Resource as an Array.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return a {@link Single} emitting the RestResponse<Void, Void> object
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link Completable} object if successful.
      */
     public Completable putArrayAsync() {
         return putArrayWithRestResponseAsync()
@@ -182,10 +182,10 @@ public class AutoRestResourceFlatteningTestServiceImpl extends ServiceClient imp
     /**
      * Put External Resource as an Array.
      *
-     * @param resourceArray External Resource as an Array to put
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @throws ErrorException thrown if the request is rejected by server
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
+     * @param resourceArray External Resource as an Array to put.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     public void putArray(List<Resource> resourceArray) {
         putArrayAsync(resourceArray).blockingAwait();
@@ -194,10 +194,10 @@ public class AutoRestResourceFlatteningTestServiceImpl extends ServiceClient imp
     /**
      * Put External Resource as an Array.
      *
-     * @param resourceArray External Resource as an Array to put
+     * @param resourceArray External Resource as an Array to put.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceFuture} object
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
     public ServiceFuture<Void> putArrayAsync(List<Resource> resourceArray, final ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(putArrayAsync(resourceArray), serviceCallback);
@@ -206,8 +206,8 @@ public class AutoRestResourceFlatteningTestServiceImpl extends ServiceClient imp
     /**
      * Put External Resource as an Array.
      *
-     * @param resourceArray External Resource as an Array to put
-     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @param resourceArray External Resource as an Array to put.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
      */
     public Single<RestResponse<Void, Void>> putArrayWithRestResponseAsync(List<Resource> resourceArray) {
@@ -218,9 +218,9 @@ public class AutoRestResourceFlatteningTestServiceImpl extends ServiceClient imp
     /**
      * Put External Resource as an Array.
      *
-     * @param resourceArray External Resource as an Array to put
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return a {@link Single} emitting the RestResponse<Void, Void> object
+     * @param resourceArray External Resource as an Array to put.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link Completable} object if successful.
      */
     public Completable putArrayAsync(List<Resource> resourceArray) {
         return putArrayWithRestResponseAsync(resourceArray)
@@ -230,9 +230,9 @@ public class AutoRestResourceFlatteningTestServiceImpl extends ServiceClient imp
     /**
      * Get External Resource as an Array.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @throws ErrorException thrown if the request is rejected by server
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the List&lt;FlattenedProduct&gt; object if successful.
      */
     public List<FlattenedProduct> getArray() {
@@ -243,8 +243,8 @@ public class AutoRestResourceFlatteningTestServiceImpl extends ServiceClient imp
      * Get External Resource as an Array.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceFuture} object
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link ServiceFuture&lt;List&lt;FlattenedProduct&gt;&gt;} object.
      */
     public ServiceFuture<List<FlattenedProduct>> getArrayAsync(final ServiceCallback<List<FlattenedProduct>> serviceCallback) {
         return ServiceFuture.fromBody(getArrayAsync(), serviceCallback);
@@ -253,7 +253,7 @@ public class AutoRestResourceFlatteningTestServiceImpl extends ServiceClient imp
     /**
      * Get External Resource as an Array.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, List&lt;FlattenedProduct&gt;&gt;&gt;} object if successful.
      */
     public Single<RestResponse<Void, List<FlattenedProduct>>> getArrayWithRestResponseAsync() {
@@ -263,8 +263,8 @@ public class AutoRestResourceFlatteningTestServiceImpl extends ServiceClient imp
     /**
      * Get External Resource as an Array.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return a {@link Single} emitting the RestResponse<Void, List<FlattenedProduct>> object
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link Maybe&lt;List&lt;FlattenedProduct&gt;&gt;} object if successful.
      */
     public Maybe<List<FlattenedProduct>> getArrayAsync() {
         return getArrayWithRestResponseAsync()
@@ -282,9 +282,9 @@ public class AutoRestResourceFlatteningTestServiceImpl extends ServiceClient imp
     /**
      * No need to have a route in Express server for this operation. Used to verify the type flattened is not removed if it's referenced in an array.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @throws ErrorException thrown if the request is rejected by server
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     public void putWrappedArray() {
         putWrappedArrayAsync().blockingAwait();
@@ -294,8 +294,8 @@ public class AutoRestResourceFlatteningTestServiceImpl extends ServiceClient imp
      * No need to have a route in Express server for this operation. Used to verify the type flattened is not removed if it's referenced in an array.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceFuture} object
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
     public ServiceFuture<Void> putWrappedArrayAsync(final ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(putWrappedArrayAsync(), serviceCallback);
@@ -304,7 +304,7 @@ public class AutoRestResourceFlatteningTestServiceImpl extends ServiceClient imp
     /**
      * No need to have a route in Express server for this operation. Used to verify the type flattened is not removed if it's referenced in an array.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
      */
     public Single<RestResponse<Void, Void>> putWrappedArrayWithRestResponseAsync() {
@@ -315,8 +315,8 @@ public class AutoRestResourceFlatteningTestServiceImpl extends ServiceClient imp
     /**
      * No need to have a route in Express server for this operation. Used to verify the type flattened is not removed if it's referenced in an array.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return a {@link Single} emitting the RestResponse<Void, Void> object
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link Completable} object if successful.
      */
     public Completable putWrappedArrayAsync() {
         return putWrappedArrayWithRestResponseAsync()
@@ -326,10 +326,10 @@ public class AutoRestResourceFlatteningTestServiceImpl extends ServiceClient imp
     /**
      * No need to have a route in Express server for this operation. Used to verify the type flattened is not removed if it's referenced in an array.
      *
-     * @param resourceArray External Resource as an Array to put
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @throws ErrorException thrown if the request is rejected by server
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
+     * @param resourceArray External Resource as an Array to put.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     public void putWrappedArray(List<WrappedProduct> resourceArray) {
         putWrappedArrayAsync(resourceArray).blockingAwait();
@@ -338,10 +338,10 @@ public class AutoRestResourceFlatteningTestServiceImpl extends ServiceClient imp
     /**
      * No need to have a route in Express server for this operation. Used to verify the type flattened is not removed if it's referenced in an array.
      *
-     * @param resourceArray External Resource as an Array to put
+     * @param resourceArray External Resource as an Array to put.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceFuture} object
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
     public ServiceFuture<Void> putWrappedArrayAsync(List<WrappedProduct> resourceArray, final ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(putWrappedArrayAsync(resourceArray), serviceCallback);
@@ -350,8 +350,8 @@ public class AutoRestResourceFlatteningTestServiceImpl extends ServiceClient imp
     /**
      * No need to have a route in Express server for this operation. Used to verify the type flattened is not removed if it's referenced in an array.
      *
-     * @param resourceArray External Resource as an Array to put
-     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @param resourceArray External Resource as an Array to put.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
      */
     public Single<RestResponse<Void, Void>> putWrappedArrayWithRestResponseAsync(List<WrappedProduct> resourceArray) {
@@ -362,9 +362,9 @@ public class AutoRestResourceFlatteningTestServiceImpl extends ServiceClient imp
     /**
      * No need to have a route in Express server for this operation. Used to verify the type flattened is not removed if it's referenced in an array.
      *
-     * @param resourceArray External Resource as an Array to put
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return a {@link Single} emitting the RestResponse<Void, Void> object
+     * @param resourceArray External Resource as an Array to put.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link Completable} object if successful.
      */
     public Completable putWrappedArrayAsync(List<WrappedProduct> resourceArray) {
         return putWrappedArrayWithRestResponseAsync(resourceArray)
@@ -374,9 +374,9 @@ public class AutoRestResourceFlatteningTestServiceImpl extends ServiceClient imp
     /**
      * No need to have a route in Express server for this operation. Used to verify the type flattened is not removed if it's referenced in an array.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @throws ErrorException thrown if the request is rejected by server
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the List&lt;ProductWrapper&gt; object if successful.
      */
     public List<ProductWrapper> getWrappedArray() {
@@ -387,8 +387,8 @@ public class AutoRestResourceFlatteningTestServiceImpl extends ServiceClient imp
      * No need to have a route in Express server for this operation. Used to verify the type flattened is not removed if it's referenced in an array.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceFuture} object
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link ServiceFuture&lt;List&lt;ProductWrapper&gt;&gt;} object.
      */
     public ServiceFuture<List<ProductWrapper>> getWrappedArrayAsync(final ServiceCallback<List<ProductWrapper>> serviceCallback) {
         return ServiceFuture.fromBody(getWrappedArrayAsync(), serviceCallback);
@@ -397,7 +397,7 @@ public class AutoRestResourceFlatteningTestServiceImpl extends ServiceClient imp
     /**
      * No need to have a route in Express server for this operation. Used to verify the type flattened is not removed if it's referenced in an array.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, List&lt;ProductWrapper&gt;&gt;&gt;} object if successful.
      */
     public Single<RestResponse<Void, List<ProductWrapper>>> getWrappedArrayWithRestResponseAsync() {
@@ -407,8 +407,8 @@ public class AutoRestResourceFlatteningTestServiceImpl extends ServiceClient imp
     /**
      * No need to have a route in Express server for this operation. Used to verify the type flattened is not removed if it's referenced in an array.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return a {@link Single} emitting the RestResponse<Void, List<ProductWrapper>> object
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link Maybe&lt;List&lt;ProductWrapper&gt;&gt;} object if successful.
      */
     public Maybe<List<ProductWrapper>> getWrappedArrayAsync() {
         return getWrappedArrayWithRestResponseAsync()
@@ -426,9 +426,9 @@ public class AutoRestResourceFlatteningTestServiceImpl extends ServiceClient imp
     /**
      * Put External Resource as a Dictionary.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @throws ErrorException thrown if the request is rejected by server
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     public void putDictionary() {
         putDictionaryAsync().blockingAwait();
@@ -438,8 +438,8 @@ public class AutoRestResourceFlatteningTestServiceImpl extends ServiceClient imp
      * Put External Resource as a Dictionary.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceFuture} object
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
     public ServiceFuture<Void> putDictionaryAsync(final ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(putDictionaryAsync(), serviceCallback);
@@ -448,7 +448,7 @@ public class AutoRestResourceFlatteningTestServiceImpl extends ServiceClient imp
     /**
      * Put External Resource as a Dictionary.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
      */
     public Single<RestResponse<Void, Void>> putDictionaryWithRestResponseAsync() {
@@ -459,8 +459,8 @@ public class AutoRestResourceFlatteningTestServiceImpl extends ServiceClient imp
     /**
      * Put External Resource as a Dictionary.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return a {@link Single} emitting the RestResponse<Void, Void> object
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link Completable} object if successful.
      */
     public Completable putDictionaryAsync() {
         return putDictionaryWithRestResponseAsync()
@@ -470,10 +470,10 @@ public class AutoRestResourceFlatteningTestServiceImpl extends ServiceClient imp
     /**
      * Put External Resource as a Dictionary.
      *
-     * @param resourceDictionary External Resource as a Dictionary to put
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @throws ErrorException thrown if the request is rejected by server
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
+     * @param resourceDictionary External Resource as a Dictionary to put.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     public void putDictionary(Map<String, FlattenedProduct> resourceDictionary) {
         putDictionaryAsync(resourceDictionary).blockingAwait();
@@ -482,10 +482,10 @@ public class AutoRestResourceFlatteningTestServiceImpl extends ServiceClient imp
     /**
      * Put External Resource as a Dictionary.
      *
-     * @param resourceDictionary External Resource as a Dictionary to put
+     * @param resourceDictionary External Resource as a Dictionary to put.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceFuture} object
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
     public ServiceFuture<Void> putDictionaryAsync(Map<String, FlattenedProduct> resourceDictionary, final ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(putDictionaryAsync(resourceDictionary), serviceCallback);
@@ -494,8 +494,8 @@ public class AutoRestResourceFlatteningTestServiceImpl extends ServiceClient imp
     /**
      * Put External Resource as a Dictionary.
      *
-     * @param resourceDictionary External Resource as a Dictionary to put
-     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @param resourceDictionary External Resource as a Dictionary to put.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
      */
     public Single<RestResponse<Void, Void>> putDictionaryWithRestResponseAsync(Map<String, FlattenedProduct> resourceDictionary) {
@@ -506,9 +506,9 @@ public class AutoRestResourceFlatteningTestServiceImpl extends ServiceClient imp
     /**
      * Put External Resource as a Dictionary.
      *
-     * @param resourceDictionary External Resource as a Dictionary to put
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return a {@link Single} emitting the RestResponse<Void, Void> object
+     * @param resourceDictionary External Resource as a Dictionary to put.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link Completable} object if successful.
      */
     public Completable putDictionaryAsync(Map<String, FlattenedProduct> resourceDictionary) {
         return putDictionaryWithRestResponseAsync(resourceDictionary)
@@ -518,9 +518,9 @@ public class AutoRestResourceFlatteningTestServiceImpl extends ServiceClient imp
     /**
      * Get External Resource as a Dictionary.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @throws ErrorException thrown if the request is rejected by server
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the Map&lt;String, FlattenedProduct&gt; object if successful.
      */
     public Map<String, FlattenedProduct> getDictionary() {
@@ -531,8 +531,8 @@ public class AutoRestResourceFlatteningTestServiceImpl extends ServiceClient imp
      * Get External Resource as a Dictionary.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceFuture} object
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link ServiceFuture&lt;Map&lt;String, FlattenedProduct&gt;&gt;} object.
      */
     public ServiceFuture<Map<String, FlattenedProduct>> getDictionaryAsync(final ServiceCallback<Map<String, FlattenedProduct>> serviceCallback) {
         return ServiceFuture.fromBody(getDictionaryAsync(), serviceCallback);
@@ -541,7 +541,7 @@ public class AutoRestResourceFlatteningTestServiceImpl extends ServiceClient imp
     /**
      * Get External Resource as a Dictionary.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, Map&lt;String, FlattenedProduct&gt;&gt;&gt;} object if successful.
      */
     public Single<RestResponse<Void, Map<String, FlattenedProduct>>> getDictionaryWithRestResponseAsync() {
@@ -551,8 +551,8 @@ public class AutoRestResourceFlatteningTestServiceImpl extends ServiceClient imp
     /**
      * Get External Resource as a Dictionary.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return a {@link Single} emitting the RestResponse<Void, Map<String, FlattenedProduct>> object
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link Maybe&lt;Map&lt;String, FlattenedProduct&gt;&gt;} object if successful.
      */
     public Maybe<Map<String, FlattenedProduct>> getDictionaryAsync() {
         return getDictionaryWithRestResponseAsync()
@@ -570,9 +570,9 @@ public class AutoRestResourceFlatteningTestServiceImpl extends ServiceClient imp
     /**
      * Put External Resource as a ResourceCollection.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @throws ErrorException thrown if the request is rejected by server
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     public void putResourceCollection() {
         putResourceCollectionAsync().blockingAwait();
@@ -582,8 +582,8 @@ public class AutoRestResourceFlatteningTestServiceImpl extends ServiceClient imp
      * Put External Resource as a ResourceCollection.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceFuture} object
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
     public ServiceFuture<Void> putResourceCollectionAsync(final ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(putResourceCollectionAsync(), serviceCallback);
@@ -592,7 +592,7 @@ public class AutoRestResourceFlatteningTestServiceImpl extends ServiceClient imp
     /**
      * Put External Resource as a ResourceCollection.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
      */
     public Single<RestResponse<Void, Void>> putResourceCollectionWithRestResponseAsync() {
@@ -603,8 +603,8 @@ public class AutoRestResourceFlatteningTestServiceImpl extends ServiceClient imp
     /**
      * Put External Resource as a ResourceCollection.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return a {@link Single} emitting the RestResponse<Void, Void> object
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link Completable} object if successful.
      */
     public Completable putResourceCollectionAsync() {
         return putResourceCollectionWithRestResponseAsync()
@@ -614,10 +614,10 @@ public class AutoRestResourceFlatteningTestServiceImpl extends ServiceClient imp
     /**
      * Put External Resource as a ResourceCollection.
      *
-     * @param resourceComplexObject External Resource as a ResourceCollection to put
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @throws ErrorException thrown if the request is rejected by server
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
+     * @param resourceComplexObject External Resource as a ResourceCollection to put.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     public void putResourceCollection(ResourceCollection resourceComplexObject) {
         putResourceCollectionAsync(resourceComplexObject).blockingAwait();
@@ -626,10 +626,10 @@ public class AutoRestResourceFlatteningTestServiceImpl extends ServiceClient imp
     /**
      * Put External Resource as a ResourceCollection.
      *
-     * @param resourceComplexObject External Resource as a ResourceCollection to put
+     * @param resourceComplexObject External Resource as a ResourceCollection to put.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceFuture} object
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
     public ServiceFuture<Void> putResourceCollectionAsync(ResourceCollection resourceComplexObject, final ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(putResourceCollectionAsync(resourceComplexObject), serviceCallback);
@@ -638,8 +638,8 @@ public class AutoRestResourceFlatteningTestServiceImpl extends ServiceClient imp
     /**
      * Put External Resource as a ResourceCollection.
      *
-     * @param resourceComplexObject External Resource as a ResourceCollection to put
-     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @param resourceComplexObject External Resource as a ResourceCollection to put.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
      */
     public Single<RestResponse<Void, Void>> putResourceCollectionWithRestResponseAsync(ResourceCollection resourceComplexObject) {
@@ -650,9 +650,9 @@ public class AutoRestResourceFlatteningTestServiceImpl extends ServiceClient imp
     /**
      * Put External Resource as a ResourceCollection.
      *
-     * @param resourceComplexObject External Resource as a ResourceCollection to put
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return a {@link Single} emitting the RestResponse<Void, Void> object
+     * @param resourceComplexObject External Resource as a ResourceCollection to put.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link Completable} object if successful.
      */
     public Completable putResourceCollectionAsync(ResourceCollection resourceComplexObject) {
         return putResourceCollectionWithRestResponseAsync(resourceComplexObject)
@@ -662,9 +662,9 @@ public class AutoRestResourceFlatteningTestServiceImpl extends ServiceClient imp
     /**
      * Get External Resource as a ResourceCollection.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @throws ErrorException thrown if the request is rejected by server
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the ResourceCollection object if successful.
      */
     public ResourceCollection getResourceCollection() {
@@ -675,8 +675,8 @@ public class AutoRestResourceFlatteningTestServiceImpl extends ServiceClient imp
      * Get External Resource as a ResourceCollection.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceFuture} object
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link ServiceFuture&lt;ResourceCollection&gt;} object.
      */
     public ServiceFuture<ResourceCollection> getResourceCollectionAsync(final ServiceCallback<ResourceCollection> serviceCallback) {
         return ServiceFuture.fromBody(getResourceCollectionAsync(), serviceCallback);
@@ -685,7 +685,7 @@ public class AutoRestResourceFlatteningTestServiceImpl extends ServiceClient imp
     /**
      * Get External Resource as a ResourceCollection.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, ResourceCollection&gt;&gt;} object if successful.
      */
     public Single<RestResponse<Void, ResourceCollection>> getResourceCollectionWithRestResponseAsync() {
@@ -695,8 +695,8 @@ public class AutoRestResourceFlatteningTestServiceImpl extends ServiceClient imp
     /**
      * Get External Resource as a ResourceCollection.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return a {@link Single} emitting the RestResponse<Void, ResourceCollection> object
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link Maybe&lt;ResourceCollection&gt;} object if successful.
      */
     public Maybe<ResourceCollection> getResourceCollectionAsync() {
         return getResourceCollectionWithRestResponseAsync()
@@ -714,9 +714,9 @@ public class AutoRestResourceFlatteningTestServiceImpl extends ServiceClient imp
     /**
      * Put Simple Product with client flattening true on the model.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @throws ErrorException thrown if the request is rejected by server
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the SimpleProduct object if successful.
      */
     public SimpleProduct putSimpleProduct() {
@@ -727,8 +727,8 @@ public class AutoRestResourceFlatteningTestServiceImpl extends ServiceClient imp
      * Put Simple Product with client flattening true on the model.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceFuture} object
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link ServiceFuture&lt;SimpleProduct&gt;} object.
      */
     public ServiceFuture<SimpleProduct> putSimpleProductAsync(final ServiceCallback<SimpleProduct> serviceCallback) {
         return ServiceFuture.fromBody(putSimpleProductAsync(), serviceCallback);
@@ -737,7 +737,7 @@ public class AutoRestResourceFlatteningTestServiceImpl extends ServiceClient imp
     /**
      * Put Simple Product with client flattening true on the model.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, SimpleProduct&gt;&gt;} object if successful.
      */
     public Single<RestResponse<Void, SimpleProduct>> putSimpleProductWithRestResponseAsync() {
@@ -748,8 +748,8 @@ public class AutoRestResourceFlatteningTestServiceImpl extends ServiceClient imp
     /**
      * Put Simple Product with client flattening true on the model.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return a {@link Single} emitting the RestResponse<Void, SimpleProduct> object
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link Maybe&lt;SimpleProduct&gt;} object if successful.
      */
     public Maybe<SimpleProduct> putSimpleProductAsync() {
         return putSimpleProductWithRestResponseAsync()
@@ -767,10 +767,10 @@ public class AutoRestResourceFlatteningTestServiceImpl extends ServiceClient imp
     /**
      * Put Simple Product with client flattening true on the model.
      *
-     * @param simpleBodyProduct Simple body product to put
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @throws ErrorException thrown if the request is rejected by server
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
+     * @param simpleBodyProduct Simple body product to put.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the SimpleProduct object if successful.
      */
     public SimpleProduct putSimpleProduct(SimpleProduct simpleBodyProduct) {
@@ -780,10 +780,10 @@ public class AutoRestResourceFlatteningTestServiceImpl extends ServiceClient imp
     /**
      * Put Simple Product with client flattening true on the model.
      *
-     * @param simpleBodyProduct Simple body product to put
+     * @param simpleBodyProduct Simple body product to put.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceFuture} object
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link ServiceFuture&lt;SimpleProduct&gt;} object.
      */
     public ServiceFuture<SimpleProduct> putSimpleProductAsync(SimpleProduct simpleBodyProduct, final ServiceCallback<SimpleProduct> serviceCallback) {
         return ServiceFuture.fromBody(putSimpleProductAsync(simpleBodyProduct), serviceCallback);
@@ -792,8 +792,8 @@ public class AutoRestResourceFlatteningTestServiceImpl extends ServiceClient imp
     /**
      * Put Simple Product with client flattening true on the model.
      *
-     * @param simpleBodyProduct Simple body product to put
-     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @param simpleBodyProduct Simple body product to put.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, SimpleProduct&gt;&gt;} object if successful.
      */
     public Single<RestResponse<Void, SimpleProduct>> putSimpleProductWithRestResponseAsync(SimpleProduct simpleBodyProduct) {
@@ -804,9 +804,9 @@ public class AutoRestResourceFlatteningTestServiceImpl extends ServiceClient imp
     /**
      * Put Simple Product with client flattening true on the model.
      *
-     * @param simpleBodyProduct Simple body product to put
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return a {@link Single} emitting the RestResponse<Void, SimpleProduct> object
+     * @param simpleBodyProduct Simple body product to put.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link Maybe&lt;SimpleProduct&gt;} object if successful.
      */
     public Maybe<SimpleProduct> putSimpleProductAsync(SimpleProduct simpleBodyProduct) {
         return putSimpleProductWithRestResponseAsync(simpleBodyProduct)
@@ -826,9 +826,9 @@ public class AutoRestResourceFlatteningTestServiceImpl extends ServiceClient imp
      *
      * @param productId Unique identifier representing a specific product for a given latitude &amp; longitude. For example, uberX in San Francisco will have a different product_id than uberX in Los Angeles.
      * @param maxProductDisplayName Display name of product.
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @throws ErrorException thrown if the request is rejected by server
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the SimpleProduct object if successful.
      */
     public SimpleProduct postFlattenedSimpleProduct(String productId, String maxProductDisplayName) {
@@ -841,8 +841,8 @@ public class AutoRestResourceFlatteningTestServiceImpl extends ServiceClient imp
      * @param productId Unique identifier representing a specific product for a given latitude &amp; longitude. For example, uberX in San Francisco will have a different product_id than uberX in Los Angeles.
      * @param maxProductDisplayName Display name of product.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceFuture} object
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link ServiceFuture&lt;SimpleProduct&gt;} object.
      */
     public ServiceFuture<SimpleProduct> postFlattenedSimpleProductAsync(String productId, String maxProductDisplayName, final ServiceCallback<SimpleProduct> serviceCallback) {
         return ServiceFuture.fromBody(postFlattenedSimpleProductAsync(productId, maxProductDisplayName), serviceCallback);
@@ -853,7 +853,7 @@ public class AutoRestResourceFlatteningTestServiceImpl extends ServiceClient imp
      *
      * @param productId Unique identifier representing a specific product for a given latitude &amp; longitude. For example, uberX in San Francisco will have a different product_id than uberX in Los Angeles.
      * @param maxProductDisplayName Display name of product.
-     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, SimpleProduct&gt;&gt;} object if successful.
      */
     public Single<RestResponse<Void, SimpleProduct>> postFlattenedSimpleProductWithRestResponseAsync(String productId, String maxProductDisplayName) {
@@ -880,8 +880,8 @@ public class AutoRestResourceFlatteningTestServiceImpl extends ServiceClient imp
      *
      * @param productId Unique identifier representing a specific product for a given latitude &amp; longitude. For example, uberX in San Francisco will have a different product_id than uberX in Los Angeles.
      * @param maxProductDisplayName Display name of product.
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return a {@link Single} emitting the RestResponse<Void, SimpleProduct> object
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link Maybe&lt;SimpleProduct&gt;} object if successful.
      */
     public Maybe<SimpleProduct> postFlattenedSimpleProductAsync(String productId, String maxProductDisplayName) {
         return postFlattenedSimpleProductWithRestResponseAsync(productId, maxProductDisplayName)
@@ -904,9 +904,9 @@ public class AutoRestResourceFlatteningTestServiceImpl extends ServiceClient imp
      * @param description Description of product.
      * @param genericValue Generic URL value.
      * @param odatavalue URL value.
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @throws ErrorException thrown if the request is rejected by server
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the SimpleProduct object if successful.
      */
     public SimpleProduct postFlattenedSimpleProduct(String productId, String maxProductDisplayName, String description, String genericValue, String odatavalue) {
@@ -922,8 +922,8 @@ public class AutoRestResourceFlatteningTestServiceImpl extends ServiceClient imp
      * @param genericValue Generic URL value.
      * @param odatavalue URL value.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceFuture} object
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link ServiceFuture&lt;SimpleProduct&gt;} object.
      */
     public ServiceFuture<SimpleProduct> postFlattenedSimpleProductAsync(String productId, String maxProductDisplayName, String description, String genericValue, String odatavalue, final ServiceCallback<SimpleProduct> serviceCallback) {
         return ServiceFuture.fromBody(postFlattenedSimpleProductAsync(productId, maxProductDisplayName, description, genericValue, odatavalue), serviceCallback);
@@ -937,7 +937,7 @@ public class AutoRestResourceFlatteningTestServiceImpl extends ServiceClient imp
      * @param description Description of product.
      * @param genericValue Generic URL value.
      * @param odatavalue URL value.
-     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, SimpleProduct&gt;&gt;} object if successful.
      */
     public Single<RestResponse<Void, SimpleProduct>> postFlattenedSimpleProductWithRestResponseAsync(String productId, String maxProductDisplayName, String description, String genericValue, String odatavalue) {
@@ -967,8 +967,8 @@ public class AutoRestResourceFlatteningTestServiceImpl extends ServiceClient imp
      * @param description Description of product.
      * @param genericValue Generic URL value.
      * @param odatavalue URL value.
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return a {@link Single} emitting the RestResponse<Void, SimpleProduct> object
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link Maybe&lt;SimpleProduct&gt;} object if successful.
      */
     public Maybe<SimpleProduct> postFlattenedSimpleProductAsync(String productId, String maxProductDisplayName, String description, String genericValue, String odatavalue) {
         return postFlattenedSimpleProductWithRestResponseAsync(productId, maxProductDisplayName, description, genericValue, odatavalue)
@@ -986,10 +986,10 @@ public class AutoRestResourceFlatteningTestServiceImpl extends ServiceClient imp
     /**
      * Put Simple Product with client flattening true on the model.
      *
-     * @param flattenParameterGroup Additional parameters for the operation
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @throws ErrorException thrown if the request is rejected by server
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
+     * @param flattenParameterGroup Additional parameters for the operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the SimpleProduct object if successful.
      */
     public SimpleProduct putSimpleProductWithGrouping(FlattenParameterGroup flattenParameterGroup) {
@@ -999,10 +999,10 @@ public class AutoRestResourceFlatteningTestServiceImpl extends ServiceClient imp
     /**
      * Put Simple Product with client flattening true on the model.
      *
-     * @param flattenParameterGroup Additional parameters for the operation
+     * @param flattenParameterGroup Additional parameters for the operation.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceFuture} object
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link ServiceFuture&lt;SimpleProduct&gt;} object.
      */
     public ServiceFuture<SimpleProduct> putSimpleProductWithGroupingAsync(FlattenParameterGroup flattenParameterGroup, final ServiceCallback<SimpleProduct> serviceCallback) {
         return ServiceFuture.fromBody(putSimpleProductWithGroupingAsync(flattenParameterGroup), serviceCallback);
@@ -1011,8 +1011,8 @@ public class AutoRestResourceFlatteningTestServiceImpl extends ServiceClient imp
     /**
      * Put Simple Product with client flattening true on the model.
      *
-     * @param flattenParameterGroup Additional parameters for the operation
-     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @param flattenParameterGroup Additional parameters for the operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, SimpleProduct&gt;&gt;} object if successful.
      */
     public Single<RestResponse<Void, SimpleProduct>> putSimpleProductWithGroupingWithRestResponseAsync(FlattenParameterGroup flattenParameterGroup) {
@@ -1041,9 +1041,9 @@ public class AutoRestResourceFlatteningTestServiceImpl extends ServiceClient imp
     /**
      * Put Simple Product with client flattening true on the model.
      *
-     * @param flattenParameterGroup Additional parameters for the operation
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return a {@link Single} emitting the RestResponse<Void, SimpleProduct> object
+     * @param flattenParameterGroup Additional parameters for the operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link Maybe&lt;SimpleProduct&gt;} object if successful.
      */
     public Maybe<SimpleProduct> putSimpleProductWithGroupingAsync(FlattenParameterGroup flattenParameterGroup) {
         return putSimpleProductWithGroupingWithRestResponseAsync(flattenParameterGroup)

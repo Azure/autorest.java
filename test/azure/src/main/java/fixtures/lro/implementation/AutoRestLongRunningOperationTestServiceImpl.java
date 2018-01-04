@@ -43,7 +43,7 @@ public class AutoRestLongRunningOperationTestServiceImpl extends AzureServiceCli
      * Sets Gets or sets the preferred language for the response.
      *
      * @param acceptLanguage the acceptLanguage value.
-     * @return the service client itself
+     * @return the service client itself.
      */
     public AutoRestLongRunningOperationTestServiceImpl withAcceptLanguage(String acceptLanguage) {
         this.acceptLanguage = acceptLanguage;
@@ -68,7 +68,7 @@ public class AutoRestLongRunningOperationTestServiceImpl extends AzureServiceCli
      * Sets Gets or sets the retry timeout in seconds for Long Running Operations. Default value is 30.
      *
      * @param longRunningOperationRetryTimeout the longRunningOperationRetryTimeout value.
-     * @return the service client itself
+     * @return the service client itself.
      */
     public AutoRestLongRunningOperationTestServiceImpl withLongRunningOperationRetryTimeout(int longRunningOperationRetryTimeout) {
         this.longRunningOperationRetryTimeout = longRunningOperationRetryTimeout;
@@ -93,7 +93,7 @@ public class AutoRestLongRunningOperationTestServiceImpl extends AzureServiceCli
      * Sets When set to true a unique x-ms-client-request-id value is generated and included in each request. Default is true.
      *
      * @param generateClientRequestId the generateClientRequestId value.
-     * @return the service client itself
+     * @return the service client itself.
      */
     public AutoRestLongRunningOperationTestServiceImpl withGenerateClientRequestId(boolean generateClientRequestId) {
         this.generateClientRequestId = generateClientRequestId;
@@ -159,7 +159,7 @@ public class AutoRestLongRunningOperationTestServiceImpl extends AzureServiceCli
     /**
      * Initializes an instance of AutoRestLongRunningOperationTestService client.
      *
-     * @param credentials the management credentials for Azure
+     * @param credentials the management credentials for Azure.
      */
     public AutoRestLongRunningOperationTestServiceImpl(ServiceClientCredentials credentials) {
         this(AzureProxy.createDefaultPipeline(AutoRestLongRunningOperationTestServiceImpl.class, credentials));
@@ -168,7 +168,7 @@ public class AutoRestLongRunningOperationTestServiceImpl extends AzureServiceCli
     /**
      * Initializes an instance of AutoRestLongRunningOperationTestService client.
      *
-     * @param credentials the management credentials for Azure
+     * @param credentials the management credentials for Azure.
      * @param azureEnvironment The environment that requests will target.
      */
     public AutoRestLongRunningOperationTestServiceImpl(ServiceClientCredentials credentials, AzureEnvironment azureEnvironment) {

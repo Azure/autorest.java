@@ -16,6 +16,7 @@ package fixtures.bodydictionary;
 public interface AutoRestSwaggerBATdictionaryService {
     /**
      * Gets the Dictionarys object to access its operations.
+     *
      * @return the Dictionarys object.
      */
     Dictionarys dictionarys();

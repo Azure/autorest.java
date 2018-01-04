@@ -162,9 +162,9 @@ public class HttpClientFailuresImpl implements HttpClientFailures {
     /**
      * Return 400 status code - should be represented in the client as an error.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @throws ErrorException thrown if the request is rejected by server
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the Error object if successful.
      */
     public Error head400() {
@@ -175,8 +175,8 @@ public class HttpClientFailuresImpl implements HttpClientFailures {
      * Return 400 status code - should be represented in the client as an error.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceFuture} object
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link ServiceFuture&lt;Error&gt;} object.
      */
     public ServiceFuture<Error> head400Async(final ServiceCallback<Error> serviceCallback) {
         return ServiceFuture.fromBody(head400Async(), serviceCallback);
@@ -185,7 +185,7 @@ public class HttpClientFailuresImpl implements HttpClientFailures {
     /**
      * Return 400 status code - should be represented in the client as an error.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, Error&gt;&gt;} object if successful.
      */
     public Single<RestResponse<Void, Error>> head400WithRestResponseAsync() {
@@ -195,8 +195,8 @@ public class HttpClientFailuresImpl implements HttpClientFailures {
     /**
      * Return 400 status code - should be represented in the client as an error.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return a {@link Single} emitting the RestResponse<Void, Error> object
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link Maybe&lt;Error&gt;} object if successful.
      */
     public Maybe<Error> head400Async() {
         return head400WithRestResponseAsync()
@@ -214,9 +214,9 @@ public class HttpClientFailuresImpl implements HttpClientFailures {
     /**
      * Return 400 status code - should be represented in the client as an error.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @throws ErrorException thrown if the request is rejected by server
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the Error object if successful.
      */
     public Error get400() {
@@ -227,8 +227,8 @@ public class HttpClientFailuresImpl implements HttpClientFailures {
      * Return 400 status code - should be represented in the client as an error.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceFuture} object
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link ServiceFuture&lt;Error&gt;} object.
      */
     public ServiceFuture<Error> get400Async(final ServiceCallback<Error> serviceCallback) {
         return ServiceFuture.fromBody(get400Async(), serviceCallback);
@@ -237,7 +237,7 @@ public class HttpClientFailuresImpl implements HttpClientFailures {
     /**
      * Return 400 status code - should be represented in the client as an error.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, Error&gt;&gt;} object if successful.
      */
     public Single<RestResponse<Void, Error>> get400WithRestResponseAsync() {
@@ -247,8 +247,8 @@ public class HttpClientFailuresImpl implements HttpClientFailures {
     /**
      * Return 400 status code - should be represented in the client as an error.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return a {@link Single} emitting the RestResponse<Void, Error> object
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link Maybe&lt;Error&gt;} object if successful.
      */
     public Maybe<Error> get400Async() {
         return get400WithRestResponseAsync()
@@ -266,9 +266,9 @@ public class HttpClientFailuresImpl implements HttpClientFailures {
     /**
      * Return 400 status code - should be represented in the client as an error.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @throws ErrorException thrown if the request is rejected by server
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the Error object if successful.
      */
     public Error put400() {
@@ -279,8 +279,8 @@ public class HttpClientFailuresImpl implements HttpClientFailures {
      * Return 400 status code - should be represented in the client as an error.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceFuture} object
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link ServiceFuture&lt;Error&gt;} object.
      */
     public ServiceFuture<Error> put400Async(final ServiceCallback<Error> serviceCallback) {
         return ServiceFuture.fromBody(put400Async(), serviceCallback);
@@ -289,7 +289,7 @@ public class HttpClientFailuresImpl implements HttpClientFailures {
     /**
      * Return 400 status code - should be represented in the client as an error.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, Error&gt;&gt;} object if successful.
      */
     public Single<RestResponse<Void, Error>> put400WithRestResponseAsync() {
@@ -300,8 +300,8 @@ public class HttpClientFailuresImpl implements HttpClientFailures {
     /**
      * Return 400 status code - should be represented in the client as an error.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return a {@link Single} emitting the RestResponse<Void, Error> object
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link Maybe&lt;Error&gt;} object if successful.
      */
     public Maybe<Error> put400Async() {
         return put400WithRestResponseAsync()
@@ -319,10 +319,10 @@ public class HttpClientFailuresImpl implements HttpClientFailures {
     /**
      * Return 400 status code - should be represented in the client as an error.
      *
-     * @param booleanValue Simple boolean value true
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @throws ErrorException thrown if the request is rejected by server
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
+     * @param booleanValue Simple boolean value true.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the Error object if successful.
      */
     public Error put400(Boolean booleanValue) {
@@ -332,10 +332,10 @@ public class HttpClientFailuresImpl implements HttpClientFailures {
     /**
      * Return 400 status code - should be represented in the client as an error.
      *
-     * @param booleanValue Simple boolean value true
+     * @param booleanValue Simple boolean value true.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceFuture} object
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link ServiceFuture&lt;Error&gt;} object.
      */
     public ServiceFuture<Error> put400Async(Boolean booleanValue, final ServiceCallback<Error> serviceCallback) {
         return ServiceFuture.fromBody(put400Async(booleanValue), serviceCallback);
@@ -344,8 +344,8 @@ public class HttpClientFailuresImpl implements HttpClientFailures {
     /**
      * Return 400 status code - should be represented in the client as an error.
      *
-     * @param booleanValue Simple boolean value true
-     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @param booleanValue Simple boolean value true.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, Error&gt;&gt;} object if successful.
      */
     public Single<RestResponse<Void, Error>> put400WithRestResponseAsync(Boolean booleanValue) {
@@ -355,9 +355,9 @@ public class HttpClientFailuresImpl implements HttpClientFailures {
     /**
      * Return 400 status code - should be represented in the client as an error.
      *
-     * @param booleanValue Simple boolean value true
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return a {@link Single} emitting the RestResponse<Void, Error> object
+     * @param booleanValue Simple boolean value true.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link Maybe&lt;Error&gt;} object if successful.
      */
     public Maybe<Error> put400Async(Boolean booleanValue) {
         return put400WithRestResponseAsync(booleanValue)
@@ -375,9 +375,9 @@ public class HttpClientFailuresImpl implements HttpClientFailures {
     /**
      * Return 400 status code - should be represented in the client as an error.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @throws ErrorException thrown if the request is rejected by server
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the Error object if successful.
      */
     public Error patch400() {
@@ -388,8 +388,8 @@ public class HttpClientFailuresImpl implements HttpClientFailures {
      * Return 400 status code - should be represented in the client as an error.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceFuture} object
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link ServiceFuture&lt;Error&gt;} object.
      */
     public ServiceFuture<Error> patch400Async(final ServiceCallback<Error> serviceCallback) {
         return ServiceFuture.fromBody(patch400Async(), serviceCallback);
@@ -398,7 +398,7 @@ public class HttpClientFailuresImpl implements HttpClientFailures {
     /**
      * Return 400 status code - should be represented in the client as an error.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, Error&gt;&gt;} object if successful.
      */
     public Single<RestResponse<Void, Error>> patch400WithRestResponseAsync() {
@@ -409,8 +409,8 @@ public class HttpClientFailuresImpl implements HttpClientFailures {
     /**
      * Return 400 status code - should be represented in the client as an error.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return a {@link Single} emitting the RestResponse<Void, Error> object
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link Maybe&lt;Error&gt;} object if successful.
      */
     public Maybe<Error> patch400Async() {
         return patch400WithRestResponseAsync()
@@ -428,10 +428,10 @@ public class HttpClientFailuresImpl implements HttpClientFailures {
     /**
      * Return 400 status code - should be represented in the client as an error.
      *
-     * @param booleanValue Simple boolean value true
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @throws ErrorException thrown if the request is rejected by server
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
+     * @param booleanValue Simple boolean value true.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the Error object if successful.
      */
     public Error patch400(Boolean booleanValue) {
@@ -441,10 +441,10 @@ public class HttpClientFailuresImpl implements HttpClientFailures {
     /**
      * Return 400 status code - should be represented in the client as an error.
      *
-     * @param booleanValue Simple boolean value true
+     * @param booleanValue Simple boolean value true.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceFuture} object
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link ServiceFuture&lt;Error&gt;} object.
      */
     public ServiceFuture<Error> patch400Async(Boolean booleanValue, final ServiceCallback<Error> serviceCallback) {
         return ServiceFuture.fromBody(patch400Async(booleanValue), serviceCallback);
@@ -453,8 +453,8 @@ public class HttpClientFailuresImpl implements HttpClientFailures {
     /**
      * Return 400 status code - should be represented in the client as an error.
      *
-     * @param booleanValue Simple boolean value true
-     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @param booleanValue Simple boolean value true.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, Error&gt;&gt;} object if successful.
      */
     public Single<RestResponse<Void, Error>> patch400WithRestResponseAsync(Boolean booleanValue) {
@@ -464,9 +464,9 @@ public class HttpClientFailuresImpl implements HttpClientFailures {
     /**
      * Return 400 status code - should be represented in the client as an error.
      *
-     * @param booleanValue Simple boolean value true
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return a {@link Single} emitting the RestResponse<Void, Error> object
+     * @param booleanValue Simple boolean value true.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link Maybe&lt;Error&gt;} object if successful.
      */
     public Maybe<Error> patch400Async(Boolean booleanValue) {
         return patch400WithRestResponseAsync(booleanValue)
@@ -484,9 +484,9 @@ public class HttpClientFailuresImpl implements HttpClientFailures {
     /**
      * Return 400 status code - should be represented in the client as an error.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @throws ErrorException thrown if the request is rejected by server
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the Error object if successful.
      */
     public Error post400() {
@@ -497,8 +497,8 @@ public class HttpClientFailuresImpl implements HttpClientFailures {
      * Return 400 status code - should be represented in the client as an error.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceFuture} object
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link ServiceFuture&lt;Error&gt;} object.
      */
     public ServiceFuture<Error> post400Async(final ServiceCallback<Error> serviceCallback) {
         return ServiceFuture.fromBody(post400Async(), serviceCallback);
@@ -507,7 +507,7 @@ public class HttpClientFailuresImpl implements HttpClientFailures {
     /**
      * Return 400 status code - should be represented in the client as an error.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, Error&gt;&gt;} object if successful.
      */
     public Single<RestResponse<Void, Error>> post400WithRestResponseAsync() {
@@ -518,8 +518,8 @@ public class HttpClientFailuresImpl implements HttpClientFailures {
     /**
      * Return 400 status code - should be represented in the client as an error.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return a {@link Single} emitting the RestResponse<Void, Error> object
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link Maybe&lt;Error&gt;} object if successful.
      */
     public Maybe<Error> post400Async() {
         return post400WithRestResponseAsync()
@@ -537,10 +537,10 @@ public class HttpClientFailuresImpl implements HttpClientFailures {
     /**
      * Return 400 status code - should be represented in the client as an error.
      *
-     * @param booleanValue Simple boolean value true
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @throws ErrorException thrown if the request is rejected by server
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
+     * @param booleanValue Simple boolean value true.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the Error object if successful.
      */
     public Error post400(Boolean booleanValue) {
@@ -550,10 +550,10 @@ public class HttpClientFailuresImpl implements HttpClientFailures {
     /**
      * Return 400 status code - should be represented in the client as an error.
      *
-     * @param booleanValue Simple boolean value true
+     * @param booleanValue Simple boolean value true.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceFuture} object
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link ServiceFuture&lt;Error&gt;} object.
      */
     public ServiceFuture<Error> post400Async(Boolean booleanValue, final ServiceCallback<Error> serviceCallback) {
         return ServiceFuture.fromBody(post400Async(booleanValue), serviceCallback);
@@ -562,8 +562,8 @@ public class HttpClientFailuresImpl implements HttpClientFailures {
     /**
      * Return 400 status code - should be represented in the client as an error.
      *
-     * @param booleanValue Simple boolean value true
-     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @param booleanValue Simple boolean value true.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, Error&gt;&gt;} object if successful.
      */
     public Single<RestResponse<Void, Error>> post400WithRestResponseAsync(Boolean booleanValue) {
@@ -573,9 +573,9 @@ public class HttpClientFailuresImpl implements HttpClientFailures {
     /**
      * Return 400 status code - should be represented in the client as an error.
      *
-     * @param booleanValue Simple boolean value true
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return a {@link Single} emitting the RestResponse<Void, Error> object
+     * @param booleanValue Simple boolean value true.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link Maybe&lt;Error&gt;} object if successful.
      */
     public Maybe<Error> post400Async(Boolean booleanValue) {
         return post400WithRestResponseAsync(booleanValue)
@@ -593,9 +593,9 @@ public class HttpClientFailuresImpl implements HttpClientFailures {
     /**
      * Return 400 status code - should be represented in the client as an error.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @throws ErrorException thrown if the request is rejected by server
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the Error object if successful.
      */
     public Error delete400() {
@@ -606,8 +606,8 @@ public class HttpClientFailuresImpl implements HttpClientFailures {
      * Return 400 status code - should be represented in the client as an error.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceFuture} object
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link ServiceFuture&lt;Error&gt;} object.
      */
     public ServiceFuture<Error> delete400Async(final ServiceCallback<Error> serviceCallback) {
         return ServiceFuture.fromBody(delete400Async(), serviceCallback);
@@ -616,7 +616,7 @@ public class HttpClientFailuresImpl implements HttpClientFailures {
     /**
      * Return 400 status code - should be represented in the client as an error.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, Error&gt;&gt;} object if successful.
      */
     public Single<RestResponse<Void, Error>> delete400WithRestResponseAsync() {
@@ -627,8 +627,8 @@ public class HttpClientFailuresImpl implements HttpClientFailures {
     /**
      * Return 400 status code - should be represented in the client as an error.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return a {@link Single} emitting the RestResponse<Void, Error> object
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link Maybe&lt;Error&gt;} object if successful.
      */
     public Maybe<Error> delete400Async() {
         return delete400WithRestResponseAsync()
@@ -646,10 +646,10 @@ public class HttpClientFailuresImpl implements HttpClientFailures {
     /**
      * Return 400 status code - should be represented in the client as an error.
      *
-     * @param booleanValue Simple boolean value true
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @throws ErrorException thrown if the request is rejected by server
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
+     * @param booleanValue Simple boolean value true.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the Error object if successful.
      */
     public Error delete400(Boolean booleanValue) {
@@ -659,10 +659,10 @@ public class HttpClientFailuresImpl implements HttpClientFailures {
     /**
      * Return 400 status code - should be represented in the client as an error.
      *
-     * @param booleanValue Simple boolean value true
+     * @param booleanValue Simple boolean value true.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceFuture} object
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link ServiceFuture&lt;Error&gt;} object.
      */
     public ServiceFuture<Error> delete400Async(Boolean booleanValue, final ServiceCallback<Error> serviceCallback) {
         return ServiceFuture.fromBody(delete400Async(booleanValue), serviceCallback);
@@ -671,8 +671,8 @@ public class HttpClientFailuresImpl implements HttpClientFailures {
     /**
      * Return 400 status code - should be represented in the client as an error.
      *
-     * @param booleanValue Simple boolean value true
-     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @param booleanValue Simple boolean value true.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, Error&gt;&gt;} object if successful.
      */
     public Single<RestResponse<Void, Error>> delete400WithRestResponseAsync(Boolean booleanValue) {
@@ -682,9 +682,9 @@ public class HttpClientFailuresImpl implements HttpClientFailures {
     /**
      * Return 400 status code - should be represented in the client as an error.
      *
-     * @param booleanValue Simple boolean value true
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return a {@link Single} emitting the RestResponse<Void, Error> object
+     * @param booleanValue Simple boolean value true.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link Maybe&lt;Error&gt;} object if successful.
      */
     public Maybe<Error> delete400Async(Boolean booleanValue) {
         return delete400WithRestResponseAsync(booleanValue)
@@ -702,9 +702,9 @@ public class HttpClientFailuresImpl implements HttpClientFailures {
     /**
      * Return 401 status code - should be represented in the client as an error.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @throws ErrorException thrown if the request is rejected by server
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the Error object if successful.
      */
     public Error head401() {
@@ -715,8 +715,8 @@ public class HttpClientFailuresImpl implements HttpClientFailures {
      * Return 401 status code - should be represented in the client as an error.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceFuture} object
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link ServiceFuture&lt;Error&gt;} object.
      */
     public ServiceFuture<Error> head401Async(final ServiceCallback<Error> serviceCallback) {
         return ServiceFuture.fromBody(head401Async(), serviceCallback);
@@ -725,7 +725,7 @@ public class HttpClientFailuresImpl implements HttpClientFailures {
     /**
      * Return 401 status code - should be represented in the client as an error.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, Error&gt;&gt;} object if successful.
      */
     public Single<RestResponse<Void, Error>> head401WithRestResponseAsync() {
@@ -735,8 +735,8 @@ public class HttpClientFailuresImpl implements HttpClientFailures {
     /**
      * Return 401 status code - should be represented in the client as an error.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return a {@link Single} emitting the RestResponse<Void, Error> object
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link Maybe&lt;Error&gt;} object if successful.
      */
     public Maybe<Error> head401Async() {
         return head401WithRestResponseAsync()
@@ -754,9 +754,9 @@ public class HttpClientFailuresImpl implements HttpClientFailures {
     /**
      * Return 402 status code - should be represented in the client as an error.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @throws ErrorException thrown if the request is rejected by server
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the Error object if successful.
      */
     public Error get402() {
@@ -767,8 +767,8 @@ public class HttpClientFailuresImpl implements HttpClientFailures {
      * Return 402 status code - should be represented in the client as an error.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceFuture} object
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link ServiceFuture&lt;Error&gt;} object.
      */
     public ServiceFuture<Error> get402Async(final ServiceCallback<Error> serviceCallback) {
         return ServiceFuture.fromBody(get402Async(), serviceCallback);
@@ -777,7 +777,7 @@ public class HttpClientFailuresImpl implements HttpClientFailures {
     /**
      * Return 402 status code - should be represented in the client as an error.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, Error&gt;&gt;} object if successful.
      */
     public Single<RestResponse<Void, Error>> get402WithRestResponseAsync() {
@@ -787,8 +787,8 @@ public class HttpClientFailuresImpl implements HttpClientFailures {
     /**
      * Return 402 status code - should be represented in the client as an error.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return a {@link Single} emitting the RestResponse<Void, Error> object
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link Maybe&lt;Error&gt;} object if successful.
      */
     public Maybe<Error> get402Async() {
         return get402WithRestResponseAsync()
@@ -806,9 +806,9 @@ public class HttpClientFailuresImpl implements HttpClientFailures {
     /**
      * Return 403 status code - should be represented in the client as an error.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @throws ErrorException thrown if the request is rejected by server
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the Error object if successful.
      */
     public Error get403() {
@@ -819,8 +819,8 @@ public class HttpClientFailuresImpl implements HttpClientFailures {
      * Return 403 status code - should be represented in the client as an error.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceFuture} object
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link ServiceFuture&lt;Error&gt;} object.
      */
     public ServiceFuture<Error> get403Async(final ServiceCallback<Error> serviceCallback) {
         return ServiceFuture.fromBody(get403Async(), serviceCallback);
@@ -829,7 +829,7 @@ public class HttpClientFailuresImpl implements HttpClientFailures {
     /**
      * Return 403 status code - should be represented in the client as an error.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, Error&gt;&gt;} object if successful.
      */
     public Single<RestResponse<Void, Error>> get403WithRestResponseAsync() {
@@ -839,8 +839,8 @@ public class HttpClientFailuresImpl implements HttpClientFailures {
     /**
      * Return 403 status code - should be represented in the client as an error.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return a {@link Single} emitting the RestResponse<Void, Error> object
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link Maybe&lt;Error&gt;} object if successful.
      */
     public Maybe<Error> get403Async() {
         return get403WithRestResponseAsync()
@@ -858,9 +858,9 @@ public class HttpClientFailuresImpl implements HttpClientFailures {
     /**
      * Return 404 status code - should be represented in the client as an error.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @throws ErrorException thrown if the request is rejected by server
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the Error object if successful.
      */
     public Error put404() {
@@ -871,8 +871,8 @@ public class HttpClientFailuresImpl implements HttpClientFailures {
      * Return 404 status code - should be represented in the client as an error.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceFuture} object
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link ServiceFuture&lt;Error&gt;} object.
      */
     public ServiceFuture<Error> put404Async(final ServiceCallback<Error> serviceCallback) {
         return ServiceFuture.fromBody(put404Async(), serviceCallback);
@@ -881,7 +881,7 @@ public class HttpClientFailuresImpl implements HttpClientFailures {
     /**
      * Return 404 status code - should be represented in the client as an error.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, Error&gt;&gt;} object if successful.
      */
     public Single<RestResponse<Void, Error>> put404WithRestResponseAsync() {
@@ -892,8 +892,8 @@ public class HttpClientFailuresImpl implements HttpClientFailures {
     /**
      * Return 404 status code - should be represented in the client as an error.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return a {@link Single} emitting the RestResponse<Void, Error> object
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link Maybe&lt;Error&gt;} object if successful.
      */
     public Maybe<Error> put404Async() {
         return put404WithRestResponseAsync()
@@ -911,10 +911,10 @@ public class HttpClientFailuresImpl implements HttpClientFailures {
     /**
      * Return 404 status code - should be represented in the client as an error.
      *
-     * @param booleanValue Simple boolean value true
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @throws ErrorException thrown if the request is rejected by server
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
+     * @param booleanValue Simple boolean value true.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the Error object if successful.
      */
     public Error put404(Boolean booleanValue) {
@@ -924,10 +924,10 @@ public class HttpClientFailuresImpl implements HttpClientFailures {
     /**
      * Return 404 status code - should be represented in the client as an error.
      *
-     * @param booleanValue Simple boolean value true
+     * @param booleanValue Simple boolean value true.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceFuture} object
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link ServiceFuture&lt;Error&gt;} object.
      */
     public ServiceFuture<Error> put404Async(Boolean booleanValue, final ServiceCallback<Error> serviceCallback) {
         return ServiceFuture.fromBody(put404Async(booleanValue), serviceCallback);
@@ -936,8 +936,8 @@ public class HttpClientFailuresImpl implements HttpClientFailures {
     /**
      * Return 404 status code - should be represented in the client as an error.
      *
-     * @param booleanValue Simple boolean value true
-     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @param booleanValue Simple boolean value true.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, Error&gt;&gt;} object if successful.
      */
     public Single<RestResponse<Void, Error>> put404WithRestResponseAsync(Boolean booleanValue) {
@@ -947,9 +947,9 @@ public class HttpClientFailuresImpl implements HttpClientFailures {
     /**
      * Return 404 status code - should be represented in the client as an error.
      *
-     * @param booleanValue Simple boolean value true
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return a {@link Single} emitting the RestResponse<Void, Error> object
+     * @param booleanValue Simple boolean value true.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link Maybe&lt;Error&gt;} object if successful.
      */
     public Maybe<Error> put404Async(Boolean booleanValue) {
         return put404WithRestResponseAsync(booleanValue)
@@ -967,9 +967,9 @@ public class HttpClientFailuresImpl implements HttpClientFailures {
     /**
      * Return 405 status code - should be represented in the client as an error.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @throws ErrorException thrown if the request is rejected by server
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the Error object if successful.
      */
     public Error patch405() {
@@ -980,8 +980,8 @@ public class HttpClientFailuresImpl implements HttpClientFailures {
      * Return 405 status code - should be represented in the client as an error.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceFuture} object
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link ServiceFuture&lt;Error&gt;} object.
      */
     public ServiceFuture<Error> patch405Async(final ServiceCallback<Error> serviceCallback) {
         return ServiceFuture.fromBody(patch405Async(), serviceCallback);
@@ -990,7 +990,7 @@ public class HttpClientFailuresImpl implements HttpClientFailures {
     /**
      * Return 405 status code - should be represented in the client as an error.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, Error&gt;&gt;} object if successful.
      */
     public Single<RestResponse<Void, Error>> patch405WithRestResponseAsync() {
@@ -1001,8 +1001,8 @@ public class HttpClientFailuresImpl implements HttpClientFailures {
     /**
      * Return 405 status code - should be represented in the client as an error.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return a {@link Single} emitting the RestResponse<Void, Error> object
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link Maybe&lt;Error&gt;} object if successful.
      */
     public Maybe<Error> patch405Async() {
         return patch405WithRestResponseAsync()
@@ -1020,10 +1020,10 @@ public class HttpClientFailuresImpl implements HttpClientFailures {
     /**
      * Return 405 status code - should be represented in the client as an error.
      *
-     * @param booleanValue Simple boolean value true
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @throws ErrorException thrown if the request is rejected by server
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
+     * @param booleanValue Simple boolean value true.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the Error object if successful.
      */
     public Error patch405(Boolean booleanValue) {
@@ -1033,10 +1033,10 @@ public class HttpClientFailuresImpl implements HttpClientFailures {
     /**
      * Return 405 status code - should be represented in the client as an error.
      *
-     * @param booleanValue Simple boolean value true
+     * @param booleanValue Simple boolean value true.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceFuture} object
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link ServiceFuture&lt;Error&gt;} object.
      */
     public ServiceFuture<Error> patch405Async(Boolean booleanValue, final ServiceCallback<Error> serviceCallback) {
         return ServiceFuture.fromBody(patch405Async(booleanValue), serviceCallback);
@@ -1045,8 +1045,8 @@ public class HttpClientFailuresImpl implements HttpClientFailures {
     /**
      * Return 405 status code - should be represented in the client as an error.
      *
-     * @param booleanValue Simple boolean value true
-     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @param booleanValue Simple boolean value true.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, Error&gt;&gt;} object if successful.
      */
     public Single<RestResponse<Void, Error>> patch405WithRestResponseAsync(Boolean booleanValue) {
@@ -1056,9 +1056,9 @@ public class HttpClientFailuresImpl implements HttpClientFailures {
     /**
      * Return 405 status code - should be represented in the client as an error.
      *
-     * @param booleanValue Simple boolean value true
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return a {@link Single} emitting the RestResponse<Void, Error> object
+     * @param booleanValue Simple boolean value true.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link Maybe&lt;Error&gt;} object if successful.
      */
     public Maybe<Error> patch405Async(Boolean booleanValue) {
         return patch405WithRestResponseAsync(booleanValue)
@@ -1076,9 +1076,9 @@ public class HttpClientFailuresImpl implements HttpClientFailures {
     /**
      * Return 406 status code - should be represented in the client as an error.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @throws ErrorException thrown if the request is rejected by server
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the Error object if successful.
      */
     public Error post406() {
@@ -1089,8 +1089,8 @@ public class HttpClientFailuresImpl implements HttpClientFailures {
      * Return 406 status code - should be represented in the client as an error.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceFuture} object
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link ServiceFuture&lt;Error&gt;} object.
      */
     public ServiceFuture<Error> post406Async(final ServiceCallback<Error> serviceCallback) {
         return ServiceFuture.fromBody(post406Async(), serviceCallback);
@@ -1099,7 +1099,7 @@ public class HttpClientFailuresImpl implements HttpClientFailures {
     /**
      * Return 406 status code - should be represented in the client as an error.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, Error&gt;&gt;} object if successful.
      */
     public Single<RestResponse<Void, Error>> post406WithRestResponseAsync() {
@@ -1110,8 +1110,8 @@ public class HttpClientFailuresImpl implements HttpClientFailures {
     /**
      * Return 406 status code - should be represented in the client as an error.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return a {@link Single} emitting the RestResponse<Void, Error> object
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link Maybe&lt;Error&gt;} object if successful.
      */
     public Maybe<Error> post406Async() {
         return post406WithRestResponseAsync()
@@ -1129,10 +1129,10 @@ public class HttpClientFailuresImpl implements HttpClientFailures {
     /**
      * Return 406 status code - should be represented in the client as an error.
      *
-     * @param booleanValue Simple boolean value true
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @throws ErrorException thrown if the request is rejected by server
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
+     * @param booleanValue Simple boolean value true.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the Error object if successful.
      */
     public Error post406(Boolean booleanValue) {
@@ -1142,10 +1142,10 @@ public class HttpClientFailuresImpl implements HttpClientFailures {
     /**
      * Return 406 status code - should be represented in the client as an error.
      *
-     * @param booleanValue Simple boolean value true
+     * @param booleanValue Simple boolean value true.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceFuture} object
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link ServiceFuture&lt;Error&gt;} object.
      */
     public ServiceFuture<Error> post406Async(Boolean booleanValue, final ServiceCallback<Error> serviceCallback) {
         return ServiceFuture.fromBody(post406Async(booleanValue), serviceCallback);
@@ -1154,8 +1154,8 @@ public class HttpClientFailuresImpl implements HttpClientFailures {
     /**
      * Return 406 status code - should be represented in the client as an error.
      *
-     * @param booleanValue Simple boolean value true
-     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @param booleanValue Simple boolean value true.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, Error&gt;&gt;} object if successful.
      */
     public Single<RestResponse<Void, Error>> post406WithRestResponseAsync(Boolean booleanValue) {
@@ -1165,9 +1165,9 @@ public class HttpClientFailuresImpl implements HttpClientFailures {
     /**
      * Return 406 status code - should be represented in the client as an error.
      *
-     * @param booleanValue Simple boolean value true
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return a {@link Single} emitting the RestResponse<Void, Error> object
+     * @param booleanValue Simple boolean value true.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link Maybe&lt;Error&gt;} object if successful.
      */
     public Maybe<Error> post406Async(Boolean booleanValue) {
         return post406WithRestResponseAsync(booleanValue)
@@ -1185,9 +1185,9 @@ public class HttpClientFailuresImpl implements HttpClientFailures {
     /**
      * Return 407 status code - should be represented in the client as an error.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @throws ErrorException thrown if the request is rejected by server
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the Error object if successful.
      */
     public Error delete407() {
@@ -1198,8 +1198,8 @@ public class HttpClientFailuresImpl implements HttpClientFailures {
      * Return 407 status code - should be represented in the client as an error.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceFuture} object
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link ServiceFuture&lt;Error&gt;} object.
      */
     public ServiceFuture<Error> delete407Async(final ServiceCallback<Error> serviceCallback) {
         return ServiceFuture.fromBody(delete407Async(), serviceCallback);
@@ -1208,7 +1208,7 @@ public class HttpClientFailuresImpl implements HttpClientFailures {
     /**
      * Return 407 status code - should be represented in the client as an error.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, Error&gt;&gt;} object if successful.
      */
     public Single<RestResponse<Void, Error>> delete407WithRestResponseAsync() {
@@ -1219,8 +1219,8 @@ public class HttpClientFailuresImpl implements HttpClientFailures {
     /**
      * Return 407 status code - should be represented in the client as an error.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return a {@link Single} emitting the RestResponse<Void, Error> object
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link Maybe&lt;Error&gt;} object if successful.
      */
     public Maybe<Error> delete407Async() {
         return delete407WithRestResponseAsync()
@@ -1238,10 +1238,10 @@ public class HttpClientFailuresImpl implements HttpClientFailures {
     /**
      * Return 407 status code - should be represented in the client as an error.
      *
-     * @param booleanValue Simple boolean value true
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @throws ErrorException thrown if the request is rejected by server
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
+     * @param booleanValue Simple boolean value true.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the Error object if successful.
      */
     public Error delete407(Boolean booleanValue) {
@@ -1251,10 +1251,10 @@ public class HttpClientFailuresImpl implements HttpClientFailures {
     /**
      * Return 407 status code - should be represented in the client as an error.
      *
-     * @param booleanValue Simple boolean value true
+     * @param booleanValue Simple boolean value true.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceFuture} object
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link ServiceFuture&lt;Error&gt;} object.
      */
     public ServiceFuture<Error> delete407Async(Boolean booleanValue, final ServiceCallback<Error> serviceCallback) {
         return ServiceFuture.fromBody(delete407Async(booleanValue), serviceCallback);
@@ -1263,8 +1263,8 @@ public class HttpClientFailuresImpl implements HttpClientFailures {
     /**
      * Return 407 status code - should be represented in the client as an error.
      *
-     * @param booleanValue Simple boolean value true
-     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @param booleanValue Simple boolean value true.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, Error&gt;&gt;} object if successful.
      */
     public Single<RestResponse<Void, Error>> delete407WithRestResponseAsync(Boolean booleanValue) {
@@ -1274,9 +1274,9 @@ public class HttpClientFailuresImpl implements HttpClientFailures {
     /**
      * Return 407 status code - should be represented in the client as an error.
      *
-     * @param booleanValue Simple boolean value true
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return a {@link Single} emitting the RestResponse<Void, Error> object
+     * @param booleanValue Simple boolean value true.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link Maybe&lt;Error&gt;} object if successful.
      */
     public Maybe<Error> delete407Async(Boolean booleanValue) {
         return delete407WithRestResponseAsync(booleanValue)
@@ -1294,9 +1294,9 @@ public class HttpClientFailuresImpl implements HttpClientFailures {
     /**
      * Return 409 status code - should be represented in the client as an error.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @throws ErrorException thrown if the request is rejected by server
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the Error object if successful.
      */
     public Error put409() {
@@ -1307,8 +1307,8 @@ public class HttpClientFailuresImpl implements HttpClientFailures {
      * Return 409 status code - should be represented in the client as an error.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceFuture} object
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link ServiceFuture&lt;Error&gt;} object.
      */
     public ServiceFuture<Error> put409Async(final ServiceCallback<Error> serviceCallback) {
         return ServiceFuture.fromBody(put409Async(), serviceCallback);
@@ -1317,7 +1317,7 @@ public class HttpClientFailuresImpl implements HttpClientFailures {
     /**
      * Return 409 status code - should be represented in the client as an error.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, Error&gt;&gt;} object if successful.
      */
     public Single<RestResponse<Void, Error>> put409WithRestResponseAsync() {
@@ -1328,8 +1328,8 @@ public class HttpClientFailuresImpl implements HttpClientFailures {
     /**
      * Return 409 status code - should be represented in the client as an error.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return a {@link Single} emitting the RestResponse<Void, Error> object
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link Maybe&lt;Error&gt;} object if successful.
      */
     public Maybe<Error> put409Async() {
         return put409WithRestResponseAsync()
@@ -1347,10 +1347,10 @@ public class HttpClientFailuresImpl implements HttpClientFailures {
     /**
      * Return 409 status code - should be represented in the client as an error.
      *
-     * @param booleanValue Simple boolean value true
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @throws ErrorException thrown if the request is rejected by server
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
+     * @param booleanValue Simple boolean value true.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the Error object if successful.
      */
     public Error put409(Boolean booleanValue) {
@@ -1360,10 +1360,10 @@ public class HttpClientFailuresImpl implements HttpClientFailures {
     /**
      * Return 409 status code - should be represented in the client as an error.
      *
-     * @param booleanValue Simple boolean value true
+     * @param booleanValue Simple boolean value true.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceFuture} object
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link ServiceFuture&lt;Error&gt;} object.
      */
     public ServiceFuture<Error> put409Async(Boolean booleanValue, final ServiceCallback<Error> serviceCallback) {
         return ServiceFuture.fromBody(put409Async(booleanValue), serviceCallback);
@@ -1372,8 +1372,8 @@ public class HttpClientFailuresImpl implements HttpClientFailures {
     /**
      * Return 409 status code - should be represented in the client as an error.
      *
-     * @param booleanValue Simple boolean value true
-     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @param booleanValue Simple boolean value true.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, Error&gt;&gt;} object if successful.
      */
     public Single<RestResponse<Void, Error>> put409WithRestResponseAsync(Boolean booleanValue) {
@@ -1383,9 +1383,9 @@ public class HttpClientFailuresImpl implements HttpClientFailures {
     /**
      * Return 409 status code - should be represented in the client as an error.
      *
-     * @param booleanValue Simple boolean value true
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return a {@link Single} emitting the RestResponse<Void, Error> object
+     * @param booleanValue Simple boolean value true.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link Maybe&lt;Error&gt;} object if successful.
      */
     public Maybe<Error> put409Async(Boolean booleanValue) {
         return put409WithRestResponseAsync(booleanValue)
@@ -1403,9 +1403,9 @@ public class HttpClientFailuresImpl implements HttpClientFailures {
     /**
      * Return 410 status code - should be represented in the client as an error.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @throws ErrorException thrown if the request is rejected by server
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the Error object if successful.
      */
     public Error head410() {
@@ -1416,8 +1416,8 @@ public class HttpClientFailuresImpl implements HttpClientFailures {
      * Return 410 status code - should be represented in the client as an error.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceFuture} object
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link ServiceFuture&lt;Error&gt;} object.
      */
     public ServiceFuture<Error> head410Async(final ServiceCallback<Error> serviceCallback) {
         return ServiceFuture.fromBody(head410Async(), serviceCallback);
@@ -1426,7 +1426,7 @@ public class HttpClientFailuresImpl implements HttpClientFailures {
     /**
      * Return 410 status code - should be represented in the client as an error.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, Error&gt;&gt;} object if successful.
      */
     public Single<RestResponse<Void, Error>> head410WithRestResponseAsync() {
@@ -1436,8 +1436,8 @@ public class HttpClientFailuresImpl implements HttpClientFailures {
     /**
      * Return 410 status code - should be represented in the client as an error.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return a {@link Single} emitting the RestResponse<Void, Error> object
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link Maybe&lt;Error&gt;} object if successful.
      */
     public Maybe<Error> head410Async() {
         return head410WithRestResponseAsync()
@@ -1455,9 +1455,9 @@ public class HttpClientFailuresImpl implements HttpClientFailures {
     /**
      * Return 411 status code - should be represented in the client as an error.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @throws ErrorException thrown if the request is rejected by server
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the Error object if successful.
      */
     public Error get411() {
@@ -1468,8 +1468,8 @@ public class HttpClientFailuresImpl implements HttpClientFailures {
      * Return 411 status code - should be represented in the client as an error.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceFuture} object
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link ServiceFuture&lt;Error&gt;} object.
      */
     public ServiceFuture<Error> get411Async(final ServiceCallback<Error> serviceCallback) {
         return ServiceFuture.fromBody(get411Async(), serviceCallback);
@@ -1478,7 +1478,7 @@ public class HttpClientFailuresImpl implements HttpClientFailures {
     /**
      * Return 411 status code - should be represented in the client as an error.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, Error&gt;&gt;} object if successful.
      */
     public Single<RestResponse<Void, Error>> get411WithRestResponseAsync() {
@@ -1488,8 +1488,8 @@ public class HttpClientFailuresImpl implements HttpClientFailures {
     /**
      * Return 411 status code - should be represented in the client as an error.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return a {@link Single} emitting the RestResponse<Void, Error> object
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link Maybe&lt;Error&gt;} object if successful.
      */
     public Maybe<Error> get411Async() {
         return get411WithRestResponseAsync()
@@ -1507,9 +1507,9 @@ public class HttpClientFailuresImpl implements HttpClientFailures {
     /**
      * Return 412 status code - should be represented in the client as an error.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @throws ErrorException thrown if the request is rejected by server
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the Error object if successful.
      */
     public Error get412() {
@@ -1520,8 +1520,8 @@ public class HttpClientFailuresImpl implements HttpClientFailures {
      * Return 412 status code - should be represented in the client as an error.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceFuture} object
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link ServiceFuture&lt;Error&gt;} object.
      */
     public ServiceFuture<Error> get412Async(final ServiceCallback<Error> serviceCallback) {
         return ServiceFuture.fromBody(get412Async(), serviceCallback);
@@ -1530,7 +1530,7 @@ public class HttpClientFailuresImpl implements HttpClientFailures {
     /**
      * Return 412 status code - should be represented in the client as an error.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, Error&gt;&gt;} object if successful.
      */
     public Single<RestResponse<Void, Error>> get412WithRestResponseAsync() {
@@ -1540,8 +1540,8 @@ public class HttpClientFailuresImpl implements HttpClientFailures {
     /**
      * Return 412 status code - should be represented in the client as an error.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return a {@link Single} emitting the RestResponse<Void, Error> object
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link Maybe&lt;Error&gt;} object if successful.
      */
     public Maybe<Error> get412Async() {
         return get412WithRestResponseAsync()
@@ -1559,9 +1559,9 @@ public class HttpClientFailuresImpl implements HttpClientFailures {
     /**
      * Return 413 status code - should be represented in the client as an error.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @throws ErrorException thrown if the request is rejected by server
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the Error object if successful.
      */
     public Error put413() {
@@ -1572,8 +1572,8 @@ public class HttpClientFailuresImpl implements HttpClientFailures {
      * Return 413 status code - should be represented in the client as an error.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceFuture} object
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link ServiceFuture&lt;Error&gt;} object.
      */
     public ServiceFuture<Error> put413Async(final ServiceCallback<Error> serviceCallback) {
         return ServiceFuture.fromBody(put413Async(), serviceCallback);
@@ -1582,7 +1582,7 @@ public class HttpClientFailuresImpl implements HttpClientFailures {
     /**
      * Return 413 status code - should be represented in the client as an error.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, Error&gt;&gt;} object if successful.
      */
     public Single<RestResponse<Void, Error>> put413WithRestResponseAsync() {
@@ -1593,8 +1593,8 @@ public class HttpClientFailuresImpl implements HttpClientFailures {
     /**
      * Return 413 status code - should be represented in the client as an error.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return a {@link Single} emitting the RestResponse<Void, Error> object
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link Maybe&lt;Error&gt;} object if successful.
      */
     public Maybe<Error> put413Async() {
         return put413WithRestResponseAsync()
@@ -1612,10 +1612,10 @@ public class HttpClientFailuresImpl implements HttpClientFailures {
     /**
      * Return 413 status code - should be represented in the client as an error.
      *
-     * @param booleanValue Simple boolean value true
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @throws ErrorException thrown if the request is rejected by server
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
+     * @param booleanValue Simple boolean value true.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the Error object if successful.
      */
     public Error put413(Boolean booleanValue) {
@@ -1625,10 +1625,10 @@ public class HttpClientFailuresImpl implements HttpClientFailures {
     /**
      * Return 413 status code - should be represented in the client as an error.
      *
-     * @param booleanValue Simple boolean value true
+     * @param booleanValue Simple boolean value true.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceFuture} object
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link ServiceFuture&lt;Error&gt;} object.
      */
     public ServiceFuture<Error> put413Async(Boolean booleanValue, final ServiceCallback<Error> serviceCallback) {
         return ServiceFuture.fromBody(put413Async(booleanValue), serviceCallback);
@@ -1637,8 +1637,8 @@ public class HttpClientFailuresImpl implements HttpClientFailures {
     /**
      * Return 413 status code - should be represented in the client as an error.
      *
-     * @param booleanValue Simple boolean value true
-     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @param booleanValue Simple boolean value true.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, Error&gt;&gt;} object if successful.
      */
     public Single<RestResponse<Void, Error>> put413WithRestResponseAsync(Boolean booleanValue) {
@@ -1648,9 +1648,9 @@ public class HttpClientFailuresImpl implements HttpClientFailures {
     /**
      * Return 413 status code - should be represented in the client as an error.
      *
-     * @param booleanValue Simple boolean value true
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return a {@link Single} emitting the RestResponse<Void, Error> object
+     * @param booleanValue Simple boolean value true.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link Maybe&lt;Error&gt;} object if successful.
      */
     public Maybe<Error> put413Async(Boolean booleanValue) {
         return put413WithRestResponseAsync(booleanValue)
@@ -1668,9 +1668,9 @@ public class HttpClientFailuresImpl implements HttpClientFailures {
     /**
      * Return 414 status code - should be represented in the client as an error.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @throws ErrorException thrown if the request is rejected by server
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the Error object if successful.
      */
     public Error patch414() {
@@ -1681,8 +1681,8 @@ public class HttpClientFailuresImpl implements HttpClientFailures {
      * Return 414 status code - should be represented in the client as an error.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceFuture} object
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link ServiceFuture&lt;Error&gt;} object.
      */
     public ServiceFuture<Error> patch414Async(final ServiceCallback<Error> serviceCallback) {
         return ServiceFuture.fromBody(patch414Async(), serviceCallback);
@@ -1691,7 +1691,7 @@ public class HttpClientFailuresImpl implements HttpClientFailures {
     /**
      * Return 414 status code - should be represented in the client as an error.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, Error&gt;&gt;} object if successful.
      */
     public Single<RestResponse<Void, Error>> patch414WithRestResponseAsync() {
@@ -1702,8 +1702,8 @@ public class HttpClientFailuresImpl implements HttpClientFailures {
     /**
      * Return 414 status code - should be represented in the client as an error.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return a {@link Single} emitting the RestResponse<Void, Error> object
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link Maybe&lt;Error&gt;} object if successful.
      */
     public Maybe<Error> patch414Async() {
         return patch414WithRestResponseAsync()
@@ -1721,10 +1721,10 @@ public class HttpClientFailuresImpl implements HttpClientFailures {
     /**
      * Return 414 status code - should be represented in the client as an error.
      *
-     * @param booleanValue Simple boolean value true
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @throws ErrorException thrown if the request is rejected by server
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
+     * @param booleanValue Simple boolean value true.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the Error object if successful.
      */
     public Error patch414(Boolean booleanValue) {
@@ -1734,10 +1734,10 @@ public class HttpClientFailuresImpl implements HttpClientFailures {
     /**
      * Return 414 status code - should be represented in the client as an error.
      *
-     * @param booleanValue Simple boolean value true
+     * @param booleanValue Simple boolean value true.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceFuture} object
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link ServiceFuture&lt;Error&gt;} object.
      */
     public ServiceFuture<Error> patch414Async(Boolean booleanValue, final ServiceCallback<Error> serviceCallback) {
         return ServiceFuture.fromBody(patch414Async(booleanValue), serviceCallback);
@@ -1746,8 +1746,8 @@ public class HttpClientFailuresImpl implements HttpClientFailures {
     /**
      * Return 414 status code - should be represented in the client as an error.
      *
-     * @param booleanValue Simple boolean value true
-     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @param booleanValue Simple boolean value true.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, Error&gt;&gt;} object if successful.
      */
     public Single<RestResponse<Void, Error>> patch414WithRestResponseAsync(Boolean booleanValue) {
@@ -1757,9 +1757,9 @@ public class HttpClientFailuresImpl implements HttpClientFailures {
     /**
      * Return 414 status code - should be represented in the client as an error.
      *
-     * @param booleanValue Simple boolean value true
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return a {@link Single} emitting the RestResponse<Void, Error> object
+     * @param booleanValue Simple boolean value true.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link Maybe&lt;Error&gt;} object if successful.
      */
     public Maybe<Error> patch414Async(Boolean booleanValue) {
         return patch414WithRestResponseAsync(booleanValue)
@@ -1777,9 +1777,9 @@ public class HttpClientFailuresImpl implements HttpClientFailures {
     /**
      * Return 415 status code - should be represented in the client as an error.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @throws ErrorException thrown if the request is rejected by server
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the Error object if successful.
      */
     public Error post415() {
@@ -1790,8 +1790,8 @@ public class HttpClientFailuresImpl implements HttpClientFailures {
      * Return 415 status code - should be represented in the client as an error.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceFuture} object
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link ServiceFuture&lt;Error&gt;} object.
      */
     public ServiceFuture<Error> post415Async(final ServiceCallback<Error> serviceCallback) {
         return ServiceFuture.fromBody(post415Async(), serviceCallback);
@@ -1800,7 +1800,7 @@ public class HttpClientFailuresImpl implements HttpClientFailures {
     /**
      * Return 415 status code - should be represented in the client as an error.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, Error&gt;&gt;} object if successful.
      */
     public Single<RestResponse<Void, Error>> post415WithRestResponseAsync() {
@@ -1811,8 +1811,8 @@ public class HttpClientFailuresImpl implements HttpClientFailures {
     /**
      * Return 415 status code - should be represented in the client as an error.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return a {@link Single} emitting the RestResponse<Void, Error> object
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link Maybe&lt;Error&gt;} object if successful.
      */
     public Maybe<Error> post415Async() {
         return post415WithRestResponseAsync()
@@ -1830,10 +1830,10 @@ public class HttpClientFailuresImpl implements HttpClientFailures {
     /**
      * Return 415 status code - should be represented in the client as an error.
      *
-     * @param booleanValue Simple boolean value true
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @throws ErrorException thrown if the request is rejected by server
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
+     * @param booleanValue Simple boolean value true.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the Error object if successful.
      */
     public Error post415(Boolean booleanValue) {
@@ -1843,10 +1843,10 @@ public class HttpClientFailuresImpl implements HttpClientFailures {
     /**
      * Return 415 status code - should be represented in the client as an error.
      *
-     * @param booleanValue Simple boolean value true
+     * @param booleanValue Simple boolean value true.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceFuture} object
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link ServiceFuture&lt;Error&gt;} object.
      */
     public ServiceFuture<Error> post415Async(Boolean booleanValue, final ServiceCallback<Error> serviceCallback) {
         return ServiceFuture.fromBody(post415Async(booleanValue), serviceCallback);
@@ -1855,8 +1855,8 @@ public class HttpClientFailuresImpl implements HttpClientFailures {
     /**
      * Return 415 status code - should be represented in the client as an error.
      *
-     * @param booleanValue Simple boolean value true
-     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @param booleanValue Simple boolean value true.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, Error&gt;&gt;} object if successful.
      */
     public Single<RestResponse<Void, Error>> post415WithRestResponseAsync(Boolean booleanValue) {
@@ -1866,9 +1866,9 @@ public class HttpClientFailuresImpl implements HttpClientFailures {
     /**
      * Return 415 status code - should be represented in the client as an error.
      *
-     * @param booleanValue Simple boolean value true
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return a {@link Single} emitting the RestResponse<Void, Error> object
+     * @param booleanValue Simple boolean value true.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link Maybe&lt;Error&gt;} object if successful.
      */
     public Maybe<Error> post415Async(Boolean booleanValue) {
         return post415WithRestResponseAsync(booleanValue)
@@ -1886,9 +1886,9 @@ public class HttpClientFailuresImpl implements HttpClientFailures {
     /**
      * Return 416 status code - should be represented in the client as an error.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @throws ErrorException thrown if the request is rejected by server
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the Error object if successful.
      */
     public Error get416() {
@@ -1899,8 +1899,8 @@ public class HttpClientFailuresImpl implements HttpClientFailures {
      * Return 416 status code - should be represented in the client as an error.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceFuture} object
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link ServiceFuture&lt;Error&gt;} object.
      */
     public ServiceFuture<Error> get416Async(final ServiceCallback<Error> serviceCallback) {
         return ServiceFuture.fromBody(get416Async(), serviceCallback);
@@ -1909,7 +1909,7 @@ public class HttpClientFailuresImpl implements HttpClientFailures {
     /**
      * Return 416 status code - should be represented in the client as an error.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, Error&gt;&gt;} object if successful.
      */
     public Single<RestResponse<Void, Error>> get416WithRestResponseAsync() {
@@ -1919,8 +1919,8 @@ public class HttpClientFailuresImpl implements HttpClientFailures {
     /**
      * Return 416 status code - should be represented in the client as an error.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return a {@link Single} emitting the RestResponse<Void, Error> object
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link Maybe&lt;Error&gt;} object if successful.
      */
     public Maybe<Error> get416Async() {
         return get416WithRestResponseAsync()
@@ -1938,9 +1938,9 @@ public class HttpClientFailuresImpl implements HttpClientFailures {
     /**
      * Return 417 status code - should be represented in the client as an error.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @throws ErrorException thrown if the request is rejected by server
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the Error object if successful.
      */
     public Error delete417() {
@@ -1951,8 +1951,8 @@ public class HttpClientFailuresImpl implements HttpClientFailures {
      * Return 417 status code - should be represented in the client as an error.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceFuture} object
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link ServiceFuture&lt;Error&gt;} object.
      */
     public ServiceFuture<Error> delete417Async(final ServiceCallback<Error> serviceCallback) {
         return ServiceFuture.fromBody(delete417Async(), serviceCallback);
@@ -1961,7 +1961,7 @@ public class HttpClientFailuresImpl implements HttpClientFailures {
     /**
      * Return 417 status code - should be represented in the client as an error.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, Error&gt;&gt;} object if successful.
      */
     public Single<RestResponse<Void, Error>> delete417WithRestResponseAsync() {
@@ -1972,8 +1972,8 @@ public class HttpClientFailuresImpl implements HttpClientFailures {
     /**
      * Return 417 status code - should be represented in the client as an error.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return a {@link Single} emitting the RestResponse<Void, Error> object
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link Maybe&lt;Error&gt;} object if successful.
      */
     public Maybe<Error> delete417Async() {
         return delete417WithRestResponseAsync()
@@ -1991,10 +1991,10 @@ public class HttpClientFailuresImpl implements HttpClientFailures {
     /**
      * Return 417 status code - should be represented in the client as an error.
      *
-     * @param booleanValue Simple boolean value true
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @throws ErrorException thrown if the request is rejected by server
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
+     * @param booleanValue Simple boolean value true.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the Error object if successful.
      */
     public Error delete417(Boolean booleanValue) {
@@ -2004,10 +2004,10 @@ public class HttpClientFailuresImpl implements HttpClientFailures {
     /**
      * Return 417 status code - should be represented in the client as an error.
      *
-     * @param booleanValue Simple boolean value true
+     * @param booleanValue Simple boolean value true.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceFuture} object
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link ServiceFuture&lt;Error&gt;} object.
      */
     public ServiceFuture<Error> delete417Async(Boolean booleanValue, final ServiceCallback<Error> serviceCallback) {
         return ServiceFuture.fromBody(delete417Async(booleanValue), serviceCallback);
@@ -2016,8 +2016,8 @@ public class HttpClientFailuresImpl implements HttpClientFailures {
     /**
      * Return 417 status code - should be represented in the client as an error.
      *
-     * @param booleanValue Simple boolean value true
-     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @param booleanValue Simple boolean value true.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, Error&gt;&gt;} object if successful.
      */
     public Single<RestResponse<Void, Error>> delete417WithRestResponseAsync(Boolean booleanValue) {
@@ -2027,9 +2027,9 @@ public class HttpClientFailuresImpl implements HttpClientFailures {
     /**
      * Return 417 status code - should be represented in the client as an error.
      *
-     * @param booleanValue Simple boolean value true
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return a {@link Single} emitting the RestResponse<Void, Error> object
+     * @param booleanValue Simple boolean value true.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link Maybe&lt;Error&gt;} object if successful.
      */
     public Maybe<Error> delete417Async(Boolean booleanValue) {
         return delete417WithRestResponseAsync(booleanValue)
@@ -2047,9 +2047,9 @@ public class HttpClientFailuresImpl implements HttpClientFailures {
     /**
      * Return 429 status code - should be represented in the client as an error.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @throws ErrorException thrown if the request is rejected by server
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the Error object if successful.
      */
     public Error head429() {
@@ -2060,8 +2060,8 @@ public class HttpClientFailuresImpl implements HttpClientFailures {
      * Return 429 status code - should be represented in the client as an error.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceFuture} object
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link ServiceFuture&lt;Error&gt;} object.
      */
     public ServiceFuture<Error> head429Async(final ServiceCallback<Error> serviceCallback) {
         return ServiceFuture.fromBody(head429Async(), serviceCallback);
@@ -2070,7 +2070,7 @@ public class HttpClientFailuresImpl implements HttpClientFailures {
     /**
      * Return 429 status code - should be represented in the client as an error.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, Error&gt;&gt;} object if successful.
      */
     public Single<RestResponse<Void, Error>> head429WithRestResponseAsync() {
@@ -2080,8 +2080,8 @@ public class HttpClientFailuresImpl implements HttpClientFailures {
     /**
      * Return 429 status code - should be represented in the client as an error.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return a {@link Single} emitting the RestResponse<Void, Error> object
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link Maybe&lt;Error&gt;} object if successful.
      */
     public Maybe<Error> head429Async() {
         return head429WithRestResponseAsync()

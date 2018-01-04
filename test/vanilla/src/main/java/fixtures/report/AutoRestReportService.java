@@ -27,9 +27,9 @@ public interface AutoRestReportService {
     /**
      * Get test coverage report.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @throws ErrorException thrown if the request is rejected by server
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the Map&lt;String, Integer&gt; object if successful.
      */
     Map<String, Integer> getReport();
@@ -38,23 +38,15 @@ public interface AutoRestReportService {
      * Get test coverage report.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceFuture} object
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link ServiceFuture&lt;Map&lt;String, Integer&gt;&gt;} object.
      */
     ServiceFuture<Map<String, Integer>> getReportAsync(final ServiceCallback<Map<String, Integer>> serviceCallback);
 
     /**
      * Get test coverage report.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the Map&lt;String, Integer&gt; object
-     */
-    Maybe<Map<String, Integer>> getReportAsync();
-
-    /**
-     * Get test coverage report.
-     *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, Map&lt;String, Integer&gt;&gt;&gt;} object if successful.
      */
     Single<RestResponse<Void, Map<String, Integer>>> getReportWithRestResponseAsync();
@@ -62,10 +54,18 @@ public interface AutoRestReportService {
     /**
      * Get test coverage report.
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link Maybe&lt;Map&lt;String, Integer&gt;&gt;} object if successful.
+     */
+    Maybe<Map<String, Integer>> getReportAsync();
+
+    /**
+     * Get test coverage report.
+     *
      * @param qualifier If specified, qualifies the generated report further (e.g. '2.7' vs '3.5' in for Python). The only effect is, that generators that run all tests several times, can distinguish the generated reports.
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @throws ErrorException thrown if the request is rejected by server
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the Map&lt;String, Integer&gt; object if successful.
      */
     Map<String, Integer> getReport(String qualifier);
@@ -75,8 +75,8 @@ public interface AutoRestReportService {
      *
      * @param qualifier If specified, qualifies the generated report further (e.g. '2.7' vs '3.5' in for Python). The only effect is, that generators that run all tests several times, can distinguish the generated reports.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceFuture} object
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link ServiceFuture&lt;Map&lt;String, Integer&gt;&gt;} object.
      */
     ServiceFuture<Map<String, Integer>> getReportAsync(String qualifier, final ServiceCallback<Map<String, Integer>> serviceCallback);
 
@@ -84,17 +84,17 @@ public interface AutoRestReportService {
      * Get test coverage report.
      *
      * @param qualifier If specified, qualifies the generated report further (e.g. '2.7' vs '3.5' in for Python). The only effect is, that generators that run all tests several times, can distinguish the generated reports.
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the Map&lt;String, Integer&gt; object
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link Single&lt;RestResponse&lt;Void, Map&lt;String, Integer&gt;&gt;&gt;} object if successful.
      */
-    Maybe<Map<String, Integer>> getReportAsync(String qualifier);
+    Single<RestResponse<Void, Map<String, Integer>>> getReportWithRestResponseAsync(String qualifier);
 
     /**
      * Get test coverage report.
      *
      * @param qualifier If specified, qualifies the generated report further (e.g. '2.7' vs '3.5' in for Python). The only effect is, that generators that run all tests several times, can distinguish the generated reports.
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single&lt;RestResponse&lt;Void, Map&lt;String, Integer&gt;&gt;&gt;} object if successful.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link Maybe&lt;Map&lt;String, Integer&gt;&gt;} object if successful.
      */
-    Single<RestResponse<Void, Map<String, Integer>>> getReportWithRestResponseAsync(String qualifier);
+    Maybe<Map<String, Integer>> getReportAsync(String qualifier);
 }

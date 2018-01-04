@@ -4,7 +4,6 @@ using AutoRest.Core.Utilities;
 using AutoRest.Core.Utilities.Collections;
 using AutoRest.Extensions;
 using AutoRest.Extensions.Azure;
-using AutoRest.Java.Azure.Fluent;
 using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
@@ -16,7 +15,7 @@ using System.Net;
 using System.Text;
 using System.Text.RegularExpressions;
 
-namespace AutoRest.Java.DanModel
+namespace AutoRest.Java
 {
     public static class DanCodeGenerator
     {
@@ -58,10 +57,15 @@ namespace AutoRest.Java.DanModel
         private const string innerSupportsDeleteImport = innerSupportsImportPrefix + "Delete";
         private const string innerSupportsListingImport = innerSupportsImportPrefix + "Listing";
 
+        private const string GetByResourceGroup = "GetByResourceGroup";
+        private const string ListByResourceGroup = "ListByResourceGroup";
+        private const string List = "List";
+        private const string Delete = "Delete";
+
         internal static readonly IDictionary<KeyValuePair<string, string>, string> pageClasses = new Dictionary<KeyValuePair<string, string>, string>();
 
         private static readonly ISet<Property> innerModelProperties = new HashSet<Property>();
-        internal static readonly ISet<CompositeType> innerModelCompositeType = new HashSet<CompositeType>();
+        private static readonly ISet<CompositeType> innerModelCompositeType = new HashSet<CompositeType>();
 
         private static readonly ISet<SequenceType> pagedListTypes = new HashSet<SequenceType>();
 
@@ -71,6 +75,26 @@ namespace AutoRest.Java.DanModel
 
         // This is a Not set because the default value for WantNullable was true.
         private static readonly ISet<PrimaryType> primaryTypeNotWantNullable = new HashSet<PrimaryType>();
+
+        private static readonly ISet<string> primaryTypes = new HashSet<string>()
+        {
+            "int", "Integer",
+            "long", "Long",
+            "object", "Object",
+            "bool", "Boolean",
+            "double", "Double",
+            "float", "Float",
+            "byte", "Byte",
+            "byte[]", "Byte[]",
+            "String",
+            "LocalDate",
+            "DateTime",
+            "DateTimeRfc1123",
+            "Duration",
+            "Period",
+            "BigDecimal",
+            "AsyncInputStream"
+        };
 
         internal static IEnumerable<JavaFile> GetMethodGroupClientAndMethodGroupClientInterfaceJavaFiles(CodeModel codeModel, Settings settings)
         {
@@ -175,7 +199,7 @@ namespace AutoRest.Java.DanModel
                         comment.Param("subscriptionId", "the subscription UUID");
                         comment.Return($"the interface exposing {serviceName} management API entry points that work across subscriptions");
                     });
-                    interfaceBlock.Method($"{className} authenticate({azureTokenCredentialsType} {credentialsVariableName}, String subscriptionId)");
+                    interfaceBlock.PublicMethod($"{className} authenticate({azureTokenCredentialsType} {credentialsVariableName}, String subscriptionId)");
                 });
 
                 classBlock.MultipleLineComment(comment =>
@@ -319,7 +343,7 @@ namespace AutoRest.Java.DanModel
                             IModelType parameterType = ParameterGetModelType(parameter);
                             if (parameterType is SequenceType sequenceType && !javaFileMap.Keys.Contains(sequenceType, ModelNameComparer.Instance))
                             {
-                                string sequenceTypeName = IModelTypeName(sequenceType);
+                                string sequenceTypeName = IModelTypeName(sequenceType, settings);
                                 string xmlName = sequenceType.XmlName;
                                 string xmlNameCamelCase = xmlName.ToCamelCase();
                                 string className = $"{xmlName.ToPascalCase()}Wrapper";
@@ -370,18 +394,224 @@ namespace AutoRest.Java.DanModel
             string serviceClientClassName = GetServiceClientClassName(codeModel);
             JavaFile javaFile = GetJavaFileWithHeaderAndPackage(codeModel, implPackage, settings, serviceClientClassName);
 
-            javaFile.Import(GetServiceClientClassImports(codeModel, settings));
-
-            AddServiceClientClassComment(javaFile, codeModel, settings);
-            javaFile.PublicClass(GetServiceClientClassDeclaration(codeModel, settings), classBlock =>
+            string serviceClientClassDeclaration = $"{serviceClientClassName} extends ";
+            bool isFluent = IsFluent(settings);
+            if (isFluent || IsAzure(settings))
             {
-                AddRestAPIProxyMemberVariable(classBlock, codeModel);
+                serviceClientClassDeclaration += "Azure";
+            }
+            serviceClientClassDeclaration += "ServiceClient";
+            if (!isFluent)
+            {
+                serviceClientClassDeclaration += $" implements {GetServiceClientInterfaceName(codeModel)}";
+            }
 
-                AddClientPropertyVariablesAndGettersAndSetters(classBlock, codeModel, serviceClientClassName);
+            HashSet<string> imports = new HashSet<string>();
+            if (!isFluent)
+            {
+                string serviceClientInterfacePath = GetPackage(codeModel) + "." + GetServiceClientInterfaceName(codeModel);
+                imports.Add(serviceClientInterfacePath);
 
-                AddMethodGroupClientVariablesAndGetters(classBlock, codeModel, settings);
+                foreach (string methodGroupClientInterfacePath in GetMethodGroups(codeModel).Select(GetMethodGroupClientInterfacePath))
+                {
+                    imports.Add(methodGroupClientInterfacePath);
+                }
+            }
+            if (HasServiceClientCredentials(codeModel))
+            {
+                imports.Add(serviceClientCredentialsImport);
+            }
+            IEnumerable<Method> restAPIMethods = GetRestAPIMethods(codeModel);
+            if (restAPIMethods.Any())
+            {
+                imports.Add("com.microsoft.rest.v2.RestResponse");
+                imports.AddRange(restAPIMethods.SelectMany(m => MethodImplImports(m, settings)));
+            }
+            imports.Add(httpPipelineImport);
+            if (isFluent || IsAzure(settings))
+            {
+                imports.Add(azureProxyImport);
+                imports.Add("com.microsoft.azure.v2.AzureServiceClient");
+                imports.Add(azureEnvironmentImport);
+            }
+            else
+            {
+                imports.Add(restProxyImport);
+                imports.Add("com.microsoft.rest.v2.ServiceClient");
+            }
+            javaFile.Import(imports);
 
-                AddServiceClientConstructors(classBlock, codeModel, settings);
+            javaFile.MultipleLineComment(comment =>
+            {
+                string serviceClientTypeName = isFluent ? serviceClientClassName : GetServiceClientInterfaceName(codeModel);
+                comment.Description($"Initializes a new instance of the {serviceClientTypeName} type.");
+            });
+            javaFile.PublicClass(serviceClientClassDeclaration, classBlock =>
+            {
+                // Add proxy service member variable
+                if (restAPIMethods.Any())
+                {
+                    classBlock.MultipleLineComment($"The proxy service used to perform REST calls.");
+                    classBlock.PrivateMemberVariable(GetRestAPIInterfaceName(codeModel), "service");
+                }
+
+                // Add ServiceClient client property variables, getters, and setters
+                IEnumerable<Property> clientProperties = GetServiceClientProperties(codeModel);
+                foreach (Property clientProperty in clientProperties)
+                {
+                    string propertyDocumentation = clientProperty.Documentation.ToString();
+                    string propertyType = IModelTypeName(IModelTypeServiceResponseVariant(GetPropertyModelType(clientProperty)), settings);
+                    string propertyName = clientProperty.Name;
+                    string propertyNameCamelCase = propertyName.ToCamelCase();
+
+                    classBlock.MultipleLineComment(comment =>
+                    {
+                        comment.Description(propertyDocumentation);
+                    });
+                    classBlock.PrivateMemberVariable($"{propertyType} {propertyNameCamelCase}");
+
+                    classBlock.MultipleLineComment(comment =>
+                    {
+                        comment.Description($"Gets {propertyDocumentation}");
+                        comment.Return($"the {propertyNameCamelCase} value.");
+                    });
+                    classBlock.PublicMethod($"{propertyType} {propertyNameCamelCase}()", function =>
+                    {
+                        function.Return($"this.{propertyNameCamelCase}");
+                    });
+
+                    if (!clientProperty.IsReadOnly)
+                    {
+                        classBlock.MultipleLineComment(comment =>
+                        {
+                            comment.Description($"Sets {propertyDocumentation}");
+                            comment.Param(propertyNameCamelCase, $"the {propertyNameCamelCase} value.");
+                            comment.Return("the service client itself");
+                        });
+                        classBlock.PublicMethod($"{serviceClientClassName} with{propertyName.ToPascalCase()}({propertyType} {propertyNameCamelCase})", function =>
+                        {
+                            function.Line($"this.{propertyNameCamelCase} = {propertyNameCamelCase};");
+                            function.Return("this");
+                        });
+                    }
+                }
+
+                // Method Group Client declarations and getters
+                foreach (MethodGroup methodGroup in GetMethodGroups(codeModel))
+                {
+                    string methodGroupDeclarationType = IsFluent(settings) ? GetMethodGroupClientClassName(methodGroup, settings) : GetMethodGroupClientInterfaceName(methodGroup);
+
+                    classBlock.MultipleLineComment(comment =>
+                    {
+                        comment.Description($"The {methodGroupDeclarationType} object to access its operations.");
+                    });
+                    classBlock.PrivateMemberVariable(methodGroupDeclarationType, MethodGroupName(methodGroup));
+
+                    classBlock.MultipleLineComment(comment =>
+                    {
+                        comment.Description($"Gets the {methodGroupDeclarationType} object to access its operations.");
+                        comment.Return($"the {methodGroupDeclarationType} object.");
+                    });
+                    classBlock.PublicMethod($"{methodGroupDeclarationType} {MethodGroupName(methodGroup)}()", function =>
+                    {
+                        function.Return($"this.{MethodGroupName(methodGroup)}");
+                    });
+                }
+
+                // Service Client Constructors
+                string serviceClientInterfaceName = GetServiceClientInterfaceName(codeModel);
+                string constructorDescription = $"Initializes an instance of {serviceClientInterfaceName} client.";
+                if (isFluent || IsAzure(settings))
+                {
+                    if (HasServiceClientCredentials(codeModel))
+                    {
+                        string createDefaultPipelineExpression = CreateDefaultPipelineExpression(settings, serviceClientClassName + ".class", credentialsVariableName);
+                        classBlock.MultipleLineComment(comment =>
+                        {
+                            comment.Description(constructorDescription);
+                            comment.Param(credentialsVariableName, credentialsDescription);
+                        });
+                        classBlock.PublicConstructor($"{serviceClientClassName}({serviceClientCredentialsType} {credentialsVariableName})", constructor =>
+                        {
+                            constructor.Line($"this({createDefaultPipelineExpression});");
+                        });
+
+                        classBlock.MultipleLineComment(comment =>
+                        {
+                            comment.Description(constructorDescription);
+                            comment.Param(credentialsVariableName, credentialsDescription);
+                            comment.Param(azureEnvironmentVariableName, azureEnvironmentDescription);
+                        });
+                        classBlock.PublicConstructor($"{serviceClientClassName}({serviceClientCredentialsType} {credentialsVariableName}, {azureEnvironmentType} {azureEnvironmentVariableName})", constructor =>
+                        {
+                            constructor.Line($"this({createDefaultPipelineExpression}, {azureEnvironmentVariableName});");
+                        });
+                    }
+                    else
+                    {
+                        string createDefaultPipelineExpression = CreateDefaultPipelineExpression(settings, serviceClientClassName);
+                        classBlock.MultipleLineComment(comment =>
+                        {
+                            comment.Description(constructorDescription);
+                        });
+                        classBlock.PublicConstructor($"{serviceClientClassName}()", constructor =>
+                        {
+                            constructor.Line($"this({createDefaultPipelineExpression});");
+                        });
+
+                        classBlock.MultipleLineComment(comment =>
+                        {
+                            comment.Description(constructorDescription);
+                            comment.Param(azureEnvironmentVariableName, azureEnvironmentDescription);
+                        });
+                        classBlock.PublicConstructor($"{serviceClientClassName}({azureEnvironmentType} {azureEnvironmentVariableName})", constructor =>
+                        {
+                            constructor.Line($"this({createDefaultPipelineExpression}, {azureEnvironmentVariableName});");
+                        });
+                    }
+
+                    classBlock.MultipleLineComment(comment =>
+                    {
+                        comment.Description(constructorDescription);
+                        comment.Param(httpPipelineVariableName, httpPipelineDescription);
+                    });
+                    classBlock.PublicConstructor($"{serviceClientClassName}({httpPipelineType} {httpPipelineVariableName})", constructor =>
+                    {
+                        constructor.Line($"this({httpPipelineVariableName}, null);");
+                    });
+
+                    classBlock.MultipleLineComment(comment =>
+                    {
+                        comment.Description(constructorDescription);
+                        comment.Param(httpPipelineVariableName, httpPipelineDescription);
+                        comment.Param(azureEnvironmentVariableName, azureEnvironmentDescription);
+                    });
+                    classBlock.PublicConstructor($"{serviceClientClassName}({httpPipelineType} {httpPipelineVariableName}, {azureEnvironmentType} {azureEnvironmentVariableName})", constructor =>
+                    {
+                        AddServiceClientConstructorBody(constructor, codeModel, settings);
+                    });
+                }
+                else
+                {
+                    classBlock.MultipleLineComment(comment =>
+                    {
+                        comment.Description(constructorDescription);
+                    });
+                    classBlock.PublicConstructor($"{serviceClientClassName}()", constructor =>
+                    {
+                        constructor.Line($"this({CreateDefaultPipelineExpression(settings)});");
+                    });
+
+                    classBlock.MultipleLineComment(comment =>
+                    {
+                        comment.Description(constructorDescription);
+                        comment.Param(httpPipelineVariableName, httpPipelineDescription);
+                    });
+                    classBlock.PublicConstructor($"{serviceClientClassName}({httpPipelineType} {httpPipelineVariableName})", constructor =>
+                    {
+                        AddServiceClientConstructorBody(constructor, codeModel, settings);
+                    });
+                }
 
                 AddRestAPIInterface(classBlock, codeModel, settings);
 
@@ -406,11 +636,11 @@ namespace AutoRest.Java.DanModel
 
             javaFile.MultipleLineComment(comment =>
             {
-                comment.Line($"The interface for {interfaceName} class.");
+                comment.Description($"The interface for {interfaceName} class.");
             });
             javaFile.PublicInterface(interfaceName, interfaceBlock =>
             {
-                AddServiceClientInterfacePropertyGettersAndSetters(interfaceBlock, codeModel);
+                AddServiceClientInterfacePropertyGettersAndSetters(interfaceBlock, codeModel, settings);
 
                 foreach (MethodGroup methodGroup in GetMethodGroups(codeModel))
                 {
@@ -420,10 +650,10 @@ namespace AutoRest.Java.DanModel
                         comment.Description($"Gets the {methodGroupClientInterfaceName} object to access its operations.");
                         comment.Return($"the {methodGroupClientInterfaceName} object.");
                     });
-                    interfaceBlock.Method($"{methodGroupClientInterfaceName} {MethodGroupName(methodGroup).ToCamelCase()}()");
+                    interfaceBlock.PublicMethod($"{methodGroupClientInterfaceName} {MethodGroupName(methodGroup).ToCamelCase()}()");
                 }
 
-                AddServiceClientInterfaceMethods(interfaceBlock, codeModel, settings);
+                AddClientMethodOverloads(interfaceBlock, GetRestAPIMethods(codeModel), settings);
             });
 
             return javaFile;
@@ -439,11 +669,11 @@ namespace AutoRest.Java.DanModel
 
             javaFile.MultipleLineComment(comment =>
             {
-                comment.Line($"The interface for {interfaceName} class.");
+                comment.Description($"The interface for {interfaceName} class.");
             });
             javaFile.PublicInterface(interfaceName, interfaceBlock =>
             {
-                AddServiceClientInterfacePropertyGettersAndSetters(interfaceBlock, codeModel);
+                AddServiceClientInterfacePropertyGettersAndSetters(interfaceBlock, codeModel, settings);
 
                 foreach (MethodGroup methodGroup in GetMethodGroups(codeModel))
                 {
@@ -452,13 +682,13 @@ namespace AutoRest.Java.DanModel
 
                     interfaceBlock.MultipleLineComment(comment =>
                     {
-                        comment.Line($"Gets the {methodGroupClientInterfaceName} object to access its operations.");
+                        comment.Description($"Gets the {methodGroupClientInterfaceName} object to access its operations.");
                         comment.Return($"the {methodGroupClientInterfaceName} object.");
                     });
-                    interfaceBlock.Method($"{methodGroupClientInterfaceName} {methodGroupName}()");
+                    interfaceBlock.PublicMethod($"{methodGroupClientInterfaceName} {methodGroupName}()");
                 }
 
-                AddServiceClientInterfaceMethods(interfaceBlock, codeModel, settings);
+                AddClientMethodOverloads(interfaceBlock, GetRestAPIMethods(codeModel), settings);
             });
 
             return javaFile;
@@ -473,13 +703,32 @@ namespace AutoRest.Java.DanModel
 
             int maximumCommentWidth = GetMaximumCommentWidth(settings);
             string methodGroupClientInterfaceName = GetMethodGroupClientInterfaceName(methodGroup);
+
+            string parentDeclaration;
+            if (IsFluent(settings))
+            {
+                IEnumerable<string> supportedInterfaces = MethodGroupSupportedInterfaces(methodGroup, settings);
+                if (supportedInterfaces.Any())
+                {
+                    parentDeclaration = $" implements {string.Join(", ", supportedInterfaces)}";
+                }
+                else
+                {
+                    parentDeclaration = "";
+                }
+            }
+            else
+            {
+                parentDeclaration = " implements " + MethodGroupTypeString(methodGroup, settings);
+            }
+
             javaFile.WordWrappedMultipleLineComment(maximumCommentWidth, comment =>
             {
-                comment.Line($"An instance of this class provides access to all the operations defined in {methodGroupClientInterfaceName}.");
+                comment.Description($"An instance of this class provides access to all the operations defined in {methodGroupClientInterfaceName}.");
             });
-            javaFile.PublicClass($"{className}{MethodGroupParentDeclaration(methodGroup, settings)}", classBlock =>
+            javaFile.PublicClass($"{className}{parentDeclaration}", classBlock =>
             {
-                string restAPIInterfaceName = GetRestAPIInterfaceName(methodGroup);
+                string restAPIInterfaceName = GetRestAPIInterfaceName(methodGroup, settings);
                 string serviceClientTypeName = MethodGroupServiceClientType(methodGroup);
 
                 classBlock.MultipleLineComment($"The proxy service used to perform REST calls.");
@@ -495,13 +744,13 @@ namespace AutoRest.Java.DanModel
                 });
                 classBlock.PublicConstructor($"{className}({serviceClientTypeName} client)", constructor =>
                 {
-                    AddProxyVariableInitializationStatement(constructor, GetRestAPIMethods(methodGroup), GetRestAPIInterfaceName(methodGroup), "client", settings);
+                    AddProxyVariableInitializationStatement(constructor, GetRestAPIMethods(methodGroup), GetRestAPIInterfaceName(methodGroup, settings), "client", settings);
                     constructor.Line("this.client = client;");
                 });
 
                 AddRestAPIInterface(classBlock, codeModel, methodGroup, settings);
 
-                AddClientMethodOverloads(classBlock, methodGroup.Methods, settings);
+                AddClientMethodOverloads(classBlock, GetRestAPIMethods(methodGroup), settings);
             });
 
             return javaFile;
@@ -523,33 +772,7 @@ namespace AutoRest.Java.DanModel
             });
             javaFile.PublicInterface(methodGroupClientInterfaceName, interfaceBlock =>
             {
-                IEnumerable<JavaMethod> methods = methodGroup.Methods.SelectMany(methodGroupMethod => ParseMethod(methodGroupMethod, settings));
-                foreach (JavaMethod method in methods)
-                {
-                    interfaceBlock.MultipleLineComment((comment) =>
-                    {
-                        comment.Description(method.Description);
-                        if (method.Parameters != null)
-                        {
-                            foreach (JavaMethodParameter parameter in method.Parameters)
-                            {
-                                comment.Param(parameter.Name, parameter.Description);
-                            }
-                        }
-                        if (method.Throws != null)
-                        {
-                            foreach (JavaThrow methodThrow in method.Throws)
-                            {
-                                comment.Throws(methodThrow.ExceptionTypeName, methodThrow.Description);
-                            }
-                        }
-                        if (!string.IsNullOrEmpty(method.Return.Description))
-                        {
-                            comment.Return(method.Return.Description);
-                        }
-                    });
-                    interfaceBlock.Method($"{method.Return.Type} {method.Name}({string.Join(", ", method.Parameters.Select(parameter => parameter.Declaration))})");
-                }
+                AddClientMethodOverloads(interfaceBlock, GetRestAPIMethods(methodGroup), settings);
             });
             return javaFile;
         }
@@ -574,7 +797,7 @@ namespace AutoRest.Java.DanModel
                 {
                     javaFile.WordWrappedMultipleLineSlashSlashComment(maximumHeaderCommentWidth, (comment) =>
                     {
-                        comment.Line(headerComment);
+                        comment.Description(headerComment);
                     });
                     javaFile.Line();
                 }
@@ -583,16 +806,16 @@ namespace AutoRest.Java.DanModel
                 {
                     if (string.IsNullOrEmpty(subPackage))
                     {
-                        comment.Line($"This package contains the classes for {title}.");
+                        comment.Description($"This package contains the classes for {title}.");
                     }
                     else
                     {
-                        comment.Line($"This package contains the {subPackage} classes for {title}.");
+                        comment.Description($"This package contains the {subPackage} classes for {title}.");
                     }
 
                     if (!string.IsNullOrEmpty(description))
                     {
-                        comment.Line(description.Period());
+                        comment.Description(description);
                     }
                 });
 
@@ -613,95 +836,33 @@ namespace AutoRest.Java.DanModel
 
             foreach (CompositeType modelType in codeModel.ModelTypes.Union(codeModel.HeaderTypes))
             {
-                bool shouldGenerate = true;
-
-                if (IsAzure(settings))
+                if (!IsAzure(settings) || (!CompositeTypeIsExternalExtension(modelType) && !CompositeTypeIsResource(modelType, settings)))
                 {
-                    bool isExternalExtension =
-                        modelType.Extensions.ContainsKey(SwaggerExtensions.ExternalExtension) &&
-                        (bool)modelType.Extensions[SwaggerExtensions.ExternalExtension];
-
-                    shouldGenerate = !isExternalExtension && !CompositeTypeIsResource(modelType);
-                }
-
-                if (shouldGenerate)
-                {
-                    IEnumerable<JavaMemberVariable> memberVariables = GetCompositeTypeProperties(modelType).Select((Property property) =>
-                    {
-                        string comment;
-                        if (string.IsNullOrEmpty(property.Summary) && string.IsNullOrEmpty(property.Documentation))
-                        {
-                            comment = $"The {property.Name} property.";
-                        }
-                        else
-                        {
-                            string summary = property.Summary.EscapeXmlComment().Period();
-                            string documentation = property.Documentation.EscapeXmlComment().Period();
-
-                            comment = summary;
-                            if (!string.IsNullOrEmpty(documentation))
-                            {
-                                if (!string.IsNullOrEmpty(comment))
-                                {
-                                    comment += "\n";
-                                }
-                                comment += documentation;
-                            }
-                        }
-
-                        string annotation = null;
-                        string annotationArgs = property.GetSerializeAnnotationArgs(shouldGenerateXmlSerialization);
-                        if (!string.IsNullOrEmpty(annotationArgs))
-                        {
-                            if (property.XmlIsAttribute)
-                            {
-                                string localName = shouldGenerateXmlSerialization ? property.XmlName : property.SerializedName.ToString();
-                                annotation = $"JacksonXmlProperty(localName = \"{localName}\", isAttribute = true)";
-                            }
-                            else if (shouldGenerateXmlSerialization && property.XmlIsWrapped && property.ModelType is SequenceType)
-                            {
-                                string localName = shouldGenerateXmlSerialization ? property.XmlName : property.SerializedName.ToString();
-                                annotation = $"JacksonXmlElementWrapper(localName = \"{localName}\")";
-                            }
-                            else
-                            {
-                                annotation = $"JsonProperty({annotationArgs})";
-                            }
-                        }
-
-                        bool isConstant = property.IsConstant;
-                        bool isReadOnly = property.IsReadOnly;
-
-                        bool isPrimitive = !(GetPropertyModelType(property) is CompositeType);
-                        JavaType wireType = new JavaType(IModelTypeName(GetPropertyModelType(property)), isPrimitive);
-                        JavaType clientType = new JavaType(IModelTypeName(GetIModelTypeResponseVariant(GetPropertyModelType(property))), isPrimitive);
-
-                        string name = property.Name;
-
-                        string defaultValue;
-                        try
-                        {
-                            defaultValue = property.DefaultValue;
-                        }
-                        catch (NotSupportedException)
-                        {
-                            defaultValue = null;
-                        }
-
-                        return new JavaMemberVariable(comment, annotation, isConstant, isReadOnly, wireType, clientType, name, defaultValue);
-                    });
-
-                    string className = IModelTypeName(modelType);
+                    string className = IModelTypeName(modelType, settings);
                     JavaFile javaFile = GetJavaFileWithHeaderAndPackage(codeModel, GetCompositeTypeModelsPackage(modelType, settings), settings, className);
 
                     List<string> imports = new List<string>();
-                    IEnumerable<Property> compositeTypeProperties = GetCompositeTypeProperties(modelType);
+                    IEnumerable<Property> compositeTypeProperties = GetCompositeTypeProperties(modelType, settings);
                     foreach (Property property in compositeTypeProperties)
                     {
-                        imports.AddRange(GetImports(property, settings));
+                        IModelType propertyModelType = GetPropertyModelType(property);
+                        IEnumerable<string> propertyModelTypeImports = GetIModelTypeImports(propertyModelType, settings);
+                        if (propertyModelType.IsPrimaryType(KnownPrimaryType.DateTimeRfc1123) || propertyModelType.IsPrimaryType(KnownPrimaryType.Base64Url))
+                        {
+                            imports.AddRange(propertyModelTypeImports);
+                            imports.AddRange(GetIModelTypeImports(GetIModelTypeResponseVariant(propertyModelType), settings));
+                        }
+                        else if (IsFluent(settings))
+                        {
+                            imports.AddRange(propertyModelTypeImports.Where(c => !c.StartsWith(GetPackage(property.Parent.CodeModel), StringComparison.Ordinal) || c.EndsWith("Inner", StringComparison.Ordinal) ^ innerModelProperties.Contains(property)));
+                        }
+                        else
+                        {
+                            imports.AddRange(propertyModelTypeImports.Where(c => !c.StartsWith(GetPackage(property.Parent.CodeModel, "models"), StringComparison.OrdinalIgnoreCase)));
+                        }
                     }
 
-                    if (compositeTypeProperties.Any(p => !p.GetSerializeAnnotationArgs(shouldGenerateXmlSerialization).IsNullOrEmpty()))
+                    if (compositeTypeProperties.Any(p => !GetSerializeAnnotationArgs(p, shouldGenerateXmlSerialization).IsNullOrEmpty()))
                     {
                         imports.Add("com.fasterxml.jackson.annotation.JsonProperty");
                     }
@@ -731,17 +892,17 @@ namespace AutoRest.Java.DanModel
                     }
 
                     // For flattening
-                    if (CompositeTypeNeedsFlatten(modelType))
+                    if (CompositeTypeNeedsFlatten(modelType, settings))
                     {
                         imports.Add("com.microsoft.rest.v2.serializer.JsonFlatten");
                     }
 
                     if (IsAzure(settings))
                     {
-                        foreach (Property property in GetCompositeTypeProperties(modelType))
+                        foreach (Property property in GetCompositeTypeProperties(modelType, settings))
                         {
                             IModelType propertyModelType = GetPropertyModelType(property);
-                            if (propertyModelType is CompositeType compositeType && CompositeTypeIsResource(compositeType))
+                            if (propertyModelType is CompositeType compositeType && CompositeTypeIsResource(compositeType, settings))
                             {
                                 imports.Add($"com.microsoft.azure.v2.{IModelTypeName(propertyModelType, settings)}");
                             }
@@ -768,11 +929,11 @@ namespace AutoRest.Java.DanModel
                     {
                         if (string.IsNullOrEmpty(modelType.Summary) && string.IsNullOrEmpty(modelType.Documentation))
                         {
-                            comment.Line($"The {IModelTypeName(modelType)} model.");
+                            comment.Description($"The {IModelTypeName(modelType, settings)} model.");
                         }
                         else
                         {
-                            comment.Line($"{modelType.Summary.EscapeXmlComment().Period()}{modelType.Documentation.EscapeXmlComment().Period()}");
+                            comment.Description($"{modelType.Summary.EscapeXmlComment()}{modelType.Documentation.EscapeXmlComment()}");
                         }
                     });
 
@@ -789,7 +950,7 @@ namespace AutoRest.Java.DanModel
 
                             Func<CompositeType, bool, string> getSubTypeAnnotation = (CompositeType subType, bool isLast) =>
                             {
-                                string subTypeAnnotation = $"@JsonSubTypes.Type(name = \"{subType.SerializedName}\", value = {IModelTypeName(subType)}.class)";
+                                string subTypeAnnotation = $"@JsonSubTypes.Type(name = \"{subType.SerializedName}\", value = {IModelTypeName(subType, settings)}.class)";
                                 if (!isLast)
                                 {
                                     subTypeAnnotation += ",";
@@ -813,62 +974,105 @@ namespace AutoRest.Java.DanModel
                         javaFile.Annotation($"JacksonXmlRootElement(localName = \"{modelType.XmlName}\")");
                     }
 
-                    if (CompositeTypeNeedsFlatten(modelType))
+                    if (CompositeTypeNeedsFlatten(modelType, settings))
                     {
                         javaFile.Annotation("JsonFlatten");
                     }
 
                     string classNameWithBaseType = className;
-                    string baseTypeName = IModelTypeName(modelType.BaseModelType);
+                    string baseTypeName = IModelTypeName(modelType.BaseModelType, settings);
                     if (!string.IsNullOrEmpty(baseTypeName))
                     {
                         classNameWithBaseType += $" extends {baseTypeName}";
                     }
                     javaFile.PublicClass(classNameWithBaseType, (classBlock) =>
                     {
-                        if (memberVariables != null && memberVariables.Any())
+                        IEnumerable<Property> properties = GetCompositeTypeProperties(modelType, settings);
+                        if (properties != null && properties.Any())
                         {
-                            foreach (JavaMemberVariable memberVariable in memberVariables)
+                            foreach (Property property in properties)
                             {
                                 classBlock.WordWrappedMultipleLineComment(maximumCommentWidth, (comment) =>
                                 {
-                                    comment.Line(memberVariable.Comment);
+                                    if (string.IsNullOrEmpty(property.Summary) && string.IsNullOrEmpty(property.Documentation))
+                                    {
+                                        comment.Description($"The {property.Name} property.");
+                                    }
+                                    else
+                                    {
+                                        string summary = property.Summary.EscapeXmlComment();
+                                        if (!string.IsNullOrEmpty(summary))
+                                        {
+                                            comment.Description(summary);
+                                        }
+
+                                        string documentation = property.Documentation.EscapeXmlComment();
+                                        if (!string.IsNullOrEmpty(documentation))
+                                        {
+                                            comment.Description(documentation);
+                                        }
+                                    }
                                 });
-                                classBlock.Annotation(memberVariable.Annotation);
-                                classBlock.PrivateMemberVariable($"{memberVariable.WireType.Name} {memberVariable.Name}");
+                                string annotationArgs = GetSerializeAnnotationArgs(property, shouldGenerateXmlSerialization);
+                                if (!string.IsNullOrEmpty(annotationArgs))
+                                {
+                                    if (property.XmlIsAttribute)
+                                    {
+                                        string localName = shouldGenerateXmlSerialization ? property.XmlName : property.SerializedName.ToString();
+                                        classBlock.Annotation($"JacksonXmlProperty(localName = \"{localName}\", isAttribute = true)");
+                                    }
+                                    else if (shouldGenerateXmlSerialization && property.XmlIsWrapped && property.ModelType is SequenceType)
+                                    {
+                                        string localName = shouldGenerateXmlSerialization ? property.XmlName : property.SerializedName.ToString();
+                                        classBlock.Annotation($"JacksonXmlElementWrapper(localName = \"{localName}\")");
+                                    }
+                                    else
+                                    {
+                                        classBlock.Annotation($"JsonProperty({annotationArgs})");
+                                    }
+                                }
+                                classBlock.PrivateMemberVariable($"{GetPropertyWireTypeName(property, settings)} {property.Name}");
                             }
 
-                            IEnumerable<JavaMemberVariable> constantMemberVariables = memberVariables.Where((memberVariable) => memberVariable.IsConstant);
-                            if (constantMemberVariables.Any())
+                            IEnumerable<Property> constantProperties = properties.Where(property => property.IsConstant);
+                            if (constantProperties.Any())
                             {
                                 classBlock.WordWrappedMultipleLineComment(maximumCommentWidth, (comment) =>
                                 {
-                                    comment.Line($"Creates an instance of {className} class.");
+                                    comment.Description($"Creates an instance of {className} class.");
                                 });
                                 classBlock.PublicConstructor($"{className}()", (constructor) =>
                                 {
-                                    foreach (JavaMemberVariable memberVariable in constantMemberVariables)
+                                    foreach (Property constantProperty in constantProperties)
                                     {
-                                        JavaType type = memberVariable.WireType;
-                                        if (!type.IsPrimitive)
+                                        bool propertyIsPrimitiveType = !(GetPropertyModelType(constantProperty) is CompositeType);
+                                        if (!propertyIsPrimitiveType)
                                         {
-                                            constructor.Line($"{memberVariable.Name} = new {type.Name}();");
+                                            constructor.Line($"{constantProperty.Name} = new {GetPropertyWireTypeName(constantProperty, settings)}();");
                                         }
                                         else
                                         {
-                                            constructor.Line($"{memberVariable.Name} = {memberVariable.DefaultValue};");
+                                            string defaultValue;
+                                            try
+                                            {
+                                                defaultValue = constantProperty.DefaultValue;
+                                            }
+                                            catch (NotSupportedException)
+                                            {
+                                                defaultValue = null;
+                                            }
+                                            constructor.Line($"{constantProperty.Name} = {defaultValue};");
                                         }
                                     }
                                 });
                             }
 
-                            foreach (JavaMemberVariable memberVariable in memberVariables)
+                            foreach (Property property in properties)
                             {
-                                string variableName = memberVariable.Name;
-                                JavaType clientType = memberVariable.ClientType;
-                                JavaType wireType = memberVariable.WireType;
-                                string clientTypeName = clientType.Name;
-                                bool clientTypeDifferentFromWireType = !clientType.Equals(memberVariable.WireType);
+                                string variableName = property.Name;
+                                string clientTypeName = IModelTypeName(GetIModelTypeResponseVariant(GetPropertyModelType(property)), settings);
+                                string wireTypeName = GetPropertyWireTypeName(property, settings);
+                                bool clientTypeDifferentFromWireType = clientTypeName != wireTypeName;
 
                                 classBlock.WordWrappedMultipleLineComment(maximumCommentWidth, (comment) =>
                                 {
@@ -883,7 +1087,7 @@ namespace AutoRest.Java.DanModel
                                         {
                                             ifBlock.Return("null");
                                         });
-                                        methodBlock.Return(wireType.ConvertTo(clientType, $"this.{variableName}"));
+                                        methodBlock.Return(ConvertProperty(wireTypeName, clientTypeName, $"this.{variableName}"));
                                     }
                                     else
                                     {
@@ -891,7 +1095,7 @@ namespace AutoRest.Java.DanModel
                                     }
                                 });
 
-                                if (!memberVariable.IsReadOnly)
+                                if (!property.IsReadOnly)
                                 {
                                     classBlock.WordWrappedMultipleLineComment(maximumCommentWidth, (comment) =>
                                     {
@@ -909,7 +1113,7 @@ namespace AutoRest.Java.DanModel
                                             })
                                             .Else((elseBlock) =>
                                             {
-                                                elseBlock.Line($"this.{variableName} = {clientType.ConvertTo(wireType, variableName)};");
+                                                elseBlock.Line($"this.{variableName} = {ConvertProperty(clientTypeName, wireTypeName, variableName)};");
                                             });
                                         }
                                         else
@@ -940,8 +1144,8 @@ namespace AutoRest.Java.DanModel
 
             foreach (CompositeType exceptionType in codeModel.ErrorTypes)
             {
-                string exceptionBodyTypeName = IModelTypeName(exceptionType);
-                string exceptionName = CompositeTypeExceptionTypeDefinitionName(exceptionType);
+                string exceptionBodyTypeName = IModelTypeName(exceptionType, settings);
+                string exceptionName = CompositeTypeExceptionTypeDefinitionName(exceptionType, settings);
 
                 // Skip any exceptions that are named "CloudErrorException" or have a body named
                 // "CloudError" because those types already exist in the runtime.
@@ -999,11 +1203,8 @@ namespace AutoRest.Java.DanModel
 
             foreach (EnumType enumType in codeModel.EnumTypes)
             {
-                string enumName = IModelTypeName(enumType);
+                string enumName = IModelTypeName(enumType, settings);
                 string enumTypeComment = $"Defines values for {enumName}.";
-
-                IEnumerable<JavaEnumValue> enumValues = enumType.Values
-                    .Select((EnumValue value) => new JavaEnumValue(value.MemberName, value.SerializedName));
 
                 JavaFile javaFile = GetJavaFileWithHeaderAndPackage(codeModel, modelsPackage, settings, enumName);
                 if (enumType.ModelAsString)
@@ -1017,10 +1218,10 @@ namespace AutoRest.Java.DanModel
                     });
                     javaFile.PublicFinalClass($"{enumName} extends ExpandableStringEnum<{enumName}>", (classBlock) =>
                     {
-                        foreach (JavaEnumValue value in enumValues)
+                        foreach (EnumValue value in enumType.Values)
                         {
-                            classBlock.MultipleLineComment($"Static value {value.Value} for {enumName}.");
-                            classBlock.PublicStaticFinalVariable($"{enumName} {value.Name} = fromString(\"{value.Value}\")");
+                            classBlock.MultipleLineComment($"Static value {value.SerializedName} for {enumName}.");
+                            classBlock.PublicStaticFinalVariable($"{enumName} {value.MemberName} = fromString(\"{value.SerializedName}\")");
                         }
 
                         classBlock.MultipleLineComment((comment) =>
@@ -1055,20 +1256,20 @@ namespace AutoRest.Java.DanModel
                     });
                     javaFile.PublicEnum(enumName, (enumBlock) =>
                     {
-                        if (enumValues.Any())
+                        if (enumType.Values.Any())
                         {
-                            Action<JavaEnumValue, bool> enumValue = (JavaEnumValue value, bool isLast) =>
+                            Action<EnumValue, bool> enumValue = (EnumValue value, bool isLast) =>
                              {
-                                 enumBlock.SingleLineComment($"Enum value {value.Value}.")
-                                     .Line($"{value.Name}(\"{value.Value}\")" + (isLast ? ";" : ","))
+                                 enumBlock.SingleLineComment($"Enum value {value.SerializedName}.")
+                                     .Line($"{value.MemberName}(\"{value.SerializedName}\")" + (isLast ? ";" : ","))
                                      .Line();
                              };
 
-                            foreach (JavaEnumValue value in enumValues.SkipLast(1))
+                            foreach (EnumValue value in enumType.Values.SkipLast(1))
                             {
                                 enumValue(value, false);
                             }
-                            enumValue(enumValues.Last(), true);
+                            enumValue(enumType.Values.Last(), true);
                         }
 
                         enumBlock.SingleLineComment($"The actual serialized value for a {enumName} instance.");
@@ -1167,7 +1368,7 @@ namespace AutoRest.Java.DanModel
                 int maximumHeaderCommentWidth = GetMaximumCommentWidth(settings);
                 javaFile.WordWrappedMultipleLineComment(maximumHeaderCommentWidth, (comment) =>
                 {
-                    comment.Line(headerComment);
+                    comment.Description(headerComment);
                 });
                 javaFile.Line();
             }
@@ -1178,42 +1379,21 @@ namespace AutoRest.Java.DanModel
             return javaFile;
         }
 
-        private static void AddRegularMethodOverloads(JavaClass classBlock, Method restAPIMethod, Settings settings)
-        {
-            if (HasOptionalClientMethodParameters(restAPIMethod))
-            {
-                AddRegularMethodOverloads(classBlock, restAPIMethod, settings, true);
-            }
-            AddRegularMethodOverloads(classBlock, restAPIMethod, settings, false);
-        }
-
-        private static void AddRegularMethodOverloads(JavaClass classBlock, Method method, Settings settings, bool onlyRequiredParameters)
+        private static void AddRegularMethodOverloads(JavaType typeBlock, Method method, Settings settings, bool onlyRequiredParameters)
         {
             IEnumerable<Parameter> clientMethodParameters = (onlyRequiredParameters ? GetClientMethodRequiredParameters(method) : GetClientMethodParameters(method));
 
-            string methodReturnTypeResponseName = MethodReturnTypeResponseName(method);
-            string methodReturnTypeResponseNameXmlEscaped = methodReturnTypeResponseName.EscapeXmlComment();
-            bool methodReturnTypeResponseNameIsNullOrEmpty = string.IsNullOrEmpty(methodReturnTypeResponseName);
-            string methodSyncReturnDocumentation = methodReturnTypeResponseNameIsNullOrEmpty && methodReturnTypeResponseName != "void"
-                ? ""
-                : $"the {methodReturnTypeResponseNameXmlEscaped} object if successful.";
-
-            IEnumerable<string> methodAsyncExceptionDocumentation = new[] { "@throws IllegalArgumentException thrown if parameters fail the validation" };
-
-            string methodObservableReturnDocumentation = methodReturnTypeResponseNameIsNullOrEmpty ? "" : $"a {{@link Single}} emitting the {MethodRestResponseAbstractTypeName(method, settings)} object";
-
-            string methodName = MethodName(method);
-            string methodParameterDeclaration = MethodParameterDeclaration(clientMethodParameters);
+            string methodName = MethodName(method, settings);
             Response methodReturnType = method.ReturnType;
             string methodArguments = string.Join(", ", clientMethodParameters.Select(parameter => ParameterGetName(parameter)));
 
-            // ---------------------------------
-            // Synchronous
-            // ---------------------------------
-            AddSynchronousMethodComment(classBlock, method, clientMethodParameters, settings);
-            classBlock.PublicMethod(GetSynchronousMethodSignature(method, clientMethodParameters, settings), function =>
+            // -------------
+            // Synchronous T
+            // -------------
+            AddSynchronousMethodComment(typeBlock, method, clientMethodParameters, settings);
+            typeBlock.PublicMethod(GetSynchronousMethodSignature(method, clientMethodParameters, settings), function =>
             {
-                if (IModelTypeName(GetIModelTypeResponseVariant(ResponseBodyClientType(methodReturnType))) == "void")
+                if (methodReturnType.Body == null)
                 {
                     function.Line($"{methodName}Async({methodArguments}).blockingAwait();");
                 }
@@ -1223,63 +1403,68 @@ namespace AutoRest.Java.DanModel
                 }
             });
 
-            // ------------------------------
-            // Callback
-            // ------------------------------
-            AddServiceFutureMethodComment(classBlock, method, clientMethodParameters);
-            classBlock.PublicMethod(GetServiceFutureMethodSignature(method, clientMethodParameters, settings), function =>
+            // ----------------------
+            // Async ServiceFuture<T>
+            // ----------------------
+            AddServiceFutureMethodComment(typeBlock, method, clientMethodParameters, settings);
+            typeBlock.PublicMethod(GetServiceFutureMethodSignature(method, clientMethodParameters, settings), function =>
             {
                 function.Return($"ServiceFuture.fromBody({methodName}Async({methodArguments}), {serviceCallbackVariableName})");
             });
 
-            // ----------------------------------------
-            // Observable, RestResponse
-            // ----------------------------------------
-            AddAsyncRestResponseMethodComment(classBlock, method, clientMethodParameters, settings);
-            classBlock.PublicMethod(GetAsyncRestResponseMethodSignature(method, clientMethodParameters, settings), function =>
+            // -----------------------------------------
+            // Async Single<RestResponse<THeader,TBody>>
+            // -----------------------------------------
+            string singleRestResponseReturnType = $"Single<{MethodRestResponseAbstractTypeName(method, settings)}>";
+            string methodParameterDeclaration = MethodParameterDeclaration(method, settings, clientMethodParameters);
+
+            typeBlock.MultipleLineComment(comment =>
+            {
+                AddMethodSummaryAndDescription(comment, method);
+                AddParameters(comment, clientMethodParameters, settings);
+                ThrowsIllegalArgumentException(comment);
+                comment.Return($"the {{@link {singleRestResponseReturnType}}} object if successful.");
+            });
+            typeBlock.PublicMethod($"{singleRestResponseReturnType} {methodName}WithRestResponseAsync({methodParameterDeclaration})", function =>
             {
                 AddRequiredNullableParameterChecks(function, method);
 
-                AddOptionalOrConstantParameterVariables(function, method, onlyRequiredParameters);
+                AddOptionalOrConstantParameterVariables(function, method, settings, onlyRequiredParameters);
 
                 AddValidationChecks(function, method, onlyRequiredParameters);
 
-                MethodBuildInputMappings(method, onlyRequiredParameters, function);
+                MethodBuildInputMappings(method, settings, onlyRequiredParameters, function);
 
                 MethodParameterConversion(method, settings, MethodRetrofitParameters(method, settings), function);
 
                 function.Return($"service.{methodName}({MethodParameterApiInvocation(method, settings)})");
             });
 
-            // --------------------------------
-            // Observable
-            // --------------------------------
-            MethodJavadoc(classBlock, method, clientMethodParameters, methodAsyncExceptionDocumentation, methodObservableReturnDocumentation);
-            IModelType methodReturnTypeBody = methodReturnType.Body;
-            string returnType;
-            string responseGenericBodyClientTypeString = null;
-            if (methodReturnTypeBody == null)
-            {
-                returnType = "Completable";
-            }
-            else
-            {
-                responseGenericBodyClientTypeString = ResponseGenericBodyClientTypeString(methodReturnType);
-                returnType = $"Maybe<{responseGenericBodyClientTypeString}>";
-            }
+            // --------------
+            // Async Maybe<T>
+            // --------------
+            string asyncMethodReturnType = (methodReturnType.Body == null ? "Completable" : $"Maybe<{ResponseServiceResponseGenericParameterString(methodReturnType, settings)}>");
+            string methodParametersDeclaration = MethodParameterDeclaration(method, settings, clientMethodParameters);
 
-            string methodParametersDeclaration = MethodParameterDeclaration(clientMethodParameters);
-            classBlock.PublicMethod($"{returnType} {methodName}Async({methodParametersDeclaration})", function =>
+            typeBlock.MultipleLineComment(comment =>
+            {
+                AddMethodSummaryAndDescription(comment, method);
+                AddParameters(comment, clientMethodParameters, settings);
+                ThrowsIllegalArgumentException(comment);
+                comment.Return($"the {{@link {asyncMethodReturnType}}} object if successful.");
+            });
+            typeBlock.PublicMethod($"{asyncMethodReturnType} {methodName}Async({methodParametersDeclaration})", function =>
             {
                 function.Line($"return {methodName}WithRestResponseAsync({methodArguments})");
                 function.Indent(() =>
                 {
-                    if (methodReturnTypeBody == null)
+                    if (methodReturnType.Body == null)
                     {
                         function.Line(".toCompletable();");
                     }
                     else
                     {
+                        string responseGenericBodyClientTypeString = ResponseGenericBodyClientTypeString(methodReturnType, settings);
                         string methodRestResponseAbstractTypeName = MethodRestResponseAbstractTypeName(method, settings);
                         function.Line($".flatMapMaybe(new Function<{methodRestResponseAbstractTypeName}, Maybe<{responseGenericBodyClientTypeString}>>() {{");
                         function.Indent(() =>
@@ -1302,11 +1487,20 @@ namespace AutoRest.Java.DanModel
             });
         }
 
+        internal static bool IsFluent()
+            => IsFluent(Settings.Instance);
+
         private static bool IsFluent(Settings settings)
             => GetBoolSetting(settings, "Fluent");
 
+        internal static bool IsAzure()
+            => IsAzure(Settings.Instance);
+
         private static bool IsAzure(Settings settings)
             => GetBoolSetting(settings, "Azure");
+
+        internal static bool IsAzureOrFluent()
+            => IsAzureOrFluent(Settings.Instance);
 
         private static bool IsAzureOrFluent(Settings settings)
             => IsFluent(settings) || IsAzure(settings);
@@ -1333,51 +1527,6 @@ namespace AutoRest.Java.DanModel
         private static bool IsServiceClientCredentialProperty(Property property)
             => GetPropertyModelType(property).IsPrimaryType(KnownPrimaryType.Credentials);
 
-        private static ISet<string> GetServiceClientClassImports(CodeModel codeModel, Settings settings)
-        {
-            HashSet<string> imports = new HashSet<string>();
-
-            bool isFluent = IsFluent(settings);
-            if (!isFluent)
-            {
-                string serviceClientInterfacePath = GetPackage(codeModel) + "." + GetServiceClientInterfaceName(codeModel);
-                imports.Add(serviceClientInterfacePath);
-
-                foreach (string methodGroupClientInterfacePath in GetMethodGroups(codeModel).Select(GetMethodGroupClientInterfacePath))
-                {
-                    imports.Add(methodGroupClientInterfacePath);
-                }
-            }
-
-            if (HasServiceClientCredentials(codeModel))
-            {
-                imports.Add(serviceClientCredentialsImport);
-            }
-
-            IEnumerable<Method> restAPIMethods = GetRestAPIMethods(codeModel);
-            if (restAPIMethods.Any())
-            {
-                imports.Add("com.microsoft.rest.v2.RestResponse");
-                imports.AddRange(restAPIMethods.SelectMany(m => MethodImplImports(m, settings)));
-            }
-
-            imports.Add(httpPipelineImport);
-
-            if (isFluent || IsAzure(settings))
-            {
-                imports.Add(azureProxyImport);
-                imports.Add("com.microsoft.azure.v2.AzureServiceClient");
-                imports.Add(azureEnvironmentImport);
-            }
-            else
-            {
-                imports.Add(restProxyImport);
-                imports.Add("com.microsoft.rest.v2.ServiceClient");
-            }
-
-            return imports;
-        }
-
         private static IEnumerable<string> GetServiceClientInterfaceImorts(CodeModel codeModel, Settings settings)
             => GetRestAPIMethods(codeModel).SelectMany(m => GetClientInterfaceMethodImports(m, settings));
 
@@ -1395,22 +1544,6 @@ namespace AutoRest.Java.DanModel
         }
 
         /// <summary>
-        /// Get whether or not the provided CodeModel/ServiceClient has any REST API methods on it.
-        /// </summary>
-        /// <param name="codeModel"></param>
-        /// <returns></returns>
-        private static bool HasRestAPIMethods(CodeModel codeModel)
-            => GetRestAPIMethods(codeModel).Any();
-
-        /// <summary>
-        /// Get whether or not the provided MethodGroup/MethodGroupClient has any REST API methods on it.
-        /// </summary>
-        /// <param name="methodGroup"></param>
-        /// <returns></returns>
-        private static bool HasRestAPIMethods(MethodGroup methodGroup)
-            => GetRestAPIMethods(methodGroup).Any();
-
-        /// <summary>
         /// Get the REST API methods that are defined for the provided CodeModel/ServiceClient.
         /// </summary>
         /// <param name="codeModel"></param>
@@ -1425,48 +1558,6 @@ namespace AutoRest.Java.DanModel
         /// <returns></returns>
         private static IEnumerable<Method> GetRestAPIMethods(MethodGroup methodGroup)
             => methodGroup.Methods;
-
-        private static IEnumerable<string> GetImports(Property property, Settings settings)
-        {
-            IEnumerable<string> result = null;
-
-            if (IsFluent(settings))
-            {
-                IModelType modelType = GetPropertyModelType(property);
-                List<string> imports = new List<string>(GetIModelTypeImports(modelType, settings)
-                            .Where(c => !c.StartsWith(property.Parent.CodeModel?.Namespace.ToLowerInvariant(), StringComparison.Ordinal) ||
-                                c.EndsWith("Inner", StringComparison.Ordinal) ^ innerModelProperties.Contains(property)));
-
-                if (modelType.IsPrimaryType(KnownPrimaryType.DateTimeRfc1123))
-                {
-                    imports.AddRange(GetIModelTypeImports(modelType, settings));
-                    imports.AddRange(GetIModelTypeImports(GetIModelTypeResponseVariant(modelType), settings));
-                }
-
-                result = imports;
-            }
-            else
-            {
-                IModelType modelType = GetPropertyModelType(property);
-                List<string> imports = new List<string>(GetIModelTypeImports(modelType, settings)
-                        .Where(c => !c.StartsWith(
-                            string.Join(
-                                ".",
-                                property.Parent?.CodeModel?.Namespace.ToLowerInvariant(),
-                                "models"),
-                            StringComparison.OrdinalIgnoreCase)));
-
-                if (modelType.IsPrimaryType(KnownPrimaryType.DateTimeRfc1123) || modelType.IsPrimaryType(KnownPrimaryType.Base64Url))
-                {
-                    imports.AddRange(GetIModelTypeImports(modelType, settings));
-                    imports.AddRange(GetIModelTypeImports(GetIModelTypeResponseVariant(modelType), settings));
-                }
-
-                result = imports;
-            }
-
-            return result;
-        }
 
         internal static IModelType GetPropertyModelType(Property property)
         {
@@ -1488,7 +1579,7 @@ namespace AutoRest.Java.DanModel
             {
                 if (modelType is EnumType)
                 {
-                    string modelTypeName = IModelTypeName(modelType);
+                    string modelTypeName = IModelTypeName(modelType, settings);
                     if (modelTypeName != "String")
                     {
                         if (!IsFluent(settings))
@@ -1509,7 +1600,7 @@ namespace AutoRest.Java.DanModel
                 }
                 else if (modelType is CompositeType compositeType)
                 {
-                    string compositeTypeName = IModelTypeName(compositeType);
+                    string compositeTypeName = IModelTypeName(compositeType, settings);
                     bool compositeTypeIsExternalExtension = CompositeTypeIsExternalExtension(compositeType);
                     bool compositeTypeIsAzureResourceExtension = CompositeTypeIsAzureResourceExtension(compositeType);
                     result = CompositeTypeImports(compositeTypeName, compositeType.CodeModel, compositeTypeIsExternalExtension, compositeTypeIsAzureResourceExtension, settings);
@@ -1614,17 +1705,20 @@ namespace AutoRest.Java.DanModel
         private static IEnumerable<string> CompositeTypeImportsAzure(string compositeTypeName, CodeModel codeModel, bool compositeTypeIsExternalExtension, bool compositeTypeIsAzureResourceExtension, Settings settings)
         {
             List<string> result = new List<string>();
-            if (compositeTypeName.Contains('<'))
+            if (!string.IsNullOrEmpty(compositeTypeName))
             {
-                result.AddRange(CompositeTypeGenericTypeImports(compositeTypeName, codeModel, compositeTypeIsExternalExtension, compositeTypeIsAzureResourceExtension, settings));
-            }
-            else if (CompositeTypeIsResource(compositeTypeName, compositeTypeIsAzureResourceExtension) || compositeTypeIsExternalExtension)
-            {
-                result.Add(string.Join(".", GetCompositeTypePackage(compositeTypeName, codeModel, compositeTypeIsExternalExtension, compositeTypeIsAzureResourceExtension, settings), compositeTypeName));
-            }
-            else
-            {
-                result.Add(string.Join(".", GetCompositeTypePackage(compositeTypeName, codeModel, compositeTypeIsExternalExtension, compositeTypeIsAzureResourceExtension, settings), "models", compositeTypeName));
+                if (compositeTypeName.Contains('<'))
+                {
+                    result.AddRange(CompositeTypeGenericTypeImports(compositeTypeName, codeModel, compositeTypeIsExternalExtension, compositeTypeIsAzureResourceExtension, settings));
+                }
+                else if (CompositeTypeIsResource(compositeTypeName, compositeTypeIsAzureResourceExtension) || compositeTypeIsExternalExtension)
+                {
+                    result.Add(string.Join(".", GetCompositeTypePackage(compositeTypeName, codeModel, compositeTypeIsExternalExtension, compositeTypeIsAzureResourceExtension, settings), compositeTypeName));
+                }
+                else
+                {
+                    result.Add(string.Join(".", GetCompositeTypePackage(compositeTypeName, codeModel, compositeTypeIsExternalExtension, compositeTypeIsAzureResourceExtension, settings), "models", compositeTypeName));
+                }
             }
             return result;
         }
@@ -1665,8 +1759,8 @@ namespace AutoRest.Java.DanModel
             return result;
         }
 
-        private static string IModelTypeParameterVariantName(IModelType modelType)
-            => IModelTypeName(IModelTypeParameterVariant(modelType));
+        private static string IModelTypeParameterVariantName(IModelType modelType, Settings settings)
+            => IModelTypeName(IModelTypeParameterVariant(modelType), settings);
 
         private static IModelType IModelTypeParameterVariant(IModelType modelType)
         {
@@ -1743,7 +1837,7 @@ namespace AutoRest.Java.DanModel
                 }
                 else if (modelType is SequenceType sequenceType)
                 {
-                    result = $"List<{IModelTypeName(sequenceType.ElementType)}>";
+                    result = $"List<{IModelTypeName(sequenceType.ElementType, settings)}>";
                     if (pagedListTypes.Contains(modelType))
                     {
                         result = "Paged" + result;
@@ -1751,7 +1845,7 @@ namespace AutoRest.Java.DanModel
                 }
                 else if (modelType is DictionaryType dictionaryType)
                 {
-                    result = $"Map<String, {IModelTypeName(dictionaryType.ValueType)}>";
+                    result = $"Map<String, {IModelTypeName(dictionaryType.ValueType, settings)}>";
                 }
                 else if (modelType is CompositeType && IsFluent(settings))
                 {
@@ -1822,11 +1916,6 @@ namespace AutoRest.Java.DanModel
                 }
             }
             return result;
-        }
-
-        internal static string GetIModelTypeFixedName(IModelType modelType)
-        {
-            return modelType?.Name?.FixedValue;
         }
 
         internal static IEnumerable<Property> GetCompositeTypeProperties(CompositeType compositeType)
@@ -1935,7 +2024,7 @@ namespace AutoRest.Java.DanModel
             foreach (string innerTypeName in types.Where(t => !string.IsNullOrWhiteSpace(t)))
             {
                 string trimmedInnerTypeName = innerTypeName.Trim();
-                if (!CodeNamerJv.PrimaryTypes.Contains(trimmedInnerTypeName))
+                if (!primaryTypes.Contains(trimmedInnerTypeName))
                 {
                     result.AddRange(CompositeTypeImports(compositeTypeName, codeModel, compositeTypeIsExternalExtension, compositeTypeIsAzureResourceExtension, settings));
                 }
@@ -1945,17 +2034,20 @@ namespace AutoRest.Java.DanModel
         }
 
         internal static bool CompositeTypeIsResource(CompositeType compositeType)
-            => CompositeTypeIsResource(IModelTypeName(compositeType), CompositeTypeIsAzureResourceExtension(compositeType));
+            => CompositeTypeIsResource(compositeType, Settings.Instance);
+
+        private static bool CompositeTypeIsResource(CompositeType compositeType, Settings settings)
+            => CompositeTypeIsResource(IModelTypeName(compositeType, settings), CompositeTypeIsAzureResourceExtension(compositeType));
 
         private static bool CompositeTypeIsResource(string compositeTypeName, bool isAzureResourceExtension)
             => compositeTypeName == "Resource" || (compositeTypeName == "SubResource" && isAzureResourceExtension);
 
-        internal static bool CompositeTypeNeedsFlatten(CompositeType compositeType)
-            => GetCompositeTypeProperties(compositeType).Any(p => p.WasFlattened());
+        internal static bool CompositeTypeNeedsFlatten(CompositeType compositeType, Settings settings)
+            => GetCompositeTypeProperties(compositeType, settings).Any(p => p.WasFlattened());
 
-        internal static string CompositeTypeExceptionTypeDefinitionName(CompositeType compositeType)
+        internal static string CompositeTypeExceptionTypeDefinitionName(CompositeType compositeType, Settings settings)
         {
-            string result = IModelTypeName(compositeType) + "Exception";
+            string result = IModelTypeName(compositeType, settings) + "Exception";
 
             if (compositeType.Extensions.ContainsKey(SwaggerExtensions.NameOverrideExtension))
             {
@@ -1990,7 +2082,7 @@ namespace AutoRest.Java.DanModel
             => GetExtensionBool(modelType?.Extensions, extensionName);
 
         private static bool CompositeTypeIsExternalExtension(CompositeType compositeType)
-            => GetExtensionBool(compositeType, "x-ms-external");
+            => GetExtensionBool(compositeType, SwaggerExtensions.ExternalExtension);
 
         internal static bool CompositeTypeIsAzureResourceExtension(CompositeType compositeType)
             => GetExtensionBool(compositeType, AzureExtensions.AzureResourceExtension);
@@ -2013,9 +2105,6 @@ namespace AutoRest.Java.DanModel
             return MethodIsPagingNextOperation(parent) || MethodIsPagingOperation(parent);
         }
 
-        internal static IModelType ResponseBodyClientType(Response response)
-            => ResponseBodyClientType(response, Settings.Instance);
-
         private static IModelType ResponseBodyClientType(Response response, Settings settings)
         {
             IModelType result = GetIModelTypeResponseVariant(ResponseBodyWireType(response));
@@ -2033,18 +2122,15 @@ namespace AutoRest.Java.DanModel
         private static TValue DictionaryGet<TKey, TValue>(IDictionary<TKey, TValue> dictionary, TKey key) where TValue : class
             => dictionary.ContainsKey(key) ? dictionary[key] : null;
 
-        internal static string ResponseGenericBodyClientTypeString(Response response)
-            => ResponseGenericBodyClientTypeString(response, Settings.Instance);
-
         private static string ResponseGenericBodyClientTypeString(Response response, Settings settings)
         {
             string result;
 
-            if (IsFluent(settings) || IsAzure(settings))
+            if (IsAzureOrFluent(settings))
             {
-                if (ResponseBodyClientType(response) is SequenceType bodySequenceType && ResponseIsPagedResponse(response))
+                if (ResponseBodyClientType(response, settings) is SequenceType bodySequenceType && ResponseIsPagedResponse(response))
                 {
-                    result = $"PagedList<{IModelTypeName(bodySequenceType.ElementType)}>";
+                    result = $"PagedList<{IModelTypeName(bodySequenceType.ElementType, settings)}>";
                 }
                 else
                 {
@@ -2052,11 +2138,11 @@ namespace AutoRest.Java.DanModel
                     IModelType responseVariant = GetIModelTypeResponseVariant(responseBodyWireType);
                     if (PrimaryTypeNullable(responseVariant as PrimaryType) != false)
                     {
-                        result = IModelTypeName(responseVariant);
+                        result = IModelTypeName(responseVariant, settings);
                     }
                     else
                     {
-                        result = IModelTypeName(responseBodyWireType);
+                        result = IModelTypeName(responseBodyWireType, settings);
                     }
                 }
             }
@@ -2066,19 +2152,16 @@ namespace AutoRest.Java.DanModel
                 IModelType responseVariant = GetIModelTypeResponseVariant(bodyWireType);
                 if (PrimaryTypeNullable(responseVariant as PrimaryType) != false)
                 {
-                    result = IModelTypeName(responseVariant);
+                    result = IModelTypeName(responseVariant, settings);
                 }
                 else
                 {
-                    result = IModelTypeName(bodyWireType);
+                    result = IModelTypeName(bodyWireType, settings);
                 }
             }
 
             return result;
         }
-
-        internal static string ResponseServiceFutureGenericParameterString(Response response)
-            => ResponseServiceFutureGenericParameterString(response, Settings.Instance);
 
         private static string ResponseServiceFutureGenericParameterString(Response response, Settings settings)
         {
@@ -2086,27 +2169,11 @@ namespace AutoRest.Java.DanModel
 
             if (IsFluent(settings) || IsAzure(settings))
             {
-                if (ResponseBodyClientType(response) is SequenceType bodySequenceType && ResponseIsPagedResponse(response))
+                if (ResponseBodyClientType(response, settings) is SequenceType bodySequenceType && ResponseIsPagedResponse(response))
                 {
-                    result = string.Format(CultureInfo.InvariantCulture, "List<{0}>", IModelTypeName(bodySequenceType.ElementType));
+                    result = $"List<{IModelTypeName(bodySequenceType.ElementType, settings)}>";
                 }
-                result = ResponseGenericBodyClientTypeString(response);
-            }
-            else
-            {
-                result = ResponseGenericBodyClientTypeString(response);
-            }
-
-            return result;
-        }
-
-        private static string ResponseServiceResponseGenericParameterString(Response response, Settings settings)
-        {
-            string result;
-
-            if (IsAzureOrFluent(settings) && ResponseBodyClientType(response) is SequenceType bodySequenceType && (ResponseIsPagedResponse(response) || MethodSimulateAsPagingOperation(ResponseGetParent(response))))
-            {
-                result = $"Page<{IModelTypeName(bodySequenceType.ElementType)}>";
+                result = ResponseGenericBodyClientTypeString(response, settings);
             }
             else
             {
@@ -2116,27 +2183,33 @@ namespace AutoRest.Java.DanModel
             return result;
         }
 
-        internal static string ResponseClientCallbackTypeString(Response response)
-            => ResponseClientCallbackTypeString(response, Settings.Instance);
+        private static string ResponseServiceResponseGenericParameterString(Response response, Settings settings)
+        {
+            string result;
+
+            if (IsAzureOrFluent(settings) && ResponseBodyClientType(response, settings) is SequenceType bodySequenceType && (ResponseIsPagedResponse(response) || MethodSimulateAsPagingOperation(ResponseGetParent(response), settings)))
+            {
+                result = $"Page<{IModelTypeName(bodySequenceType.ElementType, settings)}>";
+            }
+            else
+            {
+                result = ResponseGenericBodyClientTypeString(response, settings);
+            }
+
+            return result;
+        }
 
         internal static string ResponseClientCallbackTypeString(Response response, Settings settings)
         {
             string result;
 
-            if (IsFluent(settings) || IsAzure(settings))
+            if (IsAzureOrFluent(settings) && response.Body is SequenceType && ResponseIsPagedResponse(response))
             {
-                if (response.Body is SequenceType && ResponseIsPagedResponse(response))
-                {
-                    result = IModelTypeName(ResponseBodyClientType(response));
-                }
-                else
-                {
-                    result = ResponseGenericBodyClientTypeString(response);
-                }
+                result = IModelTypeName(ResponseBodyClientType(response, settings), settings);
             }
             else
             {
-                result = ResponseGenericBodyClientTypeString(response);
+                result = ResponseGenericBodyClientTypeString(response, settings);
             }
 
             return result;
@@ -2155,8 +2228,8 @@ namespace AutoRest.Java.DanModel
         internal static IModelType ResponseHeaderClientType(Response response)
             => GetIModelTypeResponseVariant(response.Headers);
 
-        internal static string ResponseSequenceElementTypeString(Response response)
-            => response.Body is SequenceType bodySequenceType ? IModelTypeName(bodySequenceType.ElementType) : "Void";
+        internal static string ResponseSequenceElementTypeString(Response response, Settings settings)
+            => response.Body is SequenceType bodySequenceType ? IModelTypeName(bodySequenceType.ElementType, settings) : "Void";
 
         internal static string ResponseReturnValueWireType(Response response)
         {
@@ -2180,7 +2253,7 @@ namespace AutoRest.Java.DanModel
                     }
                     else if (currentType is PrimaryType currentPrimaryType)
                     {
-                        string currentPrimaryTypeName = GetIModelTypeFixedName(currentPrimaryType);
+                        string currentPrimaryTypeName = currentPrimaryType?.Name?.FixedValue;
                         if (currentPrimaryTypeName.EqualsIgnoreCase("Base64Url") ||
                             currentPrimaryTypeName.EqualsIgnoreCase("DateTimeRfc1123") ||
                             currentPrimaryTypeName.EqualsIgnoreCase("UnixTime"))
@@ -2196,7 +2269,7 @@ namespace AutoRest.Java.DanModel
         }
 
         internal static IEnumerable<string> ResponseInterfaceImports(Response response, Settings settings)
-            => GetIModelTypeImports(ResponseBodyClientType(response), settings).Concat(GetIModelTypeImports(ResponseHeaderClientType(response), settings));
+            => GetIModelTypeImports(ResponseBodyClientType(response, settings), settings).Concat(GetIModelTypeImports(ResponseHeaderClientType(response), settings));
 
         internal static IEnumerable<string> ResponseImplImports(Response response, Settings settings)
         {
@@ -2215,9 +2288,9 @@ namespace AutoRest.Java.DanModel
                 imports.Add("com.microsoft.rest.v2." + returnValueWireType);
             }
 
-            IModelType bodyClientType = ResponseBodyClientType(response);
+            IModelType bodyClientType = ResponseBodyClientType(response, settings);
             IModelType headerClientType = ResponseHeaderClientType(response);
-            if (((bodyWireType == null ? bodyClientType != null : !bodyWireType.StructurallyEquals(bodyClientType)) && IModelTypeName(bodyClientType) != "void") ||
+            if (((bodyWireType == null ? bodyClientType != null : !bodyWireType.StructurallyEquals(bodyClientType)) && IModelTypeName(bodyClientType, settings) != "void") ||
                 (responseHeaders == null ? headerClientType != null : !responseHeaders.StructurallyEquals(headerClientType)))
             {
                 IModelType responseBody = response.Body;
@@ -2236,61 +2309,9 @@ namespace AutoRest.Java.DanModel
         internal static bool MethodIsLongRunningOperation(Method method)
             => GetExtensionBool(method?.Extensions, AzureExtensions.LongRunningExtension);
 
-        internal static void MethodTransformPagingGroupedParameter(Method method, JavaBlock block, Method nextMethod, bool filterRequired, Settings settings)
-        {
-            if (method.InputParameterTransformation.IsNullOrEmpty() || nextMethod.InputParameterTransformation.IsNullOrEmpty())
-            {
-                return;
-            }
-
-            Parameter groupedType = method.InputParameterTransformation.First().ParameterMappings[0].InputParameter;
-            Parameter nextGroupType = nextMethod.InputParameterTransformation.First().ParameterMappings[0].InputParameter;
-
-            string nextGroupTypeName = ParameterGetName(nextGroupType);
-            string groupedTypeName = ParameterGetName(groupedType);
-            if (nextGroupTypeName == groupedTypeName)
-            {
-                return;
-            }
-
-            if (filterRequired && !groupedType.IsRequired)
-            {
-                return;
-            }
-
-            string nextGroupTypeCamelCaseName = nextGroupTypeName.ToCamelCase();
-            string groupedTypeCamelCaseName = groupedTypeName.ToCamelCase();
-
-            string nextGroupTypeCodeName = CodeNamer.Instance.GetTypeName(nextGroupTypeName) + (IsFluent(settings) ? "Inner" : "");
-
-            if (!groupedType.IsRequired)
-            {
-                block.Line($"{nextGroupTypeCodeName} {nextGroupTypeCamelCaseName} = null;");
-                block.Line($"if ({groupedTypeCamelCaseName} != null) {{");
-                block.IncreaseIndent();
-                block.Line($"{nextGroupTypeCamelCaseName} = new {nextGroupTypeCodeName}();");
-            }
-            else
-            {
-                block.Line($"{nextGroupTypeCodeName} {nextGroupTypeCamelCaseName} = new {nextGroupTypeCodeName}();");
-            }
-
-            foreach (Parameter outParam in nextMethod.InputParameterTransformation.Select(t => t.OutputParameter))
-            {
-                string outParamName = ParameterGetName(outParam);
-                block.Line($"{nextGroupTypeCamelCaseName}.with{outParamName.ToPascalCase()}({groupedTypeCamelCaseName}.{outParamName.ToCamelCase()}());");
-            }
-
-            if (!groupedType.IsRequired)
-            {
-                block.DecreaseIndent();
-                block.Line("}");
-            }
-        }
-
         internal static ISet<string> GetClientInterfaceMethodImports(Method method, Settings settings)
         {
-            ISet<string> imports = new HashSet<string>();
+            HashSet<string> imports = new HashSet<string>();
 
             // static imports
             imports.Add("io.reactivex.Observable");
@@ -2339,7 +2360,7 @@ namespace AutoRest.Java.DanModel
 
                 if (IsFluent(settings))
                 {
-                    bool methodSimulateAsPagingOperation = MethodSimulateAsPagingOperation(method);
+                    bool methodSimulateAsPagingOperation = MethodSimulateAsPagingOperation(method, settings);
                     if (methodIsPagingOperation || methodSimulateAsPagingOperation)
                     {
                         imports.Add("com.microsoft.azure.v2.PagedList");
@@ -2354,7 +2375,7 @@ namespace AutoRest.Java.DanModel
                             imports.Remove("com.microsoft.rest.v2.ServiceCallback");
                         }
 
-                        if (ResponseBodyClientType(methodReturnType) is SequenceType pageType)
+                        if (ResponseBodyClientType(methodReturnType, settings) is SequenceType pageType)
                         {
                             imports.AddRange(CompositeTypeImportsFluent(SequenceTypeGetPageImplType(pageType), null, false, false, settings));
                         }
@@ -2364,9 +2385,6 @@ namespace AutoRest.Java.DanModel
 
             return imports;
         }
-
-        internal static IEnumerable<string> MethodImplImports(Method method)
-            => MethodImplImports(method, Settings.Instance);
 
         private static IEnumerable<string> MethodImplImports(Method restAPIMethod, Settings settings)
         {
@@ -2499,7 +2517,7 @@ namespace AutoRest.Java.DanModel
                     imports.AddRange(methodReturnTypeResponseImplImports);
                 }
                 CodeModel methodCodeModel = restAPIMethod.CodeModel;
-                string typeName = SequenceTypeGetPageImplType(ResponseBodyClientType(methodReturnType));
+                string typeName = SequenceTypeGetPageImplType(ResponseBodyClientType(methodReturnType, settings));
                 bool methodIsPagingOperation = MethodIsPagingOperation(restAPIMethod);
                 bool methodIsPagingNextOperation = MethodIsPagingNextOperation(restAPIMethod);
                 bool methodIsPagingNonPollingOperation = MethodIsPagingNonPollingOperation(restAPIMethod);
@@ -2535,8 +2553,8 @@ namespace AutoRest.Java.DanModel
                         imports.AddRange(ResponseImplImports(restAPIMethod.ReturnType, settings));
                     }
 
-                    SequenceType pageType = ResponseBodyClientType(restAPIMethod.ReturnType) as SequenceType;
-                    bool methodSimulateAsPagingOperation = MethodSimulateAsPagingOperation(restAPIMethod);
+                    SequenceType pageType = ResponseBodyClientType(restAPIMethod.ReturnType, settings) as SequenceType;
+                    bool methodSimulateAsPagingOperation = MethodSimulateAsPagingOperation(restAPIMethod, settings);
                     if (methodIsPagingOperation || methodIsPagingNextOperation || methodSimulateAsPagingOperation)
                     {
                         imports.Add("com.microsoft.azure.v2.PagedList");
@@ -2557,7 +2575,7 @@ namespace AutoRest.Java.DanModel
 
                     if ((methodIsPagingOperation || methodIsPagingNextOperation || methodSimulateAsPagingOperation || methodIsPagingNonPollingOperation) && pageType != null)
                     {
-                        imports.RemoveWhere(i => CompositeTypeImportsAzure(SequenceTypeGetPageImplType(ResponseBodyClientType(methodReturnType)), methodCodeModel, false, false, settings).Contains(i));
+                        imports.RemoveWhere(i => CompositeTypeImportsAzure(SequenceTypeGetPageImplType(ResponseBodyClientType(methodReturnType, settings)), methodCodeModel, false, false, settings).Contains(i));
                     }
                 }
             }
@@ -2582,7 +2600,7 @@ namespace AutoRest.Java.DanModel
             Delete
         }
 
-        private static MethodType GetMethodType(Method method)
+        private static MethodType GetMethodType(Method method, Settings settings)
         {
             Regex leading = new Regex("^/+");
             Regex trailing = new Regex("/+$");
@@ -2593,7 +2611,7 @@ namespace AutoRest.Java.DanModel
                 string[] urlSplits = methodUrl.Split('/');
                 if ((urlSplits.Count() == 5 || urlSplits.Count() == 7)
                     && StringComparer.OrdinalIgnoreCase.Equals(urlSplits[0], "subscriptions")
-                    && MethodHasSequenceType(method.ReturnType.Body))
+                    && MethodHasSequenceType(method.ReturnType.Body, settings))
                 {
                     if (urlSplits.Count() == 5)
                     {
@@ -2634,13 +2652,16 @@ namespace AutoRest.Java.DanModel
         }
 
         internal static bool MethodSimulateAsPagingOperation(Method method)
+            => MethodSimulateAsPagingOperation(method, Settings.Instance);
+
+        private static bool MethodSimulateAsPagingOperation(Method method, Settings settings)
         {
             bool result = false;
 
-            string wellKnownMethodName = MethodWellKnownMethodName(method);
+            string wellKnownMethodName = MethodWellKnownMethodName(method, settings);
             if (!string.IsNullOrWhiteSpace(wellKnownMethodName))
             {
-                MethodType methodType = GetMethodType(method);
+                MethodType methodType = GetMethodType(method, settings);
                 if (methodType == MethodType.ListByResourceGroup || methodType == MethodType.ListBySubscription)
                 {
                     result = true;
@@ -2650,11 +2671,11 @@ namespace AutoRest.Java.DanModel
             return result;
         }
 
-        internal static string MethodName(Method method)
+        internal static string MethodName(Method method, Settings settings)
         {
             string result = method.Name;
 
-            string wellKnownMethodName = MethodWellKnownMethodName(method);
+            string wellKnownMethodName = MethodWellKnownMethodName(method, settings);
             if (!string.IsNullOrWhiteSpace(wellKnownMethodName))
             {
                 IParent methodParent = method.Parent;
@@ -2668,34 +2689,34 @@ namespace AutoRest.Java.DanModel
             return result;
         }
 
-        private static string MethodWellKnownMethodName(Method method)
+        private static string MethodWellKnownMethodName(Method method, Settings settings)
         {
             string result = null;
 
             MethodGroup methodGroup = method.MethodGroup;
             if (!string.IsNullOrEmpty(MethodGroupName(methodGroup)))
             {
-                MethodType methodType = GetMethodType(method);
+                MethodType methodType = GetMethodType(method, settings);
                 if (methodType != MethodType.Other)
                 {
-                    if (methodGroup.Methods.Count(methodGroupMethod => GetMethodType(methodGroupMethod) == methodType) == 1)
+                    if (methodGroup.Methods.Count(methodGroupMethod => GetMethodType(methodGroupMethod, settings) == methodType) == 1)
                     {
                         switch (methodType)
                         {
                             case MethodType.ListBySubscription:
-                                result = WellKnowMethodNames.List;
+                                result = List;
                                 break;
 
                             case MethodType.ListByResourceGroup:
-                                result = WellKnowMethodNames.ListByResourceGroup;
+                                result = ListByResourceGroup;
                                 break;
 
                             case MethodType.Delete:
-                                result = WellKnowMethodNames.Delete;
+                                result = Delete;
                                 break;
 
                             case MethodType.Get:
-                                result = WellKnowMethodNames.GetByResourceGroup;
+                                result = GetByResourceGroup;
                                 break;
 
                             default:
@@ -2743,14 +2764,14 @@ namespace AutoRest.Java.DanModel
 
             if (IsAzureOrFluent(settings))
             {
-                if (method.DefaultResponse.Body == null || IModelTypeName(method.DefaultResponse.Body) == "CloudError")
+                if (method.DefaultResponse.Body == null || IModelTypeName(method.DefaultResponse.Body, settings) == "CloudError")
                 {
                     result = "CloudException";
                 }
                 else if (method.DefaultResponse.Body is CompositeType)
                 {
                     CompositeType type = method.DefaultResponse.Body as CompositeType;
-                    result = CompositeTypeExceptionTypeDefinitionName(type);
+                    result = CompositeTypeExceptionTypeDefinitionName(type, settings);
                 }
                 else
                 {
@@ -2762,7 +2783,7 @@ namespace AutoRest.Java.DanModel
                 if (method.DefaultResponse.Body is CompositeType)
                 {
                     CompositeType type = method.DefaultResponse.Body as CompositeType;
-                    result = CompositeTypeExceptionTypeDefinitionName(type);
+                    result = CompositeTypeExceptionTypeDefinitionName(type, settings);
                 }
                 else
                 {
@@ -2795,190 +2816,15 @@ namespace AutoRest.Java.DanModel
             return parameters;
         }
 
-        private static string MethodParameterApiDeclaration(Method method, Settings settings)
-        {
-            string result;
-
-            if (IsAzureOrFluent(settings))
-            {
-                bool shouldGenerateXmlSerialization = method.CodeModel.ShouldGenerateXmlSerialization;
-
-                List<string> declarations = new List<string>();
-                foreach (Parameter parameter in MethodOrderedRetrofitParameters(method, settings))
-                {
-                    StringBuilder declarationBuilder = new StringBuilder();
-                    if (method.Url.Contains("{" + ParameterGetName(parameter) + "}"))
-                    {
-                        parameter.Location = ParameterLocation.Path;
-                    }
-
-                    string name = parameter.SerializedName;
-                    if (parameter.Extensions.ContainsKey("hostParameter"))
-                    {
-                        declarationBuilder.Append($"@HostParam(\"{name}\") ");
-                    }
-                    else if (parameter.Location == ParameterLocation.Path ||
-                        parameter.Location == ParameterLocation.Query ||
-                        parameter.Location == ParameterLocation.Header)
-                    {
-                        ParameterLocation location = parameter.Location;
-                        declarationBuilder.Append($"@{location}Param(\"{name}\") ");
-                    }
-                    else if (parameter.Location == ParameterLocation.Body)
-                    {
-                        declarationBuilder.Append($"@BodyParam(\"{method.RequestContentType}\") ");
-                    }
-                    else if (parameter.Location == ParameterLocation.FormData)
-                    {
-                        declarationBuilder.Append($"/* @Part(\"{name}\") not supported by RestProxy */");
-                    }
-
-                    string declarativeName = parameter.ClientProperty != null ? (string)parameter.ClientProperty.Name : ParameterGetName(parameter);
-
-                    IModelType parameterModelType = ParameterGetModelType(parameter);
-                    bool shouldUseXmlListWrapper = shouldGenerateXmlSerialization && parameter.Location == ParameterLocation.Body && (parameterModelType is SequenceType);
-                    if (shouldUseXmlListWrapper)
-                    {
-                        declarationBuilder.Append(parameterModelType.XmlName + "Wrapper");
-                    }
-                    else
-                    {
-                        declarationBuilder.Append(IModelTypeName(ParameterWireType(parameter)));
-                    }
-
-                    declarationBuilder.Append(" " + declarativeName);
-                    declarations.Add(declarationBuilder.ToString());
-                }
-
-                string declaration = string.Join(", ", declarations);
-
-                foreach (Parameter parameter in MethodRetrofitParameters(method, settings).Where(p =>
-                    p.Location == ParameterLocation.Path || p.Location == ParameterLocation.Query))
-                {
-                    if (GetExtensionBool(parameter?.Extensions, AzureExtensions.SkipUrlEncodingExtension))
-                    {
-                        declaration = declaration.Replace(
-                            string.Format(CultureInfo.InvariantCulture, "@{0}Param(\"{1}\")", parameter.Location.ToString(), parameter.SerializedName),
-                            string.Format(CultureInfo.InvariantCulture, "@{0}Param(value = \"{1}\", encoded = true)", parameter.Location.ToString(), parameter.SerializedName));
-                    }
-                }
-                result = declaration;
-            }
-            else
-            {
-                bool shouldGenerateXmlSerialization = method.CodeModel.ShouldGenerateXmlSerialization;
-
-                List<string> declarations = new List<string>();
-                foreach (Parameter parameter in MethodOrderedRetrofitParameters(method, settings))
-                {
-                    StringBuilder declarationBuilder = new StringBuilder();
-                    if (method.Url.Contains("{" + ParameterGetName(parameter) + "}"))
-                    {
-                        parameter.Location = ParameterLocation.Path;
-                    }
-
-                    string name = parameter.SerializedName;
-                    if (parameter.Extensions.ContainsKey("hostParameter"))
-                    {
-                        declarationBuilder.Append($"@HostParam(\"{name}\") ");
-                    }
-                    else if (parameter.Location == ParameterLocation.Path ||
-                        parameter.Location == ParameterLocation.Query ||
-                        parameter.Location == ParameterLocation.Header)
-                    {
-                        ParameterLocation location = parameter.Location;
-                        declarationBuilder.Append($"@{location}Param(\"{name}\") ");
-                    }
-                    else if (parameter.Location == ParameterLocation.Body)
-                    {
-                        declarationBuilder.Append($"@BodyParam(\"{method.RequestContentType}\") ");
-                    }
-                    else if (parameter.Location == ParameterLocation.FormData)
-                    {
-                        declarationBuilder.Append($"/* @Part(\"{name}\") not supported by RestProxy */");
-                    }
-
-                    string declarativeName = parameter.ClientProperty != null ? (string)parameter.ClientProperty.Name : ParameterGetName(parameter);
-
-                    IModelType parameterModelType = ParameterGetModelType(parameter);
-                    bool shouldUseXmlListWrapper = shouldGenerateXmlSerialization && parameter.Location == ParameterLocation.Body && parameterModelType is SequenceType;
-                    if (shouldUseXmlListWrapper)
-                    {
-                        declarationBuilder.Append(parameterModelType.XmlName + "Wrapper");
-                    }
-                    else
-                    {
-                        declarationBuilder.Append(IModelTypeName(ParameterWireType(parameter)));
-                    }
-
-                    declarationBuilder.Append(" " + declarativeName);
-                    declarations.Add(declarationBuilder.ToString());
-                }
-
-                result = string.Join(", ", declarations);
-            }
-
-            return result;
-        }
-
-        internal static string MethodNextUrlConstructor(Method method, Settings settings)
-        {
-            StringBuilder builder = new StringBuilder("String.format(");
-            Regex regex = new Regex("{\\w+}");
-
-            string methodUrl = method.Url;
-            MatchCollection matches = regex.Matches(methodUrl);
-            builder.Append("\"").Append(regex.Replace(methodUrl, "%s").TrimStart('/')).Append("\"");
-
-            IEnumerable<Parameter> retrofitParameters = method.LogicalParameters.Where(p => p.Location != ParameterLocation.None);
-            foreach (Match match in matches)
-            {
-                string serializedName = match.Value.Trim('{', '}');
-                builder.Append(", " + ParameterWireName(retrofitParameters.First(p => p.SerializedName == serializedName)));
-            }
-            return builder.Append(")").ToString();
-        }
-
         private static string MethodParameterDeclaration(Method method, Settings settings, IEnumerable<Parameter> parameters)
         {
             string parameterPrefix = (IsAzureOrFluent(settings) && (MethodIsPagingOperation(method) || MethodIsPagingNextOperation(method)) ? "final " : "");
             return string.Join(", ", parameters.Select(parameter =>
             {
-                string parameterType = IModelTypeParameterVariantName(ParameterClientType(parameter));
+                string parameterType = IModelTypeParameterVariantName(ParameterClientType(parameter), settings);
                 string parameterName = ParameterGetName(parameter);
                 return $"{parameterPrefix}{parameterType} {parameterName}";
             }));
-        }
-
-        private static string MethodParameterDeclarationWithCallback(Method method, Settings settings, IEnumerable<Parameter> parameters)
-        {
-            string result = MethodParameterDeclaration(method, settings, parameters);
-            if (!result.IsNullOrEmpty())
-            {
-                result += ", ";
-            }
-
-            if (IsAzureOrFluent(settings))
-            {
-                if (MethodIsPagingOperation(method))
-                {
-                    result += $"final ListOperationCallback<{ResponseSequenceElementTypeString(method.ReturnType)}> {serviceCallbackVariableName}";
-                }
-                else if (MethodIsPagingNextOperation(method))
-                {
-                    result += $"final ServiceFuture<{ResponseServiceFutureGenericParameterString(method.ReturnType)}> serviceFuture, final ListOperationCallback<{ResponseSequenceElementTypeString(method.ReturnType)}> {serviceCallbackVariableName}";
-                }
-                else
-                {
-                    result += $"final ServiceCallback<{ResponseGenericBodyClientTypeString(method.ReturnType)}> {serviceCallbackVariableName}";
-                }
-            }
-            else
-            {
-                result += $"final ServiceCallback<{ResponseGenericBodyClientTypeString(method.ReturnType)}> {serviceCallbackVariableName}";
-            }
-
-            return result;
         }
 
         private static IEnumerable<string> MethodExceptionImports(Method method, Settings settings)
@@ -3005,23 +2851,61 @@ namespace AutoRest.Java.DanModel
             return exceptionImports;
         }
 
-        internal static string MethodReturnTypeResponseName(Method method)
-            => IModelTypeName(IModelTypeServiceResponseVariant(ResponseBodyClientType(method.ReturnType)));
+        internal static string MethodReturnTypeResponseName(Method method, Settings settings)
+            => IModelTypeName(IModelTypeServiceResponseVariant(ResponseBodyClientType(method.ReturnType, settings)), settings);
 
         private static void MethodPagingGroupedParameterTransformation(Method method, bool filterRequired, Settings settings, JavaBlock block)
         {
             if (MethodIsPagingOperation(method))
             {
                 string invocation;
-                Method nextMethod = MethodGetPagingNextMethodWithInvocation(method, out invocation);
-                MethodTransformPagingGroupedParameter(method, block, nextMethod, filterRequired, settings);
+                Method nextMethod = MethodGetPagingNextMethodWithInvocation(method, settings, out invocation);
+                if (!method.InputParameterTransformation.IsNullOrEmpty() && !nextMethod.InputParameterTransformation.IsNullOrEmpty())
+                {
+                    Parameter groupedType = method.InputParameterTransformation.First().ParameterMappings[0].InputParameter;
+                    Parameter nextGroupType = nextMethod.InputParameterTransformation.First().ParameterMappings[0].InputParameter;
+
+                    string nextGroupTypeName = ParameterGetName(nextGroupType);
+                    string groupedTypeName = ParameterGetName(groupedType);
+                    if (nextGroupTypeName != groupedTypeName && (!filterRequired || groupedType.IsRequired))
+                    {
+                        string nextGroupTypeCamelCaseName = nextGroupTypeName.ToCamelCase();
+                        string groupedTypeCamelCaseName = groupedTypeName.ToCamelCase();
+
+                        string nextGroupTypeCodeName = CodeNamer.Instance.GetTypeName(nextGroupTypeName) + (IsFluent(settings) ? "Inner" : "");
+
+                        if (!groupedType.IsRequired)
+                        {
+                            block.Line($"{nextGroupTypeCodeName} {nextGroupTypeCamelCaseName} = null;");
+                            block.Line($"if ({groupedTypeCamelCaseName} != null) {{");
+                            block.IncreaseIndent();
+                            block.Line($"{nextGroupTypeCamelCaseName} = new {nextGroupTypeCodeName}();");
+                        }
+                        else
+                        {
+                            block.Line($"{nextGroupTypeCodeName} {nextGroupTypeCamelCaseName} = new {nextGroupTypeCodeName}();");
+                        }
+
+                        foreach (Parameter outParam in nextMethod.InputParameterTransformation.Select(t => t.OutputParameter))
+                        {
+                            string outParamName = ParameterGetName(outParam);
+                            block.Line($"{nextGroupTypeCamelCaseName}.with{outParamName.ToPascalCase()}({groupedTypeCamelCaseName}.{outParamName.ToCamelCase()}());");
+                        }
+
+                        if (!groupedType.IsRequired)
+                        {
+                            block.DecreaseIndent();
+                            block.Line("}");
+                        }
+                    }
+                }
             }
         }
 
-        private static string MethodNextMethodParameterInvocation(Method method, bool filterRequired)
+        private static string MethodNextMethodParameterInvocation(Method method, Settings settings, bool filterRequired)
         {
             string invocation;
-            Method nextMethod = MethodGetPagingNextMethodWithInvocation(method, out invocation);
+            Method nextMethod = MethodGetPagingNextMethodWithInvocation(method, settings, out invocation);
             if (filterRequired)
             {
                 if (method.InputParameterTransformation.IsNullOrEmpty() || nextMethod.InputParameterTransformation.IsNullOrEmpty())
@@ -3054,14 +2938,14 @@ namespace AutoRest.Java.DanModel
             }
         }
 
-        private static string MethodPagingNextPageLinkParameterName(Method method)
+        private static string MethodPagingNextPageLinkParameterName(Method method, Settings settings)
         {
             string invocation;
-            Method nextMethod = MethodGetPagingNextMethodWithInvocation(method, out invocation);
+            Method nextMethod = MethodGetPagingNextMethodWithInvocation(method, settings, out invocation);
             return ParameterGetName(nextMethod.Parameters.First(p => ParameterGetName(p).StartsWith("next", StringComparison.OrdinalIgnoreCase)));
         }
 
-        internal static Method MethodGetPagingNextMethodWithInvocation(Method method, out string invocation, bool async = false, bool singlePage = true)
+        internal static Method MethodGetPagingNextMethodWithInvocation(Method method, Settings settings, out string invocation, bool async = false, bool singlePage = true)
         {
             string methodSuffixString = "";
             if (singlePage)
@@ -3070,7 +2954,7 @@ namespace AutoRest.Java.DanModel
             }
             if (MethodIsPagingNextOperation(method))
             {
-                invocation = MethodName(method) + methodSuffixString + (async ? "Async" : "");
+                invocation = MethodName(method, settings) + methodSuffixString + (async ? "Async" : "");
                 return method;
             }
             string name = method.Extensions.GetValue<Fixable<string>>("nextMethodName")?.ToCamelCase();
@@ -3100,10 +2984,10 @@ namespace AutoRest.Java.DanModel
             return methodModel;
         }
 
-        private static string MethodGetPagingNextMethodInvocation(Method method, bool singlePage = true)
+        private static string MethodGetPagingNextMethodInvocation(Method method, Settings settings, bool singlePage = true)
         {
             string invocation;
-            MethodGetPagingNextMethodWithInvocation(method, out invocation, true, singlePage);
+            MethodGetPagingNextMethodWithInvocation(method, settings, out invocation, true, singlePage);
             return invocation;
         }
 
@@ -3129,41 +3013,15 @@ namespace AutoRest.Java.DanModel
             return string.Join(", ", arguments);
         }
 
-        private static void MethodJavadoc(JavaClass classBlock, Method method, IEnumerable<Parameter> parameters, IEnumerable<string> exceptionsDocumentation, string optionalReturnDocumentation)
-        {
-            classBlock.MultipleLineComment(comment =>
-            {
-                AddMethodSummaryAndDescription(comment, method);
-
-                foreach (Parameter param in parameters)
-                {
-                    comment.Param(ParameterGetName(param), param.Documentation.Else($"the {IModelTypeName(ParameterGetModelType(param))} value").EscapeXmlComment().Trim());
-                }
-
-                foreach (string exception in exceptionsDocumentation)
-                {
-                    comment.Line(exception);
-                }
-
-                if (!string.IsNullOrEmpty(optionalReturnDocumentation))
-                {
-                    comment.Return(optionalReturnDocumentation);
-                }
-            });
-        }
-
-        internal static string MethodParameterDeclaration(IEnumerable<Parameter> parameters)
-            => string.Join(", ", parameters.Select(parameter => IModelTypeParameterVariantName(ParameterClientType(parameter)) + " " + ParameterGetName(parameter)));
-
-        internal static string MethodRestResponseHeadersName(Method method)
+        internal static string MethodRestResponseHeadersName(Method method, Settings settings)
             => method.ReturnType.Headers == null
                 ? "Void"
-                : IModelTypeName(ResponseHeaderClientType(method.ReturnType));
+                : IModelTypeName(ResponseHeaderClientType(method.ReturnType), settings);
 
         internal static string MethodRestResponseAbstractTypeName(Method method, Settings settings)
         {
             Response methodReturnType = method.ReturnType;
-            string deserializedResponseHeadersType = MethodRestResponseHeadersName(method);
+            string deserializedResponseHeadersType = MethodRestResponseHeadersName(method, settings);
             string deserializedResponseBodyType = methodReturnType.Body == null ? "Void" : ResponseServiceResponseGenericParameterString(methodReturnType, settings);
             return $"RestResponse<{deserializedResponseHeadersType}, {deserializedResponseBodyType}>";
         }
@@ -3172,20 +3030,20 @@ namespace AutoRest.Java.DanModel
         {
             Response methodReturnType = method.ReturnType;
 
-            string deserializedResponseHeadersType = MethodRestResponseHeadersName(method);
+            string deserializedResponseHeadersType = MethodRestResponseHeadersName(method, settings);
 
             string deserializedResponseBodyType;
             if (methodReturnType.Body == null)
             {
                 deserializedResponseBodyType = "Void";
             }
-            else if (IsAzureOrFluent(settings) && ResponseBodyClientType(methodReturnType) is SequenceType bodySequenceType && (ResponseIsPagedResponse(methodReturnType) || MethodSimulateAsPagingOperation(ResponseGetParent(methodReturnType))))
+            else if (IsAzureOrFluent(settings) && ResponseBodyClientType(methodReturnType, settings) is SequenceType bodySequenceType && (ResponseIsPagedResponse(methodReturnType) || MethodSimulateAsPagingOperation(ResponseGetParent(methodReturnType), settings)))
             {
-                deserializedResponseBodyType = $"{SequenceTypeGetPageImplType(bodySequenceType)}<{IModelTypeName(bodySequenceType.ElementType)}>";
+                deserializedResponseBodyType = $"{SequenceTypeGetPageImplType(bodySequenceType)}<{IModelTypeName(bodySequenceType.ElementType, settings)}>";
             }
             else
             {
-                deserializedResponseBodyType = ResponseGenericBodyClientTypeString(methodReturnType);
+                deserializedResponseBodyType = ResponseGenericBodyClientTypeString(methodReturnType, settings);
             }
 
             return $"RestResponse<{deserializedResponseHeadersType}, {deserializedResponseBodyType}>";
@@ -3211,7 +3069,7 @@ namespace AutoRest.Java.DanModel
                     {
                         IModelType clientType = ParameterClientType(parameter);
                         IModelType wireType = ParameterWireType(parameter);
-                        string wireTypeName = IModelTypeName(wireType);
+                        string wireTypeName = IModelTypeName(wireType, settings);
                         string wireName = ParameterWireName(parameter);
 
                         if (clientType is PrimaryType primaryClientType && primaryClientType.IsPrimaryType(KnownPrimaryType.ByteArray))
@@ -3240,13 +3098,13 @@ namespace AutoRest.Java.DanModel
 
                     if (!addedConversion)
                     {
-                        ParameterConvertClientTypeToWireType(block, parameter, ParameterWireType(parameter), source, ParameterWireName(parameter), methodClientReference);
+                        ParameterConvertClientTypeToWireType(block, settings, parameter, ParameterWireType(parameter), source, ParameterWireName(parameter), methodClientReference);
                     }
                 }
             }
         }
 
-        internal static void MethodBuildInputMappings(Method method, bool filterRequired, JavaBlock block)
+        private static void MethodBuildInputMappings(Method method, Settings settings, bool filterRequired, JavaBlock block)
         {
             foreach (ParameterTransformation transformation in method.InputParameterTransformation)
             {
@@ -3265,7 +3123,7 @@ namespace AutoRest.Java.DanModel
                 if (conditionalAssignment)
                 {
                     block.Line("{0} {1} = null;",
-                        IModelTypeParameterVariantName(ParameterClientType(transformationOutputParameter)),
+                        IModelTypeParameterVariantName(ParameterClientType(transformationOutputParameter), settings),
                         outParamName);
                     block.Line($"if ({nullCheck}) {{");
                     block.IncreaseIndent();
@@ -3273,13 +3131,13 @@ namespace AutoRest.Java.DanModel
 
                 IModelType transformationOutputParameterModelType = ParameterGetModelType(transformationOutputParameter);
                 bool transformationOutputParameterModelIsCompositeType = transformationOutputParameterModelType is CompositeType;
-                string transformationOutputParameterClientParameterVariantTypeName = IModelTypeParameterVariantName(ParameterClientType(transformationOutputParameter));
+                string transformationOutputParameterClientParameterVariantTypeName = IModelTypeParameterVariantName(ParameterClientType(transformationOutputParameter), settings);
                 if (transformationParameterMappings.Any(m => !string.IsNullOrEmpty(m.OutputParameterProperty)) && transformationOutputParameterModelIsCompositeType)
                 {
                     block.Line("{0}{1} = new {2}();",
                         !conditionalAssignment ? transformationOutputParameterClientParameterVariantTypeName + " " : "",
                         outParamName,
-                        IModelTypeName(transformationOutputParameterModelType));
+                        IModelTypeName(transformationOutputParameterModelType, settings));
                 }
 
                 foreach (ParameterMapping mapping in transformationParameterMappings)
@@ -3357,7 +3215,7 @@ namespace AutoRest.Java.DanModel
             }
         }
 
-        private static void AddOptionalOrConstantParameterVariables(JavaBlock block, Method restAPIMethod, bool addOptionalParameterVariables)
+        private static void AddOptionalOrConstantParameterVariables(JavaBlock block, Method restAPIMethod, Settings settings, bool addOptionalParameterVariables)
         {
             foreach (Parameter parameter in GetRestAPIMethodParameters(restAPIMethod))
             {
@@ -3366,12 +3224,12 @@ namespace AutoRest.Java.DanModel
 
                 if (addOptionalParameterVariables && !parameter.IsRequired)
                 {
-                    block.Line($"final {IModelTypeName(parameterClientType)} {parameterName} = {IModelTypeDefaultValue(parameterClientType, restAPIMethod) ?? "null"};");
+                    block.Line($"final {IModelTypeName(parameterClientType, settings)} {parameterName} = {IModelTypeDefaultValue(parameterClientType, restAPIMethod, settings) ?? "null"};");
                 }
 
                 if (parameter.IsConstant)
                 {
-                    block.Line($"final {IModelTypeParameterVariantName(parameterClientType)} {parameterName} = {parameter.DefaultValue ?? "null"};");
+                    block.Line($"final {IModelTypeParameterVariantName(parameterClientType, settings)} {parameterName} = {parameter.DefaultValue ?? "null"};");
                 }
             }
         }
@@ -3421,16 +3279,16 @@ namespace AutoRest.Java.DanModel
                 .Where(p => p != null && !p.IsClientProperty && !string.IsNullOrWhiteSpace(ParameterGetName(p)))
                 .OrderBy(item => !item.IsRequired);
         
-        private static bool MethodHasSequenceType(IModelType mt)
+        private static bool MethodHasSequenceType(IModelType modelType, Settings settings)
         {
-            if (mt is SequenceType)
+            if (modelType is SequenceType)
             {
                 return true;
             }
 
-            if (mt is CompositeType ct)
+            if (modelType is CompositeType ct)
             {
-                return GetCompositeTypeProperties(ct).Any(p => MethodHasSequenceType(GetPropertyModelType(p)));
+                return GetCompositeTypeProperties(ct, settings).Any(p => MethodHasSequenceType(GetPropertyModelType(p), settings));
             }
 
             return false;
@@ -3444,24 +3302,24 @@ namespace AutoRest.Java.DanModel
             {
                 List<string> interfacesToImport = new List<string>();
 
-                Method getMethod = methodGroup.Methods.FirstOrDefault(x => StringComparer.OrdinalIgnoreCase.Equals(MethodName(x), WellKnowMethodNames.GetByResourceGroup));
+                Method getMethod = methodGroup.Methods.FirstOrDefault(x => StringComparer.OrdinalIgnoreCase.Equals(MethodName(x, settings), GetByResourceGroup));
                 if (getMethod != null && TakesTwoRequiredParameters(getMethod))
                 {
                     interfacesToImport.Add(innerSupportsGetImport);
                 }
 
-                Method deleteMethod = methodGroup.Methods.FirstOrDefault(x => StringComparer.OrdinalIgnoreCase.Equals(MethodName(x), WellKnowMethodNames.Delete));
+                Method deleteMethod = methodGroup.Methods.FirstOrDefault(x => StringComparer.OrdinalIgnoreCase.Equals(MethodName(x, settings), Delete));
                 if (deleteMethod != null && TakesTwoRequiredParameters(deleteMethod))
                 {
                     interfacesToImport.Add(innerSupportsDeleteImport);
                 }
 
-                Method listMethod = methodGroup.Methods.FirstOrDefault(x => StringComparer.OrdinalIgnoreCase.Equals(MethodName(x), WellKnowMethodNames.List));
-                Method listByResourceGroup = methodGroup.Methods.FirstOrDefault(x => StringComparer.OrdinalIgnoreCase.Equals(MethodName(x), WellKnowMethodNames.ListByResourceGroup));
+                Method listMethod = methodGroup.Methods.FirstOrDefault(x => StringComparer.OrdinalIgnoreCase.Equals(MethodName(x, settings), List));
+                Method listByResourceGroup = methodGroup.Methods.FirstOrDefault(x => StringComparer.OrdinalIgnoreCase.Equals(MethodName(x, settings), ListByResourceGroup));
                 bool anyMethodSupportsInnerListing = listMethod != null && listByResourceGroup != null
                     && StringComparer.OrdinalIgnoreCase.Equals(
-                        ResponseSequenceElementTypeString(listMethod.ReturnType),
-                        ResponseSequenceElementTypeString(listByResourceGroup.ReturnType));
+                        ResponseSequenceElementTypeString(listMethod.ReturnType, settings),
+                        ResponseSequenceElementTypeString(listByResourceGroup.ReturnType, settings));
                 if (anyMethodSupportsInnerListing)
                 {
                     interfacesToImport.Add(innerSupportsListingImport);
@@ -3473,11 +3331,11 @@ namespace AutoRest.Java.DanModel
                 List<string> azureImplImports = new List<string>();
                 azureImplImports.Add("com.microsoft.rest.v2.RestProxy");
                 azureImplImports.Add("com.microsoft.rest.v2.RestResponse");
-                if (MethodGroupTypeString(methodGroup) == GetMethodGroupClientInterfaceName(methodGroup))
+                if (MethodGroupTypeString(methodGroup, settings) == GetMethodGroupClientInterfaceName(methodGroup))
                 {
                     azureImplImports.Add(GetMethodGroupClientInterfacePath(methodGroup));
                 }
-                azureImplImports.AddRange(methodGroup.Methods.SelectMany(m => MethodImplImports(m)));
+                azureImplImports.AddRange(methodGroup.Methods.SelectMany(m => MethodImplImports(m, settings)));
                 azureImplImports.Add("com.microsoft.azure.v2.AzureProxy");
                 azureImplImports.Remove("com.microsoft.rest.v2.RestProxy");
 
@@ -3505,11 +3363,11 @@ namespace AutoRest.Java.DanModel
                 List<string> imports = new List<string>();
                 imports.Add("com.microsoft.rest.v2.RestProxy");
                 imports.Add("com.microsoft.rest.v2.RestResponse");
-                if (MethodGroupTypeString(methodGroup) == GetMethodGroupClientInterfaceName(methodGroup))
+                if (MethodGroupTypeString(methodGroup, settings) == GetMethodGroupClientInterfaceName(methodGroup))
                 {
                     imports.Add(GetMethodGroupClientInterfacePath(methodGroup));
                 }
-                imports.AddRange(methodGroup.Methods.SelectMany(m => MethodImplImports(m)));
+                imports.AddRange(methodGroup.Methods.SelectMany(m => MethodImplImports(m, settings)));
                 imports.Add("com.microsoft.azure.v2.AzureProxy");
                 imports.Remove("com.microsoft.rest.v2.RestProxy");
                 result = imports;
@@ -3519,37 +3377,12 @@ namespace AutoRest.Java.DanModel
                 List<string> imports = new List<string>();
                 imports.Add("com.microsoft.rest.v2.RestProxy");
                 imports.Add("com.microsoft.rest.v2.RestResponse");
-                if (MethodGroupTypeString(methodGroup) == GetMethodGroupClientInterfaceName(methodGroup))
+                if (MethodGroupTypeString(methodGroup, settings) == GetMethodGroupClientInterfaceName(methodGroup))
                 {
                     imports.Add(GetMethodGroupClientInterfacePath(methodGroup));
                 }
-                imports.AddRange(methodGroup.Methods.SelectMany(m => MethodImplImports(m)));
+                imports.AddRange(methodGroup.Methods.SelectMany(m => MethodImplImports(m, settings)));
                 result = imports;
-            }
-
-            return result;
-        }
-
-        internal static string MethodGroupParentDeclaration(MethodGroup methodGroup, Settings settings)
-        {
-            string result;
-
-            if (IsFluent(settings))
-            {
-                IEnumerable<string> supportedInterfaces = MethodGroupSupportedInterfaces(methodGroup);
-
-                if (supportedInterfaces.Any())
-                {
-                    result = $" implements {string.Join(", ", supportedInterfaces)}";
-                }
-                else
-                {
-                    result = "";
-                }
-            }
-            else
-            {
-                result = " implements " + MethodGroupTypeString(methodGroup);
             }
 
             return result;
@@ -3564,7 +3397,7 @@ namespace AutoRest.Java.DanModel
             return GetClientMethodParameters(method).Count(x => x.IsRequired) == 2;
         }
 
-        internal static IEnumerable<string> MethodGroupSupportedInterfaces(MethodGroup methodGroup)
+        internal static IEnumerable<string> MethodGroupSupportedInterfaces(MethodGroup methodGroup, Settings settings)
         {
             List<string> result = new List<string>();
 
@@ -3572,27 +3405,27 @@ namespace AutoRest.Java.DanModel
             const string InnerSupportsDelete = "InnerSupportsDelete";
             const string InnerSupportsListing = "InnerSupportsListing";
 
-            Method getMethod = methodGroup.Methods.FirstOrDefault(x => StringComparer.OrdinalIgnoreCase.Equals(MethodName(x), WellKnowMethodNames.GetByResourceGroup));
+            Method getMethod = methodGroup.Methods.FirstOrDefault(x => StringComparer.OrdinalIgnoreCase.Equals(MethodName(x, settings), GetByResourceGroup));
             if (getMethod != null && TakesTwoRequiredParameters(getMethod))
             {
-                result.Add($"{InnerSupportsGet}<{ResponseGenericBodyClientTypeString(getMethod.ReturnType)}>");
+                result.Add($"{InnerSupportsGet}<{ResponseGenericBodyClientTypeString(getMethod.ReturnType, settings)}>");
             }
 
-            Method deleteMethod = methodGroup.Methods.FirstOrDefault(x => StringComparer.OrdinalIgnoreCase.Equals(MethodName(x), WellKnowMethodNames.Delete));
+            Method deleteMethod = methodGroup.Methods.FirstOrDefault(x => StringComparer.OrdinalIgnoreCase.Equals(MethodName(x, settings), Delete));
             if (deleteMethod != null && TakesTwoRequiredParameters(deleteMethod))
             {
-                result.Add($"{InnerSupportsDelete}<{ResponseClientCallbackTypeString(deleteMethod.ReturnType)}>");
+                result.Add($"{InnerSupportsDelete}<{ResponseClientCallbackTypeString(deleteMethod.ReturnType, settings)}>");
             }
 
-            Method listMethod = methodGroup.Methods.FirstOrDefault(x => StringComparer.OrdinalIgnoreCase.Equals(MethodName(x), WellKnowMethodNames.List));
-            Method listByResourceGroup = methodGroup.Methods.FirstOrDefault(x => StringComparer.OrdinalIgnoreCase.Equals(MethodName(x), WellKnowMethodNames.ListByResourceGroup));
+            Method listMethod = methodGroup.Methods.FirstOrDefault(x => StringComparer.OrdinalIgnoreCase.Equals(MethodName(x, settings), List));
+            Method listByResourceGroup = methodGroup.Methods.FirstOrDefault(x => StringComparer.OrdinalIgnoreCase.Equals(MethodName(x, settings), ListByResourceGroup));
             bool anyMethodSupportsInnerListing = listMethod != null && listByResourceGroup != null
                 && StringComparer.OrdinalIgnoreCase.Equals(
-                    ResponseSequenceElementTypeString(listMethod.ReturnType),
-                    ResponseSequenceElementTypeString(listByResourceGroup.ReturnType));
+                    ResponseSequenceElementTypeString(listMethod.ReturnType, settings),
+                    ResponseSequenceElementTypeString(listByResourceGroup.ReturnType, settings));
             if (anyMethodSupportsInnerListing)
             {
-                result.Add($"{InnerSupportsListing}<{ResponseSequenceElementTypeString(listMethod.ReturnType)}>");
+                result.Add($"{InnerSupportsListing}<{ResponseSequenceElementTypeString(listMethod.ReturnType, settings)}>");
             }
 
             return result;
@@ -3601,11 +3434,11 @@ namespace AutoRest.Java.DanModel
         private static string GetMethodGroupClientInterfacePath(MethodGroup methodGroup)
             => GetPackage(methodGroup.CodeModel) + "." + GetMethodGroupClientInterfaceName(methodGroup);
 
-        private static string MethodGroupTypeString(MethodGroup methodGroup)
+        private static string MethodGroupTypeString(MethodGroup methodGroup, Settings settings)
         {
             string methodGroupClientInterfaceName = GetMethodGroupClientInterfaceName(methodGroup);
             if (methodGroup.Methods
-                    .SelectMany(m => MethodImplImports(m))
+                    .SelectMany(m => MethodImplImports(m, settings))
                     .Any(i => i.Split('.').LastOrDefault() == methodGroupClientInterfaceName))
             {
                 return GetMethodGroupClientInterfacePath(methodGroup);
@@ -3613,12 +3446,21 @@ namespace AutoRest.Java.DanModel
             return methodGroupClientInterfaceName;
         }
 
-        private static string GetRestAPIInterfaceName(MethodGroup methodGroup)
+        private static string GetRestAPIInterfaceName(MethodGroup methodGroup, Settings settings)
             => CodeNamerJv.GetServiceName(MethodGroupName(methodGroup).ToPascalCase());
 
         private static string MethodGroupName(MethodGroup methodGroup)
         {
-            return methodGroup.Name.ToCamelCase();
+            string result = methodGroup.Name;
+
+            if (!string.IsNullOrEmpty(result) && !result.EndsWith('s'))
+            {
+                result += 's';
+            }
+
+            result = result.ToCamelCase();
+
+            return result;
         }
 
         private static IModelType PrimaryTypeResponseVariant(PrimaryType primaryType)
@@ -3667,16 +3509,16 @@ namespace AutoRest.Java.DanModel
             return true;
         }
 
-        internal static string IModelTypeDefaultValue(IModelType modelType, Method parent)
+        internal static string IModelTypeDefaultValue(IModelType modelType, Method parent, Settings settings)
         {
             string result;
-            if (modelType is PrimaryType && IModelTypeName(modelType) == "RequestBody")
+            if (modelType is PrimaryType && IModelTypeName(modelType, settings) == "RequestBody")
             {
                 result = $"RequestBody.create(MediaType.parse(\"{parent.RequestContentType}\"), new byte[0])";
             }
             else if (modelType is PrimaryType primaryType)
             {
-                string modelTypeName = IModelTypeName(primaryType);
+                string modelTypeName = IModelTypeName(primaryType, settings);
                 if (modelTypeName == "byte[]")
                 {
                     result = "new byte[0]";
@@ -3769,7 +3611,7 @@ namespace AutoRest.Java.DanModel
         internal static string ParameterWireName(Parameter parameter)
             => ParameterNeedsConversion(parameter) ? $"{ParameterGetName(parameter).ToCamelCase()}Converted" : ParameterGetName(parameter);
 
-        private static void ParameterConvertClientTypeToWireType(JavaBlock block, Parameter parameter, IModelType wireType, string source, string target, string clientReference, int level = 0)
+        private static void ParameterConvertClientTypeToWireType(JavaBlock block, Settings settings, Parameter parameter, IModelType wireType, string source, string target, string clientReference, int level = 0)
         {
             bool parameterIsRequired = parameter.IsRequired;
             if (wireType.IsPrimaryType(KnownPrimaryType.DateTimeRfc1123))
@@ -3780,7 +3622,7 @@ namespace AutoRest.Java.DanModel
                 }
                 else
                 {
-                    block.Line($"DateTimeRfc1123 {target} = {IModelTypeDefaultValue(wireType, parameter.Method) ?? "null"};");
+                    block.Line($"DateTimeRfc1123 {target} = {IModelTypeDefaultValue(wireType, parameter.Method, settings) ?? "null"};");
                     block.If($"{source} != null", ifBlock =>
                     {
                         ifBlock.Line($"{target} = new DateTimeRfc1123({source});");
@@ -3795,7 +3637,7 @@ namespace AutoRest.Java.DanModel
                 }
                 else
                 {
-                    block.Line($"Long {target} = {IModelTypeDefaultValue(wireType, parameter.Method) ?? "null"};");
+                    block.Line($"Long {target} = {IModelTypeDefaultValue(wireType, parameter.Method, settings) ?? "null"};");
                     block.If($"{source} != null", ifBlock =>
                     {
                         ifBlock.Line($"{target} = {source}.toDateTime(DateTimeZone.UTC).getMillis() / 1000;");
@@ -3810,7 +3652,7 @@ namespace AutoRest.Java.DanModel
                 }
                 else
                 {
-                    block.Line($"Base64Url {target} = {IModelTypeDefaultValue(wireType, parameter.Method) ?? "null"};");
+                    block.Line($"Base64Url {target} = {IModelTypeDefaultValue(wireType, parameter.Method, settings) ?? "null"};");
                     block.If($"{source} != null", ifBlock =>
                     {
                         ifBlock.Line($"{target} = Base64Url.encode({source});");
@@ -3822,9 +3664,9 @@ namespace AutoRest.Java.DanModel
                 if (!parameterIsRequired)
                 {
                     block.Line("{0} {1} = {2};",
-                        IModelTypeName(ParameterWireType(parameter)),
+                        IModelTypeName(ParameterWireType(parameter), settings),
                         target,
-                        IModelTypeDefaultValue(wireType, parameter.Method) ?? "null");
+                        IModelTypeDefaultValue(wireType, parameter.Method, settings) ?? "null");
                     block.Line($"if ({source} != null) {{");
                     block.IncreaseIndent();
                 }
@@ -3834,16 +3676,16 @@ namespace AutoRest.Java.DanModel
                 string itemTarget = $"value{levelSuffix}";
                 IModelType elementType = wireSequenceType.ElementType;
                 block.Line("{0}{1} = new ArrayList<{2}>();",
-                    parameterIsRequired ? IModelTypeName(wireType) + " " : "",
+                    parameterIsRequired ? IModelTypeName(wireType, settings) + " " : "",
                     target,
-                    IModelTypeName(elementType));
+                    IModelTypeName(elementType, settings));
                 block.Line("for ({0} {1} : {2}) {{",
-                    IModelTypeParameterVariantName(elementType),
+                    IModelTypeParameterVariantName(elementType, settings),
                     itemName,
                     source);
                 block.Indent(() =>
                 {
-                    ParameterConvertClientTypeToWireType(block, parameter, elementType, itemName, itemTarget, clientReference, level + 1);
+                    ParameterConvertClientTypeToWireType(block, settings, parameter, elementType, itemName, itemTarget, clientReference, level + 1);
                     block.Line($"{target}.add({itemTarget});");
                 });
                 block.Line("}");
@@ -3858,7 +3700,7 @@ namespace AutoRest.Java.DanModel
             {
                 if (!parameterIsRequired)
                 {
-                    block.Line($"{IModelTypeName(ParameterWireType(parameter))} {target} = {IModelTypeDefaultValue(wireType, parameter.Method) ?? "null"};");
+                    block.Line($"{IModelTypeName(ParameterWireType(parameter), settings)} {target} = {IModelTypeDefaultValue(wireType, parameter.Method, settings) ?? "null"};");
                     block.Line($"if ({source} != null) {{");
                     block.IncreaseIndent();
                 }
@@ -3869,11 +3711,11 @@ namespace AutoRest.Java.DanModel
                 string itemName = $"entry{levelString}";
                 string itemTarget = $"value{levelString}";
 
-                block.Line($"{(parameterIsRequired ? IModelTypeName(wireType) + " " : "")}{target} = new HashMap<String, {IModelTypeName(valueType)}>();");
-                block.Line($"for (Map.Entry<String, {IModelTypeParameterVariantName(valueType)}> {itemName} : {source}.entrySet()) {{");
+                block.Line($"{(parameterIsRequired ? IModelTypeName(wireType, settings) + " " : "")}{target} = new HashMap<String, {IModelTypeName(valueType, settings)}>();");
+                block.Line($"for (Map.Entry<String, {IModelTypeParameterVariantName(valueType, settings)}> {itemName} : {source}.entrySet()) {{");
                 block.Indent(() =>
                 {
-                    ParameterConvertClientTypeToWireType(block, parameter, valueType, itemName + ".getValue()", itemTarget, clientReference, level + 1);
+                    ParameterConvertClientTypeToWireType(block, settings, parameter, valueType, itemName + ".getValue()", itemTarget, clientReference, level + 1);
                     block.Line($"{target}.put({itemName}.getKey(), {itemTarget});");
                 });
                 block.Line("}");
@@ -3911,7 +3753,7 @@ namespace AutoRest.Java.DanModel
             {
                 string clientTypeName = methodGroup == null ? GetServiceClientInterfaceName(codeModel) : GetMethodGroupClientInterfaceName(methodGroup);
                 string restAPIBaseUrl = codeModel.BaseUrl;
-                string restAPIInterfaceName = methodGroup == null ? GetRestAPIInterfaceName(codeModel) : GetRestAPIInterfaceName(methodGroup);
+                string restAPIInterfaceName = methodGroup == null ? GetRestAPIInterfaceName(codeModel) : GetRestAPIInterfaceName(methodGroup, settings);
 
                 classBlock.WordWrappedMultipleLineComment(GetMaximumCommentWidth(settings), comment =>
                 {
@@ -3959,22 +3801,89 @@ namespace AutoRest.Java.DanModel
                             interfaceBlock.Annotation($"UnexpectedResponseExceptionType({MethodOperationExceptionTypeString(restAPIMethod, settings)}.class)");
                         }
 
-                        string methodName = MethodName(restAPIMethod);
-                        string methodParameterApiDeclaration = MethodParameterApiDeclaration(restAPIMethod, settings);
+                        string methodName = MethodName(restAPIMethod, settings);
+
+                        bool shouldGenerateXmlSerialization = restAPIMethod.CodeModel.ShouldGenerateXmlSerialization;
+
+                        List<string> parameterDeclarationList = new List<string>();
+                        IEnumerable<Parameter> retrofitParameters = MethodOrderedRetrofitParameters(restAPIMethod, settings);
+                        foreach (Parameter parameter in retrofitParameters)
+                        {
+                            StringBuilder parameterDeclarationBuilder = new StringBuilder();
+                            if (restAPIMethod.Url.Contains("{" + ParameterGetName(parameter) + "}"))
+                            {
+                                parameter.Location = ParameterLocation.Path;
+                            }
+
+                            string name = parameter.SerializedName;
+                            if (parameter.Extensions.ContainsKey("hostParameter"))
+                            {
+                                parameterDeclarationBuilder.Append($"@HostParam(\"{name}\") ");
+                            }
+                            else if (parameter.Location == ParameterLocation.Path ||
+                                parameter.Location == ParameterLocation.Query ||
+                                parameter.Location == ParameterLocation.Header)
+                            {
+                                ParameterLocation location = parameter.Location;
+                                parameterDeclarationBuilder.Append($"@{location}Param(\"{name}\") ");
+                            }
+                            else if (parameter.Location == ParameterLocation.Body)
+                            {
+                                parameterDeclarationBuilder.Append($"@BodyParam(\"{restAPIMethod.RequestContentType}\") ");
+                            }
+                            else if (parameter.Location == ParameterLocation.FormData)
+                            {
+                                parameterDeclarationBuilder.Append($"/* @Part(\"{name}\") not supported by RestProxy */");
+                            }
+
+                            string declarativeName = parameter.ClientProperty != null ? (string)parameter.ClientProperty.Name : ParameterGetName(parameter);
+
+                            IModelType parameterModelType = ParameterGetModelType(parameter);
+                            bool shouldUseXmlListWrapper = shouldGenerateXmlSerialization && parameter.Location == ParameterLocation.Body && parameterModelType is SequenceType;
+                            if (shouldUseXmlListWrapper)
+                            {
+                                parameterDeclarationBuilder.Append(parameterModelType.XmlName + "Wrapper");
+                            }
+                            else
+                            {
+                                parameterDeclarationBuilder.Append(IModelTypeName(ParameterWireType(parameter), settings));
+                            }
+
+                            parameterDeclarationBuilder.Append(" " + declarativeName);
+                            parameterDeclarationList.Add(parameterDeclarationBuilder.ToString());
+                        }
+
+                        string parameterDeclarations = string.Join(", ", parameterDeclarationList);
+
+                        if (IsAzureOrFluent(settings))
+                        {
+                            foreach (Parameter parameter in retrofitParameters.Where(p => p.Location == ParameterLocation.Path || p.Location == ParameterLocation.Query))
+                            {
+                                if (GetExtensionBool(parameter?.Extensions, SwaggerExtensions.SkipUrlEncodingExtension))
+                                {
+                                    string location = parameter.Location.ToString();
+                                    string serializedName = parameter.SerializedName;
+                                    parameterDeclarations = parameterDeclarations.Replace(
+                                        $"@{location}Param(\"{serializedName}\")",
+                                        $"@{location}Param(value = \"{serializedName}\", encoded = true)");
+                                }
+                            }
+                        }
+
                         if (MethodIsLongRunningOperation(restAPIMethod))
                         {
-                            interfaceBlock.Method($"Observable<OperationStatus<{ResponseServiceResponseGenericParameterString(restAPIMethod.ReturnType, settings)}>> {methodName}({methodParameterApiDeclaration})");
+                            interfaceBlock.PublicMethod($"Observable<OperationStatus<{ResponseServiceResponseGenericParameterString(restAPIMethod.ReturnType, settings)}>> {methodName}({parameterDeclarations})");
                         }
                         else
                         {
-                            interfaceBlock.Method($"Single<{MethodRestResponseConcreteTypeName(restAPIMethod, settings)}> {methodName}({methodParameterApiDeclaration})");
+                            interfaceBlock.PublicMethod($"Single<{MethodRestResponseConcreteTypeName(restAPIMethod, settings)}> {methodName}({parameterDeclarations})");
                         }
                     }
                 });
             }
         }
 
-        private static void AddServiceClientInterfacePropertyGettersAndSetters(JavaInterface interfaceBlock, CodeModel codeModel)
+        private static void AddServiceClientInterfacePropertyGettersAndSetters(JavaInterface interfaceBlock, CodeModel codeModel, Settings settings)
         {
             string serviceClientInterfaceName = GetServiceClientInterfaceName(codeModel);
 
@@ -3983,112 +3892,33 @@ namespace AutoRest.Java.DanModel
                 string propertyDescription = property.Documentation;
                 string propertyName = property.Name;
                 string propertyNameCamelCase = propertyName.ToCamelCase();
-                string propertyType = IModelTypeName(IModelTypeServiceResponseVariant(GetPropertyModelType(property)));
+                string propertyType = IModelTypeName(IModelTypeServiceResponseVariant(GetPropertyModelType(property)), settings);
 
                 interfaceBlock.MultipleLineComment(comment =>
                 {
-                    comment.Description($"Gets {propertyDescription}".Period());
-                    comment.Return($"the {propertyName} value".Period());
+                    comment.Description($"Gets {propertyDescription}");
+                    comment.Return($"the {propertyName} value");
                 });
-                interfaceBlock.Method($"{propertyType} {propertyNameCamelCase}()");
+                interfaceBlock.PublicMethod($"{propertyType} {propertyNameCamelCase}()");
 
                 if (!property.IsReadOnly)
                 {
                     interfaceBlock.MultipleLineComment(comment =>
                     {
-                        comment.Description($"Sets {propertyDescription}".Period());
-                        comment.Param(propertyNameCamelCase, $"the {propertyName} value".Period());
+                        comment.Description($"Sets {propertyDescription}");
+                        comment.Param(propertyNameCamelCase, $"the {propertyName} value");
                         comment.Return("the service client itself");
                     });
-                    interfaceBlock.Method($"{serviceClientInterfaceName} with{propertyName.ToPascalCase()}({propertyType} {propertyNameCamelCase})");
+                    interfaceBlock.PublicMethod($"{serviceClientInterfaceName} with{propertyName.ToPascalCase()}({propertyType} {propertyNameCamelCase})");
                 }
             }
         }
-
-        private static string GetServiceClientTypeName(CodeModel codeModel, Settings settings)
-            => IsFluent(settings) ? GetServiceClientClassName(codeModel) : GetServiceClientInterfaceName(codeModel);
 
         private static string GetServiceClientInterfaceName(CodeModel codeModel)
             => codeModel.Name.ToPascalCase();
 
         private static string GetServiceClientClassName(CodeModel codeModel)
             => GetServiceClientInterfaceName(codeModel) + "Impl";
-
-        private static string GetServiceClientClassDeclaration(CodeModel codeModel, Settings settings)
-        {
-            string serviceClientClassDeclaration = $"{GetServiceClientClassName(codeModel)} extends ";
-
-            bool isFluent = IsFluent(settings);
-            if (isFluent || IsAzure(settings))
-            {
-                serviceClientClassDeclaration += "Azure";
-            }
-
-            serviceClientClassDeclaration += "ServiceClient";
-
-            if (!isFluent)
-            {
-                serviceClientClassDeclaration += $" implements {GetServiceClientInterfaceName(codeModel)}";
-            }
-
-            return serviceClientClassDeclaration;
-        }
-
-        private static void AddServiceClientClassComment(JavaFile javaFile, CodeModel codeModel, Settings settings)
-        {
-            javaFile.MultipleLineComment(comment =>
-            {
-                comment.Line($"Initializes a new instance of the {GetServiceClientTypeName(codeModel, settings)} type.");
-            });
-        }
-
-        private static void AddRestAPIProxyMemberVariable(JavaClass classBlock, CodeModel codeModel)
-        {
-            IEnumerable<Method> restAPIMethods = GetRestAPIMethods(codeModel);
-            if (restAPIMethods.Any())
-            {
-                classBlock.MultipleLineComment($"The proxy service used to perform REST calls.");
-                classBlock.PrivateMemberVariable(GetRestAPIInterfaceName(codeModel), "service");
-            }
-        }
-
-        private static void AddServiceClientMethodGroupGetters(JavaClass classBlock, IEnumerable<MethodGroup> methodGroups, Settings settings)
-        {
-            foreach (MethodGroup methodGroup in methodGroups)
-            {
-                string methodGroupClientTypeName = GetMethodGroupClientTypeName(methodGroup, settings);
-
-                classBlock.MultipleLineComment(comment =>
-                {
-                    comment.Description($"The {methodGroupClientTypeName} object to access its operations.");
-                });
-                classBlock.PrivateMemberVariable(methodGroupClientTypeName, MethodGroupName(methodGroup));
-
-                classBlock.MultipleLineComment(comment =>
-                {
-                    comment.Description($"Gets the {methodGroupClientTypeName} object to access its operations.");
-                    comment.Return($"the {methodGroupClientTypeName} object.");
-                });
-                classBlock.PublicMethod($"{methodGroupClientTypeName} {MethodGroupName(methodGroup)}()", function =>
-                {
-                    function.Return($"this.{MethodGroupName(methodGroup)}");
-                });
-            }
-        }
-
-        /// <summary>
-        /// Get the type name of the MethodGroupClient for the provided MethodGroup. If the fluent
-        /// flag is set, then this will just be the name of the MethodGroupClient class. If the
-        /// fluent flag is not set, then this will be the name of the MethodGroupClient interface.
-        /// </summary>
-        /// <param name="methodGroup">The MethodGroup to get the client's type name for.</param>
-        /// <param name="settings">The Settings object that can be used to determine if the fluent
-        /// flag is set.</param>
-        /// <returns></returns>
-        private static string GetMethodGroupClientTypeName(MethodGroup methodGroup, Settings settings)
-        {
-            return IsFluent(settings) ? GetMethodGroupClientClassName(methodGroup, settings) : GetMethodGroupClientInterfaceName(methodGroup);
-        }
 
         /// <summary>
         /// Get the name of the MethodGroupClient class for the provided methodGroup. If the fluent
@@ -4100,16 +3930,12 @@ namespace AutoRest.Java.DanModel
         /// <param name="settings"></param>
         /// <returns></returns>
         private static string GetMethodGroupClientClassName(MethodGroup methodGroup, Settings settings)
-        {
-            return GetMethodGroupClientInterfaceName(methodGroup) + (IsFluent(settings) ? "Inner" : "Impl");
-        }
+            => GetMethodGroupClientInterfaceName(methodGroup) + (IsFluent(settings) ? "Inner" : "Impl");
 
         private static string GetMethodGroupClientInterfaceName(MethodGroup methodGroup)
-        {
-            return methodGroup.TypeName;
-        }
+            => MethodGroupName(methodGroup).ToPascalCase();
 
-        private static void AddClientMethodOverloads(JavaClass classBlock, IEnumerable<Method> restAPIMethods, Settings settings)
+        private static void AddClientMethodOverloads(JavaType typeBlock, IEnumerable<Method> restAPIMethods, Settings settings)
         {
             if (restAPIMethods.Any())
             {
@@ -4126,48 +3952,59 @@ namespace AutoRest.Java.DanModel
                         {
                             if (hasOptionalClientMethodParameters)
                             {
-                                AddPagingMethodOverloads(classBlock, restAPIMethod, requiredClientMethodParameters, settings, true, true);
+                                AddPagingMethodOverloads(typeBlock, restAPIMethod, requiredClientMethodParameters, settings, true, true);
                             }
-                            AddPagingMethodOverloads(classBlock, restAPIMethod, clientMethodParameters, settings, false, false);
+                            AddPagingMethodOverloads(typeBlock, restAPIMethod, clientMethodParameters, settings, false, false);
                         }
-                        else if (MethodSimulateAsPagingOperation(restAPIMethod))
+                        else if (MethodSimulateAsPagingOperation(restAPIMethod, settings))
                         {
                             if (hasOptionalClientMethodParameters)
                             {
-                                AddSimulatedPagingMethodOverloads(classBlock, restAPIMethod, requiredClientMethodParameters, settings, true, true);
+                                AddSimulatedPagingMethodOverloads(typeBlock, restAPIMethod, requiredClientMethodParameters, settings, true, true);
                             }
-                            AddSimulatedPagingMethodOverloads(classBlock, restAPIMethod, clientMethodParameters, settings, false, false);
+                            AddSimulatedPagingMethodOverloads(typeBlock, restAPIMethod, clientMethodParameters, settings, false, false);
                         }
                         else if (MethodIsLongRunningOperation(restAPIMethod))
                         {
                             if (hasOptionalClientMethodParameters)
                             {
-                                AddLongRunningOperationMethodOverloads(classBlock, restAPIMethod, requiredClientMethodParameters, settings, true, true);
+                                AddLongRunningOperationMethodOverloads(typeBlock, restAPIMethod, requiredClientMethodParameters, settings, true, true);
                             }
-                            AddLongRunningOperationMethodOverloads(classBlock, restAPIMethod, clientMethodParameters, settings, false, false);
+                            AddLongRunningOperationMethodOverloads(typeBlock, restAPIMethod, clientMethodParameters, settings, false, false);
                         }
                         else
                         {
-                            AddRegularMethodOverloads(classBlock, restAPIMethod, settings);
+                            if (hasOptionalClientMethodParameters)
+                            {
+                                AddRegularMethodOverloads(typeBlock, restAPIMethod, settings, true);
+                            }
+                            AddRegularMethodOverloads(typeBlock, restAPIMethod, settings, false);
                         }
                     }
                     else
                     {
-                        AddRegularMethodOverloads(classBlock, restAPIMethod, settings);
+                        if (hasOptionalClientMethodParameters)
+                        {
+                            AddRegularMethodOverloads(typeBlock, restAPIMethod, settings, true);
+                        }
+                        AddRegularMethodOverloads(typeBlock, restAPIMethod, settings, false);
                     }
                 }
             }
         }
 
-        private static void AddLongRunningOperationMethodOverloads(JavaClass classBlock, Method method, IEnumerable<Parameter> parameters, Settings settings, bool filterRequired, bool onlyRequiredParameters)
+        private static void AddLongRunningOperationMethodOverloads(JavaType typeBlock, Method method, IEnumerable<Parameter> parameters, Settings settings, bool filterRequired, bool onlyRequiredParameters)
         {
-            string methodName = MethodName(method);
+            string methodName = MethodName(method, settings);
 
-            AddSynchronousMethodComment(classBlock, method, parameters, settings);
-            classBlock.PublicMethod(GetSynchronousMethodSignature(method, parameters, settings), function =>
+            // --------------------
+            // Synchronous Overload
+            // --------------------
+            AddSynchronousMethodComment(typeBlock, method, parameters, settings);
+            typeBlock.PublicMethod(GetSynchronousMethodSignature(method, parameters, settings), function =>
             {
                 string argumentList = ArgumentList(parameters);
-                if (IModelTypeName(GetIModelTypeResponseVariant(ResponseBodyClientType(method.ReturnType))) == "void")
+                if (IModelTypeName(GetIModelTypeResponseVariant(ResponseBodyClientType(method.ReturnType, settings)), settings) == "void")
                 {
                     function.Line($"{methodName}Async({argumentList}).blockingLast();");
                 }
@@ -4177,153 +4014,68 @@ namespace AutoRest.Java.DanModel
                 }
             });
 
-            AddServiceFutureMethodComment(classBlock, method, parameters);
-            classBlock.PublicMethod(GetServiceFutureMethodSignature(method, parameters, settings), function =>
+            // ----------------------------
+            // Async ServiceFuture Overload
+            // ----------------------------
+            AddServiceFutureMethodComment(typeBlock, method, parameters, settings);
+            typeBlock.PublicMethod(GetServiceFutureMethodSignature(method, parameters, settings), function =>
             {
                 function.Return($"ServiceFutureUtil.fromLRO({methodName}Async({ArgumentList(parameters)}), {serviceCallbackVariableName})");
             });
 
-            AddOperationStatusMethodComment(classBlock, method, parameters);
-            classBlock.PublicMethod($"Observable<OperationStatus<{ResponseGenericBodyClientTypeString(method.ReturnType)}>> {methodName}Async({MethodParameterDeclaration(method, settings, parameters)})", function =>
+            // ------------------------------------------
+            // Async Observable<OperationStatus> Overload
+            // ------------------------------------------
+            typeBlock.MultipleLineComment(comment =>
+            {
+                AddMethodSummaryAndDescription(comment, method);
+                AddParameters(comment, parameters, settings);
+                ThrowsIllegalArgumentException(comment);
+                comment.Return("the observable for the request");
+            });
+            typeBlock.PublicMethod($"Observable<OperationStatus<{ResponseGenericBodyClientTypeString(method.ReturnType, settings)}>> {methodName}Async({MethodParameterDeclaration(method, settings, parameters)})", function =>
             {
                 AddRequiredNullableParameterChecks(function, method);
                 AddValidationChecks(function, method, onlyRequiredParameters);
-                AddOptionalOrConstantParameterVariables(function, method, onlyRequiredParameters);
+                AddOptionalOrConstantParameterVariables(function, method, settings, onlyRequiredParameters);
 
-                MethodBuildInputMappings(method, filterRequired, function);
+                MethodBuildInputMappings(method, settings, filterRequired, function);
                 IEnumerable<Parameter> requiredRetrofitParameters = MethodRetrofitParameters(method, settings).Where(p => p.IsRequired);
                 MethodParameterConversion(method, settings, requiredRetrofitParameters, function);
                 function.Return($"service.{methodName}({MethodParameterApiInvocation(method, settings)})");
             });
         }
 
-        private static void AddPagingMethodOverloads(JavaClass classBlock, Method method, IEnumerable<Parameter> parameters, Settings settings, bool filterRequired, bool onlyRequiredParameters)
+        private static void AddPagingMethodOverloads(JavaType typeBlock, Method method, IEnumerable<Parameter> parameters, Settings settings, bool filterRequired, bool onlyRequiredParameters)
         {
-            AddSynchronousMethodComment(classBlock, method, parameters, settings);
-            AddSynchronousPagedListMethodImplementation(classBlock, method, parameters, settings, filterRequired);
+            string methodName = MethodName(method, settings);
+            string parameterDeclaration = MethodParameterDeclaration(method, settings, parameters);
+            string pageType = ResponseServiceResponseGenericParameterString(method.ReturnType, settings);
 
-            AddObservablePagedListMethodComment(classBlock, method, parameters, settings);
-            AddObservablePagedListMethodImplementation(classBlock, method, parameters, settings, filterRequired);
-
-            AddSinglePageMethodComment(classBlock, method, parameters, settings);
-            AddSinglePageMethodImplementation(classBlock, method, parameters, settings, filterRequired, onlyRequiredParameters);
-        }
-
-        private static void AddSimulatedPagingMethodOverloads(JavaClass classBlock, Method method, IEnumerable<Parameter> parameters, Settings settings, bool filterRequired, bool onlyRequiredParameters)
-        {
-            AddSynchronousPagedListMethodComment(classBlock, method, parameters);
-            AddSynchronousSimulatedPagingMethodImplementation(classBlock, method, parameters, settings);
-
-            AddObservablePagedListMethodComment(classBlock, method, parameters, settings);
-            AddObservableSimulatedPagingMethodImplementation(classBlock, method, parameters, settings, filterRequired, onlyRequiredParameters);
-        }
-
-        private static void AddSynchronousMethodComment(JavaAbstractType typeBlock, Method method, IEnumerable<Parameter> parameters, Settings settings)
-        {
-            typeBlock.MultipleLineComment(comment =>
+            // --------------------
+            // Synchronous PageList
+            // --------------------
+            AddSynchronousMethodComment(typeBlock, method, parameters, settings);
+            string returnType = MethodReturnTypeResponseName(method, settings);
+            typeBlock.PublicMethod($"{returnType} {methodName}({parameterDeclaration})", function =>
             {
-                AddMethodSummaryAndDescription(comment, method);
-                AddParameters(comment, parameters);
-                ThrowsIllegalArgumentException(comment);
-                ThrowsOperationException(comment, MethodOperationExceptionTypeString(method, settings));
-                ThrowsRuntimeException(comment);
-                if (method.ReturnType.Body != null)
-                {
-                    comment.Return($"the {MethodReturnTypeResponseName(method).EscapeXmlComment()} object if successful.");
-                }
-            });
-        }
-
-        private static string GetSynchronousMethodSignature(Method method, IEnumerable<Parameter> parameters, Settings settings)
-        {
-            string returnType = MethodReturnTypeResponseName(method);
-            string methodName = MethodName(method);
-            return $"{returnType} {methodName}({MethodParameterDeclaration(method, settings, parameters)})";
-        }
-
-        private static void AddSynchronousMethodSignature(JavaInterface interfaceBlock, Method method, IEnumerable<Parameter> parameters, Settings settings)
-        {
-            interfaceBlock.Method(GetSynchronousMethodSignature(method, parameters, settings));
-        }
-
-        private static void AddSynchronousPagedListMethodImplementation(JavaClass classBlock, Method method, IEnumerable<Parameter> parameters, Settings settings, bool filterRequired)
-        {
-            string returnType = MethodReturnTypeResponseName(method);
-            string methodName = MethodName(method);
-            Response methodReturnType = method.ReturnType;
-            string responseServiceResponseGenericParameterString = ResponseServiceResponseGenericParameterString(method.ReturnType, settings);
-            classBlock.PublicMethod($"{returnType} {methodName}({MethodParameterDeclaration(method, settings, parameters)})", function =>
-            {
-                function.Line($"{responseServiceResponseGenericParameterString} response = {methodName}SinglePageAsync({ArgumentList(parameters)}).blockingGet();");
-                function.ReturnAnonymousClass($"new {ResponseGenericBodyClientTypeString(methodReturnType)}(response)", anonymousClass =>
+                function.Line($"{pageType} response = {methodName}SinglePageAsync({ArgumentList(parameters)}).blockingGet();");
+                function.ReturnAnonymousClass($"new {ResponseGenericBodyClientTypeString(method.ReturnType, settings)}(response)", anonymousClass =>
                 {
                     anonymousClass.Annotation("Override");
-                    anonymousClass.PublicMethod($"{responseServiceResponseGenericParameterString} nextPage(String {MethodPagingNextPageLinkParameterName(method)})", subFunction =>
+                    anonymousClass.PublicMethod($"{pageType} nextPage(String {MethodPagingNextPageLinkParameterName(method, settings)})", subFunction =>
                     {
                         MethodPagingGroupedParameterTransformation(method, filterRequired, settings, subFunction);
-                        subFunction.Return($"{MethodGetPagingNextMethodInvocation(method)}({MethodNextMethodParameterInvocation(method, filterRequired)}).blockingGet()");
+                        subFunction.Return($"{MethodGetPagingNextMethodInvocation(method, settings)}({MethodNextMethodParameterInvocation(method, settings, filterRequired)}).blockingGet()");
                     });
                 });
             });
-        }
 
-        private static void AddSynchronousSimulatedPagingMethodImplementation(JavaClass classBlock, Method method, IEnumerable<Parameter> parameters, Settings settings)
-        {
-            string methodName = MethodName(method);
-            classBlock.PublicMethod($"PagedList<{ResponseSequenceElementTypeString(method.ReturnType)}> {methodName}({MethodParameterDeclaration(method, settings, parameters)})", function =>
-            {
-                string pageImplType = SequenceTypeGetPageImplType(ResponseBodyClientType(method.ReturnType));
-                string sequenceElementTypeString = ResponseSequenceElementTypeString(method.ReturnType);
-                function.Line($"{pageImplType}<{sequenceElementTypeString}> page = new {pageImplType}<>();");
-                function.Line($"page.setItems({methodName}Async({ArgumentList(parameters)}).single().items());");
-                function.Line("page.setNextPageLink(null);");
-                function.ReturnAnonymousClass($"new PagedList<{sequenceElementTypeString}>(page)", anonymousClass =>
-                {
-                    anonymousClass.Annotation("Override");
-                    anonymousClass.PublicMethod($"Page<{sequenceElementTypeString}> nextPage(String nextPageLink)", subFunction =>
-                    {
-                        subFunction.Return("null");
-                    });
-                });
-            });
-        }
-
-        private static void AddSynchronousPagedListMethodComment(JavaClass classBlock, Method method, IEnumerable<Parameter> parameters)
-        {
-            classBlock.MultipleLineComment(comment =>
-            {
-                AddMethodSummaryAndDescription(comment, method);
-                AddParameters(comment, parameters);
-                if (method.ReturnType.Body != null)
-                {
-                    comment.Return($"the PagedList<{ResponseSequenceElementTypeString(method.ReturnType)}> object if successful.");
-                }
-            });
-        }
-
-        private static void AddObservablePagedListMethodComment(JavaClass classBlock, Method method, IEnumerable<Parameter> parameters, Settings settings)
-        {
-            classBlock.MultipleLineComment(comment =>
-            {
-                AddMethodSummaryAndDescription(comment, method);
-                AddParameters(comment, parameters);
-                ThrowsIllegalArgumentException(comment);
-                if (method.ReturnType.Body != null)
-                {
-                    comment.Return($"the observable to the {MethodReturnTypeResponseName(method).EscapeXmlComment()} object");
-                }
-                else
-                {
-                    comment.Return($"the {{@link Observable<{ResponseServiceResponseGenericParameterString(method.ReturnType, settings).EscapeXmlComment()}>}} object if successful.");
-                }
-            });
-        }
-
-        private static void AddObservablePagedListMethodImplementation(JavaClass classBlock, Method method, IEnumerable<Parameter> parameters, Settings settings, bool filterRequired)
-        {
-            string pageType = ResponseServiceResponseGenericParameterString(method.ReturnType, settings);
-            string methodName = MethodName(method);
-            classBlock.PublicMethod($"Observable<{pageType}> {methodName}Async({MethodParameterDeclaration(method, settings, parameters)})", function =>
+            // ------------------------------
+            // Async Observable<PagedList<T>>
+            // ------------------------------
+            AddObservablePagedListMethodComment(typeBlock, method, parameters, settings);
+            typeBlock.PublicMethod($"Observable<{pageType}> {methodName}Async({parameterDeclaration})", function =>
             {
                 function.Line($"return {methodName}SinglePageAsync({ArgumentList(parameters)})");
                 function.Indent(() =>
@@ -4335,33 +4087,121 @@ namespace AutoRest.Java.DanModel
                         function.Annotation("Override");
                         function.Block($"public Observable<{pageType}> apply({pageType} page)", subFunction =>
                         {
-                            string pagingNextPageLinkParameterName = MethodPagingNextPageLinkParameterName(method);
+                            string pagingNextPageLinkParameterName = MethodPagingNextPageLinkParameterName(method, settings);
                             subFunction.Line($"String {pagingNextPageLinkParameterName} = page.nextPageLink();");
                             subFunction.If($"{pagingNextPageLinkParameterName} == null", ifBlock =>
                             {
                                 ifBlock.Return("Observable.just(page)");
                             });
                             MethodPagingGroupedParameterTransformation(method, filterRequired, settings, subFunction);
-                            subFunction.Return($"Observable.just(page).concatWith({MethodGetPagingNextMethodInvocation(method, false)}({MethodNextMethodParameterInvocation(method, filterRequired)}))");
+                            subFunction.Return($"Observable.just(page).concatWith({MethodGetPagingNextMethodInvocation(method, settings, false)}({MethodNextMethodParameterInvocation(method, settings, filterRequired)}))");
                         });
                     });
                     function.Line("});");
                 });
             });
-        }
 
-        private static void AddObservableSimulatedPagingMethodImplementation(JavaClass classBlock, Method method, IEnumerable<Parameter> parameters, Settings settings, bool filterRequired, bool onlyRequiredParameters)
-        {
-            string methodName = MethodName(method);
+            // ------------------------------
+            // Async Single<Page<T>> Overload
+            // ------------------------------
             Response methodReturnType = method.ReturnType;
-            string responseServiceResponseGenericParameterString = ResponseServiceResponseGenericParameterString(methodReturnType, settings);
-            classBlock.PublicMethod($"Observable<Page<{ResponseSequenceElementTypeString(methodReturnType)}>> {methodName}Async({MethodParameterDeclaration(method, settings, parameters)})", function =>
+            string singlePageMethodReturnType = $"Single<{pageType}>";
+            typeBlock.MultipleLineComment(comment =>
+            {
+                AddMethodSummaryAndDescription(comment, method);
+                AddParameters(comment, parameters, settings);
+                ThrowsIllegalArgumentException(comment);
+                comment.Return($"the {{@link {singlePageMethodReturnType}}} object if successful.");
+            });
+            typeBlock.PublicMethod($"{singlePageMethodReturnType} {methodName}SinglePageAsync({parameterDeclaration})", function =>
             {
                 AddRequiredNullableParameterChecks(function, method);
                 AddValidationChecks(function, method, onlyRequiredParameters);
-                AddOptionalOrConstantParameterVariables(function, method, onlyRequiredParameters);
+                AddOptionalOrConstantParameterVariables(function, method, settings, onlyRequiredParameters);
 
-                MethodBuildInputMappings(method, filterRequired, function);
+                MethodBuildInputMappings(method, settings, filterRequired, function);
+                MethodParameterConversion(method, settings, MethodRetrofitParameters(method, settings), function);
+                if (MethodIsPagingNextOperation(method))
+                {
+                    string methodUrl = method.Url;
+                    Regex regex = new Regex("{\\w+}");
+                    
+                    string substitutedMethodUrl = regex.Replace(methodUrl, "%s").TrimStart('/');
+
+                    IEnumerable<Parameter> retrofitParameters = method.LogicalParameters.Where(p => p.Location != ParameterLocation.None);
+                    StringBuilder builder = new StringBuilder($"String.format(\"{substitutedMethodUrl}\"");
+                    foreach (Match match in regex.Matches(methodUrl))
+                    {
+                        string serializedNameWithBrackets = match.Value;
+                        string serializedName = serializedNameWithBrackets.Substring(1, serializedNameWithBrackets.Length - 2);
+                        builder.Append(", " + ParameterWireName(retrofitParameters.First(p => p.SerializedName == serializedName)));
+                    }
+                    builder.Append(")");
+
+                    function.Line($"String nextUrl = {builder.ToString()};");
+                }
+                string restResponseReturnType = MethodRestResponseConcreteTypeName(method, settings);
+                function.Line($"return service.{methodName}({MethodParameterApiInvocation(method, settings)}).map(new Function<{restResponseReturnType}, {pageType}>() {{");
+                function.Indent(() =>
+                {
+                    function.Annotation("Override");
+                    function.Block($"public {pageType} apply({restResponseReturnType} response)", subFunction =>
+                    {
+                        subFunction.Return("response.body()");
+                    });
+                });
+                function.Line("});");
+            });
+        }
+
+        private static void AddSimulatedPagingMethodOverloads(JavaType typeBlock, Method method, IEnumerable<Parameter> parameters, Settings settings, bool filterRequired, bool onlyRequiredParameters)
+        {
+            string methodName = MethodName(method, settings);
+            Response methodReturnType = method.ReturnType;
+            string sequenceElementTypeString = ResponseSequenceElementTypeString(methodReturnType, settings);
+            string parameterDeclaration = MethodParameterDeclaration(method, settings, parameters);
+
+            // ------------------------
+            // Synchronous PagedList<T>
+            // ------------------------
+            string pageImplType = SequenceTypeGetPageImplType(ResponseBodyClientType(methodReturnType, settings));
+            string synchronousReturnType = $"PagedList<{sequenceElementTypeString}>";
+            typeBlock.MultipleLineComment(comment =>
+            {
+                AddMethodSummaryAndDescription(comment, method);
+                AddParameters(comment, parameters, settings);
+                if (method.ReturnType.Body != null)
+                {
+                    comment.Return($"the {synchronousReturnType} object if successful.");
+                }
+            });
+            typeBlock.PublicMethod($"{synchronousReturnType} {methodName}({parameterDeclaration})", function =>
+            {
+                function.Line($"{pageImplType}<{sequenceElementTypeString}> page = new {pageImplType}<>();");
+                function.Line($"page.setItems({methodName}Async({ArgumentList(parameters)}).single().items());");
+                function.Line("page.setNextPageLink(null);");
+                function.ReturnAnonymousClass($"new {synchronousReturnType}(page)", anonymousClass =>
+                {
+                    anonymousClass.Annotation("Override");
+                    anonymousClass.PublicMethod($"Page<{sequenceElementTypeString}> nextPage(String nextPageLink)", subFunction =>
+                    {
+                        subFunction.Return("null");
+                    });
+                });
+            });
+
+            // -------------------------
+            // Async Observable<Page<T>>
+            // -------------------------
+            AddObservablePagedListMethodComment(typeBlock, method, parameters, settings);
+            string responseServiceResponseGenericParameterString = ResponseServiceResponseGenericParameterString(methodReturnType, settings);
+            typeBlock.PublicMethod($"Observable<Page<{sequenceElementTypeString}>> {methodName}Async({parameterDeclaration})", function =>
+            {
+                AddRequiredNullableParameterChecks(function, method);
+                AddValidationChecks(function, method, onlyRequiredParameters);
+                AddOptionalOrConstantParameterVariables(function, method, settings, onlyRequiredParameters);
+
+                MethodBuildInputMappings(method, settings, filterRequired, function);
 
                 MethodParameterConversion(method, settings, MethodRetrofitParameters(method, settings), function);
 
@@ -4378,262 +4218,92 @@ namespace AutoRest.Java.DanModel
             });
         }
 
-        private static void AddServiceFutureMethodComment(JavaAbstractType typeBlock, Method method, IEnumerable<Parameter> parameters)
+        private static void AddSynchronousMethodComment(JavaType typeBlock, Method method, IEnumerable<Parameter> parameters, Settings settings)
         {
             typeBlock.MultipleLineComment(comment =>
             {
                 AddMethodSummaryAndDescription(comment, method);
-                AddParameters(comment, parameters);
-                ParamServiceCallback(comment);
+                AddParameters(comment, parameters, settings);
                 ThrowsIllegalArgumentException(comment);
-                comment.Return("the {@link ServiceFuture} object");
+                comment.Throws(MethodOperationExceptionTypeString(method, settings), "thrown if the request is rejected by server");
+                comment.Throws("RuntimeException", "all other wrapped checked exceptions if the request fails to be sent");
+                if (method.ReturnType.Body != null)
+                {
+                    comment.Return($"the {MethodReturnTypeResponseName(method, settings)} object if successful.");
+                }
+            });
+        }
+
+        private static string GetSynchronousMethodSignature(Method method, IEnumerable<Parameter> parameters, Settings settings)
+        {
+            string returnType = MethodReturnTypeResponseName(method, settings);
+            string methodName = MethodName(method, settings);
+            return $"{returnType} {methodName}({MethodParameterDeclaration(method, settings, parameters)})";
+        }
+
+        private static void AddObservablePagedListMethodComment(JavaType typeBlock, Method method, IEnumerable<Parameter> parameters, Settings settings)
+        {
+            typeBlock.MultipleLineComment(comment =>
+            {
+                AddMethodSummaryAndDescription(comment, method);
+                AddParameters(comment, parameters, settings);
+                ThrowsIllegalArgumentException(comment);
+                if (method.ReturnType.Body != null)
+                {
+                    comment.Return($"the observable to the {MethodReturnTypeResponseName(method, settings)} object");
+                }
+                else
+                {
+                    comment.Return($"the {{@link Observable<{ResponseServiceResponseGenericParameterString(method.ReturnType, settings)}>}} object if successful.");
+                }
+            });
+        }
+
+        private static string GetServiceFutureMethodReturnType(Method method, Settings settings)
+            => $"ServiceFuture<{ResponseServiceFutureGenericParameterString(method.ReturnType, settings)}>";
+
+        private static void AddServiceFutureMethodComment(JavaType typeBlock, Method method, IEnumerable<Parameter> parameters, Settings settings)
+        {
+            typeBlock.MultipleLineComment(comment =>
+            {
+                AddMethodSummaryAndDescription(comment, method);
+                AddParameters(comment, parameters, settings);
+                comment.Param(serviceCallbackVariableName, "the async ServiceCallback to handle successful and failed responses.");
+                ThrowsIllegalArgumentException(comment);
+                comment.Return($"the {{@link {GetServiceFutureMethodReturnType(method, settings)}}} object");
             });
         }
 
         private static string GetServiceFutureMethodSignature(Method method, IEnumerable<Parameter> parameters, Settings settings)
         {
-            string serviceFutureTypeParameter = ResponseServiceFutureGenericParameterString(method.ReturnType);
-            string methodName = MethodName(method);
-            return $"ServiceFuture<{serviceFutureTypeParameter}> {methodName}Async({MethodParameterDeclarationWithCallback(method, settings, parameters)})";
-        }
+            string returnType = GetServiceFutureMethodReturnType(method, settings);
+            string methodName = MethodName(method, settings);
 
-        private static void AddServiceFutureMethodSignature(JavaInterface interfaceBlock, Method method, IEnumerable<Parameter> parameters, Settings settings)
-        {
-            interfaceBlock.Method(GetServiceFutureMethodSignature(method, parameters, settings));
-        }
-
-        private static void AddAsyncRestResponseMethodComment(JavaAbstractType typeBlock, Method method, IEnumerable<Parameter> parameters, Settings settings)
-        {
-            string restResponseType = MethodRestResponseAbstractTypeName(method, settings);
-
-            typeBlock.MultipleLineComment(comment =>
+            string parameterDeclaration = MethodParameterDeclaration(method, settings, parameters);
+            if (!parameterDeclaration.IsNullOrEmpty())
             {
-                AddMethodSummaryAndDescription(comment, method);
-                AddParameters(comment, parameters);
-                ThrowsIllegalArgumentException(comment);
-                comment.Return($"the {{@link Single<{restResponseType}>}} object if successful.".EscapeXmlComment());
-            });
-        }
-
-        private static string GetAsyncRestResponseMethodSignature(Method method, IEnumerable<Parameter> parameters, Settings settings)
-        {
-            string restResponseType = MethodRestResponseAbstractTypeName(method, settings);
-            string methodName = MethodName(method);
-            string methodParameterDeclaration = MethodParameterDeclaration(method, settings, parameters);
-
-            return $"Single<{restResponseType}> {methodName}WithRestResponseAsync({methodParameterDeclaration})";
-        }
-
-        private static void AddAsyncRestResponseMethodSignature(JavaInterface interfaceBlock, Method method, IEnumerable<Parameter> parameters, Settings settings)
-        {
-            interfaceBlock.Method(GetAsyncRestResponseMethodSignature(method, parameters, settings));
-        }
-
-        private static void AddSinglePageMethodComment(JavaClass classBlock, Method method, IEnumerable<Parameter> parameters, Settings settings)
-        {
-            classBlock.MultipleLineComment(comment =>
+                parameterDeclaration += ", ";
+            }
+            string callbackParameterDeclaration = null;
+            if (IsAzureOrFluent(settings))
             {
-                AddMethodSummaryAndDescription(comment, method);
-                AddParameters(comment, parameters);
-                ThrowsIllegalArgumentException(comment);
-                Response methodReturnType = method.ReturnType;
-                if (methodReturnType.Body != null)
+                if (MethodIsPagingOperation(method))
                 {
-                    comment.Return($"the {MethodReturnTypeResponseName(method).EscapeXmlComment()} object if successful.");
+                    callbackParameterDeclaration += $"final ListOperationCallback<{ResponseSequenceElementTypeString(method.ReturnType, settings)}> {serviceCallbackVariableName}";
                 }
-                else
+                else if (MethodIsPagingNextOperation(method))
                 {
-                    comment.Return($"the {{@link Single<{ResponseServiceResponseGenericParameterString(methodReturnType, settings)}>}} object if successful.");
-                }
-            });
-        }
-
-        private static void AddSinglePageMethodImplementation(JavaClass classBlock, Method method, IEnumerable<Parameter> parameters, Settings settings, bool filterRequired, bool onlyRequiredParameters)
-        {
-            string methodName = MethodName(method);
-            string singleTypeParameter = ResponseServiceResponseGenericParameterString(method.ReturnType, settings);
-            classBlock.PublicMethod($"Single<{singleTypeParameter}> {methodName}SinglePageAsync({MethodParameterDeclaration(method, settings, parameters)})", function =>
-            {
-                AddRequiredNullableParameterChecks(function, method);
-                AddValidationChecks(function, method, onlyRequiredParameters);
-                AddOptionalOrConstantParameterVariables(function, method, onlyRequiredParameters);
-
-                MethodBuildInputMappings(method, filterRequired, function);
-                MethodParameterConversion(method, settings, MethodRetrofitParameters(method, settings), function);
-                if (MethodIsPagingNextOperation(method))
-                {
-                    function.Line($"String nextUrl = {MethodNextUrlConstructor(method, settings)};");
-                }
-                string restResponseReturnType = MethodRestResponseConcreteTypeName(method, settings);
-                function.Line($"return service.{methodName}({MethodParameterApiInvocation(method, settings)}).map(new Function<{restResponseReturnType}, {singleTypeParameter}>() {{");
-                function.Indent(() =>
-                {
-                    function.Annotation("Override");
-                    function.Block($"public {singleTypeParameter} apply({restResponseReturnType} response)", subFunction =>
-                    {
-                        subFunction.Return("response.body()");
-                    });
-                });
-                function.Line("});");
-            });
-        }
-
-        private static void AddOperationStatusMethodComment(JavaClass classBlock, Method method, IEnumerable<Parameter> parameters)
-        {
-            classBlock.MultipleLineComment(comment =>
-            {
-                AddMethodSummaryAndDescription(comment, method);
-                AddParameters(comment, parameters);
-                ThrowsIllegalArgumentException(comment);
-                comment.Return("the observable for the request");
-            });
-        }
-
-        private static void AddServiceClientInterfaceMethods(JavaInterface interfaceBlock, CodeModel codeModel, Settings settings)
-        {
-            IEnumerable<Method> rootMethods = GetRestAPIMethods(codeModel);
-            if (rootMethods.Any())
-            {
-                foreach (Method method in rootMethods)
-                {
-                    string methodName = MethodName(method);
-                    string methodReturnTypeResponseName = MethodReturnTypeResponseName(method);
-                    string methodReturnTypeResponseNameXmlEscaped = methodReturnTypeResponseName.EscapeXmlComment();
-                    string responseServiceResponseGenericParameterString = ResponseServiceResponseGenericParameterString(method.ReturnType, settings);
-
-                    IEnumerable<Parameter> allParameters = GetRestAPIMethodParameters(method).Where(p => !p.IsConstant);
-                    IEnumerable<Parameter> requiredParameters = allParameters.Where(p => p.IsRequired);
-                    bool hasOptionalParameters = allParameters.Any(p => !p.IsRequired);
-
-                    if (hasOptionalParameters)
-                    {
-                        AddSynchronousMethodComment(interfaceBlock, method, requiredParameters, settings);
-                        AddSynchronousMethodSignature(interfaceBlock, method, requiredParameters, settings);
-
-                        AddServiceFutureMethodComment(interfaceBlock, method, requiredParameters);
-                        AddServiceFutureMethodSignature(interfaceBlock, method, requiredParameters, settings);
-
-                        interfaceBlock.MultipleLineComment(comment =>
-                        {
-                            AddMethodSummaryAndDescription(comment, method);
-                            AddParameters(comment, requiredParameters);
-                            ThrowsIllegalArgumentException(comment);
-                            if (methodReturnTypeResponseName.Else("void") != "void")
-                            {
-                                comment.Return($"the observable to the {methodReturnTypeResponseNameXmlEscaped} object");
-                            }
-                            else
-                            {
-                                comment.Return($"the {{@link Maybe<{responseServiceResponseGenericParameterString}>}} object if successful.");
-                            }
-                        });
-                        if (methodReturnTypeResponseName.Else("void") != "void")
-                        {
-                            interfaceBlock.Method($"Maybe<{responseServiceResponseGenericParameterString}> {methodName}Async({MethodParameterDeclaration(method, settings, requiredParameters)})");
-                        }
-                        else
-                        {
-                            interfaceBlock.Method($"Completable {methodName}Async({MethodParameterDeclaration(method, settings, requiredParameters)})");
-                        }
-
-                        if (MethodShouldGenerateBeginRestResponseMethod(method, settings))
-                        {
-                            AddAsyncRestResponseMethodComment(interfaceBlock, method, requiredParameters, settings);
-                            AddAsyncRestResponseMethodSignature(interfaceBlock, method, requiredParameters, settings);
-                        }
-                    }
-
-                    AddSynchronousMethodComment(interfaceBlock, method, allParameters, settings);
-                    AddSynchronousMethodSignature(interfaceBlock, method, allParameters, settings);
-
-                    AddServiceFutureMethodComment(interfaceBlock, method, allParameters);
-                    AddServiceFutureMethodSignature(interfaceBlock, method, allParameters, settings);
-
-                    interfaceBlock.MultipleLineComment(comment =>
-                    {
-                        AddMethodSummaryAndDescription(comment, method);
-                        AddParameters(comment, allParameters);
-                        ThrowsIllegalArgumentException(comment);
-                        if (methodReturnTypeResponseName.Else("void") != "void")
-                        {
-                            comment.Return($"the observable to the {methodReturnTypeResponseNameXmlEscaped} object");
-                        }
-                        else
-                        {
-                            comment.Return($"the {{@link Maybe<{responseServiceResponseGenericParameterString}>}} object if successful.");
-                        }
-                    });
-
-                    string methodParameterDeclaration = MethodParameterDeclaration(method, settings, allParameters);
-                    if (methodReturnTypeResponseName.Else("void") != "void")
-                    {
-                        interfaceBlock.Method($"Maybe<{responseServiceResponseGenericParameterString}> {methodName}Async({methodParameterDeclaration})");
-                    }
-                    else
-                    {
-                        interfaceBlock.Method($"Completable {methodName}Async({methodParameterDeclaration})");
-                    }
-
-                    if (MethodShouldGenerateBeginRestResponseMethod(method, settings))
-                    {
-                        AddAsyncRestResponseMethodComment(interfaceBlock, method, allParameters, settings);
-                        AddAsyncRestResponseMethodSignature(interfaceBlock, method, allParameters, settings);
-                    }
+                    callbackParameterDeclaration += $"final ServiceFuture<{ResponseServiceFutureGenericParameterString(method.ReturnType, settings)}> serviceFuture, final ListOperationCallback<{ResponseSequenceElementTypeString(method.ReturnType, settings)}> {serviceCallbackVariableName}";
                 }
             }
-        }
-
-        private static void AddClientPropertyVariablesAndGettersAndSetters(JavaClass classBlock, CodeModel codeModel, string clientClassName)
-        {
-            IEnumerable<Property> clientProperties = GetServiceClientProperties(codeModel);
-            foreach (Property clientProperty in clientProperties)
+            if (callbackParameterDeclaration == null)
             {
-                string propertyDocumentation = clientProperty.Documentation.ToString().Period();
-                string propertyType = IModelTypeName(IModelTypeServiceResponseVariant(GetPropertyModelType(clientProperty)));
-                string propertyName = clientProperty.Name;
-                string propertyNameCamelCase = propertyName.ToCamelCase();
-
-                classBlock.MultipleLineComment(comment =>
-                {
-                    comment.Description(propertyDocumentation);
-                });
-                classBlock.PrivateMemberVariable($"{propertyType} {propertyNameCamelCase}");
-
-                AddPropertyGetterComment(classBlock, propertyDocumentation, propertyNameCamelCase);
-                classBlock.PublicMethod($"{propertyType} {propertyNameCamelCase}()", function =>
-                {
-                    function.Return($"this.{propertyNameCamelCase}");
-                });
-
-                if (!clientProperty.IsReadOnly)
-                {
-                    AddPropertySetterComment(classBlock, propertyDocumentation, propertyNameCamelCase);
-                    classBlock.PublicMethod($"{clientClassName} with{propertyName.ToPascalCase()}({propertyType} {propertyNameCamelCase})", function =>
-                    {
-                        function.Line($"this.{propertyNameCamelCase} = {propertyNameCamelCase};");
-                        function.Return("this");
-                    });
-                }
+                callbackParameterDeclaration = $"final ServiceCallback<{ResponseGenericBodyClientTypeString(method.ReturnType, settings)}> {serviceCallbackVariableName}";
             }
-        }
 
-        private static void AddPropertyGetterComment(JavaAbstractType typeBlock, string propertyDocumentation, string propertyNameCamelCase)
-        {
-            typeBlock.MultipleLineComment(comment =>
-            {
-                comment.Description($"Gets {propertyDocumentation}");
-                comment.Return($"the {propertyNameCamelCase} value.");
-            });
-        }
+            parameterDeclaration += callbackParameterDeclaration;
 
-        private static void AddPropertySetterComment(JavaAbstractType typeBlock, string propertyDocumentation, string propertyNameCamelCase)
-        {
-            typeBlock.MultipleLineComment(comment =>
-            {
-                comment.Description($"Sets {propertyDocumentation}");
-                comment.Param(propertyNameCamelCase, $"the {propertyNameCamelCase} value.");
-                comment.Return("the service client itself");
-            });
+            return $"{returnType} {methodName}Async({parameterDeclaration})";
         }
 
         private static void AddMethodSummaryAndDescription(JavaMultipleLineComment comment, Method method)
@@ -4641,32 +4311,27 @@ namespace AutoRest.Java.DanModel
             string summary = method.Summary;
             if (!string.IsNullOrEmpty(summary))
             {
-                comment.Description(summary.EscapeXmlComment().Period());
+                comment.Description(summary.EscapeXmlComment());
             }
 
             string description = method.Description;
             if (!string.IsNullOrEmpty(description))
             {
-                comment.Description(description.EscapeXmlComment().Period());
+                comment.Description(description.EscapeXmlComment());
             }
         }
 
-        private static void AddParameters(JavaMultipleLineComment comment, IEnumerable<Parameter> parameters)
+        private static void AddParameters(JavaMultipleLineComment comment, IEnumerable<Parameter> parameters, Settings settings)
         {
             foreach (Parameter param in parameters)
             {
                 string parameterDocumentation = param.Documentation;
                 if (string.IsNullOrEmpty(parameterDocumentation))
                 {
-                    parameterDocumentation = $"the {IModelTypeName(ParameterGetModelType(param))} value";
+                    parameterDocumentation = $"the {IModelTypeName(ParameterGetModelType(param), settings)} value";
                 }
                 comment.Param(ParameterGetName(param), parameterDocumentation.EscapeXmlComment());
             }
-        }
-
-        private static void ParamServiceCallback(JavaMultipleLineComment comment)
-        {
-            comment.Param(serviceCallbackVariableName, "the async ServiceCallback to handle successful and failed responses.");
         }
 
         private static void ThrowsIllegalArgumentException(JavaMultipleLineComment comment)
@@ -4674,318 +4339,26 @@ namespace AutoRest.Java.DanModel
             comment.Throws("IllegalArgumentException", "thrown if parameters fail the validation");
         }
 
-        private static void ThrowsOperationException(JavaMultipleLineComment comment, string operationExceptionType)
-        {
-            comment.Throws(operationExceptionType, "thrown if the request is rejected by server");
-        }
-
-        private static void ThrowsRuntimeException(JavaMultipleLineComment comment)
-        {
-            comment.Throws("RuntimeException", "all other wrapped checked exceptions if the request fails to be sent");
-        }
-
-        private static IEnumerable<JavaMethod> ParseMethod(Method method, Settings settings)
-        {
-            string description = "";
-            if (!string.IsNullOrEmpty(method.Summary))
-            {
-                description += method.Summary.EscapeXmlComment().Period();
-            }
-            if (!string.IsNullOrEmpty(method.Description))
-            {
-                if (!string.IsNullOrEmpty(description))
-                {
-                    description += "\n";
-                }
-                description += method.Description.EscapeXmlComment().Period();
-            }
-
-            JavaThrow operationExceptionThrow = new JavaThrow(MethodOperationExceptionTypeString(method, settings), "thrown if the request is rejected by server");
-            JavaThrow runtimeExceptionThrow = new JavaThrow("RuntimeException", "all other wrapped checked exceptions if the request fails to be sent");
-            JavaThrow illegalArgumentExceptionThrow = new JavaThrow("IllegalArgumentException", "thrown if parameters fail the validation");
-
-            string syncReturnType = MethodReturnTypeResponseName(method);
-            string xmlEscapedSyncReturnType = syncReturnType.EscapeXmlComment();
-            string asyncInnerReturnType = ResponseGenericBodyClientTypeString(method.ReturnType);
-            string serviceFutureReturnType = $"ServiceFuture<{asyncInnerReturnType}>";
-
-            bool isFluentOrAzure = IsAzureOrFluent(settings);
-
-            string asyncReturnType;
-            if (!isFluentOrAzure)
-            {
-                // TODO: consolidate this conversion
-                if (method.ReturnType.Body == null)
-                {
-                    asyncReturnType = "Completable";
-                }
-                else
-                {
-                    asyncReturnType = $"Maybe<{asyncInnerReturnType}>";
-                }
-            }
-            else
-            {
-                if (MethodIsLongRunningOperation(method))
-                {
-                    asyncReturnType = $"Observable<OperationStatus<{ResponseServiceResponseGenericParameterString(method.ReturnType, settings)}>>";
-                }
-                else if (method.ReturnType.Body == null)
-                {
-                    asyncReturnType = "Completable";
-                }
-                else if (MethodIsPagingOperation(method) || MethodIsPagingNextOperation(method))
-                {
-                    asyncReturnType = $"Observable<{ResponseServiceResponseGenericParameterString(method.ReturnType, settings)}>";
-                }
-                else
-                {
-                    asyncReturnType = $"Maybe<{ResponseServiceResponseGenericParameterString(method.ReturnType, settings)}>";
-                }
-            }
-
-            string asyncRestResponseReturnType = $"Single<{MethodRestResponseAbstractTypeName(method, settings)}>";
-
-            JavaMethodReturn syncReturn = new JavaMethodReturn(
-                syncReturnType,
-                syncReturnType == "void"
-                    ? null
-                    : $"the {xmlEscapedSyncReturnType} object if successful.");
-
-            JavaMethodReturn callbackReturn = new JavaMethodReturn(
-                serviceFutureReturnType,
-                $"the {{@link {serviceFutureReturnType.EscapeXmlComment()}}} object");
-
-            JavaMethodReturn asyncReturn = new JavaMethodReturn(
-                asyncReturnType,
-                $"the {{@link {asyncReturnType.EscapeXmlComment()}}} object if successful.");
-
-            JavaMethodReturn asyncRestResponseReturn = new JavaMethodReturn(
-                asyncRestResponseReturnType,
-                $"the {{@link {asyncRestResponseReturnType.EscapeXmlComment()}}} object if successful.");
-
-            string methodName = MethodName(method);
-            string asyncMethodName = $"{methodName}Async";
-            string asyncRestResponseMethodName = $"{methodName}WithRestResponseAsync";
-
-            IEnumerable<Parameter> nonConstantParameters = GetRestAPIMethodParameters(method).Where(p => !p.IsConstant);
-            IEnumerable<Parameter> nonConstantRequiredParameters = nonConstantParameters.Where(p => p.IsRequired);
-            IEnumerable<JavaMethodParameter> parameters = nonConstantParameters.Select(ParseParameter);
-            IEnumerable<JavaMethodParameter> requiredParameters = nonConstantRequiredParameters.Select(ParseParameter);
-
-            JavaMethodParameter callbackParameter = new JavaMethodParameter(
-                "the async ServiceCallback to handle successful and failed responses.",
-                $"ServiceCallback<{asyncInnerReturnType}>",
-                serviceCallbackVariableName,
-                final: true);
-
-            bool shouldGenerateCallbackMethod =
-                !isFluentOrAzure ||
-                (!MethodIsPagingOperation(method) &&
-                 !MethodIsPagingNextOperation(method));
-
-            bool shouldGenerateRestResponseMethod =
-                !isFluentOrAzure ||
-                (!MethodIsLongRunningOperation(method) &&
-                 !MethodIsPagingOperation(method) &&
-                 !MethodIsPagingNextOperation(method));
-
-            List<JavaMethod> javaMethods = new List<JavaMethod>();
-
-            void addMethods(IEnumerable<JavaMethodParameter> methodParameters)
-            {
-                // Sync
-                javaMethods.Add(new JavaMethod(
-                    description,
-                    new[] { illegalArgumentExceptionThrow, operationExceptionThrow, runtimeExceptionThrow },
-                    syncReturn,
-                    methodName,
-                    methodParameters));
-
-                if (shouldGenerateCallbackMethod)
-                {
-                    // Callback
-                    javaMethods.Add(new JavaMethod(
-                        description,
-                        new[] { illegalArgumentExceptionThrow },
-                        callbackReturn,
-                        asyncMethodName,
-                        methodParameters.Concat(new[] { callbackParameter })));
-                }
-
-                // Async
-                javaMethods.Add(new JavaMethod(
-                    description,
-                    new[] { illegalArgumentExceptionThrow },
-                    asyncReturn,
-                    asyncMethodName,
-                    methodParameters));
-
-                if (shouldGenerateRestResponseMethod)
-                {
-                    // RestResponse Async
-                    javaMethods.Add(new JavaMethod(
-                        description,
-                        new[] { illegalArgumentExceptionThrow },
-                        asyncRestResponseReturn,
-                        asyncRestResponseMethodName,
-                        methodParameters));
-                }
-            };
-
-            if (nonConstantParameters.Any(p => !p.IsRequired))
-            {
-                addMethods(requiredParameters);
-            }
-
-            addMethods(parameters);
-
-            return javaMethods;
-        }
-
-        private static JavaMethodParameter ParseParameter(Parameter parameter)
-        {
-            string description = parameter.Documentation.Else($"the {IModelTypeName(ParameterGetModelType(parameter))} value").EscapeXmlComment();
-            string type = IModelTypeParameterVariantName(ParameterClientType(parameter));
-            string name = ParameterGetName(parameter);
-            return new JavaMethodParameter(description, type, name);
-        }
-
-        /// <summary>
-        /// Add the MethodGroupClient variables and getter methods to the ServiceClient for the provided CodeModel.
-        /// </summary>
-        /// <param name="classBlock">The JavaClass to add the MethodGroupClient variables and getter methods to.</param>
-        /// <param name="codeModel">The CodeModel for the ServiceClient.</param>
-        /// <param name="settings"></param>
-        private static void AddMethodGroupClientVariablesAndGetters(JavaClass classBlock, CodeModel codeModel, Settings settings)
-        {
-            foreach (MethodGroup methodGroup in GetMethodGroups(codeModel))
-            {
-                string methodGroupDeclarationType = GetMethodGroupClientTypeName(methodGroup, settings);
-
-                classBlock.MultipleLineComment(comment =>
-                {
-                    comment.Description($"The {methodGroupDeclarationType} object to access its operations.");
-                });
-                classBlock.PrivateMemberVariable(methodGroupDeclarationType, MethodGroupName(methodGroup));
-
-                classBlock.MultipleLineComment(comment =>
-                {
-                    comment.Description($"Gets the {methodGroupDeclarationType} object to access its operations.");
-                    comment.Return($"the {methodGroupDeclarationType} object.");
-                });
-                classBlock.PublicMethod($"{methodGroupDeclarationType} {MethodGroupName(methodGroup)}()", function =>
-                {
-                    function.Return($"this.{MethodGroupName(methodGroup)}");
-                });
-            }
-        }
-
-        private static void AddServiceClientConstructors(JavaClass classBlock, CodeModel codeModel, Settings settings)
-        {
-            string serviceClientClassName = GetServiceClientClassName(codeModel);
-            string serviceClientInterfaceName = GetServiceClientInterfaceName(codeModel);
-            string constructorDescription = $"Initializes an instance of {serviceClientInterfaceName} client.";
-            if (IsAzureOrFluent(settings))
-            {
-                if (HasServiceClientCredentials(codeModel))
-                {
-                    string createDefaultPipelineExpression = CreateDefaultPipelineExpression(settings, serviceClientClassName + ".class", credentialsVariableName);
-                    classBlock.MultipleLineComment(comment =>
-                    {
-                        comment.Description(constructorDescription);
-                        comment.Param(credentialsVariableName, credentialsDescription);
-                    });
-                    classBlock.PublicConstructor($"{serviceClientClassName}({serviceClientCredentialsType} {credentialsVariableName})", constructor =>
-                    {
-                        constructor.Line($"this({createDefaultPipelineExpression});");
-                    });
-
-                    classBlock.MultipleLineComment(comment =>
-                    {
-                        comment.Description(constructorDescription);
-                        comment.Param(credentialsVariableName, credentialsDescription);
-                        comment.Param(azureEnvironmentVariableName, azureEnvironmentDescription);
-                    });
-                    classBlock.PublicConstructor($"{serviceClientClassName}({serviceClientCredentialsType} {credentialsVariableName}, {azureEnvironmentType} {azureEnvironmentVariableName})", constructor =>
-                    {
-                        constructor.Line($"this({createDefaultPipelineExpression}, {azureEnvironmentVariableName});");
-                    });
-                }
-                else
-                {
-                    string createDefaultPipelineExpression = CreateDefaultPipelineExpression(settings, serviceClientClassName);
-                    classBlock.MultipleLineComment(comment =>
-                    {
-                        comment.Description(constructorDescription);
-                    });
-                    classBlock.PublicConstructor($"{serviceClientClassName}()", constructor =>
-                    {
-                        constructor.Line($"this({createDefaultPipelineExpression});");
-                    });
-
-                    classBlock.MultipleLineComment(comment =>
-                    {
-                        comment.Description(constructorDescription);
-                        comment.Param(azureEnvironmentVariableName, azureEnvironmentDescription);
-                    });
-                    classBlock.PublicConstructor($"{serviceClientClassName}({azureEnvironmentType} {azureEnvironmentVariableName})", constructor =>
-                    {
-                        constructor.Line($"this({createDefaultPipelineExpression}, {azureEnvironmentVariableName});");
-                    });
-                }
-
-                classBlock.MultipleLineComment(comment =>
-                {
-                    comment.Description(constructorDescription);
-                    comment.Param(httpPipelineVariableName, httpPipelineDescription);
-                });
-                classBlock.PublicConstructor($"{serviceClientClassName}({httpPipelineType} {httpPipelineVariableName})", constructor =>
-                {
-                    constructor.Line($"this({httpPipelineVariableName}, null);");
-                });
-
-                classBlock.MultipleLineComment(comment =>
-                {
-                    comment.Description(constructorDescription);
-                    comment.Param(httpPipelineVariableName, httpPipelineDescription);
-                    comment.Param(azureEnvironmentVariableName, azureEnvironmentDescription);
-                });
-                classBlock.PublicConstructor($"{serviceClientClassName}({httpPipelineType} {httpPipelineVariableName}, {azureEnvironmentType} {azureEnvironmentVariableName})", constructor =>
-                {
-                    AddServiceClientConstructorBody(constructor, codeModel, settings);
-                });
-            }
-            else
-            {
-                classBlock.MultipleLineComment(comment =>
-                {
-                    comment.Description(constructorDescription);
-                });
-                classBlock.PublicConstructor($"{serviceClientClassName}()", constructor =>
-                {
-                    constructor.Line($"this({CreateDefaultPipelineExpression(settings)});");
-                });
-
-                classBlock.MultipleLineComment(comment =>
-                {
-                    comment.Description(constructorDescription);
-                    comment.Param(httpPipelineVariableName, httpPipelineDescription);
-                });
-                classBlock.PublicConstructor($"{serviceClientClassName}({httpPipelineType} {httpPipelineVariableName})", constructor =>
-                {
-                    AddServiceClientConstructorBody(constructor, codeModel, settings);
-                });
-            }
-        }
-
         private static void AddServiceClientConstructorBody(JavaBlock constructor, CodeModel codeModel, Settings settings)
         {
-            AddSuperCall(constructor, settings);
+            List<string> superCallArgumentList = new List<string>() { httpPipelineVariableName };
+            if (IsAzureOrFluent(settings))
+            {
+                superCallArgumentList.Add(azureEnvironmentVariableName);
+            }
+            constructor.Line($"super({string.Join(", ", superCallArgumentList)});");
 
-            AddServiceClientPropertyInitializationStatements(constructor, codeModel);
+            foreach (Property serviceClientProperty in GetServiceClientProperties(codeModel).Where(p => p.DefaultValue != null))
+            {
+                constructor.Line($"this.{serviceClientProperty.Name} = {serviceClientProperty.DefaultValue};");
+            }
 
-            AddMethodGroupClientVariableInitializationStatements(constructor, codeModel, settings);
+            foreach (MethodGroup methodGroup in GetMethodGroups(codeModel))
+            {
+                string methodGroupClientName = MethodGroupName(methodGroup);
+                string methodGroupClientClassName = GetMethodGroupClientClassName(methodGroup, settings);
+                constructor.Line($"this.{methodGroupClientName} = new {methodGroupClientClassName}(this);");
+            }
 
             AddProxyVariableInitializationStatement(constructor, GetRestAPIMethods(codeModel), GetRestAPIInterfaceName(codeModel), "this", settings);
         }
@@ -4994,45 +4367,6 @@ namespace AutoRest.Java.DanModel
         {
             string proxyCreatorType = GetProxyCreatorType(settings);
             return $"{proxyCreatorType}.createDefaultPipeline({string.Join(", ", arguments)})";
-        }
-
-        private static void AddSuperCall(JavaBlock constructor, Settings settings)
-        {
-            List<string> superCallArgumentList = new List<string>() { httpPipelineVariableName };
-            if (IsAzureOrFluent(settings))
-            {
-                superCallArgumentList.Add(azureEnvironmentVariableName);
-            }
-            constructor.Line($"super({string.Join(", ", superCallArgumentList)});");
-        }
-
-        /// <summary>
-        /// Add the ServiceClient's property initialization statements to the provided constructor block.
-        /// </summary>
-        /// <param name="constructor"></param>
-        /// <param name="codeModel"></param>
-        private static void AddServiceClientPropertyInitializationStatements(JavaBlock constructor, CodeModel codeModel)
-        {
-            foreach (Property serviceClientProperty in GetServiceClientProperties(codeModel).Where(p => p.DefaultValue != null))
-            {
-                constructor.Line($"this.{serviceClientProperty.Name} = {serviceClientProperty.DefaultValue};");
-            }
-        }
-
-        /// <summary>
-        /// Add the ServiceClient's MethodClient variable initialization statements to the provided constructor block.
-        /// </summary>
-        /// <param name="constructor"></param>
-        /// <param name="codeModel"></param>
-        /// <param name="settings"></param>
-        private static void AddMethodGroupClientVariableInitializationStatements(JavaBlock constructor, CodeModel codeModel, Settings settings)
-        {
-            foreach (MethodGroup methodGroup in GetMethodGroups(codeModel))
-            {
-                string methodGroupClientName = MethodGroupName(methodGroup);
-                string methodGroupClientClassName = GetMethodGroupClientClassName(methodGroup, settings);
-                constructor.Line($"this.{methodGroupClientName} = new {methodGroupClientClassName}(this);");
-            }
         }
 
         private static void AddProxyVariableInitializationStatement(JavaBlock constructor, IEnumerable<Method> restAPIMethods, string restAPIInterfaceName, string serviceClientVariableName, Settings settings)
@@ -5045,5 +4379,339 @@ namespace AutoRest.Java.DanModel
 
         private static string GetProxyCreatorType(Settings settings)
             => IsAzureOrFluent(settings) ? azureProxyType : restProxyType;
+
+        private static string GetPropertyWireTypeName(Property property, Settings settings)
+            => IModelTypeName(GetPropertyModelType(property), settings);
+
+        private static string ConvertProperty(string sourceTypeName, string targetTypeName, string expression)
+        {
+            string result = null;
+
+            if (sourceTypeName == targetTypeName)
+            {
+                result = expression;
+            }
+            else
+            {
+                switch (sourceTypeName.ToLower())
+                {
+                    case "datetime":
+                        switch (targetTypeName.ToLower())
+                        {
+                            case "datetimerfc1123":
+                                result = $"new DateTimeRfc1123({expression})";
+                                break;
+                        }
+                        break;
+
+                    case "datetimerfc1123":
+                        switch (targetTypeName.ToLower())
+                        {
+                            case "datetime":
+                                result = $"{expression}.dateTime()";
+                                break;
+                        }
+                        break;
+                }
+
+                if (result == null)
+                {
+                    throw new NotSupportedException($"No conversion from {sourceTypeName} to {targetTypeName} is available.");
+                }
+            }
+
+            return result;
+        }
+
+        private static string GetSerializeAnnotationArgs(Property property, bool shouldUseXmlSerialization)
+        {
+            List<string> settings = new List<string>();
+            settings.Add($"value = \"{(shouldUseXmlSerialization ? property.XmlName : property.SerializedName)}\"");
+            if (property.IsRequired)
+            {
+                settings.Add("required = true");
+            }
+            if (property.IsReadOnly)
+            {
+                settings.Add("access = JsonProperty.Access.WRITE_ONLY");
+            }
+            return string.Join(", ", settings);
+        }
+
+        internal static string TrimMultilineHeader(this string header)
+        {
+            if (string.IsNullOrEmpty(header))
+            {
+                return header;
+            }
+            StringBuilder builder = new StringBuilder();
+            foreach (var headerLine in header.Split(new string[] { Environment.NewLine }, StringSplitOptions.None))
+            {
+                builder.Append(headerLine.TrimEnd()).Append(Environment.NewLine);
+            }
+            return builder.ToString();
+        }
+
+        internal static CodeModel TransformCodeModel(CodeModel codeModel)
+            => TransformCodeModel(codeModel, Settings.Instance);
+
+        private static CodeModel TransformCodeModel(CodeModel codeModel, Settings settings)
+        {
+            if (!IsAzureOrFluent(settings))
+            {
+                SwaggerExtensions.NormalizeClientModel(codeModel);
+            }
+            else
+            {
+                Settings.Instance.AddCredentials = true;
+
+                // This extension from general extensions must be run prior to Azure specific extensions.
+                SwaggerExtensions.ProcessParameterizedHost(codeModel);
+                AzureExtensions.ProcessClientRequestIdExtension(codeModel);
+                AzureExtensions.UpdateHeadMethods(codeModel);
+                SwaggerExtensions.ProcessGlobalParameters(codeModel);
+                SwaggerExtensions.FlattenModels(codeModel);
+                SwaggerExtensions.FlattenMethodParameters(codeModel);
+                ParameterGroupExtensionHelper.AddParameterGroups(codeModel);
+                AddLongRunningOperations(codeModel);
+                AzureExtensions.AddAzureProperties(codeModel);
+                AzureExtensions.SetDefaultResponses(codeModel);
+
+                // set Parent on responses (required for pageable)
+                foreach (Method method in codeModel.Methods)
+                {
+                    foreach (Response response in method.Responses.Values)
+                    {
+                        ResponseSetParent(response, method);
+                    }
+                    ResponseSetParent(method.DefaultResponse, method);
+                    ResponseSetParent(method.ReturnType, method);
+                }
+                AzureExtensions.AddPageableMethod(codeModel);
+
+                NormalizePaginatedMethods(codeModel, pageClasses);
+
+                if (IsFluent(settings))
+                {
+                    // determine inner models
+                    foreach (Parameter param in codeModel.Methods.SelectMany(m => m.Parameters))
+                    {
+                        AppendInnerToTopLevelType(DanCodeGenerator.ParameterGetModelType(param), codeModel);
+                    }
+                    foreach (Response response in codeModel.Methods.SelectMany(m => m.Responses).Select(r => r.Value))
+                    {
+                        AppendInnerToTopLevelType(response.Body, codeModel);
+                        AppendInnerToTopLevelType(response.Headers, codeModel);
+                    }
+                    foreach (CompositeType model in codeModel.ModelTypes)
+                    {
+                        if (model.BaseModelType != null && (DanCodeGenerator.IModelTypeName(model.BaseModelType) == "Resource" || DanCodeGenerator.IModelTypeName(model.BaseModelType) == "SubResource"))
+                        {
+                            AppendInnerToTopLevelType(model, codeModel);
+                        }
+                    }
+                }
+
+                // param order (PATH first)
+                foreach (Method method in codeModel.Methods)
+                {
+                    var ps = method.Parameters.ToList();
+                    method.ClearParameters();
+                    foreach (var p in ps.Where(x => x.Location == ParameterLocation.Path))
+                    {
+                        method.Add(p);
+                    }
+                    foreach (var p in ps.Where(x => x.Location != ParameterLocation.Path))
+                    {
+                        method.Add(p);
+                    }
+                }
+            }
+
+            return codeModel;
+        }
+
+        private static void AppendInnerToTopLevelType(IModelType type, CodeModel serviceClient)
+        {
+            if (type != null)
+            {
+                if (type is CompositeType compositeType)
+                {
+                    if (!DanCodeGenerator.CompositeTypeIsResource(compositeType))
+                    {
+                        DanCodeGenerator.innerModelCompositeType.Add(compositeType);
+                    }
+                }
+                else if (type is SequenceType sequenceType)
+                {
+                    AppendInnerToTopLevelType(sequenceType.ElementType, serviceClient);
+                }
+                else if (type is DictionaryType dictionaryType)
+                {
+                    AppendInnerToTopLevelType(dictionaryType.ValueType, serviceClient);
+                }
+            }
+        }
+
+        internal static void AddLongRunningOperations(CodeModel codeModel)
+        {
+            if (codeModel == null)
+            {
+                throw new ArgumentNullException("codeModel");
+            }
+
+            foreach (MethodGroup methodGroup in codeModel.Operations)
+            {
+                Method[] methods = methodGroup.Methods.ToArray();
+                methodGroup.ClearMethods();
+                foreach (Method method in methods)
+                {
+                    methodGroup.Add(method);
+                    if (method.Extensions.Get<bool>(AzureExtensions.LongRunningExtension) == true)
+                    {
+                        var response = method.Responses.Values.First();
+                        if (!method.Responses.ContainsKey(HttpStatusCode.OK))
+                        {
+                            method.Responses[HttpStatusCode.OK] = response;
+                        }
+                        if (!method.Responses.ContainsKey(HttpStatusCode.Accepted))
+                        {
+                            method.Responses[HttpStatusCode.Accepted] = response;
+                        }
+                        if (method.HttpMethod != HttpMethod.Get && !method.Responses.ContainsKey(HttpStatusCode.NoContent))
+                        {
+                            method.Responses[HttpStatusCode.NoContent] = response;
+                        }
+
+                        Method m = DependencyInjection.Duplicate(method);
+                        // Rename original method
+                        method.Name = "Begin" + m.Name.ToPascalCase();
+                        m.Extensions.Remove(AzureExtensions.LongRunningExtension);
+                        methodGroup.Add(m);
+                    }
+                }
+            }
+        }
+
+        /// <summary>
+        /// Changes paginated method signatures to return Page type.
+        /// </summary>
+        /// <param name="serviceClient"></param>
+        /// <param name="pageClasses"></param>
+        internal static void NormalizePaginatedMethods(CodeModel serviceClient, IDictionary<KeyValuePair<string, string>, string> pageClasses)
+        {
+            if (serviceClient == null)
+            {
+                throw new ArgumentNullException("serviceClient");
+            }
+
+            var convertedTypes = new Dictionary<IModelType, IModelType>();
+
+            foreach (Method method in serviceClient.Methods.Where(m => m.Extensions.ContainsKey(AzureExtensions.PageableExtension) || DanCodeGenerator.MethodSimulateAsPagingOperation(m)))
+            {
+                string nextLinkString;
+                string pageClassName = GetPagingSetting(method.Extensions, pageClasses, DanCodeGenerator.MethodSimulateAsPagingOperation(method), out nextLinkString);
+                if (string.IsNullOrEmpty(pageClassName))
+                {
+                    continue;
+                }
+                if (string.IsNullOrEmpty(nextLinkString))
+                {
+                    method.Extensions[AzureExtensions.PageableExtension] = null;
+                }
+                bool anyTypeConverted = false;
+                foreach (var responseStatus in method.Responses.Where(r => r.Value.Body is CompositeType).Select(s => s.Key).ToArray())
+                {
+                    anyTypeConverted = true;
+                    CompositeType compositeType = (CompositeType)method.Responses[responseStatus].Body;
+                    SequenceType sequenceType = DanCodeGenerator.GetCompositeTypeProperties(compositeType).Select(p => DanCodeGenerator.GetPropertyModelType(p)).FirstOrDefault(t => t is SequenceType) as SequenceType;
+
+                    // if the type is a wrapper over page-able response
+                    if (sequenceType != null)
+                    {
+                        SequenceType pagedResult = DependencyInjection.New<SequenceType>();
+                        pagedResult.ElementType = sequenceType.ElementType;
+                        DanCodeGenerator.SequenceTypeSetPageImplType(pagedResult, pageClassName);
+
+                        convertedTypes[method.Responses[responseStatus].Body] = pagedResult;
+                        Response resp = DependencyInjection.New<Response>(pagedResult, method.Responses[responseStatus].Headers);
+                        DanCodeGenerator.ResponseSetParent(resp, method);
+                        method.Responses[responseStatus] = resp;
+                    }
+                }
+
+                if (!anyTypeConverted && DanCodeGenerator.MethodSimulateAsPagingOperation(method))
+                {
+                    foreach (HttpStatusCode responseStatus in method.Responses.Where(r => r.Value.Body is SequenceType).Select(s => s.Key).ToArray())
+                    {
+                        SequenceType sequenceType = (SequenceType)method.Responses[responseStatus].Body;
+
+                        SequenceType pagedResult = DependencyInjection.New<SequenceType>();
+                        pagedResult.ElementType = sequenceType.ElementType;
+                        DanCodeGenerator.SequenceTypeSetPageImplType(pagedResult, pageClassName);
+
+                        convertedTypes[method.Responses[responseStatus].Body] = pagedResult;
+                        Response resp = DependencyInjection.New<Response>(pagedResult, method.Responses[responseStatus].Headers);
+                        DanCodeGenerator.ResponseSetParent(resp, method);
+                        method.Responses[responseStatus] = resp;
+                    }
+                }
+
+                if (convertedTypes.ContainsKey(method.ReturnType.Body))
+                {
+                    Response resp = DependencyInjection.New<Response>(convertedTypes[method.ReturnType.Body], method.ReturnType.Headers);
+                    DanCodeGenerator.ResponseSetParent(resp, method);
+                    method.ReturnType = resp;
+                }
+            }
+
+            SwaggerExtensions.RemoveUnreferencedTypes(serviceClient,
+                new HashSet<string>(convertedTypes.Keys.Where(x => x is CompositeType).Cast<CompositeType>().Select(t => DanCodeGenerator.IModelTypeName(t))));
+        }
+
+        private static string GetPagingSetting(Dictionary<string, object> extensions, IDictionary<KeyValuePair<string, string>, string> pageClasses, bool simulatingPaging, out string nextLinkName)
+        {
+            // default value
+            nextLinkName = null;
+            var itemName = "value";
+            string className = null;
+
+            if (extensions.ContainsKey(AzureExtensions.PageableExtension))
+            {
+                var ext = extensions[AzureExtensions.PageableExtension] as JContainer;
+
+                if (ext == null)
+                {
+                    return null;
+                }
+
+                nextLinkName = (string)ext["nextLinkName"];
+                itemName = (string)ext["itemName"] ?? "value";
+                className = (string)ext["className"];
+            }
+            else if (!simulatingPaging)
+            {
+                return null;
+            }
+
+            var keypair = new KeyValuePair<string, string>(nextLinkName, itemName);
+            if (!pageClasses.ContainsKey(keypair))
+            {
+                if (string.IsNullOrWhiteSpace(className))
+                {
+                    if (pageClasses.Count > 0)
+                    {
+                        className = $"PageImpl{pageClasses.Count}";
+                    }
+                    else
+                    {
+                        className = "PageImpl";
+                    }
+                }
+                pageClasses.Add(keypair, className);
+            }
+
+            return pageClasses[keypair];
+        }
     }
 }

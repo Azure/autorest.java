@@ -29,9 +29,9 @@ public interface Readonlypropertys {
     /**
      * Get complex types that have readonly properties.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @throws ErrorException thrown if the request is rejected by server
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the ReadonlyObj object if successful.
      */
     ReadonlyObj getValid();
@@ -40,62 +40,62 @@ public interface Readonlypropertys {
      * Get complex types that have readonly properties.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceFuture&lt;ReadonlyObj&gt;} object
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link ServiceFuture&lt;ReadonlyObj&gt;} object.
      */
     ServiceFuture<ReadonlyObj> getValidAsync(final ServiceCallback<ReadonlyObj> serviceCallback);
 
     /**
      * Get complex types that have readonly properties.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Maybe&lt;ReadonlyObj&gt;} object if successful.
-     */
-    Maybe<ReadonlyObj> getValidAsync();
-
-    /**
-     * Get complex types that have readonly properties.
-     *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, ReadonlyObj&gt;&gt;} object if successful.
      */
     Single<RestResponse<Void, ReadonlyObj>> getValidWithRestResponseAsync();
 
     /**
+     * Get complex types that have readonly properties.
+     *
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link Maybe&lt;ReadonlyObj&gt;} object if successful.
+     */
+    Maybe<ReadonlyObj> getValidAsync();
+
+    /**
      * Put complex types that have readonly properties.
      *
-     * @param complexBody the ReadonlyObj value
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @throws ErrorException thrown if the request is rejected by server
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
+     * @param complexBody the ReadonlyObj value.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     void putValid(ReadonlyObj complexBody);
 
     /**
      * Put complex types that have readonly properties.
      *
-     * @param complexBody the ReadonlyObj value
+     * @param complexBody the ReadonlyObj value.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceFuture&lt;Void&gt;} object
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
     ServiceFuture<Void> putValidAsync(ReadonlyObj complexBody, final ServiceCallback<Void> serviceCallback);
 
     /**
      * Put complex types that have readonly properties.
      *
-     * @param complexBody the ReadonlyObj value
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Completable} object if successful.
+     * @param complexBody the ReadonlyObj value.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
      */
-    Completable putValidAsync(ReadonlyObj complexBody);
+    Single<RestResponse<Void, Void>> putValidWithRestResponseAsync(ReadonlyObj complexBody);
 
     /**
      * Put complex types that have readonly properties.
      *
-     * @param complexBody the ReadonlyObj value
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
+     * @param complexBody the ReadonlyObj value.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link Completable} object if successful.
      */
-    Single<RestResponse<Void, Void>> putValidWithRestResponseAsync(ReadonlyObj complexBody);
+    Completable putValidAsync(ReadonlyObj complexBody);
 }

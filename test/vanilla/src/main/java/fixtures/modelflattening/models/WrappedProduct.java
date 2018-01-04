@@ -25,7 +25,7 @@ public class WrappedProduct {
     /**
      * Get the value value.
      *
-     * @return the value value
+     * @return the value value.
      */
     public String value() {
         return this.value;
@@ -34,7 +34,7 @@ public class WrappedProduct {
     /**
      * Set the value value.
      *
-     * @param value the value value to set
+     * @param value the value value to set.
      * @return the WrappedProduct object itself.
      */
     public WrappedProduct withValue(String value) {

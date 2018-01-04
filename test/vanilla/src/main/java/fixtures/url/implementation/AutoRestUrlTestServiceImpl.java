@@ -40,7 +40,7 @@ public class AutoRestUrlTestServiceImpl extends ServiceClient implements AutoRes
      * Sets A string value 'globalItemStringPath' that appears in the path.
      *
      * @param globalStringPath the globalStringPath value.
-     * @return the service client itself
+     * @return the service client itself.
      */
     public AutoRestUrlTestServiceImpl withGlobalStringPath(String globalStringPath) {
         this.globalStringPath = globalStringPath;
@@ -65,7 +65,7 @@ public class AutoRestUrlTestServiceImpl extends ServiceClient implements AutoRes
      * Sets should contain value null.
      *
      * @param globalStringQuery the globalStringQuery value.
-     * @return the service client itself
+     * @return the service client itself.
      */
     public AutoRestUrlTestServiceImpl withGlobalStringQuery(String globalStringQuery) {
         this.globalStringQuery = globalStringQuery;

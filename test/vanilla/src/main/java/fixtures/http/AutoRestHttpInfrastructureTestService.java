@@ -16,42 +16,49 @@ package fixtures.http;
 public interface AutoRestHttpInfrastructureTestService {
     /**
      * Gets the HttpFailures object to access its operations.
+     *
      * @return the HttpFailures object.
      */
     HttpFailures httpFailures();
 
     /**
      * Gets the HttpSuccess object to access its operations.
+     *
      * @return the HttpSuccess object.
      */
     HttpSuccess httpSuccess();
 
     /**
      * Gets the HttpRedirects object to access its operations.
+     *
      * @return the HttpRedirects object.
      */
     HttpRedirects httpRedirects();
 
     /**
      * Gets the HttpClientFailures object to access its operations.
+     *
      * @return the HttpClientFailures object.
      */
     HttpClientFailures httpClientFailures();
 
     /**
      * Gets the HttpServerFailures object to access its operations.
+     *
      * @return the HttpServerFailures object.
      */
     HttpServerFailures httpServerFailures();
 
     /**
      * Gets the HttpRetrys object to access its operations.
+     *
      * @return the HttpRetrys object.
      */
     HttpRetrys httpRetrys();
 
     /**
      * Gets the MultipleResponses object to access its operations.
+     *
      * @return the MultipleResponses object.
      */
     MultipleResponses multipleResponses();

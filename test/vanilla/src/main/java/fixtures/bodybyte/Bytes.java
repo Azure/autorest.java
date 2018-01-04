@@ -28,9 +28,9 @@ public interface Bytes {
     /**
      * Get null byte value.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @throws ErrorException thrown if the request is rejected by server
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the byte[] object if successful.
      */
     byte[] getNull();
@@ -39,33 +39,33 @@ public interface Bytes {
      * Get null byte value.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceFuture&lt;byte[]&gt;} object
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link ServiceFuture&lt;byte[]&gt;} object.
      */
     ServiceFuture<byte[]> getNullAsync(final ServiceCallback<byte[]> serviceCallback);
 
     /**
      * Get null byte value.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Maybe&lt;byte[]&gt;} object if successful.
-     */
-    Maybe<byte[]> getNullAsync();
-
-    /**
-     * Get null byte value.
-     *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, byte[]&gt;&gt;} object if successful.
      */
     Single<RestResponse<Void, byte[]>> getNullWithRestResponseAsync();
 
     /**
+     * Get null byte value.
+     *
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link Maybe&lt;byte[]&gt;} object if successful.
+     */
+    Maybe<byte[]> getNullAsync();
+
+    /**
      * Get empty byte value ''.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @throws ErrorException thrown if the request is rejected by server
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the byte[] object if successful.
      */
     byte[] getEmpty();
@@ -74,33 +74,33 @@ public interface Bytes {
      * Get empty byte value ''.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceFuture&lt;byte[]&gt;} object
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link ServiceFuture&lt;byte[]&gt;} object.
      */
     ServiceFuture<byte[]> getEmptyAsync(final ServiceCallback<byte[]> serviceCallback);
 
     /**
      * Get empty byte value ''.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Maybe&lt;byte[]&gt;} object if successful.
-     */
-    Maybe<byte[]> getEmptyAsync();
-
-    /**
-     * Get empty byte value ''.
-     *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, byte[]&gt;&gt;} object if successful.
      */
     Single<RestResponse<Void, byte[]>> getEmptyWithRestResponseAsync();
 
     /**
+     * Get empty byte value ''.
+     *
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link Maybe&lt;byte[]&gt;} object if successful.
+     */
+    Maybe<byte[]> getEmptyAsync();
+
+    /**
      * Get non-ascii byte string hex(FF FE FD FC FB FA F9 F8 F7 F6).
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @throws ErrorException thrown if the request is rejected by server
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the byte[] object if successful.
      */
     byte[] getNonAscii();
@@ -109,71 +109,71 @@ public interface Bytes {
      * Get non-ascii byte string hex(FF FE FD FC FB FA F9 F8 F7 F6).
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceFuture&lt;byte[]&gt;} object
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link ServiceFuture&lt;byte[]&gt;} object.
      */
     ServiceFuture<byte[]> getNonAsciiAsync(final ServiceCallback<byte[]> serviceCallback);
 
     /**
      * Get non-ascii byte string hex(FF FE FD FC FB FA F9 F8 F7 F6).
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Maybe&lt;byte[]&gt;} object if successful.
-     */
-    Maybe<byte[]> getNonAsciiAsync();
-
-    /**
-     * Get non-ascii byte string hex(FF FE FD FC FB FA F9 F8 F7 F6).
-     *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, byte[]&gt;&gt;} object if successful.
      */
     Single<RestResponse<Void, byte[]>> getNonAsciiWithRestResponseAsync();
 
     /**
+     * Get non-ascii byte string hex(FF FE FD FC FB FA F9 F8 F7 F6).
+     *
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link Maybe&lt;byte[]&gt;} object if successful.
+     */
+    Maybe<byte[]> getNonAsciiAsync();
+
+    /**
      * Put non-ascii byte string hex(FF FE FD FC FB FA F9 F8 F7 F6).
      *
-     * @param byteBody Base64-encoded non-ascii byte string hex(FF FE FD FC FB FA F9 F8 F7 F6)
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @throws ErrorException thrown if the request is rejected by server
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
+     * @param byteBody Base64-encoded non-ascii byte string hex(FF FE FD FC FB FA F9 F8 F7 F6).
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     void putNonAscii(byte[] byteBody);
 
     /**
      * Put non-ascii byte string hex(FF FE FD FC FB FA F9 F8 F7 F6).
      *
-     * @param byteBody Base64-encoded non-ascii byte string hex(FF FE FD FC FB FA F9 F8 F7 F6)
+     * @param byteBody Base64-encoded non-ascii byte string hex(FF FE FD FC FB FA F9 F8 F7 F6).
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceFuture&lt;Void&gt;} object
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
     ServiceFuture<Void> putNonAsciiAsync(byte[] byteBody, final ServiceCallback<Void> serviceCallback);
 
     /**
      * Put non-ascii byte string hex(FF FE FD FC FB FA F9 F8 F7 F6).
      *
-     * @param byteBody Base64-encoded non-ascii byte string hex(FF FE FD FC FB FA F9 F8 F7 F6)
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Completable} object if successful.
-     */
-    Completable putNonAsciiAsync(byte[] byteBody);
-
-    /**
-     * Put non-ascii byte string hex(FF FE FD FC FB FA F9 F8 F7 F6).
-     *
-     * @param byteBody Base64-encoded non-ascii byte string hex(FF FE FD FC FB FA F9 F8 F7 F6)
-     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @param byteBody Base64-encoded non-ascii byte string hex(FF FE FD FC FB FA F9 F8 F7 F6).
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
      */
     Single<RestResponse<Void, Void>> putNonAsciiWithRestResponseAsync(byte[] byteBody);
 
     /**
+     * Put non-ascii byte string hex(FF FE FD FC FB FA F9 F8 F7 F6).
+     *
+     * @param byteBody Base64-encoded non-ascii byte string hex(FF FE FD FC FB FA F9 F8 F7 F6).
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link Completable} object if successful.
+     */
+    Completable putNonAsciiAsync(byte[] byteBody);
+
+    /**
      * Get invalid byte value ':::SWAGGER::::'.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @throws ErrorException thrown if the request is rejected by server
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the byte[] object if successful.
      */
     byte[] getInvalid();
@@ -182,24 +182,24 @@ public interface Bytes {
      * Get invalid byte value ':::SWAGGER::::'.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceFuture&lt;byte[]&gt;} object
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link ServiceFuture&lt;byte[]&gt;} object.
      */
     ServiceFuture<byte[]> getInvalidAsync(final ServiceCallback<byte[]> serviceCallback);
 
     /**
      * Get invalid byte value ':::SWAGGER::::'.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Maybe&lt;byte[]&gt;} object if successful.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link Single&lt;RestResponse&lt;Void, byte[]&gt;&gt;} object if successful.
      */
-    Maybe<byte[]> getInvalidAsync();
+    Single<RestResponse<Void, byte[]>> getInvalidWithRestResponseAsync();
 
     /**
      * Get invalid byte value ':::SWAGGER::::'.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single&lt;RestResponse&lt;Void, byte[]&gt;&gt;} object if successful.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link Maybe&lt;byte[]&gt;} object if successful.
      */
-    Single<RestResponse<Void, byte[]>> getInvalidWithRestResponseAsync();
+    Maybe<byte[]> getInvalidAsync();
 }

@@ -18,7 +18,7 @@ import java.util.List;
  * An instance of this class defines a page of Azure resources and a link to
  * get the next page of resources, if any.
  *
- * @param <T> type of Azure resource
+ * @param <T> type of Azure resource.
  */
 public class PageImpl<T> implements Page<T> {
     /**

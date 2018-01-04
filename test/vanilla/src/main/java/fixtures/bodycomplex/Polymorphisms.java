@@ -30,9 +30,9 @@ public interface Polymorphisms {
     /**
      * Get complex types that are polymorphic.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @throws ErrorException thrown if the request is rejected by server
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the Fish object if successful.
      */
     Fish getValid();
@@ -41,26 +41,26 @@ public interface Polymorphisms {
      * Get complex types that are polymorphic.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceFuture&lt;Fish&gt;} object
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link ServiceFuture&lt;Fish&gt;} object.
      */
     ServiceFuture<Fish> getValidAsync(final ServiceCallback<Fish> serviceCallback);
 
     /**
      * Get complex types that are polymorphic.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Maybe&lt;Fish&gt;} object if successful.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link Single&lt;RestResponse&lt;Void, Fish&gt;&gt;} object if successful.
      */
-    Maybe<Fish> getValidAsync();
+    Single<RestResponse<Void, Fish>> getValidWithRestResponseAsync();
 
     /**
      * Get complex types that are polymorphic.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single&lt;RestResponse&lt;Void, Fish&gt;&gt;} object if successful.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link Maybe&lt;Fish&gt;} object if successful.
      */
-    Single<RestResponse<Void, Fish>> getValidWithRestResponseAsync();
+    Maybe<Fish> getValidAsync();
 
     /**
      * Put complex types that are polymorphic.
@@ -97,10 +97,10 @@ public interface Polymorphisms {
      *             'jawsize': 5
      *           }
      *         ]
-     *       };
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @throws ErrorException thrown if the request is rejected by server
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
+     *       };.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     void putValid(Fish complexBody);
 
@@ -139,10 +139,10 @@ public interface Polymorphisms {
      *             'jawsize': 5
      *           }
      *         ]
-     *       };
+     *       };.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceFuture&lt;Void&gt;} object
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
     ServiceFuture<Void> putValidAsync(Fish complexBody, final ServiceCallback<Void> serviceCallback);
 
@@ -181,11 +181,11 @@ public interface Polymorphisms {
      *             'jawsize': 5
      *           }
      *         ]
-     *       };
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Completable} object if successful.
+     *       };.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
      */
-    Completable putValidAsync(Fish complexBody);
+    Single<RestResponse<Void, Void>> putValidWithRestResponseAsync(Fish complexBody);
 
     /**
      * Put complex types that are polymorphic.
@@ -222,18 +222,18 @@ public interface Polymorphisms {
      *             'jawsize': 5
      *           }
      *         ]
-     *       };
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
+     *       };.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link Completable} object if successful.
      */
-    Single<RestResponse<Void, Void>> putValidWithRestResponseAsync(Fish complexBody);
+    Completable putValidAsync(Fish complexBody);
 
     /**
      * Get complex types that are polymorphic, but not at the root of the hierarchy; also have additional properties.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @throws ErrorException thrown if the request is rejected by server
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the Salmon object if successful.
      */
     Salmon getComplicated();
@@ -242,64 +242,64 @@ public interface Polymorphisms {
      * Get complex types that are polymorphic, but not at the root of the hierarchy; also have additional properties.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceFuture&lt;Salmon&gt;} object
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link ServiceFuture&lt;Salmon&gt;} object.
      */
     ServiceFuture<Salmon> getComplicatedAsync(final ServiceCallback<Salmon> serviceCallback);
 
     /**
      * Get complex types that are polymorphic, but not at the root of the hierarchy; also have additional properties.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Maybe&lt;Salmon&gt;} object if successful.
-     */
-    Maybe<Salmon> getComplicatedAsync();
-
-    /**
-     * Get complex types that are polymorphic, but not at the root of the hierarchy; also have additional properties.
-     *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, Salmon&gt;&gt;} object if successful.
      */
     Single<RestResponse<Void, Salmon>> getComplicatedWithRestResponseAsync();
 
     /**
+     * Get complex types that are polymorphic, but not at the root of the hierarchy; also have additional properties.
+     *
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link Maybe&lt;Salmon&gt;} object if successful.
+     */
+    Maybe<Salmon> getComplicatedAsync();
+
+    /**
      * Put complex types that are polymorphic, but not at the root of the hierarchy; also have additional properties.
      *
-     * @param complexBody the Salmon value
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @throws ErrorException thrown if the request is rejected by server
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
+     * @param complexBody the Salmon value.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     void putComplicated(Salmon complexBody);
 
     /**
      * Put complex types that are polymorphic, but not at the root of the hierarchy; also have additional properties.
      *
-     * @param complexBody the Salmon value
+     * @param complexBody the Salmon value.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceFuture&lt;Void&gt;} object
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
     ServiceFuture<Void> putComplicatedAsync(Salmon complexBody, final ServiceCallback<Void> serviceCallback);
 
     /**
      * Put complex types that are polymorphic, but not at the root of the hierarchy; also have additional properties.
      *
-     * @param complexBody the Salmon value
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Completable} object if successful.
+     * @param complexBody the Salmon value.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
      */
-    Completable putComplicatedAsync(Salmon complexBody);
+    Single<RestResponse<Void, Void>> putComplicatedWithRestResponseAsync(Salmon complexBody);
 
     /**
      * Put complex types that are polymorphic, but not at the root of the hierarchy; also have additional properties.
      *
-     * @param complexBody the Salmon value
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
+     * @param complexBody the Salmon value.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link Completable} object if successful.
      */
-    Single<RestResponse<Void, Void>> putComplicatedWithRestResponseAsync(Salmon complexBody);
+    Completable putComplicatedAsync(Salmon complexBody);
 
     /**
      * Put complex types that are polymorphic, attempting to omit required 'birthday' field - the request should not be allowed from the client.
@@ -329,10 +329,10 @@ public interface Polymorphisms {
      *             "age": 105
      *         }
      *     ]
-     * }
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @throws ErrorException thrown if the request is rejected by server
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
+     * }.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     void putValidMissingRequired(Fish complexBody);
 
@@ -364,10 +364,10 @@ public interface Polymorphisms {
      *             "age": 105
      *         }
      *     ]
-     * }
+     * }.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceFuture&lt;Void&gt;} object
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
     ServiceFuture<Void> putValidMissingRequiredAsync(Fish complexBody, final ServiceCallback<Void> serviceCallback);
 
@@ -399,11 +399,11 @@ public interface Polymorphisms {
      *             "age": 105
      *         }
      *     ]
-     * }
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Completable} object if successful.
+     * }.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
      */
-    Completable putValidMissingRequiredAsync(Fish complexBody);
+    Single<RestResponse<Void, Void>> putValidMissingRequiredWithRestResponseAsync(Fish complexBody);
 
     /**
      * Put complex types that are polymorphic, attempting to omit required 'birthday' field - the request should not be allowed from the client.
@@ -433,9 +433,9 @@ public interface Polymorphisms {
      *             "age": 105
      *         }
      *     ]
-     * }
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
+     * }.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link Completable} object if successful.
      */
-    Single<RestResponse<Void, Void>> putValidMissingRequiredWithRestResponseAsync(Fish complexBody);
+    Completable putValidMissingRequiredAsync(Fish complexBody);
 }

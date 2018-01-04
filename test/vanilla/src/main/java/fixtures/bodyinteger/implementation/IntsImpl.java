@@ -144,9 +144,9 @@ public class IntsImpl implements Ints {
     /**
      * Get null Int value.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @throws ErrorException thrown if the request is rejected by server
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the int object if successful.
      */
     public int getNull() {
@@ -157,8 +157,8 @@ public class IntsImpl implements Ints {
      * Get null Int value.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceFuture} object
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link ServiceFuture&lt;Integer&gt;} object.
      */
     public ServiceFuture<Integer> getNullAsync(final ServiceCallback<Integer> serviceCallback) {
         return ServiceFuture.fromBody(getNullAsync(), serviceCallback);
@@ -167,7 +167,7 @@ public class IntsImpl implements Ints {
     /**
      * Get null Int value.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, Integer&gt;&gt;} object if successful.
      */
     public Single<RestResponse<Void, Integer>> getNullWithRestResponseAsync() {
@@ -177,8 +177,8 @@ public class IntsImpl implements Ints {
     /**
      * Get null Int value.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return a {@link Single} emitting the RestResponse<Void, Integer> object
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link Maybe&lt;Integer&gt;} object if successful.
      */
     public Maybe<Integer> getNullAsync() {
         return getNullWithRestResponseAsync()
@@ -196,9 +196,9 @@ public class IntsImpl implements Ints {
     /**
      * Get invalid Int value.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @throws ErrorException thrown if the request is rejected by server
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the int object if successful.
      */
     public int getInvalid() {
@@ -209,8 +209,8 @@ public class IntsImpl implements Ints {
      * Get invalid Int value.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceFuture} object
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link ServiceFuture&lt;Integer&gt;} object.
      */
     public ServiceFuture<Integer> getInvalidAsync(final ServiceCallback<Integer> serviceCallback) {
         return ServiceFuture.fromBody(getInvalidAsync(), serviceCallback);
@@ -219,7 +219,7 @@ public class IntsImpl implements Ints {
     /**
      * Get invalid Int value.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, Integer&gt;&gt;} object if successful.
      */
     public Single<RestResponse<Void, Integer>> getInvalidWithRestResponseAsync() {
@@ -229,8 +229,8 @@ public class IntsImpl implements Ints {
     /**
      * Get invalid Int value.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return a {@link Single} emitting the RestResponse<Void, Integer> object
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link Maybe&lt;Integer&gt;} object if successful.
      */
     public Maybe<Integer> getInvalidAsync() {
         return getInvalidWithRestResponseAsync()
@@ -248,9 +248,9 @@ public class IntsImpl implements Ints {
     /**
      * Get overflow Int32 value.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @throws ErrorException thrown if the request is rejected by server
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the int object if successful.
      */
     public int getOverflowInt32() {
@@ -261,8 +261,8 @@ public class IntsImpl implements Ints {
      * Get overflow Int32 value.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceFuture} object
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link ServiceFuture&lt;Integer&gt;} object.
      */
     public ServiceFuture<Integer> getOverflowInt32Async(final ServiceCallback<Integer> serviceCallback) {
         return ServiceFuture.fromBody(getOverflowInt32Async(), serviceCallback);
@@ -271,7 +271,7 @@ public class IntsImpl implements Ints {
     /**
      * Get overflow Int32 value.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, Integer&gt;&gt;} object if successful.
      */
     public Single<RestResponse<Void, Integer>> getOverflowInt32WithRestResponseAsync() {
@@ -281,8 +281,8 @@ public class IntsImpl implements Ints {
     /**
      * Get overflow Int32 value.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return a {@link Single} emitting the RestResponse<Void, Integer> object
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link Maybe&lt;Integer&gt;} object if successful.
      */
     public Maybe<Integer> getOverflowInt32Async() {
         return getOverflowInt32WithRestResponseAsync()
@@ -300,9 +300,9 @@ public class IntsImpl implements Ints {
     /**
      * Get underflow Int32 value.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @throws ErrorException thrown if the request is rejected by server
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the int object if successful.
      */
     public int getUnderflowInt32() {
@@ -313,8 +313,8 @@ public class IntsImpl implements Ints {
      * Get underflow Int32 value.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceFuture} object
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link ServiceFuture&lt;Integer&gt;} object.
      */
     public ServiceFuture<Integer> getUnderflowInt32Async(final ServiceCallback<Integer> serviceCallback) {
         return ServiceFuture.fromBody(getUnderflowInt32Async(), serviceCallback);
@@ -323,7 +323,7 @@ public class IntsImpl implements Ints {
     /**
      * Get underflow Int32 value.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, Integer&gt;&gt;} object if successful.
      */
     public Single<RestResponse<Void, Integer>> getUnderflowInt32WithRestResponseAsync() {
@@ -333,8 +333,8 @@ public class IntsImpl implements Ints {
     /**
      * Get underflow Int32 value.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return a {@link Single} emitting the RestResponse<Void, Integer> object
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link Maybe&lt;Integer&gt;} object if successful.
      */
     public Maybe<Integer> getUnderflowInt32Async() {
         return getUnderflowInt32WithRestResponseAsync()
@@ -352,9 +352,9 @@ public class IntsImpl implements Ints {
     /**
      * Get overflow Int64 value.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @throws ErrorException thrown if the request is rejected by server
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the long object if successful.
      */
     public long getOverflowInt64() {
@@ -365,8 +365,8 @@ public class IntsImpl implements Ints {
      * Get overflow Int64 value.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceFuture} object
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link ServiceFuture&lt;Long&gt;} object.
      */
     public ServiceFuture<Long> getOverflowInt64Async(final ServiceCallback<Long> serviceCallback) {
         return ServiceFuture.fromBody(getOverflowInt64Async(), serviceCallback);
@@ -375,7 +375,7 @@ public class IntsImpl implements Ints {
     /**
      * Get overflow Int64 value.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, Long&gt;&gt;} object if successful.
      */
     public Single<RestResponse<Void, Long>> getOverflowInt64WithRestResponseAsync() {
@@ -385,8 +385,8 @@ public class IntsImpl implements Ints {
     /**
      * Get overflow Int64 value.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return a {@link Single} emitting the RestResponse<Void, Long> object
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link Maybe&lt;Long&gt;} object if successful.
      */
     public Maybe<Long> getOverflowInt64Async() {
         return getOverflowInt64WithRestResponseAsync()
@@ -404,9 +404,9 @@ public class IntsImpl implements Ints {
     /**
      * Get underflow Int64 value.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @throws ErrorException thrown if the request is rejected by server
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the long object if successful.
      */
     public long getUnderflowInt64() {
@@ -417,8 +417,8 @@ public class IntsImpl implements Ints {
      * Get underflow Int64 value.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceFuture} object
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link ServiceFuture&lt;Long&gt;} object.
      */
     public ServiceFuture<Long> getUnderflowInt64Async(final ServiceCallback<Long> serviceCallback) {
         return ServiceFuture.fromBody(getUnderflowInt64Async(), serviceCallback);
@@ -427,7 +427,7 @@ public class IntsImpl implements Ints {
     /**
      * Get underflow Int64 value.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, Long&gt;&gt;} object if successful.
      */
     public Single<RestResponse<Void, Long>> getUnderflowInt64WithRestResponseAsync() {
@@ -437,8 +437,8 @@ public class IntsImpl implements Ints {
     /**
      * Get underflow Int64 value.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return a {@link Single} emitting the RestResponse<Void, Long> object
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link Maybe&lt;Long&gt;} object if successful.
      */
     public Maybe<Long> getUnderflowInt64Async() {
         return getUnderflowInt64WithRestResponseAsync()
@@ -456,10 +456,10 @@ public class IntsImpl implements Ints {
     /**
      * Put max int32 value.
      *
-     * @param intBody the int value
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @throws ErrorException thrown if the request is rejected by server
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
+     * @param intBody the int value.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     public void putMax32(int intBody) {
         putMax32Async(intBody).blockingAwait();
@@ -468,10 +468,10 @@ public class IntsImpl implements Ints {
     /**
      * Put max int32 value.
      *
-     * @param intBody the int value
+     * @param intBody the int value.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceFuture} object
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
     public ServiceFuture<Void> putMax32Async(int intBody, final ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(putMax32Async(intBody), serviceCallback);
@@ -480,8 +480,8 @@ public class IntsImpl implements Ints {
     /**
      * Put max int32 value.
      *
-     * @param intBody the int value
-     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @param intBody the int value.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
      */
     public Single<RestResponse<Void, Void>> putMax32WithRestResponseAsync(int intBody) {
@@ -491,9 +491,9 @@ public class IntsImpl implements Ints {
     /**
      * Put max int32 value.
      *
-     * @param intBody the int value
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return a {@link Single} emitting the RestResponse<Void, Void> object
+     * @param intBody the int value.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link Completable} object if successful.
      */
     public Completable putMax32Async(int intBody) {
         return putMax32WithRestResponseAsync(intBody)
@@ -503,10 +503,10 @@ public class IntsImpl implements Ints {
     /**
      * Put max int64 value.
      *
-     * @param intBody the long value
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @throws ErrorException thrown if the request is rejected by server
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
+     * @param intBody the long value.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     public void putMax64(long intBody) {
         putMax64Async(intBody).blockingAwait();
@@ -515,10 +515,10 @@ public class IntsImpl implements Ints {
     /**
      * Put max int64 value.
      *
-     * @param intBody the long value
+     * @param intBody the long value.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceFuture} object
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
     public ServiceFuture<Void> putMax64Async(long intBody, final ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(putMax64Async(intBody), serviceCallback);
@@ -527,8 +527,8 @@ public class IntsImpl implements Ints {
     /**
      * Put max int64 value.
      *
-     * @param intBody the long value
-     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @param intBody the long value.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
      */
     public Single<RestResponse<Void, Void>> putMax64WithRestResponseAsync(long intBody) {
@@ -538,9 +538,9 @@ public class IntsImpl implements Ints {
     /**
      * Put max int64 value.
      *
-     * @param intBody the long value
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return a {@link Single} emitting the RestResponse<Void, Void> object
+     * @param intBody the long value.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link Completable} object if successful.
      */
     public Completable putMax64Async(long intBody) {
         return putMax64WithRestResponseAsync(intBody)
@@ -550,10 +550,10 @@ public class IntsImpl implements Ints {
     /**
      * Put min int32 value.
      *
-     * @param intBody the int value
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @throws ErrorException thrown if the request is rejected by server
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
+     * @param intBody the int value.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     public void putMin32(int intBody) {
         putMin32Async(intBody).blockingAwait();
@@ -562,10 +562,10 @@ public class IntsImpl implements Ints {
     /**
      * Put min int32 value.
      *
-     * @param intBody the int value
+     * @param intBody the int value.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceFuture} object
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
     public ServiceFuture<Void> putMin32Async(int intBody, final ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(putMin32Async(intBody), serviceCallback);
@@ -574,8 +574,8 @@ public class IntsImpl implements Ints {
     /**
      * Put min int32 value.
      *
-     * @param intBody the int value
-     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @param intBody the int value.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
      */
     public Single<RestResponse<Void, Void>> putMin32WithRestResponseAsync(int intBody) {
@@ -585,9 +585,9 @@ public class IntsImpl implements Ints {
     /**
      * Put min int32 value.
      *
-     * @param intBody the int value
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return a {@link Single} emitting the RestResponse<Void, Void> object
+     * @param intBody the int value.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link Completable} object if successful.
      */
     public Completable putMin32Async(int intBody) {
         return putMin32WithRestResponseAsync(intBody)
@@ -597,10 +597,10 @@ public class IntsImpl implements Ints {
     /**
      * Put min int64 value.
      *
-     * @param intBody the long value
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @throws ErrorException thrown if the request is rejected by server
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
+     * @param intBody the long value.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     public void putMin64(long intBody) {
         putMin64Async(intBody).blockingAwait();
@@ -609,10 +609,10 @@ public class IntsImpl implements Ints {
     /**
      * Put min int64 value.
      *
-     * @param intBody the long value
+     * @param intBody the long value.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceFuture} object
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
     public ServiceFuture<Void> putMin64Async(long intBody, final ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(putMin64Async(intBody), serviceCallback);
@@ -621,8 +621,8 @@ public class IntsImpl implements Ints {
     /**
      * Put min int64 value.
      *
-     * @param intBody the long value
-     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @param intBody the long value.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
      */
     public Single<RestResponse<Void, Void>> putMin64WithRestResponseAsync(long intBody) {
@@ -632,9 +632,9 @@ public class IntsImpl implements Ints {
     /**
      * Put min int64 value.
      *
-     * @param intBody the long value
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return a {@link Single} emitting the RestResponse<Void, Void> object
+     * @param intBody the long value.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link Completable} object if successful.
      */
     public Completable putMin64Async(long intBody) {
         return putMin64WithRestResponseAsync(intBody)
@@ -644,9 +644,9 @@ public class IntsImpl implements Ints {
     /**
      * Get datetime encoded as Unix time value.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @throws ErrorException thrown if the request is rejected by server
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the DateTime object if successful.
      */
     public DateTime getUnixTime() {
@@ -657,8 +657,8 @@ public class IntsImpl implements Ints {
      * Get datetime encoded as Unix time value.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceFuture} object
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link ServiceFuture&lt;DateTime&gt;} object.
      */
     public ServiceFuture<DateTime> getUnixTimeAsync(final ServiceCallback<DateTime> serviceCallback) {
         return ServiceFuture.fromBody(getUnixTimeAsync(), serviceCallback);
@@ -667,7 +667,7 @@ public class IntsImpl implements Ints {
     /**
      * Get datetime encoded as Unix time value.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, DateTime&gt;&gt;} object if successful.
      */
     public Single<RestResponse<Void, DateTime>> getUnixTimeWithRestResponseAsync() {
@@ -677,8 +677,8 @@ public class IntsImpl implements Ints {
     /**
      * Get datetime encoded as Unix time value.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return a {@link Single} emitting the RestResponse<Void, DateTime> object
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link Maybe&lt;DateTime&gt;} object if successful.
      */
     public Maybe<DateTime> getUnixTimeAsync() {
         return getUnixTimeWithRestResponseAsync()
@@ -696,10 +696,10 @@ public class IntsImpl implements Ints {
     /**
      * Put datetime encoded as Unix time.
      *
-     * @param intBody the long value
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @throws ErrorException thrown if the request is rejected by server
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
+     * @param intBody the long value.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     public void putUnixTimeDate(DateTime intBody) {
         putUnixTimeDateAsync(intBody).blockingAwait();
@@ -708,10 +708,10 @@ public class IntsImpl implements Ints {
     /**
      * Put datetime encoded as Unix time.
      *
-     * @param intBody the long value
+     * @param intBody the long value.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceFuture} object
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
     public ServiceFuture<Void> putUnixTimeDateAsync(DateTime intBody, final ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(putUnixTimeDateAsync(intBody), serviceCallback);
@@ -720,8 +720,8 @@ public class IntsImpl implements Ints {
     /**
      * Put datetime encoded as Unix time.
      *
-     * @param intBody the long value
-     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @param intBody the long value.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
      */
     public Single<RestResponse<Void, Void>> putUnixTimeDateWithRestResponseAsync(DateTime intBody) {
@@ -732,9 +732,9 @@ public class IntsImpl implements Ints {
     /**
      * Put datetime encoded as Unix time.
      *
-     * @param intBody the long value
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return a {@link Single} emitting the RestResponse<Void, Void> object
+     * @param intBody the long value.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link Completable} object if successful.
      */
     public Completable putUnixTimeDateAsync(DateTime intBody) {
         return putUnixTimeDateWithRestResponseAsync(intBody)
@@ -744,9 +744,9 @@ public class IntsImpl implements Ints {
     /**
      * Get invalid Unix time value.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @throws ErrorException thrown if the request is rejected by server
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the DateTime object if successful.
      */
     public DateTime getInvalidUnixTime() {
@@ -757,8 +757,8 @@ public class IntsImpl implements Ints {
      * Get invalid Unix time value.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceFuture} object
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link ServiceFuture&lt;DateTime&gt;} object.
      */
     public ServiceFuture<DateTime> getInvalidUnixTimeAsync(final ServiceCallback<DateTime> serviceCallback) {
         return ServiceFuture.fromBody(getInvalidUnixTimeAsync(), serviceCallback);
@@ -767,7 +767,7 @@ public class IntsImpl implements Ints {
     /**
      * Get invalid Unix time value.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, DateTime&gt;&gt;} object if successful.
      */
     public Single<RestResponse<Void, DateTime>> getInvalidUnixTimeWithRestResponseAsync() {
@@ -777,8 +777,8 @@ public class IntsImpl implements Ints {
     /**
      * Get invalid Unix time value.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return a {@link Single} emitting the RestResponse<Void, DateTime> object
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link Maybe&lt;DateTime&gt;} object if successful.
      */
     public Maybe<DateTime> getInvalidUnixTimeAsync() {
         return getInvalidUnixTimeWithRestResponseAsync()
@@ -796,9 +796,9 @@ public class IntsImpl implements Ints {
     /**
      * Get null Unix time value.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @throws ErrorException thrown if the request is rejected by server
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the DateTime object if successful.
      */
     public DateTime getNullUnixTime() {
@@ -809,8 +809,8 @@ public class IntsImpl implements Ints {
      * Get null Unix time value.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceFuture} object
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link ServiceFuture&lt;DateTime&gt;} object.
      */
     public ServiceFuture<DateTime> getNullUnixTimeAsync(final ServiceCallback<DateTime> serviceCallback) {
         return ServiceFuture.fromBody(getNullUnixTimeAsync(), serviceCallback);
@@ -819,7 +819,7 @@ public class IntsImpl implements Ints {
     /**
      * Get null Unix time value.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, DateTime&gt;&gt;} object if successful.
      */
     public Single<RestResponse<Void, DateTime>> getNullUnixTimeWithRestResponseAsync() {
@@ -829,8 +829,8 @@ public class IntsImpl implements Ints {
     /**
      * Get null Unix time value.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return a {@link Single} emitting the RestResponse<Void, DateTime> object
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link Maybe&lt;DateTime&gt;} object if successful.
      */
     public Maybe<DateTime> getNullUnixTimeAsync() {
         return getNullUnixTimeWithRestResponseAsync()

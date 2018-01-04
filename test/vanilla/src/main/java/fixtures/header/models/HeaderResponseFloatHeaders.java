@@ -25,7 +25,7 @@ public class HeaderResponseFloatHeaders {
     /**
      * Get the value value.
      *
-     * @return the value value
+     * @return the value value.
      */
     public Double value() {
         return this.value;
@@ -34,7 +34,7 @@ public class HeaderResponseFloatHeaders {
     /**
      * Set the value value.
      *
-     * @param value the value value to set
+     * @param value the value value to set.
      * @return the HeaderResponseFloatHeaders object itself.
      */
     public HeaderResponseFloatHeaders withValue(Double value) {

@@ -88,10 +88,10 @@ public class ParameterGroupingsInner {
     /**
      * Post a bunch of required parameters grouped.
      *
-     * @param parameterGroupingPostRequiredParameters Additional parameters for the operation
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @throws ErrorException thrown if the request is rejected by server
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
+     * @param parameterGroupingPostRequiredParameters Additional parameters for the operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     public void postRequired(ParameterGroupingPostRequiredParametersInner parameterGroupingPostRequiredParameters) {
         postRequiredAsync(parameterGroupingPostRequiredParameters).blockingAwait();
@@ -100,10 +100,10 @@ public class ParameterGroupingsInner {
     /**
      * Post a bunch of required parameters grouped.
      *
-     * @param parameterGroupingPostRequiredParameters Additional parameters for the operation
+     * @param parameterGroupingPostRequiredParameters Additional parameters for the operation.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceFuture} object
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
     public ServiceFuture<Void> postRequiredAsync(ParameterGroupingPostRequiredParametersInner parameterGroupingPostRequiredParameters, final ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(postRequiredAsync(parameterGroupingPostRequiredParameters), serviceCallback);
@@ -112,8 +112,8 @@ public class ParameterGroupingsInner {
     /**
      * Post a bunch of required parameters grouped.
      *
-     * @param parameterGroupingPostRequiredParameters Additional parameters for the operation
-     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @param parameterGroupingPostRequiredParameters Additional parameters for the operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
      */
     public Single<RestResponse<Void, Void>> postRequiredWithRestResponseAsync(ParameterGroupingPostRequiredParametersInner parameterGroupingPostRequiredParameters) {
@@ -131,9 +131,9 @@ public class ParameterGroupingsInner {
     /**
      * Post a bunch of required parameters grouped.
      *
-     * @param parameterGroupingPostRequiredParameters Additional parameters for the operation
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return a {@link Single} emitting the RestResponse<Void, Void> object
+     * @param parameterGroupingPostRequiredParameters Additional parameters for the operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link Completable} object if successful.
      */
     public Completable postRequiredAsync(ParameterGroupingPostRequiredParametersInner parameterGroupingPostRequiredParameters) {
         return postRequiredWithRestResponseAsync(parameterGroupingPostRequiredParameters)
@@ -143,9 +143,9 @@ public class ParameterGroupingsInner {
     /**
      * Post a bunch of optional parameters grouped.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @throws ErrorException thrown if the request is rejected by server
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     public void postOptional() {
         postOptionalAsync().blockingAwait();
@@ -155,8 +155,8 @@ public class ParameterGroupingsInner {
      * Post a bunch of optional parameters grouped.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceFuture} object
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
     public ServiceFuture<Void> postOptionalAsync(final ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(postOptionalAsync(), serviceCallback);
@@ -165,7 +165,7 @@ public class ParameterGroupingsInner {
     /**
      * Post a bunch of optional parameters grouped.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
      */
     public Single<RestResponse<Void, Void>> postOptionalWithRestResponseAsync() {
@@ -178,8 +178,8 @@ public class ParameterGroupingsInner {
     /**
      * Post a bunch of optional parameters grouped.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return a {@link Single} emitting the RestResponse<Void, Void> object
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link Completable} object if successful.
      */
     public Completable postOptionalAsync() {
         return postOptionalWithRestResponseAsync()
@@ -189,10 +189,10 @@ public class ParameterGroupingsInner {
     /**
      * Post a bunch of optional parameters grouped.
      *
-     * @param parameterGroupingPostOptionalParameters Additional parameters for the operation
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @throws ErrorException thrown if the request is rejected by server
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
+     * @param parameterGroupingPostOptionalParameters Additional parameters for the operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     public void postOptional(ParameterGroupingPostOptionalParametersInner parameterGroupingPostOptionalParameters) {
         postOptionalAsync(parameterGroupingPostOptionalParameters).blockingAwait();
@@ -201,10 +201,10 @@ public class ParameterGroupingsInner {
     /**
      * Post a bunch of optional parameters grouped.
      *
-     * @param parameterGroupingPostOptionalParameters Additional parameters for the operation
+     * @param parameterGroupingPostOptionalParameters Additional parameters for the operation.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceFuture} object
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
     public ServiceFuture<Void> postOptionalAsync(ParameterGroupingPostOptionalParametersInner parameterGroupingPostOptionalParameters, final ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(postOptionalAsync(parameterGroupingPostOptionalParameters), serviceCallback);
@@ -213,8 +213,8 @@ public class ParameterGroupingsInner {
     /**
      * Post a bunch of optional parameters grouped.
      *
-     * @param parameterGroupingPostOptionalParameters Additional parameters for the operation
-     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @param parameterGroupingPostOptionalParameters Additional parameters for the operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
      */
     public Single<RestResponse<Void, Void>> postOptionalWithRestResponseAsync(ParameterGroupingPostOptionalParametersInner parameterGroupingPostOptionalParameters) {
@@ -233,9 +233,9 @@ public class ParameterGroupingsInner {
     /**
      * Post a bunch of optional parameters grouped.
      *
-     * @param parameterGroupingPostOptionalParameters Additional parameters for the operation
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return a {@link Single} emitting the RestResponse<Void, Void> object
+     * @param parameterGroupingPostOptionalParameters Additional parameters for the operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link Completable} object if successful.
      */
     public Completable postOptionalAsync(ParameterGroupingPostOptionalParametersInner parameterGroupingPostOptionalParameters) {
         return postOptionalWithRestResponseAsync(parameterGroupingPostOptionalParameters)
@@ -245,9 +245,9 @@ public class ParameterGroupingsInner {
     /**
      * Post parameters from multiple different parameter groups.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @throws ErrorException thrown if the request is rejected by server
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     public void postMultiParamGroups() {
         postMultiParamGroupsAsync().blockingAwait();
@@ -257,8 +257,8 @@ public class ParameterGroupingsInner {
      * Post parameters from multiple different parameter groups.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceFuture} object
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
     public ServiceFuture<Void> postMultiParamGroupsAsync(final ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(postMultiParamGroupsAsync(), serviceCallback);
@@ -267,7 +267,7 @@ public class ParameterGroupingsInner {
     /**
      * Post parameters from multiple different parameter groups.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
      */
     public Single<RestResponse<Void, Void>> postMultiParamGroupsWithRestResponseAsync() {
@@ -283,8 +283,8 @@ public class ParameterGroupingsInner {
     /**
      * Post parameters from multiple different parameter groups.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return a {@link Single} emitting the RestResponse<Void, Void> object
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link Completable} object if successful.
      */
     public Completable postMultiParamGroupsAsync() {
         return postMultiParamGroupsWithRestResponseAsync()
@@ -294,11 +294,11 @@ public class ParameterGroupingsInner {
     /**
      * Post parameters from multiple different parameter groups.
      *
-     * @param firstParameterGroup Additional parameters for the operation
-     * @param parameterGroupingPostMultiParamGroupsSecondParamGroup Additional parameters for the operation
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @throws ErrorException thrown if the request is rejected by server
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
+     * @param firstParameterGroup Additional parameters for the operation.
+     * @param parameterGroupingPostMultiParamGroupsSecondParamGroup Additional parameters for the operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     public void postMultiParamGroups(FirstParameterGroupInner firstParameterGroup, ParameterGroupingPostMultiParamGroupsSecondParamGroupInner parameterGroupingPostMultiParamGroupsSecondParamGroup) {
         postMultiParamGroupsAsync(firstParameterGroup, parameterGroupingPostMultiParamGroupsSecondParamGroup).blockingAwait();
@@ -307,11 +307,11 @@ public class ParameterGroupingsInner {
     /**
      * Post parameters from multiple different parameter groups.
      *
-     * @param firstParameterGroup Additional parameters for the operation
-     * @param parameterGroupingPostMultiParamGroupsSecondParamGroup Additional parameters for the operation
+     * @param firstParameterGroup Additional parameters for the operation.
+     * @param parameterGroupingPostMultiParamGroupsSecondParamGroup Additional parameters for the operation.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceFuture} object
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
     public ServiceFuture<Void> postMultiParamGroupsAsync(FirstParameterGroupInner firstParameterGroup, ParameterGroupingPostMultiParamGroupsSecondParamGroupInner parameterGroupingPostMultiParamGroupsSecondParamGroup, final ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(postMultiParamGroupsAsync(firstParameterGroup, parameterGroupingPostMultiParamGroupsSecondParamGroup), serviceCallback);
@@ -320,9 +320,9 @@ public class ParameterGroupingsInner {
     /**
      * Post parameters from multiple different parameter groups.
      *
-     * @param firstParameterGroup Additional parameters for the operation
-     * @param parameterGroupingPostMultiParamGroupsSecondParamGroup Additional parameters for the operation
-     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @param firstParameterGroup Additional parameters for the operation.
+     * @param parameterGroupingPostMultiParamGroupsSecondParamGroup Additional parameters for the operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
      */
     public Single<RestResponse<Void, Void>> postMultiParamGroupsWithRestResponseAsync(FirstParameterGroupInner firstParameterGroup, ParameterGroupingPostMultiParamGroupsSecondParamGroupInner parameterGroupingPostMultiParamGroupsSecondParamGroup) {
@@ -350,10 +350,10 @@ public class ParameterGroupingsInner {
     /**
      * Post parameters from multiple different parameter groups.
      *
-     * @param firstParameterGroup Additional parameters for the operation
-     * @param parameterGroupingPostMultiParamGroupsSecondParamGroup Additional parameters for the operation
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return a {@link Single} emitting the RestResponse<Void, Void> object
+     * @param firstParameterGroup Additional parameters for the operation.
+     * @param parameterGroupingPostMultiParamGroupsSecondParamGroup Additional parameters for the operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link Completable} object if successful.
      */
     public Completable postMultiParamGroupsAsync(FirstParameterGroupInner firstParameterGroup, ParameterGroupingPostMultiParamGroupsSecondParamGroupInner parameterGroupingPostMultiParamGroupsSecondParamGroup) {
         return postMultiParamGroupsWithRestResponseAsync(firstParameterGroup, parameterGroupingPostMultiParamGroupsSecondParamGroup)
@@ -363,9 +363,9 @@ public class ParameterGroupingsInner {
     /**
      * Post parameters with a shared parameter group object.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @throws ErrorException thrown if the request is rejected by server
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     public void postSharedParameterGroupObject() {
         postSharedParameterGroupObjectAsync().blockingAwait();
@@ -375,8 +375,8 @@ public class ParameterGroupingsInner {
      * Post parameters with a shared parameter group object.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceFuture} object
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
     public ServiceFuture<Void> postSharedParameterGroupObjectAsync(final ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(postSharedParameterGroupObjectAsync(), serviceCallback);
@@ -385,7 +385,7 @@ public class ParameterGroupingsInner {
     /**
      * Post parameters with a shared parameter group object.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
      */
     public Single<RestResponse<Void, Void>> postSharedParameterGroupObjectWithRestResponseAsync() {
@@ -398,8 +398,8 @@ public class ParameterGroupingsInner {
     /**
      * Post parameters with a shared parameter group object.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return a {@link Single} emitting the RestResponse<Void, Void> object
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link Completable} object if successful.
      */
     public Completable postSharedParameterGroupObjectAsync() {
         return postSharedParameterGroupObjectWithRestResponseAsync()
@@ -409,10 +409,10 @@ public class ParameterGroupingsInner {
     /**
      * Post parameters with a shared parameter group object.
      *
-     * @param firstParameterGroup Additional parameters for the operation
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @throws ErrorException thrown if the request is rejected by server
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
+     * @param firstParameterGroup Additional parameters for the operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     public void postSharedParameterGroupObject(FirstParameterGroupInner firstParameterGroup) {
         postSharedParameterGroupObjectAsync(firstParameterGroup).blockingAwait();
@@ -421,10 +421,10 @@ public class ParameterGroupingsInner {
     /**
      * Post parameters with a shared parameter group object.
      *
-     * @param firstParameterGroup Additional parameters for the operation
+     * @param firstParameterGroup Additional parameters for the operation.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceFuture} object
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
     public ServiceFuture<Void> postSharedParameterGroupObjectAsync(FirstParameterGroupInner firstParameterGroup, final ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(postSharedParameterGroupObjectAsync(firstParameterGroup), serviceCallback);
@@ -433,8 +433,8 @@ public class ParameterGroupingsInner {
     /**
      * Post parameters with a shared parameter group object.
      *
-     * @param firstParameterGroup Additional parameters for the operation
-     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @param firstParameterGroup Additional parameters for the operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
      */
     public Single<RestResponse<Void, Void>> postSharedParameterGroupObjectWithRestResponseAsync(FirstParameterGroupInner firstParameterGroup) {
@@ -453,9 +453,9 @@ public class ParameterGroupingsInner {
     /**
      * Post parameters with a shared parameter group object.
      *
-     * @param firstParameterGroup Additional parameters for the operation
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return a {@link Single} emitting the RestResponse<Void, Void> object
+     * @param firstParameterGroup Additional parameters for the operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link Completable} object if successful.
      */
     public Completable postSharedParameterGroupObjectAsync(FirstParameterGroupInner firstParameterGroup) {
         return postSharedParameterGroupObjectWithRestResponseAsync(firstParameterGroup)

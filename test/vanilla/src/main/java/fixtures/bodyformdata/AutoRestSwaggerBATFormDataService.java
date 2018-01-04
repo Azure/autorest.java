@@ -16,6 +16,7 @@ package fixtures.bodyformdata;
 public interface AutoRestSwaggerBATFormDataService {
     /**
      * Gets the Formdatas object to access its operations.
+     *
      * @return the Formdatas object.
      */
     Formdatas formdatas();

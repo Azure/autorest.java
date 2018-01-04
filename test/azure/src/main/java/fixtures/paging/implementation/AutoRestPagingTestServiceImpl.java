@@ -40,7 +40,7 @@ public class AutoRestPagingTestServiceImpl extends AzureServiceClient implements
      * Sets Gets or sets the preferred language for the response.
      *
      * @param acceptLanguage the acceptLanguage value.
-     * @return the service client itself
+     * @return the service client itself.
      */
     public AutoRestPagingTestServiceImpl withAcceptLanguage(String acceptLanguage) {
         this.acceptLanguage = acceptLanguage;
@@ -65,7 +65,7 @@ public class AutoRestPagingTestServiceImpl extends AzureServiceClient implements
      * Sets Gets or sets the retry timeout in seconds for Long Running Operations. Default value is 30.
      *
      * @param longRunningOperationRetryTimeout the longRunningOperationRetryTimeout value.
-     * @return the service client itself
+     * @return the service client itself.
      */
     public AutoRestPagingTestServiceImpl withLongRunningOperationRetryTimeout(int longRunningOperationRetryTimeout) {
         this.longRunningOperationRetryTimeout = longRunningOperationRetryTimeout;
@@ -90,7 +90,7 @@ public class AutoRestPagingTestServiceImpl extends AzureServiceClient implements
      * Sets When set to true a unique x-ms-client-request-id value is generated and included in each request. Default is true.
      *
      * @param generateClientRequestId the generateClientRequestId value.
-     * @return the service client itself
+     * @return the service client itself.
      */
     public AutoRestPagingTestServiceImpl withGenerateClientRequestId(boolean generateClientRequestId) {
         this.generateClientRequestId = generateClientRequestId;
@@ -114,7 +114,7 @@ public class AutoRestPagingTestServiceImpl extends AzureServiceClient implements
     /**
      * Initializes an instance of AutoRestPagingTestService client.
      *
-     * @param credentials the management credentials for Azure
+     * @param credentials the management credentials for Azure.
      */
     public AutoRestPagingTestServiceImpl(ServiceClientCredentials credentials) {
         this(AzureProxy.createDefaultPipeline(AutoRestPagingTestServiceImpl.class, credentials));
@@ -123,7 +123,7 @@ public class AutoRestPagingTestServiceImpl extends AzureServiceClient implements
     /**
      * Initializes an instance of AutoRestPagingTestService client.
      *
-     * @param credentials the management credentials for Azure
+     * @param credentials the management credentials for Azure.
      * @param azureEnvironment The environment that requests will target.
      */
     public AutoRestPagingTestServiceImpl(ServiceClientCredentials credentials, AzureEnvironment azureEnvironment) {

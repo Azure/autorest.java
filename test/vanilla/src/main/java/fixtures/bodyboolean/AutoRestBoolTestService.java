@@ -16,6 +16,7 @@ package fixtures.bodyboolean;
 public interface AutoRestBoolTestService {
     /**
      * Gets the Bools object to access its operations.
+     *
      * @return the Bools object.
      */
     Bools bools();

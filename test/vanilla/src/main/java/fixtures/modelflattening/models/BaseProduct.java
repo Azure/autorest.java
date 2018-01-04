@@ -33,7 +33,7 @@ public class BaseProduct {
     /**
      * Get the productId value.
      *
-     * @return the productId value
+     * @return the productId value.
      */
     public String productId() {
         return this.productId;
@@ -42,7 +42,7 @@ public class BaseProduct {
     /**
      * Set the productId value.
      *
-     * @param productId the productId value to set
+     * @param productId the productId value to set.
      * @return the BaseProduct object itself.
      */
     public BaseProduct withProductId(String productId) {
@@ -53,7 +53,7 @@ public class BaseProduct {
     /**
      * Get the description value.
      *
-     * @return the description value
+     * @return the description value.
      */
     public String description() {
         return this.description;
@@ -62,7 +62,7 @@ public class BaseProduct {
     /**
      * Set the description value.
      *
-     * @param description the description value to set
+     * @param description the description value to set.
      * @return the BaseProduct object itself.
      */
     public BaseProduct withDescription(String description) {

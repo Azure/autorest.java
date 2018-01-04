@@ -43,7 +43,7 @@ public class ParameterGroupingPostRequiredParameters {
     /**
      * Get the body value.
      *
-     * @return the body value
+     * @return the body value.
      */
     public int body() {
         return this.body;
@@ -52,7 +52,7 @@ public class ParameterGroupingPostRequiredParameters {
     /**
      * Set the body value.
      *
-     * @param body the body value to set
+     * @param body the body value to set.
      * @return the ParameterGroupingPostRequiredParameters object itself.
      */
     public ParameterGroupingPostRequiredParameters withBody(int body) {
@@ -63,7 +63,7 @@ public class ParameterGroupingPostRequiredParameters {
     /**
      * Get the customHeader value.
      *
-     * @return the customHeader value
+     * @return the customHeader value.
      */
     public String customHeader() {
         return this.customHeader;
@@ -72,7 +72,7 @@ public class ParameterGroupingPostRequiredParameters {
     /**
      * Set the customHeader value.
      *
-     * @param customHeader the customHeader value to set
+     * @param customHeader the customHeader value to set.
      * @return the ParameterGroupingPostRequiredParameters object itself.
      */
     public ParameterGroupingPostRequiredParameters withCustomHeader(String customHeader) {
@@ -83,7 +83,7 @@ public class ParameterGroupingPostRequiredParameters {
     /**
      * Get the query value.
      *
-     * @return the query value
+     * @return the query value.
      */
     public Integer query() {
         return this.query;
@@ -92,7 +92,7 @@ public class ParameterGroupingPostRequiredParameters {
     /**
      * Set the query value.
      *
-     * @param query the query value to set
+     * @param query the query value to set.
      * @return the ParameterGroupingPostRequiredParameters object itself.
      */
     public ParameterGroupingPostRequiredParameters withQuery(Integer query) {
@@ -103,7 +103,7 @@ public class ParameterGroupingPostRequiredParameters {
     /**
      * Get the path value.
      *
-     * @return the path value
+     * @return the path value.
      */
     public String path() {
         return this.path;
@@ -112,7 +112,7 @@ public class ParameterGroupingPostRequiredParameters {
     /**
      * Set the path value.
      *
-     * @param path the path value to set
+     * @param path the path value to set.
      * @return the ParameterGroupingPostRequiredParameters object itself.
      */
     public ParameterGroupingPostRequiredParameters withPath(String path) {

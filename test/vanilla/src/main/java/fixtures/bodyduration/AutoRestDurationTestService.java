@@ -16,6 +16,7 @@ package fixtures.bodyduration;
 public interface AutoRestDurationTestService {
     /**
      * Gets the Durations object to access its operations.
+     *
      * @return the Durations object.
      */
     Durations durations();

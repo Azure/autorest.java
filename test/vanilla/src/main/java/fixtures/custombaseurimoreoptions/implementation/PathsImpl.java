@@ -72,12 +72,12 @@ public class PathsImpl implements Paths {
     /**
      * Get a 200 to test a valid base uri.
      *
-     * @param vault The vault name, e.g. https://myvault
+     * @param vault The vault name, e.g. https://myvault.
      * @param secret Secret value.
      * @param keyName The key name with value 'key1'.
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @throws ErrorException thrown if the request is rejected by server
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     public void getEmpty(String vault, String secret, String keyName) {
         getEmptyAsync(vault, secret, keyName).blockingAwait();
@@ -86,12 +86,12 @@ public class PathsImpl implements Paths {
     /**
      * Get a 200 to test a valid base uri.
      *
-     * @param vault The vault name, e.g. https://myvault
+     * @param vault The vault name, e.g. https://myvault.
      * @param secret Secret value.
      * @param keyName The key name with value 'key1'.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceFuture} object
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
     public ServiceFuture<Void> getEmptyAsync(String vault, String secret, String keyName, final ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(getEmptyAsync(vault, secret, keyName), serviceCallback);
@@ -100,10 +100,10 @@ public class PathsImpl implements Paths {
     /**
      * Get a 200 to test a valid base uri.
      *
-     * @param vault The vault name, e.g. https://myvault
+     * @param vault The vault name, e.g. https://myvault.
      * @param secret Secret value.
      * @param keyName The key name with value 'key1'.
-     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
      */
     public Single<RestResponse<Void, Void>> getEmptyWithRestResponseAsync(String vault, String secret, String keyName) {
@@ -129,11 +129,11 @@ public class PathsImpl implements Paths {
     /**
      * Get a 200 to test a valid base uri.
      *
-     * @param vault The vault name, e.g. https://myvault
+     * @param vault The vault name, e.g. https://myvault.
      * @param secret Secret value.
      * @param keyName The key name with value 'key1'.
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return a {@link Single} emitting the RestResponse<Void, Void> object
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link Completable} object if successful.
      */
     public Completable getEmptyAsync(String vault, String secret, String keyName) {
         return getEmptyWithRestResponseAsync(vault, secret, keyName)
@@ -143,13 +143,13 @@ public class PathsImpl implements Paths {
     /**
      * Get a 200 to test a valid base uri.
      *
-     * @param vault The vault name, e.g. https://myvault
+     * @param vault The vault name, e.g. https://myvault.
      * @param secret Secret value.
      * @param keyName The key name with value 'key1'.
      * @param keyVersion The key version. Default value 'v1'.
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @throws ErrorException thrown if the request is rejected by server
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     public void getEmpty(String vault, String secret, String keyName, String keyVersion) {
         getEmptyAsync(vault, secret, keyName, keyVersion).blockingAwait();
@@ -158,13 +158,13 @@ public class PathsImpl implements Paths {
     /**
      * Get a 200 to test a valid base uri.
      *
-     * @param vault The vault name, e.g. https://myvault
+     * @param vault The vault name, e.g. https://myvault.
      * @param secret Secret value.
      * @param keyName The key name with value 'key1'.
      * @param keyVersion The key version. Default value 'v1'.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceFuture} object
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
     public ServiceFuture<Void> getEmptyAsync(String vault, String secret, String keyName, String keyVersion, final ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(getEmptyAsync(vault, secret, keyName, keyVersion), serviceCallback);
@@ -173,11 +173,11 @@ public class PathsImpl implements Paths {
     /**
      * Get a 200 to test a valid base uri.
      *
-     * @param vault The vault name, e.g. https://myvault
+     * @param vault The vault name, e.g. https://myvault.
      * @param secret Secret value.
      * @param keyName The key name with value 'key1'.
      * @param keyVersion The key version. Default value 'v1'.
-     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
      */
     public Single<RestResponse<Void, Void>> getEmptyWithRestResponseAsync(String vault, String secret, String keyName, String keyVersion) {
@@ -202,12 +202,12 @@ public class PathsImpl implements Paths {
     /**
      * Get a 200 to test a valid base uri.
      *
-     * @param vault The vault name, e.g. https://myvault
+     * @param vault The vault name, e.g. https://myvault.
      * @param secret Secret value.
      * @param keyName The key name with value 'key1'.
      * @param keyVersion The key version. Default value 'v1'.
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return a {@link Single} emitting the RestResponse<Void, Void> object
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link Completable} object if successful.
      */
     public Completable getEmptyAsync(String vault, String secret, String keyName, String keyVersion) {
         return getEmptyWithRestResponseAsync(vault, secret, keyName, keyVersion)

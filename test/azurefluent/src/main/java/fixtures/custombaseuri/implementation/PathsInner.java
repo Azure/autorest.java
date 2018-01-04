@@ -71,10 +71,10 @@ public class PathsInner {
     /**
      * Get a 200 to test a valid base uri.
      *
-     * @param accountName Account Name
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @throws ErrorException thrown if the request is rejected by server
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
+     * @param accountName Account Name.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     public void getEmpty(String accountName) {
         getEmptyAsync(accountName).blockingAwait();
@@ -83,10 +83,10 @@ public class PathsInner {
     /**
      * Get a 200 to test a valid base uri.
      *
-     * @param accountName Account Name
+     * @param accountName Account Name.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceFuture} object
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
     public ServiceFuture<Void> getEmptyAsync(String accountName, final ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(getEmptyAsync(accountName), serviceCallback);
@@ -95,8 +95,8 @@ public class PathsInner {
     /**
      * Get a 200 to test a valid base uri.
      *
-     * @param accountName Account Name
-     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @param accountName Account Name.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
      */
     public Single<RestResponse<Void, Void>> getEmptyWithRestResponseAsync(String accountName) {
@@ -112,9 +112,9 @@ public class PathsInner {
     /**
      * Get a 200 to test a valid base uri.
      *
-     * @param accountName Account Name
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return a {@link Single} emitting the RestResponse<Void, Void> object
+     * @param accountName Account Name.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link Completable} object if successful.
      */
     public Completable getEmptyAsync(String accountName) {
         return getEmptyWithRestResponseAsync(accountName)

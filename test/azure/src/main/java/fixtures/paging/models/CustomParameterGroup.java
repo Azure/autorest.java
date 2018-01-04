@@ -33,7 +33,7 @@ public class CustomParameterGroup {
     /**
      * Get the apiVersion value.
      *
-     * @return the apiVersion value
+     * @return the apiVersion value.
      */
     public String apiVersion() {
         return this.apiVersion;
@@ -42,7 +42,7 @@ public class CustomParameterGroup {
     /**
      * Set the apiVersion value.
      *
-     * @param apiVersion the apiVersion value to set
+     * @param apiVersion the apiVersion value to set.
      * @return the CustomParameterGroup object itself.
      */
     public CustomParameterGroup withApiVersion(String apiVersion) {
@@ -53,7 +53,7 @@ public class CustomParameterGroup {
     /**
      * Get the tenant value.
      *
-     * @return the tenant value
+     * @return the tenant value.
      */
     public String tenant() {
         return this.tenant;
@@ -62,7 +62,7 @@ public class CustomParameterGroup {
     /**
      * Set the tenant value.
      *
-     * @param tenant the tenant value to set
+     * @param tenant the tenant value to set.
      * @return the CustomParameterGroup object itself.
      */
     public CustomParameterGroup withTenant(String tenant) {

@@ -31,7 +31,7 @@ public class Pet {
     /**
      * Get the id value.
      *
-     * @return the id value
+     * @return the id value.
      */
     public Integer id() {
         return this.id;
@@ -40,7 +40,7 @@ public class Pet {
     /**
      * Set the id value.
      *
-     * @param id the id value to set
+     * @param id the id value to set.
      * @return the Pet object itself.
      */
     public Pet withId(Integer id) {
@@ -51,7 +51,7 @@ public class Pet {
     /**
      * Get the name value.
      *
-     * @return the name value
+     * @return the name value.
      */
     public String name() {
         return this.name;
@@ -60,7 +60,7 @@ public class Pet {
     /**
      * Set the name value.
      *
-     * @param name the name value to set
+     * @param name the name value to set.
      * @return the Pet object itself.
      */
     public Pet withName(String name) {

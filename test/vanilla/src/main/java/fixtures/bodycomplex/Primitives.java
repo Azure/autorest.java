@@ -39,9 +39,9 @@ public interface Primitives {
     /**
      * Get complex types with integer properties.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @throws ErrorException thrown if the request is rejected by server
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the IntWrapper object if successful.
      */
     IntWrapper getInt();
@@ -50,71 +50,71 @@ public interface Primitives {
      * Get complex types with integer properties.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceFuture&lt;IntWrapper&gt;} object
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link ServiceFuture&lt;IntWrapper&gt;} object.
      */
     ServiceFuture<IntWrapper> getIntAsync(final ServiceCallback<IntWrapper> serviceCallback);
 
     /**
      * Get complex types with integer properties.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Maybe&lt;IntWrapper&gt;} object if successful.
-     */
-    Maybe<IntWrapper> getIntAsync();
-
-    /**
-     * Get complex types with integer properties.
-     *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, IntWrapper&gt;&gt;} object if successful.
      */
     Single<RestResponse<Void, IntWrapper>> getIntWithRestResponseAsync();
 
     /**
+     * Get complex types with integer properties.
+     *
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link Maybe&lt;IntWrapper&gt;} object if successful.
+     */
+    Maybe<IntWrapper> getIntAsync();
+
+    /**
      * Put complex types with integer properties.
      *
-     * @param complexBody Please put -1 and 2
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @throws ErrorException thrown if the request is rejected by server
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
+     * @param complexBody Please put -1 and 2.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     void putInt(IntWrapper complexBody);
 
     /**
      * Put complex types with integer properties.
      *
-     * @param complexBody Please put -1 and 2
+     * @param complexBody Please put -1 and 2.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceFuture&lt;Void&gt;} object
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
     ServiceFuture<Void> putIntAsync(IntWrapper complexBody, final ServiceCallback<Void> serviceCallback);
 
     /**
      * Put complex types with integer properties.
      *
-     * @param complexBody Please put -1 and 2
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Completable} object if successful.
-     */
-    Completable putIntAsync(IntWrapper complexBody);
-
-    /**
-     * Put complex types with integer properties.
-     *
-     * @param complexBody Please put -1 and 2
-     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @param complexBody Please put -1 and 2.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
      */
     Single<RestResponse<Void, Void>> putIntWithRestResponseAsync(IntWrapper complexBody);
 
     /**
+     * Put complex types with integer properties.
+     *
+     * @param complexBody Please put -1 and 2.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link Completable} object if successful.
+     */
+    Completable putIntAsync(IntWrapper complexBody);
+
+    /**
      * Get complex types with long properties.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @throws ErrorException thrown if the request is rejected by server
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the LongWrapper object if successful.
      */
     LongWrapper getLong();
@@ -123,71 +123,71 @@ public interface Primitives {
      * Get complex types with long properties.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceFuture&lt;LongWrapper&gt;} object
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link ServiceFuture&lt;LongWrapper&gt;} object.
      */
     ServiceFuture<LongWrapper> getLongAsync(final ServiceCallback<LongWrapper> serviceCallback);
 
     /**
      * Get complex types with long properties.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Maybe&lt;LongWrapper&gt;} object if successful.
-     */
-    Maybe<LongWrapper> getLongAsync();
-
-    /**
-     * Get complex types with long properties.
-     *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, LongWrapper&gt;&gt;} object if successful.
      */
     Single<RestResponse<Void, LongWrapper>> getLongWithRestResponseAsync();
 
     /**
+     * Get complex types with long properties.
+     *
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link Maybe&lt;LongWrapper&gt;} object if successful.
+     */
+    Maybe<LongWrapper> getLongAsync();
+
+    /**
      * Put complex types with long properties.
      *
-     * @param complexBody Please put 1099511627775 and -999511627788
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @throws ErrorException thrown if the request is rejected by server
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
+     * @param complexBody Please put 1099511627775 and -999511627788.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     void putLong(LongWrapper complexBody);
 
     /**
      * Put complex types with long properties.
      *
-     * @param complexBody Please put 1099511627775 and -999511627788
+     * @param complexBody Please put 1099511627775 and -999511627788.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceFuture&lt;Void&gt;} object
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
     ServiceFuture<Void> putLongAsync(LongWrapper complexBody, final ServiceCallback<Void> serviceCallback);
 
     /**
      * Put complex types with long properties.
      *
-     * @param complexBody Please put 1099511627775 and -999511627788
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Completable} object if successful.
-     */
-    Completable putLongAsync(LongWrapper complexBody);
-
-    /**
-     * Put complex types with long properties.
-     *
-     * @param complexBody Please put 1099511627775 and -999511627788
-     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @param complexBody Please put 1099511627775 and -999511627788.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
      */
     Single<RestResponse<Void, Void>> putLongWithRestResponseAsync(LongWrapper complexBody);
 
     /**
+     * Put complex types with long properties.
+     *
+     * @param complexBody Please put 1099511627775 and -999511627788.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link Completable} object if successful.
+     */
+    Completable putLongAsync(LongWrapper complexBody);
+
+    /**
      * Get complex types with float properties.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @throws ErrorException thrown if the request is rejected by server
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the FloatWrapper object if successful.
      */
     FloatWrapper getFloat();
@@ -196,71 +196,71 @@ public interface Primitives {
      * Get complex types with float properties.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceFuture&lt;FloatWrapper&gt;} object
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link ServiceFuture&lt;FloatWrapper&gt;} object.
      */
     ServiceFuture<FloatWrapper> getFloatAsync(final ServiceCallback<FloatWrapper> serviceCallback);
 
     /**
      * Get complex types with float properties.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Maybe&lt;FloatWrapper&gt;} object if successful.
-     */
-    Maybe<FloatWrapper> getFloatAsync();
-
-    /**
-     * Get complex types with float properties.
-     *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, FloatWrapper&gt;&gt;} object if successful.
      */
     Single<RestResponse<Void, FloatWrapper>> getFloatWithRestResponseAsync();
 
     /**
+     * Get complex types with float properties.
+     *
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link Maybe&lt;FloatWrapper&gt;} object if successful.
+     */
+    Maybe<FloatWrapper> getFloatAsync();
+
+    /**
      * Put complex types with float properties.
      *
-     * @param complexBody Please put 1.05 and -0.003
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @throws ErrorException thrown if the request is rejected by server
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
+     * @param complexBody Please put 1.05 and -0.003.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     void putFloat(FloatWrapper complexBody);
 
     /**
      * Put complex types with float properties.
      *
-     * @param complexBody Please put 1.05 and -0.003
+     * @param complexBody Please put 1.05 and -0.003.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceFuture&lt;Void&gt;} object
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
     ServiceFuture<Void> putFloatAsync(FloatWrapper complexBody, final ServiceCallback<Void> serviceCallback);
 
     /**
      * Put complex types with float properties.
      *
-     * @param complexBody Please put 1.05 and -0.003
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Completable} object if successful.
-     */
-    Completable putFloatAsync(FloatWrapper complexBody);
-
-    /**
-     * Put complex types with float properties.
-     *
-     * @param complexBody Please put 1.05 and -0.003
-     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @param complexBody Please put 1.05 and -0.003.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
      */
     Single<RestResponse<Void, Void>> putFloatWithRestResponseAsync(FloatWrapper complexBody);
 
     /**
+     * Put complex types with float properties.
+     *
+     * @param complexBody Please put 1.05 and -0.003.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link Completable} object if successful.
+     */
+    Completable putFloatAsync(FloatWrapper complexBody);
+
+    /**
      * Get complex types with double properties.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @throws ErrorException thrown if the request is rejected by server
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the DoubleWrapper object if successful.
      */
     DoubleWrapper getDouble();
@@ -269,71 +269,71 @@ public interface Primitives {
      * Get complex types with double properties.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceFuture&lt;DoubleWrapper&gt;} object
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link ServiceFuture&lt;DoubleWrapper&gt;} object.
      */
     ServiceFuture<DoubleWrapper> getDoubleAsync(final ServiceCallback<DoubleWrapper> serviceCallback);
 
     /**
      * Get complex types with double properties.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Maybe&lt;DoubleWrapper&gt;} object if successful.
-     */
-    Maybe<DoubleWrapper> getDoubleAsync();
-
-    /**
-     * Get complex types with double properties.
-     *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, DoubleWrapper&gt;&gt;} object if successful.
      */
     Single<RestResponse<Void, DoubleWrapper>> getDoubleWithRestResponseAsync();
 
     /**
+     * Get complex types with double properties.
+     *
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link Maybe&lt;DoubleWrapper&gt;} object if successful.
+     */
+    Maybe<DoubleWrapper> getDoubleAsync();
+
+    /**
      * Put complex types with double properties.
      *
-     * @param complexBody Please put 3e-100 and -0.000000000000000000000000000000000000000000000000000000005
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @throws ErrorException thrown if the request is rejected by server
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
+     * @param complexBody Please put 3e-100 and -0.000000000000000000000000000000000000000000000000000000005.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     void putDouble(DoubleWrapper complexBody);
 
     /**
      * Put complex types with double properties.
      *
-     * @param complexBody Please put 3e-100 and -0.000000000000000000000000000000000000000000000000000000005
+     * @param complexBody Please put 3e-100 and -0.000000000000000000000000000000000000000000000000000000005.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceFuture&lt;Void&gt;} object
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
     ServiceFuture<Void> putDoubleAsync(DoubleWrapper complexBody, final ServiceCallback<Void> serviceCallback);
 
     /**
      * Put complex types with double properties.
      *
-     * @param complexBody Please put 3e-100 and -0.000000000000000000000000000000000000000000000000000000005
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Completable} object if successful.
-     */
-    Completable putDoubleAsync(DoubleWrapper complexBody);
-
-    /**
-     * Put complex types with double properties.
-     *
-     * @param complexBody Please put 3e-100 and -0.000000000000000000000000000000000000000000000000000000005
-     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @param complexBody Please put 3e-100 and -0.000000000000000000000000000000000000000000000000000000005.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
      */
     Single<RestResponse<Void, Void>> putDoubleWithRestResponseAsync(DoubleWrapper complexBody);
 
     /**
+     * Put complex types with double properties.
+     *
+     * @param complexBody Please put 3e-100 and -0.000000000000000000000000000000000000000000000000000000005.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link Completable} object if successful.
+     */
+    Completable putDoubleAsync(DoubleWrapper complexBody);
+
+    /**
      * Get complex types with bool properties.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @throws ErrorException thrown if the request is rejected by server
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the BooleanWrapper object if successful.
      */
     BooleanWrapper getBool();
@@ -342,71 +342,71 @@ public interface Primitives {
      * Get complex types with bool properties.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceFuture&lt;BooleanWrapper&gt;} object
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link ServiceFuture&lt;BooleanWrapper&gt;} object.
      */
     ServiceFuture<BooleanWrapper> getBoolAsync(final ServiceCallback<BooleanWrapper> serviceCallback);
 
     /**
      * Get complex types with bool properties.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Maybe&lt;BooleanWrapper&gt;} object if successful.
-     */
-    Maybe<BooleanWrapper> getBoolAsync();
-
-    /**
-     * Get complex types with bool properties.
-     *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, BooleanWrapper&gt;&gt;} object if successful.
      */
     Single<RestResponse<Void, BooleanWrapper>> getBoolWithRestResponseAsync();
 
     /**
+     * Get complex types with bool properties.
+     *
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link Maybe&lt;BooleanWrapper&gt;} object if successful.
+     */
+    Maybe<BooleanWrapper> getBoolAsync();
+
+    /**
      * Put complex types with bool properties.
      *
-     * @param complexBody Please put true and false
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @throws ErrorException thrown if the request is rejected by server
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
+     * @param complexBody Please put true and false.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     void putBool(BooleanWrapper complexBody);
 
     /**
      * Put complex types with bool properties.
      *
-     * @param complexBody Please put true and false
+     * @param complexBody Please put true and false.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceFuture&lt;Void&gt;} object
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
     ServiceFuture<Void> putBoolAsync(BooleanWrapper complexBody, final ServiceCallback<Void> serviceCallback);
 
     /**
      * Put complex types with bool properties.
      *
-     * @param complexBody Please put true and false
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Completable} object if successful.
-     */
-    Completable putBoolAsync(BooleanWrapper complexBody);
-
-    /**
-     * Put complex types with bool properties.
-     *
-     * @param complexBody Please put true and false
-     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @param complexBody Please put true and false.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
      */
     Single<RestResponse<Void, Void>> putBoolWithRestResponseAsync(BooleanWrapper complexBody);
 
     /**
+     * Put complex types with bool properties.
+     *
+     * @param complexBody Please put true and false.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link Completable} object if successful.
+     */
+    Completable putBoolAsync(BooleanWrapper complexBody);
+
+    /**
      * Get complex types with string properties.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @throws ErrorException thrown if the request is rejected by server
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the StringWrapper object if successful.
      */
     StringWrapper getString();
@@ -415,71 +415,71 @@ public interface Primitives {
      * Get complex types with string properties.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceFuture&lt;StringWrapper&gt;} object
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link ServiceFuture&lt;StringWrapper&gt;} object.
      */
     ServiceFuture<StringWrapper> getStringAsync(final ServiceCallback<StringWrapper> serviceCallback);
 
     /**
      * Get complex types with string properties.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Maybe&lt;StringWrapper&gt;} object if successful.
-     */
-    Maybe<StringWrapper> getStringAsync();
-
-    /**
-     * Get complex types with string properties.
-     *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, StringWrapper&gt;&gt;} object if successful.
      */
     Single<RestResponse<Void, StringWrapper>> getStringWithRestResponseAsync();
 
     /**
+     * Get complex types with string properties.
+     *
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link Maybe&lt;StringWrapper&gt;} object if successful.
+     */
+    Maybe<StringWrapper> getStringAsync();
+
+    /**
      * Put complex types with string properties.
      *
-     * @param complexBody Please put 'goodrequest', '', and null
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @throws ErrorException thrown if the request is rejected by server
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
+     * @param complexBody Please put 'goodrequest', '', and null.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     void putString(StringWrapper complexBody);
 
     /**
      * Put complex types with string properties.
      *
-     * @param complexBody Please put 'goodrequest', '', and null
+     * @param complexBody Please put 'goodrequest', '', and null.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceFuture&lt;Void&gt;} object
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
     ServiceFuture<Void> putStringAsync(StringWrapper complexBody, final ServiceCallback<Void> serviceCallback);
 
     /**
      * Put complex types with string properties.
      *
-     * @param complexBody Please put 'goodrequest', '', and null
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Completable} object if successful.
-     */
-    Completable putStringAsync(StringWrapper complexBody);
-
-    /**
-     * Put complex types with string properties.
-     *
-     * @param complexBody Please put 'goodrequest', '', and null
-     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @param complexBody Please put 'goodrequest', '', and null.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
      */
     Single<RestResponse<Void, Void>> putStringWithRestResponseAsync(StringWrapper complexBody);
 
     /**
+     * Put complex types with string properties.
+     *
+     * @param complexBody Please put 'goodrequest', '', and null.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link Completable} object if successful.
+     */
+    Completable putStringAsync(StringWrapper complexBody);
+
+    /**
      * Get complex types with date properties.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @throws ErrorException thrown if the request is rejected by server
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the DateWrapper object if successful.
      */
     DateWrapper getDate();
@@ -488,71 +488,71 @@ public interface Primitives {
      * Get complex types with date properties.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceFuture&lt;DateWrapper&gt;} object
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link ServiceFuture&lt;DateWrapper&gt;} object.
      */
     ServiceFuture<DateWrapper> getDateAsync(final ServiceCallback<DateWrapper> serviceCallback);
 
     /**
      * Get complex types with date properties.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Maybe&lt;DateWrapper&gt;} object if successful.
-     */
-    Maybe<DateWrapper> getDateAsync();
-
-    /**
-     * Get complex types with date properties.
-     *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, DateWrapper&gt;&gt;} object if successful.
      */
     Single<RestResponse<Void, DateWrapper>> getDateWithRestResponseAsync();
 
     /**
+     * Get complex types with date properties.
+     *
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link Maybe&lt;DateWrapper&gt;} object if successful.
+     */
+    Maybe<DateWrapper> getDateAsync();
+
+    /**
      * Put complex types with date properties.
      *
-     * @param complexBody Please put '0001-01-01' and '2016-02-29'
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @throws ErrorException thrown if the request is rejected by server
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
+     * @param complexBody Please put '0001-01-01' and '2016-02-29'.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     void putDate(DateWrapper complexBody);
 
     /**
      * Put complex types with date properties.
      *
-     * @param complexBody Please put '0001-01-01' and '2016-02-29'
+     * @param complexBody Please put '0001-01-01' and '2016-02-29'.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceFuture&lt;Void&gt;} object
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
     ServiceFuture<Void> putDateAsync(DateWrapper complexBody, final ServiceCallback<Void> serviceCallback);
 
     /**
      * Put complex types with date properties.
      *
-     * @param complexBody Please put '0001-01-01' and '2016-02-29'
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Completable} object if successful.
-     */
-    Completable putDateAsync(DateWrapper complexBody);
-
-    /**
-     * Put complex types with date properties.
-     *
-     * @param complexBody Please put '0001-01-01' and '2016-02-29'
-     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @param complexBody Please put '0001-01-01' and '2016-02-29'.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
      */
     Single<RestResponse<Void, Void>> putDateWithRestResponseAsync(DateWrapper complexBody);
 
     /**
+     * Put complex types with date properties.
+     *
+     * @param complexBody Please put '0001-01-01' and '2016-02-29'.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link Completable} object if successful.
+     */
+    Completable putDateAsync(DateWrapper complexBody);
+
+    /**
      * Get complex types with datetime properties.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @throws ErrorException thrown if the request is rejected by server
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the DatetimeWrapper object if successful.
      */
     DatetimeWrapper getDateTime();
@@ -561,71 +561,71 @@ public interface Primitives {
      * Get complex types with datetime properties.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceFuture&lt;DatetimeWrapper&gt;} object
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link ServiceFuture&lt;DatetimeWrapper&gt;} object.
      */
     ServiceFuture<DatetimeWrapper> getDateTimeAsync(final ServiceCallback<DatetimeWrapper> serviceCallback);
 
     /**
      * Get complex types with datetime properties.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Maybe&lt;DatetimeWrapper&gt;} object if successful.
-     */
-    Maybe<DatetimeWrapper> getDateTimeAsync();
-
-    /**
-     * Get complex types with datetime properties.
-     *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, DatetimeWrapper&gt;&gt;} object if successful.
      */
     Single<RestResponse<Void, DatetimeWrapper>> getDateTimeWithRestResponseAsync();
 
     /**
+     * Get complex types with datetime properties.
+     *
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link Maybe&lt;DatetimeWrapper&gt;} object if successful.
+     */
+    Maybe<DatetimeWrapper> getDateTimeAsync();
+
+    /**
      * Put complex types with datetime properties.
      *
-     * @param complexBody Please put '0001-01-01T12:00:00-04:00' and '2015-05-18T11:38:00-08:00'
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @throws ErrorException thrown if the request is rejected by server
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
+     * @param complexBody Please put '0001-01-01T12:00:00-04:00' and '2015-05-18T11:38:00-08:00'.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     void putDateTime(DatetimeWrapper complexBody);
 
     /**
      * Put complex types with datetime properties.
      *
-     * @param complexBody Please put '0001-01-01T12:00:00-04:00' and '2015-05-18T11:38:00-08:00'
+     * @param complexBody Please put '0001-01-01T12:00:00-04:00' and '2015-05-18T11:38:00-08:00'.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceFuture&lt;Void&gt;} object
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
     ServiceFuture<Void> putDateTimeAsync(DatetimeWrapper complexBody, final ServiceCallback<Void> serviceCallback);
 
     /**
      * Put complex types with datetime properties.
      *
-     * @param complexBody Please put '0001-01-01T12:00:00-04:00' and '2015-05-18T11:38:00-08:00'
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Completable} object if successful.
-     */
-    Completable putDateTimeAsync(DatetimeWrapper complexBody);
-
-    /**
-     * Put complex types with datetime properties.
-     *
-     * @param complexBody Please put '0001-01-01T12:00:00-04:00' and '2015-05-18T11:38:00-08:00'
-     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @param complexBody Please put '0001-01-01T12:00:00-04:00' and '2015-05-18T11:38:00-08:00'.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
      */
     Single<RestResponse<Void, Void>> putDateTimeWithRestResponseAsync(DatetimeWrapper complexBody);
 
     /**
+     * Put complex types with datetime properties.
+     *
+     * @param complexBody Please put '0001-01-01T12:00:00-04:00' and '2015-05-18T11:38:00-08:00'.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link Completable} object if successful.
+     */
+    Completable putDateTimeAsync(DatetimeWrapper complexBody);
+
+    /**
      * Get complex types with datetimeRfc1123 properties.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @throws ErrorException thrown if the request is rejected by server
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the Datetimerfc1123Wrapper object if successful.
      */
     Datetimerfc1123Wrapper getDateTimeRfc1123();
@@ -634,71 +634,71 @@ public interface Primitives {
      * Get complex types with datetimeRfc1123 properties.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceFuture&lt;Datetimerfc1123Wrapper&gt;} object
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link ServiceFuture&lt;Datetimerfc1123Wrapper&gt;} object.
      */
     ServiceFuture<Datetimerfc1123Wrapper> getDateTimeRfc1123Async(final ServiceCallback<Datetimerfc1123Wrapper> serviceCallback);
 
     /**
      * Get complex types with datetimeRfc1123 properties.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Maybe&lt;Datetimerfc1123Wrapper&gt;} object if successful.
-     */
-    Maybe<Datetimerfc1123Wrapper> getDateTimeRfc1123Async();
-
-    /**
-     * Get complex types with datetimeRfc1123 properties.
-     *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, Datetimerfc1123Wrapper&gt;&gt;} object if successful.
      */
     Single<RestResponse<Void, Datetimerfc1123Wrapper>> getDateTimeRfc1123WithRestResponseAsync();
 
     /**
+     * Get complex types with datetimeRfc1123 properties.
+     *
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link Maybe&lt;Datetimerfc1123Wrapper&gt;} object if successful.
+     */
+    Maybe<Datetimerfc1123Wrapper> getDateTimeRfc1123Async();
+
+    /**
      * Put complex types with datetimeRfc1123 properties.
      *
-     * @param complexBody Please put 'Mon, 01 Jan 0001 12:00:00 GMT' and 'Mon, 18 May 2015 11:38:00 GMT'
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @throws ErrorException thrown if the request is rejected by server
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
+     * @param complexBody Please put 'Mon, 01 Jan 0001 12:00:00 GMT' and 'Mon, 18 May 2015 11:38:00 GMT'.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     void putDateTimeRfc1123(Datetimerfc1123Wrapper complexBody);
 
     /**
      * Put complex types with datetimeRfc1123 properties.
      *
-     * @param complexBody Please put 'Mon, 01 Jan 0001 12:00:00 GMT' and 'Mon, 18 May 2015 11:38:00 GMT'
+     * @param complexBody Please put 'Mon, 01 Jan 0001 12:00:00 GMT' and 'Mon, 18 May 2015 11:38:00 GMT'.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceFuture&lt;Void&gt;} object
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
     ServiceFuture<Void> putDateTimeRfc1123Async(Datetimerfc1123Wrapper complexBody, final ServiceCallback<Void> serviceCallback);
 
     /**
      * Put complex types with datetimeRfc1123 properties.
      *
-     * @param complexBody Please put 'Mon, 01 Jan 0001 12:00:00 GMT' and 'Mon, 18 May 2015 11:38:00 GMT'
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Completable} object if successful.
-     */
-    Completable putDateTimeRfc1123Async(Datetimerfc1123Wrapper complexBody);
-
-    /**
-     * Put complex types with datetimeRfc1123 properties.
-     *
-     * @param complexBody Please put 'Mon, 01 Jan 0001 12:00:00 GMT' and 'Mon, 18 May 2015 11:38:00 GMT'
-     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @param complexBody Please put 'Mon, 01 Jan 0001 12:00:00 GMT' and 'Mon, 18 May 2015 11:38:00 GMT'.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
      */
     Single<RestResponse<Void, Void>> putDateTimeRfc1123WithRestResponseAsync(Datetimerfc1123Wrapper complexBody);
 
     /**
+     * Put complex types with datetimeRfc1123 properties.
+     *
+     * @param complexBody Please put 'Mon, 01 Jan 0001 12:00:00 GMT' and 'Mon, 18 May 2015 11:38:00 GMT'.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link Completable} object if successful.
+     */
+    Completable putDateTimeRfc1123Async(Datetimerfc1123Wrapper complexBody);
+
+    /**
      * Get complex types with duration properties.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @throws ErrorException thrown if the request is rejected by server
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the DurationWrapper object if successful.
      */
     DurationWrapper getDuration();
@@ -707,71 +707,71 @@ public interface Primitives {
      * Get complex types with duration properties.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceFuture&lt;DurationWrapper&gt;} object
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link ServiceFuture&lt;DurationWrapper&gt;} object.
      */
     ServiceFuture<DurationWrapper> getDurationAsync(final ServiceCallback<DurationWrapper> serviceCallback);
 
     /**
      * Get complex types with duration properties.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Maybe&lt;DurationWrapper&gt;} object if successful.
-     */
-    Maybe<DurationWrapper> getDurationAsync();
-
-    /**
-     * Get complex types with duration properties.
-     *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, DurationWrapper&gt;&gt;} object if successful.
      */
     Single<RestResponse<Void, DurationWrapper>> getDurationWithRestResponseAsync();
 
     /**
+     * Get complex types with duration properties.
+     *
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link Maybe&lt;DurationWrapper&gt;} object if successful.
+     */
+    Maybe<DurationWrapper> getDurationAsync();
+
+    /**
      * Put complex types with duration properties.
      *
-     * @param complexBody Please put 'P123DT22H14M12.011S'
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @throws ErrorException thrown if the request is rejected by server
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
+     * @param complexBody Please put 'P123DT22H14M12.011S'.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     void putDuration(DurationWrapper complexBody);
 
     /**
      * Put complex types with duration properties.
      *
-     * @param complexBody Please put 'P123DT22H14M12.011S'
+     * @param complexBody Please put 'P123DT22H14M12.011S'.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceFuture&lt;Void&gt;} object
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
     ServiceFuture<Void> putDurationAsync(DurationWrapper complexBody, final ServiceCallback<Void> serviceCallback);
 
     /**
      * Put complex types with duration properties.
      *
-     * @param complexBody Please put 'P123DT22H14M12.011S'
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Completable} object if successful.
-     */
-    Completable putDurationAsync(DurationWrapper complexBody);
-
-    /**
-     * Put complex types with duration properties.
-     *
-     * @param complexBody Please put 'P123DT22H14M12.011S'
-     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @param complexBody Please put 'P123DT22H14M12.011S'.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
      */
     Single<RestResponse<Void, Void>> putDurationWithRestResponseAsync(DurationWrapper complexBody);
 
     /**
+     * Put complex types with duration properties.
+     *
+     * @param complexBody Please put 'P123DT22H14M12.011S'.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link Completable} object if successful.
+     */
+    Completable putDurationAsync(DurationWrapper complexBody);
+
+    /**
      * Get complex types with byte properties.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @throws ErrorException thrown if the request is rejected by server
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the ByteWrapper object if successful.
      */
     ByteWrapper getByte();
@@ -780,62 +780,62 @@ public interface Primitives {
      * Get complex types with byte properties.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceFuture&lt;ByteWrapper&gt;} object
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link ServiceFuture&lt;ByteWrapper&gt;} object.
      */
     ServiceFuture<ByteWrapper> getByteAsync(final ServiceCallback<ByteWrapper> serviceCallback);
 
     /**
      * Get complex types with byte properties.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Maybe&lt;ByteWrapper&gt;} object if successful.
-     */
-    Maybe<ByteWrapper> getByteAsync();
-
-    /**
-     * Get complex types with byte properties.
-     *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, ByteWrapper&gt;&gt;} object if successful.
      */
     Single<RestResponse<Void, ByteWrapper>> getByteWithRestResponseAsync();
 
     /**
+     * Get complex types with byte properties.
+     *
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link Maybe&lt;ByteWrapper&gt;} object if successful.
+     */
+    Maybe<ByteWrapper> getByteAsync();
+
+    /**
      * Put complex types with byte properties.
      *
-     * @param complexBody Please put non-ascii byte string hex(FF FE FD FC 00 FA F9 F8 F7 F6)
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @throws ErrorException thrown if the request is rejected by server
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
+     * @param complexBody Please put non-ascii byte string hex(FF FE FD FC 00 FA F9 F8 F7 F6).
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     void putByte(ByteWrapper complexBody);
 
     /**
      * Put complex types with byte properties.
      *
-     * @param complexBody Please put non-ascii byte string hex(FF FE FD FC 00 FA F9 F8 F7 F6)
+     * @param complexBody Please put non-ascii byte string hex(FF FE FD FC 00 FA F9 F8 F7 F6).
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceFuture&lt;Void&gt;} object
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
     ServiceFuture<Void> putByteAsync(ByteWrapper complexBody, final ServiceCallback<Void> serviceCallback);
 
     /**
      * Put complex types with byte properties.
      *
-     * @param complexBody Please put non-ascii byte string hex(FF FE FD FC 00 FA F9 F8 F7 F6)
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Completable} object if successful.
+     * @param complexBody Please put non-ascii byte string hex(FF FE FD FC 00 FA F9 F8 F7 F6).
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
      */
-    Completable putByteAsync(ByteWrapper complexBody);
+    Single<RestResponse<Void, Void>> putByteWithRestResponseAsync(ByteWrapper complexBody);
 
     /**
      * Put complex types with byte properties.
      *
-     * @param complexBody Please put non-ascii byte string hex(FF FE FD FC 00 FA F9 F8 F7 F6)
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
+     * @param complexBody Please put non-ascii byte string hex(FF FE FD FC 00 FA F9 F8 F7 F6).
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link Completable} object if successful.
      */
-    Single<RestResponse<Void, Void>> putByteWithRestResponseAsync(ByteWrapper complexBody);
+    Completable putByteAsync(ByteWrapper complexBody);
 }

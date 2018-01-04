@@ -31,7 +31,7 @@ public class ParameterGroupingPostMultiParamGroupsSecondParamGroupInner {
     /**
      * Get the headerTwo value.
      *
-     * @return the headerTwo value
+     * @return the headerTwo value.
      */
     public String headerTwo() {
         return this.headerTwo;
@@ -40,7 +40,7 @@ public class ParameterGroupingPostMultiParamGroupsSecondParamGroupInner {
     /**
      * Set the headerTwo value.
      *
-     * @param headerTwo the headerTwo value to set
+     * @param headerTwo the headerTwo value to set.
      * @return the ParameterGroupingPostMultiParamGroupsSecondParamGroupInner
      * object itself.
      */
@@ -52,7 +52,7 @@ public class ParameterGroupingPostMultiParamGroupsSecondParamGroupInner {
     /**
      * Get the queryTwo value.
      *
-     * @return the queryTwo value
+     * @return the queryTwo value.
      */
     public Integer queryTwo() {
         return this.queryTwo;
@@ -61,7 +61,7 @@ public class ParameterGroupingPostMultiParamGroupsSecondParamGroupInner {
     /**
      * Set the queryTwo value.
      *
-     * @param queryTwo the queryTwo value to set
+     * @param queryTwo the queryTwo value to set.
      * @return the ParameterGroupingPostMultiParamGroupsSecondParamGroupInner
      * object itself.
      */
