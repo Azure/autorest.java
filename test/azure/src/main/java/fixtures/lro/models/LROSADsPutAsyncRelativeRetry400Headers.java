@@ -40,7 +40,7 @@ public class LROSADsPutAsyncRelativeRetry400Headers {
     /**
      * Get the azureAsyncOperation value.
      *
-     * @return the azureAsyncOperation value
+     * @return the azureAsyncOperation value.
      */
     public String azureAsyncOperation() {
         return this.azureAsyncOperation;
@@ -49,7 +49,7 @@ public class LROSADsPutAsyncRelativeRetry400Headers {
     /**
      * Set the azureAsyncOperation value.
      *
-     * @param azureAsyncOperation the azureAsyncOperation value to set
+     * @param azureAsyncOperation the azureAsyncOperation value to set.
      * @return the LROSADsPutAsyncRelativeRetry400Headers object itself.
      */
     public LROSADsPutAsyncRelativeRetry400Headers withAzureAsyncOperation(String azureAsyncOperation) {
@@ -60,7 +60,7 @@ public class LROSADsPutAsyncRelativeRetry400Headers {
     /**
      * Get the location value.
      *
-     * @return the location value
+     * @return the location value.
      */
     public String location() {
         return this.location;
@@ -69,7 +69,7 @@ public class LROSADsPutAsyncRelativeRetry400Headers {
     /**
      * Set the location value.
      *
-     * @param location the location value to set
+     * @param location the location value to set.
      * @return the LROSADsPutAsyncRelativeRetry400Headers object itself.
      */
     public LROSADsPutAsyncRelativeRetry400Headers withLocation(String location) {
@@ -80,7 +80,7 @@ public class LROSADsPutAsyncRelativeRetry400Headers {
     /**
      * Get the retryAfter value.
      *
-     * @return the retryAfter value
+     * @return the retryAfter value.
      */
     public Integer retryAfter() {
         return this.retryAfter;
@@ -89,7 +89,7 @@ public class LROSADsPutAsyncRelativeRetry400Headers {
     /**
      * Set the retryAfter value.
      *
-     * @param retryAfter the retryAfter value to set
+     * @param retryAfter the retryAfter value to set.
      * @return the LROSADsPutAsyncRelativeRetry400Headers object itself.
      */
     public LROSADsPutAsyncRelativeRetry400Headers withRetryAfter(Integer retryAfter) {

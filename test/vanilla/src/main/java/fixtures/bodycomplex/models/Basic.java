@@ -38,7 +38,7 @@ public class Basic {
     /**
      * Get the id value.
      *
-     * @return the id value
+     * @return the id value.
      */
     public Integer id() {
         return this.id;
@@ -47,7 +47,7 @@ public class Basic {
     /**
      * Set the id value.
      *
-     * @param id the id value to set
+     * @param id the id value to set.
      * @return the Basic object itself.
      */
     public Basic withId(Integer id) {
@@ -58,7 +58,7 @@ public class Basic {
     /**
      * Get the name value.
      *
-     * @return the name value
+     * @return the name value.
      */
     public String name() {
         return this.name;
@@ -67,7 +67,7 @@ public class Basic {
     /**
      * Set the name value.
      *
-     * @param name the name value to set
+     * @param name the name value to set.
      * @return the Basic object itself.
      */
     public Basic withName(String name) {
@@ -78,7 +78,7 @@ public class Basic {
     /**
      * Get the color value.
      *
-     * @return the color value
+     * @return the color value.
      */
     public CMYKColors color() {
         return this.color;
@@ -87,7 +87,7 @@ public class Basic {
     /**
      * Set the color value.
      *
-     * @param color the color value to set
+     * @param color the color value to set.
      * @return the Basic object itself.
      */
     public Basic withColor(CMYKColors color) {

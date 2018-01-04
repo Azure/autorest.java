@@ -33,7 +33,7 @@ public class FirstParameterGroup {
     /**
      * Get the headerOne value.
      *
-     * @return the headerOne value
+     * @return the headerOne value.
      */
     public String headerOne() {
         return this.headerOne;
@@ -42,7 +42,7 @@ public class FirstParameterGroup {
     /**
      * Set the headerOne value.
      *
-     * @param headerOne the headerOne value to set
+     * @param headerOne the headerOne value to set.
      * @return the FirstParameterGroup object itself.
      */
     public FirstParameterGroup withHeaderOne(String headerOne) {
@@ -53,7 +53,7 @@ public class FirstParameterGroup {
     /**
      * Get the queryOne value.
      *
-     * @return the queryOne value
+     * @return the queryOne value.
      */
     public Integer queryOne() {
         return this.queryOne;
@@ -62,7 +62,7 @@ public class FirstParameterGroup {
     /**
      * Set the queryOne value.
      *
-     * @param queryOne the queryOne value to set
+     * @param queryOne the queryOne value to set.
      * @return the FirstParameterGroup object itself.
      */
     public FirstParameterGroup withQueryOne(Integer queryOne) {

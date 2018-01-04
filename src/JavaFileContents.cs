@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace AutoRest.Java.DanModel
+namespace AutoRest.Java
 {
     public class JavaFileContents
     {
@@ -406,7 +406,7 @@ namespace AutoRest.Java.DanModel
 
         public void CommentReturn(string returnValueDescription)
         {
-            Line($"@return {returnValueDescription}");
+            Line($"@return {returnValueDescription.EscapeXmlComment()}");
         }
 
         public void CommentThrows(string exceptionTypeName, string description)

@@ -16,6 +16,7 @@ package fixtures.bodynumber;
 public interface AutoRestNumberTestService {
     /**
      * Gets the Numbers object to access its operations.
+     *
      * @return the Numbers object.
      */
     Numbers numbers();

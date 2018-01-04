@@ -25,7 +25,7 @@ public interface AutoRestAzureSpecialParametersTestClient {
      * Sets The subscription id, which appears in the path, always modeled in credentials. The value is always '1234-5678-9012-3456'.
      *
      * @param subscriptionId the subscriptionId value.
-     * @return the service client itself
+     * @return the service client itself.
      */
     AutoRestAzureSpecialParametersTestClient withSubscriptionId(String subscriptionId);
 
@@ -47,7 +47,7 @@ public interface AutoRestAzureSpecialParametersTestClient {
      * Sets Gets or sets the preferred language for the response.
      *
      * @param acceptLanguage the acceptLanguage value.
-     * @return the service client itself
+     * @return the service client itself.
      */
     AutoRestAzureSpecialParametersTestClient withAcceptLanguage(String acceptLanguage);
 
@@ -62,7 +62,7 @@ public interface AutoRestAzureSpecialParametersTestClient {
      * Sets Gets or sets the retry timeout in seconds for Long Running Operations. Default value is 30.
      *
      * @param longRunningOperationRetryTimeout the longRunningOperationRetryTimeout value.
-     * @return the service client itself
+     * @return the service client itself.
      */
     AutoRestAzureSpecialParametersTestClient withLongRunningOperationRetryTimeout(int longRunningOperationRetryTimeout);
 
@@ -77,7 +77,7 @@ public interface AutoRestAzureSpecialParametersTestClient {
      * Sets When set to true a unique x-ms-client-request-id value is generated and included in each request. Default is true.
      *
      * @param generateClientRequestId the generateClientRequestId value.
-     * @return the service client itself
+     * @return the service client itself.
      */
     AutoRestAzureSpecialParametersTestClient withGenerateClientRequestId(boolean generateClientRequestId);
 

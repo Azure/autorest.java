@@ -39,7 +39,7 @@ public class ResourceCollectionInner {
     /**
      * Get the productresource value.
      *
-     * @return the productresource value
+     * @return the productresource value.
      */
     public FlattenedProductInner productresource() {
         return this.productresource;
@@ -48,7 +48,7 @@ public class ResourceCollectionInner {
     /**
      * Set the productresource value.
      *
-     * @param productresource the productresource value to set
+     * @param productresource the productresource value to set.
      * @return the ResourceCollectionInner object itself.
      */
     public ResourceCollectionInner withProductresource(FlattenedProductInner productresource) {
@@ -59,7 +59,7 @@ public class ResourceCollectionInner {
     /**
      * Get the arrayofresources value.
      *
-     * @return the arrayofresources value
+     * @return the arrayofresources value.
      */
     public List<FlattenedProductInner> arrayofresources() {
         return this.arrayofresources;
@@ -68,7 +68,7 @@ public class ResourceCollectionInner {
     /**
      * Set the arrayofresources value.
      *
-     * @param arrayofresources the arrayofresources value to set
+     * @param arrayofresources the arrayofresources value to set.
      * @return the ResourceCollectionInner object itself.
      */
     public ResourceCollectionInner withArrayofresources(List<FlattenedProductInner> arrayofresources) {
@@ -79,7 +79,7 @@ public class ResourceCollectionInner {
     /**
      * Get the dictionaryofresources value.
      *
-     * @return the dictionaryofresources value
+     * @return the dictionaryofresources value.
      */
     public Map<String, FlattenedProductInner> dictionaryofresources() {
         return this.dictionaryofresources;
@@ -88,7 +88,7 @@ public class ResourceCollectionInner {
     /**
      * Set the dictionaryofresources value.
      *
-     * @param dictionaryofresources the dictionaryofresources value to set
+     * @param dictionaryofresources the dictionaryofresources value to set.
      * @return the ResourceCollectionInner object itself.
      */
     public ResourceCollectionInner withDictionaryofresources(Map<String, FlattenedProductInner> dictionaryofresources) {

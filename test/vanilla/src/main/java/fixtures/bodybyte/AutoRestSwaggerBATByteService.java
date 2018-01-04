@@ -16,6 +16,7 @@ package fixtures.bodybyte;
 public interface AutoRestSwaggerBATByteService {
     /**
      * Gets the Bytes object to access its operations.
+     *
      * @return the Bytes object.
      */
     Bytes bytes();

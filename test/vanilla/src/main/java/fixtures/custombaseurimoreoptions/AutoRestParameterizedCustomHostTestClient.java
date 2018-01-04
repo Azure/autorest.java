@@ -25,7 +25,7 @@ public interface AutoRestParameterizedCustomHostTestClient {
      * Sets The subscription id with value 'test12'.
      *
      * @param subscriptionId the subscriptionId value.
-     * @return the service client itself
+     * @return the service client itself.
      */
     AutoRestParameterizedCustomHostTestClient withSubscriptionId(String subscriptionId);
 
@@ -40,12 +40,13 @@ public interface AutoRestParameterizedCustomHostTestClient {
      * Sets A string value that is used as a global part of the parameterized host. Default value 'host'.
      *
      * @param dnsSuffix the dnsSuffix value.
-     * @return the service client itself
+     * @return the service client itself.
      */
     AutoRestParameterizedCustomHostTestClient withDnsSuffix(String dnsSuffix);
 
     /**
      * Gets the Paths object to access its operations.
+     *
      * @return the Paths object.
      */
     Paths paths();

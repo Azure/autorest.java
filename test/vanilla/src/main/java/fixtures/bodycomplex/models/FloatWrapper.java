@@ -31,7 +31,7 @@ public class FloatWrapper {
     /**
      * Get the field1 value.
      *
-     * @return the field1 value
+     * @return the field1 value.
      */
     public Double field1() {
         return this.field1;
@@ -40,7 +40,7 @@ public class FloatWrapper {
     /**
      * Set the field1 value.
      *
-     * @param field1 the field1 value to set
+     * @param field1 the field1 value to set.
      * @return the FloatWrapper object itself.
      */
     public FloatWrapper withField1(Double field1) {
@@ -51,7 +51,7 @@ public class FloatWrapper {
     /**
      * Get the field2 value.
      *
-     * @return the field2 value
+     * @return the field2 value.
      */
     public Double field2() {
         return this.field2;
@@ -60,7 +60,7 @@ public class FloatWrapper {
     /**
      * Set the field2 value.
      *
-     * @param field2 the field2 value to set
+     * @param field2 the field2 value to set.
      * @return the FloatWrapper object itself.
      */
     public FloatWrapper withField2(Double field2) {

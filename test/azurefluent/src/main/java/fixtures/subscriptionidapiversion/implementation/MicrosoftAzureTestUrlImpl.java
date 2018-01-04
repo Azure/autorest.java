@@ -38,7 +38,7 @@ public class MicrosoftAzureTestUrlImpl extends AzureServiceClient {
      * Sets Subscription Id.
      *
      * @param subscriptionId the subscriptionId value.
-     * @return the service client itself
+     * @return the service client itself.
      */
     public MicrosoftAzureTestUrlImpl withSubscriptionId(String subscriptionId) {
         this.subscriptionId = subscriptionId;
@@ -77,7 +77,7 @@ public class MicrosoftAzureTestUrlImpl extends AzureServiceClient {
      * Sets Gets or sets the preferred language for the response.
      *
      * @param acceptLanguage the acceptLanguage value.
-     * @return the service client itself
+     * @return the service client itself.
      */
     public MicrosoftAzureTestUrlImpl withAcceptLanguage(String acceptLanguage) {
         this.acceptLanguage = acceptLanguage;
@@ -102,7 +102,7 @@ public class MicrosoftAzureTestUrlImpl extends AzureServiceClient {
      * Sets Gets or sets the retry timeout in seconds for Long Running Operations. Default value is 30.
      *
      * @param longRunningOperationRetryTimeout the longRunningOperationRetryTimeout value.
-     * @return the service client itself
+     * @return the service client itself.
      */
     public MicrosoftAzureTestUrlImpl withLongRunningOperationRetryTimeout(int longRunningOperationRetryTimeout) {
         this.longRunningOperationRetryTimeout = longRunningOperationRetryTimeout;
@@ -127,7 +127,7 @@ public class MicrosoftAzureTestUrlImpl extends AzureServiceClient {
      * Sets When set to true a unique x-ms-client-request-id value is generated and included in each request. Default is true.
      *
      * @param generateClientRequestId the generateClientRequestId value.
-     * @return the service client itself
+     * @return the service client itself.
      */
     public MicrosoftAzureTestUrlImpl withGenerateClientRequestId(boolean generateClientRequestId) {
         this.generateClientRequestId = generateClientRequestId;
@@ -151,7 +151,7 @@ public class MicrosoftAzureTestUrlImpl extends AzureServiceClient {
     /**
      * Initializes an instance of MicrosoftAzureTestUrl client.
      *
-     * @param credentials the management credentials for Azure
+     * @param credentials the management credentials for Azure.
      */
     public MicrosoftAzureTestUrlImpl(ServiceClientCredentials credentials) {
         this(AzureProxy.createDefaultPipeline(MicrosoftAzureTestUrlImpl.class, credentials));
@@ -160,7 +160,7 @@ public class MicrosoftAzureTestUrlImpl extends AzureServiceClient {
     /**
      * Initializes an instance of MicrosoftAzureTestUrl client.
      *
-     * @param credentials the management credentials for Azure
+     * @param credentials the management credentials for Azure.
      * @param azureEnvironment The environment that requests will target.
      */
     public MicrosoftAzureTestUrlImpl(ServiceClientCredentials credentials, AzureEnvironment azureEnvironment) {

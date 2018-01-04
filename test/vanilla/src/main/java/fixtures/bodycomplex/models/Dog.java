@@ -25,7 +25,7 @@ public class Dog extends Pet {
     /**
      * Get the food value.
      *
-     * @return the food value
+     * @return the food value.
      */
     public String food() {
         return this.food;
@@ -34,7 +34,7 @@ public class Dog extends Pet {
     /**
      * Set the food value.
      *
-     * @param food the food value to set
+     * @param food the food value to set.
      * @return the Dog object itself.
      */
     public Dog withFood(String food) {

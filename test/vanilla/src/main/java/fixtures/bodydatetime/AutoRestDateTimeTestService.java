@@ -16,6 +16,7 @@ package fixtures.bodydatetime;
 public interface AutoRestDateTimeTestService {
     /**
      * Gets the Datetimes object to access its operations.
+     *
      * @return the Datetimes object.
      */
     Datetimes datetimes();

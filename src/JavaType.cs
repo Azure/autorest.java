@@ -1,11 +1,13 @@
 ﻿using System;
 
-namespace AutoRest.Java.DanModel
+namespace AutoRest.Java
 {
-    public interface JavaAbstractType
+    public interface JavaType
     {
         void MultipleLineComment(Action<JavaMultipleLineComment> commentAction);
 
         void Annotation(params string[] annotations);
+
+        void PublicMethod(string methodSignature, Action<JavaBlock> functionBlock);
     }
 }

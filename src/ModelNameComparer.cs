@@ -3,7 +3,6 @@
 
 using System.Collections.Generic;
 using AutoRest.Core.Model;
-using AutoRest.Java.DanModel;
 
 namespace AutoRest.Java
 {

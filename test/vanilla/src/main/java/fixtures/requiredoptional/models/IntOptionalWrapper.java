@@ -25,7 +25,7 @@ public class IntOptionalWrapper {
     /**
      * Get the value value.
      *
-     * @return the value value
+     * @return the value value.
      */
     public Integer value() {
         return this.value;
@@ -34,7 +34,7 @@ public class IntOptionalWrapper {
     /**
      * Set the value value.
      *
-     * @param value the value value to set
+     * @param value the value value to set.
      * @return the IntOptionalWrapper object itself.
      */
     public IntOptionalWrapper withValue(Integer value) {

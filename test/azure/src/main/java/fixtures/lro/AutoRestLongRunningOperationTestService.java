@@ -25,7 +25,7 @@ public interface AutoRestLongRunningOperationTestService {
      * Sets Gets or sets the preferred language for the response.
      *
      * @param acceptLanguage the acceptLanguage value.
-     * @return the service client itself
+     * @return the service client itself.
      */
     AutoRestLongRunningOperationTestService withAcceptLanguage(String acceptLanguage);
 
@@ -40,7 +40,7 @@ public interface AutoRestLongRunningOperationTestService {
      * Sets Gets or sets the retry timeout in seconds for Long Running Operations. Default value is 30.
      *
      * @param longRunningOperationRetryTimeout the longRunningOperationRetryTimeout value.
-     * @return the service client itself
+     * @return the service client itself.
      */
     AutoRestLongRunningOperationTestService withLongRunningOperationRetryTimeout(int longRunningOperationRetryTimeout);
 
@@ -55,7 +55,7 @@ public interface AutoRestLongRunningOperationTestService {
      * Sets When set to true a unique x-ms-client-request-id value is generated and included in each request. Default is true.
      *
      * @param generateClientRequestId the generateClientRequestId value.
-     * @return the service client itself
+     * @return the service client itself.
      */
     AutoRestLongRunningOperationTestService withGenerateClientRequestId(boolean generateClientRequestId);
 

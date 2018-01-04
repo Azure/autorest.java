@@ -38,7 +38,7 @@ public class RefColorConstant {
     /**
      * Get the colorConstant value.
      *
-     * @return the colorConstant value
+     * @return the colorConstant value.
      */
     public String colorConstant() {
         return this.colorConstant;
@@ -47,7 +47,7 @@ public class RefColorConstant {
     /**
      * Set the colorConstant value.
      *
-     * @param colorConstant the colorConstant value to set
+     * @param colorConstant the colorConstant value to set.
      * @return the RefColorConstant object itself.
      */
     public RefColorConstant withColorConstant(String colorConstant) {
@@ -58,7 +58,7 @@ public class RefColorConstant {
     /**
      * Get the field1 value.
      *
-     * @return the field1 value
+     * @return the field1 value.
      */
     public String field1() {
         return this.field1;
@@ -67,7 +67,7 @@ public class RefColorConstant {
     /**
      * Set the field1 value.
      *
-     * @param field1 the field1 value to set
+     * @param field1 the field1 value to set.
      * @return the RefColorConstant object itself.
      */
     public RefColorConstant withField1(String field1) {

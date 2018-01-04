@@ -78,7 +78,7 @@ public class Product {
     /**
      * Get the displayNames value.
      *
-     * @return the displayNames value
+     * @return the displayNames value.
      */
     public List<String> displayNames() {
         return this.displayNames;
@@ -87,7 +87,7 @@ public class Product {
     /**
      * Set the displayNames value.
      *
-     * @param displayNames the displayNames value to set
+     * @param displayNames the displayNames value to set.
      * @return the Product object itself.
      */
     public Product withDisplayNames(List<String> displayNames) {
@@ -98,7 +98,7 @@ public class Product {
     /**
      * Get the capacity value.
      *
-     * @return the capacity value
+     * @return the capacity value.
      */
     public Integer capacity() {
         return this.capacity;
@@ -107,7 +107,7 @@ public class Product {
     /**
      * Set the capacity value.
      *
-     * @param capacity the capacity value to set
+     * @param capacity the capacity value to set.
      * @return the Product object itself.
      */
     public Product withCapacity(Integer capacity) {
@@ -118,7 +118,7 @@ public class Product {
     /**
      * Get the image value.
      *
-     * @return the image value
+     * @return the image value.
      */
     public String image() {
         return this.image;
@@ -127,7 +127,7 @@ public class Product {
     /**
      * Set the image value.
      *
-     * @param image the image value to set
+     * @param image the image value to set.
      * @return the Product object itself.
      */
     public Product withImage(String image) {
@@ -138,7 +138,7 @@ public class Product {
     /**
      * Get the child value.
      *
-     * @return the child value
+     * @return the child value.
      */
     public ChildProduct child() {
         return this.child;
@@ -147,7 +147,7 @@ public class Product {
     /**
      * Set the child value.
      *
-     * @param child the child value to set
+     * @param child the child value to set.
      * @return the Product object itself.
      */
     public Product withChild(ChildProduct child) {
@@ -158,7 +158,7 @@ public class Product {
     /**
      * Get the constChild value.
      *
-     * @return the constChild value
+     * @return the constChild value.
      */
     public ConstantProduct constChild() {
         return this.constChild;
@@ -167,7 +167,7 @@ public class Product {
     /**
      * Set the constChild value.
      *
-     * @param constChild the constChild value to set
+     * @param constChild the constChild value to set.
      * @return the Product object itself.
      */
     public Product withConstChild(ConstantProduct constChild) {
@@ -178,7 +178,7 @@ public class Product {
     /**
      * Get the constInt value.
      *
-     * @return the constInt value
+     * @return the constInt value.
      */
     public int constInt() {
         return this.constInt;
@@ -187,7 +187,7 @@ public class Product {
     /**
      * Set the constInt value.
      *
-     * @param constInt the constInt value to set
+     * @param constInt the constInt value to set.
      * @return the Product object itself.
      */
     public Product withConstInt(int constInt) {
@@ -198,7 +198,7 @@ public class Product {
     /**
      * Get the constString value.
      *
-     * @return the constString value
+     * @return the constString value.
      */
     public String constString() {
         return this.constString;
@@ -207,7 +207,7 @@ public class Product {
     /**
      * Set the constString value.
      *
-     * @param constString the constString value to set
+     * @param constString the constString value to set.
      * @return the Product object itself.
      */
     public Product withConstString(String constString) {
@@ -218,7 +218,7 @@ public class Product {
     /**
      * Get the constStringAsEnum value.
      *
-     * @return the constStringAsEnum value
+     * @return the constStringAsEnum value.
      */
     public EnumConst constStringAsEnum() {
         return this.constStringAsEnum;
@@ -227,7 +227,7 @@ public class Product {
     /**
      * Set the constStringAsEnum value.
      *
-     * @param constStringAsEnum the constStringAsEnum value to set
+     * @param constStringAsEnum the constStringAsEnum value to set.
      * @return the Product object itself.
      */
     public Product withConstStringAsEnum(EnumConst constStringAsEnum) {

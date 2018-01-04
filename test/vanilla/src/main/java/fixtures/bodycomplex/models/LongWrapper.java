@@ -31,7 +31,7 @@ public class LongWrapper {
     /**
      * Get the field1 value.
      *
-     * @return the field1 value
+     * @return the field1 value.
      */
     public Long field1() {
         return this.field1;
@@ -40,7 +40,7 @@ public class LongWrapper {
     /**
      * Set the field1 value.
      *
-     * @param field1 the field1 value to set
+     * @param field1 the field1 value to set.
      * @return the LongWrapper object itself.
      */
     public LongWrapper withField1(Long field1) {
@@ -51,7 +51,7 @@ public class LongWrapper {
     /**
      * Get the field2 value.
      *
-     * @return the field2 value
+     * @return the field2 value.
      */
     public Long field2() {
         return this.field2;
@@ -60,7 +60,7 @@ public class LongWrapper {
     /**
      * Set the field2 value.
      *
-     * @param field2 the field2 value to set
+     * @param field2 the field2 value to set.
      * @return the LongWrapper object itself.
      */
     public LongWrapper withField2(Long field2) {

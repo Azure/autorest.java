@@ -36,7 +36,7 @@ public class SmartSalmon extends Salmon {
     /**
      * Get the additionalProperties value.
      *
-     * @return the additionalProperties value
+     * @return the additionalProperties value.
      */
     public Map<String, Object> additionalProperties() {
         return this.additionalProperties;
@@ -45,7 +45,7 @@ public class SmartSalmon extends Salmon {
     /**
      * Set the additionalProperties value.
      *
-     * @param additionalProperties the additionalProperties value to set
+     * @param additionalProperties the additionalProperties value to set.
      * @return the SmartSalmon object itself.
      */
     public SmartSalmon withAdditionalProperties(Map<String, Object> additionalProperties) {
@@ -56,7 +56,7 @@ public class SmartSalmon extends Salmon {
     /**
      * Get the collegeDegree value.
      *
-     * @return the collegeDegree value
+     * @return the collegeDegree value.
      */
     public String collegeDegree() {
         return this.collegeDegree;
@@ -65,7 +65,7 @@ public class SmartSalmon extends Salmon {
     /**
      * Set the collegeDegree value.
      *
-     * @param collegeDegree the collegeDegree value to set
+     * @param collegeDegree the collegeDegree value to set.
      * @return the SmartSalmon object itself.
      */
     public SmartSalmon withCollegeDegree(String collegeDegree) {

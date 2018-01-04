@@ -25,7 +25,7 @@ public class D {
     /**
      * Get the httpStatusCode value.
      *
-     * @return the httpStatusCode value
+     * @return the httpStatusCode value.
      */
     public String httpStatusCode() {
         return this.httpStatusCode;
@@ -34,7 +34,7 @@ public class D {
     /**
      * Set the httpStatusCode value.
      *
-     * @param httpStatusCode the httpStatusCode value to set
+     * @param httpStatusCode the httpStatusCode value to set.
      * @return the D object itself.
      */
     public D withHttpStatusCode(String httpStatusCode) {

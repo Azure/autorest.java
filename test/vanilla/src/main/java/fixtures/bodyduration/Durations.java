@@ -29,9 +29,9 @@ public interface Durations {
     /**
      * Get null duration value.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @throws ErrorException thrown if the request is rejected by server
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the Period object if successful.
      */
     Period getNull();
@@ -40,71 +40,71 @@ public interface Durations {
      * Get null duration value.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceFuture&lt;Period&gt;} object
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link ServiceFuture&lt;Period&gt;} object.
      */
     ServiceFuture<Period> getNullAsync(final ServiceCallback<Period> serviceCallback);
 
     /**
      * Get null duration value.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Maybe&lt;Period&gt;} object if successful.
-     */
-    Maybe<Period> getNullAsync();
-
-    /**
-     * Get null duration value.
-     *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, Period&gt;&gt;} object if successful.
      */
     Single<RestResponse<Void, Period>> getNullWithRestResponseAsync();
 
     /**
+     * Get null duration value.
+     *
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link Maybe&lt;Period&gt;} object if successful.
+     */
+    Maybe<Period> getNullAsync();
+
+    /**
      * Put a positive duration value.
      *
-     * @param durationBody the Period value
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @throws ErrorException thrown if the request is rejected by server
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
+     * @param durationBody the Period value.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     void putPositiveDuration(Period durationBody);
 
     /**
      * Put a positive duration value.
      *
-     * @param durationBody the Period value
+     * @param durationBody the Period value.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceFuture&lt;Void&gt;} object
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
     ServiceFuture<Void> putPositiveDurationAsync(Period durationBody, final ServiceCallback<Void> serviceCallback);
 
     /**
      * Put a positive duration value.
      *
-     * @param durationBody the Period value
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Completable} object if successful.
-     */
-    Completable putPositiveDurationAsync(Period durationBody);
-
-    /**
-     * Put a positive duration value.
-     *
-     * @param durationBody the Period value
-     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @param durationBody the Period value.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
      */
     Single<RestResponse<Void, Void>> putPositiveDurationWithRestResponseAsync(Period durationBody);
 
     /**
+     * Put a positive duration value.
+     *
+     * @param durationBody the Period value.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link Completable} object if successful.
+     */
+    Completable putPositiveDurationAsync(Period durationBody);
+
+    /**
      * Get a positive duration value.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @throws ErrorException thrown if the request is rejected by server
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the Period object if successful.
      */
     Period getPositiveDuration();
@@ -113,33 +113,33 @@ public interface Durations {
      * Get a positive duration value.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceFuture&lt;Period&gt;} object
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link ServiceFuture&lt;Period&gt;} object.
      */
     ServiceFuture<Period> getPositiveDurationAsync(final ServiceCallback<Period> serviceCallback);
 
     /**
      * Get a positive duration value.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Maybe&lt;Period&gt;} object if successful.
-     */
-    Maybe<Period> getPositiveDurationAsync();
-
-    /**
-     * Get a positive duration value.
-     *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, Period&gt;&gt;} object if successful.
      */
     Single<RestResponse<Void, Period>> getPositiveDurationWithRestResponseAsync();
 
     /**
+     * Get a positive duration value.
+     *
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link Maybe&lt;Period&gt;} object if successful.
+     */
+    Maybe<Period> getPositiveDurationAsync();
+
+    /**
      * Get an invalid duration value.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @throws ErrorException thrown if the request is rejected by server
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the Period object if successful.
      */
     Period getInvalid();
@@ -148,24 +148,24 @@ public interface Durations {
      * Get an invalid duration value.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceFuture&lt;Period&gt;} object
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link ServiceFuture&lt;Period&gt;} object.
      */
     ServiceFuture<Period> getInvalidAsync(final ServiceCallback<Period> serviceCallback);
 
     /**
      * Get an invalid duration value.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Maybe&lt;Period&gt;} object if successful.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link Single&lt;RestResponse&lt;Void, Period&gt;&gt;} object if successful.
      */
-    Maybe<Period> getInvalidAsync();
+    Single<RestResponse<Void, Period>> getInvalidWithRestResponseAsync();
 
     /**
      * Get an invalid duration value.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single&lt;RestResponse&lt;Void, Period&gt;&gt;} object if successful.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link Maybe&lt;Period&gt;} object if successful.
      */
-    Single<RestResponse<Void, Period>> getInvalidWithRestResponseAsync();
+    Maybe<Period> getInvalidAsync();
 }

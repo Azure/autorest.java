@@ -25,12 +25,13 @@ public interface AutoRestParameterizedHostTestClient {
      * Sets A string value that is used as a global part of the parameterized host.
      *
      * @param host the host value.
-     * @return the service client itself
+     * @return the service client itself.
      */
     AutoRestParameterizedHostTestClient withHost(String host);
 
     /**
      * Gets the Paths object to access its operations.
+     *
      * @return the Paths object.
      */
     Paths paths();

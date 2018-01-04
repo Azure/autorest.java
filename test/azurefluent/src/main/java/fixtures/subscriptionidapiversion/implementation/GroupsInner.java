@@ -72,9 +72,9 @@ public class GroupsInner {
      * Provides a resouce group with name 'testgroup101' and location 'West US'.
      *
      * @param resourceGroupName Resource Group name 'testgroup101'.
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @throws ErrorException thrown if the request is rejected by server
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the SampleResourceGroupInner object if successful.
      */
     public SampleResourceGroupInner getSampleResourceGroup(String resourceGroupName) {
@@ -86,8 +86,8 @@ public class GroupsInner {
      *
      * @param resourceGroupName Resource Group name 'testgroup101'.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceFuture} object
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link ServiceFuture&lt;SampleResourceGroupInner&gt;} object.
      */
     public ServiceFuture<SampleResourceGroupInner> getSampleResourceGroupAsync(String resourceGroupName, final ServiceCallback<SampleResourceGroupInner> serviceCallback) {
         return ServiceFuture.fromBody(getSampleResourceGroupAsync(resourceGroupName), serviceCallback);
@@ -97,7 +97,7 @@ public class GroupsInner {
      * Provides a resouce group with name 'testgroup101' and location 'West US'.
      *
      * @param resourceGroupName Resource Group name 'testgroup101'.
-     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, SampleResourceGroupInner&gt;&gt;} object if successful.
      */
     public Single<RestResponse<Void, SampleResourceGroupInner>> getSampleResourceGroupWithRestResponseAsync(String resourceGroupName) {
@@ -117,8 +117,8 @@ public class GroupsInner {
      * Provides a resouce group with name 'testgroup101' and location 'West US'.
      *
      * @param resourceGroupName Resource Group name 'testgroup101'.
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return a {@link Single} emitting the RestResponse<Void, SampleResourceGroupInner> object
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link Maybe&lt;SampleResourceGroupInner&gt;} object if successful.
      */
     public Maybe<SampleResourceGroupInner> getSampleResourceGroupAsync(String resourceGroupName) {
         return getSampleResourceGroupWithRestResponseAsync(resourceGroupName)

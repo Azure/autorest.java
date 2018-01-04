@@ -1,8 +1,8 @@
 ﻿using System;
 
-namespace AutoRest.Java.DanModel
+namespace AutoRest.Java
 {
-    public class JavaInterface : JavaAbstractType
+    public class JavaInterface : JavaType
     {
         private readonly JavaFileContents contents;
         private bool addNewLine;
@@ -21,7 +21,10 @@ namespace AutoRest.Java.DanModel
             }
         }
 
-        public void Method(string methodSignature)
+        public void PublicMethod(string methodSignature)
+            => PublicMethod(methodSignature, null);
+
+        public void PublicMethod(string methodSignature, Action<JavaBlock> functionBlock)
         {
             AddExpectedNewLine();
             contents.Line(methodSignature + ";");

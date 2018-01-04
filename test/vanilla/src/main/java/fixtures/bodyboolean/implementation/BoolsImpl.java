@@ -97,9 +97,9 @@ public class BoolsImpl implements Bools {
     /**
      * Get true Boolean value.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @throws ErrorException thrown if the request is rejected by server
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the boolean object if successful.
      */
     public boolean getTrue() {
@@ -110,8 +110,8 @@ public class BoolsImpl implements Bools {
      * Get true Boolean value.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceFuture} object
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link ServiceFuture&lt;Boolean&gt;} object.
      */
     public ServiceFuture<Boolean> getTrueAsync(final ServiceCallback<Boolean> serviceCallback) {
         return ServiceFuture.fromBody(getTrueAsync(), serviceCallback);
@@ -120,7 +120,7 @@ public class BoolsImpl implements Bools {
     /**
      * Get true Boolean value.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, Boolean&gt;&gt;} object if successful.
      */
     public Single<RestResponse<Void, Boolean>> getTrueWithRestResponseAsync() {
@@ -130,8 +130,8 @@ public class BoolsImpl implements Bools {
     /**
      * Get true Boolean value.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return a {@link Single} emitting the RestResponse<Void, Boolean> object
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link Maybe&lt;Boolean&gt;} object if successful.
      */
     public Maybe<Boolean> getTrueAsync() {
         return getTrueWithRestResponseAsync()
@@ -149,10 +149,10 @@ public class BoolsImpl implements Bools {
     /**
      * Set Boolean value true.
      *
-     * @param boolBody the boolean value
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @throws ErrorException thrown if the request is rejected by server
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
+     * @param boolBody the boolean value.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     public void putTrue(boolean boolBody) {
         putTrueAsync(boolBody).blockingAwait();
@@ -161,10 +161,10 @@ public class BoolsImpl implements Bools {
     /**
      * Set Boolean value true.
      *
-     * @param boolBody the boolean value
+     * @param boolBody the boolean value.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceFuture} object
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
     public ServiceFuture<Void> putTrueAsync(boolean boolBody, final ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(putTrueAsync(boolBody), serviceCallback);
@@ -173,8 +173,8 @@ public class BoolsImpl implements Bools {
     /**
      * Set Boolean value true.
      *
-     * @param boolBody the boolean value
-     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @param boolBody the boolean value.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
      */
     public Single<RestResponse<Void, Void>> putTrueWithRestResponseAsync(boolean boolBody) {
@@ -184,9 +184,9 @@ public class BoolsImpl implements Bools {
     /**
      * Set Boolean value true.
      *
-     * @param boolBody the boolean value
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return a {@link Single} emitting the RestResponse<Void, Void> object
+     * @param boolBody the boolean value.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link Completable} object if successful.
      */
     public Completable putTrueAsync(boolean boolBody) {
         return putTrueWithRestResponseAsync(boolBody)
@@ -196,9 +196,9 @@ public class BoolsImpl implements Bools {
     /**
      * Get false Boolean value.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @throws ErrorException thrown if the request is rejected by server
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the boolean object if successful.
      */
     public boolean getFalse() {
@@ -209,8 +209,8 @@ public class BoolsImpl implements Bools {
      * Get false Boolean value.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceFuture} object
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link ServiceFuture&lt;Boolean&gt;} object.
      */
     public ServiceFuture<Boolean> getFalseAsync(final ServiceCallback<Boolean> serviceCallback) {
         return ServiceFuture.fromBody(getFalseAsync(), serviceCallback);
@@ -219,7 +219,7 @@ public class BoolsImpl implements Bools {
     /**
      * Get false Boolean value.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, Boolean&gt;&gt;} object if successful.
      */
     public Single<RestResponse<Void, Boolean>> getFalseWithRestResponseAsync() {
@@ -229,8 +229,8 @@ public class BoolsImpl implements Bools {
     /**
      * Get false Boolean value.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return a {@link Single} emitting the RestResponse<Void, Boolean> object
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link Maybe&lt;Boolean&gt;} object if successful.
      */
     public Maybe<Boolean> getFalseAsync() {
         return getFalseWithRestResponseAsync()
@@ -248,10 +248,10 @@ public class BoolsImpl implements Bools {
     /**
      * Set Boolean value false.
      *
-     * @param boolBody the boolean value
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @throws ErrorException thrown if the request is rejected by server
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
+     * @param boolBody the boolean value.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     public void putFalse(boolean boolBody) {
         putFalseAsync(boolBody).blockingAwait();
@@ -260,10 +260,10 @@ public class BoolsImpl implements Bools {
     /**
      * Set Boolean value false.
      *
-     * @param boolBody the boolean value
+     * @param boolBody the boolean value.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceFuture} object
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
     public ServiceFuture<Void> putFalseAsync(boolean boolBody, final ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(putFalseAsync(boolBody), serviceCallback);
@@ -272,8 +272,8 @@ public class BoolsImpl implements Bools {
     /**
      * Set Boolean value false.
      *
-     * @param boolBody the boolean value
-     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @param boolBody the boolean value.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
      */
     public Single<RestResponse<Void, Void>> putFalseWithRestResponseAsync(boolean boolBody) {
@@ -283,9 +283,9 @@ public class BoolsImpl implements Bools {
     /**
      * Set Boolean value false.
      *
-     * @param boolBody the boolean value
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return a {@link Single} emitting the RestResponse<Void, Void> object
+     * @param boolBody the boolean value.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link Completable} object if successful.
      */
     public Completable putFalseAsync(boolean boolBody) {
         return putFalseWithRestResponseAsync(boolBody)
@@ -295,9 +295,9 @@ public class BoolsImpl implements Bools {
     /**
      * Get null Boolean value.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @throws ErrorException thrown if the request is rejected by server
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the boolean object if successful.
      */
     public boolean getNull() {
@@ -308,8 +308,8 @@ public class BoolsImpl implements Bools {
      * Get null Boolean value.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceFuture} object
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link ServiceFuture&lt;Boolean&gt;} object.
      */
     public ServiceFuture<Boolean> getNullAsync(final ServiceCallback<Boolean> serviceCallback) {
         return ServiceFuture.fromBody(getNullAsync(), serviceCallback);
@@ -318,7 +318,7 @@ public class BoolsImpl implements Bools {
     /**
      * Get null Boolean value.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, Boolean&gt;&gt;} object if successful.
      */
     public Single<RestResponse<Void, Boolean>> getNullWithRestResponseAsync() {
@@ -328,8 +328,8 @@ public class BoolsImpl implements Bools {
     /**
      * Get null Boolean value.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return a {@link Single} emitting the RestResponse<Void, Boolean> object
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link Maybe&lt;Boolean&gt;} object if successful.
      */
     public Maybe<Boolean> getNullAsync() {
         return getNullWithRestResponseAsync()
@@ -347,9 +347,9 @@ public class BoolsImpl implements Bools {
     /**
      * Get invalid Boolean value.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @throws ErrorException thrown if the request is rejected by server
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the boolean object if successful.
      */
     public boolean getInvalid() {
@@ -360,8 +360,8 @@ public class BoolsImpl implements Bools {
      * Get invalid Boolean value.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceFuture} object
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link ServiceFuture&lt;Boolean&gt;} object.
      */
     public ServiceFuture<Boolean> getInvalidAsync(final ServiceCallback<Boolean> serviceCallback) {
         return ServiceFuture.fromBody(getInvalidAsync(), serviceCallback);
@@ -370,7 +370,7 @@ public class BoolsImpl implements Bools {
     /**
      * Get invalid Boolean value.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, Boolean&gt;&gt;} object if successful.
      */
     public Single<RestResponse<Void, Boolean>> getInvalidWithRestResponseAsync() {
@@ -380,8 +380,8 @@ public class BoolsImpl implements Bools {
     /**
      * Get invalid Boolean value.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return a {@link Single} emitting the RestResponse<Void, Boolean> object
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link Maybe&lt;Boolean&gt;} object if successful.
      */
     public Maybe<Boolean> getInvalidAsync() {
         return getInvalidWithRestResponseAsync()

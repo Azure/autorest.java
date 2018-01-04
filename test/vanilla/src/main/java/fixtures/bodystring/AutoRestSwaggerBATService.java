@@ -16,12 +16,14 @@ package fixtures.bodystring;
 public interface AutoRestSwaggerBATService {
     /**
      * Gets the Strings object to access its operations.
+     *
      * @return the Strings object.
      */
     Strings strings();
 
     /**
      * Gets the Enums object to access its operations.
+     *
      * @return the Enums object.
      */
     Enums enums();

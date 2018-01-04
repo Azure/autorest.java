@@ -33,7 +33,7 @@ public class DoubleWrapper {
     /**
      * Get the field1 value.
      *
-     * @return the field1 value
+     * @return the field1 value.
      */
     public Double field1() {
         return this.field1;
@@ -42,7 +42,7 @@ public class DoubleWrapper {
     /**
      * Set the field1 value.
      *
-     * @param field1 the field1 value to set
+     * @param field1 the field1 value to set.
      * @return the DoubleWrapper object itself.
      */
     public DoubleWrapper withField1(Double field1) {
@@ -57,7 +57,7 @@ public class DoubleWrapper {
      *
      * @return the
      * field56ZerosAfterTheDotAndNegativeZeroBeforeDotAndThisIsALongFieldNameOnPurpose
-     * value
+     * value.
      */
     public Double field56ZerosAfterTheDotAndNegativeZeroBeforeDotAndThisIsALongFieldNameOnPurpose() {
         return this.field56ZerosAfterTheDotAndNegativeZeroBeforeDotAndThisIsALongFieldNameOnPurpose;
@@ -72,7 +72,7 @@ public class DoubleWrapper {
      * field56ZerosAfterTheDotAndNegativeZeroBeforeDotAndThisIsALongFieldNameOnPurpose
      * the
      * field56ZerosAfterTheDotAndNegativeZeroBeforeDotAndThisIsALongFieldNameOnPurpose
-     * value to set
+     * value to set.
      * @return the DoubleWrapper object itself.
      */
     public DoubleWrapper withField56ZerosAfterTheDotAndNegativeZeroBeforeDotAndThisIsALongFieldNameOnPurpose(Double field56ZerosAfterTheDotAndNegativeZeroBeforeDotAndThisIsALongFieldNameOnPurpose) {

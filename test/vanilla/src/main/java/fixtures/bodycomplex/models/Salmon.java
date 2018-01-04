@@ -39,7 +39,7 @@ public class Salmon extends Fish {
     /**
      * Get the location value.
      *
-     * @return the location value
+     * @return the location value.
      */
     public String location() {
         return this.location;
@@ -48,7 +48,7 @@ public class Salmon extends Fish {
     /**
      * Set the location value.
      *
-     * @param location the location value to set
+     * @param location the location value to set.
      * @return the Salmon object itself.
      */
     public Salmon withLocation(String location) {
@@ -59,7 +59,7 @@ public class Salmon extends Fish {
     /**
      * Get the iswild value.
      *
-     * @return the iswild value
+     * @return the iswild value.
      */
     public Boolean iswild() {
         return this.iswild;
@@ -68,7 +68,7 @@ public class Salmon extends Fish {
     /**
      * Set the iswild value.
      *
-     * @param iswild the iswild value to set
+     * @param iswild the iswild value to set.
      * @return the Salmon object itself.
      */
     public Salmon withIswild(Boolean iswild) {

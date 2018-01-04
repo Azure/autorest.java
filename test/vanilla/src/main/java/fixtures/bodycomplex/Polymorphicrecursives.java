@@ -29,9 +29,9 @@ public interface Polymorphicrecursives {
     /**
      * Get complex types that are polymorphic and have recursive references.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @throws ErrorException thrown if the request is rejected by server
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the Fish object if successful.
      */
     Fish getValid();
@@ -40,26 +40,26 @@ public interface Polymorphicrecursives {
      * Get complex types that are polymorphic and have recursive references.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceFuture&lt;Fish&gt;} object
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link ServiceFuture&lt;Fish&gt;} object.
      */
     ServiceFuture<Fish> getValidAsync(final ServiceCallback<Fish> serviceCallback);
 
     /**
      * Get complex types that are polymorphic and have recursive references.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Maybe&lt;Fish&gt;} object if successful.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link Single&lt;RestResponse&lt;Void, Fish&gt;&gt;} object if successful.
      */
-    Maybe<Fish> getValidAsync();
+    Single<RestResponse<Void, Fish>> getValidWithRestResponseAsync();
 
     /**
      * Get complex types that are polymorphic and have recursive references.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single&lt;RestResponse&lt;Void, Fish&gt;&gt;} object if successful.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link Maybe&lt;Fish&gt;} object if successful.
      */
-    Single<RestResponse<Void, Fish>> getValidWithRestResponseAsync();
+    Maybe<Fish> getValidAsync();
 
     /**
      * Put complex types that are polymorphic and have recursive references.
@@ -116,10 +116,10 @@ public interface Polymorphicrecursives {
      *             "age": 105
      *         }
      *     ]
-     * }
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @throws ErrorException thrown if the request is rejected by server
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
+     * }.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     void putValid(Fish complexBody);
 
@@ -178,10 +178,10 @@ public interface Polymorphicrecursives {
      *             "age": 105
      *         }
      *     ]
-     * }
+     * }.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceFuture&lt;Void&gt;} object
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
     ServiceFuture<Void> putValidAsync(Fish complexBody, final ServiceCallback<Void> serviceCallback);
 
@@ -240,11 +240,11 @@ public interface Polymorphicrecursives {
      *             "age": 105
      *         }
      *     ]
-     * }
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Completable} object if successful.
+     * }.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
      */
-    Completable putValidAsync(Fish complexBody);
+    Single<RestResponse<Void, Void>> putValidWithRestResponseAsync(Fish complexBody);
 
     /**
      * Put complex types that are polymorphic and have recursive references.
@@ -301,9 +301,9 @@ public interface Polymorphicrecursives {
      *             "age": 105
      *         }
      *     ]
-     * }
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
+     * }.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link Completable} object if successful.
      */
-    Single<RestResponse<Void, Void>> putValidWithRestResponseAsync(Fish complexBody);
+    Completable putValidAsync(Fish complexBody);
 }

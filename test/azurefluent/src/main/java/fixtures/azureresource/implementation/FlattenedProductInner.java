@@ -40,7 +40,7 @@ public class FlattenedProductInner extends Resource {
     /**
      * Get the pname value.
      *
-     * @return the pname value
+     * @return the pname value.
      */
     public String pname() {
         return this.pname;
@@ -49,7 +49,7 @@ public class FlattenedProductInner extends Resource {
     /**
      * Set the pname value.
      *
-     * @param pname the pname value to set
+     * @param pname the pname value to set.
      * @return the FlattenedProductInner object itself.
      */
     public FlattenedProductInner withPname(String pname) {
@@ -60,7 +60,7 @@ public class FlattenedProductInner extends Resource {
     /**
      * Get the lsize value.
      *
-     * @return the lsize value
+     * @return the lsize value.
      */
     public Integer lsize() {
         return this.lsize;
@@ -69,7 +69,7 @@ public class FlattenedProductInner extends Resource {
     /**
      * Set the lsize value.
      *
-     * @param lsize the lsize value to set
+     * @param lsize the lsize value to set.
      * @return the FlattenedProductInner object itself.
      */
     public FlattenedProductInner withLsize(Integer lsize) {
@@ -80,7 +80,7 @@ public class FlattenedProductInner extends Resource {
     /**
      * Get the provisioningState value.
      *
-     * @return the provisioningState value
+     * @return the provisioningState value.
      */
     public String provisioningState() {
         return this.provisioningState;
@@ -89,7 +89,7 @@ public class FlattenedProductInner extends Resource {
     /**
      * Set the provisioningState value.
      *
-     * @param provisioningState the provisioningState value to set
+     * @param provisioningState the provisioningState value to set.
      * @return the FlattenedProductInner object itself.
      */
     public FlattenedProductInner withProvisioningState(String provisioningState) {

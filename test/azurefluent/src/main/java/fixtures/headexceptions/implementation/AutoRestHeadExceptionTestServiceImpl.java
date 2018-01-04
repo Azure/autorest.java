@@ -38,7 +38,7 @@ public class AutoRestHeadExceptionTestServiceImpl extends AzureServiceClient {
      * Sets Gets or sets the preferred language for the response.
      *
      * @param acceptLanguage the acceptLanguage value.
-     * @return the service client itself
+     * @return the service client itself.
      */
     public AutoRestHeadExceptionTestServiceImpl withAcceptLanguage(String acceptLanguage) {
         this.acceptLanguage = acceptLanguage;
@@ -63,7 +63,7 @@ public class AutoRestHeadExceptionTestServiceImpl extends AzureServiceClient {
      * Sets Gets or sets the retry timeout in seconds for Long Running Operations. Default value is 30.
      *
      * @param longRunningOperationRetryTimeout the longRunningOperationRetryTimeout value.
-     * @return the service client itself
+     * @return the service client itself.
      */
     public AutoRestHeadExceptionTestServiceImpl withLongRunningOperationRetryTimeout(int longRunningOperationRetryTimeout) {
         this.longRunningOperationRetryTimeout = longRunningOperationRetryTimeout;
@@ -88,7 +88,7 @@ public class AutoRestHeadExceptionTestServiceImpl extends AzureServiceClient {
      * Sets When set to true a unique x-ms-client-request-id value is generated and included in each request. Default is true.
      *
      * @param generateClientRequestId the generateClientRequestId value.
-     * @return the service client itself
+     * @return the service client itself.
      */
     public AutoRestHeadExceptionTestServiceImpl withGenerateClientRequestId(boolean generateClientRequestId) {
         this.generateClientRequestId = generateClientRequestId;
@@ -112,7 +112,7 @@ public class AutoRestHeadExceptionTestServiceImpl extends AzureServiceClient {
     /**
      * Initializes an instance of AutoRestHeadExceptionTestService client.
      *
-     * @param credentials the management credentials for Azure
+     * @param credentials the management credentials for Azure.
      */
     public AutoRestHeadExceptionTestServiceImpl(ServiceClientCredentials credentials) {
         this(AzureProxy.createDefaultPipeline(AutoRestHeadExceptionTestServiceImpl.class, credentials));
@@ -121,7 +121,7 @@ public class AutoRestHeadExceptionTestServiceImpl extends AzureServiceClient {
     /**
      * Initializes an instance of AutoRestHeadExceptionTestService client.
      *
-     * @param credentials the management credentials for Azure
+     * @param credentials the management credentials for Azure.
      * @param azureEnvironment The environment that requests will target.
      */
     public AutoRestHeadExceptionTestServiceImpl(ServiceClientCredentials credentials, AzureEnvironment azureEnvironment) {

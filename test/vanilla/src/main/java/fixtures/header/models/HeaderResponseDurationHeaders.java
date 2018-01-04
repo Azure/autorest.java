@@ -26,7 +26,7 @@ public class HeaderResponseDurationHeaders {
     /**
      * Get the value value.
      *
-     * @return the value value
+     * @return the value value.
      */
     public Period value() {
         return this.value;
@@ -35,7 +35,7 @@ public class HeaderResponseDurationHeaders {
     /**
      * Set the value value.
      *
-     * @param value the value value to set
+     * @param value the value value to set.
      * @return the HeaderResponseDurationHeaders object itself.
      */
     public HeaderResponseDurationHeaders withValue(Period value) {

@@ -25,7 +25,7 @@ public interface AutoRestRequiredOptionalTestService {
      * Sets number of items to skip.
      *
      * @param requiredGlobalPath the requiredGlobalPath value.
-     * @return the service client itself
+     * @return the service client itself.
      */
     AutoRestRequiredOptionalTestService withRequiredGlobalPath(String requiredGlobalPath);
 
@@ -40,7 +40,7 @@ public interface AutoRestRequiredOptionalTestService {
      * Sets number of items to skip.
      *
      * @param requiredGlobalQuery the requiredGlobalQuery value.
-     * @return the service client itself
+     * @return the service client itself.
      */
     AutoRestRequiredOptionalTestService withRequiredGlobalQuery(String requiredGlobalQuery);
 
@@ -55,18 +55,20 @@ public interface AutoRestRequiredOptionalTestService {
      * Sets number of items to skip.
      *
      * @param optionalGlobalQuery the optionalGlobalQuery value.
-     * @return the service client itself
+     * @return the service client itself.
      */
     AutoRestRequiredOptionalTestService withOptionalGlobalQuery(int optionalGlobalQuery);
 
     /**
      * Gets the Implicits object to access its operations.
+     *
      * @return the Implicits object.
      */
     Implicits implicits();
 
     /**
      * Gets the Explicits object to access its operations.
+     *
      * @return the Explicits object.
      */
     Explicits explicits();

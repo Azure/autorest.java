@@ -16,6 +16,7 @@ package fixtures.bodyinteger;
 public interface AutoRestIntegerTestService {
     /**
      * Gets the Ints object to access its operations.
+     *
      * @return the Ints object.
      */
     Ints ints();

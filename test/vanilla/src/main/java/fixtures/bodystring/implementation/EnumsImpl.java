@@ -100,9 +100,9 @@ public class EnumsImpl implements Enums {
     /**
      * Get enum value 'red color' from enumeration of 'red color', 'green-color', 'blue_color'.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @throws ErrorException thrown if the request is rejected by server
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the Colors object if successful.
      */
     public Colors getNotExpandable() {
@@ -113,8 +113,8 @@ public class EnumsImpl implements Enums {
      * Get enum value 'red color' from enumeration of 'red color', 'green-color', 'blue_color'.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceFuture} object
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link ServiceFuture&lt;Colors&gt;} object.
      */
     public ServiceFuture<Colors> getNotExpandableAsync(final ServiceCallback<Colors> serviceCallback) {
         return ServiceFuture.fromBody(getNotExpandableAsync(), serviceCallback);
@@ -123,7 +123,7 @@ public class EnumsImpl implements Enums {
     /**
      * Get enum value 'red color' from enumeration of 'red color', 'green-color', 'blue_color'.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, Colors&gt;&gt;} object if successful.
      */
     public Single<RestResponse<Void, Colors>> getNotExpandableWithRestResponseAsync() {
@@ -133,8 +133,8 @@ public class EnumsImpl implements Enums {
     /**
      * Get enum value 'red color' from enumeration of 'red color', 'green-color', 'blue_color'.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return a {@link Single} emitting the RestResponse<Void, Colors> object
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link Maybe&lt;Colors&gt;} object if successful.
      */
     public Maybe<Colors> getNotExpandableAsync() {
         return getNotExpandableWithRestResponseAsync()
@@ -152,10 +152,10 @@ public class EnumsImpl implements Enums {
     /**
      * Sends value 'red color' from enumeration of 'red color', 'green-color', 'blue_color'.
      *
-     * @param stringBody Possible values include: 'red color', 'green-color', 'blue_color'
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @throws ErrorException thrown if the request is rejected by server
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
+     * @param stringBody Possible values include: 'red color', 'green-color', 'blue_color'.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     public void putNotExpandable(Colors stringBody) {
         putNotExpandableAsync(stringBody).blockingAwait();
@@ -164,10 +164,10 @@ public class EnumsImpl implements Enums {
     /**
      * Sends value 'red color' from enumeration of 'red color', 'green-color', 'blue_color'.
      *
-     * @param stringBody Possible values include: 'red color', 'green-color', 'blue_color'
+     * @param stringBody Possible values include: 'red color', 'green-color', 'blue_color'.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceFuture} object
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
     public ServiceFuture<Void> putNotExpandableAsync(Colors stringBody, final ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(putNotExpandableAsync(stringBody), serviceCallback);
@@ -176,8 +176,8 @@ public class EnumsImpl implements Enums {
     /**
      * Sends value 'red color' from enumeration of 'red color', 'green-color', 'blue_color'.
      *
-     * @param stringBody Possible values include: 'red color', 'green-color', 'blue_color'
-     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @param stringBody Possible values include: 'red color', 'green-color', 'blue_color'.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
      */
     public Single<RestResponse<Void, Void>> putNotExpandableWithRestResponseAsync(Colors stringBody) {
@@ -190,9 +190,9 @@ public class EnumsImpl implements Enums {
     /**
      * Sends value 'red color' from enumeration of 'red color', 'green-color', 'blue_color'.
      *
-     * @param stringBody Possible values include: 'red color', 'green-color', 'blue_color'
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return a {@link Single} emitting the RestResponse<Void, Void> object
+     * @param stringBody Possible values include: 'red color', 'green-color', 'blue_color'.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link Completable} object if successful.
      */
     public Completable putNotExpandableAsync(Colors stringBody) {
         return putNotExpandableWithRestResponseAsync(stringBody)
@@ -202,9 +202,9 @@ public class EnumsImpl implements Enums {
     /**
      * Get enum value 'red color' from enumeration of 'red color', 'green-color', 'blue_color'.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @throws ErrorException thrown if the request is rejected by server
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the Colors object if successful.
      */
     public Colors getReferenced() {
@@ -215,8 +215,8 @@ public class EnumsImpl implements Enums {
      * Get enum value 'red color' from enumeration of 'red color', 'green-color', 'blue_color'.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceFuture} object
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link ServiceFuture&lt;Colors&gt;} object.
      */
     public ServiceFuture<Colors> getReferencedAsync(final ServiceCallback<Colors> serviceCallback) {
         return ServiceFuture.fromBody(getReferencedAsync(), serviceCallback);
@@ -225,7 +225,7 @@ public class EnumsImpl implements Enums {
     /**
      * Get enum value 'red color' from enumeration of 'red color', 'green-color', 'blue_color'.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, Colors&gt;&gt;} object if successful.
      */
     public Single<RestResponse<Void, Colors>> getReferencedWithRestResponseAsync() {
@@ -235,8 +235,8 @@ public class EnumsImpl implements Enums {
     /**
      * Get enum value 'red color' from enumeration of 'red color', 'green-color', 'blue_color'.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return a {@link Single} emitting the RestResponse<Void, Colors> object
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link Maybe&lt;Colors&gt;} object if successful.
      */
     public Maybe<Colors> getReferencedAsync() {
         return getReferencedWithRestResponseAsync()
@@ -254,10 +254,10 @@ public class EnumsImpl implements Enums {
     /**
      * Sends value 'red color' from enumeration of 'red color', 'green-color', 'blue_color'.
      *
-     * @param enumStringBody Possible values include: 'red color', 'green-color', 'blue_color'
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @throws ErrorException thrown if the request is rejected by server
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
+     * @param enumStringBody Possible values include: 'red color', 'green-color', 'blue_color'.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     public void putReferenced(Colors enumStringBody) {
         putReferencedAsync(enumStringBody).blockingAwait();
@@ -266,10 +266,10 @@ public class EnumsImpl implements Enums {
     /**
      * Sends value 'red color' from enumeration of 'red color', 'green-color', 'blue_color'.
      *
-     * @param enumStringBody Possible values include: 'red color', 'green-color', 'blue_color'
+     * @param enumStringBody Possible values include: 'red color', 'green-color', 'blue_color'.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceFuture} object
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
     public ServiceFuture<Void> putReferencedAsync(Colors enumStringBody, final ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(putReferencedAsync(enumStringBody), serviceCallback);
@@ -278,8 +278,8 @@ public class EnumsImpl implements Enums {
     /**
      * Sends value 'red color' from enumeration of 'red color', 'green-color', 'blue_color'.
      *
-     * @param enumStringBody Possible values include: 'red color', 'green-color', 'blue_color'
-     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @param enumStringBody Possible values include: 'red color', 'green-color', 'blue_color'.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
      */
     public Single<RestResponse<Void, Void>> putReferencedWithRestResponseAsync(Colors enumStringBody) {
@@ -292,9 +292,9 @@ public class EnumsImpl implements Enums {
     /**
      * Sends value 'red color' from enumeration of 'red color', 'green-color', 'blue_color'.
      *
-     * @param enumStringBody Possible values include: 'red color', 'green-color', 'blue_color'
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return a {@link Single} emitting the RestResponse<Void, Void> object
+     * @param enumStringBody Possible values include: 'red color', 'green-color', 'blue_color'.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link Completable} object if successful.
      */
     public Completable putReferencedAsync(Colors enumStringBody) {
         return putReferencedWithRestResponseAsync(enumStringBody)
@@ -304,9 +304,9 @@ public class EnumsImpl implements Enums {
     /**
      * Get value 'green-color' from the constant.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @throws ErrorException thrown if the request is rejected by server
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the RefColorConstant object if successful.
      */
     public RefColorConstant getReferencedConstant() {
@@ -317,8 +317,8 @@ public class EnumsImpl implements Enums {
      * Get value 'green-color' from the constant.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceFuture} object
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link ServiceFuture&lt;RefColorConstant&gt;} object.
      */
     public ServiceFuture<RefColorConstant> getReferencedConstantAsync(final ServiceCallback<RefColorConstant> serviceCallback) {
         return ServiceFuture.fromBody(getReferencedConstantAsync(), serviceCallback);
@@ -327,7 +327,7 @@ public class EnumsImpl implements Enums {
     /**
      * Get value 'green-color' from the constant.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, RefColorConstant&gt;&gt;} object if successful.
      */
     public Single<RestResponse<Void, RefColorConstant>> getReferencedConstantWithRestResponseAsync() {
@@ -337,8 +337,8 @@ public class EnumsImpl implements Enums {
     /**
      * Get value 'green-color' from the constant.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return a {@link Single} emitting the RestResponse<Void, RefColorConstant> object
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link Maybe&lt;RefColorConstant&gt;} object if successful.
      */
     public Maybe<RefColorConstant> getReferencedConstantAsync() {
         return getReferencedConstantWithRestResponseAsync()
@@ -356,10 +356,10 @@ public class EnumsImpl implements Enums {
     /**
      * Sends value 'green-color' from a constant.
      *
-     * @param enumStringBody the RefColorConstant value
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @throws ErrorException thrown if the request is rejected by server
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
+     * @param enumStringBody the RefColorConstant value.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     public void putReferencedConstant(RefColorConstant enumStringBody) {
         putReferencedConstantAsync(enumStringBody).blockingAwait();
@@ -368,10 +368,10 @@ public class EnumsImpl implements Enums {
     /**
      * Sends value 'green-color' from a constant.
      *
-     * @param enumStringBody the RefColorConstant value
+     * @param enumStringBody the RefColorConstant value.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceFuture} object
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
     public ServiceFuture<Void> putReferencedConstantAsync(RefColorConstant enumStringBody, final ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(putReferencedConstantAsync(enumStringBody), serviceCallback);
@@ -380,8 +380,8 @@ public class EnumsImpl implements Enums {
     /**
      * Sends value 'green-color' from a constant.
      *
-     * @param enumStringBody the RefColorConstant value
-     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @param enumStringBody the RefColorConstant value.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
      */
     public Single<RestResponse<Void, Void>> putReferencedConstantWithRestResponseAsync(RefColorConstant enumStringBody) {
@@ -395,9 +395,9 @@ public class EnumsImpl implements Enums {
     /**
      * Sends value 'green-color' from a constant.
      *
-     * @param enumStringBody the RefColorConstant value
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return a {@link Single} emitting the RestResponse<Void, Void> object
+     * @param enumStringBody the RefColorConstant value.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link Completable} object if successful.
      */
     public Completable putReferencedConstantAsync(RefColorConstant enumStringBody) {
         return putReferencedConstantWithRestResponseAsync(enumStringBody)

@@ -40,7 +40,7 @@ public class LROSADsDeleteAsyncRelativeRetryInvalidJsonPollingHeadersInner {
     /**
      * Get the azureAsyncOperation value.
      *
-     * @return the azureAsyncOperation value
+     * @return the azureAsyncOperation value.
      */
     public String azureAsyncOperation() {
         return this.azureAsyncOperation;
@@ -49,7 +49,7 @@ public class LROSADsDeleteAsyncRelativeRetryInvalidJsonPollingHeadersInner {
     /**
      * Set the azureAsyncOperation value.
      *
-     * @param azureAsyncOperation the azureAsyncOperation value to set
+     * @param azureAsyncOperation the azureAsyncOperation value to set.
      * @return the
      * LROSADsDeleteAsyncRelativeRetryInvalidJsonPollingHeadersInner object
      * itself.
@@ -62,7 +62,7 @@ public class LROSADsDeleteAsyncRelativeRetryInvalidJsonPollingHeadersInner {
     /**
      * Get the location value.
      *
-     * @return the location value
+     * @return the location value.
      */
     public String location() {
         return this.location;
@@ -71,7 +71,7 @@ public class LROSADsDeleteAsyncRelativeRetryInvalidJsonPollingHeadersInner {
     /**
      * Set the location value.
      *
-     * @param location the location value to set
+     * @param location the location value to set.
      * @return the
      * LROSADsDeleteAsyncRelativeRetryInvalidJsonPollingHeadersInner object
      * itself.
@@ -84,7 +84,7 @@ public class LROSADsDeleteAsyncRelativeRetryInvalidJsonPollingHeadersInner {
     /**
      * Get the retryAfter value.
      *
-     * @return the retryAfter value
+     * @return the retryAfter value.
      */
     public Integer retryAfter() {
         return this.retryAfter;
@@ -93,7 +93,7 @@ public class LROSADsDeleteAsyncRelativeRetryInvalidJsonPollingHeadersInner {
     /**
      * Set the retryAfter value.
      *
-     * @param retryAfter the retryAfter value to set
+     * @param retryAfter the retryAfter value to set.
      * @return the
      * LROSADsDeleteAsyncRelativeRetryInvalidJsonPollingHeadersInner object
      * itself.

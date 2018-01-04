@@ -1,8 +1,8 @@
 ﻿using System;
 
-namespace AutoRest.Java.DanModel
+namespace AutoRest.Java
 {
-    public class JavaClass : JavaAbstractType
+    public class JavaClass : JavaType
     {
         private readonly JavaFileContents contents;
         private bool addNewLine;

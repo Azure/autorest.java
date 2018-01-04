@@ -29,7 +29,7 @@ public class Sawshark extends Shark {
     /**
      * Get the picture value.
      *
-     * @return the picture value
+     * @return the picture value.
      */
     public byte[] picture() {
         return this.picture;
@@ -38,7 +38,7 @@ public class Sawshark extends Shark {
     /**
      * Set the picture value.
      *
-     * @param picture the picture value to set
+     * @param picture the picture value to set.
      * @return the Sawshark object itself.
      */
     public Sawshark withPicture(byte[] picture) {

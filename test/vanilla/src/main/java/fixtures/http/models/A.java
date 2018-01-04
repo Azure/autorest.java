@@ -25,7 +25,7 @@ public class A {
     /**
      * Get the statusCode value.
      *
-     * @return the statusCode value
+     * @return the statusCode value.
      */
     public String statusCode() {
         return this.statusCode;
@@ -34,7 +34,7 @@ public class A {
     /**
      * Set the statusCode value.
      *
-     * @param statusCode the statusCode value to set
+     * @param statusCode the statusCode value to set.
      * @return the A object itself.
      */
     public A withStatusCode(String statusCode) {

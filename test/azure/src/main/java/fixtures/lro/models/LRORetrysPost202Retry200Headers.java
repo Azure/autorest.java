@@ -33,7 +33,7 @@ public class LRORetrysPost202Retry200Headers {
     /**
      * Get the location value.
      *
-     * @return the location value
+     * @return the location value.
      */
     public String location() {
         return this.location;
@@ -42,7 +42,7 @@ public class LRORetrysPost202Retry200Headers {
     /**
      * Set the location value.
      *
-     * @param location the location value to set
+     * @param location the location value to set.
      * @return the LRORetrysPost202Retry200Headers object itself.
      */
     public LRORetrysPost202Retry200Headers withLocation(String location) {
@@ -53,7 +53,7 @@ public class LRORetrysPost202Retry200Headers {
     /**
      * Get the retryAfter value.
      *
-     * @return the retryAfter value
+     * @return the retryAfter value.
      */
     public Integer retryAfter() {
         return this.retryAfter;
@@ -62,7 +62,7 @@ public class LRORetrysPost202Retry200Headers {
     /**
      * Set the retryAfter value.
      *
-     * @param retryAfter the retryAfter value to set
+     * @param retryAfter the retryAfter value to set.
      * @return the LRORetrysPost202Retry200Headers object itself.
      */
     public LRORetrysPost202Retry200Headers withRetryAfter(Integer retryAfter) {

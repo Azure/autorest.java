@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace AutoRest.Java.DanModel
+namespace AutoRest.Java
 {
     public class JavaBlock
     {
