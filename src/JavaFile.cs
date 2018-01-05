@@ -24,43 +24,37 @@ namespace AutoRest.Java
 
         public JavaFileContents Contents { get; }
 
-        public JavaFile Text(string text)
+        public void Text(string text)
         {
             Contents.Text(text);
-            return this;
         }
 
-        public JavaFile Line(string text)
+        public void Line(string text)
         {
             Contents.Line(text);
-            return this;
         }
 
-        public JavaFile Line()
+        public void Line()
         {
             Contents.Line();
-            return this;
         }
 
-        public JavaFile Block(string text, Action<JavaBlock> bodyAction)
+        public void Block(string text, Action<JavaBlock> bodyAction)
         {
             Contents.Block(text, bodyAction);
-            return this;
         }
 
-        public JavaFile PublicClass(string classDeclaration, Action<JavaClass> classAction)
+        public void PublicClass(string classDeclaration, Action<JavaClass> classAction)
         {
             Contents.PublicClass(classDeclaration, classAction);
-            return this;
         }
 
-        public JavaFile PublicFinalClass(string classDeclaration, Action<JavaClass> classAction)
+        public void PublicFinalClass(string classDeclaration, Action<JavaClass> classAction)
         {
             Contents.PublicFinalClass(classDeclaration, classAction);
-            return this;
         }
 
-        public JavaFile Package(string package)
+        public void Package(string package)
         {
             this.package = package;
             if (string.IsNullOrEmpty(package))
@@ -76,16 +70,14 @@ namespace AutoRest.Java
                 }
             }
             Contents.Package(package);
-            return this;
         }
 
-        public JavaFile Import(params string[] imports)
+        public void Import(params string[] imports)
         {
             Contents.Import(imports);
-            return this;
         }
 
-        public JavaFile Import(IEnumerable<string> imports)
+        public void Import(IEnumerable<string> imports)
         {
             if (!string.IsNullOrEmpty(package))
             {
@@ -94,49 +86,31 @@ namespace AutoRest.Java
                 imports = imports.Where(import => !import.StartsWith(package) || import.IndexOf('.', packageWithPeriodLength) != -1);
             }
             Contents.Import(imports);
-            return this;
         }
 
-        public JavaFile SingleLineComment(string text)
+        public void JavadocComment(Action<JavaJavadocComment> commentAction)
         {
-            Contents.SingleLineComment(text);
-            return this;
+            Contents.JavadocComment(commentAction);
         }
 
-        public JavaFile MultipleLineComment(Action<JavaMultipleLineComment> commentAction)
+        public void JavadocComment(int wordWrapWidth, Action<JavaJavadocComment> commentAction)
         {
-            Contents.MultipleLineComment(commentAction);
-            return this;
+            Contents.JavadocComment(wordWrapWidth, commentAction);
         }
 
-        public JavaFile WordWrappedMultipleLineSlashStarComment(int wordWrapWidth, Action<JavaMultipleLineComment> commentAction)
+        public void LineComment(int wordWrapWidth, Action<JavaLineComment> commentAction)
         {
-            Contents.WordWrappedMultipleLineSlashStarComment(wordWrapWidth, commentAction);
-            return this;
+            Contents.LineComment(wordWrapWidth, commentAction);
         }
 
-        public JavaFile WordWrappedMultipleLineSlashSlashComment(int wordWrapWidth, Action<JavaMultipleLineComment> commentAction)
-        {
-            Contents.WordWrappedMultipleLineSlashSlashComment(wordWrapWidth, commentAction);
-            return this;
-        }
-
-        public JavaFile WordWrappedMultipleLineComment(int wordWrapWidth, Action<JavaMultipleLineComment> commentAction)
-        {
-            Contents.WordWrappedMultipleLineComment(wordWrapWidth, commentAction);
-            return this;
-        }
-
-        public JavaFile Annotation(params string[] annotations)
+        public void Annotation(params string[] annotations)
         {
             Contents.Annotation(annotations);
-            return this;
         }
 
-        public JavaFile PublicEnum(string enumName, Action<JavaBlock> enumAction)
+        public void PublicEnum(string enumName, Action<JavaBlock> enumAction)
         {
             Contents.PublicEnum(enumName, enumAction);
-            return this;
         }
 
         public void PublicInterface(string interfaceName, Action<JavaInterface> interfaceAction)

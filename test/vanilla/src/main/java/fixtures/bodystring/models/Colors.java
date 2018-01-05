@@ -17,16 +17,24 @@ import com.fasterxml.jackson.annotation.JsonValue;
  * Defines values for Colors.
  */
 public enum Colors {
-    /** Enum value red color. */
+    /**
+     * Enum value red color.
+     */
     RED_COLOR("red color"),
 
-    /** Enum value green-color. */
+    /**
+     * Enum value green-color.
+     */
     GREEN_COLOR("green-color"),
 
-    /** Enum value blue_color. */
+    /**
+     * Enum value blue_color.
+     */
     BLUE_COLOR("blue_color");
 
-    /** The actual serialized value for a Colors instance. */
+    /**
+     * The actual serialized value for a Colors instance.
+     */
     private String value;
 
     Colors(String value) {

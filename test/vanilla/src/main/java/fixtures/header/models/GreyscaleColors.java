@@ -17,16 +17,24 @@ import com.fasterxml.jackson.annotation.JsonValue;
  * Defines values for GreyscaleColors.
  */
 public enum GreyscaleColors {
-    /** Enum value White. */
+    /**
+     * Enum value White.
+     */
     WHITE("White"),
 
-    /** Enum value black. */
+    /**
+     * Enum value black.
+     */
     BLACK("black"),
 
-    /** Enum value GREY. */
+    /**
+     * Enum value GREY.
+     */
     GREY("GREY");
 
-    /** The actual serialized value for a GreyscaleColors instance. */
+    /**
+     * The actual serialized value for a GreyscaleColors instance.
+     */
     private String value;
 
     GreyscaleColors(String value) {

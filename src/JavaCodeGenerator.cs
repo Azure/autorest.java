@@ -509,14 +509,14 @@ namespace AutoRest.Java
                 azureTokenCredentialsImport,
                 "com.microsoft.azure.v2.serializer.AzureJacksonAdapter");
 
-            javaFile.MultipleLineComment(comment =>
+            javaFile.JavadocComment(comment =>
             {
                 comment.Description($"Entry point to Azure {serviceName} resource management.");
             });
             javaFile.Annotation($"Beta(SinceVersion.{betaSinceVersion})");
             javaFile.PublicFinalClass($"{className} extends Manager<{className}, {codeModel.Name + "Impl"}>", classBlock =>
             {
-                classBlock.MultipleLineComment(comment =>
+                classBlock.JavadocComment(comment =>
                 {
                     comment.Description($"Get a Configurable instance that can be used to create {className} with optional configuration.");
                     comment.Return("the instance allowing configurations");
@@ -526,7 +526,7 @@ namespace AutoRest.Java
                     function.Return($"new {className}.ConfigurableImpl()");
                 });
 
-                classBlock.MultipleLineComment(comment =>
+                classBlock.JavadocComment(comment =>
                 {
                     comment.Description($"Creates an instance of {className} that exposes {serviceName} resource management API entry points.");
                     comment.Param(credentialsVariableName, credentialsDescription);
@@ -539,7 +539,7 @@ namespace AutoRest.Java
                     function.Return($"new {className}({httpPipelineVariableName}, subscriptionId)");
                 });
 
-                classBlock.MultipleLineComment(comment =>
+                classBlock.JavadocComment(comment =>
                 {
                     comment.Description($"Creates an instance of {className} that exposes {serviceName} resource management API entry points.");
                     comment.Param(httpPipelineVariableName, httpPipelineDescription);
@@ -551,13 +551,13 @@ namespace AutoRest.Java
                     function.Return($"new {className}({httpPipelineVariableName}, subscriptionId)");
                 });
 
-                classBlock.MultipleLineComment(comment =>
+                classBlock.JavadocComment(comment =>
                 {
                     comment.Description("The interface allowing configurations to be set.");
                 });
                 classBlock.PublicInterface("Configurable extends AzureConfigurable<Configurable>", interfaceBlock =>
                 {
-                    interfaceBlock.MultipleLineComment(comment =>
+                    interfaceBlock.JavadocComment(comment =>
                     {
                         comment.Description($"Creates an instance of {className} that exposes {serviceName} management API entry points.");
                         comment.Param(credentialsVariableName, credentialsDescription);
@@ -567,7 +567,7 @@ namespace AutoRest.Java
                     interfaceBlock.PublicMethod($"{className} authenticate({azureTokenCredentialsType} {credentialsVariableName}, String subscriptionId)");
                 });
 
-                classBlock.MultipleLineComment(comment =>
+                classBlock.JavadocComment(comment =>
                 {
                     comment.Description("The implementation for Configurable interface.");
                 });
@@ -609,28 +609,28 @@ namespace AutoRest.Java
                             "com.microsoft.azure.v2.Page",
                             "java.util.List");
 
-            javaFile.WordWrappedMultipleLineComment(maximumCommentWidth, comment =>
+            javaFile.JavadocComment(maximumCommentWidth, comment =>
             {
                 comment.Description("An instance of this class defines a page of Azure resources and a link to get the next page of resources, if any.");
                 comment.Param("<T>", "type of Azure resource");
             });
             javaFile.PublicClass($"{className}<T> implements Page<T>", classBlock =>
             {
-                classBlock.MultipleLineComment(comment =>
+                classBlock.JavadocComment(comment =>
                 {
                     comment.Description("The link to the next page.");
                 });
                 classBlock.Annotation($"JsonProperty(\"{nextLinkName}\")");
                 classBlock.PrivateMemberVariable("String", "nextPageLink");
 
-                classBlock.MultipleLineComment(comment =>
+                classBlock.JavadocComment(comment =>
                 {
                     comment.Description("The list of items.");
                 });
                 classBlock.Annotation($"JsonProperty(\"{itemName}\")");
                 classBlock.PrivateMemberVariable("List<T>", "items");
 
-                classBlock.MultipleLineComment(comment =>
+                classBlock.JavadocComment(comment =>
                 {
                     comment.Description("Gets the link to the next page.");
                     comment.Return("the link to the next page.");
@@ -641,7 +641,7 @@ namespace AutoRest.Java
                     function.Return("this.nextPageLink");
                 });
 
-                classBlock.MultipleLineComment(comment =>
+                classBlock.JavadocComment(comment =>
                 {
                     comment.Description("Gets the list of items.");
                     comment.Return("the list of items in {@link List}.");
@@ -652,7 +652,7 @@ namespace AutoRest.Java
                     function.Return("items");
                 });
 
-                classBlock.MultipleLineComment(comment =>
+                classBlock.JavadocComment(comment =>
                 {
                     comment.Description("Sets the link to the next page.");
                     comment.Param("nextPageLink", "the link to the next page.");
@@ -664,7 +664,7 @@ namespace AutoRest.Java
                     function.Return("this");
                 });
 
-                classBlock.MultipleLineComment(comment =>
+                classBlock.JavadocComment(comment =>
                 {
                     comment.Description("Sets the list of items.");
                     comment.Param("items", "the list of items in {@link List}.");
@@ -731,7 +731,7 @@ namespace AutoRest.Java
                     constructor.Line($"this.{xmlNameCamelCase} = {xmlNameCamelCase};");
                 });
 
-                classBlock.MultipleLineComment(comment =>
+                classBlock.JavadocComment(comment =>
                 {
                     comment.Description($"Get the {xmlName} value.");
                     comment.Return($"the {xmlName} value");
@@ -797,7 +797,7 @@ namespace AutoRest.Java
             }
             javaFile.Import(imports);
 
-            javaFile.MultipleLineComment(comment =>
+            javaFile.JavadocComment(comment =>
             {
                 string serviceClientTypeName = isFluent ? serviceClientClassName : GetServiceClientInterfaceName(codeModel);
                 comment.Description($"Initializes a new instance of the {serviceClientTypeName} type.");
@@ -807,7 +807,7 @@ namespace AutoRest.Java
                 // Add proxy service member variable
                 if (restAPIMethods.Any())
                 {
-                    classBlock.MultipleLineComment($"The proxy service used to perform REST calls.");
+                    classBlock.JavadocComment($"The proxy service used to perform REST calls.");
                     classBlock.PrivateMemberVariable(GetRestAPIInterfaceName(codeModel), "service");
                 }
 
@@ -820,13 +820,13 @@ namespace AutoRest.Java
                     string propertyName = PropertyName(clientProperty);
                     string propertyNameCamelCase = propertyName.ToCamelCase();
 
-                    classBlock.MultipleLineComment(comment =>
+                    classBlock.JavadocComment(comment =>
                     {
                         comment.Description(propertyDocumentation);
                     });
                     classBlock.PrivateMemberVariable($"{propertyType} {propertyNameCamelCase}");
 
-                    classBlock.MultipleLineComment(comment =>
+                    classBlock.JavadocComment(comment =>
                     {
                         comment.Description($"Gets {propertyDocumentation}");
                         comment.Return($"the {propertyNameCamelCase} value.");
@@ -838,7 +838,7 @@ namespace AutoRest.Java
 
                     if (!clientProperty.IsReadOnly)
                     {
-                        classBlock.MultipleLineComment(comment =>
+                        classBlock.JavadocComment(comment =>
                         {
                             comment.Description($"Sets {propertyDocumentation}");
                             comment.Param(propertyNameCamelCase, $"the {propertyNameCamelCase} value.");
@@ -858,13 +858,13 @@ namespace AutoRest.Java
                     string methodGroupDeclarationType = IsFluent(settings) ? GetMethodGroupClientClassName(methodGroup, settings) : GetMethodGroupClientInterfaceName(methodGroup);
                     string methodGroupName = GetMethodGroupName(methodGroup);
 
-                    classBlock.MultipleLineComment(comment =>
+                    classBlock.JavadocComment(comment =>
                     {
                         comment.Description($"The {methodGroupDeclarationType} object to access its operations.");
                     });
                     classBlock.PrivateMemberVariable(methodGroupDeclarationType, methodGroupName);
 
-                    classBlock.MultipleLineComment(comment =>
+                    classBlock.JavadocComment(comment =>
                     {
                         comment.Description($"Gets the {methodGroupDeclarationType} object to access its operations.");
                         comment.Return($"the {methodGroupDeclarationType} object.");
@@ -883,7 +883,7 @@ namespace AutoRest.Java
                     if (HasServiceClientCredentials(codeModel))
                     {
                         string createDefaultPipelineExpression = CreateDefaultPipelineExpression(settings, serviceClientClassName + ".class", credentialsVariableName);
-                        classBlock.MultipleLineComment(comment =>
+                        classBlock.JavadocComment(comment =>
                         {
                             comment.Description(constructorDescription);
                             comment.Param(credentialsVariableName, credentialsDescription);
@@ -893,7 +893,7 @@ namespace AutoRest.Java
                             constructor.Line($"this({createDefaultPipelineExpression});");
                         });
 
-                        classBlock.MultipleLineComment(comment =>
+                        classBlock.JavadocComment(comment =>
                         {
                             comment.Description(constructorDescription);
                             comment.Param(credentialsVariableName, credentialsDescription);
@@ -907,7 +907,7 @@ namespace AutoRest.Java
                     else
                     {
                         string createDefaultPipelineExpression = CreateDefaultPipelineExpression(settings, serviceClientClassName);
-                        classBlock.MultipleLineComment(comment =>
+                        classBlock.JavadocComment(comment =>
                         {
                             comment.Description(constructorDescription);
                         });
@@ -916,7 +916,7 @@ namespace AutoRest.Java
                             constructor.Line($"this({createDefaultPipelineExpression});");
                         });
 
-                        classBlock.MultipleLineComment(comment =>
+                        classBlock.JavadocComment(comment =>
                         {
                             comment.Description(constructorDescription);
                             comment.Param(azureEnvironmentVariableName, azureEnvironmentDescription);
@@ -927,7 +927,7 @@ namespace AutoRest.Java
                         });
                     }
 
-                    classBlock.MultipleLineComment(comment =>
+                    classBlock.JavadocComment(comment =>
                     {
                         comment.Description(constructorDescription);
                         comment.Param(httpPipelineVariableName, httpPipelineDescription);
@@ -937,7 +937,7 @@ namespace AutoRest.Java
                         constructor.Line($"this({httpPipelineVariableName}, null);");
                     });
 
-                    classBlock.MultipleLineComment(comment =>
+                    classBlock.JavadocComment(comment =>
                     {
                         comment.Description(constructorDescription);
                         comment.Param(httpPipelineVariableName, httpPipelineDescription);
@@ -950,7 +950,7 @@ namespace AutoRest.Java
                 }
                 else
                 {
-                    classBlock.MultipleLineComment(comment =>
+                    classBlock.JavadocComment(comment =>
                     {
                         comment.Description(constructorDescription);
                     });
@@ -959,7 +959,7 @@ namespace AutoRest.Java
                         constructor.Line($"this({CreateDefaultPipelineExpression(settings)});");
                     });
 
-                    classBlock.MultipleLineComment(comment =>
+                    classBlock.JavadocComment(comment =>
                     {
                         comment.Description(constructorDescription);
                         comment.Param(httpPipelineVariableName, httpPipelineDescription);
@@ -991,7 +991,7 @@ namespace AutoRest.Java
             }
             javaFile.Import(imports);
 
-            javaFile.MultipleLineComment(comment =>
+            javaFile.JavadocComment(comment =>
             {
                 comment.Description($"The interface for {interfaceName} class.");
             });
@@ -1002,7 +1002,7 @@ namespace AutoRest.Java
                 foreach (MethodGroup methodGroup in GetMethodGroups(codeModel))
                 {
                     string methodGroupClientInterfaceName = GetMethodGroupClientInterfaceName(methodGroup);
-                    interfaceBlock.MultipleLineComment(comment =>
+                    interfaceBlock.JavadocComment(comment =>
                     {
                         comment.Description($"Gets the {methodGroupClientInterfaceName} object to access its operations.");
                         comment.Return($"the {methodGroupClientInterfaceName} object.");
@@ -1044,7 +1044,7 @@ namespace AutoRest.Java
                 parentDeclaration = " implements " + MethodGroupTypeString(methodGroup, settings);
             }
 
-            javaFile.WordWrappedMultipleLineComment(maximumCommentWidth, comment =>
+            javaFile.JavadocComment(maximumCommentWidth, comment =>
             {
                 comment.Description($"An instance of this class provides access to all the operations defined in {methodGroupClientInterfaceName}.");
             });
@@ -1053,13 +1053,13 @@ namespace AutoRest.Java
                 string restAPIInterfaceName = GetRestAPIInterfaceName(methodGroup, settings);
                 string serviceClientTypeName = MethodGroupServiceClientType(methodGroup);
 
-                classBlock.MultipleLineComment($"The proxy service used to perform REST calls.");
+                classBlock.JavadocComment($"The proxy service used to perform REST calls.");
                 classBlock.PrivateMemberVariable(restAPIInterfaceName, "service");
 
-                classBlock.MultipleLineComment("The service client containing this operation class.");
+                classBlock.JavadocComment("The service client containing this operation class.");
                 classBlock.PrivateMemberVariable(serviceClientTypeName, "client");
 
-                classBlock.MultipleLineComment(comment =>
+                classBlock.JavadocComment(comment =>
                 {
                     comment.Description($"Initializes an instance of {className}.");
                     comment.Param("client", "the instance of the service client containing this operation class.");
@@ -1088,7 +1088,7 @@ namespace AutoRest.Java
             javaFile.Import(imports);
 
             int maximumCommentWidth = GetMaximumCommentWidth(settings);
-            javaFile.WordWrappedMultipleLineComment(maximumCommentWidth, (comment) =>
+            javaFile.JavadocComment(maximumCommentWidth, (comment) =>
             {
                 comment.Description($"An instance of this class provides access to all the operations defined in {methodGroupClientInterfaceName}.");
             });
@@ -1113,14 +1113,14 @@ namespace AutoRest.Java
 
             if (!string.IsNullOrEmpty(headerComment))
             {
-                javaFile.WordWrappedMultipleLineSlashSlashComment(maximumHeaderCommentWidth, (comment) =>
+                javaFile.LineComment(maximumHeaderCommentWidth, (comment) =>
                 {
-                    comment.Description(headerComment);
+                    comment.Line(headerComment);
                 });
                 javaFile.Line();
             }
 
-            javaFile.WordWrappedMultipleLineComment(maximumHeaderCommentWidth, (comment) =>
+            javaFile.JavadocComment(maximumHeaderCommentWidth, (comment) =>
             {
                 if (string.IsNullOrEmpty(subPackage))
                 {
@@ -1249,7 +1249,7 @@ namespace AutoRest.Java
             }
             javaFile.Import(imports);
 
-            javaFile.WordWrappedMultipleLineComment(maximumCommentWidth, (comment) =>
+            javaFile.JavadocComment(maximumCommentWidth, (comment) =>
             {
                 if (string.IsNullOrEmpty(modelType.Summary) && string.IsNullOrEmpty(modelType.Documentation))
                 {
@@ -1316,7 +1316,7 @@ namespace AutoRest.Java
                 {
                     foreach (Property property in properties)
                     {
-                        classBlock.WordWrappedMultipleLineComment(maximumCommentWidth, (comment) =>
+                        classBlock.JavadocComment(maximumCommentWidth, (comment) =>
                         {
                             if (string.IsNullOrEmpty(property.Summary) && string.IsNullOrEmpty(property.Documentation))
                             {
@@ -1361,7 +1361,7 @@ namespace AutoRest.Java
                     IEnumerable<Property> constantProperties = properties.Where(property => property.IsConstant);
                     if (constantProperties.Any())
                     {
-                        classBlock.WordWrappedMultipleLineComment(maximumCommentWidth, (comment) =>
+                        classBlock.JavadocComment(maximumCommentWidth, (comment) =>
                         {
                             comment.Description($"Creates an instance of {className} class.");
                         });
@@ -1398,7 +1398,7 @@ namespace AutoRest.Java
                         string wireTypeName = GetPropertyWireTypeName(property, settings);
                         bool clientTypeDifferentFromWireType = clientTypeName != wireTypeName;
 
-                        classBlock.WordWrappedMultipleLineComment(maximumCommentWidth, (comment) =>
+                        classBlock.JavadocComment(maximumCommentWidth, (comment) =>
                         {
                             comment.Description($"Get the {variableName} value.");
                             comment.Return($"the {variableName} value");
@@ -1421,7 +1421,7 @@ namespace AutoRest.Java
 
                         if (!property.IsReadOnly)
                         {
-                            classBlock.WordWrappedMultipleLineComment(maximumCommentWidth, (comment) =>
+                            classBlock.JavadocComment(maximumCommentWidth, (comment) =>
                             {
                                 comment.Description($"Set the {variableName} value.");
                                 comment.Param(variableName, $"the {variableName} value to set");
@@ -1478,13 +1478,13 @@ namespace AutoRest.Java
             JavaFile javaFile = GetJavaFileWithHeaderAndPackage(codeModel, GetCompositeTypeModelsPackage(exceptionType, settings), settings, exceptionName);
             javaFile.Import("com.microsoft.rest.v2.RestException",
                             "com.microsoft.rest.v2.http.HttpResponse");
-            javaFile.MultipleLineComment((comment) =>
+            javaFile.JavadocComment((comment) =>
             {
                 comment.Description($"Exception thrown for an invalid response with {exceptionBodyTypeName} information.");
             });
             javaFile.Block($"public class {exceptionName} extends RestException", (classBlock) =>
             {
-                classBlock.MultipleLineComment((comment) =>
+                classBlock.JavadocComment((comment) =>
                 {
                     comment.Description($"Initializes a new instance of the {exceptionName} class.");
                     comment.Param("message", "the exception message or the response content if a message is not available");
@@ -1495,7 +1495,7 @@ namespace AutoRest.Java
                     constructorBlock.Line("super(message, response);");
                 });
                 classBlock.Line();
-                classBlock.MultipleLineComment((comment) =>
+                classBlock.JavadocComment((comment) =>
                 {
                     comment.Description($"Initializes a new instance of the {exceptionName} class.");
                     comment.Param("message", "the exception message or the response content if a message is not available");
@@ -1529,7 +1529,7 @@ namespace AutoRest.Java
                 javaFile.Import("java.util.Collection",
                                 "com.fasterxml.jackson.annotation.JsonCreator",
                                 "com.microsoft.rest.v2.ExpandableStringEnum");
-                javaFile.MultipleLineComment(comment =>
+                javaFile.JavadocComment(comment =>
                 {
                     comment.Description(enumTypeComment);
                 });
@@ -1537,11 +1537,11 @@ namespace AutoRest.Java
                 {
                     foreach (EnumValue value in enumType.Values)
                     {
-                        classBlock.MultipleLineComment($"Static value {GetEnumValueValue(value)} for {enumName}.");
+                        classBlock.JavadocComment($"Static value {GetEnumValueValue(value)} for {enumName}.");
                         classBlock.PublicStaticFinalVariable($"{enumName} {GetEnumValueName(value)} = fromString(\"{GetEnumValueValue(value)}\")");
                     }
 
-                    classBlock.MultipleLineComment((comment) =>
+                    classBlock.JavadocComment((comment) =>
                     {
                         comment.Description($"Creates or finds a {enumName} from its string representation.");
                         comment.Param("name", "a name to look for");
@@ -1553,7 +1553,7 @@ namespace AutoRest.Java
                         function.Return($"fromString(name, {enumName}.class)");
                     });
 
-                    classBlock.MultipleLineComment((comment) =>
+                    classBlock.JavadocComment((comment) =>
                     {
                         comment.Return($"known {enumName} values");
                     });
@@ -1567,7 +1567,7 @@ namespace AutoRest.Java
             {
                 javaFile.Import("com.fasterxml.jackson.annotation.JsonCreator",
                                 "com.fasterxml.jackson.annotation.JsonValue");
-                javaFile.MultipleLineComment(comment =>
+                javaFile.JavadocComment(comment =>
                 {
                     comment.Description(enumTypeComment);
                 });
@@ -1577,7 +1577,7 @@ namespace AutoRest.Java
                     {
                         Action<EnumValue, bool> enumValue = (EnumValue value, bool isLast) =>
                         {
-                            enumBlock.SingleLineComment($"Enum value {GetEnumValueValue(value)}.");
+                            enumBlock.JavadocComment($"Enum value {GetEnumValueValue(value)}.");
                             enumBlock.Line($"{GetEnumValueName(value)}(\"{GetEnumValueValue(value)}\")" + (isLast ? ";" : ","));
                             enumBlock.Line();
                         };
@@ -1589,7 +1589,7 @@ namespace AutoRest.Java
                         enumValue(enumType.Values.Last(), true);
                     }
 
-                    enumBlock.SingleLineComment($"The actual serialized value for a {enumName} instance.");
+                    enumBlock.JavadocComment($"The actual serialized value for a {enumName} instance.");
                     enumBlock.Line("private String value;");
                     enumBlock.Line();
                     enumBlock.Block($"{enumName}(String value)", (constructor) =>
@@ -1597,7 +1597,7 @@ namespace AutoRest.Java
                         constructor.Line("this.value = value;");
                     });
                     enumBlock.Line();
-                    enumBlock.MultipleLineComment((comment) =>
+                    enumBlock.JavadocComment((comment) =>
                     {
                         comment.Description($"Parses a serialized value to a {enumName} instance.");
                         comment.Param("value", "the serialized value to parse.");
@@ -1680,7 +1680,7 @@ namespace AutoRest.Java
             if (!string.IsNullOrEmpty(headerComment))
             {
                 int maximumHeaderCommentWidth = GetMaximumCommentWidth(settings);
-                javaFile.WordWrappedMultipleLineComment(maximumHeaderCommentWidth, (comment) =>
+                javaFile.JavadocComment(maximumHeaderCommentWidth, (comment) =>
                 {
                     comment.Description(headerComment);
                 });
@@ -1732,7 +1732,7 @@ namespace AutoRest.Java
             string singleRestResponseReturnType = $"Single<{MethodRestResponseAbstractTypeName(method, settings)}>";
             string methodParameterDeclaration = MethodParameterDeclaration(method, settings, clientMethodParameters);
 
-            typeBlock.MultipleLineComment(comment =>
+            typeBlock.JavadocComment(comment =>
             {
                 AddMethodSummaryAndDescription(comment, method);
                 AddParameters(comment, clientMethodParameters, settings);
@@ -1760,7 +1760,7 @@ namespace AutoRest.Java
             string asyncMethodReturnType = (methodReturnType.Body == null ? "Completable" : $"Maybe<{ResponseServiceResponseGenericParameterString(methodReturnType, settings)}>");
             string methodParametersDeclaration = MethodParameterDeclaration(method, settings, clientMethodParameters);
 
-            typeBlock.MultipleLineComment(comment =>
+            typeBlock.JavadocComment(comment =>
             {
                 AddMethodSummaryAndDescription(comment, method);
                 AddParameters(comment, clientMethodParameters, settings);
@@ -4052,7 +4052,7 @@ namespace AutoRest.Java
                 string restAPIBaseUrl = codeModel.BaseUrl;
                 string restAPIInterfaceName = methodGroup == null ? GetRestAPIInterfaceName(codeModel) : GetRestAPIInterfaceName(methodGroup, settings);
 
-                classBlock.WordWrappedMultipleLineComment(GetMaximumCommentWidth(settings), comment =>
+                classBlock.JavadocComment(GetMaximumCommentWidth(settings), comment =>
                 {
                     comment.Description($"The interface defining all the services for {clientTypeName} to be used by the proxy service to perform REST calls.");
                 });
@@ -4064,7 +4064,7 @@ namespace AutoRest.Java
                         string requestContentType = restAPIMethod.RequestContentType;
                         if (requestContentType == "multipart/form-data" || requestContentType == "application/x-www-form-urlencoded")
                         {
-                            interfaceBlock.SingleLineSlashSlashComment($"@Multipart not supported by {restProxyType}");
+                            interfaceBlock.LineComment($"@Multipart not supported by {restProxyType}");
                         }
 
                         if (MethodIsPagingNextOperation(restAPIMethod))
@@ -4191,7 +4191,7 @@ namespace AutoRest.Java
                 string propertyNameCamelCase = propertyName.ToCamelCase();
                 string propertyType = IModelTypeName(IModelTypeServiceResponseVariant(GetPropertyModelType(property)), settings);
 
-                interfaceBlock.MultipleLineComment(comment =>
+                interfaceBlock.JavadocComment(comment =>
                 {
                     comment.Description($"Gets {propertyDescription}");
                     comment.Return($"the {propertyName} value");
@@ -4200,7 +4200,7 @@ namespace AutoRest.Java
 
                 if (!property.IsReadOnly)
                 {
-                    interfaceBlock.MultipleLineComment(comment =>
+                    interfaceBlock.JavadocComment(comment =>
                     {
                         comment.Description($"Sets {propertyDescription}");
                         comment.Param(propertyNameCamelCase, $"the {propertyName} value");
@@ -4323,7 +4323,7 @@ namespace AutoRest.Java
             // ------------------------------------------
             // Async Observable<OperationStatus> Overload
             // ------------------------------------------
-            typeBlock.MultipleLineComment(comment =>
+            typeBlock.JavadocComment(comment =>
             {
                 AddMethodSummaryAndDescription(comment, method);
                 AddParameters(comment, parameters, settings);
@@ -4403,7 +4403,7 @@ namespace AutoRest.Java
             // ------------------------------
             Response methodReturnType = method.ReturnType;
             string singlePageMethodReturnType = $"Single<{pageType}>";
-            typeBlock.MultipleLineComment(comment =>
+            typeBlock.JavadocComment(comment =>
             {
                 AddMethodSummaryAndDescription(comment, method);
                 AddParameters(comment, parameters, settings);
@@ -4463,7 +4463,7 @@ namespace AutoRest.Java
             // ------------------------
             string pageImplType = SequenceTypeGetPageImplType(ResponseBodyClientType(methodReturnType, settings));
             string synchronousReturnType = $"PagedList<{sequenceElementTypeString}>";
-            typeBlock.MultipleLineComment(comment =>
+            typeBlock.JavadocComment(comment =>
             {
                 AddMethodSummaryAndDescription(comment, method);
                 AddParameters(comment, parameters, settings);
@@ -4517,7 +4517,7 @@ namespace AutoRest.Java
 
         private static void AddSynchronousMethodComment(JavaType typeBlock, Method method, IEnumerable<Parameter> parameters, Settings settings)
         {
-            typeBlock.MultipleLineComment(comment =>
+            typeBlock.JavadocComment(comment =>
             {
                 AddMethodSummaryAndDescription(comment, method);
                 AddParameters(comment, parameters, settings);
@@ -4540,7 +4540,7 @@ namespace AutoRest.Java
 
         private static void AddObservablePagedListMethodComment(JavaType typeBlock, Method method, IEnumerable<Parameter> parameters, Settings settings)
         {
-            typeBlock.MultipleLineComment(comment =>
+            typeBlock.JavadocComment(comment =>
             {
                 AddMethodSummaryAndDescription(comment, method);
                 AddParameters(comment, parameters, settings);
@@ -4561,7 +4561,7 @@ namespace AutoRest.Java
 
         private static void AddServiceFutureMethodComment(JavaType typeBlock, Method method, IEnumerable<Parameter> parameters, Settings settings)
         {
-            typeBlock.MultipleLineComment(comment =>
+            typeBlock.JavadocComment(comment =>
             {
                 AddMethodSummaryAndDescription(comment, method);
                 AddParameters(comment, parameters, settings);
@@ -4603,7 +4603,7 @@ namespace AutoRest.Java
             return $"{returnType} {methodName}Async({parameterDeclaration})";
         }
 
-        private static void AddMethodSummaryAndDescription(JavaMultipleLineComment comment, Method method)
+        private static void AddMethodSummaryAndDescription(JavaJavadocComment comment, Method method)
         {
             string summary = method.Summary;
             if (!string.IsNullOrEmpty(summary))
@@ -4618,7 +4618,7 @@ namespace AutoRest.Java
             }
         }
 
-        private static void AddParameters(JavaMultipleLineComment comment, IEnumerable<Parameter> parameters, Settings settings)
+        private static void AddParameters(JavaJavadocComment comment, IEnumerable<Parameter> parameters, Settings settings)
         {
             foreach (Parameter param in parameters)
             {
@@ -4631,7 +4631,7 @@ namespace AutoRest.Java
             }
         }
 
-        private static void ThrowsIllegalArgumentException(JavaMultipleLineComment comment)
+        private static void ThrowsIllegalArgumentException(JavaJavadocComment comment)
         {
             comment.Throws("IllegalArgumentException", "thrown if parameters fail the validation");
         }
