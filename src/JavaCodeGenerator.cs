@@ -111,6 +111,9 @@ namespace AutoRest.Java
         private static bool GetBoolSetting(Settings autoRestSettings, string settingName)
             => autoRestSettings.Host?.GetValue<bool?>(settingName).Result == true;
 
+        private static string GetStringSetting(Settings autoRestSettings, string settingName)
+            => autoRestSettings.Host?.GetValue<string>(settingName).Result;
+
         /// <summary>
         /// Generate Java client code for given ServiceClient.
         /// </summary>
@@ -128,6 +131,7 @@ namespace AutoRest.Java
                 RegeneratePom = GetBoolSetting(autoRestSettings, "regenerate-pom"),
                 FileHeaderText = autoRestSettings.Header,
                 MaximumJavadocCommentWidth = autoRestSettings.MaximumCommentColumns,
+                ServiceName = GetAutoRestSettingsServiceName(autoRestSettings),
             };
 
             TransformCodeModel(codeModel, javaSettings);
@@ -493,10 +497,8 @@ namespace AutoRest.Java
             return pageClasses[keypair];
         }
 
-        private static JavaFile GetAzureServiceManagerJavaFile(CodeModel codeModel, Settings settings)
+        private static JavaFile GetAzureServiceManagerJavaFile(CodeModel codeModel, JavaSettings settings)
         {
-            int maximumCommentWidth = GetMaximumCommentWidth(settings);
-
             string serviceName = GetServiceName(settings, codeModel);
             if (string.IsNullOrEmpty(serviceName))
             {
@@ -607,22 +609,20 @@ namespace AutoRest.Java
             return javaFile;
         }
 
-        public static JavaFile GetPageJavaFile(CodeModel codeModel, Settings settings, KeyValuePair<KeyValuePair<string, string>, string> pageClass)
+        public static JavaFile GetPageJavaFile(CodeModel codeModel, JavaSettings settings, KeyValuePair<KeyValuePair<string, string>, string> pageClass)
         {
-            int maximumCommentWidth = GetMaximumCommentWidth(settings);
-
             string nextLinkName = pageClass.Key.Key;
             string itemName = pageClass.Key.Value;
 
             string className = pageClass.Value.ToPascalCase();
 
-            string subPackage = (IsFluent(settings) ? implPackage : modelsPackage);
+            string subPackage = (settings.IsFluent ? implPackage : modelsPackage);
             JavaFile javaFile = GetJavaFileWithHeaderAndPackage(codeModel, subPackage, settings, className);
             javaFile.Import("com.fasterxml.jackson.annotation.JsonProperty",
                             "com.microsoft.azure.v2.Page",
                             "java.util.List");
 
-            javaFile.JavadocComment(maximumCommentWidth, comment =>
+            javaFile.JavadocComment(settings.MaximumJavadocCommentWidth, comment =>
             {
                 comment.Description("An instance of this class defines a page of Azure resources and a link to get the next page of resources, if any.");
                 comment.Param("<T>", "type of Azure resource");
@@ -693,7 +693,7 @@ namespace AutoRest.Java
             return javaFile;
         }
 
-        public static IEnumerable<SequenceType> GetXmlWrapperTypes(CodeModel codeModel, Settings settings)
+        public static IEnumerable<SequenceType> GetXmlWrapperTypes(CodeModel codeModel, JavaSettings settings)
         {
             ISet<SequenceType> result = new HashSet<SequenceType>();
             if (codeModel.ShouldGenerateXmlSerialization)
@@ -811,7 +811,7 @@ namespace AutoRest.Java
 
             javaFile.JavadocComment(comment =>
             {
-                string serviceClientTypeName = isFluent ? serviceClientClassName : GetServiceClientInterfaceName(codeModel);
+                string serviceClientTypeName = settings.IsFluent ? serviceClientClassName : GetServiceClientInterfaceName(codeModel);
                 comment.Description($"Initializes a new instance of the {serviceClientTypeName} type.");
             });
             javaFile.PublicClass(serviceClientClassDeclaration, classBlock =>
@@ -867,7 +867,7 @@ namespace AutoRest.Java
                 // Method Group Client declarations and getters
                 foreach (MethodGroup methodGroup in GetMethodGroups(codeModel))
                 {
-                    string methodGroupDeclarationType = IsFluent(settings) ? GetMethodGroupClientClassName(methodGroup, settings) : GetMethodGroupClientInterfaceName(methodGroup);
+                    string methodGroupDeclarationType = settings.IsFluent ? GetMethodGroupClientClassName(methodGroup, settings) : GetMethodGroupClientInterfaceName(methodGroup);
                     string methodGroupName = GetMethodGroupName(methodGroup);
 
                     classBlock.JavadocComment(comment =>
@@ -990,14 +990,14 @@ namespace AutoRest.Java
             return javaFile;
         }
 
-        public static JavaFile GetAzureServiceClientInterfaceJavaFile(CodeModel codeModel, Settings settings)
+        public static JavaFile GetAzureServiceClientInterfaceJavaFile(CodeModel codeModel, JavaSettings settings)
         {
             string interfaceName = GetServiceClientInterfaceName(codeModel);
 
             JavaFile javaFile = GetJavaFileWithHeaderAndPackage(codeModel, null, settings, interfaceName);
 
             List<string> imports = GetServiceClientInterfaceImorts(codeModel, settings).ToList();
-            if (IsFluent(settings))
+            if (settings.IsFluent)
             {
                 imports.Add("com.microsoft.azure.v2.AzureClient");
             }
@@ -1028,18 +1028,17 @@ namespace AutoRest.Java
             return javaFile;
         }
 
-        public static JavaFile GetMethodGroupClientJavaFile(CodeModel codeModel, Settings settings, MethodGroup methodGroup)
+        public static JavaFile GetMethodGroupClientJavaFile(CodeModel codeModel, JavaSettings settings, MethodGroup methodGroup)
         {
             string className = GetMethodGroupClientClassName(methodGroup, settings);
 
             JavaFile javaFile = GetJavaFileWithHeaderAndPackage(codeModel, implPackage, settings, className);
             javaFile.Import(MethodGroupImplImports(methodGroup, settings));
 
-            int maximumCommentWidth = GetMaximumCommentWidth(settings);
             string methodGroupClientInterfaceName = GetMethodGroupClientInterfaceName(methodGroup);
 
             string parentDeclaration;
-            if (IsFluent(settings))
+            if (settings.IsFluent)
             {
                 IEnumerable<string> supportedInterfaces = MethodGroupSupportedInterfaces(methodGroup, settings);
                 if (supportedInterfaces.Any())
@@ -1056,7 +1055,7 @@ namespace AutoRest.Java
                 parentDeclaration = " implements " + MethodGroupTypeString(methodGroup, settings);
             }
 
-            javaFile.JavadocComment(maximumCommentWidth, comment =>
+            javaFile.JavadocComment(settings.MaximumJavadocCommentWidth, comment =>
             {
                 comment.Description($"An instance of this class provides access to all the operations defined in {methodGroupClientInterfaceName}.");
             });
@@ -1090,7 +1089,7 @@ namespace AutoRest.Java
             return javaFile;
         }
 
-        public static JavaFile GetMethodGroupClientInterfaceJavaFile(CodeModel codeModel, Settings settings, MethodGroup methodGroup)
+        public static JavaFile GetMethodGroupClientInterfaceJavaFile(CodeModel codeModel, JavaSettings settings, MethodGroup methodGroup)
         {
             string methodGroupClientInterfaceName = GetMethodGroupClientInterfaceName(methodGroup);
 
@@ -1099,8 +1098,7 @@ namespace AutoRest.Java
             IEnumerable<string> imports = methodGroup.Methods.SelectMany(method => GetClientInterfaceMethodImports(method, settings));
             javaFile.Import(imports);
 
-            int maximumCommentWidth = GetMaximumCommentWidth(settings);
-            javaFile.JavadocComment(maximumCommentWidth, (comment) =>
+            javaFile.JavadocComment(settings.MaximumJavadocCommentWidth, (comment) =>
             {
                 comment.Description($"An instance of this class provides access to all the operations defined in {methodGroupClientInterfaceName}.");
             });
@@ -1111,28 +1109,24 @@ namespace AutoRest.Java
             return javaFile;
         }
 
-        public static JavaFile GetPackageInfoJavaFiles(CodeModel codeModel, Settings settings, string subPackage)
+        public static JavaFile GetPackageInfoJavaFiles(CodeModel codeModel, JavaSettings settings, string subPackage)
         {
-            string headerComment = settings.Header;
-
-            int maximumHeaderCommentWidth = settings.MaximumCommentColumns;
-
             string title = codeModel.Name;
             string description = codeModel.Documentation;
 
             string package = GetPackage(codeModel, subPackage);
             JavaFile javaFile = GetJavaFile(package, "package-info");
 
-            if (!string.IsNullOrEmpty(headerComment))
+            if (!string.IsNullOrEmpty(settings.FileHeaderText))
             {
-                javaFile.LineComment(maximumHeaderCommentWidth, (comment) =>
+                javaFile.LineComment(settings.MaximumJavadocCommentWidth, (comment) =>
                 {
-                    comment.Line(headerComment);
+                    comment.Line(settings.FileHeaderText);
                 });
                 javaFile.Line();
             }
 
-            javaFile.JavadocComment(maximumHeaderCommentWidth, (comment) =>
+            javaFile.JavadocComment(settings.MaximumJavadocCommentWidth, (comment) =>
             {
                 if (string.IsNullOrEmpty(subPackage))
                 {
@@ -1154,13 +1148,13 @@ namespace AutoRest.Java
             return javaFile;
         }
 
-        public static IEnumerable<CompositeType> GetModelTypes(CodeModel codeModel, Settings settings)
+        public static IEnumerable<CompositeType> GetModelTypes(CodeModel codeModel, JavaSettings settings)
         {
             List<CompositeType> result = new List<CompositeType>();
 
             foreach (CompositeType modelType in codeModel.ModelTypes.Union(codeModel.HeaderTypes))
             {
-                if (!IsAzure(settings) || (!CompositeTypeIsExternalExtension(modelType) && !CompositeTypeIsResource(modelType, settings)))
+                if (!settings.IsAzure || (!CompositeTypeIsExternalExtension(modelType) && !CompositeTypeIsResource(modelType, settings)))
                 {
                     result.Add(modelType);
                 }
@@ -1169,9 +1163,8 @@ namespace AutoRest.Java
             return result;
         }
 
-        public static JavaFile GetModelJavaFile(CodeModel codeModel, Settings settings, CompositeType modelType)
+        public static JavaFile GetModelJavaFile(CodeModel codeModel, JavaSettings settings, CompositeType modelType)
         {
-            int maximumCommentWidth = GetMaximumCommentWidth(settings);
             bool shouldGenerateXmlSerialization = codeModel.ShouldGenerateXmlSerialization;
 
             string className = IModelTypeName(modelType, settings);
@@ -1188,7 +1181,7 @@ namespace AutoRest.Java
                     imports.AddRange(propertyModelTypeImports);
                     imports.AddRange(GetIModelTypeImports(GetIModelTypeResponseVariant(propertyModelType), settings));
                 }
-                else if (IsFluent(settings))
+                else if (settings.IsFluent)
                 {
                     imports.AddRange(propertyModelTypeImports.Where(c => !c.StartsWith(GetPackage(property.Parent.CodeModel), StringComparison.Ordinal) || c.EndsWith("Inner", StringComparison.Ordinal) ^ innerModelProperties.Contains(property)));
                 }
@@ -1233,7 +1226,7 @@ namespace AutoRest.Java
                 imports.Add("com.microsoft.rest.v2.serializer.JsonFlatten");
             }
 
-            if (IsAzure(settings))
+            if (settings.IsAzure)
             {
                 foreach (Property property in GetCompositeTypeProperties(modelType, settings))
                 {
@@ -1251,7 +1244,7 @@ namespace AutoRest.Java
                     imports.Add($"com.microsoft.azure.v2.{baseModelTypeName}");
                 }
 
-                if (IsFluent(settings))
+                if (settings.IsFluent)
                 {
                     if (baseModelTypeName != null && baseModelTypeName.EndsWith("Inner", StringComparison.Ordinal) ^ innerModelCompositeType.Contains(modelType))
                     {
@@ -1261,7 +1254,7 @@ namespace AutoRest.Java
             }
             javaFile.Import(imports);
 
-            javaFile.JavadocComment(maximumCommentWidth, (comment) =>
+            javaFile.JavadocComment(settings.MaximumJavadocCommentWidth, (comment) =>
             {
                 if (string.IsNullOrEmpty(modelType.Summary) && string.IsNullOrEmpty(modelType.Documentation))
                 {
@@ -1328,7 +1321,7 @@ namespace AutoRest.Java
                 {
                     foreach (Property property in properties)
                     {
-                        classBlock.JavadocComment(maximumCommentWidth, (comment) =>
+                        classBlock.JavadocComment(settings.MaximumJavadocCommentWidth, (comment) =>
                         {
                             if (string.IsNullOrEmpty(property.Summary) && string.IsNullOrEmpty(property.Documentation))
                             {
@@ -1373,7 +1366,7 @@ namespace AutoRest.Java
                     IEnumerable<Property> constantProperties = properties.Where(property => property.IsConstant);
                     if (constantProperties.Any())
                     {
-                        classBlock.JavadocComment(maximumCommentWidth, (comment) =>
+                        classBlock.JavadocComment(settings.MaximumJavadocCommentWidth, (comment) =>
                         {
                             comment.Description($"Creates an instance of {className} class.");
                         });
@@ -1410,7 +1403,7 @@ namespace AutoRest.Java
                         string wireTypeName = GetPropertyWireTypeName(property, settings);
                         bool clientTypeDifferentFromWireType = clientTypeName != wireTypeName;
 
-                        classBlock.JavadocComment(maximumCommentWidth, (comment) =>
+                        classBlock.JavadocComment(settings.MaximumJavadocCommentWidth, (comment) =>
                         {
                             comment.Description($"Get the {variableName} value.");
                             comment.Return($"the {variableName} value");
@@ -1433,7 +1426,7 @@ namespace AutoRest.Java
 
                         if (!property.IsReadOnly)
                         {
-                            classBlock.JavadocComment(maximumCommentWidth, (comment) =>
+                            classBlock.JavadocComment(settings.MaximumJavadocCommentWidth, (comment) =>
                             {
                                 comment.Description($"Set the {variableName} value.");
                                 comment.Param(variableName, $"the {variableName} value to set");
@@ -1466,7 +1459,7 @@ namespace AutoRest.Java
             return javaFile;
         }
 
-        public static IEnumerable<CompositeType> GetExceptionTypes(CodeModel codeModel, Settings settings)
+        public static IEnumerable<CompositeType> GetExceptionTypes(CodeModel codeModel, JavaSettings settings)
         {
             foreach (CompositeType exceptionType in codeModel.ErrorTypes)
             {
@@ -1482,7 +1475,7 @@ namespace AutoRest.Java
             }
         }
 
-        public static JavaFile GetExceptionJavaFile(CodeModel codeModel, Settings settings, CompositeType exceptionType)
+        public static JavaFile GetExceptionJavaFile(CodeModel codeModel, JavaSettings settings, CompositeType exceptionType)
         {
             string exceptionBodyTypeName = IModelTypeName(exceptionType, settings);
             string exceptionName = CompositeTypeExceptionTypeDefinitionName(exceptionType, settings);
@@ -1529,12 +1522,12 @@ namespace AutoRest.Java
             return javaFile;
         }
 
-        public static JavaFile GetEnumJavaFile(CodeModel codeModel, Settings settings, EnumType enumType)
+        public static JavaFile GetEnumJavaFile(CodeModel codeModel, JavaSettings settings, EnumType enumType)
         {
             string enumName = IModelTypeName(enumType, settings);
             string enumTypeComment = $"Defines values for {enumName}.";
 
-            string subPackage = IsFluent(settings) ? null : modelsPackage;
+            string subPackage = settings.IsFluent ? null : modelsPackage;
             JavaFile javaFile = GetJavaFileWithHeaderAndPackage(codeModel, subPackage, settings, enumName);
             if (enumType.ModelAsString)
             {
@@ -1666,20 +1659,23 @@ namespace AutoRest.Java
             return new JavaFile(filePath);
         }
 
-        private static int GetMaximumCommentWidth(Settings settings)
-            => settings.MaximumCommentColumns;
+        private static string GetAutoRestSettingsServiceName(Settings autoRestSettings)
+            => GetStringSetting(autoRestSettings, "serviceName");
 
-        internal static string GetServiceName(Settings settings, CodeModel codeModel)
+        internal static string GetServiceName(Settings autoRestSettings, CodeModel codeModel)
+            => GetServiceName(GetAutoRestSettingsServiceName(autoRestSettings), codeModel);
+
+        private static string GetServiceName(JavaSettings settings, CodeModel codeModel)
+            => GetServiceName(settings.ServiceName, codeModel);
+
+        private static string GetServiceName(string serviceName, CodeModel codeModel)
         {
-            string serviceNameSetting = settings.Host?.GetValue<string>("service-name").Result;
-            if (!string.IsNullOrEmpty(serviceNameSetting))
+            if (string.IsNullOrEmpty(serviceName))
             {
-                return serviceNameSetting;
+                Method method = codeModel.Methods[0];
+                Match match = Regex.Match(input: method.Url, pattern: @"/providers/microsoft\.(\w+)/", options: RegexOptions.IgnoreCase);
+                serviceName = match.Groups[1].Value.ToPascalCase();
             }
-
-            Method method = codeModel.Methods[0];
-            Match match = Regex.Match(input: method.Url, pattern: @"/providers/microsoft\.(\w+)/", options: RegexOptions.IgnoreCase);
-            string serviceName = match.Groups[1].Value.ToPascalCase();
             return serviceName;
         }
 
@@ -1704,7 +1700,7 @@ namespace AutoRest.Java
             return javaFile;
         }
 
-        private static void AddRegularMethodOverloads(JavaType typeBlock, Method method, Settings settings, bool onlyRequiredParameters)
+        private static void AddRegularMethodOverloads(JavaType typeBlock, Method method, JavaSettings settings, bool onlyRequiredParameters)
         {
             IEnumerable<Parameter> clientMethodParameters = (onlyRequiredParameters ? GetClientMethodRequiredParameters(method) : GetClientMethodParameters(method));
 
@@ -1821,7 +1817,7 @@ namespace AutoRest.Java
         private static bool IsServiceClientCredentialProperty(Property property)
             => GetPropertyModelType(property).IsPrimaryType(KnownPrimaryType.Credentials);
 
-        private static IEnumerable<string> GetServiceClientInterfaceImorts(CodeModel codeModel, Settings settings)
+        private static IEnumerable<string> GetServiceClientInterfaceImorts(CodeModel codeModel, JavaSettings settings)
             => GetRestAPIMethods(codeModel).SelectMany(m => GetClientInterfaceMethodImports(m, settings));
 
         private static IEnumerable<MethodGroup> GetMethodGroups(CodeModel codeModel)
@@ -1865,7 +1861,7 @@ namespace AutoRest.Java
                 : GetIModelTypeNonNullableVariant(propertyModelType);
         }
 
-        private static IEnumerable<string> GetIModelTypeImports(IModelType modelType, Settings settings)
+        private static IEnumerable<string> GetIModelTypeImports(IModelType modelType, JavaSettings settings)
         {
             IEnumerable<string> result = Enumerable.Empty<string>();
 
@@ -1876,7 +1872,7 @@ namespace AutoRest.Java
                     string modelTypeName = IModelTypeName(modelType, settings);
                     if (modelTypeName != "String")
                     {
-                        if (!IsFluent(settings))
+                        if (!settings.IsFluent)
                         {
                             result = new[]
                             {
@@ -1953,15 +1949,15 @@ namespace AutoRest.Java
             return result;
         }
 
-        private static IEnumerable<string> CompositeTypeImports(string compositeTypeName, CodeModel codeModel, bool compositeTypeIsExternalExtension, bool compositeTypeIsAzureResourceExtension, Settings settings)
+        private static IEnumerable<string> CompositeTypeImports(string compositeTypeName, CodeModel codeModel, bool compositeTypeIsExternalExtension, bool compositeTypeIsAzureResourceExtension, JavaSettings settings)
         {
             IEnumerable<string> result;
 
-            if (IsFluent(settings))
+            if (settings.IsFluent)
             {
                 result = CompositeTypeImportsFluent(compositeTypeName, codeModel, compositeTypeIsExternalExtension, compositeTypeIsAzureResourceExtension, settings);
             }
-            else if (IsAzure(settings))
+            else if (settings.IsAzure)
             {
                 result = CompositeTypeImportsAzure(compositeTypeName, codeModel, compositeTypeIsExternalExtension, compositeTypeIsAzureResourceExtension, settings);
             }
@@ -1982,7 +1978,7 @@ namespace AutoRest.Java
             return result;
         }
 
-        private static IEnumerable<string> CompositeTypeImportsFluent(string compositeTypeName, CodeModel codeModel, bool compositeTypeIsExternalExtension, bool compositeTypeIsAzureResourceExtension, Settings settings)
+        private static IEnumerable<string> CompositeTypeImportsFluent(string compositeTypeName, CodeModel codeModel, bool compositeTypeIsExternalExtension, bool compositeTypeIsAzureResourceExtension, JavaSettings settings)
         {
             List<string> result = new List<string>();
             if (compositeTypeName.Contains('<'))
@@ -1996,7 +1992,7 @@ namespace AutoRest.Java
             return result;
         }
 
-        private static IEnumerable<string> CompositeTypeImportsAzure(string compositeTypeName, CodeModel codeModel, bool compositeTypeIsExternalExtension, bool compositeTypeIsAzureResourceExtension, Settings settings)
+        private static IEnumerable<string> CompositeTypeImportsAzure(string compositeTypeName, CodeModel codeModel, bool compositeTypeIsExternalExtension, bool compositeTypeIsAzureResourceExtension, JavaSettings settings)
         {
             List<string> result = new List<string>();
             if (!string.IsNullOrEmpty(compositeTypeName))
@@ -2053,7 +2049,7 @@ namespace AutoRest.Java
             return result;
         }
 
-        private static string IModelTypeParameterVariantName(IModelType modelType, Settings settings)
+        private static string IModelTypeParameterVariantName(IModelType modelType, JavaSettings settings)
             => IModelTypeName(IModelTypeParameterVariant(modelType), settings);
 
         private static IModelType IModelTypeParameterVariant(IModelType modelType)
@@ -2232,11 +2228,11 @@ namespace AutoRest.Java
             return result;
         }
 
-        private static string GetCompositeTypePackage(string compositeTypeName, CodeModel codeModel, bool compositeTypeIsExternalExtension, bool compositeTypeIsAzureResourceExtension, Settings settings)
+        private static string GetCompositeTypePackage(string compositeTypeName, CodeModel codeModel, bool compositeTypeIsExternalExtension, bool compositeTypeIsAzureResourceExtension, JavaSettings settings)
         {
             string result;
 
-            if (IsFluent(settings))
+            if (settings.IsFluent)
             {
                 if (CompositeTypeIsResource(compositeTypeName, compositeTypeIsAzureResourceExtension))
                 {
@@ -2255,7 +2251,7 @@ namespace AutoRest.Java
                     result = (codeModel?.Namespace.ToLowerInvariant());
                 }
             }
-            else if (IsAzure(settings))
+            else if (settings.IsAzure)
             {
                 if (CompositeTypeIsResource(compositeTypeName, compositeTypeIsAzureResourceExtension))
                 {
@@ -2288,11 +2284,11 @@ namespace AutoRest.Java
             return result;
         }
 
-        private static string GetCompositeTypeModelsPackage(CompositeType compositeType, Settings settings)
+        private static string GetCompositeTypeModelsPackage(CompositeType compositeType, JavaSettings settings)
         {
             string result;
 
-            if (IsFluent(settings))
+            if (settings.IsFluent)
             {
                 result = innerModelCompositeType.Contains(compositeType) ? ".implementation" : "";
             }
@@ -2304,7 +2300,7 @@ namespace AutoRest.Java
             return result;
         }
 
-        private static IEnumerable<string> CompositeTypeGenericTypeImports(string compositeTypeName, CodeModel codeModel, bool compositeTypeIsExternalExtension, bool compositeTypeIsAzureResourceExtension, Settings settings)
+        private static IEnumerable<string> CompositeTypeGenericTypeImports(string compositeTypeName, CodeModel codeModel, bool compositeTypeIsExternalExtension, bool compositeTypeIsAzureResourceExtension, JavaSettings settings)
         {
             List<string> result = new List<string>();
 
@@ -2390,10 +2386,10 @@ namespace AutoRest.Java
             return MethodIsPagingNextOperation(parent) || MethodIsPagingOperation(parent);
         }
 
-        private static IModelType ResponseBodyClientType(Response response, Settings settings)
+        private static IModelType ResponseBodyClientType(Response response, JavaSettings settings)
         {
             IModelType result = GetIModelTypeResponseVariant(ResponseBodyWireType(response));
-            if ((IsFluent(settings) || IsAzure(settings)) && result is SequenceType bodySequenceType && ResponseIsPagedResponse(response))
+            if (settings.IsAzureOrFluent && result is SequenceType bodySequenceType && ResponseIsPagedResponse(response))
             {
                 SequenceType resultSequenceType = DependencyInjection.New<SequenceType>();
                 resultSequenceType.ElementType = bodySequenceType.ElementType;
@@ -2407,11 +2403,11 @@ namespace AutoRest.Java
         private static TValue DictionaryGet<TKey, TValue>(IDictionary<TKey, TValue> dictionary, TKey key) where TValue : class
             => dictionary.ContainsKey(key) ? dictionary[key] : null;
 
-        private static string ResponseGenericBodyClientTypeString(Response response, Settings settings)
+        private static string ResponseGenericBodyClientTypeString(Response response, JavaSettings settings)
         {
             string result;
 
-            if (IsAzureOrFluent(settings))
+            if (settings.IsAzureOrFluent)
             {
                 if (ResponseBodyClientType(response, settings) is SequenceType bodySequenceType && ResponseIsPagedResponse(response))
                 {
@@ -2448,11 +2444,11 @@ namespace AutoRest.Java
             return result;
         }
 
-        private static string ResponseServiceFutureGenericParameterString(Response response, Settings settings)
+        private static string ResponseServiceFutureGenericParameterString(Response response, JavaSettings settings)
         {
             string result;
 
-            if (IsFluent(settings) || IsAzure(settings))
+            if (settings.IsAzureOrFluent)
             {
                 if (ResponseBodyClientType(response, settings) is SequenceType bodySequenceType && ResponseIsPagedResponse(response))
                 {
@@ -2468,11 +2464,11 @@ namespace AutoRest.Java
             return result;
         }
 
-        private static string ResponseServiceResponseGenericParameterString(Response response, Settings settings)
+        private static string ResponseServiceResponseGenericParameterString(Response response, JavaSettings settings)
         {
             string result;
 
-            if (IsAzureOrFluent(settings) && ResponseBodyClientType(response, settings) is SequenceType bodySequenceType && (ResponseIsPagedResponse(response) || MethodSimulateAsPagingOperation(ResponseGetParent(response), settings)))
+            if (settings.IsAzureOrFluent && ResponseBodyClientType(response, settings) is SequenceType bodySequenceType && (ResponseIsPagedResponse(response) || MethodSimulateAsPagingOperation(ResponseGetParent(response), settings)))
             {
                 result = $"Page<{IModelTypeName(bodySequenceType.ElementType, settings)}>";
             }
@@ -2484,11 +2480,11 @@ namespace AutoRest.Java
             return result;
         }
 
-        private static string ResponseClientCallbackTypeString(Response response, Settings settings)
+        private static string ResponseClientCallbackTypeString(Response response, JavaSettings settings)
         {
             string result;
 
-            if (IsAzureOrFluent(settings) && response.Body is SequenceType && ResponseIsPagedResponse(response))
+            if (settings.IsAzureOrFluent && response.Body is SequenceType && ResponseIsPagedResponse(response))
             {
                 result = IModelTypeName(ResponseBodyClientType(response, settings), settings);
             }
@@ -2513,7 +2509,7 @@ namespace AutoRest.Java
         private static IModelType ResponseHeaderClientType(Response response)
             => GetIModelTypeResponseVariant(response.Headers);
 
-        private static string ResponseSequenceElementTypeString(Response response, Settings settings)
+        private static string ResponseSequenceElementTypeString(Response response, JavaSettings settings)
             => response.Body is SequenceType bodySequenceType ? IModelTypeName(bodySequenceType.ElementType, settings) : "Void";
 
         private static string ResponseReturnValueWireType(Response response)
@@ -2553,10 +2549,10 @@ namespace AutoRest.Java
             return returnValueWireType;
         }
 
-        private static IEnumerable<string> ResponseInterfaceImports(Response response, Settings settings)
+        private static IEnumerable<string> ResponseInterfaceImports(Response response, JavaSettings settings)
             => GetIModelTypeImports(ResponseBodyClientType(response, settings), settings).Concat(GetIModelTypeImports(ResponseHeaderClientType(response), settings));
 
-        private static IEnumerable<string> ResponseImplImports(Response response, Settings settings)
+        private static IEnumerable<string> ResponseImplImports(Response response, JavaSettings settings)
         {
             List<string> imports = new List<string>(ResponseInterfaceImports(response, settings));
 
@@ -2594,7 +2590,7 @@ namespace AutoRest.Java
         private static bool MethodIsLongRunningOperation(Method method)
             => GetExtensionBool(method?.Extensions, AzureExtensions.LongRunningExtension);
 
-        private static ISet<string> GetClientInterfaceMethodImports(Method method, Settings settings)
+        private static ISet<string> GetClientInterfaceMethodImports(Method method, JavaSettings settings)
         {
             HashSet<string> imports = new HashSet<string>();
 
@@ -2627,7 +2623,7 @@ namespace AutoRest.Java
             // exceptions
             imports.AddRange(MethodExceptionImports(method, settings));
 
-            if (IsAzure(settings))
+            if (settings.IsAzure)
             {
                 if (MethodIsLongRunningOperation(method))
                 {
@@ -2643,7 +2639,7 @@ namespace AutoRest.Java
                     imports.Add("com.microsoft.azure.v2.PagedList");
                 }
 
-                if (IsFluent(settings))
+                if (settings.IsFluent)
                 {
                     bool methodSimulateAsPagingOperation = MethodSimulateAsPagingOperation(method, settings);
                     if (methodIsPagingOperation || methodSimulateAsPagingOperation)
@@ -2768,10 +2764,7 @@ namespace AutoRest.Java
             // parameterized host
             bool isParameterizedHost;
             bool containsParameterizedHostExtension = restAPIMethod?.CodeModel?.Extensions?.ContainsKey(SwaggerExtensions.ParameterizedHostExtension) ?? false;
-            bool isAzure = IsAzure(settings);
-            bool isFluent = IsFluent(settings);
-            bool isAzureOrFluent = isAzure || isFluent;
-            if (isAzureOrFluent)
+            if (settings.IsAzureOrFluent)
             {
                 isParameterizedHost = containsParameterizedHostExtension && !MethodIsPagingNextOperation(restAPIMethod);
             }
@@ -2785,7 +2778,7 @@ namespace AutoRest.Java
                 imports.Add("com.microsoft.rest.v2.annotations.HostParam");
             }
 
-            if (isAzureOrFluent)
+            if (settings.IsAzureOrFluent)
             {
                 bool methodIsLongRunningOperation = MethodIsLongRunningOperation(restAPIMethod);
                 if (methodIsLongRunningOperation)
@@ -2820,7 +2813,7 @@ namespace AutoRest.Java
                     imports.AddRange(CompositeTypeImportsAzure(typeName, methodCodeModel, false, false, settings));
                 }
 
-                if (isFluent)
+                if (settings.IsFluent)
                 {
                     string methodOperationExceptionTypeString = MethodOperationExceptionTypeString(restAPIMethod, settings);
                     if (methodOperationExceptionTypeString != "CloudException" && methodOperationExceptionTypeString != "RestException")
@@ -3029,11 +3022,11 @@ namespace AutoRest.Java
                     method.Extensions[AzureExtensions.PageableExtension] == null &&
                     !MethodIsPagingNextOperation(method);
 
-        private static bool MethodShouldGenerateBeginRestResponseMethod(Method method, Settings settings)
+        private static bool MethodShouldGenerateBeginRestResponseMethod(Method method, JavaSettings settings)
         {
             bool result;
 
-            if (IsAzureOrFluent(settings))
+            if (settings.IsAzureOrFluent)
             {
                 result = !MethodIsLongRunningOperation(method) && !MethodIsPagingOperation(method) && !MethodIsPagingNextOperation(method);
             }
@@ -3103,9 +3096,9 @@ namespace AutoRest.Java
             return parameters;
         }
 
-        private static string MethodParameterDeclaration(Method method, Settings settings, IEnumerable<Parameter> parameters)
+        private static string MethodParameterDeclaration(Method method, JavaSettings settings, IEnumerable<Parameter> parameters)
         {
-            string parameterPrefix = (IsAzureOrFluent(settings) && (MethodIsPagingOperation(method) || MethodIsPagingNextOperation(method)) ? "final " : "");
+            string parameterPrefix = (settings.IsAzureOrFluent && (MethodIsPagingOperation(method) || MethodIsPagingNextOperation(method)) ? "final " : "");
             return string.Join(", ", parameters.Select(parameter =>
             {
                 string parameterType = IModelTypeParameterVariantName(ParameterClientType(parameter), settings);
@@ -3114,7 +3107,7 @@ namespace AutoRest.Java
             }));
         }
 
-        private static IEnumerable<string> MethodExceptionImports(Method method, Settings settings)
+        private static IEnumerable<string> MethodExceptionImports(Method method, JavaSettings settings)
         {
             HashSet<string> exceptionImports = new HashSet<string>();
             exceptionImports.Add("java.io.IOException");
@@ -3138,10 +3131,10 @@ namespace AutoRest.Java
             return exceptionImports;
         }
 
-        private static string MethodReturnTypeResponseName(Method method, Settings settings)
+        private static string MethodReturnTypeResponseName(Method method, JavaSettings settings)
             => IModelTypeName(IModelTypeServiceResponseVariant(ResponseBodyClientType(method.ReturnType, settings)), settings);
 
-        private static void MethodPagingGroupedParameterTransformation(Method method, bool filterRequired, Settings settings, JavaBlock block)
+        private static void MethodPagingGroupedParameterTransformation(Method method, bool filterRequired, JavaSettings settings, JavaBlock block)
         {
             if (MethodIsPagingOperation(method))
             {
@@ -3159,7 +3152,7 @@ namespace AutoRest.Java
                         string nextGroupTypeCamelCaseName = nextGroupTypeName.ToCamelCase();
                         string groupedTypeCamelCaseName = groupedTypeName.ToCamelCase();
 
-                        string nextGroupTypeCodeName = CodeNamer.Instance.GetTypeName(nextGroupTypeName) + (IsFluent(settings) ? "Inner" : "");
+                        string nextGroupTypeCodeName = CodeNamer.Instance.GetTypeName(nextGroupTypeName) + (settings.IsFluent ? "Inner" : "");
 
                         if (!groupedType.IsRequired)
                         {
@@ -3189,7 +3182,7 @@ namespace AutoRest.Java
             }
         }
 
-        private static string MethodNextMethodParameterInvocation(Method method, Settings settings, bool filterRequired)
+        private static string MethodNextMethodParameterInvocation(Method method, JavaSettings settings, bool filterRequired)
         {
             string invocation;
             Method nextMethod = MethodGetPagingNextMethodWithInvocation(method, settings, out invocation);
@@ -3225,14 +3218,14 @@ namespace AutoRest.Java
             }
         }
 
-        private static string MethodPagingNextPageLinkParameterName(Method method, Settings settings)
+        private static string MethodPagingNextPageLinkParameterName(Method method, JavaSettings settings)
         {
             string invocation;
             Method nextMethod = MethodGetPagingNextMethodWithInvocation(method, settings, out invocation);
             return GetParameterName(nextMethod.Parameters.First(p => GetParameterName(p).StartsWith("next", StringComparison.OrdinalIgnoreCase)));
         }
 
-        private static Method MethodGetPagingNextMethodWithInvocation(Method method, Settings settings, out string invocation, bool async = false, bool singlePage = true)
+        private static Method MethodGetPagingNextMethodWithInvocation(Method method, JavaSettings settings, out string invocation, bool async = false, bool singlePage = true)
         {
             string methodSuffixString = "";
             if (singlePage)
@@ -3271,14 +3264,14 @@ namespace AutoRest.Java
             return methodModel;
         }
 
-        private static string MethodGetPagingNextMethodInvocation(Method method, Settings settings, bool singlePage = true)
+        private static string MethodGetPagingNextMethodInvocation(Method method, JavaSettings settings, bool singlePage = true)
         {
             string invocation;
             MethodGetPagingNextMethodWithInvocation(method, settings, out invocation, true, singlePage);
             return invocation;
         }
 
-        private static IEnumerable<Parameter> MethodOrderedRetrofitParameters(Method method, Settings settings)
+        private static IEnumerable<Parameter> MethodOrderedRetrofitParameters(Method method, JavaSettings settings)
         {
             IEnumerable<Parameter> retrofitParameters = MethodRetrofitParameters(method, settings);
             return retrofitParameters.Where(p => p.Location == ParameterLocation.Path)
@@ -3288,7 +3281,7 @@ namespace AutoRest.Java
         private static string ArgumentList(IEnumerable<Parameter> parameters)
             => string.Join(", ", parameters.Select(p => GetParameterName(p)));
 
-        private static string MethodParameterApiInvocation(Method method, Settings settings)
+        private static string MethodParameterApiInvocation(Method method, JavaSettings settings)
         {
             bool shouldUseXmlSerialization = method.CodeModel.ShouldGenerateXmlSerialization;
 
@@ -3300,12 +3293,12 @@ namespace AutoRest.Java
             return string.Join(", ", arguments);
         }
 
-        private static string MethodRestResponseHeadersName(Method method, Settings settings)
+        private static string MethodRestResponseHeadersName(Method method, JavaSettings settings)
             => method.ReturnType.Headers == null
                 ? "Void"
                 : IModelTypeName(ResponseHeaderClientType(method.ReturnType), settings);
 
-        private static string MethodRestResponseAbstractTypeName(Method method, Settings settings)
+        private static string MethodRestResponseAbstractTypeName(Method method, JavaSettings settings)
         {
             Response methodReturnType = method.ReturnType;
             string deserializedResponseHeadersType = MethodRestResponseHeadersName(method, settings);
@@ -3313,7 +3306,7 @@ namespace AutoRest.Java
             return $"RestResponse<{deserializedResponseHeadersType}, {deserializedResponseBodyType}>";
         }
 
-        private static string MethodRestResponseConcreteTypeName(Method method, Settings settings)
+        private static string MethodRestResponseConcreteTypeName(Method method, JavaSettings settings)
         {
             Response methodReturnType = method.ReturnType;
 
@@ -3324,7 +3317,7 @@ namespace AutoRest.Java
             {
                 deserializedResponseBodyType = "Void";
             }
-            else if (IsAzureOrFluent(settings) && ResponseBodyClientType(methodReturnType, settings) is SequenceType bodySequenceType && (ResponseIsPagedResponse(methodReturnType) || MethodSimulateAsPagingOperation(ResponseGetParent(methodReturnType), settings)))
+            else if (settings.IsAzureOrFluent && ResponseBodyClientType(methodReturnType, settings) is SequenceType bodySequenceType && (ResponseIsPagedResponse(methodReturnType) || MethodSimulateAsPagingOperation(ResponseGetParent(methodReturnType), settings)))
             {
                 deserializedResponseBodyType = $"{SequenceTypeGetPageImplType(bodySequenceType)}<{IModelTypeName(bodySequenceType.ElementType, settings)}>";
             }
@@ -3339,7 +3332,7 @@ namespace AutoRest.Java
         private static string MethodClientReference(Method method)
             => method.Group.IsNullOrEmpty() ? "this" : "this.client";
 
-        private static void MethodParameterConversion(Method method, Settings settings, IEnumerable<Parameter> parameters, JavaBlock block)
+        private static void MethodParameterConversion(Method method, JavaSettings settings, IEnumerable<Parameter> parameters, JavaBlock block)
         {
             string methodClientReference = MethodClientReference(method);
             foreach (Parameter parameter in parameters)
@@ -3391,7 +3384,7 @@ namespace AutoRest.Java
             }
         }
 
-        private static void MethodBuildInputMappings(Method method, Settings settings, bool filterRequired, JavaBlock block)
+        private static void MethodBuildInputMappings(Method method, JavaSettings settings, bool filterRequired, JavaBlock block)
         {
             foreach (ParameterTransformation transformation in method.InputParameterTransformation)
             {
@@ -3502,7 +3495,7 @@ namespace AutoRest.Java
             }
         }
 
-        private static void AddOptionalOrConstantParameterVariables(JavaBlock block, Method restAPIMethod, Settings settings, bool addOptionalParameterVariables)
+        private static void AddOptionalOrConstantParameterVariables(JavaBlock block, Method restAPIMethod, JavaSettings settings, bool addOptionalParameterVariables)
         {
             foreach (Parameter parameter in GetRestAPIMethodParameters(restAPIMethod))
             {
@@ -3581,11 +3574,11 @@ namespace AutoRest.Java
             return false;
         }
 
-        private static IEnumerable<string> MethodGroupImplImports(MethodGroup methodGroup, Settings settings)
+        private static IEnumerable<string> MethodGroupImplImports(MethodGroup methodGroup, JavaSettings settings)
         {
             IEnumerable<string> result;
 
-            if (IsFluent(settings))
+            if (settings.IsFluent)
             {
                 List<string> interfacesToImport = new List<string>();
 
@@ -3645,7 +3638,7 @@ namespace AutoRest.Java
 
                 result = imports;
             }
-            else if (IsAzure(settings))
+            else if (settings.IsAzure)
             {
                 List<string> imports = new List<string>();
                 imports.Add("com.microsoft.rest.v2.RestProxy");
@@ -3684,7 +3677,7 @@ namespace AutoRest.Java
             return GetClientMethodParameters(method).Count(x => x.IsRequired) == 2;
         }
 
-        private static IEnumerable<string> MethodGroupSupportedInterfaces(MethodGroup methodGroup, Settings settings)
+        private static IEnumerable<string> MethodGroupSupportedInterfaces(MethodGroup methodGroup, JavaSettings settings)
         {
             List<string> result = new List<string>();
 
@@ -3721,7 +3714,7 @@ namespace AutoRest.Java
         private static string GetMethodGroupClientInterfacePath(MethodGroup methodGroup)
             => GetPackage(methodGroup.CodeModel) + "." + GetMethodGroupClientInterfaceName(methodGroup);
 
-        private static string MethodGroupTypeString(MethodGroup methodGroup, Settings settings)
+        private static string MethodGroupTypeString(MethodGroup methodGroup, JavaSettings settings)
         {
             string methodGroupClientInterfaceName = GetMethodGroupClientInterfaceName(methodGroup);
             if (methodGroup.Methods
@@ -3733,7 +3726,7 @@ namespace AutoRest.Java
             return methodGroupClientInterfaceName;
         }
 
-        private static string GetRestAPIInterfaceName(MethodGroup methodGroup, Settings settings)
+        private static string GetRestAPIInterfaceName(MethodGroup methodGroup, JavaSettings settings)
             => GetMethodGroupName(methodGroup).ToPascalCase() + "Service";
 
         private static string GetMethodGroupName(MethodGroup methodGroup)
@@ -3799,7 +3792,7 @@ namespace AutoRest.Java
             return true;
         }
 
-        private static string IModelTypeDefaultValue(IModelType modelType, Method parent, Settings settings)
+        private static string IModelTypeDefaultValue(IModelType modelType, Method parent, JavaSettings settings)
         {
             string result;
             if (modelType is PrimaryType primaryType)
@@ -3897,7 +3890,7 @@ namespace AutoRest.Java
         private static string ParameterWireName(Parameter parameter)
             => ParameterNeedsConversion(parameter) ? $"{GetParameterName(parameter).ToCamelCase()}Converted" : GetParameterName(parameter);
 
-        private static void ParameterConvertClientTypeToWireType(JavaBlock block, Settings settings, Parameter parameter, IModelType wireType, string source, string target, string clientReference, int level = 0)
+        private static void ParameterConvertClientTypeToWireType(JavaBlock block, JavaSettings settings, Parameter parameter, IModelType wireType, string source, string target, string clientReference, int level = 0)
         {
             bool parameterIsRequired = parameter.IsRequired;
             if (wireType.IsPrimaryType(KnownPrimaryType.DateTimeRfc1123))
@@ -4027,12 +4020,12 @@ namespace AutoRest.Java
             return method.DefaultResponse.Body != null;
         }
 
-        private static void AddRestAPIInterface(JavaClass classBlock, CodeModel codeModel, Settings settings)
+        private static void AddRestAPIInterface(JavaClass classBlock, CodeModel codeModel, JavaSettings settings)
         {
             AddRestAPIInterface(classBlock, codeModel, null, settings);
         }
 
-        private static void AddRestAPIInterface(JavaClass classBlock, CodeModel codeModel, MethodGroup methodGroup, Settings settings)
+        private static void AddRestAPIInterface(JavaClass classBlock, CodeModel codeModel, MethodGroup methodGroup, JavaSettings settings)
         {
             IEnumerable<Method> restAPIMethods = methodGroup == null ? GetRestAPIMethods(codeModel) : GetRestAPIMethods(methodGroup);
             if (restAPIMethods.Any())
@@ -4041,7 +4034,7 @@ namespace AutoRest.Java
                 string restAPIBaseUrl = codeModel.BaseUrl;
                 string restAPIInterfaceName = methodGroup == null ? GetRestAPIInterfaceName(codeModel) : GetRestAPIInterfaceName(methodGroup, settings);
 
-                classBlock.JavadocComment(GetMaximumCommentWidth(settings), comment =>
+                classBlock.JavadocComment(settings.MaximumJavadocCommentWidth, comment =>
                 {
                     comment.Description($"The interface defining all the services for {clientTypeName} to be used by the proxy service to perform REST calls.");
                 });
@@ -4141,7 +4134,7 @@ namespace AutoRest.Java
 
                         string parameterDeclarations = string.Join(", ", parameterDeclarationList);
 
-                        if (IsAzureOrFluent(settings))
+                        if (settings.IsAzureOrFluent)
                         {
                             foreach (Parameter parameter in retrofitParameters.Where(p => p.Location == ParameterLocation.Path || p.Location == ParameterLocation.Query))
                             {
@@ -4169,7 +4162,7 @@ namespace AutoRest.Java
             }
         }
 
-        private static void AddServiceClientInterfacePropertyGettersAndSetters(JavaInterface interfaceBlock, CodeModel codeModel, Settings settings)
+        private static void AddServiceClientInterfacePropertyGettersAndSetters(JavaInterface interfaceBlock, CodeModel codeModel, JavaSettings settings)
         {
             string serviceClientInterfaceName = GetServiceClientInterfaceName(codeModel);
 
@@ -4215,17 +4208,17 @@ namespace AutoRest.Java
         /// <param name="methodGroup"></param>
         /// <param name="settings"></param>
         /// <returns></returns>
-        private static string GetMethodGroupClientClassName(MethodGroup methodGroup, Settings settings)
-            => GetMethodGroupClientInterfaceName(methodGroup) + (IsFluent(settings) ? "Inner" : "Impl");
+        private static string GetMethodGroupClientClassName(MethodGroup methodGroup, JavaSettings settings)
+            => GetMethodGroupClientInterfaceName(methodGroup) + (settings.IsFluent ? "Inner" : "Impl");
 
         private static string GetMethodGroupClientInterfaceName(MethodGroup methodGroup)
             => GetMethodGroupName(methodGroup).ToPascalCase();
 
-        private static void AddClientMethodOverloads(JavaType typeBlock, IEnumerable<Method> restAPIMethods, Settings settings)
+        private static void AddClientMethodOverloads(JavaType typeBlock, IEnumerable<Method> restAPIMethods, JavaSettings settings)
         {
             if (restAPIMethods.Any())
             {
-                bool isAzureOrFluent = IsAzureOrFluent(settings);
+                bool isAzureOrFluent = settings.IsAzureOrFluent;
                 foreach (Method restAPIMethod in restAPIMethods)
                 {
                     IEnumerable<Parameter> clientMethodParameters = GetClientMethodParameters(restAPIMethod);
@@ -4279,7 +4272,7 @@ namespace AutoRest.Java
             }
         }
 
-        private static void AddLongRunningOperationMethodOverloads(JavaType typeBlock, Method method, IEnumerable<Parameter> parameters, Settings settings, bool filterRequired, bool onlyRequiredParameters)
+        private static void AddLongRunningOperationMethodOverloads(JavaType typeBlock, Method method, IEnumerable<Parameter> parameters, JavaSettings settings, bool filterRequired, bool onlyRequiredParameters)
         {
             string methodName = GetMethodName(method, settings);
 
@@ -4332,7 +4325,7 @@ namespace AutoRest.Java
             });
         }
 
-        private static void AddPagingMethodOverloads(JavaType typeBlock, Method method, IEnumerable<Parameter> parameters, Settings settings, bool filterRequired, bool onlyRequiredParameters)
+        private static void AddPagingMethodOverloads(JavaType typeBlock, Method method, IEnumerable<Parameter> parameters, JavaSettings settings, bool filterRequired, bool onlyRequiredParameters)
         {
             string methodName = GetMethodName(method, settings);
             string parameterDeclaration = MethodParameterDeclaration(method, settings, parameters);
@@ -4440,7 +4433,7 @@ namespace AutoRest.Java
             });
         }
 
-        private static void AddSimulatedPagingMethodOverloads(JavaType typeBlock, Method method, IEnumerable<Parameter> parameters, Settings settings, bool filterRequired, bool onlyRequiredParameters)
+        private static void AddSimulatedPagingMethodOverloads(JavaType typeBlock, Method method, IEnumerable<Parameter> parameters, JavaSettings settings, bool filterRequired, bool onlyRequiredParameters)
         {
             string methodName = GetMethodName(method, settings);
             Response methodReturnType = method.ReturnType;
@@ -4504,7 +4497,7 @@ namespace AutoRest.Java
             });
         }
 
-        private static void AddSynchronousMethodComment(JavaType typeBlock, Method method, IEnumerable<Parameter> parameters, Settings settings)
+        private static void AddSynchronousMethodComment(JavaType typeBlock, Method method, IEnumerable<Parameter> parameters, JavaSettings settings)
         {
             typeBlock.JavadocComment(comment =>
             {
@@ -4520,14 +4513,14 @@ namespace AutoRest.Java
             });
         }
 
-        private static string GetSynchronousMethodSignature(Method method, IEnumerable<Parameter> parameters, Settings settings)
+        private static string GetSynchronousMethodSignature(Method method, IEnumerable<Parameter> parameters, JavaSettings settings)
         {
             string returnType = MethodReturnTypeResponseName(method, settings);
             string methodName = GetMethodName(method, settings);
             return $"{returnType} {methodName}({MethodParameterDeclaration(method, settings, parameters)})";
         }
 
-        private static void AddObservablePagedListMethodComment(JavaType typeBlock, Method method, IEnumerable<Parameter> parameters, Settings settings)
+        private static void AddObservablePagedListMethodComment(JavaType typeBlock, Method method, IEnumerable<Parameter> parameters, JavaSettings settings)
         {
             typeBlock.JavadocComment(comment =>
             {
@@ -4545,10 +4538,10 @@ namespace AutoRest.Java
             });
         }
 
-        private static string GetServiceFutureMethodReturnType(Method method, Settings settings)
+        private static string GetServiceFutureMethodReturnType(Method method, JavaSettings settings)
             => $"ServiceFuture<{ResponseServiceFutureGenericParameterString(method.ReturnType, settings)}>";
 
-        private static void AddServiceFutureMethodComment(JavaType typeBlock, Method method, IEnumerable<Parameter> parameters, Settings settings)
+        private static void AddServiceFutureMethodComment(JavaType typeBlock, Method method, IEnumerable<Parameter> parameters, JavaSettings settings)
         {
             typeBlock.JavadocComment(comment =>
             {
@@ -4560,7 +4553,7 @@ namespace AutoRest.Java
             });
         }
 
-        private static string GetServiceFutureMethodSignature(Method method, IEnumerable<Parameter> parameters, Settings settings)
+        private static string GetServiceFutureMethodSignature(Method method, IEnumerable<Parameter> parameters, JavaSettings settings)
         {
             string returnType = GetServiceFutureMethodReturnType(method, settings);
             string methodName = GetMethodName(method, settings);
@@ -4571,7 +4564,7 @@ namespace AutoRest.Java
                 parameterDeclaration += ", ";
             }
             string callbackParameterDeclaration = null;
-            if (IsAzureOrFluent(settings))
+            if (settings.IsAzureOrFluent)
             {
                 if (MethodIsPagingOperation(method))
                 {
@@ -4607,7 +4600,7 @@ namespace AutoRest.Java
             }
         }
 
-        private static void AddParameters(JavaJavadocComment comment, IEnumerable<Parameter> parameters, Settings settings)
+        private static void AddParameters(JavaJavadocComment comment, IEnumerable<Parameter> parameters, JavaSettings settings)
         {
             foreach (Parameter param in parameters)
             {
@@ -4625,10 +4618,10 @@ namespace AutoRest.Java
             comment.Throws("IllegalArgumentException", "thrown if parameters fail the validation");
         }
 
-        private static void AddServiceClientConstructorBody(JavaBlock constructor, CodeModel codeModel, Settings settings)
+        private static void AddServiceClientConstructorBody(JavaBlock constructor, CodeModel codeModel, JavaSettings settings)
         {
             List<string> superCallArgumentList = new List<string>() { httpPipelineVariableName };
-            if (IsAzureOrFluent(settings))
+            if (settings.IsAzureOrFluent)
             {
                 superCallArgumentList.Add(azureEnvironmentVariableName);
             }
@@ -4649,13 +4642,13 @@ namespace AutoRest.Java
             AddProxyVariableInitializationStatement(constructor, GetRestAPIMethods(codeModel), GetRestAPIInterfaceName(codeModel), "this", settings);
         }
 
-        private static string CreateDefaultPipelineExpression(Settings settings, params string[] arguments)
+        private static string CreateDefaultPipelineExpression(JavaSettings settings, params string[] arguments)
         {
             string proxyCreatorType = GetProxyCreatorType(settings);
             return $"{proxyCreatorType}.createDefaultPipeline({string.Join(", ", arguments)})";
         }
 
-        private static void AddProxyVariableInitializationStatement(JavaBlock constructor, IEnumerable<Method> restAPIMethods, string restAPIInterfaceName, string serviceClientVariableName, Settings settings)
+        private static void AddProxyVariableInitializationStatement(JavaBlock constructor, IEnumerable<Method> restAPIMethods, string restAPIInterfaceName, string serviceClientVariableName, JavaSettings settings)
         {
             if (restAPIMethods.Any())
             {
@@ -4663,10 +4656,10 @@ namespace AutoRest.Java
             }
         }
 
-        private static string GetProxyCreatorType(Settings settings)
-            => IsAzureOrFluent(settings) ? azureProxyType : restProxyType;
+        private static string GetProxyCreatorType(JavaSettings settings)
+            => settings.IsAzureOrFluent ? azureProxyType : restProxyType;
 
-        private static string GetPropertyWireTypeName(Property property, Settings settings)
+        private static string GetPropertyWireTypeName(Property property, JavaSettings settings)
             => IModelTypeName(GetPropertyModelType(property), settings);
 
         private static string ConvertProperty(string sourceTypeName, string targetTypeName, string expression)

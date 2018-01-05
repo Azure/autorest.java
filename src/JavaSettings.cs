@@ -27,5 +27,7 @@ namespace AutoRest.Java
         public string FileHeaderText { get; set; }
 
         public int MaximumJavadocCommentWidth { get; set; }
+
+        public string ServiceName { get; set; }
     }
 }
