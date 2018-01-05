@@ -10,12 +10,28 @@ namespace AutoRest.Java
     {
         private const string singleIndent = "    ";
 
-        private readonly StringBuilder contents = new StringBuilder();
-        private readonly StringBuilder linePrefix = new StringBuilder();
+        private readonly StringBuilder contents;
+        private readonly StringBuilder linePrefix;
 
         private int? wordWrapWidth;
 
         private bool previousLineEndingPending;
+
+        public JavaFileContents()
+            : this(null)
+        {
+        }
+
+        public JavaFileContents(string fileContents)
+        {
+            contents = new StringBuilder();
+            linePrefix = new StringBuilder();
+
+            if (!string.IsNullOrEmpty(fileContents))
+            {
+                contents.Append(fileContents);
+            }
+        }
 
         public override string ToString()
         {

@@ -91,7 +91,7 @@ namespace AutoRest.Java
             Settings.Instance.CustomSettings.Add("Fluent", fluent);
 
             // process
-            IAnyPlugin plugin = new PluginJv();
+            IAnyPlugin plugin = new JavaPlugin();
 
             Settings.PopulateSettings(plugin.Settings, Settings.Instance.CustomSettings);
             

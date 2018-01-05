@@ -10,9 +10,14 @@ namespace AutoRest.Java
         private int packageWithPeriodLength;
 
         public JavaFile(string filePath)
+            : this(filePath, null)
+        {
+        }
+
+        public JavaFile(string filePath, string fileContents)
         {
             FilePath = filePath;
-            Contents = new JavaFileContents();
+            Contents = new JavaFileContents(fileContents);
         }
 
         public string FilePath { get; }
