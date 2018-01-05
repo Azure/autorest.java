@@ -32,16 +32,16 @@ namespace AutoRest.Java
             addNewLine = true;
         }
 
-        public void MultipleLineComment(Action<JavaMultipleLineComment> commentAction)
+        public void JavadocComment(Action<JavaJavadocComment> commentAction)
         {
             AddExpectedNewLine();
-            contents.MultipleLineComment(commentAction);
+            contents.JavadocComment(commentAction);
         }
 
-        public void SingleLineSlashSlashComment(string comment)
+        public void LineComment(string comment)
         {
             AddExpectedNewLine();
-            contents.SingleLineSlashSlashComment(comment);
+            contents.LineComment(comment);
         }
 
         public void Annotation(params string[] annotations)

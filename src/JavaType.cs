@@ -4,7 +4,7 @@ namespace AutoRest.Java
 {
     public interface JavaType
     {
-        void MultipleLineComment(Action<JavaMultipleLineComment> commentAction);
+        void JavadocComment(Action<JavaJavadocComment> commentAction);
 
         void Annotation(params string[] annotations);
 

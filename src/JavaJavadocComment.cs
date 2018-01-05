@@ -1,11 +1,11 @@
 ﻿namespace AutoRest.Java
 {
-    public class JavaMultipleLineComment
+    public class JavaJavadocComment
     {
         private readonly JavaFileContents contents;
         private bool expectsLineSeparator;
 
-        public JavaMultipleLineComment(JavaFileContents contents)
+        public JavaJavadocComment(JavaFileContents contents)
         {
             this.contents = contents;
         }
@@ -19,28 +19,28 @@
             }
         }
 
-        public JavaMultipleLineComment Description(string description)
+        public JavaJavadocComment Description(string description)
         {
             contents.Line(ProcessText(description));
             expectsLineSeparator = true;
             return this;
         }
 
-        public JavaMultipleLineComment Param(string parameterName, string parameterDescription)
+        public JavaJavadocComment Param(string parameterName, string parameterDescription)
         {
             AddExpectedLineSeparator();
             contents.CommentParam(parameterName, ProcessText(parameterDescription));
             return this;
         }
 
-        public JavaMultipleLineComment Return(string returnValueDescription)
+        public JavaJavadocComment Return(string returnValueDescription)
         {
             AddExpectedLineSeparator();
             contents.CommentReturn(ProcessText(returnValueDescription));
             return this;
         }
 
-        public JavaMultipleLineComment Throws(string exceptionTypeName, string description)
+        public JavaJavadocComment Throws(string exceptionTypeName, string description)
         {
             AddExpectedLineSeparator();
             contents.CommentThrows(exceptionTypeName, ProcessText(description));
