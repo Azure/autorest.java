@@ -10,9 +10,11 @@
 
 package fixtures.azurespecials.implementation;
 
-import com.microsoft.rest.v2.RestResponse;
-import fixtures.azurespecials.Odatas;
 import com.google.common.reflect.TypeToken;
+import com.microsoft.azure.v2.AzureProxy;
+import com.microsoft.rest.v2.RestResponse;
+import com.microsoft.rest.v2.ServiceCallback;
+import com.microsoft.rest.v2.ServiceFuture;
 import com.microsoft.rest.v2.annotations.ExpectedResponses;
 import com.microsoft.rest.v2.annotations.GET;
 import com.microsoft.rest.v2.annotations.HeaderParam;
@@ -21,23 +23,27 @@ import com.microsoft.rest.v2.annotations.Host;
 import com.microsoft.rest.v2.annotations.QueryParam;
 import com.microsoft.rest.v2.annotations.UnexpectedResponseExceptionType;
 import com.microsoft.rest.v2.http.HttpClient;
-import com.microsoft.rest.v2.ServiceCallback;
-import com.microsoft.rest.v2.ServiceFuture;
+import fixtures.azurespecials.Odatas;
 import fixtures.azurespecials.models.ErrorException;
+import io.reactivex.Completable;
+import io.reactivex.Observable;
+import io.reactivex.Single;
+import io.reactivex.functions.Function;
 import java.io.IOException;
-import rx.functions.Func1;
-import rx.Observable;
-import rx.Single;
-import com.microsoft.azure.v2.AzureProxy;
 
 /**
- * An instance of this class provides access to all the operations defined
- * in Odatas.
+ * An instance of this class provides access to all the operations defined in
+ * Odatas.
  */
 public class OdatasImpl implements Odatas {
-    /** The RestProxy service to perform REST calls. */
+    /**
+     * The proxy service used to perform REST calls.
+     */
     private OdatasService service;
-    /** The service client containing this operation class. */
+
+    /**
+     * The service client containing this operation class.
+     */
     private AutoRestAzureSpecialParametersTestClientImpl client;
 
     /**
@@ -46,70 +52,67 @@ public class OdatasImpl implements Odatas {
      * @param client the instance of the service client containing this operation class.
      */
     public OdatasImpl(AutoRestAzureSpecialParametersTestClientImpl client) {
-        this.service = AzureProxy.create(OdatasService.class, client.restClient().baseURL(), client.httpClient(), client.serializerAdapter());
+        this.service = AzureProxy.create(OdatasService.class, client);
         this.client = client;
     }
 
     /**
-     * The interface defining all the services for Odatas to be
-     * used by RestProxy to perform REST calls.
+     * The interface defining all the services for Odatas to be used by the
+     * proxy service to perform REST calls.
      */
-    @Host("http://localhost")
+    @Host("http://localhost:3000")
     interface OdatasService {
-        @Headers({ "x-ms-logging-context: fixtures.azurespecials.Odatas getWithFilter" })
         @GET("azurespecials/odata/filter")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<RestResponse<Void, Void>> getWithFilter(@QueryParam("$filter") String filter, @QueryParam("$top") Integer top, @QueryParam("$orderby") String orderby, @HeaderParam("accept-language") String acceptLanguage, @HeaderParam("User-Agent") String userAgent);
-
+        Single<RestResponse<Void, Void>> getWithFilter(@QueryParam("$filter") String filter, @QueryParam("$top") Integer top, @QueryParam("$orderby") String orderby, @HeaderParam("accept-language") String acceptLanguage);
     }
 
     /**
      * Specify filter parameter with value '$filter=id gt 5 and name eq 'foo'&amp;$orderby=id&amp;$top=10'.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @throws ErrorException thrown if the request is rejected by server
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
-     * @return the void object if successful.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     public void getWithFilter() {
-        getWithFilterAsync().toBlocking().value();
+        getWithFilterAsync().blockingAwait();
     }
 
     /**
      * Specify filter parameter with value '$filter=id gt 5 and name eq 'foo'&amp;$orderby=id&amp;$top=10'.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceFuture} object
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    public ServiceFuture<Void> getWithFilterAsync(ServiceCallback<Void> serviceCallback) {
+    public ServiceFuture<Void> getWithFilterAsync(final ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(getWithFilterAsync(), serviceCallback);
     }
 
     /**
      * Specify filter parameter with value '$filter=id gt 5 and name eq 'foo'&amp;$orderby=id&amp;$top=10'.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return a {@link Single} emitting the RestResponse<Void, Void> object
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
      */
     public Single<RestResponse<Void, Void>> getWithFilterWithRestResponseAsync() {
         final String filter = null;
         final Integer top = null;
         final String orderby = null;
-        return service.getWithFilter(filter, top, orderby, this.client.acceptLanguage(), this.client.userAgent());
+        return service.getWithFilter(filter, top, orderby, this.client.acceptLanguage());
     }
 
     /**
      * Specify filter parameter with value '$filter=id gt 5 and name eq 'foo'&amp;$orderby=id&amp;$top=10'.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return a {@link Single} emitting the RestResponse<Void, Void> object
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link Completable} object if successful.
      */
-    public Single<Void> getWithFilterAsync() {
+    public Completable getWithFilterAsync() {
         return getWithFilterWithRestResponseAsync()
-            .map(new Func1<RestResponse<Void, Void>, Void>() { public Void call(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
-        }
+            .toCompletable();
+    }
 
     /**
      * Specify filter parameter with value '$filter=id gt 5 and name eq 'foo'&amp;$orderby=id&amp;$top=10'.
@@ -117,13 +120,12 @@ public class OdatasImpl implements Odatas {
      * @param filter The filter parameter with value '$filter=id gt 5 and name eq 'foo''.
      * @param top The top parameter with value 10.
      * @param orderby The orderby parameter with value id.
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @throws ErrorException thrown if the request is rejected by server
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
-     * @return the void object if successful.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     public void getWithFilter(String filter, Integer top, String orderby) {
-        getWithFilterAsync(filter, top, orderby).toBlocking().value();
+        getWithFilterAsync(filter, top, orderby).blockingAwait();
     }
 
     /**
@@ -133,10 +135,10 @@ public class OdatasImpl implements Odatas {
      * @param top The top parameter with value 10.
      * @param orderby The orderby parameter with value id.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceFuture} object
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    public ServiceFuture<Void> getWithFilterAsync(String filter, Integer top, String orderby, ServiceCallback<Void> serviceCallback) {
+    public ServiceFuture<Void> getWithFilterAsync(String filter, Integer top, String orderby, final ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(getWithFilterAsync(filter, top, orderby), serviceCallback);
     }
 
@@ -146,11 +148,11 @@ public class OdatasImpl implements Odatas {
      * @param filter The filter parameter with value '$filter=id gt 5 and name eq 'foo''.
      * @param top The top parameter with value 10.
      * @param orderby The orderby parameter with value id.
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return a {@link Single} emitting the RestResponse<Void, Void> object
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
      */
     public Single<RestResponse<Void, Void>> getWithFilterWithRestResponseAsync(String filter, Integer top, String orderby) {
-        return service.getWithFilter(filter, top, orderby, this.client.acceptLanguage(), this.client.userAgent());
+        return service.getWithFilter(filter, top, orderby, this.client.acceptLanguage());
     }
 
     /**
@@ -159,13 +161,11 @@ public class OdatasImpl implements Odatas {
      * @param filter The filter parameter with value '$filter=id gt 5 and name eq 'foo''.
      * @param top The top parameter with value 10.
      * @param orderby The orderby parameter with value id.
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return a {@link Single} emitting the RestResponse<Void, Void> object
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link Completable} object if successful.
      */
-    public Single<Void> getWithFilterAsync(String filter, Integer top, String orderby) {
+    public Completable getWithFilterAsync(String filter, Integer top, String orderby) {
         return getWithFilterWithRestResponseAsync(filter, top, orderby)
-            .map(new Func1<RestResponse<Void, Void>, Void>() { public Void call(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
-        }
-
-
+            .toCompletable();
+    }
 }

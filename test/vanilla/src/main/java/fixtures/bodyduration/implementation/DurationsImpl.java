@@ -10,10 +10,11 @@
 
 package fixtures.bodyduration.implementation;
 
+import com.google.common.reflect.TypeToken;
 import com.microsoft.rest.v2.RestProxy;
 import com.microsoft.rest.v2.RestResponse;
-import fixtures.bodyduration.Durations;
-import com.google.common.reflect.TypeToken;
+import com.microsoft.rest.v2.ServiceCallback;
+import com.microsoft.rest.v2.ServiceFuture;
 import com.microsoft.rest.v2.annotations.BodyParam;
 import com.microsoft.rest.v2.annotations.ExpectedResponses;
 import com.microsoft.rest.v2.annotations.GET;
@@ -22,95 +23,96 @@ import com.microsoft.rest.v2.annotations.Host;
 import com.microsoft.rest.v2.annotations.PUT;
 import com.microsoft.rest.v2.annotations.UnexpectedResponseExceptionType;
 import com.microsoft.rest.v2.http.HttpClient;
-import com.microsoft.rest.v2.ServiceCallback;
-import com.microsoft.rest.v2.ServiceFuture;
+import fixtures.bodyduration.Durations;
 import fixtures.bodyduration.models.ErrorException;
+import io.reactivex.Completable;
+import io.reactivex.Maybe;
+import io.reactivex.Observable;
+import io.reactivex.Single;
+import io.reactivex.functions.Function;
 import java.io.IOException;
 import org.joda.time.Period;
-import rx.functions.Func1;
-import rx.Observable;
-import rx.Single;
 
 /**
- * An instance of this class provides access to all the operations defined
- * in Durations.
+ * An instance of this class provides access to all the operations defined in
+ * Durations.
  */
 public class DurationsImpl implements Durations {
-    /** The RestProxy service to perform REST calls. */
+    /**
+     * The proxy service used to perform REST calls.
+     */
     private DurationsService service;
-    /** The service client containing this operation class. */
+
+    /**
+     * The service client containing this operation class.
+     */
     private AutoRestDurationTestServiceImpl client;
 
     /**
-     * Initializes an instance of Durations.
+     * Initializes an instance of DurationsImpl.
      *
      * @param client the instance of the service client containing this operation class.
      */
     public DurationsImpl(AutoRestDurationTestServiceImpl client) {
-        this.service = RestProxy.create(DurationsService.class, client.restClient().baseURL(), client.httpClient(), client.serializerAdapter());
+        this.service = RestProxy.create(DurationsService.class, client);
         this.client = client;
     }
 
     /**
-     * The interface defining all the services for Durations to be
-     * used by RestProxy to perform REST calls.
-    */
-    @Host("https://localhost")
+     * The interface defining all the services for Durations to be used by the
+     * proxy service to perform REST calls.
+     */
+    @Host("http://localhost:3000")
     interface DurationsService {
-        @Headers({ "x-ms-logging-context: fixtures.bodyduration.Durations getNull" })
         @GET("duration/null")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
         Single<RestResponse<Void, Period>> getNull();
 
-        @Headers({ "x-ms-logging-context: fixtures.bodyduration.Durations putPositiveDuration" })
         @PUT("duration/positiveduration")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
         Single<RestResponse<Void, Void>> putPositiveDuration(@BodyParam("application/json; charset=utf-8") Period durationBody);
 
-        @Headers({ "x-ms-logging-context: fixtures.bodyduration.Durations getPositiveDuration" })
         @GET("duration/positiveduration")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
         Single<RestResponse<Void, Period>> getPositiveDuration();
 
-        @Headers({ "x-ms-logging-context: fixtures.bodyduration.Durations getInvalid" })
         @GET("duration/invalid")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
         Single<RestResponse<Void, Period>> getInvalid();
-
     }
 
     /**
      * Get null duration value.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @throws ErrorException thrown if the request is rejected by server
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the Period object if successful.
      */
     public Period getNull() {
-        return getNullAsync().toBlocking().value();
+        return getNullAsync().blockingGet();
     }
 
     /**
      * Get null duration value.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceFuture} object
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link ServiceFuture&lt;Period&gt;} object.
      */
-    public ServiceFuture<Period> getNullAsync(ServiceCallback<Period> serviceCallback) {
+    public ServiceFuture<Period> getNullAsync(final ServiceCallback<Period> serviceCallback) {
         return ServiceFuture.fromBody(getNullAsync(), serviceCallback);
     }
 
     /**
      * Get null duration value.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return a {@link Single} emitting the RestResponse<Void, Period> object
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link Single&lt;RestResponse&lt;Void, Period&gt;&gt;} object if successful.
      */
     public Single<RestResponse<Void, Period>> getNullWithRestResponseAsync() {
         return service.getNull();
@@ -119,46 +121,52 @@ public class DurationsImpl implements Durations {
     /**
      * Get null duration value.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return a {@link Single} emitting the RestResponse<Void, Period> object
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link Maybe&lt;Period&gt;} object if successful.
      */
-    public Single<Period> getNullAsync() {
+    public Maybe<Period> getNullAsync() {
         return getNullWithRestResponseAsync()
-            .map(new Func1<RestResponse<Void, Period>, Period>() { public Period call(RestResponse<Void, Period> restResponse) { return restResponse.body(); } });
-        }
-
-
-    /**
-     * Put a positive duration value.
-     *
-     * @param durationBody the Period value
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @throws ErrorException thrown if the request is rejected by server
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
-     * @return the void object if successful.
-     */
-    public void putPositiveDuration(Period durationBody) {
-        putPositiveDurationAsync(durationBody).toBlocking().value();
+            .flatMapMaybe(new Function<RestResponse<Void, Period>, Maybe<Period>>() {
+                public Maybe<Period> apply(RestResponse<Void, Period> restResponse) {
+                    if (restResponse.body() == null) {
+                        return Maybe.empty();
+                    } else {
+                        return Maybe.just(restResponse.body());
+                    }
+                }
+            });
     }
 
     /**
      * Put a positive duration value.
      *
-     * @param durationBody the Period value
-     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceFuture} object
+     * @param durationBody the Period value.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
-    public ServiceFuture<Void> putPositiveDurationAsync(Period durationBody, ServiceCallback<Void> serviceCallback) {
+    public void putPositiveDuration(Period durationBody) {
+        putPositiveDurationAsync(durationBody).blockingAwait();
+    }
+
+    /**
+     * Put a positive duration value.
+     *
+     * @param durationBody the Period value.
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link ServiceFuture&lt;Void&gt;} object.
+     */
+    public ServiceFuture<Void> putPositiveDurationAsync(Period durationBody, final ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(putPositiveDurationAsync(durationBody), serviceCallback);
     }
 
     /**
      * Put a positive duration value.
      *
-     * @param durationBody the Period value
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return a {@link Single} emitting the RestResponse<Void, Void> object
+     * @param durationBody the Period value.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
      */
     public Single<RestResponse<Void, Void>> putPositiveDurationWithRestResponseAsync(Period durationBody) {
         if (durationBody == null) {
@@ -170,44 +178,43 @@ public class DurationsImpl implements Durations {
     /**
      * Put a positive duration value.
      *
-     * @param durationBody the Period value
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return a {@link Single} emitting the RestResponse<Void, Void> object
+     * @param durationBody the Period value.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link Completable} object if successful.
      */
-    public Single<Void> putPositiveDurationAsync(Period durationBody) {
+    public Completable putPositiveDurationAsync(Period durationBody) {
         return putPositiveDurationWithRestResponseAsync(durationBody)
-            .map(new Func1<RestResponse<Void, Void>, Void>() { public Void call(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
-        }
-
+            .toCompletable();
+    }
 
     /**
      * Get a positive duration value.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @throws ErrorException thrown if the request is rejected by server
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the Period object if successful.
      */
     public Period getPositiveDuration() {
-        return getPositiveDurationAsync().toBlocking().value();
+        return getPositiveDurationAsync().blockingGet();
     }
 
     /**
      * Get a positive duration value.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceFuture} object
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link ServiceFuture&lt;Period&gt;} object.
      */
-    public ServiceFuture<Period> getPositiveDurationAsync(ServiceCallback<Period> serviceCallback) {
+    public ServiceFuture<Period> getPositiveDurationAsync(final ServiceCallback<Period> serviceCallback) {
         return ServiceFuture.fromBody(getPositiveDurationAsync(), serviceCallback);
     }
 
     /**
      * Get a positive duration value.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return a {@link Single} emitting the RestResponse<Void, Period> object
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link Single&lt;RestResponse&lt;Void, Period&gt;&gt;} object if successful.
      */
     public Single<RestResponse<Void, Period>> getPositiveDurationWithRestResponseAsync() {
         return service.getPositiveDuration();
@@ -216,43 +223,50 @@ public class DurationsImpl implements Durations {
     /**
      * Get a positive duration value.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return a {@link Single} emitting the RestResponse<Void, Period> object
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link Maybe&lt;Period&gt;} object if successful.
      */
-    public Single<Period> getPositiveDurationAsync() {
+    public Maybe<Period> getPositiveDurationAsync() {
         return getPositiveDurationWithRestResponseAsync()
-            .map(new Func1<RestResponse<Void, Period>, Period>() { public Period call(RestResponse<Void, Period> restResponse) { return restResponse.body(); } });
-        }
-
+            .flatMapMaybe(new Function<RestResponse<Void, Period>, Maybe<Period>>() {
+                public Maybe<Period> apply(RestResponse<Void, Period> restResponse) {
+                    if (restResponse.body() == null) {
+                        return Maybe.empty();
+                    } else {
+                        return Maybe.just(restResponse.body());
+                    }
+                }
+            });
+    }
 
     /**
      * Get an invalid duration value.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @throws ErrorException thrown if the request is rejected by server
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the Period object if successful.
      */
     public Period getInvalid() {
-        return getInvalidAsync().toBlocking().value();
+        return getInvalidAsync().blockingGet();
     }
 
     /**
      * Get an invalid duration value.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceFuture} object
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link ServiceFuture&lt;Period&gt;} object.
      */
-    public ServiceFuture<Period> getInvalidAsync(ServiceCallback<Period> serviceCallback) {
+    public ServiceFuture<Period> getInvalidAsync(final ServiceCallback<Period> serviceCallback) {
         return ServiceFuture.fromBody(getInvalidAsync(), serviceCallback);
     }
 
     /**
      * Get an invalid duration value.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return a {@link Single} emitting the RestResponse<Void, Period> object
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link Single&lt;RestResponse&lt;Void, Period&gt;&gt;} object if successful.
      */
     public Single<RestResponse<Void, Period>> getInvalidWithRestResponseAsync() {
         return service.getInvalid();
@@ -261,13 +275,19 @@ public class DurationsImpl implements Durations {
     /**
      * Get an invalid duration value.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return a {@link Single} emitting the RestResponse<Void, Period> object
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link Maybe&lt;Period&gt;} object if successful.
      */
-    public Single<Period> getInvalidAsync() {
+    public Maybe<Period> getInvalidAsync() {
         return getInvalidWithRestResponseAsync()
-            .map(new Func1<RestResponse<Void, Period>, Period>() { public Period call(RestResponse<Void, Period> restResponse) { return restResponse.body(); } });
-        }
-
-
+            .flatMapMaybe(new Function<RestResponse<Void, Period>, Maybe<Period>>() {
+                public Maybe<Period> apply(RestResponse<Void, Period> restResponse) {
+                    if (restResponse.body() == null) {
+                        return Maybe.empty();
+                    } else {
+                        return Maybe.just(restResponse.body());
+                    }
+                }
+            });
+    }
 }

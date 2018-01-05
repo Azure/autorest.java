@@ -7,7 +7,8 @@
 // regenerated.
 
 /**
- * This package contains the implementation classes for AutoRestHeadTestService.
+ * This package contains the implementation classes for
+ * AutoRestHeadTestService.
  * Test Infrastructure for AutoRest.
  */
 package fixtures.head.implementation;

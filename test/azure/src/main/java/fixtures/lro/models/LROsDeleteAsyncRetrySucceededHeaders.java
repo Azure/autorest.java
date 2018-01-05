@@ -40,7 +40,7 @@ public class LROsDeleteAsyncRetrySucceededHeaders {
     /**
      * Get the azureAsyncOperation value.
      *
-     * @return the azureAsyncOperation value
+     * @return the azureAsyncOperation value.
      */
     public String azureAsyncOperation() {
         return this.azureAsyncOperation;
@@ -49,7 +49,7 @@ public class LROsDeleteAsyncRetrySucceededHeaders {
     /**
      * Set the azureAsyncOperation value.
      *
-     * @param azureAsyncOperation the azureAsyncOperation value to set
+     * @param azureAsyncOperation the azureAsyncOperation value to set.
      * @return the LROsDeleteAsyncRetrySucceededHeaders object itself.
      */
     public LROsDeleteAsyncRetrySucceededHeaders withAzureAsyncOperation(String azureAsyncOperation) {
@@ -60,7 +60,7 @@ public class LROsDeleteAsyncRetrySucceededHeaders {
     /**
      * Get the location value.
      *
-     * @return the location value
+     * @return the location value.
      */
     public String location() {
         return this.location;
@@ -69,7 +69,7 @@ public class LROsDeleteAsyncRetrySucceededHeaders {
     /**
      * Set the location value.
      *
-     * @param location the location value to set
+     * @param location the location value to set.
      * @return the LROsDeleteAsyncRetrySucceededHeaders object itself.
      */
     public LROsDeleteAsyncRetrySucceededHeaders withLocation(String location) {
@@ -80,7 +80,7 @@ public class LROsDeleteAsyncRetrySucceededHeaders {
     /**
      * Get the retryAfter value.
      *
-     * @return the retryAfter value
+     * @return the retryAfter value.
      */
     public Integer retryAfter() {
         return this.retryAfter;
@@ -89,12 +89,11 @@ public class LROsDeleteAsyncRetrySucceededHeaders {
     /**
      * Set the retryAfter value.
      *
-     * @param retryAfter the retryAfter value to set
+     * @param retryAfter the retryAfter value to set.
      * @return the LROsDeleteAsyncRetrySucceededHeaders object itself.
      */
     public LROsDeleteAsyncRetrySucceededHeaders withRetryAfter(Integer retryAfter) {
         this.retryAfter = retryAfter;
         return this;
     }
-
 }

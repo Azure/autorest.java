@@ -25,7 +25,7 @@ public class Siamese extends Cat {
     /**
      * Get the breed value.
      *
-     * @return the breed value
+     * @return the breed value.
      */
     public String breed() {
         return this.breed;
@@ -34,12 +34,11 @@ public class Siamese extends Cat {
     /**
      * Set the breed value.
      *
-     * @param breed the breed value to set
+     * @param breed the breed value to set.
      * @return the Siamese object itself.
      */
     public Siamese withBreed(String breed) {
         this.breed = breed;
         return this;
     }
-
 }

@@ -10,22 +10,21 @@
 
 package fixtures.url.implementation;
 
+import com.microsoft.rest.v2.RestProxy;
+import com.microsoft.rest.v2.ServiceClient;
+import com.microsoft.rest.v2.http.HttpPipeline;
 import fixtures.url.AutoRestUrlTestService;
+import fixtures.url.PathItems;
 import fixtures.url.Paths;
 import fixtures.url.Queries;
-import fixtures.url.PathItems;
-import com.microsoft.rest.v2.RestProxy;
-import com.microsoft.rest.v2.RestResponse;
-import com.microsoft.rest.v2.ServiceClient;
-import com.microsoft.rest.v2.RestClient;
-import rx.Single;
 
 /**
- * Initializes a new instance of the AutoRestUrlTestService class.
+ * Initializes a new instance of the AutoRestUrlTestService type.
  */
 public class AutoRestUrlTestServiceImpl extends ServiceClient implements AutoRestUrlTestService {
-
-    /** A string value 'globalItemStringPath' that appears in the path. */
+    /**
+     * A string value 'globalItemStringPath' that appears in the path.
+     */
     private String globalStringPath;
 
     /**
@@ -41,14 +40,16 @@ public class AutoRestUrlTestServiceImpl extends ServiceClient implements AutoRes
      * Sets A string value 'globalItemStringPath' that appears in the path.
      *
      * @param globalStringPath the globalStringPath value.
-     * @return the service client itself
+     * @return the service client itself.
      */
     public AutoRestUrlTestServiceImpl withGlobalStringPath(String globalStringPath) {
         this.globalStringPath = globalStringPath;
         return this;
     }
 
-    /** should contain value null. */
+    /**
+     * should contain value null.
+     */
     private String globalStringQuery;
 
     /**
@@ -64,7 +65,7 @@ public class AutoRestUrlTestServiceImpl extends ServiceClient implements AutoRes
      * Sets should contain value null.
      *
      * @param globalStringQuery the globalStringQuery value.
-     * @return the service client itself
+     * @return the service client itself.
      */
     public AutoRestUrlTestServiceImpl withGlobalStringQuery(String globalStringQuery) {
         this.globalStringQuery = globalStringQuery;
@@ -78,6 +79,7 @@ public class AutoRestUrlTestServiceImpl extends ServiceClient implements AutoRes
 
     /**
      * Gets the Paths object to access its operations.
+     *
      * @return the Paths object.
      */
     public Paths paths() {
@@ -91,6 +93,7 @@ public class AutoRestUrlTestServiceImpl extends ServiceClient implements AutoRes
 
     /**
      * Gets the Queries object to access its operations.
+     *
      * @return the Queries object.
      */
     public Queries queries() {
@@ -104,6 +107,7 @@ public class AutoRestUrlTestServiceImpl extends ServiceClient implements AutoRes
 
     /**
      * Gets the PathItems object to access its operations.
+     *
      * @return the PathItems object.
      */
     public PathItems pathItems() {
@@ -112,34 +116,18 @@ public class AutoRestUrlTestServiceImpl extends ServiceClient implements AutoRes
 
     /**
      * Initializes an instance of AutoRestUrlTestService client.
-     *
-     * @param baseUrl the base URL of the host
-     */
-    public AutoRestUrlTestServiceImpl(String baseUrl) {
-        super(baseUrl);
-        initialize();
-    }
-
-    /**
-     * Initializes an instance of AutoRestUrlTestService client.
-     *
      */
     public AutoRestUrlTestServiceImpl() {
-        this("http://localhost");
-        initialize();
+        this(RestProxy.createDefaultPipeline());
     }
 
     /**
      * Initializes an instance of AutoRestUrlTestService client.
      *
-     * @param restClient the REST client containing pre-configured settings
+     * @param httpPipeline The HTTP pipeline to send requests through.
      */
-    public AutoRestUrlTestServiceImpl(RestClient restClient) {
-        super(restClient);
-        initialize();
-    }
-
-    private void initialize() {
+    public AutoRestUrlTestServiceImpl(HttpPipeline httpPipeline) {
+        super(httpPipeline);
         this.paths = new PathsImpl(this);
         this.queries = new QueriesImpl(this);
         this.pathItems = new PathItemsImpl(this);

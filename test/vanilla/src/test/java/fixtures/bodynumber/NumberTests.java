@@ -1,6 +1,9 @@
 package fixtures.bodynumber;
 
 import com.fasterxml.jackson.core.JsonParseException;
+import com.microsoft.rest.v2.http.HttpPipeline;
+import com.microsoft.rest.v2.policy.PortPolicy;
+import com.microsoft.rest.v2.policy.ProtocolPolicy;
 import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -14,13 +17,15 @@ public class NumberTests {
 
     @BeforeClass
     public static void setup() {
-        client = new AutoRestNumberTestServiceImpl("http://localhost:3000");
+        client = new AutoRestNumberTestServiceImpl(HttpPipeline.build(
+                new ProtocolPolicy.Factory("http"),
+                new PortPolicy.Factory(3000)));
     }
 
     @Test
     public void getNull() throws Exception {
         try {
-            client.numbers().getNull();
+            double d = client.numbers().getNull();
             fail();
         } catch (NullPointerException e) {
             // expected

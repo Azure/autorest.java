@@ -10,10 +10,11 @@
 
 package fixtures.bodyformdata.implementation;
 
+import com.google.common.reflect.TypeToken;
 import com.microsoft.rest.v2.RestProxy;
 import com.microsoft.rest.v2.RestResponse;
-import fixtures.bodyformdata.Formdatas;
-import com.google.common.reflect.TypeToken;
+import com.microsoft.rest.v2.ServiceCallback;
+import com.microsoft.rest.v2.ServiceFuture;
 import com.microsoft.rest.v2.annotations.BodyParam;
 import com.microsoft.rest.v2.annotations.ExpectedResponses;
 import com.microsoft.rest.v2.annotations.Headers;
@@ -21,56 +22,57 @@ import com.microsoft.rest.v2.annotations.Host;
 import com.microsoft.rest.v2.annotations.POST;
 import com.microsoft.rest.v2.annotations.PUT;
 import com.microsoft.rest.v2.annotations.UnexpectedResponseExceptionType;
+import com.microsoft.rest.v2.http.AsyncInputStream;
 import com.microsoft.rest.v2.http.HttpClient;
-import com.microsoft.rest.v2.ServiceCallback;
-import com.microsoft.rest.v2.ServiceFuture;
+import fixtures.bodyformdata.Formdatas;
 import fixtures.bodyformdata.models.ErrorException;
-import java.io.InputStream;
+import io.reactivex.Maybe;
+import io.reactivex.Observable;
+import io.reactivex.Single;
+import io.reactivex.functions.Function;
 import java.io.IOException;
-import rx.functions.Func1;
-import rx.Observable;
-import rx.Single;
 
 /**
- * An instance of this class provides access to all the operations defined
- * in Formdatas.
+ * An instance of this class provides access to all the operations defined in
+ * Formdatas.
  */
 public class FormdatasImpl implements Formdatas {
-    /** The RestProxy service to perform REST calls. */
+    /**
+     * The proxy service used to perform REST calls.
+     */
     private FormdatasService service;
-    /** The service client containing this operation class. */
+
+    /**
+     * The service client containing this operation class.
+     */
     private AutoRestSwaggerBATFormDataServiceImpl client;
 
     /**
-     * Initializes an instance of Formdatas.
+     * Initializes an instance of FormdatasImpl.
      *
      * @param client the instance of the service client containing this operation class.
      */
     public FormdatasImpl(AutoRestSwaggerBATFormDataServiceImpl client) {
-        this.service = RestProxy.create(FormdatasService.class, client.restClient().baseURL(), client.httpClient(), client.serializerAdapter());
+        this.service = RestProxy.create(FormdatasService.class, client);
         this.client = client;
     }
 
     /**
-     * The interface defining all the services for Formdatas to be
-     * used by RestProxy to perform REST calls.
-    */
-    @Host("http://localhost")
+     * The interface defining all the services for Formdatas to be used by the
+     * proxy service to perform REST calls.
+     */
+    @Host("http://localhost:3000")
     interface FormdatasService {
         // @Multipart not supported by RestProxy
         @POST("formdata/stream/uploadfile")
-        // @Streaming not supported by RestProxy
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<RestResponse<Void, InputStream>> uploadFile(/* @Part("fileContent") not supported by RestProxy */byte[] fileContent, /* @Part("fileName") not supported by RestProxy */String fileName);
+        Single<RestResponse<Void, AsyncInputStream>> uploadFile(/* @Part("fileContent") not supported by RestProxy */AsyncInputStream fileContent, /* @Part("fileName") not supported by RestProxy */String fileName);
 
-        @Headers({ "x-ms-logging-context: fixtures.bodyformdata.Formdatas uploadFileViaBody" })
         @PUT("formdata/stream/uploadfile")
-        // @Streaming not supported by RestProxy
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<RestResponse<Void, InputStream>> uploadFileViaBody(@BodyParam("application/octet-stream") byte[] fileContent);
-
+        Single<RestResponse<Void, AsyncInputStream>> uploadFileViaBody(@BodyParam("application/octet-stream") AsyncInputStream fileContent);
     }
 
     /**
@@ -78,13 +80,13 @@ public class FormdatasImpl implements Formdatas {
      *
      * @param fileContent File to upload.
      * @param fileName File name to upload. Name has to be spelled exactly as written here.
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @throws ErrorException thrown if the request is rejected by server
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
-     * @return the InputStream object if successful.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the AsyncInputStream object if successful.
      */
-    public InputStream uploadFile(byte[] fileContent, String fileName) {
-        return uploadFileAsync(fileContent, fileName).toBlocking().value();
+    public AsyncInputStream uploadFile(AsyncInputStream fileContent, String fileName) {
+        return uploadFileAsync(fileContent, fileName).blockingGet();
     }
 
     /**
@@ -93,10 +95,10 @@ public class FormdatasImpl implements Formdatas {
      * @param fileContent File to upload.
      * @param fileName File name to upload. Name has to be spelled exactly as written here.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceFuture} object
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link ServiceFuture&lt;AsyncInputStream&gt;} object.
      */
-    public ServiceFuture<InputStream> uploadFileAsync(byte[] fileContent, String fileName, ServiceCallback<InputStream> serviceCallback) {
+    public ServiceFuture<AsyncInputStream> uploadFileAsync(AsyncInputStream fileContent, String fileName, final ServiceCallback<AsyncInputStream> serviceCallback) {
         return ServiceFuture.fromBody(uploadFileAsync(fileContent, fileName), serviceCallback);
     }
 
@@ -105,10 +107,10 @@ public class FormdatasImpl implements Formdatas {
      *
      * @param fileContent File to upload.
      * @param fileName File name to upload. Name has to be spelled exactly as written here.
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return a {@link Single} emitting the RestResponse<Void, InputStream> object
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link Single&lt;RestResponse&lt;Void, AsyncInputStream&gt;&gt;} object if successful.
      */
-    public Single<RestResponse<Void, InputStream>> uploadFileWithRestResponseAsync(byte[] fileContent, String fileName) {
+    public Single<RestResponse<Void, AsyncInputStream>> uploadFileWithRestResponseAsync(AsyncInputStream fileContent, String fileName) {
         if (fileContent == null) {
             throw new IllegalArgumentException("Parameter fileContent is required and cannot be null.");
         }
@@ -123,26 +125,33 @@ public class FormdatasImpl implements Formdatas {
      *
      * @param fileContent File to upload.
      * @param fileName File name to upload. Name has to be spelled exactly as written here.
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return a {@link Single} emitting the RestResponse<Void, InputStream> object
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link Maybe&lt;AsyncInputStream&gt;} object if successful.
      */
-    public Single<InputStream> uploadFileAsync(byte[] fileContent, String fileName) {
+    public Maybe<AsyncInputStream> uploadFileAsync(AsyncInputStream fileContent, String fileName) {
         return uploadFileWithRestResponseAsync(fileContent, fileName)
-            .map(new Func1<RestResponse<Void, InputStream>, InputStream>() { public InputStream call(RestResponse<Void, InputStream> restResponse) { return restResponse.body(); } });
-        }
-
+            .flatMapMaybe(new Function<RestResponse<Void, AsyncInputStream>, Maybe<AsyncInputStream>>() {
+                public Maybe<AsyncInputStream> apply(RestResponse<Void, AsyncInputStream> restResponse) {
+                    if (restResponse.body() == null) {
+                        return Maybe.empty();
+                    } else {
+                        return Maybe.just(restResponse.body());
+                    }
+                }
+            });
+    }
 
     /**
      * Upload file.
      *
      * @param fileContent File to upload.
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @throws ErrorException thrown if the request is rejected by server
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
-     * @return the InputStream object if successful.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the AsyncInputStream object if successful.
      */
-    public InputStream uploadFileViaBody(byte[] fileContent) {
-        return uploadFileViaBodyAsync(fileContent).toBlocking().value();
+    public AsyncInputStream uploadFileViaBody(AsyncInputStream fileContent) {
+        return uploadFileViaBodyAsync(fileContent).blockingGet();
     }
 
     /**
@@ -150,10 +159,10 @@ public class FormdatasImpl implements Formdatas {
      *
      * @param fileContent File to upload.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceFuture} object
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link ServiceFuture&lt;AsyncInputStream&gt;} object.
      */
-    public ServiceFuture<InputStream> uploadFileViaBodyAsync(byte[] fileContent, ServiceCallback<InputStream> serviceCallback) {
+    public ServiceFuture<AsyncInputStream> uploadFileViaBodyAsync(AsyncInputStream fileContent, final ServiceCallback<AsyncInputStream> serviceCallback) {
         return ServiceFuture.fromBody(uploadFileViaBodyAsync(fileContent), serviceCallback);
     }
 
@@ -161,10 +170,10 @@ public class FormdatasImpl implements Formdatas {
      * Upload file.
      *
      * @param fileContent File to upload.
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return a {@link Single} emitting the RestResponse<Void, InputStream> object
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link Single&lt;RestResponse&lt;Void, AsyncInputStream&gt;&gt;} object if successful.
      */
-    public Single<RestResponse<Void, InputStream>> uploadFileViaBodyWithRestResponseAsync(byte[] fileContent) {
+    public Single<RestResponse<Void, AsyncInputStream>> uploadFileViaBodyWithRestResponseAsync(AsyncInputStream fileContent) {
         if (fileContent == null) {
             throw new IllegalArgumentException("Parameter fileContent is required and cannot be null.");
         }
@@ -175,13 +184,19 @@ public class FormdatasImpl implements Formdatas {
      * Upload file.
      *
      * @param fileContent File to upload.
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return a {@link Single} emitting the RestResponse<Void, InputStream> object
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link Maybe&lt;AsyncInputStream&gt;} object if successful.
      */
-    public Single<InputStream> uploadFileViaBodyAsync(byte[] fileContent) {
+    public Maybe<AsyncInputStream> uploadFileViaBodyAsync(AsyncInputStream fileContent) {
         return uploadFileViaBodyWithRestResponseAsync(fileContent)
-            .map(new Func1<RestResponse<Void, InputStream>, InputStream>() { public InputStream call(RestResponse<Void, InputStream> restResponse) { return restResponse.body(); } });
-        }
-
-
+            .flatMapMaybe(new Function<RestResponse<Void, AsyncInputStream>, Maybe<AsyncInputStream>>() {
+                public Maybe<AsyncInputStream> apply(RestResponse<Void, AsyncInputStream> restResponse) {
+                    if (restResponse.body() == null) {
+                        return Maybe.empty();
+                    } else {
+                        return Maybe.just(restResponse.body());
+                    }
+                }
+            });
+    }
 }

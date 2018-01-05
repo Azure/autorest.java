@@ -10,8 +10,8 @@
 
 package fixtures.modelflattening.models;
 
-import java.util.Map;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import java.util.Map;
 
 /**
  * The Resource model.
@@ -50,7 +50,7 @@ public class Resource {
     /**
      * Get the id value.
      *
-     * @return the id value
+     * @return the id value.
      */
     public String id() {
         return this.id;
@@ -59,7 +59,7 @@ public class Resource {
     /**
      * Get the type value.
      *
-     * @return the type value
+     * @return the type value.
      */
     public String type() {
         return this.type;
@@ -68,7 +68,7 @@ public class Resource {
     /**
      * Get the tags value.
      *
-     * @return the tags value
+     * @return the tags value.
      */
     public Map<String, String> tags() {
         return this.tags;
@@ -77,7 +77,7 @@ public class Resource {
     /**
      * Set the tags value.
      *
-     * @param tags the tags value to set
+     * @param tags the tags value to set.
      * @return the Resource object itself.
      */
     public Resource withTags(Map<String, String> tags) {
@@ -88,7 +88,7 @@ public class Resource {
     /**
      * Get the location value.
      *
-     * @return the location value
+     * @return the location value.
      */
     public String location() {
         return this.location;
@@ -97,7 +97,7 @@ public class Resource {
     /**
      * Set the location value.
      *
-     * @param location the location value to set
+     * @param location the location value to set.
      * @return the Resource object itself.
      */
     public Resource withLocation(String location) {
@@ -108,10 +108,9 @@ public class Resource {
     /**
      * Get the name value.
      *
-     * @return the name value
+     * @return the name value.
      */
     public String name() {
         return this.name;
     }
-
 }

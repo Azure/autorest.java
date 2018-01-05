@@ -13,15 +13,16 @@ package fixtures.bodyformdata;
 import com.microsoft.rest.v2.RestResponse;
 import com.microsoft.rest.v2.ServiceCallback;
 import com.microsoft.rest.v2.ServiceFuture;
+import com.microsoft.rest.v2.http.AsyncInputStream;
 import fixtures.bodyformdata.models.ErrorException;
-import java.io.InputStream;
+import io.reactivex.Maybe;
+import io.reactivex.Observable;
+import io.reactivex.Single;
 import java.io.IOException;
-import rx.Observable;
-import rx.Single;
 
 /**
- * An instance of this class provides access to all the operations defined
- * in Formdatas.
+ * An instance of this class provides access to all the operations defined in
+ * Formdatas.
  */
 public interface Formdatas {
     /**
@@ -29,12 +30,12 @@ public interface Formdatas {
      *
      * @param fileContent File to upload.
      * @param fileName File name to upload. Name has to be spelled exactly as written here.
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @throws ErrorException thrown if the request is rejected by server
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
-     * @return the InputStream object if successful.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the AsyncInputStream object if successful.
      */
-    InputStream uploadFile(byte[] fileContent, String fileName);
+    AsyncInputStream uploadFile(AsyncInputStream fileContent, String fileName);
 
     /**
      * Upload file.
@@ -42,68 +43,67 @@ public interface Formdatas {
      * @param fileContent File to upload.
      * @param fileName File name to upload. Name has to be spelled exactly as written here.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceFuture} object
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link ServiceFuture&lt;AsyncInputStream&gt;} object.
      */
-    ServiceFuture<InputStream> uploadFileAsync(byte[] fileContent, String fileName, final ServiceCallback<InputStream> serviceCallback);
+    ServiceFuture<AsyncInputStream> uploadFileAsync(AsyncInputStream fileContent, String fileName, final ServiceCallback<AsyncInputStream> serviceCallback);
 
     /**
      * Upload file.
      *
      * @param fileContent File to upload.
      * @param fileName File name to upload. Name has to be spelled exactly as written here.
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the InputStream object
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link Single&lt;RestResponse&lt;Void, AsyncInputStream&gt;&gt;} object if successful.
      */
-    Single<InputStream> uploadFileAsync(byte[] fileContent, String fileName);
+    Single<RestResponse<Void, AsyncInputStream>> uploadFileWithRestResponseAsync(AsyncInputStream fileContent, String fileName);
+
     /**
      * Upload file.
      *
      * @param fileContent File to upload.
      * @param fileName File name to upload. Name has to be spelled exactly as written here.
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the InputStream object
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link Maybe&lt;AsyncInputStream&gt;} object if successful.
      */
-    Single<RestResponse<Void, InputStream>> uploadFileWithRestResponseAsync(byte[] fileContent, String fileName);
-
+    Maybe<AsyncInputStream> uploadFileAsync(AsyncInputStream fileContent, String fileName);
 
     /**
      * Upload file.
      *
      * @param fileContent File to upload.
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @throws ErrorException thrown if the request is rejected by server
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
-     * @return the InputStream object if successful.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the AsyncInputStream object if successful.
      */
-    InputStream uploadFileViaBody(byte[] fileContent);
+    AsyncInputStream uploadFileViaBody(AsyncInputStream fileContent);
 
     /**
      * Upload file.
      *
      * @param fileContent File to upload.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceFuture} object
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link ServiceFuture&lt;AsyncInputStream&gt;} object.
      */
-    ServiceFuture<InputStream> uploadFileViaBodyAsync(byte[] fileContent, final ServiceCallback<InputStream> serviceCallback);
+    ServiceFuture<AsyncInputStream> uploadFileViaBodyAsync(AsyncInputStream fileContent, final ServiceCallback<AsyncInputStream> serviceCallback);
 
     /**
      * Upload file.
      *
      * @param fileContent File to upload.
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the InputStream object
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link Single&lt;RestResponse&lt;Void, AsyncInputStream&gt;&gt;} object if successful.
      */
-    Single<InputStream> uploadFileViaBodyAsync(byte[] fileContent);
+    Single<RestResponse<Void, AsyncInputStream>> uploadFileViaBodyWithRestResponseAsync(AsyncInputStream fileContent);
+
     /**
      * Upload file.
      *
      * @param fileContent File to upload.
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the InputStream object
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link Maybe&lt;AsyncInputStream&gt;} object if successful.
      */
-    Single<RestResponse<Void, InputStream>> uploadFileViaBodyWithRestResponseAsync(byte[] fileContent);
-
-
+    Maybe<AsyncInputStream> uploadFileViaBodyAsync(AsyncInputStream fileContent);
 }

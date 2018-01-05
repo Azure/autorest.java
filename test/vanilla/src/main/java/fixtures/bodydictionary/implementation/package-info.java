@@ -7,7 +7,8 @@
 // regenerated.
 
 /**
- * This package contains the implementation classes for AutoRestSwaggerBATdictionaryService.
+ * This package contains the implementation classes for
+ * AutoRestSwaggerBATdictionaryService.
  * Test Infrastructure for AutoRest Swagger BAT.
  */
 package fixtures.bodydictionary.implementation;

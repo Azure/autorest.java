@@ -1,27 +1,16 @@
+using AutoRest.Core;
+using AutoRest.Core.Model;
+using AutoRest.Core.Parsing;
+using AutoRest.Core.Utilities;
+using Microsoft.Perks.JsonRPC;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using AutoRest.Core;
-using AutoRest.Core.Model;
-using AutoRest.Core.Parsing;
-using AutoRest.Java.Azure;
-using Microsoft.Perks.JsonRPC;
-
 using IAnyPlugin = AutoRest.Core.Extensibility.IPlugin<AutoRest.Core.Extensibility.IGeneratorSettings, AutoRest.Core.IModelSerializer<AutoRest.Core.Model.CodeModel>, AutoRest.Core.ITransformer<AutoRest.Core.Model.CodeModel>, AutoRest.Core.CodeGenerator, AutoRest.Core.CodeNamer, AutoRest.Core.Model.CodeModel>;
 
 namespace AutoRest.Java
 {
-    public static class ExtensionsLoader
-    {
-        public static IAnyPlugin GetPlugin(bool azure, bool fluent)
-        {
-            if (fluent) return new PluginJvaf();
-            if (azure) return new PluginJva();
-            return new PluginJv();
-        }
-    }
-
     public class Program : NewPlugin
     {
         public static int Main(string[] args)
@@ -29,7 +18,7 @@ namespace AutoRest.Java
             if(args != null && args.Length > 0 && args[0] == "--server")
             {
                 var connection = new Connection(Console.OpenStandardOutput(), Console.OpenStandardInput());
-                connection.Dispatch<IEnumerable<string>>("GetPluginNames", async () => new []{ "java" });
+                connection.Dispatch("GetPluginNames", () => Task.FromResult<IEnumerable<string>>(new[] { "java" }));
                 connection.Dispatch<string, string, bool>("Process", (plugin, sessionId) => new Program(connection, plugin, sessionId).Process());
                 connection.DispatchNotification("Shutdown", connection.Stop);
 
@@ -63,16 +52,17 @@ namespace AutoRest.Java
 
         protected override async Task<bool> ProcessInternal()
         {
-            var files = await ListInputs();
+            string[] files = await ListInputs().ConfigureAwait(false);
             if (files.Length != 1)
             {
                 throw new Exception($"Generator received incorrect number of inputs: {files.Length} : {string.Join(",", files)}");
             }
-            var modelAsJson = (await ReadFile(files[0])).EnsureYamlIsJson();
-            var codeModelT = new ModelSerializer<CodeModel>().Load(modelAsJson);
+
+            string modelAsJson = (await ReadFile(files[0])).EnsureYamlIsJson();
+            CodeModel codeModelT = new ModelSerializer<CodeModel>().Load(modelAsJson);
 
             // build settings
-            var altNamespace = (await GetValue<string[]>("input-file") ?? new[] { "" }).FirstOrDefault()?.Split('/').Last().Split('\\').Last().Split('.').First();
+            string altNamespace = (await GetValue<string[]>("input-file") ?? new[] { "" }).FirstOrDefault()?.Split('/').Last().Split('\\').Last().Split('.').First();
             
             new Settings
             {
@@ -82,7 +72,7 @@ namespace AutoRest.Java
                 AddCredentials = await GetValue<bool?>("add-credentials") ?? false,
                 Host = this
             };
-            var header = await GetValue("license-header");
+            string header = await GetValue("license-header");
             if (header != null)
             {
                 Settings.Instance.Header = header;
@@ -94,31 +84,36 @@ namespace AutoRest.Java
             Settings.Instance.MaximumCommentColumns = await GetValue<int?>("max-comment-columns") ?? Settings.DefaultMaximumCommentColumns;
             Settings.Instance.OutputFileName = await GetValue<string>("output-file");
 
+            bool azure = await GetValue<bool?>("azure-arm").ConfigureAwait(false) ?? false;
+            Settings.Instance.CustomSettings.Add("Azure", azure);
+
+            bool fluent = await GetValue<bool?>("fluent").ConfigureAwait(false) ?? false;
+            Settings.Instance.CustomSettings.Add("Fluent", fluent);
+
             // process
-            var plugin = ExtensionsLoader.GetPlugin(
-                await GetValue<bool?>("azure-arm") ?? false,
-                await GetValue<bool?>("fluent") ?? false);
+            IAnyPlugin plugin = new JavaPlugin();
+
             Settings.PopulateSettings(plugin.Settings, Settings.Instance.CustomSettings);
             
             using (plugin.Activate())
             {
                 Settings.Instance.Namespace = Settings.Instance.Namespace ?? CodeNamer.Instance.GetNamespaceName(altNamespace);
-                var codeModel = plugin.Serializer.Load(modelAsJson);
+                CodeModel codeModel = plugin.Serializer.Load(modelAsJson);
                 codeModel = plugin.Transformer.TransformCodeModel(codeModel);
                 if (await GetValue<bool?>("sample-generation") ?? false)
                 {
-                    plugin.CodeGenerator.GenerateSamples(codeModel).GetAwaiter().GetResult();
+                    await plugin.CodeGenerator.GenerateSamples(codeModel).ConfigureAwait(false);
                 }
                 else
                 {
-                    plugin.CodeGenerator.Generate(codeModel).GetAwaiter().GetResult();
+                    await plugin.CodeGenerator.Generate(codeModel).ConfigureAwait(false);
                 }
             }
 
             // write out files
-            var outFS = Settings.Instance.FileSystemOutput;
-            var outFiles = outFS.GetFiles("", "*", System.IO.SearchOption.AllDirectories);
-            foreach (var outFile in outFiles)
+            MemoryFileSystem outFS = Settings.Instance.FileSystemOutput;
+            string[] outFiles = outFS.GetFiles("", "*", System.IO.SearchOption.AllDirectories);
+            foreach (string outFile in outFiles)
             {
                 WriteFile(outFile, outFS.ReadAllText(outFile), null);
             }

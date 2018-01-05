@@ -10,24 +10,10 @@
 
 package fixtures.requiredoptional;
 
-import com.microsoft.rest.v2.RestClient;
-
 /**
  * The interface for AutoRestRequiredOptionalTestService class.
  */
 public interface AutoRestRequiredOptionalTestService {
-    /**
-     * Gets the REST client.
-     *
-     * @return the {@link RestClient} object.
-    */
-    RestClient restClient();
-
-    /**
-     * The default base URL.
-     */
-    String DEFAULT_BASE_URL = "http://localhost";
-
     /**
      * Gets number of items to skip.
      *
@@ -39,7 +25,7 @@ public interface AutoRestRequiredOptionalTestService {
      * Sets number of items to skip.
      *
      * @param requiredGlobalPath the requiredGlobalPath value.
-     * @return the service client itself
+     * @return the service client itself.
      */
     AutoRestRequiredOptionalTestService withRequiredGlobalPath(String requiredGlobalPath);
 
@@ -54,7 +40,7 @@ public interface AutoRestRequiredOptionalTestService {
      * Sets number of items to skip.
      *
      * @param requiredGlobalQuery the requiredGlobalQuery value.
-     * @return the service client itself
+     * @return the service client itself.
      */
     AutoRestRequiredOptionalTestService withRequiredGlobalQuery(String requiredGlobalQuery);
 
@@ -69,20 +55,21 @@ public interface AutoRestRequiredOptionalTestService {
      * Sets number of items to skip.
      *
      * @param optionalGlobalQuery the optionalGlobalQuery value.
-     * @return the service client itself
+     * @return the service client itself.
      */
     AutoRestRequiredOptionalTestService withOptionalGlobalQuery(int optionalGlobalQuery);
 
     /**
      * Gets the Implicits object to access its operations.
+     *
      * @return the Implicits object.
      */
     Implicits implicits();
 
     /**
      * Gets the Explicits object to access its operations.
+     *
      * @return the Explicits object.
      */
     Explicits explicits();
-
 }

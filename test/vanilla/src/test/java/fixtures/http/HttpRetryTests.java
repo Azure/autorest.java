@@ -1,6 +1,11 @@
 package fixtures.http;
 
 import com.microsoft.rest.v2.RestResponse;
+import com.microsoft.rest.v2.http.HttpPipeline;
+import com.microsoft.rest.v2.policy.AddCookiesPolicy;
+import com.microsoft.rest.v2.policy.PortPolicy;
+import com.microsoft.rest.v2.policy.ProtocolPolicy;
+import com.microsoft.rest.v2.policy.RetryPolicy;
 import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -9,7 +14,7 @@ import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.TimeUnit;
 
 import fixtures.http.implementation.AutoRestHttpInfrastructureTestServiceImpl;
-import rx.functions.Action1;
+import io.reactivex.functions.Consumer;
 
 public class HttpRetryTests {
     private static AutoRestHttpInfrastructureTestService client;
@@ -17,15 +22,19 @@ public class HttpRetryTests {
 
     @BeforeClass
     public static void setup() {
-        client = new AutoRestHttpInfrastructureTestServiceImpl("http://localhost:3000");
+        client = new AutoRestHttpInfrastructureTestServiceImpl(HttpPipeline.build(
+                new ProtocolPolicy.Factory("http"),
+                new PortPolicy.Factory(3000),
+                new RetryPolicy.Factory(),
+                new AddCookiesPolicy.Factory()));
     }
 
     @Test
     public void head408() throws Exception {
         client.httpRetrys().head408WithRestResponseAsync()
-            .subscribe(new Action1<RestResponse<Void, Void>>() {
+            .subscribe(new Consumer<RestResponse<Void, Void>>() {
                 @Override
-                public void call(RestResponse<Void, Void> response) {
+                public void accept(RestResponse<Void, Void> response) {
                     Assert.assertEquals(200, response.statusCode());
                     lock.countDown();
                 }
@@ -36,9 +45,9 @@ public class HttpRetryTests {
     @Test
     public void put500() throws Exception {
         client.httpRetrys().put500WithRestResponseAsync(true)
-            .subscribe(new Action1<RestResponse<Void, Void>>() {
+            .subscribe(new Consumer<RestResponse<Void, Void>>() {
                 @Override
-                public void call(RestResponse<Void, Void> response) {
+                public void accept(RestResponse<Void, Void> response) {
                     Assert.assertEquals(200, response.statusCode());
                     lock.countDown();
                 }
@@ -49,9 +58,9 @@ public class HttpRetryTests {
     @Test
     public void patch500() throws Exception {
         client.httpRetrys().patch500WithRestResponseAsync(true)
-            .subscribe(new Action1<RestResponse<Void, Void>>() {
+            .subscribe(new Consumer<RestResponse<Void, Void>>() {
                 @Override
-                public void call(RestResponse<Void, Void> response) {
+                public void accept(RestResponse<Void, Void> response) {
                     Assert.assertEquals(200, response.statusCode());
                     lock.countDown();
                 }
@@ -62,9 +71,9 @@ public class HttpRetryTests {
     @Test
     public void get502() throws Exception {
         client.httpRetrys().get502WithRestResponseAsync()
-            .subscribe(new Action1<RestResponse<Void, Void>>() {
+            .subscribe(new Consumer<RestResponse<Void, Void>>() {
                 @Override
-                public void call(RestResponse<Void, Void> response) {
+                public void accept(RestResponse<Void, Void> response) {
                     Assert.assertEquals(200, response.statusCode());
                     lock.countDown();
                 }
@@ -75,9 +84,9 @@ public class HttpRetryTests {
     @Test
     public void post503() throws Exception {
         client.httpRetrys().post503WithRestResponseAsync(true)
-            .subscribe(new Action1<RestResponse<Void, Void>>() {
+            .subscribe(new Consumer<RestResponse<Void, Void>>() {
                 @Override
-                public void call(RestResponse<Void, Void> response) {
+                public void accept(RestResponse<Void, Void> response) {
                     Assert.assertEquals(200, response.statusCode());
                     lock.countDown();
                 }
@@ -88,9 +97,9 @@ public class HttpRetryTests {
     @Test
     public void delete503() throws Exception {
         client.httpRetrys().delete503WithRestResponseAsync(true)
-            .subscribe(new Action1<RestResponse<Void, Void>>() {
+            .subscribe(new Consumer<RestResponse<Void, Void>>() {
                 @Override
-                public void call(RestResponse<Void, Void> response) {
+                public void accept(RestResponse<Void, Void> response) {
                     Assert.assertEquals(200, response.statusCode());
                     lock.countDown();
                 }
@@ -101,9 +110,9 @@ public class HttpRetryTests {
     @Test
     public void put504() throws Exception {
         client.httpRetrys().put504WithRestResponseAsync(true)
-            .subscribe(new Action1<RestResponse<Void, Void>>() {
+            .subscribe(new Consumer<RestResponse<Void, Void>>() {
                 @Override
-                public void call(RestResponse<Void, Void> response) {
+                public void accept(RestResponse<Void, Void> response) {
                     Assert.assertEquals(200, response.statusCode());
                     lock.countDown();
                 }
@@ -114,9 +123,9 @@ public class HttpRetryTests {
     @Test
     public void patch504() throws Exception {
         client.httpRetrys().patch504WithRestResponseAsync(true)
-            .subscribe(new Action1<RestResponse<Void, Void>>() {
+            .subscribe(new Consumer<RestResponse<Void, Void>>() {
                 @Override
-                public void call(RestResponse<Void, Void> response) {
+                public void accept(RestResponse<Void, Void> response) {
                     Assert.assertEquals(200, response.statusCode());
                     lock.countDown();
                 }

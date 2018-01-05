@@ -10,28 +10,14 @@
 
 package fixtures.bodyboolean;
 
-import com.microsoft.rest.v2.RestClient;
-
 /**
  * The interface for AutoRestBoolTestService class.
  */
 public interface AutoRestBoolTestService {
     /**
-     * Gets the REST client.
-     *
-     * @return the {@link RestClient} object.
-    */
-    RestClient restClient();
-
-    /**
-     * The default base URL.
-     */
-    String DEFAULT_BASE_URL = "http://localhost";
-
-    /**
      * Gets the Bools object to access its operations.
+     *
      * @return the Bools object.
      */
     Bools bools();
-
 }

@@ -10,8 +10,8 @@
 
 package fixtures.bodycomplex.models;
 
-import org.joda.time.DateTime;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import org.joda.time.DateTime;
 
 /**
  * The DatetimeWrapper model.
@@ -32,7 +32,7 @@ public class DatetimeWrapper {
     /**
      * Get the field value.
      *
-     * @return the field value
+     * @return the field value.
      */
     public DateTime field() {
         return this.field;
@@ -41,7 +41,7 @@ public class DatetimeWrapper {
     /**
      * Set the field value.
      *
-     * @param field the field value to set
+     * @param field the field value to set.
      * @return the DatetimeWrapper object itself.
      */
     public DatetimeWrapper withField(DateTime field) {
@@ -52,7 +52,7 @@ public class DatetimeWrapper {
     /**
      * Get the now value.
      *
-     * @return the now value
+     * @return the now value.
      */
     public DateTime now() {
         return this.now;
@@ -61,12 +61,11 @@ public class DatetimeWrapper {
     /**
      * Set the now value.
      *
-     * @param now the now value to set
+     * @param now the now value to set.
      * @return the DatetimeWrapper object itself.
      */
     public DatetimeWrapper withNow(DateTime now) {
         this.now = now;
         return this;
     }
-
 }

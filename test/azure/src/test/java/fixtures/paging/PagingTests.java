@@ -2,18 +2,22 @@ package fixtures.paging;
 
 import com.microsoft.azure.v2.CloudException;
 import com.microsoft.azure.v2.Page;
-import com.microsoft.azure.v2.serializer.AzureJacksonAdapter;
-import com.microsoft.rest.v2.LogLevel;
-import com.microsoft.rest.v2.RestClient;
+import com.microsoft.rest.v2.policy.AddCookiesPolicy;
+import com.microsoft.rest.v2.http.HttpPipeline;
+import com.microsoft.rest.v2.policy.PortPolicy;
+import com.microsoft.rest.v2.policy.ProtocolPolicy;
+import com.microsoft.rest.v2.policy.RetryPolicy;
 import fixtures.paging.implementation.AutoRestPagingTestServiceImpl;
 import fixtures.paging.models.CustomParameterGroup;
 import fixtures.paging.models.PagingGetMultiplePagesWithOffsetOptions;
 import fixtures.paging.models.Product;
 import fixtures.paging.models.ProductProperties;
+import io.reactivex.disposables.Disposable;
 import org.junit.Assert;
 import org.junit.BeforeClass;
+import org.junit.Ignore;
 import org.junit.Test;
-import rx.Observer;
+import io.reactivex.Observer;
 
 import java.util.List;
 import java.util.concurrent.CountDownLatch;
@@ -26,12 +30,12 @@ public class PagingTests {
 
     @BeforeClass
     public static void setup() {
-        RestClient restClient = new RestClient.Builder()
-                .withBaseUrl("http://localhost:3000")
-                .withLogLevel(LogLevel.BODY_AND_HEADERS)
-                .withSerializerAdapter(new AzureJacksonAdapter())
-                .build();
-        client = new AutoRestPagingTestServiceImpl(restClient);;
+        final HttpPipeline httpPipeline = HttpPipeline.build(
+                new ProtocolPolicy.Factory("http"),
+                new PortPolicy.Factory(3000),
+                new RetryPolicy.Factory(),
+                new AddCookiesPolicy.Factory());
+        client = new AutoRestPagingTestServiceImpl(httpPipeline);
     }
 
     @Test
@@ -80,12 +84,12 @@ public class PagingTests {
     public void getMultiplePagesAsync() throws Exception {
         final CountDownLatch lock = new CountDownLatch(1);
         client.pagings().getMultiplePagesAsync("client-id", null)
-                .toBlocking()
-                .subscribe(new Observer<Page<Product>>() {
+                .blockingSubscribe(new Observer<Page<Product>>() {
                     @Override
-                    public void onCompleted() {
-                        lock.countDown();
-                    }
+                    public void onSubscribe(Disposable d) {}
+
+                    @Override
+                    public void onNext(Page<Product> productPage) {}
 
                     @Override
                     public void onError(Throwable throwable) {
@@ -93,7 +97,9 @@ public class PagingTests {
                     }
 
                     @Override
-                    public void onNext(Page<Product> productPage) { }
+                    public void onComplete() {
+                        lock.countDown();
+                    }
                 });
 
         Assert.assertTrue(lock.await(10000, TimeUnit.MILLISECONDS));

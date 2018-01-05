@@ -10,20 +10,17 @@
 
 package fixtures.bodystring.implementation;
 
-import fixtures.bodystring.AutoRestSwaggerBATService;
-import fixtures.bodystring.Strings;
-import fixtures.bodystring.Enums;
 import com.microsoft.rest.v2.RestProxy;
-import com.microsoft.rest.v2.RestResponse;
 import com.microsoft.rest.v2.ServiceClient;
-import com.microsoft.rest.v2.RestClient;
-import rx.Single;
+import com.microsoft.rest.v2.http.HttpPipeline;
+import fixtures.bodystring.AutoRestSwaggerBATService;
+import fixtures.bodystring.Enums;
+import fixtures.bodystring.Strings;
 
 /**
- * Initializes a new instance of the AutoRestSwaggerBATService class.
+ * Initializes a new instance of the AutoRestSwaggerBATService type.
  */
 public class AutoRestSwaggerBATServiceImpl extends ServiceClient implements AutoRestSwaggerBATService {
-
     /**
      * The Strings object to access its operations.
      */
@@ -31,6 +28,7 @@ public class AutoRestSwaggerBATServiceImpl extends ServiceClient implements Auto
 
     /**
      * Gets the Strings object to access its operations.
+     *
      * @return the Strings object.
      */
     public Strings strings() {
@@ -44,6 +42,7 @@ public class AutoRestSwaggerBATServiceImpl extends ServiceClient implements Auto
 
     /**
      * Gets the Enums object to access its operations.
+     *
      * @return the Enums object.
      */
     public Enums enums() {
@@ -52,34 +51,18 @@ public class AutoRestSwaggerBATServiceImpl extends ServiceClient implements Auto
 
     /**
      * Initializes an instance of AutoRestSwaggerBATService client.
-     *
-     * @param baseUrl the base URL of the host
-     */
-    public AutoRestSwaggerBATServiceImpl(String baseUrl) {
-        super(baseUrl);
-        initialize();
-    }
-
-    /**
-     * Initializes an instance of AutoRestSwaggerBATService client.
-     *
      */
     public AutoRestSwaggerBATServiceImpl() {
-        this("http://localhost");
-        initialize();
+        this(RestProxy.createDefaultPipeline());
     }
 
     /**
      * Initializes an instance of AutoRestSwaggerBATService client.
      *
-     * @param restClient the REST client containing pre-configured settings
+     * @param httpPipeline The HTTP pipeline to send requests through.
      */
-    public AutoRestSwaggerBATServiceImpl(RestClient restClient) {
-        super(restClient);
-        initialize();
-    }
-
-    private void initialize() {
+    public AutoRestSwaggerBATServiceImpl(HttpPipeline httpPipeline) {
+        super(httpPipeline);
         this.strings = new StringsImpl(this);
         this.enums = new EnumsImpl(this);
     }

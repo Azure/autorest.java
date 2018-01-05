@@ -10,11 +10,11 @@
 
 package fixtures.bodycomplex.models;
 
-import java.util.List;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonSubTypes;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import com.fasterxml.jackson.annotation.JsonTypeName;
-import com.fasterxml.jackson.annotation.JsonSubTypes;
+import java.util.List;
 
 /**
  * The Fish model.
@@ -22,8 +22,8 @@ import com.fasterxml.jackson.annotation.JsonSubTypes;
 @JsonTypeInfo(use = JsonTypeInfo.Id.NAME, include = JsonTypeInfo.As.PROPERTY, property = "fishtype")
 @JsonTypeName("Fish")
 @JsonSubTypes({
-    @JsonSubTypes.Type(name = "salmon", value = Salmon.class),
-    @JsonSubTypes.Type(name = "shark", value = Shark.class)
+@JsonSubTypes.Type(name = "salmon", value = Salmon.class),
+@JsonSubTypes.Type(name = "shark", value = Shark.class)
 })
 public class Fish {
     /**
@@ -47,7 +47,7 @@ public class Fish {
     /**
      * Get the species value.
      *
-     * @return the species value
+     * @return the species value.
      */
     public String species() {
         return this.species;
@@ -56,7 +56,7 @@ public class Fish {
     /**
      * Set the species value.
      *
-     * @param species the species value to set
+     * @param species the species value to set.
      * @return the Fish object itself.
      */
     public Fish withSpecies(String species) {
@@ -67,7 +67,7 @@ public class Fish {
     /**
      * Get the length value.
      *
-     * @return the length value
+     * @return the length value.
      */
     public double length() {
         return this.length;
@@ -76,7 +76,7 @@ public class Fish {
     /**
      * Set the length value.
      *
-     * @param length the length value to set
+     * @param length the length value to set.
      * @return the Fish object itself.
      */
     public Fish withLength(double length) {
@@ -87,7 +87,7 @@ public class Fish {
     /**
      * Get the siblings value.
      *
-     * @return the siblings value
+     * @return the siblings value.
      */
     public List<Fish> siblings() {
         return this.siblings;
@@ -96,12 +96,11 @@ public class Fish {
     /**
      * Set the siblings value.
      *
-     * @param siblings the siblings value to set
+     * @param siblings the siblings value to set.
      * @return the Fish object itself.
      */
     public Fish withSiblings(List<Fish> siblings) {
         this.siblings = siblings;
         return this;
     }
-
 }

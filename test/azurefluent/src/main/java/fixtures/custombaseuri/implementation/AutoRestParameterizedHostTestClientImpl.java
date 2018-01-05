@@ -10,20 +10,19 @@
 
 package fixtures.custombaseuri.implementation;
 
+import com.microsoft.azure.v2.AzureEnvironment;
 import com.microsoft.azure.v2.AzureProxy;
 import com.microsoft.azure.v2.AzureServiceClient;
 import com.microsoft.rest.v2.credentials.ServiceClientCredentials;
-import com.microsoft.rest.v2.RestClient;
-import com.microsoft.rest.v2.RestResponse;
-import rx.Single;
+import com.microsoft.rest.v2.http.HttpPipeline;
 
 /**
- * Initializes a new instance of the AutoRestParameterizedHostTestClientImpl class.
+ * Initializes a new instance of the AutoRestParameterizedHostTestClientImpl type.
  */
 public class AutoRestParameterizedHostTestClientImpl extends AzureServiceClient {
-
-
-    /** A string value that is used as a global part of the parameterized host. */
+    /**
+     * A string value that is used as a global part of the parameterized host.
+     */
     private String host;
 
     /**
@@ -39,14 +38,16 @@ public class AutoRestParameterizedHostTestClientImpl extends AzureServiceClient 
      * Sets A string value that is used as a global part of the parameterized host.
      *
      * @param host the host value.
-     * @return the service client itself
+     * @return the service client itself.
      */
     public AutoRestParameterizedHostTestClientImpl withHost(String host) {
         this.host = host;
         return this;
     }
 
-    /** Gets or sets the preferred language for the response. */
+    /**
+     * Gets or sets the preferred language for the response.
+     */
     private String acceptLanguage;
 
     /**
@@ -62,14 +63,16 @@ public class AutoRestParameterizedHostTestClientImpl extends AzureServiceClient 
      * Sets Gets or sets the preferred language for the response.
      *
      * @param acceptLanguage the acceptLanguage value.
-     * @return the service client itself
+     * @return the service client itself.
      */
     public AutoRestParameterizedHostTestClientImpl withAcceptLanguage(String acceptLanguage) {
         this.acceptLanguage = acceptLanguage;
         return this;
     }
 
-    /** Gets or sets the retry timeout in seconds for Long Running Operations. Default value is 30. */
+    /**
+     * Gets or sets the retry timeout in seconds for Long Running Operations. Default value is 30.
+     */
     private int longRunningOperationRetryTimeout;
 
     /**
@@ -85,14 +88,16 @@ public class AutoRestParameterizedHostTestClientImpl extends AzureServiceClient 
      * Sets Gets or sets the retry timeout in seconds for Long Running Operations. Default value is 30.
      *
      * @param longRunningOperationRetryTimeout the longRunningOperationRetryTimeout value.
-     * @return the service client itself
+     * @return the service client itself.
      */
     public AutoRestParameterizedHostTestClientImpl withLongRunningOperationRetryTimeout(int longRunningOperationRetryTimeout) {
         this.longRunningOperationRetryTimeout = longRunningOperationRetryTimeout;
         return this;
     }
 
-    /** When set to true a unique x-ms-client-request-id value is generated and included in each request. Default is true. */
+    /**
+     * When set to true a unique x-ms-client-request-id value is generated and included in each request. Default is true.
+     */
     private boolean generateClientRequestId;
 
     /**
@@ -108,7 +113,7 @@ public class AutoRestParameterizedHostTestClientImpl extends AzureServiceClient 
      * Sets When set to true a unique x-ms-client-request-id value is generated and included in each request. Default is true.
      *
      * @param generateClientRequestId the generateClientRequestId value.
-     * @return the service client itself
+     * @return the service client itself.
      */
     public AutoRestParameterizedHostTestClientImpl withGenerateClientRequestId(boolean generateClientRequestId) {
         this.generateClientRequestId = generateClientRequestId;
@@ -122,6 +127,7 @@ public class AutoRestParameterizedHostTestClientImpl extends AzureServiceClient 
 
     /**
      * Gets the PathsInner object to access its operations.
+     *
      * @return the PathsInner object.
      */
     public PathsInner paths() {
@@ -131,48 +137,43 @@ public class AutoRestParameterizedHostTestClientImpl extends AzureServiceClient 
     /**
      * Initializes an instance of AutoRestParameterizedHostTestClient client.
      *
-     * @param credentials the management credentials for Azure
+     * @param credentials the management credentials for Azure.
      */
     public AutoRestParameterizedHostTestClientImpl(ServiceClientCredentials credentials) {
-        this("http://{accountName}{host}", credentials);
+        this(AzureProxy.createDefaultPipeline(AutoRestParameterizedHostTestClientImpl.class, credentials));
     }
 
     /**
      * Initializes an instance of AutoRestParameterizedHostTestClient client.
      *
-     * @param baseUrl the base URL of the host
-     * @param credentials the management credentials for Azure
+     * @param credentials the management credentials for Azure.
+     * @param azureEnvironment The environment that requests will target.
      */
-    private AutoRestParameterizedHostTestClientImpl(String baseUrl, ServiceClientCredentials credentials) {
-        super(baseUrl, credentials);
-        initialize();
+    public AutoRestParameterizedHostTestClientImpl(ServiceClientCredentials credentials, AzureEnvironment azureEnvironment) {
+        this(AzureProxy.createDefaultPipeline(AutoRestParameterizedHostTestClientImpl.class, credentials), azureEnvironment);
     }
 
     /**
      * Initializes an instance of AutoRestParameterizedHostTestClient client.
      *
-     * @param restClient the REST client to connect to Azure.
+     * @param httpPipeline The HTTP pipeline to send requests through.
      */
-    public AutoRestParameterizedHostTestClientImpl(RestClient restClient) {
-        super(restClient);
-        initialize();
+    public AutoRestParameterizedHostTestClientImpl(HttpPipeline httpPipeline) {
+        this(httpPipeline, null);
     }
 
-    protected void initialize() {
+    /**
+     * Initializes an instance of AutoRestParameterizedHostTestClient client.
+     *
+     * @param httpPipeline The HTTP pipeline to send requests through.
+     * @param azureEnvironment The environment that requests will target.
+     */
+    public AutoRestParameterizedHostTestClientImpl(HttpPipeline httpPipeline, AzureEnvironment azureEnvironment) {
+        super(httpPipeline, azureEnvironment);
         this.host = "host";
         this.acceptLanguage = "en-US";
         this.longRunningOperationRetryTimeout = 30;
         this.generateClientRequestId = true;
         this.paths = new PathsInner(this);
-    }
-
-    /**
-     * Gets the User-Agent header for the client.
-     *
-     * @return the user agent string.
-     */
-    @Override
-    public String userAgent() {
-        return String.format("%s (%s, %s)", super.userAgent(), "AutoRestParameterizedHostTestClient", "1.0.0");
     }
 }

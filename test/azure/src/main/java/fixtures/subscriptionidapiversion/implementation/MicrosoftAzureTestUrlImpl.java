@@ -10,22 +10,21 @@
 
 package fixtures.subscriptionidapiversion.implementation;
 
+import com.microsoft.azure.v2.AzureEnvironment;
 import com.microsoft.azure.v2.AzureProxy;
 import com.microsoft.azure.v2.AzureServiceClient;
 import com.microsoft.rest.v2.credentials.ServiceClientCredentials;
-import com.microsoft.rest.v2.RestClient;
-import com.microsoft.rest.v2.RestResponse;
+import com.microsoft.rest.v2.http.HttpPipeline;
 import fixtures.subscriptionidapiversion.Groups;
 import fixtures.subscriptionidapiversion.MicrosoftAzureTestUrl;
-import rx.Single;
 
 /**
- * Initializes a new instance of the MicrosoftAzureTestUrlImpl class.
+ * Initializes a new instance of the MicrosoftAzureTestUrl type.
  */
 public class MicrosoftAzureTestUrlImpl extends AzureServiceClient implements MicrosoftAzureTestUrl {
-
-
-    /** Subscription Id. */
+    /**
+     * Subscription Id.
+     */
     private String subscriptionId;
 
     /**
@@ -41,14 +40,16 @@ public class MicrosoftAzureTestUrlImpl extends AzureServiceClient implements Mic
      * Sets Subscription Id.
      *
      * @param subscriptionId the subscriptionId value.
-     * @return the service client itself
+     * @return the service client itself.
      */
     public MicrosoftAzureTestUrlImpl withSubscriptionId(String subscriptionId) {
         this.subscriptionId = subscriptionId;
         return this;
     }
 
-    /** API Version with value '2014-04-01-preview'. */
+    /**
+     * API Version with value '2014-04-01-preview'.
+     */
     private String apiVersion;
 
     /**
@@ -60,7 +61,9 @@ public class MicrosoftAzureTestUrlImpl extends AzureServiceClient implements Mic
         return this.apiVersion;
     }
 
-    /** Gets or sets the preferred language for the response. */
+    /**
+     * Gets or sets the preferred language for the response.
+     */
     private String acceptLanguage;
 
     /**
@@ -76,14 +79,16 @@ public class MicrosoftAzureTestUrlImpl extends AzureServiceClient implements Mic
      * Sets Gets or sets the preferred language for the response.
      *
      * @param acceptLanguage the acceptLanguage value.
-     * @return the service client itself
+     * @return the service client itself.
      */
     public MicrosoftAzureTestUrlImpl withAcceptLanguage(String acceptLanguage) {
         this.acceptLanguage = acceptLanguage;
         return this;
     }
 
-    /** Gets or sets the retry timeout in seconds for Long Running Operations. Default value is 30. */
+    /**
+     * Gets or sets the retry timeout in seconds for Long Running Operations. Default value is 30.
+     */
     private int longRunningOperationRetryTimeout;
 
     /**
@@ -99,14 +104,16 @@ public class MicrosoftAzureTestUrlImpl extends AzureServiceClient implements Mic
      * Sets Gets or sets the retry timeout in seconds for Long Running Operations. Default value is 30.
      *
      * @param longRunningOperationRetryTimeout the longRunningOperationRetryTimeout value.
-     * @return the service client itself
+     * @return the service client itself.
      */
     public MicrosoftAzureTestUrlImpl withLongRunningOperationRetryTimeout(int longRunningOperationRetryTimeout) {
         this.longRunningOperationRetryTimeout = longRunningOperationRetryTimeout;
         return this;
     }
 
-    /** When set to true a unique x-ms-client-request-id value is generated and included in each request. Default is true. */
+    /**
+     * When set to true a unique x-ms-client-request-id value is generated and included in each request. Default is true.
+     */
     private boolean generateClientRequestId;
 
     /**
@@ -122,7 +129,7 @@ public class MicrosoftAzureTestUrlImpl extends AzureServiceClient implements Mic
      * Sets When set to true a unique x-ms-client-request-id value is generated and included in each request. Default is true.
      *
      * @param generateClientRequestId the generateClientRequestId value.
-     * @return the service client itself
+     * @return the service client itself.
      */
     public MicrosoftAzureTestUrlImpl withGenerateClientRequestId(boolean generateClientRequestId) {
         this.generateClientRequestId = generateClientRequestId;
@@ -136,6 +143,7 @@ public class MicrosoftAzureTestUrlImpl extends AzureServiceClient implements Mic
 
     /**
      * Gets the Groups object to access its operations.
+     *
      * @return the Groups object.
      */
     public Groups groups() {
@@ -145,48 +153,43 @@ public class MicrosoftAzureTestUrlImpl extends AzureServiceClient implements Mic
     /**
      * Initializes an instance of MicrosoftAzureTestUrl client.
      *
-     * @param credentials the management credentials for Azure
+     * @param credentials the management credentials for Azure.
      */
     public MicrosoftAzureTestUrlImpl(ServiceClientCredentials credentials) {
-        this("https://management.azure.com/", credentials);
+        this(AzureProxy.createDefaultPipeline(MicrosoftAzureTestUrlImpl.class, credentials));
     }
 
     /**
      * Initializes an instance of MicrosoftAzureTestUrl client.
      *
-     * @param baseUrl the base URL of the host
-     * @param credentials the management credentials for Azure
+     * @param credentials the management credentials for Azure.
+     * @param azureEnvironment The environment that requests will target.
      */
-    public MicrosoftAzureTestUrlImpl(String baseUrl, ServiceClientCredentials credentials) {
-        super(baseUrl, credentials);
-        initialize();
+    public MicrosoftAzureTestUrlImpl(ServiceClientCredentials credentials, AzureEnvironment azureEnvironment) {
+        this(AzureProxy.createDefaultPipeline(MicrosoftAzureTestUrlImpl.class, credentials), azureEnvironment);
     }
 
     /**
      * Initializes an instance of MicrosoftAzureTestUrl client.
      *
-     * @param restClient the REST client to connect to Azure.
+     * @param httpPipeline The HTTP pipeline to send requests through.
      */
-    public MicrosoftAzureTestUrlImpl(RestClient restClient) {
-        super(restClient);
-        initialize();
+    public MicrosoftAzureTestUrlImpl(HttpPipeline httpPipeline) {
+        this(httpPipeline, null);
     }
 
-    protected void initialize() {
+    /**
+     * Initializes an instance of MicrosoftAzureTestUrl client.
+     *
+     * @param httpPipeline The HTTP pipeline to send requests through.
+     * @param azureEnvironment The environment that requests will target.
+     */
+    public MicrosoftAzureTestUrlImpl(HttpPipeline httpPipeline, AzureEnvironment azureEnvironment) {
+        super(httpPipeline, azureEnvironment);
         this.apiVersion = "2014-04-01-preview";
         this.acceptLanguage = "en-US";
         this.longRunningOperationRetryTimeout = 30;
         this.generateClientRequestId = true;
         this.groups = new GroupsImpl(this);
-    }
-
-    /**
-     * Gets the User-Agent header for the client.
-     *
-     * @return the user agent string.
-     */
-    @Override
-    public String userAgent() {
-        return String.format("%s (%s, %s)", super.userAgent(), "MicrosoftAzureTestUrl", "2014-04-01-preview");
     }
 }

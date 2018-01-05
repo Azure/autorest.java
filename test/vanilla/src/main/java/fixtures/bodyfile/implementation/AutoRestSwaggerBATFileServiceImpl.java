@@ -10,19 +10,16 @@
 
 package fixtures.bodyfile.implementation;
 
+import com.microsoft.rest.v2.RestProxy;
+import com.microsoft.rest.v2.ServiceClient;
+import com.microsoft.rest.v2.http.HttpPipeline;
 import fixtures.bodyfile.AutoRestSwaggerBATFileService;
 import fixtures.bodyfile.Files;
-import com.microsoft.rest.v2.RestProxy;
-import com.microsoft.rest.v2.RestResponse;
-import com.microsoft.rest.v2.ServiceClient;
-import com.microsoft.rest.v2.RestClient;
-import rx.Single;
 
 /**
- * Initializes a new instance of the AutoRestSwaggerBATFileService class.
+ * Initializes a new instance of the AutoRestSwaggerBATFileService type.
  */
 public class AutoRestSwaggerBATFileServiceImpl extends ServiceClient implements AutoRestSwaggerBATFileService {
-
     /**
      * The Files object to access its operations.
      */
@@ -30,6 +27,7 @@ public class AutoRestSwaggerBATFileServiceImpl extends ServiceClient implements 
 
     /**
      * Gets the Files object to access its operations.
+     *
      * @return the Files object.
      */
     public Files files() {
@@ -38,34 +36,18 @@ public class AutoRestSwaggerBATFileServiceImpl extends ServiceClient implements 
 
     /**
      * Initializes an instance of AutoRestSwaggerBATFileService client.
-     *
-     * @param baseUrl the base URL of the host
-     */
-    public AutoRestSwaggerBATFileServiceImpl(String baseUrl) {
-        super(baseUrl);
-        initialize();
-    }
-
-    /**
-     * Initializes an instance of AutoRestSwaggerBATFileService client.
-     *
      */
     public AutoRestSwaggerBATFileServiceImpl() {
-        this("http://localhost");
-        initialize();
+        this(RestProxy.createDefaultPipeline());
     }
 
     /**
      * Initializes an instance of AutoRestSwaggerBATFileService client.
      *
-     * @param restClient the REST client containing pre-configured settings
+     * @param httpPipeline The HTTP pipeline to send requests through.
      */
-    public AutoRestSwaggerBATFileServiceImpl(RestClient restClient) {
-        super(restClient);
-        initialize();
-    }
-
-    private void initialize() {
+    public AutoRestSwaggerBATFileServiceImpl(HttpPipeline httpPipeline) {
+        super(httpPipeline);
         this.files = new FilesImpl(this);
     }
 }

@@ -10,8 +10,8 @@
 
 package fixtures.bodycomplex.models;
 
-import org.joda.time.LocalDate;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import org.joda.time.LocalDate;
 
 /**
  * The DateWrapper model.
@@ -32,7 +32,7 @@ public class DateWrapper {
     /**
      * Get the field value.
      *
-     * @return the field value
+     * @return the field value.
      */
     public LocalDate field() {
         return this.field;
@@ -41,7 +41,7 @@ public class DateWrapper {
     /**
      * Set the field value.
      *
-     * @param field the field value to set
+     * @param field the field value to set.
      * @return the DateWrapper object itself.
      */
     public DateWrapper withField(LocalDate field) {
@@ -52,7 +52,7 @@ public class DateWrapper {
     /**
      * Get the leap value.
      *
-     * @return the leap value
+     * @return the leap value.
      */
     public LocalDate leap() {
         return this.leap;
@@ -61,12 +61,11 @@ public class DateWrapper {
     /**
      * Set the leap value.
      *
-     * @param leap the leap value to set
+     * @param leap the leap value to set.
      * @return the DateWrapper object itself.
      */
     public DateWrapper withLeap(LocalDate leap) {
         this.leap = leap;
         return this;
     }
-
 }

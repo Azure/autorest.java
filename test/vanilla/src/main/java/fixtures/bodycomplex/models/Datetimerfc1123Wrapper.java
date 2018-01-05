@@ -10,9 +10,9 @@
 
 package fixtures.bodycomplex.models;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.microsoft.rest.v2.DateTimeRfc1123;
 import org.joda.time.DateTime;
-import com.fasterxml.jackson.annotation.JsonProperty;
 
 /**
  * The Datetimerfc1123Wrapper model.
@@ -33,7 +33,7 @@ public class Datetimerfc1123Wrapper {
     /**
      * Get the field value.
      *
-     * @return the field value
+     * @return the field value.
      */
     public DateTime field() {
         if (this.field == null) {
@@ -45,7 +45,7 @@ public class Datetimerfc1123Wrapper {
     /**
      * Set the field value.
      *
-     * @param field the field value to set
+     * @param field the field value to set.
      * @return the Datetimerfc1123Wrapper object itself.
      */
     public Datetimerfc1123Wrapper withField(DateTime field) {
@@ -60,7 +60,7 @@ public class Datetimerfc1123Wrapper {
     /**
      * Get the now value.
      *
-     * @return the now value
+     * @return the now value.
      */
     public DateTime now() {
         if (this.now == null) {
@@ -72,7 +72,7 @@ public class Datetimerfc1123Wrapper {
     /**
      * Set the now value.
      *
-     * @param now the now value to set
+     * @param now the now value to set.
      * @return the Datetimerfc1123Wrapper object itself.
      */
     public Datetimerfc1123Wrapper withNow(DateTime now) {
@@ -83,5 +83,4 @@ public class Datetimerfc1123Wrapper {
         }
         return this;
     }
-
 }

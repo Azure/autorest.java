@@ -31,7 +31,7 @@ public class SampleResourceGroup {
     /**
      * Get the name value.
      *
-     * @return the name value
+     * @return the name value.
      */
     public String name() {
         return this.name;
@@ -40,7 +40,7 @@ public class SampleResourceGroup {
     /**
      * Set the name value.
      *
-     * @param name the name value to set
+     * @param name the name value to set.
      * @return the SampleResourceGroup object itself.
      */
     public SampleResourceGroup withName(String name) {
@@ -51,7 +51,7 @@ public class SampleResourceGroup {
     /**
      * Get the location value.
      *
-     * @return the location value
+     * @return the location value.
      */
     public String location() {
         return this.location;
@@ -60,12 +60,11 @@ public class SampleResourceGroup {
     /**
      * Set the location value.
      *
-     * @param location the location value to set
+     * @param location the location value to set.
      * @return the SampleResourceGroup object itself.
      */
     public SampleResourceGroup withLocation(String location) {
         this.location = location;
         return this;
     }
-
 }

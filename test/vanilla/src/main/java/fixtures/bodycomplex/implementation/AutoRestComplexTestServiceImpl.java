@@ -10,27 +10,26 @@
 
 package fixtures.bodycomplex.implementation;
 
+import com.microsoft.rest.v2.RestProxy;
+import com.microsoft.rest.v2.ServiceClient;
+import com.microsoft.rest.v2.http.HttpPipeline;
+import fixtures.bodycomplex.Arrays;
 import fixtures.bodycomplex.AutoRestComplexTestService;
 import fixtures.bodycomplex.Basics;
-import fixtures.bodycomplex.Primitives;
-import fixtures.bodycomplex.Arrays;
 import fixtures.bodycomplex.Dictionarys;
 import fixtures.bodycomplex.Inheritances;
-import fixtures.bodycomplex.Polymorphisms;
 import fixtures.bodycomplex.Polymorphicrecursives;
+import fixtures.bodycomplex.Polymorphisms;
+import fixtures.bodycomplex.Primitives;
 import fixtures.bodycomplex.Readonlypropertys;
-import com.microsoft.rest.v2.RestProxy;
-import com.microsoft.rest.v2.RestResponse;
-import com.microsoft.rest.v2.ServiceClient;
-import com.microsoft.rest.v2.RestClient;
-import rx.Single;
 
 /**
- * Initializes a new instance of the AutoRestComplexTestService class.
+ * Initializes a new instance of the AutoRestComplexTestService type.
  */
 public class AutoRestComplexTestServiceImpl extends ServiceClient implements AutoRestComplexTestService {
-
-    /** API ID. */
+    /**
+     * API ID.
+     */
     private String apiVersion;
 
     /**
@@ -46,7 +45,7 @@ public class AutoRestComplexTestServiceImpl extends ServiceClient implements Aut
      * Sets API ID.
      *
      * @param apiVersion the apiVersion value.
-     * @return the service client itself
+     * @return the service client itself.
      */
     public AutoRestComplexTestServiceImpl withApiVersion(String apiVersion) {
         this.apiVersion = apiVersion;
@@ -60,6 +59,7 @@ public class AutoRestComplexTestServiceImpl extends ServiceClient implements Aut
 
     /**
      * Gets the Basics object to access its operations.
+     *
      * @return the Basics object.
      */
     public Basics basics() {
@@ -73,6 +73,7 @@ public class AutoRestComplexTestServiceImpl extends ServiceClient implements Aut
 
     /**
      * Gets the Primitives object to access its operations.
+     *
      * @return the Primitives object.
      */
     public Primitives primitives() {
@@ -86,6 +87,7 @@ public class AutoRestComplexTestServiceImpl extends ServiceClient implements Aut
 
     /**
      * Gets the Arrays object to access its operations.
+     *
      * @return the Arrays object.
      */
     public Arrays arrays() {
@@ -99,6 +101,7 @@ public class AutoRestComplexTestServiceImpl extends ServiceClient implements Aut
 
     /**
      * Gets the Dictionarys object to access its operations.
+     *
      * @return the Dictionarys object.
      */
     public Dictionarys dictionarys() {
@@ -112,6 +115,7 @@ public class AutoRestComplexTestServiceImpl extends ServiceClient implements Aut
 
     /**
      * Gets the Inheritances object to access its operations.
+     *
      * @return the Inheritances object.
      */
     public Inheritances inheritances() {
@@ -125,6 +129,7 @@ public class AutoRestComplexTestServiceImpl extends ServiceClient implements Aut
 
     /**
      * Gets the Polymorphisms object to access its operations.
+     *
      * @return the Polymorphisms object.
      */
     public Polymorphisms polymorphisms() {
@@ -138,6 +143,7 @@ public class AutoRestComplexTestServiceImpl extends ServiceClient implements Aut
 
     /**
      * Gets the Polymorphicrecursives object to access its operations.
+     *
      * @return the Polymorphicrecursives object.
      */
     public Polymorphicrecursives polymorphicrecursives() {
@@ -151,6 +157,7 @@ public class AutoRestComplexTestServiceImpl extends ServiceClient implements Aut
 
     /**
      * Gets the Readonlypropertys object to access its operations.
+     *
      * @return the Readonlypropertys object.
      */
     public Readonlypropertys readonlypropertys() {
@@ -159,34 +166,18 @@ public class AutoRestComplexTestServiceImpl extends ServiceClient implements Aut
 
     /**
      * Initializes an instance of AutoRestComplexTestService client.
-     *
-     * @param baseUrl the base URL of the host
-     */
-    public AutoRestComplexTestServiceImpl(String baseUrl) {
-        super(baseUrl);
-        initialize();
-    }
-
-    /**
-     * Initializes an instance of AutoRestComplexTestService client.
-     *
      */
     public AutoRestComplexTestServiceImpl() {
-        this("http://localhost");
-        initialize();
+        this(RestProxy.createDefaultPipeline());
     }
 
     /**
      * Initializes an instance of AutoRestComplexTestService client.
      *
-     * @param restClient the REST client containing pre-configured settings
+     * @param httpPipeline The HTTP pipeline to send requests through.
      */
-    public AutoRestComplexTestServiceImpl(RestClient restClient) {
-        super(restClient);
-        initialize();
-    }
-
-    private void initialize() {
+    public AutoRestComplexTestServiceImpl(HttpPipeline httpPipeline) {
+        super(httpPipeline);
         this.apiVersion = "2014-04-01-preview";
         this.basics = new BasicsImpl(this);
         this.primitives = new PrimitivesImpl(this);

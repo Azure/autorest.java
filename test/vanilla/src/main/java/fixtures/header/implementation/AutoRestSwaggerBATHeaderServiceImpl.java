@@ -10,19 +10,16 @@
 
 package fixtures.header.implementation;
 
+import com.microsoft.rest.v2.RestProxy;
+import com.microsoft.rest.v2.ServiceClient;
+import com.microsoft.rest.v2.http.HttpPipeline;
 import fixtures.header.AutoRestSwaggerBATHeaderService;
 import fixtures.header.Headers;
-import com.microsoft.rest.v2.RestProxy;
-import com.microsoft.rest.v2.RestResponse;
-import com.microsoft.rest.v2.ServiceClient;
-import com.microsoft.rest.v2.RestClient;
-import rx.Single;
 
 /**
- * Initializes a new instance of the AutoRestSwaggerBATHeaderService class.
+ * Initializes a new instance of the AutoRestSwaggerBATHeaderService type.
  */
 public class AutoRestSwaggerBATHeaderServiceImpl extends ServiceClient implements AutoRestSwaggerBATHeaderService {
-
     /**
      * The Headers object to access its operations.
      */
@@ -30,6 +27,7 @@ public class AutoRestSwaggerBATHeaderServiceImpl extends ServiceClient implement
 
     /**
      * Gets the Headers object to access its operations.
+     *
      * @return the Headers object.
      */
     public Headers headers() {
@@ -38,34 +36,18 @@ public class AutoRestSwaggerBATHeaderServiceImpl extends ServiceClient implement
 
     /**
      * Initializes an instance of AutoRestSwaggerBATHeaderService client.
-     *
-     * @param baseUrl the base URL of the host
-     */
-    public AutoRestSwaggerBATHeaderServiceImpl(String baseUrl) {
-        super(baseUrl);
-        initialize();
-    }
-
-    /**
-     * Initializes an instance of AutoRestSwaggerBATHeaderService client.
-     *
      */
     public AutoRestSwaggerBATHeaderServiceImpl() {
-        this("http://localhost");
-        initialize();
+        this(RestProxy.createDefaultPipeline());
     }
 
     /**
      * Initializes an instance of AutoRestSwaggerBATHeaderService client.
      *
-     * @param restClient the REST client containing pre-configured settings
+     * @param httpPipeline The HTTP pipeline to send requests through.
      */
-    public AutoRestSwaggerBATHeaderServiceImpl(RestClient restClient) {
-        super(restClient);
-        initialize();
-    }
-
-    private void initialize() {
+    public AutoRestSwaggerBATHeaderServiceImpl(HttpPipeline httpPipeline) {
+        super(httpPipeline);
         this.headers = new HeadersImpl(this);
     }
 }

@@ -10,19 +10,16 @@
 
 package fixtures.bodyarray.implementation;
 
-import fixtures.bodyarray.AutoRestSwaggerBATArrayService;
-import fixtures.bodyarray.Arrays;
 import com.microsoft.rest.v2.RestProxy;
-import com.microsoft.rest.v2.RestResponse;
 import com.microsoft.rest.v2.ServiceClient;
-import com.microsoft.rest.v2.RestClient;
-import rx.Single;
+import com.microsoft.rest.v2.http.HttpPipeline;
+import fixtures.bodyarray.Arrays;
+import fixtures.bodyarray.AutoRestSwaggerBATArrayService;
 
 /**
- * Initializes a new instance of the AutoRestSwaggerBATArrayService class.
+ * Initializes a new instance of the AutoRestSwaggerBATArrayService type.
  */
 public class AutoRestSwaggerBATArrayServiceImpl extends ServiceClient implements AutoRestSwaggerBATArrayService {
-
     /**
      * The Arrays object to access its operations.
      */
@@ -30,6 +27,7 @@ public class AutoRestSwaggerBATArrayServiceImpl extends ServiceClient implements
 
     /**
      * Gets the Arrays object to access its operations.
+     *
      * @return the Arrays object.
      */
     public Arrays arrays() {
@@ -38,34 +36,18 @@ public class AutoRestSwaggerBATArrayServiceImpl extends ServiceClient implements
 
     /**
      * Initializes an instance of AutoRestSwaggerBATArrayService client.
-     *
-     * @param baseUrl the base URL of the host
-     */
-    public AutoRestSwaggerBATArrayServiceImpl(String baseUrl) {
-        super(baseUrl);
-        initialize();
-    }
-
-    /**
-     * Initializes an instance of AutoRestSwaggerBATArrayService client.
-     *
      */
     public AutoRestSwaggerBATArrayServiceImpl() {
-        this("http://localhost");
-        initialize();
+        this(RestProxy.createDefaultPipeline());
     }
 
     /**
      * Initializes an instance of AutoRestSwaggerBATArrayService client.
      *
-     * @param restClient the REST client containing pre-configured settings
+     * @param httpPipeline The HTTP pipeline to send requests through.
      */
-    public AutoRestSwaggerBATArrayServiceImpl(RestClient restClient) {
-        super(restClient);
-        initialize();
-    }
-
-    private void initialize() {
+    public AutoRestSwaggerBATArrayServiceImpl(HttpPipeline httpPipeline) {
+        super(httpPipeline);
         this.arrays = new ArraysImpl(this);
     }
 }

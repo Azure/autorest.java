@@ -32,7 +32,7 @@ public class PagingGetOdataMultiplePagesOptions {
     /**
      * Get the maxresults value.
      *
-     * @return the maxresults value
+     * @return the maxresults value.
      */
     public Integer maxresults() {
         return this.maxresults;
@@ -41,7 +41,7 @@ public class PagingGetOdataMultiplePagesOptions {
     /**
      * Set the maxresults value.
      *
-     * @param maxresults the maxresults value to set
+     * @param maxresults the maxresults value to set.
      * @return the PagingGetOdataMultiplePagesOptions object itself.
      */
     public PagingGetOdataMultiplePagesOptions withMaxresults(Integer maxresults) {
@@ -52,7 +52,7 @@ public class PagingGetOdataMultiplePagesOptions {
     /**
      * Get the timeout value.
      *
-     * @return the timeout value
+     * @return the timeout value.
      */
     public Integer timeout() {
         return this.timeout;
@@ -61,12 +61,11 @@ public class PagingGetOdataMultiplePagesOptions {
     /**
      * Set the timeout value.
      *
-     * @param timeout the timeout value to set
+     * @param timeout the timeout value to set.
      * @return the PagingGetOdataMultiplePagesOptions object itself.
      */
     public PagingGetOdataMultiplePagesOptions withTimeout(Integer timeout) {
         this.timeout = timeout;
         return this;
     }
-
 }

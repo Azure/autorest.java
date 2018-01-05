@@ -26,7 +26,7 @@ public class HttpRedirectsHead301Headers {
     /**
      * Get the location value.
      *
-     * @return the location value
+     * @return the location value.
      */
     public String location() {
         return this.location;
@@ -35,12 +35,11 @@ public class HttpRedirectsHead301Headers {
     /**
      * Set the location value.
      *
-     * @param location the location value to set
+     * @param location the location value to set.
      * @return the HttpRedirectsHead301Headers object itself.
      */
     public HttpRedirectsHead301Headers withLocation(String location) {
         this.location = location;
         return this;
     }
-
 }

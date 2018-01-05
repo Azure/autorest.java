@@ -10,19 +10,16 @@
 
 package fixtures.bodynumber.implementation;
 
+import com.microsoft.rest.v2.RestProxy;
+import com.microsoft.rest.v2.ServiceClient;
+import com.microsoft.rest.v2.http.HttpPipeline;
 import fixtures.bodynumber.AutoRestNumberTestService;
 import fixtures.bodynumber.Numbers;
-import com.microsoft.rest.v2.RestProxy;
-import com.microsoft.rest.v2.RestResponse;
-import com.microsoft.rest.v2.ServiceClient;
-import com.microsoft.rest.v2.RestClient;
-import rx.Single;
 
 /**
- * Initializes a new instance of the AutoRestNumberTestService class.
+ * Initializes a new instance of the AutoRestNumberTestService type.
  */
 public class AutoRestNumberTestServiceImpl extends ServiceClient implements AutoRestNumberTestService {
-
     /**
      * The Numbers object to access its operations.
      */
@@ -30,6 +27,7 @@ public class AutoRestNumberTestServiceImpl extends ServiceClient implements Auto
 
     /**
      * Gets the Numbers object to access its operations.
+     *
      * @return the Numbers object.
      */
     public Numbers numbers() {
@@ -38,34 +36,18 @@ public class AutoRestNumberTestServiceImpl extends ServiceClient implements Auto
 
     /**
      * Initializes an instance of AutoRestNumberTestService client.
-     *
-     * @param baseUrl the base URL of the host
-     */
-    public AutoRestNumberTestServiceImpl(String baseUrl) {
-        super(baseUrl);
-        initialize();
-    }
-
-    /**
-     * Initializes an instance of AutoRestNumberTestService client.
-     *
      */
     public AutoRestNumberTestServiceImpl() {
-        this("https://localhost");
-        initialize();
+        this(RestProxy.createDefaultPipeline());
     }
 
     /**
      * Initializes an instance of AutoRestNumberTestService client.
      *
-     * @param restClient the REST client containing pre-configured settings
+     * @param httpPipeline The HTTP pipeline to send requests through.
      */
-    public AutoRestNumberTestServiceImpl(RestClient restClient) {
-        super(restClient);
-        initialize();
-    }
-
-    private void initialize() {
+    public AutoRestNumberTestServiceImpl(HttpPipeline httpPipeline) {
+        super(httpPipeline);
         this.numbers = new NumbersImpl(this);
     }
 }

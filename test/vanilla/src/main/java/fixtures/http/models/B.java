@@ -25,7 +25,7 @@ public class B extends A {
     /**
      * Get the textStatusCode value.
      *
-     * @return the textStatusCode value
+     * @return the textStatusCode value.
      */
     public String textStatusCode() {
         return this.textStatusCode;
@@ -34,12 +34,11 @@ public class B extends A {
     /**
      * Set the textStatusCode value.
      *
-     * @param textStatusCode the textStatusCode value to set
+     * @param textStatusCode the textStatusCode value to set.
      * @return the B object itself.
      */
     public B withTextStatusCode(String textStatusCode) {
         this.textStatusCode = textStatusCode;
         return this;
     }
-
 }

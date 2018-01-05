@@ -33,7 +33,7 @@ public class LROsPutAsyncNoRetrycanceledHeadersInner {
     /**
      * Get the azureAsyncOperation value.
      *
-     * @return the azureAsyncOperation value
+     * @return the azureAsyncOperation value.
      */
     public String azureAsyncOperation() {
         return this.azureAsyncOperation;
@@ -42,7 +42,7 @@ public class LROsPutAsyncNoRetrycanceledHeadersInner {
     /**
      * Set the azureAsyncOperation value.
      *
-     * @param azureAsyncOperation the azureAsyncOperation value to set
+     * @param azureAsyncOperation the azureAsyncOperation value to set.
      * @return the LROsPutAsyncNoRetrycanceledHeadersInner object itself.
      */
     public LROsPutAsyncNoRetrycanceledHeadersInner withAzureAsyncOperation(String azureAsyncOperation) {
@@ -53,7 +53,7 @@ public class LROsPutAsyncNoRetrycanceledHeadersInner {
     /**
      * Get the location value.
      *
-     * @return the location value
+     * @return the location value.
      */
     public String location() {
         return this.location;
@@ -62,12 +62,11 @@ public class LROsPutAsyncNoRetrycanceledHeadersInner {
     /**
      * Set the location value.
      *
-     * @param location the location value to set
+     * @param location the location value to set.
      * @return the LROsPutAsyncNoRetrycanceledHeadersInner object itself.
      */
     public LROsPutAsyncNoRetrycanceledHeadersInner withLocation(String location) {
         this.location = location;
         return this;
     }
-
 }

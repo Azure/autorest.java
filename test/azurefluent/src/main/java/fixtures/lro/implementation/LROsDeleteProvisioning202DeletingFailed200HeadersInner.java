@@ -33,7 +33,7 @@ public class LROsDeleteProvisioning202DeletingFailed200HeadersInner {
     /**
      * Get the location value.
      *
-     * @return the location value
+     * @return the location value.
      */
     public String location() {
         return this.location;
@@ -42,8 +42,9 @@ public class LROsDeleteProvisioning202DeletingFailed200HeadersInner {
     /**
      * Set the location value.
      *
-     * @param location the location value to set
-     * @return the LROsDeleteProvisioning202DeletingFailed200HeadersInner object itself.
+     * @param location the location value to set.
+     * @return the LROsDeleteProvisioning202DeletingFailed200HeadersInner
+     * object itself.
      */
     public LROsDeleteProvisioning202DeletingFailed200HeadersInner withLocation(String location) {
         this.location = location;
@@ -53,7 +54,7 @@ public class LROsDeleteProvisioning202DeletingFailed200HeadersInner {
     /**
      * Get the retryAfter value.
      *
-     * @return the retryAfter value
+     * @return the retryAfter value.
      */
     public Integer retryAfter() {
         return this.retryAfter;
@@ -62,12 +63,12 @@ public class LROsDeleteProvisioning202DeletingFailed200HeadersInner {
     /**
      * Set the retryAfter value.
      *
-     * @param retryAfter the retryAfter value to set
-     * @return the LROsDeleteProvisioning202DeletingFailed200HeadersInner object itself.
+     * @param retryAfter the retryAfter value to set.
+     * @return the LROsDeleteProvisioning202DeletingFailed200HeadersInner
+     * object itself.
      */
     public LROsDeleteProvisioning202DeletingFailed200HeadersInner withRetryAfter(Integer retryAfter) {
         this.retryAfter = retryAfter;
         return this;
     }
-
 }

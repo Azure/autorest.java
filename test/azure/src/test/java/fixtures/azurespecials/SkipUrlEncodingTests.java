@@ -1,6 +1,10 @@
 package fixtures.azurespecials;
 
 import com.microsoft.rest.v2.credentials.BasicAuthenticationCredentials;
+import com.microsoft.rest.v2.http.HttpPipeline;
+import com.microsoft.rest.v2.policy.CredentialsPolicy;
+import com.microsoft.rest.v2.policy.PortPolicy;
+import com.microsoft.rest.v2.policy.ProtocolPolicy;
 import org.junit.BeforeClass;
 import org.junit.Ignore;
 import org.junit.Test;
@@ -8,7 +12,6 @@ import org.junit.Test;
 import fixtures.azurespecials.implementation.AutoRestAzureSpecialParametersTestClientImpl;
 
 public class SkipUrlEncodingTests {
-    private static String baseUrl = "http://localhost:3000";
     private static String unencodedPath = "path1/path2/path3";
     private static String unencodedQuery = "value1&q2=value2&q3=value3";
 
@@ -16,7 +19,11 @@ public class SkipUrlEncodingTests {
 
     @BeforeClass
     public static void setup() {
-        client = new AutoRestAzureSpecialParametersTestClientImpl(baseUrl, new BasicAuthenticationCredentials(null, null)).skipUrlEncodings();
+        client = new AutoRestAzureSpecialParametersTestClientImpl(
+            HttpPipeline.build(
+                new ProtocolPolicy.Factory("http"),
+                new PortPolicy.Factory(3000),
+                new CredentialsPolicy.Factory(new BasicAuthenticationCredentials(null, null)))).skipUrlEncodings();
     }
 
     @Test

@@ -25,7 +25,7 @@ public class HeaderCustomNamedRequestIdParamGroupingHeadersInner {
     /**
      * Get the fooRequestId value.
      *
-     * @return the fooRequestId value
+     * @return the fooRequestId value.
      */
     public String fooRequestId() {
         return this.fooRequestId;
@@ -34,12 +34,12 @@ public class HeaderCustomNamedRequestIdParamGroupingHeadersInner {
     /**
      * Set the fooRequestId value.
      *
-     * @param fooRequestId the fooRequestId value to set
-     * @return the HeaderCustomNamedRequestIdParamGroupingHeadersInner object itself.
+     * @param fooRequestId the fooRequestId value to set.
+     * @return the HeaderCustomNamedRequestIdParamGroupingHeadersInner object
+     * itself.
      */
     public HeaderCustomNamedRequestIdParamGroupingHeadersInner withFooRequestId(String fooRequestId) {
         this.fooRequestId = fooRequestId;
         return this;
     }
-
 }

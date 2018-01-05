@@ -31,7 +31,7 @@ public class ParameterGroupingPostOptionalParameters {
     /**
      * Get the customHeader value.
      *
-     * @return the customHeader value
+     * @return the customHeader value.
      */
     public String customHeader() {
         return this.customHeader;
@@ -40,7 +40,7 @@ public class ParameterGroupingPostOptionalParameters {
     /**
      * Set the customHeader value.
      *
-     * @param customHeader the customHeader value to set
+     * @param customHeader the customHeader value to set.
      * @return the ParameterGroupingPostOptionalParameters object itself.
      */
     public ParameterGroupingPostOptionalParameters withCustomHeader(String customHeader) {
@@ -51,7 +51,7 @@ public class ParameterGroupingPostOptionalParameters {
     /**
      * Get the query value.
      *
-     * @return the query value
+     * @return the query value.
      */
     public Integer query() {
         return this.query;
@@ -60,12 +60,11 @@ public class ParameterGroupingPostOptionalParameters {
     /**
      * Set the query value.
      *
-     * @param query the query value to set
+     * @param query the query value to set.
      * @return the ParameterGroupingPostOptionalParameters object itself.
      */
     public ParameterGroupingPostOptionalParameters withQuery(Integer query) {
         this.query = query;
         return this;
     }
-
 }

@@ -2,6 +2,8 @@ package fixtures.bodyboolean;
 
 import com.fasterxml.jackson.core.JsonParseException;
 
+import com.microsoft.rest.v2.http.HttpPipeline;
+import com.microsoft.rest.v2.policy.PortPolicy;
 import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -15,13 +17,13 @@ public class BoolTests {
 
     @BeforeClass
     public static void setup() {
-        client = new AutoRestBoolTestServiceImpl("http://localhost:3000");
+        client = new AutoRestBoolTestServiceImpl(HttpPipeline.build(new PortPolicy.Factory(3000)));
     }
 
     @Test
     public void getNull() throws Exception {
         try {
-            client.bools().getNull();
+            boolean b = client.bools().getNull();
             fail();
         } catch (NullPointerException e) {
             // expected

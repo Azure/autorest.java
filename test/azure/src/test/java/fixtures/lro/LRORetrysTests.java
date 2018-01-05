@@ -1,9 +1,13 @@
 package fixtures.lro;
 
 import com.microsoft.azure.v2.AzureProxy;
-import com.microsoft.azure.v2.serializer.AzureJacksonAdapter;
-import com.microsoft.rest.v2.LogLevel;
-import com.microsoft.rest.v2.RestClient;
+import com.microsoft.rest.v2.policy.AddCookiesPolicy;
+import com.microsoft.rest.v2.policy.LoggingPolicy;
+import com.microsoft.rest.v2.policy.LoggingPolicy.LogLevel;
+import com.microsoft.rest.v2.http.HttpPipeline;
+import com.microsoft.rest.v2.policy.PortPolicy;
+import com.microsoft.rest.v2.policy.ProtocolPolicy;
+import com.microsoft.rest.v2.policy.RetryPolicy;
 import fixtures.lro.implementation.AutoRestLongRunningOperationTestServiceImpl;
 import fixtures.lro.models.Product;
 import org.junit.Assert;
@@ -15,13 +19,13 @@ public class LRORetrysTests {
 
     @BeforeClass
     public static void setup() {
-        RestClient restClient = new RestClient.Builder()
-                .withBaseUrl("http://localhost:3000")
-                .withLogLevel(LogLevel.BODY_AND_HEADERS)
-                .withSerializerAdapter(new AzureJacksonAdapter())
-                .build();
-        AzureProxy.setDefaultDelayInMilliseconds(0);
-        client = new AutoRestLongRunningOperationTestServiceImpl(restClient)
+        final HttpPipeline httpPipeline = HttpPipeline.build(
+            new ProtocolPolicy.Factory("http"),
+            new PortPolicy.Factory(3000),
+            new RetryPolicy.Factory(),
+            new AddCookiesPolicy.Factory());
+        AzureProxy.setDefaultPollingDelayInMilliseconds(0);
+        client = new AutoRestLongRunningOperationTestServiceImpl(httpPipeline)
             .withLongRunningOperationRetryTimeout(0);
     }
 

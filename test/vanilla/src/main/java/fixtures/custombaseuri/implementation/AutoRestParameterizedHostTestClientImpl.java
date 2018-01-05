@@ -10,20 +10,19 @@
 
 package fixtures.custombaseuri.implementation;
 
+import com.microsoft.rest.v2.RestProxy;
+import com.microsoft.rest.v2.ServiceClient;
+import com.microsoft.rest.v2.http.HttpPipeline;
 import fixtures.custombaseuri.AutoRestParameterizedHostTestClient;
 import fixtures.custombaseuri.Paths;
-import com.microsoft.rest.v2.RestProxy;
-import com.microsoft.rest.v2.RestResponse;
-import com.microsoft.rest.v2.ServiceClient;
-import com.microsoft.rest.v2.RestClient;
-import rx.Single;
 
 /**
- * Initializes a new instance of the AutoRestParameterizedHostTestClient class.
+ * Initializes a new instance of the AutoRestParameterizedHostTestClient type.
  */
 public class AutoRestParameterizedHostTestClientImpl extends ServiceClient implements AutoRestParameterizedHostTestClient {
-
-    /** A string value that is used as a global part of the parameterized host. */
+    /**
+     * A string value that is used as a global part of the parameterized host.
+     */
     private String host;
 
     /**
@@ -39,7 +38,7 @@ public class AutoRestParameterizedHostTestClientImpl extends ServiceClient imple
      * Sets A string value that is used as a global part of the parameterized host.
      *
      * @param host the host value.
-     * @return the service client itself
+     * @return the service client itself.
      */
     public AutoRestParameterizedHostTestClientImpl withHost(String host) {
         this.host = host;
@@ -53,6 +52,7 @@ public class AutoRestParameterizedHostTestClientImpl extends ServiceClient imple
 
     /**
      * Gets the Paths object to access its operations.
+     *
      * @return the Paths object.
      */
     public Paths paths() {
@@ -61,34 +61,18 @@ public class AutoRestParameterizedHostTestClientImpl extends ServiceClient imple
 
     /**
      * Initializes an instance of AutoRestParameterizedHostTestClient client.
-     *
-     * @param baseUrl the base URL of the host
-     */
-    private AutoRestParameterizedHostTestClientImpl(String baseUrl) {
-        super(baseUrl);
-        initialize();
-    }
-
-    /**
-     * Initializes an instance of AutoRestParameterizedHostTestClient client.
-     *
      */
     public AutoRestParameterizedHostTestClientImpl() {
-        this("http://{accountName}{host}");
-        initialize();
+        this(RestProxy.createDefaultPipeline());
     }
 
     /**
      * Initializes an instance of AutoRestParameterizedHostTestClient client.
      *
-     * @param restClient the REST client containing pre-configured settings
+     * @param httpPipeline The HTTP pipeline to send requests through.
      */
-    public AutoRestParameterizedHostTestClientImpl(RestClient restClient) {
-        super(restClient);
-        initialize();
-    }
-
-    private void initialize() {
+    public AutoRestParameterizedHostTestClientImpl(HttpPipeline httpPipeline) {
+        super(httpPipeline);
         this.host = "host";
         this.paths = new PathsImpl(this);
     }

@@ -27,7 +27,7 @@ public class OperationResult {
     /**
      * Get the status value.
      *
-     * @return the status value
+     * @return the status value.
      */
     public String status() {
         return this.status;
@@ -36,12 +36,11 @@ public class OperationResult {
     /**
      * Set the status value.
      *
-     * @param status the status value to set
+     * @param status the status value to set.
      * @return the OperationResult object itself.
      */
     public OperationResult withStatus(String status) {
         this.status = status;
         return this;
     }
-
 }

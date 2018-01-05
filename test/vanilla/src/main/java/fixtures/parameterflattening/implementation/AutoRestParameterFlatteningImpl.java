@@ -10,19 +10,16 @@
 
 package fixtures.parameterflattening.implementation;
 
+import com.microsoft.rest.v2.RestProxy;
+import com.microsoft.rest.v2.ServiceClient;
+import com.microsoft.rest.v2.http.HttpPipeline;
 import fixtures.parameterflattening.AutoRestParameterFlattening;
 import fixtures.parameterflattening.AvailabilitySets;
-import com.microsoft.rest.v2.RestProxy;
-import com.microsoft.rest.v2.RestResponse;
-import com.microsoft.rest.v2.ServiceClient;
-import com.microsoft.rest.v2.RestClient;
-import rx.Single;
 
 /**
- * Initializes a new instance of the AutoRestParameterFlattening class.
+ * Initializes a new instance of the AutoRestParameterFlattening type.
  */
 public class AutoRestParameterFlatteningImpl extends ServiceClient implements AutoRestParameterFlattening {
-
     /**
      * The AvailabilitySets object to access its operations.
      */
@@ -30,6 +27,7 @@ public class AutoRestParameterFlatteningImpl extends ServiceClient implements Au
 
     /**
      * Gets the AvailabilitySets object to access its operations.
+     *
      * @return the AvailabilitySets object.
      */
     public AvailabilitySets availabilitySets() {
@@ -38,34 +36,18 @@ public class AutoRestParameterFlatteningImpl extends ServiceClient implements Au
 
     /**
      * Initializes an instance of AutoRestParameterFlattening client.
-     *
-     * @param baseUrl the base URL of the host
-     */
-    public AutoRestParameterFlatteningImpl(String baseUrl) {
-        super(baseUrl);
-        initialize();
-    }
-
-    /**
-     * Initializes an instance of AutoRestParameterFlattening client.
-     *
      */
     public AutoRestParameterFlatteningImpl() {
-        this("http://localhost");
-        initialize();
+        this(RestProxy.createDefaultPipeline());
     }
 
     /**
      * Initializes an instance of AutoRestParameterFlattening client.
      *
-     * @param restClient the REST client containing pre-configured settings
+     * @param httpPipeline The HTTP pipeline to send requests through.
      */
-    public AutoRestParameterFlatteningImpl(RestClient restClient) {
-        super(restClient);
-        initialize();
-    }
-
-    private void initialize() {
+    public AutoRestParameterFlatteningImpl(HttpPipeline httpPipeline) {
+        super(httpPipeline);
         this.availabilitySets = new AvailabilitySetsImpl(this);
     }
 }

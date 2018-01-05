@@ -10,28 +10,14 @@
 
 package fixtures.bodybyte;
 
-import com.microsoft.rest.v2.RestClient;
-
 /**
  * The interface for AutoRestSwaggerBATByteService class.
  */
 public interface AutoRestSwaggerBATByteService {
     /**
-     * Gets the REST client.
-     *
-     * @return the {@link RestClient} object.
-    */
-    RestClient restClient();
-
-    /**
-     * The default base URL.
-     */
-    String DEFAULT_BASE_URL = "http://localhost";
-
-    /**
      * Gets the Bytes object to access its operations.
+     *
      * @return the Bytes object.
      */
     Bytes bytes();
-
 }

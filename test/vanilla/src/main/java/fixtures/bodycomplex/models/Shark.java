@@ -10,11 +10,11 @@
 
 package fixtures.bodycomplex.models;
 
-import org.joda.time.DateTime;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonSubTypes;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import com.fasterxml.jackson.annotation.JsonTypeName;
-import com.fasterxml.jackson.annotation.JsonSubTypes;
+import org.joda.time.DateTime;
 
 /**
  * The Shark model.
@@ -22,9 +22,9 @@ import com.fasterxml.jackson.annotation.JsonSubTypes;
 @JsonTypeInfo(use = JsonTypeInfo.Id.NAME, include = JsonTypeInfo.As.PROPERTY, property = "fishtype")
 @JsonTypeName("shark")
 @JsonSubTypes({
-    @JsonSubTypes.Type(name = "sawshark", value = Sawshark.class),
-    @JsonSubTypes.Type(name = "goblin", value = Goblinshark.class),
-    @JsonSubTypes.Type(name = "cookiecuttershark", value = Cookiecuttershark.class)
+@JsonSubTypes.Type(name = "sawshark", value = Sawshark.class),
+@JsonSubTypes.Type(name = "goblin", value = Goblinshark.class),
+@JsonSubTypes.Type(name = "cookiecuttershark", value = Cookiecuttershark.class)
 })
 public class Shark extends Fish {
     /**
@@ -42,7 +42,7 @@ public class Shark extends Fish {
     /**
      * Get the age value.
      *
-     * @return the age value
+     * @return the age value.
      */
     public Integer age() {
         return this.age;
@@ -51,7 +51,7 @@ public class Shark extends Fish {
     /**
      * Set the age value.
      *
-     * @param age the age value to set
+     * @param age the age value to set.
      * @return the Shark object itself.
      */
     public Shark withAge(Integer age) {
@@ -62,7 +62,7 @@ public class Shark extends Fish {
     /**
      * Get the birthday value.
      *
-     * @return the birthday value
+     * @return the birthday value.
      */
     public DateTime birthday() {
         return this.birthday;
@@ -71,12 +71,11 @@ public class Shark extends Fish {
     /**
      * Set the birthday value.
      *
-     * @param birthday the birthday value to set
+     * @param birthday the birthday value to set.
      * @return the Shark object itself.
      */
     public Shark withBirthday(DateTime birthday) {
         this.birthday = birthday;
         return this;
     }
-
 }

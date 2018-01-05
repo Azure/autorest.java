@@ -10,8 +10,8 @@
 
 package fixtures.paging.implementation;
 
-import fixtures.paging.ProductProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import fixtures.paging.ProductProperties;
 
 /**
  * The ProductInner model.
@@ -26,7 +26,7 @@ public class ProductInner {
     /**
      * Get the properties value.
      *
-     * @return the properties value
+     * @return the properties value.
      */
     public ProductProperties properties() {
         return this.properties;
@@ -35,12 +35,11 @@ public class ProductInner {
     /**
      * Set the properties value.
      *
-     * @param properties the properties value to set
+     * @param properties the properties value to set.
      * @return the ProductInner object itself.
      */
     public ProductInner withProperties(ProductProperties properties) {
         this.properties = properties;
         return this;
     }
-
 }

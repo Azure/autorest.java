@@ -10,19 +10,16 @@
 
 package fixtures.bodybyte.implementation;
 
+import com.microsoft.rest.v2.RestProxy;
+import com.microsoft.rest.v2.ServiceClient;
+import com.microsoft.rest.v2.http.HttpPipeline;
 import fixtures.bodybyte.AutoRestSwaggerBATByteService;
 import fixtures.bodybyte.Bytes;
-import com.microsoft.rest.v2.RestProxy;
-import com.microsoft.rest.v2.RestResponse;
-import com.microsoft.rest.v2.ServiceClient;
-import com.microsoft.rest.v2.RestClient;
-import rx.Single;
 
 /**
- * Initializes a new instance of the AutoRestSwaggerBATByteService class.
+ * Initializes a new instance of the AutoRestSwaggerBATByteService type.
  */
 public class AutoRestSwaggerBATByteServiceImpl extends ServiceClient implements AutoRestSwaggerBATByteService {
-
     /**
      * The Bytes object to access its operations.
      */
@@ -30,6 +27,7 @@ public class AutoRestSwaggerBATByteServiceImpl extends ServiceClient implements 
 
     /**
      * Gets the Bytes object to access its operations.
+     *
      * @return the Bytes object.
      */
     public Bytes bytes() {
@@ -38,34 +36,18 @@ public class AutoRestSwaggerBATByteServiceImpl extends ServiceClient implements 
 
     /**
      * Initializes an instance of AutoRestSwaggerBATByteService client.
-     *
-     * @param baseUrl the base URL of the host
-     */
-    public AutoRestSwaggerBATByteServiceImpl(String baseUrl) {
-        super(baseUrl);
-        initialize();
-    }
-
-    /**
-     * Initializes an instance of AutoRestSwaggerBATByteService client.
-     *
      */
     public AutoRestSwaggerBATByteServiceImpl() {
-        this("http://localhost");
-        initialize();
+        this(RestProxy.createDefaultPipeline());
     }
 
     /**
      * Initializes an instance of AutoRestSwaggerBATByteService client.
      *
-     * @param restClient the REST client containing pre-configured settings
+     * @param httpPipeline The HTTP pipeline to send requests through.
      */
-    public AutoRestSwaggerBATByteServiceImpl(RestClient restClient) {
-        super(restClient);
-        initialize();
-    }
-
-    private void initialize() {
+    public AutoRestSwaggerBATByteServiceImpl(HttpPipeline httpPipeline) {
+        super(httpPipeline);
         this.bytes = new BytesImpl(this);
     }
 }

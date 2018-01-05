@@ -25,8 +25,8 @@ public class Error {
     /**
      * The constantId property.
      */
-    @JsonProperty(value = "constantId")
-    private Integer constantId;
+    @JsonProperty(value = "constantId", required = true)
+    private int constantId;
 
     /**
      * The message property.
@@ -35,9 +35,16 @@ public class Error {
     private String message;
 
     /**
+     * Creates an instance of Error class.
+     */
+    public Error() {
+        constantId = 1;
+    }
+
+    /**
      * Get the status value.
      *
-     * @return the status value
+     * @return the status value.
      */
     public Integer status() {
         return this.status;
@@ -46,7 +53,7 @@ public class Error {
     /**
      * Set the status value.
      *
-     * @param status the status value to set
+     * @param status the status value to set.
      * @return the Error object itself.
      */
     public Error withStatus(Integer status) {
@@ -57,19 +64,19 @@ public class Error {
     /**
      * Get the constantId value.
      *
-     * @return the constantId value
+     * @return the constantId value.
      */
-    public Integer constantId() {
+    public int constantId() {
         return this.constantId;
     }
 
     /**
      * Set the constantId value.
      *
-     * @param constantId the constantId value to set
+     * @param constantId the constantId value to set.
      * @return the Error object itself.
      */
-    public Error withConstantId(Integer constantId) {
+    public Error withConstantId(int constantId) {
         this.constantId = constantId;
         return this;
     }
@@ -77,7 +84,7 @@ public class Error {
     /**
      * Get the message value.
      *
-     * @return the message value
+     * @return the message value.
      */
     public String message() {
         return this.message;
@@ -86,12 +93,11 @@ public class Error {
     /**
      * Set the message value.
      *
-     * @param message the message value to set
+     * @param message the message value to set.
      * @return the Error object itself.
      */
     public Error withMessage(String message) {
         this.message = message;
         return this;
     }
-
 }

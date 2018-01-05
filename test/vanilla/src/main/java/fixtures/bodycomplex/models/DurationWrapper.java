@@ -10,8 +10,8 @@
 
 package fixtures.bodycomplex.models;
 
-import org.joda.time.Period;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import org.joda.time.Period;
 
 /**
  * The DurationWrapper model.
@@ -26,7 +26,7 @@ public class DurationWrapper {
     /**
      * Get the field value.
      *
-     * @return the field value
+     * @return the field value.
      */
     public Period field() {
         return this.field;
@@ -35,12 +35,11 @@ public class DurationWrapper {
     /**
      * Set the field value.
      *
-     * @param field the field value to set
+     * @param field the field value to set.
      * @return the DurationWrapper object itself.
      */
     public DurationWrapper withField(Period field) {
         this.field = field;
         return this;
     }
-
 }

@@ -10,10 +10,12 @@
 
 package fixtures.bodycomplex.implementation;
 
+import com.google.common.reflect.TypeToken;
 import com.microsoft.rest.v2.RestProxy;
 import com.microsoft.rest.v2.RestResponse;
-import fixtures.bodycomplex.Primitives;
-import com.google.common.reflect.TypeToken;
+import com.microsoft.rest.v2.ServiceCallback;
+import com.microsoft.rest.v2.ServiceFuture;
+import com.microsoft.rest.v2.Validator;
 import com.microsoft.rest.v2.annotations.BodyParam;
 import com.microsoft.rest.v2.annotations.ExpectedResponses;
 import com.microsoft.rest.v2.annotations.GET;
@@ -22,9 +24,7 @@ import com.microsoft.rest.v2.annotations.Host;
 import com.microsoft.rest.v2.annotations.PUT;
 import com.microsoft.rest.v2.annotations.UnexpectedResponseExceptionType;
 import com.microsoft.rest.v2.http.HttpClient;
-import com.microsoft.rest.v2.ServiceCallback;
-import com.microsoft.rest.v2.ServiceFuture;
-import com.microsoft.rest.v2.Validator;
+import fixtures.bodycomplex.Primitives;
 import fixtures.bodycomplex.models.BooleanWrapper;
 import fixtures.bodycomplex.models.ByteWrapper;
 import fixtures.bodycomplex.models.Datetimerfc1123Wrapper;
@@ -37,199 +37,183 @@ import fixtures.bodycomplex.models.FloatWrapper;
 import fixtures.bodycomplex.models.IntWrapper;
 import fixtures.bodycomplex.models.LongWrapper;
 import fixtures.bodycomplex.models.StringWrapper;
+import io.reactivex.Completable;
+import io.reactivex.Maybe;
+import io.reactivex.Observable;
+import io.reactivex.Single;
+import io.reactivex.functions.Function;
 import java.io.IOException;
-import rx.functions.Func1;
-import rx.Observable;
-import rx.Single;
 
 /**
- * An instance of this class provides access to all the operations defined
- * in Primitives.
+ * An instance of this class provides access to all the operations defined in
+ * Primitives.
  */
 public class PrimitivesImpl implements Primitives {
-    /** The RestProxy service to perform REST calls. */
+    /**
+     * The proxy service used to perform REST calls.
+     */
     private PrimitivesService service;
-    /** The service client containing this operation class. */
+
+    /**
+     * The service client containing this operation class.
+     */
     private AutoRestComplexTestServiceImpl client;
 
     /**
-     * Initializes an instance of Primitives.
+     * Initializes an instance of PrimitivesImpl.
      *
      * @param client the instance of the service client containing this operation class.
      */
     public PrimitivesImpl(AutoRestComplexTestServiceImpl client) {
-        this.service = RestProxy.create(PrimitivesService.class, client.restClient().baseURL(), client.httpClient(), client.serializerAdapter());
+        this.service = RestProxy.create(PrimitivesService.class, client);
         this.client = client;
     }
 
     /**
-     * The interface defining all the services for Primitives to be
-     * used by RestProxy to perform REST calls.
-    */
-    @Host("http://localhost")
+     * The interface defining all the services for Primitives to be used by the
+     * proxy service to perform REST calls.
+     */
+    @Host("http://localhost:3000")
     interface PrimitivesService {
-        @Headers({ "x-ms-logging-context: fixtures.bodycomplex.Primitives getInt" })
         @GET("complex/primitive/integer")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
         Single<RestResponse<Void, IntWrapper>> getInt();
 
-        @Headers({ "x-ms-logging-context: fixtures.bodycomplex.Primitives putInt" })
         @PUT("complex/primitive/integer")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
         Single<RestResponse<Void, Void>> putInt(@BodyParam("application/json; charset=utf-8") IntWrapper complexBody);
 
-        @Headers({ "x-ms-logging-context: fixtures.bodycomplex.Primitives getLong" })
         @GET("complex/primitive/long")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
         Single<RestResponse<Void, LongWrapper>> getLong();
 
-        @Headers({ "x-ms-logging-context: fixtures.bodycomplex.Primitives putLong" })
         @PUT("complex/primitive/long")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
         Single<RestResponse<Void, Void>> putLong(@BodyParam("application/json; charset=utf-8") LongWrapper complexBody);
 
-        @Headers({ "x-ms-logging-context: fixtures.bodycomplex.Primitives getFloat" })
         @GET("complex/primitive/float")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
         Single<RestResponse<Void, FloatWrapper>> getFloat();
 
-        @Headers({ "x-ms-logging-context: fixtures.bodycomplex.Primitives putFloat" })
         @PUT("complex/primitive/float")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
         Single<RestResponse<Void, Void>> putFloat(@BodyParam("application/json; charset=utf-8") FloatWrapper complexBody);
 
-        @Headers({ "x-ms-logging-context: fixtures.bodycomplex.Primitives getDouble" })
         @GET("complex/primitive/double")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
         Single<RestResponse<Void, DoubleWrapper>> getDouble();
 
-        @Headers({ "x-ms-logging-context: fixtures.bodycomplex.Primitives putDouble" })
         @PUT("complex/primitive/double")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
         Single<RestResponse<Void, Void>> putDouble(@BodyParam("application/json; charset=utf-8") DoubleWrapper complexBody);
 
-        @Headers({ "x-ms-logging-context: fixtures.bodycomplex.Primitives getBool" })
         @GET("complex/primitive/bool")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
         Single<RestResponse<Void, BooleanWrapper>> getBool();
 
-        @Headers({ "x-ms-logging-context: fixtures.bodycomplex.Primitives putBool" })
         @PUT("complex/primitive/bool")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
         Single<RestResponse<Void, Void>> putBool(@BodyParam("application/json; charset=utf-8") BooleanWrapper complexBody);
 
-        @Headers({ "x-ms-logging-context: fixtures.bodycomplex.Primitives getString" })
         @GET("complex/primitive/string")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
         Single<RestResponse<Void, StringWrapper>> getString();
 
-        @Headers({ "x-ms-logging-context: fixtures.bodycomplex.Primitives putString" })
         @PUT("complex/primitive/string")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
         Single<RestResponse<Void, Void>> putString(@BodyParam("application/json; charset=utf-8") StringWrapper complexBody);
 
-        @Headers({ "x-ms-logging-context: fixtures.bodycomplex.Primitives getDate" })
         @GET("complex/primitive/date")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
         Single<RestResponse<Void, DateWrapper>> getDate();
 
-        @Headers({ "x-ms-logging-context: fixtures.bodycomplex.Primitives putDate" })
         @PUT("complex/primitive/date")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
         Single<RestResponse<Void, Void>> putDate(@BodyParam("application/json; charset=utf-8") DateWrapper complexBody);
 
-        @Headers({ "x-ms-logging-context: fixtures.bodycomplex.Primitives getDateTime" })
         @GET("complex/primitive/datetime")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
         Single<RestResponse<Void, DatetimeWrapper>> getDateTime();
 
-        @Headers({ "x-ms-logging-context: fixtures.bodycomplex.Primitives putDateTime" })
         @PUT("complex/primitive/datetime")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
         Single<RestResponse<Void, Void>> putDateTime(@BodyParam("application/json; charset=utf-8") DatetimeWrapper complexBody);
 
-        @Headers({ "x-ms-logging-context: fixtures.bodycomplex.Primitives getDateTimeRfc1123" })
         @GET("complex/primitive/datetimerfc1123")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
         Single<RestResponse<Void, Datetimerfc1123Wrapper>> getDateTimeRfc1123();
 
-        @Headers({ "x-ms-logging-context: fixtures.bodycomplex.Primitives putDateTimeRfc1123" })
         @PUT("complex/primitive/datetimerfc1123")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
         Single<RestResponse<Void, Void>> putDateTimeRfc1123(@BodyParam("application/json; charset=utf-8") Datetimerfc1123Wrapper complexBody);
 
-        @Headers({ "x-ms-logging-context: fixtures.bodycomplex.Primitives getDuration" })
         @GET("complex/primitive/duration")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
         Single<RestResponse<Void, DurationWrapper>> getDuration();
 
-        @Headers({ "x-ms-logging-context: fixtures.bodycomplex.Primitives putDuration" })
         @PUT("complex/primitive/duration")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
         Single<RestResponse<Void, Void>> putDuration(@BodyParam("application/json; charset=utf-8") DurationWrapper complexBody);
 
-        @Headers({ "x-ms-logging-context: fixtures.bodycomplex.Primitives getByte" })
         @GET("complex/primitive/byte")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
         Single<RestResponse<Void, ByteWrapper>> getByte();
 
-        @Headers({ "x-ms-logging-context: fixtures.bodycomplex.Primitives putByte" })
         @PUT("complex/primitive/byte")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
         Single<RestResponse<Void, Void>> putByte(@BodyParam("application/json; charset=utf-8") ByteWrapper complexBody);
-
     }
 
     /**
      * Get complex types with integer properties.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @throws ErrorException thrown if the request is rejected by server
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the IntWrapper object if successful.
      */
     public IntWrapper getInt() {
-        return getIntAsync().toBlocking().value();
+        return getIntAsync().blockingGet();
     }
 
     /**
      * Get complex types with integer properties.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceFuture} object
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link ServiceFuture&lt;IntWrapper&gt;} object.
      */
-    public ServiceFuture<IntWrapper> getIntAsync(ServiceCallback<IntWrapper> serviceCallback) {
+    public ServiceFuture<IntWrapper> getIntAsync(final ServiceCallback<IntWrapper> serviceCallback) {
         return ServiceFuture.fromBody(getIntAsync(), serviceCallback);
     }
 
     /**
      * Get complex types with integer properties.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return a {@link Single} emitting the RestResponse<Void, IntWrapper> object
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link Single&lt;RestResponse&lt;Void, IntWrapper&gt;&gt;} object if successful.
      */
     public Single<RestResponse<Void, IntWrapper>> getIntWithRestResponseAsync() {
         return service.getInt();
@@ -238,46 +222,52 @@ public class PrimitivesImpl implements Primitives {
     /**
      * Get complex types with integer properties.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return a {@link Single} emitting the RestResponse<Void, IntWrapper> object
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link Maybe&lt;IntWrapper&gt;} object if successful.
      */
-    public Single<IntWrapper> getIntAsync() {
+    public Maybe<IntWrapper> getIntAsync() {
         return getIntWithRestResponseAsync()
-            .map(new Func1<RestResponse<Void, IntWrapper>, IntWrapper>() { public IntWrapper call(RestResponse<Void, IntWrapper> restResponse) { return restResponse.body(); } });
-        }
-
-
-    /**
-     * Put complex types with integer properties.
-     *
-     * @param complexBody Please put -1 and 2
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @throws ErrorException thrown if the request is rejected by server
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
-     * @return the void object if successful.
-     */
-    public void putInt(IntWrapper complexBody) {
-        putIntAsync(complexBody).toBlocking().value();
+            .flatMapMaybe(new Function<RestResponse<Void, IntWrapper>, Maybe<IntWrapper>>() {
+                public Maybe<IntWrapper> apply(RestResponse<Void, IntWrapper> restResponse) {
+                    if (restResponse.body() == null) {
+                        return Maybe.empty();
+                    } else {
+                        return Maybe.just(restResponse.body());
+                    }
+                }
+            });
     }
 
     /**
      * Put complex types with integer properties.
      *
-     * @param complexBody Please put -1 and 2
-     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceFuture} object
+     * @param complexBody Please put -1 and 2.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
-    public ServiceFuture<Void> putIntAsync(IntWrapper complexBody, ServiceCallback<Void> serviceCallback) {
+    public void putInt(IntWrapper complexBody) {
+        putIntAsync(complexBody).blockingAwait();
+    }
+
+    /**
+     * Put complex types with integer properties.
+     *
+     * @param complexBody Please put -1 and 2.
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link ServiceFuture&lt;Void&gt;} object.
+     */
+    public ServiceFuture<Void> putIntAsync(IntWrapper complexBody, final ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(putIntAsync(complexBody), serviceCallback);
     }
 
     /**
      * Put complex types with integer properties.
      *
-     * @param complexBody Please put -1 and 2
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return a {@link Single} emitting the RestResponse<Void, Void> object
+     * @param complexBody Please put -1 and 2.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
      */
     public Single<RestResponse<Void, Void>> putIntWithRestResponseAsync(IntWrapper complexBody) {
         if (complexBody == null) {
@@ -290,44 +280,43 @@ public class PrimitivesImpl implements Primitives {
     /**
      * Put complex types with integer properties.
      *
-     * @param complexBody Please put -1 and 2
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return a {@link Single} emitting the RestResponse<Void, Void> object
+     * @param complexBody Please put -1 and 2.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link Completable} object if successful.
      */
-    public Single<Void> putIntAsync(IntWrapper complexBody) {
+    public Completable putIntAsync(IntWrapper complexBody) {
         return putIntWithRestResponseAsync(complexBody)
-            .map(new Func1<RestResponse<Void, Void>, Void>() { public Void call(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
-        }
-
+            .toCompletable();
+    }
 
     /**
      * Get complex types with long properties.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @throws ErrorException thrown if the request is rejected by server
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the LongWrapper object if successful.
      */
     public LongWrapper getLong() {
-        return getLongAsync().toBlocking().value();
+        return getLongAsync().blockingGet();
     }
 
     /**
      * Get complex types with long properties.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceFuture} object
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link ServiceFuture&lt;LongWrapper&gt;} object.
      */
-    public ServiceFuture<LongWrapper> getLongAsync(ServiceCallback<LongWrapper> serviceCallback) {
+    public ServiceFuture<LongWrapper> getLongAsync(final ServiceCallback<LongWrapper> serviceCallback) {
         return ServiceFuture.fromBody(getLongAsync(), serviceCallback);
     }
 
     /**
      * Get complex types with long properties.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return a {@link Single} emitting the RestResponse<Void, LongWrapper> object
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link Single&lt;RestResponse&lt;Void, LongWrapper&gt;&gt;} object if successful.
      */
     public Single<RestResponse<Void, LongWrapper>> getLongWithRestResponseAsync() {
         return service.getLong();
@@ -336,46 +325,52 @@ public class PrimitivesImpl implements Primitives {
     /**
      * Get complex types with long properties.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return a {@link Single} emitting the RestResponse<Void, LongWrapper> object
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link Maybe&lt;LongWrapper&gt;} object if successful.
      */
-    public Single<LongWrapper> getLongAsync() {
+    public Maybe<LongWrapper> getLongAsync() {
         return getLongWithRestResponseAsync()
-            .map(new Func1<RestResponse<Void, LongWrapper>, LongWrapper>() { public LongWrapper call(RestResponse<Void, LongWrapper> restResponse) { return restResponse.body(); } });
-        }
-
-
-    /**
-     * Put complex types with long properties.
-     *
-     * @param complexBody Please put 1099511627775 and -999511627788
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @throws ErrorException thrown if the request is rejected by server
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
-     * @return the void object if successful.
-     */
-    public void putLong(LongWrapper complexBody) {
-        putLongAsync(complexBody).toBlocking().value();
+            .flatMapMaybe(new Function<RestResponse<Void, LongWrapper>, Maybe<LongWrapper>>() {
+                public Maybe<LongWrapper> apply(RestResponse<Void, LongWrapper> restResponse) {
+                    if (restResponse.body() == null) {
+                        return Maybe.empty();
+                    } else {
+                        return Maybe.just(restResponse.body());
+                    }
+                }
+            });
     }
 
     /**
      * Put complex types with long properties.
      *
-     * @param complexBody Please put 1099511627775 and -999511627788
-     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceFuture} object
+     * @param complexBody Please put 1099511627775 and -999511627788.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
-    public ServiceFuture<Void> putLongAsync(LongWrapper complexBody, ServiceCallback<Void> serviceCallback) {
+    public void putLong(LongWrapper complexBody) {
+        putLongAsync(complexBody).blockingAwait();
+    }
+
+    /**
+     * Put complex types with long properties.
+     *
+     * @param complexBody Please put 1099511627775 and -999511627788.
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link ServiceFuture&lt;Void&gt;} object.
+     */
+    public ServiceFuture<Void> putLongAsync(LongWrapper complexBody, final ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(putLongAsync(complexBody), serviceCallback);
     }
 
     /**
      * Put complex types with long properties.
      *
-     * @param complexBody Please put 1099511627775 and -999511627788
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return a {@link Single} emitting the RestResponse<Void, Void> object
+     * @param complexBody Please put 1099511627775 and -999511627788.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
      */
     public Single<RestResponse<Void, Void>> putLongWithRestResponseAsync(LongWrapper complexBody) {
         if (complexBody == null) {
@@ -388,44 +383,43 @@ public class PrimitivesImpl implements Primitives {
     /**
      * Put complex types with long properties.
      *
-     * @param complexBody Please put 1099511627775 and -999511627788
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return a {@link Single} emitting the RestResponse<Void, Void> object
+     * @param complexBody Please put 1099511627775 and -999511627788.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link Completable} object if successful.
      */
-    public Single<Void> putLongAsync(LongWrapper complexBody) {
+    public Completable putLongAsync(LongWrapper complexBody) {
         return putLongWithRestResponseAsync(complexBody)
-            .map(new Func1<RestResponse<Void, Void>, Void>() { public Void call(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
-        }
-
+            .toCompletable();
+    }
 
     /**
      * Get complex types with float properties.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @throws ErrorException thrown if the request is rejected by server
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the FloatWrapper object if successful.
      */
     public FloatWrapper getFloat() {
-        return getFloatAsync().toBlocking().value();
+        return getFloatAsync().blockingGet();
     }
 
     /**
      * Get complex types with float properties.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceFuture} object
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link ServiceFuture&lt;FloatWrapper&gt;} object.
      */
-    public ServiceFuture<FloatWrapper> getFloatAsync(ServiceCallback<FloatWrapper> serviceCallback) {
+    public ServiceFuture<FloatWrapper> getFloatAsync(final ServiceCallback<FloatWrapper> serviceCallback) {
         return ServiceFuture.fromBody(getFloatAsync(), serviceCallback);
     }
 
     /**
      * Get complex types with float properties.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return a {@link Single} emitting the RestResponse<Void, FloatWrapper> object
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link Single&lt;RestResponse&lt;Void, FloatWrapper&gt;&gt;} object if successful.
      */
     public Single<RestResponse<Void, FloatWrapper>> getFloatWithRestResponseAsync() {
         return service.getFloat();
@@ -434,46 +428,52 @@ public class PrimitivesImpl implements Primitives {
     /**
      * Get complex types with float properties.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return a {@link Single} emitting the RestResponse<Void, FloatWrapper> object
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link Maybe&lt;FloatWrapper&gt;} object if successful.
      */
-    public Single<FloatWrapper> getFloatAsync() {
+    public Maybe<FloatWrapper> getFloatAsync() {
         return getFloatWithRestResponseAsync()
-            .map(new Func1<RestResponse<Void, FloatWrapper>, FloatWrapper>() { public FloatWrapper call(RestResponse<Void, FloatWrapper> restResponse) { return restResponse.body(); } });
-        }
-
-
-    /**
-     * Put complex types with float properties.
-     *
-     * @param complexBody Please put 1.05 and -0.003
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @throws ErrorException thrown if the request is rejected by server
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
-     * @return the void object if successful.
-     */
-    public void putFloat(FloatWrapper complexBody) {
-        putFloatAsync(complexBody).toBlocking().value();
+            .flatMapMaybe(new Function<RestResponse<Void, FloatWrapper>, Maybe<FloatWrapper>>() {
+                public Maybe<FloatWrapper> apply(RestResponse<Void, FloatWrapper> restResponse) {
+                    if (restResponse.body() == null) {
+                        return Maybe.empty();
+                    } else {
+                        return Maybe.just(restResponse.body());
+                    }
+                }
+            });
     }
 
     /**
      * Put complex types with float properties.
      *
-     * @param complexBody Please put 1.05 and -0.003
-     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceFuture} object
+     * @param complexBody Please put 1.05 and -0.003.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
-    public ServiceFuture<Void> putFloatAsync(FloatWrapper complexBody, ServiceCallback<Void> serviceCallback) {
+    public void putFloat(FloatWrapper complexBody) {
+        putFloatAsync(complexBody).blockingAwait();
+    }
+
+    /**
+     * Put complex types with float properties.
+     *
+     * @param complexBody Please put 1.05 and -0.003.
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link ServiceFuture&lt;Void&gt;} object.
+     */
+    public ServiceFuture<Void> putFloatAsync(FloatWrapper complexBody, final ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(putFloatAsync(complexBody), serviceCallback);
     }
 
     /**
      * Put complex types with float properties.
      *
-     * @param complexBody Please put 1.05 and -0.003
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return a {@link Single} emitting the RestResponse<Void, Void> object
+     * @param complexBody Please put 1.05 and -0.003.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
      */
     public Single<RestResponse<Void, Void>> putFloatWithRestResponseAsync(FloatWrapper complexBody) {
         if (complexBody == null) {
@@ -486,44 +486,43 @@ public class PrimitivesImpl implements Primitives {
     /**
      * Put complex types with float properties.
      *
-     * @param complexBody Please put 1.05 and -0.003
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return a {@link Single} emitting the RestResponse<Void, Void> object
+     * @param complexBody Please put 1.05 and -0.003.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link Completable} object if successful.
      */
-    public Single<Void> putFloatAsync(FloatWrapper complexBody) {
+    public Completable putFloatAsync(FloatWrapper complexBody) {
         return putFloatWithRestResponseAsync(complexBody)
-            .map(new Func1<RestResponse<Void, Void>, Void>() { public Void call(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
-        }
-
+            .toCompletable();
+    }
 
     /**
      * Get complex types with double properties.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @throws ErrorException thrown if the request is rejected by server
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the DoubleWrapper object if successful.
      */
     public DoubleWrapper getDouble() {
-        return getDoubleAsync().toBlocking().value();
+        return getDoubleAsync().blockingGet();
     }
 
     /**
      * Get complex types with double properties.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceFuture} object
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link ServiceFuture&lt;DoubleWrapper&gt;} object.
      */
-    public ServiceFuture<DoubleWrapper> getDoubleAsync(ServiceCallback<DoubleWrapper> serviceCallback) {
+    public ServiceFuture<DoubleWrapper> getDoubleAsync(final ServiceCallback<DoubleWrapper> serviceCallback) {
         return ServiceFuture.fromBody(getDoubleAsync(), serviceCallback);
     }
 
     /**
      * Get complex types with double properties.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return a {@link Single} emitting the RestResponse<Void, DoubleWrapper> object
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link Single&lt;RestResponse&lt;Void, DoubleWrapper&gt;&gt;} object if successful.
      */
     public Single<RestResponse<Void, DoubleWrapper>> getDoubleWithRestResponseAsync() {
         return service.getDouble();
@@ -532,46 +531,52 @@ public class PrimitivesImpl implements Primitives {
     /**
      * Get complex types with double properties.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return a {@link Single} emitting the RestResponse<Void, DoubleWrapper> object
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link Maybe&lt;DoubleWrapper&gt;} object if successful.
      */
-    public Single<DoubleWrapper> getDoubleAsync() {
+    public Maybe<DoubleWrapper> getDoubleAsync() {
         return getDoubleWithRestResponseAsync()
-            .map(new Func1<RestResponse<Void, DoubleWrapper>, DoubleWrapper>() { public DoubleWrapper call(RestResponse<Void, DoubleWrapper> restResponse) { return restResponse.body(); } });
-        }
-
-
-    /**
-     * Put complex types with double properties.
-     *
-     * @param complexBody Please put 3e-100 and -0.000000000000000000000000000000000000000000000000000000005
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @throws ErrorException thrown if the request is rejected by server
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
-     * @return the void object if successful.
-     */
-    public void putDouble(DoubleWrapper complexBody) {
-        putDoubleAsync(complexBody).toBlocking().value();
+            .flatMapMaybe(new Function<RestResponse<Void, DoubleWrapper>, Maybe<DoubleWrapper>>() {
+                public Maybe<DoubleWrapper> apply(RestResponse<Void, DoubleWrapper> restResponse) {
+                    if (restResponse.body() == null) {
+                        return Maybe.empty();
+                    } else {
+                        return Maybe.just(restResponse.body());
+                    }
+                }
+            });
     }
 
     /**
      * Put complex types with double properties.
      *
-     * @param complexBody Please put 3e-100 and -0.000000000000000000000000000000000000000000000000000000005
-     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceFuture} object
+     * @param complexBody Please put 3e-100 and -0.000000000000000000000000000000000000000000000000000000005.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
-    public ServiceFuture<Void> putDoubleAsync(DoubleWrapper complexBody, ServiceCallback<Void> serviceCallback) {
+    public void putDouble(DoubleWrapper complexBody) {
+        putDoubleAsync(complexBody).blockingAwait();
+    }
+
+    /**
+     * Put complex types with double properties.
+     *
+     * @param complexBody Please put 3e-100 and -0.000000000000000000000000000000000000000000000000000000005.
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link ServiceFuture&lt;Void&gt;} object.
+     */
+    public ServiceFuture<Void> putDoubleAsync(DoubleWrapper complexBody, final ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(putDoubleAsync(complexBody), serviceCallback);
     }
 
     /**
      * Put complex types with double properties.
      *
-     * @param complexBody Please put 3e-100 and -0.000000000000000000000000000000000000000000000000000000005
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return a {@link Single} emitting the RestResponse<Void, Void> object
+     * @param complexBody Please put 3e-100 and -0.000000000000000000000000000000000000000000000000000000005.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
      */
     public Single<RestResponse<Void, Void>> putDoubleWithRestResponseAsync(DoubleWrapper complexBody) {
         if (complexBody == null) {
@@ -584,44 +589,43 @@ public class PrimitivesImpl implements Primitives {
     /**
      * Put complex types with double properties.
      *
-     * @param complexBody Please put 3e-100 and -0.000000000000000000000000000000000000000000000000000000005
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return a {@link Single} emitting the RestResponse<Void, Void> object
+     * @param complexBody Please put 3e-100 and -0.000000000000000000000000000000000000000000000000000000005.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link Completable} object if successful.
      */
-    public Single<Void> putDoubleAsync(DoubleWrapper complexBody) {
+    public Completable putDoubleAsync(DoubleWrapper complexBody) {
         return putDoubleWithRestResponseAsync(complexBody)
-            .map(new Func1<RestResponse<Void, Void>, Void>() { public Void call(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
-        }
-
+            .toCompletable();
+    }
 
     /**
      * Get complex types with bool properties.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @throws ErrorException thrown if the request is rejected by server
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the BooleanWrapper object if successful.
      */
     public BooleanWrapper getBool() {
-        return getBoolAsync().toBlocking().value();
+        return getBoolAsync().blockingGet();
     }
 
     /**
      * Get complex types with bool properties.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceFuture} object
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link ServiceFuture&lt;BooleanWrapper&gt;} object.
      */
-    public ServiceFuture<BooleanWrapper> getBoolAsync(ServiceCallback<BooleanWrapper> serviceCallback) {
+    public ServiceFuture<BooleanWrapper> getBoolAsync(final ServiceCallback<BooleanWrapper> serviceCallback) {
         return ServiceFuture.fromBody(getBoolAsync(), serviceCallback);
     }
 
     /**
      * Get complex types with bool properties.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return a {@link Single} emitting the RestResponse<Void, BooleanWrapper> object
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link Single&lt;RestResponse&lt;Void, BooleanWrapper&gt;&gt;} object if successful.
      */
     public Single<RestResponse<Void, BooleanWrapper>> getBoolWithRestResponseAsync() {
         return service.getBool();
@@ -630,46 +634,52 @@ public class PrimitivesImpl implements Primitives {
     /**
      * Get complex types with bool properties.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return a {@link Single} emitting the RestResponse<Void, BooleanWrapper> object
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link Maybe&lt;BooleanWrapper&gt;} object if successful.
      */
-    public Single<BooleanWrapper> getBoolAsync() {
+    public Maybe<BooleanWrapper> getBoolAsync() {
         return getBoolWithRestResponseAsync()
-            .map(new Func1<RestResponse<Void, BooleanWrapper>, BooleanWrapper>() { public BooleanWrapper call(RestResponse<Void, BooleanWrapper> restResponse) { return restResponse.body(); } });
-        }
-
-
-    /**
-     * Put complex types with bool properties.
-     *
-     * @param complexBody Please put true and false
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @throws ErrorException thrown if the request is rejected by server
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
-     * @return the void object if successful.
-     */
-    public void putBool(BooleanWrapper complexBody) {
-        putBoolAsync(complexBody).toBlocking().value();
+            .flatMapMaybe(new Function<RestResponse<Void, BooleanWrapper>, Maybe<BooleanWrapper>>() {
+                public Maybe<BooleanWrapper> apply(RestResponse<Void, BooleanWrapper> restResponse) {
+                    if (restResponse.body() == null) {
+                        return Maybe.empty();
+                    } else {
+                        return Maybe.just(restResponse.body());
+                    }
+                }
+            });
     }
 
     /**
      * Put complex types with bool properties.
      *
-     * @param complexBody Please put true and false
-     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceFuture} object
+     * @param complexBody Please put true and false.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
-    public ServiceFuture<Void> putBoolAsync(BooleanWrapper complexBody, ServiceCallback<Void> serviceCallback) {
+    public void putBool(BooleanWrapper complexBody) {
+        putBoolAsync(complexBody).blockingAwait();
+    }
+
+    /**
+     * Put complex types with bool properties.
+     *
+     * @param complexBody Please put true and false.
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link ServiceFuture&lt;Void&gt;} object.
+     */
+    public ServiceFuture<Void> putBoolAsync(BooleanWrapper complexBody, final ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(putBoolAsync(complexBody), serviceCallback);
     }
 
     /**
      * Put complex types with bool properties.
      *
-     * @param complexBody Please put true and false
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return a {@link Single} emitting the RestResponse<Void, Void> object
+     * @param complexBody Please put true and false.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
      */
     public Single<RestResponse<Void, Void>> putBoolWithRestResponseAsync(BooleanWrapper complexBody) {
         if (complexBody == null) {
@@ -682,44 +692,43 @@ public class PrimitivesImpl implements Primitives {
     /**
      * Put complex types with bool properties.
      *
-     * @param complexBody Please put true and false
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return a {@link Single} emitting the RestResponse<Void, Void> object
+     * @param complexBody Please put true and false.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link Completable} object if successful.
      */
-    public Single<Void> putBoolAsync(BooleanWrapper complexBody) {
+    public Completable putBoolAsync(BooleanWrapper complexBody) {
         return putBoolWithRestResponseAsync(complexBody)
-            .map(new Func1<RestResponse<Void, Void>, Void>() { public Void call(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
-        }
-
+            .toCompletable();
+    }
 
     /**
      * Get complex types with string properties.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @throws ErrorException thrown if the request is rejected by server
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the StringWrapper object if successful.
      */
     public StringWrapper getString() {
-        return getStringAsync().toBlocking().value();
+        return getStringAsync().blockingGet();
     }
 
     /**
      * Get complex types with string properties.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceFuture} object
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link ServiceFuture&lt;StringWrapper&gt;} object.
      */
-    public ServiceFuture<StringWrapper> getStringAsync(ServiceCallback<StringWrapper> serviceCallback) {
+    public ServiceFuture<StringWrapper> getStringAsync(final ServiceCallback<StringWrapper> serviceCallback) {
         return ServiceFuture.fromBody(getStringAsync(), serviceCallback);
     }
 
     /**
      * Get complex types with string properties.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return a {@link Single} emitting the RestResponse<Void, StringWrapper> object
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link Single&lt;RestResponse&lt;Void, StringWrapper&gt;&gt;} object if successful.
      */
     public Single<RestResponse<Void, StringWrapper>> getStringWithRestResponseAsync() {
         return service.getString();
@@ -728,46 +737,52 @@ public class PrimitivesImpl implements Primitives {
     /**
      * Get complex types with string properties.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return a {@link Single} emitting the RestResponse<Void, StringWrapper> object
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link Maybe&lt;StringWrapper&gt;} object if successful.
      */
-    public Single<StringWrapper> getStringAsync() {
+    public Maybe<StringWrapper> getStringAsync() {
         return getStringWithRestResponseAsync()
-            .map(new Func1<RestResponse<Void, StringWrapper>, StringWrapper>() { public StringWrapper call(RestResponse<Void, StringWrapper> restResponse) { return restResponse.body(); } });
-        }
-
-
-    /**
-     * Put complex types with string properties.
-     *
-     * @param complexBody Please put 'goodrequest', '', and null
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @throws ErrorException thrown if the request is rejected by server
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
-     * @return the void object if successful.
-     */
-    public void putString(StringWrapper complexBody) {
-        putStringAsync(complexBody).toBlocking().value();
+            .flatMapMaybe(new Function<RestResponse<Void, StringWrapper>, Maybe<StringWrapper>>() {
+                public Maybe<StringWrapper> apply(RestResponse<Void, StringWrapper> restResponse) {
+                    if (restResponse.body() == null) {
+                        return Maybe.empty();
+                    } else {
+                        return Maybe.just(restResponse.body());
+                    }
+                }
+            });
     }
 
     /**
      * Put complex types with string properties.
      *
-     * @param complexBody Please put 'goodrequest', '', and null
-     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceFuture} object
+     * @param complexBody Please put 'goodrequest', '', and null.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
-    public ServiceFuture<Void> putStringAsync(StringWrapper complexBody, ServiceCallback<Void> serviceCallback) {
+    public void putString(StringWrapper complexBody) {
+        putStringAsync(complexBody).blockingAwait();
+    }
+
+    /**
+     * Put complex types with string properties.
+     *
+     * @param complexBody Please put 'goodrequest', '', and null.
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link ServiceFuture&lt;Void&gt;} object.
+     */
+    public ServiceFuture<Void> putStringAsync(StringWrapper complexBody, final ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(putStringAsync(complexBody), serviceCallback);
     }
 
     /**
      * Put complex types with string properties.
      *
-     * @param complexBody Please put 'goodrequest', '', and null
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return a {@link Single} emitting the RestResponse<Void, Void> object
+     * @param complexBody Please put 'goodrequest', '', and null.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
      */
     public Single<RestResponse<Void, Void>> putStringWithRestResponseAsync(StringWrapper complexBody) {
         if (complexBody == null) {
@@ -780,44 +795,43 @@ public class PrimitivesImpl implements Primitives {
     /**
      * Put complex types with string properties.
      *
-     * @param complexBody Please put 'goodrequest', '', and null
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return a {@link Single} emitting the RestResponse<Void, Void> object
+     * @param complexBody Please put 'goodrequest', '', and null.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link Completable} object if successful.
      */
-    public Single<Void> putStringAsync(StringWrapper complexBody) {
+    public Completable putStringAsync(StringWrapper complexBody) {
         return putStringWithRestResponseAsync(complexBody)
-            .map(new Func1<RestResponse<Void, Void>, Void>() { public Void call(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
-        }
-
+            .toCompletable();
+    }
 
     /**
      * Get complex types with date properties.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @throws ErrorException thrown if the request is rejected by server
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the DateWrapper object if successful.
      */
     public DateWrapper getDate() {
-        return getDateAsync().toBlocking().value();
+        return getDateAsync().blockingGet();
     }
 
     /**
      * Get complex types with date properties.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceFuture} object
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link ServiceFuture&lt;DateWrapper&gt;} object.
      */
-    public ServiceFuture<DateWrapper> getDateAsync(ServiceCallback<DateWrapper> serviceCallback) {
+    public ServiceFuture<DateWrapper> getDateAsync(final ServiceCallback<DateWrapper> serviceCallback) {
         return ServiceFuture.fromBody(getDateAsync(), serviceCallback);
     }
 
     /**
      * Get complex types with date properties.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return a {@link Single} emitting the RestResponse<Void, DateWrapper> object
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link Single&lt;RestResponse&lt;Void, DateWrapper&gt;&gt;} object if successful.
      */
     public Single<RestResponse<Void, DateWrapper>> getDateWithRestResponseAsync() {
         return service.getDate();
@@ -826,46 +840,52 @@ public class PrimitivesImpl implements Primitives {
     /**
      * Get complex types with date properties.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return a {@link Single} emitting the RestResponse<Void, DateWrapper> object
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link Maybe&lt;DateWrapper&gt;} object if successful.
      */
-    public Single<DateWrapper> getDateAsync() {
+    public Maybe<DateWrapper> getDateAsync() {
         return getDateWithRestResponseAsync()
-            .map(new Func1<RestResponse<Void, DateWrapper>, DateWrapper>() { public DateWrapper call(RestResponse<Void, DateWrapper> restResponse) { return restResponse.body(); } });
-        }
-
-
-    /**
-     * Put complex types with date properties.
-     *
-     * @param complexBody Please put '0001-01-01' and '2016-02-29'
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @throws ErrorException thrown if the request is rejected by server
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
-     * @return the void object if successful.
-     */
-    public void putDate(DateWrapper complexBody) {
-        putDateAsync(complexBody).toBlocking().value();
+            .flatMapMaybe(new Function<RestResponse<Void, DateWrapper>, Maybe<DateWrapper>>() {
+                public Maybe<DateWrapper> apply(RestResponse<Void, DateWrapper> restResponse) {
+                    if (restResponse.body() == null) {
+                        return Maybe.empty();
+                    } else {
+                        return Maybe.just(restResponse.body());
+                    }
+                }
+            });
     }
 
     /**
      * Put complex types with date properties.
      *
-     * @param complexBody Please put '0001-01-01' and '2016-02-29'
-     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceFuture} object
+     * @param complexBody Please put '0001-01-01' and '2016-02-29'.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
-    public ServiceFuture<Void> putDateAsync(DateWrapper complexBody, ServiceCallback<Void> serviceCallback) {
+    public void putDate(DateWrapper complexBody) {
+        putDateAsync(complexBody).blockingAwait();
+    }
+
+    /**
+     * Put complex types with date properties.
+     *
+     * @param complexBody Please put '0001-01-01' and '2016-02-29'.
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link ServiceFuture&lt;Void&gt;} object.
+     */
+    public ServiceFuture<Void> putDateAsync(DateWrapper complexBody, final ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(putDateAsync(complexBody), serviceCallback);
     }
 
     /**
      * Put complex types with date properties.
      *
-     * @param complexBody Please put '0001-01-01' and '2016-02-29'
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return a {@link Single} emitting the RestResponse<Void, Void> object
+     * @param complexBody Please put '0001-01-01' and '2016-02-29'.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
      */
     public Single<RestResponse<Void, Void>> putDateWithRestResponseAsync(DateWrapper complexBody) {
         if (complexBody == null) {
@@ -878,44 +898,43 @@ public class PrimitivesImpl implements Primitives {
     /**
      * Put complex types with date properties.
      *
-     * @param complexBody Please put '0001-01-01' and '2016-02-29'
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return a {@link Single} emitting the RestResponse<Void, Void> object
+     * @param complexBody Please put '0001-01-01' and '2016-02-29'.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link Completable} object if successful.
      */
-    public Single<Void> putDateAsync(DateWrapper complexBody) {
+    public Completable putDateAsync(DateWrapper complexBody) {
         return putDateWithRestResponseAsync(complexBody)
-            .map(new Func1<RestResponse<Void, Void>, Void>() { public Void call(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
-        }
-
+            .toCompletable();
+    }
 
     /**
      * Get complex types with datetime properties.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @throws ErrorException thrown if the request is rejected by server
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the DatetimeWrapper object if successful.
      */
     public DatetimeWrapper getDateTime() {
-        return getDateTimeAsync().toBlocking().value();
+        return getDateTimeAsync().blockingGet();
     }
 
     /**
      * Get complex types with datetime properties.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceFuture} object
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link ServiceFuture&lt;DatetimeWrapper&gt;} object.
      */
-    public ServiceFuture<DatetimeWrapper> getDateTimeAsync(ServiceCallback<DatetimeWrapper> serviceCallback) {
+    public ServiceFuture<DatetimeWrapper> getDateTimeAsync(final ServiceCallback<DatetimeWrapper> serviceCallback) {
         return ServiceFuture.fromBody(getDateTimeAsync(), serviceCallback);
     }
 
     /**
      * Get complex types with datetime properties.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return a {@link Single} emitting the RestResponse<Void, DatetimeWrapper> object
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link Single&lt;RestResponse&lt;Void, DatetimeWrapper&gt;&gt;} object if successful.
      */
     public Single<RestResponse<Void, DatetimeWrapper>> getDateTimeWithRestResponseAsync() {
         return service.getDateTime();
@@ -924,46 +943,52 @@ public class PrimitivesImpl implements Primitives {
     /**
      * Get complex types with datetime properties.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return a {@link Single} emitting the RestResponse<Void, DatetimeWrapper> object
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link Maybe&lt;DatetimeWrapper&gt;} object if successful.
      */
-    public Single<DatetimeWrapper> getDateTimeAsync() {
+    public Maybe<DatetimeWrapper> getDateTimeAsync() {
         return getDateTimeWithRestResponseAsync()
-            .map(new Func1<RestResponse<Void, DatetimeWrapper>, DatetimeWrapper>() { public DatetimeWrapper call(RestResponse<Void, DatetimeWrapper> restResponse) { return restResponse.body(); } });
-        }
-
-
-    /**
-     * Put complex types with datetime properties.
-     *
-     * @param complexBody Please put '0001-01-01T12:00:00-04:00' and '2015-05-18T11:38:00-08:00'
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @throws ErrorException thrown if the request is rejected by server
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
-     * @return the void object if successful.
-     */
-    public void putDateTime(DatetimeWrapper complexBody) {
-        putDateTimeAsync(complexBody).toBlocking().value();
+            .flatMapMaybe(new Function<RestResponse<Void, DatetimeWrapper>, Maybe<DatetimeWrapper>>() {
+                public Maybe<DatetimeWrapper> apply(RestResponse<Void, DatetimeWrapper> restResponse) {
+                    if (restResponse.body() == null) {
+                        return Maybe.empty();
+                    } else {
+                        return Maybe.just(restResponse.body());
+                    }
+                }
+            });
     }
 
     /**
      * Put complex types with datetime properties.
      *
-     * @param complexBody Please put '0001-01-01T12:00:00-04:00' and '2015-05-18T11:38:00-08:00'
-     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceFuture} object
+     * @param complexBody Please put '0001-01-01T12:00:00-04:00' and '2015-05-18T11:38:00-08:00'.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
-    public ServiceFuture<Void> putDateTimeAsync(DatetimeWrapper complexBody, ServiceCallback<Void> serviceCallback) {
+    public void putDateTime(DatetimeWrapper complexBody) {
+        putDateTimeAsync(complexBody).blockingAwait();
+    }
+
+    /**
+     * Put complex types with datetime properties.
+     *
+     * @param complexBody Please put '0001-01-01T12:00:00-04:00' and '2015-05-18T11:38:00-08:00'.
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link ServiceFuture&lt;Void&gt;} object.
+     */
+    public ServiceFuture<Void> putDateTimeAsync(DatetimeWrapper complexBody, final ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(putDateTimeAsync(complexBody), serviceCallback);
     }
 
     /**
      * Put complex types with datetime properties.
      *
-     * @param complexBody Please put '0001-01-01T12:00:00-04:00' and '2015-05-18T11:38:00-08:00'
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return a {@link Single} emitting the RestResponse<Void, Void> object
+     * @param complexBody Please put '0001-01-01T12:00:00-04:00' and '2015-05-18T11:38:00-08:00'.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
      */
     public Single<RestResponse<Void, Void>> putDateTimeWithRestResponseAsync(DatetimeWrapper complexBody) {
         if (complexBody == null) {
@@ -976,44 +1001,43 @@ public class PrimitivesImpl implements Primitives {
     /**
      * Put complex types with datetime properties.
      *
-     * @param complexBody Please put '0001-01-01T12:00:00-04:00' and '2015-05-18T11:38:00-08:00'
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return a {@link Single} emitting the RestResponse<Void, Void> object
+     * @param complexBody Please put '0001-01-01T12:00:00-04:00' and '2015-05-18T11:38:00-08:00'.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link Completable} object if successful.
      */
-    public Single<Void> putDateTimeAsync(DatetimeWrapper complexBody) {
+    public Completable putDateTimeAsync(DatetimeWrapper complexBody) {
         return putDateTimeWithRestResponseAsync(complexBody)
-            .map(new Func1<RestResponse<Void, Void>, Void>() { public Void call(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
-        }
-
+            .toCompletable();
+    }
 
     /**
      * Get complex types with datetimeRfc1123 properties.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @throws ErrorException thrown if the request is rejected by server
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the Datetimerfc1123Wrapper object if successful.
      */
     public Datetimerfc1123Wrapper getDateTimeRfc1123() {
-        return getDateTimeRfc1123Async().toBlocking().value();
+        return getDateTimeRfc1123Async().blockingGet();
     }
 
     /**
      * Get complex types with datetimeRfc1123 properties.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceFuture} object
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link ServiceFuture&lt;Datetimerfc1123Wrapper&gt;} object.
      */
-    public ServiceFuture<Datetimerfc1123Wrapper> getDateTimeRfc1123Async(ServiceCallback<Datetimerfc1123Wrapper> serviceCallback) {
+    public ServiceFuture<Datetimerfc1123Wrapper> getDateTimeRfc1123Async(final ServiceCallback<Datetimerfc1123Wrapper> serviceCallback) {
         return ServiceFuture.fromBody(getDateTimeRfc1123Async(), serviceCallback);
     }
 
     /**
      * Get complex types with datetimeRfc1123 properties.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return a {@link Single} emitting the RestResponse<Void, Datetimerfc1123Wrapper> object
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link Single&lt;RestResponse&lt;Void, Datetimerfc1123Wrapper&gt;&gt;} object if successful.
      */
     public Single<RestResponse<Void, Datetimerfc1123Wrapper>> getDateTimeRfc1123WithRestResponseAsync() {
         return service.getDateTimeRfc1123();
@@ -1022,46 +1046,52 @@ public class PrimitivesImpl implements Primitives {
     /**
      * Get complex types with datetimeRfc1123 properties.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return a {@link Single} emitting the RestResponse<Void, Datetimerfc1123Wrapper> object
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link Maybe&lt;Datetimerfc1123Wrapper&gt;} object if successful.
      */
-    public Single<Datetimerfc1123Wrapper> getDateTimeRfc1123Async() {
+    public Maybe<Datetimerfc1123Wrapper> getDateTimeRfc1123Async() {
         return getDateTimeRfc1123WithRestResponseAsync()
-            .map(new Func1<RestResponse<Void, Datetimerfc1123Wrapper>, Datetimerfc1123Wrapper>() { public Datetimerfc1123Wrapper call(RestResponse<Void, Datetimerfc1123Wrapper> restResponse) { return restResponse.body(); } });
-        }
-
-
-    /**
-     * Put complex types with datetimeRfc1123 properties.
-     *
-     * @param complexBody Please put 'Mon, 01 Jan 0001 12:00:00 GMT' and 'Mon, 18 May 2015 11:38:00 GMT'
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @throws ErrorException thrown if the request is rejected by server
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
-     * @return the void object if successful.
-     */
-    public void putDateTimeRfc1123(Datetimerfc1123Wrapper complexBody) {
-        putDateTimeRfc1123Async(complexBody).toBlocking().value();
+            .flatMapMaybe(new Function<RestResponse<Void, Datetimerfc1123Wrapper>, Maybe<Datetimerfc1123Wrapper>>() {
+                public Maybe<Datetimerfc1123Wrapper> apply(RestResponse<Void, Datetimerfc1123Wrapper> restResponse) {
+                    if (restResponse.body() == null) {
+                        return Maybe.empty();
+                    } else {
+                        return Maybe.just(restResponse.body());
+                    }
+                }
+            });
     }
 
     /**
      * Put complex types with datetimeRfc1123 properties.
      *
-     * @param complexBody Please put 'Mon, 01 Jan 0001 12:00:00 GMT' and 'Mon, 18 May 2015 11:38:00 GMT'
-     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceFuture} object
+     * @param complexBody Please put 'Mon, 01 Jan 0001 12:00:00 GMT' and 'Mon, 18 May 2015 11:38:00 GMT'.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
-    public ServiceFuture<Void> putDateTimeRfc1123Async(Datetimerfc1123Wrapper complexBody, ServiceCallback<Void> serviceCallback) {
+    public void putDateTimeRfc1123(Datetimerfc1123Wrapper complexBody) {
+        putDateTimeRfc1123Async(complexBody).blockingAwait();
+    }
+
+    /**
+     * Put complex types with datetimeRfc1123 properties.
+     *
+     * @param complexBody Please put 'Mon, 01 Jan 0001 12:00:00 GMT' and 'Mon, 18 May 2015 11:38:00 GMT'.
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link ServiceFuture&lt;Void&gt;} object.
+     */
+    public ServiceFuture<Void> putDateTimeRfc1123Async(Datetimerfc1123Wrapper complexBody, final ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(putDateTimeRfc1123Async(complexBody), serviceCallback);
     }
 
     /**
      * Put complex types with datetimeRfc1123 properties.
      *
-     * @param complexBody Please put 'Mon, 01 Jan 0001 12:00:00 GMT' and 'Mon, 18 May 2015 11:38:00 GMT'
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return a {@link Single} emitting the RestResponse<Void, Void> object
+     * @param complexBody Please put 'Mon, 01 Jan 0001 12:00:00 GMT' and 'Mon, 18 May 2015 11:38:00 GMT'.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
      */
     public Single<RestResponse<Void, Void>> putDateTimeRfc1123WithRestResponseAsync(Datetimerfc1123Wrapper complexBody) {
         if (complexBody == null) {
@@ -1074,44 +1104,43 @@ public class PrimitivesImpl implements Primitives {
     /**
      * Put complex types with datetimeRfc1123 properties.
      *
-     * @param complexBody Please put 'Mon, 01 Jan 0001 12:00:00 GMT' and 'Mon, 18 May 2015 11:38:00 GMT'
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return a {@link Single} emitting the RestResponse<Void, Void> object
+     * @param complexBody Please put 'Mon, 01 Jan 0001 12:00:00 GMT' and 'Mon, 18 May 2015 11:38:00 GMT'.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link Completable} object if successful.
      */
-    public Single<Void> putDateTimeRfc1123Async(Datetimerfc1123Wrapper complexBody) {
+    public Completable putDateTimeRfc1123Async(Datetimerfc1123Wrapper complexBody) {
         return putDateTimeRfc1123WithRestResponseAsync(complexBody)
-            .map(new Func1<RestResponse<Void, Void>, Void>() { public Void call(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
-        }
-
+            .toCompletable();
+    }
 
     /**
      * Get complex types with duration properties.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @throws ErrorException thrown if the request is rejected by server
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the DurationWrapper object if successful.
      */
     public DurationWrapper getDuration() {
-        return getDurationAsync().toBlocking().value();
+        return getDurationAsync().blockingGet();
     }
 
     /**
      * Get complex types with duration properties.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceFuture} object
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link ServiceFuture&lt;DurationWrapper&gt;} object.
      */
-    public ServiceFuture<DurationWrapper> getDurationAsync(ServiceCallback<DurationWrapper> serviceCallback) {
+    public ServiceFuture<DurationWrapper> getDurationAsync(final ServiceCallback<DurationWrapper> serviceCallback) {
         return ServiceFuture.fromBody(getDurationAsync(), serviceCallback);
     }
 
     /**
      * Get complex types with duration properties.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return a {@link Single} emitting the RestResponse<Void, DurationWrapper> object
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link Single&lt;RestResponse&lt;Void, DurationWrapper&gt;&gt;} object if successful.
      */
     public Single<RestResponse<Void, DurationWrapper>> getDurationWithRestResponseAsync() {
         return service.getDuration();
@@ -1120,46 +1149,52 @@ public class PrimitivesImpl implements Primitives {
     /**
      * Get complex types with duration properties.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return a {@link Single} emitting the RestResponse<Void, DurationWrapper> object
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link Maybe&lt;DurationWrapper&gt;} object if successful.
      */
-    public Single<DurationWrapper> getDurationAsync() {
+    public Maybe<DurationWrapper> getDurationAsync() {
         return getDurationWithRestResponseAsync()
-            .map(new Func1<RestResponse<Void, DurationWrapper>, DurationWrapper>() { public DurationWrapper call(RestResponse<Void, DurationWrapper> restResponse) { return restResponse.body(); } });
-        }
-
-
-    /**
-     * Put complex types with duration properties.
-     *
-     * @param complexBody Please put 'P123DT22H14M12.011S'
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @throws ErrorException thrown if the request is rejected by server
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
-     * @return the void object if successful.
-     */
-    public void putDuration(DurationWrapper complexBody) {
-        putDurationAsync(complexBody).toBlocking().value();
+            .flatMapMaybe(new Function<RestResponse<Void, DurationWrapper>, Maybe<DurationWrapper>>() {
+                public Maybe<DurationWrapper> apply(RestResponse<Void, DurationWrapper> restResponse) {
+                    if (restResponse.body() == null) {
+                        return Maybe.empty();
+                    } else {
+                        return Maybe.just(restResponse.body());
+                    }
+                }
+            });
     }
 
     /**
      * Put complex types with duration properties.
      *
-     * @param complexBody Please put 'P123DT22H14M12.011S'
-     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceFuture} object
+     * @param complexBody Please put 'P123DT22H14M12.011S'.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
-    public ServiceFuture<Void> putDurationAsync(DurationWrapper complexBody, ServiceCallback<Void> serviceCallback) {
+    public void putDuration(DurationWrapper complexBody) {
+        putDurationAsync(complexBody).blockingAwait();
+    }
+
+    /**
+     * Put complex types with duration properties.
+     *
+     * @param complexBody Please put 'P123DT22H14M12.011S'.
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link ServiceFuture&lt;Void&gt;} object.
+     */
+    public ServiceFuture<Void> putDurationAsync(DurationWrapper complexBody, final ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(putDurationAsync(complexBody), serviceCallback);
     }
 
     /**
      * Put complex types with duration properties.
      *
-     * @param complexBody Please put 'P123DT22H14M12.011S'
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return a {@link Single} emitting the RestResponse<Void, Void> object
+     * @param complexBody Please put 'P123DT22H14M12.011S'.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
      */
     public Single<RestResponse<Void, Void>> putDurationWithRestResponseAsync(DurationWrapper complexBody) {
         if (complexBody == null) {
@@ -1172,44 +1207,43 @@ public class PrimitivesImpl implements Primitives {
     /**
      * Put complex types with duration properties.
      *
-     * @param complexBody Please put 'P123DT22H14M12.011S'
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return a {@link Single} emitting the RestResponse<Void, Void> object
+     * @param complexBody Please put 'P123DT22H14M12.011S'.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link Completable} object if successful.
      */
-    public Single<Void> putDurationAsync(DurationWrapper complexBody) {
+    public Completable putDurationAsync(DurationWrapper complexBody) {
         return putDurationWithRestResponseAsync(complexBody)
-            .map(new Func1<RestResponse<Void, Void>, Void>() { public Void call(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
-        }
-
+            .toCompletable();
+    }
 
     /**
      * Get complex types with byte properties.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @throws ErrorException thrown if the request is rejected by server
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the ByteWrapper object if successful.
      */
     public ByteWrapper getByte() {
-        return getByteAsync().toBlocking().value();
+        return getByteAsync().blockingGet();
     }
 
     /**
      * Get complex types with byte properties.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceFuture} object
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link ServiceFuture&lt;ByteWrapper&gt;} object.
      */
-    public ServiceFuture<ByteWrapper> getByteAsync(ServiceCallback<ByteWrapper> serviceCallback) {
+    public ServiceFuture<ByteWrapper> getByteAsync(final ServiceCallback<ByteWrapper> serviceCallback) {
         return ServiceFuture.fromBody(getByteAsync(), serviceCallback);
     }
 
     /**
      * Get complex types with byte properties.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return a {@link Single} emitting the RestResponse<Void, ByteWrapper> object
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link Single&lt;RestResponse&lt;Void, ByteWrapper&gt;&gt;} object if successful.
      */
     public Single<RestResponse<Void, ByteWrapper>> getByteWithRestResponseAsync() {
         return service.getByte();
@@ -1218,46 +1252,52 @@ public class PrimitivesImpl implements Primitives {
     /**
      * Get complex types with byte properties.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return a {@link Single} emitting the RestResponse<Void, ByteWrapper> object
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link Maybe&lt;ByteWrapper&gt;} object if successful.
      */
-    public Single<ByteWrapper> getByteAsync() {
+    public Maybe<ByteWrapper> getByteAsync() {
         return getByteWithRestResponseAsync()
-            .map(new Func1<RestResponse<Void, ByteWrapper>, ByteWrapper>() { public ByteWrapper call(RestResponse<Void, ByteWrapper> restResponse) { return restResponse.body(); } });
-        }
-
-
-    /**
-     * Put complex types with byte properties.
-     *
-     * @param complexBody Please put non-ascii byte string hex(FF FE FD FC 00 FA F9 F8 F7 F6)
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @throws ErrorException thrown if the request is rejected by server
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
-     * @return the void object if successful.
-     */
-    public void putByte(ByteWrapper complexBody) {
-        putByteAsync(complexBody).toBlocking().value();
+            .flatMapMaybe(new Function<RestResponse<Void, ByteWrapper>, Maybe<ByteWrapper>>() {
+                public Maybe<ByteWrapper> apply(RestResponse<Void, ByteWrapper> restResponse) {
+                    if (restResponse.body() == null) {
+                        return Maybe.empty();
+                    } else {
+                        return Maybe.just(restResponse.body());
+                    }
+                }
+            });
     }
 
     /**
      * Put complex types with byte properties.
      *
-     * @param complexBody Please put non-ascii byte string hex(FF FE FD FC 00 FA F9 F8 F7 F6)
-     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceFuture} object
+     * @param complexBody Please put non-ascii byte string hex(FF FE FD FC 00 FA F9 F8 F7 F6).
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
-    public ServiceFuture<Void> putByteAsync(ByteWrapper complexBody, ServiceCallback<Void> serviceCallback) {
+    public void putByte(ByteWrapper complexBody) {
+        putByteAsync(complexBody).blockingAwait();
+    }
+
+    /**
+     * Put complex types with byte properties.
+     *
+     * @param complexBody Please put non-ascii byte string hex(FF FE FD FC 00 FA F9 F8 F7 F6).
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link ServiceFuture&lt;Void&gt;} object.
+     */
+    public ServiceFuture<Void> putByteAsync(ByteWrapper complexBody, final ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(putByteAsync(complexBody), serviceCallback);
     }
 
     /**
      * Put complex types with byte properties.
      *
-     * @param complexBody Please put non-ascii byte string hex(FF FE FD FC 00 FA F9 F8 F7 F6)
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return a {@link Single} emitting the RestResponse<Void, Void> object
+     * @param complexBody Please put non-ascii byte string hex(FF FE FD FC 00 FA F9 F8 F7 F6).
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
      */
     public Single<RestResponse<Void, Void>> putByteWithRestResponseAsync(ByteWrapper complexBody) {
         if (complexBody == null) {
@@ -1270,14 +1310,12 @@ public class PrimitivesImpl implements Primitives {
     /**
      * Put complex types with byte properties.
      *
-     * @param complexBody Please put non-ascii byte string hex(FF FE FD FC 00 FA F9 F8 F7 F6)
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return a {@link Single} emitting the RestResponse<Void, Void> object
+     * @param complexBody Please put non-ascii byte string hex(FF FE FD FC 00 FA F9 F8 F7 F6).
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link Completable} object if successful.
      */
-    public Single<Void> putByteAsync(ByteWrapper complexBody) {
+    public Completable putByteAsync(ByteWrapper complexBody) {
         return putByteWithRestResponseAsync(complexBody)
-            .map(new Func1<RestResponse<Void, Void>, Void>() { public Void call(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
-        }
-
-
+            .toCompletable();
+    }
 }

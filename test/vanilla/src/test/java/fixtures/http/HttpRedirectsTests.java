@@ -26,6 +26,7 @@ import fixtures.http.models.HttpRedirectsPost307Headers;
 import fixtures.http.models.HttpRedirectsPut301Headers;
 import fixtures.http.models.HttpRedirectsPut307Headers;
 
+// FIXME
 @Ignore("TODO: reimplement")
 public class HttpRedirectsTests {
     private static AutoRestHttpInfrastructureTestService client;
@@ -33,7 +34,7 @@ public class HttpRedirectsTests {
 
 //    @BeforeClass
 //    public static void setup() {
-//        client = new AutoRestHttpInfrastructureTestServiceImpl("http://localhost:3000");
+//        client = new AutoRestHttpInfrastructureTestServiceImpl(HttpPipeline.build(new PortPolicy.Factory(3000)));
 //    }
 //
 //    @Test

@@ -10,19 +10,16 @@
 
 package fixtures.bodyduration.implementation;
 
+import com.microsoft.rest.v2.RestProxy;
+import com.microsoft.rest.v2.ServiceClient;
+import com.microsoft.rest.v2.http.HttpPipeline;
 import fixtures.bodyduration.AutoRestDurationTestService;
 import fixtures.bodyduration.Durations;
-import com.microsoft.rest.v2.RestProxy;
-import com.microsoft.rest.v2.RestResponse;
-import com.microsoft.rest.v2.ServiceClient;
-import com.microsoft.rest.v2.RestClient;
-import rx.Single;
 
 /**
- * Initializes a new instance of the AutoRestDurationTestService class.
+ * Initializes a new instance of the AutoRestDurationTestService type.
  */
 public class AutoRestDurationTestServiceImpl extends ServiceClient implements AutoRestDurationTestService {
-
     /**
      * The Durations object to access its operations.
      */
@@ -30,6 +27,7 @@ public class AutoRestDurationTestServiceImpl extends ServiceClient implements Au
 
     /**
      * Gets the Durations object to access its operations.
+     *
      * @return the Durations object.
      */
     public Durations durations() {
@@ -38,34 +36,18 @@ public class AutoRestDurationTestServiceImpl extends ServiceClient implements Au
 
     /**
      * Initializes an instance of AutoRestDurationTestService client.
-     *
-     * @param baseUrl the base URL of the host
-     */
-    public AutoRestDurationTestServiceImpl(String baseUrl) {
-        super(baseUrl);
-        initialize();
-    }
-
-    /**
-     * Initializes an instance of AutoRestDurationTestService client.
-     *
      */
     public AutoRestDurationTestServiceImpl() {
-        this("https://localhost");
-        initialize();
+        this(RestProxy.createDefaultPipeline());
     }
 
     /**
      * Initializes an instance of AutoRestDurationTestService client.
      *
-     * @param restClient the REST client containing pre-configured settings
+     * @param httpPipeline The HTTP pipeline to send requests through.
      */
-    public AutoRestDurationTestServiceImpl(RestClient restClient) {
-        super(restClient);
-        initialize();
-    }
-
-    private void initialize() {
+    public AutoRestDurationTestServiceImpl(HttpPipeline httpPipeline) {
+        super(httpPipeline);
         this.durations = new DurationsImpl(this);
     }
 }

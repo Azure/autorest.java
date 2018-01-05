@@ -1,25 +1,30 @@
 package fixtures.bodyfile;
 
+import com.microsoft.rest.v2.http.AsyncInputStream;
+import com.microsoft.rest.v2.util.FlowableUtil;
+import io.reactivex.Maybe;
+import io.reactivex.Single;
+import io.reactivex.functions.BiConsumer;
+import io.reactivex.functions.BiFunction;
+import io.reactivex.functions.Function;
+import com.microsoft.rest.v2.http.HttpPipeline;
+import com.microsoft.rest.v2.policy.PortPolicy;
 import org.apache.commons.io.IOUtils;
 import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Ignore;
 import org.junit.Test;
 
-import java.io.IOException;
 import java.io.InputStream;
-import java.util.concurrent.TimeUnit;
 
 import fixtures.bodyfile.implementation.AutoRestSwaggerBATFileServiceImpl;
-import rx.exceptions.Exceptions;
-import rx.functions.Func1;
 
 public class FilesTests {
     private static AutoRestSwaggerBATFileService client;
 
     @BeforeClass
     public static void setup() {
-        client = new AutoRestSwaggerBATFileServiceImpl("http://localhost:3000");
+        client = new AutoRestSwaggerBATFileServiceImpl(HttpPipeline.build(new PortPolicy.Factory(3000)));
     }
 
     @Test
@@ -27,16 +32,12 @@ public class FilesTests {
         ClassLoader classLoader = getClass().getClassLoader();
         try (InputStream file = classLoader.getResourceAsStream("sample.png")) {
             byte[] actual = client.files().getFileAsync()
-                .map(new Func1<InputStream, byte[]>() {
+                .flatMapSingle(new Function<AsyncInputStream, Single<byte[]>>() {
                     @Override
-                    public byte[] call(InputStream inputStreamServiceResponse) {
-                        try {
-                            return IOUtils.toByteArray(inputStreamServiceResponse);
-                        } catch (IOException e) {
-                            throw Exceptions.propagate(e);
-                        }
+                    public Single<byte[]> apply(AsyncInputStream stream) throws Exception {
+                        return FlowableUtil.collectBytes(stream.content());
                     }
-                }).toBlocking().value();
+                }).blockingGet();
             byte[] expected = IOUtils.toByteArray(file);
             Assert.assertArrayEquals(expected, actual);
         }
@@ -47,24 +48,24 @@ public class FilesTests {
     public void getLargeFile() throws Exception {
         final long streamSize = 3000L * 1024L * 1024L;
         long skipped = client.files().getFileLargeAsync()
-            .map(new Func1<InputStream, Long>() {
+            .flatMapSingle(new Function<AsyncInputStream, Single<Long>>() {
                 @Override
-                public Long call(InputStream inputStreamServiceResponse) {
-                    try {
-                        return inputStreamServiceResponse.skip(streamSize);
-                    } catch (IOException e) {
-                        throw Exceptions.propagate(e);
-                    }
+                public Single<Long> apply(AsyncInputStream asyncInputStream) throws Exception {
+                    // Dispose of the response content stream
+                    return asyncInputStream.content().reduce(0L, new BiFunction<Long, byte[], Long>() {
+                        @Override
+                        public Long apply(Long sum, byte[] bytes) throws Exception {
+                            return sum + bytes.length;
+                        }
+                    });
                 }
-            }).toBlocking().value();
+            }).blockingGet();
         Assert.assertEquals(streamSize, skipped);
     }
 
     @Test
     public void getEmptyFile() throws Exception {
-        try (InputStream result = client.files().getEmptyFile()) {
-            byte[] actual = IOUtils.toByteArray(result);
-            Assert.assertEquals(0, actual.length);
-        }
+        AsyncInputStream stream = client.files().getEmptyFile();
+        Assert.assertEquals(0, stream.contentLength());
     }
 }

@@ -10,8 +10,8 @@
 
 package fixtures.bodycomplex.models;
 
-import java.util.List;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import java.util.List;
 
 /**
  * The Cat model.
@@ -32,7 +32,7 @@ public class Cat extends Pet {
     /**
      * Get the color value.
      *
-     * @return the color value
+     * @return the color value.
      */
     public String color() {
         return this.color;
@@ -41,7 +41,7 @@ public class Cat extends Pet {
     /**
      * Set the color value.
      *
-     * @param color the color value to set
+     * @param color the color value to set.
      * @return the Cat object itself.
      */
     public Cat withColor(String color) {
@@ -52,7 +52,7 @@ public class Cat extends Pet {
     /**
      * Get the hates value.
      *
-     * @return the hates value
+     * @return the hates value.
      */
     public List<Dog> hates() {
         return this.hates;
@@ -61,12 +61,11 @@ public class Cat extends Pet {
     /**
      * Set the hates value.
      *
-     * @param hates the hates value to set
+     * @param hates the hates value to set.
      * @return the Cat object itself.
      */
     public Cat withHates(List<Dog> hates) {
         this.hates = hates;
         return this;
     }
-
 }

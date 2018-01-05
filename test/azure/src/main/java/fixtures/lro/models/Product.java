@@ -11,8 +11,8 @@
 package fixtures.lro.models;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.microsoft.rest.v2.serializer.JsonFlatten;
 import com.microsoft.azure.v2.Resource;
+import com.microsoft.rest.v2.serializer.JsonFlatten;
 
 /**
  * The Product model.
@@ -36,7 +36,7 @@ public class Product extends Resource {
     /**
      * Get the provisioningState value.
      *
-     * @return the provisioningState value
+     * @return the provisioningState value.
      */
     public String provisioningState() {
         return this.provisioningState;
@@ -45,7 +45,7 @@ public class Product extends Resource {
     /**
      * Set the provisioningState value.
      *
-     * @param provisioningState the provisioningState value to set
+     * @param provisioningState the provisioningState value to set.
      * @return the Product object itself.
      */
     public Product withProvisioningState(String provisioningState) {
@@ -56,10 +56,9 @@ public class Product extends Resource {
     /**
      * Get the provisioningStateValues value.
      *
-     * @return the provisioningStateValues value
+     * @return the provisioningStateValues value.
      */
     public String provisioningStateValues() {
         return this.provisioningStateValues;
     }
-
 }

@@ -25,7 +25,7 @@ public class ClassOptionalWrapper {
     /**
      * Get the value value.
      *
-     * @return the value value
+     * @return the value value.
      */
     public Product value() {
         return this.value;
@@ -34,12 +34,11 @@ public class ClassOptionalWrapper {
     /**
      * Set the value value.
      *
-     * @param value the value value to set
+     * @param value the value value to set.
      * @return the ClassOptionalWrapper object itself.
      */
     public ClassOptionalWrapper withValue(Product value) {
         this.value = value;
         return this;
     }
-
 }

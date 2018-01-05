@@ -2,10 +2,14 @@ package fixtures.lro;
 
 import com.microsoft.azure.v2.AzureProxy;
 import com.microsoft.azure.v2.CloudException;
-import com.microsoft.azure.v2.serializer.AzureJacksonAdapter;
-import com.microsoft.rest.v2.LogLevel;
-import com.microsoft.rest.v2.RestClient;
+import com.microsoft.rest.v2.policy.AddCookiesPolicy;
+import com.microsoft.rest.v2.policy.LoggingPolicy;
+import com.microsoft.rest.v2.policy.LoggingPolicy.LogLevel;
 import com.microsoft.rest.v2.ServiceCallback;
+import com.microsoft.rest.v2.http.HttpPipeline;
+import com.microsoft.rest.v2.policy.PortPolicy;
+import com.microsoft.rest.v2.policy.ProtocolPolicy;
+import com.microsoft.rest.v2.policy.RetryPolicy;
 import fixtures.lro.implementation.AutoRestLongRunningOperationTestServiceImpl;
 import fixtures.lro.models.Product;
 import fixtures.lro.models.Sku;
@@ -25,14 +29,13 @@ public class LROsTests {
 
     @BeforeClass
     public static void setup() {
-        RestClient restClient = new RestClient.Builder()
-                .withBaseUrl("http://localhost:3000")
-                .withLogLevel(LogLevel.BODY_AND_HEADERS)
-                .withSerializerAdapter(new AzureJacksonAdapter())
-                .build();
-        client = new AutoRestLongRunningOperationTestServiceImpl(restClient);
-        AzureProxy.setDefaultDelayInMilliseconds(0);
-//        client.getAzureClient().setLongRunningOperationRetryTimeout(0);
+        final HttpPipeline httpPipeline = HttpPipeline.build(
+                new ProtocolPolicy.Factory("http"),
+                new PortPolicy.Factory(3000),
+                new RetryPolicy.Factory(),
+                new AddCookiesPolicy.Factory());
+        client = new AutoRestLongRunningOperationTestServiceImpl(httpPipeline);
+        AzureProxy.setDefaultPollingDelayInMilliseconds(0);
     }
 
     @Test
@@ -301,7 +304,7 @@ public class LROsTests {
     public void post202NoRetry204() throws Exception {
         Product product = new Product();
         product.withLocation("West US");
-        Product response = client.lROs().post202NoRetry204(product);
+        Product response = client.lROs().post202NoRetry204WithRestResponseAsync(product).blockingGet().body();
     }
 
     @Test

@@ -5,12 +5,20 @@ import java.util.List;
 import java.util.Map;
 
 import com.microsoft.rest.v2.credentials.BasicAuthenticationCredentials;
+import com.microsoft.rest.v2.http.HttpPipeline;
+import com.microsoft.rest.v2.policy.CredentialsPolicy;
+import com.microsoft.rest.v2.policy.PortPolicy;
+import com.microsoft.rest.v2.policy.ProtocolPolicy;
 import fixtures.azurereport.implementation.AutoRestReportServiceForAzureImpl;
 import org.junit.runner.Result;
 import org.junit.runner.notification.RunListener;
 
 public final class CoverageReporter extends RunListener {
-    private AutoRestReportServiceForAzureImpl client = new AutoRestReportServiceForAzureImpl("http://localhost:3000", new BasicAuthenticationCredentials(null, null));
+    private AutoRestReportServiceForAzureImpl client = new AutoRestReportServiceForAzureImpl(
+        HttpPipeline.build(
+            new ProtocolPolicy.Factory("http"),
+            new PortPolicy.Factory(3000),
+            new CredentialsPolicy.Factory(new BasicAuthenticationCredentials(null, null))));
 
     @Override
     public void testRunFinished(Result result) throws Exception {

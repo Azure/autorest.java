@@ -40,7 +40,7 @@ public class LROSADsDeleteAsyncRelativeRetry400HeadersInner {
     /**
      * Get the azureAsyncOperation value.
      *
-     * @return the azureAsyncOperation value
+     * @return the azureAsyncOperation value.
      */
     public String azureAsyncOperation() {
         return this.azureAsyncOperation;
@@ -49,8 +49,9 @@ public class LROSADsDeleteAsyncRelativeRetry400HeadersInner {
     /**
      * Set the azureAsyncOperation value.
      *
-     * @param azureAsyncOperation the azureAsyncOperation value to set
-     * @return the LROSADsDeleteAsyncRelativeRetry400HeadersInner object itself.
+     * @param azureAsyncOperation the azureAsyncOperation value to set.
+     * @return the LROSADsDeleteAsyncRelativeRetry400HeadersInner object
+     * itself.
      */
     public LROSADsDeleteAsyncRelativeRetry400HeadersInner withAzureAsyncOperation(String azureAsyncOperation) {
         this.azureAsyncOperation = azureAsyncOperation;
@@ -60,7 +61,7 @@ public class LROSADsDeleteAsyncRelativeRetry400HeadersInner {
     /**
      * Get the location value.
      *
-     * @return the location value
+     * @return the location value.
      */
     public String location() {
         return this.location;
@@ -69,8 +70,9 @@ public class LROSADsDeleteAsyncRelativeRetry400HeadersInner {
     /**
      * Set the location value.
      *
-     * @param location the location value to set
-     * @return the LROSADsDeleteAsyncRelativeRetry400HeadersInner object itself.
+     * @param location the location value to set.
+     * @return the LROSADsDeleteAsyncRelativeRetry400HeadersInner object
+     * itself.
      */
     public LROSADsDeleteAsyncRelativeRetry400HeadersInner withLocation(String location) {
         this.location = location;
@@ -80,7 +82,7 @@ public class LROSADsDeleteAsyncRelativeRetry400HeadersInner {
     /**
      * Get the retryAfter value.
      *
-     * @return the retryAfter value
+     * @return the retryAfter value.
      */
     public Integer retryAfter() {
         return this.retryAfter;
@@ -89,12 +91,12 @@ public class LROSADsDeleteAsyncRelativeRetry400HeadersInner {
     /**
      * Set the retryAfter value.
      *
-     * @param retryAfter the retryAfter value to set
-     * @return the LROSADsDeleteAsyncRelativeRetry400HeadersInner object itself.
+     * @param retryAfter the retryAfter value to set.
+     * @return the LROSADsDeleteAsyncRelativeRetry400HeadersInner object
+     * itself.
      */
     public LROSADsDeleteAsyncRelativeRetry400HeadersInner withRetryAfter(Integer retryAfter) {
         this.retryAfter = retryAfter;
         return this;
     }
-
 }

@@ -10,8 +10,8 @@
 
 package fixtures.header.models;
 
-import org.joda.time.Period;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import org.joda.time.Period;
 
 /**
  * Defines headers for responseDuration operation.
@@ -26,7 +26,7 @@ public class HeaderResponseDurationHeaders {
     /**
      * Get the value value.
      *
-     * @return the value value
+     * @return the value value.
      */
     public Period value() {
         return this.value;
@@ -35,12 +35,11 @@ public class HeaderResponseDurationHeaders {
     /**
      * Set the value value.
      *
-     * @param value the value value to set
+     * @param value the value value to set.
      * @return the HeaderResponseDurationHeaders object itself.
      */
     public HeaderResponseDurationHeaders withValue(Period value) {
         this.value = value;
         return this;
     }
-
 }

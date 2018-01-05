@@ -15,21 +15,23 @@ import com.microsoft.rest.v2.ServiceCallback;
 import com.microsoft.rest.v2.ServiceFuture;
 import fixtures.bodycomplex.models.ErrorException;
 import fixtures.bodycomplex.models.Fish;
+import io.reactivex.Completable;
+import io.reactivex.Maybe;
+import io.reactivex.Observable;
+import io.reactivex.Single;
 import java.io.IOException;
-import rx.Observable;
-import rx.Single;
 
 /**
- * An instance of this class provides access to all the operations defined
- * in Polymorphicrecursives.
+ * An instance of this class provides access to all the operations defined in
+ * Polymorphicrecursives.
  */
 public interface Polymorphicrecursives {
     /**
      * Get complex types that are polymorphic and have recursive references.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @throws ErrorException thrown if the request is rejected by server
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the Fish object if successful.
      */
     Fish getValid();
@@ -38,86 +40,86 @@ public interface Polymorphicrecursives {
      * Get complex types that are polymorphic and have recursive references.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceFuture} object
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link ServiceFuture&lt;Fish&gt;} object.
      */
     ServiceFuture<Fish> getValidAsync(final ServiceCallback<Fish> serviceCallback);
 
     /**
      * Get complex types that are polymorphic and have recursive references.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the Fish object
-     */
-    Single<Fish> getValidAsync();
-    /**
-     * Get complex types that are polymorphic and have recursive references.
-     *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the Fish object
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link Single&lt;RestResponse&lt;Void, Fish&gt;&gt;} object if successful.
      */
     Single<RestResponse<Void, Fish>> getValidWithRestResponseAsync();
 
+    /**
+     * Get complex types that are polymorphic and have recursive references.
+     *
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link Maybe&lt;Fish&gt;} object if successful.
+     */
+    Maybe<Fish> getValidAsync();
 
     /**
      * Put complex types that are polymorphic and have recursive references.
      *
      * @param complexBody Please put a salmon that looks like this:
-     {
-         "fishtype": "salmon",
-         "species": "king",
-         "length": 1,
-         "age": 1,
-         "location": "alaska",
-         "iswild": true,
-         "siblings": [
-             {
-                 "fishtype": "shark",
-                 "species": "predator",
-                 "length": 20,
-                 "age": 6,
-                 "siblings": [
-                     {
-                         "fishtype": "salmon",
-                         "species": "coho",
-                         "length": 2,
-                         "age": 2,
-                         "location": "atlantic",
-                         "iswild": true,
-                         "siblings": [
-                             {
-                                 "fishtype": "shark",
-                                 "species": "predator",
-                                 "length": 20,
-                                 "age": 6
-                             },
-                             {
-                                 "fishtype": "sawshark",
-                                 "species": "dangerous",
-                                 "length": 10,
-                                 "age": 105
-                             }
-                         ]
-                     },
-                     {
-                         "fishtype": "sawshark",
-                         "species": "dangerous",
-                         "length": 10,
-                         "age": 105
-                     }
-                 ]
-             },
-             {
-                 "fishtype": "sawshark",
-                 "species": "dangerous",
-                 "length": 10,
-                 "age": 105
-             }
-         ]
-     }
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @throws ErrorException thrown if the request is rejected by server
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
+     * {
+     *     "fishtype": "salmon",
+     *     "species": "king",
+     *     "length": 1,
+     *     "age": 1,
+     *     "location": "alaska",
+     *     "iswild": true,
+     *     "siblings": [
+     *         {
+     *             "fishtype": "shark",
+     *             "species": "predator",
+     *             "length": 20,
+     *             "age": 6,
+     *             "siblings": [
+     *                 {
+     *                     "fishtype": "salmon",
+     *                     "species": "coho",
+     *                     "length": 2,
+     *                     "age": 2,
+     *                     "location": "atlantic",
+     *                     "iswild": true,
+     *                     "siblings": [
+     *                         {
+     *                             "fishtype": "shark",
+     *                             "species": "predator",
+     *                             "length": 20,
+     *                             "age": 6
+     *                         },
+     *                         {
+     *                             "fishtype": "sawshark",
+     *                             "species": "dangerous",
+     *                             "length": 10,
+     *                             "age": 105
+     *                         }
+     *                     ]
+     *                 },
+     *                 {
+     *                     "fishtype": "sawshark",
+     *                     "species": "dangerous",
+     *                     "length": 10,
+     *                     "age": 105
+     *                 }
+     *             ]
+     *         },
+     *         {
+     *             "fishtype": "sawshark",
+     *             "species": "dangerous",
+     *             "length": 10,
+     *             "age": 105
+     *         }
+     *     ]
+     * }.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     void putValid(Fish complexBody);
 
@@ -125,61 +127,61 @@ public interface Polymorphicrecursives {
      * Put complex types that are polymorphic and have recursive references.
      *
      * @param complexBody Please put a salmon that looks like this:
-     {
-         "fishtype": "salmon",
-         "species": "king",
-         "length": 1,
-         "age": 1,
-         "location": "alaska",
-         "iswild": true,
-         "siblings": [
-             {
-                 "fishtype": "shark",
-                 "species": "predator",
-                 "length": 20,
-                 "age": 6,
-                 "siblings": [
-                     {
-                         "fishtype": "salmon",
-                         "species": "coho",
-                         "length": 2,
-                         "age": 2,
-                         "location": "atlantic",
-                         "iswild": true,
-                         "siblings": [
-                             {
-                                 "fishtype": "shark",
-                                 "species": "predator",
-                                 "length": 20,
-                                 "age": 6
-                             },
-                             {
-                                 "fishtype": "sawshark",
-                                 "species": "dangerous",
-                                 "length": 10,
-                                 "age": 105
-                             }
-                         ]
-                     },
-                     {
-                         "fishtype": "sawshark",
-                         "species": "dangerous",
-                         "length": 10,
-                         "age": 105
-                     }
-                 ]
-             },
-             {
-                 "fishtype": "sawshark",
-                 "species": "dangerous",
-                 "length": 10,
-                 "age": 105
-             }
-         ]
-     }
+     * {
+     *     "fishtype": "salmon",
+     *     "species": "king",
+     *     "length": 1,
+     *     "age": 1,
+     *     "location": "alaska",
+     *     "iswild": true,
+     *     "siblings": [
+     *         {
+     *             "fishtype": "shark",
+     *             "species": "predator",
+     *             "length": 20,
+     *             "age": 6,
+     *             "siblings": [
+     *                 {
+     *                     "fishtype": "salmon",
+     *                     "species": "coho",
+     *                     "length": 2,
+     *                     "age": 2,
+     *                     "location": "atlantic",
+     *                     "iswild": true,
+     *                     "siblings": [
+     *                         {
+     *                             "fishtype": "shark",
+     *                             "species": "predator",
+     *                             "length": 20,
+     *                             "age": 6
+     *                         },
+     *                         {
+     *                             "fishtype": "sawshark",
+     *                             "species": "dangerous",
+     *                             "length": 10,
+     *                             "age": 105
+     *                         }
+     *                     ]
+     *                 },
+     *                 {
+     *                     "fishtype": "sawshark",
+     *                     "species": "dangerous",
+     *                     "length": 10,
+     *                     "age": 105
+     *                 }
+     *             ]
+     *         },
+     *         {
+     *             "fishtype": "sawshark",
+     *             "species": "dangerous",
+     *             "length": 10,
+     *             "age": 105
+     *         }
+     *     ]
+     * }.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceFuture} object
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
     ServiceFuture<Void> putValidAsync(Fish complexBody, final ServiceCallback<Void> serviceCallback);
 
@@ -187,122 +189,121 @@ public interface Polymorphicrecursives {
      * Put complex types that are polymorphic and have recursive references.
      *
      * @param complexBody Please put a salmon that looks like this:
-     {
-         "fishtype": "salmon",
-         "species": "king",
-         "length": 1,
-         "age": 1,
-         "location": "alaska",
-         "iswild": true,
-         "siblings": [
-             {
-                 "fishtype": "shark",
-                 "species": "predator",
-                 "length": 20,
-                 "age": 6,
-                 "siblings": [
-                     {
-                         "fishtype": "salmon",
-                         "species": "coho",
-                         "length": 2,
-                         "age": 2,
-                         "location": "atlantic",
-                         "iswild": true,
-                         "siblings": [
-                             {
-                                 "fishtype": "shark",
-                                 "species": "predator",
-                                 "length": 20,
-                                 "age": 6
-                             },
-                             {
-                                 "fishtype": "sawshark",
-                                 "species": "dangerous",
-                                 "length": 10,
-                                 "age": 105
-                             }
-                         ]
-                     },
-                     {
-                         "fishtype": "sawshark",
-                         "species": "dangerous",
-                         "length": 10,
-                         "age": 105
-                     }
-                 ]
-             },
-             {
-                 "fishtype": "sawshark",
-                 "species": "dangerous",
-                 "length": 10,
-                 "age": 105
-             }
-         ]
-     }
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single<Void>} object if successful.
+     * {
+     *     "fishtype": "salmon",
+     *     "species": "king",
+     *     "length": 1,
+     *     "age": 1,
+     *     "location": "alaska",
+     *     "iswild": true,
+     *     "siblings": [
+     *         {
+     *             "fishtype": "shark",
+     *             "species": "predator",
+     *             "length": 20,
+     *             "age": 6,
+     *             "siblings": [
+     *                 {
+     *                     "fishtype": "salmon",
+     *                     "species": "coho",
+     *                     "length": 2,
+     *                     "age": 2,
+     *                     "location": "atlantic",
+     *                     "iswild": true,
+     *                     "siblings": [
+     *                         {
+     *                             "fishtype": "shark",
+     *                             "species": "predator",
+     *                             "length": 20,
+     *                             "age": 6
+     *                         },
+     *                         {
+     *                             "fishtype": "sawshark",
+     *                             "species": "dangerous",
+     *                             "length": 10,
+     *                             "age": 105
+     *                         }
+     *                     ]
+     *                 },
+     *                 {
+     *                     "fishtype": "sawshark",
+     *                     "species": "dangerous",
+     *                     "length": 10,
+     *                     "age": 105
+     *                 }
+     *             ]
+     *         },
+     *         {
+     *             "fishtype": "sawshark",
+     *             "species": "dangerous",
+     *             "length": 10,
+     *             "age": 105
+     *         }
+     *     ]
+     * }.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
      */
-    Single<Void> putValidAsync(Fish complexBody);
+    Single<RestResponse<Void, Void>> putValidWithRestResponseAsync(Fish complexBody);
+
     /**
      * Put complex types that are polymorphic and have recursive references.
      *
      * @param complexBody Please put a salmon that looks like this:
-     {
-         "fishtype": "salmon",
-         "species": "king",
-         "length": 1,
-         "age": 1,
-         "location": "alaska",
-         "iswild": true,
-         "siblings": [
-             {
-                 "fishtype": "shark",
-                 "species": "predator",
-                 "length": 20,
-                 "age": 6,
-                 "siblings": [
-                     {
-                         "fishtype": "salmon",
-                         "species": "coho",
-                         "length": 2,
-                         "age": 2,
-                         "location": "atlantic",
-                         "iswild": true,
-                         "siblings": [
-                             {
-                                 "fishtype": "shark",
-                                 "species": "predator",
-                                 "length": 20,
-                                 "age": 6
-                             },
-                             {
-                                 "fishtype": "sawshark",
-                                 "species": "dangerous",
-                                 "length": 10,
-                                 "age": 105
-                             }
-                         ]
-                     },
-                     {
-                         "fishtype": "sawshark",
-                         "species": "dangerous",
-                         "length": 10,
-                         "age": 105
-                     }
-                 ]
-             },
-             {
-                 "fishtype": "sawshark",
-                 "species": "dangerous",
-                 "length": 10,
-                 "age": 105
-             }
-         ]
-     }
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single<Void>} object if successful.
+     * {
+     *     "fishtype": "salmon",
+     *     "species": "king",
+     *     "length": 1,
+     *     "age": 1,
+     *     "location": "alaska",
+     *     "iswild": true,
+     *     "siblings": [
+     *         {
+     *             "fishtype": "shark",
+     *             "species": "predator",
+     *             "length": 20,
+     *             "age": 6,
+     *             "siblings": [
+     *                 {
+     *                     "fishtype": "salmon",
+     *                     "species": "coho",
+     *                     "length": 2,
+     *                     "age": 2,
+     *                     "location": "atlantic",
+     *                     "iswild": true,
+     *                     "siblings": [
+     *                         {
+     *                             "fishtype": "shark",
+     *                             "species": "predator",
+     *                             "length": 20,
+     *                             "age": 6
+     *                         },
+     *                         {
+     *                             "fishtype": "sawshark",
+     *                             "species": "dangerous",
+     *                             "length": 10,
+     *                             "age": 105
+     *                         }
+     *                     ]
+     *                 },
+     *                 {
+     *                     "fishtype": "sawshark",
+     *                     "species": "dangerous",
+     *                     "length": 10,
+     *                     "age": 105
+     *                 }
+     *             ]
+     *         },
+     *         {
+     *             "fishtype": "sawshark",
+     *             "species": "dangerous",
+     *             "length": 10,
+     *             "age": 105
+     *         }
+     *     ]
+     * }.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link Completable} object if successful.
      */
-    Single<RestResponse<Void, Void>> putValidWithRestResponseAsync(Fish complexBody);
-
-
+    Completable putValidAsync(Fish complexBody);
 }

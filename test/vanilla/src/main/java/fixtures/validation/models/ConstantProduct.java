@@ -39,7 +39,7 @@ public class ConstantProduct {
     /**
      * Get the constProperty value.
      *
-     * @return the constProperty value
+     * @return the constProperty value.
      */
     public String constProperty() {
         return this.constProperty;
@@ -48,7 +48,7 @@ public class ConstantProduct {
     /**
      * Set the constProperty value.
      *
-     * @param constProperty the constProperty value to set
+     * @param constProperty the constProperty value to set.
      * @return the ConstantProduct object itself.
      */
     public ConstantProduct withConstProperty(String constProperty) {
@@ -59,7 +59,7 @@ public class ConstantProduct {
     /**
      * Get the constProperty2 value.
      *
-     * @return the constProperty2 value
+     * @return the constProperty2 value.
      */
     public String constProperty2() {
         return this.constProperty2;
@@ -68,12 +68,11 @@ public class ConstantProduct {
     /**
      * Set the constProperty2 value.
      *
-     * @param constProperty2 the constProperty2 value to set
+     * @param constProperty2 the constProperty2 value to set.
      * @return the ConstantProduct object itself.
      */
     public ConstantProduct withConstProperty2(String constProperty2) {
         this.constProperty2 = constProperty2;
         return this;
     }
-
 }

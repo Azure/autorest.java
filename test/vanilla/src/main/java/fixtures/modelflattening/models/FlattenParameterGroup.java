@@ -59,7 +59,7 @@ public class FlattenParameterGroup {
     /**
      * Get the name value.
      *
-     * @return the name value
+     * @return the name value.
      */
     public String name() {
         return this.name;
@@ -68,7 +68,7 @@ public class FlattenParameterGroup {
     /**
      * Set the name value.
      *
-     * @param name the name value to set
+     * @param name the name value to set.
      * @return the FlattenParameterGroup object itself.
      */
     public FlattenParameterGroup withName(String name) {
@@ -79,7 +79,7 @@ public class FlattenParameterGroup {
     /**
      * Get the productId value.
      *
-     * @return the productId value
+     * @return the productId value.
      */
     public String productId() {
         return this.productId;
@@ -88,7 +88,7 @@ public class FlattenParameterGroup {
     /**
      * Set the productId value.
      *
-     * @param productId the productId value to set
+     * @param productId the productId value to set.
      * @return the FlattenParameterGroup object itself.
      */
     public FlattenParameterGroup withProductId(String productId) {
@@ -99,7 +99,7 @@ public class FlattenParameterGroup {
     /**
      * Get the description value.
      *
-     * @return the description value
+     * @return the description value.
      */
     public String description() {
         return this.description;
@@ -108,7 +108,7 @@ public class FlattenParameterGroup {
     /**
      * Set the description value.
      *
-     * @param description the description value to set
+     * @param description the description value to set.
      * @return the FlattenParameterGroup object itself.
      */
     public FlattenParameterGroup withDescription(String description) {
@@ -119,7 +119,7 @@ public class FlattenParameterGroup {
     /**
      * Get the maxProductDisplayName value.
      *
-     * @return the maxProductDisplayName value
+     * @return the maxProductDisplayName value.
      */
     public String maxProductDisplayName() {
         return this.maxProductDisplayName;
@@ -128,7 +128,7 @@ public class FlattenParameterGroup {
     /**
      * Set the maxProductDisplayName value.
      *
-     * @param maxProductDisplayName the maxProductDisplayName value to set
+     * @param maxProductDisplayName the maxProductDisplayName value to set.
      * @return the FlattenParameterGroup object itself.
      */
     public FlattenParameterGroup withMaxProductDisplayName(String maxProductDisplayName) {
@@ -139,7 +139,7 @@ public class FlattenParameterGroup {
     /**
      * Get the genericValue value.
      *
-     * @return the genericValue value
+     * @return the genericValue value.
      */
     public String genericValue() {
         return this.genericValue;
@@ -148,7 +148,7 @@ public class FlattenParameterGroup {
     /**
      * Set the genericValue value.
      *
-     * @param genericValue the genericValue value to set
+     * @param genericValue the genericValue value to set.
      * @return the FlattenParameterGroup object itself.
      */
     public FlattenParameterGroup withGenericValue(String genericValue) {
@@ -159,7 +159,7 @@ public class FlattenParameterGroup {
     /**
      * Get the odatavalue value.
      *
-     * @return the odatavalue value
+     * @return the odatavalue value.
      */
     public String odatavalue() {
         return this.odatavalue;
@@ -168,12 +168,11 @@ public class FlattenParameterGroup {
     /**
      * Set the odatavalue value.
      *
-     * @param odatavalue the odatavalue value to set
+     * @param odatavalue the odatavalue value to set.
      * @return the FlattenParameterGroup object itself.
      */
     public FlattenParameterGroup withOdatavalue(String odatavalue) {
         this.odatavalue = odatavalue;
         return this;
     }
-
 }

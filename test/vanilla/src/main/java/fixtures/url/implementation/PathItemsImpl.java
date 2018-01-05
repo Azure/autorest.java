@@ -10,10 +10,11 @@
 
 package fixtures.url.implementation;
 
+import com.google.common.reflect.TypeToken;
 import com.microsoft.rest.v2.RestProxy;
 import com.microsoft.rest.v2.RestResponse;
-import fixtures.url.PathItems;
-import com.google.common.reflect.TypeToken;
+import com.microsoft.rest.v2.ServiceCallback;
+import com.microsoft.rest.v2.ServiceFuture;
 import com.microsoft.rest.v2.annotations.ExpectedResponses;
 import com.microsoft.rest.v2.annotations.GET;
 import com.microsoft.rest.v2.annotations.Headers;
@@ -22,100 +23,99 @@ import com.microsoft.rest.v2.annotations.PathParam;
 import com.microsoft.rest.v2.annotations.QueryParam;
 import com.microsoft.rest.v2.annotations.UnexpectedResponseExceptionType;
 import com.microsoft.rest.v2.http.HttpClient;
-import com.microsoft.rest.v2.ServiceCallback;
-import com.microsoft.rest.v2.ServiceFuture;
+import fixtures.url.PathItems;
 import fixtures.url.models.ErrorException;
+import io.reactivex.Completable;
+import io.reactivex.Observable;
+import io.reactivex.Single;
+import io.reactivex.functions.Function;
 import java.io.IOException;
-import rx.functions.Func1;
-import rx.Observable;
-import rx.Single;
 
 /**
- * An instance of this class provides access to all the operations defined
- * in PathItems.
+ * An instance of this class provides access to all the operations defined in
+ * PathItems.
  */
 public class PathItemsImpl implements PathItems {
-    /** The RestProxy service to perform REST calls. */
+    /**
+     * The proxy service used to perform REST calls.
+     */
     private PathItemsService service;
-    /** The service client containing this operation class. */
+
+    /**
+     * The service client containing this operation class.
+     */
     private AutoRestUrlTestServiceImpl client;
 
     /**
-     * Initializes an instance of PathItems.
+     * Initializes an instance of PathItemsImpl.
      *
      * @param client the instance of the service client containing this operation class.
      */
     public PathItemsImpl(AutoRestUrlTestServiceImpl client) {
-        this.service = RestProxy.create(PathItemsService.class, client.restClient().baseURL(), client.httpClient(), client.serializerAdapter());
+        this.service = RestProxy.create(PathItemsService.class, client);
         this.client = client;
     }
 
     /**
-     * The interface defining all the services for PathItems to be
-     * used by RestProxy to perform REST calls.
-    */
-    @Host("http://localhost")
+     * The interface defining all the services for PathItems to be used by the
+     * proxy service to perform REST calls.
+     */
+    @Host("http://localhost:3000")
     interface PathItemsService {
-        @Headers({ "x-ms-logging-context: fixtures.url.PathItems getAllWithValues" })
         @GET("pathitem/nullable/globalStringPath/{globalStringPath}/pathItemStringPath/{pathItemStringPath}/localStringPath/{localStringPath}/globalStringQuery/pathItemStringQuery/localStringQuery")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
         Single<RestResponse<Void, Void>> getAllWithValues(@PathParam("localStringPath") String localStringPath, @PathParam("pathItemStringPath") String pathItemStringPath, @PathParam("globalStringPath") String globalStringPath, @QueryParam("localStringQuery") String localStringQuery, @QueryParam("pathItemStringQuery") String pathItemStringQuery, @QueryParam("globalStringQuery") String globalStringQuery);
 
-        @Headers({ "x-ms-logging-context: fixtures.url.PathItems getGlobalQueryNull" })
         @GET("pathitem/nullable/globalStringPath/{globalStringPath}/pathItemStringPath/{pathItemStringPath}/localStringPath/{localStringPath}/null/pathItemStringQuery/localStringQuery")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
         Single<RestResponse<Void, Void>> getGlobalQueryNull(@PathParam("localStringPath") String localStringPath, @PathParam("pathItemStringPath") String pathItemStringPath, @PathParam("globalStringPath") String globalStringPath, @QueryParam("localStringQuery") String localStringQuery, @QueryParam("pathItemStringQuery") String pathItemStringQuery, @QueryParam("globalStringQuery") String globalStringQuery);
 
-        @Headers({ "x-ms-logging-context: fixtures.url.PathItems getGlobalAndLocalQueryNull" })
         @GET("pathitem/nullable/globalStringPath/{globalStringPath}/pathItemStringPath/{pathItemStringPath}/localStringPath/{localStringPath}/null/pathItemStringQuery/null")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
         Single<RestResponse<Void, Void>> getGlobalAndLocalQueryNull(@PathParam("localStringPath") String localStringPath, @PathParam("pathItemStringPath") String pathItemStringPath, @PathParam("globalStringPath") String globalStringPath, @QueryParam("localStringQuery") String localStringQuery, @QueryParam("pathItemStringQuery") String pathItemStringQuery, @QueryParam("globalStringQuery") String globalStringQuery);
 
-        @Headers({ "x-ms-logging-context: fixtures.url.PathItems getLocalPathItemQueryNull" })
         @GET("pathitem/nullable/globalStringPath/{globalStringPath}/pathItemStringPath/{pathItemStringPath}/localStringPath/{localStringPath}/globalStringQuery/null/null")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
         Single<RestResponse<Void, Void>> getLocalPathItemQueryNull(@PathParam("localStringPath") String localStringPath, @PathParam("pathItemStringPath") String pathItemStringPath, @PathParam("globalStringPath") String globalStringPath, @QueryParam("localStringQuery") String localStringQuery, @QueryParam("pathItemStringQuery") String pathItemStringQuery, @QueryParam("globalStringQuery") String globalStringQuery);
-
     }
 
     /**
      * send globalStringPath='globalStringPath', pathItemStringPath='pathItemStringPath', localStringPath='localStringPath', globalStringQuery='globalStringQuery', pathItemStringQuery='pathItemStringQuery', localStringQuery='localStringQuery'.
      *
-     * @param localStringPath should contain value 'localStringPath'
-     * @param pathItemStringPath A string value 'pathItemStringPath' that appears in the path
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @throws ErrorException thrown if the request is rejected by server
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
-     * @return the void object if successful.
+     * @param localStringPath should contain value 'localStringPath'.
+     * @param pathItemStringPath A string value 'pathItemStringPath' that appears in the path.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     public void getAllWithValues(String localStringPath, String pathItemStringPath) {
-        getAllWithValuesAsync(localStringPath, pathItemStringPath).toBlocking().value();
+        getAllWithValuesAsync(localStringPath, pathItemStringPath).blockingAwait();
     }
 
     /**
      * send globalStringPath='globalStringPath', pathItemStringPath='pathItemStringPath', localStringPath='localStringPath', globalStringQuery='globalStringQuery', pathItemStringQuery='pathItemStringQuery', localStringQuery='localStringQuery'.
      *
-     * @param localStringPath should contain value 'localStringPath'
-     * @param pathItemStringPath A string value 'pathItemStringPath' that appears in the path
+     * @param localStringPath should contain value 'localStringPath'.
+     * @param pathItemStringPath A string value 'pathItemStringPath' that appears in the path.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceFuture} object
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    public ServiceFuture<Void> getAllWithValuesAsync(String localStringPath, String pathItemStringPath, ServiceCallback<Void> serviceCallback) {
+    public ServiceFuture<Void> getAllWithValuesAsync(String localStringPath, String pathItemStringPath, final ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(getAllWithValuesAsync(localStringPath, pathItemStringPath), serviceCallback);
     }
 
     /**
      * send globalStringPath='globalStringPath', pathItemStringPath='pathItemStringPath', localStringPath='localStringPath', globalStringQuery='globalStringQuery', pathItemStringQuery='pathItemStringQuery', localStringQuery='localStringQuery'.
      *
-     * @param localStringPath should contain value 'localStringPath'
-     * @param pathItemStringPath A string value 'pathItemStringPath' that appears in the path
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return a {@link Single} emitting the RestResponse<Void, Void> object
+     * @param localStringPath should contain value 'localStringPath'.
+     * @param pathItemStringPath A string value 'pathItemStringPath' that appears in the path.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
      */
     public Single<RestResponse<Void, Void>> getAllWithValuesWithRestResponseAsync(String localStringPath, String pathItemStringPath) {
         if (localStringPath == null) {
@@ -135,56 +135,55 @@ public class PathItemsImpl implements PathItems {
     /**
      * send globalStringPath='globalStringPath', pathItemStringPath='pathItemStringPath', localStringPath='localStringPath', globalStringQuery='globalStringQuery', pathItemStringQuery='pathItemStringQuery', localStringQuery='localStringQuery'.
      *
-     * @param localStringPath should contain value 'localStringPath'
-     * @param pathItemStringPath A string value 'pathItemStringPath' that appears in the path
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return a {@link Single} emitting the RestResponse<Void, Void> object
+     * @param localStringPath should contain value 'localStringPath'.
+     * @param pathItemStringPath A string value 'pathItemStringPath' that appears in the path.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link Completable} object if successful.
      */
-    public Single<Void> getAllWithValuesAsync(String localStringPath, String pathItemStringPath) {
+    public Completable getAllWithValuesAsync(String localStringPath, String pathItemStringPath) {
         return getAllWithValuesWithRestResponseAsync(localStringPath, pathItemStringPath)
-            .map(new Func1<RestResponse<Void, Void>, Void>() { public Void call(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
-        }
-
-    /**
-     * send globalStringPath='globalStringPath', pathItemStringPath='pathItemStringPath', localStringPath='localStringPath', globalStringQuery='globalStringQuery', pathItemStringQuery='pathItemStringQuery', localStringQuery='localStringQuery'.
-     *
-     * @param localStringPath should contain value 'localStringPath'
-     * @param pathItemStringPath A string value 'pathItemStringPath' that appears in the path
-     * @param localStringQuery should contain value 'localStringQuery'
-     * @param pathItemStringQuery A string value 'pathItemStringQuery' that appears as a query parameter
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @throws ErrorException thrown if the request is rejected by server
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
-     * @return the void object if successful.
-     */
-    public void getAllWithValues(String localStringPath, String pathItemStringPath, String localStringQuery, String pathItemStringQuery) {
-        getAllWithValuesAsync(localStringPath, pathItemStringPath, localStringQuery, pathItemStringQuery).toBlocking().value();
+            .toCompletable();
     }
 
     /**
      * send globalStringPath='globalStringPath', pathItemStringPath='pathItemStringPath', localStringPath='localStringPath', globalStringQuery='globalStringQuery', pathItemStringQuery='pathItemStringQuery', localStringQuery='localStringQuery'.
      *
-     * @param localStringPath should contain value 'localStringPath'
-     * @param pathItemStringPath A string value 'pathItemStringPath' that appears in the path
-     * @param localStringQuery should contain value 'localStringQuery'
-     * @param pathItemStringQuery A string value 'pathItemStringQuery' that appears as a query parameter
-     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceFuture} object
+     * @param localStringPath should contain value 'localStringPath'.
+     * @param pathItemStringPath A string value 'pathItemStringPath' that appears in the path.
+     * @param localStringQuery should contain value 'localStringQuery'.
+     * @param pathItemStringQuery A string value 'pathItemStringQuery' that appears as a query parameter.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
-    public ServiceFuture<Void> getAllWithValuesAsync(String localStringPath, String pathItemStringPath, String localStringQuery, String pathItemStringQuery, ServiceCallback<Void> serviceCallback) {
+    public void getAllWithValues(String localStringPath, String pathItemStringPath, String localStringQuery, String pathItemStringQuery) {
+        getAllWithValuesAsync(localStringPath, pathItemStringPath, localStringQuery, pathItemStringQuery).blockingAwait();
+    }
+
+    /**
+     * send globalStringPath='globalStringPath', pathItemStringPath='pathItemStringPath', localStringPath='localStringPath', globalStringQuery='globalStringQuery', pathItemStringQuery='pathItemStringQuery', localStringQuery='localStringQuery'.
+     *
+     * @param localStringPath should contain value 'localStringPath'.
+     * @param pathItemStringPath A string value 'pathItemStringPath' that appears in the path.
+     * @param localStringQuery should contain value 'localStringQuery'.
+     * @param pathItemStringQuery A string value 'pathItemStringQuery' that appears as a query parameter.
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link ServiceFuture&lt;Void&gt;} object.
+     */
+    public ServiceFuture<Void> getAllWithValuesAsync(String localStringPath, String pathItemStringPath, String localStringQuery, String pathItemStringQuery, final ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(getAllWithValuesAsync(localStringPath, pathItemStringPath, localStringQuery, pathItemStringQuery), serviceCallback);
     }
 
     /**
      * send globalStringPath='globalStringPath', pathItemStringPath='pathItemStringPath', localStringPath='localStringPath', globalStringQuery='globalStringQuery', pathItemStringQuery='pathItemStringQuery', localStringQuery='localStringQuery'.
      *
-     * @param localStringPath should contain value 'localStringPath'
-     * @param pathItemStringPath A string value 'pathItemStringPath' that appears in the path
-     * @param localStringQuery should contain value 'localStringQuery'
-     * @param pathItemStringQuery A string value 'pathItemStringQuery' that appears as a query parameter
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return a {@link Single} emitting the RestResponse<Void, Void> object
+     * @param localStringPath should contain value 'localStringPath'.
+     * @param pathItemStringPath A string value 'pathItemStringPath' that appears in the path.
+     * @param localStringQuery should contain value 'localStringQuery'.
+     * @param pathItemStringQuery A string value 'pathItemStringQuery' that appears as a query parameter.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
      */
     public Single<RestResponse<Void, Void>> getAllWithValuesWithRestResponseAsync(String localStringPath, String pathItemStringPath, String localStringQuery, String pathItemStringQuery) {
         if (localStringPath == null) {
@@ -202,53 +201,51 @@ public class PathItemsImpl implements PathItems {
     /**
      * send globalStringPath='globalStringPath', pathItemStringPath='pathItemStringPath', localStringPath='localStringPath', globalStringQuery='globalStringQuery', pathItemStringQuery='pathItemStringQuery', localStringQuery='localStringQuery'.
      *
-     * @param localStringPath should contain value 'localStringPath'
-     * @param pathItemStringPath A string value 'pathItemStringPath' that appears in the path
-     * @param localStringQuery should contain value 'localStringQuery'
-     * @param pathItemStringQuery A string value 'pathItemStringQuery' that appears as a query parameter
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return a {@link Single} emitting the RestResponse<Void, Void> object
+     * @param localStringPath should contain value 'localStringPath'.
+     * @param pathItemStringPath A string value 'pathItemStringPath' that appears in the path.
+     * @param localStringQuery should contain value 'localStringQuery'.
+     * @param pathItemStringQuery A string value 'pathItemStringQuery' that appears as a query parameter.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link Completable} object if successful.
      */
-    public Single<Void> getAllWithValuesAsync(String localStringPath, String pathItemStringPath, String localStringQuery, String pathItemStringQuery) {
+    public Completable getAllWithValuesAsync(String localStringPath, String pathItemStringPath, String localStringQuery, String pathItemStringQuery) {
         return getAllWithValuesWithRestResponseAsync(localStringPath, pathItemStringPath, localStringQuery, pathItemStringQuery)
-            .map(new Func1<RestResponse<Void, Void>, Void>() { public Void call(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
-        }
-
-
-    /**
-     * send globalStringPath='globalStringPath', pathItemStringPath='pathItemStringPath', localStringPath='localStringPath', globalStringQuery=null, pathItemStringQuery='pathItemStringQuery', localStringQuery='localStringQuery'.
-     *
-     * @param localStringPath should contain value 'localStringPath'
-     * @param pathItemStringPath A string value 'pathItemStringPath' that appears in the path
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @throws ErrorException thrown if the request is rejected by server
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
-     * @return the void object if successful.
-     */
-    public void getGlobalQueryNull(String localStringPath, String pathItemStringPath) {
-        getGlobalQueryNullAsync(localStringPath, pathItemStringPath).toBlocking().value();
+            .toCompletable();
     }
 
     /**
      * send globalStringPath='globalStringPath', pathItemStringPath='pathItemStringPath', localStringPath='localStringPath', globalStringQuery=null, pathItemStringQuery='pathItemStringQuery', localStringQuery='localStringQuery'.
      *
-     * @param localStringPath should contain value 'localStringPath'
-     * @param pathItemStringPath A string value 'pathItemStringPath' that appears in the path
-     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceFuture} object
+     * @param localStringPath should contain value 'localStringPath'.
+     * @param pathItemStringPath A string value 'pathItemStringPath' that appears in the path.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
-    public ServiceFuture<Void> getGlobalQueryNullAsync(String localStringPath, String pathItemStringPath, ServiceCallback<Void> serviceCallback) {
+    public void getGlobalQueryNull(String localStringPath, String pathItemStringPath) {
+        getGlobalQueryNullAsync(localStringPath, pathItemStringPath).blockingAwait();
+    }
+
+    /**
+     * send globalStringPath='globalStringPath', pathItemStringPath='pathItemStringPath', localStringPath='localStringPath', globalStringQuery=null, pathItemStringQuery='pathItemStringQuery', localStringQuery='localStringQuery'.
+     *
+     * @param localStringPath should contain value 'localStringPath'.
+     * @param pathItemStringPath A string value 'pathItemStringPath' that appears in the path.
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link ServiceFuture&lt;Void&gt;} object.
+     */
+    public ServiceFuture<Void> getGlobalQueryNullAsync(String localStringPath, String pathItemStringPath, final ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(getGlobalQueryNullAsync(localStringPath, pathItemStringPath), serviceCallback);
     }
 
     /**
      * send globalStringPath='globalStringPath', pathItemStringPath='pathItemStringPath', localStringPath='localStringPath', globalStringQuery=null, pathItemStringQuery='pathItemStringQuery', localStringQuery='localStringQuery'.
      *
-     * @param localStringPath should contain value 'localStringPath'
-     * @param pathItemStringPath A string value 'pathItemStringPath' that appears in the path
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return a {@link Single} emitting the RestResponse<Void, Void> object
+     * @param localStringPath should contain value 'localStringPath'.
+     * @param pathItemStringPath A string value 'pathItemStringPath' that appears in the path.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
      */
     public Single<RestResponse<Void, Void>> getGlobalQueryNullWithRestResponseAsync(String localStringPath, String pathItemStringPath) {
         if (localStringPath == null) {
@@ -268,56 +265,55 @@ public class PathItemsImpl implements PathItems {
     /**
      * send globalStringPath='globalStringPath', pathItemStringPath='pathItemStringPath', localStringPath='localStringPath', globalStringQuery=null, pathItemStringQuery='pathItemStringQuery', localStringQuery='localStringQuery'.
      *
-     * @param localStringPath should contain value 'localStringPath'
-     * @param pathItemStringPath A string value 'pathItemStringPath' that appears in the path
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return a {@link Single} emitting the RestResponse<Void, Void> object
+     * @param localStringPath should contain value 'localStringPath'.
+     * @param pathItemStringPath A string value 'pathItemStringPath' that appears in the path.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link Completable} object if successful.
      */
-    public Single<Void> getGlobalQueryNullAsync(String localStringPath, String pathItemStringPath) {
+    public Completable getGlobalQueryNullAsync(String localStringPath, String pathItemStringPath) {
         return getGlobalQueryNullWithRestResponseAsync(localStringPath, pathItemStringPath)
-            .map(new Func1<RestResponse<Void, Void>, Void>() { public Void call(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
-        }
-
-    /**
-     * send globalStringPath='globalStringPath', pathItemStringPath='pathItemStringPath', localStringPath='localStringPath', globalStringQuery=null, pathItemStringQuery='pathItemStringQuery', localStringQuery='localStringQuery'.
-     *
-     * @param localStringPath should contain value 'localStringPath'
-     * @param pathItemStringPath A string value 'pathItemStringPath' that appears in the path
-     * @param localStringQuery should contain value 'localStringQuery'
-     * @param pathItemStringQuery A string value 'pathItemStringQuery' that appears as a query parameter
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @throws ErrorException thrown if the request is rejected by server
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
-     * @return the void object if successful.
-     */
-    public void getGlobalQueryNull(String localStringPath, String pathItemStringPath, String localStringQuery, String pathItemStringQuery) {
-        getGlobalQueryNullAsync(localStringPath, pathItemStringPath, localStringQuery, pathItemStringQuery).toBlocking().value();
+            .toCompletable();
     }
 
     /**
      * send globalStringPath='globalStringPath', pathItemStringPath='pathItemStringPath', localStringPath='localStringPath', globalStringQuery=null, pathItemStringQuery='pathItemStringQuery', localStringQuery='localStringQuery'.
      *
-     * @param localStringPath should contain value 'localStringPath'
-     * @param pathItemStringPath A string value 'pathItemStringPath' that appears in the path
-     * @param localStringQuery should contain value 'localStringQuery'
-     * @param pathItemStringQuery A string value 'pathItemStringQuery' that appears as a query parameter
-     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceFuture} object
+     * @param localStringPath should contain value 'localStringPath'.
+     * @param pathItemStringPath A string value 'pathItemStringPath' that appears in the path.
+     * @param localStringQuery should contain value 'localStringQuery'.
+     * @param pathItemStringQuery A string value 'pathItemStringQuery' that appears as a query parameter.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
-    public ServiceFuture<Void> getGlobalQueryNullAsync(String localStringPath, String pathItemStringPath, String localStringQuery, String pathItemStringQuery, ServiceCallback<Void> serviceCallback) {
+    public void getGlobalQueryNull(String localStringPath, String pathItemStringPath, String localStringQuery, String pathItemStringQuery) {
+        getGlobalQueryNullAsync(localStringPath, pathItemStringPath, localStringQuery, pathItemStringQuery).blockingAwait();
+    }
+
+    /**
+     * send globalStringPath='globalStringPath', pathItemStringPath='pathItemStringPath', localStringPath='localStringPath', globalStringQuery=null, pathItemStringQuery='pathItemStringQuery', localStringQuery='localStringQuery'.
+     *
+     * @param localStringPath should contain value 'localStringPath'.
+     * @param pathItemStringPath A string value 'pathItemStringPath' that appears in the path.
+     * @param localStringQuery should contain value 'localStringQuery'.
+     * @param pathItemStringQuery A string value 'pathItemStringQuery' that appears as a query parameter.
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link ServiceFuture&lt;Void&gt;} object.
+     */
+    public ServiceFuture<Void> getGlobalQueryNullAsync(String localStringPath, String pathItemStringPath, String localStringQuery, String pathItemStringQuery, final ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(getGlobalQueryNullAsync(localStringPath, pathItemStringPath, localStringQuery, pathItemStringQuery), serviceCallback);
     }
 
     /**
      * send globalStringPath='globalStringPath', pathItemStringPath='pathItemStringPath', localStringPath='localStringPath', globalStringQuery=null, pathItemStringQuery='pathItemStringQuery', localStringQuery='localStringQuery'.
      *
-     * @param localStringPath should contain value 'localStringPath'
-     * @param pathItemStringPath A string value 'pathItemStringPath' that appears in the path
-     * @param localStringQuery should contain value 'localStringQuery'
-     * @param pathItemStringQuery A string value 'pathItemStringQuery' that appears as a query parameter
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return a {@link Single} emitting the RestResponse<Void, Void> object
+     * @param localStringPath should contain value 'localStringPath'.
+     * @param pathItemStringPath A string value 'pathItemStringPath' that appears in the path.
+     * @param localStringQuery should contain value 'localStringQuery'.
+     * @param pathItemStringQuery A string value 'pathItemStringQuery' that appears as a query parameter.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
      */
     public Single<RestResponse<Void, Void>> getGlobalQueryNullWithRestResponseAsync(String localStringPath, String pathItemStringPath, String localStringQuery, String pathItemStringQuery) {
         if (localStringPath == null) {
@@ -335,53 +331,51 @@ public class PathItemsImpl implements PathItems {
     /**
      * send globalStringPath='globalStringPath', pathItemStringPath='pathItemStringPath', localStringPath='localStringPath', globalStringQuery=null, pathItemStringQuery='pathItemStringQuery', localStringQuery='localStringQuery'.
      *
-     * @param localStringPath should contain value 'localStringPath'
-     * @param pathItemStringPath A string value 'pathItemStringPath' that appears in the path
-     * @param localStringQuery should contain value 'localStringQuery'
-     * @param pathItemStringQuery A string value 'pathItemStringQuery' that appears as a query parameter
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return a {@link Single} emitting the RestResponse<Void, Void> object
+     * @param localStringPath should contain value 'localStringPath'.
+     * @param pathItemStringPath A string value 'pathItemStringPath' that appears in the path.
+     * @param localStringQuery should contain value 'localStringQuery'.
+     * @param pathItemStringQuery A string value 'pathItemStringQuery' that appears as a query parameter.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link Completable} object if successful.
      */
-    public Single<Void> getGlobalQueryNullAsync(String localStringPath, String pathItemStringPath, String localStringQuery, String pathItemStringQuery) {
+    public Completable getGlobalQueryNullAsync(String localStringPath, String pathItemStringPath, String localStringQuery, String pathItemStringQuery) {
         return getGlobalQueryNullWithRestResponseAsync(localStringPath, pathItemStringPath, localStringQuery, pathItemStringQuery)
-            .map(new Func1<RestResponse<Void, Void>, Void>() { public Void call(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
-        }
-
-
-    /**
-     * send globalStringPath=globalStringPath, pathItemStringPath='pathItemStringPath', localStringPath='localStringPath', globalStringQuery=null, pathItemStringQuery='pathItemStringQuery', localStringQuery=null.
-     *
-     * @param localStringPath should contain value 'localStringPath'
-     * @param pathItemStringPath A string value 'pathItemStringPath' that appears in the path
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @throws ErrorException thrown if the request is rejected by server
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
-     * @return the void object if successful.
-     */
-    public void getGlobalAndLocalQueryNull(String localStringPath, String pathItemStringPath) {
-        getGlobalAndLocalQueryNullAsync(localStringPath, pathItemStringPath).toBlocking().value();
+            .toCompletable();
     }
 
     /**
      * send globalStringPath=globalStringPath, pathItemStringPath='pathItemStringPath', localStringPath='localStringPath', globalStringQuery=null, pathItemStringQuery='pathItemStringQuery', localStringQuery=null.
      *
-     * @param localStringPath should contain value 'localStringPath'
-     * @param pathItemStringPath A string value 'pathItemStringPath' that appears in the path
-     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceFuture} object
+     * @param localStringPath should contain value 'localStringPath'.
+     * @param pathItemStringPath A string value 'pathItemStringPath' that appears in the path.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
-    public ServiceFuture<Void> getGlobalAndLocalQueryNullAsync(String localStringPath, String pathItemStringPath, ServiceCallback<Void> serviceCallback) {
+    public void getGlobalAndLocalQueryNull(String localStringPath, String pathItemStringPath) {
+        getGlobalAndLocalQueryNullAsync(localStringPath, pathItemStringPath).blockingAwait();
+    }
+
+    /**
+     * send globalStringPath=globalStringPath, pathItemStringPath='pathItemStringPath', localStringPath='localStringPath', globalStringQuery=null, pathItemStringQuery='pathItemStringQuery', localStringQuery=null.
+     *
+     * @param localStringPath should contain value 'localStringPath'.
+     * @param pathItemStringPath A string value 'pathItemStringPath' that appears in the path.
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link ServiceFuture&lt;Void&gt;} object.
+     */
+    public ServiceFuture<Void> getGlobalAndLocalQueryNullAsync(String localStringPath, String pathItemStringPath, final ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(getGlobalAndLocalQueryNullAsync(localStringPath, pathItemStringPath), serviceCallback);
     }
 
     /**
      * send globalStringPath=globalStringPath, pathItemStringPath='pathItemStringPath', localStringPath='localStringPath', globalStringQuery=null, pathItemStringQuery='pathItemStringQuery', localStringQuery=null.
      *
-     * @param localStringPath should contain value 'localStringPath'
-     * @param pathItemStringPath A string value 'pathItemStringPath' that appears in the path
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return a {@link Single} emitting the RestResponse<Void, Void> object
+     * @param localStringPath should contain value 'localStringPath'.
+     * @param pathItemStringPath A string value 'pathItemStringPath' that appears in the path.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
      */
     public Single<RestResponse<Void, Void>> getGlobalAndLocalQueryNullWithRestResponseAsync(String localStringPath, String pathItemStringPath) {
         if (localStringPath == null) {
@@ -401,56 +395,55 @@ public class PathItemsImpl implements PathItems {
     /**
      * send globalStringPath=globalStringPath, pathItemStringPath='pathItemStringPath', localStringPath='localStringPath', globalStringQuery=null, pathItemStringQuery='pathItemStringQuery', localStringQuery=null.
      *
-     * @param localStringPath should contain value 'localStringPath'
-     * @param pathItemStringPath A string value 'pathItemStringPath' that appears in the path
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return a {@link Single} emitting the RestResponse<Void, Void> object
+     * @param localStringPath should contain value 'localStringPath'.
+     * @param pathItemStringPath A string value 'pathItemStringPath' that appears in the path.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link Completable} object if successful.
      */
-    public Single<Void> getGlobalAndLocalQueryNullAsync(String localStringPath, String pathItemStringPath) {
+    public Completable getGlobalAndLocalQueryNullAsync(String localStringPath, String pathItemStringPath) {
         return getGlobalAndLocalQueryNullWithRestResponseAsync(localStringPath, pathItemStringPath)
-            .map(new Func1<RestResponse<Void, Void>, Void>() { public Void call(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
-        }
-
-    /**
-     * send globalStringPath=globalStringPath, pathItemStringPath='pathItemStringPath', localStringPath='localStringPath', globalStringQuery=null, pathItemStringQuery='pathItemStringQuery', localStringQuery=null.
-     *
-     * @param localStringPath should contain value 'localStringPath'
-     * @param pathItemStringPath A string value 'pathItemStringPath' that appears in the path
-     * @param localStringQuery should contain null value
-     * @param pathItemStringQuery A string value 'pathItemStringQuery' that appears as a query parameter
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @throws ErrorException thrown if the request is rejected by server
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
-     * @return the void object if successful.
-     */
-    public void getGlobalAndLocalQueryNull(String localStringPath, String pathItemStringPath, String localStringQuery, String pathItemStringQuery) {
-        getGlobalAndLocalQueryNullAsync(localStringPath, pathItemStringPath, localStringQuery, pathItemStringQuery).toBlocking().value();
+            .toCompletable();
     }
 
     /**
      * send globalStringPath=globalStringPath, pathItemStringPath='pathItemStringPath', localStringPath='localStringPath', globalStringQuery=null, pathItemStringQuery='pathItemStringQuery', localStringQuery=null.
      *
-     * @param localStringPath should contain value 'localStringPath'
-     * @param pathItemStringPath A string value 'pathItemStringPath' that appears in the path
-     * @param localStringQuery should contain null value
-     * @param pathItemStringQuery A string value 'pathItemStringQuery' that appears as a query parameter
-     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceFuture} object
+     * @param localStringPath should contain value 'localStringPath'.
+     * @param pathItemStringPath A string value 'pathItemStringPath' that appears in the path.
+     * @param localStringQuery should contain null value.
+     * @param pathItemStringQuery A string value 'pathItemStringQuery' that appears as a query parameter.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
-    public ServiceFuture<Void> getGlobalAndLocalQueryNullAsync(String localStringPath, String pathItemStringPath, String localStringQuery, String pathItemStringQuery, ServiceCallback<Void> serviceCallback) {
+    public void getGlobalAndLocalQueryNull(String localStringPath, String pathItemStringPath, String localStringQuery, String pathItemStringQuery) {
+        getGlobalAndLocalQueryNullAsync(localStringPath, pathItemStringPath, localStringQuery, pathItemStringQuery).blockingAwait();
+    }
+
+    /**
+     * send globalStringPath=globalStringPath, pathItemStringPath='pathItemStringPath', localStringPath='localStringPath', globalStringQuery=null, pathItemStringQuery='pathItemStringQuery', localStringQuery=null.
+     *
+     * @param localStringPath should contain value 'localStringPath'.
+     * @param pathItemStringPath A string value 'pathItemStringPath' that appears in the path.
+     * @param localStringQuery should contain null value.
+     * @param pathItemStringQuery A string value 'pathItemStringQuery' that appears as a query parameter.
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link ServiceFuture&lt;Void&gt;} object.
+     */
+    public ServiceFuture<Void> getGlobalAndLocalQueryNullAsync(String localStringPath, String pathItemStringPath, String localStringQuery, String pathItemStringQuery, final ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(getGlobalAndLocalQueryNullAsync(localStringPath, pathItemStringPath, localStringQuery, pathItemStringQuery), serviceCallback);
     }
 
     /**
      * send globalStringPath=globalStringPath, pathItemStringPath='pathItemStringPath', localStringPath='localStringPath', globalStringQuery=null, pathItemStringQuery='pathItemStringQuery', localStringQuery=null.
      *
-     * @param localStringPath should contain value 'localStringPath'
-     * @param pathItemStringPath A string value 'pathItemStringPath' that appears in the path
-     * @param localStringQuery should contain null value
-     * @param pathItemStringQuery A string value 'pathItemStringQuery' that appears as a query parameter
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return a {@link Single} emitting the RestResponse<Void, Void> object
+     * @param localStringPath should contain value 'localStringPath'.
+     * @param pathItemStringPath A string value 'pathItemStringPath' that appears in the path.
+     * @param localStringQuery should contain null value.
+     * @param pathItemStringQuery A string value 'pathItemStringQuery' that appears as a query parameter.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
      */
     public Single<RestResponse<Void, Void>> getGlobalAndLocalQueryNullWithRestResponseAsync(String localStringPath, String pathItemStringPath, String localStringQuery, String pathItemStringQuery) {
         if (localStringPath == null) {
@@ -468,53 +461,51 @@ public class PathItemsImpl implements PathItems {
     /**
      * send globalStringPath=globalStringPath, pathItemStringPath='pathItemStringPath', localStringPath='localStringPath', globalStringQuery=null, pathItemStringQuery='pathItemStringQuery', localStringQuery=null.
      *
-     * @param localStringPath should contain value 'localStringPath'
-     * @param pathItemStringPath A string value 'pathItemStringPath' that appears in the path
-     * @param localStringQuery should contain null value
-     * @param pathItemStringQuery A string value 'pathItemStringQuery' that appears as a query parameter
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return a {@link Single} emitting the RestResponse<Void, Void> object
+     * @param localStringPath should contain value 'localStringPath'.
+     * @param pathItemStringPath A string value 'pathItemStringPath' that appears in the path.
+     * @param localStringQuery should contain null value.
+     * @param pathItemStringQuery A string value 'pathItemStringQuery' that appears as a query parameter.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link Completable} object if successful.
      */
-    public Single<Void> getGlobalAndLocalQueryNullAsync(String localStringPath, String pathItemStringPath, String localStringQuery, String pathItemStringQuery) {
+    public Completable getGlobalAndLocalQueryNullAsync(String localStringPath, String pathItemStringPath, String localStringQuery, String pathItemStringQuery) {
         return getGlobalAndLocalQueryNullWithRestResponseAsync(localStringPath, pathItemStringPath, localStringQuery, pathItemStringQuery)
-            .map(new Func1<RestResponse<Void, Void>, Void>() { public Void call(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
-        }
-
-
-    /**
-     * send globalStringPath='globalStringPath', pathItemStringPath='pathItemStringPath', localStringPath='localStringPath', globalStringQuery='globalStringQuery', pathItemStringQuery=null, localStringQuery=null.
-     *
-     * @param localStringPath should contain value 'localStringPath'
-     * @param pathItemStringPath A string value 'pathItemStringPath' that appears in the path
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @throws ErrorException thrown if the request is rejected by server
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
-     * @return the void object if successful.
-     */
-    public void getLocalPathItemQueryNull(String localStringPath, String pathItemStringPath) {
-        getLocalPathItemQueryNullAsync(localStringPath, pathItemStringPath).toBlocking().value();
+            .toCompletable();
     }
 
     /**
      * send globalStringPath='globalStringPath', pathItemStringPath='pathItemStringPath', localStringPath='localStringPath', globalStringQuery='globalStringQuery', pathItemStringQuery=null, localStringQuery=null.
      *
-     * @param localStringPath should contain value 'localStringPath'
-     * @param pathItemStringPath A string value 'pathItemStringPath' that appears in the path
-     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceFuture} object
+     * @param localStringPath should contain value 'localStringPath'.
+     * @param pathItemStringPath A string value 'pathItemStringPath' that appears in the path.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
-    public ServiceFuture<Void> getLocalPathItemQueryNullAsync(String localStringPath, String pathItemStringPath, ServiceCallback<Void> serviceCallback) {
+    public void getLocalPathItemQueryNull(String localStringPath, String pathItemStringPath) {
+        getLocalPathItemQueryNullAsync(localStringPath, pathItemStringPath).blockingAwait();
+    }
+
+    /**
+     * send globalStringPath='globalStringPath', pathItemStringPath='pathItemStringPath', localStringPath='localStringPath', globalStringQuery='globalStringQuery', pathItemStringQuery=null, localStringQuery=null.
+     *
+     * @param localStringPath should contain value 'localStringPath'.
+     * @param pathItemStringPath A string value 'pathItemStringPath' that appears in the path.
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link ServiceFuture&lt;Void&gt;} object.
+     */
+    public ServiceFuture<Void> getLocalPathItemQueryNullAsync(String localStringPath, String pathItemStringPath, final ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(getLocalPathItemQueryNullAsync(localStringPath, pathItemStringPath), serviceCallback);
     }
 
     /**
      * send globalStringPath='globalStringPath', pathItemStringPath='pathItemStringPath', localStringPath='localStringPath', globalStringQuery='globalStringQuery', pathItemStringQuery=null, localStringQuery=null.
      *
-     * @param localStringPath should contain value 'localStringPath'
-     * @param pathItemStringPath A string value 'pathItemStringPath' that appears in the path
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return a {@link Single} emitting the RestResponse<Void, Void> object
+     * @param localStringPath should contain value 'localStringPath'.
+     * @param pathItemStringPath A string value 'pathItemStringPath' that appears in the path.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
      */
     public Single<RestResponse<Void, Void>> getLocalPathItemQueryNullWithRestResponseAsync(String localStringPath, String pathItemStringPath) {
         if (localStringPath == null) {
@@ -534,56 +525,55 @@ public class PathItemsImpl implements PathItems {
     /**
      * send globalStringPath='globalStringPath', pathItemStringPath='pathItemStringPath', localStringPath='localStringPath', globalStringQuery='globalStringQuery', pathItemStringQuery=null, localStringQuery=null.
      *
-     * @param localStringPath should contain value 'localStringPath'
-     * @param pathItemStringPath A string value 'pathItemStringPath' that appears in the path
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return a {@link Single} emitting the RestResponse<Void, Void> object
+     * @param localStringPath should contain value 'localStringPath'.
+     * @param pathItemStringPath A string value 'pathItemStringPath' that appears in the path.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link Completable} object if successful.
      */
-    public Single<Void> getLocalPathItemQueryNullAsync(String localStringPath, String pathItemStringPath) {
+    public Completable getLocalPathItemQueryNullAsync(String localStringPath, String pathItemStringPath) {
         return getLocalPathItemQueryNullWithRestResponseAsync(localStringPath, pathItemStringPath)
-            .map(new Func1<RestResponse<Void, Void>, Void>() { public Void call(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
-        }
-
-    /**
-     * send globalStringPath='globalStringPath', pathItemStringPath='pathItemStringPath', localStringPath='localStringPath', globalStringQuery='globalStringQuery', pathItemStringQuery=null, localStringQuery=null.
-     *
-     * @param localStringPath should contain value 'localStringPath'
-     * @param pathItemStringPath A string value 'pathItemStringPath' that appears in the path
-     * @param localStringQuery should contain value null
-     * @param pathItemStringQuery should contain value null
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @throws ErrorException thrown if the request is rejected by server
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
-     * @return the void object if successful.
-     */
-    public void getLocalPathItemQueryNull(String localStringPath, String pathItemStringPath, String localStringQuery, String pathItemStringQuery) {
-        getLocalPathItemQueryNullAsync(localStringPath, pathItemStringPath, localStringQuery, pathItemStringQuery).toBlocking().value();
+            .toCompletable();
     }
 
     /**
      * send globalStringPath='globalStringPath', pathItemStringPath='pathItemStringPath', localStringPath='localStringPath', globalStringQuery='globalStringQuery', pathItemStringQuery=null, localStringQuery=null.
      *
-     * @param localStringPath should contain value 'localStringPath'
-     * @param pathItemStringPath A string value 'pathItemStringPath' that appears in the path
-     * @param localStringQuery should contain value null
-     * @param pathItemStringQuery should contain value null
-     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceFuture} object
+     * @param localStringPath should contain value 'localStringPath'.
+     * @param pathItemStringPath A string value 'pathItemStringPath' that appears in the path.
+     * @param localStringQuery should contain value null.
+     * @param pathItemStringQuery should contain value null.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
-    public ServiceFuture<Void> getLocalPathItemQueryNullAsync(String localStringPath, String pathItemStringPath, String localStringQuery, String pathItemStringQuery, ServiceCallback<Void> serviceCallback) {
+    public void getLocalPathItemQueryNull(String localStringPath, String pathItemStringPath, String localStringQuery, String pathItemStringQuery) {
+        getLocalPathItemQueryNullAsync(localStringPath, pathItemStringPath, localStringQuery, pathItemStringQuery).blockingAwait();
+    }
+
+    /**
+     * send globalStringPath='globalStringPath', pathItemStringPath='pathItemStringPath', localStringPath='localStringPath', globalStringQuery='globalStringQuery', pathItemStringQuery=null, localStringQuery=null.
+     *
+     * @param localStringPath should contain value 'localStringPath'.
+     * @param pathItemStringPath A string value 'pathItemStringPath' that appears in the path.
+     * @param localStringQuery should contain value null.
+     * @param pathItemStringQuery should contain value null.
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link ServiceFuture&lt;Void&gt;} object.
+     */
+    public ServiceFuture<Void> getLocalPathItemQueryNullAsync(String localStringPath, String pathItemStringPath, String localStringQuery, String pathItemStringQuery, final ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(getLocalPathItemQueryNullAsync(localStringPath, pathItemStringPath, localStringQuery, pathItemStringQuery), serviceCallback);
     }
 
     /**
      * send globalStringPath='globalStringPath', pathItemStringPath='pathItemStringPath', localStringPath='localStringPath', globalStringQuery='globalStringQuery', pathItemStringQuery=null, localStringQuery=null.
      *
-     * @param localStringPath should contain value 'localStringPath'
-     * @param pathItemStringPath A string value 'pathItemStringPath' that appears in the path
-     * @param localStringQuery should contain value null
-     * @param pathItemStringQuery should contain value null
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return a {@link Single} emitting the RestResponse<Void, Void> object
+     * @param localStringPath should contain value 'localStringPath'.
+     * @param pathItemStringPath A string value 'pathItemStringPath' that appears in the path.
+     * @param localStringQuery should contain value null.
+     * @param pathItemStringQuery should contain value null.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
      */
     public Single<RestResponse<Void, Void>> getLocalPathItemQueryNullWithRestResponseAsync(String localStringPath, String pathItemStringPath, String localStringQuery, String pathItemStringQuery) {
         if (localStringPath == null) {
@@ -601,17 +591,15 @@ public class PathItemsImpl implements PathItems {
     /**
      * send globalStringPath='globalStringPath', pathItemStringPath='pathItemStringPath', localStringPath='localStringPath', globalStringQuery='globalStringQuery', pathItemStringQuery=null, localStringQuery=null.
      *
-     * @param localStringPath should contain value 'localStringPath'
-     * @param pathItemStringPath A string value 'pathItemStringPath' that appears in the path
-     * @param localStringQuery should contain value null
-     * @param pathItemStringQuery should contain value null
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return a {@link Single} emitting the RestResponse<Void, Void> object
+     * @param localStringPath should contain value 'localStringPath'.
+     * @param pathItemStringPath A string value 'pathItemStringPath' that appears in the path.
+     * @param localStringQuery should contain value null.
+     * @param pathItemStringQuery should contain value null.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link Completable} object if successful.
      */
-    public Single<Void> getLocalPathItemQueryNullAsync(String localStringPath, String pathItemStringPath, String localStringQuery, String pathItemStringQuery) {
+    public Completable getLocalPathItemQueryNullAsync(String localStringPath, String pathItemStringPath, String localStringQuery, String pathItemStringQuery) {
         return getLocalPathItemQueryNullWithRestResponseAsync(localStringPath, pathItemStringPath, localStringQuery, pathItemStringQuery)
-            .map(new Func1<RestResponse<Void, Void>, Void>() { public Void call(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
-        }
-
-
+            .toCompletable();
+    }
 }

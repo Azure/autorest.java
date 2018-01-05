@@ -10,58 +10,44 @@
 
 package fixtures.custombaseurimoreoptions;
 
-import com.microsoft.rest.v2.RestClient;
-
 /**
  * The interface for AutoRestParameterizedCustomHostTestClient class.
  */
 public interface AutoRestParameterizedCustomHostTestClient {
     /**
-     * Gets the REST client.
-     *
-     * @return the {@link RestClient} object.
-    */
-    RestClient restClient();
-
-    /**
-     * The default base URL.
-     */
-    String DEFAULT_BASE_URL = "https://{vault}{secret}{dnsSuffix}";
-
-    /**
-     * Gets The subscription id with value 'test12'..
+     * Gets The subscription id with value 'test12'.
      *
      * @return the subscriptionId value.
      */
     String subscriptionId();
 
     /**
-     * Sets The subscription id with value 'test12'..
+     * Sets The subscription id with value 'test12'.
      *
      * @param subscriptionId the subscriptionId value.
-     * @return the service client itself
+     * @return the service client itself.
      */
     AutoRestParameterizedCustomHostTestClient withSubscriptionId(String subscriptionId);
 
     /**
-     * Gets A string value that is used as a global part of the parameterized host. Default value 'host'..
+     * Gets A string value that is used as a global part of the parameterized host. Default value 'host'.
      *
      * @return the dnsSuffix value.
      */
     String dnsSuffix();
 
     /**
-     * Sets A string value that is used as a global part of the parameterized host. Default value 'host'..
+     * Sets A string value that is used as a global part of the parameterized host. Default value 'host'.
      *
      * @param dnsSuffix the dnsSuffix value.
-     * @return the service client itself
+     * @return the service client itself.
      */
     AutoRestParameterizedCustomHostTestClient withDnsSuffix(String dnsSuffix);
 
     /**
      * Gets the Paths object to access its operations.
+     *
      * @return the Paths object.
      */
     Paths paths();
-
 }

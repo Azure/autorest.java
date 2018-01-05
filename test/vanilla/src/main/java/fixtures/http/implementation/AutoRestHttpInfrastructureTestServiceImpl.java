@@ -10,25 +10,22 @@
 
 package fixtures.http.implementation;
 
-import fixtures.http.AutoRestHttpInfrastructureTestService;
-import fixtures.http.HttpFailures;
-import fixtures.http.HttpSuccess;
-import fixtures.http.HttpRedirects;
-import fixtures.http.HttpClientFailures;
-import fixtures.http.HttpServerFailures;
-import fixtures.http.HttpRetrys;
-import fixtures.http.MultipleResponses;
 import com.microsoft.rest.v2.RestProxy;
-import com.microsoft.rest.v2.RestResponse;
 import com.microsoft.rest.v2.ServiceClient;
-import com.microsoft.rest.v2.RestClient;
-import rx.Single;
+import com.microsoft.rest.v2.http.HttpPipeline;
+import fixtures.http.AutoRestHttpInfrastructureTestService;
+import fixtures.http.HttpClientFailures;
+import fixtures.http.HttpFailures;
+import fixtures.http.HttpRedirects;
+import fixtures.http.HttpRetrys;
+import fixtures.http.HttpServerFailures;
+import fixtures.http.HttpSuccess;
+import fixtures.http.MultipleResponses;
 
 /**
- * Initializes a new instance of the AutoRestHttpInfrastructureTestService class.
+ * Initializes a new instance of the AutoRestHttpInfrastructureTestService type.
  */
 public class AutoRestHttpInfrastructureTestServiceImpl extends ServiceClient implements AutoRestHttpInfrastructureTestService {
-
     /**
      * The HttpFailures object to access its operations.
      */
@@ -36,6 +33,7 @@ public class AutoRestHttpInfrastructureTestServiceImpl extends ServiceClient imp
 
     /**
      * Gets the HttpFailures object to access its operations.
+     *
      * @return the HttpFailures object.
      */
     public HttpFailures httpFailures() {
@@ -49,6 +47,7 @@ public class AutoRestHttpInfrastructureTestServiceImpl extends ServiceClient imp
 
     /**
      * Gets the HttpSuccess object to access its operations.
+     *
      * @return the HttpSuccess object.
      */
     public HttpSuccess httpSuccess() {
@@ -62,6 +61,7 @@ public class AutoRestHttpInfrastructureTestServiceImpl extends ServiceClient imp
 
     /**
      * Gets the HttpRedirects object to access its operations.
+     *
      * @return the HttpRedirects object.
      */
     public HttpRedirects httpRedirects() {
@@ -75,6 +75,7 @@ public class AutoRestHttpInfrastructureTestServiceImpl extends ServiceClient imp
 
     /**
      * Gets the HttpClientFailures object to access its operations.
+     *
      * @return the HttpClientFailures object.
      */
     public HttpClientFailures httpClientFailures() {
@@ -88,6 +89,7 @@ public class AutoRestHttpInfrastructureTestServiceImpl extends ServiceClient imp
 
     /**
      * Gets the HttpServerFailures object to access its operations.
+     *
      * @return the HttpServerFailures object.
      */
     public HttpServerFailures httpServerFailures() {
@@ -101,6 +103,7 @@ public class AutoRestHttpInfrastructureTestServiceImpl extends ServiceClient imp
 
     /**
      * Gets the HttpRetrys object to access its operations.
+     *
      * @return the HttpRetrys object.
      */
     public HttpRetrys httpRetrys() {
@@ -114,6 +117,7 @@ public class AutoRestHttpInfrastructureTestServiceImpl extends ServiceClient imp
 
     /**
      * Gets the MultipleResponses object to access its operations.
+     *
      * @return the MultipleResponses object.
      */
     public MultipleResponses multipleResponses() {
@@ -122,34 +126,18 @@ public class AutoRestHttpInfrastructureTestServiceImpl extends ServiceClient imp
 
     /**
      * Initializes an instance of AutoRestHttpInfrastructureTestService client.
-     *
-     * @param baseUrl the base URL of the host
-     */
-    public AutoRestHttpInfrastructureTestServiceImpl(String baseUrl) {
-        super(baseUrl);
-        initialize();
-    }
-
-    /**
-     * Initializes an instance of AutoRestHttpInfrastructureTestService client.
-     *
      */
     public AutoRestHttpInfrastructureTestServiceImpl() {
-        this("http://localhost");
-        initialize();
+        this(RestProxy.createDefaultPipeline());
     }
 
     /**
      * Initializes an instance of AutoRestHttpInfrastructureTestService client.
      *
-     * @param restClient the REST client containing pre-configured settings
+     * @param httpPipeline The HTTP pipeline to send requests through.
      */
-    public AutoRestHttpInfrastructureTestServiceImpl(RestClient restClient) {
-        super(restClient);
-        initialize();
-    }
-
-    private void initialize() {
+    public AutoRestHttpInfrastructureTestServiceImpl(HttpPipeline httpPipeline) {
+        super(httpPipeline);
         this.httpFailures = new HttpFailuresImpl(this);
         this.httpSuccess = new HttpSuccessImpl(this);
         this.httpRedirects = new HttpRedirectsImpl(this);

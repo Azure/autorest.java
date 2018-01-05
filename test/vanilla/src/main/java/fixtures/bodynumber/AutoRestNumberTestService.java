@@ -10,28 +10,14 @@
 
 package fixtures.bodynumber;
 
-import com.microsoft.rest.v2.RestClient;
-
 /**
  * The interface for AutoRestNumberTestService class.
  */
 public interface AutoRestNumberTestService {
     /**
-     * Gets the REST client.
-     *
-     * @return the {@link RestClient} object.
-    */
-    RestClient restClient();
-
-    /**
-     * The default base URL.
-     */
-    String DEFAULT_BASE_URL = "https://localhost";
-
-    /**
      * Gets the Numbers object to access its operations.
+     *
      * @return the Numbers object.
      */
     Numbers numbers();
-
 }

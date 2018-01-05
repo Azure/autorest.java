@@ -10,20 +10,19 @@
 
 package fixtures.custombaseurimoreoptions.implementation;
 
+import com.microsoft.rest.v2.RestProxy;
+import com.microsoft.rest.v2.ServiceClient;
+import com.microsoft.rest.v2.http.HttpPipeline;
 import fixtures.custombaseurimoreoptions.AutoRestParameterizedCustomHostTestClient;
 import fixtures.custombaseurimoreoptions.Paths;
-import com.microsoft.rest.v2.RestProxy;
-import com.microsoft.rest.v2.RestResponse;
-import com.microsoft.rest.v2.ServiceClient;
-import com.microsoft.rest.v2.RestClient;
-import rx.Single;
 
 /**
- * Initializes a new instance of the AutoRestParameterizedCustomHostTestClient class.
+ * Initializes a new instance of the AutoRestParameterizedCustomHostTestClient type.
  */
 public class AutoRestParameterizedCustomHostTestClientImpl extends ServiceClient implements AutoRestParameterizedCustomHostTestClient {
-
-    /** The subscription id with value 'test12'. */
+    /**
+     * The subscription id with value 'test12'.
+     */
     private String subscriptionId;
 
     /**
@@ -39,14 +38,16 @@ public class AutoRestParameterizedCustomHostTestClientImpl extends ServiceClient
      * Sets The subscription id with value 'test12'.
      *
      * @param subscriptionId the subscriptionId value.
-     * @return the service client itself
+     * @return the service client itself.
      */
     public AutoRestParameterizedCustomHostTestClientImpl withSubscriptionId(String subscriptionId) {
         this.subscriptionId = subscriptionId;
         return this;
     }
 
-    /** A string value that is used as a global part of the parameterized host. Default value 'host'. */
+    /**
+     * A string value that is used as a global part of the parameterized host. Default value 'host'.
+     */
     private String dnsSuffix;
 
     /**
@@ -62,7 +63,7 @@ public class AutoRestParameterizedCustomHostTestClientImpl extends ServiceClient
      * Sets A string value that is used as a global part of the parameterized host. Default value 'host'.
      *
      * @param dnsSuffix the dnsSuffix value.
-     * @return the service client itself
+     * @return the service client itself.
      */
     public AutoRestParameterizedCustomHostTestClientImpl withDnsSuffix(String dnsSuffix) {
         this.dnsSuffix = dnsSuffix;
@@ -76,6 +77,7 @@ public class AutoRestParameterizedCustomHostTestClientImpl extends ServiceClient
 
     /**
      * Gets the Paths object to access its operations.
+     *
      * @return the Paths object.
      */
     public Paths paths() {
@@ -84,34 +86,18 @@ public class AutoRestParameterizedCustomHostTestClientImpl extends ServiceClient
 
     /**
      * Initializes an instance of AutoRestParameterizedCustomHostTestClient client.
-     *
-     * @param baseUrl the base URL of the host
-     */
-    private AutoRestParameterizedCustomHostTestClientImpl(String baseUrl) {
-        super(baseUrl);
-        initialize();
-    }
-
-    /**
-     * Initializes an instance of AutoRestParameterizedCustomHostTestClient client.
-     *
      */
     public AutoRestParameterizedCustomHostTestClientImpl() {
-        this("https://{vault}{secret}{dnsSuffix}");
-        initialize();
+        this(RestProxy.createDefaultPipeline());
     }
 
     /**
      * Initializes an instance of AutoRestParameterizedCustomHostTestClient client.
      *
-     * @param restClient the REST client containing pre-configured settings
+     * @param httpPipeline The HTTP pipeline to send requests through.
      */
-    public AutoRestParameterizedCustomHostTestClientImpl(RestClient restClient) {
-        super(restClient);
-        initialize();
-    }
-
-    private void initialize() {
+    public AutoRestParameterizedCustomHostTestClientImpl(HttpPipeline httpPipeline) {
+        super(httpPipeline);
         this.dnsSuffix = "host";
         this.paths = new PathsImpl(this);
     }

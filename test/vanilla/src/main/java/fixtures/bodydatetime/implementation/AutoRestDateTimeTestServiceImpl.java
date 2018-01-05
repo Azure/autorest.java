@@ -10,19 +10,16 @@
 
 package fixtures.bodydatetime.implementation;
 
+import com.microsoft.rest.v2.RestProxy;
+import com.microsoft.rest.v2.ServiceClient;
+import com.microsoft.rest.v2.http.HttpPipeline;
 import fixtures.bodydatetime.AutoRestDateTimeTestService;
 import fixtures.bodydatetime.Datetimes;
-import com.microsoft.rest.v2.RestProxy;
-import com.microsoft.rest.v2.RestResponse;
-import com.microsoft.rest.v2.ServiceClient;
-import com.microsoft.rest.v2.RestClient;
-import rx.Single;
 
 /**
- * Initializes a new instance of the AutoRestDateTimeTestService class.
+ * Initializes a new instance of the AutoRestDateTimeTestService type.
  */
 public class AutoRestDateTimeTestServiceImpl extends ServiceClient implements AutoRestDateTimeTestService {
-
     /**
      * The Datetimes object to access its operations.
      */
@@ -30,6 +27,7 @@ public class AutoRestDateTimeTestServiceImpl extends ServiceClient implements Au
 
     /**
      * Gets the Datetimes object to access its operations.
+     *
      * @return the Datetimes object.
      */
     public Datetimes datetimes() {
@@ -38,34 +36,18 @@ public class AutoRestDateTimeTestServiceImpl extends ServiceClient implements Au
 
     /**
      * Initializes an instance of AutoRestDateTimeTestService client.
-     *
-     * @param baseUrl the base URL of the host
-     */
-    public AutoRestDateTimeTestServiceImpl(String baseUrl) {
-        super(baseUrl);
-        initialize();
-    }
-
-    /**
-     * Initializes an instance of AutoRestDateTimeTestService client.
-     *
      */
     public AutoRestDateTimeTestServiceImpl() {
-        this("https://localhost");
-        initialize();
+        this(RestProxy.createDefaultPipeline());
     }
 
     /**
      * Initializes an instance of AutoRestDateTimeTestService client.
      *
-     * @param restClient the REST client containing pre-configured settings
+     * @param httpPipeline The HTTP pipeline to send requests through.
      */
-    public AutoRestDateTimeTestServiceImpl(RestClient restClient) {
-        super(restClient);
-        initialize();
-    }
-
-    private void initialize() {
+    public AutoRestDateTimeTestServiceImpl(HttpPipeline httpPipeline) {
+        super(httpPipeline);
         this.datetimes = new DatetimesImpl(this);
     }
 }

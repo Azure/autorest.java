@@ -10,21 +10,20 @@
 
 package fixtures.requiredoptional.implementation;
 
-import fixtures.requiredoptional.AutoRestRequiredOptionalTestService;
-import fixtures.requiredoptional.Implicits;
-import fixtures.requiredoptional.Explicits;
 import com.microsoft.rest.v2.RestProxy;
-import com.microsoft.rest.v2.RestResponse;
 import com.microsoft.rest.v2.ServiceClient;
-import com.microsoft.rest.v2.RestClient;
-import rx.Single;
+import com.microsoft.rest.v2.http.HttpPipeline;
+import fixtures.requiredoptional.AutoRestRequiredOptionalTestService;
+import fixtures.requiredoptional.Explicits;
+import fixtures.requiredoptional.Implicits;
 
 /**
- * Initializes a new instance of the AutoRestRequiredOptionalTestService class.
+ * Initializes a new instance of the AutoRestRequiredOptionalTestService type.
  */
 public class AutoRestRequiredOptionalTestServiceImpl extends ServiceClient implements AutoRestRequiredOptionalTestService {
-
-    /** number of items to skip. */
+    /**
+     * number of items to skip.
+     */
     private String requiredGlobalPath;
 
     /**
@@ -40,14 +39,16 @@ public class AutoRestRequiredOptionalTestServiceImpl extends ServiceClient imple
      * Sets number of items to skip.
      *
      * @param requiredGlobalPath the requiredGlobalPath value.
-     * @return the service client itself
+     * @return the service client itself.
      */
     public AutoRestRequiredOptionalTestServiceImpl withRequiredGlobalPath(String requiredGlobalPath) {
         this.requiredGlobalPath = requiredGlobalPath;
         return this;
     }
 
-    /** number of items to skip. */
+    /**
+     * number of items to skip.
+     */
     private String requiredGlobalQuery;
 
     /**
@@ -63,14 +64,16 @@ public class AutoRestRequiredOptionalTestServiceImpl extends ServiceClient imple
      * Sets number of items to skip.
      *
      * @param requiredGlobalQuery the requiredGlobalQuery value.
-     * @return the service client itself
+     * @return the service client itself.
      */
     public AutoRestRequiredOptionalTestServiceImpl withRequiredGlobalQuery(String requiredGlobalQuery) {
         this.requiredGlobalQuery = requiredGlobalQuery;
         return this;
     }
 
-    /** number of items to skip. */
+    /**
+     * number of items to skip.
+     */
     private int optionalGlobalQuery;
 
     /**
@@ -86,7 +89,7 @@ public class AutoRestRequiredOptionalTestServiceImpl extends ServiceClient imple
      * Sets number of items to skip.
      *
      * @param optionalGlobalQuery the optionalGlobalQuery value.
-     * @return the service client itself
+     * @return the service client itself.
      */
     public AutoRestRequiredOptionalTestServiceImpl withOptionalGlobalQuery(int optionalGlobalQuery) {
         this.optionalGlobalQuery = optionalGlobalQuery;
@@ -100,6 +103,7 @@ public class AutoRestRequiredOptionalTestServiceImpl extends ServiceClient imple
 
     /**
      * Gets the Implicits object to access its operations.
+     *
      * @return the Implicits object.
      */
     public Implicits implicits() {
@@ -113,6 +117,7 @@ public class AutoRestRequiredOptionalTestServiceImpl extends ServiceClient imple
 
     /**
      * Gets the Explicits object to access its operations.
+     *
      * @return the Explicits object.
      */
     public Explicits explicits() {
@@ -121,34 +126,18 @@ public class AutoRestRequiredOptionalTestServiceImpl extends ServiceClient imple
 
     /**
      * Initializes an instance of AutoRestRequiredOptionalTestService client.
-     *
-     * @param baseUrl the base URL of the host
-     */
-    public AutoRestRequiredOptionalTestServiceImpl(String baseUrl) {
-        super(baseUrl);
-        initialize();
-    }
-
-    /**
-     * Initializes an instance of AutoRestRequiredOptionalTestService client.
-     *
      */
     public AutoRestRequiredOptionalTestServiceImpl() {
-        this("http://localhost");
-        initialize();
+        this(RestProxy.createDefaultPipeline());
     }
 
     /**
      * Initializes an instance of AutoRestRequiredOptionalTestService client.
      *
-     * @param restClient the REST client containing pre-configured settings
+     * @param httpPipeline The HTTP pipeline to send requests through.
      */
-    public AutoRestRequiredOptionalTestServiceImpl(RestClient restClient) {
-        super(restClient);
-        initialize();
-    }
-
-    private void initialize() {
+    public AutoRestRequiredOptionalTestServiceImpl(HttpPipeline httpPipeline) {
+        super(httpPipeline);
         this.implicits = new ImplicitsImpl(this);
         this.explicits = new ExplicitsImpl(this);
     }

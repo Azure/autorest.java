@@ -1,43 +1,52 @@
 package fixtures.azurespecials;
 
+import com.microsoft.rest.v2.RestResponse;
 import com.microsoft.rest.v2.credentials.BasicAuthenticationCredentials;
-import org.junit.Assert;
+import com.microsoft.rest.v2.http.HttpPipeline;
+import com.microsoft.rest.v2.policy.CredentialsPolicy;
+import com.microsoft.rest.v2.policy.PortPolicy;
+import com.microsoft.rest.v2.policy.ProtocolPolicy;
 import org.junit.BeforeClass;
 import org.junit.Ignore;
 import org.junit.Test;
 
 import fixtures.azurespecials.implementation.AutoRestAzureSpecialParametersTestClientImpl;
 
-@Ignore("RestProxy doesn't currently support response status or headers")
+import static org.junit.Assert.assertEquals;
+
 public class ApiVersionDefaultTests {
     private static AutoRestAzureSpecialParametersTestClientImpl client;
 
     @BeforeClass
     public static void setup() {
-        client = new AutoRestAzureSpecialParametersTestClientImpl("http://localhost:3000", new BasicAuthenticationCredentials(null, null));
+        final HttpPipeline httpPipeline = HttpPipeline.build(
+                new ProtocolPolicy.Factory("http"),
+                new PortPolicy.Factory(3000),
+                new CredentialsPolicy.Factory(new BasicAuthenticationCredentials(null, null)));
+        client = new AutoRestAzureSpecialParametersTestClientImpl(httpPipeline);
     }
 
     @Test
     public void getMethodGlobalValid() throws Exception {
-        Void response = client.apiVersionDefaults().getMethodGlobalValidAsync().toBlocking().value();
-//        Assert.assertEquals(200, response.response().code());
+        RestResponse<Void, Void> response = client.apiVersionDefaults().getMethodGlobalValidWithRestResponseAsync().blockingGet();
+        assertEquals(200, response.statusCode());
     }
 
     @Test
     public void getMethodGlobalNotProvidedValid() throws Exception {
-        Void response = client.apiVersionDefaults().getMethodGlobalNotProvidedValidAsync().toBlocking().value();
-//        Assert.assertEquals(200, response.response().code());
+        RestResponse<Void, Void> response = client.apiVersionDefaults().getMethodGlobalNotProvidedValidWithRestResponseAsync().blockingGet();
+        assertEquals(200, response.statusCode());
     }
 
     @Test
     public void getPathGlobalValid() throws Exception {
-        Void response = client.apiVersionDefaults().getPathGlobalValidAsync().toBlocking().value();
-//        Assert.assertEquals(200, response.response().code());
+        RestResponse<Void, Void> response = client.apiVersionDefaults().getPathGlobalValidWithRestResponseAsync().blockingGet();
+        assertEquals(200, response.statusCode());
     }
 
     @Test
     public void getSwaggerGlobalValid() throws Exception {
-        Void response = client.apiVersionDefaults().getSwaggerGlobalValidAsync().toBlocking().value();
-//        Assert.assertEquals(200, response.response().code());
+        RestResponse<Void, Void> response = client.apiVersionDefaults().getSwaggerGlobalValidWithRestResponseAsync().blockingGet();
+        assertEquals(200, response.statusCode());
     }
 }

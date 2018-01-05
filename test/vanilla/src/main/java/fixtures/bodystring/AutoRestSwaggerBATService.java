@@ -10,34 +10,21 @@
 
 package fixtures.bodystring;
 
-import com.microsoft.rest.v2.RestClient;
-
 /**
  * The interface for AutoRestSwaggerBATService class.
  */
 public interface AutoRestSwaggerBATService {
     /**
-     * Gets the REST client.
-     *
-     * @return the {@link RestClient} object.
-    */
-    RestClient restClient();
-
-    /**
-     * The default base URL.
-     */
-    String DEFAULT_BASE_URL = "http://localhost";
-
-    /**
      * Gets the Strings object to access its operations.
+     *
      * @return the Strings object.
      */
     Strings strings();
 
     /**
      * Gets the Enums object to access its operations.
+     *
      * @return the Enums object.
      */
     Enums enums();
-
 }
