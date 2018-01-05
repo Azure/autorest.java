@@ -215,16 +215,6 @@ namespace AutoRest.Java
             Line($"}}");
         }
 
-        public void BlockStatement(string text, Action<JavaBlock> bodyAction)
-        {
-            Line($"{text} {{");
-            Indent(() =>
-            {
-                bodyAction.Invoke(new JavaBlock(this));
-            });
-            Line($"}};");
-        }
-
         public void Import(params string[] imports)
         {
             Import((IEnumerable<string>)imports);
@@ -245,83 +235,64 @@ namespace AutoRest.Java
                 Line();
             }
         }
-
-        public void SingleLineSlashStarComment(string text)
+        
+        public void LineComment(string text)
         {
-            Line($"/** {text} */");
+            LineComment(comment =>
+            {
+                comment.Line(text);
+            });
         }
 
-        public void SingleLineSlashSlashComment(string text)
+        public void LineComment(Action<JavaLineComment> commentAction)
         {
-            Line($"// {text}");
+            AddToPrefix("// ");
+            commentAction.Invoke(new JavaLineComment(this));
+            RemoveFromPrefix("// ");
         }
 
-        public void SingleLineComment(string text)
+        public void LineComment(int wordWrapWidth, Action<JavaLineComment> commentAction)
         {
-            SingleLineSlashStarComment(text);
+            LineComment((comment) =>
+            {
+                WithWordWrap(wordWrapWidth, () =>
+                {
+                    commentAction.Invoke(new JavaLineComment(this));
+                });
+            });
         }
 
-        public void MultipleLineSlashStarComment(Action<JavaMultipleLineComment> commentAction)
+        public void JavadocComment(string text)
+        {
+            JavadocComment(comment =>
+            {
+                comment.Description(text);
+            });
+        }
+
+        public void JavadocComment(Action<JavaJavadocComment> commentAction)
         {
             Line("/**");
             AddToPrefix(" * ");
-            commentAction.Invoke(new JavaMultipleLineComment(this));
+            commentAction.Invoke(new JavaJavadocComment(this));
             RemoveFromPrefix(" * ");
             Line(" */");
         }
 
-        public void MultipleLineSlashSlashComment(Action<JavaMultipleLineComment> commentAction)
+        public void JavadocComment(int wordWrapWidth, Action<JavaJavadocComment> commentAction)
         {
-            AddToPrefix("// ");
-            commentAction.Invoke(new JavaMultipleLineComment(this));
-            RemoveFromPrefix("// ");
-        }
-
-        public void MultipleLineComment(Action<JavaMultipleLineComment> commentAction)
-        {
-            MultipleLineSlashStarComment(commentAction);
-        }
-
-        public void WordWrappedMultipleLineSlashStarComment(int wordWrapWidth, Action<JavaMultipleLineComment> commentAction)
-        {
-            MultipleLineComment((comment) =>
+            JavadocComment((comment) =>
             {
                 WithWordWrap(wordWrapWidth, () =>
                 {
-                    commentAction.Invoke(new JavaMultipleLineComment(this));
+                    commentAction.Invoke(new JavaJavadocComment(this));
                 });
             });
-        }
-
-        public void WordWrappedMultipleLineSlashSlashComment(int wordWrapWidth, Action<JavaMultipleLineComment> commentAction)
-        {
-            MultipleLineSlashSlashComment((comment) =>
-            {
-                WithWordWrap(wordWrapWidth, () =>
-                {
-                    commentAction.Invoke(new JavaMultipleLineComment(this));
-                });
-            });
-        }
-
-        public void WordWrappedMultipleLineComment(int wordWrapWidth, Action<JavaMultipleLineComment> commentAction)
-        {
-            WordWrappedMultipleLineSlashStarComment(wordWrapWidth, commentAction);
         }
 
         public void Return(string text)
         {
             Line($"return {text};");
-        }
-
-        public void ReturnBlock(string text, Action<JavaBlock> bodyAction)
-        {
-            Line($"return {text} {{");
-            Indent(() =>
-            {
-                bodyAction.Invoke(new JavaBlock(this));
-            });
-            Line($"}};");
         }
 
         public void ReturnAnonymousClass(string anonymousClassDeclaration, Action<JavaClass> anonymousClassBlock)
@@ -436,20 +407,6 @@ namespace AutoRest.Java
             Indent(() =>
             {
                 ifAction.Invoke(new JavaBlock(this));
-            });
-            Text($"}}");
-
-            previousLineEndingPending = true;
-        }
-
-        public void ElseIf(string condition, Action<JavaBlock> elseIfAction)
-        {
-            previousLineEndingPending = false;
-
-            Line($" else if ({condition}) {{", addPrefix: false);
-            Indent(() =>
-            {
-                elseIfAction.Invoke(new JavaBlock(this));
             });
             Text($"}}");
 

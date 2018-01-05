@@ -11,57 +11,49 @@ namespace AutoRest.Java
             this.contents = contents;
         }
 
-        public JavaBlock Indent(Action indentAction)
+        public void Indent(Action indentAction)
         {
             contents.Indent(indentAction);
-            return this;
         }
 
-        public JavaBlock IncreaseIndent()
+        public void IncreaseIndent()
         {
             contents.IncreaseIndent();
-            return this;
         }
 
-        public JavaBlock DecreaseIndent()
+        public void DecreaseIndent()
         {
             contents.DecreaseIndent();
-            return this;
         }
 
-        public JavaBlock Line(string text, params object[] formattedArguments)
+        public void Line(string text, params object[] formattedArguments)
         {
             contents.Line(text, formattedArguments);
-            return this;
         }
 
-        public JavaBlock Line()
+        public void Line()
         {
             contents.Line();
-            return this;
         }
 
-        public JavaBlock Block(string text, Action<JavaBlock> bodyAction)
+        public void Block(string text, Action<JavaBlock> bodyAction)
         {
             contents.Block(text, bodyAction);
-            return this;
         }
 
-        public JavaBlock SingleLineComment(string text)
+        public void JavadocComment(string text)
         {
-            contents.SingleLineComment(text);
-            return this;
+            contents.JavadocComment(text);
         }
 
-        public void MultipleLineComment(Action<JavaMultipleLineComment> commentAction)
+        public void JavadocComment(Action<JavaJavadocComment> commentAction)
         {
-            contents.MultipleLineComment(commentAction);
+            contents.JavadocComment(commentAction);
         }
 
-        public JavaBlock Return(string text)
+        public void Return(string text)
         {
             contents.Return(text);
-            return this;
         }
 
         public void Annotation(params string[] annotations)
@@ -74,10 +66,10 @@ namespace AutoRest.Java
             contents.ReturnAnonymousClass(anonymousClassDeclaration, anonymousClassBlock);
         }
 
-        public JavaIfBlock<JavaBlock> If(string condition, Action<JavaBlock> ifAction)
+        public JavaIfBlock If(string condition, Action<JavaBlock> ifAction)
         {
             contents.If(condition, ifAction);
-            return new JavaIfBlock<JavaBlock>(this, contents);
+            return new JavaIfBlock(contents);
         }
     }
 }

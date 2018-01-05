@@ -17,10 +17,14 @@ import com.fasterxml.jackson.annotation.JsonValue;
  * Defines values for EnumConst.
  */
 public enum EnumConst {
-    /** Enum value constant_string_as_enum. */
+    /**
+     * Enum value constant_string_as_enum.
+     */
     CONSTANT_STRING_AS_ENUM("constant_string_as_enum");
 
-    /** The actual serialized value for a EnumConst instance. */
+    /**
+     * The actual serialized value for a EnumConst instance.
+     */
     private String value;
 
     EnumConst(String value) {

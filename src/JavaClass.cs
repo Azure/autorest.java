@@ -61,13 +61,6 @@ namespace AutoRest.Java
             addNewLine = true;
         }
 
-        public void ProtectedMethod(string methodSignature, Action<JavaBlock> method)
-        {
-            AddExpectedNewLine();
-            contents.Block($"protected {methodSignature}", method);
-            addNewLine = true;
-        }
-
         public void PrivateMethod(string methodSignature, Action<JavaBlock> method)
         {
             AddExpectedNewLine();
@@ -103,24 +96,22 @@ namespace AutoRest.Java
             addNewLine = true;
         }
 
-        public void MultipleLineComment(string description)
-        {
-            MultipleLineComment(comment =>
-            {
-                comment.Description(description);
-            });
-        }
-
-        public void MultipleLineComment(Action<JavaMultipleLineComment> commentAction)
+        public void JavadocComment(string description)
         {
             AddExpectedNewLine();
-            contents.MultipleLineComment(commentAction);
+            contents.JavadocComment(description);
         }
 
-        public void WordWrappedMultipleLineComment(int wordWrapWidth, Action<JavaMultipleLineComment> commentAction)
+        public void JavadocComment(Action<JavaJavadocComment> commentAction)
         {
             AddExpectedNewLine();
-            contents.WordWrappedMultipleLineComment(wordWrapWidth, commentAction);
+            contents.JavadocComment(commentAction);
+        }
+
+        public void JavadocComment(int wordWrapWidth, Action<JavaJavadocComment> commentAction)
+        {
+            AddExpectedNewLine();
+            contents.JavadocComment(wordWrapWidth, commentAction);
         }
 
         public void Annotation(params string[] annotations)
