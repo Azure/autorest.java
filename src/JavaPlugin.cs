@@ -8,7 +8,7 @@ using AutoRest.Core.Model;
 
 namespace AutoRest.Java
 {
-    public sealed class PluginJv : Plugin<IGeneratorSettings, CodeModelTransformer<CodeModel>, JavaCodeGenerator, CodeNamerJv, CodeModel>
+    public sealed class JavaPlugin : Plugin<IGeneratorSettings, CodeModelTransformer<CodeModel>, JavaCodeGenerator, JavaCodeNamer, CodeModel>
     {
     }
 }
