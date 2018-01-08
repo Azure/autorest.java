@@ -1327,34 +1327,33 @@ namespace AutoRest.Java
 
             if (modelType.BaseIsPolymorphic)
             {
-                javaFile.Annotation($"JsonTypeInfo(use = JsonTypeInfo.Id.NAME, include = JsonTypeInfo.As.PROPERTY, property = \"{modelType.BasePolymorphicDiscriminator}\")");
+                List<CompositeType> types = CompositeTypeSubTypes(modelType).ToList();
+
+                javaFile.Annotation($"JsonTypeInfo(use = JsonTypeInfo.Id.NAME, include = JsonTypeInfo.As.PROPERTY, property = \"{modelType.BasePolymorphicDiscriminator}\"{(types.Any() ? $", defaultImpl = {className}.class" : "")})");
                 javaFile.Annotation($"JsonTypeName(\"{modelType.SerializedName}\")");
 
-                List<CompositeType> types = CompositeTypeSubTypes(modelType).ToList();
                 if (types.Any())
                 {
-                    StringBuilder subTypeAnnotationBuilder = new StringBuilder();
-                    subTypeAnnotationBuilder.AppendLine("JsonSubTypes({");
-
-                    Func<CompositeType, bool, string> getSubTypeAnnotation = (CompositeType subType, bool isLast) =>
+                    javaFile.Line("@JsonSubTypes({");
+                    javaFile.Indent(() =>
                     {
-                        string subTypeAnnotation = $"@JsonSubTypes.Type(name = \"{subType.SerializedName}\", value = {IModelTypeName(subType, settings)}.class)";
-                        if (!isLast)
+                        Func<CompositeType, bool, string> getSubTypeAnnotation = (CompositeType subType, bool isLast) =>
                         {
-                            subTypeAnnotation += ",";
+                            string subTypeAnnotation = $"@JsonSubTypes.Type(name = \"{subType.SerializedName}\", value = {IModelTypeName(subType, settings)}.class)";
+                            if (!isLast)
+                            {
+                                subTypeAnnotation += ",";
+                            }
+                            return subTypeAnnotation;
+                        };
+
+                        foreach (CompositeType subType in types.SkipLast(1))
+                        {
+                            javaFile.Line(getSubTypeAnnotation(subType, false));
                         }
-                        return subTypeAnnotation;
-                    };
-
-                    foreach (CompositeType subType in types.SkipLast(1))
-                    {
-                        subTypeAnnotationBuilder.AppendLine(getSubTypeAnnotation(subType, false));
-                    }
-                    subTypeAnnotationBuilder.AppendLine(getSubTypeAnnotation(types.Last(), true));
-
-                    subTypeAnnotationBuilder.Append("})");
-
-                    javaFile.Annotation(subTypeAnnotationBuilder.ToString());
+                        javaFile.Line(getSubTypeAnnotation(types.Last(), true));
+                    });
+                    javaFile.Line("})");
                 }
             }
             if (shouldGenerateXmlSerialization)

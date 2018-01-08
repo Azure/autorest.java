@@ -19,11 +19,11 @@ import java.util.List;
 /**
  * The Fish model.
  */
-@JsonTypeInfo(use = JsonTypeInfo.Id.NAME, include = JsonTypeInfo.As.PROPERTY, property = "fishtype")
+@JsonTypeInfo(use = JsonTypeInfo.Id.NAME, include = JsonTypeInfo.As.PROPERTY, property = "fishtype", defaultImpl = Fish.class)
 @JsonTypeName("Fish")
 @JsonSubTypes({
-@JsonSubTypes.Type(name = "salmon", value = Salmon.class),
-@JsonSubTypes.Type(name = "shark", value = Shark.class)
+    @JsonSubTypes.Type(name = "salmon", value = Salmon.class),
+    @JsonSubTypes.Type(name = "shark", value = Shark.class)
 })
 public class Fish {
     /**

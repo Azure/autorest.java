@@ -19,12 +19,12 @@ import org.joda.time.DateTime;
 /**
  * The Shark model.
  */
-@JsonTypeInfo(use = JsonTypeInfo.Id.NAME, include = JsonTypeInfo.As.PROPERTY, property = "fishtype")
+@JsonTypeInfo(use = JsonTypeInfo.Id.NAME, include = JsonTypeInfo.As.PROPERTY, property = "fishtype", defaultImpl = Shark.class)
 @JsonTypeName("shark")
 @JsonSubTypes({
-@JsonSubTypes.Type(name = "sawshark", value = Sawshark.class),
-@JsonSubTypes.Type(name = "goblin", value = Goblinshark.class),
-@JsonSubTypes.Type(name = "cookiecuttershark", value = Cookiecuttershark.class)
+    @JsonSubTypes.Type(name = "sawshark", value = Sawshark.class),
+    @JsonSubTypes.Type(name = "goblin", value = Goblinshark.class),
+    @JsonSubTypes.Type(name = "cookiecuttershark", value = Cookiecuttershark.class)
 })
 public class Shark extends Fish {
     /**

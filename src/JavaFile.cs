@@ -39,6 +39,11 @@ namespace AutoRest.Java
             Contents.Line();
         }
 
+        public void Indent(Action indentAction)
+        {
+            Contents.Indent(indentAction);
+        }
+
         public void Block(string text, Action<JavaBlock> bodyAction)
         {
             Contents.Block(text, bodyAction);
