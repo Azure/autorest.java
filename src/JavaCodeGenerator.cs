@@ -137,6 +137,8 @@ namespace AutoRest.Java
 
             TransformCodeModel(codeModel, javaSettings);
 
+            JavaCodeModel javaCodeModel = GetJavaCodeModel(codeModel, javaSettings);
+
             List<JavaFile> javaFiles = new List<JavaFile>();
             javaFiles.Add(GetServiceClientJavaFile(codeModel, javaSettings));
 
@@ -487,6 +489,11 @@ namespace AutoRest.Java
             }
 
             return pageClasses[keypair];
+        }
+
+        private static JavaCodeModel GetJavaCodeModel(CodeModel codeModel, JavaSettings settings)
+        {
+
         }
 
         private static JavaFile GetAzureServiceManagerJavaFile(CodeModel codeModel, JavaSettings settings)
