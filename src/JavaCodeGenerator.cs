@@ -132,78 +132,71 @@ namespace AutoRest.Java
                 FileHeaderText = autoRestSettings.Header,
                 MaximumJavadocCommentWidth = autoRestSettings.MaximumCommentColumns,
                 ServiceName = GetAutoRestSettingsServiceName(autoRestSettings),
+                Package = codeModel.Namespace.ToLowerInvariant(),
             };
 
             TransformCodeModel(codeModel, javaSettings);
 
-            IEnumerable<JavaFile> javaFiles = GetJavaFiles(codeModel, javaSettings);
-
-            IEnumerable<Task> writeJavaFileTasks = javaFiles.Select(WriteJavaFile);
-
-            return Task.WhenAll(writeJavaFileTasks);
-        }
-
-        private static IEnumerable<JavaFile> GetJavaFiles(CodeModel codeModel, JavaSettings settings)
-        {
-            yield return GetServiceClientJavaFile(codeModel, settings);
+            List<JavaFile> javaFiles = new List<JavaFile>();
+            javaFiles.Add(GetServiceClientJavaFile(codeModel, javaSettings));
 
             foreach (MethodGroup methodGroup in GetMethodGroups(codeModel))
             {
-                yield return GetMethodGroupClientJavaFile(codeModel, settings, methodGroup);
+                javaFiles.Add(GetMethodGroupClientJavaFile(codeModel, javaSettings, methodGroup));
             }
 
-            foreach (CompositeType modelType in GetModelTypes(codeModel, settings))
+            foreach (CompositeType modelType in GetModelTypes(codeModel, javaSettings))
             {
-                yield return GetModelJavaFile(codeModel, settings, modelType);
+                javaFiles.Add(GetModelJavaFile(codeModel, javaSettings, modelType));
             }
 
             foreach (EnumType enumType in codeModel.EnumTypes)
             {
-                yield return GetEnumJavaFile(codeModel, settings, enumType);
+                javaFiles.Add(GetEnumJavaFile(codeModel, javaSettings, enumType));
             }
 
-            foreach (SequenceType xmlWrapperSequenceType in GetXmlWrapperTypes(codeModel, settings))
+            foreach (SequenceType xmlWrapperSequenceType in GetXmlWrapperTypes(codeModel, javaSettings))
             {
-                yield return GetXmlWrapperJavaFile(codeModel, settings, xmlWrapperSequenceType);
+                javaFiles.Add(GetXmlWrapperJavaFile(codeModel, javaSettings, xmlWrapperSequenceType));
             }
 
-            foreach (CompositeType exceptionType in GetExceptionTypes(codeModel, settings))
+            foreach (CompositeType exceptionType in GetExceptionTypes(codeModel, javaSettings))
             {
-                yield return GetExceptionJavaFile(codeModel, settings, exceptionType);
+                javaFiles.Add(GetExceptionJavaFile(codeModel, javaSettings, exceptionType));
             }
 
             foreach (string subPackage in new[] { "", "implementation" })
             {
-                yield return GetPackageInfoJavaFiles(codeModel, settings, subPackage);
+                javaFiles.Add(GetPackageInfoJavaFiles(codeModel, javaSettings, subPackage));
             }
 
-            if (settings.IsAzureOrFluent)
+            if (javaSettings.IsAzureOrFluent)
             {
                 foreach (KeyValuePair<KeyValuePair<string, string>, string> pageClass in pageClasses)
                 {
-                    yield return GetPageJavaFile(codeModel, settings, pageClass);
+                    javaFiles.Add(GetPageJavaFile(codeModel, javaSettings, pageClass));
                 }
             }
 
-            if (!settings.IsFluent)
+            if (!javaSettings.IsFluent)
             {
-                yield return GetAzureServiceClientInterfaceJavaFile(codeModel, settings);
+                javaFiles.Add(GetAzureServiceClientInterfaceJavaFile(codeModel, javaSettings));
 
                 foreach (MethodGroup methodGroup in GetMethodGroups(codeModel))
                 {
-                    yield return GetMethodGroupClientInterfaceJavaFile(codeModel, settings, methodGroup);
+                    javaFiles.Add(GetMethodGroupClientInterfaceJavaFile(codeModel, javaSettings, methodGroup));
                 }
 
-                yield return GetPackageInfoJavaFiles(codeModel, settings, "models");
+                javaFiles.Add(GetPackageInfoJavaFiles(codeModel, javaSettings, "models"));
             }
             else
             {
-                if (settings.RegenerateManagers)
+                if (javaSettings.RegenerateManagers)
                 {
-                    yield return GetAzureServiceManagerJavaFile(codeModel, settings);
+                    javaFiles.Add(GetAzureServiceManagerJavaFile(codeModel, javaSettings));
                 }
 
-                if (settings.RegeneratePom)
+                if (javaSettings.RegeneratePom)
                 {
                     PomTemplate pomTemplate = new PomTemplate { Model = codeModel };
                     StringBuilder pomContentsBuilder = new StringBuilder();
@@ -211,13 +204,12 @@ namespace AutoRest.Java
                     {
                         pomTemplate.ExecuteAsync().GetAwaiter().GetResult();
                     }
-                    yield return new JavaFile("pom.xml", pomContentsBuilder.ToString());
+                    javaFiles.Add(new JavaFile("pom.xml", pomContentsBuilder.ToString()));
                 }
             }
-        }
 
-        private Task WriteJavaFile(JavaFile javaFile)
-            => Write(javaFile.Contents.ToString(), javaFile.FilePath);
+            return Task.WhenAll(javaFiles.Select(javaFile => Write(javaFile.Contents.ToString(), javaFile.FilePath)));
+        }
         
         private static CodeModel TransformCodeModel(CodeModel codeModel, JavaSettings settings)
         {
@@ -239,7 +231,7 @@ namespace AutoRest.Java
                 "period",   "stream",   "string",   "object", "header"
             });
 
-            if (!settings.IsAzure && !settings.IsFluent)
+            if (!settings.IsAzureOrFluent)
             {
                 SwaggerExtensions.NormalizeClientModel(codeModel);
             }
@@ -727,10 +719,10 @@ namespace AutoRest.Java
             JavaFile javaFile = GetJavaFileWithHeaderAndPackage(codeModel, implPackage, settings, className);
             javaFile.Import(GetIModelTypeImports(sequenceType, settings).Concat(new string[]
             {
-                                    "com.fasterxml.jackson.annotation.JsonCreator",
-                                    "com.fasterxml.jackson.annotation.JsonProperty",
-                                    "com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlProperty",
-                                    "com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlRootElement"
+                "com.fasterxml.jackson.annotation.JsonCreator",
+                "com.fasterxml.jackson.annotation.JsonProperty",
+                "com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlProperty",
+                "com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlRootElement"
             }));
             javaFile.Annotation($"JacksonXmlRootElement(localName = \"{xmlName}\")");
             javaFile.PublicClass(className, classBlock =>
@@ -777,13 +769,9 @@ namespace AutoRest.Java
             HashSet<string> imports = new HashSet<string>();
             if (!settings.IsFluent)
             {
-                string serviceClientInterfacePath = GetPackage(codeModel) + "." + GetServiceClientInterfaceName(codeModel);
+                string serviceClientInterfacePath = GetPackage(settings) + "." + GetServiceClientInterfaceName(codeModel);
                 imports.Add(serviceClientInterfacePath);
-
-                foreach (string methodGroupClientInterfacePath in GetMethodGroups(codeModel).Select(GetMethodGroupClientInterfacePath))
-                {
-                    imports.Add(methodGroupClientInterfacePath);
-                }
+                imports.AddRange(GetMethodGroups(codeModel).Select((MethodGroup methodGroup) => GetMethodGroupClientInterfacePath(methodGroup, settings)));
             }
             if (HasServiceClientCredentials(codeModel))
             {
@@ -1114,7 +1102,7 @@ namespace AutoRest.Java
             string title = codeModel.Name;
             string description = codeModel.Documentation;
 
-            string package = GetPackage(codeModel, subPackage);
+            string package = GetPackage(settings, subPackage);
             JavaFile javaFile = GetJavaFile(package, "package-info");
 
             if (!string.IsNullOrEmpty(settings.FileHeaderText))
@@ -1183,11 +1171,11 @@ namespace AutoRest.Java
                 }
                 else if (settings.IsFluent)
                 {
-                    imports.AddRange(propertyModelTypeImports.Where(c => !c.StartsWith(GetPackage(property.Parent.CodeModel), StringComparison.Ordinal) || c.EndsWith("Inner", StringComparison.Ordinal) ^ innerModelProperties.Contains(property)));
+                    imports.AddRange(propertyModelTypeImports.Where(c => !c.StartsWith(GetPackage(settings), StringComparison.Ordinal) || c.EndsWith("Inner", StringComparison.Ordinal) ^ innerModelProperties.Contains(property)));
                 }
                 else
                 {
-                    imports.AddRange(propertyModelTypeImports.Where(c => !c.StartsWith(GetPackage(property.Parent.CodeModel, "models"), StringComparison.OrdinalIgnoreCase)));
+                    imports.AddRange(propertyModelTypeImports.Where(c => !c.StartsWith(GetPackage(settings, "models"), StringComparison.OrdinalIgnoreCase)));
                 }
             }
 
@@ -1634,9 +1622,9 @@ namespace AutoRest.Java
             return javaFile;
         }
 
-        private static string GetPackage(CodeModel codeModel, params string[] packageSuffixes)
+        private static string GetPackage(JavaSettings settings, params string[] packageSuffixes)
         {
-            string package = codeModel.Namespace.ToLowerInvariant();
+            string package = settings.Package;
             if (packageSuffixes != null)
             {
                 foreach (string packageSuffix in packageSuffixes)
@@ -1681,7 +1669,7 @@ namespace AutoRest.Java
 
         private static JavaFile GetJavaFileWithHeaderAndPackage(CodeModel codeModel, string subPackage, JavaSettings settings, string fileNameWithoutExtension)
         {
-            string package = GetPackage(codeModel, subPackage);
+            string package = GetPackage(settings, subPackage);
             JavaFile javaFile = GetJavaFile(package, fileNameWithoutExtension);
 
             string headerComment = settings.FileHeaderText;
@@ -3613,7 +3601,7 @@ namespace AutoRest.Java
                 azureImplImports.Add("com.microsoft.rest.v2.RestResponse");
                 if (MethodGroupTypeString(methodGroup, settings) == GetMethodGroupClientInterfaceName(methodGroup))
                 {
-                    azureImplImports.Add(GetMethodGroupClientInterfacePath(methodGroup));
+                    azureImplImports.Add(GetMethodGroupClientInterfacePath(methodGroup, settings));
                 }
                 azureImplImports.AddRange(methodGroup.Methods.SelectMany(m => MethodImplImports(m, settings)));
                 azureImplImports.Add("com.microsoft.azure.v2.AzureProxy");
@@ -3645,7 +3633,7 @@ namespace AutoRest.Java
                 imports.Add("com.microsoft.rest.v2.RestResponse");
                 if (MethodGroupTypeString(methodGroup, settings) == GetMethodGroupClientInterfaceName(methodGroup))
                 {
-                    imports.Add(GetMethodGroupClientInterfacePath(methodGroup));
+                    imports.Add(GetMethodGroupClientInterfacePath(methodGroup, settings));
                 }
                 imports.AddRange(methodGroup.Methods.SelectMany(m => MethodImplImports(m, settings)));
                 imports.Add("com.microsoft.azure.v2.AzureProxy");
@@ -3659,7 +3647,7 @@ namespace AutoRest.Java
                 imports.Add("com.microsoft.rest.v2.RestResponse");
                 if (MethodGroupTypeString(methodGroup, settings) == GetMethodGroupClientInterfaceName(methodGroup))
                 {
-                    imports.Add(GetMethodGroupClientInterfacePath(methodGroup));
+                    imports.Add(GetMethodGroupClientInterfacePath(methodGroup, settings));
                 }
                 imports.AddRange(methodGroup.Methods.SelectMany(m => MethodImplImports(m, settings)));
                 result = imports;
@@ -3711,8 +3699,8 @@ namespace AutoRest.Java
             return result;
         }
 
-        private static string GetMethodGroupClientInterfacePath(MethodGroup methodGroup)
-            => GetPackage(methodGroup.CodeModel) + "." + GetMethodGroupClientInterfaceName(methodGroup);
+        private static string GetMethodGroupClientInterfacePath(MethodGroup methodGroup, JavaSettings settings)
+            => settings.Package + "." + GetMethodGroupClientInterfaceName(methodGroup);
 
         private static string MethodGroupTypeString(MethodGroup methodGroup, JavaSettings settings)
         {
@@ -3721,7 +3709,7 @@ namespace AutoRest.Java
                     .SelectMany(m => MethodImplImports(m, settings))
                     .Any(i => i.Split('.').LastOrDefault() == methodGroupClientInterfaceName))
             {
-                return GetMethodGroupClientInterfacePath(methodGroup);
+                return GetMethodGroupClientInterfacePath(methodGroup, settings);
             }
             return methodGroupClientInterfaceName;
         }
