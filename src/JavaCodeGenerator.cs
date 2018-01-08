@@ -7,6 +7,7 @@ using AutoRest.Core.Utilities;
 using AutoRest.Core.Utilities.Collections;
 using AutoRest.Extensions;
 using AutoRest.Extensions.Azure;
+using AutoRest.Java.Model;
 using AutoRest.Java.Templates;
 using Newtonsoft.Json.Linq;
 using System;
@@ -137,6 +138,8 @@ namespace AutoRest.Java
 
             TransformCodeModel(codeModel, javaSettings);
 
+            Service service = GetService(codeModel, javaSettings);
+
             List<JavaFile> javaFiles = new List<JavaFile>();
             javaFiles.Add(GetServiceClientJavaFile(codeModel, javaSettings));
 
@@ -150,9 +153,9 @@ namespace AutoRest.Java
                 javaFiles.Add(GetModelJavaFile(codeModel, javaSettings, modelType));
             }
 
-            foreach (EnumType enumType in codeModel.EnumTypes)
+            foreach (ServiceEnum serviceEnum in service.Enums)
             {
-                javaFiles.Add(GetEnumJavaFile(codeModel, javaSettings, enumType));
+                javaFiles.Add(GetEnumJavaFile(serviceEnum, javaSettings));
             }
 
             foreach (SequenceType xmlWrapperSequenceType in GetXmlWrapperTypes(codeModel, javaSettings))
@@ -160,9 +163,9 @@ namespace AutoRest.Java
                 javaFiles.Add(GetXmlWrapperJavaFile(codeModel, javaSettings, xmlWrapperSequenceType));
             }
 
-            foreach (CompositeType exceptionType in GetExceptionTypes(codeModel, javaSettings))
+            foreach (ServiceException exception in service.Exceptions)
             {
-                javaFiles.Add(GetExceptionJavaFile(codeModel, javaSettings, exceptionType));
+                javaFiles.Add(GetExceptionJavaFile(exception, javaSettings));
             }
 
             foreach (string subPackage in new[] { "", "implementation" })
@@ -489,6 +492,74 @@ namespace AutoRest.Java
             return pageClasses[keypair];
         }
 
+        private static Service GetService(CodeModel codeModel, JavaSettings settings)
+        {
+            // Get Service Enum Types.
+            List<ServiceEnum> enums = new List<ServiceEnum>();
+            string enumSubPackage = settings.IsFluent ? null : modelsPackage;
+            Func<char, bool> isUpper = new Func<char, bool>(c => c >= 'A' && c <= 'Z');
+            Func<char, bool> isLower = new Func<char, bool>(c => c >= 'a' && c <= 'z');
+            foreach (EnumType enumType in codeModel.EnumTypes)
+            {
+                string enumName = IModelTypeName(enumType, settings);
+                bool expandable = enumType.ModelAsString;
+
+                List<ServiceEnumValue> enumValues = new List<ServiceEnumValue>();
+                foreach (EnumValue enumValue in enumType.Values)
+                {
+                    string name = enumValue.MemberName;
+                    if (!string.IsNullOrWhiteSpace(name))
+                    {
+                        name = new Regex("[\\ -]+").Replace(name, "_");
+                        for (int i = 1; i < name.Length - 1; i++)
+                        {
+                            if (isUpper(name[i]))
+                            {
+                                if (name[i - 1] != '_' && isLower(name[i - 1]))
+                                {
+                                    name = name.Insert(i, "_");
+                                }
+                            }
+                        }
+                        name = name.ToUpperInvariant();
+                    }
+
+                    string value = enumValue.SerializedName;
+
+                    enumValues.Add(new ServiceEnumValue(name, value));
+                }
+
+                enums.Add(new ServiceEnum(enumName, enumSubPackage, expandable, enumValues));
+            }
+
+            // Get Service Exceptions
+            List<ServiceException> exceptions = new List<ServiceException>();
+            foreach (CompositeType exceptionType in codeModel.ErrorTypes)
+            {
+                string exceptionName = CompositeTypeExceptionTypeDefinitionName(exceptionType, settings);
+                string errorName = IModelTypeName(exceptionType, settings);
+                
+                // Skip any exceptions that are named "CloudErrorException" or have a body named
+                // "CloudError" because those types already exist in the runtime.
+                if (exceptionName != "CloudErrorException" && errorName != "CloudError")
+                {
+                    string exceptionSubPackage;
+                    if (settings.IsFluent)
+                    {
+                        exceptionSubPackage = innerModelCompositeType.Contains(exceptionType) ? ".implementation" : "";
+                    }
+                    else
+                    {
+                        exceptionSubPackage = modelsPackage;
+                    }
+
+                    exceptions.Add(new ServiceException(exceptionName, errorName, exceptionSubPackage));
+                }
+            }
+
+            return new Service(enums, exceptions);
+        }
+
         private static JavaFile GetAzureServiceManagerJavaFile(CodeModel codeModel, JavaSettings settings)
         {
             string serviceName = GetServiceName(settings, codeModel);
@@ -504,7 +575,7 @@ namespace AutoRest.Java
             int newMinorVersion = (patchVersion == 0 ? minorVersion : minorVersion + 1);
             string betaSinceVersion = "V" + versionParts[0] + "_" + newMinorVersion + "_0";
 
-            JavaFile javaFile = GetJavaFileWithHeaderAndPackage(codeModel, implPackage, settings, className);
+            JavaFile javaFile = GetJavaFileWithHeaderAndPackage(implPackage, settings, className);
 
             javaFile.Import(
                 "com.microsoft.azure.management.apigeneration.Beta",
@@ -609,7 +680,7 @@ namespace AutoRest.Java
             string className = pageClass.Value.ToPascalCase();
 
             string subPackage = (settings.IsFluent ? implPackage : modelsPackage);
-            JavaFile javaFile = GetJavaFileWithHeaderAndPackage(codeModel, subPackage, settings, className);
+            JavaFile javaFile = GetJavaFileWithHeaderAndPackage(subPackage, settings, className);
             javaFile.Import("com.fasterxml.jackson.annotation.JsonProperty",
                             "com.microsoft.azure.v2.Page",
                             "java.util.List");
@@ -716,7 +787,7 @@ namespace AutoRest.Java
             string xmlNameCamelCase = xmlName.ToCamelCase();
             string className = $"{xmlName.ToPascalCase()}Wrapper";
 
-            JavaFile javaFile = GetJavaFileWithHeaderAndPackage(codeModel, implPackage, settings, className);
+            JavaFile javaFile = GetJavaFileWithHeaderAndPackage(implPackage, settings, className);
             javaFile.Import(GetIModelTypeImports(sequenceType, settings).Concat(new string[]
             {
                 "com.fasterxml.jackson.annotation.JsonCreator",
@@ -753,7 +824,7 @@ namespace AutoRest.Java
         public static JavaFile GetServiceClientJavaFile(CodeModel codeModel, JavaSettings settings)
         {
             string serviceClientClassName = GetServiceClientClassName(codeModel);
-            JavaFile javaFile = GetJavaFileWithHeaderAndPackage(codeModel, implPackage, settings, serviceClientClassName);
+            JavaFile javaFile = GetJavaFileWithHeaderAndPackage(implPackage, settings, serviceClientClassName);
 
             string serviceClientClassDeclaration = $"{serviceClientClassName} extends ";
             if (settings.IsAzureOrFluent)
@@ -982,7 +1053,7 @@ namespace AutoRest.Java
         {
             string interfaceName = GetServiceClientInterfaceName(codeModel);
 
-            JavaFile javaFile = GetJavaFileWithHeaderAndPackage(codeModel, null, settings, interfaceName);
+            JavaFile javaFile = GetJavaFileWithHeaderAndPackage(null, settings, interfaceName);
 
             List<string> imports = GetServiceClientInterfaceImorts(codeModel, settings).ToList();
             if (settings.IsFluent)
@@ -1020,7 +1091,7 @@ namespace AutoRest.Java
         {
             string className = GetMethodGroupClientClassName(methodGroup, settings);
 
-            JavaFile javaFile = GetJavaFileWithHeaderAndPackage(codeModel, implPackage, settings, className);
+            JavaFile javaFile = GetJavaFileWithHeaderAndPackage(implPackage, settings, className);
             javaFile.Import(MethodGroupImplImports(methodGroup, settings));
 
             string methodGroupClientInterfaceName = GetMethodGroupClientInterfaceName(methodGroup);
@@ -1081,7 +1152,7 @@ namespace AutoRest.Java
         {
             string methodGroupClientInterfaceName = GetMethodGroupClientInterfaceName(methodGroup);
 
-            JavaFile javaFile = GetJavaFileWithHeaderAndPackage(codeModel, null, settings, methodGroupClientInterfaceName);
+            JavaFile javaFile = GetJavaFileWithHeaderAndPackage(null, settings, methodGroupClientInterfaceName);
 
             IEnumerable<string> imports = methodGroup.Methods.SelectMany(method => GetClientInterfaceMethodImports(method, settings));
             javaFile.Import(imports);
@@ -1156,7 +1227,7 @@ namespace AutoRest.Java
             bool shouldGenerateXmlSerialization = codeModel.ShouldGenerateXmlSerialization;
 
             string className = IModelTypeName(modelType, settings);
-            JavaFile javaFile = GetJavaFileWithHeaderAndPackage(codeModel, GetCompositeTypeModelsPackage(modelType, settings), settings, className);
+            JavaFile javaFile = GetJavaFileWithHeaderAndPackage(GetCompositeTypeModelsPackage(modelType, settings), settings, className);
 
             List<string> imports = new List<string>();
             IEnumerable<Property> compositeTypeProperties = GetCompositeTypeProperties(modelType, settings);
@@ -1447,77 +1518,57 @@ namespace AutoRest.Java
             return javaFile;
         }
 
-        public static IEnumerable<CompositeType> GetExceptionTypes(CodeModel codeModel, JavaSettings settings)
+        public static JavaFile GetExceptionJavaFile(ServiceException exception, JavaSettings settings)
         {
-            foreach (CompositeType exceptionType in codeModel.ErrorTypes)
-            {
-                string exceptionBodyTypeName = IModelTypeName(exceptionType, settings);
-                string exceptionName = CompositeTypeExceptionTypeDefinitionName(exceptionType, settings);
-
-                // Skip any exceptions that are named "CloudErrorException" or have a body named
-                // "CloudError" because those types already exist in the runtime.
-                if (exceptionBodyTypeName != "CloudError" && exceptionName != "CloudErrorException")
-                {
-                    yield return exceptionType;
-                }
-            }
-        }
-
-        public static JavaFile GetExceptionJavaFile(CodeModel codeModel, JavaSettings settings, CompositeType exceptionType)
-        {
-            string exceptionBodyTypeName = IModelTypeName(exceptionType, settings);
-            string exceptionName = CompositeTypeExceptionTypeDefinitionName(exceptionType, settings);
-
-            JavaFile javaFile = GetJavaFileWithHeaderAndPackage(codeModel, GetCompositeTypeModelsPackage(exceptionType, settings), settings, exceptionName);
+            JavaFile javaFile = GetJavaFileWithHeaderAndPackage(exception.Subpackage, settings, exception.Name);
             javaFile.Import("com.microsoft.rest.v2.RestException",
                             "com.microsoft.rest.v2.http.HttpResponse");
             javaFile.JavadocComment((comment) =>
             {
-                comment.Description($"Exception thrown for an invalid response with {exceptionBodyTypeName} information.");
+                comment.Description($"Exception thrown for an invalid response with {exception.ErrorName} information.");
             });
-            javaFile.Block($"public class {exceptionName} extends RestException", (classBlock) =>
+            javaFile.Block($"public class {exception.Name} extends RestException", (classBlock) =>
             {
                 classBlock.JavadocComment((comment) =>
                 {
-                    comment.Description($"Initializes a new instance of the {exceptionName} class.");
+                    comment.Description($"Initializes a new instance of the {exception.Name} class.");
                     comment.Param("message", "the exception message or the response content if a message is not available");
                     comment.Param("response", "the HTTP response");
                 });
-                classBlock.Block($"public {exceptionName}(final String message, HttpResponse response)", (constructorBlock) =>
+                classBlock.Block($"public {exception.Name}(final String message, HttpResponse response)", (constructorBlock) =>
                 {
                     constructorBlock.Line("super(message, response);");
                 });
                 classBlock.Line();
                 classBlock.JavadocComment((comment) =>
                 {
-                    comment.Description($"Initializes a new instance of the {exceptionName} class.");
+                    comment.Description($"Initializes a new instance of the {exception.Name} class.");
                     comment.Param("message", "the exception message or the response content if a message is not available");
                     comment.Param("response", "the HTTP response");
                     comment.Param("body", "the deserialized response body");
                 });
-                classBlock.Block($"public {exceptionName}(final String message, final HttpResponse response, final {exceptionBodyTypeName} body)", (constructorBlock) =>
+                classBlock.Block($"public {exception.Name}(final String message, final HttpResponse response, final {exception.ErrorName} body)", (constructorBlock) =>
                 {
                     constructorBlock.Line("super(message, response, body);");
                 });
                 classBlock.Line();
                 classBlock.Annotation("Override");
-                classBlock.Block($"public {exceptionBodyTypeName} body()", (methodBlock) =>
+                classBlock.Block($"public {exception.ErrorName} body()", (methodBlock) =>
                 {
-                    methodBlock.Return($"({exceptionBodyTypeName}) super.body()");
+                    methodBlock.Return($"({exception.ErrorName}) super.body()");
                 });
             });
 
             return javaFile;
         }
 
-        public static JavaFile GetEnumJavaFile(CodeModel codeModel, JavaSettings settings, EnumType enumType)
+        public static JavaFile GetEnumJavaFile(ServiceEnum serviceEnum, JavaSettings settings)
         {
-            string enumName = IModelTypeName(enumType, settings);
-            string enumTypeComment = $"Defines values for {enumName}.";
+            string enumTypeComment = $"Defines values for {serviceEnum.Name}.";
 
             string subPackage = settings.IsFluent ? null : modelsPackage;
-            JavaFile javaFile = GetJavaFileWithHeaderAndPackage(codeModel, subPackage, settings, enumName);
-            if (enumType.ModelAsString)
+            JavaFile javaFile = GetJavaFileWithHeaderAndPackage(subPackage, settings, serviceEnum.Name);
+            if (serviceEnum.Expandable)
             {
                 javaFile.Import("java.util.Collection",
                                 "com.fasterxml.jackson.annotation.JsonCreator",
@@ -1526,33 +1577,33 @@ namespace AutoRest.Java
                 {
                     comment.Description(enumTypeComment);
                 });
-                javaFile.PublicFinalClass($"{enumName} extends ExpandableStringEnum<{enumName}>", (classBlock) =>
+                javaFile.PublicFinalClass($"{serviceEnum.Name} extends ExpandableStringEnum<{serviceEnum.Name}>", (classBlock) =>
                 {
-                    foreach (EnumValue value in enumType.Values)
+                    foreach (ServiceEnumValue enumValue in serviceEnum.Values)
                     {
-                        classBlock.JavadocComment($"Static value {GetEnumValueValue(value)} for {enumName}.");
-                        classBlock.PublicStaticFinalVariable($"{enumName} {GetEnumValueName(value)} = fromString(\"{GetEnumValueValue(value)}\")");
+                        classBlock.JavadocComment($"Static value {enumValue.Value} for {serviceEnum.Name}.");
+                        classBlock.PublicStaticFinalVariable($"{serviceEnum.Name} {enumValue.Name} = fromString(\"{enumValue.Value}\")");
                     }
 
                     classBlock.JavadocComment((comment) =>
                     {
-                        comment.Description($"Creates or finds a {enumName} from its string representation.");
+                        comment.Description($"Creates or finds a {serviceEnum.Name} from its string representation.");
                         comment.Param("name", "a name to look for");
-                        comment.Return($"the corresponding {enumName}");
+                        comment.Return($"the corresponding {serviceEnum.Name}");
                     });
                     classBlock.Annotation("JsonCreator");
-                    classBlock.PublicStaticMethod($"{enumName} fromString(String name)", (function) =>
+                    classBlock.PublicStaticMethod($"{serviceEnum.Name} fromString(String name)", (function) =>
                     {
-                        function.Return($"fromString(name, {enumName}.class)");
+                        function.Return($"fromString(name, {serviceEnum.Name}.class)");
                     });
 
                     classBlock.JavadocComment((comment) =>
                     {
-                        comment.Return($"known {enumName} values");
+                        comment.Return($"known {serviceEnum.Name} values");
                     });
-                    classBlock.PublicStaticMethod($"Collection<{enumName}> values()", (function) =>
+                    classBlock.PublicStaticMethod($"Collection<{serviceEnum.Name}> values()", (function) =>
                     {
-                        function.Return($"values({enumName}.class)");
+                        function.Return($"values({serviceEnum.Name}.class)");
                     });
                 });
             }
@@ -1564,43 +1615,43 @@ namespace AutoRest.Java
                 {
                     comment.Description(enumTypeComment);
                 });
-                javaFile.PublicEnum(enumName, (enumBlock) =>
+                javaFile.PublicEnum(serviceEnum.Name, (enumBlock) =>
                 {
-                    if (enumType.Values.Any())
+                    if (serviceEnum.Values.Any())
                     {
-                        Action<EnumValue, bool> enumValue = (EnumValue value, bool isLast) =>
+                        Action<ServiceEnumValue, bool> enumValue = (ServiceEnumValue value, bool isLast) =>
                         {
-                            enumBlock.JavadocComment($"Enum value {GetEnumValueValue(value)}.");
-                            enumBlock.Line($"{GetEnumValueName(value)}(\"{GetEnumValueValue(value)}\")" + (isLast ? ";" : ","));
+                            enumBlock.JavadocComment($"Enum value {value.Value}.");
+                            enumBlock.Line($"{value.Name}(\"{value.Value}\")" + (isLast ? ";" : ","));
                             enumBlock.Line();
                         };
 
-                        foreach (EnumValue value in enumType.Values.SkipLast(1))
+                        foreach (ServiceEnumValue value in serviceEnum.Values.SkipLast(1))
                         {
                             enumValue(value, false);
                         }
-                        enumValue(enumType.Values.Last(), true);
+                        enumValue(serviceEnum.Values.Last(), true);
                     }
 
-                    enumBlock.JavadocComment($"The actual serialized value for a {enumName} instance.");
+                    enumBlock.JavadocComment($"The actual serialized value for a {serviceEnum.Name} instance.");
                     enumBlock.Line("private String value;");
                     enumBlock.Line();
-                    enumBlock.Block($"{enumName}(String value)", (constructor) =>
+                    enumBlock.Block($"{serviceEnum.Name}(String value)", (constructor) =>
                     {
                         constructor.Line("this.value = value;");
                     });
                     enumBlock.Line();
                     enumBlock.JavadocComment((comment) =>
                     {
-                        comment.Description($"Parses a serialized value to a {enumName} instance.");
+                        comment.Description($"Parses a serialized value to a {serviceEnum.Name} instance.");
                         comment.Param("value", "the serialized value to parse.");
-                        comment.Return($"the parsed {enumName} object, or null if unable to parse.");
+                        comment.Return($"the parsed {serviceEnum.Name} object, or null if unable to parse.");
                     });
                     enumBlock.Annotation("JsonCreator");
-                    enumBlock.Block($"public static {enumName} fromString(String value)", (function) =>
+                    enumBlock.Block($"public static {serviceEnum.Name} fromString(String value)", (function) =>
                     {
-                        function.Line($"{enumName}[] items = {enumName}.values();");
-                        function.Block($"for ({enumName} item : items)", (foreachBlock) =>
+                        function.Line($"{serviceEnum.Name}[] items = {serviceEnum.Name}.values();");
+                        function.Block($"for ({serviceEnum.Name} item : items)", (foreachBlock) =>
                         {
                             foreachBlock.If("item.toString().equalsIgnoreCase(value)", (ifBlock) =>
                             {
@@ -1667,7 +1718,7 @@ namespace AutoRest.Java
             return serviceName;
         }
 
-        private static JavaFile GetJavaFileWithHeaderAndPackage(CodeModel codeModel, string subPackage, JavaSettings settings, string fileNameWithoutExtension)
+        private static JavaFile GetJavaFileWithHeaderAndPackage(string subPackage, JavaSettings settings, string fileNameWithoutExtension)
         {
             string package = GetPackage(settings, subPackage);
             JavaFile javaFile = GetJavaFile(package, fileNameWithoutExtension);
@@ -3009,22 +3060,6 @@ namespace AutoRest.Java
             => method.Extensions.ContainsKey(AzureExtensions.PageableExtension) &&
                     method.Extensions[AzureExtensions.PageableExtension] == null &&
                     !MethodIsPagingNextOperation(method);
-
-        private static bool MethodShouldGenerateBeginRestResponseMethod(Method method, JavaSettings settings)
-        {
-            bool result;
-
-            if (settings.IsAzureOrFluent)
-            {
-                result = !MethodIsLongRunningOperation(method) && !MethodIsPagingOperation(method) && !MethodIsPagingNextOperation(method);
-            }
-            else
-            {
-                result = true;
-            }
-
-            return result;
-        }
 
         private static string MethodOperationExceptionTypeString(Method method, JavaSettings settings)
         {
@@ -4714,34 +4749,6 @@ namespace AutoRest.Java
                 result = codeNamer.CamelCase(codeNamer.RemoveInvalidCharacters(result));
             }
             return result;
-        }
-
-        private static string GetEnumValueName(EnumValue enumValue)
-        {
-            string result = enumValue.MemberName;
-            if (!string.IsNullOrWhiteSpace(result))
-            {
-                result = new Regex("[\\ -]+").Replace(result, "_");
-                Func<char, bool> isUpper = new Func<char, bool>(c => c >= 'A' && c <= 'Z');
-                Func<char, bool> isLower = new Func<char, bool>(c => c >= 'a' && c <= 'z');
-                for (int i = 1; i < result.Length - 1; i++)
-                {
-                    if (isUpper(result[i]))
-                    {
-                        if (result[i - 1] != '_' && isLower(result[i - 1]))
-                        {
-                            result = result.Insert(i, "_");
-                        }
-                    }
-                }
-                result = result.ToUpperInvariant();
-            }
-            return result;
-        }
-
-        private static string GetEnumValueValue(EnumValue enumValue)
-        {
-            return enumValue.SerializedName;
         }
 
         private static string GetParameterDefaultValue(Parameter parameter)
