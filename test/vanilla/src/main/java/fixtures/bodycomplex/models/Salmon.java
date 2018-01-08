@@ -18,10 +18,10 @@ import com.fasterxml.jackson.annotation.JsonTypeName;
 /**
  * The Salmon model.
  */
-@JsonTypeInfo(use = JsonTypeInfo.Id.NAME, include = JsonTypeInfo.As.PROPERTY, property = "fishtype")
+@JsonTypeInfo(use = JsonTypeInfo.Id.NAME, include = JsonTypeInfo.As.PROPERTY, property = "fishtype", defaultImpl = Salmon.class)
 @JsonTypeName("salmon")
 @JsonSubTypes({
-@JsonSubTypes.Type(name = "smart_salmon", value = SmartSalmon.class)
+    @JsonSubTypes.Type(name = "smart_salmon", value = SmartSalmon.class)
 })
 public class Salmon extends Fish {
     /**
