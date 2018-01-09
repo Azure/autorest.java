@@ -12,16 +12,19 @@ namespace AutoRest.Java.Model
     {
         private readonly IEnumerable<ServiceEnum> enums;
         private readonly IEnumerable<ServiceException> exceptions;
+        private readonly IEnumerable<XmlSequenceWrapper> xmlSequenceWrappers;
 
         /// <summary>
         /// Create a new Service with the provided values.
         /// </summary>
         /// <param name="enums">The enum types that are used by the service.</param>
         /// <param name="exceptions">The exception types that are used by the service.</param>
-        public Service(IEnumerable<ServiceEnum> enums, IEnumerable<ServiceException> exceptions)
+        /// <param name="xmlSequenceWrappers"></param>
+        public Service(IEnumerable<ServiceEnum> enums, IEnumerable<ServiceException> exceptions, IEnumerable<XmlSequenceWrapper> xmlSequenceWrappers)
         {
             this.enums = enums;
             this.exceptions = exceptions;
+            this.xmlSequenceWrappers = xmlSequenceWrappers;
         }
 
         /// <summary>
@@ -33,5 +36,7 @@ namespace AutoRest.Java.Model
         /// Get the exception types that are used by this service.
         /// </summary>
         public IEnumerable<ServiceException> Exceptions => exceptions;
+
+        public IEnumerable<XmlSequenceWrapper> XmlSequenceWrappers => xmlSequenceWrappers;
     }
 }
