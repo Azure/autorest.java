@@ -158,9 +158,9 @@ namespace AutoRest.Java
                 javaFiles.Add(GetEnumJavaFile(serviceEnum, javaSettings));
             }
 
-            foreach (SequenceType xmlWrapperSequenceType in GetXmlWrapperTypes(codeModel, javaSettings))
+            foreach (XmlSequenceWrapper xmlSequenceWrapper in service.XmlSequenceWrappers)
             {
-                javaFiles.Add(GetXmlWrapperJavaFile(codeModel, javaSettings, xmlWrapperSequenceType));
+                javaFiles.Add(GetXmlSequenceWrapperJavaFile(xmlSequenceWrapper, javaSettings));
             }
 
             foreach (ServiceException exception in service.Exceptions)
@@ -183,7 +183,7 @@ namespace AutoRest.Java
 
             if (!javaSettings.IsFluent)
             {
-                javaFiles.Add(GetAzureServiceClientInterfaceJavaFile(codeModel, javaSettings));
+                javaFiles.Add(GetServiceClientInterfaceJavaFile(codeModel, javaSettings));
 
                 foreach (MethodGroup methodGroup in GetMethodGroups(codeModel))
                 {
@@ -196,7 +196,7 @@ namespace AutoRest.Java
             {
                 if (javaSettings.RegenerateManagers)
                 {
-                    javaFiles.Add(GetAzureServiceManagerJavaFile(codeModel, javaSettings));
+                    javaFiles.Add(GetServiceManagerJavaFile(codeModel, javaSettings));
                 }
 
                 if (javaSettings.RegeneratePom)
@@ -497,11 +497,9 @@ namespace AutoRest.Java
             // Get Service Enum Types.
             List<ServiceEnum> enums = new List<ServiceEnum>();
             string enumSubPackage = settings.IsFluent ? null : modelsPackage;
-            Func<char, bool> isUpper = new Func<char, bool>(c => c >= 'A' && c <= 'Z');
-            Func<char, bool> isLower = new Func<char, bool>(c => c >= 'a' && c <= 'z');
             foreach (EnumType enumType in codeModel.EnumTypes)
             {
-                string enumName = IModelTypeName(enumType, settings);
+                string enumName = GetEnumTypeName(enumType);
                 bool expandable = enumType.ModelAsString;
 
                 List<ServiceEnumValue> enumValues = new List<ServiceEnumValue>();
@@ -513,9 +511,9 @@ namespace AutoRest.Java
                         name = new Regex("[\\ -]+").Replace(name, "_");
                         for (int i = 1; i < name.Length - 1; i++)
                         {
-                            if (isUpper(name[i]))
+                            if (char.IsUpper(name[i]))
                             {
-                                if (name[i - 1] != '_' && isLower(name[i - 1]))
+                                if (name[i - 1] != '_' && char.IsLower(name[i - 1]))
                                 {
                                     name = name.Insert(i, "_");
                                 }
@@ -537,7 +535,7 @@ namespace AutoRest.Java
             foreach (CompositeType exceptionType in codeModel.ErrorTypes)
             {
                 string exceptionName = CompositeTypeExceptionTypeDefinitionName(exceptionType, settings);
-                string errorName = IModelTypeName(exceptionType, settings);
+                string errorName = GetCompositeTypeName(exceptionType, settings);
                 
                 // Skip any exceptions that are named "CloudErrorException" or have a body named
                 // "CloudError" because those types already exist in the runtime.
@@ -557,10 +555,43 @@ namespace AutoRest.Java
                 }
             }
 
-            return new Service(enums, exceptions);
+            // Get XML Sequence Wrappers
+            List<XmlSequenceWrapper> xmlSequenceWrappers = new List<XmlSequenceWrapper>();
+            if (codeModel.ShouldGenerateXmlSerialization)
+            {
+                // Every sequence type used as a parameter to a service method.
+                IEnumerable<Method> allMethods = codeModel.Methods.Concat(codeModel.Operations.SelectMany(methodGroup => methodGroup.Methods));
+                IEnumerable<Parameter> allParameters = allMethods.SelectMany(method => method.Parameters);
+
+                foreach (Parameter parameter in allParameters)
+                {
+                    IModelType parameterType = ParameterGetModelType(parameter);
+                    if (parameterType is SequenceType sequenceType)
+                    {
+                        string xmlElementName = sequenceType.XmlName.ToPascalCase();
+                        if (xmlSequenceWrappers.Any(existingWrapper => existingWrapper.XmlElementName != xmlElementName))
+                        {
+                            string sequenceTypeName = GetSequenceTypeName(sequenceType, settings);
+
+                            HashSet<string> xmlSequenceWrapperImports = GetSequenceTypeImports(sequenceType, settings);
+                            xmlSequenceWrapperImports.AddRange(new[]
+                            {
+                                "com.fasterxml.jackson.annotation.JsonCreator",
+                                "com.fasterxml.jackson.annotation.JsonProperty",
+                                "com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlProperty",
+                                "com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlRootElement"
+                            });
+
+                            xmlSequenceWrappers.Add(new XmlSequenceWrapper(sequenceTypeName, xmlElementName, xmlSequenceWrapperImports));
+                        }
+                    }
+                }
+            }
+
+            return new Service(enums, exceptions, xmlSequenceWrappers);
         }
 
-        private static JavaFile GetAzureServiceManagerJavaFile(CodeModel codeModel, JavaSettings settings)
+        private static JavaFile GetServiceManagerJavaFile(CodeModel codeModel, JavaSettings settings)
         {
             string serviceName = GetServiceName(settings, codeModel);
             if (string.IsNullOrEmpty(serviceName))
@@ -756,65 +787,33 @@ namespace AutoRest.Java
             return javaFile;
         }
 
-        public static IEnumerable<SequenceType> GetXmlWrapperTypes(CodeModel codeModel, JavaSettings settings)
+        public static JavaFile GetXmlSequenceWrapperJavaFile(XmlSequenceWrapper xmlSequenceWrapper, JavaSettings settings)
         {
-            ISet<SequenceType> result = new HashSet<SequenceType>();
-            if (codeModel.ShouldGenerateXmlSerialization)
+            string xmlElementName = xmlSequenceWrapper.XmlElementName;
+            string xmlElementNameCamelCase = xmlElementName.ToCamelCase();
+            
+            JavaFile javaFile = GetJavaFileWithHeaderAndPackage(implPackage, settings, xmlSequenceWrapper.WrapperClassName);
+            javaFile.Import(xmlSequenceWrapper.Imports);
+            javaFile.Annotation($"JacksonXmlRootElement(localName = \"{xmlElementName}\")");
+            javaFile.PublicClass(xmlSequenceWrapper.WrapperClassName, classBlock =>
             {
-                // Every sequence type used as a parameter to a service method.
-                foreach (MethodGroup methodGroup in codeModel.Operations)
-                {
-                    foreach (Method method in methodGroup.Methods)
-                    {
-                        foreach (Parameter parameter in method.Parameters)
-                        {
-                            IModelType parameterType = ParameterGetModelType(parameter);
-                            if (parameterType is SequenceType sequenceType)
-                            {
-                                result.Add(sequenceType);
-                            }
-                        }
-                    }
-                }
-            }
-            return result;
-        }
-
-        public static JavaFile GetXmlWrapperJavaFile(CodeModel codeModel, JavaSettings settings, SequenceType sequenceType)
-        {
-            string sequenceTypeName = IModelTypeName(sequenceType, settings);
-            string xmlName = sequenceType.XmlName;
-            string xmlNameCamelCase = xmlName.ToCamelCase();
-            string className = $"{xmlName.ToPascalCase()}Wrapper";
-
-            JavaFile javaFile = GetJavaFileWithHeaderAndPackage(implPackage, settings, className);
-            javaFile.Import(GetIModelTypeImports(sequenceType, settings).Concat(new string[]
-            {
-                "com.fasterxml.jackson.annotation.JsonCreator",
-                "com.fasterxml.jackson.annotation.JsonProperty",
-                "com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlProperty",
-                "com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlRootElement"
-            }));
-            javaFile.Annotation($"JacksonXmlRootElement(localName = \"{xmlName}\")");
-            javaFile.PublicClass(className, classBlock =>
-            {
-                classBlock.Annotation($"JacksonXmlProperty(localName = \"{sequenceType.ElementXmlName}\")");
-                classBlock.PrivateFinalMemberVariable(sequenceTypeName, xmlNameCamelCase);
+                classBlock.Annotation($"JacksonXmlProperty(localName = \"{xmlElementName}\")");
+                classBlock.PrivateFinalMemberVariable(xmlSequenceWrapper.SequenceType, xmlElementNameCamelCase);
 
                 classBlock.Annotation("JsonCreator");
-                classBlock.PublicConstructor($"{className}(@JsonProperty(\"{xmlNameCamelCase}\") {sequenceTypeName} {xmlNameCamelCase})", constructor =>
+                classBlock.PublicConstructor($"{xmlSequenceWrapper.WrapperClassName}(@JsonProperty(\"{xmlElementNameCamelCase}\") {xmlSequenceWrapper.SequenceType} {xmlElementNameCamelCase})", constructor =>
                 {
-                    constructor.Line($"this.{xmlNameCamelCase} = {xmlNameCamelCase};");
+                    constructor.Line($"this.{xmlElementNameCamelCase} = {xmlElementNameCamelCase};");
                 });
 
                 classBlock.JavadocComment(comment =>
                 {
-                    comment.Description($"Get the {xmlName} value.");
-                    comment.Return($"the {xmlName} value");
+                    comment.Description($"Get the {xmlElementName} value.");
+                    comment.Return($"the {xmlElementName} value");
                 });
-                classBlock.PublicMethod($"{sequenceTypeName} {xmlNameCamelCase}()", function =>
+                classBlock.PublicMethod($"{xmlSequenceWrapper.SequenceType} {xmlElementNameCamelCase}()", function =>
                 {
-                    function.Return(xmlNameCamelCase);
+                    function.Return(xmlElementNameCamelCase);
                 });
             });
 
@@ -1049,7 +1048,7 @@ namespace AutoRest.Java
             return javaFile;
         }
 
-        public static JavaFile GetAzureServiceClientInterfaceJavaFile(CodeModel codeModel, JavaSettings settings)
+        public static JavaFile GetServiceClientInterfaceJavaFile(CodeModel codeModel, JavaSettings settings)
         {
             string interfaceName = GetServiceClientInterfaceName(codeModel);
 
@@ -1928,15 +1927,14 @@ namespace AutoRest.Java
                 }
                 else if (modelType is CompositeType compositeType)
                 {
-                    string compositeTypeName = IModelTypeName(compositeType, settings);
+                    string compositeTypeName = GetCompositeTypeName(compositeType, settings);
                     bool compositeTypeIsExternalExtension = CompositeTypeIsExternalExtension(compositeType);
                     bool compositeTypeIsAzureResourceExtension = CompositeTypeIsAzureResourceExtension(compositeType);
                     result = CompositeTypeImports(compositeTypeName, compositeType.CodeModel, compositeTypeIsExternalExtension, compositeTypeIsAzureResourceExtension, settings);
                 }
                 else if (modelType is SequenceType sequenceType)
                 {
-                    result = GetIModelTypeImports(sequenceType.ElementType, settings)
-                        .Concat(new[] { "java.util.List" });
+                    result = GetSequenceTypeImports(sequenceType, settings);
                 }
                 else if (modelType is DictionaryType dictionaryType)
                 {
@@ -1984,6 +1982,14 @@ namespace AutoRest.Java
                 }
             }
 
+            return result;
+        }
+
+        private static HashSet<string> GetSequenceTypeImports(SequenceType sequenceType, JavaSettings settings)
+        {
+            HashSet<string> result = new HashSet<string>();
+            result.Add("java.util.List");
+            result.AddRange(GetIModelTypeImports(sequenceType.ElementType, settings));
             return result;
         }
 
@@ -2156,25 +2162,21 @@ namespace AutoRest.Java
             if (modelType != null)
             {
                 result = modelType.Name.ToString();
-                if (modelType is EnumType)
+                if (modelType is EnumType enumType)
                 {
-                    result = (string.IsNullOrEmpty(result) || result == "enum" ? "String" : CodeNamer.Instance.GetTypeName(result));
+                    result = GetEnumTypeName(enumType);
                 }
                 else if (modelType is SequenceType sequenceType)
                 {
-                    result = $"List<{IModelTypeName(sequenceType.ElementType, settings)}>";
-                    if (pagedListTypes.Contains(modelType))
-                    {
-                        result = "Paged" + result;
-                    }
+                    result = GetSequenceTypeName(sequenceType, settings);
                 }
                 else if (modelType is DictionaryType dictionaryType)
                 {
                     result = $"Map<String, {IModelTypeName(dictionaryType.ValueType, settings)}>";
                 }
-                else if (modelType is CompositeType && settings.IsFluent)
+                else if (modelType is CompositeType compositeType)
                 {
-                    result = string.IsNullOrEmpty(result) || !innerModelCompositeType.Contains(modelType) ? result : result + "Inner";
+                    result = GetCompositeTypeName(compositeType, settings);
                 }
                 else if (modelType is PrimaryType primaryType)
                 {
@@ -2238,6 +2240,46 @@ namespace AutoRest.Java
                         default:
                             throw new NotImplementedException($"Primary type {primaryType.KnownPrimaryType} is not implemented in {primaryType.GetType().Name}");
                     }
+                }
+            }
+            return result;
+        }
+
+        private static string GetEnumTypeName(EnumType enumType)
+        {
+            string result = null;
+            if (enumType != null)
+            {
+                result = enumType.Name.ToString();
+                result = (string.IsNullOrEmpty(result) || result == "enum" ? "String" : CodeNamer.Instance.GetTypeName(result));
+            }
+            return result;
+        }
+
+        private static string GetCompositeTypeName(CompositeType compositeType, JavaSettings settings)
+        {
+            string result = null;
+            if (compositeType != null)
+            {
+                result = compositeType.Name.ToString();
+
+                if (settings.IsFluent)
+                {
+                    result = string.IsNullOrEmpty(result) || !innerModelCompositeType.Contains(compositeType) ? result : result + "Inner";
+                }
+            }
+            return result;
+        }
+
+        private static string GetSequenceTypeName(SequenceType sequenceType, JavaSettings settings)
+        {
+            string result = null;
+            if (sequenceType != null)
+            {
+                result = $"List<{IModelTypeName(sequenceType.ElementType, settings)}>";
+                if (pagedListTypes.Contains(sequenceType))
+                {
+                    result = "Paged" + result;
                 }
             }
             return result;
@@ -2366,7 +2408,7 @@ namespace AutoRest.Java
 
         private static string CompositeTypeExceptionTypeDefinitionName(CompositeType compositeType, JavaSettings settings)
         {
-            string result = IModelTypeName(compositeType, settings) + "Exception";
+            string result = GetCompositeTypeName(compositeType, settings) + "Exception";
 
             if (compositeType.Extensions.ContainsKey(SwaggerExtensions.NameOverrideExtension))
             {
