@@ -168,9 +168,9 @@ namespace AutoRest.Java
                 javaFiles.Add(GetExceptionJavaFile(exception, javaSettings));
             }
 
-            foreach (string subPackage in new[] { "", "implementation" })
+            foreach (string subPackage in service.SubPackages)
             {
-                javaFiles.Add(GetPackageInfoJavaFiles(codeModel, javaSettings, subPackage));
+                javaFiles.Add(GetPackageInfoJavaFiles(service, subPackage, javaSettings));
             }
 
             if (javaSettings.IsAzureOrFluent)
@@ -189,8 +189,6 @@ namespace AutoRest.Java
                 {
                     javaFiles.Add(GetMethodGroupClientInterfaceJavaFile(codeModel, javaSettings, methodGroup));
                 }
-
-                javaFiles.Add(GetPackageInfoJavaFiles(codeModel, javaSettings, "models"));
             }
             else
             {
@@ -494,6 +492,16 @@ namespace AutoRest.Java
 
         private static Service GetService(CodeModel codeModel, JavaSettings settings)
         {
+            string serviceName = codeModel.Name;
+            string serviceDescription = codeModel.Documentation;
+
+            // Get package-info.java subpackage folder paths.
+            List<string> subpackages = new List<string>() { "", "implementation" };
+            if (!settings.IsFluent)
+            {
+                subpackages.Add("models");
+            }
+
             // Get Service Enum Types.
             List<ServiceEnum> enums = new List<ServiceEnum>();
             string enumSubPackage = settings.IsFluent ? null : modelsPackage;
@@ -588,7 +596,7 @@ namespace AutoRest.Java
                 }
             }
 
-            return new Service(enums, exceptions, xmlSequenceWrappers);
+            return new Service(serviceName, serviceDescription, subpackages, enums, exceptions, xmlSequenceWrappers);
         }
 
         private static JavaFile GetServiceManagerJavaFile(CodeModel codeModel, JavaSettings settings)
@@ -1167,10 +1175,10 @@ namespace AutoRest.Java
             return javaFile;
         }
 
-        public static JavaFile GetPackageInfoJavaFiles(CodeModel codeModel, JavaSettings settings, string subPackage)
+        public static JavaFile GetPackageInfoJavaFiles(Service service, string subPackage, JavaSettings settings)
         {
-            string title = codeModel.Name;
-            string description = codeModel.Documentation;
+            string title = service.Name;
+            string description = service.Description;
 
             string package = GetPackage(settings, subPackage);
             JavaFile javaFile = GetJavaFile(package, "package-info");
