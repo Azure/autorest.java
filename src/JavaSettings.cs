@@ -1,4 +1,7 @@
-﻿using AutoRest.Core;
+﻿// Copyright (c) Microsoft Corporation. All rights reserved.
+// Licensed under the MIT License. See License.txt in the project root for license information.
+
+using AutoRest.Core;
 
 namespace AutoRest.Java
 {
@@ -31,5 +34,7 @@ namespace AutoRest.Java
         public string ServiceName { get; set; }
 
         public string Package { get; set; }
+
+        public bool ShouldGenerateXmlSerialization { get; set; }
     }
 }
