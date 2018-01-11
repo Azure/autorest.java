@@ -123,19 +123,17 @@ namespace AutoRest.Java
         public override Task Generate(CodeModel codeModel)
         {
             Settings autoRestSettings = Settings.Instance;
-            JavaSettings javaSettings = new JavaSettings
-            {
-                AutoRestSettings = autoRestSettings,
-                IsAzure = GetBoolSetting(autoRestSettings, "azure-arm"),
-                IsFluent = GetBoolSetting(autoRestSettings, "fluent"),
-                RegenerateManagers = GetBoolSetting(autoRestSettings, "regenerate-manager"),
-                RegeneratePom = GetBoolSetting(autoRestSettings, "regenerate-pom"),
-                FileHeaderText = autoRestSettings.Header,
-                MaximumJavadocCommentWidth = autoRestSettings.MaximumCommentColumns,
-                ServiceName = GetAutoRestSettingsServiceName(autoRestSettings),
-                Package = codeModel.Namespace.ToLowerInvariant(),
-                ShouldGenerateXmlSerialization = codeModel.ShouldGenerateXmlSerialization,
-            };
+            JavaSettings javaSettings = new JavaSettings(
+                setAddCredentials: (bool value) => autoRestSettings.AddCredentials = value,
+                isAzure: GetBoolSetting(autoRestSettings, "azure-arm"),
+                isFluent: GetBoolSetting(autoRestSettings, "fluent"),
+                regenerateManagers: GetBoolSetting(autoRestSettings, "regenerate-manager"),
+                regeneratePom: GetBoolSetting(autoRestSettings, "regenerate-pom"),
+                fileHeaderText: autoRestSettings.Header,
+                maximumJavadocCommentWidth: autoRestSettings.MaximumCommentColumns,
+                serviceName: GetAutoRestSettingsServiceName(autoRestSettings),
+                package: codeModel.Namespace.ToLowerInvariant(),
+                shouldGenerateXmlSerialization: codeModel.ShouldGenerateXmlSerialization);
 
             TransformCodeModel(codeModel, javaSettings);
 
