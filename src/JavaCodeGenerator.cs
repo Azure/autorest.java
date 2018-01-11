@@ -102,13 +102,13 @@ namespace AutoRest.Java
         };
 
         private const string ClientRuntimePackage = "com.microsoft.rest.v2:client-runtime:2.0.0-SNAPSHOT from snapshot repo https://oss.sonatype.org/content/repositories/snapshots/";
-        
+
         public JavaCodeNamer Namer { get; private set; }
 
         public override string UsageInstructions => $"The {ClientRuntimePackage} maven dependency is required to execute the generated code.";
 
         public override string ImplementationFileExtension => ".java";
-        
+
         private static bool GetBoolSetting(Settings autoRestSettings, string settingName)
             => autoRestSettings.Host?.GetValue<bool?>(settingName).Result == true;
 
@@ -212,7 +212,7 @@ namespace AutoRest.Java
 
             return Task.WhenAll(javaFiles.Select(javaFile => Write(javaFile.Contents.ToString(), javaFile.FilePath)));
         }
-        
+
         private static CodeModel TransformCodeModel(CodeModel codeModel, JavaSettings settings)
         {
             // List retrieved from
@@ -545,7 +545,7 @@ namespace AutoRest.Java
             {
                 string exceptionName = CompositeTypeExceptionTypeDefinitionName(exceptionType, settings);
                 string errorName = GetCompositeTypeName(exceptionType, settings);
-                
+
                 // Skip any exceptions that are named "CloudErrorException" or have a body named
                 // "CloudError" because those types already exist in the runtime.
                 if (exceptionName != "CloudErrorException" && errorName != "CloudError")
@@ -807,7 +807,7 @@ namespace AutoRest.Java
         {
             string xmlElementName = xmlSequenceWrapper.XmlElementName;
             string xmlElementNameCamelCase = xmlElementName.ToCamelCase();
-            
+
             JavaFile javaFile = GetJavaFileWithHeaderAndPackage(implPackage, settings, xmlSequenceWrapper.WrapperClassName);
             javaFile.Import(xmlSequenceWrapper.Imports);
             javaFile.Annotation($"JacksonXmlRootElement(localName = \"{xmlElementName}\")");
@@ -1758,6 +1758,8 @@ namespace AutoRest.Java
             Response methodReturnType = method.ReturnType;
             string methodArguments = string.Join(", ", clientMethodParameters.Select(parameter => GetParameterName(parameter)));
 
+            bool isFluentDelete = settings.IsFluent && StringComparer.OrdinalIgnoreCase.Equals(GetMethodName(method, settings), Delete) && TakesTwoRequiredParameters(method);
+
             // -------------
             // Synchronous T
             // -------------
@@ -1766,7 +1768,14 @@ namespace AutoRest.Java
             {
                 if (methodReturnType.Body == null)
                 {
-                    function.Line($"{methodName}Async({methodArguments}).blockingAwait();");
+                    if (isFluentDelete)
+                    {
+                        function.Line($"{methodName}Async({methodArguments}).blockingGet();");
+                    }
+                    else
+                    {
+                        function.Line($"{methodName}Async({methodArguments}).blockingAwait();");
+                    }
                 }
                 else
                 {
@@ -1814,7 +1823,21 @@ namespace AutoRest.Java
             // --------------
             // Async Maybe<T>
             // --------------
-            string asyncMethodReturnType = (methodReturnType.Body == null ? "Completable" : $"Maybe<{ResponseServiceResponseGenericParameterString(methodReturnType, settings)}>");
+
+            string asyncMethodReturnType;
+            if (methodReturnType.Body != null)
+            {
+                asyncMethodReturnType = $"Maybe<{ResponseServiceResponseGenericParameterString(methodReturnType, settings)}>";
+            }
+            else if (isFluentDelete)
+            {
+                asyncMethodReturnType = "Maybe<Void>";
+            }
+            else
+            {
+                asyncMethodReturnType = "Completable";
+            }
+
             string methodParametersDeclaration = MethodParameterDeclaration(method, settings, clientMethodParameters);
 
             typeBlock.JavadocComment(comment =>
@@ -1831,7 +1854,22 @@ namespace AutoRest.Java
                 {
                     if (methodReturnType.Body == null)
                     {
-                        function.Line(".toCompletable();");
+                        if (isFluentDelete)
+                        {
+                            function.Line(".flatMapMaybe(new Function<RestResponse<?, ?>, Maybe<Void>>() {");
+                            function.Indent(() =>
+                            {
+                                function.Block("public Maybe<Void> apply(RestResponse<?, ?> restResponse)", subFunction =>
+                                {
+                                    subFunction.Return("Maybe.empty()");
+                                });
+                            });
+                            function.Line("});");
+                        }
+                        else
+                        {
+                            function.Line(".toCompletable();");
+                        }
                     }
                     else
                     {
