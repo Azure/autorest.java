@@ -102,13 +102,13 @@ namespace AutoRest.Java
         };
 
         private const string ClientRuntimePackage = "com.microsoft.rest.v2:client-runtime:2.0.0-SNAPSHOT from snapshot repo https://oss.sonatype.org/content/repositories/snapshots/";
-        
+
         public JavaCodeNamer Namer { get; private set; }
 
         public override string UsageInstructions => $"The {ClientRuntimePackage} maven dependency is required to execute the generated code.";
 
         public override string ImplementationFileExtension => ".java";
-        
+
         private static bool GetBoolSetting(Settings autoRestSettings, string settingName)
             => autoRestSettings.Host?.GetValue<bool?>(settingName).Result == true;
 
@@ -142,6 +142,7 @@ namespace AutoRest.Java
             Service service = ParseService(codeModel, javaSettings);
 
             List<JavaFile> javaFiles = new List<JavaFile>();
+
             javaFiles.Add(GetServiceClientJavaFile(codeModel, javaSettings));
 
             foreach (MethodGroup methodGroup in GetMethodGroups(codeModel))
@@ -158,7 +159,7 @@ namespace AutoRest.Java
             {
                 javaFiles.Add(GetEnumJavaFile(serviceEnum, javaSettings));
             }
-
+            
             foreach (XmlSequenceWrapper xmlSequenceWrapper in service.XmlSequenceWrappers)
             {
                 javaFiles.Add(GetXmlSequenceWrapperJavaFile(xmlSequenceWrapper, javaSettings));
@@ -182,6 +183,11 @@ namespace AutoRest.Java
                 }
             }
 
+            if (service.Manager != null)
+            {
+                javaFiles.Add(GetServiceManagerJavaFile(service.Manager, javaSettings));
+            }
+
             if (!javaSettings.IsFluent)
             {
                 javaFiles.Add(GetServiceClientInterfaceJavaFile(codeModel, javaSettings));
@@ -193,11 +199,6 @@ namespace AutoRest.Java
             }
             else
             {
-                if (javaSettings.RegenerateManagers)
-                {
-                    javaFiles.Add(GetServiceManagerJavaFile(codeModel, javaSettings));
-                }
-
                 if (javaSettings.RegeneratePom)
                 {
                     PomTemplate pomTemplate = new PomTemplate { Model = codeModel };
@@ -212,7 +213,7 @@ namespace AutoRest.Java
 
             return Task.WhenAll(javaFiles.Select(javaFile => Write(javaFile.Contents.ToString(), javaFile.FilePath)));
         }
-        
+
         private static CodeModel TransformCodeModel(CodeModel codeModel, JavaSettings settings)
         {
             // List retrieved from
@@ -493,8 +494,8 @@ namespace AutoRest.Java
 
         private static Service ParseService(CodeModel codeModel, JavaSettings settings)
         {
-            string serviceName = codeModel.Name;
-            string serviceDescription = codeModel.Documentation;
+            string serviceClientName = codeModel.Name;
+            string serviceClientDescription = codeModel.Documentation;
 
             IEnumerable<string> subpackages = ParseSubpackages(settings);
 
@@ -506,7 +507,9 @@ namespace AutoRest.Java
 
             IEnumerable<ServiceModel> models = ParseModels(codeModel, settings);
 
-            return new Service(serviceName, serviceDescription, subpackages, enums, exceptions, xmlSequenceWrappers, models);
+            ServiceManager manager = ParseManager(serviceClientName, codeModel, settings);
+
+            return new Service(serviceClientName, serviceClientDescription, subpackages, enums, exceptions, xmlSequenceWrappers, models, manager);
         }
 
         private static IEnumerable<string> ParseSubpackages(JavaSettings settings)
@@ -834,14 +837,24 @@ namespace AutoRest.Java
             return new ServiceProperty(name, description, annotationArguments, isXmlAttribute, xmlName, serializedName, isXmlWrapper, wireTypeName, isConstant, modelTypeIsSequence, modelTypeIsComposite, clientTypeName, defaultValue, isReadOnly);
         }
 
-        private static JavaFile GetServiceManagerJavaFile(CodeModel codeModel, JavaSettings settings)
+        private static ServiceManager ParseManager(string serviceClientName, CodeModel codeModel, JavaSettings settings)
         {
-            string serviceName = GetServiceName(settings, codeModel);
-            if (string.IsNullOrEmpty(serviceName))
+            ServiceManager manager = null;
+            if (settings.IsFluent && settings.RegenerateManagers)
             {
-                serviceName = "MissingServiceName";
+                string serviceName = GetServiceName(settings.ServiceName, codeModel);
+                if (string.IsNullOrEmpty(serviceName))
+                {
+                    serviceName = "MissingServiceName";
+                }
+                manager = new ServiceManager(serviceClientName, serviceName);
             }
-            string className = $"{serviceName}Manager";
+            return manager;
+        }
+
+        private static JavaFile GetServiceManagerJavaFile(ServiceManager manager, JavaSettings settings)
+        {
+            string className = $"{manager.ServiceName}Manager";
 
             string[] versionParts = targetVersion.Split('.');
             int minorVersion = int.Parse(versionParts[1]);
@@ -863,10 +876,10 @@ namespace AutoRest.Java
 
             javaFile.JavadocComment(comment =>
             {
-                comment.Description($"Entry point to Azure {serviceName} resource management.");
+                comment.Description($"Entry point to Azure {manager.ServiceName} resource management.");
             });
             javaFile.Annotation($"Beta(SinceVersion.{betaSinceVersion})");
-            javaFile.PublicFinalClass($"{className} extends Manager<{className}, {codeModel.Name + "Impl"}>", classBlock =>
+            javaFile.PublicFinalClass($"{className} extends Manager<{className}, {manager.ServiceClientName + "Impl"}>", classBlock =>
             {
                 classBlock.JavadocComment(comment =>
                 {
@@ -880,7 +893,7 @@ namespace AutoRest.Java
 
                 classBlock.JavadocComment(comment =>
                 {
-                    comment.Description($"Creates an instance of {className} that exposes {serviceName} resource management API entry points.");
+                    comment.Description($"Creates an instance of {className} that exposes {manager.ServiceName} resource management API entry points.");
                     comment.Param(credentialsVariableName, credentialsDescription);
                     comment.Param("subscriptionId", "the subscription UUID");
                     comment.Return($"the {className}");
@@ -893,7 +906,7 @@ namespace AutoRest.Java
 
                 classBlock.JavadocComment(comment =>
                 {
-                    comment.Description($"Creates an instance of {className} that exposes {serviceName} resource management API entry points.");
+                    comment.Description($"Creates an instance of {className} that exposes {manager.ServiceName} resource management API entry points.");
                     comment.Param(httpPipelineVariableName, httpPipelineDescription);
                     comment.Param("subscriptionId", "the subscription UUID");
                     comment.Return($"the {className}");
@@ -911,10 +924,10 @@ namespace AutoRest.Java
                 {
                     interfaceBlock.JavadocComment(comment =>
                     {
-                        comment.Description($"Creates an instance of {className} that exposes {serviceName} management API entry points.");
+                        comment.Description($"Creates an instance of {className} that exposes {manager.ServiceName} management API entry points.");
                         comment.Param(credentialsVariableName, credentialsDescription);
                         comment.Param("subscriptionId", "the subscription UUID");
-                        comment.Return($"the interface exposing {serviceName} management API entry points that work across subscriptions");
+                        comment.Return($"the interface exposing {manager.ServiceName} management API entry points that work across subscriptions");
                     });
                     interfaceBlock.PublicMethod($"{className} authenticate({azureTokenCredentialsType} {credentialsVariableName}, String subscriptionId)");
                 });
@@ -938,7 +951,7 @@ namespace AutoRest.Java
                     {
                         constructor.Line($"{httpPipelineVariableName},");
                         constructor.Line("subscriptionId,");
-                        constructor.Line($"new {codeModel.Name}Impl({httpPipelineVariableName}).withSubscriptionId(subscriptionId));");
+                        constructor.Line($"new {manager.ServiceClientName}Impl({httpPipelineVariableName}).withSubscriptionId(subscriptionId));");
                     });
                 });
             });
@@ -1034,7 +1047,7 @@ namespace AutoRest.Java
         {
             string xmlElementName = xmlSequenceWrapper.XmlElementName;
             string xmlElementNameCamelCase = xmlElementName.ToCamelCase();
-            
+
             JavaFile javaFile = GetJavaFileWithHeaderAndPackage(implPackage, settings, xmlSequenceWrapper.WrapperClassName);
             javaFile.Import(xmlSequenceWrapper.Imports);
             javaFile.Annotation($"JacksonXmlRootElement(localName = \"{xmlElementName}\")");
@@ -1412,8 +1425,8 @@ namespace AutoRest.Java
 
         public static JavaFile GetPackageInfoJavaFiles(Service service, string subPackage, JavaSettings settings)
         {
-            string title = service.Name;
-            string description = service.Description;
+            string title = service.ClientName;
+            string description = service.ClientDescription;
 
             string package = GetPackage(settings, subPackage);
             JavaFile javaFile = GetJavaFile(package, "package-info");
@@ -1815,9 +1828,6 @@ namespace AutoRest.Java
         internal static string GetServiceName(Settings autoRestSettings, CodeModel codeModel)
             => GetServiceName(GetAutoRestSettingsServiceName(autoRestSettings), codeModel);
 
-        private static string GetServiceName(JavaSettings settings, CodeModel codeModel)
-            => GetServiceName(settings.ServiceName, codeModel);
-
         private static string GetServiceName(string serviceName, CodeModel codeModel)
         {
             if (string.IsNullOrEmpty(serviceName))
@@ -1858,6 +1868,8 @@ namespace AutoRest.Java
             Response methodReturnType = method.ReturnType;
             string methodArguments = string.Join(", ", clientMethodParameters.Select(parameter => GetParameterName(parameter)));
 
+            bool isFluentDelete = settings.IsFluent && StringComparer.OrdinalIgnoreCase.Equals(GetMethodName(method, settings), Delete) && TakesTwoRequiredParameters(method);
+
             // -------------
             // Synchronous T
             // -------------
@@ -1866,7 +1878,14 @@ namespace AutoRest.Java
             {
                 if (methodReturnType.Body == null)
                 {
-                    function.Line($"{methodName}Async({methodArguments}).blockingAwait();");
+                    if (isFluentDelete)
+                    {
+                        function.Line($"{methodName}Async({methodArguments}).blockingGet();");
+                    }
+                    else
+                    {
+                        function.Line($"{methodName}Async({methodArguments}).blockingAwait();");
+                    }
                 }
                 else
                 {
@@ -1914,7 +1933,21 @@ namespace AutoRest.Java
             // --------------
             // Async Maybe<T>
             // --------------
-            string asyncMethodReturnType = (methodReturnType.Body == null ? "Completable" : $"Maybe<{ResponseServiceResponseGenericParameterString(methodReturnType, settings)}>");
+
+            string asyncMethodReturnType;
+            if (methodReturnType.Body != null)
+            {
+                asyncMethodReturnType = $"Maybe<{ResponseServiceResponseGenericParameterString(methodReturnType, settings)}>";
+            }
+            else if (isFluentDelete)
+            {
+                asyncMethodReturnType = "Maybe<Void>";
+            }
+            else
+            {
+                asyncMethodReturnType = "Completable";
+            }
+
             string methodParametersDeclaration = MethodParameterDeclaration(method, settings, clientMethodParameters);
 
             typeBlock.JavadocComment(comment =>
@@ -1931,7 +1964,22 @@ namespace AutoRest.Java
                 {
                     if (methodReturnType.Body == null)
                     {
-                        function.Line(".toCompletable();");
+                        if (isFluentDelete)
+                        {
+                            function.Line(".flatMapMaybe(new Function<RestResponse<?, ?>, Maybe<Void>>() {");
+                            function.Indent(() =>
+                            {
+                                function.Block("public Maybe<Void> apply(RestResponse<?, ?> restResponse)", subFunction =>
+                                {
+                                    subFunction.Return("Maybe.empty()");
+                                });
+                            });
+                            function.Line("});");
+                        }
+                        else
+                        {
+                            function.Line(".toCompletable();");
+                        }
                     }
                     else
                     {

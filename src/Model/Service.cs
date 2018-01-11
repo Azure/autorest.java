@@ -13,32 +13,34 @@ namespace AutoRest.Java.Model
         /// <summary>
         /// Create a new Service with the provided values.
         /// </summary>
-        /// <param name="name">The name of the service.</param>
-        /// <param name="description">The description of the service.</param>
+        /// <param name="clientName">The name of the service client.</param>
+        /// <param name="clientDescription">The description of the service client.</param>
         /// <param name="subpackages">The subpackage folder paths that will get package-info.java files.</param>
         /// <param name="enums">The enum types that are used by the service.</param>
         /// <param name="exceptions">The exception types that are used by the service.</param>
         /// <param name="xmlSequenceWrappers"></param>
-        public Service(string name, string description, IEnumerable<string> subpackages, IEnumerable<ServiceEnum> enums, IEnumerable<ServiceException> exceptions, IEnumerable<XmlSequenceWrapper> xmlSequenceWrappers, IEnumerable<ServiceModel> models)
+        /// <param name="manager"></param>
+        public Service(string clientName, string clientDescription, IEnumerable<string> subpackages, IEnumerable<ServiceEnum> enums, IEnumerable<ServiceException> exceptions, IEnumerable<XmlSequenceWrapper> xmlSequenceWrappers, IEnumerable<ServiceModel> models, ServiceManager manager)
         {
-            Name = name;
-            Description = description;
+            ClientName = clientName;
+            ClientDescription = clientDescription;
             SubPackages = subpackages;
             Enums = enums;
             Exceptions = exceptions;
             XmlSequenceWrappers = xmlSequenceWrappers;
             Models = models;
+            Manager = manager;
         }
 
         /// <summary>
-        /// The name of this service.
+        /// The name of this service client.
         /// </summary>
-        public string Name { get; }
+        public string ClientName { get; }
 
         /// <summary>
         /// The description of this service.
         /// </summary>
-        public string Description { get; }
+        public string ClientDescription { get; }
 
         /// <summary>
         /// The subpackage folder paths that will get package-info.java files.
@@ -64,5 +66,10 @@ namespace AutoRest.Java.Model
         /// Get the model types that are used by this service.
         /// </summary>
         public IEnumerable<ServiceModel> Models { get; }
+
+        /// <summary>
+        /// Get the Manager for this service.
+        /// </summary>
+        public ServiceManager Manager { get; }
     }
 }
