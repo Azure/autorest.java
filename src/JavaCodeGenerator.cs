@@ -154,36 +154,24 @@ namespace AutoRest.Java
                 javaFiles.Add(GetModelJavaFile(codeModel, javaSettings, modelType));
             }
 
-            if (service.Enums != null && service.Enums.Any())
+            foreach (ServiceEnum serviceEnum in service.Enums)
             {
-                foreach (ServiceEnum serviceEnum in service.Enums)
-                {
-                    javaFiles.Add(GetEnumJavaFile(serviceEnum, javaSettings));
-                }
+                javaFiles.Add(GetEnumJavaFile(serviceEnum, javaSettings));
+            }
+            
+            foreach (XmlSequenceWrapper xmlSequenceWrapper in service.XmlSequenceWrappers)
+            {
+                javaFiles.Add(GetXmlSequenceWrapperJavaFile(xmlSequenceWrapper, javaSettings));
             }
 
-            if (service.XmlSequenceWrappers != null && service.XmlSequenceWrappers.Any())
+            foreach (ServiceException exception in service.Exceptions)
             {
-                foreach (XmlSequenceWrapper xmlSequenceWrapper in service.XmlSequenceWrappers)
-                {
-                    javaFiles.Add(GetXmlSequenceWrapperJavaFile(xmlSequenceWrapper, javaSettings));
-                }
+                javaFiles.Add(GetExceptionJavaFile(exception, javaSettings));
             }
 
-            if (service.Exceptions != null && service.Exceptions.Any())
+            foreach (string subPackage in service.SubPackages)
             {
-                foreach (ServiceException exception in service.Exceptions)
-                {
-                    javaFiles.Add(GetExceptionJavaFile(exception, javaSettings));
-                }
-            }
-
-            if (service.SubPackages != null && service.SubPackages.Any())
-            {
-                foreach (string subPackage in service.SubPackages)
-                {
-                    javaFiles.Add(GetPackageInfoJavaFiles(service, subPackage, javaSettings));
-                }
+                javaFiles.Add(GetPackageInfoJavaFiles(service, subPackage, javaSettings));
             }
 
             if (javaSettings.IsAzureOrFluent)
