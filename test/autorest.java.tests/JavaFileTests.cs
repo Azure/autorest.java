@@ -1,4 +1,5 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+using System;
 
 namespace AutoRest.Java.DanModel
 {
@@ -66,7 +67,7 @@ namespace AutoRest.Java.DanModel
 
             file.Line();
 
-            Assert.AreEqual("\n", file.Contents.ToString());
+            Assert.AreEqual(Environment.NewLine, file.Contents.ToString());
         }
 
         [TestMethod]
@@ -76,7 +77,7 @@ namespace AutoRest.Java.DanModel
 
             file.Line(null);
 
-            Assert.AreEqual("\n", file.Contents.ToString());
+            Assert.AreEqual(Environment.NewLine, file.Contents.ToString());
         }
 
         [TestMethod]
@@ -86,7 +87,7 @@ namespace AutoRest.Java.DanModel
 
             file.Line("");
 
-            Assert.AreEqual("\n", file.Contents.ToString());
+            Assert.AreEqual(Environment.NewLine, file.Contents.ToString());
         }
 
         [TestMethod]
@@ -96,7 +97,7 @@ namespace AutoRest.Java.DanModel
 
             file.Line("12345");
 
-            Assert.AreEqual("12345\n", file.Contents.ToString());
+            Assert.AreEqual("12345" + Environment.NewLine, file.Contents.ToString());
         }
 
         private static JavaFile createJavaFile()
