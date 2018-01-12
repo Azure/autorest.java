@@ -67,9 +67,9 @@ namespace AutoRest.Java
         private const string List = "List";
         private const string Delete = "Delete";
 
-        private static readonly Regex enumValueNameRegex = new Regex(@"[\\\/\.\+\ \-]+");
+        private static readonly List<PageClass> pageClasses = new List<PageClass>();
 
-        private static readonly IDictionary<KeyValuePair<string, string>, string> pageClasses = new Dictionary<KeyValuePair<string, string>, string>();
+        private static readonly Regex enumValueNameRegex = new Regex(@"[\\\/\.\+\ \-]+");
 
         private static readonly ISet<Property> innerModelProperties = new HashSet<Property>();
         private static readonly ISet<CompositeType> innerModelCompositeType = new HashSet<CompositeType>();
@@ -177,9 +177,9 @@ namespace AutoRest.Java
 
             if (javaSettings.IsAzureOrFluent)
             {
-                foreach (KeyValuePair<KeyValuePair<string, string>, string> pageClass in pageClasses)
+                foreach (PageClass pageClass in pageClasses)
                 {
-                    javaFiles.Add(GetPageJavaFile(codeModel, javaSettings, pageClass));
+                    javaFiles.Add(GetPageJavaFile(pageClass, javaSettings));
                 }
             }
 
@@ -266,7 +266,7 @@ namespace AutoRest.Java
                 }
                 AzureExtensions.AddPageableMethod(codeModel);
 
-                NormalizePaginatedMethods(codeModel, pageClasses, settings);
+                NormalizePaginatedMethods(codeModel, settings);
 
                 if (settings.IsFluent)
                 {
@@ -376,7 +376,7 @@ namespace AutoRest.Java
         /// </summary>
         /// <param name="serviceClient"></param>
         /// <param name="pageClasses"></param>
-        private static void NormalizePaginatedMethods(CodeModel serviceClient, IDictionary<KeyValuePair<string, string>, string> pageClasses, JavaSettings settings)
+        private static void NormalizePaginatedMethods(CodeModel serviceClient, JavaSettings settings)
         {
             if (serviceClient == null)
             {
@@ -385,61 +385,67 @@ namespace AutoRest.Java
 
             var convertedTypes = new Dictionary<IModelType, IModelType>();
 
-            foreach (Method method in serviceClient.Methods.Where(m => m.Extensions.ContainsKey(AzureExtensions.PageableExtension) || MethodSimulateAsPagingOperation(m, settings)))
+            foreach (Method method in serviceClient.Methods)
             {
-                string nextLinkString;
-                string pageClassName = GetPagingSetting(method.Extensions, pageClasses, MethodSimulateAsPagingOperation(method, settings), out nextLinkString);
-                if (string.IsNullOrEmpty(pageClassName))
-                {
-                    continue;
-                }
-                if (string.IsNullOrEmpty(nextLinkString))
-                {
-                    method.Extensions[AzureExtensions.PageableExtension] = null;
-                }
-                bool anyTypeConverted = false;
-                foreach (HttpStatusCode responseStatus in method.Responses.Where(r => r.Value.Body is CompositeType).Select(s => s.Key).ToArray())
-                {
-                    anyTypeConverted = true;
-                    CompositeType compositeType = (CompositeType)method.Responses[responseStatus].Body;
-                    SequenceType sequenceType = GetCompositeTypeProperties(compositeType, settings).Select(p => GetPropertyModelType(p)).FirstOrDefault(t => t is SequenceType) as SequenceType;
+                bool methodHasPageableExtensions = method.Extensions.ContainsKey(AzureExtensions.PageableExtension);
+                JContainer methodPageableExtensions = methodHasPageableExtensions ? method.Extensions[AzureExtensions.PageableExtension] as JContainer : null;
+                bool simulateMethodAsPagingOperation = MethodSimulateAsPagingOperation(method, settings);
 
-                    // if the type is a wrapper over page-able response
-                    if (sequenceType != null)
+                if (methodPageableExtensions != null || simulateMethodAsPagingOperation)
+                {
+                    PageClass page = GetPagingSetting(methodHasPageableExtensions, methodPageableExtensions, simulateMethodAsPagingOperation);
+
+                    if (page != null && !string.IsNullOrEmpty(page.ClassName))
                     {
-                        SequenceType pagedResult = DependencyInjection.New<SequenceType>();
-                        pagedResult.ElementType = sequenceType.ElementType;
-                        SequenceTypeSetPageImplType(pagedResult, pageClassName);
+                        if (string.IsNullOrEmpty(page.NextLinkName))
+                        {
+                            method.Extensions[AzureExtensions.PageableExtension] = null;
+                        }
+                        bool anyTypeConverted = false;
+                        foreach (HttpStatusCode responseStatus in method.Responses.Where(r => r.Value.Body is CompositeType).Select(s => s.Key).ToArray())
+                        {
+                            anyTypeConverted = true;
+                            CompositeType compositeType = (CompositeType)method.Responses[responseStatus].Body;
+                            SequenceType sequenceType = GetCompositeTypeProperties(compositeType, settings).Select(p => GetPropertyModelType(p)).FirstOrDefault(t => t is SequenceType) as SequenceType;
 
-                        convertedTypes[method.Responses[responseStatus].Body] = pagedResult;
-                        Response resp = DependencyInjection.New<Response>(pagedResult, method.Responses[responseStatus].Headers);
-                        ResponseSetParent(resp, method);
-                        method.Responses[responseStatus] = resp;
+                            // if the type is a wrapper over page-able response
+                            if (sequenceType != null)
+                            {
+                                SequenceType pagedResult = DependencyInjection.New<SequenceType>();
+                                pagedResult.ElementType = sequenceType.ElementType;
+                                SequenceTypeSetPageImplType(pagedResult, page.ClassName);
+
+                                convertedTypes[method.Responses[responseStatus].Body] = pagedResult;
+                                Response resp = DependencyInjection.New<Response>(pagedResult, method.Responses[responseStatus].Headers);
+                                ResponseSetParent(resp, method);
+                                method.Responses[responseStatus] = resp;
+                            }
+                        }
+
+                        if (!anyTypeConverted && MethodSimulateAsPagingOperation(method, settings))
+                        {
+                            foreach (HttpStatusCode responseStatus in method.Responses.Where(r => r.Value.Body is SequenceType).Select(s => s.Key).ToArray())
+                            {
+                                SequenceType sequenceType = (SequenceType)method.Responses[responseStatus].Body;
+
+                                SequenceType pagedResult = DependencyInjection.New<SequenceType>();
+                                pagedResult.ElementType = sequenceType.ElementType;
+                                SequenceTypeSetPageImplType(pagedResult, page.ClassName);
+
+                                convertedTypes[method.Responses[responseStatus].Body] = pagedResult;
+                                Response resp = DependencyInjection.New<Response>(pagedResult, method.Responses[responseStatus].Headers);
+                                ResponseSetParent(resp, method);
+                                method.Responses[responseStatus] = resp;
+                            }
+                        }
+
+                        if (convertedTypes.ContainsKey(method.ReturnType.Body))
+                        {
+                            Response resp = DependencyInjection.New<Response>(convertedTypes[method.ReturnType.Body], method.ReturnType.Headers);
+                            ResponseSetParent(resp, method);
+                            method.ReturnType = resp;
+                        }
                     }
-                }
-
-                if (!anyTypeConverted && MethodSimulateAsPagingOperation(method, settings))
-                {
-                    foreach (HttpStatusCode responseStatus in method.Responses.Where(r => r.Value.Body is SequenceType).Select(s => s.Key).ToArray())
-                    {
-                        SequenceType sequenceType = (SequenceType)method.Responses[responseStatus].Body;
-
-                        SequenceType pagedResult = DependencyInjection.New<SequenceType>();
-                        pagedResult.ElementType = sequenceType.ElementType;
-                        SequenceTypeSetPageImplType(pagedResult, pageClassName);
-
-                        convertedTypes[method.Responses[responseStatus].Body] = pagedResult;
-                        Response resp = DependencyInjection.New<Response>(pagedResult, method.Responses[responseStatus].Headers);
-                        ResponseSetParent(resp, method);
-                        method.Responses[responseStatus] = resp;
-                    }
-                }
-
-                if (convertedTypes.ContainsKey(method.ReturnType.Body))
-                {
-                    Response resp = DependencyInjection.New<Response>(convertedTypes[method.ReturnType.Body], method.ReturnType.Headers);
-                    ResponseSetParent(resp, method);
-                    method.ReturnType = resp;
                 }
             }
 
@@ -447,49 +453,56 @@ namespace AutoRest.Java
                 new HashSet<string>(convertedTypes.Keys.Where(x => x is CompositeType).Cast<CompositeType>().Select(t => IModelTypeName(t, settings))));
         }
 
-        private static string GetPagingSetting(Dictionary<string, object> extensions, IDictionary<KeyValuePair<string, string>, string> pageClasses, bool simulatingPaging, out string nextLinkName)
+        private static PageClass GetPagingSetting(bool hasPageableExtension, JContainer methodPageableExtensions, bool simulatedMethodAsPaging)
         {
-            // default value
-            nextLinkName = null;
-            var itemName = "value";
+            string nextLinkName = null;
+            string itemName = "value";
             string className = null;
 
-            if (extensions.ContainsKey(AzureExtensions.PageableExtension))
-            {
-                var ext = extensions[AzureExtensions.PageableExtension] as JContainer;
+            bool shouldCreatePage = true;
 
-                if (ext == null)
+            if (hasPageableExtension)
+            {
+                if (methodPageableExtensions == null)
                 {
-                    return null;
+                    shouldCreatePage = false;
                 }
-
-                nextLinkName = (string)ext["nextLinkName"];
-                itemName = (string)ext["itemName"] ?? "value";
-                className = (string)ext["className"];
-            }
-            else if (!simulatingPaging)
-            {
-                return null;
-            }
-
-            var keypair = new KeyValuePair<string, string>(nextLinkName, itemName);
-            if (!pageClasses.ContainsKey(keypair))
-            {
-                if (string.IsNullOrWhiteSpace(className))
+                else
                 {
-                    if (pageClasses.Count > 0)
-                    {
-                        className = $"PageImpl{pageClasses.Count}";
-                    }
-                    else
-                    {
-                        className = "PageImpl";
-                    }
+                    nextLinkName = (string)methodPageableExtensions["nextLinkName"];
+                    itemName = (string)methodPageableExtensions["itemName"] ?? "value";
+                    className = (string)methodPageableExtensions["className"];
                 }
-                pageClasses.Add(keypair, className);
+            }
+            else if (!simulatedMethodAsPaging)
+            {
+                shouldCreatePage = false;
             }
 
-            return pageClasses[keypair];
+            PageClass result = null;
+            if (shouldCreatePage)
+            {
+                result = pageClasses.FirstOrDefault(page => page.NextLinkName == nextLinkName && page.ItemName == itemName);
+                if (result == null)
+                {
+                    if (string.IsNullOrWhiteSpace(className))
+                    {
+                        if (pageClasses.Count > 0)
+                        {
+                            className = $"PageImpl{pageClasses.Count}";
+                        }
+                        else
+                        {
+                            className = "PageImpl";
+                        }
+                    }
+
+                    result = new PageClass(nextLinkName, itemName, className);
+                    pageClasses.Add(result);
+                }
+            }
+
+            return result;
         }
 
         private static Service ParseService(CodeModel codeModel, JavaSettings settings)
@@ -961,15 +974,10 @@ namespace AutoRest.Java
             return javaFile;
         }
 
-        public static JavaFile GetPageJavaFile(CodeModel codeModel, JavaSettings settings, KeyValuePair<KeyValuePair<string, string>, string> pageClass)
+        public static JavaFile GetPageJavaFile(PageClass pageClass, JavaSettings settings)
         {
-            string nextLinkName = pageClass.Key.Key;
-            string itemName = pageClass.Key.Value;
-
-            string className = pageClass.Value.ToPascalCase();
-
             string subPackage = (settings.IsFluent ? implPackage : modelsPackage);
-            JavaFile javaFile = GetJavaFileWithHeaderAndPackage(subPackage, settings, className);
+            JavaFile javaFile = GetJavaFileWithHeaderAndPackage(subPackage, settings, pageClass.ClassName);
             javaFile.Import("com.fasterxml.jackson.annotation.JsonProperty",
                             "com.microsoft.azure.v2.Page",
                             "java.util.List");
@@ -979,20 +987,20 @@ namespace AutoRest.Java
                 comment.Description("An instance of this class defines a page of Azure resources and a link to get the next page of resources, if any.");
                 comment.Param("<T>", "type of Azure resource");
             });
-            javaFile.PublicClass($"{className}<T> implements Page<T>", classBlock =>
+            javaFile.PublicClass($"{pageClass.ClassName}<T> implements Page<T>", classBlock =>
             {
                 classBlock.JavadocComment(comment =>
                 {
                     comment.Description("The link to the next page.");
                 });
-                classBlock.Annotation($"JsonProperty(\"{nextLinkName}\")");
+                classBlock.Annotation($"JsonProperty(\"{pageClass.NextLinkName}\")");
                 classBlock.PrivateMemberVariable("String", "nextPageLink");
 
                 classBlock.JavadocComment(comment =>
                 {
                     comment.Description("The list of items.");
                 });
-                classBlock.Annotation($"JsonProperty(\"{itemName}\")");
+                classBlock.Annotation($"JsonProperty(\"{pageClass.ItemName}\")");
                 classBlock.PrivateMemberVariable("List<T>", "items");
 
                 classBlock.JavadocComment(comment =>
@@ -1023,7 +1031,7 @@ namespace AutoRest.Java
                     comment.Param("nextPageLink", "the link to the next page.");
                     comment.Return("this Page object itself.");
                 });
-                classBlock.PublicMethod($"{className}<T> setNextPageLink(String nextPageLink)", function =>
+                classBlock.PublicMethod($"{pageClass.ClassName}<T> setNextPageLink(String nextPageLink)", function =>
                 {
                     function.Line("this.nextPageLink = nextPageLink;");
                     function.Return("this");
@@ -1035,7 +1043,7 @@ namespace AutoRest.Java
                     comment.Param("items", "the list of items in {@link List}.");
                     comment.Return("this Page object itself.");
                 });
-                classBlock.PublicMethod($"{className}<T> setItems(List<T> items)", function =>
+                classBlock.PublicMethod($"{pageClass.ClassName}<T> setItems(List<T> items)", function =>
                 {
                     function.Line("this.items = items;");
                     function.Return("this");
