@@ -510,6 +510,32 @@ namespace AutoRest.Java
             return new Service(serviceClientName, serviceClientDescription, subpackages, enums, exceptions, xmlSequenceWrappers, models, manager);
         }
 
+        private static MethodGroupClient ParseMethodGroupClient(MethodGroup methodGroup, CodeModel codeModel, JavaSettings settings)
+        {
+            string className = GetMethodGroupClientClassName(methodGroup, settings);
+
+            string interfaceName = GetMethodGroupClientInterfaceName(methodGroup);
+
+            IEnumerable<string> implementedInterfaces = Enumerable.Empty<string>();
+            if (settings.IsFluent)
+            {
+                implementedInterfaces = MethodGroupSupportedInterfaces(methodGroup, settings);
+            }
+            else
+            {
+                implementedInterfaces = new[] { MethodGroupTypeString(methodGroup, settings) };
+            }
+
+            RestAPI restAPI = ParseRestAPI(settings);
+
+            return new MethodGroupClient(className, interfaceName, implementedInterfaces);
+        }
+
+        private static RestAPI ParseRestAPI(JavaSettings settings)
+        {
+            return null;
+        }
+
         private static IEnumerable<string> ParseSubpackages(JavaSettings settings)
         {
             List<string> subpackages = new List<string>() { "", "implementation" };
@@ -1342,36 +1368,18 @@ namespace AutoRest.Java
 
         public static JavaFile GetMethodGroupClientJavaFile(CodeModel codeModel, JavaSettings settings, MethodGroup methodGroup)
         {
-            string className = GetMethodGroupClientClassName(methodGroup, settings);
+            MethodGroupClient methodGroupClient = ParseMethodGroupClient(methodGroup, codeModel, settings);
 
-            JavaFile javaFile = GetJavaFileWithHeaderAndPackage(implPackage, settings, className);
+            JavaFile javaFile = GetJavaFileWithHeaderAndPackage(implPackage, settings, methodGroupClient.ClassName);
             javaFile.Import(MethodGroupImplImports(methodGroup, settings));
 
-            string methodGroupClientInterfaceName = GetMethodGroupClientInterfaceName(methodGroup);
-
-            string parentDeclaration;
-            if (settings.IsFluent)
-            {
-                IEnumerable<string> supportedInterfaces = MethodGroupSupportedInterfaces(methodGroup, settings);
-                if (supportedInterfaces.Any())
-                {
-                    parentDeclaration = $" implements {string.Join(", ", supportedInterfaces)}";
-                }
-                else
-                {
-                    parentDeclaration = "";
-                }
-            }
-            else
-            {
-                parentDeclaration = " implements " + MethodGroupTypeString(methodGroup, settings);
-            }
+            string parentDeclaration = methodGroupClient.ImplementedInterfaces.Any() ? $" implements {string.Join(", ", methodGroupClient.ImplementedInterfaces)}" : "";
 
             javaFile.JavadocComment(settings.MaximumJavadocCommentWidth, comment =>
             {
-                comment.Description($"An instance of this class provides access to all the operations defined in {methodGroupClientInterfaceName}.");
+                comment.Description($"An instance of this class provides access to all the operations defined in {methodGroupClient.InterfaceName}.");
             });
-            javaFile.PublicClass($"{className}{parentDeclaration}", classBlock =>
+            javaFile.PublicClass($"{methodGroupClient.ClassName}{parentDeclaration}", classBlock =>
             {
                 string restAPIInterfaceName = GetRestAPIInterfaceName(methodGroup, settings);
                 string serviceClientTypeName = MethodGroupServiceClientType(methodGroup);
@@ -1384,10 +1392,10 @@ namespace AutoRest.Java
 
                 classBlock.JavadocComment(comment =>
                 {
-                    comment.Description($"Initializes an instance of {className}.");
+                    comment.Description($"Initializes an instance of {methodGroupClient.ClassName}.");
                     comment.Param("client", "the instance of the service client containing this operation class.");
                 });
-                classBlock.PublicConstructor($"{className}({serviceClientTypeName} client)", constructor =>
+                classBlock.PublicConstructor($"{methodGroupClient.ClassName}({serviceClientTypeName} client)", constructor =>
                 {
                     AddProxyVariableInitializationStatement(constructor, GetRestAPIMethods(methodGroup), GetRestAPIInterfaceName(methodGroup, settings), "client", settings);
                     constructor.Line("this.client = client;");
