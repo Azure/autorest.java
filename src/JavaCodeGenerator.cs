@@ -69,6 +69,8 @@ namespace AutoRest.Java
 
         private static readonly List<PageClass> pageClasses = new List<PageClass>();
 
+        private static readonly Regex enumValueNameRegex = new Regex(@"[\\\/\.\+\ \-]+");
+
         private static readonly ISet<Property> innerModelProperties = new HashSet<Property>();
         private static readonly ISet<CompositeType> innerModelCompositeType = new HashSet<CompositeType>();
 
@@ -545,31 +547,33 @@ namespace AutoRest.Java
                 List<ServiceEnumValue> enumValues = new List<ServiceEnumValue>();
                 foreach (EnumValue enumValue in enumType.Values)
                 {
-                    string name = enumValue.MemberName;
-                    if (!string.IsNullOrWhiteSpace(name))
-                    {
-                        name = new Regex("[\\ -]+").Replace(name, "_");
-                        for (int i = 1; i < name.Length - 1; i++)
-                        {
-                            if (char.IsUpper(name[i]))
-                            {
-                                if (name[i - 1] != '_' && char.IsLower(name[i - 1]))
-                                {
-                                    name = name.Insert(i, "_");
-                                }
-                            }
-                        }
-                        name = name.ToUpperInvariant();
-                    }
-
-                    string value = enumValue.SerializedName;
-
-                    enumValues.Add(new ServiceEnumValue(name, value));
+                    enumValues.Add(ParseEnumValue(enumValue.MemberName, enumValue.SerializedName));
                 }
 
                 enums.Add(new ServiceEnum(enumName, enumSubPackage, expandable, enumValues));
             }
             return enums;
+        }
+
+        internal static ServiceEnumValue ParseEnumValue(string name, string value)
+        {
+            if (!string.IsNullOrWhiteSpace(name))
+            {
+                name = enumValueNameRegex.Replace(name, "_");
+                for (int i = 1; i < name.Length - 1; i++)
+                {
+                    if (char.IsUpper(name[i]))
+                    {
+                        if (name[i - 1] != '_' && char.IsLower(name[i - 1]))
+                        {
+                            name = name.Insert(i, "_");
+                        }
+                    }
+                }
+                name = name.ToUpperInvariant();
+            }
+
+            return new ServiceEnumValue(name, value);
         }
 
         private static IEnumerable<ServiceException> ParseExceptions(CodeModel codeModel, JavaSettings settings)
