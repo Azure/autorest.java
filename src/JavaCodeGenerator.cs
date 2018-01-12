@@ -528,14 +528,77 @@ namespace AutoRest.Java
                 implementedInterfaces = new[] { MethodGroupTypeString(methodGroup, settings) };
             }
 
-            RestAPI restAPI = ParseRestAPI(settings);
+            RestAPI restAPI = ParseRestAPI(methodGroup, settings);
 
-            return new MethodGroupClient(className, interfaceName, implementedInterfaces);
+            IEnumerable<string> imports = MethodGroupImplImports(methodGroup, settings);
+
+            string serviceClientName = MethodGroupServiceClientType(methodGroup);
+
+            return new MethodGroupClient(className, interfaceName, implementedInterfaces, restAPI, imports, serviceClientName);
         }
 
-        private static RestAPI ParseRestAPI(JavaSettings settings)
+        private static RestAPI ParseRestAPI(MethodGroup methodGroup, JavaSettings settings)
         {
-            return null;
+            string name = GetRestAPIInterfaceName(methodGroup, settings);
+
+            string baseURL = methodGroup.CodeModel.BaseUrl;
+
+            List<RestAPIMethod> restAPIMethods = new List<RestAPIMethod>();
+            foreach (Method method in methodGroup.Methods)
+            {
+                restAPIMethods.Add(ParseRestAPIMethod(method, settings));
+            }
+
+            return new RestAPI(name, baseURL, restAPIMethods);
+        }
+
+        private static RestAPIMethod ParseRestAPIMethod(Method method, JavaSettings settings)
+        {
+            string methodRequestContentType = method.RequestContentType;
+
+            bool methodIsPagingNextOperation = MethodIsPagingNextOperation(method);
+
+            string methodHttpMethod = method.HttpMethod.ToString().ToUpper();
+
+            string methodUrlPath = method.Url.TrimStart('/');
+
+            IEnumerable<HttpStatusCode> methodExpectedResponseStatusCodes = method.Responses.Keys.OrderBy(statusCode => statusCode);
+
+            string methodReturnValueWireType = ResponseReturnValueWireType(method.ReturnType);
+
+            string methodUnexpectedResponseExceptionType = null;
+            if (HasUnexpectedResponseExceptionType(method))
+            {
+                methodUnexpectedResponseExceptionType = MethodOperationExceptionTypeString(method, settings);
+            }
+
+            string methodName = GetMethodName(method, settings);
+
+            string methodAsyncReturnType;
+            if (MethodIsLongRunningOperation(method))
+            {
+                methodAsyncReturnType = $"Observable<OperationStatus<{ResponseServiceResponseGenericParameterString(method.ReturnType, settings)}>>";
+            }
+            else
+            {
+                methodAsyncReturnType = $"Single<{MethodRestResponseConcreteTypeName(method, settings)}>";
+            }
+
+            List<RestAPIParameter> methodParameters = new List<RestAPIParameter>();
+            foreach (Parameter parameter in MethodOrderedRetrofitParameters(method, settings))
+            {
+                string parameterName = GetParameterName(parameter);
+
+                string parameterLocation = parameter.Location.ToString();
+                if (method.Url.Contains("{" + parameterName + "}"))
+                {
+                    parameterLocation = ParameterLocation.Path.ToString();
+                }
+
+                methodParameters.Add(new RestAPIParameter(parameterName, parameterLocation));
+            }
+
+            return new RestAPIMethod(methodRequestContentType, methodIsPagingNextOperation, methodHttpMethod, methodUrlPath, methodExpectedResponseStatusCodes, methodReturnValueWireType, methodUnexpectedResponseExceptionType, methodName, methodAsyncReturnType, methodParameters);
         }
 
         private static IEnumerable<string> ParseSubpackages(JavaSettings settings)
@@ -1375,7 +1438,7 @@ namespace AutoRest.Java
             MethodGroupClient methodGroupClient = ParseMethodGroupClient(methodGroup, codeModel, settings);
 
             JavaFile javaFile = GetJavaFileWithHeaderAndPackage(implPackage, settings, methodGroupClient.ClassName);
-            javaFile.Import(MethodGroupImplImports(methodGroup, settings));
+            javaFile.Import(methodGroupClient.Imports);
 
             string parentDeclaration = methodGroupClient.ImplementedInterfaces.Any() ? $" implements {string.Join(", ", methodGroupClient.ImplementedInterfaces)}" : "";
 
@@ -1385,23 +1448,20 @@ namespace AutoRest.Java
             });
             javaFile.PublicClass($"{methodGroupClient.ClassName}{parentDeclaration}", classBlock =>
             {
-                string restAPIInterfaceName = GetRestAPIInterfaceName(methodGroup, settings);
-                string serviceClientTypeName = MethodGroupServiceClientType(methodGroup);
-
                 classBlock.JavadocComment($"The proxy service used to perform REST calls.");
-                classBlock.PrivateMemberVariable(restAPIInterfaceName, "service");
+                classBlock.PrivateMemberVariable(methodGroupClient.RestAPI.Name, "service");
 
                 classBlock.JavadocComment("The service client containing this operation class.");
-                classBlock.PrivateMemberVariable(serviceClientTypeName, "client");
+                classBlock.PrivateMemberVariable(methodGroupClient.ServiceClientName, "client");
 
                 classBlock.JavadocComment(comment =>
                 {
                     comment.Description($"Initializes an instance of {methodGroupClient.ClassName}.");
                     comment.Param("client", "the instance of the service client containing this operation class.");
                 });
-                classBlock.PublicConstructor($"{methodGroupClient.ClassName}({serviceClientTypeName} client)", constructor =>
+                classBlock.PublicConstructor($"{methodGroupClient.ClassName}({methodGroupClient.ServiceClientName} client)", constructor =>
                 {
-                    AddProxyVariableInitializationStatement(constructor, GetRestAPIMethods(methodGroup), GetRestAPIInterfaceName(methodGroup, settings), "client", settings);
+                    AddProxyVariableInitializationStatement(constructor, methodGroupClient.RestAPI, "client", settings);
                     constructor.Line("this.client = client;");
                 });
 
@@ -4397,6 +4457,117 @@ namespace AutoRest.Java
             }
         }
 
+        private static void AddRestAPIInterface(JavaClass classBlock, RestAPI restAPI, string clientTypeName, bool shouldGenerateXmlSerialization, JavaSettings settings)
+        {
+            if (restAPI != null)
+            {
+                classBlock.JavadocComment(settings.MaximumJavadocCommentWidth, comment =>
+                {
+                    comment.Description($"The interface defining all the services for {clientTypeName} to be used by the proxy service to perform REST calls.");
+                });
+                classBlock.Annotation($"Host(\"{restAPI.BaseURL}\")");
+                classBlock.Interface(restAPI.Name, interfaceBlock =>
+                {
+                    foreach (RestAPIMethod restAPIMethod in restAPI.Methods)
+                    {
+                        if (restAPIMethod.RequestContentType == "multipart/form-data" || restAPIMethod.RequestContentType == "application/x-www-form-urlencoded")
+                        {
+                            interfaceBlock.LineComment($"@Multipart not supported by {restProxyType}");
+                        }
+
+                        if (restAPIMethod.IsPagingNextOperation)
+                        {
+                            interfaceBlock.Annotation("GET(\"{nextUrl}\")");
+                        }
+                        else
+                        {
+                            interfaceBlock.Annotation($"{restAPIMethod.HttpMethod}(\"{restAPIMethod.UrlPath}\")");
+                        }
+
+                        if (restAPIMethod.ResponseExpectedStatusCodes.Any())
+                        {
+                            interfaceBlock.Annotation($"ExpectedResponses({{{string.Join(", ", restAPIMethod.ResponseExpectedStatusCodes.Select(statusCode => statusCode.ToString("D")))}}})");
+                        }
+
+                        if (!string.IsNullOrEmpty(restAPIMethod.ReturnValueWireType))
+                        {
+                            interfaceBlock.Annotation($"ReturnValueWireType({restAPIMethod.ReturnValueWireType}.class)");
+                        }
+
+                        if (!string.IsNullOrEmpty(restAPIMethod.UnexpectedResponseExceptionType))
+                        {
+                            interfaceBlock.Annotation($"UnexpectedResponseExceptionType({restAPIMethod.UnexpectedResponseExceptionType}.class)");
+                        }
+
+                        List<string> parameterDeclarationList = new List<string>();
+                        foreach (RestAPIParameter parameter in restAPIMethod.Parameters)
+                        {
+                            StringBuilder parameterDeclarationBuilder = new StringBuilder();
+                            if (restAPIMethod.Url.Contains("{" + GetParameterName(parameter) + "}"))
+                            {
+                                parameter.Location = ParameterLocation.Path;
+                            }
+
+                            string name = parameter.SerializedName;
+                            if (parameter.Extensions.ContainsKey("hostParameter"))
+                            {
+                                parameterDeclarationBuilder.Append($"@HostParam(\"{name}\") ");
+                            }
+                            else if (parameter.Location == ParameterLocation.Path ||
+                                parameter.Location == ParameterLocation.Query ||
+                                parameter.Location == ParameterLocation.Header)
+                            {
+                                parameterDeclarationBuilder.Append($"@{parameter.Location}Param(\"{name}\") ");
+                            }
+                            else if (parameter.Location == ParameterLocation.Body)
+                            {
+                                parameterDeclarationBuilder.Append($"@BodyParam(\"{restAPIMethod.RequestContentType}\") ");
+                            }
+                            else if (parameter.Location == ParameterLocation.FormData)
+                            {
+                                parameterDeclarationBuilder.Append($"/* @Part(\"{name}\") not supported by RestProxy */");
+                            }
+
+                            string declarativeName = PropertyName(parameter.ClientProperty) ?? GetParameterName(parameter);
+
+                            IModelType parameterModelType = ParameterGetModelType(parameter);
+                            bool shouldUseXmlListWrapper = shouldGenerateXmlSerialization && parameter.Location == ParameterLocation.Body && parameterModelType is SequenceType;
+                            if (shouldUseXmlListWrapper)
+                            {
+                                parameterDeclarationBuilder.Append(parameterModelType.XmlName + "Wrapper");
+                            }
+                            else
+                            {
+                                parameterDeclarationBuilder.Append(IModelTypeName(ParameterWireType(parameter), settings));
+                            }
+
+                            parameterDeclarationBuilder.Append(" " + declarativeName);
+                            parameterDeclarationList.Add(parameterDeclarationBuilder.ToString());
+                        }
+
+                        string parameterDeclarations = string.Join(", ", parameterDeclarationList);
+
+                        if (settings.IsAzureOrFluent)
+                        {
+                            foreach (Parameter parameter in retrofitParameters.Where(p => p.Location == ParameterLocation.Path || p.Location == ParameterLocation.Query))
+                            {
+                                if (GetExtensionBool(parameter?.Extensions, SwaggerExtensions.SkipUrlEncodingExtension))
+                                {
+                                    string location = parameter.Location.ToString();
+                                    string serializedName = parameter.SerializedName;
+                                    parameterDeclarations = parameterDeclarations.Replace(
+                                        $"@{location}Param(\"{serializedName}\")",
+                                        $"@{location}Param(value = \"{serializedName}\", encoded = true)");
+                                }
+                            }
+                        }
+
+                        interfaceBlock.PublicMethod($"{restAPIMethod.AsyncReturnType}>> {restAPIMethod.Name}({parameterDeclarations})");
+                    }
+                });
+            }
+        }
+
         private static void AddServiceClientInterfacePropertyGettersAndSetters(JavaInterface interfaceBlock, CodeModel codeModel, JavaSettings settings)
         {
             string serviceClientInterfaceName = GetServiceClientInterfaceName(codeModel);
@@ -4888,6 +5059,14 @@ namespace AutoRest.Java
             if (restAPIMethods.Any())
             {
                 constructor.Line($"this.service = {GetProxyCreatorType(settings)}.create({restAPIInterfaceName}.class, {serviceClientVariableName});");
+            }
+        }
+
+        private static void AddProxyVariableInitializationStatement(JavaBlock constructor, RestAPI restAPI, string serviceClientVariableName, JavaSettings settings)
+        {
+            if (restAPI != null)
+            {
+                constructor.Line($"this.service = {GetProxyCreatorType(settings)}.create({restAPI.Name}.class, {serviceClientVariableName});");
             }
         }
 

@@ -16,11 +16,17 @@ namespace AutoRest.Java.Model
         /// <param name="className">The name of the client's class.</param>
         /// <param name="interfaceName">The name of the client's interface.</param>
         /// <param name="implementedInterfaces">The interfaces that the client implements.</param>
-        public MethodGroupClient(string className, string interfaceName, IEnumerable<string> implementedInterfaces, RestAPI restAPI)
+        /// <param name="restAPI">The REST API that the client will send requests to.</param>
+        /// <param name="imports">The imports for the client.</param>
+        /// <param name="serviceClientName">The name of the ServiceClient that contains this MethodGroupClient.</param>
+        public MethodGroupClient(string className, string interfaceName, IEnumerable<string> implementedInterfaces, RestAPI restAPI, IEnumerable<string> imports, string serviceClientName)
         {
             ClassName = className;
             InterfaceName = interfaceName;
             ImplementedInterfaces = implementedInterfaces;
+            RestAPI = restAPI;
+            Imports = imports;
+            ServiceClientName = serviceClientName;
         }
 
         /// <summary>
@@ -37,5 +43,20 @@ namespace AutoRest.Java.Model
         /// Get the interfaces that the client implements.
         /// </summary>
         public IEnumerable<string> ImplementedInterfaces { get; }
+
+        /// <summary>
+        /// Get the REST API that this client will send requests to.
+        /// </summary>
+        public RestAPI RestAPI { get; }
+
+        /// <summary>
+        /// Get the imports for this client.
+        /// </summary>
+        public IEnumerable<string> Imports { get; }
+
+        /// <summary>
+        /// Get the name of the ServiceClient that contains this MethodGroupClient.
+        /// </summary>
+        public string ServiceClientName { get; }
     }
 }
