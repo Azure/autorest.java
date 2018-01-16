@@ -82,5 +82,10 @@ namespace AutoRest.Java.Model
         /// Get the return type of this method with its asynchronous container.
         /// </summary>
         public string AsyncReturnType { get; }
+
+        /// <summary>
+        /// Get the parameters that are provided to this method.
+        /// </summary>
+        public IEnumerable<RestAPIParameter> Parameters { get; }
     }
 }

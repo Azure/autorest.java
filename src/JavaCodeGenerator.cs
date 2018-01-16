@@ -607,8 +607,30 @@ namespace AutoRest.Java
                 {
                     parameterLocation = ParameterLocation.Path.ToString();
                 }
+                else if (parameter.Extensions.ContainsKey("hostParameter"))
+                {
+                    parameterLocation = "Host";
+                }
 
-                methodParameters.Add(new RestAPIParameter(parameterName, parameterLocation));
+                string parameterSerializedName = parameter.SerializedName;
+
+                string parameterVariableName = PropertyName(parameter.ClientProperty) ?? GetParameterName(parameter);
+
+                string parameterClientTypeName;
+                IModelType parameterModelType = ParameterGetModelType(parameter);
+                bool shouldUseXmlListWrapper = method.MethodGroup.CodeModel.ShouldGenerateXmlSerialization && parameter.Location == ParameterLocation.Body && parameterModelType is SequenceType;
+                if (shouldUseXmlListWrapper)
+                {
+                    parameterClientTypeName = parameterModelType.XmlName + "Wrapper";
+                }
+                else
+                {
+                    parameterClientTypeName = IModelTypeName(ParameterWireType(parameter), settings);
+                }
+
+                bool parameterSkipUrlEncodingExtension = GetExtensionBool(parameter.Extensions, SwaggerExtensions.SkipUrlEncodingExtension);
+
+                methodParameters.Add(new RestAPIParameter(parameterName, parameterLocation, parameterSerializedName, parameterVariableName, parameterClientTypeName, parameterSkipUrlEncodingExtension));
             }
 
             return new RestAPIMethod(methodRequestContentType, methodIsPagingNextOperation, methodHttpMethod, methodUrlPath, methodExpectedResponseStatusCodes, methodReturnValueWireType, methodUnexpectedResponseExceptionType, methodName, methodAsyncReturnType, methodParameters);
@@ -916,7 +938,7 @@ namespace AutoRest.Java
 
             bool isXmlWrapper = property.XmlIsWrapped;
 
-            string wireTypeName = GetPropertyWireTypeName(property, settings);
+            string wireTypeName = IModelTypeName(GetPropertyModelType(property), settings);
 
             bool isConstant = property.IsConstant;
 
@@ -929,7 +951,7 @@ namespace AutoRest.Java
             string defaultValue;
             try
             {
-                defaultValue = GetPropertyDefaultValue(property);
+                defaultValue = GetDefaultValue(property.DefaultValue, GetPropertyModelType(property));
             }
             catch (NotSupportedException)
             {
@@ -1177,7 +1199,7 @@ namespace AutoRest.Java
 
         public static JavaFile GetServiceClientJavaFile(CodeModel codeModel, JavaSettings settings)
         {
-            string serviceClientClassName = GetServiceClientClassName(codeModel);
+            string serviceClientClassName = GetServiceClientInterfaceName(codeModel) + "Impl";
             JavaFile javaFile = GetJavaFileWithHeaderAndPackage(implPackage, settings, serviceClientClassName);
 
             string serviceClientClassDeclaration = $"{serviceClientClassName} extends ";
@@ -1422,7 +1444,31 @@ namespace AutoRest.Java
             });
             javaFile.PublicInterface(interfaceName, interfaceBlock =>
             {
-                AddServiceClientInterfacePropertyGettersAndSetters(interfaceBlock, codeModel, settings);
+                foreach (Property property in GetServiceClientProperties(codeModel))
+                {
+                    string propertyDescription = property.Documentation;
+                    string propertyName = PropertyName(property);
+                    string propertyNameCamelCase = propertyName.ToCamelCase();
+                    string propertyType = IModelTypeName(IModelTypeServiceResponseVariant(GetPropertyModelType(property)), settings);
+
+                    interfaceBlock.JavadocComment(comment =>
+                    {
+                        comment.Description($"Gets {propertyDescription}");
+                        comment.Return($"the {propertyName} value");
+                    });
+                    interfaceBlock.PublicMethod($"{propertyType} {propertyNameCamelCase}()");
+
+                    if (!property.IsReadOnly)
+                    {
+                        interfaceBlock.JavadocComment(comment =>
+                        {
+                            comment.Description($"Sets {propertyDescription}");
+                            comment.Param(propertyNameCamelCase, $"the {propertyName} value");
+                            comment.Return("the service client itself");
+                        });
+                        interfaceBlock.PublicMethod($"{interfaceName} with{propertyName.ToPascalCase()}({propertyType} {propertyNameCamelCase})");
+                    }
+                }
 
                 foreach (MethodGroup methodGroup in GetMethodGroups(codeModel))
                 {
@@ -1469,11 +1515,14 @@ namespace AutoRest.Java
                 });
                 classBlock.PublicConstructor($"{methodGroupClient.ClassName}({methodGroupClient.ServiceClientName} client)", constructor =>
                 {
-                    AddProxyVariableInitializationStatement(constructor, methodGroupClient.RestAPI, "client", settings);
+                    if (methodGroupClient.RestAPI != null)
+                    {
+                        constructor.Line($"this.service = {GetProxyCreatorType(settings)}.create({methodGroupClient.RestAPI.Name}.class, client);");
+                    }
                     constructor.Line("this.client = client;");
                 });
 
-                AddRestAPIInterface(classBlock, codeModel, methodGroup, settings);
+                AddRestAPIInterface(classBlock, methodGroupClient.RestAPI, methodGroupClient.InterfaceName, settings);
 
                 AddClientMethodOverloads(classBlock, GetRestAPIMethods(methodGroup), settings);
             });
@@ -3053,7 +3102,7 @@ namespace AutoRest.Java
             }
 
             // validation
-            if (HasClientMethodParametersOrClientPropertiesToValidate(restAPIMethod))
+            if (GetClientMethodParametersAndClientPropertiesToValidate(restAPIMethod).Any())
             {
                 imports.Add("com.microsoft.rest.v2.Validator");
             }
@@ -3812,13 +3861,11 @@ namespace AutoRest.Java
 
                 if (parameter.IsConstant)
                 {
-                    block.Line($"final {IModelTypeParameterVariantName(parameterClientType, settings)} {parameterName} = {GetParameterDefaultValue(parameter) ?? "null"};");
+                    string defaultValue = GetDefaultValue(parameter.DefaultValue, ParameterGetModelType(parameter));
+                    block.Line($"final {IModelTypeParameterVariantName(parameterClientType, settings)} {parameterName} = {defaultValue ?? "null"};");
                 }
             }
         }
-
-        private static bool HasClientMethodParametersOrClientPropertiesToValidate(Method method)
-            => GetClientMethodParametersAndClientPropertiesToValidate(method).Any();
 
         private static IEnumerable<Parameter> GetClientMethodParametersAndClientPropertiesToValidate(Method method)
             => method.Parameters.Where(parameter =>
@@ -4465,7 +4512,7 @@ namespace AutoRest.Java
             }
         }
 
-        private static void AddRestAPIInterface(JavaClass classBlock, RestAPI restAPI, string clientTypeName, bool shouldGenerateXmlSerialization, JavaSettings settings)
+        private static void AddRestAPIInterface(JavaClass classBlock, RestAPI restAPI, string clientTypeName, JavaSettings settings)
         {
             if (restAPI != null)
             {
@@ -4511,45 +4558,29 @@ namespace AutoRest.Java
                         foreach (RestAPIParameter parameter in restAPIMethod.Parameters)
                         {
                             StringBuilder parameterDeclarationBuilder = new StringBuilder();
-                            if (restAPIMethod.Url.Contains("{" + GetParameterName(parameter) + "}"))
+                            
+                            switch (parameter.Location.ToLower())
                             {
-                                parameter.Location = ParameterLocation.Path;
+                                case "host":
+                                    parameterDeclarationBuilder.Append($"@HostParam(\"{parameter.SerializedName}\") ");
+                                    break;
+
+                                case "path":
+                                case "query":
+                                case "header":
+                                    parameterDeclarationBuilder.Append($"@{parameter.Location}Param(\"{parameter.SerializedName}\") ");
+                                    break;
+
+                                case "body":
+                                    parameterDeclarationBuilder.Append($"@BodyParam(\"{restAPIMethod.RequestContentType}\") ");
+                                    break;
+
+                                case "formdata":
+                                    parameterDeclarationBuilder.Append($"/* @Part(\"{parameter.SerializedName}\") not supported by RestProxy */");
+                                    break;
                             }
 
-                            string name = parameter.SerializedName;
-                            if (parameter.Extensions.ContainsKey("hostParameter"))
-                            {
-                                parameterDeclarationBuilder.Append($"@HostParam(\"{name}\") ");
-                            }
-                            else if (parameter.Location == ParameterLocation.Path ||
-                                parameter.Location == ParameterLocation.Query ||
-                                parameter.Location == ParameterLocation.Header)
-                            {
-                                parameterDeclarationBuilder.Append($"@{parameter.Location}Param(\"{name}\") ");
-                            }
-                            else if (parameter.Location == ParameterLocation.Body)
-                            {
-                                parameterDeclarationBuilder.Append($"@BodyParam(\"{restAPIMethod.RequestContentType}\") ");
-                            }
-                            else if (parameter.Location == ParameterLocation.FormData)
-                            {
-                                parameterDeclarationBuilder.Append($"/* @Part(\"{name}\") not supported by RestProxy */");
-                            }
-
-                            string declarativeName = PropertyName(parameter.ClientProperty) ?? GetParameterName(parameter);
-
-                            IModelType parameterModelType = ParameterGetModelType(parameter);
-                            bool shouldUseXmlListWrapper = shouldGenerateXmlSerialization && parameter.Location == ParameterLocation.Body && parameterModelType is SequenceType;
-                            if (shouldUseXmlListWrapper)
-                            {
-                                parameterDeclarationBuilder.Append(parameterModelType.XmlName + "Wrapper");
-                            }
-                            else
-                            {
-                                parameterDeclarationBuilder.Append(IModelTypeName(ParameterWireType(parameter), settings));
-                            }
-
-                            parameterDeclarationBuilder.Append(" " + declarativeName);
+                            parameterDeclarationBuilder.Append(parameter.ClientTypeName + " " + parameter.VariableName);
                             parameterDeclarationList.Add(parameterDeclarationBuilder.ToString());
                         }
 
@@ -4557,61 +4588,22 @@ namespace AutoRest.Java
 
                         if (settings.IsAzureOrFluent)
                         {
-                            foreach (Parameter parameter in retrofitParameters.Where(p => p.Location == ParameterLocation.Path || p.Location == ParameterLocation.Query))
+                            foreach (RestAPIParameter parameter in restAPIMethod.Parameters.Where(p => (p.Location.EqualsIgnoreCase("Path") || p.Location.EqualsIgnoreCase("Query")) && p.SkipUrlEncodingExtension))
                             {
-                                if (GetExtensionBool(parameter?.Extensions, SwaggerExtensions.SkipUrlEncodingExtension))
-                                {
-                                    string location = parameter.Location.ToString();
-                                    string serializedName = parameter.SerializedName;
-                                    parameterDeclarations = parameterDeclarations.Replace(
-                                        $"@{location}Param(\"{serializedName}\")",
-                                        $"@{location}Param(value = \"{serializedName}\", encoded = true)");
-                                }
+                                parameterDeclarations = parameterDeclarations.Replace(
+                                    $"@{parameter.Location}Param(\"{parameter.SerializedName}\")",
+                                    $"@{parameter.Location}Param(value = \"{parameter.SerializedName}\", encoded = true)");
                             }
                         }
 
-                        interfaceBlock.PublicMethod($"{restAPIMethod.AsyncReturnType}>> {restAPIMethod.Name}({parameterDeclarations})");
+                        interfaceBlock.PublicMethod($"{restAPIMethod.AsyncReturnType} {restAPIMethod.Name}({parameterDeclarations})");
                     }
                 });
             }
         }
 
-        private static void AddServiceClientInterfacePropertyGettersAndSetters(JavaInterface interfaceBlock, CodeModel codeModel, JavaSettings settings)
-        {
-            string serviceClientInterfaceName = GetServiceClientInterfaceName(codeModel);
-
-            foreach (Property property in GetServiceClientProperties(codeModel))
-            {
-                string propertyDescription = property.Documentation;
-                string propertyName = PropertyName(property);
-                string propertyNameCamelCase = propertyName.ToCamelCase();
-                string propertyType = IModelTypeName(IModelTypeServiceResponseVariant(GetPropertyModelType(property)), settings);
-
-                interfaceBlock.JavadocComment(comment =>
-                {
-                    comment.Description($"Gets {propertyDescription}");
-                    comment.Return($"the {propertyName} value");
-                });
-                interfaceBlock.PublicMethod($"{propertyType} {propertyNameCamelCase}()");
-
-                if (!property.IsReadOnly)
-                {
-                    interfaceBlock.JavadocComment(comment =>
-                    {
-                        comment.Description($"Sets {propertyDescription}");
-                        comment.Param(propertyNameCamelCase, $"the {propertyName} value");
-                        comment.Return("the service client itself");
-                    });
-                    interfaceBlock.PublicMethod($"{serviceClientInterfaceName} with{propertyName.ToPascalCase()}({propertyType} {propertyNameCamelCase})");
-                }
-            }
-        }
-
         private static string GetServiceClientInterfaceName(CodeModel codeModel)
             => codeModel.Name.ToPascalCase();
-
-        private static string GetServiceClientClassName(CodeModel codeModel)
-            => GetServiceClientInterfaceName(codeModel) + "Impl";
 
         /// <summary>
         /// Get the name of the MethodGroupClient class for the provided methodGroup. If the fluent
@@ -5041,9 +5033,13 @@ namespace AutoRest.Java
             }
             constructor.Line($"super({string.Join(", ", superCallArgumentList)});");
 
-            foreach (Property serviceClientProperty in GetServiceClientProperties(codeModel).Where(p => GetPropertyDefaultValue(p) != null))
+            foreach (Property serviceClientProperty in GetServiceClientProperties(codeModel))
             {
-                constructor.Line($"this.{PropertyName(serviceClientProperty)} = {GetPropertyDefaultValue(serviceClientProperty)};");
+                string defaultValue = GetDefaultValue(serviceClientProperty.DefaultValue, GetPropertyModelType(serviceClientProperty));
+                if (defaultValue != null)
+                {
+                    constructor.Line($"this.{PropertyName(serviceClientProperty)} = {defaultValue};");
+                }
             }
 
             foreach (MethodGroup methodGroup in GetMethodGroups(codeModel))
@@ -5053,7 +5049,10 @@ namespace AutoRest.Java
                 constructor.Line($"this.{methodGroupClientName} = new {methodGroupClientClassName}(this);");
             }
 
-            AddProxyVariableInitializationStatement(constructor, GetRestAPIMethods(codeModel), GetRestAPIInterfaceName(codeModel), "this", settings);
+            if (GetRestAPIMethods(codeModel).Any())
+            {
+                constructor.Line($"this.service = {GetProxyCreatorType(settings)}.create({GetRestAPIInterfaceName(codeModel)}.class, this);");
+            }
         }
 
         private static string CreateDefaultPipelineExpression(JavaSettings settings, params string[] arguments)
@@ -5062,27 +5061,8 @@ namespace AutoRest.Java
             return $"{proxyCreatorType}.createDefaultPipeline({string.Join(", ", arguments)})";
         }
 
-        private static void AddProxyVariableInitializationStatement(JavaBlock constructor, IEnumerable<Method> restAPIMethods, string restAPIInterfaceName, string serviceClientVariableName, JavaSettings settings)
-        {
-            if (restAPIMethods.Any())
-            {
-                constructor.Line($"this.service = {GetProxyCreatorType(settings)}.create({restAPIInterfaceName}.class, {serviceClientVariableName});");
-            }
-        }
-
-        private static void AddProxyVariableInitializationStatement(JavaBlock constructor, RestAPI restAPI, string serviceClientVariableName, JavaSettings settings)
-        {
-            if (restAPI != null)
-            {
-                constructor.Line($"this.service = {GetProxyCreatorType(settings)}.create({restAPI.Name}.class, {serviceClientVariableName});");
-            }
-        }
-
         private static string GetProxyCreatorType(JavaSettings settings)
             => settings.IsAzureOrFluent ? azureProxyType : restProxyType;
-
-        private static string GetPropertyWireTypeName(Property property, JavaSettings settings)
-            => IModelTypeName(GetPropertyModelType(property), settings);
 
         private static string ConvertProperty(string sourceTypeName, string targetTypeName, string expression)
         {
@@ -5148,16 +5128,6 @@ namespace AutoRest.Java
                 result = codeNamer.CamelCase(codeNamer.RemoveInvalidCharacters(result));
             }
             return result;
-        }
-
-        private static string GetParameterDefaultValue(Parameter parameter)
-        {
-            return GetDefaultValue(parameter.DefaultValue, ParameterGetModelType(parameter));
-        }
-
-        private static string GetPropertyDefaultValue(Property property)
-        {
-            return GetDefaultValue(property.DefaultValue, GetPropertyModelType(property));
         }
 
         private static string GetDefaultValue(string defaultValue, IModelType type)
