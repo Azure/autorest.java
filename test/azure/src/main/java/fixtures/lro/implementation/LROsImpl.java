@@ -464,7 +464,7 @@ public class LROsImpl implements LROs {
      * @return the Product object if successful.
      */
     public Product beginPut200Succeeded() {
-        return beginPut200SucceededAsync().blockingLast().result();
+        return beginPut200SucceededAsync().blockingFirst().result();
     }
 
     /**
@@ -499,7 +499,7 @@ public class LROsImpl implements LROs {
      * @return the Product object if successful.
      */
     public Product beginPut200Succeeded(Product product) {
-        return beginPut200SucceededAsync(product).blockingLast().result();
+        return beginPut200SucceededAsync(product).blockingFirst().result();
     }
 
     /**
@@ -645,7 +645,7 @@ public class LROsImpl implements LROs {
      * @return the Product object if successful.
      */
     public Product beginPut200SucceededNoState() {
-        return beginPut200SucceededNoStateAsync().blockingLast().result();
+        return beginPut200SucceededNoStateAsync().blockingFirst().result();
     }
 
     /**
@@ -680,7 +680,7 @@ public class LROsImpl implements LROs {
      * @return the Product object if successful.
      */
     public Product beginPut200SucceededNoState(Product product) {
-        return beginPut200SucceededNoStateAsync(product).blockingLast().result();
+        return beginPut200SucceededNoStateAsync(product).blockingFirst().result();
     }
 
     /**
@@ -826,7 +826,7 @@ public class LROsImpl implements LROs {
      * @return the Product object if successful.
      */
     public Product beginPut202Retry200() {
-        return beginPut202Retry200Async().blockingLast().result();
+        return beginPut202Retry200Async().blockingFirst().result();
     }
 
     /**
@@ -861,7 +861,7 @@ public class LROsImpl implements LROs {
      * @return the Product object if successful.
      */
     public Product beginPut202Retry200(Product product) {
-        return beginPut202Retry200Async(product).blockingLast().result();
+        return beginPut202Retry200Async(product).blockingFirst().result();
     }
 
     /**
@@ -1007,7 +1007,7 @@ public class LROsImpl implements LROs {
      * @return the Product object if successful.
      */
     public Product beginPut201CreatingSucceeded200() {
-        return beginPut201CreatingSucceeded200Async().blockingLast().result();
+        return beginPut201CreatingSucceeded200Async().blockingFirst().result();
     }
 
     /**
@@ -1042,7 +1042,7 @@ public class LROsImpl implements LROs {
      * @return the Product object if successful.
      */
     public Product beginPut201CreatingSucceeded200(Product product) {
-        return beginPut201CreatingSucceeded200Async(product).blockingLast().result();
+        return beginPut201CreatingSucceeded200Async(product).blockingFirst().result();
     }
 
     /**
@@ -1188,7 +1188,7 @@ public class LROsImpl implements LROs {
      * @return the Product object if successful.
      */
     public Product beginPut200UpdatingSucceeded204() {
-        return beginPut200UpdatingSucceeded204Async().blockingLast().result();
+        return beginPut200UpdatingSucceeded204Async().blockingFirst().result();
     }
 
     /**
@@ -1223,7 +1223,7 @@ public class LROsImpl implements LROs {
      * @return the Product object if successful.
      */
     public Product beginPut200UpdatingSucceeded204(Product product) {
-        return beginPut200UpdatingSucceeded204Async(product).blockingLast().result();
+        return beginPut200UpdatingSucceeded204Async(product).blockingFirst().result();
     }
 
     /**
@@ -1369,7 +1369,7 @@ public class LROsImpl implements LROs {
      * @return the Product object if successful.
      */
     public Product beginPut201CreatingFailed200() {
-        return beginPut201CreatingFailed200Async().blockingLast().result();
+        return beginPut201CreatingFailed200Async().blockingFirst().result();
     }
 
     /**
@@ -1404,7 +1404,7 @@ public class LROsImpl implements LROs {
      * @return the Product object if successful.
      */
     public Product beginPut201CreatingFailed200(Product product) {
-        return beginPut201CreatingFailed200Async(product).blockingLast().result();
+        return beginPut201CreatingFailed200Async(product).blockingFirst().result();
     }
 
     /**
@@ -1550,7 +1550,7 @@ public class LROsImpl implements LROs {
      * @return the Product object if successful.
      */
     public Product beginPut200Acceptedcanceled200() {
-        return beginPut200Acceptedcanceled200Async().blockingLast().result();
+        return beginPut200Acceptedcanceled200Async().blockingFirst().result();
     }
 
     /**
@@ -1585,7 +1585,7 @@ public class LROsImpl implements LROs {
      * @return the Product object if successful.
      */
     public Product beginPut200Acceptedcanceled200(Product product) {
-        return beginPut200Acceptedcanceled200Async(product).blockingLast().result();
+        return beginPut200Acceptedcanceled200Async(product).blockingFirst().result();
     }
 
     /**
@@ -1731,7 +1731,7 @@ public class LROsImpl implements LROs {
      * @return the Product object if successful.
      */
     public Product beginPutNoHeaderInRetry() {
-        return beginPutNoHeaderInRetryAsync().blockingLast().result();
+        return beginPutNoHeaderInRetryAsync().blockingFirst().result();
     }
 
     /**
@@ -1766,7 +1766,7 @@ public class LROsImpl implements LROs {
      * @return the Product object if successful.
      */
     public Product beginPutNoHeaderInRetry(Product product) {
-        return beginPutNoHeaderInRetryAsync(product).blockingLast().result();
+        return beginPutNoHeaderInRetryAsync(product).blockingFirst().result();
     }
 
     /**
@@ -1912,7 +1912,7 @@ public class LROsImpl implements LROs {
      * @return the Product object if successful.
      */
     public Product beginPutAsyncRetrySucceeded() {
-        return beginPutAsyncRetrySucceededAsync().blockingLast().result();
+        return beginPutAsyncRetrySucceededAsync().blockingFirst().result();
     }
 
     /**
@@ -1947,7 +1947,7 @@ public class LROsImpl implements LROs {
      * @return the Product object if successful.
      */
     public Product beginPutAsyncRetrySucceeded(Product product) {
-        return beginPutAsyncRetrySucceededAsync(product).blockingLast().result();
+        return beginPutAsyncRetrySucceededAsync(product).blockingFirst().result();
     }
 
     /**
@@ -2093,7 +2093,7 @@ public class LROsImpl implements LROs {
      * @return the Product object if successful.
      */
     public Product beginPutAsyncNoRetrySucceeded() {
-        return beginPutAsyncNoRetrySucceededAsync().blockingLast().result();
+        return beginPutAsyncNoRetrySucceededAsync().blockingFirst().result();
     }
 
     /**
@@ -2128,7 +2128,7 @@ public class LROsImpl implements LROs {
      * @return the Product object if successful.
      */
     public Product beginPutAsyncNoRetrySucceeded(Product product) {
-        return beginPutAsyncNoRetrySucceededAsync(product).blockingLast().result();
+        return beginPutAsyncNoRetrySucceededAsync(product).blockingFirst().result();
     }
 
     /**
@@ -2274,7 +2274,7 @@ public class LROsImpl implements LROs {
      * @return the Product object if successful.
      */
     public Product beginPutAsyncRetryFailed() {
-        return beginPutAsyncRetryFailedAsync().blockingLast().result();
+        return beginPutAsyncRetryFailedAsync().blockingFirst().result();
     }
 
     /**
@@ -2309,7 +2309,7 @@ public class LROsImpl implements LROs {
      * @return the Product object if successful.
      */
     public Product beginPutAsyncRetryFailed(Product product) {
-        return beginPutAsyncRetryFailedAsync(product).blockingLast().result();
+        return beginPutAsyncRetryFailedAsync(product).blockingFirst().result();
     }
 
     /**
@@ -2455,7 +2455,7 @@ public class LROsImpl implements LROs {
      * @return the Product object if successful.
      */
     public Product beginPutAsyncNoRetrycanceled() {
-        return beginPutAsyncNoRetrycanceledAsync().blockingLast().result();
+        return beginPutAsyncNoRetrycanceledAsync().blockingFirst().result();
     }
 
     /**
@@ -2490,7 +2490,7 @@ public class LROsImpl implements LROs {
      * @return the Product object if successful.
      */
     public Product beginPutAsyncNoRetrycanceled(Product product) {
-        return beginPutAsyncNoRetrycanceledAsync(product).blockingLast().result();
+        return beginPutAsyncNoRetrycanceledAsync(product).blockingFirst().result();
     }
 
     /**
@@ -2636,7 +2636,7 @@ public class LROsImpl implements LROs {
      * @return the Product object if successful.
      */
     public Product beginPutAsyncNoHeaderInRetry() {
-        return beginPutAsyncNoHeaderInRetryAsync().blockingLast().result();
+        return beginPutAsyncNoHeaderInRetryAsync().blockingFirst().result();
     }
 
     /**
@@ -2671,7 +2671,7 @@ public class LROsImpl implements LROs {
      * @return the Product object if successful.
      */
     public Product beginPutAsyncNoHeaderInRetry(Product product) {
-        return beginPutAsyncNoHeaderInRetryAsync(product).blockingLast().result();
+        return beginPutAsyncNoHeaderInRetryAsync(product).blockingFirst().result();
     }
 
     /**
@@ -2817,7 +2817,7 @@ public class LROsImpl implements LROs {
      * @return the Sku object if successful.
      */
     public Sku beginPutNonResource() {
-        return beginPutNonResourceAsync().blockingLast().result();
+        return beginPutNonResourceAsync().blockingFirst().result();
     }
 
     /**
@@ -2852,7 +2852,7 @@ public class LROsImpl implements LROs {
      * @return the Sku object if successful.
      */
     public Sku beginPutNonResource(Sku sku) {
-        return beginPutNonResourceAsync(sku).blockingLast().result();
+        return beginPutNonResourceAsync(sku).blockingFirst().result();
     }
 
     /**
@@ -2998,7 +2998,7 @@ public class LROsImpl implements LROs {
      * @return the Sku object if successful.
      */
     public Sku beginPutAsyncNonResource() {
-        return beginPutAsyncNonResourceAsync().blockingLast().result();
+        return beginPutAsyncNonResourceAsync().blockingFirst().result();
     }
 
     /**
@@ -3033,7 +3033,7 @@ public class LROsImpl implements LROs {
      * @return the Sku object if successful.
      */
     public Sku beginPutAsyncNonResource(Sku sku) {
-        return beginPutAsyncNonResourceAsync(sku).blockingLast().result();
+        return beginPutAsyncNonResourceAsync(sku).blockingFirst().result();
     }
 
     /**
@@ -3179,7 +3179,7 @@ public class LROsImpl implements LROs {
      * @return the SubProduct object if successful.
      */
     public SubProduct beginPutSubResource() {
-        return beginPutSubResourceAsync().blockingLast().result();
+        return beginPutSubResourceAsync().blockingFirst().result();
     }
 
     /**
@@ -3214,7 +3214,7 @@ public class LROsImpl implements LROs {
      * @return the SubProduct object if successful.
      */
     public SubProduct beginPutSubResource(SubProduct product) {
-        return beginPutSubResourceAsync(product).blockingLast().result();
+        return beginPutSubResourceAsync(product).blockingFirst().result();
     }
 
     /**
@@ -3360,7 +3360,7 @@ public class LROsImpl implements LROs {
      * @return the SubProduct object if successful.
      */
     public SubProduct beginPutAsyncSubResource() {
-        return beginPutAsyncSubResourceAsync().blockingLast().result();
+        return beginPutAsyncSubResourceAsync().blockingFirst().result();
     }
 
     /**
@@ -3395,7 +3395,7 @@ public class LROsImpl implements LROs {
      * @return the SubProduct object if successful.
      */
     public SubProduct beginPutAsyncSubResource(SubProduct product) {
-        return beginPutAsyncSubResourceAsync(product).blockingLast().result();
+        return beginPutAsyncSubResourceAsync(product).blockingFirst().result();
     }
 
     /**
@@ -3541,7 +3541,7 @@ public class LROsImpl implements LROs {
      * @return the Product object if successful.
      */
     public Product beginDeleteProvisioning202Accepted200Succeeded() {
-        return beginDeleteProvisioning202Accepted200SucceededAsync().blockingLast().result();
+        return beginDeleteProvisioning202Accepted200SucceededAsync().blockingFirst().result();
     }
 
     /**
@@ -3626,7 +3626,7 @@ public class LROsImpl implements LROs {
      * @return the Product object if successful.
      */
     public Product beginDeleteProvisioning202DeletingFailed200() {
-        return beginDeleteProvisioning202DeletingFailed200Async().blockingLast().result();
+        return beginDeleteProvisioning202DeletingFailed200Async().blockingFirst().result();
     }
 
     /**
@@ -3711,7 +3711,7 @@ public class LROsImpl implements LROs {
      * @return the Product object if successful.
      */
     public Product beginDeleteProvisioning202Deletingcanceled200() {
-        return beginDeleteProvisioning202Deletingcanceled200Async().blockingLast().result();
+        return beginDeleteProvisioning202Deletingcanceled200Async().blockingFirst().result();
     }
 
     /**
@@ -3795,7 +3795,7 @@ public class LROsImpl implements LROs {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     public void beginDelete204Succeeded() {
-        beginDelete204SucceededAsync().blockingLast();
+        beginDelete204SucceededAsync().blockingFirst();
     }
 
     /**
@@ -3871,7 +3871,7 @@ public class LROsImpl implements LROs {
      * @return the Product object if successful.
      */
     public Product beginDelete202Retry200() {
-        return beginDelete202Retry200Async().blockingLast().result();
+        return beginDelete202Retry200Async().blockingFirst().result();
     }
 
     /**
@@ -3956,7 +3956,7 @@ public class LROsImpl implements LROs {
      * @return the Product object if successful.
      */
     public Product beginDelete202NoRetry204() {
-        return beginDelete202NoRetry204Async().blockingLast().result();
+        return beginDelete202NoRetry204Async().blockingFirst().result();
     }
 
     /**
@@ -4040,7 +4040,7 @@ public class LROsImpl implements LROs {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     public void beginDeleteNoHeaderInRetry() {
-        beginDeleteNoHeaderInRetryAsync().blockingLast();
+        beginDeleteNoHeaderInRetryAsync().blockingFirst();
     }
 
     /**
@@ -4115,7 +4115,7 @@ public class LROsImpl implements LROs {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     public void beginDeleteAsyncNoHeaderInRetry() {
-        beginDeleteAsyncNoHeaderInRetryAsync().blockingLast();
+        beginDeleteAsyncNoHeaderInRetryAsync().blockingFirst();
     }
 
     /**
@@ -4190,7 +4190,7 @@ public class LROsImpl implements LROs {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     public void beginDeleteAsyncRetrySucceeded() {
-        beginDeleteAsyncRetrySucceededAsync().blockingLast();
+        beginDeleteAsyncRetrySucceededAsync().blockingFirst();
     }
 
     /**
@@ -4265,7 +4265,7 @@ public class LROsImpl implements LROs {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     public void beginDeleteAsyncNoRetrySucceeded() {
-        beginDeleteAsyncNoRetrySucceededAsync().blockingLast();
+        beginDeleteAsyncNoRetrySucceededAsync().blockingFirst();
     }
 
     /**
@@ -4340,7 +4340,7 @@ public class LROsImpl implements LROs {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     public void beginDeleteAsyncRetryFailed() {
-        beginDeleteAsyncRetryFailedAsync().blockingLast();
+        beginDeleteAsyncRetryFailedAsync().blockingFirst();
     }
 
     /**
@@ -4415,7 +4415,7 @@ public class LROsImpl implements LROs {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     public void beginDeleteAsyncRetrycanceled() {
-        beginDeleteAsyncRetrycanceledAsync().blockingLast();
+        beginDeleteAsyncRetrycanceledAsync().blockingFirst();
     }
 
     /**
@@ -4491,7 +4491,7 @@ public class LROsImpl implements LROs {
      * @return the Sku object if successful.
      */
     public Sku beginPost200WithPayload() {
-        return beginPost200WithPayloadAsync().blockingLast().result();
+        return beginPost200WithPayloadAsync().blockingFirst().result();
     }
 
     /**
@@ -4575,7 +4575,7 @@ public class LROsImpl implements LROs {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     public void beginPost202Retry200() {
-        beginPost202Retry200Async().blockingLast();
+        beginPost202Retry200Async().blockingFirst();
     }
 
     /**
@@ -4609,7 +4609,7 @@ public class LROsImpl implements LROs {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     public void beginPost202Retry200(Product product) {
-        beginPost202Retry200Async(product).blockingLast();
+        beginPost202Retry200Async(product).blockingFirst();
     }
 
     /**
@@ -4737,7 +4737,7 @@ public class LROsImpl implements LROs {
      * @return the Product object if successful.
      */
     public Product beginPost202NoRetry204() {
-        return beginPost202NoRetry204Async().blockingLast().result();
+        return beginPost202NoRetry204Async().blockingFirst().result();
     }
 
     /**
@@ -4772,7 +4772,7 @@ public class LROsImpl implements LROs {
      * @return the Product object if successful.
      */
     public Product beginPost202NoRetry204(Product product) {
-        return beginPost202NoRetry204Async(product).blockingLast().result();
+        return beginPost202NoRetry204Async(product).blockingFirst().result();
     }
 
     /**
@@ -4918,7 +4918,7 @@ public class LROsImpl implements LROs {
      * @return the Product object if successful.
      */
     public Product beginPostAsyncRetrySucceeded() {
-        return beginPostAsyncRetrySucceededAsync().blockingLast().result();
+        return beginPostAsyncRetrySucceededAsync().blockingFirst().result();
     }
 
     /**
@@ -4953,7 +4953,7 @@ public class LROsImpl implements LROs {
      * @return the Product object if successful.
      */
     public Product beginPostAsyncRetrySucceeded(Product product) {
-        return beginPostAsyncRetrySucceededAsync(product).blockingLast().result();
+        return beginPostAsyncRetrySucceededAsync(product).blockingFirst().result();
     }
 
     /**
@@ -5099,7 +5099,7 @@ public class LROsImpl implements LROs {
      * @return the Product object if successful.
      */
     public Product beginPostAsyncNoRetrySucceeded() {
-        return beginPostAsyncNoRetrySucceededAsync().blockingLast().result();
+        return beginPostAsyncNoRetrySucceededAsync().blockingFirst().result();
     }
 
     /**
@@ -5134,7 +5134,7 @@ public class LROsImpl implements LROs {
      * @return the Product object if successful.
      */
     public Product beginPostAsyncNoRetrySucceeded(Product product) {
-        return beginPostAsyncNoRetrySucceededAsync(product).blockingLast().result();
+        return beginPostAsyncNoRetrySucceededAsync(product).blockingFirst().result();
     }
 
     /**
@@ -5279,7 +5279,7 @@ public class LROsImpl implements LROs {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     public void beginPostAsyncRetryFailed() {
-        beginPostAsyncRetryFailedAsync().blockingLast();
+        beginPostAsyncRetryFailedAsync().blockingFirst();
     }
 
     /**
@@ -5313,7 +5313,7 @@ public class LROsImpl implements LROs {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     public void beginPostAsyncRetryFailed(Product product) {
-        beginPostAsyncRetryFailedAsync(product).blockingLast();
+        beginPostAsyncRetryFailedAsync(product).blockingFirst();
     }
 
     /**
@@ -5440,7 +5440,7 @@ public class LROsImpl implements LROs {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     public void beginPostAsyncRetrycanceled() {
-        beginPostAsyncRetrycanceledAsync().blockingLast();
+        beginPostAsyncRetrycanceledAsync().blockingFirst();
     }
 
     /**
@@ -5474,7 +5474,7 @@ public class LROsImpl implements LROs {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     public void beginPostAsyncRetrycanceled(Product product) {
-        beginPostAsyncRetrycanceledAsync(product).blockingLast();
+        beginPostAsyncRetrycanceledAsync(product).blockingFirst();
     }
 
     /**

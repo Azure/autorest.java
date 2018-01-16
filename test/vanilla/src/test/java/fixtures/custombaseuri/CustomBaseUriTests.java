@@ -19,8 +19,8 @@ public class CustomBaseUriTests {
     @BeforeClass
     public static void setup() {
         client = new AutoRestParameterizedHostTestClientImpl(HttpPipeline.build(
-                new ProtocolPolicy.Factory("http"),
-                new PortPolicy.Factory(3000)));
+                new ProtocolPolicyFactory("http"),
+                new PortPolicyFactory(3000)));
     }
 
     // Positive test case

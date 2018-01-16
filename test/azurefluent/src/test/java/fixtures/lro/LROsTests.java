@@ -6,10 +6,10 @@ import com.microsoft.azure.v2.serializer.AzureJacksonAdapter;
 import com.microsoft.rest.RestClient;
 import com.microsoft.rest.v2.ServiceCallback;
 import com.microsoft.rest.v2.http.HttpPipeline;
-import com.microsoft.rest.v2.policy.AddCookiesPolicy;
-import com.microsoft.rest.v2.policy.PortPolicy;
-import com.microsoft.rest.v2.policy.ProtocolPolicy;
-import com.microsoft.rest.v2.policy.RetryPolicy;
+import com.microsoft.rest.v2.policy.CookiePolicyFactory;
+import com.microsoft.rest.v2.policy.PortPolicyFactory;
+import com.microsoft.rest.v2.policy.ProtocolPolicyFactory;
+import com.microsoft.rest.v2.policy.RetryPolicyFactory;
 import fixtures.lro.implementation.AutoRestLongRunningOperationTestServiceImpl;
 import fixtures.lro.implementation.ProductInner;
 import fixtures.lro.implementation.SkuInner;
@@ -33,10 +33,10 @@ public class LROsTests {
     public static void setup() {
         AzureProxy.setDefaultPollingDelayInMilliseconds(0);
         final HttpPipeline httpPipeline = HttpPipeline.build(
-            new ProtocolPolicy.Factory("http"),
-            new PortPolicy.Factory(3000),
-            new RetryPolicy.Factory(),
-            new AddCookiesPolicy.Factory());
+            new ProtocolPolicyFactory("http"),
+            new PortPolicyFactory(3000),
+            new RetryPolicyFactory(),
+            new CookiePolicyFactory());
         client = new AutoRestLongRunningOperationTestServiceImpl(httpPipeline);
     }
 

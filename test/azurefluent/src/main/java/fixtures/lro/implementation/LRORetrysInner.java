@@ -147,7 +147,7 @@ public class LRORetrysInner {
      * @return the ProductInner object if successful.
      */
     public ProductInner beginPut201CreatingSucceeded200() {
-        return beginPut201CreatingSucceeded200Async().blockingLast().result();
+        return beginPut201CreatingSucceeded200Async().blockingFirst().result();
     }
 
     /**
@@ -182,7 +182,7 @@ public class LRORetrysInner {
      * @return the ProductInner object if successful.
      */
     public ProductInner beginPut201CreatingSucceeded200(ProductInner product) {
-        return beginPut201CreatingSucceeded200Async(product).blockingLast().result();
+        return beginPut201CreatingSucceeded200Async(product).blockingFirst().result();
     }
 
     /**
@@ -328,7 +328,7 @@ public class LRORetrysInner {
      * @return the ProductInner object if successful.
      */
     public ProductInner beginPutAsyncRelativeRetrySucceeded() {
-        return beginPutAsyncRelativeRetrySucceededAsync().blockingLast().result();
+        return beginPutAsyncRelativeRetrySucceededAsync().blockingFirst().result();
     }
 
     /**
@@ -363,7 +363,7 @@ public class LRORetrysInner {
      * @return the ProductInner object if successful.
      */
     public ProductInner beginPutAsyncRelativeRetrySucceeded(ProductInner product) {
-        return beginPutAsyncRelativeRetrySucceededAsync(product).blockingLast().result();
+        return beginPutAsyncRelativeRetrySucceededAsync(product).blockingFirst().result();
     }
 
     /**
@@ -509,7 +509,7 @@ public class LRORetrysInner {
      * @return the ProductInner object if successful.
      */
     public ProductInner beginDeleteProvisioning202Accepted200Succeeded() {
-        return beginDeleteProvisioning202Accepted200SucceededAsync().blockingLast().result();
+        return beginDeleteProvisioning202Accepted200SucceededAsync().blockingFirst().result();
     }
 
     /**
@@ -593,7 +593,7 @@ public class LRORetrysInner {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     public void beginDelete202Retry200() {
-        beginDelete202Retry200Async().blockingLast();
+        beginDelete202Retry200Async().blockingFirst();
     }
 
     /**
@@ -668,7 +668,7 @@ public class LRORetrysInner {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     public void beginDeleteAsyncRelativeRetrySucceeded() {
-        beginDeleteAsyncRelativeRetrySucceededAsync().blockingLast();
+        beginDeleteAsyncRelativeRetrySucceededAsync().blockingFirst();
     }
 
     /**
@@ -743,7 +743,7 @@ public class LRORetrysInner {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     public void beginPost202Retry200() {
-        beginPost202Retry200Async().blockingLast();
+        beginPost202Retry200Async().blockingFirst();
     }
 
     /**
@@ -777,7 +777,7 @@ public class LRORetrysInner {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     public void beginPost202Retry200(ProductInner product) {
-        beginPost202Retry200Async(product).blockingLast();
+        beginPost202Retry200Async(product).blockingFirst();
     }
 
     /**
@@ -904,7 +904,7 @@ public class LRORetrysInner {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     public void beginPostAsyncRelativeRetrySucceeded() {
-        beginPostAsyncRelativeRetrySucceededAsync().blockingLast();
+        beginPostAsyncRelativeRetrySucceededAsync().blockingFirst();
     }
 
     /**
@@ -938,7 +938,7 @@ public class LRORetrysInner {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     public void beginPostAsyncRelativeRetrySucceeded(ProductInner product) {
-        beginPostAsyncRelativeRetrySucceededAsync(product).blockingLast();
+        beginPostAsyncRelativeRetrySucceededAsync(product).blockingFirst();
     }
 
     /**

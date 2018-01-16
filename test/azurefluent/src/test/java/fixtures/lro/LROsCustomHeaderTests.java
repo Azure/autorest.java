@@ -3,10 +3,10 @@ package fixtures.lro;
 import com.microsoft.rest.v2.credentials.BasicAuthenticationCredentials;
 import com.microsoft.rest.v2.http.HttpHeaders;
 import com.microsoft.rest.v2.http.HttpPipeline;
-import com.microsoft.rest.v2.policy.AddHeadersPolicy;
-import com.microsoft.rest.v2.policy.CredentialsPolicy;
-import com.microsoft.rest.v2.policy.PortPolicy;
-import com.microsoft.rest.v2.policy.ProtocolPolicy;
+import com.microsoft.rest.v2.policy.AddHeadersPolicyFactory;
+import com.microsoft.rest.v2.policy.CredentialsPolicyFactory;
+import com.microsoft.rest.v2.policy.PortPolicyFactory;
+import com.microsoft.rest.v2.policy.ProtocolPolicyFactory;
 import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Ignore;
@@ -22,10 +22,10 @@ public class LROsCustomHeaderTests {
         HttpHeaders headers = new HttpHeaders();
         headers.set("x-ms-client-request-id", "9C4D50EE-2D56-4CD3-8152-34347DC9F2B0");
         final HttpPipeline httpPipeline = HttpPipeline.build(
-                new ProtocolPolicy.Factory("http"),
-                new PortPolicy.Factory(3000),
-                new CredentialsPolicy.Factory(new BasicAuthenticationCredentials(null, null)),
-                new AddHeadersPolicy.Factory(headers));
+                new ProtocolPolicyFactory("http"),
+                new PortPolicyFactory(3000),
+                new CredentialsPolicyFactory(new BasicAuthenticationCredentials(null, null)),
+                new AddHeadersPolicyFactory(headers));
         client = new AutoRestLongRunningOperationTestServiceImpl(httpPipeline);
     }
 

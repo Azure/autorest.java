@@ -31,8 +31,8 @@ public class MultipleResponsesTests {
     @BeforeClass
     public static void setup() {
         client = new AutoRestHttpInfrastructureTestServiceImpl(HttpPipeline.build(
-                new ProtocolPolicy.Factory("http"),
-                new PortPolicy.Factory(3000)));
+                new ProtocolPolicyFactory("http"),
+                new PortPolicyFactory(3000)));
     }
 
     @Test
@@ -141,8 +141,8 @@ public class MultipleResponsesTests {
     @Test
     public void get202None204NoneDefaultError202None() throws Exception {
         HttpPipeline httpPipeline = HttpPipeline.build(
-                new ProtocolPolicy.Factory("http"),
-                new PortPolicy.Factory(3000),
+                new ProtocolPolicyFactory("http"),
+                new PortPolicyFactory(3000),
                 new RequestPolicyFactory() {
                 @Override
                 public RequestPolicy create(final RequestPolicy next, RequestPolicyOptions options) {
@@ -176,8 +176,8 @@ public class MultipleResponsesTests {
     @Test
     public void get202None204NoneDefaultError204None() throws Exception {
         HttpPipeline httpPipeline = HttpPipeline.build(
-                new ProtocolPolicy.Factory("http"),
-                new PortPolicy.Factory(3000),
+                new ProtocolPolicyFactory("http"),
+                new PortPolicyFactory(3000),
                 new RequestPolicyFactory() {
                 @Override
                 public RequestPolicy create(final RequestPolicy next, RequestPolicyOptions options) {

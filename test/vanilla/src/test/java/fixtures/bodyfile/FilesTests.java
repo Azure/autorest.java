@@ -8,7 +8,7 @@ import io.reactivex.functions.BiConsumer;
 import io.reactivex.functions.BiFunction;
 import io.reactivex.functions.Function;
 import com.microsoft.rest.v2.http.HttpPipeline;
-import com.microsoft.rest.v2.policy.PortPolicy;
+import com.microsoft.rest.v2.policy.PortPolicyFactory;
 import org.apache.commons.io.IOUtils;
 import org.junit.Assert;
 import org.junit.BeforeClass;
@@ -24,7 +24,7 @@ public class FilesTests {
 
     @BeforeClass
     public static void setup() {
-        client = new AutoRestSwaggerBATFileServiceImpl(HttpPipeline.build(new PortPolicy.Factory(3000)));
+        client = new AutoRestSwaggerBATFileServiceImpl(HttpPipeline.build(new PortPolicyFactory(3000)));
     }
 
     @Test

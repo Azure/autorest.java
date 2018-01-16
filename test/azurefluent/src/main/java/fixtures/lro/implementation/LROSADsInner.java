@@ -337,7 +337,7 @@ public class LROSADsInner {
      * @return the ProductInner object if successful.
      */
     public ProductInner beginPutNonRetry400() {
-        return beginPutNonRetry400Async().blockingLast().result();
+        return beginPutNonRetry400Async().blockingFirst().result();
     }
 
     /**
@@ -372,7 +372,7 @@ public class LROSADsInner {
      * @return the ProductInner object if successful.
      */
     public ProductInner beginPutNonRetry400(ProductInner product) {
-        return beginPutNonRetry400Async(product).blockingLast().result();
+        return beginPutNonRetry400Async(product).blockingFirst().result();
     }
 
     /**
@@ -518,7 +518,7 @@ public class LROSADsInner {
      * @return the ProductInner object if successful.
      */
     public ProductInner beginPutNonRetry201Creating400() {
-        return beginPutNonRetry201Creating400Async().blockingLast().result();
+        return beginPutNonRetry201Creating400Async().blockingFirst().result();
     }
 
     /**
@@ -553,7 +553,7 @@ public class LROSADsInner {
      * @return the ProductInner object if successful.
      */
     public ProductInner beginPutNonRetry201Creating400(ProductInner product) {
-        return beginPutNonRetry201Creating400Async(product).blockingLast().result();
+        return beginPutNonRetry201Creating400Async(product).blockingFirst().result();
     }
 
     /**
@@ -699,7 +699,7 @@ public class LROSADsInner {
      * @return the ProductInner object if successful.
      */
     public ProductInner beginPutNonRetry201Creating400InvalidJson() {
-        return beginPutNonRetry201Creating400InvalidJsonAsync().blockingLast().result();
+        return beginPutNonRetry201Creating400InvalidJsonAsync().blockingFirst().result();
     }
 
     /**
@@ -734,7 +734,7 @@ public class LROSADsInner {
      * @return the ProductInner object if successful.
      */
     public ProductInner beginPutNonRetry201Creating400InvalidJson(ProductInner product) {
-        return beginPutNonRetry201Creating400InvalidJsonAsync(product).blockingLast().result();
+        return beginPutNonRetry201Creating400InvalidJsonAsync(product).blockingFirst().result();
     }
 
     /**
@@ -880,7 +880,7 @@ public class LROSADsInner {
      * @return the ProductInner object if successful.
      */
     public ProductInner beginPutAsyncRelativeRetry400() {
-        return beginPutAsyncRelativeRetry400Async().blockingLast().result();
+        return beginPutAsyncRelativeRetry400Async().blockingFirst().result();
     }
 
     /**
@@ -915,7 +915,7 @@ public class LROSADsInner {
      * @return the ProductInner object if successful.
      */
     public ProductInner beginPutAsyncRelativeRetry400(ProductInner product) {
-        return beginPutAsyncRelativeRetry400Async(product).blockingLast().result();
+        return beginPutAsyncRelativeRetry400Async(product).blockingFirst().result();
     }
 
     /**
@@ -1060,7 +1060,7 @@ public class LROSADsInner {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     public void beginDeleteNonRetry400() {
-        beginDeleteNonRetry400Async().blockingLast();
+        beginDeleteNonRetry400Async().blockingFirst();
     }
 
     /**
@@ -1135,7 +1135,7 @@ public class LROSADsInner {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     public void beginDelete202NonRetry400() {
-        beginDelete202NonRetry400Async().blockingLast();
+        beginDelete202NonRetry400Async().blockingFirst();
     }
 
     /**
@@ -1210,7 +1210,7 @@ public class LROSADsInner {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     public void beginDeleteAsyncRelativeRetry400() {
-        beginDeleteAsyncRelativeRetry400Async().blockingLast();
+        beginDeleteAsyncRelativeRetry400Async().blockingFirst();
     }
 
     /**
@@ -1285,7 +1285,7 @@ public class LROSADsInner {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     public void beginPostNonRetry400() {
-        beginPostNonRetry400Async().blockingLast();
+        beginPostNonRetry400Async().blockingFirst();
     }
 
     /**
@@ -1319,7 +1319,7 @@ public class LROSADsInner {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     public void beginPostNonRetry400(ProductInner product) {
-        beginPostNonRetry400Async(product).blockingLast();
+        beginPostNonRetry400Async(product).blockingFirst();
     }
 
     /**
@@ -1446,7 +1446,7 @@ public class LROSADsInner {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     public void beginPost202NonRetry400() {
-        beginPost202NonRetry400Async().blockingLast();
+        beginPost202NonRetry400Async().blockingFirst();
     }
 
     /**
@@ -1480,7 +1480,7 @@ public class LROSADsInner {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     public void beginPost202NonRetry400(ProductInner product) {
-        beginPost202NonRetry400Async(product).blockingLast();
+        beginPost202NonRetry400Async(product).blockingFirst();
     }
 
     /**
@@ -1607,7 +1607,7 @@ public class LROSADsInner {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     public void beginPostAsyncRelativeRetry400() {
-        beginPostAsyncRelativeRetry400Async().blockingLast();
+        beginPostAsyncRelativeRetry400Async().blockingFirst();
     }
 
     /**
@@ -1641,7 +1641,7 @@ public class LROSADsInner {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     public void beginPostAsyncRelativeRetry400(ProductInner product) {
-        beginPostAsyncRelativeRetry400Async(product).blockingLast();
+        beginPostAsyncRelativeRetry400Async(product).blockingFirst();
     }
 
     /**
@@ -1769,7 +1769,7 @@ public class LROSADsInner {
      * @return the ProductInner object if successful.
      */
     public ProductInner beginPutError201NoProvisioningStatePayload() {
-        return beginPutError201NoProvisioningStatePayloadAsync().blockingLast().result();
+        return beginPutError201NoProvisioningStatePayloadAsync().blockingFirst().result();
     }
 
     /**
@@ -1804,7 +1804,7 @@ public class LROSADsInner {
      * @return the ProductInner object if successful.
      */
     public ProductInner beginPutError201NoProvisioningStatePayload(ProductInner product) {
-        return beginPutError201NoProvisioningStatePayloadAsync(product).blockingLast().result();
+        return beginPutError201NoProvisioningStatePayloadAsync(product).blockingFirst().result();
     }
 
     /**
@@ -1950,7 +1950,7 @@ public class LROSADsInner {
      * @return the ProductInner object if successful.
      */
     public ProductInner beginPutAsyncRelativeRetryNoStatus() {
-        return beginPutAsyncRelativeRetryNoStatusAsync().blockingLast().result();
+        return beginPutAsyncRelativeRetryNoStatusAsync().blockingFirst().result();
     }
 
     /**
@@ -1985,7 +1985,7 @@ public class LROSADsInner {
      * @return the ProductInner object if successful.
      */
     public ProductInner beginPutAsyncRelativeRetryNoStatus(ProductInner product) {
-        return beginPutAsyncRelativeRetryNoStatusAsync(product).blockingLast().result();
+        return beginPutAsyncRelativeRetryNoStatusAsync(product).blockingFirst().result();
     }
 
     /**
@@ -2131,7 +2131,7 @@ public class LROSADsInner {
      * @return the ProductInner object if successful.
      */
     public ProductInner beginPutAsyncRelativeRetryNoStatusPayload() {
-        return beginPutAsyncRelativeRetryNoStatusPayloadAsync().blockingLast().result();
+        return beginPutAsyncRelativeRetryNoStatusPayloadAsync().blockingFirst().result();
     }
 
     /**
@@ -2166,7 +2166,7 @@ public class LROSADsInner {
      * @return the ProductInner object if successful.
      */
     public ProductInner beginPutAsyncRelativeRetryNoStatusPayload(ProductInner product) {
-        return beginPutAsyncRelativeRetryNoStatusPayloadAsync(product).blockingLast().result();
+        return beginPutAsyncRelativeRetryNoStatusPayloadAsync(product).blockingFirst().result();
     }
 
     /**
@@ -2311,7 +2311,7 @@ public class LROSADsInner {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     public void beginDelete204Succeeded() {
-        beginDelete204SucceededAsync().blockingLast();
+        beginDelete204SucceededAsync().blockingFirst();
     }
 
     /**
@@ -2386,7 +2386,7 @@ public class LROSADsInner {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     public void beginDeleteAsyncRelativeRetryNoStatus() {
-        beginDeleteAsyncRelativeRetryNoStatusAsync().blockingLast();
+        beginDeleteAsyncRelativeRetryNoStatusAsync().blockingFirst();
     }
 
     /**
@@ -2461,7 +2461,7 @@ public class LROSADsInner {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     public void beginPost202NoLocation() {
-        beginPost202NoLocationAsync().blockingLast();
+        beginPost202NoLocationAsync().blockingFirst();
     }
 
     /**
@@ -2495,7 +2495,7 @@ public class LROSADsInner {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     public void beginPost202NoLocation(ProductInner product) {
-        beginPost202NoLocationAsync(product).blockingLast();
+        beginPost202NoLocationAsync(product).blockingFirst();
     }
 
     /**
@@ -2622,7 +2622,7 @@ public class LROSADsInner {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     public void beginPostAsyncRelativeRetryNoPayload() {
-        beginPostAsyncRelativeRetryNoPayloadAsync().blockingLast();
+        beginPostAsyncRelativeRetryNoPayloadAsync().blockingFirst();
     }
 
     /**
@@ -2656,7 +2656,7 @@ public class LROSADsInner {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     public void beginPostAsyncRelativeRetryNoPayload(ProductInner product) {
-        beginPostAsyncRelativeRetryNoPayloadAsync(product).blockingLast();
+        beginPostAsyncRelativeRetryNoPayloadAsync(product).blockingFirst();
     }
 
     /**
@@ -2784,7 +2784,7 @@ public class LROSADsInner {
      * @return the ProductInner object if successful.
      */
     public ProductInner beginPut200InvalidJson() {
-        return beginPut200InvalidJsonAsync().blockingLast().result();
+        return beginPut200InvalidJsonAsync().blockingFirst().result();
     }
 
     /**
@@ -2819,7 +2819,7 @@ public class LROSADsInner {
      * @return the ProductInner object if successful.
      */
     public ProductInner beginPut200InvalidJson(ProductInner product) {
-        return beginPut200InvalidJsonAsync(product).blockingLast().result();
+        return beginPut200InvalidJsonAsync(product).blockingFirst().result();
     }
 
     /**
@@ -2965,7 +2965,7 @@ public class LROSADsInner {
      * @return the ProductInner object if successful.
      */
     public ProductInner beginPutAsyncRelativeRetryInvalidHeader() {
-        return beginPutAsyncRelativeRetryInvalidHeaderAsync().blockingLast().result();
+        return beginPutAsyncRelativeRetryInvalidHeaderAsync().blockingFirst().result();
     }
 
     /**
@@ -3000,7 +3000,7 @@ public class LROSADsInner {
      * @return the ProductInner object if successful.
      */
     public ProductInner beginPutAsyncRelativeRetryInvalidHeader(ProductInner product) {
-        return beginPutAsyncRelativeRetryInvalidHeaderAsync(product).blockingLast().result();
+        return beginPutAsyncRelativeRetryInvalidHeaderAsync(product).blockingFirst().result();
     }
 
     /**
@@ -3146,7 +3146,7 @@ public class LROSADsInner {
      * @return the ProductInner object if successful.
      */
     public ProductInner beginPutAsyncRelativeRetryInvalidJsonPolling() {
-        return beginPutAsyncRelativeRetryInvalidJsonPollingAsync().blockingLast().result();
+        return beginPutAsyncRelativeRetryInvalidJsonPollingAsync().blockingFirst().result();
     }
 
     /**
@@ -3181,7 +3181,7 @@ public class LROSADsInner {
      * @return the ProductInner object if successful.
      */
     public ProductInner beginPutAsyncRelativeRetryInvalidJsonPolling(ProductInner product) {
-        return beginPutAsyncRelativeRetryInvalidJsonPollingAsync(product).blockingLast().result();
+        return beginPutAsyncRelativeRetryInvalidJsonPollingAsync(product).blockingFirst().result();
     }
 
     /**
@@ -3326,7 +3326,7 @@ public class LROSADsInner {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     public void beginDelete202RetryInvalidHeader() {
-        beginDelete202RetryInvalidHeaderAsync().blockingLast();
+        beginDelete202RetryInvalidHeaderAsync().blockingFirst();
     }
 
     /**
@@ -3401,7 +3401,7 @@ public class LROSADsInner {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     public void beginDeleteAsyncRelativeRetryInvalidHeader() {
-        beginDeleteAsyncRelativeRetryInvalidHeaderAsync().blockingLast();
+        beginDeleteAsyncRelativeRetryInvalidHeaderAsync().blockingFirst();
     }
 
     /**
@@ -3476,7 +3476,7 @@ public class LROSADsInner {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     public void beginDeleteAsyncRelativeRetryInvalidJsonPolling() {
-        beginDeleteAsyncRelativeRetryInvalidJsonPollingAsync().blockingLast();
+        beginDeleteAsyncRelativeRetryInvalidJsonPollingAsync().blockingFirst();
     }
 
     /**
@@ -3551,7 +3551,7 @@ public class LROSADsInner {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     public void beginPost202RetryInvalidHeader() {
-        beginPost202RetryInvalidHeaderAsync().blockingLast();
+        beginPost202RetryInvalidHeaderAsync().blockingFirst();
     }
 
     /**
@@ -3585,7 +3585,7 @@ public class LROSADsInner {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     public void beginPost202RetryInvalidHeader(ProductInner product) {
-        beginPost202RetryInvalidHeaderAsync(product).blockingLast();
+        beginPost202RetryInvalidHeaderAsync(product).blockingFirst();
     }
 
     /**
@@ -3712,7 +3712,7 @@ public class LROSADsInner {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     public void beginPostAsyncRelativeRetryInvalidHeader() {
-        beginPostAsyncRelativeRetryInvalidHeaderAsync().blockingLast();
+        beginPostAsyncRelativeRetryInvalidHeaderAsync().blockingFirst();
     }
 
     /**
@@ -3746,7 +3746,7 @@ public class LROSADsInner {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     public void beginPostAsyncRelativeRetryInvalidHeader(ProductInner product) {
-        beginPostAsyncRelativeRetryInvalidHeaderAsync(product).blockingLast();
+        beginPostAsyncRelativeRetryInvalidHeaderAsync(product).blockingFirst();
     }
 
     /**
@@ -3873,7 +3873,7 @@ public class LROSADsInner {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     public void beginPostAsyncRelativeRetryInvalidJsonPolling() {
-        beginPostAsyncRelativeRetryInvalidJsonPollingAsync().blockingLast();
+        beginPostAsyncRelativeRetryInvalidJsonPollingAsync().blockingFirst();
     }
 
     /**
@@ -3907,7 +3907,7 @@ public class LROSADsInner {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     public void beginPostAsyncRelativeRetryInvalidJsonPolling(ProductInner product) {
-        beginPostAsyncRelativeRetryInvalidJsonPollingAsync(product).blockingLast();
+        beginPostAsyncRelativeRetryInvalidJsonPollingAsync(product).blockingFirst();
     }
 
     /**

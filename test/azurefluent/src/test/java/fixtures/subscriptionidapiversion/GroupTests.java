@@ -18,11 +18,11 @@ public class GroupTests {
     @BeforeClass
     public static void setup() {
         final HttpPipeline httpPipeline = HttpPipeline.build(
-            new ProtocolPolicy.Factory("http"),
-            new HostPolicy.Factory("localhost"),
-            new PortPolicy.Factory(3000),
-            new RetryPolicy.Factory(),
-            new AddCookiesPolicy.Factory());
+            new ProtocolPolicyFactory("http"),
+            new HostPolicyFactory("localhost"),
+            new PortPolicyFactory(3000),
+            new RetryPolicyFactory(),
+            new CookiePolicyFactory());
         client = new MicrosoftAzureTestUrlImpl(httpPipeline);
     }
 
