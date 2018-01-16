@@ -35,12 +35,7 @@ public class ExplicitTests {
 
     @Test
     public void postOptionalIntegerParameter() throws Exception {
-        try {
-            client.explicits().postOptionalIntegerParameter(null);
-            fail();
-        } catch (IllegalArgumentException ex) {
-            // Body parameter cannot be null
-        }
+        client.explicits().postOptionalIntegerParameter(null);
     }
 
     @Test
@@ -80,12 +75,7 @@ public class ExplicitTests {
 
     @Test
     public void postOptionalStringParameter() throws Exception {
-        try {
-            client.explicits().postOptionalIntegerParameter(null);
-            fail();
-        } catch (IllegalArgumentException ex) {
-            // Body parameter cannot be null
-        }
+        client.explicits().postOptionalIntegerParameter(null);
     }
 
     @Test
@@ -134,12 +124,7 @@ public class ExplicitTests {
 
     @Test
     public void postOptionalClassParameter() throws Exception {
-        try {
-            client.explicits().postOptionalClassParameter(null);
-            fail();
-        } catch (IllegalArgumentException ex) {
-            // Body parameter cannot be null
-        }
+        client.explicits().postOptionalClassParameter(null);
     }
 
     @Test
@@ -173,12 +158,7 @@ public class ExplicitTests {
 
     @Test
     public void postOptionalArrayParameter() throws Exception {
-        try {
-            client.explicits().postOptionalArrayParameter(null);
-            fail();
-        } catch (IllegalArgumentException ex) {
-            // Body parameter cannot be null
-        }
+        client.explicits().postOptionalArrayParameter(null);
     }
 
     @Test
