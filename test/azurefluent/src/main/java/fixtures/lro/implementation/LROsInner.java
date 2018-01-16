@@ -437,7 +437,7 @@ public class LROsInner {
      * @return the ProductInner object if successful.
      */
     public ProductInner beginPut200Succeeded() {
-        return beginPut200SucceededAsync().blockingLast().result();
+        return beginPut200SucceededAsync().blockingFirst().result();
     }
 
     /**
@@ -472,7 +472,7 @@ public class LROsInner {
      * @return the ProductInner object if successful.
      */
     public ProductInner beginPut200Succeeded(ProductInner product) {
-        return beginPut200SucceededAsync(product).blockingLast().result();
+        return beginPut200SucceededAsync(product).blockingFirst().result();
     }
 
     /**
@@ -618,7 +618,7 @@ public class LROsInner {
      * @return the ProductInner object if successful.
      */
     public ProductInner beginPut200SucceededNoState() {
-        return beginPut200SucceededNoStateAsync().blockingLast().result();
+        return beginPut200SucceededNoStateAsync().blockingFirst().result();
     }
 
     /**
@@ -653,7 +653,7 @@ public class LROsInner {
      * @return the ProductInner object if successful.
      */
     public ProductInner beginPut200SucceededNoState(ProductInner product) {
-        return beginPut200SucceededNoStateAsync(product).blockingLast().result();
+        return beginPut200SucceededNoStateAsync(product).blockingFirst().result();
     }
 
     /**
@@ -799,7 +799,7 @@ public class LROsInner {
      * @return the ProductInner object if successful.
      */
     public ProductInner beginPut202Retry200() {
-        return beginPut202Retry200Async().blockingLast().result();
+        return beginPut202Retry200Async().blockingFirst().result();
     }
 
     /**
@@ -834,7 +834,7 @@ public class LROsInner {
      * @return the ProductInner object if successful.
      */
     public ProductInner beginPut202Retry200(ProductInner product) {
-        return beginPut202Retry200Async(product).blockingLast().result();
+        return beginPut202Retry200Async(product).blockingFirst().result();
     }
 
     /**
@@ -980,7 +980,7 @@ public class LROsInner {
      * @return the ProductInner object if successful.
      */
     public ProductInner beginPut201CreatingSucceeded200() {
-        return beginPut201CreatingSucceeded200Async().blockingLast().result();
+        return beginPut201CreatingSucceeded200Async().blockingFirst().result();
     }
 
     /**
@@ -1015,7 +1015,7 @@ public class LROsInner {
      * @return the ProductInner object if successful.
      */
     public ProductInner beginPut201CreatingSucceeded200(ProductInner product) {
-        return beginPut201CreatingSucceeded200Async(product).blockingLast().result();
+        return beginPut201CreatingSucceeded200Async(product).blockingFirst().result();
     }
 
     /**
@@ -1161,7 +1161,7 @@ public class LROsInner {
      * @return the ProductInner object if successful.
      */
     public ProductInner beginPut200UpdatingSucceeded204() {
-        return beginPut200UpdatingSucceeded204Async().blockingLast().result();
+        return beginPut200UpdatingSucceeded204Async().blockingFirst().result();
     }
 
     /**
@@ -1196,7 +1196,7 @@ public class LROsInner {
      * @return the ProductInner object if successful.
      */
     public ProductInner beginPut200UpdatingSucceeded204(ProductInner product) {
-        return beginPut200UpdatingSucceeded204Async(product).blockingLast().result();
+        return beginPut200UpdatingSucceeded204Async(product).blockingFirst().result();
     }
 
     /**
@@ -1342,7 +1342,7 @@ public class LROsInner {
      * @return the ProductInner object if successful.
      */
     public ProductInner beginPut201CreatingFailed200() {
-        return beginPut201CreatingFailed200Async().blockingLast().result();
+        return beginPut201CreatingFailed200Async().blockingFirst().result();
     }
 
     /**
@@ -1377,7 +1377,7 @@ public class LROsInner {
      * @return the ProductInner object if successful.
      */
     public ProductInner beginPut201CreatingFailed200(ProductInner product) {
-        return beginPut201CreatingFailed200Async(product).blockingLast().result();
+        return beginPut201CreatingFailed200Async(product).blockingFirst().result();
     }
 
     /**
@@ -1523,7 +1523,7 @@ public class LROsInner {
      * @return the ProductInner object if successful.
      */
     public ProductInner beginPut200Acceptedcanceled200() {
-        return beginPut200Acceptedcanceled200Async().blockingLast().result();
+        return beginPut200Acceptedcanceled200Async().blockingFirst().result();
     }
 
     /**
@@ -1558,7 +1558,7 @@ public class LROsInner {
      * @return the ProductInner object if successful.
      */
     public ProductInner beginPut200Acceptedcanceled200(ProductInner product) {
-        return beginPut200Acceptedcanceled200Async(product).blockingLast().result();
+        return beginPut200Acceptedcanceled200Async(product).blockingFirst().result();
     }
 
     /**
@@ -1704,7 +1704,7 @@ public class LROsInner {
      * @return the ProductInner object if successful.
      */
     public ProductInner beginPutNoHeaderInRetry() {
-        return beginPutNoHeaderInRetryAsync().blockingLast().result();
+        return beginPutNoHeaderInRetryAsync().blockingFirst().result();
     }
 
     /**
@@ -1739,7 +1739,7 @@ public class LROsInner {
      * @return the ProductInner object if successful.
      */
     public ProductInner beginPutNoHeaderInRetry(ProductInner product) {
-        return beginPutNoHeaderInRetryAsync(product).blockingLast().result();
+        return beginPutNoHeaderInRetryAsync(product).blockingFirst().result();
     }
 
     /**
@@ -1885,7 +1885,7 @@ public class LROsInner {
      * @return the ProductInner object if successful.
      */
     public ProductInner beginPutAsyncRetrySucceeded() {
-        return beginPutAsyncRetrySucceededAsync().blockingLast().result();
+        return beginPutAsyncRetrySucceededAsync().blockingFirst().result();
     }
 
     /**
@@ -1920,7 +1920,7 @@ public class LROsInner {
      * @return the ProductInner object if successful.
      */
     public ProductInner beginPutAsyncRetrySucceeded(ProductInner product) {
-        return beginPutAsyncRetrySucceededAsync(product).blockingLast().result();
+        return beginPutAsyncRetrySucceededAsync(product).blockingFirst().result();
     }
 
     /**
@@ -2066,7 +2066,7 @@ public class LROsInner {
      * @return the ProductInner object if successful.
      */
     public ProductInner beginPutAsyncNoRetrySucceeded() {
-        return beginPutAsyncNoRetrySucceededAsync().blockingLast().result();
+        return beginPutAsyncNoRetrySucceededAsync().blockingFirst().result();
     }
 
     /**
@@ -2101,7 +2101,7 @@ public class LROsInner {
      * @return the ProductInner object if successful.
      */
     public ProductInner beginPutAsyncNoRetrySucceeded(ProductInner product) {
-        return beginPutAsyncNoRetrySucceededAsync(product).blockingLast().result();
+        return beginPutAsyncNoRetrySucceededAsync(product).blockingFirst().result();
     }
 
     /**
@@ -2247,7 +2247,7 @@ public class LROsInner {
      * @return the ProductInner object if successful.
      */
     public ProductInner beginPutAsyncRetryFailed() {
-        return beginPutAsyncRetryFailedAsync().blockingLast().result();
+        return beginPutAsyncRetryFailedAsync().blockingFirst().result();
     }
 
     /**
@@ -2282,7 +2282,7 @@ public class LROsInner {
      * @return the ProductInner object if successful.
      */
     public ProductInner beginPutAsyncRetryFailed(ProductInner product) {
-        return beginPutAsyncRetryFailedAsync(product).blockingLast().result();
+        return beginPutAsyncRetryFailedAsync(product).blockingFirst().result();
     }
 
     /**
@@ -2428,7 +2428,7 @@ public class LROsInner {
      * @return the ProductInner object if successful.
      */
     public ProductInner beginPutAsyncNoRetrycanceled() {
-        return beginPutAsyncNoRetrycanceledAsync().blockingLast().result();
+        return beginPutAsyncNoRetrycanceledAsync().blockingFirst().result();
     }
 
     /**
@@ -2463,7 +2463,7 @@ public class LROsInner {
      * @return the ProductInner object if successful.
      */
     public ProductInner beginPutAsyncNoRetrycanceled(ProductInner product) {
-        return beginPutAsyncNoRetrycanceledAsync(product).blockingLast().result();
+        return beginPutAsyncNoRetrycanceledAsync(product).blockingFirst().result();
     }
 
     /**
@@ -2609,7 +2609,7 @@ public class LROsInner {
      * @return the ProductInner object if successful.
      */
     public ProductInner beginPutAsyncNoHeaderInRetry() {
-        return beginPutAsyncNoHeaderInRetryAsync().blockingLast().result();
+        return beginPutAsyncNoHeaderInRetryAsync().blockingFirst().result();
     }
 
     /**
@@ -2644,7 +2644,7 @@ public class LROsInner {
      * @return the ProductInner object if successful.
      */
     public ProductInner beginPutAsyncNoHeaderInRetry(ProductInner product) {
-        return beginPutAsyncNoHeaderInRetryAsync(product).blockingLast().result();
+        return beginPutAsyncNoHeaderInRetryAsync(product).blockingFirst().result();
     }
 
     /**
@@ -2790,7 +2790,7 @@ public class LROsInner {
      * @return the SkuInner object if successful.
      */
     public SkuInner beginPutNonResource() {
-        return beginPutNonResourceAsync().blockingLast().result();
+        return beginPutNonResourceAsync().blockingFirst().result();
     }
 
     /**
@@ -2825,7 +2825,7 @@ public class LROsInner {
      * @return the SkuInner object if successful.
      */
     public SkuInner beginPutNonResource(SkuInner sku) {
-        return beginPutNonResourceAsync(sku).blockingLast().result();
+        return beginPutNonResourceAsync(sku).blockingFirst().result();
     }
 
     /**
@@ -2971,7 +2971,7 @@ public class LROsInner {
      * @return the SkuInner object if successful.
      */
     public SkuInner beginPutAsyncNonResource() {
-        return beginPutAsyncNonResourceAsync().blockingLast().result();
+        return beginPutAsyncNonResourceAsync().blockingFirst().result();
     }
 
     /**
@@ -3006,7 +3006,7 @@ public class LROsInner {
      * @return the SkuInner object if successful.
      */
     public SkuInner beginPutAsyncNonResource(SkuInner sku) {
-        return beginPutAsyncNonResourceAsync(sku).blockingLast().result();
+        return beginPutAsyncNonResourceAsync(sku).blockingFirst().result();
     }
 
     /**
@@ -3152,7 +3152,7 @@ public class LROsInner {
      * @return the SubProductInner object if successful.
      */
     public SubProductInner beginPutSubResource() {
-        return beginPutSubResourceAsync().blockingLast().result();
+        return beginPutSubResourceAsync().blockingFirst().result();
     }
 
     /**
@@ -3187,7 +3187,7 @@ public class LROsInner {
      * @return the SubProductInner object if successful.
      */
     public SubProductInner beginPutSubResource(SubProductInner product) {
-        return beginPutSubResourceAsync(product).blockingLast().result();
+        return beginPutSubResourceAsync(product).blockingFirst().result();
     }
 
     /**
@@ -3333,7 +3333,7 @@ public class LROsInner {
      * @return the SubProductInner object if successful.
      */
     public SubProductInner beginPutAsyncSubResource() {
-        return beginPutAsyncSubResourceAsync().blockingLast().result();
+        return beginPutAsyncSubResourceAsync().blockingFirst().result();
     }
 
     /**
@@ -3368,7 +3368,7 @@ public class LROsInner {
      * @return the SubProductInner object if successful.
      */
     public SubProductInner beginPutAsyncSubResource(SubProductInner product) {
-        return beginPutAsyncSubResourceAsync(product).blockingLast().result();
+        return beginPutAsyncSubResourceAsync(product).blockingFirst().result();
     }
 
     /**
@@ -3514,7 +3514,7 @@ public class LROsInner {
      * @return the ProductInner object if successful.
      */
     public ProductInner beginDeleteProvisioning202Accepted200Succeeded() {
-        return beginDeleteProvisioning202Accepted200SucceededAsync().blockingLast().result();
+        return beginDeleteProvisioning202Accepted200SucceededAsync().blockingFirst().result();
     }
 
     /**
@@ -3599,7 +3599,7 @@ public class LROsInner {
      * @return the ProductInner object if successful.
      */
     public ProductInner beginDeleteProvisioning202DeletingFailed200() {
-        return beginDeleteProvisioning202DeletingFailed200Async().blockingLast().result();
+        return beginDeleteProvisioning202DeletingFailed200Async().blockingFirst().result();
     }
 
     /**
@@ -3684,7 +3684,7 @@ public class LROsInner {
      * @return the ProductInner object if successful.
      */
     public ProductInner beginDeleteProvisioning202Deletingcanceled200() {
-        return beginDeleteProvisioning202Deletingcanceled200Async().blockingLast().result();
+        return beginDeleteProvisioning202Deletingcanceled200Async().blockingFirst().result();
     }
 
     /**
@@ -3768,7 +3768,7 @@ public class LROsInner {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     public void beginDelete204Succeeded() {
-        beginDelete204SucceededAsync().blockingLast();
+        beginDelete204SucceededAsync().blockingFirst();
     }
 
     /**
@@ -3844,7 +3844,7 @@ public class LROsInner {
      * @return the ProductInner object if successful.
      */
     public ProductInner beginDelete202Retry200() {
-        return beginDelete202Retry200Async().blockingLast().result();
+        return beginDelete202Retry200Async().blockingFirst().result();
     }
 
     /**
@@ -3929,7 +3929,7 @@ public class LROsInner {
      * @return the ProductInner object if successful.
      */
     public ProductInner beginDelete202NoRetry204() {
-        return beginDelete202NoRetry204Async().blockingLast().result();
+        return beginDelete202NoRetry204Async().blockingFirst().result();
     }
 
     /**
@@ -4013,7 +4013,7 @@ public class LROsInner {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     public void beginDeleteNoHeaderInRetry() {
-        beginDeleteNoHeaderInRetryAsync().blockingLast();
+        beginDeleteNoHeaderInRetryAsync().blockingFirst();
     }
 
     /**
@@ -4088,7 +4088,7 @@ public class LROsInner {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     public void beginDeleteAsyncNoHeaderInRetry() {
-        beginDeleteAsyncNoHeaderInRetryAsync().blockingLast();
+        beginDeleteAsyncNoHeaderInRetryAsync().blockingFirst();
     }
 
     /**
@@ -4163,7 +4163,7 @@ public class LROsInner {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     public void beginDeleteAsyncRetrySucceeded() {
-        beginDeleteAsyncRetrySucceededAsync().blockingLast();
+        beginDeleteAsyncRetrySucceededAsync().blockingFirst();
     }
 
     /**
@@ -4238,7 +4238,7 @@ public class LROsInner {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     public void beginDeleteAsyncNoRetrySucceeded() {
-        beginDeleteAsyncNoRetrySucceededAsync().blockingLast();
+        beginDeleteAsyncNoRetrySucceededAsync().blockingFirst();
     }
 
     /**
@@ -4313,7 +4313,7 @@ public class LROsInner {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     public void beginDeleteAsyncRetryFailed() {
-        beginDeleteAsyncRetryFailedAsync().blockingLast();
+        beginDeleteAsyncRetryFailedAsync().blockingFirst();
     }
 
     /**
@@ -4388,7 +4388,7 @@ public class LROsInner {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     public void beginDeleteAsyncRetrycanceled() {
-        beginDeleteAsyncRetrycanceledAsync().blockingLast();
+        beginDeleteAsyncRetrycanceledAsync().blockingFirst();
     }
 
     /**
@@ -4464,7 +4464,7 @@ public class LROsInner {
      * @return the SkuInner object if successful.
      */
     public SkuInner beginPost200WithPayload() {
-        return beginPost200WithPayloadAsync().blockingLast().result();
+        return beginPost200WithPayloadAsync().blockingFirst().result();
     }
 
     /**
@@ -4548,7 +4548,7 @@ public class LROsInner {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     public void beginPost202Retry200() {
-        beginPost202Retry200Async().blockingLast();
+        beginPost202Retry200Async().blockingFirst();
     }
 
     /**
@@ -4582,7 +4582,7 @@ public class LROsInner {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     public void beginPost202Retry200(ProductInner product) {
-        beginPost202Retry200Async(product).blockingLast();
+        beginPost202Retry200Async(product).blockingFirst();
     }
 
     /**
@@ -4710,7 +4710,7 @@ public class LROsInner {
      * @return the ProductInner object if successful.
      */
     public ProductInner beginPost202NoRetry204() {
-        return beginPost202NoRetry204Async().blockingLast().result();
+        return beginPost202NoRetry204Async().blockingFirst().result();
     }
 
     /**
@@ -4745,7 +4745,7 @@ public class LROsInner {
      * @return the ProductInner object if successful.
      */
     public ProductInner beginPost202NoRetry204(ProductInner product) {
-        return beginPost202NoRetry204Async(product).blockingLast().result();
+        return beginPost202NoRetry204Async(product).blockingFirst().result();
     }
 
     /**
@@ -4891,7 +4891,7 @@ public class LROsInner {
      * @return the ProductInner object if successful.
      */
     public ProductInner beginPostAsyncRetrySucceeded() {
-        return beginPostAsyncRetrySucceededAsync().blockingLast().result();
+        return beginPostAsyncRetrySucceededAsync().blockingFirst().result();
     }
 
     /**
@@ -4926,7 +4926,7 @@ public class LROsInner {
      * @return the ProductInner object if successful.
      */
     public ProductInner beginPostAsyncRetrySucceeded(ProductInner product) {
-        return beginPostAsyncRetrySucceededAsync(product).blockingLast().result();
+        return beginPostAsyncRetrySucceededAsync(product).blockingFirst().result();
     }
 
     /**
@@ -5072,7 +5072,7 @@ public class LROsInner {
      * @return the ProductInner object if successful.
      */
     public ProductInner beginPostAsyncNoRetrySucceeded() {
-        return beginPostAsyncNoRetrySucceededAsync().blockingLast().result();
+        return beginPostAsyncNoRetrySucceededAsync().blockingFirst().result();
     }
 
     /**
@@ -5107,7 +5107,7 @@ public class LROsInner {
      * @return the ProductInner object if successful.
      */
     public ProductInner beginPostAsyncNoRetrySucceeded(ProductInner product) {
-        return beginPostAsyncNoRetrySucceededAsync(product).blockingLast().result();
+        return beginPostAsyncNoRetrySucceededAsync(product).blockingFirst().result();
     }
 
     /**
@@ -5252,7 +5252,7 @@ public class LROsInner {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     public void beginPostAsyncRetryFailed() {
-        beginPostAsyncRetryFailedAsync().blockingLast();
+        beginPostAsyncRetryFailedAsync().blockingFirst();
     }
 
     /**
@@ -5286,7 +5286,7 @@ public class LROsInner {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     public void beginPostAsyncRetryFailed(ProductInner product) {
-        beginPostAsyncRetryFailedAsync(product).blockingLast();
+        beginPostAsyncRetryFailedAsync(product).blockingFirst();
     }
 
     /**
@@ -5413,7 +5413,7 @@ public class LROsInner {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     public void beginPostAsyncRetrycanceled() {
-        beginPostAsyncRetrycanceledAsync().blockingLast();
+        beginPostAsyncRetrycanceledAsync().blockingFirst();
     }
 
     /**
@@ -5447,7 +5447,7 @@ public class LROsInner {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     public void beginPostAsyncRetrycanceled(ProductInner product) {
-        beginPostAsyncRetrycanceledAsync(product).blockingLast();
+        beginPostAsyncRetrycanceledAsync(product).blockingFirst();
     }
 
     /**

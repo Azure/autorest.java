@@ -3,8 +3,8 @@ package fixtures.lro;
 import com.microsoft.azure.v2.AzureProxy;
 import com.microsoft.azure.v2.CloudException;
 import com.microsoft.rest.v2.http.HttpPipeline;
-import com.microsoft.rest.v2.policy.PortPolicy;
-import com.microsoft.rest.v2.policy.ProtocolPolicy;
+import com.microsoft.rest.v2.policy.PortPolicyFactory;
+import com.microsoft.rest.v2.policy.ProtocolPolicyFactory;
 import fixtures.lro.implementation.AutoRestLongRunningOperationTestServiceImpl;
 import fixtures.lro.implementation.ProductInner;
 import org.junit.Assert;
@@ -20,8 +20,8 @@ public class LROSADsTests {
     public static void setup() {
         AzureProxy.setDefaultPollingDelayInMilliseconds(0);
         final HttpPipeline httpPipeline = HttpPipeline.build(
-                new ProtocolPolicy.Factory("http"),
-                new PortPolicy.Factory(3000));
+                new ProtocolPolicyFactory("http"),
+                new PortPolicyFactory(3000));
         client = new AutoRestLongRunningOperationTestServiceImpl(httpPipeline);
     }
 

@@ -3,10 +3,10 @@ package fixtures.azurespecials;
 import com.microsoft.rest.v2.credentials.TokenCredentials;
 
 import com.microsoft.rest.v2.http.HttpPipeline;
-import com.microsoft.rest.v2.policy.CredentialsPolicy;
-import com.microsoft.rest.v2.policy.PortPolicy;
-import com.microsoft.rest.v2.policy.ProtocolPolicy;
-import com.microsoft.rest.v2.policy.RequestIdPolicy;
+import com.microsoft.rest.v2.policy.CredentialsPolicyFactory;
+import com.microsoft.rest.v2.policy.PortPolicyFactory;
+import com.microsoft.rest.v2.policy.ProtocolPolicyFactory;
+import com.microsoft.rest.v2.policy.RequestIdPolicyFactory;
 import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -23,10 +23,10 @@ public class SubscriptionInMethodTests {
     @BeforeClass
     public static void setup() {
         final HttpPipeline httpPipeline = HttpPipeline.build(
-                new ProtocolPolicy.Factory("http"),
-                new PortPolicy.Factory(3000),
-                new CredentialsPolicy.Factory(new TokenCredentials(null, UUID.randomUUID().toString())),
-                new RequestIdPolicy.Factory());
+                new ProtocolPolicyFactory("http"),
+                new PortPolicyFactory(3000),
+                new CredentialsPolicyFactory(new TokenCredentials(null, UUID.randomUUID().toString())),
+                new RequestIdPolicyFactory());
         client = new AutoRestAzureSpecialParametersTestClientImpl(httpPipeline);
         client.withSubscriptionId("1234-5678-9012-3456");
     }

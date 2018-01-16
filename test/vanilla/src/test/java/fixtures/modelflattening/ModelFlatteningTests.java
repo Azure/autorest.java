@@ -1,8 +1,8 @@
 package fixtures.modelflattening;
 
 import com.microsoft.rest.v2.http.HttpPipeline;
-import com.microsoft.rest.v2.policy.PortPolicy;
-import com.microsoft.rest.v2.policy.ProtocolPolicy;
+import com.microsoft.rest.v2.policy.PortPolicyFactory;
+import com.microsoft.rest.v2.policy.ProtocolPolicyFactory;
 import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -25,8 +25,8 @@ public class ModelFlatteningTests {
     @BeforeClass
     public static void setup() {
         client = new AutoRestResourceFlatteningTestServiceImpl(HttpPipeline.build(
-                new ProtocolPolicy.Factory("http"),
-                new PortPolicy.Factory(3000)));
+                new ProtocolPolicyFactory("http"),
+                new PortPolicyFactory(3000)));
     }
 
     @Test

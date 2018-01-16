@@ -57,7 +57,7 @@ namespace AutoRest.Java
         private const string implPackage = "implementation";
         private const string modelsPackage = ".models";
 
-        private const string innerSupportsImportPrefix = "com.microsoft.azure.management.resources.fluentcore.collection.InnerSupports";
+        private const string innerSupportsImportPrefix = "com.microsoft.azure.v2.management.resources.fluentcore.collection.InnerSupports";
         private const string innerSupportsGetImport = innerSupportsImportPrefix + "Get";
         private const string innerSupportsDeleteImport = innerSupportsImportPrefix + "Delete";
         private const string innerSupportsListingImport = innerSupportsImportPrefix + "Listing";
@@ -159,7 +159,7 @@ namespace AutoRest.Java
             {
                 javaFiles.Add(GetEnumJavaFile(serviceEnum, javaSettings));
             }
-            
+
             foreach (XmlSequenceWrapper xmlSequenceWrapper in service.XmlSequenceWrappers)
             {
                 javaFiles.Add(GetXmlSequenceWrapperJavaFile(xmlSequenceWrapper, javaSettings));
@@ -882,9 +882,9 @@ namespace AutoRest.Java
             javaFile.Import(
                 "com.microsoft.azure.management.apigeneration.Beta",
                 "com.microsoft.azure.management.apigeneration.Beta.SinceVersion",
-                "com.microsoft.azure.management.resources.fluentcore.arm.AzureConfigurable",
-                "com.microsoft.azure.management.resources.fluentcore.arm.implementation.AzureConfigurableImpl",
-                "com.microsoft.azure.management.resources.fluentcore.arm.implementation.Manager",
+                "com.microsoft.azure.v2.management.resources.fluentcore.arm.AzureConfigurable",
+                "com.microsoft.azure.v2.management.resources.fluentcore.arm.implementation.AzureConfigurableImpl",
+                "com.microsoft.azure.v2.management.resources.fluentcore.arm.implementation.Manager",
                 "com.microsoft.azure.v2.AzureEnvironment",
                 azureTokenCredentialsImport,
                 "com.microsoft.azure.v2.serializer.AzureJacksonAdapter");
@@ -4520,11 +4520,11 @@ namespace AutoRest.Java
                 string argumentList = ArgumentList(parameters);
                 if (IModelTypeName(GetIModelTypeResponseVariant(ResponseBodyClientType(method.ReturnType, settings)), settings) == "void")
                 {
-                    function.Line($"{methodName}Async({argumentList}).blockingLast();");
+                    function.Line($"{methodName}Async({argumentList}).blockingFirst();");
                 }
                 else
                 {
-                    function.Return($"{methodName}Async({argumentList}).blockingLast().result()");
+                    function.Return($"{methodName}Async({argumentList}).blockingFirst().result()");
                 }
             });
 

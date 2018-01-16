@@ -4,7 +4,7 @@ import com.microsoft.rest.v2.http.HttpPipeline;
 import com.microsoft.rest.v2.http.HttpRequest;
 import com.microsoft.rest.v2.http.HttpResponse;
 import com.microsoft.rest.v2.http.UrlBuilder;
-import com.microsoft.rest.v2.policy.PortPolicy;
+import com.microsoft.rest.v2.policy.PortPolicyFactory;
 import com.microsoft.rest.v2.policy.RequestPolicy;
 import org.joda.time.DateTime;
 import org.joda.time.DateTimeZone;
@@ -32,7 +32,7 @@ public class ArrayTests {
 
     @BeforeClass
     public static void setup() throws Exception {
-        client = new AutoRestSwaggerBATArrayServiceImpl(HttpPipeline.build(new PortPolicy.Factory(3000)));
+        client = new AutoRestSwaggerBATArrayServiceImpl(HttpPipeline.build(new PortPolicyFactory(3000)));
     }
 
     @Test

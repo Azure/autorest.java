@@ -1,7 +1,7 @@
 package fixtures.bodybyte;
 
 import com.microsoft.rest.v2.http.HttpPipeline;
-import com.microsoft.rest.v2.policy.PortPolicy;
+import com.microsoft.rest.v2.policy.PortPolicyFactory;
 import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -13,7 +13,7 @@ public class ByteOperationsTests {
 
     @BeforeClass
     public static void setup() {
-        client = new AutoRestSwaggerBATByteServiceImpl(HttpPipeline.build(new PortPolicy.Factory(3000)));
+        client = new AutoRestSwaggerBATByteServiceImpl(HttpPipeline.build(new PortPolicyFactory(3000)));
     }
 
     @Test

@@ -19,10 +19,10 @@ public class LRORetrysTests {
     public static void setup() {
         AzureProxy.setDefaultPollingDelayInMilliseconds(0);
         final HttpPipeline httpPipeline = HttpPipeline.build(
-            new ProtocolPolicy.Factory("http"),
-            new PortPolicy.Factory(3000),
-            new RetryPolicy.Factory(),
-            new AddCookiesPolicy.Factory());
+            new ProtocolPolicyFactory("http"),
+            new PortPolicyFactory(3000),
+            new RetryPolicyFactory(),
+            new CookiePolicyFactory());
         client = new AutoRestLongRunningOperationTestServiceImpl(httpPipeline);
     }
 

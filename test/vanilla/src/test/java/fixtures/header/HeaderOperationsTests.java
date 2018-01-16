@@ -4,9 +4,9 @@ import com.microsoft.rest.v2.RestResponse;
 import com.microsoft.rest.v2.http.HttpHeaders;
 import com.microsoft.rest.v2.http.HttpPipeline;
 import com.microsoft.rest.v2.http.HttpPipelineBuilder;
-import com.microsoft.rest.v2.policy.AddHeadersPolicy;
-import com.microsoft.rest.v2.policy.PortPolicy;
-import com.microsoft.rest.v2.policy.ProtocolPolicy;
+import com.microsoft.rest.v2.policy.AddHeadersPolicyFactory;
+import com.microsoft.rest.v2.policy.PortPolicyFactory;
+import com.microsoft.rest.v2.policy.ProtocolPolicyFactory;
 import org.apache.commons.codec.binary.Base64;
 import org.joda.time.DateTime;
 import org.joda.time.DateTimeZone;
@@ -52,9 +52,9 @@ public class HeaderOperationsTests {
 
         HttpPipeline httpPipeline = new HttpPipelineBuilder()
                 .withUserAgent("")
-                .withRequestPolicy(new AddHeadersPolicy.Factory(headers))
-                .withRequestPolicy(new ProtocolPolicy.Factory("http"))
-                .withRequestPolicy(new PortPolicy.Factory(3000))
+                .withRequestPolicy(new AddHeadersPolicyFactory(headers))
+                .withRequestPolicy(new ProtocolPolicyFactory("http"))
+                .withRequestPolicy(new PortPolicyFactory(3000))
                 .build();
 
         client = new AutoRestSwaggerBATHeaderServiceImpl(httpPipeline);

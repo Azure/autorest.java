@@ -3,7 +3,7 @@ package fixtures.bodystring;
 import com.microsoft.rest.v2.RestException;
 import com.microsoft.rest.v2.ServiceCallback;
 import com.microsoft.rest.v2.http.HttpPipeline;
-import com.microsoft.rest.v2.policy.PortPolicy;
+import com.microsoft.rest.v2.policy.PortPolicyFactory;
 import fixtures.bodystring.implementation.AutoRestSwaggerBATServiceImpl;
 import org.junit.Assert;
 import org.junit.BeforeClass;
@@ -22,7 +22,7 @@ public class StringOperationsTests {
 
     @BeforeClass
     public static void setup() {
-        client = new AutoRestSwaggerBATServiceImpl(HttpPipeline.build(new PortPolicy.Factory(3000)));
+        client = new AutoRestSwaggerBATServiceImpl(HttpPipeline.build(new PortPolicyFactory(3000)));
     }
 
     @Test
