@@ -999,7 +999,6 @@ namespace AutoRest.Java
                     {
                         methodImports.Remove("java.util.ArrayList");
                         methodImports.Remove("com.microsoft.rest.v2.ServiceCallback");
-                        methodImports.Add("com.microsoft.azure.v2.ListOperationCallback");
                         methodImports.Add("com.microsoft.azure.v2.Page");
                         methodImports.Add("com.microsoft.azure.v2.PagedList");
                         methodImports.AddRange(CompositeTypeImports(typeName, false, false, true, false, settings.Package));
@@ -1126,11 +1125,6 @@ namespace AutoRest.Java
                         if (methodIsPagingOperation || methodIsPagingNextOperation || simulateMethodAsPagingOperation)
                         {
                             methodImports.Add("com.microsoft.azure.v2.PagedList");
-
-                            if (methodIsPagingOperation || methodIsPagingNextOperation)
-                            {
-                                methodImports.Add("com.microsoft.azure.v2.ListOperationCallback");
-                            }
 
                             if (!simulateMethodAsPagingOperation)
                             {
@@ -2964,7 +2958,6 @@ namespace AutoRest.Java
                         {
                             methodImports.Remove("java.util.ArrayList");
                             methodImports.Remove("com.microsoft.rest.v2.ServiceCallback");
-                            methodImports.Add("com.microsoft.azure.v2.ListOperationCallback");
                             methodImports.Add("com.microsoft.azure.v2.Page");
                             methodImports.Add("com.microsoft.azure.v2.PagedList");
                             methodImports.AddRange(CompositeTypeImports(typeName, false, false, true, false, settings.Package));
@@ -3090,11 +3083,6 @@ namespace AutoRest.Java
                             if (methodIsPagingOperation || methodIsPagingNextOperation || simulateMethodAsPagingOperation)
                             {
                                 methodImports.Add("com.microsoft.azure.v2.PagedList");
-
-                                if (methodIsPagingOperation || methodIsPagingNextOperation)
-                                {
-                                    methodImports.Add("com.microsoft.azure.v2.ListOperationCallback");
-                                }
 
                                 if (!simulateMethodAsPagingOperation)
                                 {
@@ -3594,7 +3582,6 @@ namespace AutoRest.Java
                     if (methodIsPagingOperation)
                     {
                         methodImports.Remove("com.microsoft.rest.v2.ServiceCallback");
-                        methodImports.Add("com.microsoft.azure.v2.ListOperationCallback");
                         methodImports.Add("com.microsoft.azure.v2.Page");
                         methodImports.Add("com.microsoft.azure.v2.PagedList");
                     }
@@ -3693,11 +3680,6 @@ namespace AutoRest.Java
                         if (methodIsPagingOperation || simulateMethodAsPagingOperation)
                         {
                             methodImports.Add("com.microsoft.azure.v2.PagedList");
-
-                            if (methodIsPagingOperation)
-                            {
-                                methodImports.Add("com.microsoft.azure.v2.ListOperationCallback");
-                            }
 
                             if (!simulateMethodAsPagingOperation)
                             {
@@ -3941,7 +3923,6 @@ namespace AutoRest.Java
                     if (methodIsPagingOperation)
                     {
                         methodImports.Remove("com.microsoft.rest.v2.ServiceCallback");
-                        methodImports.Add("com.microsoft.azure.v2.ListOperationCallback");
                         methodImports.Add("com.microsoft.azure.v2.Page");
                         methodImports.Add("com.microsoft.azure.v2.PagedList");
                     }
@@ -4039,11 +4020,6 @@ namespace AutoRest.Java
                         if (methodIsPagingOperation || simulateMethodAsPagingOperation)
                         {
                             methodImports.Add("com.microsoft.azure.v2.PagedList");
-
-                            if (methodIsPagingOperation)
-                            {
-                                methodImports.Add("com.microsoft.azure.v2.ListOperationCallback");
-                            }
 
                             if (!simulateMethodAsPagingOperation)
                             {
@@ -7810,27 +7786,7 @@ namespace AutoRest.Java
                             {
                                 serviceCallbackParameterDeclaration += ", ";
                             }
-                            string callbackParameterDeclaration = null;
-                            
-                            string listOperationCallbackDeclaration = $"final ListOperationCallback<{responseSequenceElementTypeString}> {serviceCallbackVariableName}";
-
-                            if (settings.IsAzureOrFluent)
-                            {
-                                if (methodIsPagingOperation)
-                                {
-                                    callbackParameterDeclaration += listOperationCallbackDeclaration;
-                                }
-                                else if (methodIsPagingNextOperation)
-                                {
-                                    callbackParameterDeclaration += $"final ServiceFuture<{responseGenericBodyClientTypeString}> serviceFuture, {listOperationCallbackDeclaration}";
-                                }
-                            }
-                            if (callbackParameterDeclaration == null)
-                            {
-                                callbackParameterDeclaration = $"final ServiceCallback<{responseGenericBodyClientTypeString}> {serviceCallbackVariableName}";
-                            }
-
-                            serviceCallbackParameterDeclaration += callbackParameterDeclaration;
+                            serviceCallbackParameterDeclaration += $"final ServiceCallback<{responseGenericBodyClientTypeString}> {serviceCallbackVariableName}";
 
                             typeBlock.PublicMethod($"{serviceFutureReturnType} {methodName}Async({serviceCallbackParameterDeclaration})", function =>
                             {
@@ -8415,27 +8371,7 @@ namespace AutoRest.Java
                         {
                             serviceCallbackParameterDeclaration += ", ";
                         }
-                        string callbackParameterDeclaration = null;
-                        
-                        string listOperationCallbackDeclaration = $"final ListOperationCallback<{responseSequenceElementTypeString}> {serviceCallbackVariableName}";
-
-                        if (settings.IsAzureOrFluent)
-                        {
-                            if (methodIsPagingNextOperation)
-                            {
-                                callbackParameterDeclaration += listOperationCallbackDeclaration;
-                            }
-                            else if (methodIsPagingNextOperation)
-                            {
-                                callbackParameterDeclaration += $"final ServiceFuture<{responseGenericBodyClientTypeString}> serviceFuture, {listOperationCallbackDeclaration}";
-                            }
-                        }
-                        if (callbackParameterDeclaration == null)
-                        {
-                            callbackParameterDeclaration = $"final ServiceCallback<{responseGenericBodyClientTypeString}> {serviceCallbackVariableName}";
-                        }
-
-                        serviceCallbackParameterDeclaration += callbackParameterDeclaration;
+                        serviceCallbackParameterDeclaration += $"final ServiceCallback<{responseGenericBodyClientTypeString}> {serviceCallbackVariableName}";
 
                         typeBlock.PublicMethod($"{serviceFutureReturnType} {methodName}Async({serviceCallbackParameterDeclaration})", function =>
                         {
