@@ -827,6 +827,8 @@ namespace AutoRest.Java
 
             bool isXmlWrapper = property.XmlIsWrapped;
 
+            string xmlListElementName = property.ModelType is SequenceType st ? st.ElementXmlName : null;
+
             string wireTypeName = GetPropertyWireTypeName(property, settings);
 
             bool isConstant = property.IsConstant;
@@ -849,7 +851,7 @@ namespace AutoRest.Java
 
             bool isReadOnly = property.IsReadOnly;
 
-            return new ServiceProperty(name, description, annotationArguments, isXmlAttribute, xmlName, serializedName, isXmlWrapper, wireTypeName, isConstant, modelTypeIsSequence, modelTypeIsComposite, clientTypeName, defaultValue, isReadOnly);
+            return new ServiceProperty(name, description, annotationArguments, isXmlAttribute, xmlName, serializedName, isXmlWrapper, xmlListElementName, wireTypeName, isConstant, modelTypeIsSequence, modelTypeIsComposite, clientTypeName, defaultValue, isReadOnly);
         }
 
         private static ServiceManager ParseManager(string serviceClientName, CodeModel codeModel, JavaSettings settings)
@@ -1320,7 +1322,7 @@ namespace AutoRest.Java
 
             JavaFile javaFile = GetJavaFileWithHeaderAndPackage(null, settings, interfaceName);
 
-            List<string> imports = GetServiceClientInterfaceImorts(codeModel, settings).ToList();
+            List<string> imports = GetServiceClientInterfaceImports(codeModel, settings).ToList();
             if (settings.IsFluent)
             {
                 imports.Add("com.microsoft.azure.v2.AzureClient");
@@ -1562,6 +1564,8 @@ namespace AutoRest.Java
                         {
                             string localName = settings.ShouldGenerateXmlSerialization ? property.XmlName : property.SerializedName.ToString();
                             classBlock.Annotation($"JacksonXmlElementWrapper(localName = \"{localName}\")");
+
+                            classBlock.Annotation($"JsonProperty(\"{property.XmlListElementName}\")");
                         }
                         else
                         {
@@ -2025,7 +2029,7 @@ namespace AutoRest.Java
         private static bool IsServiceClientCredentialProperty(Property property)
             => GetPropertyModelType(property).IsPrimaryType(KnownPrimaryType.Credentials);
 
-        private static IEnumerable<string> GetServiceClientInterfaceImorts(CodeModel codeModel, JavaSettings settings)
+        private static IEnumerable<string> GetServiceClientInterfaceImports(CodeModel codeModel, JavaSettings settings)
             => GetRestAPIMethods(codeModel).SelectMany(m => GetClientInterfaceMethodImports(m, settings));
 
         private static IEnumerable<MethodGroup> GetMethodGroups(CodeModel codeModel)
@@ -2159,6 +2163,7 @@ namespace AutoRest.Java
         private static HashSet<string> GetSequenceTypeImports(SequenceType sequenceType, JavaSettings settings)
         {
             HashSet<string> result = new HashSet<string>();
+
             result.Add("java.util.List");
             result.AddRange(GetIModelTypeImports(sequenceType.ElementType, settings));
             return result;
@@ -2926,14 +2931,12 @@ namespace AutoRest.Java
             imports.Add("io.reactivex.Observable");
             imports.Add("io.reactivex.Single");
             imports.Add("io.reactivex.functions.Function");
-            imports.Add("com.microsoft.rest.v2.annotations.Headers");
             imports.Add("com.microsoft.rest.v2.annotations.ExpectedResponses");
             if (HasUnexpectedResponseExceptionType(restAPIMethod))
             {
                 imports.Add("com.microsoft.rest.v2.annotations.UnexpectedResponseExceptionType");
             }
             imports.Add("com.microsoft.rest.v2.annotations.Host");
-            imports.Add("com.microsoft.rest.v2.http.HttpClient");
             imports.Add("com.microsoft.rest.v2.ServiceFuture");
             imports.Add("com.microsoft.rest.v2.ServiceCallback");
 
@@ -2977,12 +2980,6 @@ namespace AutoRest.Java
 
             // Http verb annotations
             imports.Add($"com.microsoft.rest.v2.annotations.{restAPIMethod.HttpMethod.ToString().ToUpperInvariant()}");
-
-            // response type conversion
-            if (restAPIMethod.Responses.Any())
-            {
-                imports.Add("com.google.common.reflect.TypeToken");
-            }
 
             // validation
             if (HasClientMethodParametersOrClientPropertiesToValidate(restAPIMethod))
@@ -3345,7 +3342,6 @@ namespace AutoRest.Java
         private static IEnumerable<string> MethodExceptionImports(Method method, JavaSettings settings)
         {
             HashSet<string> exceptionImports = new HashSet<string>();
-            exceptionImports.Add("java.io.IOException");
 
             string methodOperationExceptionTypeImport = null;
             string methodOperationExceptionTypeName = MethodOperationExceptionTypeString(method, settings);
