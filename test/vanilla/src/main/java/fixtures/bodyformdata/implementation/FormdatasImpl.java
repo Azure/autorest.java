@@ -22,10 +22,10 @@ import com.microsoft.rest.v2.annotations.Host;
 import com.microsoft.rest.v2.annotations.POST;
 import com.microsoft.rest.v2.annotations.PUT;
 import com.microsoft.rest.v2.annotations.UnexpectedResponseExceptionType;
-import com.microsoft.rest.v2.http.AsyncInputStream;
 import com.microsoft.rest.v2.http.HttpClient;
 import fixtures.bodyformdata.Formdatas;
 import fixtures.bodyformdata.models.ErrorException;
+import io.reactivex.Flowable;
 import io.reactivex.Maybe;
 import io.reactivex.Observable;
 import io.reactivex.Single;
@@ -67,12 +67,12 @@ public class FormdatasImpl implements Formdatas {
         @POST("formdata/stream/uploadfile")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<RestResponse<Void, AsyncInputStream>> uploadFile(/* @Part("fileContent") not supported by RestProxy */AsyncInputStream fileContent, /* @Part("fileName") not supported by RestProxy */String fileName);
+        Single<RestResponse<Void, Flowable<byte[]>>> uploadFile(/* @Part("fileContent") not supported by RestProxy */Flowable<byte[]> fileContent, /* @Part("fileName") not supported by RestProxy */String fileName);
 
         @PUT("formdata/stream/uploadfile")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<RestResponse<Void, AsyncInputStream>> uploadFileViaBody(@BodyParam("application/octet-stream") AsyncInputStream fileContent);
+        Single<RestResponse<Void, Flowable<byte[]>>> uploadFileViaBody(@BodyParam("application/octet-stream") Flowable<byte[]> fileContent);
     }
 
     /**
@@ -83,9 +83,9 @@ public class FormdatasImpl implements Formdatas {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the AsyncInputStream object if successful.
+     * @return the Flowable&lt;byte[]&gt; object if successful.
      */
-    public AsyncInputStream uploadFile(AsyncInputStream fileContent, String fileName) {
+    public Flowable<byte[]> uploadFile(Flowable<byte[]> fileContent, String fileName) {
         return uploadFileAsync(fileContent, fileName).blockingGet();
     }
 
@@ -96,9 +96,9 @@ public class FormdatasImpl implements Formdatas {
      * @param fileName File name to upload. Name has to be spelled exactly as written here.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;AsyncInputStream&gt;} object.
+     * @return the {@link ServiceFuture&lt;Flowable&lt;byte[]&gt;&gt;} object.
      */
-    public ServiceFuture<AsyncInputStream> uploadFileAsync(AsyncInputStream fileContent, String fileName, final ServiceCallback<AsyncInputStream> serviceCallback) {
+    public ServiceFuture<Flowable<byte[]>> uploadFileAsync(Flowable<byte[]> fileContent, String fileName, final ServiceCallback<Flowable<byte[]>> serviceCallback) {
         return ServiceFuture.fromBody(uploadFileAsync(fileContent, fileName), serviceCallback);
     }
 
@@ -108,9 +108,9 @@ public class FormdatasImpl implements Formdatas {
      * @param fileContent File to upload.
      * @param fileName File name to upload. Name has to be spelled exactly as written here.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link Single&lt;RestResponse&lt;Void, AsyncInputStream&gt;&gt;} object if successful.
+     * @return the {@link Single&lt;RestResponse&lt;Void, Flowable&lt;byte[]&gt;&gt;&gt;} object if successful.
      */
-    public Single<RestResponse<Void, AsyncInputStream>> uploadFileWithRestResponseAsync(AsyncInputStream fileContent, String fileName) {
+    public Single<RestResponse<Void, Flowable<byte[]>>> uploadFileWithRestResponseAsync(Flowable<byte[]> fileContent, String fileName) {
         if (fileContent == null) {
             throw new IllegalArgumentException("Parameter fileContent is required and cannot be null.");
         }
@@ -126,12 +126,12 @@ public class FormdatasImpl implements Formdatas {
      * @param fileContent File to upload.
      * @param fileName File name to upload. Name has to be spelled exactly as written here.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link Maybe&lt;AsyncInputStream&gt;} object if successful.
+     * @return the {@link Maybe&lt;Flowable&lt;byte[]&gt;&gt;} object if successful.
      */
-    public Maybe<AsyncInputStream> uploadFileAsync(AsyncInputStream fileContent, String fileName) {
+    public Maybe<Flowable<byte[]>> uploadFileAsync(Flowable<byte[]> fileContent, String fileName) {
         return uploadFileWithRestResponseAsync(fileContent, fileName)
-            .flatMapMaybe(new Function<RestResponse<Void, AsyncInputStream>, Maybe<AsyncInputStream>>() {
-                public Maybe<AsyncInputStream> apply(RestResponse<Void, AsyncInputStream> restResponse) {
+            .flatMapMaybe(new Function<RestResponse<Void, Flowable<byte[]>>, Maybe<Flowable<byte[]>>>() {
+                public Maybe<Flowable<byte[]>> apply(RestResponse<Void, Flowable<byte[]>> restResponse) {
                     if (restResponse.body() == null) {
                         return Maybe.empty();
                     } else {
@@ -148,9 +148,9 @@ public class FormdatasImpl implements Formdatas {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the AsyncInputStream object if successful.
+     * @return the Flowable&lt;byte[]&gt; object if successful.
      */
-    public AsyncInputStream uploadFileViaBody(AsyncInputStream fileContent) {
+    public Flowable<byte[]> uploadFileViaBody(Flowable<byte[]> fileContent) {
         return uploadFileViaBodyAsync(fileContent).blockingGet();
     }
 
@@ -160,9 +160,9 @@ public class FormdatasImpl implements Formdatas {
      * @param fileContent File to upload.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;AsyncInputStream&gt;} object.
+     * @return the {@link ServiceFuture&lt;Flowable&lt;byte[]&gt;&gt;} object.
      */
-    public ServiceFuture<AsyncInputStream> uploadFileViaBodyAsync(AsyncInputStream fileContent, final ServiceCallback<AsyncInputStream> serviceCallback) {
+    public ServiceFuture<Flowable<byte[]>> uploadFileViaBodyAsync(Flowable<byte[]> fileContent, final ServiceCallback<Flowable<byte[]>> serviceCallback) {
         return ServiceFuture.fromBody(uploadFileViaBodyAsync(fileContent), serviceCallback);
     }
 
@@ -171,9 +171,9 @@ public class FormdatasImpl implements Formdatas {
      *
      * @param fileContent File to upload.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link Single&lt;RestResponse&lt;Void, AsyncInputStream&gt;&gt;} object if successful.
+     * @return the {@link Single&lt;RestResponse&lt;Void, Flowable&lt;byte[]&gt;&gt;&gt;} object if successful.
      */
-    public Single<RestResponse<Void, AsyncInputStream>> uploadFileViaBodyWithRestResponseAsync(AsyncInputStream fileContent) {
+    public Single<RestResponse<Void, Flowable<byte[]>>> uploadFileViaBodyWithRestResponseAsync(Flowable<byte[]> fileContent) {
         if (fileContent == null) {
             throw new IllegalArgumentException("Parameter fileContent is required and cannot be null.");
         }
@@ -185,12 +185,12 @@ public class FormdatasImpl implements Formdatas {
      *
      * @param fileContent File to upload.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link Maybe&lt;AsyncInputStream&gt;} object if successful.
+     * @return the {@link Maybe&lt;Flowable&lt;byte[]&gt;&gt;} object if successful.
      */
-    public Maybe<AsyncInputStream> uploadFileViaBodyAsync(AsyncInputStream fileContent) {
+    public Maybe<Flowable<byte[]>> uploadFileViaBodyAsync(Flowable<byte[]> fileContent) {
         return uploadFileViaBodyWithRestResponseAsync(fileContent)
-            .flatMapMaybe(new Function<RestResponse<Void, AsyncInputStream>, Maybe<AsyncInputStream>>() {
-                public Maybe<AsyncInputStream> apply(RestResponse<Void, AsyncInputStream> restResponse) {
+            .flatMapMaybe(new Function<RestResponse<Void, Flowable<byte[]>>, Maybe<Flowable<byte[]>>>() {
+                public Maybe<Flowable<byte[]>> apply(RestResponse<Void, Flowable<byte[]>> restResponse) {
                     if (restResponse.body() == null) {
                         return Maybe.empty();
                     } else {
