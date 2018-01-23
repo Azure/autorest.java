@@ -13,8 +13,8 @@ package fixtures.bodyfile;
 import com.microsoft.rest.v2.RestResponse;
 import com.microsoft.rest.v2.ServiceCallback;
 import com.microsoft.rest.v2.ServiceFuture;
-import com.microsoft.rest.v2.http.AsyncInputStream;
 import fixtures.bodyfile.models.ErrorException;
+import io.reactivex.Flowable;
 import io.reactivex.Maybe;
 import io.reactivex.Observable;
 import io.reactivex.Single;
@@ -31,34 +31,34 @@ public interface Files {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the AsyncInputStream object if successful.
+     * @return the Flowable&lt;byte[]&gt; object if successful.
      */
-    AsyncInputStream getFile();
+    Flowable<byte[]> getFile();
 
     /**
      * Get file.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;AsyncInputStream&gt;} object.
+     * @return the {@link ServiceFuture&lt;Flowable&lt;byte[]&gt;&gt;} object.
      */
-    ServiceFuture<AsyncInputStream> getFileAsync(final ServiceCallback<AsyncInputStream> serviceCallback);
+    ServiceFuture<Flowable<byte[]>> getFileAsync(final ServiceCallback<Flowable<byte[]>> serviceCallback);
 
     /**
      * Get file.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link Single&lt;RestResponse&lt;Void, AsyncInputStream&gt;&gt;} object if successful.
+     * @return the {@link Single&lt;RestResponse&lt;Void, Flowable&lt;byte[]&gt;&gt;&gt;} object if successful.
      */
-    Single<RestResponse<Void, AsyncInputStream>> getFileWithRestResponseAsync();
+    Single<RestResponse<Void, Flowable<byte[]>>> getFileWithRestResponseAsync();
 
     /**
      * Get file.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link Maybe&lt;AsyncInputStream&gt;} object if successful.
+     * @return the {@link Maybe&lt;Flowable&lt;byte[]&gt;&gt;} object if successful.
      */
-    Maybe<AsyncInputStream> getFileAsync();
+    Maybe<Flowable<byte[]>> getFileAsync();
 
     /**
      * Get a large file.
@@ -66,34 +66,34 @@ public interface Files {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the AsyncInputStream object if successful.
+     * @return the Flowable&lt;byte[]&gt; object if successful.
      */
-    AsyncInputStream getFileLarge();
+    Flowable<byte[]> getFileLarge();
 
     /**
      * Get a large file.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;AsyncInputStream&gt;} object.
+     * @return the {@link ServiceFuture&lt;Flowable&lt;byte[]&gt;&gt;} object.
      */
-    ServiceFuture<AsyncInputStream> getFileLargeAsync(final ServiceCallback<AsyncInputStream> serviceCallback);
+    ServiceFuture<Flowable<byte[]>> getFileLargeAsync(final ServiceCallback<Flowable<byte[]>> serviceCallback);
 
     /**
      * Get a large file.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link Single&lt;RestResponse&lt;Void, AsyncInputStream&gt;&gt;} object if successful.
+     * @return the {@link Single&lt;RestResponse&lt;Void, Flowable&lt;byte[]&gt;&gt;&gt;} object if successful.
      */
-    Single<RestResponse<Void, AsyncInputStream>> getFileLargeWithRestResponseAsync();
+    Single<RestResponse<Void, Flowable<byte[]>>> getFileLargeWithRestResponseAsync();
 
     /**
      * Get a large file.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link Maybe&lt;AsyncInputStream&gt;} object if successful.
+     * @return the {@link Maybe&lt;Flowable&lt;byte[]&gt;&gt;} object if successful.
      */
-    Maybe<AsyncInputStream> getFileLargeAsync();
+    Maybe<Flowable<byte[]>> getFileLargeAsync();
 
     /**
      * Get empty file.
@@ -101,32 +101,32 @@ public interface Files {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the AsyncInputStream object if successful.
+     * @return the Flowable&lt;byte[]&gt; object if successful.
      */
-    AsyncInputStream getEmptyFile();
+    Flowable<byte[]> getEmptyFile();
 
     /**
      * Get empty file.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;AsyncInputStream&gt;} object.
+     * @return the {@link ServiceFuture&lt;Flowable&lt;byte[]&gt;&gt;} object.
      */
-    ServiceFuture<AsyncInputStream> getEmptyFileAsync(final ServiceCallback<AsyncInputStream> serviceCallback);
+    ServiceFuture<Flowable<byte[]>> getEmptyFileAsync(final ServiceCallback<Flowable<byte[]>> serviceCallback);
 
     /**
      * Get empty file.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link Single&lt;RestResponse&lt;Void, AsyncInputStream&gt;&gt;} object if successful.
+     * @return the {@link Single&lt;RestResponse&lt;Void, Flowable&lt;byte[]&gt;&gt;&gt;} object if successful.
      */
-    Single<RestResponse<Void, AsyncInputStream>> getEmptyFileWithRestResponseAsync();
+    Single<RestResponse<Void, Flowable<byte[]>>> getEmptyFileWithRestResponseAsync();
 
     /**
      * Get empty file.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link Maybe&lt;AsyncInputStream&gt;} object if successful.
+     * @return the {@link Maybe&lt;Flowable&lt;byte[]&gt;&gt;} object if successful.
      */
-    Maybe<AsyncInputStream> getEmptyFileAsync();
+    Maybe<Flowable<byte[]>> getEmptyFileAsync();
 }
