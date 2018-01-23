@@ -15,15 +15,22 @@ namespace AutoRest.Java.Model
         /// <param name="location">The location within the REST API method's URL where this parameter will be added.</param>
         /// <param name="serializedName">The name of this parameter when it is serialized.</param>
         /// <param name="variableName">The name of this parameter when it is used as a variable.</param>
-        /// <param name="clientTypeName">The name of this parameter's type when it is used within the client application.</param>
-        public RestAPIParameter(string name, string location, string serializedName, string variableName, string clientTypeName, bool skipUrlEncodingExtension)
+        /// <param name="skipUrlEncodingExtension"></param>
+        /// <param name="isConstant">Whether or not this parameter is a constant value.</param>
+        /// <param name="isRequired">Whether or not this parameter is required.</param>
+        /// <param name="description">The description of this parameter.</param>
+        /// <param name="type">The type of this parameter.</param>
+        public RestAPIParameter(string name, string location, string serializedName, string variableName, bool skipUrlEncodingExtension, bool isConstant, bool isRequired, string description, RestAPIType type)
         {
             Name = name;
             Location = location;
             SerializedName = serializedName;
             VariableName = variableName;
-            ClientTypeName = clientTypeName;
             SkipUrlEncodingExtension = skipUrlEncodingExtension;
+            IsConstant = isConstant;
+            IsRequired = isRequired;
+            Description = description;
+            Type = type;
         }
 
         /// <summary>
@@ -46,11 +53,26 @@ namespace AutoRest.Java.Model
         /// </summary>
         public string VariableName { get; }
 
-        /// <summary>
-        /// Get the name of this parameter's type when it is used within the client application.
-        /// </summary>
-        public string ClientTypeName { get; }
-
         public bool SkipUrlEncodingExtension { get; }
+
+        /// <summary>
+        /// Get whether or not this parameter is a constant value.
+        /// </summary>
+        public bool IsConstant { get; }
+
+        /// <summary>
+        /// Get whether or not this parameter is required.
+        /// </summary>
+        public bool IsRequired { get; }
+
+        /// <summary>
+        /// Get the description of this parameter.
+        /// </summary>
+        public string Description { get; }
+
+        /// <summary>
+        /// Get the type of this parameter.
+        /// </summary>
+        public RestAPIType Type { get; }
     }
 }

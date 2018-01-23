@@ -24,7 +24,12 @@ namespace AutoRest.Java.Model
         /// <param name="name">The name of this REST API method.</param>
         /// <param name="asyncReturnType">The return type of this method with its asynchronous container.</param>
         /// <param name="parameters">The parameters that are provided to this method.</param>
-        public RestAPIMethod(string requestContentType, bool isPagingNextOperation, string httpMethod, string urlPath, IEnumerable<HttpStatusCode> responseExpectedStatusCodes, string returnValueWireType, string unexpectedResponseExceptionType, string name, string asyncReturnType, IEnumerable<RestAPIParameter> parameters)
+        /// <param name="isPagingOperation">Whether or not this method is a request to get the first page of a sequence of pages.</param>
+        /// <param name="description">The description of this method.</param>
+        /// <param name="simulateAsPagingOperation">Whether or not to simulate this method as a paging operation.</param>
+        /// <param name="isLongRunningOperation">Whether or not this method is a long running operation.</param>
+        /// <param name="returnValueClientType">The return value's type as it is returned from the client.</param>
+        public RestAPIMethod(string requestContentType, bool isPagingNextOperation, string httpMethod, string urlPath, IEnumerable<HttpStatusCode> responseExpectedStatusCodes, string returnValueWireType, string unexpectedResponseExceptionType, string name, string asyncReturnType, IEnumerable<RestAPIParameter> parameters, bool isPagingOperation, string description, bool simulateAsPagingOperation, bool isLongRunningOperation, string returnValueClientType)
         {
             RequestContentType = requestContentType;
             IsPagingNextOperation = isPagingNextOperation;
@@ -36,6 +41,11 @@ namespace AutoRest.Java.Model
             Name = name;
             AsyncReturnType = asyncReturnType;
             Parameters = parameters;
+            IsPagingOperation = isPagingOperation;
+            Description = description;
+            SimulateAsPagingOperation = simulateAsPagingOperation;
+            IsLongRunningOperation = isLongRunningOperation;
+            ReturnValueClientType = returnValueClientType;
         }
 
         /// <summary>
@@ -87,5 +97,30 @@ namespace AutoRest.Java.Model
         /// Get the parameters that are provided to this method.
         /// </summary>
         public IEnumerable<RestAPIParameter> Parameters { get; }
+
+        /// <summary>
+        /// Get whether or not this method is a request to get the first page of a sequence of pages.
+        /// </summary>
+        public bool IsPagingOperation { get; }
+
+        /// <summary>
+        /// Get the description of this method.
+        /// </summary>
+        public string Description { get; }
+
+        /// <summary>
+        /// Get whether or not to simulate this method as a paging operation.
+        /// </summary>
+        public bool SimulateAsPagingOperation { get; }
+
+        /// <summary>
+        /// Get whether or not this method is a long running operation.
+        /// </summary>
+        public bool IsLongRunningOperation { get; }
+
+        /// <summary>
+        /// Get the return value's type as it is returned from the client.
+        /// </summary>
+        public string ReturnValueClientType { get; }
     }
 }
