@@ -32,7 +32,6 @@ import fixtures.header.models.HeaderResponseStringHeaders;
 import io.reactivex.Completable;
 import io.reactivex.Observable;
 import io.reactivex.Single;
-import java.io.IOException;
 import org.joda.time.DateTime;
 import org.joda.time.LocalDate;
 import org.joda.time.Period;

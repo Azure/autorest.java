@@ -10,7 +10,6 @@
 
 package fixtures.azurespecials.implementation;
 
-import com.google.common.reflect.TypeToken;
 import com.microsoft.azure.v2.AzureProxy;
 import com.microsoft.rest.v2.RestResponse;
 import com.microsoft.rest.v2.ServiceCallback;
@@ -19,11 +18,10 @@ import com.microsoft.rest.v2.Validator;
 import com.microsoft.rest.v2.annotations.ExpectedResponses;
 import com.microsoft.rest.v2.annotations.HEAD;
 import com.microsoft.rest.v2.annotations.HeaderParam;
-import com.microsoft.rest.v2.annotations.Headers;
 import com.microsoft.rest.v2.annotations.Host;
 import com.microsoft.rest.v2.annotations.POST;
 import com.microsoft.rest.v2.annotations.UnexpectedResponseExceptionType;
-import com.microsoft.rest.v2.http.HttpClient;
+import fixtures.azurespecials.Headers;
 import fixtures.azurespecials.models.ErrorException;
 import fixtures.azurespecials.models.HeaderCustomNamedRequestIdHeaders;
 import fixtures.azurespecials.models.HeaderCustomNamedRequestIdHeadHeaders;
@@ -34,13 +32,12 @@ import io.reactivex.Maybe;
 import io.reactivex.Observable;
 import io.reactivex.Single;
 import io.reactivex.functions.Function;
-import java.io.IOException;
 
 /**
  * An instance of this class provides access to all the operations defined in
  * Headers.
  */
-public class HeadersImpl implements fixtures.azurespecials.Headers {
+public class HeadersImpl implements Headers {
     /**
      * The proxy service used to perform REST calls.
      */
