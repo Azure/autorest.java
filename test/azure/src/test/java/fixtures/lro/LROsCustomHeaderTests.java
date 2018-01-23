@@ -20,12 +20,12 @@ public class LROsCustomHeaderTests {
         headers.set("x-ms-client-request-id", "9C4D50EE-2D56-4CD3-8152-34347DC9F2B0");
 
         final HttpPipeline httpPipeline = HttpPipeline.build(
-            new ProtocolPolicy.Factory("http"),
-            new PortPolicy.Factory(3000),
-            new RetryPolicy.Factory(),
-            new AddCookiesPolicy.Factory(),
-            new AddHeadersPolicy.Factory(headers),
-            new CredentialsPolicy.Factory(new BasicAuthenticationCredentials(null, null)));
+            new ProtocolPolicyFactory("http"),
+            new PortPolicyFactory(3000),
+            new RetryPolicyFactory(),
+            new CookiePolicyFactory(),
+            new AddHeadersPolicyFactory(headers),
+            new CredentialsPolicyFactory(new BasicAuthenticationCredentials(null, null)));
         AzureProxy.setDefaultPollingDelayInMilliseconds(0);
         client = new AutoRestLongRunningOperationTestServiceImpl(httpPipeline);
     }

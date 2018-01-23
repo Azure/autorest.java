@@ -1,8 +1,8 @@
 package fixtures.requiredoptional;
 
 import com.microsoft.rest.v2.http.HttpPipeline;
-import com.microsoft.rest.v2.policy.PortPolicy;
-import com.microsoft.rest.v2.policy.ProtocolPolicy;
+import com.microsoft.rest.v2.policy.PortPolicyFactory;
+import com.microsoft.rest.v2.policy.ProtocolPolicyFactory;
 import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -17,8 +17,8 @@ public class ImplicitTests {
     @BeforeClass
     public static void setup() {
         client = new AutoRestRequiredOptionalTestServiceImpl(HttpPipeline.build(
-                new ProtocolPolicy.Factory("http"),
-                new PortPolicy.Factory(3000)));
+                new ProtocolPolicyFactory("http"),
+                new PortPolicyFactory(3000)));
     }
 
     @Test
@@ -43,12 +43,7 @@ public class ImplicitTests {
 
     @Test
     public void putOptionalBody() throws Exception {
-        try {
-            client.implicits().putOptionalBody(null);
-            fail();
-        } catch (IllegalArgumentException ex) {
-            Assert.assertTrue(ex.getMessage().contains("Argument for @BodyParam parameter must be non-null"));
-        }
+        client.implicits().putOptionalBody(null);
     }
 
     @Test

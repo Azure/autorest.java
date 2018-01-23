@@ -4,10 +4,10 @@ import com.microsoft.rest.v2.RestResponse;
 import com.microsoft.rest.v2.credentials.TokenCredentials;
 import com.microsoft.rest.v2.http.HttpHeaders;
 import com.microsoft.rest.v2.http.HttpPipeline;
-import com.microsoft.rest.v2.policy.AddHeadersPolicy;
-import com.microsoft.rest.v2.policy.CredentialsPolicy;
-import com.microsoft.rest.v2.policy.PortPolicy;
-import com.microsoft.rest.v2.policy.ProtocolPolicy;
+import com.microsoft.rest.v2.policy.AddHeadersPolicyFactory;
+import com.microsoft.rest.v2.policy.CredentialsPolicyFactory;
+import com.microsoft.rest.v2.policy.PortPolicyFactory;
+import com.microsoft.rest.v2.policy.ProtocolPolicyFactory;
 import fixtures.azurespecials.implementation.AutoRestAzureSpecialParametersTestClientImpl;
 import org.junit.BeforeClass;
 import org.junit.Ignore;
@@ -26,10 +26,10 @@ public class XMsClientRequestIdTests {
         headers.set("x-ms-client-request-id", "9C4D50EE-2D56-4CD3-8152-34347DC9F2B0");
 
         final HttpPipeline httpPipeline = HttpPipeline.build(
-                new ProtocolPolicy.Factory("http"),
-                new PortPolicy.Factory(3000),
-                new CredentialsPolicy.Factory(new TokenCredentials(null, UUID.randomUUID().toString())),
-                new AddHeadersPolicy.Factory(headers));
+                new ProtocolPolicyFactory("http"),
+                new PortPolicyFactory(3000),
+                new CredentialsPolicyFactory(new TokenCredentials(null, UUID.randomUUID().toString())),
+                new AddHeadersPolicyFactory(headers));
         client = new AutoRestAzureSpecialParametersTestClientImpl(httpPipeline);
         client.withSubscriptionId("1234-5678-9012-3456");
     }

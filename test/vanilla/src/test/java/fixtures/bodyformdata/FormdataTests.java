@@ -3,10 +3,11 @@ package fixtures.bodyformdata;
 import com.google.common.base.Charsets;
 import com.microsoft.rest.v2.http.AsyncInputStream;
 import com.microsoft.rest.v2.util.FlowableUtil;
+import io.reactivex.Flowable;
 import io.reactivex.Single;
 import io.reactivex.functions.Function;
 import com.microsoft.rest.v2.http.HttpPipeline;
-import com.microsoft.rest.v2.policy.PortPolicy;
+import com.microsoft.rest.v2.policy.PortPolicyFactory;
 import org.apache.commons.io.IOUtils;
 import org.junit.Assert;
 import org.junit.BeforeClass;
@@ -23,7 +24,7 @@ public class FormdataTests {
 
     @BeforeClass
     public static void setup() {
-        client = new AutoRestSwaggerBATFormDataServiceImpl(HttpPipeline.build(new PortPolicy.Factory(3000)));
+        client = new AutoRestSwaggerBATFormDataServiceImpl(HttpPipeline.build(new PortPolicyFactory(3000)));
     }
 
     @Ignore("Multipart form data not currently supported")
@@ -33,8 +34,8 @@ public class FormdataTests {
         InputStream stream = classLoader.getResourceAsStream("upload.txt");
         byte[] bytes = IOUtils.toByteArray(stream);
         stream.close();
-        AsyncInputStream result = client.formdatas().uploadFile(AsyncInputStream.create(new ByteArrayInputStream(bytes), bytes.length), "sample.png");
-        byte[] allContent = FlowableUtil.collectBytes(result.content()).blockingGet();
+        Flowable<byte[]> result = client.formdatas().uploadFile(AsyncInputStream.create(bytes).content(), "sample.png");
+        byte[] allContent = FlowableUtil.collectBytes(result).blockingGet();
         Assert.assertEquals(new String(bytes, Charsets.UTF_8), new String(allContent, Charsets.UTF_8));
     }
 
@@ -45,11 +46,11 @@ public class FormdataTests {
         try (InputStream stream = classLoader.getResourceAsStream("upload.txt")) {
             byte[] bytes = IOUtils.toByteArray(stream);
             stream.close();
-            byte[] actual = client.formdatas().uploadFileViaBodyAsync(AsyncInputStream.create(new ByteArrayInputStream(bytes), bytes.length))
-                    .flatMapSingle(new Function<AsyncInputStream, Single<byte[]>>() {
+            byte[] actual = client.formdatas().uploadFileViaBodyAsync(AsyncInputStream.create(bytes).content())
+                    .flatMapSingle(new Function<Flowable<byte[]>, Single<byte[]>>() {
                         @Override
-                        public Single<byte[]> apply(AsyncInputStream stream) throws Exception {
-                            return FlowableUtil.collectBytes(stream.content());
+                        public Single<byte[]> apply(Flowable<byte[]> stream) throws Exception {
+                            return FlowableUtil.collectBytes(stream);
                         }
                     }).blockingGet();
             Assert.assertEquals(new String(bytes), IOUtils.toString(actual));

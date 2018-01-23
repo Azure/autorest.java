@@ -1,7 +1,7 @@
 package fixtures.bodystring;
 
 import com.microsoft.rest.v2.http.HttpPipeline;
-import com.microsoft.rest.v2.policy.PortPolicy;
+import com.microsoft.rest.v2.policy.PortPolicyFactory;
 import fixtures.bodystring.implementation.AutoRestSwaggerBATServiceImpl;
 import fixtures.bodystring.models.Colors;
 import org.junit.Assert;
@@ -16,7 +16,7 @@ public class EnumOperationsTests {
 
     @BeforeClass
     public static void setup() {
-        client = new AutoRestSwaggerBATServiceImpl(HttpPipeline.build(new PortPolicy.Factory(3000)));
+        client = new AutoRestSwaggerBATServiceImpl(HttpPipeline.build(new PortPolicyFactory(3000)));
     }
 
     @Test

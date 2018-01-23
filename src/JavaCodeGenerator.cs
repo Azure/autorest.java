@@ -57,7 +57,7 @@ namespace AutoRest.Java
         private const string implPackage = "implementation";
         private const string modelsPackage = ".models";
 
-        private const string innerSupportsImportPrefix = "com.microsoft.azure.management.resources.fluentcore.collection.InnerSupports";
+        private const string innerSupportsImportPrefix = "com.microsoft.azure.v2.management.resources.fluentcore.collection.InnerSupports";
         private const string innerSupportsGetImport = innerSupportsImportPrefix + "Get";
         private const string innerSupportsDeleteImport = innerSupportsImportPrefix + "Delete";
         private const string innerSupportsListingImport = innerSupportsImportPrefix + "Listing";
@@ -98,7 +98,7 @@ namespace AutoRest.Java
             "Duration",
             "Period",
             "BigDecimal",
-            "AsyncInputStream"
+            "Flowable<byte[]>"
         };
 
         private static readonly Regex methodTypeLeading = new Regex("^/+");
@@ -4660,7 +4660,7 @@ namespace AutoRest.Java
                             result = new[] { "java.math.BigDecimal" };
                             break;
                         case KnownPrimaryType.Stream:
-                            result = new[] { "com.microsoft.rest.v2.http.AsyncInputStream" };
+                            result = new[] { "io.reactivex.Flowable" };
                             break;
                         case KnownPrimaryType.TimeSpan:
                             result = new[] { "org.joda.time.Period" };
@@ -4925,7 +4925,7 @@ namespace AutoRest.Java
                     result = PrimaryTypeGetWantNullable(primaryType) ? "Long" : "long";
                     break;
                 case KnownPrimaryType.Stream:
-                    result = "AsyncInputStream";
+                    result = "Flowable<byte[]>";
                     break;
                 case KnownPrimaryType.String:
                     result = "String";
