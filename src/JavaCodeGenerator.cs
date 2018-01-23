@@ -916,7 +916,15 @@ namespace AutoRest.Java
                 }
                 else if (restAPIMethodExceptionType is CompositeType compositeReturnType)
                 {
-                    methodOperationExceptionTypeName = CompositeTypeExceptionTypeDefinitionName(compositeReturnType, settings);
+                    methodOperationExceptionTypeName = GetCompositeTypeName(compositeReturnType, settings) + "Exception";
+                    if (compositeReturnType.Extensions.ContainsKey(SwaggerExtensions.NameOverrideExtension))
+                    {
+                        JContainer ext = compositeReturnType.Extensions[SwaggerExtensions.NameOverrideExtension] as JContainer;
+                        if (ext != null && ext["name"] != null)
+                        {
+                            methodOperationExceptionTypeName = ext["name"].ToString();
+                        }
+                    }
                 }
                 else
                 {
@@ -1502,7 +1510,15 @@ namespace AutoRest.Java
                 }
                 else if (restAPIMethodDefaultResponseReturnType is CompositeType compositeReturnType)
                 {
-                    methodOperationExceptionTypeName = CompositeTypeExceptionTypeDefinitionName(compositeReturnType, settings);
+                    methodOperationExceptionTypeName = GetCompositeTypeName(compositeReturnType, settings) + "Exception";
+                    if (compositeReturnType.Extensions.ContainsKey(SwaggerExtensions.NameOverrideExtension))
+                    {
+                        JContainer ext = compositeReturnType.Extensions[SwaggerExtensions.NameOverrideExtension] as JContainer;
+                        if (ext != null && ext["name"] != null)
+                        {
+                            methodOperationExceptionTypeName = ext["name"].ToString();
+                        }
+                    }
                 }
                 else
                 {
@@ -1942,12 +1958,21 @@ namespace AutoRest.Java
             List<ServiceException> exceptions = new List<ServiceException>();
             foreach (CompositeType exceptionType in codeModel.ErrorTypes)
             {
-                string exceptionName = CompositeTypeExceptionTypeDefinitionName(exceptionType, settings);
+                string methodOperationExceptionTypeName = GetCompositeTypeName(exceptionType, settings) + "Exception";
+                if (exceptionType.Extensions.ContainsKey(SwaggerExtensions.NameOverrideExtension))
+                {
+                    JContainer ext = exceptionType.Extensions[SwaggerExtensions.NameOverrideExtension] as JContainer;
+                    if (ext != null && ext["name"] != null)
+                    {
+                        methodOperationExceptionTypeName = ext["name"].ToString();
+                    }
+                }
+
                 string errorName = GetCompositeTypeName(exceptionType, settings);
 
                 // Skip any exceptions that are named "CloudErrorException" or have a body named
                 // "CloudError" because those types already exist in the runtime.
-                if (exceptionName != "CloudErrorException" && errorName != "CloudError")
+                if (methodOperationExceptionTypeName != "CloudErrorException" && errorName != "CloudError")
                 {
                     string exceptionSubPackage;
                     if (settings.IsFluent)
@@ -1959,7 +1984,7 @@ namespace AutoRest.Java
                         exceptionSubPackage = modelsPackage;
                     }
 
-                    exceptions.Add(new ServiceException(exceptionName, errorName, exceptionSubPackage));
+                    exceptions.Add(new ServiceException(methodOperationExceptionTypeName, errorName, exceptionSubPackage));
                 }
             }
             return exceptions;
@@ -2844,7 +2869,15 @@ namespace AutoRest.Java
                     }
                     else if (restAPIMethodExceptionType is CompositeType compositeReturnType)
                     {
-                        methodOperationExceptionTypeName = CompositeTypeExceptionTypeDefinitionName(compositeReturnType, settings);
+                        methodOperationExceptionTypeName = GetCompositeTypeName(compositeReturnType, settings) + "Exception";
+                        if (compositeReturnType.Extensions.ContainsKey(SwaggerExtensions.NameOverrideExtension))
+                        {
+                            JContainer ext = compositeReturnType.Extensions[SwaggerExtensions.NameOverrideExtension] as JContainer;
+                            if (ext != null && ext["name"] != null)
+                            {
+                                methodOperationExceptionTypeName = ext["name"].ToString();
+                            }
+                        }
                     }
                     else
                     {
@@ -3502,7 +3535,15 @@ namespace AutoRest.Java
                 }
                 else if (restAPIMethodExceptionType is CompositeType compositeReturnType)
                 {
-                    methodOperationExceptionTypeName = CompositeTypeExceptionTypeDefinitionName(compositeReturnType, settings);
+                    methodOperationExceptionTypeName = GetCompositeTypeName(compositeReturnType, settings) + "Exception";
+                    if (compositeReturnType.Extensions.ContainsKey(SwaggerExtensions.NameOverrideExtension))
+                    {
+                        JContainer ext = compositeReturnType.Extensions[SwaggerExtensions.NameOverrideExtension] as JContainer;
+                        if (ext != null && ext["name"] != null)
+                        {
+                            methodOperationExceptionTypeName = ext["name"].ToString();
+                        }
+                    }
                 }
                 else
                 {
@@ -3840,7 +3881,15 @@ namespace AutoRest.Java
                 }
                 else if (restAPIMethodExceptionType is CompositeType compositeReturnType)
                 {
-                    methodOperationExceptionTypeName = CompositeTypeExceptionTypeDefinitionName(compositeReturnType, settings);
+                    methodOperationExceptionTypeName = GetCompositeTypeName(compositeReturnType, settings) + "Exception";
+                    if (compositeReturnType.Extensions.ContainsKey(SwaggerExtensions.NameOverrideExtension))
+                    {
+                        JContainer ext = compositeReturnType.Extensions[SwaggerExtensions.NameOverrideExtension] as JContainer;
+                        if (ext != null && ext["name"] != null)
+                        {
+                            methodOperationExceptionTypeName = ext["name"].ToString();
+                        }
+                    }
                 }
                 else
                 {
@@ -5064,21 +5113,6 @@ namespace AutoRest.Java
         private static bool CompositeTypeNeedsFlatten(CompositeType compositeType, JavaSettings settings)
             => GetCompositeTypeProperties(compositeType, settings).Any(p => p.WasFlattened());
 
-        private static string CompositeTypeExceptionTypeDefinitionName(CompositeType compositeType, JavaSettings settings)
-        {
-            string result = GetCompositeTypeName(compositeType, settings) + "Exception";
-
-            if (compositeType.Extensions.ContainsKey(SwaggerExtensions.NameOverrideExtension))
-            {
-                JContainer ext = compositeType.Extensions[SwaggerExtensions.NameOverrideExtension] as JContainer;
-                if (ext != null && ext["name"] != null)
-                {
-                    result = ext["name"].ToString();
-                }
-            }
-            return result;
-        }
-
         private static bool GetExtensionBool(IDictionary<string, object> extensions, string extensionName)
             => extensions?.Get<bool>(extensionName) == true;
 
@@ -5348,7 +5382,15 @@ namespace AutoRest.Java
                             }
                             else if (restAPIMethodExceptionType is CompositeType compositeReturnType)
                             {
-                                methodOperationExceptionTypeName = CompositeTypeExceptionTypeDefinitionName(compositeReturnType, settings);
+                                methodOperationExceptionTypeName = GetCompositeTypeName(compositeReturnType, settings) + "Exception";
+                                if (compositeReturnType.Extensions.ContainsKey(SwaggerExtensions.NameOverrideExtension))
+                                {
+                                    JContainer ext = compositeReturnType.Extensions[SwaggerExtensions.NameOverrideExtension] as JContainer;
+                                    if (ext != null && ext["name"] != null)
+                                    {
+                                        methodOperationExceptionTypeName = ext["name"].ToString();
+                                    }
+                                }
                             }
                             else
                             {
@@ -6058,7 +6100,15 @@ namespace AutoRest.Java
                 }
                 else if (restAPIMethodExceptionType is CompositeType compositeExceptionType)
                 {
-                    methodOperationExceptionTypeName = CompositeTypeExceptionTypeDefinitionName(compositeExceptionType, settings);
+                    methodOperationExceptionTypeName = GetCompositeTypeName(compositeExceptionType, settings) + "Exception";
+                    if (compositeExceptionType.Extensions.ContainsKey(SwaggerExtensions.NameOverrideExtension))
+                    {
+                        JContainer ext = compositeExceptionType.Extensions[SwaggerExtensions.NameOverrideExtension] as JContainer;
+                        if (ext != null && ext["name"] != null)
+                        {
+                            methodOperationExceptionTypeName = ext["name"].ToString();
+                        }
+                    }
                 }
                 else
                 {
