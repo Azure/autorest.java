@@ -29,23 +29,22 @@ namespace AutoRest.Java.Model
         /// <param name="simulateAsPagingOperation">Whether or not to simulate this method as a paging operation.</param>
         /// <param name="isLongRunningOperation">Whether or not this method is a long running operation.</param>
         /// <param name="returnValueClientType">The return value's type as it is returned from the client.</param>
-        public RestAPIMethod(string requestContentType, bool isPagingNextOperation, string httpMethod, string urlPath, IEnumerable<HttpStatusCode> responseExpectedStatusCodes, string returnValueWireType, string unexpectedResponseExceptionType, string name, string asyncReturnType, IEnumerable<RestAPIParameter> parameters, bool isPagingOperation, string description, bool simulateAsPagingOperation, bool isLongRunningOperation, string returnValueClientType)
+        /// <param name="asyncReturnType">The asynchronous return type of this RestAPIMethod.</param>
+        public RestAPIMethod(string requestContentType, bool isPagingNextOperation, string httpMethod, string urlPath, IEnumerable<HttpStatusCode> responseExpectedStatusCodes, string unexpectedResponseExceptionType, string name, IEnumerable<RestAPIParameter> parameters, bool isPagingOperation, string description, bool simulateAsPagingOperation, bool isLongRunningOperation, RestAPIGenericType asyncReturnType)
         {
             RequestContentType = requestContentType;
             IsPagingNextOperation = isPagingNextOperation;
             HttpMethod = httpMethod;
             UrlPath = urlPath;
             ResponseExpectedStatusCodes = responseExpectedStatusCodes;
-            ReturnValueWireType = returnValueWireType;
             UnexpectedResponseExceptionType = unexpectedResponseExceptionType;
             Name = name;
-            AsyncReturnType = asyncReturnType;
             Parameters = parameters;
             IsPagingOperation = isPagingOperation;
             Description = description;
             SimulateAsPagingOperation = simulateAsPagingOperation;
             IsLongRunningOperation = isLongRunningOperation;
-            ReturnValueClientType = returnValueClientType;
+            AsyncReturnType = asyncReturnType;
         }
 
         /// <summary>
@@ -74,11 +73,6 @@ namespace AutoRest.Java.Model
         public IEnumerable<HttpStatusCode> ResponseExpectedStatusCodes { get; }
 
         /// <summary>
-        /// Get the return value's type as it is received from the network (across the wire).
-        /// </summary>
-        public string ReturnValueWireType { get; }
-
-        /// <summary>
         /// Get the exception type to throw if this method receives and unexpected response status code.
         /// </summary>
         public string UnexpectedResponseExceptionType { get; }
@@ -87,11 +81,6 @@ namespace AutoRest.Java.Model
         /// Get the name of this Rest API method.
         /// </summary>
         public string Name { get; }
-
-        /// <summary>
-        /// Get the return type of this method with its asynchronous container.
-        /// </summary>
-        public string AsyncReturnType { get; }
 
         /// <summary>
         /// Get the parameters that are provided to this method.
@@ -119,8 +108,8 @@ namespace AutoRest.Java.Model
         public bool IsLongRunningOperation { get; }
 
         /// <summary>
-        /// Get the return value's type as it is returned from the client.
+        /// The asynchronous return type of this RestAPIMethod.
         /// </summary>
-        public string ReturnValueClientType { get; }
+        public RestAPIGenericType AsyncReturnType { get; }
     }
 }
