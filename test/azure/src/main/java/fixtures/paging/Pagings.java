@@ -11,7 +11,6 @@
 package fixtures.paging;
 
 import com.microsoft.azure.v2.CloudException;
-import com.microsoft.azure.v2.ListOperationCallback;
 import com.microsoft.azure.v2.Page;
 import com.microsoft.azure.v2.PagedList;
 import com.microsoft.rest.v2.RestResponse;
