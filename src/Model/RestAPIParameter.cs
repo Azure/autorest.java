@@ -19,8 +19,8 @@ namespace AutoRest.Java.Model
         /// <param name="isConstant">Whether or not this parameter is a constant value.</param>
         /// <param name="isRequired">Whether or not this parameter is required.</param>
         /// <param name="description">The description of this parameter.</param>
-        /// <param name="type">The type of this parameter.</param>
-        public RestAPIParameter(string name, string location, string serializedName, string variableName, bool skipUrlEncodingExtension, bool isConstant, bool isRequired, string description, RestAPIType type)
+        /// <param name="clientTypeName">The type of this parameter that is exposed via the client.</param>
+        public RestAPIParameter(string name, string location, string serializedName, string variableName, bool skipUrlEncodingExtension, bool isConstant, bool isRequired, string description, string clientTypeName)
         {
             Name = name;
             Location = location;
@@ -30,7 +30,7 @@ namespace AutoRest.Java.Model
             IsConstant = isConstant;
             IsRequired = isRequired;
             Description = description;
-            Type = type;
+            ClientTypeName = clientTypeName;
         }
 
         /// <summary>
@@ -71,8 +71,8 @@ namespace AutoRest.Java.Model
         public string Description { get; }
 
         /// <summary>
-        /// Get the type of this parameter.
+        /// Get the type of this parameter that is exposed via the client.
         /// </summary>
-        public RestAPIType Type { get; }
+        public string ClientTypeName { get; }
     }
 }

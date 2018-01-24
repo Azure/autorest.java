@@ -71,7 +71,7 @@ namespace AutoRest.Java
 
         private static readonly Regex enumValueNameRegex = new Regex(@"[\\\/\.\+\ \-]+");
 
-        private static readonly ISet<Property> innerModelProperties = new HashSet<Property>();
+        private static readonly HashSet<Property> innerModelProperties = new HashSet<Property>();
         private static readonly ISet<CompositeType> innerModelCompositeType = new HashSet<CompositeType>();
 
         private static readonly ISet<SequenceType> pagedListTypes = new HashSet<SequenceType>();
@@ -146,7 +146,7 @@ namespace AutoRest.Java
 
             javaFiles.Add(GetServiceClientJavaFile(codeModel, javaSettings));
 
-            foreach (MethodGroup methodGroup in GetMethodGroups(codeModel))
+            foreach (MethodGroup methodGroup in codeModel.Operations.Where((MethodGroup methodGroup) => !string.IsNullOrEmpty(methodGroup?.Name?.ToString())))
             {
                 javaFiles.Add(GetMethodGroupClientJavaFile(methodGroup, javaSettings));
             }
@@ -193,7 +193,8 @@ namespace AutoRest.Java
             {
                 javaFiles.Add(GetServiceClientInterfaceJavaFile(codeModel, javaSettings));
 
-                foreach (MethodGroup methodGroup in GetMethodGroups(codeModel))
+                IEnumerable<MethodGroup> methodGroups = codeModel.Operations.Where((MethodGroup methodGroup) => !string.IsNullOrEmpty(methodGroup?.Name?.ToString()));
+                foreach (MethodGroup methodGroup in methodGroups)
                 {
                     javaFiles.Add(GetMethodGroupClientInterfaceJavaFile(methodGroup, javaSettings));
                 }
@@ -267,7 +268,14 @@ namespace AutoRest.Java
                         IModelType parameterModelType = parameter.ModelType;
                         if (parameterModelType != null && !IsNullable(parameter))
                         {
-                            parameterModelType = GetIModelTypeNonNullableVariant(parameterModelType);
+                            if (parameterModelType is PrimaryType parameterModelPrimaryType)
+                            {
+                                PrimaryType nonNullableParameterModelPrimaryType = DependencyInjection.New<PrimaryType>(parameterModelPrimaryType.KnownPrimaryType);
+                                nonNullableParameterModelPrimaryType.Format = parameterModelPrimaryType.Format;
+                                primaryTypeNotWantNullable.Add(nonNullableParameterModelPrimaryType);
+
+                                parameterModelType = nonNullableParameterModelPrimaryType;
+                            }
                         }
                         AppendInnerToTopLevelType(parameterModelType, codeModel, settings);
                     }
@@ -311,11 +319,17 @@ namespace AutoRest.Java
             {
                 if (type is CompositeType compositeType)
                 {
-                    string compositeTypeName = GetCompositeTypeName(compositeType, settings);
+                    string compositeTypeName = compositeType.Name.ToString();
+                    if (!string.IsNullOrEmpty(compositeTypeName) && innerModelCompositeType.Contains(compositeType))
+                    {
+                        compositeTypeName += "Inner";
+                    }
+
                     bool compositeTypeIsAzureResourceExtension = GetExtensionBool(compositeType, AzureExtensions.AzureResourceExtension);
                     if (compositeTypeName != "Resource" && (compositeTypeName != "SubResource" || !compositeTypeIsAzureResourceExtension))
                     {
                         innerModelCompositeType.Add(compositeType);
+                        innerModelProperties.AddRange(compositeType.Properties);
                     }
                 }
                 else if (type is SequenceType sequenceType)
@@ -492,7 +506,21 @@ namespace AutoRest.Java
                         {
                             anyTypeConverted = true;
                             CompositeType compositeType = (CompositeType)restAPIMethod.Responses[responseStatus].Body;
-                            SequenceType sequenceType = GetCompositeTypeProperties(compositeType, settings).Select(p => GetPropertyModelType(p)).FirstOrDefault(t => t is SequenceType) as SequenceType;
+                            SequenceType sequenceType = compositeType.Properties
+                                .Select((Property property) =>
+                                {
+                                    IModelType propertyModelType = property.ModelType;
+                                    if (propertyModelType != null && !IsNullable(property) && propertyModelType is PrimaryType propertyModelPrimaryType)
+                                    {
+                                        PrimaryType propertyModelNonNullablePrimaryType = DependencyInjection.New<PrimaryType>(propertyModelPrimaryType.KnownPrimaryType);
+                                        propertyModelNonNullablePrimaryType.Format = propertyModelPrimaryType.Format;
+                                        primaryTypeNotWantNullable.Add(propertyModelNonNullablePrimaryType);
+
+                                        propertyModelType = propertyModelNonNullablePrimaryType;
+                                    }
+                                    return propertyModelType;
+                                })
+                                .FirstOrDefault(t => t is SequenceType) as SequenceType;
 
                             // if the type is a wrapper over page-able response
                             if (sequenceType != null)
@@ -533,7 +561,18 @@ namespace AutoRest.Java
             }
 
             SwaggerExtensions.RemoveUnreferencedTypes(serviceClient,
-                new HashSet<string>(convertedTypes.Keys.Where(x => x is CompositeType).Cast<CompositeType>().Select((CompositeType t) => GetCompositeTypeName(t, settings))));
+                new HashSet<string>(convertedTypes.Keys
+                    .Where(x => x is CompositeType)
+                    .Cast<CompositeType>()
+                    .Select((CompositeType compositeType) =>
+                    {
+                        string compositeTypeName = compositeType.Name.ToString();
+                        if (settings.IsFluent && !string.IsNullOrEmpty(compositeTypeName) && innerModelCompositeType.Contains(compositeType))
+                        {
+                            compositeTypeName += "Inner";
+                        }
+                        return compositeTypeName;
+                    })));
         }
 
         private static PageClass GetPagingSetting(bool hasPageableExtension, JContainer methodPageableExtensions, bool simulatedMethodAsPaging)
@@ -593,6 +632,8 @@ namespace AutoRest.Java
             string serviceClientName = codeModel.Name;
             string serviceClientDescription = codeModel.Documentation;
 
+            ServiceClient serviceClient = ParseServiceClient(codeModel, settings);
+
             IEnumerable<string> subpackages = ParseSubpackages(settings);
 
             IEnumerable<ServiceEnum> enums = ParseEnums(codeModel, settings);
@@ -605,7 +646,714 @@ namespace AutoRest.Java
 
             ServiceManager manager = ParseManager(serviceClientName, codeModel, settings);
 
-            return new Service(serviceClientName, serviceClientDescription, subpackages, enums, exceptions, xmlSequenceWrappers, models, manager);
+            return new Service(serviceClientName, serviceClientDescription, subpackages, enums, exceptions, xmlSequenceWrappers, models, manager, serviceClient);
+        }
+
+        private static ServiceClient ParseServiceClient(CodeModel codeModel, JavaSettings settings)
+        {
+            string serviceClientInterfaceName = codeModel.Name.ToPascalCase();
+
+            string serviceClientClassName = serviceClientInterfaceName + "Impl";
+
+            RestAPI serviceClientRestAPI = null;
+            IEnumerable<Method> codeModelRestAPIMethods = codeModel.Methods.Where(m => m.Group.IsNullOrEmpty());
+            if (codeModelRestAPIMethods.Any())
+            {
+                string restAPIName = codeModel.Name.ToString().ToPascalCase() + "Service";
+                string restAPIBaseURL = codeModel.BaseUrl;
+                List<RestAPIMethod> restAPIMethods = new List<RestAPIMethod>();
+                foreach (Method codeModelRestAPIMethod in codeModelRestAPIMethods)
+                {
+                    restAPIMethods.Add(ParseRestAPIMethod(codeModelRestAPIMethod, settings));
+                }
+                serviceClientRestAPI = new RestAPI(restAPIName, restAPIBaseURL, restAPIMethods);
+            }
+
+            List<MethodGroupClient> serviceClientMethodGroupClients = new List<MethodGroupClient>();
+            IEnumerable<MethodGroup> codeModelMethodGroups = codeModel.Operations.Where((MethodGroup methodGroup) => !string.IsNullOrEmpty(methodGroup?.Name?.ToString()));
+            foreach (MethodGroup codeModelMethodGroup in codeModelMethodGroups)
+            {
+                serviceClientMethodGroupClients.Add(ParseMethodGroupClient(codeModelMethodGroup, settings));
+            }
+
+            bool serviceClientUsesCredentials = codeModel.Properties.Any((Property property) => property.ModelType is PrimaryType propertyModelPrimaryType && propertyModelPrimaryType.KnownPrimaryType == KnownPrimaryType.Credentials);
+
+            HashSet<string> serviceClientImports = new HashSet<string>();
+            if (!settings.IsFluent)
+            {
+                string serviceClientInterfacePath = GetPackage(settings) + "." + serviceClientInterfaceName;
+                serviceClientImports.Add(serviceClientInterfacePath);
+
+                foreach (MethodGroupClient methodGroupClient in serviceClientMethodGroupClients)
+                {
+                    serviceClientImports.Add(settings.Package + '.' + methodGroupClient.InterfaceName);
+                }
+            }
+            if (serviceClientUsesCredentials)
+            {
+                serviceClientImports.Add(serviceClientCredentialsImport);
+            }
+            if (serviceClientRestAPI != null)
+            {
+                serviceClientImports.Add("com.microsoft.rest.v2.RestResponse");
+
+                foreach (Method restAPIMethod in codeModelRestAPIMethods)
+                {
+                    HashSet<string> methodImports = new HashSet<string>()
+                    {
+                        "io.reactivex.Observable",
+                        "io.reactivex.Single",
+                        "io.reactivex.functions.Function",
+                        "com.microsoft.rest.v2.ServiceFuture",
+                        "com.microsoft.rest.v2.ServiceCallback",
+                        "com.microsoft.rest.v2.annotations.ExpectedResponses",
+                        "com.microsoft.rest.v2.annotations.Headers",
+                        "com.microsoft.rest.v2.annotations.Host",
+                        "com.microsoft.rest.v2.http.HttpClient",
+                    };
+
+                    if (restAPIMethod.DefaultResponse.Body != null)
+                    {
+                        methodImports.Add("com.microsoft.rest.v2.annotations.UnexpectedResponseExceptionType");
+                    }
+
+                    Response restAPIMethodReturnType = restAPIMethod.ReturnType;
+                    if (restAPIMethodReturnType.Body == null)
+                    {
+                        methodImports.Add("io.reactivex.Completable");
+                    }
+                    else
+                    {
+                        methodImports.Add("io.reactivex.Maybe");
+                    }
+
+                    List<Parameter> methodRetrofitParameters = restAPIMethod.LogicalParameters.Where(p => p.Location != ParameterLocation.None).ToList();
+                    bool methodIsPagingNextOperation = GetExtensionBool(restAPIMethod?.Extensions, "nextLinkMethod");
+                    if (settings.IsAzureOrFluent && methodIsPagingNextOperation)
+                    {
+                        methodRetrofitParameters.RemoveAll(p => p.Location == ParameterLocation.Path);
+
+                        Parameter nextUrlParam = DependencyInjection.New<Parameter>();
+                        nextUrlParam.SerializedName = "nextUrl";
+                        nextUrlParam.Documentation = "The URL to get the next page of items.";
+                        nextUrlParam.Location = ParameterLocation.Path;
+                        nextUrlParam.IsRequired = true;
+                        nextUrlParam.ModelType = DependencyInjection.New<PrimaryType>(KnownPrimaryType.String);
+                        nextUrlParam.Name = "nextUrl";
+                        nextUrlParam.Extensions.Add(SwaggerExtensions.SkipUrlEncodingExtension, true);
+                        methodRetrofitParameters.Insert(0, nextUrlParam);
+                    }
+
+                    foreach (Parameter parameter in methodRetrofitParameters)
+                    {
+                        ParameterLocation location = parameter.Location;
+                        IModelType parameterModelType = parameter.ModelType;
+                        if (parameterModelType != null && !IsNullable(parameter))
+                        {
+                            if (parameterModelType is PrimaryType parameterModelPrimaryType2)
+                            {
+                                PrimaryType nonNullableParameterModelPrimaryType = DependencyInjection.New<PrimaryType>(parameterModelPrimaryType2.KnownPrimaryType);
+                                nonNullableParameterModelPrimaryType.Format = parameterModelPrimaryType2.Format;
+                                primaryTypeNotWantNullable.Add(nonNullableParameterModelPrimaryType);
+
+                                parameterModelType = nonNullableParameterModelPrimaryType;
+                            }
+                        }
+                        if (location == ParameterLocation.Body || !((parameterModelType is PrimaryType parameterModelPrimaryType && parameterModelPrimaryType.KnownPrimaryType == KnownPrimaryType.ByteArray) || parameterModelType is SequenceType))
+                        {
+                            IModelType parameterWireType;
+                            IModelType parameterClientType = ConvertToClientType(parameterModelType);
+                            if (parameterModelType.IsPrimaryType(KnownPrimaryType.Stream))
+                            {
+                                parameterWireType = parameterClientType;
+                            }
+                            else if (!parameterModelType.IsPrimaryType(KnownPrimaryType.Base64Url) &&
+                                location != ParameterLocation.Body &&
+                                location != ParameterLocation.FormData &&
+                                ((parameterClientType is PrimaryType parameterClientPrimaryType && parameterClientPrimaryType.KnownPrimaryType == KnownPrimaryType.ByteArray) || parameterClientType is SequenceType))
+                            {
+                                parameterWireType = DependencyInjection.New<PrimaryType>(KnownPrimaryType.String);
+                            }
+                            else
+                            {
+                                parameterWireType = parameterModelType;
+                            }
+
+                            methodImports.AddRange(GetIModelTypeImports(parameterWireType, settings));
+                        }
+
+                        if (location != ParameterLocation.FormData)
+                        {
+                            methodImports.Add($"com.microsoft.rest.v2.annotations.{location.ToString()}Param");
+                        }
+
+                        if (location != ParameterLocation.Body)
+                        {
+                            if (parameterModelType.IsPrimaryType(KnownPrimaryType.ByteArray))
+                            {
+                                methodImports.Add("org.apache.commons.codec.binary.Base64");
+                            }
+                            else if (parameterModelType is SequenceType)
+                            {
+                                methodImports.Add("com.microsoft.rest.v2.CollectionFormat");
+                            }
+                        }
+                    }
+
+                    // Http verb annotations
+                    methodImports.Add($"com.microsoft.rest.v2.annotations.{restAPIMethod.HttpMethod.ToString().ToUpperInvariant()}");
+
+                    // response type conversion
+                    if (restAPIMethod.Responses.Any())
+                    {
+                        methodImports.Add("com.google.common.reflect.TypeToken");
+                    }
+
+                    // validation
+                    bool hasClientMethodParametersOrClientPropertiesToValidate = restAPIMethod.Parameters.Where(parameter =>
+                    {
+                        bool result = !parameter.IsConstant;
+                        if (result)
+                        {
+                            IModelType parameterModelType = parameter.ModelType;
+                            if (parameterModelType != null && !IsNullable(parameter))
+                            {
+                                if (parameterModelType is PrimaryType parameterModelPrimaryType)
+                                {
+                                    PrimaryType nonNullableParameterModelPrimaryType = DependencyInjection.New<PrimaryType>(parameterModelPrimaryType.KnownPrimaryType);
+                                    nonNullableParameterModelPrimaryType.Format = parameterModelPrimaryType.Format;
+                                    primaryTypeNotWantNullable.Add(nonNullableParameterModelPrimaryType);
+
+                                    parameterModelType = nonNullableParameterModelPrimaryType;
+                                }
+                            }
+                            result = !(parameterModelType is PrimaryType) && !(parameterModelType is EnumType);
+                        }
+                        return result;
+                    }).Any();
+                    if (hasClientMethodParametersOrClientPropertiesToValidate)
+                    {
+                        methodImports.Add("com.microsoft.rest.v2.Validator");
+                    }
+
+                    // parameters
+                    IEnumerable<Parameter> methodLocalParameters = restAPIMethod.Parameters
+                        //Omit parameter-group properties for now since Java doesn't support them yet
+                        .Where((Parameter parameter) => parameter != null && !parameter.IsClientProperty && !string.IsNullOrWhiteSpace(parameter.Name))
+                        .OrderBy(item => !item.IsRequired);
+                    IEnumerable<Parameter> methodLogicalParameters = restAPIMethod.LogicalParameters;
+                    foreach (Parameter parameter in methodLocalParameters.Concat(methodLogicalParameters))
+                    {
+                        IModelType parameterModelType = parameter.ModelType;
+                        if (parameterModelType != null && !IsNullable(parameter))
+                        {
+                            if (parameterModelType is PrimaryType parameterModelPrimaryType)
+                            {
+                                PrimaryType nonNullableParameterModelPrimaryType = DependencyInjection.New<PrimaryType>(parameterModelPrimaryType.KnownPrimaryType);
+                                nonNullableParameterModelPrimaryType.Format = parameterModelPrimaryType.Format;
+                                primaryTypeNotWantNullable.Add(nonNullableParameterModelPrimaryType);
+
+                                parameterModelType = nonNullableParameterModelPrimaryType;
+                            }
+                        }
+                        IModelType parameterClientType = ConvertToClientType(parameterModelType);
+                        methodImports.AddRange(GetIModelTypeImports(parameterClientType, settings));
+                    }
+
+                    // return type
+                    IModelType restAPIMethodReturnBodyClientType = ConvertToClientType(restAPIMethodReturnType.Body ?? DependencyInjection.New<PrimaryType>(KnownPrimaryType.None));
+                    SequenceType restAPIMethodReturnBodyClientSequenceType = restAPIMethodReturnBodyClientType as SequenceType;
+
+                    bool restAPIMethodReturnTypeIsPaged = GetExtensionBool(restAPIMethod.Extensions, "nextLinkMethod") ||
+                        (restAPIMethod.Extensions.ContainsKey(AzureExtensions.PageableExtension) &&
+                         restAPIMethod.Extensions[AzureExtensions.PageableExtension] != null);
+
+                    if (settings.IsAzureOrFluent && restAPIMethodReturnBodyClientSequenceType != null && restAPIMethodReturnTypeIsPaged)
+                    {
+                        SequenceType resultSequenceType = DependencyInjection.New<SequenceType>();
+                        resultSequenceType.ElementType = restAPIMethodReturnBodyClientSequenceType.ElementType;
+                        SequenceTypeSetPageImplType(resultSequenceType, SequenceTypeGetPageImplType(restAPIMethodReturnBodyClientSequenceType));
+                        pagedListTypes.Add(resultSequenceType);
+                        restAPIMethodReturnBodyClientType = resultSequenceType;
+                    }
+                    methodImports.AddRange(GetIModelTypeImports(restAPIMethodReturnBodyClientType, settings));
+                    methodImports.AddRange(GetIModelTypeImports(ConvertToClientType(restAPIMethodReturnType.Headers), settings));
+
+                    IModelType returnTypeBodyWireType = restAPIMethodReturnType.Body ?? DependencyInjection.New<PrimaryType>(KnownPrimaryType.None);
+                    methodImports.AddRange(GetIModelTypeImports(returnTypeBodyWireType, settings));
+
+                    IModelType returnTypeHeadersWireType = restAPIMethodReturnType.Headers;
+                    methodImports.AddRange(GetIModelTypeImports(returnTypeHeadersWireType, settings));
+
+                    IModelType returnTypeCurrentType = restAPIMethodReturnType.Body;
+                    while (returnTypeCurrentType != null)
+                    {
+                        if (returnTypeCurrentType is SequenceType currentSequenceType)
+                        {
+                            returnTypeCurrentType = currentSequenceType.ElementType;
+                        }
+                        else if (returnTypeCurrentType is DictionaryType currentDictionaryType)
+                        {
+                            returnTypeCurrentType = currentDictionaryType.ValueType;
+                        }
+                        else
+                        {
+                            if (returnTypeCurrentType is PrimaryType currentPrimaryType)
+                            {
+                                string currentPrimaryTypeName = currentPrimaryType?.Name?.FixedValue;
+                                if (currentPrimaryTypeName.EqualsIgnoreCase("Base64Url") ||
+                                    currentPrimaryTypeName.EqualsIgnoreCase("DateTimeRfc1123") ||
+                                    currentPrimaryTypeName.EqualsIgnoreCase("UnixTime"))
+                                {
+                                    methodImports.Add("com.microsoft.rest.v2.annotations.ReturnValueWireType");
+                                    methodImports.Add("com.microsoft.rest.v2." + currentPrimaryTypeName);
+                                }
+                            }
+
+                            returnTypeCurrentType = null;
+                        }
+                    }
+
+                    IModelType returnTypeHeaderClientType = ConvertToClientType(restAPIMethodReturnType.Headers);
+                    if (((returnTypeBodyWireType == null ? restAPIMethodReturnBodyClientType != null : !returnTypeBodyWireType.StructurallyEquals(restAPIMethodReturnBodyClientType)) && IModelTypeName(restAPIMethodReturnBodyClientType, settings) != "void") ||
+                        (returnTypeHeadersWireType == null ? returnTypeHeaderClientType != null : !returnTypeHeadersWireType.StructurallyEquals(returnTypeHeaderClientType)))
+                    {
+                        IModelType responseBody = restAPIMethodReturnType.Body;
+                        if (responseBody is SequenceType || returnTypeHeadersWireType is SequenceType)
+                        {
+                            methodImports.Add("java.util.ArrayList");
+                        }
+                        else if (responseBody is DictionaryType || returnTypeHeadersWireType is DictionaryType)
+                        {
+                            methodImports.Add("java.util.HashMap");
+                        }
+                    }
+
+                    // response type (can be different from return type)
+                    IEnumerable<Response> methodResponses = restAPIMethod.Responses.Values;
+                    foreach (Response methodResponse in methodResponses)
+                    {
+                        IModelType methodResponseBodyClientType = ConvertToClientType(methodResponse.Body ?? DependencyInjection.New<PrimaryType>(KnownPrimaryType.None));
+                        SequenceType methodResponseBodyClientSequenceType = methodResponseBodyClientType as SequenceType;
+
+                        if (settings.IsAzureOrFluent && methodResponseBodyClientSequenceType != null && restAPIMethodReturnTypeIsPaged)
+                        {
+                            SequenceType resultSequenceType = DependencyInjection.New<SequenceType>();
+                            resultSequenceType.ElementType = methodResponseBodyClientSequenceType.ElementType;
+                            SequenceTypeSetPageImplType(resultSequenceType, SequenceTypeGetPageImplType(methodResponseBodyClientSequenceType));
+                            pagedListTypes.Add(resultSequenceType);
+                            methodResponseBodyClientType = resultSequenceType;
+                        }
+
+                        methodImports.AddRange(GetIModelTypeImports(methodResponseBodyClientType, settings));
+                        methodImports.AddRange(GetIModelTypeImports(ConvertToClientType(methodResponse.Headers), settings));
+
+                        IModelType responseBodyWireType = methodResponse.Body ?? DependencyInjection.New<PrimaryType>(KnownPrimaryType.None);
+                        methodImports.AddRange(GetIModelTypeImports(responseBodyWireType, settings));
+
+                        IModelType responseHeadersWireType = methodResponse.Headers;
+                        methodImports.AddRange(GetIModelTypeImports(responseHeadersWireType, settings));
+
+                        IModelType responseCurrentType = methodResponse.Body;
+                        while (responseCurrentType != null)
+                        {
+                            if (responseCurrentType is SequenceType currentSequenceType)
+                            {
+                                responseCurrentType = currentSequenceType.ElementType;
+                            }
+                            else if (responseCurrentType is DictionaryType currentDictionaryType)
+                            {
+                                responseCurrentType = currentDictionaryType.ValueType;
+                            }
+                            else
+                            {
+                                if (responseCurrentType is PrimaryType currentPrimaryType)
+                                {
+                                    string currentPrimaryTypeName = currentPrimaryType?.Name?.FixedValue;
+                                    if (currentPrimaryTypeName.EqualsIgnoreCase("Base64Url") ||
+                                        currentPrimaryTypeName.EqualsIgnoreCase("DateTimeRfc1123") ||
+                                        currentPrimaryTypeName.EqualsIgnoreCase("UnixTime"))
+                                    {
+                                        methodImports.Add("com.microsoft.rest.v2.annotations.ReturnValueWireType");
+                                        methodImports.Add("com.microsoft.rest.v2." + currentPrimaryTypeName);
+                                    }
+                                }
+
+                                responseCurrentType = null;
+                            }
+                        }
+
+                        IModelType responseHeaderClientType = ConvertToClientType(methodResponse.Headers);
+                        if (((responseBodyWireType == null ? methodResponseBodyClientType != null : !responseBodyWireType.StructurallyEquals(methodResponseBodyClientType)) && IModelTypeName(methodResponseBodyClientType, settings) != "void") ||
+                            (responseHeadersWireType == null ? responseHeaderClientType != null : !responseHeadersWireType.StructurallyEquals(responseHeaderClientType)))
+                        {
+                            IModelType responseBody = methodResponse.Body;
+                            if (responseBody is SequenceType || responseHeadersWireType is SequenceType)
+                            {
+                                methodImports.Add("java.util.ArrayList");
+                            }
+                            else if (responseBody is DictionaryType || responseHeadersWireType is DictionaryType)
+                            {
+                                methodImports.Add("java.util.HashMap");
+                            }
+                        }
+                    }
+
+                    // exceptions
+                    methodImports.Add("java.io.IOException");
+
+                    string methodOperationExceptionTypeName;
+                    IModelType restAPIMethodExceptionType = restAPIMethod.DefaultResponse.Body;
+                    if (settings.IsAzureOrFluent && (restAPIMethodExceptionType == null || IModelTypeName(restAPIMethodExceptionType, settings) == "CloudError"))
+                    {
+                        methodOperationExceptionTypeName = "CloudException";
+                    }
+                    else if (restAPIMethodExceptionType is CompositeType compositeReturnType)
+                    {
+                        methodOperationExceptionTypeName = compositeReturnType.Name.ToString();
+                        if (settings.IsFluent && !string.IsNullOrEmpty(methodOperationExceptionTypeName) && innerModelCompositeType.Contains(compositeReturnType))
+                        {
+                            methodOperationExceptionTypeName += "Inner";
+                        }
+                        methodOperationExceptionTypeName += "Exception";
+
+                        if (compositeReturnType.Extensions.ContainsKey(SwaggerExtensions.NameOverrideExtension))
+                        {
+                            JContainer ext = compositeReturnType.Extensions[SwaggerExtensions.NameOverrideExtension] as JContainer;
+                            if (ext != null && ext["name"] != null)
+                            {
+                                methodOperationExceptionTypeName = ext["name"].ToString();
+                            }
+                        }
+                    }
+                    else
+                    {
+                        methodOperationExceptionTypeName = "RestException";
+                    }
+
+                    switch (methodOperationExceptionTypeName)
+                    {
+                        case "CloudException":
+                            methodImports.Add("com.microsoft.azure.v2.CloudException");
+                            break;
+                        case "RestException":
+                            methodImports.Add("com.microsoft.rest.v2.RestException");
+                            break;
+                        default:
+                            methodImports.Add($"{settings.Package}.models.{methodOperationExceptionTypeName}");
+                            break;
+                    }
+
+                    // parameterized host
+                    bool isParameterizedHost;
+                    bool containsParameterizedHostExtension = restAPIMethod?.CodeModel?.Extensions?.ContainsKey(SwaggerExtensions.ParameterizedHostExtension) ?? false;
+                    if (settings.IsAzureOrFluent)
+                    {
+                        isParameterizedHost = containsParameterizedHostExtension && !methodIsPagingNextOperation;
+                    }
+                    else
+                    {
+                        isParameterizedHost = containsParameterizedHostExtension;
+                    }
+
+                    if (isParameterizedHost)
+                    {
+                        methodImports.Add("com.microsoft.rest.v2.annotations.HostParam");
+                    }
+
+                    if (settings.IsAzureOrFluent)
+                    {
+                        bool methodIsLongRunningOperation = GetExtensionBool(restAPIMethod?.Extensions, AzureExtensions.LongRunningExtension);
+                        if (methodIsLongRunningOperation)
+                        {
+                            methodImports.Add("com.microsoft.azure.v2.OperationStatus");
+                            methodImports.Add("com.microsoft.azure.v2.util.ServiceFutureUtil");
+
+                            restAPIMethod.Responses.Select(r => r.Value.Body).Concat(new IModelType[] { restAPIMethod.DefaultResponse.Body })
+                                .SelectMany(t => GetIModelTypeImports(t, settings))
+                                .Where(i => !restAPIMethod.Parameters.Any(parameter =>
+                                {
+                                    IModelType parameterModelType = parameter.ModelType;
+                                    if (parameterModelType != null && !IsNullable(parameter))
+                                    {
+                                        if (parameterModelType is PrimaryType parameterModelPrimaryType)
+                                        {
+                                            PrimaryType nonNullableParameterModelPrimaryType = DependencyInjection.New<PrimaryType>(parameterModelPrimaryType.KnownPrimaryType);
+                                            nonNullableParameterModelPrimaryType.Format = parameterModelPrimaryType.Format;
+                                            primaryTypeNotWantNullable.Add(nonNullableParameterModelPrimaryType);
+
+                                            parameterModelType = nonNullableParameterModelPrimaryType;
+                                        }
+                                    }
+                                    return GetIModelTypeImports(parameterModelType, settings).Contains(i);
+                                }))
+                                .ForEach(i => methodImports.Remove(i));
+                        }
+
+                        string typeName = SequenceTypeGetPageImplType(restAPIMethodReturnBodyClientType);
+
+                        bool methodIsPagingOperation = restAPIMethod.Extensions.ContainsKey(AzureExtensions.PageableExtension) &&
+                            restAPIMethod.Extensions[AzureExtensions.PageableExtension] != null &&
+                            !methodIsPagingNextOperation;
+
+                        bool methodIsPagingNonPollingOperation = restAPIMethod.Extensions.ContainsKey(AzureExtensions.PageableExtension) &&
+                            restAPIMethod.Extensions[AzureExtensions.PageableExtension] == null &&
+                            !methodIsPagingNextOperation;
+
+                        if (methodIsPagingOperation || methodIsPagingNextOperation)
+                        {
+                            methodImports.Remove("java.util.ArrayList");
+                            methodImports.Remove("com.microsoft.rest.v2.ServiceCallback");
+                            methodImports.Add("com.microsoft.azure.v2.Page");
+                            methodImports.Add("com.microsoft.azure.v2.PagedList");
+                            methodImports.AddRange(CompositeTypeImports(typeName, false, false, true, false, settings.Package));
+                        }
+                        else if (methodIsPagingNonPollingOperation)
+                        {
+                            methodImports.AddRange(CompositeTypeImports(typeName, false, false, true, false, settings.Package));
+                        }
+
+                        if (settings.IsFluent)
+                        {
+                            if (methodOperationExceptionTypeName != "CloudException" && methodOperationExceptionTypeName != "RestException")
+                            {
+                                IEnumerable<string> methodOperationExceptionTypeNameAzureImports = CompositeTypeImports(methodOperationExceptionTypeName, false, false, true, false, settings.Package);
+                                methodImports.RemoveWhere(i => methodOperationExceptionTypeNameAzureImports.Contains(i));
+                                methodImports.AddRange(CompositeTypeImports(methodOperationExceptionTypeName, false, false, false, true, settings.Package));
+                            }
+                            if (methodIsLongRunningOperation)
+                            {
+                                restAPIMethod.Responses.Select(r => r.Value.Body).Concat(new IModelType[] { restAPIMethod.DefaultResponse.Body })
+                                    .SelectMany(t => GetIModelTypeImports(t, settings))
+                                    .Where(i => !restAPIMethod.Parameters.Any(parameter =>
+                                    {
+                                        IModelType parameterModelType = parameter.ModelType;
+                                        if (parameterModelType != null && !IsNullable(parameter))
+                                        {
+                                            if (parameterModelType is PrimaryType parameterModelPrimaryType)
+                                            {
+                                                PrimaryType nonNullableParameterModelPrimaryType = DependencyInjection.New<PrimaryType>(parameterModelPrimaryType.KnownPrimaryType);
+                                                nonNullableParameterModelPrimaryType.Format = parameterModelPrimaryType.Format;
+                                                primaryTypeNotWantNullable.Add(nonNullableParameterModelPrimaryType);
+
+                                                parameterModelType = nonNullableParameterModelPrimaryType;
+                                            }
+                                        }
+                                        return GetIModelTypeImports(parameterModelType, settings).Contains(i);
+                                    }))
+                                    .ForEach(i => methodImports.Remove(i));
+                            }
+
+                            bool simulateMethodAsPagingOperation = false;
+                            MethodGroup methodGroup = restAPIMethod.MethodGroup;
+                            if (!string.IsNullOrEmpty(methodGroup?.Name?.ToString()))
+                            {
+                                MethodType restAPIMethodType = MethodType.Other;
+                                string methodUrl = methodTypeTrailing.Replace(methodTypeLeading.Replace(restAPIMethod.Url, ""), "");
+                                string[] methodUrlSplits = methodUrl.Split('/');
+                                switch (restAPIMethod.HttpMethod)
+                                {
+                                    case HttpMethod.Get:
+                                        if ((methodUrlSplits.Length == 5 || methodUrlSplits.Length == 7)
+                                            && methodUrlSplits[0].EqualsIgnoreCase("subscriptions")
+                                            && MethodHasSequenceType(restAPIMethod.ReturnType.Body, settings))
+                                        {
+                                            if (methodUrlSplits.Length == 5)
+                                            {
+                                                if (methodUrlSplits[2].EqualsIgnoreCase("providers"))
+                                                {
+                                                    restAPIMethodType = MethodType.ListBySubscription;
+                                                }
+                                                else
+                                                {
+                                                    restAPIMethodType = MethodType.ListByResourceGroup;
+                                                }
+                                            }
+                                            else if (methodUrlSplits[2].EqualsIgnoreCase("resourceGroups"))
+                                            {
+                                                restAPIMethodType = MethodType.ListByResourceGroup;
+                                            }
+                                        }
+                                        else if (IsTopLevelResourceUrl(methodUrlSplits))
+                                        {
+                                            restAPIMethodType = MethodType.Get;
+                                        }
+                                        break;
+
+                                    case HttpMethod.Delete:
+                                        if (IsTopLevelResourceUrl(methodUrlSplits))
+                                        {
+                                            restAPIMethodType = MethodType.Delete;
+                                        }
+                                        break;
+                                }
+                                simulateMethodAsPagingOperation = (restAPIMethodType == MethodType.ListByResourceGroup || restAPIMethodType == MethodType.ListBySubscription) &&
+                                    1 == methodGroup.Methods.Count((Method methodGroupMethod) =>
+                                    {
+                                        MethodType methodGroupMethodType = MethodType.Other;
+                                        string methodGroupMethodUrl = methodTypeTrailing.Replace(methodTypeLeading.Replace(methodGroupMethod.Url, ""), "");
+                                        string[] methodGroupMethodUrlSplits = methodGroupMethodUrl.Split('/');
+                                        switch (methodGroupMethod.HttpMethod)
+                                        {
+                                            case HttpMethod.Get:
+                                                if ((methodGroupMethodUrlSplits.Length == 5 || methodGroupMethodUrlSplits.Length == 7)
+                                                    && methodGroupMethodUrlSplits[0].EqualsIgnoreCase("subscriptions")
+                                                    && MethodHasSequenceType(methodGroupMethod.ReturnType.Body, settings))
+                                                {
+                                                    if (methodGroupMethodUrlSplits.Length == 5)
+                                                    {
+                                                        if (methodGroupMethodUrlSplits[2].EqualsIgnoreCase("providers"))
+                                                        {
+                                                            methodGroupMethodType = MethodType.ListBySubscription;
+                                                        }
+                                                        else
+                                                        {
+                                                            methodGroupMethodType = MethodType.ListByResourceGroup;
+                                                        }
+                                                    }
+                                                    else if (methodGroupMethodUrlSplits[2].EqualsIgnoreCase("resourceGroups"))
+                                                    {
+                                                        methodGroupMethodType = MethodType.ListByResourceGroup;
+                                                    }
+                                                }
+                                                else if (IsTopLevelResourceUrl(methodGroupMethodUrlSplits))
+                                                {
+                                                    methodGroupMethodType = MethodType.Get;
+                                                }
+                                                break;
+
+                                            case HttpMethod.Delete:
+                                                if (IsTopLevelResourceUrl(methodGroupMethodUrlSplits))
+                                                {
+                                                    methodGroupMethodType = MethodType.Delete;
+                                                }
+                                                break;
+                                        }
+                                        return methodGroupMethodType == restAPIMethodType;
+                                    });
+                            }
+
+                            if (methodIsPagingOperation || methodIsPagingNextOperation || simulateMethodAsPagingOperation)
+                            {
+                                methodImports.Add("com.microsoft.azure.v2.PagedList");
+
+                                if (!simulateMethodAsPagingOperation)
+                                {
+                                    methodImports.Remove("com.microsoft.rest.v2.ServiceCallback");
+                                }
+
+                                methodImports.Remove("java.util.ArrayList");
+                                methodImports.Add("com.microsoft.azure.v2.Page");
+                            }
+
+                            if ((methodIsPagingOperation || methodIsPagingNextOperation || simulateMethodAsPagingOperation || methodIsPagingNonPollingOperation) && restAPIMethodReturnBodyClientSequenceType != null)
+                            {
+                                string pageImplType = SequenceTypeGetPageImplType(restAPIMethodReturnBodyClientType);
+                                IEnumerable<string> pageImplTypeAzureImports = CompositeTypeImports(pageImplType, false, false, true, false, settings.Package);
+                                methodImports.RemoveWhere(i => pageImplTypeAzureImports.Contains(i));
+                            }
+                        }
+                    }
+                    serviceClientImports.AddRange(methodImports);
+                }
+            }
+            serviceClientImports.Add(httpPipelineImport);
+            if (settings.IsAzureOrFluent)
+            {
+                serviceClientImports.Add(azureProxyImport);
+                serviceClientImports.Add("com.microsoft.azure.v2.AzureServiceClient");
+                serviceClientImports.Add(azureEnvironmentImport);
+            }
+            else
+            {
+                serviceClientImports.Add(restProxyImport);
+                serviceClientImports.Add("com.microsoft.rest.v2.ServiceClient");
+            }
+
+            List<ServiceClientProperty> serviceClientProperties = new List<ServiceClientProperty>();
+            IEnumerable<Property> codeModelServiceClientProperties = codeModel.Properties.Where((Property property) => !(property.ModelType is PrimaryType propertyModelPrimaryType && propertyModelPrimaryType.KnownPrimaryType == KnownPrimaryType.Credentials));
+            foreach (Property codeModelServiceClientProperty in codeModelServiceClientProperties)
+            {
+                string serviceClientPropertyDescription = codeModelServiceClientProperty.Documentation.ToString();
+
+                IModelType serviceClientPropertyModelType = codeModelServiceClientProperty.ModelType;
+                if (serviceClientPropertyModelType != null && !IsNullable(codeModelServiceClientProperty) && serviceClientPropertyModelType is PrimaryType serviceClientPropertyModelPrimaryType)
+                {
+                    PrimaryType propertyModelNonNullablePrimaryType = DependencyInjection.New<PrimaryType>(serviceClientPropertyModelPrimaryType.KnownPrimaryType);
+                    propertyModelNonNullablePrimaryType.Format = serviceClientPropertyModelPrimaryType.Format;
+                    primaryTypeNotWantNullable.Add(propertyModelNonNullablePrimaryType);
+
+                    serviceClientPropertyModelType = propertyModelNonNullablePrimaryType;
+                }
+
+                IModelType propertyModelClientType = ConvertToClientType(serviceClientPropertyModelType);
+
+                if (propertyModelClientType is PrimaryType propertyModelClientPrimaryType)
+                {
+                    PrimaryType nonNullablePropertyModelClientPrimaryType = DependencyInjection.New<PrimaryType>(propertyModelClientPrimaryType.KnownPrimaryType);
+                    nonNullablePropertyModelClientPrimaryType.Format = propertyModelClientPrimaryType.Format;
+                    primaryTypeNotWantNullable.Add(nonNullablePropertyModelClientPrimaryType);
+
+                    propertyModelClientType = nonNullablePropertyModelClientPrimaryType;
+                }
+
+                string serviceClientPropertyClientType = IModelTypeName(propertyModelClientType, settings);
+                string serviceClientPropertyName = codeModelServiceClientProperty.Name.ToString();
+                if (!string.IsNullOrEmpty(serviceClientPropertyName))
+                {
+                    CodeNamer codeNamer = CodeNamer.Instance;
+                    serviceClientPropertyName = codeNamer.CamelCase(codeNamer.RemoveInvalidCharacters(serviceClientPropertyName));
+                }
+
+                bool serviceClientPropertyIsReadOnly = codeModelServiceClientProperty.IsReadOnly;
+
+                string serviceClientPropertyDefaultValueExpression = codeModelServiceClientProperty.DefaultValue;
+                if (serviceClientPropertyDefaultValueExpression != null)
+                {
+                    if (codeModelServiceClientProperty.ModelType is PrimaryType codeModelServiceClientPropertyModelPrimaryType)
+                    {
+                        switch (codeModelServiceClientPropertyModelPrimaryType.KnownPrimaryType)
+                        {
+                            case KnownPrimaryType.Double:
+                                serviceClientPropertyDefaultValueExpression = double.Parse(serviceClientPropertyDefaultValueExpression).ToString();
+                                break;
+
+                            case KnownPrimaryType.String:
+                                serviceClientPropertyDefaultValueExpression = CodeNamer.Instance.QuoteValue(serviceClientPropertyDefaultValueExpression);
+                                break;
+
+                            case KnownPrimaryType.Boolean:
+                                serviceClientPropertyDefaultValueExpression = serviceClientPropertyDefaultValueExpression.ToLowerInvariant();
+                                break;
+
+                            case KnownPrimaryType.Long:
+                                serviceClientPropertyDefaultValueExpression = serviceClientPropertyDefaultValueExpression + 'L';
+                                break;
+
+                            case KnownPrimaryType.Date:
+                                serviceClientPropertyDefaultValueExpression = $"LocalDate.parse(\"{serviceClientPropertyDefaultValueExpression}\")";
+                                break;
+
+                            case KnownPrimaryType.DateTime:
+                            case KnownPrimaryType.DateTimeRfc1123:
+                                serviceClientPropertyDefaultValueExpression = $"DateTime.parse(\"{serviceClientPropertyDefaultValueExpression}\")";
+                                break;
+
+                            case KnownPrimaryType.TimeSpan:
+                                serviceClientPropertyDefaultValueExpression = $"Period.parse(\"{serviceClientPropertyDefaultValueExpression}\")";
+                                break;
+
+                            case KnownPrimaryType.ByteArray:
+                                serviceClientPropertyDefaultValueExpression = $"\"{serviceClientPropertyDefaultValueExpression}\".getBytes()";
+                                break;
+                        }
+                    }
+                }
+
+                serviceClientProperties.Add(new ServiceClientProperty(serviceClientPropertyDescription, serviceClientPropertyClientType, serviceClientPropertyName, serviceClientPropertyIsReadOnly, serviceClientPropertyDefaultValueExpression));
+            }
+
+            return new ServiceClient(serviceClientClassName, serviceClientInterfaceName, serviceClientImports, serviceClientRestAPI, serviceClientMethodGroupClients, serviceClientProperties, serviceClientUsesCredentials);
         }
 
         private static MethodGroupClient ParseMethodGroupClient(MethodGroup methodGroup, JavaSettings settings)
@@ -620,7 +1368,20 @@ namespace AutoRest.Java
 
             string methodGroupClientInterfacePath = settings.Package + "." + interfaceName;
 
-            RestAPI restAPI = ParseRestAPI(methodGroup, settings);
+            string restAPIName = methodGroup.Name.ToString().ToPascalCase();
+            if (!restAPIName.EndsWith('s'))
+            {
+                restAPIName += 's';
+            }
+            restAPIName += "Service";
+            string restAPIBaseURL = methodGroup.CodeModel.BaseUrl;
+            List<RestAPIMethod> restAPIMethods = new List<RestAPIMethod>();
+            foreach (Method method in methodGroup.Methods)
+            {
+                restAPIMethods.Add(ParseRestAPIMethod(method, settings));
+            }
+            RestAPI restAPI = new RestAPI(restAPIName, restAPIBaseURL, restAPIMethods);
+
             HashSet<string> imports = new HashSet<string>()
             {
                 "com.microsoft.rest.v2.RestResponse"
@@ -679,7 +1440,14 @@ namespace AutoRest.Java
                     IModelType parameterModelType = parameter.ModelType;
                     if (parameterModelType != null && !IsNullable(parameter))
                     {
-                        parameterModelType = GetIModelTypeNonNullableVariant(parameterModelType);
+                        if (parameterModelType is PrimaryType parameterModelPrimaryType2)
+                        {
+                            PrimaryType nonNullableParameterModelPrimaryType = DependencyInjection.New<PrimaryType>(parameterModelPrimaryType2.KnownPrimaryType);
+                            nonNullableParameterModelPrimaryType.Format = parameterModelPrimaryType2.Format;
+                            primaryTypeNotWantNullable.Add(nonNullableParameterModelPrimaryType);
+
+                            parameterModelType = nonNullableParameterModelPrimaryType;
+                        }
                     }
                     if (location == ParameterLocation.Body || !((parameterModelType is PrimaryType parameterModelPrimaryType && parameterModelPrimaryType.KnownPrimaryType == KnownPrimaryType.ByteArray) || parameterModelType is SequenceType))
                     {
@@ -740,7 +1508,14 @@ namespace AutoRest.Java
                         IModelType parameterModelType = parameter.ModelType;
                         if (parameterModelType != null && !IsNullable(parameter))
                         {
-                            parameterModelType = GetIModelTypeNonNullableVariant(parameterModelType);
+                            if (parameterModelType is PrimaryType parameterModelPrimaryType)
+                            {
+                                PrimaryType nonNullableParameterModelPrimaryType = DependencyInjection.New<PrimaryType>(parameterModelPrimaryType.KnownPrimaryType);
+                                nonNullableParameterModelPrimaryType.Format = parameterModelPrimaryType.Format;
+                                primaryTypeNotWantNullable.Add(nonNullableParameterModelPrimaryType);
+
+                                parameterModelType = nonNullableParameterModelPrimaryType;
+                            }
                         }
                         result = !(parameterModelType is PrimaryType) && !(parameterModelType is EnumType);
                     }
@@ -762,7 +1537,14 @@ namespace AutoRest.Java
                     IModelType parameterModelType = parameter.ModelType;
                     if (parameterModelType != null && !IsNullable(parameter))
                     {
-                        parameterModelType = GetIModelTypeNonNullableVariant(parameterModelType);
+                        if (parameterModelType is PrimaryType parameterModelPrimaryType)
+                        {
+                            PrimaryType nonNullableParameterModelPrimaryType = DependencyInjection.New<PrimaryType>(parameterModelPrimaryType.KnownPrimaryType);
+                            nonNullableParameterModelPrimaryType.Format = parameterModelPrimaryType.Format;
+                            primaryTypeNotWantNullable.Add(nonNullableParameterModelPrimaryType);
+
+                            parameterModelType = nonNullableParameterModelPrimaryType;
+                        }
                     }
                     IModelType parameterClientType = ConvertToClientType(parameterModelType);
                     methodImports.AddRange(GetIModelTypeImports(parameterClientType, settings));
@@ -918,7 +1700,13 @@ namespace AutoRest.Java
                 }
                 else if (restAPIMethodExceptionType is CompositeType compositeReturnType)
                 {
-                    methodOperationExceptionTypeName = GetCompositeTypeName(compositeReturnType, settings) + "Exception";
+                    methodOperationExceptionTypeName = compositeReturnType.Name.ToString();
+                    if (settings.IsFluent && !string.IsNullOrEmpty(methodOperationExceptionTypeName) && innerModelCompositeType.Contains(compositeReturnType))
+                    {
+                        methodOperationExceptionTypeName += "Inner";
+                    }
+                    methodOperationExceptionTypeName += "Exception";
+
                     if (compositeReturnType.Extensions.ContainsKey(SwaggerExtensions.NameOverrideExtension))
                     {
                         JContainer ext = compositeReturnType.Extensions[SwaggerExtensions.NameOverrideExtension] as JContainer;
@@ -978,7 +1766,14 @@ namespace AutoRest.Java
                                 IModelType parameterModelType = parameter.ModelType;
                                 if (parameterModelType != null && !IsNullable(parameter))
                                 {
-                                    parameterModelType = GetIModelTypeNonNullableVariant(parameterModelType);
+                                    if (parameterModelType is PrimaryType parameterModelPrimaryType)
+                                    {
+                                        PrimaryType nonNullableParameterModelPrimaryType = DependencyInjection.New<PrimaryType>(parameterModelPrimaryType.KnownPrimaryType);
+                                        nonNullableParameterModelPrimaryType.Format = parameterModelPrimaryType.Format;
+                                        primaryTypeNotWantNullable.Add(nonNullableParameterModelPrimaryType);
+
+                                        parameterModelType = nonNullableParameterModelPrimaryType;
+                                    }
                                 }
                                 return GetIModelTypeImports(parameterModelType, settings).Contains(i);
                             }))
@@ -1025,7 +1820,14 @@ namespace AutoRest.Java
                                     IModelType parameterModelType = parameter.ModelType;
                                     if (parameterModelType != null && !IsNullable(parameter))
                                     {
-                                        parameterModelType = GetIModelTypeNonNullableVariant(parameterModelType);
+                                        if (parameterModelType is PrimaryType parameterModelPrimaryType)
+                                        {
+                                            PrimaryType nonNullableParameterModelPrimaryType = DependencyInjection.New<PrimaryType>(parameterModelPrimaryType.KnownPrimaryType);
+                                            nonNullableParameterModelPrimaryType.Format = parameterModelPrimaryType.Format;
+                                            primaryTypeNotWantNullable.Add(nonNullableParameterModelPrimaryType);
+
+                                            parameterModelType = nonNullableParameterModelPrimaryType;
+                                        }
                                     }
                                     return GetIModelTypeImports(parameterModelType, settings).Contains(i);
                                 }))
@@ -1433,27 +2235,10 @@ namespace AutoRest.Java
 
             string serviceClientName = methodGroup.CodeModel.Name + "Impl";
 
-            return new MethodGroupClient(className, interfaceName, implementedInterfaces, restAPI, imports, serviceClientName);
-        }
+            string variableType = interfaceName + (settings.IsFluent ? "Inner" : "");
+            string variableName = interfaceName.ToCamelCase();
 
-        private static RestAPI ParseRestAPI(MethodGroup methodGroup, JavaSettings settings)
-        {
-            string name = methodGroup.Name.ToString().ToPascalCase();
-            if (!name.EndsWith('s'))
-            {
-                name += 's';
-            }
-            name += "Service";
-
-            string baseURL = methodGroup.CodeModel.BaseUrl;
-
-            List<RestAPIMethod> restAPIMethods = new List<RestAPIMethod>();
-            foreach (Method method in methodGroup.Methods)
-            {
-                restAPIMethods.Add(ParseRestAPIMethod(method, settings));
-            }
-
-            return new RestAPI(name, baseURL, restAPIMethods);
+            return new MethodGroupClient(className, interfaceName, implementedInterfaces, restAPI, imports, serviceClientName, variableType, variableName);
         }
 
         private static RestAPIMethod ParseRestAPIMethod(Method restAPIMethod, JavaSettings settings)
@@ -1509,7 +2294,13 @@ namespace AutoRest.Java
                 }
                 else if (restAPIMethodDefaultResponseReturnType is CompositeType compositeReturnType)
                 {
-                    methodOperationExceptionTypeName = GetCompositeTypeName(compositeReturnType, settings) + "Exception";
+                    methodOperationExceptionTypeName = compositeReturnType.Name.ToString();
+                    if (settings.IsFluent && !string.IsNullOrEmpty(methodOperationExceptionTypeName) && innerModelCompositeType.Contains(compositeReturnType))
+                    {
+                        methodOperationExceptionTypeName += "Inner";
+                    }
+                    methodOperationExceptionTypeName += "Exception";
+
                     if (compositeReturnType.Extensions.ContainsKey(SwaggerExtensions.NameOverrideExtension))
                     {
                         JContainer ext = compositeReturnType.Extensions[SwaggerExtensions.NameOverrideExtension] as JContainer;
@@ -1811,7 +2602,14 @@ namespace AutoRest.Java
                     IModelType parameterModelType = parameter.ModelType;
                     if (parameterModelType != null && !parameterIsNullable)
                     {
-                        parameterModelType = GetIModelTypeNonNullableVariant(parameterModelType);
+                        if (parameterModelType is PrimaryType parameterModelPrimaryType)
+                        {
+                            PrimaryType nonNullableParameterModelPrimaryType = DependencyInjection.New<PrimaryType>(parameterModelPrimaryType.KnownPrimaryType);
+                            nonNullableParameterModelPrimaryType.Format = parameterModelPrimaryType.Format;
+                            primaryTypeNotWantNullable.Add(nonNullableParameterModelPrimaryType);
+
+                            parameterModelType = nonNullableParameterModelPrimaryType;
+                        }
                     }
                     parameterDescription = $"the {IModelTypeName(parameterModelType, settings)} value";
                 }
@@ -1821,9 +2619,46 @@ namespace AutoRest.Java
                     primaryTypeNotWantNullable.Add(parameterPrimaryType);
                 }
 
-                RestAPIType parameterType = ParseParameterType(parameter, settings);
+                string parameterClientTypeName = null;
 
-                methodParameters.Add(new RestAPIParameter(parameterName, parameterLocation, parameterSerializedName, parameterVariableName, parameterSkipUrlEncodingExtension, parameterIsConstant, parameterIsRequired, parameterDescription, parameterType));
+                IModelType modelType = parameter.ModelType;
+                if (modelType is SequenceType && settings.ShouldGenerateXmlSerialization && parameter.Location == ParameterLocation.Body)
+                {
+                    parameterClientTypeName = modelType.XmlName + "Wrapper";
+                }
+                else
+                {
+                    IModelType clientType = ConvertToClientType(modelType);
+
+                    IModelType wireType = modelType;
+                    if (modelType is PrimaryType modelPrimaryType)
+                    {
+                        switch (modelPrimaryType.KnownPrimaryType)
+                        {
+                            case KnownPrimaryType.Stream:
+                                wireType = clientType;
+                                break;
+
+                            case KnownPrimaryType.ByteArray:
+                                if (parameter.Location != ParameterLocation.Body && parameter.Location != ParameterLocation.FormData)
+                                {
+                                    parameterClientTypeName = "String";
+                                }
+                                break;
+                        }
+                    }
+                    else if (modelType is SequenceType && parameter.Location != ParameterLocation.Body && parameter.Location != ParameterLocation.FormData)
+                    {
+                        parameterClientTypeName = "String";
+                    }
+
+                    if (parameterClientTypeName == null)
+                    {
+                        parameterClientTypeName = IModelTypeName(wireType, settings);
+                    }
+                }
+
+                methodParameters.Add(new RestAPIParameter(parameterName, parameterLocation, parameterSerializedName, parameterVariableName, parameterSkipUrlEncodingExtension, parameterIsConstant, parameterIsRequired, parameterDescription, parameterClientTypeName));
             }
 
             bool methodIsPagingOperation = restAPIMethod.Extensions.ContainsKey(AzureExtensions.PageableExtension) &&
@@ -1844,11 +2679,20 @@ namespace AutoRest.Java
                 methodDescription += restAPIMethod.Description;
             }
 
-            IModelType serviceResponseVariant = GetIModelTypeNonNullableVariant(ConvertToClientType(restAPIMethodReturnClientType)) ?? restAPIMethodReturnClientType;
-            string methodReturnValueClientType = IModelTypeName(serviceResponseVariant, settings);
-            if (methodReturnValueClientType == null)
+            string methodReturnValueClientType = "void";
+            if (restAPIMethodReturnClientType != null)
             {
-                methodReturnValueClientType = "void";
+                IModelType serviceResponseVariant = ConvertToClientType(restAPIMethodReturnClientType);
+                if (serviceResponseVariant is PrimaryType serviceResponseVariantPrimaryType)
+                {
+                    PrimaryType nonNullableServiceResponseVariant = DependencyInjection.New<PrimaryType>(serviceResponseVariantPrimaryType.KnownPrimaryType);
+                    nonNullableServiceResponseVariant.Format = serviceResponseVariantPrimaryType.Format;
+                    primaryTypeNotWantNullable.Add(nonNullableServiceResponseVariant);
+
+                    serviceResponseVariant = nonNullableServiceResponseVariant;
+                }
+
+                methodReturnValueClientType = IModelTypeName(serviceResponseVariant, settings);
             }
 
             return new RestAPIMethod(methodRequestContentType, methodIsPagingNextOperation, methodHttpMethod, methodUrlPath, methodExpectedResponseStatusCodes, methodReturnValueWireType, methodOperationExceptionTypeName, methodName, methodAsyncReturnType, methodParameters, methodIsPagingOperation, methodDescription, simulateMethodAsPagingOperation, methodIsLongRunningOperation, methodReturnValueClientType);
@@ -1856,50 +2700,6 @@ namespace AutoRest.Java
 
         private static bool IsNullable(IVariable variable)
             => variable.IsXNullable.HasValue ? variable.IsXNullable.Value : !variable.IsRequired;
-
-        private static RestAPIType ParseParameterType(Parameter parameter, JavaSettings settings)
-        {
-            string clientTypeName = null;
-
-            IModelType modelType = parameter.ModelType;
-            if (modelType is SequenceType && settings.ShouldGenerateXmlSerialization && parameter.Location == ParameterLocation.Body)
-            {
-                clientTypeName = modelType.XmlName + "Wrapper";
-            }
-            else
-            {
-                IModelType clientType = ConvertToClientType(modelType);
-
-                IModelType wireType = modelType;
-                if (modelType is PrimaryType modelPrimaryType)
-                {
-                    switch (modelPrimaryType.KnownPrimaryType)
-                    {
-                        case KnownPrimaryType.Stream:
-                            wireType = clientType;
-                            break;
-
-                        case KnownPrimaryType.ByteArray:
-                            if (parameter.Location != ParameterLocation.Body && parameter.Location != ParameterLocation.FormData)
-                            {
-                                clientTypeName = "String";
-                            }
-                            break;
-                    }
-                }
-                else if (modelType is SequenceType && parameter.Location != ParameterLocation.Body && parameter.Location != ParameterLocation.FormData)
-                {
-                    clientTypeName = "String";
-                }
-
-                if (clientTypeName == null)
-                {
-                    clientTypeName = IModelTypeName(wireType, settings);
-                }
-            }
-
-            return new RestAPIValueType(clientTypeName);
-        }
 
         private static IEnumerable<string> ParseSubpackages(JavaSettings settings)
         {
@@ -1917,7 +2717,9 @@ namespace AutoRest.Java
             string enumSubPackage = settings.IsFluent ? null : modelsPackage;
             foreach (EnumType enumType in codeModel.EnumTypes)
             {
-                string enumName = GetEnumTypeName(enumType);
+                string enumName = enumType.Name.ToString();
+                enumName = (string.IsNullOrEmpty(enumName) || enumName == "enum" ? "String" : CodeNamer.Instance.GetTypeName(enumName));
+
                 bool expandable = enumType.ModelAsString;
 
                 List<ServiceEnumValue> enumValues = new List<ServiceEnumValue>();
@@ -1957,7 +2759,14 @@ namespace AutoRest.Java
             List<ServiceException> exceptions = new List<ServiceException>();
             foreach (CompositeType exceptionType in codeModel.ErrorTypes)
             {
-                string methodOperationExceptionTypeName = GetCompositeTypeName(exceptionType, settings) + "Exception";
+                string errorName = exceptionType.Name.ToString();
+                if (settings.IsFluent && !string.IsNullOrEmpty(errorName) && innerModelCompositeType.Contains(exceptionType))
+                {
+                    errorName += "Inner";
+                }
+
+                string methodOperationExceptionTypeName = errorName + "Exception";
+
                 if (exceptionType.Extensions.ContainsKey(SwaggerExtensions.NameOverrideExtension))
                 {
                     JContainer ext = exceptionType.Extensions[SwaggerExtensions.NameOverrideExtension] as JContainer;
@@ -1966,8 +2775,6 @@ namespace AutoRest.Java
                         methodOperationExceptionTypeName = ext["name"].ToString();
                     }
                 }
-
-                string errorName = GetCompositeTypeName(exceptionType, settings);
 
                 // Skip any exceptions that are named "CloudErrorException" or have a body named
                 // "CloudError" because those types already exist in the runtime.
@@ -2003,7 +2810,14 @@ namespace AutoRest.Java
                     IModelType parameterModelType = parameter.ModelType;
                     if (parameterModelType != null && !IsNullable(parameter))
                     {
-                        parameterModelType = GetIModelTypeNonNullableVariant(parameterModelType);
+                        if (parameterModelType is PrimaryType parameterModelPrimaryType)
+                        {
+                            PrimaryType nonNullableParameterModelPrimaryType = DependencyInjection.New<PrimaryType>(parameterModelPrimaryType.KnownPrimaryType);
+                            nonNullableParameterModelPrimaryType.Format = parameterModelPrimaryType.Format;
+                            primaryTypeNotWantNullable.Add(nonNullableParameterModelPrimaryType);
+
+                            parameterModelType = nonNullableParameterModelPrimaryType;
+                        }
                     }
 
                     if (parameterModelType is SequenceType sequenceType)
@@ -2011,7 +2825,7 @@ namespace AutoRest.Java
                         string xmlElementName = sequenceType.XmlName.ToPascalCase();
                         if (xmlSequenceWrappers.Any(existingWrapper => existingWrapper.XmlElementName != xmlElementName))
                         {
-                            string sequenceTypeName = GetSequenceTypeName(sequenceType, settings);
+                            string sequenceTypeName = $"List<{IModelTypeName(sequenceType.ElementType, settings)}>";
 
                             HashSet<string> xmlSequenceWrapperImports = new HashSet<string>()
                             {
@@ -2044,7 +2858,11 @@ namespace AutoRest.Java
 
         private static ServiceModel ParseModel(CompositeType compositeType, JavaSettings settings, ServiceModels models)
         {
-            string modelName = GetCompositeTypeName(compositeType, settings);
+            string modelName = compositeType.Name.ToString();
+            if (settings.IsFluent && !string.IsNullOrEmpty(modelName) && innerModelCompositeType.Contains(compositeType))
+            {
+                modelName += "Inner";
+            }
 
             ServiceModel result = models.GetModel(modelName);
             if (result == null)
@@ -2060,12 +2878,22 @@ namespace AutoRest.Java
                 }
 
                 HashSet<string> modelImports = new HashSet<string>();
-                IEnumerable<Property> compositeTypeProperties = GetCompositeTypeProperties(compositeType, settings);
+                IEnumerable<Property> compositeTypeProperties = compositeType.Properties;
                 foreach (Property property in compositeTypeProperties)
                 {
-                    IModelType propertyModelType = GetPropertyModelType(property);
+                    IModelType propertyModelType = property.ModelType;
+                    PrimaryType propertyModelPrimaryType = propertyModelType as PrimaryType;
+                    if (propertyModelType != null && !IsNullable(property) && propertyModelPrimaryType != null)
+                    {
+                        PrimaryType propertyModelNonNullablePrimaryType = DependencyInjection.New<PrimaryType>(propertyModelPrimaryType.KnownPrimaryType);
+                        propertyModelNonNullablePrimaryType.Format = propertyModelPrimaryType.Format;
+                        primaryTypeNotWantNullable.Add(propertyModelNonNullablePrimaryType);
+
+                        propertyModelType = propertyModelNonNullablePrimaryType;
+                    }
+
                     IEnumerable<string> propertyModelTypeImports = GetIModelTypeImports(propertyModelType, settings);
-                    if (propertyModelType.IsPrimaryType(KnownPrimaryType.DateTimeRfc1123) || propertyModelType.IsPrimaryType(KnownPrimaryType.Base64Url))
+                    if (propertyModelPrimaryType != null && (propertyModelPrimaryType.KnownPrimaryType == KnownPrimaryType.DateTimeRfc1123 || propertyModelPrimaryType.KnownPrimaryType == KnownPrimaryType.Base64Url))
                     {
                         modelImports.AddRange(propertyModelTypeImports);
                         modelImports.AddRange(GetIModelTypeImports(ConvertToClientType(propertyModelType), settings));
@@ -2111,39 +2939,51 @@ namespace AutoRest.Java
                 }
 
                 // For flattening
-                if (GetCompositeTypeProperties(compositeType, settings).Any(p => p.WasFlattened()))
+                if (compositeTypeProperties.Any(p => p.WasFlattened()))
                 {
                     modelImports.Add("com.microsoft.rest.v2.serializer.JsonFlatten");
                 }
 
                 if (settings.IsAzure)
                 {
-                    foreach (Property property in GetCompositeTypeProperties(compositeType, settings))
+                    foreach (Property property in compositeTypeProperties)
                     {
-                        IModelType propertyModelType = GetPropertyModelType(property);
-                        if (propertyModelType is CompositeType propertyCompositeType)
+                        if (property.ModelType is CompositeType propertyCompositeType)
                         {
-                            string propertyCompositeTypeName = GetCompositeTypeName(propertyCompositeType, settings);
+                            string propertyCompositeTypeName = propertyCompositeType.Name.ToString();
+                            if (settings.IsFluent && !string.IsNullOrEmpty(propertyCompositeTypeName) && innerModelCompositeType.Contains(propertyCompositeType))
+                            {
+                                propertyCompositeTypeName += "Inner";
+                            }
+
                             bool propertyCompositeTypeIsAzureResourceExtension = GetExtensionBool(propertyCompositeType, AzureExtensions.AzureResourceExtension);
                             if (propertyCompositeTypeName == "Resource" || (propertyCompositeTypeName == "SubResource" && propertyCompositeTypeIsAzureResourceExtension))
                             {
-                                modelImports.Add($"com.microsoft.azure.v2.{GetCompositeTypeName(propertyCompositeType, settings)}");
+                                modelImports.Add($"com.microsoft.azure.v2.{propertyCompositeTypeName}");
                             }
                         }
                     }
 
                     CompositeType baseModelType = compositeType.BaseModelType;
-                    string baseModelTypeName = GetCompositeTypeName(baseModelType, settings);
-                    if (baseModelTypeName == "Resource" || baseModelTypeName == "SubResource")
+                    if (baseModelType != null)
                     {
-                        modelImports.Add($"com.microsoft.azure.v2.{baseModelTypeName}");
-                    }
-
-                    if (settings.IsFluent)
-                    {
-                        if (baseModelTypeName != null && baseModelTypeName.EndsWith("Inner", StringComparison.Ordinal) ^ innerModelCompositeType.Contains(compositeType))
+                        string baseModelTypeName = baseModelType.Name.ToString();
+                        if (settings.IsFluent && !string.IsNullOrEmpty(baseModelTypeName) && innerModelCompositeType.Contains(baseModelType))
                         {
-                            modelImports.AddRange(GetIModelTypeImports(baseModelType, settings));
+                            baseModelTypeName += "Inner";
+                        }
+
+                        if (baseModelTypeName == "Resource" || baseModelTypeName == "SubResource")
+                        {
+                            modelImports.Add($"com.microsoft.azure.v2.{baseModelTypeName}");
+                        }
+
+                        if (settings.IsFluent)
+                        {
+                            if (baseModelTypeName != null && baseModelTypeName.EndsWith("Inner", StringComparison.Ordinal) ^ innerModelCompositeType.Contains(compositeType))
+                            {
+                                modelImports.AddRange(GetIModelTypeImports(baseModelType, settings));
+                            }
                         }
                     }
                 }
@@ -2167,10 +3007,10 @@ namespace AutoRest.Java
                 string modelXmlName = compositeType.XmlName;
 
                 bool needsFlatten = false;
-                List<ServiceProperty> properties = new List<ServiceProperty>();
-                foreach (Property property in GetCompositeTypeProperties(compositeType, settings))
+                List<ServiceModelProperty> properties = new List<ServiceModelProperty>();
+                foreach (Property property in compositeTypeProperties)
                 {
-                    properties.Add(ParseProperty(property, settings));
+                    properties.Add(ParseModelProperty(property, settings));
                     if (!needsFlatten && property.WasFlattened())
                     {
                         needsFlatten = true;
@@ -2185,7 +3025,7 @@ namespace AutoRest.Java
             return result;
         }
 
-        private static ServiceProperty ParseProperty(Property property, JavaSettings settings)
+        private static ServiceModelProperty ParseModelProperty(Property property, JavaSettings settings)
         {
             string name = property?.Name?.ToString();
             if (!string.IsNullOrEmpty(name))
@@ -2244,7 +3084,17 @@ namespace AutoRest.Java
 
             bool isXmlWrapper = property.XmlIsWrapped;
 
-            IModelType propertyModelType = GetPropertyModelType(property);
+            IModelType propertyModelType = property.ModelType;
+            PrimaryType propertyModelPrimaryType = propertyModelType as PrimaryType;
+            if (propertyModelType != null && !IsNullable(property) && propertyModelPrimaryType != null)
+            {
+                PrimaryType propertyModelNonNullablePrimaryType = DependencyInjection.New<PrimaryType>(propertyModelPrimaryType.KnownPrimaryType);
+                propertyModelNonNullablePrimaryType.Format = propertyModelPrimaryType.Format;
+                primaryTypeNotWantNullable.Add(propertyModelNonNullablePrimaryType);
+
+                propertyModelType = propertyModelNonNullablePrimaryType;
+            }
+
             string wireTypeName = IModelTypeName(propertyModelType, settings);
 
             bool isConstant = property.IsConstant;
@@ -2258,7 +3108,7 @@ namespace AutoRest.Java
             try
             {
                 defaultValue = property.DefaultValue;
-                if (defaultValue != null && propertyModelType != null && propertyModelType is PrimaryType propertyModelPrimaryType)
+                if (defaultValue != null && propertyModelType != null && propertyModelPrimaryType != null)
                 {
                     switch (propertyModelPrimaryType.KnownPrimaryType)
                     {
@@ -2304,7 +3154,7 @@ namespace AutoRest.Java
 
             bool isReadOnly = property.IsReadOnly;
 
-            return new ServiceProperty(name, description, annotationArguments, isXmlAttribute, xmlName, serializedName, isXmlWrapper, wireTypeName, isConstant, modelTypeIsSequence, modelTypeIsComposite, clientTypeName, defaultValue, isReadOnly);
+            return new ServiceModelProperty(name, description, annotationArguments, isXmlAttribute, xmlName, serializedName, isXmlWrapper, wireTypeName, isConstant, modelTypeIsSequence, modelTypeIsComposite, clientTypeName, defaultValue, isReadOnly);
         }
 
         private static ServiceManager ParseManager(string serviceClientName, CodeModel codeModel, JavaSettings settings)
@@ -2543,11 +3393,11 @@ namespace AutoRest.Java
 
         public static JavaFile GetServiceClientJavaFile(CodeModel codeModel, JavaSettings settings)
         {
-            string serviceClientInterfaceName = codeModel.Name.ToPascalCase();
-            string serviceClientClassName = serviceClientInterfaceName + "Impl";
-            JavaFile javaFile = GetJavaFileWithHeaderAndPackage(implPackage, settings, serviceClientClassName);
+            ServiceClient serviceClient = ParseServiceClient(codeModel, settings);
 
-            string serviceClientClassDeclaration = $"{serviceClientClassName} extends ";
+            JavaFile javaFile = GetJavaFileWithHeaderAndPackage(implPackage, settings, serviceClient.ClassName);
+
+            string serviceClientClassDeclaration = $"{serviceClient.ClassName} extends ";
             if (settings.IsAzureOrFluent)
             {
                 serviceClientClassDeclaration += "Azure";
@@ -2555,681 +3405,94 @@ namespace AutoRest.Java
             serviceClientClassDeclaration += "ServiceClient";
             if (!settings.IsFluent)
             {
-                serviceClientClassDeclaration += $" implements {serviceClientInterfaceName}";
+                serviceClientClassDeclaration += $" implements {serviceClient.InterfaceName}";
             }
 
-            IEnumerable<MethodGroup> methodGroups = GetMethodGroups(codeModel);
-
-            HashSet<string> imports = new HashSet<string>();
-            if (!settings.IsFluent)
-            {
-                string serviceClientInterfacePath = GetPackage(settings) + "." + serviceClientInterfaceName;
-                imports.Add(serviceClientInterfacePath);
-
-                imports.AddRange(methodGroups.Select((MethodGroup methodGroup) =>
-                {
-                    string interfaceName = methodGroup.Name.ToString().ToPascalCase();
-                    if (!interfaceName.EndsWith('s'))
-                    {
-                        interfaceName += 's';
-                    }
-                    return settings.Package + "." + interfaceName;
-                }));
-            }
-            if (HasServiceClientCredentials(codeModel))
-            {
-                imports.Add(serviceClientCredentialsImport);
-            }
-            IEnumerable<Method> restAPIMethods = GetRestAPIMethods(codeModel);
-            if (restAPIMethods.Any())
-            {
-                imports.Add("com.microsoft.rest.v2.RestResponse");
-
-                foreach (Method restAPIMethod in restAPIMethods)
-                {
-                    HashSet<string> methodImports = new HashSet<string>()
-                    {
-                        "io.reactivex.Observable",
-                        "io.reactivex.Single",
-                        "io.reactivex.functions.Function",
-                        "com.microsoft.rest.v2.ServiceFuture",
-                        "com.microsoft.rest.v2.ServiceCallback",
-                        "com.microsoft.rest.v2.annotations.ExpectedResponses",
-                        "com.microsoft.rest.v2.annotations.Headers",
-                        "com.microsoft.rest.v2.annotations.Host",
-                        "com.microsoft.rest.v2.http.HttpClient",
-                    };
-
-                    if (restAPIMethod.DefaultResponse.Body != null)
-                    {
-                        methodImports.Add("com.microsoft.rest.v2.annotations.UnexpectedResponseExceptionType");
-                    }
-
-                    Response restAPIMethodReturnType = restAPIMethod.ReturnType;
-                    if (restAPIMethodReturnType.Body == null)
-                    {
-                        methodImports.Add("io.reactivex.Completable");
-                    }
-                    else
-                    {
-                        methodImports.Add("io.reactivex.Maybe");
-                    }
-
-                    List<Parameter> methodRetrofitParameters = restAPIMethod.LogicalParameters.Where(p => p.Location != ParameterLocation.None).ToList();
-                    bool methodIsPagingNextOperation = GetExtensionBool(restAPIMethod?.Extensions, "nextLinkMethod");
-                    if (settings.IsAzureOrFluent && methodIsPagingNextOperation)
-                    {
-                        methodRetrofitParameters.RemoveAll(p => p.Location == ParameterLocation.Path);
-
-                        Parameter nextUrlParam = DependencyInjection.New<Parameter>();
-                        nextUrlParam.SerializedName = "nextUrl";
-                        nextUrlParam.Documentation = "The URL to get the next page of items.";
-                        nextUrlParam.Location = ParameterLocation.Path;
-                        nextUrlParam.IsRequired = true;
-                        nextUrlParam.ModelType = DependencyInjection.New<PrimaryType>(KnownPrimaryType.String);
-                        nextUrlParam.Name = "nextUrl";
-                        nextUrlParam.Extensions.Add(SwaggerExtensions.SkipUrlEncodingExtension, true);
-                        methodRetrofitParameters.Insert(0, nextUrlParam);
-                    }
-
-                    foreach (Parameter parameter in methodRetrofitParameters)
-                    {
-                        ParameterLocation location = parameter.Location;
-                        IModelType parameterModelType = parameter.ModelType;
-                        if (parameterModelType != null && !IsNullable(parameter))
-                        {
-                            parameterModelType = GetIModelTypeNonNullableVariant(parameterModelType);
-                        }
-                        if (location == ParameterLocation.Body || !((parameterModelType is PrimaryType parameterModelPrimaryType && parameterModelPrimaryType.KnownPrimaryType == KnownPrimaryType.ByteArray) || parameterModelType is SequenceType))
-                        {
-                            IModelType parameterWireType;
-                            IModelType parameterClientType = ConvertToClientType(parameterModelType);
-                            if (parameterModelType.IsPrimaryType(KnownPrimaryType.Stream))
-                            {
-                                parameterWireType = parameterClientType;
-                            }
-                            else if (!parameterModelType.IsPrimaryType(KnownPrimaryType.Base64Url) &&
-                                location != ParameterLocation.Body &&
-                                location != ParameterLocation.FormData &&
-                                ((parameterClientType is PrimaryType parameterClientPrimaryType && parameterClientPrimaryType.KnownPrimaryType == KnownPrimaryType.ByteArray) || parameterClientType is SequenceType))
-                            {
-                                parameterWireType = DependencyInjection.New<PrimaryType>(KnownPrimaryType.String);
-                            }
-                            else
-                            {
-                                parameterWireType = parameterModelType;
-                            }
-
-                            methodImports.AddRange(GetIModelTypeImports(parameterWireType, settings));
-                        }
-
-                        if (location != ParameterLocation.FormData)
-                        {
-                            methodImports.Add($"com.microsoft.rest.v2.annotations.{location.ToString()}Param");
-                        }
-
-                        if (location != ParameterLocation.Body)
-                        {
-                            if (parameterModelType.IsPrimaryType(KnownPrimaryType.ByteArray))
-                            {
-                                methodImports.Add("org.apache.commons.codec.binary.Base64");
-                            }
-                            else if (parameterModelType is SequenceType)
-                            {
-                                methodImports.Add("com.microsoft.rest.v2.CollectionFormat");
-                            }
-                        }
-                    }
-
-                    // Http verb annotations
-                    methodImports.Add($"com.microsoft.rest.v2.annotations.{restAPIMethod.HttpMethod.ToString().ToUpperInvariant()}");
-
-                    // response type conversion
-                    if (restAPIMethod.Responses.Any())
-                    {
-                        methodImports.Add("com.google.common.reflect.TypeToken");
-                    }
-
-                    // validation
-                    bool hasClientMethodParametersOrClientPropertiesToValidate = restAPIMethod.Parameters.Where(parameter =>
-                    {
-                        bool result = !parameter.IsConstant;
-                        if (result)
-                        {
-                            IModelType parameterModelType = parameter.ModelType;
-                            if (parameterModelType != null && !IsNullable(parameter))
-                            {
-                                parameterModelType = GetIModelTypeNonNullableVariant(parameterModelType);
-                            }
-                            result = !(parameterModelType is PrimaryType) && !(parameterModelType is EnumType);
-                        }
-                        return result;
-                    }).Any();
-                    if (hasClientMethodParametersOrClientPropertiesToValidate)
-                    {
-                        methodImports.Add("com.microsoft.rest.v2.Validator");
-                    }
-
-                    // parameters
-                    IEnumerable<Parameter> methodLocalParameters = restAPIMethod.Parameters
-                        //Omit parameter-group properties for now since Java doesn't support them yet
-                        .Where((Parameter parameter) => parameter != null && !parameter.IsClientProperty && !string.IsNullOrWhiteSpace(parameter.Name))
-                        .OrderBy(item => !item.IsRequired);
-                    IEnumerable<Parameter> methodLogicalParameters = restAPIMethod.LogicalParameters;
-                    foreach (Parameter parameter in methodLocalParameters.Concat(methodLogicalParameters))
-                    {
-                        IModelType parameterModelType = parameter.ModelType;
-                        if (parameterModelType != null && !IsNullable(parameter))
-                        {
-                            parameterModelType = GetIModelTypeNonNullableVariant(parameterModelType);
-                        }
-                        IModelType parameterClientType = ConvertToClientType(parameterModelType);
-                        methodImports.AddRange(GetIModelTypeImports(parameterClientType, settings));
-                    }
-
-                    // return type
-                    IModelType restAPIMethodReturnBodyClientType = ConvertToClientType(restAPIMethodReturnType.Body ?? DependencyInjection.New<PrimaryType>(KnownPrimaryType.None));
-                    SequenceType restAPIMethodReturnBodyClientSequenceType = restAPIMethodReturnBodyClientType as SequenceType;
-
-                    bool restAPIMethodReturnTypeIsPaged = GetExtensionBool(restAPIMethod.Extensions, "nextLinkMethod") ||
-                        (restAPIMethod.Extensions.ContainsKey(AzureExtensions.PageableExtension) &&
-                         restAPIMethod.Extensions[AzureExtensions.PageableExtension] != null);
-
-                    if (settings.IsAzureOrFluent && restAPIMethodReturnBodyClientSequenceType != null && restAPIMethodReturnTypeIsPaged)
-                    {
-                        SequenceType resultSequenceType = DependencyInjection.New<SequenceType>();
-                        resultSequenceType.ElementType = restAPIMethodReturnBodyClientSequenceType.ElementType;
-                        SequenceTypeSetPageImplType(resultSequenceType, SequenceTypeGetPageImplType(restAPIMethodReturnBodyClientSequenceType));
-                        pagedListTypes.Add(resultSequenceType);
-                        restAPIMethodReturnBodyClientType = resultSequenceType;
-                    }
-                    methodImports.AddRange(GetIModelTypeImports(restAPIMethodReturnBodyClientType, settings));
-                    methodImports.AddRange(GetIModelTypeImports(ConvertToClientType(restAPIMethodReturnType.Headers), settings));
-
-                    IModelType returnTypeBodyWireType = restAPIMethodReturnType.Body ?? DependencyInjection.New<PrimaryType>(KnownPrimaryType.None);
-                    methodImports.AddRange(GetIModelTypeImports(returnTypeBodyWireType, settings));
-
-                    IModelType returnTypeHeadersWireType = restAPIMethodReturnType.Headers;
-                    methodImports.AddRange(GetIModelTypeImports(returnTypeHeadersWireType, settings));
-
-                    IModelType returnTypeCurrentType = restAPIMethodReturnType.Body;
-                    while (returnTypeCurrentType != null)
-                    {
-                        if (returnTypeCurrentType is SequenceType currentSequenceType)
-                        {
-                            returnTypeCurrentType = currentSequenceType.ElementType;
-                        }
-                        else if (returnTypeCurrentType is DictionaryType currentDictionaryType)
-                        {
-                            returnTypeCurrentType = currentDictionaryType.ValueType;
-                        }
-                        else
-                        {
-                            if (returnTypeCurrentType is PrimaryType currentPrimaryType)
-                            {
-                                string currentPrimaryTypeName = currentPrimaryType?.Name?.FixedValue;
-                                if (currentPrimaryTypeName.EqualsIgnoreCase("Base64Url") ||
-                                    currentPrimaryTypeName.EqualsIgnoreCase("DateTimeRfc1123") ||
-                                    currentPrimaryTypeName.EqualsIgnoreCase("UnixTime"))
-                                {
-                                    methodImports.Add("com.microsoft.rest.v2.annotations.ReturnValueWireType");
-                                    methodImports.Add("com.microsoft.rest.v2." + currentPrimaryTypeName);
-                                }
-                            }
-
-                            returnTypeCurrentType = null;
-                        }
-                    }
-
-                    IModelType returnTypeHeaderClientType = ConvertToClientType(restAPIMethodReturnType.Headers);
-                    if (((returnTypeBodyWireType == null ? restAPIMethodReturnBodyClientType != null : !returnTypeBodyWireType.StructurallyEquals(restAPIMethodReturnBodyClientType)) && IModelTypeName(restAPIMethodReturnBodyClientType, settings) != "void") ||
-                        (returnTypeHeadersWireType == null ? returnTypeHeaderClientType != null : !returnTypeHeadersWireType.StructurallyEquals(returnTypeHeaderClientType)))
-                    {
-                        IModelType responseBody = restAPIMethodReturnType.Body;
-                        if (responseBody is SequenceType || returnTypeHeadersWireType is SequenceType)
-                        {
-                            methodImports.Add("java.util.ArrayList");
-                        }
-                        else if (responseBody is DictionaryType || returnTypeHeadersWireType is DictionaryType)
-                        {
-                            methodImports.Add("java.util.HashMap");
-                        }
-                    }
-
-                    // response type (can be different from return type)
-                    IEnumerable<Response> methodResponses = restAPIMethod.Responses.Values;
-                    foreach (Response methodResponse in methodResponses)
-                    {
-                        IModelType methodResponseBodyClientType = ConvertToClientType(methodResponse.Body ?? DependencyInjection.New<PrimaryType>(KnownPrimaryType.None));
-                        SequenceType methodResponseBodyClientSequenceType = methodResponseBodyClientType as SequenceType;
-
-                        if (settings.IsAzureOrFluent && methodResponseBodyClientSequenceType != null && restAPIMethodReturnTypeIsPaged)
-                        {
-                            SequenceType resultSequenceType = DependencyInjection.New<SequenceType>();
-                            resultSequenceType.ElementType = methodResponseBodyClientSequenceType.ElementType;
-                            SequenceTypeSetPageImplType(resultSequenceType, SequenceTypeGetPageImplType(methodResponseBodyClientSequenceType));
-                            pagedListTypes.Add(resultSequenceType);
-                            methodResponseBodyClientType = resultSequenceType;
-                        }
-
-                        methodImports.AddRange(GetIModelTypeImports(methodResponseBodyClientType, settings));
-                        methodImports.AddRange(GetIModelTypeImports(ConvertToClientType(methodResponse.Headers), settings));
-
-                        IModelType responseBodyWireType = methodResponse.Body ?? DependencyInjection.New<PrimaryType>(KnownPrimaryType.None);
-                        methodImports.AddRange(GetIModelTypeImports(responseBodyWireType, settings));
-
-                        IModelType responseHeadersWireType = methodResponse.Headers;
-                        methodImports.AddRange(GetIModelTypeImports(responseHeadersWireType, settings));
-
-                        IModelType responseCurrentType = methodResponse.Body;
-                        while (responseCurrentType != null)
-                        {
-                            if (responseCurrentType is SequenceType currentSequenceType)
-                            {
-                                responseCurrentType = currentSequenceType.ElementType;
-                            }
-                            else if (responseCurrentType is DictionaryType currentDictionaryType)
-                            {
-                                responseCurrentType = currentDictionaryType.ValueType;
-                            }
-                            else
-                            {
-                                if (responseCurrentType is PrimaryType currentPrimaryType)
-                                {
-                                    string currentPrimaryTypeName = currentPrimaryType?.Name?.FixedValue;
-                                    if (currentPrimaryTypeName.EqualsIgnoreCase("Base64Url") ||
-                                        currentPrimaryTypeName.EqualsIgnoreCase("DateTimeRfc1123") ||
-                                        currentPrimaryTypeName.EqualsIgnoreCase("UnixTime"))
-                                    {
-                                        methodImports.Add("com.microsoft.rest.v2.annotations.ReturnValueWireType");
-                                        methodImports.Add("com.microsoft.rest.v2." + currentPrimaryTypeName);
-                                    }
-                                }
-
-                                responseCurrentType = null;
-                            }
-                        }
-
-                        IModelType responseHeaderClientType = ConvertToClientType(methodResponse.Headers);
-                        if (((responseBodyWireType == null ? methodResponseBodyClientType != null : !responseBodyWireType.StructurallyEquals(methodResponseBodyClientType)) && IModelTypeName(methodResponseBodyClientType, settings) != "void") ||
-                            (responseHeadersWireType == null ? responseHeaderClientType != null : !responseHeadersWireType.StructurallyEquals(responseHeaderClientType)))
-                        {
-                            IModelType responseBody = methodResponse.Body;
-                            if (responseBody is SequenceType || responseHeadersWireType is SequenceType)
-                            {
-                                methodImports.Add("java.util.ArrayList");
-                            }
-                            else if (responseBody is DictionaryType || responseHeadersWireType is DictionaryType)
-                            {
-                                methodImports.Add("java.util.HashMap");
-                            }
-                        }
-                    }
-
-                    // exceptions
-                    methodImports.Add("java.io.IOException");
-
-                    string methodOperationExceptionTypeName;
-                    IModelType restAPIMethodExceptionType = restAPIMethod.DefaultResponse.Body;
-                    if (settings.IsAzureOrFluent && (restAPIMethodExceptionType == null || IModelTypeName(restAPIMethodExceptionType, settings) == "CloudError"))
-                    {
-                        methodOperationExceptionTypeName = "CloudException";
-                    }
-                    else if (restAPIMethodExceptionType is CompositeType compositeReturnType)
-                    {
-                        methodOperationExceptionTypeName = GetCompositeTypeName(compositeReturnType, settings) + "Exception";
-                        if (compositeReturnType.Extensions.ContainsKey(SwaggerExtensions.NameOverrideExtension))
-                        {
-                            JContainer ext = compositeReturnType.Extensions[SwaggerExtensions.NameOverrideExtension] as JContainer;
-                            if (ext != null && ext["name"] != null)
-                            {
-                                methodOperationExceptionTypeName = ext["name"].ToString();
-                            }
-                        }
-                    }
-                    else
-                    {
-                        methodOperationExceptionTypeName = "RestException";
-                    }
-
-                    switch (methodOperationExceptionTypeName)
-                    {
-                        case "CloudException":
-                            methodImports.Add("com.microsoft.azure.v2.CloudException");
-                            break;
-                        case "RestException":
-                            methodImports.Add("com.microsoft.rest.v2.RestException");
-                            break;
-                        default:
-                            methodImports.Add($"{settings.Package}.models.{methodOperationExceptionTypeName}");
-                            break;
-                    }
-
-                    // parameterized host
-                    bool isParameterizedHost;
-                    bool containsParameterizedHostExtension = restAPIMethod?.CodeModel?.Extensions?.ContainsKey(SwaggerExtensions.ParameterizedHostExtension) ?? false;
-                    if (settings.IsAzureOrFluent)
-                    {
-                        isParameterizedHost = containsParameterizedHostExtension && !methodIsPagingNextOperation;
-                    }
-                    else
-                    {
-                        isParameterizedHost = containsParameterizedHostExtension;
-                    }
-
-                    if (isParameterizedHost)
-                    {
-                        methodImports.Add("com.microsoft.rest.v2.annotations.HostParam");
-                    }
-
-                    if (settings.IsAzureOrFluent)
-                    {
-                        bool methodIsLongRunningOperation = GetExtensionBool(restAPIMethod?.Extensions, AzureExtensions.LongRunningExtension);
-                        if (methodIsLongRunningOperation)
-                        {
-                            methodImports.Add("com.microsoft.azure.v2.OperationStatus");
-                            methodImports.Add("com.microsoft.azure.v2.util.ServiceFutureUtil");
-
-                            restAPIMethod.Responses.Select(r => r.Value.Body).Concat(new IModelType[] { restAPIMethod.DefaultResponse.Body })
-                                .SelectMany(t => GetIModelTypeImports(t, settings))
-                                .Where(i => !restAPIMethod.Parameters.Any(parameter =>
-                                {
-                                    IModelType parameterModelType = parameter.ModelType;
-                                    if (parameterModelType != null && !IsNullable(parameter))
-                                    {
-                                        parameterModelType = GetIModelTypeNonNullableVariant(parameterModelType);
-                                    }
-                                    return GetIModelTypeImports(parameterModelType, settings).Contains(i);
-                                }))
-                                .ForEach(i => methodImports.Remove(i));
-                        }
-                        
-                        string typeName = SequenceTypeGetPageImplType(restAPIMethodReturnBodyClientType);
-
-                        bool methodIsPagingOperation = restAPIMethod.Extensions.ContainsKey(AzureExtensions.PageableExtension) &&
-                            restAPIMethod.Extensions[AzureExtensions.PageableExtension] != null &&
-                            !methodIsPagingNextOperation;
-
-                        bool methodIsPagingNonPollingOperation = restAPIMethod.Extensions.ContainsKey(AzureExtensions.PageableExtension) &&
-                            restAPIMethod.Extensions[AzureExtensions.PageableExtension] == null &&
-                            !methodIsPagingNextOperation;
-
-                        if (methodIsPagingOperation || methodIsPagingNextOperation)
-                        {
-                            methodImports.Remove("java.util.ArrayList");
-                            methodImports.Remove("com.microsoft.rest.v2.ServiceCallback");
-                            methodImports.Add("com.microsoft.azure.v2.Page");
-                            methodImports.Add("com.microsoft.azure.v2.PagedList");
-                            methodImports.AddRange(CompositeTypeImports(typeName, false, false, true, false, settings.Package));
-                        }
-                        else if (methodIsPagingNonPollingOperation)
-                        {
-                            methodImports.AddRange(CompositeTypeImports(typeName, false, false, true, false, settings.Package));
-                        }
-
-                        if (settings.IsFluent)
-                        {
-                            if (methodOperationExceptionTypeName != "CloudException" && methodOperationExceptionTypeName != "RestException")
-                            {
-                                IEnumerable<string> methodOperationExceptionTypeNameAzureImports = CompositeTypeImports(methodOperationExceptionTypeName, false, false, true, false, settings.Package);
-                                methodImports.RemoveWhere(i => methodOperationExceptionTypeNameAzureImports.Contains(i));
-                                methodImports.AddRange(CompositeTypeImports(methodOperationExceptionTypeName, false, false, false, true, settings.Package));
-                            }
-                            if (methodIsLongRunningOperation)
-                            {
-                                restAPIMethod.Responses.Select(r => r.Value.Body).Concat(new IModelType[] { restAPIMethod.DefaultResponse.Body })
-                                    .SelectMany(t => GetIModelTypeImports(t, settings))
-                                    .Where(i => !restAPIMethod.Parameters.Any(parameter =>
-                                    {
-                                        IModelType parameterModelType = parameter.ModelType;
-                                        if (parameterModelType != null && !IsNullable(parameter))
-                                        {
-                                            parameterModelType = GetIModelTypeNonNullableVariant(parameterModelType);
-                                        }
-                                        return GetIModelTypeImports(parameterModelType, settings).Contains(i);
-                                    }))
-                                    .ForEach(i => methodImports.Remove(i));
-                            }
-
-                            bool simulateMethodAsPagingOperation = false;
-                            MethodGroup methodGroup = restAPIMethod.MethodGroup;
-                            if (!string.IsNullOrEmpty(methodGroup?.Name?.ToString()))
-                            {
-                                MethodType restAPIMethodType = MethodType.Other;
-                                string methodUrl = methodTypeTrailing.Replace(methodTypeLeading.Replace(restAPIMethod.Url, ""), "");
-                                string[] methodUrlSplits = methodUrl.Split('/');
-                                switch (restAPIMethod.HttpMethod)
-                                {
-                                    case HttpMethod.Get:
-                                        if ((methodUrlSplits.Length == 5 || methodUrlSplits.Length == 7)
-                                            && methodUrlSplits[0].EqualsIgnoreCase("subscriptions")
-                                            && MethodHasSequenceType(restAPIMethod.ReturnType.Body, settings))
-                                        {
-                                            if (methodUrlSplits.Length == 5)
-                                            {
-                                                if (methodUrlSplits[2].EqualsIgnoreCase("providers"))
-                                                {
-                                                    restAPIMethodType = MethodType.ListBySubscription;
-                                                }
-                                                else
-                                                {
-                                                    restAPIMethodType = MethodType.ListByResourceGroup;
-                                                }
-                                            }
-                                            else if (methodUrlSplits[2].EqualsIgnoreCase("resourceGroups"))
-                                            {
-                                                restAPIMethodType = MethodType.ListByResourceGroup;
-                                            }
-                                        }
-                                        else if (IsTopLevelResourceUrl(methodUrlSplits))
-                                        {
-                                            restAPIMethodType = MethodType.Get;
-                                        }
-                                        break;
-
-                                    case HttpMethod.Delete:
-                                        if (IsTopLevelResourceUrl(methodUrlSplits))
-                                        {
-                                            restAPIMethodType = MethodType.Delete;
-                                        }
-                                        break;
-                                }
-                                simulateMethodAsPagingOperation = (restAPIMethodType == MethodType.ListByResourceGroup || restAPIMethodType == MethodType.ListBySubscription) &&
-                                    1 == methodGroup.Methods.Count((Method methodGroupMethod) =>
-                                    {
-                                        MethodType methodGroupMethodType = MethodType.Other;
-                                        string methodGroupMethodUrl = methodTypeTrailing.Replace(methodTypeLeading.Replace(methodGroupMethod.Url, ""), "");
-                                        string[] methodGroupMethodUrlSplits = methodGroupMethodUrl.Split('/');
-                                        switch (methodGroupMethod.HttpMethod)
-                                        {
-                                            case HttpMethod.Get:
-                                                if ((methodGroupMethodUrlSplits.Length == 5 || methodGroupMethodUrlSplits.Length == 7)
-                                                    && methodGroupMethodUrlSplits[0].EqualsIgnoreCase("subscriptions")
-                                                    && MethodHasSequenceType(methodGroupMethod.ReturnType.Body, settings))
-                                                {
-                                                    if (methodGroupMethodUrlSplits.Length == 5)
-                                                    {
-                                                        if (methodGroupMethodUrlSplits[2].EqualsIgnoreCase("providers"))
-                                                        {
-                                                            methodGroupMethodType = MethodType.ListBySubscription;
-                                                        }
-                                                        else
-                                                        {
-                                                            methodGroupMethodType = MethodType.ListByResourceGroup;
-                                                        }
-                                                    }
-                                                    else if (methodGroupMethodUrlSplits[2].EqualsIgnoreCase("resourceGroups"))
-                                                    {
-                                                        methodGroupMethodType = MethodType.ListByResourceGroup;
-                                                    }
-                                                }
-                                                else if (IsTopLevelResourceUrl(methodGroupMethodUrlSplits))
-                                                {
-                                                    methodGroupMethodType = MethodType.Get;
-                                                }
-                                                break;
-
-                                            case HttpMethod.Delete:
-                                                if (IsTopLevelResourceUrl(methodGroupMethodUrlSplits))
-                                                {
-                                                    methodGroupMethodType = MethodType.Delete;
-                                                }
-                                                break;
-                                        }
-                                        return methodGroupMethodType == restAPIMethodType;
-                                    });
-                            }
-
-                            if (methodIsPagingOperation || methodIsPagingNextOperation || simulateMethodAsPagingOperation)
-                            {
-                                methodImports.Add("com.microsoft.azure.v2.PagedList");
-
-                                if (!simulateMethodAsPagingOperation)
-                                {
-                                    methodImports.Remove("com.microsoft.rest.v2.ServiceCallback");
-                                }
-
-                                methodImports.Remove("java.util.ArrayList");
-                                methodImports.Add("com.microsoft.azure.v2.Page");
-                            }
-
-                            if ((methodIsPagingOperation || methodIsPagingNextOperation || simulateMethodAsPagingOperation || methodIsPagingNonPollingOperation) && restAPIMethodReturnBodyClientSequenceType != null)
-                            {
-                                string pageImplType = SequenceTypeGetPageImplType(restAPIMethodReturnBodyClientType);
-                                IEnumerable<string> pageImplTypeAzureImports = CompositeTypeImports(pageImplType, false, false, true, false, settings.Package);
-                                methodImports.RemoveWhere(i => pageImplTypeAzureImports.Contains(i));
-                            }
-                        }
-                    }
-                    imports.AddRange(methodImports);
-                }
-            }
-            imports.Add(httpPipelineImport);
-            if (settings.IsAzureOrFluent)
-            {
-                imports.Add(azureProxyImport);
-                imports.Add("com.microsoft.azure.v2.AzureServiceClient");
-                imports.Add(azureEnvironmentImport);
-            }
-            else
-            {
-                imports.Add(restProxyImport);
-                imports.Add("com.microsoft.rest.v2.ServiceClient");
-            }
-            javaFile.Import(imports);
+            javaFile.Import(serviceClient.Imports);
 
             javaFile.JavadocComment(comment =>
             {
-                string serviceClientTypeName = settings.IsFluent ? serviceClientClassName : serviceClientInterfaceName;
+                string serviceClientTypeName = settings.IsFluent ? serviceClient.ClassName : serviceClient.InterfaceName;
                 comment.Description($"Initializes a new instance of the {serviceClientTypeName} type.");
             });
             javaFile.PublicClass(serviceClientClassDeclaration, classBlock =>
             {
-                string restAPIInterfaceName = codeModel.Name.ToPascalCase();
-                if (!string.IsNullOrEmpty(restAPIInterfaceName))
-                {
-                    restAPIInterfaceName += "Service";
-                }
-
                 // Add proxy service member variable
-                if (restAPIMethods.Any())
+                if (serviceClient.RestAPI != null)
                 {
                     classBlock.JavadocComment($"The proxy service used to perform REST calls.");
-                    classBlock.PrivateMemberVariable(restAPIInterfaceName, "service");
+                    classBlock.PrivateMemberVariable(serviceClient.RestAPI.Name, "service");
                 }
 
                 // Add ServiceClient client property variables, getters, and setters
-                IEnumerable<Property> serviceClientProperties = GetServiceClientProperties(codeModel);
-                foreach (Property serviceClientProperty in serviceClientProperties)
+                foreach (ServiceClientProperty serviceClientProperty in serviceClient.Properties)
                 {
-                    string propertyDocumentation = serviceClientProperty.Documentation.ToString();
-                    IModelType propertyModelType = GetPropertyModelType(serviceClientProperty);
-                    IModelType serviceResponseVariant = GetIModelTypeNonNullableVariant(ConvertToClientType(propertyModelType)) ?? propertyModelType;
-                    string propertyType = IModelTypeName(serviceResponseVariant, settings);
-                    string propertyName = serviceClientProperty?.Name?.ToString();
-                    if (!string.IsNullOrEmpty(propertyName))
+                    classBlock.JavadocComment(comment =>
                     {
-                        CodeNamer codeNamer = CodeNamer.Instance;
-                        propertyName = codeNamer.CamelCase(codeNamer.RemoveInvalidCharacters(propertyName));
-                    }
-                    string propertyNameCamelCase = propertyName.ToCamelCase();
+                        comment.Description(serviceClientProperty.Description);
+                    });
+                    classBlock.PrivateMemberVariable($"{serviceClientProperty.ClientType} {serviceClientProperty.Name}");
 
                     classBlock.JavadocComment(comment =>
                     {
-                        comment.Description(propertyDocumentation);
+                        comment.Description($"Gets {serviceClientProperty.Description}");
+                        comment.Return($"the {serviceClientProperty.Name} value.");
                     });
-                    classBlock.PrivateMemberVariable($"{propertyType} {propertyNameCamelCase}");
-
-                    classBlock.JavadocComment(comment =>
+                    classBlock.PublicMethod($"{serviceClientProperty.ClientType} {serviceClientProperty.Name}()", function =>
                     {
-                        comment.Description($"Gets {propertyDocumentation}");
-                        comment.Return($"the {propertyNameCamelCase} value.");
-                    });
-                    classBlock.PublicMethod($"{propertyType} {propertyNameCamelCase}()", function =>
-                    {
-                        function.Return($"this.{propertyNameCamelCase}");
+                        function.Return($"this.{serviceClientProperty.Name}");
                     });
 
                     if (!serviceClientProperty.IsReadOnly)
                     {
                         classBlock.JavadocComment(comment =>
                         {
-                            comment.Description($"Sets {propertyDocumentation}");
-                            comment.Param(propertyNameCamelCase, $"the {propertyNameCamelCase} value.");
+                            comment.Description($"Sets {serviceClientProperty.Description}");
+                            comment.Param(serviceClientProperty.Name, $"the {serviceClientProperty.Name} value.");
                             comment.Return("the service client itself");
                         });
-                        classBlock.PublicMethod($"{serviceClientClassName} with{propertyName.ToPascalCase()}({propertyType} {propertyNameCamelCase})", function =>
+                        classBlock.PublicMethod($"{serviceClient.ClassName} with{serviceClientProperty.Name.ToPascalCase()}({serviceClientProperty.ClientType} {serviceClientProperty.Name})", function =>
                         {
-                            function.Line($"this.{propertyNameCamelCase} = {propertyNameCamelCase};");
+                            function.Line($"this.{serviceClientProperty.Name} = {serviceClientProperty.Name};");
                             function.Return("this");
                         });
                     }
                 }
 
                 // Method Group Client declarations and getters
-                foreach (MethodGroup methodGroup in methodGroups)
+                foreach (MethodGroupClient methodGroupClient in serviceClient.MethodGroupClients)
                 {
-                    string methodGroupName = methodGroup.Name.ToString().ToCamelCase();
-                    if (!methodGroupName.EndsWith('s'))
+                    classBlock.JavadocComment(comment =>
                     {
-                        methodGroupName += 's';
-                    }
-
-                    string methodGroupDeclarationType = (settings.IsFluent ? methodGroupName + "Inner" : methodGroupName).ToPascalCase();
+                        comment.Description($"The {methodGroupClient.VariableType} object to access its operations.");
+                    });
+                    classBlock.PrivateMemberVariable(methodGroupClient.VariableType, methodGroupClient.VariableName);
 
                     classBlock.JavadocComment(comment =>
                     {
-                        comment.Description($"The {methodGroupDeclarationType} object to access its operations.");
+                        comment.Description($"Gets the {methodGroupClient.VariableType} object to access its operations.");
+                        comment.Return($"the {methodGroupClient.VariableType} object.");
                     });
-                    classBlock.PrivateMemberVariable(methodGroupDeclarationType, methodGroupName);
-
-                    classBlock.JavadocComment(comment =>
+                    classBlock.PublicMethod($"{methodGroupClient.VariableType} {methodGroupClient.VariableName}()", function =>
                     {
-                        comment.Description($"Gets the {methodGroupDeclarationType} object to access its operations.");
-                        comment.Return($"the {methodGroupDeclarationType} object.");
-                    });
-                    classBlock.PublicMethod($"{methodGroupDeclarationType} {methodGroupName}()", function =>
-                    {
-                        function.Return($"this.{methodGroupName}");
+                        function.Return($"this.{methodGroupClient.VariableName}");
                     });
                 }
 
-                string proxyType = settings.IsAzureOrFluent ? azureProxyType : restProxyType;
-
                 // Service Client Constructors
-                string constructorDescription = $"Initializes an instance of {serviceClientInterfaceName} client.";
+                string constructorDescription = $"Initializes an instance of {serviceClient.InterfaceName} client.";
                 if (settings.IsAzureOrFluent)
                 {
-                    if (HasServiceClientCredentials(codeModel))
+                    if (serviceClient.UsesCredentials)
                     {
-                        string createDefaultPipelineExpression = $"{proxyType}.createDefaultPipeline({serviceClientClassName}.class, {credentialsVariableName})";
+                        string createDefaultPipelineExpression = $"{azureProxyType}.createDefaultPipeline({serviceClient.ClassName}.class, {credentialsVariableName})";
 
                         classBlock.JavadocComment(comment =>
                         {
                             comment.Description(constructorDescription);
                             comment.Param(credentialsVariableName, credentialsDescription);
                         });
-                        classBlock.PublicConstructor($"{serviceClientClassName}({serviceClientCredentialsType} {credentialsVariableName})", constructor =>
+                        classBlock.PublicConstructor($"{serviceClient.ClassName}({serviceClientCredentialsType} {credentialsVariableName})", constructor =>
                         {
                             constructor.Line($"this({createDefaultPipelineExpression});");
                         });
@@ -3240,19 +3503,19 @@ namespace AutoRest.Java
                             comment.Param(credentialsVariableName, credentialsDescription);
                             comment.Param(azureEnvironmentVariableName, azureEnvironmentDescription);
                         });
-                        classBlock.PublicConstructor($"{serviceClientClassName}({serviceClientCredentialsType} {credentialsVariableName}, {azureEnvironmentType} {azureEnvironmentVariableName})", constructor =>
+                        classBlock.PublicConstructor($"{serviceClient.ClassName}({serviceClientCredentialsType} {credentialsVariableName}, {azureEnvironmentType} {azureEnvironmentVariableName})", constructor =>
                         {
                             constructor.Line($"this({createDefaultPipelineExpression}, {azureEnvironmentVariableName});");
                         });
                     }
                     else
                     {
-                        string createDefaultPipelineExpression = $"{proxyType}.createDefaultPipeline({serviceClientClassName}.class)";
+                        string createDefaultPipelineExpression = $"{azureProxyType}.createDefaultPipeline({serviceClient.ClassName}.class)";
                         classBlock.JavadocComment(comment =>
                         {
                             comment.Description(constructorDescription);
                         });
-                        classBlock.PublicConstructor($"{serviceClientClassName}()", constructor =>
+                        classBlock.PublicConstructor($"{serviceClient.ClassName}()", constructor =>
                         {
                             constructor.Line($"this({createDefaultPipelineExpression});");
                         });
@@ -3262,7 +3525,7 @@ namespace AutoRest.Java
                             comment.Description(constructorDescription);
                             comment.Param(azureEnvironmentVariableName, azureEnvironmentDescription);
                         });
-                        classBlock.PublicConstructor($"{serviceClientClassName}({azureEnvironmentType} {azureEnvironmentVariableName})", constructor =>
+                        classBlock.PublicConstructor($"{serviceClient.ClassName}({azureEnvironmentType} {azureEnvironmentVariableName})", constructor =>
                         {
                             constructor.Line($"this({createDefaultPipelineExpression}, {azureEnvironmentVariableName});");
                         });
@@ -3273,7 +3536,7 @@ namespace AutoRest.Java
                         comment.Description(constructorDescription);
                         comment.Param(httpPipelineVariableName, httpPipelineDescription);
                     });
-                    classBlock.PublicConstructor($"{serviceClientClassName}({httpPipelineType} {httpPipelineVariableName})", constructor =>
+                    classBlock.PublicConstructor($"{serviceClient.ClassName}({httpPipelineType} {httpPipelineVariableName})", constructor =>
                     {
                         constructor.Line($"this({httpPipelineVariableName}, null);");
                     });
@@ -3284,86 +3547,26 @@ namespace AutoRest.Java
                         comment.Param(httpPipelineVariableName, httpPipelineDescription);
                         comment.Param(azureEnvironmentVariableName, azureEnvironmentDescription);
                     });
-                    classBlock.PublicConstructor($"{serviceClientClassName}({httpPipelineType} {httpPipelineVariableName}, {azureEnvironmentType} {azureEnvironmentVariableName})", constructor =>
+                    classBlock.PublicConstructor($"{serviceClient.ClassName}({httpPipelineType} {httpPipelineVariableName}, {azureEnvironmentType} {azureEnvironmentVariableName})", constructor =>
                     {
-                        List<string> superCallArgumentList = new List<string>() { httpPipelineVariableName };
-                        if (settings.IsAzureOrFluent)
-                        {
-                            superCallArgumentList.Add(azureEnvironmentVariableName);
-                        }
-                        constructor.Line($"super({string.Join(", ", superCallArgumentList)});");
+                        constructor.Line($"super({httpPipelineVariableName}, {azureEnvironmentVariableName});");
 
-                        foreach (Property serviceClientProperty in serviceClientProperties)
+                        foreach (ServiceClientProperty serviceClientProperty in serviceClient.Properties)
                         {
-                            string defaultValue = serviceClientProperty.DefaultValue;
-                            IModelType propertyModelType = GetPropertyModelType(serviceClientProperty);
-                            if (defaultValue != null)
+                            if (serviceClientProperty.DefaultValueExpression != null)
                             {
-                                if (propertyModelType is PrimaryType propertyModelPrimaryType)
-                                {
-                                    switch (propertyModelPrimaryType.KnownPrimaryType)
-                                    {
-                                        case KnownPrimaryType.Double:
-                                            defaultValue = double.Parse(defaultValue).ToString();
-                                            break;
-
-                                        case KnownPrimaryType.String:
-                                            defaultValue = CodeNamer.Instance.QuoteValue(defaultValue);
-                                            break;
-
-                                        case KnownPrimaryType.Boolean:
-                                            defaultValue = defaultValue.ToLowerInvariant();
-                                            break;
-
-                                        case KnownPrimaryType.Long:
-                                            defaultValue = defaultValue + 'L';
-                                            break;
-
-                                        case KnownPrimaryType.Date:
-                                            defaultValue = $"LocalDate.parse(\"{defaultValue}\")";
-                                            break;
-
-                                        case KnownPrimaryType.DateTime:
-                                        case KnownPrimaryType.DateTimeRfc1123:
-                                            defaultValue = $"DateTime.parse(\"{defaultValue}\")";
-                                            break;
-
-                                        case KnownPrimaryType.TimeSpan:
-                                            defaultValue = $"Period.parse(\"{defaultValue}\")";
-                                            break;
-
-                                        case KnownPrimaryType.ByteArray:
-                                            defaultValue = $"\"{defaultValue}\".getBytes()";
-                                            break;
-                                    }
-                                }
-
-                                string serviceClientPropertyName = serviceClientProperty?.Name?.ToString();
-                                if (!string.IsNullOrEmpty(serviceClientPropertyName))
-                                {
-                                    CodeNamer codeNamer = CodeNamer.Instance;
-                                    serviceClientPropertyName = codeNamer.CamelCase(codeNamer.RemoveInvalidCharacters(serviceClientPropertyName));
-                                }
-                                constructor.Line($"this.{serviceClientPropertyName} = {defaultValue};");
+                                constructor.Line($"this.{serviceClientProperty.Name} = {serviceClientProperty.DefaultValueExpression};");
                             }
                         }
 
-                        foreach (MethodGroup methodGroup in methodGroups)
+                        foreach (MethodGroupClient methodGroupClient in serviceClient.MethodGroupClients)
                         {
-                            string methodGroupClientName = methodGroup.Name.ToString();
-                            if (!methodGroupClientName.EndsWith('s'))
-                            {
-                                methodGroupClientName += 's';
-                            }
-
-                            string methodGroupClientClassName = methodGroupClientName.ToPascalCase() + (settings.IsFluent ? "Inner" : "Impl");
-
-                            constructor.Line($"this.{methodGroupClientName.ToCamelCase()} = new {methodGroupClientClassName}(this);");
+                            constructor.Line($"this.{methodGroupClient.VariableName} = new {methodGroupClient.ClassName}(this);");
                         }
 
-                        if (restAPIMethods.Any())
+                        if (serviceClient.RestAPI != null)
                         {
-                            constructor.Line($"this.service = {proxyType}.create({restAPIInterfaceName}.class, this);");
+                            constructor.Line($"this.service = {azureProxyType}.create({serviceClient.RestAPI.Name}.class, this);");
                         }
                     });
                 }
@@ -3373,9 +3576,9 @@ namespace AutoRest.Java
                     {
                         comment.Description(constructorDescription);
                     });
-                    classBlock.PublicConstructor($"{serviceClientClassName}()", constructor =>
+                    classBlock.PublicConstructor($"{serviceClient.ClassName}()", constructor =>
                     {
-                        constructor.Line($"this({proxyType}.createDefaultPipeline());");
+                        constructor.Line($"this({restProxyType}.createDefaultPipeline());");
                     });
 
                     classBlock.JavadocComment(comment =>
@@ -3383,87 +3586,34 @@ namespace AutoRest.Java
                         comment.Description(constructorDescription);
                         comment.Param(httpPipelineVariableName, httpPipelineDescription);
                     });
-                    classBlock.PublicConstructor($"{serviceClientClassName}({httpPipelineType} {httpPipelineVariableName})", constructor =>
+                    classBlock.PublicConstructor($"{serviceClient.ClassName}({httpPipelineType} {httpPipelineVariableName})", constructor =>
                     {
                         constructor.Line($"super({httpPipelineVariableName});");
 
-                        foreach (Property serviceClientProperty in GetServiceClientProperties(codeModel))
+                        foreach (ServiceClientProperty serviceClientProperty in serviceClient.Properties)
                         {
-                            string defaultValue = serviceClientProperty.DefaultValue;
-                            IModelType propertyModelType = GetPropertyModelType(serviceClientProperty);
-                            if (defaultValue != null)
+                            if (serviceClientProperty.DefaultValueExpression != null)
                             {
-                                if (propertyModelType is PrimaryType propertyModelPrimaryType)
-                                {
-                                    switch (propertyModelPrimaryType.KnownPrimaryType)
-                                    {
-                                        case KnownPrimaryType.Double:
-                                            defaultValue = double.Parse(defaultValue).ToString();
-                                            break;
-
-                                        case KnownPrimaryType.String:
-                                            defaultValue = CodeNamer.Instance.QuoteValue(defaultValue);
-                                            break;
-
-                                        case KnownPrimaryType.Boolean:
-                                            defaultValue = defaultValue.ToLowerInvariant();
-                                            break;
-
-                                        case KnownPrimaryType.Long:
-                                            defaultValue = defaultValue + 'L';
-                                            break;
-
-                                        case KnownPrimaryType.Date:
-                                            defaultValue = $"LocalDate.parse(\"{defaultValue}\")";
-                                            break;
-
-                                        case KnownPrimaryType.DateTime:
-                                        case KnownPrimaryType.DateTimeRfc1123:
-                                            defaultValue = $"DateTime.parse(\"{defaultValue}\")";
-                                            break;
-
-                                        case KnownPrimaryType.TimeSpan:
-                                            defaultValue = $"Period.parse(\"{defaultValue}\")";
-                                            break;
-
-                                        case KnownPrimaryType.ByteArray:
-                                            defaultValue = $"\"{defaultValue}\".getBytes()";
-                                            break;
-                                    }
-                                }
-
-                                string serviceClientPropertyName = serviceClientProperty?.Name?.ToString();
-                                if (!string.IsNullOrEmpty(serviceClientPropertyName))
-                                {
-                                    CodeNamer codeNamer = CodeNamer.Instance;
-                                    serviceClientPropertyName = codeNamer.CamelCase(codeNamer.RemoveInvalidCharacters(serviceClientPropertyName));
-                                }
-                                constructor.Line($"this.{serviceClientPropertyName} = {defaultValue};");
+                                constructor.Line($"this.{serviceClientProperty.Name} = {serviceClientProperty.DefaultValueExpression};");
                             }
                         }
 
-                        foreach (MethodGroup methodGroup in methodGroups)
+                        foreach (MethodGroupClient methodGroupClient in serviceClient.MethodGroupClients)
                         {
-                            string methodGroupClientName = methodGroup.Name.ToString();
-                            if (!methodGroupClientName.EndsWith('s'))
-                            {
-                                methodGroupClientName += 's';
-                            }
-
-                            string methodGroupClientClassName = methodGroupClientName.ToPascalCase() + "Impl";
-                            constructor.Line($"this.{methodGroupClientName.ToCamelCase()} = new {methodGroupClientClassName}(this);");
+                            constructor.Line($"this.{methodGroupClient.VariableName} = new {methodGroupClient.ClassName}(this);");
                         }
 
-                        if (restAPIMethods.Any())
+                        if (serviceClient.RestAPI != null)
                         {
-                            constructor.Line($"this.service = {proxyType}.create({restAPIInterfaceName}.class, this);");
+                            constructor.Line($"this.service = {restProxyType}.create({serviceClient.RestAPI.Name}.class, this);");
                         }
                     });
                 }
 
-                AddRestAPIInterface(classBlock, codeModel, null, settings);
+                AddRestAPIInterface(classBlock, serviceClient.RestAPI, serviceClient.InterfaceName, settings);
 
-                AddClientMethodOverloads(classBlock, restAPIMethods, settings);
+                IEnumerable<Method> codeModelRestAPIMethods = codeModel.Methods.Where(m => m.Group.IsNullOrEmpty());
+                AddClientMethodOverloads(classBlock, codeModelRestAPIMethods, settings);
             });
 
             return javaFile;
@@ -3471,12 +3621,12 @@ namespace AutoRest.Java
 
         public static JavaFile GetServiceClientInterfaceJavaFile(CodeModel codeModel, JavaSettings settings)
         {
-            string interfaceName = codeModel.Name.ToPascalCase();
+            ServiceClient serviceClient = ParseServiceClient(codeModel, settings);
 
-            JavaFile javaFile = GetJavaFileWithHeaderAndPackage(null, settings, interfaceName);
+            JavaFile javaFile = GetJavaFileWithHeaderAndPackage(null, settings, serviceClient.InterfaceName);
 
             HashSet<string> imports = new HashSet<string>();
-            foreach (Method restAPIMethod in GetRestAPIMethods(codeModel))
+            foreach (Method restAPIMethod in codeModel.Methods.Where(m => m.Group.IsNullOrEmpty()))
             {
                 HashSet<string> methodImports = new HashSet<string>()
                 {
@@ -3503,7 +3653,14 @@ namespace AutoRest.Java
                     IModelType parameterModelType = parameter.ModelType;
                     if (parameterModelType != null && !IsNullable(parameter))
                     {
-                        parameterModelType = GetIModelTypeNonNullableVariant(parameterModelType);
+                        if (parameterModelType is PrimaryType parameterModelPrimaryType)
+                        {
+                            PrimaryType nonNullableParameterModelPrimaryType = DependencyInjection.New<PrimaryType>(parameterModelPrimaryType.KnownPrimaryType);
+                            nonNullableParameterModelPrimaryType.Format = parameterModelPrimaryType.Format;
+                            primaryTypeNotWantNullable.Add(nonNullableParameterModelPrimaryType);
+
+                            parameterModelType = nonNullableParameterModelPrimaryType;
+                        }
                     }
                     IModelType parameterClientType = ConvertToClientType(parameterModelType);
                     methodImports.AddRange(GetIModelTypeImports(parameterClientType, settings));
@@ -3540,7 +3697,13 @@ namespace AutoRest.Java
                 }
                 else if (restAPIMethodExceptionType is CompositeType compositeReturnType)
                 {
-                    methodOperationExceptionTypeName = GetCompositeTypeName(compositeReturnType, settings) + "Exception";
+                    methodOperationExceptionTypeName = compositeReturnType.Name.ToString();
+                    if (settings.IsFluent && !string.IsNullOrEmpty(methodOperationExceptionTypeName) && innerModelCompositeType.Contains(compositeReturnType))
+                    {
+                        methodOperationExceptionTypeName += "Inner";
+                    }
+                    methodOperationExceptionTypeName += "Exception";
+
                     if (compositeReturnType.Extensions.ContainsKey(SwaggerExtensions.NameOverrideExtension))
                     {
                         JContainer ext = compositeReturnType.Extensions[SwaggerExtensions.NameOverrideExtension] as JContainer;
@@ -3704,61 +3867,42 @@ namespace AutoRest.Java
 
             javaFile.JavadocComment(comment =>
             {
-                comment.Description($"The interface for {interfaceName} class.");
+                comment.Description($"The interface for {serviceClient.InterfaceName} class.");
             });
-            javaFile.PublicInterface(interfaceName, interfaceBlock =>
+            javaFile.PublicInterface(serviceClient.InterfaceName, interfaceBlock =>
             {
-                foreach (Property property in GetServiceClientProperties(codeModel))
+                foreach (ServiceClientProperty property in serviceClient.Properties)
                 {
-                    string propertyDescription = property.Documentation;
-                    string propertyName = property?.Name?.ToString();
-                    if (!string.IsNullOrEmpty(propertyName))
-                    {
-                        CodeNamer codeNamer = CodeNamer.Instance;
-                        propertyName = codeNamer.CamelCase(codeNamer.RemoveInvalidCharacters(propertyName));
-                    }
-                    string propertyNameCamelCase = propertyName.ToCamelCase();
-                    IModelType propertyModelType = GetPropertyModelType(property);
-                    IModelType serviceResponseVariant = GetIModelTypeNonNullableVariant(ConvertToClientType(propertyModelType)) ?? propertyModelType;
-                    string propertyType = IModelTypeName(serviceResponseVariant, settings);
-
                     interfaceBlock.JavadocComment(comment =>
                     {
-                        comment.Description($"Gets {propertyDescription}");
-                        comment.Return($"the {propertyName} value");
+                        comment.Description($"Gets {property.Description}");
+                        comment.Return($"the {property.Name} value");
                     });
-                    interfaceBlock.PublicMethod($"{propertyType} {propertyNameCamelCase}()");
+                    interfaceBlock.PublicMethod($"{property.ClientType} {property.Name}()");
 
                     if (!property.IsReadOnly)
                     {
                         interfaceBlock.JavadocComment(comment =>
                         {
-                            comment.Description($"Sets {propertyDescription}");
-                            comment.Param(propertyNameCamelCase, $"the {propertyName} value");
+                            comment.Description($"Sets {property.Description}");
+                            comment.Param(property.Name, $"the {property.Name} value");
                             comment.Return("the service client itself");
                         });
-                        interfaceBlock.PublicMethod($"{interfaceName} with{propertyName.ToPascalCase()}({propertyType} {propertyNameCamelCase})");
+                        interfaceBlock.PublicMethod($"{serviceClient.InterfaceName} with{property.Name.ToPascalCase()}({property.ClientType} {property.Name})");
                     }
                 }
 
-                foreach (MethodGroup methodGroup in GetMethodGroups(codeModel))
+                foreach (MethodGroupClient methodGroupClient in serviceClient.MethodGroupClients)
                 {
-                    string methodGroupName = methodGroup.Name.ToString().ToCamelCase();
-                    if (!methodGroupName.EndsWith('s'))
-                    {
-                        methodGroupName += 's';
-                    }
-
-                    string methodGroupClientInterfaceName = methodGroupName.ToPascalCase();
                     interfaceBlock.JavadocComment(comment =>
                     {
-                        comment.Description($"Gets the {methodGroupClientInterfaceName} object to access its operations.");
-                        comment.Return($"the {methodGroupClientInterfaceName} object.");
+                        comment.Description($"Gets the {methodGroupClient.InterfaceName} object to access its operations.");
+                        comment.Return($"the {methodGroupClient.InterfaceName} object.");
                     });
-                    interfaceBlock.PublicMethod($"{methodGroupClientInterfaceName} {methodGroupName}()");
+                    interfaceBlock.PublicMethod($"{methodGroupClient.InterfaceName} {methodGroupClient.VariableName}()");
                 }
 
-                AddClientMethodOverloads(interfaceBlock, GetRestAPIMethods(codeModel), settings);
+                AddClientMethodOverloads(interfaceBlock, codeModel.Methods.Where(m => m.Group.IsNullOrEmpty()), settings);
             });
 
             return javaFile;
@@ -3801,7 +3945,7 @@ namespace AutoRest.Java
 
                 AddRestAPIInterface(classBlock, methodGroupClient.RestAPI, methodGroupClient.InterfaceName, settings);
 
-                AddClientMethodOverloads(classBlock, GetRestAPIMethods(methodGroup), settings);
+                AddClientMethodOverloads(classBlock, methodGroup.Methods, settings);
             });
 
             return javaFile;
@@ -3809,13 +3953,9 @@ namespace AutoRest.Java
 
         public static JavaFile GetMethodGroupClientInterfaceJavaFile(MethodGroup methodGroup, JavaSettings settings)
         {
-            string methodGroupClientInterfaceName = methodGroup.Name.ToString().ToPascalCase();
-            if (!methodGroupClientInterfaceName.EndsWith('s'))
-            {
-                methodGroupClientInterfaceName += 's';
-            }
+            MethodGroupClient methodGroupClient = ParseMethodGroupClient(methodGroup, settings);
 
-            JavaFile javaFile = GetJavaFileWithHeaderAndPackage(null, settings, methodGroupClientInterfaceName);
+            JavaFile javaFile = GetJavaFileWithHeaderAndPackage(null, settings, methodGroupClient.InterfaceName);
 
             HashSet<string> imports = new HashSet<string>();
             foreach (Method restAPIMethod in methodGroup.Methods)
@@ -3845,7 +3985,14 @@ namespace AutoRest.Java
                     IModelType parameterModelType = parameter.ModelType;
                     if (parameterModelType != null && !IsNullable(parameter))
                     {
-                        parameterModelType = GetIModelTypeNonNullableVariant(parameterModelType);
+                        if (parameterModelType is PrimaryType parameterModelPrimaryType)
+                        {
+                            PrimaryType nonNullableParameterModelPrimaryType = DependencyInjection.New<PrimaryType>(parameterModelPrimaryType.KnownPrimaryType);
+                            nonNullableParameterModelPrimaryType.Format = parameterModelPrimaryType.Format;
+                            primaryTypeNotWantNullable.Add(nonNullableParameterModelPrimaryType);
+
+                            parameterModelType = nonNullableParameterModelPrimaryType;
+                        }
                     }
                     IModelType parameterClientType = ConvertToClientType(parameterModelType);
                     methodImports.AddRange(GetIModelTypeImports(parameterClientType, settings));
@@ -3881,7 +4028,13 @@ namespace AutoRest.Java
                 }
                 else if (restAPIMethodExceptionType is CompositeType compositeReturnType)
                 {
-                    methodOperationExceptionTypeName = GetCompositeTypeName(compositeReturnType, settings) + "Exception";
+                    methodOperationExceptionTypeName = compositeReturnType.Name.ToString();
+                    if (settings.IsFluent && !string.IsNullOrEmpty(methodOperationExceptionTypeName) && innerModelCompositeType.Contains(compositeReturnType))
+                    {
+                        methodOperationExceptionTypeName += "Inner";
+                    }
+                    methodOperationExceptionTypeName += "Exception";
+
                     if (compositeReturnType.Extensions.ContainsKey(SwaggerExtensions.NameOverrideExtension))
                     {
                         JContainer ext = compositeReturnType.Extensions[SwaggerExtensions.NameOverrideExtension] as JContainer;
@@ -4040,11 +4193,11 @@ namespace AutoRest.Java
 
             javaFile.JavadocComment(settings.MaximumJavadocCommentWidth, (comment) =>
             {
-                comment.Description($"An instance of this class provides access to all the operations defined in {methodGroupClientInterfaceName}.");
+                comment.Description($"An instance of this class provides access to all the operations defined in {methodGroupClient.InterfaceName}.");
             });
-            javaFile.PublicInterface(methodGroupClientInterfaceName, interfaceBlock =>
+            javaFile.PublicInterface(methodGroupClient.InterfaceName, interfaceBlock =>
             {
-                AddClientMethodOverloads(interfaceBlock, GetRestAPIMethods(methodGroup), settings);
+                AddClientMethodOverloads(interfaceBlock, methodGroup.Methods, settings);
             });
             return javaFile;
         }
@@ -4114,7 +4267,12 @@ namespace AutoRest.Java
                 }
                 else if (!GetExtensionBool(modelType, SwaggerExtensions.ExternalExtension))
                 {
-                    string modelTypeName = GetCompositeTypeName(modelType, settings);
+                    string modelTypeName = modelType.Name.ToString();
+                    if (settings.IsFluent && !string.IsNullOrEmpty(modelTypeName) && innerModelCompositeType.Contains(modelType))
+                    {
+                        modelTypeName += "Inner";
+                    }
+
                     bool modelTypeIsAzureResourceExtension = GetExtensionBool(modelType, AzureExtensions.AzureResourceExtension);
                     shouldParseModelType = modelTypeName != "Resource" && (modelTypeName != "SubResource" || !modelTypeIsAzureResourceExtension);
                 }
@@ -4175,7 +4333,7 @@ namespace AutoRest.Java
             }
             javaFile.PublicClass(classNameWithBaseType, (classBlock) =>
             {
-                foreach (ServiceProperty property in model.Properties)
+                foreach (ServiceModelProperty property in model.Properties)
                 {
                     classBlock.JavadocComment(settings.MaximumJavadocCommentWidth, (comment) =>
                     {
@@ -4202,7 +4360,7 @@ namespace AutoRest.Java
                     classBlock.PrivateMemberVariable($"{property.WireTypeName} {property.Name}");
                 }
 
-                IEnumerable<ServiceProperty> constantProperties = model.Properties.Where(property => property.IsConstant);
+                IEnumerable<ServiceModelProperty> constantProperties = model.Properties.Where(property => property.IsConstant);
                 if (constantProperties.Any())
                 {
                     classBlock.JavadocComment(settings.MaximumJavadocCommentWidth, (comment) =>
@@ -4211,7 +4369,7 @@ namespace AutoRest.Java
                     });
                     classBlock.PublicConstructor($"{model.Name}()", (constructor) =>
                     {
-                        foreach (ServiceProperty constantProperty in constantProperties)
+                        foreach (ServiceModelProperty constantProperty in constantProperties)
                         {
                             bool propertyIsPrimitiveType = !(constantProperty.ModelTypeIsComposite);
                             if (!propertyIsPrimitiveType)
@@ -4226,7 +4384,7 @@ namespace AutoRest.Java
                     });
                 }
 
-                foreach (ServiceProperty property in model.Properties)
+                foreach (ServiceModelProperty property in model.Properties)
                 {
                     classBlock.JavadocComment(settings.MaximumJavadocCommentWidth, (comment) =>
                     {
@@ -4569,44 +4727,7 @@ namespace AutoRest.Java
         }
 
         private static IEnumerable<Property> GetServiceClientProperties(CodeModel codeModel)
-            => codeModel.Properties.Where(p => !IsServiceClientCredentialProperty(p));
-
-        private static bool HasServiceClientCredentials(CodeModel codeModel)
-            => codeModel.Properties.Any(IsServiceClientCredentialProperty);
-
-        private static bool IsServiceClientCredentialProperty(Property property)
-            => GetPropertyModelType(property).IsPrimaryType(KnownPrimaryType.Credentials);
-
-        private static IEnumerable<MethodGroup> GetMethodGroups(CodeModel codeModel)
-            => codeModel.Operations.Where((MethodGroup operation) => !string.IsNullOrEmpty(operation?.Name?.ToString()));
-
-        /// <summary>
-        /// Get the REST API methods that are defined for the provided CodeModel/ServiceClient.
-        /// </summary>
-        /// <param name="codeModel"></param>
-        /// <returns></returns>
-        private static IEnumerable<Method> GetRestAPIMethods(CodeModel codeModel)
-            => codeModel.Methods.Where(m => m.Group.IsNullOrEmpty());
-
-        /// <summary>
-        /// Get the REST API methods that are defined for the provided MethodGroup/MethodGroupClient.
-        /// </summary>
-        /// <param name="methodGroup"></param>
-        /// <returns></returns>
-        private static IEnumerable<Method> GetRestAPIMethods(MethodGroup methodGroup)
-            => methodGroup.Methods;
-
-        private static IModelType GetPropertyModelType(Property property)
-        {
-            IModelType propertyModelType = property.ModelType;
-            if (propertyModelType == null)
-            {
-                return null;
-            }
-            return IsNullable(property)
-                ? propertyModelType
-                : GetIModelTypeNonNullableVariant(propertyModelType);
-        }
+            => codeModel.Properties.Where((Property property) => !(property.ModelType is PrimaryType propertyModelPrimaryType && propertyModelPrimaryType.KnownPrimaryType == KnownPrimaryType.Credentials));
 
         private static IEnumerable<string> GetIModelTypeImports(IModelType modelType, JavaSettings settings)
         {
@@ -4631,7 +4752,12 @@ namespace AutoRest.Java
                 }
                 else if (modelType is CompositeType compositeType)
                 {
-                    string compositeTypeName = GetCompositeTypeName(compositeType, settings);
+                    string compositeTypeName = compositeType.Name.ToString();
+                    if (settings.IsFluent && !string.IsNullOrEmpty(compositeTypeName) && innerModelCompositeType.Contains(compositeType))
+                    {
+                        compositeTypeName += "Inner";
+                    }
+
                     bool compositeTypeIsExternalExtension = GetExtensionBool(compositeType, SwaggerExtensions.ExternalExtension);
                     bool compositeTypeIsAzureResourceExtension = GetExtensionBool(compositeType, AzureExtensions.AzureResourceExtension);
                     result.AddRange(CompositeTypeImports(compositeTypeName, compositeTypeIsExternalExtension, compositeTypeIsAzureResourceExtension, settings.IsAzure, settings.IsFluent, settings.Package));
@@ -4828,24 +4954,12 @@ namespace AutoRest.Java
                 }
                 else if (primaryType.KnownPrimaryType == KnownPrimaryType.None)
                 {
-                    result = GetIModelTypeNonNullableVariant(primaryType);
+                    PrimaryType nonNullableResult = DependencyInjection.New<PrimaryType>(primaryType.KnownPrimaryType);
+                    nonNullableResult.Format = primaryType.Format;
+                    primaryTypeNotWantNullable.Add(nonNullableResult);
+
+                    result = nonNullableResult;
                 }
-            }
-
-            return result;
-        }
-
-        private static IModelType GetIModelTypeNonNullableVariant(IModelType modelType)
-        {
-            IModelType result = modelType;
-
-            if (modelType is PrimaryType primaryType)
-            {
-                PrimaryType resultPrimaryType = DependencyInjection.New<PrimaryType>(primaryType.KnownPrimaryType);
-                resultPrimaryType.Format = primaryType.Format;
-                primaryTypeNotWantNullable.Add(resultPrimaryType);
-
-                result = resultPrimaryType;
             }
 
             return result;
@@ -4859,11 +4973,16 @@ namespace AutoRest.Java
                 result = modelType.Name.ToString();
                 if (modelType is EnumType enumType)
                 {
-                    result = GetEnumTypeName(enumType);
+                    result = enumType.Name.ToString();
+                    result = (string.IsNullOrEmpty(result) || result == "enum" ? "String" : CodeNamer.Instance.GetTypeName(result));
                 }
                 else if (modelType is SequenceType sequenceType)
                 {
-                    result = GetSequenceTypeName(sequenceType, settings);
+                    result = $"List<{IModelTypeName(sequenceType.ElementType, settings)}>";
+                    if (pagedListTypes.Contains(sequenceType))
+                    {
+                        result = "Paged" + result;
+                    }
                 }
                 else if (modelType is DictionaryType dictionaryType)
                 {
@@ -4871,142 +4990,76 @@ namespace AutoRest.Java
                 }
                 else if (modelType is CompositeType compositeType)
                 {
-                    result = GetCompositeTypeName(compositeType, settings);
+                    result = compositeType.Name.ToString();
+                    if (settings.IsFluent && !string.IsNullOrEmpty(result) && innerModelCompositeType.Contains(compositeType))
+                    {
+                        result += "Inner";
+                    }
                 }
                 else if (modelType is PrimaryType primaryType)
                 {
-                    result = PrimaryTypeName(primaryType);
-                }
-            }
-            return result;
-        }
-
-        private static string PrimaryTypeName(PrimaryType primaryType)
-        {
-            string result;
-            switch (primaryType.KnownPrimaryType)
-            {
-                case KnownPrimaryType.None:
-                    result = PrimaryTypeGetWantNullable(primaryType) ? "Void" : "void";
-                    break;
-                case KnownPrimaryType.Base64Url:
-                    result = "Base64Url";
-                    break;
-                case KnownPrimaryType.Boolean:
-                    result = PrimaryTypeGetWantNullable(primaryType) ? "Boolean" : "boolean";
-                    break;
-                case KnownPrimaryType.ByteArray:
-                    result = "byte[]";
-                    break;
-                case KnownPrimaryType.Date:
-                    result = "LocalDate";
-                    break;
-                case KnownPrimaryType.DateTime:
-                    result = "DateTime";
-                    break;
-                case KnownPrimaryType.DateTimeRfc1123:
-                    result = "DateTimeRfc1123";
-                    break;
-                case KnownPrimaryType.Double:
-                    result = PrimaryTypeGetWantNullable(primaryType) ? "Double" : "double";
-                    break;
-                case KnownPrimaryType.Decimal:
-                    result = "BigDecimal";
-                    break;
-                case KnownPrimaryType.Int:
-                    result = PrimaryTypeGetWantNullable(primaryType) ? "Integer" : "int";
-                    break;
-                case KnownPrimaryType.Long:
-                    result = PrimaryTypeGetWantNullable(primaryType) ? "Long" : "long";
-                    break;
-                case KnownPrimaryType.Stream:
-                    result = "Flowable<byte[]>";
-                    break;
-                case KnownPrimaryType.String:
-                    result = "String";
-                    break;
-                case KnownPrimaryType.TimeSpan:
-                    result = "Period";
-                    break;
-                case KnownPrimaryType.UnixTime:
-                    result = PrimaryTypeGetWantNullable(primaryType) ? "Long" : "long";
-                    break;
-                case KnownPrimaryType.Uuid:
-                    result = "UUID";
-                    break;
-                case KnownPrimaryType.Object:
-                    result = "Object";
-                    break;
-                case KnownPrimaryType.Credentials:
-                    result = serviceClientCredentialsType;
-                    break;
-
-                default:
-                    throw new NotImplementedException($"Primary type {primaryType.KnownPrimaryType} is not implemented in {primaryType.GetType().Name}");
-            }
-            return result;
-        }
-
-        private static string GetEnumTypeName(EnumType enumType)
-        {
-            string result = null;
-            if (enumType != null)
-            {
-                result = enumType.Name.ToString();
-                result = (string.IsNullOrEmpty(result) || result == "enum" ? "String" : CodeNamer.Instance.GetTypeName(result));
-            }
-            return result;
-        }
-
-        private static string GetCompositeTypeName(CompositeType compositeType, JavaSettings settings)
-        {
-            string result = null;
-            if (compositeType != null)
-            {
-                result = compositeType.Name.ToString();
-
-                if (settings.IsFluent)
-                {
-                    result = string.IsNullOrEmpty(result) || !innerModelCompositeType.Contains(compositeType) ? result : result + "Inner";
-                }
-            }
-            return result;
-        }
-
-        private static string GetSequenceTypeName(SequenceType sequenceType, JavaSettings settings)
-        {
-            string result = null;
-            if (sequenceType != null)
-            {
-                result = $"List<{IModelTypeName(sequenceType.ElementType, settings)}>";
-                if (pagedListTypes.Contains(sequenceType))
-                {
-                    result = "Paged" + result;
-                }
-            }
-            return result;
-        }
-
-        private static IEnumerable<Property> GetCompositeTypeProperties(CompositeType compositeType, JavaSettings settings)
-        {
-            IEnumerable<Property> result = compositeType.Properties;
-
-            if (settings.IsFluent)
-            {
-                bool compositeTypeIsInnerModel = innerModelCompositeType.Contains(compositeType);
-                foreach (Property property in result)
-                {
-                    if (compositeTypeIsInnerModel)
+                    switch (primaryType.KnownPrimaryType)
                     {
-                        innerModelProperties.Add(property);
-                    }
-                    else
-                    {
-                        innerModelProperties.Remove(property);
+                        case KnownPrimaryType.None:
+                            result = PrimaryTypeGetWantNullable(primaryType) ? "Void" : "void";
+                            break;
+                        case KnownPrimaryType.Base64Url:
+                            result = "Base64Url";
+                            break;
+                        case KnownPrimaryType.Boolean:
+                            result = PrimaryTypeGetWantNullable(primaryType) ? "Boolean" : "boolean";
+                            break;
+                        case KnownPrimaryType.ByteArray:
+                            result = "byte[]";
+                            break;
+                        case KnownPrimaryType.Date:
+                            result = "LocalDate";
+                            break;
+                        case KnownPrimaryType.DateTime:
+                            result = "DateTime";
+                            break;
+                        case KnownPrimaryType.DateTimeRfc1123:
+                            result = "DateTimeRfc1123";
+                            break;
+                        case KnownPrimaryType.Double:
+                            result = PrimaryTypeGetWantNullable(primaryType) ? "Double" : "double";
+                            break;
+                        case KnownPrimaryType.Decimal:
+                            result = "BigDecimal";
+                            break;
+                        case KnownPrimaryType.Int:
+                            result = PrimaryTypeGetWantNullable(primaryType) ? "Integer" : "int";
+                            break;
+                        case KnownPrimaryType.Long:
+                            result = PrimaryTypeGetWantNullable(primaryType) ? "Long" : "long";
+                            break;
+                        case KnownPrimaryType.Stream:
+                            result = "Flowable<byte[]>";
+                            break;
+                        case KnownPrimaryType.String:
+                            result = "String";
+                            break;
+                        case KnownPrimaryType.TimeSpan:
+                            result = "Period";
+                            break;
+                        case KnownPrimaryType.UnixTime:
+                            result = PrimaryTypeGetWantNullable(primaryType) ? "Long" : "long";
+                            break;
+                        case KnownPrimaryType.Uuid:
+                            result = "UUID";
+                            break;
+                        case KnownPrimaryType.Object:
+                            result = "Object";
+                            break;
+                        case KnownPrimaryType.Credentials:
+                            result = serviceClientCredentialsType;
+                            break;
+
+                        default:
+                            throw new NotImplementedException($"Primary type {primaryType.KnownPrimaryType} is not implemented in {primaryType.GetType().Name}");
                     }
                 }
             }
-
             return result;
         }
 
@@ -5040,8 +5093,11 @@ namespace AutoRest.Java
         }
 
         private static bool MethodHasSequenceType(IModelType modelType, JavaSettings settings)
-            => modelType is SequenceType ||
-            (modelType is CompositeType ct && GetCompositeTypeProperties(ct, settings).Any(p => MethodHasSequenceType(GetPropertyModelType(p), settings)));
+        {
+            return modelType is SequenceType ||
+                (modelType is CompositeType modelCompositeType &&
+                 modelCompositeType.Properties.Any((Property property) => MethodHasSequenceType(property.ModelType, settings)));
+        }
 
         private static bool PrimaryTypeGetWantNullable(PrimaryType primaryType)
             => !primaryTypeNotWantNullable.Contains(primaryType);
@@ -5166,464 +5222,6 @@ namespace AutoRest.Java
             }
         }
 
-        private static void AddRestAPIInterface(JavaClass classBlock, CodeModel codeModel, MethodGroup methodGroup, JavaSettings settings)
-        {
-            IEnumerable<Method> restAPIMethods = methodGroup == null ? GetRestAPIMethods(codeModel) : GetRestAPIMethods(methodGroup);
-            if (restAPIMethods.Any())
-            {
-                string clientTypeName;
-                if (methodGroup == null)
-                {
-                    clientTypeName = codeModel.Name.ToPascalCase();
-                }
-                else
-                {
-                    clientTypeName = methodGroup.Name.ToString().ToPascalCase();
-                    if (!clientTypeName.EndsWith('s'))
-                    {
-                        clientTypeName += 's';
-                    }
-                }
-
-                string restAPIInterfaceName = clientTypeName + "Service";
-
-                classBlock.JavadocComment(settings.MaximumJavadocCommentWidth, comment =>
-                {
-                    comment.Description($"The interface defining all the services for {clientTypeName} to be used by the proxy service to perform REST calls.");
-                });
-                classBlock.Annotation($"Host(\"{codeModel.BaseUrl}\")");
-                classBlock.Interface(restAPIInterfaceName, interfaceBlock =>
-                {
-                    foreach (Method restAPIMethod in restAPIMethods)
-                    {
-                        string requestContentType = restAPIMethod.RequestContentType;
-                        if (requestContentType == "multipart/form-data" || requestContentType == "application/x-www-form-urlencoded")
-                        {
-                            interfaceBlock.LineComment($"@Multipart not supported by {restProxyType}");
-                        }
-
-                        bool methodIsPagingNextOperation = GetExtensionBool(restAPIMethod?.Extensions, "nextLinkMethod");
-                        if (methodIsPagingNextOperation)
-                        {
-                            interfaceBlock.Annotation("GET(\"{nextUrl}\")");
-                        }
-                        else
-                        {
-                            string httpMethod = restAPIMethod.HttpMethod.ToString().ToUpper();
-                            string path = restAPIMethod.Url.TrimStart('/');
-                            interfaceBlock.Annotation($"{httpMethod}(\"{path}\")");
-                        }
-
-                        IEnumerable<HttpStatusCode> expectedResponses = restAPIMethod.Responses.Keys;
-                        if (expectedResponses.Any())
-                        {
-                            string expectedResponseStrings = string.Join(", ", expectedResponses
-                                .OrderBy(statusCode => statusCode)
-                                .Select(statusCode => statusCode.ToString("D")));
-                            interfaceBlock.Annotation($"ExpectedResponses({{{expectedResponseStrings}}})");
-                        }
-
-                        Response restAPIMethodReturnType = restAPIMethod.ReturnType;
-
-                        IModelType returnTypeCurrentType = restAPIMethodReturnType.Body;
-                        while (returnTypeCurrentType != null)
-                        {
-                            if (returnTypeCurrentType is SequenceType currentSequenceType)
-                            {
-                                returnTypeCurrentType = currentSequenceType.ElementType;
-                            }
-                            else if (returnTypeCurrentType is DictionaryType currentDictionaryType)
-                            {
-                                returnTypeCurrentType = currentDictionaryType.ValueType;
-                            }
-                            else
-                            {
-                                if (returnTypeCurrentType is PrimaryType currentPrimaryType)
-                                {
-                                    string currentPrimaryTypeName = currentPrimaryType?.Name?.FixedValue;
-                                    if (currentPrimaryTypeName.EqualsIgnoreCase("Base64Url") ||
-                                        currentPrimaryTypeName.EqualsIgnoreCase("DateTimeRfc1123") ||
-                                        currentPrimaryTypeName.EqualsIgnoreCase("UnixTime"))
-                                    {
-                                        interfaceBlock.Annotation($"ReturnValueWireType({currentPrimaryTypeName}.class)");
-                                    }
-                                }
-
-                                returnTypeCurrentType = null;
-                            }
-                        }
-
-                        IModelType restAPIMethodReturnBodyClientType = ConvertToClientType(restAPIMethodReturnType.Body ?? DependencyInjection.New<PrimaryType>(KnownPrimaryType.None));
-                        SequenceType restAPIMethodReturnBodyClientSequenceType = restAPIMethodReturnBodyClientType as SequenceType;
-
-                        bool restAPIMethodReturnTypeIsPaged = GetExtensionBool(restAPIMethod.Extensions, "nextLinkMethod") ||
-                            (restAPIMethod.Extensions.ContainsKey(AzureExtensions.PageableExtension) &&
-                             restAPIMethod.Extensions[AzureExtensions.PageableExtension] != null);
-
-                        if (settings.IsAzureOrFluent && restAPIMethodReturnBodyClientSequenceType != null && restAPIMethodReturnTypeIsPaged)
-                        {
-                            SequenceType resultSequenceType = DependencyInjection.New<SequenceType>();
-                            resultSequenceType.ElementType = restAPIMethodReturnBodyClientSequenceType.ElementType;
-                            SequenceTypeSetPageImplType(resultSequenceType, SequenceTypeGetPageImplType(restAPIMethodReturnBodyClientSequenceType));
-                            pagedListTypes.Add(resultSequenceType);
-                            restAPIMethodReturnBodyClientType = resultSequenceType;
-                        }
-
-                        if (restAPIMethod.DefaultResponse.Body != null)
-                        {
-                            string methodOperationExceptionTypeName;
-                            IModelType restAPIMethodExceptionType = restAPIMethod.DefaultResponse.Body;
-                            if (settings.IsAzureOrFluent && (restAPIMethodExceptionType == null || IModelTypeName(restAPIMethodExceptionType, settings) == "CloudError"))
-                            {
-                                methodOperationExceptionTypeName = "CloudException";
-                            }
-                            else if (restAPIMethodExceptionType is CompositeType compositeReturnType)
-                            {
-                                methodOperationExceptionTypeName = GetCompositeTypeName(compositeReturnType, settings) + "Exception";
-                                if (compositeReturnType.Extensions.ContainsKey(SwaggerExtensions.NameOverrideExtension))
-                                {
-                                    JContainer ext = compositeReturnType.Extensions[SwaggerExtensions.NameOverrideExtension] as JContainer;
-                                    if (ext != null && ext["name"] != null)
-                                    {
-                                        methodOperationExceptionTypeName = ext["name"].ToString();
-                                    }
-                                }
-                            }
-                            else
-                            {
-                                methodOperationExceptionTypeName = "RestException";
-                            }
-                            interfaceBlock.Annotation($"UnexpectedResponseExceptionType({methodOperationExceptionTypeName}.class)");
-                        }
-
-                        bool simulateMethodAsPagingOperation = false;
-                        string methodName = restAPIMethod.Name;
-                        string wellKnownMethodName = null;
-                        if (!string.IsNullOrEmpty(methodGroup?.Name?.ToString()))
-                        {
-                            MethodType restAPIMethodType = MethodType.Other;
-                            string methodUrl = methodTypeTrailing.Replace(methodTypeLeading.Replace(restAPIMethod.Url, ""), "");
-                            string[] methodUrlSplits = methodUrl.Split('/');
-                            switch (restAPIMethod.HttpMethod)
-                            {
-                                case HttpMethod.Get:
-                                    if ((methodUrlSplits.Length == 5 || methodUrlSplits.Length == 7)
-                                        && methodUrlSplits[0].EqualsIgnoreCase("subscriptions")
-                                        && MethodHasSequenceType(restAPIMethod.ReturnType.Body, settings))
-                                    {
-                                        if (methodUrlSplits.Length == 5)
-                                        {
-                                            if (methodUrlSplits[2].EqualsIgnoreCase("providers"))
-                                            {
-                                                restAPIMethodType = MethodType.ListBySubscription;
-                                            }
-                                            else
-                                            {
-                                                restAPIMethodType = MethodType.ListByResourceGroup;
-                                            }
-                                        }
-                                        else if (methodUrlSplits[2].EqualsIgnoreCase("resourceGroups"))
-                                        {
-                                            restAPIMethodType = MethodType.ListByResourceGroup;
-                                        }
-                                    }
-                                    else if (IsTopLevelResourceUrl(methodUrlSplits))
-                                    {
-                                        restAPIMethodType = MethodType.Get;
-                                    }
-                                    break;
-
-                                case HttpMethod.Delete:
-                                    if (IsTopLevelResourceUrl(methodUrlSplits))
-                                    {
-                                        restAPIMethodType = MethodType.Delete;
-                                    }
-                                    break;
-                            }
-
-                            if (restAPIMethodType != MethodType.Other)
-                            {
-                                int methodsWithSameType = methodGroup.Methods.Count((Method methodGroupMethod) =>
-                                {
-                                    MethodType methodGroupMethodType = MethodType.Other;
-                                    string methodGroupMethodUrl = methodTypeTrailing.Replace(methodTypeLeading.Replace(methodGroupMethod.Url, ""), "");
-                                    string[] methodGroupMethodUrlSplits = methodGroupMethodUrl.Split('/');
-                                    switch (methodGroupMethod.HttpMethod)
-                                    {
-                                        case HttpMethod.Get:
-                                            if ((methodGroupMethodUrlSplits.Length == 5 || methodGroupMethodUrlSplits.Length == 7)
-                                                && methodGroupMethodUrlSplits[0].EqualsIgnoreCase("subscriptions")
-                                                && MethodHasSequenceType(methodGroupMethod.ReturnType.Body, settings))
-                                            {
-                                                if (methodGroupMethodUrlSplits.Length == 5)
-                                                {
-                                                    if (methodGroupMethodUrlSplits[2].EqualsIgnoreCase("providers"))
-                                                    {
-                                                        methodGroupMethodType = MethodType.ListBySubscription;
-                                                    }
-                                                    else
-                                                    {
-                                                        methodGroupMethodType = MethodType.ListByResourceGroup;
-                                                    }
-                                                }
-                                                else if (methodGroupMethodUrlSplits[2].EqualsIgnoreCase("resourceGroups"))
-                                                {
-                                                    methodGroupMethodType = MethodType.ListByResourceGroup;
-                                                }
-                                            }
-                                            else if (IsTopLevelResourceUrl(methodGroupMethodUrlSplits))
-                                            {
-                                                methodGroupMethodType = MethodType.Get;
-                                            }
-                                            break;
-
-                                        case HttpMethod.Delete:
-                                            if (IsTopLevelResourceUrl(methodGroupMethodUrlSplits))
-                                            {
-                                                methodGroupMethodType = MethodType.Delete;
-                                            }
-                                            break;
-                                    }
-                                    return methodGroupMethodType == restAPIMethodType;
-                                });
-
-                                if (methodsWithSameType == 1)
-                                {
-                                    switch (restAPIMethodType)
-                                    {
-                                        case MethodType.ListBySubscription:
-                                            wellKnownMethodName = List;
-                                            simulateMethodAsPagingOperation = true;
-                                            break;
-
-                                        case MethodType.ListByResourceGroup:
-                                            wellKnownMethodName = ListByResourceGroup;
-                                            simulateMethodAsPagingOperation = true;
-                                            break;
-
-                                        case MethodType.Delete:
-                                            wellKnownMethodName = Delete;
-                                            break;
-
-                                        case MethodType.Get:
-                                            wellKnownMethodName = GetByResourceGroup;
-                                            break;
-
-                                        default:
-                                            throw new Exception("Flow should not hit this statement.");
-                                    }
-                                }
-                            }
-                        }
-                        if (!string.IsNullOrWhiteSpace(wellKnownMethodName))
-                        {
-                            IParent methodParent = restAPIMethod.Parent;
-                            methodName = CodeNamer.Instance.GetUnique(wellKnownMethodName, restAPIMethod, methodParent.IdentifiersInScope, methodParent.Children.Except(restAPIMethod.SingleItemAsEnumerable()));
-                        }
-                        methodName = methodName.ToCamelCase();
-
-                        bool shouldGenerateXmlSerialization = settings.ShouldGenerateXmlSerialization;
-
-                        List<string> parameterDeclarationList = new List<string>();
-
-                        List<Parameter> methodRetrofitParameters = restAPIMethod.LogicalParameters.Where(p => p.Location != ParameterLocation.None).ToList();
-                        if (settings.IsAzureOrFluent && methodIsPagingNextOperation)
-                        {
-                            methodRetrofitParameters.RemoveAll(p => p.Location == ParameterLocation.Path);
-
-                            Parameter nextUrlParam = DependencyInjection.New<Parameter>();
-                            nextUrlParam.SerializedName = "nextUrl";
-                            nextUrlParam.Documentation = "The URL to get the next page of items.";
-                            nextUrlParam.Location = ParameterLocation.Path;
-                            nextUrlParam.IsRequired = true;
-                            nextUrlParam.ModelType = DependencyInjection.New<PrimaryType>(KnownPrimaryType.String);
-                            nextUrlParam.Name = "nextUrl";
-                            nextUrlParam.Extensions.Add(SwaggerExtensions.SkipUrlEncodingExtension, true);
-                            methodRetrofitParameters.Insert(0, nextUrlParam);
-                        }
-
-                        IEnumerable<Parameter> orderedRetrofitParameters = methodRetrofitParameters.Where(p => p.Location == ParameterLocation.Path)
-                            .Union(methodRetrofitParameters.Where(p => p.Location != ParameterLocation.Path));
-                        foreach (Parameter parameter in orderedRetrofitParameters)
-                        {
-                            string parameterName;
-                            if (!parameter.IsClientProperty)
-                            {
-                                parameterName = parameter.Name;
-                            }
-                            else
-                            {
-                                string caller = (parameter.Method != null && parameter.Method.Group.IsNullOrEmpty() ? "this" : "this.client");
-                                string clientPropertyName = parameter.ClientProperty?.Name?.ToString();
-                                if (!string.IsNullOrEmpty(clientPropertyName))
-                                {
-                                    CodeNamer codeNamer = CodeNamer.Instance;
-                                    clientPropertyName = codeNamer.CamelCase(codeNamer.RemoveInvalidCharacters(clientPropertyName));
-                                }
-                                parameterName = $"{caller}.{clientPropertyName}()";
-                            }
-
-                            StringBuilder parameterDeclarationBuilder = new StringBuilder();
-                            if (restAPIMethod.Url.Contains("{" + parameterName + "}"))
-                            {
-                                parameter.Location = ParameterLocation.Path;
-                            }
-
-                            string name = parameter.SerializedName;
-                            if (parameter.Extensions.ContainsKey("hostParameter"))
-                            {
-                                parameterDeclarationBuilder.Append($"@HostParam(\"{name}\") ");
-                            }
-                            else if (parameter.Location == ParameterLocation.Path ||
-                                parameter.Location == ParameterLocation.Query ||
-                                parameter.Location == ParameterLocation.Header)
-                            {
-                                ParameterLocation location = parameter.Location;
-                                parameterDeclarationBuilder.Append($"@{location}Param(\"{name}\") ");
-                            }
-                            else if (parameter.Location == ParameterLocation.Body)
-                            {
-                                parameterDeclarationBuilder.Append($"@BodyParam(\"{restAPIMethod.RequestContentType}\") ");
-                            }
-                            else if (parameter.Location == ParameterLocation.FormData)
-                            {
-                                parameterDeclarationBuilder.Append($"/* @Part(\"{name}\") not supported by RestProxy */");
-                            }
-
-                            string declarativeName = parameter.ClientProperty?.Name?.ToString();
-                            if (!string.IsNullOrEmpty(declarativeName))
-                            {
-                                CodeNamer codeNamer = CodeNamer.Instance;
-                                declarativeName = codeNamer.CamelCase(codeNamer.RemoveInvalidCharacters(declarativeName));
-                            }
-                            if (declarativeName == null)
-                            {
-                                declarativeName = parameterName;
-                            }
-
-                            IModelType parameterModelType = parameter.ModelType;
-                            if (parameterModelType != null && !IsNullable(parameter))
-                            {
-                                parameterModelType = GetIModelTypeNonNullableVariant(parameterModelType);
-                            }
-                            bool shouldUseXmlListWrapper = shouldGenerateXmlSerialization && parameter.Location == ParameterLocation.Body && parameterModelType is SequenceType;
-                            if (shouldUseXmlListWrapper)
-                            {
-                                parameterDeclarationBuilder.Append(parameterModelType.XmlName + "Wrapper");
-                            }
-                            else
-                            {
-                                IModelType parameterWireType;
-                                IModelType parameterClientType = ConvertToClientType(parameterModelType);
-                                if (parameterModelType.IsPrimaryType(KnownPrimaryType.Stream))
-                                {
-                                    parameterWireType = parameterClientType;
-                                }
-                                else if (!parameterModelType.IsPrimaryType(KnownPrimaryType.Base64Url) &&
-                                    parameter.Location != ParameterLocation.Body &&
-                                    parameter.Location != ParameterLocation.FormData &&
-                                    ((parameterClientType is PrimaryType primaryType && primaryType.KnownPrimaryType == KnownPrimaryType.ByteArray) || parameterClientType is SequenceType))
-                                {
-                                    parameterWireType = DependencyInjection.New<PrimaryType>(KnownPrimaryType.String);
-                                }
-                                else
-                                {
-                                    parameterWireType = parameterModelType;
-                                }
-                                parameterDeclarationBuilder.Append(IModelTypeName(parameterWireType, settings));
-                            }
-
-                            parameterDeclarationBuilder.Append(" " + declarativeName);
-                            parameterDeclarationList.Add(parameterDeclarationBuilder.ToString());
-                        }
-
-                        string parameterDeclarations = string.Join(", ", parameterDeclarationList);
-
-                        if (settings.IsAzureOrFluent)
-                        {
-                            foreach (Parameter parameter in orderedRetrofitParameters.Where(p => p.Location == ParameterLocation.Path || p.Location == ParameterLocation.Query))
-                            {
-                                if (GetExtensionBool(parameter?.Extensions, SwaggerExtensions.SkipUrlEncodingExtension))
-                                {
-                                    string location = parameter.Location.ToString();
-                                    string serializedName = parameter.SerializedName;
-                                    parameterDeclarations = parameterDeclarations.Replace(
-                                        $"@{location}Param(\"{serializedName}\")",
-                                        $"@{location}Param(value = \"{serializedName}\", encoded = true)");
-                                }
-                            }
-                        }
-
-                        string responseGenericBodyClientTypeString;
-                        if (settings.IsAzureOrFluent && restAPIMethodReturnBodyClientSequenceType != null && restAPIMethodReturnTypeIsPaged)
-                        {
-                            responseGenericBodyClientTypeString = $"PagedList<{IModelTypeName(restAPIMethodReturnBodyClientSequenceType.ElementType, settings)}>";
-                        }
-                        else
-                        {
-                            IModelType responseBodyWireType = restAPIMethodReturnType.Body ?? DependencyInjection.New<PrimaryType>(KnownPrimaryType.None);
-                            IModelType responseVariant = ConvertToClientType(responseBodyWireType);
-
-                            bool responseVariantPrimaryTypeIsNullable = true;
-                            if (responseVariant is PrimaryType responseVariantPrimaryType && !PrimaryTypeGetWantNullable(responseVariantPrimaryType))
-                            {
-                                switch (responseVariantPrimaryType.KnownPrimaryType)
-                                {
-                                    case KnownPrimaryType.None:
-                                    case KnownPrimaryType.Boolean:
-                                    case KnownPrimaryType.Double:
-                                    case KnownPrimaryType.Int:
-                                    case KnownPrimaryType.Long:
-                                    case KnownPrimaryType.UnixTime:
-                                        responseVariantPrimaryTypeIsNullable = false;
-                                        break;
-                                }
-                            }
-
-                            IModelType responseGenericBodyClientType = responseVariantPrimaryTypeIsNullable ? responseVariant : responseBodyWireType;
-                            responseGenericBodyClientTypeString = IModelTypeName(responseGenericBodyClientType, settings);
-                        }
-
-                        bool methodIsLongRunningOperation = GetExtensionBool(restAPIMethod?.Extensions, AzureExtensions.LongRunningExtension);
-                        if (methodIsLongRunningOperation)
-                        {
-                            string responseGenericParameterString;
-                            if (settings.IsAzureOrFluent && restAPIMethodReturnBodyClientSequenceType != null && (restAPIMethodReturnTypeIsPaged || simulateMethodAsPagingOperation))
-                            {
-                                responseGenericParameterString = $"Page<{IModelTypeName(restAPIMethodReturnBodyClientSequenceType.ElementType, settings)}>";
-                            }
-                            else
-                            {
-                                responseGenericParameterString = responseGenericBodyClientTypeString;
-                            }
-
-                            interfaceBlock.PublicMethod($"Observable<OperationStatus<{responseGenericParameterString}>> {methodName}({parameterDeclarations})");
-                        }
-                        else
-                        {
-                            IModelType restAPIMethodResponseHeaders = restAPIMethodReturnType.Headers;
-                            string deserializedResponseHeadersType = restAPIMethodResponseHeaders == null ? "Void" : IModelTypeName(ConvertToClientType(restAPIMethodResponseHeaders), settings);
-                            string deserializedResponseBodyType;
-                            if (restAPIMethodReturnType.Body == null)
-                            {
-                                deserializedResponseBodyType = "Void";
-                            }
-                            else if (settings.IsAzureOrFluent && restAPIMethodReturnBodyClientSequenceType != null && (restAPIMethodReturnTypeIsPaged || simulateMethodAsPagingOperation))
-                            {
-                                deserializedResponseBodyType = $"{SequenceTypeGetPageImplType(restAPIMethodReturnBodyClientSequenceType)}<{IModelTypeName(restAPIMethodReturnBodyClientSequenceType.ElementType, settings)}>";
-                            }
-                            else
-                            {
-                                deserializedResponseBodyType = responseGenericBodyClientTypeString;
-                            }
-                            string restResponseConcreteTypeName = $"RestResponse<{deserializedResponseHeadersType}, {deserializedResponseBodyType}>";
-                            interfaceBlock.PublicMethod($"Single<{restResponseConcreteTypeName}> {methodName}({parameterDeclarations})");
-                        }
-                    }
-                });
-            }
-        }
-
         private static void AddRestAPIInterface(JavaClass classBlock, RestAPI restAPI, string clientTypeName, JavaSettings settings)
         {
             if (restAPI != null)
@@ -5692,7 +5290,7 @@ namespace AutoRest.Java
                                     break;
                             }
 
-                            parameterDeclarationBuilder.Append(parameter.Type.ClientTypeName + " " + parameter.VariableName);
+                            parameterDeclarationBuilder.Append(parameter.ClientTypeName + " " + parameter.VariableName);
                             parameterDeclarationList.Add(parameterDeclarationBuilder.ToString());
                         }
 
@@ -5932,7 +5530,14 @@ namespace AutoRest.Java
                         IModelType parameterModelType = parameter.ModelType;
                         if (parameterModelType != null && !IsNullable(parameter))
                         {
-                            parameterModelType = GetIModelTypeNonNullableVariant(parameterModelType);
+                            if (parameterModelType is PrimaryType parameterModelPrimaryType)
+                            {
+                                PrimaryType nonNullableParameterModelPrimaryType = DependencyInjection.New<PrimaryType>(parameterModelPrimaryType.KnownPrimaryType);
+                                nonNullableParameterModelPrimaryType.Format = parameterModelPrimaryType.Format;
+                                primaryTypeNotWantNullable.Add(nonNullableParameterModelPrimaryType);
+
+                                parameterModelType = nonNullableParameterModelPrimaryType;
+                            }
                         }
                         result = !parameterModelType.IsPrimaryType(KnownPrimaryType.Int) &&
                                  !parameterModelType.IsPrimaryType(KnownPrimaryType.Double) &&
@@ -5976,8 +5581,18 @@ namespace AutoRest.Java
                 }
 
                 string serviceFutureReturnType = $"ServiceFuture<{responseGenericBodyClientTypeString}>";
-                IModelType serviceResponseVariant = GetIModelTypeNonNullableVariant(ConvertToClientType(restAPIMethodReturnBodyClientType)) ?? restAPIMethodReturnBodyClientType;
-                string synchronousMethodReturnType = IModelTypeName(serviceResponseVariant, settings);
+
+                IModelType restAPIMethodReturnBodyClientNonNullableType = restAPIMethodReturnBodyClientType;
+                if (restAPIMethodReturnBodyClientType is PrimaryType restAPIMethodReturnBodyClientPrimaryType)
+                {
+                    PrimaryType restAPIMethodReturnBodyClientNonNullablePrimaryType = DependencyInjection.New<PrimaryType>(restAPIMethodReturnBodyClientPrimaryType.KnownPrimaryType);
+                    restAPIMethodReturnBodyClientNonNullablePrimaryType.Format = restAPIMethodReturnBodyClientPrimaryType.Format;
+                    primaryTypeNotWantNullable.Add(restAPIMethodReturnBodyClientNonNullablePrimaryType);
+
+                    restAPIMethodReturnBodyClientNonNullableType = restAPIMethodReturnBodyClientNonNullablePrimaryType;
+                }
+
+                string synchronousMethodReturnType = IModelTypeName(restAPIMethodReturnBodyClientNonNullableType, settings);
 
                 string pageType;
                 if (settings.IsAzureOrFluent && restAPIMethodReturnBodyClientSequenceType != null && (restAPIMethodReturnTypeIsPaged || simulateMethodAsPagingOperation))
@@ -5997,7 +5612,13 @@ namespace AutoRest.Java
                 }
                 else if (restAPIMethodExceptionType is CompositeType compositeExceptionType)
                 {
-                    methodOperationExceptionTypeName = GetCompositeTypeName(compositeExceptionType, settings) + "Exception";
+                    methodOperationExceptionTypeName = compositeExceptionType.Name.ToString();
+                    if (settings.IsFluent && !string.IsNullOrEmpty(methodOperationExceptionTypeName) && innerModelCompositeType.Contains(compositeExceptionType))
+                    {
+                        methodOperationExceptionTypeName += "Inner";
+                    }
+                    methodOperationExceptionTypeName += "Exception";
+
                     if (compositeExceptionType.Extensions.ContainsKey(SwaggerExtensions.NameOverrideExtension))
                     {
                         JContainer ext = compositeExceptionType.Extensions[SwaggerExtensions.NameOverrideExtension] as JContainer;
@@ -6033,7 +5654,14 @@ namespace AutoRest.Java
                                 IModelType parameterModelType = parameter.ModelType;
                                 if (parameterModelType != null && !IsNullable(parameter))
                                 {
-                                    parameterModelType = GetIModelTypeNonNullableVariant(parameterModelType);
+                                    if (parameterModelType is PrimaryType parameterModelPrimaryType)
+                                    {
+                                        PrimaryType nonNullableParameterModelPrimaryType = DependencyInjection.New<PrimaryType>(parameterModelPrimaryType.KnownPrimaryType);
+                                        nonNullableParameterModelPrimaryType.Format = parameterModelPrimaryType.Format;
+                                        primaryTypeNotWantNullable.Add(nonNullableParameterModelPrimaryType);
+
+                                        parameterModelType = nonNullableParameterModelPrimaryType;
+                                    }
                                 }
                                 IModelType parameterClientType = ConvertToClientType(parameterModelType);
                                 string parameterType = IModelTypeName(parameterClientType, settings);
@@ -6400,7 +6028,14 @@ namespace AutoRest.Java
                                         IModelType parameterModelType = parameter.ModelType;
                                         if (parameterModelType != null && !IsNullable(parameter))
                                         {
-                                            parameterModelType = GetIModelTypeNonNullableVariant(parameterModelType);
+                                            if (parameterModelType is PrimaryType parameterModelPrimaryType)
+                                            {
+                                                PrimaryType nonNullableParameterModelPrimaryType = DependencyInjection.New<PrimaryType>(parameterModelPrimaryType.KnownPrimaryType);
+                                                nonNullableParameterModelPrimaryType.Format = parameterModelPrimaryType.Format;
+                                                primaryTypeNotWantNullable.Add(nonNullableParameterModelPrimaryType);
+
+                                                parameterModelType = nonNullableParameterModelPrimaryType;
+                                            }
                                         }
                                         parameterDocumentation = $"the {IModelTypeName(parameterModelType, settings)} value";
                                     }
@@ -6495,7 +6130,14 @@ namespace AutoRest.Java
                                         IModelType parameterModelType = parameter.ModelType;
                                         if (parameterModelType != null && !IsNullable(parameter))
                                         {
-                                            parameterModelType = GetIModelTypeNonNullableVariant(parameterModelType);
+                                            if (parameterModelType is PrimaryType parameterModelPrimaryType)
+                                            {
+                                                PrimaryType nonNullableParameterModelPrimaryType = DependencyInjection.New<PrimaryType>(parameterModelPrimaryType.KnownPrimaryType);
+                                                nonNullableParameterModelPrimaryType.Format = parameterModelPrimaryType.Format;
+                                                primaryTypeNotWantNullable.Add(nonNullableParameterModelPrimaryType);
+
+                                                parameterModelType = nonNullableParameterModelPrimaryType;
+                                            }
                                         }
                                         parameterDocumentation = $"the {IModelTypeName(parameterModelType, settings)} value";
                                     }
@@ -6605,7 +6247,14 @@ namespace AutoRest.Java
                                         IModelType parameterModelType = parameter.ModelType;
                                         if (parameterModelType != null && !IsNullable(parameter))
                                         {
-                                            parameterModelType = GetIModelTypeNonNullableVariant(parameterModelType);
+                                            if (parameterModelType is PrimaryType parameterModelPrimaryType)
+                                            {
+                                                PrimaryType nonNullableParameterModelPrimaryType = DependencyInjection.New<PrimaryType>(parameterModelPrimaryType.KnownPrimaryType);
+                                                nonNullableParameterModelPrimaryType.Format = parameterModelPrimaryType.Format;
+                                                primaryTypeNotWantNullable.Add(nonNullableParameterModelPrimaryType);
+
+                                                parameterModelType = nonNullableParameterModelPrimaryType;
+                                            }
                                         }
                                         parameterDocumentation = $"the {IModelTypeName(parameterModelType, settings)} value";
                                     }
@@ -6650,7 +6299,14 @@ namespace AutoRest.Java
                                         IModelType parameterModelType = parameter.ModelType;
                                         if (parameterModelType != null && !IsNullable(parameter))
                                         {
-                                            parameterModelType = GetIModelTypeNonNullableVariant(parameterModelType);
+                                            if (parameterModelType is PrimaryType parameterModelPrimaryType)
+                                            {
+                                                PrimaryType nonNullableParameterModelPrimaryType = DependencyInjection.New<PrimaryType>(parameterModelPrimaryType.KnownPrimaryType);
+                                                nonNullableParameterModelPrimaryType.Format = parameterModelPrimaryType.Format;
+                                                primaryTypeNotWantNullable.Add(nonNullableParameterModelPrimaryType);
+
+                                                parameterModelType = nonNullableParameterModelPrimaryType;
+                                            }
                                         }
                                         result = !(parameterModelType is PrimaryType) && !(parameterModelType is EnumType) && (!onlyRequiredParameters || parameter.IsRequired);
                                     }
@@ -6687,7 +6343,14 @@ namespace AutoRest.Java
                                     IModelType parameterModelType = parameter.ModelType;
                                     if (parameterModelType != null && !IsNullable(parameter))
                                     {
-                                        parameterModelType = GetIModelTypeNonNullableVariant(parameterModelType);
+                                        if (parameterModelType is PrimaryType parameterModelPrimaryType)
+                                        {
+                                            PrimaryType nonNullableParameterModelPrimaryType = DependencyInjection.New<PrimaryType>(parameterModelPrimaryType.KnownPrimaryType);
+                                            nonNullableParameterModelPrimaryType.Format = parameterModelPrimaryType.Format;
+                                            primaryTypeNotWantNullable.Add(nonNullableParameterModelPrimaryType);
+
+                                            parameterModelType = nonNullableParameterModelPrimaryType;
+                                        }
                                     }
                                     IModelType parameterClientType = ConvertToClientType(parameterModelType);
 
@@ -6765,9 +6428,13 @@ namespace AutoRest.Java
                                 {
                                     Parameter transformationOutputParameter = transformation.OutputParameter;
                                     IModelType transformationOutputParameterModelType = transformationOutputParameter.ModelType;
-                                    if (transformationOutputParameterModelType != null && !IsNullable(transformationOutputParameter))
+                                    if (transformationOutputParameterModelType != null && !IsNullable(transformationOutputParameter) && transformationOutputParameterModelType is PrimaryType transformationOutputParameterModelPrimaryType)
                                     {
-                                        transformationOutputParameterModelType = GetIModelTypeNonNullableVariant(transformationOutputParameterModelType);
+                                        PrimaryType transformationOutputParameterModelNonNullablePrimaryType = DependencyInjection.New<PrimaryType>(transformationOutputParameterModelPrimaryType.KnownPrimaryType);
+                                        transformationOutputParameterModelNonNullablePrimaryType.Format = transformationOutputParameterModelPrimaryType.Format;
+                                        primaryTypeNotWantNullable.Add(transformationOutputParameterModelNonNullablePrimaryType);
+
+                                        transformationOutputParameterModelType = transformationOutputParameterModelNonNullablePrimaryType;
                                     }
                                     IModelType transformationOutputParameterClientType = ConvertToClientType(transformationOutputParameterModelType);
 
@@ -6850,13 +6517,19 @@ namespace AutoRest.Java
                                         function.IncreaseIndent();
                                     }
 
-                                    bool transformationOutputParameterModelIsCompositeType = transformationOutputParameterModelType is CompositeType;
-                                    if (transformationParameterMappings.Any(m => !string.IsNullOrEmpty(m.OutputParameterProperty)) && transformationOutputParameterModelIsCompositeType)
+                                    CompositeType transformationOutputParameterModelCompositeType = transformationOutputParameterModelType as CompositeType;
+                                    if (transformationOutputParameterModelCompositeType != null && transformationParameterMappings.Any(m => !string.IsNullOrEmpty(m.OutputParameterProperty)))
                                     {
+                                        string transformationOutputParameterModelCompositeTypeName = transformationOutputParameterModelCompositeType.Name.ToString();
+                                        if (settings.IsFluent && !string.IsNullOrEmpty(transformationOutputParameterModelCompositeTypeName) && innerModelCompositeType.Contains(transformationOutputParameterModelCompositeType))
+                                        {
+                                            transformationOutputParameterModelCompositeTypeName += "Inner";
+                                        }
+
                                         function.Line("{0}{1} = new {2}();",
                                             !conditionalAssignment ? transformationOutputParameterClientParameterVariantTypeName + " " : "",
                                             outParamName,
-                                            GetCompositeTypeName(transformationOutputParameterModelType as CompositeType, settings));
+                                            transformationOutputParameterModelCompositeTypeName);
                                     }
 
                                     foreach (ParameterMapping mapping in transformationParameterMappings)
@@ -6898,7 +6571,7 @@ namespace AutoRest.Java
                                         }
 
                                         function.Line("{0}{1}{2};",
-                                            !conditionalAssignment && !transformationOutputParameterModelIsCompositeType ? transformationOutputParameterClientParameterVariantTypeName + " " : "",
+                                            !conditionalAssignment && transformationOutputParameterModelCompositeType == null ? transformationOutputParameterClientParameterVariantTypeName + " " : "",
                                             outParamName,
                                             getMapping);
                                     }
@@ -6915,7 +6588,14 @@ namespace AutoRest.Java
                                     IModelType parameterModelType = parameter.ModelType;
                                     if (parameterModelType != null && !IsNullable(parameter))
                                     {
-                                        parameterModelType = GetIModelTypeNonNullableVariant(parameterModelType);
+                                        if (parameterModelType is PrimaryType parameterModelPrimaryType)
+                                        {
+                                            PrimaryType nonNullableParameterModelPrimaryType = DependencyInjection.New<PrimaryType>(parameterModelPrimaryType.KnownPrimaryType);
+                                            nonNullableParameterModelPrimaryType.Format = parameterModelPrimaryType.Format;
+                                            primaryTypeNotWantNullable.Add(nonNullableParameterModelPrimaryType);
+
+                                            parameterModelType = nonNullableParameterModelPrimaryType;
+                                        }
                                     }
                                     IModelType parameterClientType = ConvertToClientType(parameterModelType);
 
@@ -7030,7 +6710,14 @@ namespace AutoRest.Java
                                         IModelType parameterModelType = parameter.ModelType;
                                         if (parameterModelType != null && !IsNullable(parameter))
                                         {
-                                            parameterModelType = GetIModelTypeNonNullableVariant(parameterModelType);
+                                            if (parameterModelType is PrimaryType parameterModelPrimaryType)
+                                            {
+                                                PrimaryType nonNullableParameterModelPrimaryType = DependencyInjection.New<PrimaryType>(parameterModelPrimaryType.KnownPrimaryType);
+                                                nonNullableParameterModelPrimaryType.Format = parameterModelPrimaryType.Format;
+                                                primaryTypeNotWantNullable.Add(nonNullableParameterModelPrimaryType);
+
+                                                parameterModelType = nonNullableParameterModelPrimaryType;
+                                            }
                                         }
 
                                         IModelType parameterClientType = ConvertToClientType(parameterModelType);
@@ -7084,7 +6771,14 @@ namespace AutoRest.Java
                                         IModelType parameterModelType = parameter.ModelType;
                                         if (parameterModelType != null && !IsNullable(parameter))
                                         {
-                                            parameterModelType = GetIModelTypeNonNullableVariant(parameterModelType);
+                                            if (parameterModelType is PrimaryType parameterModelPrimaryType)
+                                            {
+                                                PrimaryType nonNullableParameterModelPrimaryType = DependencyInjection.New<PrimaryType>(parameterModelPrimaryType.KnownPrimaryType);
+                                                nonNullableParameterModelPrimaryType.Format = parameterModelPrimaryType.Format;
+                                                primaryTypeNotWantNullable.Add(nonNullableParameterModelPrimaryType);
+
+                                                parameterModelType = nonNullableParameterModelPrimaryType;
+                                            }
                                         }
                                         IModelType parameterClientType = ConvertToClientType(parameterModelType);
 
@@ -7148,7 +6842,14 @@ namespace AutoRest.Java
                                 IModelType parameterModelType = parameter.ModelType;
                                 if (parameterModelType != null && !IsNullable(parameter))
                                 {
-                                    parameterModelType = GetIModelTypeNonNullableVariant(parameterModelType);
+                                    if (parameterModelType is PrimaryType parameterModelPrimaryType)
+                                    {
+                                        PrimaryType nonNullableParameterModelPrimaryType = DependencyInjection.New<PrimaryType>(parameterModelPrimaryType.KnownPrimaryType);
+                                        nonNullableParameterModelPrimaryType.Format = parameterModelPrimaryType.Format;
+                                        primaryTypeNotWantNullable.Add(nonNullableParameterModelPrimaryType);
+
+                                        parameterModelType = nonNullableParameterModelPrimaryType;
+                                    }
                                 }
                                 IModelType parameterClientType = ConvertToClientType(parameterModelType);
                                 string parameterType = IModelTypeName(parameterClientType, settings);
@@ -7174,7 +6875,14 @@ namespace AutoRest.Java
                                         IModelType parameterModelType = parameter.ModelType;
                                         if (parameterModelType != null && !IsNullable(parameter))
                                         {
-                                            parameterModelType = GetIModelTypeNonNullableVariant(parameterModelType);
+                                            if (parameterModelType is PrimaryType parameterModelPrimaryType)
+                                            {
+                                                PrimaryType nonNullableParameterModelPrimaryType = DependencyInjection.New<PrimaryType>(parameterModelPrimaryType.KnownPrimaryType);
+                                                nonNullableParameterModelPrimaryType.Format = parameterModelPrimaryType.Format;
+                                                primaryTypeNotWantNullable.Add(nonNullableParameterModelPrimaryType);
+
+                                                parameterModelType = nonNullableParameterModelPrimaryType;
+                                            }
                                         }
                                         parameterDocumentation = $"the {IModelTypeName(parameterModelType, settings)} value";
                                     }
@@ -7220,7 +6928,14 @@ namespace AutoRest.Java
                                         IModelType parameterModelType = parameter.ModelType;
                                         if (parameterModelType != null && !IsNullable(parameter))
                                         {
-                                            parameterModelType = GetIModelTypeNonNullableVariant(parameterModelType);
+                                            if (parameterModelType is PrimaryType parameterModelPrimaryType)
+                                            {
+                                                PrimaryType nonNullableParameterModelPrimaryType = DependencyInjection.New<PrimaryType>(parameterModelPrimaryType.KnownPrimaryType);
+                                                nonNullableParameterModelPrimaryType.Format = parameterModelPrimaryType.Format;
+                                                primaryTypeNotWantNullable.Add(nonNullableParameterModelPrimaryType);
+
+                                                parameterModelType = nonNullableParameterModelPrimaryType;
+                                            }
                                         }
                                         parameterDocumentation = $"the {IModelTypeName(parameterModelType, settings)} value";
                                     }
@@ -7272,7 +6987,14 @@ namespace AutoRest.Java
                                         IModelType parameterModelType = parameter.ModelType;
                                         if (parameterModelType != null && !IsNullable(parameter))
                                         {
-                                            parameterModelType = GetIModelTypeNonNullableVariant(parameterModelType);
+                                            if (parameterModelType is PrimaryType parameterModelPrimaryType)
+                                            {
+                                                PrimaryType nonNullableParameterModelPrimaryType = DependencyInjection.New<PrimaryType>(parameterModelPrimaryType.KnownPrimaryType);
+                                                nonNullableParameterModelPrimaryType.Format = parameterModelPrimaryType.Format;
+                                                primaryTypeNotWantNullable.Add(nonNullableParameterModelPrimaryType);
+
+                                                parameterModelType = nonNullableParameterModelPrimaryType;
+                                            }
                                         }
                                         result = !(parameterModelType is PrimaryType) && !(parameterModelType is EnumType) && (!onlyRequiredParameters || parameter.IsRequired);
                                     }
@@ -7308,7 +7030,14 @@ namespace AutoRest.Java
                                     IModelType parameterModelType = parameter.ModelType;
                                     if (parameterModelType != null && !IsNullable(parameter))
                                     {
-                                        parameterModelType = GetIModelTypeNonNullableVariant(parameterModelType);
+                                        if (parameterModelType is PrimaryType parameterModelPrimaryType)
+                                        {
+                                            PrimaryType nonNullableParameterModelPrimaryType = DependencyInjection.New<PrimaryType>(parameterModelPrimaryType.KnownPrimaryType);
+                                            nonNullableParameterModelPrimaryType.Format = parameterModelPrimaryType.Format;
+                                            primaryTypeNotWantNullable.Add(nonNullableParameterModelPrimaryType);
+
+                                            parameterModelType = nonNullableParameterModelPrimaryType;
+                                        }
                                     }
                                     IModelType parameterClientType = ConvertToClientType(parameterModelType);
 
@@ -7386,9 +7115,13 @@ namespace AutoRest.Java
                                 {
                                     Parameter transformationOutputParameter = transformation.OutputParameter;
                                     IModelType transformationOutputParameterModelType = transformationOutputParameter.ModelType;
-                                    if (transformationOutputParameterModelType != null && !IsNullable(transformationOutputParameter))
+                                    if (transformationOutputParameterModelType != null && !IsNullable(transformationOutputParameter) && transformationOutputParameterModelType is PrimaryType transformationOutputParameterModelPrimaryType)
                                     {
-                                        transformationOutputParameterModelType = GetIModelTypeNonNullableVariant(transformationOutputParameterModelType);
+                                        PrimaryType transformationOutputParameterModelNonNullablePrimaryType = DependencyInjection.New<PrimaryType>(transformationOutputParameterModelPrimaryType.KnownPrimaryType);
+                                        transformationOutputParameterModelNonNullablePrimaryType.Format = transformationOutputParameterModelPrimaryType.Format;
+                                        primaryTypeNotWantNullable.Add(transformationOutputParameterModelNonNullablePrimaryType);
+
+                                        transformationOutputParameterModelType = transformationOutputParameterModelNonNullablePrimaryType;
                                     }
                                     IModelType transformationOutputParameterClientType = ConvertToClientType(transformationOutputParameterModelType);
 
@@ -7471,13 +7204,19 @@ namespace AutoRest.Java
                                         function.IncreaseIndent();
                                     }
 
-                                    bool transformationOutputParameterModelIsCompositeType = transformationOutputParameterModelType is CompositeType;
-                                    if (transformationParameterMappings.Any(m => !string.IsNullOrEmpty(m.OutputParameterProperty)) && transformationOutputParameterModelIsCompositeType)
+                                    CompositeType transformationOutputParameterModelCompositeType = transformationOutputParameterModelType as CompositeType;
+                                    if (transformationOutputParameterModelCompositeType != null && transformationParameterMappings.Any(m => !string.IsNullOrEmpty(m.OutputParameterProperty)))
                                     {
+                                        string transformationOutputParameterModelCompositeTypeName = transformationOutputParameterModelCompositeType.Name.ToString();
+                                        if (settings.IsFluent && !string.IsNullOrEmpty(transformationOutputParameterModelCompositeTypeName) && innerModelCompositeType.Contains(transformationOutputParameterModelCompositeType))
+                                        {
+                                            transformationOutputParameterModelCompositeTypeName += "Inner";
+                                        }
+
                                         function.Line("{0}{1} = new {2}();",
                                             !conditionalAssignment ? transformationOutputParameterClientParameterVariantTypeName + " " : "",
                                             outParamName,
-                                            GetCompositeTypeName(transformationOutputParameterModelType as CompositeType, settings));
+                                            transformationOutputParameterModelCompositeTypeName);
                                     }
 
                                     foreach (ParameterMapping mapping in transformationParameterMappings)
@@ -7519,7 +7258,7 @@ namespace AutoRest.Java
                                         }
 
                                         function.Line("{0}{1}{2};",
-                                            !conditionalAssignment && !transformationOutputParameterModelIsCompositeType ? transformationOutputParameterClientParameterVariantTypeName + " " : "",
+                                            !conditionalAssignment && transformationOutputParameterModelCompositeType == null ? transformationOutputParameterClientParameterVariantTypeName + " " : "",
                                             outParamName,
                                             getMapping);
                                     }
@@ -7536,7 +7275,14 @@ namespace AutoRest.Java
                                     IModelType parameterModelType = parameter.ModelType;
                                     if (parameterModelType != null && !IsNullable(parameter))
                                     {
-                                        parameterModelType = GetIModelTypeNonNullableVariant(parameterModelType);
+                                        if (parameterModelType is PrimaryType parameterModelPrimaryType)
+                                        {
+                                            PrimaryType nonNullableParameterModelPrimaryType = DependencyInjection.New<PrimaryType>(parameterModelPrimaryType.KnownPrimaryType);
+                                            nonNullableParameterModelPrimaryType.Format = parameterModelPrimaryType.Format;
+                                            primaryTypeNotWantNullable.Add(nonNullableParameterModelPrimaryType);
+
+                                            parameterModelType = nonNullableParameterModelPrimaryType;
+                                        }
                                     }
                                     IModelType parameterClientType = ConvertToClientType(parameterModelType);
 
@@ -7638,7 +7384,14 @@ namespace AutoRest.Java
                                         IModelType parameterModelType = parameter.ModelType;
                                         if (parameterModelType != null && !IsNullable(parameter))
                                         {
-                                            parameterModelType = GetIModelTypeNonNullableVariant(parameterModelType);
+                                            if (parameterModelType is PrimaryType parameterModelPrimaryType)
+                                            {
+                                                PrimaryType nonNullableParameterModelPrimaryType = DependencyInjection.New<PrimaryType>(parameterModelPrimaryType.KnownPrimaryType);
+                                                nonNullableParameterModelPrimaryType.Format = parameterModelPrimaryType.Format;
+                                                primaryTypeNotWantNullable.Add(nonNullableParameterModelPrimaryType);
+
+                                                parameterModelType = nonNullableParameterModelPrimaryType;
+                                            }
                                         }
                                         IModelType parameterClientType = ConvertToClientType(parameterModelType);
 
@@ -7701,7 +7454,14 @@ namespace AutoRest.Java
                                 IModelType parameterModelType = parameter.ModelType;
                                 if (parameterModelType != null && !IsNullable(parameter))
                                 {
-                                    parameterModelType = GetIModelTypeNonNullableVariant(parameterModelType);
+                                    if (parameterModelType is PrimaryType parameterModelPrimaryType)
+                                    {
+                                        PrimaryType nonNullableParameterModelPrimaryType = DependencyInjection.New<PrimaryType>(parameterModelPrimaryType.KnownPrimaryType);
+                                        nonNullableParameterModelPrimaryType.Format = parameterModelPrimaryType.Format;
+                                        primaryTypeNotWantNullable.Add(nonNullableParameterModelPrimaryType);
+
+                                        parameterModelType = nonNullableParameterModelPrimaryType;
+                                    }
                                 }
                                 IModelType parameterClientType = ConvertToClientType(parameterModelType);
                                 string parameterType = IModelTypeName(parameterClientType, settings);
@@ -7725,7 +7485,14 @@ namespace AutoRest.Java
                                         IModelType parameterModelType = parameter.ModelType;
                                         if (parameterModelType != null && !IsNullable(parameter))
                                         {
-                                            parameterModelType = GetIModelTypeNonNullableVariant(parameterModelType);
+                                            if (parameterModelType is PrimaryType parameterModelPrimaryType)
+                                            {
+                                                PrimaryType nonNullableParameterModelPrimaryType = DependencyInjection.New<PrimaryType>(parameterModelPrimaryType.KnownPrimaryType);
+                                                nonNullableParameterModelPrimaryType.Format = parameterModelPrimaryType.Format;
+                                                primaryTypeNotWantNullable.Add(nonNullableParameterModelPrimaryType);
+
+                                                parameterModelType = nonNullableParameterModelPrimaryType;
+                                            }
                                         }
                                         parameterDocumentation = $"the {IModelTypeName(parameterModelType, settings)} value";
                                     }
@@ -7769,7 +7536,14 @@ namespace AutoRest.Java
                                         IModelType parameterModelType = parameter.ModelType;
                                         if (parameterModelType != null && !IsNullable(parameter))
                                         {
-                                            parameterModelType = GetIModelTypeNonNullableVariant(parameterModelType);
+                                            if (parameterModelType is PrimaryType parameterModelPrimaryType)
+                                            {
+                                                PrimaryType nonNullableParameterModelPrimaryType = DependencyInjection.New<PrimaryType>(parameterModelPrimaryType.KnownPrimaryType);
+                                                nonNullableParameterModelPrimaryType.Format = parameterModelPrimaryType.Format;
+                                                primaryTypeNotWantNullable.Add(nonNullableParameterModelPrimaryType);
+
+                                                parameterModelType = nonNullableParameterModelPrimaryType;
+                                            }
                                         }
                                         parameterDocumentation = $"the {IModelTypeName(parameterModelType, settings)} value";
                                     }
@@ -7810,7 +7584,14 @@ namespace AutoRest.Java
                                         IModelType parameterModelType = parameter.ModelType;
                                         if (parameterModelType != null && !IsNullable(parameter))
                                         {
-                                            parameterModelType = GetIModelTypeNonNullableVariant(parameterModelType);
+                                            if (parameterModelType is PrimaryType parameterModelPrimaryType)
+                                            {
+                                                PrimaryType nonNullableParameterModelPrimaryType = DependencyInjection.New<PrimaryType>(parameterModelPrimaryType.KnownPrimaryType);
+                                                nonNullableParameterModelPrimaryType.Format = parameterModelPrimaryType.Format;
+                                                primaryTypeNotWantNullable.Add(nonNullableParameterModelPrimaryType);
+
+                                                parameterModelType = nonNullableParameterModelPrimaryType;
+                                            }
                                         }
                                         parameterDocumentation = $"the {IModelTypeName(parameterModelType, settings)} value";
                                     }
@@ -7855,7 +7636,14 @@ namespace AutoRest.Java
                                         IModelType parameterModelType = parameter.ModelType;
                                         if (parameterModelType != null && !IsNullable(parameter))
                                         {
-                                            parameterModelType = GetIModelTypeNonNullableVariant(parameterModelType);
+                                            if (parameterModelType is PrimaryType parameterModelPrimaryType)
+                                            {
+                                                PrimaryType nonNullableParameterModelPrimaryType = DependencyInjection.New<PrimaryType>(parameterModelPrimaryType.KnownPrimaryType);
+                                                nonNullableParameterModelPrimaryType.Format = parameterModelPrimaryType.Format;
+                                                primaryTypeNotWantNullable.Add(nonNullableParameterModelPrimaryType);
+
+                                                parameterModelType = nonNullableParameterModelPrimaryType;
+                                            }
                                         }
                                         result = !(parameterModelType is PrimaryType) && !(parameterModelType is EnumType) && (!onlyRequiredParameters || parameter.IsRequired);
                                     }
@@ -7891,7 +7679,14 @@ namespace AutoRest.Java
                                     IModelType parameterModelType = parameter.ModelType;
                                     if (parameterModelType != null && !IsNullable(parameter))
                                     {
-                                        parameterModelType = GetIModelTypeNonNullableVariant(parameterModelType);
+                                        if (parameterModelType is PrimaryType parameterModelPrimaryType)
+                                        {
+                                            PrimaryType nonNullableParameterModelPrimaryType = DependencyInjection.New<PrimaryType>(parameterModelPrimaryType.KnownPrimaryType);
+                                            nonNullableParameterModelPrimaryType.Format = parameterModelPrimaryType.Format;
+                                            primaryTypeNotWantNullable.Add(nonNullableParameterModelPrimaryType);
+
+                                            parameterModelType = nonNullableParameterModelPrimaryType;
+                                        }
                                     }
                                     IModelType parameterClientType = ConvertToClientType(parameterModelType);
 
@@ -7969,9 +7764,13 @@ namespace AutoRest.Java
                                 {
                                     Parameter transformationOutputParameter = transformation.OutputParameter;
                                     IModelType transformationOutputParameterModelType = transformationOutputParameter.ModelType;
-                                    if (transformationOutputParameterModelType != null && !IsNullable(transformationOutputParameter))
+                                    if (transformationOutputParameterModelType != null && !IsNullable(transformationOutputParameter) && transformationOutputParameterModelType is PrimaryType transformationOutputParameterModelPrimaryType)
                                     {
-                                        transformationOutputParameterModelType = GetIModelTypeNonNullableVariant(transformationOutputParameterModelType);
+                                        PrimaryType transformationOutputParameterModelNonNullablePrimaryType = DependencyInjection.New<PrimaryType>(transformationOutputParameterModelPrimaryType.KnownPrimaryType);
+                                        transformationOutputParameterModelNonNullablePrimaryType.Format = transformationOutputParameterModelPrimaryType.Format;
+                                        primaryTypeNotWantNullable.Add(transformationOutputParameterModelNonNullablePrimaryType);
+
+                                        transformationOutputParameterModelType = transformationOutputParameterModelNonNullablePrimaryType;
                                     }
                                     IModelType transformationOutputParameterClientType = ConvertToClientType(transformationOutputParameterModelType);
 
@@ -8054,13 +7853,19 @@ namespace AutoRest.Java
                                         function.IncreaseIndent();
                                     }
 
-                                    bool transformationOutputParameterModelIsCompositeType = transformationOutputParameterModelType is CompositeType;
-                                    if (transformationParameterMappings.Any(m => !string.IsNullOrEmpty(m.OutputParameterProperty)) && transformationOutputParameterModelIsCompositeType)
+                                    CompositeType transformationOutputParameterModelCompositeType = transformationOutputParameterModelType as CompositeType;
+                                    if (transformationOutputParameterModelCompositeType != null && transformationParameterMappings.Any(m => !string.IsNullOrEmpty(m.OutputParameterProperty)))
                                     {
+                                        string transformationOutputParameterModelCompositeTypeName = transformationOutputParameterModelCompositeType.Name.ToString();
+                                        if (settings.IsFluent && !string.IsNullOrEmpty(transformationOutputParameterModelCompositeTypeName) && innerModelCompositeType.Contains(transformationOutputParameterModelCompositeType))
+                                        {
+                                            transformationOutputParameterModelCompositeTypeName += "Inner";
+                                        }
+
                                         function.Line("{0}{1} = new {2}();",
                                             !conditionalAssignment ? transformationOutputParameterClientParameterVariantTypeName + " " : "",
                                             outParamName,
-                                            GetCompositeTypeName(transformationOutputParameterModelType as CompositeType, settings));
+                                            transformationOutputParameterModelCompositeTypeName);
                                     }
 
                                     foreach (ParameterMapping mapping in transformationParameterMappings)
@@ -8102,7 +7907,7 @@ namespace AutoRest.Java
                                         }
 
                                         function.Line("{0}{1}{2};",
-                                            !conditionalAssignment && !transformationOutputParameterModelIsCompositeType ? transformationOutputParameterClientParameterVariantTypeName + " " : "",
+                                            !conditionalAssignment && transformationOutputParameterModelCompositeType == null ? transformationOutputParameterClientParameterVariantTypeName + " " : "",
                                             outParamName,
                                             getMapping);
                                     }
@@ -8119,7 +7924,14 @@ namespace AutoRest.Java
                                     IModelType parameterModelType = parameter.ModelType;
                                     if (parameterModelType != null && !IsNullable(parameter))
                                     {
-                                        parameterModelType = GetIModelTypeNonNullableVariant(parameterModelType);
+                                        if (parameterModelType is PrimaryType parameterModelPrimaryType)
+                                        {
+                                            PrimaryType nonNullableParameterModelPrimaryType = DependencyInjection.New<PrimaryType>(parameterModelPrimaryType.KnownPrimaryType);
+                                            nonNullableParameterModelPrimaryType.Format = parameterModelPrimaryType.Format;
+                                            primaryTypeNotWantNullable.Add(nonNullableParameterModelPrimaryType);
+
+                                            parameterModelType = nonNullableParameterModelPrimaryType;
+                                        }
                                     }
                                     IModelType parameterClientType = ConvertToClientType(parameterModelType);
 
@@ -8221,7 +8033,14 @@ namespace AutoRest.Java
                                         IModelType parameterModelType = parameter.ModelType;
                                         if (parameterModelType != null && !IsNullable(parameter))
                                         {
-                                            parameterModelType = GetIModelTypeNonNullableVariant(parameterModelType);
+                                            if (parameterModelType is PrimaryType parameterModelPrimaryType)
+                                            {
+                                                PrimaryType nonNullableParameterModelPrimaryType = DependencyInjection.New<PrimaryType>(parameterModelPrimaryType.KnownPrimaryType);
+                                                nonNullableParameterModelPrimaryType.Format = parameterModelPrimaryType.Format;
+                                                primaryTypeNotWantNullable.Add(nonNullableParameterModelPrimaryType);
+
+                                                parameterModelType = nonNullableParameterModelPrimaryType;
+                                            }
                                         }
                                         IModelType parameterClientType = ConvertToClientType(parameterModelType);
 
@@ -8279,7 +8098,14 @@ namespace AutoRest.Java
                             IModelType parameterModelType = parameter.ModelType;
                             if (parameterModelType != null && !IsNullable(parameter))
                             {
-                                parameterModelType = GetIModelTypeNonNullableVariant(parameterModelType);
+                                if (parameterModelType is PrimaryType parameterModelPrimaryType)
+                                {
+                                    PrimaryType nonNullableParameterModelPrimaryType = DependencyInjection.New<PrimaryType>(parameterModelPrimaryType.KnownPrimaryType);
+                                    nonNullableParameterModelPrimaryType.Format = parameterModelPrimaryType.Format;
+                                    primaryTypeNotWantNullable.Add(nonNullableParameterModelPrimaryType);
+
+                                    parameterModelType = nonNullableParameterModelPrimaryType;
+                                }
                             }
                             IModelType parameterClientType = ConvertToClientType(parameterModelType);
                             string parameterType = IModelTypeName(parameterClientType, settings);
@@ -8303,7 +8129,14 @@ namespace AutoRest.Java
                                     IModelType parameterModelType = parameter.ModelType;
                                     if (parameterModelType != null && !IsNullable(parameter))
                                     {
-                                        parameterModelType = GetIModelTypeNonNullableVariant(parameterModelType);
+                                        if (parameterModelType is PrimaryType parameterModelPrimaryType)
+                                        {
+                                            PrimaryType nonNullableParameterModelPrimaryType = DependencyInjection.New<PrimaryType>(parameterModelPrimaryType.KnownPrimaryType);
+                                            nonNullableParameterModelPrimaryType.Format = parameterModelPrimaryType.Format;
+                                            primaryTypeNotWantNullable.Add(nonNullableParameterModelPrimaryType);
+
+                                            parameterModelType = nonNullableParameterModelPrimaryType;
+                                        }
                                     }
                                     parameterDocumentation = $"the {IModelTypeName(parameterModelType, settings)} value";
                                 }
@@ -8354,7 +8187,14 @@ namespace AutoRest.Java
                                     IModelType parameterModelType = parameter.ModelType;
                                     if (parameterModelType != null && !IsNullable(parameter))
                                     {
-                                        parameterModelType = GetIModelTypeNonNullableVariant(parameterModelType);
+                                        if (parameterModelType is PrimaryType parameterModelPrimaryType)
+                                        {
+                                            PrimaryType nonNullableParameterModelPrimaryType = DependencyInjection.New<PrimaryType>(parameterModelPrimaryType.KnownPrimaryType);
+                                            nonNullableParameterModelPrimaryType.Format = parameterModelPrimaryType.Format;
+                                            primaryTypeNotWantNullable.Add(nonNullableParameterModelPrimaryType);
+
+                                            parameterModelType = nonNullableParameterModelPrimaryType;
+                                        }
                                     }
                                     parameterDocumentation = $"the {IModelTypeName(parameterModelType, settings)} value";
                                 }
@@ -8397,7 +8237,14 @@ namespace AutoRest.Java
                                     IModelType parameterModelType = parameter.ModelType;
                                     if (parameterModelType != null && !IsNullable(parameter))
                                     {
-                                        parameterModelType = GetIModelTypeNonNullableVariant(parameterModelType);
+                                        if (parameterModelType is PrimaryType parameterModelPrimaryType)
+                                        {
+                                            PrimaryType nonNullableParameterModelPrimaryType = DependencyInjection.New<PrimaryType>(parameterModelPrimaryType.KnownPrimaryType);
+                                            nonNullableParameterModelPrimaryType.Format = parameterModelPrimaryType.Format;
+                                            primaryTypeNotWantNullable.Add(nonNullableParameterModelPrimaryType);
+
+                                            parameterModelType = nonNullableParameterModelPrimaryType;
+                                        }
                                     }
                                     parameterDocumentation = $"the {IModelTypeName(parameterModelType, settings)} value";
                                 }
@@ -8441,7 +8288,14 @@ namespace AutoRest.Java
                                 IModelType parameterModelType = parameter.ModelType;
                                 if (parameterModelType != null && !IsNullable(parameter))
                                 {
-                                    parameterModelType = GetIModelTypeNonNullableVariant(parameterModelType);
+                                    if (parameterModelType is PrimaryType parameterModelPrimaryType)
+                                    {
+                                        PrimaryType nonNullableParameterModelPrimaryType = DependencyInjection.New<PrimaryType>(parameterModelPrimaryType.KnownPrimaryType);
+                                        nonNullableParameterModelPrimaryType.Format = parameterModelPrimaryType.Format;
+                                        primaryTypeNotWantNullable.Add(nonNullableParameterModelPrimaryType);
+
+                                        parameterModelType = nonNullableParameterModelPrimaryType;
+                                    }
                                 }
                                 IModelType parameterClientType = ConvertToClientType(parameterModelType);
 
@@ -8523,7 +8377,14 @@ namespace AutoRest.Java
                                     IModelType parameterModelType = parameter.ModelType;
                                     if (parameterModelType != null && !IsNullable(parameter))
                                     {
-                                        parameterModelType = GetIModelTypeNonNullableVariant(parameterModelType);
+                                        if (parameterModelType is PrimaryType parameterModelPrimaryType)
+                                        {
+                                            PrimaryType nonNullableParameterModelPrimaryType = DependencyInjection.New<PrimaryType>(parameterModelPrimaryType.KnownPrimaryType);
+                                            nonNullableParameterModelPrimaryType.Format = parameterModelPrimaryType.Format;
+                                            primaryTypeNotWantNullable.Add(nonNullableParameterModelPrimaryType);
+
+                                            parameterModelType = nonNullableParameterModelPrimaryType;
+                                        }
                                     }
                                     result = !(parameterModelType is PrimaryType) && !(parameterModelType is EnumType) && (!onlyRequiredParameters || parameter.IsRequired);
                                 }
@@ -8556,9 +8417,13 @@ namespace AutoRest.Java
                             {
                                 Parameter transformationOutputParameter = transformation.OutputParameter;
                                 IModelType transformationOutputParameterModelType = transformationOutputParameter.ModelType;
-                                if (transformationOutputParameterModelType != null && !IsNullable(transformationOutputParameter))
+                                if (transformationOutputParameterModelType != null && !IsNullable(transformationOutputParameter) && transformationOutputParameterModelType is PrimaryType transformationOutputParameterModelPrimaryType)
                                 {
-                                    transformationOutputParameterModelType = GetIModelTypeNonNullableVariant(transformationOutputParameterModelType);
+                                    PrimaryType transformationOutputParameterModelNonNullablePrimaryType = DependencyInjection.New<PrimaryType>(transformationOutputParameterModelPrimaryType.KnownPrimaryType);
+                                    transformationOutputParameterModelNonNullablePrimaryType.Format = transformationOutputParameterModelPrimaryType.Format;
+                                    primaryTypeNotWantNullable.Add(transformationOutputParameterModelNonNullablePrimaryType);
+
+                                    transformationOutputParameterModelType = transformationOutputParameterModelNonNullablePrimaryType;
                                 }
                                 IModelType transformationOutputParameterClientType = ConvertToClientType(transformationOutputParameterModelType);
 
@@ -8641,13 +8506,19 @@ namespace AutoRest.Java
                                     function.IncreaseIndent();
                                 }
 
-                                bool transformationOutputParameterModelIsCompositeType = transformationOutputParameterModelType is CompositeType;
-                                if (transformationParameterMappings.Any(m => !string.IsNullOrEmpty(m.OutputParameterProperty)) && transformationOutputParameterModelIsCompositeType)
+                                CompositeType transformationOutputParameterModelCompositeType = transformationOutputParameterModelType as CompositeType;
+                                if (transformationOutputParameterModelCompositeType != null && transformationParameterMappings.Any(m => !string.IsNullOrEmpty(m.OutputParameterProperty)))
                                 {
+                                    string transformationOutputParameterModelCompositeTypeName = transformationOutputParameterModelCompositeType.Name.ToString();
+                                    if (settings.IsFluent && !string.IsNullOrEmpty(transformationOutputParameterModelCompositeTypeName) && innerModelCompositeType.Contains(transformationOutputParameterModelCompositeType))
+                                    {
+                                        transformationOutputParameterModelCompositeTypeName += "Inner";
+                                    }
+
                                     function.Line("{0}{1} = new {2}();",
                                         !conditionalAssignment ? transformationOutputParameterClientParameterVariantTypeName + " " : "",
                                         outParamName,
-                                        GetCompositeTypeName(transformationOutputParameterModelType as CompositeType, settings));
+                                        transformationOutputParameterModelCompositeTypeName);
                                 }
 
                                 foreach (ParameterMapping mapping in transformationParameterMappings)
@@ -8689,7 +8560,7 @@ namespace AutoRest.Java
                                     }
 
                                     function.Line("{0}{1}{2};",
-                                        !conditionalAssignment && !transformationOutputParameterModelIsCompositeType ? transformationOutputParameterClientParameterVariantTypeName + " " : "",
+                                        !conditionalAssignment && transformationOutputParameterModelCompositeType == null ? transformationOutputParameterClientParameterVariantTypeName + " " : "",
                                         outParamName,
                                         getMapping);
                                 }
@@ -8706,7 +8577,14 @@ namespace AutoRest.Java
                                 IModelType parameterModelType = parameter.ModelType;
                                 if (parameterModelType != null && !IsNullable(parameter))
                                 {
-                                    parameterModelType = GetIModelTypeNonNullableVariant(parameterModelType);
+                                    if (parameterModelType is PrimaryType parameterModelPrimaryType)
+                                    {
+                                        PrimaryType nonNullableParameterModelPrimaryType = DependencyInjection.New<PrimaryType>(parameterModelPrimaryType.KnownPrimaryType);
+                                        nonNullableParameterModelPrimaryType.Format = parameterModelPrimaryType.Format;
+                                        primaryTypeNotWantNullable.Add(nonNullableParameterModelPrimaryType);
+
+                                        parameterModelType = nonNullableParameterModelPrimaryType;
+                                    }
                                 }
                                 IModelType parameterClientType = ConvertToClientType(parameterModelType);
 
@@ -8808,7 +8686,14 @@ namespace AutoRest.Java
                                     IModelType parameterModelType = parameter.ModelType;
                                     if (parameterModelType != null && !IsNullable(parameter))
                                     {
-                                        parameterModelType = GetIModelTypeNonNullableVariant(parameterModelType);
+                                        if (parameterModelType is PrimaryType parameterModelPrimaryType)
+                                        {
+                                            PrimaryType nonNullableParameterModelPrimaryType = DependencyInjection.New<PrimaryType>(parameterModelPrimaryType.KnownPrimaryType);
+                                            nonNullableParameterModelPrimaryType.Format = parameterModelPrimaryType.Format;
+                                            primaryTypeNotWantNullable.Add(nonNullableParameterModelPrimaryType);
+
+                                            parameterModelType = nonNullableParameterModelPrimaryType;
+                                        }
                                     }
                                     IModelType parameterClientType = ConvertToClientType(parameterModelType);
 
@@ -8877,7 +8762,14 @@ namespace AutoRest.Java
                                     IModelType parameterModelType = parameter.ModelType;
                                     if (parameterModelType != null && !IsNullable(parameter))
                                     {
-                                        parameterModelType = GetIModelTypeNonNullableVariant(parameterModelType);
+                                        if (parameterModelType is PrimaryType parameterModelPrimaryType)
+                                        {
+                                            PrimaryType nonNullableParameterModelPrimaryType = DependencyInjection.New<PrimaryType>(parameterModelPrimaryType.KnownPrimaryType);
+                                            nonNullableParameterModelPrimaryType.Format = parameterModelPrimaryType.Format;
+                                            primaryTypeNotWantNullable.Add(nonNullableParameterModelPrimaryType);
+
+                                            parameterModelType = nonNullableParameterModelPrimaryType;
+                                        }
                                     }
                                     parameterDocumentation = $"the {IModelTypeName(parameterModelType, settings)} value";
                                 }
