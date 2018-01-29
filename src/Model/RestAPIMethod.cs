@@ -15,6 +15,7 @@ namespace AutoRest.Java.Model
         /// Create a new RestAPIMethod with the provided properties.
         /// </summary>
         /// <param name="requestContentType">The Content-Type of the request.</param>
+        /// <param name="returnValue">The value that is returned from this method.</param>
         /// <param name="isPagingNextOperation">Whether or not this method is a request to get the next page of a sequence of pages.</param>
         /// <param name="httpMethod">The HTTP method that will be used for this method.</param>
         /// <param name="urlPath">The path of this method's request URL.</param>
@@ -29,10 +30,10 @@ namespace AutoRest.Java.Model
         /// <param name="simulateAsPagingOperation">Whether or not to simulate this method as a paging operation.</param>
         /// <param name="isLongRunningOperation">Whether or not this method is a long running operation.</param>
         /// <param name="returnValueClientType">The return value's type as it is returned from the client.</param>
-        /// <param name="asyncReturnType">The asynchronous return type of this RestAPIMethod.</param>
-        public RestAPIMethod(string requestContentType, bool isPagingNextOperation, string httpMethod, string urlPath, IEnumerable<HttpStatusCode> responseExpectedStatusCodes, string unexpectedResponseExceptionType, string name, IEnumerable<RestAPIParameter> parameters, bool isPagingOperation, string description, bool simulateAsPagingOperation, bool isLongRunningOperation, RestAPIGenericType asyncReturnType)
+        public RestAPIMethod(string requestContentType, ReturnValue returnValue, bool isPagingNextOperation, string httpMethod, string urlPath, IEnumerable<HttpStatusCode> responseExpectedStatusCodes, ClassType unexpectedResponseExceptionType, string name, IEnumerable<RestAPIParameter> parameters, bool isPagingOperation, string description, bool simulateAsPagingOperation, bool isLongRunningOperation)
         {
             RequestContentType = requestContentType;
+            ReturnValue = returnValue;
             IsPagingNextOperation = isPagingNextOperation;
             HttpMethod = httpMethod;
             UrlPath = urlPath;
@@ -44,13 +45,17 @@ namespace AutoRest.Java.Model
             Description = description;
             SimulateAsPagingOperation = simulateAsPagingOperation;
             IsLongRunningOperation = isLongRunningOperation;
-            AsyncReturnType = asyncReturnType;
         }
 
         /// <summary>
         /// Get the Content-Type of the request.
         /// </summary>
         public string RequestContentType { get; }
+
+        /// <summary>
+        /// The value that is returned from this method.
+        /// </summary>
+        public ReturnValue ReturnValue { get; }
 
         /// <summary>
         /// Get whether or not this method is a request to get the next page of a sequence of pages.
@@ -75,7 +80,7 @@ namespace AutoRest.Java.Model
         /// <summary>
         /// Get the exception type to throw if this method receives and unexpected response status code.
         /// </summary>
-        public string UnexpectedResponseExceptionType { get; }
+        public ClassType UnexpectedResponseExceptionType { get; }
 
         /// <summary>
         /// Get the name of this Rest API method.
@@ -108,8 +113,20 @@ namespace AutoRest.Java.Model
         public bool IsLongRunningOperation { get; }
 
         /// <summary>
-        /// The asynchronous return type of this RestAPIMethod.
+        /// Add this property's imports to the provided ISet of imports.
         /// </summary>
-        public RestAPIGenericType AsyncReturnType { get; }
+        /// <param name="imports">The set of imports to add to.</param>
+        /// <param name="includeImplementationImports">Whether or not to include imports that are only necessary for method implementations.</param>
+        public void AddImportsTo(ISet<string> imports, bool includeImplementationImports, JavaSettings settings)
+        {
+            ReturnValue.AddImportsTo(imports, includeImplementationImports, settings);
+
+            UnexpectedResponseExceptionType?.AddImportsTo(imports, includeImplementationImports);
+
+            foreach (RestAPIParameter parameter in Parameters)
+            {
+                parameter.AddImportsTo(imports, includeImplementationImports, settings);
+            }
+        }
     }
 }

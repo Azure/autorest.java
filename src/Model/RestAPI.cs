@@ -37,5 +37,18 @@ namespace AutoRest.Java.Model
         /// Get the methods of this REST API.
         /// </summary>
         public IEnumerable<RestAPIMethod> Methods { get; }
+
+        /// <summary>
+        /// Add this property's imports to the provided ISet of imports.
+        /// </summary>
+        /// <param name="imports">The set of imports to add to.</param>
+        /// <param name="includeImplementationImports">Whether or not to include imports that are only necessary for method implementations.</param>
+        public void AddImportsTo(ISet<string> imports, bool includeImplementationImports, JavaSettings settings)
+        {
+            foreach (RestAPIMethod method in Methods)
+            {
+                method.AddImportsTo(imports, includeImplementationImports, settings);
+            }
+        }
     }
 }

@@ -4,9 +4,22 @@
 namespace AutoRest.Java.Model
 {
     /// <summary>
-    /// A type used by a REST API method.
+    /// The location of a parameter within a HTTP request.
     /// </summary>
-    public interface RestAPIType
+    public enum RequestParameterLocation
     {
+        Body,
+
+        FormData,
+
+        Host,
+
+        Path,
+
+        Header,
+
+        None,
+
+        Query,
     }
 }

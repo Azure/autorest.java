@@ -6,20 +6,20 @@ namespace AutoRest.Java.Model
     /// <summary>
     /// A sequence type used by a REST API method.
     /// </summary>
-    public class RestAPISequenceType : RestAPIGenericType
+    public class ListType : GenericType
     {
         /// <summary>
         /// Create a new RestAPISequenceType from the provided properties.
         /// </summary>
         /// <param name="elementType">The type of elements that are stored in this sequence.</param>
-        public RestAPISequenceType(RestAPIType elementType)
-            : base("List", new[] { elementType })
+        public ListType(IType elementType)
+            : base("java.util", "List", elementType)
         {
         }
 
         /// <summary>
         /// The type of elements that are stored in this sequence.
         /// </summary>
-        public RestAPIType ElementType => TypeArguments[0];
+        public IType ElementType => TypeArguments[0];
     }
 }

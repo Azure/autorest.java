@@ -72,5 +72,18 @@ namespace AutoRest.Java.Model
         /// Get the variable name for any instances of this MethodGroupClient.
         /// </summary>
         public string VariableName { get; }
+
+        /// <summary>
+        /// Add this property's imports to the provided ISet of imports.
+        /// </summary>
+        /// <param name="imports">The set of imports to add to.</param>
+        /// <param name="includeImplementationImports">Whether or not to include imports that are only necessary for method implementations.</param>
+        public void AddImportsTo(ISet<string> imports, bool includeImplementationImports, JavaSettings settings)
+        {
+            if (!settings.IsFluent)
+            {
+                imports.Add($"{settings.Package}.{InterfaceName}");
+            }
+        }
     }
 }

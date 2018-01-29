@@ -65,5 +65,35 @@ namespace AutoRest.Java.Model
         /// Get whether or not this ServiceClient uses credentials to authenticate to its service.
         /// </summary>
         public bool UsesCredentials { get; }
+
+        /// <summary>
+        /// Add this property's imports to the provided ISet of imports.
+        /// </summary>
+        /// <param name="imports">The set of imports to add to.</param>
+        /// <param name="includeImplementationImports">Whether or not to include imports that are only necessary for method implementations.</param>
+        public void AddImportsTo(ISet<string> imports, bool includeImplementationImports, JavaSettings settings)
+        {
+            if (!settings.IsFluent)
+            {
+                imports.Add($"{settings.Package}.{InterfaceName}");
+            }
+
+            if (UsesCredentials)
+            {
+                ClassType.ServiceClientCredentials.AddImportsTo(imports, true);
+            }
+
+            foreach (ServiceClientProperty serviceClientProperty in Properties)
+            {
+                serviceClientProperty.AddImportsTo(imports, true);
+            }
+
+            foreach (MethodGroupClient methodGroupClient in MethodGroupClients)
+            {
+                methodGroupClient.AddImportsTo(imports, true, settings);
+            }
+
+            RestAPI?.AddImportsTo(imports, true, settings);
+        }
     }
 }

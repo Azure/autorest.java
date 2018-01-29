@@ -22,7 +22,7 @@ namespace AutoRest.Java.Model
         /// <param name="models"></param>
         /// <param name="manager"></param>
         /// <param name="serviceClient"></param>
-        public Service(string clientName, string clientDescription, IEnumerable<string> subpackages, IEnumerable<ServiceEnum> enums, IEnumerable<ServiceException> exceptions, IEnumerable<XmlSequenceWrapper> xmlSequenceWrappers, IEnumerable<ServiceModel> models, ServiceManager manager, ServiceClient serviceClient)
+        public Service(string clientName, string clientDescription, IEnumerable<string> subpackages, IEnumerable<EnumType> enums, IEnumerable<ServiceException> exceptions, IEnumerable<XmlSequenceWrapper> xmlSequenceWrappers, IEnumerable<ServiceModel> models, ServiceManager manager, ServiceClient serviceClient)
         {
             ClientName = clientName;
             ClientDescription = clientDescription;
@@ -53,7 +53,7 @@ namespace AutoRest.Java.Model
         /// <summary>
         /// Get the enum types that are used by this service.
         /// </summary>
-        public IEnumerable<ServiceEnum> Enums { get; }
+        public IEnumerable<EnumType> Enums { get; }
 
         /// <summary>
         /// Get the exception types that are used by this service.
