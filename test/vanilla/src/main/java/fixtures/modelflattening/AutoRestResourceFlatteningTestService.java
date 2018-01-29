@@ -25,7 +25,6 @@ import io.reactivex.Completable;
 import io.reactivex.Maybe;
 import io.reactivex.Observable;
 import io.reactivex.Single;
-import java.io.IOException;
 import java.util.List;
 import java.util.Map;
 

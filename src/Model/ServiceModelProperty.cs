@@ -18,6 +18,7 @@ namespace AutoRest.Java.Model
         /// <param name="xmlName">This property's name when serialized to XML.</param>
         /// <param name="serializedName">This property's name when it is serialized.</param>
         /// <param name="isXmlWrapper">Whether or not this property is a container.</param>
+        /// <param name="xmlListElementName">The name of each list element tag within an XML list property.</param>
         /// <param name="wireTypeName">The name of this property's type when it is sent through the network (across the wire).</param>
         /// <param name="isConstant">Whether or not this property has a constant value.</param>
         /// <param name="modelTypeIsSequence">Whether or not this property's model type is a sequence type.</param>
@@ -25,7 +26,7 @@ namespace AutoRest.Java.Model
         /// <param name="clientTypeName">The name of this property's type when it is exposed via the client library.</param>
         /// <param name="defaultValue">The default value expression of this property.</param>
         /// <param name="isReadOnly">Whether or not this property's value can be changed by the client library.</param>
-        public ServiceModelProperty(string name, string description, string annotationArguments, bool isXmlAttribute, string xmlName, string serializedName, bool isXmlWrapper, string wireTypeName, bool isConstant, bool modelTypeIsSequence, bool modelTypeIsComposite, string clientTypeName, string defaultValue, bool isReadOnly)
+        public ServiceModelProperty(string name, string description, string annotationArguments, bool isXmlAttribute, string xmlName, string serializedName, bool isXmlWrapper, string xmlListElementName, string wireTypeName, bool isConstant, bool modelTypeIsSequence, bool modelTypeIsComposite, string clientTypeName, string defaultValue, bool isReadOnly)
         {
             Name = name;
             Description = description;
@@ -34,6 +35,7 @@ namespace AutoRest.Java.Model
             XmlName = xmlName;
             SerializedName = serializedName;
             IsXmlWrapper = isXmlWrapper;
+            XmlListElementName = xmlListElementName;
             WireTypeName = wireTypeName;
             IsConstant = isConstant;
             ModelTypeIsSequence = modelTypeIsSequence;
@@ -77,6 +79,11 @@ namespace AutoRest.Java.Model
         /// Get whether or not this property is a container.
         /// </summary>
         public bool IsXmlWrapper { get; }
+
+        /// <summary>
+        /// The name of each list element tag within an XML list property.
+        /// </summary>
+        public string XmlListElementName { get; }
 
         /// <summary>
         /// Get the name of this property's type when it is sent through the network (across the wire).

@@ -21,7 +21,6 @@ import fixtures.azureparametergrouping.models.ParameterGroupingPostRequiredParam
 import io.reactivex.Completable;
 import io.reactivex.Observable;
 import io.reactivex.Single;
-import java.io.IOException;
 
 /**
  * An instance of this class provides access to all the operations defined in

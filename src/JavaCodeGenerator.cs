@@ -3170,6 +3170,8 @@ namespace AutoRest.Java
                 propertyModelType = propertyModelNonNullablePrimaryType;
             }
 
+            string xmlListElementName = propertyModelType is SequenceType st ? st.ElementXmlName : null;
+
             string wireTypeName = AutoRestIModelTypeName(propertyModelType, settings);
 
             bool isConstant = property.IsConstant;
@@ -3229,7 +3231,7 @@ namespace AutoRest.Java
 
             bool isReadOnly = property.IsReadOnly;
 
-            return new ServiceModelProperty(name, description, annotationArguments, isXmlAttribute, xmlName, serializedName, isXmlWrapper, wireTypeName, isConstant, modelTypeIsSequence, modelTypeIsComposite, clientTypeName, defaultValue, isReadOnly);
+            return new ServiceModelProperty(name, description, annotationArguments, isXmlAttribute, xmlName, serializedName, isXmlWrapper, xmlListElementName, wireTypeName, isConstant, modelTypeIsSequence, modelTypeIsComposite, clientTypeName, defaultValue, isReadOnly);
         }
 
         private static ServiceManager ParseManager(string serviceClientName, AutoRestCodeModel codeModel, JavaSettings settings)
@@ -4428,6 +4430,8 @@ namespace AutoRest.Java
                         {
                             string localName = settings.ShouldGenerateXmlSerialization ? property.XmlName : property.SerializedName.ToString();
                             classBlock.Annotation($"JacksonXmlElementWrapper(localName = \"{localName}\")");
+
+                            classBlock.Annotation($"JsonProperty(\"{property.XmlListElementName}\")");
                         }
                         else
                         {
