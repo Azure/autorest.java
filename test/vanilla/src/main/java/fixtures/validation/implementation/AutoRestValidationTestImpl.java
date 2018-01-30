@@ -10,7 +10,6 @@
 
 package fixtures.validation.implementation;
 
-import com.microsoft.rest.v2.RestException;
 import com.microsoft.rest.v2.RestProxy;
 import com.microsoft.rest.v2.RestResponse;
 import com.microsoft.rest.v2.ServiceCallback;
@@ -32,7 +31,6 @@ import fixtures.validation.models.ErrorException;
 import fixtures.validation.models.Product;
 import io.reactivex.Completable;
 import io.reactivex.Maybe;
-import io.reactivex.Observable;
 import io.reactivex.Single;
 import io.reactivex.functions.Function;
 

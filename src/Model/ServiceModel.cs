@@ -14,7 +14,7 @@ namespace AutoRest.Java.Model
         /// Create a new ServiceModel with the provided properties.
         /// </summary>
         /// <param name="name">The name of this model.</param>
-        /// <param name="package">The package that this model is in.</param>
+        /// <param name="subPackage">The subpackage that this model is in.</param>
         /// <param name="imports">The imports for this model.</param>
         /// <param name="description">The description of this model.</param>
         /// <param name="isPolymorphic">Whether or not this model has model types that derive from it.</param>
@@ -25,10 +25,10 @@ namespace AutoRest.Java.Model
         /// <param name="derivedModels">The models that derive from this model.</param>
         /// <param name="xmlName">The name that will be used for this model's XML element representation.</param>
         /// <param name="properties">The properties for this model.</param>
-        public ServiceModel(string name, string package, IEnumerable<string> imports, string description, bool isPolymorphic, string polymorphicDiscriminator, string serializedName, bool needsFlatten, ServiceModel parentModel, IEnumerable<ServiceModel> derivedModels, string xmlName, IEnumerable<ServiceModelProperty> properties)
+        public ServiceModel(string name, string subPackage, IEnumerable<string> imports, string description, bool isPolymorphic, string polymorphicDiscriminator, string serializedName, bool needsFlatten, ServiceModel parentModel, IEnumerable<ServiceModel> derivedModels, string xmlName, IEnumerable<ServiceModelProperty> properties)
         {
             Name = name;
-            Package = package;
+            SubPackage = subPackage;
             Imports = imports;
             Description = description;
             IsPolymorphic = isPolymorphic;
@@ -47,9 +47,9 @@ namespace AutoRest.Java.Model
         public string Name { get; }
 
         /// <summary>
-        /// Get the package that this model is in.
+        /// Get the subpackage that this model is in.
         /// </summary>
-        public string Package { get; }
+        public string SubPackage { get; }
 
         /// <summary>
         /// Get the imports for this model.

@@ -74,6 +74,11 @@ namespace AutoRest.Java.Model
         public string VariableName { get; }
 
         /// <summary>
+        /// The client method overloads for this MethodGroupClient.
+        /// </summary>
+        public IEnumerable<Method> ClientMethods { get; }
+
+        /// <summary>
         /// Add this property's imports to the provided ISet of imports.
         /// </summary>
         /// <param name="imports">The set of imports to add to.</param>
@@ -84,6 +89,13 @@ namespace AutoRest.Java.Model
             {
                 imports.Add($"{settings.Package}.{InterfaceName}");
             }
+
+            foreach (string import in Imports)
+            {
+                imports.Add(import);
+            }
+
+            RestAPI.AddImportsTo(imports, includeImplementationImports, settings);
         }
     }
 }

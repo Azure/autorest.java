@@ -11,16 +11,6 @@ namespace AutoRest.Java.Model
     /// </summary>
     public class GenericType : IType
     {
-        public static readonly GenericType FlowableByteArray = Flowable(ArrayType.ByteArray);
-
-        public static GenericType Flowable(IType typeArgument) => new GenericType("io.reactivex", "Flowable", typeArgument);
-        public static GenericType Observable(IType typeArgument) => new GenericType("io.reactivex", "Observable", typeArgument);
-        public static GenericType Single(IType typeArgument) => new GenericType("io.reactivex", "Single", typeArgument);
-        public static GenericType RestResponse(IType headersType, IType bodyType) => new GenericType("com.microsoft.rest.v2", "RestResponse", headersType, bodyType);
-        public static GenericType Page(IType typeArgument) => new GenericType("com.microsoft.azure.v2", "Page", typeArgument);
-        public static GenericType PagedList(IType typeArgument) => new GenericType("com.microsoft.azure.v2", "PagedList", typeArgument);
-        public static GenericType OperationStatus(IType typeArgument) => new GenericType("com.microsoft.azure.v2", "OperationStatus", typeArgument);
-
         /// <summary>
         /// Create a new GenericType from the provided properties.
         /// </summary>
@@ -53,6 +43,21 @@ namespace AutoRest.Java.Model
             return $"{Name}<{string.Join(", ", TypeArguments.Select((IType typeArgument) => typeArgument.AsNullable().ToString()))}>";
         }
 
+        public override bool Equals(object rhs)
+        {
+            return rhs is GenericType genericTypeRhs &&
+                Package == genericTypeRhs.Package &&
+                Name == genericTypeRhs.Name &&
+                TypeArguments.SequenceEqual(genericTypeRhs.TypeArguments);
+        }
+
+        public override int GetHashCode()
+        {
+            return Package.GetHashCode() +
+                Name.GetHashCode() +
+                TypeArguments.Select(typeArgument => typeArgument.GetHashCode()).Sum();
+        }
+
         public IType AsNullable()
         {
             return this;
@@ -63,7 +68,7 @@ namespace AutoRest.Java.Model
             return this == type || TypeArguments.Any((IType typeArgument) => typeArgument.Contains(type));
         }
 
-        public void AddImportsTo(ISet<string> imports, bool includeImplementationImports)
+        public virtual void AddImportsTo(ISet<string> imports, bool includeImplementationImports)
         {
             imports.Add($"{Package}.{Name}");
             foreach (IType typeArgument in TypeArguments)

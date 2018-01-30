@@ -13,14 +13,16 @@ namespace AutoRest.Java.Model
         /// <summary>
         /// Create a new ServiceClient with the provided properties.
         /// </summary>
+        /// <param name="package">The package that this service client belongs to.</param>
         /// <param name="className">The name of the client's class.</param>
         /// <param name="interfaceName">The name of the client's interface.</param>
         /// <param name="imports">The imports for the client.</param>
         /// <param name="restAPI">The REST API that the client will send requests to.</param>
         /// <param name="methodGroupClients">The MethodGroupClients that belong to this ServiceClient.</param>
         /// <param name="properties">The properties of this ServiceClient</param>
-        /// <param name="usesCredentials">Whether or not this ServiceClient uses credentials to authenticate to its service.</param>
-        public ServiceClient(string className, string interfaceName, IEnumerable<string> imports, RestAPI restAPI, IEnumerable<MethodGroupClient> methodGroupClients, IEnumerable<ServiceClientProperty> properties, bool usesCredentials)
+        /// <param name="constructors">The constructors for this ServiceClient.</param>
+        /// <param name="clientMethods">The client method overloads for this ServiceClient.</param>
+        public ServiceClient(string className, string interfaceName, IEnumerable<string> imports, RestAPI restAPI, IEnumerable<MethodGroupClient> methodGroupClients, IEnumerable<ServiceClientProperty> properties, IEnumerable<Constructor> constructors, IEnumerable<Method> clientMethods)
         {
             ClassName = className;
             InterfaceName = interfaceName;
@@ -28,7 +30,8 @@ namespace AutoRest.Java.Model
             RestAPI = restAPI;
             MethodGroupClients = methodGroupClients;
             Properties = properties;
-            UsesCredentials = usesCredentials;
+            Constructors = constructors;
+            ClientMethods = clientMethods;
         }
 
         /// <summary>
@@ -62,9 +65,14 @@ namespace AutoRest.Java.Model
         public IEnumerable<ServiceClientProperty> Properties { get; }
 
         /// <summary>
-        /// Get whether or not this ServiceClient uses credentials to authenticate to its service.
+        /// The constructors for this ServiceClient.
         /// </summary>
-        public bool UsesCredentials { get; }
+        public IEnumerable<Constructor> Constructors { get; }
+
+        /// <summary>
+        /// The client method overloads for this ServiceClient.
+        /// </summary>
+        public IEnumerable<Method> ClientMethods { get; }
 
         /// <summary>
         /// Add this property's imports to the provided ISet of imports.
@@ -73,14 +81,24 @@ namespace AutoRest.Java.Model
         /// <param name="includeImplementationImports">Whether or not to include imports that are only necessary for method implementations.</param>
         public void AddImportsTo(ISet<string> imports, bool includeImplementationImports, JavaSettings settings)
         {
+            if (settings.IsAzureOrFluent)
+            {
+                imports.Add("com.microsoft.azure.v2.AzureServiceClient");
+                imports.Add("com.microsoft.azure.v2.AzureProxy");
+            }
+            else
+            {
+                imports.Add("com.microsoft.rest.v2.ServiceClient");
+                imports.Add("com.microsoft.rest.v2.RestProxy");
+            }
+
             if (!settings.IsFluent)
             {
                 imports.Add($"{settings.Package}.{InterfaceName}");
-            }
-
-            if (UsesCredentials)
-            {
-                ClassType.ServiceClientCredentials.AddImportsTo(imports, true);
+                foreach (MethodGroupClient methodGroupClient in MethodGroupClients)
+                {
+                    imports.Add($"{settings.Package}.{methodGroupClient.InterfaceName}");
+                }
             }
 
             foreach (ServiceClientProperty serviceClientProperty in Properties)
@@ -88,9 +106,9 @@ namespace AutoRest.Java.Model
                 serviceClientProperty.AddImportsTo(imports, true);
             }
 
-            foreach (MethodGroupClient methodGroupClient in MethodGroupClients)
+            foreach (Constructor constructor in Constructors)
             {
-                methodGroupClient.AddImportsTo(imports, true, settings);
+                constructor.AddImportsTo(imports, true);
             }
 
             RestAPI?.AddImportsTo(imports, true, settings);

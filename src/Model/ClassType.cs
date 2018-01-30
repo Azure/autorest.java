@@ -23,10 +23,14 @@ namespace AutoRest.Java.Model
         public static readonly ClassType UUID = new ClassType("java.util", "UUID", null, null, false);
         public static readonly ClassType Object = new ClassType("java.lang", "Object", null, null, false);
         public static readonly ClassType ServiceClientCredentials = new ClassType("com.microsoft.rest.v2.credentials", "ServiceClientCredentials", null, null, false);
+        public static readonly ClassType AzureTokenCredentials = new ClassType("com.microsoft.azure.v2.credentials", "AzureTokenCredentials", null, null, false);
         public static readonly ClassType CloudException = new ClassType("com.microsoft.azure.v2", "CloudException", null, null, false);
         public static readonly ClassType RestException = new ClassType("com.microsoft.azure.v2", "RestException", null, null, false);
+        public static readonly ClassType UnixTime = new ClassType("com.microsoft.rest.v2", "UnixTime", null, null, false);
         public static readonly ClassType UnixTimeDateTime = new ClassType("org.joda.time", "DateTime", new[] { "org.joda.time.DateTimeZone" }, null, false);
         public static readonly ClassType UnixTimeLong = new ClassType("java.lang", "Long", null, null, false);
+        public static readonly ClassType AzureEnvironment = new ClassType("com.microsoft.azure.v2", "AzureEnvironment", null, null, false);
+        public static readonly ClassType HttpPipeline = new ClassType("com.microsoft.rest.v2.http", "HttpPipeline", null, null, false);
 
         public ClassType(string package, string name, IEnumerable<string> implementationImports, IDictionary<string,string> extensions, bool isInnerModelType)
         {

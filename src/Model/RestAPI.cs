@@ -45,6 +45,8 @@ namespace AutoRest.Java.Model
         /// <param name="includeImplementationImports">Whether or not to include imports that are only necessary for method implementations.</param>
         public void AddImportsTo(ISet<string> imports, bool includeImplementationImports, JavaSettings settings)
         {
+            imports.Add("com.microsoft.rest.v2.annotations.Host");
+
             foreach (RestAPIMethod method in Methods)
             {
                 method.AddImportsTo(imports, includeImplementationImports, settings);

@@ -47,30 +47,13 @@ namespace AutoRest.Java
         private const string targetVersion = "1.1.3";
         internal const string pomVersion = targetVersion + "-SNAPSHOT";
 
-        private const string httpPipelineImport = "com.microsoft.rest.v2.http." + httpPipelineType;
-        private const string httpPipelineDescription = "The HTTP pipeline to send requests through.";
-        private const string httpPipelineType = "HttpPipeline";
-        private const string httpPipelineVariableName = "httpPipeline";
-
-        private const string restProxyImport = "com.microsoft.rest.v2." + restProxyType;
         private const string restProxyType = "RestProxy";
-
-        private const string serializerImport = "com.microsoft.rest.v2.protocol.SerializerAdapter";
-
-        private const string azureEnvironmentImport = "com.microsoft.azure.v2." + azureEnvironmentType;
-        private const string azureEnvironmentType = "AzureEnvironment";
-        private const string azureEnvironmentVariableName = "azureEnvironment";
-        private const string azureEnvironmentDescription = "The environment that requests will target.";
-
-        private const string azureProxyImport = "com.microsoft.azure.v2." + azureProxyType;
         private const string azureProxyType = "AzureProxy";
 
-        private const string serviceClientCredentialsType = "ServiceClientCredentials";
-        private const string serviceClientCredentialsImport = "com.microsoft.rest.v2.credentials." + serviceClientCredentialsType;
-        private const string azureTokenCredentialsType = "AzureTokenCredentials";
-        private const string azureTokenCredentialsImport = "com.microsoft.azure.v2.credentials." + azureTokenCredentialsType;
-        private const string credentialsVariableName = "credentials";
-        private const string credentialsDescription = "the management credentials for Azure";
+        private static readonly Parameter serviceClientCredentialsParameter = new Parameter("the management credentials for Azure", false, ClassType.ServiceClientCredentials, "credentials", true);
+        private static readonly Parameter azureTokenCredentialsParameter = new Parameter("the management credentials for Azure", false, ClassType.AzureTokenCredentials, "credentials", true);
+        private static readonly Parameter azureEnvironmentParameter = new Parameter("The environment that requests will target.", false, ClassType.AzureEnvironment, "azureEnvironment", true);
+        private static readonly Parameter httpPipelineParameter = new Parameter("The HTTP pipeline to send requests through.", false, ClassType.HttpPipeline, "httpPipeline", true);
 
         private const string serviceCallbackVariableName = "serviceCallback";
 
@@ -125,7 +108,10 @@ namespace AutoRest.Java
         private static readonly IDictionary<AutoRestIModelType, IType> parsedAutoRestIModelTypes = new Dictionary<AutoRestIModelType, IType>();
 
         private static readonly Regex methodTypeLeading = new Regex("^/+");
-        private static readonly Regex methodTypeTrailing = new Regex("/+$");                                
+        private static readonly Regex methodTypeTrailing = new Regex("/+$");
+
+        private static readonly IEnumerable<IType> unixTimeTypes = new IType[] { PrimitiveType.UnixTimeLong, ClassType.UnixTimeLong, ClassType.UnixTimeDateTime };
+        private static readonly IEnumerable<IType> returnValueWireTypeOptions = new IType[] { ClassType.Base64Url, ClassType.DateTimeRfc1123 }.Concat(unixTimeTypes);
 
         private const string ClientRuntimePackage = "com.microsoft.rest.v2:client-runtime:2.0.0-SNAPSHOT from snapshot repo https://oss.sonatype.org/content/repositories/snapshots/";
 
@@ -623,7 +609,11 @@ namespace AutoRest.Java
             List<EnumType> enumTypes = new List<EnumType>();
             foreach (AutoRestEnumType autoRestEnumType in codeModel.EnumTypes)
             {
-                enumTypes.Add(ParseEnumType(autoRestEnumType, settings));
+                IType type = ParseEnumType(autoRestEnumType, settings);
+                if (type is EnumType enumType)
+                {
+                    enumTypes.Add(enumType);
+                }
             }
 
             IEnumerable<ServiceException> exceptions = ParseExceptions(codeModel, settings);
@@ -644,6 +634,7 @@ namespace AutoRest.Java
             string serviceClientClassName = serviceClientInterfaceName + "Impl";
 
             RestAPI serviceClientRestAPI = null;
+            List<Method> serviceClientMethods = new List<Method>();
             IEnumerable<AutoRestMethod> codeModelRestAPIMethods = codeModel.Methods.Where(m => m.Group.IsNullOrEmpty());
             if (codeModelRestAPIMethods.Any())
             {
@@ -652,7 +643,8 @@ namespace AutoRest.Java
                 List<RestAPIMethod> restAPIMethods = new List<RestAPIMethod>();
                 foreach (AutoRestMethod codeModelRestAPIMethod in codeModelRestAPIMethods)
                 {
-                    restAPIMethods.Add(ParseRestAPIMethod(codeModelRestAPIMethod, settings));
+                    RestAPIMethod restAPIMethod = ParseRestAPIMethod(codeModelRestAPIMethod, settings);
+                    restAPIMethods.Add(restAPIMethod);
                 }
                 serviceClientRestAPI = new RestAPI(restAPIName, restAPIBaseURL, restAPIMethods);
             }
@@ -664,7 +656,7 @@ namespace AutoRest.Java
                 serviceClientMethodGroupClients.Add(ParseMethodGroupClient(codeModelMethodGroup, settings));
             }
 
-            bool serviceClientUsesCredentials = false;
+            bool usesCredentials = false;
 
             List<ServiceClientProperty> serviceClientProperties = new List<ServiceClientProperty>();
             foreach (AutoRestProperty codeModelServiceClientProperty in codeModel.Properties)
@@ -716,7 +708,7 @@ namespace AutoRest.Java
 
                 if (serviceClientPropertyClientType == ClassType.ServiceClientCredentials)
                 {
-                    serviceClientUsesCredentials = true;
+                    usesCredentials = true;
                 }
                 else
                 {
@@ -724,37 +716,41 @@ namespace AutoRest.Java
                 }
             }
 
-            HashSet<string> serviceClientImports = new HashSet<string>();
-            if (!settings.IsFluent)
+            List<Constructor> serviceClientConstructors = new List<Constructor>();
+            string constructorDescription = $"Initializes an instance of {serviceClientInterfaceName} client.";
+            if (settings.IsAzureOrFluent)
             {
-                foreach (MethodGroupClient methodGroupClient in serviceClientMethodGroupClients)
+                if (usesCredentials)
                 {
-                    serviceClientImports.Add(settings.Package + '.' + methodGroupClient.InterfaceName);
+                    serviceClientConstructors.Add(new Constructor(serviceClientCredentialsParameter));
+                    serviceClientConstructors.Add(new Constructor(serviceClientCredentialsParameter, azureEnvironmentParameter));
                 }
+                else
+                {
+                    serviceClientConstructors.Add(new Constructor());
+                    serviceClientConstructors.Add(new Constructor(azureEnvironmentParameter));
+                }
+
+                serviceClientConstructors.Add(new Constructor(httpPipelineParameter));
+                serviceClientConstructors.Add(new Constructor(httpPipelineParameter, azureEnvironmentParameter));
             }
+            else
+            {
+                serviceClientConstructors.Add(new Constructor());
+                serviceClientConstructors.Add(new Constructor(httpPipelineParameter));
+            }
+
+            HashSet<string> serviceClientImports = new HashSet<string>();
             if (serviceClientRestAPI != null)
             {
-                serviceClientImports.Add("com.microsoft.rest.v2.RestResponse");
-
                 foreach (AutoRestMethod codeModelRestAPIMethod in codeModelRestAPIMethods)
                 {
                     HashSet<string> methodImports = new HashSet<string>()
                     {
-                        "io.reactivex.Observable",
-                        "io.reactivex.Single",
                         "io.reactivex.functions.Function",
                         "com.microsoft.rest.v2.ServiceFuture",
                         "com.microsoft.rest.v2.ServiceCallback",
-                        "com.microsoft.rest.v2.annotations.ExpectedResponses",
-                        "com.microsoft.rest.v2.annotations.Headers",
-                        "com.microsoft.rest.v2.annotations.Host",
-                        "com.microsoft.rest.v2.http.HttpClient",
                     };
-
-                    if (codeModelRestAPIMethod.DefaultResponse.Body != null)
-                    {
-                        methodImports.Add("com.microsoft.rest.v2.annotations.UnexpectedResponseExceptionType");
-                    }
 
                     AutoRestResponse restAPIMethodReturnType = codeModelRestAPIMethod.ReturnType;
                     if (restAPIMethodReturnType.Body == null)
@@ -821,11 +817,6 @@ namespace AutoRest.Java
                             methodImports.AddRange(GetIModelTypeImports(parameterWireType, settings));
                         }
 
-                        if (location != AutoRestParameterLocation.FormData)
-                        {
-                            methodImports.Add($"com.microsoft.rest.v2.annotations.{location.ToString()}Param");
-                        }
-
                         if (location != AutoRestParameterLocation.Body)
                         {
                             if (parameterModelType.IsPrimaryType(AutoRestKnownPrimaryType.ByteArray))
@@ -837,15 +828,6 @@ namespace AutoRest.Java
                                 methodImports.Add("com.microsoft.rest.v2.CollectionFormat");
                             }
                         }
-                    }
-
-                    // Http verb annotations
-                    methodImports.Add($"com.microsoft.rest.v2.annotations.{codeModelRestAPIMethod.HttpMethod.ToString().ToUpperInvariant()}");
-
-                    // response type conversion
-                    if (codeModelRestAPIMethod.Responses.Any())
-                    {
-                        methodImports.Add("com.google.common.reflect.TypeToken");
                     }
 
                     // validation
@@ -928,50 +910,6 @@ namespace AutoRest.Java
                     AutoRestIModelType returnTypeHeadersWireType = restAPIMethodReturnType.Headers;
                     methodImports.AddRange(GetIModelTypeImports(returnTypeHeadersWireType, settings));
 
-                    AutoRestIModelType returnTypeCurrentType = restAPIMethodReturnType.Body;
-                    while (returnTypeCurrentType != null)
-                    {
-                        if (returnTypeCurrentType is AutoRestSequenceType currentSequenceType)
-                        {
-                            returnTypeCurrentType = currentSequenceType.ElementType;
-                        }
-                        else if (returnTypeCurrentType is AutoRestDictionaryType currentDictionaryType)
-                        {
-                            returnTypeCurrentType = currentDictionaryType.ValueType;
-                        }
-                        else
-                        {
-                            if (returnTypeCurrentType is AutoRestPrimaryType currentPrimaryType)
-                            {
-                                string currentPrimaryTypeName = currentPrimaryType?.Name?.FixedValue;
-                                if (currentPrimaryTypeName.EqualsIgnoreCase("Base64Url") ||
-                                    currentPrimaryTypeName.EqualsIgnoreCase("DateTimeRfc1123") ||
-                                    currentPrimaryTypeName.EqualsIgnoreCase("UnixTime"))
-                                {
-                                    methodImports.Add("com.microsoft.rest.v2.annotations.ReturnValueWireType");
-                                    methodImports.Add("com.microsoft.rest.v2." + currentPrimaryTypeName);
-                                }
-                            }
-
-                            returnTypeCurrentType = null;
-                        }
-                    }
-
-                    AutoRestIModelType returnTypeHeaderClientType = ConvertToClientType(restAPIMethodReturnType.Headers);
-                    if (((returnTypeBodyWireType == null ? restAPIMethodReturnBodyClientType != null : !returnTypeBodyWireType.StructurallyEquals(restAPIMethodReturnBodyClientType)) && AutoRestIModelTypeName(restAPIMethodReturnBodyClientType, settings) != "void") ||
-                        (returnTypeHeadersWireType == null ? returnTypeHeaderClientType != null : !returnTypeHeadersWireType.StructurallyEquals(returnTypeHeaderClientType)))
-                    {
-                        AutoRestIModelType responseBody = restAPIMethodReturnType.Body;
-                        if (responseBody is AutoRestSequenceType || returnTypeHeadersWireType is AutoRestSequenceType)
-                        {
-                            methodImports.Add("java.util.ArrayList");
-                        }
-                        else if (responseBody is AutoRestDictionaryType || returnTypeHeadersWireType is AutoRestDictionaryType)
-                        {
-                            methodImports.Add("java.util.HashMap");
-                        }
-                    }
-
                     // response type (can be different from return type)
                     IEnumerable<AutoRestResponse> methodResponses = codeModelRestAPIMethod.Responses.Values;
                     foreach (AutoRestResponse methodResponse in methodResponses)
@@ -1001,35 +939,6 @@ namespace AutoRest.Java
                         AutoRestIModelType responseHeadersWireType = methodResponse.Headers;
                         methodImports.AddRange(GetIModelTypeImports(responseHeadersWireType, settings));
 
-                        AutoRestIModelType responseCurrentType = methodResponse.Body;
-                        while (responseCurrentType != null)
-                        {
-                            if (responseCurrentType is AutoRestSequenceType currentSequenceType)
-                            {
-                                responseCurrentType = currentSequenceType.ElementType;
-                            }
-                            else if (responseCurrentType is AutoRestDictionaryType currentDictionaryType)
-                            {
-                                responseCurrentType = currentDictionaryType.ValueType;
-                            }
-                            else
-                            {
-                                if (responseCurrentType is AutoRestPrimaryType currentPrimaryType)
-                                {
-                                    string currentPrimaryTypeName = currentPrimaryType?.Name?.FixedValue;
-                                    if (currentPrimaryTypeName.EqualsIgnoreCase("Base64Url") ||
-                                        currentPrimaryTypeName.EqualsIgnoreCase("DateTimeRfc1123") ||
-                                        currentPrimaryTypeName.EqualsIgnoreCase("UnixTime"))
-                                    {
-                                        methodImports.Add("com.microsoft.rest.v2.annotations.ReturnValueWireType");
-                                        methodImports.Add("com.microsoft.rest.v2." + currentPrimaryTypeName);
-                                    }
-                                }
-
-                                responseCurrentType = null;
-                            }
-                        }
-
                         AutoRestIModelType responseHeaderClientType = ConvertToClientType(methodResponse.Headers);
                         if (((responseBodyWireType == null ? methodResponseBodyClientType != null : !responseBodyWireType.StructurallyEquals(methodResponseBodyClientType)) && AutoRestIModelTypeName(methodResponseBodyClientType, settings) != "void") ||
                             (responseHeadersWireType == null ? responseHeaderClientType != null : !responseHeadersWireType.StructurallyEquals(responseHeaderClientType)))
@@ -1046,68 +955,7 @@ namespace AutoRest.Java
                         }
                     }
 
-                    // exceptions
-                    methodImports.Add("java.io.IOException");
-
-                    string methodOperationExceptionTypeName;
-                    AutoRestIModelType restAPIMethodExceptionType = codeModelRestAPIMethod.DefaultResponse.Body;
-                    if (settings.IsAzureOrFluent && (restAPIMethodExceptionType == null || AutoRestIModelTypeName(restAPIMethodExceptionType, settings) == "CloudError"))
-                    {
-                        methodOperationExceptionTypeName = "CloudException";
-                    }
-                    else if (restAPIMethodExceptionType is AutoRestCompositeType compositeReturnType)
-                    {
-                        methodOperationExceptionTypeName = compositeReturnType.Name.ToString();
-                        if (settings.IsFluent && !string.IsNullOrEmpty(methodOperationExceptionTypeName) && innerModelCompositeType.Contains(compositeReturnType))
-                        {
-                            methodOperationExceptionTypeName += "Inner";
-                        }
-                        methodOperationExceptionTypeName += "Exception";
-
-                        if (compositeReturnType.Extensions.ContainsKey(SwaggerExtensions.NameOverrideExtension))
-                        {
-                            JContainer ext = compositeReturnType.Extensions[SwaggerExtensions.NameOverrideExtension] as JContainer;
-                            if (ext != null && ext["name"] != null)
-                            {
-                                methodOperationExceptionTypeName = ext["name"].ToString();
-                            }
-                        }
-                    }
-                    else
-                    {
-                        methodOperationExceptionTypeName = "RestException";
-                    }
-
-                    switch (methodOperationExceptionTypeName)
-                    {
-                        case "CloudException":
-                            methodImports.Add("com.microsoft.azure.v2.CloudException");
-                            break;
-                        case "RestException":
-                            methodImports.Add("com.microsoft.rest.v2.RestException");
-                            break;
-                        default:
-                            methodImports.Add($"{settings.Package}.models.{methodOperationExceptionTypeName}");
-                            break;
-                    }
-
                     // parameterized host
-                    bool isParameterizedHost;
-                    bool containsParameterizedHostExtension = codeModelRestAPIMethod?.CodeModel?.Extensions?.ContainsKey(SwaggerExtensions.ParameterizedHostExtension) ?? false;
-                    if (settings.IsAzureOrFluent)
-                    {
-                        isParameterizedHost = containsParameterizedHostExtension && !methodIsPagingNextOperation;
-                    }
-                    else
-                    {
-                        isParameterizedHost = containsParameterizedHostExtension;
-                    }
-
-                    if (isParameterizedHost)
-                    {
-                        methodImports.Add("com.microsoft.rest.v2.annotations.HostParam");
-                    }
-
                     if (settings.IsAzureOrFluent)
                     {
                         bool methodIsLongRunningOperation = GetExtensionBool(codeModelRestAPIMethod?.Extensions, AzureExtensions.LongRunningExtension);
@@ -1159,165 +1007,12 @@ namespace AutoRest.Java
                         {
                             methodImports.AddRange(CompositeTypeImports(typeName, false, false, true, false, settings.Package));
                         }
-
-                        if (settings.IsFluent)
-                        {
-                            if (methodOperationExceptionTypeName != "CloudException" && methodOperationExceptionTypeName != "RestException")
-                            {
-                                IEnumerable<string> methodOperationExceptionTypeNameAzureImports = CompositeTypeImports(methodOperationExceptionTypeName, false, false, true, false, settings.Package);
-                                methodImports.RemoveWhere(i => methodOperationExceptionTypeNameAzureImports.Contains(i));
-                                methodImports.AddRange(CompositeTypeImports(methodOperationExceptionTypeName, false, false, false, true, settings.Package));
-                            }
-                            if (methodIsLongRunningOperation)
-                            {
-                                codeModelRestAPIMethod.Responses.Select(r => r.Value.Body).Concat(new AutoRestIModelType[] { codeModelRestAPIMethod.DefaultResponse.Body })
-                                    .SelectMany(t => GetIModelTypeImports(t, settings))
-                                    .Where(i => !codeModelRestAPIMethod.Parameters.Any(parameter =>
-                                    {
-                                        AutoRestIModelType parameterModelType = parameter.ModelType;
-                                        if (parameterModelType != null && !IsNullable(parameter))
-                                        {
-                                            if (parameterModelType is AutoRestPrimaryType parameterModelPrimaryType)
-                                            {
-                                                AutoRestPrimaryType nonNullableParameterModelPrimaryType = DependencyInjection.New<AutoRestPrimaryType>(parameterModelPrimaryType.KnownPrimaryType);
-                                                nonNullableParameterModelPrimaryType.Format = parameterModelPrimaryType.Format;
-                                                primaryTypeNotWantNullable.Add(nonNullableParameterModelPrimaryType);
-
-                                                parameterModelType = nonNullableParameterModelPrimaryType;
-                                            }
-                                        }
-                                        return GetIModelTypeImports(parameterModelType, settings).Contains(i);
-                                    }))
-                                    .ForEach(i => methodImports.Remove(i));
-                            }
-
-                            bool simulateMethodAsPagingOperation = false;
-                            AutoRestMethodGroup methodGroup = codeModelRestAPIMethod.MethodGroup;
-                            if (!string.IsNullOrEmpty(methodGroup?.Name?.ToString()))
-                            {
-                                MethodType restAPIMethodType = MethodType.Other;
-                                string methodUrl = methodTypeTrailing.Replace(methodTypeLeading.Replace(codeModelRestAPIMethod.Url, ""), "");
-                                string[] methodUrlSplits = methodUrl.Split('/');
-                                switch (codeModelRestAPIMethod.HttpMethod)
-                                {
-                                    case AutoRestHttpMethod.Get:
-                                        if ((methodUrlSplits.Length == 5 || methodUrlSplits.Length == 7)
-                                            && methodUrlSplits[0].EqualsIgnoreCase("subscriptions")
-                                            && MethodHasSequenceType(codeModelRestAPIMethod.ReturnType.Body, settings))
-                                        {
-                                            if (methodUrlSplits.Length == 5)
-                                            {
-                                                if (methodUrlSplits[2].EqualsIgnoreCase("providers"))
-                                                {
-                                                    restAPIMethodType = MethodType.ListBySubscription;
-                                                }
-                                                else
-                                                {
-                                                    restAPIMethodType = MethodType.ListByResourceGroup;
-                                                }
-                                            }
-                                            else if (methodUrlSplits[2].EqualsIgnoreCase("resourceGroups"))
-                                            {
-                                                restAPIMethodType = MethodType.ListByResourceGroup;
-                                            }
-                                        }
-                                        else if (IsTopLevelResourceUrl(methodUrlSplits))
-                                        {
-                                            restAPIMethodType = MethodType.Get;
-                                        }
-                                        break;
-
-                                    case AutoRestHttpMethod.Delete:
-                                        if (IsTopLevelResourceUrl(methodUrlSplits))
-                                        {
-                                            restAPIMethodType = MethodType.Delete;
-                                        }
-                                        break;
-                                }
-                                simulateMethodAsPagingOperation = (restAPIMethodType == MethodType.ListByResourceGroup || restAPIMethodType == MethodType.ListBySubscription) &&
-                                    1 == methodGroup.Methods.Count((AutoRestMethod methodGroupMethod) =>
-                                    {
-                                        MethodType methodGroupMethodType = MethodType.Other;
-                                        string methodGroupMethodUrl = methodTypeTrailing.Replace(methodTypeLeading.Replace(methodGroupMethod.Url, ""), "");
-                                        string[] methodGroupMethodUrlSplits = methodGroupMethodUrl.Split('/');
-                                        switch (methodGroupMethod.HttpMethod)
-                                        {
-                                            case AutoRestHttpMethod.Get:
-                                                if ((methodGroupMethodUrlSplits.Length == 5 || methodGroupMethodUrlSplits.Length == 7)
-                                                    && methodGroupMethodUrlSplits[0].EqualsIgnoreCase("subscriptions")
-                                                    && MethodHasSequenceType(methodGroupMethod.ReturnType.Body, settings))
-                                                {
-                                                    if (methodGroupMethodUrlSplits.Length == 5)
-                                                    {
-                                                        if (methodGroupMethodUrlSplits[2].EqualsIgnoreCase("providers"))
-                                                        {
-                                                            methodGroupMethodType = MethodType.ListBySubscription;
-                                                        }
-                                                        else
-                                                        {
-                                                            methodGroupMethodType = MethodType.ListByResourceGroup;
-                                                        }
-                                                    }
-                                                    else if (methodGroupMethodUrlSplits[2].EqualsIgnoreCase("resourceGroups"))
-                                                    {
-                                                        methodGroupMethodType = MethodType.ListByResourceGroup;
-                                                    }
-                                                }
-                                                else if (IsTopLevelResourceUrl(methodGroupMethodUrlSplits))
-                                                {
-                                                    methodGroupMethodType = MethodType.Get;
-                                                }
-                                                break;
-
-                                            case AutoRestHttpMethod.Delete:
-                                                if (IsTopLevelResourceUrl(methodGroupMethodUrlSplits))
-                                                {
-                                                    methodGroupMethodType = MethodType.Delete;
-                                                }
-                                                break;
-                                        }
-                                        return methodGroupMethodType == restAPIMethodType;
-                                    });
-                            }
-
-                            if (methodIsPagingOperation || methodIsPagingNextOperation || simulateMethodAsPagingOperation)
-                            {
-                                methodImports.Add("com.microsoft.azure.v2.PagedList");
-
-                                if (!simulateMethodAsPagingOperation)
-                                {
-                                    methodImports.Remove("com.microsoft.rest.v2.ServiceCallback");
-                                }
-
-                                methodImports.Remove("java.util.ArrayList");
-                                methodImports.Add("com.microsoft.azure.v2.Page");
-                            }
-
-                            if ((methodIsPagingOperation || methodIsPagingNextOperation || simulateMethodAsPagingOperation || methodIsPagingNonPollingOperation) && restAPIMethodReturnBodyClientSequenceType != null)
-                            {
-                                string pageImplType = SequenceTypeGetPageImplType(restAPIMethodReturnBodyClientType);
-                                IEnumerable<string> pageImplTypeAzureImports = CompositeTypeImports(pageImplType, false, false, true, false, settings.Package);
-                                methodImports.RemoveWhere(i => pageImplTypeAzureImports.Contains(i));
-                            }
-                        }
                     }
                     serviceClientImports.AddRange(methodImports);
                 }
             }
-            serviceClientImports.Add(httpPipelineImport);
-            if (settings.IsAzureOrFluent)
-            {
-                serviceClientImports.Add(azureProxyImport);
-                serviceClientImports.Add("com.microsoft.azure.v2.AzureServiceClient");
-                serviceClientImports.Add(azureEnvironmentImport);
-            }
-            else
-            {
-                serviceClientImports.Add(restProxyImport);
-                serviceClientImports.Add("com.microsoft.rest.v2.ServiceClient");
-            }
 
-            return new ServiceClient(serviceClientClassName, serviceClientInterfaceName, serviceClientImports, serviceClientRestAPI, serviceClientMethodGroupClients, serviceClientProperties, serviceClientUsesCredentials);
+            return new ServiceClient(serviceClientClassName, serviceClientInterfaceName, serviceClientImports, serviceClientRestAPI, serviceClientMethodGroupClients, serviceClientProperties, serviceClientConstructors, serviceClientMethods);
         }
 
         private static MethodGroupClient ParseMethodGroupClient(AutoRestMethodGroup methodGroup, JavaSettings settings)
@@ -1361,9 +1056,7 @@ namespace AutoRest.Java
                     "com.microsoft.rest.v2.ServiceFuture",
                     "com.microsoft.rest.v2.ServiceCallback",
                     "com.microsoft.rest.v2.annotations.ExpectedResponses",
-                    "com.microsoft.rest.v2.annotations.Headers",
                     "com.microsoft.rest.v2.annotations.Host",
-                    "com.microsoft.rest.v2.http.HttpClient",
                 };
 
                 if (methodGroupRestAPIMethod.DefaultResponse.Body != null)
@@ -1457,12 +1150,6 @@ namespace AutoRest.Java
                 // Http verb annotations
                 methodImports.Add($"com.microsoft.rest.v2.annotations.{methodGroupRestAPIMethod.HttpMethod.ToString().ToUpperInvariant()}");
 
-                // response type conversion
-                if (methodGroupRestAPIMethod.Responses.Any())
-                {
-                    methodImports.Add("com.google.common.reflect.TypeToken");
-                }
-
                 // validation
                 bool hasClientMethodParametersOrClientPropertiesToValidate = methodGroupRestAPIMethod.Parameters.Where(parameter =>
                 {
@@ -1542,35 +1229,6 @@ namespace AutoRest.Java
                 AutoRestIModelType returnTypeHeadersWireType = restAPIMethodReturnType.Headers;
                 methodImports.AddRange(GetIModelTypeImports(returnTypeHeadersWireType, settings));
 
-                AutoRestIModelType methodReturnTypeCurrentType = restAPIMethodReturnType.Body;
-                while (methodReturnTypeCurrentType != null)
-                {
-                    if (methodReturnTypeCurrentType is AutoRestSequenceType currentSequenceType)
-                    {
-                        methodReturnTypeCurrentType = currentSequenceType.ElementType;
-                    }
-                    else if (methodReturnTypeCurrentType is AutoRestDictionaryType currentDictionaryType)
-                    {
-                        methodReturnTypeCurrentType = currentDictionaryType.ValueType;
-                    }
-                    else
-                    {
-                        if (methodReturnTypeCurrentType is AutoRestPrimaryType currentPrimaryType)
-                        {
-                            string currentPrimaryTypeName = currentPrimaryType?.Name?.FixedValue;
-                            if (currentPrimaryTypeName.EqualsIgnoreCase("Base64Url") ||
-                                currentPrimaryTypeName.EqualsIgnoreCase("DateTimeRfc1123") ||
-                                currentPrimaryTypeName.EqualsIgnoreCase("UnixTime"))
-                            {
-                                methodImports.Add("com.microsoft.rest.v2.annotations.ReturnValueWireType");
-                                methodImports.Add("com.microsoft.rest.v2." + currentPrimaryTypeName);
-                            }
-                        }
-
-                        methodReturnTypeCurrentType = null;
-                    }
-                }
-
                 AutoRestIModelType returnTypeHeaderClientType = ConvertToClientType(restAPIMethodReturnType.Headers);
                 if (((returnTypeBodyWireType == null ? restAPIMethodReturnBodyClientType != null : !returnTypeBodyWireType.StructurallyEquals(restAPIMethodReturnBodyClientType)) && AutoRestIModelTypeName(restAPIMethodReturnBodyClientType, settings) != "void") ||
                     (returnTypeHeadersWireType == null ? returnTypeHeaderClientType != null : !returnTypeHeadersWireType.StructurallyEquals(returnTypeHeaderClientType)))
@@ -1598,35 +1256,6 @@ namespace AutoRest.Java
 
                     AutoRestIModelType responseHeadersWireType = methodResponse.Headers;
                     methodImports.AddRange(GetIModelTypeImports(responseHeadersWireType, settings));
-
-                    AutoRestIModelType responseCurrentType = methodResponse.Body;
-                    while (responseCurrentType != null)
-                    {
-                        if (responseCurrentType is AutoRestSequenceType currentSequenceType)
-                        {
-                            responseCurrentType = currentSequenceType.ElementType;
-                        }
-                        else if (responseCurrentType is AutoRestDictionaryType currentDictionaryType)
-                        {
-                            responseCurrentType = currentDictionaryType.ValueType;
-                        }
-                        else
-                        {
-                            if (responseCurrentType is AutoRestPrimaryType currentPrimaryType)
-                            {
-                                string currentPrimaryTypeName = currentPrimaryType?.Name?.FixedValue;
-                                if (currentPrimaryTypeName.EqualsIgnoreCase("Base64Url") ||
-                                    currentPrimaryTypeName.EqualsIgnoreCase("DateTimeRfc1123") ||
-                                    currentPrimaryTypeName.EqualsIgnoreCase("UnixTime"))
-                                {
-                                    methodImports.Add("com.microsoft.rest.v2.annotations.ReturnValueWireType");
-                                    methodImports.Add("com.microsoft.rest.v2." + currentPrimaryTypeName);
-                                }
-                            }
-
-                            responseCurrentType = null;
-                        }
-                    }
 
                     AutoRestIModelType methodResponseBodyClientType = ConvertToClientType(methodResponse.Body ?? DependencyInjection.New<AutoRestPrimaryType>(AutoRestKnownPrimaryType.None));
                     AutoRestSequenceType methodResponseBodyClientSequenceType = methodResponseBodyClientType as AutoRestSequenceType;
@@ -1659,8 +1288,6 @@ namespace AutoRest.Java
                 }
 
                 // exceptions
-                methodImports.Add("java.io.IOException");
-
                 string methodOperationExceptionTypeName;
                 AutoRestIModelType restAPIMethodExceptionType = methodGroupRestAPIMethod.DefaultResponse.Body;
                 if (settings.IsAzureOrFluent && (restAPIMethodExceptionType == null || AutoRestIModelTypeName(restAPIMethodExceptionType, settings) == "CloudError"))
@@ -2210,22 +1837,22 @@ namespace AutoRest.Java
             return new MethodGroupClient(className, interfaceName, implementedInterfaces, restAPI, imports, serviceClientName, variableType, variableName);
         }
 
-        private static RestAPIMethod ParseRestAPIMethod(AutoRestMethod autorestRestAPIMethod, JavaSettings settings)
+        private static RestAPIMethod ParseRestAPIMethod(AutoRestMethod autoRestRestAPIMethod, JavaSettings settings)
         {
-            string restAPIMethodRequestContentType = autorestRestAPIMethod.RequestContentType;
+            string restAPIMethodRequestContentType = autoRestRestAPIMethod.RequestContentType;
 
-            bool restAPIMethodIsPagingNextOperation = GetExtensionBool(autorestRestAPIMethod?.Extensions, "nextLinkMethod");
+            bool restAPIMethodIsPagingNextOperation = GetExtensionBool(autoRestRestAPIMethod?.Extensions, "nextLinkMethod");
 
-            string restAPIMethodHttpMethod = autorestRestAPIMethod.HttpMethod.ToString().ToUpper();
+            string restAPIMethodHttpMethod = autoRestRestAPIMethod.HttpMethod.ToString().ToUpper();
 
-            string restAPIMethodUrlPath = autorestRestAPIMethod.Url.TrimStart('/');
+            string restAPIMethodUrlPath = autoRestRestAPIMethod.Url.TrimStart('/');
 
-            IEnumerable<HttpStatusCode> restAPIMethodExpectedResponseStatusCodes = autorestRestAPIMethod.Responses.Keys.OrderBy(statusCode => statusCode);
+            IEnumerable<HttpStatusCode> restAPIMethodExpectedResponseStatusCodes = autoRestRestAPIMethod.Responses.Keys.OrderBy(statusCode => statusCode);
 
             ClassType restAPIMethodExceptionType = null;
-            if (autorestRestAPIMethod.DefaultResponse.Body != null)
+            if (autoRestRestAPIMethod.DefaultResponse.Body != null)
             {
-                AutoRestIModelType autoRestExceptionType = autorestRestAPIMethod.DefaultResponse.Body;
+                AutoRestIModelType autoRestExceptionType = autoRestRestAPIMethod.DefaultResponse.Body;
                 IType errorType = ParseType(autoRestExceptionType, settings);
 
                 if (settings.IsAzureOrFluent && (errorType == null || errorType.ToString() == "CloudError"))
@@ -2266,18 +1893,18 @@ namespace AutoRest.Java
             }
 
             string wellKnownMethodName = null;
-            AutoRestMethodGroup methodGroup = autorestRestAPIMethod.MethodGroup;
+            AutoRestMethodGroup methodGroup = autoRestRestAPIMethod.MethodGroup;
             if (!string.IsNullOrEmpty(methodGroup?.Name?.ToString()))
             {
                 MethodType methodType = MethodType.Other;
-                string methodUrl = methodTypeTrailing.Replace(methodTypeLeading.Replace(autorestRestAPIMethod.Url, ""), "");
+                string methodUrl = methodTypeTrailing.Replace(methodTypeLeading.Replace(autoRestRestAPIMethod.Url, ""), "");
                 string[] methodUrlSplits = methodUrl.Split('/');
-                switch (autorestRestAPIMethod.HttpMethod)
+                switch (autoRestRestAPIMethod.HttpMethod)
                 {
                     case AutoRestHttpMethod.Get:
                         if ((methodUrlSplits.Length == 5 || methodUrlSplits.Length == 7)
                             && methodUrlSplits[0].EqualsIgnoreCase("subscriptions")
-                            && MethodHasSequenceType(autorestRestAPIMethod.ReturnType.Body, settings))
+                            && MethodHasSequenceType(autoRestRestAPIMethod.ReturnType.Body, settings))
                         {
                             if (methodUrlSplits.Length == 5)
                             {
@@ -2384,29 +2011,29 @@ namespace AutoRest.Java
             string restAPIMethodName;
             if (!string.IsNullOrWhiteSpace(wellKnownMethodName))
             {
-                AutoRestIParent methodParent = autorestRestAPIMethod.Parent;
-                restAPIMethodName = CodeNamer.Instance.GetUnique(wellKnownMethodName, autorestRestAPIMethod, methodParent.IdentifiersInScope, methodParent.Children.Except(autorestRestAPIMethod.SingleItemAsEnumerable()));
+                AutoRestIParent methodParent = autoRestRestAPIMethod.Parent;
+                restAPIMethodName = CodeNamer.Instance.GetUnique(wellKnownMethodName, autoRestRestAPIMethod, methodParent.IdentifiersInScope, methodParent.Children.Except(autoRestRestAPIMethod.SingleItemAsEnumerable()));
             }
             else
             {
-                restAPIMethodName = autorestRestAPIMethod.Name;
+                restAPIMethodName = autoRestRestAPIMethod.Name;
             }
             restAPIMethodName = restAPIMethodName.ToCamelCase();
 
             bool restAPIMethodSimulateMethodAsPagingOperation = (wellKnownMethodName == List || wellKnownMethodName == ListByResourceGroup);
 
-            bool restAPIMethodIsLongRunningOperation = GetExtensionBool(autorestRestAPIMethod?.Extensions, AzureExtensions.LongRunningExtension);
+            bool restAPIMethodIsLongRunningOperation = GetExtensionBool(autoRestRestAPIMethod?.Extensions, AzureExtensions.LongRunningExtension);
 
-            AutoRestResponse autoRestRestAPIMethodReturnType = autorestRestAPIMethod.ReturnType;
+            AutoRestResponse autoRestRestAPIMethodReturnType = autoRestRestAPIMethod.ReturnType;
             IType responseBodyType = ParseType(autoRestRestAPIMethodReturnType.Body, settings);
             ListType responseBodyWireListType = responseBodyType as ListType;
 
             AutoRestIModelType autorestRestAPIMethodReturnClientType = ConvertToClientType(autoRestRestAPIMethodReturnType.Body ?? DependencyInjection.New<AutoRestPrimaryType>(AutoRestKnownPrimaryType.None));
             AutoRestSequenceType autorestRestAPIMethodReturnClientSequenceType = autorestRestAPIMethodReturnClientType as AutoRestSequenceType;
 
-            bool autorestRestAPIMethodReturnTypeIsPaged = GetExtensionBool(autorestRestAPIMethod.Extensions, "nextLinkMethod") ||
-                (autorestRestAPIMethod.Extensions.ContainsKey(AzureExtensions.PageableExtension) &&
-                 autorestRestAPIMethod.Extensions[AzureExtensions.PageableExtension] != null);
+            bool autorestRestAPIMethodReturnTypeIsPaged = GetExtensionBool(autoRestRestAPIMethod.Extensions, "nextLinkMethod") ||
+                (autoRestRestAPIMethod.Extensions.ContainsKey(AzureExtensions.PageableExtension) &&
+                 autoRestRestAPIMethod.Extensions[AzureExtensions.PageableExtension] != null);
 
             if (settings.IsAzureOrFluent && responseBodyWireListType != null && autorestRestAPIMethodReturnTypeIsPaged)
             {
@@ -2424,19 +2051,19 @@ namespace AutoRest.Java
                 pagedListTypes.Add(responseBodyWireListType);
             }
 
-            GenericType responseBodyAsyncType;
+            IType restAPIMethodReturnType;
             if (restAPIMethodIsLongRunningOperation)
             {
                 IType operationStatusTypeArgument;
                 if (settings.IsAzureOrFluent && responseBodyWireListType != null && (autorestRestAPIMethodReturnTypeIsPaged || restAPIMethodSimulateMethodAsPagingOperation))
                 {
-                    operationStatusTypeArgument = GenericType.Page(responseBodyWireListType.ElementType);
+                    operationStatusTypeArgument = new PageType(responseBodyWireListType.ElementType);
                 }
                 else
                 {
                     operationStatusTypeArgument = responseBodyType;
                 }
-                responseBodyAsyncType = GenericType.Observable(GenericType.OperationStatus(operationStatusTypeArgument));
+                restAPIMethodReturnType = new ObservableType(new OperationStatusType(operationStatusTypeArgument));
             }
             else
             {
@@ -2452,33 +2079,42 @@ namespace AutoRest.Java
                     restResponseBodyType = responseBodyType;
                 }
 
-                responseBodyAsyncType = GenericType.Single(GenericType.RestResponse(restResponseHeadersType, responseBodyType));
+                restAPIMethodReturnType = new SingleType(new RestResponseType(restResponseHeadersType, responseBodyType));
             }
-            ReturnValue restAPIMethodReturnValue = new ReturnValue(responseBodyAsyncType);
 
-            IEnumerable<RestAPIParameter> restAPIMethodParameters = ParseRestAPIMethodParameters(autorestRestAPIMethod, restAPIMethodIsPagingNextOperation, settings);
+            List<AutoRestParameter> autoRestRestAPIMethodParameters = autoRestRestAPIMethod.LogicalParameters.Where(p => p.Location != AutoRestParameterLocation.None).ToList();
+
+            IEnumerable<RestAPIParameter> restAPIMethodParameters = ParseRestAPIParameters(autoRestRestAPIMethod, restAPIMethodIsPagingNextOperation, settings);
+
+            IEnumerable<Parameter> clientMethodParameters = ParseClientMethodParameters(autoRestRestAPIMethod, settings);
 
             string restAPIMethodDescription = "";
-            if (!string.IsNullOrEmpty(autorestRestAPIMethod.Summary))
+            if (!string.IsNullOrEmpty(autoRestRestAPIMethod.Summary))
             {
-                restAPIMethodDescription += autorestRestAPIMethod.Summary;
+                restAPIMethodDescription += autoRestRestAPIMethod.Summary;
             }
-            if (!string.IsNullOrEmpty(autorestRestAPIMethod.Description))
+            if (!string.IsNullOrEmpty(autoRestRestAPIMethod.Description))
             {
                 if (restAPIMethodDescription != "")
                 {
                     restAPIMethodDescription += Environment.NewLine;
                 }
-                restAPIMethodDescription += autorestRestAPIMethod.Description;
+                restAPIMethodDescription += autoRestRestAPIMethod.Description;
             }
 
-            bool restAPIMethodIsPagingOperation = autorestRestAPIMethod.Extensions.ContainsKey(AzureExtensions.PageableExtension) &&
-                autorestRestAPIMethod.Extensions[AzureExtensions.PageableExtension] != null &&
+            bool restAPIMethodIsPagingOperation = autoRestRestAPIMethod.Extensions.ContainsKey(AzureExtensions.PageableExtension) &&
+                autoRestRestAPIMethod.Extensions[AzureExtensions.PageableExtension] != null &&
                 !restAPIMethodIsPagingNextOperation;
 
+            IType restAPIMethodReturnValueWireType = returnValueWireTypeOptions.FirstOrDefault((IType type) => restAPIMethodReturnType.Contains(type));
+            if (unixTimeTypes.Contains(restAPIMethodReturnValueWireType))
+            {
+                restAPIMethodReturnValueWireType = ClassType.UnixTime;
+            }
+            
             return new RestAPIMethod(
                 restAPIMethodRequestContentType,
-                restAPIMethodReturnValue,
+                restAPIMethodReturnType,
                 restAPIMethodIsPagingNextOperation,
                 restAPIMethodHttpMethod,
                 restAPIMethodUrlPath,
@@ -2489,130 +2125,3435 @@ namespace AutoRest.Java
                 restAPIMethodIsPagingOperation,
                 restAPIMethodDescription,
                 restAPIMethodSimulateMethodAsPagingOperation,
-                restAPIMethodIsLongRunningOperation);
+                restAPIMethodIsLongRunningOperation,
+                restAPIMethodReturnValueWireType,
+                clientMethodParameters);
         }
 
-        private static IEnumerable<RestAPIParameter> ParseRestAPIMethodParameters(AutoRestMethod autoRestRestAPIMethod, bool restAPIMethodIsPagingNextOperation, JavaSettings settings)
+        private static IEnumerable<Method> ParseClientMethods(RestAPIMethod restAPIMethod, JavaSettings settings)
         {
-            List<AutoRestParameter> autoRestRestAPIMethodParameters = autoRestRestAPIMethod.LogicalParameters.Where(p => p.Location != AutoRestParameterLocation.None).ToList();
+            List<Method> clientMethods = new List<Method>();
 
-            List<RestAPIParameter> restAPIMethodParameters = new List<RestAPIParameter>();
-            if (settings.IsAzureOrFluent && restAPIMethodIsPagingNextOperation)
-            {
-                restAPIMethodParameters.Add(new RestAPIParameter(
-                    description: "The URL to get the next page of items.",
-                    type: ClassType.String,
-                    variableName: "nextUrl",
-                    requestParameterLocation: RequestParameterLocation.Path,
-                    requestParameterName: "nextUrl",
-                    alreadyEncoded: true,
-                    isConstant: false,
-                    isRequired: true));
+            //foreach (AutoRestMethod autorestRestAPIMethod in autorestRestAPIMethods)
+            //{
+            //    RestAPIMethod restAPIMethod = ParseRestAPIMethod(autorestRestAPIMethod, settings);
 
-                autoRestRestAPIMethodParameters.RemoveAll(p => p.Location == AutoRestParameterLocation.Path);
-            }
+            //    IEnumerable<AutoRestParameter> clientMethodAndConstantParameters = autorestRestAPIMethod.Parameters
+            //        //Omit parameter-group properties for now since Java doesn't support them yet
+            //        .Where((AutoRestParameter parameter) => parameter != null && !parameter.IsClientProperty && !string.IsNullOrWhiteSpace(parameter.Name))
+            //        .OrderBy(item => !item.IsRequired);
+            //    IEnumerable<AutoRestParameter> clientMethodParameters = clientMethodAndConstantParameters
+            //        .Where((AutoRestParameter parameter) => !parameter.IsConstant)
+            //        .OrderBy(item => !item.IsRequired);
+            //    IEnumerable<AutoRestParameter> requiredClientMethodParameters = clientMethodParameters.Where(parameter => parameter.IsRequired);
+            //    bool hasOptionalClientMethodParameters = clientMethodParameters.Any(parameter => !parameter.IsRequired);
 
-            IEnumerable<AutoRestParameter> autoRestRestAPIMethodOrderedParameters = autoRestRestAPIMethodParameters
-                .Where(p => p.Location == AutoRestParameterLocation.Path)
-                .Union(autoRestRestAPIMethodParameters.Where(p => p.Location != AutoRestParameterLocation.Path));
+            //    bool simulateMethodAsPagingOperation = false;
+            //    AutoRestMethodGroup methodGroup = autorestRestAPIMethod.MethodGroup;
+            //    MethodType restAPIMethodType = MethodType.Other;
+            //    if (!string.IsNullOrEmpty(methodGroup?.Name?.ToString()))
+            //    {
+            //        string methodUrl = methodTypeTrailing.Replace(methodTypeLeading.Replace(autorestRestAPIMethod.Url, ""), "");
+            //        string[] methodUrlSplits = methodUrl.Split('/');
+            //        switch (autorestRestAPIMethod.HttpMethod)
+            //        {
+            //            case AutoRestHttpMethod.Get:
+            //                if ((methodUrlSplits.Length == 5 || methodUrlSplits.Length == 7)
+            //                    && methodUrlSplits[0].EqualsIgnoreCase("subscriptions")
+            //                    && MethodHasSequenceType(autorestRestAPIMethod.ReturnType.Body, settings))
+            //                {
+            //                    if (methodUrlSplits.Length == 5)
+            //                    {
+            //                        if (methodUrlSplits[2].EqualsIgnoreCase("providers"))
+            //                        {
+            //                            restAPIMethodType = MethodType.ListBySubscription;
+            //                        }
+            //                        else
+            //                        {
+            //                            restAPIMethodType = MethodType.ListByResourceGroup;
+            //                        }
+            //                    }
+            //                    else if (methodUrlSplits[2].EqualsIgnoreCase("resourceGroups"))
+            //                    {
+            //                        restAPIMethodType = MethodType.ListByResourceGroup;
+            //                    }
+            //                }
+            //                else if (IsTopLevelResourceUrl(methodUrlSplits))
+            //                {
+            //                    restAPIMethodType = MethodType.Get;
+            //                }
+            //                break;
 
-            foreach (AutoRestParameter autoRestParameter in autoRestRestAPIMethodOrderedParameters)
-            {
-                string parameterRequestName = autoRestParameter.SerializedName;
+            //            case AutoRestHttpMethod.Delete:
+            //                if (IsTopLevelResourceUrl(methodUrlSplits))
+            //                {
+            //                    restAPIMethodType = MethodType.Delete;
+            //                }
+            //                break;
+            //        }
+            //    }
 
-                RequestParameterLocation parameterRequestLocation = ParseParameterRequestLocation(autoRestParameter.Location);
-                if (autoRestRestAPIMethod.Url.Contains("{" + parameterRequestName + "}"))
-                {
-                    parameterRequestLocation = RequestParameterLocation.Path;
-                }
-                else if (autoRestParameter.Extensions.ContainsKey("hostParameter"))
-                {
-                    parameterRequestLocation = RequestParameterLocation.Host;
-                }
 
-                AutoRestIModelType autoRestParameterWireType = autoRestParameter.ModelType;
-                IType parameterType = ParseType(autoRestParameterWireType, settings);
-                if (parameterType is ListType && settings.ShouldGenerateXmlSerialization && parameterRequestLocation == RequestParameterLocation.Body)
-                {
-                    string parameterTypePackage = settings.Package + ".implementation";
-                    string parameterTypeName = autoRestParameterWireType.XmlName + "Wrapper";
-                    parameterType = new ClassType(parameterTypePackage, parameterTypeName, null, null, false);
-                }
-                else if (parameterType == ArrayType.ByteArray)
-                {
-                    if (parameterRequestLocation != RequestParameterLocation.Body && parameterRequestLocation != RequestParameterLocation.FormData)
-                    {
-                        parameterType = ClassType.String;
-                    }
-                }
-                else if (parameterType is ListType && autoRestParameter.Location != AutoRestParameterLocation.Body && autoRestParameter.Location != AutoRestParameterLocation.FormData)
-                {
-                    parameterType = ClassType.String;
-                }
+            //    AutoRestResponse restAPIMethodReturnType = autorestRestAPIMethod.ReturnType;
 
-                bool parameterIsNullable = IsNullable(autoRestParameter);
-                if (parameterIsNullable)
-                {
-                    parameterType = parameterType.AsNullable();
-                }
+            //    AutoRestIModelType restAPIMethodReturnBodyClientType = ConvertToClientType(restAPIMethodReturnType.Body ?? DependencyInjection.New<AutoRestPrimaryType>(AutoRestKnownPrimaryType.None));
+            //    AutoRestSequenceType restAPIMethodReturnBodyClientSequenceType = restAPIMethodReturnBodyClientType as AutoRestSequenceType;
 
-                string parameterDescription = autoRestParameter.Documentation;
-                if (string.IsNullOrEmpty(parameterDescription))
-                {
-                    if (!parameterIsNullable && autoRestParameter.ModelType is AutoRestPrimaryType parameterPrimaryType)
-                    {
-                        primaryTypeNotWantNullable.Add(parameterPrimaryType);
-                    }
+            //    bool restAPIMethodReturnTypeIsPaged = GetExtensionBool(autorestRestAPIMethod.Extensions, "nextLinkMethod") ||
+            //        (autorestRestAPIMethod.Extensions.ContainsKey(AzureExtensions.PageableExtension) &&
+            //         autorestRestAPIMethod.Extensions[AzureExtensions.PageableExtension] != null);
 
-                    if (autoRestParameterWireType != null && !parameterIsNullable)
-                    {
-                        if (autoRestParameterWireType is AutoRestPrimaryType parameterModelPrimaryType)
-                        {
-                            AutoRestPrimaryType nonNullableParameterModelPrimaryType = DependencyInjection.New<AutoRestPrimaryType>(parameterModelPrimaryType.KnownPrimaryType);
-                            nonNullableParameterModelPrimaryType.Format = parameterModelPrimaryType.Format;
-                            primaryTypeNotWantNullable.Add(nonNullableParameterModelPrimaryType);
+            //    if (settings.IsAzureOrFluent && restAPIMethodReturnBodyClientSequenceType != null && restAPIMethodReturnTypeIsPaged)
+            //    {
+            //        AutoRestSequenceType resultSequenceType = DependencyInjection.New<AutoRestSequenceType>();
+            //        resultSequenceType.ElementType = restAPIMethodReturnBodyClientSequenceType.ElementType;
+            //        SequenceTypeSetPageImplType(resultSequenceType, SequenceTypeGetPageImplType(restAPIMethodReturnBodyClientSequenceType));
+            //        autoRestPagedListTypes.Add(resultSequenceType);
+            //        restAPIMethodReturnBodyClientType = resultSequenceType;
+            //    }
 
-                            autoRestParameterWireType = nonNullableParameterModelPrimaryType;
-                        }
-                    }
-                    parameterDescription = $"the {AutoRestIModelTypeName(autoRestParameterWireType, settings)} value";
-                }
+            //    string responseGenericBodyClientTypeString;
+            //    if (settings.IsAzureOrFluent && restAPIMethodReturnBodyClientSequenceType != null && restAPIMethodReturnTypeIsPaged)
+            //    {
+            //        responseGenericBodyClientTypeString = $"PagedList<{AutoRestIModelTypeName(restAPIMethodReturnBodyClientSequenceType.ElementType, settings)}>";
+            //    }
+            //    else
+            //    {
+            //        AutoRestIModelType responseBodyWireType = restAPIMethodReturnType.Body ?? DependencyInjection.New<AutoRestPrimaryType>(AutoRestKnownPrimaryType.None);
+            //        AutoRestIModelType responseVariant = ConvertToClientType(responseBodyWireType);
 
-                string parameterVariableName = autoRestParameter.ClientProperty?.Name?.ToString();
-                if (!string.IsNullOrEmpty(parameterVariableName))
-                {
-                    CodeNamer codeNamer = CodeNamer.Instance;
-                    parameterVariableName = codeNamer.CamelCase(codeNamer.RemoveInvalidCharacters(parameterVariableName));
-                }
-                if (parameterVariableName == null)
-                {
-                    if (!autoRestParameter.IsClientProperty)
-                    {
-                        parameterVariableName = autoRestParameter.Name;
-                    }
-                    else
-                    {
-                        string caller = (autoRestParameter.Method != null && autoRestParameter.Method.Group.IsNullOrEmpty() ? "this" : "this.client");
-                        string clientPropertyName = autoRestParameter.ClientProperty?.Name?.ToString();
-                        if (!string.IsNullOrEmpty(clientPropertyName))
-                        {
-                            CodeNamer codeNamer = CodeNamer.Instance;
-                            clientPropertyName = codeNamer.CamelCase(codeNamer.RemoveInvalidCharacters(clientPropertyName));
-                        }
-                        parameterVariableName = $"{caller}.{clientPropertyName}()";
-                    }
-                }
+            //        bool responseVariantPrimaryTypeIsNullable = true;
+            //        if (responseVariant is AutoRestPrimaryType responseVariantPrimaryType && !PrimaryTypeGetWantNullable(responseVariantPrimaryType))
+            //        {
+            //            switch (responseVariantPrimaryType.KnownPrimaryType)
+            //            {
+            //                case AutoRestKnownPrimaryType.None:
+            //                case AutoRestKnownPrimaryType.Boolean:
+            //                case AutoRestKnownPrimaryType.Double:
+            //                case AutoRestKnownPrimaryType.Int:
+            //                case AutoRestKnownPrimaryType.Long:
+            //                case AutoRestKnownPrimaryType.UnixTime:
+            //                    responseVariantPrimaryTypeIsNullable = false;
+            //                    break;
+            //            }
+            //        }
 
-                bool parameterSkipUrlEncodingExtension = GetExtensionBool(autoRestParameter.Extensions, SwaggerExtensions.SkipUrlEncodingExtension);
+            //        AutoRestIModelType responseGenericBodyClientType = responseVariantPrimaryTypeIsNullable ? responseVariant : responseBodyWireType;
+            //        responseGenericBodyClientTypeString = AutoRestIModelTypeName(responseGenericBodyClientType, settings);
+            //    }
 
-                bool parameterIsConstant = autoRestParameter.IsConstant;
+            //    AutoRestSequenceType restAPIMethodReturnBodySequenceType = restAPIMethodReturnType.Body as AutoRestSequenceType;
+            //    string responseSequenceElementTypeString = restAPIMethodReturnBodySequenceType == null ? "Void" : AutoRestIModelTypeName(restAPIMethodReturnBodySequenceType.ElementType, settings);
 
-                bool parameterIsRequired = autoRestParameter.IsRequired;
+            //    AutoRestIModelType restAPIMethodResponseHeaders = restAPIMethodReturnType.Headers;
+            //    string deserializedResponseHeadersType = restAPIMethodResponseHeaders == null ? "Void" : AutoRestIModelTypeName(ConvertToClientType(restAPIMethodResponseHeaders), settings);
+            //    string deserializedResponseBodyType;
 
-                restAPIMethodParameters.Add(new RestAPIParameter(parameterDescription, parameterType, parameterVariableName, parameterRequestLocation, parameterRequestName, parameterSkipUrlEncodingExtension, parameterIsConstant, parameterIsRequired));
-            }
+            //    if (restAPIMethodReturnType.Body == null)
+            //    {
+            //        deserializedResponseBodyType = "Void";
+            //    }
+            //    else if (settings.IsAzureOrFluent && restAPIMethodReturnBodyClientSequenceType != null && (restAPIMethodReturnTypeIsPaged || simulateMethodAsPagingOperation))
+            //    {
+            //        string pageContainerTypeName = SequenceTypeGetPageImplType(restAPIMethodReturnBodyClientSequenceType);
+            //        string pageTypeName = AutoRestIModelTypeName(restAPIMethodReturnBodyClientSequenceType.ElementType, settings);
+            //        deserializedResponseBodyType = $"{pageContainerTypeName}<{pageTypeName}>";
+            //    }
+            //    else
+            //    {
+            //        deserializedResponseBodyType = responseGenericBodyClientTypeString;
+            //    }
+            //    string restResponseType = $"RestResponse<{deserializedResponseHeadersType}, {deserializedResponseBodyType}>";
 
-            return restAPIMethodParameters;
+            //    IEnumerable<AutoRestParameter> requiredNullableParameters = autorestRestAPIMethod.Parameters.Where((AutoRestParameter parameter) =>
+            //    {
+            //        bool result = !parameter.IsConstant && parameter.IsRequired;
+            //        if (result)
+            //        {
+            //            AutoRestIModelType parameterModelType = parameter.ModelType;
+            //            if (parameterModelType != null && !IsNullable(parameter))
+            //            {
+            //                if (parameterModelType is AutoRestPrimaryType parameterModelPrimaryType)
+            //                {
+            //                    AutoRestPrimaryType nonNullableParameterModelPrimaryType = DependencyInjection.New<AutoRestPrimaryType>(parameterModelPrimaryType.KnownPrimaryType);
+            //                    nonNullableParameterModelPrimaryType.Format = parameterModelPrimaryType.Format;
+            //                    primaryTypeNotWantNullable.Add(nonNullableParameterModelPrimaryType);
+
+            //                    parameterModelType = nonNullableParameterModelPrimaryType;
+            //                }
+            //            }
+            //            result = !parameterModelType.IsPrimaryType(AutoRestKnownPrimaryType.Int) &&
+            //                     !parameterModelType.IsPrimaryType(AutoRestKnownPrimaryType.Double) &&
+            //                     !parameterModelType.IsPrimaryType(AutoRestKnownPrimaryType.Boolean) &&
+            //                     !parameterModelType.IsPrimaryType(AutoRestKnownPrimaryType.Long) &&
+            //                     !parameterModelType.IsPrimaryType(AutoRestKnownPrimaryType.UnixTime);
+            //        }
+            //        return result;
+            //    });
+
+            //    bool methodIsPagingNextOperation = GetExtensionBool(autorestRestAPIMethod?.Extensions, "nextLinkMethod");
+
+            //    List<AutoRestParameter> methodRetrofitParameters = autorestRestAPIMethod.LogicalParameters.Where(p => p.Location != AutoRestParameterLocation.None).ToList();
+            //    if (settings.IsAzureOrFluent && methodIsPagingNextOperation)
+            //    {
+            //        methodRetrofitParameters.RemoveAll(p => p.Location == AutoRestParameterLocation.Path);
+
+            //        AutoRestParameter nextUrlParam = DependencyInjection.New<AutoRestParameter>();
+            //        nextUrlParam.SerializedName = "nextUrl";
+            //        nextUrlParam.Documentation = "The URL to get the next page of items.";
+            //        nextUrlParam.Location = AutoRestParameterLocation.Path;
+            //        nextUrlParam.IsRequired = true;
+            //        nextUrlParam.ModelType = DependencyInjection.New<AutoRestPrimaryType>(AutoRestKnownPrimaryType.String);
+            //        nextUrlParam.Name = "nextUrl";
+            //        nextUrlParam.Extensions.Add(SwaggerExtensions.SkipUrlEncodingExtension, true);
+            //        methodRetrofitParameters.Insert(0, nextUrlParam);
+            //    }
+
+            //    IEnumerable<AutoRestParameter> methodOrderedRetrofitParameters = methodRetrofitParameters.Where(p => p.Location == AutoRestParameterLocation.Path)
+            //                        .Union(methodRetrofitParameters.Where(p => p.Location != AutoRestParameterLocation.Path));
+
+            //    string methodClientReference = autorestRestAPIMethod.Group.IsNullOrEmpty() ? "this" : "this.client";
+
+            //    List<IEnumerable<AutoRestParameter>> parameterLists = new List<IEnumerable<AutoRestParameter>>()
+            //    {
+            //        clientMethodParameters
+            //    };
+            //    if (clientMethodParameters.Any(parameter => !parameter.IsRequired))
+            //    {
+            //        parameterLists.Insert(0, requiredClientMethodParameters);
+            //    }
+
+            //    string serviceFutureReturnType = $"ServiceFuture<{responseGenericBodyClientTypeString}>";
+
+            //    AutoRestIModelType restAPIMethodReturnBodyClientNonNullableType = restAPIMethodReturnBodyClientType;
+            //    if (restAPIMethodReturnBodyClientType is AutoRestPrimaryType restAPIMethodReturnBodyClientPrimaryType)
+            //    {
+            //        AutoRestPrimaryType restAPIMethodReturnBodyClientNonNullablePrimaryType = DependencyInjection.New<AutoRestPrimaryType>(restAPIMethodReturnBodyClientPrimaryType.KnownPrimaryType);
+            //        restAPIMethodReturnBodyClientNonNullablePrimaryType.Format = restAPIMethodReturnBodyClientPrimaryType.Format;
+            //        primaryTypeNotWantNullable.Add(restAPIMethodReturnBodyClientNonNullablePrimaryType);
+
+            //        restAPIMethodReturnBodyClientNonNullableType = restAPIMethodReturnBodyClientNonNullablePrimaryType;
+            //    }
+
+            //    string synchronousMethodReturnType = AutoRestIModelTypeName(restAPIMethodReturnBodyClientNonNullableType, settings);
+
+            //    string pageType;
+            //    if (settings.IsAzureOrFluent && restAPIMethodReturnBodyClientSequenceType != null && (restAPIMethodReturnTypeIsPaged || simulateMethodAsPagingOperation))
+            //    {
+            //        pageType = $"Page<{AutoRestIModelTypeName(restAPIMethodReturnBodyClientSequenceType.ElementType, settings)}>";
+            //    }
+            //    else
+            //    {
+            //        pageType = responseGenericBodyClientTypeString;
+            //    }
+
+            //    string methodOperationExceptionTypeName;
+            //    AutoRestIModelType restAPIMethodExceptionType = autorestRestAPIMethod.DefaultResponse.Body;
+            //    if (settings.IsAzureOrFluent && (restAPIMethodReturnType == null || AutoRestIModelTypeName(restAPIMethodExceptionType, settings) == "CloudError"))
+            //    {
+            //        methodOperationExceptionTypeName = "CloudException";
+            //    }
+            //    else if (restAPIMethodExceptionType is AutoRestCompositeType compositeExceptionType)
+            //    {
+            //        methodOperationExceptionTypeName = compositeExceptionType.Name.ToString();
+            //        if (settings.IsFluent && !string.IsNullOrEmpty(methodOperationExceptionTypeName) && innerModelCompositeType.Contains(compositeExceptionType))
+            //        {
+            //            methodOperationExceptionTypeName += "Inner";
+            //        }
+            //        methodOperationExceptionTypeName += "Exception";
+
+            //        if (compositeExceptionType.Extensions.ContainsKey(SwaggerExtensions.NameOverrideExtension))
+            //        {
+            //            JContainer ext = compositeExceptionType.Extensions[SwaggerExtensions.NameOverrideExtension] as JContainer;
+            //            if (ext != null && ext["name"] != null)
+            //            {
+            //                methodOperationExceptionTypeName = ext["name"].ToString();
+            //            }
+            //        }
+            //    }
+            //    else
+            //    {
+            //        methodOperationExceptionTypeName = "RestException";
+            //    }
+
+            //    bool addedClientMethods = false;
+
+            //    if (settings.IsAzureOrFluent)
+            //    {
+            //        if (restAPIMethod.IsPagingOperation || methodIsPagingNextOperation)
+            //        {
+            //            foreach (IEnumerable<AutoRestParameter> parameters in parameterLists)
+            //            {
+            //                bool onlyRequiredParameters = (parameters == requiredClientMethodParameters);
+
+            //                string parameterDeclaration = string.Join(", ", parameters.Select(parameter =>
+            //                {
+            //                    AutoRestIModelType parameterModelType = parameter.ModelType;
+            //                    if (parameterModelType != null && !IsNullable(parameter))
+            //                    {
+            //                        if (parameterModelType is AutoRestPrimaryType parameterModelPrimaryType)
+            //                        {
+            //                            AutoRestPrimaryType nonNullableParameterModelPrimaryType = DependencyInjection.New<AutoRestPrimaryType>(parameterModelPrimaryType.KnownPrimaryType);
+            //                            nonNullableParameterModelPrimaryType.Format = parameterModelPrimaryType.Format;
+            //                            primaryTypeNotWantNullable.Add(nonNullableParameterModelPrimaryType);
+
+            //                            parameterModelType = nonNullableParameterModelPrimaryType;
+            //                        }
+            //                    }
+            //                    AutoRestIModelType parameterClientType = ConvertToClientType(parameterModelType);
+            //                    string parameterType = AutoRestIModelTypeName(parameterClientType, settings);
+            //                    return $"final {parameterType} {parameter.Name}";
+            //                }));
+
+            //                AutoRestMethod nextMethod;
+            //                string nextMethodInvocation;
+            //                if (methodIsPagingNextOperation)
+            //                {
+            //                    nextMethod = autorestRestAPIMethod;
+
+            //                    nextMethodInvocation = autorestRestAPIMethod.Name;
+            //                    string nextMethodWellKnownMethodName = null;
+            //                    if (!string.IsNullOrEmpty(methodGroup?.Name?.ToString()))
+            //                    {
+            //                        if (restAPIMethodType != MethodType.Other)
+            //                        {
+            //                            int methodsWithSameType = methodGroup.Methods.Count((AutoRestMethod methodGroupMethod) =>
+            //                            {
+            //                                MethodType methodGroupMethodType = MethodType.Other;
+            //                                string methodGroupMethodUrl = methodTypeTrailing.Replace(methodTypeLeading.Replace(methodGroupMethod.Url, ""), "");
+            //                                string[] methodGroupMethodUrlSplits = methodGroupMethodUrl.Split('/');
+            //                                switch (methodGroupMethod.HttpMethod)
+            //                                {
+            //                                    case AutoRestHttpMethod.Get:
+            //                                        if ((methodGroupMethodUrlSplits.Length == 5 || methodGroupMethodUrlSplits.Length == 7)
+            //                                            && methodGroupMethodUrlSplits[0].EqualsIgnoreCase("subscriptions")
+            //                                            && MethodHasSequenceType(methodGroupMethod.ReturnType.Body, settings))
+            //                                        {
+            //                                            if (methodGroupMethodUrlSplits.Length == 5)
+            //                                            {
+            //                                                if (methodGroupMethodUrlSplits[2].EqualsIgnoreCase("providers"))
+            //                                                {
+            //                                                    methodGroupMethodType = MethodType.ListBySubscription;
+            //                                                }
+            //                                                else
+            //                                                {
+            //                                                    methodGroupMethodType = MethodType.ListByResourceGroup;
+            //                                                }
+            //                                            }
+            //                                            else if (methodGroupMethodUrlSplits[2].EqualsIgnoreCase("resourceGroups"))
+            //                                            {
+            //                                                methodGroupMethodType = MethodType.ListByResourceGroup;
+            //                                            }
+            //                                        }
+            //                                        else if (IsTopLevelResourceUrl(methodGroupMethodUrlSplits))
+            //                                        {
+            //                                            methodGroupMethodType = MethodType.Get;
+            //                                        }
+            //                                        break;
+
+            //                                    case AutoRestHttpMethod.Delete:
+            //                                        if (IsTopLevelResourceUrl(methodGroupMethodUrlSplits))
+            //                                        {
+            //                                            methodGroupMethodType = MethodType.Delete;
+            //                                        }
+            //                                        break;
+            //                                }
+            //                                return methodGroupMethodType == restAPIMethodType;
+            //                            });
+
+            //                            if (methodsWithSameType == 1)
+            //                            {
+            //                                switch (restAPIMethodType)
+            //                                {
+            //                                    case MethodType.ListBySubscription:
+            //                                        nextMethodWellKnownMethodName = List;
+            //                                        break;
+
+            //                                    case MethodType.ListByResourceGroup:
+            //                                        nextMethodWellKnownMethodName = ListByResourceGroup;
+            //                                        break;
+
+            //                                    case MethodType.Delete:
+            //                                        nextMethodWellKnownMethodName = Delete;
+            //                                        break;
+
+            //                                    case MethodType.Get:
+            //                                        nextMethodWellKnownMethodName = GetByResourceGroup;
+            //                                        break;
+
+            //                                    default:
+            //                                        throw new Exception("Flow should not hit this statement.");
+            //                                }
+            //                            }
+            //                        }
+            //                    }
+            //                    if (!string.IsNullOrWhiteSpace(nextMethodWellKnownMethodName))
+            //                    {
+            //                        AutoRestIParent methodParent = autorestRestAPIMethod.Parent;
+            //                        nextMethodInvocation = CodeNamer.Instance.GetUnique(nextMethodWellKnownMethodName, autorestRestAPIMethod, methodParent.IdentifiersInScope, methodParent.Children.Except(autorestRestAPIMethod.SingleItemAsEnumerable()));
+            //                    }
+            //                    nextMethodInvocation = nextMethodInvocation.ToCamelCase();
+            //                }
+            //                else
+            //                {
+            //                    string nextMethodName = autorestRestAPIMethod.Extensions.GetValue<Fixable<string>>("nextMethodName")?.ToCamelCase();
+            //                    string nextMethodGroup = autorestRestAPIMethod.Extensions.GetValue<Fixable<string>>("nextMethodGroup");
+
+            //                    nextMethod = autorestRestAPIMethod.CodeModel.Methods
+            //                        .FirstOrDefault((AutoRestMethod codeModelMethod) =>
+            //                        {
+            //                            bool result = nextMethodGroup.EqualsIgnoreCase(codeModelMethod.Group);
+            //                            if (result)
+            //                            {
+            //                                string codeModelMethodName = codeModelMethod.Name;
+            //                                string codeModelMethodWellKnownMethodName = null;
+            //                                AutoRestMethodGroup codeModelMethodMethodGroup = codeModelMethod.MethodGroup;
+            //                                if (!string.IsNullOrEmpty(codeModelMethodMethodGroup?.Name?.ToString()))
+            //                                {
+            //                                    MethodType codeModelMethodType = MethodType.Other;
+            //                                    string codeModelMethodUrl = methodTypeTrailing.Replace(methodTypeLeading.Replace(codeModelMethod.Url, ""), "");
+            //                                    string[] codeModelMethodUrlSplits = codeModelMethodUrl.Split('/');
+            //                                    switch (codeModelMethod.HttpMethod)
+            //                                    {
+            //                                        case AutoRestHttpMethod.Get:
+            //                                            if ((codeModelMethodUrlSplits.Length == 5 || codeModelMethodUrlSplits.Length == 7)
+            //                                                && codeModelMethodUrlSplits[0].EqualsIgnoreCase("subscriptions")
+            //                                                && MethodHasSequenceType(codeModelMethod.ReturnType.Body, settings))
+            //                                            {
+            //                                                if (codeModelMethodUrlSplits.Length == 5)
+            //                                                {
+            //                                                    if (codeModelMethodUrlSplits[2].EqualsIgnoreCase("providers"))
+            //                                                    {
+            //                                                        codeModelMethodType = MethodType.ListBySubscription;
+            //                                                    }
+            //                                                    else
+            //                                                    {
+            //                                                        codeModelMethodType = MethodType.ListByResourceGroup;
+            //                                                    }
+            //                                                }
+            //                                                else if (codeModelMethodUrlSplits[2].EqualsIgnoreCase("resourceGroups"))
+            //                                                {
+            //                                                    codeModelMethodType = MethodType.ListByResourceGroup;
+            //                                                }
+            //                                            }
+            //                                            else if (IsTopLevelResourceUrl(codeModelMethodUrlSplits))
+            //                                            {
+            //                                                codeModelMethodType = MethodType.Get;
+            //                                            }
+            //                                            break;
+
+            //                                        case AutoRestHttpMethod.Delete:
+            //                                            if (IsTopLevelResourceUrl(codeModelMethodUrlSplits))
+            //                                            {
+            //                                                codeModelMethodType = MethodType.Delete;
+            //                                            }
+            //                                            break;
+            //                                    }
+
+            //                                    if (codeModelMethodType != MethodType.Other)
+            //                                    {
+            //                                        int methodsWithSameType = codeModelMethodMethodGroup.Methods.Count((AutoRestMethod methodGroupMethod) =>
+            //                                        {
+            //                                            MethodType methodGroupMethodType = MethodType.Other;
+            //                                            string methodGroupMethodUrl = methodTypeTrailing.Replace(methodTypeLeading.Replace(methodGroupMethod.Url, ""), "");
+            //                                            string[] methodGroupMethodUrlSplits = methodGroupMethodUrl.Split('/');
+            //                                            switch (methodGroupMethod.HttpMethod)
+            //                                            {
+            //                                                case AutoRestHttpMethod.Get:
+            //                                                    if ((methodGroupMethodUrlSplits.Length == 5 || methodGroupMethodUrlSplits.Length == 7)
+            //                                                        && methodGroupMethodUrlSplits[0].EqualsIgnoreCase("subscriptions")
+            //                                                        && MethodHasSequenceType(methodGroupMethod.ReturnType.Body, settings))
+            //                                                    {
+            //                                                        if (methodGroupMethodUrlSplits.Length == 5)
+            //                                                        {
+            //                                                            if (methodGroupMethodUrlSplits[2].EqualsIgnoreCase("providers"))
+            //                                                            {
+            //                                                                methodGroupMethodType = MethodType.ListBySubscription;
+            //                                                            }
+            //                                                            else
+            //                                                            {
+            //                                                                methodGroupMethodType = MethodType.ListByResourceGroup;
+            //                                                            }
+            //                                                        }
+            //                                                        else if (methodGroupMethodUrlSplits[2].EqualsIgnoreCase("resourceGroups"))
+            //                                                        {
+            //                                                            methodGroupMethodType = MethodType.ListByResourceGroup;
+            //                                                        }
+            //                                                    }
+            //                                                    else if (IsTopLevelResourceUrl(methodGroupMethodUrlSplits))
+            //                                                    {
+            //                                                        methodGroupMethodType = MethodType.Get;
+            //                                                    }
+            //                                                    break;
+
+            //                                                case AutoRestHttpMethod.Delete:
+            //                                                    if (IsTopLevelResourceUrl(methodGroupMethodUrlSplits))
+            //                                                    {
+            //                                                        methodGroupMethodType = MethodType.Delete;
+            //                                                    }
+            //                                                    break;
+            //                                            }
+            //                                            return methodGroupMethodType == restAPIMethodType;
+            //                                        });
+
+            //                                        if (methodsWithSameType == 1)
+            //                                        {
+            //                                            switch (codeModelMethodType)
+            //                                            {
+            //                                                case MethodType.ListBySubscription:
+            //                                                    codeModelMethodWellKnownMethodName = List;
+            //                                                    break;
+
+            //                                                case MethodType.ListByResourceGroup:
+            //                                                    codeModelMethodWellKnownMethodName = ListByResourceGroup;
+            //                                                    break;
+
+            //                                                case MethodType.Delete:
+            //                                                    codeModelMethodWellKnownMethodName = Delete;
+            //                                                    break;
+
+            //                                                case MethodType.Get:
+            //                                                    codeModelMethodWellKnownMethodName = GetByResourceGroup;
+            //                                                    break;
+
+            //                                                default:
+            //                                                    throw new Exception("Flow should not hit this statement.");
+            //                                            }
+            //                                        }
+            //                                    }
+            //                                }
+            //                                if (!string.IsNullOrWhiteSpace(codeModelMethodWellKnownMethodName))
+            //                                {
+            //                                    AutoRestIParent methodParent = codeModelMethod.Parent;
+            //                                    codeModelMethodName = CodeNamer.Instance.GetUnique(codeModelMethodWellKnownMethodName, codeModelMethod, methodParent.IdentifiersInScope, methodParent.Children.Except(codeModelMethod.SingleItemAsEnumerable()));
+            //                                }
+
+            //                                result = nextMethodName.EqualsIgnoreCase(codeModelMethodName);
+            //                            }
+            //                            return result;
+            //                        });
+
+            //                    if (nextMethodGroup == null || autorestRestAPIMethod.Group == nextMethod.Group)
+            //                    {
+            //                        nextMethodInvocation = nextMethodName;
+            //                    }
+            //                    else
+            //                    {
+            //                        nextMethodInvocation = $"{(autorestRestAPIMethod.Group.IsNullOrEmpty() ? "this" : "client")}.get{nextMethodGroup.ToPascalCase()}().{nextMethodName}";
+            //                    }
+            //                }
+
+            //                string nextPageLinkParameterName = nextMethod.Parameters
+            //                    .Select((AutoRestParameter parameter) =>
+            //                    {
+            //                        string parameterName;
+            //                        if (!parameter.IsClientProperty)
+            //                        {
+            //                            parameterName = parameter.Name;
+            //                        }
+            //                        else
+            //                        {
+            //                            string caller = (parameter.Method != null && parameter.Method.Group.IsNullOrEmpty() ? "this" : "this.client");
+            //                            string clientPropertyName = parameter.ClientProperty?.Name?.ToString();
+            //                            if (!string.IsNullOrEmpty(clientPropertyName))
+            //                            {
+            //                                CodeNamer codeNamer = CodeNamer.Instance;
+            //                                clientPropertyName = codeNamer.CamelCase(codeNamer.RemoveInvalidCharacters(clientPropertyName));
+            //                            }
+            //                            parameterName = $"{caller}.{clientPropertyName}()";
+            //                        }
+            //                        return parameterName;
+            //                    })
+            //                    .First((string parameterName) => parameterName.StartsWith("next", StringComparison.OrdinalIgnoreCase));
+
+            //                IEnumerable<AutoRestParameter> nextMethodRestAPIParameters = nextMethod.Parameters
+            //                    .Where((AutoRestParameter parameter) => parameter != null && !parameter.IsClientProperty && !string.IsNullOrWhiteSpace(parameter.Name))
+            //                    .OrderBy(item => !item.IsRequired);
+
+            //                string nextMethodParameterInvocation;
+            //                AutoRestParameter groupedType = null;
+            //                AutoRestParameter nextGroupType = null;
+            //                if (!onlyRequiredParameters)
+            //                {
+            //                    nextMethodParameterInvocation = string.Join(", ", nextMethodRestAPIParameters.Where(p => !p.IsConstant).Select((AutoRestParameter parameter) => parameter.Name));
+            //                }
+            //                else if (autorestRestAPIMethod.InputParameterTransformation.IsNullOrEmpty() || nextMethod.InputParameterTransformation.IsNullOrEmpty())
+            //                {
+            //                    nextMethodParameterInvocation = string.Join(", ", nextMethodRestAPIParameters.Select((AutoRestParameter parameter) => parameter.IsRequired ? parameter.Name.ToString() : "null"));
+            //                }
+            //                else
+            //                {
+            //                    groupedType = autorestRestAPIMethod.InputParameterTransformation.First().ParameterMappings[0].InputParameter;
+            //                    nextGroupType = nextMethod.InputParameterTransformation.First().ParameterMappings[0].InputParameter;
+            //                    List<string> invocations = new List<string>();
+            //                    foreach (AutoRestParameter parameter in nextMethodRestAPIParameters)
+            //                    {
+            //                        string parameterName = parameter.Name;
+
+            //                        if (parameter.IsRequired)
+            //                        {
+            //                            invocations.Add(parameterName);
+            //                        }
+            //                        else if (parameterName == nextGroupType.Name && groupedType.IsRequired)
+            //                        {
+            //                            invocations.Add(parameterName);
+            //                        }
+            //                        else
+            //                        {
+            //                            invocations.Add("null");
+            //                        }
+            //                    }
+            //                    nextMethodParameterInvocation = string.Join(", ", invocations);
+            //                }
+
+            //                string argumentList = string.Join(", ", parameters.Select((AutoRestParameter parameter) => parameter.Name));
+
+            //                string nextGroupTypeName = null;
+            //                string groupedTypeName = null;
+            //                if (restAPIMethod.IsPagingOperation && !autorestRestAPIMethod.InputParameterTransformation.IsNullOrEmpty() && !nextMethod.InputParameterTransformation.IsNullOrEmpty())
+            //                {
+            //                    groupedType = groupedType ?? autorestRestAPIMethod.InputParameterTransformation.First().ParameterMappings[0].InputParameter;
+            //                    nextGroupType = nextGroupType ?? nextMethod.InputParameterTransformation.First().ParameterMappings[0].InputParameter;
+
+            //                    if (!nextGroupType.IsClientProperty)
+            //                    {
+            //                        nextGroupTypeName = nextGroupType.Name;
+            //                    }
+            //                    else
+            //                    {
+            //                        string caller = (nextGroupType.Method != null && nextGroupType.Method.Group.IsNullOrEmpty() ? "this" : "this.client");
+            //                        string clientPropertyName = nextGroupType.ClientProperty?.Name?.ToString();
+            //                        if (!string.IsNullOrEmpty(clientPropertyName))
+            //                        {
+            //                            CodeNamer codeNamer = CodeNamer.Instance;
+            //                            clientPropertyName = codeNamer.CamelCase(codeNamer.RemoveInvalidCharacters(clientPropertyName));
+            //                        }
+            //                        nextGroupTypeName = $"{caller}.{clientPropertyName}()";
+            //                    }
+
+            //                    if (!groupedType.IsClientProperty)
+            //                    {
+            //                        groupedTypeName = groupedType.Name;
+            //                    }
+            //                    else
+            //                    {
+            //                        string caller = (groupedType.Method != null && groupedType.Method.Group.IsNullOrEmpty() ? "this" : "this.client");
+            //                        string clientPropertyName = groupedType.ClientProperty?.Name?.ToString();
+            //                        if (!string.IsNullOrEmpty(clientPropertyName))
+            //                        {
+            //                            CodeNamer codeNamer = CodeNamer.Instance;
+            //                            clientPropertyName = codeNamer.CamelCase(codeNamer.RemoveInvalidCharacters(clientPropertyName));
+            //                        }
+            //                        groupedTypeName = $"{caller}.{clientPropertyName}()";
+            //                    }
+            //                }
+
+            //                // --------------------
+            //                // Synchronous PageList
+            //                // --------------------
+            //                typeBlock.JavadocComment(comment =>
+            //                {
+            //                    comment.Description(restAPIMethod.Description);
+            //                    foreach (AutoRestParameter parameter in parameters)
+            //                    {
+            //                        string parameterName = parameter.Name;
+
+            //                        string parameterDocumentation = parameter.Documentation;
+            //                        if (string.IsNullOrEmpty(parameterDocumentation))
+            //                        {
+            //                            AutoRestIModelType parameterModelType = parameter.ModelType;
+            //                            if (parameterModelType != null && !IsNullable(parameter))
+            //                            {
+            //                                if (parameterModelType is AutoRestPrimaryType parameterModelPrimaryType)
+            //                                {
+            //                                    AutoRestPrimaryType nonNullableParameterModelPrimaryType = DependencyInjection.New<AutoRestPrimaryType>(parameterModelPrimaryType.KnownPrimaryType);
+            //                                    nonNullableParameterModelPrimaryType.Format = parameterModelPrimaryType.Format;
+            //                                    primaryTypeNotWantNullable.Add(nonNullableParameterModelPrimaryType);
+
+            //                                    parameterModelType = nonNullableParameterModelPrimaryType;
+            //                                }
+            //                            }
+            //                            parameterDocumentation = $"the {AutoRestIModelTypeName(parameterModelType, settings)} value";
+            //                        }
+
+            //                        comment.Param(parameterName, parameterDocumentation);
+            //                    }
+            //                    comment.Throws("IllegalArgumentException", "thrown if parameters fail the validation");
+            //                    comment.Throws(methodOperationExceptionTypeName, "thrown if the request is rejected by server");
+            //                    comment.Throws("RuntimeException", "all other wrapped checked exceptions if the request fails to be sent");
+            //                    if (autorestRestAPIMethod.ReturnType.Body != null)
+            //                    {
+            //                        comment.Return($"the {synchronousMethodReturnType} object if successful.");
+            //                    }
+            //                });
+            //                typeBlock.PublicMethod($"{synchronousMethodReturnType} {restAPIMethod.Name}({parameterDeclaration})", function =>
+            //                {
+            //                    function.Line($"{pageType} response = {restAPIMethod.Name}SinglePageAsync({argumentList}).blockingGet();");
+            //                    function.ReturnAnonymousClass($"new {responseGenericBodyClientTypeString}(response)", anonymousClass =>
+            //                    {
+            //                        anonymousClass.Annotation("Override");
+            //                        anonymousClass.PublicMethod($"{pageType} nextPage(String {nextPageLinkParameterName})", subFunction =>
+            //                        {
+            //                            if (restAPIMethod.IsPagingOperation && !autorestRestAPIMethod.InputParameterTransformation.IsNullOrEmpty() && !nextMethod.InputParameterTransformation.IsNullOrEmpty())
+            //                            {
+            //                                if (nextGroupTypeName != groupedTypeName && (!onlyRequiredParameters || groupedType.IsRequired))
+            //                                {
+            //                                    string nextGroupTypeCamelCaseName = nextGroupTypeName.ToCamelCase();
+            //                                    string groupedTypeCamelCaseName = groupedTypeName.ToCamelCase();
+
+            //                                    string nextGroupTypeCodeName = CodeNamer.Instance.GetTypeName(nextGroupTypeName) + (settings.IsFluent ? "Inner" : "");
+
+            //                                    if (!groupedType.IsRequired)
+            //                                    {
+            //                                        subFunction.Line($"{nextGroupTypeCodeName} {nextGroupTypeCamelCaseName} = null;");
+            //                                        subFunction.Line($"if ({groupedTypeCamelCaseName} != null) {{");
+            //                                        subFunction.IncreaseIndent();
+            //                                        subFunction.Line($"{nextGroupTypeCamelCaseName} = new {nextGroupTypeCodeName}();");
+            //                                    }
+            //                                    else
+            //                                    {
+            //                                        subFunction.Line($"{nextGroupTypeCodeName} {nextGroupTypeCamelCaseName} = new {nextGroupTypeCodeName}();");
+            //                                    }
+
+            //                                    foreach (AutoRestParameter outputParameter in nextMethod.InputParameterTransformation.Select(transformation => transformation.OutputParameter))
+            //                                    {
+            //                                        string outputParameterName;
+            //                                        if (!outputParameter.IsClientProperty)
+            //                                        {
+            //                                            outputParameterName = outputParameter.Name;
+            //                                        }
+            //                                        else
+            //                                        {
+            //                                            string caller = (outputParameter.Method != null && outputParameter.Method.Group.IsNullOrEmpty() ? "this" : "this.client");
+            //                                            string clientPropertyName = outputParameter.ClientProperty?.Name?.ToString();
+            //                                            if (!string.IsNullOrEmpty(clientPropertyName))
+            //                                            {
+            //                                                CodeNamer codeNamer = CodeNamer.Instance;
+            //                                                clientPropertyName = codeNamer.CamelCase(codeNamer.RemoveInvalidCharacters(clientPropertyName));
+            //                                            }
+            //                                            outputParameterName = $"{caller}.{clientPropertyName}()";
+            //                                        }
+            //                                        subFunction.Line($"{nextGroupTypeCamelCaseName}.with{outputParameterName.ToPascalCase()}({groupedTypeCamelCaseName}.{outputParameterName.ToCamelCase()}());");
+            //                                    }
+
+            //                                    if (!groupedType.IsRequired)
+            //                                    {
+            //                                        subFunction.DecreaseIndent();
+            //                                        subFunction.Line("}");
+            //                                    }
+            //                                }
+            //                            }
+
+            //                            subFunction.Return($"{nextMethodInvocation}SinglePageAsync({nextMethodParameterInvocation}).blockingGet()");
+            //                        });
+            //                    });
+            //                });
+
+            //                // ------------------------------
+            //                // Async Observable<PagedList<T>>
+            //                // ------------------------------
+            //                typeBlock.JavadocComment(comment =>
+            //                {
+            //                    comment.Description(restAPIMethod.Description);
+            //                    foreach (AutoRestParameter parameter in parameters)
+            //                    {
+            //                        string parameterName = parameter.Name;
+
+            //                        string parameterDocumentation = parameter.Documentation;
+            //                        if (string.IsNullOrEmpty(parameterDocumentation))
+            //                        {
+            //                            AutoRestIModelType parameterModelType = parameter.ModelType;
+            //                            if (parameterModelType != null && !IsNullable(parameter))
+            //                            {
+            //                                if (parameterModelType is AutoRestPrimaryType parameterModelPrimaryType)
+            //                                {
+            //                                    AutoRestPrimaryType nonNullableParameterModelPrimaryType = DependencyInjection.New<AutoRestPrimaryType>(parameterModelPrimaryType.KnownPrimaryType);
+            //                                    nonNullableParameterModelPrimaryType.Format = parameterModelPrimaryType.Format;
+            //                                    primaryTypeNotWantNullable.Add(nonNullableParameterModelPrimaryType);
+
+            //                                    parameterModelType = nonNullableParameterModelPrimaryType;
+            //                                }
+            //                            }
+            //                            parameterDocumentation = $"the {AutoRestIModelTypeName(parameterModelType, settings)} value";
+            //                        }
+
+            //                        comment.Param(parameterName, parameterDocumentation);
+            //                    }
+            //                    comment.Throws("IllegalArgumentException", "thrown if parameters fail the validation");
+            //                    if (restAPIMethodReturnType.Body != null)
+            //                    {
+            //                        comment.Return($"the observable to the {synchronousMethodReturnType} object");
+            //                    }
+            //                    else
+            //                    {
+            //                        comment.Return($"the {{@link Observable<{pageType}>}} object if successful.");
+            //                    }
+            //                });
+            //                typeBlock.PublicMethod($"Observable<{pageType}> {restAPIMethod.Name}Async({parameterDeclaration})", function =>
+            //                {
+            //                    function.Line($"return {restAPIMethod.Name}SinglePageAsync({argumentList})");
+            //                    function.Indent(() =>
+            //                    {
+            //                        function.Line(".toObservable()");
+            //                        function.Line($".concatMap(new Function<{pageType}, Observable<{pageType}>>() {{");
+            //                        function.Indent(() =>
+            //                        {
+            //                            function.Annotation("Override");
+            //                            function.Block($"public Observable<{pageType}> apply({pageType} page)", subFunction =>
+            //                            {
+            //                                subFunction.Line($"String {nextPageLinkParameterName} = page.nextPageLink();");
+            //                                subFunction.If($"{nextPageLinkParameterName} == null", ifBlock =>
+            //                                {
+            //                                    ifBlock.Return("Observable.just(page)");
+            //                                });
+
+            //                                if (restAPIMethod.IsPagingOperation && !autorestRestAPIMethod.InputParameterTransformation.IsNullOrEmpty() && !nextMethod.InputParameterTransformation.IsNullOrEmpty())
+            //                                {
+            //                                    if (nextGroupTypeName != groupedTypeName && (!onlyRequiredParameters || groupedType.IsRequired))
+            //                                    {
+            //                                        string nextGroupTypeCamelCaseName = nextGroupTypeName.ToCamelCase();
+            //                                        string groupedTypeCamelCaseName = groupedTypeName.ToCamelCase();
+
+            //                                        string nextGroupTypeCodeName = CodeNamer.Instance.GetTypeName(nextGroupTypeName) + (settings.IsFluent ? "Inner" : "");
+
+            //                                        if (!groupedType.IsRequired)
+            //                                        {
+            //                                            subFunction.Line($"{nextGroupTypeCodeName} {nextGroupTypeCamelCaseName} = null;");
+            //                                            subFunction.Line($"if ({groupedTypeCamelCaseName} != null) {{");
+            //                                            subFunction.IncreaseIndent();
+            //                                            subFunction.Line($"{nextGroupTypeCamelCaseName} = new {nextGroupTypeCodeName}();");
+            //                                        }
+            //                                        else
+            //                                        {
+            //                                            subFunction.Line($"{nextGroupTypeCodeName} {nextGroupTypeCamelCaseName} = new {nextGroupTypeCodeName}();");
+            //                                        }
+
+            //                                        foreach (AutoRestParameter outputParameter in nextMethod.InputParameterTransformation.Select(transformation => transformation.OutputParameter))
+            //                                        {
+            //                                            string outputParameterName;
+            //                                            if (!outputParameter.IsClientProperty)
+            //                                            {
+            //                                                outputParameterName = outputParameter.Name;
+            //                                            }
+            //                                            else
+            //                                            {
+            //                                                string caller = (outputParameter.Method != null && outputParameter.Method.Group.IsNullOrEmpty() ? "this" : "this.client");
+            //                                                string clientPropertyName = outputParameter.ClientProperty?.Name?.ToString();
+            //                                                if (!string.IsNullOrEmpty(clientPropertyName))
+            //                                                {
+            //                                                    CodeNamer codeNamer = CodeNamer.Instance;
+            //                                                    clientPropertyName = codeNamer.CamelCase(codeNamer.RemoveInvalidCharacters(clientPropertyName));
+            //                                                }
+            //                                                outputParameterName = $"{caller}.{clientPropertyName}()";
+            //                                            }
+            //                                            subFunction.Line($"{nextGroupTypeCamelCaseName}.with{outputParameterName.ToPascalCase()}({groupedTypeCamelCaseName}.{outputParameterName.ToCamelCase()}());");
+            //                                        }
+
+            //                                        if (!groupedType.IsRequired)
+            //                                        {
+            //                                            subFunction.DecreaseIndent();
+            //                                            subFunction.Line("}");
+            //                                        }
+            //                                    }
+            //                                }
+
+            //                                subFunction.Return($"Observable.just(page).concatWith({nextMethodInvocation}Async({nextMethodParameterInvocation}))");
+            //                            });
+            //                        });
+            //                        function.Line("});");
+            //                    });
+            //                });
+
+            //                // ------------------------------
+            //                // Async Single<Page<T>> Overload
+            //                // ------------------------------
+            //                string singlePageMethodReturnType = $"Single<{pageType}>";
+            //                typeBlock.JavadocComment(comment =>
+            //                {
+            //                    comment.Description(restAPIMethod.Description);
+            //                    foreach (AutoRestParameter parameter in parameters)
+            //                    {
+            //                        string parameterName = parameter.Name;
+
+            //                        string parameterDocumentation = parameter.Documentation;
+            //                        if (string.IsNullOrEmpty(parameterDocumentation))
+            //                        {
+            //                            AutoRestIModelType parameterModelType = parameter.ModelType;
+            //                            if (parameterModelType != null && !IsNullable(parameter))
+            //                            {
+            //                                if (parameterModelType is AutoRestPrimaryType parameterModelPrimaryType)
+            //                                {
+            //                                    AutoRestPrimaryType nonNullableParameterModelPrimaryType = DependencyInjection.New<AutoRestPrimaryType>(parameterModelPrimaryType.KnownPrimaryType);
+            //                                    nonNullableParameterModelPrimaryType.Format = parameterModelPrimaryType.Format;
+            //                                    primaryTypeNotWantNullable.Add(nonNullableParameterModelPrimaryType);
+
+            //                                    parameterModelType = nonNullableParameterModelPrimaryType;
+            //                                }
+            //                            }
+            //                            parameterDocumentation = $"the {AutoRestIModelTypeName(parameterModelType, settings)} value";
+            //                        }
+
+            //                        comment.Param(parameterName, parameterDocumentation);
+            //                    }
+            //                    comment.Throws("IllegalArgumentException", "thrown if parameters fail the validation");
+            //                    comment.Return($"the {{@link {singlePageMethodReturnType}}} object if successful.");
+            //                });
+            //                typeBlock.PublicMethod($"{singlePageMethodReturnType} {restAPIMethod.Name}SinglePageAsync({parameterDeclaration})", function =>
+            //                {
+            //                    foreach (AutoRestParameter parameter in requiredNullableParameters)
+            //                    {
+            //                        string parameterName;
+            //                        if (!parameter.IsClientProperty)
+            //                        {
+            //                            parameterName = parameter.Name;
+            //                        }
+            //                        else
+            //                        {
+            //                            string caller = (parameter.Method != null && parameter.Method.Group.IsNullOrEmpty() ? "this" : "this.client");
+            //                            string clientPropertyName = parameter.ClientProperty?.Name?.ToString();
+            //                            if (!string.IsNullOrEmpty(clientPropertyName))
+            //                            {
+            //                                CodeNamer codeNamer = CodeNamer.Instance;
+            //                                clientPropertyName = codeNamer.CamelCase(codeNamer.RemoveInvalidCharacters(clientPropertyName));
+            //                            }
+            //                            parameterName = $"{caller}.{clientPropertyName}()";
+            //                        }
+
+            //                        function.If($"{parameterName} == null", ifBlock =>
+            //                        {
+            //                            ifBlock.Line($"throw new IllegalArgumentException(\"Parameter {parameterName} is required and cannot be null.\");");
+            //                        });
+            //                    }
+
+            //                    IEnumerable<AutoRestParameter> parametersToValidate = autorestRestAPIMethod.Parameters.Where(parameter =>
+            //                    {
+            //                        bool result = !parameter.IsConstant;
+            //                        if (result)
+            //                        {
+            //                            AutoRestIModelType parameterModelType = parameter.ModelType;
+            //                            if (parameterModelType != null && !IsNullable(parameter))
+            //                            {
+            //                                if (parameterModelType is AutoRestPrimaryType parameterModelPrimaryType)
+            //                                {
+            //                                    AutoRestPrimaryType nonNullableParameterModelPrimaryType = DependencyInjection.New<AutoRestPrimaryType>(parameterModelPrimaryType.KnownPrimaryType);
+            //                                    nonNullableParameterModelPrimaryType.Format = parameterModelPrimaryType.Format;
+            //                                    primaryTypeNotWantNullable.Add(nonNullableParameterModelPrimaryType);
+
+            //                                    parameterModelType = nonNullableParameterModelPrimaryType;
+            //                                }
+            //                            }
+            //                            result = !(parameterModelType is AutoRestPrimaryType) && !(parameterModelType is AutoRestEnumType) && (!onlyRequiredParameters || parameter.IsRequired);
+            //                        }
+
+            //                        return result;
+            //                    });
+
+            //                    foreach (AutoRestParameter parameter in parametersToValidate)
+            //                    {
+            //                        string parameterName;
+            //                        if (!parameter.IsClientProperty)
+            //                        {
+            //                            parameterName = parameter.Name;
+            //                        }
+            //                        else
+            //                        {
+            //                            string caller = (parameter.Method != null && parameter.Method.Group.IsNullOrEmpty() ? "this" : "this.client");
+            //                            string clientPropertyName = parameter.ClientProperty?.Name?.ToString();
+            //                            if (!string.IsNullOrEmpty(clientPropertyName))
+            //                            {
+            //                                CodeNamer codeNamer = CodeNamer.Instance;
+            //                                clientPropertyName = codeNamer.CamelCase(codeNamer.RemoveInvalidCharacters(clientPropertyName));
+            //                            }
+            //                            parameterName = $"{caller}.{clientPropertyName}()";
+            //                        }
+
+            //                        function.Line($"Validator.validate({parameterName});");
+            //                    }
+
+            //                    foreach (AutoRestParameter parameter in clientMethodAndConstantParameters)
+            //                    {
+            //                        string parameterName = parameter.Name;
+
+            //                        AutoRestIModelType parameterModelType = parameter.ModelType;
+            //                        if (parameterModelType != null && !IsNullable(parameter))
+            //                        {
+            //                            if (parameterModelType is AutoRestPrimaryType parameterModelPrimaryType)
+            //                            {
+            //                                AutoRestPrimaryType nonNullableParameterModelPrimaryType = DependencyInjection.New<AutoRestPrimaryType>(parameterModelPrimaryType.KnownPrimaryType);
+            //                                nonNullableParameterModelPrimaryType.Format = parameterModelPrimaryType.Format;
+            //                                primaryTypeNotWantNullable.Add(nonNullableParameterModelPrimaryType);
+
+            //                                parameterModelType = nonNullableParameterModelPrimaryType;
+            //                            }
+            //                        }
+            //                        AutoRestIModelType parameterClientType = ConvertToClientType(parameterModelType);
+
+            //                        if (onlyRequiredParameters && !parameter.IsRequired)
+            //                        {
+            //                            string parameterDefaultValue;
+            //                            if (parameterClientType is AutoRestPrimaryType parameterClientPrimaryType)
+            //                            {
+            //                                string modelTypeName = AutoRestIModelTypeName(parameterClientPrimaryType, settings);
+            //                                if (modelTypeName == "byte[]")
+            //                                {
+            //                                    parameterDefaultValue = "new byte[0]";
+            //                                }
+            //                                else if (modelTypeName == "Byte[]")
+            //                                {
+            //                                    parameterDefaultValue = "new Byte[0]";
+            //                                }
+            //                                else
+            //                                {
+            //                                    parameterDefaultValue = null;
+            //                                }
+            //                            }
+            //                            else
+            //                            {
+            //                                parameterDefaultValue = parameterClientType.DefaultValue;
+            //                            }
+            //                            function.Line($"final {AutoRestIModelTypeName(parameterClientType, settings)} {parameterName} = {parameterDefaultValue ?? "null"};");
+            //                        }
+            //                        else if (parameter.IsConstant)
+            //                        {
+            //                            string defaultValue = parameter.DefaultValue;
+            //                            if (defaultValue != null && parameterModelType is AutoRestPrimaryType parameterModelPrimaryType)
+            //                            {
+            //                                switch (parameterModelPrimaryType.KnownPrimaryType)
+            //                                {
+            //                                    case AutoRestKnownPrimaryType.Double:
+            //                                        defaultValue = double.Parse(defaultValue).ToString();
+            //                                        break;
+
+            //                                    case AutoRestKnownPrimaryType.String:
+            //                                        defaultValue = CodeNamer.Instance.QuoteValue(defaultValue);
+            //                                        break;
+
+            //                                    case AutoRestKnownPrimaryType.Boolean:
+            //                                        defaultValue = defaultValue.ToLowerInvariant();
+            //                                        break;
+
+            //                                    case AutoRestKnownPrimaryType.Long:
+            //                                        defaultValue = defaultValue + 'L';
+            //                                        break;
+
+            //                                    case AutoRestKnownPrimaryType.Date:
+            //                                        defaultValue = $"LocalDate.parse(\"{defaultValue}\")";
+            //                                        break;
+
+            //                                    case AutoRestKnownPrimaryType.DateTime:
+            //                                    case AutoRestKnownPrimaryType.DateTimeRfc1123:
+            //                                        defaultValue = $"DateTime.parse(\"{defaultValue}\")";
+            //                                        break;
+
+            //                                    case AutoRestKnownPrimaryType.TimeSpan:
+            //                                        defaultValue = $"Period.parse(\"{defaultValue}\")";
+            //                                        break;
+
+            //                                    case AutoRestKnownPrimaryType.ByteArray:
+            //                                        defaultValue = $"\"{defaultValue}\".getBytes()";
+            //                                        break;
+            //                                }
+            //                            }
+            //                            function.Line($"final {AutoRestIModelTypeName(ConvertToClientType(parameterClientType), settings)} {parameterName} = {defaultValue ?? "null"};");
+            //                        }
+            //                    }
+
+            //                    foreach (AutoRestParameterTransformation transformation in autorestRestAPIMethod.InputParameterTransformation)
+            //                    {
+            //                        AutoRestParameter transformationOutputParameter = transformation.OutputParameter;
+            //                        AutoRestIModelType transformationOutputParameterModelType = transformationOutputParameter.ModelType;
+            //                        if (transformationOutputParameterModelType != null && !IsNullable(transformationOutputParameter) && transformationOutputParameterModelType is AutoRestPrimaryType transformationOutputParameterModelPrimaryType)
+            //                        {
+            //                            AutoRestPrimaryType transformationOutputParameterModelNonNullablePrimaryType = DependencyInjection.New<AutoRestPrimaryType>(transformationOutputParameterModelPrimaryType.KnownPrimaryType);
+            //                            transformationOutputParameterModelNonNullablePrimaryType.Format = transformationOutputParameterModelPrimaryType.Format;
+            //                            primaryTypeNotWantNullable.Add(transformationOutputParameterModelNonNullablePrimaryType);
+
+            //                            transformationOutputParameterModelType = transformationOutputParameterModelNonNullablePrimaryType;
+            //                        }
+            //                        AutoRestIModelType transformationOutputParameterClientType = ConvertToClientType(transformationOutputParameterModelType);
+
+            //                        string outParamName;
+            //                        if (!transformationOutputParameter.IsClientProperty)
+            //                        {
+            //                            outParamName = transformationOutputParameter.Name;
+            //                        }
+            //                        else
+            //                        {
+            //                            string caller = (transformationOutputParameter.Method != null && transformationOutputParameter.Method.Group.IsNullOrEmpty() ? "this" : "this.client");
+            //                            string clientPropertyName = transformationOutputParameter.ClientProperty?.Name?.ToString();
+            //                            if (!string.IsNullOrEmpty(clientPropertyName))
+            //                            {
+            //                                CodeNamer codeNamer = CodeNamer.Instance;
+            //                                clientPropertyName = codeNamer.CamelCase(codeNamer.RemoveInvalidCharacters(clientPropertyName));
+            //                            }
+            //                            outParamName = $"{caller}.{clientPropertyName}()";
+            //                        }
+            //                        while (autorestRestAPIMethod.Parameters.Any((AutoRestParameter parameter) =>
+            //                        {
+            //                            string parameterName;
+            //                            if (!parameter.IsClientProperty)
+            //                            {
+            //                                parameterName = parameter.Name;
+            //                            }
+            //                            else
+            //                            {
+            //                                string caller = (parameter.Method != null && parameter.Method.Group.IsNullOrEmpty() ? "this" : "this.client");
+            //                                string clientPropertyName = parameter.ClientProperty?.Name?.ToString();
+            //                                if (!string.IsNullOrEmpty(clientPropertyName))
+            //                                {
+            //                                    CodeNamer codeNamer = CodeNamer.Instance;
+            //                                    clientPropertyName = codeNamer.CamelCase(codeNamer.RemoveInvalidCharacters(clientPropertyName));
+            //                                }
+            //                                parameterName = $"{caller}.{clientPropertyName}()";
+            //                            }
+            //                            return parameterName == outParamName;
+            //                        }))
+            //                        {
+            //                            outParamName += "1";
+            //                        }
+
+            //                        transformationOutputParameter.Name = outParamName;
+
+            //                        string transformationOutputParameterClientParameterVariantTypeName = AutoRestIModelTypeName(ConvertToClientType(transformationOutputParameterClientType), settings);
+
+            //                        IEnumerable<AutoRestParameterMapping> transformationParameterMappings = transformation.ParameterMappings;
+            //                        string nullCheck = string.Join(" || ", transformationParameterMappings.Where(m => !m.InputParameter.IsRequired)
+            //                            .Select((AutoRestParameterMapping m) =>
+            //                            {
+            //                                AutoRestParameter parameter = m.InputParameter;
+
+            //                                string parameterName;
+            //                                if (!parameter.IsClientProperty)
+            //                                {
+            //                                    parameterName = parameter.Name;
+            //                                }
+            //                                else
+            //                                {
+            //                                    string caller = (parameter.Method != null && parameter.Method.Group.IsNullOrEmpty() ? "this" : "this.client");
+            //                                    string clientPropertyName = parameter.ClientProperty?.Name?.ToString();
+            //                                    if (!string.IsNullOrEmpty(clientPropertyName))
+            //                                    {
+            //                                        CodeNamer codeNamer = CodeNamer.Instance;
+            //                                        clientPropertyName = codeNamer.CamelCase(codeNamer.RemoveInvalidCharacters(clientPropertyName));
+            //                                    }
+            //                                    parameterName = $"{caller}.{clientPropertyName}()";
+            //                                }
+
+            //                                return parameterName + " != null";
+            //                            }));
+            //                        bool conditionalAssignment = !string.IsNullOrEmpty(nullCheck) && !transformationOutputParameter.IsRequired && !onlyRequiredParameters;
+            //                        if (conditionalAssignment)
+            //                        {
+            //                            function.Line("{0} {1} = null;",
+            //                                transformationOutputParameterClientParameterVariantTypeName,
+            //                                outParamName);
+            //                            function.Line($"if ({nullCheck}) {{");
+            //                            function.IncreaseIndent();
+            //                        }
+
+            //                        AutoRestCompositeType transformationOutputParameterModelCompositeType = transformationOutputParameterModelType as AutoRestCompositeType;
+            //                        if (transformationOutputParameterModelCompositeType != null && transformationParameterMappings.Any(m => !string.IsNullOrEmpty(m.OutputParameterProperty)))
+            //                        {
+            //                            string transformationOutputParameterModelCompositeTypeName = transformationOutputParameterModelCompositeType.Name.ToString();
+            //                            if (settings.IsFluent && !string.IsNullOrEmpty(transformationOutputParameterModelCompositeTypeName) && innerModelCompositeType.Contains(transformationOutputParameterModelCompositeType))
+            //                            {
+            //                                transformationOutputParameterModelCompositeTypeName += "Inner";
+            //                            }
+
+            //                            function.Line("{0}{1} = new {2}();",
+            //                                !conditionalAssignment ? transformationOutputParameterClientParameterVariantTypeName + " " : "",
+            //                                outParamName,
+            //                                transformationOutputParameterModelCompositeTypeName);
+            //                        }
+
+            //                        foreach (AutoRestParameterMapping mapping in transformationParameterMappings)
+            //                        {
+            //                            string inputPath;
+            //                            if (!mapping.InputParameter.IsClientProperty)
+            //                            {
+            //                                inputPath = mapping.InputParameter.Name;
+            //                            }
+            //                            else
+            //                            {
+            //                                string caller = (mapping.InputParameter.Method != null && mapping.InputParameter.Method.Group.IsNullOrEmpty() ? "this" : "this.client");
+            //                                string clientPropertyName = mapping.InputParameter.ClientProperty?.Name?.ToString();
+            //                                if (!string.IsNullOrEmpty(clientPropertyName))
+            //                                {
+            //                                    CodeNamer codeNamer = CodeNamer.Instance;
+            //                                    clientPropertyName = codeNamer.CamelCase(codeNamer.RemoveInvalidCharacters(clientPropertyName));
+            //                                }
+            //                                inputPath = $"{caller}.{clientPropertyName}()";
+            //                            }
+
+            //                            if (mapping.InputParameterProperty != null)
+            //                            {
+            //                                inputPath += "." + CodeNamer.Instance.CamelCase(mapping.InputParameterProperty) + "()";
+            //                            }
+            //                            if (onlyRequiredParameters && !mapping.InputParameter.IsRequired)
+            //                            {
+            //                                inputPath = "null";
+            //                            }
+
+            //                            string getMapping;
+            //                            if (mapping.OutputParameterProperty != null)
+            //                            {
+            //                                getMapping = $".with{CodeNamer.Instance.PascalCase(mapping.OutputParameterProperty)}({inputPath})";
+            //                            }
+            //                            else
+            //                            {
+            //                                getMapping = $" = {inputPath}";
+            //                            }
+
+            //                            function.Line("{0}{1}{2};",
+            //                                !conditionalAssignment && transformationOutputParameterModelCompositeType == null ? transformationOutputParameterClientParameterVariantTypeName + " " : "",
+            //                                outParamName,
+            //                                getMapping);
+            //                        }
+
+            //                        if (conditionalAssignment)
+            //                        {
+            //                            function.DecreaseIndent();
+            //                            function.Line("}");
+            //                        }
+            //                    }
+
+            //                    foreach (AutoRestParameter parameter in methodRetrofitParameters)
+            //                    {
+            //                        AutoRestIModelType parameterModelType = parameter.ModelType;
+            //                        if (parameterModelType != null && !IsNullable(parameter))
+            //                        {
+            //                            if (parameterModelType is AutoRestPrimaryType parameterModelPrimaryType)
+            //                            {
+            //                                AutoRestPrimaryType nonNullableParameterModelPrimaryType = DependencyInjection.New<AutoRestPrimaryType>(parameterModelPrimaryType.KnownPrimaryType);
+            //                                nonNullableParameterModelPrimaryType.Format = parameterModelPrimaryType.Format;
+            //                                primaryTypeNotWantNullable.Add(nonNullableParameterModelPrimaryType);
+
+            //                                parameterModelType = nonNullableParameterModelPrimaryType;
+            //                            }
+            //                        }
+            //                        AutoRestIModelType parameterClientType = ConvertToClientType(parameterModelType);
+
+            //                        AutoRestIModelType parameterWireType;
+            //                        if (parameterModelType.IsPrimaryType(AutoRestKnownPrimaryType.Stream))
+            //                        {
+            //                            parameterWireType = parameterClientType;
+            //                        }
+            //                        else if (!parameterModelType.IsPrimaryType(AutoRestKnownPrimaryType.Base64Url) &&
+            //                            parameter.Location != AutoRestParameterLocation.Body &&
+            //                            parameter.Location != AutoRestParameterLocation.FormData &&
+            //                            ((parameterClientType is AutoRestPrimaryType primaryType && primaryType.KnownPrimaryType == AutoRestKnownPrimaryType.ByteArray) || parameterClientType is AutoRestSequenceType))
+            //                        {
+            //                            parameterWireType = DependencyInjection.New<AutoRestPrimaryType>(AutoRestKnownPrimaryType.String);
+            //                        }
+            //                        else
+            //                        {
+            //                            parameterWireType = parameterModelType;
+            //                        }
+
+            //                        if (!parameterClientType.StructurallyEquals(parameterWireType))
+            //                        {
+            //                            string parameterName;
+            //                            if (!parameter.IsClientProperty)
+            //                            {
+            //                                parameterName = parameter.Name;
+            //                            }
+            //                            else
+            //                            {
+            //                                string caller = (parameter.Method != null && parameter.Method.Group.IsNullOrEmpty() ? "this" : "this.client");
+            //                                string clientPropertyName = parameter.ClientProperty?.Name?.ToString();
+            //                                if (!string.IsNullOrEmpty(clientPropertyName))
+            //                                {
+            //                                    CodeNamer codeNamer = CodeNamer.Instance;
+            //                                    clientPropertyName = codeNamer.CamelCase(codeNamer.RemoveInvalidCharacters(clientPropertyName));
+            //                                }
+            //                                parameterName = $"{caller}.{clientPropertyName}()";
+            //                            }
+            //                            string parameterWireName = $"{parameterName.ToCamelCase()}Converted";
+
+            //                            bool addedConversion = false;
+            //                            AutoRestParameterLocation parameterLocation = parameter.Location;
+            //                            if (parameterLocation != AutoRestParameterLocation.Body &&
+            //                                parameterLocation != AutoRestParameterLocation.FormData &&
+            //                                ((parameterModelType is AutoRestPrimaryType parameterModelPrimaryType && parameterModelPrimaryType.KnownPrimaryType == AutoRestKnownPrimaryType.ByteArray) || parameterModelType is AutoRestSequenceType))
+            //                            {
+            //                                string parameterWireTypeName = AutoRestIModelTypeName(parameterWireType, settings);
+
+            //                                if (parameterClientType is AutoRestPrimaryType primaryClientType && primaryClientType.KnownPrimaryType == AutoRestKnownPrimaryType.ByteArray)
+            //                                {
+            //                                    if (parameterWireType.IsPrimaryType(AutoRestKnownPrimaryType.String))
+            //                                    {
+            //                                        function.Line($"{parameterWireTypeName} {parameterWireName} = Base64.encodeBase64String({parameterName});");
+            //                                    }
+            //                                    else
+            //                                    {
+            //                                        function.Line($"{parameterWireTypeName} {parameterWireName} = Base64Url.encode({parameterName});");
+            //                                    }
+            //                                    addedConversion = true;
+            //                                }
+            //                                else if (parameterClientType is AutoRestSequenceType)
+            //                                {
+            //                                    function.Line("{0} {1} = {2}.serializerAdapter().serializeList({3}, CollectionFormat.{4});",
+            //                                        parameterWireTypeName,
+            //                                        parameterWireName,
+            //                                        methodClientReference,
+            //                                        parameterName,
+            //                                        parameter.CollectionFormat.ToString().ToUpperInvariant());
+            //                                    addedConversion = true;
+            //                                }
+            //                            }
+
+            //                            if (!addedConversion)
+            //                            {
+            //                                ParameterConvertClientTypeToWireType(function, settings, parameter, parameterWireType, parameterName, parameterWireName, methodClientReference);
+            //                            }
+            //                        }
+            //                    }
+
+            //                    if (methodIsPagingNextOperation)
+            //                    {
+            //                        string methodUrl = autorestRestAPIMethod.Url;
+            //                        Regex regex = new Regex("{\\w+}");
+
+            //                        string substitutedMethodUrl = regex.Replace(methodUrl, "%s").TrimStart('/');
+
+            //                        IEnumerable<AutoRestParameter> retrofitParameters = autorestRestAPIMethod.LogicalParameters.Where(p => p.Location != AutoRestParameterLocation.None);
+            //                        StringBuilder builder = new StringBuilder($"String.format(\"{substitutedMethodUrl}\"");
+            //                        foreach (Match match in regex.Matches(methodUrl))
+            //                        {
+            //                            string serializedNameWithBrackets = match.Value;
+            //                            string serializedName = serializedNameWithBrackets.Substring(1, serializedNameWithBrackets.Length - 2);
+            //                            AutoRestParameter parameter = retrofitParameters.First(p => p.SerializedName == serializedName);
+
+            //                            string parameterName;
+            //                            if (!parameter.IsClientProperty)
+            //                            {
+            //                                parameterName = parameter.Name;
+            //                            }
+            //                            else
+            //                            {
+            //                                string caller = (parameter.Method != null && parameter.Method.Group.IsNullOrEmpty() ? "this" : "this.client");
+            //                                string clientPropertyName = parameter.ClientProperty?.Name?.ToString();
+            //                                if (!string.IsNullOrEmpty(clientPropertyName))
+            //                                {
+            //                                    CodeNamer codeNamer = CodeNamer.Instance;
+            //                                    clientPropertyName = codeNamer.CamelCase(codeNamer.RemoveInvalidCharacters(clientPropertyName));
+            //                                }
+            //                                parameterName = $"{caller}.{clientPropertyName}()";
+            //                            }
+
+            //                            AutoRestIModelType parameterModelType = parameter.ModelType;
+            //                            if (parameterModelType != null && !IsNullable(parameter))
+            //                            {
+            //                                if (parameterModelType is AutoRestPrimaryType parameterModelPrimaryType)
+            //                                {
+            //                                    AutoRestPrimaryType nonNullableParameterModelPrimaryType = DependencyInjection.New<AutoRestPrimaryType>(parameterModelPrimaryType.KnownPrimaryType);
+            //                                    nonNullableParameterModelPrimaryType.Format = parameterModelPrimaryType.Format;
+            //                                    primaryTypeNotWantNullable.Add(nonNullableParameterModelPrimaryType);
+
+            //                                    parameterModelType = nonNullableParameterModelPrimaryType;
+            //                                }
+            //                            }
+
+            //                            AutoRestIModelType parameterClientType = ConvertToClientType(parameterModelType);
+
+            //                            AutoRestIModelType parameterWireType;
+            //                            if (parameterModelType.IsPrimaryType(AutoRestKnownPrimaryType.Stream))
+            //                            {
+            //                                parameterWireType = parameterClientType;
+            //                            }
+            //                            else if (!parameterModelType.IsPrimaryType(AutoRestKnownPrimaryType.Base64Url) &&
+            //                                parameter.Location != AutoRestParameterLocation.Body &&
+            //                                parameter.Location != AutoRestParameterLocation.FormData &&
+            //                                ((parameterClientType is AutoRestPrimaryType primaryType && primaryType.KnownPrimaryType == AutoRestKnownPrimaryType.ByteArray) || parameterClientType is AutoRestSequenceType))
+            //                            {
+            //                                parameterWireType = DependencyInjection.New<AutoRestPrimaryType>(AutoRestKnownPrimaryType.String);
+            //                            }
+            //                            else
+            //                            {
+            //                                parameterWireType = parameterModelType;
+            //                            }
+
+            //                            string parameterWireName = !parameterClientType.StructurallyEquals(parameterWireType) ? $"{parameterName.ToCamelCase()}Converted" : parameterName;
+            //                            builder.Append(", " + parameterWireName);
+            //                        }
+            //                        builder.Append(")");
+
+            //                        function.Line($"String nextUrl = {builder.ToString()};");
+            //                    }
+
+            //                    IEnumerable<AutoRestParameter> orderedRetrofitParameters = methodRetrofitParameters.Where(p => p.Location == AutoRestParameterLocation.Path)
+            //                        .Union(methodRetrofitParameters.Where(p => p.Location != AutoRestParameterLocation.Path));
+            //                    string restAPIMethodArgumentList = string.Join(", ", orderedRetrofitParameters
+            //                        .Select((AutoRestParameter parameter) =>
+            //                        {
+            //                            string parameterName;
+            //                            if (!parameter.IsClientProperty)
+            //                            {
+            //                                parameterName = parameter.Name;
+            //                            }
+            //                            else
+            //                            {
+            //                                string caller = (parameter.Method != null && parameter.Method.Group.IsNullOrEmpty() ? "this" : "this.client");
+            //                                string clientPropertyName = parameter.ClientProperty?.Name?.ToString();
+            //                                if (!string.IsNullOrEmpty(clientPropertyName))
+            //                                {
+            //                                    CodeNamer codeNamer = CodeNamer.Instance;
+            //                                    clientPropertyName = codeNamer.CamelCase(codeNamer.RemoveInvalidCharacters(clientPropertyName));
+            //                                }
+            //                                parameterName = $"{caller}.{clientPropertyName}()";
+            //                            }
+            //                            AutoRestIModelType parameterModelType = parameter.ModelType;
+            //                            if (parameterModelType != null && !IsNullable(parameter))
+            //                            {
+            //                                if (parameterModelType is AutoRestPrimaryType parameterModelPrimaryType)
+            //                                {
+            //                                    AutoRestPrimaryType nonNullableParameterModelPrimaryType = DependencyInjection.New<AutoRestPrimaryType>(parameterModelPrimaryType.KnownPrimaryType);
+            //                                    nonNullableParameterModelPrimaryType.Format = parameterModelPrimaryType.Format;
+            //                                    primaryTypeNotWantNullable.Add(nonNullableParameterModelPrimaryType);
+
+            //                                    parameterModelType = nonNullableParameterModelPrimaryType;
+            //                                }
+            //                            }
+            //                            AutoRestIModelType parameterClientType = ConvertToClientType(parameterModelType);
+
+            //                            AutoRestIModelType parameterWireType;
+            //                            if (parameterModelType.IsPrimaryType(AutoRestKnownPrimaryType.Stream))
+            //                            {
+            //                                parameterWireType = parameterClientType;
+            //                            }
+            //                            else if (!parameterModelType.IsPrimaryType(AutoRestKnownPrimaryType.Base64Url) &&
+            //                                parameter.Location != AutoRestParameterLocation.Body &&
+            //                                parameter.Location != AutoRestParameterLocation.FormData &&
+            //                                ((parameterClientType is AutoRestPrimaryType primaryType && primaryType.KnownPrimaryType == AutoRestKnownPrimaryType.ByteArray) || parameterClientType is AutoRestSequenceType))
+            //                            {
+            //                                parameterWireType = DependencyInjection.New<AutoRestPrimaryType>(AutoRestKnownPrimaryType.String);
+            //                            }
+            //                            else
+            //                            {
+            //                                parameterWireType = parameterModelType;
+            //                            }
+
+            //                            string parameterWireName = !parameterClientType.StructurallyEquals(parameterWireType) ? $"{parameterName.ToCamelCase()}Converted" : parameterName;
+
+            //                            string result;
+            //                            if (settings.ShouldGenerateXmlSerialization && parameterWireType is AutoRestSequenceType)
+            //                            {
+            //                                result = $"new {parameterWireType.XmlName}Wrapper({parameterWireName})";
+            //                            }
+            //                            else
+            //                            {
+            //                                result = parameterWireName;
+            //                            }
+            //                            return result;
+            //                        }));
+
+            //                    function.Line($"return service.{restAPIMethod.Name}({restAPIMethodArgumentList}).map(new Function<{restResponseType}, {pageType}>() {{");
+            //                    function.Indent(() =>
+            //                    {
+            //                        function.Annotation("Override");
+            //                        function.Block($"public {pageType} apply({restResponseType} response)", subFunction =>
+            //                        {
+            //                            subFunction.Return("response.body()");
+            //                        });
+            //                    });
+            //                    function.Line("});");
+            //                });
+            //            }
+
+            //            addedClientMethods = true;
+            //        }
+            //        else if (simulateMethodAsPagingOperation)
+            //        {
+            //            string sequenceElementTypeString = restAPIMethodReturnType.Body is AutoRestSequenceType bodySequenceType ? AutoRestIModelTypeName(bodySequenceType.ElementType, settings) : "Void";
+
+            //            foreach (IEnumerable<AutoRestParameter> parameters in parameterLists)
+            //            {
+            //                bool onlyRequiredParameters = (parameters == requiredClientMethodParameters);
+            //                bool filterRequired = onlyRequiredParameters;
+
+            //                string parameterDeclaration = string.Join(", ", parameters.Select(parameter =>
+            //                {
+            //                    AutoRestIModelType parameterModelType = parameter.ModelType;
+            //                    if (parameterModelType != null && !IsNullable(parameter))
+            //                    {
+            //                        if (parameterModelType is AutoRestPrimaryType parameterModelPrimaryType)
+            //                        {
+            //                            AutoRestPrimaryType nonNullableParameterModelPrimaryType = DependencyInjection.New<AutoRestPrimaryType>(parameterModelPrimaryType.KnownPrimaryType);
+            //                            nonNullableParameterModelPrimaryType.Format = parameterModelPrimaryType.Format;
+            //                            primaryTypeNotWantNullable.Add(nonNullableParameterModelPrimaryType);
+
+            //                            parameterModelType = nonNullableParameterModelPrimaryType;
+            //                        }
+            //                    }
+            //                    AutoRestIModelType parameterClientType = ConvertToClientType(parameterModelType);
+            //                    string parameterType = AutoRestIModelTypeName(parameterClientType, settings);
+            //                    return $"{parameterType} {parameter.Name}";
+            //                }));
+
+            //                // ------------------------
+            //                // Synchronous PagedList<T>
+            //                // ------------------------
+            //                string pageImplType = SequenceTypeGetPageImplType(restAPIMethodReturnBodyClientType);
+            //                string synchronousReturnType = $"PagedList<{sequenceElementTypeString}>";
+            //                typeBlock.JavadocComment(comment =>
+            //                {
+            //                    comment.Description(restAPIMethod.Description);
+            //                    foreach (AutoRestParameter parameter in parameters)
+            //                    {
+            //                        string parameterName = parameter.Name;
+
+            //                        string parameterDocumentation = parameter.Documentation;
+            //                        if (string.IsNullOrEmpty(parameterDocumentation))
+            //                        {
+            //                            AutoRestIModelType parameterModelType = parameter.ModelType;
+            //                            if (parameterModelType != null && !IsNullable(parameter))
+            //                            {
+            //                                if (parameterModelType is AutoRestPrimaryType parameterModelPrimaryType)
+            //                                {
+            //                                    AutoRestPrimaryType nonNullableParameterModelPrimaryType = DependencyInjection.New<AutoRestPrimaryType>(parameterModelPrimaryType.KnownPrimaryType);
+            //                                    nonNullableParameterModelPrimaryType.Format = parameterModelPrimaryType.Format;
+            //                                    primaryTypeNotWantNullable.Add(nonNullableParameterModelPrimaryType);
+
+            //                                    parameterModelType = nonNullableParameterModelPrimaryType;
+            //                                }
+            //                            }
+            //                            parameterDocumentation = $"the {AutoRestIModelTypeName(parameterModelType, settings)} value";
+            //                        }
+
+            //                        comment.Param(parameterName, parameterDocumentation);
+            //                    }
+            //                    if (autorestRestAPIMethod.ReturnType.Body != null)
+            //                    {
+            //                        comment.Return($"the {synchronousReturnType} object if successful.");
+            //                    }
+            //                });
+            //                typeBlock.PublicMethod($"{synchronousReturnType} {restAPIMethod.Name}({parameterDeclaration})", function =>
+            //                {
+            //                    function.Line($"{pageImplType}<{sequenceElementTypeString}> page = new {pageImplType}<>();");
+
+            //                    string argumentList = string.Join(", ", parameters.Select((AutoRestParameter parameter) => parameter.Name));
+            //                    function.Line($"page.setItems({restAPIMethod.Name}Async({argumentList}).single().items());");
+            //                    function.Line("page.setNextPageLink(null);");
+            //                    function.ReturnAnonymousClass($"new {synchronousReturnType}(page)", anonymousClass =>
+            //                    {
+            //                        anonymousClass.Annotation("Override");
+            //                        anonymousClass.PublicMethod($"Page<{sequenceElementTypeString}> nextPage(String nextPageLink)", subFunction =>
+            //                        {
+            //                            subFunction.Return("null");
+            //                        });
+            //                    });
+            //                });
+
+            //                // -------------------------
+            //                // Async Observable<Page<T>>
+            //                // -------------------------
+            //                typeBlock.JavadocComment(comment =>
+            //                {
+            //                    comment.Description(restAPIMethod.Description);
+            //                    foreach (AutoRestParameter parameter in parameters)
+            //                    {
+            //                        string parameterName = parameter.Name;
+
+            //                        string parameterDocumentation = parameter.Documentation;
+            //                        if (string.IsNullOrEmpty(parameterDocumentation))
+            //                        {
+            //                            AutoRestIModelType parameterModelType = parameter.ModelType;
+            //                            if (parameterModelType != null && !IsNullable(parameter))
+            //                            {
+            //                                if (parameterModelType is AutoRestPrimaryType parameterModelPrimaryType)
+            //                                {
+            //                                    AutoRestPrimaryType nonNullableParameterModelPrimaryType = DependencyInjection.New<AutoRestPrimaryType>(parameterModelPrimaryType.KnownPrimaryType);
+            //                                    nonNullableParameterModelPrimaryType.Format = parameterModelPrimaryType.Format;
+            //                                    primaryTypeNotWantNullable.Add(nonNullableParameterModelPrimaryType);
+
+            //                                    parameterModelType = nonNullableParameterModelPrimaryType;
+            //                                }
+            //                            }
+            //                            parameterDocumentation = $"the {AutoRestIModelTypeName(parameterModelType, settings)} value";
+            //                        }
+
+            //                        comment.Param(parameterName, parameterDocumentation);
+            //                    }
+            //                    comment.Throws("IllegalArgumentException", "thrown if parameters fail the validation");
+            //                    if (autorestRestAPIMethod.ReturnType.Body != null)
+            //                    {
+            //                        comment.Return($"the observable to the {synchronousMethodReturnType} object");
+            //                    }
+            //                    else
+            //                    {
+            //                        comment.Return($"the {{@link Observable<{pageType}>}} object if successful.");
+            //                    }
+            //                });
+            //                typeBlock.PublicMethod($"Observable<Page<{sequenceElementTypeString}>> {restAPIMethod.Name}Async({parameterDeclaration})", function =>
+            //                {
+            //                    foreach (AutoRestParameter parameter in requiredNullableParameters)
+            //                    {
+            //                        string parameterName;
+            //                        if (!parameter.IsClientProperty)
+            //                        {
+            //                            parameterName = parameter.Name;
+            //                        }
+            //                        else
+            //                        {
+            //                            string caller = (parameter.Method != null && parameter.Method.Group.IsNullOrEmpty() ? "this" : "this.client");
+            //                            string clientPropertyName = parameter.ClientProperty?.Name?.ToString();
+            //                            if (!string.IsNullOrEmpty(clientPropertyName))
+            //                            {
+            //                                CodeNamer codeNamer = CodeNamer.Instance;
+            //                                clientPropertyName = codeNamer.CamelCase(codeNamer.RemoveInvalidCharacters(clientPropertyName));
+            //                            }
+            //                            parameterName = $"{caller}.{clientPropertyName}()";
+            //                        }
+
+            //                        function.If($"{parameterName} == null", ifBlock =>
+            //                        {
+            //                            ifBlock.Line($"throw new IllegalArgumentException(\"Parameter {parameterName} is required and cannot be null.\");");
+            //                        });
+            //                    }
+
+            //                    IEnumerable<AutoRestParameter> parametersToValidate = autorestRestAPIMethod.Parameters.Where(parameter =>
+            //                    {
+            //                        bool result = !parameter.IsConstant;
+            //                        if (result)
+            //                        {
+            //                            AutoRestIModelType parameterModelType = parameter.ModelType;
+            //                            if (parameterModelType != null && !IsNullable(parameter))
+            //                            {
+            //                                if (parameterModelType is AutoRestPrimaryType parameterModelPrimaryType)
+            //                                {
+            //                                    AutoRestPrimaryType nonNullableParameterModelPrimaryType = DependencyInjection.New<AutoRestPrimaryType>(parameterModelPrimaryType.KnownPrimaryType);
+            //                                    nonNullableParameterModelPrimaryType.Format = parameterModelPrimaryType.Format;
+            //                                    primaryTypeNotWantNullable.Add(nonNullableParameterModelPrimaryType);
+
+            //                                    parameterModelType = nonNullableParameterModelPrimaryType;
+            //                                }
+            //                            }
+            //                            result = !(parameterModelType is AutoRestPrimaryType) && !(parameterModelType is AutoRestEnumType) && (!onlyRequiredParameters || parameter.IsRequired);
+            //                        }
+
+            //                        return result;
+            //                    });
+            //                    foreach (AutoRestParameter parameter in parametersToValidate)
+            //                    {
+            //                        string parameterName;
+            //                        if (!parameter.IsClientProperty)
+            //                        {
+            //                            parameterName = parameter.Name;
+            //                        }
+            //                        else
+            //                        {
+            //                            string caller = (parameter.Method != null && parameter.Method.Group.IsNullOrEmpty() ? "this" : "this.client");
+            //                            string clientPropertyName = parameter.ClientProperty?.Name?.ToString();
+            //                            if (!string.IsNullOrEmpty(clientPropertyName))
+            //                            {
+            //                                CodeNamer codeNamer = CodeNamer.Instance;
+            //                                clientPropertyName = codeNamer.CamelCase(codeNamer.RemoveInvalidCharacters(clientPropertyName));
+            //                            }
+            //                            parameterName = $"{caller}.{clientPropertyName}()";
+            //                        }
+
+            //                        function.Line($"Validator.validate({parameterName});");
+            //                    }
+
+            //                    foreach (AutoRestParameter parameter in clientMethodAndConstantParameters)
+            //                    {
+            //                        string parameterName = parameter.Name;
+
+            //                        AutoRestIModelType parameterModelType = parameter.ModelType;
+            //                        if (parameterModelType != null && !IsNullable(parameter))
+            //                        {
+            //                            if (parameterModelType is AutoRestPrimaryType parameterModelPrimaryType)
+            //                            {
+            //                                AutoRestPrimaryType nonNullableParameterModelPrimaryType = DependencyInjection.New<AutoRestPrimaryType>(parameterModelPrimaryType.KnownPrimaryType);
+            //                                nonNullableParameterModelPrimaryType.Format = parameterModelPrimaryType.Format;
+            //                                primaryTypeNotWantNullable.Add(nonNullableParameterModelPrimaryType);
+
+            //                                parameterModelType = nonNullableParameterModelPrimaryType;
+            //                            }
+            //                        }
+            //                        AutoRestIModelType parameterClientType = ConvertToClientType(parameterModelType);
+
+            //                        if (onlyRequiredParameters && !parameter.IsRequired)
+            //                        {
+            //                            string parameterDefaultValue;
+            //                            if (parameterClientType is AutoRestPrimaryType parameterClientPrimaryType)
+            //                            {
+            //                                string modelTypeName = AutoRestIModelTypeName(parameterClientPrimaryType, settings);
+            //                                if (modelTypeName == "byte[]")
+            //                                {
+            //                                    parameterDefaultValue = "new byte[0]";
+            //                                }
+            //                                else if (modelTypeName == "Byte[]")
+            //                                {
+            //                                    parameterDefaultValue = "new Byte[0]";
+            //                                }
+            //                                else
+            //                                {
+            //                                    parameterDefaultValue = null;
+            //                                }
+            //                            }
+            //                            else
+            //                            {
+            //                                parameterDefaultValue = parameterClientType.DefaultValue;
+            //                            }
+            //                            function.Line($"final {AutoRestIModelTypeName(parameterClientType, settings)} {parameterName} = {parameterDefaultValue ?? "null"};");
+            //                        }
+            //                        else if (parameter.IsConstant)
+            //                        {
+            //                            string defaultValue = parameter.DefaultValue;
+            //                            if (defaultValue != null && parameterModelType is AutoRestPrimaryType parameterModelPrimaryType)
+            //                            {
+            //                                switch (parameterModelPrimaryType.KnownPrimaryType)
+            //                                {
+            //                                    case AutoRestKnownPrimaryType.Double:
+            //                                        defaultValue = double.Parse(defaultValue).ToString();
+            //                                        break;
+
+            //                                    case AutoRestKnownPrimaryType.String:
+            //                                        defaultValue = CodeNamer.Instance.QuoteValue(defaultValue);
+            //                                        break;
+
+            //                                    case AutoRestKnownPrimaryType.Boolean:
+            //                                        defaultValue = defaultValue.ToLowerInvariant();
+            //                                        break;
+
+            //                                    case AutoRestKnownPrimaryType.Long:
+            //                                        defaultValue = defaultValue + 'L';
+            //                                        break;
+
+            //                                    case AutoRestKnownPrimaryType.Date:
+            //                                        defaultValue = $"LocalDate.parse(\"{defaultValue}\")";
+            //                                        break;
+
+            //                                    case AutoRestKnownPrimaryType.DateTime:
+            //                                    case AutoRestKnownPrimaryType.DateTimeRfc1123:
+            //                                        defaultValue = $"DateTime.parse(\"{defaultValue}\")";
+            //                                        break;
+
+            //                                    case AutoRestKnownPrimaryType.TimeSpan:
+            //                                        defaultValue = $"Period.parse(\"{defaultValue}\")";
+            //                                        break;
+
+            //                                    case AutoRestKnownPrimaryType.ByteArray:
+            //                                        defaultValue = $"\"{defaultValue}\".getBytes()";
+            //                                        break;
+            //                                }
+            //                            }
+            //                            function.Line($"final {AutoRestIModelTypeName(ConvertToClientType(parameterClientType), settings)} {parameterName} = {defaultValue ?? "null"};");
+            //                        }
+            //                    }
+
+            //                    foreach (AutoRestParameterTransformation transformation in autorestRestAPIMethod.InputParameterTransformation)
+            //                    {
+            //                        AutoRestParameter transformationOutputParameter = transformation.OutputParameter;
+            //                        AutoRestIModelType transformationOutputParameterModelType = transformationOutputParameter.ModelType;
+            //                        if (transformationOutputParameterModelType != null && !IsNullable(transformationOutputParameter) && transformationOutputParameterModelType is AutoRestPrimaryType transformationOutputParameterModelPrimaryType)
+            //                        {
+            //                            AutoRestPrimaryType transformationOutputParameterModelNonNullablePrimaryType = DependencyInjection.New<AutoRestPrimaryType>(transformationOutputParameterModelPrimaryType.KnownPrimaryType);
+            //                            transformationOutputParameterModelNonNullablePrimaryType.Format = transformationOutputParameterModelPrimaryType.Format;
+            //                            primaryTypeNotWantNullable.Add(transformationOutputParameterModelNonNullablePrimaryType);
+
+            //                            transformationOutputParameterModelType = transformationOutputParameterModelNonNullablePrimaryType;
+            //                        }
+            //                        AutoRestIModelType transformationOutputParameterClientType = ConvertToClientType(transformationOutputParameterModelType);
+
+            //                        string outParamName;
+            //                        if (!transformationOutputParameter.IsClientProperty)
+            //                        {
+            //                            outParamName = transformationOutputParameter.Name;
+            //                        }
+            //                        else
+            //                        {
+            //                            string caller = (transformationOutputParameter.Method != null && transformationOutputParameter.Method.Group.IsNullOrEmpty() ? "this" : "this.client");
+            //                            string clientPropertyName = transformationOutputParameter.ClientProperty?.Name?.ToString();
+            //                            if (!string.IsNullOrEmpty(clientPropertyName))
+            //                            {
+            //                                CodeNamer codeNamer = CodeNamer.Instance;
+            //                                clientPropertyName = codeNamer.CamelCase(codeNamer.RemoveInvalidCharacters(clientPropertyName));
+            //                            }
+            //                            outParamName = $"{caller}.{clientPropertyName}()";
+            //                        }
+            //                        while (autorestRestAPIMethod.Parameters.Any((AutoRestParameter parameter) =>
+            //                        {
+            //                            string parameterName;
+            //                            if (!parameter.IsClientProperty)
+            //                            {
+            //                                parameterName = parameter.Name;
+            //                            }
+            //                            else
+            //                            {
+            //                                string caller = (parameter.Method != null && parameter.Method.Group.IsNullOrEmpty() ? "this" : "this.client");
+            //                                string clientPropertyName = parameter.ClientProperty?.Name?.ToString();
+            //                                if (!string.IsNullOrEmpty(clientPropertyName))
+            //                                {
+            //                                    CodeNamer codeNamer = CodeNamer.Instance;
+            //                                    clientPropertyName = codeNamer.CamelCase(codeNamer.RemoveInvalidCharacters(clientPropertyName));
+            //                                }
+            //                                parameterName = $"{caller}.{clientPropertyName}()";
+            //                            }
+            //                            return parameterName == outParamName;
+            //                        }))
+            //                        {
+            //                            outParamName += "1";
+            //                        }
+
+            //                        transformationOutputParameter.Name = outParamName;
+
+            //                        string transformationOutputParameterClientParameterVariantTypeName = AutoRestIModelTypeName(ConvertToClientType(transformationOutputParameterClientType), settings);
+
+            //                        IEnumerable<AutoRestParameterMapping> transformationParameterMappings = transformation.ParameterMappings;
+            //                        string nullCheck = string.Join(" || ", transformationParameterMappings.Where(m => !m.InputParameter.IsRequired)
+            //                            .Select((AutoRestParameterMapping m) =>
+            //                            {
+            //                                AutoRestParameter parameter = m.InputParameter;
+
+            //                                string parameterName;
+            //                                if (!parameter.IsClientProperty)
+            //                                {
+            //                                    parameterName = parameter.Name;
+            //                                }
+            //                                else
+            //                                {
+            //                                    string caller = (parameter.Method != null && parameter.Method.Group.IsNullOrEmpty() ? "this" : "this.client");
+            //                                    string clientPropertyName = parameter.ClientProperty?.Name?.ToString();
+            //                                    if (!string.IsNullOrEmpty(clientPropertyName))
+            //                                    {
+            //                                        CodeNamer codeNamer = CodeNamer.Instance;
+            //                                        clientPropertyName = codeNamer.CamelCase(codeNamer.RemoveInvalidCharacters(clientPropertyName));
+            //                                    }
+            //                                    parameterName = $"{caller}.{clientPropertyName}()";
+            //                                }
+
+            //                                return parameterName + " != null";
+            //                            }));
+            //                        bool conditionalAssignment = !string.IsNullOrEmpty(nullCheck) && !transformationOutputParameter.IsRequired && !filterRequired;
+            //                        if (conditionalAssignment)
+            //                        {
+            //                            function.Line("{0} {1} = null;",
+            //                                transformationOutputParameterClientParameterVariantTypeName,
+            //                                outParamName);
+            //                            function.Line($"if ({nullCheck}) {{");
+            //                            function.IncreaseIndent();
+            //                        }
+
+            //                        AutoRestCompositeType transformationOutputParameterModelCompositeType = transformationOutputParameterModelType as AutoRestCompositeType;
+            //                        if (transformationOutputParameterModelCompositeType != null && transformationParameterMappings.Any(m => !string.IsNullOrEmpty(m.OutputParameterProperty)))
+            //                        {
+            //                            string transformationOutputParameterModelCompositeTypeName = transformationOutputParameterModelCompositeType.Name.ToString();
+            //                            if (settings.IsFluent && !string.IsNullOrEmpty(transformationOutputParameterModelCompositeTypeName) && innerModelCompositeType.Contains(transformationOutputParameterModelCompositeType))
+            //                            {
+            //                                transformationOutputParameterModelCompositeTypeName += "Inner";
+            //                            }
+
+            //                            function.Line("{0}{1} = new {2}();",
+            //                                !conditionalAssignment ? transformationOutputParameterClientParameterVariantTypeName + " " : "",
+            //                                outParamName,
+            //                                transformationOutputParameterModelCompositeTypeName);
+            //                        }
+
+            //                        foreach (AutoRestParameterMapping mapping in transformationParameterMappings)
+            //                        {
+            //                            string inputPath;
+            //                            if (!mapping.InputParameter.IsClientProperty)
+            //                            {
+            //                                inputPath = mapping.InputParameter.Name;
+            //                            }
+            //                            else
+            //                            {
+            //                                string caller = (mapping.InputParameter.Method != null && mapping.InputParameter.Method.Group.IsNullOrEmpty() ? "this" : "this.client");
+            //                                string clientPropertyName = mapping.InputParameter.ClientProperty?.Name?.ToString();
+            //                                if (!string.IsNullOrEmpty(clientPropertyName))
+            //                                {
+            //                                    CodeNamer codeNamer = CodeNamer.Instance;
+            //                                    clientPropertyName = codeNamer.CamelCase(codeNamer.RemoveInvalidCharacters(clientPropertyName));
+            //                                }
+            //                                inputPath = $"{caller}.{clientPropertyName}()";
+            //                            }
+
+            //                            if (mapping.InputParameterProperty != null)
+            //                            {
+            //                                inputPath += "." + CodeNamer.Instance.CamelCase(mapping.InputParameterProperty) + "()";
+            //                            }
+            //                            if (filterRequired && !mapping.InputParameter.IsRequired)
+            //                            {
+            //                                inputPath = "null";
+            //                            }
+
+            //                            string getMapping;
+            //                            if (mapping.OutputParameterProperty != null)
+            //                            {
+            //                                getMapping = $".with{CodeNamer.Instance.PascalCase(mapping.OutputParameterProperty)}({inputPath})";
+            //                            }
+            //                            else
+            //                            {
+            //                                getMapping = $" = {inputPath}";
+            //                            }
+
+            //                            function.Line("{0}{1}{2};",
+            //                                !conditionalAssignment && transformationOutputParameterModelCompositeType == null ? transformationOutputParameterClientParameterVariantTypeName + " " : "",
+            //                                outParamName,
+            //                                getMapping);
+            //                        }
+
+            //                        if (conditionalAssignment)
+            //                        {
+            //                            function.DecreaseIndent();
+            //                            function.Line("}");
+            //                        }
+            //                    }
+
+            //                    foreach (AutoRestParameter parameter in methodRetrofitParameters)
+            //                    {
+            //                        AutoRestIModelType parameterModelType = parameter.ModelType;
+            //                        if (parameterModelType != null && !IsNullable(parameter))
+            //                        {
+            //                            if (parameterModelType is AutoRestPrimaryType parameterModelPrimaryType)
+            //                            {
+            //                                AutoRestPrimaryType nonNullableParameterModelPrimaryType = DependencyInjection.New<AutoRestPrimaryType>(parameterModelPrimaryType.KnownPrimaryType);
+            //                                nonNullableParameterModelPrimaryType.Format = parameterModelPrimaryType.Format;
+            //                                primaryTypeNotWantNullable.Add(nonNullableParameterModelPrimaryType);
+
+            //                                parameterModelType = nonNullableParameterModelPrimaryType;
+            //                            }
+            //                        }
+            //                        AutoRestIModelType parameterClientType = ConvertToClientType(parameterModelType);
+
+            //                        AutoRestIModelType parameterWireType;
+            //                        if (parameterModelType.IsPrimaryType(AutoRestKnownPrimaryType.Stream))
+            //                        {
+            //                            parameterWireType = parameterClientType;
+            //                        }
+            //                        else if (!parameterModelType.IsPrimaryType(AutoRestKnownPrimaryType.Base64Url) &&
+            //                            parameter.Location != AutoRestParameterLocation.Body &&
+            //                            parameter.Location != AutoRestParameterLocation.FormData &&
+            //                            ((parameterClientType is AutoRestPrimaryType primaryType && primaryType.KnownPrimaryType == AutoRestKnownPrimaryType.ByteArray) || parameterClientType is AutoRestSequenceType))
+            //                        {
+            //                            parameterWireType = DependencyInjection.New<AutoRestPrimaryType>(AutoRestKnownPrimaryType.String);
+            //                        }
+            //                        else
+            //                        {
+            //                            parameterWireType = parameterModelType;
+            //                        }
+
+            //                        if (!parameterClientType.StructurallyEquals(parameterWireType))
+            //                        {
+            //                            string parameterName;
+            //                            if (!parameter.IsClientProperty)
+            //                            {
+            //                                parameterName = parameter.Name;
+            //                            }
+            //                            else
+            //                            {
+            //                                string caller = (parameter.Method != null && parameter.Method.Group.IsNullOrEmpty() ? "this" : "this.client");
+            //                                string clientPropertyName = parameter.ClientProperty?.Name?.ToString();
+            //                                if (!string.IsNullOrEmpty(clientPropertyName))
+            //                                {
+            //                                    CodeNamer codeNamer = CodeNamer.Instance;
+            //                                    clientPropertyName = codeNamer.CamelCase(codeNamer.RemoveInvalidCharacters(clientPropertyName));
+            //                                }
+            //                                parameterName = $"{caller}.{clientPropertyName}()";
+            //                            }
+            //                            string parameterWireName = $"{parameterName.ToCamelCase()}Converted";
+
+            //                            bool addedConversion = false;
+            //                            AutoRestParameterLocation parameterLocation = parameter.Location;
+            //                            if (parameterLocation != AutoRestParameterLocation.Body &&
+            //                                parameterLocation != AutoRestParameterLocation.FormData &&
+            //                                ((parameterModelType is AutoRestPrimaryType parameterModelPrimaryType && parameterModelPrimaryType.KnownPrimaryType == AutoRestKnownPrimaryType.ByteArray) || parameterModelType is AutoRestSequenceType))
+            //                            {
+            //                                string parameterWireTypeName = AutoRestIModelTypeName(parameterWireType, settings);
+
+            //                                if (parameterClientType is AutoRestPrimaryType primaryClientType && primaryClientType.KnownPrimaryType == AutoRestKnownPrimaryType.ByteArray)
+            //                                {
+            //                                    if (parameterWireType.IsPrimaryType(AutoRestKnownPrimaryType.String))
+            //                                    {
+            //                                        function.Line($"{parameterWireTypeName} {parameterWireName} = Base64.encodeBase64String({parameterName});");
+            //                                    }
+            //                                    else
+            //                                    {
+            //                                        function.Line($"{parameterWireTypeName} {parameterWireName} = Base64Url.encode({parameterName});");
+            //                                    }
+            //                                    addedConversion = true;
+            //                                }
+            //                                else if (parameterClientType is AutoRestSequenceType)
+            //                                {
+            //                                    function.Line("{0} {1} = {2}.serializerAdapter().serializeList({3}, CollectionFormat.{4});",
+            //                                        parameterWireTypeName,
+            //                                        parameterWireName,
+            //                                        methodClientReference,
+            //                                        parameterName,
+            //                                        parameter.CollectionFormat.ToString().ToUpperInvariant());
+            //                                    addedConversion = true;
+            //                                }
+            //                            }
+
+            //                            if (!addedConversion)
+            //                            {
+            //                                ParameterConvertClientTypeToWireType(function, settings, parameter, parameterWireType, parameterName, parameterWireName, methodClientReference);
+            //                            }
+            //                        }
+            //                    }
+
+            //                    string restAPIMethodArgumentList = string.Join(", ", methodOrderedRetrofitParameters
+            //                        .Select((AutoRestParameter parameter) =>
+            //                        {
+            //                            string parameterName;
+            //                            if (!parameter.IsClientProperty)
+            //                            {
+            //                                parameterName = parameter.Name;
+            //                            }
+            //                            else
+            //                            {
+            //                                string caller = (parameter.Method != null && parameter.Method.Group.IsNullOrEmpty() ? "this" : "this.client");
+            //                                string clientPropertyName = parameter.ClientProperty?.Name?.ToString();
+            //                                if (!string.IsNullOrEmpty(clientPropertyName))
+            //                                {
+            //                                    CodeNamer codeNamer = CodeNamer.Instance;
+            //                                    clientPropertyName = codeNamer.CamelCase(codeNamer.RemoveInvalidCharacters(clientPropertyName));
+            //                                }
+            //                                parameterName = $"{caller}.{clientPropertyName}()";
+            //                            }
+            //                            AutoRestIModelType parameterModelType = parameter.ModelType;
+            //                            if (parameterModelType != null && !IsNullable(parameter))
+            //                            {
+            //                                if (parameterModelType is AutoRestPrimaryType parameterModelPrimaryType)
+            //                                {
+            //                                    AutoRestPrimaryType nonNullableParameterModelPrimaryType = DependencyInjection.New<AutoRestPrimaryType>(parameterModelPrimaryType.KnownPrimaryType);
+            //                                    nonNullableParameterModelPrimaryType.Format = parameterModelPrimaryType.Format;
+            //                                    primaryTypeNotWantNullable.Add(nonNullableParameterModelPrimaryType);
+
+            //                                    parameterModelType = nonNullableParameterModelPrimaryType;
+            //                                }
+            //                            }
+            //                            AutoRestIModelType parameterClientType = ConvertToClientType(parameterModelType);
+
+            //                            AutoRestIModelType parameterWireType;
+            //                            if (parameterModelType.IsPrimaryType(AutoRestKnownPrimaryType.Stream))
+            //                            {
+            //                                parameterWireType = parameterClientType;
+            //                            }
+            //                            else if (!parameterModelType.IsPrimaryType(AutoRestKnownPrimaryType.Base64Url) &&
+            //                                parameter.Location != AutoRestParameterLocation.Body &&
+            //                                parameter.Location != AutoRestParameterLocation.FormData &&
+            //                                ((parameterClientType is AutoRestPrimaryType primaryType && primaryType.KnownPrimaryType == AutoRestKnownPrimaryType.ByteArray) || parameterClientType is AutoRestSequenceType))
+            //                            {
+            //                                parameterWireType = DependencyInjection.New<AutoRestPrimaryType>(AutoRestKnownPrimaryType.String);
+            //                            }
+            //                            else
+            //                            {
+            //                                parameterWireType = parameterModelType;
+            //                            }
+
+            //                            string parameterWireName = !parameterClientType.StructurallyEquals(parameterWireType) ? $"{parameterName.ToCamelCase()}Converted" : parameterName;
+
+            //                            string result;
+            //                            if (settings.ShouldGenerateXmlSerialization && parameterWireType is AutoRestSequenceType)
+            //                            {
+            //                                result = $"new {parameterWireType.XmlName}Wrapper({parameterWireName})";
+            //                            }
+            //                            else
+            //                            {
+            //                                result = parameterWireName;
+            //                            }
+            //                            return result;
+            //                        }));
+
+            //                    function.Line($"return service.{restAPIMethod.Name}({restAPIMethodArgumentList}).map(new Function<{restResponseType}, {pageType}>() {{");
+            //                    function.Indent(() =>
+            //                    {
+            //                        function.Annotation("Override");
+            //                        function.Block($"public {pageType} apply({restResponseType} response)", subFunction =>
+            //                        {
+            //                            subFunction.Return("response.body()");
+            //                        });
+            //                    });
+            //                    function.Line("}).toObservable();");
+            //                });
+            //            }
+
+            //            addedClientMethods = true;
+            //        }
+            //        else if (restAPIMethod.IsLongRunningOperation)
+            //        {
+            //            foreach (IEnumerable<AutoRestParameter> parameters in parameterLists)
+            //            {
+            //                bool onlyRequiredParameters = (parameters == requiredClientMethodParameters);
+
+            //                string argumentList = string.Join(", ", parameters.Select((AutoRestParameter parameter) => parameter.Name));
+
+            //                string parameterDeclaration = string.Join(", ", parameters.Select(parameter =>
+            //                {
+            //                    AutoRestIModelType parameterModelType = parameter.ModelType;
+            //                    if (parameterModelType != null && !IsNullable(parameter))
+            //                    {
+            //                        if (parameterModelType is AutoRestPrimaryType parameterModelPrimaryType)
+            //                        {
+            //                            AutoRestPrimaryType nonNullableParameterModelPrimaryType = DependencyInjection.New<AutoRestPrimaryType>(parameterModelPrimaryType.KnownPrimaryType);
+            //                            nonNullableParameterModelPrimaryType.Format = parameterModelPrimaryType.Format;
+            //                            primaryTypeNotWantNullable.Add(nonNullableParameterModelPrimaryType);
+
+            //                            parameterModelType = nonNullableParameterModelPrimaryType;
+            //                        }
+            //                    }
+            //                    AutoRestIModelType parameterClientType = ConvertToClientType(parameterModelType);
+            //                    string parameterType = AutoRestIModelTypeName(parameterClientType, settings);
+            //                    return $"{parameterType} {parameter.Name}";
+            //                }));
+
+            //                // --------------------
+            //                // Synchronous Overload
+            //                // --------------------
+            //                typeBlock.JavadocComment(comment =>
+            //                {
+            //                    comment.Description(restAPIMethod.Description);
+            //                    foreach (AutoRestParameter parameter in parameters)
+            //                    {
+            //                        string parameterName = parameter.Name;
+
+            //                        string parameterDocumentation = parameter.Documentation;
+            //                        if (string.IsNullOrEmpty(parameterDocumentation))
+            //                        {
+            //                            AutoRestIModelType parameterModelType = parameter.ModelType;
+            //                            if (parameterModelType != null && !IsNullable(parameter))
+            //                            {
+            //                                if (parameterModelType is AutoRestPrimaryType parameterModelPrimaryType)
+            //                                {
+            //                                    AutoRestPrimaryType nonNullableParameterModelPrimaryType = DependencyInjection.New<AutoRestPrimaryType>(parameterModelPrimaryType.KnownPrimaryType);
+            //                                    nonNullableParameterModelPrimaryType.Format = parameterModelPrimaryType.Format;
+            //                                    primaryTypeNotWantNullable.Add(nonNullableParameterModelPrimaryType);
+
+            //                                    parameterModelType = nonNullableParameterModelPrimaryType;
+            //                                }
+            //                            }
+            //                            parameterDocumentation = $"the {AutoRestIModelTypeName(parameterModelType, settings)} value";
+            //                        }
+
+            //                        comment.Param(parameterName, parameterDocumentation);
+            //                    }
+            //                    comment.Throws("IllegalArgumentException", "thrown if parameters fail the validation");
+            //                    comment.Throws(methodOperationExceptionTypeName, "thrown if the request is rejected by server");
+            //                    comment.Throws("RuntimeException", "all other wrapped checked exceptions if the request fails to be sent");
+            //                    if (autorestRestAPIMethod.ReturnType.Body != null)
+            //                    {
+            //                        comment.Return($"the {synchronousMethodReturnType} object if successful.");
+            //                    }
+            //                });
+            //                typeBlock.PublicMethod($"{synchronousMethodReturnType} {restAPIMethod.Name}({parameterDeclaration})", function =>
+            //                {
+            //                    if (AutoRestIModelTypeName(ConvertToClientType(restAPIMethodReturnBodyClientType), settings) == "void")
+            //                    {
+            //                        function.Line($"{restAPIMethod.Name}Async({argumentList}).blockingLast();");
+            //                    }
+            //                    else
+            //                    {
+            //                        function.Return($"{restAPIMethod.Name}Async({argumentList}).blockingLast().result()");
+            //                    }
+            //                });
+
+            //                // ----------------------------
+            //                // Async ServiceFuture Overload
+            //                // ----------------------------
+            //                typeBlock.JavadocComment(comment =>
+            //                {
+            //                    comment.Description(restAPIMethod.Description);
+            //                    foreach (AutoRestParameter parameter in parameters)
+            //                    {
+            //                        string parameterName = parameter.Name;
+
+            //                        string parameterDocumentation = parameter.Documentation;
+            //                        if (string.IsNullOrEmpty(parameterDocumentation))
+            //                        {
+            //                            AutoRestIModelType parameterModelType = parameter.ModelType;
+            //                            if (parameterModelType != null && !IsNullable(parameter))
+            //                            {
+            //                                if (parameterModelType is AutoRestPrimaryType parameterModelPrimaryType)
+            //                                {
+            //                                    AutoRestPrimaryType nonNullableParameterModelPrimaryType = DependencyInjection.New<AutoRestPrimaryType>(parameterModelPrimaryType.KnownPrimaryType);
+            //                                    nonNullableParameterModelPrimaryType.Format = parameterModelPrimaryType.Format;
+            //                                    primaryTypeNotWantNullable.Add(nonNullableParameterModelPrimaryType);
+
+            //                                    parameterModelType = nonNullableParameterModelPrimaryType;
+            //                                }
+            //                            }
+            //                            parameterDocumentation = $"the {AutoRestIModelTypeName(parameterModelType, settings)} value";
+            //                        }
+
+            //                        comment.Param(parameterName, parameterDocumentation);
+            //                    }
+            //                    comment.Param(serviceCallbackVariableName, "the async ServiceCallback to handle successful and failed responses.");
+            //                    comment.Throws("IllegalArgumentException", "thrown if parameters fail the validation");
+            //                    comment.Return($"the {{@link {serviceFutureReturnType}}} object");
+            //                });
+
+            //                string serviceCallbackParameterDeclaration = parameterDeclaration;
+            //                if (!serviceCallbackParameterDeclaration.IsNullOrEmpty())
+            //                {
+            //                    serviceCallbackParameterDeclaration += ", ";
+            //                }
+            //                serviceCallbackParameterDeclaration += $"final ServiceCallback<{responseGenericBodyClientTypeString}> {serviceCallbackVariableName}";
+
+            //                typeBlock.PublicMethod($"{serviceFutureReturnType} {restAPIMethod.Name}Async({serviceCallbackParameterDeclaration})", function =>
+            //                {
+            //                    function.Return($"ServiceFutureUtil.fromLRO({restAPIMethod.Name}Async({argumentList}), {serviceCallbackVariableName})");
+            //                });
+
+            //                // ------------------------------------------
+            //                // Async Observable<OperationStatus> Overload
+            //                // ------------------------------------------
+            //                typeBlock.JavadocComment(comment =>
+            //                {
+            //                    comment.Description(restAPIMethod.Description);
+            //                    foreach (AutoRestParameter parameter in parameters)
+            //                    {
+            //                        string parameterName = parameter.Name;
+
+            //                        string parameterDocumentation = parameter.Documentation;
+            //                        if (string.IsNullOrEmpty(parameterDocumentation))
+            //                        {
+            //                            AutoRestIModelType parameterModelType = parameter.ModelType;
+            //                            if (parameterModelType != null && !IsNullable(parameter))
+            //                            {
+            //                                if (parameterModelType is AutoRestPrimaryType parameterModelPrimaryType)
+            //                                {
+            //                                    AutoRestPrimaryType nonNullableParameterModelPrimaryType = DependencyInjection.New<AutoRestPrimaryType>(parameterModelPrimaryType.KnownPrimaryType);
+            //                                    nonNullableParameterModelPrimaryType.Format = parameterModelPrimaryType.Format;
+            //                                    primaryTypeNotWantNullable.Add(nonNullableParameterModelPrimaryType);
+
+            //                                    parameterModelType = nonNullableParameterModelPrimaryType;
+            //                                }
+            //                            }
+            //                            parameterDocumentation = $"the {AutoRestIModelTypeName(parameterModelType, settings)} value";
+            //                        }
+
+            //                        comment.Param(parameterName, parameterDocumentation);
+            //                    }
+            //                    comment.Throws("IllegalArgumentException", "thrown if parameters fail the validation");
+            //                    comment.Return("the observable for the request");
+            //                });
+            //                typeBlock.PublicMethod($"Observable<OperationStatus<{responseGenericBodyClientTypeString}>> {restAPIMethod.Name}Async({parameterDeclaration})", function =>
+            //                {
+            //                    foreach (AutoRestParameter parameter in requiredNullableParameters)
+            //                    {
+            //                        string parameterName;
+            //                        if (!parameter.IsClientProperty)
+            //                        {
+            //                            parameterName = parameter.Name;
+            //                        }
+            //                        else
+            //                        {
+            //                            string caller = (parameter.Method != null && parameter.Method.Group.IsNullOrEmpty() ? "this" : "this.client");
+            //                            string clientPropertyName = parameter.ClientProperty?.Name?.ToString();
+            //                            if (!string.IsNullOrEmpty(clientPropertyName))
+            //                            {
+            //                                CodeNamer codeNamer = CodeNamer.Instance;
+            //                                clientPropertyName = codeNamer.CamelCase(codeNamer.RemoveInvalidCharacters(clientPropertyName));
+            //                            }
+            //                            parameterName = $"{caller}.{clientPropertyName}()";
+            //                        }
+
+            //                        function.If($"{parameterName} == null", ifBlock =>
+            //                        {
+            //                            ifBlock.Line($"throw new IllegalArgumentException(\"Parameter {parameterName} is required and cannot be null.\");");
+            //                        });
+            //                    }
+
+            //                    IEnumerable<AutoRestParameter> parametersToValidate = autorestRestAPIMethod.Parameters.Where(parameter =>
+            //                    {
+            //                        bool result = !parameter.IsConstant;
+            //                        if (result)
+            //                        {
+            //                            AutoRestIModelType parameterModelType = parameter.ModelType;
+            //                            if (parameterModelType != null && !IsNullable(parameter))
+            //                            {
+            //                                if (parameterModelType is AutoRestPrimaryType parameterModelPrimaryType)
+            //                                {
+            //                                    AutoRestPrimaryType nonNullableParameterModelPrimaryType = DependencyInjection.New<AutoRestPrimaryType>(parameterModelPrimaryType.KnownPrimaryType);
+            //                                    nonNullableParameterModelPrimaryType.Format = parameterModelPrimaryType.Format;
+            //                                    primaryTypeNotWantNullable.Add(nonNullableParameterModelPrimaryType);
+
+            //                                    parameterModelType = nonNullableParameterModelPrimaryType;
+            //                                }
+            //                            }
+            //                            result = !(parameterModelType is AutoRestPrimaryType) && !(parameterModelType is AutoRestEnumType) && (!onlyRequiredParameters || parameter.IsRequired);
+            //                        }
+
+            //                        return result;
+            //                    });
+            //                    foreach (AutoRestParameter parameter in parametersToValidate)
+            //                    {
+            //                        string parameterName;
+            //                        if (!parameter.IsClientProperty)
+            //                        {
+            //                            parameterName = parameter.Name;
+            //                        }
+            //                        else
+            //                        {
+            //                            string caller = (parameter.Method != null && parameter.Method.Group.IsNullOrEmpty() ? "this" : "this.client");
+            //                            string clientPropertyName = parameter.ClientProperty?.Name?.ToString();
+            //                            if (!string.IsNullOrEmpty(clientPropertyName))
+            //                            {
+            //                                CodeNamer codeNamer = CodeNamer.Instance;
+            //                                clientPropertyName = codeNamer.CamelCase(codeNamer.RemoveInvalidCharacters(clientPropertyName));
+            //                            }
+            //                            parameterName = $"{caller}.{clientPropertyName}()";
+            //                        }
+
+            //                        function.Line($"Validator.validate({parameterName});");
+            //                    }
+
+            //                    foreach (AutoRestParameter parameter in clientMethodAndConstantParameters)
+            //                    {
+            //                        string parameterName = parameter.Name;
+
+            //                        AutoRestIModelType parameterModelType = parameter.ModelType;
+            //                        if (parameterModelType != null && !IsNullable(parameter))
+            //                        {
+            //                            if (parameterModelType is AutoRestPrimaryType parameterModelPrimaryType)
+            //                            {
+            //                                AutoRestPrimaryType nonNullableParameterModelPrimaryType = DependencyInjection.New<AutoRestPrimaryType>(parameterModelPrimaryType.KnownPrimaryType);
+            //                                nonNullableParameterModelPrimaryType.Format = parameterModelPrimaryType.Format;
+            //                                primaryTypeNotWantNullable.Add(nonNullableParameterModelPrimaryType);
+
+            //                                parameterModelType = nonNullableParameterModelPrimaryType;
+            //                            }
+            //                        }
+            //                        AutoRestIModelType parameterClientType = ConvertToClientType(parameterModelType);
+
+            //                        if (onlyRequiredParameters && !parameter.IsRequired)
+            //                        {
+            //                            string parameterDefaultValue;
+            //                            if (parameterClientType is AutoRestPrimaryType parameterClientPrimaryType)
+            //                            {
+            //                                string modelTypeName = AutoRestIModelTypeName(parameterClientPrimaryType, settings);
+            //                                if (modelTypeName == "byte[]")
+            //                                {
+            //                                    parameterDefaultValue = "new byte[0]";
+            //                                }
+            //                                else if (modelTypeName == "Byte[]")
+            //                                {
+            //                                    parameterDefaultValue = "new Byte[0]";
+            //                                }
+            //                                else
+            //                                {
+            //                                    parameterDefaultValue = null;
+            //                                }
+            //                            }
+            //                            else
+            //                            {
+            //                                parameterDefaultValue = parameterClientType.DefaultValue;
+            //                            }
+            //                            function.Line($"final {AutoRestIModelTypeName(parameterClientType, settings)} {parameterName} = {parameterDefaultValue ?? "null"};");
+            //                        }
+            //                        else if (parameter.IsConstant)
+            //                        {
+            //                            string defaultValue = parameter.DefaultValue;
+            //                            if (defaultValue != null && parameterModelType is AutoRestPrimaryType parameterModelPrimaryType)
+            //                            {
+            //                                switch (parameterModelPrimaryType.KnownPrimaryType)
+            //                                {
+            //                                    case AutoRestKnownPrimaryType.Double:
+            //                                        defaultValue = double.Parse(defaultValue).ToString();
+            //                                        break;
+
+            //                                    case AutoRestKnownPrimaryType.String:
+            //                                        defaultValue = CodeNamer.Instance.QuoteValue(defaultValue);
+            //                                        break;
+
+            //                                    case AutoRestKnownPrimaryType.Boolean:
+            //                                        defaultValue = defaultValue.ToLowerInvariant();
+            //                                        break;
+
+            //                                    case AutoRestKnownPrimaryType.Long:
+            //                                        defaultValue = defaultValue + 'L';
+            //                                        break;
+
+            //                                    case AutoRestKnownPrimaryType.Date:
+            //                                        defaultValue = $"LocalDate.parse(\"{defaultValue}\")";
+            //                                        break;
+
+            //                                    case AutoRestKnownPrimaryType.DateTime:
+            //                                    case AutoRestKnownPrimaryType.DateTimeRfc1123:
+            //                                        defaultValue = $"DateTime.parse(\"{defaultValue}\")";
+            //                                        break;
+
+            //                                    case AutoRestKnownPrimaryType.TimeSpan:
+            //                                        defaultValue = $"Period.parse(\"{defaultValue}\")";
+            //                                        break;
+
+            //                                    case AutoRestKnownPrimaryType.ByteArray:
+            //                                        defaultValue = $"\"{defaultValue}\".getBytes()";
+            //                                        break;
+            //                                }
+            //                            }
+            //                            function.Line($"final {AutoRestIModelTypeName(ConvertToClientType(parameterClientType), settings)} {parameterName} = {defaultValue ?? "null"};");
+            //                        }
+            //                    }
+
+            //                    foreach (AutoRestParameterTransformation transformation in autorestRestAPIMethod.InputParameterTransformation)
+            //                    {
+            //                        AutoRestParameter transformationOutputParameter = transformation.OutputParameter;
+            //                        AutoRestIModelType transformationOutputParameterModelType = transformationOutputParameter.ModelType;
+            //                        if (transformationOutputParameterModelType != null && !IsNullable(transformationOutputParameter) && transformationOutputParameterModelType is AutoRestPrimaryType transformationOutputParameterModelPrimaryType)
+            //                        {
+            //                            AutoRestPrimaryType transformationOutputParameterModelNonNullablePrimaryType = DependencyInjection.New<AutoRestPrimaryType>(transformationOutputParameterModelPrimaryType.KnownPrimaryType);
+            //                            transformationOutputParameterModelNonNullablePrimaryType.Format = transformationOutputParameterModelPrimaryType.Format;
+            //                            primaryTypeNotWantNullable.Add(transformationOutputParameterModelNonNullablePrimaryType);
+
+            //                            transformationOutputParameterModelType = transformationOutputParameterModelNonNullablePrimaryType;
+            //                        }
+            //                        AutoRestIModelType transformationOutputParameterClientType = ConvertToClientType(transformationOutputParameterModelType);
+
+            //                        string outParamName;
+            //                        if (!transformationOutputParameter.IsClientProperty)
+            //                        {
+            //                            outParamName = transformationOutputParameter.Name;
+            //                        }
+            //                        else
+            //                        {
+            //                            string caller = (transformationOutputParameter.Method != null && transformationOutputParameter.Method.Group.IsNullOrEmpty() ? "this" : "this.client");
+            //                            string clientPropertyName = transformationOutputParameter.ClientProperty?.Name?.ToString();
+            //                            if (!string.IsNullOrEmpty(clientPropertyName))
+            //                            {
+            //                                CodeNamer codeNamer = CodeNamer.Instance;
+            //                                clientPropertyName = codeNamer.CamelCase(codeNamer.RemoveInvalidCharacters(clientPropertyName));
+            //                            }
+            //                            outParamName = $"{caller}.{clientPropertyName}()";
+            //                        }
+            //                        while (autorestRestAPIMethod.Parameters.Any((AutoRestParameter parameter) =>
+            //                        {
+            //                            string parameterName;
+            //                            if (!parameter.IsClientProperty)
+            //                            {
+            //                                parameterName = parameter.Name;
+            //                            }
+            //                            else
+            //                            {
+            //                                string caller = (parameter.Method != null && parameter.Method.Group.IsNullOrEmpty() ? "this" : "this.client");
+            //                                string clientPropertyName = parameter.ClientProperty?.Name?.ToString();
+            //                                if (!string.IsNullOrEmpty(clientPropertyName))
+            //                                {
+            //                                    CodeNamer codeNamer = CodeNamer.Instance;
+            //                                    clientPropertyName = codeNamer.CamelCase(codeNamer.RemoveInvalidCharacters(clientPropertyName));
+            //                                }
+            //                                parameterName = $"{caller}.{clientPropertyName}()";
+            //                            }
+            //                            return parameterName == outParamName;
+            //                        }))
+            //                        {
+            //                            outParamName += "1";
+            //                        }
+
+            //                        transformationOutputParameter.Name = outParamName;
+
+            //                        string transformationOutputParameterClientParameterVariantTypeName = AutoRestIModelTypeName(ConvertToClientType(transformationOutputParameterClientType), settings);
+
+            //                        IEnumerable<AutoRestParameterMapping> transformationParameterMappings = transformation.ParameterMappings;
+            //                        string nullCheck = string.Join(" || ", transformationParameterMappings.Where(m => !m.InputParameter.IsRequired)
+            //                            .Select((AutoRestParameterMapping m) =>
+            //                            {
+            //                                AutoRestParameter parameter = m.InputParameter;
+
+            //                                string parameterName;
+            //                                if (!parameter.IsClientProperty)
+            //                                {
+            //                                    parameterName = parameter.Name;
+            //                                }
+            //                                else
+            //                                {
+            //                                    string caller = (parameter.Method != null && parameter.Method.Group.IsNullOrEmpty() ? "this" : "this.client");
+            //                                    string clientPropertyName = parameter.ClientProperty?.Name?.ToString();
+            //                                    if (!string.IsNullOrEmpty(clientPropertyName))
+            //                                    {
+            //                                        CodeNamer codeNamer = CodeNamer.Instance;
+            //                                        clientPropertyName = codeNamer.CamelCase(codeNamer.RemoveInvalidCharacters(clientPropertyName));
+            //                                    }
+            //                                    parameterName = $"{caller}.{clientPropertyName}()";
+            //                                }
+
+            //                                return parameterName + " != null";
+            //                            }));
+            //                        bool conditionalAssignment = !string.IsNullOrEmpty(nullCheck) && !transformationOutputParameter.IsRequired && !onlyRequiredParameters;
+            //                        if (conditionalAssignment)
+            //                        {
+            //                            function.Line("{0} {1} = null;",
+            //                                transformationOutputParameterClientParameterVariantTypeName,
+            //                                outParamName);
+            //                            function.Line($"if ({nullCheck}) {{");
+            //                            function.IncreaseIndent();
+            //                        }
+
+            //                        AutoRestCompositeType transformationOutputParameterModelCompositeType = transformationOutputParameterModelType as AutoRestCompositeType;
+            //                        if (transformationOutputParameterModelCompositeType != null && transformationParameterMappings.Any(m => !string.IsNullOrEmpty(m.OutputParameterProperty)))
+            //                        {
+            //                            string transformationOutputParameterModelCompositeTypeName = transformationOutputParameterModelCompositeType.Name.ToString();
+            //                            if (settings.IsFluent && !string.IsNullOrEmpty(transformationOutputParameterModelCompositeTypeName) && innerModelCompositeType.Contains(transformationOutputParameterModelCompositeType))
+            //                            {
+            //                                transformationOutputParameterModelCompositeTypeName += "Inner";
+            //                            }
+
+            //                            function.Line("{0}{1} = new {2}();",
+            //                                !conditionalAssignment ? transformationOutputParameterClientParameterVariantTypeName + " " : "",
+            //                                outParamName,
+            //                                transformationOutputParameterModelCompositeTypeName);
+            //                        }
+
+            //                        foreach (AutoRestParameterMapping mapping in transformationParameterMappings)
+            //                        {
+            //                            string inputPath;
+            //                            if (!mapping.InputParameter.IsClientProperty)
+            //                            {
+            //                                inputPath = mapping.InputParameter.Name;
+            //                            }
+            //                            else
+            //                            {
+            //                                string caller = (mapping.InputParameter.Method != null && mapping.InputParameter.Method.Group.IsNullOrEmpty() ? "this" : "this.client");
+            //                                string clientPropertyName = mapping.InputParameter.ClientProperty?.Name?.ToString();
+            //                                if (!string.IsNullOrEmpty(clientPropertyName))
+            //                                {
+            //                                    CodeNamer codeNamer = CodeNamer.Instance;
+            //                                    clientPropertyName = codeNamer.CamelCase(codeNamer.RemoveInvalidCharacters(clientPropertyName));
+            //                                }
+            //                                inputPath = $"{caller}.{clientPropertyName}()";
+            //                            }
+
+            //                            if (mapping.InputParameterProperty != null)
+            //                            {
+            //                                inputPath += "." + CodeNamer.Instance.CamelCase(mapping.InputParameterProperty) + "()";
+            //                            }
+            //                            if (onlyRequiredParameters && !mapping.InputParameter.IsRequired)
+            //                            {
+            //                                inputPath = "null";
+            //                            }
+
+            //                            string getMapping;
+            //                            if (mapping.OutputParameterProperty != null)
+            //                            {
+            //                                getMapping = $".with{CodeNamer.Instance.PascalCase(mapping.OutputParameterProperty)}({inputPath})";
+            //                            }
+            //                            else
+            //                            {
+            //                                getMapping = $" = {inputPath}";
+            //                            }
+
+            //                            function.Line("{0}{1}{2};",
+            //                                !conditionalAssignment && transformationOutputParameterModelCompositeType == null ? transformationOutputParameterClientParameterVariantTypeName + " " : "",
+            //                                outParamName,
+            //                                getMapping);
+            //                        }
+
+            //                        if (conditionalAssignment)
+            //                        {
+            //                            function.DecreaseIndent();
+            //                            function.Line("}");
+            //                        }
+            //                    }
+
+            //                    foreach (AutoRestParameter parameter in methodRetrofitParameters)
+            //                    {
+            //                        AutoRestIModelType parameterModelType = parameter.ModelType;
+            //                        if (parameterModelType != null && !IsNullable(parameter))
+            //                        {
+            //                            if (parameterModelType is AutoRestPrimaryType parameterModelPrimaryType)
+            //                            {
+            //                                AutoRestPrimaryType nonNullableParameterModelPrimaryType = DependencyInjection.New<AutoRestPrimaryType>(parameterModelPrimaryType.KnownPrimaryType);
+            //                                nonNullableParameterModelPrimaryType.Format = parameterModelPrimaryType.Format;
+            //                                primaryTypeNotWantNullable.Add(nonNullableParameterModelPrimaryType);
+
+            //                                parameterModelType = nonNullableParameterModelPrimaryType;
+            //                            }
+            //                        }
+            //                        AutoRestIModelType parameterClientType = ConvertToClientType(parameterModelType);
+
+            //                        AutoRestIModelType parameterWireType;
+            //                        if (parameterModelType.IsPrimaryType(AutoRestKnownPrimaryType.Stream))
+            //                        {
+            //                            parameterWireType = parameterClientType;
+            //                        }
+            //                        else if (!parameterModelType.IsPrimaryType(AutoRestKnownPrimaryType.Base64Url) &&
+            //                            parameter.Location != AutoRestParameterLocation.Body &&
+            //                            parameter.Location != AutoRestParameterLocation.FormData &&
+            //                            ((parameterClientType is AutoRestPrimaryType primaryType && primaryType.KnownPrimaryType == AutoRestKnownPrimaryType.ByteArray) || parameterClientType is AutoRestSequenceType))
+            //                        {
+            //                            parameterWireType = DependencyInjection.New<AutoRestPrimaryType>(AutoRestKnownPrimaryType.String);
+            //                        }
+            //                        else
+            //                        {
+            //                            parameterWireType = parameterModelType;
+            //                        }
+
+            //                        if (!parameterClientType.StructurallyEquals(parameterWireType))
+            //                        {
+            //                            string parameterName;
+            //                            if (!parameter.IsClientProperty)
+            //                            {
+            //                                parameterName = parameter.Name;
+            //                            }
+            //                            else
+            //                            {
+            //                                string caller = (parameter.Method != null && parameter.Method.Group.IsNullOrEmpty() ? "this" : "this.client");
+            //                                string clientPropertyName = parameter.ClientProperty?.Name?.ToString();
+            //                                if (!string.IsNullOrEmpty(clientPropertyName))
+            //                                {
+            //                                    CodeNamer codeNamer = CodeNamer.Instance;
+            //                                    clientPropertyName = codeNamer.CamelCase(codeNamer.RemoveInvalidCharacters(clientPropertyName));
+            //                                }
+            //                                parameterName = $"{caller}.{clientPropertyName}()";
+            //                            }
+            //                            string parameterWireName = $"{parameterName.ToCamelCase()}Converted";
+
+            //                            bool addedConversion = false;
+            //                            AutoRestParameterLocation parameterLocation = parameter.Location;
+            //                            if (parameterLocation != AutoRestParameterLocation.Body &&
+            //                                parameterLocation != AutoRestParameterLocation.FormData &&
+            //                                ((parameterModelType is AutoRestPrimaryType parameterModelPrimaryType && parameterModelPrimaryType.KnownPrimaryType == AutoRestKnownPrimaryType.ByteArray) || parameterModelType is AutoRestSequenceType))
+            //                            {
+            //                                string parameterWireTypeName = AutoRestIModelTypeName(parameterWireType, settings);
+
+            //                                if (parameterClientType is AutoRestPrimaryType primaryClientType && primaryClientType.KnownPrimaryType == AutoRestKnownPrimaryType.ByteArray)
+            //                                {
+            //                                    if (parameterWireType.IsPrimaryType(AutoRestKnownPrimaryType.String))
+            //                                    {
+            //                                        function.Line($"{parameterWireTypeName} {parameterWireName} = Base64.encodeBase64String({parameterName});");
+            //                                    }
+            //                                    else
+            //                                    {
+            //                                        function.Line($"{parameterWireTypeName} {parameterWireName} = Base64Url.encode({parameterName});");
+            //                                    }
+            //                                    addedConversion = true;
+            //                                }
+            //                                else if (parameterClientType is AutoRestSequenceType)
+            //                                {
+            //                                    function.Line("{0} {1} = {2}.serializerAdapter().serializeList({3}, CollectionFormat.{4});",
+            //                                        parameterWireTypeName,
+            //                                        parameterWireName,
+            //                                        methodClientReference,
+            //                                        parameterName,
+            //                                        parameter.CollectionFormat.ToString().ToUpperInvariant());
+            //                                    addedConversion = true;
+            //                                }
+            //                            }
+
+            //                            if (!addedConversion)
+            //                            {
+            //                                ParameterConvertClientTypeToWireType(function, settings, parameter, parameterWireType, parameterName, parameterWireName, methodClientReference);
+            //                            }
+            //                        }
+            //                    }
+
+            //                    string restAPIMethodArgumentList = string.Join(", ", methodOrderedRetrofitParameters
+            //                        .Select((AutoRestParameter parameter) =>
+            //                        {
+            //                            string parameterName;
+            //                            if (!parameter.IsClientProperty)
+            //                            {
+            //                                parameterName = parameter.Name;
+            //                            }
+            //                            else
+            //                            {
+            //                                string caller = (parameter.Method != null && parameter.Method.Group.IsNullOrEmpty() ? "this" : "this.client");
+            //                                string clientPropertyName = parameter.ClientProperty?.Name?.ToString();
+            //                                if (!string.IsNullOrEmpty(clientPropertyName))
+            //                                {
+            //                                    CodeNamer codeNamer = CodeNamer.Instance;
+            //                                    clientPropertyName = codeNamer.CamelCase(codeNamer.RemoveInvalidCharacters(clientPropertyName));
+            //                                }
+            //                                parameterName = $"{caller}.{clientPropertyName}()";
+            //                            }
+            //                            AutoRestIModelType parameterModelType = parameter.ModelType;
+            //                            if (parameterModelType != null && !IsNullable(parameter))
+            //                            {
+            //                                if (parameterModelType is AutoRestPrimaryType parameterModelPrimaryType)
+            //                                {
+            //                                    AutoRestPrimaryType nonNullableParameterModelPrimaryType = DependencyInjection.New<AutoRestPrimaryType>(parameterModelPrimaryType.KnownPrimaryType);
+            //                                    nonNullableParameterModelPrimaryType.Format = parameterModelPrimaryType.Format;
+            //                                    primaryTypeNotWantNullable.Add(nonNullableParameterModelPrimaryType);
+
+            //                                    parameterModelType = nonNullableParameterModelPrimaryType;
+            //                                }
+            //                            }
+            //                            AutoRestIModelType parameterClientType = ConvertToClientType(parameterModelType);
+
+            //                            AutoRestIModelType parameterWireType;
+            //                            if (parameterModelType.IsPrimaryType(AutoRestKnownPrimaryType.Stream))
+            //                            {
+            //                                parameterWireType = parameterClientType;
+            //                            }
+            //                            else if (!parameterModelType.IsPrimaryType(AutoRestKnownPrimaryType.Base64Url) &&
+            //                                parameter.Location != AutoRestParameterLocation.Body &&
+            //                                parameter.Location != AutoRestParameterLocation.FormData &&
+            //                                ((parameterClientType is AutoRestPrimaryType primaryType && primaryType.KnownPrimaryType == AutoRestKnownPrimaryType.ByteArray) || parameterClientType is AutoRestSequenceType))
+            //                            {
+            //                                parameterWireType = DependencyInjection.New<AutoRestPrimaryType>(AutoRestKnownPrimaryType.String);
+            //                            }
+            //                            else
+            //                            {
+            //                                parameterWireType = parameterModelType;
+            //                            }
+
+            //                            string parameterWireName = !parameterClientType.StructurallyEquals(parameterWireType) ? $"{parameterName.ToCamelCase()}Converted" : parameterName;
+
+            //                            string result;
+            //                            if (settings.ShouldGenerateXmlSerialization && parameterWireType is AutoRestSequenceType)
+            //                            {
+            //                                result = $"new {parameterWireType.XmlName}Wrapper({parameterWireName})";
+            //                            }
+            //                            else
+            //                            {
+            //                                result = parameterWireName;
+            //                            }
+            //                            return result;
+            //                        }));
+
+            //                    function.Return($"service.{restAPIMethod.Name}({restAPIMethodArgumentList})");
+            //                });
+            //            }
+
+            //            addedClientMethods = true;
+            //        }
+            //    }
+
+            //    if (!addedClientMethods)
+            //    {
+            //        bool isFluentDelete = settings.IsFluent && restAPIMethod.Name.EqualsIgnoreCase(Delete) && requiredClientMethodParameters.Count() == 2;
+
+            //        foreach (IEnumerable<AutoRestParameter> parameters in parameterLists)
+            //        {
+            //            bool onlyRequiredParameters = (parameters == requiredClientMethodParameters);
+
+            //            string methodArguments = string.Join(", ", parameters.Select((AutoRestParameter parameter) => parameter.Name));
+
+            //            string parameterDeclaration = string.Join(", ", parameters.Select(parameter =>
+            //            {
+            //                AutoRestIModelType parameterModelType = parameter.ModelType;
+            //                if (parameterModelType != null && !IsNullable(parameter))
+            //                {
+            //                    if (parameterModelType is AutoRestPrimaryType parameterModelPrimaryType)
+            //                    {
+            //                        AutoRestPrimaryType nonNullableParameterModelPrimaryType = DependencyInjection.New<AutoRestPrimaryType>(parameterModelPrimaryType.KnownPrimaryType);
+            //                        nonNullableParameterModelPrimaryType.Format = parameterModelPrimaryType.Format;
+            //                        primaryTypeNotWantNullable.Add(nonNullableParameterModelPrimaryType);
+
+            //                        parameterModelType = nonNullableParameterModelPrimaryType;
+            //                    }
+            //                }
+            //                AutoRestIModelType parameterClientType = ConvertToClientType(parameterModelType);
+            //                string parameterType = AutoRestIModelTypeName(parameterClientType, settings);
+            //                return $"{parameterType} {parameter.Name}";
+            //            }));
+
+            //            // -------------
+            //            // Synchronous T
+            //            // -------------
+            //            typeBlock.JavadocComment(comment =>
+            //            {
+            //                comment.Description(restAPIMethod.Description);
+            //                foreach (AutoRestParameter parameter in parameters)
+            //                {
+            //                    string parameterName = parameter.Name;
+
+            //                    string parameterDocumentation = parameter.Documentation;
+            //                    if (string.IsNullOrEmpty(parameterDocumentation))
+            //                    {
+            //                        AutoRestIModelType parameterModelType = parameter.ModelType;
+            //                        if (parameterModelType != null && !IsNullable(parameter))
+            //                        {
+            //                            if (parameterModelType is AutoRestPrimaryType parameterModelPrimaryType)
+            //                            {
+            //                                AutoRestPrimaryType nonNullableParameterModelPrimaryType = DependencyInjection.New<AutoRestPrimaryType>(parameterModelPrimaryType.KnownPrimaryType);
+            //                                nonNullableParameterModelPrimaryType.Format = parameterModelPrimaryType.Format;
+            //                                primaryTypeNotWantNullable.Add(nonNullableParameterModelPrimaryType);
+
+            //                                parameterModelType = nonNullableParameterModelPrimaryType;
+            //                            }
+            //                        }
+            //                        parameterDocumentation = $"the {AutoRestIModelTypeName(parameterModelType, settings)} value";
+            //                    }
+
+            //                    comment.Param(parameterName, parameterDocumentation);
+            //                }
+            //                comment.Throws("IllegalArgumentException", "thrown if parameters fail the validation");
+            //                comment.Throws(methodOperationExceptionTypeName, "thrown if the request is rejected by server");
+            //                comment.Throws("RuntimeException", "all other wrapped checked exceptions if the request fails to be sent");
+            //                if (autorestRestAPIMethod.ReturnType.Body != null)
+            //                {
+            //                    comment.Return($"the {synchronousMethodReturnType} object if successful.");
+            //                }
+            //            });
+            //            typeBlock.PublicMethod($"{synchronousMethodReturnType} {restAPIMethod.Name}({parameterDeclaration})", function =>
+            //            {
+            //                if (restAPIMethodReturnType.Body == null)
+            //                {
+            //                    if (isFluentDelete)
+            //                    {
+            //                        function.Line($"{restAPIMethod.Name}Async({methodArguments}).blockingGet();");
+            //                    }
+            //                    else
+            //                    {
+            //                        function.Line($"{restAPIMethod.Name}Async({methodArguments}).blockingAwait();");
+            //                    }
+            //                }
+            //                else
+            //                {
+            //                    function.Return($"{restAPIMethod.Name}Async({methodArguments}).blockingGet()");
+            //                }
+            //            });
+
+            //            // ----------------------
+            //            // Async ServiceFuture<T>
+            //            // ----------------------
+            //            typeBlock.JavadocComment(comment =>
+            //            {
+            //                comment.Description(restAPIMethod.Description);
+            //                foreach (AutoRestParameter parameter in parameters)
+            //                {
+            //                    string parameterName = parameter.Name;
+
+            //                    string parameterDocumentation = parameter.Documentation;
+            //                    if (string.IsNullOrEmpty(parameterDocumentation))
+            //                    {
+            //                        AutoRestIModelType parameterModelType = parameter.ModelType;
+            //                        if (parameterModelType != null && !IsNullable(parameter))
+            //                        {
+            //                            if (parameterModelType is AutoRestPrimaryType parameterModelPrimaryType)
+            //                            {
+            //                                AutoRestPrimaryType nonNullableParameterModelPrimaryType = DependencyInjection.New<AutoRestPrimaryType>(parameterModelPrimaryType.KnownPrimaryType);
+            //                                nonNullableParameterModelPrimaryType.Format = parameterModelPrimaryType.Format;
+            //                                primaryTypeNotWantNullable.Add(nonNullableParameterModelPrimaryType);
+
+            //                                parameterModelType = nonNullableParameterModelPrimaryType;
+            //                            }
+            //                        }
+            //                        parameterDocumentation = $"the {AutoRestIModelTypeName(parameterModelType, settings)} value";
+            //                    }
+
+            //                    comment.Param(parameterName, parameterDocumentation);
+            //                }
+            //                comment.Param(serviceCallbackVariableName, "the async ServiceCallback to handle successful and failed responses.");
+            //                comment.Throws("IllegalArgumentException", "thrown if parameters fail the validation");
+            //                comment.Return($"the {{@link {serviceFutureReturnType}}} object");
+            //            });
+
+            //            string serviceCallbackParameterDeclaration = parameterDeclaration;
+            //            if (!serviceCallbackParameterDeclaration.IsNullOrEmpty())
+            //            {
+            //                serviceCallbackParameterDeclaration += ", ";
+            //            }
+            //            serviceCallbackParameterDeclaration += $"final ServiceCallback<{responseGenericBodyClientTypeString}> {serviceCallbackVariableName}";
+
+            //            typeBlock.PublicMethod($"{serviceFutureReturnType} {restAPIMethod.Name}Async({serviceCallbackParameterDeclaration})", function =>
+            //            {
+            //                function.Return($"ServiceFuture.fromBody({restAPIMethod.Name}Async({methodArguments}), {serviceCallbackVariableName})");
+            //            });
+
+            //            // -----------------------------------------
+            //            // Async Single<RestResponse<THeader,TBody>>
+            //            // -----------------------------------------
+            //            string singleRestResponseReturnType = $"Single<{restResponseType}>";
+
+            //            typeBlock.JavadocComment(comment =>
+            //            {
+            //                comment.Description(restAPIMethod.Description);
+            //                foreach (AutoRestParameter parameter in parameters)
+            //                {
+            //                    string parameterName = parameter.Name;
+
+            //                    string parameterDocumentation = parameter.Documentation;
+            //                    if (string.IsNullOrEmpty(parameterDocumentation))
+            //                    {
+            //                        AutoRestIModelType parameterModelType = parameter.ModelType;
+            //                        if (parameterModelType != null && !IsNullable(parameter))
+            //                        {
+            //                            if (parameterModelType is AutoRestPrimaryType parameterModelPrimaryType)
+            //                            {
+            //                                AutoRestPrimaryType nonNullableParameterModelPrimaryType = DependencyInjection.New<AutoRestPrimaryType>(parameterModelPrimaryType.KnownPrimaryType);
+            //                                nonNullableParameterModelPrimaryType.Format = parameterModelPrimaryType.Format;
+            //                                primaryTypeNotWantNullable.Add(nonNullableParameterModelPrimaryType);
+
+            //                                parameterModelType = nonNullableParameterModelPrimaryType;
+            //                            }
+            //                        }
+            //                        parameterDocumentation = $"the {AutoRestIModelTypeName(parameterModelType, settings)} value";
+            //                    }
+
+            //                    comment.Param(parameterName, parameterDocumentation);
+            //                }
+            //                comment.Throws("IllegalArgumentException", "thrown if parameters fail the validation");
+            //                comment.Return($"the {{@link {singleRestResponseReturnType}}} object if successful.");
+            //            });
+            //            typeBlock.PublicMethod($"{singleRestResponseReturnType} {restAPIMethod.Name}WithRestResponseAsync({parameterDeclaration})", function =>
+            //            {
+            //                foreach (AutoRestParameter parameter in requiredNullableParameters)
+            //                {
+            //                    string parameterName;
+            //                    if (!parameter.IsClientProperty)
+            //                    {
+            //                        parameterName = parameter.Name;
+            //                    }
+            //                    else
+            //                    {
+            //                        string caller = (parameter.Method != null && parameter.Method.Group.IsNullOrEmpty() ? "this" : "this.client");
+            //                        string clientPropertyName = parameter.ClientProperty?.Name?.ToString();
+            //                        if (!string.IsNullOrEmpty(clientPropertyName))
+            //                        {
+            //                            CodeNamer codeNamer = CodeNamer.Instance;
+            //                            clientPropertyName = codeNamer.CamelCase(codeNamer.RemoveInvalidCharacters(clientPropertyName));
+            //                        }
+            //                        parameterName = $"{caller}.{clientPropertyName}()";
+            //                    }
+
+            //                    function.If($"{parameterName} == null", ifBlock =>
+            //                    {
+            //                        ifBlock.Line($"throw new IllegalArgumentException(\"Parameter {parameterName} is required and cannot be null.\");");
+            //                    });
+            //                }
+
+            //                foreach (AutoRestParameter parameter in clientMethodAndConstantParameters)
+            //                {
+            //                    string parameterName = parameter.Name;
+
+            //                    AutoRestIModelType parameterModelType = parameter.ModelType;
+            //                    if (parameterModelType != null && !IsNullable(parameter))
+            //                    {
+            //                        if (parameterModelType is AutoRestPrimaryType parameterModelPrimaryType)
+            //                        {
+            //                            AutoRestPrimaryType nonNullableParameterModelPrimaryType = DependencyInjection.New<AutoRestPrimaryType>(parameterModelPrimaryType.KnownPrimaryType);
+            //                            nonNullableParameterModelPrimaryType.Format = parameterModelPrimaryType.Format;
+            //                            primaryTypeNotWantNullable.Add(nonNullableParameterModelPrimaryType);
+
+            //                            parameterModelType = nonNullableParameterModelPrimaryType;
+            //                        }
+            //                    }
+            //                    AutoRestIModelType parameterClientType = ConvertToClientType(parameterModelType);
+
+            //                    if (onlyRequiredParameters && !parameter.IsRequired)
+            //                    {
+            //                        string parameterDefaultValue;
+            //                        if (parameterClientType is AutoRestPrimaryType parameterClientPrimaryType)
+            //                        {
+            //                            string modelTypeName = AutoRestIModelTypeName(parameterClientPrimaryType, settings);
+            //                            if (modelTypeName == "byte[]")
+            //                            {
+            //                                parameterDefaultValue = "new byte[0]";
+            //                            }
+            //                            else if (modelTypeName == "Byte[]")
+            //                            {
+            //                                parameterDefaultValue = "new Byte[0]";
+            //                            }
+            //                            else
+            //                            {
+            //                                parameterDefaultValue = null;
+            //                            }
+            //                        }
+            //                        else
+            //                        {
+            //                            parameterDefaultValue = parameterClientType.DefaultValue;
+            //                        }
+            //                        function.Line($"final {AutoRestIModelTypeName(parameterClientType, settings)} {parameterName} = {parameterDefaultValue ?? "null"};");
+            //                    }
+            //                    else if (parameter.IsConstant)
+            //                    {
+            //                        string defaultValue = parameter.DefaultValue;
+            //                        if (defaultValue != null && parameterModelType is AutoRestPrimaryType parameterModelPrimaryType)
+            //                        {
+            //                            switch (parameterModelPrimaryType.KnownPrimaryType)
+            //                            {
+            //                                case AutoRestKnownPrimaryType.Double:
+            //                                    defaultValue = double.Parse(defaultValue).ToString();
+            //                                    break;
+
+            //                                case AutoRestKnownPrimaryType.String:
+            //                                    defaultValue = CodeNamer.Instance.QuoteValue(defaultValue);
+            //                                    break;
+
+            //                                case AutoRestKnownPrimaryType.Boolean:
+            //                                    defaultValue = defaultValue.ToLowerInvariant();
+            //                                    break;
+
+            //                                case AutoRestKnownPrimaryType.Long:
+            //                                    defaultValue = defaultValue + 'L';
+            //                                    break;
+
+            //                                case AutoRestKnownPrimaryType.Date:
+            //                                    defaultValue = $"LocalDate.parse(\"{defaultValue}\")";
+            //                                    break;
+
+            //                                case AutoRestKnownPrimaryType.DateTime:
+            //                                case AutoRestKnownPrimaryType.DateTimeRfc1123:
+            //                                    defaultValue = $"DateTime.parse(\"{defaultValue}\")";
+            //                                    break;
+
+            //                                case AutoRestKnownPrimaryType.TimeSpan:
+            //                                    defaultValue = $"Period.parse(\"{defaultValue}\")";
+            //                                    break;
+
+            //                                case AutoRestKnownPrimaryType.ByteArray:
+            //                                    defaultValue = $"\"{defaultValue}\".getBytes()";
+            //                                    break;
+            //                            }
+            //                        }
+            //                        function.Line($"final {AutoRestIModelTypeName(ConvertToClientType(parameterClientType), settings)} {parameterName} = {defaultValue ?? "null"};");
+            //                    }
+            //                }
+
+            //                IEnumerable<AutoRestParameter> parametersToValidate = autorestRestAPIMethod.Parameters.Where(parameter =>
+            //                {
+            //                    bool result = !parameter.IsConstant;
+            //                    if (result)
+            //                    {
+            //                        AutoRestIModelType parameterModelType = parameter.ModelType;
+            //                        if (parameterModelType != null && !IsNullable(parameter))
+            //                        {
+            //                            if (parameterModelType is AutoRestPrimaryType parameterModelPrimaryType)
+            //                            {
+            //                                AutoRestPrimaryType nonNullableParameterModelPrimaryType = DependencyInjection.New<AutoRestPrimaryType>(parameterModelPrimaryType.KnownPrimaryType);
+            //                                nonNullableParameterModelPrimaryType.Format = parameterModelPrimaryType.Format;
+            //                                primaryTypeNotWantNullable.Add(nonNullableParameterModelPrimaryType);
+
+            //                                parameterModelType = nonNullableParameterModelPrimaryType;
+            //                            }
+            //                        }
+            //                        result = !(parameterModelType is AutoRestPrimaryType) && !(parameterModelType is AutoRestEnumType) && (!onlyRequiredParameters || parameter.IsRequired);
+            //                    }
+
+            //                    return result;
+            //                });
+            //                foreach (AutoRestParameter parameter in parametersToValidate)
+            //                {
+            //                    string parameterName;
+            //                    if (!parameter.IsClientProperty)
+            //                    {
+            //                        parameterName = parameter.Name;
+            //                    }
+            //                    else
+            //                    {
+            //                        string caller = (parameter.Method != null && parameter.Method.Group.IsNullOrEmpty() ? "this" : "this.client");
+            //                        string clientPropertyName = parameter.ClientProperty?.Name?.ToString();
+            //                        if (!string.IsNullOrEmpty(clientPropertyName))
+            //                        {
+            //                            CodeNamer codeNamer = CodeNamer.Instance;
+            //                            clientPropertyName = codeNamer.CamelCase(codeNamer.RemoveInvalidCharacters(clientPropertyName));
+            //                        }
+            //                        parameterName = $"{caller}.{clientPropertyName}()";
+            //                    }
+
+            //                    function.Line($"Validator.validate({parameterName});");
+            //                }
+
+            //                foreach (AutoRestParameterTransformation transformation in autorestRestAPIMethod.InputParameterTransformation)
+            //                {
+            //                    AutoRestParameter transformationOutputParameter = transformation.OutputParameter;
+            //                    AutoRestIModelType transformationOutputParameterModelType = transformationOutputParameter.ModelType;
+            //                    if (transformationOutputParameterModelType != null && !IsNullable(transformationOutputParameter) && transformationOutputParameterModelType is AutoRestPrimaryType transformationOutputParameterModelPrimaryType)
+            //                    {
+            //                        AutoRestPrimaryType transformationOutputParameterModelNonNullablePrimaryType = DependencyInjection.New<AutoRestPrimaryType>(transformationOutputParameterModelPrimaryType.KnownPrimaryType);
+            //                        transformationOutputParameterModelNonNullablePrimaryType.Format = transformationOutputParameterModelPrimaryType.Format;
+            //                        primaryTypeNotWantNullable.Add(transformationOutputParameterModelNonNullablePrimaryType);
+
+            //                        transformationOutputParameterModelType = transformationOutputParameterModelNonNullablePrimaryType;
+            //                    }
+            //                    AutoRestIModelType transformationOutputParameterClientType = ConvertToClientType(transformationOutputParameterModelType);
+
+            //                    string outParamName;
+            //                    if (!transformationOutputParameter.IsClientProperty)
+            //                    {
+            //                        outParamName = transformationOutputParameter.Name;
+            //                    }
+            //                    else
+            //                    {
+            //                        string caller = (transformationOutputParameter.Method != null && transformationOutputParameter.Method.Group.IsNullOrEmpty() ? "this" : "this.client");
+            //                        string clientPropertyName = transformationOutputParameter.ClientProperty?.Name?.ToString();
+            //                        if (!string.IsNullOrEmpty(clientPropertyName))
+            //                        {
+            //                            CodeNamer codeNamer = CodeNamer.Instance;
+            //                            clientPropertyName = codeNamer.CamelCase(codeNamer.RemoveInvalidCharacters(clientPropertyName));
+            //                        }
+            //                        outParamName = $"{caller}.{clientPropertyName}()";
+            //                    }
+            //                    while (autorestRestAPIMethod.Parameters.Any((AutoRestParameter parameter) =>
+            //                    {
+            //                        string parameterName;
+            //                        if (!parameter.IsClientProperty)
+            //                        {
+            //                            parameterName = parameter.Name;
+            //                        }
+            //                        else
+            //                        {
+            //                            string caller = (parameter.Method != null && parameter.Method.Group.IsNullOrEmpty() ? "this" : "this.client");
+            //                            string clientPropertyName = parameter.ClientProperty?.Name?.ToString();
+            //                            if (!string.IsNullOrEmpty(clientPropertyName))
+            //                            {
+            //                                CodeNamer codeNamer = CodeNamer.Instance;
+            //                                clientPropertyName = codeNamer.CamelCase(codeNamer.RemoveInvalidCharacters(clientPropertyName));
+            //                            }
+            //                            parameterName = $"{caller}.{clientPropertyName}()";
+            //                        }
+            //                        return parameterName == outParamName;
+            //                    }))
+            //                    {
+            //                        outParamName += "1";
+            //                    }
+
+            //                    transformationOutputParameter.Name = outParamName;
+
+            //                    string transformationOutputParameterClientParameterVariantTypeName = AutoRestIModelTypeName(ConvertToClientType(transformationOutputParameterClientType), settings);
+
+            //                    IEnumerable<AutoRestParameterMapping> transformationParameterMappings = transformation.ParameterMappings;
+            //                    string nullCheck = string.Join(" || ", transformationParameterMappings.Where(m => !m.InputParameter.IsRequired)
+            //                        .Select((AutoRestParameterMapping m) =>
+            //                        {
+            //                            AutoRestParameter parameter = m.InputParameter;
+
+            //                            string parameterName;
+            //                            if (!parameter.IsClientProperty)
+            //                            {
+            //                                parameterName = parameter.Name;
+            //                            }
+            //                            else
+            //                            {
+            //                                string caller = (parameter.Method != null && parameter.Method.Group.IsNullOrEmpty() ? "this" : "this.client");
+            //                                string clientPropertyName = parameter.ClientProperty?.Name?.ToString();
+            //                                if (!string.IsNullOrEmpty(clientPropertyName))
+            //                                {
+            //                                    CodeNamer codeNamer = CodeNamer.Instance;
+            //                                    clientPropertyName = codeNamer.CamelCase(codeNamer.RemoveInvalidCharacters(clientPropertyName));
+            //                                }
+            //                                parameterName = $"{caller}.{clientPropertyName}()";
+            //                            }
+
+            //                            return parameterName + " != null";
+            //                        }));
+            //                    bool conditionalAssignment = !string.IsNullOrEmpty(nullCheck) && !transformationOutputParameter.IsRequired && !onlyRequiredParameters;
+            //                    if (conditionalAssignment)
+            //                    {
+            //                        function.Line("{0} {1} = null;",
+            //                            transformationOutputParameterClientParameterVariantTypeName,
+            //                            outParamName);
+            //                        function.Line($"if ({nullCheck}) {{");
+            //                        function.IncreaseIndent();
+            //                    }
+
+            //                    AutoRestCompositeType transformationOutputParameterModelCompositeType = transformationOutputParameterModelType as AutoRestCompositeType;
+            //                    if (transformationOutputParameterModelCompositeType != null && transformationParameterMappings.Any(m => !string.IsNullOrEmpty(m.OutputParameterProperty)))
+            //                    {
+            //                        string transformationOutputParameterModelCompositeTypeName = transformationOutputParameterModelCompositeType.Name.ToString();
+            //                        if (settings.IsFluent && !string.IsNullOrEmpty(transformationOutputParameterModelCompositeTypeName) && innerModelCompositeType.Contains(transformationOutputParameterModelCompositeType))
+            //                        {
+            //                            transformationOutputParameterModelCompositeTypeName += "Inner";
+            //                        }
+
+            //                        function.Line("{0}{1} = new {2}();",
+            //                            !conditionalAssignment ? transformationOutputParameterClientParameterVariantTypeName + " " : "",
+            //                            outParamName,
+            //                            transformationOutputParameterModelCompositeTypeName);
+            //                    }
+
+            //                    foreach (AutoRestParameterMapping mapping in transformationParameterMappings)
+            //                    {
+            //                        string inputPath;
+            //                        if (!mapping.InputParameter.IsClientProperty)
+            //                        {
+            //                            inputPath = mapping.InputParameter.Name;
+            //                        }
+            //                        else
+            //                        {
+            //                            string caller = (mapping.InputParameter.Method != null && mapping.InputParameter.Method.Group.IsNullOrEmpty() ? "this" : "this.client");
+            //                            string clientPropertyName = mapping.InputParameter.ClientProperty?.Name?.ToString();
+            //                            if (!string.IsNullOrEmpty(clientPropertyName))
+            //                            {
+            //                                CodeNamer codeNamer = CodeNamer.Instance;
+            //                                clientPropertyName = codeNamer.CamelCase(codeNamer.RemoveInvalidCharacters(clientPropertyName));
+            //                            }
+            //                            inputPath = $"{caller}.{clientPropertyName}()";
+            //                        }
+
+            //                        if (mapping.InputParameterProperty != null)
+            //                        {
+            //                            inputPath += "." + CodeNamer.Instance.CamelCase(mapping.InputParameterProperty) + "()";
+            //                        }
+            //                        if (onlyRequiredParameters && !mapping.InputParameter.IsRequired)
+            //                        {
+            //                            inputPath = "null";
+            //                        }
+
+            //                        string getMapping;
+            //                        if (mapping.OutputParameterProperty != null)
+            //                        {
+            //                            getMapping = $".with{CodeNamer.Instance.PascalCase(mapping.OutputParameterProperty)}({inputPath})";
+            //                        }
+            //                        else
+            //                        {
+            //                            getMapping = $" = {inputPath}";
+            //                        }
+
+            //                        function.Line("{0}{1}{2};",
+            //                            !conditionalAssignment && transformationOutputParameterModelCompositeType == null ? transformationOutputParameterClientParameterVariantTypeName + " " : "",
+            //                            outParamName,
+            //                            getMapping);
+            //                    }
+
+            //                    if (conditionalAssignment)
+            //                    {
+            //                        function.DecreaseIndent();
+            //                        function.Line("}");
+            //                    }
+            //                }
+
+            //                foreach (AutoRestParameter parameter in methodRetrofitParameters)
+            //                {
+            //                    AutoRestIModelType parameterModelType = parameter.ModelType;
+            //                    if (parameterModelType != null && !IsNullable(parameter))
+            //                    {
+            //                        if (parameterModelType is AutoRestPrimaryType parameterModelPrimaryType)
+            //                        {
+            //                            AutoRestPrimaryType nonNullableParameterModelPrimaryType = DependencyInjection.New<AutoRestPrimaryType>(parameterModelPrimaryType.KnownPrimaryType);
+            //                            nonNullableParameterModelPrimaryType.Format = parameterModelPrimaryType.Format;
+            //                            primaryTypeNotWantNullable.Add(nonNullableParameterModelPrimaryType);
+
+            //                            parameterModelType = nonNullableParameterModelPrimaryType;
+            //                        }
+            //                    }
+            //                    AutoRestIModelType parameterClientType = ConvertToClientType(parameterModelType);
+
+            //                    AutoRestIModelType parameterWireType;
+            //                    if (parameterModelType.IsPrimaryType(AutoRestKnownPrimaryType.Stream))
+            //                    {
+            //                        parameterWireType = parameterClientType;
+            //                    }
+            //                    else if (!parameterModelType.IsPrimaryType(AutoRestKnownPrimaryType.Base64Url) &&
+            //                        parameter.Location != AutoRestParameterLocation.Body &&
+            //                        parameter.Location != AutoRestParameterLocation.FormData &&
+            //                        ((parameterClientType is AutoRestPrimaryType primaryType && primaryType.KnownPrimaryType == AutoRestKnownPrimaryType.ByteArray) || parameterClientType is AutoRestSequenceType))
+            //                    {
+            //                        parameterWireType = DependencyInjection.New<AutoRestPrimaryType>(AutoRestKnownPrimaryType.String);
+            //                    }
+            //                    else
+            //                    {
+            //                        parameterWireType = parameterModelType;
+            //                    }
+
+            //                    if (!parameterClientType.StructurallyEquals(parameterWireType))
+            //                    {
+            //                        string parameterName;
+            //                        if (!parameter.IsClientProperty)
+            //                        {
+            //                            parameterName = parameter.Name;
+            //                        }
+            //                        else
+            //                        {
+            //                            string caller = (parameter.Method != null && parameter.Method.Group.IsNullOrEmpty() ? "this" : "this.client");
+            //                            string clientPropertyName = parameter.ClientProperty?.Name?.ToString();
+            //                            if (!string.IsNullOrEmpty(clientPropertyName))
+            //                            {
+            //                                CodeNamer codeNamer = CodeNamer.Instance;
+            //                                clientPropertyName = codeNamer.CamelCase(codeNamer.RemoveInvalidCharacters(clientPropertyName));
+            //                            }
+            //                            parameterName = $"{caller}.{clientPropertyName}()";
+            //                        }
+            //                        string parameterWireName = $"{parameterName.ToCamelCase()}Converted";
+
+            //                        bool addedConversion = false;
+            //                        AutoRestParameterLocation parameterLocation = parameter.Location;
+            //                        if (parameterLocation != AutoRestParameterLocation.Body &&
+            //                            parameterLocation != AutoRestParameterLocation.FormData &&
+            //                            ((parameterModelType is AutoRestPrimaryType parameterModelPrimaryType && parameterModelPrimaryType.KnownPrimaryType == AutoRestKnownPrimaryType.ByteArray) || parameterModelType is AutoRestSequenceType))
+            //                        {
+            //                            string parameterWireTypeName = AutoRestIModelTypeName(parameterWireType, settings);
+
+            //                            if (parameterClientType is AutoRestPrimaryType primaryClientType && primaryClientType.KnownPrimaryType == AutoRestKnownPrimaryType.ByteArray)
+            //                            {
+            //                                if (parameterWireType.IsPrimaryType(AutoRestKnownPrimaryType.String))
+            //                                {
+            //                                    function.Line($"{parameterWireTypeName} {parameterWireName} = Base64.encodeBase64String({parameterName});");
+            //                                }
+            //                                else
+            //                                {
+            //                                    function.Line($"{parameterWireTypeName} {parameterWireName} = Base64Url.encode({parameterName});");
+            //                                }
+            //                                addedConversion = true;
+            //                            }
+            //                            else if (parameterClientType is AutoRestSequenceType)
+            //                            {
+            //                                function.Line("{0} {1} = {2}.serializerAdapter().serializeList({3}, CollectionFormat.{4});",
+            //                                    parameterWireTypeName,
+            //                                    parameterWireName,
+            //                                    methodClientReference,
+            //                                    parameterName,
+            //                                    parameter.CollectionFormat.ToString().ToUpperInvariant());
+            //                                addedConversion = true;
+            //                            }
+            //                        }
+
+            //                        if (!addedConversion)
+            //                        {
+            //                            ParameterConvertClientTypeToWireType(function, settings, parameter, parameterWireType, parameterName, parameterWireName, methodClientReference);
+            //                        }
+            //                    }
+            //                }
+
+            //                string restAPIMethodArgumentList = string.Join(", ", methodOrderedRetrofitParameters
+            //                    .Select((AutoRestParameter parameter) =>
+            //                    {
+            //                        string parameterName;
+            //                        if (!parameter.IsClientProperty)
+            //                        {
+            //                            parameterName = parameter.Name;
+            //                        }
+            //                        else
+            //                        {
+            //                            string caller = (parameter.Method != null && parameter.Method.Group.IsNullOrEmpty() ? "this" : "this.client");
+            //                            string clientPropertyName = parameter.ClientProperty?.Name?.ToString();
+            //                            if (!string.IsNullOrEmpty(clientPropertyName))
+            //                            {
+            //                                CodeNamer codeNamer = CodeNamer.Instance;
+            //                                clientPropertyName = codeNamer.CamelCase(codeNamer.RemoveInvalidCharacters(clientPropertyName));
+            //                            }
+            //                            parameterName = $"{caller}.{clientPropertyName}()";
+            //                        }
+            //                        AutoRestIModelType parameterModelType = parameter.ModelType;
+            //                        if (parameterModelType != null && !IsNullable(parameter))
+            //                        {
+            //                            if (parameterModelType is AutoRestPrimaryType parameterModelPrimaryType)
+            //                            {
+            //                                AutoRestPrimaryType nonNullableParameterModelPrimaryType = DependencyInjection.New<AutoRestPrimaryType>(parameterModelPrimaryType.KnownPrimaryType);
+            //                                nonNullableParameterModelPrimaryType.Format = parameterModelPrimaryType.Format;
+            //                                primaryTypeNotWantNullable.Add(nonNullableParameterModelPrimaryType);
+
+            //                                parameterModelType = nonNullableParameterModelPrimaryType;
+            //                            }
+            //                        }
+            //                        AutoRestIModelType parameterClientType = ConvertToClientType(parameterModelType);
+
+            //                        AutoRestIModelType parameterWireType;
+            //                        if (parameterModelType.IsPrimaryType(AutoRestKnownPrimaryType.Stream))
+            //                        {
+            //                            parameterWireType = parameterClientType;
+            //                        }
+            //                        else if (!parameterModelType.IsPrimaryType(AutoRestKnownPrimaryType.Base64Url) &&
+            //                            parameter.Location != AutoRestParameterLocation.Body &&
+            //                            parameter.Location != AutoRestParameterLocation.FormData &&
+            //                            ((parameterClientType is AutoRestPrimaryType primaryType && primaryType.KnownPrimaryType == AutoRestKnownPrimaryType.ByteArray) || parameterClientType is AutoRestSequenceType))
+            //                        {
+            //                            parameterWireType = DependencyInjection.New<AutoRestPrimaryType>(AutoRestKnownPrimaryType.String);
+            //                        }
+            //                        else
+            //                        {
+            //                            parameterWireType = parameterModelType;
+            //                        }
+
+            //                        string parameterWireName = !parameterClientType.StructurallyEquals(parameterWireType) ? $"{parameterName.ToCamelCase()}Converted" : parameterName;
+
+            //                        string result;
+            //                        if (settings.ShouldGenerateXmlSerialization && parameterWireType is AutoRestSequenceType)
+            //                        {
+            //                            result = $"new {parameterWireType.XmlName}Wrapper({parameterWireName})";
+            //                        }
+            //                        else
+            //                        {
+            //                            result = parameterWireName;
+            //                        }
+            //                        return result;
+            //                    }));
+
+            //                function.Return($"service.{restAPIMethod.Name}({restAPIMethodArgumentList})");
+            //            });
+
+            //            // --------------
+            //            // Async Maybe<T>
+            //            // --------------
+            //            string asyncMethodReturnType;
+            //            if (restAPIMethodReturnType.Body != null)
+            //            {
+            //                asyncMethodReturnType = $"Maybe<{pageType}>";
+            //            }
+            //            else if (isFluentDelete)
+            //            {
+            //                asyncMethodReturnType = "Maybe<Void>";
+            //            }
+            //            else
+            //            {
+            //                asyncMethodReturnType = "Completable";
+            //            }
+
+            //            typeBlock.JavadocComment(comment =>
+            //            {
+            //                comment.Description(restAPIMethod.Description);
+            //                foreach (AutoRestParameter parameter in parameters)
+            //                {
+            //                    string parameterName = parameter.Name;
+
+            //                    string parameterDocumentation = parameter.Documentation;
+            //                    if (string.IsNullOrEmpty(parameterDocumentation))
+            //                    {
+            //                        AutoRestIModelType parameterModelType = parameter.ModelType;
+            //                        if (parameterModelType != null && !IsNullable(parameter))
+            //                        {
+            //                            if (parameterModelType is AutoRestPrimaryType parameterModelPrimaryType)
+            //                            {
+            //                                AutoRestPrimaryType nonNullableParameterModelPrimaryType = DependencyInjection.New<AutoRestPrimaryType>(parameterModelPrimaryType.KnownPrimaryType);
+            //                                nonNullableParameterModelPrimaryType.Format = parameterModelPrimaryType.Format;
+            //                                primaryTypeNotWantNullable.Add(nonNullableParameterModelPrimaryType);
+
+            //                                parameterModelType = nonNullableParameterModelPrimaryType;
+            //                            }
+            //                        }
+            //                        parameterDocumentation = $"the {AutoRestIModelTypeName(parameterModelType, settings)} value";
+            //                    }
+
+            //                    comment.Param(parameterName, parameterDocumentation);
+            //                }
+            //                comment.Throws("IllegalArgumentException", "thrown if parameters fail the validation");
+            //                comment.Return($"the {{@link {asyncMethodReturnType}}} object if successful.");
+            //            });
+            //            typeBlock.PublicMethod($"{asyncMethodReturnType} {restAPIMethod.Name}Async({parameterDeclaration})", function =>
+            //            {
+            //                function.Line($"return {restAPIMethod.Name}WithRestResponseAsync({methodArguments})");
+            //                function.Indent(() =>
+            //                {
+            //                    if (restAPIMethodReturnType.Body == null)
+            //                    {
+            //                        if (isFluentDelete)
+            //                        {
+            //                            function.Line(".flatMapMaybe(new Function<RestResponse<?, ?>, Maybe<Void>>() {");
+            //                            function.Indent(() =>
+            //                            {
+            //                                function.Block("public Maybe<Void> apply(RestResponse<?, ?> restResponse)", subFunction =>
+            //                                {
+            //                                    subFunction.Return("Maybe.empty()");
+            //                                });
+            //                            });
+            //                            function.Line("});");
+            //                        }
+            //                        else
+            //                        {
+            //                            function.Line(".toCompletable();");
+            //                        }
+            //                    }
+            //                    else
+            //                    {
+            //                        function.Line($".flatMapMaybe(new Function<{restResponseType}, Maybe<{responseGenericBodyClientTypeString}>>() {{");
+            //                        function.Indent(() =>
+            //                        {
+            //                            function.Block($"public Maybe<{responseGenericBodyClientTypeString}> apply({restResponseType} restResponse)", subFunction =>
+            //                            {
+            //                                subFunction.If("restResponse.body() == null", ifBlock =>
+            //                                {
+            //                                    ifBlock.Return("Maybe.empty()");
+            //                                })
+            //                                .Else(elseBlock =>
+            //                                {
+            //                                    elseBlock.Return("Maybe.just(restResponse.body())");
+            //                                });
+            //                            });
+            //                        });
+            //                        function.Line("});");
+            //                    }
+            //                });
+            //            });
+            //        }
+            //    }
+            //}
+
+            return clientMethods;
         }
 
         private static RequestParameterLocation ParseParameterRequestLocation(AutoRestParameterLocation autoRestParameterLocation)
@@ -2743,7 +5684,7 @@ namespace AutoRest.Java
                             result = PrimitiveType.Long;
                             break;
                         case AutoRestKnownPrimaryType.Stream:
-                            result = GenericType.FlowableByteArray;
+                            result = FlowableType.ByteArray;
                             break;
                         case AutoRestKnownPrimaryType.String:
                             result = ClassType.String;
@@ -2777,22 +5718,33 @@ namespace AutoRest.Java
             return result;
         }
 
-        private static EnumType ParseEnumType(AutoRestEnumType autoRestEnumType, JavaSettings settings)
+        private static IType ParseEnumType(AutoRestEnumType autoRestEnumType, JavaSettings settings)
         {
-            string enumPackage = settings.Package + (settings.IsFluent ? "" : modelsPackage);
+            string enumTypeName = autoRestEnumType?.Name?.ToString();
 
-            string enumTypeName = autoRestEnumType.Name.ToString();
-            enumTypeName = (string.IsNullOrEmpty(enumTypeName) || enumTypeName == "enum" ? "String" : CodeNamer.Instance.GetTypeName(enumTypeName));
-
-            bool expandable = autoRestEnumType.ModelAsString;
-
-            List<ServiceEnumValue> enumValues = new List<ServiceEnumValue>();
-            foreach (AutoRestEnumValue enumValue in autoRestEnumType.Values)
+            IType enumType;
+            if (string.IsNullOrEmpty(enumTypeName) || enumTypeName == "enum")
             {
-                enumValues.Add(ParseEnumValue(enumValue.MemberName, enumValue.SerializedName));
+                enumType = ClassType.String;
+            }
+            else
+            {
+                string enumPackage = settings.Package + (settings.IsFluent ? "" : modelsPackage);
+
+                enumTypeName = CodeNamer.Instance.GetTypeName(enumTypeName);
+
+                bool expandable = autoRestEnumType.ModelAsString;
+
+                List<ServiceEnumValue> enumValues = new List<ServiceEnumValue>();
+                foreach (AutoRestEnumValue enumValue in autoRestEnumType.Values)
+                {
+                    enumValues.Add(ParseEnumValue(enumValue.MemberName, enumValue.SerializedName));
+                }
+
+                enumType = new EnumType(enumPackage, enumTypeName, expandable, enumValues);
             }
 
-            return new EnumType(enumPackage, enumTypeName, expandable, enumValues);
+            return enumType;
         }
 
         private static bool IsNullable(AutoRestIVariable variable)
@@ -2942,7 +5894,7 @@ namespace AutoRest.Java
             ServiceModel result = models.GetModel(modelName);
             if (result == null)
             {
-                string modelPackage = !settings.IsFluent ? modelsPackage : (innerModelCompositeType.Contains(compositeType) ? ".implementation" : "");
+                string modelSubPackage = !settings.IsFluent ? modelsPackage : (innerModelCompositeType.Contains(compositeType) ? ".implementation" : "");
 
                 bool isPolymorphic = compositeType.BaseIsPolymorphic;
 
@@ -3092,7 +6044,7 @@ namespace AutoRest.Java
                     }
                 }
 
-                result = new ServiceModel(modelName, modelPackage, modelImports, modelDescription, isPolymorphic, polymorphicDiscriminator, modelSerializedName, needsFlatten, parentModel, derivedTypes, modelXmlName, properties);
+                result = new ServiceModel(modelName, modelSubPackage, modelImports, modelDescription, isPolymorphic, polymorphicDiscriminator, modelSerializedName, needsFlatten, parentModel, derivedTypes, modelXmlName, properties);
 
                 models.AddModel(result);
             }
@@ -3170,7 +6122,7 @@ namespace AutoRest.Java
                 propertyModelType = propertyModelNonNullablePrimaryType;
             }
 
-            string xmlListElementName = propertyModelType is SequenceType st ? st.ElementXmlName : null;
+            string xmlListElementName = propertyModelType is AutoRestSequenceType st ? st.ElementXmlName : null;
 
             string wireTypeName = AutoRestIModelTypeName(propertyModelType, settings);
 
@@ -3268,7 +6220,7 @@ namespace AutoRest.Java
                 "com.microsoft.azure.management.resources.fluentcore.arm.implementation.AzureConfigurableImpl",
                 "com.microsoft.azure.management.resources.fluentcore.arm.implementation.Manager",
                 "com.microsoft.azure.v2.AzureEnvironment",
-                azureTokenCredentialsImport,
+                $"{ClassType.AzureTokenCredentials.Package}.{ClassType.AzureTokenCredentials.Name}",
                 "com.microsoft.azure.v2.serializer.AzureJacksonAdapter");
 
             javaFile.JavadocComment(comment =>
@@ -3291,26 +6243,26 @@ namespace AutoRest.Java
                 classBlock.JavadocComment(comment =>
                 {
                     comment.Description($"Creates an instance of {className} that exposes {manager.ServiceName} resource management API entry points.");
-                    comment.Param(credentialsVariableName, credentialsDescription);
+                    comment.Param(azureTokenCredentialsParameter.Name, azureTokenCredentialsParameter.Description);
                     comment.Param("subscriptionId", "the subscription UUID");
                     comment.Return($"the {className}");
                 });
-                classBlock.PublicStaticMethod($"{className} authenticate({azureTokenCredentialsType} {credentialsVariableName}, String subscriptionId)", function =>
+                classBlock.PublicStaticMethod($"{className} authenticate({azureTokenCredentialsParameter.Declaration}, String subscriptionId)", function =>
                 {
-                    function.Line($"final {httpPipelineType} {httpPipelineVariableName} = AzureProxy.defaultPipeline({className}.class, {credentialsVariableName});");
-                    function.Return($"new {className}({httpPipelineVariableName}, subscriptionId)");
+                    function.Line($"final {httpPipelineParameter.Type} {httpPipelineParameter.Name} = AzureProxy.defaultPipeline({className}.class, {azureTokenCredentialsParameter.Name});");
+                    function.Return($"new {className}({httpPipelineParameter.Name}, subscriptionId)");
                 });
 
                 classBlock.JavadocComment(comment =>
                 {
                     comment.Description($"Creates an instance of {className} that exposes {manager.ServiceName} resource management API entry points.");
-                    comment.Param(httpPipelineVariableName, httpPipelineDescription);
+                    comment.Param(httpPipelineParameter.Name, httpPipelineParameter.Description);
                     comment.Param("subscriptionId", "the subscription UUID");
                     comment.Return($"the {className}");
                 });
-                classBlock.PublicStaticMethod($"{className} authenticate({httpPipelineType} {httpPipelineVariableName}, String subscriptionId)", function =>
+                classBlock.PublicStaticMethod($"{className} authenticate({httpPipelineParameter.Type} {httpPipelineParameter.Name}, String subscriptionId)", function =>
                 {
-                    function.Return($"new {className}({httpPipelineVariableName}, subscriptionId)");
+                    function.Return($"new {className}({httpPipelineParameter.Name}, subscriptionId)");
                 });
 
                 classBlock.JavadocComment(comment =>
@@ -3322,11 +6274,11 @@ namespace AutoRest.Java
                     interfaceBlock.JavadocComment(comment =>
                     {
                         comment.Description($"Creates an instance of {className} that exposes {manager.ServiceName} management API entry points.");
-                        comment.Param(credentialsVariableName, credentialsDescription);
+                        comment.Param(azureTokenCredentialsParameter.Name, azureTokenCredentialsParameter.Description);
                         comment.Param("subscriptionId", "the subscription UUID");
                         comment.Return($"the interface exposing {manager.ServiceName} management API entry points that work across subscriptions");
                     });
-                    interfaceBlock.PublicMethod($"{className} authenticate({azureTokenCredentialsType} {credentialsVariableName}, String subscriptionId)");
+                    interfaceBlock.PublicMethod($"{className} authenticate({azureTokenCredentialsParameter.Declaration}, String subscriptionId)");
                 });
 
                 classBlock.JavadocComment(comment =>
@@ -3335,20 +6287,20 @@ namespace AutoRest.Java
                 });
                 classBlock.PrivateStaticFinalClass("ConfigurableImpl extends AzureConfigurableImpl<Configurable> implements Configurable", innerClass =>
                 {
-                    innerClass.PublicMethod($"{className} authenticate({azureTokenCredentialsType} {credentialsVariableName}, String subscriptionId)", function =>
+                    innerClass.PublicMethod($"{className} authenticate({azureTokenCredentialsParameter.Declaration}, String subscriptionId)", function =>
                     {
-                        function.Return($"{className}.authenticate(build{httpPipelineType}({credentialsVariableName}), subscriptionId)");
+                        function.Return($"{className}.authenticate(build{httpPipelineParameter.Type}({azureTokenCredentialsParameter.Name}), subscriptionId)");
                     });
                 });
 
-                classBlock.PrivateMethod($"private {className}({httpPipelineType} {httpPipelineVariableName}, String subscriptionId)", constructor =>
+                classBlock.PrivateMethod($"private {className}({httpPipelineParameter.Declaration}, String subscriptionId)", constructor =>
                 {
                     constructor.Line("super(");
                     constructor.Indent(() =>
                     {
-                        constructor.Line($"{httpPipelineVariableName},");
+                        constructor.Line($"{httpPipelineParameter.Name},");
                         constructor.Line("subscriptionId,");
-                        constructor.Line($"new {manager.ServiceClientName}Impl({httpPipelineVariableName}).withSubscriptionId(subscriptionId));");
+                        constructor.Line($"new {manager.ServiceClientName}Impl({httpPipelineParameter.Name}).withSubscriptionId(subscriptionId));");
                     });
                 });
             });
@@ -3358,7 +6310,7 @@ namespace AutoRest.Java
 
         public static JavaFile GetPageJavaFile(PageDetails pageClass, JavaSettings settings)
         {
-            string subPackage = (settings.IsFluent ? implPackage : modelsPackage);
+            string subPackage = settings.IsFluent ? implPackage : modelsPackage;
             JavaFile javaFile = GetJavaFileWithHeaderAndPackage(subPackage, settings, pageClass.ClassName);
             javaFile.Import("com.fasterxml.jackson.annotation.JsonProperty",
                             "com.microsoft.azure.v2.Page",
@@ -3559,132 +6511,93 @@ namespace AutoRest.Java
                 }
 
                 // Service Client Constructors
-                string constructorDescription = $"Initializes an instance of {serviceClient.InterfaceName} client.";
-                if (settings.IsAzureOrFluent)
-                {
-                    if (serviceClient.UsesCredentials)
-                    {
-                        string createDefaultPipelineExpression = $"{azureProxyType}.createDefaultPipeline({serviceClient.ClassName}.class, {credentialsVariableName})";
-
-                        classBlock.JavadocComment(comment =>
-                        {
-                            comment.Description(constructorDescription);
-                            comment.Param(credentialsVariableName, credentialsDescription);
-                        });
-                        classBlock.PublicConstructor($"{serviceClient.ClassName}({serviceClientCredentialsType} {credentialsVariableName})", constructor =>
-                        {
-                            constructor.Line($"this({createDefaultPipelineExpression});");
-                        });
-
-                        classBlock.JavadocComment(comment =>
-                        {
-                            comment.Description(constructorDescription);
-                            comment.Param(credentialsVariableName, credentialsDescription);
-                            comment.Param(azureEnvironmentVariableName, azureEnvironmentDescription);
-                        });
-                        classBlock.PublicConstructor($"{serviceClient.ClassName}({serviceClientCredentialsType} {credentialsVariableName}, {azureEnvironmentType} {azureEnvironmentVariableName})", constructor =>
-                        {
-                            constructor.Line($"this({createDefaultPipelineExpression}, {azureEnvironmentVariableName});");
-                        });
-                    }
-                    else
-                    {
-                        string createDefaultPipelineExpression = $"{azureProxyType}.createDefaultPipeline({serviceClient.ClassName}.class)";
-                        classBlock.JavadocComment(comment =>
-                        {
-                            comment.Description(constructorDescription);
-                        });
-                        classBlock.PublicConstructor($"{serviceClient.ClassName}()", constructor =>
-                        {
-                            constructor.Line($"this({createDefaultPipelineExpression});");
-                        });
-
-                        classBlock.JavadocComment(comment =>
-                        {
-                            comment.Description(constructorDescription);
-                            comment.Param(azureEnvironmentVariableName, azureEnvironmentDescription);
-                        });
-                        classBlock.PublicConstructor($"{serviceClient.ClassName}({azureEnvironmentType} {azureEnvironmentVariableName})", constructor =>
-                        {
-                            constructor.Line($"this({createDefaultPipelineExpression}, {azureEnvironmentVariableName});");
-                        });
-                    }
-
-                    classBlock.JavadocComment(comment =>
-                    {
-                        comment.Description(constructorDescription);
-                        comment.Param(httpPipelineVariableName, httpPipelineDescription);
-                    });
-                    classBlock.PublicConstructor($"{serviceClient.ClassName}({httpPipelineType} {httpPipelineVariableName})", constructor =>
-                    {
-                        constructor.Line($"this({httpPipelineVariableName}, null);");
-                    });
-
-                    classBlock.JavadocComment(comment =>
-                    {
-                        comment.Description(constructorDescription);
-                        comment.Param(httpPipelineVariableName, httpPipelineDescription);
-                        comment.Param(azureEnvironmentVariableName, azureEnvironmentDescription);
-                    });
-                    classBlock.PublicConstructor($"{serviceClient.ClassName}({httpPipelineType} {httpPipelineVariableName}, {azureEnvironmentType} {azureEnvironmentVariableName})", constructor =>
-                    {
-                        constructor.Line($"super({httpPipelineVariableName}, {azureEnvironmentVariableName});");
-
-                        foreach (ServiceClientProperty serviceClientProperty in serviceClient.Properties)
-                        {
-                            if (serviceClientProperty.DefaultValueExpression != null)
-                            {
-                                constructor.Line($"this.{serviceClientProperty.Name} = {serviceClientProperty.DefaultValueExpression};");
-                            }
-                        }
-
-                        foreach (MethodGroupClient methodGroupClient in serviceClient.MethodGroupClients)
-                        {
-                            constructor.Line($"this.{methodGroupClient.VariableName} = new {methodGroupClient.ClassName}(this);");
-                        }
-
-                        if (serviceClient.RestAPI != null)
-                        {
-                            constructor.Line($"this.service = {azureProxyType}.create({serviceClient.RestAPI.Name}.class, this);");
-                        }
-                    });
-                }
-                else
+                bool serviceClientUsesCredentials = serviceClient.Constructors.Any(constructor => constructor.Parameters.Contains(serviceClientCredentialsParameter));
+                foreach (Constructor constructor in serviceClient.Constructors)
                 {
                     classBlock.JavadocComment(comment =>
                     {
-                        comment.Description(constructorDescription);
-                    });
-                    classBlock.PublicConstructor($"{serviceClient.ClassName}()", constructor =>
-                    {
-                        constructor.Line($"this({restProxyType}.createDefaultPipeline());");
-                    });
-
-                    classBlock.JavadocComment(comment =>
-                    {
-                        comment.Description(constructorDescription);
-                        comment.Param(httpPipelineVariableName, httpPipelineDescription);
-                    });
-                    classBlock.PublicConstructor($"{serviceClient.ClassName}({httpPipelineType} {httpPipelineVariableName})", constructor =>
-                    {
-                        constructor.Line($"super({httpPipelineVariableName});");
-
-                        foreach (ServiceClientProperty serviceClientProperty in serviceClient.Properties)
+                        comment.Description($"Initializes an instance of {serviceClient.InterfaceName} client.");
+                        foreach (Parameter parameter in constructor.Parameters)
                         {
-                            if (serviceClientProperty.DefaultValueExpression != null)
+                            comment.Param(parameter.Name, parameter.Description);
+                        }
+                    });
+
+                    classBlock.PublicConstructor($"{serviceClient.ClassName}({string.Join(", ", constructor.Parameters.Select(parameter => parameter.Declaration))})", constructorBlock =>
+                    {
+                        if (settings.IsAzureOrFluent)
+                        {
+                            if (constructor.Parameters.SequenceEqual(new[] { serviceClientCredentialsParameter }))
                             {
-                                constructor.Line($"this.{serviceClientProperty.Name} = {serviceClientProperty.DefaultValueExpression};");
+                                constructorBlock.Line($"this({azureProxyType}.createDefaultPipeline({serviceClient.ClassName}.class, {serviceClientCredentialsParameter.Name}));");
+                            }
+                            else if (constructor.Parameters.SequenceEqual(new[] { serviceClientCredentialsParameter, azureEnvironmentParameter }))
+                            {
+                                constructorBlock.Line($"this({azureProxyType}.createDefaultPipeline({serviceClient.ClassName}.class, {serviceClientCredentialsParameter.Name}), {azureEnvironmentParameter.Name});");
+                            }
+                            else if (!constructor.Parameters.Any())
+                            {
+                                constructorBlock.Line($"this({azureProxyType}.createDefaultPipeline({serviceClient.ClassName}.class));");
+                            }
+                            else if (constructor.Parameters.SequenceEqual(new[] { azureEnvironmentParameter }))
+                            {
+                                constructorBlock.Line($"this({azureProxyType}.createDefaultPipeline({serviceClient.ClassName}.class), {azureEnvironmentParameter.Name});");
+                            }
+                            else if (constructor.Parameters.SequenceEqual(new[] { httpPipelineParameter }))
+                            {
+                                constructorBlock.Line($"this({httpPipelineParameter.Name}, null);");
+                            }
+                            else if (constructor.Parameters.SequenceEqual(new[] { httpPipelineParameter, azureEnvironmentParameter }))
+                            {
+                                constructorBlock.Line($"super({httpPipelineParameter.Name}, {azureEnvironmentParameter.Name});");
+
+                                foreach (ServiceClientProperty serviceClientProperty in serviceClient.Properties)
+                                {
+                                    if (serviceClientProperty.DefaultValueExpression != null)
+                                    {
+                                        constructorBlock.Line($"this.{serviceClientProperty.Name} = {serviceClientProperty.DefaultValueExpression};");
+                                    }
+                                }
+
+                                foreach (MethodGroupClient methodGroupClient in serviceClient.MethodGroupClients)
+                                {
+                                    constructorBlock.Line($"this.{methodGroupClient.VariableName} = new {methodGroupClient.ClassName}(this);");
+                                }
+
+                                if (serviceClient.RestAPI != null)
+                                {
+                                    constructorBlock.Line($"this.service = {azureProxyType}.create({serviceClient.RestAPI.Name}.class, this);");
+                                }
                             }
                         }
-
-                        foreach (MethodGroupClient methodGroupClient in serviceClient.MethodGroupClients)
+                        else
                         {
-                            constructor.Line($"this.{methodGroupClient.VariableName} = new {methodGroupClient.ClassName}(this);");
-                        }
+                            if (!constructor.Parameters.Any())
+                            {
+                                constructorBlock.Line($"this({restProxyType}.createDefaultPipeline());");
+                            }
+                            else if (constructor.Parameters.SequenceEqual(new[] { httpPipelineParameter }))
+                            {
+                                constructorBlock.Line($"super({httpPipelineParameter.Name});");
 
-                        if (serviceClient.RestAPI != null)
-                        {
-                            constructor.Line($"this.service = {restProxyType}.create({serviceClient.RestAPI.Name}.class, this);");
+                                foreach (ServiceClientProperty serviceClientProperty in serviceClient.Properties)
+                                {
+                                    if (serviceClientProperty.DefaultValueExpression != null)
+                                    {
+                                        constructorBlock.Line($"this.{serviceClientProperty.Name} = {serviceClientProperty.DefaultValueExpression};");
+                                    }
+                                }
+
+                                foreach (MethodGroupClient methodGroupClient in serviceClient.MethodGroupClients)
+                                {
+                                    constructorBlock.Line($"this.{methodGroupClient.VariableName} = new {methodGroupClient.ClassName}(this);");
+                                }
+
+                                if (serviceClient.RestAPI != null)
+                                {
+                                    constructorBlock.Line($"this.service = {restProxyType}.create({serviceClient.RestAPI.Name}.class, this);");
+                                }
+                            }
                         }
                     });
                 }
@@ -3766,8 +6679,6 @@ namespace AutoRest.Java
                 methodImports.AddRange(GetIModelTypeImports(ConvertToClientType(restAPIMethodReturnType.Headers), settings));
 
                 // exceptions
-                methodImports.Add("java.io.IOException");
-
                 string methodOperationExceptionTypeName;
                 AutoRestIModelType restAPIMethodExceptionType = codeModelRestAPIMethod.DefaultResponse.Body;
                 if (settings.IsAzureOrFluent && (restAPIMethodExceptionType == null || AutoRestIModelTypeName(restAPIMethodExceptionType, settings) == "CloudError"))
@@ -3992,7 +6903,10 @@ namespace AutoRest.Java
             MethodGroupClient methodGroupClient = ParseMethodGroupClient(methodGroup, settings);
 
             JavaFile javaFile = GetJavaFileWithHeaderAndPackage(implPackage, settings, methodGroupClient.ClassName);
-            javaFile.Import(methodGroupClient.Imports);
+
+            ISet<string> imports = new HashSet<string>();
+            methodGroupClient.AddImportsTo(imports, true, settings);
+            javaFile.Import(imports);
 
             string parentDeclaration = methodGroupClient.ImplementedInterfaces.Any() ? $" implements {string.Join(", ", methodGroupClient.ImplementedInterfaces)}" : "";
 
@@ -4097,8 +7011,6 @@ namespace AutoRest.Java
                 methodImports.AddRange(GetIModelTypeImports(ConvertToClientType(restAPIMethodReturnType.Headers), settings));
 
                 // exceptions
-                methodImports.Add("java.io.IOException");
-
                 string methodOperationExceptionTypeName;
                 AutoRestIModelType restAPIMethodExceptionType = methodGroupRestAPIMethod.DefaultResponse.Body;
                 if (settings.IsAzureOrFluent && (restAPIMethodExceptionType == null || AutoRestIModelTypeName(restAPIMethodExceptionType, settings) == "CloudError"))
@@ -4361,7 +7273,7 @@ namespace AutoRest.Java
 
         public static JavaFile GetModelJavaFile(ServiceModel model, JavaSettings settings)
         {
-            JavaFile javaFile = GetJavaFileWithHeaderAndPackage(model.Package, settings, model.Name);
+            JavaFile javaFile = GetJavaFileWithHeaderAndPackage(model.SubPackage, settings, model.Name);
 
             javaFile.Import(model.Imports);
 
@@ -4637,8 +7549,8 @@ namespace AutoRest.Java
         {
             string enumTypeComment = $"Defines values for {serviceEnum.Name}.";
 
-            string subPackage = settings.IsFluent ? null : modelsPackage;
-            JavaFile javaFile = GetJavaFileWithHeaderAndPackage(subPackage, settings, serviceEnum.Name);
+            string subpackage = settings.IsFluent ? null : modelsPackage;
+            JavaFile javaFile = GetJavaFileWithHeaderAndPackage(subpackage, settings, serviceEnum.Name);
             if (serviceEnum.Expandable)
             {
                 javaFile.Import("java.util.Collection",
@@ -4883,7 +7795,7 @@ namespace AutoRest.Java
                             result.Add("java.util.UUID");
                             break;
                         case AutoRestKnownPrimaryType.Credentials:
-                            result.Add(serviceClientCredentialsImport);
+                            result.Add($"{ClassType.ServiceClientCredentials.Package}.{ClassType.ServiceClientCredentials.Name}");
                             break;
                     }
                 }
@@ -4983,9 +7895,13 @@ namespace AutoRest.Java
                     }
                 }
             }
-            else if (wireType == ClassType.DateTimeRfc1123 || wireType == PrimitiveType.UnixTimeLong)
+            else if (wireType == ClassType.DateTimeRfc1123)
             {
                 clientType = ClassType.DateTime;
+            }
+            else if (wireType == PrimitiveType.UnixTimeLong)
+            {
+                clientType = ClassType.UnixTimeDateTime;
             }
             else if (wireType == ClassType.Base64Url)
             {
@@ -5184,7 +8100,7 @@ namespace AutoRest.Java
                     autoRestPrimaryTypeName = "Object";
                     break;
                 case AutoRestKnownPrimaryType.Credentials:
-                    autoRestPrimaryTypeName = serviceClientCredentialsType;
+                    autoRestPrimaryTypeName = ClassType.ServiceClientCredentials.Name;
                     break;
 
                 default:
@@ -5384,12 +8300,9 @@ namespace AutoRest.Java
                             interfaceBlock.Annotation($"ExpectedResponses({{{string.Join(", ", restAPIMethod.ResponseExpectedStatusCodes.Select(statusCode => statusCode.ToString("D")))}}})");
                         }
 
-                        IType[] returnValueWireTypeOptions = new IType[] { ClassType.Base64Url, ClassType.DateTimeRfc1123, PrimitiveType.UnixTimeLong };
-                        IType returnValueWireType = returnValueWireTypeOptions.FirstOrDefault((IType type) => restAPIMethod.ReturnValue.Type.Contains(type));
-                        if (returnValueWireType != null)
+                        if (restAPIMethod.ReturnValueWireType != null)
                         {
-                            string returnValueWireTypeName = (returnValueWireType == PrimitiveType.UnixTimeLong ? "UnixTime" : returnValueWireType.ToString());
-                            interfaceBlock.Annotation($"ReturnValueWireType({returnValueWireTypeName}.class)");
+                            interfaceBlock.Annotation($"ReturnValueWireType({restAPIMethod.ReturnValueWireType}.class)");
                         }
 
                         if (restAPIMethod.UnexpectedResponseExceptionType != null)
@@ -5433,13 +8346,13 @@ namespace AutoRest.Java
                                     throw new ArgumentException("Unrecognized RequestParameterLocation value: " + parameter.RequestParameterLocation);
                             }
 
-                            parameterDeclarationBuilder.Append(parameter.Type + " " + parameter.VariableName);
+                            parameterDeclarationBuilder.Append(parameter.Type + " " + parameter.Name);
                             parameterDeclarationList.Add(parameterDeclarationBuilder.ToString());
                         }
 
                         string parameterDeclarations = string.Join(", ", parameterDeclarationList);
 
-                        IType restAPIMethodReturnValueClientType = ConvertToClientType(restAPIMethod.ReturnValue.Type);
+                        IType restAPIMethodReturnValueClientType = ConvertToClientType(restAPIMethod.ReturnType);
                         interfaceBlock.PublicMethod($"{restAPIMethodReturnValueClientType} {restAPIMethod.Name}({parameterDeclarations})");
                     }
                 });
@@ -5448,138 +8361,112 @@ namespace AutoRest.Java
 
         private static void AddClientMethodOverloads(JavaType typeBlock, IEnumerable<AutoRestMethod> autorestRestAPIMethods, JavaSettings settings)
         {
-            foreach (AutoRestMethod autorestRestAPIMethod in autorestRestAPIMethods)
+            foreach (AutoRestMethod autoRestRestAPIMethod in autorestRestAPIMethods)
             {
-                RestAPIMethod restAPIMethod = ParseRestAPIMethod(autorestRestAPIMethod, settings);
+                RestAPIMethod restAPIMethod = ParseRestAPIMethod(autoRestRestAPIMethod, settings);
                 
-                IEnumerable<AutoRestParameter> clientMethodAndConstantParameters = autorestRestAPIMethod.Parameters
+                IEnumerable<AutoRestParameter> autoRestClientMethodAndConstantParameters = autoRestRestAPIMethod.Parameters
                     //Omit parameter-group properties for now since Java doesn't support them yet
                     .Where((AutoRestParameter parameter) => parameter != null && !parameter.IsClientProperty && !string.IsNullOrWhiteSpace(parameter.Name))
                     .OrderBy(item => !item.IsRequired);
-                IEnumerable<AutoRestParameter> clientMethodParameters = clientMethodAndConstantParameters
+                IEnumerable<AutoRestParameter> autoRestClientMethodParameters = autoRestClientMethodAndConstantParameters
                     .Where((AutoRestParameter parameter) => !parameter.IsConstant)
                     .OrderBy(item => !item.IsRequired);
-                IEnumerable<AutoRestParameter> requiredClientMethodParameters = clientMethodParameters.Where(parameter => parameter.IsRequired);
-                bool hasOptionalClientMethodParameters = clientMethodParameters.Any(parameter => !parameter.IsRequired);
-
-                bool simulateMethodAsPagingOperation = false;
-                AutoRestMethodGroup methodGroup = autorestRestAPIMethod.MethodGroup;
-                MethodType restAPIMethodType = MethodType.Other;
-                if (!string.IsNullOrEmpty(methodGroup?.Name?.ToString()))
+                IEnumerable<AutoRestParameter> autoRestRequiredClientMethodParameters = autoRestClientMethodParameters.Where(parameter => parameter.IsRequired);
+                
+                AutoRestMethodGroup autoRestMethodGroup = autoRestRestAPIMethod.MethodGroup;
+                MethodType autoRestRestAPIMethodType = MethodType.Other;
+                if (!string.IsNullOrEmpty(autoRestMethodGroup?.Name?.ToString()))
                 {
-                    string methodUrl = methodTypeTrailing.Replace(methodTypeLeading.Replace(autorestRestAPIMethod.Url, ""), "");
-                    string[] methodUrlSplits = methodUrl.Split('/');
-                    switch (autorestRestAPIMethod.HttpMethod)
+                    string autoRestMethodUrl = methodTypeTrailing.Replace(methodTypeLeading.Replace(restAPIMethod.UrlPath, ""), "");
+                    string[] methodUrlSplits = autoRestMethodUrl.Split('/');
+                    switch (autoRestRestAPIMethod.HttpMethod)
                     {
                         case AutoRestHttpMethod.Get:
                             if ((methodUrlSplits.Length == 5 || methodUrlSplits.Length == 7)
                                 && methodUrlSplits[0].EqualsIgnoreCase("subscriptions")
-                                && MethodHasSequenceType(autorestRestAPIMethod.ReturnType.Body, settings))
+                                && MethodHasSequenceType(autoRestRestAPIMethod.ReturnType.Body, settings))
                             {
                                 if (methodUrlSplits.Length == 5)
                                 {
                                     if (methodUrlSplits[2].EqualsIgnoreCase("providers"))
                                     {
-                                        restAPIMethodType = MethodType.ListBySubscription;
+                                        autoRestRestAPIMethodType = MethodType.ListBySubscription;
                                     }
                                     else
                                     {
-                                        restAPIMethodType = MethodType.ListByResourceGroup;
+                                        autoRestRestAPIMethodType = MethodType.ListByResourceGroup;
                                     }
                                 }
                                 else if (methodUrlSplits[2].EqualsIgnoreCase("resourceGroups"))
                                 {
-                                    restAPIMethodType = MethodType.ListByResourceGroup;
+                                    autoRestRestAPIMethodType = MethodType.ListByResourceGroup;
                                 }
                             }
                             else if (IsTopLevelResourceUrl(methodUrlSplits))
                             {
-                                restAPIMethodType = MethodType.Get;
+                                autoRestRestAPIMethodType = MethodType.Get;
                             }
                             break;
 
                         case AutoRestHttpMethod.Delete:
                             if (IsTopLevelResourceUrl(methodUrlSplits))
                             {
-                                restAPIMethodType = MethodType.Delete;
+                                autoRestRestAPIMethodType = MethodType.Delete;
                             }
                             break;
                     }
                 }
                 
 
-                AutoRestResponse restAPIMethodReturnType = autorestRestAPIMethod.ReturnType;
+                AutoRestResponse autoRestRestAPIMethodReturnType = autoRestRestAPIMethod.ReturnType;
+                AutoRestIModelType autoRestRestAPIMethodReturnBodyType = autoRestRestAPIMethodReturnType.Body ?? DependencyInjection.New<AutoRestPrimaryType>(AutoRestKnownPrimaryType.None);
+                AutoRestIModelType autoRestRestAPIMethodReturnBodyClientType = ConvertToClientType(autoRestRestAPIMethodReturnBodyType);
+                AutoRestSequenceType autoRestRestAPIMethodReturnBodyClientSequenceType = autoRestRestAPIMethodReturnBodyClientType as AutoRestSequenceType;
 
-                AutoRestIModelType restAPIMethodReturnBodyClientType = ConvertToClientType(restAPIMethodReturnType.Body ?? DependencyInjection.New<AutoRestPrimaryType>(AutoRestKnownPrimaryType.None));
-                AutoRestSequenceType restAPIMethodReturnBodyClientSequenceType = restAPIMethodReturnBodyClientType as AutoRestSequenceType;
+                IType restAPIMethodReturnBodyType = ParseType(autoRestRestAPIMethodReturnBodyType, settings);
+                IType restAPIMethodReturnBodyClientType = ConvertToClientType(restAPIMethodReturnBodyType);
+                ListType restAPIMethodReturnBodyClientListType = restAPIMethodReturnBodyClientType as ListType;
 
-                bool restAPIMethodReturnTypeIsPaged = GetExtensionBool(autorestRestAPIMethod.Extensions, "nextLinkMethod") ||
-                    (autorestRestAPIMethod.Extensions.ContainsKey(AzureExtensions.PageableExtension) &&
-                     autorestRestAPIMethod.Extensions[AzureExtensions.PageableExtension] != null);
+                bool restAPIMethodReturnTypeIsPaged = GetExtensionBool(autoRestRestAPIMethod.Extensions, "nextLinkMethod") ||
+                    (autoRestRestAPIMethod.Extensions.ContainsKey(AzureExtensions.PageableExtension) &&
+                     autoRestRestAPIMethod.Extensions[AzureExtensions.PageableExtension] != null);
 
-                if (settings.IsAzureOrFluent && restAPIMethodReturnBodyClientSequenceType != null && restAPIMethodReturnTypeIsPaged)
+                if (settings.IsAzureOrFluent && restAPIMethodReturnBodyClientListType != null && restAPIMethodReturnTypeIsPaged)
                 {
                     AutoRestSequenceType resultSequenceType = DependencyInjection.New<AutoRestSequenceType>();
-                    resultSequenceType.ElementType = restAPIMethodReturnBodyClientSequenceType.ElementType;
-                    SequenceTypeSetPageImplType(resultSequenceType, SequenceTypeGetPageImplType(restAPIMethodReturnBodyClientSequenceType));
+                    resultSequenceType.ElementType = autoRestRestAPIMethodReturnBodyClientSequenceType.ElementType;
+                    SequenceTypeSetPageImplType(resultSequenceType, SequenceTypeGetPageImplType(autoRestRestAPIMethodReturnBodyClientSequenceType));
                     autoRestPagedListTypes.Add(resultSequenceType);
-                    restAPIMethodReturnBodyClientType = resultSequenceType;
+                    autoRestRestAPIMethodReturnBodyClientType = resultSequenceType;
+
+                    restAPIMethodReturnBodyClientType = new PagedListType(restAPIMethodReturnBodyClientListType.ElementType);
                 }
 
-                string responseGenericBodyClientTypeString;
-                if (settings.IsAzureOrFluent && restAPIMethodReturnBodyClientSequenceType != null && restAPIMethodReturnTypeIsPaged)
-                {
-                    responseGenericBodyClientTypeString = $"PagedList<{AutoRestIModelTypeName(restAPIMethodReturnBodyClientSequenceType.ElementType, settings)}>";
-                }
-                else
-                {
-                    AutoRestIModelType responseBodyWireType = restAPIMethodReturnType.Body ?? DependencyInjection.New<AutoRestPrimaryType>(AutoRestKnownPrimaryType.None);
-                    AutoRestIModelType responseVariant = ConvertToClientType(responseBodyWireType);
-
-                    bool responseVariantPrimaryTypeIsNullable = true;
-                    if (responseVariant is AutoRestPrimaryType responseVariantPrimaryType && !PrimaryTypeGetWantNullable(responseVariantPrimaryType))
-                    {
-                        switch (responseVariantPrimaryType.KnownPrimaryType)
-                        {
-                            case AutoRestKnownPrimaryType.None:
-                            case AutoRestKnownPrimaryType.Boolean:
-                            case AutoRestKnownPrimaryType.Double:
-                            case AutoRestKnownPrimaryType.Int:
-                            case AutoRestKnownPrimaryType.Long:
-                            case AutoRestKnownPrimaryType.UnixTime:
-                                responseVariantPrimaryTypeIsNullable = false;
-                                break;
-                        }
-                    }
-
-                    AutoRestIModelType responseGenericBodyClientType = responseVariantPrimaryTypeIsNullable ? responseVariant : responseBodyWireType;
-                    responseGenericBodyClientTypeString = AutoRestIModelTypeName(responseGenericBodyClientType, settings);
-                }
-
-                AutoRestSequenceType restAPIMethodReturnBodySequenceType = restAPIMethodReturnType.Body as AutoRestSequenceType;
+                AutoRestSequenceType restAPIMethodReturnBodySequenceType = autoRestRestAPIMethodReturnType.Body as AutoRestSequenceType;
                 string responseSequenceElementTypeString = restAPIMethodReturnBodySequenceType == null ? "Void" : AutoRestIModelTypeName(restAPIMethodReturnBodySequenceType.ElementType, settings);
 
-                AutoRestIModelType restAPIMethodResponseHeaders = restAPIMethodReturnType.Headers;
+                AutoRestIModelType restAPIMethodResponseHeaders = autoRestRestAPIMethodReturnType.Headers;
                 string deserializedResponseHeadersType = restAPIMethodResponseHeaders == null ? "Void" : AutoRestIModelTypeName(ConvertToClientType(restAPIMethodResponseHeaders), settings);
                 string deserializedResponseBodyType;
 
-                if (restAPIMethodReturnType.Body == null)
+                if (autoRestRestAPIMethodReturnType.Body == null)
                 {
                     deserializedResponseBodyType = "Void";
                 }
-                else if (settings.IsAzureOrFluent && restAPIMethodReturnBodyClientSequenceType != null && (restAPIMethodReturnTypeIsPaged || simulateMethodAsPagingOperation))
+                else if (settings.IsAzureOrFluent && autoRestRestAPIMethodReturnBodyClientSequenceType != null && (restAPIMethodReturnTypeIsPaged || restAPIMethod.SimulateAsPagingOperation))
                 {
-                    string pageContainerTypeName = SequenceTypeGetPageImplType(restAPIMethodReturnBodyClientSequenceType);
-                    string pageTypeName = AutoRestIModelTypeName(restAPIMethodReturnBodyClientSequenceType.ElementType, settings);
+                    string pageContainerTypeName = SequenceTypeGetPageImplType(autoRestRestAPIMethodReturnBodyClientSequenceType);
+                    string pageTypeName = AutoRestIModelTypeName(autoRestRestAPIMethodReturnBodyClientSequenceType.ElementType, settings);
                     deserializedResponseBodyType = $"{pageContainerTypeName}<{pageTypeName}>";
                 }
                 else
                 {
-                    deserializedResponseBodyType = responseGenericBodyClientTypeString;
+                    deserializedResponseBodyType = restAPIMethodReturnBodyClientType.AsNullable().ToString();
                 }
                 string restResponseType = $"RestResponse<{deserializedResponseHeadersType}, {deserializedResponseBodyType}>";
 
-                IEnumerable<AutoRestParameter> requiredNullableParameters = autorestRestAPIMethod.Parameters.Where((AutoRestParameter parameter) =>
+                IEnumerable<AutoRestParameter> requiredNullableParameters = autoRestRestAPIMethod.Parameters.Where((AutoRestParameter parameter) =>
                 {
                     bool result = !parameter.IsConstant && parameter.IsRequired;
                     if (result)
@@ -5605,10 +8492,8 @@ namespace AutoRest.Java
                     return result;
                 });
 
-                bool methodIsPagingNextOperation = GetExtensionBool(autorestRestAPIMethod?.Extensions, "nextLinkMethod");
-
-                List<AutoRestParameter> methodRetrofitParameters = autorestRestAPIMethod.LogicalParameters.Where(p => p.Location != AutoRestParameterLocation.None).ToList();
-                if (settings.IsAzureOrFluent && methodIsPagingNextOperation)
+                List<AutoRestParameter> methodRetrofitParameters = autoRestRestAPIMethod.LogicalParameters.Where(p => p.Location != AutoRestParameterLocation.None).ToList();
+                if (settings.IsAzureOrFluent && restAPIMethod.IsPagingNextOperation)
                 {
                     methodRetrofitParameters.RemoveAll(p => p.Location == AutoRestParameterLocation.Path);
 
@@ -5626,44 +8511,42 @@ namespace AutoRest.Java
                 IEnumerable<AutoRestParameter> methodOrderedRetrofitParameters = methodRetrofitParameters.Where(p => p.Location == AutoRestParameterLocation.Path)
                                     .Union(methodRetrofitParameters.Where(p => p.Location != AutoRestParameterLocation.Path));
 
-                string methodClientReference = autorestRestAPIMethod.Group.IsNullOrEmpty() ? "this" : "this.client";
+                string methodClientReference = autoRestRestAPIMethod.Group.IsNullOrEmpty() ? "this" : "this.client";
 
-                List<IEnumerable<AutoRestParameter>> parameterLists = new List<IEnumerable<AutoRestParameter>>()
+                List<IEnumerable<AutoRestParameter>> autoRestParameterLists = new List<IEnumerable<AutoRestParameter>>()
                 {
-                    clientMethodParameters
+                    autoRestClientMethodParameters
                 };
-                if (clientMethodParameters.Any(parameter => !parameter.IsRequired))
+                if (autoRestClientMethodParameters.Any(parameter => !parameter.IsRequired))
                 {
-                    parameterLists.Insert(0, requiredClientMethodParameters);
+                    autoRestParameterLists.Insert(0, autoRestRequiredClientMethodParameters);
                 }
 
-                string serviceFutureReturnType = $"ServiceFuture<{responseGenericBodyClientTypeString}>";
+                string serviceFutureReturnType = $"ServiceFuture<{restAPIMethodReturnBodyClientType.AsNullable()}>";
 
-                AutoRestIModelType restAPIMethodReturnBodyClientNonNullableType = restAPIMethodReturnBodyClientType;
-                if (restAPIMethodReturnBodyClientType is AutoRestPrimaryType restAPIMethodReturnBodyClientPrimaryType)
+                AutoRestIModelType autoRestRestAPIMethodReturnBodyClientNonNullableType = autoRestRestAPIMethodReturnBodyClientType;
+                if (autoRestRestAPIMethodReturnBodyClientType is AutoRestPrimaryType autoRestRestAPIMethodReturnBodyClientPrimaryType)
                 {
-                    AutoRestPrimaryType restAPIMethodReturnBodyClientNonNullablePrimaryType = DependencyInjection.New<AutoRestPrimaryType>(restAPIMethodReturnBodyClientPrimaryType.KnownPrimaryType);
-                    restAPIMethodReturnBodyClientNonNullablePrimaryType.Format = restAPIMethodReturnBodyClientPrimaryType.Format;
-                    primaryTypeNotWantNullable.Add(restAPIMethodReturnBodyClientNonNullablePrimaryType);
+                    AutoRestPrimaryType autoRestRestAPIMethodReturnBodyClientNonNullablePrimaryType = DependencyInjection.New<AutoRestPrimaryType>(autoRestRestAPIMethodReturnBodyClientPrimaryType.KnownPrimaryType);
+                    autoRestRestAPIMethodReturnBodyClientNonNullablePrimaryType.Format = autoRestRestAPIMethodReturnBodyClientPrimaryType.Format;
+                    primaryTypeNotWantNullable.Add(autoRestRestAPIMethodReturnBodyClientNonNullablePrimaryType);
 
-                    restAPIMethodReturnBodyClientNonNullableType = restAPIMethodReturnBodyClientNonNullablePrimaryType;
+                    autoRestRestAPIMethodReturnBodyClientNonNullableType = autoRestRestAPIMethodReturnBodyClientNonNullablePrimaryType;
                 }
-
-                string synchronousMethodReturnType = AutoRestIModelTypeName(restAPIMethodReturnBodyClientNonNullableType, settings);
 
                 string pageType;
-                if (settings.IsAzureOrFluent && restAPIMethodReturnBodyClientSequenceType != null && (restAPIMethodReturnTypeIsPaged || simulateMethodAsPagingOperation))
+                if (settings.IsAzureOrFluent && autoRestRestAPIMethodReturnBodyClientSequenceType != null && (restAPIMethodReturnTypeIsPaged || restAPIMethod.SimulateAsPagingOperation))
                 {
-                    pageType = $"Page<{AutoRestIModelTypeName(restAPIMethodReturnBodyClientSequenceType.ElementType, settings)}>";
+                    pageType = $"Page<{AutoRestIModelTypeName(autoRestRestAPIMethodReturnBodyClientSequenceType.ElementType, settings)}>";
                 }
                 else
                 {
-                    pageType = responseGenericBodyClientTypeString;
+                    pageType = restAPIMethodReturnBodyClientType.AsNullable().ToString();
                 }
 
                 string methodOperationExceptionTypeName;
-                AutoRestIModelType restAPIMethodExceptionType = autorestRestAPIMethod.DefaultResponse.Body;
-                if (settings.IsAzureOrFluent && (restAPIMethodReturnType == null || AutoRestIModelTypeName(restAPIMethodExceptionType, settings) == "CloudError"))
+                AutoRestIModelType restAPIMethodExceptionType = autoRestRestAPIMethod.DefaultResponse.Body;
+                if (settings.IsAzureOrFluent && (autoRestRestAPIMethodReturnType == null || AutoRestIModelTypeName(restAPIMethodExceptionType, settings) == "CloudError"))
                 {
                     methodOperationExceptionTypeName = "CloudException";
                 }
@@ -5694,11 +8577,11 @@ namespace AutoRest.Java
 
                 if (settings.IsAzureOrFluent)
                 {
-                    if (restAPIMethod.IsPagingOperation || methodIsPagingNextOperation)
+                    if (restAPIMethod.IsPagingOperation || restAPIMethod.IsPagingNextOperation)
                     {
-                        foreach (IEnumerable<AutoRestParameter> parameters in parameterLists)
+                        foreach (IEnumerable<AutoRestParameter> parameters in autoRestParameterLists)
                         {
-                            bool onlyRequiredParameters = (parameters == requiredClientMethodParameters);
+                            bool onlyRequiredParameters = (parameters == autoRestRequiredClientMethodParameters);
 
                             string parameterDeclaration = string.Join(", ", parameters.Select(parameter =>
                             {
@@ -5721,17 +8604,17 @@ namespace AutoRest.Java
 
                             AutoRestMethod nextMethod;
                             string nextMethodInvocation;
-                            if (methodIsPagingNextOperation)
+                            if (restAPIMethod.IsPagingNextOperation)
                             {
-                                nextMethod = autorestRestAPIMethod;
+                                nextMethod = autoRestRestAPIMethod;
 
-                                nextMethodInvocation = autorestRestAPIMethod.Name;
+                                nextMethodInvocation = autoRestRestAPIMethod.Name;
                                 string nextMethodWellKnownMethodName = null;
-                                if (!string.IsNullOrEmpty(methodGroup?.Name?.ToString()))
+                                if (!string.IsNullOrEmpty(autoRestMethodGroup?.Name?.ToString()))
                                 {
-                                    if (restAPIMethodType != MethodType.Other)
+                                    if (autoRestRestAPIMethodType != MethodType.Other)
                                     {
-                                        int methodsWithSameType = methodGroup.Methods.Count((AutoRestMethod methodGroupMethod) =>
+                                        int methodsWithSameType = autoRestMethodGroup.Methods.Count((AutoRestMethod methodGroupMethod) =>
                                         {
                                             MethodType methodGroupMethodType = MethodType.Other;
                                             string methodGroupMethodUrl = methodTypeTrailing.Replace(methodTypeLeading.Replace(methodGroupMethod.Url, ""), "");
@@ -5772,12 +8655,12 @@ namespace AutoRest.Java
                                                     }
                                                     break;
                                             }
-                                            return methodGroupMethodType == restAPIMethodType;
+                                            return methodGroupMethodType == autoRestRestAPIMethodType;
                                         });
 
                                         if (methodsWithSameType == 1)
                                         {
-                                            switch (restAPIMethodType)
+                                            switch (autoRestRestAPIMethodType)
                                             {
                                                 case MethodType.ListBySubscription:
                                                     nextMethodWellKnownMethodName = List;
@@ -5803,17 +8686,17 @@ namespace AutoRest.Java
                                 }
                                 if (!string.IsNullOrWhiteSpace(nextMethodWellKnownMethodName))
                                 {
-                                    AutoRestIParent methodParent = autorestRestAPIMethod.Parent;
-                                    nextMethodInvocation = CodeNamer.Instance.GetUnique(nextMethodWellKnownMethodName, autorestRestAPIMethod, methodParent.IdentifiersInScope, methodParent.Children.Except(autorestRestAPIMethod.SingleItemAsEnumerable()));
+                                    AutoRestIParent methodParent = autoRestRestAPIMethod.Parent;
+                                    nextMethodInvocation = CodeNamer.Instance.GetUnique(nextMethodWellKnownMethodName, autoRestRestAPIMethod, methodParent.IdentifiersInScope, methodParent.Children.Except(autoRestRestAPIMethod.SingleItemAsEnumerable()));
                                 }
                                 nextMethodInvocation = nextMethodInvocation.ToCamelCase();
                             }
                             else
                             {
-                                string nextMethodName = autorestRestAPIMethod.Extensions.GetValue<Fixable<string>>("nextMethodName")?.ToCamelCase();
-                                string nextMethodGroup = autorestRestAPIMethod.Extensions.GetValue<Fixable<string>>("nextMethodGroup");
+                                string nextMethodName = autoRestRestAPIMethod.Extensions.GetValue<Fixable<string>>("nextMethodName")?.ToCamelCase();
+                                string nextMethodGroup = autoRestRestAPIMethod.Extensions.GetValue<Fixable<string>>("nextMethodGroup");
 
-                                nextMethod = autorestRestAPIMethod.CodeModel.Methods
+                                nextMethod = autoRestRestAPIMethod.CodeModel.Methods
                                     .FirstOrDefault((AutoRestMethod codeModelMethod) =>
                                         {
                                         bool result = nextMethodGroup.EqualsIgnoreCase(codeModelMethod.Group);
@@ -5907,7 +8790,7 @@ namespace AutoRest.Java
                                                                     }
                                                                     break;
                                                             }
-                                                            return methodGroupMethodType == restAPIMethodType;
+                                                            return methodGroupMethodType == autoRestRestAPIMethodType;
                                                         });
 
                                                         if (methodsWithSameType == 1)
@@ -5947,13 +8830,13 @@ namespace AutoRest.Java
                                             return result;
                                         });
 
-                                if (nextMethodGroup == null || autorestRestAPIMethod.Group == nextMethod.Group)
+                                if (nextMethodGroup == null || autoRestRestAPIMethod.Group == nextMethod.Group)
                                 {
                                     nextMethodInvocation = nextMethodName;
                                 }
                                 else
                                 {
-                                    nextMethodInvocation = $"{(autorestRestAPIMethod.Group.IsNullOrEmpty() ? "this" : "client")}.get{nextMethodGroup.ToPascalCase()}().{nextMethodName}";
+                                    nextMethodInvocation = $"{(autoRestRestAPIMethod.Group.IsNullOrEmpty() ? "this" : "client")}.get{nextMethodGroup.ToPascalCase()}().{nextMethodName}";
                                 }
                             }
 
@@ -5991,13 +8874,13 @@ namespace AutoRest.Java
                             {
                                 nextMethodParameterInvocation = string.Join(", ", nextMethodRestAPIParameters.Where(p => !p.IsConstant).Select((AutoRestParameter parameter) => parameter.Name));
                             }
-                            else if (autorestRestAPIMethod.InputParameterTransformation.IsNullOrEmpty() || nextMethod.InputParameterTransformation.IsNullOrEmpty())
+                            else if (autoRestRestAPIMethod.InputParameterTransformation.IsNullOrEmpty() || nextMethod.InputParameterTransformation.IsNullOrEmpty())
                             {
                                 nextMethodParameterInvocation = string.Join(", ", nextMethodRestAPIParameters.Select((AutoRestParameter parameter) => parameter.IsRequired ? parameter.Name.ToString() : "null"));
                             }
                             else
                             {
-                                groupedType = autorestRestAPIMethod.InputParameterTransformation.First().ParameterMappings[0].InputParameter;
+                                groupedType = autoRestRestAPIMethod.InputParameterTransformation.First().ParameterMappings[0].InputParameter;
                                 nextGroupType = nextMethod.InputParameterTransformation.First().ParameterMappings[0].InputParameter;
                                 List<string> invocations = new List<string>();
                                 foreach (AutoRestParameter parameter in nextMethodRestAPIParameters)
@@ -6024,9 +8907,9 @@ namespace AutoRest.Java
 
                             string nextGroupTypeName = null;
                             string groupedTypeName = null;
-                            if (restAPIMethod.IsPagingOperation && !autorestRestAPIMethod.InputParameterTransformation.IsNullOrEmpty() && !nextMethod.InputParameterTransformation.IsNullOrEmpty())
+                            if (restAPIMethod.IsPagingOperation && !autoRestRestAPIMethod.InputParameterTransformation.IsNullOrEmpty() && !nextMethod.InputParameterTransformation.IsNullOrEmpty())
                             {
-                                groupedType = groupedType ?? autorestRestAPIMethod.InputParameterTransformation.First().ParameterMappings[0].InputParameter;
+                                groupedType = groupedType ?? autoRestRestAPIMethod.InputParameterTransformation.First().ParameterMappings[0].InputParameter;
                                 nextGroupType = nextGroupType ?? nextMethod.InputParameterTransformation.First().ParameterMappings[0].InputParameter;
 
                                 if (!nextGroupType.IsClientProperty)
@@ -6095,20 +8978,20 @@ namespace AutoRest.Java
                                 comment.Throws("IllegalArgumentException", "thrown if parameters fail the validation");
                                 comment.Throws(methodOperationExceptionTypeName, "thrown if the request is rejected by server");
                                 comment.Throws("RuntimeException", "all other wrapped checked exceptions if the request fails to be sent");
-                                if (autorestRestAPIMethod.ReturnType.Body != null)
+                                if (restAPIMethodReturnBodyClientType != PrimitiveType.Void)
                                 {
-                                    comment.Return($"the {synchronousMethodReturnType} object if successful.");
+                                    comment.Return($"the {restAPIMethodReturnBodyClientType} object if successful.");
                                 }
                             });
-                            typeBlock.PublicMethod($"{synchronousMethodReturnType} {restAPIMethod.Name}({parameterDeclaration})", function =>
+                            typeBlock.PublicMethod($"{restAPIMethodReturnBodyClientType} {restAPIMethod.Name}({parameterDeclaration})", function =>
                             {
                                 function.Line($"{pageType} response = {restAPIMethod.Name}SinglePageAsync({argumentList}).blockingGet();");
-                                function.ReturnAnonymousClass($"new {responseGenericBodyClientTypeString}(response)", anonymousClass =>
+                                function.ReturnAnonymousClass($"new {restAPIMethodReturnBodyClientType}(response)", anonymousClass =>
                                 {
                                     anonymousClass.Annotation("Override");
                                     anonymousClass.PublicMethod($"{pageType} nextPage(String {nextPageLinkParameterName})", subFunction =>
                                     {
-                                        if (restAPIMethod.IsPagingOperation && !autorestRestAPIMethod.InputParameterTransformation.IsNullOrEmpty() && !nextMethod.InputParameterTransformation.IsNullOrEmpty())
+                                        if (restAPIMethod.IsPagingOperation && !autoRestRestAPIMethod.InputParameterTransformation.IsNullOrEmpty() && !nextMethod.InputParameterTransformation.IsNullOrEmpty())
                                         {
                                             if (nextGroupTypeName != groupedTypeName && (!onlyRequiredParameters || groupedType.IsRequired))
                                             {
@@ -6194,9 +9077,9 @@ namespace AutoRest.Java
                                     comment.Param(parameterName, parameterDocumentation);
                                 }
                                 comment.Throws("IllegalArgumentException", "thrown if parameters fail the validation");
-                                if (restAPIMethodReturnType.Body != null)
+                                if (autoRestRestAPIMethodReturnType.Body != null)
                                 {
-                                    comment.Return($"the observable to the {synchronousMethodReturnType} object");
+                                    comment.Return($"the observable to the {restAPIMethodReturnBodyClientType} object");
                                 }
                                 else
                                 {
@@ -6221,7 +9104,7 @@ namespace AutoRest.Java
                                                 ifBlock.Return("Observable.just(page)");
                                             });
 
-                                            if (restAPIMethod.IsPagingOperation && !autorestRestAPIMethod.InputParameterTransformation.IsNullOrEmpty() && !nextMethod.InputParameterTransformation.IsNullOrEmpty())
+                                            if (restAPIMethod.IsPagingOperation && !autoRestRestAPIMethod.InputParameterTransformation.IsNullOrEmpty() && !nextMethod.InputParameterTransformation.IsNullOrEmpty())
                                             {
                                                 if (nextGroupTypeName != groupedTypeName && (!onlyRequiredParameters || groupedType.IsRequired))
                                                 {
@@ -6339,7 +9222,7 @@ namespace AutoRest.Java
                                     });
                                 }
 
-                                IEnumerable<AutoRestParameter> parametersToValidate = autorestRestAPIMethod.Parameters.Where(parameter =>
+                                IEnumerable<AutoRestParameter> parametersToValidate = autoRestRestAPIMethod.Parameters.Where(parameter =>
                                 {
                                     bool result = !parameter.IsConstant;
                                     if (result)
@@ -6384,7 +9267,7 @@ namespace AutoRest.Java
                                     function.Line($"Validator.validate({parameterName});");
                                 }
 
-                                foreach (AutoRestParameter parameter in clientMethodAndConstantParameters)
+                                foreach (AutoRestParameter parameter in autoRestClientMethodAndConstantParameters)
                                 {
                                     string parameterName = parameter.Name;
 
@@ -6472,7 +9355,7 @@ namespace AutoRest.Java
                                     }
                                 }
 
-                                foreach (AutoRestParameterTransformation transformation in autorestRestAPIMethod.InputParameterTransformation)
+                                foreach (AutoRestParameterTransformation transformation in autoRestRestAPIMethod.InputParameterTransformation)
                                 {
                                     AutoRestParameter transformationOutputParameter = transformation.OutputParameter;
                                     AutoRestIModelType transformationOutputParameterModelType = transformationOutputParameter.ModelType;
@@ -6502,7 +9385,7 @@ namespace AutoRest.Java
                                         }
                                         outParamName = $"{caller}.{clientPropertyName}()";
                                     }
-                                    while (autorestRestAPIMethod.Parameters.Any((AutoRestParameter parameter) =>
+                                    while (autoRestRestAPIMethod.Parameters.Any((AutoRestParameter parameter) =>
                                     {
                                         string parameterName;
                                         if (!parameter.IsClientProperty)
@@ -6723,14 +9606,14 @@ namespace AutoRest.Java
                                     }
                                 }
 
-                                if (methodIsPagingNextOperation)
+                                if (restAPIMethod.IsPagingNextOperation)
                                 {
-                                    string methodUrl = autorestRestAPIMethod.Url;
+                                    string methodUrl = autoRestRestAPIMethod.Url;
                                     Regex regex = new Regex("{\\w+}");
 
                                     string substitutedMethodUrl = regex.Replace(methodUrl, "%s").TrimStart('/');
 
-                                    IEnumerable<AutoRestParameter> retrofitParameters = autorestRestAPIMethod.LogicalParameters.Where(p => p.Location != AutoRestParameterLocation.None);
+                                    IEnumerable<AutoRestParameter> retrofitParameters = autoRestRestAPIMethod.LogicalParameters.Where(p => p.Location != AutoRestParameterLocation.None);
                                     StringBuilder builder = new StringBuilder($"String.format(\"{substitutedMethodUrl}\"");
                                     foreach (Match match in regex.Matches(methodUrl))
                                     {
@@ -6876,13 +9759,13 @@ namespace AutoRest.Java
 
                         addedClientMethods = true;
                     }
-                    else if (simulateMethodAsPagingOperation)
+                    else if (restAPIMethod.SimulateAsPagingOperation)
                     {
-                        string sequenceElementTypeString = restAPIMethodReturnType.Body is AutoRestSequenceType bodySequenceType ? AutoRestIModelTypeName(bodySequenceType.ElementType, settings) : "Void";
+                        string sequenceElementTypeString = autoRestRestAPIMethodReturnType.Body is AutoRestSequenceType bodySequenceType ? AutoRestIModelTypeName(bodySequenceType.ElementType, settings) : "Void";
 
-                        foreach (IEnumerable<AutoRestParameter> parameters in parameterLists)
+                        foreach (IEnumerable<AutoRestParameter> parameters in autoRestParameterLists)
                         {
-                            bool onlyRequiredParameters = (parameters == requiredClientMethodParameters);
+                            bool onlyRequiredParameters = (parameters == autoRestRequiredClientMethodParameters);
                             bool filterRequired = onlyRequiredParameters;
 
                             string parameterDeclaration = string.Join(", ", parameters.Select(parameter =>
@@ -6907,7 +9790,7 @@ namespace AutoRest.Java
                             // ------------------------
                             // Synchronous PagedList<T>
                             // ------------------------
-                            string pageImplType = SequenceTypeGetPageImplType(restAPIMethodReturnBodyClientType);
+                            string pageImplType = SequenceTypeGetPageImplType(autoRestRestAPIMethodReturnBodyClientType);
                             string synchronousReturnType = $"PagedList<{sequenceElementTypeString}>";
                             typeBlock.JavadocComment(comment =>
                             {
@@ -6936,7 +9819,7 @@ namespace AutoRest.Java
 
                                     comment.Param(parameterName, parameterDocumentation);
                                 }
-                                if (autorestRestAPIMethod.ReturnType.Body != null)
+                                if (autoRestRestAPIMethod.ReturnType.Body != null)
                                 {
                                     comment.Return($"the {synchronousReturnType} object if successful.");
                                 }
@@ -6989,9 +9872,9 @@ namespace AutoRest.Java
                                     comment.Param(parameterName, parameterDocumentation);
                                 }
                                 comment.Throws("IllegalArgumentException", "thrown if parameters fail the validation");
-                                if (autorestRestAPIMethod.ReturnType.Body != null)
+                                if (autoRestRestAPIMethodReturnType.Body != null)
                                 {
-                                    comment.Return($"the observable to the {synchronousMethodReturnType} object");
+                                    comment.Return($"the observable to the {restAPIMethodReturnBodyClientType} object");
                                 }
                                 else
                                 {
@@ -7025,7 +9908,7 @@ namespace AutoRest.Java
                                     });
                                 }
 
-                                IEnumerable<AutoRestParameter> parametersToValidate = autorestRestAPIMethod.Parameters.Where(parameter =>
+                                IEnumerable<AutoRestParameter> parametersToValidate = autoRestRestAPIMethod.Parameters.Where(parameter =>
                                 {
                                     bool result = !parameter.IsConstant;
                                     if (result)
@@ -7069,7 +9952,7 @@ namespace AutoRest.Java
                                     function.Line($"Validator.validate({parameterName});");
                                 }
 
-                                foreach (AutoRestParameter parameter in clientMethodAndConstantParameters)
+                                foreach (AutoRestParameter parameter in autoRestClientMethodAndConstantParameters)
                                 {
                                     string parameterName = parameter.Name;
 
@@ -7157,7 +10040,7 @@ namespace AutoRest.Java
                                     }
                                 }
 
-                                foreach (AutoRestParameterTransformation transformation in autorestRestAPIMethod.InputParameterTransformation)
+                                foreach (AutoRestParameterTransformation transformation in autoRestRestAPIMethod.InputParameterTransformation)
                                 {
                                     AutoRestParameter transformationOutputParameter = transformation.OutputParameter;
                                     AutoRestIModelType transformationOutputParameterModelType = transformationOutputParameter.ModelType;
@@ -7187,7 +10070,7 @@ namespace AutoRest.Java
                                         }
                                         outParamName = $"{caller}.{clientPropertyName}()";
                                     }
-                                    while (autorestRestAPIMethod.Parameters.Any((AutoRestParameter parameter) =>
+                                    while (autoRestRestAPIMethod.Parameters.Any((AutoRestParameter parameter) =>
                                     {
                                         string parameterName;
                                         if (!parameter.IsClientProperty)
@@ -7489,9 +10372,9 @@ namespace AutoRest.Java
                     }
                     else if (restAPIMethod.IsLongRunningOperation)
                     {
-                        foreach (IEnumerable<AutoRestParameter> parameters in parameterLists)
+                        foreach (IEnumerable<AutoRestParameter> parameters in autoRestParameterLists)
                         {
-                            bool onlyRequiredParameters = (parameters == requiredClientMethodParameters);
+                            bool onlyRequiredParameters = (parameters == autoRestRequiredClientMethodParameters);
                             
                             string argumentList = string.Join(", ", parameters.Select((AutoRestParameter parameter) => parameter.Name));
 
@@ -7547,14 +10430,14 @@ namespace AutoRest.Java
                                 comment.Throws("IllegalArgumentException", "thrown if parameters fail the validation");
                                 comment.Throws(methodOperationExceptionTypeName, "thrown if the request is rejected by server");
                                 comment.Throws("RuntimeException", "all other wrapped checked exceptions if the request fails to be sent");
-                                if (autorestRestAPIMethod.ReturnType.Body != null)
+                                if (autoRestRestAPIMethod.ReturnType.Body != null)
                                 {
-                                    comment.Return($"the {synchronousMethodReturnType} object if successful.");
+                                    comment.Return($"the {restAPIMethodReturnBodyClientType} object if successful.");
                                 }
                             });
-                            typeBlock.PublicMethod($"{synchronousMethodReturnType} {restAPIMethod.Name}({parameterDeclaration})", function =>
+                            typeBlock.PublicMethod($"{restAPIMethodReturnBodyClientType} {restAPIMethod.Name}({parameterDeclaration})", function =>
                             {
-                                if (AutoRestIModelTypeName(ConvertToClientType(restAPIMethodReturnBodyClientType), settings) == "void")
+                                if (AutoRestIModelTypeName(ConvertToClientType(autoRestRestAPIMethodReturnBodyClientType), settings) == "void")
                                 {
                                     function.Line($"{restAPIMethod.Name}Async({argumentList}).blockingLast();");
                                 }
@@ -7604,7 +10487,7 @@ namespace AutoRest.Java
                             {
                                 serviceCallbackParameterDeclaration += ", ";
                             }
-                            serviceCallbackParameterDeclaration += $"final ServiceCallback<{responseGenericBodyClientTypeString}> {serviceCallbackVariableName}";
+                            serviceCallbackParameterDeclaration += $"final ServiceCallback<{restAPIMethodReturnBodyClientType.AsNullable()}> {serviceCallbackVariableName}";
 
                             typeBlock.PublicMethod($"{serviceFutureReturnType} {restAPIMethod.Name}Async({serviceCallbackParameterDeclaration})", function =>
                             {
@@ -7644,7 +10527,7 @@ namespace AutoRest.Java
                                 comment.Throws("IllegalArgumentException", "thrown if parameters fail the validation");
                                 comment.Return("the observable for the request");
                             });
-                            typeBlock.PublicMethod($"Observable<OperationStatus<{responseGenericBodyClientTypeString}>> {restAPIMethod.Name}Async({parameterDeclaration})", function =>
+                            typeBlock.PublicMethod($"Observable<OperationStatus<{restAPIMethodReturnBodyClientType.AsNullable()}>> {restAPIMethod.Name}Async({parameterDeclaration})", function =>
                             {
                                 foreach (AutoRestParameter parameter in requiredNullableParameters)
                                 {
@@ -7671,7 +10554,7 @@ namespace AutoRest.Java
                                     });
                                 }
 
-                                IEnumerable<AutoRestParameter> parametersToValidate = autorestRestAPIMethod.Parameters.Where(parameter =>
+                                IEnumerable<AutoRestParameter> parametersToValidate = autoRestRestAPIMethod.Parameters.Where(parameter =>
                                 {
                                     bool result = !parameter.IsConstant;
                                     if (result)
@@ -7715,7 +10598,7 @@ namespace AutoRest.Java
                                     function.Line($"Validator.validate({parameterName});");
                                 }
 
-                                foreach (AutoRestParameter parameter in clientMethodAndConstantParameters)
+                                foreach (AutoRestParameter parameter in autoRestClientMethodAndConstantParameters)
                                 {
                                     string parameterName = parameter.Name;
 
@@ -7803,7 +10686,7 @@ namespace AutoRest.Java
                                     }
                                 }
 
-                                foreach (AutoRestParameterTransformation transformation in autorestRestAPIMethod.InputParameterTransformation)
+                                foreach (AutoRestParameterTransformation transformation in autoRestRestAPIMethod.InputParameterTransformation)
                                 {
                                     AutoRestParameter transformationOutputParameter = transformation.OutputParameter;
                                     AutoRestIModelType transformationOutputParameterModelType = transformationOutputParameter.ModelType;
@@ -7833,7 +10716,7 @@ namespace AutoRest.Java
                                         }
                                         outParamName = $"{caller}.{clientPropertyName}()";
                                     }
-                                    while (autorestRestAPIMethod.Parameters.Any((AutoRestParameter parameter) =>
+                                    while (autoRestRestAPIMethod.Parameters.Any((AutoRestParameter parameter) =>
                                     {
                                         string parameterName;
                                         if (!parameter.IsClientProperty)
@@ -8128,11 +11011,11 @@ namespace AutoRest.Java
 
                 if (!addedClientMethods)
                 {
-                    bool isFluentDelete = settings.IsFluent && restAPIMethod.Name.EqualsIgnoreCase(Delete) && requiredClientMethodParameters.Count() == 2;
+                    bool isFluentDelete = settings.IsFluent && restAPIMethod.Name.EqualsIgnoreCase(Delete) && autoRestRequiredClientMethodParameters.Count() == 2;
 
-                    foreach (IEnumerable<AutoRestParameter> parameters in parameterLists)
+                    foreach (IEnumerable<AutoRestParameter> parameters in autoRestParameterLists)
                     {
-                        bool onlyRequiredParameters = (parameters == requiredClientMethodParameters);
+                        bool onlyRequiredParameters = (parameters == autoRestRequiredClientMethodParameters);
 
                         string methodArguments = string.Join(", ", parameters.Select((AutoRestParameter parameter) => parameter.Name));
 
@@ -8188,14 +11071,14 @@ namespace AutoRest.Java
                             comment.Throws("IllegalArgumentException", "thrown if parameters fail the validation");
                             comment.Throws(methodOperationExceptionTypeName, "thrown if the request is rejected by server");
                             comment.Throws("RuntimeException", "all other wrapped checked exceptions if the request fails to be sent");
-                            if (autorestRestAPIMethod.ReturnType.Body != null)
+                            if (autoRestRestAPIMethod.ReturnType.Body != null)
                             {
-                                comment.Return($"the {synchronousMethodReturnType} object if successful.");
+                                comment.Return($"the {restAPIMethodReturnBodyClientType} object if successful.");
                             }
                         });
-                        typeBlock.PublicMethod($"{synchronousMethodReturnType} {restAPIMethod.Name}({parameterDeclaration})", function =>
+                        typeBlock.PublicMethod($"{restAPIMethodReturnBodyClientType} {restAPIMethod.Name}({parameterDeclaration})", function =>
                         {
-                            if (restAPIMethodReturnType.Body == null)
+                            if (autoRestRestAPIMethodReturnType.Body == null)
                             {
                                 if (isFluentDelete)
                                 {
@@ -8252,7 +11135,7 @@ namespace AutoRest.Java
                         {
                             serviceCallbackParameterDeclaration += ", ";
                         }
-                        serviceCallbackParameterDeclaration += $"final ServiceCallback<{responseGenericBodyClientTypeString}> {serviceCallbackVariableName}";
+                        serviceCallbackParameterDeclaration += $"final ServiceCallback<{restAPIMethodReturnBodyClientType.AsNullable()}> {serviceCallbackVariableName}";
 
                         typeBlock.PublicMethod($"{serviceFutureReturnType} {restAPIMethod.Name}Async({serviceCallbackParameterDeclaration})", function =>
                         {
@@ -8321,7 +11204,7 @@ namespace AutoRest.Java
                                 });
                             }
 
-                            foreach (AutoRestParameter parameter in clientMethodAndConstantParameters)
+                            foreach (AutoRestParameter parameter in autoRestClientMethodAndConstantParameters)
                             {
                                 string parameterName = parameter.Name;
 
@@ -8409,7 +11292,7 @@ namespace AutoRest.Java
                                 }
                             }
 
-                            IEnumerable<AutoRestParameter> parametersToValidate = autorestRestAPIMethod.Parameters.Where(parameter =>
+                            IEnumerable<AutoRestParameter> parametersToValidate = autoRestRestAPIMethod.Parameters.Where(parameter =>
                             {
                                 bool result = !parameter.IsConstant;
                                 if (result)
@@ -8453,7 +11336,7 @@ namespace AutoRest.Java
                                 function.Line($"Validator.validate({parameterName});");
                             }
 
-                            foreach (AutoRestParameterTransformation transformation in autorestRestAPIMethod.InputParameterTransformation)
+                            foreach (AutoRestParameterTransformation transformation in autoRestRestAPIMethod.InputParameterTransformation)
                             {
                                 AutoRestParameter transformationOutputParameter = transformation.OutputParameter;
                                 AutoRestIModelType transformationOutputParameterModelType = transformationOutputParameter.ModelType;
@@ -8483,7 +11366,7 @@ namespace AutoRest.Java
                                     }
                                     outParamName = $"{caller}.{clientPropertyName}()";
                                 }
-                                while (autorestRestAPIMethod.Parameters.Any((AutoRestParameter parameter) =>
+                                while (autoRestRestAPIMethod.Parameters.Any((AutoRestParameter parameter) =>
                                 {
                                     string parameterName;
                                     if (!parameter.IsClientProperty)
@@ -8775,7 +11658,7 @@ namespace AutoRest.Java
                         // Async Maybe<T>
                         // --------------
                         string asyncMethodReturnType;
-                        if (restAPIMethodReturnType.Body != null)
+                        if (autoRestRestAPIMethodReturnType.Body != null)
                         {
                             asyncMethodReturnType = $"Maybe<{pageType}>";
                         }
@@ -8787,6 +11670,8 @@ namespace AutoRest.Java
                         {
                             asyncMethodReturnType = "Completable";
                         }
+
+                        IEnumerable<Parameter> clientMethodParameters = ParseClientMethodParameters(parameters, settings);
 
                         typeBlock.JavadocComment(comment =>
                         {
@@ -8823,7 +11708,7 @@ namespace AutoRest.Java
                             function.Line($"return {restAPIMethod.Name}WithRestResponseAsync({methodArguments})");
                             function.Indent(() =>
                             {
-                                if (restAPIMethodReturnType.Body == null)
+                                if (autoRestRestAPIMethodReturnType.Body == null)
                                 {
                                     if (isFluentDelete)
                                     {
@@ -8844,10 +11729,10 @@ namespace AutoRest.Java
                                 }
                                 else
                                 {
-                                    function.Line($".flatMapMaybe(new Function<{restResponseType}, Maybe<{responseGenericBodyClientTypeString}>>() {{");
+                                    function.Line($".flatMapMaybe(new Function<{restResponseType}, Maybe<{restAPIMethodReturnBodyClientType.AsNullable()}>>() {{");
                                     function.Indent(() =>
                                     {
-                                        function.Block($"public Maybe<{responseGenericBodyClientTypeString}> apply({restResponseType} restResponse)", subFunction =>
+                                        function.Block($"public Maybe<{restAPIMethodReturnBodyClientType.AsNullable()}> apply({restResponseType} restResponse)", subFunction =>
                                         {
                                             subFunction.If("restResponse.body() == null", ifBlock =>
                                             {
@@ -8866,6 +11751,167 @@ namespace AutoRest.Java
                     }
                 }
             }
+        }
+
+        private static IEnumerable<RestAPIParameter> ParseRestAPIParameters(AutoRestMethod autoRestRestAPIMethod, bool restAPIMethodIsPagingNextOperation, JavaSettings settings)
+        {
+            List<AutoRestParameter> autoRestRestAPIMethodParameters = autoRestRestAPIMethod.LogicalParameters.Where(p => p.Location != AutoRestParameterLocation.None).ToList();
+
+            List<RestAPIParameter> restAPIMethodParameters = new List<RestAPIParameter>();
+            if (settings.IsAzureOrFluent && restAPIMethodIsPagingNextOperation)
+            {
+                restAPIMethodParameters.Add(new RestAPIParameter(
+                    description: "The URL to get the next page of items.",
+                    type: ClassType.String,
+                    name: "nextUrl",
+                    requestParameterLocation: RequestParameterLocation.Path,
+                    requestParameterName: "nextUrl",
+                    alreadyEncoded: true,
+                    isConstant: false,
+                    isRequired: true,
+                    isServiceClientProperty: false));
+
+                autoRestRestAPIMethodParameters.RemoveAll(p => p.Location == AutoRestParameterLocation.Path);
+            }
+
+            IEnumerable<AutoRestParameter> autoRestRestAPIMethodOrderedParameters = autoRestRestAPIMethodParameters
+                .Where(p => p.Location == AutoRestParameterLocation.Path)
+                .Union(autoRestRestAPIMethodParameters.Where(p => p.Location != AutoRestParameterLocation.Path));
+
+            foreach (AutoRestParameter autoRestParameter in autoRestRestAPIMethodOrderedParameters)
+            {
+                string parameterRequestName = autoRestParameter.SerializedName;
+
+                RequestParameterLocation parameterRequestLocation = ParseParameterRequestLocation(autoRestParameter.Location);
+                if (autoRestRestAPIMethod.Url.Contains("{" + parameterRequestName + "}"))
+                {
+                    parameterRequestLocation = RequestParameterLocation.Path;
+                }
+                else if (autoRestParameter.Extensions.ContainsKey("hostParameter"))
+                {
+                    parameterRequestLocation = RequestParameterLocation.Host;
+                }
+
+                AutoRestIModelType autoRestParameterWireType = autoRestParameter.ModelType;
+                IType parameterType = ParseType(autoRestParameterWireType, settings);
+                if (parameterType is ListType && settings.ShouldGenerateXmlSerialization && parameterRequestLocation == RequestParameterLocation.Body)
+                {
+                    string parameterTypePackage = settings.Package + ".implementation";
+                    string parameterTypeName = autoRestParameterWireType.XmlName + "Wrapper";
+                    parameterType = new ClassType(parameterTypePackage, parameterTypeName, null, null, false);
+                }
+                else if (parameterType == ArrayType.ByteArray)
+                {
+                    if (parameterRequestLocation != RequestParameterLocation.Body && parameterRequestLocation != RequestParameterLocation.FormData)
+                    {
+                        parameterType = ClassType.String;
+                    }
+                }
+                else if (parameterType is ListType && autoRestParameter.Location != AutoRestParameterLocation.Body && autoRestParameter.Location != AutoRestParameterLocation.FormData)
+                {
+                    parameterType = ClassType.String;
+                }
+
+                bool parameterIsNullable = IsNullable(autoRestParameter);
+                if (parameterIsNullable)
+                {
+                    parameterType = parameterType.AsNullable();
+                }
+
+                string parameterDescription = autoRestParameter.Documentation;
+                if (string.IsNullOrEmpty(parameterDescription))
+                {
+                    if (!parameterIsNullable && autoRestParameter.ModelType is AutoRestPrimaryType parameterPrimaryType)
+                    {
+                        primaryTypeNotWantNullable.Add(parameterPrimaryType);
+                    }
+
+                    if (autoRestParameterWireType != null && !parameterIsNullable)
+                    {
+                        if (autoRestParameterWireType is AutoRestPrimaryType parameterModelPrimaryType)
+                        {
+                            AutoRestPrimaryType nonNullableParameterModelPrimaryType = DependencyInjection.New<AutoRestPrimaryType>(parameterModelPrimaryType.KnownPrimaryType);
+                            nonNullableParameterModelPrimaryType.Format = parameterModelPrimaryType.Format;
+                            primaryTypeNotWantNullable.Add(nonNullableParameterModelPrimaryType);
+
+                            autoRestParameterWireType = nonNullableParameterModelPrimaryType;
+                        }
+                    }
+                    parameterDescription = $"the {AutoRestIModelTypeName(autoRestParameterWireType, settings)} value";
+                }
+
+                string parameterVariableName = autoRestParameter.ClientProperty?.Name?.ToString();
+                if (!string.IsNullOrEmpty(parameterVariableName))
+                {
+                    CodeNamer codeNamer = CodeNamer.Instance;
+                    parameterVariableName = codeNamer.CamelCase(codeNamer.RemoveInvalidCharacters(parameterVariableName));
+                }
+                if (parameterVariableName == null)
+                {
+                    if (!autoRestParameter.IsClientProperty)
+                    {
+                        parameterVariableName = autoRestParameter.Name;
+                    }
+                    else
+                    {
+                        string caller = (autoRestParameter.Method != null && autoRestParameter.Method.Group.IsNullOrEmpty() ? "this" : "this.client");
+                        string clientPropertyName = autoRestParameter.ClientProperty?.Name?.ToString();
+                        if (!string.IsNullOrEmpty(clientPropertyName))
+                        {
+                            CodeNamer codeNamer = CodeNamer.Instance;
+                            clientPropertyName = codeNamer.CamelCase(codeNamer.RemoveInvalidCharacters(clientPropertyName));
+                        }
+                        parameterVariableName = $"{caller}.{clientPropertyName}()";
+                    }
+                }
+
+                bool parameterSkipUrlEncodingExtension = GetExtensionBool(autoRestParameter.Extensions, SwaggerExtensions.SkipUrlEncodingExtension);
+
+                bool parameterIsConstant = autoRestParameter.IsConstant;
+
+                bool parameterIsRequired = autoRestParameter.IsRequired;
+
+                bool parameterIsServiceClientProperty = autoRestParameter.IsClientProperty;
+
+                restAPIMethodParameters.Add(new RestAPIParameter(parameterDescription, parameterType, parameterVariableName, parameterRequestLocation, parameterRequestName, parameterSkipUrlEncodingExtension, parameterIsConstant, parameterIsRequired, parameterIsServiceClientProperty));
+            }
+
+            return restAPIMethodParameters;
+        }
+
+        private static IEnumerable<Parameter> ParseClientMethodParameters(AutoRestMethod autoRestRestAPIMethod, JavaSettings settings)
+        {
+            return ParseClientMethodParameters(autoRestRestAPIMethod.Parameters, settings);
+        }
+
+        private static IEnumerable<Parameter> ParseClientMethodParameters(IEnumerable<AutoRestParameter> autoRestRestAPIMethodParameters, JavaSettings settings)
+        {
+            List<Parameter> clientMethodParameters = new List<Parameter>();
+
+            IEnumerable<AutoRestParameter> autoRestClientMethodParameters = autoRestRestAPIMethodParameters
+                //Omit parameter-group properties for now since Java doesn't support them yet
+                .Where((AutoRestParameter parameter) => parameter != null && !parameter.IsClientProperty && !parameter.IsConstant && !string.IsNullOrWhiteSpace(parameter.Name))
+                .OrderBy(item => !item.IsRequired);
+            foreach (AutoRestParameter autoRestClientMethodParameter in autoRestClientMethodParameters)
+            {
+                string clientMethodParameterDescription = autoRestClientMethodParameter.Documentation;
+
+                const bool clientMethodParameterIsFinal = false;
+
+                IType clientMethodParameterType = ConvertToClientType(ParseType(autoRestClientMethodParameter.ModelType, settings));
+                if (IsNullable(autoRestClientMethodParameter))
+                {
+                    clientMethodParameterType = clientMethodParameterType.AsNullable();
+                }
+
+                string clientMethodParameterName = autoRestClientMethodParameter.Name;
+
+                bool clientMethodParameterIsRequired = autoRestClientMethodParameter.IsRequired;
+
+                clientMethodParameters.Add(new Parameter(clientMethodParameterDescription, clientMethodParameterIsFinal, clientMethodParameterType, clientMethodParameterName, clientMethodParameterIsRequired));
+            }
+
+            return clientMethodParameters;
         }
     }
 }

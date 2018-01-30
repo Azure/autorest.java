@@ -2,6 +2,7 @@
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
 using System.Collections.Generic;
+using System.Linq;
 using System.Net;
 
 namespace AutoRest.Java.Model
@@ -15,7 +16,7 @@ namespace AutoRest.Java.Model
         /// Create a new RestAPIMethod with the provided properties.
         /// </summary>
         /// <param name="requestContentType">The Content-Type of the request.</param>
-        /// <param name="returnValue">The value that is returned from this method.</param>
+        /// <param name="returnType">The type of value that is returned from this method.</param>
         /// <param name="isPagingNextOperation">Whether or not this method is a request to get the next page of a sequence of pages.</param>
         /// <param name="httpMethod">The HTTP method that will be used for this method.</param>
         /// <param name="urlPath">The path of this method's request URL.</param>
@@ -30,10 +31,11 @@ namespace AutoRest.Java.Model
         /// <param name="simulateAsPagingOperation">Whether or not to simulate this method as a paging operation.</param>
         /// <param name="isLongRunningOperation">Whether or not this method is a long running operation.</param>
         /// <param name="returnValueClientType">The return value's type as it is returned from the client.</param>
-        public RestAPIMethod(string requestContentType, ReturnValue returnValue, bool isPagingNextOperation, string httpMethod, string urlPath, IEnumerable<HttpStatusCode> responseExpectedStatusCodes, ClassType unexpectedResponseExceptionType, string name, IEnumerable<RestAPIParameter> parameters, bool isPagingOperation, string description, bool simulateAsPagingOperation, bool isLongRunningOperation)
+        /// <param name="clientMethodParameters">The parameters that will be exposed for this method's client method overloads.</param>
+        public RestAPIMethod(string requestContentType, IType returnType, bool isPagingNextOperation, string httpMethod, string urlPath, IEnumerable<HttpStatusCode> responseExpectedStatusCodes, ClassType unexpectedResponseExceptionType, string name, IEnumerable<RestAPIParameter> parameters, bool isPagingOperation, string description, bool simulateAsPagingOperation, bool isLongRunningOperation, IType returnValueWireType, IEnumerable<Parameter> clientMethodParameters)
         {
             RequestContentType = requestContentType;
-            ReturnValue = returnValue;
+            ReturnType = returnType;
             IsPagingNextOperation = isPagingNextOperation;
             HttpMethod = httpMethod;
             UrlPath = urlPath;
@@ -45,6 +47,8 @@ namespace AutoRest.Java.Model
             Description = description;
             SimulateAsPagingOperation = simulateAsPagingOperation;
             IsLongRunningOperation = isLongRunningOperation;
+            ReturnValueWireType = returnValueWireType;
+            ClientMethodParameters = clientMethodParameters;
         }
 
         /// <summary>
@@ -55,7 +59,7 @@ namespace AutoRest.Java.Model
         /// <summary>
         /// The value that is returned from this method.
         /// </summary>
-        public ReturnValue ReturnValue { get; }
+        public IType ReturnType { get; }
 
         /// <summary>
         /// Get whether or not this method is a request to get the next page of a sequence of pages.
@@ -113,15 +117,39 @@ namespace AutoRest.Java.Model
         public bool IsLongRunningOperation { get; }
 
         /// <summary>
+        /// The value of the ReturnValueWireType annotation for this method.
+        /// </summary>
+        public IType ReturnValueWireType { get; }
+
+        /// <summary>
+        /// The parameters that will be exposed for this method's client method overloads.
+        /// </summary>
+        public IEnumerable<Parameter> ClientMethodParameters { get; }
+
+        /// <summary>
         /// Add this property's imports to the provided ISet of imports.
         /// </summary>
         /// <param name="imports">The set of imports to add to.</param>
         /// <param name="includeImplementationImports">Whether or not to include imports that are only necessary for method implementations.</param>
         public void AddImportsTo(ISet<string> imports, bool includeImplementationImports, JavaSettings settings)
         {
-            ReturnValue.AddImportsTo(imports, includeImplementationImports, settings);
+            imports.Add($"com.microsoft.rest.v2.annotations.{HttpMethod.ToUpperInvariant()}");
+            
+            imports.Add("com.microsoft.rest.v2.annotations.ExpectedResponses");
 
-            UnexpectedResponseExceptionType?.AddImportsTo(imports, includeImplementationImports);
+            if (ReturnValueWireType != null)
+            {
+                imports.Add("com.microsoft.rest.v2.annotations.ReturnValueWireType");
+                ReturnValueWireType.AddImportsTo(imports, includeImplementationImports);
+            }
+
+            if (UnexpectedResponseExceptionType != null)
+            {
+                imports.Add("com.microsoft.rest.v2.annotations.UnexpectedResponseExceptionType");
+                UnexpectedResponseExceptionType.AddImportsTo(imports, includeImplementationImports);
+            }
+
+            ReturnType.AddImportsTo(imports, includeImplementationImports);
 
             foreach (RestAPIParameter parameter in Parameters)
             {

@@ -24,7 +24,6 @@ import com.microsoft.rest.v2.http.HttpPipeline;
 import fixtures.report.AutoRestReportService;
 import fixtures.report.models.ErrorException;
 import io.reactivex.Maybe;
-import io.reactivex.Observable;
 import io.reactivex.Single;
 import io.reactivex.functions.Function;
 import java.util.Map;
