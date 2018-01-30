@@ -38,7 +38,6 @@ public interface Primitives {
     /**
      * Get complex types with integer properties.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the IntWrapper object if successful.
@@ -57,7 +56,6 @@ public interface Primitives {
     /**
      * Get complex types with integer properties.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, IntWrapper&gt;&gt;} object if successful.
      */
     Single<RestResponse<Void, IntWrapper>> getIntWithRestResponseAsync();
@@ -65,7 +63,6 @@ public interface Primitives {
     /**
      * Get complex types with integer properties.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Maybe&lt;IntWrapper&gt;} object if successful.
      */
     Maybe<IntWrapper> getIntAsync();
@@ -111,7 +108,6 @@ public interface Primitives {
     /**
      * Get complex types with long properties.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the LongWrapper object if successful.
@@ -130,7 +126,6 @@ public interface Primitives {
     /**
      * Get complex types with long properties.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, LongWrapper&gt;&gt;} object if successful.
      */
     Single<RestResponse<Void, LongWrapper>> getLongWithRestResponseAsync();
@@ -138,7 +133,6 @@ public interface Primitives {
     /**
      * Get complex types with long properties.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Maybe&lt;LongWrapper&gt;} object if successful.
      */
     Maybe<LongWrapper> getLongAsync();
@@ -184,7 +178,6 @@ public interface Primitives {
     /**
      * Get complex types with float properties.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the FloatWrapper object if successful.
@@ -203,7 +196,6 @@ public interface Primitives {
     /**
      * Get complex types with float properties.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, FloatWrapper&gt;&gt;} object if successful.
      */
     Single<RestResponse<Void, FloatWrapper>> getFloatWithRestResponseAsync();
@@ -211,7 +203,6 @@ public interface Primitives {
     /**
      * Get complex types with float properties.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Maybe&lt;FloatWrapper&gt;} object if successful.
      */
     Maybe<FloatWrapper> getFloatAsync();
@@ -257,7 +248,6 @@ public interface Primitives {
     /**
      * Get complex types with double properties.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the DoubleWrapper object if successful.
@@ -276,7 +266,6 @@ public interface Primitives {
     /**
      * Get complex types with double properties.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, DoubleWrapper&gt;&gt;} object if successful.
      */
     Single<RestResponse<Void, DoubleWrapper>> getDoubleWithRestResponseAsync();
@@ -284,7 +273,6 @@ public interface Primitives {
     /**
      * Get complex types with double properties.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Maybe&lt;DoubleWrapper&gt;} object if successful.
      */
     Maybe<DoubleWrapper> getDoubleAsync();
@@ -330,7 +318,6 @@ public interface Primitives {
     /**
      * Get complex types with bool properties.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the BooleanWrapper object if successful.
@@ -349,7 +336,6 @@ public interface Primitives {
     /**
      * Get complex types with bool properties.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, BooleanWrapper&gt;&gt;} object if successful.
      */
     Single<RestResponse<Void, BooleanWrapper>> getBoolWithRestResponseAsync();
@@ -357,7 +343,6 @@ public interface Primitives {
     /**
      * Get complex types with bool properties.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Maybe&lt;BooleanWrapper&gt;} object if successful.
      */
     Maybe<BooleanWrapper> getBoolAsync();
@@ -403,7 +388,6 @@ public interface Primitives {
     /**
      * Get complex types with string properties.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the StringWrapper object if successful.
@@ -422,7 +406,6 @@ public interface Primitives {
     /**
      * Get complex types with string properties.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, StringWrapper&gt;&gt;} object if successful.
      */
     Single<RestResponse<Void, StringWrapper>> getStringWithRestResponseAsync();
@@ -430,7 +413,6 @@ public interface Primitives {
     /**
      * Get complex types with string properties.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Maybe&lt;StringWrapper&gt;} object if successful.
      */
     Maybe<StringWrapper> getStringAsync();
@@ -476,7 +458,6 @@ public interface Primitives {
     /**
      * Get complex types with date properties.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the DateWrapper object if successful.
@@ -495,7 +476,6 @@ public interface Primitives {
     /**
      * Get complex types with date properties.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, DateWrapper&gt;&gt;} object if successful.
      */
     Single<RestResponse<Void, DateWrapper>> getDateWithRestResponseAsync();
@@ -503,7 +483,6 @@ public interface Primitives {
     /**
      * Get complex types with date properties.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Maybe&lt;DateWrapper&gt;} object if successful.
      */
     Maybe<DateWrapper> getDateAsync();
@@ -549,7 +528,6 @@ public interface Primitives {
     /**
      * Get complex types with datetime properties.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the DatetimeWrapper object if successful.
@@ -568,7 +546,6 @@ public interface Primitives {
     /**
      * Get complex types with datetime properties.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, DatetimeWrapper&gt;&gt;} object if successful.
      */
     Single<RestResponse<Void, DatetimeWrapper>> getDateTimeWithRestResponseAsync();
@@ -576,7 +553,6 @@ public interface Primitives {
     /**
      * Get complex types with datetime properties.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Maybe&lt;DatetimeWrapper&gt;} object if successful.
      */
     Maybe<DatetimeWrapper> getDateTimeAsync();
@@ -622,7 +598,6 @@ public interface Primitives {
     /**
      * Get complex types with datetimeRfc1123 properties.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the Datetimerfc1123Wrapper object if successful.
@@ -641,7 +616,6 @@ public interface Primitives {
     /**
      * Get complex types with datetimeRfc1123 properties.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, Datetimerfc1123Wrapper&gt;&gt;} object if successful.
      */
     Single<RestResponse<Void, Datetimerfc1123Wrapper>> getDateTimeRfc1123WithRestResponseAsync();
@@ -649,7 +623,6 @@ public interface Primitives {
     /**
      * Get complex types with datetimeRfc1123 properties.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Maybe&lt;Datetimerfc1123Wrapper&gt;} object if successful.
      */
     Maybe<Datetimerfc1123Wrapper> getDateTimeRfc1123Async();
@@ -695,7 +668,6 @@ public interface Primitives {
     /**
      * Get complex types with duration properties.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the DurationWrapper object if successful.
@@ -714,7 +686,6 @@ public interface Primitives {
     /**
      * Get complex types with duration properties.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, DurationWrapper&gt;&gt;} object if successful.
      */
     Single<RestResponse<Void, DurationWrapper>> getDurationWithRestResponseAsync();
@@ -722,7 +693,6 @@ public interface Primitives {
     /**
      * Get complex types with duration properties.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Maybe&lt;DurationWrapper&gt;} object if successful.
      */
     Maybe<DurationWrapper> getDurationAsync();
@@ -768,7 +738,6 @@ public interface Primitives {
     /**
      * Get complex types with byte properties.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the ByteWrapper object if successful.
@@ -787,7 +756,6 @@ public interface Primitives {
     /**
      * Get complex types with byte properties.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, ByteWrapper&gt;&gt;} object if successful.
      */
     Single<RestResponse<Void, ByteWrapper>> getByteWithRestResponseAsync();
@@ -795,7 +763,6 @@ public interface Primitives {
     /**
      * Get complex types with byte properties.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Maybe&lt;ByteWrapper&gt;} object if successful.
      */
     Maybe<ByteWrapper> getByteAsync();

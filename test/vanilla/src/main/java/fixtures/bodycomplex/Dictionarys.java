@@ -28,7 +28,6 @@ public interface Dictionarys {
     /**
      * Get complex types with dictionary property.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the DictionaryWrapper object if successful.
@@ -47,7 +46,6 @@ public interface Dictionarys {
     /**
      * Get complex types with dictionary property.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, DictionaryWrapper&gt;&gt;} object if successful.
      */
     Single<RestResponse<Void, DictionaryWrapper>> getValidWithRestResponseAsync();
@@ -55,7 +53,6 @@ public interface Dictionarys {
     /**
      * Get complex types with dictionary property.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Maybe&lt;DictionaryWrapper&gt;} object if successful.
      */
     Maybe<DictionaryWrapper> getValidAsync();
@@ -101,7 +98,6 @@ public interface Dictionarys {
     /**
      * Get complex types with dictionary property which is empty.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the DictionaryWrapper object if successful.
@@ -120,7 +116,6 @@ public interface Dictionarys {
     /**
      * Get complex types with dictionary property which is empty.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, DictionaryWrapper&gt;&gt;} object if successful.
      */
     Single<RestResponse<Void, DictionaryWrapper>> getEmptyWithRestResponseAsync();
@@ -128,7 +123,6 @@ public interface Dictionarys {
     /**
      * Get complex types with dictionary property which is empty.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Maybe&lt;DictionaryWrapper&gt;} object if successful.
      */
     Maybe<DictionaryWrapper> getEmptyAsync();
@@ -174,7 +168,6 @@ public interface Dictionarys {
     /**
      * Get complex types with dictionary property which is null.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the DictionaryWrapper object if successful.
@@ -193,7 +186,6 @@ public interface Dictionarys {
     /**
      * Get complex types with dictionary property which is null.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, DictionaryWrapper&gt;&gt;} object if successful.
      */
     Single<RestResponse<Void, DictionaryWrapper>> getNullWithRestResponseAsync();
@@ -201,7 +193,6 @@ public interface Dictionarys {
     /**
      * Get complex types with dictionary property which is null.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Maybe&lt;DictionaryWrapper&gt;} object if successful.
      */
     Maybe<DictionaryWrapper> getNullAsync();
@@ -209,7 +200,6 @@ public interface Dictionarys {
     /**
      * Get complex types with dictionary property while server doesn't provide a response payload.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the DictionaryWrapper object if successful.
@@ -228,7 +218,6 @@ public interface Dictionarys {
     /**
      * Get complex types with dictionary property while server doesn't provide a response payload.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, DictionaryWrapper&gt;&gt;} object if successful.
      */
     Single<RestResponse<Void, DictionaryWrapper>> getNotProvidedWithRestResponseAsync();
@@ -236,7 +225,6 @@ public interface Dictionarys {
     /**
      * Get complex types with dictionary property while server doesn't provide a response payload.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Maybe&lt;DictionaryWrapper&gt;} object if successful.
      */
     Maybe<DictionaryWrapper> getNotProvidedAsync();

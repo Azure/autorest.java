@@ -402,7 +402,6 @@ public class ArraysImpl implements Arrays {
     /**
      * Get null array value.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the List&lt;Integer&gt; object if successful.
@@ -425,7 +424,6 @@ public class ArraysImpl implements Arrays {
     /**
      * Get null array value.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, List&lt;Integer&gt;&gt;&gt;} object if successful.
      */
     public Single<RestResponse<Void, List<Integer>>> getNullWithRestResponseAsync() {
@@ -435,7 +433,6 @@ public class ArraysImpl implements Arrays {
     /**
      * Get null array value.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Maybe&lt;List&lt;Integer&gt;&gt;} object if successful.
      */
     public Maybe<List<Integer>> getNullAsync() {
@@ -454,7 +451,6 @@ public class ArraysImpl implements Arrays {
     /**
      * Get invalid array [1, 2, 3.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the List&lt;Integer&gt; object if successful.
@@ -477,7 +473,6 @@ public class ArraysImpl implements Arrays {
     /**
      * Get invalid array [1, 2, 3.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, List&lt;Integer&gt;&gt;&gt;} object if successful.
      */
     public Single<RestResponse<Void, List<Integer>>> getInvalidWithRestResponseAsync() {
@@ -487,7 +482,6 @@ public class ArraysImpl implements Arrays {
     /**
      * Get invalid array [1, 2, 3.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Maybe&lt;List&lt;Integer&gt;&gt;} object if successful.
      */
     public Maybe<List<Integer>> getInvalidAsync() {
@@ -506,7 +500,6 @@ public class ArraysImpl implements Arrays {
     /**
      * Get empty array value [].
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the List&lt;Integer&gt; object if successful.
@@ -529,7 +522,6 @@ public class ArraysImpl implements Arrays {
     /**
      * Get empty array value [].
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, List&lt;Integer&gt;&gt;&gt;} object if successful.
      */
     public Single<RestResponse<Void, List<Integer>>> getEmptyWithRestResponseAsync() {
@@ -539,7 +531,6 @@ public class ArraysImpl implements Arrays {
     /**
      * Get empty array value [].
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Maybe&lt;List&lt;Integer&gt;&gt;} object if successful.
      */
     public Maybe<List<Integer>> getEmptyAsync() {
@@ -609,7 +600,6 @@ public class ArraysImpl implements Arrays {
     /**
      * Get boolean array value [true, false, false, true].
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the List&lt;Boolean&gt; object if successful.
@@ -632,7 +622,6 @@ public class ArraysImpl implements Arrays {
     /**
      * Get boolean array value [true, false, false, true].
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, List&lt;Boolean&gt;&gt;&gt;} object if successful.
      */
     public Single<RestResponse<Void, List<Boolean>>> getBooleanTfftWithRestResponseAsync() {
@@ -642,7 +631,6 @@ public class ArraysImpl implements Arrays {
     /**
      * Get boolean array value [true, false, false, true].
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Maybe&lt;List&lt;Boolean&gt;&gt;} object if successful.
      */
     public Maybe<List<Boolean>> getBooleanTfftAsync() {
@@ -712,7 +700,6 @@ public class ArraysImpl implements Arrays {
     /**
      * Get boolean array value [true, null, false].
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the List&lt;Boolean&gt; object if successful.
@@ -735,7 +722,6 @@ public class ArraysImpl implements Arrays {
     /**
      * Get boolean array value [true, null, false].
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, List&lt;Boolean&gt;&gt;&gt;} object if successful.
      */
     public Single<RestResponse<Void, List<Boolean>>> getBooleanInvalidNullWithRestResponseAsync() {
@@ -745,7 +731,6 @@ public class ArraysImpl implements Arrays {
     /**
      * Get boolean array value [true, null, false].
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Maybe&lt;List&lt;Boolean&gt;&gt;} object if successful.
      */
     public Maybe<List<Boolean>> getBooleanInvalidNullAsync() {
@@ -764,7 +749,6 @@ public class ArraysImpl implements Arrays {
     /**
      * Get boolean array value [true, 'boolean', false].
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the List&lt;Boolean&gt; object if successful.
@@ -787,7 +771,6 @@ public class ArraysImpl implements Arrays {
     /**
      * Get boolean array value [true, 'boolean', false].
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, List&lt;Boolean&gt;&gt;&gt;} object if successful.
      */
     public Single<RestResponse<Void, List<Boolean>>> getBooleanInvalidStringWithRestResponseAsync() {
@@ -797,7 +780,6 @@ public class ArraysImpl implements Arrays {
     /**
      * Get boolean array value [true, 'boolean', false].
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Maybe&lt;List&lt;Boolean&gt;&gt;} object if successful.
      */
     public Maybe<List<Boolean>> getBooleanInvalidStringAsync() {
@@ -816,7 +798,6 @@ public class ArraysImpl implements Arrays {
     /**
      * Get integer array value [1, -1, 3, 300].
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the List&lt;Integer&gt; object if successful.
@@ -839,7 +820,6 @@ public class ArraysImpl implements Arrays {
     /**
      * Get integer array value [1, -1, 3, 300].
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, List&lt;Integer&gt;&gt;&gt;} object if successful.
      */
     public Single<RestResponse<Void, List<Integer>>> getIntegerValidWithRestResponseAsync() {
@@ -849,7 +829,6 @@ public class ArraysImpl implements Arrays {
     /**
      * Get integer array value [1, -1, 3, 300].
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Maybe&lt;List&lt;Integer&gt;&gt;} object if successful.
      */
     public Maybe<List<Integer>> getIntegerValidAsync() {
@@ -919,7 +898,6 @@ public class ArraysImpl implements Arrays {
     /**
      * Get integer array value [1, null, 0].
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the List&lt;Integer&gt; object if successful.
@@ -942,7 +920,6 @@ public class ArraysImpl implements Arrays {
     /**
      * Get integer array value [1, null, 0].
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, List&lt;Integer&gt;&gt;&gt;} object if successful.
      */
     public Single<RestResponse<Void, List<Integer>>> getIntInvalidNullWithRestResponseAsync() {
@@ -952,7 +929,6 @@ public class ArraysImpl implements Arrays {
     /**
      * Get integer array value [1, null, 0].
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Maybe&lt;List&lt;Integer&gt;&gt;} object if successful.
      */
     public Maybe<List<Integer>> getIntInvalidNullAsync() {
@@ -971,7 +947,6 @@ public class ArraysImpl implements Arrays {
     /**
      * Get integer array value [1, 'integer', 0].
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the List&lt;Integer&gt; object if successful.
@@ -994,7 +969,6 @@ public class ArraysImpl implements Arrays {
     /**
      * Get integer array value [1, 'integer', 0].
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, List&lt;Integer&gt;&gt;&gt;} object if successful.
      */
     public Single<RestResponse<Void, List<Integer>>> getIntInvalidStringWithRestResponseAsync() {
@@ -1004,7 +978,6 @@ public class ArraysImpl implements Arrays {
     /**
      * Get integer array value [1, 'integer', 0].
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Maybe&lt;List&lt;Integer&gt;&gt;} object if successful.
      */
     public Maybe<List<Integer>> getIntInvalidStringAsync() {
@@ -1023,7 +996,6 @@ public class ArraysImpl implements Arrays {
     /**
      * Get integer array value [1, -1, 3, 300].
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the List&lt;Long&gt; object if successful.
@@ -1046,7 +1018,6 @@ public class ArraysImpl implements Arrays {
     /**
      * Get integer array value [1, -1, 3, 300].
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, List&lt;Long&gt;&gt;&gt;} object if successful.
      */
     public Single<RestResponse<Void, List<Long>>> getLongValidWithRestResponseAsync() {
@@ -1056,7 +1027,6 @@ public class ArraysImpl implements Arrays {
     /**
      * Get integer array value [1, -1, 3, 300].
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Maybe&lt;List&lt;Long&gt;&gt;} object if successful.
      */
     public Maybe<List<Long>> getLongValidAsync() {
@@ -1126,7 +1096,6 @@ public class ArraysImpl implements Arrays {
     /**
      * Get long array value [1, null, 0].
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the List&lt;Long&gt; object if successful.
@@ -1149,7 +1118,6 @@ public class ArraysImpl implements Arrays {
     /**
      * Get long array value [1, null, 0].
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, List&lt;Long&gt;&gt;&gt;} object if successful.
      */
     public Single<RestResponse<Void, List<Long>>> getLongInvalidNullWithRestResponseAsync() {
@@ -1159,7 +1127,6 @@ public class ArraysImpl implements Arrays {
     /**
      * Get long array value [1, null, 0].
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Maybe&lt;List&lt;Long&gt;&gt;} object if successful.
      */
     public Maybe<List<Long>> getLongInvalidNullAsync() {
@@ -1178,7 +1145,6 @@ public class ArraysImpl implements Arrays {
     /**
      * Get long array value [1, 'integer', 0].
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the List&lt;Long&gt; object if successful.
@@ -1201,7 +1167,6 @@ public class ArraysImpl implements Arrays {
     /**
      * Get long array value [1, 'integer', 0].
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, List&lt;Long&gt;&gt;&gt;} object if successful.
      */
     public Single<RestResponse<Void, List<Long>>> getLongInvalidStringWithRestResponseAsync() {
@@ -1211,7 +1176,6 @@ public class ArraysImpl implements Arrays {
     /**
      * Get long array value [1, 'integer', 0].
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Maybe&lt;List&lt;Long&gt;&gt;} object if successful.
      */
     public Maybe<List<Long>> getLongInvalidStringAsync() {
@@ -1230,7 +1194,6 @@ public class ArraysImpl implements Arrays {
     /**
      * Get float array value [0, -0.01, 1.2e20].
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the List&lt;Double&gt; object if successful.
@@ -1253,7 +1216,6 @@ public class ArraysImpl implements Arrays {
     /**
      * Get float array value [0, -0.01, 1.2e20].
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, List&lt;Double&gt;&gt;&gt;} object if successful.
      */
     public Single<RestResponse<Void, List<Double>>> getFloatValidWithRestResponseAsync() {
@@ -1263,7 +1225,6 @@ public class ArraysImpl implements Arrays {
     /**
      * Get float array value [0, -0.01, 1.2e20].
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Maybe&lt;List&lt;Double&gt;&gt;} object if successful.
      */
     public Maybe<List<Double>> getFloatValidAsync() {
@@ -1333,7 +1294,6 @@ public class ArraysImpl implements Arrays {
     /**
      * Get float array value [0.0, null, -1.2e20].
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the List&lt;Double&gt; object if successful.
@@ -1356,7 +1316,6 @@ public class ArraysImpl implements Arrays {
     /**
      * Get float array value [0.0, null, -1.2e20].
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, List&lt;Double&gt;&gt;&gt;} object if successful.
      */
     public Single<RestResponse<Void, List<Double>>> getFloatInvalidNullWithRestResponseAsync() {
@@ -1366,7 +1325,6 @@ public class ArraysImpl implements Arrays {
     /**
      * Get float array value [0.0, null, -1.2e20].
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Maybe&lt;List&lt;Double&gt;&gt;} object if successful.
      */
     public Maybe<List<Double>> getFloatInvalidNullAsync() {
@@ -1385,7 +1343,6 @@ public class ArraysImpl implements Arrays {
     /**
      * Get boolean array value [1.0, 'number', 0.0].
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the List&lt;Double&gt; object if successful.
@@ -1408,7 +1365,6 @@ public class ArraysImpl implements Arrays {
     /**
      * Get boolean array value [1.0, 'number', 0.0].
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, List&lt;Double&gt;&gt;&gt;} object if successful.
      */
     public Single<RestResponse<Void, List<Double>>> getFloatInvalidStringWithRestResponseAsync() {
@@ -1418,7 +1374,6 @@ public class ArraysImpl implements Arrays {
     /**
      * Get boolean array value [1.0, 'number', 0.0].
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Maybe&lt;List&lt;Double&gt;&gt;} object if successful.
      */
     public Maybe<List<Double>> getFloatInvalidStringAsync() {
@@ -1437,7 +1392,6 @@ public class ArraysImpl implements Arrays {
     /**
      * Get float array value [0, -0.01, 1.2e20].
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the List&lt;Double&gt; object if successful.
@@ -1460,7 +1414,6 @@ public class ArraysImpl implements Arrays {
     /**
      * Get float array value [0, -0.01, 1.2e20].
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, List&lt;Double&gt;&gt;&gt;} object if successful.
      */
     public Single<RestResponse<Void, List<Double>>> getDoubleValidWithRestResponseAsync() {
@@ -1470,7 +1423,6 @@ public class ArraysImpl implements Arrays {
     /**
      * Get float array value [0, -0.01, 1.2e20].
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Maybe&lt;List&lt;Double&gt;&gt;} object if successful.
      */
     public Maybe<List<Double>> getDoubleValidAsync() {
@@ -1540,7 +1492,6 @@ public class ArraysImpl implements Arrays {
     /**
      * Get float array value [0.0, null, -1.2e20].
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the List&lt;Double&gt; object if successful.
@@ -1563,7 +1514,6 @@ public class ArraysImpl implements Arrays {
     /**
      * Get float array value [0.0, null, -1.2e20].
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, List&lt;Double&gt;&gt;&gt;} object if successful.
      */
     public Single<RestResponse<Void, List<Double>>> getDoubleInvalidNullWithRestResponseAsync() {
@@ -1573,7 +1523,6 @@ public class ArraysImpl implements Arrays {
     /**
      * Get float array value [0.0, null, -1.2e20].
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Maybe&lt;List&lt;Double&gt;&gt;} object if successful.
      */
     public Maybe<List<Double>> getDoubleInvalidNullAsync() {
@@ -1592,7 +1541,6 @@ public class ArraysImpl implements Arrays {
     /**
      * Get boolean array value [1.0, 'number', 0.0].
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the List&lt;Double&gt; object if successful.
@@ -1615,7 +1563,6 @@ public class ArraysImpl implements Arrays {
     /**
      * Get boolean array value [1.0, 'number', 0.0].
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, List&lt;Double&gt;&gt;&gt;} object if successful.
      */
     public Single<RestResponse<Void, List<Double>>> getDoubleInvalidStringWithRestResponseAsync() {
@@ -1625,7 +1572,6 @@ public class ArraysImpl implements Arrays {
     /**
      * Get boolean array value [1.0, 'number', 0.0].
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Maybe&lt;List&lt;Double&gt;&gt;} object if successful.
      */
     public Maybe<List<Double>> getDoubleInvalidStringAsync() {
@@ -1644,7 +1590,6 @@ public class ArraysImpl implements Arrays {
     /**
      * Get string array value ['foo1', 'foo2', 'foo3'].
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the List&lt;String&gt; object if successful.
@@ -1667,7 +1612,6 @@ public class ArraysImpl implements Arrays {
     /**
      * Get string array value ['foo1', 'foo2', 'foo3'].
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, List&lt;String&gt;&gt;&gt;} object if successful.
      */
     public Single<RestResponse<Void, List<String>>> getStringValidWithRestResponseAsync() {
@@ -1677,7 +1621,6 @@ public class ArraysImpl implements Arrays {
     /**
      * Get string array value ['foo1', 'foo2', 'foo3'].
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Maybe&lt;List&lt;String&gt;&gt;} object if successful.
      */
     public Maybe<List<String>> getStringValidAsync() {
@@ -1747,7 +1690,6 @@ public class ArraysImpl implements Arrays {
     /**
      * Get string array value ['foo', null, 'foo2'].
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the List&lt;String&gt; object if successful.
@@ -1770,7 +1712,6 @@ public class ArraysImpl implements Arrays {
     /**
      * Get string array value ['foo', null, 'foo2'].
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, List&lt;String&gt;&gt;&gt;} object if successful.
      */
     public Single<RestResponse<Void, List<String>>> getStringWithNullWithRestResponseAsync() {
@@ -1780,7 +1721,6 @@ public class ArraysImpl implements Arrays {
     /**
      * Get string array value ['foo', null, 'foo2'].
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Maybe&lt;List&lt;String&gt;&gt;} object if successful.
      */
     public Maybe<List<String>> getStringWithNullAsync() {
@@ -1799,7 +1739,6 @@ public class ArraysImpl implements Arrays {
     /**
      * Get string array value ['foo', 123, 'foo2'].
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the List&lt;String&gt; object if successful.
@@ -1822,7 +1761,6 @@ public class ArraysImpl implements Arrays {
     /**
      * Get string array value ['foo', 123, 'foo2'].
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, List&lt;String&gt;&gt;&gt;} object if successful.
      */
     public Single<RestResponse<Void, List<String>>> getStringWithInvalidWithRestResponseAsync() {
@@ -1832,7 +1770,6 @@ public class ArraysImpl implements Arrays {
     /**
      * Get string array value ['foo', 123, 'foo2'].
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Maybe&lt;List&lt;String&gt;&gt;} object if successful.
      */
     public Maybe<List<String>> getStringWithInvalidAsync() {
@@ -1851,7 +1788,6 @@ public class ArraysImpl implements Arrays {
     /**
      * Get uuid array value ['6dcc7237-45fe-45c4-8a6b-3a8a3f625652', 'd1399005-30f7-40d6-8da6-dd7c89ad34db', 'f42f6aa1-a5bc-4ddf-907e-5f915de43205'].
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the List&lt;UUID&gt; object if successful.
@@ -1874,7 +1810,6 @@ public class ArraysImpl implements Arrays {
     /**
      * Get uuid array value ['6dcc7237-45fe-45c4-8a6b-3a8a3f625652', 'd1399005-30f7-40d6-8da6-dd7c89ad34db', 'f42f6aa1-a5bc-4ddf-907e-5f915de43205'].
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, List&lt;UUID&gt;&gt;&gt;} object if successful.
      */
     public Single<RestResponse<Void, List<UUID>>> getUuidValidWithRestResponseAsync() {
@@ -1884,7 +1819,6 @@ public class ArraysImpl implements Arrays {
     /**
      * Get uuid array value ['6dcc7237-45fe-45c4-8a6b-3a8a3f625652', 'd1399005-30f7-40d6-8da6-dd7c89ad34db', 'f42f6aa1-a5bc-4ddf-907e-5f915de43205'].
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Maybe&lt;List&lt;UUID&gt;&gt;} object if successful.
      */
     public Maybe<List<UUID>> getUuidValidAsync() {
@@ -1954,7 +1888,6 @@ public class ArraysImpl implements Arrays {
     /**
      * Get uuid array value ['6dcc7237-45fe-45c4-8a6b-3a8a3f625652', 'foo'].
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the List&lt;UUID&gt; object if successful.
@@ -1977,7 +1910,6 @@ public class ArraysImpl implements Arrays {
     /**
      * Get uuid array value ['6dcc7237-45fe-45c4-8a6b-3a8a3f625652', 'foo'].
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, List&lt;UUID&gt;&gt;&gt;} object if successful.
      */
     public Single<RestResponse<Void, List<UUID>>> getUuidInvalidCharsWithRestResponseAsync() {
@@ -1987,7 +1919,6 @@ public class ArraysImpl implements Arrays {
     /**
      * Get uuid array value ['6dcc7237-45fe-45c4-8a6b-3a8a3f625652', 'foo'].
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Maybe&lt;List&lt;UUID&gt;&gt;} object if successful.
      */
     public Maybe<List<UUID>> getUuidInvalidCharsAsync() {
@@ -2006,7 +1937,6 @@ public class ArraysImpl implements Arrays {
     /**
      * Get integer array value ['2000-12-01', '1980-01-02', '1492-10-12'].
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the List&lt;LocalDate&gt; object if successful.
@@ -2029,7 +1959,6 @@ public class ArraysImpl implements Arrays {
     /**
      * Get integer array value ['2000-12-01', '1980-01-02', '1492-10-12'].
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, List&lt;LocalDate&gt;&gt;&gt;} object if successful.
      */
     public Single<RestResponse<Void, List<LocalDate>>> getDateValidWithRestResponseAsync() {
@@ -2039,7 +1968,6 @@ public class ArraysImpl implements Arrays {
     /**
      * Get integer array value ['2000-12-01', '1980-01-02', '1492-10-12'].
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Maybe&lt;List&lt;LocalDate&gt;&gt;} object if successful.
      */
     public Maybe<List<LocalDate>> getDateValidAsync() {
@@ -2109,7 +2037,6 @@ public class ArraysImpl implements Arrays {
     /**
      * Get date array value ['2012-01-01', null, '1776-07-04'].
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the List&lt;LocalDate&gt; object if successful.
@@ -2132,7 +2059,6 @@ public class ArraysImpl implements Arrays {
     /**
      * Get date array value ['2012-01-01', null, '1776-07-04'].
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, List&lt;LocalDate&gt;&gt;&gt;} object if successful.
      */
     public Single<RestResponse<Void, List<LocalDate>>> getDateInvalidNullWithRestResponseAsync() {
@@ -2142,7 +2068,6 @@ public class ArraysImpl implements Arrays {
     /**
      * Get date array value ['2012-01-01', null, '1776-07-04'].
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Maybe&lt;List&lt;LocalDate&gt;&gt;} object if successful.
      */
     public Maybe<List<LocalDate>> getDateInvalidNullAsync() {
@@ -2161,7 +2086,6 @@ public class ArraysImpl implements Arrays {
     /**
      * Get date array value ['2011-03-22', 'date'].
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the List&lt;LocalDate&gt; object if successful.
@@ -2184,7 +2108,6 @@ public class ArraysImpl implements Arrays {
     /**
      * Get date array value ['2011-03-22', 'date'].
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, List&lt;LocalDate&gt;&gt;&gt;} object if successful.
      */
     public Single<RestResponse<Void, List<LocalDate>>> getDateInvalidCharsWithRestResponseAsync() {
@@ -2194,7 +2117,6 @@ public class ArraysImpl implements Arrays {
     /**
      * Get date array value ['2011-03-22', 'date'].
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Maybe&lt;List&lt;LocalDate&gt;&gt;} object if successful.
      */
     public Maybe<List<LocalDate>> getDateInvalidCharsAsync() {
@@ -2213,7 +2135,6 @@ public class ArraysImpl implements Arrays {
     /**
      * Get date-time array value ['2000-12-01t00:00:01z', '1980-01-02T00:11:35+01:00', '1492-10-12T10:15:01-08:00'].
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the List&lt;DateTime&gt; object if successful.
@@ -2236,7 +2157,6 @@ public class ArraysImpl implements Arrays {
     /**
      * Get date-time array value ['2000-12-01t00:00:01z', '1980-01-02T00:11:35+01:00', '1492-10-12T10:15:01-08:00'].
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, List&lt;DateTime&gt;&gt;&gt;} object if successful.
      */
     public Single<RestResponse<Void, List<DateTime>>> getDateTimeValidWithRestResponseAsync() {
@@ -2246,7 +2166,6 @@ public class ArraysImpl implements Arrays {
     /**
      * Get date-time array value ['2000-12-01t00:00:01z', '1980-01-02T00:11:35+01:00', '1492-10-12T10:15:01-08:00'].
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Maybe&lt;List&lt;DateTime&gt;&gt;} object if successful.
      */
     public Maybe<List<DateTime>> getDateTimeValidAsync() {
@@ -2316,7 +2235,6 @@ public class ArraysImpl implements Arrays {
     /**
      * Get date array value ['2000-12-01t00:00:01z', null].
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the List&lt;DateTime&gt; object if successful.
@@ -2339,7 +2257,6 @@ public class ArraysImpl implements Arrays {
     /**
      * Get date array value ['2000-12-01t00:00:01z', null].
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, List&lt;DateTime&gt;&gt;&gt;} object if successful.
      */
     public Single<RestResponse<Void, List<DateTime>>> getDateTimeInvalidNullWithRestResponseAsync() {
@@ -2349,7 +2266,6 @@ public class ArraysImpl implements Arrays {
     /**
      * Get date array value ['2000-12-01t00:00:01z', null].
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Maybe&lt;List&lt;DateTime&gt;&gt;} object if successful.
      */
     public Maybe<List<DateTime>> getDateTimeInvalidNullAsync() {
@@ -2368,7 +2284,6 @@ public class ArraysImpl implements Arrays {
     /**
      * Get date array value ['2000-12-01t00:00:01z', 'date-time'].
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the List&lt;DateTime&gt; object if successful.
@@ -2391,7 +2306,6 @@ public class ArraysImpl implements Arrays {
     /**
      * Get date array value ['2000-12-01t00:00:01z', 'date-time'].
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, List&lt;DateTime&gt;&gt;&gt;} object if successful.
      */
     public Single<RestResponse<Void, List<DateTime>>> getDateTimeInvalidCharsWithRestResponseAsync() {
@@ -2401,7 +2315,6 @@ public class ArraysImpl implements Arrays {
     /**
      * Get date array value ['2000-12-01t00:00:01z', 'date-time'].
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Maybe&lt;List&lt;DateTime&gt;&gt;} object if successful.
      */
     public Maybe<List<DateTime>> getDateTimeInvalidCharsAsync() {
@@ -2420,7 +2333,6 @@ public class ArraysImpl implements Arrays {
     /**
      * Get date-time array value ['Fri, 01 Dec 2000 00:00:01 GMT', 'Wed, 02 Jan 1980 00:11:35 GMT', 'Wed, 12 Oct 1492 10:15:01 GMT'].
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the List&lt;DateTime&gt; object if successful.
@@ -2443,7 +2355,6 @@ public class ArraysImpl implements Arrays {
     /**
      * Get date-time array value ['Fri, 01 Dec 2000 00:00:01 GMT', 'Wed, 02 Jan 1980 00:11:35 GMT', 'Wed, 12 Oct 1492 10:15:01 GMT'].
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, List&lt;DateTime&gt;&gt;&gt;} object if successful.
      */
     public Single<RestResponse<Void, List<DateTime>>> getDateTimeRfc1123ValidWithRestResponseAsync() {
@@ -2453,7 +2364,6 @@ public class ArraysImpl implements Arrays {
     /**
      * Get date-time array value ['Fri, 01 Dec 2000 00:00:01 GMT', 'Wed, 02 Jan 1980 00:11:35 GMT', 'Wed, 12 Oct 1492 10:15:01 GMT'].
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Maybe&lt;List&lt;DateTime&gt;&gt;} object if successful.
      */
     public Maybe<List<DateTime>> getDateTimeRfc1123ValidAsync() {
@@ -2528,7 +2438,6 @@ public class ArraysImpl implements Arrays {
     /**
      * Get duration array value ['P123DT22H14M12.011S', 'P5DT1H0M0S'].
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the List&lt;Period&gt; object if successful.
@@ -2551,7 +2460,6 @@ public class ArraysImpl implements Arrays {
     /**
      * Get duration array value ['P123DT22H14M12.011S', 'P5DT1H0M0S'].
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, List&lt;Period&gt;&gt;&gt;} object if successful.
      */
     public Single<RestResponse<Void, List<Period>>> getDurationValidWithRestResponseAsync() {
@@ -2561,7 +2469,6 @@ public class ArraysImpl implements Arrays {
     /**
      * Get duration array value ['P123DT22H14M12.011S', 'P5DT1H0M0S'].
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Maybe&lt;List&lt;Period&gt;&gt;} object if successful.
      */
     public Maybe<List<Period>> getDurationValidAsync() {
@@ -2631,7 +2538,6 @@ public class ArraysImpl implements Arrays {
     /**
      * Get byte array value [hex(FF FF FF FA), hex(01 02 03), hex (25, 29, 43)] with each item encoded in base64.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the List&lt;byte[]&gt; object if successful.
@@ -2654,7 +2560,6 @@ public class ArraysImpl implements Arrays {
     /**
      * Get byte array value [hex(FF FF FF FA), hex(01 02 03), hex (25, 29, 43)] with each item encoded in base64.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, List&lt;byte[]&gt;&gt;&gt;} object if successful.
      */
     public Single<RestResponse<Void, List<byte[]>>> getByteValidWithRestResponseAsync() {
@@ -2664,7 +2569,6 @@ public class ArraysImpl implements Arrays {
     /**
      * Get byte array value [hex(FF FF FF FA), hex(01 02 03), hex (25, 29, 43)] with each item encoded in base64.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Maybe&lt;List&lt;byte[]&gt;&gt;} object if successful.
      */
     public Maybe<List<byte[]>> getByteValidAsync() {
@@ -2734,7 +2638,6 @@ public class ArraysImpl implements Arrays {
     /**
      * Get byte array value [hex(AB, AC, AD), null] with the first item base64 encoded.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the List&lt;byte[]&gt; object if successful.
@@ -2757,7 +2660,6 @@ public class ArraysImpl implements Arrays {
     /**
      * Get byte array value [hex(AB, AC, AD), null] with the first item base64 encoded.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, List&lt;byte[]&gt;&gt;&gt;} object if successful.
      */
     public Single<RestResponse<Void, List<byte[]>>> getByteInvalidNullWithRestResponseAsync() {
@@ -2767,7 +2669,6 @@ public class ArraysImpl implements Arrays {
     /**
      * Get byte array value [hex(AB, AC, AD), null] with the first item base64 encoded.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Maybe&lt;List&lt;byte[]&gt;&gt;} object if successful.
      */
     public Maybe<List<byte[]>> getByteInvalidNullAsync() {
@@ -2786,7 +2687,6 @@ public class ArraysImpl implements Arrays {
     /**
      * Get array value ['a string that gets encoded with base64url', 'test string' 'Lorem ipsum'] with the items base64url encoded.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the List&lt;byte[]&gt; object if successful.
@@ -2809,7 +2709,6 @@ public class ArraysImpl implements Arrays {
     /**
      * Get array value ['a string that gets encoded with base64url', 'test string' 'Lorem ipsum'] with the items base64url encoded.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, List&lt;byte[]&gt;&gt;&gt;} object if successful.
      */
     public Single<RestResponse<Void, List<byte[]>>> getBase64UrlWithRestResponseAsync() {
@@ -2819,7 +2718,6 @@ public class ArraysImpl implements Arrays {
     /**
      * Get array value ['a string that gets encoded with base64url', 'test string' 'Lorem ipsum'] with the items base64url encoded.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Maybe&lt;List&lt;byte[]&gt;&gt;} object if successful.
      */
     public Maybe<List<byte[]>> getBase64UrlAsync() {
@@ -2838,7 +2736,6 @@ public class ArraysImpl implements Arrays {
     /**
      * Get array of complex type null value.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the List&lt;Product&gt; object if successful.
@@ -2861,7 +2758,6 @@ public class ArraysImpl implements Arrays {
     /**
      * Get array of complex type null value.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, List&lt;Product&gt;&gt;&gt;} object if successful.
      */
     public Single<RestResponse<Void, List<Product>>> getComplexNullWithRestResponseAsync() {
@@ -2871,7 +2767,6 @@ public class ArraysImpl implements Arrays {
     /**
      * Get array of complex type null value.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Maybe&lt;List&lt;Product&gt;&gt;} object if successful.
      */
     public Maybe<List<Product>> getComplexNullAsync() {
@@ -2890,7 +2785,6 @@ public class ArraysImpl implements Arrays {
     /**
      * Get empty array of complex type [].
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the List&lt;Product&gt; object if successful.
@@ -2913,7 +2807,6 @@ public class ArraysImpl implements Arrays {
     /**
      * Get empty array of complex type [].
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, List&lt;Product&gt;&gt;&gt;} object if successful.
      */
     public Single<RestResponse<Void, List<Product>>> getComplexEmptyWithRestResponseAsync() {
@@ -2923,7 +2816,6 @@ public class ArraysImpl implements Arrays {
     /**
      * Get empty array of complex type [].
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Maybe&lt;List&lt;Product&gt;&gt;} object if successful.
      */
     public Maybe<List<Product>> getComplexEmptyAsync() {
@@ -2942,7 +2834,6 @@ public class ArraysImpl implements Arrays {
     /**
      * Get array of complex type with null item [{'integer': 1 'string': '2'}, null, {'integer': 5, 'string': '6'}].
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the List&lt;Product&gt; object if successful.
@@ -2965,7 +2856,6 @@ public class ArraysImpl implements Arrays {
     /**
      * Get array of complex type with null item [{'integer': 1 'string': '2'}, null, {'integer': 5, 'string': '6'}].
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, List&lt;Product&gt;&gt;&gt;} object if successful.
      */
     public Single<RestResponse<Void, List<Product>>> getComplexItemNullWithRestResponseAsync() {
@@ -2975,7 +2865,6 @@ public class ArraysImpl implements Arrays {
     /**
      * Get array of complex type with null item [{'integer': 1 'string': '2'}, null, {'integer': 5, 'string': '6'}].
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Maybe&lt;List&lt;Product&gt;&gt;} object if successful.
      */
     public Maybe<List<Product>> getComplexItemNullAsync() {
@@ -2994,7 +2883,6 @@ public class ArraysImpl implements Arrays {
     /**
      * Get array of complex type with empty item [{'integer': 1 'string': '2'}, {}, {'integer': 5, 'string': '6'}].
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the List&lt;Product&gt; object if successful.
@@ -3017,7 +2905,6 @@ public class ArraysImpl implements Arrays {
     /**
      * Get array of complex type with empty item [{'integer': 1 'string': '2'}, {}, {'integer': 5, 'string': '6'}].
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, List&lt;Product&gt;&gt;&gt;} object if successful.
      */
     public Single<RestResponse<Void, List<Product>>> getComplexItemEmptyWithRestResponseAsync() {
@@ -3027,7 +2914,6 @@ public class ArraysImpl implements Arrays {
     /**
      * Get array of complex type with empty item [{'integer': 1 'string': '2'}, {}, {'integer': 5, 'string': '6'}].
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Maybe&lt;List&lt;Product&gt;&gt;} object if successful.
      */
     public Maybe<List<Product>> getComplexItemEmptyAsync() {
@@ -3046,7 +2932,6 @@ public class ArraysImpl implements Arrays {
     /**
      * Get array of complex type with [{'integer': 1 'string': '2'}, {'integer': 3, 'string': '4'}, {'integer': 5, 'string': '6'}].
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the List&lt;Product&gt; object if successful.
@@ -3069,7 +2954,6 @@ public class ArraysImpl implements Arrays {
     /**
      * Get array of complex type with [{'integer': 1 'string': '2'}, {'integer': 3, 'string': '4'}, {'integer': 5, 'string': '6'}].
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, List&lt;Product&gt;&gt;&gt;} object if successful.
      */
     public Single<RestResponse<Void, List<Product>>> getComplexValidWithRestResponseAsync() {
@@ -3079,7 +2963,6 @@ public class ArraysImpl implements Arrays {
     /**
      * Get array of complex type with [{'integer': 1 'string': '2'}, {'integer': 3, 'string': '4'}, {'integer': 5, 'string': '6'}].
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Maybe&lt;List&lt;Product&gt;&gt;} object if successful.
      */
     public Maybe<List<Product>> getComplexValidAsync() {
@@ -3149,7 +3032,6 @@ public class ArraysImpl implements Arrays {
     /**
      * Get a null array.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the List&lt;List&lt;String&gt;&gt; object if successful.
@@ -3172,7 +3054,6 @@ public class ArraysImpl implements Arrays {
     /**
      * Get a null array.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, List&lt;List&lt;String&gt;&gt;&gt;&gt;} object if successful.
      */
     public Single<RestResponse<Void, List<List<String>>>> getArrayNullWithRestResponseAsync() {
@@ -3182,7 +3063,6 @@ public class ArraysImpl implements Arrays {
     /**
      * Get a null array.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Maybe&lt;List&lt;List&lt;String&gt;&gt;&gt;} object if successful.
      */
     public Maybe<List<List<String>>> getArrayNullAsync() {
@@ -3201,7 +3081,6 @@ public class ArraysImpl implements Arrays {
     /**
      * Get an empty array [].
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the List&lt;List&lt;String&gt;&gt; object if successful.
@@ -3224,7 +3103,6 @@ public class ArraysImpl implements Arrays {
     /**
      * Get an empty array [].
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, List&lt;List&lt;String&gt;&gt;&gt;&gt;} object if successful.
      */
     public Single<RestResponse<Void, List<List<String>>>> getArrayEmptyWithRestResponseAsync() {
@@ -3234,7 +3112,6 @@ public class ArraysImpl implements Arrays {
     /**
      * Get an empty array [].
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Maybe&lt;List&lt;List&lt;String&gt;&gt;&gt;} object if successful.
      */
     public Maybe<List<List<String>>> getArrayEmptyAsync() {
@@ -3253,7 +3130,6 @@ public class ArraysImpl implements Arrays {
     /**
      * Get an array of array of strings [['1', '2', '3'], null, ['7', '8', '9']].
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the List&lt;List&lt;String&gt;&gt; object if successful.
@@ -3276,7 +3152,6 @@ public class ArraysImpl implements Arrays {
     /**
      * Get an array of array of strings [['1', '2', '3'], null, ['7', '8', '9']].
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, List&lt;List&lt;String&gt;&gt;&gt;&gt;} object if successful.
      */
     public Single<RestResponse<Void, List<List<String>>>> getArrayItemNullWithRestResponseAsync() {
@@ -3286,7 +3161,6 @@ public class ArraysImpl implements Arrays {
     /**
      * Get an array of array of strings [['1', '2', '3'], null, ['7', '8', '9']].
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Maybe&lt;List&lt;List&lt;String&gt;&gt;&gt;} object if successful.
      */
     public Maybe<List<List<String>>> getArrayItemNullAsync() {
@@ -3305,7 +3179,6 @@ public class ArraysImpl implements Arrays {
     /**
      * Get an array of array of strings [['1', '2', '3'], [], ['7', '8', '9']].
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the List&lt;List&lt;String&gt;&gt; object if successful.
@@ -3328,7 +3201,6 @@ public class ArraysImpl implements Arrays {
     /**
      * Get an array of array of strings [['1', '2', '3'], [], ['7', '8', '9']].
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, List&lt;List&lt;String&gt;&gt;&gt;&gt;} object if successful.
      */
     public Single<RestResponse<Void, List<List<String>>>> getArrayItemEmptyWithRestResponseAsync() {
@@ -3338,7 +3210,6 @@ public class ArraysImpl implements Arrays {
     /**
      * Get an array of array of strings [['1', '2', '3'], [], ['7', '8', '9']].
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Maybe&lt;List&lt;List&lt;String&gt;&gt;&gt;} object if successful.
      */
     public Maybe<List<List<String>>> getArrayItemEmptyAsync() {
@@ -3357,7 +3228,6 @@ public class ArraysImpl implements Arrays {
     /**
      * Get an array of array of strings [['1', '2', '3'], ['4', '5', '6'], ['7', '8', '9']].
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the List&lt;List&lt;String&gt;&gt; object if successful.
@@ -3380,7 +3250,6 @@ public class ArraysImpl implements Arrays {
     /**
      * Get an array of array of strings [['1', '2', '3'], ['4', '5', '6'], ['7', '8', '9']].
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, List&lt;List&lt;String&gt;&gt;&gt;&gt;} object if successful.
      */
     public Single<RestResponse<Void, List<List<String>>>> getArrayValidWithRestResponseAsync() {
@@ -3390,7 +3259,6 @@ public class ArraysImpl implements Arrays {
     /**
      * Get an array of array of strings [['1', '2', '3'], ['4', '5', '6'], ['7', '8', '9']].
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Maybe&lt;List&lt;List&lt;String&gt;&gt;&gt;} object if successful.
      */
     public Maybe<List<List<String>>> getArrayValidAsync() {
@@ -3460,7 +3328,6 @@ public class ArraysImpl implements Arrays {
     /**
      * Get an array of Dictionaries with value null.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the List&lt;Map&lt;String, String&gt;&gt; object if successful.
@@ -3483,7 +3350,6 @@ public class ArraysImpl implements Arrays {
     /**
      * Get an array of Dictionaries with value null.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, List&lt;Map&lt;String, String&gt;&gt;&gt;&gt;} object if successful.
      */
     public Single<RestResponse<Void, List<Map<String, String>>>> getDictionaryNullWithRestResponseAsync() {
@@ -3493,7 +3359,6 @@ public class ArraysImpl implements Arrays {
     /**
      * Get an array of Dictionaries with value null.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Maybe&lt;List&lt;Map&lt;String, String&gt;&gt;&gt;} object if successful.
      */
     public Maybe<List<Map<String, String>>> getDictionaryNullAsync() {
@@ -3512,7 +3377,6 @@ public class ArraysImpl implements Arrays {
     /**
      * Get an array of Dictionaries of type &lt;string, string&gt; with value [].
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the List&lt;Map&lt;String, String&gt;&gt; object if successful.
@@ -3535,7 +3399,6 @@ public class ArraysImpl implements Arrays {
     /**
      * Get an array of Dictionaries of type &lt;string, string&gt; with value [].
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, List&lt;Map&lt;String, String&gt;&gt;&gt;&gt;} object if successful.
      */
     public Single<RestResponse<Void, List<Map<String, String>>>> getDictionaryEmptyWithRestResponseAsync() {
@@ -3545,7 +3408,6 @@ public class ArraysImpl implements Arrays {
     /**
      * Get an array of Dictionaries of type &lt;string, string&gt; with value [].
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Maybe&lt;List&lt;Map&lt;String, String&gt;&gt;&gt;} object if successful.
      */
     public Maybe<List<Map<String, String>>> getDictionaryEmptyAsync() {
@@ -3564,7 +3426,6 @@ public class ArraysImpl implements Arrays {
     /**
      * Get an array of Dictionaries of type &lt;string, string&gt; with value [{'1': 'one', '2': 'two', '3': 'three'}, null, {'7': 'seven', '8': 'eight', '9': 'nine'}].
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the List&lt;Map&lt;String, String&gt;&gt; object if successful.
@@ -3587,7 +3448,6 @@ public class ArraysImpl implements Arrays {
     /**
      * Get an array of Dictionaries of type &lt;string, string&gt; with value [{'1': 'one', '2': 'two', '3': 'three'}, null, {'7': 'seven', '8': 'eight', '9': 'nine'}].
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, List&lt;Map&lt;String, String&gt;&gt;&gt;&gt;} object if successful.
      */
     public Single<RestResponse<Void, List<Map<String, String>>>> getDictionaryItemNullWithRestResponseAsync() {
@@ -3597,7 +3457,6 @@ public class ArraysImpl implements Arrays {
     /**
      * Get an array of Dictionaries of type &lt;string, string&gt; with value [{'1': 'one', '2': 'two', '3': 'three'}, null, {'7': 'seven', '8': 'eight', '9': 'nine'}].
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Maybe&lt;List&lt;Map&lt;String, String&gt;&gt;&gt;} object if successful.
      */
     public Maybe<List<Map<String, String>>> getDictionaryItemNullAsync() {
@@ -3616,7 +3475,6 @@ public class ArraysImpl implements Arrays {
     /**
      * Get an array of Dictionaries of type &lt;string, string&gt; with value [{'1': 'one', '2': 'two', '3': 'three'}, {}, {'7': 'seven', '8': 'eight', '9': 'nine'}].
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the List&lt;Map&lt;String, String&gt;&gt; object if successful.
@@ -3639,7 +3497,6 @@ public class ArraysImpl implements Arrays {
     /**
      * Get an array of Dictionaries of type &lt;string, string&gt; with value [{'1': 'one', '2': 'two', '3': 'three'}, {}, {'7': 'seven', '8': 'eight', '9': 'nine'}].
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, List&lt;Map&lt;String, String&gt;&gt;&gt;&gt;} object if successful.
      */
     public Single<RestResponse<Void, List<Map<String, String>>>> getDictionaryItemEmptyWithRestResponseAsync() {
@@ -3649,7 +3506,6 @@ public class ArraysImpl implements Arrays {
     /**
      * Get an array of Dictionaries of type &lt;string, string&gt; with value [{'1': 'one', '2': 'two', '3': 'three'}, {}, {'7': 'seven', '8': 'eight', '9': 'nine'}].
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Maybe&lt;List&lt;Map&lt;String, String&gt;&gt;&gt;} object if successful.
      */
     public Maybe<List<Map<String, String>>> getDictionaryItemEmptyAsync() {
@@ -3668,7 +3524,6 @@ public class ArraysImpl implements Arrays {
     /**
      * Get an array of Dictionaries of type &lt;string, string&gt; with value [{'1': 'one', '2': 'two', '3': 'three'}, {'4': 'four', '5': 'five', '6': 'six'}, {'7': 'seven', '8': 'eight', '9': 'nine'}].
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the List&lt;Map&lt;String, String&gt;&gt; object if successful.
@@ -3691,7 +3546,6 @@ public class ArraysImpl implements Arrays {
     /**
      * Get an array of Dictionaries of type &lt;string, string&gt; with value [{'1': 'one', '2': 'two', '3': 'three'}, {'4': 'four', '5': 'five', '6': 'six'}, {'7': 'seven', '8': 'eight', '9': 'nine'}].
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, List&lt;Map&lt;String, String&gt;&gt;&gt;&gt;} object if successful.
      */
     public Single<RestResponse<Void, List<Map<String, String>>>> getDictionaryValidWithRestResponseAsync() {
@@ -3701,7 +3555,6 @@ public class ArraysImpl implements Arrays {
     /**
      * Get an array of Dictionaries of type &lt;string, string&gt; with value [{'1': 'one', '2': 'two', '3': 'three'}, {'4': 'four', '5': 'five', '6': 'six'}, {'7': 'seven', '8': 'eight', '9': 'nine'}].
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Maybe&lt;List&lt;Map&lt;String, String&gt;&gt;&gt;} object if successful.
      */
     public Maybe<List<Map<String, String>>> getDictionaryValidAsync() {

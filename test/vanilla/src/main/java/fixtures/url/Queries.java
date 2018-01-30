@@ -30,7 +30,6 @@ public interface Queries {
     /**
      * Get true Boolean value on path.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
@@ -48,7 +47,6 @@ public interface Queries {
     /**
      * Get true Boolean value on path.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
      */
     Single<RestResponse<Void, Void>> getBooleanTrueWithRestResponseAsync();
@@ -56,7 +54,6 @@ public interface Queries {
     /**
      * Get true Boolean value on path.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Completable} object if successful.
      */
     Completable getBooleanTrueAsync();
@@ -64,7 +61,6 @@ public interface Queries {
     /**
      * Get false Boolean value on path.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
@@ -82,7 +78,6 @@ public interface Queries {
     /**
      * Get false Boolean value on path.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
      */
     Single<RestResponse<Void, Void>> getBooleanFalseWithRestResponseAsync();
@@ -90,7 +85,6 @@ public interface Queries {
     /**
      * Get false Boolean value on path.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Completable} object if successful.
      */
     Completable getBooleanFalseAsync();
@@ -98,7 +92,6 @@ public interface Queries {
     /**
      * Get null Boolean value on query (query string should be absent).
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
@@ -116,7 +109,6 @@ public interface Queries {
     /**
      * Get null Boolean value on query (query string should be absent).
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
      */
     Single<RestResponse<Void, Void>> getBooleanNullWithRestResponseAsync();
@@ -124,7 +116,6 @@ public interface Queries {
     /**
      * Get null Boolean value on query (query string should be absent).
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Completable} object if successful.
      */
     Completable getBooleanNullAsync();
@@ -170,7 +161,6 @@ public interface Queries {
     /**
      * Get '1000000' integer value.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
@@ -188,7 +178,6 @@ public interface Queries {
     /**
      * Get '1000000' integer value.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
      */
     Single<RestResponse<Void, Void>> getIntOneMillionWithRestResponseAsync();
@@ -196,7 +185,6 @@ public interface Queries {
     /**
      * Get '1000000' integer value.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Completable} object if successful.
      */
     Completable getIntOneMillionAsync();
@@ -204,7 +192,6 @@ public interface Queries {
     /**
      * Get '-1000000' integer value.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
@@ -222,7 +209,6 @@ public interface Queries {
     /**
      * Get '-1000000' integer value.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
      */
     Single<RestResponse<Void, Void>> getIntNegativeOneMillionWithRestResponseAsync();
@@ -230,7 +216,6 @@ public interface Queries {
     /**
      * Get '-1000000' integer value.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Completable} object if successful.
      */
     Completable getIntNegativeOneMillionAsync();
@@ -238,7 +223,6 @@ public interface Queries {
     /**
      * Get null integer value (no query parameter).
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
@@ -256,7 +240,6 @@ public interface Queries {
     /**
      * Get null integer value (no query parameter).
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
      */
     Single<RestResponse<Void, Void>> getIntNullWithRestResponseAsync();
@@ -264,7 +247,6 @@ public interface Queries {
     /**
      * Get null integer value (no query parameter).
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Completable} object if successful.
      */
     Completable getIntNullAsync();
@@ -310,7 +292,6 @@ public interface Queries {
     /**
      * Get '10000000000' 64 bit integer value.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
@@ -328,7 +309,6 @@ public interface Queries {
     /**
      * Get '10000000000' 64 bit integer value.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
      */
     Single<RestResponse<Void, Void>> getTenBillionWithRestResponseAsync();
@@ -336,7 +316,6 @@ public interface Queries {
     /**
      * Get '10000000000' 64 bit integer value.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Completable} object if successful.
      */
     Completable getTenBillionAsync();
@@ -344,7 +323,6 @@ public interface Queries {
     /**
      * Get '-10000000000' 64 bit integer value.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
@@ -362,7 +340,6 @@ public interface Queries {
     /**
      * Get '-10000000000' 64 bit integer value.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
      */
     Single<RestResponse<Void, Void>> getNegativeTenBillionWithRestResponseAsync();
@@ -370,7 +347,6 @@ public interface Queries {
     /**
      * Get '-10000000000' 64 bit integer value.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Completable} object if successful.
      */
     Completable getNegativeTenBillionAsync();
@@ -378,7 +354,6 @@ public interface Queries {
     /**
      * Get 'null 64 bit integer value (no query param in uri).
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
@@ -396,7 +371,6 @@ public interface Queries {
     /**
      * Get 'null 64 bit integer value (no query param in uri).
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
      */
     Single<RestResponse<Void, Void>> getLongNullWithRestResponseAsync();
@@ -404,7 +378,6 @@ public interface Queries {
     /**
      * Get 'null 64 bit integer value (no query param in uri).
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Completable} object if successful.
      */
     Completable getLongNullAsync();
@@ -450,7 +423,6 @@ public interface Queries {
     /**
      * Get '1.034E+20' numeric value.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
@@ -468,7 +440,6 @@ public interface Queries {
     /**
      * Get '1.034E+20' numeric value.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
      */
     Single<RestResponse<Void, Void>> floatScientificPositiveWithRestResponseAsync();
@@ -476,7 +447,6 @@ public interface Queries {
     /**
      * Get '1.034E+20' numeric value.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Completable} object if successful.
      */
     Completable floatScientificPositiveAsync();
@@ -484,7 +454,6 @@ public interface Queries {
     /**
      * Get '-1.034E-20' numeric value.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
@@ -502,7 +471,6 @@ public interface Queries {
     /**
      * Get '-1.034E-20' numeric value.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
      */
     Single<RestResponse<Void, Void>> floatScientificNegativeWithRestResponseAsync();
@@ -510,7 +478,6 @@ public interface Queries {
     /**
      * Get '-1.034E-20' numeric value.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Completable} object if successful.
      */
     Completable floatScientificNegativeAsync();
@@ -518,7 +485,6 @@ public interface Queries {
     /**
      * Get null numeric value (no query parameter).
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
@@ -536,7 +502,6 @@ public interface Queries {
     /**
      * Get null numeric value (no query parameter).
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
      */
     Single<RestResponse<Void, Void>> floatNullWithRestResponseAsync();
@@ -544,7 +509,6 @@ public interface Queries {
     /**
      * Get null numeric value (no query parameter).
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Completable} object if successful.
      */
     Completable floatNullAsync();
@@ -590,7 +554,6 @@ public interface Queries {
     /**
      * Get '9999999.999' numeric value.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
@@ -608,7 +571,6 @@ public interface Queries {
     /**
      * Get '9999999.999' numeric value.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
      */
     Single<RestResponse<Void, Void>> doubleDecimalPositiveWithRestResponseAsync();
@@ -616,7 +578,6 @@ public interface Queries {
     /**
      * Get '9999999.999' numeric value.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Completable} object if successful.
      */
     Completable doubleDecimalPositiveAsync();
@@ -624,7 +585,6 @@ public interface Queries {
     /**
      * Get '-9999999.999' numeric value.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
@@ -642,7 +602,6 @@ public interface Queries {
     /**
      * Get '-9999999.999' numeric value.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
      */
     Single<RestResponse<Void, Void>> doubleDecimalNegativeWithRestResponseAsync();
@@ -650,7 +609,6 @@ public interface Queries {
     /**
      * Get '-9999999.999' numeric value.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Completable} object if successful.
      */
     Completable doubleDecimalNegativeAsync();
@@ -658,7 +616,6 @@ public interface Queries {
     /**
      * Get null numeric value (no query parameter).
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
@@ -676,7 +633,6 @@ public interface Queries {
     /**
      * Get null numeric value (no query parameter).
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
      */
     Single<RestResponse<Void, Void>> doubleNullWithRestResponseAsync();
@@ -684,7 +640,6 @@ public interface Queries {
     /**
      * Get null numeric value (no query parameter).
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Completable} object if successful.
      */
     Completable doubleNullAsync();
@@ -730,7 +685,6 @@ public interface Queries {
     /**
      * Get '啊齄丂狛狜隣郎隣兀﨩' multi-byte string value.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
@@ -748,7 +702,6 @@ public interface Queries {
     /**
      * Get '啊齄丂狛狜隣郎隣兀﨩' multi-byte string value.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
      */
     Single<RestResponse<Void, Void>> stringUnicodeWithRestResponseAsync();
@@ -756,7 +709,6 @@ public interface Queries {
     /**
      * Get '啊齄丂狛狜隣郎隣兀﨩' multi-byte string value.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Completable} object if successful.
      */
     Completable stringUnicodeAsync();
@@ -764,7 +716,6 @@ public interface Queries {
     /**
      * Get 'begin!*'();:@ &amp;=+$,/?#[]end.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
@@ -782,7 +733,6 @@ public interface Queries {
     /**
      * Get 'begin!*'();:@ &amp;=+$,/?#[]end.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
      */
     Single<RestResponse<Void, Void>> stringUrlEncodedWithRestResponseAsync();
@@ -790,7 +740,6 @@ public interface Queries {
     /**
      * Get 'begin!*'();:@ &amp;=+$,/?#[]end.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Completable} object if successful.
      */
     Completable stringUrlEncodedAsync();
@@ -798,7 +747,6 @@ public interface Queries {
     /**
      * Get ''.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
@@ -816,7 +764,6 @@ public interface Queries {
     /**
      * Get ''.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
      */
     Single<RestResponse<Void, Void>> stringEmptyWithRestResponseAsync();
@@ -824,7 +771,6 @@ public interface Queries {
     /**
      * Get ''.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Completable} object if successful.
      */
     Completable stringEmptyAsync();
@@ -832,7 +778,6 @@ public interface Queries {
     /**
      * Get null (no query parameter in url).
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
@@ -850,7 +795,6 @@ public interface Queries {
     /**
      * Get null (no query parameter in url).
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
      */
     Single<RestResponse<Void, Void>> stringNullWithRestResponseAsync();
@@ -858,7 +802,6 @@ public interface Queries {
     /**
      * Get null (no query parameter in url).
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Completable} object if successful.
      */
     Completable stringNullAsync();
@@ -904,7 +847,6 @@ public interface Queries {
     /**
      * Get using uri with query parameter 'green color'.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
@@ -922,7 +864,6 @@ public interface Queries {
     /**
      * Get using uri with query parameter 'green color'.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
      */
     Single<RestResponse<Void, Void>> enumValidWithRestResponseAsync();
@@ -930,7 +871,6 @@ public interface Queries {
     /**
      * Get using uri with query parameter 'green color'.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Completable} object if successful.
      */
     Completable enumValidAsync();
@@ -976,7 +916,6 @@ public interface Queries {
     /**
      * Get null (no query parameter in url).
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
@@ -994,7 +933,6 @@ public interface Queries {
     /**
      * Get null (no query parameter in url).
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
      */
     Single<RestResponse<Void, Void>> enumNullWithRestResponseAsync();
@@ -1002,7 +940,6 @@ public interface Queries {
     /**
      * Get null (no query parameter in url).
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Completable} object if successful.
      */
     Completable enumNullAsync();
@@ -1048,7 +985,6 @@ public interface Queries {
     /**
      * Get '啊齄丂狛狜隣郎隣兀﨩' multibyte value as utf-8 encoded byte array.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
@@ -1066,7 +1002,6 @@ public interface Queries {
     /**
      * Get '啊齄丂狛狜隣郎隣兀﨩' multibyte value as utf-8 encoded byte array.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
      */
     Single<RestResponse<Void, Void>> byteMultiByteWithRestResponseAsync();
@@ -1074,7 +1009,6 @@ public interface Queries {
     /**
      * Get '啊齄丂狛狜隣郎隣兀﨩' multibyte value as utf-8 encoded byte array.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Completable} object if successful.
      */
     Completable byteMultiByteAsync();
@@ -1120,7 +1054,6 @@ public interface Queries {
     /**
      * Get '' as byte array.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
@@ -1138,7 +1071,6 @@ public interface Queries {
     /**
      * Get '' as byte array.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
      */
     Single<RestResponse<Void, Void>> byteEmptyWithRestResponseAsync();
@@ -1146,7 +1078,6 @@ public interface Queries {
     /**
      * Get '' as byte array.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Completable} object if successful.
      */
     Completable byteEmptyAsync();
@@ -1154,7 +1085,6 @@ public interface Queries {
     /**
      * Get null as byte array (no query parameters in uri).
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
@@ -1172,7 +1102,6 @@ public interface Queries {
     /**
      * Get null as byte array (no query parameters in uri).
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
      */
     Single<RestResponse<Void, Void>> byteNullWithRestResponseAsync();
@@ -1180,7 +1109,6 @@ public interface Queries {
     /**
      * Get null as byte array (no query parameters in uri).
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Completable} object if successful.
      */
     Completable byteNullAsync();
@@ -1226,7 +1154,6 @@ public interface Queries {
     /**
      * Get '2012-01-01' as date.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
@@ -1244,7 +1171,6 @@ public interface Queries {
     /**
      * Get '2012-01-01' as date.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
      */
     Single<RestResponse<Void, Void>> dateValidWithRestResponseAsync();
@@ -1252,7 +1178,6 @@ public interface Queries {
     /**
      * Get '2012-01-01' as date.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Completable} object if successful.
      */
     Completable dateValidAsync();
@@ -1260,7 +1185,6 @@ public interface Queries {
     /**
      * Get null as date - this should result in no query parameters in uri.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
@@ -1278,7 +1202,6 @@ public interface Queries {
     /**
      * Get null as date - this should result in no query parameters in uri.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
      */
     Single<RestResponse<Void, Void>> dateNullWithRestResponseAsync();
@@ -1286,7 +1209,6 @@ public interface Queries {
     /**
      * Get null as date - this should result in no query parameters in uri.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Completable} object if successful.
      */
     Completable dateNullAsync();
@@ -1332,7 +1254,6 @@ public interface Queries {
     /**
      * Get '2012-01-01T01:01:01Z' as date-time.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
@@ -1350,7 +1271,6 @@ public interface Queries {
     /**
      * Get '2012-01-01T01:01:01Z' as date-time.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
      */
     Single<RestResponse<Void, Void>> dateTimeValidWithRestResponseAsync();
@@ -1358,7 +1278,6 @@ public interface Queries {
     /**
      * Get '2012-01-01T01:01:01Z' as date-time.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Completable} object if successful.
      */
     Completable dateTimeValidAsync();
@@ -1366,7 +1285,6 @@ public interface Queries {
     /**
      * Get null as date-time, should result in no query parameters in uri.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
@@ -1384,7 +1302,6 @@ public interface Queries {
     /**
      * Get null as date-time, should result in no query parameters in uri.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
      */
     Single<RestResponse<Void, Void>> dateTimeNullWithRestResponseAsync();
@@ -1392,7 +1309,6 @@ public interface Queries {
     /**
      * Get null as date-time, should result in no query parameters in uri.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Completable} object if successful.
      */
     Completable dateTimeNullAsync();
@@ -1438,7 +1354,6 @@ public interface Queries {
     /**
      * Get an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the csv-array format.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
@@ -1456,7 +1371,6 @@ public interface Queries {
     /**
      * Get an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the csv-array format.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
      */
     Single<RestResponse<Void, Void>> arrayStringCsvValidWithRestResponseAsync();
@@ -1464,7 +1378,6 @@ public interface Queries {
     /**
      * Get an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the csv-array format.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Completable} object if successful.
      */
     Completable arrayStringCsvValidAsync();
@@ -1510,7 +1423,6 @@ public interface Queries {
     /**
      * Get a null array of string using the csv-array format.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
@@ -1528,7 +1440,6 @@ public interface Queries {
     /**
      * Get a null array of string using the csv-array format.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
      */
     Single<RestResponse<Void, Void>> arrayStringCsvNullWithRestResponseAsync();
@@ -1536,7 +1447,6 @@ public interface Queries {
     /**
      * Get a null array of string using the csv-array format.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Completable} object if successful.
      */
     Completable arrayStringCsvNullAsync();
@@ -1582,7 +1492,6 @@ public interface Queries {
     /**
      * Get an empty array [] of string using the csv-array format.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
@@ -1600,7 +1509,6 @@ public interface Queries {
     /**
      * Get an empty array [] of string using the csv-array format.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
      */
     Single<RestResponse<Void, Void>> arrayStringCsvEmptyWithRestResponseAsync();
@@ -1608,7 +1516,6 @@ public interface Queries {
     /**
      * Get an empty array [] of string using the csv-array format.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Completable} object if successful.
      */
     Completable arrayStringCsvEmptyAsync();
@@ -1654,7 +1561,6 @@ public interface Queries {
     /**
      * Get an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the ssv-array format.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
@@ -1672,7 +1578,6 @@ public interface Queries {
     /**
      * Get an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the ssv-array format.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
      */
     Single<RestResponse<Void, Void>> arrayStringSsvValidWithRestResponseAsync();
@@ -1680,7 +1585,6 @@ public interface Queries {
     /**
      * Get an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the ssv-array format.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Completable} object if successful.
      */
     Completable arrayStringSsvValidAsync();
@@ -1726,7 +1630,6 @@ public interface Queries {
     /**
      * Get an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the tsv-array format.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
@@ -1744,7 +1647,6 @@ public interface Queries {
     /**
      * Get an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the tsv-array format.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
      */
     Single<RestResponse<Void, Void>> arrayStringTsvValidWithRestResponseAsync();
@@ -1752,7 +1654,6 @@ public interface Queries {
     /**
      * Get an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the tsv-array format.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Completable} object if successful.
      */
     Completable arrayStringTsvValidAsync();
@@ -1798,7 +1699,6 @@ public interface Queries {
     /**
      * Get an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the pipes-array format.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
@@ -1816,7 +1716,6 @@ public interface Queries {
     /**
      * Get an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the pipes-array format.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
      */
     Single<RestResponse<Void, Void>> arrayStringPipesValidWithRestResponseAsync();
@@ -1824,7 +1723,6 @@ public interface Queries {
     /**
      * Get an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the pipes-array format.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Completable} object if successful.
      */
     Completable arrayStringPipesValidAsync();

@@ -75,7 +75,6 @@ public class PolymorphicrecursivesImpl implements Polymorphicrecursives {
     /**
      * Get complex types that are polymorphic and have recursive references.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the Fish object if successful.
@@ -98,7 +97,6 @@ public class PolymorphicrecursivesImpl implements Polymorphicrecursives {
     /**
      * Get complex types that are polymorphic and have recursive references.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, Fish&gt;&gt;} object if successful.
      */
     public Single<RestResponse<Void, Fish>> getValidWithRestResponseAsync() {
@@ -108,7 +106,6 @@ public class PolymorphicrecursivesImpl implements Polymorphicrecursives {
     /**
      * Get complex types that are polymorphic and have recursive references.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Maybe&lt;Fish&gt;} object if successful.
      */
     public Maybe<Fish> getValidAsync() {

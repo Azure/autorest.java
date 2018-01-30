@@ -81,7 +81,6 @@ public class ApiVersionDefaultsInner {
     /**
      * GET method with api-version modeled in global settings.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
@@ -103,7 +102,6 @@ public class ApiVersionDefaultsInner {
     /**
      * GET method with api-version modeled in global settings.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
      */
     public Single<RestResponse<Void, Void>> getMethodGlobalValidWithRestResponseAsync() {
@@ -116,7 +114,6 @@ public class ApiVersionDefaultsInner {
     /**
      * GET method with api-version modeled in global settings.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Completable} object if successful.
      */
     public Completable getMethodGlobalValidAsync() {
@@ -127,7 +124,6 @@ public class ApiVersionDefaultsInner {
     /**
      * GET method with api-version modeled in global settings.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
@@ -149,7 +145,6 @@ public class ApiVersionDefaultsInner {
     /**
      * GET method with api-version modeled in global settings.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
      */
     public Single<RestResponse<Void, Void>> getMethodGlobalNotProvidedValidWithRestResponseAsync() {
@@ -162,7 +157,6 @@ public class ApiVersionDefaultsInner {
     /**
      * GET method with api-version modeled in global settings.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Completable} object if successful.
      */
     public Completable getMethodGlobalNotProvidedValidAsync() {
@@ -173,7 +167,6 @@ public class ApiVersionDefaultsInner {
     /**
      * GET method with api-version modeled in global settings.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
@@ -195,7 +188,6 @@ public class ApiVersionDefaultsInner {
     /**
      * GET method with api-version modeled in global settings.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
      */
     public Single<RestResponse<Void, Void>> getPathGlobalValidWithRestResponseAsync() {
@@ -208,7 +200,6 @@ public class ApiVersionDefaultsInner {
     /**
      * GET method with api-version modeled in global settings.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Completable} object if successful.
      */
     public Completable getPathGlobalValidAsync() {
@@ -219,7 +210,6 @@ public class ApiVersionDefaultsInner {
     /**
      * GET method with api-version modeled in global settings.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
@@ -241,7 +231,6 @@ public class ApiVersionDefaultsInner {
     /**
      * GET method with api-version modeled in global settings.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
      */
     public Single<RestResponse<Void, Void>> getSwaggerGlobalValidWithRestResponseAsync() {
@@ -254,7 +243,6 @@ public class ApiVersionDefaultsInner {
     /**
      * GET method with api-version modeled in global settings.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Completable} object if successful.
      */
     public Completable getSwaggerGlobalValidAsync() {

@@ -28,7 +28,6 @@ public interface Readonlypropertys {
     /**
      * Get complex types that have readonly properties.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the ReadonlyObj object if successful.
@@ -47,7 +46,6 @@ public interface Readonlypropertys {
     /**
      * Get complex types that have readonly properties.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, ReadonlyObj&gt;&gt;} object if successful.
      */
     Single<RestResponse<Void, ReadonlyObj>> getValidWithRestResponseAsync();
@@ -55,7 +53,6 @@ public interface Readonlypropertys {
     /**
      * Get complex types that have readonly properties.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Maybe&lt;ReadonlyObj&gt;} object if successful.
      */
     Maybe<ReadonlyObj> getValidAsync();

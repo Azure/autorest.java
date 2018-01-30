@@ -27,7 +27,6 @@ public interface HttpServerFailures {
     /**
      * Return 501 status code - should be represented in the client as an error.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the Error object if successful.
@@ -46,7 +45,6 @@ public interface HttpServerFailures {
     /**
      * Return 501 status code - should be represented in the client as an error.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, Error&gt;&gt;} object if successful.
      */
     Single<RestResponse<Void, Error>> head501WithRestResponseAsync();
@@ -54,7 +52,6 @@ public interface HttpServerFailures {
     /**
      * Return 501 status code - should be represented in the client as an error.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Maybe&lt;Error&gt;} object if successful.
      */
     Maybe<Error> head501Async();
@@ -62,7 +59,6 @@ public interface HttpServerFailures {
     /**
      * Return 501 status code - should be represented in the client as an error.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the Error object if successful.
@@ -81,7 +77,6 @@ public interface HttpServerFailures {
     /**
      * Return 501 status code - should be represented in the client as an error.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, Error&gt;&gt;} object if successful.
      */
     Single<RestResponse<Void, Error>> get501WithRestResponseAsync();
@@ -89,7 +84,6 @@ public interface HttpServerFailures {
     /**
      * Return 501 status code - should be represented in the client as an error.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Maybe&lt;Error&gt;} object if successful.
      */
     Maybe<Error> get501Async();
@@ -97,7 +91,6 @@ public interface HttpServerFailures {
     /**
      * Return 505 status code - should be represented in the client as an error.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the Error object if successful.
@@ -116,7 +109,6 @@ public interface HttpServerFailures {
     /**
      * Return 505 status code - should be represented in the client as an error.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, Error&gt;&gt;} object if successful.
      */
     Single<RestResponse<Void, Error>> post505WithRestResponseAsync();
@@ -124,7 +116,6 @@ public interface HttpServerFailures {
     /**
      * Return 505 status code - should be represented in the client as an error.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Maybe&lt;Error&gt;} object if successful.
      */
     Maybe<Error> post505Async();
@@ -171,7 +162,6 @@ public interface HttpServerFailures {
     /**
      * Return 505 status code - should be represented in the client as an error.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the Error object if successful.
@@ -190,7 +180,6 @@ public interface HttpServerFailures {
     /**
      * Return 505 status code - should be represented in the client as an error.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, Error&gt;&gt;} object if successful.
      */
     Single<RestResponse<Void, Error>> delete505WithRestResponseAsync();
@@ -198,7 +187,6 @@ public interface HttpServerFailures {
     /**
      * Return 505 status code - should be represented in the client as an error.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Maybe&lt;Error&gt;} object if successful.
      */
     Maybe<Error> delete505Async();

@@ -158,7 +158,6 @@ public class HttpRedirectsImpl implements HttpRedirects {
     /**
      * Return 300 status code and redirect to /http/success/200.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
@@ -180,7 +179,6 @@ public class HttpRedirectsImpl implements HttpRedirects {
     /**
      * Return 300 status code and redirect to /http/success/200.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;HttpRedirectsHead300Headers, Void&gt;&gt;} object if successful.
      */
     public Single<RestResponse<HttpRedirectsHead300Headers, Void>> head300WithRestResponseAsync() {
@@ -190,7 +188,6 @@ public class HttpRedirectsImpl implements HttpRedirects {
     /**
      * Return 300 status code and redirect to /http/success/200.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Completable} object if successful.
      */
     public Completable head300Async() {
@@ -201,7 +198,6 @@ public class HttpRedirectsImpl implements HttpRedirects {
     /**
      * Return 300 status code and redirect to /http/success/200.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the List&lt;String&gt; object if successful.
@@ -224,7 +220,6 @@ public class HttpRedirectsImpl implements HttpRedirects {
     /**
      * Return 300 status code and redirect to /http/success/200.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;HttpRedirectsGet300Headers, List&lt;String&gt;&gt;&gt;} object if successful.
      */
     public Single<RestResponse<HttpRedirectsGet300Headers, List<String>>> get300WithRestResponseAsync() {
@@ -234,7 +229,6 @@ public class HttpRedirectsImpl implements HttpRedirects {
     /**
      * Return 300 status code and redirect to /http/success/200.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Maybe&lt;List&lt;String&gt;&gt;} object if successful.
      */
     public Maybe<List<String>> get300Async() {
@@ -253,7 +247,6 @@ public class HttpRedirectsImpl implements HttpRedirects {
     /**
      * Return 301 status code and redirect to /http/success/200.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
@@ -275,7 +268,6 @@ public class HttpRedirectsImpl implements HttpRedirects {
     /**
      * Return 301 status code and redirect to /http/success/200.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;HttpRedirectsHead301Headers, Void&gt;&gt;} object if successful.
      */
     public Single<RestResponse<HttpRedirectsHead301Headers, Void>> head301WithRestResponseAsync() {
@@ -285,7 +277,6 @@ public class HttpRedirectsImpl implements HttpRedirects {
     /**
      * Return 301 status code and redirect to /http/success/200.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Completable} object if successful.
      */
     public Completable head301Async() {
@@ -296,7 +287,6 @@ public class HttpRedirectsImpl implements HttpRedirects {
     /**
      * Return 301 status code and redirect to /http/success/200.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
@@ -318,7 +308,6 @@ public class HttpRedirectsImpl implements HttpRedirects {
     /**
      * Return 301 status code and redirect to /http/success/200.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;HttpRedirectsGet301Headers, Void&gt;&gt;} object if successful.
      */
     public Single<RestResponse<HttpRedirectsGet301Headers, Void>> get301WithRestResponseAsync() {
@@ -328,7 +317,6 @@ public class HttpRedirectsImpl implements HttpRedirects {
     /**
      * Return 301 status code and redirect to /http/success/200.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Completable} object if successful.
      */
     public Completable get301Async() {
@@ -339,7 +327,6 @@ public class HttpRedirectsImpl implements HttpRedirects {
     /**
      * Put true Boolean value in request returns 301.  This request should not be automatically redirected, but should return the received 301 to the caller for evaluation.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
@@ -361,7 +348,6 @@ public class HttpRedirectsImpl implements HttpRedirects {
     /**
      * Put true Boolean value in request returns 301.  This request should not be automatically redirected, but should return the received 301 to the caller for evaluation.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;HttpRedirectsPut301Headers, Void&gt;&gt;} object if successful.
      */
     public Single<RestResponse<HttpRedirectsPut301Headers, Void>> put301WithRestResponseAsync() {
@@ -372,7 +358,6 @@ public class HttpRedirectsImpl implements HttpRedirects {
     /**
      * Put true Boolean value in request returns 301.  This request should not be automatically redirected, but should return the received 301 to the caller for evaluation.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Completable} object if successful.
      */
     public Completable put301Async() {
@@ -430,7 +415,6 @@ public class HttpRedirectsImpl implements HttpRedirects {
     /**
      * Return 302 status code and redirect to /http/success/200.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
@@ -452,7 +436,6 @@ public class HttpRedirectsImpl implements HttpRedirects {
     /**
      * Return 302 status code and redirect to /http/success/200.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;HttpRedirectsHead302Headers, Void&gt;&gt;} object if successful.
      */
     public Single<RestResponse<HttpRedirectsHead302Headers, Void>> head302WithRestResponseAsync() {
@@ -462,7 +445,6 @@ public class HttpRedirectsImpl implements HttpRedirects {
     /**
      * Return 302 status code and redirect to /http/success/200.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Completable} object if successful.
      */
     public Completable head302Async() {
@@ -473,7 +455,6 @@ public class HttpRedirectsImpl implements HttpRedirects {
     /**
      * Return 302 status code and redirect to /http/success/200.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
@@ -495,7 +476,6 @@ public class HttpRedirectsImpl implements HttpRedirects {
     /**
      * Return 302 status code and redirect to /http/success/200.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;HttpRedirectsGet302Headers, Void&gt;&gt;} object if successful.
      */
     public Single<RestResponse<HttpRedirectsGet302Headers, Void>> get302WithRestResponseAsync() {
@@ -505,7 +485,6 @@ public class HttpRedirectsImpl implements HttpRedirects {
     /**
      * Return 302 status code and redirect to /http/success/200.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Completable} object if successful.
      */
     public Completable get302Async() {
@@ -516,7 +495,6 @@ public class HttpRedirectsImpl implements HttpRedirects {
     /**
      * Patch true Boolean value in request returns 302.  This request should not be automatically redirected, but should return the received 302 to the caller for evaluation.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
@@ -538,7 +516,6 @@ public class HttpRedirectsImpl implements HttpRedirects {
     /**
      * Patch true Boolean value in request returns 302.  This request should not be automatically redirected, but should return the received 302 to the caller for evaluation.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;HttpRedirectsPatch302Headers, Void&gt;&gt;} object if successful.
      */
     public Single<RestResponse<HttpRedirectsPatch302Headers, Void>> patch302WithRestResponseAsync() {
@@ -549,7 +526,6 @@ public class HttpRedirectsImpl implements HttpRedirects {
     /**
      * Patch true Boolean value in request returns 302.  This request should not be automatically redirected, but should return the received 302 to the caller for evaluation.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Completable} object if successful.
      */
     public Completable patch302Async() {
@@ -607,7 +583,6 @@ public class HttpRedirectsImpl implements HttpRedirects {
     /**
      * Post true Boolean value in request returns 303.  This request should be automatically redirected usign a get, ultimately returning a 200 status code.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
@@ -629,7 +604,6 @@ public class HttpRedirectsImpl implements HttpRedirects {
     /**
      * Post true Boolean value in request returns 303.  This request should be automatically redirected usign a get, ultimately returning a 200 status code.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;HttpRedirectsPost303Headers, Void&gt;&gt;} object if successful.
      */
     public Single<RestResponse<HttpRedirectsPost303Headers, Void>> post303WithRestResponseAsync() {
@@ -640,7 +614,6 @@ public class HttpRedirectsImpl implements HttpRedirects {
     /**
      * Post true Boolean value in request returns 303.  This request should be automatically redirected usign a get, ultimately returning a 200 status code.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Completable} object if successful.
      */
     public Completable post303Async() {
@@ -698,7 +671,6 @@ public class HttpRedirectsImpl implements HttpRedirects {
     /**
      * Redirect with 307, resulting in a 200 success.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
@@ -720,7 +692,6 @@ public class HttpRedirectsImpl implements HttpRedirects {
     /**
      * Redirect with 307, resulting in a 200 success.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;HttpRedirectsHead307Headers, Void&gt;&gt;} object if successful.
      */
     public Single<RestResponse<HttpRedirectsHead307Headers, Void>> head307WithRestResponseAsync() {
@@ -730,7 +701,6 @@ public class HttpRedirectsImpl implements HttpRedirects {
     /**
      * Redirect with 307, resulting in a 200 success.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Completable} object if successful.
      */
     public Completable head307Async() {
@@ -741,7 +711,6 @@ public class HttpRedirectsImpl implements HttpRedirects {
     /**
      * Redirect get with 307, resulting in a 200 success.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
@@ -763,7 +732,6 @@ public class HttpRedirectsImpl implements HttpRedirects {
     /**
      * Redirect get with 307, resulting in a 200 success.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;HttpRedirectsGet307Headers, Void&gt;&gt;} object if successful.
      */
     public Single<RestResponse<HttpRedirectsGet307Headers, Void>> get307WithRestResponseAsync() {
@@ -773,7 +741,6 @@ public class HttpRedirectsImpl implements HttpRedirects {
     /**
      * Redirect get with 307, resulting in a 200 success.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Completable} object if successful.
      */
     public Completable get307Async() {
@@ -784,7 +751,6 @@ public class HttpRedirectsImpl implements HttpRedirects {
     /**
      * Put redirected with 307, resulting in a 200 after redirect.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
@@ -806,7 +772,6 @@ public class HttpRedirectsImpl implements HttpRedirects {
     /**
      * Put redirected with 307, resulting in a 200 after redirect.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;HttpRedirectsPut307Headers, Void&gt;&gt;} object if successful.
      */
     public Single<RestResponse<HttpRedirectsPut307Headers, Void>> put307WithRestResponseAsync() {
@@ -817,7 +782,6 @@ public class HttpRedirectsImpl implements HttpRedirects {
     /**
      * Put redirected with 307, resulting in a 200 after redirect.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Completable} object if successful.
      */
     public Completable put307Async() {
@@ -875,7 +839,6 @@ public class HttpRedirectsImpl implements HttpRedirects {
     /**
      * Patch redirected with 307, resulting in a 200 after redirect.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
@@ -897,7 +860,6 @@ public class HttpRedirectsImpl implements HttpRedirects {
     /**
      * Patch redirected with 307, resulting in a 200 after redirect.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;HttpRedirectsPatch307Headers, Void&gt;&gt;} object if successful.
      */
     public Single<RestResponse<HttpRedirectsPatch307Headers, Void>> patch307WithRestResponseAsync() {
@@ -908,7 +870,6 @@ public class HttpRedirectsImpl implements HttpRedirects {
     /**
      * Patch redirected with 307, resulting in a 200 after redirect.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Completable} object if successful.
      */
     public Completable patch307Async() {
@@ -966,7 +927,6 @@ public class HttpRedirectsImpl implements HttpRedirects {
     /**
      * Post redirected with 307, resulting in a 200 after redirect.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
@@ -988,7 +948,6 @@ public class HttpRedirectsImpl implements HttpRedirects {
     /**
      * Post redirected with 307, resulting in a 200 after redirect.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;HttpRedirectsPost307Headers, Void&gt;&gt;} object if successful.
      */
     public Single<RestResponse<HttpRedirectsPost307Headers, Void>> post307WithRestResponseAsync() {
@@ -999,7 +958,6 @@ public class HttpRedirectsImpl implements HttpRedirects {
     /**
      * Post redirected with 307, resulting in a 200 after redirect.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Completable} object if successful.
      */
     public Completable post307Async() {
@@ -1057,7 +1015,6 @@ public class HttpRedirectsImpl implements HttpRedirects {
     /**
      * Delete redirected with 307, resulting in a 200 after redirect.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
@@ -1079,7 +1036,6 @@ public class HttpRedirectsImpl implements HttpRedirects {
     /**
      * Delete redirected with 307, resulting in a 200 after redirect.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;HttpRedirectsDelete307Headers, Void&gt;&gt;} object if successful.
      */
     public Single<RestResponse<HttpRedirectsDelete307Headers, Void>> delete307WithRestResponseAsync() {
@@ -1090,7 +1046,6 @@ public class HttpRedirectsImpl implements HttpRedirects {
     /**
      * Delete redirected with 307, resulting in a 200 after redirect.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Completable} object if successful.
      */
     public Completable delete307Async() {

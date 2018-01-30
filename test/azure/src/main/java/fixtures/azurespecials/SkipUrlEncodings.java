@@ -102,7 +102,6 @@ public interface SkipUrlEncodings {
     /**
      * Get method with unencoded path parameter with value 'path1/path2/path3'.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
@@ -120,7 +119,6 @@ public interface SkipUrlEncodings {
     /**
      * Get method with unencoded path parameter with value 'path1/path2/path3'.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
      */
     Single<RestResponse<Void, Void>> getSwaggerPathValidWithRestResponseAsync();
@@ -128,7 +126,6 @@ public interface SkipUrlEncodings {
     /**
      * Get method with unencoded path parameter with value 'path1/path2/path3'.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Completable} object if successful.
      */
     Completable getSwaggerPathValidAsync();
@@ -174,7 +171,6 @@ public interface SkipUrlEncodings {
     /**
      * Get method with unencoded query parameter with value null.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
@@ -192,7 +188,6 @@ public interface SkipUrlEncodings {
     /**
      * Get method with unencoded query parameter with value null.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
      */
     Single<RestResponse<Void, Void>> getMethodQueryNullWithRestResponseAsync();
@@ -200,7 +195,6 @@ public interface SkipUrlEncodings {
     /**
      * Get method with unencoded query parameter with value null.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Completable} object if successful.
      */
     Completable getMethodQueryNullAsync();
@@ -284,7 +278,6 @@ public interface SkipUrlEncodings {
     /**
      * Get method with unencoded query parameter with value 'value1&amp;q2=value2&amp;q3=value3'.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
@@ -302,7 +295,6 @@ public interface SkipUrlEncodings {
     /**
      * Get method with unencoded query parameter with value 'value1&amp;q2=value2&amp;q3=value3'.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
      */
     Single<RestResponse<Void, Void>> getSwaggerQueryValidWithRestResponseAsync();
@@ -310,7 +302,6 @@ public interface SkipUrlEncodings {
     /**
      * Get method with unencoded query parameter with value 'value1&amp;q2=value2&amp;q3=value3'.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Completable} object if successful.
      */
     Completable getSwaggerQueryValidAsync();

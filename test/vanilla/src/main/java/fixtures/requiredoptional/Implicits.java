@@ -67,7 +67,6 @@ public interface Implicits {
     /**
      * Test implicitly optional query parameter.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
@@ -85,7 +84,6 @@ public interface Implicits {
     /**
      * Test implicitly optional query parameter.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
      */
     Single<RestResponse<Void, Void>> putOptionalQueryWithRestResponseAsync();
@@ -93,7 +91,6 @@ public interface Implicits {
     /**
      * Test implicitly optional query parameter.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Completable} object if successful.
      */
     Completable putOptionalQueryAsync();
@@ -139,7 +136,6 @@ public interface Implicits {
     /**
      * Test implicitly optional header parameter.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
@@ -157,7 +153,6 @@ public interface Implicits {
     /**
      * Test implicitly optional header parameter.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
      */
     Single<RestResponse<Void, Void>> putOptionalHeaderWithRestResponseAsync();
@@ -165,7 +160,6 @@ public interface Implicits {
     /**
      * Test implicitly optional header parameter.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Completable} object if successful.
      */
     Completable putOptionalHeaderAsync();
@@ -211,7 +205,6 @@ public interface Implicits {
     /**
      * Test implicitly optional body parameter.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
@@ -229,7 +222,6 @@ public interface Implicits {
     /**
      * Test implicitly optional body parameter.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
      */
     Single<RestResponse<Void, Void>> putOptionalBodyWithRestResponseAsync();
@@ -237,7 +229,6 @@ public interface Implicits {
     /**
      * Test implicitly optional body parameter.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Completable} object if successful.
      */
     Completable putOptionalBodyAsync();
@@ -283,7 +274,6 @@ public interface Implicits {
     /**
      * Test implicitly required path parameter.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the Error object if successful.
@@ -302,7 +292,6 @@ public interface Implicits {
     /**
      * Test implicitly required path parameter.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, Error&gt;&gt;} object if successful.
      */
     Single<RestResponse<Void, Error>> getRequiredGlobalPathWithRestResponseAsync();
@@ -310,7 +299,6 @@ public interface Implicits {
     /**
      * Test implicitly required path parameter.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Maybe&lt;Error&gt;} object if successful.
      */
     Maybe<Error> getRequiredGlobalPathAsync();
@@ -318,7 +306,6 @@ public interface Implicits {
     /**
      * Test implicitly required query parameter.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the Error object if successful.
@@ -337,7 +324,6 @@ public interface Implicits {
     /**
      * Test implicitly required query parameter.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, Error&gt;&gt;} object if successful.
      */
     Single<RestResponse<Void, Error>> getRequiredGlobalQueryWithRestResponseAsync();
@@ -345,7 +331,6 @@ public interface Implicits {
     /**
      * Test implicitly required query parameter.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Maybe&lt;Error&gt;} object if successful.
      */
     Maybe<Error> getRequiredGlobalQueryAsync();
@@ -353,7 +338,6 @@ public interface Implicits {
     /**
      * Test implicitly optional query parameter.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the Error object if successful.
@@ -372,7 +356,6 @@ public interface Implicits {
     /**
      * Test implicitly optional query parameter.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, Error&gt;&gt;} object if successful.
      */
     Single<RestResponse<Void, Error>> getOptionalGlobalQueryWithRestResponseAsync();
@@ -380,7 +363,6 @@ public interface Implicits {
     /**
      * Test implicitly optional query parameter.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Maybe&lt;Error&gt;} object if successful.
      */
     Maybe<Error> getOptionalGlobalQueryAsync();

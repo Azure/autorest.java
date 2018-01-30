@@ -144,7 +144,6 @@ public class ParameterGroupingsImpl implements ParameterGroupings {
     /**
      * Post a bunch of optional parameters grouped.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
@@ -166,7 +165,6 @@ public class ParameterGroupingsImpl implements ParameterGroupings {
     /**
      * Post a bunch of optional parameters grouped.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
      */
     public Single<RestResponse<Void, Void>> postOptionalWithRestResponseAsync() {
@@ -179,7 +177,6 @@ public class ParameterGroupingsImpl implements ParameterGroupings {
     /**
      * Post a bunch of optional parameters grouped.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Completable} object if successful.
      */
     public Completable postOptionalAsync() {
@@ -246,7 +243,6 @@ public class ParameterGroupingsImpl implements ParameterGroupings {
     /**
      * Post parameters from multiple different parameter groups.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
@@ -268,7 +264,6 @@ public class ParameterGroupingsImpl implements ParameterGroupings {
     /**
      * Post parameters from multiple different parameter groups.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
      */
     public Single<RestResponse<Void, Void>> postMultiParamGroupsWithRestResponseAsync() {
@@ -284,7 +279,6 @@ public class ParameterGroupingsImpl implements ParameterGroupings {
     /**
      * Post parameters from multiple different parameter groups.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Completable} object if successful.
      */
     public Completable postMultiParamGroupsAsync() {
@@ -364,7 +358,6 @@ public class ParameterGroupingsImpl implements ParameterGroupings {
     /**
      * Post parameters with a shared parameter group object.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
@@ -386,7 +379,6 @@ public class ParameterGroupingsImpl implements ParameterGroupings {
     /**
      * Post parameters with a shared parameter group object.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
      */
     public Single<RestResponse<Void, Void>> postSharedParameterGroupObjectWithRestResponseAsync() {
@@ -399,7 +391,6 @@ public class ParameterGroupingsImpl implements ParameterGroupings {
     /**
      * Post parameters with a shared parameter group object.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Completable} object if successful.
      */
     public Completable postSharedParameterGroupObjectAsync() {

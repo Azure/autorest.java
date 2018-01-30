@@ -29,7 +29,6 @@ public interface Polymorphisms {
     /**
      * Get complex types that are polymorphic.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the Fish object if successful.
@@ -48,7 +47,6 @@ public interface Polymorphisms {
     /**
      * Get complex types that are polymorphic.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, Fish&gt;&gt;} object if successful.
      */
     Single<RestResponse<Void, Fish>> getValidWithRestResponseAsync();
@@ -56,7 +54,6 @@ public interface Polymorphisms {
     /**
      * Get complex types that are polymorphic.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Maybe&lt;Fish&gt;} object if successful.
      */
     Maybe<Fish> getValidAsync();
@@ -230,7 +227,6 @@ public interface Polymorphisms {
     /**
      * Get complex types that are polymorphic, but not at the root of the hierarchy; also have additional properties.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the Salmon object if successful.
@@ -249,7 +245,6 @@ public interface Polymorphisms {
     /**
      * Get complex types that are polymorphic, but not at the root of the hierarchy; also have additional properties.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, Salmon&gt;&gt;} object if successful.
      */
     Single<RestResponse<Void, Salmon>> getComplicatedWithRestResponseAsync();
@@ -257,7 +252,6 @@ public interface Polymorphisms {
     /**
      * Get complex types that are polymorphic, but not at the root of the hierarchy; also have additional properties.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Maybe&lt;Salmon&gt;} object if successful.
      */
     Maybe<Salmon> getComplicatedAsync();

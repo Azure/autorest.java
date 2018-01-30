@@ -140,7 +140,6 @@ public class IntsImpl implements Ints {
     /**
      * Get null Int value.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the int object if successful.
@@ -163,7 +162,6 @@ public class IntsImpl implements Ints {
     /**
      * Get null Int value.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, Integer&gt;&gt;} object if successful.
      */
     public Single<RestResponse<Void, Integer>> getNullWithRestResponseAsync() {
@@ -173,7 +171,6 @@ public class IntsImpl implements Ints {
     /**
      * Get null Int value.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Maybe&lt;Integer&gt;} object if successful.
      */
     public Maybe<Integer> getNullAsync() {
@@ -192,7 +189,6 @@ public class IntsImpl implements Ints {
     /**
      * Get invalid Int value.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the int object if successful.
@@ -215,7 +211,6 @@ public class IntsImpl implements Ints {
     /**
      * Get invalid Int value.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, Integer&gt;&gt;} object if successful.
      */
     public Single<RestResponse<Void, Integer>> getInvalidWithRestResponseAsync() {
@@ -225,7 +220,6 @@ public class IntsImpl implements Ints {
     /**
      * Get invalid Int value.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Maybe&lt;Integer&gt;} object if successful.
      */
     public Maybe<Integer> getInvalidAsync() {
@@ -244,7 +238,6 @@ public class IntsImpl implements Ints {
     /**
      * Get overflow Int32 value.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the int object if successful.
@@ -267,7 +260,6 @@ public class IntsImpl implements Ints {
     /**
      * Get overflow Int32 value.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, Integer&gt;&gt;} object if successful.
      */
     public Single<RestResponse<Void, Integer>> getOverflowInt32WithRestResponseAsync() {
@@ -277,7 +269,6 @@ public class IntsImpl implements Ints {
     /**
      * Get overflow Int32 value.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Maybe&lt;Integer&gt;} object if successful.
      */
     public Maybe<Integer> getOverflowInt32Async() {
@@ -296,7 +287,6 @@ public class IntsImpl implements Ints {
     /**
      * Get underflow Int32 value.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the int object if successful.
@@ -319,7 +309,6 @@ public class IntsImpl implements Ints {
     /**
      * Get underflow Int32 value.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, Integer&gt;&gt;} object if successful.
      */
     public Single<RestResponse<Void, Integer>> getUnderflowInt32WithRestResponseAsync() {
@@ -329,7 +318,6 @@ public class IntsImpl implements Ints {
     /**
      * Get underflow Int32 value.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Maybe&lt;Integer&gt;} object if successful.
      */
     public Maybe<Integer> getUnderflowInt32Async() {
@@ -348,7 +336,6 @@ public class IntsImpl implements Ints {
     /**
      * Get overflow Int64 value.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the long object if successful.
@@ -371,7 +358,6 @@ public class IntsImpl implements Ints {
     /**
      * Get overflow Int64 value.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, Long&gt;&gt;} object if successful.
      */
     public Single<RestResponse<Void, Long>> getOverflowInt64WithRestResponseAsync() {
@@ -381,7 +367,6 @@ public class IntsImpl implements Ints {
     /**
      * Get overflow Int64 value.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Maybe&lt;Long&gt;} object if successful.
      */
     public Maybe<Long> getOverflowInt64Async() {
@@ -400,7 +385,6 @@ public class IntsImpl implements Ints {
     /**
      * Get underflow Int64 value.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the long object if successful.
@@ -423,7 +407,6 @@ public class IntsImpl implements Ints {
     /**
      * Get underflow Int64 value.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, Long&gt;&gt;} object if successful.
      */
     public Single<RestResponse<Void, Long>> getUnderflowInt64WithRestResponseAsync() {
@@ -433,7 +416,6 @@ public class IntsImpl implements Ints {
     /**
      * Get underflow Int64 value.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Maybe&lt;Long&gt;} object if successful.
      */
     public Maybe<Long> getUnderflowInt64Async() {
@@ -640,7 +622,6 @@ public class IntsImpl implements Ints {
     /**
      * Get datetime encoded as Unix time value.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the DateTime object if successful.
@@ -663,7 +644,6 @@ public class IntsImpl implements Ints {
     /**
      * Get datetime encoded as Unix time value.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, DateTime&gt;&gt;} object if successful.
      */
     public Single<RestResponse<Void, DateTime>> getUnixTimeWithRestResponseAsync() {
@@ -673,7 +653,6 @@ public class IntsImpl implements Ints {
     /**
      * Get datetime encoded as Unix time value.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Maybe&lt;DateTime&gt;} object if successful.
      */
     public Maybe<DateTime> getUnixTimeAsync() {
@@ -740,7 +719,6 @@ public class IntsImpl implements Ints {
     /**
      * Get invalid Unix time value.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the DateTime object if successful.
@@ -763,7 +741,6 @@ public class IntsImpl implements Ints {
     /**
      * Get invalid Unix time value.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, DateTime&gt;&gt;} object if successful.
      */
     public Single<RestResponse<Void, DateTime>> getInvalidUnixTimeWithRestResponseAsync() {
@@ -773,7 +750,6 @@ public class IntsImpl implements Ints {
     /**
      * Get invalid Unix time value.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Maybe&lt;DateTime&gt;} object if successful.
      */
     public Maybe<DateTime> getInvalidUnixTimeAsync() {
@@ -792,7 +768,6 @@ public class IntsImpl implements Ints {
     /**
      * Get null Unix time value.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the DateTime object if successful.
@@ -815,7 +790,6 @@ public class IntsImpl implements Ints {
     /**
      * Get null Unix time value.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, DateTime&gt;&gt;} object if successful.
      */
     public Single<RestResponse<Void, DateTime>> getNullUnixTimeWithRestResponseAsync() {
@@ -825,7 +799,6 @@ public class IntsImpl implements Ints {
     /**
      * Get null Unix time value.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Maybe&lt;DateTime&gt;} object if successful.
      */
     public Maybe<DateTime> getNullUnixTimeAsync() {

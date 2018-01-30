@@ -27,7 +27,6 @@ public interface Bytes {
     /**
      * Get null byte value.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the byte[] object if successful.
@@ -46,7 +45,6 @@ public interface Bytes {
     /**
      * Get null byte value.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, byte[]&gt;&gt;} object if successful.
      */
     Single<RestResponse<Void, byte[]>> getNullWithRestResponseAsync();
@@ -54,7 +52,6 @@ public interface Bytes {
     /**
      * Get null byte value.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Maybe&lt;byte[]&gt;} object if successful.
      */
     Maybe<byte[]> getNullAsync();
@@ -62,7 +59,6 @@ public interface Bytes {
     /**
      * Get empty byte value ''.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the byte[] object if successful.
@@ -81,7 +77,6 @@ public interface Bytes {
     /**
      * Get empty byte value ''.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, byte[]&gt;&gt;} object if successful.
      */
     Single<RestResponse<Void, byte[]>> getEmptyWithRestResponseAsync();
@@ -89,7 +84,6 @@ public interface Bytes {
     /**
      * Get empty byte value ''.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Maybe&lt;byte[]&gt;} object if successful.
      */
     Maybe<byte[]> getEmptyAsync();
@@ -97,7 +91,6 @@ public interface Bytes {
     /**
      * Get non-ascii byte string hex(FF FE FD FC FB FA F9 F8 F7 F6).
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the byte[] object if successful.
@@ -116,7 +109,6 @@ public interface Bytes {
     /**
      * Get non-ascii byte string hex(FF FE FD FC FB FA F9 F8 F7 F6).
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, byte[]&gt;&gt;} object if successful.
      */
     Single<RestResponse<Void, byte[]>> getNonAsciiWithRestResponseAsync();
@@ -124,7 +116,6 @@ public interface Bytes {
     /**
      * Get non-ascii byte string hex(FF FE FD FC FB FA F9 F8 F7 F6).
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Maybe&lt;byte[]&gt;} object if successful.
      */
     Maybe<byte[]> getNonAsciiAsync();
@@ -170,7 +161,6 @@ public interface Bytes {
     /**
      * Get invalid byte value ':::SWAGGER::::'.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the byte[] object if successful.
@@ -189,7 +179,6 @@ public interface Bytes {
     /**
      * Get invalid byte value ':::SWAGGER::::'.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, byte[]&gt;&gt;} object if successful.
      */
     Single<RestResponse<Void, byte[]>> getInvalidWithRestResponseAsync();
@@ -197,7 +186,6 @@ public interface Bytes {
     /**
      * Get invalid byte value ':::SWAGGER::::'.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Maybe&lt;byte[]&gt;} object if successful.
      */
     Maybe<byte[]> getInvalidAsync();

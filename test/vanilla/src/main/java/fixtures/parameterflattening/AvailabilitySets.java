@@ -31,7 +31,6 @@ public interface AvailabilitySets {
      * @param avset The name of the storage availability set.
      * @param tags A set of tags. A description about the set of tags.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws RestException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     void update(String resourceGroupName, String avset, Map<String, String> tags);

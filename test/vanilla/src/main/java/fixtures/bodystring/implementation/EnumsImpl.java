@@ -96,7 +96,6 @@ public class EnumsImpl implements Enums {
     /**
      * Get enum value 'red color' from enumeration of 'red color', 'green-color', 'blue_color'.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the Colors object if successful.
@@ -119,7 +118,6 @@ public class EnumsImpl implements Enums {
     /**
      * Get enum value 'red color' from enumeration of 'red color', 'green-color', 'blue_color'.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, Colors&gt;&gt;} object if successful.
      */
     public Single<RestResponse<Void, Colors>> getNotExpandableWithRestResponseAsync() {
@@ -129,7 +127,6 @@ public class EnumsImpl implements Enums {
     /**
      * Get enum value 'red color' from enumeration of 'red color', 'green-color', 'blue_color'.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Maybe&lt;Colors&gt;} object if successful.
      */
     public Maybe<Colors> getNotExpandableAsync() {
@@ -198,7 +195,6 @@ public class EnumsImpl implements Enums {
     /**
      * Get enum value 'red color' from enumeration of 'red color', 'green-color', 'blue_color'.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the Colors object if successful.
@@ -221,7 +217,6 @@ public class EnumsImpl implements Enums {
     /**
      * Get enum value 'red color' from enumeration of 'red color', 'green-color', 'blue_color'.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, Colors&gt;&gt;} object if successful.
      */
     public Single<RestResponse<Void, Colors>> getReferencedWithRestResponseAsync() {
@@ -231,7 +226,6 @@ public class EnumsImpl implements Enums {
     /**
      * Get enum value 'red color' from enumeration of 'red color', 'green-color', 'blue_color'.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Maybe&lt;Colors&gt;} object if successful.
      */
     public Maybe<Colors> getReferencedAsync() {
@@ -300,7 +294,6 @@ public class EnumsImpl implements Enums {
     /**
      * Get value 'green-color' from the constant.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the RefColorConstant object if successful.
@@ -323,7 +316,6 @@ public class EnumsImpl implements Enums {
     /**
      * Get value 'green-color' from the constant.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, RefColorConstant&gt;&gt;} object if successful.
      */
     public Single<RestResponse<Void, RefColorConstant>> getReferencedConstantWithRestResponseAsync() {
@@ -333,7 +325,6 @@ public class EnumsImpl implements Enums {
     /**
      * Get value 'green-color' from the constant.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Maybe&lt;RefColorConstant&gt;} object if successful.
      */
     public Maybe<RefColorConstant> getReferencedConstantAsync() {

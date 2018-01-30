@@ -74,7 +74,6 @@ public class HttpFailuresImpl implements HttpFailures {
     /**
      * Get empty error form server.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the boolean object if successful.
@@ -97,7 +96,6 @@ public class HttpFailuresImpl implements HttpFailures {
     /**
      * Get empty error form server.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, Boolean&gt;&gt;} object if successful.
      */
     public Single<RestResponse<Void, Boolean>> getEmptyErrorWithRestResponseAsync() {
@@ -107,7 +105,6 @@ public class HttpFailuresImpl implements HttpFailures {
     /**
      * Get empty error form server.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Maybe&lt;Boolean&gt;} object if successful.
      */
     public Maybe<Boolean> getEmptyErrorAsync() {
@@ -126,8 +123,6 @@ public class HttpFailuresImpl implements HttpFailures {
     /**
      * Get empty error form server.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws RestException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the boolean object if successful.
      */
@@ -149,7 +144,6 @@ public class HttpFailuresImpl implements HttpFailures {
     /**
      * Get empty error form server.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, Boolean&gt;&gt;} object if successful.
      */
     public Single<RestResponse<Void, Boolean>> getNoModelErrorWithRestResponseAsync() {
@@ -159,7 +153,6 @@ public class HttpFailuresImpl implements HttpFailures {
     /**
      * Get empty error form server.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Maybe&lt;Boolean&gt;} object if successful.
      */
     public Maybe<Boolean> getNoModelErrorAsync() {
@@ -178,8 +171,6 @@ public class HttpFailuresImpl implements HttpFailures {
     /**
      * Get empty response from server.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws RestException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the boolean object if successful.
      */
@@ -201,7 +192,6 @@ public class HttpFailuresImpl implements HttpFailures {
     /**
      * Get empty response from server.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, Boolean&gt;&gt;} object if successful.
      */
     public Single<RestResponse<Void, Boolean>> getNoModelEmptyWithRestResponseAsync() {
@@ -211,7 +201,6 @@ public class HttpFailuresImpl implements HttpFailures {
     /**
      * Get empty response from server.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Maybe&lt;Boolean&gt;} object if successful.
      */
     public Maybe<Boolean> getNoModelEmptyAsync() {

@@ -77,7 +77,6 @@ public interface Explicits {
     /**
      * Test explicitly optional integer. Please put null.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
@@ -95,7 +94,6 @@ public interface Explicits {
     /**
      * Test explicitly optional integer. Please put null.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
      */
     Single<RestResponse<Void, Void>> postOptionalIntegerParameterWithRestResponseAsync();
@@ -103,7 +101,6 @@ public interface Explicits {
     /**
      * Test explicitly optional integer. Please put null.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Completable} object if successful.
      */
     Completable postOptionalIntegerParameterAsync();
@@ -188,7 +185,6 @@ public interface Explicits {
     /**
      * Test explicitly optional integer. Please put a valid int-wrapper with 'value' = null.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
@@ -206,7 +202,6 @@ public interface Explicits {
     /**
      * Test explicitly optional integer. Please put a valid int-wrapper with 'value' = null.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
      */
     Single<RestResponse<Void, Void>> postOptionalIntegerPropertyWithRestResponseAsync();
@@ -214,7 +209,6 @@ public interface Explicits {
     /**
      * Test explicitly optional integer. Please put a valid int-wrapper with 'value' = null.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Completable} object if successful.
      */
     Completable postOptionalIntegerPropertyAsync();
@@ -299,7 +293,6 @@ public interface Explicits {
     /**
      * Test explicitly optional integer. Please put a header 'headerParameter' =&gt; null.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
@@ -317,7 +310,6 @@ public interface Explicits {
     /**
      * Test explicitly optional integer. Please put a header 'headerParameter' =&gt; null.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
      */
     Single<RestResponse<Void, Void>> postOptionalIntegerHeaderWithRestResponseAsync();
@@ -325,7 +317,6 @@ public interface Explicits {
     /**
      * Test explicitly optional integer. Please put a header 'headerParameter' =&gt; null.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Completable} object if successful.
      */
     Completable postOptionalIntegerHeaderAsync();
@@ -410,7 +401,6 @@ public interface Explicits {
     /**
      * Test explicitly optional string. Please put null.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
@@ -428,7 +418,6 @@ public interface Explicits {
     /**
      * Test explicitly optional string. Please put null.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
      */
     Single<RestResponse<Void, Void>> postOptionalStringParameterWithRestResponseAsync();
@@ -436,7 +425,6 @@ public interface Explicits {
     /**
      * Test explicitly optional string. Please put null.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Completable} object if successful.
      */
     Completable postOptionalStringParameterAsync();
@@ -521,7 +509,6 @@ public interface Explicits {
     /**
      * Test explicitly optional integer. Please put a valid string-wrapper with 'value' = null.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
@@ -539,7 +526,6 @@ public interface Explicits {
     /**
      * Test explicitly optional integer. Please put a valid string-wrapper with 'value' = null.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
      */
     Single<RestResponse<Void, Void>> postOptionalStringPropertyWithRestResponseAsync();
@@ -547,7 +533,6 @@ public interface Explicits {
     /**
      * Test explicitly optional integer. Please put a valid string-wrapper with 'value' = null.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Completable} object if successful.
      */
     Completable postOptionalStringPropertyAsync();
@@ -632,7 +617,6 @@ public interface Explicits {
     /**
      * Test explicitly optional string. Please put a header 'headerParameter' =&gt; null.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
@@ -650,7 +634,6 @@ public interface Explicits {
     /**
      * Test explicitly optional string. Please put a header 'headerParameter' =&gt; null.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
      */
     Single<RestResponse<Void, Void>> postOptionalStringHeaderWithRestResponseAsync();
@@ -658,7 +641,6 @@ public interface Explicits {
     /**
      * Test explicitly optional string. Please put a header 'headerParameter' =&gt; null.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Completable} object if successful.
      */
     Completable postOptionalStringHeaderAsync();
@@ -743,7 +725,6 @@ public interface Explicits {
     /**
      * Test explicitly optional complex object. Please put null.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
@@ -761,7 +742,6 @@ public interface Explicits {
     /**
      * Test explicitly optional complex object. Please put null.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
      */
     Single<RestResponse<Void, Void>> postOptionalClassParameterWithRestResponseAsync();
@@ -769,7 +749,6 @@ public interface Explicits {
     /**
      * Test explicitly optional complex object. Please put null.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Completable} object if successful.
      */
     Completable postOptionalClassParameterAsync();
@@ -854,7 +833,6 @@ public interface Explicits {
     /**
      * Test explicitly optional complex object. Please put a valid class-wrapper with 'value' = null.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
@@ -872,7 +850,6 @@ public interface Explicits {
     /**
      * Test explicitly optional complex object. Please put a valid class-wrapper with 'value' = null.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
      */
     Single<RestResponse<Void, Void>> postOptionalClassPropertyWithRestResponseAsync();
@@ -880,7 +857,6 @@ public interface Explicits {
     /**
      * Test explicitly optional complex object. Please put a valid class-wrapper with 'value' = null.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Completable} object if successful.
      */
     Completable postOptionalClassPropertyAsync();
@@ -965,7 +941,6 @@ public interface Explicits {
     /**
      * Test explicitly optional array. Please put null.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
@@ -983,7 +958,6 @@ public interface Explicits {
     /**
      * Test explicitly optional array. Please put null.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
      */
     Single<RestResponse<Void, Void>> postOptionalArrayParameterWithRestResponseAsync();
@@ -991,7 +965,6 @@ public interface Explicits {
     /**
      * Test explicitly optional array. Please put null.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Completable} object if successful.
      */
     Completable postOptionalArrayParameterAsync();
@@ -1076,7 +1049,6 @@ public interface Explicits {
     /**
      * Test explicitly optional array. Please put a valid array-wrapper with 'value' = null.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
@@ -1094,7 +1066,6 @@ public interface Explicits {
     /**
      * Test explicitly optional array. Please put a valid array-wrapper with 'value' = null.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
      */
     Single<RestResponse<Void, Void>> postOptionalArrayPropertyWithRestResponseAsync();
@@ -1102,7 +1073,6 @@ public interface Explicits {
     /**
      * Test explicitly optional array. Please put a valid array-wrapper with 'value' = null.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Completable} object if successful.
      */
     Completable postOptionalArrayPropertyAsync();
@@ -1187,7 +1157,6 @@ public interface Explicits {
     /**
      * Test explicitly optional integer. Please put a header 'headerParameter' =&gt; null.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
@@ -1205,7 +1174,6 @@ public interface Explicits {
     /**
      * Test explicitly optional integer. Please put a header 'headerParameter' =&gt; null.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
      */
     Single<RestResponse<Void, Void>> postOptionalArrayHeaderWithRestResponseAsync();
@@ -1213,7 +1181,6 @@ public interface Explicits {
     /**
      * Test explicitly optional integer. Please put a header 'headerParameter' =&gt; null.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Completable} object if successful.
      */
     Completable postOptionalArrayHeaderAsync();

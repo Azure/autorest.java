@@ -28,7 +28,6 @@ public interface Polymorphicrecursives {
     /**
      * Get complex types that are polymorphic and have recursive references.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the Fish object if successful.
@@ -47,7 +46,6 @@ public interface Polymorphicrecursives {
     /**
      * Get complex types that are polymorphic and have recursive references.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, Fish&gt;&gt;} object if successful.
      */
     Single<RestResponse<Void, Fish>> getValidWithRestResponseAsync();
@@ -55,7 +53,6 @@ public interface Polymorphicrecursives {
     /**
      * Get complex types that are polymorphic and have recursive references.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Maybe&lt;Fish&gt;} object if successful.
      */
     Maybe<Fish> getValidAsync();

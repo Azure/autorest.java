@@ -28,7 +28,6 @@ public interface Inheritances {
     /**
      * Get complex types that extend others.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the Siamese object if successful.
@@ -47,7 +46,6 @@ public interface Inheritances {
     /**
      * Get complex types that extend others.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, Siamese&gt;&gt;} object if successful.
      */
     Single<RestResponse<Void, Siamese>> getValidWithRestResponseAsync();
@@ -55,7 +53,6 @@ public interface Inheritances {
     /**
      * Get complex types that extend others.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Maybe&lt;Siamese&gt;} object if successful.
      */
     Maybe<Siamese> getValidAsync();

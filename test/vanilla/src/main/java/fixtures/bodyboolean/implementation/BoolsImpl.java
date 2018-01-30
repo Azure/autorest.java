@@ -93,7 +93,6 @@ public class BoolsImpl implements Bools {
     /**
      * Get true Boolean value.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the boolean object if successful.
@@ -116,7 +115,6 @@ public class BoolsImpl implements Bools {
     /**
      * Get true Boolean value.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, Boolean&gt;&gt;} object if successful.
      */
     public Single<RestResponse<Void, Boolean>> getTrueWithRestResponseAsync() {
@@ -126,7 +124,6 @@ public class BoolsImpl implements Bools {
     /**
      * Get true Boolean value.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Maybe&lt;Boolean&gt;} object if successful.
      */
     public Maybe<Boolean> getTrueAsync() {
@@ -192,7 +189,6 @@ public class BoolsImpl implements Bools {
     /**
      * Get false Boolean value.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the boolean object if successful.
@@ -215,7 +211,6 @@ public class BoolsImpl implements Bools {
     /**
      * Get false Boolean value.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, Boolean&gt;&gt;} object if successful.
      */
     public Single<RestResponse<Void, Boolean>> getFalseWithRestResponseAsync() {
@@ -225,7 +220,6 @@ public class BoolsImpl implements Bools {
     /**
      * Get false Boolean value.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Maybe&lt;Boolean&gt;} object if successful.
      */
     public Maybe<Boolean> getFalseAsync() {
@@ -291,7 +285,6 @@ public class BoolsImpl implements Bools {
     /**
      * Get null Boolean value.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the boolean object if successful.
@@ -314,7 +307,6 @@ public class BoolsImpl implements Bools {
     /**
      * Get null Boolean value.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, Boolean&gt;&gt;} object if successful.
      */
     public Single<RestResponse<Void, Boolean>> getNullWithRestResponseAsync() {
@@ -324,7 +316,6 @@ public class BoolsImpl implements Bools {
     /**
      * Get null Boolean value.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Maybe&lt;Boolean&gt;} object if successful.
      */
     public Maybe<Boolean> getNullAsync() {
@@ -343,7 +334,6 @@ public class BoolsImpl implements Bools {
     /**
      * Get invalid Boolean value.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the boolean object if successful.
@@ -366,7 +356,6 @@ public class BoolsImpl implements Bools {
     /**
      * Get invalid Boolean value.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, Boolean&gt;&gt;} object if successful.
      */
     public Single<RestResponse<Void, Boolean>> getInvalidWithRestResponseAsync() {
@@ -376,7 +365,6 @@ public class BoolsImpl implements Bools {
     /**
      * Get invalid Boolean value.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Maybe&lt;Boolean&gt;} object if successful.
      */
     public Maybe<Boolean> getInvalidAsync() {

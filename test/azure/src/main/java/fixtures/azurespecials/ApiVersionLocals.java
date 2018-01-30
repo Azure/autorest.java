@@ -26,7 +26,6 @@ public interface ApiVersionLocals {
     /**
      * Get method with api-version modeled in the method.  pass in api-version = '2.0' to succeed.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
@@ -44,7 +43,6 @@ public interface ApiVersionLocals {
     /**
      * Get method with api-version modeled in the method.  pass in api-version = '2.0' to succeed.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
      */
     Single<RestResponse<Void, Void>> getMethodLocalValidWithRestResponseAsync();
@@ -52,7 +50,6 @@ public interface ApiVersionLocals {
     /**
      * Get method with api-version modeled in the method.  pass in api-version = '2.0' to succeed.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Completable} object if successful.
      */
     Completable getMethodLocalValidAsync();
@@ -60,7 +57,6 @@ public interface ApiVersionLocals {
     /**
      * Get method with api-version modeled in the method.  pass in api-version = null to succeed.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
@@ -78,7 +74,6 @@ public interface ApiVersionLocals {
     /**
      * Get method with api-version modeled in the method.  pass in api-version = null to succeed.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
      */
     Single<RestResponse<Void, Void>> getMethodLocalNullWithRestResponseAsync();
@@ -86,7 +81,6 @@ public interface ApiVersionLocals {
     /**
      * Get method with api-version modeled in the method.  pass in api-version = null to succeed.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Completable} object if successful.
      */
     Completable getMethodLocalNullAsync();
@@ -132,7 +126,6 @@ public interface ApiVersionLocals {
     /**
      * Get method with api-version modeled in the method.  pass in api-version = '2.0' to succeed.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
@@ -150,7 +143,6 @@ public interface ApiVersionLocals {
     /**
      * Get method with api-version modeled in the method.  pass in api-version = '2.0' to succeed.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
      */
     Single<RestResponse<Void, Void>> getPathLocalValidWithRestResponseAsync();
@@ -158,7 +150,6 @@ public interface ApiVersionLocals {
     /**
      * Get method with api-version modeled in the method.  pass in api-version = '2.0' to succeed.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Completable} object if successful.
      */
     Completable getPathLocalValidAsync();
@@ -166,7 +157,6 @@ public interface ApiVersionLocals {
     /**
      * Get method with api-version modeled in the method.  pass in api-version = '2.0' to succeed.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
@@ -184,7 +174,6 @@ public interface ApiVersionLocals {
     /**
      * Get method with api-version modeled in the method.  pass in api-version = '2.0' to succeed.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
      */
     Single<RestResponse<Void, Void>> getSwaggerLocalValidWithRestResponseAsync();
@@ -192,7 +181,6 @@ public interface ApiVersionLocals {
     /**
      * Get method with api-version modeled in the method.  pass in api-version = '2.0' to succeed.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Completable} object if successful.
      */
     Completable getSwaggerLocalValidAsync();

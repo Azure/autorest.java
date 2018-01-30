@@ -349,8 +349,6 @@ public class AutoRestValidationTestImpl extends ServiceClient implements AutoRes
     }
 
     /**
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws RestException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     public void getWithConstantInPath() {
@@ -367,7 +365,6 @@ public class AutoRestValidationTestImpl extends ServiceClient implements AutoRes
     }
 
     /**
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
      */
     public Single<RestResponse<Void, Void>> getWithConstantInPathWithRestResponseAsync() {
@@ -376,7 +373,6 @@ public class AutoRestValidationTestImpl extends ServiceClient implements AutoRes
     }
 
     /**
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Completable} object if successful.
      */
     public Completable getWithConstantInPathAsync() {
@@ -385,8 +381,6 @@ public class AutoRestValidationTestImpl extends ServiceClient implements AutoRes
     }
 
     /**
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws RestException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the Product object if successful.
      */
@@ -404,7 +398,6 @@ public class AutoRestValidationTestImpl extends ServiceClient implements AutoRes
     }
 
     /**
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, Product&gt;&gt;} object if successful.
      */
     public Single<RestResponse<Void, Product>> postWithConstantInBodyWithRestResponseAsync() {
@@ -414,7 +407,6 @@ public class AutoRestValidationTestImpl extends ServiceClient implements AutoRes
     }
 
     /**
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Maybe&lt;Product&gt;} object if successful.
      */
     public Maybe<Product> postWithConstantInBodyAsync() {
@@ -433,7 +425,6 @@ public class AutoRestValidationTestImpl extends ServiceClient implements AutoRes
     /**
      * @param body the Product value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws RestException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the Product object if successful.
      */

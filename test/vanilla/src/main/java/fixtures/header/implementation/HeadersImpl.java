@@ -276,7 +276,6 @@ public class HeadersImpl implements Headers {
     /**
      * Get a response with header value "User-Agent": "overwrite".
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
@@ -298,7 +297,6 @@ public class HeadersImpl implements Headers {
     /**
      * Get a response with header value "User-Agent": "overwrite".
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;HeaderResponseExistingKeyHeaders, Void&gt;&gt;} object if successful.
      */
     public Single<RestResponse<HeaderResponseExistingKeyHeaders, Void>> responseExistingKeyWithRestResponseAsync() {
@@ -308,7 +306,6 @@ public class HeadersImpl implements Headers {
     /**
      * Get a response with header value "User-Agent": "overwrite".
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Completable} object if successful.
      */
     public Completable responseExistingKeyAsync() {
@@ -369,7 +366,6 @@ public class HeadersImpl implements Headers {
     /**
      * Get a response with header value "Content-Type": "text/html".
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
@@ -391,7 +387,6 @@ public class HeadersImpl implements Headers {
     /**
      * Get a response with header value "Content-Type": "text/html".
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;HeaderResponseProtectedKeyHeaders, Void&gt;&gt;} object if successful.
      */
     public Single<RestResponse<HeaderResponseProtectedKeyHeaders, Void>> responseProtectedKeyWithRestResponseAsync() {
@@ -401,7 +396,6 @@ public class HeadersImpl implements Headers {
     /**
      * Get a response with header value "Content-Type": "text/html".
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Completable} object if successful.
      */
     public Completable responseProtectedKeyAsync() {
@@ -1834,7 +1828,6 @@ public class HeadersImpl implements Headers {
     /**
      * Send x-ms-client-request-id = 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0 in the header of the request.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
@@ -1856,7 +1849,6 @@ public class HeadersImpl implements Headers {
     /**
      * Send x-ms-client-request-id = 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0 in the header of the request.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
      */
     public Single<RestResponse<Void, Void>> customRequestIdWithRestResponseAsync() {
@@ -1866,7 +1858,6 @@ public class HeadersImpl implements Headers {
     /**
      * Send x-ms-client-request-id = 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0 in the header of the request.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Completable} object if successful.
      */
     public Completable customRequestIdAsync() {

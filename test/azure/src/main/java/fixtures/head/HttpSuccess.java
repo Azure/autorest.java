@@ -26,7 +26,6 @@ public interface HttpSuccess {
     /**
      * Return 200 status code if successful.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws CloudException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the boolean object if successful.
@@ -45,7 +44,6 @@ public interface HttpSuccess {
     /**
      * Return 200 status code if successful.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, Boolean&gt;&gt;} object if successful.
      */
     Single<RestResponse<Void, Boolean>> head200WithRestResponseAsync();
@@ -53,7 +51,6 @@ public interface HttpSuccess {
     /**
      * Return 200 status code if successful.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Maybe&lt;Boolean&gt;} object if successful.
      */
     Maybe<Boolean> head200Async();
@@ -61,7 +58,6 @@ public interface HttpSuccess {
     /**
      * Return 204 status code if successful.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws CloudException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the boolean object if successful.
@@ -80,7 +76,6 @@ public interface HttpSuccess {
     /**
      * Return 204 status code if successful.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, Boolean&gt;&gt;} object if successful.
      */
     Single<RestResponse<Void, Boolean>> head204WithRestResponseAsync();
@@ -88,7 +83,6 @@ public interface HttpSuccess {
     /**
      * Return 204 status code if successful.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Maybe&lt;Boolean&gt;} object if successful.
      */
     Maybe<Boolean> head204Async();
@@ -96,7 +90,6 @@ public interface HttpSuccess {
     /**
      * Return 404 status code if successful.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws CloudException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the boolean object if successful.
@@ -115,7 +108,6 @@ public interface HttpSuccess {
     /**
      * Return 404 status code if successful.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, Boolean&gt;&gt;} object if successful.
      */
     Single<RestResponse<Void, Boolean>> head404WithRestResponseAsync();
@@ -123,7 +115,6 @@ public interface HttpSuccess {
     /**
      * Return 404 status code if successful.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Maybe&lt;Boolean&gt;} object if successful.
      */
     Maybe<Boolean> head404Async();

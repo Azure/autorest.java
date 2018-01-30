@@ -454,7 +454,6 @@ public class LROsImpl implements LROs {
     /**
      * Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Succeeded’.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws CloudException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the Product object if successful.
@@ -477,7 +476,6 @@ public class LROsImpl implements LROs {
     /**
      * Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Succeeded’.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the observable for the request.
      */
     public Observable<OperationStatus<Product>> beginPut200SucceededAsync() {
@@ -525,7 +523,6 @@ public class LROsImpl implements LROs {
     /**
      * Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Succeeded’.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws CloudException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the Product object if successful.
@@ -548,7 +545,6 @@ public class LROsImpl implements LROs {
     /**
      * Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Succeeded’.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, Product&gt;&gt;} object if successful.
      */
     public Single<RestResponse<Void, Product>> put200SucceededWithRestResponseAsync() {
@@ -559,7 +555,6 @@ public class LROsImpl implements LROs {
     /**
      * Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Succeeded’.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Maybe&lt;Product&gt;} object if successful.
      */
     public Maybe<Product> put200SucceededAsync() {
@@ -635,7 +630,6 @@ public class LROsImpl implements LROs {
     /**
      * Long running put request, service returns a 200 to the initial request, with an entity that does not contain ProvisioningState=’Succeeded’.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws CloudException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the Product object if successful.
@@ -658,7 +652,6 @@ public class LROsImpl implements LROs {
     /**
      * Long running put request, service returns a 200 to the initial request, with an entity that does not contain ProvisioningState=’Succeeded’.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the observable for the request.
      */
     public Observable<OperationStatus<Product>> beginPut200SucceededNoStateAsync() {
@@ -706,7 +699,6 @@ public class LROsImpl implements LROs {
     /**
      * Long running put request, service returns a 200 to the initial request, with an entity that does not contain ProvisioningState=’Succeeded’.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws CloudException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the Product object if successful.
@@ -729,7 +721,6 @@ public class LROsImpl implements LROs {
     /**
      * Long running put request, service returns a 200 to the initial request, with an entity that does not contain ProvisioningState=’Succeeded’.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, Product&gt;&gt;} object if successful.
      */
     public Single<RestResponse<Void, Product>> put200SucceededNoStateWithRestResponseAsync() {
@@ -740,7 +731,6 @@ public class LROsImpl implements LROs {
     /**
      * Long running put request, service returns a 200 to the initial request, with an entity that does not contain ProvisioningState=’Succeeded’.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Maybe&lt;Product&gt;} object if successful.
      */
     public Maybe<Product> put200SucceededNoStateAsync() {
@@ -816,7 +806,6 @@ public class LROsImpl implements LROs {
     /**
      * Long running put request, service returns a 202 to the initial request, with a location header that points to a polling URL that returns a 200 and an entity that doesn't contains ProvisioningState.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws CloudException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the Product object if successful.
@@ -839,7 +828,6 @@ public class LROsImpl implements LROs {
     /**
      * Long running put request, service returns a 202 to the initial request, with a location header that points to a polling URL that returns a 200 and an entity that doesn't contains ProvisioningState.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the observable for the request.
      */
     public Observable<OperationStatus<Product>> beginPut202Retry200Async() {
@@ -887,7 +875,6 @@ public class LROsImpl implements LROs {
     /**
      * Long running put request, service returns a 202 to the initial request, with a location header that points to a polling URL that returns a 200 and an entity that doesn't contains ProvisioningState.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws CloudException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the Product object if successful.
@@ -910,7 +897,6 @@ public class LROsImpl implements LROs {
     /**
      * Long running put request, service returns a 202 to the initial request, with a location header that points to a polling URL that returns a 200 and an entity that doesn't contains ProvisioningState.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, Product&gt;&gt;} object if successful.
      */
     public Single<RestResponse<Void, Product>> put202Retry200WithRestResponseAsync() {
@@ -921,7 +907,6 @@ public class LROsImpl implements LROs {
     /**
      * Long running put request, service returns a 202 to the initial request, with a location header that points to a polling URL that returns a 200 and an entity that doesn't contains ProvisioningState.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Maybe&lt;Product&gt;} object if successful.
      */
     public Maybe<Product> put202Retry200Async() {
@@ -997,7 +982,6 @@ public class LROsImpl implements LROs {
     /**
      * Long running put request, service returns a 201 to the initial request, with an entity that contains ProvisioningState=’Creating’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Succeeded’.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws CloudException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the Product object if successful.
@@ -1020,7 +1004,6 @@ public class LROsImpl implements LROs {
     /**
      * Long running put request, service returns a 201 to the initial request, with an entity that contains ProvisioningState=’Creating’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Succeeded’.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the observable for the request.
      */
     public Observable<OperationStatus<Product>> beginPut201CreatingSucceeded200Async() {
@@ -1068,7 +1051,6 @@ public class LROsImpl implements LROs {
     /**
      * Long running put request, service returns a 201 to the initial request, with an entity that contains ProvisioningState=’Creating’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Succeeded’.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws CloudException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the Product object if successful.
@@ -1091,7 +1073,6 @@ public class LROsImpl implements LROs {
     /**
      * Long running put request, service returns a 201 to the initial request, with an entity that contains ProvisioningState=’Creating’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Succeeded’.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, Product&gt;&gt;} object if successful.
      */
     public Single<RestResponse<Void, Product>> put201CreatingSucceeded200WithRestResponseAsync() {
@@ -1102,7 +1083,6 @@ public class LROsImpl implements LROs {
     /**
      * Long running put request, service returns a 201 to the initial request, with an entity that contains ProvisioningState=’Creating’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Succeeded’.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Maybe&lt;Product&gt;} object if successful.
      */
     public Maybe<Product> put201CreatingSucceeded200Async() {
@@ -1178,7 +1158,6 @@ public class LROsImpl implements LROs {
     /**
      * Long running put request, service returns a 201 to the initial request, with an entity that contains ProvisioningState=’Updating’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Succeeded’.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws CloudException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the Product object if successful.
@@ -1201,7 +1180,6 @@ public class LROsImpl implements LROs {
     /**
      * Long running put request, service returns a 201 to the initial request, with an entity that contains ProvisioningState=’Updating’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Succeeded’.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the observable for the request.
      */
     public Observable<OperationStatus<Product>> beginPut200UpdatingSucceeded204Async() {
@@ -1249,7 +1227,6 @@ public class LROsImpl implements LROs {
     /**
      * Long running put request, service returns a 201 to the initial request, with an entity that contains ProvisioningState=’Updating’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Succeeded’.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws CloudException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the Product object if successful.
@@ -1272,7 +1249,6 @@ public class LROsImpl implements LROs {
     /**
      * Long running put request, service returns a 201 to the initial request, with an entity that contains ProvisioningState=’Updating’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Succeeded’.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, Product&gt;&gt;} object if successful.
      */
     public Single<RestResponse<Void, Product>> put200UpdatingSucceeded204WithRestResponseAsync() {
@@ -1283,7 +1259,6 @@ public class LROsImpl implements LROs {
     /**
      * Long running put request, service returns a 201 to the initial request, with an entity that contains ProvisioningState=’Updating’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Succeeded’.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Maybe&lt;Product&gt;} object if successful.
      */
     public Maybe<Product> put200UpdatingSucceeded204Async() {
@@ -1359,7 +1334,6 @@ public class LROsImpl implements LROs {
     /**
      * Long running put request, service returns a 201 to the initial request, with an entity that contains ProvisioningState=’Created’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Failed’.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws CloudException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the Product object if successful.
@@ -1382,7 +1356,6 @@ public class LROsImpl implements LROs {
     /**
      * Long running put request, service returns a 201 to the initial request, with an entity that contains ProvisioningState=’Created’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Failed’.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the observable for the request.
      */
     public Observable<OperationStatus<Product>> beginPut201CreatingFailed200Async() {
@@ -1430,7 +1403,6 @@ public class LROsImpl implements LROs {
     /**
      * Long running put request, service returns a 201 to the initial request, with an entity that contains ProvisioningState=’Created’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Failed’.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws CloudException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the Product object if successful.
@@ -1453,7 +1425,6 @@ public class LROsImpl implements LROs {
     /**
      * Long running put request, service returns a 201 to the initial request, with an entity that contains ProvisioningState=’Created’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Failed’.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, Product&gt;&gt;} object if successful.
      */
     public Single<RestResponse<Void, Product>> put201CreatingFailed200WithRestResponseAsync() {
@@ -1464,7 +1435,6 @@ public class LROsImpl implements LROs {
     /**
      * Long running put request, service returns a 201 to the initial request, with an entity that contains ProvisioningState=’Created’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Failed’.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Maybe&lt;Product&gt;} object if successful.
      */
     public Maybe<Product> put201CreatingFailed200Async() {
@@ -1540,7 +1510,6 @@ public class LROsImpl implements LROs {
     /**
      * Long running put request, service returns a 201 to the initial request, with an entity that contains ProvisioningState=’Creating’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Canceled’.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws CloudException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the Product object if successful.
@@ -1563,7 +1532,6 @@ public class LROsImpl implements LROs {
     /**
      * Long running put request, service returns a 201 to the initial request, with an entity that contains ProvisioningState=’Creating’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Canceled’.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the observable for the request.
      */
     public Observable<OperationStatus<Product>> beginPut200Acceptedcanceled200Async() {
@@ -1611,7 +1579,6 @@ public class LROsImpl implements LROs {
     /**
      * Long running put request, service returns a 201 to the initial request, with an entity that contains ProvisioningState=’Creating’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Canceled’.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws CloudException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the Product object if successful.
@@ -1634,7 +1601,6 @@ public class LROsImpl implements LROs {
     /**
      * Long running put request, service returns a 201 to the initial request, with an entity that contains ProvisioningState=’Creating’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Canceled’.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, Product&gt;&gt;} object if successful.
      */
     public Single<RestResponse<Void, Product>> put200Acceptedcanceled200WithRestResponseAsync() {
@@ -1645,7 +1611,6 @@ public class LROsImpl implements LROs {
     /**
      * Long running put request, service returns a 201 to the initial request, with an entity that contains ProvisioningState=’Creating’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Canceled’.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Maybe&lt;Product&gt;} object if successful.
      */
     public Maybe<Product> put200Acceptedcanceled200Async() {
@@ -1721,7 +1686,6 @@ public class LROsImpl implements LROs {
     /**
      * Long running put request, service returns a 202 to the initial request with location header. Subsequent calls to operation status do not contain location header.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws CloudException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the Product object if successful.
@@ -1744,7 +1708,6 @@ public class LROsImpl implements LROs {
     /**
      * Long running put request, service returns a 202 to the initial request with location header. Subsequent calls to operation status do not contain location header.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the observable for the request.
      */
     public Observable<OperationStatus<Product>> beginPutNoHeaderInRetryAsync() {
@@ -1792,7 +1755,6 @@ public class LROsImpl implements LROs {
     /**
      * Long running put request, service returns a 202 to the initial request with location header. Subsequent calls to operation status do not contain location header.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws CloudException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the Product object if successful.
@@ -1815,7 +1777,6 @@ public class LROsImpl implements LROs {
     /**
      * Long running put request, service returns a 202 to the initial request with location header. Subsequent calls to operation status do not contain location header.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;LROsPutNoHeaderInRetryHeaders, Product&gt;&gt;} object if successful.
      */
     public Single<RestResponse<LROsPutNoHeaderInRetryHeaders, Product>> putNoHeaderInRetryWithRestResponseAsync() {
@@ -1826,7 +1787,6 @@ public class LROsImpl implements LROs {
     /**
      * Long running put request, service returns a 202 to the initial request with location header. Subsequent calls to operation status do not contain location header.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Maybe&lt;Product&gt;} object if successful.
      */
     public Maybe<Product> putNoHeaderInRetryAsync() {
@@ -1902,7 +1862,6 @@ public class LROsImpl implements LROs {
     /**
      * Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws CloudException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the Product object if successful.
@@ -1925,7 +1884,6 @@ public class LROsImpl implements LROs {
     /**
      * Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the observable for the request.
      */
     public Observable<OperationStatus<Product>> beginPutAsyncRetrySucceededAsync() {
@@ -1973,7 +1931,6 @@ public class LROsImpl implements LROs {
     /**
      * Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws CloudException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the Product object if successful.
@@ -1996,7 +1953,6 @@ public class LROsImpl implements LROs {
     /**
      * Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;LROsPutAsyncRetrySucceededHeaders, Product&gt;&gt;} object if successful.
      */
     public Single<RestResponse<LROsPutAsyncRetrySucceededHeaders, Product>> putAsyncRetrySucceededWithRestResponseAsync() {
@@ -2007,7 +1963,6 @@ public class LROsImpl implements LROs {
     /**
      * Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Maybe&lt;Product&gt;} object if successful.
      */
     public Maybe<Product> putAsyncRetrySucceededAsync() {
@@ -2083,7 +2038,6 @@ public class LROsImpl implements LROs {
     /**
      * Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws CloudException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the Product object if successful.
@@ -2106,7 +2060,6 @@ public class LROsImpl implements LROs {
     /**
      * Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the observable for the request.
      */
     public Observable<OperationStatus<Product>> beginPutAsyncNoRetrySucceededAsync() {
@@ -2154,7 +2107,6 @@ public class LROsImpl implements LROs {
     /**
      * Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws CloudException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the Product object if successful.
@@ -2177,7 +2129,6 @@ public class LROsImpl implements LROs {
     /**
      * Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;LROsPutAsyncNoRetrySucceededHeaders, Product&gt;&gt;} object if successful.
      */
     public Single<RestResponse<LROsPutAsyncNoRetrySucceededHeaders, Product>> putAsyncNoRetrySucceededWithRestResponseAsync() {
@@ -2188,7 +2139,6 @@ public class LROsImpl implements LROs {
     /**
      * Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Maybe&lt;Product&gt;} object if successful.
      */
     public Maybe<Product> putAsyncNoRetrySucceededAsync() {
@@ -2264,7 +2214,6 @@ public class LROsImpl implements LROs {
     /**
      * Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws CloudException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the Product object if successful.
@@ -2287,7 +2236,6 @@ public class LROsImpl implements LROs {
     /**
      * Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the observable for the request.
      */
     public Observable<OperationStatus<Product>> beginPutAsyncRetryFailedAsync() {
@@ -2335,7 +2283,6 @@ public class LROsImpl implements LROs {
     /**
      * Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws CloudException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the Product object if successful.
@@ -2358,7 +2305,6 @@ public class LROsImpl implements LROs {
     /**
      * Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;LROsPutAsyncRetryFailedHeaders, Product&gt;&gt;} object if successful.
      */
     public Single<RestResponse<LROsPutAsyncRetryFailedHeaders, Product>> putAsyncRetryFailedWithRestResponseAsync() {
@@ -2369,7 +2315,6 @@ public class LROsImpl implements LROs {
     /**
      * Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Maybe&lt;Product&gt;} object if successful.
      */
     public Maybe<Product> putAsyncRetryFailedAsync() {
@@ -2445,7 +2390,6 @@ public class LROsImpl implements LROs {
     /**
      * Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws CloudException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the Product object if successful.
@@ -2468,7 +2412,6 @@ public class LROsImpl implements LROs {
     /**
      * Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the observable for the request.
      */
     public Observable<OperationStatus<Product>> beginPutAsyncNoRetrycanceledAsync() {
@@ -2516,7 +2459,6 @@ public class LROsImpl implements LROs {
     /**
      * Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws CloudException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the Product object if successful.
@@ -2539,7 +2481,6 @@ public class LROsImpl implements LROs {
     /**
      * Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;LROsPutAsyncNoRetrycanceledHeaders, Product&gt;&gt;} object if successful.
      */
     public Single<RestResponse<LROsPutAsyncNoRetrycanceledHeaders, Product>> putAsyncNoRetrycanceledWithRestResponseAsync() {
@@ -2550,7 +2491,6 @@ public class LROsImpl implements LROs {
     /**
      * Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Maybe&lt;Product&gt;} object if successful.
      */
     public Maybe<Product> putAsyncNoRetrycanceledAsync() {
@@ -2626,7 +2566,6 @@ public class LROsImpl implements LROs {
     /**
      * Long running put request, service returns a 202 to the initial request with Azure-AsyncOperation header. Subsequent calls to operation status do not contain Azure-AsyncOperation header.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws CloudException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the Product object if successful.
@@ -2649,7 +2588,6 @@ public class LROsImpl implements LROs {
     /**
      * Long running put request, service returns a 202 to the initial request with Azure-AsyncOperation header. Subsequent calls to operation status do not contain Azure-AsyncOperation header.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the observable for the request.
      */
     public Observable<OperationStatus<Product>> beginPutAsyncNoHeaderInRetryAsync() {
@@ -2697,7 +2635,6 @@ public class LROsImpl implements LROs {
     /**
      * Long running put request, service returns a 202 to the initial request with Azure-AsyncOperation header. Subsequent calls to operation status do not contain Azure-AsyncOperation header.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws CloudException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the Product object if successful.
@@ -2720,7 +2657,6 @@ public class LROsImpl implements LROs {
     /**
      * Long running put request, service returns a 202 to the initial request with Azure-AsyncOperation header. Subsequent calls to operation status do not contain Azure-AsyncOperation header.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;LROsPutAsyncNoHeaderInRetryHeaders, Product&gt;&gt;} object if successful.
      */
     public Single<RestResponse<LROsPutAsyncNoHeaderInRetryHeaders, Product>> putAsyncNoHeaderInRetryWithRestResponseAsync() {
@@ -2731,7 +2667,6 @@ public class LROsImpl implements LROs {
     /**
      * Long running put request, service returns a 202 to the initial request with Azure-AsyncOperation header. Subsequent calls to operation status do not contain Azure-AsyncOperation header.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Maybe&lt;Product&gt;} object if successful.
      */
     public Maybe<Product> putAsyncNoHeaderInRetryAsync() {
@@ -2807,7 +2742,6 @@ public class LROsImpl implements LROs {
     /**
      * Long running put request with non resource.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws CloudException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the Sku object if successful.
@@ -2830,7 +2764,6 @@ public class LROsImpl implements LROs {
     /**
      * Long running put request with non resource.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the observable for the request.
      */
     public Observable<OperationStatus<Sku>> beginPutNonResourceAsync() {
@@ -2878,7 +2811,6 @@ public class LROsImpl implements LROs {
     /**
      * Long running put request with non resource.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws CloudException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the Sku object if successful.
@@ -2901,7 +2833,6 @@ public class LROsImpl implements LROs {
     /**
      * Long running put request with non resource.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, Sku&gt;&gt;} object if successful.
      */
     public Single<RestResponse<Void, Sku>> putNonResourceWithRestResponseAsync() {
@@ -2912,7 +2843,6 @@ public class LROsImpl implements LROs {
     /**
      * Long running put request with non resource.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Maybe&lt;Sku&gt;} object if successful.
      */
     public Maybe<Sku> putNonResourceAsync() {
@@ -2988,7 +2918,6 @@ public class LROsImpl implements LROs {
     /**
      * Long running put request with non resource.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws CloudException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the Sku object if successful.
@@ -3011,7 +2940,6 @@ public class LROsImpl implements LROs {
     /**
      * Long running put request with non resource.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the observable for the request.
      */
     public Observable<OperationStatus<Sku>> beginPutAsyncNonResourceAsync() {
@@ -3059,7 +2987,6 @@ public class LROsImpl implements LROs {
     /**
      * Long running put request with non resource.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws CloudException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the Sku object if successful.
@@ -3082,7 +3009,6 @@ public class LROsImpl implements LROs {
     /**
      * Long running put request with non resource.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, Sku&gt;&gt;} object if successful.
      */
     public Single<RestResponse<Void, Sku>> putAsyncNonResourceWithRestResponseAsync() {
@@ -3093,7 +3019,6 @@ public class LROsImpl implements LROs {
     /**
      * Long running put request with non resource.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Maybe&lt;Sku&gt;} object if successful.
      */
     public Maybe<Sku> putAsyncNonResourceAsync() {
@@ -3169,7 +3094,6 @@ public class LROsImpl implements LROs {
     /**
      * Long running put request with sub resource.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws CloudException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the SubProduct object if successful.
@@ -3192,7 +3116,6 @@ public class LROsImpl implements LROs {
     /**
      * Long running put request with sub resource.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the observable for the request.
      */
     public Observable<OperationStatus<SubProduct>> beginPutSubResourceAsync() {
@@ -3240,7 +3163,6 @@ public class LROsImpl implements LROs {
     /**
      * Long running put request with sub resource.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws CloudException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the SubProduct object if successful.
@@ -3263,7 +3185,6 @@ public class LROsImpl implements LROs {
     /**
      * Long running put request with sub resource.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, SubProduct&gt;&gt;} object if successful.
      */
     public Single<RestResponse<Void, SubProduct>> putSubResourceWithRestResponseAsync() {
@@ -3274,7 +3195,6 @@ public class LROsImpl implements LROs {
     /**
      * Long running put request with sub resource.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Maybe&lt;SubProduct&gt;} object if successful.
      */
     public Maybe<SubProduct> putSubResourceAsync() {
@@ -3350,7 +3270,6 @@ public class LROsImpl implements LROs {
     /**
      * Long running put request with sub resource.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws CloudException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the SubProduct object if successful.
@@ -3373,7 +3292,6 @@ public class LROsImpl implements LROs {
     /**
      * Long running put request with sub resource.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the observable for the request.
      */
     public Observable<OperationStatus<SubProduct>> beginPutAsyncSubResourceAsync() {
@@ -3421,7 +3339,6 @@ public class LROsImpl implements LROs {
     /**
      * Long running put request with sub resource.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws CloudException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the SubProduct object if successful.
@@ -3444,7 +3361,6 @@ public class LROsImpl implements LROs {
     /**
      * Long running put request with sub resource.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, SubProduct&gt;&gt;} object if successful.
      */
     public Single<RestResponse<Void, SubProduct>> putAsyncSubResourceWithRestResponseAsync() {
@@ -3455,7 +3371,6 @@ public class LROsImpl implements LROs {
     /**
      * Long running put request with sub resource.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Maybe&lt;SubProduct&gt;} object if successful.
      */
     public Maybe<SubProduct> putAsyncSubResourceAsync() {
@@ -3531,7 +3446,6 @@ public class LROsImpl implements LROs {
     /**
      * Long running delete request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Accepted’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Succeeded’.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws CloudException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the Product object if successful.
@@ -3554,7 +3468,6 @@ public class LROsImpl implements LROs {
     /**
      * Long running delete request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Accepted’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Succeeded’.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the observable for the request.
      */
     public Observable<OperationStatus<Product>> beginDeleteProvisioning202Accepted200SucceededAsync() {
@@ -3564,7 +3477,6 @@ public class LROsImpl implements LROs {
     /**
      * Long running delete request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Accepted’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Succeeded’.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws CloudException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the Product object if successful.
@@ -3587,7 +3499,6 @@ public class LROsImpl implements LROs {
     /**
      * Long running delete request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Accepted’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Succeeded’.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;LROsDeleteProvisioning202Accepted200SucceededHeaders, Product&gt;&gt;} object if successful.
      */
     public Single<RestResponse<LROsDeleteProvisioning202Accepted200SucceededHeaders, Product>> deleteProvisioning202Accepted200SucceededWithRestResponseAsync() {
@@ -3597,7 +3508,6 @@ public class LROsImpl implements LROs {
     /**
      * Long running delete request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Accepted’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Succeeded’.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Maybe&lt;Product&gt;} object if successful.
      */
     public Maybe<Product> deleteProvisioning202Accepted200SucceededAsync() {
@@ -3616,7 +3526,6 @@ public class LROsImpl implements LROs {
     /**
      * Long running delete request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Failed’.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws CloudException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the Product object if successful.
@@ -3639,7 +3548,6 @@ public class LROsImpl implements LROs {
     /**
      * Long running delete request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Failed’.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the observable for the request.
      */
     public Observable<OperationStatus<Product>> beginDeleteProvisioning202DeletingFailed200Async() {
@@ -3649,7 +3557,6 @@ public class LROsImpl implements LROs {
     /**
      * Long running delete request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Failed’.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws CloudException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the Product object if successful.
@@ -3672,7 +3579,6 @@ public class LROsImpl implements LROs {
     /**
      * Long running delete request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Failed’.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;LROsDeleteProvisioning202DeletingFailed200Headers, Product&gt;&gt;} object if successful.
      */
     public Single<RestResponse<LROsDeleteProvisioning202DeletingFailed200Headers, Product>> deleteProvisioning202DeletingFailed200WithRestResponseAsync() {
@@ -3682,7 +3588,6 @@ public class LROsImpl implements LROs {
     /**
      * Long running delete request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Failed’.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Maybe&lt;Product&gt;} object if successful.
      */
     public Maybe<Product> deleteProvisioning202DeletingFailed200Async() {
@@ -3701,7 +3606,6 @@ public class LROsImpl implements LROs {
     /**
      * Long running delete request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Canceled’.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws CloudException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the Product object if successful.
@@ -3724,7 +3628,6 @@ public class LROsImpl implements LROs {
     /**
      * Long running delete request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Canceled’.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the observable for the request.
      */
     public Observable<OperationStatus<Product>> beginDeleteProvisioning202Deletingcanceled200Async() {
@@ -3734,7 +3637,6 @@ public class LROsImpl implements LROs {
     /**
      * Long running delete request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Canceled’.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws CloudException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the Product object if successful.
@@ -3757,7 +3659,6 @@ public class LROsImpl implements LROs {
     /**
      * Long running delete request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Canceled’.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;LROsDeleteProvisioning202Deletingcanceled200Headers, Product&gt;&gt;} object if successful.
      */
     public Single<RestResponse<LROsDeleteProvisioning202Deletingcanceled200Headers, Product>> deleteProvisioning202Deletingcanceled200WithRestResponseAsync() {
@@ -3767,7 +3668,6 @@ public class LROsImpl implements LROs {
     /**
      * Long running delete request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Canceled’.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Maybe&lt;Product&gt;} object if successful.
      */
     public Maybe<Product> deleteProvisioning202Deletingcanceled200Async() {
@@ -3786,7 +3686,6 @@ public class LROsImpl implements LROs {
     /**
      * Long running delete succeeds and returns right away.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws CloudException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
@@ -3808,7 +3707,6 @@ public class LROsImpl implements LROs {
     /**
      * Long running delete succeeds and returns right away.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the observable for the request.
      */
     public Observable<OperationStatus<Void>> beginDelete204SucceededAsync() {
@@ -3818,7 +3716,6 @@ public class LROsImpl implements LROs {
     /**
      * Long running delete succeeds and returns right away.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws CloudException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
@@ -3840,7 +3737,6 @@ public class LROsImpl implements LROs {
     /**
      * Long running delete succeeds and returns right away.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
      */
     public Single<RestResponse<Void, Void>> delete204SucceededWithRestResponseAsync() {
@@ -3850,7 +3746,6 @@ public class LROsImpl implements LROs {
     /**
      * Long running delete succeeds and returns right away.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Completable} object if successful.
      */
     public Completable delete204SucceededAsync() {
@@ -3861,7 +3756,6 @@ public class LROsImpl implements LROs {
     /**
      * Long running delete request, service returns a 202 to the initial request. Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Succeeded’.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws CloudException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the Product object if successful.
@@ -3884,7 +3778,6 @@ public class LROsImpl implements LROs {
     /**
      * Long running delete request, service returns a 202 to the initial request. Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Succeeded’.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the observable for the request.
      */
     public Observable<OperationStatus<Product>> beginDelete202Retry200Async() {
@@ -3894,7 +3787,6 @@ public class LROsImpl implements LROs {
     /**
      * Long running delete request, service returns a 202 to the initial request. Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Succeeded’.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws CloudException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the Product object if successful.
@@ -3917,7 +3809,6 @@ public class LROsImpl implements LROs {
     /**
      * Long running delete request, service returns a 202 to the initial request. Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Succeeded’.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;LROsDelete202Retry200Headers, Product&gt;&gt;} object if successful.
      */
     public Single<RestResponse<LROsDelete202Retry200Headers, Product>> delete202Retry200WithRestResponseAsync() {
@@ -3927,7 +3818,6 @@ public class LROsImpl implements LROs {
     /**
      * Long running delete request, service returns a 202 to the initial request. Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Succeeded’.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Maybe&lt;Product&gt;} object if successful.
      */
     public Maybe<Product> delete202Retry200Async() {
@@ -3946,7 +3836,6 @@ public class LROsImpl implements LROs {
     /**
      * Long running delete request, service returns a 202 to the initial request. Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Succeeded’.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws CloudException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the Product object if successful.
@@ -3969,7 +3858,6 @@ public class LROsImpl implements LROs {
     /**
      * Long running delete request, service returns a 202 to the initial request. Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Succeeded’.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the observable for the request.
      */
     public Observable<OperationStatus<Product>> beginDelete202NoRetry204Async() {
@@ -3979,7 +3867,6 @@ public class LROsImpl implements LROs {
     /**
      * Long running delete request, service returns a 202 to the initial request. Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Succeeded’.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws CloudException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the Product object if successful.
@@ -4002,7 +3889,6 @@ public class LROsImpl implements LROs {
     /**
      * Long running delete request, service returns a 202 to the initial request. Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Succeeded’.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;LROsDelete202NoRetry204Headers, Product&gt;&gt;} object if successful.
      */
     public Single<RestResponse<LROsDelete202NoRetry204Headers, Product>> delete202NoRetry204WithRestResponseAsync() {
@@ -4012,7 +3898,6 @@ public class LROsImpl implements LROs {
     /**
      * Long running delete request, service returns a 202 to the initial request. Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Succeeded’.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Maybe&lt;Product&gt;} object if successful.
      */
     public Maybe<Product> delete202NoRetry204Async() {
@@ -4031,7 +3916,6 @@ public class LROsImpl implements LROs {
     /**
      * Long running delete request, service returns a location header in the initial request. Subsequent calls to operation status do not contain location header.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws CloudException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
@@ -4053,7 +3937,6 @@ public class LROsImpl implements LROs {
     /**
      * Long running delete request, service returns a location header in the initial request. Subsequent calls to operation status do not contain location header.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the observable for the request.
      */
     public Observable<OperationStatus<Void>> beginDeleteNoHeaderInRetryAsync() {
@@ -4063,7 +3946,6 @@ public class LROsImpl implements LROs {
     /**
      * Long running delete request, service returns a location header in the initial request. Subsequent calls to operation status do not contain location header.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws CloudException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
@@ -4085,7 +3967,6 @@ public class LROsImpl implements LROs {
     /**
      * Long running delete request, service returns a location header in the initial request. Subsequent calls to operation status do not contain location header.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;LROsDeleteNoHeaderInRetryHeaders, Void&gt;&gt;} object if successful.
      */
     public Single<RestResponse<LROsDeleteNoHeaderInRetryHeaders, Void>> deleteNoHeaderInRetryWithRestResponseAsync() {
@@ -4095,7 +3976,6 @@ public class LROsImpl implements LROs {
     /**
      * Long running delete request, service returns a location header in the initial request. Subsequent calls to operation status do not contain location header.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Completable} object if successful.
      */
     public Completable deleteNoHeaderInRetryAsync() {
@@ -4106,7 +3986,6 @@ public class LROsImpl implements LROs {
     /**
      * Long running delete request, service returns an Azure-AsyncOperation header in the initial request. Subsequent calls to operation status do not contain Azure-AsyncOperation header.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws CloudException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
@@ -4128,7 +4007,6 @@ public class LROsImpl implements LROs {
     /**
      * Long running delete request, service returns an Azure-AsyncOperation header in the initial request. Subsequent calls to operation status do not contain Azure-AsyncOperation header.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the observable for the request.
      */
     public Observable<OperationStatus<Void>> beginDeleteAsyncNoHeaderInRetryAsync() {
@@ -4138,7 +4016,6 @@ public class LROsImpl implements LROs {
     /**
      * Long running delete request, service returns an Azure-AsyncOperation header in the initial request. Subsequent calls to operation status do not contain Azure-AsyncOperation header.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws CloudException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
@@ -4160,7 +4037,6 @@ public class LROsImpl implements LROs {
     /**
      * Long running delete request, service returns an Azure-AsyncOperation header in the initial request. Subsequent calls to operation status do not contain Azure-AsyncOperation header.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;LROsDeleteAsyncNoHeaderInRetryHeaders, Void&gt;&gt;} object if successful.
      */
     public Single<RestResponse<LROsDeleteAsyncNoHeaderInRetryHeaders, Void>> deleteAsyncNoHeaderInRetryWithRestResponseAsync() {
@@ -4170,7 +4046,6 @@ public class LROsImpl implements LROs {
     /**
      * Long running delete request, service returns an Azure-AsyncOperation header in the initial request. Subsequent calls to operation status do not contain Azure-AsyncOperation header.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Completable} object if successful.
      */
     public Completable deleteAsyncNoHeaderInRetryAsync() {
@@ -4181,7 +4056,6 @@ public class LROsImpl implements LROs {
     /**
      * Long running delete request, service returns a 202 to the initial request. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws CloudException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
@@ -4203,7 +4077,6 @@ public class LROsImpl implements LROs {
     /**
      * Long running delete request, service returns a 202 to the initial request. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the observable for the request.
      */
     public Observable<OperationStatus<Void>> beginDeleteAsyncRetrySucceededAsync() {
@@ -4213,7 +4086,6 @@ public class LROsImpl implements LROs {
     /**
      * Long running delete request, service returns a 202 to the initial request. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws CloudException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
@@ -4235,7 +4107,6 @@ public class LROsImpl implements LROs {
     /**
      * Long running delete request, service returns a 202 to the initial request. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;LROsDeleteAsyncRetrySucceededHeaders, Void&gt;&gt;} object if successful.
      */
     public Single<RestResponse<LROsDeleteAsyncRetrySucceededHeaders, Void>> deleteAsyncRetrySucceededWithRestResponseAsync() {
@@ -4245,7 +4116,6 @@ public class LROsImpl implements LROs {
     /**
      * Long running delete request, service returns a 202 to the initial request. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Completable} object if successful.
      */
     public Completable deleteAsyncRetrySucceededAsync() {
@@ -4256,7 +4126,6 @@ public class LROsImpl implements LROs {
     /**
      * Long running delete request, service returns a 202 to the initial request. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws CloudException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
@@ -4278,7 +4147,6 @@ public class LROsImpl implements LROs {
     /**
      * Long running delete request, service returns a 202 to the initial request. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the observable for the request.
      */
     public Observable<OperationStatus<Void>> beginDeleteAsyncNoRetrySucceededAsync() {
@@ -4288,7 +4156,6 @@ public class LROsImpl implements LROs {
     /**
      * Long running delete request, service returns a 202 to the initial request. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws CloudException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
@@ -4310,7 +4177,6 @@ public class LROsImpl implements LROs {
     /**
      * Long running delete request, service returns a 202 to the initial request. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;LROsDeleteAsyncNoRetrySucceededHeaders, Void&gt;&gt;} object if successful.
      */
     public Single<RestResponse<LROsDeleteAsyncNoRetrySucceededHeaders, Void>> deleteAsyncNoRetrySucceededWithRestResponseAsync() {
@@ -4320,7 +4186,6 @@ public class LROsImpl implements LROs {
     /**
      * Long running delete request, service returns a 202 to the initial request. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Completable} object if successful.
      */
     public Completable deleteAsyncNoRetrySucceededAsync() {
@@ -4331,7 +4196,6 @@ public class LROsImpl implements LROs {
     /**
      * Long running delete request, service returns a 202 to the initial request. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws CloudException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
@@ -4353,7 +4217,6 @@ public class LROsImpl implements LROs {
     /**
      * Long running delete request, service returns a 202 to the initial request. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the observable for the request.
      */
     public Observable<OperationStatus<Void>> beginDeleteAsyncRetryFailedAsync() {
@@ -4363,7 +4226,6 @@ public class LROsImpl implements LROs {
     /**
      * Long running delete request, service returns a 202 to the initial request. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws CloudException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
@@ -4385,7 +4247,6 @@ public class LROsImpl implements LROs {
     /**
      * Long running delete request, service returns a 202 to the initial request. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;LROsDeleteAsyncRetryFailedHeaders, Void&gt;&gt;} object if successful.
      */
     public Single<RestResponse<LROsDeleteAsyncRetryFailedHeaders, Void>> deleteAsyncRetryFailedWithRestResponseAsync() {
@@ -4395,7 +4256,6 @@ public class LROsImpl implements LROs {
     /**
      * Long running delete request, service returns a 202 to the initial request. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Completable} object if successful.
      */
     public Completable deleteAsyncRetryFailedAsync() {
@@ -4406,7 +4266,6 @@ public class LROsImpl implements LROs {
     /**
      * Long running delete request, service returns a 202 to the initial request. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws CloudException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
@@ -4428,7 +4287,6 @@ public class LROsImpl implements LROs {
     /**
      * Long running delete request, service returns a 202 to the initial request. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the observable for the request.
      */
     public Observable<OperationStatus<Void>> beginDeleteAsyncRetrycanceledAsync() {
@@ -4438,7 +4296,6 @@ public class LROsImpl implements LROs {
     /**
      * Long running delete request, service returns a 202 to the initial request. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws CloudException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
@@ -4460,7 +4317,6 @@ public class LROsImpl implements LROs {
     /**
      * Long running delete request, service returns a 202 to the initial request. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;LROsDeleteAsyncRetrycanceledHeaders, Void&gt;&gt;} object if successful.
      */
     public Single<RestResponse<LROsDeleteAsyncRetrycanceledHeaders, Void>> deleteAsyncRetrycanceledWithRestResponseAsync() {
@@ -4470,7 +4326,6 @@ public class LROsImpl implements LROs {
     /**
      * Long running delete request, service returns a 202 to the initial request. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Completable} object if successful.
      */
     public Completable deleteAsyncRetrycanceledAsync() {
@@ -4481,7 +4336,6 @@ public class LROsImpl implements LROs {
     /**
      * Long running post request, service returns a 202 to the initial request, with 'Location' header. Poll returns a 200 with a response body after success.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws CloudException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the Sku object if successful.
@@ -4504,7 +4358,6 @@ public class LROsImpl implements LROs {
     /**
      * Long running post request, service returns a 202 to the initial request, with 'Location' header. Poll returns a 200 with a response body after success.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the observable for the request.
      */
     public Observable<OperationStatus<Sku>> beginPost200WithPayloadAsync() {
@@ -4514,7 +4367,6 @@ public class LROsImpl implements LROs {
     /**
      * Long running post request, service returns a 202 to the initial request, with 'Location' header. Poll returns a 200 with a response body after success.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws CloudException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the Sku object if successful.
@@ -4537,7 +4389,6 @@ public class LROsImpl implements LROs {
     /**
      * Long running post request, service returns a 202 to the initial request, with 'Location' header. Poll returns a 200 with a response body after success.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, Sku&gt;&gt;} object if successful.
      */
     public Single<RestResponse<Void, Sku>> post200WithPayloadWithRestResponseAsync() {
@@ -4547,7 +4398,6 @@ public class LROsImpl implements LROs {
     /**
      * Long running post request, service returns a 202 to the initial request, with 'Location' header. Poll returns a 200 with a response body after success.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Maybe&lt;Sku&gt;} object if successful.
      */
     public Maybe<Sku> post200WithPayloadAsync() {
@@ -4566,7 +4416,6 @@ public class LROsImpl implements LROs {
     /**
      * Long running post request, service returns a 202 to the initial request, with 'Location' and 'Retry-After' headers, Polls return a 200 with a response body after success.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws CloudException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
@@ -4588,7 +4437,6 @@ public class LROsImpl implements LROs {
     /**
      * Long running post request, service returns a 202 to the initial request, with 'Location' and 'Retry-After' headers, Polls return a 200 with a response body after success.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the observable for the request.
      */
     public Observable<OperationStatus<Void>> beginPost202Retry200Async() {
@@ -4635,7 +4483,6 @@ public class LROsImpl implements LROs {
     /**
      * Long running post request, service returns a 202 to the initial request, with 'Location' and 'Retry-After' headers, Polls return a 200 with a response body after success.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws CloudException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
@@ -4657,7 +4504,6 @@ public class LROsImpl implements LROs {
     /**
      * Long running post request, service returns a 202 to the initial request, with 'Location' and 'Retry-After' headers, Polls return a 200 with a response body after success.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;LROsPost202Retry200Headers, Void&gt;&gt;} object if successful.
      */
     public Single<RestResponse<LROsPost202Retry200Headers, Void>> post202Retry200WithRestResponseAsync() {
@@ -4668,7 +4514,6 @@ public class LROsImpl implements LROs {
     /**
      * Long running post request, service returns a 202 to the initial request, with 'Location' and 'Retry-After' headers, Polls return a 200 with a response body after success.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Completable} object if successful.
      */
     public Completable post202Retry200Async() {
@@ -4727,7 +4572,6 @@ public class LROsImpl implements LROs {
     /**
      * Long running post request, service returns a 202 to the initial request, with 'Location' header, 204 with noresponse body after success.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws CloudException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the Product object if successful.
@@ -4750,7 +4594,6 @@ public class LROsImpl implements LROs {
     /**
      * Long running post request, service returns a 202 to the initial request, with 'Location' header, 204 with noresponse body after success.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the observable for the request.
      */
     public Observable<OperationStatus<Product>> beginPost202NoRetry204Async() {
@@ -4798,7 +4641,6 @@ public class LROsImpl implements LROs {
     /**
      * Long running post request, service returns a 202 to the initial request, with 'Location' header, 204 with noresponse body after success.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws CloudException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the Product object if successful.
@@ -4821,7 +4663,6 @@ public class LROsImpl implements LROs {
     /**
      * Long running post request, service returns a 202 to the initial request, with 'Location' header, 204 with noresponse body after success.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;LROsPost202NoRetry204Headers, Product&gt;&gt;} object if successful.
      */
     public Single<RestResponse<LROsPost202NoRetry204Headers, Product>> post202NoRetry204WithRestResponseAsync() {
@@ -4832,7 +4673,6 @@ public class LROsImpl implements LROs {
     /**
      * Long running post request, service returns a 202 to the initial request, with 'Location' header, 204 with noresponse body after success.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Maybe&lt;Product&gt;} object if successful.
      */
     public Maybe<Product> post202NoRetry204Async() {
@@ -4908,7 +4748,6 @@ public class LROsImpl implements LROs {
     /**
      * Long running post request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws CloudException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the Product object if successful.
@@ -4931,7 +4770,6 @@ public class LROsImpl implements LROs {
     /**
      * Long running post request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the observable for the request.
      */
     public Observable<OperationStatus<Product>> beginPostAsyncRetrySucceededAsync() {
@@ -4979,7 +4817,6 @@ public class LROsImpl implements LROs {
     /**
      * Long running post request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws CloudException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the Product object if successful.
@@ -5002,7 +4839,6 @@ public class LROsImpl implements LROs {
     /**
      * Long running post request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;LROsPostAsyncRetrySucceededHeaders, Product&gt;&gt;} object if successful.
      */
     public Single<RestResponse<LROsPostAsyncRetrySucceededHeaders, Product>> postAsyncRetrySucceededWithRestResponseAsync() {
@@ -5013,7 +4849,6 @@ public class LROsImpl implements LROs {
     /**
      * Long running post request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Maybe&lt;Product&gt;} object if successful.
      */
     public Maybe<Product> postAsyncRetrySucceededAsync() {
@@ -5089,7 +4924,6 @@ public class LROsImpl implements LROs {
     /**
      * Long running post request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws CloudException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the Product object if successful.
@@ -5112,7 +4946,6 @@ public class LROsImpl implements LROs {
     /**
      * Long running post request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the observable for the request.
      */
     public Observable<OperationStatus<Product>> beginPostAsyncNoRetrySucceededAsync() {
@@ -5160,7 +4993,6 @@ public class LROsImpl implements LROs {
     /**
      * Long running post request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws CloudException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the Product object if successful.
@@ -5183,7 +5015,6 @@ public class LROsImpl implements LROs {
     /**
      * Long running post request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;LROsPostAsyncNoRetrySucceededHeaders, Product&gt;&gt;} object if successful.
      */
     public Single<RestResponse<LROsPostAsyncNoRetrySucceededHeaders, Product>> postAsyncNoRetrySucceededWithRestResponseAsync() {
@@ -5194,7 +5025,6 @@ public class LROsImpl implements LROs {
     /**
      * Long running post request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Maybe&lt;Product&gt;} object if successful.
      */
     public Maybe<Product> postAsyncNoRetrySucceededAsync() {
@@ -5270,7 +5100,6 @@ public class LROsImpl implements LROs {
     /**
      * Long running post request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws CloudException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
@@ -5292,7 +5121,6 @@ public class LROsImpl implements LROs {
     /**
      * Long running post request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the observable for the request.
      */
     public Observable<OperationStatus<Void>> beginPostAsyncRetryFailedAsync() {
@@ -5339,7 +5167,6 @@ public class LROsImpl implements LROs {
     /**
      * Long running post request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws CloudException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
@@ -5361,7 +5188,6 @@ public class LROsImpl implements LROs {
     /**
      * Long running post request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;LROsPostAsyncRetryFailedHeaders, Void&gt;&gt;} object if successful.
      */
     public Single<RestResponse<LROsPostAsyncRetryFailedHeaders, Void>> postAsyncRetryFailedWithRestResponseAsync() {
@@ -5372,7 +5198,6 @@ public class LROsImpl implements LROs {
     /**
      * Long running post request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Completable} object if successful.
      */
     public Completable postAsyncRetryFailedAsync() {
@@ -5431,7 +5256,6 @@ public class LROsImpl implements LROs {
     /**
      * Long running post request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws CloudException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
@@ -5453,7 +5277,6 @@ public class LROsImpl implements LROs {
     /**
      * Long running post request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the observable for the request.
      */
     public Observable<OperationStatus<Void>> beginPostAsyncRetrycanceledAsync() {
@@ -5500,7 +5323,6 @@ public class LROsImpl implements LROs {
     /**
      * Long running post request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws CloudException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
@@ -5522,7 +5344,6 @@ public class LROsImpl implements LROs {
     /**
      * Long running post request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;LROsPostAsyncRetrycanceledHeaders, Void&gt;&gt;} object if successful.
      */
     public Single<RestResponse<LROsPostAsyncRetrycanceledHeaders, Void>> postAsyncRetrycanceledWithRestResponseAsync() {
@@ -5533,7 +5354,6 @@ public class LROsImpl implements LROs {
     /**
      * Long running post request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Completable} object if successful.
      */
     public Completable postAsyncRetrycanceledAsync() {

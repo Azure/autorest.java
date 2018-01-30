@@ -157,7 +157,6 @@ public class HttpSuccessImpl implements HttpSuccess {
     /**
      * Return 200 status code if successful.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
@@ -179,7 +178,6 @@ public class HttpSuccessImpl implements HttpSuccess {
     /**
      * Return 200 status code if successful.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
      */
     public Single<RestResponse<Void, Void>> head200WithRestResponseAsync() {
@@ -189,7 +187,6 @@ public class HttpSuccessImpl implements HttpSuccess {
     /**
      * Return 200 status code if successful.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Completable} object if successful.
      */
     public Completable head200Async() {
@@ -200,7 +197,6 @@ public class HttpSuccessImpl implements HttpSuccess {
     /**
      * Get 200 success.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the boolean object if successful.
@@ -223,7 +219,6 @@ public class HttpSuccessImpl implements HttpSuccess {
     /**
      * Get 200 success.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, Boolean&gt;&gt;} object if successful.
      */
     public Single<RestResponse<Void, Boolean>> get200WithRestResponseAsync() {
@@ -233,7 +228,6 @@ public class HttpSuccessImpl implements HttpSuccess {
     /**
      * Get 200 success.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Maybe&lt;Boolean&gt;} object if successful.
      */
     public Maybe<Boolean> get200Async() {
@@ -252,7 +246,6 @@ public class HttpSuccessImpl implements HttpSuccess {
     /**
      * Put boolean value true returning 200 success.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
@@ -274,7 +267,6 @@ public class HttpSuccessImpl implements HttpSuccess {
     /**
      * Put boolean value true returning 200 success.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
      */
     public Single<RestResponse<Void, Void>> put200WithRestResponseAsync() {
@@ -285,7 +277,6 @@ public class HttpSuccessImpl implements HttpSuccess {
     /**
      * Put boolean value true returning 200 success.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Completable} object if successful.
      */
     public Completable put200Async() {
@@ -343,7 +334,6 @@ public class HttpSuccessImpl implements HttpSuccess {
     /**
      * Patch true Boolean value in request returning 200.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
@@ -365,7 +355,6 @@ public class HttpSuccessImpl implements HttpSuccess {
     /**
      * Patch true Boolean value in request returning 200.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
      */
     public Single<RestResponse<Void, Void>> patch200WithRestResponseAsync() {
@@ -376,7 +365,6 @@ public class HttpSuccessImpl implements HttpSuccess {
     /**
      * Patch true Boolean value in request returning 200.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Completable} object if successful.
      */
     public Completable patch200Async() {
@@ -434,7 +422,6 @@ public class HttpSuccessImpl implements HttpSuccess {
     /**
      * Post bollean value true in request that returns a 200.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
@@ -456,7 +443,6 @@ public class HttpSuccessImpl implements HttpSuccess {
     /**
      * Post bollean value true in request that returns a 200.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
      */
     public Single<RestResponse<Void, Void>> post200WithRestResponseAsync() {
@@ -467,7 +453,6 @@ public class HttpSuccessImpl implements HttpSuccess {
     /**
      * Post bollean value true in request that returns a 200.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Completable} object if successful.
      */
     public Completable post200Async() {
@@ -525,7 +510,6 @@ public class HttpSuccessImpl implements HttpSuccess {
     /**
      * Delete simple boolean value true returns 200.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
@@ -547,7 +531,6 @@ public class HttpSuccessImpl implements HttpSuccess {
     /**
      * Delete simple boolean value true returns 200.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
      */
     public Single<RestResponse<Void, Void>> delete200WithRestResponseAsync() {
@@ -558,7 +541,6 @@ public class HttpSuccessImpl implements HttpSuccess {
     /**
      * Delete simple boolean value true returns 200.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Completable} object if successful.
      */
     public Completable delete200Async() {
@@ -616,7 +598,6 @@ public class HttpSuccessImpl implements HttpSuccess {
     /**
      * Put true Boolean value in request returns 201.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
@@ -638,7 +619,6 @@ public class HttpSuccessImpl implements HttpSuccess {
     /**
      * Put true Boolean value in request returns 201.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
      */
     public Single<RestResponse<Void, Void>> put201WithRestResponseAsync() {
@@ -649,7 +629,6 @@ public class HttpSuccessImpl implements HttpSuccess {
     /**
      * Put true Boolean value in request returns 201.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Completable} object if successful.
      */
     public Completable put201Async() {
@@ -707,7 +686,6 @@ public class HttpSuccessImpl implements HttpSuccess {
     /**
      * Post true Boolean value in request returns 201 (Created).
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
@@ -729,7 +707,6 @@ public class HttpSuccessImpl implements HttpSuccess {
     /**
      * Post true Boolean value in request returns 201 (Created).
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
      */
     public Single<RestResponse<Void, Void>> post201WithRestResponseAsync() {
@@ -740,7 +717,6 @@ public class HttpSuccessImpl implements HttpSuccess {
     /**
      * Post true Boolean value in request returns 201 (Created).
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Completable} object if successful.
      */
     public Completable post201Async() {
@@ -798,7 +774,6 @@ public class HttpSuccessImpl implements HttpSuccess {
     /**
      * Put true Boolean value in request returns 202 (Accepted).
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
@@ -820,7 +795,6 @@ public class HttpSuccessImpl implements HttpSuccess {
     /**
      * Put true Boolean value in request returns 202 (Accepted).
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
      */
     public Single<RestResponse<Void, Void>> put202WithRestResponseAsync() {
@@ -831,7 +805,6 @@ public class HttpSuccessImpl implements HttpSuccess {
     /**
      * Put true Boolean value in request returns 202 (Accepted).
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Completable} object if successful.
      */
     public Completable put202Async() {
@@ -889,7 +862,6 @@ public class HttpSuccessImpl implements HttpSuccess {
     /**
      * Patch true Boolean value in request returns 202.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
@@ -911,7 +883,6 @@ public class HttpSuccessImpl implements HttpSuccess {
     /**
      * Patch true Boolean value in request returns 202.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
      */
     public Single<RestResponse<Void, Void>> patch202WithRestResponseAsync() {
@@ -922,7 +893,6 @@ public class HttpSuccessImpl implements HttpSuccess {
     /**
      * Patch true Boolean value in request returns 202.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Completable} object if successful.
      */
     public Completable patch202Async() {
@@ -980,7 +950,6 @@ public class HttpSuccessImpl implements HttpSuccess {
     /**
      * Post true Boolean value in request returns 202 (Accepted).
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
@@ -1002,7 +971,6 @@ public class HttpSuccessImpl implements HttpSuccess {
     /**
      * Post true Boolean value in request returns 202 (Accepted).
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
      */
     public Single<RestResponse<Void, Void>> post202WithRestResponseAsync() {
@@ -1013,7 +981,6 @@ public class HttpSuccessImpl implements HttpSuccess {
     /**
      * Post true Boolean value in request returns 202 (Accepted).
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Completable} object if successful.
      */
     public Completable post202Async() {
@@ -1071,7 +1038,6 @@ public class HttpSuccessImpl implements HttpSuccess {
     /**
      * Delete true Boolean value in request returns 202 (accepted).
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
@@ -1093,7 +1059,6 @@ public class HttpSuccessImpl implements HttpSuccess {
     /**
      * Delete true Boolean value in request returns 202 (accepted).
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
      */
     public Single<RestResponse<Void, Void>> delete202WithRestResponseAsync() {
@@ -1104,7 +1069,6 @@ public class HttpSuccessImpl implements HttpSuccess {
     /**
      * Delete true Boolean value in request returns 202 (accepted).
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Completable} object if successful.
      */
     public Completable delete202Async() {
@@ -1162,7 +1126,6 @@ public class HttpSuccessImpl implements HttpSuccess {
     /**
      * Return 204 status code if successful.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
@@ -1184,7 +1147,6 @@ public class HttpSuccessImpl implements HttpSuccess {
     /**
      * Return 204 status code if successful.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
      */
     public Single<RestResponse<Void, Void>> head204WithRestResponseAsync() {
@@ -1194,7 +1156,6 @@ public class HttpSuccessImpl implements HttpSuccess {
     /**
      * Return 204 status code if successful.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Completable} object if successful.
      */
     public Completable head204Async() {
@@ -1205,7 +1166,6 @@ public class HttpSuccessImpl implements HttpSuccess {
     /**
      * Put true Boolean value in request returns 204 (no content).
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
@@ -1227,7 +1187,6 @@ public class HttpSuccessImpl implements HttpSuccess {
     /**
      * Put true Boolean value in request returns 204 (no content).
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
      */
     public Single<RestResponse<Void, Void>> put204WithRestResponseAsync() {
@@ -1238,7 +1197,6 @@ public class HttpSuccessImpl implements HttpSuccess {
     /**
      * Put true Boolean value in request returns 204 (no content).
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Completable} object if successful.
      */
     public Completable put204Async() {
@@ -1296,7 +1254,6 @@ public class HttpSuccessImpl implements HttpSuccess {
     /**
      * Patch true Boolean value in request returns 204 (no content).
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
@@ -1318,7 +1275,6 @@ public class HttpSuccessImpl implements HttpSuccess {
     /**
      * Patch true Boolean value in request returns 204 (no content).
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
      */
     public Single<RestResponse<Void, Void>> patch204WithRestResponseAsync() {
@@ -1329,7 +1285,6 @@ public class HttpSuccessImpl implements HttpSuccess {
     /**
      * Patch true Boolean value in request returns 204 (no content).
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Completable} object if successful.
      */
     public Completable patch204Async() {
@@ -1387,7 +1342,6 @@ public class HttpSuccessImpl implements HttpSuccess {
     /**
      * Post true Boolean value in request returns 204 (no content).
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
@@ -1409,7 +1363,6 @@ public class HttpSuccessImpl implements HttpSuccess {
     /**
      * Post true Boolean value in request returns 204 (no content).
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
      */
     public Single<RestResponse<Void, Void>> post204WithRestResponseAsync() {
@@ -1420,7 +1373,6 @@ public class HttpSuccessImpl implements HttpSuccess {
     /**
      * Post true Boolean value in request returns 204 (no content).
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Completable} object if successful.
      */
     public Completable post204Async() {
@@ -1478,7 +1430,6 @@ public class HttpSuccessImpl implements HttpSuccess {
     /**
      * Delete true Boolean value in request returns 204 (no content).
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
@@ -1500,7 +1451,6 @@ public class HttpSuccessImpl implements HttpSuccess {
     /**
      * Delete true Boolean value in request returns 204 (no content).
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
      */
     public Single<RestResponse<Void, Void>> delete204WithRestResponseAsync() {
@@ -1511,7 +1461,6 @@ public class HttpSuccessImpl implements HttpSuccess {
     /**
      * Delete true Boolean value in request returns 204 (no content).
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Completable} object if successful.
      */
     public Completable delete204Async() {
@@ -1569,7 +1518,6 @@ public class HttpSuccessImpl implements HttpSuccess {
     /**
      * Return 404 status code.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
@@ -1591,7 +1539,6 @@ public class HttpSuccessImpl implements HttpSuccess {
     /**
      * Return 404 status code.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
      */
     public Single<RestResponse<Void, Void>> head404WithRestResponseAsync() {
@@ -1601,7 +1548,6 @@ public class HttpSuccessImpl implements HttpSuccess {
     /**
      * Return 404 status code.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Completable} object if successful.
      */
     public Completable head404Async() {

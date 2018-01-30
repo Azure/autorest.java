@@ -28,7 +28,6 @@ public interface Durations {
     /**
      * Get null duration value.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the Period object if successful.
@@ -47,7 +46,6 @@ public interface Durations {
     /**
      * Get null duration value.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, Period&gt;&gt;} object if successful.
      */
     Single<RestResponse<Void, Period>> getNullWithRestResponseAsync();
@@ -55,7 +53,6 @@ public interface Durations {
     /**
      * Get null duration value.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Maybe&lt;Period&gt;} object if successful.
      */
     Maybe<Period> getNullAsync();
@@ -101,7 +98,6 @@ public interface Durations {
     /**
      * Get a positive duration value.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the Period object if successful.
@@ -120,7 +116,6 @@ public interface Durations {
     /**
      * Get a positive duration value.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, Period&gt;&gt;} object if successful.
      */
     Single<RestResponse<Void, Period>> getPositiveDurationWithRestResponseAsync();
@@ -128,7 +123,6 @@ public interface Durations {
     /**
      * Get a positive duration value.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Maybe&lt;Period&gt;} object if successful.
      */
     Maybe<Period> getPositiveDurationAsync();
@@ -136,7 +130,6 @@ public interface Durations {
     /**
      * Get an invalid duration value.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the Period object if successful.
@@ -155,7 +148,6 @@ public interface Durations {
     /**
      * Get an invalid duration value.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, Period&gt;&gt;} object if successful.
      */
     Single<RestResponse<Void, Period>> getInvalidWithRestResponseAsync();
@@ -163,7 +155,6 @@ public interface Durations {
     /**
      * Get an invalid duration value.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Maybe&lt;Period&gt;} object if successful.
      */
     Maybe<Period> getInvalidAsync();

@@ -349,7 +349,6 @@ public class LROSADsImpl implements LROSADs {
     /**
      * Long running put request, service returns a 400 to the initial request.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws CloudException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the Product object if successful.
@@ -372,7 +371,6 @@ public class LROSADsImpl implements LROSADs {
     /**
      * Long running put request, service returns a 400 to the initial request.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the observable for the request.
      */
     public Observable<OperationStatus<Product>> beginPutNonRetry400Async() {
@@ -420,7 +418,6 @@ public class LROSADsImpl implements LROSADs {
     /**
      * Long running put request, service returns a 400 to the initial request.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws CloudException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the Product object if successful.
@@ -443,7 +440,6 @@ public class LROSADsImpl implements LROSADs {
     /**
      * Long running put request, service returns a 400 to the initial request.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, Product&gt;&gt;} object if successful.
      */
     public Single<RestResponse<Void, Product>> putNonRetry400WithRestResponseAsync() {
@@ -454,7 +450,6 @@ public class LROSADsImpl implements LROSADs {
     /**
      * Long running put request, service returns a 400 to the initial request.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Maybe&lt;Product&gt;} object if successful.
      */
     public Maybe<Product> putNonRetry400Async() {
@@ -530,7 +525,6 @@ public class LROSADsImpl implements LROSADs {
     /**
      * Long running put request, service returns a Product with 'ProvisioningState' = 'Creating' and 201 response code.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws CloudException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the Product object if successful.
@@ -553,7 +547,6 @@ public class LROSADsImpl implements LROSADs {
     /**
      * Long running put request, service returns a Product with 'ProvisioningState' = 'Creating' and 201 response code.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the observable for the request.
      */
     public Observable<OperationStatus<Product>> beginPutNonRetry201Creating400Async() {
@@ -601,7 +594,6 @@ public class LROSADsImpl implements LROSADs {
     /**
      * Long running put request, service returns a Product with 'ProvisioningState' = 'Creating' and 201 response code.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws CloudException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the Product object if successful.
@@ -624,7 +616,6 @@ public class LROSADsImpl implements LROSADs {
     /**
      * Long running put request, service returns a Product with 'ProvisioningState' = 'Creating' and 201 response code.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, Product&gt;&gt;} object if successful.
      */
     public Single<RestResponse<Void, Product>> putNonRetry201Creating400WithRestResponseAsync() {
@@ -635,7 +626,6 @@ public class LROSADsImpl implements LROSADs {
     /**
      * Long running put request, service returns a Product with 'ProvisioningState' = 'Creating' and 201 response code.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Maybe&lt;Product&gt;} object if successful.
      */
     public Maybe<Product> putNonRetry201Creating400Async() {
@@ -711,7 +701,6 @@ public class LROSADsImpl implements LROSADs {
     /**
      * Long running put request, service returns a Product with 'ProvisioningState' = 'Creating' and 201 response code.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws CloudException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the Product object if successful.
@@ -734,7 +723,6 @@ public class LROSADsImpl implements LROSADs {
     /**
      * Long running put request, service returns a Product with 'ProvisioningState' = 'Creating' and 201 response code.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the observable for the request.
      */
     public Observable<OperationStatus<Product>> beginPutNonRetry201Creating400InvalidJsonAsync() {
@@ -782,7 +770,6 @@ public class LROSADsImpl implements LROSADs {
     /**
      * Long running put request, service returns a Product with 'ProvisioningState' = 'Creating' and 201 response code.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws CloudException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the Product object if successful.
@@ -805,7 +792,6 @@ public class LROSADsImpl implements LROSADs {
     /**
      * Long running put request, service returns a Product with 'ProvisioningState' = 'Creating' and 201 response code.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, Product&gt;&gt;} object if successful.
      */
     public Single<RestResponse<Void, Product>> putNonRetry201Creating400InvalidJsonWithRestResponseAsync() {
@@ -816,7 +802,6 @@ public class LROSADsImpl implements LROSADs {
     /**
      * Long running put request, service returns a Product with 'ProvisioningState' = 'Creating' and 201 response code.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Maybe&lt;Product&gt;} object if successful.
      */
     public Maybe<Product> putNonRetry201Creating400InvalidJsonAsync() {
@@ -892,7 +877,6 @@ public class LROSADsImpl implements LROSADs {
     /**
      * Long running put request, service returns a 200 with ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws CloudException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the Product object if successful.
@@ -915,7 +899,6 @@ public class LROSADsImpl implements LROSADs {
     /**
      * Long running put request, service returns a 200 with ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the observable for the request.
      */
     public Observable<OperationStatus<Product>> beginPutAsyncRelativeRetry400Async() {
@@ -963,7 +946,6 @@ public class LROSADsImpl implements LROSADs {
     /**
      * Long running put request, service returns a 200 with ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws CloudException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the Product object if successful.
@@ -986,7 +968,6 @@ public class LROSADsImpl implements LROSADs {
     /**
      * Long running put request, service returns a 200 with ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;LROSADsPutAsyncRelativeRetry400Headers, Product&gt;&gt;} object if successful.
      */
     public Single<RestResponse<LROSADsPutAsyncRelativeRetry400Headers, Product>> putAsyncRelativeRetry400WithRestResponseAsync() {
@@ -997,7 +978,6 @@ public class LROSADsImpl implements LROSADs {
     /**
      * Long running put request, service returns a 200 with ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Maybe&lt;Product&gt;} object if successful.
      */
     public Maybe<Product> putAsyncRelativeRetry400Async() {
@@ -1073,7 +1053,6 @@ public class LROSADsImpl implements LROSADs {
     /**
      * Long running delete request, service returns a 400 with an error body.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws CloudException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
@@ -1095,7 +1074,6 @@ public class LROSADsImpl implements LROSADs {
     /**
      * Long running delete request, service returns a 400 with an error body.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the observable for the request.
      */
     public Observable<OperationStatus<Void>> beginDeleteNonRetry400Async() {
@@ -1105,7 +1083,6 @@ public class LROSADsImpl implements LROSADs {
     /**
      * Long running delete request, service returns a 400 with an error body.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws CloudException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
@@ -1127,7 +1104,6 @@ public class LROSADsImpl implements LROSADs {
     /**
      * Long running delete request, service returns a 400 with an error body.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;LROSADsDeleteNonRetry400Headers, Void&gt;&gt;} object if successful.
      */
     public Single<RestResponse<LROSADsDeleteNonRetry400Headers, Void>> deleteNonRetry400WithRestResponseAsync() {
@@ -1137,7 +1113,6 @@ public class LROSADsImpl implements LROSADs {
     /**
      * Long running delete request, service returns a 400 with an error body.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Completable} object if successful.
      */
     public Completable deleteNonRetry400Async() {
@@ -1148,7 +1123,6 @@ public class LROSADsImpl implements LROSADs {
     /**
      * Long running delete request, service returns a 202 with a location header.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws CloudException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
@@ -1170,7 +1144,6 @@ public class LROSADsImpl implements LROSADs {
     /**
      * Long running delete request, service returns a 202 with a location header.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the observable for the request.
      */
     public Observable<OperationStatus<Void>> beginDelete202NonRetry400Async() {
@@ -1180,7 +1153,6 @@ public class LROSADsImpl implements LROSADs {
     /**
      * Long running delete request, service returns a 202 with a location header.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws CloudException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
@@ -1202,7 +1174,6 @@ public class LROSADsImpl implements LROSADs {
     /**
      * Long running delete request, service returns a 202 with a location header.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;LROSADsDelete202NonRetry400Headers, Void&gt;&gt;} object if successful.
      */
     public Single<RestResponse<LROSADsDelete202NonRetry400Headers, Void>> delete202NonRetry400WithRestResponseAsync() {
@@ -1212,7 +1183,6 @@ public class LROSADsImpl implements LROSADs {
     /**
      * Long running delete request, service returns a 202 with a location header.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Completable} object if successful.
      */
     public Completable delete202NonRetry400Async() {
@@ -1223,7 +1193,6 @@ public class LROSADsImpl implements LROSADs {
     /**
      * Long running delete request, service returns a 202 to the initial request. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws CloudException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
@@ -1245,7 +1214,6 @@ public class LROSADsImpl implements LROSADs {
     /**
      * Long running delete request, service returns a 202 to the initial request. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the observable for the request.
      */
     public Observable<OperationStatus<Void>> beginDeleteAsyncRelativeRetry400Async() {
@@ -1255,7 +1223,6 @@ public class LROSADsImpl implements LROSADs {
     /**
      * Long running delete request, service returns a 202 to the initial request. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws CloudException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
@@ -1277,7 +1244,6 @@ public class LROSADsImpl implements LROSADs {
     /**
      * Long running delete request, service returns a 202 to the initial request. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;LROSADsDeleteAsyncRelativeRetry400Headers, Void&gt;&gt;} object if successful.
      */
     public Single<RestResponse<LROSADsDeleteAsyncRelativeRetry400Headers, Void>> deleteAsyncRelativeRetry400WithRestResponseAsync() {
@@ -1287,7 +1253,6 @@ public class LROSADsImpl implements LROSADs {
     /**
      * Long running delete request, service returns a 202 to the initial request. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Completable} object if successful.
      */
     public Completable deleteAsyncRelativeRetry400Async() {
@@ -1298,7 +1263,6 @@ public class LROSADsImpl implements LROSADs {
     /**
      * Long running post request, service returns a 400 with no error body.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws CloudException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
@@ -1320,7 +1284,6 @@ public class LROSADsImpl implements LROSADs {
     /**
      * Long running post request, service returns a 400 with no error body.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the observable for the request.
      */
     public Observable<OperationStatus<Void>> beginPostNonRetry400Async() {
@@ -1367,7 +1330,6 @@ public class LROSADsImpl implements LROSADs {
     /**
      * Long running post request, service returns a 400 with no error body.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws CloudException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
@@ -1389,7 +1351,6 @@ public class LROSADsImpl implements LROSADs {
     /**
      * Long running post request, service returns a 400 with no error body.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;LROSADsPostNonRetry400Headers, Void&gt;&gt;} object if successful.
      */
     public Single<RestResponse<LROSADsPostNonRetry400Headers, Void>> postNonRetry400WithRestResponseAsync() {
@@ -1400,7 +1361,6 @@ public class LROSADsImpl implements LROSADs {
     /**
      * Long running post request, service returns a 400 with no error body.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Completable} object if successful.
      */
     public Completable postNonRetry400Async() {
@@ -1459,7 +1419,6 @@ public class LROSADsImpl implements LROSADs {
     /**
      * Long running post request, service returns a 202 with a location header.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws CloudException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
@@ -1481,7 +1440,6 @@ public class LROSADsImpl implements LROSADs {
     /**
      * Long running post request, service returns a 202 with a location header.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the observable for the request.
      */
     public Observable<OperationStatus<Void>> beginPost202NonRetry400Async() {
@@ -1528,7 +1486,6 @@ public class LROSADsImpl implements LROSADs {
     /**
      * Long running post request, service returns a 202 with a location header.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws CloudException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
@@ -1550,7 +1507,6 @@ public class LROSADsImpl implements LROSADs {
     /**
      * Long running post request, service returns a 202 with a location header.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;LROSADsPost202NonRetry400Headers, Void&gt;&gt;} object if successful.
      */
     public Single<RestResponse<LROSADsPost202NonRetry400Headers, Void>> post202NonRetry400WithRestResponseAsync() {
@@ -1561,7 +1517,6 @@ public class LROSADsImpl implements LROSADs {
     /**
      * Long running post request, service returns a 202 with a location header.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Completable} object if successful.
      */
     public Completable post202NonRetry400Async() {
@@ -1620,7 +1575,6 @@ public class LROSADsImpl implements LROSADs {
     /**
      * Long running post request, service returns a 202 to the initial request Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws CloudException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
@@ -1642,7 +1596,6 @@ public class LROSADsImpl implements LROSADs {
     /**
      * Long running post request, service returns a 202 to the initial request Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the observable for the request.
      */
     public Observable<OperationStatus<Void>> beginPostAsyncRelativeRetry400Async() {
@@ -1689,7 +1642,6 @@ public class LROSADsImpl implements LROSADs {
     /**
      * Long running post request, service returns a 202 to the initial request Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws CloudException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
@@ -1711,7 +1663,6 @@ public class LROSADsImpl implements LROSADs {
     /**
      * Long running post request, service returns a 202 to the initial request Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;LROSADsPostAsyncRelativeRetry400Headers, Void&gt;&gt;} object if successful.
      */
     public Single<RestResponse<LROSADsPostAsyncRelativeRetry400Headers, Void>> postAsyncRelativeRetry400WithRestResponseAsync() {
@@ -1722,7 +1673,6 @@ public class LROSADsImpl implements LROSADs {
     /**
      * Long running post request, service returns a 202 to the initial request Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Completable} object if successful.
      */
     public Completable postAsyncRelativeRetry400Async() {
@@ -1781,7 +1731,6 @@ public class LROSADsImpl implements LROSADs {
     /**
      * Long running put request, service returns a 201 to the initial request with no payload.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws CloudException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the Product object if successful.
@@ -1804,7 +1753,6 @@ public class LROSADsImpl implements LROSADs {
     /**
      * Long running put request, service returns a 201 to the initial request with no payload.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the observable for the request.
      */
     public Observable<OperationStatus<Product>> beginPutError201NoProvisioningStatePayloadAsync() {
@@ -1852,7 +1800,6 @@ public class LROSADsImpl implements LROSADs {
     /**
      * Long running put request, service returns a 201 to the initial request with no payload.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws CloudException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the Product object if successful.
@@ -1875,7 +1822,6 @@ public class LROSADsImpl implements LROSADs {
     /**
      * Long running put request, service returns a 201 to the initial request with no payload.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, Product&gt;&gt;} object if successful.
      */
     public Single<RestResponse<Void, Product>> putError201NoProvisioningStatePayloadWithRestResponseAsync() {
@@ -1886,7 +1832,6 @@ public class LROSADsImpl implements LROSADs {
     /**
      * Long running put request, service returns a 201 to the initial request with no payload.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Maybe&lt;Product&gt;} object if successful.
      */
     public Maybe<Product> putError201NoProvisioningStatePayloadAsync() {
@@ -1962,7 +1907,6 @@ public class LROSADsImpl implements LROSADs {
     /**
      * Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws CloudException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the Product object if successful.
@@ -1985,7 +1929,6 @@ public class LROSADsImpl implements LROSADs {
     /**
      * Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the observable for the request.
      */
     public Observable<OperationStatus<Product>> beginPutAsyncRelativeRetryNoStatusAsync() {
@@ -2033,7 +1976,6 @@ public class LROSADsImpl implements LROSADs {
     /**
      * Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws CloudException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the Product object if successful.
@@ -2056,7 +1998,6 @@ public class LROSADsImpl implements LROSADs {
     /**
      * Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;LROSADsPutAsyncRelativeRetryNoStatusHeaders, Product&gt;&gt;} object if successful.
      */
     public Single<RestResponse<LROSADsPutAsyncRelativeRetryNoStatusHeaders, Product>> putAsyncRelativeRetryNoStatusWithRestResponseAsync() {
@@ -2067,7 +2008,6 @@ public class LROSADsImpl implements LROSADs {
     /**
      * Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Maybe&lt;Product&gt;} object if successful.
      */
     public Maybe<Product> putAsyncRelativeRetryNoStatusAsync() {
@@ -2143,7 +2083,6 @@ public class LROSADsImpl implements LROSADs {
     /**
      * Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws CloudException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the Product object if successful.
@@ -2166,7 +2105,6 @@ public class LROSADsImpl implements LROSADs {
     /**
      * Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the observable for the request.
      */
     public Observable<OperationStatus<Product>> beginPutAsyncRelativeRetryNoStatusPayloadAsync() {
@@ -2214,7 +2152,6 @@ public class LROSADsImpl implements LROSADs {
     /**
      * Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws CloudException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the Product object if successful.
@@ -2237,7 +2174,6 @@ public class LROSADsImpl implements LROSADs {
     /**
      * Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;LROSADsPutAsyncRelativeRetryNoStatusPayloadHeaders, Product&gt;&gt;} object if successful.
      */
     public Single<RestResponse<LROSADsPutAsyncRelativeRetryNoStatusPayloadHeaders, Product>> putAsyncRelativeRetryNoStatusPayloadWithRestResponseAsync() {
@@ -2248,7 +2184,6 @@ public class LROSADsImpl implements LROSADs {
     /**
      * Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Maybe&lt;Product&gt;} object if successful.
      */
     public Maybe<Product> putAsyncRelativeRetryNoStatusPayloadAsync() {
@@ -2324,7 +2259,6 @@ public class LROSADsImpl implements LROSADs {
     /**
      * Long running delete request, service returns a 204 to the initial request, indicating success.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws CloudException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
@@ -2346,7 +2280,6 @@ public class LROSADsImpl implements LROSADs {
     /**
      * Long running delete request, service returns a 204 to the initial request, indicating success.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the observable for the request.
      */
     public Observable<OperationStatus<Void>> beginDelete204SucceededAsync() {
@@ -2356,7 +2289,6 @@ public class LROSADsImpl implements LROSADs {
     /**
      * Long running delete request, service returns a 204 to the initial request, indicating success.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws CloudException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
@@ -2378,7 +2310,6 @@ public class LROSADsImpl implements LROSADs {
     /**
      * Long running delete request, service returns a 204 to the initial request, indicating success.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
      */
     public Single<RestResponse<Void, Void>> delete204SucceededWithRestResponseAsync() {
@@ -2388,7 +2319,6 @@ public class LROSADsImpl implements LROSADs {
     /**
      * Long running delete request, service returns a 204 to the initial request, indicating success.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Completable} object if successful.
      */
     public Completable delete204SucceededAsync() {
@@ -2399,7 +2329,6 @@ public class LROSADsImpl implements LROSADs {
     /**
      * Long running delete request, service returns a 202 to the initial request. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws CloudException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
@@ -2421,7 +2350,6 @@ public class LROSADsImpl implements LROSADs {
     /**
      * Long running delete request, service returns a 202 to the initial request. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the observable for the request.
      */
     public Observable<OperationStatus<Void>> beginDeleteAsyncRelativeRetryNoStatusAsync() {
@@ -2431,7 +2359,6 @@ public class LROSADsImpl implements LROSADs {
     /**
      * Long running delete request, service returns a 202 to the initial request. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws CloudException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
@@ -2453,7 +2380,6 @@ public class LROSADsImpl implements LROSADs {
     /**
      * Long running delete request, service returns a 202 to the initial request. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;LROSADsDeleteAsyncRelativeRetryNoStatusHeaders, Void&gt;&gt;} object if successful.
      */
     public Single<RestResponse<LROSADsDeleteAsyncRelativeRetryNoStatusHeaders, Void>> deleteAsyncRelativeRetryNoStatusWithRestResponseAsync() {
@@ -2463,7 +2389,6 @@ public class LROSADsImpl implements LROSADs {
     /**
      * Long running delete request, service returns a 202 to the initial request. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Completable} object if successful.
      */
     public Completable deleteAsyncRelativeRetryNoStatusAsync() {
@@ -2474,7 +2399,6 @@ public class LROSADsImpl implements LROSADs {
     /**
      * Long running post request, service returns a 202 to the initial request, without a location header.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws CloudException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
@@ -2496,7 +2420,6 @@ public class LROSADsImpl implements LROSADs {
     /**
      * Long running post request, service returns a 202 to the initial request, without a location header.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the observable for the request.
      */
     public Observable<OperationStatus<Void>> beginPost202NoLocationAsync() {
@@ -2543,7 +2466,6 @@ public class LROSADsImpl implements LROSADs {
     /**
      * Long running post request, service returns a 202 to the initial request, without a location header.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws CloudException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
@@ -2565,7 +2487,6 @@ public class LROSADsImpl implements LROSADs {
     /**
      * Long running post request, service returns a 202 to the initial request, without a location header.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;LROSADsPost202NoLocationHeaders, Void&gt;&gt;} object if successful.
      */
     public Single<RestResponse<LROSADsPost202NoLocationHeaders, Void>> post202NoLocationWithRestResponseAsync() {
@@ -2576,7 +2497,6 @@ public class LROSADsImpl implements LROSADs {
     /**
      * Long running post request, service returns a 202 to the initial request, without a location header.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Completable} object if successful.
      */
     public Completable post202NoLocationAsync() {
@@ -2635,7 +2555,6 @@ public class LROSADsImpl implements LROSADs {
     /**
      * Long running post request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws CloudException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
@@ -2657,7 +2576,6 @@ public class LROSADsImpl implements LROSADs {
     /**
      * Long running post request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the observable for the request.
      */
     public Observable<OperationStatus<Void>> beginPostAsyncRelativeRetryNoPayloadAsync() {
@@ -2704,7 +2622,6 @@ public class LROSADsImpl implements LROSADs {
     /**
      * Long running post request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws CloudException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
@@ -2726,7 +2643,6 @@ public class LROSADsImpl implements LROSADs {
     /**
      * Long running post request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;LROSADsPostAsyncRelativeRetryNoPayloadHeaders, Void&gt;&gt;} object if successful.
      */
     public Single<RestResponse<LROSADsPostAsyncRelativeRetryNoPayloadHeaders, Void>> postAsyncRelativeRetryNoPayloadWithRestResponseAsync() {
@@ -2737,7 +2653,6 @@ public class LROSADsImpl implements LROSADs {
     /**
      * Long running post request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Completable} object if successful.
      */
     public Completable postAsyncRelativeRetryNoPayloadAsync() {
@@ -2796,7 +2711,6 @@ public class LROSADsImpl implements LROSADs {
     /**
      * Long running put request, service returns a 200 to the initial request, with an entity that is not a valid json.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws CloudException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the Product object if successful.
@@ -2819,7 +2733,6 @@ public class LROSADsImpl implements LROSADs {
     /**
      * Long running put request, service returns a 200 to the initial request, with an entity that is not a valid json.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the observable for the request.
      */
     public Observable<OperationStatus<Product>> beginPut200InvalidJsonAsync() {
@@ -2867,7 +2780,6 @@ public class LROSADsImpl implements LROSADs {
     /**
      * Long running put request, service returns a 200 to the initial request, with an entity that is not a valid json.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws CloudException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the Product object if successful.
@@ -2890,7 +2802,6 @@ public class LROSADsImpl implements LROSADs {
     /**
      * Long running put request, service returns a 200 to the initial request, with an entity that is not a valid json.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, Product&gt;&gt;} object if successful.
      */
     public Single<RestResponse<Void, Product>> put200InvalidJsonWithRestResponseAsync() {
@@ -2901,7 +2812,6 @@ public class LROSADsImpl implements LROSADs {
     /**
      * Long running put request, service returns a 200 to the initial request, with an entity that is not a valid json.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Maybe&lt;Product&gt;} object if successful.
      */
     public Maybe<Product> put200InvalidJsonAsync() {
@@ -2977,7 +2887,6 @@ public class LROSADsImpl implements LROSADs {
     /**
      * Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. The endpoint indicated in the Azure-AsyncOperation header is invalid.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws CloudException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the Product object if successful.
@@ -3000,7 +2909,6 @@ public class LROSADsImpl implements LROSADs {
     /**
      * Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. The endpoint indicated in the Azure-AsyncOperation header is invalid.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the observable for the request.
      */
     public Observable<OperationStatus<Product>> beginPutAsyncRelativeRetryInvalidHeaderAsync() {
@@ -3048,7 +2956,6 @@ public class LROSADsImpl implements LROSADs {
     /**
      * Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. The endpoint indicated in the Azure-AsyncOperation header is invalid.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws CloudException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the Product object if successful.
@@ -3071,7 +2978,6 @@ public class LROSADsImpl implements LROSADs {
     /**
      * Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. The endpoint indicated in the Azure-AsyncOperation header is invalid.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;LROSADsPutAsyncRelativeRetryInvalidHeaderHeaders, Product&gt;&gt;} object if successful.
      */
     public Single<RestResponse<LROSADsPutAsyncRelativeRetryInvalidHeaderHeaders, Product>> putAsyncRelativeRetryInvalidHeaderWithRestResponseAsync() {
@@ -3082,7 +2988,6 @@ public class LROSADsImpl implements LROSADs {
     /**
      * Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. The endpoint indicated in the Azure-AsyncOperation header is invalid.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Maybe&lt;Product&gt;} object if successful.
      */
     public Maybe<Product> putAsyncRelativeRetryInvalidHeaderAsync() {
@@ -3158,7 +3063,6 @@ public class LROSADsImpl implements LROSADs {
     /**
      * Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws CloudException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the Product object if successful.
@@ -3181,7 +3085,6 @@ public class LROSADsImpl implements LROSADs {
     /**
      * Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the observable for the request.
      */
     public Observable<OperationStatus<Product>> beginPutAsyncRelativeRetryInvalidJsonPollingAsync() {
@@ -3229,7 +3132,6 @@ public class LROSADsImpl implements LROSADs {
     /**
      * Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws CloudException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the Product object if successful.
@@ -3252,7 +3154,6 @@ public class LROSADsImpl implements LROSADs {
     /**
      * Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;LROSADsPutAsyncRelativeRetryInvalidJsonPollingHeaders, Product&gt;&gt;} object if successful.
      */
     public Single<RestResponse<LROSADsPutAsyncRelativeRetryInvalidJsonPollingHeaders, Product>> putAsyncRelativeRetryInvalidJsonPollingWithRestResponseAsync() {
@@ -3263,7 +3164,6 @@ public class LROSADsImpl implements LROSADs {
     /**
      * Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Maybe&lt;Product&gt;} object if successful.
      */
     public Maybe<Product> putAsyncRelativeRetryInvalidJsonPollingAsync() {
@@ -3339,7 +3239,6 @@ public class LROSADsImpl implements LROSADs {
     /**
      * Long running delete request, service returns a 202 to the initial request receing a reponse with an invalid 'Location' and 'Retry-After' headers.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws CloudException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
@@ -3361,7 +3260,6 @@ public class LROSADsImpl implements LROSADs {
     /**
      * Long running delete request, service returns a 202 to the initial request receing a reponse with an invalid 'Location' and 'Retry-After' headers.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the observable for the request.
      */
     public Observable<OperationStatus<Void>> beginDelete202RetryInvalidHeaderAsync() {
@@ -3371,7 +3269,6 @@ public class LROSADsImpl implements LROSADs {
     /**
      * Long running delete request, service returns a 202 to the initial request receing a reponse with an invalid 'Location' and 'Retry-After' headers.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws CloudException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
@@ -3393,7 +3290,6 @@ public class LROSADsImpl implements LROSADs {
     /**
      * Long running delete request, service returns a 202 to the initial request receing a reponse with an invalid 'Location' and 'Retry-After' headers.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;LROSADsDelete202RetryInvalidHeaderHeaders, Void&gt;&gt;} object if successful.
      */
     public Single<RestResponse<LROSADsDelete202RetryInvalidHeaderHeaders, Void>> delete202RetryInvalidHeaderWithRestResponseAsync() {
@@ -3403,7 +3299,6 @@ public class LROSADsImpl implements LROSADs {
     /**
      * Long running delete request, service returns a 202 to the initial request receing a reponse with an invalid 'Location' and 'Retry-After' headers.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Completable} object if successful.
      */
     public Completable delete202RetryInvalidHeaderAsync() {
@@ -3414,7 +3309,6 @@ public class LROSADsImpl implements LROSADs {
     /**
      * Long running delete request, service returns a 202 to the initial request. The endpoint indicated in the Azure-AsyncOperation header is invalid.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws CloudException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
@@ -3436,7 +3330,6 @@ public class LROSADsImpl implements LROSADs {
     /**
      * Long running delete request, service returns a 202 to the initial request. The endpoint indicated in the Azure-AsyncOperation header is invalid.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the observable for the request.
      */
     public Observable<OperationStatus<Void>> beginDeleteAsyncRelativeRetryInvalidHeaderAsync() {
@@ -3446,7 +3339,6 @@ public class LROSADsImpl implements LROSADs {
     /**
      * Long running delete request, service returns a 202 to the initial request. The endpoint indicated in the Azure-AsyncOperation header is invalid.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws CloudException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
@@ -3468,7 +3360,6 @@ public class LROSADsImpl implements LROSADs {
     /**
      * Long running delete request, service returns a 202 to the initial request. The endpoint indicated in the Azure-AsyncOperation header is invalid.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;LROSADsDeleteAsyncRelativeRetryInvalidHeaderHeaders, Void&gt;&gt;} object if successful.
      */
     public Single<RestResponse<LROSADsDeleteAsyncRelativeRetryInvalidHeaderHeaders, Void>> deleteAsyncRelativeRetryInvalidHeaderWithRestResponseAsync() {
@@ -3478,7 +3369,6 @@ public class LROSADsImpl implements LROSADs {
     /**
      * Long running delete request, service returns a 202 to the initial request. The endpoint indicated in the Azure-AsyncOperation header is invalid.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Completable} object if successful.
      */
     public Completable deleteAsyncRelativeRetryInvalidHeaderAsync() {
@@ -3489,7 +3379,6 @@ public class LROSADsImpl implements LROSADs {
     /**
      * Long running delete request, service returns a 202 to the initial request. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws CloudException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
@@ -3511,7 +3400,6 @@ public class LROSADsImpl implements LROSADs {
     /**
      * Long running delete request, service returns a 202 to the initial request. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the observable for the request.
      */
     public Observable<OperationStatus<Void>> beginDeleteAsyncRelativeRetryInvalidJsonPollingAsync() {
@@ -3521,7 +3409,6 @@ public class LROSADsImpl implements LROSADs {
     /**
      * Long running delete request, service returns a 202 to the initial request. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws CloudException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
@@ -3543,7 +3430,6 @@ public class LROSADsImpl implements LROSADs {
     /**
      * Long running delete request, service returns a 202 to the initial request. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;LROSADsDeleteAsyncRelativeRetryInvalidJsonPollingHeaders, Void&gt;&gt;} object if successful.
      */
     public Single<RestResponse<LROSADsDeleteAsyncRelativeRetryInvalidJsonPollingHeaders, Void>> deleteAsyncRelativeRetryInvalidJsonPollingWithRestResponseAsync() {
@@ -3553,7 +3439,6 @@ public class LROSADsImpl implements LROSADs {
     /**
      * Long running delete request, service returns a 202 to the initial request. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Completable} object if successful.
      */
     public Completable deleteAsyncRelativeRetryInvalidJsonPollingAsync() {
@@ -3564,7 +3449,6 @@ public class LROSADsImpl implements LROSADs {
     /**
      * Long running post request, service returns a 202 to the initial request, with invalid 'Location' and 'Retry-After' headers.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws CloudException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
@@ -3586,7 +3470,6 @@ public class LROSADsImpl implements LROSADs {
     /**
      * Long running post request, service returns a 202 to the initial request, with invalid 'Location' and 'Retry-After' headers.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the observable for the request.
      */
     public Observable<OperationStatus<Void>> beginPost202RetryInvalidHeaderAsync() {
@@ -3633,7 +3516,6 @@ public class LROSADsImpl implements LROSADs {
     /**
      * Long running post request, service returns a 202 to the initial request, with invalid 'Location' and 'Retry-After' headers.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws CloudException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
@@ -3655,7 +3537,6 @@ public class LROSADsImpl implements LROSADs {
     /**
      * Long running post request, service returns a 202 to the initial request, with invalid 'Location' and 'Retry-After' headers.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;LROSADsPost202RetryInvalidHeaderHeaders, Void&gt;&gt;} object if successful.
      */
     public Single<RestResponse<LROSADsPost202RetryInvalidHeaderHeaders, Void>> post202RetryInvalidHeaderWithRestResponseAsync() {
@@ -3666,7 +3547,6 @@ public class LROSADsImpl implements LROSADs {
     /**
      * Long running post request, service returns a 202 to the initial request, with invalid 'Location' and 'Retry-After' headers.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Completable} object if successful.
      */
     public Completable post202RetryInvalidHeaderAsync() {
@@ -3725,7 +3605,6 @@ public class LROSADsImpl implements LROSADs {
     /**
      * Long running post request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’. The endpoint indicated in the Azure-AsyncOperation header is invalid.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws CloudException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
@@ -3747,7 +3626,6 @@ public class LROSADsImpl implements LROSADs {
     /**
      * Long running post request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’. The endpoint indicated in the Azure-AsyncOperation header is invalid.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the observable for the request.
      */
     public Observable<OperationStatus<Void>> beginPostAsyncRelativeRetryInvalidHeaderAsync() {
@@ -3794,7 +3672,6 @@ public class LROSADsImpl implements LROSADs {
     /**
      * Long running post request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’. The endpoint indicated in the Azure-AsyncOperation header is invalid.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws CloudException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
@@ -3816,7 +3693,6 @@ public class LROSADsImpl implements LROSADs {
     /**
      * Long running post request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’. The endpoint indicated in the Azure-AsyncOperation header is invalid.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;LROSADsPostAsyncRelativeRetryInvalidHeaderHeaders, Void&gt;&gt;} object if successful.
      */
     public Single<RestResponse<LROSADsPostAsyncRelativeRetryInvalidHeaderHeaders, Void>> postAsyncRelativeRetryInvalidHeaderWithRestResponseAsync() {
@@ -3827,7 +3703,6 @@ public class LROSADsImpl implements LROSADs {
     /**
      * Long running post request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’. The endpoint indicated in the Azure-AsyncOperation header is invalid.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Completable} object if successful.
      */
     public Completable postAsyncRelativeRetryInvalidHeaderAsync() {
@@ -3886,7 +3761,6 @@ public class LROSADsImpl implements LROSADs {
     /**
      * Long running post request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws CloudException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
@@ -3908,7 +3782,6 @@ public class LROSADsImpl implements LROSADs {
     /**
      * Long running post request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the observable for the request.
      */
     public Observable<OperationStatus<Void>> beginPostAsyncRelativeRetryInvalidJsonPollingAsync() {
@@ -3955,7 +3828,6 @@ public class LROSADsImpl implements LROSADs {
     /**
      * Long running post request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws CloudException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
@@ -3977,7 +3849,6 @@ public class LROSADsImpl implements LROSADs {
     /**
      * Long running post request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;LROSADsPostAsyncRelativeRetryInvalidJsonPollingHeaders, Void&gt;&gt;} object if successful.
      */
     public Single<RestResponse<LROSADsPostAsyncRelativeRetryInvalidJsonPollingHeaders, Void>> postAsyncRelativeRetryInvalidJsonPollingWithRestResponseAsync() {
@@ -3988,7 +3859,6 @@ public class LROSADsImpl implements LROSADs {
     /**
      * Long running post request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Completable} object if successful.
      */
     public Completable postAsyncRelativeRetryInvalidJsonPollingAsync() {

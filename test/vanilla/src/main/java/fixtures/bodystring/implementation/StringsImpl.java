@@ -133,7 +133,6 @@ public class StringsImpl implements Strings {
     /**
      * Get null string value value.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the String object if successful.
@@ -156,7 +155,6 @@ public class StringsImpl implements Strings {
     /**
      * Get null string value value.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, String&gt;&gt;} object if successful.
      */
     public Single<RestResponse<Void, String>> getNullWithRestResponseAsync() {
@@ -166,7 +164,6 @@ public class StringsImpl implements Strings {
     /**
      * Get null string value value.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Maybe&lt;String&gt;} object if successful.
      */
     public Maybe<String> getNullAsync() {
@@ -185,7 +182,6 @@ public class StringsImpl implements Strings {
     /**
      * Set string value null.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
@@ -207,7 +203,6 @@ public class StringsImpl implements Strings {
     /**
      * Set string value null.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
      */
     public Single<RestResponse<Void, Void>> putNullWithRestResponseAsync() {
@@ -218,7 +213,6 @@ public class StringsImpl implements Strings {
     /**
      * Set string value null.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Completable} object if successful.
      */
     public Completable putNullAsync() {
@@ -276,7 +270,6 @@ public class StringsImpl implements Strings {
     /**
      * Get empty string value value ''.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the String object if successful.
@@ -299,7 +292,6 @@ public class StringsImpl implements Strings {
     /**
      * Get empty string value value ''.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, String&gt;&gt;} object if successful.
      */
     public Single<RestResponse<Void, String>> getEmptyWithRestResponseAsync() {
@@ -309,7 +301,6 @@ public class StringsImpl implements Strings {
     /**
      * Get empty string value value ''.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Maybe&lt;String&gt;} object if successful.
      */
     public Maybe<String> getEmptyAsync() {
@@ -378,7 +369,6 @@ public class StringsImpl implements Strings {
     /**
      * Get mbcs string value '啊齄丂狛狜隣郎隣兀﨩ˊ〞〡￤℡㈱‐ー﹡﹢﹫、〓ⅰⅹ⒈€㈠㈩ⅠⅫ！￣ぁんァヶΑ︴АЯаяāɡㄅㄩ─╋︵﹄︻︱︳︴ⅰⅹɑɡ〇〾⿻⺁䜣€'.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the String object if successful.
@@ -401,7 +391,6 @@ public class StringsImpl implements Strings {
     /**
      * Get mbcs string value '啊齄丂狛狜隣郎隣兀﨩ˊ〞〡￤℡㈱‐ー﹡﹢﹫、〓ⅰⅹ⒈€㈠㈩ⅠⅫ！￣ぁんァヶΑ︴АЯаяāɡㄅㄩ─╋︵﹄︻︱︳︴ⅰⅹɑɡ〇〾⿻⺁䜣€'.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, String&gt;&gt;} object if successful.
      */
     public Single<RestResponse<Void, String>> getMbcsWithRestResponseAsync() {
@@ -411,7 +400,6 @@ public class StringsImpl implements Strings {
     /**
      * Get mbcs string value '啊齄丂狛狜隣郎隣兀﨩ˊ〞〡￤℡㈱‐ー﹡﹢﹫、〓ⅰⅹ⒈€㈠㈩ⅠⅫ！￣ぁんァヶΑ︴АЯаяāɡㄅㄩ─╋︵﹄︻︱︳︴ⅰⅹɑɡ〇〾⿻⺁䜣€'.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Maybe&lt;String&gt;} object if successful.
      */
     public Maybe<String> getMbcsAsync() {
@@ -480,7 +468,6 @@ public class StringsImpl implements Strings {
     /**
      * Get string value with leading and trailing whitespace '&lt;tab&gt;&lt;space&gt;&lt;space&gt;Now is the time for all good men to come to the aid of their country&lt;tab&gt;&lt;space&gt;&lt;space&gt;'.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the String object if successful.
@@ -503,7 +490,6 @@ public class StringsImpl implements Strings {
     /**
      * Get string value with leading and trailing whitespace '&lt;tab&gt;&lt;space&gt;&lt;space&gt;Now is the time for all good men to come to the aid of their country&lt;tab&gt;&lt;space&gt;&lt;space&gt;'.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, String&gt;&gt;} object if successful.
      */
     public Single<RestResponse<Void, String>> getWhitespaceWithRestResponseAsync() {
@@ -513,7 +499,6 @@ public class StringsImpl implements Strings {
     /**
      * Get string value with leading and trailing whitespace '&lt;tab&gt;&lt;space&gt;&lt;space&gt;Now is the time for all good men to come to the aid of their country&lt;tab&gt;&lt;space&gt;&lt;space&gt;'.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Maybe&lt;String&gt;} object if successful.
      */
     public Maybe<String> getWhitespaceAsync() {
@@ -582,7 +567,6 @@ public class StringsImpl implements Strings {
     /**
      * Get String value when no string value is sent in response payload.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the String object if successful.
@@ -605,7 +589,6 @@ public class StringsImpl implements Strings {
     /**
      * Get String value when no string value is sent in response payload.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, String&gt;&gt;} object if successful.
      */
     public Single<RestResponse<Void, String>> getNotProvidedWithRestResponseAsync() {
@@ -615,7 +598,6 @@ public class StringsImpl implements Strings {
     /**
      * Get String value when no string value is sent in response payload.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Maybe&lt;String&gt;} object if successful.
      */
     public Maybe<String> getNotProvidedAsync() {
@@ -634,7 +616,6 @@ public class StringsImpl implements Strings {
     /**
      * Get value that is base64 encoded.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the byte[] object if successful.
@@ -657,7 +638,6 @@ public class StringsImpl implements Strings {
     /**
      * Get value that is base64 encoded.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, byte[]&gt;&gt;} object if successful.
      */
     public Single<RestResponse<Void, byte[]>> getBase64EncodedWithRestResponseAsync() {
@@ -667,7 +647,6 @@ public class StringsImpl implements Strings {
     /**
      * Get value that is base64 encoded.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Maybe&lt;byte[]&gt;} object if successful.
      */
     public Maybe<byte[]> getBase64EncodedAsync() {
@@ -686,7 +665,6 @@ public class StringsImpl implements Strings {
     /**
      * Get value that is base64url encoded.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the byte[] object if successful.
@@ -709,7 +687,6 @@ public class StringsImpl implements Strings {
     /**
      * Get value that is base64url encoded.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, byte[]&gt;&gt;} object if successful.
      */
     public Single<RestResponse<Void, byte[]>> getBase64UrlEncodedWithRestResponseAsync() {
@@ -719,7 +696,6 @@ public class StringsImpl implements Strings {
     /**
      * Get value that is base64url encoded.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Maybe&lt;byte[]&gt;} object if successful.
      */
     public Maybe<byte[]> getBase64UrlEncodedAsync() {
@@ -789,7 +765,6 @@ public class StringsImpl implements Strings {
     /**
      * Get null value that is expected to be base64url encoded.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the byte[] object if successful.
@@ -812,7 +787,6 @@ public class StringsImpl implements Strings {
     /**
      * Get null value that is expected to be base64url encoded.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, byte[]&gt;&gt;} object if successful.
      */
     public Single<RestResponse<Void, byte[]>> getNullBase64UrlEncodedWithRestResponseAsync() {
@@ -822,7 +796,6 @@ public class StringsImpl implements Strings {
     /**
      * Get null value that is expected to be base64url encoded.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Maybe&lt;byte[]&gt;} object if successful.
      */
     public Maybe<byte[]> getNullBase64UrlEncodedAsync() {

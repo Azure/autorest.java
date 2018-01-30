@@ -68,7 +68,6 @@ public interface ParameterGroupings {
     /**
      * Post a bunch of optional parameters grouped.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
@@ -86,7 +85,6 @@ public interface ParameterGroupings {
     /**
      * Post a bunch of optional parameters grouped.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
      */
     Single<RestResponse<Void, Void>> postOptionalWithRestResponseAsync();
@@ -94,7 +92,6 @@ public interface ParameterGroupings {
     /**
      * Post a bunch of optional parameters grouped.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Completable} object if successful.
      */
     Completable postOptionalAsync();
@@ -140,7 +137,6 @@ public interface ParameterGroupings {
     /**
      * Post parameters from multiple different parameter groups.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
@@ -158,7 +154,6 @@ public interface ParameterGroupings {
     /**
      * Post parameters from multiple different parameter groups.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
      */
     Single<RestResponse<Void, Void>> postMultiParamGroupsWithRestResponseAsync();
@@ -166,7 +161,6 @@ public interface ParameterGroupings {
     /**
      * Post parameters from multiple different parameter groups.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Completable} object if successful.
      */
     Completable postMultiParamGroupsAsync();
@@ -216,7 +210,6 @@ public interface ParameterGroupings {
     /**
      * Post parameters with a shared parameter group object.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
@@ -234,7 +227,6 @@ public interface ParameterGroupings {
     /**
      * Post parameters with a shared parameter group object.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
      */
     Single<RestResponse<Void, Void>> postSharedParameterGroupObjectWithRestResponseAsync();
@@ -242,7 +234,6 @@ public interface ParameterGroupings {
     /**
      * Post parameters with a shared parameter group object.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Completable} object if successful.
      */
     Completable postSharedParameterGroupObjectAsync();

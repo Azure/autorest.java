@@ -27,7 +27,6 @@ public interface Strings {
     /**
      * Get null string value value.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the String object if successful.
@@ -46,7 +45,6 @@ public interface Strings {
     /**
      * Get null string value value.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, String&gt;&gt;} object if successful.
      */
     Single<RestResponse<Void, String>> getNullWithRestResponseAsync();
@@ -54,7 +52,6 @@ public interface Strings {
     /**
      * Get null string value value.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Maybe&lt;String&gt;} object if successful.
      */
     Maybe<String> getNullAsync();
@@ -62,7 +59,6 @@ public interface Strings {
     /**
      * Set string value null.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
@@ -80,7 +76,6 @@ public interface Strings {
     /**
      * Set string value null.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
      */
     Single<RestResponse<Void, Void>> putNullWithRestResponseAsync();
@@ -88,7 +83,6 @@ public interface Strings {
     /**
      * Set string value null.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Completable} object if successful.
      */
     Completable putNullAsync();
@@ -134,7 +128,6 @@ public interface Strings {
     /**
      * Get empty string value value ''.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the String object if successful.
@@ -153,7 +146,6 @@ public interface Strings {
     /**
      * Get empty string value value ''.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, String&gt;&gt;} object if successful.
      */
     Single<RestResponse<Void, String>> getEmptyWithRestResponseAsync();
@@ -161,7 +153,6 @@ public interface Strings {
     /**
      * Get empty string value value ''.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Maybe&lt;String&gt;} object if successful.
      */
     Maybe<String> getEmptyAsync();
@@ -207,7 +198,6 @@ public interface Strings {
     /**
      * Get mbcs string value '啊齄丂狛狜隣郎隣兀﨩ˊ〞〡￤℡㈱‐ー﹡﹢﹫、〓ⅰⅹ⒈€㈠㈩ⅠⅫ！￣ぁんァヶΑ︴АЯаяāɡㄅㄩ─╋︵﹄︻︱︳︴ⅰⅹɑɡ〇〾⿻⺁䜣€'.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the String object if successful.
@@ -226,7 +216,6 @@ public interface Strings {
     /**
      * Get mbcs string value '啊齄丂狛狜隣郎隣兀﨩ˊ〞〡￤℡㈱‐ー﹡﹢﹫、〓ⅰⅹ⒈€㈠㈩ⅠⅫ！￣ぁんァヶΑ︴АЯаяāɡㄅㄩ─╋︵﹄︻︱︳︴ⅰⅹɑɡ〇〾⿻⺁䜣€'.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, String&gt;&gt;} object if successful.
      */
     Single<RestResponse<Void, String>> getMbcsWithRestResponseAsync();
@@ -234,7 +223,6 @@ public interface Strings {
     /**
      * Get mbcs string value '啊齄丂狛狜隣郎隣兀﨩ˊ〞〡￤℡㈱‐ー﹡﹢﹫、〓ⅰⅹ⒈€㈠㈩ⅠⅫ！￣ぁんァヶΑ︴АЯаяāɡㄅㄩ─╋︵﹄︻︱︳︴ⅰⅹɑɡ〇〾⿻⺁䜣€'.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Maybe&lt;String&gt;} object if successful.
      */
     Maybe<String> getMbcsAsync();
@@ -280,7 +268,6 @@ public interface Strings {
     /**
      * Get string value with leading and trailing whitespace '&lt;tab&gt;&lt;space&gt;&lt;space&gt;Now is the time for all good men to come to the aid of their country&lt;tab&gt;&lt;space&gt;&lt;space&gt;'.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the String object if successful.
@@ -299,7 +286,6 @@ public interface Strings {
     /**
      * Get string value with leading and trailing whitespace '&lt;tab&gt;&lt;space&gt;&lt;space&gt;Now is the time for all good men to come to the aid of their country&lt;tab&gt;&lt;space&gt;&lt;space&gt;'.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, String&gt;&gt;} object if successful.
      */
     Single<RestResponse<Void, String>> getWhitespaceWithRestResponseAsync();
@@ -307,7 +293,6 @@ public interface Strings {
     /**
      * Get string value with leading and trailing whitespace '&lt;tab&gt;&lt;space&gt;&lt;space&gt;Now is the time for all good men to come to the aid of their country&lt;tab&gt;&lt;space&gt;&lt;space&gt;'.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Maybe&lt;String&gt;} object if successful.
      */
     Maybe<String> getWhitespaceAsync();
@@ -353,7 +338,6 @@ public interface Strings {
     /**
      * Get String value when no string value is sent in response payload.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the String object if successful.
@@ -372,7 +356,6 @@ public interface Strings {
     /**
      * Get String value when no string value is sent in response payload.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, String&gt;&gt;} object if successful.
      */
     Single<RestResponse<Void, String>> getNotProvidedWithRestResponseAsync();
@@ -380,7 +363,6 @@ public interface Strings {
     /**
      * Get String value when no string value is sent in response payload.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Maybe&lt;String&gt;} object if successful.
      */
     Maybe<String> getNotProvidedAsync();
@@ -388,7 +370,6 @@ public interface Strings {
     /**
      * Get value that is base64 encoded.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the byte[] object if successful.
@@ -407,7 +388,6 @@ public interface Strings {
     /**
      * Get value that is base64 encoded.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, byte[]&gt;&gt;} object if successful.
      */
     Single<RestResponse<Void, byte[]>> getBase64EncodedWithRestResponseAsync();
@@ -415,7 +395,6 @@ public interface Strings {
     /**
      * Get value that is base64 encoded.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Maybe&lt;byte[]&gt;} object if successful.
      */
     Maybe<byte[]> getBase64EncodedAsync();
@@ -423,7 +402,6 @@ public interface Strings {
     /**
      * Get value that is base64url encoded.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the byte[] object if successful.
@@ -442,7 +420,6 @@ public interface Strings {
     /**
      * Get value that is base64url encoded.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, byte[]&gt;&gt;} object if successful.
      */
     Single<RestResponse<Void, byte[]>> getBase64UrlEncodedWithRestResponseAsync();
@@ -450,7 +427,6 @@ public interface Strings {
     /**
      * Get value that is base64url encoded.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Maybe&lt;byte[]&gt;} object if successful.
      */
     Maybe<byte[]> getBase64UrlEncodedAsync();
@@ -496,7 +472,6 @@ public interface Strings {
     /**
      * Get null value that is expected to be base64url encoded.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the byte[] object if successful.
@@ -515,7 +490,6 @@ public interface Strings {
     /**
      * Get null value that is expected to be base64url encoded.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, byte[]&gt;&gt;} object if successful.
      */
     Single<RestResponse<Void, byte[]>> getNullBase64UrlEncodedWithRestResponseAsync();
@@ -523,7 +497,6 @@ public interface Strings {
     /**
      * Get null value that is expected to be base64url encoded.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Maybe&lt;byte[]&gt;} object if successful.
      */
     Maybe<byte[]> getNullBase64UrlEncodedAsync();

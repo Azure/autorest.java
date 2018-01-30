@@ -28,7 +28,6 @@ public interface Datetimes {
     /**
      * Get null datetime value.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the DateTime object if successful.
@@ -47,7 +46,6 @@ public interface Datetimes {
     /**
      * Get null datetime value.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, DateTime&gt;&gt;} object if successful.
      */
     Single<RestResponse<Void, DateTime>> getNullWithRestResponseAsync();
@@ -55,7 +53,6 @@ public interface Datetimes {
     /**
      * Get null datetime value.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Maybe&lt;DateTime&gt;} object if successful.
      */
     Maybe<DateTime> getNullAsync();
@@ -63,7 +60,6 @@ public interface Datetimes {
     /**
      * Get invalid datetime value.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the DateTime object if successful.
@@ -82,7 +78,6 @@ public interface Datetimes {
     /**
      * Get invalid datetime value.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, DateTime&gt;&gt;} object if successful.
      */
     Single<RestResponse<Void, DateTime>> getInvalidWithRestResponseAsync();
@@ -90,7 +85,6 @@ public interface Datetimes {
     /**
      * Get invalid datetime value.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Maybe&lt;DateTime&gt;} object if successful.
      */
     Maybe<DateTime> getInvalidAsync();
@@ -98,7 +92,6 @@ public interface Datetimes {
     /**
      * Get overflow datetime value.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the DateTime object if successful.
@@ -117,7 +110,6 @@ public interface Datetimes {
     /**
      * Get overflow datetime value.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, DateTime&gt;&gt;} object if successful.
      */
     Single<RestResponse<Void, DateTime>> getOverflowWithRestResponseAsync();
@@ -125,7 +117,6 @@ public interface Datetimes {
     /**
      * Get overflow datetime value.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Maybe&lt;DateTime&gt;} object if successful.
      */
     Maybe<DateTime> getOverflowAsync();
@@ -133,7 +124,6 @@ public interface Datetimes {
     /**
      * Get underflow datetime value.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the DateTime object if successful.
@@ -152,7 +142,6 @@ public interface Datetimes {
     /**
      * Get underflow datetime value.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, DateTime&gt;&gt;} object if successful.
      */
     Single<RestResponse<Void, DateTime>> getUnderflowWithRestResponseAsync();
@@ -160,7 +149,6 @@ public interface Datetimes {
     /**
      * Get underflow datetime value.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Maybe&lt;DateTime&gt;} object if successful.
      */
     Maybe<DateTime> getUnderflowAsync();
@@ -206,7 +194,6 @@ public interface Datetimes {
     /**
      * Get max datetime value 9999-12-31t23:59:59.9999999z.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the DateTime object if successful.
@@ -225,7 +212,6 @@ public interface Datetimes {
     /**
      * Get max datetime value 9999-12-31t23:59:59.9999999z.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, DateTime&gt;&gt;} object if successful.
      */
     Single<RestResponse<Void, DateTime>> getUtcLowercaseMaxDateTimeWithRestResponseAsync();
@@ -233,7 +219,6 @@ public interface Datetimes {
     /**
      * Get max datetime value 9999-12-31t23:59:59.9999999z.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Maybe&lt;DateTime&gt;} object if successful.
      */
     Maybe<DateTime> getUtcLowercaseMaxDateTimeAsync();
@@ -241,7 +226,6 @@ public interface Datetimes {
     /**
      * Get max datetime value 9999-12-31T23:59:59.9999999Z.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the DateTime object if successful.
@@ -260,7 +244,6 @@ public interface Datetimes {
     /**
      * Get max datetime value 9999-12-31T23:59:59.9999999Z.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, DateTime&gt;&gt;} object if successful.
      */
     Single<RestResponse<Void, DateTime>> getUtcUppercaseMaxDateTimeWithRestResponseAsync();
@@ -268,7 +251,6 @@ public interface Datetimes {
     /**
      * Get max datetime value 9999-12-31T23:59:59.9999999Z.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Maybe&lt;DateTime&gt;} object if successful.
      */
     Maybe<DateTime> getUtcUppercaseMaxDateTimeAsync();
@@ -314,7 +296,6 @@ public interface Datetimes {
     /**
      * Get max datetime value with positive num offset 9999-12-31t23:59:59.9999999+14:00.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the DateTime object if successful.
@@ -333,7 +314,6 @@ public interface Datetimes {
     /**
      * Get max datetime value with positive num offset 9999-12-31t23:59:59.9999999+14:00.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, DateTime&gt;&gt;} object if successful.
      */
     Single<RestResponse<Void, DateTime>> getLocalPositiveOffsetLowercaseMaxDateTimeWithRestResponseAsync();
@@ -341,7 +321,6 @@ public interface Datetimes {
     /**
      * Get max datetime value with positive num offset 9999-12-31t23:59:59.9999999+14:00.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Maybe&lt;DateTime&gt;} object if successful.
      */
     Maybe<DateTime> getLocalPositiveOffsetLowercaseMaxDateTimeAsync();
@@ -349,7 +328,6 @@ public interface Datetimes {
     /**
      * Get max datetime value with positive num offset 9999-12-31T23:59:59.9999999+14:00.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the DateTime object if successful.
@@ -368,7 +346,6 @@ public interface Datetimes {
     /**
      * Get max datetime value with positive num offset 9999-12-31T23:59:59.9999999+14:00.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, DateTime&gt;&gt;} object if successful.
      */
     Single<RestResponse<Void, DateTime>> getLocalPositiveOffsetUppercaseMaxDateTimeWithRestResponseAsync();
@@ -376,7 +353,6 @@ public interface Datetimes {
     /**
      * Get max datetime value with positive num offset 9999-12-31T23:59:59.9999999+14:00.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Maybe&lt;DateTime&gt;} object if successful.
      */
     Maybe<DateTime> getLocalPositiveOffsetUppercaseMaxDateTimeAsync();
@@ -422,7 +398,6 @@ public interface Datetimes {
     /**
      * Get max datetime value with positive num offset 9999-12-31T23:59:59.9999999-14:00.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the DateTime object if successful.
@@ -441,7 +416,6 @@ public interface Datetimes {
     /**
      * Get max datetime value with positive num offset 9999-12-31T23:59:59.9999999-14:00.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, DateTime&gt;&gt;} object if successful.
      */
     Single<RestResponse<Void, DateTime>> getLocalNegativeOffsetUppercaseMaxDateTimeWithRestResponseAsync();
@@ -449,7 +423,6 @@ public interface Datetimes {
     /**
      * Get max datetime value with positive num offset 9999-12-31T23:59:59.9999999-14:00.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Maybe&lt;DateTime&gt;} object if successful.
      */
     Maybe<DateTime> getLocalNegativeOffsetUppercaseMaxDateTimeAsync();
@@ -457,7 +430,6 @@ public interface Datetimes {
     /**
      * Get max datetime value with positive num offset 9999-12-31t23:59:59.9999999-14:00.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the DateTime object if successful.
@@ -476,7 +448,6 @@ public interface Datetimes {
     /**
      * Get max datetime value with positive num offset 9999-12-31t23:59:59.9999999-14:00.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, DateTime&gt;&gt;} object if successful.
      */
     Single<RestResponse<Void, DateTime>> getLocalNegativeOffsetLowercaseMaxDateTimeWithRestResponseAsync();
@@ -484,7 +455,6 @@ public interface Datetimes {
     /**
      * Get max datetime value with positive num offset 9999-12-31t23:59:59.9999999-14:00.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Maybe&lt;DateTime&gt;} object if successful.
      */
     Maybe<DateTime> getLocalNegativeOffsetLowercaseMaxDateTimeAsync();
@@ -530,7 +500,6 @@ public interface Datetimes {
     /**
      * Get min datetime value 0001-01-01T00:00:00Z.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the DateTime object if successful.
@@ -549,7 +518,6 @@ public interface Datetimes {
     /**
      * Get min datetime value 0001-01-01T00:00:00Z.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, DateTime&gt;&gt;} object if successful.
      */
     Single<RestResponse<Void, DateTime>> getUtcMinDateTimeWithRestResponseAsync();
@@ -557,7 +525,6 @@ public interface Datetimes {
     /**
      * Get min datetime value 0001-01-01T00:00:00Z.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Maybe&lt;DateTime&gt;} object if successful.
      */
     Maybe<DateTime> getUtcMinDateTimeAsync();
@@ -603,7 +570,6 @@ public interface Datetimes {
     /**
      * Get min datetime value 0001-01-01T00:00:00+14:00.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the DateTime object if successful.
@@ -622,7 +588,6 @@ public interface Datetimes {
     /**
      * Get min datetime value 0001-01-01T00:00:00+14:00.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, DateTime&gt;&gt;} object if successful.
      */
     Single<RestResponse<Void, DateTime>> getLocalPositiveOffsetMinDateTimeWithRestResponseAsync();
@@ -630,7 +595,6 @@ public interface Datetimes {
     /**
      * Get min datetime value 0001-01-01T00:00:00+14:00.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Maybe&lt;DateTime&gt;} object if successful.
      */
     Maybe<DateTime> getLocalPositiveOffsetMinDateTimeAsync();
@@ -676,7 +640,6 @@ public interface Datetimes {
     /**
      * Get min datetime value 0001-01-01T00:00:00-14:00.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the DateTime object if successful.
@@ -695,7 +658,6 @@ public interface Datetimes {
     /**
      * Get min datetime value 0001-01-01T00:00:00-14:00.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, DateTime&gt;&gt;} object if successful.
      */
     Single<RestResponse<Void, DateTime>> getLocalNegativeOffsetMinDateTimeWithRestResponseAsync();
@@ -703,7 +665,6 @@ public interface Datetimes {
     /**
      * Get min datetime value 0001-01-01T00:00:00-14:00.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Maybe&lt;DateTime&gt;} object if successful.
      */
     Maybe<DateTime> getLocalNegativeOffsetMinDateTimeAsync();

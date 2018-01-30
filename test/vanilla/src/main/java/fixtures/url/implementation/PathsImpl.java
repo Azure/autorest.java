@@ -200,7 +200,6 @@ public class PathsImpl implements Paths {
     /**
      * Get true Boolean value on path.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
@@ -222,7 +221,6 @@ public class PathsImpl implements Paths {
     /**
      * Get true Boolean value on path.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
      */
     public Single<RestResponse<Void, Void>> getBooleanTrueWithRestResponseAsync() {
@@ -233,7 +231,6 @@ public class PathsImpl implements Paths {
     /**
      * Get true Boolean value on path.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Completable} object if successful.
      */
     public Completable getBooleanTrueAsync() {
@@ -244,7 +241,6 @@ public class PathsImpl implements Paths {
     /**
      * Get false Boolean value on path.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
@@ -266,7 +262,6 @@ public class PathsImpl implements Paths {
     /**
      * Get false Boolean value on path.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
      */
     public Single<RestResponse<Void, Void>> getBooleanFalseWithRestResponseAsync() {
@@ -277,7 +272,6 @@ public class PathsImpl implements Paths {
     /**
      * Get false Boolean value on path.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Completable} object if successful.
      */
     public Completable getBooleanFalseAsync() {
@@ -288,7 +282,6 @@ public class PathsImpl implements Paths {
     /**
      * Get '1000000' integer value.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
@@ -310,7 +303,6 @@ public class PathsImpl implements Paths {
     /**
      * Get '1000000' integer value.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
      */
     public Single<RestResponse<Void, Void>> getIntOneMillionWithRestResponseAsync() {
@@ -321,7 +313,6 @@ public class PathsImpl implements Paths {
     /**
      * Get '1000000' integer value.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Completable} object if successful.
      */
     public Completable getIntOneMillionAsync() {
@@ -332,7 +323,6 @@ public class PathsImpl implements Paths {
     /**
      * Get '-1000000' integer value.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
@@ -354,7 +344,6 @@ public class PathsImpl implements Paths {
     /**
      * Get '-1000000' integer value.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
      */
     public Single<RestResponse<Void, Void>> getIntNegativeOneMillionWithRestResponseAsync() {
@@ -365,7 +354,6 @@ public class PathsImpl implements Paths {
     /**
      * Get '-1000000' integer value.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Completable} object if successful.
      */
     public Completable getIntNegativeOneMillionAsync() {
@@ -376,7 +364,6 @@ public class PathsImpl implements Paths {
     /**
      * Get '10000000000' 64 bit integer value.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
@@ -398,7 +385,6 @@ public class PathsImpl implements Paths {
     /**
      * Get '10000000000' 64 bit integer value.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
      */
     public Single<RestResponse<Void, Void>> getTenBillionWithRestResponseAsync() {
@@ -409,7 +395,6 @@ public class PathsImpl implements Paths {
     /**
      * Get '10000000000' 64 bit integer value.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Completable} object if successful.
      */
     public Completable getTenBillionAsync() {
@@ -420,7 +405,6 @@ public class PathsImpl implements Paths {
     /**
      * Get '-10000000000' 64 bit integer value.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
@@ -442,7 +426,6 @@ public class PathsImpl implements Paths {
     /**
      * Get '-10000000000' 64 bit integer value.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
      */
     public Single<RestResponse<Void, Void>> getNegativeTenBillionWithRestResponseAsync() {
@@ -453,7 +436,6 @@ public class PathsImpl implements Paths {
     /**
      * Get '-10000000000' 64 bit integer value.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Completable} object if successful.
      */
     public Completable getNegativeTenBillionAsync() {
@@ -464,7 +446,6 @@ public class PathsImpl implements Paths {
     /**
      * Get '1.034E+20' numeric value.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
@@ -486,7 +467,6 @@ public class PathsImpl implements Paths {
     /**
      * Get '1.034E+20' numeric value.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
      */
     public Single<RestResponse<Void, Void>> floatScientificPositiveWithRestResponseAsync() {
@@ -497,7 +477,6 @@ public class PathsImpl implements Paths {
     /**
      * Get '1.034E+20' numeric value.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Completable} object if successful.
      */
     public Completable floatScientificPositiveAsync() {
@@ -508,7 +487,6 @@ public class PathsImpl implements Paths {
     /**
      * Get '-1.034E-20' numeric value.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
@@ -530,7 +508,6 @@ public class PathsImpl implements Paths {
     /**
      * Get '-1.034E-20' numeric value.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
      */
     public Single<RestResponse<Void, Void>> floatScientificNegativeWithRestResponseAsync() {
@@ -541,7 +518,6 @@ public class PathsImpl implements Paths {
     /**
      * Get '-1.034E-20' numeric value.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Completable} object if successful.
      */
     public Completable floatScientificNegativeAsync() {
@@ -552,7 +528,6 @@ public class PathsImpl implements Paths {
     /**
      * Get '9999999.999' numeric value.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
@@ -574,7 +549,6 @@ public class PathsImpl implements Paths {
     /**
      * Get '9999999.999' numeric value.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
      */
     public Single<RestResponse<Void, Void>> doubleDecimalPositiveWithRestResponseAsync() {
@@ -585,7 +559,6 @@ public class PathsImpl implements Paths {
     /**
      * Get '9999999.999' numeric value.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Completable} object if successful.
      */
     public Completable doubleDecimalPositiveAsync() {
@@ -596,7 +569,6 @@ public class PathsImpl implements Paths {
     /**
      * Get '-9999999.999' numeric value.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
@@ -618,7 +590,6 @@ public class PathsImpl implements Paths {
     /**
      * Get '-9999999.999' numeric value.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
      */
     public Single<RestResponse<Void, Void>> doubleDecimalNegativeWithRestResponseAsync() {
@@ -629,7 +600,6 @@ public class PathsImpl implements Paths {
     /**
      * Get '-9999999.999' numeric value.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Completable} object if successful.
      */
     public Completable doubleDecimalNegativeAsync() {
@@ -640,7 +610,6 @@ public class PathsImpl implements Paths {
     /**
      * Get '啊齄丂狛狜隣郎隣兀﨩' multi-byte string value.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
@@ -662,7 +631,6 @@ public class PathsImpl implements Paths {
     /**
      * Get '啊齄丂狛狜隣郎隣兀﨩' multi-byte string value.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
      */
     public Single<RestResponse<Void, Void>> stringUnicodeWithRestResponseAsync() {
@@ -673,7 +641,6 @@ public class PathsImpl implements Paths {
     /**
      * Get '啊齄丂狛狜隣郎隣兀﨩' multi-byte string value.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Completable} object if successful.
      */
     public Completable stringUnicodeAsync() {
@@ -684,7 +651,6 @@ public class PathsImpl implements Paths {
     /**
      * Get 'begin!*'();:@ &amp;=+$,/?#[]end.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
@@ -706,7 +672,6 @@ public class PathsImpl implements Paths {
     /**
      * Get 'begin!*'();:@ &amp;=+$,/?#[]end.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
      */
     public Single<RestResponse<Void, Void>> stringUrlEncodedWithRestResponseAsync() {
@@ -717,7 +682,6 @@ public class PathsImpl implements Paths {
     /**
      * Get 'begin!*'();:@ &amp;=+$,/?#[]end.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Completable} object if successful.
      */
     public Completable stringUrlEncodedAsync() {
@@ -728,7 +692,6 @@ public class PathsImpl implements Paths {
     /**
      * Get ''.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
@@ -750,7 +713,6 @@ public class PathsImpl implements Paths {
     /**
      * Get ''.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
      */
     public Single<RestResponse<Void, Void>> stringEmptyWithRestResponseAsync() {
@@ -761,7 +723,6 @@ public class PathsImpl implements Paths {
     /**
      * Get ''.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Completable} object if successful.
      */
     public Completable stringEmptyAsync() {
@@ -973,7 +934,6 @@ public class PathsImpl implements Paths {
     /**
      * Get '' as byte array.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
@@ -995,7 +955,6 @@ public class PathsImpl implements Paths {
     /**
      * Get '' as byte array.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
      */
     public Single<RestResponse<Void, Void>> byteEmptyWithRestResponseAsync() {
@@ -1007,7 +966,6 @@ public class PathsImpl implements Paths {
     /**
      * Get '' as byte array.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Completable} object if successful.
      */
     public Completable byteEmptyAsync() {
@@ -1069,7 +1027,6 @@ public class PathsImpl implements Paths {
     /**
      * Get '2012-01-01' as date.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
@@ -1091,7 +1048,6 @@ public class PathsImpl implements Paths {
     /**
      * Get '2012-01-01' as date.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
      */
     public Single<RestResponse<Void, Void>> dateValidWithRestResponseAsync() {
@@ -1102,7 +1058,6 @@ public class PathsImpl implements Paths {
     /**
      * Get '2012-01-01' as date.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Completable} object if successful.
      */
     public Completable dateValidAsync() {
@@ -1163,7 +1118,6 @@ public class PathsImpl implements Paths {
     /**
      * Get '2012-01-01T01:01:01Z' as date-time.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
@@ -1185,7 +1139,6 @@ public class PathsImpl implements Paths {
     /**
      * Get '2012-01-01T01:01:01Z' as date-time.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
      */
     public Single<RestResponse<Void, Void>> dateTimeValidWithRestResponseAsync() {
@@ -1196,7 +1149,6 @@ public class PathsImpl implements Paths {
     /**
      * Get '2012-01-01T01:01:01Z' as date-time.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Completable} object if successful.
      */
     public Completable dateTimeValidAsync() {

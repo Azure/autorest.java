@@ -27,7 +27,6 @@ public interface Files {
     /**
      * Get file.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the Flowable&lt;byte[]&gt; object if successful.
@@ -46,7 +45,6 @@ public interface Files {
     /**
      * Get file.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, Flowable&lt;byte[]&gt;&gt;&gt;} object if successful.
      */
     Single<RestResponse<Void, Flowable<byte[]>>> getFileWithRestResponseAsync();
@@ -54,7 +52,6 @@ public interface Files {
     /**
      * Get file.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Maybe&lt;Flowable&lt;byte[]&gt;&gt;} object if successful.
      */
     Maybe<Flowable<byte[]>> getFileAsync();
@@ -62,7 +59,6 @@ public interface Files {
     /**
      * Get a large file.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the Flowable&lt;byte[]&gt; object if successful.
@@ -81,7 +77,6 @@ public interface Files {
     /**
      * Get a large file.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, Flowable&lt;byte[]&gt;&gt;&gt;} object if successful.
      */
     Single<RestResponse<Void, Flowable<byte[]>>> getFileLargeWithRestResponseAsync();
@@ -89,7 +84,6 @@ public interface Files {
     /**
      * Get a large file.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Maybe&lt;Flowable&lt;byte[]&gt;&gt;} object if successful.
      */
     Maybe<Flowable<byte[]>> getFileLargeAsync();
@@ -97,7 +91,6 @@ public interface Files {
     /**
      * Get empty file.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the Flowable&lt;byte[]&gt; object if successful.
@@ -116,7 +109,6 @@ public interface Files {
     /**
      * Get empty file.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, Flowable&lt;byte[]&gt;&gt;&gt;} object if successful.
      */
     Single<RestResponse<Void, Flowable<byte[]>>> getEmptyFileWithRestResponseAsync();
@@ -124,7 +116,6 @@ public interface Files {
     /**
      * Get empty file.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Maybe&lt;Flowable&lt;byte[]&gt;&gt;} object if successful.
      */
     Maybe<Flowable<byte[]>> getEmptyFileAsync();

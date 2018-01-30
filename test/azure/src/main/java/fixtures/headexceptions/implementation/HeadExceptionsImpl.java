@@ -76,7 +76,6 @@ public class HeadExceptionsImpl implements HeadExceptions {
     /**
      * Return 200 status code if successful.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws CloudException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
@@ -98,7 +97,6 @@ public class HeadExceptionsImpl implements HeadExceptions {
     /**
      * Return 200 status code if successful.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
      */
     public Single<RestResponse<Void, Void>> head200WithRestResponseAsync() {
@@ -108,7 +106,6 @@ public class HeadExceptionsImpl implements HeadExceptions {
     /**
      * Return 200 status code if successful.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Completable} object if successful.
      */
     public Completable head200Async() {
@@ -119,7 +116,6 @@ public class HeadExceptionsImpl implements HeadExceptions {
     /**
      * Return 204 status code if successful.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws CloudException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
@@ -141,7 +137,6 @@ public class HeadExceptionsImpl implements HeadExceptions {
     /**
      * Return 204 status code if successful.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
      */
     public Single<RestResponse<Void, Void>> head204WithRestResponseAsync() {
@@ -151,7 +146,6 @@ public class HeadExceptionsImpl implements HeadExceptions {
     /**
      * Return 204 status code if successful.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Completable} object if successful.
      */
     public Completable head204Async() {
@@ -162,7 +156,6 @@ public class HeadExceptionsImpl implements HeadExceptions {
     /**
      * Return 404 status code if successful.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws CloudException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
@@ -184,7 +177,6 @@ public class HeadExceptionsImpl implements HeadExceptions {
     /**
      * Return 404 status code if successful.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
      */
     public Single<RestResponse<Void, Void>> head404WithRestResponseAsync() {
@@ -194,7 +186,6 @@ public class HeadExceptionsImpl implements HeadExceptions {
     /**
      * Return 404 status code if successful.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Completable} object if successful.
      */
     public Completable head404Async() {

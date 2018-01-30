@@ -26,7 +26,6 @@ public interface HttpRetrys {
     /**
      * Return 408 status code, then 200 after retry.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
@@ -44,7 +43,6 @@ public interface HttpRetrys {
     /**
      * Return 408 status code, then 200 after retry.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
      */
     Single<RestResponse<Void, Void>> head408WithRestResponseAsync();
@@ -52,7 +50,6 @@ public interface HttpRetrys {
     /**
      * Return 408 status code, then 200 after retry.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Completable} object if successful.
      */
     Completable head408Async();
@@ -60,7 +57,6 @@ public interface HttpRetrys {
     /**
      * Return 500 status code, then 200 after retry.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
@@ -78,7 +74,6 @@ public interface HttpRetrys {
     /**
      * Return 500 status code, then 200 after retry.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
      */
     Single<RestResponse<Void, Void>> put500WithRestResponseAsync();
@@ -86,7 +81,6 @@ public interface HttpRetrys {
     /**
      * Return 500 status code, then 200 after retry.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Completable} object if successful.
      */
     Completable put500Async();
@@ -132,7 +126,6 @@ public interface HttpRetrys {
     /**
      * Return 500 status code, then 200 after retry.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
@@ -150,7 +143,6 @@ public interface HttpRetrys {
     /**
      * Return 500 status code, then 200 after retry.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
      */
     Single<RestResponse<Void, Void>> patch500WithRestResponseAsync();
@@ -158,7 +150,6 @@ public interface HttpRetrys {
     /**
      * Return 500 status code, then 200 after retry.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Completable} object if successful.
      */
     Completable patch500Async();
@@ -204,7 +195,6 @@ public interface HttpRetrys {
     /**
      * Return 502 status code, then 200 after retry.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
@@ -222,7 +212,6 @@ public interface HttpRetrys {
     /**
      * Return 502 status code, then 200 after retry.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
      */
     Single<RestResponse<Void, Void>> get502WithRestResponseAsync();
@@ -230,7 +219,6 @@ public interface HttpRetrys {
     /**
      * Return 502 status code, then 200 after retry.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Completable} object if successful.
      */
     Completable get502Async();
@@ -238,7 +226,6 @@ public interface HttpRetrys {
     /**
      * Return 503 status code, then 200 after retry.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
@@ -256,7 +243,6 @@ public interface HttpRetrys {
     /**
      * Return 503 status code, then 200 after retry.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
      */
     Single<RestResponse<Void, Void>> post503WithRestResponseAsync();
@@ -264,7 +250,6 @@ public interface HttpRetrys {
     /**
      * Return 503 status code, then 200 after retry.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Completable} object if successful.
      */
     Completable post503Async();
@@ -310,7 +295,6 @@ public interface HttpRetrys {
     /**
      * Return 503 status code, then 200 after retry.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
@@ -328,7 +312,6 @@ public interface HttpRetrys {
     /**
      * Return 503 status code, then 200 after retry.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
      */
     Single<RestResponse<Void, Void>> delete503WithRestResponseAsync();
@@ -336,7 +319,6 @@ public interface HttpRetrys {
     /**
      * Return 503 status code, then 200 after retry.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Completable} object if successful.
      */
     Completable delete503Async();
@@ -382,7 +364,6 @@ public interface HttpRetrys {
     /**
      * Return 504 status code, then 200 after retry.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
@@ -400,7 +381,6 @@ public interface HttpRetrys {
     /**
      * Return 504 status code, then 200 after retry.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
      */
     Single<RestResponse<Void, Void>> put504WithRestResponseAsync();
@@ -408,7 +388,6 @@ public interface HttpRetrys {
     /**
      * Return 504 status code, then 200 after retry.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Completable} object if successful.
      */
     Completable put504Async();
@@ -454,7 +433,6 @@ public interface HttpRetrys {
     /**
      * Return 504 status code, then 200 after retry.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
@@ -472,7 +450,6 @@ public interface HttpRetrys {
     /**
      * Return 504 status code, then 200 after retry.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
      */
     Single<RestResponse<Void, Void>> patch504WithRestResponseAsync();
@@ -480,7 +457,6 @@ public interface HttpRetrys {
     /**
      * Return 504 status code, then 200 after retry.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Completable} object if successful.
      */
     Completable patch504Async();

@@ -28,7 +28,6 @@ public interface Basics {
     /**
      * Get complex type {id: 2, name: 'abc', color: 'YELLOW'}.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the Basic object if successful.
@@ -47,7 +46,6 @@ public interface Basics {
     /**
      * Get complex type {id: 2, name: 'abc', color: 'YELLOW'}.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, Basic&gt;&gt;} object if successful.
      */
     Single<RestResponse<Void, Basic>> getValidWithRestResponseAsync();
@@ -55,7 +53,6 @@ public interface Basics {
     /**
      * Get complex type {id: 2, name: 'abc', color: 'YELLOW'}.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Maybe&lt;Basic&gt;} object if successful.
      */
     Maybe<Basic> getValidAsync();
@@ -101,7 +98,6 @@ public interface Basics {
     /**
      * Get a basic complex type that is invalid for the local strong type.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the Basic object if successful.
@@ -120,7 +116,6 @@ public interface Basics {
     /**
      * Get a basic complex type that is invalid for the local strong type.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, Basic&gt;&gt;} object if successful.
      */
     Single<RestResponse<Void, Basic>> getInvalidWithRestResponseAsync();
@@ -128,7 +123,6 @@ public interface Basics {
     /**
      * Get a basic complex type that is invalid for the local strong type.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Maybe&lt;Basic&gt;} object if successful.
      */
     Maybe<Basic> getInvalidAsync();
@@ -136,7 +130,6 @@ public interface Basics {
     /**
      * Get a basic complex type that is empty.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the Basic object if successful.
@@ -155,7 +148,6 @@ public interface Basics {
     /**
      * Get a basic complex type that is empty.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, Basic&gt;&gt;} object if successful.
      */
     Single<RestResponse<Void, Basic>> getEmptyWithRestResponseAsync();
@@ -163,7 +155,6 @@ public interface Basics {
     /**
      * Get a basic complex type that is empty.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Maybe&lt;Basic&gt;} object if successful.
      */
     Maybe<Basic> getEmptyAsync();
@@ -171,7 +162,6 @@ public interface Basics {
     /**
      * Get a basic complex type whose properties are null.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the Basic object if successful.
@@ -190,7 +180,6 @@ public interface Basics {
     /**
      * Get a basic complex type whose properties are null.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, Basic&gt;&gt;} object if successful.
      */
     Single<RestResponse<Void, Basic>> getNullWithRestResponseAsync();
@@ -198,7 +187,6 @@ public interface Basics {
     /**
      * Get a basic complex type whose properties are null.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Maybe&lt;Basic&gt;} object if successful.
      */
     Maybe<Basic> getNullAsync();
@@ -206,7 +194,6 @@ public interface Basics {
     /**
      * Get a basic complex type while the server doesn't provide a response payload.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the Basic object if successful.
@@ -225,7 +212,6 @@ public interface Basics {
     /**
      * Get a basic complex type while the server doesn't provide a response payload.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, Basic&gt;&gt;} object if successful.
      */
     Single<RestResponse<Void, Basic>> getNotProvidedWithRestResponseAsync();
@@ -233,7 +219,6 @@ public interface Basics {
     /**
      * Get a basic complex type while the server doesn't provide a response payload.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Maybe&lt;Basic&gt;} object if successful.
      */
     Maybe<Basic> getNotProvidedAsync();

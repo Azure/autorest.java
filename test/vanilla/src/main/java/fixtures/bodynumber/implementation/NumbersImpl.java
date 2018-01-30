@@ -184,7 +184,6 @@ public class NumbersImpl implements Numbers {
     /**
      * Get null Number value.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the double object if successful.
@@ -207,7 +206,6 @@ public class NumbersImpl implements Numbers {
     /**
      * Get null Number value.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, Double&gt;&gt;} object if successful.
      */
     public Single<RestResponse<Void, Double>> getNullWithRestResponseAsync() {
@@ -217,7 +215,6 @@ public class NumbersImpl implements Numbers {
     /**
      * Get null Number value.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Maybe&lt;Double&gt;} object if successful.
      */
     public Maybe<Double> getNullAsync() {
@@ -236,7 +233,6 @@ public class NumbersImpl implements Numbers {
     /**
      * Get invalid float Number value.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the double object if successful.
@@ -259,7 +255,6 @@ public class NumbersImpl implements Numbers {
     /**
      * Get invalid float Number value.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, Double&gt;&gt;} object if successful.
      */
     public Single<RestResponse<Void, Double>> getInvalidFloatWithRestResponseAsync() {
@@ -269,7 +264,6 @@ public class NumbersImpl implements Numbers {
     /**
      * Get invalid float Number value.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Maybe&lt;Double&gt;} object if successful.
      */
     public Maybe<Double> getInvalidFloatAsync() {
@@ -288,7 +282,6 @@ public class NumbersImpl implements Numbers {
     /**
      * Get invalid double Number value.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the double object if successful.
@@ -311,7 +304,6 @@ public class NumbersImpl implements Numbers {
     /**
      * Get invalid double Number value.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, Double&gt;&gt;} object if successful.
      */
     public Single<RestResponse<Void, Double>> getInvalidDoubleWithRestResponseAsync() {
@@ -321,7 +313,6 @@ public class NumbersImpl implements Numbers {
     /**
      * Get invalid double Number value.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Maybe&lt;Double&gt;} object if successful.
      */
     public Maybe<Double> getInvalidDoubleAsync() {
@@ -340,7 +331,6 @@ public class NumbersImpl implements Numbers {
     /**
      * Get invalid decimal Number value.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the BigDecimal object if successful.
@@ -363,7 +353,6 @@ public class NumbersImpl implements Numbers {
     /**
      * Get invalid decimal Number value.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, BigDecimal&gt;&gt;} object if successful.
      */
     public Single<RestResponse<Void, BigDecimal>> getInvalidDecimalWithRestResponseAsync() {
@@ -373,7 +362,6 @@ public class NumbersImpl implements Numbers {
     /**
      * Get invalid decimal Number value.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Maybe&lt;BigDecimal&gt;} object if successful.
      */
     public Maybe<BigDecimal> getInvalidDecimalAsync() {
@@ -439,7 +427,6 @@ public class NumbersImpl implements Numbers {
     /**
      * Get big float value 3.402823e+20.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the double object if successful.
@@ -462,7 +449,6 @@ public class NumbersImpl implements Numbers {
     /**
      * Get big float value 3.402823e+20.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, Double&gt;&gt;} object if successful.
      */
     public Single<RestResponse<Void, Double>> getBigFloatWithRestResponseAsync() {
@@ -472,7 +458,6 @@ public class NumbersImpl implements Numbers {
     /**
      * Get big float value 3.402823e+20.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Maybe&lt;Double&gt;} object if successful.
      */
     public Maybe<Double> getBigFloatAsync() {
@@ -538,7 +523,6 @@ public class NumbersImpl implements Numbers {
     /**
      * Get big double value 2.5976931e+101.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the double object if successful.
@@ -561,7 +545,6 @@ public class NumbersImpl implements Numbers {
     /**
      * Get big double value 2.5976931e+101.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, Double&gt;&gt;} object if successful.
      */
     public Single<RestResponse<Void, Double>> getBigDoubleWithRestResponseAsync() {
@@ -571,7 +554,6 @@ public class NumbersImpl implements Numbers {
     /**
      * Get big double value 2.5976931e+101.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Maybe&lt;Double&gt;} object if successful.
      */
     public Maybe<Double> getBigDoubleAsync() {
@@ -637,7 +619,6 @@ public class NumbersImpl implements Numbers {
     /**
      * Get big double value 99999999.99.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the double object if successful.
@@ -660,7 +641,6 @@ public class NumbersImpl implements Numbers {
     /**
      * Get big double value 99999999.99.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, Double&gt;&gt;} object if successful.
      */
     public Single<RestResponse<Void, Double>> getBigDoublePositiveDecimalWithRestResponseAsync() {
@@ -670,7 +650,6 @@ public class NumbersImpl implements Numbers {
     /**
      * Get big double value 99999999.99.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Maybe&lt;Double&gt;} object if successful.
      */
     public Maybe<Double> getBigDoublePositiveDecimalAsync() {
@@ -736,7 +715,6 @@ public class NumbersImpl implements Numbers {
     /**
      * Get big double value -99999999.99.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the double object if successful.
@@ -759,7 +737,6 @@ public class NumbersImpl implements Numbers {
     /**
      * Get big double value -99999999.99.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, Double&gt;&gt;} object if successful.
      */
     public Single<RestResponse<Void, Double>> getBigDoubleNegativeDecimalWithRestResponseAsync() {
@@ -769,7 +746,6 @@ public class NumbersImpl implements Numbers {
     /**
      * Get big double value -99999999.99.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Maybe&lt;Double&gt;} object if successful.
      */
     public Maybe<Double> getBigDoubleNegativeDecimalAsync() {
@@ -838,7 +814,6 @@ public class NumbersImpl implements Numbers {
     /**
      * Get big decimal value 2.5976931e+101.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the BigDecimal object if successful.
@@ -861,7 +836,6 @@ public class NumbersImpl implements Numbers {
     /**
      * Get big decimal value 2.5976931e+101.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, BigDecimal&gt;&gt;} object if successful.
      */
     public Single<RestResponse<Void, BigDecimal>> getBigDecimalWithRestResponseAsync() {
@@ -871,7 +845,6 @@ public class NumbersImpl implements Numbers {
     /**
      * Get big decimal value 2.5976931e+101.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Maybe&lt;BigDecimal&gt;} object if successful.
      */
     public Maybe<BigDecimal> getBigDecimalAsync() {
@@ -940,7 +913,6 @@ public class NumbersImpl implements Numbers {
     /**
      * Get big decimal value 99999999.99.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the BigDecimal object if successful.
@@ -963,7 +935,6 @@ public class NumbersImpl implements Numbers {
     /**
      * Get big decimal value 99999999.99.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, BigDecimal&gt;&gt;} object if successful.
      */
     public Single<RestResponse<Void, BigDecimal>> getBigDecimalPositiveDecimalWithRestResponseAsync() {
@@ -973,7 +944,6 @@ public class NumbersImpl implements Numbers {
     /**
      * Get big decimal value 99999999.99.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Maybe&lt;BigDecimal&gt;} object if successful.
      */
     public Maybe<BigDecimal> getBigDecimalPositiveDecimalAsync() {
@@ -1042,7 +1012,6 @@ public class NumbersImpl implements Numbers {
     /**
      * Get big decimal value -99999999.99.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the BigDecimal object if successful.
@@ -1065,7 +1034,6 @@ public class NumbersImpl implements Numbers {
     /**
      * Get big decimal value -99999999.99.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, BigDecimal&gt;&gt;} object if successful.
      */
     public Single<RestResponse<Void, BigDecimal>> getBigDecimalNegativeDecimalWithRestResponseAsync() {
@@ -1075,7 +1043,6 @@ public class NumbersImpl implements Numbers {
     /**
      * Get big decimal value -99999999.99.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Maybe&lt;BigDecimal&gt;} object if successful.
      */
     public Maybe<BigDecimal> getBigDecimalNegativeDecimalAsync() {
@@ -1141,7 +1108,6 @@ public class NumbersImpl implements Numbers {
     /**
      * Get big double value 3.402823e-20.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the double object if successful.
@@ -1164,7 +1130,6 @@ public class NumbersImpl implements Numbers {
     /**
      * Get big double value 3.402823e-20.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, Double&gt;&gt;} object if successful.
      */
     public Single<RestResponse<Void, Double>> getSmallFloatWithRestResponseAsync() {
@@ -1174,7 +1139,6 @@ public class NumbersImpl implements Numbers {
     /**
      * Get big double value 3.402823e-20.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Maybe&lt;Double&gt;} object if successful.
      */
     public Maybe<Double> getSmallFloatAsync() {
@@ -1240,7 +1204,6 @@ public class NumbersImpl implements Numbers {
     /**
      * Get big double value 2.5976931e-101.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the double object if successful.
@@ -1263,7 +1226,6 @@ public class NumbersImpl implements Numbers {
     /**
      * Get big double value 2.5976931e-101.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, Double&gt;&gt;} object if successful.
      */
     public Single<RestResponse<Void, Double>> getSmallDoubleWithRestResponseAsync() {
@@ -1273,7 +1235,6 @@ public class NumbersImpl implements Numbers {
     /**
      * Get big double value 2.5976931e-101.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Maybe&lt;Double&gt;} object if successful.
      */
     public Maybe<Double> getSmallDoubleAsync() {
@@ -1342,7 +1303,6 @@ public class NumbersImpl implements Numbers {
     /**
      * Get small decimal value 2.5976931e-101.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the BigDecimal object if successful.
@@ -1365,7 +1325,6 @@ public class NumbersImpl implements Numbers {
     /**
      * Get small decimal value 2.5976931e-101.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, BigDecimal&gt;&gt;} object if successful.
      */
     public Single<RestResponse<Void, BigDecimal>> getSmallDecimalWithRestResponseAsync() {
@@ -1375,7 +1334,6 @@ public class NumbersImpl implements Numbers {
     /**
      * Get small decimal value 2.5976931e-101.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Maybe&lt;BigDecimal&gt;} object if successful.
      */
     public Maybe<BigDecimal> getSmallDecimalAsync() {

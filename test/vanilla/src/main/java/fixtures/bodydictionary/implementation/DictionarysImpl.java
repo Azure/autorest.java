@@ -401,7 +401,6 @@ public class DictionarysImpl implements Dictionarys {
     /**
      * Get null dictionary value.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the Map&lt;String, Integer&gt; object if successful.
@@ -424,7 +423,6 @@ public class DictionarysImpl implements Dictionarys {
     /**
      * Get null dictionary value.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, Map&lt;String, Integer&gt;&gt;&gt;} object if successful.
      */
     public Single<RestResponse<Void, Map<String, Integer>>> getNullWithRestResponseAsync() {
@@ -434,7 +432,6 @@ public class DictionarysImpl implements Dictionarys {
     /**
      * Get null dictionary value.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Maybe&lt;Map&lt;String, Integer&gt;&gt;} object if successful.
      */
     public Maybe<Map<String, Integer>> getNullAsync() {
@@ -453,7 +450,6 @@ public class DictionarysImpl implements Dictionarys {
     /**
      * Get empty dictionary value {}.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the Map&lt;String, Integer&gt; object if successful.
@@ -476,7 +472,6 @@ public class DictionarysImpl implements Dictionarys {
     /**
      * Get empty dictionary value {}.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, Map&lt;String, Integer&gt;&gt;&gt;} object if successful.
      */
     public Single<RestResponse<Void, Map<String, Integer>>> getEmptyWithRestResponseAsync() {
@@ -486,7 +481,6 @@ public class DictionarysImpl implements Dictionarys {
     /**
      * Get empty dictionary value {}.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Maybe&lt;Map&lt;String, Integer&gt;&gt;} object if successful.
      */
     public Maybe<Map<String, Integer>> getEmptyAsync() {
@@ -556,7 +550,6 @@ public class DictionarysImpl implements Dictionarys {
     /**
      * Get Dictionary with null value.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the Map&lt;String, String&gt; object if successful.
@@ -579,7 +572,6 @@ public class DictionarysImpl implements Dictionarys {
     /**
      * Get Dictionary with null value.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, Map&lt;String, String&gt;&gt;&gt;} object if successful.
      */
     public Single<RestResponse<Void, Map<String, String>>> getNullValueWithRestResponseAsync() {
@@ -589,7 +581,6 @@ public class DictionarysImpl implements Dictionarys {
     /**
      * Get Dictionary with null value.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Maybe&lt;Map&lt;String, String&gt;&gt;} object if successful.
      */
     public Maybe<Map<String, String>> getNullValueAsync() {
@@ -608,7 +599,6 @@ public class DictionarysImpl implements Dictionarys {
     /**
      * Get Dictionary with null key.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the Map&lt;String, String&gt; object if successful.
@@ -631,7 +621,6 @@ public class DictionarysImpl implements Dictionarys {
     /**
      * Get Dictionary with null key.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, Map&lt;String, String&gt;&gt;&gt;} object if successful.
      */
     public Single<RestResponse<Void, Map<String, String>>> getNullKeyWithRestResponseAsync() {
@@ -641,7 +630,6 @@ public class DictionarysImpl implements Dictionarys {
     /**
      * Get Dictionary with null key.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Maybe&lt;Map&lt;String, String&gt;&gt;} object if successful.
      */
     public Maybe<Map<String, String>> getNullKeyAsync() {
@@ -660,7 +648,6 @@ public class DictionarysImpl implements Dictionarys {
     /**
      * Get Dictionary with key as empty string.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the Map&lt;String, String&gt; object if successful.
@@ -683,7 +670,6 @@ public class DictionarysImpl implements Dictionarys {
     /**
      * Get Dictionary with key as empty string.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, Map&lt;String, String&gt;&gt;&gt;} object if successful.
      */
     public Single<RestResponse<Void, Map<String, String>>> getEmptyStringKeyWithRestResponseAsync() {
@@ -693,7 +679,6 @@ public class DictionarysImpl implements Dictionarys {
     /**
      * Get Dictionary with key as empty string.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Maybe&lt;Map&lt;String, String&gt;&gt;} object if successful.
      */
     public Maybe<Map<String, String>> getEmptyStringKeyAsync() {
@@ -712,7 +697,6 @@ public class DictionarysImpl implements Dictionarys {
     /**
      * Get invalid Dictionary value.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the Map&lt;String, String&gt; object if successful.
@@ -735,7 +719,6 @@ public class DictionarysImpl implements Dictionarys {
     /**
      * Get invalid Dictionary value.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, Map&lt;String, String&gt;&gt;&gt;} object if successful.
      */
     public Single<RestResponse<Void, Map<String, String>>> getInvalidWithRestResponseAsync() {
@@ -745,7 +728,6 @@ public class DictionarysImpl implements Dictionarys {
     /**
      * Get invalid Dictionary value.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Maybe&lt;Map&lt;String, String&gt;&gt;} object if successful.
      */
     public Maybe<Map<String, String>> getInvalidAsync() {
@@ -764,7 +746,6 @@ public class DictionarysImpl implements Dictionarys {
     /**
      * Get boolean dictionary value {"0": true, "1": false, "2": false, "3": true }.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the Map&lt;String, Boolean&gt; object if successful.
@@ -787,7 +768,6 @@ public class DictionarysImpl implements Dictionarys {
     /**
      * Get boolean dictionary value {"0": true, "1": false, "2": false, "3": true }.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, Map&lt;String, Boolean&gt;&gt;&gt;} object if successful.
      */
     public Single<RestResponse<Void, Map<String, Boolean>>> getBooleanTfftWithRestResponseAsync() {
@@ -797,7 +777,6 @@ public class DictionarysImpl implements Dictionarys {
     /**
      * Get boolean dictionary value {"0": true, "1": false, "2": false, "3": true }.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Maybe&lt;Map&lt;String, Boolean&gt;&gt;} object if successful.
      */
     public Maybe<Map<String, Boolean>> getBooleanTfftAsync() {
@@ -867,7 +846,6 @@ public class DictionarysImpl implements Dictionarys {
     /**
      * Get boolean dictionary value {"0": true, "1": null, "2": false }.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the Map&lt;String, Boolean&gt; object if successful.
@@ -890,7 +868,6 @@ public class DictionarysImpl implements Dictionarys {
     /**
      * Get boolean dictionary value {"0": true, "1": null, "2": false }.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, Map&lt;String, Boolean&gt;&gt;&gt;} object if successful.
      */
     public Single<RestResponse<Void, Map<String, Boolean>>> getBooleanInvalidNullWithRestResponseAsync() {
@@ -900,7 +877,6 @@ public class DictionarysImpl implements Dictionarys {
     /**
      * Get boolean dictionary value {"0": true, "1": null, "2": false }.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Maybe&lt;Map&lt;String, Boolean&gt;&gt;} object if successful.
      */
     public Maybe<Map<String, Boolean>> getBooleanInvalidNullAsync() {
@@ -919,7 +895,6 @@ public class DictionarysImpl implements Dictionarys {
     /**
      * Get boolean dictionary value '{"0": true, "1": "boolean", "2": false}'.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the Map&lt;String, Boolean&gt; object if successful.
@@ -942,7 +917,6 @@ public class DictionarysImpl implements Dictionarys {
     /**
      * Get boolean dictionary value '{"0": true, "1": "boolean", "2": false}'.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, Map&lt;String, Boolean&gt;&gt;&gt;} object if successful.
      */
     public Single<RestResponse<Void, Map<String, Boolean>>> getBooleanInvalidStringWithRestResponseAsync() {
@@ -952,7 +926,6 @@ public class DictionarysImpl implements Dictionarys {
     /**
      * Get boolean dictionary value '{"0": true, "1": "boolean", "2": false}'.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Maybe&lt;Map&lt;String, Boolean&gt;&gt;} object if successful.
      */
     public Maybe<Map<String, Boolean>> getBooleanInvalidStringAsync() {
@@ -971,7 +944,6 @@ public class DictionarysImpl implements Dictionarys {
     /**
      * Get integer dictionary value {"0": 1, "1": -1, "2": 3, "3": 300}.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the Map&lt;String, Integer&gt; object if successful.
@@ -994,7 +966,6 @@ public class DictionarysImpl implements Dictionarys {
     /**
      * Get integer dictionary value {"0": 1, "1": -1, "2": 3, "3": 300}.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, Map&lt;String, Integer&gt;&gt;&gt;} object if successful.
      */
     public Single<RestResponse<Void, Map<String, Integer>>> getIntegerValidWithRestResponseAsync() {
@@ -1004,7 +975,6 @@ public class DictionarysImpl implements Dictionarys {
     /**
      * Get integer dictionary value {"0": 1, "1": -1, "2": 3, "3": 300}.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Maybe&lt;Map&lt;String, Integer&gt;&gt;} object if successful.
      */
     public Maybe<Map<String, Integer>> getIntegerValidAsync() {
@@ -1074,7 +1044,6 @@ public class DictionarysImpl implements Dictionarys {
     /**
      * Get integer dictionary value {"0": 1, "1": null, "2": 0}.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the Map&lt;String, Integer&gt; object if successful.
@@ -1097,7 +1066,6 @@ public class DictionarysImpl implements Dictionarys {
     /**
      * Get integer dictionary value {"0": 1, "1": null, "2": 0}.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, Map&lt;String, Integer&gt;&gt;&gt;} object if successful.
      */
     public Single<RestResponse<Void, Map<String, Integer>>> getIntInvalidNullWithRestResponseAsync() {
@@ -1107,7 +1075,6 @@ public class DictionarysImpl implements Dictionarys {
     /**
      * Get integer dictionary value {"0": 1, "1": null, "2": 0}.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Maybe&lt;Map&lt;String, Integer&gt;&gt;} object if successful.
      */
     public Maybe<Map<String, Integer>> getIntInvalidNullAsync() {
@@ -1126,7 +1093,6 @@ public class DictionarysImpl implements Dictionarys {
     /**
      * Get integer dictionary value {"0": 1, "1": "integer", "2": 0}.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the Map&lt;String, Integer&gt; object if successful.
@@ -1149,7 +1115,6 @@ public class DictionarysImpl implements Dictionarys {
     /**
      * Get integer dictionary value {"0": 1, "1": "integer", "2": 0}.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, Map&lt;String, Integer&gt;&gt;&gt;} object if successful.
      */
     public Single<RestResponse<Void, Map<String, Integer>>> getIntInvalidStringWithRestResponseAsync() {
@@ -1159,7 +1124,6 @@ public class DictionarysImpl implements Dictionarys {
     /**
      * Get integer dictionary value {"0": 1, "1": "integer", "2": 0}.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Maybe&lt;Map&lt;String, Integer&gt;&gt;} object if successful.
      */
     public Maybe<Map<String, Integer>> getIntInvalidStringAsync() {
@@ -1178,7 +1142,6 @@ public class DictionarysImpl implements Dictionarys {
     /**
      * Get integer dictionary value {"0": 1, "1": -1, "2": 3, "3": 300}.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the Map&lt;String, Long&gt; object if successful.
@@ -1201,7 +1164,6 @@ public class DictionarysImpl implements Dictionarys {
     /**
      * Get integer dictionary value {"0": 1, "1": -1, "2": 3, "3": 300}.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, Map&lt;String, Long&gt;&gt;&gt;} object if successful.
      */
     public Single<RestResponse<Void, Map<String, Long>>> getLongValidWithRestResponseAsync() {
@@ -1211,7 +1173,6 @@ public class DictionarysImpl implements Dictionarys {
     /**
      * Get integer dictionary value {"0": 1, "1": -1, "2": 3, "3": 300}.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Maybe&lt;Map&lt;String, Long&gt;&gt;} object if successful.
      */
     public Maybe<Map<String, Long>> getLongValidAsync() {
@@ -1281,7 +1242,6 @@ public class DictionarysImpl implements Dictionarys {
     /**
      * Get long dictionary value {"0": 1, "1": null, "2": 0}.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the Map&lt;String, Long&gt; object if successful.
@@ -1304,7 +1264,6 @@ public class DictionarysImpl implements Dictionarys {
     /**
      * Get long dictionary value {"0": 1, "1": null, "2": 0}.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, Map&lt;String, Long&gt;&gt;&gt;} object if successful.
      */
     public Single<RestResponse<Void, Map<String, Long>>> getLongInvalidNullWithRestResponseAsync() {
@@ -1314,7 +1273,6 @@ public class DictionarysImpl implements Dictionarys {
     /**
      * Get long dictionary value {"0": 1, "1": null, "2": 0}.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Maybe&lt;Map&lt;String, Long&gt;&gt;} object if successful.
      */
     public Maybe<Map<String, Long>> getLongInvalidNullAsync() {
@@ -1333,7 +1291,6 @@ public class DictionarysImpl implements Dictionarys {
     /**
      * Get long dictionary value {"0": 1, "1": "integer", "2": 0}.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the Map&lt;String, Long&gt; object if successful.
@@ -1356,7 +1313,6 @@ public class DictionarysImpl implements Dictionarys {
     /**
      * Get long dictionary value {"0": 1, "1": "integer", "2": 0}.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, Map&lt;String, Long&gt;&gt;&gt;} object if successful.
      */
     public Single<RestResponse<Void, Map<String, Long>>> getLongInvalidStringWithRestResponseAsync() {
@@ -1366,7 +1322,6 @@ public class DictionarysImpl implements Dictionarys {
     /**
      * Get long dictionary value {"0": 1, "1": "integer", "2": 0}.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Maybe&lt;Map&lt;String, Long&gt;&gt;} object if successful.
      */
     public Maybe<Map<String, Long>> getLongInvalidStringAsync() {
@@ -1385,7 +1340,6 @@ public class DictionarysImpl implements Dictionarys {
     /**
      * Get float dictionary value {"0": 0, "1": -0.01, "2": 1.2e20}.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the Map&lt;String, Double&gt; object if successful.
@@ -1408,7 +1362,6 @@ public class DictionarysImpl implements Dictionarys {
     /**
      * Get float dictionary value {"0": 0, "1": -0.01, "2": 1.2e20}.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, Map&lt;String, Double&gt;&gt;&gt;} object if successful.
      */
     public Single<RestResponse<Void, Map<String, Double>>> getFloatValidWithRestResponseAsync() {
@@ -1418,7 +1371,6 @@ public class DictionarysImpl implements Dictionarys {
     /**
      * Get float dictionary value {"0": 0, "1": -0.01, "2": 1.2e20}.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Maybe&lt;Map&lt;String, Double&gt;&gt;} object if successful.
      */
     public Maybe<Map<String, Double>> getFloatValidAsync() {
@@ -1488,7 +1440,6 @@ public class DictionarysImpl implements Dictionarys {
     /**
      * Get float dictionary value {"0": 0.0, "1": null, "2": 1.2e20}.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the Map&lt;String, Double&gt; object if successful.
@@ -1511,7 +1462,6 @@ public class DictionarysImpl implements Dictionarys {
     /**
      * Get float dictionary value {"0": 0.0, "1": null, "2": 1.2e20}.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, Map&lt;String, Double&gt;&gt;&gt;} object if successful.
      */
     public Single<RestResponse<Void, Map<String, Double>>> getFloatInvalidNullWithRestResponseAsync() {
@@ -1521,7 +1471,6 @@ public class DictionarysImpl implements Dictionarys {
     /**
      * Get float dictionary value {"0": 0.0, "1": null, "2": 1.2e20}.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Maybe&lt;Map&lt;String, Double&gt;&gt;} object if successful.
      */
     public Maybe<Map<String, Double>> getFloatInvalidNullAsync() {
@@ -1540,7 +1489,6 @@ public class DictionarysImpl implements Dictionarys {
     /**
      * Get boolean dictionary value {"0": 1.0, "1": "number", "2": 0.0}.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the Map&lt;String, Double&gt; object if successful.
@@ -1563,7 +1511,6 @@ public class DictionarysImpl implements Dictionarys {
     /**
      * Get boolean dictionary value {"0": 1.0, "1": "number", "2": 0.0}.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, Map&lt;String, Double&gt;&gt;&gt;} object if successful.
      */
     public Single<RestResponse<Void, Map<String, Double>>> getFloatInvalidStringWithRestResponseAsync() {
@@ -1573,7 +1520,6 @@ public class DictionarysImpl implements Dictionarys {
     /**
      * Get boolean dictionary value {"0": 1.0, "1": "number", "2": 0.0}.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Maybe&lt;Map&lt;String, Double&gt;&gt;} object if successful.
      */
     public Maybe<Map<String, Double>> getFloatInvalidStringAsync() {
@@ -1592,7 +1538,6 @@ public class DictionarysImpl implements Dictionarys {
     /**
      * Get float dictionary value {"0": 0, "1": -0.01, "2": 1.2e20}.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the Map&lt;String, Double&gt; object if successful.
@@ -1615,7 +1560,6 @@ public class DictionarysImpl implements Dictionarys {
     /**
      * Get float dictionary value {"0": 0, "1": -0.01, "2": 1.2e20}.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, Map&lt;String, Double&gt;&gt;&gt;} object if successful.
      */
     public Single<RestResponse<Void, Map<String, Double>>> getDoubleValidWithRestResponseAsync() {
@@ -1625,7 +1569,6 @@ public class DictionarysImpl implements Dictionarys {
     /**
      * Get float dictionary value {"0": 0, "1": -0.01, "2": 1.2e20}.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Maybe&lt;Map&lt;String, Double&gt;&gt;} object if successful.
      */
     public Maybe<Map<String, Double>> getDoubleValidAsync() {
@@ -1695,7 +1638,6 @@ public class DictionarysImpl implements Dictionarys {
     /**
      * Get float dictionary value {"0": 0.0, "1": null, "2": 1.2e20}.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the Map&lt;String, Double&gt; object if successful.
@@ -1718,7 +1660,6 @@ public class DictionarysImpl implements Dictionarys {
     /**
      * Get float dictionary value {"0": 0.0, "1": null, "2": 1.2e20}.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, Map&lt;String, Double&gt;&gt;&gt;} object if successful.
      */
     public Single<RestResponse<Void, Map<String, Double>>> getDoubleInvalidNullWithRestResponseAsync() {
@@ -1728,7 +1669,6 @@ public class DictionarysImpl implements Dictionarys {
     /**
      * Get float dictionary value {"0": 0.0, "1": null, "2": 1.2e20}.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Maybe&lt;Map&lt;String, Double&gt;&gt;} object if successful.
      */
     public Maybe<Map<String, Double>> getDoubleInvalidNullAsync() {
@@ -1747,7 +1687,6 @@ public class DictionarysImpl implements Dictionarys {
     /**
      * Get boolean dictionary value {"0": 1.0, "1": "number", "2": 0.0}.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the Map&lt;String, Double&gt; object if successful.
@@ -1770,7 +1709,6 @@ public class DictionarysImpl implements Dictionarys {
     /**
      * Get boolean dictionary value {"0": 1.0, "1": "number", "2": 0.0}.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, Map&lt;String, Double&gt;&gt;&gt;} object if successful.
      */
     public Single<RestResponse<Void, Map<String, Double>>> getDoubleInvalidStringWithRestResponseAsync() {
@@ -1780,7 +1718,6 @@ public class DictionarysImpl implements Dictionarys {
     /**
      * Get boolean dictionary value {"0": 1.0, "1": "number", "2": 0.0}.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Maybe&lt;Map&lt;String, Double&gt;&gt;} object if successful.
      */
     public Maybe<Map<String, Double>> getDoubleInvalidStringAsync() {
@@ -1799,7 +1736,6 @@ public class DictionarysImpl implements Dictionarys {
     /**
      * Get string dictionary value {"0": "foo1", "1": "foo2", "2": "foo3"}.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the Map&lt;String, String&gt; object if successful.
@@ -1822,7 +1758,6 @@ public class DictionarysImpl implements Dictionarys {
     /**
      * Get string dictionary value {"0": "foo1", "1": "foo2", "2": "foo3"}.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, Map&lt;String, String&gt;&gt;&gt;} object if successful.
      */
     public Single<RestResponse<Void, Map<String, String>>> getStringValidWithRestResponseAsync() {
@@ -1832,7 +1767,6 @@ public class DictionarysImpl implements Dictionarys {
     /**
      * Get string dictionary value {"0": "foo1", "1": "foo2", "2": "foo3"}.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Maybe&lt;Map&lt;String, String&gt;&gt;} object if successful.
      */
     public Maybe<Map<String, String>> getStringValidAsync() {
@@ -1902,7 +1836,6 @@ public class DictionarysImpl implements Dictionarys {
     /**
      * Get string dictionary value {"0": "foo", "1": null, "2": "foo2"}.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the Map&lt;String, String&gt; object if successful.
@@ -1925,7 +1858,6 @@ public class DictionarysImpl implements Dictionarys {
     /**
      * Get string dictionary value {"0": "foo", "1": null, "2": "foo2"}.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, Map&lt;String, String&gt;&gt;&gt;} object if successful.
      */
     public Single<RestResponse<Void, Map<String, String>>> getStringWithNullWithRestResponseAsync() {
@@ -1935,7 +1867,6 @@ public class DictionarysImpl implements Dictionarys {
     /**
      * Get string dictionary value {"0": "foo", "1": null, "2": "foo2"}.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Maybe&lt;Map&lt;String, String&gt;&gt;} object if successful.
      */
     public Maybe<Map<String, String>> getStringWithNullAsync() {
@@ -1954,7 +1885,6 @@ public class DictionarysImpl implements Dictionarys {
     /**
      * Get string dictionary value {"0": "foo", "1": 123, "2": "foo2"}.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the Map&lt;String, String&gt; object if successful.
@@ -1977,7 +1907,6 @@ public class DictionarysImpl implements Dictionarys {
     /**
      * Get string dictionary value {"0": "foo", "1": 123, "2": "foo2"}.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, Map&lt;String, String&gt;&gt;&gt;} object if successful.
      */
     public Single<RestResponse<Void, Map<String, String>>> getStringWithInvalidWithRestResponseAsync() {
@@ -1987,7 +1916,6 @@ public class DictionarysImpl implements Dictionarys {
     /**
      * Get string dictionary value {"0": "foo", "1": 123, "2": "foo2"}.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Maybe&lt;Map&lt;String, String&gt;&gt;} object if successful.
      */
     public Maybe<Map<String, String>> getStringWithInvalidAsync() {
@@ -2006,7 +1934,6 @@ public class DictionarysImpl implements Dictionarys {
     /**
      * Get integer dictionary value {"0": "2000-12-01", "1": "1980-01-02", "2": "1492-10-12"}.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the Map&lt;String, LocalDate&gt; object if successful.
@@ -2029,7 +1956,6 @@ public class DictionarysImpl implements Dictionarys {
     /**
      * Get integer dictionary value {"0": "2000-12-01", "1": "1980-01-02", "2": "1492-10-12"}.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, Map&lt;String, LocalDate&gt;&gt;&gt;} object if successful.
      */
     public Single<RestResponse<Void, Map<String, LocalDate>>> getDateValidWithRestResponseAsync() {
@@ -2039,7 +1965,6 @@ public class DictionarysImpl implements Dictionarys {
     /**
      * Get integer dictionary value {"0": "2000-12-01", "1": "1980-01-02", "2": "1492-10-12"}.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Maybe&lt;Map&lt;String, LocalDate&gt;&gt;} object if successful.
      */
     public Maybe<Map<String, LocalDate>> getDateValidAsync() {
@@ -2109,7 +2034,6 @@ public class DictionarysImpl implements Dictionarys {
     /**
      * Get date dictionary value {"0": "2012-01-01", "1": null, "2": "1776-07-04"}.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the Map&lt;String, LocalDate&gt; object if successful.
@@ -2132,7 +2056,6 @@ public class DictionarysImpl implements Dictionarys {
     /**
      * Get date dictionary value {"0": "2012-01-01", "1": null, "2": "1776-07-04"}.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, Map&lt;String, LocalDate&gt;&gt;&gt;} object if successful.
      */
     public Single<RestResponse<Void, Map<String, LocalDate>>> getDateInvalidNullWithRestResponseAsync() {
@@ -2142,7 +2065,6 @@ public class DictionarysImpl implements Dictionarys {
     /**
      * Get date dictionary value {"0": "2012-01-01", "1": null, "2": "1776-07-04"}.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Maybe&lt;Map&lt;String, LocalDate&gt;&gt;} object if successful.
      */
     public Maybe<Map<String, LocalDate>> getDateInvalidNullAsync() {
@@ -2161,7 +2083,6 @@ public class DictionarysImpl implements Dictionarys {
     /**
      * Get date dictionary value {"0": "2011-03-22", "1": "date"}.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the Map&lt;String, LocalDate&gt; object if successful.
@@ -2184,7 +2105,6 @@ public class DictionarysImpl implements Dictionarys {
     /**
      * Get date dictionary value {"0": "2011-03-22", "1": "date"}.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, Map&lt;String, LocalDate&gt;&gt;&gt;} object if successful.
      */
     public Single<RestResponse<Void, Map<String, LocalDate>>> getDateInvalidCharsWithRestResponseAsync() {
@@ -2194,7 +2114,6 @@ public class DictionarysImpl implements Dictionarys {
     /**
      * Get date dictionary value {"0": "2011-03-22", "1": "date"}.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Maybe&lt;Map&lt;String, LocalDate&gt;&gt;} object if successful.
      */
     public Maybe<Map<String, LocalDate>> getDateInvalidCharsAsync() {
@@ -2213,7 +2132,6 @@ public class DictionarysImpl implements Dictionarys {
     /**
      * Get date-time dictionary value {"0": "2000-12-01t00:00:01z", "1": "1980-01-02T00:11:35+01:00", "2": "1492-10-12T10:15:01-08:00"}.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the Map&lt;String, DateTime&gt; object if successful.
@@ -2236,7 +2154,6 @@ public class DictionarysImpl implements Dictionarys {
     /**
      * Get date-time dictionary value {"0": "2000-12-01t00:00:01z", "1": "1980-01-02T00:11:35+01:00", "2": "1492-10-12T10:15:01-08:00"}.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, Map&lt;String, DateTime&gt;&gt;&gt;} object if successful.
      */
     public Single<RestResponse<Void, Map<String, DateTime>>> getDateTimeValidWithRestResponseAsync() {
@@ -2246,7 +2163,6 @@ public class DictionarysImpl implements Dictionarys {
     /**
      * Get date-time dictionary value {"0": "2000-12-01t00:00:01z", "1": "1980-01-02T00:11:35+01:00", "2": "1492-10-12T10:15:01-08:00"}.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Maybe&lt;Map&lt;String, DateTime&gt;&gt;} object if successful.
      */
     public Maybe<Map<String, DateTime>> getDateTimeValidAsync() {
@@ -2316,7 +2232,6 @@ public class DictionarysImpl implements Dictionarys {
     /**
      * Get date dictionary value {"0": "2000-12-01t00:00:01z", "1": null}.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the Map&lt;String, DateTime&gt; object if successful.
@@ -2339,7 +2254,6 @@ public class DictionarysImpl implements Dictionarys {
     /**
      * Get date dictionary value {"0": "2000-12-01t00:00:01z", "1": null}.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, Map&lt;String, DateTime&gt;&gt;&gt;} object if successful.
      */
     public Single<RestResponse<Void, Map<String, DateTime>>> getDateTimeInvalidNullWithRestResponseAsync() {
@@ -2349,7 +2263,6 @@ public class DictionarysImpl implements Dictionarys {
     /**
      * Get date dictionary value {"0": "2000-12-01t00:00:01z", "1": null}.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Maybe&lt;Map&lt;String, DateTime&gt;&gt;} object if successful.
      */
     public Maybe<Map<String, DateTime>> getDateTimeInvalidNullAsync() {
@@ -2368,7 +2281,6 @@ public class DictionarysImpl implements Dictionarys {
     /**
      * Get date dictionary value {"0": "2000-12-01t00:00:01z", "1": "date-time"}.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the Map&lt;String, DateTime&gt; object if successful.
@@ -2391,7 +2303,6 @@ public class DictionarysImpl implements Dictionarys {
     /**
      * Get date dictionary value {"0": "2000-12-01t00:00:01z", "1": "date-time"}.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, Map&lt;String, DateTime&gt;&gt;&gt;} object if successful.
      */
     public Single<RestResponse<Void, Map<String, DateTime>>> getDateTimeInvalidCharsWithRestResponseAsync() {
@@ -2401,7 +2312,6 @@ public class DictionarysImpl implements Dictionarys {
     /**
      * Get date dictionary value {"0": "2000-12-01t00:00:01z", "1": "date-time"}.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Maybe&lt;Map&lt;String, DateTime&gt;&gt;} object if successful.
      */
     public Maybe<Map<String, DateTime>> getDateTimeInvalidCharsAsync() {
@@ -2420,7 +2330,6 @@ public class DictionarysImpl implements Dictionarys {
     /**
      * Get date-time-rfc1123 dictionary value {"0": "Fri, 01 Dec 2000 00:00:01 GMT", "1": "Wed, 02 Jan 1980 00:11:35 GMT", "2": "Wed, 12 Oct 1492 10:15:01 GMT"}.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the Map&lt;String, DateTime&gt; object if successful.
@@ -2443,7 +2352,6 @@ public class DictionarysImpl implements Dictionarys {
     /**
      * Get date-time-rfc1123 dictionary value {"0": "Fri, 01 Dec 2000 00:00:01 GMT", "1": "Wed, 02 Jan 1980 00:11:35 GMT", "2": "Wed, 12 Oct 1492 10:15:01 GMT"}.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, Map&lt;String, DateTime&gt;&gt;&gt;} object if successful.
      */
     public Single<RestResponse<Void, Map<String, DateTime>>> getDateTimeRfc1123ValidWithRestResponseAsync() {
@@ -2453,7 +2361,6 @@ public class DictionarysImpl implements Dictionarys {
     /**
      * Get date-time-rfc1123 dictionary value {"0": "Fri, 01 Dec 2000 00:00:01 GMT", "1": "Wed, 02 Jan 1980 00:11:35 GMT", "2": "Wed, 12 Oct 1492 10:15:01 GMT"}.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Maybe&lt;Map&lt;String, DateTime&gt;&gt;} object if successful.
      */
     public Maybe<Map<String, DateTime>> getDateTimeRfc1123ValidAsync() {
@@ -2528,7 +2435,6 @@ public class DictionarysImpl implements Dictionarys {
     /**
      * Get duration dictionary value {"0": "P123DT22H14M12.011S", "1": "P5DT1H0M0S"}.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the Map&lt;String, Period&gt; object if successful.
@@ -2551,7 +2457,6 @@ public class DictionarysImpl implements Dictionarys {
     /**
      * Get duration dictionary value {"0": "P123DT22H14M12.011S", "1": "P5DT1H0M0S"}.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, Map&lt;String, Period&gt;&gt;&gt;} object if successful.
      */
     public Single<RestResponse<Void, Map<String, Period>>> getDurationValidWithRestResponseAsync() {
@@ -2561,7 +2466,6 @@ public class DictionarysImpl implements Dictionarys {
     /**
      * Get duration dictionary value {"0": "P123DT22H14M12.011S", "1": "P5DT1H0M0S"}.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Maybe&lt;Map&lt;String, Period&gt;&gt;} object if successful.
      */
     public Maybe<Map<String, Period>> getDurationValidAsync() {
@@ -2631,7 +2535,6 @@ public class DictionarysImpl implements Dictionarys {
     /**
      * Get byte dictionary value {"0": hex(FF FF FF FA), "1": hex(01 02 03), "2": hex (25, 29, 43)} with each item encoded in base64.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the Map&lt;String, byte[]&gt; object if successful.
@@ -2654,7 +2557,6 @@ public class DictionarysImpl implements Dictionarys {
     /**
      * Get byte dictionary value {"0": hex(FF FF FF FA), "1": hex(01 02 03), "2": hex (25, 29, 43)} with each item encoded in base64.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, Map&lt;String, byte[]&gt;&gt;&gt;} object if successful.
      */
     public Single<RestResponse<Void, Map<String, byte[]>>> getByteValidWithRestResponseAsync() {
@@ -2664,7 +2566,6 @@ public class DictionarysImpl implements Dictionarys {
     /**
      * Get byte dictionary value {"0": hex(FF FF FF FA), "1": hex(01 02 03), "2": hex (25, 29, 43)} with each item encoded in base64.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Maybe&lt;Map&lt;String, byte[]&gt;&gt;} object if successful.
      */
     public Maybe<Map<String, byte[]>> getByteValidAsync() {
@@ -2734,7 +2635,6 @@ public class DictionarysImpl implements Dictionarys {
     /**
      * Get byte dictionary value {"0": hex(FF FF FF FA), "1": null} with the first item base64 encoded.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the Map&lt;String, byte[]&gt; object if successful.
@@ -2757,7 +2657,6 @@ public class DictionarysImpl implements Dictionarys {
     /**
      * Get byte dictionary value {"0": hex(FF FF FF FA), "1": null} with the first item base64 encoded.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, Map&lt;String, byte[]&gt;&gt;&gt;} object if successful.
      */
     public Single<RestResponse<Void, Map<String, byte[]>>> getByteInvalidNullWithRestResponseAsync() {
@@ -2767,7 +2666,6 @@ public class DictionarysImpl implements Dictionarys {
     /**
      * Get byte dictionary value {"0": hex(FF FF FF FA), "1": null} with the first item base64 encoded.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Maybe&lt;Map&lt;String, byte[]&gt;&gt;} object if successful.
      */
     public Maybe<Map<String, byte[]>> getByteInvalidNullAsync() {
@@ -2786,7 +2684,6 @@ public class DictionarysImpl implements Dictionarys {
     /**
      * Get base64url dictionary value {"0": "a string that gets encoded with base64url", "1": "test string", "2": "Lorem ipsum"}.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the Map&lt;String, byte[]&gt; object if successful.
@@ -2809,7 +2706,6 @@ public class DictionarysImpl implements Dictionarys {
     /**
      * Get base64url dictionary value {"0": "a string that gets encoded with base64url", "1": "test string", "2": "Lorem ipsum"}.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, Map&lt;String, byte[]&gt;&gt;&gt;} object if successful.
      */
     public Single<RestResponse<Void, Map<String, byte[]>>> getBase64UrlWithRestResponseAsync() {
@@ -2819,7 +2715,6 @@ public class DictionarysImpl implements Dictionarys {
     /**
      * Get base64url dictionary value {"0": "a string that gets encoded with base64url", "1": "test string", "2": "Lorem ipsum"}.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Maybe&lt;Map&lt;String, byte[]&gt;&gt;} object if successful.
      */
     public Maybe<Map<String, byte[]>> getBase64UrlAsync() {
@@ -2838,7 +2733,6 @@ public class DictionarysImpl implements Dictionarys {
     /**
      * Get dictionary of complex type null value.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the Map&lt;String, Widget&gt; object if successful.
@@ -2861,7 +2755,6 @@ public class DictionarysImpl implements Dictionarys {
     /**
      * Get dictionary of complex type null value.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, Map&lt;String, Widget&gt;&gt;&gt;} object if successful.
      */
     public Single<RestResponse<Void, Map<String, Widget>>> getComplexNullWithRestResponseAsync() {
@@ -2871,7 +2764,6 @@ public class DictionarysImpl implements Dictionarys {
     /**
      * Get dictionary of complex type null value.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Maybe&lt;Map&lt;String, Widget&gt;&gt;} object if successful.
      */
     public Maybe<Map<String, Widget>> getComplexNullAsync() {
@@ -2890,7 +2782,6 @@ public class DictionarysImpl implements Dictionarys {
     /**
      * Get empty dictionary of complex type {}.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the Map&lt;String, Widget&gt; object if successful.
@@ -2913,7 +2804,6 @@ public class DictionarysImpl implements Dictionarys {
     /**
      * Get empty dictionary of complex type {}.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, Map&lt;String, Widget&gt;&gt;&gt;} object if successful.
      */
     public Single<RestResponse<Void, Map<String, Widget>>> getComplexEmptyWithRestResponseAsync() {
@@ -2923,7 +2813,6 @@ public class DictionarysImpl implements Dictionarys {
     /**
      * Get empty dictionary of complex type {}.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Maybe&lt;Map&lt;String, Widget&gt;&gt;} object if successful.
      */
     public Maybe<Map<String, Widget>> getComplexEmptyAsync() {
@@ -2942,7 +2831,6 @@ public class DictionarysImpl implements Dictionarys {
     /**
      * Get dictionary of complex type with null item {"0": {"integer": 1, "string": "2"}, "1": null, "2": {"integer": 5, "string": "6"}}.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the Map&lt;String, Widget&gt; object if successful.
@@ -2965,7 +2853,6 @@ public class DictionarysImpl implements Dictionarys {
     /**
      * Get dictionary of complex type with null item {"0": {"integer": 1, "string": "2"}, "1": null, "2": {"integer": 5, "string": "6"}}.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, Map&lt;String, Widget&gt;&gt;&gt;} object if successful.
      */
     public Single<RestResponse<Void, Map<String, Widget>>> getComplexItemNullWithRestResponseAsync() {
@@ -2975,7 +2862,6 @@ public class DictionarysImpl implements Dictionarys {
     /**
      * Get dictionary of complex type with null item {"0": {"integer": 1, "string": "2"}, "1": null, "2": {"integer": 5, "string": "6"}}.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Maybe&lt;Map&lt;String, Widget&gt;&gt;} object if successful.
      */
     public Maybe<Map<String, Widget>> getComplexItemNullAsync() {
@@ -2994,7 +2880,6 @@ public class DictionarysImpl implements Dictionarys {
     /**
      * Get dictionary of complex type with empty item {"0": {"integer": 1, "string": "2"}, "1:" {}, "2": {"integer": 5, "string": "6"}}.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the Map&lt;String, Widget&gt; object if successful.
@@ -3017,7 +2902,6 @@ public class DictionarysImpl implements Dictionarys {
     /**
      * Get dictionary of complex type with empty item {"0": {"integer": 1, "string": "2"}, "1:" {}, "2": {"integer": 5, "string": "6"}}.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, Map&lt;String, Widget&gt;&gt;&gt;} object if successful.
      */
     public Single<RestResponse<Void, Map<String, Widget>>> getComplexItemEmptyWithRestResponseAsync() {
@@ -3027,7 +2911,6 @@ public class DictionarysImpl implements Dictionarys {
     /**
      * Get dictionary of complex type with empty item {"0": {"integer": 1, "string": "2"}, "1:" {}, "2": {"integer": 5, "string": "6"}}.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Maybe&lt;Map&lt;String, Widget&gt;&gt;} object if successful.
      */
     public Maybe<Map<String, Widget>> getComplexItemEmptyAsync() {
@@ -3046,7 +2929,6 @@ public class DictionarysImpl implements Dictionarys {
     /**
      * Get dictionary of complex type with {"0": {"integer": 1, "string": "2"}, "1": {"integer": 3, "string": "4"}, "2": {"integer": 5, "string": "6"}}.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the Map&lt;String, Widget&gt; object if successful.
@@ -3069,7 +2951,6 @@ public class DictionarysImpl implements Dictionarys {
     /**
      * Get dictionary of complex type with {"0": {"integer": 1, "string": "2"}, "1": {"integer": 3, "string": "4"}, "2": {"integer": 5, "string": "6"}}.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, Map&lt;String, Widget&gt;&gt;&gt;} object if successful.
      */
     public Single<RestResponse<Void, Map<String, Widget>>> getComplexValidWithRestResponseAsync() {
@@ -3079,7 +2960,6 @@ public class DictionarysImpl implements Dictionarys {
     /**
      * Get dictionary of complex type with {"0": {"integer": 1, "string": "2"}, "1": {"integer": 3, "string": "4"}, "2": {"integer": 5, "string": "6"}}.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Maybe&lt;Map&lt;String, Widget&gt;&gt;} object if successful.
      */
     public Maybe<Map<String, Widget>> getComplexValidAsync() {
@@ -3149,7 +3029,6 @@ public class DictionarysImpl implements Dictionarys {
     /**
      * Get a null array.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the Map&lt;String, List&lt;String&gt;&gt; object if successful.
@@ -3172,7 +3051,6 @@ public class DictionarysImpl implements Dictionarys {
     /**
      * Get a null array.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, Map&lt;String, List&lt;String&gt;&gt;&gt;&gt;} object if successful.
      */
     public Single<RestResponse<Void, Map<String, List<String>>>> getArrayNullWithRestResponseAsync() {
@@ -3182,7 +3060,6 @@ public class DictionarysImpl implements Dictionarys {
     /**
      * Get a null array.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Maybe&lt;Map&lt;String, List&lt;String&gt;&gt;&gt;} object if successful.
      */
     public Maybe<Map<String, List<String>>> getArrayNullAsync() {
@@ -3201,7 +3078,6 @@ public class DictionarysImpl implements Dictionarys {
     /**
      * Get an empty dictionary {}.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the Map&lt;String, List&lt;String&gt;&gt; object if successful.
@@ -3224,7 +3100,6 @@ public class DictionarysImpl implements Dictionarys {
     /**
      * Get an empty dictionary {}.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, Map&lt;String, List&lt;String&gt;&gt;&gt;&gt;} object if successful.
      */
     public Single<RestResponse<Void, Map<String, List<String>>>> getArrayEmptyWithRestResponseAsync() {
@@ -3234,7 +3109,6 @@ public class DictionarysImpl implements Dictionarys {
     /**
      * Get an empty dictionary {}.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Maybe&lt;Map&lt;String, List&lt;String&gt;&gt;&gt;} object if successful.
      */
     public Maybe<Map<String, List<String>>> getArrayEmptyAsync() {
@@ -3253,7 +3127,6 @@ public class DictionarysImpl implements Dictionarys {
     /**
      * Get an dictionary of array of strings {"0": ["1", "2", "3"], "1": null, "2": ["7", "8", "9"]}.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the Map&lt;String, List&lt;String&gt;&gt; object if successful.
@@ -3276,7 +3149,6 @@ public class DictionarysImpl implements Dictionarys {
     /**
      * Get an dictionary of array of strings {"0": ["1", "2", "3"], "1": null, "2": ["7", "8", "9"]}.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, Map&lt;String, List&lt;String&gt;&gt;&gt;&gt;} object if successful.
      */
     public Single<RestResponse<Void, Map<String, List<String>>>> getArrayItemNullWithRestResponseAsync() {
@@ -3286,7 +3158,6 @@ public class DictionarysImpl implements Dictionarys {
     /**
      * Get an dictionary of array of strings {"0": ["1", "2", "3"], "1": null, "2": ["7", "8", "9"]}.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Maybe&lt;Map&lt;String, List&lt;String&gt;&gt;&gt;} object if successful.
      */
     public Maybe<Map<String, List<String>>> getArrayItemNullAsync() {
@@ -3305,7 +3176,6 @@ public class DictionarysImpl implements Dictionarys {
     /**
      * Get an array of array of strings [{"0": ["1", "2", "3"], "1": [], "2": ["7", "8", "9"]}.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the Map&lt;String, List&lt;String&gt;&gt; object if successful.
@@ -3328,7 +3198,6 @@ public class DictionarysImpl implements Dictionarys {
     /**
      * Get an array of array of strings [{"0": ["1", "2", "3"], "1": [], "2": ["7", "8", "9"]}.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, Map&lt;String, List&lt;String&gt;&gt;&gt;&gt;} object if successful.
      */
     public Single<RestResponse<Void, Map<String, List<String>>>> getArrayItemEmptyWithRestResponseAsync() {
@@ -3338,7 +3207,6 @@ public class DictionarysImpl implements Dictionarys {
     /**
      * Get an array of array of strings [{"0": ["1", "2", "3"], "1": [], "2": ["7", "8", "9"]}.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Maybe&lt;Map&lt;String, List&lt;String&gt;&gt;&gt;} object if successful.
      */
     public Maybe<Map<String, List<String>>> getArrayItemEmptyAsync() {
@@ -3357,7 +3225,6 @@ public class DictionarysImpl implements Dictionarys {
     /**
      * Get an array of array of strings {"0": ["1", "2", "3"], "1": ["4", "5", "6"], "2": ["7", "8", "9"]}.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the Map&lt;String, List&lt;String&gt;&gt; object if successful.
@@ -3380,7 +3247,6 @@ public class DictionarysImpl implements Dictionarys {
     /**
      * Get an array of array of strings {"0": ["1", "2", "3"], "1": ["4", "5", "6"], "2": ["7", "8", "9"]}.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, Map&lt;String, List&lt;String&gt;&gt;&gt;&gt;} object if successful.
      */
     public Single<RestResponse<Void, Map<String, List<String>>>> getArrayValidWithRestResponseAsync() {
@@ -3390,7 +3256,6 @@ public class DictionarysImpl implements Dictionarys {
     /**
      * Get an array of array of strings {"0": ["1", "2", "3"], "1": ["4", "5", "6"], "2": ["7", "8", "9"]}.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Maybe&lt;Map&lt;String, List&lt;String&gt;&gt;&gt;} object if successful.
      */
     public Maybe<Map<String, List<String>>> getArrayValidAsync() {
@@ -3460,7 +3325,6 @@ public class DictionarysImpl implements Dictionarys {
     /**
      * Get an dictionaries of dictionaries with value null.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the Map&lt;String, Map&lt;String, String&gt;&gt; object if successful.
@@ -3483,7 +3347,6 @@ public class DictionarysImpl implements Dictionarys {
     /**
      * Get an dictionaries of dictionaries with value null.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, Map&lt;String, Map&lt;String, String&gt;&gt;&gt;&gt;} object if successful.
      */
     public Single<RestResponse<Void, Map<String, Map<String, String>>>> getDictionaryNullWithRestResponseAsync() {
@@ -3493,7 +3356,6 @@ public class DictionarysImpl implements Dictionarys {
     /**
      * Get an dictionaries of dictionaries with value null.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Maybe&lt;Map&lt;String, Map&lt;String, String&gt;&gt;&gt;} object if successful.
      */
     public Maybe<Map<String, Map<String, String>>> getDictionaryNullAsync() {
@@ -3512,7 +3374,6 @@ public class DictionarysImpl implements Dictionarys {
     /**
      * Get an dictionaries of dictionaries of type &lt;string, string&gt; with value {}.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the Map&lt;String, Map&lt;String, String&gt;&gt; object if successful.
@@ -3535,7 +3396,6 @@ public class DictionarysImpl implements Dictionarys {
     /**
      * Get an dictionaries of dictionaries of type &lt;string, string&gt; with value {}.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, Map&lt;String, Map&lt;String, String&gt;&gt;&gt;&gt;} object if successful.
      */
     public Single<RestResponse<Void, Map<String, Map<String, String>>>> getDictionaryEmptyWithRestResponseAsync() {
@@ -3545,7 +3405,6 @@ public class DictionarysImpl implements Dictionarys {
     /**
      * Get an dictionaries of dictionaries of type &lt;string, string&gt; with value {}.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Maybe&lt;Map&lt;String, Map&lt;String, String&gt;&gt;&gt;} object if successful.
      */
     public Maybe<Map<String, Map<String, String>>> getDictionaryEmptyAsync() {
@@ -3564,7 +3423,6 @@ public class DictionarysImpl implements Dictionarys {
     /**
      * Get an dictionaries of dictionaries of type &lt;string, string&gt; with value {"0": {"1": "one", "2": "two", "3": "three"}, "1": null, "2": {"7": "seven", "8": "eight", "9": "nine"}}.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the Map&lt;String, Map&lt;String, String&gt;&gt; object if successful.
@@ -3587,7 +3445,6 @@ public class DictionarysImpl implements Dictionarys {
     /**
      * Get an dictionaries of dictionaries of type &lt;string, string&gt; with value {"0": {"1": "one", "2": "two", "3": "three"}, "1": null, "2": {"7": "seven", "8": "eight", "9": "nine"}}.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, Map&lt;String, Map&lt;String, String&gt;&gt;&gt;&gt;} object if successful.
      */
     public Single<RestResponse<Void, Map<String, Map<String, String>>>> getDictionaryItemNullWithRestResponseAsync() {
@@ -3597,7 +3454,6 @@ public class DictionarysImpl implements Dictionarys {
     /**
      * Get an dictionaries of dictionaries of type &lt;string, string&gt; with value {"0": {"1": "one", "2": "two", "3": "three"}, "1": null, "2": {"7": "seven", "8": "eight", "9": "nine"}}.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Maybe&lt;Map&lt;String, Map&lt;String, String&gt;&gt;&gt;} object if successful.
      */
     public Maybe<Map<String, Map<String, String>>> getDictionaryItemNullAsync() {
@@ -3616,7 +3472,6 @@ public class DictionarysImpl implements Dictionarys {
     /**
      * Get an dictionaries of dictionaries of type &lt;string, string&gt; with value {"0": {"1": "one", "2": "two", "3": "three"}, "1": {}, "2": {"7": "seven", "8": "eight", "9": "nine"}}.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the Map&lt;String, Map&lt;String, String&gt;&gt; object if successful.
@@ -3639,7 +3494,6 @@ public class DictionarysImpl implements Dictionarys {
     /**
      * Get an dictionaries of dictionaries of type &lt;string, string&gt; with value {"0": {"1": "one", "2": "two", "3": "three"}, "1": {}, "2": {"7": "seven", "8": "eight", "9": "nine"}}.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, Map&lt;String, Map&lt;String, String&gt;&gt;&gt;&gt;} object if successful.
      */
     public Single<RestResponse<Void, Map<String, Map<String, String>>>> getDictionaryItemEmptyWithRestResponseAsync() {
@@ -3649,7 +3503,6 @@ public class DictionarysImpl implements Dictionarys {
     /**
      * Get an dictionaries of dictionaries of type &lt;string, string&gt; with value {"0": {"1": "one", "2": "two", "3": "three"}, "1": {}, "2": {"7": "seven", "8": "eight", "9": "nine"}}.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Maybe&lt;Map&lt;String, Map&lt;String, String&gt;&gt;&gt;} object if successful.
      */
     public Maybe<Map<String, Map<String, String>>> getDictionaryItemEmptyAsync() {
@@ -3668,7 +3521,6 @@ public class DictionarysImpl implements Dictionarys {
     /**
      * Get an dictionaries of dictionaries of type &lt;string, string&gt; with value {"0": {"1": "one", "2": "two", "3": "three"}, "1": {"4": "four", "5": "five", "6": "six"}, "2": {"7": "seven", "8": "eight", "9": "nine"}}.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the Map&lt;String, Map&lt;String, String&gt;&gt; object if successful.
@@ -3691,7 +3543,6 @@ public class DictionarysImpl implements Dictionarys {
     /**
      * Get an dictionaries of dictionaries of type &lt;string, string&gt; with value {"0": {"1": "one", "2": "two", "3": "three"}, "1": {"4": "four", "5": "five", "6": "six"}, "2": {"7": "seven", "8": "eight", "9": "nine"}}.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, Map&lt;String, Map&lt;String, String&gt;&gt;&gt;&gt;} object if successful.
      */
     public Single<RestResponse<Void, Map<String, Map<String, String>>>> getDictionaryValidWithRestResponseAsync() {
@@ -3701,7 +3552,6 @@ public class DictionarysImpl implements Dictionarys {
     /**
      * Get an dictionaries of dictionaries of type &lt;string, string&gt; with value {"0": {"1": "one", "2": "two", "3": "three"}, "1": {"4": "four", "5": "five", "6": "six"}, "2": {"7": "seven", "8": "eight", "9": "nine"}}.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Maybe&lt;Map&lt;String, Map&lt;String, String&gt;&gt;&gt;} object if successful.
      */
     public Maybe<Map<String, Map<String, String>>> getDictionaryValidAsync() {

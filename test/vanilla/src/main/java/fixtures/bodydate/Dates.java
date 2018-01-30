@@ -28,7 +28,6 @@ public interface Dates {
     /**
      * Get null date value.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the LocalDate object if successful.
@@ -47,7 +46,6 @@ public interface Dates {
     /**
      * Get null date value.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, LocalDate&gt;&gt;} object if successful.
      */
     Single<RestResponse<Void, LocalDate>> getNullWithRestResponseAsync();
@@ -55,7 +53,6 @@ public interface Dates {
     /**
      * Get null date value.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Maybe&lt;LocalDate&gt;} object if successful.
      */
     Maybe<LocalDate> getNullAsync();
@@ -63,7 +60,6 @@ public interface Dates {
     /**
      * Get invalid date value.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the LocalDate object if successful.
@@ -82,7 +78,6 @@ public interface Dates {
     /**
      * Get invalid date value.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, LocalDate&gt;&gt;} object if successful.
      */
     Single<RestResponse<Void, LocalDate>> getInvalidDateWithRestResponseAsync();
@@ -90,7 +85,6 @@ public interface Dates {
     /**
      * Get invalid date value.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Maybe&lt;LocalDate&gt;} object if successful.
      */
     Maybe<LocalDate> getInvalidDateAsync();
@@ -98,7 +92,6 @@ public interface Dates {
     /**
      * Get overflow date value.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the LocalDate object if successful.
@@ -117,7 +110,6 @@ public interface Dates {
     /**
      * Get overflow date value.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, LocalDate&gt;&gt;} object if successful.
      */
     Single<RestResponse<Void, LocalDate>> getOverflowDateWithRestResponseAsync();
@@ -125,7 +117,6 @@ public interface Dates {
     /**
      * Get overflow date value.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Maybe&lt;LocalDate&gt;} object if successful.
      */
     Maybe<LocalDate> getOverflowDateAsync();
@@ -133,7 +124,6 @@ public interface Dates {
     /**
      * Get underflow date value.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the LocalDate object if successful.
@@ -152,7 +142,6 @@ public interface Dates {
     /**
      * Get underflow date value.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, LocalDate&gt;&gt;} object if successful.
      */
     Single<RestResponse<Void, LocalDate>> getUnderflowDateWithRestResponseAsync();
@@ -160,7 +149,6 @@ public interface Dates {
     /**
      * Get underflow date value.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Maybe&lt;LocalDate&gt;} object if successful.
      */
     Maybe<LocalDate> getUnderflowDateAsync();
@@ -206,7 +194,6 @@ public interface Dates {
     /**
      * Get max date value 9999-12-31.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the LocalDate object if successful.
@@ -225,7 +212,6 @@ public interface Dates {
     /**
      * Get max date value 9999-12-31.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, LocalDate&gt;&gt;} object if successful.
      */
     Single<RestResponse<Void, LocalDate>> getMaxDateWithRestResponseAsync();
@@ -233,7 +219,6 @@ public interface Dates {
     /**
      * Get max date value 9999-12-31.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Maybe&lt;LocalDate&gt;} object if successful.
      */
     Maybe<LocalDate> getMaxDateAsync();
@@ -279,7 +264,6 @@ public interface Dates {
     /**
      * Get min date value 0000-01-01.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the LocalDate object if successful.
@@ -298,7 +282,6 @@ public interface Dates {
     /**
      * Get min date value 0000-01-01.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, LocalDate&gt;&gt;} object if successful.
      */
     Single<RestResponse<Void, LocalDate>> getMinDateWithRestResponseAsync();
@@ -306,7 +289,6 @@ public interface Dates {
     /**
      * Get min date value 0000-01-01.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Maybe&lt;LocalDate&gt;} object if successful.
      */
     Maybe<LocalDate> getMinDateAsync();

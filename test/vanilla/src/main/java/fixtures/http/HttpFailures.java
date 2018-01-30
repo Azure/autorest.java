@@ -27,7 +27,6 @@ public interface HttpFailures {
     /**
      * Get empty error form server.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the boolean object if successful.
@@ -46,7 +45,6 @@ public interface HttpFailures {
     /**
      * Get empty error form server.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, Boolean&gt;&gt;} object if successful.
      */
     Single<RestResponse<Void, Boolean>> getEmptyErrorWithRestResponseAsync();
@@ -54,7 +52,6 @@ public interface HttpFailures {
     /**
      * Get empty error form server.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Maybe&lt;Boolean&gt;} object if successful.
      */
     Maybe<Boolean> getEmptyErrorAsync();
@@ -62,8 +59,6 @@ public interface HttpFailures {
     /**
      * Get empty error form server.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws RestException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the boolean object if successful.
      */
@@ -81,7 +76,6 @@ public interface HttpFailures {
     /**
      * Get empty error form server.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, Boolean&gt;&gt;} object if successful.
      */
     Single<RestResponse<Void, Boolean>> getNoModelErrorWithRestResponseAsync();
@@ -89,7 +83,6 @@ public interface HttpFailures {
     /**
      * Get empty error form server.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Maybe&lt;Boolean&gt;} object if successful.
      */
     Maybe<Boolean> getNoModelErrorAsync();
@@ -97,8 +90,6 @@ public interface HttpFailures {
     /**
      * Get empty response from server.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws RestException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the boolean object if successful.
      */
@@ -116,7 +107,6 @@ public interface HttpFailures {
     /**
      * Get empty response from server.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, Boolean&gt;&gt;} object if successful.
      */
     Single<RestResponse<Void, Boolean>> getNoModelEmptyWithRestResponseAsync();
@@ -124,7 +114,6 @@ public interface HttpFailures {
     /**
      * Get empty response from server.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Maybe&lt;Boolean&gt;} object if successful.
      */
     Maybe<Boolean> getNoModelEmptyAsync();

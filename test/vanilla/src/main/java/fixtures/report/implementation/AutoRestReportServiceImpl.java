@@ -69,7 +69,6 @@ public class AutoRestReportServiceImpl extends ServiceClient implements AutoRest
     /**
      * Get test coverage report.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the Map&lt;String, Integer&gt; object if successful.
@@ -92,7 +91,6 @@ public class AutoRestReportServiceImpl extends ServiceClient implements AutoRest
     /**
      * Get test coverage report.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, Map&lt;String, Integer&gt;&gt;&gt;} object if successful.
      */
     public Single<RestResponse<Void, Map<String, Integer>>> getReportWithRestResponseAsync() {
@@ -103,7 +101,6 @@ public class AutoRestReportServiceImpl extends ServiceClient implements AutoRest
     /**
      * Get test coverage report.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Maybe&lt;Map&lt;String, Integer&gt;&gt;} object if successful.
      */
     public Maybe<Map<String, Integer>> getReportAsync() {

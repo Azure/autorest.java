@@ -28,7 +28,6 @@ public interface Arrays {
     /**
      * Get complex types with array property.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the ArrayWrapper object if successful.
@@ -47,7 +46,6 @@ public interface Arrays {
     /**
      * Get complex types with array property.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, ArrayWrapper&gt;&gt;} object if successful.
      */
     Single<RestResponse<Void, ArrayWrapper>> getValidWithRestResponseAsync();
@@ -55,7 +53,6 @@ public interface Arrays {
     /**
      * Get complex types with array property.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Maybe&lt;ArrayWrapper&gt;} object if successful.
      */
     Maybe<ArrayWrapper> getValidAsync();
@@ -101,7 +98,6 @@ public interface Arrays {
     /**
      * Get complex types with array property which is empty.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the ArrayWrapper object if successful.
@@ -120,7 +116,6 @@ public interface Arrays {
     /**
      * Get complex types with array property which is empty.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, ArrayWrapper&gt;&gt;} object if successful.
      */
     Single<RestResponse<Void, ArrayWrapper>> getEmptyWithRestResponseAsync();
@@ -128,7 +123,6 @@ public interface Arrays {
     /**
      * Get complex types with array property which is empty.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Maybe&lt;ArrayWrapper&gt;} object if successful.
      */
     Maybe<ArrayWrapper> getEmptyAsync();
@@ -174,7 +168,6 @@ public interface Arrays {
     /**
      * Get complex types with array property while server doesn't provide a response payload.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the ArrayWrapper object if successful.
@@ -193,7 +186,6 @@ public interface Arrays {
     /**
      * Get complex types with array property while server doesn't provide a response payload.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, ArrayWrapper&gt;&gt;} object if successful.
      */
     Single<RestResponse<Void, ArrayWrapper>> getNotProvidedWithRestResponseAsync();
@@ -201,7 +193,6 @@ public interface Arrays {
     /**
      * Get complex types with array property while server doesn't provide a response payload.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Maybe&lt;ArrayWrapper&gt;} object if successful.
      */
     Maybe<ArrayWrapper> getNotProvidedAsync();
