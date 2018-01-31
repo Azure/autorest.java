@@ -4995,29 +4995,28 @@ namespace AutoRest.Java
                 AutoRestIModelType autoRestRestAPIMethodReturnBodyType = autoRestRestAPIMethodReturnType.Body ?? DependencyInjection.New<AutoRestPrimaryType>(AutoRestKnownPrimaryType.None);
                 
                 IType restAPIMethodReturnBodyClientType = ConvertToClientType(ParseType(autoRestRestAPIMethodReturnBodyType, settings));
-                ListType restAPIMethodReturnBodyClientListType = restAPIMethodReturnBodyClientType as ListType;
-
-                bool restAPIMethodReturnTypeIsPaged = GetExtensionBool(autoRestRestAPIMethod.Extensions, "nextLinkMethod") ||
-                    (autoRestRestAPIMethod.Extensions.ContainsKey(AzureExtensions.PageableExtension) &&
-                     autoRestRestAPIMethod.Extensions[AzureExtensions.PageableExtension] != null);
-
+                
                 GenericType pageImplType = null;
                 IType deserializedResponseBodyType;
                 IType pageType;
 
-                if (settings.IsAzureOrFluent && restAPIMethodReturnBodyClientListType != null && (restAPIMethodReturnTypeIsPaged || restAPIMethod.SimulateAsPagingOperation))
+                if (settings.IsAzureOrFluent &&
+                    restAPIMethodReturnBodyClientType is ListType restAPIMethodReturnBodyClientListType &&
+                    (restAPIMethod.IsPagingOperation || restAPIMethod.IsPagingNextOperation || restAPIMethod.SimulateAsPagingOperation))
                 {
-                    restAPIMethodReturnBodyClientType = new PagedListType(restAPIMethodReturnBodyClientListType.ElementType);
+                    IType restAPIMethodReturnBodyClientListElementType = restAPIMethodReturnBodyClientListType.ElementType;
+
+                    restAPIMethodReturnBodyClientType = new PagedListType(restAPIMethodReturnBodyClientListElementType);
 
                     string pageImplTypeName = SequenceTypeGetPageImplType(autoRestRestAPIMethodReturnBodyType);
 
                     string pageImplSubPackage = settings.IsFluent ? implPackage : modelsPackage;
                     string pageImplPackage = $"{settings.Package}.{pageImplSubPackage}";
 
-                    pageImplType = new GenericType(pageImplPackage, pageImplTypeName, restAPIMethodReturnBodyClientListType.ElementType);
+                    pageImplType = new GenericType(pageImplPackage, pageImplTypeName, restAPIMethodReturnBodyClientListElementType);
                     deserializedResponseBodyType = pageImplType;
 
-                    pageType = new PageType(restAPIMethodReturnBodyClientListType.ElementType);
+                    pageType = new PageType(restAPIMethodReturnBodyClientListElementType);
                 }
                 else
                 {
@@ -5036,31 +5035,44 @@ namespace AutoRest.Java
                     name: "serviceCallback",
                     isRequired: true);
 
-                IEnumerable<AutoRestParameter> autoRestRequiredNullableParameters = autoRestRestAPIMethod.Parameters.Where((AutoRestParameter parameter) =>
-                {
-                    bool result = !parameter.IsConstant && parameter.IsRequired;
-                    if (result)
-                    {
-                        AutoRestIModelType parameterModelType = parameter.ModelType;
-                        if (parameterModelType != null && !IsNullable(parameter))
-                        {
-                            if (parameterModelType is AutoRestPrimaryType parameterModelPrimaryType)
-                            {
-                                AutoRestPrimaryType nonNullableParameterModelPrimaryType = DependencyInjection.New<AutoRestPrimaryType>(parameterModelPrimaryType.KnownPrimaryType);
-                                nonNullableParameterModelPrimaryType.Format = parameterModelPrimaryType.Format;
-                                primaryTypeNotWantNullable.Add(nonNullableParameterModelPrimaryType);
+                GenericType serviceFutureReturnType = GenericType.ServiceFuture(restAPIMethodReturnBodyClientType);
 
-                                parameterModelType = nonNullableParameterModelPrimaryType;
-                            }
+                ObservableType observablePageType = new ObservableType(pageType);
+
+                List<string> requiredNullableParameterExpressions = new List<string>();
+                foreach (AutoRestParameter autoRestParameter in autoRestRestAPIMethod.Parameters)
+                {
+                    if (!autoRestParameter.IsConstant && autoRestParameter.IsRequired)
+                    {
+                        IType parameterType = ParseType(autoRestParameter.ModelType, settings);
+                        if (IsNullable(autoRestParameter))
+                        {
+                            parameterType = parameterType.AsNullable();
                         }
-                        result = !parameterModelType.IsPrimaryType(AutoRestKnownPrimaryType.Int) &&
-                                 !parameterModelType.IsPrimaryType(AutoRestKnownPrimaryType.Double) &&
-                                 !parameterModelType.IsPrimaryType(AutoRestKnownPrimaryType.Boolean) &&
-                                 !parameterModelType.IsPrimaryType(AutoRestKnownPrimaryType.Long) &&
-                                 !parameterModelType.IsPrimaryType(AutoRestKnownPrimaryType.UnixTime);
+
+                        if (!(parameterType is PrimitiveType))
+                        {
+                            string parameterExpression;
+                            if (!autoRestParameter.IsClientProperty)
+                            {
+                                parameterExpression = autoRestParameter.Name;
+                            }
+                            else
+                            {
+                                string caller = (autoRestParameter.Method != null && autoRestParameter.Method.Group.IsNullOrEmpty() ? "this" : "this.client");
+                                string clientPropertyName = autoRestParameter.ClientProperty?.Name?.ToString();
+                                if (!string.IsNullOrEmpty(clientPropertyName))
+                                {
+                                    CodeNamer codeNamer = CodeNamer.Instance;
+                                    clientPropertyName = codeNamer.CamelCase(codeNamer.RemoveInvalidCharacters(clientPropertyName));
+                                }
+                                parameterExpression = $"{caller}.{clientPropertyName}()";
+                            }
+
+                            requiredNullableParameterExpressions.Add(parameterExpression);
+                        }
                     }
-                    return result;
-                });
+                }
 
                 List<AutoRestParameter> autoRestMethodRetrofitParameters = autoRestRestAPIMethod.LogicalParameters.Where(p => p.Location != AutoRestParameterLocation.None).ToList();
                 if (settings.IsAzureOrFluent && restAPIMethod.IsPagingNextOperation)
@@ -5092,35 +5104,31 @@ namespace AutoRest.Java
                     autoRestParameterLists.Insert(0, autoRestRequiredClientMethodParameters);
                 }
 
-                GenericType serviceFutureReturnType = GenericType.ServiceFuture(restAPIMethodReturnBodyClientType);
-
-                ObservableType observablePageType = new ObservableType(pageType);
-
                 bool addedClientMethods = false;
 
                 if (settings.IsAzureOrFluent)
                 {
                     if (restAPIMethod.IsPagingOperation || restAPIMethod.IsPagingNextOperation)
                     {
-                        foreach (IEnumerable<AutoRestParameter> parameters in autoRestParameterLists)
+                        foreach (IEnumerable<AutoRestParameter> autoRestParameters in autoRestParameterLists)
                         {
-                            bool onlyRequiredParameters = (parameters == autoRestRequiredClientMethodParameters);
+                            bool onlyRequiredParameters = (autoRestParameters == autoRestRequiredClientMethodParameters);
 
-                            string parameterDeclaration = string.Join(", ", parameters.Select(parameter =>
+                            string autoRestParameterDeclaration = string.Join(", ", autoRestParameters.Select(parameter =>
                             {
-                                AutoRestIModelType parameterModelType = parameter.ModelType;
-                                if (parameterModelType != null && !IsNullable(parameter))
+                                AutoRestIModelType autoRestParameterModelType = parameter.ModelType;
+                                if (autoRestParameterModelType != null && !IsNullable(parameter))
                                 {
-                                    if (parameterModelType is AutoRestPrimaryType parameterModelPrimaryType)
+                                    if (autoRestParameterModelType is AutoRestPrimaryType parameterModelPrimaryType)
                                     {
                                         AutoRestPrimaryType nonNullableParameterModelPrimaryType = DependencyInjection.New<AutoRestPrimaryType>(parameterModelPrimaryType.KnownPrimaryType);
                                         nonNullableParameterModelPrimaryType.Format = parameterModelPrimaryType.Format;
                                         primaryTypeNotWantNullable.Add(nonNullableParameterModelPrimaryType);
 
-                                        parameterModelType = nonNullableParameterModelPrimaryType;
+                                        autoRestParameterModelType = nonNullableParameterModelPrimaryType;
                                     }
                                 }
-                                AutoRestIModelType parameterClientType = ConvertToClientType(parameterModelType);
+                                AutoRestIModelType parameterClientType = ConvertToClientType(autoRestParameterModelType);
                                 string parameterType = AutoRestIModelTypeName(parameterClientType, settings);
                                 return $"final {parameterType} {parameter.Name}";
                             }));
@@ -5426,7 +5434,7 @@ namespace AutoRest.Java
                                 nextMethodParameterInvocation = string.Join(", ", invocations);
                             }
 
-                            string argumentList = string.Join(", ", parameters.Select((AutoRestParameter parameter) => parameter.Name));
+                            string argumentList = string.Join(", ", autoRestParameters.Select((AutoRestParameter parameter) => parameter.Name));
 
                             string nextGroupTypeName = null;
                             string groupedTypeName = null;
@@ -5471,10 +5479,18 @@ namespace AutoRest.Java
                             // --------------------
                             // Synchronous PageList
                             // --------------------
+                            Method synchronousPageListMethod = new Method(
+                                description: restAPIMethod.Description,
+                                returnValue: new ReturnValue(
+                                    description: restAPIMethodReturnBodyClientType == PrimitiveType.Void ? null : $"the {restAPIMethodReturnBodyClientType} object if successful.",
+                                    type: restAPIMethodReturnBodyClientType),
+                                name: restAPIMethod.Name,
+                                parameters: null);
+
                             typeBlock.JavadocComment(comment =>
                             {
-                                comment.Description(restAPIMethod.Description);
-                                foreach (AutoRestParameter parameter in parameters)
+                                comment.Description(synchronousPageListMethod.Description);
+                                foreach (AutoRestParameter parameter in autoRestParameters)
                                 {
                                     string parameterName = parameter.Name;
 
@@ -5498,7 +5514,7 @@ namespace AutoRest.Java
 
                                     comment.Param(parameterName, parameterDocumentation);
                                 }
-                                if (!string.IsNullOrEmpty(parameterDeclaration))
+                                if (!string.IsNullOrEmpty(autoRestParameterDeclaration))
                                 {
                                     comment.Throws("IllegalArgumentException", "thrown if parameters fail the validation");
                                 }
@@ -5507,15 +5523,12 @@ namespace AutoRest.Java
                                     comment.Throws(restAPIMethod.UnexpectedResponseExceptionType.ToString(), "thrown if the request is rejected by server");
                                 }
                                 comment.Throws("RuntimeException", "all other wrapped checked exceptions if the request fails to be sent");
-                                if (restAPIMethodReturnBodyClientType != PrimitiveType.Void)
-                                {
-                                    comment.Return($"the {restAPIMethodReturnBodyClientType} object if successful.");
-                                }
+                                comment.Return(synchronousPageListMethod.ReturnValue.Description);
                             });
-                            typeBlock.PublicMethod($"{restAPIMethodReturnBodyClientType} {restAPIMethod.Name}({parameterDeclaration})", function =>
+                            typeBlock.PublicMethod($"{synchronousPageListMethod.ReturnValue.Type} {synchronousPageListMethod.Name}({autoRestParameterDeclaration})", function =>
                             {
-                                function.Line($"{pageType} response = {restAPIMethod.Name}SinglePageAsync({argumentList}).blockingGet();");
-                                function.ReturnAnonymousClass($"new {restAPIMethodReturnBodyClientType}(response)", anonymousClass =>
+                                function.Line($"{pageType} response = {synchronousPageListMethod.Name}SinglePageAsync({argumentList}).blockingGet();");
+                                function.ReturnAnonymousClass($"new {synchronousPageListMethod.ReturnValue.Type}(response)", anonymousClass =>
                                 {
                                     anonymousClass.Annotation("Override");
                                     anonymousClass.PublicMethod($"{pageType} nextPage(String {nextPageLinkParameterName})", subFunction =>
@@ -5581,7 +5594,7 @@ namespace AutoRest.Java
                             typeBlock.JavadocComment(comment =>
                             {
                                 comment.Description(restAPIMethod.Description);
-                                foreach (AutoRestParameter parameter in parameters)
+                                foreach (AutoRestParameter parameter in autoRestParameters)
                                 {
                                     string parameterName = parameter.Name;
 
@@ -5605,7 +5618,7 @@ namespace AutoRest.Java
 
                                     comment.Param(parameterName, parameterDocumentation);
                                 }
-                                if (!string.IsNullOrEmpty(parameterDeclaration))
+                                if (!string.IsNullOrEmpty(autoRestParameterDeclaration))
                                 {
                                     comment.Throws("IllegalArgumentException", "thrown if parameters fail the validation");
                                 }
@@ -5618,7 +5631,7 @@ namespace AutoRest.Java
                                     comment.Return($"the {{@link {observablePageType}}} object if successful.");
                                 }
                             });
-                            typeBlock.PublicMethod($"{observablePageType} {restAPIMethod.Name}Async({parameterDeclaration})", function =>
+                            typeBlock.PublicMethod($"{observablePageType} {restAPIMethod.Name}Async({autoRestParameterDeclaration})", function =>
                             {
                                 function.Line($"return {restAPIMethod.Name}SinglePageAsync({argumentList})");
                                 function.Indent(() =>
@@ -5700,7 +5713,7 @@ namespace AutoRest.Java
                             typeBlock.JavadocComment(comment =>
                             {
                                 comment.Description(restAPIMethod.Description);
-                                foreach (AutoRestParameter parameter in parameters)
+                                foreach (AutoRestParameter parameter in autoRestParameters)
                                 {
                                     string parameterName = parameter.Name;
 
@@ -5724,36 +5737,19 @@ namespace AutoRest.Java
 
                                     comment.Param(parameterName, parameterDocumentation);
                                 }
-                                if (!string.IsNullOrEmpty(parameterDeclaration))
+                                if (!string.IsNullOrEmpty(autoRestParameterDeclaration))
                                 {
                                     comment.Throws("IllegalArgumentException", "thrown if parameters fail the validation");
                                 }
                                 comment.Return($"the {{@link {singlePageMethodReturnType}}} object if successful.");
                             });
-                            typeBlock.PublicMethod($"{singlePageMethodReturnType} {restAPIMethod.Name}SinglePageAsync({parameterDeclaration})", function =>
+                            typeBlock.PublicMethod($"{singlePageMethodReturnType} {restAPIMethod.Name}SinglePageAsync({autoRestParameterDeclaration})", function =>
                             {
-                                foreach (AutoRestParameter parameter in autoRestRequiredNullableParameters)
+                                foreach (string requiredNullableParameterExpression in requiredNullableParameterExpressions)
                                 {
-                                    string parameterName;
-                                    if (!parameter.IsClientProperty)
+                                    function.If($"{requiredNullableParameterExpression} == null", ifBlock =>
                                     {
-                                        parameterName = parameter.Name;
-                                    }
-                                    else
-                                    {
-                                        string caller = (parameter.Method != null && parameter.Method.Group.IsNullOrEmpty() ? "this" : "this.client");
-                                        string clientPropertyName = parameter.ClientProperty?.Name?.ToString();
-                                        if (!string.IsNullOrEmpty(clientPropertyName))
-                                        {
-                                            CodeNamer codeNamer = CodeNamer.Instance;
-                                            clientPropertyName = codeNamer.CamelCase(codeNamer.RemoveInvalidCharacters(clientPropertyName));
-                                        }
-                                        parameterName = $"{caller}.{clientPropertyName}()";
-                                    }
-
-                                    function.If($"{parameterName} == null", ifBlock =>
-                                    {
-                                        ifBlock.Line($"throw new IllegalArgumentException(\"Parameter {parameterName} is required and cannot be null.\");");
+                                        ifBlock.Line($"throw new IllegalArgumentException(\"Parameter {requiredNullableParameterExpression} is required and cannot be null.\");");
                                     });
                                 }
 
@@ -6420,28 +6416,11 @@ namespace AutoRest.Java
                             });
                             typeBlock.PublicMethod($"Observable<Page<{sequenceElementTypeString}>> {restAPIMethod.Name}Async({parameterDeclaration})", function =>
                             {
-                                foreach (AutoRestParameter parameter in autoRestRequiredNullableParameters)
+                                foreach (string requiredNullableParameterExpression in requiredNullableParameterExpressions)
                                 {
-                                    string parameterName;
-                                    if (!parameter.IsClientProperty)
+                                    function.If($"{requiredNullableParameterExpression} == null", ifBlock =>
                                     {
-                                        parameterName = parameter.Name;
-                                    }
-                                    else
-                                    {
-                                        string caller = (parameter.Method != null && parameter.Method.Group.IsNullOrEmpty() ? "this" : "this.client");
-                                        string clientPropertyName = parameter.ClientProperty?.Name?.ToString();
-                                        if (!string.IsNullOrEmpty(clientPropertyName))
-                                        {
-                                            CodeNamer codeNamer = CodeNamer.Instance;
-                                            clientPropertyName = codeNamer.CamelCase(codeNamer.RemoveInvalidCharacters(clientPropertyName));
-                                        }
-                                        parameterName = $"{caller}.{clientPropertyName}()";
-                                    }
-
-                                    function.If($"{parameterName} == null", ifBlock =>
-                                    {
-                                        ifBlock.Line($"throw new IllegalArgumentException(\"Parameter {parameterName} is required and cannot be null.\");");
+                                        ifBlock.Line($"throw new IllegalArgumentException(\"Parameter {requiredNullableParameterExpression} is required and cannot be null.\");");
                                     });
                                 }
 
@@ -7075,28 +7054,11 @@ namespace AutoRest.Java
                             });
                             typeBlock.PublicMethod($"Observable<OperationStatus<{restAPIMethodReturnBodyClientType.AsNullable()}>> {restAPIMethod.Name}Async({parametersDeclaration})", function =>
                             {
-                                foreach (AutoRestParameter parameter in autoRestRequiredNullableParameters)
+                                foreach (string requiredNullableParameterExpression in requiredNullableParameterExpressions)
                                 {
-                                    string parameterName;
-                                    if (!parameter.IsClientProperty)
+                                    function.If($"{requiredNullableParameterExpression} == null", ifBlock =>
                                     {
-                                        parameterName = parameter.Name;
-                                    }
-                                    else
-                                    {
-                                        string caller = (parameter.Method != null && parameter.Method.Group.IsNullOrEmpty() ? "this" : "this.client");
-                                        string clientPropertyName = parameter.ClientProperty?.Name?.ToString();
-                                        if (!string.IsNullOrEmpty(clientPropertyName))
-                                        {
-                                            CodeNamer codeNamer = CodeNamer.Instance;
-                                            clientPropertyName = codeNamer.CamelCase(codeNamer.RemoveInvalidCharacters(clientPropertyName));
-                                        }
-                                        parameterName = $"{caller}.{clientPropertyName}()";
-                                    }
-
-                                    function.If($"{parameterName} == null", ifBlock =>
-                                    {
-                                        ifBlock.Line($"throw new IllegalArgumentException(\"Parameter {parameterName} is required and cannot be null.\");");
+                                        ifBlock.Line($"throw new IllegalArgumentException(\"Parameter {requiredNullableParameterExpression} is required and cannot be null.\");");
                                     });
                                 }
 
@@ -7734,28 +7696,11 @@ namespace AutoRest.Java
                         });
                         typeBlock.PublicMethod($"{singleRestResponseReturnType} {restAPIMethod.Name}WithRestResponseAsync({parametersDeclaration})", function =>
                         {
-                            foreach (AutoRestParameter parameter in autoRestRequiredNullableParameters)
+                            foreach (string requiredNullableParameterExpression in requiredNullableParameterExpressions)
                             {
-                                string parameterName;
-                                if (!parameter.IsClientProperty)
+                                function.If($"{requiredNullableParameterExpression} == null", ifBlock =>
                                 {
-                                    parameterName = parameter.Name;
-                                }
-                                else
-                                {
-                                    string caller = (parameter.Method != null && parameter.Method.Group.IsNullOrEmpty() ? "this" : "this.client");
-                                    string clientPropertyName = parameter.ClientProperty?.Name?.ToString();
-                                    if (!string.IsNullOrEmpty(clientPropertyName))
-                                    {
-                                        CodeNamer codeNamer = CodeNamer.Instance;
-                                        clientPropertyName = codeNamer.CamelCase(codeNamer.RemoveInvalidCharacters(clientPropertyName));
-                                    }
-                                    parameterName = $"{caller}.{clientPropertyName}()";
-                                }
-
-                                function.If($"{parameterName} == null", ifBlock =>
-                                {
-                                    ifBlock.Line($"throw new IllegalArgumentException(\"Parameter {parameterName} is required and cannot be null.\");");
+                                    ifBlock.Line($"throw new IllegalArgumentException(\"Parameter {requiredNullableParameterExpression} is required and cannot be null.\");");
                                 });
                             }
 

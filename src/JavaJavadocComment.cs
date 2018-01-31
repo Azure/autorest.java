@@ -39,8 +39,11 @@ namespace AutoRest.Java
 
         public void Return(string returnValueDescription)
         {
-            AddExpectedLineSeparator();
-            contents.Line($"@return {ProcessText(returnValueDescription)}");
+            if (!string.IsNullOrEmpty(returnValueDescription))
+            {
+                AddExpectedLineSeparator();
+                contents.Line($"@return {ProcessText(returnValueDescription)}");
+            }
         }
 
         public void Throws(string exceptionTypeName, string description)

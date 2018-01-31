@@ -7,10 +7,10 @@ namespace AutoRest.Java.Model
 {
     public class Method
     {
-        public Method(string description, IType returnType, string name, IEnumerable<Parameter> parameters)
+        public Method(string description, ReturnValue returnValue, string name, IEnumerable<Parameter> parameters)
         {
             Description = description;
-            ReturnType = returnType;
+            ReturnValue = returnValue;
             Name = name;
             Parameters = parameters;
         }
@@ -21,9 +21,9 @@ namespace AutoRest.Java.Model
         public string Description { get; }
 
         /// <summary>
-        /// The type that this method returns, or null if this is a constructor.
+        /// The return value of this method.
         /// </summary>
-        public IType ReturnType { get; }
+        public ReturnValue ReturnValue { get; }
 
         /// <summary>
         /// The name of this method.
@@ -36,13 +36,13 @@ namespace AutoRest.Java.Model
         public IEnumerable<Parameter> Parameters { get; }
 
         /// <summary>
-        /// Add this property's imports to the provided ISet of imports.
+        /// Add this method's imports to the provided ISet of imports.
         /// </summary>
         /// <param name="imports">The set of imports to add to.</param>
         /// <param name="includeImplementationImports">Whether or not to include imports that are only necessary for method implementations.</param>
         public virtual void AddImportsTo(ISet<string> imports, bool includeImplementationImports)
         {
-            ReturnType.AddImportsTo(imports, includeImplementationImports);
+            ReturnValue.AddImportsTo(imports, includeImplementationImports);
 
             foreach (Parameter parameter in Parameters)
             {
