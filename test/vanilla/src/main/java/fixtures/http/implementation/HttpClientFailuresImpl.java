@@ -174,7 +174,7 @@ public class HttpClientFailuresImpl implements HttpClientFailures {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Error&gt;} object.
      */
-    public ServiceFuture<Error> head400Async(final ServiceCallback<Error> serviceCallback) {
+    public ServiceFuture<Error> head400Async(ServiceCallback<Error> serviceCallback) {
         return ServiceFuture.fromBody(head400Async(), serviceCallback);
     }
 
@@ -223,7 +223,7 @@ public class HttpClientFailuresImpl implements HttpClientFailures {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Error&gt;} object.
      */
-    public ServiceFuture<Error> get400Async(final ServiceCallback<Error> serviceCallback) {
+    public ServiceFuture<Error> get400Async(ServiceCallback<Error> serviceCallback) {
         return ServiceFuture.fromBody(get400Async(), serviceCallback);
     }
 
@@ -272,7 +272,7 @@ public class HttpClientFailuresImpl implements HttpClientFailures {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Error&gt;} object.
      */
-    public ServiceFuture<Error> put400Async(final ServiceCallback<Error> serviceCallback) {
+    public ServiceFuture<Error> put400Async(ServiceCallback<Error> serviceCallback) {
         return ServiceFuture.fromBody(put400Async(), serviceCallback);
     }
 
@@ -325,7 +325,7 @@ public class HttpClientFailuresImpl implements HttpClientFailures {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Error&gt;} object.
      */
-    public ServiceFuture<Error> put400Async(Boolean booleanValue, final ServiceCallback<Error> serviceCallback) {
+    public ServiceFuture<Error> put400Async(Boolean booleanValue, ServiceCallback<Error> serviceCallback) {
         return ServiceFuture.fromBody(put400Async(booleanValue), serviceCallback);
     }
 
@@ -378,7 +378,7 @@ public class HttpClientFailuresImpl implements HttpClientFailures {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Error&gt;} object.
      */
-    public ServiceFuture<Error> patch400Async(final ServiceCallback<Error> serviceCallback) {
+    public ServiceFuture<Error> patch400Async(ServiceCallback<Error> serviceCallback) {
         return ServiceFuture.fromBody(patch400Async(), serviceCallback);
     }
 
@@ -431,7 +431,7 @@ public class HttpClientFailuresImpl implements HttpClientFailures {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Error&gt;} object.
      */
-    public ServiceFuture<Error> patch400Async(Boolean booleanValue, final ServiceCallback<Error> serviceCallback) {
+    public ServiceFuture<Error> patch400Async(Boolean booleanValue, ServiceCallback<Error> serviceCallback) {
         return ServiceFuture.fromBody(patch400Async(booleanValue), serviceCallback);
     }
 
@@ -484,7 +484,7 @@ public class HttpClientFailuresImpl implements HttpClientFailures {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Error&gt;} object.
      */
-    public ServiceFuture<Error> post400Async(final ServiceCallback<Error> serviceCallback) {
+    public ServiceFuture<Error> post400Async(ServiceCallback<Error> serviceCallback) {
         return ServiceFuture.fromBody(post400Async(), serviceCallback);
     }
 
@@ -537,7 +537,7 @@ public class HttpClientFailuresImpl implements HttpClientFailures {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Error&gt;} object.
      */
-    public ServiceFuture<Error> post400Async(Boolean booleanValue, final ServiceCallback<Error> serviceCallback) {
+    public ServiceFuture<Error> post400Async(Boolean booleanValue, ServiceCallback<Error> serviceCallback) {
         return ServiceFuture.fromBody(post400Async(booleanValue), serviceCallback);
     }
 
@@ -590,7 +590,7 @@ public class HttpClientFailuresImpl implements HttpClientFailures {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Error&gt;} object.
      */
-    public ServiceFuture<Error> delete400Async(final ServiceCallback<Error> serviceCallback) {
+    public ServiceFuture<Error> delete400Async(ServiceCallback<Error> serviceCallback) {
         return ServiceFuture.fromBody(delete400Async(), serviceCallback);
     }
 
@@ -643,7 +643,7 @@ public class HttpClientFailuresImpl implements HttpClientFailures {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Error&gt;} object.
      */
-    public ServiceFuture<Error> delete400Async(Boolean booleanValue, final ServiceCallback<Error> serviceCallback) {
+    public ServiceFuture<Error> delete400Async(Boolean booleanValue, ServiceCallback<Error> serviceCallback) {
         return ServiceFuture.fromBody(delete400Async(booleanValue), serviceCallback);
     }
 
@@ -696,7 +696,7 @@ public class HttpClientFailuresImpl implements HttpClientFailures {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Error&gt;} object.
      */
-    public ServiceFuture<Error> head401Async(final ServiceCallback<Error> serviceCallback) {
+    public ServiceFuture<Error> head401Async(ServiceCallback<Error> serviceCallback) {
         return ServiceFuture.fromBody(head401Async(), serviceCallback);
     }
 
@@ -745,7 +745,7 @@ public class HttpClientFailuresImpl implements HttpClientFailures {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Error&gt;} object.
      */
-    public ServiceFuture<Error> get402Async(final ServiceCallback<Error> serviceCallback) {
+    public ServiceFuture<Error> get402Async(ServiceCallback<Error> serviceCallback) {
         return ServiceFuture.fromBody(get402Async(), serviceCallback);
     }
 
@@ -794,7 +794,7 @@ public class HttpClientFailuresImpl implements HttpClientFailures {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Error&gt;} object.
      */
-    public ServiceFuture<Error> get403Async(final ServiceCallback<Error> serviceCallback) {
+    public ServiceFuture<Error> get403Async(ServiceCallback<Error> serviceCallback) {
         return ServiceFuture.fromBody(get403Async(), serviceCallback);
     }
 
@@ -843,7 +843,7 @@ public class HttpClientFailuresImpl implements HttpClientFailures {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Error&gt;} object.
      */
-    public ServiceFuture<Error> put404Async(final ServiceCallback<Error> serviceCallback) {
+    public ServiceFuture<Error> put404Async(ServiceCallback<Error> serviceCallback) {
         return ServiceFuture.fromBody(put404Async(), serviceCallback);
     }
 
@@ -896,7 +896,7 @@ public class HttpClientFailuresImpl implements HttpClientFailures {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Error&gt;} object.
      */
-    public ServiceFuture<Error> put404Async(Boolean booleanValue, final ServiceCallback<Error> serviceCallback) {
+    public ServiceFuture<Error> put404Async(Boolean booleanValue, ServiceCallback<Error> serviceCallback) {
         return ServiceFuture.fromBody(put404Async(booleanValue), serviceCallback);
     }
 
@@ -949,7 +949,7 @@ public class HttpClientFailuresImpl implements HttpClientFailures {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Error&gt;} object.
      */
-    public ServiceFuture<Error> patch405Async(final ServiceCallback<Error> serviceCallback) {
+    public ServiceFuture<Error> patch405Async(ServiceCallback<Error> serviceCallback) {
         return ServiceFuture.fromBody(patch405Async(), serviceCallback);
     }
 
@@ -1002,7 +1002,7 @@ public class HttpClientFailuresImpl implements HttpClientFailures {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Error&gt;} object.
      */
-    public ServiceFuture<Error> patch405Async(Boolean booleanValue, final ServiceCallback<Error> serviceCallback) {
+    public ServiceFuture<Error> patch405Async(Boolean booleanValue, ServiceCallback<Error> serviceCallback) {
         return ServiceFuture.fromBody(patch405Async(booleanValue), serviceCallback);
     }
 
@@ -1055,7 +1055,7 @@ public class HttpClientFailuresImpl implements HttpClientFailures {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Error&gt;} object.
      */
-    public ServiceFuture<Error> post406Async(final ServiceCallback<Error> serviceCallback) {
+    public ServiceFuture<Error> post406Async(ServiceCallback<Error> serviceCallback) {
         return ServiceFuture.fromBody(post406Async(), serviceCallback);
     }
 
@@ -1108,7 +1108,7 @@ public class HttpClientFailuresImpl implements HttpClientFailures {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Error&gt;} object.
      */
-    public ServiceFuture<Error> post406Async(Boolean booleanValue, final ServiceCallback<Error> serviceCallback) {
+    public ServiceFuture<Error> post406Async(Boolean booleanValue, ServiceCallback<Error> serviceCallback) {
         return ServiceFuture.fromBody(post406Async(booleanValue), serviceCallback);
     }
 
@@ -1161,7 +1161,7 @@ public class HttpClientFailuresImpl implements HttpClientFailures {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Error&gt;} object.
      */
-    public ServiceFuture<Error> delete407Async(final ServiceCallback<Error> serviceCallback) {
+    public ServiceFuture<Error> delete407Async(ServiceCallback<Error> serviceCallback) {
         return ServiceFuture.fromBody(delete407Async(), serviceCallback);
     }
 
@@ -1214,7 +1214,7 @@ public class HttpClientFailuresImpl implements HttpClientFailures {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Error&gt;} object.
      */
-    public ServiceFuture<Error> delete407Async(Boolean booleanValue, final ServiceCallback<Error> serviceCallback) {
+    public ServiceFuture<Error> delete407Async(Boolean booleanValue, ServiceCallback<Error> serviceCallback) {
         return ServiceFuture.fromBody(delete407Async(booleanValue), serviceCallback);
     }
 
@@ -1267,7 +1267,7 @@ public class HttpClientFailuresImpl implements HttpClientFailures {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Error&gt;} object.
      */
-    public ServiceFuture<Error> put409Async(final ServiceCallback<Error> serviceCallback) {
+    public ServiceFuture<Error> put409Async(ServiceCallback<Error> serviceCallback) {
         return ServiceFuture.fromBody(put409Async(), serviceCallback);
     }
 
@@ -1320,7 +1320,7 @@ public class HttpClientFailuresImpl implements HttpClientFailures {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Error&gt;} object.
      */
-    public ServiceFuture<Error> put409Async(Boolean booleanValue, final ServiceCallback<Error> serviceCallback) {
+    public ServiceFuture<Error> put409Async(Boolean booleanValue, ServiceCallback<Error> serviceCallback) {
         return ServiceFuture.fromBody(put409Async(booleanValue), serviceCallback);
     }
 
@@ -1373,7 +1373,7 @@ public class HttpClientFailuresImpl implements HttpClientFailures {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Error&gt;} object.
      */
-    public ServiceFuture<Error> head410Async(final ServiceCallback<Error> serviceCallback) {
+    public ServiceFuture<Error> head410Async(ServiceCallback<Error> serviceCallback) {
         return ServiceFuture.fromBody(head410Async(), serviceCallback);
     }
 
@@ -1422,7 +1422,7 @@ public class HttpClientFailuresImpl implements HttpClientFailures {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Error&gt;} object.
      */
-    public ServiceFuture<Error> get411Async(final ServiceCallback<Error> serviceCallback) {
+    public ServiceFuture<Error> get411Async(ServiceCallback<Error> serviceCallback) {
         return ServiceFuture.fromBody(get411Async(), serviceCallback);
     }
 
@@ -1471,7 +1471,7 @@ public class HttpClientFailuresImpl implements HttpClientFailures {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Error&gt;} object.
      */
-    public ServiceFuture<Error> get412Async(final ServiceCallback<Error> serviceCallback) {
+    public ServiceFuture<Error> get412Async(ServiceCallback<Error> serviceCallback) {
         return ServiceFuture.fromBody(get412Async(), serviceCallback);
     }
 
@@ -1520,7 +1520,7 @@ public class HttpClientFailuresImpl implements HttpClientFailures {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Error&gt;} object.
      */
-    public ServiceFuture<Error> put413Async(final ServiceCallback<Error> serviceCallback) {
+    public ServiceFuture<Error> put413Async(ServiceCallback<Error> serviceCallback) {
         return ServiceFuture.fromBody(put413Async(), serviceCallback);
     }
 
@@ -1573,7 +1573,7 @@ public class HttpClientFailuresImpl implements HttpClientFailures {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Error&gt;} object.
      */
-    public ServiceFuture<Error> put413Async(Boolean booleanValue, final ServiceCallback<Error> serviceCallback) {
+    public ServiceFuture<Error> put413Async(Boolean booleanValue, ServiceCallback<Error> serviceCallback) {
         return ServiceFuture.fromBody(put413Async(booleanValue), serviceCallback);
     }
 
@@ -1626,7 +1626,7 @@ public class HttpClientFailuresImpl implements HttpClientFailures {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Error&gt;} object.
      */
-    public ServiceFuture<Error> patch414Async(final ServiceCallback<Error> serviceCallback) {
+    public ServiceFuture<Error> patch414Async(ServiceCallback<Error> serviceCallback) {
         return ServiceFuture.fromBody(patch414Async(), serviceCallback);
     }
 
@@ -1679,7 +1679,7 @@ public class HttpClientFailuresImpl implements HttpClientFailures {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Error&gt;} object.
      */
-    public ServiceFuture<Error> patch414Async(Boolean booleanValue, final ServiceCallback<Error> serviceCallback) {
+    public ServiceFuture<Error> patch414Async(Boolean booleanValue, ServiceCallback<Error> serviceCallback) {
         return ServiceFuture.fromBody(patch414Async(booleanValue), serviceCallback);
     }
 
@@ -1732,7 +1732,7 @@ public class HttpClientFailuresImpl implements HttpClientFailures {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Error&gt;} object.
      */
-    public ServiceFuture<Error> post415Async(final ServiceCallback<Error> serviceCallback) {
+    public ServiceFuture<Error> post415Async(ServiceCallback<Error> serviceCallback) {
         return ServiceFuture.fromBody(post415Async(), serviceCallback);
     }
 
@@ -1785,7 +1785,7 @@ public class HttpClientFailuresImpl implements HttpClientFailures {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Error&gt;} object.
      */
-    public ServiceFuture<Error> post415Async(Boolean booleanValue, final ServiceCallback<Error> serviceCallback) {
+    public ServiceFuture<Error> post415Async(Boolean booleanValue, ServiceCallback<Error> serviceCallback) {
         return ServiceFuture.fromBody(post415Async(booleanValue), serviceCallback);
     }
 
@@ -1838,7 +1838,7 @@ public class HttpClientFailuresImpl implements HttpClientFailures {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Error&gt;} object.
      */
-    public ServiceFuture<Error> get416Async(final ServiceCallback<Error> serviceCallback) {
+    public ServiceFuture<Error> get416Async(ServiceCallback<Error> serviceCallback) {
         return ServiceFuture.fromBody(get416Async(), serviceCallback);
     }
 
@@ -1887,7 +1887,7 @@ public class HttpClientFailuresImpl implements HttpClientFailures {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Error&gt;} object.
      */
-    public ServiceFuture<Error> delete417Async(final ServiceCallback<Error> serviceCallback) {
+    public ServiceFuture<Error> delete417Async(ServiceCallback<Error> serviceCallback) {
         return ServiceFuture.fromBody(delete417Async(), serviceCallback);
     }
 
@@ -1940,7 +1940,7 @@ public class HttpClientFailuresImpl implements HttpClientFailures {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Error&gt;} object.
      */
-    public ServiceFuture<Error> delete417Async(Boolean booleanValue, final ServiceCallback<Error> serviceCallback) {
+    public ServiceFuture<Error> delete417Async(Boolean booleanValue, ServiceCallback<Error> serviceCallback) {
         return ServiceFuture.fromBody(delete417Async(booleanValue), serviceCallback);
     }
 
@@ -1993,7 +1993,7 @@ public class HttpClientFailuresImpl implements HttpClientFailures {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Error&gt;} object.
      */
-    public ServiceFuture<Error> head429Async(final ServiceCallback<Error> serviceCallback) {
+    public ServiceFuture<Error> head429Async(ServiceCallback<Error> serviceCallback) {
         return ServiceFuture.fromBody(head429Async(), serviceCallback);
     }
 

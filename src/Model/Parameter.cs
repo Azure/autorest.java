@@ -11,10 +11,9 @@ namespace AutoRest.Java.Model
     public class Parameter
     {
 
-        public Parameter(string description, bool isFinal, IType type, string name, bool isRequired)
+        public Parameter(string description, IType type, string name, bool isRequired)
         {
             Description = description;
-            IsFinal = isFinal;
             Type = type;
             Name = name;
             IsRequired = isRequired;
@@ -24,11 +23,6 @@ namespace AutoRest.Java.Model
         /// The description of this parameter.
         /// </summary>
         public string Description { get; }
-
-        /// <summary>
-        /// Whether or not this parameter is final.
-        /// </summary>
-        public bool IsFinal { get; }
 
         /// <summary>
         /// The type of this parameter.
@@ -45,7 +39,7 @@ namespace AutoRest.Java.Model
         /// </summary>
         public bool IsRequired { get; }
 
-        public string Declaration => $"{(IsFinal ? "final " : "")}{Type} {Name}";
+        public string Declaration => $"{Type} {Name}";
 
         /// <summary>
         /// Add this parameter's imports to the provided ISet of imports.

@@ -76,7 +76,7 @@ public interface AutoRestValidationTest {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Product&gt;} object.
      */
-    ServiceFuture<Product> validationOfMethodParametersAsync(String resourceGroupName, int id, final ServiceCallback<Product> serviceCallback);
+    ServiceFuture<Product> validationOfMethodParametersAsync(String resourceGroupName, int id, ServiceCallback<Product> serviceCallback);
 
     /**
      * Validates input parameters on the method. See swagger for details.
@@ -119,7 +119,7 @@ public interface AutoRestValidationTest {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Product&gt;} object.
      */
-    ServiceFuture<Product> validationOfBodyAsync(String resourceGroupName, int id, final ServiceCallback<Product> serviceCallback);
+    ServiceFuture<Product> validationOfBodyAsync(String resourceGroupName, int id, ServiceCallback<Product> serviceCallback);
 
     /**
      * Validates body parameters on the method. See swagger for details.
@@ -164,7 +164,7 @@ public interface AutoRestValidationTest {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Product&gt;} object.
      */
-    ServiceFuture<Product> validationOfBodyAsync(String resourceGroupName, int id, Product body, final ServiceCallback<Product> serviceCallback);
+    ServiceFuture<Product> validationOfBodyAsync(String resourceGroupName, int id, Product body, ServiceCallback<Product> serviceCallback);
 
     /**
      * Validates body parameters on the method. See swagger for details.
@@ -198,7 +198,7 @@ public interface AutoRestValidationTest {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    ServiceFuture<Void> getWithConstantInPathAsync(final ServiceCallback<Void> serviceCallback);
+    ServiceFuture<Void> getWithConstantInPathAsync(ServiceCallback<Void> serviceCallback);
 
     /**
      * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
@@ -221,7 +221,7 @@ public interface AutoRestValidationTest {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Product&gt;} object.
      */
-    ServiceFuture<Product> postWithConstantInBodyAsync(final ServiceCallback<Product> serviceCallback);
+    ServiceFuture<Product> postWithConstantInBodyAsync(ServiceCallback<Product> serviceCallback);
 
     /**
      * @return the {@link Single&lt;RestResponse&lt;Void, Product&gt;&gt;} object if successful.
@@ -247,7 +247,7 @@ public interface AutoRestValidationTest {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Product&gt;} object.
      */
-    ServiceFuture<Product> postWithConstantInBodyAsync(Product body, final ServiceCallback<Product> serviceCallback);
+    ServiceFuture<Product> postWithConstantInBodyAsync(Product body, ServiceCallback<Product> serviceCallback);
 
     /**
      * @param body the Product value.

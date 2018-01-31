@@ -172,7 +172,7 @@ public class HttpRedirectsImpl implements HttpRedirects {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    public ServiceFuture<Void> head300Async(final ServiceCallback<Void> serviceCallback) {
+    public ServiceFuture<Void> head300Async(ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(head300Async(), serviceCallback);
     }
 
@@ -213,7 +213,7 @@ public class HttpRedirectsImpl implements HttpRedirects {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;List&lt;String&gt;&gt;} object.
      */
-    public ServiceFuture<List<String>> get300Async(final ServiceCallback<List<String>> serviceCallback) {
+    public ServiceFuture<List<String>> get300Async(ServiceCallback<List<String>> serviceCallback) {
         return ServiceFuture.fromBody(get300Async(), serviceCallback);
     }
 
@@ -261,7 +261,7 @@ public class HttpRedirectsImpl implements HttpRedirects {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    public ServiceFuture<Void> head301Async(final ServiceCallback<Void> serviceCallback) {
+    public ServiceFuture<Void> head301Async(ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(head301Async(), serviceCallback);
     }
 
@@ -301,7 +301,7 @@ public class HttpRedirectsImpl implements HttpRedirects {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    public ServiceFuture<Void> get301Async(final ServiceCallback<Void> serviceCallback) {
+    public ServiceFuture<Void> get301Async(ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(get301Async(), serviceCallback);
     }
 
@@ -341,7 +341,7 @@ public class HttpRedirectsImpl implements HttpRedirects {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    public ServiceFuture<Void> put301Async(final ServiceCallback<Void> serviceCallback) {
+    public ServiceFuture<Void> put301Async(ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(put301Async(), serviceCallback);
     }
 
@@ -385,7 +385,7 @@ public class HttpRedirectsImpl implements HttpRedirects {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    public ServiceFuture<Void> put301Async(Boolean booleanValue, final ServiceCallback<Void> serviceCallback) {
+    public ServiceFuture<Void> put301Async(Boolean booleanValue, ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(put301Async(booleanValue), serviceCallback);
     }
 
@@ -429,7 +429,7 @@ public class HttpRedirectsImpl implements HttpRedirects {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    public ServiceFuture<Void> head302Async(final ServiceCallback<Void> serviceCallback) {
+    public ServiceFuture<Void> head302Async(ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(head302Async(), serviceCallback);
     }
 
@@ -469,7 +469,7 @@ public class HttpRedirectsImpl implements HttpRedirects {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    public ServiceFuture<Void> get302Async(final ServiceCallback<Void> serviceCallback) {
+    public ServiceFuture<Void> get302Async(ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(get302Async(), serviceCallback);
     }
 
@@ -509,7 +509,7 @@ public class HttpRedirectsImpl implements HttpRedirects {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    public ServiceFuture<Void> patch302Async(final ServiceCallback<Void> serviceCallback) {
+    public ServiceFuture<Void> patch302Async(ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(patch302Async(), serviceCallback);
     }
 
@@ -553,7 +553,7 @@ public class HttpRedirectsImpl implements HttpRedirects {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    public ServiceFuture<Void> patch302Async(Boolean booleanValue, final ServiceCallback<Void> serviceCallback) {
+    public ServiceFuture<Void> patch302Async(Boolean booleanValue, ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(patch302Async(booleanValue), serviceCallback);
     }
 
@@ -597,7 +597,7 @@ public class HttpRedirectsImpl implements HttpRedirects {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    public ServiceFuture<Void> post303Async(final ServiceCallback<Void> serviceCallback) {
+    public ServiceFuture<Void> post303Async(ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(post303Async(), serviceCallback);
     }
 
@@ -641,7 +641,7 @@ public class HttpRedirectsImpl implements HttpRedirects {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    public ServiceFuture<Void> post303Async(Boolean booleanValue, final ServiceCallback<Void> serviceCallback) {
+    public ServiceFuture<Void> post303Async(Boolean booleanValue, ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(post303Async(booleanValue), serviceCallback);
     }
 
@@ -685,7 +685,7 @@ public class HttpRedirectsImpl implements HttpRedirects {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    public ServiceFuture<Void> head307Async(final ServiceCallback<Void> serviceCallback) {
+    public ServiceFuture<Void> head307Async(ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(head307Async(), serviceCallback);
     }
 
@@ -725,7 +725,7 @@ public class HttpRedirectsImpl implements HttpRedirects {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    public ServiceFuture<Void> get307Async(final ServiceCallback<Void> serviceCallback) {
+    public ServiceFuture<Void> get307Async(ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(get307Async(), serviceCallback);
     }
 
@@ -765,7 +765,7 @@ public class HttpRedirectsImpl implements HttpRedirects {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    public ServiceFuture<Void> put307Async(final ServiceCallback<Void> serviceCallback) {
+    public ServiceFuture<Void> put307Async(ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(put307Async(), serviceCallback);
     }
 
@@ -809,7 +809,7 @@ public class HttpRedirectsImpl implements HttpRedirects {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    public ServiceFuture<Void> put307Async(Boolean booleanValue, final ServiceCallback<Void> serviceCallback) {
+    public ServiceFuture<Void> put307Async(Boolean booleanValue, ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(put307Async(booleanValue), serviceCallback);
     }
 
@@ -853,7 +853,7 @@ public class HttpRedirectsImpl implements HttpRedirects {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    public ServiceFuture<Void> patch307Async(final ServiceCallback<Void> serviceCallback) {
+    public ServiceFuture<Void> patch307Async(ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(patch307Async(), serviceCallback);
     }
 
@@ -897,7 +897,7 @@ public class HttpRedirectsImpl implements HttpRedirects {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    public ServiceFuture<Void> patch307Async(Boolean booleanValue, final ServiceCallback<Void> serviceCallback) {
+    public ServiceFuture<Void> patch307Async(Boolean booleanValue, ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(patch307Async(booleanValue), serviceCallback);
     }
 
@@ -941,7 +941,7 @@ public class HttpRedirectsImpl implements HttpRedirects {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    public ServiceFuture<Void> post307Async(final ServiceCallback<Void> serviceCallback) {
+    public ServiceFuture<Void> post307Async(ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(post307Async(), serviceCallback);
     }
 
@@ -985,7 +985,7 @@ public class HttpRedirectsImpl implements HttpRedirects {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    public ServiceFuture<Void> post307Async(Boolean booleanValue, final ServiceCallback<Void> serviceCallback) {
+    public ServiceFuture<Void> post307Async(Boolean booleanValue, ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(post307Async(booleanValue), serviceCallback);
     }
 
@@ -1029,7 +1029,7 @@ public class HttpRedirectsImpl implements HttpRedirects {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    public ServiceFuture<Void> delete307Async(final ServiceCallback<Void> serviceCallback) {
+    public ServiceFuture<Void> delete307Async(ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(delete307Async(), serviceCallback);
     }
 
@@ -1073,7 +1073,7 @@ public class HttpRedirectsImpl implements HttpRedirects {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    public ServiceFuture<Void> delete307Async(Boolean booleanValue, final ServiceCallback<Void> serviceCallback) {
+    public ServiceFuture<Void> delete307Async(Boolean booleanValue, ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(delete307Async(booleanValue), serviceCallback);
     }
 

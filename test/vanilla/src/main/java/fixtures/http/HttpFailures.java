@@ -40,7 +40,7 @@ public interface HttpFailures {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Boolean&gt;} object.
      */
-    ServiceFuture<Boolean> getEmptyErrorAsync(final ServiceCallback<Boolean> serviceCallback);
+    ServiceFuture<Boolean> getEmptyErrorAsync(ServiceCallback<Boolean> serviceCallback);
 
     /**
      * Get empty error form server.
@@ -71,7 +71,7 @@ public interface HttpFailures {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Boolean&gt;} object.
      */
-    ServiceFuture<Boolean> getNoModelErrorAsync(final ServiceCallback<Boolean> serviceCallback);
+    ServiceFuture<Boolean> getNoModelErrorAsync(ServiceCallback<Boolean> serviceCallback);
 
     /**
      * Get empty error form server.
@@ -102,7 +102,7 @@ public interface HttpFailures {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Boolean&gt;} object.
      */
-    ServiceFuture<Boolean> getNoModelEmptyAsync(final ServiceCallback<Boolean> serviceCallback);
+    ServiceFuture<Boolean> getNoModelEmptyAsync(ServiceCallback<Boolean> serviceCallback);
 
     /**
      * Get empty response from server.

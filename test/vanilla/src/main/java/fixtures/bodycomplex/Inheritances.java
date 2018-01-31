@@ -41,7 +41,7 @@ public interface Inheritances {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Siamese&gt;} object.
      */
-    ServiceFuture<Siamese> getValidAsync(final ServiceCallback<Siamese> serviceCallback);
+    ServiceFuture<Siamese> getValidAsync(ServiceCallback<Siamese> serviceCallback);
 
     /**
      * Get complex types that extend others.
@@ -75,7 +75,7 @@ public interface Inheritances {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    ServiceFuture<Void> putValidAsync(Siamese complexBody, final ServiceCallback<Void> serviceCallback);
+    ServiceFuture<Void> putValidAsync(Siamese complexBody, ServiceCallback<Void> serviceCallback);
 
     /**
      * Put complex types that extend others.

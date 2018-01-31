@@ -41,7 +41,7 @@ public interface Numbers {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Double&gt;} object.
      */
-    ServiceFuture<Double> getNullAsync(final ServiceCallback<Double> serviceCallback);
+    ServiceFuture<Double> getNullAsync(ServiceCallback<Double> serviceCallback);
 
     /**
      * Get null Number value.
@@ -73,7 +73,7 @@ public interface Numbers {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Double&gt;} object.
      */
-    ServiceFuture<Double> getInvalidFloatAsync(final ServiceCallback<Double> serviceCallback);
+    ServiceFuture<Double> getInvalidFloatAsync(ServiceCallback<Double> serviceCallback);
 
     /**
      * Get invalid float Number value.
@@ -105,7 +105,7 @@ public interface Numbers {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Double&gt;} object.
      */
-    ServiceFuture<Double> getInvalidDoubleAsync(final ServiceCallback<Double> serviceCallback);
+    ServiceFuture<Double> getInvalidDoubleAsync(ServiceCallback<Double> serviceCallback);
 
     /**
      * Get invalid double Number value.
@@ -137,7 +137,7 @@ public interface Numbers {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;BigDecimal&gt;} object.
      */
-    ServiceFuture<BigDecimal> getInvalidDecimalAsync(final ServiceCallback<BigDecimal> serviceCallback);
+    ServiceFuture<BigDecimal> getInvalidDecimalAsync(ServiceCallback<BigDecimal> serviceCallback);
 
     /**
      * Get invalid decimal Number value.
@@ -171,7 +171,7 @@ public interface Numbers {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    ServiceFuture<Void> putBigFloatAsync(double numberBody, final ServiceCallback<Void> serviceCallback);
+    ServiceFuture<Void> putBigFloatAsync(double numberBody, ServiceCallback<Void> serviceCallback);
 
     /**
      * Put big float value 3.402823e+20.
@@ -207,7 +207,7 @@ public interface Numbers {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Double&gt;} object.
      */
-    ServiceFuture<Double> getBigFloatAsync(final ServiceCallback<Double> serviceCallback);
+    ServiceFuture<Double> getBigFloatAsync(ServiceCallback<Double> serviceCallback);
 
     /**
      * Get big float value 3.402823e+20.
@@ -241,7 +241,7 @@ public interface Numbers {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    ServiceFuture<Void> putBigDoubleAsync(double numberBody, final ServiceCallback<Void> serviceCallback);
+    ServiceFuture<Void> putBigDoubleAsync(double numberBody, ServiceCallback<Void> serviceCallback);
 
     /**
      * Put big double value 2.5976931e+101.
@@ -277,7 +277,7 @@ public interface Numbers {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Double&gt;} object.
      */
-    ServiceFuture<Double> getBigDoubleAsync(final ServiceCallback<Double> serviceCallback);
+    ServiceFuture<Double> getBigDoubleAsync(ServiceCallback<Double> serviceCallback);
 
     /**
      * Get big double value 2.5976931e+101.
@@ -311,7 +311,7 @@ public interface Numbers {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    ServiceFuture<Void> putBigDoublePositiveDecimalAsync(double numberBody, final ServiceCallback<Void> serviceCallback);
+    ServiceFuture<Void> putBigDoublePositiveDecimalAsync(double numberBody, ServiceCallback<Void> serviceCallback);
 
     /**
      * Put big double value 99999999.99.
@@ -347,7 +347,7 @@ public interface Numbers {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Double&gt;} object.
      */
-    ServiceFuture<Double> getBigDoublePositiveDecimalAsync(final ServiceCallback<Double> serviceCallback);
+    ServiceFuture<Double> getBigDoublePositiveDecimalAsync(ServiceCallback<Double> serviceCallback);
 
     /**
      * Get big double value 99999999.99.
@@ -381,7 +381,7 @@ public interface Numbers {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    ServiceFuture<Void> putBigDoubleNegativeDecimalAsync(double numberBody, final ServiceCallback<Void> serviceCallback);
+    ServiceFuture<Void> putBigDoubleNegativeDecimalAsync(double numberBody, ServiceCallback<Void> serviceCallback);
 
     /**
      * Put big double value -99999999.99.
@@ -417,7 +417,7 @@ public interface Numbers {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Double&gt;} object.
      */
-    ServiceFuture<Double> getBigDoubleNegativeDecimalAsync(final ServiceCallback<Double> serviceCallback);
+    ServiceFuture<Double> getBigDoubleNegativeDecimalAsync(ServiceCallback<Double> serviceCallback);
 
     /**
      * Get big double value -99999999.99.
@@ -451,7 +451,7 @@ public interface Numbers {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    ServiceFuture<Void> putBigDecimalAsync(BigDecimal numberBody, final ServiceCallback<Void> serviceCallback);
+    ServiceFuture<Void> putBigDecimalAsync(BigDecimal numberBody, ServiceCallback<Void> serviceCallback);
 
     /**
      * Put big decimal value 2.5976931e+101.
@@ -487,7 +487,7 @@ public interface Numbers {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;BigDecimal&gt;} object.
      */
-    ServiceFuture<BigDecimal> getBigDecimalAsync(final ServiceCallback<BigDecimal> serviceCallback);
+    ServiceFuture<BigDecimal> getBigDecimalAsync(ServiceCallback<BigDecimal> serviceCallback);
 
     /**
      * Get big decimal value 2.5976931e+101.
@@ -521,7 +521,7 @@ public interface Numbers {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    ServiceFuture<Void> putBigDecimalPositiveDecimalAsync(BigDecimal numberBody, final ServiceCallback<Void> serviceCallback);
+    ServiceFuture<Void> putBigDecimalPositiveDecimalAsync(BigDecimal numberBody, ServiceCallback<Void> serviceCallback);
 
     /**
      * Put big decimal value 99999999.99.
@@ -557,7 +557,7 @@ public interface Numbers {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;BigDecimal&gt;} object.
      */
-    ServiceFuture<BigDecimal> getBigDecimalPositiveDecimalAsync(final ServiceCallback<BigDecimal> serviceCallback);
+    ServiceFuture<BigDecimal> getBigDecimalPositiveDecimalAsync(ServiceCallback<BigDecimal> serviceCallback);
 
     /**
      * Get big decimal value 99999999.99.
@@ -591,7 +591,7 @@ public interface Numbers {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    ServiceFuture<Void> putBigDecimalNegativeDecimalAsync(BigDecimal numberBody, final ServiceCallback<Void> serviceCallback);
+    ServiceFuture<Void> putBigDecimalNegativeDecimalAsync(BigDecimal numberBody, ServiceCallback<Void> serviceCallback);
 
     /**
      * Put big decimal value -99999999.99.
@@ -627,7 +627,7 @@ public interface Numbers {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;BigDecimal&gt;} object.
      */
-    ServiceFuture<BigDecimal> getBigDecimalNegativeDecimalAsync(final ServiceCallback<BigDecimal> serviceCallback);
+    ServiceFuture<BigDecimal> getBigDecimalNegativeDecimalAsync(ServiceCallback<BigDecimal> serviceCallback);
 
     /**
      * Get big decimal value -99999999.99.
@@ -661,7 +661,7 @@ public interface Numbers {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    ServiceFuture<Void> putSmallFloatAsync(double numberBody, final ServiceCallback<Void> serviceCallback);
+    ServiceFuture<Void> putSmallFloatAsync(double numberBody, ServiceCallback<Void> serviceCallback);
 
     /**
      * Put small float value 3.402823e-20.
@@ -697,7 +697,7 @@ public interface Numbers {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Double&gt;} object.
      */
-    ServiceFuture<Double> getSmallFloatAsync(final ServiceCallback<Double> serviceCallback);
+    ServiceFuture<Double> getSmallFloatAsync(ServiceCallback<Double> serviceCallback);
 
     /**
      * Get big double value 3.402823e-20.
@@ -731,7 +731,7 @@ public interface Numbers {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    ServiceFuture<Void> putSmallDoubleAsync(double numberBody, final ServiceCallback<Void> serviceCallback);
+    ServiceFuture<Void> putSmallDoubleAsync(double numberBody, ServiceCallback<Void> serviceCallback);
 
     /**
      * Put small double value 2.5976931e-101.
@@ -767,7 +767,7 @@ public interface Numbers {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Double&gt;} object.
      */
-    ServiceFuture<Double> getSmallDoubleAsync(final ServiceCallback<Double> serviceCallback);
+    ServiceFuture<Double> getSmallDoubleAsync(ServiceCallback<Double> serviceCallback);
 
     /**
      * Get big double value 2.5976931e-101.
@@ -801,7 +801,7 @@ public interface Numbers {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    ServiceFuture<Void> putSmallDecimalAsync(BigDecimal numberBody, final ServiceCallback<Void> serviceCallback);
+    ServiceFuture<Void> putSmallDecimalAsync(BigDecimal numberBody, ServiceCallback<Void> serviceCallback);
 
     /**
      * Put small decimal value 2.5976931e-101.
@@ -837,7 +837,7 @@ public interface Numbers {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;BigDecimal&gt;} object.
      */
-    ServiceFuture<BigDecimal> getSmallDecimalAsync(final ServiceCallback<BigDecimal> serviceCallback);
+    ServiceFuture<BigDecimal> getSmallDecimalAsync(ServiceCallback<BigDecimal> serviceCallback);
 
     /**
      * Get small decimal value 2.5976931e-101.

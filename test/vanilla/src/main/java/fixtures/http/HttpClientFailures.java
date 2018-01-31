@@ -40,7 +40,7 @@ public interface HttpClientFailures {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Error&gt;} object.
      */
-    ServiceFuture<Error> head400Async(final ServiceCallback<Error> serviceCallback);
+    ServiceFuture<Error> head400Async(ServiceCallback<Error> serviceCallback);
 
     /**
      * Return 400 status code - should be represented in the client as an error.
@@ -72,7 +72,7 @@ public interface HttpClientFailures {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Error&gt;} object.
      */
-    ServiceFuture<Error> get400Async(final ServiceCallback<Error> serviceCallback);
+    ServiceFuture<Error> get400Async(ServiceCallback<Error> serviceCallback);
 
     /**
      * Return 400 status code - should be represented in the client as an error.
@@ -104,7 +104,7 @@ public interface HttpClientFailures {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Error&gt;} object.
      */
-    ServiceFuture<Error> put400Async(final ServiceCallback<Error> serviceCallback);
+    ServiceFuture<Error> put400Async(ServiceCallback<Error> serviceCallback);
 
     /**
      * Return 400 status code - should be represented in the client as an error.
@@ -139,7 +139,7 @@ public interface HttpClientFailures {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Error&gt;} object.
      */
-    ServiceFuture<Error> put400Async(Boolean booleanValue, final ServiceCallback<Error> serviceCallback);
+    ServiceFuture<Error> put400Async(Boolean booleanValue, ServiceCallback<Error> serviceCallback);
 
     /**
      * Return 400 status code - should be represented in the client as an error.
@@ -175,7 +175,7 @@ public interface HttpClientFailures {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Error&gt;} object.
      */
-    ServiceFuture<Error> patch400Async(final ServiceCallback<Error> serviceCallback);
+    ServiceFuture<Error> patch400Async(ServiceCallback<Error> serviceCallback);
 
     /**
      * Return 400 status code - should be represented in the client as an error.
@@ -210,7 +210,7 @@ public interface HttpClientFailures {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Error&gt;} object.
      */
-    ServiceFuture<Error> patch400Async(Boolean booleanValue, final ServiceCallback<Error> serviceCallback);
+    ServiceFuture<Error> patch400Async(Boolean booleanValue, ServiceCallback<Error> serviceCallback);
 
     /**
      * Return 400 status code - should be represented in the client as an error.
@@ -246,7 +246,7 @@ public interface HttpClientFailures {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Error&gt;} object.
      */
-    ServiceFuture<Error> post400Async(final ServiceCallback<Error> serviceCallback);
+    ServiceFuture<Error> post400Async(ServiceCallback<Error> serviceCallback);
 
     /**
      * Return 400 status code - should be represented in the client as an error.
@@ -281,7 +281,7 @@ public interface HttpClientFailures {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Error&gt;} object.
      */
-    ServiceFuture<Error> post400Async(Boolean booleanValue, final ServiceCallback<Error> serviceCallback);
+    ServiceFuture<Error> post400Async(Boolean booleanValue, ServiceCallback<Error> serviceCallback);
 
     /**
      * Return 400 status code - should be represented in the client as an error.
@@ -317,7 +317,7 @@ public interface HttpClientFailures {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Error&gt;} object.
      */
-    ServiceFuture<Error> delete400Async(final ServiceCallback<Error> serviceCallback);
+    ServiceFuture<Error> delete400Async(ServiceCallback<Error> serviceCallback);
 
     /**
      * Return 400 status code - should be represented in the client as an error.
@@ -352,7 +352,7 @@ public interface HttpClientFailures {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Error&gt;} object.
      */
-    ServiceFuture<Error> delete400Async(Boolean booleanValue, final ServiceCallback<Error> serviceCallback);
+    ServiceFuture<Error> delete400Async(Boolean booleanValue, ServiceCallback<Error> serviceCallback);
 
     /**
      * Return 400 status code - should be represented in the client as an error.
@@ -388,7 +388,7 @@ public interface HttpClientFailures {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Error&gt;} object.
      */
-    ServiceFuture<Error> head401Async(final ServiceCallback<Error> serviceCallback);
+    ServiceFuture<Error> head401Async(ServiceCallback<Error> serviceCallback);
 
     /**
      * Return 401 status code - should be represented in the client as an error.
@@ -420,7 +420,7 @@ public interface HttpClientFailures {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Error&gt;} object.
      */
-    ServiceFuture<Error> get402Async(final ServiceCallback<Error> serviceCallback);
+    ServiceFuture<Error> get402Async(ServiceCallback<Error> serviceCallback);
 
     /**
      * Return 402 status code - should be represented in the client as an error.
@@ -452,7 +452,7 @@ public interface HttpClientFailures {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Error&gt;} object.
      */
-    ServiceFuture<Error> get403Async(final ServiceCallback<Error> serviceCallback);
+    ServiceFuture<Error> get403Async(ServiceCallback<Error> serviceCallback);
 
     /**
      * Return 403 status code - should be represented in the client as an error.
@@ -484,7 +484,7 @@ public interface HttpClientFailures {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Error&gt;} object.
      */
-    ServiceFuture<Error> put404Async(final ServiceCallback<Error> serviceCallback);
+    ServiceFuture<Error> put404Async(ServiceCallback<Error> serviceCallback);
 
     /**
      * Return 404 status code - should be represented in the client as an error.
@@ -519,7 +519,7 @@ public interface HttpClientFailures {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Error&gt;} object.
      */
-    ServiceFuture<Error> put404Async(Boolean booleanValue, final ServiceCallback<Error> serviceCallback);
+    ServiceFuture<Error> put404Async(Boolean booleanValue, ServiceCallback<Error> serviceCallback);
 
     /**
      * Return 404 status code - should be represented in the client as an error.
@@ -555,7 +555,7 @@ public interface HttpClientFailures {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Error&gt;} object.
      */
-    ServiceFuture<Error> patch405Async(final ServiceCallback<Error> serviceCallback);
+    ServiceFuture<Error> patch405Async(ServiceCallback<Error> serviceCallback);
 
     /**
      * Return 405 status code - should be represented in the client as an error.
@@ -590,7 +590,7 @@ public interface HttpClientFailures {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Error&gt;} object.
      */
-    ServiceFuture<Error> patch405Async(Boolean booleanValue, final ServiceCallback<Error> serviceCallback);
+    ServiceFuture<Error> patch405Async(Boolean booleanValue, ServiceCallback<Error> serviceCallback);
 
     /**
      * Return 405 status code - should be represented in the client as an error.
@@ -626,7 +626,7 @@ public interface HttpClientFailures {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Error&gt;} object.
      */
-    ServiceFuture<Error> post406Async(final ServiceCallback<Error> serviceCallback);
+    ServiceFuture<Error> post406Async(ServiceCallback<Error> serviceCallback);
 
     /**
      * Return 406 status code - should be represented in the client as an error.
@@ -661,7 +661,7 @@ public interface HttpClientFailures {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Error&gt;} object.
      */
-    ServiceFuture<Error> post406Async(Boolean booleanValue, final ServiceCallback<Error> serviceCallback);
+    ServiceFuture<Error> post406Async(Boolean booleanValue, ServiceCallback<Error> serviceCallback);
 
     /**
      * Return 406 status code - should be represented in the client as an error.
@@ -697,7 +697,7 @@ public interface HttpClientFailures {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Error&gt;} object.
      */
-    ServiceFuture<Error> delete407Async(final ServiceCallback<Error> serviceCallback);
+    ServiceFuture<Error> delete407Async(ServiceCallback<Error> serviceCallback);
 
     /**
      * Return 407 status code - should be represented in the client as an error.
@@ -732,7 +732,7 @@ public interface HttpClientFailures {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Error&gt;} object.
      */
-    ServiceFuture<Error> delete407Async(Boolean booleanValue, final ServiceCallback<Error> serviceCallback);
+    ServiceFuture<Error> delete407Async(Boolean booleanValue, ServiceCallback<Error> serviceCallback);
 
     /**
      * Return 407 status code - should be represented in the client as an error.
@@ -768,7 +768,7 @@ public interface HttpClientFailures {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Error&gt;} object.
      */
-    ServiceFuture<Error> put409Async(final ServiceCallback<Error> serviceCallback);
+    ServiceFuture<Error> put409Async(ServiceCallback<Error> serviceCallback);
 
     /**
      * Return 409 status code - should be represented in the client as an error.
@@ -803,7 +803,7 @@ public interface HttpClientFailures {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Error&gt;} object.
      */
-    ServiceFuture<Error> put409Async(Boolean booleanValue, final ServiceCallback<Error> serviceCallback);
+    ServiceFuture<Error> put409Async(Boolean booleanValue, ServiceCallback<Error> serviceCallback);
 
     /**
      * Return 409 status code - should be represented in the client as an error.
@@ -839,7 +839,7 @@ public interface HttpClientFailures {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Error&gt;} object.
      */
-    ServiceFuture<Error> head410Async(final ServiceCallback<Error> serviceCallback);
+    ServiceFuture<Error> head410Async(ServiceCallback<Error> serviceCallback);
 
     /**
      * Return 410 status code - should be represented in the client as an error.
@@ -871,7 +871,7 @@ public interface HttpClientFailures {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Error&gt;} object.
      */
-    ServiceFuture<Error> get411Async(final ServiceCallback<Error> serviceCallback);
+    ServiceFuture<Error> get411Async(ServiceCallback<Error> serviceCallback);
 
     /**
      * Return 411 status code - should be represented in the client as an error.
@@ -903,7 +903,7 @@ public interface HttpClientFailures {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Error&gt;} object.
      */
-    ServiceFuture<Error> get412Async(final ServiceCallback<Error> serviceCallback);
+    ServiceFuture<Error> get412Async(ServiceCallback<Error> serviceCallback);
 
     /**
      * Return 412 status code - should be represented in the client as an error.
@@ -935,7 +935,7 @@ public interface HttpClientFailures {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Error&gt;} object.
      */
-    ServiceFuture<Error> put413Async(final ServiceCallback<Error> serviceCallback);
+    ServiceFuture<Error> put413Async(ServiceCallback<Error> serviceCallback);
 
     /**
      * Return 413 status code - should be represented in the client as an error.
@@ -970,7 +970,7 @@ public interface HttpClientFailures {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Error&gt;} object.
      */
-    ServiceFuture<Error> put413Async(Boolean booleanValue, final ServiceCallback<Error> serviceCallback);
+    ServiceFuture<Error> put413Async(Boolean booleanValue, ServiceCallback<Error> serviceCallback);
 
     /**
      * Return 413 status code - should be represented in the client as an error.
@@ -1006,7 +1006,7 @@ public interface HttpClientFailures {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Error&gt;} object.
      */
-    ServiceFuture<Error> patch414Async(final ServiceCallback<Error> serviceCallback);
+    ServiceFuture<Error> patch414Async(ServiceCallback<Error> serviceCallback);
 
     /**
      * Return 414 status code - should be represented in the client as an error.
@@ -1041,7 +1041,7 @@ public interface HttpClientFailures {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Error&gt;} object.
      */
-    ServiceFuture<Error> patch414Async(Boolean booleanValue, final ServiceCallback<Error> serviceCallback);
+    ServiceFuture<Error> patch414Async(Boolean booleanValue, ServiceCallback<Error> serviceCallback);
 
     /**
      * Return 414 status code - should be represented in the client as an error.
@@ -1077,7 +1077,7 @@ public interface HttpClientFailures {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Error&gt;} object.
      */
-    ServiceFuture<Error> post415Async(final ServiceCallback<Error> serviceCallback);
+    ServiceFuture<Error> post415Async(ServiceCallback<Error> serviceCallback);
 
     /**
      * Return 415 status code - should be represented in the client as an error.
@@ -1112,7 +1112,7 @@ public interface HttpClientFailures {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Error&gt;} object.
      */
-    ServiceFuture<Error> post415Async(Boolean booleanValue, final ServiceCallback<Error> serviceCallback);
+    ServiceFuture<Error> post415Async(Boolean booleanValue, ServiceCallback<Error> serviceCallback);
 
     /**
      * Return 415 status code - should be represented in the client as an error.
@@ -1148,7 +1148,7 @@ public interface HttpClientFailures {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Error&gt;} object.
      */
-    ServiceFuture<Error> get416Async(final ServiceCallback<Error> serviceCallback);
+    ServiceFuture<Error> get416Async(ServiceCallback<Error> serviceCallback);
 
     /**
      * Return 416 status code - should be represented in the client as an error.
@@ -1180,7 +1180,7 @@ public interface HttpClientFailures {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Error&gt;} object.
      */
-    ServiceFuture<Error> delete417Async(final ServiceCallback<Error> serviceCallback);
+    ServiceFuture<Error> delete417Async(ServiceCallback<Error> serviceCallback);
 
     /**
      * Return 417 status code - should be represented in the client as an error.
@@ -1215,7 +1215,7 @@ public interface HttpClientFailures {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Error&gt;} object.
      */
-    ServiceFuture<Error> delete417Async(Boolean booleanValue, final ServiceCallback<Error> serviceCallback);
+    ServiceFuture<Error> delete417Async(Boolean booleanValue, ServiceCallback<Error> serviceCallback);
 
     /**
      * Return 417 status code - should be represented in the client as an error.
@@ -1251,7 +1251,7 @@ public interface HttpClientFailures {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Error&gt;} object.
      */
-    ServiceFuture<Error> head429Async(final ServiceCallback<Error> serviceCallback);
+    ServiceFuture<Error> head429Async(ServiceCallback<Error> serviceCallback);
 
     /**
      * Return 429 status code - should be represented in the client as an error.

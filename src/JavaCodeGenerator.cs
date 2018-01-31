@@ -50,12 +50,10 @@ namespace AutoRest.Java
         private const string restProxyType = "RestProxy";
         private const string azureProxyType = "AzureProxy";
 
-        private static readonly Parameter serviceClientCredentialsParameter = new Parameter("the management credentials for Azure", false, ClassType.ServiceClientCredentials, "credentials", true);
-        private static readonly Parameter azureTokenCredentialsParameter = new Parameter("the management credentials for Azure", false, ClassType.AzureTokenCredentials, "credentials", true);
-        private static readonly Parameter azureEnvironmentParameter = new Parameter("The environment that requests will target.", false, ClassType.AzureEnvironment, "azureEnvironment", true);
-        private static readonly Parameter httpPipelineParameter = new Parameter("The HTTP pipeline to send requests through.", false, ClassType.HttpPipeline, "httpPipeline", true);
-
-        private const string serviceCallbackVariableName = "serviceCallback";
+        private static readonly Parameter serviceClientCredentialsParameter = new Parameter("the management credentials for Azure", ClassType.ServiceClientCredentials, "credentials", true);
+        private static readonly Parameter azureTokenCredentialsParameter = new Parameter("the management credentials for Azure", ClassType.AzureTokenCredentials, "credentials", true);
+        private static readonly Parameter azureEnvironmentParameter = new Parameter("The environment that requests will target.", ClassType.AzureEnvironment, "azureEnvironment", true);
+        private static readonly Parameter httpPipelineParameter = new Parameter("The HTTP pipeline to send requests through.", ClassType.HttpPipeline, "httpPipeline", true);
 
         private const string implPackage = "implementation";
         private const string modelsPackage = ".models";
@@ -4995,52 +4993,50 @@ namespace AutoRest.Java
 
                 AutoRestResponse autoRestRestAPIMethodReturnType = autoRestRestAPIMethod.ReturnType;
                 AutoRestIModelType autoRestRestAPIMethodReturnBodyType = autoRestRestAPIMethodReturnType.Body ?? DependencyInjection.New<AutoRestPrimaryType>(AutoRestKnownPrimaryType.None);
-                AutoRestIModelType autoRestRestAPIMethodReturnBodyClientType = ConvertToClientType(autoRestRestAPIMethodReturnBodyType);
-                AutoRestSequenceType autoRestRestAPIMethodReturnBodyClientSequenceType = autoRestRestAPIMethodReturnBodyClientType as AutoRestSequenceType;
-
-                IType restAPIMethodReturnBodyType = ParseType(autoRestRestAPIMethodReturnBodyType, settings);
-                IType restAPIMethodReturnBodyClientType = ConvertToClientType(restAPIMethodReturnBodyType);
+                
+                IType restAPIMethodReturnBodyClientType = ConvertToClientType(ParseType(autoRestRestAPIMethodReturnBodyType, settings));
                 ListType restAPIMethodReturnBodyClientListType = restAPIMethodReturnBodyClientType as ListType;
 
                 bool restAPIMethodReturnTypeIsPaged = GetExtensionBool(autoRestRestAPIMethod.Extensions, "nextLinkMethod") ||
                     (autoRestRestAPIMethod.Extensions.ContainsKey(AzureExtensions.PageableExtension) &&
                      autoRestRestAPIMethod.Extensions[AzureExtensions.PageableExtension] != null);
 
-                if (settings.IsAzureOrFluent && restAPIMethodReturnBodyClientListType != null && restAPIMethodReturnTypeIsPaged)
-                {
-                    AutoRestSequenceType resultSequenceType = DependencyInjection.New<AutoRestSequenceType>();
-                    resultSequenceType.ElementType = autoRestRestAPIMethodReturnBodyClientSequenceType.ElementType;
-                    SequenceTypeSetPageImplType(resultSequenceType, SequenceTypeGetPageImplType(autoRestRestAPIMethodReturnBodyClientSequenceType));
-                    autoRestPagedListTypes.Add(resultSequenceType);
-                    autoRestRestAPIMethodReturnBodyClientType = resultSequenceType;
+                GenericType pageImplType = null;
+                IType deserializedResponseBodyType;
+                IType pageType;
 
+                if (settings.IsAzureOrFluent && restAPIMethodReturnBodyClientListType != null && (restAPIMethodReturnTypeIsPaged || restAPIMethod.SimulateAsPagingOperation))
+                {
                     restAPIMethodReturnBodyClientType = new PagedListType(restAPIMethodReturnBodyClientListType.ElementType);
-                }
 
-                AutoRestSequenceType restAPIMethodReturnBodySequenceType = autoRestRestAPIMethodReturnType.Body as AutoRestSequenceType;
-                string responseSequenceElementTypeString = restAPIMethodReturnBodySequenceType == null ? "Void" : AutoRestIModelTypeName(restAPIMethodReturnBodySequenceType.ElementType, settings);
+                    string pageImplTypeName = SequenceTypeGetPageImplType(autoRestRestAPIMethodReturnBodyType);
 
-                AutoRestIModelType restAPIMethodResponseHeaders = autoRestRestAPIMethodReturnType.Headers;
-                string deserializedResponseHeadersType = restAPIMethodResponseHeaders == null ? "Void" : AutoRestIModelTypeName(ConvertToClientType(restAPIMethodResponseHeaders), settings);
-                string deserializedResponseBodyType;
+                    string pageImplSubPackage = settings.IsFluent ? implPackage : modelsPackage;
+                    string pageImplPackage = $"{settings.Package}.{pageImplSubPackage}";
 
-                if (autoRestRestAPIMethodReturnType.Body == null)
-                {
-                    deserializedResponseBodyType = "Void";
-                }
-                else if (settings.IsAzureOrFluent && autoRestRestAPIMethodReturnBodyClientSequenceType != null && (restAPIMethodReturnTypeIsPaged || restAPIMethod.SimulateAsPagingOperation))
-                {
-                    string pageContainerTypeName = SequenceTypeGetPageImplType(autoRestRestAPIMethodReturnBodyClientSequenceType);
-                    string pageTypeName = AutoRestIModelTypeName(autoRestRestAPIMethodReturnBodyClientSequenceType.ElementType, settings);
-                    deserializedResponseBodyType = $"{pageContainerTypeName}<{pageTypeName}>";
+                    pageImplType = new GenericType(pageImplPackage, pageImplTypeName, restAPIMethodReturnBodyClientListType.ElementType);
+                    deserializedResponseBodyType = pageImplType;
+
+                    pageType = new PageType(restAPIMethodReturnBodyClientListType.ElementType);
                 }
                 else
                 {
-                    deserializedResponseBodyType = restAPIMethodReturnBodyClientType.AsNullable().ToString();
-                }
-                string restResponseType = $"RestResponse<{deserializedResponseHeadersType}, {deserializedResponseBodyType}>";
+                    deserializedResponseBodyType = restAPIMethodReturnBodyClientType;
 
-                IEnumerable<AutoRestParameter> requiredNullableParameters = autoRestRestAPIMethod.Parameters.Where((AutoRestParameter parameter) =>
+                    pageType = restAPIMethodReturnBodyClientType.AsNullable();
+                }
+
+                RestResponseType restResponseType = new RestResponseType(
+                    headersType: ConvertToClientType(ParseType(autoRestRestAPIMethodReturnType.Headers, settings)),
+                    bodyType: deserializedResponseBodyType);
+
+                Parameter serviceCallbackParameter = new Parameter(
+                    description: "the async ServiceCallback to handle successful and failed responses.",
+                    type: GenericType.ServiceCallback(restAPIMethodReturnBodyClientType),
+                    name: "serviceCallback",
+                    isRequired: true);
+
+                IEnumerable<AutoRestParameter> autoRestRequiredNullableParameters = autoRestRestAPIMethod.Parameters.Where((AutoRestParameter parameter) =>
                 {
                     bool result = !parameter.IsConstant && parameter.IsRequired;
                     if (result)
@@ -5066,24 +5062,24 @@ namespace AutoRest.Java
                     return result;
                 });
 
-                List<AutoRestParameter> methodRetrofitParameters = autoRestRestAPIMethod.LogicalParameters.Where(p => p.Location != AutoRestParameterLocation.None).ToList();
+                List<AutoRestParameter> autoRestMethodRetrofitParameters = autoRestRestAPIMethod.LogicalParameters.Where(p => p.Location != AutoRestParameterLocation.None).ToList();
                 if (settings.IsAzureOrFluent && restAPIMethod.IsPagingNextOperation)
                 {
-                    methodRetrofitParameters.RemoveAll(p => p.Location == AutoRestParameterLocation.Path);
+                    autoRestMethodRetrofitParameters.RemoveAll(p => p.Location == AutoRestParameterLocation.Path);
 
-                    AutoRestParameter nextUrlParam = DependencyInjection.New<AutoRestParameter>();
-                    nextUrlParam.SerializedName = "nextUrl";
-                    nextUrlParam.Documentation = "The URL to get the next page of items.";
-                    nextUrlParam.Location = AutoRestParameterLocation.Path;
-                    nextUrlParam.IsRequired = true;
-                    nextUrlParam.ModelType = DependencyInjection.New<AutoRestPrimaryType>(AutoRestKnownPrimaryType.String);
-                    nextUrlParam.Name = "nextUrl";
-                    nextUrlParam.Extensions.Add(SwaggerExtensions.SkipUrlEncodingExtension, true);
-                    methodRetrofitParameters.Insert(0, nextUrlParam);
+                    AutoRestParameter autoRestNextUrlParam = DependencyInjection.New<AutoRestParameter>();
+                    autoRestNextUrlParam.SerializedName = "nextUrl";
+                    autoRestNextUrlParam.Documentation = "The URL to get the next page of items.";
+                    autoRestNextUrlParam.Location = AutoRestParameterLocation.Path;
+                    autoRestNextUrlParam.IsRequired = true;
+                    autoRestNextUrlParam.ModelType = DependencyInjection.New<AutoRestPrimaryType>(AutoRestKnownPrimaryType.String);
+                    autoRestNextUrlParam.Name = "nextUrl";
+                    autoRestNextUrlParam.Extensions.Add(SwaggerExtensions.SkipUrlEncodingExtension, true);
+                    autoRestMethodRetrofitParameters.Insert(0, autoRestNextUrlParam);
                 }
 
-                IEnumerable<AutoRestParameter> methodOrderedRetrofitParameters = methodRetrofitParameters.Where(p => p.Location == AutoRestParameterLocation.Path)
-                                    .Union(methodRetrofitParameters.Where(p => p.Location != AutoRestParameterLocation.Path));
+                IEnumerable<AutoRestParameter> autoRestMethodOrderedRetrofitParameters = autoRestMethodRetrofitParameters.Where(p => p.Location == AutoRestParameterLocation.Path)
+                                    .Union(autoRestMethodRetrofitParameters.Where(p => p.Location != AutoRestParameterLocation.Path));
 
                 string methodClientReference = autoRestRestAPIMethod.Group.IsNullOrEmpty() ? "this" : "this.client";
 
@@ -5096,27 +5092,9 @@ namespace AutoRest.Java
                     autoRestParameterLists.Insert(0, autoRestRequiredClientMethodParameters);
                 }
 
-                string serviceFutureReturnType = $"ServiceFuture<{restAPIMethodReturnBodyClientType.AsNullable()}>";
+                GenericType serviceFutureReturnType = GenericType.ServiceFuture(restAPIMethodReturnBodyClientType);
 
-                AutoRestIModelType autoRestRestAPIMethodReturnBodyClientNonNullableType = autoRestRestAPIMethodReturnBodyClientType;
-                if (autoRestRestAPIMethodReturnBodyClientType is AutoRestPrimaryType autoRestRestAPIMethodReturnBodyClientPrimaryType)
-                {
-                    AutoRestPrimaryType autoRestRestAPIMethodReturnBodyClientNonNullablePrimaryType = DependencyInjection.New<AutoRestPrimaryType>(autoRestRestAPIMethodReturnBodyClientPrimaryType.KnownPrimaryType);
-                    autoRestRestAPIMethodReturnBodyClientNonNullablePrimaryType.Format = autoRestRestAPIMethodReturnBodyClientPrimaryType.Format;
-                    primaryTypeNotWantNullable.Add(autoRestRestAPIMethodReturnBodyClientNonNullablePrimaryType);
-
-                    autoRestRestAPIMethodReturnBodyClientNonNullableType = autoRestRestAPIMethodReturnBodyClientNonNullablePrimaryType;
-                }
-
-                string pageType;
-                if (settings.IsAzureOrFluent && autoRestRestAPIMethodReturnBodyClientSequenceType != null && (restAPIMethodReturnTypeIsPaged || restAPIMethod.SimulateAsPagingOperation))
-                {
-                    pageType = $"Page<{AutoRestIModelTypeName(autoRestRestAPIMethodReturnBodyClientSequenceType.ElementType, settings)}>";
-                }
-                else
-                {
-                    pageType = restAPIMethodReturnBodyClientType.AsNullable().ToString();
-                }
+                ObservableType observablePageType = new ObservableType(pageType);
 
                 bool addedClientMethods = false;
 
@@ -5637,20 +5615,20 @@ namespace AutoRest.Java
                                 }
                                 else
                                 {
-                                    comment.Return($"the {{@link Observable<{pageType}>}} object if successful.");
+                                    comment.Return($"the {{@link {observablePageType}}} object if successful.");
                                 }
                             });
-                            typeBlock.PublicMethod($"Observable<{pageType}> {restAPIMethod.Name}Async({parameterDeclaration})", function =>
+                            typeBlock.PublicMethod($"{observablePageType} {restAPIMethod.Name}Async({parameterDeclaration})", function =>
                             {
                                 function.Line($"return {restAPIMethod.Name}SinglePageAsync({argumentList})");
                                 function.Indent(() =>
                                 {
                                     function.Line(".toObservable()");
-                                    function.Line($".concatMap(new Function<{pageType}, Observable<{pageType}>>() {{");
+                                    function.Line($".concatMap(new Function<{pageType}, {observablePageType}>() {{");
                                     function.Indent(() =>
                                     {
                                         function.Annotation("Override");
-                                        function.Block($"public Observable<{pageType}> apply({pageType} page)", subFunction =>
+                                        function.Block($"public {observablePageType} apply({pageType} page)", subFunction =>
                                         {
                                             subFunction.Line($"String {nextPageLinkParameterName} = page.nextPageLink();");
                                             subFunction.If($"{nextPageLinkParameterName} == null", ifBlock =>
@@ -5718,7 +5696,7 @@ namespace AutoRest.Java
                             // ------------------------------
                             // Async Single<Page<T>> Overload
                             // ------------------------------
-                            string singlePageMethodReturnType = $"Single<{pageType}>";
+                            SingleType singlePageMethodReturnType = new SingleType(pageType);
                             typeBlock.JavadocComment(comment =>
                             {
                                 comment.Description(restAPIMethod.Description);
@@ -5754,7 +5732,7 @@ namespace AutoRest.Java
                             });
                             typeBlock.PublicMethod($"{singlePageMethodReturnType} {restAPIMethod.Name}SinglePageAsync({parameterDeclaration})", function =>
                             {
-                                foreach (AutoRestParameter parameter in requiredNullableParameters)
+                                foreach (AutoRestParameter parameter in autoRestRequiredNullableParameters)
                                 {
                                     string parameterName;
                                     if (!parameter.IsClientProperty)
@@ -6071,7 +6049,7 @@ namespace AutoRest.Java
                                     }
                                 }
 
-                                foreach (AutoRestParameter parameter in methodRetrofitParameters)
+                                foreach (AutoRestParameter parameter in autoRestMethodRetrofitParameters)
                                 {
                                     AutoRestIModelType parameterModelType = parameter.ModelType;
                                     if (parameterModelType != null && !IsNullable(parameter))
@@ -6235,8 +6213,8 @@ namespace AutoRest.Java
                                     function.Line($"String nextUrl = {builder.ToString()};");
                                 }
 
-                                IEnumerable<AutoRestParameter> orderedRetrofitParameters = methodRetrofitParameters.Where(p => p.Location == AutoRestParameterLocation.Path)
-                                    .Union(methodRetrofitParameters.Where(p => p.Location != AutoRestParameterLocation.Path));
+                                IEnumerable<AutoRestParameter> orderedRetrofitParameters = autoRestMethodRetrofitParameters.Where(p => p.Location == AutoRestParameterLocation.Path)
+                                    .Union(autoRestMethodRetrofitParameters.Where(p => p.Location != AutoRestParameterLocation.Path));
                                 string restAPIMethodArgumentList = string.Join(", ", orderedRetrofitParameters
                                     .Select((AutoRestParameter parameter) =>
                                     {
@@ -6347,7 +6325,6 @@ namespace AutoRest.Java
                             // ------------------------
                             // Synchronous PagedList<T>
                             // ------------------------
-                            string pageImplType = SequenceTypeGetPageImplType(autoRestRestAPIMethodReturnBodyClientType);
                             string synchronousReturnType = $"PagedList<{sequenceElementTypeString}>";
                             typeBlock.JavadocComment(comment =>
                             {
@@ -6438,12 +6415,12 @@ namespace AutoRest.Java
                                 }
                                 else
                                 {
-                                    comment.Return($"the {{@link Observable<{pageType}>}} object if successful.");
+                                    comment.Return($"the {{@link {observablePageType}}} object if successful.");
                                 }
                             });
                             typeBlock.PublicMethod($"Observable<Page<{sequenceElementTypeString}>> {restAPIMethod.Name}Async({parameterDeclaration})", function =>
                             {
-                                foreach (AutoRestParameter parameter in requiredNullableParameters)
+                                foreach (AutoRestParameter parameter in autoRestRequiredNullableParameters)
                                 {
                                     string parameterName;
                                     if (!parameter.IsClientProperty)
@@ -6759,7 +6736,7 @@ namespace AutoRest.Java
                                     }
                                 }
 
-                                foreach (AutoRestParameter parameter in methodRetrofitParameters)
+                                foreach (AutoRestParameter parameter in autoRestMethodRetrofitParameters)
                                 {
                                     AutoRestIModelType parameterModelType = parameter.ModelType;
                                     if (parameterModelType != null && !IsNullable(parameter))
@@ -6851,7 +6828,7 @@ namespace AutoRest.Java
                                     }
                                 }
 
-                                string restAPIMethodArgumentList = string.Join(", ", methodOrderedRetrofitParameters
+                                string restAPIMethodArgumentList = string.Join(", ", autoRestMethodOrderedRetrofitParameters
                                     .Select((AutoRestParameter parameter) =>
                                     {
                                         string parameterName;
@@ -6938,7 +6915,7 @@ namespace AutoRest.Java
                             
                             string argumentList = string.Join(", ", parameters.Select((AutoRestParameter parameter) => parameter.Name));
 
-                            string parameterDeclaration = string.Join(", ", parameters.Select(parameter =>
+                            string parametersDeclaration = string.Join(", ", parameters.Select(parameter =>
                             {
                                 AutoRestIModelType parameterModelType = parameter.ModelType;
                                 if (parameterModelType != null && !IsNullable(parameter))
@@ -6987,7 +6964,7 @@ namespace AutoRest.Java
 
                                     comment.Param(parameterName, parameterDocumentation);
                                 }
-                                if (!string.IsNullOrEmpty(parameterDeclaration))
+                                if (!string.IsNullOrEmpty(parametersDeclaration))
                                 {
                                     comment.Throws("IllegalArgumentException", "thrown if parameters fail the validation");
                                 }
@@ -7001,9 +6978,9 @@ namespace AutoRest.Java
                                     comment.Return($"the {restAPIMethodReturnBodyClientType} object if successful.");
                                 }
                             });
-                            typeBlock.PublicMethod($"{restAPIMethodReturnBodyClientType} {restAPIMethod.Name}({parameterDeclaration})", function =>
+                            typeBlock.PublicMethod($"{restAPIMethodReturnBodyClientType} {restAPIMethod.Name}({parametersDeclaration})", function =>
                             {
-                                if (AutoRestIModelTypeName(ConvertToClientType(autoRestRestAPIMethodReturnBodyClientType), settings) == "void")
+                                if (restAPIMethodReturnBodyClientType == PrimitiveType.Void)
                                 {
                                     function.Line($"{restAPIMethod.Name}Async({argumentList}).blockingLast();");
                                 }
@@ -7043,21 +7020,21 @@ namespace AutoRest.Java
 
                                     comment.Param(parameterName, parameterDocumentation);
                                 }
-                                comment.Param(serviceCallbackVariableName, "the async ServiceCallback to handle successful and failed responses.");
+                                comment.Param(serviceCallbackParameter.Name, serviceCallbackParameter.Description);
                                 comment.Throws("IllegalArgumentException", "thrown if parameters fail the validation");
                                 comment.Return($"the {{@link {serviceFutureReturnType}}} object");
                             });
 
-                            string serviceCallbackParameterDeclaration = parameterDeclaration;
-                            if (!serviceCallbackParameterDeclaration.IsNullOrEmpty())
+                            string serviceCallbackParametersDeclaration = parametersDeclaration;
+                            if (!serviceCallbackParametersDeclaration.IsNullOrEmpty())
                             {
-                                serviceCallbackParameterDeclaration += ", ";
+                                serviceCallbackParametersDeclaration += ", ";
                             }
-                            serviceCallbackParameterDeclaration += $"final ServiceCallback<{restAPIMethodReturnBodyClientType.AsNullable()}> {serviceCallbackVariableName}";
+                            serviceCallbackParametersDeclaration += serviceCallbackParameter.Declaration;
 
-                            typeBlock.PublicMethod($"{serviceFutureReturnType} {restAPIMethod.Name}Async({serviceCallbackParameterDeclaration})", function =>
+                            typeBlock.PublicMethod($"{serviceFutureReturnType} {restAPIMethod.Name}Async({serviceCallbackParametersDeclaration})", function =>
                             {
-                                function.Return($"ServiceFutureUtil.fromLRO({restAPIMethod.Name}Async({argumentList}), {serviceCallbackVariableName})");
+                                function.Return($"ServiceFutureUtil.fromLRO({restAPIMethod.Name}Async({argumentList}), {serviceCallbackParameter.Name})");
                             });
 
                             // ------------------------------------------
@@ -7090,15 +7067,15 @@ namespace AutoRest.Java
 
                                     comment.Param(parameterName, parameterDocumentation);
                                 }
-                                if (!string.IsNullOrEmpty(parameterDeclaration))
+                                if (!string.IsNullOrEmpty(parametersDeclaration))
                                 {
                                     comment.Throws("IllegalArgumentException", "thrown if parameters fail the validation");
                                 }
                                 comment.Return("the observable for the request");
                             });
-                            typeBlock.PublicMethod($"Observable<OperationStatus<{restAPIMethodReturnBodyClientType.AsNullable()}>> {restAPIMethod.Name}Async({parameterDeclaration})", function =>
+                            typeBlock.PublicMethod($"Observable<OperationStatus<{restAPIMethodReturnBodyClientType.AsNullable()}>> {restAPIMethod.Name}Async({parametersDeclaration})", function =>
                             {
-                                foreach (AutoRestParameter parameter in requiredNullableParameters)
+                                foreach (AutoRestParameter parameter in autoRestRequiredNullableParameters)
                                 {
                                     string parameterName;
                                     if (!parameter.IsClientProperty)
@@ -7414,7 +7391,7 @@ namespace AutoRest.Java
                                     }
                                 }
 
-                                foreach (AutoRestParameter parameter in methodRetrofitParameters)
+                                foreach (AutoRestParameter parameter in autoRestMethodRetrofitParameters)
                                 {
                                     AutoRestIModelType parameterModelType = parameter.ModelType;
                                     if (parameterModelType != null && !IsNullable(parameter))
@@ -7506,7 +7483,7 @@ namespace AutoRest.Java
                                     }
                                 }
 
-                                string restAPIMethodArgumentList = string.Join(", ", methodOrderedRetrofitParameters
+                                string restAPIMethodArgumentList = string.Join(", ", autoRestMethodOrderedRetrofitParameters
                                     .Select((AutoRestParameter parameter) =>
                                     {
                                         string parameterName;
@@ -7588,7 +7565,7 @@ namespace AutoRest.Java
 
                         string methodArguments = string.Join(", ", parameters.Select((AutoRestParameter parameter) => parameter.Name));
 
-                        string parameterDeclaration = string.Join(", ", parameters.Select(parameter =>
+                        string parametersDeclaration = string.Join(", ", parameters.Select(parameter =>
                         {
                             AutoRestIModelType parameterModelType = parameter.ModelType;
                             if (parameterModelType != null && !IsNullable(parameter))
@@ -7637,7 +7614,7 @@ namespace AutoRest.Java
 
                                 comment.Param(parameterName, parameterDocumentation);
                             }
-                            if (!string.IsNullOrEmpty(parameterDeclaration))
+                            if (!string.IsNullOrEmpty(parametersDeclaration))
                             {
                                 comment.Throws("IllegalArgumentException", "thrown if parameters fail the validation");
                             }
@@ -7651,7 +7628,7 @@ namespace AutoRest.Java
                                 comment.Return($"the {restAPIMethodReturnBodyClientType} object if successful.");
                             }
                         });
-                        typeBlock.PublicMethod($"{restAPIMethodReturnBodyClientType} {restAPIMethod.Name}({parameterDeclaration})", function =>
+                        typeBlock.PublicMethod($"{restAPIMethodReturnBodyClientType} {restAPIMethod.Name}({parametersDeclaration})", function =>
                         {
                             if (autoRestRestAPIMethodReturnType.Body == null)
                             {
@@ -7700,21 +7677,21 @@ namespace AutoRest.Java
 
                                 comment.Param(parameterName, parameterDocumentation);
                             }
-                            comment.Param(serviceCallbackVariableName, "the async ServiceCallback to handle successful and failed responses.");
+                            comment.Param(serviceCallbackParameter.Name, serviceCallbackParameter.Description);
                             comment.Throws("IllegalArgumentException", "thrown if parameters fail the validation");
                             comment.Return($"the {{@link {serviceFutureReturnType}}} object");
                         });
 
-                        string serviceCallbackParameterDeclaration = parameterDeclaration;
-                        if (!serviceCallbackParameterDeclaration.IsNullOrEmpty())
+                        string serviceCallbackParametersDeclaration = parametersDeclaration;
+                        if (!serviceCallbackParametersDeclaration.IsNullOrEmpty())
                         {
-                            serviceCallbackParameterDeclaration += ", ";
+                            serviceCallbackParametersDeclaration += ", ";
                         }
-                        serviceCallbackParameterDeclaration += $"final ServiceCallback<{restAPIMethodReturnBodyClientType.AsNullable()}> {serviceCallbackVariableName}";
+                        serviceCallbackParametersDeclaration += serviceCallbackParameter.Declaration;
 
-                        typeBlock.PublicMethod($"{serviceFutureReturnType} {restAPIMethod.Name}Async({serviceCallbackParameterDeclaration})", function =>
+                        typeBlock.PublicMethod($"{serviceFutureReturnType} {restAPIMethod.Name}Async({serviceCallbackParametersDeclaration})", function =>
                         {
-                            function.Return($"ServiceFuture.fromBody({restAPIMethod.Name}Async({methodArguments}), {serviceCallbackVariableName})");
+                            function.Return($"ServiceFuture.fromBody({restAPIMethod.Name}Async({methodArguments}), {serviceCallbackParameter.Name})");
                         });
 
                         // -----------------------------------------
@@ -7749,15 +7726,15 @@ namespace AutoRest.Java
 
                                 comment.Param(parameterName, parameterDocumentation);
                             }
-                            if (!string.IsNullOrEmpty(parameterDeclaration))
+                            if (!string.IsNullOrEmpty(parametersDeclaration))
                             {
                                 comment.Throws("IllegalArgumentException", "thrown if parameters fail the validation");
                             }
                             comment.Return($"the {{@link {singleRestResponseReturnType}}} object if successful.");
                         });
-                        typeBlock.PublicMethod($"{singleRestResponseReturnType} {restAPIMethod.Name}WithRestResponseAsync({parameterDeclaration})", function =>
+                        typeBlock.PublicMethod($"{singleRestResponseReturnType} {restAPIMethod.Name}WithRestResponseAsync({parametersDeclaration})", function =>
                         {
-                            foreach (AutoRestParameter parameter in requiredNullableParameters)
+                            foreach (AutoRestParameter parameter in autoRestRequiredNullableParameters)
                             {
                                 string parameterName;
                                 if (!parameter.IsClientProperty)
@@ -8073,7 +8050,7 @@ namespace AutoRest.Java
                                 }
                             }
 
-                            foreach (AutoRestParameter parameter in methodRetrofitParameters)
+                            foreach (AutoRestParameter parameter in autoRestMethodRetrofitParameters)
                             {
                                 AutoRestIModelType parameterModelType = parameter.ModelType;
                                 if (parameterModelType != null && !IsNullable(parameter))
@@ -8165,7 +8142,7 @@ namespace AutoRest.Java
                                 }
                             }
 
-                            string restAPIMethodArgumentList = string.Join(", ", methodOrderedRetrofitParameters
+                            string restAPIMethodArgumentList = string.Join(", ", autoRestMethodOrderedRetrofitParameters
                                 .Select((AutoRestParameter parameter) =>
                                 {
                                     string parameterName;
@@ -8235,18 +8212,18 @@ namespace AutoRest.Java
                         // --------------
                         // Async Maybe<T>
                         // --------------
-                        string asyncMethodReturnType;
+                        IType asyncMethodReturnType;
                         if (autoRestRestAPIMethodReturnType.Body != null)
                         {
-                            asyncMethodReturnType = $"Maybe<{pageType}>";
+                            asyncMethodReturnType = new MaybeType(pageType);
                         }
                         else if (isFluentDelete)
                         {
-                            asyncMethodReturnType = "Maybe<Void>";
+                            asyncMethodReturnType = new MaybeType(ClassType.Void);
                         }
                         else
                         {
-                            asyncMethodReturnType = "Completable";
+                            asyncMethodReturnType = ClassType.Completable;
                         }
 
                         IEnumerable<Parameter> clientMethodParameters = ParseClientMethodParameters(parameters, settings);
@@ -8278,13 +8255,13 @@ namespace AutoRest.Java
 
                                 comment.Param(parameterName, parameterDocumentation);
                             }
-                            if (!string.IsNullOrEmpty(parameterDeclaration))
+                            if (!string.IsNullOrEmpty(parametersDeclaration))
                             {
                                 comment.Throws("IllegalArgumentException", "thrown if parameters fail the validation");
                             }
                             comment.Return($"the {{@link {asyncMethodReturnType}}} object if successful.");
                         });
-                        typeBlock.PublicMethod($"{asyncMethodReturnType} {restAPIMethod.Name}Async({parameterDeclaration})", function =>
+                        typeBlock.PublicMethod($"{asyncMethodReturnType} {restAPIMethod.Name}Async({parametersDeclaration})", function =>
                         {
                             function.Line($"return {restAPIMethod.Name}WithRestResponseAsync({methodArguments})");
                             function.Indent(() =>
@@ -8477,8 +8454,6 @@ namespace AutoRest.Java
             {
                 string clientMethodParameterDescription = autoRestClientMethodParameter.Documentation;
 
-                const bool clientMethodParameterIsFinal = false;
-
                 IType clientMethodParameterType = ConvertToClientType(ParseType(autoRestClientMethodParameter.ModelType, settings));
                 if (IsNullable(autoRestClientMethodParameter))
                 {
@@ -8489,7 +8464,7 @@ namespace AutoRest.Java
 
                 bool clientMethodParameterIsRequired = autoRestClientMethodParameter.IsRequired;
 
-                clientMethodParameters.Add(new Parameter(clientMethodParameterDescription, clientMethodParameterIsFinal, clientMethodParameterType, clientMethodParameterName, clientMethodParameterIsRequired));
+                clientMethodParameters.Add(new Parameter(clientMethodParameterDescription, clientMethodParameterType, clientMethodParameterName, clientMethodParameterIsRequired));
             }
 
             return clientMethodParameters;

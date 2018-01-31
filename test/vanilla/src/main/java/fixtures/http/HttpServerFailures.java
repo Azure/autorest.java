@@ -40,7 +40,7 @@ public interface HttpServerFailures {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Error&gt;} object.
      */
-    ServiceFuture<Error> head501Async(final ServiceCallback<Error> serviceCallback);
+    ServiceFuture<Error> head501Async(ServiceCallback<Error> serviceCallback);
 
     /**
      * Return 501 status code - should be represented in the client as an error.
@@ -72,7 +72,7 @@ public interface HttpServerFailures {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Error&gt;} object.
      */
-    ServiceFuture<Error> get501Async(final ServiceCallback<Error> serviceCallback);
+    ServiceFuture<Error> get501Async(ServiceCallback<Error> serviceCallback);
 
     /**
      * Return 501 status code - should be represented in the client as an error.
@@ -104,7 +104,7 @@ public interface HttpServerFailures {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Error&gt;} object.
      */
-    ServiceFuture<Error> post505Async(final ServiceCallback<Error> serviceCallback);
+    ServiceFuture<Error> post505Async(ServiceCallback<Error> serviceCallback);
 
     /**
      * Return 505 status code - should be represented in the client as an error.
@@ -139,7 +139,7 @@ public interface HttpServerFailures {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Error&gt;} object.
      */
-    ServiceFuture<Error> post505Async(Boolean booleanValue, final ServiceCallback<Error> serviceCallback);
+    ServiceFuture<Error> post505Async(Boolean booleanValue, ServiceCallback<Error> serviceCallback);
 
     /**
      * Return 505 status code - should be represented in the client as an error.
@@ -175,7 +175,7 @@ public interface HttpServerFailures {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Error&gt;} object.
      */
-    ServiceFuture<Error> delete505Async(final ServiceCallback<Error> serviceCallback);
+    ServiceFuture<Error> delete505Async(ServiceCallback<Error> serviceCallback);
 
     /**
      * Return 505 status code - should be represented in the client as an error.
@@ -210,7 +210,7 @@ public interface HttpServerFailures {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Error&gt;} object.
      */
-    ServiceFuture<Error> delete505Async(Boolean booleanValue, final ServiceCallback<Error> serviceCallback);
+    ServiceFuture<Error> delete505Async(Boolean booleanValue, ServiceCallback<Error> serviceCallback);
 
     /**
      * Return 505 status code - should be represented in the client as an error.

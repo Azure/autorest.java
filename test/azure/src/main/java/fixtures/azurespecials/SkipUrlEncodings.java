@@ -41,7 +41,7 @@ public interface SkipUrlEncodings {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    ServiceFuture<Void> getMethodPathValidAsync(String unencodedPathParam, final ServiceCallback<Void> serviceCallback);
+    ServiceFuture<Void> getMethodPathValidAsync(String unencodedPathParam, ServiceCallback<Void> serviceCallback);
 
     /**
      * Get method with unencoded path parameter with value 'path1/path2/path3'.
@@ -79,7 +79,7 @@ public interface SkipUrlEncodings {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    ServiceFuture<Void> getPathPathValidAsync(String unencodedPathParam, final ServiceCallback<Void> serviceCallback);
+    ServiceFuture<Void> getPathPathValidAsync(String unencodedPathParam, ServiceCallback<Void> serviceCallback);
 
     /**
      * Get method with unencoded path parameter with value 'path1/path2/path3'.
@@ -114,7 +114,7 @@ public interface SkipUrlEncodings {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    ServiceFuture<Void> getSwaggerPathValidAsync(final ServiceCallback<Void> serviceCallback);
+    ServiceFuture<Void> getSwaggerPathValidAsync(ServiceCallback<Void> serviceCallback);
 
     /**
      * Get method with unencoded path parameter with value 'path1/path2/path3'.
@@ -148,7 +148,7 @@ public interface SkipUrlEncodings {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    ServiceFuture<Void> getMethodQueryValidAsync(String q1, final ServiceCallback<Void> serviceCallback);
+    ServiceFuture<Void> getMethodQueryValidAsync(String q1, ServiceCallback<Void> serviceCallback);
 
     /**
      * Get method with unencoded query parameter with value 'value1&amp;q2=value2&amp;q3=value3'.
@@ -183,7 +183,7 @@ public interface SkipUrlEncodings {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    ServiceFuture<Void> getMethodQueryNullAsync(final ServiceCallback<Void> serviceCallback);
+    ServiceFuture<Void> getMethodQueryNullAsync(ServiceCallback<Void> serviceCallback);
 
     /**
      * Get method with unencoded query parameter with value null.
@@ -217,7 +217,7 @@ public interface SkipUrlEncodings {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    ServiceFuture<Void> getMethodQueryNullAsync(String q1, final ServiceCallback<Void> serviceCallback);
+    ServiceFuture<Void> getMethodQueryNullAsync(String q1, ServiceCallback<Void> serviceCallback);
 
     /**
      * Get method with unencoded query parameter with value null.
@@ -255,7 +255,7 @@ public interface SkipUrlEncodings {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    ServiceFuture<Void> getPathQueryValidAsync(String q1, final ServiceCallback<Void> serviceCallback);
+    ServiceFuture<Void> getPathQueryValidAsync(String q1, ServiceCallback<Void> serviceCallback);
 
     /**
      * Get method with unencoded query parameter with value 'value1&amp;q2=value2&amp;q3=value3'.
@@ -290,7 +290,7 @@ public interface SkipUrlEncodings {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    ServiceFuture<Void> getSwaggerQueryValidAsync(final ServiceCallback<Void> serviceCallback);
+    ServiceFuture<Void> getSwaggerQueryValidAsync(ServiceCallback<Void> serviceCallback);
 
     /**
      * Get method with unencoded query parameter with value 'value1&amp;q2=value2&amp;q3=value3'.

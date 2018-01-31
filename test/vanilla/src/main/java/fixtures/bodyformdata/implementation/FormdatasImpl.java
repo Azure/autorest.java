@@ -94,7 +94,7 @@ public class FormdatasImpl implements Formdatas {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Flowable&lt;byte[]&gt;&gt;} object.
      */
-    public ServiceFuture<Flowable<byte[]>> uploadFileAsync(Flowable<byte[]> fileContent, String fileName, final ServiceCallback<Flowable<byte[]>> serviceCallback) {
+    public ServiceFuture<Flowable<byte[]>> uploadFileAsync(Flowable<byte[]> fileContent, String fileName, ServiceCallback<Flowable<byte[]>> serviceCallback) {
         return ServiceFuture.fromBody(uploadFileAsync(fileContent, fileName), serviceCallback);
     }
 
@@ -158,7 +158,7 @@ public class FormdatasImpl implements Formdatas {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Flowable&lt;byte[]&gt;&gt;} object.
      */
-    public ServiceFuture<Flowable<byte[]>> uploadFileViaBodyAsync(Flowable<byte[]> fileContent, final ServiceCallback<Flowable<byte[]>> serviceCallback) {
+    public ServiceFuture<Flowable<byte[]>> uploadFileViaBodyAsync(Flowable<byte[]> fileContent, ServiceCallback<Flowable<byte[]>> serviceCallback) {
         return ServiceFuture.fromBody(uploadFileViaBodyAsync(fileContent), serviceCallback);
     }
 

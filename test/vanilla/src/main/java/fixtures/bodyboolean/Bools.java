@@ -40,7 +40,7 @@ public interface Bools {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Boolean&gt;} object.
      */
-    ServiceFuture<Boolean> getTrueAsync(final ServiceCallback<Boolean> serviceCallback);
+    ServiceFuture<Boolean> getTrueAsync(ServiceCallback<Boolean> serviceCallback);
 
     /**
      * Get true Boolean value.
@@ -74,7 +74,7 @@ public interface Bools {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    ServiceFuture<Void> putTrueAsync(boolean boolBody, final ServiceCallback<Void> serviceCallback);
+    ServiceFuture<Void> putTrueAsync(boolean boolBody, ServiceCallback<Void> serviceCallback);
 
     /**
      * Set Boolean value true.
@@ -110,7 +110,7 @@ public interface Bools {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Boolean&gt;} object.
      */
-    ServiceFuture<Boolean> getFalseAsync(final ServiceCallback<Boolean> serviceCallback);
+    ServiceFuture<Boolean> getFalseAsync(ServiceCallback<Boolean> serviceCallback);
 
     /**
      * Get false Boolean value.
@@ -144,7 +144,7 @@ public interface Bools {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    ServiceFuture<Void> putFalseAsync(boolean boolBody, final ServiceCallback<Void> serviceCallback);
+    ServiceFuture<Void> putFalseAsync(boolean boolBody, ServiceCallback<Void> serviceCallback);
 
     /**
      * Set Boolean value false.
@@ -180,7 +180,7 @@ public interface Bools {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Boolean&gt;} object.
      */
-    ServiceFuture<Boolean> getNullAsync(final ServiceCallback<Boolean> serviceCallback);
+    ServiceFuture<Boolean> getNullAsync(ServiceCallback<Boolean> serviceCallback);
 
     /**
      * Get null Boolean value.
@@ -212,7 +212,7 @@ public interface Bools {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Boolean&gt;} object.
      */
-    ServiceFuture<Boolean> getInvalidAsync(final ServiceCallback<Boolean> serviceCallback);
+    ServiceFuture<Boolean> getInvalidAsync(ServiceCallback<Boolean> serviceCallback);
 
     /**
      * Get invalid Boolean value.

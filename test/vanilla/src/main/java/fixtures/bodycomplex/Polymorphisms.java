@@ -42,7 +42,7 @@ public interface Polymorphisms {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Fish&gt;} object.
      */
-    ServiceFuture<Fish> getValidAsync(final ServiceCallback<Fish> serviceCallback);
+    ServiceFuture<Fish> getValidAsync(ServiceCallback<Fish> serviceCallback);
 
     /**
      * Get complex types that are polymorphic.
@@ -140,7 +140,7 @@ public interface Polymorphisms {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    ServiceFuture<Void> putValidAsync(Fish complexBody, final ServiceCallback<Void> serviceCallback);
+    ServiceFuture<Void> putValidAsync(Fish complexBody, ServiceCallback<Void> serviceCallback);
 
     /**
      * Put complex types that are polymorphic.
@@ -240,7 +240,7 @@ public interface Polymorphisms {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Salmon&gt;} object.
      */
-    ServiceFuture<Salmon> getComplicatedAsync(final ServiceCallback<Salmon> serviceCallback);
+    ServiceFuture<Salmon> getComplicatedAsync(ServiceCallback<Salmon> serviceCallback);
 
     /**
      * Get complex types that are polymorphic, but not at the root of the hierarchy; also have additional properties.
@@ -274,7 +274,7 @@ public interface Polymorphisms {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    ServiceFuture<Void> putComplicatedAsync(Salmon complexBody, final ServiceCallback<Void> serviceCallback);
+    ServiceFuture<Void> putComplicatedAsync(Salmon complexBody, ServiceCallback<Void> serviceCallback);
 
     /**
      * Put complex types that are polymorphic, but not at the root of the hierarchy; also have additional properties.
@@ -362,7 +362,7 @@ public interface Polymorphisms {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    ServiceFuture<Void> putValidMissingRequiredAsync(Fish complexBody, final ServiceCallback<Void> serviceCallback);
+    ServiceFuture<Void> putValidMissingRequiredAsync(Fish complexBody, ServiceCallback<Void> serviceCallback);
 
     /**
      * Put complex types that are polymorphic, attempting to omit required 'birthday' field - the request should not be allowed from the client.

@@ -3,10 +3,10 @@
 
 namespace AutoRest.Java.Model
 {
-    public class ServiceCallbackType : GenericType
+    public class MaybeType : GenericType
     {
-        public ServiceCallbackType(IType typeArgument)
-            : base("com.microsoft.rest.v2", "ServiceCallback", typeArgument)
+        public MaybeType(IType typeArgument)
+            : base("io.reactivex", "Maybe", typeArgument)
         {
         }
 

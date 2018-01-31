@@ -111,7 +111,7 @@ public class EnumsImpl implements Enums {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Colors&gt;} object.
      */
-    public ServiceFuture<Colors> getNotExpandableAsync(final ServiceCallback<Colors> serviceCallback) {
+    public ServiceFuture<Colors> getNotExpandableAsync(ServiceCallback<Colors> serviceCallback) {
         return ServiceFuture.fromBody(getNotExpandableAsync(), serviceCallback);
     }
 
@@ -162,7 +162,7 @@ public class EnumsImpl implements Enums {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    public ServiceFuture<Void> putNotExpandableAsync(Colors stringBody, final ServiceCallback<Void> serviceCallback) {
+    public ServiceFuture<Void> putNotExpandableAsync(Colors stringBody, ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(putNotExpandableAsync(stringBody), serviceCallback);
     }
 
@@ -210,7 +210,7 @@ public class EnumsImpl implements Enums {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Colors&gt;} object.
      */
-    public ServiceFuture<Colors> getReferencedAsync(final ServiceCallback<Colors> serviceCallback) {
+    public ServiceFuture<Colors> getReferencedAsync(ServiceCallback<Colors> serviceCallback) {
         return ServiceFuture.fromBody(getReferencedAsync(), serviceCallback);
     }
 
@@ -261,7 +261,7 @@ public class EnumsImpl implements Enums {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    public ServiceFuture<Void> putReferencedAsync(Colors enumStringBody, final ServiceCallback<Void> serviceCallback) {
+    public ServiceFuture<Void> putReferencedAsync(Colors enumStringBody, ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(putReferencedAsync(enumStringBody), serviceCallback);
     }
 
@@ -309,7 +309,7 @@ public class EnumsImpl implements Enums {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;RefColorConstant&gt;} object.
      */
-    public ServiceFuture<RefColorConstant> getReferencedConstantAsync(final ServiceCallback<RefColorConstant> serviceCallback) {
+    public ServiceFuture<RefColorConstant> getReferencedConstantAsync(ServiceCallback<RefColorConstant> serviceCallback) {
         return ServiceFuture.fromBody(getReferencedConstantAsync(), serviceCallback);
     }
 
@@ -360,7 +360,7 @@ public class EnumsImpl implements Enums {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    public ServiceFuture<Void> putReferencedConstantAsync(RefColorConstant enumStringBody, final ServiceCallback<Void> serviceCallback) {
+    public ServiceFuture<Void> putReferencedConstantAsync(RefColorConstant enumStringBody, ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(putReferencedConstantAsync(enumStringBody), serviceCallback);
     }
 

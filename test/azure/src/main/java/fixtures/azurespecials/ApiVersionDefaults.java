@@ -38,7 +38,7 @@ public interface ApiVersionDefaults {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    ServiceFuture<Void> getMethodGlobalValidAsync(final ServiceCallback<Void> serviceCallback);
+    ServiceFuture<Void> getMethodGlobalValidAsync(ServiceCallback<Void> serviceCallback);
 
     /**
      * GET method with api-version modeled in global settings.
@@ -69,7 +69,7 @@ public interface ApiVersionDefaults {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    ServiceFuture<Void> getMethodGlobalNotProvidedValidAsync(final ServiceCallback<Void> serviceCallback);
+    ServiceFuture<Void> getMethodGlobalNotProvidedValidAsync(ServiceCallback<Void> serviceCallback);
 
     /**
      * GET method with api-version modeled in global settings.
@@ -100,7 +100,7 @@ public interface ApiVersionDefaults {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    ServiceFuture<Void> getPathGlobalValidAsync(final ServiceCallback<Void> serviceCallback);
+    ServiceFuture<Void> getPathGlobalValidAsync(ServiceCallback<Void> serviceCallback);
 
     /**
      * GET method with api-version modeled in global settings.
@@ -131,7 +131,7 @@ public interface ApiVersionDefaults {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    ServiceFuture<Void> getSwaggerGlobalValidAsync(final ServiceCallback<Void> serviceCallback);
+    ServiceFuture<Void> getSwaggerGlobalValidAsync(ServiceCallback<Void> serviceCallback);
 
     /**
      * GET method with api-version modeled in global settings.

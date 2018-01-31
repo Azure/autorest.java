@@ -45,7 +45,7 @@ public interface Formdatas {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Flowable&lt;byte[]&gt;&gt;} object.
      */
-    ServiceFuture<Flowable<byte[]>> uploadFileAsync(Flowable<byte[]> fileContent, String fileName, final ServiceCallback<Flowable<byte[]>> serviceCallback);
+    ServiceFuture<Flowable<byte[]>> uploadFileAsync(Flowable<byte[]> fileContent, String fileName, ServiceCallback<Flowable<byte[]>> serviceCallback);
 
     /**
      * Upload file.
@@ -86,7 +86,7 @@ public interface Formdatas {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Flowable&lt;byte[]&gt;&gt;} object.
      */
-    ServiceFuture<Flowable<byte[]>> uploadFileViaBodyAsync(Flowable<byte[]> fileContent, final ServiceCallback<Flowable<byte[]>> serviceCallback);
+    ServiceFuture<Flowable<byte[]>> uploadFileViaBodyAsync(Flowable<byte[]> fileContent, ServiceCallback<Flowable<byte[]>> serviceCallback);
 
     /**
      * Upload file.

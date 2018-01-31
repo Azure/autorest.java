@@ -86,7 +86,7 @@ public class XMsClientRequestIdsImpl implements XMsClientRequestIds {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    public ServiceFuture<Void> getAsync(final ServiceCallback<Void> serviceCallback) {
+    public ServiceFuture<Void> getAsync(ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(getAsync(), serviceCallback);
     }
 
@@ -129,7 +129,7 @@ public class XMsClientRequestIdsImpl implements XMsClientRequestIds {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    public ServiceFuture<Void> paramGetAsync(String xMsClientRequestId, final ServiceCallback<Void> serviceCallback) {
+    public ServiceFuture<Void> paramGetAsync(String xMsClientRequestId, ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(paramGetAsync(xMsClientRequestId), serviceCallback);
     }
 

@@ -91,7 +91,7 @@ public class HttpSuccessImpl implements HttpSuccess {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Boolean&gt;} object.
      */
-    public ServiceFuture<Boolean> head200Async(final ServiceCallback<Boolean> serviceCallback) {
+    public ServiceFuture<Boolean> head200Async(ServiceCallback<Boolean> serviceCallback) {
         return ServiceFuture.fromBody(head200Async(), serviceCallback);
     }
 
@@ -140,7 +140,7 @@ public class HttpSuccessImpl implements HttpSuccess {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Boolean&gt;} object.
      */
-    public ServiceFuture<Boolean> head204Async(final ServiceCallback<Boolean> serviceCallback) {
+    public ServiceFuture<Boolean> head204Async(ServiceCallback<Boolean> serviceCallback) {
         return ServiceFuture.fromBody(head204Async(), serviceCallback);
     }
 
@@ -189,7 +189,7 @@ public class HttpSuccessImpl implements HttpSuccess {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Boolean&gt;} object.
      */
-    public ServiceFuture<Boolean> head404Async(final ServiceCallback<Boolean> serviceCallback) {
+    public ServiceFuture<Boolean> head404Async(ServiceCallback<Boolean> serviceCallback) {
         return ServiceFuture.fromBody(head404Async(), serviceCallback);
     }
 

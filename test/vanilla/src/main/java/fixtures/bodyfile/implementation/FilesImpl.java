@@ -91,7 +91,7 @@ public class FilesImpl implements Files {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Flowable&lt;byte[]&gt;&gt;} object.
      */
-    public ServiceFuture<Flowable<byte[]>> getFileAsync(final ServiceCallback<Flowable<byte[]>> serviceCallback) {
+    public ServiceFuture<Flowable<byte[]>> getFileAsync(ServiceCallback<Flowable<byte[]>> serviceCallback) {
         return ServiceFuture.fromBody(getFileAsync(), serviceCallback);
     }
 
@@ -140,7 +140,7 @@ public class FilesImpl implements Files {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Flowable&lt;byte[]&gt;&gt;} object.
      */
-    public ServiceFuture<Flowable<byte[]>> getFileLargeAsync(final ServiceCallback<Flowable<byte[]>> serviceCallback) {
+    public ServiceFuture<Flowable<byte[]>> getFileLargeAsync(ServiceCallback<Flowable<byte[]>> serviceCallback) {
         return ServiceFuture.fromBody(getFileLargeAsync(), serviceCallback);
     }
 
@@ -189,7 +189,7 @@ public class FilesImpl implements Files {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Flowable&lt;byte[]&gt;&gt;} object.
      */
-    public ServiceFuture<Flowable<byte[]>> getEmptyFileAsync(final ServiceCallback<Flowable<byte[]>> serviceCallback) {
+    public ServiceFuture<Flowable<byte[]>> getEmptyFileAsync(ServiceCallback<Flowable<byte[]>> serviceCallback) {
         return ServiceFuture.fromBody(getEmptyFileAsync(), serviceCallback);
     }
 

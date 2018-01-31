@@ -41,7 +41,7 @@ public interface Ints {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Integer&gt;} object.
      */
-    ServiceFuture<Integer> getNullAsync(final ServiceCallback<Integer> serviceCallback);
+    ServiceFuture<Integer> getNullAsync(ServiceCallback<Integer> serviceCallback);
 
     /**
      * Get null Int value.
@@ -73,7 +73,7 @@ public interface Ints {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Integer&gt;} object.
      */
-    ServiceFuture<Integer> getInvalidAsync(final ServiceCallback<Integer> serviceCallback);
+    ServiceFuture<Integer> getInvalidAsync(ServiceCallback<Integer> serviceCallback);
 
     /**
      * Get invalid Int value.
@@ -105,7 +105,7 @@ public interface Ints {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Integer&gt;} object.
      */
-    ServiceFuture<Integer> getOverflowInt32Async(final ServiceCallback<Integer> serviceCallback);
+    ServiceFuture<Integer> getOverflowInt32Async(ServiceCallback<Integer> serviceCallback);
 
     /**
      * Get overflow Int32 value.
@@ -137,7 +137,7 @@ public interface Ints {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Integer&gt;} object.
      */
-    ServiceFuture<Integer> getUnderflowInt32Async(final ServiceCallback<Integer> serviceCallback);
+    ServiceFuture<Integer> getUnderflowInt32Async(ServiceCallback<Integer> serviceCallback);
 
     /**
      * Get underflow Int32 value.
@@ -169,7 +169,7 @@ public interface Ints {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Long&gt;} object.
      */
-    ServiceFuture<Long> getOverflowInt64Async(final ServiceCallback<Long> serviceCallback);
+    ServiceFuture<Long> getOverflowInt64Async(ServiceCallback<Long> serviceCallback);
 
     /**
      * Get overflow Int64 value.
@@ -201,7 +201,7 @@ public interface Ints {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Long&gt;} object.
      */
-    ServiceFuture<Long> getUnderflowInt64Async(final ServiceCallback<Long> serviceCallback);
+    ServiceFuture<Long> getUnderflowInt64Async(ServiceCallback<Long> serviceCallback);
 
     /**
      * Get underflow Int64 value.
@@ -235,7 +235,7 @@ public interface Ints {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    ServiceFuture<Void> putMax32Async(int intBody, final ServiceCallback<Void> serviceCallback);
+    ServiceFuture<Void> putMax32Async(int intBody, ServiceCallback<Void> serviceCallback);
 
     /**
      * Put max int32 value.
@@ -273,7 +273,7 @@ public interface Ints {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    ServiceFuture<Void> putMax64Async(long intBody, final ServiceCallback<Void> serviceCallback);
+    ServiceFuture<Void> putMax64Async(long intBody, ServiceCallback<Void> serviceCallback);
 
     /**
      * Put max int64 value.
@@ -311,7 +311,7 @@ public interface Ints {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    ServiceFuture<Void> putMin32Async(int intBody, final ServiceCallback<Void> serviceCallback);
+    ServiceFuture<Void> putMin32Async(int intBody, ServiceCallback<Void> serviceCallback);
 
     /**
      * Put min int32 value.
@@ -349,7 +349,7 @@ public interface Ints {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    ServiceFuture<Void> putMin64Async(long intBody, final ServiceCallback<Void> serviceCallback);
+    ServiceFuture<Void> putMin64Async(long intBody, ServiceCallback<Void> serviceCallback);
 
     /**
      * Put min int64 value.
@@ -385,7 +385,7 @@ public interface Ints {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;DateTime&gt;} object.
      */
-    ServiceFuture<DateTime> getUnixTimeAsync(final ServiceCallback<DateTime> serviceCallback);
+    ServiceFuture<DateTime> getUnixTimeAsync(ServiceCallback<DateTime> serviceCallback);
 
     /**
      * Get datetime encoded as Unix time value.
@@ -419,7 +419,7 @@ public interface Ints {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    ServiceFuture<Void> putUnixTimeDateAsync(DateTime intBody, final ServiceCallback<Void> serviceCallback);
+    ServiceFuture<Void> putUnixTimeDateAsync(DateTime intBody, ServiceCallback<Void> serviceCallback);
 
     /**
      * Put datetime encoded as Unix time.
@@ -455,7 +455,7 @@ public interface Ints {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;DateTime&gt;} object.
      */
-    ServiceFuture<DateTime> getInvalidUnixTimeAsync(final ServiceCallback<DateTime> serviceCallback);
+    ServiceFuture<DateTime> getInvalidUnixTimeAsync(ServiceCallback<DateTime> serviceCallback);
 
     /**
      * Get invalid Unix time value.
@@ -487,7 +487,7 @@ public interface Ints {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;DateTime&gt;} object.
      */
-    ServiceFuture<DateTime> getNullUnixTimeAsync(final ServiceCallback<DateTime> serviceCallback);
+    ServiceFuture<DateTime> getNullUnixTimeAsync(ServiceCallback<DateTime> serviceCallback);
 
     /**
      * Get null Unix time value.

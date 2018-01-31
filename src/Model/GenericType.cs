@@ -11,12 +11,15 @@ namespace AutoRest.Java.Model
     /// </summary>
     public class GenericType : IType
     {
+        public static GenericType ServiceCallback(IType typeArgument) => new GenericType("com.microsoft.rest.v2", "ServiceCallback", typeArgument);
+        public static GenericType ServiceFuture(IType typeArgument) => new GenericType("com.microsoft.rest.v2", "ServiceFuture", typeArgument);
+
         /// <summary>
         /// Create a new GenericType from the provided properties.
         /// </summary>
         /// <param name="name">The main non-generic type of this generic type.</param>
         /// <param name="typeArguments">The type arguments of this generic type.</param>
-        public GenericType(string package, string name, params IType[] typeArguments)
+        internal GenericType(string package, string name, params IType[] typeArguments)
         {
             Name = name;
             Package = package;

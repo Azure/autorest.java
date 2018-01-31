@@ -40,7 +40,7 @@ public interface Files {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Flowable&lt;byte[]&gt;&gt;} object.
      */
-    ServiceFuture<Flowable<byte[]>> getFileAsync(final ServiceCallback<Flowable<byte[]>> serviceCallback);
+    ServiceFuture<Flowable<byte[]>> getFileAsync(ServiceCallback<Flowable<byte[]>> serviceCallback);
 
     /**
      * Get file.
@@ -72,7 +72,7 @@ public interface Files {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Flowable&lt;byte[]&gt;&gt;} object.
      */
-    ServiceFuture<Flowable<byte[]>> getFileLargeAsync(final ServiceCallback<Flowable<byte[]>> serviceCallback);
+    ServiceFuture<Flowable<byte[]>> getFileLargeAsync(ServiceCallback<Flowable<byte[]>> serviceCallback);
 
     /**
      * Get a large file.
@@ -104,7 +104,7 @@ public interface Files {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Flowable&lt;byte[]&gt;&gt;} object.
      */
-    ServiceFuture<Flowable<byte[]>> getEmptyFileAsync(final ServiceCallback<Flowable<byte[]>> serviceCallback);
+    ServiceFuture<Flowable<byte[]>> getEmptyFileAsync(ServiceCallback<Flowable<byte[]>> serviceCallback);
 
     /**
      * Get empty file.

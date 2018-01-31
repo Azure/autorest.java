@@ -243,7 +243,7 @@ public class HeadersImpl implements Headers {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    public ServiceFuture<Void> paramExistingKeyAsync(String userAgent, final ServiceCallback<Void> serviceCallback) {
+    public ServiceFuture<Void> paramExistingKeyAsync(String userAgent, ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(paramExistingKeyAsync(userAgent), serviceCallback);
     }
 
@@ -290,7 +290,7 @@ public class HeadersImpl implements Headers {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    public ServiceFuture<Void> responseExistingKeyAsync(final ServiceCallback<Void> serviceCallback) {
+    public ServiceFuture<Void> responseExistingKeyAsync(ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(responseExistingKeyAsync(), serviceCallback);
     }
 
@@ -333,7 +333,7 @@ public class HeadersImpl implements Headers {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    public ServiceFuture<Void> paramProtectedKeyAsync(String contentType, final ServiceCallback<Void> serviceCallback) {
+    public ServiceFuture<Void> paramProtectedKeyAsync(String contentType, ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(paramProtectedKeyAsync(contentType), serviceCallback);
     }
 
@@ -380,7 +380,7 @@ public class HeadersImpl implements Headers {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    public ServiceFuture<Void> responseProtectedKeyAsync(final ServiceCallback<Void> serviceCallback) {
+    public ServiceFuture<Void> responseProtectedKeyAsync(ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(responseProtectedKeyAsync(), serviceCallback);
     }
 
@@ -425,7 +425,7 @@ public class HeadersImpl implements Headers {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    public ServiceFuture<Void> paramIntegerAsync(String scenario, int value, final ServiceCallback<Void> serviceCallback) {
+    public ServiceFuture<Void> paramIntegerAsync(String scenario, int value, ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(paramIntegerAsync(scenario, value), serviceCallback);
     }
 
@@ -477,7 +477,7 @@ public class HeadersImpl implements Headers {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    public ServiceFuture<Void> responseIntegerAsync(String scenario, final ServiceCallback<Void> serviceCallback) {
+    public ServiceFuture<Void> responseIntegerAsync(String scenario, ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(responseIntegerAsync(scenario), serviceCallback);
     }
 
@@ -529,7 +529,7 @@ public class HeadersImpl implements Headers {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    public ServiceFuture<Void> paramLongAsync(String scenario, long value, final ServiceCallback<Void> serviceCallback) {
+    public ServiceFuture<Void> paramLongAsync(String scenario, long value, ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(paramLongAsync(scenario, value), serviceCallback);
     }
 
@@ -581,7 +581,7 @@ public class HeadersImpl implements Headers {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    public ServiceFuture<Void> responseLongAsync(String scenario, final ServiceCallback<Void> serviceCallback) {
+    public ServiceFuture<Void> responseLongAsync(String scenario, ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(responseLongAsync(scenario), serviceCallback);
     }
 
@@ -633,7 +633,7 @@ public class HeadersImpl implements Headers {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    public ServiceFuture<Void> paramFloatAsync(String scenario, double value, final ServiceCallback<Void> serviceCallback) {
+    public ServiceFuture<Void> paramFloatAsync(String scenario, double value, ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(paramFloatAsync(scenario, value), serviceCallback);
     }
 
@@ -685,7 +685,7 @@ public class HeadersImpl implements Headers {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    public ServiceFuture<Void> responseFloatAsync(String scenario, final ServiceCallback<Void> serviceCallback) {
+    public ServiceFuture<Void> responseFloatAsync(String scenario, ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(responseFloatAsync(scenario), serviceCallback);
     }
 
@@ -737,7 +737,7 @@ public class HeadersImpl implements Headers {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    public ServiceFuture<Void> paramDoubleAsync(String scenario, double value, final ServiceCallback<Void> serviceCallback) {
+    public ServiceFuture<Void> paramDoubleAsync(String scenario, double value, ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(paramDoubleAsync(scenario, value), serviceCallback);
     }
 
@@ -789,7 +789,7 @@ public class HeadersImpl implements Headers {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    public ServiceFuture<Void> responseDoubleAsync(String scenario, final ServiceCallback<Void> serviceCallback) {
+    public ServiceFuture<Void> responseDoubleAsync(String scenario, ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(responseDoubleAsync(scenario), serviceCallback);
     }
 
@@ -841,7 +841,7 @@ public class HeadersImpl implements Headers {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    public ServiceFuture<Void> paramBoolAsync(String scenario, boolean value, final ServiceCallback<Void> serviceCallback) {
+    public ServiceFuture<Void> paramBoolAsync(String scenario, boolean value, ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(paramBoolAsync(scenario, value), serviceCallback);
     }
 
@@ -893,7 +893,7 @@ public class HeadersImpl implements Headers {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    public ServiceFuture<Void> responseBoolAsync(String scenario, final ServiceCallback<Void> serviceCallback) {
+    public ServiceFuture<Void> responseBoolAsync(String scenario, ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(responseBoolAsync(scenario), serviceCallback);
     }
 
@@ -943,7 +943,7 @@ public class HeadersImpl implements Headers {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    public ServiceFuture<Void> paramStringAsync(String scenario, final ServiceCallback<Void> serviceCallback) {
+    public ServiceFuture<Void> paramStringAsync(String scenario, ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(paramStringAsync(scenario), serviceCallback);
     }
 
@@ -996,7 +996,7 @@ public class HeadersImpl implements Headers {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    public ServiceFuture<Void> paramStringAsync(String scenario, String value, final ServiceCallback<Void> serviceCallback) {
+    public ServiceFuture<Void> paramStringAsync(String scenario, String value, ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(paramStringAsync(scenario, value), serviceCallback);
     }
 
@@ -1048,7 +1048,7 @@ public class HeadersImpl implements Headers {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    public ServiceFuture<Void> responseStringAsync(String scenario, final ServiceCallback<Void> serviceCallback) {
+    public ServiceFuture<Void> responseStringAsync(String scenario, ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(responseStringAsync(scenario), serviceCallback);
     }
 
@@ -1100,7 +1100,7 @@ public class HeadersImpl implements Headers {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    public ServiceFuture<Void> paramDateAsync(String scenario, LocalDate value, final ServiceCallback<Void> serviceCallback) {
+    public ServiceFuture<Void> paramDateAsync(String scenario, LocalDate value, ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(paramDateAsync(scenario, value), serviceCallback);
     }
 
@@ -1155,7 +1155,7 @@ public class HeadersImpl implements Headers {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    public ServiceFuture<Void> responseDateAsync(String scenario, final ServiceCallback<Void> serviceCallback) {
+    public ServiceFuture<Void> responseDateAsync(String scenario, ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(responseDateAsync(scenario), serviceCallback);
     }
 
@@ -1207,7 +1207,7 @@ public class HeadersImpl implements Headers {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    public ServiceFuture<Void> paramDatetimeAsync(String scenario, DateTime value, final ServiceCallback<Void> serviceCallback) {
+    public ServiceFuture<Void> paramDatetimeAsync(String scenario, DateTime value, ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(paramDatetimeAsync(scenario, value), serviceCallback);
     }
 
@@ -1262,7 +1262,7 @@ public class HeadersImpl implements Headers {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    public ServiceFuture<Void> responseDatetimeAsync(String scenario, final ServiceCallback<Void> serviceCallback) {
+    public ServiceFuture<Void> responseDatetimeAsync(String scenario, ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(responseDatetimeAsync(scenario), serviceCallback);
     }
 
@@ -1312,7 +1312,7 @@ public class HeadersImpl implements Headers {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    public ServiceFuture<Void> paramDatetimeRfc1123Async(String scenario, final ServiceCallback<Void> serviceCallback) {
+    public ServiceFuture<Void> paramDatetimeRfc1123Async(String scenario, ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(paramDatetimeRfc1123Async(scenario), serviceCallback);
     }
 
@@ -1369,7 +1369,7 @@ public class HeadersImpl implements Headers {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    public ServiceFuture<Void> paramDatetimeRfc1123Async(String scenario, DateTime value, final ServiceCallback<Void> serviceCallback) {
+    public ServiceFuture<Void> paramDatetimeRfc1123Async(String scenario, DateTime value, ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(paramDatetimeRfc1123Async(scenario, value), serviceCallback);
     }
 
@@ -1425,7 +1425,7 @@ public class HeadersImpl implements Headers {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    public ServiceFuture<Void> responseDatetimeRfc1123Async(String scenario, final ServiceCallback<Void> serviceCallback) {
+    public ServiceFuture<Void> responseDatetimeRfc1123Async(String scenario, ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(responseDatetimeRfc1123Async(scenario), serviceCallback);
     }
 
@@ -1477,7 +1477,7 @@ public class HeadersImpl implements Headers {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    public ServiceFuture<Void> paramDurationAsync(String scenario, Period value, final ServiceCallback<Void> serviceCallback) {
+    public ServiceFuture<Void> paramDurationAsync(String scenario, Period value, ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(paramDurationAsync(scenario, value), serviceCallback);
     }
 
@@ -1532,7 +1532,7 @@ public class HeadersImpl implements Headers {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    public ServiceFuture<Void> responseDurationAsync(String scenario, final ServiceCallback<Void> serviceCallback) {
+    public ServiceFuture<Void> responseDurationAsync(String scenario, ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(responseDurationAsync(scenario), serviceCallback);
     }
 
@@ -1584,7 +1584,7 @@ public class HeadersImpl implements Headers {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    public ServiceFuture<Void> paramByteAsync(String scenario, byte[] value, final ServiceCallback<Void> serviceCallback) {
+    public ServiceFuture<Void> paramByteAsync(String scenario, byte[] value, ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(paramByteAsync(scenario, value), serviceCallback);
     }
 
@@ -1640,7 +1640,7 @@ public class HeadersImpl implements Headers {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    public ServiceFuture<Void> responseByteAsync(String scenario, final ServiceCallback<Void> serviceCallback) {
+    public ServiceFuture<Void> responseByteAsync(String scenario, ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(responseByteAsync(scenario), serviceCallback);
     }
 
@@ -1690,7 +1690,7 @@ public class HeadersImpl implements Headers {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    public ServiceFuture<Void> paramEnumAsync(String scenario, final ServiceCallback<Void> serviceCallback) {
+    public ServiceFuture<Void> paramEnumAsync(String scenario, ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(paramEnumAsync(scenario), serviceCallback);
     }
 
@@ -1743,7 +1743,7 @@ public class HeadersImpl implements Headers {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    public ServiceFuture<Void> paramEnumAsync(String scenario, GreyscaleColors value, final ServiceCallback<Void> serviceCallback) {
+    public ServiceFuture<Void> paramEnumAsync(String scenario, GreyscaleColors value, ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(paramEnumAsync(scenario, value), serviceCallback);
     }
 
@@ -1795,7 +1795,7 @@ public class HeadersImpl implements Headers {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    public ServiceFuture<Void> responseEnumAsync(String scenario, final ServiceCallback<Void> serviceCallback) {
+    public ServiceFuture<Void> responseEnumAsync(String scenario, ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(responseEnumAsync(scenario), serviceCallback);
     }
 
@@ -1842,7 +1842,7 @@ public class HeadersImpl implements Headers {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    public ServiceFuture<Void> customRequestIdAsync(final ServiceCallback<Void> serviceCallback) {
+    public ServiceFuture<Void> customRequestIdAsync(ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(customRequestIdAsync(), serviceCallback);
     }
 

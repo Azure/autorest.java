@@ -31,6 +31,7 @@ namespace AutoRest.Java.Model
         public static readonly ClassType UnixTimeLong = new ClassType("java.lang", "Long", null, null, false);
         public static readonly ClassType AzureEnvironment = new ClassType("com.microsoft.azure.v2", "AzureEnvironment", null, null, false);
         public static readonly ClassType HttpPipeline = new ClassType("com.microsoft.rest.v2.http", "HttpPipeline", null, null, false);
+        public static readonly ClassType Completable = new ClassType("io.reactivex", "Completable", null, null, false);
 
         public ClassType(string package, string name, IEnumerable<string> implementationImports, IDictionary<string,string> extensions, bool isInnerModelType)
         {

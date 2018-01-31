@@ -200,7 +200,7 @@ public class PrimitivesImpl implements Primitives {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;IntWrapper&gt;} object.
      */
-    public ServiceFuture<IntWrapper> getIntAsync(final ServiceCallback<IntWrapper> serviceCallback) {
+    public ServiceFuture<IntWrapper> getIntAsync(ServiceCallback<IntWrapper> serviceCallback) {
         return ServiceFuture.fromBody(getIntAsync(), serviceCallback);
     }
 
@@ -251,7 +251,7 @@ public class PrimitivesImpl implements Primitives {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    public ServiceFuture<Void> putIntAsync(IntWrapper complexBody, final ServiceCallback<Void> serviceCallback) {
+    public ServiceFuture<Void> putIntAsync(IntWrapper complexBody, ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(putIntAsync(complexBody), serviceCallback);
     }
 
@@ -300,7 +300,7 @@ public class PrimitivesImpl implements Primitives {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;LongWrapper&gt;} object.
      */
-    public ServiceFuture<LongWrapper> getLongAsync(final ServiceCallback<LongWrapper> serviceCallback) {
+    public ServiceFuture<LongWrapper> getLongAsync(ServiceCallback<LongWrapper> serviceCallback) {
         return ServiceFuture.fromBody(getLongAsync(), serviceCallback);
     }
 
@@ -351,7 +351,7 @@ public class PrimitivesImpl implements Primitives {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    public ServiceFuture<Void> putLongAsync(LongWrapper complexBody, final ServiceCallback<Void> serviceCallback) {
+    public ServiceFuture<Void> putLongAsync(LongWrapper complexBody, ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(putLongAsync(complexBody), serviceCallback);
     }
 
@@ -400,7 +400,7 @@ public class PrimitivesImpl implements Primitives {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;FloatWrapper&gt;} object.
      */
-    public ServiceFuture<FloatWrapper> getFloatAsync(final ServiceCallback<FloatWrapper> serviceCallback) {
+    public ServiceFuture<FloatWrapper> getFloatAsync(ServiceCallback<FloatWrapper> serviceCallback) {
         return ServiceFuture.fromBody(getFloatAsync(), serviceCallback);
     }
 
@@ -451,7 +451,7 @@ public class PrimitivesImpl implements Primitives {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    public ServiceFuture<Void> putFloatAsync(FloatWrapper complexBody, final ServiceCallback<Void> serviceCallback) {
+    public ServiceFuture<Void> putFloatAsync(FloatWrapper complexBody, ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(putFloatAsync(complexBody), serviceCallback);
     }
 
@@ -500,7 +500,7 @@ public class PrimitivesImpl implements Primitives {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;DoubleWrapper&gt;} object.
      */
-    public ServiceFuture<DoubleWrapper> getDoubleAsync(final ServiceCallback<DoubleWrapper> serviceCallback) {
+    public ServiceFuture<DoubleWrapper> getDoubleAsync(ServiceCallback<DoubleWrapper> serviceCallback) {
         return ServiceFuture.fromBody(getDoubleAsync(), serviceCallback);
     }
 
@@ -551,7 +551,7 @@ public class PrimitivesImpl implements Primitives {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    public ServiceFuture<Void> putDoubleAsync(DoubleWrapper complexBody, final ServiceCallback<Void> serviceCallback) {
+    public ServiceFuture<Void> putDoubleAsync(DoubleWrapper complexBody, ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(putDoubleAsync(complexBody), serviceCallback);
     }
 
@@ -600,7 +600,7 @@ public class PrimitivesImpl implements Primitives {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;BooleanWrapper&gt;} object.
      */
-    public ServiceFuture<BooleanWrapper> getBoolAsync(final ServiceCallback<BooleanWrapper> serviceCallback) {
+    public ServiceFuture<BooleanWrapper> getBoolAsync(ServiceCallback<BooleanWrapper> serviceCallback) {
         return ServiceFuture.fromBody(getBoolAsync(), serviceCallback);
     }
 
@@ -651,7 +651,7 @@ public class PrimitivesImpl implements Primitives {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    public ServiceFuture<Void> putBoolAsync(BooleanWrapper complexBody, final ServiceCallback<Void> serviceCallback) {
+    public ServiceFuture<Void> putBoolAsync(BooleanWrapper complexBody, ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(putBoolAsync(complexBody), serviceCallback);
     }
 
@@ -700,7 +700,7 @@ public class PrimitivesImpl implements Primitives {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;StringWrapper&gt;} object.
      */
-    public ServiceFuture<StringWrapper> getStringAsync(final ServiceCallback<StringWrapper> serviceCallback) {
+    public ServiceFuture<StringWrapper> getStringAsync(ServiceCallback<StringWrapper> serviceCallback) {
         return ServiceFuture.fromBody(getStringAsync(), serviceCallback);
     }
 
@@ -751,7 +751,7 @@ public class PrimitivesImpl implements Primitives {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    public ServiceFuture<Void> putStringAsync(StringWrapper complexBody, final ServiceCallback<Void> serviceCallback) {
+    public ServiceFuture<Void> putStringAsync(StringWrapper complexBody, ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(putStringAsync(complexBody), serviceCallback);
     }
 
@@ -800,7 +800,7 @@ public class PrimitivesImpl implements Primitives {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;DateWrapper&gt;} object.
      */
-    public ServiceFuture<DateWrapper> getDateAsync(final ServiceCallback<DateWrapper> serviceCallback) {
+    public ServiceFuture<DateWrapper> getDateAsync(ServiceCallback<DateWrapper> serviceCallback) {
         return ServiceFuture.fromBody(getDateAsync(), serviceCallback);
     }
 
@@ -851,7 +851,7 @@ public class PrimitivesImpl implements Primitives {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    public ServiceFuture<Void> putDateAsync(DateWrapper complexBody, final ServiceCallback<Void> serviceCallback) {
+    public ServiceFuture<Void> putDateAsync(DateWrapper complexBody, ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(putDateAsync(complexBody), serviceCallback);
     }
 
@@ -900,7 +900,7 @@ public class PrimitivesImpl implements Primitives {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;DatetimeWrapper&gt;} object.
      */
-    public ServiceFuture<DatetimeWrapper> getDateTimeAsync(final ServiceCallback<DatetimeWrapper> serviceCallback) {
+    public ServiceFuture<DatetimeWrapper> getDateTimeAsync(ServiceCallback<DatetimeWrapper> serviceCallback) {
         return ServiceFuture.fromBody(getDateTimeAsync(), serviceCallback);
     }
 
@@ -951,7 +951,7 @@ public class PrimitivesImpl implements Primitives {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    public ServiceFuture<Void> putDateTimeAsync(DatetimeWrapper complexBody, final ServiceCallback<Void> serviceCallback) {
+    public ServiceFuture<Void> putDateTimeAsync(DatetimeWrapper complexBody, ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(putDateTimeAsync(complexBody), serviceCallback);
     }
 
@@ -1000,7 +1000,7 @@ public class PrimitivesImpl implements Primitives {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Datetimerfc1123Wrapper&gt;} object.
      */
-    public ServiceFuture<Datetimerfc1123Wrapper> getDateTimeRfc1123Async(final ServiceCallback<Datetimerfc1123Wrapper> serviceCallback) {
+    public ServiceFuture<Datetimerfc1123Wrapper> getDateTimeRfc1123Async(ServiceCallback<Datetimerfc1123Wrapper> serviceCallback) {
         return ServiceFuture.fromBody(getDateTimeRfc1123Async(), serviceCallback);
     }
 
@@ -1051,7 +1051,7 @@ public class PrimitivesImpl implements Primitives {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    public ServiceFuture<Void> putDateTimeRfc1123Async(Datetimerfc1123Wrapper complexBody, final ServiceCallback<Void> serviceCallback) {
+    public ServiceFuture<Void> putDateTimeRfc1123Async(Datetimerfc1123Wrapper complexBody, ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(putDateTimeRfc1123Async(complexBody), serviceCallback);
     }
 
@@ -1100,7 +1100,7 @@ public class PrimitivesImpl implements Primitives {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;DurationWrapper&gt;} object.
      */
-    public ServiceFuture<DurationWrapper> getDurationAsync(final ServiceCallback<DurationWrapper> serviceCallback) {
+    public ServiceFuture<DurationWrapper> getDurationAsync(ServiceCallback<DurationWrapper> serviceCallback) {
         return ServiceFuture.fromBody(getDurationAsync(), serviceCallback);
     }
 
@@ -1151,7 +1151,7 @@ public class PrimitivesImpl implements Primitives {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    public ServiceFuture<Void> putDurationAsync(DurationWrapper complexBody, final ServiceCallback<Void> serviceCallback) {
+    public ServiceFuture<Void> putDurationAsync(DurationWrapper complexBody, ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(putDurationAsync(complexBody), serviceCallback);
     }
 
@@ -1200,7 +1200,7 @@ public class PrimitivesImpl implements Primitives {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;ByteWrapper&gt;} object.
      */
-    public ServiceFuture<ByteWrapper> getByteAsync(final ServiceCallback<ByteWrapper> serviceCallback) {
+    public ServiceFuture<ByteWrapper> getByteAsync(ServiceCallback<ByteWrapper> serviceCallback) {
         return ServiceFuture.fromBody(getByteAsync(), serviceCallback);
     }
 
@@ -1251,7 +1251,7 @@ public class PrimitivesImpl implements Primitives {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    public ServiceFuture<Void> putByteAsync(ByteWrapper complexBody, final ServiceCallback<Void> serviceCallback) {
+    public ServiceFuture<Void> putByteAsync(ByteWrapper complexBody, ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(putByteAsync(complexBody), serviceCallback);
     }
 
