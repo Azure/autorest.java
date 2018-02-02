@@ -21,7 +21,8 @@ namespace AutoRest.Java.Model
         /// <param name="serviceClientName">The name of the ServiceClient that contains this MethodGroupClient.</param>
         /// <param name="variableType">The type of this MethodGroupClient when it is used as a variable.</param>
         /// <param name="variableName">The variable name for any instances of this MethodGroupClient.</param>
-        public MethodGroupClient(string className, string interfaceName, IEnumerable<string> implementedInterfaces, RestAPI restAPI, IEnumerable<string> imports, string serviceClientName, string variableType, string variableName)
+        /// <param name="clientMethods">The ClientMethods for this MethodGroupClient.</param>
+        public MethodGroupClient(string className, string interfaceName, IEnumerable<string> implementedInterfaces, RestAPI restAPI, IEnumerable<string> imports, string serviceClientName, string variableType, string variableName, IEnumerable<ClientMethod> clientMethods)
         {
             ClassName = className;
             InterfaceName = interfaceName;
@@ -31,6 +32,7 @@ namespace AutoRest.Java.Model
             ServiceClientName = serviceClientName;
             VariableType = variableType;
             VariableName = variableName;
+            ClientMethods = clientMethods;
         }
 
         /// <summary>
@@ -76,7 +78,7 @@ namespace AutoRest.Java.Model
         /// <summary>
         /// The client method overloads for this MethodGroupClient.
         /// </summary>
-        public IEnumerable<Method> ClientMethods { get; }
+        public IEnumerable<ClientMethod> ClientMethods { get; }
 
         /// <summary>
         /// Add this property's imports to the provided ISet of imports.
@@ -96,6 +98,11 @@ namespace AutoRest.Java.Model
             }
 
             RestAPI.AddImportsTo(imports, includeImplementationImports, settings);
+
+            foreach (ClientMethod clientMethod in ClientMethods)
+            {
+                clientMethod.AddImportsTo(imports, includeImplementationImports);
+            }
         }
     }
 }

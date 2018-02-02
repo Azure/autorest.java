@@ -314,7 +314,7 @@ public class Datetimerfc1123sImpl implements Datetimerfc1123s {
     /**
      * Put max datetime value Fri, 31 Dec 9999 23:59:59 GMT.
      *
-     * @param datetimeBody the DateTimeRfc1123 value.
+     * @param datetimeBody the DateTime value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -326,7 +326,7 @@ public class Datetimerfc1123sImpl implements Datetimerfc1123s {
     /**
      * Put max datetime value Fri, 31 Dec 9999 23:59:59 GMT.
      *
-     * @param datetimeBody the DateTimeRfc1123 value.
+     * @param datetimeBody the DateTime value.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
@@ -338,7 +338,7 @@ public class Datetimerfc1123sImpl implements Datetimerfc1123s {
     /**
      * Put max datetime value Fri, 31 Dec 9999 23:59:59 GMT.
      *
-     * @param datetimeBody the DateTimeRfc1123 value.
+     * @param datetimeBody the DateTime value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
      */
@@ -353,7 +353,7 @@ public class Datetimerfc1123sImpl implements Datetimerfc1123s {
     /**
      * Put max datetime value Fri, 31 Dec 9999 23:59:59 GMT.
      *
-     * @param datetimeBody the DateTimeRfc1123 value.
+     * @param datetimeBody the DateTime value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Completable} object if successful.
      */
@@ -463,7 +463,7 @@ public class Datetimerfc1123sImpl implements Datetimerfc1123s {
     /**
      * Put min datetime value Mon, 1 Jan 0001 00:00:00 GMT.
      *
-     * @param datetimeBody the DateTimeRfc1123 value.
+     * @param datetimeBody the DateTime value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -475,7 +475,7 @@ public class Datetimerfc1123sImpl implements Datetimerfc1123s {
     /**
      * Put min datetime value Mon, 1 Jan 0001 00:00:00 GMT.
      *
-     * @param datetimeBody the DateTimeRfc1123 value.
+     * @param datetimeBody the DateTime value.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
@@ -487,7 +487,7 @@ public class Datetimerfc1123sImpl implements Datetimerfc1123s {
     /**
      * Put min datetime value Mon, 1 Jan 0001 00:00:00 GMT.
      *
-     * @param datetimeBody the DateTimeRfc1123 value.
+     * @param datetimeBody the DateTime value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
      */
@@ -502,7 +502,7 @@ public class Datetimerfc1123sImpl implements Datetimerfc1123s {
     /**
      * Put min datetime value Mon, 1 Jan 0001 00:00:00 GMT.
      *
-     * @param datetimeBody the DateTimeRfc1123 value.
+     * @param datetimeBody the DateTime value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Completable} object if successful.
      */

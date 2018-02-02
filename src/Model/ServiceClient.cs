@@ -22,7 +22,7 @@ namespace AutoRest.Java.Model
         /// <param name="properties">The properties of this ServiceClient</param>
         /// <param name="constructors">The constructors for this ServiceClient.</param>
         /// <param name="clientMethods">The client method overloads for this ServiceClient.</param>
-        public ServiceClient(string className, string interfaceName, IEnumerable<string> imports, RestAPI restAPI, IEnumerable<MethodGroupClient> methodGroupClients, IEnumerable<ServiceClientProperty> properties, IEnumerable<Constructor> constructors, IEnumerable<Method> clientMethods)
+        public ServiceClient(string className, string interfaceName, IEnumerable<string> imports, RestAPI restAPI, IEnumerable<MethodGroupClient> methodGroupClients, IEnumerable<ServiceClientProperty> properties, IEnumerable<Constructor> constructors, IEnumerable<ClientMethod> clientMethods)
         {
             ClassName = className;
             InterfaceName = interfaceName;
@@ -72,7 +72,7 @@ namespace AutoRest.Java.Model
         /// <summary>
         /// The client method overloads for this ServiceClient.
         /// </summary>
-        public IEnumerable<Method> ClientMethods { get; }
+        public IEnumerable<ClientMethod> ClientMethods { get; }
 
         /// <summary>
         /// Add this property's imports to the provided ISet of imports.
@@ -103,15 +103,20 @@ namespace AutoRest.Java.Model
 
             foreach (ServiceClientProperty serviceClientProperty in Properties)
             {
-                serviceClientProperty.AddImportsTo(imports, true);
+                serviceClientProperty.AddImportsTo(imports, includeImplementationImports);
             }
 
             foreach (Constructor constructor in Constructors)
             {
-                constructor.AddImportsTo(imports, true);
+                constructor.AddImportsTo(imports, includeImplementationImports);
             }
 
-            RestAPI?.AddImportsTo(imports, true, settings);
+            RestAPI?.AddImportsTo(imports, includeImplementationImports, settings);
+
+            foreach (ClientMethod clientMethod in ClientMethods)
+            {
+                clientMethod.AddImportsTo(imports, includeImplementationImports);
+            }
         }
     }
 }

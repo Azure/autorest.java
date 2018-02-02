@@ -4,6 +4,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
+using AutoRestMethod = AutoRest.Core.Model.Method;
 
 namespace AutoRest.Java.Model
 {
@@ -31,8 +32,8 @@ namespace AutoRest.Java.Model
         /// <param name="simulateAsPagingOperation">Whether or not to simulate this method as a paging operation.</param>
         /// <param name="isLongRunningOperation">Whether or not this method is a long running operation.</param>
         /// <param name="returnValueClientType">The return value's type as it is returned from the client.</param>
-        /// <param name="clientMethodParameters">The parameters that will be exposed for this method's client method overloads.</param>
-        public RestAPIMethod(string requestContentType, IType returnType, bool isPagingNextOperation, string httpMethod, string urlPath, IEnumerable<HttpStatusCode> responseExpectedStatusCodes, ClassType unexpectedResponseExceptionType, string name, IEnumerable<RestAPIParameter> parameters, bool isPagingOperation, string description, bool simulateAsPagingOperation, bool isLongRunningOperation, IType returnValueWireType, IEnumerable<Parameter> clientMethodParameters)
+        /// <param name="autoRestMethod">The AutoRestMethod that this RestAPIMethod was created from.</param>
+        public RestAPIMethod(string requestContentType, IType returnType, bool isPagingNextOperation, string httpMethod, string urlPath, IEnumerable<HttpStatusCode> responseExpectedStatusCodes, ClassType unexpectedResponseExceptionType, string name, IEnumerable<RestAPIParameter> parameters, bool isPagingOperation, string description, bool simulateAsPagingOperation, bool isLongRunningOperation, IType returnValueWireType, AutoRestMethod autoRestMethod)
         {
             RequestContentType = requestContentType;
             ReturnType = returnType;
@@ -48,7 +49,7 @@ namespace AutoRest.Java.Model
             SimulateAsPagingOperation = simulateAsPagingOperation;
             IsLongRunningOperation = isLongRunningOperation;
             ReturnValueWireType = returnValueWireType;
-            ClientMethodParameters = clientMethodParameters;
+            AutoRestMethod = autoRestMethod;
         }
 
         /// <summary>
@@ -122,9 +123,9 @@ namespace AutoRest.Java.Model
         public IType ReturnValueWireType { get; }
 
         /// <summary>
-        /// The parameters that will be exposed for this method's client method overloads.
+        /// The AutoRestMethod that this RestAPIMethod was created from.
         /// </summary>
-        public IEnumerable<Parameter> ClientMethodParameters { get; }
+        public AutoRestMethod AutoRestMethod { get; }
 
         /// <summary>
         /// Add this property's imports to the provided ISet of imports.

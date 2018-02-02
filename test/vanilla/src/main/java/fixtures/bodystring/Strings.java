@@ -434,7 +434,7 @@ public interface Strings {
     /**
      * Put value that is base64url encoded.
      *
-     * @param stringBody the Base64Url value.
+     * @param stringBody the byte[] value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -444,7 +444,7 @@ public interface Strings {
     /**
      * Put value that is base64url encoded.
      *
-     * @param stringBody the Base64Url value.
+     * @param stringBody the byte[] value.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
@@ -454,7 +454,7 @@ public interface Strings {
     /**
      * Put value that is base64url encoded.
      *
-     * @param stringBody the Base64Url value.
+     * @param stringBody the byte[] value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
      */
@@ -463,7 +463,7 @@ public interface Strings {
     /**
      * Put value that is base64url encoded.
      *
-     * @param stringBody the Base64Url value.
+     * @param stringBody the byte[] value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Completable} object if successful.
      */
