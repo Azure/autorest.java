@@ -100,7 +100,7 @@ namespace AutoRest.Java
             "Duration",
             "Period",
             "BigDecimal",
-            "Flowable<byte[]>"
+            "Flowable<ByteBuffer>"
         };
 
         private const string ClientRuntimePackage = "com.microsoft.rest.v2:client-runtime:2.0.0-SNAPSHOT from snapshot repo https://oss.sonatype.org/content/repositories/snapshots/";
@@ -2136,7 +2136,7 @@ namespace AutoRest.Java
                             result = new[] { "java.math.BigDecimal" };
                             break;
                         case KnownPrimaryType.Stream:
-                            result = new[] { "io.reactivex.Flowable" };
+                            result = new[] { "io.reactivex.Flowable", "java.nio.ByteBuffer" };
                             break;
                         case KnownPrimaryType.TimeSpan:
                             result = new[] { "org.joda.time.Period" };
@@ -2392,7 +2392,7 @@ namespace AutoRest.Java
                             result = PrimaryTypeGetWantNullable(primaryType) ? "Long" : "long";
                             break;
                         case KnownPrimaryType.Stream:
-                            result = "Flowable<byte[]>";
+                            result = "Flowable<ByteBuffer>";
                             break;
                         case KnownPrimaryType.String:
                             result = "String";
