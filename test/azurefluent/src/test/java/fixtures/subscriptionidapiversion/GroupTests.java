@@ -1,16 +1,19 @@
 package fixtures.subscriptionidapiversion;
 
-import com.microsoft.rest.v2.credentials.BasicAuthenticationCredentials;
 import com.microsoft.rest.v2.http.HttpPipeline;
-import com.microsoft.rest.v2.policy.*;
+import com.microsoft.rest.v2.policy.CookiePolicyFactory;
+import com.microsoft.rest.v2.policy.DecodingPolicyFactory;
+import com.microsoft.rest.v2.policy.HostPolicyFactory;
+import com.microsoft.rest.v2.policy.PortPolicyFactory;
+import com.microsoft.rest.v2.policy.ProtocolPolicyFactory;
+import com.microsoft.rest.v2.policy.RetryPolicyFactory;
+import fixtures.subscriptionidapiversion.implementation.MicrosoftAzureTestUrlImpl;
+import fixtures.subscriptionidapiversion.implementation.SampleResourceGroupInner;
 import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
 import java.util.UUID;
-
-import fixtures.subscriptionidapiversion.implementation.MicrosoftAzureTestUrlImpl;
-import fixtures.subscriptionidapiversion.implementation.SampleResourceGroupInner;
 
 public class GroupTests {
     private static MicrosoftAzureTestUrlImpl client;
@@ -22,7 +25,8 @@ public class GroupTests {
             new HostPolicyFactory("localhost"),
             new PortPolicyFactory(3000),
             new RetryPolicyFactory(),
-            new CookiePolicyFactory());
+            new CookiePolicyFactory(),
+            new DecodingPolicyFactory());
         client = new MicrosoftAzureTestUrlImpl(httpPipeline);
     }
 

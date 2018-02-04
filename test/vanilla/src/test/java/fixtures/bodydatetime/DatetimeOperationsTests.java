@@ -1,8 +1,8 @@
 package fixtures.bodydatetime;
 
 import com.microsoft.rest.v2.http.HttpPipeline;
-import com.microsoft.rest.v2.policy.PortPolicyFactory;
-import com.microsoft.rest.v2.policy.ProtocolPolicyFactory;
+import com.microsoft.rest.v2.policy.DecodingPolicyFactory;
+import fixtures.bodydatetime.implementation.AutoRestDateTimeTestServiceImpl;
 import org.joda.time.DateTime;
 import org.joda.time.DateTimeZone;
 import org.joda.time.IllegalFieldValueException;
@@ -10,16 +10,12 @@ import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-import fixtures.bodydatetime.implementation.AutoRestDateTimeTestServiceImpl;
-
 public class DatetimeOperationsTests {
     private static AutoRestDateTimeTestService client;
 
     @BeforeClass
     public static void setup() {
-        client = new AutoRestDateTimeTestServiceImpl(HttpPipeline.build(
-                new ProtocolPolicyFactory("http"),
-                new PortPolicyFactory(3000)));
+        client = new AutoRestDateTimeTestServiceImpl(HttpPipeline.build(new DecodingPolicyFactory()));
     }
 
     @Test

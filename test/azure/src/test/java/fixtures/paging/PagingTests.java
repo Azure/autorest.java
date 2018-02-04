@@ -2,8 +2,9 @@ package fixtures.paging;
 
 import com.microsoft.azure.v2.CloudException;
 import com.microsoft.azure.v2.Page;
-import com.microsoft.rest.v2.policy.CookiePolicyFactory;
 import com.microsoft.rest.v2.http.HttpPipeline;
+import com.microsoft.rest.v2.policy.CookiePolicyFactory;
+import com.microsoft.rest.v2.policy.DecodingPolicyFactory;
 import com.microsoft.rest.v2.policy.PortPolicyFactory;
 import com.microsoft.rest.v2.policy.ProtocolPolicyFactory;
 import com.microsoft.rest.v2.policy.RetryPolicyFactory;
@@ -12,12 +13,11 @@ import fixtures.paging.models.CustomParameterGroup;
 import fixtures.paging.models.PagingGetMultiplePagesWithOffsetOptions;
 import fixtures.paging.models.Product;
 import fixtures.paging.models.ProductProperties;
+import io.reactivex.Observer;
 import io.reactivex.disposables.Disposable;
 import org.junit.Assert;
 import org.junit.BeforeClass;
-import org.junit.Ignore;
 import org.junit.Test;
-import io.reactivex.Observer;
 
 import java.util.List;
 import java.util.concurrent.CountDownLatch;
@@ -34,7 +34,8 @@ public class PagingTests {
                 new ProtocolPolicyFactory("http"),
                 new PortPolicyFactory(3000),
                 new RetryPolicyFactory(),
-                new CookiePolicyFactory());
+                new CookiePolicyFactory(),
+                new DecodingPolicyFactory());
         client = new AutoRestPagingTestServiceImpl(httpPipeline);
     }
 

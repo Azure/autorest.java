@@ -4,6 +4,7 @@ import com.microsoft.rest.v2.RestException;
 import com.microsoft.rest.v2.credentials.BasicAuthenticationCredentials;
 import com.microsoft.rest.v2.http.HttpPipeline;
 import com.microsoft.rest.v2.policy.CredentialsPolicyFactory;
+import com.microsoft.rest.v2.policy.DecodingPolicyFactory;
 import com.microsoft.rest.v2.policy.PortPolicyFactory;
 import com.microsoft.rest.v2.policy.ProtocolPolicyFactory;
 import org.junit.BeforeClass;
@@ -20,7 +21,8 @@ public class HeadExceptionTests {
             HttpPipeline.build(
                 new ProtocolPolicyFactory("http"),
                 new PortPolicyFactory(3000),
-                new CredentialsPolicyFactory(new BasicAuthenticationCredentials(null, null))));
+                new CredentialsPolicyFactory(new BasicAuthenticationCredentials(null, null)),
+                new DecodingPolicyFactory()));
     }
 
     @Test

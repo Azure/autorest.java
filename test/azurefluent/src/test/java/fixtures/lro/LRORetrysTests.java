@@ -1,15 +1,17 @@
 package fixtures.lro;
 
 import com.microsoft.azure.v2.AzureProxy;
-import com.microsoft.rest.v2.credentials.BasicAuthenticationCredentials;
 import com.microsoft.rest.v2.http.HttpPipeline;
-import com.microsoft.rest.v2.policy.*;
+import com.microsoft.rest.v2.policy.CookiePolicyFactory;
+import com.microsoft.rest.v2.policy.DecodingPolicyFactory;
+import com.microsoft.rest.v2.policy.PortPolicyFactory;
+import com.microsoft.rest.v2.policy.ProtocolPolicyFactory;
+import com.microsoft.rest.v2.policy.RetryPolicyFactory;
+import fixtures.lro.implementation.AutoRestLongRunningOperationTestServiceImpl;
+import fixtures.lro.implementation.ProductInner;
 import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
-
-import fixtures.lro.implementation.AutoRestLongRunningOperationTestServiceImpl;
-import fixtures.lro.implementation.ProductInner;
 
 
 public class LRORetrysTests {
@@ -22,7 +24,8 @@ public class LRORetrysTests {
             new ProtocolPolicyFactory("http"),
             new PortPolicyFactory(3000),
             new RetryPolicyFactory(),
-            new CookiePolicyFactory());
+            new CookiePolicyFactory(),
+            new DecodingPolicyFactory());
         client = new AutoRestLongRunningOperationTestServiceImpl(httpPipeline);
     }
 

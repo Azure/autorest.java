@@ -1,30 +1,8 @@
 package fixtures.http;
 
-import org.junit.Assert;
-import org.junit.BeforeClass;
 import org.junit.Ignore;
-import org.junit.Test;
 
-import java.util.List;
 import java.util.concurrent.CountDownLatch;
-import java.util.concurrent.TimeUnit;
-
-import fixtures.http.implementation.AutoRestHttpInfrastructureTestServiceImpl;
-import fixtures.http.models.HttpRedirectsDelete307Headers;
-import fixtures.http.models.HttpRedirectsGet300Headers;
-import fixtures.http.models.HttpRedirectsGet301Headers;
-import fixtures.http.models.HttpRedirectsGet302Headers;
-import fixtures.http.models.HttpRedirectsGet307Headers;
-import fixtures.http.models.HttpRedirectsHead300Headers;
-import fixtures.http.models.HttpRedirectsHead301Headers;
-import fixtures.http.models.HttpRedirectsHead302Headers;
-import fixtures.http.models.HttpRedirectsHead307Headers;
-import fixtures.http.models.HttpRedirectsPatch302Headers;
-import fixtures.http.models.HttpRedirectsPatch307Headers;
-import fixtures.http.models.HttpRedirectsPost303Headers;
-import fixtures.http.models.HttpRedirectsPost307Headers;
-import fixtures.http.models.HttpRedirectsPut301Headers;
-import fixtures.http.models.HttpRedirectsPut307Headers;
 
 // FIXME
 @Ignore("TODO: reimplement")
@@ -34,7 +12,7 @@ public class HttpRedirectsTests {
 
 //    @BeforeClass
 //    public static void setup() {
-//        client = new AutoRestHttpInfrastructureTestServiceImpl(HttpPipeline.build(new PortPolicyFactory(3000)));
+//        client = new AutoRestHttpInfrastructureTestServiceImpl(HttpPipeline.build(new DecodingPolicyFactory()));
 //    }
 //
 //    @Test

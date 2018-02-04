@@ -1,15 +1,7 @@
 package fixtures.bodycomplex;
 
 import com.microsoft.rest.v2.http.HttpPipeline;
-import com.microsoft.rest.v2.policy.PortPolicyFactory;
-import org.joda.time.DateTime;
-import org.joda.time.DateTimeZone;
-import org.joda.time.LocalDate;
-import org.joda.time.Period;
-import org.junit.Assert;
-import org.junit.BeforeClass;
-import org.junit.Test;
-
+import com.microsoft.rest.v2.policy.DecodingPolicyFactory;
 import fixtures.bodycomplex.implementation.AutoRestComplexTestServiceImpl;
 import fixtures.bodycomplex.models.BooleanWrapper;
 import fixtures.bodycomplex.models.ByteWrapper;
@@ -22,13 +14,20 @@ import fixtures.bodycomplex.models.FloatWrapper;
 import fixtures.bodycomplex.models.IntWrapper;
 import fixtures.bodycomplex.models.LongWrapper;
 import fixtures.bodycomplex.models.StringWrapper;
+import org.joda.time.DateTime;
+import org.joda.time.DateTimeZone;
+import org.joda.time.LocalDate;
+import org.joda.time.Period;
+import org.junit.Assert;
+import org.junit.BeforeClass;
+import org.junit.Test;
 
 public class PrimitiveTests {
     private static AutoRestComplexTestService client;
 
     @BeforeClass
     public static void setup() {
-        client = new AutoRestComplexTestServiceImpl(HttpPipeline.build(new PortPolicyFactory(3000)));
+        client = new AutoRestComplexTestServiceImpl(HttpPipeline.build(new DecodingPolicyFactory()));
     }
 
     @Test

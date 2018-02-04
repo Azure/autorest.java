@@ -1,7 +1,9 @@
 package fixtures.bodycomplex;
 
 import com.microsoft.rest.v2.http.HttpPipeline;
-import com.microsoft.rest.v2.policy.PortPolicyFactory;
+import com.microsoft.rest.v2.policy.DecodingPolicyFactory;
+import fixtures.bodycomplex.implementation.AutoRestComplexTestServiceImpl;
+import fixtures.bodycomplex.models.DictionaryWrapper;
 import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -9,15 +11,12 @@ import org.junit.Test;
 import java.util.HashMap;
 import java.util.Map;
 
-import fixtures.bodycomplex.implementation.AutoRestComplexTestServiceImpl;
-import fixtures.bodycomplex.models.DictionaryWrapper;
-
 public class DictionaryTests {
     private static AutoRestComplexTestService client;
 
     @BeforeClass
     public static void setup() {
-        client = new AutoRestComplexTestServiceImpl(HttpPipeline.build(new PortPolicyFactory(3000)));
+        client = new AutoRestComplexTestServiceImpl(HttpPipeline.build(new DecodingPolicyFactory()));
     }
 
     @Test

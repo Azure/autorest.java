@@ -25,7 +25,8 @@ public class LROsCustomHeaderTests {
             new RetryPolicyFactory(),
             new CookiePolicyFactory(),
             new AddHeadersPolicyFactory(headers),
-            new CredentialsPolicyFactory(new BasicAuthenticationCredentials(null, null)));
+            new CredentialsPolicyFactory(new BasicAuthenticationCredentials(null, null)),
+            new DecodingPolicyFactory());
         AzureProxy.setDefaultPollingDelayInMilliseconds(0);
         client = new AutoRestLongRunningOperationTestServiceImpl(httpPipeline);
     }

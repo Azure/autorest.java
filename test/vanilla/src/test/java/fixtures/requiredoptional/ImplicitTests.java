@@ -1,13 +1,11 @@
 package fixtures.requiredoptional;
 
 import com.microsoft.rest.v2.http.HttpPipeline;
-import com.microsoft.rest.v2.policy.PortPolicyFactory;
-import com.microsoft.rest.v2.policy.ProtocolPolicyFactory;
+import com.microsoft.rest.v2.policy.DecodingPolicyFactory;
+import fixtures.requiredoptional.implementation.AutoRestRequiredOptionalTestServiceImpl;
 import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
-
-import fixtures.requiredoptional.implementation.AutoRestRequiredOptionalTestServiceImpl;
 
 import static org.junit.Assert.fail;
 
@@ -16,9 +14,7 @@ public class ImplicitTests {
 
     @BeforeClass
     public static void setup() {
-        client = new AutoRestRequiredOptionalTestServiceImpl(HttpPipeline.build(
-                new ProtocolPolicyFactory("http"),
-                new PortPolicyFactory(3000)));
+        client = new AutoRestRequiredOptionalTestServiceImpl(HttpPipeline.build(new DecodingPolicyFactory()));
     }
 
     @Test

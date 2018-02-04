@@ -1,19 +1,18 @@
 package fixtures.bodybyte;
 
 import com.microsoft.rest.v2.http.HttpPipeline;
-import com.microsoft.rest.v2.policy.PortPolicyFactory;
+import com.microsoft.rest.v2.policy.DecodingPolicyFactory;
+import fixtures.bodybyte.implementation.AutoRestSwaggerBATByteServiceImpl;
 import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
-
-import fixtures.bodybyte.implementation.AutoRestSwaggerBATByteServiceImpl;
 
 public class ByteOperationsTests {
     private static AutoRestSwaggerBATByteService client;
 
     @BeforeClass
     public static void setup() {
-        client = new AutoRestSwaggerBATByteServiceImpl(HttpPipeline.build(new PortPolicyFactory(3000)));
+        client = new AutoRestSwaggerBATByteServiceImpl(HttpPipeline.build(new DecodingPolicyFactory()));
     }
 
     @Test

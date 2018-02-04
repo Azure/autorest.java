@@ -1,19 +1,18 @@
 package fixtures.azurespecials;
 
 import com.microsoft.rest.v2.credentials.TokenCredentials;
-
 import com.microsoft.rest.v2.http.HttpPipeline;
 import com.microsoft.rest.v2.policy.CredentialsPolicyFactory;
+import com.microsoft.rest.v2.policy.DecodingPolicyFactory;
 import com.microsoft.rest.v2.policy.PortPolicyFactory;
 import com.microsoft.rest.v2.policy.ProtocolPolicyFactory;
 import com.microsoft.rest.v2.policy.RequestIdPolicyFactory;
+import fixtures.azurespecials.implementation.AutoRestAzureSpecialParametersTestClientImpl;
 import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
 import java.util.UUID;
-
-import fixtures.azurespecials.implementation.AutoRestAzureSpecialParametersTestClientImpl;
 
 import static org.junit.Assert.fail;
 
@@ -26,7 +25,8 @@ public class SubscriptionInMethodTests {
                 new ProtocolPolicyFactory("http"),
                 new PortPolicyFactory(3000),
                 new CredentialsPolicyFactory(new TokenCredentials(null, UUID.randomUUID().toString())),
-                new RequestIdPolicyFactory());
+                new RequestIdPolicyFactory(),
+                new DecodingPolicyFactory());
         client = new AutoRestAzureSpecialParametersTestClientImpl(httpPipeline);
         client.withSubscriptionId("1234-5678-9012-3456");
     }
