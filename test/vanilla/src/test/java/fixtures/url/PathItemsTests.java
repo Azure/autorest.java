@@ -1,21 +1,17 @@
 package fixtures.url;
 
 import com.microsoft.rest.v2.http.HttpPipeline;
-import com.microsoft.rest.v2.policy.PortPolicyFactory;
-import com.microsoft.rest.v2.policy.ProtocolPolicyFactory;
+import com.microsoft.rest.v2.policy.DecodingPolicyFactory;
+import fixtures.url.implementation.AutoRestUrlTestServiceImpl;
 import org.junit.BeforeClass;
 import org.junit.Test;
-
-import fixtures.url.implementation.AutoRestUrlTestServiceImpl;
 
 public class PathItemsTests {
     private static AutoRestUrlTestService client;
 
     @BeforeClass
     public static void setup() {
-        client = new AutoRestUrlTestServiceImpl(HttpPipeline.build(
-                new ProtocolPolicyFactory("http"),
-                new PortPolicyFactory(3000)));
+        client = new AutoRestUrlTestServiceImpl(HttpPipeline.build(new DecodingPolicyFactory()));
     }
 
     @Test

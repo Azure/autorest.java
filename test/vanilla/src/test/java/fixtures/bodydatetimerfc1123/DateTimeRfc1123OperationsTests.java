@@ -2,24 +2,20 @@ package fixtures.bodydatetimerfc1123;
 
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.microsoft.rest.v2.http.HttpPipeline;
-import com.microsoft.rest.v2.policy.PortPolicyFactory;
-import com.microsoft.rest.v2.policy.ProtocolPolicyFactory;
+import com.microsoft.rest.v2.policy.DecodingPolicyFactory;
+import fixtures.bodydatetimerfc1123.implementation.AutoRestRFC1123DateTimeTestServiceImpl;
 import org.joda.time.DateTime;
 import org.joda.time.DateTimeZone;
 import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-import fixtures.bodydatetimerfc1123.implementation.AutoRestRFC1123DateTimeTestServiceImpl;
-
 public class DateTimeRfc1123OperationsTests {
     private static AutoRestRFC1123DateTimeTestService client;
 
     @BeforeClass
     public static void setup() {
-        client = new AutoRestRFC1123DateTimeTestServiceImpl(HttpPipeline.build(
-                new ProtocolPolicyFactory("http"),
-                new PortPolicyFactory(3000)));
+        client = new AutoRestRFC1123DateTimeTestServiceImpl(HttpPipeline.build(new DecodingPolicyFactory()));
     }
 
     @Test

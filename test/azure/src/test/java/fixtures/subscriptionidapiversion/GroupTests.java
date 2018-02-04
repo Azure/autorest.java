@@ -1,17 +1,17 @@
 package fixtures.subscriptionidapiversion;
 
 import com.microsoft.rest.v2.http.HttpPipeline;
+import com.microsoft.rest.v2.policy.DecodingPolicyFactory;
 import com.microsoft.rest.v2.policy.HostPolicyFactory;
 import com.microsoft.rest.v2.policy.PortPolicyFactory;
 import com.microsoft.rest.v2.policy.ProtocolPolicyFactory;
+import fixtures.subscriptionidapiversion.implementation.MicrosoftAzureTestUrlImpl;
+import fixtures.subscriptionidapiversion.models.SampleResourceGroup;
 import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
 import java.util.UUID;
-
-import fixtures.subscriptionidapiversion.implementation.MicrosoftAzureTestUrlImpl;
-import fixtures.subscriptionidapiversion.models.SampleResourceGroup;
 
 public class GroupTests {
     private static MicrosoftAzureTestUrlImpl client;
@@ -22,7 +22,8 @@ public class GroupTests {
             HttpPipeline.build(
                 new ProtocolPolicyFactory("http"),
                 new HostPolicyFactory("localhost"),
-                new PortPolicyFactory(3000)));
+                new PortPolicyFactory(3000),
+                new DecodingPolicyFactory()));
     }
 
     @Test

@@ -1,12 +1,15 @@
 package fixtures.bodyinteger;
 
 import com.fasterxml.jackson.core.JsonParseException;
+import com.microsoft.rest.v2.RestException;
 import com.microsoft.rest.v2.ServiceCallback;
-
+import com.microsoft.rest.v2.http.HttpPipeline;
+import com.microsoft.rest.v2.policy.DecodingPolicyFactory;
+import fixtures.bodyinteger.implementation.AutoRestIntegerTestServiceImpl;
+import io.reactivex.Observable;
 import io.reactivex.Observer;
 import io.reactivex.disposables.Disposable;
-import com.microsoft.rest.v2.http.HttpPipeline;
-import com.microsoft.rest.v2.policy.PortPolicyFactory;
+import org.hamcrest.CoreMatchers;
 import org.joda.time.DateTime;
 import org.joda.time.DateTimeZone;
 import org.junit.Assert;
@@ -16,9 +19,7 @@ import org.junit.Test;
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.TimeUnit;
 
-import fixtures.bodyinteger.implementation.AutoRestIntegerTestServiceImpl;
-import io.reactivex.Observable;
-
+import static org.junit.Assert.assertThat;
 import static org.junit.Assert.fail;
 
 public class IntOperationsTests {
@@ -27,7 +28,7 @@ public class IntOperationsTests {
 
     @BeforeClass
     public static void setup() {
-        client = new AutoRestIntegerTestServiceImpl(HttpPipeline.build(new PortPolicyFactory(3000)));
+        client = new AutoRestIntegerTestServiceImpl(HttpPipeline.build(new DecodingPolicyFactory()));
     }
 
     @Test
@@ -190,8 +191,8 @@ public class IntOperationsTests {
         try {
             client.ints().getInvalidUnixTime();
             fail();
-        } catch (RuntimeException e) {
-            Assert.assertTrue(e.getMessage().contains("Unexpected character"));
+        } catch (RestException e) {
+            assertThat(e.getMessage(), CoreMatchers.containsString("HTTP response has a malformed body"));
         }
     }
 

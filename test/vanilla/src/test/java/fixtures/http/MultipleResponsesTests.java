@@ -4,7 +4,10 @@ import com.microsoft.rest.v2.RestException;
 import com.microsoft.rest.v2.http.HttpPipeline;
 import com.microsoft.rest.v2.http.HttpRequest;
 import com.microsoft.rest.v2.http.HttpResponse;
-import com.microsoft.rest.v2.policy.*;
+import com.microsoft.rest.v2.policy.DecodingPolicyFactory;
+import com.microsoft.rest.v2.policy.RequestPolicy;
+import com.microsoft.rest.v2.policy.RequestPolicyFactory;
+import com.microsoft.rest.v2.policy.RequestPolicyOptions;
 import fixtures.http.implementation.AutoRestHttpInfrastructureTestServiceImpl;
 import fixtures.http.models.A;
 import fixtures.http.models.AException;
@@ -12,12 +15,12 @@ import fixtures.http.models.C;
 import fixtures.http.models.D;
 import fixtures.http.models.Error;
 import fixtures.http.models.ErrorException;
+import io.reactivex.Single;
+import io.reactivex.functions.Consumer;
 import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Ignore;
 import org.junit.Test;
-import io.reactivex.Single;
-import io.reactivex.functions.Consumer;
 
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.TimeUnit;
@@ -30,9 +33,7 @@ public class MultipleResponsesTests {
 
     @BeforeClass
     public static void setup() {
-        client = new AutoRestHttpInfrastructureTestServiceImpl(HttpPipeline.build(
-                new ProtocolPolicyFactory("http"),
-                new PortPolicyFactory(3000)));
+        client = new AutoRestHttpInfrastructureTestServiceImpl(HttpPipeline.build(new DecodingPolicyFactory()));
     }
 
     @Test
@@ -140,9 +141,7 @@ public class MultipleResponsesTests {
 
     @Test
     public void get202None204NoneDefaultError202None() throws Exception {
-        HttpPipeline httpPipeline = HttpPipeline.build(
-                new ProtocolPolicyFactory("http"),
-                new PortPolicyFactory(3000),
+        HttpPipeline httpPipeline = HttpPipeline.build(new DecodingPolicyFactory(),
                 new RequestPolicyFactory() {
                 @Override
                 public RequestPolicy create(final RequestPolicy next, RequestPolicyOptions options) {
@@ -175,9 +174,7 @@ public class MultipleResponsesTests {
 
     @Test
     public void get202None204NoneDefaultError204None() throws Exception {
-        HttpPipeline httpPipeline = HttpPipeline.build(
-                new ProtocolPolicyFactory("http"),
-                new PortPolicyFactory(3000),
+        HttpPipeline httpPipeline = HttpPipeline.build(new DecodingPolicyFactory(),
                 new RequestPolicyFactory() {
                 @Override
                 public RequestPolicy create(final RequestPolicy next, RequestPolicyOptions options) {

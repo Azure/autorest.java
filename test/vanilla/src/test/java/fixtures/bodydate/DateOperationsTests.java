@@ -1,8 +1,8 @@
 package fixtures.bodydate;
 
 import com.microsoft.rest.v2.http.HttpPipeline;
-import com.microsoft.rest.v2.policy.PortPolicyFactory;
-import com.microsoft.rest.v2.policy.ProtocolPolicyFactory;
+import com.microsoft.rest.v2.policy.DecodingPolicyFactory;
+import fixtures.bodydate.implementation.AutoRestDateTestServiceImpl;
 import org.joda.time.IllegalFieldValueException;
 import org.joda.time.LocalDate;
 import org.junit.Assert;
@@ -11,17 +11,13 @@ import org.junit.Test;
 
 import java.util.concurrent.CountDownLatch;
 
-import fixtures.bodydate.implementation.AutoRestDateTestServiceImpl;
-
 public class DateOperationsTests {
     private static AutoRestDateTestService client;
     private CountDownLatch lock = new CountDownLatch(1);
 
     @BeforeClass
     public static void setup() {
-        client = new AutoRestDateTestServiceImpl(HttpPipeline.build(
-                new ProtocolPolicyFactory("http"),
-                new PortPolicyFactory(3000)));
+        client = new AutoRestDateTestServiceImpl(HttpPipeline.build(new DecodingPolicyFactory()));
     }
 
     @Test

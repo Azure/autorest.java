@@ -2,17 +2,21 @@ package fixtures.lro;
 
 import com.microsoft.azure.v2.AzureProxy;
 import com.microsoft.azure.v2.CloudException;
-
+import com.microsoft.rest.v2.RestException;
 import com.microsoft.rest.v2.http.HttpPipeline;
+import com.microsoft.rest.v2.policy.DecodingPolicyFactory;
 import com.microsoft.rest.v2.policy.PortPolicyFactory;
 import com.microsoft.rest.v2.policy.ProtocolPolicyFactory;
+import fixtures.lro.implementation.AutoRestLongRunningOperationTestServiceImpl;
+import fixtures.lro.models.Product;
+import org.hamcrest.CoreMatchers;
 import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-import fixtures.lro.implementation.AutoRestLongRunningOperationTestServiceImpl;
-import fixtures.lro.models.Product;
+import java.io.IOException;
 
+import static org.junit.Assert.assertThat;
 import static org.junit.Assert.fail;
 
 public class LROSADsTests {
@@ -23,7 +27,8 @@ public class LROSADsTests {
         client = new AutoRestLongRunningOperationTestServiceImpl(
                 HttpPipeline.build(
                         new ProtocolPolicyFactory("http"),
-                        new PortPolicyFactory(3000)));
+                        new PortPolicyFactory(3000),
+                        new DecodingPolicyFactory()));
         AzureProxy.setDefaultPollingDelayInMilliseconds(0);
     }
 
@@ -217,8 +222,8 @@ public class LROSADsTests {
         try {
             client.lROSADs().put200InvalidJson(product);
             fail();
-        } catch (RuntimeException ex) {
-            Assert.assertTrue(ex.getMessage().contains("Unexpected end-of-input"));
+        } catch (RestException ex) {
+            assertThat(ex.getMessage(), CoreMatchers.containsString("HTTP response has a malformed body"));
         }
     }
 
@@ -229,8 +234,8 @@ public class LROSADsTests {
         try {
             client.lROSADs().putAsyncRelativeRetryInvalidHeader(product);
             fail();
-        } catch (NumberFormatException ex) {
-            Assert.assertEquals("For input string: \"/bar\"", ex.getMessage());
+        } catch (RuntimeException ex) {
+            assertThat(ex.getCause(), CoreMatchers.instanceOf(IOException.class));
         }
     }
 
@@ -242,7 +247,7 @@ public class LROSADsTests {
             client.lROSADs().putAsyncRelativeRetryInvalidJsonPolling(product);
             fail();
         } catch (RuntimeException ex) {
-            Assert.assertTrue(ex.getMessage().contains("does not contain a valid body"));
+            assertThat(ex.getMessage(), CoreMatchers.containsString("HTTP response has a malformed body"));
         }
     }
 
@@ -251,8 +256,8 @@ public class LROSADsTests {
         try {
             client.lROSADs().delete202RetryInvalidHeader();
             fail();
-        } catch (NumberFormatException ex) {
-            Assert.assertEquals("For input string: \"/bar\"", ex.getMessage());
+        } catch (RuntimeException ex) {
+            assertThat(ex.getCause(), CoreMatchers.instanceOf(IOException.class));
         }
     }
 
@@ -261,8 +266,8 @@ public class LROSADsTests {
         try {
             client.lROSADs().deleteAsyncRelativeRetryInvalidHeader();
             fail();
-        } catch (NumberFormatException ex) {
-            Assert.assertEquals("For input string: \"/bar\"", ex.getMessage());
+        } catch (RuntimeException ex) {
+            assertThat(ex.getCause(), CoreMatchers.instanceOf(IOException.class));
         }
     }
 
@@ -283,8 +288,8 @@ public class LROSADsTests {
         try {
             client.lROSADs().post202RetryInvalidHeader(product);
             fail();
-        } catch (NumberFormatException ex) {
-            Assert.assertEquals("For input string: \"/bar\"", ex.getMessage());
+        } catch (RuntimeException ex) {
+            assertThat(ex.getCause(), CoreMatchers.instanceOf(IOException.class));
         }
     }
 
@@ -295,8 +300,8 @@ public class LROSADsTests {
         try {
             client.lROSADs().postAsyncRelativeRetryInvalidHeader(product);
             fail();
-        } catch (NumberFormatException ex) {
-            Assert.assertEquals("For input string: \"/bar\"", ex.getMessage());
+        } catch (RuntimeException ex) {
+            assertThat(ex.getCause(), CoreMatchers.instanceOf(IOException.class));
         }
     }
 

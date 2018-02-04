@@ -1,9 +1,10 @@
 package fixtures.bodyfile;
 
-import com.microsoft.rest.v2.util.FlowableUtil;
-import io.reactivex.functions.BiFunction;
 import com.microsoft.rest.v2.http.HttpPipeline;
-import com.microsoft.rest.v2.policy.PortPolicyFactory;
+import com.microsoft.rest.v2.policy.DecodingPolicyFactory;
+import com.microsoft.rest.v2.util.FlowableUtil;
+import fixtures.bodyfile.implementation.AutoRestSwaggerBATFileServiceImpl;
+import io.reactivex.functions.BiFunction;
 import org.apache.commons.io.IOUtils;
 import org.junit.BeforeClass;
 import org.junit.Ignore;
@@ -11,8 +12,6 @@ import org.junit.Test;
 
 import java.io.InputStream;
 import java.nio.ByteBuffer;
-
-import fixtures.bodyfile.implementation.AutoRestSwaggerBATFileServiceImpl;
 
 import static org.junit.Assert.assertArrayEquals;
 import static org.junit.Assert.assertEquals;
@@ -22,7 +21,7 @@ public class FilesTests {
 
     @BeforeClass
     public static void setup() {
-        client = new AutoRestSwaggerBATFileServiceImpl(HttpPipeline.build(new PortPolicyFactory(3000)));
+        client = new AutoRestSwaggerBATFileServiceImpl(HttpPipeline.build(new DecodingPolicyFactory()));
     }
 
     @Test

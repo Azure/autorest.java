@@ -1,10 +1,11 @@
 package fixtures.bodyformdata;
 
 import com.google.common.base.Charsets;
-import com.microsoft.rest.v2.util.FlowableUtil;
-import io.reactivex.Flowable;
 import com.microsoft.rest.v2.http.HttpPipeline;
-import com.microsoft.rest.v2.policy.PortPolicyFactory;
+import com.microsoft.rest.v2.policy.DecodingPolicyFactory;
+import com.microsoft.rest.v2.util.FlowableUtil;
+import fixtures.bodyformdata.implementation.AutoRestSwaggerBATFormDataServiceImpl;
+import io.reactivex.Flowable;
 import org.apache.commons.io.IOUtils;
 import org.junit.Assert;
 import org.junit.BeforeClass;
@@ -15,14 +16,12 @@ import java.io.InputStream;
 import java.nio.ByteBuffer;
 import java.nio.charset.StandardCharsets;
 
-import fixtures.bodyformdata.implementation.AutoRestSwaggerBATFormDataServiceImpl;
-
 public class FormdataTests {
     private static AutoRestSwaggerBATFormDataService client;
 
     @BeforeClass
     public static void setup() {
-        client = new AutoRestSwaggerBATFormDataServiceImpl(HttpPipeline.build(new PortPolicyFactory(3000)));
+        client = new AutoRestSwaggerBATFormDataServiceImpl(HttpPipeline.build(new DecodingPolicyFactory()));
     }
 
     @Ignore("Multipart form data not currently supported")

@@ -1,8 +1,13 @@
 package fixtures.modelflattening;
 
 import com.microsoft.rest.v2.http.HttpPipeline;
-import com.microsoft.rest.v2.policy.PortPolicyFactory;
-import com.microsoft.rest.v2.policy.ProtocolPolicyFactory;
+import com.microsoft.rest.v2.policy.DecodingPolicyFactory;
+import fixtures.modelflattening.implementation.AutoRestResourceFlatteningTestServiceImpl;
+import fixtures.modelflattening.models.FlattenParameterGroup;
+import fixtures.modelflattening.models.FlattenedProduct;
+import fixtures.modelflattening.models.Resource;
+import fixtures.modelflattening.models.ResourceCollection;
+import fixtures.modelflattening.models.SimpleProduct;
 import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -12,21 +17,12 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import fixtures.modelflattening.implementation.AutoRestResourceFlatteningTestServiceImpl;
-import fixtures.modelflattening.models.FlattenParameterGroup;
-import fixtures.modelflattening.models.FlattenedProduct;
-import fixtures.modelflattening.models.Resource;
-import fixtures.modelflattening.models.ResourceCollection;
-import fixtures.modelflattening.models.SimpleProduct;
-
 public class ModelFlatteningTests {
     private static AutoRestResourceFlatteningTestService client;
 
     @BeforeClass
     public static void setup() {
-        client = new AutoRestResourceFlatteningTestServiceImpl(HttpPipeline.build(
-                new ProtocolPolicyFactory("http"),
-                new PortPolicyFactory(3000)));
+        client = new AutoRestResourceFlatteningTestServiceImpl(HttpPipeline.build(new DecodingPolicyFactory()));
     }
 
     @Test

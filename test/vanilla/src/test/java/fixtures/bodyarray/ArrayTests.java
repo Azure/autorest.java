@@ -1,11 +1,12 @@
 package fixtures.bodyarray;
 
+import com.microsoft.rest.v2.RestException;
 import com.microsoft.rest.v2.http.HttpPipeline;
-import com.microsoft.rest.v2.http.HttpRequest;
-import com.microsoft.rest.v2.http.HttpResponse;
-import com.microsoft.rest.v2.http.UrlBuilder;
-import com.microsoft.rest.v2.policy.PortPolicyFactory;
-import com.microsoft.rest.v2.policy.RequestPolicy;
+import com.microsoft.rest.v2.policy.DecodingPolicyFactory;
+import fixtures.bodyarray.implementation.AutoRestSwaggerBATArrayServiceImpl;
+import fixtures.bodyarray.models.ErrorException;
+import fixtures.bodyarray.models.Product;
+import org.hamcrest.CoreMatchers;
 import org.joda.time.DateTime;
 import org.joda.time.DateTimeZone;
 import org.joda.time.LocalDate;
@@ -14,8 +15,6 @@ import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-import java.net.MalformedURLException;
-import java.net.URL;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
@@ -23,16 +22,15 @@ import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 
-import fixtures.bodyarray.implementation.AutoRestSwaggerBATArrayServiceImpl;
-import fixtures.bodyarray.models.ErrorException;
-import fixtures.bodyarray.models.Product;
+import static org.junit.Assert.assertThat;
+import static org.junit.Assert.fail;
 
 public class ArrayTests {
     private static AutoRestSwaggerBATArrayService client;
 
     @BeforeClass
     public static void setup() throws Exception {
-        client = new AutoRestSwaggerBATArrayServiceImpl(HttpPipeline.build(new PortPolicyFactory(3000)));
+        client = new AutoRestSwaggerBATArrayServiceImpl(HttpPipeline.build(new DecodingPolicyFactory()));
     }
 
     @Test
@@ -44,10 +42,9 @@ public class ArrayTests {
     public void getInvalid() throws Exception {
         try {
             List<Integer> result = client.arrays().getInvalid();
-            Assert.assertTrue(false);
-        } catch (RuntimeException exception) {
-            // expected
-            Assert.assertTrue(exception.getMessage().contains("Unexpected end-of-input"));
+            fail();
+        } catch (RestException exception) {
+            assertThat(exception.getMessage(), CoreMatchers.containsString("HTTP response has a malformed body"));
         }
     }
 
@@ -65,8 +62,8 @@ public class ArrayTests {
     @Test
     public void getBooleanTfft() throws Exception {
         List<Boolean> result = client.arrays().getBooleanTfft();
-        Object[] exected = new Boolean[] {true, false, false, true};
-        Assert.assertArrayEquals(exected, result.toArray());
+        Object[] expected = new Boolean[] {true, false, false, true};
+        Assert.assertArrayEquals(expected, result.toArray());
     }
 
     @Test
@@ -273,7 +270,7 @@ public class ArrayTests {
     public void getUuidInvalidChars() throws Exception {
         try {
             List<UUID> result = client.arrays().getUuidInvalidChars();
-            Assert.fail();
+            fail();
         } catch (RuntimeException ex) {
             // expected
             Assert.assertTrue(ex.getMessage(), ex.getMessage().contains("UUID has to be represented"));
