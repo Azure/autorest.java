@@ -28,7 +28,7 @@ public class FilesTests {
     public void getFile() throws Exception {
         ClassLoader classLoader = getClass().getClassLoader();
         try (InputStream file = classLoader.getResourceAsStream("sample.png")) {
-            byte[] actual = FlowableUtil.collectBytes(client.files().getFile()).blockingGet();
+            byte[] actual = FlowableUtil.collectBytesInArray(client.files().getFile()).blockingGet();
             byte[] expected = IOUtils.toByteArray(file);
             assertArrayEquals(expected, actual);
         }
@@ -50,7 +50,7 @@ public class FilesTests {
 
     @Test
     public void getEmptyFile() {
-        final byte[] bytes = FlowableUtil.collectBytes(client.files().getEmptyFile()).blockingGet();
+        final byte[] bytes = FlowableUtil.collectBytesInArray(client.files().getEmptyFile()).blockingGet();
         assertArrayEquals(new byte[0], bytes);
     }
 }
