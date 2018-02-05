@@ -32,6 +32,10 @@ namespace AutoRest.Java.Model
         public static readonly ClassType AzureEnvironment = new ClassType("com.microsoft.azure.v2", "AzureEnvironment", null, null, false);
         public static readonly ClassType HttpPipeline = new ClassType("com.microsoft.rest.v2.http", "HttpPipeline", null, null, false);
         public static readonly ClassType Completable = new ClassType("io.reactivex", "Completable", null, null, false);
+        public static readonly ClassType AzureProxy = new ClassType("com.microsoft.azure.v2", "AzureProxy", null, null, false);
+        public static readonly ClassType RestProxy = new ClassType("com.microsoft.rest.v2", "RestProxy", null, null, false);
+        public static readonly ClassType Validator = new ClassType("com.microsoft.rest.v2", "Validator", null, null, false);
+        public static readonly ClassType Function = new ClassType("io.reactivex.functions", "Function", null, null, false);
 
         public ClassType(string package, string name, IEnumerable<string> implementationImports, IDictionary<string,string> extensions, bool isInnerModelType)
         {
@@ -71,6 +75,8 @@ namespace AutoRest.Java.Model
         {
             return this == type;
         }
+
+        public string FullName => $"{Package}.{Name}";
 
         public void AddImportsTo(ISet<string> imports, bool includeImplementationImports)
         {

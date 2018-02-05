@@ -29,7 +29,6 @@ import fixtures.azurespecials.models.HeaderCustomNamedRequestIdParamGroupingHead
 import fixtures.azurespecials.models.HeaderCustomNamedRequestIdParamGroupingParameters;
 import io.reactivex.Completable;
 import io.reactivex.Maybe;
-import io.reactivex.Observable;
 import io.reactivex.Single;
 import io.reactivex.functions.Function;
 

@@ -92,16 +92,17 @@ namespace AutoRest.Java.Model
                 imports.Add($"{settings.Package}.{InterfaceName}");
             }
 
-            foreach (string import in Imports)
+            if (includeImplementationImports)
             {
-                imports.Add(import);
+                ClassType proxyType = settings.IsAzureOrFluent ? ClassType.AzureProxy : ClassType.RestProxy;
+                imports.Add(proxyType.FullName);
             }
 
             RestAPI.AddImportsTo(imports, includeImplementationImports, settings);
 
             foreach (ClientMethod clientMethod in ClientMethods)
             {
-                clientMethod.AddImportsTo(imports, includeImplementationImports);
+                clientMethod.AddImportsTo(imports, includeImplementationImports, settings);
             }
         }
     }

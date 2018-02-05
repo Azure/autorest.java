@@ -23,5 +23,15 @@ namespace AutoRest.Java.Model
         /// The type of elements that are stored in this sequence.
         /// </summary>
         public IType ElementType => TypeArguments[0];
+
+        public override void AddImportsTo(ISet<string> imports, bool includeImplementationImports)
+        {
+            base.AddImportsTo(imports, includeImplementationImports);
+
+            if (includeImplementationImports)
+            {
+                imports.Add("java.util.ArrayList");
+            }
+        }
     }
 }

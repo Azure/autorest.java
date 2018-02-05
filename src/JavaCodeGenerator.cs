@@ -47,9 +47,6 @@ namespace AutoRest.Java
         private const string targetVersion = "1.1.3";
         internal const string pomVersion = targetVersion + "-SNAPSHOT";
 
-        private const string restProxyType = "RestProxy";
-        private const string azureProxyType = "AzureProxy";
-
         private static readonly Parameter serviceClientCredentialsParameter = new Parameter("the management credentials for Azure", false, ClassType.ServiceClientCredentials, "credentials", true);
         private static readonly Parameter azureTokenCredentialsParameter = new Parameter("the management credentials for Azure", false, ClassType.AzureTokenCredentials, "credentials", true);
         private static readonly Parameter azureEnvironmentParameter = new Parameter("The environment that requests will target.", false, ClassType.AzureEnvironment, "azureEnvironment", true);
@@ -3221,19 +3218,19 @@ namespace AutoRest.Java
                         {
                             if (constructor.Parameters.SequenceEqual(new[] { serviceClientCredentialsParameter }))
                             {
-                                constructorBlock.Line($"this({azureProxyType}.createDefaultPipeline({serviceClient.ClassName}.class, {serviceClientCredentialsParameter.Name}));");
+                                constructorBlock.Line($"this({ClassType.AzureProxy.Name}.createDefaultPipeline({serviceClient.ClassName}.class, {serviceClientCredentialsParameter.Name}));");
                             }
                             else if (constructor.Parameters.SequenceEqual(new[] { serviceClientCredentialsParameter, azureEnvironmentParameter }))
                             {
-                                constructorBlock.Line($"this({azureProxyType}.createDefaultPipeline({serviceClient.ClassName}.class, {serviceClientCredentialsParameter.Name}), {azureEnvironmentParameter.Name});");
+                                constructorBlock.Line($"this({ClassType.AzureProxy.Name}.createDefaultPipeline({serviceClient.ClassName}.class, {serviceClientCredentialsParameter.Name}), {azureEnvironmentParameter.Name});");
                             }
                             else if (!constructor.Parameters.Any())
                             {
-                                constructorBlock.Line($"this({azureProxyType}.createDefaultPipeline({serviceClient.ClassName}.class));");
+                                constructorBlock.Line($"this({ClassType.AzureProxy.Name}.createDefaultPipeline({serviceClient.ClassName}.class));");
                             }
                             else if (constructor.Parameters.SequenceEqual(new[] { azureEnvironmentParameter }))
                             {
-                                constructorBlock.Line($"this({azureProxyType}.createDefaultPipeline({serviceClient.ClassName}.class), {azureEnvironmentParameter.Name});");
+                                constructorBlock.Line($"this({ClassType.AzureProxy.Name}.createDefaultPipeline({serviceClient.ClassName}.class), {azureEnvironmentParameter.Name});");
                             }
                             else if (constructor.Parameters.SequenceEqual(new[] { httpPipelineParameter }))
                             {
@@ -3258,7 +3255,7 @@ namespace AutoRest.Java
 
                                 if (serviceClient.RestAPI != null)
                                 {
-                                    constructorBlock.Line($"this.service = {azureProxyType}.create({serviceClient.RestAPI.Name}.class, this);");
+                                    constructorBlock.Line($"this.service = {ClassType.AzureProxy.Name}.create({serviceClient.RestAPI.Name}.class, this);");
                                 }
                             }
                         }
@@ -3266,7 +3263,7 @@ namespace AutoRest.Java
                         {
                             if (!constructor.Parameters.Any())
                             {
-                                constructorBlock.Line($"this({restProxyType}.createDefaultPipeline());");
+                                constructorBlock.Line($"this({ClassType.RestProxy.Name}.createDefaultPipeline());");
                             }
                             else if (constructor.Parameters.SequenceEqual(new[] { httpPipelineParameter }))
                             {
@@ -3287,7 +3284,7 @@ namespace AutoRest.Java
 
                                 if (serviceClient.RestAPI != null)
                                 {
-                                    constructorBlock.Line($"this.service = {restProxyType}.create({serviceClient.RestAPI.Name}.class, this);");
+                                    constructorBlock.Line($"this.service = {ClassType.RestProxy.Name}.create({serviceClient.RestAPI.Name}.class, this);");
                                 }
                             }
                         }
@@ -3622,7 +3619,8 @@ namespace AutoRest.Java
                 {
                     if (methodGroupClient.RestAPI != null)
                     {
-                        constructor.Line($"this.service = {(settings.IsAzureOrFluent ? azureProxyType : restProxyType)}.create({methodGroupClient.RestAPI.Name}.class, client);");
+                        ClassType proxyType = (settings.IsAzureOrFluent ? ClassType.AzureProxy : ClassType.RestProxy);
+                        constructor.Line($"this.service = {proxyType.Name}.create({methodGroupClient.RestAPI.Name}.class, client);");
                     }
                     constructor.Line("this.client = client;");
                 });
@@ -4974,7 +4972,7 @@ namespace AutoRest.Java
                     {
                         if (restAPIMethod.RequestContentType == "multipart/form-data" || restAPIMethod.RequestContentType == "application/x-www-form-urlencoded")
                         {
-                            interfaceBlock.LineComment($"@Multipart not supported by {restProxyType}");
+                            interfaceBlock.LineComment($"@Multipart not supported by {ClassType.RestProxy.Name}");
                         }
 
                         if (restAPIMethod.IsPagingNextOperation)
@@ -5561,8 +5559,6 @@ namespace AutoRest.Java
                     }
                 }
 
-                IEnumerable<string> expressionsToValidate = GetExpressionsToValidate(clientMethod, settings);
-
                 bool isFluentDelete = settings.IsFluent && restAPIMethod.Name.EqualsIgnoreCase(Delete) && autoRestRequiredClientMethodParameters.Count() == 2;
 
                 switch (clientMethod.Type)
@@ -5670,7 +5666,7 @@ namespace AutoRest.Java
                             function.Indent(() =>
                             {
                                 function.Line(".toObservable()");
-                                function.Line($".concatMap(new Function<{pageType}, {clientMethod.ReturnValue.Type}>() {{");
+                                function.Line($".concatMap(new {GenericType.Function(pageType, clientMethod.ReturnValue.Type)}() {{");
                                 function.Indent(() =>
                                 {
                                     function.Annotation("Override");
@@ -5764,7 +5760,7 @@ namespace AutoRest.Java
                                 });
                             }
 
-                            foreach (string expressionToValidate in expressionsToValidate)
+                            foreach (string expressionToValidate in clientMethod.ExpressionsToValidate)
                             {
                                 function.Line($"Validator.validate({expressionToValidate});");
                             }
@@ -6246,7 +6242,7 @@ namespace AutoRest.Java
                                     return result;
                                 }));
 
-                            function.Line($"return service.{restAPIMethod.Name}({restAPIMethodArgumentList}).map(new Function<{restResponseType}, {pageType}>() {{");
+                            function.Line($"return service.{restAPIMethod.Name}({restAPIMethodArgumentList}).map(new {GenericType.Function(restResponseType, pageType)}() {{");
                             function.Indent(() =>
                             {
                                 function.Annotation("Override");
@@ -6293,7 +6289,7 @@ namespace AutoRest.Java
                             {
                                 comment.Param(parameter.Name, parameter.Description);
                             }
-                            if (requiredNullableParameterExpressions.Any() || expressionsToValidate.Any())
+                            if (requiredNullableParameterExpressions.Any() || clientMethod.ExpressionsToValidate.Any())
                             {
                                 comment.Throws("IllegalArgumentException", "thrown if parameters fail the validation");
                             }
@@ -6308,7 +6304,7 @@ namespace AutoRest.Java
                                     ifBlock.Line($"throw new IllegalArgumentException(\"Parameter {requiredNullableParameterExpression} is required and cannot be null.\");");
                                 });
                             }
-                            foreach (string expressionToValidate in expressionsToValidate)
+                            foreach (string expressionToValidate in clientMethod.ExpressionsToValidate)
                             {
                                 function.Line($"Validator.validate({expressionToValidate});");
                             }
@@ -6715,7 +6711,7 @@ namespace AutoRest.Java
                                     return result;
                                 }));
 
-                            function.Line($"return service.{clientMethod.RestAPIMethod.Name}({restAPIMethodArgumentList}).map(new Function<{restResponseType}, {pageType}>() {{");
+                            function.Line($"return service.{clientMethod.RestAPIMethod.Name}({restAPIMethodArgumentList}).map(new {GenericType.Function(restResponseType, pageType)}() {{");
                             function.Indent(() =>
                             {
                                 function.Annotation("Override");
@@ -6785,7 +6781,7 @@ namespace AutoRest.Java
                             {
                                 comment.Param(parameter.Name, parameter.Description);
                             }
-                            if (requiredNullableParameterExpressions.Any() || expressionsToValidate.Any())
+                            if (requiredNullableParameterExpressions.Any() || clientMethod.ExpressionsToValidate.Any())
                             {
                                 comment.Throws("IllegalArgumentException", "thrown if parameters fail the validation");
                             }
@@ -6801,7 +6797,7 @@ namespace AutoRest.Java
                                 });
                             }
 
-                            foreach (string expressionToValidate in expressionsToValidate)
+                            foreach (string expressionToValidate in clientMethod.ExpressionsToValidate)
                             {
                                 function.Line($"Validator.validate({expressionToValidate});");
                             }
@@ -7378,7 +7374,7 @@ namespace AutoRest.Java
                                 }
                             }
 
-                            foreach (string expressionToValidate in expressionsToValidate)
+                            foreach (string expressionToValidate in clientMethod.ExpressionsToValidate)
                             {
                                 function.Line($"Validator.validate({expressionToValidate});");
                             }
@@ -7723,7 +7719,7 @@ namespace AutoRest.Java
                             {
                                 if (restAPIMethodReturnBodyClientType != PrimitiveType.Void)
                                 {
-                                    function.Line($".flatMapMaybe(new Function<{restResponseType}, {clientMethod.ReturnValue.Type}>() {{");
+                                    function.Line($".flatMapMaybe(new {GenericType.Function(restResponseType, clientMethod.ReturnValue.Type)}() {{");
                                     function.Indent(() =>
                                     {
                                         function.Block($"public {clientMethod.ReturnValue.Type} apply({restResponseType} restResponse)", subFunction =>
@@ -7742,7 +7738,7 @@ namespace AutoRest.Java
                                 }
                                 else if (isFluentDelete)
                                 {
-                                    function.Line($".flatMapMaybe(new Function<{restResponseType}, {clientMethod.ReturnValue.Type}>() {{");
+                                    function.Line($".flatMapMaybe(new {GenericType.Function(restResponseType, clientMethod.ReturnValue.Type)}() {{");
                                     function.Indent(() =>
                                     {
                                         function.Block($"public {clientMethod.ReturnValue.Type} apply({restResponseType} restResponse)", subFunction =>
@@ -7766,13 +7762,10 @@ namespace AutoRest.Java
             }
         }
 
-        private static IEnumerable<string> GetExpressionsToValidate(ClientMethod clientMethod, JavaSettings settings)
+        private static IEnumerable<string> GetExpressionsToValidate(RestAPIMethod restAPIMethod, bool onlyRequiredParameters, JavaSettings settings)
         {
-            return GetExpressionsToValidate(clientMethod.AutoRestMethod, clientMethod.OnlyRequiredParameters, settings);
-        }
+            AutoRestMethod autoRestMethod = restAPIMethod.AutoRestMethod;
 
-        private static IEnumerable<string> GetExpressionsToValidate(AutoRestMethod autoRestMethod, bool onlyRequiredParameters, JavaSettings settings)
-        {
             List<string> expressionsToValidate = new List<string>();
             foreach (AutoRestParameter autoRestParameter in autoRestMethod.Parameters)
             {
@@ -7912,6 +7905,8 @@ namespace AutoRest.Java
                         {
                             bool onlyRequiredParameters = (autoRestParameters == autoRestRequiredClientMethodParameters);
 
+                            IEnumerable<string> expressionsToValidate = GetExpressionsToValidate(restAPIMethod, onlyRequiredParameters, settings);
+
                             List<Parameter> parameters = new List<Parameter>();
                             foreach (AutoRestParameter autoRestParameter in autoRestParameters)
                             {
@@ -7944,7 +7939,8 @@ namespace AutoRest.Java
                                 parameters: parameters,
                                 onlyRequiredParameters: onlyRequiredParameters,
                                 type: ClientMethodType.PagingSync,
-                                restAPIMethod: restAPIMethod));
+                                restAPIMethod: restAPIMethod,
+                                expressionsToValidate: expressionsToValidate));
 
                             clientMethods.Add(new ClientMethod(
                                 description: restAPIMethod.Description,
@@ -7955,7 +7951,8 @@ namespace AutoRest.Java
                                 parameters: parameters,
                                 onlyRequiredParameters: onlyRequiredParameters,
                                 type: ClientMethodType.PagingAsync,
-                                restAPIMethod: restAPIMethod));
+                                restAPIMethod: restAPIMethod,
+                                expressionsToValidate: expressionsToValidate));
 
                             GenericType singlePageMethodReturnType = GenericType.Single(pageType);
                             clientMethods.Add(new ClientMethod(
@@ -7967,7 +7964,8 @@ namespace AutoRest.Java
                                 parameters: parameters,
                                 onlyRequiredParameters: onlyRequiredParameters,
                                 type: ClientMethodType.PagingAsyncSinglePage,
-                                restAPIMethod: restAPIMethod));
+                                restAPIMethod: restAPIMethod,
+                                expressionsToValidate: expressionsToValidate));
                         }
 
                         addSimpleClientMethods = false;
@@ -7977,6 +7975,8 @@ namespace AutoRest.Java
                         foreach (IEnumerable<AutoRestParameter> autoRestParameters in autoRestParameterLists)
                         {
                             bool onlyRequiredParameters = (autoRestParameters == autoRestRequiredClientMethodParameters);
+
+                            IEnumerable<string> expressionsToValidate = GetExpressionsToValidate(restAPIMethod, onlyRequiredParameters, settings);
 
                             List<Parameter> parameters = new List<Parameter>();
                             foreach (AutoRestParameter autoRestParameter in autoRestParameters)
@@ -8004,7 +8004,8 @@ namespace AutoRest.Java
                                 parameters: parameters,
                                 onlyRequiredParameters: onlyRequiredParameters,
                                 type: ClientMethodType.SimulatedPagingSync,
-                                restAPIMethod: restAPIMethod));
+                                restAPIMethod: restAPIMethod,
+                                expressionsToValidate: expressionsToValidate));
 
                             clientMethods.Add(new ClientMethod(
                                 description: restAPIMethod.Description,
@@ -8015,7 +8016,8 @@ namespace AutoRest.Java
                                 parameters: parameters,
                                 onlyRequiredParameters: onlyRequiredParameters,
                                 type: ClientMethodType.SimulatedPagingAsync,
-                                restAPIMethod: restAPIMethod));
+                                restAPIMethod: restAPIMethod,
+                                expressionsToValidate: expressionsToValidate));
                         }
 
                         addSimpleClientMethods = false;
@@ -8025,6 +8027,8 @@ namespace AutoRest.Java
                         foreach (IEnumerable<AutoRestParameter> autoRestParameters in autoRestParameterLists)
                         {
                             bool onlyRequiredParameters = (autoRestParameters == autoRestRequiredClientMethodParameters);
+
+                            IEnumerable<string> expressionsToValidate = GetExpressionsToValidate(restAPIMethod, onlyRequiredParameters, settings);
 
                             List<Parameter> parameters = new List<Parameter>();
                             foreach (AutoRestParameter autoRestParameter in autoRestParameters)
@@ -8058,7 +8062,8 @@ namespace AutoRest.Java
                                 parameters: parameters,
                                 onlyRequiredParameters: onlyRequiredParameters,
                                 type: ClientMethodType.LongRunningSync,
-                                restAPIMethod: restAPIMethod));
+                                restAPIMethod: restAPIMethod,
+                                expressionsToValidate: expressionsToValidate));
 
                             clientMethods.Add(new ClientMethod(
                                 description: restAPIMethod.Description,
@@ -8069,7 +8074,8 @@ namespace AutoRest.Java
                                 parameters: parameters.ConcatSingleItem(serviceCallbackParameter),
                                 onlyRequiredParameters: onlyRequiredParameters,
                                 type: ClientMethodType.LongRunningAsyncServiceCallback,
-                                restAPIMethod: restAPIMethod));
+                                restAPIMethod: restAPIMethod,
+                                expressionsToValidate: expressionsToValidate));
 
                             clientMethods.Add(new ClientMethod(
                                 description: restAPIMethod.Description,
@@ -8080,7 +8086,8 @@ namespace AutoRest.Java
                                 parameters: parameters,
                                 onlyRequiredParameters: onlyRequiredParameters,
                                 type: ClientMethodType.LongRunningAsync,
-                                restAPIMethod: restAPIMethod));
+                                restAPIMethod: restAPIMethod,
+                                expressionsToValidate: expressionsToValidate));
                         }
 
                         addSimpleClientMethods = false;
@@ -8094,6 +8101,8 @@ namespace AutoRest.Java
                     foreach (IEnumerable<AutoRestParameter> autoRestParameters in autoRestParameterLists)
                     {
                         bool onlyRequiredParameters = (autoRestParameters == autoRestRequiredClientMethodParameters);
+
+                        IEnumerable<string> expressionsToValidate = GetExpressionsToValidate(restAPIMethod, onlyRequiredParameters, settings);
 
                         List<Parameter> parameters = new List<Parameter>();
                         foreach (AutoRestParameter autoRestParameter in autoRestParameters)
@@ -8127,7 +8136,8 @@ namespace AutoRest.Java
                             parameters: parameters,
                             onlyRequiredParameters: onlyRequiredParameters,
                             type: ClientMethodType.SimpleSync,
-                            restAPIMethod: restAPIMethod));
+                            restAPIMethod: restAPIMethod,
+                            expressionsToValidate: expressionsToValidate));
 
                         clientMethods.Add(new ClientMethod(
                             description: restAPIMethod.Description,
@@ -8138,7 +8148,8 @@ namespace AutoRest.Java
                             parameters: parameters.ConcatSingleItem(serviceCallbackParameter),
                             onlyRequiredParameters: onlyRequiredParameters,
                             type: ClientMethodType.SimpleAsyncServiceCallback,
-                            restAPIMethod: restAPIMethod));
+                            restAPIMethod: restAPIMethod,
+                            expressionsToValidate: expressionsToValidate));
 
                         GenericType singleRestResponseReturnType = GenericType.Single(GenericType.RestResponse(
                             headersType: ConvertToClientType(ParseType(autoRestRestAPIMethodReturnType.Headers, settings)),
@@ -8152,7 +8163,8 @@ namespace AutoRest.Java
                             parameters: parameters,
                             onlyRequiredParameters: onlyRequiredParameters,
                             type: ClientMethodType.SimpleAsyncRestResponse,
-                            restAPIMethod: restAPIMethod));
+                            restAPIMethod: restAPIMethod,
+                            expressionsToValidate: expressionsToValidate));
 
                         IType asyncMethodReturnType;
                         if (restAPIMethodReturnBodyClientType != PrimitiveType.Void)
@@ -8176,17 +8188,13 @@ namespace AutoRest.Java
                             parameters: parameters,
                             onlyRequiredParameters: onlyRequiredParameters,
                             type: ClientMethodType.SimpleAsync,
-                            restAPIMethod: restAPIMethod));
+                            restAPIMethod: restAPIMethod,
+                            expressionsToValidate: expressionsToValidate));
                     }
                 }
             }
 
             return clientMethods;
-        }
-
-        private static string GetPagingAsyncMethodName(ClientMethod clientMethod)
-        {
-            return GetPagingAsyncMethodName(clientMethod.RestAPIMethod);
         }
 
         private static string GetPagingAsyncMethodName(RestAPIMethod restAPIMethod)

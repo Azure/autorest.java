@@ -115,7 +115,7 @@ namespace AutoRest.Java.Model
 
             foreach (ClientMethod clientMethod in ClientMethods)
             {
-                clientMethod.AddImportsTo(imports, includeImplementationImports);
+                clientMethod.AddImportsTo(imports, includeImplementationImports, settings);
             }
         }
     }
