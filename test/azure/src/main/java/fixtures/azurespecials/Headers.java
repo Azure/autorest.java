@@ -13,7 +13,6 @@ package fixtures.azurespecials;
 import com.microsoft.rest.v2.RestResponse;
 import com.microsoft.rest.v2.ServiceCallback;
 import com.microsoft.rest.v2.ServiceFuture;
-import fixtures.azurespecials.models.ErrorException;
 import fixtures.azurespecials.models.HeaderCustomNamedRequestIdHeaders;
 import fixtures.azurespecials.models.HeaderCustomNamedRequestIdHeadHeaders;
 import fixtures.azurespecials.models.HeaderCustomNamedRequestIdParamGroupingHeaders;

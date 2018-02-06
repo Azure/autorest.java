@@ -13,7 +13,6 @@ package fixtures.bodyarray;
 import com.microsoft.rest.v2.RestResponse;
 import com.microsoft.rest.v2.ServiceCallback;
 import com.microsoft.rest.v2.ServiceFuture;
-import fixtures.bodyarray.models.ErrorException;
 import fixtures.bodyarray.models.Product;
 import io.reactivex.Completable;
 import io.reactivex.Maybe;

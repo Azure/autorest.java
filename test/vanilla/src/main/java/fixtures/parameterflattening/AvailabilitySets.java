@@ -10,7 +10,6 @@
 
 package fixtures.parameterflattening;
 
-import com.microsoft.rest.v2.RestException;
 import com.microsoft.rest.v2.RestResponse;
 import com.microsoft.rest.v2.ServiceCallback;
 import com.microsoft.rest.v2.ServiceFuture;

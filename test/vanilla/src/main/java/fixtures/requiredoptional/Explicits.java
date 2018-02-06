@@ -18,7 +18,6 @@ import fixtures.requiredoptional.models.ArrayWrapper;
 import fixtures.requiredoptional.models.ClassOptionalWrapper;
 import fixtures.requiredoptional.models.ClassWrapper;
 import fixtures.requiredoptional.models.Error;
-import fixtures.requiredoptional.models.ErrorException;
 import fixtures.requiredoptional.models.IntOptionalWrapper;
 import fixtures.requiredoptional.models.IntWrapper;
 import fixtures.requiredoptional.models.Product;

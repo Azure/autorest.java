@@ -13,7 +13,6 @@ package fixtures.subscriptionidapiversion;
 import com.microsoft.rest.v2.RestResponse;
 import com.microsoft.rest.v2.ServiceCallback;
 import com.microsoft.rest.v2.ServiceFuture;
-import fixtures.subscriptionidapiversion.models.ErrorException;
 import fixtures.subscriptionidapiversion.models.SampleResourceGroup;
 import io.reactivex.Maybe;
 import io.reactivex.Single;

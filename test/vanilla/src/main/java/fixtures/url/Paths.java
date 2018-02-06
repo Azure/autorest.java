@@ -13,7 +13,6 @@ package fixtures.url;
 import com.microsoft.rest.v2.RestResponse;
 import com.microsoft.rest.v2.ServiceCallback;
 import com.microsoft.rest.v2.ServiceFuture;
-import fixtures.url.models.ErrorException;
 import fixtures.url.models.UriColor;
 import io.reactivex.Completable;
 import io.reactivex.Single;

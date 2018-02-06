@@ -13,7 +13,6 @@ package fixtures.header;
 import com.microsoft.rest.v2.RestResponse;
 import com.microsoft.rest.v2.ServiceCallback;
 import com.microsoft.rest.v2.ServiceFuture;
-import fixtures.header.models.ErrorException;
 import fixtures.header.models.GreyscaleColors;
 import fixtures.header.models.HeaderResponseBoolHeaders;
 import fixtures.header.models.HeaderResponseByteHeaders;

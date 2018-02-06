@@ -14,7 +14,6 @@ import com.microsoft.rest.v2.RestResponse;
 import com.microsoft.rest.v2.ServiceCallback;
 import com.microsoft.rest.v2.ServiceFuture;
 import fixtures.bodystring.models.Colors;
-import fixtures.bodystring.models.ErrorException;
 import fixtures.bodystring.models.RefColorConstant;
 import io.reactivex.Completable;
 import io.reactivex.Maybe;

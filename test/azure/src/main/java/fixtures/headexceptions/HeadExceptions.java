@@ -10,7 +10,6 @@
 
 package fixtures.headexceptions;
 
-import com.microsoft.azure.v2.CloudException;
 import com.microsoft.rest.v2.RestResponse;
 import com.microsoft.rest.v2.ServiceCallback;
 import com.microsoft.rest.v2.ServiceFuture;

@@ -20,7 +20,6 @@ import fixtures.bodycomplex.models.DatetimeWrapper;
 import fixtures.bodycomplex.models.DateWrapper;
 import fixtures.bodycomplex.models.DoubleWrapper;
 import fixtures.bodycomplex.models.DurationWrapper;
-import fixtures.bodycomplex.models.ErrorException;
 import fixtures.bodycomplex.models.FloatWrapper;
 import fixtures.bodycomplex.models.IntWrapper;
 import fixtures.bodycomplex.models.LongWrapper;

@@ -13,7 +13,6 @@ package fixtures.bodydictionary;
 import com.microsoft.rest.v2.RestResponse;
 import com.microsoft.rest.v2.ServiceCallback;
 import com.microsoft.rest.v2.ServiceFuture;
-import fixtures.bodydictionary.models.ErrorException;
 import fixtures.bodydictionary.models.Widget;
 import io.reactivex.Completable;
 import io.reactivex.Maybe;

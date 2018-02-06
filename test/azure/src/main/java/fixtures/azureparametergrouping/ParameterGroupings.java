@@ -13,7 +13,6 @@ package fixtures.azureparametergrouping;
 import com.microsoft.rest.v2.RestResponse;
 import com.microsoft.rest.v2.ServiceCallback;
 import com.microsoft.rest.v2.ServiceFuture;
-import fixtures.azureparametergrouping.models.ErrorException;
 import fixtures.azureparametergrouping.models.FirstParameterGroup;
 import fixtures.azureparametergrouping.models.ParameterGroupingPostMultiParamGroupsSecondParamGroup;
 import fixtures.azureparametergrouping.models.ParameterGroupingPostOptionalParameters;
