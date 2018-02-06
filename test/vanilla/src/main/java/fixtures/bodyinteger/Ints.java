@@ -16,6 +16,7 @@ import com.microsoft.rest.v2.ServiceFuture;
 import io.reactivex.Completable;
 import io.reactivex.Maybe;
 import io.reactivex.Single;
+import io.reactivex.annotations.NonNull;
 import org.joda.time.DateTime;
 
 /**
@@ -39,7 +40,7 @@ public interface Ints {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Integer&gt;} object.
      */
-    ServiceFuture<Integer> getNullAsync(ServiceCallback<Integer> serviceCallback);
+    ServiceFuture<Integer> getNullAsync(@NonNull ServiceCallback<Integer> serviceCallback);
 
     /**
      * Get null Int value.
@@ -71,7 +72,7 @@ public interface Ints {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Integer&gt;} object.
      */
-    ServiceFuture<Integer> getInvalidAsync(ServiceCallback<Integer> serviceCallback);
+    ServiceFuture<Integer> getInvalidAsync(@NonNull ServiceCallback<Integer> serviceCallback);
 
     /**
      * Get invalid Int value.
@@ -103,7 +104,7 @@ public interface Ints {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Integer&gt;} object.
      */
-    ServiceFuture<Integer> getOverflowInt32Async(ServiceCallback<Integer> serviceCallback);
+    ServiceFuture<Integer> getOverflowInt32Async(@NonNull ServiceCallback<Integer> serviceCallback);
 
     /**
      * Get overflow Int32 value.
@@ -135,7 +136,7 @@ public interface Ints {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Integer&gt;} object.
      */
-    ServiceFuture<Integer> getUnderflowInt32Async(ServiceCallback<Integer> serviceCallback);
+    ServiceFuture<Integer> getUnderflowInt32Async(@NonNull ServiceCallback<Integer> serviceCallback);
 
     /**
      * Get underflow Int32 value.
@@ -167,7 +168,7 @@ public interface Ints {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Long&gt;} object.
      */
-    ServiceFuture<Long> getOverflowInt64Async(ServiceCallback<Long> serviceCallback);
+    ServiceFuture<Long> getOverflowInt64Async(@NonNull ServiceCallback<Long> serviceCallback);
 
     /**
      * Get overflow Int64 value.
@@ -199,7 +200,7 @@ public interface Ints {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Long&gt;} object.
      */
-    ServiceFuture<Long> getUnderflowInt64Async(ServiceCallback<Long> serviceCallback);
+    ServiceFuture<Long> getUnderflowInt64Async(@NonNull ServiceCallback<Long> serviceCallback);
 
     /**
      * Get underflow Int64 value.
@@ -223,7 +224,7 @@ public interface Ints {
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
-    void putMax32(int intBody);
+    void putMax32(@NonNull int intBody);
 
     /**
      * Put max int32 value.
@@ -233,7 +234,7 @@ public interface Ints {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    ServiceFuture<Void> putMax32Async(int intBody, ServiceCallback<Void> serviceCallback);
+    ServiceFuture<Void> putMax32Async(@NonNull int intBody, @NonNull ServiceCallback<Void> serviceCallback);
 
     /**
      * Put max int32 value.
@@ -242,7 +243,7 @@ public interface Ints {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
      */
-    Single<RestResponse<Void, Void>> putMax32WithRestResponseAsync(int intBody);
+    Single<RestResponse<Void, Void>> putMax32WithRestResponseAsync(@NonNull int intBody);
 
     /**
      * Put max int32 value.
@@ -251,7 +252,7 @@ public interface Ints {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Completable} object if successful.
      */
-    Completable putMax32Async(int intBody);
+    Completable putMax32Async(@NonNull int intBody);
 
     /**
      * Put max int64 value.
@@ -261,7 +262,7 @@ public interface Ints {
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
-    void putMax64(long intBody);
+    void putMax64(@NonNull long intBody);
 
     /**
      * Put max int64 value.
@@ -271,7 +272,7 @@ public interface Ints {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    ServiceFuture<Void> putMax64Async(long intBody, ServiceCallback<Void> serviceCallback);
+    ServiceFuture<Void> putMax64Async(@NonNull long intBody, @NonNull ServiceCallback<Void> serviceCallback);
 
     /**
      * Put max int64 value.
@@ -280,7 +281,7 @@ public interface Ints {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
      */
-    Single<RestResponse<Void, Void>> putMax64WithRestResponseAsync(long intBody);
+    Single<RestResponse<Void, Void>> putMax64WithRestResponseAsync(@NonNull long intBody);
 
     /**
      * Put max int64 value.
@@ -289,7 +290,7 @@ public interface Ints {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Completable} object if successful.
      */
-    Completable putMax64Async(long intBody);
+    Completable putMax64Async(@NonNull long intBody);
 
     /**
      * Put min int32 value.
@@ -299,7 +300,7 @@ public interface Ints {
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
-    void putMin32(int intBody);
+    void putMin32(@NonNull int intBody);
 
     /**
      * Put min int32 value.
@@ -309,7 +310,7 @@ public interface Ints {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    ServiceFuture<Void> putMin32Async(int intBody, ServiceCallback<Void> serviceCallback);
+    ServiceFuture<Void> putMin32Async(@NonNull int intBody, @NonNull ServiceCallback<Void> serviceCallback);
 
     /**
      * Put min int32 value.
@@ -318,7 +319,7 @@ public interface Ints {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
      */
-    Single<RestResponse<Void, Void>> putMin32WithRestResponseAsync(int intBody);
+    Single<RestResponse<Void, Void>> putMin32WithRestResponseAsync(@NonNull int intBody);
 
     /**
      * Put min int32 value.
@@ -327,7 +328,7 @@ public interface Ints {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Completable} object if successful.
      */
-    Completable putMin32Async(int intBody);
+    Completable putMin32Async(@NonNull int intBody);
 
     /**
      * Put min int64 value.
@@ -337,7 +338,7 @@ public interface Ints {
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
-    void putMin64(long intBody);
+    void putMin64(@NonNull long intBody);
 
     /**
      * Put min int64 value.
@@ -347,7 +348,7 @@ public interface Ints {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    ServiceFuture<Void> putMin64Async(long intBody, ServiceCallback<Void> serviceCallback);
+    ServiceFuture<Void> putMin64Async(@NonNull long intBody, @NonNull ServiceCallback<Void> serviceCallback);
 
     /**
      * Put min int64 value.
@@ -356,7 +357,7 @@ public interface Ints {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
      */
-    Single<RestResponse<Void, Void>> putMin64WithRestResponseAsync(long intBody);
+    Single<RestResponse<Void, Void>> putMin64WithRestResponseAsync(@NonNull long intBody);
 
     /**
      * Put min int64 value.
@@ -365,7 +366,7 @@ public interface Ints {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Completable} object if successful.
      */
-    Completable putMin64Async(long intBody);
+    Completable putMin64Async(@NonNull long intBody);
 
     /**
      * Get datetime encoded as Unix time value.
@@ -383,7 +384,7 @@ public interface Ints {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;DateTime&gt;} object.
      */
-    ServiceFuture<DateTime> getUnixTimeAsync(ServiceCallback<DateTime> serviceCallback);
+    ServiceFuture<DateTime> getUnixTimeAsync(@NonNull ServiceCallback<DateTime> serviceCallback);
 
     /**
      * Get datetime encoded as Unix time value.
@@ -407,7 +408,7 @@ public interface Ints {
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
-    void putUnixTimeDate(DateTime intBody);
+    void putUnixTimeDate(@NonNull DateTime intBody);
 
     /**
      * Put datetime encoded as Unix time.
@@ -417,7 +418,7 @@ public interface Ints {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    ServiceFuture<Void> putUnixTimeDateAsync(DateTime intBody, ServiceCallback<Void> serviceCallback);
+    ServiceFuture<Void> putUnixTimeDateAsync(@NonNull DateTime intBody, @NonNull ServiceCallback<Void> serviceCallback);
 
     /**
      * Put datetime encoded as Unix time.
@@ -426,7 +427,7 @@ public interface Ints {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
      */
-    Single<RestResponse<Void, Void>> putUnixTimeDateWithRestResponseAsync(DateTime intBody);
+    Single<RestResponse<Void, Void>> putUnixTimeDateWithRestResponseAsync(@NonNull DateTime intBody);
 
     /**
      * Put datetime encoded as Unix time.
@@ -435,7 +436,7 @@ public interface Ints {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Completable} object if successful.
      */
-    Completable putUnixTimeDateAsync(DateTime intBody);
+    Completable putUnixTimeDateAsync(@NonNull DateTime intBody);
 
     /**
      * Get invalid Unix time value.
@@ -453,7 +454,7 @@ public interface Ints {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;DateTime&gt;} object.
      */
-    ServiceFuture<DateTime> getInvalidUnixTimeAsync(ServiceCallback<DateTime> serviceCallback);
+    ServiceFuture<DateTime> getInvalidUnixTimeAsync(@NonNull ServiceCallback<DateTime> serviceCallback);
 
     /**
      * Get invalid Unix time value.
@@ -485,7 +486,7 @@ public interface Ints {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;DateTime&gt;} object.
      */
-    ServiceFuture<DateTime> getNullUnixTimeAsync(ServiceCallback<DateTime> serviceCallback);
+    ServiceFuture<DateTime> getNullUnixTimeAsync(@NonNull ServiceCallback<DateTime> serviceCallback);
 
     /**
      * Get null Unix time value.

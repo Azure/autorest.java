@@ -20,6 +20,7 @@ import fixtures.azurespecials.models.HeaderCustomNamedRequestIdParamGroupingPara
 import io.reactivex.Completable;
 import io.reactivex.Maybe;
 import io.reactivex.Single;
+import io.reactivex.annotations.NonNull;
 
 /**
  * An instance of this class provides access to all the operations defined in
@@ -34,7 +35,7 @@ public interface Headers {
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
-    void customNamedRequestId(String fooClientRequestId);
+    void customNamedRequestId(@NonNull String fooClientRequestId);
 
     /**
      * Send foo-client-request-id = 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0 in the header of the request.
@@ -44,7 +45,7 @@ public interface Headers {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    ServiceFuture<Void> customNamedRequestIdAsync(String fooClientRequestId, ServiceCallback<Void> serviceCallback);
+    ServiceFuture<Void> customNamedRequestIdAsync(@NonNull String fooClientRequestId, @NonNull ServiceCallback<Void> serviceCallback);
 
     /**
      * Send foo-client-request-id = 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0 in the header of the request.
@@ -53,7 +54,7 @@ public interface Headers {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;HeaderCustomNamedRequestIdHeaders, Void&gt;&gt;} object if successful.
      */
-    Single<RestResponse<HeaderCustomNamedRequestIdHeaders, Void>> customNamedRequestIdWithRestResponseAsync(String fooClientRequestId);
+    Single<RestResponse<HeaderCustomNamedRequestIdHeaders, Void>> customNamedRequestIdWithRestResponseAsync(@NonNull String fooClientRequestId);
 
     /**
      * Send foo-client-request-id = 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0 in the header of the request.
@@ -62,7 +63,7 @@ public interface Headers {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Completable} object if successful.
      */
-    Completable customNamedRequestIdAsync(String fooClientRequestId);
+    Completable customNamedRequestIdAsync(@NonNull String fooClientRequestId);
 
     /**
      * Send foo-client-request-id = 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0 in the header of the request, via a parameter group.
@@ -72,7 +73,7 @@ public interface Headers {
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
-    void customNamedRequestIdParamGrouping(HeaderCustomNamedRequestIdParamGroupingParameters headerCustomNamedRequestIdParamGroupingParameters);
+    void customNamedRequestIdParamGrouping(@NonNull HeaderCustomNamedRequestIdParamGroupingParameters headerCustomNamedRequestIdParamGroupingParameters);
 
     /**
      * Send foo-client-request-id = 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0 in the header of the request, via a parameter group.
@@ -82,7 +83,7 @@ public interface Headers {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    ServiceFuture<Void> customNamedRequestIdParamGroupingAsync(HeaderCustomNamedRequestIdParamGroupingParameters headerCustomNamedRequestIdParamGroupingParameters, ServiceCallback<Void> serviceCallback);
+    ServiceFuture<Void> customNamedRequestIdParamGroupingAsync(@NonNull HeaderCustomNamedRequestIdParamGroupingParameters headerCustomNamedRequestIdParamGroupingParameters, @NonNull ServiceCallback<Void> serviceCallback);
 
     /**
      * Send foo-client-request-id = 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0 in the header of the request, via a parameter group.
@@ -91,7 +92,7 @@ public interface Headers {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;HeaderCustomNamedRequestIdParamGroupingHeaders, Void&gt;&gt;} object if successful.
      */
-    Single<RestResponse<HeaderCustomNamedRequestIdParamGroupingHeaders, Void>> customNamedRequestIdParamGroupingWithRestResponseAsync(HeaderCustomNamedRequestIdParamGroupingParameters headerCustomNamedRequestIdParamGroupingParameters);
+    Single<RestResponse<HeaderCustomNamedRequestIdParamGroupingHeaders, Void>> customNamedRequestIdParamGroupingWithRestResponseAsync(@NonNull HeaderCustomNamedRequestIdParamGroupingParameters headerCustomNamedRequestIdParamGroupingParameters);
 
     /**
      * Send foo-client-request-id = 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0 in the header of the request, via a parameter group.
@@ -100,7 +101,7 @@ public interface Headers {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Completable} object if successful.
      */
-    Completable customNamedRequestIdParamGroupingAsync(HeaderCustomNamedRequestIdParamGroupingParameters headerCustomNamedRequestIdParamGroupingParameters);
+    Completable customNamedRequestIdParamGroupingAsync(@NonNull HeaderCustomNamedRequestIdParamGroupingParameters headerCustomNamedRequestIdParamGroupingParameters);
 
     /**
      * Send foo-client-request-id = 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0 in the header of the request.
@@ -111,7 +112,7 @@ public interface Headers {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the boolean object if successful.
      */
-    boolean customNamedRequestIdHead(String fooClientRequestId);
+    boolean customNamedRequestIdHead(@NonNull String fooClientRequestId);
 
     /**
      * Send foo-client-request-id = 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0 in the header of the request.
@@ -121,7 +122,7 @@ public interface Headers {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Boolean&gt;} object.
      */
-    ServiceFuture<Boolean> customNamedRequestIdHeadAsync(String fooClientRequestId, ServiceCallback<Boolean> serviceCallback);
+    ServiceFuture<Boolean> customNamedRequestIdHeadAsync(@NonNull String fooClientRequestId, @NonNull ServiceCallback<Boolean> serviceCallback);
 
     /**
      * Send foo-client-request-id = 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0 in the header of the request.
@@ -130,7 +131,7 @@ public interface Headers {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;HeaderCustomNamedRequestIdHeadHeaders, Boolean&gt;&gt;} object if successful.
      */
-    Single<RestResponse<HeaderCustomNamedRequestIdHeadHeaders, Boolean>> customNamedRequestIdHeadWithRestResponseAsync(String fooClientRequestId);
+    Single<RestResponse<HeaderCustomNamedRequestIdHeadHeaders, Boolean>> customNamedRequestIdHeadWithRestResponseAsync(@NonNull String fooClientRequestId);
 
     /**
      * Send foo-client-request-id = 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0 in the header of the request.
@@ -139,5 +140,5 @@ public interface Headers {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Maybe&lt;Boolean&gt;} object if successful.
      */
-    Maybe<Boolean> customNamedRequestIdHeadAsync(String fooClientRequestId);
+    Maybe<Boolean> customNamedRequestIdHeadAsync(@NonNull String fooClientRequestId);
 }

@@ -17,6 +17,7 @@ import fixtures.bodycomplex.models.ArrayWrapper;
 import io.reactivex.Completable;
 import io.reactivex.Maybe;
 import io.reactivex.Single;
+import io.reactivex.annotations.NonNull;
 
 /**
  * An instance of this class provides access to all the operations defined in
@@ -39,7 +40,7 @@ public interface Arrays {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;ArrayWrapper&gt;} object.
      */
-    ServiceFuture<ArrayWrapper> getValidAsync(ServiceCallback<ArrayWrapper> serviceCallback);
+    ServiceFuture<ArrayWrapper> getValidAsync(@NonNull ServiceCallback<ArrayWrapper> serviceCallback);
 
     /**
      * Get complex types with array property.
@@ -63,7 +64,7 @@ public interface Arrays {
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
-    void putValid(ArrayWrapper complexBody);
+    void putValid(@NonNull ArrayWrapper complexBody);
 
     /**
      * Put complex types with array property.
@@ -73,7 +74,7 @@ public interface Arrays {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    ServiceFuture<Void> putValidAsync(ArrayWrapper complexBody, ServiceCallback<Void> serviceCallback);
+    ServiceFuture<Void> putValidAsync(@NonNull ArrayWrapper complexBody, @NonNull ServiceCallback<Void> serviceCallback);
 
     /**
      * Put complex types with array property.
@@ -82,7 +83,7 @@ public interface Arrays {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
      */
-    Single<RestResponse<Void, Void>> putValidWithRestResponseAsync(ArrayWrapper complexBody);
+    Single<RestResponse<Void, Void>> putValidWithRestResponseAsync(@NonNull ArrayWrapper complexBody);
 
     /**
      * Put complex types with array property.
@@ -91,7 +92,7 @@ public interface Arrays {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Completable} object if successful.
      */
-    Completable putValidAsync(ArrayWrapper complexBody);
+    Completable putValidAsync(@NonNull ArrayWrapper complexBody);
 
     /**
      * Get complex types with array property which is empty.
@@ -109,7 +110,7 @@ public interface Arrays {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;ArrayWrapper&gt;} object.
      */
-    ServiceFuture<ArrayWrapper> getEmptyAsync(ServiceCallback<ArrayWrapper> serviceCallback);
+    ServiceFuture<ArrayWrapper> getEmptyAsync(@NonNull ServiceCallback<ArrayWrapper> serviceCallback);
 
     /**
      * Get complex types with array property which is empty.
@@ -133,7 +134,7 @@ public interface Arrays {
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
-    void putEmpty(ArrayWrapper complexBody);
+    void putEmpty(@NonNull ArrayWrapper complexBody);
 
     /**
      * Put complex types with array property which is empty.
@@ -143,7 +144,7 @@ public interface Arrays {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    ServiceFuture<Void> putEmptyAsync(ArrayWrapper complexBody, ServiceCallback<Void> serviceCallback);
+    ServiceFuture<Void> putEmptyAsync(@NonNull ArrayWrapper complexBody, @NonNull ServiceCallback<Void> serviceCallback);
 
     /**
      * Put complex types with array property which is empty.
@@ -152,7 +153,7 @@ public interface Arrays {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
      */
-    Single<RestResponse<Void, Void>> putEmptyWithRestResponseAsync(ArrayWrapper complexBody);
+    Single<RestResponse<Void, Void>> putEmptyWithRestResponseAsync(@NonNull ArrayWrapper complexBody);
 
     /**
      * Put complex types with array property which is empty.
@@ -161,7 +162,7 @@ public interface Arrays {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Completable} object if successful.
      */
-    Completable putEmptyAsync(ArrayWrapper complexBody);
+    Completable putEmptyAsync(@NonNull ArrayWrapper complexBody);
 
     /**
      * Get complex types with array property while server doesn't provide a response payload.
@@ -179,7 +180,7 @@ public interface Arrays {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;ArrayWrapper&gt;} object.
      */
-    ServiceFuture<ArrayWrapper> getNotProvidedAsync(ServiceCallback<ArrayWrapper> serviceCallback);
+    ServiceFuture<ArrayWrapper> getNotProvidedAsync(@NonNull ServiceCallback<ArrayWrapper> serviceCallback);
 
     /**
      * Get complex types with array property while server doesn't provide a response payload.

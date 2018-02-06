@@ -25,12 +25,13 @@ import fixtures.azurespecials.SkipUrlEncodings;
 import fixtures.azurespecials.models.ErrorException;
 import io.reactivex.Completable;
 import io.reactivex.Single;
+import io.reactivex.annotations.NonNull;
 
 /**
  * An instance of this class provides access to all the operations defined in
  * SkipUrlEncodings.
  */
-public class SkipUrlEncodingsImpl implements SkipUrlEncodings {
+public final class SkipUrlEncodingsImpl implements SkipUrlEncodings {
     /**
      * The proxy service used to perform REST calls.
      */
@@ -101,7 +102,7 @@ public class SkipUrlEncodingsImpl implements SkipUrlEncodings {
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
-    public void getMethodPathValid(String unencodedPathParam) {
+    public void getMethodPathValid(@NonNull String unencodedPathParam) {
         getMethodPathValidAsync(unencodedPathParam).blockingAwait();
     }
 
@@ -113,7 +114,7 @@ public class SkipUrlEncodingsImpl implements SkipUrlEncodings {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    public ServiceFuture<Void> getMethodPathValidAsync(String unencodedPathParam, ServiceCallback<Void> serviceCallback) {
+    public ServiceFuture<Void> getMethodPathValidAsync(@NonNull String unencodedPathParam, @NonNull ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(getMethodPathValidAsync(unencodedPathParam), serviceCallback);
     }
 
@@ -124,7 +125,7 @@ public class SkipUrlEncodingsImpl implements SkipUrlEncodings {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
      */
-    public Single<RestResponse<Void, Void>> getMethodPathValidWithRestResponseAsync(String unencodedPathParam) {
+    public Single<RestResponse<Void, Void>> getMethodPathValidWithRestResponseAsync(@NonNull String unencodedPathParam) {
         if (unencodedPathParam == null) {
             throw new IllegalArgumentException("Parameter unencodedPathParam is required and cannot be null.");
         }
@@ -138,7 +139,7 @@ public class SkipUrlEncodingsImpl implements SkipUrlEncodings {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Completable} object if successful.
      */
-    public Completable getMethodPathValidAsync(String unencodedPathParam) {
+    public Completable getMethodPathValidAsync(@NonNull String unencodedPathParam) {
         return getMethodPathValidWithRestResponseAsync(unencodedPathParam)
             .toCompletable();
     }
@@ -151,7 +152,7 @@ public class SkipUrlEncodingsImpl implements SkipUrlEncodings {
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
-    public void getPathPathValid(String unencodedPathParam) {
+    public void getPathPathValid(@NonNull String unencodedPathParam) {
         getPathPathValidAsync(unencodedPathParam).blockingAwait();
     }
 
@@ -163,7 +164,7 @@ public class SkipUrlEncodingsImpl implements SkipUrlEncodings {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    public ServiceFuture<Void> getPathPathValidAsync(String unencodedPathParam, ServiceCallback<Void> serviceCallback) {
+    public ServiceFuture<Void> getPathPathValidAsync(@NonNull String unencodedPathParam, @NonNull ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(getPathPathValidAsync(unencodedPathParam), serviceCallback);
     }
 
@@ -174,7 +175,7 @@ public class SkipUrlEncodingsImpl implements SkipUrlEncodings {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
      */
-    public Single<RestResponse<Void, Void>> getPathPathValidWithRestResponseAsync(String unencodedPathParam) {
+    public Single<RestResponse<Void, Void>> getPathPathValidWithRestResponseAsync(@NonNull String unencodedPathParam) {
         if (unencodedPathParam == null) {
             throw new IllegalArgumentException("Parameter unencodedPathParam is required and cannot be null.");
         }
@@ -188,7 +189,7 @@ public class SkipUrlEncodingsImpl implements SkipUrlEncodings {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Completable} object if successful.
      */
-    public Completable getPathPathValidAsync(String unencodedPathParam) {
+    public Completable getPathPathValidAsync(@NonNull String unencodedPathParam) {
         return getPathPathValidWithRestResponseAsync(unencodedPathParam)
             .toCompletable();
     }
@@ -210,7 +211,7 @@ public class SkipUrlEncodingsImpl implements SkipUrlEncodings {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    public ServiceFuture<Void> getSwaggerPathValidAsync(ServiceCallback<Void> serviceCallback) {
+    public ServiceFuture<Void> getSwaggerPathValidAsync(@NonNull ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(getSwaggerPathValidAsync(), serviceCallback);
     }
 
@@ -242,7 +243,7 @@ public class SkipUrlEncodingsImpl implements SkipUrlEncodings {
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
-    public void getMethodQueryValid(String q1) {
+    public void getMethodQueryValid(@NonNull String q1) {
         getMethodQueryValidAsync(q1).blockingAwait();
     }
 
@@ -254,7 +255,7 @@ public class SkipUrlEncodingsImpl implements SkipUrlEncodings {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    public ServiceFuture<Void> getMethodQueryValidAsync(String q1, ServiceCallback<Void> serviceCallback) {
+    public ServiceFuture<Void> getMethodQueryValidAsync(@NonNull String q1, @NonNull ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(getMethodQueryValidAsync(q1), serviceCallback);
     }
 
@@ -265,7 +266,7 @@ public class SkipUrlEncodingsImpl implements SkipUrlEncodings {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
      */
-    public Single<RestResponse<Void, Void>> getMethodQueryValidWithRestResponseAsync(String q1) {
+    public Single<RestResponse<Void, Void>> getMethodQueryValidWithRestResponseAsync(@NonNull String q1) {
         if (q1 == null) {
             throw new IllegalArgumentException("Parameter q1 is required and cannot be null.");
         }
@@ -279,7 +280,7 @@ public class SkipUrlEncodingsImpl implements SkipUrlEncodings {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Completable} object if successful.
      */
-    public Completable getMethodQueryValidAsync(String q1) {
+    public Completable getMethodQueryValidAsync(@NonNull String q1) {
         return getMethodQueryValidWithRestResponseAsync(q1)
             .toCompletable();
     }
@@ -301,7 +302,7 @@ public class SkipUrlEncodingsImpl implements SkipUrlEncodings {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    public ServiceFuture<Void> getMethodQueryNullAsync(ServiceCallback<Void> serviceCallback) {
+    public ServiceFuture<Void> getMethodQueryNullAsync(@NonNull ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(getMethodQueryNullAsync(), serviceCallback);
     }
 
@@ -345,7 +346,7 @@ public class SkipUrlEncodingsImpl implements SkipUrlEncodings {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    public ServiceFuture<Void> getMethodQueryNullAsync(String q1, ServiceCallback<Void> serviceCallback) {
+    public ServiceFuture<Void> getMethodQueryNullAsync(String q1, @NonNull ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(getMethodQueryNullAsync(q1), serviceCallback);
     }
 
@@ -380,7 +381,7 @@ public class SkipUrlEncodingsImpl implements SkipUrlEncodings {
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
-    public void getPathQueryValid(String q1) {
+    public void getPathQueryValid(@NonNull String q1) {
         getPathQueryValidAsync(q1).blockingAwait();
     }
 
@@ -392,7 +393,7 @@ public class SkipUrlEncodingsImpl implements SkipUrlEncodings {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    public ServiceFuture<Void> getPathQueryValidAsync(String q1, ServiceCallback<Void> serviceCallback) {
+    public ServiceFuture<Void> getPathQueryValidAsync(@NonNull String q1, @NonNull ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(getPathQueryValidAsync(q1), serviceCallback);
     }
 
@@ -403,7 +404,7 @@ public class SkipUrlEncodingsImpl implements SkipUrlEncodings {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
      */
-    public Single<RestResponse<Void, Void>> getPathQueryValidWithRestResponseAsync(String q1) {
+    public Single<RestResponse<Void, Void>> getPathQueryValidWithRestResponseAsync(@NonNull String q1) {
         if (q1 == null) {
             throw new IllegalArgumentException("Parameter q1 is required and cannot be null.");
         }
@@ -417,7 +418,7 @@ public class SkipUrlEncodingsImpl implements SkipUrlEncodings {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Completable} object if successful.
      */
-    public Completable getPathQueryValidAsync(String q1) {
+    public Completable getPathQueryValidAsync(@NonNull String q1) {
         return getPathQueryValidWithRestResponseAsync(q1)
             .toCompletable();
     }
@@ -439,7 +440,7 @@ public class SkipUrlEncodingsImpl implements SkipUrlEncodings {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    public ServiceFuture<Void> getSwaggerQueryValidAsync(ServiceCallback<Void> serviceCallback) {
+    public ServiceFuture<Void> getSwaggerQueryValidAsync(@NonNull ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(getSwaggerQueryValidAsync(), serviceCallback);
     }
 

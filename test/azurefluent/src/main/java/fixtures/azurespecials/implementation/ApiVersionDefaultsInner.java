@@ -23,12 +23,13 @@ import com.microsoft.rest.v2.annotations.UnexpectedResponseExceptionType;
 import fixtures.azurespecials.ErrorException;
 import io.reactivex.Completable;
 import io.reactivex.Single;
+import io.reactivex.annotations.NonNull;
 
 /**
  * An instance of this class provides access to all the operations defined in
  * ApiVersionDefaults.
  */
-public class ApiVersionDefaultsInner {
+public final class ApiVersionDefaultsInner {
     /**
      * The proxy service used to perform REST calls.
      */
@@ -93,7 +94,7 @@ public class ApiVersionDefaultsInner {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    public ServiceFuture<Void> getMethodGlobalValidAsync(ServiceCallback<Void> serviceCallback) {
+    public ServiceFuture<Void> getMethodGlobalValidAsync(@NonNull ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(getMethodGlobalValidAsync(), serviceCallback);
     }
 
@@ -136,7 +137,7 @@ public class ApiVersionDefaultsInner {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    public ServiceFuture<Void> getMethodGlobalNotProvidedValidAsync(ServiceCallback<Void> serviceCallback) {
+    public ServiceFuture<Void> getMethodGlobalNotProvidedValidAsync(@NonNull ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(getMethodGlobalNotProvidedValidAsync(), serviceCallback);
     }
 
@@ -179,7 +180,7 @@ public class ApiVersionDefaultsInner {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    public ServiceFuture<Void> getPathGlobalValidAsync(ServiceCallback<Void> serviceCallback) {
+    public ServiceFuture<Void> getPathGlobalValidAsync(@NonNull ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(getPathGlobalValidAsync(), serviceCallback);
     }
 
@@ -222,7 +223,7 @@ public class ApiVersionDefaultsInner {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    public ServiceFuture<Void> getSwaggerGlobalValidAsync(ServiceCallback<Void> serviceCallback) {
+    public ServiceFuture<Void> getSwaggerGlobalValidAsync(@NonNull ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(getSwaggerGlobalValidAsync(), serviceCallback);
     }
 

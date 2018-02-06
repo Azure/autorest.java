@@ -27,13 +27,14 @@ import fixtures.bodycomplex.models.ErrorException;
 import io.reactivex.Completable;
 import io.reactivex.Maybe;
 import io.reactivex.Single;
+import io.reactivex.annotations.NonNull;
 import io.reactivex.functions.Function;
 
 /**
  * An instance of this class provides access to all the operations defined in
  * Arrays.
  */
-public class ArraysImpl implements Arrays {
+public final class ArraysImpl implements Arrays {
     /**
      * The proxy service used to perform REST calls.
      */
@@ -104,7 +105,7 @@ public class ArraysImpl implements Arrays {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;ArrayWrapper&gt;} object.
      */
-    public ServiceFuture<ArrayWrapper> getValidAsync(ServiceCallback<ArrayWrapper> serviceCallback) {
+    public ServiceFuture<ArrayWrapper> getValidAsync(@NonNull ServiceCallback<ArrayWrapper> serviceCallback) {
         return ServiceFuture.fromBody(getValidAsync(), serviceCallback);
     }
 
@@ -143,7 +144,7 @@ public class ArraysImpl implements Arrays {
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
-    public void putValid(ArrayWrapper complexBody) {
+    public void putValid(@NonNull ArrayWrapper complexBody) {
         putValidAsync(complexBody).blockingAwait();
     }
 
@@ -155,7 +156,7 @@ public class ArraysImpl implements Arrays {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    public ServiceFuture<Void> putValidAsync(ArrayWrapper complexBody, ServiceCallback<Void> serviceCallback) {
+    public ServiceFuture<Void> putValidAsync(@NonNull ArrayWrapper complexBody, @NonNull ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(putValidAsync(complexBody), serviceCallback);
     }
 
@@ -166,7 +167,7 @@ public class ArraysImpl implements Arrays {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
      */
-    public Single<RestResponse<Void, Void>> putValidWithRestResponseAsync(ArrayWrapper complexBody) {
+    public Single<RestResponse<Void, Void>> putValidWithRestResponseAsync(@NonNull ArrayWrapper complexBody) {
         if (complexBody == null) {
             throw new IllegalArgumentException("Parameter complexBody is required and cannot be null.");
         }
@@ -181,7 +182,7 @@ public class ArraysImpl implements Arrays {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Completable} object if successful.
      */
-    public Completable putValidAsync(ArrayWrapper complexBody) {
+    public Completable putValidAsync(@NonNull ArrayWrapper complexBody) {
         return putValidWithRestResponseAsync(complexBody)
             .toCompletable();
     }
@@ -204,7 +205,7 @@ public class ArraysImpl implements Arrays {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;ArrayWrapper&gt;} object.
      */
-    public ServiceFuture<ArrayWrapper> getEmptyAsync(ServiceCallback<ArrayWrapper> serviceCallback) {
+    public ServiceFuture<ArrayWrapper> getEmptyAsync(@NonNull ServiceCallback<ArrayWrapper> serviceCallback) {
         return ServiceFuture.fromBody(getEmptyAsync(), serviceCallback);
     }
 
@@ -243,7 +244,7 @@ public class ArraysImpl implements Arrays {
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
-    public void putEmpty(ArrayWrapper complexBody) {
+    public void putEmpty(@NonNull ArrayWrapper complexBody) {
         putEmptyAsync(complexBody).blockingAwait();
     }
 
@@ -255,7 +256,7 @@ public class ArraysImpl implements Arrays {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    public ServiceFuture<Void> putEmptyAsync(ArrayWrapper complexBody, ServiceCallback<Void> serviceCallback) {
+    public ServiceFuture<Void> putEmptyAsync(@NonNull ArrayWrapper complexBody, @NonNull ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(putEmptyAsync(complexBody), serviceCallback);
     }
 
@@ -266,7 +267,7 @@ public class ArraysImpl implements Arrays {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
      */
-    public Single<RestResponse<Void, Void>> putEmptyWithRestResponseAsync(ArrayWrapper complexBody) {
+    public Single<RestResponse<Void, Void>> putEmptyWithRestResponseAsync(@NonNull ArrayWrapper complexBody) {
         if (complexBody == null) {
             throw new IllegalArgumentException("Parameter complexBody is required and cannot be null.");
         }
@@ -281,7 +282,7 @@ public class ArraysImpl implements Arrays {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Completable} object if successful.
      */
-    public Completable putEmptyAsync(ArrayWrapper complexBody) {
+    public Completable putEmptyAsync(@NonNull ArrayWrapper complexBody) {
         return putEmptyWithRestResponseAsync(complexBody)
             .toCompletable();
     }
@@ -304,7 +305,7 @@ public class ArraysImpl implements Arrays {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;ArrayWrapper&gt;} object.
      */
-    public ServiceFuture<ArrayWrapper> getNotProvidedAsync(ServiceCallback<ArrayWrapper> serviceCallback) {
+    public ServiceFuture<ArrayWrapper> getNotProvidedAsync(@NonNull ServiceCallback<ArrayWrapper> serviceCallback) {
         return ServiceFuture.fromBody(getNotProvidedAsync(), serviceCallback);
     }
 

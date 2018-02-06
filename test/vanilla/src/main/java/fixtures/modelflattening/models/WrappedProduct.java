@@ -15,7 +15,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 /**
  * The wrapped produc.
  */
-public class WrappedProduct {
+public final class WrappedProduct {
     /**
      * the product value.
      */

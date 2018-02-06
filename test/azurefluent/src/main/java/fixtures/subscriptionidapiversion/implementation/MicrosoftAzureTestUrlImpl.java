@@ -15,11 +15,12 @@ import com.microsoft.azure.v2.AzureProxy;
 import com.microsoft.azure.v2.AzureServiceClient;
 import com.microsoft.rest.v2.credentials.ServiceClientCredentials;
 import com.microsoft.rest.v2.http.HttpPipeline;
+import io.reactivex.annotations.NonNull;
 
 /**
  * Initializes a new instance of the MicrosoftAzureTestUrlImpl type.
  */
-public class MicrosoftAzureTestUrlImpl extends AzureServiceClient {
+public final class MicrosoftAzureTestUrlImpl extends AzureServiceClient {
     /**
      * Subscription Id.
      */
@@ -153,7 +154,7 @@ public class MicrosoftAzureTestUrlImpl extends AzureServiceClient {
      *
      * @param credentials the management credentials for Azure.
      */
-    public MicrosoftAzureTestUrlImpl(ServiceClientCredentials credentials) {
+    public MicrosoftAzureTestUrlImpl(@NonNull ServiceClientCredentials credentials) {
         this(AzureProxy.createDefaultPipeline(MicrosoftAzureTestUrlImpl.class, credentials));
     }
 
@@ -163,7 +164,7 @@ public class MicrosoftAzureTestUrlImpl extends AzureServiceClient {
      * @param credentials the management credentials for Azure.
      * @param azureEnvironment The environment that requests will target.
      */
-    public MicrosoftAzureTestUrlImpl(ServiceClientCredentials credentials, AzureEnvironment azureEnvironment) {
+    public MicrosoftAzureTestUrlImpl(@NonNull ServiceClientCredentials credentials, @NonNull AzureEnvironment azureEnvironment) {
         this(AzureProxy.createDefaultPipeline(MicrosoftAzureTestUrlImpl.class, credentials), azureEnvironment);
     }
 
@@ -172,7 +173,7 @@ public class MicrosoftAzureTestUrlImpl extends AzureServiceClient {
      *
      * @param httpPipeline The HTTP pipeline to send requests through.
      */
-    public MicrosoftAzureTestUrlImpl(HttpPipeline httpPipeline) {
+    public MicrosoftAzureTestUrlImpl(@NonNull HttpPipeline httpPipeline) {
         this(httpPipeline, null);
     }
 
@@ -182,7 +183,7 @@ public class MicrosoftAzureTestUrlImpl extends AzureServiceClient {
      * @param httpPipeline The HTTP pipeline to send requests through.
      * @param azureEnvironment The environment that requests will target.
      */
-    public MicrosoftAzureTestUrlImpl(HttpPipeline httpPipeline, AzureEnvironment azureEnvironment) {
+    public MicrosoftAzureTestUrlImpl(@NonNull HttpPipeline httpPipeline, @NonNull AzureEnvironment azureEnvironment) {
         super(httpPipeline, azureEnvironment);
         this.apiVersion = "2014-04-01-preview";
         this.acceptLanguage = "en-US";

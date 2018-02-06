@@ -15,7 +15,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 /**
  * The FloatWrapper model.
  */
-public class FloatWrapper {
+public final class FloatWrapper {
     /**
      * The field1 property.
      */

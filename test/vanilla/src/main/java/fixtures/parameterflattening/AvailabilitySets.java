@@ -15,6 +15,7 @@ import com.microsoft.rest.v2.ServiceCallback;
 import com.microsoft.rest.v2.ServiceFuture;
 import io.reactivex.Completable;
 import io.reactivex.Single;
+import io.reactivex.annotations.NonNull;
 import java.util.Map;
 
 /**
@@ -31,7 +32,7 @@ public interface AvailabilitySets {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
-    void update(String resourceGroupName, String avset, Map<String, String> tags);
+    void update(@NonNull String resourceGroupName, @NonNull String avset, @NonNull Map<String, String> tags);
 
     /**
      * Updates the tags for an availability set.
@@ -43,7 +44,7 @@ public interface AvailabilitySets {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    ServiceFuture<Void> updateAsync(String resourceGroupName, String avset, Map<String, String> tags, ServiceCallback<Void> serviceCallback);
+    ServiceFuture<Void> updateAsync(@NonNull String resourceGroupName, @NonNull String avset, @NonNull Map<String, String> tags, @NonNull ServiceCallback<Void> serviceCallback);
 
     /**
      * Updates the tags for an availability set.
@@ -54,7 +55,7 @@ public interface AvailabilitySets {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
      */
-    Single<RestResponse<Void, Void>> updateWithRestResponseAsync(String resourceGroupName, String avset, Map<String, String> tags);
+    Single<RestResponse<Void, Void>> updateWithRestResponseAsync(@NonNull String resourceGroupName, @NonNull String avset, @NonNull Map<String, String> tags);
 
     /**
      * Updates the tags for an availability set.
@@ -65,5 +66,5 @@ public interface AvailabilitySets {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Completable} object if successful.
      */
-    Completable updateAsync(String resourceGroupName, String avset, Map<String, String> tags);
+    Completable updateAsync(@NonNull String resourceGroupName, @NonNull String avset, @NonNull Map<String, String> tags);
 }

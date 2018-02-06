@@ -15,11 +15,12 @@ import com.microsoft.rest.v2.ServiceClient;
 import com.microsoft.rest.v2.http.HttpPipeline;
 import fixtures.bodydatetime.AutoRestDateTimeTestService;
 import fixtures.bodydatetime.Datetimes;
+import io.reactivex.annotations.NonNull;
 
 /**
  * Initializes a new instance of the AutoRestDateTimeTestService type.
  */
-public class AutoRestDateTimeTestServiceImpl extends ServiceClient implements AutoRestDateTimeTestService {
+public final class AutoRestDateTimeTestServiceImpl extends ServiceClient implements AutoRestDateTimeTestService {
     /**
      * The Datetimes object to access its operations.
      */
@@ -46,7 +47,7 @@ public class AutoRestDateTimeTestServiceImpl extends ServiceClient implements Au
      *
      * @param httpPipeline The HTTP pipeline to send requests through.
      */
-    public AutoRestDateTimeTestServiceImpl(HttpPipeline httpPipeline) {
+    public AutoRestDateTimeTestServiceImpl(@NonNull HttpPipeline httpPipeline) {
         super(httpPipeline);
         this.datetimes = new DatetimesImpl(this);
     }

@@ -15,11 +15,12 @@ import com.microsoft.rest.v2.ServiceClient;
 import com.microsoft.rest.v2.http.HttpPipeline;
 import fixtures.bodyarray.Arrays;
 import fixtures.bodyarray.AutoRestSwaggerBATArrayService;
+import io.reactivex.annotations.NonNull;
 
 /**
  * Initializes a new instance of the AutoRestSwaggerBATArrayService type.
  */
-public class AutoRestSwaggerBATArrayServiceImpl extends ServiceClient implements AutoRestSwaggerBATArrayService {
+public final class AutoRestSwaggerBATArrayServiceImpl extends ServiceClient implements AutoRestSwaggerBATArrayService {
     /**
      * The Arrays object to access its operations.
      */
@@ -46,7 +47,7 @@ public class AutoRestSwaggerBATArrayServiceImpl extends ServiceClient implements
      *
      * @param httpPipeline The HTTP pipeline to send requests through.
      */
-    public AutoRestSwaggerBATArrayServiceImpl(HttpPipeline httpPipeline) {
+    public AutoRestSwaggerBATArrayServiceImpl(@NonNull HttpPipeline httpPipeline) {
         super(httpPipeline);
         this.arrays = new ArraysImpl(this);
     }

@@ -39,6 +39,7 @@ import fixtures.header.models.HeaderResponseProtectedKeyHeaders;
 import fixtures.header.models.HeaderResponseStringHeaders;
 import io.reactivex.Completable;
 import io.reactivex.Single;
+import io.reactivex.annotations.NonNull;
 import org.apache.commons.codec.binary.Base64;
 import org.joda.time.DateTime;
 import org.joda.time.LocalDate;
@@ -48,7 +49,7 @@ import org.joda.time.Period;
  * An instance of this class provides access to all the operations defined in
  * Headers.
  */
-public class HeadersImpl implements Headers {
+public final class HeadersImpl implements Headers {
     /**
      * The proxy service used to perform REST calls.
      */
@@ -229,7 +230,7 @@ public class HeadersImpl implements Headers {
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
-    public void paramExistingKey(String userAgent) {
+    public void paramExistingKey(@NonNull String userAgent) {
         paramExistingKeyAsync(userAgent).blockingAwait();
     }
 
@@ -241,7 +242,7 @@ public class HeadersImpl implements Headers {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    public ServiceFuture<Void> paramExistingKeyAsync(String userAgent, ServiceCallback<Void> serviceCallback) {
+    public ServiceFuture<Void> paramExistingKeyAsync(@NonNull String userAgent, @NonNull ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(paramExistingKeyAsync(userAgent), serviceCallback);
     }
 
@@ -252,7 +253,7 @@ public class HeadersImpl implements Headers {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
      */
-    public Single<RestResponse<Void, Void>> paramExistingKeyWithRestResponseAsync(String userAgent) {
+    public Single<RestResponse<Void, Void>> paramExistingKeyWithRestResponseAsync(@NonNull String userAgent) {
         if (userAgent == null) {
             throw new IllegalArgumentException("Parameter userAgent is required and cannot be null.");
         }
@@ -266,7 +267,7 @@ public class HeadersImpl implements Headers {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Completable} object if successful.
      */
-    public Completable paramExistingKeyAsync(String userAgent) {
+    public Completable paramExistingKeyAsync(@NonNull String userAgent) {
         return paramExistingKeyWithRestResponseAsync(userAgent)
             .toCompletable();
     }
@@ -288,7 +289,7 @@ public class HeadersImpl implements Headers {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    public ServiceFuture<Void> responseExistingKeyAsync(ServiceCallback<Void> serviceCallback) {
+    public ServiceFuture<Void> responseExistingKeyAsync(@NonNull ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(responseExistingKeyAsync(), serviceCallback);
     }
 
@@ -319,7 +320,7 @@ public class HeadersImpl implements Headers {
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
-    public void paramProtectedKey(String contentType) {
+    public void paramProtectedKey(@NonNull String contentType) {
         paramProtectedKeyAsync(contentType).blockingAwait();
     }
 
@@ -331,7 +332,7 @@ public class HeadersImpl implements Headers {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    public ServiceFuture<Void> paramProtectedKeyAsync(String contentType, ServiceCallback<Void> serviceCallback) {
+    public ServiceFuture<Void> paramProtectedKeyAsync(@NonNull String contentType, @NonNull ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(paramProtectedKeyAsync(contentType), serviceCallback);
     }
 
@@ -342,7 +343,7 @@ public class HeadersImpl implements Headers {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
      */
-    public Single<RestResponse<Void, Void>> paramProtectedKeyWithRestResponseAsync(String contentType) {
+    public Single<RestResponse<Void, Void>> paramProtectedKeyWithRestResponseAsync(@NonNull String contentType) {
         if (contentType == null) {
             throw new IllegalArgumentException("Parameter contentType is required and cannot be null.");
         }
@@ -356,7 +357,7 @@ public class HeadersImpl implements Headers {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Completable} object if successful.
      */
-    public Completable paramProtectedKeyAsync(String contentType) {
+    public Completable paramProtectedKeyAsync(@NonNull String contentType) {
         return paramProtectedKeyWithRestResponseAsync(contentType)
             .toCompletable();
     }
@@ -378,7 +379,7 @@ public class HeadersImpl implements Headers {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    public ServiceFuture<Void> responseProtectedKeyAsync(ServiceCallback<Void> serviceCallback) {
+    public ServiceFuture<Void> responseProtectedKeyAsync(@NonNull ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(responseProtectedKeyAsync(), serviceCallback);
     }
 
@@ -410,7 +411,7 @@ public class HeadersImpl implements Headers {
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
-    public void paramInteger(String scenario, int value) {
+    public void paramInteger(@NonNull String scenario, @NonNull int value) {
         paramIntegerAsync(scenario, value).blockingAwait();
     }
 
@@ -423,7 +424,7 @@ public class HeadersImpl implements Headers {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    public ServiceFuture<Void> paramIntegerAsync(String scenario, int value, ServiceCallback<Void> serviceCallback) {
+    public ServiceFuture<Void> paramIntegerAsync(@NonNull String scenario, @NonNull int value, @NonNull ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(paramIntegerAsync(scenario, value), serviceCallback);
     }
 
@@ -435,7 +436,7 @@ public class HeadersImpl implements Headers {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
      */
-    public Single<RestResponse<Void, Void>> paramIntegerWithRestResponseAsync(String scenario, int value) {
+    public Single<RestResponse<Void, Void>> paramIntegerWithRestResponseAsync(@NonNull String scenario, @NonNull int value) {
         if (scenario == null) {
             throw new IllegalArgumentException("Parameter scenario is required and cannot be null.");
         }
@@ -450,7 +451,7 @@ public class HeadersImpl implements Headers {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Completable} object if successful.
      */
-    public Completable paramIntegerAsync(String scenario, int value) {
+    public Completable paramIntegerAsync(@NonNull String scenario, @NonNull int value) {
         return paramIntegerWithRestResponseAsync(scenario, value)
             .toCompletable();
     }
@@ -463,7 +464,7 @@ public class HeadersImpl implements Headers {
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
-    public void responseInteger(String scenario) {
+    public void responseInteger(@NonNull String scenario) {
         responseIntegerAsync(scenario).blockingAwait();
     }
 
@@ -475,7 +476,7 @@ public class HeadersImpl implements Headers {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    public ServiceFuture<Void> responseIntegerAsync(String scenario, ServiceCallback<Void> serviceCallback) {
+    public ServiceFuture<Void> responseIntegerAsync(@NonNull String scenario, @NonNull ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(responseIntegerAsync(scenario), serviceCallback);
     }
 
@@ -486,7 +487,7 @@ public class HeadersImpl implements Headers {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;HeaderResponseIntegerHeaders, Void&gt;&gt;} object if successful.
      */
-    public Single<RestResponse<HeaderResponseIntegerHeaders, Void>> responseIntegerWithRestResponseAsync(String scenario) {
+    public Single<RestResponse<HeaderResponseIntegerHeaders, Void>> responseIntegerWithRestResponseAsync(@NonNull String scenario) {
         if (scenario == null) {
             throw new IllegalArgumentException("Parameter scenario is required and cannot be null.");
         }
@@ -500,7 +501,7 @@ public class HeadersImpl implements Headers {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Completable} object if successful.
      */
-    public Completable responseIntegerAsync(String scenario) {
+    public Completable responseIntegerAsync(@NonNull String scenario) {
         return responseIntegerWithRestResponseAsync(scenario)
             .toCompletable();
     }
@@ -514,7 +515,7 @@ public class HeadersImpl implements Headers {
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
-    public void paramLong(String scenario, long value) {
+    public void paramLong(@NonNull String scenario, @NonNull long value) {
         paramLongAsync(scenario, value).blockingAwait();
     }
 
@@ -527,7 +528,7 @@ public class HeadersImpl implements Headers {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    public ServiceFuture<Void> paramLongAsync(String scenario, long value, ServiceCallback<Void> serviceCallback) {
+    public ServiceFuture<Void> paramLongAsync(@NonNull String scenario, @NonNull long value, @NonNull ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(paramLongAsync(scenario, value), serviceCallback);
     }
 
@@ -539,7 +540,7 @@ public class HeadersImpl implements Headers {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
      */
-    public Single<RestResponse<Void, Void>> paramLongWithRestResponseAsync(String scenario, long value) {
+    public Single<RestResponse<Void, Void>> paramLongWithRestResponseAsync(@NonNull String scenario, @NonNull long value) {
         if (scenario == null) {
             throw new IllegalArgumentException("Parameter scenario is required and cannot be null.");
         }
@@ -554,7 +555,7 @@ public class HeadersImpl implements Headers {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Completable} object if successful.
      */
-    public Completable paramLongAsync(String scenario, long value) {
+    public Completable paramLongAsync(@NonNull String scenario, @NonNull long value) {
         return paramLongWithRestResponseAsync(scenario, value)
             .toCompletable();
     }
@@ -567,7 +568,7 @@ public class HeadersImpl implements Headers {
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
-    public void responseLong(String scenario) {
+    public void responseLong(@NonNull String scenario) {
         responseLongAsync(scenario).blockingAwait();
     }
 
@@ -579,7 +580,7 @@ public class HeadersImpl implements Headers {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    public ServiceFuture<Void> responseLongAsync(String scenario, ServiceCallback<Void> serviceCallback) {
+    public ServiceFuture<Void> responseLongAsync(@NonNull String scenario, @NonNull ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(responseLongAsync(scenario), serviceCallback);
     }
 
@@ -590,7 +591,7 @@ public class HeadersImpl implements Headers {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;HeaderResponseLongHeaders, Void&gt;&gt;} object if successful.
      */
-    public Single<RestResponse<HeaderResponseLongHeaders, Void>> responseLongWithRestResponseAsync(String scenario) {
+    public Single<RestResponse<HeaderResponseLongHeaders, Void>> responseLongWithRestResponseAsync(@NonNull String scenario) {
         if (scenario == null) {
             throw new IllegalArgumentException("Parameter scenario is required and cannot be null.");
         }
@@ -604,7 +605,7 @@ public class HeadersImpl implements Headers {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Completable} object if successful.
      */
-    public Completable responseLongAsync(String scenario) {
+    public Completable responseLongAsync(@NonNull String scenario) {
         return responseLongWithRestResponseAsync(scenario)
             .toCompletable();
     }
@@ -618,7 +619,7 @@ public class HeadersImpl implements Headers {
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
-    public void paramFloat(String scenario, double value) {
+    public void paramFloat(@NonNull String scenario, @NonNull double value) {
         paramFloatAsync(scenario, value).blockingAwait();
     }
 
@@ -631,7 +632,7 @@ public class HeadersImpl implements Headers {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    public ServiceFuture<Void> paramFloatAsync(String scenario, double value, ServiceCallback<Void> serviceCallback) {
+    public ServiceFuture<Void> paramFloatAsync(@NonNull String scenario, @NonNull double value, @NonNull ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(paramFloatAsync(scenario, value), serviceCallback);
     }
 
@@ -643,7 +644,7 @@ public class HeadersImpl implements Headers {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
      */
-    public Single<RestResponse<Void, Void>> paramFloatWithRestResponseAsync(String scenario, double value) {
+    public Single<RestResponse<Void, Void>> paramFloatWithRestResponseAsync(@NonNull String scenario, @NonNull double value) {
         if (scenario == null) {
             throw new IllegalArgumentException("Parameter scenario is required and cannot be null.");
         }
@@ -658,7 +659,7 @@ public class HeadersImpl implements Headers {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Completable} object if successful.
      */
-    public Completable paramFloatAsync(String scenario, double value) {
+    public Completable paramFloatAsync(@NonNull String scenario, @NonNull double value) {
         return paramFloatWithRestResponseAsync(scenario, value)
             .toCompletable();
     }
@@ -671,7 +672,7 @@ public class HeadersImpl implements Headers {
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
-    public void responseFloat(String scenario) {
+    public void responseFloat(@NonNull String scenario) {
         responseFloatAsync(scenario).blockingAwait();
     }
 
@@ -683,7 +684,7 @@ public class HeadersImpl implements Headers {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    public ServiceFuture<Void> responseFloatAsync(String scenario, ServiceCallback<Void> serviceCallback) {
+    public ServiceFuture<Void> responseFloatAsync(@NonNull String scenario, @NonNull ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(responseFloatAsync(scenario), serviceCallback);
     }
 
@@ -694,7 +695,7 @@ public class HeadersImpl implements Headers {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;HeaderResponseFloatHeaders, Void&gt;&gt;} object if successful.
      */
-    public Single<RestResponse<HeaderResponseFloatHeaders, Void>> responseFloatWithRestResponseAsync(String scenario) {
+    public Single<RestResponse<HeaderResponseFloatHeaders, Void>> responseFloatWithRestResponseAsync(@NonNull String scenario) {
         if (scenario == null) {
             throw new IllegalArgumentException("Parameter scenario is required and cannot be null.");
         }
@@ -708,7 +709,7 @@ public class HeadersImpl implements Headers {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Completable} object if successful.
      */
-    public Completable responseFloatAsync(String scenario) {
+    public Completable responseFloatAsync(@NonNull String scenario) {
         return responseFloatWithRestResponseAsync(scenario)
             .toCompletable();
     }
@@ -722,7 +723,7 @@ public class HeadersImpl implements Headers {
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
-    public void paramDouble(String scenario, double value) {
+    public void paramDouble(@NonNull String scenario, @NonNull double value) {
         paramDoubleAsync(scenario, value).blockingAwait();
     }
 
@@ -735,7 +736,7 @@ public class HeadersImpl implements Headers {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    public ServiceFuture<Void> paramDoubleAsync(String scenario, double value, ServiceCallback<Void> serviceCallback) {
+    public ServiceFuture<Void> paramDoubleAsync(@NonNull String scenario, @NonNull double value, @NonNull ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(paramDoubleAsync(scenario, value), serviceCallback);
     }
 
@@ -747,7 +748,7 @@ public class HeadersImpl implements Headers {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
      */
-    public Single<RestResponse<Void, Void>> paramDoubleWithRestResponseAsync(String scenario, double value) {
+    public Single<RestResponse<Void, Void>> paramDoubleWithRestResponseAsync(@NonNull String scenario, @NonNull double value) {
         if (scenario == null) {
             throw new IllegalArgumentException("Parameter scenario is required and cannot be null.");
         }
@@ -762,7 +763,7 @@ public class HeadersImpl implements Headers {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Completable} object if successful.
      */
-    public Completable paramDoubleAsync(String scenario, double value) {
+    public Completable paramDoubleAsync(@NonNull String scenario, @NonNull double value) {
         return paramDoubleWithRestResponseAsync(scenario, value)
             .toCompletable();
     }
@@ -775,7 +776,7 @@ public class HeadersImpl implements Headers {
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
-    public void responseDouble(String scenario) {
+    public void responseDouble(@NonNull String scenario) {
         responseDoubleAsync(scenario).blockingAwait();
     }
 
@@ -787,7 +788,7 @@ public class HeadersImpl implements Headers {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    public ServiceFuture<Void> responseDoubleAsync(String scenario, ServiceCallback<Void> serviceCallback) {
+    public ServiceFuture<Void> responseDoubleAsync(@NonNull String scenario, @NonNull ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(responseDoubleAsync(scenario), serviceCallback);
     }
 
@@ -798,7 +799,7 @@ public class HeadersImpl implements Headers {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;HeaderResponseDoubleHeaders, Void&gt;&gt;} object if successful.
      */
-    public Single<RestResponse<HeaderResponseDoubleHeaders, Void>> responseDoubleWithRestResponseAsync(String scenario) {
+    public Single<RestResponse<HeaderResponseDoubleHeaders, Void>> responseDoubleWithRestResponseAsync(@NonNull String scenario) {
         if (scenario == null) {
             throw new IllegalArgumentException("Parameter scenario is required and cannot be null.");
         }
@@ -812,7 +813,7 @@ public class HeadersImpl implements Headers {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Completable} object if successful.
      */
-    public Completable responseDoubleAsync(String scenario) {
+    public Completable responseDoubleAsync(@NonNull String scenario) {
         return responseDoubleWithRestResponseAsync(scenario)
             .toCompletable();
     }
@@ -826,7 +827,7 @@ public class HeadersImpl implements Headers {
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
-    public void paramBool(String scenario, boolean value) {
+    public void paramBool(@NonNull String scenario, @NonNull boolean value) {
         paramBoolAsync(scenario, value).blockingAwait();
     }
 
@@ -839,7 +840,7 @@ public class HeadersImpl implements Headers {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    public ServiceFuture<Void> paramBoolAsync(String scenario, boolean value, ServiceCallback<Void> serviceCallback) {
+    public ServiceFuture<Void> paramBoolAsync(@NonNull String scenario, @NonNull boolean value, @NonNull ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(paramBoolAsync(scenario, value), serviceCallback);
     }
 
@@ -851,7 +852,7 @@ public class HeadersImpl implements Headers {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
      */
-    public Single<RestResponse<Void, Void>> paramBoolWithRestResponseAsync(String scenario, boolean value) {
+    public Single<RestResponse<Void, Void>> paramBoolWithRestResponseAsync(@NonNull String scenario, @NonNull boolean value) {
         if (scenario == null) {
             throw new IllegalArgumentException("Parameter scenario is required and cannot be null.");
         }
@@ -866,7 +867,7 @@ public class HeadersImpl implements Headers {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Completable} object if successful.
      */
-    public Completable paramBoolAsync(String scenario, boolean value) {
+    public Completable paramBoolAsync(@NonNull String scenario, @NonNull boolean value) {
         return paramBoolWithRestResponseAsync(scenario, value)
             .toCompletable();
     }
@@ -879,7 +880,7 @@ public class HeadersImpl implements Headers {
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
-    public void responseBool(String scenario) {
+    public void responseBool(@NonNull String scenario) {
         responseBoolAsync(scenario).blockingAwait();
     }
 
@@ -891,7 +892,7 @@ public class HeadersImpl implements Headers {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    public ServiceFuture<Void> responseBoolAsync(String scenario, ServiceCallback<Void> serviceCallback) {
+    public ServiceFuture<Void> responseBoolAsync(@NonNull String scenario, @NonNull ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(responseBoolAsync(scenario), serviceCallback);
     }
 
@@ -902,7 +903,7 @@ public class HeadersImpl implements Headers {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;HeaderResponseBoolHeaders, Void&gt;&gt;} object if successful.
      */
-    public Single<RestResponse<HeaderResponseBoolHeaders, Void>> responseBoolWithRestResponseAsync(String scenario) {
+    public Single<RestResponse<HeaderResponseBoolHeaders, Void>> responseBoolWithRestResponseAsync(@NonNull String scenario) {
         if (scenario == null) {
             throw new IllegalArgumentException("Parameter scenario is required and cannot be null.");
         }
@@ -916,7 +917,7 @@ public class HeadersImpl implements Headers {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Completable} object if successful.
      */
-    public Completable responseBoolAsync(String scenario) {
+    public Completable responseBoolAsync(@NonNull String scenario) {
         return responseBoolWithRestResponseAsync(scenario)
             .toCompletable();
     }
@@ -929,7 +930,7 @@ public class HeadersImpl implements Headers {
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
-    public void paramString(String scenario) {
+    public void paramString(@NonNull String scenario) {
         paramStringAsync(scenario).blockingAwait();
     }
 
@@ -941,7 +942,7 @@ public class HeadersImpl implements Headers {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    public ServiceFuture<Void> paramStringAsync(String scenario, ServiceCallback<Void> serviceCallback) {
+    public ServiceFuture<Void> paramStringAsync(@NonNull String scenario, @NonNull ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(paramStringAsync(scenario), serviceCallback);
     }
 
@@ -952,7 +953,7 @@ public class HeadersImpl implements Headers {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
      */
-    public Single<RestResponse<Void, Void>> paramStringWithRestResponseAsync(String scenario) {
+    public Single<RestResponse<Void, Void>> paramStringWithRestResponseAsync(@NonNull String scenario) {
         if (scenario == null) {
             throw new IllegalArgumentException("Parameter scenario is required and cannot be null.");
         }
@@ -967,7 +968,7 @@ public class HeadersImpl implements Headers {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Completable} object if successful.
      */
-    public Completable paramStringAsync(String scenario) {
+    public Completable paramStringAsync(@NonNull String scenario) {
         return paramStringWithRestResponseAsync(scenario)
             .toCompletable();
     }
@@ -981,7 +982,7 @@ public class HeadersImpl implements Headers {
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
-    public void paramString(String scenario, String value) {
+    public void paramString(@NonNull String scenario, String value) {
         paramStringAsync(scenario, value).blockingAwait();
     }
 
@@ -994,7 +995,7 @@ public class HeadersImpl implements Headers {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    public ServiceFuture<Void> paramStringAsync(String scenario, String value, ServiceCallback<Void> serviceCallback) {
+    public ServiceFuture<Void> paramStringAsync(@NonNull String scenario, String value, @NonNull ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(paramStringAsync(scenario, value), serviceCallback);
     }
 
@@ -1006,7 +1007,7 @@ public class HeadersImpl implements Headers {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
      */
-    public Single<RestResponse<Void, Void>> paramStringWithRestResponseAsync(String scenario, String value) {
+    public Single<RestResponse<Void, Void>> paramStringWithRestResponseAsync(@NonNull String scenario, String value) {
         if (scenario == null) {
             throw new IllegalArgumentException("Parameter scenario is required and cannot be null.");
         }
@@ -1021,7 +1022,7 @@ public class HeadersImpl implements Headers {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Completable} object if successful.
      */
-    public Completable paramStringAsync(String scenario, String value) {
+    public Completable paramStringAsync(@NonNull String scenario, String value) {
         return paramStringWithRestResponseAsync(scenario, value)
             .toCompletable();
     }
@@ -1034,7 +1035,7 @@ public class HeadersImpl implements Headers {
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
-    public void responseString(String scenario) {
+    public void responseString(@NonNull String scenario) {
         responseStringAsync(scenario).blockingAwait();
     }
 
@@ -1046,7 +1047,7 @@ public class HeadersImpl implements Headers {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    public ServiceFuture<Void> responseStringAsync(String scenario, ServiceCallback<Void> serviceCallback) {
+    public ServiceFuture<Void> responseStringAsync(@NonNull String scenario, @NonNull ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(responseStringAsync(scenario), serviceCallback);
     }
 
@@ -1057,7 +1058,7 @@ public class HeadersImpl implements Headers {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;HeaderResponseStringHeaders, Void&gt;&gt;} object if successful.
      */
-    public Single<RestResponse<HeaderResponseStringHeaders, Void>> responseStringWithRestResponseAsync(String scenario) {
+    public Single<RestResponse<HeaderResponseStringHeaders, Void>> responseStringWithRestResponseAsync(@NonNull String scenario) {
         if (scenario == null) {
             throw new IllegalArgumentException("Parameter scenario is required and cannot be null.");
         }
@@ -1071,7 +1072,7 @@ public class HeadersImpl implements Headers {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Completable} object if successful.
      */
-    public Completable responseStringAsync(String scenario) {
+    public Completable responseStringAsync(@NonNull String scenario) {
         return responseStringWithRestResponseAsync(scenario)
             .toCompletable();
     }
@@ -1085,7 +1086,7 @@ public class HeadersImpl implements Headers {
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
-    public void paramDate(String scenario, LocalDate value) {
+    public void paramDate(@NonNull String scenario, @NonNull LocalDate value) {
         paramDateAsync(scenario, value).blockingAwait();
     }
 
@@ -1098,7 +1099,7 @@ public class HeadersImpl implements Headers {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    public ServiceFuture<Void> paramDateAsync(String scenario, LocalDate value, ServiceCallback<Void> serviceCallback) {
+    public ServiceFuture<Void> paramDateAsync(@NonNull String scenario, @NonNull LocalDate value, @NonNull ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(paramDateAsync(scenario, value), serviceCallback);
     }
 
@@ -1110,7 +1111,7 @@ public class HeadersImpl implements Headers {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
      */
-    public Single<RestResponse<Void, Void>> paramDateWithRestResponseAsync(String scenario, LocalDate value) {
+    public Single<RestResponse<Void, Void>> paramDateWithRestResponseAsync(@NonNull String scenario, @NonNull LocalDate value) {
         if (scenario == null) {
             throw new IllegalArgumentException("Parameter scenario is required and cannot be null.");
         }
@@ -1128,7 +1129,7 @@ public class HeadersImpl implements Headers {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Completable} object if successful.
      */
-    public Completable paramDateAsync(String scenario, LocalDate value) {
+    public Completable paramDateAsync(@NonNull String scenario, @NonNull LocalDate value) {
         return paramDateWithRestResponseAsync(scenario, value)
             .toCompletable();
     }
@@ -1141,7 +1142,7 @@ public class HeadersImpl implements Headers {
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
-    public void responseDate(String scenario) {
+    public void responseDate(@NonNull String scenario) {
         responseDateAsync(scenario).blockingAwait();
     }
 
@@ -1153,7 +1154,7 @@ public class HeadersImpl implements Headers {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    public ServiceFuture<Void> responseDateAsync(String scenario, ServiceCallback<Void> serviceCallback) {
+    public ServiceFuture<Void> responseDateAsync(@NonNull String scenario, @NonNull ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(responseDateAsync(scenario), serviceCallback);
     }
 
@@ -1164,7 +1165,7 @@ public class HeadersImpl implements Headers {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;HeaderResponseDateHeaders, Void&gt;&gt;} object if successful.
      */
-    public Single<RestResponse<HeaderResponseDateHeaders, Void>> responseDateWithRestResponseAsync(String scenario) {
+    public Single<RestResponse<HeaderResponseDateHeaders, Void>> responseDateWithRestResponseAsync(@NonNull String scenario) {
         if (scenario == null) {
             throw new IllegalArgumentException("Parameter scenario is required and cannot be null.");
         }
@@ -1178,7 +1179,7 @@ public class HeadersImpl implements Headers {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Completable} object if successful.
      */
-    public Completable responseDateAsync(String scenario) {
+    public Completable responseDateAsync(@NonNull String scenario) {
         return responseDateWithRestResponseAsync(scenario)
             .toCompletable();
     }
@@ -1192,7 +1193,7 @@ public class HeadersImpl implements Headers {
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
-    public void paramDatetime(String scenario, DateTime value) {
+    public void paramDatetime(@NonNull String scenario, @NonNull DateTime value) {
         paramDatetimeAsync(scenario, value).blockingAwait();
     }
 
@@ -1205,7 +1206,7 @@ public class HeadersImpl implements Headers {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    public ServiceFuture<Void> paramDatetimeAsync(String scenario, DateTime value, ServiceCallback<Void> serviceCallback) {
+    public ServiceFuture<Void> paramDatetimeAsync(@NonNull String scenario, @NonNull DateTime value, @NonNull ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(paramDatetimeAsync(scenario, value), serviceCallback);
     }
 
@@ -1217,7 +1218,7 @@ public class HeadersImpl implements Headers {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
      */
-    public Single<RestResponse<Void, Void>> paramDatetimeWithRestResponseAsync(String scenario, DateTime value) {
+    public Single<RestResponse<Void, Void>> paramDatetimeWithRestResponseAsync(@NonNull String scenario, @NonNull DateTime value) {
         if (scenario == null) {
             throw new IllegalArgumentException("Parameter scenario is required and cannot be null.");
         }
@@ -1235,7 +1236,7 @@ public class HeadersImpl implements Headers {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Completable} object if successful.
      */
-    public Completable paramDatetimeAsync(String scenario, DateTime value) {
+    public Completable paramDatetimeAsync(@NonNull String scenario, @NonNull DateTime value) {
         return paramDatetimeWithRestResponseAsync(scenario, value)
             .toCompletable();
     }
@@ -1248,7 +1249,7 @@ public class HeadersImpl implements Headers {
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
-    public void responseDatetime(String scenario) {
+    public void responseDatetime(@NonNull String scenario) {
         responseDatetimeAsync(scenario).blockingAwait();
     }
 
@@ -1260,7 +1261,7 @@ public class HeadersImpl implements Headers {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    public ServiceFuture<Void> responseDatetimeAsync(String scenario, ServiceCallback<Void> serviceCallback) {
+    public ServiceFuture<Void> responseDatetimeAsync(@NonNull String scenario, @NonNull ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(responseDatetimeAsync(scenario), serviceCallback);
     }
 
@@ -1271,7 +1272,7 @@ public class HeadersImpl implements Headers {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;HeaderResponseDatetimeHeaders, Void&gt;&gt;} object if successful.
      */
-    public Single<RestResponse<HeaderResponseDatetimeHeaders, Void>> responseDatetimeWithRestResponseAsync(String scenario) {
+    public Single<RestResponse<HeaderResponseDatetimeHeaders, Void>> responseDatetimeWithRestResponseAsync(@NonNull String scenario) {
         if (scenario == null) {
             throw new IllegalArgumentException("Parameter scenario is required and cannot be null.");
         }
@@ -1285,7 +1286,7 @@ public class HeadersImpl implements Headers {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Completable} object if successful.
      */
-    public Completable responseDatetimeAsync(String scenario) {
+    public Completable responseDatetimeAsync(@NonNull String scenario) {
         return responseDatetimeWithRestResponseAsync(scenario)
             .toCompletable();
     }
@@ -1298,7 +1299,7 @@ public class HeadersImpl implements Headers {
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
-    public void paramDatetimeRfc1123(String scenario) {
+    public void paramDatetimeRfc1123(@NonNull String scenario) {
         paramDatetimeRfc1123Async(scenario).blockingAwait();
     }
 
@@ -1310,7 +1311,7 @@ public class HeadersImpl implements Headers {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    public ServiceFuture<Void> paramDatetimeRfc1123Async(String scenario, ServiceCallback<Void> serviceCallback) {
+    public ServiceFuture<Void> paramDatetimeRfc1123Async(@NonNull String scenario, @NonNull ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(paramDatetimeRfc1123Async(scenario), serviceCallback);
     }
 
@@ -1321,7 +1322,7 @@ public class HeadersImpl implements Headers {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
      */
-    public Single<RestResponse<Void, Void>> paramDatetimeRfc1123WithRestResponseAsync(String scenario) {
+    public Single<RestResponse<Void, Void>> paramDatetimeRfc1123WithRestResponseAsync(@NonNull String scenario) {
         if (scenario == null) {
             throw new IllegalArgumentException("Parameter scenario is required and cannot be null.");
         }
@@ -1340,7 +1341,7 @@ public class HeadersImpl implements Headers {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Completable} object if successful.
      */
-    public Completable paramDatetimeRfc1123Async(String scenario) {
+    public Completable paramDatetimeRfc1123Async(@NonNull String scenario) {
         return paramDatetimeRfc1123WithRestResponseAsync(scenario)
             .toCompletable();
     }
@@ -1354,7 +1355,7 @@ public class HeadersImpl implements Headers {
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
-    public void paramDatetimeRfc1123(String scenario, DateTime value) {
+    public void paramDatetimeRfc1123(@NonNull String scenario, DateTime value) {
         paramDatetimeRfc1123Async(scenario, value).blockingAwait();
     }
 
@@ -1367,7 +1368,7 @@ public class HeadersImpl implements Headers {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    public ServiceFuture<Void> paramDatetimeRfc1123Async(String scenario, DateTime value, ServiceCallback<Void> serviceCallback) {
+    public ServiceFuture<Void> paramDatetimeRfc1123Async(@NonNull String scenario, DateTime value, @NonNull ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(paramDatetimeRfc1123Async(scenario, value), serviceCallback);
     }
 
@@ -1379,7 +1380,7 @@ public class HeadersImpl implements Headers {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
      */
-    public Single<RestResponse<Void, Void>> paramDatetimeRfc1123WithRestResponseAsync(String scenario, DateTime value) {
+    public Single<RestResponse<Void, Void>> paramDatetimeRfc1123WithRestResponseAsync(@NonNull String scenario, DateTime value) {
         if (scenario == null) {
             throw new IllegalArgumentException("Parameter scenario is required and cannot be null.");
         }
@@ -1398,7 +1399,7 @@ public class HeadersImpl implements Headers {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Completable} object if successful.
      */
-    public Completable paramDatetimeRfc1123Async(String scenario, DateTime value) {
+    public Completable paramDatetimeRfc1123Async(@NonNull String scenario, DateTime value) {
         return paramDatetimeRfc1123WithRestResponseAsync(scenario, value)
             .toCompletable();
     }
@@ -1411,7 +1412,7 @@ public class HeadersImpl implements Headers {
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
-    public void responseDatetimeRfc1123(String scenario) {
+    public void responseDatetimeRfc1123(@NonNull String scenario) {
         responseDatetimeRfc1123Async(scenario).blockingAwait();
     }
 
@@ -1423,7 +1424,7 @@ public class HeadersImpl implements Headers {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    public ServiceFuture<Void> responseDatetimeRfc1123Async(String scenario, ServiceCallback<Void> serviceCallback) {
+    public ServiceFuture<Void> responseDatetimeRfc1123Async(@NonNull String scenario, @NonNull ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(responseDatetimeRfc1123Async(scenario), serviceCallback);
     }
 
@@ -1434,7 +1435,7 @@ public class HeadersImpl implements Headers {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;HeaderResponseDatetimeRfc1123Headers, Void&gt;&gt;} object if successful.
      */
-    public Single<RestResponse<HeaderResponseDatetimeRfc1123Headers, Void>> responseDatetimeRfc1123WithRestResponseAsync(String scenario) {
+    public Single<RestResponse<HeaderResponseDatetimeRfc1123Headers, Void>> responseDatetimeRfc1123WithRestResponseAsync(@NonNull String scenario) {
         if (scenario == null) {
             throw new IllegalArgumentException("Parameter scenario is required and cannot be null.");
         }
@@ -1448,7 +1449,7 @@ public class HeadersImpl implements Headers {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Completable} object if successful.
      */
-    public Completable responseDatetimeRfc1123Async(String scenario) {
+    public Completable responseDatetimeRfc1123Async(@NonNull String scenario) {
         return responseDatetimeRfc1123WithRestResponseAsync(scenario)
             .toCompletable();
     }
@@ -1462,7 +1463,7 @@ public class HeadersImpl implements Headers {
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
-    public void paramDuration(String scenario, Period value) {
+    public void paramDuration(@NonNull String scenario, @NonNull Period value) {
         paramDurationAsync(scenario, value).blockingAwait();
     }
 
@@ -1475,7 +1476,7 @@ public class HeadersImpl implements Headers {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    public ServiceFuture<Void> paramDurationAsync(String scenario, Period value, ServiceCallback<Void> serviceCallback) {
+    public ServiceFuture<Void> paramDurationAsync(@NonNull String scenario, @NonNull Period value, @NonNull ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(paramDurationAsync(scenario, value), serviceCallback);
     }
 
@@ -1487,7 +1488,7 @@ public class HeadersImpl implements Headers {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
      */
-    public Single<RestResponse<Void, Void>> paramDurationWithRestResponseAsync(String scenario, Period value) {
+    public Single<RestResponse<Void, Void>> paramDurationWithRestResponseAsync(@NonNull String scenario, @NonNull Period value) {
         if (scenario == null) {
             throw new IllegalArgumentException("Parameter scenario is required and cannot be null.");
         }
@@ -1505,7 +1506,7 @@ public class HeadersImpl implements Headers {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Completable} object if successful.
      */
-    public Completable paramDurationAsync(String scenario, Period value) {
+    public Completable paramDurationAsync(@NonNull String scenario, @NonNull Period value) {
         return paramDurationWithRestResponseAsync(scenario, value)
             .toCompletable();
     }
@@ -1518,7 +1519,7 @@ public class HeadersImpl implements Headers {
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
-    public void responseDuration(String scenario) {
+    public void responseDuration(@NonNull String scenario) {
         responseDurationAsync(scenario).blockingAwait();
     }
 
@@ -1530,7 +1531,7 @@ public class HeadersImpl implements Headers {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    public ServiceFuture<Void> responseDurationAsync(String scenario, ServiceCallback<Void> serviceCallback) {
+    public ServiceFuture<Void> responseDurationAsync(@NonNull String scenario, @NonNull ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(responseDurationAsync(scenario), serviceCallback);
     }
 
@@ -1541,7 +1542,7 @@ public class HeadersImpl implements Headers {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;HeaderResponseDurationHeaders, Void&gt;&gt;} object if successful.
      */
-    public Single<RestResponse<HeaderResponseDurationHeaders, Void>> responseDurationWithRestResponseAsync(String scenario) {
+    public Single<RestResponse<HeaderResponseDurationHeaders, Void>> responseDurationWithRestResponseAsync(@NonNull String scenario) {
         if (scenario == null) {
             throw new IllegalArgumentException("Parameter scenario is required and cannot be null.");
         }
@@ -1555,7 +1556,7 @@ public class HeadersImpl implements Headers {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Completable} object if successful.
      */
-    public Completable responseDurationAsync(String scenario) {
+    public Completable responseDurationAsync(@NonNull String scenario) {
         return responseDurationWithRestResponseAsync(scenario)
             .toCompletable();
     }
@@ -1569,7 +1570,7 @@ public class HeadersImpl implements Headers {
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
-    public void paramByte(String scenario, byte[] value) {
+    public void paramByte(@NonNull String scenario, @NonNull byte[] value) {
         paramByteAsync(scenario, value).blockingAwait();
     }
 
@@ -1582,7 +1583,7 @@ public class HeadersImpl implements Headers {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    public ServiceFuture<Void> paramByteAsync(String scenario, byte[] value, ServiceCallback<Void> serviceCallback) {
+    public ServiceFuture<Void> paramByteAsync(@NonNull String scenario, @NonNull byte[] value, @NonNull ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(paramByteAsync(scenario, value), serviceCallback);
     }
 
@@ -1594,7 +1595,7 @@ public class HeadersImpl implements Headers {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
      */
-    public Single<RestResponse<Void, Void>> paramByteWithRestResponseAsync(String scenario, byte[] value) {
+    public Single<RestResponse<Void, Void>> paramByteWithRestResponseAsync(@NonNull String scenario, @NonNull byte[] value) {
         if (scenario == null) {
             throw new IllegalArgumentException("Parameter scenario is required and cannot be null.");
         }
@@ -1613,7 +1614,7 @@ public class HeadersImpl implements Headers {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Completable} object if successful.
      */
-    public Completable paramByteAsync(String scenario, byte[] value) {
+    public Completable paramByteAsync(@NonNull String scenario, @NonNull byte[] value) {
         return paramByteWithRestResponseAsync(scenario, value)
             .toCompletable();
     }
@@ -1626,7 +1627,7 @@ public class HeadersImpl implements Headers {
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
-    public void responseByte(String scenario) {
+    public void responseByte(@NonNull String scenario) {
         responseByteAsync(scenario).blockingAwait();
     }
 
@@ -1638,7 +1639,7 @@ public class HeadersImpl implements Headers {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    public ServiceFuture<Void> responseByteAsync(String scenario, ServiceCallback<Void> serviceCallback) {
+    public ServiceFuture<Void> responseByteAsync(@NonNull String scenario, @NonNull ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(responseByteAsync(scenario), serviceCallback);
     }
 
@@ -1649,7 +1650,7 @@ public class HeadersImpl implements Headers {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;HeaderResponseByteHeaders, Void&gt;&gt;} object if successful.
      */
-    public Single<RestResponse<HeaderResponseByteHeaders, Void>> responseByteWithRestResponseAsync(String scenario) {
+    public Single<RestResponse<HeaderResponseByteHeaders, Void>> responseByteWithRestResponseAsync(@NonNull String scenario) {
         if (scenario == null) {
             throw new IllegalArgumentException("Parameter scenario is required and cannot be null.");
         }
@@ -1663,7 +1664,7 @@ public class HeadersImpl implements Headers {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Completable} object if successful.
      */
-    public Completable responseByteAsync(String scenario) {
+    public Completable responseByteAsync(@NonNull String scenario) {
         return responseByteWithRestResponseAsync(scenario)
             .toCompletable();
     }
@@ -1676,7 +1677,7 @@ public class HeadersImpl implements Headers {
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
-    public void paramEnum(String scenario) {
+    public void paramEnum(@NonNull String scenario) {
         paramEnumAsync(scenario).blockingAwait();
     }
 
@@ -1688,7 +1689,7 @@ public class HeadersImpl implements Headers {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    public ServiceFuture<Void> paramEnumAsync(String scenario, ServiceCallback<Void> serviceCallback) {
+    public ServiceFuture<Void> paramEnumAsync(@NonNull String scenario, @NonNull ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(paramEnumAsync(scenario), serviceCallback);
     }
 
@@ -1699,7 +1700,7 @@ public class HeadersImpl implements Headers {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
      */
-    public Single<RestResponse<Void, Void>> paramEnumWithRestResponseAsync(String scenario) {
+    public Single<RestResponse<Void, Void>> paramEnumWithRestResponseAsync(@NonNull String scenario) {
         if (scenario == null) {
             throw new IllegalArgumentException("Parameter scenario is required and cannot be null.");
         }
@@ -1714,7 +1715,7 @@ public class HeadersImpl implements Headers {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Completable} object if successful.
      */
-    public Completable paramEnumAsync(String scenario) {
+    public Completable paramEnumAsync(@NonNull String scenario) {
         return paramEnumWithRestResponseAsync(scenario)
             .toCompletable();
     }
@@ -1728,7 +1729,7 @@ public class HeadersImpl implements Headers {
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
-    public void paramEnum(String scenario, GreyscaleColors value) {
+    public void paramEnum(@NonNull String scenario, GreyscaleColors value) {
         paramEnumAsync(scenario, value).blockingAwait();
     }
 
@@ -1741,7 +1742,7 @@ public class HeadersImpl implements Headers {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    public ServiceFuture<Void> paramEnumAsync(String scenario, GreyscaleColors value, ServiceCallback<Void> serviceCallback) {
+    public ServiceFuture<Void> paramEnumAsync(@NonNull String scenario, GreyscaleColors value, @NonNull ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(paramEnumAsync(scenario, value), serviceCallback);
     }
 
@@ -1753,7 +1754,7 @@ public class HeadersImpl implements Headers {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
      */
-    public Single<RestResponse<Void, Void>> paramEnumWithRestResponseAsync(String scenario, GreyscaleColors value) {
+    public Single<RestResponse<Void, Void>> paramEnumWithRestResponseAsync(@NonNull String scenario, GreyscaleColors value) {
         if (scenario == null) {
             throw new IllegalArgumentException("Parameter scenario is required and cannot be null.");
         }
@@ -1768,7 +1769,7 @@ public class HeadersImpl implements Headers {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Completable} object if successful.
      */
-    public Completable paramEnumAsync(String scenario, GreyscaleColors value) {
+    public Completable paramEnumAsync(@NonNull String scenario, GreyscaleColors value) {
         return paramEnumWithRestResponseAsync(scenario, value)
             .toCompletable();
     }
@@ -1781,7 +1782,7 @@ public class HeadersImpl implements Headers {
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
-    public void responseEnum(String scenario) {
+    public void responseEnum(@NonNull String scenario) {
         responseEnumAsync(scenario).blockingAwait();
     }
 
@@ -1793,7 +1794,7 @@ public class HeadersImpl implements Headers {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    public ServiceFuture<Void> responseEnumAsync(String scenario, ServiceCallback<Void> serviceCallback) {
+    public ServiceFuture<Void> responseEnumAsync(@NonNull String scenario, @NonNull ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(responseEnumAsync(scenario), serviceCallback);
     }
 
@@ -1804,7 +1805,7 @@ public class HeadersImpl implements Headers {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;HeaderResponseEnumHeaders, Void&gt;&gt;} object if successful.
      */
-    public Single<RestResponse<HeaderResponseEnumHeaders, Void>> responseEnumWithRestResponseAsync(String scenario) {
+    public Single<RestResponse<HeaderResponseEnumHeaders, Void>> responseEnumWithRestResponseAsync(@NonNull String scenario) {
         if (scenario == null) {
             throw new IllegalArgumentException("Parameter scenario is required and cannot be null.");
         }
@@ -1818,7 +1819,7 @@ public class HeadersImpl implements Headers {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Completable} object if successful.
      */
-    public Completable responseEnumAsync(String scenario) {
+    public Completable responseEnumAsync(@NonNull String scenario) {
         return responseEnumWithRestResponseAsync(scenario)
             .toCompletable();
     }
@@ -1840,7 +1841,7 @@ public class HeadersImpl implements Headers {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    public ServiceFuture<Void> customRequestIdAsync(ServiceCallback<Void> serviceCallback) {
+    public ServiceFuture<Void> customRequestIdAsync(@NonNull ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(customRequestIdAsync(), serviceCallback);
     }
 

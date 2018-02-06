@@ -27,13 +27,14 @@ import fixtures.bodycomplex.models.ErrorException;
 import io.reactivex.Completable;
 import io.reactivex.Maybe;
 import io.reactivex.Single;
+import io.reactivex.annotations.NonNull;
 import io.reactivex.functions.Function;
 
 /**
  * An instance of this class provides access to all the operations defined in
  * Dictionarys.
  */
-public class DictionarysImpl implements Dictionarys {
+public final class DictionarysImpl implements Dictionarys {
     /**
      * The proxy service used to perform REST calls.
      */
@@ -109,7 +110,7 @@ public class DictionarysImpl implements Dictionarys {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;DictionaryWrapper&gt;} object.
      */
-    public ServiceFuture<DictionaryWrapper> getValidAsync(ServiceCallback<DictionaryWrapper> serviceCallback) {
+    public ServiceFuture<DictionaryWrapper> getValidAsync(@NonNull ServiceCallback<DictionaryWrapper> serviceCallback) {
         return ServiceFuture.fromBody(getValidAsync(), serviceCallback);
     }
 
@@ -148,7 +149,7 @@ public class DictionarysImpl implements Dictionarys {
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
-    public void putValid(DictionaryWrapper complexBody) {
+    public void putValid(@NonNull DictionaryWrapper complexBody) {
         putValidAsync(complexBody).blockingAwait();
     }
 
@@ -160,7 +161,7 @@ public class DictionarysImpl implements Dictionarys {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    public ServiceFuture<Void> putValidAsync(DictionaryWrapper complexBody, ServiceCallback<Void> serviceCallback) {
+    public ServiceFuture<Void> putValidAsync(@NonNull DictionaryWrapper complexBody, @NonNull ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(putValidAsync(complexBody), serviceCallback);
     }
 
@@ -171,7 +172,7 @@ public class DictionarysImpl implements Dictionarys {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
      */
-    public Single<RestResponse<Void, Void>> putValidWithRestResponseAsync(DictionaryWrapper complexBody) {
+    public Single<RestResponse<Void, Void>> putValidWithRestResponseAsync(@NonNull DictionaryWrapper complexBody) {
         if (complexBody == null) {
             throw new IllegalArgumentException("Parameter complexBody is required and cannot be null.");
         }
@@ -186,7 +187,7 @@ public class DictionarysImpl implements Dictionarys {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Completable} object if successful.
      */
-    public Completable putValidAsync(DictionaryWrapper complexBody) {
+    public Completable putValidAsync(@NonNull DictionaryWrapper complexBody) {
         return putValidWithRestResponseAsync(complexBody)
             .toCompletable();
     }
@@ -209,7 +210,7 @@ public class DictionarysImpl implements Dictionarys {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;DictionaryWrapper&gt;} object.
      */
-    public ServiceFuture<DictionaryWrapper> getEmptyAsync(ServiceCallback<DictionaryWrapper> serviceCallback) {
+    public ServiceFuture<DictionaryWrapper> getEmptyAsync(@NonNull ServiceCallback<DictionaryWrapper> serviceCallback) {
         return ServiceFuture.fromBody(getEmptyAsync(), serviceCallback);
     }
 
@@ -248,7 +249,7 @@ public class DictionarysImpl implements Dictionarys {
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
-    public void putEmpty(DictionaryWrapper complexBody) {
+    public void putEmpty(@NonNull DictionaryWrapper complexBody) {
         putEmptyAsync(complexBody).blockingAwait();
     }
 
@@ -260,7 +261,7 @@ public class DictionarysImpl implements Dictionarys {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    public ServiceFuture<Void> putEmptyAsync(DictionaryWrapper complexBody, ServiceCallback<Void> serviceCallback) {
+    public ServiceFuture<Void> putEmptyAsync(@NonNull DictionaryWrapper complexBody, @NonNull ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(putEmptyAsync(complexBody), serviceCallback);
     }
 
@@ -271,7 +272,7 @@ public class DictionarysImpl implements Dictionarys {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
      */
-    public Single<RestResponse<Void, Void>> putEmptyWithRestResponseAsync(DictionaryWrapper complexBody) {
+    public Single<RestResponse<Void, Void>> putEmptyWithRestResponseAsync(@NonNull DictionaryWrapper complexBody) {
         if (complexBody == null) {
             throw new IllegalArgumentException("Parameter complexBody is required and cannot be null.");
         }
@@ -286,7 +287,7 @@ public class DictionarysImpl implements Dictionarys {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Completable} object if successful.
      */
-    public Completable putEmptyAsync(DictionaryWrapper complexBody) {
+    public Completable putEmptyAsync(@NonNull DictionaryWrapper complexBody) {
         return putEmptyWithRestResponseAsync(complexBody)
             .toCompletable();
     }
@@ -309,7 +310,7 @@ public class DictionarysImpl implements Dictionarys {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;DictionaryWrapper&gt;} object.
      */
-    public ServiceFuture<DictionaryWrapper> getNullAsync(ServiceCallback<DictionaryWrapper> serviceCallback) {
+    public ServiceFuture<DictionaryWrapper> getNullAsync(@NonNull ServiceCallback<DictionaryWrapper> serviceCallback) {
         return ServiceFuture.fromBody(getNullAsync(), serviceCallback);
     }
 
@@ -358,7 +359,7 @@ public class DictionarysImpl implements Dictionarys {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;DictionaryWrapper&gt;} object.
      */
-    public ServiceFuture<DictionaryWrapper> getNotProvidedAsync(ServiceCallback<DictionaryWrapper> serviceCallback) {
+    public ServiceFuture<DictionaryWrapper> getNotProvidedAsync(@NonNull ServiceCallback<DictionaryWrapper> serviceCallback) {
         return ServiceFuture.fromBody(getNotProvidedAsync(), serviceCallback);
     }
 

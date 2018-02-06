@@ -15,7 +15,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 /**
  * The DoubleWrapper model.
  */
-public class DoubleWrapper {
+public final class DoubleWrapper {
     /**
      * The field1 property.
      */

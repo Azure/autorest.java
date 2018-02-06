@@ -31,6 +31,7 @@ import fixtures.azureresource.ErrorException;
 import io.reactivex.Completable;
 import io.reactivex.Maybe;
 import io.reactivex.Single;
+import io.reactivex.annotations.NonNull;
 import io.reactivex.functions.Function;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -40,7 +41,7 @@ import java.util.Map;
 /**
  * Initializes a new instance of the AutoRestResourceFlatteningTestServiceImpl type.
  */
-public class AutoRestResourceFlatteningTestServiceImpl extends AzureServiceClient {
+public final class AutoRestResourceFlatteningTestServiceImpl extends AzureServiceClient {
     /**
      * The proxy service used to perform REST calls.
      */
@@ -126,7 +127,7 @@ public class AutoRestResourceFlatteningTestServiceImpl extends AzureServiceClien
      *
      * @param credentials the management credentials for Azure.
      */
-    public AutoRestResourceFlatteningTestServiceImpl(ServiceClientCredentials credentials) {
+    public AutoRestResourceFlatteningTestServiceImpl(@NonNull ServiceClientCredentials credentials) {
         this(AzureProxy.createDefaultPipeline(AutoRestResourceFlatteningTestServiceImpl.class, credentials));
     }
 
@@ -136,7 +137,7 @@ public class AutoRestResourceFlatteningTestServiceImpl extends AzureServiceClien
      * @param credentials the management credentials for Azure.
      * @param azureEnvironment The environment that requests will target.
      */
-    public AutoRestResourceFlatteningTestServiceImpl(ServiceClientCredentials credentials, AzureEnvironment azureEnvironment) {
+    public AutoRestResourceFlatteningTestServiceImpl(@NonNull ServiceClientCredentials credentials, @NonNull AzureEnvironment azureEnvironment) {
         this(AzureProxy.createDefaultPipeline(AutoRestResourceFlatteningTestServiceImpl.class, credentials), azureEnvironment);
     }
 
@@ -145,7 +146,7 @@ public class AutoRestResourceFlatteningTestServiceImpl extends AzureServiceClien
      *
      * @param httpPipeline The HTTP pipeline to send requests through.
      */
-    public AutoRestResourceFlatteningTestServiceImpl(HttpPipeline httpPipeline) {
+    public AutoRestResourceFlatteningTestServiceImpl(@NonNull HttpPipeline httpPipeline) {
         this(httpPipeline, null);
     }
 
@@ -155,7 +156,7 @@ public class AutoRestResourceFlatteningTestServiceImpl extends AzureServiceClien
      * @param httpPipeline The HTTP pipeline to send requests through.
      * @param azureEnvironment The environment that requests will target.
      */
-    public AutoRestResourceFlatteningTestServiceImpl(HttpPipeline httpPipeline, AzureEnvironment azureEnvironment) {
+    public AutoRestResourceFlatteningTestServiceImpl(@NonNull HttpPipeline httpPipeline, @NonNull AzureEnvironment azureEnvironment) {
         super(httpPipeline, azureEnvironment);
         this.acceptLanguage = "en-US";
         this.longRunningOperationRetryTimeout = 30;
@@ -218,7 +219,7 @@ public class AutoRestResourceFlatteningTestServiceImpl extends AzureServiceClien
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    public ServiceFuture<Void> putArrayAsync(ServiceCallback<Void> serviceCallback) {
+    public ServiceFuture<Void> putArrayAsync(@NonNull ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(putArrayAsync(), serviceCallback);
     }
 
@@ -262,7 +263,7 @@ public class AutoRestResourceFlatteningTestServiceImpl extends AzureServiceClien
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    public ServiceFuture<Void> putArrayAsync(List<Resource> resourceArray, ServiceCallback<Void> serviceCallback) {
+    public ServiceFuture<Void> putArrayAsync(List<Resource> resourceArray, @NonNull ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(putArrayAsync(resourceArray), serviceCallback);
     }
 
@@ -308,7 +309,7 @@ public class AutoRestResourceFlatteningTestServiceImpl extends AzureServiceClien
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;List&lt;FlattenedProductInner&gt;&gt;} object.
      */
-    public ServiceFuture<List<FlattenedProductInner>> getArrayAsync(ServiceCallback<List<FlattenedProductInner>> serviceCallback) {
+    public ServiceFuture<List<FlattenedProductInner>> getArrayAsync(@NonNull ServiceCallback<List<FlattenedProductInner>> serviceCallback) {
         return ServiceFuture.fromBody(getArrayAsync(), serviceCallback);
     }
 
@@ -356,7 +357,7 @@ public class AutoRestResourceFlatteningTestServiceImpl extends AzureServiceClien
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    public ServiceFuture<Void> putDictionaryAsync(ServiceCallback<Void> serviceCallback) {
+    public ServiceFuture<Void> putDictionaryAsync(@NonNull ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(putDictionaryAsync(), serviceCallback);
     }
 
@@ -400,7 +401,7 @@ public class AutoRestResourceFlatteningTestServiceImpl extends AzureServiceClien
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    public ServiceFuture<Void> putDictionaryAsync(Map<String, FlattenedProductInner> resourceDictionary, ServiceCallback<Void> serviceCallback) {
+    public ServiceFuture<Void> putDictionaryAsync(Map<String, FlattenedProductInner> resourceDictionary, @NonNull ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(putDictionaryAsync(resourceDictionary), serviceCallback);
     }
 
@@ -446,7 +447,7 @@ public class AutoRestResourceFlatteningTestServiceImpl extends AzureServiceClien
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Map&lt;String, FlattenedProductInner&gt;&gt;} object.
      */
-    public ServiceFuture<Map<String, FlattenedProductInner>> getDictionaryAsync(ServiceCallback<Map<String, FlattenedProductInner>> serviceCallback) {
+    public ServiceFuture<Map<String, FlattenedProductInner>> getDictionaryAsync(@NonNull ServiceCallback<Map<String, FlattenedProductInner>> serviceCallback) {
         return ServiceFuture.fromBody(getDictionaryAsync(), serviceCallback);
     }
 
@@ -494,7 +495,7 @@ public class AutoRestResourceFlatteningTestServiceImpl extends AzureServiceClien
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    public ServiceFuture<Void> putResourceCollectionAsync(ServiceCallback<Void> serviceCallback) {
+    public ServiceFuture<Void> putResourceCollectionAsync(@NonNull ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(putResourceCollectionAsync(), serviceCallback);
     }
 
@@ -538,7 +539,7 @@ public class AutoRestResourceFlatteningTestServiceImpl extends AzureServiceClien
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    public ServiceFuture<Void> putResourceCollectionAsync(ResourceCollectionInner resourceComplexObject, ServiceCallback<Void> serviceCallback) {
+    public ServiceFuture<Void> putResourceCollectionAsync(ResourceCollectionInner resourceComplexObject, @NonNull ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(putResourceCollectionAsync(resourceComplexObject), serviceCallback);
     }
 
@@ -584,7 +585,7 @@ public class AutoRestResourceFlatteningTestServiceImpl extends AzureServiceClien
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;ResourceCollectionInner&gt;} object.
      */
-    public ServiceFuture<ResourceCollectionInner> getResourceCollectionAsync(ServiceCallback<ResourceCollectionInner> serviceCallback) {
+    public ServiceFuture<ResourceCollectionInner> getResourceCollectionAsync(@NonNull ServiceCallback<ResourceCollectionInner> serviceCallback) {
         return ServiceFuture.fromBody(getResourceCollectionAsync(), serviceCallback);
     }
 

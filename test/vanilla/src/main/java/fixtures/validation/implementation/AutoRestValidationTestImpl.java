@@ -32,12 +32,13 @@ import fixtures.validation.models.Product;
 import io.reactivex.Completable;
 import io.reactivex.Maybe;
 import io.reactivex.Single;
+import io.reactivex.annotations.NonNull;
 import io.reactivex.functions.Function;
 
 /**
  * Initializes a new instance of the AutoRestValidationTest type.
  */
-public class AutoRestValidationTestImpl extends ServiceClient implements AutoRestValidationTest {
+public final class AutoRestValidationTestImpl extends ServiceClient implements AutoRestValidationTest {
     /**
      * The proxy service used to perform REST calls.
      */
@@ -105,7 +106,7 @@ public class AutoRestValidationTestImpl extends ServiceClient implements AutoRes
      *
      * @param httpPipeline The HTTP pipeline to send requests through.
      */
-    public AutoRestValidationTestImpl(HttpPipeline httpPipeline) {
+    public AutoRestValidationTestImpl(@NonNull HttpPipeline httpPipeline) {
         super(httpPipeline);
         this.service = RestProxy.create(AutoRestValidationTestService.class, this);
     }
@@ -145,7 +146,7 @@ public class AutoRestValidationTestImpl extends ServiceClient implements AutoRes
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the Product object if successful.
      */
-    public Product validationOfMethodParameters(String resourceGroupName, int id) {
+    public Product validationOfMethodParameters(@NonNull String resourceGroupName, @NonNull int id) {
         return validationOfMethodParametersAsync(resourceGroupName, id).blockingGet();
     }
 
@@ -158,7 +159,7 @@ public class AutoRestValidationTestImpl extends ServiceClient implements AutoRes
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Product&gt;} object.
      */
-    public ServiceFuture<Product> validationOfMethodParametersAsync(String resourceGroupName, int id, ServiceCallback<Product> serviceCallback) {
+    public ServiceFuture<Product> validationOfMethodParametersAsync(@NonNull String resourceGroupName, @NonNull int id, @NonNull ServiceCallback<Product> serviceCallback) {
         return ServiceFuture.fromBody(validationOfMethodParametersAsync(resourceGroupName, id), serviceCallback);
     }
 
@@ -170,7 +171,7 @@ public class AutoRestValidationTestImpl extends ServiceClient implements AutoRes
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, Product&gt;&gt;} object if successful.
      */
-    public Single<RestResponse<Void, Product>> validationOfMethodParametersWithRestResponseAsync(String resourceGroupName, int id) {
+    public Single<RestResponse<Void, Product>> validationOfMethodParametersWithRestResponseAsync(@NonNull String resourceGroupName, @NonNull int id) {
         if (this.subscriptionId() == null) {
             throw new IllegalArgumentException("Parameter this.subscriptionId() is required and cannot be null.");
         }
@@ -191,7 +192,7 @@ public class AutoRestValidationTestImpl extends ServiceClient implements AutoRes
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Maybe&lt;Product&gt;} object if successful.
      */
-    public Maybe<Product> validationOfMethodParametersAsync(String resourceGroupName, int id) {
+    public Maybe<Product> validationOfMethodParametersAsync(@NonNull String resourceGroupName, @NonNull int id) {
         return validationOfMethodParametersWithRestResponseAsync(resourceGroupName, id)
             .flatMapMaybe(new Function<RestResponse<Void, Product>, Maybe<Product>>() {
                 public Maybe<Product> apply(RestResponse<Void, Product> restResponse) {
@@ -214,7 +215,7 @@ public class AutoRestValidationTestImpl extends ServiceClient implements AutoRes
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the Product object if successful.
      */
-    public Product validationOfBody(String resourceGroupName, int id) {
+    public Product validationOfBody(@NonNull String resourceGroupName, @NonNull int id) {
         return validationOfBodyAsync(resourceGroupName, id).blockingGet();
     }
 
@@ -227,7 +228,7 @@ public class AutoRestValidationTestImpl extends ServiceClient implements AutoRes
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Product&gt;} object.
      */
-    public ServiceFuture<Product> validationOfBodyAsync(String resourceGroupName, int id, ServiceCallback<Product> serviceCallback) {
+    public ServiceFuture<Product> validationOfBodyAsync(@NonNull String resourceGroupName, @NonNull int id, @NonNull ServiceCallback<Product> serviceCallback) {
         return ServiceFuture.fromBody(validationOfBodyAsync(resourceGroupName, id), serviceCallback);
     }
 
@@ -239,7 +240,7 @@ public class AutoRestValidationTestImpl extends ServiceClient implements AutoRes
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, Product&gt;&gt;} object if successful.
      */
-    public Single<RestResponse<Void, Product>> validationOfBodyWithRestResponseAsync(String resourceGroupName, int id) {
+    public Single<RestResponse<Void, Product>> validationOfBodyWithRestResponseAsync(@NonNull String resourceGroupName, @NonNull int id) {
         if (this.subscriptionId() == null) {
             throw new IllegalArgumentException("Parameter this.subscriptionId() is required and cannot be null.");
         }
@@ -261,7 +262,7 @@ public class AutoRestValidationTestImpl extends ServiceClient implements AutoRes
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Maybe&lt;Product&gt;} object if successful.
      */
-    public Maybe<Product> validationOfBodyAsync(String resourceGroupName, int id) {
+    public Maybe<Product> validationOfBodyAsync(@NonNull String resourceGroupName, @NonNull int id) {
         return validationOfBodyWithRestResponseAsync(resourceGroupName, id)
             .flatMapMaybe(new Function<RestResponse<Void, Product>, Maybe<Product>>() {
                 public Maybe<Product> apply(RestResponse<Void, Product> restResponse) {
@@ -285,7 +286,7 @@ public class AutoRestValidationTestImpl extends ServiceClient implements AutoRes
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the Product object if successful.
      */
-    public Product validationOfBody(String resourceGroupName, int id, Product body) {
+    public Product validationOfBody(@NonNull String resourceGroupName, @NonNull int id, Product body) {
         return validationOfBodyAsync(resourceGroupName, id, body).blockingGet();
     }
 
@@ -299,7 +300,7 @@ public class AutoRestValidationTestImpl extends ServiceClient implements AutoRes
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Product&gt;} object.
      */
-    public ServiceFuture<Product> validationOfBodyAsync(String resourceGroupName, int id, Product body, ServiceCallback<Product> serviceCallback) {
+    public ServiceFuture<Product> validationOfBodyAsync(@NonNull String resourceGroupName, @NonNull int id, Product body, @NonNull ServiceCallback<Product> serviceCallback) {
         return ServiceFuture.fromBody(validationOfBodyAsync(resourceGroupName, id, body), serviceCallback);
     }
 
@@ -312,7 +313,7 @@ public class AutoRestValidationTestImpl extends ServiceClient implements AutoRes
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, Product&gt;&gt;} object if successful.
      */
-    public Single<RestResponse<Void, Product>> validationOfBodyWithRestResponseAsync(String resourceGroupName, int id, Product body) {
+    public Single<RestResponse<Void, Product>> validationOfBodyWithRestResponseAsync(@NonNull String resourceGroupName, @NonNull int id, Product body) {
         if (this.subscriptionId() == null) {
             throw new IllegalArgumentException("Parameter this.subscriptionId() is required and cannot be null.");
         }
@@ -335,7 +336,7 @@ public class AutoRestValidationTestImpl extends ServiceClient implements AutoRes
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Maybe&lt;Product&gt;} object if successful.
      */
-    public Maybe<Product> validationOfBodyAsync(String resourceGroupName, int id, Product body) {
+    public Maybe<Product> validationOfBodyAsync(@NonNull String resourceGroupName, @NonNull int id, Product body) {
         return validationOfBodyWithRestResponseAsync(resourceGroupName, id, body)
             .flatMapMaybe(new Function<RestResponse<Void, Product>, Maybe<Product>>() {
                 public Maybe<Product> apply(RestResponse<Void, Product> restResponse) {
@@ -360,7 +361,7 @@ public class AutoRestValidationTestImpl extends ServiceClient implements AutoRes
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    public ServiceFuture<Void> getWithConstantInPathAsync(ServiceCallback<Void> serviceCallback) {
+    public ServiceFuture<Void> getWithConstantInPathAsync(@NonNull ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(getWithConstantInPathAsync(), serviceCallback);
     }
 
@@ -393,7 +394,7 @@ public class AutoRestValidationTestImpl extends ServiceClient implements AutoRes
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Product&gt;} object.
      */
-    public ServiceFuture<Product> postWithConstantInBodyAsync(ServiceCallback<Product> serviceCallback) {
+    public ServiceFuture<Product> postWithConstantInBodyAsync(@NonNull ServiceCallback<Product> serviceCallback) {
         return ServiceFuture.fromBody(postWithConstantInBodyAsync(), serviceCallback);
     }
 
@@ -438,7 +439,7 @@ public class AutoRestValidationTestImpl extends ServiceClient implements AutoRes
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Product&gt;} object.
      */
-    public ServiceFuture<Product> postWithConstantInBodyAsync(Product body, ServiceCallback<Product> serviceCallback) {
+    public ServiceFuture<Product> postWithConstantInBodyAsync(Product body, @NonNull ServiceCallback<Product> serviceCallback) {
         return ServiceFuture.fromBody(postWithConstantInBodyAsync(body), serviceCallback);
     }
 

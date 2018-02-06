@@ -16,7 +16,7 @@ import org.joda.time.Period;
 /**
  * The DurationWrapper model.
  */
-public class DurationWrapper {
+public final class DurationWrapper {
     /**
      * The field property.
      */

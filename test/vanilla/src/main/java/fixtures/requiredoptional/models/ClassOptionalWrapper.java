@@ -15,7 +15,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 /**
  * The ClassOptionalWrapper model.
  */
-public class ClassOptionalWrapper {
+public final class ClassOptionalWrapper {
     /**
      * The value property.
      */

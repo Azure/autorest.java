@@ -37,13 +37,14 @@ import fixtures.bodycomplex.models.StringWrapper;
 import io.reactivex.Completable;
 import io.reactivex.Maybe;
 import io.reactivex.Single;
+import io.reactivex.annotations.NonNull;
 import io.reactivex.functions.Function;
 
 /**
  * An instance of this class provides access to all the operations defined in
  * Primitives.
  */
-public class PrimitivesImpl implements Primitives {
+public final class PrimitivesImpl implements Primitives {
     /**
      * The proxy service used to perform REST calls.
      */
@@ -199,7 +200,7 @@ public class PrimitivesImpl implements Primitives {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;IntWrapper&gt;} object.
      */
-    public ServiceFuture<IntWrapper> getIntAsync(ServiceCallback<IntWrapper> serviceCallback) {
+    public ServiceFuture<IntWrapper> getIntAsync(@NonNull ServiceCallback<IntWrapper> serviceCallback) {
         return ServiceFuture.fromBody(getIntAsync(), serviceCallback);
     }
 
@@ -238,7 +239,7 @@ public class PrimitivesImpl implements Primitives {
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
-    public void putInt(IntWrapper complexBody) {
+    public void putInt(@NonNull IntWrapper complexBody) {
         putIntAsync(complexBody).blockingAwait();
     }
 
@@ -250,7 +251,7 @@ public class PrimitivesImpl implements Primitives {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    public ServiceFuture<Void> putIntAsync(IntWrapper complexBody, ServiceCallback<Void> serviceCallback) {
+    public ServiceFuture<Void> putIntAsync(@NonNull IntWrapper complexBody, @NonNull ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(putIntAsync(complexBody), serviceCallback);
     }
 
@@ -261,7 +262,7 @@ public class PrimitivesImpl implements Primitives {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
      */
-    public Single<RestResponse<Void, Void>> putIntWithRestResponseAsync(IntWrapper complexBody) {
+    public Single<RestResponse<Void, Void>> putIntWithRestResponseAsync(@NonNull IntWrapper complexBody) {
         if (complexBody == null) {
             throw new IllegalArgumentException("Parameter complexBody is required and cannot be null.");
         }
@@ -276,7 +277,7 @@ public class PrimitivesImpl implements Primitives {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Completable} object if successful.
      */
-    public Completable putIntAsync(IntWrapper complexBody) {
+    public Completable putIntAsync(@NonNull IntWrapper complexBody) {
         return putIntWithRestResponseAsync(complexBody)
             .toCompletable();
     }
@@ -299,7 +300,7 @@ public class PrimitivesImpl implements Primitives {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;LongWrapper&gt;} object.
      */
-    public ServiceFuture<LongWrapper> getLongAsync(ServiceCallback<LongWrapper> serviceCallback) {
+    public ServiceFuture<LongWrapper> getLongAsync(@NonNull ServiceCallback<LongWrapper> serviceCallback) {
         return ServiceFuture.fromBody(getLongAsync(), serviceCallback);
     }
 
@@ -338,7 +339,7 @@ public class PrimitivesImpl implements Primitives {
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
-    public void putLong(LongWrapper complexBody) {
+    public void putLong(@NonNull LongWrapper complexBody) {
         putLongAsync(complexBody).blockingAwait();
     }
 
@@ -350,7 +351,7 @@ public class PrimitivesImpl implements Primitives {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    public ServiceFuture<Void> putLongAsync(LongWrapper complexBody, ServiceCallback<Void> serviceCallback) {
+    public ServiceFuture<Void> putLongAsync(@NonNull LongWrapper complexBody, @NonNull ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(putLongAsync(complexBody), serviceCallback);
     }
 
@@ -361,7 +362,7 @@ public class PrimitivesImpl implements Primitives {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
      */
-    public Single<RestResponse<Void, Void>> putLongWithRestResponseAsync(LongWrapper complexBody) {
+    public Single<RestResponse<Void, Void>> putLongWithRestResponseAsync(@NonNull LongWrapper complexBody) {
         if (complexBody == null) {
             throw new IllegalArgumentException("Parameter complexBody is required and cannot be null.");
         }
@@ -376,7 +377,7 @@ public class PrimitivesImpl implements Primitives {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Completable} object if successful.
      */
-    public Completable putLongAsync(LongWrapper complexBody) {
+    public Completable putLongAsync(@NonNull LongWrapper complexBody) {
         return putLongWithRestResponseAsync(complexBody)
             .toCompletable();
     }
@@ -399,7 +400,7 @@ public class PrimitivesImpl implements Primitives {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;FloatWrapper&gt;} object.
      */
-    public ServiceFuture<FloatWrapper> getFloatAsync(ServiceCallback<FloatWrapper> serviceCallback) {
+    public ServiceFuture<FloatWrapper> getFloatAsync(@NonNull ServiceCallback<FloatWrapper> serviceCallback) {
         return ServiceFuture.fromBody(getFloatAsync(), serviceCallback);
     }
 
@@ -438,7 +439,7 @@ public class PrimitivesImpl implements Primitives {
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
-    public void putFloat(FloatWrapper complexBody) {
+    public void putFloat(@NonNull FloatWrapper complexBody) {
         putFloatAsync(complexBody).blockingAwait();
     }
 
@@ -450,7 +451,7 @@ public class PrimitivesImpl implements Primitives {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    public ServiceFuture<Void> putFloatAsync(FloatWrapper complexBody, ServiceCallback<Void> serviceCallback) {
+    public ServiceFuture<Void> putFloatAsync(@NonNull FloatWrapper complexBody, @NonNull ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(putFloatAsync(complexBody), serviceCallback);
     }
 
@@ -461,7 +462,7 @@ public class PrimitivesImpl implements Primitives {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
      */
-    public Single<RestResponse<Void, Void>> putFloatWithRestResponseAsync(FloatWrapper complexBody) {
+    public Single<RestResponse<Void, Void>> putFloatWithRestResponseAsync(@NonNull FloatWrapper complexBody) {
         if (complexBody == null) {
             throw new IllegalArgumentException("Parameter complexBody is required and cannot be null.");
         }
@@ -476,7 +477,7 @@ public class PrimitivesImpl implements Primitives {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Completable} object if successful.
      */
-    public Completable putFloatAsync(FloatWrapper complexBody) {
+    public Completable putFloatAsync(@NonNull FloatWrapper complexBody) {
         return putFloatWithRestResponseAsync(complexBody)
             .toCompletable();
     }
@@ -499,7 +500,7 @@ public class PrimitivesImpl implements Primitives {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;DoubleWrapper&gt;} object.
      */
-    public ServiceFuture<DoubleWrapper> getDoubleAsync(ServiceCallback<DoubleWrapper> serviceCallback) {
+    public ServiceFuture<DoubleWrapper> getDoubleAsync(@NonNull ServiceCallback<DoubleWrapper> serviceCallback) {
         return ServiceFuture.fromBody(getDoubleAsync(), serviceCallback);
     }
 
@@ -538,7 +539,7 @@ public class PrimitivesImpl implements Primitives {
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
-    public void putDouble(DoubleWrapper complexBody) {
+    public void putDouble(@NonNull DoubleWrapper complexBody) {
         putDoubleAsync(complexBody).blockingAwait();
     }
 
@@ -550,7 +551,7 @@ public class PrimitivesImpl implements Primitives {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    public ServiceFuture<Void> putDoubleAsync(DoubleWrapper complexBody, ServiceCallback<Void> serviceCallback) {
+    public ServiceFuture<Void> putDoubleAsync(@NonNull DoubleWrapper complexBody, @NonNull ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(putDoubleAsync(complexBody), serviceCallback);
     }
 
@@ -561,7 +562,7 @@ public class PrimitivesImpl implements Primitives {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
      */
-    public Single<RestResponse<Void, Void>> putDoubleWithRestResponseAsync(DoubleWrapper complexBody) {
+    public Single<RestResponse<Void, Void>> putDoubleWithRestResponseAsync(@NonNull DoubleWrapper complexBody) {
         if (complexBody == null) {
             throw new IllegalArgumentException("Parameter complexBody is required and cannot be null.");
         }
@@ -576,7 +577,7 @@ public class PrimitivesImpl implements Primitives {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Completable} object if successful.
      */
-    public Completable putDoubleAsync(DoubleWrapper complexBody) {
+    public Completable putDoubleAsync(@NonNull DoubleWrapper complexBody) {
         return putDoubleWithRestResponseAsync(complexBody)
             .toCompletable();
     }
@@ -599,7 +600,7 @@ public class PrimitivesImpl implements Primitives {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;BooleanWrapper&gt;} object.
      */
-    public ServiceFuture<BooleanWrapper> getBoolAsync(ServiceCallback<BooleanWrapper> serviceCallback) {
+    public ServiceFuture<BooleanWrapper> getBoolAsync(@NonNull ServiceCallback<BooleanWrapper> serviceCallback) {
         return ServiceFuture.fromBody(getBoolAsync(), serviceCallback);
     }
 
@@ -638,7 +639,7 @@ public class PrimitivesImpl implements Primitives {
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
-    public void putBool(BooleanWrapper complexBody) {
+    public void putBool(@NonNull BooleanWrapper complexBody) {
         putBoolAsync(complexBody).blockingAwait();
     }
 
@@ -650,7 +651,7 @@ public class PrimitivesImpl implements Primitives {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    public ServiceFuture<Void> putBoolAsync(BooleanWrapper complexBody, ServiceCallback<Void> serviceCallback) {
+    public ServiceFuture<Void> putBoolAsync(@NonNull BooleanWrapper complexBody, @NonNull ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(putBoolAsync(complexBody), serviceCallback);
     }
 
@@ -661,7 +662,7 @@ public class PrimitivesImpl implements Primitives {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
      */
-    public Single<RestResponse<Void, Void>> putBoolWithRestResponseAsync(BooleanWrapper complexBody) {
+    public Single<RestResponse<Void, Void>> putBoolWithRestResponseAsync(@NonNull BooleanWrapper complexBody) {
         if (complexBody == null) {
             throw new IllegalArgumentException("Parameter complexBody is required and cannot be null.");
         }
@@ -676,7 +677,7 @@ public class PrimitivesImpl implements Primitives {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Completable} object if successful.
      */
-    public Completable putBoolAsync(BooleanWrapper complexBody) {
+    public Completable putBoolAsync(@NonNull BooleanWrapper complexBody) {
         return putBoolWithRestResponseAsync(complexBody)
             .toCompletable();
     }
@@ -699,7 +700,7 @@ public class PrimitivesImpl implements Primitives {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;StringWrapper&gt;} object.
      */
-    public ServiceFuture<StringWrapper> getStringAsync(ServiceCallback<StringWrapper> serviceCallback) {
+    public ServiceFuture<StringWrapper> getStringAsync(@NonNull ServiceCallback<StringWrapper> serviceCallback) {
         return ServiceFuture.fromBody(getStringAsync(), serviceCallback);
     }
 
@@ -738,7 +739,7 @@ public class PrimitivesImpl implements Primitives {
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
-    public void putString(StringWrapper complexBody) {
+    public void putString(@NonNull StringWrapper complexBody) {
         putStringAsync(complexBody).blockingAwait();
     }
 
@@ -750,7 +751,7 @@ public class PrimitivesImpl implements Primitives {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    public ServiceFuture<Void> putStringAsync(StringWrapper complexBody, ServiceCallback<Void> serviceCallback) {
+    public ServiceFuture<Void> putStringAsync(@NonNull StringWrapper complexBody, @NonNull ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(putStringAsync(complexBody), serviceCallback);
     }
 
@@ -761,7 +762,7 @@ public class PrimitivesImpl implements Primitives {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
      */
-    public Single<RestResponse<Void, Void>> putStringWithRestResponseAsync(StringWrapper complexBody) {
+    public Single<RestResponse<Void, Void>> putStringWithRestResponseAsync(@NonNull StringWrapper complexBody) {
         if (complexBody == null) {
             throw new IllegalArgumentException("Parameter complexBody is required and cannot be null.");
         }
@@ -776,7 +777,7 @@ public class PrimitivesImpl implements Primitives {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Completable} object if successful.
      */
-    public Completable putStringAsync(StringWrapper complexBody) {
+    public Completable putStringAsync(@NonNull StringWrapper complexBody) {
         return putStringWithRestResponseAsync(complexBody)
             .toCompletable();
     }
@@ -799,7 +800,7 @@ public class PrimitivesImpl implements Primitives {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;DateWrapper&gt;} object.
      */
-    public ServiceFuture<DateWrapper> getDateAsync(ServiceCallback<DateWrapper> serviceCallback) {
+    public ServiceFuture<DateWrapper> getDateAsync(@NonNull ServiceCallback<DateWrapper> serviceCallback) {
         return ServiceFuture.fromBody(getDateAsync(), serviceCallback);
     }
 
@@ -838,7 +839,7 @@ public class PrimitivesImpl implements Primitives {
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
-    public void putDate(DateWrapper complexBody) {
+    public void putDate(@NonNull DateWrapper complexBody) {
         putDateAsync(complexBody).blockingAwait();
     }
 
@@ -850,7 +851,7 @@ public class PrimitivesImpl implements Primitives {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    public ServiceFuture<Void> putDateAsync(DateWrapper complexBody, ServiceCallback<Void> serviceCallback) {
+    public ServiceFuture<Void> putDateAsync(@NonNull DateWrapper complexBody, @NonNull ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(putDateAsync(complexBody), serviceCallback);
     }
 
@@ -861,7 +862,7 @@ public class PrimitivesImpl implements Primitives {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
      */
-    public Single<RestResponse<Void, Void>> putDateWithRestResponseAsync(DateWrapper complexBody) {
+    public Single<RestResponse<Void, Void>> putDateWithRestResponseAsync(@NonNull DateWrapper complexBody) {
         if (complexBody == null) {
             throw new IllegalArgumentException("Parameter complexBody is required and cannot be null.");
         }
@@ -876,7 +877,7 @@ public class PrimitivesImpl implements Primitives {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Completable} object if successful.
      */
-    public Completable putDateAsync(DateWrapper complexBody) {
+    public Completable putDateAsync(@NonNull DateWrapper complexBody) {
         return putDateWithRestResponseAsync(complexBody)
             .toCompletable();
     }
@@ -899,7 +900,7 @@ public class PrimitivesImpl implements Primitives {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;DatetimeWrapper&gt;} object.
      */
-    public ServiceFuture<DatetimeWrapper> getDateTimeAsync(ServiceCallback<DatetimeWrapper> serviceCallback) {
+    public ServiceFuture<DatetimeWrapper> getDateTimeAsync(@NonNull ServiceCallback<DatetimeWrapper> serviceCallback) {
         return ServiceFuture.fromBody(getDateTimeAsync(), serviceCallback);
     }
 
@@ -938,7 +939,7 @@ public class PrimitivesImpl implements Primitives {
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
-    public void putDateTime(DatetimeWrapper complexBody) {
+    public void putDateTime(@NonNull DatetimeWrapper complexBody) {
         putDateTimeAsync(complexBody).blockingAwait();
     }
 
@@ -950,7 +951,7 @@ public class PrimitivesImpl implements Primitives {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    public ServiceFuture<Void> putDateTimeAsync(DatetimeWrapper complexBody, ServiceCallback<Void> serviceCallback) {
+    public ServiceFuture<Void> putDateTimeAsync(@NonNull DatetimeWrapper complexBody, @NonNull ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(putDateTimeAsync(complexBody), serviceCallback);
     }
 
@@ -961,7 +962,7 @@ public class PrimitivesImpl implements Primitives {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
      */
-    public Single<RestResponse<Void, Void>> putDateTimeWithRestResponseAsync(DatetimeWrapper complexBody) {
+    public Single<RestResponse<Void, Void>> putDateTimeWithRestResponseAsync(@NonNull DatetimeWrapper complexBody) {
         if (complexBody == null) {
             throw new IllegalArgumentException("Parameter complexBody is required and cannot be null.");
         }
@@ -976,7 +977,7 @@ public class PrimitivesImpl implements Primitives {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Completable} object if successful.
      */
-    public Completable putDateTimeAsync(DatetimeWrapper complexBody) {
+    public Completable putDateTimeAsync(@NonNull DatetimeWrapper complexBody) {
         return putDateTimeWithRestResponseAsync(complexBody)
             .toCompletable();
     }
@@ -999,7 +1000,7 @@ public class PrimitivesImpl implements Primitives {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Datetimerfc1123Wrapper&gt;} object.
      */
-    public ServiceFuture<Datetimerfc1123Wrapper> getDateTimeRfc1123Async(ServiceCallback<Datetimerfc1123Wrapper> serviceCallback) {
+    public ServiceFuture<Datetimerfc1123Wrapper> getDateTimeRfc1123Async(@NonNull ServiceCallback<Datetimerfc1123Wrapper> serviceCallback) {
         return ServiceFuture.fromBody(getDateTimeRfc1123Async(), serviceCallback);
     }
 
@@ -1038,7 +1039,7 @@ public class PrimitivesImpl implements Primitives {
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
-    public void putDateTimeRfc1123(Datetimerfc1123Wrapper complexBody) {
+    public void putDateTimeRfc1123(@NonNull Datetimerfc1123Wrapper complexBody) {
         putDateTimeRfc1123Async(complexBody).blockingAwait();
     }
 
@@ -1050,7 +1051,7 @@ public class PrimitivesImpl implements Primitives {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    public ServiceFuture<Void> putDateTimeRfc1123Async(Datetimerfc1123Wrapper complexBody, ServiceCallback<Void> serviceCallback) {
+    public ServiceFuture<Void> putDateTimeRfc1123Async(@NonNull Datetimerfc1123Wrapper complexBody, @NonNull ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(putDateTimeRfc1123Async(complexBody), serviceCallback);
     }
 
@@ -1061,7 +1062,7 @@ public class PrimitivesImpl implements Primitives {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
      */
-    public Single<RestResponse<Void, Void>> putDateTimeRfc1123WithRestResponseAsync(Datetimerfc1123Wrapper complexBody) {
+    public Single<RestResponse<Void, Void>> putDateTimeRfc1123WithRestResponseAsync(@NonNull Datetimerfc1123Wrapper complexBody) {
         if (complexBody == null) {
             throw new IllegalArgumentException("Parameter complexBody is required and cannot be null.");
         }
@@ -1076,7 +1077,7 @@ public class PrimitivesImpl implements Primitives {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Completable} object if successful.
      */
-    public Completable putDateTimeRfc1123Async(Datetimerfc1123Wrapper complexBody) {
+    public Completable putDateTimeRfc1123Async(@NonNull Datetimerfc1123Wrapper complexBody) {
         return putDateTimeRfc1123WithRestResponseAsync(complexBody)
             .toCompletable();
     }
@@ -1099,7 +1100,7 @@ public class PrimitivesImpl implements Primitives {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;DurationWrapper&gt;} object.
      */
-    public ServiceFuture<DurationWrapper> getDurationAsync(ServiceCallback<DurationWrapper> serviceCallback) {
+    public ServiceFuture<DurationWrapper> getDurationAsync(@NonNull ServiceCallback<DurationWrapper> serviceCallback) {
         return ServiceFuture.fromBody(getDurationAsync(), serviceCallback);
     }
 
@@ -1138,7 +1139,7 @@ public class PrimitivesImpl implements Primitives {
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
-    public void putDuration(DurationWrapper complexBody) {
+    public void putDuration(@NonNull DurationWrapper complexBody) {
         putDurationAsync(complexBody).blockingAwait();
     }
 
@@ -1150,7 +1151,7 @@ public class PrimitivesImpl implements Primitives {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    public ServiceFuture<Void> putDurationAsync(DurationWrapper complexBody, ServiceCallback<Void> serviceCallback) {
+    public ServiceFuture<Void> putDurationAsync(@NonNull DurationWrapper complexBody, @NonNull ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(putDurationAsync(complexBody), serviceCallback);
     }
 
@@ -1161,7 +1162,7 @@ public class PrimitivesImpl implements Primitives {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
      */
-    public Single<RestResponse<Void, Void>> putDurationWithRestResponseAsync(DurationWrapper complexBody) {
+    public Single<RestResponse<Void, Void>> putDurationWithRestResponseAsync(@NonNull DurationWrapper complexBody) {
         if (complexBody == null) {
             throw new IllegalArgumentException("Parameter complexBody is required and cannot be null.");
         }
@@ -1176,7 +1177,7 @@ public class PrimitivesImpl implements Primitives {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Completable} object if successful.
      */
-    public Completable putDurationAsync(DurationWrapper complexBody) {
+    public Completable putDurationAsync(@NonNull DurationWrapper complexBody) {
         return putDurationWithRestResponseAsync(complexBody)
             .toCompletable();
     }
@@ -1199,7 +1200,7 @@ public class PrimitivesImpl implements Primitives {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;ByteWrapper&gt;} object.
      */
-    public ServiceFuture<ByteWrapper> getByteAsync(ServiceCallback<ByteWrapper> serviceCallback) {
+    public ServiceFuture<ByteWrapper> getByteAsync(@NonNull ServiceCallback<ByteWrapper> serviceCallback) {
         return ServiceFuture.fromBody(getByteAsync(), serviceCallback);
     }
 
@@ -1238,7 +1239,7 @@ public class PrimitivesImpl implements Primitives {
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
-    public void putByte(ByteWrapper complexBody) {
+    public void putByte(@NonNull ByteWrapper complexBody) {
         putByteAsync(complexBody).blockingAwait();
     }
 
@@ -1250,7 +1251,7 @@ public class PrimitivesImpl implements Primitives {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    public ServiceFuture<Void> putByteAsync(ByteWrapper complexBody, ServiceCallback<Void> serviceCallback) {
+    public ServiceFuture<Void> putByteAsync(@NonNull ByteWrapper complexBody, @NonNull ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(putByteAsync(complexBody), serviceCallback);
     }
 
@@ -1261,7 +1262,7 @@ public class PrimitivesImpl implements Primitives {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
      */
-    public Single<RestResponse<Void, Void>> putByteWithRestResponseAsync(ByteWrapper complexBody) {
+    public Single<RestResponse<Void, Void>> putByteWithRestResponseAsync(@NonNull ByteWrapper complexBody) {
         if (complexBody == null) {
             throw new IllegalArgumentException("Parameter complexBody is required and cannot be null.");
         }
@@ -1276,7 +1277,7 @@ public class PrimitivesImpl implements Primitives {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Completable} object if successful.
      */
-    public Completable putByteAsync(ByteWrapper complexBody) {
+    public Completable putByteAsync(@NonNull ByteWrapper complexBody) {
         return putByteWithRestResponseAsync(complexBody)
             .toCompletable();
     }

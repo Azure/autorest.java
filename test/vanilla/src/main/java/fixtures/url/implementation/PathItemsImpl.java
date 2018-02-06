@@ -24,12 +24,13 @@ import fixtures.url.PathItems;
 import fixtures.url.models.ErrorException;
 import io.reactivex.Completable;
 import io.reactivex.Single;
+import io.reactivex.annotations.NonNull;
 
 /**
  * An instance of this class provides access to all the operations defined in
  * PathItems.
  */
-public class PathItemsImpl implements PathItems {
+public final class PathItemsImpl implements PathItems {
     /**
      * The proxy service used to perform REST calls.
      */
@@ -86,7 +87,7 @@ public class PathItemsImpl implements PathItems {
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
-    public void getAllWithValues(String localStringPath, String pathItemStringPath) {
+    public void getAllWithValues(@NonNull String localStringPath, @NonNull String pathItemStringPath) {
         getAllWithValuesAsync(localStringPath, pathItemStringPath).blockingAwait();
     }
 
@@ -99,7 +100,7 @@ public class PathItemsImpl implements PathItems {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    public ServiceFuture<Void> getAllWithValuesAsync(String localStringPath, String pathItemStringPath, ServiceCallback<Void> serviceCallback) {
+    public ServiceFuture<Void> getAllWithValuesAsync(@NonNull String localStringPath, @NonNull String pathItemStringPath, @NonNull ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(getAllWithValuesAsync(localStringPath, pathItemStringPath), serviceCallback);
     }
 
@@ -111,7 +112,7 @@ public class PathItemsImpl implements PathItems {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
      */
-    public Single<RestResponse<Void, Void>> getAllWithValuesWithRestResponseAsync(String localStringPath, String pathItemStringPath) {
+    public Single<RestResponse<Void, Void>> getAllWithValuesWithRestResponseAsync(@NonNull String localStringPath, @NonNull String pathItemStringPath) {
         if (localStringPath == null) {
             throw new IllegalArgumentException("Parameter localStringPath is required and cannot be null.");
         }
@@ -134,7 +135,7 @@ public class PathItemsImpl implements PathItems {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Completable} object if successful.
      */
-    public Completable getAllWithValuesAsync(String localStringPath, String pathItemStringPath) {
+    public Completable getAllWithValuesAsync(@NonNull String localStringPath, @NonNull String pathItemStringPath) {
         return getAllWithValuesWithRestResponseAsync(localStringPath, pathItemStringPath)
             .toCompletable();
     }
@@ -150,7 +151,7 @@ public class PathItemsImpl implements PathItems {
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
-    public void getAllWithValues(String localStringPath, String pathItemStringPath, String localStringQuery, String pathItemStringQuery) {
+    public void getAllWithValues(@NonNull String localStringPath, @NonNull String pathItemStringPath, String localStringQuery, String pathItemStringQuery) {
         getAllWithValuesAsync(localStringPath, pathItemStringPath, localStringQuery, pathItemStringQuery).blockingAwait();
     }
 
@@ -165,7 +166,7 @@ public class PathItemsImpl implements PathItems {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    public ServiceFuture<Void> getAllWithValuesAsync(String localStringPath, String pathItemStringPath, String localStringQuery, String pathItemStringQuery, ServiceCallback<Void> serviceCallback) {
+    public ServiceFuture<Void> getAllWithValuesAsync(@NonNull String localStringPath, @NonNull String pathItemStringPath, String localStringQuery, String pathItemStringQuery, @NonNull ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(getAllWithValuesAsync(localStringPath, pathItemStringPath, localStringQuery, pathItemStringQuery), serviceCallback);
     }
 
@@ -179,7 +180,7 @@ public class PathItemsImpl implements PathItems {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
      */
-    public Single<RestResponse<Void, Void>> getAllWithValuesWithRestResponseAsync(String localStringPath, String pathItemStringPath, String localStringQuery, String pathItemStringQuery) {
+    public Single<RestResponse<Void, Void>> getAllWithValuesWithRestResponseAsync(@NonNull String localStringPath, @NonNull String pathItemStringPath, String localStringQuery, String pathItemStringQuery) {
         if (localStringPath == null) {
             throw new IllegalArgumentException("Parameter localStringPath is required and cannot be null.");
         }
@@ -202,7 +203,7 @@ public class PathItemsImpl implements PathItems {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Completable} object if successful.
      */
-    public Completable getAllWithValuesAsync(String localStringPath, String pathItemStringPath, String localStringQuery, String pathItemStringQuery) {
+    public Completable getAllWithValuesAsync(@NonNull String localStringPath, @NonNull String pathItemStringPath, String localStringQuery, String pathItemStringQuery) {
         return getAllWithValuesWithRestResponseAsync(localStringPath, pathItemStringPath, localStringQuery, pathItemStringQuery)
             .toCompletable();
     }
@@ -216,7 +217,7 @@ public class PathItemsImpl implements PathItems {
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
-    public void getGlobalQueryNull(String localStringPath, String pathItemStringPath) {
+    public void getGlobalQueryNull(@NonNull String localStringPath, @NonNull String pathItemStringPath) {
         getGlobalQueryNullAsync(localStringPath, pathItemStringPath).blockingAwait();
     }
 
@@ -229,7 +230,7 @@ public class PathItemsImpl implements PathItems {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    public ServiceFuture<Void> getGlobalQueryNullAsync(String localStringPath, String pathItemStringPath, ServiceCallback<Void> serviceCallback) {
+    public ServiceFuture<Void> getGlobalQueryNullAsync(@NonNull String localStringPath, @NonNull String pathItemStringPath, @NonNull ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(getGlobalQueryNullAsync(localStringPath, pathItemStringPath), serviceCallback);
     }
 
@@ -241,7 +242,7 @@ public class PathItemsImpl implements PathItems {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
      */
-    public Single<RestResponse<Void, Void>> getGlobalQueryNullWithRestResponseAsync(String localStringPath, String pathItemStringPath) {
+    public Single<RestResponse<Void, Void>> getGlobalQueryNullWithRestResponseAsync(@NonNull String localStringPath, @NonNull String pathItemStringPath) {
         if (localStringPath == null) {
             throw new IllegalArgumentException("Parameter localStringPath is required and cannot be null.");
         }
@@ -264,7 +265,7 @@ public class PathItemsImpl implements PathItems {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Completable} object if successful.
      */
-    public Completable getGlobalQueryNullAsync(String localStringPath, String pathItemStringPath) {
+    public Completable getGlobalQueryNullAsync(@NonNull String localStringPath, @NonNull String pathItemStringPath) {
         return getGlobalQueryNullWithRestResponseAsync(localStringPath, pathItemStringPath)
             .toCompletable();
     }
@@ -280,7 +281,7 @@ public class PathItemsImpl implements PathItems {
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
-    public void getGlobalQueryNull(String localStringPath, String pathItemStringPath, String localStringQuery, String pathItemStringQuery) {
+    public void getGlobalQueryNull(@NonNull String localStringPath, @NonNull String pathItemStringPath, String localStringQuery, String pathItemStringQuery) {
         getGlobalQueryNullAsync(localStringPath, pathItemStringPath, localStringQuery, pathItemStringQuery).blockingAwait();
     }
 
@@ -295,7 +296,7 @@ public class PathItemsImpl implements PathItems {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    public ServiceFuture<Void> getGlobalQueryNullAsync(String localStringPath, String pathItemStringPath, String localStringQuery, String pathItemStringQuery, ServiceCallback<Void> serviceCallback) {
+    public ServiceFuture<Void> getGlobalQueryNullAsync(@NonNull String localStringPath, @NonNull String pathItemStringPath, String localStringQuery, String pathItemStringQuery, @NonNull ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(getGlobalQueryNullAsync(localStringPath, pathItemStringPath, localStringQuery, pathItemStringQuery), serviceCallback);
     }
 
@@ -309,7 +310,7 @@ public class PathItemsImpl implements PathItems {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
      */
-    public Single<RestResponse<Void, Void>> getGlobalQueryNullWithRestResponseAsync(String localStringPath, String pathItemStringPath, String localStringQuery, String pathItemStringQuery) {
+    public Single<RestResponse<Void, Void>> getGlobalQueryNullWithRestResponseAsync(@NonNull String localStringPath, @NonNull String pathItemStringPath, String localStringQuery, String pathItemStringQuery) {
         if (localStringPath == null) {
             throw new IllegalArgumentException("Parameter localStringPath is required and cannot be null.");
         }
@@ -332,7 +333,7 @@ public class PathItemsImpl implements PathItems {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Completable} object if successful.
      */
-    public Completable getGlobalQueryNullAsync(String localStringPath, String pathItemStringPath, String localStringQuery, String pathItemStringQuery) {
+    public Completable getGlobalQueryNullAsync(@NonNull String localStringPath, @NonNull String pathItemStringPath, String localStringQuery, String pathItemStringQuery) {
         return getGlobalQueryNullWithRestResponseAsync(localStringPath, pathItemStringPath, localStringQuery, pathItemStringQuery)
             .toCompletable();
     }
@@ -346,7 +347,7 @@ public class PathItemsImpl implements PathItems {
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
-    public void getGlobalAndLocalQueryNull(String localStringPath, String pathItemStringPath) {
+    public void getGlobalAndLocalQueryNull(@NonNull String localStringPath, @NonNull String pathItemStringPath) {
         getGlobalAndLocalQueryNullAsync(localStringPath, pathItemStringPath).blockingAwait();
     }
 
@@ -359,7 +360,7 @@ public class PathItemsImpl implements PathItems {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    public ServiceFuture<Void> getGlobalAndLocalQueryNullAsync(String localStringPath, String pathItemStringPath, ServiceCallback<Void> serviceCallback) {
+    public ServiceFuture<Void> getGlobalAndLocalQueryNullAsync(@NonNull String localStringPath, @NonNull String pathItemStringPath, @NonNull ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(getGlobalAndLocalQueryNullAsync(localStringPath, pathItemStringPath), serviceCallback);
     }
 
@@ -371,7 +372,7 @@ public class PathItemsImpl implements PathItems {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
      */
-    public Single<RestResponse<Void, Void>> getGlobalAndLocalQueryNullWithRestResponseAsync(String localStringPath, String pathItemStringPath) {
+    public Single<RestResponse<Void, Void>> getGlobalAndLocalQueryNullWithRestResponseAsync(@NonNull String localStringPath, @NonNull String pathItemStringPath) {
         if (localStringPath == null) {
             throw new IllegalArgumentException("Parameter localStringPath is required and cannot be null.");
         }
@@ -394,7 +395,7 @@ public class PathItemsImpl implements PathItems {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Completable} object if successful.
      */
-    public Completable getGlobalAndLocalQueryNullAsync(String localStringPath, String pathItemStringPath) {
+    public Completable getGlobalAndLocalQueryNullAsync(@NonNull String localStringPath, @NonNull String pathItemStringPath) {
         return getGlobalAndLocalQueryNullWithRestResponseAsync(localStringPath, pathItemStringPath)
             .toCompletable();
     }
@@ -410,7 +411,7 @@ public class PathItemsImpl implements PathItems {
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
-    public void getGlobalAndLocalQueryNull(String localStringPath, String pathItemStringPath, String localStringQuery, String pathItemStringQuery) {
+    public void getGlobalAndLocalQueryNull(@NonNull String localStringPath, @NonNull String pathItemStringPath, String localStringQuery, String pathItemStringQuery) {
         getGlobalAndLocalQueryNullAsync(localStringPath, pathItemStringPath, localStringQuery, pathItemStringQuery).blockingAwait();
     }
 
@@ -425,7 +426,7 @@ public class PathItemsImpl implements PathItems {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    public ServiceFuture<Void> getGlobalAndLocalQueryNullAsync(String localStringPath, String pathItemStringPath, String localStringQuery, String pathItemStringQuery, ServiceCallback<Void> serviceCallback) {
+    public ServiceFuture<Void> getGlobalAndLocalQueryNullAsync(@NonNull String localStringPath, @NonNull String pathItemStringPath, String localStringQuery, String pathItemStringQuery, @NonNull ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(getGlobalAndLocalQueryNullAsync(localStringPath, pathItemStringPath, localStringQuery, pathItemStringQuery), serviceCallback);
     }
 
@@ -439,7 +440,7 @@ public class PathItemsImpl implements PathItems {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
      */
-    public Single<RestResponse<Void, Void>> getGlobalAndLocalQueryNullWithRestResponseAsync(String localStringPath, String pathItemStringPath, String localStringQuery, String pathItemStringQuery) {
+    public Single<RestResponse<Void, Void>> getGlobalAndLocalQueryNullWithRestResponseAsync(@NonNull String localStringPath, @NonNull String pathItemStringPath, String localStringQuery, String pathItemStringQuery) {
         if (localStringPath == null) {
             throw new IllegalArgumentException("Parameter localStringPath is required and cannot be null.");
         }
@@ -462,7 +463,7 @@ public class PathItemsImpl implements PathItems {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Completable} object if successful.
      */
-    public Completable getGlobalAndLocalQueryNullAsync(String localStringPath, String pathItemStringPath, String localStringQuery, String pathItemStringQuery) {
+    public Completable getGlobalAndLocalQueryNullAsync(@NonNull String localStringPath, @NonNull String pathItemStringPath, String localStringQuery, String pathItemStringQuery) {
         return getGlobalAndLocalQueryNullWithRestResponseAsync(localStringPath, pathItemStringPath, localStringQuery, pathItemStringQuery)
             .toCompletable();
     }
@@ -476,7 +477,7 @@ public class PathItemsImpl implements PathItems {
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
-    public void getLocalPathItemQueryNull(String localStringPath, String pathItemStringPath) {
+    public void getLocalPathItemQueryNull(@NonNull String localStringPath, @NonNull String pathItemStringPath) {
         getLocalPathItemQueryNullAsync(localStringPath, pathItemStringPath).blockingAwait();
     }
 
@@ -489,7 +490,7 @@ public class PathItemsImpl implements PathItems {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    public ServiceFuture<Void> getLocalPathItemQueryNullAsync(String localStringPath, String pathItemStringPath, ServiceCallback<Void> serviceCallback) {
+    public ServiceFuture<Void> getLocalPathItemQueryNullAsync(@NonNull String localStringPath, @NonNull String pathItemStringPath, @NonNull ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(getLocalPathItemQueryNullAsync(localStringPath, pathItemStringPath), serviceCallback);
     }
 
@@ -501,7 +502,7 @@ public class PathItemsImpl implements PathItems {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
      */
-    public Single<RestResponse<Void, Void>> getLocalPathItemQueryNullWithRestResponseAsync(String localStringPath, String pathItemStringPath) {
+    public Single<RestResponse<Void, Void>> getLocalPathItemQueryNullWithRestResponseAsync(@NonNull String localStringPath, @NonNull String pathItemStringPath) {
         if (localStringPath == null) {
             throw new IllegalArgumentException("Parameter localStringPath is required and cannot be null.");
         }
@@ -524,7 +525,7 @@ public class PathItemsImpl implements PathItems {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Completable} object if successful.
      */
-    public Completable getLocalPathItemQueryNullAsync(String localStringPath, String pathItemStringPath) {
+    public Completable getLocalPathItemQueryNullAsync(@NonNull String localStringPath, @NonNull String pathItemStringPath) {
         return getLocalPathItemQueryNullWithRestResponseAsync(localStringPath, pathItemStringPath)
             .toCompletable();
     }
@@ -540,7 +541,7 @@ public class PathItemsImpl implements PathItems {
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
-    public void getLocalPathItemQueryNull(String localStringPath, String pathItemStringPath, String localStringQuery, String pathItemStringQuery) {
+    public void getLocalPathItemQueryNull(@NonNull String localStringPath, @NonNull String pathItemStringPath, String localStringQuery, String pathItemStringQuery) {
         getLocalPathItemQueryNullAsync(localStringPath, pathItemStringPath, localStringQuery, pathItemStringQuery).blockingAwait();
     }
 
@@ -555,7 +556,7 @@ public class PathItemsImpl implements PathItems {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    public ServiceFuture<Void> getLocalPathItemQueryNullAsync(String localStringPath, String pathItemStringPath, String localStringQuery, String pathItemStringQuery, ServiceCallback<Void> serviceCallback) {
+    public ServiceFuture<Void> getLocalPathItemQueryNullAsync(@NonNull String localStringPath, @NonNull String pathItemStringPath, String localStringQuery, String pathItemStringQuery, @NonNull ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(getLocalPathItemQueryNullAsync(localStringPath, pathItemStringPath, localStringQuery, pathItemStringQuery), serviceCallback);
     }
 
@@ -569,7 +570,7 @@ public class PathItemsImpl implements PathItems {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
      */
-    public Single<RestResponse<Void, Void>> getLocalPathItemQueryNullWithRestResponseAsync(String localStringPath, String pathItemStringPath, String localStringQuery, String pathItemStringQuery) {
+    public Single<RestResponse<Void, Void>> getLocalPathItemQueryNullWithRestResponseAsync(@NonNull String localStringPath, @NonNull String pathItemStringPath, String localStringQuery, String pathItemStringQuery) {
         if (localStringPath == null) {
             throw new IllegalArgumentException("Parameter localStringPath is required and cannot be null.");
         }
@@ -592,7 +593,7 @@ public class PathItemsImpl implements PathItems {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Completable} object if successful.
      */
-    public Completable getLocalPathItemQueryNullAsync(String localStringPath, String pathItemStringPath, String localStringQuery, String pathItemStringQuery) {
+    public Completable getLocalPathItemQueryNullAsync(@NonNull String localStringPath, @NonNull String pathItemStringPath, String localStringQuery, String pathItemStringQuery) {
         return getLocalPathItemQueryNullWithRestResponseAsync(localStringPath, pathItemStringPath, localStringQuery, pathItemStringQuery)
             .toCompletable();
     }

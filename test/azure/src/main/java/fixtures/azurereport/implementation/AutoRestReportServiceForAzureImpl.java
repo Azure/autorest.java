@@ -28,6 +28,7 @@ import fixtures.azurereport.AutoRestReportServiceForAzure;
 import fixtures.azurereport.models.ErrorException;
 import io.reactivex.Maybe;
 import io.reactivex.Single;
+import io.reactivex.annotations.NonNull;
 import io.reactivex.functions.Function;
 import java.util.HashMap;
 import java.util.Map;
@@ -35,7 +36,7 @@ import java.util.Map;
 /**
  * Initializes a new instance of the AutoRestReportServiceForAzure type.
  */
-public class AutoRestReportServiceForAzureImpl extends AzureServiceClient implements AutoRestReportServiceForAzure {
+public final class AutoRestReportServiceForAzureImpl extends AzureServiceClient implements AutoRestReportServiceForAzure {
     /**
      * The proxy service used to perform REST calls.
      */
@@ -121,7 +122,7 @@ public class AutoRestReportServiceForAzureImpl extends AzureServiceClient implem
      *
      * @param credentials the management credentials for Azure.
      */
-    public AutoRestReportServiceForAzureImpl(ServiceClientCredentials credentials) {
+    public AutoRestReportServiceForAzureImpl(@NonNull ServiceClientCredentials credentials) {
         this(AzureProxy.createDefaultPipeline(AutoRestReportServiceForAzureImpl.class, credentials));
     }
 
@@ -131,7 +132,7 @@ public class AutoRestReportServiceForAzureImpl extends AzureServiceClient implem
      * @param credentials the management credentials for Azure.
      * @param azureEnvironment The environment that requests will target.
      */
-    public AutoRestReportServiceForAzureImpl(ServiceClientCredentials credentials, AzureEnvironment azureEnvironment) {
+    public AutoRestReportServiceForAzureImpl(@NonNull ServiceClientCredentials credentials, @NonNull AzureEnvironment azureEnvironment) {
         this(AzureProxy.createDefaultPipeline(AutoRestReportServiceForAzureImpl.class, credentials), azureEnvironment);
     }
 
@@ -140,7 +141,7 @@ public class AutoRestReportServiceForAzureImpl extends AzureServiceClient implem
      *
      * @param httpPipeline The HTTP pipeline to send requests through.
      */
-    public AutoRestReportServiceForAzureImpl(HttpPipeline httpPipeline) {
+    public AutoRestReportServiceForAzureImpl(@NonNull HttpPipeline httpPipeline) {
         this(httpPipeline, null);
     }
 
@@ -150,7 +151,7 @@ public class AutoRestReportServiceForAzureImpl extends AzureServiceClient implem
      * @param httpPipeline The HTTP pipeline to send requests through.
      * @param azureEnvironment The environment that requests will target.
      */
-    public AutoRestReportServiceForAzureImpl(HttpPipeline httpPipeline, AzureEnvironment azureEnvironment) {
+    public AutoRestReportServiceForAzureImpl(@NonNull HttpPipeline httpPipeline, @NonNull AzureEnvironment azureEnvironment) {
         super(httpPipeline, azureEnvironment);
         this.acceptLanguage = "en-US";
         this.longRunningOperationRetryTimeout = 30;
@@ -189,7 +190,7 @@ public class AutoRestReportServiceForAzureImpl extends AzureServiceClient implem
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Map&lt;String, Integer&gt;&gt;} object.
      */
-    public ServiceFuture<Map<String, Integer>> getReportAsync(ServiceCallback<Map<String, Integer>> serviceCallback) {
+    public ServiceFuture<Map<String, Integer>> getReportAsync(@NonNull ServiceCallback<Map<String, Integer>> serviceCallback) {
         return ServiceFuture.fromBody(getReportAsync(), serviceCallback);
     }
 
@@ -242,7 +243,7 @@ public class AutoRestReportServiceForAzureImpl extends AzureServiceClient implem
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Map&lt;String, Integer&gt;&gt;} object.
      */
-    public ServiceFuture<Map<String, Integer>> getReportAsync(String qualifier, ServiceCallback<Map<String, Integer>> serviceCallback) {
+    public ServiceFuture<Map<String, Integer>> getReportAsync(String qualifier, @NonNull ServiceCallback<Map<String, Integer>> serviceCallback) {
         return ServiceFuture.fromBody(getReportAsync(qualifier), serviceCallback);
     }
 

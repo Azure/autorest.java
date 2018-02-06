@@ -17,11 +17,12 @@ import com.microsoft.rest.v2.credentials.ServiceClientCredentials;
 import com.microsoft.rest.v2.http.HttpPipeline;
 import fixtures.azureparametergrouping.AutoRestParameterGroupingTestService;
 import fixtures.azureparametergrouping.ParameterGroupings;
+import io.reactivex.annotations.NonNull;
 
 /**
  * Initializes a new instance of the AutoRestParameterGroupingTestService type.
  */
-public class AutoRestParameterGroupingTestServiceImpl extends AzureServiceClient implements AutoRestParameterGroupingTestService {
+public final class AutoRestParameterGroupingTestServiceImpl extends AzureServiceClient implements AutoRestParameterGroupingTestService {
     /**
      * Gets or sets the preferred language for the response.
      */
@@ -116,7 +117,7 @@ public class AutoRestParameterGroupingTestServiceImpl extends AzureServiceClient
      *
      * @param credentials the management credentials for Azure.
      */
-    public AutoRestParameterGroupingTestServiceImpl(ServiceClientCredentials credentials) {
+    public AutoRestParameterGroupingTestServiceImpl(@NonNull ServiceClientCredentials credentials) {
         this(AzureProxy.createDefaultPipeline(AutoRestParameterGroupingTestServiceImpl.class, credentials));
     }
 
@@ -126,7 +127,7 @@ public class AutoRestParameterGroupingTestServiceImpl extends AzureServiceClient
      * @param credentials the management credentials for Azure.
      * @param azureEnvironment The environment that requests will target.
      */
-    public AutoRestParameterGroupingTestServiceImpl(ServiceClientCredentials credentials, AzureEnvironment azureEnvironment) {
+    public AutoRestParameterGroupingTestServiceImpl(@NonNull ServiceClientCredentials credentials, @NonNull AzureEnvironment azureEnvironment) {
         this(AzureProxy.createDefaultPipeline(AutoRestParameterGroupingTestServiceImpl.class, credentials), azureEnvironment);
     }
 
@@ -135,7 +136,7 @@ public class AutoRestParameterGroupingTestServiceImpl extends AzureServiceClient
      *
      * @param httpPipeline The HTTP pipeline to send requests through.
      */
-    public AutoRestParameterGroupingTestServiceImpl(HttpPipeline httpPipeline) {
+    public AutoRestParameterGroupingTestServiceImpl(@NonNull HttpPipeline httpPipeline) {
         this(httpPipeline, null);
     }
 
@@ -145,7 +146,7 @@ public class AutoRestParameterGroupingTestServiceImpl extends AzureServiceClient
      * @param httpPipeline The HTTP pipeline to send requests through.
      * @param azureEnvironment The environment that requests will target.
      */
-    public AutoRestParameterGroupingTestServiceImpl(HttpPipeline httpPipeline, AzureEnvironment azureEnvironment) {
+    public AutoRestParameterGroupingTestServiceImpl(@NonNull HttpPipeline httpPipeline, @NonNull AzureEnvironment azureEnvironment) {
         super(httpPipeline, azureEnvironment);
         this.acceptLanguage = "en-US";
         this.longRunningOperationRetryTimeout = 30;

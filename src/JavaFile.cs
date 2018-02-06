@@ -44,19 +44,14 @@ namespace AutoRest.Java
             Contents.Indent(indentAction);
         }
 
-        public void Block(string text, Action<JavaBlock> bodyAction)
+        public void PublicClass(bool isFinal, string classDeclaration, Action<JavaClass> classAction)
         {
-            Contents.Block(text, bodyAction);
-        }
-
-        public void PublicClass(string classDeclaration, Action<JavaClass> classAction)
-        {
-            Contents.PublicClass(classDeclaration, classAction);
+            Contents.PublicClass(isFinal, classDeclaration, classAction);
         }
 
         public void PublicFinalClass(string classDeclaration, Action<JavaClass> classAction)
         {
-            Contents.PublicFinalClass(classDeclaration, classAction);
+            PublicClass(true, classDeclaration, classAction);
         }
 
         public void Package(string package)

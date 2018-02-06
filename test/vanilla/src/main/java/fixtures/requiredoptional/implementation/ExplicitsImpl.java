@@ -37,6 +37,7 @@ import fixtures.requiredoptional.models.StringWrapper;
 import io.reactivex.Completable;
 import io.reactivex.Maybe;
 import io.reactivex.Single;
+import io.reactivex.annotations.NonNull;
 import io.reactivex.functions.Function;
 import java.util.ArrayList;
 import java.util.List;
@@ -45,7 +46,7 @@ import java.util.List;
  * An instance of this class provides access to all the operations defined in
  * Explicits.
  */
-public class ExplicitsImpl implements Explicits {
+public final class ExplicitsImpl implements Explicits {
     /**
      * The proxy service used to perform REST calls.
      */
@@ -181,7 +182,7 @@ public class ExplicitsImpl implements Explicits {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the Error object if successful.
      */
-    public Error postRequiredIntegerParameter(int bodyParameter) {
+    public Error postRequiredIntegerParameter(@NonNull int bodyParameter) {
         return postRequiredIntegerParameterAsync(bodyParameter).blockingGet();
     }
 
@@ -193,7 +194,7 @@ public class ExplicitsImpl implements Explicits {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Error&gt;} object.
      */
-    public ServiceFuture<Error> postRequiredIntegerParameterAsync(int bodyParameter, ServiceCallback<Error> serviceCallback) {
+    public ServiceFuture<Error> postRequiredIntegerParameterAsync(@NonNull int bodyParameter, @NonNull ServiceCallback<Error> serviceCallback) {
         return ServiceFuture.fromBody(postRequiredIntegerParameterAsync(bodyParameter), serviceCallback);
     }
 
@@ -204,7 +205,7 @@ public class ExplicitsImpl implements Explicits {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, Error&gt;&gt;} object if successful.
      */
-    public Single<RestResponse<Void, Error>> postRequiredIntegerParameterWithRestResponseAsync(int bodyParameter) {
+    public Single<RestResponse<Void, Error>> postRequiredIntegerParameterWithRestResponseAsync(@NonNull int bodyParameter) {
         return service.postRequiredIntegerParameter(bodyParameter);
     }
 
@@ -215,7 +216,7 @@ public class ExplicitsImpl implements Explicits {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Maybe&lt;Error&gt;} object if successful.
      */
-    public Maybe<Error> postRequiredIntegerParameterAsync(int bodyParameter) {
+    public Maybe<Error> postRequiredIntegerParameterAsync(@NonNull int bodyParameter) {
         return postRequiredIntegerParameterWithRestResponseAsync(bodyParameter)
             .flatMapMaybe(new Function<RestResponse<Void, Error>, Maybe<Error>>() {
                 public Maybe<Error> apply(RestResponse<Void, Error> restResponse) {
@@ -245,7 +246,7 @@ public class ExplicitsImpl implements Explicits {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    public ServiceFuture<Void> postOptionalIntegerParameterAsync(ServiceCallback<Void> serviceCallback) {
+    public ServiceFuture<Void> postOptionalIntegerParameterAsync(@NonNull ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(postOptionalIntegerParameterAsync(), serviceCallback);
     }
 
@@ -289,7 +290,7 @@ public class ExplicitsImpl implements Explicits {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    public ServiceFuture<Void> postOptionalIntegerParameterAsync(Integer bodyParameter, ServiceCallback<Void> serviceCallback) {
+    public ServiceFuture<Void> postOptionalIntegerParameterAsync(Integer bodyParameter, @NonNull ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(postOptionalIntegerParameterAsync(bodyParameter), serviceCallback);
     }
 
@@ -325,7 +326,7 @@ public class ExplicitsImpl implements Explicits {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the Error object if successful.
      */
-    public Error postRequiredIntegerProperty(IntWrapper bodyParameter) {
+    public Error postRequiredIntegerProperty(@NonNull IntWrapper bodyParameter) {
         return postRequiredIntegerPropertyAsync(bodyParameter).blockingGet();
     }
 
@@ -337,7 +338,7 @@ public class ExplicitsImpl implements Explicits {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Error&gt;} object.
      */
-    public ServiceFuture<Error> postRequiredIntegerPropertyAsync(IntWrapper bodyParameter, ServiceCallback<Error> serviceCallback) {
+    public ServiceFuture<Error> postRequiredIntegerPropertyAsync(@NonNull IntWrapper bodyParameter, @NonNull ServiceCallback<Error> serviceCallback) {
         return ServiceFuture.fromBody(postRequiredIntegerPropertyAsync(bodyParameter), serviceCallback);
     }
 
@@ -348,7 +349,7 @@ public class ExplicitsImpl implements Explicits {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, Error&gt;&gt;} object if successful.
      */
-    public Single<RestResponse<Void, Error>> postRequiredIntegerPropertyWithRestResponseAsync(IntWrapper bodyParameter) {
+    public Single<RestResponse<Void, Error>> postRequiredIntegerPropertyWithRestResponseAsync(@NonNull IntWrapper bodyParameter) {
         if (bodyParameter == null) {
             throw new IllegalArgumentException("Parameter bodyParameter is required and cannot be null.");
         }
@@ -363,7 +364,7 @@ public class ExplicitsImpl implements Explicits {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Maybe&lt;Error&gt;} object if successful.
      */
-    public Maybe<Error> postRequiredIntegerPropertyAsync(IntWrapper bodyParameter) {
+    public Maybe<Error> postRequiredIntegerPropertyAsync(@NonNull IntWrapper bodyParameter) {
         return postRequiredIntegerPropertyWithRestResponseAsync(bodyParameter)
             .flatMapMaybe(new Function<RestResponse<Void, Error>, Maybe<Error>>() {
                 public Maybe<Error> apply(RestResponse<Void, Error> restResponse) {
@@ -393,7 +394,7 @@ public class ExplicitsImpl implements Explicits {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    public ServiceFuture<Void> postOptionalIntegerPropertyAsync(ServiceCallback<Void> serviceCallback) {
+    public ServiceFuture<Void> postOptionalIntegerPropertyAsync(@NonNull ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(postOptionalIntegerPropertyAsync(), serviceCallback);
     }
 
@@ -437,7 +438,7 @@ public class ExplicitsImpl implements Explicits {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    public ServiceFuture<Void> postOptionalIntegerPropertyAsync(IntOptionalWrapper bodyParameter, ServiceCallback<Void> serviceCallback) {
+    public ServiceFuture<Void> postOptionalIntegerPropertyAsync(IntOptionalWrapper bodyParameter, @NonNull ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(postOptionalIntegerPropertyAsync(bodyParameter), serviceCallback);
     }
 
@@ -474,7 +475,7 @@ public class ExplicitsImpl implements Explicits {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the Error object if successful.
      */
-    public Error postRequiredIntegerHeader(int headerParameter) {
+    public Error postRequiredIntegerHeader(@NonNull int headerParameter) {
         return postRequiredIntegerHeaderAsync(headerParameter).blockingGet();
     }
 
@@ -486,7 +487,7 @@ public class ExplicitsImpl implements Explicits {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Error&gt;} object.
      */
-    public ServiceFuture<Error> postRequiredIntegerHeaderAsync(int headerParameter, ServiceCallback<Error> serviceCallback) {
+    public ServiceFuture<Error> postRequiredIntegerHeaderAsync(@NonNull int headerParameter, @NonNull ServiceCallback<Error> serviceCallback) {
         return ServiceFuture.fromBody(postRequiredIntegerHeaderAsync(headerParameter), serviceCallback);
     }
 
@@ -497,7 +498,7 @@ public class ExplicitsImpl implements Explicits {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, Error&gt;&gt;} object if successful.
      */
-    public Single<RestResponse<Void, Error>> postRequiredIntegerHeaderWithRestResponseAsync(int headerParameter) {
+    public Single<RestResponse<Void, Error>> postRequiredIntegerHeaderWithRestResponseAsync(@NonNull int headerParameter) {
         return service.postRequiredIntegerHeader(headerParameter);
     }
 
@@ -508,7 +509,7 @@ public class ExplicitsImpl implements Explicits {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Maybe&lt;Error&gt;} object if successful.
      */
-    public Maybe<Error> postRequiredIntegerHeaderAsync(int headerParameter) {
+    public Maybe<Error> postRequiredIntegerHeaderAsync(@NonNull int headerParameter) {
         return postRequiredIntegerHeaderWithRestResponseAsync(headerParameter)
             .flatMapMaybe(new Function<RestResponse<Void, Error>, Maybe<Error>>() {
                 public Maybe<Error> apply(RestResponse<Void, Error> restResponse) {
@@ -538,7 +539,7 @@ public class ExplicitsImpl implements Explicits {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    public ServiceFuture<Void> postOptionalIntegerHeaderAsync(ServiceCallback<Void> serviceCallback) {
+    public ServiceFuture<Void> postOptionalIntegerHeaderAsync(@NonNull ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(postOptionalIntegerHeaderAsync(), serviceCallback);
     }
 
@@ -582,7 +583,7 @@ public class ExplicitsImpl implements Explicits {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    public ServiceFuture<Void> postOptionalIntegerHeaderAsync(Integer headerParameter, ServiceCallback<Void> serviceCallback) {
+    public ServiceFuture<Void> postOptionalIntegerHeaderAsync(Integer headerParameter, @NonNull ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(postOptionalIntegerHeaderAsync(headerParameter), serviceCallback);
     }
 
@@ -618,7 +619,7 @@ public class ExplicitsImpl implements Explicits {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the Error object if successful.
      */
-    public Error postRequiredStringParameter(String bodyParameter) {
+    public Error postRequiredStringParameter(@NonNull String bodyParameter) {
         return postRequiredStringParameterAsync(bodyParameter).blockingGet();
     }
 
@@ -630,7 +631,7 @@ public class ExplicitsImpl implements Explicits {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Error&gt;} object.
      */
-    public ServiceFuture<Error> postRequiredStringParameterAsync(String bodyParameter, ServiceCallback<Error> serviceCallback) {
+    public ServiceFuture<Error> postRequiredStringParameterAsync(@NonNull String bodyParameter, @NonNull ServiceCallback<Error> serviceCallback) {
         return ServiceFuture.fromBody(postRequiredStringParameterAsync(bodyParameter), serviceCallback);
     }
 
@@ -641,7 +642,7 @@ public class ExplicitsImpl implements Explicits {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, Error&gt;&gt;} object if successful.
      */
-    public Single<RestResponse<Void, Error>> postRequiredStringParameterWithRestResponseAsync(String bodyParameter) {
+    public Single<RestResponse<Void, Error>> postRequiredStringParameterWithRestResponseAsync(@NonNull String bodyParameter) {
         if (bodyParameter == null) {
             throw new IllegalArgumentException("Parameter bodyParameter is required and cannot be null.");
         }
@@ -655,7 +656,7 @@ public class ExplicitsImpl implements Explicits {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Maybe&lt;Error&gt;} object if successful.
      */
-    public Maybe<Error> postRequiredStringParameterAsync(String bodyParameter) {
+    public Maybe<Error> postRequiredStringParameterAsync(@NonNull String bodyParameter) {
         return postRequiredStringParameterWithRestResponseAsync(bodyParameter)
             .flatMapMaybe(new Function<RestResponse<Void, Error>, Maybe<Error>>() {
                 public Maybe<Error> apply(RestResponse<Void, Error> restResponse) {
@@ -685,7 +686,7 @@ public class ExplicitsImpl implements Explicits {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    public ServiceFuture<Void> postOptionalStringParameterAsync(ServiceCallback<Void> serviceCallback) {
+    public ServiceFuture<Void> postOptionalStringParameterAsync(@NonNull ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(postOptionalStringParameterAsync(), serviceCallback);
     }
 
@@ -729,7 +730,7 @@ public class ExplicitsImpl implements Explicits {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    public ServiceFuture<Void> postOptionalStringParameterAsync(String bodyParameter, ServiceCallback<Void> serviceCallback) {
+    public ServiceFuture<Void> postOptionalStringParameterAsync(String bodyParameter, @NonNull ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(postOptionalStringParameterAsync(bodyParameter), serviceCallback);
     }
 
@@ -765,7 +766,7 @@ public class ExplicitsImpl implements Explicits {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the Error object if successful.
      */
-    public Error postRequiredStringProperty(StringWrapper bodyParameter) {
+    public Error postRequiredStringProperty(@NonNull StringWrapper bodyParameter) {
         return postRequiredStringPropertyAsync(bodyParameter).blockingGet();
     }
 
@@ -777,7 +778,7 @@ public class ExplicitsImpl implements Explicits {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Error&gt;} object.
      */
-    public ServiceFuture<Error> postRequiredStringPropertyAsync(StringWrapper bodyParameter, ServiceCallback<Error> serviceCallback) {
+    public ServiceFuture<Error> postRequiredStringPropertyAsync(@NonNull StringWrapper bodyParameter, @NonNull ServiceCallback<Error> serviceCallback) {
         return ServiceFuture.fromBody(postRequiredStringPropertyAsync(bodyParameter), serviceCallback);
     }
 
@@ -788,7 +789,7 @@ public class ExplicitsImpl implements Explicits {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, Error&gt;&gt;} object if successful.
      */
-    public Single<RestResponse<Void, Error>> postRequiredStringPropertyWithRestResponseAsync(StringWrapper bodyParameter) {
+    public Single<RestResponse<Void, Error>> postRequiredStringPropertyWithRestResponseAsync(@NonNull StringWrapper bodyParameter) {
         if (bodyParameter == null) {
             throw new IllegalArgumentException("Parameter bodyParameter is required and cannot be null.");
         }
@@ -803,7 +804,7 @@ public class ExplicitsImpl implements Explicits {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Maybe&lt;Error&gt;} object if successful.
      */
-    public Maybe<Error> postRequiredStringPropertyAsync(StringWrapper bodyParameter) {
+    public Maybe<Error> postRequiredStringPropertyAsync(@NonNull StringWrapper bodyParameter) {
         return postRequiredStringPropertyWithRestResponseAsync(bodyParameter)
             .flatMapMaybe(new Function<RestResponse<Void, Error>, Maybe<Error>>() {
                 public Maybe<Error> apply(RestResponse<Void, Error> restResponse) {
@@ -833,7 +834,7 @@ public class ExplicitsImpl implements Explicits {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    public ServiceFuture<Void> postOptionalStringPropertyAsync(ServiceCallback<Void> serviceCallback) {
+    public ServiceFuture<Void> postOptionalStringPropertyAsync(@NonNull ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(postOptionalStringPropertyAsync(), serviceCallback);
     }
 
@@ -877,7 +878,7 @@ public class ExplicitsImpl implements Explicits {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    public ServiceFuture<Void> postOptionalStringPropertyAsync(StringOptionalWrapper bodyParameter, ServiceCallback<Void> serviceCallback) {
+    public ServiceFuture<Void> postOptionalStringPropertyAsync(StringOptionalWrapper bodyParameter, @NonNull ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(postOptionalStringPropertyAsync(bodyParameter), serviceCallback);
     }
 
@@ -914,7 +915,7 @@ public class ExplicitsImpl implements Explicits {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the Error object if successful.
      */
-    public Error postRequiredStringHeader(String headerParameter) {
+    public Error postRequiredStringHeader(@NonNull String headerParameter) {
         return postRequiredStringHeaderAsync(headerParameter).blockingGet();
     }
 
@@ -926,7 +927,7 @@ public class ExplicitsImpl implements Explicits {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Error&gt;} object.
      */
-    public ServiceFuture<Error> postRequiredStringHeaderAsync(String headerParameter, ServiceCallback<Error> serviceCallback) {
+    public ServiceFuture<Error> postRequiredStringHeaderAsync(@NonNull String headerParameter, @NonNull ServiceCallback<Error> serviceCallback) {
         return ServiceFuture.fromBody(postRequiredStringHeaderAsync(headerParameter), serviceCallback);
     }
 
@@ -937,7 +938,7 @@ public class ExplicitsImpl implements Explicits {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, Error&gt;&gt;} object if successful.
      */
-    public Single<RestResponse<Void, Error>> postRequiredStringHeaderWithRestResponseAsync(String headerParameter) {
+    public Single<RestResponse<Void, Error>> postRequiredStringHeaderWithRestResponseAsync(@NonNull String headerParameter) {
         if (headerParameter == null) {
             throw new IllegalArgumentException("Parameter headerParameter is required and cannot be null.");
         }
@@ -951,7 +952,7 @@ public class ExplicitsImpl implements Explicits {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Maybe&lt;Error&gt;} object if successful.
      */
-    public Maybe<Error> postRequiredStringHeaderAsync(String headerParameter) {
+    public Maybe<Error> postRequiredStringHeaderAsync(@NonNull String headerParameter) {
         return postRequiredStringHeaderWithRestResponseAsync(headerParameter)
             .flatMapMaybe(new Function<RestResponse<Void, Error>, Maybe<Error>>() {
                 public Maybe<Error> apply(RestResponse<Void, Error> restResponse) {
@@ -981,7 +982,7 @@ public class ExplicitsImpl implements Explicits {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    public ServiceFuture<Void> postOptionalStringHeaderAsync(ServiceCallback<Void> serviceCallback) {
+    public ServiceFuture<Void> postOptionalStringHeaderAsync(@NonNull ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(postOptionalStringHeaderAsync(), serviceCallback);
     }
 
@@ -1025,7 +1026,7 @@ public class ExplicitsImpl implements Explicits {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    public ServiceFuture<Void> postOptionalStringHeaderAsync(String bodyParameter, ServiceCallback<Void> serviceCallback) {
+    public ServiceFuture<Void> postOptionalStringHeaderAsync(String bodyParameter, @NonNull ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(postOptionalStringHeaderAsync(bodyParameter), serviceCallback);
     }
 
@@ -1061,7 +1062,7 @@ public class ExplicitsImpl implements Explicits {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the Error object if successful.
      */
-    public Error postRequiredClassParameter(Product bodyParameter) {
+    public Error postRequiredClassParameter(@NonNull Product bodyParameter) {
         return postRequiredClassParameterAsync(bodyParameter).blockingGet();
     }
 
@@ -1073,7 +1074,7 @@ public class ExplicitsImpl implements Explicits {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Error&gt;} object.
      */
-    public ServiceFuture<Error> postRequiredClassParameterAsync(Product bodyParameter, ServiceCallback<Error> serviceCallback) {
+    public ServiceFuture<Error> postRequiredClassParameterAsync(@NonNull Product bodyParameter, @NonNull ServiceCallback<Error> serviceCallback) {
         return ServiceFuture.fromBody(postRequiredClassParameterAsync(bodyParameter), serviceCallback);
     }
 
@@ -1084,7 +1085,7 @@ public class ExplicitsImpl implements Explicits {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, Error&gt;&gt;} object if successful.
      */
-    public Single<RestResponse<Void, Error>> postRequiredClassParameterWithRestResponseAsync(Product bodyParameter) {
+    public Single<RestResponse<Void, Error>> postRequiredClassParameterWithRestResponseAsync(@NonNull Product bodyParameter) {
         if (bodyParameter == null) {
             throw new IllegalArgumentException("Parameter bodyParameter is required and cannot be null.");
         }
@@ -1099,7 +1100,7 @@ public class ExplicitsImpl implements Explicits {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Maybe&lt;Error&gt;} object if successful.
      */
-    public Maybe<Error> postRequiredClassParameterAsync(Product bodyParameter) {
+    public Maybe<Error> postRequiredClassParameterAsync(@NonNull Product bodyParameter) {
         return postRequiredClassParameterWithRestResponseAsync(bodyParameter)
             .flatMapMaybe(new Function<RestResponse<Void, Error>, Maybe<Error>>() {
                 public Maybe<Error> apply(RestResponse<Void, Error> restResponse) {
@@ -1129,7 +1130,7 @@ public class ExplicitsImpl implements Explicits {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    public ServiceFuture<Void> postOptionalClassParameterAsync(ServiceCallback<Void> serviceCallback) {
+    public ServiceFuture<Void> postOptionalClassParameterAsync(@NonNull ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(postOptionalClassParameterAsync(), serviceCallback);
     }
 
@@ -1173,7 +1174,7 @@ public class ExplicitsImpl implements Explicits {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    public ServiceFuture<Void> postOptionalClassParameterAsync(Product bodyParameter, ServiceCallback<Void> serviceCallback) {
+    public ServiceFuture<Void> postOptionalClassParameterAsync(Product bodyParameter, @NonNull ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(postOptionalClassParameterAsync(bodyParameter), serviceCallback);
     }
 
@@ -1210,7 +1211,7 @@ public class ExplicitsImpl implements Explicits {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the Error object if successful.
      */
-    public Error postRequiredClassProperty(ClassWrapper bodyParameter) {
+    public Error postRequiredClassProperty(@NonNull ClassWrapper bodyParameter) {
         return postRequiredClassPropertyAsync(bodyParameter).blockingGet();
     }
 
@@ -1222,7 +1223,7 @@ public class ExplicitsImpl implements Explicits {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Error&gt;} object.
      */
-    public ServiceFuture<Error> postRequiredClassPropertyAsync(ClassWrapper bodyParameter, ServiceCallback<Error> serviceCallback) {
+    public ServiceFuture<Error> postRequiredClassPropertyAsync(@NonNull ClassWrapper bodyParameter, @NonNull ServiceCallback<Error> serviceCallback) {
         return ServiceFuture.fromBody(postRequiredClassPropertyAsync(bodyParameter), serviceCallback);
     }
 
@@ -1233,7 +1234,7 @@ public class ExplicitsImpl implements Explicits {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, Error&gt;&gt;} object if successful.
      */
-    public Single<RestResponse<Void, Error>> postRequiredClassPropertyWithRestResponseAsync(ClassWrapper bodyParameter) {
+    public Single<RestResponse<Void, Error>> postRequiredClassPropertyWithRestResponseAsync(@NonNull ClassWrapper bodyParameter) {
         if (bodyParameter == null) {
             throw new IllegalArgumentException("Parameter bodyParameter is required and cannot be null.");
         }
@@ -1248,7 +1249,7 @@ public class ExplicitsImpl implements Explicits {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Maybe&lt;Error&gt;} object if successful.
      */
-    public Maybe<Error> postRequiredClassPropertyAsync(ClassWrapper bodyParameter) {
+    public Maybe<Error> postRequiredClassPropertyAsync(@NonNull ClassWrapper bodyParameter) {
         return postRequiredClassPropertyWithRestResponseAsync(bodyParameter)
             .flatMapMaybe(new Function<RestResponse<Void, Error>, Maybe<Error>>() {
                 public Maybe<Error> apply(RestResponse<Void, Error> restResponse) {
@@ -1278,7 +1279,7 @@ public class ExplicitsImpl implements Explicits {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    public ServiceFuture<Void> postOptionalClassPropertyAsync(ServiceCallback<Void> serviceCallback) {
+    public ServiceFuture<Void> postOptionalClassPropertyAsync(@NonNull ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(postOptionalClassPropertyAsync(), serviceCallback);
     }
 
@@ -1322,7 +1323,7 @@ public class ExplicitsImpl implements Explicits {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    public ServiceFuture<Void> postOptionalClassPropertyAsync(ClassOptionalWrapper bodyParameter, ServiceCallback<Void> serviceCallback) {
+    public ServiceFuture<Void> postOptionalClassPropertyAsync(ClassOptionalWrapper bodyParameter, @NonNull ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(postOptionalClassPropertyAsync(bodyParameter), serviceCallback);
     }
 
@@ -1359,7 +1360,7 @@ public class ExplicitsImpl implements Explicits {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the Error object if successful.
      */
-    public Error postRequiredArrayParameter(List<String> bodyParameter) {
+    public Error postRequiredArrayParameter(@NonNull List<String> bodyParameter) {
         return postRequiredArrayParameterAsync(bodyParameter).blockingGet();
     }
 
@@ -1371,7 +1372,7 @@ public class ExplicitsImpl implements Explicits {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Error&gt;} object.
      */
-    public ServiceFuture<Error> postRequiredArrayParameterAsync(List<String> bodyParameter, ServiceCallback<Error> serviceCallback) {
+    public ServiceFuture<Error> postRequiredArrayParameterAsync(@NonNull List<String> bodyParameter, @NonNull ServiceCallback<Error> serviceCallback) {
         return ServiceFuture.fromBody(postRequiredArrayParameterAsync(bodyParameter), serviceCallback);
     }
 
@@ -1382,7 +1383,7 @@ public class ExplicitsImpl implements Explicits {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, Error&gt;&gt;} object if successful.
      */
-    public Single<RestResponse<Void, Error>> postRequiredArrayParameterWithRestResponseAsync(List<String> bodyParameter) {
+    public Single<RestResponse<Void, Error>> postRequiredArrayParameterWithRestResponseAsync(@NonNull List<String> bodyParameter) {
         if (bodyParameter == null) {
             throw new IllegalArgumentException("Parameter bodyParameter is required and cannot be null.");
         }
@@ -1397,7 +1398,7 @@ public class ExplicitsImpl implements Explicits {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Maybe&lt;Error&gt;} object if successful.
      */
-    public Maybe<Error> postRequiredArrayParameterAsync(List<String> bodyParameter) {
+    public Maybe<Error> postRequiredArrayParameterAsync(@NonNull List<String> bodyParameter) {
         return postRequiredArrayParameterWithRestResponseAsync(bodyParameter)
             .flatMapMaybe(new Function<RestResponse<Void, Error>, Maybe<Error>>() {
                 public Maybe<Error> apply(RestResponse<Void, Error> restResponse) {
@@ -1427,7 +1428,7 @@ public class ExplicitsImpl implements Explicits {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    public ServiceFuture<Void> postOptionalArrayParameterAsync(ServiceCallback<Void> serviceCallback) {
+    public ServiceFuture<Void> postOptionalArrayParameterAsync(@NonNull ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(postOptionalArrayParameterAsync(), serviceCallback);
     }
 
@@ -1471,7 +1472,7 @@ public class ExplicitsImpl implements Explicits {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    public ServiceFuture<Void> postOptionalArrayParameterAsync(List<String> bodyParameter, ServiceCallback<Void> serviceCallback) {
+    public ServiceFuture<Void> postOptionalArrayParameterAsync(List<String> bodyParameter, @NonNull ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(postOptionalArrayParameterAsync(bodyParameter), serviceCallback);
     }
 
@@ -1508,7 +1509,7 @@ public class ExplicitsImpl implements Explicits {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the Error object if successful.
      */
-    public Error postRequiredArrayProperty(ArrayWrapper bodyParameter) {
+    public Error postRequiredArrayProperty(@NonNull ArrayWrapper bodyParameter) {
         return postRequiredArrayPropertyAsync(bodyParameter).blockingGet();
     }
 
@@ -1520,7 +1521,7 @@ public class ExplicitsImpl implements Explicits {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Error&gt;} object.
      */
-    public ServiceFuture<Error> postRequiredArrayPropertyAsync(ArrayWrapper bodyParameter, ServiceCallback<Error> serviceCallback) {
+    public ServiceFuture<Error> postRequiredArrayPropertyAsync(@NonNull ArrayWrapper bodyParameter, @NonNull ServiceCallback<Error> serviceCallback) {
         return ServiceFuture.fromBody(postRequiredArrayPropertyAsync(bodyParameter), serviceCallback);
     }
 
@@ -1531,7 +1532,7 @@ public class ExplicitsImpl implements Explicits {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, Error&gt;&gt;} object if successful.
      */
-    public Single<RestResponse<Void, Error>> postRequiredArrayPropertyWithRestResponseAsync(ArrayWrapper bodyParameter) {
+    public Single<RestResponse<Void, Error>> postRequiredArrayPropertyWithRestResponseAsync(@NonNull ArrayWrapper bodyParameter) {
         if (bodyParameter == null) {
             throw new IllegalArgumentException("Parameter bodyParameter is required and cannot be null.");
         }
@@ -1546,7 +1547,7 @@ public class ExplicitsImpl implements Explicits {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Maybe&lt;Error&gt;} object if successful.
      */
-    public Maybe<Error> postRequiredArrayPropertyAsync(ArrayWrapper bodyParameter) {
+    public Maybe<Error> postRequiredArrayPropertyAsync(@NonNull ArrayWrapper bodyParameter) {
         return postRequiredArrayPropertyWithRestResponseAsync(bodyParameter)
             .flatMapMaybe(new Function<RestResponse<Void, Error>, Maybe<Error>>() {
                 public Maybe<Error> apply(RestResponse<Void, Error> restResponse) {
@@ -1576,7 +1577,7 @@ public class ExplicitsImpl implements Explicits {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    public ServiceFuture<Void> postOptionalArrayPropertyAsync(ServiceCallback<Void> serviceCallback) {
+    public ServiceFuture<Void> postOptionalArrayPropertyAsync(@NonNull ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(postOptionalArrayPropertyAsync(), serviceCallback);
     }
 
@@ -1620,7 +1621,7 @@ public class ExplicitsImpl implements Explicits {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    public ServiceFuture<Void> postOptionalArrayPropertyAsync(ArrayOptionalWrapper bodyParameter, ServiceCallback<Void> serviceCallback) {
+    public ServiceFuture<Void> postOptionalArrayPropertyAsync(ArrayOptionalWrapper bodyParameter, @NonNull ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(postOptionalArrayPropertyAsync(bodyParameter), serviceCallback);
     }
 
@@ -1657,7 +1658,7 @@ public class ExplicitsImpl implements Explicits {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the Error object if successful.
      */
-    public Error postRequiredArrayHeader(List<String> headerParameter) {
+    public Error postRequiredArrayHeader(@NonNull List<String> headerParameter) {
         return postRequiredArrayHeaderAsync(headerParameter).blockingGet();
     }
 
@@ -1669,7 +1670,7 @@ public class ExplicitsImpl implements Explicits {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Error&gt;} object.
      */
-    public ServiceFuture<Error> postRequiredArrayHeaderAsync(List<String> headerParameter, ServiceCallback<Error> serviceCallback) {
+    public ServiceFuture<Error> postRequiredArrayHeaderAsync(@NonNull List<String> headerParameter, @NonNull ServiceCallback<Error> serviceCallback) {
         return ServiceFuture.fromBody(postRequiredArrayHeaderAsync(headerParameter), serviceCallback);
     }
 
@@ -1680,7 +1681,7 @@ public class ExplicitsImpl implements Explicits {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, Error&gt;&gt;} object if successful.
      */
-    public Single<RestResponse<Void, Error>> postRequiredArrayHeaderWithRestResponseAsync(List<String> headerParameter) {
+    public Single<RestResponse<Void, Error>> postRequiredArrayHeaderWithRestResponseAsync(@NonNull List<String> headerParameter) {
         if (headerParameter == null) {
             throw new IllegalArgumentException("Parameter headerParameter is required and cannot be null.");
         }
@@ -1696,7 +1697,7 @@ public class ExplicitsImpl implements Explicits {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Maybe&lt;Error&gt;} object if successful.
      */
-    public Maybe<Error> postRequiredArrayHeaderAsync(List<String> headerParameter) {
+    public Maybe<Error> postRequiredArrayHeaderAsync(@NonNull List<String> headerParameter) {
         return postRequiredArrayHeaderWithRestResponseAsync(headerParameter)
             .flatMapMaybe(new Function<RestResponse<Void, Error>, Maybe<Error>>() {
                 public Maybe<Error> apply(RestResponse<Void, Error> restResponse) {
@@ -1726,7 +1727,7 @@ public class ExplicitsImpl implements Explicits {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    public ServiceFuture<Void> postOptionalArrayHeaderAsync(ServiceCallback<Void> serviceCallback) {
+    public ServiceFuture<Void> postOptionalArrayHeaderAsync(@NonNull ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(postOptionalArrayHeaderAsync(), serviceCallback);
     }
 
@@ -1771,7 +1772,7 @@ public class ExplicitsImpl implements Explicits {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    public ServiceFuture<Void> postOptionalArrayHeaderAsync(List<String> headerParameter, ServiceCallback<Void> serviceCallback) {
+    public ServiceFuture<Void> postOptionalArrayHeaderAsync(List<String> headerParameter, @NonNull ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(postOptionalArrayHeaderAsync(headerParameter), serviceCallback);
     }
 

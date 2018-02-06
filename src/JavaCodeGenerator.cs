@@ -47,10 +47,12 @@ namespace AutoRest.Java
         private const string targetVersion = "1.1.3";
         internal const string pomVersion = targetVersion + "-SNAPSHOT";
 
-        private static readonly Parameter serviceClientCredentialsParameter = new Parameter("the management credentials for Azure", false, ClassType.ServiceClientCredentials, "credentials", true);
-        private static readonly Parameter azureTokenCredentialsParameter = new Parameter("the management credentials for Azure", false, ClassType.AzureTokenCredentials, "credentials", true);
-        private static readonly Parameter azureEnvironmentParameter = new Parameter("The environment that requests will target.", false, ClassType.AzureEnvironment, "azureEnvironment", true);
-        private static readonly Parameter httpPipelineParameter = new Parameter("The HTTP pipeline to send requests through.", false, ClassType.HttpPipeline, "httpPipeline", true);
+        private static readonly ClassType[] nonNullAnnotation = new[] { ClassType.NonNull };
+
+        private static Lazy<Parameter> serviceClientCredentialsParameter;
+        private static Lazy<Parameter> azureTokenCredentialsParameter;
+        private static Lazy<Parameter> azureEnvironmentParameter;
+        private static Lazy<Parameter> httpPipelineParameter;
 
         private const string implPackage = "implementation";
         private const string modelsPackage = ".models";
@@ -116,11 +118,38 @@ namespace AutoRest.Java
 
         public override string ImplementationFileExtension => ".java";
 
-        private static bool GetBoolSetting(Settings autoRestSettings, string settingName)
-            => autoRestSettings.Host?.GetValue<bool?>(settingName).Result == true;
+        private static bool GetBoolSetting(Settings autoRestSettings, string settingName, bool defaultValue = false)
+        {
+            bool customSettingValue = defaultValue;
 
-        private static string GetStringSetting(Settings autoRestSettings, string settingName)
-            => autoRestSettings.Host?.GetValue<string>(settingName).Result;
+            string settingValueString = GetStringSetting(autoRestSettings, settingName, null);
+            if (bool.TryParse(settingValueString, out bool settingValueBool))
+            {
+                customSettingValue = settingValueBool;
+            }
+
+            return customSettingValue;
+        }
+
+        private static string GetStringSetting(Settings autoRestSettings, string settingName, string defaultValue = null)
+        {
+            IDictionary<string, object> customSettings = autoRestSettings.CustomSettings;
+
+            string customSettingValue = defaultValue;
+            foreach (KeyValuePair<string, object> entry in customSettings)
+            {
+                if (entry.Key.EqualsIgnoreCase(settingName))
+                {
+                    string entryValueString = (string)entry.Value;
+                    if (!string.IsNullOrEmpty(entryValueString))
+                    {
+                        customSettingValue = entryValueString;
+                    }
+                    break;
+                }
+            }
+            return customSettingValue;
+        }
 
         /// <summary>
         /// Generate Java client code for given ServiceClient.
@@ -140,9 +169,46 @@ namespace AutoRest.Java
                 maximumJavadocCommentWidth: autoRestSettings.MaximumCommentColumns,
                 serviceName: GetAutoRestSettingsServiceName(autoRestSettings),
                 package: codeModel.Namespace.ToLowerInvariant(),
-                shouldGenerateXmlSerialization: codeModel.ShouldGenerateXmlSerialization);
+                shouldGenerateXmlSerialization: codeModel.ShouldGenerateXmlSerialization,
+                nonNullAnnotations: GetBoolSetting(autoRestSettings, "non-null-annotations", true));
 
-            Service service = ParseService(codeModel, javaSettings);
+            serviceClientCredentialsParameter = new Lazy<Parameter>(() =>
+                new Parameter(
+                    description: "the management credentials for Azure",
+                    isFinal: false,
+                    type: ClassType.ServiceClientCredentials,
+                    name: "credentials",
+                    isRequired: true,
+                    annotations: GetClientMethodParameterAnnotations(true, javaSettings)));
+
+            azureTokenCredentialsParameter = new Lazy<Parameter>(() =>
+                new Parameter(
+                    description: "the management credentials for Azure",
+                    isFinal: false,
+                    type: ClassType.AzureTokenCredentials,
+                    name: "credentials",
+                    isRequired: true, 
+                    annotations: GetClientMethodParameterAnnotations(true, javaSettings)));
+
+            azureEnvironmentParameter = new Lazy<Parameter>(() =>
+                new Parameter(
+                    description: "The environment that requests will target.",
+                    isFinal: false,
+                    type: ClassType.AzureEnvironment,
+                    name: "azureEnvironment",
+                    isRequired: true,
+                    annotations: GetClientMethodParameterAnnotations(true, javaSettings)));
+
+            httpPipelineParameter = new Lazy<Parameter>(() =>
+                new Parameter(
+                    description: "The HTTP pipeline to send requests through.",
+                    isFinal: false,
+                    type: ClassType.HttpPipeline,
+                    name: "httpPipeline",
+                    isRequired: true,
+                    annotations: GetClientMethodParameterAnnotations(true, javaSettings)));
+
+        Service service = ParseService(codeModel, javaSettings);
 
             List<JavaFile> javaFiles = new List<JavaFile>();
 
@@ -717,22 +783,22 @@ namespace AutoRest.Java
             {
                 if (usesCredentials)
                 {
-                    serviceClientConstructors.Add(new Constructor(serviceClientCredentialsParameter));
-                    serviceClientConstructors.Add(new Constructor(serviceClientCredentialsParameter, azureEnvironmentParameter));
+                    serviceClientConstructors.Add(new Constructor(serviceClientCredentialsParameter.Value));
+                    serviceClientConstructors.Add(new Constructor(serviceClientCredentialsParameter.Value, azureEnvironmentParameter.Value));
                 }
                 else
                 {
                     serviceClientConstructors.Add(new Constructor());
-                    serviceClientConstructors.Add(new Constructor(azureEnvironmentParameter));
+                    serviceClientConstructors.Add(new Constructor(azureEnvironmentParameter.Value));
                 }
 
-                serviceClientConstructors.Add(new Constructor(httpPipelineParameter));
-                serviceClientConstructors.Add(new Constructor(httpPipelineParameter, azureEnvironmentParameter));
+                serviceClientConstructors.Add(new Constructor(httpPipelineParameter.Value));
+                serviceClientConstructors.Add(new Constructor(httpPipelineParameter.Value, azureEnvironmentParameter.Value));
             }
             else
             {
                 serviceClientConstructors.Add(new Constructor());
-                serviceClientConstructors.Add(new Constructor(httpPipelineParameter));
+                serviceClientConstructors.Add(new Constructor(httpPipelineParameter.Value));
             }
 
             return new ServiceClient(serviceClientClassName, serviceClientInterfaceName, serviceClientRestAPI, serviceClientMethodGroupClients, serviceClientProperties, serviceClientConstructors, serviceClientMethods);
@@ -1897,26 +1963,26 @@ namespace AutoRest.Java
                 classBlock.JavadocComment(comment =>
                 {
                     comment.Description($"Creates an instance of {className} that exposes {manager.ServiceName} resource management API entry points.");
-                    comment.Param(azureTokenCredentialsParameter.Name, azureTokenCredentialsParameter.Description);
+                    comment.Param(azureTokenCredentialsParameter.Value.Name, azureTokenCredentialsParameter.Value.Description);
                     comment.Param("subscriptionId", "the subscription UUID");
                     comment.Return($"the {className}");
                 });
-                classBlock.PublicStaticMethod($"{className} authenticate({azureTokenCredentialsParameter.Declaration}, String subscriptionId)", function =>
+                classBlock.PublicStaticMethod($"{className} authenticate({azureTokenCredentialsParameter.Value.Declaration}, String subscriptionId)", function =>
                 {
-                    function.Line($"final {httpPipelineParameter.Type} {httpPipelineParameter.Name} = AzureProxy.defaultPipeline({className}.class, {azureTokenCredentialsParameter.Name});");
-                    function.Return($"new {className}({httpPipelineParameter.Name}, subscriptionId)");
+                    function.Line($"final {httpPipelineParameter.Value.Type} {httpPipelineParameter.Value.Name} = AzureProxy.defaultPipeline({className}.class, {azureTokenCredentialsParameter.Value.Name});");
+                    function.Return($"new {className}({httpPipelineParameter.Value.Name}, subscriptionId)");
                 });
 
                 classBlock.JavadocComment(comment =>
                 {
                     comment.Description($"Creates an instance of {className} that exposes {manager.ServiceName} resource management API entry points.");
-                    comment.Param(httpPipelineParameter.Name, httpPipelineParameter.Description);
+                    comment.Param(httpPipelineParameter.Value.Name, httpPipelineParameter.Value.Description);
                     comment.Param("subscriptionId", "the subscription UUID");
                     comment.Return($"the {className}");
                 });
-                classBlock.PublicStaticMethod($"{className} authenticate({httpPipelineParameter.Type} {httpPipelineParameter.Name}, String subscriptionId)", function =>
+                classBlock.PublicStaticMethod($"{className} authenticate({httpPipelineParameter.Value.Type} {httpPipelineParameter.Value.Name}, String subscriptionId)", function =>
                 {
-                    function.Return($"new {className}({httpPipelineParameter.Name}, subscriptionId)");
+                    function.Return($"new {className}({httpPipelineParameter.Value.Name}, subscriptionId)");
                 });
 
                 classBlock.JavadocComment(comment =>
@@ -1928,11 +1994,11 @@ namespace AutoRest.Java
                     interfaceBlock.JavadocComment(comment =>
                     {
                         comment.Description($"Creates an instance of {className} that exposes {manager.ServiceName} management API entry points.");
-                        comment.Param(azureTokenCredentialsParameter.Name, azureTokenCredentialsParameter.Description);
+                        comment.Param(azureTokenCredentialsParameter.Value.Name, azureTokenCredentialsParameter.Value.Description);
                         comment.Param("subscriptionId", "the subscription UUID");
                         comment.Return($"the interface exposing {manager.ServiceName} management API entry points that work across subscriptions");
                     });
-                    interfaceBlock.PublicMethod($"{className} authenticate({azureTokenCredentialsParameter.Declaration}, String subscriptionId)");
+                    interfaceBlock.PublicMethod($"{className} authenticate({azureTokenCredentialsParameter.Value.Declaration}, String subscriptionId)");
                 });
 
                 classBlock.JavadocComment(comment =>
@@ -1941,20 +2007,20 @@ namespace AutoRest.Java
                 });
                 classBlock.PrivateStaticFinalClass("ConfigurableImpl extends AzureConfigurableImpl<Configurable> implements Configurable", innerClass =>
                 {
-                    innerClass.PublicMethod($"{className} authenticate({azureTokenCredentialsParameter.Declaration}, String subscriptionId)", function =>
+                    innerClass.PublicMethod($"{className} authenticate({azureTokenCredentialsParameter.Value.Declaration}, String subscriptionId)", function =>
                     {
-                        function.Return($"{className}.authenticate(build{httpPipelineParameter.Type}({azureTokenCredentialsParameter.Name}), subscriptionId)");
+                        function.Return($"{className}.authenticate(build{httpPipelineParameter.Value.Type}({azureTokenCredentialsParameter.Value.Name}), subscriptionId)");
                     });
                 });
 
-                classBlock.PrivateMethod($"private {className}({httpPipelineParameter.Declaration}, String subscriptionId)", constructor =>
+                classBlock.PrivateMethod($"private {className}({httpPipelineParameter.Value.Declaration}, String subscriptionId)", constructor =>
                 {
                     constructor.Line("super(");
                     constructor.Indent(() =>
                     {
-                        constructor.Line($"{httpPipelineParameter.Name},");
+                        constructor.Line($"{httpPipelineParameter.Value.Name},");
                         constructor.Line("subscriptionId,");
-                        constructor.Line($"new {manager.ServiceClientName}Impl({httpPipelineParameter.Name}).withSubscriptionId(subscriptionId));");
+                        constructor.Line($"new {manager.ServiceClientName}Impl({httpPipelineParameter.Value.Name}).withSubscriptionId(subscriptionId));");
                     });
                 });
             });
@@ -1975,7 +2041,7 @@ namespace AutoRest.Java
                 comment.Description("An instance of this class defines a page of Azure resources and a link to get the next page of resources, if any.");
                 comment.Param("<T>", "type of Azure resource");
             });
-            javaFile.PublicClass($"{pageClass.ClassName}<T> implements Page<T>", classBlock =>
+            javaFile.PublicFinalClass($"{pageClass.ClassName}<T> implements Page<T>", classBlock =>
             {
                 classBlock.JavadocComment(comment =>
                 {
@@ -2049,7 +2115,7 @@ namespace AutoRest.Java
             JavaFile javaFile = GetJavaFileWithHeaderAndPackage(implPackage, settings, xmlSequenceWrapper.WrapperClassName);
             javaFile.Import(xmlSequenceWrapper.Imports);
             javaFile.Annotation($"JacksonXmlRootElement(localName = \"{xmlElementName}\")");
-            javaFile.PublicClass(xmlSequenceWrapper.WrapperClassName, classBlock =>
+            javaFile.PublicFinalClass(xmlSequenceWrapper.WrapperClassName, classBlock =>
             {
                 classBlock.Annotation($"JacksonXmlProperty(localName = \"{xmlElementName}\")");
                 classBlock.PrivateFinalMemberVariable(xmlSequenceWrapper.SequenceType, xmlElementNameCamelCase);
@@ -2098,7 +2164,7 @@ namespace AutoRest.Java
                 string serviceClientTypeName = settings.IsFluent ? serviceClient.ClassName : serviceClient.InterfaceName;
                 comment.Description($"Initializes a new instance of the {serviceClientTypeName} type.");
             });
-            javaFile.PublicClass(serviceClientClassDeclaration, classBlock =>
+            javaFile.PublicFinalClass(serviceClientClassDeclaration, classBlock =>
             {
                 // Add proxy service member variable
                 if (serviceClient.RestAPI != null)
@@ -2163,7 +2229,7 @@ namespace AutoRest.Java
                 }
 
                 // Service Client Constructors
-                bool serviceClientUsesCredentials = serviceClient.Constructors.Any(constructor => constructor.Parameters.Contains(serviceClientCredentialsParameter));
+                bool serviceClientUsesCredentials = serviceClient.Constructors.Any(constructor => constructor.Parameters.Contains(serviceClientCredentialsParameter.Value));
                 foreach (Constructor constructor in serviceClient.Constructors)
                 {
                     classBlock.JavadocComment(comment =>
@@ -2179,29 +2245,29 @@ namespace AutoRest.Java
                     {
                         if (settings.IsAzureOrFluent)
                         {
-                            if (constructor.Parameters.SequenceEqual(new[] { serviceClientCredentialsParameter }))
+                            if (constructor.Parameters.SequenceEqual(new[] { serviceClientCredentialsParameter.Value }))
                             {
-                                constructorBlock.Line($"this({ClassType.AzureProxy.Name}.createDefaultPipeline({serviceClient.ClassName}.class, {serviceClientCredentialsParameter.Name}));");
+                                constructorBlock.Line($"this({ClassType.AzureProxy.Name}.createDefaultPipeline({serviceClient.ClassName}.class, {serviceClientCredentialsParameter.Value.Name}));");
                             }
-                            else if (constructor.Parameters.SequenceEqual(new[] { serviceClientCredentialsParameter, azureEnvironmentParameter }))
+                            else if (constructor.Parameters.SequenceEqual(new[] { serviceClientCredentialsParameter.Value, azureEnvironmentParameter.Value }))
                             {
-                                constructorBlock.Line($"this({ClassType.AzureProxy.Name}.createDefaultPipeline({serviceClient.ClassName}.class, {serviceClientCredentialsParameter.Name}), {azureEnvironmentParameter.Name});");
+                                constructorBlock.Line($"this({ClassType.AzureProxy.Name}.createDefaultPipeline({serviceClient.ClassName}.class, {serviceClientCredentialsParameter.Value.Name}), {azureEnvironmentParameter.Value.Name});");
                             }
                             else if (!constructor.Parameters.Any())
                             {
                                 constructorBlock.Line($"this({ClassType.AzureProxy.Name}.createDefaultPipeline({serviceClient.ClassName}.class));");
                             }
-                            else if (constructor.Parameters.SequenceEqual(new[] { azureEnvironmentParameter }))
+                            else if (constructor.Parameters.SequenceEqual(new[] { azureEnvironmentParameter.Value }))
                             {
-                                constructorBlock.Line($"this({ClassType.AzureProxy.Name}.createDefaultPipeline({serviceClient.ClassName}.class), {azureEnvironmentParameter.Name});");
+                                constructorBlock.Line($"this({ClassType.AzureProxy.Name}.createDefaultPipeline({serviceClient.ClassName}.class), {azureEnvironmentParameter.Value.Name});");
                             }
-                            else if (constructor.Parameters.SequenceEqual(new[] { httpPipelineParameter }))
+                            else if (constructor.Parameters.SequenceEqual(new[] { httpPipelineParameter.Value }))
                             {
-                                constructorBlock.Line($"this({httpPipelineParameter.Name}, null);");
+                                constructorBlock.Line($"this({httpPipelineParameter.Value.Name}, null);");
                             }
-                            else if (constructor.Parameters.SequenceEqual(new[] { httpPipelineParameter, azureEnvironmentParameter }))
+                            else if (constructor.Parameters.SequenceEqual(new[] { httpPipelineParameter.Value, azureEnvironmentParameter.Value }))
                             {
-                                constructorBlock.Line($"super({httpPipelineParameter.Name}, {azureEnvironmentParameter.Name});");
+                                constructorBlock.Line($"super({httpPipelineParameter.Value.Name}, {azureEnvironmentParameter.Value.Name});");
 
                                 foreach (ServiceClientProperty serviceClientProperty in serviceClient.Properties)
                                 {
@@ -2228,9 +2294,9 @@ namespace AutoRest.Java
                             {
                                 constructorBlock.Line($"this({ClassType.RestProxy.Name}.createDefaultPipeline());");
                             }
-                            else if (constructor.Parameters.SequenceEqual(new[] { httpPipelineParameter }))
+                            else if (constructor.Parameters.SequenceEqual(new[] { httpPipelineParameter.Value }))
                             {
-                                constructorBlock.Line($"super({httpPipelineParameter.Name});");
+                                constructorBlock.Line($"super({httpPipelineParameter.Value.Name});");
 
                                 foreach (ServiceClientProperty serviceClientProperty in serviceClient.Properties)
                                 {
@@ -2327,7 +2393,7 @@ namespace AutoRest.Java
             {
                 comment.Description($"An instance of this class provides access to all the operations defined in {methodGroupClient.InterfaceName}.");
             });
-            javaFile.PublicClass($"{methodGroupClient.ClassName}{parentDeclaration}", classBlock =>
+            javaFile.PublicFinalClass($"{methodGroupClient.ClassName}{parentDeclaration}", classBlock =>
             {
                 classBlock.JavadocComment($"The proxy service used to perform REST calls.");
                 classBlock.PrivateMemberVariable(methodGroupClient.RestAPI.Name, "service");
@@ -2466,10 +2532,9 @@ namespace AutoRest.Java
                 comment.Description(model.Description);
             });
 
+            bool hasDerivedModels = model.DerivedModels.Any();
             if (model.IsPolymorphic)
             {
-                bool hasDerivedModels = model.DerivedModels.Any();
-
                 javaFile.Annotation($"JsonTypeInfo(use = JsonTypeInfo.Id.NAME, include = JsonTypeInfo.As.PROPERTY, property = \"{model.PolymorphicDiscriminator}\"{(hasDerivedModels ? $", defaultImpl = {model.Name}.class" : "")})");
                 javaFile.Annotation($"JsonTypeName(\"{model.SerializedName}\")");
 
@@ -2501,12 +2566,14 @@ namespace AutoRest.Java
                 javaFile.Annotation("JsonFlatten");
             }
 
+            bool isFinal = !hasDerivedModels && !model.NeedsFlatten;
+
             string classNameWithBaseType = model.Name;
             if (model.ParentModel != null)
             {
                 classNameWithBaseType += $" extends {model.ParentModel.Name}";
             }
-            javaFile.PublicClass(classNameWithBaseType, (classBlock) =>
+            javaFile.PublicClass(isFinal, classNameWithBaseType, (classBlock) =>
             {
                 foreach (ServiceModelProperty property in model.Properties)
                 {
@@ -2694,7 +2761,7 @@ namespace AutoRest.Java
             {
                 comment.Description($"Exception thrown for an invalid response with {exception.ErrorName} information.");
             });
-            javaFile.Block($"public class {exception.Name} extends RestException", (classBlock) =>
+            javaFile.PublicFinalClass($"{exception.Name} extends RestException", (classBlock) =>
             {
                 classBlock.JavadocComment((comment) =>
                 {
@@ -2702,11 +2769,11 @@ namespace AutoRest.Java
                     comment.Param("message", "the exception message or the response content if a message is not available");
                     comment.Param("response", "the HTTP response");
                 });
-                classBlock.Block($"public {exception.Name}(final String message, HttpResponse response)", (constructorBlock) =>
+                classBlock.PublicConstructor($"{exception.Name}(String message, HttpResponse response)", (constructorBlock) =>
                 {
                     constructorBlock.Line("super(message, response);");
                 });
-                classBlock.Line();
+                
                 classBlock.JavadocComment((comment) =>
                 {
                     comment.Description($"Initializes a new instance of the {exception.Name} class.");
@@ -2714,13 +2781,13 @@ namespace AutoRest.Java
                     comment.Param("response", "the HTTP response");
                     comment.Param("body", "the deserialized response body");
                 });
-                classBlock.Block($"public {exception.Name}(final String message, final HttpResponse response, final {exception.ErrorName} body)", (constructorBlock) =>
+                classBlock.PublicConstructor($"{exception.Name}(String message, HttpResponse response, {exception.ErrorName} body)", (constructorBlock) =>
                 {
                     constructorBlock.Line("super(message, response, body);");
                 });
-                classBlock.Line();
+                
                 classBlock.Annotation("Override");
-                classBlock.Block($"public {exception.ErrorName} body()", (methodBlock) =>
+                classBlock.PublicMethod($"{exception.ErrorName} body()", (methodBlock) =>
                 {
                     methodBlock.Return($"({exception.ErrorName}) super.body()");
                 });
@@ -3647,7 +3714,10 @@ namespace AutoRest.Java
                     isFinal: false,
                     type: GenericType.ServiceCallback(restAPIMethodReturnBodyClientType),
                     name: "serviceCallback",
-                    isRequired: true);
+                    isRequired: true,
+                    // GetClientMethodParameterAnnotations() is provided false for isRequired so
+                    // that this parameter won't get marked as NonNull.
+                    annotations: GetClientMethodParameterAnnotations(false, settings));
 
                 GenericType serviceFutureReturnType = GenericType.ServiceFuture(restAPIMethodReturnBodyClientType);
 
@@ -6320,6 +6390,38 @@ namespace AutoRest.Java
             return expressionsToValidate;
         }
 
+        private static IEnumerable<Parameter> ParseClientMethodParameters(IEnumerable<AutoRestParameter> autoRestParameters, bool parametersAreFinal, JavaSettings settings)
+        {
+            List<Parameter> parameters = new List<Parameter>();
+            foreach (AutoRestParameter autoRestParameter in autoRestParameters)
+            {
+                IType parameterType = ConvertToClientType(ParseType(autoRestParameter.ModelType, settings));
+                if (IsNullable(autoRestParameter))
+                {
+                    parameterType = parameterType.AsNullable();
+                }
+
+                string parameterDescription = autoRestParameter.Documentation;
+                if (string.IsNullOrEmpty(parameterDescription))
+                {
+                    parameterDescription = $"the {parameterType} value";
+                }
+
+                bool parameterIsRequired = autoRestParameter.IsRequired;
+
+                IEnumerable<ClassType> parameterAnnotations = GetClientMethodParameterAnnotations(parameterIsRequired, settings);
+
+                parameters.Add(new Parameter(
+                    description: parameterDescription,
+                    isFinal: parametersAreFinal,
+                    type: parameterType,
+                    name: autoRestParameter.Name,
+                    isRequired: parameterIsRequired,
+                    annotations: parameterAnnotations));
+            }
+            return parameters;
+        }
+
         private static IEnumerable<ClientMethod> ParseClientMethods(RestAPI restAPI, JavaSettings settings)
         {
             List<ClientMethod> clientMethods = new List<ClientMethod>();
@@ -6375,7 +6477,8 @@ namespace AutoRest.Java
                     isFinal: false,
                     type: GenericType.ServiceCallback(restAPIMethodReturnBodyClientType),
                     name: "serviceCallback",
-                    isRequired: true);
+                    isRequired: true,
+                    annotations: GetClientMethodParameterAnnotations(true, settings));
 
                 GenericType serviceFutureReturnType = GenericType.ServiceFuture(restAPIMethodReturnBodyClientType);
 
@@ -6402,28 +6505,7 @@ namespace AutoRest.Java
 
                             IEnumerable<string> expressionsToValidate = GetExpressionsToValidate(restAPIMethod, onlyRequiredParameters, settings);
 
-                            List<Parameter> parameters = new List<Parameter>();
-                            foreach (AutoRestParameter autoRestParameter in autoRestParameters)
-                            {
-                                IType parameterType = ParseType(autoRestParameter.ModelType, settings);
-                                if (IsNullable(autoRestParameter))
-                                {
-                                    parameterType = parameterType.AsNullable();
-                                }
-
-                                string parameterDescription = autoRestParameter.Documentation;
-                                if (string.IsNullOrEmpty(parameterDescription))
-                                {
-                                    parameterDescription = $"the {parameterType} value";
-                                }
-
-                                parameters.Add(new Parameter(
-                                    description: parameterDescription,
-                                    isFinal: true,
-                                    type: parameterType,
-                                    name: autoRestParameter.Name,
-                                    isRequired: autoRestParameter.IsRequired));
-                            }
+                            IEnumerable<Parameter> parameters = ParseClientMethodParameters(autoRestParameters, true, settings);
 
                             clientMethods.Add(new ClientMethod(
                                 description: restAPIMethod.Description,
@@ -6473,22 +6555,7 @@ namespace AutoRest.Java
 
                             IEnumerable<string> expressionsToValidate = GetExpressionsToValidate(restAPIMethod, onlyRequiredParameters, settings);
 
-                            List<Parameter> parameters = new List<Parameter>();
-                            foreach (AutoRestParameter autoRestParameter in autoRestParameters)
-                            {
-                                IType parameterType = ParseType(autoRestParameter.ModelType, settings);
-                                if (IsNullable(autoRestParameter))
-                                {
-                                    parameterType = parameterType.AsNullable();
-                                }
-
-                                parameters.Add(new Parameter(
-                                    description: $"the {parameterType} value",
-                                    isFinal: false,
-                                    type: parameterType,
-                                    name: autoRestParameter.Name,
-                                    isRequired: autoRestParameter.IsRequired));
-                            }
+                            IEnumerable<Parameter> parameters = ParseClientMethodParameters(autoRestParameters, false, settings);
 
                             clientMethods.Add(new ClientMethod(
                                 description: restAPIMethod.Description,
@@ -6525,28 +6592,7 @@ namespace AutoRest.Java
 
                             IEnumerable<string> expressionsToValidate = GetExpressionsToValidate(restAPIMethod, onlyRequiredParameters, settings);
 
-                            List<Parameter> parameters = new List<Parameter>();
-                            foreach (AutoRestParameter autoRestParameter in autoRestParameters)
-                            {
-                                IType parameterType = ParseType(autoRestParameter.ModelType, settings);
-                                if (IsNullable(autoRestParameter))
-                                {
-                                    parameterType = parameterType.AsNullable();
-                                }
-
-                                string parameterDescription = autoRestParameter.Documentation;
-                                if (string.IsNullOrEmpty(parameterDescription))
-                                {
-                                    parameterDescription = $"the {parameterType} value";
-                                }
-
-                                parameters.Add(new Parameter(
-                                    description: parameterDescription,
-                                    isFinal: false,
-                                    type: parameterType,
-                                    name: autoRestParameter.Name,
-                                    isRequired: autoRestParameter.IsRequired));
-                            }
+                            IEnumerable<Parameter> parameters = ParseClientMethodParameters(autoRestParameters, false, settings);
 
                             clientMethods.Add(new ClientMethod(
                                 description: restAPIMethod.Description,
@@ -6599,28 +6645,7 @@ namespace AutoRest.Java
 
                         IEnumerable<string> expressionsToValidate = GetExpressionsToValidate(restAPIMethod, onlyRequiredParameters, settings);
 
-                        List<Parameter> parameters = new List<Parameter>();
-                        foreach (AutoRestParameter autoRestParameter in autoRestParameters)
-                        {
-                            IType parameterType = ConvertToClientType(ParseType(autoRestParameter.ModelType, settings));
-                            if (IsNullable(autoRestParameter))
-                            {
-                                parameterType = parameterType.AsNullable();
-                            }
-
-                            string parameterDescription = autoRestParameter.Documentation;
-                            if (string.IsNullOrEmpty(parameterDescription))
-                            {
-                                parameterDescription = $"the {parameterType} value";
-                            }
-
-                            parameters.Add(new Parameter(
-                                description: parameterDescription,
-                                isFinal: false,
-                                type: parameterType,
-                                name: autoRestParameter.Name,
-                                isRequired: autoRestParameter.IsRequired));
-                        }
+                        IEnumerable<Parameter> parameters = ParseClientMethodParameters(autoRestParameters, false, settings);
 
                         clientMethods.Add(new ClientMethod(
                             description: restAPIMethod.Description,
@@ -6750,6 +6775,11 @@ namespace AutoRest.Java
         private static string GetSimpleAsyncRestResponseMethodName(RestAPIMethod restAPIMethod)
         {
             return restAPIMethod.Name + "WithRestResponseAsync";
+        }
+
+        private static IEnumerable<ClassType> GetClientMethodParameterAnnotations(bool isRequired, JavaSettings settings)
+        {
+            return settings.NonNullAnnotations && isRequired ? nonNullAnnotation : Enumerable.Empty<ClassType>();
         }
     }
 }

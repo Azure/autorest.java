@@ -21,11 +21,12 @@ import fixtures.http.HttpRetrys;
 import fixtures.http.HttpServerFailures;
 import fixtures.http.HttpSuccess;
 import fixtures.http.MultipleResponses;
+import io.reactivex.annotations.NonNull;
 
 /**
  * Initializes a new instance of the AutoRestHttpInfrastructureTestService type.
  */
-public class AutoRestHttpInfrastructureTestServiceImpl extends ServiceClient implements AutoRestHttpInfrastructureTestService {
+public final class AutoRestHttpInfrastructureTestServiceImpl extends ServiceClient implements AutoRestHttpInfrastructureTestService {
     /**
      * The HttpFailures object to access its operations.
      */
@@ -136,7 +137,7 @@ public class AutoRestHttpInfrastructureTestServiceImpl extends ServiceClient imp
      *
      * @param httpPipeline The HTTP pipeline to send requests through.
      */
-    public AutoRestHttpInfrastructureTestServiceImpl(HttpPipeline httpPipeline) {
+    public AutoRestHttpInfrastructureTestServiceImpl(@NonNull HttpPipeline httpPipeline) {
         super(httpPipeline);
         this.httpFailures = new HttpFailuresImpl(this);
         this.httpSuccess = new HttpSuccessImpl(this);

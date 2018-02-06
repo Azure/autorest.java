@@ -17,6 +17,7 @@ import fixtures.requiredoptional.models.Error;
 import io.reactivex.Completable;
 import io.reactivex.Maybe;
 import io.reactivex.Single;
+import io.reactivex.annotations.NonNull;
 
 /**
  * An instance of this class provides access to all the operations defined in
@@ -32,7 +33,7 @@ public interface Implicits {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the Error object if successful.
      */
-    Error getRequiredPath(String pathParameter);
+    Error getRequiredPath(@NonNull String pathParameter);
 
     /**
      * Test implicitly required path parameter.
@@ -42,7 +43,7 @@ public interface Implicits {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Error&gt;} object.
      */
-    ServiceFuture<Error> getRequiredPathAsync(String pathParameter, ServiceCallback<Error> serviceCallback);
+    ServiceFuture<Error> getRequiredPathAsync(@NonNull String pathParameter, @NonNull ServiceCallback<Error> serviceCallback);
 
     /**
      * Test implicitly required path parameter.
@@ -51,7 +52,7 @@ public interface Implicits {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, Error&gt;&gt;} object if successful.
      */
-    Single<RestResponse<Void, Error>> getRequiredPathWithRestResponseAsync(String pathParameter);
+    Single<RestResponse<Void, Error>> getRequiredPathWithRestResponseAsync(@NonNull String pathParameter);
 
     /**
      * Test implicitly required path parameter.
@@ -60,7 +61,7 @@ public interface Implicits {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Maybe&lt;Error&gt;} object if successful.
      */
-    Maybe<Error> getRequiredPathAsync(String pathParameter);
+    Maybe<Error> getRequiredPathAsync(@NonNull String pathParameter);
 
     /**
      * Test implicitly optional query parameter.
@@ -77,7 +78,7 @@ public interface Implicits {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    ServiceFuture<Void> putOptionalQueryAsync(ServiceCallback<Void> serviceCallback);
+    ServiceFuture<Void> putOptionalQueryAsync(@NonNull ServiceCallback<Void> serviceCallback);
 
     /**
      * Test implicitly optional query parameter.
@@ -111,7 +112,7 @@ public interface Implicits {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    ServiceFuture<Void> putOptionalQueryAsync(String queryParameter, ServiceCallback<Void> serviceCallback);
+    ServiceFuture<Void> putOptionalQueryAsync(String queryParameter, @NonNull ServiceCallback<Void> serviceCallback);
 
     /**
      * Test implicitly optional query parameter.
@@ -146,7 +147,7 @@ public interface Implicits {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    ServiceFuture<Void> putOptionalHeaderAsync(ServiceCallback<Void> serviceCallback);
+    ServiceFuture<Void> putOptionalHeaderAsync(@NonNull ServiceCallback<Void> serviceCallback);
 
     /**
      * Test implicitly optional header parameter.
@@ -180,7 +181,7 @@ public interface Implicits {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    ServiceFuture<Void> putOptionalHeaderAsync(String queryParameter, ServiceCallback<Void> serviceCallback);
+    ServiceFuture<Void> putOptionalHeaderAsync(String queryParameter, @NonNull ServiceCallback<Void> serviceCallback);
 
     /**
      * Test implicitly optional header parameter.
@@ -215,7 +216,7 @@ public interface Implicits {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    ServiceFuture<Void> putOptionalBodyAsync(ServiceCallback<Void> serviceCallback);
+    ServiceFuture<Void> putOptionalBodyAsync(@NonNull ServiceCallback<Void> serviceCallback);
 
     /**
      * Test implicitly optional body parameter.
@@ -249,7 +250,7 @@ public interface Implicits {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    ServiceFuture<Void> putOptionalBodyAsync(String bodyParameter, ServiceCallback<Void> serviceCallback);
+    ServiceFuture<Void> putOptionalBodyAsync(String bodyParameter, @NonNull ServiceCallback<Void> serviceCallback);
 
     /**
      * Test implicitly optional body parameter.
@@ -285,7 +286,7 @@ public interface Implicits {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Error&gt;} object.
      */
-    ServiceFuture<Error> getRequiredGlobalPathAsync(ServiceCallback<Error> serviceCallback);
+    ServiceFuture<Error> getRequiredGlobalPathAsync(@NonNull ServiceCallback<Error> serviceCallback);
 
     /**
      * Test implicitly required path parameter.
@@ -317,7 +318,7 @@ public interface Implicits {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Error&gt;} object.
      */
-    ServiceFuture<Error> getRequiredGlobalQueryAsync(ServiceCallback<Error> serviceCallback);
+    ServiceFuture<Error> getRequiredGlobalQueryAsync(@NonNull ServiceCallback<Error> serviceCallback);
 
     /**
      * Test implicitly required query parameter.
@@ -349,7 +350,7 @@ public interface Implicits {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Error&gt;} object.
      */
-    ServiceFuture<Error> getOptionalGlobalQueryAsync(ServiceCallback<Error> serviceCallback);
+    ServiceFuture<Error> getOptionalGlobalQueryAsync(@NonNull ServiceCallback<Error> serviceCallback);
 
     /**
      * Test implicitly optional query parameter.

@@ -22,12 +22,13 @@ import com.microsoft.rest.v2.annotations.Host;
 import com.microsoft.rest.v2.annotations.UnexpectedResponseExceptionType;
 import io.reactivex.Completable;
 import io.reactivex.Single;
+import io.reactivex.annotations.NonNull;
 
 /**
  * An instance of this class provides access to all the operations defined in
  * HeadExceptions.
  */
-public class HeadExceptionsInner {
+public final class HeadExceptionsInner {
     /**
      * The proxy service used to perform REST calls.
      */
@@ -87,7 +88,7 @@ public class HeadExceptionsInner {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    public ServiceFuture<Void> head200Async(ServiceCallback<Void> serviceCallback) {
+    public ServiceFuture<Void> head200Async(@NonNull ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(head200Async(), serviceCallback);
     }
 
@@ -127,7 +128,7 @@ public class HeadExceptionsInner {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    public ServiceFuture<Void> head204Async(ServiceCallback<Void> serviceCallback) {
+    public ServiceFuture<Void> head204Async(@NonNull ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(head204Async(), serviceCallback);
     }
 
@@ -167,7 +168,7 @@ public class HeadExceptionsInner {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    public ServiceFuture<Void> head404Async(ServiceCallback<Void> serviceCallback) {
+    public ServiceFuture<Void> head404Async(@NonNull ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(head404Async(), serviceCallback);
     }
 

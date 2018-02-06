@@ -38,13 +38,14 @@ import io.reactivex.Completable;
 import io.reactivex.Maybe;
 import io.reactivex.Observable;
 import io.reactivex.Single;
+import io.reactivex.annotations.NonNull;
 import io.reactivex.functions.Function;
 
 /**
  * An instance of this class provides access to all the operations defined in
  * LRORetrys.
  */
-public class LRORetrysImpl implements LRORetrys {
+public final class LRORetrysImpl implements LRORetrys {
     /**
      * The proxy service used to perform REST calls.
      */
@@ -160,7 +161,7 @@ public class LRORetrysImpl implements LRORetrys {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Product&gt;} object.
      */
-    public ServiceFuture<Product> beginPut201CreatingSucceeded200Async(ServiceCallback<Product> serviceCallback) {
+    public ServiceFuture<Product> beginPut201CreatingSucceeded200Async(@NonNull ServiceCallback<Product> serviceCallback) {
         return ServiceFutureUtil.fromLRO(beginPut201CreatingSucceeded200Async(), serviceCallback);
     }
 
@@ -194,7 +195,7 @@ public class LRORetrysImpl implements LRORetrys {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Product&gt;} object.
      */
-    public ServiceFuture<Product> beginPut201CreatingSucceeded200Async(Product product, ServiceCallback<Product> serviceCallback) {
+    public ServiceFuture<Product> beginPut201CreatingSucceeded200Async(Product product, @NonNull ServiceCallback<Product> serviceCallback) {
         return ServiceFutureUtil.fromLRO(beginPut201CreatingSucceeded200Async(product), serviceCallback);
     }
 
@@ -228,7 +229,7 @@ public class LRORetrysImpl implements LRORetrys {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Product&gt;} object.
      */
-    public ServiceFuture<Product> put201CreatingSucceeded200Async(ServiceCallback<Product> serviceCallback) {
+    public ServiceFuture<Product> put201CreatingSucceeded200Async(@NonNull ServiceCallback<Product> serviceCallback) {
         return ServiceFuture.fromBody(put201CreatingSucceeded200Async(), serviceCallback);
     }
 
@@ -281,7 +282,7 @@ public class LRORetrysImpl implements LRORetrys {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Product&gt;} object.
      */
-    public ServiceFuture<Product> put201CreatingSucceeded200Async(Product product, ServiceCallback<Product> serviceCallback) {
+    public ServiceFuture<Product> put201CreatingSucceeded200Async(Product product, @NonNull ServiceCallback<Product> serviceCallback) {
         return ServiceFuture.fromBody(put201CreatingSucceeded200Async(product), serviceCallback);
     }
 
@@ -335,7 +336,7 @@ public class LRORetrysImpl implements LRORetrys {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Product&gt;} object.
      */
-    public ServiceFuture<Product> beginPutAsyncRelativeRetrySucceededAsync(ServiceCallback<Product> serviceCallback) {
+    public ServiceFuture<Product> beginPutAsyncRelativeRetrySucceededAsync(@NonNull ServiceCallback<Product> serviceCallback) {
         return ServiceFutureUtil.fromLRO(beginPutAsyncRelativeRetrySucceededAsync(), serviceCallback);
     }
 
@@ -369,7 +370,7 @@ public class LRORetrysImpl implements LRORetrys {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Product&gt;} object.
      */
-    public ServiceFuture<Product> beginPutAsyncRelativeRetrySucceededAsync(Product product, ServiceCallback<Product> serviceCallback) {
+    public ServiceFuture<Product> beginPutAsyncRelativeRetrySucceededAsync(Product product, @NonNull ServiceCallback<Product> serviceCallback) {
         return ServiceFutureUtil.fromLRO(beginPutAsyncRelativeRetrySucceededAsync(product), serviceCallback);
     }
 
@@ -403,7 +404,7 @@ public class LRORetrysImpl implements LRORetrys {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Product&gt;} object.
      */
-    public ServiceFuture<Product> putAsyncRelativeRetrySucceededAsync(ServiceCallback<Product> serviceCallback) {
+    public ServiceFuture<Product> putAsyncRelativeRetrySucceededAsync(@NonNull ServiceCallback<Product> serviceCallback) {
         return ServiceFuture.fromBody(putAsyncRelativeRetrySucceededAsync(), serviceCallback);
     }
 
@@ -456,7 +457,7 @@ public class LRORetrysImpl implements LRORetrys {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Product&gt;} object.
      */
-    public ServiceFuture<Product> putAsyncRelativeRetrySucceededAsync(Product product, ServiceCallback<Product> serviceCallback) {
+    public ServiceFuture<Product> putAsyncRelativeRetrySucceededAsync(Product product, @NonNull ServiceCallback<Product> serviceCallback) {
         return ServiceFuture.fromBody(putAsyncRelativeRetrySucceededAsync(product), serviceCallback);
     }
 
@@ -510,7 +511,7 @@ public class LRORetrysImpl implements LRORetrys {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Product&gt;} object.
      */
-    public ServiceFuture<Product> beginDeleteProvisioning202Accepted200SucceededAsync(ServiceCallback<Product> serviceCallback) {
+    public ServiceFuture<Product> beginDeleteProvisioning202Accepted200SucceededAsync(@NonNull ServiceCallback<Product> serviceCallback) {
         return ServiceFutureUtil.fromLRO(beginDeleteProvisioning202Accepted200SucceededAsync(), serviceCallback);
     }
 
@@ -541,7 +542,7 @@ public class LRORetrysImpl implements LRORetrys {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Product&gt;} object.
      */
-    public ServiceFuture<Product> deleteProvisioning202Accepted200SucceededAsync(ServiceCallback<Product> serviceCallback) {
+    public ServiceFuture<Product> deleteProvisioning202Accepted200SucceededAsync(@NonNull ServiceCallback<Product> serviceCallback) {
         return ServiceFuture.fromBody(deleteProvisioning202Accepted200SucceededAsync(), serviceCallback);
     }
 
@@ -589,7 +590,7 @@ public class LRORetrysImpl implements LRORetrys {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    public ServiceFuture<Void> beginDelete202Retry200Async(ServiceCallback<Void> serviceCallback) {
+    public ServiceFuture<Void> beginDelete202Retry200Async(@NonNull ServiceCallback<Void> serviceCallback) {
         return ServiceFutureUtil.fromLRO(beginDelete202Retry200Async(), serviceCallback);
     }
 
@@ -619,7 +620,7 @@ public class LRORetrysImpl implements LRORetrys {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    public ServiceFuture<Void> delete202Retry200Async(ServiceCallback<Void> serviceCallback) {
+    public ServiceFuture<Void> delete202Retry200Async(@NonNull ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(delete202Retry200Async(), serviceCallback);
     }
 
@@ -659,7 +660,7 @@ public class LRORetrysImpl implements LRORetrys {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    public ServiceFuture<Void> beginDeleteAsyncRelativeRetrySucceededAsync(ServiceCallback<Void> serviceCallback) {
+    public ServiceFuture<Void> beginDeleteAsyncRelativeRetrySucceededAsync(@NonNull ServiceCallback<Void> serviceCallback) {
         return ServiceFutureUtil.fromLRO(beginDeleteAsyncRelativeRetrySucceededAsync(), serviceCallback);
     }
 
@@ -689,7 +690,7 @@ public class LRORetrysImpl implements LRORetrys {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    public ServiceFuture<Void> deleteAsyncRelativeRetrySucceededAsync(ServiceCallback<Void> serviceCallback) {
+    public ServiceFuture<Void> deleteAsyncRelativeRetrySucceededAsync(@NonNull ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(deleteAsyncRelativeRetrySucceededAsync(), serviceCallback);
     }
 
@@ -729,7 +730,7 @@ public class LRORetrysImpl implements LRORetrys {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    public ServiceFuture<Void> beginPost202Retry200Async(ServiceCallback<Void> serviceCallback) {
+    public ServiceFuture<Void> beginPost202Retry200Async(@NonNull ServiceCallback<Void> serviceCallback) {
         return ServiceFutureUtil.fromLRO(beginPost202Retry200Async(), serviceCallback);
     }
 
@@ -762,7 +763,7 @@ public class LRORetrysImpl implements LRORetrys {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    public ServiceFuture<Void> beginPost202Retry200Async(Product product, ServiceCallback<Void> serviceCallback) {
+    public ServiceFuture<Void> beginPost202Retry200Async(Product product, @NonNull ServiceCallback<Void> serviceCallback) {
         return ServiceFutureUtil.fromLRO(beginPost202Retry200Async(product), serviceCallback);
     }
 
@@ -795,7 +796,7 @@ public class LRORetrysImpl implements LRORetrys {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    public ServiceFuture<Void> post202Retry200Async(ServiceCallback<Void> serviceCallback) {
+    public ServiceFuture<Void> post202Retry200Async(@NonNull ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(post202Retry200Async(), serviceCallback);
     }
 
@@ -839,7 +840,7 @@ public class LRORetrysImpl implements LRORetrys {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    public ServiceFuture<Void> post202Retry200Async(Product product, ServiceCallback<Void> serviceCallback) {
+    public ServiceFuture<Void> post202Retry200Async(Product product, @NonNull ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(post202Retry200Async(product), serviceCallback);
     }
 
@@ -884,7 +885,7 @@ public class LRORetrysImpl implements LRORetrys {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    public ServiceFuture<Void> beginPostAsyncRelativeRetrySucceededAsync(ServiceCallback<Void> serviceCallback) {
+    public ServiceFuture<Void> beginPostAsyncRelativeRetrySucceededAsync(@NonNull ServiceCallback<Void> serviceCallback) {
         return ServiceFutureUtil.fromLRO(beginPostAsyncRelativeRetrySucceededAsync(), serviceCallback);
     }
 
@@ -917,7 +918,7 @@ public class LRORetrysImpl implements LRORetrys {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    public ServiceFuture<Void> beginPostAsyncRelativeRetrySucceededAsync(Product product, ServiceCallback<Void> serviceCallback) {
+    public ServiceFuture<Void> beginPostAsyncRelativeRetrySucceededAsync(Product product, @NonNull ServiceCallback<Void> serviceCallback) {
         return ServiceFutureUtil.fromLRO(beginPostAsyncRelativeRetrySucceededAsync(product), serviceCallback);
     }
 
@@ -950,7 +951,7 @@ public class LRORetrysImpl implements LRORetrys {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    public ServiceFuture<Void> postAsyncRelativeRetrySucceededAsync(ServiceCallback<Void> serviceCallback) {
+    public ServiceFuture<Void> postAsyncRelativeRetrySucceededAsync(@NonNull ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(postAsyncRelativeRetrySucceededAsync(), serviceCallback);
     }
 
@@ -994,7 +995,7 @@ public class LRORetrysImpl implements LRORetrys {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    public ServiceFuture<Void> postAsyncRelativeRetrySucceededAsync(Product product, ServiceCallback<Void> serviceCallback) {
+    public ServiceFuture<Void> postAsyncRelativeRetrySucceededAsync(Product product, @NonNull ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(postAsyncRelativeRetrySucceededAsync(product), serviceCallback);
     }
 

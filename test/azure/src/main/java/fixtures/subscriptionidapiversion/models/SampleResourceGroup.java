@@ -15,7 +15,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 /**
  * The SampleResourceGroup model.
  */
-public class SampleResourceGroup {
+public final class SampleResourceGroup {
     /**
      * resource group name 'testgroup101'.
      */

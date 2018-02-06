@@ -24,12 +24,13 @@ import fixtures.azurespecials.SubscriptionInMethods;
 import fixtures.azurespecials.models.ErrorException;
 import io.reactivex.Completable;
 import io.reactivex.Single;
+import io.reactivex.annotations.NonNull;
 
 /**
  * An instance of this class provides access to all the operations defined in
  * SubscriptionInMethods.
  */
-public class SubscriptionInMethodsImpl implements SubscriptionInMethods {
+public final class SubscriptionInMethodsImpl implements SubscriptionInMethods {
     /**
      * The proxy service used to perform REST calls.
      */
@@ -85,7 +86,7 @@ public class SubscriptionInMethodsImpl implements SubscriptionInMethods {
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
-    public void postMethodLocalValid(String subscriptionId) {
+    public void postMethodLocalValid(@NonNull String subscriptionId) {
         postMethodLocalValidAsync(subscriptionId).blockingAwait();
     }
 
@@ -97,7 +98,7 @@ public class SubscriptionInMethodsImpl implements SubscriptionInMethods {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    public ServiceFuture<Void> postMethodLocalValidAsync(String subscriptionId, ServiceCallback<Void> serviceCallback) {
+    public ServiceFuture<Void> postMethodLocalValidAsync(@NonNull String subscriptionId, @NonNull ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(postMethodLocalValidAsync(subscriptionId), serviceCallback);
     }
 
@@ -108,7 +109,7 @@ public class SubscriptionInMethodsImpl implements SubscriptionInMethods {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
      */
-    public Single<RestResponse<Void, Void>> postMethodLocalValidWithRestResponseAsync(String subscriptionId) {
+    public Single<RestResponse<Void, Void>> postMethodLocalValidWithRestResponseAsync(@NonNull String subscriptionId) {
         if (subscriptionId == null) {
             throw new IllegalArgumentException("Parameter subscriptionId is required and cannot be null.");
         }
@@ -122,7 +123,7 @@ public class SubscriptionInMethodsImpl implements SubscriptionInMethods {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Completable} object if successful.
      */
-    public Completable postMethodLocalValidAsync(String subscriptionId) {
+    public Completable postMethodLocalValidAsync(@NonNull String subscriptionId) {
         return postMethodLocalValidWithRestResponseAsync(subscriptionId)
             .toCompletable();
     }
@@ -135,7 +136,7 @@ public class SubscriptionInMethodsImpl implements SubscriptionInMethods {
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
-    public void postMethodLocalNull(String subscriptionId) {
+    public void postMethodLocalNull(@NonNull String subscriptionId) {
         postMethodLocalNullAsync(subscriptionId).blockingAwait();
     }
 
@@ -147,7 +148,7 @@ public class SubscriptionInMethodsImpl implements SubscriptionInMethods {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    public ServiceFuture<Void> postMethodLocalNullAsync(String subscriptionId, ServiceCallback<Void> serviceCallback) {
+    public ServiceFuture<Void> postMethodLocalNullAsync(@NonNull String subscriptionId, @NonNull ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(postMethodLocalNullAsync(subscriptionId), serviceCallback);
     }
 
@@ -158,7 +159,7 @@ public class SubscriptionInMethodsImpl implements SubscriptionInMethods {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
      */
-    public Single<RestResponse<Void, Void>> postMethodLocalNullWithRestResponseAsync(String subscriptionId) {
+    public Single<RestResponse<Void, Void>> postMethodLocalNullWithRestResponseAsync(@NonNull String subscriptionId) {
         if (subscriptionId == null) {
             throw new IllegalArgumentException("Parameter subscriptionId is required and cannot be null.");
         }
@@ -172,7 +173,7 @@ public class SubscriptionInMethodsImpl implements SubscriptionInMethods {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Completable} object if successful.
      */
-    public Completable postMethodLocalNullAsync(String subscriptionId) {
+    public Completable postMethodLocalNullAsync(@NonNull String subscriptionId) {
         return postMethodLocalNullWithRestResponseAsync(subscriptionId)
             .toCompletable();
     }
@@ -185,7 +186,7 @@ public class SubscriptionInMethodsImpl implements SubscriptionInMethods {
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
-    public void postPathLocalValid(String subscriptionId) {
+    public void postPathLocalValid(@NonNull String subscriptionId) {
         postPathLocalValidAsync(subscriptionId).blockingAwait();
     }
 
@@ -197,7 +198,7 @@ public class SubscriptionInMethodsImpl implements SubscriptionInMethods {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    public ServiceFuture<Void> postPathLocalValidAsync(String subscriptionId, ServiceCallback<Void> serviceCallback) {
+    public ServiceFuture<Void> postPathLocalValidAsync(@NonNull String subscriptionId, @NonNull ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(postPathLocalValidAsync(subscriptionId), serviceCallback);
     }
 
@@ -208,7 +209,7 @@ public class SubscriptionInMethodsImpl implements SubscriptionInMethods {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
      */
-    public Single<RestResponse<Void, Void>> postPathLocalValidWithRestResponseAsync(String subscriptionId) {
+    public Single<RestResponse<Void, Void>> postPathLocalValidWithRestResponseAsync(@NonNull String subscriptionId) {
         if (subscriptionId == null) {
             throw new IllegalArgumentException("Parameter subscriptionId is required and cannot be null.");
         }
@@ -222,7 +223,7 @@ public class SubscriptionInMethodsImpl implements SubscriptionInMethods {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Completable} object if successful.
      */
-    public Completable postPathLocalValidAsync(String subscriptionId) {
+    public Completable postPathLocalValidAsync(@NonNull String subscriptionId) {
         return postPathLocalValidWithRestResponseAsync(subscriptionId)
             .toCompletable();
     }
@@ -235,7 +236,7 @@ public class SubscriptionInMethodsImpl implements SubscriptionInMethods {
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
-    public void postSwaggerLocalValid(String subscriptionId) {
+    public void postSwaggerLocalValid(@NonNull String subscriptionId) {
         postSwaggerLocalValidAsync(subscriptionId).blockingAwait();
     }
 
@@ -247,7 +248,7 @@ public class SubscriptionInMethodsImpl implements SubscriptionInMethods {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    public ServiceFuture<Void> postSwaggerLocalValidAsync(String subscriptionId, ServiceCallback<Void> serviceCallback) {
+    public ServiceFuture<Void> postSwaggerLocalValidAsync(@NonNull String subscriptionId, @NonNull ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(postSwaggerLocalValidAsync(subscriptionId), serviceCallback);
     }
 
@@ -258,7 +259,7 @@ public class SubscriptionInMethodsImpl implements SubscriptionInMethods {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
      */
-    public Single<RestResponse<Void, Void>> postSwaggerLocalValidWithRestResponseAsync(String subscriptionId) {
+    public Single<RestResponse<Void, Void>> postSwaggerLocalValidWithRestResponseAsync(@NonNull String subscriptionId) {
         if (subscriptionId == null) {
             throw new IllegalArgumentException("Parameter subscriptionId is required and cannot be null.");
         }
@@ -272,7 +273,7 @@ public class SubscriptionInMethodsImpl implements SubscriptionInMethods {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Completable} object if successful.
      */
-    public Completable postSwaggerLocalValidAsync(String subscriptionId) {
+    public Completable postSwaggerLocalValidAsync(@NonNull String subscriptionId) {
         return postSwaggerLocalValidWithRestResponseAsync(subscriptionId)
             .toCompletable();
     }

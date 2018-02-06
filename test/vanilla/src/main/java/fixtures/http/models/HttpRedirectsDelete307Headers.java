@@ -15,7 +15,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 /**
  * Defines headers for delete307 operation.
  */
-public class HttpRedirectsDelete307Headers {
+public final class HttpRedirectsDelete307Headers {
     /**
      * The redirect location for this request. Possible values include:
      * '/http/success/delete/200'.

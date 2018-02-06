@@ -16,6 +16,7 @@ import com.microsoft.rest.v2.ServiceFuture;
 import fixtures.subscriptionidapiversion.models.SampleResourceGroup;
 import io.reactivex.Maybe;
 import io.reactivex.Single;
+import io.reactivex.annotations.NonNull;
 
 /**
  * An instance of this class provides access to all the operations defined in
@@ -31,7 +32,7 @@ public interface Groups {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the SampleResourceGroup object if successful.
      */
-    SampleResourceGroup getSampleResourceGroup(String resourceGroupName);
+    SampleResourceGroup getSampleResourceGroup(@NonNull String resourceGroupName);
 
     /**
      * Provides a resouce group with name 'testgroup101' and location 'West US'.
@@ -41,7 +42,7 @@ public interface Groups {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;SampleResourceGroup&gt;} object.
      */
-    ServiceFuture<SampleResourceGroup> getSampleResourceGroupAsync(String resourceGroupName, ServiceCallback<SampleResourceGroup> serviceCallback);
+    ServiceFuture<SampleResourceGroup> getSampleResourceGroupAsync(@NonNull String resourceGroupName, @NonNull ServiceCallback<SampleResourceGroup> serviceCallback);
 
     /**
      * Provides a resouce group with name 'testgroup101' and location 'West US'.
@@ -50,7 +51,7 @@ public interface Groups {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, SampleResourceGroup&gt;&gt;} object if successful.
      */
-    Single<RestResponse<Void, SampleResourceGroup>> getSampleResourceGroupWithRestResponseAsync(String resourceGroupName);
+    Single<RestResponse<Void, SampleResourceGroup>> getSampleResourceGroupWithRestResponseAsync(@NonNull String resourceGroupName);
 
     /**
      * Provides a resouce group with name 'testgroup101' and location 'West US'.
@@ -59,5 +60,5 @@ public interface Groups {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Maybe&lt;SampleResourceGroup&gt;} object if successful.
      */
-    Maybe<SampleResourceGroup> getSampleResourceGroupAsync(String resourceGroupName);
+    Maybe<SampleResourceGroup> getSampleResourceGroupAsync(@NonNull String resourceGroupName);
 }

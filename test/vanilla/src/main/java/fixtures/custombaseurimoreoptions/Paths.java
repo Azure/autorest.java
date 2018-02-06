@@ -15,6 +15,7 @@ import com.microsoft.rest.v2.ServiceCallback;
 import com.microsoft.rest.v2.ServiceFuture;
 import io.reactivex.Completable;
 import io.reactivex.Single;
+import io.reactivex.annotations.NonNull;
 
 /**
  * An instance of this class provides access to all the operations defined in
@@ -31,7 +32,7 @@ public interface Paths {
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
-    void getEmpty(String vault, String secret, String keyName);
+    void getEmpty(@NonNull String vault, @NonNull String secret, @NonNull String keyName);
 
     /**
      * Get a 200 to test a valid base uri.
@@ -43,7 +44,7 @@ public interface Paths {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    ServiceFuture<Void> getEmptyAsync(String vault, String secret, String keyName, ServiceCallback<Void> serviceCallback);
+    ServiceFuture<Void> getEmptyAsync(@NonNull String vault, @NonNull String secret, @NonNull String keyName, @NonNull ServiceCallback<Void> serviceCallback);
 
     /**
      * Get a 200 to test a valid base uri.
@@ -54,7 +55,7 @@ public interface Paths {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
      */
-    Single<RestResponse<Void, Void>> getEmptyWithRestResponseAsync(String vault, String secret, String keyName);
+    Single<RestResponse<Void, Void>> getEmptyWithRestResponseAsync(@NonNull String vault, @NonNull String secret, @NonNull String keyName);
 
     /**
      * Get a 200 to test a valid base uri.
@@ -65,7 +66,7 @@ public interface Paths {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Completable} object if successful.
      */
-    Completable getEmptyAsync(String vault, String secret, String keyName);
+    Completable getEmptyAsync(@NonNull String vault, @NonNull String secret, @NonNull String keyName);
 
     /**
      * Get a 200 to test a valid base uri.
@@ -78,7 +79,7 @@ public interface Paths {
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
-    void getEmpty(String vault, String secret, String keyName, String keyVersion);
+    void getEmpty(@NonNull String vault, @NonNull String secret, @NonNull String keyName, String keyVersion);
 
     /**
      * Get a 200 to test a valid base uri.
@@ -91,7 +92,7 @@ public interface Paths {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    ServiceFuture<Void> getEmptyAsync(String vault, String secret, String keyName, String keyVersion, ServiceCallback<Void> serviceCallback);
+    ServiceFuture<Void> getEmptyAsync(@NonNull String vault, @NonNull String secret, @NonNull String keyName, String keyVersion, @NonNull ServiceCallback<Void> serviceCallback);
 
     /**
      * Get a 200 to test a valid base uri.
@@ -103,7 +104,7 @@ public interface Paths {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
      */
-    Single<RestResponse<Void, Void>> getEmptyWithRestResponseAsync(String vault, String secret, String keyName, String keyVersion);
+    Single<RestResponse<Void, Void>> getEmptyWithRestResponseAsync(@NonNull String vault, @NonNull String secret, @NonNull String keyName, String keyVersion);
 
     /**
      * Get a 200 to test a valid base uri.
@@ -115,5 +116,5 @@ public interface Paths {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Completable} object if successful.
      */
-    Completable getEmptyAsync(String vault, String secret, String keyName, String keyVersion);
+    Completable getEmptyAsync(@NonNull String vault, @NonNull String secret, @NonNull String keyName, String keyVersion);
 }

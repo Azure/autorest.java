@@ -15,11 +15,12 @@ import com.microsoft.rest.v2.ServiceClient;
 import com.microsoft.rest.v2.http.HttpPipeline;
 import fixtures.bodydatetimerfc1123.AutoRestRFC1123DateTimeTestService;
 import fixtures.bodydatetimerfc1123.Datetimerfc1123s;
+import io.reactivex.annotations.NonNull;
 
 /**
  * Initializes a new instance of the AutoRestRFC1123DateTimeTestService type.
  */
-public class AutoRestRFC1123DateTimeTestServiceImpl extends ServiceClient implements AutoRestRFC1123DateTimeTestService {
+public final class AutoRestRFC1123DateTimeTestServiceImpl extends ServiceClient implements AutoRestRFC1123DateTimeTestService {
     /**
      * The Datetimerfc1123s object to access its operations.
      */
@@ -46,7 +47,7 @@ public class AutoRestRFC1123DateTimeTestServiceImpl extends ServiceClient implem
      *
      * @param httpPipeline The HTTP pipeline to send requests through.
      */
-    public AutoRestRFC1123DateTimeTestServiceImpl(HttpPipeline httpPipeline) {
+    public AutoRestRFC1123DateTimeTestServiceImpl(@NonNull HttpPipeline httpPipeline) {
         super(httpPipeline);
         this.datetimerfc1123s = new Datetimerfc1123sImpl(this);
     }

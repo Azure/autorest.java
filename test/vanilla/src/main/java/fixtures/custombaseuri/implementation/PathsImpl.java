@@ -23,12 +23,13 @@ import fixtures.custombaseuri.Paths;
 import fixtures.custombaseuri.models.ErrorException;
 import io.reactivex.Completable;
 import io.reactivex.Single;
+import io.reactivex.annotations.NonNull;
 
 /**
  * An instance of this class provides access to all the operations defined in
  * Paths.
  */
-public class PathsImpl implements Paths {
+public final class PathsImpl implements Paths {
     /**
      * The proxy service used to perform REST calls.
      */
@@ -69,7 +70,7 @@ public class PathsImpl implements Paths {
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
-    public void getEmpty(String accountName) {
+    public void getEmpty(@NonNull String accountName) {
         getEmptyAsync(accountName).blockingAwait();
     }
 
@@ -81,7 +82,7 @@ public class PathsImpl implements Paths {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    public ServiceFuture<Void> getEmptyAsync(String accountName, ServiceCallback<Void> serviceCallback) {
+    public ServiceFuture<Void> getEmptyAsync(@NonNull String accountName, @NonNull ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(getEmptyAsync(accountName), serviceCallback);
     }
 
@@ -92,7 +93,7 @@ public class PathsImpl implements Paths {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
      */
-    public Single<RestResponse<Void, Void>> getEmptyWithRestResponseAsync(String accountName) {
+    public Single<RestResponse<Void, Void>> getEmptyWithRestResponseAsync(@NonNull String accountName) {
         if (accountName == null) {
             throw new IllegalArgumentException("Parameter accountName is required and cannot be null.");
         }
@@ -109,7 +110,7 @@ public class PathsImpl implements Paths {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Completable} object if successful.
      */
-    public Completable getEmptyAsync(String accountName) {
+    public Completable getEmptyAsync(@NonNull String accountName) {
         return getEmptyWithRestResponseAsync(accountName)
             .toCompletable();
     }

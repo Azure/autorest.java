@@ -15,7 +15,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 /**
  * The BooleanWrapper model.
  */
-public class BooleanWrapper {
+public final class BooleanWrapper {
     /**
      * The fieldTrue property.
      */

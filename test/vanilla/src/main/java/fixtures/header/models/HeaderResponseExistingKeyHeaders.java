@@ -15,7 +15,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 /**
  * Defines headers for responseExistingKey operation.
  */
-public class HeaderResponseExistingKeyHeaders {
+public final class HeaderResponseExistingKeyHeaders {
     /**
      * response with header value "User-Agent": "overwrite".
      */

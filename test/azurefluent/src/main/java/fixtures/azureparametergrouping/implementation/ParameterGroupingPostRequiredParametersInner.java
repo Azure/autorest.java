@@ -15,7 +15,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 /**
  * Additional parameters for postRequired operation.
  */
-public class ParameterGroupingPostRequiredParametersInner {
+public final class ParameterGroupingPostRequiredParametersInner {
     /**
      * The body property.
      */

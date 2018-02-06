@@ -19,7 +19,7 @@ import com.fasterxml.jackson.annotation.JsonTypeName;
  */
 @JsonTypeInfo(use = JsonTypeInfo.Id.NAME, include = JsonTypeInfo.As.PROPERTY, property = "fishtype")
 @JsonTypeName("sawshark")
-public class Sawshark extends Shark {
+public final class Sawshark extends Shark {
     /**
      * The picture property.
      */

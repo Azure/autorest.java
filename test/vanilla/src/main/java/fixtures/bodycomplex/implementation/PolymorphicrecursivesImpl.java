@@ -27,13 +27,14 @@ import fixtures.bodycomplex.models.Fish;
 import io.reactivex.Completable;
 import io.reactivex.Maybe;
 import io.reactivex.Single;
+import io.reactivex.annotations.NonNull;
 import io.reactivex.functions.Function;
 
 /**
  * An instance of this class provides access to all the operations defined in
  * Polymorphicrecursives.
  */
-public class PolymorphicrecursivesImpl implements Polymorphicrecursives {
+public final class PolymorphicrecursivesImpl implements Polymorphicrecursives {
     /**
      * The proxy service used to perform REST calls.
      */
@@ -89,7 +90,7 @@ public class PolymorphicrecursivesImpl implements Polymorphicrecursives {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Fish&gt;} object.
      */
-    public ServiceFuture<Fish> getValidAsync(ServiceCallback<Fish> serviceCallback) {
+    public ServiceFuture<Fish> getValidAsync(@NonNull ServiceCallback<Fish> serviceCallback) {
         return ServiceFuture.fromBody(getValidAsync(), serviceCallback);
     }
 
@@ -180,7 +181,7 @@ public class PolymorphicrecursivesImpl implements Polymorphicrecursives {
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
-    public void putValid(Fish complexBody) {
+    public void putValid(@NonNull Fish complexBody) {
         putValidAsync(complexBody).blockingAwait();
     }
 
@@ -244,7 +245,7 @@ public class PolymorphicrecursivesImpl implements Polymorphicrecursives {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    public ServiceFuture<Void> putValidAsync(Fish complexBody, ServiceCallback<Void> serviceCallback) {
+    public ServiceFuture<Void> putValidAsync(@NonNull Fish complexBody, @NonNull ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(putValidAsync(complexBody), serviceCallback);
     }
 
@@ -307,7 +308,7 @@ public class PolymorphicrecursivesImpl implements Polymorphicrecursives {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
      */
-    public Single<RestResponse<Void, Void>> putValidWithRestResponseAsync(Fish complexBody) {
+    public Single<RestResponse<Void, Void>> putValidWithRestResponseAsync(@NonNull Fish complexBody) {
         if (complexBody == null) {
             throw new IllegalArgumentException("Parameter complexBody is required and cannot be null.");
         }
@@ -374,7 +375,7 @@ public class PolymorphicrecursivesImpl implements Polymorphicrecursives {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Completable} object if successful.
      */
-    public Completable putValidAsync(Fish complexBody) {
+    public Completable putValidAsync(@NonNull Fish complexBody) {
         return putValidWithRestResponseAsync(complexBody)
             .toCompletable();
     }

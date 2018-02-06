@@ -18,5 +18,5 @@ import com.fasterxml.jackson.annotation.JsonTypeName;
  */
 @JsonTypeInfo(use = JsonTypeInfo.Id.NAME, include = JsonTypeInfo.As.PROPERTY, property = "fishtype")
 @JsonTypeName("cookiecuttershark")
-public class Cookiecuttershark extends Shark {
+public final class Cookiecuttershark extends Shark {
 }

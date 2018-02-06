@@ -15,7 +15,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 /**
  * Defines headers for postAsyncRelativeRetryInvalidHeader operation.
  */
-public class LROSADsPostAsyncRelativeRetryInvalidHeaderHeadersInner {
+public final class LROSADsPostAsyncRelativeRetryInvalidHeaderHeadersInner {
     /**
      * Location to poll for result status: will be set to foo.
      */

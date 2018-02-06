@@ -15,7 +15,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 /**
  * Defines headers for patch302 operation.
  */
-public class HttpRedirectsPatch302Headers {
+public final class HttpRedirectsPatch302Headers {
     /**
      * The redirect location for this request. Possible values include:
      * '/http/failure/500'.

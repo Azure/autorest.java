@@ -15,11 +15,12 @@ import com.microsoft.rest.v2.ServiceClient;
 import com.microsoft.rest.v2.http.HttpPipeline;
 import fixtures.header.AutoRestSwaggerBATHeaderService;
 import fixtures.header.Headers;
+import io.reactivex.annotations.NonNull;
 
 /**
  * Initializes a new instance of the AutoRestSwaggerBATHeaderService type.
  */
-public class AutoRestSwaggerBATHeaderServiceImpl extends ServiceClient implements AutoRestSwaggerBATHeaderService {
+public final class AutoRestSwaggerBATHeaderServiceImpl extends ServiceClient implements AutoRestSwaggerBATHeaderService {
     /**
      * The Headers object to access its operations.
      */
@@ -46,7 +47,7 @@ public class AutoRestSwaggerBATHeaderServiceImpl extends ServiceClient implement
      *
      * @param httpPipeline The HTTP pipeline to send requests through.
      */
-    public AutoRestSwaggerBATHeaderServiceImpl(HttpPipeline httpPipeline) {
+    public AutoRestSwaggerBATHeaderServiceImpl(@NonNull HttpPipeline httpPipeline) {
         super(httpPipeline);
         this.headers = new HeadersImpl(this);
     }

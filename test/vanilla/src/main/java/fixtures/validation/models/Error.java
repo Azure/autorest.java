@@ -15,7 +15,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 /**
  * The Error model.
  */
-public class Error {
+public final class Error {
     /**
      * The code property.
      */

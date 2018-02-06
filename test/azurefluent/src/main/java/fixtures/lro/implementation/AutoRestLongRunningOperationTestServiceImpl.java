@@ -15,11 +15,12 @@ import com.microsoft.azure.v2.AzureProxy;
 import com.microsoft.azure.v2.AzureServiceClient;
 import com.microsoft.rest.v2.credentials.ServiceClientCredentials;
 import com.microsoft.rest.v2.http.HttpPipeline;
+import io.reactivex.annotations.NonNull;
 
 /**
  * Initializes a new instance of the AutoRestLongRunningOperationTestServiceImpl type.
  */
-public class AutoRestLongRunningOperationTestServiceImpl extends AzureServiceClient {
+public final class AutoRestLongRunningOperationTestServiceImpl extends AzureServiceClient {
     /**
      * Gets or sets the preferred language for the response.
      */
@@ -156,7 +157,7 @@ public class AutoRestLongRunningOperationTestServiceImpl extends AzureServiceCli
      *
      * @param credentials the management credentials for Azure.
      */
-    public AutoRestLongRunningOperationTestServiceImpl(ServiceClientCredentials credentials) {
+    public AutoRestLongRunningOperationTestServiceImpl(@NonNull ServiceClientCredentials credentials) {
         this(AzureProxy.createDefaultPipeline(AutoRestLongRunningOperationTestServiceImpl.class, credentials));
     }
 
@@ -166,7 +167,7 @@ public class AutoRestLongRunningOperationTestServiceImpl extends AzureServiceCli
      * @param credentials the management credentials for Azure.
      * @param azureEnvironment The environment that requests will target.
      */
-    public AutoRestLongRunningOperationTestServiceImpl(ServiceClientCredentials credentials, AzureEnvironment azureEnvironment) {
+    public AutoRestLongRunningOperationTestServiceImpl(@NonNull ServiceClientCredentials credentials, @NonNull AzureEnvironment azureEnvironment) {
         this(AzureProxy.createDefaultPipeline(AutoRestLongRunningOperationTestServiceImpl.class, credentials), azureEnvironment);
     }
 
@@ -175,7 +176,7 @@ public class AutoRestLongRunningOperationTestServiceImpl extends AzureServiceCli
      *
      * @param httpPipeline The HTTP pipeline to send requests through.
      */
-    public AutoRestLongRunningOperationTestServiceImpl(HttpPipeline httpPipeline) {
+    public AutoRestLongRunningOperationTestServiceImpl(@NonNull HttpPipeline httpPipeline) {
         this(httpPipeline, null);
     }
 
@@ -185,7 +186,7 @@ public class AutoRestLongRunningOperationTestServiceImpl extends AzureServiceCli
      * @param httpPipeline The HTTP pipeline to send requests through.
      * @param azureEnvironment The environment that requests will target.
      */
-    public AutoRestLongRunningOperationTestServiceImpl(HttpPipeline httpPipeline, AzureEnvironment azureEnvironment) {
+    public AutoRestLongRunningOperationTestServiceImpl(@NonNull HttpPipeline httpPipeline, @NonNull AzureEnvironment azureEnvironment) {
         super(httpPipeline, azureEnvironment);
         this.acceptLanguage = "en-US";
         this.longRunningOperationRetryTimeout = 30;

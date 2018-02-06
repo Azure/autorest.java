@@ -17,7 +17,7 @@ import java.util.Map;
 /**
  * The ResourceCollection model.
  */
-public class ResourceCollection {
+public final class ResourceCollection {
     /**
      * The productresource property.
      */

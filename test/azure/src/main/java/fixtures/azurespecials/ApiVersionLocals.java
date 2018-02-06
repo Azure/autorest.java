@@ -15,6 +15,7 @@ import com.microsoft.rest.v2.ServiceCallback;
 import com.microsoft.rest.v2.ServiceFuture;
 import io.reactivex.Completable;
 import io.reactivex.Single;
+import io.reactivex.annotations.NonNull;
 
 /**
  * An instance of this class provides access to all the operations defined in
@@ -36,7 +37,7 @@ public interface ApiVersionLocals {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    ServiceFuture<Void> getMethodLocalValidAsync(ServiceCallback<Void> serviceCallback);
+    ServiceFuture<Void> getMethodLocalValidAsync(@NonNull ServiceCallback<Void> serviceCallback);
 
     /**
      * Get method with api-version modeled in the method.  pass in api-version = '2.0' to succeed.
@@ -67,7 +68,7 @@ public interface ApiVersionLocals {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    ServiceFuture<Void> getMethodLocalNullAsync(ServiceCallback<Void> serviceCallback);
+    ServiceFuture<Void> getMethodLocalNullAsync(@NonNull ServiceCallback<Void> serviceCallback);
 
     /**
      * Get method with api-version modeled in the method.  pass in api-version = null to succeed.
@@ -101,7 +102,7 @@ public interface ApiVersionLocals {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    ServiceFuture<Void> getMethodLocalNullAsync(String apiVersion, ServiceCallback<Void> serviceCallback);
+    ServiceFuture<Void> getMethodLocalNullAsync(String apiVersion, @NonNull ServiceCallback<Void> serviceCallback);
 
     /**
      * Get method with api-version modeled in the method.  pass in api-version = null to succeed.
@@ -136,7 +137,7 @@ public interface ApiVersionLocals {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    ServiceFuture<Void> getPathLocalValidAsync(ServiceCallback<Void> serviceCallback);
+    ServiceFuture<Void> getPathLocalValidAsync(@NonNull ServiceCallback<Void> serviceCallback);
 
     /**
      * Get method with api-version modeled in the method.  pass in api-version = '2.0' to succeed.
@@ -167,7 +168,7 @@ public interface ApiVersionLocals {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    ServiceFuture<Void> getSwaggerLocalValidAsync(ServiceCallback<Void> serviceCallback);
+    ServiceFuture<Void> getSwaggerLocalValidAsync(@NonNull ServiceCallback<Void> serviceCallback);
 
     /**
      * Get method with api-version modeled in the method.  pass in api-version = '2.0' to succeed.

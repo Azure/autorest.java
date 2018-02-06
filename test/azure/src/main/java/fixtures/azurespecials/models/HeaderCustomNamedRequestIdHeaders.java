@@ -15,7 +15,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 /**
  * Defines headers for customNamedRequestId operation.
  */
-public class HeaderCustomNamedRequestIdHeaders {
+public final class HeaderCustomNamedRequestIdHeaders {
     /**
      * Gets the foo-request-id.
      */

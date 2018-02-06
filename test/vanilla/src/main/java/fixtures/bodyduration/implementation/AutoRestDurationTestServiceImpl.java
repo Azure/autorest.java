@@ -15,11 +15,12 @@ import com.microsoft.rest.v2.ServiceClient;
 import com.microsoft.rest.v2.http.HttpPipeline;
 import fixtures.bodyduration.AutoRestDurationTestService;
 import fixtures.bodyduration.Durations;
+import io.reactivex.annotations.NonNull;
 
 /**
  * Initializes a new instance of the AutoRestDurationTestService type.
  */
-public class AutoRestDurationTestServiceImpl extends ServiceClient implements AutoRestDurationTestService {
+public final class AutoRestDurationTestServiceImpl extends ServiceClient implements AutoRestDurationTestService {
     /**
      * The Durations object to access its operations.
      */
@@ -46,7 +47,7 @@ public class AutoRestDurationTestServiceImpl extends ServiceClient implements Au
      *
      * @param httpPipeline The HTTP pipeline to send requests through.
      */
-    public AutoRestDurationTestServiceImpl(HttpPipeline httpPipeline) {
+    public AutoRestDurationTestServiceImpl(@NonNull HttpPipeline httpPipeline) {
         super(httpPipeline);
         this.durations = new DurationsImpl(this);
     }

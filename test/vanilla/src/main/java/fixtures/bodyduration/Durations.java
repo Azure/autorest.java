@@ -16,6 +16,7 @@ import com.microsoft.rest.v2.ServiceFuture;
 import io.reactivex.Completable;
 import io.reactivex.Maybe;
 import io.reactivex.Single;
+import io.reactivex.annotations.NonNull;
 import org.joda.time.Period;
 
 /**
@@ -39,7 +40,7 @@ public interface Durations {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Period&gt;} object.
      */
-    ServiceFuture<Period> getNullAsync(ServiceCallback<Period> serviceCallback);
+    ServiceFuture<Period> getNullAsync(@NonNull ServiceCallback<Period> serviceCallback);
 
     /**
      * Get null duration value.
@@ -63,7 +64,7 @@ public interface Durations {
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
-    void putPositiveDuration(Period durationBody);
+    void putPositiveDuration(@NonNull Period durationBody);
 
     /**
      * Put a positive duration value.
@@ -73,7 +74,7 @@ public interface Durations {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    ServiceFuture<Void> putPositiveDurationAsync(Period durationBody, ServiceCallback<Void> serviceCallback);
+    ServiceFuture<Void> putPositiveDurationAsync(@NonNull Period durationBody, @NonNull ServiceCallback<Void> serviceCallback);
 
     /**
      * Put a positive duration value.
@@ -82,7 +83,7 @@ public interface Durations {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
      */
-    Single<RestResponse<Void, Void>> putPositiveDurationWithRestResponseAsync(Period durationBody);
+    Single<RestResponse<Void, Void>> putPositiveDurationWithRestResponseAsync(@NonNull Period durationBody);
 
     /**
      * Put a positive duration value.
@@ -91,7 +92,7 @@ public interface Durations {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Completable} object if successful.
      */
-    Completable putPositiveDurationAsync(Period durationBody);
+    Completable putPositiveDurationAsync(@NonNull Period durationBody);
 
     /**
      * Get a positive duration value.
@@ -109,7 +110,7 @@ public interface Durations {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Period&gt;} object.
      */
-    ServiceFuture<Period> getPositiveDurationAsync(ServiceCallback<Period> serviceCallback);
+    ServiceFuture<Period> getPositiveDurationAsync(@NonNull ServiceCallback<Period> serviceCallback);
 
     /**
      * Get a positive duration value.
@@ -141,7 +142,7 @@ public interface Durations {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Period&gt;} object.
      */
-    ServiceFuture<Period> getInvalidAsync(ServiceCallback<Period> serviceCallback);
+    ServiceFuture<Period> getInvalidAsync(@NonNull ServiceCallback<Period> serviceCallback);
 
     /**
      * Get an invalid duration value.

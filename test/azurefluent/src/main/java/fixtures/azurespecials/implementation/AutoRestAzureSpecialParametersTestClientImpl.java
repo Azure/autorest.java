@@ -15,11 +15,12 @@ import com.microsoft.azure.v2.AzureProxy;
 import com.microsoft.azure.v2.AzureServiceClient;
 import com.microsoft.rest.v2.credentials.ServiceClientCredentials;
 import com.microsoft.rest.v2.http.HttpPipeline;
+import io.reactivex.annotations.NonNull;
 
 /**
  * Initializes a new instance of the AutoRestAzureSpecialParametersTestClientImpl type.
  */
-public class AutoRestAzureSpecialParametersTestClientImpl extends AzureServiceClient {
+public final class AutoRestAzureSpecialParametersTestClientImpl extends AzureServiceClient {
     /**
      * The subscription id, which appears in the path, always modeled in credentials. The value is always '1234-5678-9012-3456'.
      */
@@ -251,7 +252,7 @@ public class AutoRestAzureSpecialParametersTestClientImpl extends AzureServiceCl
      *
      * @param credentials the management credentials for Azure.
      */
-    public AutoRestAzureSpecialParametersTestClientImpl(ServiceClientCredentials credentials) {
+    public AutoRestAzureSpecialParametersTestClientImpl(@NonNull ServiceClientCredentials credentials) {
         this(AzureProxy.createDefaultPipeline(AutoRestAzureSpecialParametersTestClientImpl.class, credentials));
     }
 
@@ -261,7 +262,7 @@ public class AutoRestAzureSpecialParametersTestClientImpl extends AzureServiceCl
      * @param credentials the management credentials for Azure.
      * @param azureEnvironment The environment that requests will target.
      */
-    public AutoRestAzureSpecialParametersTestClientImpl(ServiceClientCredentials credentials, AzureEnvironment azureEnvironment) {
+    public AutoRestAzureSpecialParametersTestClientImpl(@NonNull ServiceClientCredentials credentials, @NonNull AzureEnvironment azureEnvironment) {
         this(AzureProxy.createDefaultPipeline(AutoRestAzureSpecialParametersTestClientImpl.class, credentials), azureEnvironment);
     }
 
@@ -270,7 +271,7 @@ public class AutoRestAzureSpecialParametersTestClientImpl extends AzureServiceCl
      *
      * @param httpPipeline The HTTP pipeline to send requests through.
      */
-    public AutoRestAzureSpecialParametersTestClientImpl(HttpPipeline httpPipeline) {
+    public AutoRestAzureSpecialParametersTestClientImpl(@NonNull HttpPipeline httpPipeline) {
         this(httpPipeline, null);
     }
 
@@ -280,7 +281,7 @@ public class AutoRestAzureSpecialParametersTestClientImpl extends AzureServiceCl
      * @param httpPipeline The HTTP pipeline to send requests through.
      * @param azureEnvironment The environment that requests will target.
      */
-    public AutoRestAzureSpecialParametersTestClientImpl(HttpPipeline httpPipeline, AzureEnvironment azureEnvironment) {
+    public AutoRestAzureSpecialParametersTestClientImpl(@NonNull HttpPipeline httpPipeline, @NonNull AzureEnvironment azureEnvironment) {
         super(httpPipeline, azureEnvironment);
         this.apiVersion = "2015-07-01-preview";
         this.acceptLanguage = "en-US";

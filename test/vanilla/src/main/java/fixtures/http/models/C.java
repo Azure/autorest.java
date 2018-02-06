@@ -15,7 +15,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 /**
  * The C model.
  */
-public class C {
+public final class C {
     /**
      * The httpCode property.
      */

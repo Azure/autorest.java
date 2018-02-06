@@ -15,7 +15,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 /**
  * The Basic model.
  */
-public class Basic {
+public final class Basic {
     /**
      * Basic Id.
      */

@@ -25,6 +25,7 @@ import fixtures.bodyduration.models.ErrorException;
 import io.reactivex.Completable;
 import io.reactivex.Maybe;
 import io.reactivex.Single;
+import io.reactivex.annotations.NonNull;
 import io.reactivex.functions.Function;
 import org.joda.time.Period;
 
@@ -32,7 +33,7 @@ import org.joda.time.Period;
  * An instance of this class provides access to all the operations defined in
  * Durations.
  */
-public class DurationsImpl implements Durations {
+public final class DurationsImpl implements Durations {
     /**
      * The proxy service used to perform REST calls.
      */
@@ -98,7 +99,7 @@ public class DurationsImpl implements Durations {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Period&gt;} object.
      */
-    public ServiceFuture<Period> getNullAsync(ServiceCallback<Period> serviceCallback) {
+    public ServiceFuture<Period> getNullAsync(@NonNull ServiceCallback<Period> serviceCallback) {
         return ServiceFuture.fromBody(getNullAsync(), serviceCallback);
     }
 
@@ -137,7 +138,7 @@ public class DurationsImpl implements Durations {
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
-    public void putPositiveDuration(Period durationBody) {
+    public void putPositiveDuration(@NonNull Period durationBody) {
         putPositiveDurationAsync(durationBody).blockingAwait();
     }
 
@@ -149,7 +150,7 @@ public class DurationsImpl implements Durations {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    public ServiceFuture<Void> putPositiveDurationAsync(Period durationBody, ServiceCallback<Void> serviceCallback) {
+    public ServiceFuture<Void> putPositiveDurationAsync(@NonNull Period durationBody, @NonNull ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(putPositiveDurationAsync(durationBody), serviceCallback);
     }
 
@@ -160,7 +161,7 @@ public class DurationsImpl implements Durations {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
      */
-    public Single<RestResponse<Void, Void>> putPositiveDurationWithRestResponseAsync(Period durationBody) {
+    public Single<RestResponse<Void, Void>> putPositiveDurationWithRestResponseAsync(@NonNull Period durationBody) {
         if (durationBody == null) {
             throw new IllegalArgumentException("Parameter durationBody is required and cannot be null.");
         }
@@ -174,7 +175,7 @@ public class DurationsImpl implements Durations {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Completable} object if successful.
      */
-    public Completable putPositiveDurationAsync(Period durationBody) {
+    public Completable putPositiveDurationAsync(@NonNull Period durationBody) {
         return putPositiveDurationWithRestResponseAsync(durationBody)
             .toCompletable();
     }
@@ -197,7 +198,7 @@ public class DurationsImpl implements Durations {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Period&gt;} object.
      */
-    public ServiceFuture<Period> getPositiveDurationAsync(ServiceCallback<Period> serviceCallback) {
+    public ServiceFuture<Period> getPositiveDurationAsync(@NonNull ServiceCallback<Period> serviceCallback) {
         return ServiceFuture.fromBody(getPositiveDurationAsync(), serviceCallback);
     }
 
@@ -246,7 +247,7 @@ public class DurationsImpl implements Durations {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Period&gt;} object.
      */
-    public ServiceFuture<Period> getInvalidAsync(ServiceCallback<Period> serviceCallback) {
+    public ServiceFuture<Period> getInvalidAsync(@NonNull ServiceCallback<Period> serviceCallback) {
         return ServiceFuture.fromBody(getInvalidAsync(), serviceCallback);
     }
 

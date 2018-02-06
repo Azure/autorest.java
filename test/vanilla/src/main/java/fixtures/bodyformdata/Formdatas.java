@@ -16,6 +16,7 @@ import com.microsoft.rest.v2.ServiceFuture;
 import io.reactivex.Flowable;
 import io.reactivex.Maybe;
 import io.reactivex.Single;
+import io.reactivex.annotations.NonNull;
 import java.nio.ByteBuffer;
 
 /**
@@ -33,7 +34,7 @@ public interface Formdatas {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the Flowable&lt;ByteBuffer&gt; object if successful.
      */
-    Flowable<ByteBuffer> uploadFile(Flowable<ByteBuffer> fileContent, String fileName);
+    Flowable<ByteBuffer> uploadFile(@NonNull Flowable<ByteBuffer> fileContent, @NonNull String fileName);
 
     /**
      * Upload file.
@@ -44,7 +45,7 @@ public interface Formdatas {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Flowable&lt;ByteBuffer&gt;&gt;} object.
      */
-    ServiceFuture<Flowable<ByteBuffer>> uploadFileAsync(Flowable<ByteBuffer> fileContent, String fileName, ServiceCallback<Flowable<ByteBuffer>> serviceCallback);
+    ServiceFuture<Flowable<ByteBuffer>> uploadFileAsync(@NonNull Flowable<ByteBuffer> fileContent, @NonNull String fileName, @NonNull ServiceCallback<Flowable<ByteBuffer>> serviceCallback);
 
     /**
      * Upload file.
@@ -54,7 +55,7 @@ public interface Formdatas {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, Flowable&lt;ByteBuffer&gt;&gt;&gt;} object if successful.
      */
-    Single<RestResponse<Void, Flowable<ByteBuffer>>> uploadFileWithRestResponseAsync(Flowable<ByteBuffer> fileContent, String fileName);
+    Single<RestResponse<Void, Flowable<ByteBuffer>>> uploadFileWithRestResponseAsync(@NonNull Flowable<ByteBuffer> fileContent, @NonNull String fileName);
 
     /**
      * Upload file.
@@ -64,7 +65,7 @@ public interface Formdatas {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Maybe&lt;Flowable&lt;ByteBuffer&gt;&gt;} object if successful.
      */
-    Maybe<Flowable<ByteBuffer>> uploadFileAsync(Flowable<ByteBuffer> fileContent, String fileName);
+    Maybe<Flowable<ByteBuffer>> uploadFileAsync(@NonNull Flowable<ByteBuffer> fileContent, @NonNull String fileName);
 
     /**
      * Upload file.
@@ -75,7 +76,7 @@ public interface Formdatas {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the Flowable&lt;ByteBuffer&gt; object if successful.
      */
-    Flowable<ByteBuffer> uploadFileViaBody(Flowable<ByteBuffer> fileContent);
+    Flowable<ByteBuffer> uploadFileViaBody(@NonNull Flowable<ByteBuffer> fileContent);
 
     /**
      * Upload file.
@@ -85,7 +86,7 @@ public interface Formdatas {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Flowable&lt;ByteBuffer&gt;&gt;} object.
      */
-    ServiceFuture<Flowable<ByteBuffer>> uploadFileViaBodyAsync(Flowable<ByteBuffer> fileContent, ServiceCallback<Flowable<ByteBuffer>> serviceCallback);
+    ServiceFuture<Flowable<ByteBuffer>> uploadFileViaBodyAsync(@NonNull Flowable<ByteBuffer> fileContent, @NonNull ServiceCallback<Flowable<ByteBuffer>> serviceCallback);
 
     /**
      * Upload file.
@@ -94,7 +95,7 @@ public interface Formdatas {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, Flowable&lt;ByteBuffer&gt;&gt;&gt;} object if successful.
      */
-    Single<RestResponse<Void, Flowable<ByteBuffer>>> uploadFileViaBodyWithRestResponseAsync(Flowable<ByteBuffer> fileContent);
+    Single<RestResponse<Void, Flowable<ByteBuffer>>> uploadFileViaBodyWithRestResponseAsync(@NonNull Flowable<ByteBuffer> fileContent);
 
     /**
      * Upload file.
@@ -103,5 +104,5 @@ public interface Formdatas {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Maybe&lt;Flowable&lt;ByteBuffer&gt;&gt;} object if successful.
      */
-    Maybe<Flowable<ByteBuffer>> uploadFileViaBodyAsync(Flowable<ByteBuffer> fileContent);
+    Maybe<Flowable<ByteBuffer>> uploadFileViaBodyAsync(@NonNull Flowable<ByteBuffer> fileContent);
 }

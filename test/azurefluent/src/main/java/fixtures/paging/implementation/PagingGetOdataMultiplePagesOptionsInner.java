@@ -15,7 +15,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 /**
  * Additional parameters for getOdataMultiplePages operation.
  */
-public class PagingGetOdataMultiplePagesOptionsInner {
+public final class PagingGetOdataMultiplePagesOptionsInner {
     /**
      * Sets the maximum number of items to return in the response.
      */

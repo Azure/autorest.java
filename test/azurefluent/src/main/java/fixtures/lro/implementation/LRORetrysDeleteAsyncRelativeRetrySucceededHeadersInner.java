@@ -15,7 +15,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 /**
  * Defines headers for deleteAsyncRelativeRetrySucceeded operation.
  */
-public class LRORetrysDeleteAsyncRelativeRetrySucceededHeadersInner {
+public final class LRORetrysDeleteAsyncRelativeRetrySucceededHeadersInner {
     /**
      * Location to poll for result status: will be set to
      * /lro/retryerror/deleteasync/retry/succeeded/operationResults/200.

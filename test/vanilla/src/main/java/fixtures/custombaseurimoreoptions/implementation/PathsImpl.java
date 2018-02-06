@@ -25,12 +25,13 @@ import fixtures.custombaseurimoreoptions.Paths;
 import fixtures.custombaseurimoreoptions.models.ErrorException;
 import io.reactivex.Completable;
 import io.reactivex.Single;
+import io.reactivex.annotations.NonNull;
 
 /**
  * An instance of this class provides access to all the operations defined in
  * Paths.
  */
-public class PathsImpl implements Paths {
+public final class PathsImpl implements Paths {
     /**
      * The proxy service used to perform REST calls.
      */
@@ -73,7 +74,7 @@ public class PathsImpl implements Paths {
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
-    public void getEmpty(String vault, String secret, String keyName) {
+    public void getEmpty(@NonNull String vault, @NonNull String secret, @NonNull String keyName) {
         getEmptyAsync(vault, secret, keyName).blockingAwait();
     }
 
@@ -87,7 +88,7 @@ public class PathsImpl implements Paths {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    public ServiceFuture<Void> getEmptyAsync(String vault, String secret, String keyName, ServiceCallback<Void> serviceCallback) {
+    public ServiceFuture<Void> getEmptyAsync(@NonNull String vault, @NonNull String secret, @NonNull String keyName, @NonNull ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(getEmptyAsync(vault, secret, keyName), serviceCallback);
     }
 
@@ -100,7 +101,7 @@ public class PathsImpl implements Paths {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
      */
-    public Single<RestResponse<Void, Void>> getEmptyWithRestResponseAsync(String vault, String secret, String keyName) {
+    public Single<RestResponse<Void, Void>> getEmptyWithRestResponseAsync(@NonNull String vault, @NonNull String secret, @NonNull String keyName) {
         if (vault == null) {
             throw new IllegalArgumentException("Parameter vault is required and cannot be null.");
         }
@@ -129,7 +130,7 @@ public class PathsImpl implements Paths {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Completable} object if successful.
      */
-    public Completable getEmptyAsync(String vault, String secret, String keyName) {
+    public Completable getEmptyAsync(@NonNull String vault, @NonNull String secret, @NonNull String keyName) {
         return getEmptyWithRestResponseAsync(vault, secret, keyName)
             .toCompletable();
     }
@@ -145,7 +146,7 @@ public class PathsImpl implements Paths {
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
-    public void getEmpty(String vault, String secret, String keyName, String keyVersion) {
+    public void getEmpty(@NonNull String vault, @NonNull String secret, @NonNull String keyName, String keyVersion) {
         getEmptyAsync(vault, secret, keyName, keyVersion).blockingAwait();
     }
 
@@ -160,7 +161,7 @@ public class PathsImpl implements Paths {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    public ServiceFuture<Void> getEmptyAsync(String vault, String secret, String keyName, String keyVersion, ServiceCallback<Void> serviceCallback) {
+    public ServiceFuture<Void> getEmptyAsync(@NonNull String vault, @NonNull String secret, @NonNull String keyName, String keyVersion, @NonNull ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(getEmptyAsync(vault, secret, keyName, keyVersion), serviceCallback);
     }
 
@@ -174,7 +175,7 @@ public class PathsImpl implements Paths {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
      */
-    public Single<RestResponse<Void, Void>> getEmptyWithRestResponseAsync(String vault, String secret, String keyName, String keyVersion) {
+    public Single<RestResponse<Void, Void>> getEmptyWithRestResponseAsync(@NonNull String vault, @NonNull String secret, @NonNull String keyName, String keyVersion) {
         if (vault == null) {
             throw new IllegalArgumentException("Parameter vault is required and cannot be null.");
         }
@@ -203,7 +204,7 @@ public class PathsImpl implements Paths {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Completable} object if successful.
      */
-    public Completable getEmptyAsync(String vault, String secret, String keyName, String keyVersion) {
+    public Completable getEmptyAsync(@NonNull String vault, @NonNull String secret, @NonNull String keyName, String keyVersion) {
         return getEmptyWithRestResponseAsync(vault, secret, keyName, keyVersion)
             .toCompletable();
     }

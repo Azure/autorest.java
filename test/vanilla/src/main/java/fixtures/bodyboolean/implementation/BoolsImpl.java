@@ -25,13 +25,14 @@ import fixtures.bodyboolean.models.ErrorException;
 import io.reactivex.Completable;
 import io.reactivex.Maybe;
 import io.reactivex.Single;
+import io.reactivex.annotations.NonNull;
 import io.reactivex.functions.Function;
 
 /**
  * An instance of this class provides access to all the operations defined in
  * Bools.
  */
-public class BoolsImpl implements Bools {
+public final class BoolsImpl implements Bools {
     /**
      * The proxy service used to perform REST calls.
      */
@@ -107,7 +108,7 @@ public class BoolsImpl implements Bools {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Boolean&gt;} object.
      */
-    public ServiceFuture<Boolean> getTrueAsync(ServiceCallback<Boolean> serviceCallback) {
+    public ServiceFuture<Boolean> getTrueAsync(@NonNull ServiceCallback<Boolean> serviceCallback) {
         return ServiceFuture.fromBody(getTrueAsync(), serviceCallback);
     }
 
@@ -146,7 +147,7 @@ public class BoolsImpl implements Bools {
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
-    public void putTrue(boolean boolBody) {
+    public void putTrue(@NonNull boolean boolBody) {
         putTrueAsync(boolBody).blockingAwait();
     }
 
@@ -158,7 +159,7 @@ public class BoolsImpl implements Bools {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    public ServiceFuture<Void> putTrueAsync(boolean boolBody, ServiceCallback<Void> serviceCallback) {
+    public ServiceFuture<Void> putTrueAsync(@NonNull boolean boolBody, @NonNull ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(putTrueAsync(boolBody), serviceCallback);
     }
 
@@ -169,7 +170,7 @@ public class BoolsImpl implements Bools {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
      */
-    public Single<RestResponse<Void, Void>> putTrueWithRestResponseAsync(boolean boolBody) {
+    public Single<RestResponse<Void, Void>> putTrueWithRestResponseAsync(@NonNull boolean boolBody) {
         return service.putTrue(boolBody);
     }
 
@@ -180,7 +181,7 @@ public class BoolsImpl implements Bools {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Completable} object if successful.
      */
-    public Completable putTrueAsync(boolean boolBody) {
+    public Completable putTrueAsync(@NonNull boolean boolBody) {
         return putTrueWithRestResponseAsync(boolBody)
             .toCompletable();
     }
@@ -203,7 +204,7 @@ public class BoolsImpl implements Bools {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Boolean&gt;} object.
      */
-    public ServiceFuture<Boolean> getFalseAsync(ServiceCallback<Boolean> serviceCallback) {
+    public ServiceFuture<Boolean> getFalseAsync(@NonNull ServiceCallback<Boolean> serviceCallback) {
         return ServiceFuture.fromBody(getFalseAsync(), serviceCallback);
     }
 
@@ -242,7 +243,7 @@ public class BoolsImpl implements Bools {
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
-    public void putFalse(boolean boolBody) {
+    public void putFalse(@NonNull boolean boolBody) {
         putFalseAsync(boolBody).blockingAwait();
     }
 
@@ -254,7 +255,7 @@ public class BoolsImpl implements Bools {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    public ServiceFuture<Void> putFalseAsync(boolean boolBody, ServiceCallback<Void> serviceCallback) {
+    public ServiceFuture<Void> putFalseAsync(@NonNull boolean boolBody, @NonNull ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(putFalseAsync(boolBody), serviceCallback);
     }
 
@@ -265,7 +266,7 @@ public class BoolsImpl implements Bools {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
      */
-    public Single<RestResponse<Void, Void>> putFalseWithRestResponseAsync(boolean boolBody) {
+    public Single<RestResponse<Void, Void>> putFalseWithRestResponseAsync(@NonNull boolean boolBody) {
         return service.putFalse(boolBody);
     }
 
@@ -276,7 +277,7 @@ public class BoolsImpl implements Bools {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Completable} object if successful.
      */
-    public Completable putFalseAsync(boolean boolBody) {
+    public Completable putFalseAsync(@NonNull boolean boolBody) {
         return putFalseWithRestResponseAsync(boolBody)
             .toCompletable();
     }
@@ -299,7 +300,7 @@ public class BoolsImpl implements Bools {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Boolean&gt;} object.
      */
-    public ServiceFuture<Boolean> getNullAsync(ServiceCallback<Boolean> serviceCallback) {
+    public ServiceFuture<Boolean> getNullAsync(@NonNull ServiceCallback<Boolean> serviceCallback) {
         return ServiceFuture.fromBody(getNullAsync(), serviceCallback);
     }
 
@@ -348,7 +349,7 @@ public class BoolsImpl implements Bools {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Boolean&gt;} object.
      */
-    public ServiceFuture<Boolean> getInvalidAsync(ServiceCallback<Boolean> serviceCallback) {
+    public ServiceFuture<Boolean> getInvalidAsync(@NonNull ServiceCallback<Boolean> serviceCallback) {
         return ServiceFuture.fromBody(getInvalidAsync(), serviceCallback);
     }
 

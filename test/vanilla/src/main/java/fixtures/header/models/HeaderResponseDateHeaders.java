@@ -16,7 +16,7 @@ import org.joda.time.LocalDate;
 /**
  * Defines headers for responseDate operation.
  */
-public class HeaderResponseDateHeaders {
+public final class HeaderResponseDateHeaders {
     /**
      * response with header values "2010-01-01" or "0001-01-01".
      */

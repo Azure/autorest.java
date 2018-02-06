@@ -25,13 +25,14 @@ import fixtures.azurespecials.ErrorException;
 import io.reactivex.Completable;
 import io.reactivex.Maybe;
 import io.reactivex.Single;
+import io.reactivex.annotations.NonNull;
 import io.reactivex.functions.Function;
 
 /**
  * An instance of this class provides access to all the operations defined in
  * Headers.
  */
-public class HeadersInner {
+public final class HeadersInner {
     /**
      * The proxy service used to perform REST calls.
      */
@@ -82,7 +83,7 @@ public class HeadersInner {
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
-    public void customNamedRequestId(String fooClientRequestId) {
+    public void customNamedRequestId(@NonNull String fooClientRequestId) {
         customNamedRequestIdAsync(fooClientRequestId).blockingAwait();
     }
 
@@ -94,7 +95,7 @@ public class HeadersInner {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    public ServiceFuture<Void> customNamedRequestIdAsync(String fooClientRequestId, ServiceCallback<Void> serviceCallback) {
+    public ServiceFuture<Void> customNamedRequestIdAsync(@NonNull String fooClientRequestId, @NonNull ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(customNamedRequestIdAsync(fooClientRequestId), serviceCallback);
     }
 
@@ -105,7 +106,7 @@ public class HeadersInner {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;HeaderCustomNamedRequestIdHeadersInner, Void&gt;&gt;} object if successful.
      */
-    public Single<RestResponse<HeaderCustomNamedRequestIdHeadersInner, Void>> customNamedRequestIdWithRestResponseAsync(String fooClientRequestId) {
+    public Single<RestResponse<HeaderCustomNamedRequestIdHeadersInner, Void>> customNamedRequestIdWithRestResponseAsync(@NonNull String fooClientRequestId) {
         if (fooClientRequestId == null) {
             throw new IllegalArgumentException("Parameter fooClientRequestId is required and cannot be null.");
         }
@@ -119,7 +120,7 @@ public class HeadersInner {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Completable} object if successful.
      */
-    public Completable customNamedRequestIdAsync(String fooClientRequestId) {
+    public Completable customNamedRequestIdAsync(@NonNull String fooClientRequestId) {
         return customNamedRequestIdWithRestResponseAsync(fooClientRequestId)
             .toCompletable();
     }
@@ -132,7 +133,7 @@ public class HeadersInner {
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
-    public void customNamedRequestIdParamGrouping(HeaderCustomNamedRequestIdParamGroupingParametersInner headerCustomNamedRequestIdParamGroupingParameters) {
+    public void customNamedRequestIdParamGrouping(@NonNull HeaderCustomNamedRequestIdParamGroupingParametersInner headerCustomNamedRequestIdParamGroupingParameters) {
         customNamedRequestIdParamGroupingAsync(headerCustomNamedRequestIdParamGroupingParameters).blockingAwait();
     }
 
@@ -144,7 +145,7 @@ public class HeadersInner {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    public ServiceFuture<Void> customNamedRequestIdParamGroupingAsync(HeaderCustomNamedRequestIdParamGroupingParametersInner headerCustomNamedRequestIdParamGroupingParameters, ServiceCallback<Void> serviceCallback) {
+    public ServiceFuture<Void> customNamedRequestIdParamGroupingAsync(@NonNull HeaderCustomNamedRequestIdParamGroupingParametersInner headerCustomNamedRequestIdParamGroupingParameters, @NonNull ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(customNamedRequestIdParamGroupingAsync(headerCustomNamedRequestIdParamGroupingParameters), serviceCallback);
     }
 
@@ -155,7 +156,7 @@ public class HeadersInner {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;HeaderCustomNamedRequestIdParamGroupingHeadersInner, Void&gt;&gt;} object if successful.
      */
-    public Single<RestResponse<HeaderCustomNamedRequestIdParamGroupingHeadersInner, Void>> customNamedRequestIdParamGroupingWithRestResponseAsync(HeaderCustomNamedRequestIdParamGroupingParametersInner headerCustomNamedRequestIdParamGroupingParameters) {
+    public Single<RestResponse<HeaderCustomNamedRequestIdParamGroupingHeadersInner, Void>> customNamedRequestIdParamGroupingWithRestResponseAsync(@NonNull HeaderCustomNamedRequestIdParamGroupingParametersInner headerCustomNamedRequestIdParamGroupingParameters) {
         if (headerCustomNamedRequestIdParamGroupingParameters == null) {
             throw new IllegalArgumentException("Parameter headerCustomNamedRequestIdParamGroupingParameters is required and cannot be null.");
         }
@@ -171,7 +172,7 @@ public class HeadersInner {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Completable} object if successful.
      */
-    public Completable customNamedRequestIdParamGroupingAsync(HeaderCustomNamedRequestIdParamGroupingParametersInner headerCustomNamedRequestIdParamGroupingParameters) {
+    public Completable customNamedRequestIdParamGroupingAsync(@NonNull HeaderCustomNamedRequestIdParamGroupingParametersInner headerCustomNamedRequestIdParamGroupingParameters) {
         return customNamedRequestIdParamGroupingWithRestResponseAsync(headerCustomNamedRequestIdParamGroupingParameters)
             .toCompletable();
     }
@@ -185,7 +186,7 @@ public class HeadersInner {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the boolean object if successful.
      */
-    public boolean customNamedRequestIdHead(String fooClientRequestId) {
+    public boolean customNamedRequestIdHead(@NonNull String fooClientRequestId) {
         return customNamedRequestIdHeadAsync(fooClientRequestId).blockingGet();
     }
 
@@ -197,7 +198,7 @@ public class HeadersInner {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Boolean&gt;} object.
      */
-    public ServiceFuture<Boolean> customNamedRequestIdHeadAsync(String fooClientRequestId, ServiceCallback<Boolean> serviceCallback) {
+    public ServiceFuture<Boolean> customNamedRequestIdHeadAsync(@NonNull String fooClientRequestId, @NonNull ServiceCallback<Boolean> serviceCallback) {
         return ServiceFuture.fromBody(customNamedRequestIdHeadAsync(fooClientRequestId), serviceCallback);
     }
 
@@ -208,7 +209,7 @@ public class HeadersInner {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;HeaderCustomNamedRequestIdHeadHeadersInner, Boolean&gt;&gt;} object if successful.
      */
-    public Single<RestResponse<HeaderCustomNamedRequestIdHeadHeadersInner, Boolean>> customNamedRequestIdHeadWithRestResponseAsync(String fooClientRequestId) {
+    public Single<RestResponse<HeaderCustomNamedRequestIdHeadHeadersInner, Boolean>> customNamedRequestIdHeadWithRestResponseAsync(@NonNull String fooClientRequestId) {
         if (fooClientRequestId == null) {
             throw new IllegalArgumentException("Parameter fooClientRequestId is required and cannot be null.");
         }
@@ -222,7 +223,7 @@ public class HeadersInner {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Maybe&lt;Boolean&gt;} object if successful.
      */
-    public Maybe<Boolean> customNamedRequestIdHeadAsync(String fooClientRequestId) {
+    public Maybe<Boolean> customNamedRequestIdHeadAsync(@NonNull String fooClientRequestId) {
         return customNamedRequestIdHeadWithRestResponseAsync(fooClientRequestId)
             .flatMapMaybe(new Function<RestResponse<HeaderCustomNamedRequestIdHeadHeadersInner, Boolean>, Maybe<Boolean>>() {
                 public Maybe<Boolean> apply(RestResponse<HeaderCustomNamedRequestIdHeadHeadersInner, Boolean> restResponse) {

@@ -15,7 +15,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 /**
  * The Generic URL.
  */
-public class GenericUrl {
+public final class GenericUrl {
     /**
      * Generic URL value.
      */

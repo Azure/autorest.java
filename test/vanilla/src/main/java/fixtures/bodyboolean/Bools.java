@@ -16,6 +16,7 @@ import com.microsoft.rest.v2.ServiceFuture;
 import io.reactivex.Completable;
 import io.reactivex.Maybe;
 import io.reactivex.Single;
+import io.reactivex.annotations.NonNull;
 
 /**
  * An instance of this class provides access to all the operations defined in
@@ -38,7 +39,7 @@ public interface Bools {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Boolean&gt;} object.
      */
-    ServiceFuture<Boolean> getTrueAsync(ServiceCallback<Boolean> serviceCallback);
+    ServiceFuture<Boolean> getTrueAsync(@NonNull ServiceCallback<Boolean> serviceCallback);
 
     /**
      * Get true Boolean value.
@@ -62,7 +63,7 @@ public interface Bools {
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
-    void putTrue(boolean boolBody);
+    void putTrue(@NonNull boolean boolBody);
 
     /**
      * Set Boolean value true.
@@ -72,7 +73,7 @@ public interface Bools {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    ServiceFuture<Void> putTrueAsync(boolean boolBody, ServiceCallback<Void> serviceCallback);
+    ServiceFuture<Void> putTrueAsync(@NonNull boolean boolBody, @NonNull ServiceCallback<Void> serviceCallback);
 
     /**
      * Set Boolean value true.
@@ -81,7 +82,7 @@ public interface Bools {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
      */
-    Single<RestResponse<Void, Void>> putTrueWithRestResponseAsync(boolean boolBody);
+    Single<RestResponse<Void, Void>> putTrueWithRestResponseAsync(@NonNull boolean boolBody);
 
     /**
      * Set Boolean value true.
@@ -90,7 +91,7 @@ public interface Bools {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Completable} object if successful.
      */
-    Completable putTrueAsync(boolean boolBody);
+    Completable putTrueAsync(@NonNull boolean boolBody);
 
     /**
      * Get false Boolean value.
@@ -108,7 +109,7 @@ public interface Bools {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Boolean&gt;} object.
      */
-    ServiceFuture<Boolean> getFalseAsync(ServiceCallback<Boolean> serviceCallback);
+    ServiceFuture<Boolean> getFalseAsync(@NonNull ServiceCallback<Boolean> serviceCallback);
 
     /**
      * Get false Boolean value.
@@ -132,7 +133,7 @@ public interface Bools {
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
-    void putFalse(boolean boolBody);
+    void putFalse(@NonNull boolean boolBody);
 
     /**
      * Set Boolean value false.
@@ -142,7 +143,7 @@ public interface Bools {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    ServiceFuture<Void> putFalseAsync(boolean boolBody, ServiceCallback<Void> serviceCallback);
+    ServiceFuture<Void> putFalseAsync(@NonNull boolean boolBody, @NonNull ServiceCallback<Void> serviceCallback);
 
     /**
      * Set Boolean value false.
@@ -151,7 +152,7 @@ public interface Bools {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
      */
-    Single<RestResponse<Void, Void>> putFalseWithRestResponseAsync(boolean boolBody);
+    Single<RestResponse<Void, Void>> putFalseWithRestResponseAsync(@NonNull boolean boolBody);
 
     /**
      * Set Boolean value false.
@@ -160,7 +161,7 @@ public interface Bools {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Completable} object if successful.
      */
-    Completable putFalseAsync(boolean boolBody);
+    Completable putFalseAsync(@NonNull boolean boolBody);
 
     /**
      * Get null Boolean value.
@@ -178,7 +179,7 @@ public interface Bools {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Boolean&gt;} object.
      */
-    ServiceFuture<Boolean> getNullAsync(ServiceCallback<Boolean> serviceCallback);
+    ServiceFuture<Boolean> getNullAsync(@NonNull ServiceCallback<Boolean> serviceCallback);
 
     /**
      * Get null Boolean value.
@@ -210,7 +211,7 @@ public interface Bools {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Boolean&gt;} object.
      */
-    ServiceFuture<Boolean> getInvalidAsync(ServiceCallback<Boolean> serviceCallback);
+    ServiceFuture<Boolean> getInvalidAsync(@NonNull ServiceCallback<Boolean> serviceCallback);
 
     /**
      * Get invalid Boolean value.

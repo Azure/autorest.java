@@ -15,7 +15,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 /**
  * Defines headers for deleteNoHeaderInRetry operation.
  */
-public class LROsDeleteNoHeaderInRetryHeaders {
+public final class LROsDeleteNoHeaderInRetryHeaders {
     /**
      * Location to poll for result status: will be set to
      * /lro/put/noheader/202/204/operationresults.

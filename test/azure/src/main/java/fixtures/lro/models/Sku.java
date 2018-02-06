@@ -15,7 +15,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 /**
  * The Sku model.
  */
-public class Sku {
+public final class Sku {
     /**
      * The name property.
      */

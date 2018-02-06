@@ -15,7 +15,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 /**
  * Additional parameters for postOptional operation.
  */
-public class ParameterGroupingPostOptionalParameters {
+public final class ParameterGroupingPostOptionalParameters {
     /**
      * The customHeader property.
      */

@@ -28,13 +28,14 @@ import fixtures.bodycomplex.models.ErrorException;
 import io.reactivex.Completable;
 import io.reactivex.Maybe;
 import io.reactivex.Single;
+import io.reactivex.annotations.NonNull;
 import io.reactivex.functions.Function;
 
 /**
  * An instance of this class provides access to all the operations defined in
  * Basics.
  */
-public class BasicsImpl implements Basics {
+public final class BasicsImpl implements Basics {
     /**
      * The proxy service used to perform REST calls.
      */
@@ -110,7 +111,7 @@ public class BasicsImpl implements Basics {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Basic&gt;} object.
      */
-    public ServiceFuture<Basic> getValidAsync(ServiceCallback<Basic> serviceCallback) {
+    public ServiceFuture<Basic> getValidAsync(@NonNull ServiceCallback<Basic> serviceCallback) {
         return ServiceFuture.fromBody(getValidAsync(), serviceCallback);
     }
 
@@ -149,7 +150,7 @@ public class BasicsImpl implements Basics {
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
-    public void putValid(Basic complexBody) {
+    public void putValid(@NonNull Basic complexBody) {
         putValidAsync(complexBody).blockingAwait();
     }
 
@@ -161,7 +162,7 @@ public class BasicsImpl implements Basics {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    public ServiceFuture<Void> putValidAsync(Basic complexBody, ServiceCallback<Void> serviceCallback) {
+    public ServiceFuture<Void> putValidAsync(@NonNull Basic complexBody, @NonNull ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(putValidAsync(complexBody), serviceCallback);
     }
 
@@ -172,7 +173,7 @@ public class BasicsImpl implements Basics {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
      */
-    public Single<RestResponse<Void, Void>> putValidWithRestResponseAsync(Basic complexBody) {
+    public Single<RestResponse<Void, Void>> putValidWithRestResponseAsync(@NonNull Basic complexBody) {
         if (complexBody == null) {
             throw new IllegalArgumentException("Parameter complexBody is required and cannot be null.");
         }
@@ -187,7 +188,7 @@ public class BasicsImpl implements Basics {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Completable} object if successful.
      */
-    public Completable putValidAsync(Basic complexBody) {
+    public Completable putValidAsync(@NonNull Basic complexBody) {
         return putValidWithRestResponseAsync(complexBody)
             .toCompletable();
     }
@@ -210,7 +211,7 @@ public class BasicsImpl implements Basics {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Basic&gt;} object.
      */
-    public ServiceFuture<Basic> getInvalidAsync(ServiceCallback<Basic> serviceCallback) {
+    public ServiceFuture<Basic> getInvalidAsync(@NonNull ServiceCallback<Basic> serviceCallback) {
         return ServiceFuture.fromBody(getInvalidAsync(), serviceCallback);
     }
 
@@ -259,7 +260,7 @@ public class BasicsImpl implements Basics {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Basic&gt;} object.
      */
-    public ServiceFuture<Basic> getEmptyAsync(ServiceCallback<Basic> serviceCallback) {
+    public ServiceFuture<Basic> getEmptyAsync(@NonNull ServiceCallback<Basic> serviceCallback) {
         return ServiceFuture.fromBody(getEmptyAsync(), serviceCallback);
     }
 
@@ -308,7 +309,7 @@ public class BasicsImpl implements Basics {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Basic&gt;} object.
      */
-    public ServiceFuture<Basic> getNullAsync(ServiceCallback<Basic> serviceCallback) {
+    public ServiceFuture<Basic> getNullAsync(@NonNull ServiceCallback<Basic> serviceCallback) {
         return ServiceFuture.fromBody(getNullAsync(), serviceCallback);
     }
 
@@ -357,7 +358,7 @@ public class BasicsImpl implements Basics {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Basic&gt;} object.
      */
-    public ServiceFuture<Basic> getNotProvidedAsync(ServiceCallback<Basic> serviceCallback) {
+    public ServiceFuture<Basic> getNotProvidedAsync(@NonNull ServiceCallback<Basic> serviceCallback) {
         return ServiceFuture.fromBody(getNotProvidedAsync(), serviceCallback);
     }
 

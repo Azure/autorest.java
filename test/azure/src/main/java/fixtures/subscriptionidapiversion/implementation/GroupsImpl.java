@@ -26,13 +26,14 @@ import fixtures.subscriptionidapiversion.models.ErrorException;
 import fixtures.subscriptionidapiversion.models.SampleResourceGroup;
 import io.reactivex.Maybe;
 import io.reactivex.Single;
+import io.reactivex.annotations.NonNull;
 import io.reactivex.functions.Function;
 
 /**
  * An instance of this class provides access to all the operations defined in
  * Groups.
  */
-public class GroupsImpl implements Groups {
+public final class GroupsImpl implements Groups {
     /**
      * The proxy service used to perform REST calls.
      */
@@ -74,7 +75,7 @@ public class GroupsImpl implements Groups {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the SampleResourceGroup object if successful.
      */
-    public SampleResourceGroup getSampleResourceGroup(String resourceGroupName) {
+    public SampleResourceGroup getSampleResourceGroup(@NonNull String resourceGroupName) {
         return getSampleResourceGroupAsync(resourceGroupName).blockingGet();
     }
 
@@ -86,7 +87,7 @@ public class GroupsImpl implements Groups {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;SampleResourceGroup&gt;} object.
      */
-    public ServiceFuture<SampleResourceGroup> getSampleResourceGroupAsync(String resourceGroupName, ServiceCallback<SampleResourceGroup> serviceCallback) {
+    public ServiceFuture<SampleResourceGroup> getSampleResourceGroupAsync(@NonNull String resourceGroupName, @NonNull ServiceCallback<SampleResourceGroup> serviceCallback) {
         return ServiceFuture.fromBody(getSampleResourceGroupAsync(resourceGroupName), serviceCallback);
     }
 
@@ -97,7 +98,7 @@ public class GroupsImpl implements Groups {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, SampleResourceGroup&gt;&gt;} object if successful.
      */
-    public Single<RestResponse<Void, SampleResourceGroup>> getSampleResourceGroupWithRestResponseAsync(String resourceGroupName) {
+    public Single<RestResponse<Void, SampleResourceGroup>> getSampleResourceGroupWithRestResponseAsync(@NonNull String resourceGroupName) {
         if (this.client.subscriptionId() == null) {
             throw new IllegalArgumentException("Parameter this.client.subscriptionId() is required and cannot be null.");
         }
@@ -117,7 +118,7 @@ public class GroupsImpl implements Groups {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Maybe&lt;SampleResourceGroup&gt;} object if successful.
      */
-    public Maybe<SampleResourceGroup> getSampleResourceGroupAsync(String resourceGroupName) {
+    public Maybe<SampleResourceGroup> getSampleResourceGroupAsync(@NonNull String resourceGroupName) {
         return getSampleResourceGroupWithRestResponseAsync(resourceGroupName)
             .flatMapMaybe(new Function<RestResponse<Void, SampleResourceGroup>, Maybe<SampleResourceGroup>>() {
                 public Maybe<SampleResourceGroup> apply(RestResponse<Void, SampleResourceGroup> restResponse) {

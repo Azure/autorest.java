@@ -15,11 +15,12 @@ import com.microsoft.rest.v2.ServiceClient;
 import com.microsoft.rest.v2.http.HttpPipeline;
 import fixtures.parameterflattening.AutoRestParameterFlattening;
 import fixtures.parameterflattening.AvailabilitySets;
+import io.reactivex.annotations.NonNull;
 
 /**
  * Initializes a new instance of the AutoRestParameterFlattening type.
  */
-public class AutoRestParameterFlatteningImpl extends ServiceClient implements AutoRestParameterFlattening {
+public final class AutoRestParameterFlatteningImpl extends ServiceClient implements AutoRestParameterFlattening {
     /**
      * The AvailabilitySets object to access its operations.
      */
@@ -46,7 +47,7 @@ public class AutoRestParameterFlatteningImpl extends ServiceClient implements Au
      *
      * @param httpPipeline The HTTP pipeline to send requests through.
      */
-    public AutoRestParameterFlatteningImpl(HttpPipeline httpPipeline) {
+    public AutoRestParameterFlatteningImpl(@NonNull HttpPipeline httpPipeline) {
         super(httpPipeline);
         this.availabilitySets = new AvailabilitySetsImpl(this);
     }

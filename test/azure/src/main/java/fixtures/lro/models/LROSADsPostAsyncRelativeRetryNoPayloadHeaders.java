@@ -15,7 +15,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 /**
  * Defines headers for postAsyncRelativeRetryNoPayload operation.
  */
-public class LROSADsPostAsyncRelativeRetryNoPayloadHeaders {
+public final class LROSADsPostAsyncRelativeRetryNoPayloadHeaders {
     /**
      * Location to poll for result status: will be set to
      * /lro/error/putasync/retry/failed/operationResults/nopayload.

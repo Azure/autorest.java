@@ -15,7 +15,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 /**
  * The Dog model.
  */
-public class Dog extends Pet {
+public final class Dog extends Pet {
     /**
      * The food property.
      */

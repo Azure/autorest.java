@@ -23,12 +23,13 @@ import com.microsoft.rest.v2.annotations.UnexpectedResponseExceptionType;
 import fixtures.azurespecials.ErrorException;
 import io.reactivex.Completable;
 import io.reactivex.Single;
+import io.reactivex.annotations.NonNull;
 
 /**
  * An instance of this class provides access to all the operations defined in
  * XMsClientRequestIds.
  */
-public class XMsClientRequestIdsInner {
+public final class XMsClientRequestIdsInner {
     /**
      * The proxy service used to perform REST calls.
      */
@@ -83,7 +84,7 @@ public class XMsClientRequestIdsInner {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    public ServiceFuture<Void> getAsync(ServiceCallback<Void> serviceCallback) {
+    public ServiceFuture<Void> getAsync(@NonNull ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(getAsync(), serviceCallback);
     }
 
@@ -114,7 +115,7 @@ public class XMsClientRequestIdsInner {
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
-    public void paramGet(String xMsClientRequestId) {
+    public void paramGet(@NonNull String xMsClientRequestId) {
         paramGetAsync(xMsClientRequestId).blockingAwait();
     }
 
@@ -126,7 +127,7 @@ public class XMsClientRequestIdsInner {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    public ServiceFuture<Void> paramGetAsync(String xMsClientRequestId, ServiceCallback<Void> serviceCallback) {
+    public ServiceFuture<Void> paramGetAsync(@NonNull String xMsClientRequestId, @NonNull ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(paramGetAsync(xMsClientRequestId), serviceCallback);
     }
 
@@ -137,7 +138,7 @@ public class XMsClientRequestIdsInner {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
      */
-    public Single<RestResponse<Void, Void>> paramGetWithRestResponseAsync(String xMsClientRequestId) {
+    public Single<RestResponse<Void, Void>> paramGetWithRestResponseAsync(@NonNull String xMsClientRequestId) {
         if (xMsClientRequestId == null) {
             throw new IllegalArgumentException("Parameter xMsClientRequestId is required and cannot be null.");
         }
@@ -151,7 +152,7 @@ public class XMsClientRequestIdsInner {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Completable} object if successful.
      */
-    public Completable paramGetAsync(String xMsClientRequestId) {
+    public Completable paramGetAsync(@NonNull String xMsClientRequestId) {
         return paramGetWithRestResponseAsync(xMsClientRequestId)
             .toCompletable();
     }

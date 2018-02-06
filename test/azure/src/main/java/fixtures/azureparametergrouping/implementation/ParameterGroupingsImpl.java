@@ -31,12 +31,13 @@ import fixtures.azureparametergrouping.models.ParameterGroupingPostOptionalParam
 import fixtures.azureparametergrouping.models.ParameterGroupingPostRequiredParameters;
 import io.reactivex.Completable;
 import io.reactivex.Single;
+import io.reactivex.annotations.NonNull;
 
 /**
  * An instance of this class provides access to all the operations defined in
  * ParameterGroupings.
  */
-public class ParameterGroupingsImpl implements ParameterGroupings {
+public final class ParameterGroupingsImpl implements ParameterGroupings {
     /**
      * The proxy service used to perform REST calls.
      */
@@ -92,7 +93,7 @@ public class ParameterGroupingsImpl implements ParameterGroupings {
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
-    public void postRequired(ParameterGroupingPostRequiredParameters parameterGroupingPostRequiredParameters) {
+    public void postRequired(@NonNull ParameterGroupingPostRequiredParameters parameterGroupingPostRequiredParameters) {
         postRequiredAsync(parameterGroupingPostRequiredParameters).blockingAwait();
     }
 
@@ -104,7 +105,7 @@ public class ParameterGroupingsImpl implements ParameterGroupings {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    public ServiceFuture<Void> postRequiredAsync(ParameterGroupingPostRequiredParameters parameterGroupingPostRequiredParameters, ServiceCallback<Void> serviceCallback) {
+    public ServiceFuture<Void> postRequiredAsync(@NonNull ParameterGroupingPostRequiredParameters parameterGroupingPostRequiredParameters, @NonNull ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(postRequiredAsync(parameterGroupingPostRequiredParameters), serviceCallback);
     }
 
@@ -115,7 +116,7 @@ public class ParameterGroupingsImpl implements ParameterGroupings {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
      */
-    public Single<RestResponse<Void, Void>> postRequiredWithRestResponseAsync(ParameterGroupingPostRequiredParameters parameterGroupingPostRequiredParameters) {
+    public Single<RestResponse<Void, Void>> postRequiredWithRestResponseAsync(@NonNull ParameterGroupingPostRequiredParameters parameterGroupingPostRequiredParameters) {
         if (parameterGroupingPostRequiredParameters == null) {
             throw new IllegalArgumentException("Parameter parameterGroupingPostRequiredParameters is required and cannot be null.");
         }
@@ -134,7 +135,7 @@ public class ParameterGroupingsImpl implements ParameterGroupings {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Completable} object if successful.
      */
-    public Completable postRequiredAsync(ParameterGroupingPostRequiredParameters parameterGroupingPostRequiredParameters) {
+    public Completable postRequiredAsync(@NonNull ParameterGroupingPostRequiredParameters parameterGroupingPostRequiredParameters) {
         return postRequiredWithRestResponseAsync(parameterGroupingPostRequiredParameters)
             .toCompletable();
     }
@@ -156,7 +157,7 @@ public class ParameterGroupingsImpl implements ParameterGroupings {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    public ServiceFuture<Void> postOptionalAsync(ServiceCallback<Void> serviceCallback) {
+    public ServiceFuture<Void> postOptionalAsync(@NonNull ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(postOptionalAsync(), serviceCallback);
     }
 
@@ -202,7 +203,7 @@ public class ParameterGroupingsImpl implements ParameterGroupings {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    public ServiceFuture<Void> postOptionalAsync(ParameterGroupingPostOptionalParameters parameterGroupingPostOptionalParameters, ServiceCallback<Void> serviceCallback) {
+    public ServiceFuture<Void> postOptionalAsync(ParameterGroupingPostOptionalParameters parameterGroupingPostOptionalParameters, @NonNull ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(postOptionalAsync(parameterGroupingPostOptionalParameters), serviceCallback);
     }
 
@@ -255,7 +256,7 @@ public class ParameterGroupingsImpl implements ParameterGroupings {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    public ServiceFuture<Void> postMultiParamGroupsAsync(ServiceCallback<Void> serviceCallback) {
+    public ServiceFuture<Void> postMultiParamGroupsAsync(@NonNull ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(postMultiParamGroupsAsync(), serviceCallback);
     }
 
@@ -306,7 +307,7 @@ public class ParameterGroupingsImpl implements ParameterGroupings {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    public ServiceFuture<Void> postMultiParamGroupsAsync(FirstParameterGroup firstParameterGroup, ParameterGroupingPostMultiParamGroupsSecondParamGroup parameterGroupingPostMultiParamGroupsSecondParamGroup, ServiceCallback<Void> serviceCallback) {
+    public ServiceFuture<Void> postMultiParamGroupsAsync(FirstParameterGroup firstParameterGroup, ParameterGroupingPostMultiParamGroupsSecondParamGroup parameterGroupingPostMultiParamGroupsSecondParamGroup, @NonNull ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(postMultiParamGroupsAsync(firstParameterGroup, parameterGroupingPostMultiParamGroupsSecondParamGroup), serviceCallback);
     }
 
@@ -370,7 +371,7 @@ public class ParameterGroupingsImpl implements ParameterGroupings {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    public ServiceFuture<Void> postSharedParameterGroupObjectAsync(ServiceCallback<Void> serviceCallback) {
+    public ServiceFuture<Void> postSharedParameterGroupObjectAsync(@NonNull ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(postSharedParameterGroupObjectAsync(), serviceCallback);
     }
 
@@ -416,7 +417,7 @@ public class ParameterGroupingsImpl implements ParameterGroupings {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    public ServiceFuture<Void> postSharedParameterGroupObjectAsync(FirstParameterGroup firstParameterGroup, ServiceCallback<Void> serviceCallback) {
+    public ServiceFuture<Void> postSharedParameterGroupObjectAsync(FirstParameterGroup firstParameterGroup, @NonNull ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(postSharedParameterGroupObjectAsync(firstParameterGroup), serviceCallback);
     }
 

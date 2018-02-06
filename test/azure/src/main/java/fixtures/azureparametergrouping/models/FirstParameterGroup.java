@@ -17,7 +17,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
  * ParameterGrouping_postMultiParamGroups,
  * ParameterGrouping_postSharedParameterGroupObject.
  */
-public class FirstParameterGroup {
+public final class FirstParameterGroup {
     /**
      * The headerOne property.
      */

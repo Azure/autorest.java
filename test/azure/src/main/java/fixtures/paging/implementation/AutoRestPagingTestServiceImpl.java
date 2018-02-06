@@ -17,11 +17,12 @@ import com.microsoft.rest.v2.credentials.ServiceClientCredentials;
 import com.microsoft.rest.v2.http.HttpPipeline;
 import fixtures.paging.AutoRestPagingTestService;
 import fixtures.paging.Pagings;
+import io.reactivex.annotations.NonNull;
 
 /**
  * Initializes a new instance of the AutoRestPagingTestService type.
  */
-public class AutoRestPagingTestServiceImpl extends AzureServiceClient implements AutoRestPagingTestService {
+public final class AutoRestPagingTestServiceImpl extends AzureServiceClient implements AutoRestPagingTestService {
     /**
      * Gets or sets the preferred language for the response.
      */
@@ -116,7 +117,7 @@ public class AutoRestPagingTestServiceImpl extends AzureServiceClient implements
      *
      * @param credentials the management credentials for Azure.
      */
-    public AutoRestPagingTestServiceImpl(ServiceClientCredentials credentials) {
+    public AutoRestPagingTestServiceImpl(@NonNull ServiceClientCredentials credentials) {
         this(AzureProxy.createDefaultPipeline(AutoRestPagingTestServiceImpl.class, credentials));
     }
 
@@ -126,7 +127,7 @@ public class AutoRestPagingTestServiceImpl extends AzureServiceClient implements
      * @param credentials the management credentials for Azure.
      * @param azureEnvironment The environment that requests will target.
      */
-    public AutoRestPagingTestServiceImpl(ServiceClientCredentials credentials, AzureEnvironment azureEnvironment) {
+    public AutoRestPagingTestServiceImpl(@NonNull ServiceClientCredentials credentials, @NonNull AzureEnvironment azureEnvironment) {
         this(AzureProxy.createDefaultPipeline(AutoRestPagingTestServiceImpl.class, credentials), azureEnvironment);
     }
 
@@ -135,7 +136,7 @@ public class AutoRestPagingTestServiceImpl extends AzureServiceClient implements
      *
      * @param httpPipeline The HTTP pipeline to send requests through.
      */
-    public AutoRestPagingTestServiceImpl(HttpPipeline httpPipeline) {
+    public AutoRestPagingTestServiceImpl(@NonNull HttpPipeline httpPipeline) {
         this(httpPipeline, null);
     }
 
@@ -145,7 +146,7 @@ public class AutoRestPagingTestServiceImpl extends AzureServiceClient implements
      * @param httpPipeline The HTTP pipeline to send requests through.
      * @param azureEnvironment The environment that requests will target.
      */
-    public AutoRestPagingTestServiceImpl(HttpPipeline httpPipeline, AzureEnvironment azureEnvironment) {
+    public AutoRestPagingTestServiceImpl(@NonNull HttpPipeline httpPipeline, @NonNull AzureEnvironment azureEnvironment) {
         super(httpPipeline, azureEnvironment);
         this.acceptLanguage = "en-US";
         this.longRunningOperationRetryTimeout = 30;

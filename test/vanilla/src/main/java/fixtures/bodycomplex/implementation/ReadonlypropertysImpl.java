@@ -27,13 +27,14 @@ import fixtures.bodycomplex.models.ReadonlyObj;
 import io.reactivex.Completable;
 import io.reactivex.Maybe;
 import io.reactivex.Single;
+import io.reactivex.annotations.NonNull;
 import io.reactivex.functions.Function;
 
 /**
  * An instance of this class provides access to all the operations defined in
  * Readonlypropertys.
  */
-public class ReadonlypropertysImpl implements Readonlypropertys {
+public final class ReadonlypropertysImpl implements Readonlypropertys {
     /**
      * The proxy service used to perform REST calls.
      */
@@ -89,7 +90,7 @@ public class ReadonlypropertysImpl implements Readonlypropertys {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;ReadonlyObj&gt;} object.
      */
-    public ServiceFuture<ReadonlyObj> getValidAsync(ServiceCallback<ReadonlyObj> serviceCallback) {
+    public ServiceFuture<ReadonlyObj> getValidAsync(@NonNull ServiceCallback<ReadonlyObj> serviceCallback) {
         return ServiceFuture.fromBody(getValidAsync(), serviceCallback);
     }
 
@@ -128,7 +129,7 @@ public class ReadonlypropertysImpl implements Readonlypropertys {
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
-    public void putValid(ReadonlyObj complexBody) {
+    public void putValid(@NonNull ReadonlyObj complexBody) {
         putValidAsync(complexBody).blockingAwait();
     }
 
@@ -140,7 +141,7 @@ public class ReadonlypropertysImpl implements Readonlypropertys {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    public ServiceFuture<Void> putValidAsync(ReadonlyObj complexBody, ServiceCallback<Void> serviceCallback) {
+    public ServiceFuture<Void> putValidAsync(@NonNull ReadonlyObj complexBody, @NonNull ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(putValidAsync(complexBody), serviceCallback);
     }
 
@@ -151,7 +152,7 @@ public class ReadonlypropertysImpl implements Readonlypropertys {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
      */
-    public Single<RestResponse<Void, Void>> putValidWithRestResponseAsync(ReadonlyObj complexBody) {
+    public Single<RestResponse<Void, Void>> putValidWithRestResponseAsync(@NonNull ReadonlyObj complexBody) {
         if (complexBody == null) {
             throw new IllegalArgumentException("Parameter complexBody is required and cannot be null.");
         }
@@ -166,7 +167,7 @@ public class ReadonlypropertysImpl implements Readonlypropertys {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Completable} object if successful.
      */
-    public Completable putValidAsync(ReadonlyObj complexBody) {
+    public Completable putValidAsync(@NonNull ReadonlyObj complexBody) {
         return putValidWithRestResponseAsync(complexBody)
             .toCompletable();
     }
