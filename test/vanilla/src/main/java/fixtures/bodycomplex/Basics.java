@@ -17,6 +17,7 @@ import fixtures.bodycomplex.models.Basic;
 import io.reactivex.Completable;
 import io.reactivex.Maybe;
 import io.reactivex.Single;
+import io.reactivex.annotations.NonNull;
 
 /**
  * An instance of this class provides access to all the operations defined in
@@ -39,7 +40,7 @@ public interface Basics {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Basic&gt;} object.
      */
-    ServiceFuture<Basic> getValidAsync(ServiceCallback<Basic> serviceCallback);
+    ServiceFuture<Basic> getValidAsync(@NonNull ServiceCallback<Basic> serviceCallback);
 
     /**
      * Get complex type {id: 2, name: 'abc', color: 'YELLOW'}.
@@ -63,7 +64,7 @@ public interface Basics {
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
-    void putValid(Basic complexBody);
+    void putValid(@NonNull Basic complexBody);
 
     /**
      * Please put {id: 2, name: 'abc', color: 'Magenta'}.
@@ -73,7 +74,7 @@ public interface Basics {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    ServiceFuture<Void> putValidAsync(Basic complexBody, ServiceCallback<Void> serviceCallback);
+    ServiceFuture<Void> putValidAsync(@NonNull Basic complexBody, @NonNull ServiceCallback<Void> serviceCallback);
 
     /**
      * Please put {id: 2, name: 'abc', color: 'Magenta'}.
@@ -82,7 +83,7 @@ public interface Basics {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
      */
-    Single<RestResponse<Void, Void>> putValidWithRestResponseAsync(Basic complexBody);
+    Single<RestResponse<Void, Void>> putValidWithRestResponseAsync(@NonNull Basic complexBody);
 
     /**
      * Please put {id: 2, name: 'abc', color: 'Magenta'}.
@@ -91,7 +92,7 @@ public interface Basics {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Completable} object if successful.
      */
-    Completable putValidAsync(Basic complexBody);
+    Completable putValidAsync(@NonNull Basic complexBody);
 
     /**
      * Get a basic complex type that is invalid for the local strong type.
@@ -109,7 +110,7 @@ public interface Basics {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Basic&gt;} object.
      */
-    ServiceFuture<Basic> getInvalidAsync(ServiceCallback<Basic> serviceCallback);
+    ServiceFuture<Basic> getInvalidAsync(@NonNull ServiceCallback<Basic> serviceCallback);
 
     /**
      * Get a basic complex type that is invalid for the local strong type.
@@ -141,7 +142,7 @@ public interface Basics {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Basic&gt;} object.
      */
-    ServiceFuture<Basic> getEmptyAsync(ServiceCallback<Basic> serviceCallback);
+    ServiceFuture<Basic> getEmptyAsync(@NonNull ServiceCallback<Basic> serviceCallback);
 
     /**
      * Get a basic complex type that is empty.
@@ -173,7 +174,7 @@ public interface Basics {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Basic&gt;} object.
      */
-    ServiceFuture<Basic> getNullAsync(ServiceCallback<Basic> serviceCallback);
+    ServiceFuture<Basic> getNullAsync(@NonNull ServiceCallback<Basic> serviceCallback);
 
     /**
      * Get a basic complex type whose properties are null.
@@ -205,7 +206,7 @@ public interface Basics {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Basic&gt;} object.
      */
-    ServiceFuture<Basic> getNotProvidedAsync(ServiceCallback<Basic> serviceCallback);
+    ServiceFuture<Basic> getNotProvidedAsync(@NonNull ServiceCallback<Basic> serviceCallback);
 
     /**
      * Get a basic complex type while the server doesn't provide a response payload.

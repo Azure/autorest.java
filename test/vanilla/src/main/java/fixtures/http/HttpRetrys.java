@@ -15,6 +15,7 @@ import com.microsoft.rest.v2.ServiceCallback;
 import com.microsoft.rest.v2.ServiceFuture;
 import io.reactivex.Completable;
 import io.reactivex.Single;
+import io.reactivex.annotations.NonNull;
 
 /**
  * An instance of this class provides access to all the operations defined in
@@ -36,7 +37,7 @@ public interface HttpRetrys {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    ServiceFuture<Void> head408Async(ServiceCallback<Void> serviceCallback);
+    ServiceFuture<Void> head408Async(@NonNull ServiceCallback<Void> serviceCallback);
 
     /**
      * Return 408 status code, then 200 after retry.
@@ -67,7 +68,7 @@ public interface HttpRetrys {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    ServiceFuture<Void> put500Async(ServiceCallback<Void> serviceCallback);
+    ServiceFuture<Void> put500Async(@NonNull ServiceCallback<Void> serviceCallback);
 
     /**
      * Return 500 status code, then 200 after retry.
@@ -101,7 +102,7 @@ public interface HttpRetrys {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    ServiceFuture<Void> put500Async(Boolean booleanValue, ServiceCallback<Void> serviceCallback);
+    ServiceFuture<Void> put500Async(Boolean booleanValue, @NonNull ServiceCallback<Void> serviceCallback);
 
     /**
      * Return 500 status code, then 200 after retry.
@@ -136,7 +137,7 @@ public interface HttpRetrys {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    ServiceFuture<Void> patch500Async(ServiceCallback<Void> serviceCallback);
+    ServiceFuture<Void> patch500Async(@NonNull ServiceCallback<Void> serviceCallback);
 
     /**
      * Return 500 status code, then 200 after retry.
@@ -170,7 +171,7 @@ public interface HttpRetrys {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    ServiceFuture<Void> patch500Async(Boolean booleanValue, ServiceCallback<Void> serviceCallback);
+    ServiceFuture<Void> patch500Async(Boolean booleanValue, @NonNull ServiceCallback<Void> serviceCallback);
 
     /**
      * Return 500 status code, then 200 after retry.
@@ -205,7 +206,7 @@ public interface HttpRetrys {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    ServiceFuture<Void> get502Async(ServiceCallback<Void> serviceCallback);
+    ServiceFuture<Void> get502Async(@NonNull ServiceCallback<Void> serviceCallback);
 
     /**
      * Return 502 status code, then 200 after retry.
@@ -236,7 +237,7 @@ public interface HttpRetrys {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    ServiceFuture<Void> post503Async(ServiceCallback<Void> serviceCallback);
+    ServiceFuture<Void> post503Async(@NonNull ServiceCallback<Void> serviceCallback);
 
     /**
      * Return 503 status code, then 200 after retry.
@@ -270,7 +271,7 @@ public interface HttpRetrys {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    ServiceFuture<Void> post503Async(Boolean booleanValue, ServiceCallback<Void> serviceCallback);
+    ServiceFuture<Void> post503Async(Boolean booleanValue, @NonNull ServiceCallback<Void> serviceCallback);
 
     /**
      * Return 503 status code, then 200 after retry.
@@ -305,7 +306,7 @@ public interface HttpRetrys {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    ServiceFuture<Void> delete503Async(ServiceCallback<Void> serviceCallback);
+    ServiceFuture<Void> delete503Async(@NonNull ServiceCallback<Void> serviceCallback);
 
     /**
      * Return 503 status code, then 200 after retry.
@@ -339,7 +340,7 @@ public interface HttpRetrys {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    ServiceFuture<Void> delete503Async(Boolean booleanValue, ServiceCallback<Void> serviceCallback);
+    ServiceFuture<Void> delete503Async(Boolean booleanValue, @NonNull ServiceCallback<Void> serviceCallback);
 
     /**
      * Return 503 status code, then 200 after retry.
@@ -374,7 +375,7 @@ public interface HttpRetrys {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    ServiceFuture<Void> put504Async(ServiceCallback<Void> serviceCallback);
+    ServiceFuture<Void> put504Async(@NonNull ServiceCallback<Void> serviceCallback);
 
     /**
      * Return 504 status code, then 200 after retry.
@@ -408,7 +409,7 @@ public interface HttpRetrys {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    ServiceFuture<Void> put504Async(Boolean booleanValue, ServiceCallback<Void> serviceCallback);
+    ServiceFuture<Void> put504Async(Boolean booleanValue, @NonNull ServiceCallback<Void> serviceCallback);
 
     /**
      * Return 504 status code, then 200 after retry.
@@ -443,7 +444,7 @@ public interface HttpRetrys {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    ServiceFuture<Void> patch504Async(ServiceCallback<Void> serviceCallback);
+    ServiceFuture<Void> patch504Async(@NonNull ServiceCallback<Void> serviceCallback);
 
     /**
      * Return 504 status code, then 200 after retry.
@@ -477,7 +478,7 @@ public interface HttpRetrys {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    ServiceFuture<Void> patch504Async(Boolean booleanValue, ServiceCallback<Void> serviceCallback);
+    ServiceFuture<Void> patch504Async(Boolean booleanValue, @NonNull ServiceCallback<Void> serviceCallback);
 
     /**
      * Return 504 status code, then 200 after retry.

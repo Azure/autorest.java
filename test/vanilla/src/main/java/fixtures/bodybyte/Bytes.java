@@ -16,6 +16,7 @@ import com.microsoft.rest.v2.ServiceFuture;
 import io.reactivex.Completable;
 import io.reactivex.Maybe;
 import io.reactivex.Single;
+import io.reactivex.annotations.NonNull;
 
 /**
  * An instance of this class provides access to all the operations defined in
@@ -38,7 +39,7 @@ public interface Bytes {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;byte[]&gt;} object.
      */
-    ServiceFuture<byte[]> getNullAsync(ServiceCallback<byte[]> serviceCallback);
+    ServiceFuture<byte[]> getNullAsync(@NonNull ServiceCallback<byte[]> serviceCallback);
 
     /**
      * Get null byte value.
@@ -70,7 +71,7 @@ public interface Bytes {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;byte[]&gt;} object.
      */
-    ServiceFuture<byte[]> getEmptyAsync(ServiceCallback<byte[]> serviceCallback);
+    ServiceFuture<byte[]> getEmptyAsync(@NonNull ServiceCallback<byte[]> serviceCallback);
 
     /**
      * Get empty byte value ''.
@@ -102,7 +103,7 @@ public interface Bytes {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;byte[]&gt;} object.
      */
-    ServiceFuture<byte[]> getNonAsciiAsync(ServiceCallback<byte[]> serviceCallback);
+    ServiceFuture<byte[]> getNonAsciiAsync(@NonNull ServiceCallback<byte[]> serviceCallback);
 
     /**
      * Get non-ascii byte string hex(FF FE FD FC FB FA F9 F8 F7 F6).
@@ -126,7 +127,7 @@ public interface Bytes {
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
-    void putNonAscii(byte[] byteBody);
+    void putNonAscii(@NonNull byte[] byteBody);
 
     /**
      * Put non-ascii byte string hex(FF FE FD FC FB FA F9 F8 F7 F6).
@@ -136,7 +137,7 @@ public interface Bytes {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    ServiceFuture<Void> putNonAsciiAsync(byte[] byteBody, ServiceCallback<Void> serviceCallback);
+    ServiceFuture<Void> putNonAsciiAsync(@NonNull byte[] byteBody, @NonNull ServiceCallback<Void> serviceCallback);
 
     /**
      * Put non-ascii byte string hex(FF FE FD FC FB FA F9 F8 F7 F6).
@@ -145,7 +146,7 @@ public interface Bytes {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
      */
-    Single<RestResponse<Void, Void>> putNonAsciiWithRestResponseAsync(byte[] byteBody);
+    Single<RestResponse<Void, Void>> putNonAsciiWithRestResponseAsync(@NonNull byte[] byteBody);
 
     /**
      * Put non-ascii byte string hex(FF FE FD FC FB FA F9 F8 F7 F6).
@@ -154,7 +155,7 @@ public interface Bytes {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Completable} object if successful.
      */
-    Completable putNonAsciiAsync(byte[] byteBody);
+    Completable putNonAsciiAsync(@NonNull byte[] byteBody);
 
     /**
      * Get invalid byte value ':::SWAGGER::::'.
@@ -172,7 +173,7 @@ public interface Bytes {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;byte[]&gt;} object.
      */
-    ServiceFuture<byte[]> getInvalidAsync(ServiceCallback<byte[]> serviceCallback);
+    ServiceFuture<byte[]> getInvalidAsync(@NonNull ServiceCallback<byte[]> serviceCallback);
 
     /**
      * Get invalid byte value ':::SWAGGER::::'.

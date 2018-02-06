@@ -15,6 +15,7 @@ import com.microsoft.rest.v2.ServiceCallback;
 import com.microsoft.rest.v2.ServiceFuture;
 import io.reactivex.Completable;
 import io.reactivex.Single;
+import io.reactivex.annotations.NonNull;
 
 /**
  * An instance of this class provides access to all the operations defined in
@@ -36,7 +37,7 @@ public interface Odatas {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    ServiceFuture<Void> getWithFilterAsync(ServiceCallback<Void> serviceCallback);
+    ServiceFuture<Void> getWithFilterAsync(@NonNull ServiceCallback<Void> serviceCallback);
 
     /**
      * Specify filter parameter with value '$filter=id gt 5 and name eq 'foo'&amp;$orderby=id&amp;$top=10'.
@@ -74,7 +75,7 @@ public interface Odatas {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    ServiceFuture<Void> getWithFilterAsync(String filter, Integer top, String orderby, ServiceCallback<Void> serviceCallback);
+    ServiceFuture<Void> getWithFilterAsync(String filter, Integer top, String orderby, @NonNull ServiceCallback<Void> serviceCallback);
 
     /**
      * Specify filter parameter with value '$filter=id gt 5 and name eq 'foo'&amp;$orderby=id&amp;$top=10'.

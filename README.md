@@ -6,11 +6,10 @@ This project enables Java code generation in [AutoRest](https://github.com/Azure
 
 # Java AutoRest Generator Command Line Arguments
 
-- *--java.not-null-annotations*: Whether or not to add `@NonNull` (from the `io.reactivex.annotations` package) annotations to each required parameter in
-client methods.
-|Without Argument|With Argument|
-|---|---|
-|`int Plus(Integer val1, Integer val2)`|`int Plus(@NonNull Integer val1, @NonNull Integer val2)`|
+- *--java.not-null-annotations*: Whether or not to add `@NonNull` (from the `io.reactivex.annotations` package) annotations to each required parameter in client methods.
+  - Default: `true`
+  - Without Argument: `int Plus(Integer val1, Integer val2)`
+  - With Argument: `int Plus(@NonNull Integer val1, @NonNull Integer val2)`
 
 # Contributing
 

@@ -15,6 +15,7 @@ import com.microsoft.rest.v2.ServiceClient;
 import com.microsoft.rest.v2.http.HttpPipeline;
 import fixtures.custombaseuri.AutoRestParameterizedHostTestClient;
 import fixtures.custombaseuri.Paths;
+import io.reactivex.annotations.NonNull;
 
 /**
  * Initializes a new instance of the AutoRestParameterizedHostTestClient type.
@@ -71,7 +72,7 @@ public final class AutoRestParameterizedHostTestClientImpl extends ServiceClient
      *
      * @param httpPipeline The HTTP pipeline to send requests through.
      */
-    public AutoRestParameterizedHostTestClientImpl(HttpPipeline httpPipeline) {
+    public AutoRestParameterizedHostTestClientImpl(@NonNull HttpPipeline httpPipeline) {
         super(httpPipeline);
         this.host = "host";
         this.paths = new PathsImpl(this);

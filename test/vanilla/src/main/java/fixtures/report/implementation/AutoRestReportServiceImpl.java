@@ -25,6 +25,7 @@ import fixtures.report.AutoRestReportService;
 import fixtures.report.models.ErrorException;
 import io.reactivex.Maybe;
 import io.reactivex.Single;
+import io.reactivex.annotations.NonNull;
 import io.reactivex.functions.Function;
 import java.util.HashMap;
 import java.util.Map;
@@ -50,7 +51,7 @@ public final class AutoRestReportServiceImpl extends ServiceClient implements Au
      *
      * @param httpPipeline The HTTP pipeline to send requests through.
      */
-    public AutoRestReportServiceImpl(HttpPipeline httpPipeline) {
+    public AutoRestReportServiceImpl(@NonNull HttpPipeline httpPipeline) {
         super(httpPipeline);
         this.service = RestProxy.create(AutoRestReportServiceService.class, this);
     }
@@ -85,7 +86,7 @@ public final class AutoRestReportServiceImpl extends ServiceClient implements Au
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Map&lt;String, Integer&gt;&gt;} object.
      */
-    public ServiceFuture<Map<String, Integer>> getReportAsync(ServiceCallback<Map<String, Integer>> serviceCallback) {
+    public ServiceFuture<Map<String, Integer>> getReportAsync(@NonNull ServiceCallback<Map<String, Integer>> serviceCallback) {
         return ServiceFuture.fromBody(getReportAsync(), serviceCallback);
     }
 
@@ -138,7 +139,7 @@ public final class AutoRestReportServiceImpl extends ServiceClient implements Au
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Map&lt;String, Integer&gt;&gt;} object.
      */
-    public ServiceFuture<Map<String, Integer>> getReportAsync(String qualifier, ServiceCallback<Map<String, Integer>> serviceCallback) {
+    public ServiceFuture<Map<String, Integer>> getReportAsync(String qualifier, @NonNull ServiceCallback<Map<String, Integer>> serviceCallback) {
         return ServiceFuture.fromBody(getReportAsync(qualifier), serviceCallback);
     }
 

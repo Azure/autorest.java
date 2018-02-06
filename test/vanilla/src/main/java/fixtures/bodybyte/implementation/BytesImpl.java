@@ -25,6 +25,7 @@ import fixtures.bodybyte.models.ErrorException;
 import io.reactivex.Completable;
 import io.reactivex.Maybe;
 import io.reactivex.Single;
+import io.reactivex.annotations.NonNull;
 import io.reactivex.functions.Function;
 
 /**
@@ -102,7 +103,7 @@ public final class BytesImpl implements Bytes {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;byte[]&gt;} object.
      */
-    public ServiceFuture<byte[]> getNullAsync(ServiceCallback<byte[]> serviceCallback) {
+    public ServiceFuture<byte[]> getNullAsync(@NonNull ServiceCallback<byte[]> serviceCallback) {
         return ServiceFuture.fromBody(getNullAsync(), serviceCallback);
     }
 
@@ -151,7 +152,7 @@ public final class BytesImpl implements Bytes {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;byte[]&gt;} object.
      */
-    public ServiceFuture<byte[]> getEmptyAsync(ServiceCallback<byte[]> serviceCallback) {
+    public ServiceFuture<byte[]> getEmptyAsync(@NonNull ServiceCallback<byte[]> serviceCallback) {
         return ServiceFuture.fromBody(getEmptyAsync(), serviceCallback);
     }
 
@@ -200,7 +201,7 @@ public final class BytesImpl implements Bytes {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;byte[]&gt;} object.
      */
-    public ServiceFuture<byte[]> getNonAsciiAsync(ServiceCallback<byte[]> serviceCallback) {
+    public ServiceFuture<byte[]> getNonAsciiAsync(@NonNull ServiceCallback<byte[]> serviceCallback) {
         return ServiceFuture.fromBody(getNonAsciiAsync(), serviceCallback);
     }
 
@@ -239,7 +240,7 @@ public final class BytesImpl implements Bytes {
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
-    public void putNonAscii(byte[] byteBody) {
+    public void putNonAscii(@NonNull byte[] byteBody) {
         putNonAsciiAsync(byteBody).blockingAwait();
     }
 
@@ -251,7 +252,7 @@ public final class BytesImpl implements Bytes {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    public ServiceFuture<Void> putNonAsciiAsync(byte[] byteBody, ServiceCallback<Void> serviceCallback) {
+    public ServiceFuture<Void> putNonAsciiAsync(@NonNull byte[] byteBody, @NonNull ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(putNonAsciiAsync(byteBody), serviceCallback);
     }
 
@@ -262,7 +263,7 @@ public final class BytesImpl implements Bytes {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
      */
-    public Single<RestResponse<Void, Void>> putNonAsciiWithRestResponseAsync(byte[] byteBody) {
+    public Single<RestResponse<Void, Void>> putNonAsciiWithRestResponseAsync(@NonNull byte[] byteBody) {
         if (byteBody == null) {
             throw new IllegalArgumentException("Parameter byteBody is required and cannot be null.");
         }
@@ -276,7 +277,7 @@ public final class BytesImpl implements Bytes {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Completable} object if successful.
      */
-    public Completable putNonAsciiAsync(byte[] byteBody) {
+    public Completable putNonAsciiAsync(@NonNull byte[] byteBody) {
         return putNonAsciiWithRestResponseAsync(byteBody)
             .toCompletable();
     }
@@ -299,7 +300,7 @@ public final class BytesImpl implements Bytes {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;byte[]&gt;} object.
      */
-    public ServiceFuture<byte[]> getInvalidAsync(ServiceCallback<byte[]> serviceCallback) {
+    public ServiceFuture<byte[]> getInvalidAsync(@NonNull ServiceCallback<byte[]> serviceCallback) {
         return ServiceFuture.fromBody(getInvalidAsync(), serviceCallback);
     }
 

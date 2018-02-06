@@ -15,6 +15,7 @@ import com.microsoft.rest.v2.ServiceCallback;
 import com.microsoft.rest.v2.ServiceFuture;
 import io.reactivex.Completable;
 import io.reactivex.Single;
+import io.reactivex.annotations.NonNull;
 
 /**
  * An instance of this class provides access to all the operations defined in
@@ -36,7 +37,7 @@ public interface ApiVersionDefaults {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    ServiceFuture<Void> getMethodGlobalValidAsync(ServiceCallback<Void> serviceCallback);
+    ServiceFuture<Void> getMethodGlobalValidAsync(@NonNull ServiceCallback<Void> serviceCallback);
 
     /**
      * GET method with api-version modeled in global settings.
@@ -67,7 +68,7 @@ public interface ApiVersionDefaults {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    ServiceFuture<Void> getMethodGlobalNotProvidedValidAsync(ServiceCallback<Void> serviceCallback);
+    ServiceFuture<Void> getMethodGlobalNotProvidedValidAsync(@NonNull ServiceCallback<Void> serviceCallback);
 
     /**
      * GET method with api-version modeled in global settings.
@@ -98,7 +99,7 @@ public interface ApiVersionDefaults {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    ServiceFuture<Void> getPathGlobalValidAsync(ServiceCallback<Void> serviceCallback);
+    ServiceFuture<Void> getPathGlobalValidAsync(@NonNull ServiceCallback<Void> serviceCallback);
 
     /**
      * GET method with api-version modeled in global settings.
@@ -129,7 +130,7 @@ public interface ApiVersionDefaults {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    ServiceFuture<Void> getSwaggerGlobalValidAsync(ServiceCallback<Void> serviceCallback);
+    ServiceFuture<Void> getSwaggerGlobalValidAsync(@NonNull ServiceCallback<Void> serviceCallback);
 
     /**
      * GET method with api-version modeled in global settings.

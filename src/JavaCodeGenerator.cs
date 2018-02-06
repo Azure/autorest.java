@@ -118,11 +118,38 @@ namespace AutoRest.Java
 
         public override string ImplementationFileExtension => ".java";
 
-        private static bool GetBoolSetting(Settings autoRestSettings, string settingName)
-            => autoRestSettings.Host?.GetValue<bool?>(settingName).Result == true;
+        private static bool GetBoolSetting(Settings autoRestSettings, string settingName, bool defaultValue = false)
+        {
+            bool customSettingValue = defaultValue;
 
-        private static string GetStringSetting(Settings autoRestSettings, string settingName)
-            => autoRestSettings.Host?.GetValue<string>(settingName).Result;
+            string settingValueString = GetStringSetting(autoRestSettings, settingName, null);
+            if (bool.TryParse(settingValueString, out bool settingValueBool))
+            {
+                customSettingValue = settingValueBool;
+            }
+
+            return customSettingValue;
+        }
+
+        private static string GetStringSetting(Settings autoRestSettings, string settingName, string defaultValue = null)
+        {
+            IDictionary<string, object> customSettings = autoRestSettings.CustomSettings;
+
+            string customSettingValue = defaultValue;
+            foreach (KeyValuePair<string, object> entry in customSettings)
+            {
+                if (entry.Key.EqualsIgnoreCase(settingName))
+                {
+                    string entryValueString = (string)entry.Value;
+                    if (!string.IsNullOrEmpty(entryValueString))
+                    {
+                        customSettingValue = entryValueString;
+                    }
+                    break;
+                }
+            }
+            return customSettingValue;
+        }
 
         /// <summary>
         /// Generate Java client code for given ServiceClient.
@@ -143,7 +170,7 @@ namespace AutoRest.Java
                 serviceName: GetAutoRestSettingsServiceName(autoRestSettings),
                 package: codeModel.Namespace.ToLowerInvariant(),
                 shouldGenerateXmlSerialization: codeModel.ShouldGenerateXmlSerialization,
-                nonNullAnnotations: GetBoolSetting(autoRestSettings, "non-null-annotations"));
+                nonNullAnnotations: GetBoolSetting(autoRestSettings, "non-null-annotations", true));
 
             serviceClientCredentialsParameter = new Lazy<Parameter>(() =>
                 new Parameter(

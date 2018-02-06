@@ -15,6 +15,7 @@ import com.microsoft.rest.v2.ServiceClient;
 import com.microsoft.rest.v2.http.HttpPipeline;
 import fixtures.bodyboolean.AutoRestBoolTestService;
 import fixtures.bodyboolean.Bools;
+import io.reactivex.annotations.NonNull;
 
 /**
  * Initializes a new instance of the AutoRestBoolTestService type.
@@ -46,7 +47,7 @@ public final class AutoRestBoolTestServiceImpl extends ServiceClient implements 
      *
      * @param httpPipeline The HTTP pipeline to send requests through.
      */
-    public AutoRestBoolTestServiceImpl(HttpPipeline httpPipeline) {
+    public AutoRestBoolTestServiceImpl(@NonNull HttpPipeline httpPipeline) {
         super(httpPipeline);
         this.bools = new BoolsImpl(this);
     }

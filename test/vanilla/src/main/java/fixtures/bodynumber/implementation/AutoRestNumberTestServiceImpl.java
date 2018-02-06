@@ -15,6 +15,7 @@ import com.microsoft.rest.v2.ServiceClient;
 import com.microsoft.rest.v2.http.HttpPipeline;
 import fixtures.bodynumber.AutoRestNumberTestService;
 import fixtures.bodynumber.Numbers;
+import io.reactivex.annotations.NonNull;
 
 /**
  * Initializes a new instance of the AutoRestNumberTestService type.
@@ -46,7 +47,7 @@ public final class AutoRestNumberTestServiceImpl extends ServiceClient implement
      *
      * @param httpPipeline The HTTP pipeline to send requests through.
      */
-    public AutoRestNumberTestServiceImpl(HttpPipeline httpPipeline) {
+    public AutoRestNumberTestServiceImpl(@NonNull HttpPipeline httpPipeline) {
         super(httpPipeline);
         this.numbers = new NumbersImpl(this);
     }

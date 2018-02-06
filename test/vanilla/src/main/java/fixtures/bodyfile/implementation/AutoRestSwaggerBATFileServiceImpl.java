@@ -15,6 +15,7 @@ import com.microsoft.rest.v2.ServiceClient;
 import com.microsoft.rest.v2.http.HttpPipeline;
 import fixtures.bodyfile.AutoRestSwaggerBATFileService;
 import fixtures.bodyfile.Files;
+import io.reactivex.annotations.NonNull;
 
 /**
  * Initializes a new instance of the AutoRestSwaggerBATFileService type.
@@ -46,7 +47,7 @@ public final class AutoRestSwaggerBATFileServiceImpl extends ServiceClient imple
      *
      * @param httpPipeline The HTTP pipeline to send requests through.
      */
-    public AutoRestSwaggerBATFileServiceImpl(HttpPipeline httpPipeline) {
+    public AutoRestSwaggerBATFileServiceImpl(@NonNull HttpPipeline httpPipeline) {
         super(httpPipeline);
         this.files = new FilesImpl(this);
     }

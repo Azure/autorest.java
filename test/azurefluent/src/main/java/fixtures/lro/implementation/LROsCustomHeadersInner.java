@@ -29,6 +29,7 @@ import io.reactivex.Completable;
 import io.reactivex.Maybe;
 import io.reactivex.Observable;
 import io.reactivex.Single;
+import io.reactivex.annotations.NonNull;
 import io.reactivex.functions.Function;
 
 /**
@@ -121,7 +122,7 @@ public final class LROsCustomHeadersInner {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;ProductInner&gt;} object.
      */
-    public ServiceFuture<ProductInner> beginPutAsyncRetrySucceededAsync(ServiceCallback<ProductInner> serviceCallback) {
+    public ServiceFuture<ProductInner> beginPutAsyncRetrySucceededAsync(@NonNull ServiceCallback<ProductInner> serviceCallback) {
         return ServiceFutureUtil.fromLRO(beginPutAsyncRetrySucceededAsync(), serviceCallback);
     }
 
@@ -155,7 +156,7 @@ public final class LROsCustomHeadersInner {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;ProductInner&gt;} object.
      */
-    public ServiceFuture<ProductInner> beginPutAsyncRetrySucceededAsync(ProductInner product, ServiceCallback<ProductInner> serviceCallback) {
+    public ServiceFuture<ProductInner> beginPutAsyncRetrySucceededAsync(ProductInner product, @NonNull ServiceCallback<ProductInner> serviceCallback) {
         return ServiceFutureUtil.fromLRO(beginPutAsyncRetrySucceededAsync(product), serviceCallback);
     }
 
@@ -189,7 +190,7 @@ public final class LROsCustomHeadersInner {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;ProductInner&gt;} object.
      */
-    public ServiceFuture<ProductInner> putAsyncRetrySucceededAsync(ServiceCallback<ProductInner> serviceCallback) {
+    public ServiceFuture<ProductInner> putAsyncRetrySucceededAsync(@NonNull ServiceCallback<ProductInner> serviceCallback) {
         return ServiceFuture.fromBody(putAsyncRetrySucceededAsync(), serviceCallback);
     }
 
@@ -242,7 +243,7 @@ public final class LROsCustomHeadersInner {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;ProductInner&gt;} object.
      */
-    public ServiceFuture<ProductInner> putAsyncRetrySucceededAsync(ProductInner product, ServiceCallback<ProductInner> serviceCallback) {
+    public ServiceFuture<ProductInner> putAsyncRetrySucceededAsync(ProductInner product, @NonNull ServiceCallback<ProductInner> serviceCallback) {
         return ServiceFuture.fromBody(putAsyncRetrySucceededAsync(product), serviceCallback);
     }
 
@@ -296,7 +297,7 @@ public final class LROsCustomHeadersInner {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;ProductInner&gt;} object.
      */
-    public ServiceFuture<ProductInner> beginPut201CreatingSucceeded200Async(ServiceCallback<ProductInner> serviceCallback) {
+    public ServiceFuture<ProductInner> beginPut201CreatingSucceeded200Async(@NonNull ServiceCallback<ProductInner> serviceCallback) {
         return ServiceFutureUtil.fromLRO(beginPut201CreatingSucceeded200Async(), serviceCallback);
     }
 
@@ -330,7 +331,7 @@ public final class LROsCustomHeadersInner {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;ProductInner&gt;} object.
      */
-    public ServiceFuture<ProductInner> beginPut201CreatingSucceeded200Async(ProductInner product, ServiceCallback<ProductInner> serviceCallback) {
+    public ServiceFuture<ProductInner> beginPut201CreatingSucceeded200Async(ProductInner product, @NonNull ServiceCallback<ProductInner> serviceCallback) {
         return ServiceFutureUtil.fromLRO(beginPut201CreatingSucceeded200Async(product), serviceCallback);
     }
 
@@ -364,7 +365,7 @@ public final class LROsCustomHeadersInner {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;ProductInner&gt;} object.
      */
-    public ServiceFuture<ProductInner> put201CreatingSucceeded200Async(ServiceCallback<ProductInner> serviceCallback) {
+    public ServiceFuture<ProductInner> put201CreatingSucceeded200Async(@NonNull ServiceCallback<ProductInner> serviceCallback) {
         return ServiceFuture.fromBody(put201CreatingSucceeded200Async(), serviceCallback);
     }
 
@@ -417,7 +418,7 @@ public final class LROsCustomHeadersInner {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;ProductInner&gt;} object.
      */
-    public ServiceFuture<ProductInner> put201CreatingSucceeded200Async(ProductInner product, ServiceCallback<ProductInner> serviceCallback) {
+    public ServiceFuture<ProductInner> put201CreatingSucceeded200Async(ProductInner product, @NonNull ServiceCallback<ProductInner> serviceCallback) {
         return ServiceFuture.fromBody(put201CreatingSucceeded200Async(product), serviceCallback);
     }
 
@@ -470,7 +471,7 @@ public final class LROsCustomHeadersInner {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    public ServiceFuture<Void> beginPost202Retry200Async(ServiceCallback<Void> serviceCallback) {
+    public ServiceFuture<Void> beginPost202Retry200Async(@NonNull ServiceCallback<Void> serviceCallback) {
         return ServiceFutureUtil.fromLRO(beginPost202Retry200Async(), serviceCallback);
     }
 
@@ -503,7 +504,7 @@ public final class LROsCustomHeadersInner {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    public ServiceFuture<Void> beginPost202Retry200Async(ProductInner product, ServiceCallback<Void> serviceCallback) {
+    public ServiceFuture<Void> beginPost202Retry200Async(ProductInner product, @NonNull ServiceCallback<Void> serviceCallback) {
         return ServiceFutureUtil.fromLRO(beginPost202Retry200Async(product), serviceCallback);
     }
 
@@ -536,7 +537,7 @@ public final class LROsCustomHeadersInner {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    public ServiceFuture<Void> post202Retry200Async(ServiceCallback<Void> serviceCallback) {
+    public ServiceFuture<Void> post202Retry200Async(@NonNull ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(post202Retry200Async(), serviceCallback);
     }
 
@@ -580,7 +581,7 @@ public final class LROsCustomHeadersInner {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    public ServiceFuture<Void> post202Retry200Async(ProductInner product, ServiceCallback<Void> serviceCallback) {
+    public ServiceFuture<Void> post202Retry200Async(ProductInner product, @NonNull ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(post202Retry200Async(product), serviceCallback);
     }
 
@@ -625,7 +626,7 @@ public final class LROsCustomHeadersInner {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    public ServiceFuture<Void> beginPostAsyncRetrySucceededAsync(ServiceCallback<Void> serviceCallback) {
+    public ServiceFuture<Void> beginPostAsyncRetrySucceededAsync(@NonNull ServiceCallback<Void> serviceCallback) {
         return ServiceFutureUtil.fromLRO(beginPostAsyncRetrySucceededAsync(), serviceCallback);
     }
 
@@ -658,7 +659,7 @@ public final class LROsCustomHeadersInner {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    public ServiceFuture<Void> beginPostAsyncRetrySucceededAsync(ProductInner product, ServiceCallback<Void> serviceCallback) {
+    public ServiceFuture<Void> beginPostAsyncRetrySucceededAsync(ProductInner product, @NonNull ServiceCallback<Void> serviceCallback) {
         return ServiceFutureUtil.fromLRO(beginPostAsyncRetrySucceededAsync(product), serviceCallback);
     }
 
@@ -691,7 +692,7 @@ public final class LROsCustomHeadersInner {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    public ServiceFuture<Void> postAsyncRetrySucceededAsync(ServiceCallback<Void> serviceCallback) {
+    public ServiceFuture<Void> postAsyncRetrySucceededAsync(@NonNull ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(postAsyncRetrySucceededAsync(), serviceCallback);
     }
 
@@ -735,7 +736,7 @@ public final class LROsCustomHeadersInner {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    public ServiceFuture<Void> postAsyncRetrySucceededAsync(ProductInner product, ServiceCallback<Void> serviceCallback) {
+    public ServiceFuture<Void> postAsyncRetrySucceededAsync(ProductInner product, @NonNull ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(postAsyncRetrySucceededAsync(product), serviceCallback);
     }
 

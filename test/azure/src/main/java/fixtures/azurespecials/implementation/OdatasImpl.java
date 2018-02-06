@@ -24,6 +24,7 @@ import fixtures.azurespecials.Odatas;
 import fixtures.azurespecials.models.ErrorException;
 import io.reactivex.Completable;
 import io.reactivex.Single;
+import io.reactivex.annotations.NonNull;
 
 /**
  * An instance of this class provides access to all the operations defined in
@@ -79,7 +80,7 @@ public final class OdatasImpl implements Odatas {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    public ServiceFuture<Void> getWithFilterAsync(ServiceCallback<Void> serviceCallback) {
+    public ServiceFuture<Void> getWithFilterAsync(@NonNull ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(getWithFilterAsync(), serviceCallback);
     }
 
@@ -129,7 +130,7 @@ public final class OdatasImpl implements Odatas {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    public ServiceFuture<Void> getWithFilterAsync(String filter, Integer top, String orderby, ServiceCallback<Void> serviceCallback) {
+    public ServiceFuture<Void> getWithFilterAsync(String filter, Integer top, String orderby, @NonNull ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(getWithFilterAsync(filter, top, orderby), serviceCallback);
     }
 

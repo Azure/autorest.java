@@ -16,6 +16,7 @@ import com.microsoft.rest.v2.http.HttpPipeline;
 import fixtures.requiredoptional.AutoRestRequiredOptionalTestService;
 import fixtures.requiredoptional.Explicits;
 import fixtures.requiredoptional.Implicits;
+import io.reactivex.annotations.NonNull;
 
 /**
  * Initializes a new instance of the AutoRestRequiredOptionalTestService type.
@@ -136,7 +137,7 @@ public final class AutoRestRequiredOptionalTestServiceImpl extends ServiceClient
      *
      * @param httpPipeline The HTTP pipeline to send requests through.
      */
-    public AutoRestRequiredOptionalTestServiceImpl(HttpPipeline httpPipeline) {
+    public AutoRestRequiredOptionalTestServiceImpl(@NonNull HttpPipeline httpPipeline) {
         super(httpPipeline);
         this.implicits = new ImplicitsImpl(this);
         this.explicits = new ExplicitsImpl(this);

@@ -15,6 +15,7 @@ import com.microsoft.rest.v2.ServiceCallback;
 import com.microsoft.rest.v2.ServiceFuture;
 import io.reactivex.Maybe;
 import io.reactivex.Single;
+import io.reactivex.annotations.NonNull;
 
 /**
  * An instance of this class provides access to all the operations defined in
@@ -37,7 +38,7 @@ public interface HttpFailures {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Boolean&gt;} object.
      */
-    ServiceFuture<Boolean> getEmptyErrorAsync(ServiceCallback<Boolean> serviceCallback);
+    ServiceFuture<Boolean> getEmptyErrorAsync(@NonNull ServiceCallback<Boolean> serviceCallback);
 
     /**
      * Get empty error form server.
@@ -68,7 +69,7 @@ public interface HttpFailures {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Boolean&gt;} object.
      */
-    ServiceFuture<Boolean> getNoModelErrorAsync(ServiceCallback<Boolean> serviceCallback);
+    ServiceFuture<Boolean> getNoModelErrorAsync(@NonNull ServiceCallback<Boolean> serviceCallback);
 
     /**
      * Get empty error form server.
@@ -99,7 +100,7 @@ public interface HttpFailures {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Boolean&gt;} object.
      */
-    ServiceFuture<Boolean> getNoModelEmptyAsync(ServiceCallback<Boolean> serviceCallback);
+    ServiceFuture<Boolean> getNoModelEmptyAsync(@NonNull ServiceCallback<Boolean> serviceCallback);
 
     /**
      * Get empty response from server.

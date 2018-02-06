@@ -16,6 +16,7 @@ import com.microsoft.rest.v2.ServiceFuture;
 import fixtures.url.models.UriColor;
 import io.reactivex.Completable;
 import io.reactivex.Single;
+import io.reactivex.annotations.NonNull;
 import java.util.List;
 import org.joda.time.DateTime;
 import org.joda.time.LocalDate;
@@ -40,7 +41,7 @@ public interface Queries {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    ServiceFuture<Void> getBooleanTrueAsync(ServiceCallback<Void> serviceCallback);
+    ServiceFuture<Void> getBooleanTrueAsync(@NonNull ServiceCallback<Void> serviceCallback);
 
     /**
      * Get true Boolean value on path.
@@ -71,7 +72,7 @@ public interface Queries {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    ServiceFuture<Void> getBooleanFalseAsync(ServiceCallback<Void> serviceCallback);
+    ServiceFuture<Void> getBooleanFalseAsync(@NonNull ServiceCallback<Void> serviceCallback);
 
     /**
      * Get false Boolean value on path.
@@ -102,7 +103,7 @@ public interface Queries {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    ServiceFuture<Void> getBooleanNullAsync(ServiceCallback<Void> serviceCallback);
+    ServiceFuture<Void> getBooleanNullAsync(@NonNull ServiceCallback<Void> serviceCallback);
 
     /**
      * Get null Boolean value on query (query string should be absent).
@@ -136,7 +137,7 @@ public interface Queries {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    ServiceFuture<Void> getBooleanNullAsync(Boolean boolQuery, ServiceCallback<Void> serviceCallback);
+    ServiceFuture<Void> getBooleanNullAsync(Boolean boolQuery, @NonNull ServiceCallback<Void> serviceCallback);
 
     /**
      * Get null Boolean value on query (query string should be absent).
@@ -171,7 +172,7 @@ public interface Queries {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    ServiceFuture<Void> getIntOneMillionAsync(ServiceCallback<Void> serviceCallback);
+    ServiceFuture<Void> getIntOneMillionAsync(@NonNull ServiceCallback<Void> serviceCallback);
 
     /**
      * Get '1000000' integer value.
@@ -202,7 +203,7 @@ public interface Queries {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    ServiceFuture<Void> getIntNegativeOneMillionAsync(ServiceCallback<Void> serviceCallback);
+    ServiceFuture<Void> getIntNegativeOneMillionAsync(@NonNull ServiceCallback<Void> serviceCallback);
 
     /**
      * Get '-1000000' integer value.
@@ -233,7 +234,7 @@ public interface Queries {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    ServiceFuture<Void> getIntNullAsync(ServiceCallback<Void> serviceCallback);
+    ServiceFuture<Void> getIntNullAsync(@NonNull ServiceCallback<Void> serviceCallback);
 
     /**
      * Get null integer value (no query parameter).
@@ -267,7 +268,7 @@ public interface Queries {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    ServiceFuture<Void> getIntNullAsync(Integer intQuery, ServiceCallback<Void> serviceCallback);
+    ServiceFuture<Void> getIntNullAsync(Integer intQuery, @NonNull ServiceCallback<Void> serviceCallback);
 
     /**
      * Get null integer value (no query parameter).
@@ -302,7 +303,7 @@ public interface Queries {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    ServiceFuture<Void> getTenBillionAsync(ServiceCallback<Void> serviceCallback);
+    ServiceFuture<Void> getTenBillionAsync(@NonNull ServiceCallback<Void> serviceCallback);
 
     /**
      * Get '10000000000' 64 bit integer value.
@@ -333,7 +334,7 @@ public interface Queries {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    ServiceFuture<Void> getNegativeTenBillionAsync(ServiceCallback<Void> serviceCallback);
+    ServiceFuture<Void> getNegativeTenBillionAsync(@NonNull ServiceCallback<Void> serviceCallback);
 
     /**
      * Get '-10000000000' 64 bit integer value.
@@ -364,7 +365,7 @@ public interface Queries {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    ServiceFuture<Void> getLongNullAsync(ServiceCallback<Void> serviceCallback);
+    ServiceFuture<Void> getLongNullAsync(@NonNull ServiceCallback<Void> serviceCallback);
 
     /**
      * Get 'null 64 bit integer value (no query param in uri).
@@ -398,7 +399,7 @@ public interface Queries {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    ServiceFuture<Void> getLongNullAsync(Long longQuery, ServiceCallback<Void> serviceCallback);
+    ServiceFuture<Void> getLongNullAsync(Long longQuery, @NonNull ServiceCallback<Void> serviceCallback);
 
     /**
      * Get 'null 64 bit integer value (no query param in uri).
@@ -433,7 +434,7 @@ public interface Queries {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    ServiceFuture<Void> floatScientificPositiveAsync(ServiceCallback<Void> serviceCallback);
+    ServiceFuture<Void> floatScientificPositiveAsync(@NonNull ServiceCallback<Void> serviceCallback);
 
     /**
      * Get '1.034E+20' numeric value.
@@ -464,7 +465,7 @@ public interface Queries {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    ServiceFuture<Void> floatScientificNegativeAsync(ServiceCallback<Void> serviceCallback);
+    ServiceFuture<Void> floatScientificNegativeAsync(@NonNull ServiceCallback<Void> serviceCallback);
 
     /**
      * Get '-1.034E-20' numeric value.
@@ -495,7 +496,7 @@ public interface Queries {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    ServiceFuture<Void> floatNullAsync(ServiceCallback<Void> serviceCallback);
+    ServiceFuture<Void> floatNullAsync(@NonNull ServiceCallback<Void> serviceCallback);
 
     /**
      * Get null numeric value (no query parameter).
@@ -529,7 +530,7 @@ public interface Queries {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    ServiceFuture<Void> floatNullAsync(Double floatQuery, ServiceCallback<Void> serviceCallback);
+    ServiceFuture<Void> floatNullAsync(Double floatQuery, @NonNull ServiceCallback<Void> serviceCallback);
 
     /**
      * Get null numeric value (no query parameter).
@@ -564,7 +565,7 @@ public interface Queries {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    ServiceFuture<Void> doubleDecimalPositiveAsync(ServiceCallback<Void> serviceCallback);
+    ServiceFuture<Void> doubleDecimalPositiveAsync(@NonNull ServiceCallback<Void> serviceCallback);
 
     /**
      * Get '9999999.999' numeric value.
@@ -595,7 +596,7 @@ public interface Queries {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    ServiceFuture<Void> doubleDecimalNegativeAsync(ServiceCallback<Void> serviceCallback);
+    ServiceFuture<Void> doubleDecimalNegativeAsync(@NonNull ServiceCallback<Void> serviceCallback);
 
     /**
      * Get '-9999999.999' numeric value.
@@ -626,7 +627,7 @@ public interface Queries {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    ServiceFuture<Void> doubleNullAsync(ServiceCallback<Void> serviceCallback);
+    ServiceFuture<Void> doubleNullAsync(@NonNull ServiceCallback<Void> serviceCallback);
 
     /**
      * Get null numeric value (no query parameter).
@@ -660,7 +661,7 @@ public interface Queries {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    ServiceFuture<Void> doubleNullAsync(Double doubleQuery, ServiceCallback<Void> serviceCallback);
+    ServiceFuture<Void> doubleNullAsync(Double doubleQuery, @NonNull ServiceCallback<Void> serviceCallback);
 
     /**
      * Get null numeric value (no query parameter).
@@ -695,7 +696,7 @@ public interface Queries {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    ServiceFuture<Void> stringUnicodeAsync(ServiceCallback<Void> serviceCallback);
+    ServiceFuture<Void> stringUnicodeAsync(@NonNull ServiceCallback<Void> serviceCallback);
 
     /**
      * Get '啊齄丂狛狜隣郎隣兀﨩' multi-byte string value.
@@ -726,7 +727,7 @@ public interface Queries {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    ServiceFuture<Void> stringUrlEncodedAsync(ServiceCallback<Void> serviceCallback);
+    ServiceFuture<Void> stringUrlEncodedAsync(@NonNull ServiceCallback<Void> serviceCallback);
 
     /**
      * Get 'begin!*'();:@ &amp;=+$,/?#[]end.
@@ -757,7 +758,7 @@ public interface Queries {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    ServiceFuture<Void> stringEmptyAsync(ServiceCallback<Void> serviceCallback);
+    ServiceFuture<Void> stringEmptyAsync(@NonNull ServiceCallback<Void> serviceCallback);
 
     /**
      * Get ''.
@@ -788,7 +789,7 @@ public interface Queries {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    ServiceFuture<Void> stringNullAsync(ServiceCallback<Void> serviceCallback);
+    ServiceFuture<Void> stringNullAsync(@NonNull ServiceCallback<Void> serviceCallback);
 
     /**
      * Get null (no query parameter in url).
@@ -822,7 +823,7 @@ public interface Queries {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    ServiceFuture<Void> stringNullAsync(String stringQuery, ServiceCallback<Void> serviceCallback);
+    ServiceFuture<Void> stringNullAsync(String stringQuery, @NonNull ServiceCallback<Void> serviceCallback);
 
     /**
      * Get null (no query parameter in url).
@@ -857,7 +858,7 @@ public interface Queries {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    ServiceFuture<Void> enumValidAsync(ServiceCallback<Void> serviceCallback);
+    ServiceFuture<Void> enumValidAsync(@NonNull ServiceCallback<Void> serviceCallback);
 
     /**
      * Get using uri with query parameter 'green color'.
@@ -891,7 +892,7 @@ public interface Queries {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    ServiceFuture<Void> enumValidAsync(UriColor enumQuery, ServiceCallback<Void> serviceCallback);
+    ServiceFuture<Void> enumValidAsync(UriColor enumQuery, @NonNull ServiceCallback<Void> serviceCallback);
 
     /**
      * Get using uri with query parameter 'green color'.
@@ -926,7 +927,7 @@ public interface Queries {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    ServiceFuture<Void> enumNullAsync(ServiceCallback<Void> serviceCallback);
+    ServiceFuture<Void> enumNullAsync(@NonNull ServiceCallback<Void> serviceCallback);
 
     /**
      * Get null (no query parameter in url).
@@ -960,7 +961,7 @@ public interface Queries {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    ServiceFuture<Void> enumNullAsync(UriColor enumQuery, ServiceCallback<Void> serviceCallback);
+    ServiceFuture<Void> enumNullAsync(UriColor enumQuery, @NonNull ServiceCallback<Void> serviceCallback);
 
     /**
      * Get null (no query parameter in url).
@@ -995,7 +996,7 @@ public interface Queries {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    ServiceFuture<Void> byteMultiByteAsync(ServiceCallback<Void> serviceCallback);
+    ServiceFuture<Void> byteMultiByteAsync(@NonNull ServiceCallback<Void> serviceCallback);
 
     /**
      * Get '啊齄丂狛狜隣郎隣兀﨩' multibyte value as utf-8 encoded byte array.
@@ -1029,7 +1030,7 @@ public interface Queries {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    ServiceFuture<Void> byteMultiByteAsync(byte[] byteQuery, ServiceCallback<Void> serviceCallback);
+    ServiceFuture<Void> byteMultiByteAsync(byte[] byteQuery, @NonNull ServiceCallback<Void> serviceCallback);
 
     /**
      * Get '啊齄丂狛狜隣郎隣兀﨩' multibyte value as utf-8 encoded byte array.
@@ -1064,7 +1065,7 @@ public interface Queries {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    ServiceFuture<Void> byteEmptyAsync(ServiceCallback<Void> serviceCallback);
+    ServiceFuture<Void> byteEmptyAsync(@NonNull ServiceCallback<Void> serviceCallback);
 
     /**
      * Get '' as byte array.
@@ -1095,7 +1096,7 @@ public interface Queries {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    ServiceFuture<Void> byteNullAsync(ServiceCallback<Void> serviceCallback);
+    ServiceFuture<Void> byteNullAsync(@NonNull ServiceCallback<Void> serviceCallback);
 
     /**
      * Get null as byte array (no query parameters in uri).
@@ -1129,7 +1130,7 @@ public interface Queries {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    ServiceFuture<Void> byteNullAsync(byte[] byteQuery, ServiceCallback<Void> serviceCallback);
+    ServiceFuture<Void> byteNullAsync(byte[] byteQuery, @NonNull ServiceCallback<Void> serviceCallback);
 
     /**
      * Get null as byte array (no query parameters in uri).
@@ -1164,7 +1165,7 @@ public interface Queries {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    ServiceFuture<Void> dateValidAsync(ServiceCallback<Void> serviceCallback);
+    ServiceFuture<Void> dateValidAsync(@NonNull ServiceCallback<Void> serviceCallback);
 
     /**
      * Get '2012-01-01' as date.
@@ -1195,7 +1196,7 @@ public interface Queries {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    ServiceFuture<Void> dateNullAsync(ServiceCallback<Void> serviceCallback);
+    ServiceFuture<Void> dateNullAsync(@NonNull ServiceCallback<Void> serviceCallback);
 
     /**
      * Get null as date - this should result in no query parameters in uri.
@@ -1229,7 +1230,7 @@ public interface Queries {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    ServiceFuture<Void> dateNullAsync(LocalDate dateQuery, ServiceCallback<Void> serviceCallback);
+    ServiceFuture<Void> dateNullAsync(LocalDate dateQuery, @NonNull ServiceCallback<Void> serviceCallback);
 
     /**
      * Get null as date - this should result in no query parameters in uri.
@@ -1264,7 +1265,7 @@ public interface Queries {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    ServiceFuture<Void> dateTimeValidAsync(ServiceCallback<Void> serviceCallback);
+    ServiceFuture<Void> dateTimeValidAsync(@NonNull ServiceCallback<Void> serviceCallback);
 
     /**
      * Get '2012-01-01T01:01:01Z' as date-time.
@@ -1295,7 +1296,7 @@ public interface Queries {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    ServiceFuture<Void> dateTimeNullAsync(ServiceCallback<Void> serviceCallback);
+    ServiceFuture<Void> dateTimeNullAsync(@NonNull ServiceCallback<Void> serviceCallback);
 
     /**
      * Get null as date-time, should result in no query parameters in uri.
@@ -1329,7 +1330,7 @@ public interface Queries {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    ServiceFuture<Void> dateTimeNullAsync(DateTime dateTimeQuery, ServiceCallback<Void> serviceCallback);
+    ServiceFuture<Void> dateTimeNullAsync(DateTime dateTimeQuery, @NonNull ServiceCallback<Void> serviceCallback);
 
     /**
      * Get null as date-time, should result in no query parameters in uri.
@@ -1364,7 +1365,7 @@ public interface Queries {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    ServiceFuture<Void> arrayStringCsvValidAsync(ServiceCallback<Void> serviceCallback);
+    ServiceFuture<Void> arrayStringCsvValidAsync(@NonNull ServiceCallback<Void> serviceCallback);
 
     /**
      * Get an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the csv-array format.
@@ -1398,7 +1399,7 @@ public interface Queries {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    ServiceFuture<Void> arrayStringCsvValidAsync(List<String> arrayQuery, ServiceCallback<Void> serviceCallback);
+    ServiceFuture<Void> arrayStringCsvValidAsync(List<String> arrayQuery, @NonNull ServiceCallback<Void> serviceCallback);
 
     /**
      * Get an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the csv-array format.
@@ -1433,7 +1434,7 @@ public interface Queries {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    ServiceFuture<Void> arrayStringCsvNullAsync(ServiceCallback<Void> serviceCallback);
+    ServiceFuture<Void> arrayStringCsvNullAsync(@NonNull ServiceCallback<Void> serviceCallback);
 
     /**
      * Get a null array of string using the csv-array format.
@@ -1467,7 +1468,7 @@ public interface Queries {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    ServiceFuture<Void> arrayStringCsvNullAsync(List<String> arrayQuery, ServiceCallback<Void> serviceCallback);
+    ServiceFuture<Void> arrayStringCsvNullAsync(List<String> arrayQuery, @NonNull ServiceCallback<Void> serviceCallback);
 
     /**
      * Get a null array of string using the csv-array format.
@@ -1502,7 +1503,7 @@ public interface Queries {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    ServiceFuture<Void> arrayStringCsvEmptyAsync(ServiceCallback<Void> serviceCallback);
+    ServiceFuture<Void> arrayStringCsvEmptyAsync(@NonNull ServiceCallback<Void> serviceCallback);
 
     /**
      * Get an empty array [] of string using the csv-array format.
@@ -1536,7 +1537,7 @@ public interface Queries {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    ServiceFuture<Void> arrayStringCsvEmptyAsync(List<String> arrayQuery, ServiceCallback<Void> serviceCallback);
+    ServiceFuture<Void> arrayStringCsvEmptyAsync(List<String> arrayQuery, @NonNull ServiceCallback<Void> serviceCallback);
 
     /**
      * Get an empty array [] of string using the csv-array format.
@@ -1571,7 +1572,7 @@ public interface Queries {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    ServiceFuture<Void> arrayStringSsvValidAsync(ServiceCallback<Void> serviceCallback);
+    ServiceFuture<Void> arrayStringSsvValidAsync(@NonNull ServiceCallback<Void> serviceCallback);
 
     /**
      * Get an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the ssv-array format.
@@ -1605,7 +1606,7 @@ public interface Queries {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    ServiceFuture<Void> arrayStringSsvValidAsync(List<String> arrayQuery, ServiceCallback<Void> serviceCallback);
+    ServiceFuture<Void> arrayStringSsvValidAsync(List<String> arrayQuery, @NonNull ServiceCallback<Void> serviceCallback);
 
     /**
      * Get an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the ssv-array format.
@@ -1640,7 +1641,7 @@ public interface Queries {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    ServiceFuture<Void> arrayStringTsvValidAsync(ServiceCallback<Void> serviceCallback);
+    ServiceFuture<Void> arrayStringTsvValidAsync(@NonNull ServiceCallback<Void> serviceCallback);
 
     /**
      * Get an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the tsv-array format.
@@ -1674,7 +1675,7 @@ public interface Queries {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    ServiceFuture<Void> arrayStringTsvValidAsync(List<String> arrayQuery, ServiceCallback<Void> serviceCallback);
+    ServiceFuture<Void> arrayStringTsvValidAsync(List<String> arrayQuery, @NonNull ServiceCallback<Void> serviceCallback);
 
     /**
      * Get an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the tsv-array format.
@@ -1709,7 +1710,7 @@ public interface Queries {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    ServiceFuture<Void> arrayStringPipesValidAsync(ServiceCallback<Void> serviceCallback);
+    ServiceFuture<Void> arrayStringPipesValidAsync(@NonNull ServiceCallback<Void> serviceCallback);
 
     /**
      * Get an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the pipes-array format.
@@ -1743,7 +1744,7 @@ public interface Queries {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    ServiceFuture<Void> arrayStringPipesValidAsync(List<String> arrayQuery, ServiceCallback<Void> serviceCallback);
+    ServiceFuture<Void> arrayStringPipesValidAsync(List<String> arrayQuery, @NonNull ServiceCallback<Void> serviceCallback);
 
     /**
      * Get an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the pipes-array format.

@@ -17,6 +17,7 @@ import fixtures.bodycomplex.models.Siamese;
 import io.reactivex.Completable;
 import io.reactivex.Maybe;
 import io.reactivex.Single;
+import io.reactivex.annotations.NonNull;
 
 /**
  * An instance of this class provides access to all the operations defined in
@@ -39,7 +40,7 @@ public interface Inheritances {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Siamese&gt;} object.
      */
-    ServiceFuture<Siamese> getValidAsync(ServiceCallback<Siamese> serviceCallback);
+    ServiceFuture<Siamese> getValidAsync(@NonNull ServiceCallback<Siamese> serviceCallback);
 
     /**
      * Get complex types that extend others.
@@ -63,7 +64,7 @@ public interface Inheritances {
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
-    void putValid(Siamese complexBody);
+    void putValid(@NonNull Siamese complexBody);
 
     /**
      * Put complex types that extend others.
@@ -73,7 +74,7 @@ public interface Inheritances {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    ServiceFuture<Void> putValidAsync(Siamese complexBody, ServiceCallback<Void> serviceCallback);
+    ServiceFuture<Void> putValidAsync(@NonNull Siamese complexBody, @NonNull ServiceCallback<Void> serviceCallback);
 
     /**
      * Put complex types that extend others.
@@ -82,7 +83,7 @@ public interface Inheritances {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
      */
-    Single<RestResponse<Void, Void>> putValidWithRestResponseAsync(Siamese complexBody);
+    Single<RestResponse<Void, Void>> putValidWithRestResponseAsync(@NonNull Siamese complexBody);
 
     /**
      * Put complex types that extend others.
@@ -91,5 +92,5 @@ public interface Inheritances {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Completable} object if successful.
      */
-    Completable putValidAsync(Siamese complexBody);
+    Completable putValidAsync(@NonNull Siamese complexBody);
 }

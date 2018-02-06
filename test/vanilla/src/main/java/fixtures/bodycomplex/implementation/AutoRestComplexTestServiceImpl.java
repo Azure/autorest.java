@@ -22,6 +22,7 @@ import fixtures.bodycomplex.Polymorphicrecursives;
 import fixtures.bodycomplex.Polymorphisms;
 import fixtures.bodycomplex.Primitives;
 import fixtures.bodycomplex.Readonlypropertys;
+import io.reactivex.annotations.NonNull;
 
 /**
  * Initializes a new instance of the AutoRestComplexTestService type.
@@ -176,7 +177,7 @@ public final class AutoRestComplexTestServiceImpl extends ServiceClient implemen
      *
      * @param httpPipeline The HTTP pipeline to send requests through.
      */
-    public AutoRestComplexTestServiceImpl(HttpPipeline httpPipeline) {
+    public AutoRestComplexTestServiceImpl(@NonNull HttpPipeline httpPipeline) {
         super(httpPipeline);
         this.apiVersion = "2014-04-01-preview";
         this.basics = new BasicsImpl(this);

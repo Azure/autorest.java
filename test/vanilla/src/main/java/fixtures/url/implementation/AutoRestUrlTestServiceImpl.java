@@ -17,6 +17,7 @@ import fixtures.url.AutoRestUrlTestService;
 import fixtures.url.PathItems;
 import fixtures.url.Paths;
 import fixtures.url.Queries;
+import io.reactivex.annotations.NonNull;
 
 /**
  * Initializes a new instance of the AutoRestUrlTestService type.
@@ -126,7 +127,7 @@ public final class AutoRestUrlTestServiceImpl extends ServiceClient implements A
      *
      * @param httpPipeline The HTTP pipeline to send requests through.
      */
-    public AutoRestUrlTestServiceImpl(HttpPipeline httpPipeline) {
+    public AutoRestUrlTestServiceImpl(@NonNull HttpPipeline httpPipeline) {
         super(httpPipeline);
         this.paths = new PathsImpl(this);
         this.queries = new QueriesImpl(this);

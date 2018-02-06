@@ -16,6 +16,7 @@ import com.microsoft.rest.v2.ServiceFuture;
 import io.reactivex.Completable;
 import io.reactivex.Maybe;
 import io.reactivex.Single;
+import io.reactivex.annotations.NonNull;
 import org.joda.time.LocalDate;
 
 /**
@@ -39,7 +40,7 @@ public interface Dates {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;LocalDate&gt;} object.
      */
-    ServiceFuture<LocalDate> getNullAsync(ServiceCallback<LocalDate> serviceCallback);
+    ServiceFuture<LocalDate> getNullAsync(@NonNull ServiceCallback<LocalDate> serviceCallback);
 
     /**
      * Get null date value.
@@ -71,7 +72,7 @@ public interface Dates {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;LocalDate&gt;} object.
      */
-    ServiceFuture<LocalDate> getInvalidDateAsync(ServiceCallback<LocalDate> serviceCallback);
+    ServiceFuture<LocalDate> getInvalidDateAsync(@NonNull ServiceCallback<LocalDate> serviceCallback);
 
     /**
      * Get invalid date value.
@@ -103,7 +104,7 @@ public interface Dates {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;LocalDate&gt;} object.
      */
-    ServiceFuture<LocalDate> getOverflowDateAsync(ServiceCallback<LocalDate> serviceCallback);
+    ServiceFuture<LocalDate> getOverflowDateAsync(@NonNull ServiceCallback<LocalDate> serviceCallback);
 
     /**
      * Get overflow date value.
@@ -135,7 +136,7 @@ public interface Dates {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;LocalDate&gt;} object.
      */
-    ServiceFuture<LocalDate> getUnderflowDateAsync(ServiceCallback<LocalDate> serviceCallback);
+    ServiceFuture<LocalDate> getUnderflowDateAsync(@NonNull ServiceCallback<LocalDate> serviceCallback);
 
     /**
      * Get underflow date value.
@@ -159,7 +160,7 @@ public interface Dates {
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
-    void putMaxDate(LocalDate dateBody);
+    void putMaxDate(@NonNull LocalDate dateBody);
 
     /**
      * Put max date value 9999-12-31.
@@ -169,7 +170,7 @@ public interface Dates {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    ServiceFuture<Void> putMaxDateAsync(LocalDate dateBody, ServiceCallback<Void> serviceCallback);
+    ServiceFuture<Void> putMaxDateAsync(@NonNull LocalDate dateBody, @NonNull ServiceCallback<Void> serviceCallback);
 
     /**
      * Put max date value 9999-12-31.
@@ -178,7 +179,7 @@ public interface Dates {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
      */
-    Single<RestResponse<Void, Void>> putMaxDateWithRestResponseAsync(LocalDate dateBody);
+    Single<RestResponse<Void, Void>> putMaxDateWithRestResponseAsync(@NonNull LocalDate dateBody);
 
     /**
      * Put max date value 9999-12-31.
@@ -187,7 +188,7 @@ public interface Dates {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Completable} object if successful.
      */
-    Completable putMaxDateAsync(LocalDate dateBody);
+    Completable putMaxDateAsync(@NonNull LocalDate dateBody);
 
     /**
      * Get max date value 9999-12-31.
@@ -205,7 +206,7 @@ public interface Dates {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;LocalDate&gt;} object.
      */
-    ServiceFuture<LocalDate> getMaxDateAsync(ServiceCallback<LocalDate> serviceCallback);
+    ServiceFuture<LocalDate> getMaxDateAsync(@NonNull ServiceCallback<LocalDate> serviceCallback);
 
     /**
      * Get max date value 9999-12-31.
@@ -229,7 +230,7 @@ public interface Dates {
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
-    void putMinDate(LocalDate dateBody);
+    void putMinDate(@NonNull LocalDate dateBody);
 
     /**
      * Put min date value 0000-01-01.
@@ -239,7 +240,7 @@ public interface Dates {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    ServiceFuture<Void> putMinDateAsync(LocalDate dateBody, ServiceCallback<Void> serviceCallback);
+    ServiceFuture<Void> putMinDateAsync(@NonNull LocalDate dateBody, @NonNull ServiceCallback<Void> serviceCallback);
 
     /**
      * Put min date value 0000-01-01.
@@ -248,7 +249,7 @@ public interface Dates {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
      */
-    Single<RestResponse<Void, Void>> putMinDateWithRestResponseAsync(LocalDate dateBody);
+    Single<RestResponse<Void, Void>> putMinDateWithRestResponseAsync(@NonNull LocalDate dateBody);
 
     /**
      * Put min date value 0000-01-01.
@@ -257,7 +258,7 @@ public interface Dates {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Completable} object if successful.
      */
-    Completable putMinDateAsync(LocalDate dateBody);
+    Completable putMinDateAsync(@NonNull LocalDate dateBody);
 
     /**
      * Get min date value 0000-01-01.
@@ -275,7 +276,7 @@ public interface Dates {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;LocalDate&gt;} object.
      */
-    ServiceFuture<LocalDate> getMinDateAsync(ServiceCallback<LocalDate> serviceCallback);
+    ServiceFuture<LocalDate> getMinDateAsync(@NonNull ServiceCallback<LocalDate> serviceCallback);
 
     /**
      * Get min date value 0000-01-01.

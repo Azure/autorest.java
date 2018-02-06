@@ -24,6 +24,7 @@ import fixtures.parameterflattening.AvailabilitySets;
 import fixtures.parameterflattening.models.AvailabilitySetUpdateParameters;
 import io.reactivex.Completable;
 import io.reactivex.Single;
+import io.reactivex.annotations.NonNull;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -72,7 +73,7 @@ public final class AvailabilitySetsImpl implements AvailabilitySets {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
-    public void update(String resourceGroupName, String avset, Map<String, String> tags) {
+    public void update(@NonNull String resourceGroupName, @NonNull String avset, @NonNull Map<String, String> tags) {
         updateAsync(resourceGroupName, avset, tags).blockingAwait();
     }
 
@@ -86,7 +87,7 @@ public final class AvailabilitySetsImpl implements AvailabilitySets {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    public ServiceFuture<Void> updateAsync(String resourceGroupName, String avset, Map<String, String> tags, ServiceCallback<Void> serviceCallback) {
+    public ServiceFuture<Void> updateAsync(@NonNull String resourceGroupName, @NonNull String avset, @NonNull Map<String, String> tags, @NonNull ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(updateAsync(resourceGroupName, avset, tags), serviceCallback);
     }
 
@@ -99,7 +100,7 @@ public final class AvailabilitySetsImpl implements AvailabilitySets {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
      */
-    public Single<RestResponse<Void, Void>> updateWithRestResponseAsync(String resourceGroupName, String avset, Map<String, String> tags) {
+    public Single<RestResponse<Void, Void>> updateWithRestResponseAsync(@NonNull String resourceGroupName, @NonNull String avset, @NonNull Map<String, String> tags) {
         if (resourceGroupName == null) {
             throw new IllegalArgumentException("Parameter resourceGroupName is required and cannot be null.");
         }
@@ -124,7 +125,7 @@ public final class AvailabilitySetsImpl implements AvailabilitySets {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Completable} object if successful.
      */
-    public Completable updateAsync(String resourceGroupName, String avset, Map<String, String> tags) {
+    public Completable updateAsync(@NonNull String resourceGroupName, @NonNull String avset, @NonNull Map<String, String> tags) {
         return updateWithRestResponseAsync(resourceGroupName, avset, tags)
             .toCompletable();
     }

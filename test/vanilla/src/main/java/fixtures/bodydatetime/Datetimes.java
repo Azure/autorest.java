@@ -16,6 +16,7 @@ import com.microsoft.rest.v2.ServiceFuture;
 import io.reactivex.Completable;
 import io.reactivex.Maybe;
 import io.reactivex.Single;
+import io.reactivex.annotations.NonNull;
 import org.joda.time.DateTime;
 
 /**
@@ -39,7 +40,7 @@ public interface Datetimes {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;DateTime&gt;} object.
      */
-    ServiceFuture<DateTime> getNullAsync(ServiceCallback<DateTime> serviceCallback);
+    ServiceFuture<DateTime> getNullAsync(@NonNull ServiceCallback<DateTime> serviceCallback);
 
     /**
      * Get null datetime value.
@@ -71,7 +72,7 @@ public interface Datetimes {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;DateTime&gt;} object.
      */
-    ServiceFuture<DateTime> getInvalidAsync(ServiceCallback<DateTime> serviceCallback);
+    ServiceFuture<DateTime> getInvalidAsync(@NonNull ServiceCallback<DateTime> serviceCallback);
 
     /**
      * Get invalid datetime value.
@@ -103,7 +104,7 @@ public interface Datetimes {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;DateTime&gt;} object.
      */
-    ServiceFuture<DateTime> getOverflowAsync(ServiceCallback<DateTime> serviceCallback);
+    ServiceFuture<DateTime> getOverflowAsync(@NonNull ServiceCallback<DateTime> serviceCallback);
 
     /**
      * Get overflow datetime value.
@@ -135,7 +136,7 @@ public interface Datetimes {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;DateTime&gt;} object.
      */
-    ServiceFuture<DateTime> getUnderflowAsync(ServiceCallback<DateTime> serviceCallback);
+    ServiceFuture<DateTime> getUnderflowAsync(@NonNull ServiceCallback<DateTime> serviceCallback);
 
     /**
      * Get underflow datetime value.
@@ -159,7 +160,7 @@ public interface Datetimes {
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
-    void putUtcMaxDateTime(DateTime datetimeBody);
+    void putUtcMaxDateTime(@NonNull DateTime datetimeBody);
 
     /**
      * Put max datetime value 9999-12-31T23:59:59.9999999Z.
@@ -169,7 +170,7 @@ public interface Datetimes {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    ServiceFuture<Void> putUtcMaxDateTimeAsync(DateTime datetimeBody, ServiceCallback<Void> serviceCallback);
+    ServiceFuture<Void> putUtcMaxDateTimeAsync(@NonNull DateTime datetimeBody, @NonNull ServiceCallback<Void> serviceCallback);
 
     /**
      * Put max datetime value 9999-12-31T23:59:59.9999999Z.
@@ -178,7 +179,7 @@ public interface Datetimes {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
      */
-    Single<RestResponse<Void, Void>> putUtcMaxDateTimeWithRestResponseAsync(DateTime datetimeBody);
+    Single<RestResponse<Void, Void>> putUtcMaxDateTimeWithRestResponseAsync(@NonNull DateTime datetimeBody);
 
     /**
      * Put max datetime value 9999-12-31T23:59:59.9999999Z.
@@ -187,7 +188,7 @@ public interface Datetimes {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Completable} object if successful.
      */
-    Completable putUtcMaxDateTimeAsync(DateTime datetimeBody);
+    Completable putUtcMaxDateTimeAsync(@NonNull DateTime datetimeBody);
 
     /**
      * Get max datetime value 9999-12-31t23:59:59.9999999z.
@@ -205,7 +206,7 @@ public interface Datetimes {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;DateTime&gt;} object.
      */
-    ServiceFuture<DateTime> getUtcLowercaseMaxDateTimeAsync(ServiceCallback<DateTime> serviceCallback);
+    ServiceFuture<DateTime> getUtcLowercaseMaxDateTimeAsync(@NonNull ServiceCallback<DateTime> serviceCallback);
 
     /**
      * Get max datetime value 9999-12-31t23:59:59.9999999z.
@@ -237,7 +238,7 @@ public interface Datetimes {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;DateTime&gt;} object.
      */
-    ServiceFuture<DateTime> getUtcUppercaseMaxDateTimeAsync(ServiceCallback<DateTime> serviceCallback);
+    ServiceFuture<DateTime> getUtcUppercaseMaxDateTimeAsync(@NonNull ServiceCallback<DateTime> serviceCallback);
 
     /**
      * Get max datetime value 9999-12-31T23:59:59.9999999Z.
@@ -261,7 +262,7 @@ public interface Datetimes {
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
-    void putLocalPositiveOffsetMaxDateTime(DateTime datetimeBody);
+    void putLocalPositiveOffsetMaxDateTime(@NonNull DateTime datetimeBody);
 
     /**
      * Put max datetime value with positive numoffset 9999-12-31t23:59:59.9999999+14:00.
@@ -271,7 +272,7 @@ public interface Datetimes {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    ServiceFuture<Void> putLocalPositiveOffsetMaxDateTimeAsync(DateTime datetimeBody, ServiceCallback<Void> serviceCallback);
+    ServiceFuture<Void> putLocalPositiveOffsetMaxDateTimeAsync(@NonNull DateTime datetimeBody, @NonNull ServiceCallback<Void> serviceCallback);
 
     /**
      * Put max datetime value with positive numoffset 9999-12-31t23:59:59.9999999+14:00.
@@ -280,7 +281,7 @@ public interface Datetimes {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
      */
-    Single<RestResponse<Void, Void>> putLocalPositiveOffsetMaxDateTimeWithRestResponseAsync(DateTime datetimeBody);
+    Single<RestResponse<Void, Void>> putLocalPositiveOffsetMaxDateTimeWithRestResponseAsync(@NonNull DateTime datetimeBody);
 
     /**
      * Put max datetime value with positive numoffset 9999-12-31t23:59:59.9999999+14:00.
@@ -289,7 +290,7 @@ public interface Datetimes {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Completable} object if successful.
      */
-    Completable putLocalPositiveOffsetMaxDateTimeAsync(DateTime datetimeBody);
+    Completable putLocalPositiveOffsetMaxDateTimeAsync(@NonNull DateTime datetimeBody);
 
     /**
      * Get max datetime value with positive num offset 9999-12-31t23:59:59.9999999+14:00.
@@ -307,7 +308,7 @@ public interface Datetimes {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;DateTime&gt;} object.
      */
-    ServiceFuture<DateTime> getLocalPositiveOffsetLowercaseMaxDateTimeAsync(ServiceCallback<DateTime> serviceCallback);
+    ServiceFuture<DateTime> getLocalPositiveOffsetLowercaseMaxDateTimeAsync(@NonNull ServiceCallback<DateTime> serviceCallback);
 
     /**
      * Get max datetime value with positive num offset 9999-12-31t23:59:59.9999999+14:00.
@@ -339,7 +340,7 @@ public interface Datetimes {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;DateTime&gt;} object.
      */
-    ServiceFuture<DateTime> getLocalPositiveOffsetUppercaseMaxDateTimeAsync(ServiceCallback<DateTime> serviceCallback);
+    ServiceFuture<DateTime> getLocalPositiveOffsetUppercaseMaxDateTimeAsync(@NonNull ServiceCallback<DateTime> serviceCallback);
 
     /**
      * Get max datetime value with positive num offset 9999-12-31T23:59:59.9999999+14:00.
@@ -363,7 +364,7 @@ public interface Datetimes {
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
-    void putLocalNegativeOffsetMaxDateTime(DateTime datetimeBody);
+    void putLocalNegativeOffsetMaxDateTime(@NonNull DateTime datetimeBody);
 
     /**
      * Put max datetime value with positive numoffset 9999-12-31t23:59:59.9999999-14:00.
@@ -373,7 +374,7 @@ public interface Datetimes {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    ServiceFuture<Void> putLocalNegativeOffsetMaxDateTimeAsync(DateTime datetimeBody, ServiceCallback<Void> serviceCallback);
+    ServiceFuture<Void> putLocalNegativeOffsetMaxDateTimeAsync(@NonNull DateTime datetimeBody, @NonNull ServiceCallback<Void> serviceCallback);
 
     /**
      * Put max datetime value with positive numoffset 9999-12-31t23:59:59.9999999-14:00.
@@ -382,7 +383,7 @@ public interface Datetimes {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
      */
-    Single<RestResponse<Void, Void>> putLocalNegativeOffsetMaxDateTimeWithRestResponseAsync(DateTime datetimeBody);
+    Single<RestResponse<Void, Void>> putLocalNegativeOffsetMaxDateTimeWithRestResponseAsync(@NonNull DateTime datetimeBody);
 
     /**
      * Put max datetime value with positive numoffset 9999-12-31t23:59:59.9999999-14:00.
@@ -391,7 +392,7 @@ public interface Datetimes {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Completable} object if successful.
      */
-    Completable putLocalNegativeOffsetMaxDateTimeAsync(DateTime datetimeBody);
+    Completable putLocalNegativeOffsetMaxDateTimeAsync(@NonNull DateTime datetimeBody);
 
     /**
      * Get max datetime value with positive num offset 9999-12-31T23:59:59.9999999-14:00.
@@ -409,7 +410,7 @@ public interface Datetimes {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;DateTime&gt;} object.
      */
-    ServiceFuture<DateTime> getLocalNegativeOffsetUppercaseMaxDateTimeAsync(ServiceCallback<DateTime> serviceCallback);
+    ServiceFuture<DateTime> getLocalNegativeOffsetUppercaseMaxDateTimeAsync(@NonNull ServiceCallback<DateTime> serviceCallback);
 
     /**
      * Get max datetime value with positive num offset 9999-12-31T23:59:59.9999999-14:00.
@@ -441,7 +442,7 @@ public interface Datetimes {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;DateTime&gt;} object.
      */
-    ServiceFuture<DateTime> getLocalNegativeOffsetLowercaseMaxDateTimeAsync(ServiceCallback<DateTime> serviceCallback);
+    ServiceFuture<DateTime> getLocalNegativeOffsetLowercaseMaxDateTimeAsync(@NonNull ServiceCallback<DateTime> serviceCallback);
 
     /**
      * Get max datetime value with positive num offset 9999-12-31t23:59:59.9999999-14:00.
@@ -465,7 +466,7 @@ public interface Datetimes {
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
-    void putUtcMinDateTime(DateTime datetimeBody);
+    void putUtcMinDateTime(@NonNull DateTime datetimeBody);
 
     /**
      * Put min datetime value 0001-01-01T00:00:00Z.
@@ -475,7 +476,7 @@ public interface Datetimes {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    ServiceFuture<Void> putUtcMinDateTimeAsync(DateTime datetimeBody, ServiceCallback<Void> serviceCallback);
+    ServiceFuture<Void> putUtcMinDateTimeAsync(@NonNull DateTime datetimeBody, @NonNull ServiceCallback<Void> serviceCallback);
 
     /**
      * Put min datetime value 0001-01-01T00:00:00Z.
@@ -484,7 +485,7 @@ public interface Datetimes {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
      */
-    Single<RestResponse<Void, Void>> putUtcMinDateTimeWithRestResponseAsync(DateTime datetimeBody);
+    Single<RestResponse<Void, Void>> putUtcMinDateTimeWithRestResponseAsync(@NonNull DateTime datetimeBody);
 
     /**
      * Put min datetime value 0001-01-01T00:00:00Z.
@@ -493,7 +494,7 @@ public interface Datetimes {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Completable} object if successful.
      */
-    Completable putUtcMinDateTimeAsync(DateTime datetimeBody);
+    Completable putUtcMinDateTimeAsync(@NonNull DateTime datetimeBody);
 
     /**
      * Get min datetime value 0001-01-01T00:00:00Z.
@@ -511,7 +512,7 @@ public interface Datetimes {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;DateTime&gt;} object.
      */
-    ServiceFuture<DateTime> getUtcMinDateTimeAsync(ServiceCallback<DateTime> serviceCallback);
+    ServiceFuture<DateTime> getUtcMinDateTimeAsync(@NonNull ServiceCallback<DateTime> serviceCallback);
 
     /**
      * Get min datetime value 0001-01-01T00:00:00Z.
@@ -535,7 +536,7 @@ public interface Datetimes {
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
-    void putLocalPositiveOffsetMinDateTime(DateTime datetimeBody);
+    void putLocalPositiveOffsetMinDateTime(@NonNull DateTime datetimeBody);
 
     /**
      * Put min datetime value 0001-01-01T00:00:00+14:00.
@@ -545,7 +546,7 @@ public interface Datetimes {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    ServiceFuture<Void> putLocalPositiveOffsetMinDateTimeAsync(DateTime datetimeBody, ServiceCallback<Void> serviceCallback);
+    ServiceFuture<Void> putLocalPositiveOffsetMinDateTimeAsync(@NonNull DateTime datetimeBody, @NonNull ServiceCallback<Void> serviceCallback);
 
     /**
      * Put min datetime value 0001-01-01T00:00:00+14:00.
@@ -554,7 +555,7 @@ public interface Datetimes {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
      */
-    Single<RestResponse<Void, Void>> putLocalPositiveOffsetMinDateTimeWithRestResponseAsync(DateTime datetimeBody);
+    Single<RestResponse<Void, Void>> putLocalPositiveOffsetMinDateTimeWithRestResponseAsync(@NonNull DateTime datetimeBody);
 
     /**
      * Put min datetime value 0001-01-01T00:00:00+14:00.
@@ -563,7 +564,7 @@ public interface Datetimes {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Completable} object if successful.
      */
-    Completable putLocalPositiveOffsetMinDateTimeAsync(DateTime datetimeBody);
+    Completable putLocalPositiveOffsetMinDateTimeAsync(@NonNull DateTime datetimeBody);
 
     /**
      * Get min datetime value 0001-01-01T00:00:00+14:00.
@@ -581,7 +582,7 @@ public interface Datetimes {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;DateTime&gt;} object.
      */
-    ServiceFuture<DateTime> getLocalPositiveOffsetMinDateTimeAsync(ServiceCallback<DateTime> serviceCallback);
+    ServiceFuture<DateTime> getLocalPositiveOffsetMinDateTimeAsync(@NonNull ServiceCallback<DateTime> serviceCallback);
 
     /**
      * Get min datetime value 0001-01-01T00:00:00+14:00.
@@ -605,7 +606,7 @@ public interface Datetimes {
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
-    void putLocalNegativeOffsetMinDateTime(DateTime datetimeBody);
+    void putLocalNegativeOffsetMinDateTime(@NonNull DateTime datetimeBody);
 
     /**
      * Put min datetime value 0001-01-01T00:00:00-14:00.
@@ -615,7 +616,7 @@ public interface Datetimes {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    ServiceFuture<Void> putLocalNegativeOffsetMinDateTimeAsync(DateTime datetimeBody, ServiceCallback<Void> serviceCallback);
+    ServiceFuture<Void> putLocalNegativeOffsetMinDateTimeAsync(@NonNull DateTime datetimeBody, @NonNull ServiceCallback<Void> serviceCallback);
 
     /**
      * Put min datetime value 0001-01-01T00:00:00-14:00.
@@ -624,7 +625,7 @@ public interface Datetimes {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
      */
-    Single<RestResponse<Void, Void>> putLocalNegativeOffsetMinDateTimeWithRestResponseAsync(DateTime datetimeBody);
+    Single<RestResponse<Void, Void>> putLocalNegativeOffsetMinDateTimeWithRestResponseAsync(@NonNull DateTime datetimeBody);
 
     /**
      * Put min datetime value 0001-01-01T00:00:00-14:00.
@@ -633,7 +634,7 @@ public interface Datetimes {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Completable} object if successful.
      */
-    Completable putLocalNegativeOffsetMinDateTimeAsync(DateTime datetimeBody);
+    Completable putLocalNegativeOffsetMinDateTimeAsync(@NonNull DateTime datetimeBody);
 
     /**
      * Get min datetime value 0001-01-01T00:00:00-14:00.
@@ -651,7 +652,7 @@ public interface Datetimes {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;DateTime&gt;} object.
      */
-    ServiceFuture<DateTime> getLocalNegativeOffsetMinDateTimeAsync(ServiceCallback<DateTime> serviceCallback);
+    ServiceFuture<DateTime> getLocalNegativeOffsetMinDateTimeAsync(@NonNull ServiceCallback<DateTime> serviceCallback);
 
     /**
      * Get min datetime value 0001-01-01T00:00:00-14:00.

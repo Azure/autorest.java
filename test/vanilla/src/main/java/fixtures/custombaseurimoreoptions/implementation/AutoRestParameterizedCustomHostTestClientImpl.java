@@ -15,6 +15,7 @@ import com.microsoft.rest.v2.ServiceClient;
 import com.microsoft.rest.v2.http.HttpPipeline;
 import fixtures.custombaseurimoreoptions.AutoRestParameterizedCustomHostTestClient;
 import fixtures.custombaseurimoreoptions.Paths;
+import io.reactivex.annotations.NonNull;
 
 /**
  * Initializes a new instance of the AutoRestParameterizedCustomHostTestClient type.
@@ -96,7 +97,7 @@ public final class AutoRestParameterizedCustomHostTestClientImpl extends Service
      *
      * @param httpPipeline The HTTP pipeline to send requests through.
      */
-    public AutoRestParameterizedCustomHostTestClientImpl(HttpPipeline httpPipeline) {
+    public AutoRestParameterizedCustomHostTestClientImpl(@NonNull HttpPipeline httpPipeline) {
         super(httpPipeline);
         this.dnsSuffix = "host";
         this.paths = new PathsImpl(this);

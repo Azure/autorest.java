@@ -15,6 +15,7 @@ import com.microsoft.rest.v2.ServiceClient;
 import com.microsoft.rest.v2.http.HttpPipeline;
 import fixtures.bodydate.AutoRestDateTestService;
 import fixtures.bodydate.Dates;
+import io.reactivex.annotations.NonNull;
 
 /**
  * Initializes a new instance of the AutoRestDateTestService type.
@@ -46,7 +47,7 @@ public final class AutoRestDateTestServiceImpl extends ServiceClient implements 
      *
      * @param httpPipeline The HTTP pipeline to send requests through.
      */
-    public AutoRestDateTestServiceImpl(HttpPipeline httpPipeline) {
+    public AutoRestDateTestServiceImpl(@NonNull HttpPipeline httpPipeline) {
         super(httpPipeline);
         this.dates = new DatesImpl(this);
     }
