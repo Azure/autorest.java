@@ -17,6 +17,7 @@ import com.microsoft.rest.v2.credentials.ServiceClientCredentials;
 import com.microsoft.rest.v2.http.HttpPipeline;
 import fixtures.subscriptionidapiversion.Groups;
 import fixtures.subscriptionidapiversion.MicrosoftAzureTestUrl;
+import io.reactivex.annotations.NonNull;
 
 /**
  * Initializes a new instance of the MicrosoftAzureTestUrl type.
@@ -155,7 +156,7 @@ public final class MicrosoftAzureTestUrlImpl extends AzureServiceClient implemen
      *
      * @param credentials the management credentials for Azure.
      */
-    public MicrosoftAzureTestUrlImpl(ServiceClientCredentials credentials) {
+    public MicrosoftAzureTestUrlImpl(@NonNull ServiceClientCredentials credentials) {
         this(AzureProxy.createDefaultPipeline(MicrosoftAzureTestUrlImpl.class, credentials));
     }
 
@@ -165,7 +166,7 @@ public final class MicrosoftAzureTestUrlImpl extends AzureServiceClient implemen
      * @param credentials the management credentials for Azure.
      * @param azureEnvironment The environment that requests will target.
      */
-    public MicrosoftAzureTestUrlImpl(ServiceClientCredentials credentials, AzureEnvironment azureEnvironment) {
+    public MicrosoftAzureTestUrlImpl(@NonNull ServiceClientCredentials credentials, @NonNull AzureEnvironment azureEnvironment) {
         this(AzureProxy.createDefaultPipeline(MicrosoftAzureTestUrlImpl.class, credentials), azureEnvironment);
     }
 
@@ -174,7 +175,7 @@ public final class MicrosoftAzureTestUrlImpl extends AzureServiceClient implemen
      *
      * @param httpPipeline The HTTP pipeline to send requests through.
      */
-    public MicrosoftAzureTestUrlImpl(HttpPipeline httpPipeline) {
+    public MicrosoftAzureTestUrlImpl(@NonNull HttpPipeline httpPipeline) {
         this(httpPipeline, null);
     }
 
@@ -184,7 +185,7 @@ public final class MicrosoftAzureTestUrlImpl extends AzureServiceClient implemen
      * @param httpPipeline The HTTP pipeline to send requests through.
      * @param azureEnvironment The environment that requests will target.
      */
-    public MicrosoftAzureTestUrlImpl(HttpPipeline httpPipeline, AzureEnvironment azureEnvironment) {
+    public MicrosoftAzureTestUrlImpl(@NonNull HttpPipeline httpPipeline, @NonNull AzureEnvironment azureEnvironment) {
         super(httpPipeline, azureEnvironment);
         this.apiVersion = "2014-04-01-preview";
         this.acceptLanguage = "en-US";

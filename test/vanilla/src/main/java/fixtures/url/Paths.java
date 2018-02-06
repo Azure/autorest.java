@@ -16,6 +16,7 @@ import com.microsoft.rest.v2.ServiceFuture;
 import fixtures.url.models.UriColor;
 import io.reactivex.Completable;
 import io.reactivex.Single;
+import io.reactivex.annotations.NonNull;
 import java.util.List;
 import org.joda.time.DateTime;
 import org.joda.time.LocalDate;
@@ -40,7 +41,7 @@ public interface Paths {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    ServiceFuture<Void> getBooleanTrueAsync(ServiceCallback<Void> serviceCallback);
+    ServiceFuture<Void> getBooleanTrueAsync(@NonNull ServiceCallback<Void> serviceCallback);
 
     /**
      * Get true Boolean value on path.
@@ -71,7 +72,7 @@ public interface Paths {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    ServiceFuture<Void> getBooleanFalseAsync(ServiceCallback<Void> serviceCallback);
+    ServiceFuture<Void> getBooleanFalseAsync(@NonNull ServiceCallback<Void> serviceCallback);
 
     /**
      * Get false Boolean value on path.
@@ -102,7 +103,7 @@ public interface Paths {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    ServiceFuture<Void> getIntOneMillionAsync(ServiceCallback<Void> serviceCallback);
+    ServiceFuture<Void> getIntOneMillionAsync(@NonNull ServiceCallback<Void> serviceCallback);
 
     /**
      * Get '1000000' integer value.
@@ -133,7 +134,7 @@ public interface Paths {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    ServiceFuture<Void> getIntNegativeOneMillionAsync(ServiceCallback<Void> serviceCallback);
+    ServiceFuture<Void> getIntNegativeOneMillionAsync(@NonNull ServiceCallback<Void> serviceCallback);
 
     /**
      * Get '-1000000' integer value.
@@ -164,7 +165,7 @@ public interface Paths {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    ServiceFuture<Void> getTenBillionAsync(ServiceCallback<Void> serviceCallback);
+    ServiceFuture<Void> getTenBillionAsync(@NonNull ServiceCallback<Void> serviceCallback);
 
     /**
      * Get '10000000000' 64 bit integer value.
@@ -195,7 +196,7 @@ public interface Paths {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    ServiceFuture<Void> getNegativeTenBillionAsync(ServiceCallback<Void> serviceCallback);
+    ServiceFuture<Void> getNegativeTenBillionAsync(@NonNull ServiceCallback<Void> serviceCallback);
 
     /**
      * Get '-10000000000' 64 bit integer value.
@@ -226,7 +227,7 @@ public interface Paths {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    ServiceFuture<Void> floatScientificPositiveAsync(ServiceCallback<Void> serviceCallback);
+    ServiceFuture<Void> floatScientificPositiveAsync(@NonNull ServiceCallback<Void> serviceCallback);
 
     /**
      * Get '1.034E+20' numeric value.
@@ -257,7 +258,7 @@ public interface Paths {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    ServiceFuture<Void> floatScientificNegativeAsync(ServiceCallback<Void> serviceCallback);
+    ServiceFuture<Void> floatScientificNegativeAsync(@NonNull ServiceCallback<Void> serviceCallback);
 
     /**
      * Get '-1.034E-20' numeric value.
@@ -288,7 +289,7 @@ public interface Paths {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    ServiceFuture<Void> doubleDecimalPositiveAsync(ServiceCallback<Void> serviceCallback);
+    ServiceFuture<Void> doubleDecimalPositiveAsync(@NonNull ServiceCallback<Void> serviceCallback);
 
     /**
      * Get '9999999.999' numeric value.
@@ -319,7 +320,7 @@ public interface Paths {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    ServiceFuture<Void> doubleDecimalNegativeAsync(ServiceCallback<Void> serviceCallback);
+    ServiceFuture<Void> doubleDecimalNegativeAsync(@NonNull ServiceCallback<Void> serviceCallback);
 
     /**
      * Get '-9999999.999' numeric value.
@@ -350,7 +351,7 @@ public interface Paths {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    ServiceFuture<Void> stringUnicodeAsync(ServiceCallback<Void> serviceCallback);
+    ServiceFuture<Void> stringUnicodeAsync(@NonNull ServiceCallback<Void> serviceCallback);
 
     /**
      * Get '啊齄丂狛狜隣郎隣兀﨩' multi-byte string value.
@@ -381,7 +382,7 @@ public interface Paths {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    ServiceFuture<Void> stringUrlEncodedAsync(ServiceCallback<Void> serviceCallback);
+    ServiceFuture<Void> stringUrlEncodedAsync(@NonNull ServiceCallback<Void> serviceCallback);
 
     /**
      * Get 'begin!*'();:@ &amp;=+$,/?#[]end.
@@ -412,7 +413,7 @@ public interface Paths {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    ServiceFuture<Void> stringEmptyAsync(ServiceCallback<Void> serviceCallback);
+    ServiceFuture<Void> stringEmptyAsync(@NonNull ServiceCallback<Void> serviceCallback);
 
     /**
      * Get ''.
@@ -436,7 +437,7 @@ public interface Paths {
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
-    void stringNull(String stringPath);
+    void stringNull(@NonNull String stringPath);
 
     /**
      * Get null (should throw).
@@ -446,7 +447,7 @@ public interface Paths {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    ServiceFuture<Void> stringNullAsync(String stringPath, ServiceCallback<Void> serviceCallback);
+    ServiceFuture<Void> stringNullAsync(@NonNull String stringPath, @NonNull ServiceCallback<Void> serviceCallback);
 
     /**
      * Get null (should throw).
@@ -455,7 +456,7 @@ public interface Paths {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
      */
-    Single<RestResponse<Void, Void>> stringNullWithRestResponseAsync(String stringPath);
+    Single<RestResponse<Void, Void>> stringNullWithRestResponseAsync(@NonNull String stringPath);
 
     /**
      * Get null (should throw).
@@ -464,7 +465,7 @@ public interface Paths {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Completable} object if successful.
      */
-    Completable stringNullAsync(String stringPath);
+    Completable stringNullAsync(@NonNull String stringPath);
 
     /**
      * Get using uri with 'green color' in path parameter.
@@ -474,7 +475,7 @@ public interface Paths {
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
-    void enumValid(UriColor enumPath);
+    void enumValid(@NonNull UriColor enumPath);
 
     /**
      * Get using uri with 'green color' in path parameter.
@@ -484,7 +485,7 @@ public interface Paths {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    ServiceFuture<Void> enumValidAsync(UriColor enumPath, ServiceCallback<Void> serviceCallback);
+    ServiceFuture<Void> enumValidAsync(@NonNull UriColor enumPath, @NonNull ServiceCallback<Void> serviceCallback);
 
     /**
      * Get using uri with 'green color' in path parameter.
@@ -493,7 +494,7 @@ public interface Paths {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
      */
-    Single<RestResponse<Void, Void>> enumValidWithRestResponseAsync(UriColor enumPath);
+    Single<RestResponse<Void, Void>> enumValidWithRestResponseAsync(@NonNull UriColor enumPath);
 
     /**
      * Get using uri with 'green color' in path parameter.
@@ -502,7 +503,7 @@ public interface Paths {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Completable} object if successful.
      */
-    Completable enumValidAsync(UriColor enumPath);
+    Completable enumValidAsync(@NonNull UriColor enumPath);
 
     /**
      * Get null (should throw on the client before the request is sent on wire).
@@ -512,7 +513,7 @@ public interface Paths {
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
-    void enumNull(UriColor enumPath);
+    void enumNull(@NonNull UriColor enumPath);
 
     /**
      * Get null (should throw on the client before the request is sent on wire).
@@ -522,7 +523,7 @@ public interface Paths {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    ServiceFuture<Void> enumNullAsync(UriColor enumPath, ServiceCallback<Void> serviceCallback);
+    ServiceFuture<Void> enumNullAsync(@NonNull UriColor enumPath, @NonNull ServiceCallback<Void> serviceCallback);
 
     /**
      * Get null (should throw on the client before the request is sent on wire).
@@ -531,7 +532,7 @@ public interface Paths {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
      */
-    Single<RestResponse<Void, Void>> enumNullWithRestResponseAsync(UriColor enumPath);
+    Single<RestResponse<Void, Void>> enumNullWithRestResponseAsync(@NonNull UriColor enumPath);
 
     /**
      * Get null (should throw on the client before the request is sent on wire).
@@ -540,7 +541,7 @@ public interface Paths {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Completable} object if successful.
      */
-    Completable enumNullAsync(UriColor enumPath);
+    Completable enumNullAsync(@NonNull UriColor enumPath);
 
     /**
      * Get '啊齄丂狛狜隣郎隣兀﨩' multibyte value as utf-8 encoded byte array.
@@ -550,7 +551,7 @@ public interface Paths {
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
-    void byteMultiByte(byte[] bytePath);
+    void byteMultiByte(@NonNull byte[] bytePath);
 
     /**
      * Get '啊齄丂狛狜隣郎隣兀﨩' multibyte value as utf-8 encoded byte array.
@@ -560,7 +561,7 @@ public interface Paths {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    ServiceFuture<Void> byteMultiByteAsync(byte[] bytePath, ServiceCallback<Void> serviceCallback);
+    ServiceFuture<Void> byteMultiByteAsync(@NonNull byte[] bytePath, @NonNull ServiceCallback<Void> serviceCallback);
 
     /**
      * Get '啊齄丂狛狜隣郎隣兀﨩' multibyte value as utf-8 encoded byte array.
@@ -569,7 +570,7 @@ public interface Paths {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
      */
-    Single<RestResponse<Void, Void>> byteMultiByteWithRestResponseAsync(byte[] bytePath);
+    Single<RestResponse<Void, Void>> byteMultiByteWithRestResponseAsync(@NonNull byte[] bytePath);
 
     /**
      * Get '啊齄丂狛狜隣郎隣兀﨩' multibyte value as utf-8 encoded byte array.
@@ -578,7 +579,7 @@ public interface Paths {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Completable} object if successful.
      */
-    Completable byteMultiByteAsync(byte[] bytePath);
+    Completable byteMultiByteAsync(@NonNull byte[] bytePath);
 
     /**
      * Get '' as byte array.
@@ -595,7 +596,7 @@ public interface Paths {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    ServiceFuture<Void> byteEmptyAsync(ServiceCallback<Void> serviceCallback);
+    ServiceFuture<Void> byteEmptyAsync(@NonNull ServiceCallback<Void> serviceCallback);
 
     /**
      * Get '' as byte array.
@@ -619,7 +620,7 @@ public interface Paths {
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
-    void byteNull(byte[] bytePath);
+    void byteNull(@NonNull byte[] bytePath);
 
     /**
      * Get null as byte array (should throw).
@@ -629,7 +630,7 @@ public interface Paths {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    ServiceFuture<Void> byteNullAsync(byte[] bytePath, ServiceCallback<Void> serviceCallback);
+    ServiceFuture<Void> byteNullAsync(@NonNull byte[] bytePath, @NonNull ServiceCallback<Void> serviceCallback);
 
     /**
      * Get null as byte array (should throw).
@@ -638,7 +639,7 @@ public interface Paths {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
      */
-    Single<RestResponse<Void, Void>> byteNullWithRestResponseAsync(byte[] bytePath);
+    Single<RestResponse<Void, Void>> byteNullWithRestResponseAsync(@NonNull byte[] bytePath);
 
     /**
      * Get null as byte array (should throw).
@@ -647,7 +648,7 @@ public interface Paths {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Completable} object if successful.
      */
-    Completable byteNullAsync(byte[] bytePath);
+    Completable byteNullAsync(@NonNull byte[] bytePath);
 
     /**
      * Get '2012-01-01' as date.
@@ -664,7 +665,7 @@ public interface Paths {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    ServiceFuture<Void> dateValidAsync(ServiceCallback<Void> serviceCallback);
+    ServiceFuture<Void> dateValidAsync(@NonNull ServiceCallback<Void> serviceCallback);
 
     /**
      * Get '2012-01-01' as date.
@@ -688,7 +689,7 @@ public interface Paths {
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
-    void dateNull(LocalDate datePath);
+    void dateNull(@NonNull LocalDate datePath);
 
     /**
      * Get null as date - this should throw or be unusable on the client side, depending on date representation.
@@ -698,7 +699,7 @@ public interface Paths {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    ServiceFuture<Void> dateNullAsync(LocalDate datePath, ServiceCallback<Void> serviceCallback);
+    ServiceFuture<Void> dateNullAsync(@NonNull LocalDate datePath, @NonNull ServiceCallback<Void> serviceCallback);
 
     /**
      * Get null as date - this should throw or be unusable on the client side, depending on date representation.
@@ -707,7 +708,7 @@ public interface Paths {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
      */
-    Single<RestResponse<Void, Void>> dateNullWithRestResponseAsync(LocalDate datePath);
+    Single<RestResponse<Void, Void>> dateNullWithRestResponseAsync(@NonNull LocalDate datePath);
 
     /**
      * Get null as date - this should throw or be unusable on the client side, depending on date representation.
@@ -716,7 +717,7 @@ public interface Paths {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Completable} object if successful.
      */
-    Completable dateNullAsync(LocalDate datePath);
+    Completable dateNullAsync(@NonNull LocalDate datePath);
 
     /**
      * Get '2012-01-01T01:01:01Z' as date-time.
@@ -733,7 +734,7 @@ public interface Paths {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    ServiceFuture<Void> dateTimeValidAsync(ServiceCallback<Void> serviceCallback);
+    ServiceFuture<Void> dateTimeValidAsync(@NonNull ServiceCallback<Void> serviceCallback);
 
     /**
      * Get '2012-01-01T01:01:01Z' as date-time.
@@ -757,7 +758,7 @@ public interface Paths {
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
-    void dateTimeNull(DateTime dateTimePath);
+    void dateTimeNull(@NonNull DateTime dateTimePath);
 
     /**
      * Get null as date-time, should be disallowed or throw depending on representation of date-time.
@@ -767,7 +768,7 @@ public interface Paths {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    ServiceFuture<Void> dateTimeNullAsync(DateTime dateTimePath, ServiceCallback<Void> serviceCallback);
+    ServiceFuture<Void> dateTimeNullAsync(@NonNull DateTime dateTimePath, @NonNull ServiceCallback<Void> serviceCallback);
 
     /**
      * Get null as date-time, should be disallowed or throw depending on representation of date-time.
@@ -776,7 +777,7 @@ public interface Paths {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
      */
-    Single<RestResponse<Void, Void>> dateTimeNullWithRestResponseAsync(DateTime dateTimePath);
+    Single<RestResponse<Void, Void>> dateTimeNullWithRestResponseAsync(@NonNull DateTime dateTimePath);
 
     /**
      * Get null as date-time, should be disallowed or throw depending on representation of date-time.
@@ -785,7 +786,7 @@ public interface Paths {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Completable} object if successful.
      */
-    Completable dateTimeNullAsync(DateTime dateTimePath);
+    Completable dateTimeNullAsync(@NonNull DateTime dateTimePath);
 
     /**
      * Get 'lorem' encoded value as 'bG9yZW0' (base64url).
@@ -795,7 +796,7 @@ public interface Paths {
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
-    void base64Url(byte[] base64UrlPath);
+    void base64Url(@NonNull byte[] base64UrlPath);
 
     /**
      * Get 'lorem' encoded value as 'bG9yZW0' (base64url).
@@ -805,7 +806,7 @@ public interface Paths {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    ServiceFuture<Void> base64UrlAsync(byte[] base64UrlPath, ServiceCallback<Void> serviceCallback);
+    ServiceFuture<Void> base64UrlAsync(@NonNull byte[] base64UrlPath, @NonNull ServiceCallback<Void> serviceCallback);
 
     /**
      * Get 'lorem' encoded value as 'bG9yZW0' (base64url).
@@ -814,7 +815,7 @@ public interface Paths {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
      */
-    Single<RestResponse<Void, Void>> base64UrlWithRestResponseAsync(byte[] base64UrlPath);
+    Single<RestResponse<Void, Void>> base64UrlWithRestResponseAsync(@NonNull byte[] base64UrlPath);
 
     /**
      * Get 'lorem' encoded value as 'bG9yZW0' (base64url).
@@ -823,7 +824,7 @@ public interface Paths {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Completable} object if successful.
      */
-    Completable base64UrlAsync(byte[] base64UrlPath);
+    Completable base64UrlAsync(@NonNull byte[] base64UrlPath);
 
     /**
      * Get an array of string ['ArrayPath1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the csv-array format.
@@ -833,7 +834,7 @@ public interface Paths {
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
-    void arrayCsvInPath(List<String> arrayPath);
+    void arrayCsvInPath(@NonNull List<String> arrayPath);
 
     /**
      * Get an array of string ['ArrayPath1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the csv-array format.
@@ -843,7 +844,7 @@ public interface Paths {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    ServiceFuture<Void> arrayCsvInPathAsync(List<String> arrayPath, ServiceCallback<Void> serviceCallback);
+    ServiceFuture<Void> arrayCsvInPathAsync(@NonNull List<String> arrayPath, @NonNull ServiceCallback<Void> serviceCallback);
 
     /**
      * Get an array of string ['ArrayPath1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the csv-array format.
@@ -852,7 +853,7 @@ public interface Paths {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
      */
-    Single<RestResponse<Void, Void>> arrayCsvInPathWithRestResponseAsync(List<String> arrayPath);
+    Single<RestResponse<Void, Void>> arrayCsvInPathWithRestResponseAsync(@NonNull List<String> arrayPath);
 
     /**
      * Get an array of string ['ArrayPath1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the csv-array format.
@@ -861,7 +862,7 @@ public interface Paths {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Completable} object if successful.
      */
-    Completable arrayCsvInPathAsync(List<String> arrayPath);
+    Completable arrayCsvInPathAsync(@NonNull List<String> arrayPath);
 
     /**
      * Get the date 2016-04-13 encoded value as '1460505600' (Unix time).
@@ -871,7 +872,7 @@ public interface Paths {
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
-    void unixTimeUrl(DateTime unixTimeUrlPath);
+    void unixTimeUrl(@NonNull DateTime unixTimeUrlPath);
 
     /**
      * Get the date 2016-04-13 encoded value as '1460505600' (Unix time).
@@ -881,7 +882,7 @@ public interface Paths {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    ServiceFuture<Void> unixTimeUrlAsync(DateTime unixTimeUrlPath, ServiceCallback<Void> serviceCallback);
+    ServiceFuture<Void> unixTimeUrlAsync(@NonNull DateTime unixTimeUrlPath, @NonNull ServiceCallback<Void> serviceCallback);
 
     /**
      * Get the date 2016-04-13 encoded value as '1460505600' (Unix time).
@@ -890,7 +891,7 @@ public interface Paths {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
      */
-    Single<RestResponse<Void, Void>> unixTimeUrlWithRestResponseAsync(DateTime unixTimeUrlPath);
+    Single<RestResponse<Void, Void>> unixTimeUrlWithRestResponseAsync(@NonNull DateTime unixTimeUrlPath);
 
     /**
      * Get the date 2016-04-13 encoded value as '1460505600' (Unix time).
@@ -899,5 +900,5 @@ public interface Paths {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Completable} object if successful.
      */
-    Completable unixTimeUrlAsync(DateTime unixTimeUrlPath);
+    Completable unixTimeUrlAsync(@NonNull DateTime unixTimeUrlPath);
 }

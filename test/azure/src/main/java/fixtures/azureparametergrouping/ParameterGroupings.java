@@ -19,6 +19,7 @@ import fixtures.azureparametergrouping.models.ParameterGroupingPostOptionalParam
 import fixtures.azureparametergrouping.models.ParameterGroupingPostRequiredParameters;
 import io.reactivex.Completable;
 import io.reactivex.Single;
+import io.reactivex.annotations.NonNull;
 
 /**
  * An instance of this class provides access to all the operations defined in
@@ -33,7 +34,7 @@ public interface ParameterGroupings {
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
-    void postRequired(ParameterGroupingPostRequiredParameters parameterGroupingPostRequiredParameters);
+    void postRequired(@NonNull ParameterGroupingPostRequiredParameters parameterGroupingPostRequiredParameters);
 
     /**
      * Post a bunch of required parameters grouped.
@@ -43,7 +44,7 @@ public interface ParameterGroupings {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    ServiceFuture<Void> postRequiredAsync(ParameterGroupingPostRequiredParameters parameterGroupingPostRequiredParameters, ServiceCallback<Void> serviceCallback);
+    ServiceFuture<Void> postRequiredAsync(@NonNull ParameterGroupingPostRequiredParameters parameterGroupingPostRequiredParameters, @NonNull ServiceCallback<Void> serviceCallback);
 
     /**
      * Post a bunch of required parameters grouped.
@@ -52,7 +53,7 @@ public interface ParameterGroupings {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
      */
-    Single<RestResponse<Void, Void>> postRequiredWithRestResponseAsync(ParameterGroupingPostRequiredParameters parameterGroupingPostRequiredParameters);
+    Single<RestResponse<Void, Void>> postRequiredWithRestResponseAsync(@NonNull ParameterGroupingPostRequiredParameters parameterGroupingPostRequiredParameters);
 
     /**
      * Post a bunch of required parameters grouped.
@@ -61,7 +62,7 @@ public interface ParameterGroupings {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Completable} object if successful.
      */
-    Completable postRequiredAsync(ParameterGroupingPostRequiredParameters parameterGroupingPostRequiredParameters);
+    Completable postRequiredAsync(@NonNull ParameterGroupingPostRequiredParameters parameterGroupingPostRequiredParameters);
 
     /**
      * Post a bunch of optional parameters grouped.
@@ -78,7 +79,7 @@ public interface ParameterGroupings {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    ServiceFuture<Void> postOptionalAsync(ServiceCallback<Void> serviceCallback);
+    ServiceFuture<Void> postOptionalAsync(@NonNull ServiceCallback<Void> serviceCallback);
 
     /**
      * Post a bunch of optional parameters grouped.
@@ -112,7 +113,7 @@ public interface ParameterGroupings {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    ServiceFuture<Void> postOptionalAsync(ParameterGroupingPostOptionalParameters parameterGroupingPostOptionalParameters, ServiceCallback<Void> serviceCallback);
+    ServiceFuture<Void> postOptionalAsync(ParameterGroupingPostOptionalParameters parameterGroupingPostOptionalParameters, @NonNull ServiceCallback<Void> serviceCallback);
 
     /**
      * Post a bunch of optional parameters grouped.
@@ -147,7 +148,7 @@ public interface ParameterGroupings {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    ServiceFuture<Void> postMultiParamGroupsAsync(ServiceCallback<Void> serviceCallback);
+    ServiceFuture<Void> postMultiParamGroupsAsync(@NonNull ServiceCallback<Void> serviceCallback);
 
     /**
      * Post parameters from multiple different parameter groups.
@@ -183,7 +184,7 @@ public interface ParameterGroupings {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    ServiceFuture<Void> postMultiParamGroupsAsync(FirstParameterGroup firstParameterGroup, ParameterGroupingPostMultiParamGroupsSecondParamGroup parameterGroupingPostMultiParamGroupsSecondParamGroup, ServiceCallback<Void> serviceCallback);
+    ServiceFuture<Void> postMultiParamGroupsAsync(FirstParameterGroup firstParameterGroup, ParameterGroupingPostMultiParamGroupsSecondParamGroup parameterGroupingPostMultiParamGroupsSecondParamGroup, @NonNull ServiceCallback<Void> serviceCallback);
 
     /**
      * Post parameters from multiple different parameter groups.
@@ -220,7 +221,7 @@ public interface ParameterGroupings {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    ServiceFuture<Void> postSharedParameterGroupObjectAsync(ServiceCallback<Void> serviceCallback);
+    ServiceFuture<Void> postSharedParameterGroupObjectAsync(@NonNull ServiceCallback<Void> serviceCallback);
 
     /**
      * Post parameters with a shared parameter group object.
@@ -254,7 +255,7 @@ public interface ParameterGroupings {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    ServiceFuture<Void> postSharedParameterGroupObjectAsync(FirstParameterGroup firstParameterGroup, ServiceCallback<Void> serviceCallback);
+    ServiceFuture<Void> postSharedParameterGroupObjectAsync(FirstParameterGroup firstParameterGroup, @NonNull ServiceCallback<Void> serviceCallback);
 
     /**
      * Post parameters with a shared parameter group object.

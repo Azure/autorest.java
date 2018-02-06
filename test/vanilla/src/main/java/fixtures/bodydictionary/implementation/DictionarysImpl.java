@@ -30,6 +30,7 @@ import fixtures.bodydictionary.models.Widget;
 import io.reactivex.Completable;
 import io.reactivex.Maybe;
 import io.reactivex.Single;
+import io.reactivex.annotations.NonNull;
 import io.reactivex.functions.Function;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -416,7 +417,7 @@ public final class DictionarysImpl implements Dictionarys {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Map&lt;String, Integer&gt;&gt;} object.
      */
-    public ServiceFuture<Map<String, Integer>> getNullAsync(ServiceCallback<Map<String, Integer>> serviceCallback) {
+    public ServiceFuture<Map<String, Integer>> getNullAsync(@NonNull ServiceCallback<Map<String, Integer>> serviceCallback) {
         return ServiceFuture.fromBody(getNullAsync(), serviceCallback);
     }
 
@@ -465,7 +466,7 @@ public final class DictionarysImpl implements Dictionarys {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Map&lt;String, Integer&gt;&gt;} object.
      */
-    public ServiceFuture<Map<String, Integer>> getEmptyAsync(ServiceCallback<Map<String, Integer>> serviceCallback) {
+    public ServiceFuture<Map<String, Integer>> getEmptyAsync(@NonNull ServiceCallback<Map<String, Integer>> serviceCallback) {
         return ServiceFuture.fromBody(getEmptyAsync(), serviceCallback);
     }
 
@@ -504,7 +505,7 @@ public final class DictionarysImpl implements Dictionarys {
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
-    public void putEmpty(Map<String, String> arrayBody) {
+    public void putEmpty(@NonNull Map<String, String> arrayBody) {
         putEmptyAsync(arrayBody).blockingAwait();
     }
 
@@ -516,7 +517,7 @@ public final class DictionarysImpl implements Dictionarys {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    public ServiceFuture<Void> putEmptyAsync(Map<String, String> arrayBody, ServiceCallback<Void> serviceCallback) {
+    public ServiceFuture<Void> putEmptyAsync(@NonNull Map<String, String> arrayBody, @NonNull ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(putEmptyAsync(arrayBody), serviceCallback);
     }
 
@@ -527,7 +528,7 @@ public final class DictionarysImpl implements Dictionarys {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
      */
-    public Single<RestResponse<Void, Void>> putEmptyWithRestResponseAsync(Map<String, String> arrayBody) {
+    public Single<RestResponse<Void, Void>> putEmptyWithRestResponseAsync(@NonNull Map<String, String> arrayBody) {
         if (arrayBody == null) {
             throw new IllegalArgumentException("Parameter arrayBody is required and cannot be null.");
         }
@@ -542,7 +543,7 @@ public final class DictionarysImpl implements Dictionarys {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Completable} object if successful.
      */
-    public Completable putEmptyAsync(Map<String, String> arrayBody) {
+    public Completable putEmptyAsync(@NonNull Map<String, String> arrayBody) {
         return putEmptyWithRestResponseAsync(arrayBody)
             .toCompletable();
     }
@@ -565,7 +566,7 @@ public final class DictionarysImpl implements Dictionarys {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Map&lt;String, String&gt;&gt;} object.
      */
-    public ServiceFuture<Map<String, String>> getNullValueAsync(ServiceCallback<Map<String, String>> serviceCallback) {
+    public ServiceFuture<Map<String, String>> getNullValueAsync(@NonNull ServiceCallback<Map<String, String>> serviceCallback) {
         return ServiceFuture.fromBody(getNullValueAsync(), serviceCallback);
     }
 
@@ -614,7 +615,7 @@ public final class DictionarysImpl implements Dictionarys {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Map&lt;String, String&gt;&gt;} object.
      */
-    public ServiceFuture<Map<String, String>> getNullKeyAsync(ServiceCallback<Map<String, String>> serviceCallback) {
+    public ServiceFuture<Map<String, String>> getNullKeyAsync(@NonNull ServiceCallback<Map<String, String>> serviceCallback) {
         return ServiceFuture.fromBody(getNullKeyAsync(), serviceCallback);
     }
 
@@ -663,7 +664,7 @@ public final class DictionarysImpl implements Dictionarys {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Map&lt;String, String&gt;&gt;} object.
      */
-    public ServiceFuture<Map<String, String>> getEmptyStringKeyAsync(ServiceCallback<Map<String, String>> serviceCallback) {
+    public ServiceFuture<Map<String, String>> getEmptyStringKeyAsync(@NonNull ServiceCallback<Map<String, String>> serviceCallback) {
         return ServiceFuture.fromBody(getEmptyStringKeyAsync(), serviceCallback);
     }
 
@@ -712,7 +713,7 @@ public final class DictionarysImpl implements Dictionarys {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Map&lt;String, String&gt;&gt;} object.
      */
-    public ServiceFuture<Map<String, String>> getInvalidAsync(ServiceCallback<Map<String, String>> serviceCallback) {
+    public ServiceFuture<Map<String, String>> getInvalidAsync(@NonNull ServiceCallback<Map<String, String>> serviceCallback) {
         return ServiceFuture.fromBody(getInvalidAsync(), serviceCallback);
     }
 
@@ -761,7 +762,7 @@ public final class DictionarysImpl implements Dictionarys {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Map&lt;String, Boolean&gt;&gt;} object.
      */
-    public ServiceFuture<Map<String, Boolean>> getBooleanTfftAsync(ServiceCallback<Map<String, Boolean>> serviceCallback) {
+    public ServiceFuture<Map<String, Boolean>> getBooleanTfftAsync(@NonNull ServiceCallback<Map<String, Boolean>> serviceCallback) {
         return ServiceFuture.fromBody(getBooleanTfftAsync(), serviceCallback);
     }
 
@@ -800,7 +801,7 @@ public final class DictionarysImpl implements Dictionarys {
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
-    public void putBooleanTfft(Map<String, Boolean> arrayBody) {
+    public void putBooleanTfft(@NonNull Map<String, Boolean> arrayBody) {
         putBooleanTfftAsync(arrayBody).blockingAwait();
     }
 
@@ -812,7 +813,7 @@ public final class DictionarysImpl implements Dictionarys {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    public ServiceFuture<Void> putBooleanTfftAsync(Map<String, Boolean> arrayBody, ServiceCallback<Void> serviceCallback) {
+    public ServiceFuture<Void> putBooleanTfftAsync(@NonNull Map<String, Boolean> arrayBody, @NonNull ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(putBooleanTfftAsync(arrayBody), serviceCallback);
     }
 
@@ -823,7 +824,7 @@ public final class DictionarysImpl implements Dictionarys {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
      */
-    public Single<RestResponse<Void, Void>> putBooleanTfftWithRestResponseAsync(Map<String, Boolean> arrayBody) {
+    public Single<RestResponse<Void, Void>> putBooleanTfftWithRestResponseAsync(@NonNull Map<String, Boolean> arrayBody) {
         if (arrayBody == null) {
             throw new IllegalArgumentException("Parameter arrayBody is required and cannot be null.");
         }
@@ -838,7 +839,7 @@ public final class DictionarysImpl implements Dictionarys {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Completable} object if successful.
      */
-    public Completable putBooleanTfftAsync(Map<String, Boolean> arrayBody) {
+    public Completable putBooleanTfftAsync(@NonNull Map<String, Boolean> arrayBody) {
         return putBooleanTfftWithRestResponseAsync(arrayBody)
             .toCompletable();
     }
@@ -861,7 +862,7 @@ public final class DictionarysImpl implements Dictionarys {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Map&lt;String, Boolean&gt;&gt;} object.
      */
-    public ServiceFuture<Map<String, Boolean>> getBooleanInvalidNullAsync(ServiceCallback<Map<String, Boolean>> serviceCallback) {
+    public ServiceFuture<Map<String, Boolean>> getBooleanInvalidNullAsync(@NonNull ServiceCallback<Map<String, Boolean>> serviceCallback) {
         return ServiceFuture.fromBody(getBooleanInvalidNullAsync(), serviceCallback);
     }
 
@@ -910,7 +911,7 @@ public final class DictionarysImpl implements Dictionarys {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Map&lt;String, Boolean&gt;&gt;} object.
      */
-    public ServiceFuture<Map<String, Boolean>> getBooleanInvalidStringAsync(ServiceCallback<Map<String, Boolean>> serviceCallback) {
+    public ServiceFuture<Map<String, Boolean>> getBooleanInvalidStringAsync(@NonNull ServiceCallback<Map<String, Boolean>> serviceCallback) {
         return ServiceFuture.fromBody(getBooleanInvalidStringAsync(), serviceCallback);
     }
 
@@ -959,7 +960,7 @@ public final class DictionarysImpl implements Dictionarys {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Map&lt;String, Integer&gt;&gt;} object.
      */
-    public ServiceFuture<Map<String, Integer>> getIntegerValidAsync(ServiceCallback<Map<String, Integer>> serviceCallback) {
+    public ServiceFuture<Map<String, Integer>> getIntegerValidAsync(@NonNull ServiceCallback<Map<String, Integer>> serviceCallback) {
         return ServiceFuture.fromBody(getIntegerValidAsync(), serviceCallback);
     }
 
@@ -998,7 +999,7 @@ public final class DictionarysImpl implements Dictionarys {
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
-    public void putIntegerValid(Map<String, Integer> arrayBody) {
+    public void putIntegerValid(@NonNull Map<String, Integer> arrayBody) {
         putIntegerValidAsync(arrayBody).blockingAwait();
     }
 
@@ -1010,7 +1011,7 @@ public final class DictionarysImpl implements Dictionarys {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    public ServiceFuture<Void> putIntegerValidAsync(Map<String, Integer> arrayBody, ServiceCallback<Void> serviceCallback) {
+    public ServiceFuture<Void> putIntegerValidAsync(@NonNull Map<String, Integer> arrayBody, @NonNull ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(putIntegerValidAsync(arrayBody), serviceCallback);
     }
 
@@ -1021,7 +1022,7 @@ public final class DictionarysImpl implements Dictionarys {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
      */
-    public Single<RestResponse<Void, Void>> putIntegerValidWithRestResponseAsync(Map<String, Integer> arrayBody) {
+    public Single<RestResponse<Void, Void>> putIntegerValidWithRestResponseAsync(@NonNull Map<String, Integer> arrayBody) {
         if (arrayBody == null) {
             throw new IllegalArgumentException("Parameter arrayBody is required and cannot be null.");
         }
@@ -1036,7 +1037,7 @@ public final class DictionarysImpl implements Dictionarys {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Completable} object if successful.
      */
-    public Completable putIntegerValidAsync(Map<String, Integer> arrayBody) {
+    public Completable putIntegerValidAsync(@NonNull Map<String, Integer> arrayBody) {
         return putIntegerValidWithRestResponseAsync(arrayBody)
             .toCompletable();
     }
@@ -1059,7 +1060,7 @@ public final class DictionarysImpl implements Dictionarys {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Map&lt;String, Integer&gt;&gt;} object.
      */
-    public ServiceFuture<Map<String, Integer>> getIntInvalidNullAsync(ServiceCallback<Map<String, Integer>> serviceCallback) {
+    public ServiceFuture<Map<String, Integer>> getIntInvalidNullAsync(@NonNull ServiceCallback<Map<String, Integer>> serviceCallback) {
         return ServiceFuture.fromBody(getIntInvalidNullAsync(), serviceCallback);
     }
 
@@ -1108,7 +1109,7 @@ public final class DictionarysImpl implements Dictionarys {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Map&lt;String, Integer&gt;&gt;} object.
      */
-    public ServiceFuture<Map<String, Integer>> getIntInvalidStringAsync(ServiceCallback<Map<String, Integer>> serviceCallback) {
+    public ServiceFuture<Map<String, Integer>> getIntInvalidStringAsync(@NonNull ServiceCallback<Map<String, Integer>> serviceCallback) {
         return ServiceFuture.fromBody(getIntInvalidStringAsync(), serviceCallback);
     }
 
@@ -1157,7 +1158,7 @@ public final class DictionarysImpl implements Dictionarys {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Map&lt;String, Long&gt;&gt;} object.
      */
-    public ServiceFuture<Map<String, Long>> getLongValidAsync(ServiceCallback<Map<String, Long>> serviceCallback) {
+    public ServiceFuture<Map<String, Long>> getLongValidAsync(@NonNull ServiceCallback<Map<String, Long>> serviceCallback) {
         return ServiceFuture.fromBody(getLongValidAsync(), serviceCallback);
     }
 
@@ -1196,7 +1197,7 @@ public final class DictionarysImpl implements Dictionarys {
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
-    public void putLongValid(Map<String, Long> arrayBody) {
+    public void putLongValid(@NonNull Map<String, Long> arrayBody) {
         putLongValidAsync(arrayBody).blockingAwait();
     }
 
@@ -1208,7 +1209,7 @@ public final class DictionarysImpl implements Dictionarys {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    public ServiceFuture<Void> putLongValidAsync(Map<String, Long> arrayBody, ServiceCallback<Void> serviceCallback) {
+    public ServiceFuture<Void> putLongValidAsync(@NonNull Map<String, Long> arrayBody, @NonNull ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(putLongValidAsync(arrayBody), serviceCallback);
     }
 
@@ -1219,7 +1220,7 @@ public final class DictionarysImpl implements Dictionarys {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
      */
-    public Single<RestResponse<Void, Void>> putLongValidWithRestResponseAsync(Map<String, Long> arrayBody) {
+    public Single<RestResponse<Void, Void>> putLongValidWithRestResponseAsync(@NonNull Map<String, Long> arrayBody) {
         if (arrayBody == null) {
             throw new IllegalArgumentException("Parameter arrayBody is required and cannot be null.");
         }
@@ -1234,7 +1235,7 @@ public final class DictionarysImpl implements Dictionarys {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Completable} object if successful.
      */
-    public Completable putLongValidAsync(Map<String, Long> arrayBody) {
+    public Completable putLongValidAsync(@NonNull Map<String, Long> arrayBody) {
         return putLongValidWithRestResponseAsync(arrayBody)
             .toCompletable();
     }
@@ -1257,7 +1258,7 @@ public final class DictionarysImpl implements Dictionarys {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Map&lt;String, Long&gt;&gt;} object.
      */
-    public ServiceFuture<Map<String, Long>> getLongInvalidNullAsync(ServiceCallback<Map<String, Long>> serviceCallback) {
+    public ServiceFuture<Map<String, Long>> getLongInvalidNullAsync(@NonNull ServiceCallback<Map<String, Long>> serviceCallback) {
         return ServiceFuture.fromBody(getLongInvalidNullAsync(), serviceCallback);
     }
 
@@ -1306,7 +1307,7 @@ public final class DictionarysImpl implements Dictionarys {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Map&lt;String, Long&gt;&gt;} object.
      */
-    public ServiceFuture<Map<String, Long>> getLongInvalidStringAsync(ServiceCallback<Map<String, Long>> serviceCallback) {
+    public ServiceFuture<Map<String, Long>> getLongInvalidStringAsync(@NonNull ServiceCallback<Map<String, Long>> serviceCallback) {
         return ServiceFuture.fromBody(getLongInvalidStringAsync(), serviceCallback);
     }
 
@@ -1355,7 +1356,7 @@ public final class DictionarysImpl implements Dictionarys {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Map&lt;String, Double&gt;&gt;} object.
      */
-    public ServiceFuture<Map<String, Double>> getFloatValidAsync(ServiceCallback<Map<String, Double>> serviceCallback) {
+    public ServiceFuture<Map<String, Double>> getFloatValidAsync(@NonNull ServiceCallback<Map<String, Double>> serviceCallback) {
         return ServiceFuture.fromBody(getFloatValidAsync(), serviceCallback);
     }
 
@@ -1394,7 +1395,7 @@ public final class DictionarysImpl implements Dictionarys {
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
-    public void putFloatValid(Map<String, Double> arrayBody) {
+    public void putFloatValid(@NonNull Map<String, Double> arrayBody) {
         putFloatValidAsync(arrayBody).blockingAwait();
     }
 
@@ -1406,7 +1407,7 @@ public final class DictionarysImpl implements Dictionarys {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    public ServiceFuture<Void> putFloatValidAsync(Map<String, Double> arrayBody, ServiceCallback<Void> serviceCallback) {
+    public ServiceFuture<Void> putFloatValidAsync(@NonNull Map<String, Double> arrayBody, @NonNull ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(putFloatValidAsync(arrayBody), serviceCallback);
     }
 
@@ -1417,7 +1418,7 @@ public final class DictionarysImpl implements Dictionarys {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
      */
-    public Single<RestResponse<Void, Void>> putFloatValidWithRestResponseAsync(Map<String, Double> arrayBody) {
+    public Single<RestResponse<Void, Void>> putFloatValidWithRestResponseAsync(@NonNull Map<String, Double> arrayBody) {
         if (arrayBody == null) {
             throw new IllegalArgumentException("Parameter arrayBody is required and cannot be null.");
         }
@@ -1432,7 +1433,7 @@ public final class DictionarysImpl implements Dictionarys {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Completable} object if successful.
      */
-    public Completable putFloatValidAsync(Map<String, Double> arrayBody) {
+    public Completable putFloatValidAsync(@NonNull Map<String, Double> arrayBody) {
         return putFloatValidWithRestResponseAsync(arrayBody)
             .toCompletable();
     }
@@ -1455,7 +1456,7 @@ public final class DictionarysImpl implements Dictionarys {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Map&lt;String, Double&gt;&gt;} object.
      */
-    public ServiceFuture<Map<String, Double>> getFloatInvalidNullAsync(ServiceCallback<Map<String, Double>> serviceCallback) {
+    public ServiceFuture<Map<String, Double>> getFloatInvalidNullAsync(@NonNull ServiceCallback<Map<String, Double>> serviceCallback) {
         return ServiceFuture.fromBody(getFloatInvalidNullAsync(), serviceCallback);
     }
 
@@ -1504,7 +1505,7 @@ public final class DictionarysImpl implements Dictionarys {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Map&lt;String, Double&gt;&gt;} object.
      */
-    public ServiceFuture<Map<String, Double>> getFloatInvalidStringAsync(ServiceCallback<Map<String, Double>> serviceCallback) {
+    public ServiceFuture<Map<String, Double>> getFloatInvalidStringAsync(@NonNull ServiceCallback<Map<String, Double>> serviceCallback) {
         return ServiceFuture.fromBody(getFloatInvalidStringAsync(), serviceCallback);
     }
 
@@ -1553,7 +1554,7 @@ public final class DictionarysImpl implements Dictionarys {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Map&lt;String, Double&gt;&gt;} object.
      */
-    public ServiceFuture<Map<String, Double>> getDoubleValidAsync(ServiceCallback<Map<String, Double>> serviceCallback) {
+    public ServiceFuture<Map<String, Double>> getDoubleValidAsync(@NonNull ServiceCallback<Map<String, Double>> serviceCallback) {
         return ServiceFuture.fromBody(getDoubleValidAsync(), serviceCallback);
     }
 
@@ -1592,7 +1593,7 @@ public final class DictionarysImpl implements Dictionarys {
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
-    public void putDoubleValid(Map<String, Double> arrayBody) {
+    public void putDoubleValid(@NonNull Map<String, Double> arrayBody) {
         putDoubleValidAsync(arrayBody).blockingAwait();
     }
 
@@ -1604,7 +1605,7 @@ public final class DictionarysImpl implements Dictionarys {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    public ServiceFuture<Void> putDoubleValidAsync(Map<String, Double> arrayBody, ServiceCallback<Void> serviceCallback) {
+    public ServiceFuture<Void> putDoubleValidAsync(@NonNull Map<String, Double> arrayBody, @NonNull ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(putDoubleValidAsync(arrayBody), serviceCallback);
     }
 
@@ -1615,7 +1616,7 @@ public final class DictionarysImpl implements Dictionarys {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
      */
-    public Single<RestResponse<Void, Void>> putDoubleValidWithRestResponseAsync(Map<String, Double> arrayBody) {
+    public Single<RestResponse<Void, Void>> putDoubleValidWithRestResponseAsync(@NonNull Map<String, Double> arrayBody) {
         if (arrayBody == null) {
             throw new IllegalArgumentException("Parameter arrayBody is required and cannot be null.");
         }
@@ -1630,7 +1631,7 @@ public final class DictionarysImpl implements Dictionarys {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Completable} object if successful.
      */
-    public Completable putDoubleValidAsync(Map<String, Double> arrayBody) {
+    public Completable putDoubleValidAsync(@NonNull Map<String, Double> arrayBody) {
         return putDoubleValidWithRestResponseAsync(arrayBody)
             .toCompletable();
     }
@@ -1653,7 +1654,7 @@ public final class DictionarysImpl implements Dictionarys {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Map&lt;String, Double&gt;&gt;} object.
      */
-    public ServiceFuture<Map<String, Double>> getDoubleInvalidNullAsync(ServiceCallback<Map<String, Double>> serviceCallback) {
+    public ServiceFuture<Map<String, Double>> getDoubleInvalidNullAsync(@NonNull ServiceCallback<Map<String, Double>> serviceCallback) {
         return ServiceFuture.fromBody(getDoubleInvalidNullAsync(), serviceCallback);
     }
 
@@ -1702,7 +1703,7 @@ public final class DictionarysImpl implements Dictionarys {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Map&lt;String, Double&gt;&gt;} object.
      */
-    public ServiceFuture<Map<String, Double>> getDoubleInvalidStringAsync(ServiceCallback<Map<String, Double>> serviceCallback) {
+    public ServiceFuture<Map<String, Double>> getDoubleInvalidStringAsync(@NonNull ServiceCallback<Map<String, Double>> serviceCallback) {
         return ServiceFuture.fromBody(getDoubleInvalidStringAsync(), serviceCallback);
     }
 
@@ -1751,7 +1752,7 @@ public final class DictionarysImpl implements Dictionarys {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Map&lt;String, String&gt;&gt;} object.
      */
-    public ServiceFuture<Map<String, String>> getStringValidAsync(ServiceCallback<Map<String, String>> serviceCallback) {
+    public ServiceFuture<Map<String, String>> getStringValidAsync(@NonNull ServiceCallback<Map<String, String>> serviceCallback) {
         return ServiceFuture.fromBody(getStringValidAsync(), serviceCallback);
     }
 
@@ -1790,7 +1791,7 @@ public final class DictionarysImpl implements Dictionarys {
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
-    public void putStringValid(Map<String, String> arrayBody) {
+    public void putStringValid(@NonNull Map<String, String> arrayBody) {
         putStringValidAsync(arrayBody).blockingAwait();
     }
 
@@ -1802,7 +1803,7 @@ public final class DictionarysImpl implements Dictionarys {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    public ServiceFuture<Void> putStringValidAsync(Map<String, String> arrayBody, ServiceCallback<Void> serviceCallback) {
+    public ServiceFuture<Void> putStringValidAsync(@NonNull Map<String, String> arrayBody, @NonNull ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(putStringValidAsync(arrayBody), serviceCallback);
     }
 
@@ -1813,7 +1814,7 @@ public final class DictionarysImpl implements Dictionarys {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
      */
-    public Single<RestResponse<Void, Void>> putStringValidWithRestResponseAsync(Map<String, String> arrayBody) {
+    public Single<RestResponse<Void, Void>> putStringValidWithRestResponseAsync(@NonNull Map<String, String> arrayBody) {
         if (arrayBody == null) {
             throw new IllegalArgumentException("Parameter arrayBody is required and cannot be null.");
         }
@@ -1828,7 +1829,7 @@ public final class DictionarysImpl implements Dictionarys {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Completable} object if successful.
      */
-    public Completable putStringValidAsync(Map<String, String> arrayBody) {
+    public Completable putStringValidAsync(@NonNull Map<String, String> arrayBody) {
         return putStringValidWithRestResponseAsync(arrayBody)
             .toCompletable();
     }
@@ -1851,7 +1852,7 @@ public final class DictionarysImpl implements Dictionarys {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Map&lt;String, String&gt;&gt;} object.
      */
-    public ServiceFuture<Map<String, String>> getStringWithNullAsync(ServiceCallback<Map<String, String>> serviceCallback) {
+    public ServiceFuture<Map<String, String>> getStringWithNullAsync(@NonNull ServiceCallback<Map<String, String>> serviceCallback) {
         return ServiceFuture.fromBody(getStringWithNullAsync(), serviceCallback);
     }
 
@@ -1900,7 +1901,7 @@ public final class DictionarysImpl implements Dictionarys {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Map&lt;String, String&gt;&gt;} object.
      */
-    public ServiceFuture<Map<String, String>> getStringWithInvalidAsync(ServiceCallback<Map<String, String>> serviceCallback) {
+    public ServiceFuture<Map<String, String>> getStringWithInvalidAsync(@NonNull ServiceCallback<Map<String, String>> serviceCallback) {
         return ServiceFuture.fromBody(getStringWithInvalidAsync(), serviceCallback);
     }
 
@@ -1949,7 +1950,7 @@ public final class DictionarysImpl implements Dictionarys {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Map&lt;String, LocalDate&gt;&gt;} object.
      */
-    public ServiceFuture<Map<String, LocalDate>> getDateValidAsync(ServiceCallback<Map<String, LocalDate>> serviceCallback) {
+    public ServiceFuture<Map<String, LocalDate>> getDateValidAsync(@NonNull ServiceCallback<Map<String, LocalDate>> serviceCallback) {
         return ServiceFuture.fromBody(getDateValidAsync(), serviceCallback);
     }
 
@@ -1988,7 +1989,7 @@ public final class DictionarysImpl implements Dictionarys {
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
-    public void putDateValid(Map<String, LocalDate> arrayBody) {
+    public void putDateValid(@NonNull Map<String, LocalDate> arrayBody) {
         putDateValidAsync(arrayBody).blockingAwait();
     }
 
@@ -2000,7 +2001,7 @@ public final class DictionarysImpl implements Dictionarys {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    public ServiceFuture<Void> putDateValidAsync(Map<String, LocalDate> arrayBody, ServiceCallback<Void> serviceCallback) {
+    public ServiceFuture<Void> putDateValidAsync(@NonNull Map<String, LocalDate> arrayBody, @NonNull ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(putDateValidAsync(arrayBody), serviceCallback);
     }
 
@@ -2011,7 +2012,7 @@ public final class DictionarysImpl implements Dictionarys {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
      */
-    public Single<RestResponse<Void, Void>> putDateValidWithRestResponseAsync(Map<String, LocalDate> arrayBody) {
+    public Single<RestResponse<Void, Void>> putDateValidWithRestResponseAsync(@NonNull Map<String, LocalDate> arrayBody) {
         if (arrayBody == null) {
             throw new IllegalArgumentException("Parameter arrayBody is required and cannot be null.");
         }
@@ -2026,7 +2027,7 @@ public final class DictionarysImpl implements Dictionarys {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Completable} object if successful.
      */
-    public Completable putDateValidAsync(Map<String, LocalDate> arrayBody) {
+    public Completable putDateValidAsync(@NonNull Map<String, LocalDate> arrayBody) {
         return putDateValidWithRestResponseAsync(arrayBody)
             .toCompletable();
     }
@@ -2049,7 +2050,7 @@ public final class DictionarysImpl implements Dictionarys {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Map&lt;String, LocalDate&gt;&gt;} object.
      */
-    public ServiceFuture<Map<String, LocalDate>> getDateInvalidNullAsync(ServiceCallback<Map<String, LocalDate>> serviceCallback) {
+    public ServiceFuture<Map<String, LocalDate>> getDateInvalidNullAsync(@NonNull ServiceCallback<Map<String, LocalDate>> serviceCallback) {
         return ServiceFuture.fromBody(getDateInvalidNullAsync(), serviceCallback);
     }
 
@@ -2098,7 +2099,7 @@ public final class DictionarysImpl implements Dictionarys {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Map&lt;String, LocalDate&gt;&gt;} object.
      */
-    public ServiceFuture<Map<String, LocalDate>> getDateInvalidCharsAsync(ServiceCallback<Map<String, LocalDate>> serviceCallback) {
+    public ServiceFuture<Map<String, LocalDate>> getDateInvalidCharsAsync(@NonNull ServiceCallback<Map<String, LocalDate>> serviceCallback) {
         return ServiceFuture.fromBody(getDateInvalidCharsAsync(), serviceCallback);
     }
 
@@ -2147,7 +2148,7 @@ public final class DictionarysImpl implements Dictionarys {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Map&lt;String, DateTime&gt;&gt;} object.
      */
-    public ServiceFuture<Map<String, DateTime>> getDateTimeValidAsync(ServiceCallback<Map<String, DateTime>> serviceCallback) {
+    public ServiceFuture<Map<String, DateTime>> getDateTimeValidAsync(@NonNull ServiceCallback<Map<String, DateTime>> serviceCallback) {
         return ServiceFuture.fromBody(getDateTimeValidAsync(), serviceCallback);
     }
 
@@ -2186,7 +2187,7 @@ public final class DictionarysImpl implements Dictionarys {
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
-    public void putDateTimeValid(Map<String, DateTime> arrayBody) {
+    public void putDateTimeValid(@NonNull Map<String, DateTime> arrayBody) {
         putDateTimeValidAsync(arrayBody).blockingAwait();
     }
 
@@ -2198,7 +2199,7 @@ public final class DictionarysImpl implements Dictionarys {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    public ServiceFuture<Void> putDateTimeValidAsync(Map<String, DateTime> arrayBody, ServiceCallback<Void> serviceCallback) {
+    public ServiceFuture<Void> putDateTimeValidAsync(@NonNull Map<String, DateTime> arrayBody, @NonNull ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(putDateTimeValidAsync(arrayBody), serviceCallback);
     }
 
@@ -2209,7 +2210,7 @@ public final class DictionarysImpl implements Dictionarys {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
      */
-    public Single<RestResponse<Void, Void>> putDateTimeValidWithRestResponseAsync(Map<String, DateTime> arrayBody) {
+    public Single<RestResponse<Void, Void>> putDateTimeValidWithRestResponseAsync(@NonNull Map<String, DateTime> arrayBody) {
         if (arrayBody == null) {
             throw new IllegalArgumentException("Parameter arrayBody is required and cannot be null.");
         }
@@ -2224,7 +2225,7 @@ public final class DictionarysImpl implements Dictionarys {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Completable} object if successful.
      */
-    public Completable putDateTimeValidAsync(Map<String, DateTime> arrayBody) {
+    public Completable putDateTimeValidAsync(@NonNull Map<String, DateTime> arrayBody) {
         return putDateTimeValidWithRestResponseAsync(arrayBody)
             .toCompletable();
     }
@@ -2247,7 +2248,7 @@ public final class DictionarysImpl implements Dictionarys {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Map&lt;String, DateTime&gt;&gt;} object.
      */
-    public ServiceFuture<Map<String, DateTime>> getDateTimeInvalidNullAsync(ServiceCallback<Map<String, DateTime>> serviceCallback) {
+    public ServiceFuture<Map<String, DateTime>> getDateTimeInvalidNullAsync(@NonNull ServiceCallback<Map<String, DateTime>> serviceCallback) {
         return ServiceFuture.fromBody(getDateTimeInvalidNullAsync(), serviceCallback);
     }
 
@@ -2296,7 +2297,7 @@ public final class DictionarysImpl implements Dictionarys {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Map&lt;String, DateTime&gt;&gt;} object.
      */
-    public ServiceFuture<Map<String, DateTime>> getDateTimeInvalidCharsAsync(ServiceCallback<Map<String, DateTime>> serviceCallback) {
+    public ServiceFuture<Map<String, DateTime>> getDateTimeInvalidCharsAsync(@NonNull ServiceCallback<Map<String, DateTime>> serviceCallback) {
         return ServiceFuture.fromBody(getDateTimeInvalidCharsAsync(), serviceCallback);
     }
 
@@ -2345,7 +2346,7 @@ public final class DictionarysImpl implements Dictionarys {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Map&lt;String, DateTime&gt;&gt;} object.
      */
-    public ServiceFuture<Map<String, DateTime>> getDateTimeRfc1123ValidAsync(ServiceCallback<Map<String, DateTime>> serviceCallback) {
+    public ServiceFuture<Map<String, DateTime>> getDateTimeRfc1123ValidAsync(@NonNull ServiceCallback<Map<String, DateTime>> serviceCallback) {
         return ServiceFuture.fromBody(getDateTimeRfc1123ValidAsync(), serviceCallback);
     }
 
@@ -2384,7 +2385,7 @@ public final class DictionarysImpl implements Dictionarys {
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
-    public void putDateTimeRfc1123Valid(Map<String, DateTime> arrayBody) {
+    public void putDateTimeRfc1123Valid(@NonNull Map<String, DateTime> arrayBody) {
         putDateTimeRfc1123ValidAsync(arrayBody).blockingAwait();
     }
 
@@ -2396,7 +2397,7 @@ public final class DictionarysImpl implements Dictionarys {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    public ServiceFuture<Void> putDateTimeRfc1123ValidAsync(Map<String, DateTime> arrayBody, ServiceCallback<Void> serviceCallback) {
+    public ServiceFuture<Void> putDateTimeRfc1123ValidAsync(@NonNull Map<String, DateTime> arrayBody, @NonNull ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(putDateTimeRfc1123ValidAsync(arrayBody), serviceCallback);
     }
 
@@ -2407,7 +2408,7 @@ public final class DictionarysImpl implements Dictionarys {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
      */
-    public Single<RestResponse<Void, Void>> putDateTimeRfc1123ValidWithRestResponseAsync(Map<String, DateTime> arrayBody) {
+    public Single<RestResponse<Void, Void>> putDateTimeRfc1123ValidWithRestResponseAsync(@NonNull Map<String, DateTime> arrayBody) {
         if (arrayBody == null) {
             throw new IllegalArgumentException("Parameter arrayBody is required and cannot be null.");
         }
@@ -2427,7 +2428,7 @@ public final class DictionarysImpl implements Dictionarys {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Completable} object if successful.
      */
-    public Completable putDateTimeRfc1123ValidAsync(Map<String, DateTime> arrayBody) {
+    public Completable putDateTimeRfc1123ValidAsync(@NonNull Map<String, DateTime> arrayBody) {
         return putDateTimeRfc1123ValidWithRestResponseAsync(arrayBody)
             .toCompletable();
     }
@@ -2450,7 +2451,7 @@ public final class DictionarysImpl implements Dictionarys {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Map&lt;String, Period&gt;&gt;} object.
      */
-    public ServiceFuture<Map<String, Period>> getDurationValidAsync(ServiceCallback<Map<String, Period>> serviceCallback) {
+    public ServiceFuture<Map<String, Period>> getDurationValidAsync(@NonNull ServiceCallback<Map<String, Period>> serviceCallback) {
         return ServiceFuture.fromBody(getDurationValidAsync(), serviceCallback);
     }
 
@@ -2489,7 +2490,7 @@ public final class DictionarysImpl implements Dictionarys {
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
-    public void putDurationValid(Map<String, Period> arrayBody) {
+    public void putDurationValid(@NonNull Map<String, Period> arrayBody) {
         putDurationValidAsync(arrayBody).blockingAwait();
     }
 
@@ -2501,7 +2502,7 @@ public final class DictionarysImpl implements Dictionarys {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    public ServiceFuture<Void> putDurationValidAsync(Map<String, Period> arrayBody, ServiceCallback<Void> serviceCallback) {
+    public ServiceFuture<Void> putDurationValidAsync(@NonNull Map<String, Period> arrayBody, @NonNull ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(putDurationValidAsync(arrayBody), serviceCallback);
     }
 
@@ -2512,7 +2513,7 @@ public final class DictionarysImpl implements Dictionarys {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
      */
-    public Single<RestResponse<Void, Void>> putDurationValidWithRestResponseAsync(Map<String, Period> arrayBody) {
+    public Single<RestResponse<Void, Void>> putDurationValidWithRestResponseAsync(@NonNull Map<String, Period> arrayBody) {
         if (arrayBody == null) {
             throw new IllegalArgumentException("Parameter arrayBody is required and cannot be null.");
         }
@@ -2527,7 +2528,7 @@ public final class DictionarysImpl implements Dictionarys {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Completable} object if successful.
      */
-    public Completable putDurationValidAsync(Map<String, Period> arrayBody) {
+    public Completable putDurationValidAsync(@NonNull Map<String, Period> arrayBody) {
         return putDurationValidWithRestResponseAsync(arrayBody)
             .toCompletable();
     }
@@ -2550,7 +2551,7 @@ public final class DictionarysImpl implements Dictionarys {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Map&lt;String, byte[]&gt;&gt;} object.
      */
-    public ServiceFuture<Map<String, byte[]>> getByteValidAsync(ServiceCallback<Map<String, byte[]>> serviceCallback) {
+    public ServiceFuture<Map<String, byte[]>> getByteValidAsync(@NonNull ServiceCallback<Map<String, byte[]>> serviceCallback) {
         return ServiceFuture.fromBody(getByteValidAsync(), serviceCallback);
     }
 
@@ -2589,7 +2590,7 @@ public final class DictionarysImpl implements Dictionarys {
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
-    public void putByteValid(Map<String, byte[]> arrayBody) {
+    public void putByteValid(@NonNull Map<String, byte[]> arrayBody) {
         putByteValidAsync(arrayBody).blockingAwait();
     }
 
@@ -2601,7 +2602,7 @@ public final class DictionarysImpl implements Dictionarys {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    public ServiceFuture<Void> putByteValidAsync(Map<String, byte[]> arrayBody, ServiceCallback<Void> serviceCallback) {
+    public ServiceFuture<Void> putByteValidAsync(@NonNull Map<String, byte[]> arrayBody, @NonNull ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(putByteValidAsync(arrayBody), serviceCallback);
     }
 
@@ -2612,7 +2613,7 @@ public final class DictionarysImpl implements Dictionarys {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
      */
-    public Single<RestResponse<Void, Void>> putByteValidWithRestResponseAsync(Map<String, byte[]> arrayBody) {
+    public Single<RestResponse<Void, Void>> putByteValidWithRestResponseAsync(@NonNull Map<String, byte[]> arrayBody) {
         if (arrayBody == null) {
             throw new IllegalArgumentException("Parameter arrayBody is required and cannot be null.");
         }
@@ -2627,7 +2628,7 @@ public final class DictionarysImpl implements Dictionarys {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Completable} object if successful.
      */
-    public Completable putByteValidAsync(Map<String, byte[]> arrayBody) {
+    public Completable putByteValidAsync(@NonNull Map<String, byte[]> arrayBody) {
         return putByteValidWithRestResponseAsync(arrayBody)
             .toCompletable();
     }
@@ -2650,7 +2651,7 @@ public final class DictionarysImpl implements Dictionarys {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Map&lt;String, byte[]&gt;&gt;} object.
      */
-    public ServiceFuture<Map<String, byte[]>> getByteInvalidNullAsync(ServiceCallback<Map<String, byte[]>> serviceCallback) {
+    public ServiceFuture<Map<String, byte[]>> getByteInvalidNullAsync(@NonNull ServiceCallback<Map<String, byte[]>> serviceCallback) {
         return ServiceFuture.fromBody(getByteInvalidNullAsync(), serviceCallback);
     }
 
@@ -2699,7 +2700,7 @@ public final class DictionarysImpl implements Dictionarys {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Map&lt;String, byte[]&gt;&gt;} object.
      */
-    public ServiceFuture<Map<String, byte[]>> getBase64UrlAsync(ServiceCallback<Map<String, byte[]>> serviceCallback) {
+    public ServiceFuture<Map<String, byte[]>> getBase64UrlAsync(@NonNull ServiceCallback<Map<String, byte[]>> serviceCallback) {
         return ServiceFuture.fromBody(getBase64UrlAsync(), serviceCallback);
     }
 
@@ -2748,7 +2749,7 @@ public final class DictionarysImpl implements Dictionarys {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Map&lt;String, Widget&gt;&gt;} object.
      */
-    public ServiceFuture<Map<String, Widget>> getComplexNullAsync(ServiceCallback<Map<String, Widget>> serviceCallback) {
+    public ServiceFuture<Map<String, Widget>> getComplexNullAsync(@NonNull ServiceCallback<Map<String, Widget>> serviceCallback) {
         return ServiceFuture.fromBody(getComplexNullAsync(), serviceCallback);
     }
 
@@ -2797,7 +2798,7 @@ public final class DictionarysImpl implements Dictionarys {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Map&lt;String, Widget&gt;&gt;} object.
      */
-    public ServiceFuture<Map<String, Widget>> getComplexEmptyAsync(ServiceCallback<Map<String, Widget>> serviceCallback) {
+    public ServiceFuture<Map<String, Widget>> getComplexEmptyAsync(@NonNull ServiceCallback<Map<String, Widget>> serviceCallback) {
         return ServiceFuture.fromBody(getComplexEmptyAsync(), serviceCallback);
     }
 
@@ -2846,7 +2847,7 @@ public final class DictionarysImpl implements Dictionarys {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Map&lt;String, Widget&gt;&gt;} object.
      */
-    public ServiceFuture<Map<String, Widget>> getComplexItemNullAsync(ServiceCallback<Map<String, Widget>> serviceCallback) {
+    public ServiceFuture<Map<String, Widget>> getComplexItemNullAsync(@NonNull ServiceCallback<Map<String, Widget>> serviceCallback) {
         return ServiceFuture.fromBody(getComplexItemNullAsync(), serviceCallback);
     }
 
@@ -2895,7 +2896,7 @@ public final class DictionarysImpl implements Dictionarys {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Map&lt;String, Widget&gt;&gt;} object.
      */
-    public ServiceFuture<Map<String, Widget>> getComplexItemEmptyAsync(ServiceCallback<Map<String, Widget>> serviceCallback) {
+    public ServiceFuture<Map<String, Widget>> getComplexItemEmptyAsync(@NonNull ServiceCallback<Map<String, Widget>> serviceCallback) {
         return ServiceFuture.fromBody(getComplexItemEmptyAsync(), serviceCallback);
     }
 
@@ -2944,7 +2945,7 @@ public final class DictionarysImpl implements Dictionarys {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Map&lt;String, Widget&gt;&gt;} object.
      */
-    public ServiceFuture<Map<String, Widget>> getComplexValidAsync(ServiceCallback<Map<String, Widget>> serviceCallback) {
+    public ServiceFuture<Map<String, Widget>> getComplexValidAsync(@NonNull ServiceCallback<Map<String, Widget>> serviceCallback) {
         return ServiceFuture.fromBody(getComplexValidAsync(), serviceCallback);
     }
 
@@ -2983,7 +2984,7 @@ public final class DictionarysImpl implements Dictionarys {
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
-    public void putComplexValid(Map<String, Widget> arrayBody) {
+    public void putComplexValid(@NonNull Map<String, Widget> arrayBody) {
         putComplexValidAsync(arrayBody).blockingAwait();
     }
 
@@ -2995,7 +2996,7 @@ public final class DictionarysImpl implements Dictionarys {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    public ServiceFuture<Void> putComplexValidAsync(Map<String, Widget> arrayBody, ServiceCallback<Void> serviceCallback) {
+    public ServiceFuture<Void> putComplexValidAsync(@NonNull Map<String, Widget> arrayBody, @NonNull ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(putComplexValidAsync(arrayBody), serviceCallback);
     }
 
@@ -3006,7 +3007,7 @@ public final class DictionarysImpl implements Dictionarys {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
      */
-    public Single<RestResponse<Void, Void>> putComplexValidWithRestResponseAsync(Map<String, Widget> arrayBody) {
+    public Single<RestResponse<Void, Void>> putComplexValidWithRestResponseAsync(@NonNull Map<String, Widget> arrayBody) {
         if (arrayBody == null) {
             throw new IllegalArgumentException("Parameter arrayBody is required and cannot be null.");
         }
@@ -3021,7 +3022,7 @@ public final class DictionarysImpl implements Dictionarys {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Completable} object if successful.
      */
-    public Completable putComplexValidAsync(Map<String, Widget> arrayBody) {
+    public Completable putComplexValidAsync(@NonNull Map<String, Widget> arrayBody) {
         return putComplexValidWithRestResponseAsync(arrayBody)
             .toCompletable();
     }
@@ -3044,7 +3045,7 @@ public final class DictionarysImpl implements Dictionarys {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Map&lt;String, List&lt;String&gt;&gt;&gt;} object.
      */
-    public ServiceFuture<Map<String, List<String>>> getArrayNullAsync(ServiceCallback<Map<String, List<String>>> serviceCallback) {
+    public ServiceFuture<Map<String, List<String>>> getArrayNullAsync(@NonNull ServiceCallback<Map<String, List<String>>> serviceCallback) {
         return ServiceFuture.fromBody(getArrayNullAsync(), serviceCallback);
     }
 
@@ -3093,7 +3094,7 @@ public final class DictionarysImpl implements Dictionarys {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Map&lt;String, List&lt;String&gt;&gt;&gt;} object.
      */
-    public ServiceFuture<Map<String, List<String>>> getArrayEmptyAsync(ServiceCallback<Map<String, List<String>>> serviceCallback) {
+    public ServiceFuture<Map<String, List<String>>> getArrayEmptyAsync(@NonNull ServiceCallback<Map<String, List<String>>> serviceCallback) {
         return ServiceFuture.fromBody(getArrayEmptyAsync(), serviceCallback);
     }
 
@@ -3142,7 +3143,7 @@ public final class DictionarysImpl implements Dictionarys {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Map&lt;String, List&lt;String&gt;&gt;&gt;} object.
      */
-    public ServiceFuture<Map<String, List<String>>> getArrayItemNullAsync(ServiceCallback<Map<String, List<String>>> serviceCallback) {
+    public ServiceFuture<Map<String, List<String>>> getArrayItemNullAsync(@NonNull ServiceCallback<Map<String, List<String>>> serviceCallback) {
         return ServiceFuture.fromBody(getArrayItemNullAsync(), serviceCallback);
     }
 
@@ -3191,7 +3192,7 @@ public final class DictionarysImpl implements Dictionarys {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Map&lt;String, List&lt;String&gt;&gt;&gt;} object.
      */
-    public ServiceFuture<Map<String, List<String>>> getArrayItemEmptyAsync(ServiceCallback<Map<String, List<String>>> serviceCallback) {
+    public ServiceFuture<Map<String, List<String>>> getArrayItemEmptyAsync(@NonNull ServiceCallback<Map<String, List<String>>> serviceCallback) {
         return ServiceFuture.fromBody(getArrayItemEmptyAsync(), serviceCallback);
     }
 
@@ -3240,7 +3241,7 @@ public final class DictionarysImpl implements Dictionarys {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Map&lt;String, List&lt;String&gt;&gt;&gt;} object.
      */
-    public ServiceFuture<Map<String, List<String>>> getArrayValidAsync(ServiceCallback<Map<String, List<String>>> serviceCallback) {
+    public ServiceFuture<Map<String, List<String>>> getArrayValidAsync(@NonNull ServiceCallback<Map<String, List<String>>> serviceCallback) {
         return ServiceFuture.fromBody(getArrayValidAsync(), serviceCallback);
     }
 
@@ -3279,7 +3280,7 @@ public final class DictionarysImpl implements Dictionarys {
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
-    public void putArrayValid(Map<String, List<String>> arrayBody) {
+    public void putArrayValid(@NonNull Map<String, List<String>> arrayBody) {
         putArrayValidAsync(arrayBody).blockingAwait();
     }
 
@@ -3291,7 +3292,7 @@ public final class DictionarysImpl implements Dictionarys {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    public ServiceFuture<Void> putArrayValidAsync(Map<String, List<String>> arrayBody, ServiceCallback<Void> serviceCallback) {
+    public ServiceFuture<Void> putArrayValidAsync(@NonNull Map<String, List<String>> arrayBody, @NonNull ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(putArrayValidAsync(arrayBody), serviceCallback);
     }
 
@@ -3302,7 +3303,7 @@ public final class DictionarysImpl implements Dictionarys {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
      */
-    public Single<RestResponse<Void, Void>> putArrayValidWithRestResponseAsync(Map<String, List<String>> arrayBody) {
+    public Single<RestResponse<Void, Void>> putArrayValidWithRestResponseAsync(@NonNull Map<String, List<String>> arrayBody) {
         if (arrayBody == null) {
             throw new IllegalArgumentException("Parameter arrayBody is required and cannot be null.");
         }
@@ -3317,7 +3318,7 @@ public final class DictionarysImpl implements Dictionarys {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Completable} object if successful.
      */
-    public Completable putArrayValidAsync(Map<String, List<String>> arrayBody) {
+    public Completable putArrayValidAsync(@NonNull Map<String, List<String>> arrayBody) {
         return putArrayValidWithRestResponseAsync(arrayBody)
             .toCompletable();
     }
@@ -3340,7 +3341,7 @@ public final class DictionarysImpl implements Dictionarys {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Map&lt;String, Map&lt;String, String&gt;&gt;&gt;} object.
      */
-    public ServiceFuture<Map<String, Map<String, String>>> getDictionaryNullAsync(ServiceCallback<Map<String, Map<String, String>>> serviceCallback) {
+    public ServiceFuture<Map<String, Map<String, String>>> getDictionaryNullAsync(@NonNull ServiceCallback<Map<String, Map<String, String>>> serviceCallback) {
         return ServiceFuture.fromBody(getDictionaryNullAsync(), serviceCallback);
     }
 
@@ -3389,7 +3390,7 @@ public final class DictionarysImpl implements Dictionarys {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Map&lt;String, Map&lt;String, String&gt;&gt;&gt;} object.
      */
-    public ServiceFuture<Map<String, Map<String, String>>> getDictionaryEmptyAsync(ServiceCallback<Map<String, Map<String, String>>> serviceCallback) {
+    public ServiceFuture<Map<String, Map<String, String>>> getDictionaryEmptyAsync(@NonNull ServiceCallback<Map<String, Map<String, String>>> serviceCallback) {
         return ServiceFuture.fromBody(getDictionaryEmptyAsync(), serviceCallback);
     }
 
@@ -3438,7 +3439,7 @@ public final class DictionarysImpl implements Dictionarys {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Map&lt;String, Map&lt;String, String&gt;&gt;&gt;} object.
      */
-    public ServiceFuture<Map<String, Map<String, String>>> getDictionaryItemNullAsync(ServiceCallback<Map<String, Map<String, String>>> serviceCallback) {
+    public ServiceFuture<Map<String, Map<String, String>>> getDictionaryItemNullAsync(@NonNull ServiceCallback<Map<String, Map<String, String>>> serviceCallback) {
         return ServiceFuture.fromBody(getDictionaryItemNullAsync(), serviceCallback);
     }
 
@@ -3487,7 +3488,7 @@ public final class DictionarysImpl implements Dictionarys {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Map&lt;String, Map&lt;String, String&gt;&gt;&gt;} object.
      */
-    public ServiceFuture<Map<String, Map<String, String>>> getDictionaryItemEmptyAsync(ServiceCallback<Map<String, Map<String, String>>> serviceCallback) {
+    public ServiceFuture<Map<String, Map<String, String>>> getDictionaryItemEmptyAsync(@NonNull ServiceCallback<Map<String, Map<String, String>>> serviceCallback) {
         return ServiceFuture.fromBody(getDictionaryItemEmptyAsync(), serviceCallback);
     }
 
@@ -3536,7 +3537,7 @@ public final class DictionarysImpl implements Dictionarys {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Map&lt;String, Map&lt;String, String&gt;&gt;&gt;} object.
      */
-    public ServiceFuture<Map<String, Map<String, String>>> getDictionaryValidAsync(ServiceCallback<Map<String, Map<String, String>>> serviceCallback) {
+    public ServiceFuture<Map<String, Map<String, String>>> getDictionaryValidAsync(@NonNull ServiceCallback<Map<String, Map<String, String>>> serviceCallback) {
         return ServiceFuture.fromBody(getDictionaryValidAsync(), serviceCallback);
     }
 
@@ -3575,7 +3576,7 @@ public final class DictionarysImpl implements Dictionarys {
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
-    public void putDictionaryValid(Map<String, Map<String, String>> arrayBody) {
+    public void putDictionaryValid(@NonNull Map<String, Map<String, String>> arrayBody) {
         putDictionaryValidAsync(arrayBody).blockingAwait();
     }
 
@@ -3587,7 +3588,7 @@ public final class DictionarysImpl implements Dictionarys {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    public ServiceFuture<Void> putDictionaryValidAsync(Map<String, Map<String, String>> arrayBody, ServiceCallback<Void> serviceCallback) {
+    public ServiceFuture<Void> putDictionaryValidAsync(@NonNull Map<String, Map<String, String>> arrayBody, @NonNull ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(putDictionaryValidAsync(arrayBody), serviceCallback);
     }
 
@@ -3598,7 +3599,7 @@ public final class DictionarysImpl implements Dictionarys {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
      */
-    public Single<RestResponse<Void, Void>> putDictionaryValidWithRestResponseAsync(Map<String, Map<String, String>> arrayBody) {
+    public Single<RestResponse<Void, Void>> putDictionaryValidWithRestResponseAsync(@NonNull Map<String, Map<String, String>> arrayBody) {
         if (arrayBody == null) {
             throw new IllegalArgumentException("Parameter arrayBody is required and cannot be null.");
         }
@@ -3613,7 +3614,7 @@ public final class DictionarysImpl implements Dictionarys {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Completable} object if successful.
      */
-    public Completable putDictionaryValidAsync(Map<String, Map<String, String>> arrayBody) {
+    public Completable putDictionaryValidAsync(@NonNull Map<String, Map<String, String>> arrayBody) {
         return putDictionaryValidWithRestResponseAsync(arrayBody)
             .toCompletable();
     }

@@ -17,6 +17,7 @@ import fixtures.bodycomplex.models.ReadonlyObj;
 import io.reactivex.Completable;
 import io.reactivex.Maybe;
 import io.reactivex.Single;
+import io.reactivex.annotations.NonNull;
 
 /**
  * An instance of this class provides access to all the operations defined in
@@ -39,7 +40,7 @@ public interface Readonlypropertys {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;ReadonlyObj&gt;} object.
      */
-    ServiceFuture<ReadonlyObj> getValidAsync(ServiceCallback<ReadonlyObj> serviceCallback);
+    ServiceFuture<ReadonlyObj> getValidAsync(@NonNull ServiceCallback<ReadonlyObj> serviceCallback);
 
     /**
      * Get complex types that have readonly properties.
@@ -63,7 +64,7 @@ public interface Readonlypropertys {
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
-    void putValid(ReadonlyObj complexBody);
+    void putValid(@NonNull ReadonlyObj complexBody);
 
     /**
      * Put complex types that have readonly properties.
@@ -73,7 +74,7 @@ public interface Readonlypropertys {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    ServiceFuture<Void> putValidAsync(ReadonlyObj complexBody, ServiceCallback<Void> serviceCallback);
+    ServiceFuture<Void> putValidAsync(@NonNull ReadonlyObj complexBody, @NonNull ServiceCallback<Void> serviceCallback);
 
     /**
      * Put complex types that have readonly properties.
@@ -82,7 +83,7 @@ public interface Readonlypropertys {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
      */
-    Single<RestResponse<Void, Void>> putValidWithRestResponseAsync(ReadonlyObj complexBody);
+    Single<RestResponse<Void, Void>> putValidWithRestResponseAsync(@NonNull ReadonlyObj complexBody);
 
     /**
      * Put complex types that have readonly properties.
@@ -91,5 +92,5 @@ public interface Readonlypropertys {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Completable} object if successful.
      */
-    Completable putValidAsync(ReadonlyObj complexBody);
+    Completable putValidAsync(@NonNull ReadonlyObj complexBody);
 }

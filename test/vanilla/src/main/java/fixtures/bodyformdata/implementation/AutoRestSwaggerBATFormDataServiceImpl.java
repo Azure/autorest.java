@@ -15,6 +15,7 @@ import com.microsoft.rest.v2.ServiceClient;
 import com.microsoft.rest.v2.http.HttpPipeline;
 import fixtures.bodyformdata.AutoRestSwaggerBATFormDataService;
 import fixtures.bodyformdata.Formdatas;
+import io.reactivex.annotations.NonNull;
 
 /**
  * Initializes a new instance of the AutoRestSwaggerBATFormDataService type.
@@ -46,7 +47,7 @@ public final class AutoRestSwaggerBATFormDataServiceImpl extends ServiceClient i
      *
      * @param httpPipeline The HTTP pipeline to send requests through.
      */
-    public AutoRestSwaggerBATFormDataServiceImpl(HttpPipeline httpPipeline) {
+    public AutoRestSwaggerBATFormDataServiceImpl(@NonNull HttpPipeline httpPipeline) {
         super(httpPipeline);
         this.formdatas = new FormdatasImpl(this);
     }

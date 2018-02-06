@@ -18,6 +18,7 @@ import fixtures.bodycomplex.models.Salmon;
 import io.reactivex.Completable;
 import io.reactivex.Maybe;
 import io.reactivex.Single;
+import io.reactivex.annotations.NonNull;
 
 /**
  * An instance of this class provides access to all the operations defined in
@@ -40,7 +41,7 @@ public interface Polymorphisms {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Fish&gt;} object.
      */
-    ServiceFuture<Fish> getValidAsync(ServiceCallback<Fish> serviceCallback);
+    ServiceFuture<Fish> getValidAsync(@NonNull ServiceCallback<Fish> serviceCallback);
 
     /**
      * Get complex types that are polymorphic.
@@ -96,7 +97,7 @@ public interface Polymorphisms {
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
-    void putValid(Fish complexBody);
+    void putValid(@NonNull Fish complexBody);
 
     /**
      * Put complex types that are polymorphic.
@@ -138,7 +139,7 @@ public interface Polymorphisms {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    ServiceFuture<Void> putValidAsync(Fish complexBody, ServiceCallback<Void> serviceCallback);
+    ServiceFuture<Void> putValidAsync(@NonNull Fish complexBody, @NonNull ServiceCallback<Void> serviceCallback);
 
     /**
      * Put complex types that are polymorphic.
@@ -179,7 +180,7 @@ public interface Polymorphisms {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
      */
-    Single<RestResponse<Void, Void>> putValidWithRestResponseAsync(Fish complexBody);
+    Single<RestResponse<Void, Void>> putValidWithRestResponseAsync(@NonNull Fish complexBody);
 
     /**
      * Put complex types that are polymorphic.
@@ -220,7 +221,7 @@ public interface Polymorphisms {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Completable} object if successful.
      */
-    Completable putValidAsync(Fish complexBody);
+    Completable putValidAsync(@NonNull Fish complexBody);
 
     /**
      * Get complex types that are polymorphic, but not at the root of the hierarchy; also have additional properties.
@@ -238,7 +239,7 @@ public interface Polymorphisms {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Salmon&gt;} object.
      */
-    ServiceFuture<Salmon> getComplicatedAsync(ServiceCallback<Salmon> serviceCallback);
+    ServiceFuture<Salmon> getComplicatedAsync(@NonNull ServiceCallback<Salmon> serviceCallback);
 
     /**
      * Get complex types that are polymorphic, but not at the root of the hierarchy; also have additional properties.
@@ -262,7 +263,7 @@ public interface Polymorphisms {
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
-    void putComplicated(Salmon complexBody);
+    void putComplicated(@NonNull Salmon complexBody);
 
     /**
      * Put complex types that are polymorphic, but not at the root of the hierarchy; also have additional properties.
@@ -272,7 +273,7 @@ public interface Polymorphisms {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    ServiceFuture<Void> putComplicatedAsync(Salmon complexBody, ServiceCallback<Void> serviceCallback);
+    ServiceFuture<Void> putComplicatedAsync(@NonNull Salmon complexBody, @NonNull ServiceCallback<Void> serviceCallback);
 
     /**
      * Put complex types that are polymorphic, but not at the root of the hierarchy; also have additional properties.
@@ -281,7 +282,7 @@ public interface Polymorphisms {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
      */
-    Single<RestResponse<Void, Void>> putComplicatedWithRestResponseAsync(Salmon complexBody);
+    Single<RestResponse<Void, Void>> putComplicatedWithRestResponseAsync(@NonNull Salmon complexBody);
 
     /**
      * Put complex types that are polymorphic, but not at the root of the hierarchy; also have additional properties.
@@ -290,7 +291,7 @@ public interface Polymorphisms {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Completable} object if successful.
      */
-    Completable putComplicatedAsync(Salmon complexBody);
+    Completable putComplicatedAsync(@NonNull Salmon complexBody);
 
     /**
      * Put complex types that are polymorphic, attempting to omit required 'birthday' field - the request should not be allowed from the client.
@@ -325,7 +326,7 @@ public interface Polymorphisms {
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
-    void putValidMissingRequired(Fish complexBody);
+    void putValidMissingRequired(@NonNull Fish complexBody);
 
     /**
      * Put complex types that are polymorphic, attempting to omit required 'birthday' field - the request should not be allowed from the client.
@@ -360,7 +361,7 @@ public interface Polymorphisms {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    ServiceFuture<Void> putValidMissingRequiredAsync(Fish complexBody, ServiceCallback<Void> serviceCallback);
+    ServiceFuture<Void> putValidMissingRequiredAsync(@NonNull Fish complexBody, @NonNull ServiceCallback<Void> serviceCallback);
 
     /**
      * Put complex types that are polymorphic, attempting to omit required 'birthday' field - the request should not be allowed from the client.
@@ -394,7 +395,7 @@ public interface Polymorphisms {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
      */
-    Single<RestResponse<Void, Void>> putValidMissingRequiredWithRestResponseAsync(Fish complexBody);
+    Single<RestResponse<Void, Void>> putValidMissingRequiredWithRestResponseAsync(@NonNull Fish complexBody);
 
     /**
      * Put complex types that are polymorphic, attempting to omit required 'birthday' field - the request should not be allowed from the client.
@@ -428,5 +429,5 @@ public interface Polymorphisms {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Completable} object if successful.
      */
-    Completable putValidMissingRequiredAsync(Fish complexBody);
+    Completable putValidMissingRequiredAsync(@NonNull Fish complexBody);
 }

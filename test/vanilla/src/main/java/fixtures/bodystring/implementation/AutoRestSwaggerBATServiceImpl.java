@@ -16,6 +16,7 @@ import com.microsoft.rest.v2.http.HttpPipeline;
 import fixtures.bodystring.AutoRestSwaggerBATService;
 import fixtures.bodystring.Enums;
 import fixtures.bodystring.Strings;
+import io.reactivex.annotations.NonNull;
 
 /**
  * Initializes a new instance of the AutoRestSwaggerBATService type.
@@ -61,7 +62,7 @@ public final class AutoRestSwaggerBATServiceImpl extends ServiceClient implement
      *
      * @param httpPipeline The HTTP pipeline to send requests through.
      */
-    public AutoRestSwaggerBATServiceImpl(HttpPipeline httpPipeline) {
+    public AutoRestSwaggerBATServiceImpl(@NonNull HttpPipeline httpPipeline) {
         super(httpPipeline);
         this.strings = new StringsImpl(this);
         this.enums = new EnumsImpl(this);

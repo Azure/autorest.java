@@ -15,6 +15,7 @@ import com.microsoft.rest.v2.ServiceClient;
 import com.microsoft.rest.v2.http.HttpPipeline;
 import fixtures.bodydictionary.AutoRestSwaggerBATdictionaryService;
 import fixtures.bodydictionary.Dictionarys;
+import io.reactivex.annotations.NonNull;
 
 /**
  * Initializes a new instance of the AutoRestSwaggerBATdictionaryService type.
@@ -46,7 +47,7 @@ public final class AutoRestSwaggerBATdictionaryServiceImpl extends ServiceClient
      *
      * @param httpPipeline The HTTP pipeline to send requests through.
      */
-    public AutoRestSwaggerBATdictionaryServiceImpl(HttpPipeline httpPipeline) {
+    public AutoRestSwaggerBATdictionaryServiceImpl(@NonNull HttpPipeline httpPipeline) {
         super(httpPipeline);
         this.dictionarys = new DictionarysImpl(this);
     }

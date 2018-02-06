@@ -27,6 +27,7 @@ import fixtures.bodystring.models.ErrorException;
 import io.reactivex.Completable;
 import io.reactivex.Maybe;
 import io.reactivex.Single;
+import io.reactivex.annotations.NonNull;
 import io.reactivex.functions.Function;
 
 /**
@@ -147,7 +148,7 @@ public final class StringsImpl implements Strings {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;String&gt;} object.
      */
-    public ServiceFuture<String> getNullAsync(ServiceCallback<String> serviceCallback) {
+    public ServiceFuture<String> getNullAsync(@NonNull ServiceCallback<String> serviceCallback) {
         return ServiceFuture.fromBody(getNullAsync(), serviceCallback);
     }
 
@@ -195,7 +196,7 @@ public final class StringsImpl implements Strings {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    public ServiceFuture<Void> putNullAsync(ServiceCallback<Void> serviceCallback) {
+    public ServiceFuture<Void> putNullAsync(@NonNull ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(putNullAsync(), serviceCallback);
     }
 
@@ -239,7 +240,7 @@ public final class StringsImpl implements Strings {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    public ServiceFuture<Void> putNullAsync(String stringBody, ServiceCallback<Void> serviceCallback) {
+    public ServiceFuture<Void> putNullAsync(String stringBody, @NonNull ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(putNullAsync(stringBody), serviceCallback);
     }
 
@@ -284,7 +285,7 @@ public final class StringsImpl implements Strings {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;String&gt;} object.
      */
-    public ServiceFuture<String> getEmptyAsync(ServiceCallback<String> serviceCallback) {
+    public ServiceFuture<String> getEmptyAsync(@NonNull ServiceCallback<String> serviceCallback) {
         return ServiceFuture.fromBody(getEmptyAsync(), serviceCallback);
     }
 
@@ -323,7 +324,7 @@ public final class StringsImpl implements Strings {
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
-    public void putEmpty(String stringBody) {
+    public void putEmpty(@NonNull String stringBody) {
         putEmptyAsync(stringBody).blockingAwait();
     }
 
@@ -335,7 +336,7 @@ public final class StringsImpl implements Strings {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    public ServiceFuture<Void> putEmptyAsync(String stringBody, ServiceCallback<Void> serviceCallback) {
+    public ServiceFuture<Void> putEmptyAsync(@NonNull String stringBody, @NonNull ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(putEmptyAsync(stringBody), serviceCallback);
     }
 
@@ -346,7 +347,7 @@ public final class StringsImpl implements Strings {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
      */
-    public Single<RestResponse<Void, Void>> putEmptyWithRestResponseAsync(String stringBody) {
+    public Single<RestResponse<Void, Void>> putEmptyWithRestResponseAsync(@NonNull String stringBody) {
         if (stringBody == null) {
             throw new IllegalArgumentException("Parameter stringBody is required and cannot be null.");
         }
@@ -360,7 +361,7 @@ public final class StringsImpl implements Strings {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Completable} object if successful.
      */
-    public Completable putEmptyAsync(String stringBody) {
+    public Completable putEmptyAsync(@NonNull String stringBody) {
         return putEmptyWithRestResponseAsync(stringBody)
             .toCompletable();
     }
@@ -383,7 +384,7 @@ public final class StringsImpl implements Strings {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;String&gt;} object.
      */
-    public ServiceFuture<String> getMbcsAsync(ServiceCallback<String> serviceCallback) {
+    public ServiceFuture<String> getMbcsAsync(@NonNull ServiceCallback<String> serviceCallback) {
         return ServiceFuture.fromBody(getMbcsAsync(), serviceCallback);
     }
 
@@ -422,7 +423,7 @@ public final class StringsImpl implements Strings {
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
-    public void putMbcs(String stringBody) {
+    public void putMbcs(@NonNull String stringBody) {
         putMbcsAsync(stringBody).blockingAwait();
     }
 
@@ -434,7 +435,7 @@ public final class StringsImpl implements Strings {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    public ServiceFuture<Void> putMbcsAsync(String stringBody, ServiceCallback<Void> serviceCallback) {
+    public ServiceFuture<Void> putMbcsAsync(@NonNull String stringBody, @NonNull ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(putMbcsAsync(stringBody), serviceCallback);
     }
 
@@ -445,7 +446,7 @@ public final class StringsImpl implements Strings {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
      */
-    public Single<RestResponse<Void, Void>> putMbcsWithRestResponseAsync(String stringBody) {
+    public Single<RestResponse<Void, Void>> putMbcsWithRestResponseAsync(@NonNull String stringBody) {
         if (stringBody == null) {
             throw new IllegalArgumentException("Parameter stringBody is required and cannot be null.");
         }
@@ -459,7 +460,7 @@ public final class StringsImpl implements Strings {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Completable} object if successful.
      */
-    public Completable putMbcsAsync(String stringBody) {
+    public Completable putMbcsAsync(@NonNull String stringBody) {
         return putMbcsWithRestResponseAsync(stringBody)
             .toCompletable();
     }
@@ -482,7 +483,7 @@ public final class StringsImpl implements Strings {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;String&gt;} object.
      */
-    public ServiceFuture<String> getWhitespaceAsync(ServiceCallback<String> serviceCallback) {
+    public ServiceFuture<String> getWhitespaceAsync(@NonNull ServiceCallback<String> serviceCallback) {
         return ServiceFuture.fromBody(getWhitespaceAsync(), serviceCallback);
     }
 
@@ -521,7 +522,7 @@ public final class StringsImpl implements Strings {
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
-    public void putWhitespace(String stringBody) {
+    public void putWhitespace(@NonNull String stringBody) {
         putWhitespaceAsync(stringBody).blockingAwait();
     }
 
@@ -533,7 +534,7 @@ public final class StringsImpl implements Strings {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    public ServiceFuture<Void> putWhitespaceAsync(String stringBody, ServiceCallback<Void> serviceCallback) {
+    public ServiceFuture<Void> putWhitespaceAsync(@NonNull String stringBody, @NonNull ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(putWhitespaceAsync(stringBody), serviceCallback);
     }
 
@@ -544,7 +545,7 @@ public final class StringsImpl implements Strings {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
      */
-    public Single<RestResponse<Void, Void>> putWhitespaceWithRestResponseAsync(String stringBody) {
+    public Single<RestResponse<Void, Void>> putWhitespaceWithRestResponseAsync(@NonNull String stringBody) {
         if (stringBody == null) {
             throw new IllegalArgumentException("Parameter stringBody is required and cannot be null.");
         }
@@ -558,7 +559,7 @@ public final class StringsImpl implements Strings {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Completable} object if successful.
      */
-    public Completable putWhitespaceAsync(String stringBody) {
+    public Completable putWhitespaceAsync(@NonNull String stringBody) {
         return putWhitespaceWithRestResponseAsync(stringBody)
             .toCompletable();
     }
@@ -581,7 +582,7 @@ public final class StringsImpl implements Strings {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;String&gt;} object.
      */
-    public ServiceFuture<String> getNotProvidedAsync(ServiceCallback<String> serviceCallback) {
+    public ServiceFuture<String> getNotProvidedAsync(@NonNull ServiceCallback<String> serviceCallback) {
         return ServiceFuture.fromBody(getNotProvidedAsync(), serviceCallback);
     }
 
@@ -630,7 +631,7 @@ public final class StringsImpl implements Strings {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;byte[]&gt;} object.
      */
-    public ServiceFuture<byte[]> getBase64EncodedAsync(ServiceCallback<byte[]> serviceCallback) {
+    public ServiceFuture<byte[]> getBase64EncodedAsync(@NonNull ServiceCallback<byte[]> serviceCallback) {
         return ServiceFuture.fromBody(getBase64EncodedAsync(), serviceCallback);
     }
 
@@ -679,7 +680,7 @@ public final class StringsImpl implements Strings {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;byte[]&gt;} object.
      */
-    public ServiceFuture<byte[]> getBase64UrlEncodedAsync(ServiceCallback<byte[]> serviceCallback) {
+    public ServiceFuture<byte[]> getBase64UrlEncodedAsync(@NonNull ServiceCallback<byte[]> serviceCallback) {
         return ServiceFuture.fromBody(getBase64UrlEncodedAsync(), serviceCallback);
     }
 
@@ -718,7 +719,7 @@ public final class StringsImpl implements Strings {
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
-    public void putBase64UrlEncoded(byte[] stringBody) {
+    public void putBase64UrlEncoded(@NonNull byte[] stringBody) {
         putBase64UrlEncodedAsync(stringBody).blockingAwait();
     }
 
@@ -730,7 +731,7 @@ public final class StringsImpl implements Strings {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    public ServiceFuture<Void> putBase64UrlEncodedAsync(byte[] stringBody, ServiceCallback<Void> serviceCallback) {
+    public ServiceFuture<Void> putBase64UrlEncodedAsync(@NonNull byte[] stringBody, @NonNull ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(putBase64UrlEncodedAsync(stringBody), serviceCallback);
     }
 
@@ -741,7 +742,7 @@ public final class StringsImpl implements Strings {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
      */
-    public Single<RestResponse<Void, Void>> putBase64UrlEncodedWithRestResponseAsync(byte[] stringBody) {
+    public Single<RestResponse<Void, Void>> putBase64UrlEncodedWithRestResponseAsync(@NonNull byte[] stringBody) {
         if (stringBody == null) {
             throw new IllegalArgumentException("Parameter stringBody is required and cannot be null.");
         }
@@ -756,7 +757,7 @@ public final class StringsImpl implements Strings {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Completable} object if successful.
      */
-    public Completable putBase64UrlEncodedAsync(byte[] stringBody) {
+    public Completable putBase64UrlEncodedAsync(@NonNull byte[] stringBody) {
         return putBase64UrlEncodedWithRestResponseAsync(stringBody)
             .toCompletable();
     }
@@ -779,7 +780,7 @@ public final class StringsImpl implements Strings {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;byte[]&gt;} object.
      */
-    public ServiceFuture<byte[]> getNullBase64UrlEncodedAsync(ServiceCallback<byte[]> serviceCallback) {
+    public ServiceFuture<byte[]> getNullBase64UrlEncodedAsync(@NonNull ServiceCallback<byte[]> serviceCallback) {
         return ServiceFuture.fromBody(getNullBase64UrlEncodedAsync(), serviceCallback);
     }
 

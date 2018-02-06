@@ -15,6 +15,7 @@ import com.microsoft.rest.v2.ServiceClient;
 import com.microsoft.rest.v2.http.HttpPipeline;
 import fixtures.bodyinteger.AutoRestIntegerTestService;
 import fixtures.bodyinteger.Ints;
+import io.reactivex.annotations.NonNull;
 
 /**
  * Initializes a new instance of the AutoRestIntegerTestService type.
@@ -46,7 +47,7 @@ public final class AutoRestIntegerTestServiceImpl extends ServiceClient implemen
      *
      * @param httpPipeline The HTTP pipeline to send requests through.
      */
-    public AutoRestIntegerTestServiceImpl(HttpPipeline httpPipeline) {
+    public AutoRestIntegerTestServiceImpl(@NonNull HttpPipeline httpPipeline) {
         super(httpPipeline);
         this.ints = new IntsImpl(this);
     }

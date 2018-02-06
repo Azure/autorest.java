@@ -28,6 +28,7 @@ import fixtures.bodystring.models.RefColorConstant;
 import io.reactivex.Completable;
 import io.reactivex.Maybe;
 import io.reactivex.Single;
+import io.reactivex.annotations.NonNull;
 import io.reactivex.functions.Function;
 
 /**
@@ -110,7 +111,7 @@ public final class EnumsImpl implements Enums {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Colors&gt;} object.
      */
-    public ServiceFuture<Colors> getNotExpandableAsync(ServiceCallback<Colors> serviceCallback) {
+    public ServiceFuture<Colors> getNotExpandableAsync(@NonNull ServiceCallback<Colors> serviceCallback) {
         return ServiceFuture.fromBody(getNotExpandableAsync(), serviceCallback);
     }
 
@@ -149,7 +150,7 @@ public final class EnumsImpl implements Enums {
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
-    public void putNotExpandable(Colors stringBody) {
+    public void putNotExpandable(@NonNull Colors stringBody) {
         putNotExpandableAsync(stringBody).blockingAwait();
     }
 
@@ -161,7 +162,7 @@ public final class EnumsImpl implements Enums {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    public ServiceFuture<Void> putNotExpandableAsync(Colors stringBody, ServiceCallback<Void> serviceCallback) {
+    public ServiceFuture<Void> putNotExpandableAsync(@NonNull Colors stringBody, @NonNull ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(putNotExpandableAsync(stringBody), serviceCallback);
     }
 
@@ -172,7 +173,7 @@ public final class EnumsImpl implements Enums {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
      */
-    public Single<RestResponse<Void, Void>> putNotExpandableWithRestResponseAsync(Colors stringBody) {
+    public Single<RestResponse<Void, Void>> putNotExpandableWithRestResponseAsync(@NonNull Colors stringBody) {
         if (stringBody == null) {
             throw new IllegalArgumentException("Parameter stringBody is required and cannot be null.");
         }
@@ -186,7 +187,7 @@ public final class EnumsImpl implements Enums {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Completable} object if successful.
      */
-    public Completable putNotExpandableAsync(Colors stringBody) {
+    public Completable putNotExpandableAsync(@NonNull Colors stringBody) {
         return putNotExpandableWithRestResponseAsync(stringBody)
             .toCompletable();
     }
@@ -209,7 +210,7 @@ public final class EnumsImpl implements Enums {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Colors&gt;} object.
      */
-    public ServiceFuture<Colors> getReferencedAsync(ServiceCallback<Colors> serviceCallback) {
+    public ServiceFuture<Colors> getReferencedAsync(@NonNull ServiceCallback<Colors> serviceCallback) {
         return ServiceFuture.fromBody(getReferencedAsync(), serviceCallback);
     }
 
@@ -248,7 +249,7 @@ public final class EnumsImpl implements Enums {
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
-    public void putReferenced(Colors enumStringBody) {
+    public void putReferenced(@NonNull Colors enumStringBody) {
         putReferencedAsync(enumStringBody).blockingAwait();
     }
 
@@ -260,7 +261,7 @@ public final class EnumsImpl implements Enums {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    public ServiceFuture<Void> putReferencedAsync(Colors enumStringBody, ServiceCallback<Void> serviceCallback) {
+    public ServiceFuture<Void> putReferencedAsync(@NonNull Colors enumStringBody, @NonNull ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(putReferencedAsync(enumStringBody), serviceCallback);
     }
 
@@ -271,7 +272,7 @@ public final class EnumsImpl implements Enums {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
      */
-    public Single<RestResponse<Void, Void>> putReferencedWithRestResponseAsync(Colors enumStringBody) {
+    public Single<RestResponse<Void, Void>> putReferencedWithRestResponseAsync(@NonNull Colors enumStringBody) {
         if (enumStringBody == null) {
             throw new IllegalArgumentException("Parameter enumStringBody is required and cannot be null.");
         }
@@ -285,7 +286,7 @@ public final class EnumsImpl implements Enums {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Completable} object if successful.
      */
-    public Completable putReferencedAsync(Colors enumStringBody) {
+    public Completable putReferencedAsync(@NonNull Colors enumStringBody) {
         return putReferencedWithRestResponseAsync(enumStringBody)
             .toCompletable();
     }
@@ -308,7 +309,7 @@ public final class EnumsImpl implements Enums {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;RefColorConstant&gt;} object.
      */
-    public ServiceFuture<RefColorConstant> getReferencedConstantAsync(ServiceCallback<RefColorConstant> serviceCallback) {
+    public ServiceFuture<RefColorConstant> getReferencedConstantAsync(@NonNull ServiceCallback<RefColorConstant> serviceCallback) {
         return ServiceFuture.fromBody(getReferencedConstantAsync(), serviceCallback);
     }
 
@@ -347,7 +348,7 @@ public final class EnumsImpl implements Enums {
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
-    public void putReferencedConstant(RefColorConstant enumStringBody) {
+    public void putReferencedConstant(@NonNull RefColorConstant enumStringBody) {
         putReferencedConstantAsync(enumStringBody).blockingAwait();
     }
 
@@ -359,7 +360,7 @@ public final class EnumsImpl implements Enums {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    public ServiceFuture<Void> putReferencedConstantAsync(RefColorConstant enumStringBody, ServiceCallback<Void> serviceCallback) {
+    public ServiceFuture<Void> putReferencedConstantAsync(@NonNull RefColorConstant enumStringBody, @NonNull ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(putReferencedConstantAsync(enumStringBody), serviceCallback);
     }
 
@@ -370,7 +371,7 @@ public final class EnumsImpl implements Enums {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
      */
-    public Single<RestResponse<Void, Void>> putReferencedConstantWithRestResponseAsync(RefColorConstant enumStringBody) {
+    public Single<RestResponse<Void, Void>> putReferencedConstantWithRestResponseAsync(@NonNull RefColorConstant enumStringBody) {
         if (enumStringBody == null) {
             throw new IllegalArgumentException("Parameter enumStringBody is required and cannot be null.");
         }
@@ -385,7 +386,7 @@ public final class EnumsImpl implements Enums {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Completable} object if successful.
      */
-    public Completable putReferencedConstantAsync(RefColorConstant enumStringBody) {
+    public Completable putReferencedConstantAsync(@NonNull RefColorConstant enumStringBody) {
         return putReferencedConstantWithRestResponseAsync(enumStringBody)
             .toCompletable();
     }

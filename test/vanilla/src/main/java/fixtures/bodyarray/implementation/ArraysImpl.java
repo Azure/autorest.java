@@ -30,6 +30,7 @@ import fixtures.bodyarray.models.Product;
 import io.reactivex.Completable;
 import io.reactivex.Maybe;
 import io.reactivex.Single;
+import io.reactivex.annotations.NonNull;
 import io.reactivex.functions.Function;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -417,7 +418,7 @@ public final class ArraysImpl implements Arrays {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;List&lt;Integer&gt;&gt;} object.
      */
-    public ServiceFuture<List<Integer>> getNullAsync(ServiceCallback<List<Integer>> serviceCallback) {
+    public ServiceFuture<List<Integer>> getNullAsync(@NonNull ServiceCallback<List<Integer>> serviceCallback) {
         return ServiceFuture.fromBody(getNullAsync(), serviceCallback);
     }
 
@@ -466,7 +467,7 @@ public final class ArraysImpl implements Arrays {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;List&lt;Integer&gt;&gt;} object.
      */
-    public ServiceFuture<List<Integer>> getInvalidAsync(ServiceCallback<List<Integer>> serviceCallback) {
+    public ServiceFuture<List<Integer>> getInvalidAsync(@NonNull ServiceCallback<List<Integer>> serviceCallback) {
         return ServiceFuture.fromBody(getInvalidAsync(), serviceCallback);
     }
 
@@ -515,7 +516,7 @@ public final class ArraysImpl implements Arrays {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;List&lt;Integer&gt;&gt;} object.
      */
-    public ServiceFuture<List<Integer>> getEmptyAsync(ServiceCallback<List<Integer>> serviceCallback) {
+    public ServiceFuture<List<Integer>> getEmptyAsync(@NonNull ServiceCallback<List<Integer>> serviceCallback) {
         return ServiceFuture.fromBody(getEmptyAsync(), serviceCallback);
     }
 
@@ -554,7 +555,7 @@ public final class ArraysImpl implements Arrays {
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
-    public void putEmpty(List<String> arrayBody) {
+    public void putEmpty(@NonNull List<String> arrayBody) {
         putEmptyAsync(arrayBody).blockingAwait();
     }
 
@@ -566,7 +567,7 @@ public final class ArraysImpl implements Arrays {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    public ServiceFuture<Void> putEmptyAsync(List<String> arrayBody, ServiceCallback<Void> serviceCallback) {
+    public ServiceFuture<Void> putEmptyAsync(@NonNull List<String> arrayBody, @NonNull ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(putEmptyAsync(arrayBody), serviceCallback);
     }
 
@@ -577,7 +578,7 @@ public final class ArraysImpl implements Arrays {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
      */
-    public Single<RestResponse<Void, Void>> putEmptyWithRestResponseAsync(List<String> arrayBody) {
+    public Single<RestResponse<Void, Void>> putEmptyWithRestResponseAsync(@NonNull List<String> arrayBody) {
         if (arrayBody == null) {
             throw new IllegalArgumentException("Parameter arrayBody is required and cannot be null.");
         }
@@ -592,7 +593,7 @@ public final class ArraysImpl implements Arrays {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Completable} object if successful.
      */
-    public Completable putEmptyAsync(List<String> arrayBody) {
+    public Completable putEmptyAsync(@NonNull List<String> arrayBody) {
         return putEmptyWithRestResponseAsync(arrayBody)
             .toCompletable();
     }
@@ -615,7 +616,7 @@ public final class ArraysImpl implements Arrays {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;List&lt;Boolean&gt;&gt;} object.
      */
-    public ServiceFuture<List<Boolean>> getBooleanTfftAsync(ServiceCallback<List<Boolean>> serviceCallback) {
+    public ServiceFuture<List<Boolean>> getBooleanTfftAsync(@NonNull ServiceCallback<List<Boolean>> serviceCallback) {
         return ServiceFuture.fromBody(getBooleanTfftAsync(), serviceCallback);
     }
 
@@ -654,7 +655,7 @@ public final class ArraysImpl implements Arrays {
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
-    public void putBooleanTfft(List<Boolean> arrayBody) {
+    public void putBooleanTfft(@NonNull List<Boolean> arrayBody) {
         putBooleanTfftAsync(arrayBody).blockingAwait();
     }
 
@@ -666,7 +667,7 @@ public final class ArraysImpl implements Arrays {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    public ServiceFuture<Void> putBooleanTfftAsync(List<Boolean> arrayBody, ServiceCallback<Void> serviceCallback) {
+    public ServiceFuture<Void> putBooleanTfftAsync(@NonNull List<Boolean> arrayBody, @NonNull ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(putBooleanTfftAsync(arrayBody), serviceCallback);
     }
 
@@ -677,7 +678,7 @@ public final class ArraysImpl implements Arrays {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
      */
-    public Single<RestResponse<Void, Void>> putBooleanTfftWithRestResponseAsync(List<Boolean> arrayBody) {
+    public Single<RestResponse<Void, Void>> putBooleanTfftWithRestResponseAsync(@NonNull List<Boolean> arrayBody) {
         if (arrayBody == null) {
             throw new IllegalArgumentException("Parameter arrayBody is required and cannot be null.");
         }
@@ -692,7 +693,7 @@ public final class ArraysImpl implements Arrays {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Completable} object if successful.
      */
-    public Completable putBooleanTfftAsync(List<Boolean> arrayBody) {
+    public Completable putBooleanTfftAsync(@NonNull List<Boolean> arrayBody) {
         return putBooleanTfftWithRestResponseAsync(arrayBody)
             .toCompletable();
     }
@@ -715,7 +716,7 @@ public final class ArraysImpl implements Arrays {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;List&lt;Boolean&gt;&gt;} object.
      */
-    public ServiceFuture<List<Boolean>> getBooleanInvalidNullAsync(ServiceCallback<List<Boolean>> serviceCallback) {
+    public ServiceFuture<List<Boolean>> getBooleanInvalidNullAsync(@NonNull ServiceCallback<List<Boolean>> serviceCallback) {
         return ServiceFuture.fromBody(getBooleanInvalidNullAsync(), serviceCallback);
     }
 
@@ -764,7 +765,7 @@ public final class ArraysImpl implements Arrays {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;List&lt;Boolean&gt;&gt;} object.
      */
-    public ServiceFuture<List<Boolean>> getBooleanInvalidStringAsync(ServiceCallback<List<Boolean>> serviceCallback) {
+    public ServiceFuture<List<Boolean>> getBooleanInvalidStringAsync(@NonNull ServiceCallback<List<Boolean>> serviceCallback) {
         return ServiceFuture.fromBody(getBooleanInvalidStringAsync(), serviceCallback);
     }
 
@@ -813,7 +814,7 @@ public final class ArraysImpl implements Arrays {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;List&lt;Integer&gt;&gt;} object.
      */
-    public ServiceFuture<List<Integer>> getIntegerValidAsync(ServiceCallback<List<Integer>> serviceCallback) {
+    public ServiceFuture<List<Integer>> getIntegerValidAsync(@NonNull ServiceCallback<List<Integer>> serviceCallback) {
         return ServiceFuture.fromBody(getIntegerValidAsync(), serviceCallback);
     }
 
@@ -852,7 +853,7 @@ public final class ArraysImpl implements Arrays {
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
-    public void putIntegerValid(List<Integer> arrayBody) {
+    public void putIntegerValid(@NonNull List<Integer> arrayBody) {
         putIntegerValidAsync(arrayBody).blockingAwait();
     }
 
@@ -864,7 +865,7 @@ public final class ArraysImpl implements Arrays {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    public ServiceFuture<Void> putIntegerValidAsync(List<Integer> arrayBody, ServiceCallback<Void> serviceCallback) {
+    public ServiceFuture<Void> putIntegerValidAsync(@NonNull List<Integer> arrayBody, @NonNull ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(putIntegerValidAsync(arrayBody), serviceCallback);
     }
 
@@ -875,7 +876,7 @@ public final class ArraysImpl implements Arrays {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
      */
-    public Single<RestResponse<Void, Void>> putIntegerValidWithRestResponseAsync(List<Integer> arrayBody) {
+    public Single<RestResponse<Void, Void>> putIntegerValidWithRestResponseAsync(@NonNull List<Integer> arrayBody) {
         if (arrayBody == null) {
             throw new IllegalArgumentException("Parameter arrayBody is required and cannot be null.");
         }
@@ -890,7 +891,7 @@ public final class ArraysImpl implements Arrays {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Completable} object if successful.
      */
-    public Completable putIntegerValidAsync(List<Integer> arrayBody) {
+    public Completable putIntegerValidAsync(@NonNull List<Integer> arrayBody) {
         return putIntegerValidWithRestResponseAsync(arrayBody)
             .toCompletable();
     }
@@ -913,7 +914,7 @@ public final class ArraysImpl implements Arrays {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;List&lt;Integer&gt;&gt;} object.
      */
-    public ServiceFuture<List<Integer>> getIntInvalidNullAsync(ServiceCallback<List<Integer>> serviceCallback) {
+    public ServiceFuture<List<Integer>> getIntInvalidNullAsync(@NonNull ServiceCallback<List<Integer>> serviceCallback) {
         return ServiceFuture.fromBody(getIntInvalidNullAsync(), serviceCallback);
     }
 
@@ -962,7 +963,7 @@ public final class ArraysImpl implements Arrays {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;List&lt;Integer&gt;&gt;} object.
      */
-    public ServiceFuture<List<Integer>> getIntInvalidStringAsync(ServiceCallback<List<Integer>> serviceCallback) {
+    public ServiceFuture<List<Integer>> getIntInvalidStringAsync(@NonNull ServiceCallback<List<Integer>> serviceCallback) {
         return ServiceFuture.fromBody(getIntInvalidStringAsync(), serviceCallback);
     }
 
@@ -1011,7 +1012,7 @@ public final class ArraysImpl implements Arrays {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;List&lt;Long&gt;&gt;} object.
      */
-    public ServiceFuture<List<Long>> getLongValidAsync(ServiceCallback<List<Long>> serviceCallback) {
+    public ServiceFuture<List<Long>> getLongValidAsync(@NonNull ServiceCallback<List<Long>> serviceCallback) {
         return ServiceFuture.fromBody(getLongValidAsync(), serviceCallback);
     }
 
@@ -1050,7 +1051,7 @@ public final class ArraysImpl implements Arrays {
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
-    public void putLongValid(List<Long> arrayBody) {
+    public void putLongValid(@NonNull List<Long> arrayBody) {
         putLongValidAsync(arrayBody).blockingAwait();
     }
 
@@ -1062,7 +1063,7 @@ public final class ArraysImpl implements Arrays {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    public ServiceFuture<Void> putLongValidAsync(List<Long> arrayBody, ServiceCallback<Void> serviceCallback) {
+    public ServiceFuture<Void> putLongValidAsync(@NonNull List<Long> arrayBody, @NonNull ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(putLongValidAsync(arrayBody), serviceCallback);
     }
 
@@ -1073,7 +1074,7 @@ public final class ArraysImpl implements Arrays {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
      */
-    public Single<RestResponse<Void, Void>> putLongValidWithRestResponseAsync(List<Long> arrayBody) {
+    public Single<RestResponse<Void, Void>> putLongValidWithRestResponseAsync(@NonNull List<Long> arrayBody) {
         if (arrayBody == null) {
             throw new IllegalArgumentException("Parameter arrayBody is required and cannot be null.");
         }
@@ -1088,7 +1089,7 @@ public final class ArraysImpl implements Arrays {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Completable} object if successful.
      */
-    public Completable putLongValidAsync(List<Long> arrayBody) {
+    public Completable putLongValidAsync(@NonNull List<Long> arrayBody) {
         return putLongValidWithRestResponseAsync(arrayBody)
             .toCompletable();
     }
@@ -1111,7 +1112,7 @@ public final class ArraysImpl implements Arrays {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;List&lt;Long&gt;&gt;} object.
      */
-    public ServiceFuture<List<Long>> getLongInvalidNullAsync(ServiceCallback<List<Long>> serviceCallback) {
+    public ServiceFuture<List<Long>> getLongInvalidNullAsync(@NonNull ServiceCallback<List<Long>> serviceCallback) {
         return ServiceFuture.fromBody(getLongInvalidNullAsync(), serviceCallback);
     }
 
@@ -1160,7 +1161,7 @@ public final class ArraysImpl implements Arrays {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;List&lt;Long&gt;&gt;} object.
      */
-    public ServiceFuture<List<Long>> getLongInvalidStringAsync(ServiceCallback<List<Long>> serviceCallback) {
+    public ServiceFuture<List<Long>> getLongInvalidStringAsync(@NonNull ServiceCallback<List<Long>> serviceCallback) {
         return ServiceFuture.fromBody(getLongInvalidStringAsync(), serviceCallback);
     }
 
@@ -1209,7 +1210,7 @@ public final class ArraysImpl implements Arrays {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;List&lt;Double&gt;&gt;} object.
      */
-    public ServiceFuture<List<Double>> getFloatValidAsync(ServiceCallback<List<Double>> serviceCallback) {
+    public ServiceFuture<List<Double>> getFloatValidAsync(@NonNull ServiceCallback<List<Double>> serviceCallback) {
         return ServiceFuture.fromBody(getFloatValidAsync(), serviceCallback);
     }
 
@@ -1248,7 +1249,7 @@ public final class ArraysImpl implements Arrays {
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
-    public void putFloatValid(List<Double> arrayBody) {
+    public void putFloatValid(@NonNull List<Double> arrayBody) {
         putFloatValidAsync(arrayBody).blockingAwait();
     }
 
@@ -1260,7 +1261,7 @@ public final class ArraysImpl implements Arrays {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    public ServiceFuture<Void> putFloatValidAsync(List<Double> arrayBody, ServiceCallback<Void> serviceCallback) {
+    public ServiceFuture<Void> putFloatValidAsync(@NonNull List<Double> arrayBody, @NonNull ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(putFloatValidAsync(arrayBody), serviceCallback);
     }
 
@@ -1271,7 +1272,7 @@ public final class ArraysImpl implements Arrays {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
      */
-    public Single<RestResponse<Void, Void>> putFloatValidWithRestResponseAsync(List<Double> arrayBody) {
+    public Single<RestResponse<Void, Void>> putFloatValidWithRestResponseAsync(@NonNull List<Double> arrayBody) {
         if (arrayBody == null) {
             throw new IllegalArgumentException("Parameter arrayBody is required and cannot be null.");
         }
@@ -1286,7 +1287,7 @@ public final class ArraysImpl implements Arrays {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Completable} object if successful.
      */
-    public Completable putFloatValidAsync(List<Double> arrayBody) {
+    public Completable putFloatValidAsync(@NonNull List<Double> arrayBody) {
         return putFloatValidWithRestResponseAsync(arrayBody)
             .toCompletable();
     }
@@ -1309,7 +1310,7 @@ public final class ArraysImpl implements Arrays {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;List&lt;Double&gt;&gt;} object.
      */
-    public ServiceFuture<List<Double>> getFloatInvalidNullAsync(ServiceCallback<List<Double>> serviceCallback) {
+    public ServiceFuture<List<Double>> getFloatInvalidNullAsync(@NonNull ServiceCallback<List<Double>> serviceCallback) {
         return ServiceFuture.fromBody(getFloatInvalidNullAsync(), serviceCallback);
     }
 
@@ -1358,7 +1359,7 @@ public final class ArraysImpl implements Arrays {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;List&lt;Double&gt;&gt;} object.
      */
-    public ServiceFuture<List<Double>> getFloatInvalidStringAsync(ServiceCallback<List<Double>> serviceCallback) {
+    public ServiceFuture<List<Double>> getFloatInvalidStringAsync(@NonNull ServiceCallback<List<Double>> serviceCallback) {
         return ServiceFuture.fromBody(getFloatInvalidStringAsync(), serviceCallback);
     }
 
@@ -1407,7 +1408,7 @@ public final class ArraysImpl implements Arrays {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;List&lt;Double&gt;&gt;} object.
      */
-    public ServiceFuture<List<Double>> getDoubleValidAsync(ServiceCallback<List<Double>> serviceCallback) {
+    public ServiceFuture<List<Double>> getDoubleValidAsync(@NonNull ServiceCallback<List<Double>> serviceCallback) {
         return ServiceFuture.fromBody(getDoubleValidAsync(), serviceCallback);
     }
 
@@ -1446,7 +1447,7 @@ public final class ArraysImpl implements Arrays {
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
-    public void putDoubleValid(List<Double> arrayBody) {
+    public void putDoubleValid(@NonNull List<Double> arrayBody) {
         putDoubleValidAsync(arrayBody).blockingAwait();
     }
 
@@ -1458,7 +1459,7 @@ public final class ArraysImpl implements Arrays {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    public ServiceFuture<Void> putDoubleValidAsync(List<Double> arrayBody, ServiceCallback<Void> serviceCallback) {
+    public ServiceFuture<Void> putDoubleValidAsync(@NonNull List<Double> arrayBody, @NonNull ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(putDoubleValidAsync(arrayBody), serviceCallback);
     }
 
@@ -1469,7 +1470,7 @@ public final class ArraysImpl implements Arrays {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
      */
-    public Single<RestResponse<Void, Void>> putDoubleValidWithRestResponseAsync(List<Double> arrayBody) {
+    public Single<RestResponse<Void, Void>> putDoubleValidWithRestResponseAsync(@NonNull List<Double> arrayBody) {
         if (arrayBody == null) {
             throw new IllegalArgumentException("Parameter arrayBody is required and cannot be null.");
         }
@@ -1484,7 +1485,7 @@ public final class ArraysImpl implements Arrays {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Completable} object if successful.
      */
-    public Completable putDoubleValidAsync(List<Double> arrayBody) {
+    public Completable putDoubleValidAsync(@NonNull List<Double> arrayBody) {
         return putDoubleValidWithRestResponseAsync(arrayBody)
             .toCompletable();
     }
@@ -1507,7 +1508,7 @@ public final class ArraysImpl implements Arrays {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;List&lt;Double&gt;&gt;} object.
      */
-    public ServiceFuture<List<Double>> getDoubleInvalidNullAsync(ServiceCallback<List<Double>> serviceCallback) {
+    public ServiceFuture<List<Double>> getDoubleInvalidNullAsync(@NonNull ServiceCallback<List<Double>> serviceCallback) {
         return ServiceFuture.fromBody(getDoubleInvalidNullAsync(), serviceCallback);
     }
 
@@ -1556,7 +1557,7 @@ public final class ArraysImpl implements Arrays {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;List&lt;Double&gt;&gt;} object.
      */
-    public ServiceFuture<List<Double>> getDoubleInvalidStringAsync(ServiceCallback<List<Double>> serviceCallback) {
+    public ServiceFuture<List<Double>> getDoubleInvalidStringAsync(@NonNull ServiceCallback<List<Double>> serviceCallback) {
         return ServiceFuture.fromBody(getDoubleInvalidStringAsync(), serviceCallback);
     }
 
@@ -1605,7 +1606,7 @@ public final class ArraysImpl implements Arrays {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;List&lt;String&gt;&gt;} object.
      */
-    public ServiceFuture<List<String>> getStringValidAsync(ServiceCallback<List<String>> serviceCallback) {
+    public ServiceFuture<List<String>> getStringValidAsync(@NonNull ServiceCallback<List<String>> serviceCallback) {
         return ServiceFuture.fromBody(getStringValidAsync(), serviceCallback);
     }
 
@@ -1644,7 +1645,7 @@ public final class ArraysImpl implements Arrays {
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
-    public void putStringValid(List<String> arrayBody) {
+    public void putStringValid(@NonNull List<String> arrayBody) {
         putStringValidAsync(arrayBody).blockingAwait();
     }
 
@@ -1656,7 +1657,7 @@ public final class ArraysImpl implements Arrays {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    public ServiceFuture<Void> putStringValidAsync(List<String> arrayBody, ServiceCallback<Void> serviceCallback) {
+    public ServiceFuture<Void> putStringValidAsync(@NonNull List<String> arrayBody, @NonNull ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(putStringValidAsync(arrayBody), serviceCallback);
     }
 
@@ -1667,7 +1668,7 @@ public final class ArraysImpl implements Arrays {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
      */
-    public Single<RestResponse<Void, Void>> putStringValidWithRestResponseAsync(List<String> arrayBody) {
+    public Single<RestResponse<Void, Void>> putStringValidWithRestResponseAsync(@NonNull List<String> arrayBody) {
         if (arrayBody == null) {
             throw new IllegalArgumentException("Parameter arrayBody is required and cannot be null.");
         }
@@ -1682,7 +1683,7 @@ public final class ArraysImpl implements Arrays {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Completable} object if successful.
      */
-    public Completable putStringValidAsync(List<String> arrayBody) {
+    public Completable putStringValidAsync(@NonNull List<String> arrayBody) {
         return putStringValidWithRestResponseAsync(arrayBody)
             .toCompletable();
     }
@@ -1705,7 +1706,7 @@ public final class ArraysImpl implements Arrays {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;List&lt;String&gt;&gt;} object.
      */
-    public ServiceFuture<List<String>> getStringWithNullAsync(ServiceCallback<List<String>> serviceCallback) {
+    public ServiceFuture<List<String>> getStringWithNullAsync(@NonNull ServiceCallback<List<String>> serviceCallback) {
         return ServiceFuture.fromBody(getStringWithNullAsync(), serviceCallback);
     }
 
@@ -1754,7 +1755,7 @@ public final class ArraysImpl implements Arrays {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;List&lt;String&gt;&gt;} object.
      */
-    public ServiceFuture<List<String>> getStringWithInvalidAsync(ServiceCallback<List<String>> serviceCallback) {
+    public ServiceFuture<List<String>> getStringWithInvalidAsync(@NonNull ServiceCallback<List<String>> serviceCallback) {
         return ServiceFuture.fromBody(getStringWithInvalidAsync(), serviceCallback);
     }
 
@@ -1803,7 +1804,7 @@ public final class ArraysImpl implements Arrays {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;List&lt;UUID&gt;&gt;} object.
      */
-    public ServiceFuture<List<UUID>> getUuidValidAsync(ServiceCallback<List<UUID>> serviceCallback) {
+    public ServiceFuture<List<UUID>> getUuidValidAsync(@NonNull ServiceCallback<List<UUID>> serviceCallback) {
         return ServiceFuture.fromBody(getUuidValidAsync(), serviceCallback);
     }
 
@@ -1842,7 +1843,7 @@ public final class ArraysImpl implements Arrays {
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
-    public void putUuidValid(List<UUID> arrayBody) {
+    public void putUuidValid(@NonNull List<UUID> arrayBody) {
         putUuidValidAsync(arrayBody).blockingAwait();
     }
 
@@ -1854,7 +1855,7 @@ public final class ArraysImpl implements Arrays {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    public ServiceFuture<Void> putUuidValidAsync(List<UUID> arrayBody, ServiceCallback<Void> serviceCallback) {
+    public ServiceFuture<Void> putUuidValidAsync(@NonNull List<UUID> arrayBody, @NonNull ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(putUuidValidAsync(arrayBody), serviceCallback);
     }
 
@@ -1865,7 +1866,7 @@ public final class ArraysImpl implements Arrays {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
      */
-    public Single<RestResponse<Void, Void>> putUuidValidWithRestResponseAsync(List<UUID> arrayBody) {
+    public Single<RestResponse<Void, Void>> putUuidValidWithRestResponseAsync(@NonNull List<UUID> arrayBody) {
         if (arrayBody == null) {
             throw new IllegalArgumentException("Parameter arrayBody is required and cannot be null.");
         }
@@ -1880,7 +1881,7 @@ public final class ArraysImpl implements Arrays {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Completable} object if successful.
      */
-    public Completable putUuidValidAsync(List<UUID> arrayBody) {
+    public Completable putUuidValidAsync(@NonNull List<UUID> arrayBody) {
         return putUuidValidWithRestResponseAsync(arrayBody)
             .toCompletable();
     }
@@ -1903,7 +1904,7 @@ public final class ArraysImpl implements Arrays {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;List&lt;UUID&gt;&gt;} object.
      */
-    public ServiceFuture<List<UUID>> getUuidInvalidCharsAsync(ServiceCallback<List<UUID>> serviceCallback) {
+    public ServiceFuture<List<UUID>> getUuidInvalidCharsAsync(@NonNull ServiceCallback<List<UUID>> serviceCallback) {
         return ServiceFuture.fromBody(getUuidInvalidCharsAsync(), serviceCallback);
     }
 
@@ -1952,7 +1953,7 @@ public final class ArraysImpl implements Arrays {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;List&lt;LocalDate&gt;&gt;} object.
      */
-    public ServiceFuture<List<LocalDate>> getDateValidAsync(ServiceCallback<List<LocalDate>> serviceCallback) {
+    public ServiceFuture<List<LocalDate>> getDateValidAsync(@NonNull ServiceCallback<List<LocalDate>> serviceCallback) {
         return ServiceFuture.fromBody(getDateValidAsync(), serviceCallback);
     }
 
@@ -1991,7 +1992,7 @@ public final class ArraysImpl implements Arrays {
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
-    public void putDateValid(List<LocalDate> arrayBody) {
+    public void putDateValid(@NonNull List<LocalDate> arrayBody) {
         putDateValidAsync(arrayBody).blockingAwait();
     }
 
@@ -2003,7 +2004,7 @@ public final class ArraysImpl implements Arrays {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    public ServiceFuture<Void> putDateValidAsync(List<LocalDate> arrayBody, ServiceCallback<Void> serviceCallback) {
+    public ServiceFuture<Void> putDateValidAsync(@NonNull List<LocalDate> arrayBody, @NonNull ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(putDateValidAsync(arrayBody), serviceCallback);
     }
 
@@ -2014,7 +2015,7 @@ public final class ArraysImpl implements Arrays {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
      */
-    public Single<RestResponse<Void, Void>> putDateValidWithRestResponseAsync(List<LocalDate> arrayBody) {
+    public Single<RestResponse<Void, Void>> putDateValidWithRestResponseAsync(@NonNull List<LocalDate> arrayBody) {
         if (arrayBody == null) {
             throw new IllegalArgumentException("Parameter arrayBody is required and cannot be null.");
         }
@@ -2029,7 +2030,7 @@ public final class ArraysImpl implements Arrays {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Completable} object if successful.
      */
-    public Completable putDateValidAsync(List<LocalDate> arrayBody) {
+    public Completable putDateValidAsync(@NonNull List<LocalDate> arrayBody) {
         return putDateValidWithRestResponseAsync(arrayBody)
             .toCompletable();
     }
@@ -2052,7 +2053,7 @@ public final class ArraysImpl implements Arrays {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;List&lt;LocalDate&gt;&gt;} object.
      */
-    public ServiceFuture<List<LocalDate>> getDateInvalidNullAsync(ServiceCallback<List<LocalDate>> serviceCallback) {
+    public ServiceFuture<List<LocalDate>> getDateInvalidNullAsync(@NonNull ServiceCallback<List<LocalDate>> serviceCallback) {
         return ServiceFuture.fromBody(getDateInvalidNullAsync(), serviceCallback);
     }
 
@@ -2101,7 +2102,7 @@ public final class ArraysImpl implements Arrays {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;List&lt;LocalDate&gt;&gt;} object.
      */
-    public ServiceFuture<List<LocalDate>> getDateInvalidCharsAsync(ServiceCallback<List<LocalDate>> serviceCallback) {
+    public ServiceFuture<List<LocalDate>> getDateInvalidCharsAsync(@NonNull ServiceCallback<List<LocalDate>> serviceCallback) {
         return ServiceFuture.fromBody(getDateInvalidCharsAsync(), serviceCallback);
     }
 
@@ -2150,7 +2151,7 @@ public final class ArraysImpl implements Arrays {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;List&lt;DateTime&gt;&gt;} object.
      */
-    public ServiceFuture<List<DateTime>> getDateTimeValidAsync(ServiceCallback<List<DateTime>> serviceCallback) {
+    public ServiceFuture<List<DateTime>> getDateTimeValidAsync(@NonNull ServiceCallback<List<DateTime>> serviceCallback) {
         return ServiceFuture.fromBody(getDateTimeValidAsync(), serviceCallback);
     }
 
@@ -2189,7 +2190,7 @@ public final class ArraysImpl implements Arrays {
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
-    public void putDateTimeValid(List<DateTime> arrayBody) {
+    public void putDateTimeValid(@NonNull List<DateTime> arrayBody) {
         putDateTimeValidAsync(arrayBody).blockingAwait();
     }
 
@@ -2201,7 +2202,7 @@ public final class ArraysImpl implements Arrays {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    public ServiceFuture<Void> putDateTimeValidAsync(List<DateTime> arrayBody, ServiceCallback<Void> serviceCallback) {
+    public ServiceFuture<Void> putDateTimeValidAsync(@NonNull List<DateTime> arrayBody, @NonNull ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(putDateTimeValidAsync(arrayBody), serviceCallback);
     }
 
@@ -2212,7 +2213,7 @@ public final class ArraysImpl implements Arrays {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
      */
-    public Single<RestResponse<Void, Void>> putDateTimeValidWithRestResponseAsync(List<DateTime> arrayBody) {
+    public Single<RestResponse<Void, Void>> putDateTimeValidWithRestResponseAsync(@NonNull List<DateTime> arrayBody) {
         if (arrayBody == null) {
             throw new IllegalArgumentException("Parameter arrayBody is required and cannot be null.");
         }
@@ -2227,7 +2228,7 @@ public final class ArraysImpl implements Arrays {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Completable} object if successful.
      */
-    public Completable putDateTimeValidAsync(List<DateTime> arrayBody) {
+    public Completable putDateTimeValidAsync(@NonNull List<DateTime> arrayBody) {
         return putDateTimeValidWithRestResponseAsync(arrayBody)
             .toCompletable();
     }
@@ -2250,7 +2251,7 @@ public final class ArraysImpl implements Arrays {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;List&lt;DateTime&gt;&gt;} object.
      */
-    public ServiceFuture<List<DateTime>> getDateTimeInvalidNullAsync(ServiceCallback<List<DateTime>> serviceCallback) {
+    public ServiceFuture<List<DateTime>> getDateTimeInvalidNullAsync(@NonNull ServiceCallback<List<DateTime>> serviceCallback) {
         return ServiceFuture.fromBody(getDateTimeInvalidNullAsync(), serviceCallback);
     }
 
@@ -2299,7 +2300,7 @@ public final class ArraysImpl implements Arrays {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;List&lt;DateTime&gt;&gt;} object.
      */
-    public ServiceFuture<List<DateTime>> getDateTimeInvalidCharsAsync(ServiceCallback<List<DateTime>> serviceCallback) {
+    public ServiceFuture<List<DateTime>> getDateTimeInvalidCharsAsync(@NonNull ServiceCallback<List<DateTime>> serviceCallback) {
         return ServiceFuture.fromBody(getDateTimeInvalidCharsAsync(), serviceCallback);
     }
 
@@ -2348,7 +2349,7 @@ public final class ArraysImpl implements Arrays {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;List&lt;DateTime&gt;&gt;} object.
      */
-    public ServiceFuture<List<DateTime>> getDateTimeRfc1123ValidAsync(ServiceCallback<List<DateTime>> serviceCallback) {
+    public ServiceFuture<List<DateTime>> getDateTimeRfc1123ValidAsync(@NonNull ServiceCallback<List<DateTime>> serviceCallback) {
         return ServiceFuture.fromBody(getDateTimeRfc1123ValidAsync(), serviceCallback);
     }
 
@@ -2387,7 +2388,7 @@ public final class ArraysImpl implements Arrays {
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
-    public void putDateTimeRfc1123Valid(List<DateTime> arrayBody) {
+    public void putDateTimeRfc1123Valid(@NonNull List<DateTime> arrayBody) {
         putDateTimeRfc1123ValidAsync(arrayBody).blockingAwait();
     }
 
@@ -2399,7 +2400,7 @@ public final class ArraysImpl implements Arrays {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    public ServiceFuture<Void> putDateTimeRfc1123ValidAsync(List<DateTime> arrayBody, ServiceCallback<Void> serviceCallback) {
+    public ServiceFuture<Void> putDateTimeRfc1123ValidAsync(@NonNull List<DateTime> arrayBody, @NonNull ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(putDateTimeRfc1123ValidAsync(arrayBody), serviceCallback);
     }
 
@@ -2410,7 +2411,7 @@ public final class ArraysImpl implements Arrays {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
      */
-    public Single<RestResponse<Void, Void>> putDateTimeRfc1123ValidWithRestResponseAsync(List<DateTime> arrayBody) {
+    public Single<RestResponse<Void, Void>> putDateTimeRfc1123ValidWithRestResponseAsync(@NonNull List<DateTime> arrayBody) {
         if (arrayBody == null) {
             throw new IllegalArgumentException("Parameter arrayBody is required and cannot be null.");
         }
@@ -2430,7 +2431,7 @@ public final class ArraysImpl implements Arrays {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Completable} object if successful.
      */
-    public Completable putDateTimeRfc1123ValidAsync(List<DateTime> arrayBody) {
+    public Completable putDateTimeRfc1123ValidAsync(@NonNull List<DateTime> arrayBody) {
         return putDateTimeRfc1123ValidWithRestResponseAsync(arrayBody)
             .toCompletable();
     }
@@ -2453,7 +2454,7 @@ public final class ArraysImpl implements Arrays {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;List&lt;Period&gt;&gt;} object.
      */
-    public ServiceFuture<List<Period>> getDurationValidAsync(ServiceCallback<List<Period>> serviceCallback) {
+    public ServiceFuture<List<Period>> getDurationValidAsync(@NonNull ServiceCallback<List<Period>> serviceCallback) {
         return ServiceFuture.fromBody(getDurationValidAsync(), serviceCallback);
     }
 
@@ -2492,7 +2493,7 @@ public final class ArraysImpl implements Arrays {
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
-    public void putDurationValid(List<Period> arrayBody) {
+    public void putDurationValid(@NonNull List<Period> arrayBody) {
         putDurationValidAsync(arrayBody).blockingAwait();
     }
 
@@ -2504,7 +2505,7 @@ public final class ArraysImpl implements Arrays {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    public ServiceFuture<Void> putDurationValidAsync(List<Period> arrayBody, ServiceCallback<Void> serviceCallback) {
+    public ServiceFuture<Void> putDurationValidAsync(@NonNull List<Period> arrayBody, @NonNull ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(putDurationValidAsync(arrayBody), serviceCallback);
     }
 
@@ -2515,7 +2516,7 @@ public final class ArraysImpl implements Arrays {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
      */
-    public Single<RestResponse<Void, Void>> putDurationValidWithRestResponseAsync(List<Period> arrayBody) {
+    public Single<RestResponse<Void, Void>> putDurationValidWithRestResponseAsync(@NonNull List<Period> arrayBody) {
         if (arrayBody == null) {
             throw new IllegalArgumentException("Parameter arrayBody is required and cannot be null.");
         }
@@ -2530,7 +2531,7 @@ public final class ArraysImpl implements Arrays {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Completable} object if successful.
      */
-    public Completable putDurationValidAsync(List<Period> arrayBody) {
+    public Completable putDurationValidAsync(@NonNull List<Period> arrayBody) {
         return putDurationValidWithRestResponseAsync(arrayBody)
             .toCompletable();
     }
@@ -2553,7 +2554,7 @@ public final class ArraysImpl implements Arrays {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;List&lt;byte[]&gt;&gt;} object.
      */
-    public ServiceFuture<List<byte[]>> getByteValidAsync(ServiceCallback<List<byte[]>> serviceCallback) {
+    public ServiceFuture<List<byte[]>> getByteValidAsync(@NonNull ServiceCallback<List<byte[]>> serviceCallback) {
         return ServiceFuture.fromBody(getByteValidAsync(), serviceCallback);
     }
 
@@ -2592,7 +2593,7 @@ public final class ArraysImpl implements Arrays {
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
-    public void putByteValid(List<byte[]> arrayBody) {
+    public void putByteValid(@NonNull List<byte[]> arrayBody) {
         putByteValidAsync(arrayBody).blockingAwait();
     }
 
@@ -2604,7 +2605,7 @@ public final class ArraysImpl implements Arrays {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    public ServiceFuture<Void> putByteValidAsync(List<byte[]> arrayBody, ServiceCallback<Void> serviceCallback) {
+    public ServiceFuture<Void> putByteValidAsync(@NonNull List<byte[]> arrayBody, @NonNull ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(putByteValidAsync(arrayBody), serviceCallback);
     }
 
@@ -2615,7 +2616,7 @@ public final class ArraysImpl implements Arrays {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
      */
-    public Single<RestResponse<Void, Void>> putByteValidWithRestResponseAsync(List<byte[]> arrayBody) {
+    public Single<RestResponse<Void, Void>> putByteValidWithRestResponseAsync(@NonNull List<byte[]> arrayBody) {
         if (arrayBody == null) {
             throw new IllegalArgumentException("Parameter arrayBody is required and cannot be null.");
         }
@@ -2630,7 +2631,7 @@ public final class ArraysImpl implements Arrays {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Completable} object if successful.
      */
-    public Completable putByteValidAsync(List<byte[]> arrayBody) {
+    public Completable putByteValidAsync(@NonNull List<byte[]> arrayBody) {
         return putByteValidWithRestResponseAsync(arrayBody)
             .toCompletable();
     }
@@ -2653,7 +2654,7 @@ public final class ArraysImpl implements Arrays {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;List&lt;byte[]&gt;&gt;} object.
      */
-    public ServiceFuture<List<byte[]>> getByteInvalidNullAsync(ServiceCallback<List<byte[]>> serviceCallback) {
+    public ServiceFuture<List<byte[]>> getByteInvalidNullAsync(@NonNull ServiceCallback<List<byte[]>> serviceCallback) {
         return ServiceFuture.fromBody(getByteInvalidNullAsync(), serviceCallback);
     }
 
@@ -2702,7 +2703,7 @@ public final class ArraysImpl implements Arrays {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;List&lt;byte[]&gt;&gt;} object.
      */
-    public ServiceFuture<List<byte[]>> getBase64UrlAsync(ServiceCallback<List<byte[]>> serviceCallback) {
+    public ServiceFuture<List<byte[]>> getBase64UrlAsync(@NonNull ServiceCallback<List<byte[]>> serviceCallback) {
         return ServiceFuture.fromBody(getBase64UrlAsync(), serviceCallback);
     }
 
@@ -2751,7 +2752,7 @@ public final class ArraysImpl implements Arrays {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;List&lt;Product&gt;&gt;} object.
      */
-    public ServiceFuture<List<Product>> getComplexNullAsync(ServiceCallback<List<Product>> serviceCallback) {
+    public ServiceFuture<List<Product>> getComplexNullAsync(@NonNull ServiceCallback<List<Product>> serviceCallback) {
         return ServiceFuture.fromBody(getComplexNullAsync(), serviceCallback);
     }
 
@@ -2800,7 +2801,7 @@ public final class ArraysImpl implements Arrays {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;List&lt;Product&gt;&gt;} object.
      */
-    public ServiceFuture<List<Product>> getComplexEmptyAsync(ServiceCallback<List<Product>> serviceCallback) {
+    public ServiceFuture<List<Product>> getComplexEmptyAsync(@NonNull ServiceCallback<List<Product>> serviceCallback) {
         return ServiceFuture.fromBody(getComplexEmptyAsync(), serviceCallback);
     }
 
@@ -2849,7 +2850,7 @@ public final class ArraysImpl implements Arrays {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;List&lt;Product&gt;&gt;} object.
      */
-    public ServiceFuture<List<Product>> getComplexItemNullAsync(ServiceCallback<List<Product>> serviceCallback) {
+    public ServiceFuture<List<Product>> getComplexItemNullAsync(@NonNull ServiceCallback<List<Product>> serviceCallback) {
         return ServiceFuture.fromBody(getComplexItemNullAsync(), serviceCallback);
     }
 
@@ -2898,7 +2899,7 @@ public final class ArraysImpl implements Arrays {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;List&lt;Product&gt;&gt;} object.
      */
-    public ServiceFuture<List<Product>> getComplexItemEmptyAsync(ServiceCallback<List<Product>> serviceCallback) {
+    public ServiceFuture<List<Product>> getComplexItemEmptyAsync(@NonNull ServiceCallback<List<Product>> serviceCallback) {
         return ServiceFuture.fromBody(getComplexItemEmptyAsync(), serviceCallback);
     }
 
@@ -2947,7 +2948,7 @@ public final class ArraysImpl implements Arrays {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;List&lt;Product&gt;&gt;} object.
      */
-    public ServiceFuture<List<Product>> getComplexValidAsync(ServiceCallback<List<Product>> serviceCallback) {
+    public ServiceFuture<List<Product>> getComplexValidAsync(@NonNull ServiceCallback<List<Product>> serviceCallback) {
         return ServiceFuture.fromBody(getComplexValidAsync(), serviceCallback);
     }
 
@@ -2986,7 +2987,7 @@ public final class ArraysImpl implements Arrays {
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
-    public void putComplexValid(List<Product> arrayBody) {
+    public void putComplexValid(@NonNull List<Product> arrayBody) {
         putComplexValidAsync(arrayBody).blockingAwait();
     }
 
@@ -2998,7 +2999,7 @@ public final class ArraysImpl implements Arrays {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    public ServiceFuture<Void> putComplexValidAsync(List<Product> arrayBody, ServiceCallback<Void> serviceCallback) {
+    public ServiceFuture<Void> putComplexValidAsync(@NonNull List<Product> arrayBody, @NonNull ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(putComplexValidAsync(arrayBody), serviceCallback);
     }
 
@@ -3009,7 +3010,7 @@ public final class ArraysImpl implements Arrays {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
      */
-    public Single<RestResponse<Void, Void>> putComplexValidWithRestResponseAsync(List<Product> arrayBody) {
+    public Single<RestResponse<Void, Void>> putComplexValidWithRestResponseAsync(@NonNull List<Product> arrayBody) {
         if (arrayBody == null) {
             throw new IllegalArgumentException("Parameter arrayBody is required and cannot be null.");
         }
@@ -3024,7 +3025,7 @@ public final class ArraysImpl implements Arrays {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Completable} object if successful.
      */
-    public Completable putComplexValidAsync(List<Product> arrayBody) {
+    public Completable putComplexValidAsync(@NonNull List<Product> arrayBody) {
         return putComplexValidWithRestResponseAsync(arrayBody)
             .toCompletable();
     }
@@ -3047,7 +3048,7 @@ public final class ArraysImpl implements Arrays {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;List&lt;List&lt;String&gt;&gt;&gt;} object.
      */
-    public ServiceFuture<List<List<String>>> getArrayNullAsync(ServiceCallback<List<List<String>>> serviceCallback) {
+    public ServiceFuture<List<List<String>>> getArrayNullAsync(@NonNull ServiceCallback<List<List<String>>> serviceCallback) {
         return ServiceFuture.fromBody(getArrayNullAsync(), serviceCallback);
     }
 
@@ -3096,7 +3097,7 @@ public final class ArraysImpl implements Arrays {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;List&lt;List&lt;String&gt;&gt;&gt;} object.
      */
-    public ServiceFuture<List<List<String>>> getArrayEmptyAsync(ServiceCallback<List<List<String>>> serviceCallback) {
+    public ServiceFuture<List<List<String>>> getArrayEmptyAsync(@NonNull ServiceCallback<List<List<String>>> serviceCallback) {
         return ServiceFuture.fromBody(getArrayEmptyAsync(), serviceCallback);
     }
 
@@ -3145,7 +3146,7 @@ public final class ArraysImpl implements Arrays {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;List&lt;List&lt;String&gt;&gt;&gt;} object.
      */
-    public ServiceFuture<List<List<String>>> getArrayItemNullAsync(ServiceCallback<List<List<String>>> serviceCallback) {
+    public ServiceFuture<List<List<String>>> getArrayItemNullAsync(@NonNull ServiceCallback<List<List<String>>> serviceCallback) {
         return ServiceFuture.fromBody(getArrayItemNullAsync(), serviceCallback);
     }
 
@@ -3194,7 +3195,7 @@ public final class ArraysImpl implements Arrays {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;List&lt;List&lt;String&gt;&gt;&gt;} object.
      */
-    public ServiceFuture<List<List<String>>> getArrayItemEmptyAsync(ServiceCallback<List<List<String>>> serviceCallback) {
+    public ServiceFuture<List<List<String>>> getArrayItemEmptyAsync(@NonNull ServiceCallback<List<List<String>>> serviceCallback) {
         return ServiceFuture.fromBody(getArrayItemEmptyAsync(), serviceCallback);
     }
 
@@ -3243,7 +3244,7 @@ public final class ArraysImpl implements Arrays {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;List&lt;List&lt;String&gt;&gt;&gt;} object.
      */
-    public ServiceFuture<List<List<String>>> getArrayValidAsync(ServiceCallback<List<List<String>>> serviceCallback) {
+    public ServiceFuture<List<List<String>>> getArrayValidAsync(@NonNull ServiceCallback<List<List<String>>> serviceCallback) {
         return ServiceFuture.fromBody(getArrayValidAsync(), serviceCallback);
     }
 
@@ -3282,7 +3283,7 @@ public final class ArraysImpl implements Arrays {
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
-    public void putArrayValid(List<List<String>> arrayBody) {
+    public void putArrayValid(@NonNull List<List<String>> arrayBody) {
         putArrayValidAsync(arrayBody).blockingAwait();
     }
 
@@ -3294,7 +3295,7 @@ public final class ArraysImpl implements Arrays {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    public ServiceFuture<Void> putArrayValidAsync(List<List<String>> arrayBody, ServiceCallback<Void> serviceCallback) {
+    public ServiceFuture<Void> putArrayValidAsync(@NonNull List<List<String>> arrayBody, @NonNull ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(putArrayValidAsync(arrayBody), serviceCallback);
     }
 
@@ -3305,7 +3306,7 @@ public final class ArraysImpl implements Arrays {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
      */
-    public Single<RestResponse<Void, Void>> putArrayValidWithRestResponseAsync(List<List<String>> arrayBody) {
+    public Single<RestResponse<Void, Void>> putArrayValidWithRestResponseAsync(@NonNull List<List<String>> arrayBody) {
         if (arrayBody == null) {
             throw new IllegalArgumentException("Parameter arrayBody is required and cannot be null.");
         }
@@ -3320,7 +3321,7 @@ public final class ArraysImpl implements Arrays {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Completable} object if successful.
      */
-    public Completable putArrayValidAsync(List<List<String>> arrayBody) {
+    public Completable putArrayValidAsync(@NonNull List<List<String>> arrayBody) {
         return putArrayValidWithRestResponseAsync(arrayBody)
             .toCompletable();
     }
@@ -3343,7 +3344,7 @@ public final class ArraysImpl implements Arrays {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;List&lt;Map&lt;String, String&gt;&gt;&gt;} object.
      */
-    public ServiceFuture<List<Map<String, String>>> getDictionaryNullAsync(ServiceCallback<List<Map<String, String>>> serviceCallback) {
+    public ServiceFuture<List<Map<String, String>>> getDictionaryNullAsync(@NonNull ServiceCallback<List<Map<String, String>>> serviceCallback) {
         return ServiceFuture.fromBody(getDictionaryNullAsync(), serviceCallback);
     }
 
@@ -3392,7 +3393,7 @@ public final class ArraysImpl implements Arrays {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;List&lt;Map&lt;String, String&gt;&gt;&gt;} object.
      */
-    public ServiceFuture<List<Map<String, String>>> getDictionaryEmptyAsync(ServiceCallback<List<Map<String, String>>> serviceCallback) {
+    public ServiceFuture<List<Map<String, String>>> getDictionaryEmptyAsync(@NonNull ServiceCallback<List<Map<String, String>>> serviceCallback) {
         return ServiceFuture.fromBody(getDictionaryEmptyAsync(), serviceCallback);
     }
 
@@ -3441,7 +3442,7 @@ public final class ArraysImpl implements Arrays {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;List&lt;Map&lt;String, String&gt;&gt;&gt;} object.
      */
-    public ServiceFuture<List<Map<String, String>>> getDictionaryItemNullAsync(ServiceCallback<List<Map<String, String>>> serviceCallback) {
+    public ServiceFuture<List<Map<String, String>>> getDictionaryItemNullAsync(@NonNull ServiceCallback<List<Map<String, String>>> serviceCallback) {
         return ServiceFuture.fromBody(getDictionaryItemNullAsync(), serviceCallback);
     }
 
@@ -3490,7 +3491,7 @@ public final class ArraysImpl implements Arrays {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;List&lt;Map&lt;String, String&gt;&gt;&gt;} object.
      */
-    public ServiceFuture<List<Map<String, String>>> getDictionaryItemEmptyAsync(ServiceCallback<List<Map<String, String>>> serviceCallback) {
+    public ServiceFuture<List<Map<String, String>>> getDictionaryItemEmptyAsync(@NonNull ServiceCallback<List<Map<String, String>>> serviceCallback) {
         return ServiceFuture.fromBody(getDictionaryItemEmptyAsync(), serviceCallback);
     }
 
@@ -3539,7 +3540,7 @@ public final class ArraysImpl implements Arrays {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;List&lt;Map&lt;String, String&gt;&gt;&gt;} object.
      */
-    public ServiceFuture<List<Map<String, String>>> getDictionaryValidAsync(ServiceCallback<List<Map<String, String>>> serviceCallback) {
+    public ServiceFuture<List<Map<String, String>>> getDictionaryValidAsync(@NonNull ServiceCallback<List<Map<String, String>>> serviceCallback) {
         return ServiceFuture.fromBody(getDictionaryValidAsync(), serviceCallback);
     }
 
@@ -3578,7 +3579,7 @@ public final class ArraysImpl implements Arrays {
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
-    public void putDictionaryValid(List<Map<String, String>> arrayBody) {
+    public void putDictionaryValid(@NonNull List<Map<String, String>> arrayBody) {
         putDictionaryValidAsync(arrayBody).blockingAwait();
     }
 
@@ -3590,7 +3591,7 @@ public final class ArraysImpl implements Arrays {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    public ServiceFuture<Void> putDictionaryValidAsync(List<Map<String, String>> arrayBody, ServiceCallback<Void> serviceCallback) {
+    public ServiceFuture<Void> putDictionaryValidAsync(@NonNull List<Map<String, String>> arrayBody, @NonNull ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(putDictionaryValidAsync(arrayBody), serviceCallback);
     }
 
@@ -3601,7 +3602,7 @@ public final class ArraysImpl implements Arrays {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
      */
-    public Single<RestResponse<Void, Void>> putDictionaryValidWithRestResponseAsync(List<Map<String, String>> arrayBody) {
+    public Single<RestResponse<Void, Void>> putDictionaryValidWithRestResponseAsync(@NonNull List<Map<String, String>> arrayBody) {
         if (arrayBody == null) {
             throw new IllegalArgumentException("Parameter arrayBody is required and cannot be null.");
         }
@@ -3616,7 +3617,7 @@ public final class ArraysImpl implements Arrays {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Completable} object if successful.
      */
-    public Completable putDictionaryValidAsync(List<Map<String, String>> arrayBody) {
+    public Completable putDictionaryValidAsync(@NonNull List<Map<String, String>> arrayBody) {
         return putDictionaryValidWithRestResponseAsync(arrayBody)
             .toCompletable();
     }

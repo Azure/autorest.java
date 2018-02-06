@@ -15,6 +15,7 @@ import com.microsoft.rest.v2.ServiceCallback;
 import com.microsoft.rest.v2.ServiceFuture;
 import io.reactivex.Completable;
 import io.reactivex.Single;
+import io.reactivex.annotations.NonNull;
 
 /**
  * An instance of this class provides access to all the operations defined in
@@ -36,7 +37,7 @@ public interface SubscriptionInCredentials {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    ServiceFuture<Void> postMethodGlobalValidAsync(ServiceCallback<Void> serviceCallback);
+    ServiceFuture<Void> postMethodGlobalValidAsync(@NonNull ServiceCallback<Void> serviceCallback);
 
     /**
      * POST method with subscriptionId modeled in credentials.  Set the credential subscriptionId to '1234-5678-9012-3456' to succeed.
@@ -67,7 +68,7 @@ public interface SubscriptionInCredentials {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    ServiceFuture<Void> postMethodGlobalNullAsync(ServiceCallback<Void> serviceCallback);
+    ServiceFuture<Void> postMethodGlobalNullAsync(@NonNull ServiceCallback<Void> serviceCallback);
 
     /**
      * POST method with subscriptionId modeled in credentials.  Set the credential subscriptionId to null, and client-side validation should prevent you from making this call.
@@ -98,7 +99,7 @@ public interface SubscriptionInCredentials {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    ServiceFuture<Void> postMethodGlobalNotProvidedValidAsync(ServiceCallback<Void> serviceCallback);
+    ServiceFuture<Void> postMethodGlobalNotProvidedValidAsync(@NonNull ServiceCallback<Void> serviceCallback);
 
     /**
      * POST method with subscriptionId modeled in credentials.  Set the credential subscriptionId to '1234-5678-9012-3456' to succeed.
@@ -129,7 +130,7 @@ public interface SubscriptionInCredentials {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    ServiceFuture<Void> postPathGlobalValidAsync(ServiceCallback<Void> serviceCallback);
+    ServiceFuture<Void> postPathGlobalValidAsync(@NonNull ServiceCallback<Void> serviceCallback);
 
     /**
      * POST method with subscriptionId modeled in credentials.  Set the credential subscriptionId to '1234-5678-9012-3456' to succeed.
@@ -160,7 +161,7 @@ public interface SubscriptionInCredentials {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    ServiceFuture<Void> postSwaggerGlobalValidAsync(ServiceCallback<Void> serviceCallback);
+    ServiceFuture<Void> postSwaggerGlobalValidAsync(@NonNull ServiceCallback<Void> serviceCallback);
 
     /**
      * POST method with subscriptionId modeled in credentials.  Set the credential subscriptionId to '1234-5678-9012-3456' to succeed.

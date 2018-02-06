@@ -77,19 +77,19 @@ namespace AutoRest.Java
             {
                 Settings.Instance.Header = header;
             }
-            Settings.Instance.CustomSettings.Add("InternalConstructors", GetXmsCodeGenSetting<bool?>(codeModelT, "internalConstructors") ?? await GetValue<bool?>("use-internal-constructors") ?? false);
-            Settings.Instance.CustomSettings.Add("SyncMethods", GetXmsCodeGenSetting<string>(codeModelT, "syncMethods") ?? await GetValue("sync-methods") ?? "essential");
-            Settings.Instance.CustomSettings.Add("UseDateTimeOffset", GetXmsCodeGenSetting<bool?>(codeModelT, "useDateTimeOffset") ?? await GetValue<bool?>("use-datetimeoffset") ?? false);
+
+            Settings.Instance.CustomSettings["InternalConstructors"] = GetXmsCodeGenSetting<bool?>(codeModelT, "internalConstructors") ?? await GetValue<bool?>("use-internal-constructors") ?? false;
+            Settings.Instance.CustomSettings["SyncMethods"] = GetXmsCodeGenSetting<string>(codeModelT, "syncMethods") ?? await GetValue("sync-methods") ?? "essential";
+            Settings.Instance.CustomSettings["UseDateTimeOffset"] = GetXmsCodeGenSetting<bool?>(codeModelT, "useDateTimeOffset") ?? await GetValue<bool?>("use-datetimeoffset") ?? false;
             Settings.Instance.CustomSettings["ClientSideValidation"] = await GetValue<bool?>("client-side-validation") ?? false;
+
+            Settings.Instance.CustomSettings["azure-arm"] = await GetValue("azure-arm").ConfigureAwait(false);
+            Settings.Instance.CustomSettings["fluent"] = await GetValue("fluent").ConfigureAwait(false);
+            Settings.Instance.CustomSettings["non-null-annotations"] = await GetValue("non-null-annotations").ConfigureAwait(false);
+
             Settings.Instance.MaximumCommentColumns = await GetValue<int?>("max-comment-columns") ?? Settings.DefaultMaximumCommentColumns;
             Settings.Instance.OutputFileName = await GetValue<string>("output-file");
-
-            bool azure = await GetValue<bool?>("azure-arm").ConfigureAwait(false) ?? false;
-            Settings.Instance.CustomSettings.Add("Azure", azure);
-
-            bool fluent = await GetValue<bool?>("fluent").ConfigureAwait(false) ?? false;
-            Settings.Instance.CustomSettings.Add("Fluent", fluent);
-
+            
             // process
             IAnyPlugin plugin = new JavaPlugin();
 

@@ -25,6 +25,7 @@ import fixtures.bodyformdata.models.ErrorException;
 import io.reactivex.Flowable;
 import io.reactivex.Maybe;
 import io.reactivex.Single;
+import io.reactivex.annotations.NonNull;
 import io.reactivex.functions.Function;
 import java.nio.ByteBuffer;
 
@@ -81,7 +82,7 @@ public final class FormdatasImpl implements Formdatas {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the Flowable&lt;ByteBuffer&gt; object if successful.
      */
-    public Flowable<ByteBuffer> uploadFile(Flowable<ByteBuffer> fileContent, String fileName) {
+    public Flowable<ByteBuffer> uploadFile(@NonNull Flowable<ByteBuffer> fileContent, @NonNull String fileName) {
         return uploadFileAsync(fileContent, fileName).blockingGet();
     }
 
@@ -94,7 +95,7 @@ public final class FormdatasImpl implements Formdatas {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Flowable&lt;ByteBuffer&gt;&gt;} object.
      */
-    public ServiceFuture<Flowable<ByteBuffer>> uploadFileAsync(Flowable<ByteBuffer> fileContent, String fileName, ServiceCallback<Flowable<ByteBuffer>> serviceCallback) {
+    public ServiceFuture<Flowable<ByteBuffer>> uploadFileAsync(@NonNull Flowable<ByteBuffer> fileContent, @NonNull String fileName, @NonNull ServiceCallback<Flowable<ByteBuffer>> serviceCallback) {
         return ServiceFuture.fromBody(uploadFileAsync(fileContent, fileName), serviceCallback);
     }
 
@@ -106,7 +107,7 @@ public final class FormdatasImpl implements Formdatas {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, Flowable&lt;ByteBuffer&gt;&gt;&gt;} object if successful.
      */
-    public Single<RestResponse<Void, Flowable<ByteBuffer>>> uploadFileWithRestResponseAsync(Flowable<ByteBuffer> fileContent, String fileName) {
+    public Single<RestResponse<Void, Flowable<ByteBuffer>>> uploadFileWithRestResponseAsync(@NonNull Flowable<ByteBuffer> fileContent, @NonNull String fileName) {
         if (fileContent == null) {
             throw new IllegalArgumentException("Parameter fileContent is required and cannot be null.");
         }
@@ -124,7 +125,7 @@ public final class FormdatasImpl implements Formdatas {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Maybe&lt;Flowable&lt;ByteBuffer&gt;&gt;} object if successful.
      */
-    public Maybe<Flowable<ByteBuffer>> uploadFileAsync(Flowable<ByteBuffer> fileContent, String fileName) {
+    public Maybe<Flowable<ByteBuffer>> uploadFileAsync(@NonNull Flowable<ByteBuffer> fileContent, @NonNull String fileName) {
         return uploadFileWithRestResponseAsync(fileContent, fileName)
             .flatMapMaybe(new Function<RestResponse<Void, Flowable<ByteBuffer>>, Maybe<Flowable<ByteBuffer>>>() {
                 public Maybe<Flowable<ByteBuffer>> apply(RestResponse<Void, Flowable<ByteBuffer>> restResponse) {
@@ -146,7 +147,7 @@ public final class FormdatasImpl implements Formdatas {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the Flowable&lt;ByteBuffer&gt; object if successful.
      */
-    public Flowable<ByteBuffer> uploadFileViaBody(Flowable<ByteBuffer> fileContent) {
+    public Flowable<ByteBuffer> uploadFileViaBody(@NonNull Flowable<ByteBuffer> fileContent) {
         return uploadFileViaBodyAsync(fileContent).blockingGet();
     }
 
@@ -158,7 +159,7 @@ public final class FormdatasImpl implements Formdatas {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Flowable&lt;ByteBuffer&gt;&gt;} object.
      */
-    public ServiceFuture<Flowable<ByteBuffer>> uploadFileViaBodyAsync(Flowable<ByteBuffer> fileContent, ServiceCallback<Flowable<ByteBuffer>> serviceCallback) {
+    public ServiceFuture<Flowable<ByteBuffer>> uploadFileViaBodyAsync(@NonNull Flowable<ByteBuffer> fileContent, @NonNull ServiceCallback<Flowable<ByteBuffer>> serviceCallback) {
         return ServiceFuture.fromBody(uploadFileViaBodyAsync(fileContent), serviceCallback);
     }
 
@@ -169,7 +170,7 @@ public final class FormdatasImpl implements Formdatas {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, Flowable&lt;ByteBuffer&gt;&gt;&gt;} object if successful.
      */
-    public Single<RestResponse<Void, Flowable<ByteBuffer>>> uploadFileViaBodyWithRestResponseAsync(Flowable<ByteBuffer> fileContent) {
+    public Single<RestResponse<Void, Flowable<ByteBuffer>>> uploadFileViaBodyWithRestResponseAsync(@NonNull Flowable<ByteBuffer> fileContent) {
         if (fileContent == null) {
             throw new IllegalArgumentException("Parameter fileContent is required and cannot be null.");
         }
@@ -183,7 +184,7 @@ public final class FormdatasImpl implements Formdatas {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Maybe&lt;Flowable&lt;ByteBuffer&gt;&gt;} object if successful.
      */
-    public Maybe<Flowable<ByteBuffer>> uploadFileViaBodyAsync(Flowable<ByteBuffer> fileContent) {
+    public Maybe<Flowable<ByteBuffer>> uploadFileViaBodyAsync(@NonNull Flowable<ByteBuffer> fileContent) {
         return uploadFileViaBodyWithRestResponseAsync(fileContent)
             .flatMapMaybe(new Function<RestResponse<Void, Flowable<ByteBuffer>>, Maybe<Flowable<ByteBuffer>>>() {
                 public Maybe<Flowable<ByteBuffer>> apply(RestResponse<Void, Flowable<ByteBuffer>> restResponse) {

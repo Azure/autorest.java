@@ -15,6 +15,7 @@ import com.microsoft.azure.v2.AzureProxy;
 import com.microsoft.azure.v2.AzureServiceClient;
 import com.microsoft.rest.v2.credentials.ServiceClientCredentials;
 import com.microsoft.rest.v2.http.HttpPipeline;
+import io.reactivex.annotations.NonNull;
 
 /**
  * Initializes a new instance of the AutoRestHeadExceptionTestServiceImpl type.
@@ -114,7 +115,7 @@ public final class AutoRestHeadExceptionTestServiceImpl extends AzureServiceClie
      *
      * @param credentials the management credentials for Azure.
      */
-    public AutoRestHeadExceptionTestServiceImpl(ServiceClientCredentials credentials) {
+    public AutoRestHeadExceptionTestServiceImpl(@NonNull ServiceClientCredentials credentials) {
         this(AzureProxy.createDefaultPipeline(AutoRestHeadExceptionTestServiceImpl.class, credentials));
     }
 
@@ -124,7 +125,7 @@ public final class AutoRestHeadExceptionTestServiceImpl extends AzureServiceClie
      * @param credentials the management credentials for Azure.
      * @param azureEnvironment The environment that requests will target.
      */
-    public AutoRestHeadExceptionTestServiceImpl(ServiceClientCredentials credentials, AzureEnvironment azureEnvironment) {
+    public AutoRestHeadExceptionTestServiceImpl(@NonNull ServiceClientCredentials credentials, @NonNull AzureEnvironment azureEnvironment) {
         this(AzureProxy.createDefaultPipeline(AutoRestHeadExceptionTestServiceImpl.class, credentials), azureEnvironment);
     }
 
@@ -133,7 +134,7 @@ public final class AutoRestHeadExceptionTestServiceImpl extends AzureServiceClie
      *
      * @param httpPipeline The HTTP pipeline to send requests through.
      */
-    public AutoRestHeadExceptionTestServiceImpl(HttpPipeline httpPipeline) {
+    public AutoRestHeadExceptionTestServiceImpl(@NonNull HttpPipeline httpPipeline) {
         this(httpPipeline, null);
     }
 
@@ -143,7 +144,7 @@ public final class AutoRestHeadExceptionTestServiceImpl extends AzureServiceClie
      * @param httpPipeline The HTTP pipeline to send requests through.
      * @param azureEnvironment The environment that requests will target.
      */
-    public AutoRestHeadExceptionTestServiceImpl(HttpPipeline httpPipeline, AzureEnvironment azureEnvironment) {
+    public AutoRestHeadExceptionTestServiceImpl(@NonNull HttpPipeline httpPipeline, @NonNull AzureEnvironment azureEnvironment) {
         super(httpPipeline, azureEnvironment);
         this.acceptLanguage = "en-US";
         this.longRunningOperationRetryTimeout = 30;

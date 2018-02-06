@@ -15,6 +15,7 @@ import com.microsoft.rest.v2.ServiceCallback;
 import com.microsoft.rest.v2.ServiceFuture;
 import io.reactivex.Completable;
 import io.reactivex.Single;
+import io.reactivex.annotations.NonNull;
 
 /**
  * An instance of this class provides access to all the operations defined in
@@ -36,7 +37,7 @@ public interface HeadExceptions {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    ServiceFuture<Void> head200Async(ServiceCallback<Void> serviceCallback);
+    ServiceFuture<Void> head200Async(@NonNull ServiceCallback<Void> serviceCallback);
 
     /**
      * Return 200 status code if successful.
@@ -67,7 +68,7 @@ public interface HeadExceptions {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    ServiceFuture<Void> head204Async(ServiceCallback<Void> serviceCallback);
+    ServiceFuture<Void> head204Async(@NonNull ServiceCallback<Void> serviceCallback);
 
     /**
      * Return 204 status code if successful.
@@ -98,7 +99,7 @@ public interface HeadExceptions {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    ServiceFuture<Void> head404Async(ServiceCallback<Void> serviceCallback);
+    ServiceFuture<Void> head404Async(@NonNull ServiceCallback<Void> serviceCallback);
 
     /**
      * Return 404 status code if successful.

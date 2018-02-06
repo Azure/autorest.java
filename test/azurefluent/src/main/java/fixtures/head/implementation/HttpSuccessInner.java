@@ -22,6 +22,7 @@ import com.microsoft.rest.v2.annotations.Host;
 import com.microsoft.rest.v2.annotations.UnexpectedResponseExceptionType;
 import io.reactivex.Maybe;
 import io.reactivex.Single;
+import io.reactivex.annotations.NonNull;
 import io.reactivex.functions.Function;
 
 /**
@@ -89,7 +90,7 @@ public final class HttpSuccessInner {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Boolean&gt;} object.
      */
-    public ServiceFuture<Boolean> head200Async(ServiceCallback<Boolean> serviceCallback) {
+    public ServiceFuture<Boolean> head200Async(@NonNull ServiceCallback<Boolean> serviceCallback) {
         return ServiceFuture.fromBody(head200Async(), serviceCallback);
     }
 
@@ -138,7 +139,7 @@ public final class HttpSuccessInner {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Boolean&gt;} object.
      */
-    public ServiceFuture<Boolean> head204Async(ServiceCallback<Boolean> serviceCallback) {
+    public ServiceFuture<Boolean> head204Async(@NonNull ServiceCallback<Boolean> serviceCallback) {
         return ServiceFuture.fromBody(head204Async(), serviceCallback);
     }
 
@@ -187,7 +188,7 @@ public final class HttpSuccessInner {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Boolean&gt;} object.
      */
-    public ServiceFuture<Boolean> head404Async(ServiceCallback<Boolean> serviceCallback) {
+    public ServiceFuture<Boolean> head404Async(@NonNull ServiceCallback<Boolean> serviceCallback) {
         return ServiceFuture.fromBody(head404Async(), serviceCallback);
     }
 

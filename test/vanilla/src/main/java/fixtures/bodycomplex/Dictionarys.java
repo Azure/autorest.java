@@ -17,6 +17,7 @@ import fixtures.bodycomplex.models.DictionaryWrapper;
 import io.reactivex.Completable;
 import io.reactivex.Maybe;
 import io.reactivex.Single;
+import io.reactivex.annotations.NonNull;
 
 /**
  * An instance of this class provides access to all the operations defined in
@@ -39,7 +40,7 @@ public interface Dictionarys {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;DictionaryWrapper&gt;} object.
      */
-    ServiceFuture<DictionaryWrapper> getValidAsync(ServiceCallback<DictionaryWrapper> serviceCallback);
+    ServiceFuture<DictionaryWrapper> getValidAsync(@NonNull ServiceCallback<DictionaryWrapper> serviceCallback);
 
     /**
      * Get complex types with dictionary property.
@@ -63,7 +64,7 @@ public interface Dictionarys {
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
-    void putValid(DictionaryWrapper complexBody);
+    void putValid(@NonNull DictionaryWrapper complexBody);
 
     /**
      * Put complex types with dictionary property.
@@ -73,7 +74,7 @@ public interface Dictionarys {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    ServiceFuture<Void> putValidAsync(DictionaryWrapper complexBody, ServiceCallback<Void> serviceCallback);
+    ServiceFuture<Void> putValidAsync(@NonNull DictionaryWrapper complexBody, @NonNull ServiceCallback<Void> serviceCallback);
 
     /**
      * Put complex types with dictionary property.
@@ -82,7 +83,7 @@ public interface Dictionarys {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
      */
-    Single<RestResponse<Void, Void>> putValidWithRestResponseAsync(DictionaryWrapper complexBody);
+    Single<RestResponse<Void, Void>> putValidWithRestResponseAsync(@NonNull DictionaryWrapper complexBody);
 
     /**
      * Put complex types with dictionary property.
@@ -91,7 +92,7 @@ public interface Dictionarys {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Completable} object if successful.
      */
-    Completable putValidAsync(DictionaryWrapper complexBody);
+    Completable putValidAsync(@NonNull DictionaryWrapper complexBody);
 
     /**
      * Get complex types with dictionary property which is empty.
@@ -109,7 +110,7 @@ public interface Dictionarys {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;DictionaryWrapper&gt;} object.
      */
-    ServiceFuture<DictionaryWrapper> getEmptyAsync(ServiceCallback<DictionaryWrapper> serviceCallback);
+    ServiceFuture<DictionaryWrapper> getEmptyAsync(@NonNull ServiceCallback<DictionaryWrapper> serviceCallback);
 
     /**
      * Get complex types with dictionary property which is empty.
@@ -133,7 +134,7 @@ public interface Dictionarys {
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
-    void putEmpty(DictionaryWrapper complexBody);
+    void putEmpty(@NonNull DictionaryWrapper complexBody);
 
     /**
      * Put complex types with dictionary property which is empty.
@@ -143,7 +144,7 @@ public interface Dictionarys {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    ServiceFuture<Void> putEmptyAsync(DictionaryWrapper complexBody, ServiceCallback<Void> serviceCallback);
+    ServiceFuture<Void> putEmptyAsync(@NonNull DictionaryWrapper complexBody, @NonNull ServiceCallback<Void> serviceCallback);
 
     /**
      * Put complex types with dictionary property which is empty.
@@ -152,7 +153,7 @@ public interface Dictionarys {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
      */
-    Single<RestResponse<Void, Void>> putEmptyWithRestResponseAsync(DictionaryWrapper complexBody);
+    Single<RestResponse<Void, Void>> putEmptyWithRestResponseAsync(@NonNull DictionaryWrapper complexBody);
 
     /**
      * Put complex types with dictionary property which is empty.
@@ -161,7 +162,7 @@ public interface Dictionarys {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Completable} object if successful.
      */
-    Completable putEmptyAsync(DictionaryWrapper complexBody);
+    Completable putEmptyAsync(@NonNull DictionaryWrapper complexBody);
 
     /**
      * Get complex types with dictionary property which is null.
@@ -179,7 +180,7 @@ public interface Dictionarys {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;DictionaryWrapper&gt;} object.
      */
-    ServiceFuture<DictionaryWrapper> getNullAsync(ServiceCallback<DictionaryWrapper> serviceCallback);
+    ServiceFuture<DictionaryWrapper> getNullAsync(@NonNull ServiceCallback<DictionaryWrapper> serviceCallback);
 
     /**
      * Get complex types with dictionary property which is null.
@@ -211,7 +212,7 @@ public interface Dictionarys {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;DictionaryWrapper&gt;} object.
      */
-    ServiceFuture<DictionaryWrapper> getNotProvidedAsync(ServiceCallback<DictionaryWrapper> serviceCallback);
+    ServiceFuture<DictionaryWrapper> getNotProvidedAsync(@NonNull ServiceCallback<DictionaryWrapper> serviceCallback);
 
     /**
      * Get complex types with dictionary property while server doesn't provide a response payload.

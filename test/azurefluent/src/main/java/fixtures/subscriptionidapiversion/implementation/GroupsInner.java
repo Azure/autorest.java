@@ -24,6 +24,7 @@ import com.microsoft.rest.v2.annotations.UnexpectedResponseExceptionType;
 import fixtures.subscriptionidapiversion.ErrorException;
 import io.reactivex.Maybe;
 import io.reactivex.Single;
+import io.reactivex.annotations.NonNull;
 import io.reactivex.functions.Function;
 
 /**
@@ -72,7 +73,7 @@ public final class GroupsInner {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the SampleResourceGroupInner object if successful.
      */
-    public SampleResourceGroupInner getSampleResourceGroup(String resourceGroupName) {
+    public SampleResourceGroupInner getSampleResourceGroup(@NonNull String resourceGroupName) {
         return getSampleResourceGroupAsync(resourceGroupName).blockingGet();
     }
 
@@ -84,7 +85,7 @@ public final class GroupsInner {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;SampleResourceGroupInner&gt;} object.
      */
-    public ServiceFuture<SampleResourceGroupInner> getSampleResourceGroupAsync(String resourceGroupName, ServiceCallback<SampleResourceGroupInner> serviceCallback) {
+    public ServiceFuture<SampleResourceGroupInner> getSampleResourceGroupAsync(@NonNull String resourceGroupName, @NonNull ServiceCallback<SampleResourceGroupInner> serviceCallback) {
         return ServiceFuture.fromBody(getSampleResourceGroupAsync(resourceGroupName), serviceCallback);
     }
 
@@ -95,7 +96,7 @@ public final class GroupsInner {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, SampleResourceGroupInner&gt;&gt;} object if successful.
      */
-    public Single<RestResponse<Void, SampleResourceGroupInner>> getSampleResourceGroupWithRestResponseAsync(String resourceGroupName) {
+    public Single<RestResponse<Void, SampleResourceGroupInner>> getSampleResourceGroupWithRestResponseAsync(@NonNull String resourceGroupName) {
         if (this.client.subscriptionId() == null) {
             throw new IllegalArgumentException("Parameter this.client.subscriptionId() is required and cannot be null.");
         }
@@ -115,7 +116,7 @@ public final class GroupsInner {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Maybe&lt;SampleResourceGroupInner&gt;} object if successful.
      */
-    public Maybe<SampleResourceGroupInner> getSampleResourceGroupAsync(String resourceGroupName) {
+    public Maybe<SampleResourceGroupInner> getSampleResourceGroupAsync(@NonNull String resourceGroupName) {
         return getSampleResourceGroupWithRestResponseAsync(resourceGroupName)
             .flatMapMaybe(new Function<RestResponse<Void, SampleResourceGroupInner>, Maybe<SampleResourceGroupInner>>() {
                 public Maybe<SampleResourceGroupInner> apply(RestResponse<Void, SampleResourceGroupInner> restResponse) {
