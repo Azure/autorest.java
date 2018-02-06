@@ -8,11 +8,11 @@ import fixtures.paging.models.CustomParameterGroup;
 import fixtures.paging.models.PagingGetMultiplePagesWithOffsetOptions;
 import fixtures.paging.models.Product;
 import fixtures.paging.models.ProductProperties;
+import io.reactivex.Observer;
 import io.reactivex.disposables.Disposable;
 import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
-import io.reactivex.Observer;
 
 import java.util.List;
 import java.util.concurrent.CountDownLatch;

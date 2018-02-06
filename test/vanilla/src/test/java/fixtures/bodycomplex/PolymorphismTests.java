@@ -1,5 +1,11 @@
 package fixtures.bodycomplex;
 
+import fixtures.bodycomplex.implementation.AutoRestComplexTestServiceImpl;
+import fixtures.bodycomplex.models.Fish;
+import fixtures.bodycomplex.models.Goblinshark;
+import fixtures.bodycomplex.models.Salmon;
+import fixtures.bodycomplex.models.Sawshark;
+import fixtures.bodycomplex.models.Shark;
 import org.joda.time.DateTime;
 import org.joda.time.DateTimeZone;
 import org.junit.Assert;
@@ -7,13 +13,6 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 
 import java.util.ArrayList;
-
-import fixtures.bodycomplex.implementation.AutoRestComplexTestServiceImpl;
-import fixtures.bodycomplex.models.Fish;
-import fixtures.bodycomplex.models.Goblinshark;
-import fixtures.bodycomplex.models.Salmon;
-import fixtures.bodycomplex.models.Sawshark;
-import fixtures.bodycomplex.models.Shark;
 
 public class PolymorphismTests {
     private static AutoRestComplexTestService client;

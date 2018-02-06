@@ -1,5 +1,6 @@
 package fixtures.bodydate;
 
+import fixtures.bodydate.implementation.AutoRestDateTestServiceImpl;
 import org.joda.time.IllegalFieldValueException;
 import org.joda.time.LocalDate;
 import org.junit.Assert;
@@ -7,8 +8,6 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 
 import java.util.concurrent.CountDownLatch;
-
-import fixtures.bodydate.implementation.AutoRestDateTestServiceImpl;
 
 public class DateOperationsTests {
     private static AutoRestDateTestService client;

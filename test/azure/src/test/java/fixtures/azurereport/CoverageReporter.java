@@ -1,13 +1,13 @@
 package fixtures.azurereport;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
-
 import com.microsoft.rest.v2.credentials.BasicAuthenticationCredentials;
 import fixtures.azurereport.implementation.AutoRestReportServiceForAzureImpl;
 import org.junit.runner.Result;
 import org.junit.runner.notification.RunListener;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
 
 public final class CoverageReporter extends RunListener {
     private AutoRestReportServiceForAzureImpl client = new AutoRestReportServiceForAzureImpl(

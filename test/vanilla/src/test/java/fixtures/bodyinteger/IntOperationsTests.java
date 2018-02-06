@@ -1,8 +1,12 @@
 package fixtures.bodyinteger;
 
 import com.fasterxml.jackson.core.JsonParseException;
+import com.microsoft.rest.v2.RestException;
 import com.microsoft.rest.v2.ServiceCallback;
-
+import com.microsoft.rest.v2.http.HttpPipeline;
+import com.microsoft.rest.v2.policy.DecodingPolicyFactory;
+import fixtures.bodyinteger.implementation.AutoRestIntegerTestServiceImpl;
+import io.reactivex.Observable;
 import io.reactivex.Observer;
 import io.reactivex.disposables.Disposable;
 import org.joda.time.DateTime;
@@ -14,9 +18,7 @@ import org.junit.Test;
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.TimeUnit;
 
-import fixtures.bodyinteger.implementation.AutoRestIntegerTestServiceImpl;
-import io.reactivex.Observable;
-
+import static org.junit.Assert.assertThat;
 import static org.junit.Assert.fail;
 
 public class IntOperationsTests {

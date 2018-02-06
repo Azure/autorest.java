@@ -1,15 +1,11 @@
 package fixtures.http;
 
+import fixtures.http.implementation.AutoRestHttpInfrastructureTestServiceImpl;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-import java.util.concurrent.CountDownLatch;
-
-import fixtures.http.implementation.AutoRestHttpInfrastructureTestServiceImpl;
-
 public class HttpSuccessTests {
     private static AutoRestHttpInfrastructureTestService client;
-    private CountDownLatch lock = new CountDownLatch(1);
 
     @BeforeClass
     public static void setup() {

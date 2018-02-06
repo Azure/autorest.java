@@ -1,5 +1,7 @@
 package fixtures.bodydictionary;
 
+import fixtures.bodydictionary.implementation.AutoRestSwaggerBATdictionaryServiceImpl;
+import fixtures.bodydictionary.models.Widget;
 import org.joda.time.DateTime;
 import org.joda.time.DateTimeZone;
 import org.joda.time.LocalDate;
@@ -13,9 +15,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import fixtures.bodydictionary.implementation.AutoRestSwaggerBATdictionaryServiceImpl;
-import fixtures.bodydictionary.models.Widget;
-
+import static org.junit.Assert.assertThat;
 import static org.junit.Assert.fail;
 
 public class DictionaryTests {

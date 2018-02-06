@@ -6,11 +6,11 @@ import com.microsoft.rest.v2.http.HttpHeaders;
 import com.microsoft.rest.v2.http.HttpPipeline;
 import com.microsoft.rest.v2.policy.AddHeadersPolicyFactory;
 import com.microsoft.rest.v2.policy.CredentialsPolicyFactory;
+import com.microsoft.rest.v2.policy.DecodingPolicyFactory;
 import com.microsoft.rest.v2.policy.PortPolicyFactory;
 import com.microsoft.rest.v2.policy.ProtocolPolicyFactory;
 import fixtures.azurespecials.implementation.AutoRestAzureSpecialParametersTestClientImpl;
 import org.junit.BeforeClass;
-import org.junit.Ignore;
 import org.junit.Test;
 
 import java.util.UUID;
@@ -29,7 +29,8 @@ public class XMsClientRequestIdTests {
                 new ProtocolPolicyFactory("http"),
                 new PortPolicyFactory(3000),
                 new CredentialsPolicyFactory(new TokenCredentials(null, UUID.randomUUID().toString())),
-                new AddHeadersPolicyFactory(headers));
+                new AddHeadersPolicyFactory(headers),
+                new DecodingPolicyFactory());
         client = new AutoRestAzureSpecialParametersTestClientImpl(httpPipeline);
         client.withSubscriptionId("1234-5678-9012-3456");
     }

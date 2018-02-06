@@ -97,7 +97,7 @@ namespace AutoRest.Java
             "Duration",
             "Period",
             "BigDecimal",
-            "Flowable<byte[]>"
+            "Flowable<ByteBuffer>"
         };
 
         private static readonly IDictionary<AutoRestIModelType, IType> parsedAutoRestIModelTypes = new Dictionary<AutoRestIModelType, IType>();

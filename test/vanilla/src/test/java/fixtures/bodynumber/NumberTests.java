@@ -1,11 +1,10 @@
 package fixtures.bodynumber;
 
 import com.fasterxml.jackson.core.JsonParseException;
+import fixtures.bodynumber.implementation.AutoRestNumberTestServiceImpl;
 import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
-
-import fixtures.bodynumber.implementation.AutoRestNumberTestServiceImpl;
 
 import static org.junit.Assert.fail;
 

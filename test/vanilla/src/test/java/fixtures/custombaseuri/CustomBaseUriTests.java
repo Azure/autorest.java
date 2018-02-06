@@ -1,15 +1,14 @@
 package fixtures.custombaseuri;
 
 import com.microsoft.rest.v2.http.HttpPipeline;
-import com.microsoft.rest.v2.policy.*;
+import com.microsoft.rest.v2.policy.DecodingPolicyFactory;
+import fixtures.custombaseuri.implementation.AutoRestParameterizedHostTestClientImpl;
 import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.TimeUnit;
-
-import fixtures.custombaseuri.implementation.AutoRestParameterizedHostTestClientImpl;
 
 import static org.junit.Assert.fail;
 
@@ -18,9 +17,7 @@ public class CustomBaseUriTests {
 
     @BeforeClass
     public static void setup() {
-        client = new AutoRestParameterizedHostTestClientImpl(HttpPipeline.build(
-                new ProtocolPolicyFactory("http"),
-                new PortPolicyFactory(3000)));
+        client = new AutoRestParameterizedHostTestClientImpl(HttpPipeline.build(new DecodingPolicyFactory()));
     }
 
     // Positive test case
@@ -34,10 +31,9 @@ public class CustomBaseUriTests {
     public void getEmptyWithInvalidCustomUriAccountName() throws Exception {
         try {
             client.paths().getEmpty("bad");
-            Assert.assertTrue(false);
+            Assert.fail();
         }
         catch (RuntimeException e) {
-            Assert.assertTrue(true);
         }
     }
 
@@ -46,10 +42,9 @@ public class CustomBaseUriTests {
         try {
             client.withHost("badhost");
             client.paths().getEmpty("local");
-            Assert.assertTrue(false);
+            Assert.fail();
         }
         catch (RuntimeException e) {
-            Assert.assertTrue(true);
         }
         finally {
             client.withHost("host:3000");

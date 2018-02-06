@@ -1,5 +1,8 @@
 package fixtures.bodyarray;
 
+import fixtures.bodyarray.implementation.AutoRestSwaggerBATArrayServiceImpl;
+import fixtures.bodyarray.models.ErrorException;
+import fixtures.bodyarray.models.Product;
 import org.joda.time.DateTime;
 import org.joda.time.DateTimeZone;
 import org.joda.time.LocalDate;
@@ -15,9 +18,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 
-import fixtures.bodyarray.implementation.AutoRestSwaggerBATArrayServiceImpl;
-import fixtures.bodyarray.models.ErrorException;
-import fixtures.bodyarray.models.Product;
+import static org.junit.Assert.assertThat;
+import static org.junit.Assert.fail;
 
 public class ArrayTests {
     private static AutoRestSwaggerBATArrayService client;
@@ -57,8 +59,8 @@ public class ArrayTests {
     @Test
     public void getBooleanTfft() throws Exception {
         List<Boolean> result = client.arrays().getBooleanTfft();
-        Object[] exected = new Boolean[] {true, false, false, true};
-        Assert.assertArrayEquals(exected, result.toArray());
+        Object[] expected = new Boolean[] {true, false, false, true};
+        Assert.assertArrayEquals(expected, result.toArray());
     }
 
     @Test
@@ -265,7 +267,7 @@ public class ArrayTests {
     public void getUuidInvalidChars() throws Exception {
         try {
             List<UUID> result = client.arrays().getUuidInvalidChars();
-            Assert.fail();
+            fail();
         } catch (RuntimeException ex) {
             // expected
             Assert.assertTrue(ex.getMessage(), ex.getMessage().contains("UUID has to be represented"));

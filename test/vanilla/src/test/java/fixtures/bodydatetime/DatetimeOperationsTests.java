@@ -1,13 +1,12 @@
 package fixtures.bodydatetime;
 
+import fixtures.bodydatetime.implementation.AutoRestDateTimeTestServiceImpl;
 import org.joda.time.DateTime;
 import org.joda.time.DateTimeZone;
 import org.joda.time.IllegalFieldValueException;
 import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
-
-import fixtures.bodydatetime.implementation.AutoRestDateTimeTestServiceImpl;
 
 public class DatetimeOperationsTests {
     private static AutoRestDateTimeTestService client;

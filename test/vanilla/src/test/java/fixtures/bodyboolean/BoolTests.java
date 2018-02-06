@@ -1,12 +1,10 @@
 package fixtures.bodyboolean;
 
 import com.fasterxml.jackson.core.JsonParseException;
-
+import fixtures.bodyboolean.implementation.AutoRestBoolTestServiceImpl;
 import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
-
-import fixtures.bodyboolean.implementation.AutoRestBoolTestServiceImpl;
 
 import static org.junit.Assert.fail;
 

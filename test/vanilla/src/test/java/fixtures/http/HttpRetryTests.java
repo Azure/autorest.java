@@ -3,18 +3,16 @@ package fixtures.http;
 import com.microsoft.rest.v2.RestResponse;
 import com.microsoft.rest.v2.http.HttpPipeline;
 import com.microsoft.rest.v2.policy.CookiePolicyFactory;
-import com.microsoft.rest.v2.policy.PortPolicyFactory;
-import com.microsoft.rest.v2.policy.ProtocolPolicyFactory;
+import com.microsoft.rest.v2.policy.DecodingPolicyFactory;
 import com.microsoft.rest.v2.policy.RetryPolicyFactory;
+import fixtures.http.implementation.AutoRestHttpInfrastructureTestServiceImpl;
+import io.reactivex.functions.Consumer;
 import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.TimeUnit;
-
-import fixtures.http.implementation.AutoRestHttpInfrastructureTestServiceImpl;
-import io.reactivex.functions.Consumer;
 
 public class HttpRetryTests {
     private static AutoRestHttpInfrastructureTestService client;
@@ -23,10 +21,9 @@ public class HttpRetryTests {
     @BeforeClass
     public static void setup() {
         client = new AutoRestHttpInfrastructureTestServiceImpl(HttpPipeline.build(
-                new ProtocolPolicyFactory("http"),
-                new PortPolicyFactory(3000),
                 new RetryPolicyFactory(),
-                new CookiePolicyFactory()));
+                new CookiePolicyFactory(),
+                new DecodingPolicyFactory()));
     }
 
     @Test

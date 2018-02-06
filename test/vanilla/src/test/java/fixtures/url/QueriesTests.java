@@ -1,8 +1,10 @@
 package fixtures.url;
 
 import com.microsoft.rest.v2.http.HttpPipeline;
-import com.microsoft.rest.v2.policy.PortPolicyFactory;
-import com.microsoft.rest.v2.policy.ProtocolPolicyFactory;
+import com.microsoft.rest.v2.policy.DecodingPolicyFactory;
+import fixtures.url.implementation.AutoRestUrlTestServiceImpl;
+import fixtures.url.models.ErrorException;
+import fixtures.url.models.UriColor;
 import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -10,18 +12,12 @@ import org.junit.Test;
 import java.util.ArrayList;
 import java.util.List;
 
-import fixtures.url.implementation.AutoRestUrlTestServiceImpl;
-import fixtures.url.models.ErrorException;
-import fixtures.url.models.UriColor;
-
 public class QueriesTests {
     private static AutoRestUrlTestService client;
 
     @BeforeClass
     public static void setup() {
-        client = new AutoRestUrlTestServiceImpl(HttpPipeline.build(
-                new ProtocolPolicyFactory("http"),
-                new PortPolicyFactory(3000)));
+        client = new AutoRestUrlTestServiceImpl(HttpPipeline.build(new DecodingPolicyFactory()));
     }
 
     @Test
