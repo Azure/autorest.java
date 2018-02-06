@@ -19,8 +19,10 @@ namespace AutoRest.Java.Model
         /// <param name="enums">The enum types that are used by the service.</param>
         /// <param name="exceptions">The exception types that are used by the service.</param>
         /// <param name="xmlSequenceWrappers"></param>
+        /// <param name="models"></param>
         /// <param name="manager"></param>
-        public Service(string clientName, string clientDescription, IEnumerable<string> subpackages, IEnumerable<ServiceEnum> enums, IEnumerable<ServiceException> exceptions, IEnumerable<XmlSequenceWrapper> xmlSequenceWrappers, IEnumerable<ServiceModel> models, ServiceManager manager)
+        /// <param name="serviceClient"></param>
+        public Service(string clientName, string clientDescription, IEnumerable<string> subpackages, IEnumerable<EnumType> enums, IEnumerable<ServiceException> exceptions, IEnumerable<XmlSequenceWrapper> xmlSequenceWrappers, IEnumerable<ServiceModel> models, ServiceManager manager, ServiceClient serviceClient)
         {
             ClientName = clientName;
             ClientDescription = clientDescription;
@@ -30,6 +32,7 @@ namespace AutoRest.Java.Model
             XmlSequenceWrappers = xmlSequenceWrappers;
             Models = models;
             Manager = manager;
+            ServiceClient = serviceClient;
         }
 
         /// <summary>
@@ -50,7 +53,7 @@ namespace AutoRest.Java.Model
         /// <summary>
         /// Get the enum types that are used by this service.
         /// </summary>
-        public IEnumerable<ServiceEnum> Enums { get; }
+        public IEnumerable<EnumType> Enums { get; }
 
         /// <summary>
         /// Get the exception types that are used by this service.
@@ -71,5 +74,10 @@ namespace AutoRest.Java.Model
         /// Get the Manager for this service.
         /// </summary>
         public ServiceManager Manager { get; }
+
+        /// <summary>
+        /// The ServiceClient for this service.
+        /// </summary>
+        public ServiceClient ServiceClient { get; }
     }
 }

@@ -9,7 +9,6 @@ import fixtures.bodyinteger.implementation.AutoRestIntegerTestServiceImpl;
 import io.reactivex.Observable;
 import io.reactivex.Observer;
 import io.reactivex.disposables.Disposable;
-import org.hamcrest.CoreMatchers;
 import org.joda.time.DateTime;
 import org.joda.time.DateTimeZone;
 import org.junit.Assert;
@@ -28,7 +27,7 @@ public class IntOperationsTests {
 
     @BeforeClass
     public static void setup() {
-        client = new AutoRestIntegerTestServiceImpl(HttpPipeline.build(new DecodingPolicyFactory()));
+        client = new AutoRestIntegerTestServiceImpl();
     }
 
     @Test
@@ -191,8 +190,8 @@ public class IntOperationsTests {
         try {
             client.ints().getInvalidUnixTime();
             fail();
-        } catch (RestException e) {
-            assertThat(e.getMessage(), CoreMatchers.containsString("HTTP response has a malformed body"));
+        } catch (RuntimeException e) {
+            Assert.assertTrue(e.getMessage().contains("HTTP response has a malformed body"));
         }
     }
 

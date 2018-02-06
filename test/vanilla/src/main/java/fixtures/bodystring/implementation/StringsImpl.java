@@ -26,7 +26,6 @@ import fixtures.bodystring.Strings;
 import fixtures.bodystring.models.ErrorException;
 import io.reactivex.Completable;
 import io.reactivex.Maybe;
-import io.reactivex.Observable;
 import io.reactivex.Single;
 import io.reactivex.functions.Function;
 
@@ -133,7 +132,6 @@ public class StringsImpl implements Strings {
     /**
      * Get null string value value.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the String object if successful.
@@ -149,14 +147,13 @@ public class StringsImpl implements Strings {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;String&gt;} object.
      */
-    public ServiceFuture<String> getNullAsync(final ServiceCallback<String> serviceCallback) {
+    public ServiceFuture<String> getNullAsync(ServiceCallback<String> serviceCallback) {
         return ServiceFuture.fromBody(getNullAsync(), serviceCallback);
     }
 
     /**
      * Get null string value value.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, String&gt;&gt;} object if successful.
      */
     public Single<RestResponse<Void, String>> getNullWithRestResponseAsync() {
@@ -166,7 +163,6 @@ public class StringsImpl implements Strings {
     /**
      * Get null string value value.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Maybe&lt;String&gt;} object if successful.
      */
     public Maybe<String> getNullAsync() {
@@ -185,7 +181,6 @@ public class StringsImpl implements Strings {
     /**
      * Set string value null.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
@@ -200,14 +195,13 @@ public class StringsImpl implements Strings {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    public ServiceFuture<Void> putNullAsync(final ServiceCallback<Void> serviceCallback) {
+    public ServiceFuture<Void> putNullAsync(ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(putNullAsync(), serviceCallback);
     }
 
     /**
      * Set string value null.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
      */
     public Single<RestResponse<Void, Void>> putNullWithRestResponseAsync() {
@@ -218,7 +212,6 @@ public class StringsImpl implements Strings {
     /**
      * Set string value null.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Completable} object if successful.
      */
     public Completable putNullAsync() {
@@ -246,7 +239,7 @@ public class StringsImpl implements Strings {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    public ServiceFuture<Void> putNullAsync(String stringBody, final ServiceCallback<Void> serviceCallback) {
+    public ServiceFuture<Void> putNullAsync(String stringBody, ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(putNullAsync(stringBody), serviceCallback);
     }
 
@@ -276,7 +269,6 @@ public class StringsImpl implements Strings {
     /**
      * Get empty string value value ''.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the String object if successful.
@@ -292,14 +284,13 @@ public class StringsImpl implements Strings {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;String&gt;} object.
      */
-    public ServiceFuture<String> getEmptyAsync(final ServiceCallback<String> serviceCallback) {
+    public ServiceFuture<String> getEmptyAsync(ServiceCallback<String> serviceCallback) {
         return ServiceFuture.fromBody(getEmptyAsync(), serviceCallback);
     }
 
     /**
      * Get empty string value value ''.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, String&gt;&gt;} object if successful.
      */
     public Single<RestResponse<Void, String>> getEmptyWithRestResponseAsync() {
@@ -309,7 +300,6 @@ public class StringsImpl implements Strings {
     /**
      * Get empty string value value ''.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Maybe&lt;String&gt;} object if successful.
      */
     public Maybe<String> getEmptyAsync() {
@@ -345,7 +335,7 @@ public class StringsImpl implements Strings {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    public ServiceFuture<Void> putEmptyAsync(String stringBody, final ServiceCallback<Void> serviceCallback) {
+    public ServiceFuture<Void> putEmptyAsync(String stringBody, ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(putEmptyAsync(stringBody), serviceCallback);
     }
 
@@ -378,7 +368,6 @@ public class StringsImpl implements Strings {
     /**
      * Get mbcs string value '啊齄丂狛狜隣郎隣兀﨩ˊ〞〡￤℡㈱‐ー﹡﹢﹫、〓ⅰⅹ⒈€㈠㈩ⅠⅫ！￣ぁんァヶΑ︴АЯаяāɡㄅㄩ─╋︵﹄︻︱︳︴ⅰⅹɑɡ〇〾⿻⺁䜣€'.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the String object if successful.
@@ -394,14 +383,13 @@ public class StringsImpl implements Strings {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;String&gt;} object.
      */
-    public ServiceFuture<String> getMbcsAsync(final ServiceCallback<String> serviceCallback) {
+    public ServiceFuture<String> getMbcsAsync(ServiceCallback<String> serviceCallback) {
         return ServiceFuture.fromBody(getMbcsAsync(), serviceCallback);
     }
 
     /**
      * Get mbcs string value '啊齄丂狛狜隣郎隣兀﨩ˊ〞〡￤℡㈱‐ー﹡﹢﹫、〓ⅰⅹ⒈€㈠㈩ⅠⅫ！￣ぁんァヶΑ︴АЯаяāɡㄅㄩ─╋︵﹄︻︱︳︴ⅰⅹɑɡ〇〾⿻⺁䜣€'.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, String&gt;&gt;} object if successful.
      */
     public Single<RestResponse<Void, String>> getMbcsWithRestResponseAsync() {
@@ -411,7 +399,6 @@ public class StringsImpl implements Strings {
     /**
      * Get mbcs string value '啊齄丂狛狜隣郎隣兀﨩ˊ〞〡￤℡㈱‐ー﹡﹢﹫、〓ⅰⅹ⒈€㈠㈩ⅠⅫ！￣ぁんァヶΑ︴АЯаяāɡㄅㄩ─╋︵﹄︻︱︳︴ⅰⅹɑɡ〇〾⿻⺁䜣€'.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Maybe&lt;String&gt;} object if successful.
      */
     public Maybe<String> getMbcsAsync() {
@@ -447,7 +434,7 @@ public class StringsImpl implements Strings {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    public ServiceFuture<Void> putMbcsAsync(String stringBody, final ServiceCallback<Void> serviceCallback) {
+    public ServiceFuture<Void> putMbcsAsync(String stringBody, ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(putMbcsAsync(stringBody), serviceCallback);
     }
 
@@ -480,7 +467,6 @@ public class StringsImpl implements Strings {
     /**
      * Get string value with leading and trailing whitespace '&lt;tab&gt;&lt;space&gt;&lt;space&gt;Now is the time for all good men to come to the aid of their country&lt;tab&gt;&lt;space&gt;&lt;space&gt;'.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the String object if successful.
@@ -496,14 +482,13 @@ public class StringsImpl implements Strings {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;String&gt;} object.
      */
-    public ServiceFuture<String> getWhitespaceAsync(final ServiceCallback<String> serviceCallback) {
+    public ServiceFuture<String> getWhitespaceAsync(ServiceCallback<String> serviceCallback) {
         return ServiceFuture.fromBody(getWhitespaceAsync(), serviceCallback);
     }
 
     /**
      * Get string value with leading and trailing whitespace '&lt;tab&gt;&lt;space&gt;&lt;space&gt;Now is the time for all good men to come to the aid of their country&lt;tab&gt;&lt;space&gt;&lt;space&gt;'.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, String&gt;&gt;} object if successful.
      */
     public Single<RestResponse<Void, String>> getWhitespaceWithRestResponseAsync() {
@@ -513,7 +498,6 @@ public class StringsImpl implements Strings {
     /**
      * Get string value with leading and trailing whitespace '&lt;tab&gt;&lt;space&gt;&lt;space&gt;Now is the time for all good men to come to the aid of their country&lt;tab&gt;&lt;space&gt;&lt;space&gt;'.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Maybe&lt;String&gt;} object if successful.
      */
     public Maybe<String> getWhitespaceAsync() {
@@ -549,7 +533,7 @@ public class StringsImpl implements Strings {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    public ServiceFuture<Void> putWhitespaceAsync(String stringBody, final ServiceCallback<Void> serviceCallback) {
+    public ServiceFuture<Void> putWhitespaceAsync(String stringBody, ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(putWhitespaceAsync(stringBody), serviceCallback);
     }
 
@@ -582,7 +566,6 @@ public class StringsImpl implements Strings {
     /**
      * Get String value when no string value is sent in response payload.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the String object if successful.
@@ -598,14 +581,13 @@ public class StringsImpl implements Strings {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;String&gt;} object.
      */
-    public ServiceFuture<String> getNotProvidedAsync(final ServiceCallback<String> serviceCallback) {
+    public ServiceFuture<String> getNotProvidedAsync(ServiceCallback<String> serviceCallback) {
         return ServiceFuture.fromBody(getNotProvidedAsync(), serviceCallback);
     }
 
     /**
      * Get String value when no string value is sent in response payload.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, String&gt;&gt;} object if successful.
      */
     public Single<RestResponse<Void, String>> getNotProvidedWithRestResponseAsync() {
@@ -615,7 +597,6 @@ public class StringsImpl implements Strings {
     /**
      * Get String value when no string value is sent in response payload.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Maybe&lt;String&gt;} object if successful.
      */
     public Maybe<String> getNotProvidedAsync() {
@@ -634,7 +615,6 @@ public class StringsImpl implements Strings {
     /**
      * Get value that is base64 encoded.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the byte[] object if successful.
@@ -650,14 +630,13 @@ public class StringsImpl implements Strings {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;byte[]&gt;} object.
      */
-    public ServiceFuture<byte[]> getBase64EncodedAsync(final ServiceCallback<byte[]> serviceCallback) {
+    public ServiceFuture<byte[]> getBase64EncodedAsync(ServiceCallback<byte[]> serviceCallback) {
         return ServiceFuture.fromBody(getBase64EncodedAsync(), serviceCallback);
     }
 
     /**
      * Get value that is base64 encoded.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, byte[]&gt;&gt;} object if successful.
      */
     public Single<RestResponse<Void, byte[]>> getBase64EncodedWithRestResponseAsync() {
@@ -667,7 +646,6 @@ public class StringsImpl implements Strings {
     /**
      * Get value that is base64 encoded.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Maybe&lt;byte[]&gt;} object if successful.
      */
     public Maybe<byte[]> getBase64EncodedAsync() {
@@ -686,7 +664,6 @@ public class StringsImpl implements Strings {
     /**
      * Get value that is base64url encoded.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the byte[] object if successful.
@@ -702,14 +679,13 @@ public class StringsImpl implements Strings {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;byte[]&gt;} object.
      */
-    public ServiceFuture<byte[]> getBase64UrlEncodedAsync(final ServiceCallback<byte[]> serviceCallback) {
+    public ServiceFuture<byte[]> getBase64UrlEncodedAsync(ServiceCallback<byte[]> serviceCallback) {
         return ServiceFuture.fromBody(getBase64UrlEncodedAsync(), serviceCallback);
     }
 
     /**
      * Get value that is base64url encoded.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, byte[]&gt;&gt;} object if successful.
      */
     public Single<RestResponse<Void, byte[]>> getBase64UrlEncodedWithRestResponseAsync() {
@@ -719,7 +695,6 @@ public class StringsImpl implements Strings {
     /**
      * Get value that is base64url encoded.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Maybe&lt;byte[]&gt;} object if successful.
      */
     public Maybe<byte[]> getBase64UrlEncodedAsync() {
@@ -738,7 +713,7 @@ public class StringsImpl implements Strings {
     /**
      * Put value that is base64url encoded.
      *
-     * @param stringBody the Base64Url value.
+     * @param stringBody the byte[] value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -750,19 +725,19 @@ public class StringsImpl implements Strings {
     /**
      * Put value that is base64url encoded.
      *
-     * @param stringBody the Base64Url value.
+     * @param stringBody the byte[] value.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    public ServiceFuture<Void> putBase64UrlEncodedAsync(byte[] stringBody, final ServiceCallback<Void> serviceCallback) {
+    public ServiceFuture<Void> putBase64UrlEncodedAsync(byte[] stringBody, ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(putBase64UrlEncodedAsync(stringBody), serviceCallback);
     }
 
     /**
      * Put value that is base64url encoded.
      *
-     * @param stringBody the Base64Url value.
+     * @param stringBody the byte[] value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
      */
@@ -777,7 +752,7 @@ public class StringsImpl implements Strings {
     /**
      * Put value that is base64url encoded.
      *
-     * @param stringBody the Base64Url value.
+     * @param stringBody the byte[] value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Completable} object if successful.
      */
@@ -789,7 +764,6 @@ public class StringsImpl implements Strings {
     /**
      * Get null value that is expected to be base64url encoded.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the byte[] object if successful.
@@ -805,14 +779,13 @@ public class StringsImpl implements Strings {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;byte[]&gt;} object.
      */
-    public ServiceFuture<byte[]> getNullBase64UrlEncodedAsync(final ServiceCallback<byte[]> serviceCallback) {
+    public ServiceFuture<byte[]> getNullBase64UrlEncodedAsync(ServiceCallback<byte[]> serviceCallback) {
         return ServiceFuture.fromBody(getNullBase64UrlEncodedAsync(), serviceCallback);
     }
 
     /**
      * Get null value that is expected to be base64url encoded.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, byte[]&gt;&gt;} object if successful.
      */
     public Single<RestResponse<Void, byte[]>> getNullBase64UrlEncodedWithRestResponseAsync() {
@@ -822,7 +795,6 @@ public class StringsImpl implements Strings {
     /**
      * Get null value that is expected to be base64url encoded.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Maybe&lt;byte[]&gt;} object if successful.
      */
     public Maybe<byte[]> getNullBase64UrlEncodedAsync() {

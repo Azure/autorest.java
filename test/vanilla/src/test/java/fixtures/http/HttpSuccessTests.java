@@ -1,7 +1,5 @@
 package fixtures.http;
 
-import com.microsoft.rest.v2.http.HttpPipeline;
-import com.microsoft.rest.v2.policy.DecodingPolicyFactory;
 import fixtures.http.implementation.AutoRestHttpInfrastructureTestServiceImpl;
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -11,7 +9,7 @@ public class HttpSuccessTests {
 
     @BeforeClass
     public static void setup() {
-        client = new AutoRestHttpInfrastructureTestServiceImpl(HttpPipeline.build(new DecodingPolicyFactory()));
+        client = new AutoRestHttpInfrastructureTestServiceImpl();
     }
 
     @Test

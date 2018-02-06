@@ -13,11 +13,9 @@ package fixtures.bodycomplex;
 import com.microsoft.rest.v2.RestResponse;
 import com.microsoft.rest.v2.ServiceCallback;
 import com.microsoft.rest.v2.ServiceFuture;
-import fixtures.bodycomplex.models.ErrorException;
 import fixtures.bodycomplex.models.Siamese;
 import io.reactivex.Completable;
 import io.reactivex.Maybe;
-import io.reactivex.Observable;
 import io.reactivex.Single;
 
 /**
@@ -28,7 +26,6 @@ public interface Inheritances {
     /**
      * Get complex types that extend others.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the Siamese object if successful.
@@ -42,12 +39,11 @@ public interface Inheritances {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Siamese&gt;} object.
      */
-    ServiceFuture<Siamese> getValidAsync(final ServiceCallback<Siamese> serviceCallback);
+    ServiceFuture<Siamese> getValidAsync(ServiceCallback<Siamese> serviceCallback);
 
     /**
      * Get complex types that extend others.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, Siamese&gt;&gt;} object if successful.
      */
     Single<RestResponse<Void, Siamese>> getValidWithRestResponseAsync();
@@ -55,7 +51,6 @@ public interface Inheritances {
     /**
      * Get complex types that extend others.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Maybe&lt;Siamese&gt;} object if successful.
      */
     Maybe<Siamese> getValidAsync();
@@ -78,7 +73,7 @@ public interface Inheritances {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    ServiceFuture<Void> putValidAsync(Siamese complexBody, final ServiceCallback<Void> serviceCallback);
+    ServiceFuture<Void> putValidAsync(Siamese complexBody, ServiceCallback<Void> serviceCallback);
 
     /**
      * Put complex types that extend others.

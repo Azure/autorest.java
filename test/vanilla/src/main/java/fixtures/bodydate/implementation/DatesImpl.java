@@ -24,7 +24,6 @@ import fixtures.bodydate.Dates;
 import fixtures.bodydate.models.ErrorException;
 import io.reactivex.Completable;
 import io.reactivex.Maybe;
-import io.reactivex.Observable;
 import io.reactivex.Single;
 import io.reactivex.functions.Function;
 import org.joda.time.LocalDate;
@@ -104,7 +103,6 @@ public class DatesImpl implements Dates {
     /**
      * Get null date value.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the LocalDate object if successful.
@@ -120,14 +118,13 @@ public class DatesImpl implements Dates {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;LocalDate&gt;} object.
      */
-    public ServiceFuture<LocalDate> getNullAsync(final ServiceCallback<LocalDate> serviceCallback) {
+    public ServiceFuture<LocalDate> getNullAsync(ServiceCallback<LocalDate> serviceCallback) {
         return ServiceFuture.fromBody(getNullAsync(), serviceCallback);
     }
 
     /**
      * Get null date value.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, LocalDate&gt;&gt;} object if successful.
      */
     public Single<RestResponse<Void, LocalDate>> getNullWithRestResponseAsync() {
@@ -137,7 +134,6 @@ public class DatesImpl implements Dates {
     /**
      * Get null date value.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Maybe&lt;LocalDate&gt;} object if successful.
      */
     public Maybe<LocalDate> getNullAsync() {
@@ -156,7 +152,6 @@ public class DatesImpl implements Dates {
     /**
      * Get invalid date value.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the LocalDate object if successful.
@@ -172,14 +167,13 @@ public class DatesImpl implements Dates {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;LocalDate&gt;} object.
      */
-    public ServiceFuture<LocalDate> getInvalidDateAsync(final ServiceCallback<LocalDate> serviceCallback) {
+    public ServiceFuture<LocalDate> getInvalidDateAsync(ServiceCallback<LocalDate> serviceCallback) {
         return ServiceFuture.fromBody(getInvalidDateAsync(), serviceCallback);
     }
 
     /**
      * Get invalid date value.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, LocalDate&gt;&gt;} object if successful.
      */
     public Single<RestResponse<Void, LocalDate>> getInvalidDateWithRestResponseAsync() {
@@ -189,7 +183,6 @@ public class DatesImpl implements Dates {
     /**
      * Get invalid date value.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Maybe&lt;LocalDate&gt;} object if successful.
      */
     public Maybe<LocalDate> getInvalidDateAsync() {
@@ -208,7 +201,6 @@ public class DatesImpl implements Dates {
     /**
      * Get overflow date value.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the LocalDate object if successful.
@@ -224,14 +216,13 @@ public class DatesImpl implements Dates {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;LocalDate&gt;} object.
      */
-    public ServiceFuture<LocalDate> getOverflowDateAsync(final ServiceCallback<LocalDate> serviceCallback) {
+    public ServiceFuture<LocalDate> getOverflowDateAsync(ServiceCallback<LocalDate> serviceCallback) {
         return ServiceFuture.fromBody(getOverflowDateAsync(), serviceCallback);
     }
 
     /**
      * Get overflow date value.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, LocalDate&gt;&gt;} object if successful.
      */
     public Single<RestResponse<Void, LocalDate>> getOverflowDateWithRestResponseAsync() {
@@ -241,7 +232,6 @@ public class DatesImpl implements Dates {
     /**
      * Get overflow date value.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Maybe&lt;LocalDate&gt;} object if successful.
      */
     public Maybe<LocalDate> getOverflowDateAsync() {
@@ -260,7 +250,6 @@ public class DatesImpl implements Dates {
     /**
      * Get underflow date value.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the LocalDate object if successful.
@@ -276,14 +265,13 @@ public class DatesImpl implements Dates {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;LocalDate&gt;} object.
      */
-    public ServiceFuture<LocalDate> getUnderflowDateAsync(final ServiceCallback<LocalDate> serviceCallback) {
+    public ServiceFuture<LocalDate> getUnderflowDateAsync(ServiceCallback<LocalDate> serviceCallback) {
         return ServiceFuture.fromBody(getUnderflowDateAsync(), serviceCallback);
     }
 
     /**
      * Get underflow date value.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, LocalDate&gt;&gt;} object if successful.
      */
     public Single<RestResponse<Void, LocalDate>> getUnderflowDateWithRestResponseAsync() {
@@ -293,7 +281,6 @@ public class DatesImpl implements Dates {
     /**
      * Get underflow date value.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Maybe&lt;LocalDate&gt;} object if successful.
      */
     public Maybe<LocalDate> getUnderflowDateAsync() {
@@ -329,7 +316,7 @@ public class DatesImpl implements Dates {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    public ServiceFuture<Void> putMaxDateAsync(LocalDate dateBody, final ServiceCallback<Void> serviceCallback) {
+    public ServiceFuture<Void> putMaxDateAsync(LocalDate dateBody, ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(putMaxDateAsync(dateBody), serviceCallback);
     }
 
@@ -362,7 +349,6 @@ public class DatesImpl implements Dates {
     /**
      * Get max date value 9999-12-31.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the LocalDate object if successful.
@@ -378,14 +364,13 @@ public class DatesImpl implements Dates {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;LocalDate&gt;} object.
      */
-    public ServiceFuture<LocalDate> getMaxDateAsync(final ServiceCallback<LocalDate> serviceCallback) {
+    public ServiceFuture<LocalDate> getMaxDateAsync(ServiceCallback<LocalDate> serviceCallback) {
         return ServiceFuture.fromBody(getMaxDateAsync(), serviceCallback);
     }
 
     /**
      * Get max date value 9999-12-31.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, LocalDate&gt;&gt;} object if successful.
      */
     public Single<RestResponse<Void, LocalDate>> getMaxDateWithRestResponseAsync() {
@@ -395,7 +380,6 @@ public class DatesImpl implements Dates {
     /**
      * Get max date value 9999-12-31.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Maybe&lt;LocalDate&gt;} object if successful.
      */
     public Maybe<LocalDate> getMaxDateAsync() {
@@ -431,7 +415,7 @@ public class DatesImpl implements Dates {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    public ServiceFuture<Void> putMinDateAsync(LocalDate dateBody, final ServiceCallback<Void> serviceCallback) {
+    public ServiceFuture<Void> putMinDateAsync(LocalDate dateBody, ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(putMinDateAsync(dateBody), serviceCallback);
     }
 
@@ -464,7 +448,6 @@ public class DatesImpl implements Dates {
     /**
      * Get min date value 0000-01-01.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the LocalDate object if successful.
@@ -480,14 +463,13 @@ public class DatesImpl implements Dates {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;LocalDate&gt;} object.
      */
-    public ServiceFuture<LocalDate> getMinDateAsync(final ServiceCallback<LocalDate> serviceCallback) {
+    public ServiceFuture<LocalDate> getMinDateAsync(ServiceCallback<LocalDate> serviceCallback) {
         return ServiceFuture.fromBody(getMinDateAsync(), serviceCallback);
     }
 
     /**
      * Get min date value 0000-01-01.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, LocalDate&gt;&gt;} object if successful.
      */
     public Single<RestResponse<Void, LocalDate>> getMinDateWithRestResponseAsync() {
@@ -497,7 +479,6 @@ public class DatesImpl implements Dates {
     /**
      * Get min date value 0000-01-01.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Maybe&lt;LocalDate&gt;} object if successful.
      */
     public Maybe<LocalDate> getMinDateAsync() {

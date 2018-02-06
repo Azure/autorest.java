@@ -13,10 +13,8 @@ package fixtures.bodydatetimerfc1123;
 import com.microsoft.rest.v2.RestResponse;
 import com.microsoft.rest.v2.ServiceCallback;
 import com.microsoft.rest.v2.ServiceFuture;
-import fixtures.bodydatetimerfc1123.models.ErrorException;
 import io.reactivex.Completable;
 import io.reactivex.Maybe;
-import io.reactivex.Observable;
 import io.reactivex.Single;
 import org.joda.time.DateTime;
 
@@ -28,7 +26,6 @@ public interface Datetimerfc1123s {
     /**
      * Get null datetime value.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the DateTime object if successful.
@@ -42,12 +39,11 @@ public interface Datetimerfc1123s {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;DateTime&gt;} object.
      */
-    ServiceFuture<DateTime> getNullAsync(final ServiceCallback<DateTime> serviceCallback);
+    ServiceFuture<DateTime> getNullAsync(ServiceCallback<DateTime> serviceCallback);
 
     /**
      * Get null datetime value.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, DateTime&gt;&gt;} object if successful.
      */
     Single<RestResponse<Void, DateTime>> getNullWithRestResponseAsync();
@@ -55,7 +51,6 @@ public interface Datetimerfc1123s {
     /**
      * Get null datetime value.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Maybe&lt;DateTime&gt;} object if successful.
      */
     Maybe<DateTime> getNullAsync();
@@ -63,7 +58,6 @@ public interface Datetimerfc1123s {
     /**
      * Get invalid datetime value.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the DateTime object if successful.
@@ -77,12 +71,11 @@ public interface Datetimerfc1123s {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;DateTime&gt;} object.
      */
-    ServiceFuture<DateTime> getInvalidAsync(final ServiceCallback<DateTime> serviceCallback);
+    ServiceFuture<DateTime> getInvalidAsync(ServiceCallback<DateTime> serviceCallback);
 
     /**
      * Get invalid datetime value.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, DateTime&gt;&gt;} object if successful.
      */
     Single<RestResponse<Void, DateTime>> getInvalidWithRestResponseAsync();
@@ -90,7 +83,6 @@ public interface Datetimerfc1123s {
     /**
      * Get invalid datetime value.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Maybe&lt;DateTime&gt;} object if successful.
      */
     Maybe<DateTime> getInvalidAsync();
@@ -98,7 +90,6 @@ public interface Datetimerfc1123s {
     /**
      * Get overflow datetime value.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the DateTime object if successful.
@@ -112,12 +103,11 @@ public interface Datetimerfc1123s {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;DateTime&gt;} object.
      */
-    ServiceFuture<DateTime> getOverflowAsync(final ServiceCallback<DateTime> serviceCallback);
+    ServiceFuture<DateTime> getOverflowAsync(ServiceCallback<DateTime> serviceCallback);
 
     /**
      * Get overflow datetime value.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, DateTime&gt;&gt;} object if successful.
      */
     Single<RestResponse<Void, DateTime>> getOverflowWithRestResponseAsync();
@@ -125,7 +115,6 @@ public interface Datetimerfc1123s {
     /**
      * Get overflow datetime value.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Maybe&lt;DateTime&gt;} object if successful.
      */
     Maybe<DateTime> getOverflowAsync();
@@ -133,7 +122,6 @@ public interface Datetimerfc1123s {
     /**
      * Get underflow datetime value.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the DateTime object if successful.
@@ -147,12 +135,11 @@ public interface Datetimerfc1123s {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;DateTime&gt;} object.
      */
-    ServiceFuture<DateTime> getUnderflowAsync(final ServiceCallback<DateTime> serviceCallback);
+    ServiceFuture<DateTime> getUnderflowAsync(ServiceCallback<DateTime> serviceCallback);
 
     /**
      * Get underflow datetime value.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, DateTime&gt;&gt;} object if successful.
      */
     Single<RestResponse<Void, DateTime>> getUnderflowWithRestResponseAsync();
@@ -160,7 +147,6 @@ public interface Datetimerfc1123s {
     /**
      * Get underflow datetime value.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Maybe&lt;DateTime&gt;} object if successful.
      */
     Maybe<DateTime> getUnderflowAsync();
@@ -168,7 +154,7 @@ public interface Datetimerfc1123s {
     /**
      * Put max datetime value Fri, 31 Dec 9999 23:59:59 GMT.
      *
-     * @param datetimeBody the DateTimeRfc1123 value.
+     * @param datetimeBody the DateTime value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -178,17 +164,17 @@ public interface Datetimerfc1123s {
     /**
      * Put max datetime value Fri, 31 Dec 9999 23:59:59 GMT.
      *
-     * @param datetimeBody the DateTimeRfc1123 value.
+     * @param datetimeBody the DateTime value.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    ServiceFuture<Void> putUtcMaxDateTimeAsync(DateTime datetimeBody, final ServiceCallback<Void> serviceCallback);
+    ServiceFuture<Void> putUtcMaxDateTimeAsync(DateTime datetimeBody, ServiceCallback<Void> serviceCallback);
 
     /**
      * Put max datetime value Fri, 31 Dec 9999 23:59:59 GMT.
      *
-     * @param datetimeBody the DateTimeRfc1123 value.
+     * @param datetimeBody the DateTime value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
      */
@@ -197,7 +183,7 @@ public interface Datetimerfc1123s {
     /**
      * Put max datetime value Fri, 31 Dec 9999 23:59:59 GMT.
      *
-     * @param datetimeBody the DateTimeRfc1123 value.
+     * @param datetimeBody the DateTime value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Completable} object if successful.
      */
@@ -206,7 +192,6 @@ public interface Datetimerfc1123s {
     /**
      * Get max datetime value fri, 31 dec 9999 23:59:59 gmt.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the DateTime object if successful.
@@ -220,12 +205,11 @@ public interface Datetimerfc1123s {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;DateTime&gt;} object.
      */
-    ServiceFuture<DateTime> getUtcLowercaseMaxDateTimeAsync(final ServiceCallback<DateTime> serviceCallback);
+    ServiceFuture<DateTime> getUtcLowercaseMaxDateTimeAsync(ServiceCallback<DateTime> serviceCallback);
 
     /**
      * Get max datetime value fri, 31 dec 9999 23:59:59 gmt.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, DateTime&gt;&gt;} object if successful.
      */
     Single<RestResponse<Void, DateTime>> getUtcLowercaseMaxDateTimeWithRestResponseAsync();
@@ -233,7 +217,6 @@ public interface Datetimerfc1123s {
     /**
      * Get max datetime value fri, 31 dec 9999 23:59:59 gmt.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Maybe&lt;DateTime&gt;} object if successful.
      */
     Maybe<DateTime> getUtcLowercaseMaxDateTimeAsync();
@@ -241,7 +224,6 @@ public interface Datetimerfc1123s {
     /**
      * Get max datetime value FRI, 31 DEC 9999 23:59:59 GMT.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the DateTime object if successful.
@@ -255,12 +237,11 @@ public interface Datetimerfc1123s {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;DateTime&gt;} object.
      */
-    ServiceFuture<DateTime> getUtcUppercaseMaxDateTimeAsync(final ServiceCallback<DateTime> serviceCallback);
+    ServiceFuture<DateTime> getUtcUppercaseMaxDateTimeAsync(ServiceCallback<DateTime> serviceCallback);
 
     /**
      * Get max datetime value FRI, 31 DEC 9999 23:59:59 GMT.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, DateTime&gt;&gt;} object if successful.
      */
     Single<RestResponse<Void, DateTime>> getUtcUppercaseMaxDateTimeWithRestResponseAsync();
@@ -268,7 +249,6 @@ public interface Datetimerfc1123s {
     /**
      * Get max datetime value FRI, 31 DEC 9999 23:59:59 GMT.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Maybe&lt;DateTime&gt;} object if successful.
      */
     Maybe<DateTime> getUtcUppercaseMaxDateTimeAsync();
@@ -276,7 +256,7 @@ public interface Datetimerfc1123s {
     /**
      * Put min datetime value Mon, 1 Jan 0001 00:00:00 GMT.
      *
-     * @param datetimeBody the DateTimeRfc1123 value.
+     * @param datetimeBody the DateTime value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -286,17 +266,17 @@ public interface Datetimerfc1123s {
     /**
      * Put min datetime value Mon, 1 Jan 0001 00:00:00 GMT.
      *
-     * @param datetimeBody the DateTimeRfc1123 value.
+     * @param datetimeBody the DateTime value.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    ServiceFuture<Void> putUtcMinDateTimeAsync(DateTime datetimeBody, final ServiceCallback<Void> serviceCallback);
+    ServiceFuture<Void> putUtcMinDateTimeAsync(DateTime datetimeBody, ServiceCallback<Void> serviceCallback);
 
     /**
      * Put min datetime value Mon, 1 Jan 0001 00:00:00 GMT.
      *
-     * @param datetimeBody the DateTimeRfc1123 value.
+     * @param datetimeBody the DateTime value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
      */
@@ -305,7 +285,7 @@ public interface Datetimerfc1123s {
     /**
      * Put min datetime value Mon, 1 Jan 0001 00:00:00 GMT.
      *
-     * @param datetimeBody the DateTimeRfc1123 value.
+     * @param datetimeBody the DateTime value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Completable} object if successful.
      */
@@ -314,7 +294,6 @@ public interface Datetimerfc1123s {
     /**
      * Get min datetime value Mon, 1 Jan 0001 00:00:00 GMT.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the DateTime object if successful.
@@ -328,12 +307,11 @@ public interface Datetimerfc1123s {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;DateTime&gt;} object.
      */
-    ServiceFuture<DateTime> getUtcMinDateTimeAsync(final ServiceCallback<DateTime> serviceCallback);
+    ServiceFuture<DateTime> getUtcMinDateTimeAsync(ServiceCallback<DateTime> serviceCallback);
 
     /**
      * Get min datetime value Mon, 1 Jan 0001 00:00:00 GMT.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, DateTime&gt;&gt;} object if successful.
      */
     Single<RestResponse<Void, DateTime>> getUtcMinDateTimeWithRestResponseAsync();
@@ -341,7 +319,6 @@ public interface Datetimerfc1123s {
     /**
      * Get min datetime value Mon, 1 Jan 0001 00:00:00 GMT.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Maybe&lt;DateTime&gt;} object if successful.
      */
     Maybe<DateTime> getUtcMinDateTimeAsync();

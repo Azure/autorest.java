@@ -25,9 +25,8 @@ import fixtures.url.Queries;
 import fixtures.url.models.ErrorException;
 import fixtures.url.models.UriColor;
 import io.reactivex.Completable;
-import io.reactivex.Observable;
 import io.reactivex.Single;
-import io.reactivex.functions.Function;
+import java.util.ArrayList;
 import java.util.List;
 import org.apache.commons.codec.binary.Base64;
 import org.joda.time.DateTime;
@@ -238,7 +237,6 @@ public class QueriesImpl implements Queries {
     /**
      * Get true Boolean value on path.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
@@ -253,14 +251,13 @@ public class QueriesImpl implements Queries {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    public ServiceFuture<Void> getBooleanTrueAsync(final ServiceCallback<Void> serviceCallback) {
+    public ServiceFuture<Void> getBooleanTrueAsync(ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(getBooleanTrueAsync(), serviceCallback);
     }
 
     /**
      * Get true Boolean value on path.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
      */
     public Single<RestResponse<Void, Void>> getBooleanTrueWithRestResponseAsync() {
@@ -271,7 +268,6 @@ public class QueriesImpl implements Queries {
     /**
      * Get true Boolean value on path.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Completable} object if successful.
      */
     public Completable getBooleanTrueAsync() {
@@ -282,7 +278,6 @@ public class QueriesImpl implements Queries {
     /**
      * Get false Boolean value on path.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
@@ -297,14 +292,13 @@ public class QueriesImpl implements Queries {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    public ServiceFuture<Void> getBooleanFalseAsync(final ServiceCallback<Void> serviceCallback) {
+    public ServiceFuture<Void> getBooleanFalseAsync(ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(getBooleanFalseAsync(), serviceCallback);
     }
 
     /**
      * Get false Boolean value on path.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
      */
     public Single<RestResponse<Void, Void>> getBooleanFalseWithRestResponseAsync() {
@@ -315,7 +309,6 @@ public class QueriesImpl implements Queries {
     /**
      * Get false Boolean value on path.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Completable} object if successful.
      */
     public Completable getBooleanFalseAsync() {
@@ -326,7 +319,6 @@ public class QueriesImpl implements Queries {
     /**
      * Get null Boolean value on query (query string should be absent).
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
@@ -341,14 +333,13 @@ public class QueriesImpl implements Queries {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    public ServiceFuture<Void> getBooleanNullAsync(final ServiceCallback<Void> serviceCallback) {
+    public ServiceFuture<Void> getBooleanNullAsync(ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(getBooleanNullAsync(), serviceCallback);
     }
 
     /**
      * Get null Boolean value on query (query string should be absent).
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
      */
     public Single<RestResponse<Void, Void>> getBooleanNullWithRestResponseAsync() {
@@ -359,7 +350,6 @@ public class QueriesImpl implements Queries {
     /**
      * Get null Boolean value on query (query string should be absent).
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Completable} object if successful.
      */
     public Completable getBooleanNullAsync() {
@@ -387,7 +377,7 @@ public class QueriesImpl implements Queries {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    public ServiceFuture<Void> getBooleanNullAsync(Boolean boolQuery, final ServiceCallback<Void> serviceCallback) {
+    public ServiceFuture<Void> getBooleanNullAsync(Boolean boolQuery, ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(getBooleanNullAsync(boolQuery), serviceCallback);
     }
 
@@ -417,7 +407,6 @@ public class QueriesImpl implements Queries {
     /**
      * Get '1000000' integer value.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
@@ -432,14 +421,13 @@ public class QueriesImpl implements Queries {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    public ServiceFuture<Void> getIntOneMillionAsync(final ServiceCallback<Void> serviceCallback) {
+    public ServiceFuture<Void> getIntOneMillionAsync(ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(getIntOneMillionAsync(), serviceCallback);
     }
 
     /**
      * Get '1000000' integer value.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
      */
     public Single<RestResponse<Void, Void>> getIntOneMillionWithRestResponseAsync() {
@@ -450,7 +438,6 @@ public class QueriesImpl implements Queries {
     /**
      * Get '1000000' integer value.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Completable} object if successful.
      */
     public Completable getIntOneMillionAsync() {
@@ -461,7 +448,6 @@ public class QueriesImpl implements Queries {
     /**
      * Get '-1000000' integer value.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
@@ -476,14 +462,13 @@ public class QueriesImpl implements Queries {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    public ServiceFuture<Void> getIntNegativeOneMillionAsync(final ServiceCallback<Void> serviceCallback) {
+    public ServiceFuture<Void> getIntNegativeOneMillionAsync(ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(getIntNegativeOneMillionAsync(), serviceCallback);
     }
 
     /**
      * Get '-1000000' integer value.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
      */
     public Single<RestResponse<Void, Void>> getIntNegativeOneMillionWithRestResponseAsync() {
@@ -494,7 +479,6 @@ public class QueriesImpl implements Queries {
     /**
      * Get '-1000000' integer value.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Completable} object if successful.
      */
     public Completable getIntNegativeOneMillionAsync() {
@@ -505,7 +489,6 @@ public class QueriesImpl implements Queries {
     /**
      * Get null integer value (no query parameter).
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
@@ -520,14 +503,13 @@ public class QueriesImpl implements Queries {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    public ServiceFuture<Void> getIntNullAsync(final ServiceCallback<Void> serviceCallback) {
+    public ServiceFuture<Void> getIntNullAsync(ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(getIntNullAsync(), serviceCallback);
     }
 
     /**
      * Get null integer value (no query parameter).
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
      */
     public Single<RestResponse<Void, Void>> getIntNullWithRestResponseAsync() {
@@ -538,7 +520,6 @@ public class QueriesImpl implements Queries {
     /**
      * Get null integer value (no query parameter).
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Completable} object if successful.
      */
     public Completable getIntNullAsync() {
@@ -566,7 +547,7 @@ public class QueriesImpl implements Queries {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    public ServiceFuture<Void> getIntNullAsync(Integer intQuery, final ServiceCallback<Void> serviceCallback) {
+    public ServiceFuture<Void> getIntNullAsync(Integer intQuery, ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(getIntNullAsync(intQuery), serviceCallback);
     }
 
@@ -596,7 +577,6 @@ public class QueriesImpl implements Queries {
     /**
      * Get '10000000000' 64 bit integer value.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
@@ -611,14 +591,13 @@ public class QueriesImpl implements Queries {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    public ServiceFuture<Void> getTenBillionAsync(final ServiceCallback<Void> serviceCallback) {
+    public ServiceFuture<Void> getTenBillionAsync(ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(getTenBillionAsync(), serviceCallback);
     }
 
     /**
      * Get '10000000000' 64 bit integer value.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
      */
     public Single<RestResponse<Void, Void>> getTenBillionWithRestResponseAsync() {
@@ -629,7 +608,6 @@ public class QueriesImpl implements Queries {
     /**
      * Get '10000000000' 64 bit integer value.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Completable} object if successful.
      */
     public Completable getTenBillionAsync() {
@@ -640,7 +618,6 @@ public class QueriesImpl implements Queries {
     /**
      * Get '-10000000000' 64 bit integer value.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
@@ -655,14 +632,13 @@ public class QueriesImpl implements Queries {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    public ServiceFuture<Void> getNegativeTenBillionAsync(final ServiceCallback<Void> serviceCallback) {
+    public ServiceFuture<Void> getNegativeTenBillionAsync(ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(getNegativeTenBillionAsync(), serviceCallback);
     }
 
     /**
      * Get '-10000000000' 64 bit integer value.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
      */
     public Single<RestResponse<Void, Void>> getNegativeTenBillionWithRestResponseAsync() {
@@ -673,7 +649,6 @@ public class QueriesImpl implements Queries {
     /**
      * Get '-10000000000' 64 bit integer value.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Completable} object if successful.
      */
     public Completable getNegativeTenBillionAsync() {
@@ -684,7 +659,6 @@ public class QueriesImpl implements Queries {
     /**
      * Get 'null 64 bit integer value (no query param in uri).
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
@@ -699,14 +673,13 @@ public class QueriesImpl implements Queries {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    public ServiceFuture<Void> getLongNullAsync(final ServiceCallback<Void> serviceCallback) {
+    public ServiceFuture<Void> getLongNullAsync(ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(getLongNullAsync(), serviceCallback);
     }
 
     /**
      * Get 'null 64 bit integer value (no query param in uri).
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
      */
     public Single<RestResponse<Void, Void>> getLongNullWithRestResponseAsync() {
@@ -717,7 +690,6 @@ public class QueriesImpl implements Queries {
     /**
      * Get 'null 64 bit integer value (no query param in uri).
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Completable} object if successful.
      */
     public Completable getLongNullAsync() {
@@ -745,7 +717,7 @@ public class QueriesImpl implements Queries {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    public ServiceFuture<Void> getLongNullAsync(Long longQuery, final ServiceCallback<Void> serviceCallback) {
+    public ServiceFuture<Void> getLongNullAsync(Long longQuery, ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(getLongNullAsync(longQuery), serviceCallback);
     }
 
@@ -775,7 +747,6 @@ public class QueriesImpl implements Queries {
     /**
      * Get '1.034E+20' numeric value.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
@@ -790,14 +761,13 @@ public class QueriesImpl implements Queries {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    public ServiceFuture<Void> floatScientificPositiveAsync(final ServiceCallback<Void> serviceCallback) {
+    public ServiceFuture<Void> floatScientificPositiveAsync(ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(floatScientificPositiveAsync(), serviceCallback);
     }
 
     /**
      * Get '1.034E+20' numeric value.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
      */
     public Single<RestResponse<Void, Void>> floatScientificPositiveWithRestResponseAsync() {
@@ -808,7 +778,6 @@ public class QueriesImpl implements Queries {
     /**
      * Get '1.034E+20' numeric value.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Completable} object if successful.
      */
     public Completable floatScientificPositiveAsync() {
@@ -819,7 +788,6 @@ public class QueriesImpl implements Queries {
     /**
      * Get '-1.034E-20' numeric value.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
@@ -834,14 +802,13 @@ public class QueriesImpl implements Queries {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    public ServiceFuture<Void> floatScientificNegativeAsync(final ServiceCallback<Void> serviceCallback) {
+    public ServiceFuture<Void> floatScientificNegativeAsync(ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(floatScientificNegativeAsync(), serviceCallback);
     }
 
     /**
      * Get '-1.034E-20' numeric value.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
      */
     public Single<RestResponse<Void, Void>> floatScientificNegativeWithRestResponseAsync() {
@@ -852,7 +819,6 @@ public class QueriesImpl implements Queries {
     /**
      * Get '-1.034E-20' numeric value.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Completable} object if successful.
      */
     public Completable floatScientificNegativeAsync() {
@@ -863,7 +829,6 @@ public class QueriesImpl implements Queries {
     /**
      * Get null numeric value (no query parameter).
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
@@ -878,14 +843,13 @@ public class QueriesImpl implements Queries {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    public ServiceFuture<Void> floatNullAsync(final ServiceCallback<Void> serviceCallback) {
+    public ServiceFuture<Void> floatNullAsync(ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(floatNullAsync(), serviceCallback);
     }
 
     /**
      * Get null numeric value (no query parameter).
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
      */
     public Single<RestResponse<Void, Void>> floatNullWithRestResponseAsync() {
@@ -896,7 +860,6 @@ public class QueriesImpl implements Queries {
     /**
      * Get null numeric value (no query parameter).
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Completable} object if successful.
      */
     public Completable floatNullAsync() {
@@ -924,7 +887,7 @@ public class QueriesImpl implements Queries {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    public ServiceFuture<Void> floatNullAsync(Double floatQuery, final ServiceCallback<Void> serviceCallback) {
+    public ServiceFuture<Void> floatNullAsync(Double floatQuery, ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(floatNullAsync(floatQuery), serviceCallback);
     }
 
@@ -954,7 +917,6 @@ public class QueriesImpl implements Queries {
     /**
      * Get '9999999.999' numeric value.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
@@ -969,14 +931,13 @@ public class QueriesImpl implements Queries {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    public ServiceFuture<Void> doubleDecimalPositiveAsync(final ServiceCallback<Void> serviceCallback) {
+    public ServiceFuture<Void> doubleDecimalPositiveAsync(ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(doubleDecimalPositiveAsync(), serviceCallback);
     }
 
     /**
      * Get '9999999.999' numeric value.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
      */
     public Single<RestResponse<Void, Void>> doubleDecimalPositiveWithRestResponseAsync() {
@@ -987,7 +948,6 @@ public class QueriesImpl implements Queries {
     /**
      * Get '9999999.999' numeric value.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Completable} object if successful.
      */
     public Completable doubleDecimalPositiveAsync() {
@@ -998,7 +958,6 @@ public class QueriesImpl implements Queries {
     /**
      * Get '-9999999.999' numeric value.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
@@ -1013,14 +972,13 @@ public class QueriesImpl implements Queries {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    public ServiceFuture<Void> doubleDecimalNegativeAsync(final ServiceCallback<Void> serviceCallback) {
+    public ServiceFuture<Void> doubleDecimalNegativeAsync(ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(doubleDecimalNegativeAsync(), serviceCallback);
     }
 
     /**
      * Get '-9999999.999' numeric value.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
      */
     public Single<RestResponse<Void, Void>> doubleDecimalNegativeWithRestResponseAsync() {
@@ -1031,7 +989,6 @@ public class QueriesImpl implements Queries {
     /**
      * Get '-9999999.999' numeric value.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Completable} object if successful.
      */
     public Completable doubleDecimalNegativeAsync() {
@@ -1042,7 +999,6 @@ public class QueriesImpl implements Queries {
     /**
      * Get null numeric value (no query parameter).
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
@@ -1057,14 +1013,13 @@ public class QueriesImpl implements Queries {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    public ServiceFuture<Void> doubleNullAsync(final ServiceCallback<Void> serviceCallback) {
+    public ServiceFuture<Void> doubleNullAsync(ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(doubleNullAsync(), serviceCallback);
     }
 
     /**
      * Get null numeric value (no query parameter).
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
      */
     public Single<RestResponse<Void, Void>> doubleNullWithRestResponseAsync() {
@@ -1075,7 +1030,6 @@ public class QueriesImpl implements Queries {
     /**
      * Get null numeric value (no query parameter).
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Completable} object if successful.
      */
     public Completable doubleNullAsync() {
@@ -1103,7 +1057,7 @@ public class QueriesImpl implements Queries {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    public ServiceFuture<Void> doubleNullAsync(Double doubleQuery, final ServiceCallback<Void> serviceCallback) {
+    public ServiceFuture<Void> doubleNullAsync(Double doubleQuery, ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(doubleNullAsync(doubleQuery), serviceCallback);
     }
 
@@ -1133,7 +1087,6 @@ public class QueriesImpl implements Queries {
     /**
      * Get '啊齄丂狛狜隣郎隣兀﨩' multi-byte string value.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
@@ -1148,14 +1101,13 @@ public class QueriesImpl implements Queries {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    public ServiceFuture<Void> stringUnicodeAsync(final ServiceCallback<Void> serviceCallback) {
+    public ServiceFuture<Void> stringUnicodeAsync(ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(stringUnicodeAsync(), serviceCallback);
     }
 
     /**
      * Get '啊齄丂狛狜隣郎隣兀﨩' multi-byte string value.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
      */
     public Single<RestResponse<Void, Void>> stringUnicodeWithRestResponseAsync() {
@@ -1166,7 +1118,6 @@ public class QueriesImpl implements Queries {
     /**
      * Get '啊齄丂狛狜隣郎隣兀﨩' multi-byte string value.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Completable} object if successful.
      */
     public Completable stringUnicodeAsync() {
@@ -1177,7 +1128,6 @@ public class QueriesImpl implements Queries {
     /**
      * Get 'begin!*'();:@ &amp;=+$,/?#[]end.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
@@ -1192,14 +1142,13 @@ public class QueriesImpl implements Queries {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    public ServiceFuture<Void> stringUrlEncodedAsync(final ServiceCallback<Void> serviceCallback) {
+    public ServiceFuture<Void> stringUrlEncodedAsync(ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(stringUrlEncodedAsync(), serviceCallback);
     }
 
     /**
      * Get 'begin!*'();:@ &amp;=+$,/?#[]end.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
      */
     public Single<RestResponse<Void, Void>> stringUrlEncodedWithRestResponseAsync() {
@@ -1210,7 +1159,6 @@ public class QueriesImpl implements Queries {
     /**
      * Get 'begin!*'();:@ &amp;=+$,/?#[]end.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Completable} object if successful.
      */
     public Completable stringUrlEncodedAsync() {
@@ -1221,7 +1169,6 @@ public class QueriesImpl implements Queries {
     /**
      * Get ''.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
@@ -1236,14 +1183,13 @@ public class QueriesImpl implements Queries {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    public ServiceFuture<Void> stringEmptyAsync(final ServiceCallback<Void> serviceCallback) {
+    public ServiceFuture<Void> stringEmptyAsync(ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(stringEmptyAsync(), serviceCallback);
     }
 
     /**
      * Get ''.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
      */
     public Single<RestResponse<Void, Void>> stringEmptyWithRestResponseAsync() {
@@ -1254,7 +1200,6 @@ public class QueriesImpl implements Queries {
     /**
      * Get ''.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Completable} object if successful.
      */
     public Completable stringEmptyAsync() {
@@ -1265,7 +1210,6 @@ public class QueriesImpl implements Queries {
     /**
      * Get null (no query parameter in url).
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
@@ -1280,14 +1224,13 @@ public class QueriesImpl implements Queries {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    public ServiceFuture<Void> stringNullAsync(final ServiceCallback<Void> serviceCallback) {
+    public ServiceFuture<Void> stringNullAsync(ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(stringNullAsync(), serviceCallback);
     }
 
     /**
      * Get null (no query parameter in url).
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
      */
     public Single<RestResponse<Void, Void>> stringNullWithRestResponseAsync() {
@@ -1298,7 +1241,6 @@ public class QueriesImpl implements Queries {
     /**
      * Get null (no query parameter in url).
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Completable} object if successful.
      */
     public Completable stringNullAsync() {
@@ -1326,7 +1268,7 @@ public class QueriesImpl implements Queries {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    public ServiceFuture<Void> stringNullAsync(String stringQuery, final ServiceCallback<Void> serviceCallback) {
+    public ServiceFuture<Void> stringNullAsync(String stringQuery, ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(stringNullAsync(stringQuery), serviceCallback);
     }
 
@@ -1356,7 +1298,6 @@ public class QueriesImpl implements Queries {
     /**
      * Get using uri with query parameter 'green color'.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
@@ -1371,14 +1312,13 @@ public class QueriesImpl implements Queries {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    public ServiceFuture<Void> enumValidAsync(final ServiceCallback<Void> serviceCallback) {
+    public ServiceFuture<Void> enumValidAsync(ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(enumValidAsync(), serviceCallback);
     }
 
     /**
      * Get using uri with query parameter 'green color'.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
      */
     public Single<RestResponse<Void, Void>> enumValidWithRestResponseAsync() {
@@ -1389,7 +1329,6 @@ public class QueriesImpl implements Queries {
     /**
      * Get using uri with query parameter 'green color'.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Completable} object if successful.
      */
     public Completable enumValidAsync() {
@@ -1417,7 +1356,7 @@ public class QueriesImpl implements Queries {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    public ServiceFuture<Void> enumValidAsync(UriColor enumQuery, final ServiceCallback<Void> serviceCallback) {
+    public ServiceFuture<Void> enumValidAsync(UriColor enumQuery, ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(enumValidAsync(enumQuery), serviceCallback);
     }
 
@@ -1447,7 +1386,6 @@ public class QueriesImpl implements Queries {
     /**
      * Get null (no query parameter in url).
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
@@ -1462,14 +1400,13 @@ public class QueriesImpl implements Queries {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    public ServiceFuture<Void> enumNullAsync(final ServiceCallback<Void> serviceCallback) {
+    public ServiceFuture<Void> enumNullAsync(ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(enumNullAsync(), serviceCallback);
     }
 
     /**
      * Get null (no query parameter in url).
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
      */
     public Single<RestResponse<Void, Void>> enumNullWithRestResponseAsync() {
@@ -1480,7 +1417,6 @@ public class QueriesImpl implements Queries {
     /**
      * Get null (no query parameter in url).
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Completable} object if successful.
      */
     public Completable enumNullAsync() {
@@ -1508,7 +1444,7 @@ public class QueriesImpl implements Queries {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    public ServiceFuture<Void> enumNullAsync(UriColor enumQuery, final ServiceCallback<Void> serviceCallback) {
+    public ServiceFuture<Void> enumNullAsync(UriColor enumQuery, ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(enumNullAsync(enumQuery), serviceCallback);
     }
 
@@ -1538,7 +1474,6 @@ public class QueriesImpl implements Queries {
     /**
      * Get '啊齄丂狛狜隣郎隣兀﨩' multibyte value as utf-8 encoded byte array.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
@@ -1553,14 +1488,13 @@ public class QueriesImpl implements Queries {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    public ServiceFuture<Void> byteMultiByteAsync(final ServiceCallback<Void> serviceCallback) {
+    public ServiceFuture<Void> byteMultiByteAsync(ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(byteMultiByteAsync(), serviceCallback);
     }
 
     /**
      * Get '啊齄丂狛狜隣郎隣兀﨩' multibyte value as utf-8 encoded byte array.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
      */
     public Single<RestResponse<Void, Void>> byteMultiByteWithRestResponseAsync() {
@@ -1572,7 +1506,6 @@ public class QueriesImpl implements Queries {
     /**
      * Get '啊齄丂狛狜隣郎隣兀﨩' multibyte value as utf-8 encoded byte array.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Completable} object if successful.
      */
     public Completable byteMultiByteAsync() {
@@ -1600,7 +1533,7 @@ public class QueriesImpl implements Queries {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    public ServiceFuture<Void> byteMultiByteAsync(byte[] byteQuery, final ServiceCallback<Void> serviceCallback) {
+    public ServiceFuture<Void> byteMultiByteAsync(byte[] byteQuery, ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(byteMultiByteAsync(byteQuery), serviceCallback);
     }
 
@@ -1631,7 +1564,6 @@ public class QueriesImpl implements Queries {
     /**
      * Get '' as byte array.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
@@ -1646,14 +1578,13 @@ public class QueriesImpl implements Queries {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    public ServiceFuture<Void> byteEmptyAsync(final ServiceCallback<Void> serviceCallback) {
+    public ServiceFuture<Void> byteEmptyAsync(ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(byteEmptyAsync(), serviceCallback);
     }
 
     /**
      * Get '' as byte array.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
      */
     public Single<RestResponse<Void, Void>> byteEmptyWithRestResponseAsync() {
@@ -1665,7 +1596,6 @@ public class QueriesImpl implements Queries {
     /**
      * Get '' as byte array.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Completable} object if successful.
      */
     public Completable byteEmptyAsync() {
@@ -1676,7 +1606,6 @@ public class QueriesImpl implements Queries {
     /**
      * Get null as byte array (no query parameters in uri).
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
@@ -1691,14 +1620,13 @@ public class QueriesImpl implements Queries {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    public ServiceFuture<Void> byteNullAsync(final ServiceCallback<Void> serviceCallback) {
+    public ServiceFuture<Void> byteNullAsync(ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(byteNullAsync(), serviceCallback);
     }
 
     /**
      * Get null as byte array (no query parameters in uri).
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
      */
     public Single<RestResponse<Void, Void>> byteNullWithRestResponseAsync() {
@@ -1710,7 +1638,6 @@ public class QueriesImpl implements Queries {
     /**
      * Get null as byte array (no query parameters in uri).
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Completable} object if successful.
      */
     public Completable byteNullAsync() {
@@ -1738,7 +1665,7 @@ public class QueriesImpl implements Queries {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    public ServiceFuture<Void> byteNullAsync(byte[] byteQuery, final ServiceCallback<Void> serviceCallback) {
+    public ServiceFuture<Void> byteNullAsync(byte[] byteQuery, ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(byteNullAsync(byteQuery), serviceCallback);
     }
 
@@ -1769,7 +1696,6 @@ public class QueriesImpl implements Queries {
     /**
      * Get '2012-01-01' as date.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
@@ -1784,14 +1710,13 @@ public class QueriesImpl implements Queries {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    public ServiceFuture<Void> dateValidAsync(final ServiceCallback<Void> serviceCallback) {
+    public ServiceFuture<Void> dateValidAsync(ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(dateValidAsync(), serviceCallback);
     }
 
     /**
      * Get '2012-01-01' as date.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
      */
     public Single<RestResponse<Void, Void>> dateValidWithRestResponseAsync() {
@@ -1802,7 +1727,6 @@ public class QueriesImpl implements Queries {
     /**
      * Get '2012-01-01' as date.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Completable} object if successful.
      */
     public Completable dateValidAsync() {
@@ -1813,7 +1737,6 @@ public class QueriesImpl implements Queries {
     /**
      * Get null as date - this should result in no query parameters in uri.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
@@ -1828,14 +1751,13 @@ public class QueriesImpl implements Queries {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    public ServiceFuture<Void> dateNullAsync(final ServiceCallback<Void> serviceCallback) {
+    public ServiceFuture<Void> dateNullAsync(ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(dateNullAsync(), serviceCallback);
     }
 
     /**
      * Get null as date - this should result in no query parameters in uri.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
      */
     public Single<RestResponse<Void, Void>> dateNullWithRestResponseAsync() {
@@ -1846,7 +1768,6 @@ public class QueriesImpl implements Queries {
     /**
      * Get null as date - this should result in no query parameters in uri.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Completable} object if successful.
      */
     public Completable dateNullAsync() {
@@ -1874,7 +1795,7 @@ public class QueriesImpl implements Queries {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    public ServiceFuture<Void> dateNullAsync(LocalDate dateQuery, final ServiceCallback<Void> serviceCallback) {
+    public ServiceFuture<Void> dateNullAsync(LocalDate dateQuery, ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(dateNullAsync(dateQuery), serviceCallback);
     }
 
@@ -1904,7 +1825,6 @@ public class QueriesImpl implements Queries {
     /**
      * Get '2012-01-01T01:01:01Z' as date-time.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
@@ -1919,14 +1839,13 @@ public class QueriesImpl implements Queries {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    public ServiceFuture<Void> dateTimeValidAsync(final ServiceCallback<Void> serviceCallback) {
+    public ServiceFuture<Void> dateTimeValidAsync(ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(dateTimeValidAsync(), serviceCallback);
     }
 
     /**
      * Get '2012-01-01T01:01:01Z' as date-time.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
      */
     public Single<RestResponse<Void, Void>> dateTimeValidWithRestResponseAsync() {
@@ -1937,7 +1856,6 @@ public class QueriesImpl implements Queries {
     /**
      * Get '2012-01-01T01:01:01Z' as date-time.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Completable} object if successful.
      */
     public Completable dateTimeValidAsync() {
@@ -1948,7 +1866,6 @@ public class QueriesImpl implements Queries {
     /**
      * Get null as date-time, should result in no query parameters in uri.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
@@ -1963,14 +1880,13 @@ public class QueriesImpl implements Queries {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    public ServiceFuture<Void> dateTimeNullAsync(final ServiceCallback<Void> serviceCallback) {
+    public ServiceFuture<Void> dateTimeNullAsync(ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(dateTimeNullAsync(), serviceCallback);
     }
 
     /**
      * Get null as date-time, should result in no query parameters in uri.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
      */
     public Single<RestResponse<Void, Void>> dateTimeNullWithRestResponseAsync() {
@@ -1981,7 +1897,6 @@ public class QueriesImpl implements Queries {
     /**
      * Get null as date-time, should result in no query parameters in uri.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Completable} object if successful.
      */
     public Completable dateTimeNullAsync() {
@@ -2009,7 +1924,7 @@ public class QueriesImpl implements Queries {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    public ServiceFuture<Void> dateTimeNullAsync(DateTime dateTimeQuery, final ServiceCallback<Void> serviceCallback) {
+    public ServiceFuture<Void> dateTimeNullAsync(DateTime dateTimeQuery, ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(dateTimeNullAsync(dateTimeQuery), serviceCallback);
     }
 
@@ -2039,7 +1954,6 @@ public class QueriesImpl implements Queries {
     /**
      * Get an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the csv-array format.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
@@ -2054,14 +1968,13 @@ public class QueriesImpl implements Queries {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    public ServiceFuture<Void> arrayStringCsvValidAsync(final ServiceCallback<Void> serviceCallback) {
+    public ServiceFuture<Void> arrayStringCsvValidAsync(ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(arrayStringCsvValidAsync(), serviceCallback);
     }
 
     /**
      * Get an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the csv-array format.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
      */
     public Single<RestResponse<Void, Void>> arrayStringCsvValidWithRestResponseAsync() {
@@ -2073,7 +1986,6 @@ public class QueriesImpl implements Queries {
     /**
      * Get an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the csv-array format.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Completable} object if successful.
      */
     public Completable arrayStringCsvValidAsync() {
@@ -2101,7 +2013,7 @@ public class QueriesImpl implements Queries {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    public ServiceFuture<Void> arrayStringCsvValidAsync(List<String> arrayQuery, final ServiceCallback<Void> serviceCallback) {
+    public ServiceFuture<Void> arrayStringCsvValidAsync(List<String> arrayQuery, ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(arrayStringCsvValidAsync(arrayQuery), serviceCallback);
     }
 
@@ -2133,7 +2045,6 @@ public class QueriesImpl implements Queries {
     /**
      * Get a null array of string using the csv-array format.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
@@ -2148,14 +2059,13 @@ public class QueriesImpl implements Queries {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    public ServiceFuture<Void> arrayStringCsvNullAsync(final ServiceCallback<Void> serviceCallback) {
+    public ServiceFuture<Void> arrayStringCsvNullAsync(ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(arrayStringCsvNullAsync(), serviceCallback);
     }
 
     /**
      * Get a null array of string using the csv-array format.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
      */
     public Single<RestResponse<Void, Void>> arrayStringCsvNullWithRestResponseAsync() {
@@ -2167,7 +2077,6 @@ public class QueriesImpl implements Queries {
     /**
      * Get a null array of string using the csv-array format.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Completable} object if successful.
      */
     public Completable arrayStringCsvNullAsync() {
@@ -2195,7 +2104,7 @@ public class QueriesImpl implements Queries {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    public ServiceFuture<Void> arrayStringCsvNullAsync(List<String> arrayQuery, final ServiceCallback<Void> serviceCallback) {
+    public ServiceFuture<Void> arrayStringCsvNullAsync(List<String> arrayQuery, ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(arrayStringCsvNullAsync(arrayQuery), serviceCallback);
     }
 
@@ -2227,7 +2136,6 @@ public class QueriesImpl implements Queries {
     /**
      * Get an empty array [] of string using the csv-array format.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
@@ -2242,14 +2150,13 @@ public class QueriesImpl implements Queries {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    public ServiceFuture<Void> arrayStringCsvEmptyAsync(final ServiceCallback<Void> serviceCallback) {
+    public ServiceFuture<Void> arrayStringCsvEmptyAsync(ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(arrayStringCsvEmptyAsync(), serviceCallback);
     }
 
     /**
      * Get an empty array [] of string using the csv-array format.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
      */
     public Single<RestResponse<Void, Void>> arrayStringCsvEmptyWithRestResponseAsync() {
@@ -2261,7 +2168,6 @@ public class QueriesImpl implements Queries {
     /**
      * Get an empty array [] of string using the csv-array format.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Completable} object if successful.
      */
     public Completable arrayStringCsvEmptyAsync() {
@@ -2289,7 +2195,7 @@ public class QueriesImpl implements Queries {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    public ServiceFuture<Void> arrayStringCsvEmptyAsync(List<String> arrayQuery, final ServiceCallback<Void> serviceCallback) {
+    public ServiceFuture<Void> arrayStringCsvEmptyAsync(List<String> arrayQuery, ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(arrayStringCsvEmptyAsync(arrayQuery), serviceCallback);
     }
 
@@ -2321,7 +2227,6 @@ public class QueriesImpl implements Queries {
     /**
      * Get an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the ssv-array format.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
@@ -2336,14 +2241,13 @@ public class QueriesImpl implements Queries {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    public ServiceFuture<Void> arrayStringSsvValidAsync(final ServiceCallback<Void> serviceCallback) {
+    public ServiceFuture<Void> arrayStringSsvValidAsync(ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(arrayStringSsvValidAsync(), serviceCallback);
     }
 
     /**
      * Get an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the ssv-array format.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
      */
     public Single<RestResponse<Void, Void>> arrayStringSsvValidWithRestResponseAsync() {
@@ -2355,7 +2259,6 @@ public class QueriesImpl implements Queries {
     /**
      * Get an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the ssv-array format.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Completable} object if successful.
      */
     public Completable arrayStringSsvValidAsync() {
@@ -2383,7 +2286,7 @@ public class QueriesImpl implements Queries {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    public ServiceFuture<Void> arrayStringSsvValidAsync(List<String> arrayQuery, final ServiceCallback<Void> serviceCallback) {
+    public ServiceFuture<Void> arrayStringSsvValidAsync(List<String> arrayQuery, ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(arrayStringSsvValidAsync(arrayQuery), serviceCallback);
     }
 
@@ -2415,7 +2318,6 @@ public class QueriesImpl implements Queries {
     /**
      * Get an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the tsv-array format.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
@@ -2430,14 +2332,13 @@ public class QueriesImpl implements Queries {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    public ServiceFuture<Void> arrayStringTsvValidAsync(final ServiceCallback<Void> serviceCallback) {
+    public ServiceFuture<Void> arrayStringTsvValidAsync(ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(arrayStringTsvValidAsync(), serviceCallback);
     }
 
     /**
      * Get an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the tsv-array format.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
      */
     public Single<RestResponse<Void, Void>> arrayStringTsvValidWithRestResponseAsync() {
@@ -2449,7 +2350,6 @@ public class QueriesImpl implements Queries {
     /**
      * Get an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the tsv-array format.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Completable} object if successful.
      */
     public Completable arrayStringTsvValidAsync() {
@@ -2477,7 +2377,7 @@ public class QueriesImpl implements Queries {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    public ServiceFuture<Void> arrayStringTsvValidAsync(List<String> arrayQuery, final ServiceCallback<Void> serviceCallback) {
+    public ServiceFuture<Void> arrayStringTsvValidAsync(List<String> arrayQuery, ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(arrayStringTsvValidAsync(arrayQuery), serviceCallback);
     }
 
@@ -2509,7 +2409,6 @@ public class QueriesImpl implements Queries {
     /**
      * Get an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the pipes-array format.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
@@ -2524,14 +2423,13 @@ public class QueriesImpl implements Queries {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    public ServiceFuture<Void> arrayStringPipesValidAsync(final ServiceCallback<Void> serviceCallback) {
+    public ServiceFuture<Void> arrayStringPipesValidAsync(ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(arrayStringPipesValidAsync(), serviceCallback);
     }
 
     /**
      * Get an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the pipes-array format.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
      */
     public Single<RestResponse<Void, Void>> arrayStringPipesValidWithRestResponseAsync() {
@@ -2543,7 +2441,6 @@ public class QueriesImpl implements Queries {
     /**
      * Get an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the pipes-array format.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Completable} object if successful.
      */
     public Completable arrayStringPipesValidAsync() {
@@ -2571,7 +2468,7 @@ public class QueriesImpl implements Queries {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    public ServiceFuture<Void> arrayStringPipesValidAsync(List<String> arrayQuery, final ServiceCallback<Void> serviceCallback) {
+    public ServiceFuture<Void> arrayStringPipesValidAsync(List<String> arrayQuery, ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(arrayStringPipesValidAsync(arrayQuery), serviceCallback);
     }
 

@@ -10,7 +10,6 @@
 
 package fixtures.http.implementation;
 
-import com.microsoft.rest.v2.RestException;
 import com.microsoft.rest.v2.RestProxy;
 import com.microsoft.rest.v2.RestResponse;
 import com.microsoft.rest.v2.ServiceCallback;
@@ -22,7 +21,6 @@ import com.microsoft.rest.v2.annotations.UnexpectedResponseExceptionType;
 import fixtures.http.HttpFailures;
 import fixtures.http.models.ErrorException;
 import io.reactivex.Maybe;
-import io.reactivex.Observable;
 import io.reactivex.Single;
 import io.reactivex.functions.Function;
 
@@ -74,7 +72,6 @@ public class HttpFailuresImpl implements HttpFailures {
     /**
      * Get empty error form server.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the boolean object if successful.
@@ -90,14 +87,13 @@ public class HttpFailuresImpl implements HttpFailures {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Boolean&gt;} object.
      */
-    public ServiceFuture<Boolean> getEmptyErrorAsync(final ServiceCallback<Boolean> serviceCallback) {
+    public ServiceFuture<Boolean> getEmptyErrorAsync(ServiceCallback<Boolean> serviceCallback) {
         return ServiceFuture.fromBody(getEmptyErrorAsync(), serviceCallback);
     }
 
     /**
      * Get empty error form server.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, Boolean&gt;&gt;} object if successful.
      */
     public Single<RestResponse<Void, Boolean>> getEmptyErrorWithRestResponseAsync() {
@@ -107,7 +103,6 @@ public class HttpFailuresImpl implements HttpFailures {
     /**
      * Get empty error form server.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Maybe&lt;Boolean&gt;} object if successful.
      */
     public Maybe<Boolean> getEmptyErrorAsync() {
@@ -126,8 +121,6 @@ public class HttpFailuresImpl implements HttpFailures {
     /**
      * Get empty error form server.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws RestException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the boolean object if successful.
      */
@@ -142,14 +135,13 @@ public class HttpFailuresImpl implements HttpFailures {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Boolean&gt;} object.
      */
-    public ServiceFuture<Boolean> getNoModelErrorAsync(final ServiceCallback<Boolean> serviceCallback) {
+    public ServiceFuture<Boolean> getNoModelErrorAsync(ServiceCallback<Boolean> serviceCallback) {
         return ServiceFuture.fromBody(getNoModelErrorAsync(), serviceCallback);
     }
 
     /**
      * Get empty error form server.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, Boolean&gt;&gt;} object if successful.
      */
     public Single<RestResponse<Void, Boolean>> getNoModelErrorWithRestResponseAsync() {
@@ -159,7 +151,6 @@ public class HttpFailuresImpl implements HttpFailures {
     /**
      * Get empty error form server.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Maybe&lt;Boolean&gt;} object if successful.
      */
     public Maybe<Boolean> getNoModelErrorAsync() {
@@ -178,8 +169,6 @@ public class HttpFailuresImpl implements HttpFailures {
     /**
      * Get empty response from server.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws RestException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the boolean object if successful.
      */
@@ -194,14 +183,13 @@ public class HttpFailuresImpl implements HttpFailures {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Boolean&gt;} object.
      */
-    public ServiceFuture<Boolean> getNoModelEmptyAsync(final ServiceCallback<Boolean> serviceCallback) {
+    public ServiceFuture<Boolean> getNoModelEmptyAsync(ServiceCallback<Boolean> serviceCallback) {
         return ServiceFuture.fromBody(getNoModelEmptyAsync(), serviceCallback);
     }
 
     /**
      * Get empty response from server.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, Boolean&gt;&gt;} object if successful.
      */
     public Single<RestResponse<Void, Boolean>> getNoModelEmptyWithRestResponseAsync() {
@@ -211,7 +199,6 @@ public class HttpFailuresImpl implements HttpFailures {
     /**
      * Get empty response from server.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Maybe&lt;Boolean&gt;} object if successful.
      */
     public Maybe<Boolean> getNoModelEmptyAsync() {

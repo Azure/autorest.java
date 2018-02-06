@@ -23,9 +23,7 @@ import com.microsoft.rest.v2.annotations.UnexpectedResponseExceptionType;
 import fixtures.azurespecials.SubscriptionInMethods;
 import fixtures.azurespecials.models.ErrorException;
 import io.reactivex.Completable;
-import io.reactivex.Observable;
 import io.reactivex.Single;
-import io.reactivex.functions.Function;
 
 /**
  * An instance of this class provides access to all the operations defined in
@@ -99,7 +97,7 @@ public class SubscriptionInMethodsImpl implements SubscriptionInMethods {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    public ServiceFuture<Void> postMethodLocalValidAsync(String subscriptionId, final ServiceCallback<Void> serviceCallback) {
+    public ServiceFuture<Void> postMethodLocalValidAsync(String subscriptionId, ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(postMethodLocalValidAsync(subscriptionId), serviceCallback);
     }
 
@@ -149,7 +147,7 @@ public class SubscriptionInMethodsImpl implements SubscriptionInMethods {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    public ServiceFuture<Void> postMethodLocalNullAsync(String subscriptionId, final ServiceCallback<Void> serviceCallback) {
+    public ServiceFuture<Void> postMethodLocalNullAsync(String subscriptionId, ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(postMethodLocalNullAsync(subscriptionId), serviceCallback);
     }
 
@@ -199,7 +197,7 @@ public class SubscriptionInMethodsImpl implements SubscriptionInMethods {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    public ServiceFuture<Void> postPathLocalValidAsync(String subscriptionId, final ServiceCallback<Void> serviceCallback) {
+    public ServiceFuture<Void> postPathLocalValidAsync(String subscriptionId, ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(postPathLocalValidAsync(subscriptionId), serviceCallback);
     }
 
@@ -249,7 +247,7 @@ public class SubscriptionInMethodsImpl implements SubscriptionInMethods {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    public ServiceFuture<Void> postSwaggerLocalValidAsync(String subscriptionId, final ServiceCallback<Void> serviceCallback) {
+    public ServiceFuture<Void> postSwaggerLocalValidAsync(String subscriptionId, ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(postSwaggerLocalValidAsync(subscriptionId), serviceCallback);
     }
 

@@ -32,7 +32,7 @@ public class FormdataTests {
         byte[] bytes = IOUtils.toByteArray(stream);
         stream.close();
         Flowable<ByteBuffer> result = client.formdatas().uploadFile(Flowable.just(ByteBuffer.wrap(bytes)), "sample.png");
-        byte[] allContent = FlowableUtil.collectBytes(result).blockingGet();
+        byte[] allContent = FlowableUtil.collectBytesInArray(result).blockingGet();
         Assert.assertEquals(new String(bytes, Charsets.UTF_8), new String(allContent, Charsets.UTF_8));
     }
 
@@ -44,7 +44,7 @@ public class FormdataTests {
         try (InputStream stream = classLoader.getResourceAsStream("upload.txt")) {
             byte[] bytes = IOUtils.toByteArray(stream);
             stream.close();
-            byte[] actual = FlowableUtil.collectBytes(client.formdatas().uploadFileViaBody(Flowable.just(ByteBuffer.wrap(bytes)))).blockingGet();
+            byte[] actual = FlowableUtil.collectBytesInArray(client.formdatas().uploadFileViaBody(Flowable.just(ByteBuffer.wrap(bytes)))).blockingGet();
             Assert.assertEquals(new String(bytes, StandardCharsets.UTF_8), new String(actual, StandardCharsets.UTF_8));
         }
     }

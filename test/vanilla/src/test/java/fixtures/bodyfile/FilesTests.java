@@ -1,9 +1,6 @@
 package fixtures.bodyfile;
 
-import com.microsoft.rest.v2.http.HttpPipeline;
-import com.microsoft.rest.v2.policy.DecodingPolicyFactory;
 import com.microsoft.rest.v2.util.FlowableUtil;
-import fixtures.bodyfile.implementation.AutoRestSwaggerBATFileServiceImpl;
 import io.reactivex.functions.BiFunction;
 import org.apache.commons.io.IOUtils;
 import org.junit.BeforeClass;
@@ -13,6 +10,8 @@ import org.junit.Test;
 import java.io.InputStream;
 import java.nio.ByteBuffer;
 
+import fixtures.bodyfile.implementation.AutoRestSwaggerBATFileServiceImpl;
+
 import static org.junit.Assert.assertArrayEquals;
 import static org.junit.Assert.assertEquals;
 
@@ -21,14 +20,14 @@ public class FilesTests {
 
     @BeforeClass
     public static void setup() {
-        client = new AutoRestSwaggerBATFileServiceImpl(HttpPipeline.build(new DecodingPolicyFactory()));
+        client = new AutoRestSwaggerBATFileServiceImpl();
     }
 
     @Test
     public void getFile() throws Exception {
         ClassLoader classLoader = getClass().getClassLoader();
         try (InputStream file = classLoader.getResourceAsStream("sample.png")) {
-            byte[] actual = FlowableUtil.collectBytes(client.files().getFile()).blockingGet();
+            byte[] actual = FlowableUtil.collectBytesInArray(client.files().getFile()).blockingGet();
             byte[] expected = IOUtils.toByteArray(file);
             assertArrayEquals(expected, actual);
         }
@@ -50,7 +49,7 @@ public class FilesTests {
 
     @Test
     public void getEmptyFile() {
-        final byte[] bytes = FlowableUtil.collectBytes(client.files().getEmptyFile()).blockingGet();
+        final byte[] bytes = FlowableUtil.collectBytesInArray(client.files().getEmptyFile()).blockingGet();
         assertArrayEquals(new byte[0], bytes);
     }
 }

@@ -22,7 +22,6 @@ import fixtures.bodyfile.Files;
 import fixtures.bodyfile.models.ErrorException;
 import io.reactivex.Flowable;
 import io.reactivex.Maybe;
-import io.reactivex.Observable;
 import io.reactivex.Single;
 import io.reactivex.functions.Function;
 import java.nio.ByteBuffer;
@@ -77,7 +76,6 @@ public class FilesImpl implements Files {
     /**
      * Get file.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the Flowable&lt;ByteBuffer&gt; object if successful.
@@ -93,14 +91,13 @@ public class FilesImpl implements Files {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Flowable&lt;ByteBuffer&gt;&gt;} object.
      */
-    public ServiceFuture<Flowable<ByteBuffer>> getFileAsync(final ServiceCallback<Flowable<ByteBuffer>> serviceCallback) {
+    public ServiceFuture<Flowable<ByteBuffer>> getFileAsync(ServiceCallback<Flowable<ByteBuffer>> serviceCallback) {
         return ServiceFuture.fromBody(getFileAsync(), serviceCallback);
     }
 
     /**
      * Get file.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, Flowable&lt;ByteBuffer&gt;&gt;&gt;} object if successful.
      */
     public Single<RestResponse<Void, Flowable<ByteBuffer>>> getFileWithRestResponseAsync() {
@@ -110,7 +107,6 @@ public class FilesImpl implements Files {
     /**
      * Get file.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Maybe&lt;Flowable&lt;ByteBuffer&gt;&gt;} object if successful.
      */
     public Maybe<Flowable<ByteBuffer>> getFileAsync() {
@@ -129,7 +125,6 @@ public class FilesImpl implements Files {
     /**
      * Get a large file.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the Flowable&lt;ByteBuffer&gt; object if successful.
@@ -145,14 +140,13 @@ public class FilesImpl implements Files {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Flowable&lt;ByteBuffer&gt;&gt;} object.
      */
-    public ServiceFuture<Flowable<ByteBuffer>> getFileLargeAsync(final ServiceCallback<Flowable<ByteBuffer>> serviceCallback) {
+    public ServiceFuture<Flowable<ByteBuffer>> getFileLargeAsync(ServiceCallback<Flowable<ByteBuffer>> serviceCallback) {
         return ServiceFuture.fromBody(getFileLargeAsync(), serviceCallback);
     }
 
     /**
      * Get a large file.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, Flowable&lt;ByteBuffer&gt;&gt;&gt;} object if successful.
      */
     public Single<RestResponse<Void, Flowable<ByteBuffer>>> getFileLargeWithRestResponseAsync() {
@@ -162,7 +156,6 @@ public class FilesImpl implements Files {
     /**
      * Get a large file.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Maybe&lt;Flowable&lt;ByteBuffer&gt;&gt;} object if successful.
      */
     public Maybe<Flowable<ByteBuffer>> getFileLargeAsync() {
@@ -181,7 +174,6 @@ public class FilesImpl implements Files {
     /**
      * Get empty file.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the Flowable&lt;ByteBuffer&gt; object if successful.
@@ -197,14 +189,13 @@ public class FilesImpl implements Files {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Flowable&lt;ByteBuffer&gt;&gt;} object.
      */
-    public ServiceFuture<Flowable<ByteBuffer>> getEmptyFileAsync(final ServiceCallback<Flowable<ByteBuffer>> serviceCallback) {
+    public ServiceFuture<Flowable<ByteBuffer>> getEmptyFileAsync(ServiceCallback<Flowable<ByteBuffer>> serviceCallback) {
         return ServiceFuture.fromBody(getEmptyFileAsync(), serviceCallback);
     }
 
     /**
      * Get empty file.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, Flowable&lt;ByteBuffer&gt;&gt;&gt;} object if successful.
      */
     public Single<RestResponse<Void, Flowable<ByteBuffer>>> getEmptyFileWithRestResponseAsync() {
@@ -214,7 +205,6 @@ public class FilesImpl implements Files {
     /**
      * Get empty file.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Maybe&lt;Flowable&lt;ByteBuffer&gt;&gt;} object if successful.
      */
     public Maybe<Flowable<ByteBuffer>> getEmptyFileAsync() {

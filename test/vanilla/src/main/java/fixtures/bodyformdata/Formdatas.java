@@ -13,10 +13,8 @@ package fixtures.bodyformdata;
 import com.microsoft.rest.v2.RestResponse;
 import com.microsoft.rest.v2.ServiceCallback;
 import com.microsoft.rest.v2.ServiceFuture;
-import fixtures.bodyformdata.models.ErrorException;
 import io.reactivex.Flowable;
 import io.reactivex.Maybe;
-import io.reactivex.Observable;
 import io.reactivex.Single;
 import java.nio.ByteBuffer;
 
@@ -46,7 +44,7 @@ public interface Formdatas {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Flowable&lt;ByteBuffer&gt;&gt;} object.
      */
-    ServiceFuture<Flowable<ByteBuffer>> uploadFileAsync(Flowable<ByteBuffer> fileContent, String fileName, final ServiceCallback<Flowable<ByteBuffer>> serviceCallback);
+    ServiceFuture<Flowable<ByteBuffer>> uploadFileAsync(Flowable<ByteBuffer> fileContent, String fileName, ServiceCallback<Flowable<ByteBuffer>> serviceCallback);
 
     /**
      * Upload file.
@@ -87,7 +85,7 @@ public interface Formdatas {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Flowable&lt;ByteBuffer&gt;&gt;} object.
      */
-    ServiceFuture<Flowable<ByteBuffer>> uploadFileViaBodyAsync(Flowable<ByteBuffer> fileContent, final ServiceCallback<Flowable<ByteBuffer>> serviceCallback);
+    ServiceFuture<Flowable<ByteBuffer>> uploadFileViaBodyAsync(Flowable<ByteBuffer> fileContent, ServiceCallback<Flowable<ByteBuffer>> serviceCallback);
 
     /**
      * Upload file.

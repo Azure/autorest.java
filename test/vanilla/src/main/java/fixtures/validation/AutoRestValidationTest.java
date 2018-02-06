@@ -10,15 +10,12 @@
 
 package fixtures.validation;
 
-import com.microsoft.rest.v2.RestException;
 import com.microsoft.rest.v2.RestResponse;
 import com.microsoft.rest.v2.ServiceCallback;
 import com.microsoft.rest.v2.ServiceFuture;
-import fixtures.validation.models.ErrorException;
 import fixtures.validation.models.Product;
 import io.reactivex.Completable;
 import io.reactivex.Maybe;
-import io.reactivex.Observable;
 import io.reactivex.Single;
 
 /**
@@ -76,7 +73,7 @@ public interface AutoRestValidationTest {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Product&gt;} object.
      */
-    ServiceFuture<Product> validationOfMethodParametersAsync(String resourceGroupName, int id, final ServiceCallback<Product> serviceCallback);
+    ServiceFuture<Product> validationOfMethodParametersAsync(String resourceGroupName, int id, ServiceCallback<Product> serviceCallback);
 
     /**
      * Validates input parameters on the method. See swagger for details.
@@ -119,7 +116,7 @@ public interface AutoRestValidationTest {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Product&gt;} object.
      */
-    ServiceFuture<Product> validationOfBodyAsync(String resourceGroupName, int id, final ServiceCallback<Product> serviceCallback);
+    ServiceFuture<Product> validationOfBodyAsync(String resourceGroupName, int id, ServiceCallback<Product> serviceCallback);
 
     /**
      * Validates body parameters on the method. See swagger for details.
@@ -164,7 +161,7 @@ public interface AutoRestValidationTest {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Product&gt;} object.
      */
-    ServiceFuture<Product> validationOfBodyAsync(String resourceGroupName, int id, Product body, final ServiceCallback<Product> serviceCallback);
+    ServiceFuture<Product> validationOfBodyAsync(String resourceGroupName, int id, Product body, ServiceCallback<Product> serviceCallback);
 
     /**
      * Validates body parameters on the method. See swagger for details.
@@ -189,8 +186,6 @@ public interface AutoRestValidationTest {
     Maybe<Product> validationOfBodyAsync(String resourceGroupName, int id, Product body);
 
     /**
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws RestException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     void getWithConstantInPath();
@@ -200,23 +195,19 @@ public interface AutoRestValidationTest {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    ServiceFuture<Void> getWithConstantInPathAsync(final ServiceCallback<Void> serviceCallback);
+    ServiceFuture<Void> getWithConstantInPathAsync(ServiceCallback<Void> serviceCallback);
 
     /**
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
      */
     Single<RestResponse<Void, Void>> getWithConstantInPathWithRestResponseAsync();
 
     /**
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Completable} object if successful.
      */
     Completable getWithConstantInPathAsync();
 
     /**
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws RestException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the Product object if successful.
      */
@@ -227,16 +218,14 @@ public interface AutoRestValidationTest {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Product&gt;} object.
      */
-    ServiceFuture<Product> postWithConstantInBodyAsync(final ServiceCallback<Product> serviceCallback);
+    ServiceFuture<Product> postWithConstantInBodyAsync(ServiceCallback<Product> serviceCallback);
 
     /**
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, Product&gt;&gt;} object if successful.
      */
     Single<RestResponse<Void, Product>> postWithConstantInBodyWithRestResponseAsync();
 
     /**
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Maybe&lt;Product&gt;} object if successful.
      */
     Maybe<Product> postWithConstantInBodyAsync();
@@ -244,7 +233,6 @@ public interface AutoRestValidationTest {
     /**
      * @param body the Product value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws RestException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the Product object if successful.
      */
@@ -256,7 +244,7 @@ public interface AutoRestValidationTest {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Product&gt;} object.
      */
-    ServiceFuture<Product> postWithConstantInBodyAsync(Product body, final ServiceCallback<Product> serviceCallback);
+    ServiceFuture<Product> postWithConstantInBodyAsync(Product body, ServiceCallback<Product> serviceCallback);
 
     /**
      * @param body the Product value.

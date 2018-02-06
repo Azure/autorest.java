@@ -13,11 +13,9 @@ package fixtures.bodycomplex;
 import com.microsoft.rest.v2.RestResponse;
 import com.microsoft.rest.v2.ServiceCallback;
 import com.microsoft.rest.v2.ServiceFuture;
-import fixtures.bodycomplex.models.ErrorException;
 import fixtures.bodycomplex.models.Fish;
 import io.reactivex.Completable;
 import io.reactivex.Maybe;
-import io.reactivex.Observable;
 import io.reactivex.Single;
 
 /**
@@ -28,7 +26,6 @@ public interface Polymorphicrecursives {
     /**
      * Get complex types that are polymorphic and have recursive references.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the Fish object if successful.
@@ -42,12 +39,11 @@ public interface Polymorphicrecursives {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Fish&gt;} object.
      */
-    ServiceFuture<Fish> getValidAsync(final ServiceCallback<Fish> serviceCallback);
+    ServiceFuture<Fish> getValidAsync(ServiceCallback<Fish> serviceCallback);
 
     /**
      * Get complex types that are polymorphic and have recursive references.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, Fish&gt;&gt;} object if successful.
      */
     Single<RestResponse<Void, Fish>> getValidWithRestResponseAsync();
@@ -55,7 +51,6 @@ public interface Polymorphicrecursives {
     /**
      * Get complex types that are polymorphic and have recursive references.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Maybe&lt;Fish&gt;} object if successful.
      */
     Maybe<Fish> getValidAsync();
@@ -182,7 +177,7 @@ public interface Polymorphicrecursives {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    ServiceFuture<Void> putValidAsync(Fish complexBody, final ServiceCallback<Void> serviceCallback);
+    ServiceFuture<Void> putValidAsync(Fish complexBody, ServiceCallback<Void> serviceCallback);
 
     /**
      * Put complex types that are polymorphic and have recursive references.

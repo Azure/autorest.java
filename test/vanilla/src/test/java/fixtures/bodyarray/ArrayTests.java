@@ -1,12 +1,8 @@
 package fixtures.bodyarray;
 
-import com.microsoft.rest.v2.RestException;
-import com.microsoft.rest.v2.http.HttpPipeline;
-import com.microsoft.rest.v2.policy.DecodingPolicyFactory;
 import fixtures.bodyarray.implementation.AutoRestSwaggerBATArrayServiceImpl;
 import fixtures.bodyarray.models.ErrorException;
 import fixtures.bodyarray.models.Product;
-import org.hamcrest.CoreMatchers;
 import org.joda.time.DateTime;
 import org.joda.time.DateTimeZone;
 import org.joda.time.LocalDate;
@@ -29,8 +25,8 @@ public class ArrayTests {
     private static AutoRestSwaggerBATArrayService client;
 
     @BeforeClass
-    public static void setup() throws Exception {
-        client = new AutoRestSwaggerBATArrayServiceImpl(HttpPipeline.build(new DecodingPolicyFactory()));
+    public static void setup() {
+        client = new AutoRestSwaggerBATArrayServiceImpl();
     }
 
     @Test
@@ -42,9 +38,10 @@ public class ArrayTests {
     public void getInvalid() throws Exception {
         try {
             List<Integer> result = client.arrays().getInvalid();
-            fail();
-        } catch (RestException exception) {
-            assertThat(exception.getMessage(), CoreMatchers.containsString("HTTP response has a malformed body"));
+            Assert.assertTrue(false);
+        } catch (RuntimeException exception) {
+            // expected
+            Assert.assertTrue(exception.getMessage().contains("HTTP response has a malformed body"));
         }
     }
 

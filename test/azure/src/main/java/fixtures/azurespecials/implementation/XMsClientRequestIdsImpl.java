@@ -23,9 +23,7 @@ import com.microsoft.rest.v2.annotations.UnexpectedResponseExceptionType;
 import fixtures.azurespecials.XMsClientRequestIds;
 import fixtures.azurespecials.models.ErrorException;
 import io.reactivex.Completable;
-import io.reactivex.Observable;
 import io.reactivex.Single;
-import io.reactivex.functions.Function;
 
 /**
  * An instance of this class provides access to all the operations defined in
@@ -72,7 +70,6 @@ public class XMsClientRequestIdsImpl implements XMsClientRequestIds {
     /**
      * Get method that overwrites x-ms-client-request header with value 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws CloudException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
@@ -87,14 +84,13 @@ public class XMsClientRequestIdsImpl implements XMsClientRequestIds {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    public ServiceFuture<Void> getAsync(final ServiceCallback<Void> serviceCallback) {
+    public ServiceFuture<Void> getAsync(ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(getAsync(), serviceCallback);
     }
 
     /**
      * Get method that overwrites x-ms-client-request header with value 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
      */
     public Single<RestResponse<Void, Void>> getWithRestResponseAsync() {
@@ -104,7 +100,6 @@ public class XMsClientRequestIdsImpl implements XMsClientRequestIds {
     /**
      * Get method that overwrites x-ms-client-request header with value 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Completable} object if successful.
      */
     public Completable getAsync() {
@@ -132,7 +127,7 @@ public class XMsClientRequestIdsImpl implements XMsClientRequestIds {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    public ServiceFuture<Void> paramGetAsync(String xMsClientRequestId, final ServiceCallback<Void> serviceCallback) {
+    public ServiceFuture<Void> paramGetAsync(String xMsClientRequestId, ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(paramGetAsync(xMsClientRequestId), serviceCallback);
     }
 

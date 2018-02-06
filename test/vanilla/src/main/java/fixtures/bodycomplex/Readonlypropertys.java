@@ -13,11 +13,9 @@ package fixtures.bodycomplex;
 import com.microsoft.rest.v2.RestResponse;
 import com.microsoft.rest.v2.ServiceCallback;
 import com.microsoft.rest.v2.ServiceFuture;
-import fixtures.bodycomplex.models.ErrorException;
 import fixtures.bodycomplex.models.ReadonlyObj;
 import io.reactivex.Completable;
 import io.reactivex.Maybe;
-import io.reactivex.Observable;
 import io.reactivex.Single;
 
 /**
@@ -28,7 +26,6 @@ public interface Readonlypropertys {
     /**
      * Get complex types that have readonly properties.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the ReadonlyObj object if successful.
@@ -42,12 +39,11 @@ public interface Readonlypropertys {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;ReadonlyObj&gt;} object.
      */
-    ServiceFuture<ReadonlyObj> getValidAsync(final ServiceCallback<ReadonlyObj> serviceCallback);
+    ServiceFuture<ReadonlyObj> getValidAsync(ServiceCallback<ReadonlyObj> serviceCallback);
 
     /**
      * Get complex types that have readonly properties.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, ReadonlyObj&gt;&gt;} object if successful.
      */
     Single<RestResponse<Void, ReadonlyObj>> getValidWithRestResponseAsync();
@@ -55,7 +51,6 @@ public interface Readonlypropertys {
     /**
      * Get complex types that have readonly properties.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Maybe&lt;ReadonlyObj&gt;} object if successful.
      */
     Maybe<ReadonlyObj> getValidAsync();
@@ -78,7 +73,7 @@ public interface Readonlypropertys {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    ServiceFuture<Void> putValidAsync(ReadonlyObj complexBody, final ServiceCallback<Void> serviceCallback);
+    ServiceFuture<Void> putValidAsync(ReadonlyObj complexBody, ServiceCallback<Void> serviceCallback);
 
     /**
      * Put complex types that have readonly properties.

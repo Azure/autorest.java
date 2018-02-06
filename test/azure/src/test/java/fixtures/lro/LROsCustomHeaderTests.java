@@ -20,9 +20,8 @@ public class LROsCustomHeaderTests {
         headers.set("x-ms-client-request-id", "9C4D50EE-2D56-4CD3-8152-34347DC9F2B0");
 
         final HttpPipeline httpPipeline = HttpPipeline.build(
-            new ProtocolPolicyFactory("http"),
-            new PortPolicyFactory(3000),
             new RetryPolicyFactory(),
+            new DecodingPolicyFactory(),
             new CookiePolicyFactory(),
             new AddHeadersPolicyFactory(headers),
             new CredentialsPolicyFactory(new BasicAuthenticationCredentials(null, null)),

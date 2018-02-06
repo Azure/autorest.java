@@ -16,11 +16,7 @@ import java.util.Map;
 
 public final class CoverageReporter extends RunListener {
     private AutoRestReportServiceForAzureImpl client = new AutoRestReportServiceForAzureImpl(
-            HttpPipeline.build(
-                    new ProtocolPolicyFactory("http"),
-                    new PortPolicyFactory(3000),
-                    new CredentialsPolicyFactory(new BasicAuthenticationCredentials(null, null)),
-                    new DecodingPolicyFactory()));
+        new BasicAuthenticationCredentials(null, null));
 
     @Override
     public void testRunFinished(Result result) throws Exception {

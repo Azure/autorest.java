@@ -2,11 +2,6 @@ package fixtures.azurespecials;
 
 import com.microsoft.rest.v2.RestResponse;
 import com.microsoft.rest.v2.credentials.BasicAuthenticationCredentials;
-import com.microsoft.rest.v2.http.HttpPipeline;
-import com.microsoft.rest.v2.policy.CredentialsPolicyFactory;
-import com.microsoft.rest.v2.policy.DecodingPolicyFactory;
-import com.microsoft.rest.v2.policy.PortPolicyFactory;
-import com.microsoft.rest.v2.policy.ProtocolPolicyFactory;
 import fixtures.azurespecials.implementation.AutoRestAzureSpecialParametersTestClientImpl;
 import fixtures.azurespecials.models.HeaderCustomNamedRequestIdHeadHeaders;
 import fixtures.azurespecials.models.HeaderCustomNamedRequestIdHeaders;
@@ -22,22 +17,18 @@ public class HeaderOperationsTests {
     @BeforeClass
     public static void setup() {
         client = new AutoRestAzureSpecialParametersTestClientImpl(
-            HttpPipeline.build(
-                new ProtocolPolicyFactory("http"),
-                new PortPolicyFactory(3000),
-                new CredentialsPolicyFactory(new BasicAuthenticationCredentials(null, null)),
-                new DecodingPolicyFactory()));
+            new BasicAuthenticationCredentials(null, null));
     }
 
     @Test
-    public void customNamedRequestId() throws Exception {
+    public void customNamedRequestId() {
         RestResponse<HeaderCustomNamedRequestIdHeaders, Void> response = client.headers().customNamedRequestIdWithRestResponseAsync("9C4D50EE-2D56-4CD3-8152-34347DC9F2B0").blockingGet();
         Assert.assertEquals(200, response.statusCode());
         Assert.assertEquals("123", response.headers().fooRequestId());
     }
 
     @Test
-    public void customNamedRequestIdParamGrouping() throws Exception {
+    public void customNamedRequestIdParamGrouping() {
         HeaderCustomNamedRequestIdParamGroupingParameters group = new HeaderCustomNamedRequestIdParamGroupingParameters();
         group.withFooClientRequestId("9C4D50EE-2D56-4CD3-8152-34347DC9F2B0");
         RestResponse<HeaderCustomNamedRequestIdParamGroupingHeaders, Void> response = client.headers().customNamedRequestIdParamGroupingWithRestResponseAsync(group).blockingGet();
@@ -46,7 +37,7 @@ public class HeaderOperationsTests {
     }
 
     @Test
-    public void customNamedRequestIdHead() throws Exception {
+    public void customNamedRequestIdHead() {
         RestResponse<HeaderCustomNamedRequestIdHeadHeaders, Boolean> response = client.headers().customNamedRequestIdHeadWithRestResponseAsync("9C4D50EE-2D56-4CD3-8152-34347DC9F2B0").blockingGet();
         Assert.assertEquals(200, response.statusCode());
         Assert.assertTrue(response.body());

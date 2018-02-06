@@ -13,11 +13,9 @@ package fixtures.bodyarray;
 import com.microsoft.rest.v2.RestResponse;
 import com.microsoft.rest.v2.ServiceCallback;
 import com.microsoft.rest.v2.ServiceFuture;
-import fixtures.bodyarray.models.ErrorException;
 import fixtures.bodyarray.models.Product;
 import io.reactivex.Completable;
 import io.reactivex.Maybe;
-import io.reactivex.Observable;
 import io.reactivex.Single;
 import java.util.List;
 import java.util.Map;
@@ -34,7 +32,6 @@ public interface Arrays {
     /**
      * Get null array value.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the List&lt;Integer&gt; object if successful.
@@ -48,12 +45,11 @@ public interface Arrays {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;List&lt;Integer&gt;&gt;} object.
      */
-    ServiceFuture<List<Integer>> getNullAsync(final ServiceCallback<List<Integer>> serviceCallback);
+    ServiceFuture<List<Integer>> getNullAsync(ServiceCallback<List<Integer>> serviceCallback);
 
     /**
      * Get null array value.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, List&lt;Integer&gt;&gt;&gt;} object if successful.
      */
     Single<RestResponse<Void, List<Integer>>> getNullWithRestResponseAsync();
@@ -61,7 +57,6 @@ public interface Arrays {
     /**
      * Get null array value.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Maybe&lt;List&lt;Integer&gt;&gt;} object if successful.
      */
     Maybe<List<Integer>> getNullAsync();
@@ -69,7 +64,6 @@ public interface Arrays {
     /**
      * Get invalid array [1, 2, 3.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the List&lt;Integer&gt; object if successful.
@@ -83,12 +77,11 @@ public interface Arrays {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;List&lt;Integer&gt;&gt;} object.
      */
-    ServiceFuture<List<Integer>> getInvalidAsync(final ServiceCallback<List<Integer>> serviceCallback);
+    ServiceFuture<List<Integer>> getInvalidAsync(ServiceCallback<List<Integer>> serviceCallback);
 
     /**
      * Get invalid array [1, 2, 3.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, List&lt;Integer&gt;&gt;&gt;} object if successful.
      */
     Single<RestResponse<Void, List<Integer>>> getInvalidWithRestResponseAsync();
@@ -96,7 +89,6 @@ public interface Arrays {
     /**
      * Get invalid array [1, 2, 3.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Maybe&lt;List&lt;Integer&gt;&gt;} object if successful.
      */
     Maybe<List<Integer>> getInvalidAsync();
@@ -104,7 +96,6 @@ public interface Arrays {
     /**
      * Get empty array value [].
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the List&lt;Integer&gt; object if successful.
@@ -118,12 +109,11 @@ public interface Arrays {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;List&lt;Integer&gt;&gt;} object.
      */
-    ServiceFuture<List<Integer>> getEmptyAsync(final ServiceCallback<List<Integer>> serviceCallback);
+    ServiceFuture<List<Integer>> getEmptyAsync(ServiceCallback<List<Integer>> serviceCallback);
 
     /**
      * Get empty array value [].
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, List&lt;Integer&gt;&gt;&gt;} object if successful.
      */
     Single<RestResponse<Void, List<Integer>>> getEmptyWithRestResponseAsync();
@@ -131,7 +121,6 @@ public interface Arrays {
     /**
      * Get empty array value [].
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Maybe&lt;List&lt;Integer&gt;&gt;} object if successful.
      */
     Maybe<List<Integer>> getEmptyAsync();
@@ -154,7 +143,7 @@ public interface Arrays {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    ServiceFuture<Void> putEmptyAsync(List<String> arrayBody, final ServiceCallback<Void> serviceCallback);
+    ServiceFuture<Void> putEmptyAsync(List<String> arrayBody, ServiceCallback<Void> serviceCallback);
 
     /**
      * Set array value empty [].
@@ -177,7 +166,6 @@ public interface Arrays {
     /**
      * Get boolean array value [true, false, false, true].
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the List&lt;Boolean&gt; object if successful.
@@ -191,12 +179,11 @@ public interface Arrays {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;List&lt;Boolean&gt;&gt;} object.
      */
-    ServiceFuture<List<Boolean>> getBooleanTfftAsync(final ServiceCallback<List<Boolean>> serviceCallback);
+    ServiceFuture<List<Boolean>> getBooleanTfftAsync(ServiceCallback<List<Boolean>> serviceCallback);
 
     /**
      * Get boolean array value [true, false, false, true].
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, List&lt;Boolean&gt;&gt;&gt;} object if successful.
      */
     Single<RestResponse<Void, List<Boolean>>> getBooleanTfftWithRestResponseAsync();
@@ -204,7 +191,6 @@ public interface Arrays {
     /**
      * Get boolean array value [true, false, false, true].
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Maybe&lt;List&lt;Boolean&gt;&gt;} object if successful.
      */
     Maybe<List<Boolean>> getBooleanTfftAsync();
@@ -227,7 +213,7 @@ public interface Arrays {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    ServiceFuture<Void> putBooleanTfftAsync(List<Boolean> arrayBody, final ServiceCallback<Void> serviceCallback);
+    ServiceFuture<Void> putBooleanTfftAsync(List<Boolean> arrayBody, ServiceCallback<Void> serviceCallback);
 
     /**
      * Set array value empty [true, false, false, true].
@@ -250,7 +236,6 @@ public interface Arrays {
     /**
      * Get boolean array value [true, null, false].
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the List&lt;Boolean&gt; object if successful.
@@ -264,12 +249,11 @@ public interface Arrays {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;List&lt;Boolean&gt;&gt;} object.
      */
-    ServiceFuture<List<Boolean>> getBooleanInvalidNullAsync(final ServiceCallback<List<Boolean>> serviceCallback);
+    ServiceFuture<List<Boolean>> getBooleanInvalidNullAsync(ServiceCallback<List<Boolean>> serviceCallback);
 
     /**
      * Get boolean array value [true, null, false].
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, List&lt;Boolean&gt;&gt;&gt;} object if successful.
      */
     Single<RestResponse<Void, List<Boolean>>> getBooleanInvalidNullWithRestResponseAsync();
@@ -277,7 +261,6 @@ public interface Arrays {
     /**
      * Get boolean array value [true, null, false].
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Maybe&lt;List&lt;Boolean&gt;&gt;} object if successful.
      */
     Maybe<List<Boolean>> getBooleanInvalidNullAsync();
@@ -285,7 +268,6 @@ public interface Arrays {
     /**
      * Get boolean array value [true, 'boolean', false].
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the List&lt;Boolean&gt; object if successful.
@@ -299,12 +281,11 @@ public interface Arrays {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;List&lt;Boolean&gt;&gt;} object.
      */
-    ServiceFuture<List<Boolean>> getBooleanInvalidStringAsync(final ServiceCallback<List<Boolean>> serviceCallback);
+    ServiceFuture<List<Boolean>> getBooleanInvalidStringAsync(ServiceCallback<List<Boolean>> serviceCallback);
 
     /**
      * Get boolean array value [true, 'boolean', false].
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, List&lt;Boolean&gt;&gt;&gt;} object if successful.
      */
     Single<RestResponse<Void, List<Boolean>>> getBooleanInvalidStringWithRestResponseAsync();
@@ -312,7 +293,6 @@ public interface Arrays {
     /**
      * Get boolean array value [true, 'boolean', false].
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Maybe&lt;List&lt;Boolean&gt;&gt;} object if successful.
      */
     Maybe<List<Boolean>> getBooleanInvalidStringAsync();
@@ -320,7 +300,6 @@ public interface Arrays {
     /**
      * Get integer array value [1, -1, 3, 300].
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the List&lt;Integer&gt; object if successful.
@@ -334,12 +313,11 @@ public interface Arrays {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;List&lt;Integer&gt;&gt;} object.
      */
-    ServiceFuture<List<Integer>> getIntegerValidAsync(final ServiceCallback<List<Integer>> serviceCallback);
+    ServiceFuture<List<Integer>> getIntegerValidAsync(ServiceCallback<List<Integer>> serviceCallback);
 
     /**
      * Get integer array value [1, -1, 3, 300].
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, List&lt;Integer&gt;&gt;&gt;} object if successful.
      */
     Single<RestResponse<Void, List<Integer>>> getIntegerValidWithRestResponseAsync();
@@ -347,7 +325,6 @@ public interface Arrays {
     /**
      * Get integer array value [1, -1, 3, 300].
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Maybe&lt;List&lt;Integer&gt;&gt;} object if successful.
      */
     Maybe<List<Integer>> getIntegerValidAsync();
@@ -370,7 +347,7 @@ public interface Arrays {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    ServiceFuture<Void> putIntegerValidAsync(List<Integer> arrayBody, final ServiceCallback<Void> serviceCallback);
+    ServiceFuture<Void> putIntegerValidAsync(List<Integer> arrayBody, ServiceCallback<Void> serviceCallback);
 
     /**
      * Set array value empty [1, -1, 3, 300].
@@ -393,7 +370,6 @@ public interface Arrays {
     /**
      * Get integer array value [1, null, 0].
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the List&lt;Integer&gt; object if successful.
@@ -407,12 +383,11 @@ public interface Arrays {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;List&lt;Integer&gt;&gt;} object.
      */
-    ServiceFuture<List<Integer>> getIntInvalidNullAsync(final ServiceCallback<List<Integer>> serviceCallback);
+    ServiceFuture<List<Integer>> getIntInvalidNullAsync(ServiceCallback<List<Integer>> serviceCallback);
 
     /**
      * Get integer array value [1, null, 0].
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, List&lt;Integer&gt;&gt;&gt;} object if successful.
      */
     Single<RestResponse<Void, List<Integer>>> getIntInvalidNullWithRestResponseAsync();
@@ -420,7 +395,6 @@ public interface Arrays {
     /**
      * Get integer array value [1, null, 0].
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Maybe&lt;List&lt;Integer&gt;&gt;} object if successful.
      */
     Maybe<List<Integer>> getIntInvalidNullAsync();
@@ -428,7 +402,6 @@ public interface Arrays {
     /**
      * Get integer array value [1, 'integer', 0].
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the List&lt;Integer&gt; object if successful.
@@ -442,12 +415,11 @@ public interface Arrays {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;List&lt;Integer&gt;&gt;} object.
      */
-    ServiceFuture<List<Integer>> getIntInvalidStringAsync(final ServiceCallback<List<Integer>> serviceCallback);
+    ServiceFuture<List<Integer>> getIntInvalidStringAsync(ServiceCallback<List<Integer>> serviceCallback);
 
     /**
      * Get integer array value [1, 'integer', 0].
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, List&lt;Integer&gt;&gt;&gt;} object if successful.
      */
     Single<RestResponse<Void, List<Integer>>> getIntInvalidStringWithRestResponseAsync();
@@ -455,7 +427,6 @@ public interface Arrays {
     /**
      * Get integer array value [1, 'integer', 0].
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Maybe&lt;List&lt;Integer&gt;&gt;} object if successful.
      */
     Maybe<List<Integer>> getIntInvalidStringAsync();
@@ -463,7 +434,6 @@ public interface Arrays {
     /**
      * Get integer array value [1, -1, 3, 300].
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the List&lt;Long&gt; object if successful.
@@ -477,12 +447,11 @@ public interface Arrays {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;List&lt;Long&gt;&gt;} object.
      */
-    ServiceFuture<List<Long>> getLongValidAsync(final ServiceCallback<List<Long>> serviceCallback);
+    ServiceFuture<List<Long>> getLongValidAsync(ServiceCallback<List<Long>> serviceCallback);
 
     /**
      * Get integer array value [1, -1, 3, 300].
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, List&lt;Long&gt;&gt;&gt;} object if successful.
      */
     Single<RestResponse<Void, List<Long>>> getLongValidWithRestResponseAsync();
@@ -490,7 +459,6 @@ public interface Arrays {
     /**
      * Get integer array value [1, -1, 3, 300].
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Maybe&lt;List&lt;Long&gt;&gt;} object if successful.
      */
     Maybe<List<Long>> getLongValidAsync();
@@ -513,7 +481,7 @@ public interface Arrays {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    ServiceFuture<Void> putLongValidAsync(List<Long> arrayBody, final ServiceCallback<Void> serviceCallback);
+    ServiceFuture<Void> putLongValidAsync(List<Long> arrayBody, ServiceCallback<Void> serviceCallback);
 
     /**
      * Set array value empty [1, -1, 3, 300].
@@ -536,7 +504,6 @@ public interface Arrays {
     /**
      * Get long array value [1, null, 0].
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the List&lt;Long&gt; object if successful.
@@ -550,12 +517,11 @@ public interface Arrays {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;List&lt;Long&gt;&gt;} object.
      */
-    ServiceFuture<List<Long>> getLongInvalidNullAsync(final ServiceCallback<List<Long>> serviceCallback);
+    ServiceFuture<List<Long>> getLongInvalidNullAsync(ServiceCallback<List<Long>> serviceCallback);
 
     /**
      * Get long array value [1, null, 0].
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, List&lt;Long&gt;&gt;&gt;} object if successful.
      */
     Single<RestResponse<Void, List<Long>>> getLongInvalidNullWithRestResponseAsync();
@@ -563,7 +529,6 @@ public interface Arrays {
     /**
      * Get long array value [1, null, 0].
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Maybe&lt;List&lt;Long&gt;&gt;} object if successful.
      */
     Maybe<List<Long>> getLongInvalidNullAsync();
@@ -571,7 +536,6 @@ public interface Arrays {
     /**
      * Get long array value [1, 'integer', 0].
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the List&lt;Long&gt; object if successful.
@@ -585,12 +549,11 @@ public interface Arrays {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;List&lt;Long&gt;&gt;} object.
      */
-    ServiceFuture<List<Long>> getLongInvalidStringAsync(final ServiceCallback<List<Long>> serviceCallback);
+    ServiceFuture<List<Long>> getLongInvalidStringAsync(ServiceCallback<List<Long>> serviceCallback);
 
     /**
      * Get long array value [1, 'integer', 0].
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, List&lt;Long&gt;&gt;&gt;} object if successful.
      */
     Single<RestResponse<Void, List<Long>>> getLongInvalidStringWithRestResponseAsync();
@@ -598,7 +561,6 @@ public interface Arrays {
     /**
      * Get long array value [1, 'integer', 0].
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Maybe&lt;List&lt;Long&gt;&gt;} object if successful.
      */
     Maybe<List<Long>> getLongInvalidStringAsync();
@@ -606,7 +568,6 @@ public interface Arrays {
     /**
      * Get float array value [0, -0.01, 1.2e20].
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the List&lt;Double&gt; object if successful.
@@ -620,12 +581,11 @@ public interface Arrays {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;List&lt;Double&gt;&gt;} object.
      */
-    ServiceFuture<List<Double>> getFloatValidAsync(final ServiceCallback<List<Double>> serviceCallback);
+    ServiceFuture<List<Double>> getFloatValidAsync(ServiceCallback<List<Double>> serviceCallback);
 
     /**
      * Get float array value [0, -0.01, 1.2e20].
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, List&lt;Double&gt;&gt;&gt;} object if successful.
      */
     Single<RestResponse<Void, List<Double>>> getFloatValidWithRestResponseAsync();
@@ -633,7 +593,6 @@ public interface Arrays {
     /**
      * Get float array value [0, -0.01, 1.2e20].
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Maybe&lt;List&lt;Double&gt;&gt;} object if successful.
      */
     Maybe<List<Double>> getFloatValidAsync();
@@ -656,7 +615,7 @@ public interface Arrays {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    ServiceFuture<Void> putFloatValidAsync(List<Double> arrayBody, final ServiceCallback<Void> serviceCallback);
+    ServiceFuture<Void> putFloatValidAsync(List<Double> arrayBody, ServiceCallback<Void> serviceCallback);
 
     /**
      * Set array value [0, -0.01, 1.2e20].
@@ -679,7 +638,6 @@ public interface Arrays {
     /**
      * Get float array value [0.0, null, -1.2e20].
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the List&lt;Double&gt; object if successful.
@@ -693,12 +651,11 @@ public interface Arrays {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;List&lt;Double&gt;&gt;} object.
      */
-    ServiceFuture<List<Double>> getFloatInvalidNullAsync(final ServiceCallback<List<Double>> serviceCallback);
+    ServiceFuture<List<Double>> getFloatInvalidNullAsync(ServiceCallback<List<Double>> serviceCallback);
 
     /**
      * Get float array value [0.0, null, -1.2e20].
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, List&lt;Double&gt;&gt;&gt;} object if successful.
      */
     Single<RestResponse<Void, List<Double>>> getFloatInvalidNullWithRestResponseAsync();
@@ -706,7 +663,6 @@ public interface Arrays {
     /**
      * Get float array value [0.0, null, -1.2e20].
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Maybe&lt;List&lt;Double&gt;&gt;} object if successful.
      */
     Maybe<List<Double>> getFloatInvalidNullAsync();
@@ -714,7 +670,6 @@ public interface Arrays {
     /**
      * Get boolean array value [1.0, 'number', 0.0].
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the List&lt;Double&gt; object if successful.
@@ -728,12 +683,11 @@ public interface Arrays {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;List&lt;Double&gt;&gt;} object.
      */
-    ServiceFuture<List<Double>> getFloatInvalidStringAsync(final ServiceCallback<List<Double>> serviceCallback);
+    ServiceFuture<List<Double>> getFloatInvalidStringAsync(ServiceCallback<List<Double>> serviceCallback);
 
     /**
      * Get boolean array value [1.0, 'number', 0.0].
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, List&lt;Double&gt;&gt;&gt;} object if successful.
      */
     Single<RestResponse<Void, List<Double>>> getFloatInvalidStringWithRestResponseAsync();
@@ -741,7 +695,6 @@ public interface Arrays {
     /**
      * Get boolean array value [1.0, 'number', 0.0].
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Maybe&lt;List&lt;Double&gt;&gt;} object if successful.
      */
     Maybe<List<Double>> getFloatInvalidStringAsync();
@@ -749,7 +702,6 @@ public interface Arrays {
     /**
      * Get float array value [0, -0.01, 1.2e20].
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the List&lt;Double&gt; object if successful.
@@ -763,12 +715,11 @@ public interface Arrays {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;List&lt;Double&gt;&gt;} object.
      */
-    ServiceFuture<List<Double>> getDoubleValidAsync(final ServiceCallback<List<Double>> serviceCallback);
+    ServiceFuture<List<Double>> getDoubleValidAsync(ServiceCallback<List<Double>> serviceCallback);
 
     /**
      * Get float array value [0, -0.01, 1.2e20].
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, List&lt;Double&gt;&gt;&gt;} object if successful.
      */
     Single<RestResponse<Void, List<Double>>> getDoubleValidWithRestResponseAsync();
@@ -776,7 +727,6 @@ public interface Arrays {
     /**
      * Get float array value [0, -0.01, 1.2e20].
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Maybe&lt;List&lt;Double&gt;&gt;} object if successful.
      */
     Maybe<List<Double>> getDoubleValidAsync();
@@ -799,7 +749,7 @@ public interface Arrays {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    ServiceFuture<Void> putDoubleValidAsync(List<Double> arrayBody, final ServiceCallback<Void> serviceCallback);
+    ServiceFuture<Void> putDoubleValidAsync(List<Double> arrayBody, ServiceCallback<Void> serviceCallback);
 
     /**
      * Set array value [0, -0.01, 1.2e20].
@@ -822,7 +772,6 @@ public interface Arrays {
     /**
      * Get float array value [0.0, null, -1.2e20].
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the List&lt;Double&gt; object if successful.
@@ -836,12 +785,11 @@ public interface Arrays {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;List&lt;Double&gt;&gt;} object.
      */
-    ServiceFuture<List<Double>> getDoubleInvalidNullAsync(final ServiceCallback<List<Double>> serviceCallback);
+    ServiceFuture<List<Double>> getDoubleInvalidNullAsync(ServiceCallback<List<Double>> serviceCallback);
 
     /**
      * Get float array value [0.0, null, -1.2e20].
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, List&lt;Double&gt;&gt;&gt;} object if successful.
      */
     Single<RestResponse<Void, List<Double>>> getDoubleInvalidNullWithRestResponseAsync();
@@ -849,7 +797,6 @@ public interface Arrays {
     /**
      * Get float array value [0.0, null, -1.2e20].
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Maybe&lt;List&lt;Double&gt;&gt;} object if successful.
      */
     Maybe<List<Double>> getDoubleInvalidNullAsync();
@@ -857,7 +804,6 @@ public interface Arrays {
     /**
      * Get boolean array value [1.0, 'number', 0.0].
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the List&lt;Double&gt; object if successful.
@@ -871,12 +817,11 @@ public interface Arrays {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;List&lt;Double&gt;&gt;} object.
      */
-    ServiceFuture<List<Double>> getDoubleInvalidStringAsync(final ServiceCallback<List<Double>> serviceCallback);
+    ServiceFuture<List<Double>> getDoubleInvalidStringAsync(ServiceCallback<List<Double>> serviceCallback);
 
     /**
      * Get boolean array value [1.0, 'number', 0.0].
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, List&lt;Double&gt;&gt;&gt;} object if successful.
      */
     Single<RestResponse<Void, List<Double>>> getDoubleInvalidStringWithRestResponseAsync();
@@ -884,7 +829,6 @@ public interface Arrays {
     /**
      * Get boolean array value [1.0, 'number', 0.0].
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Maybe&lt;List&lt;Double&gt;&gt;} object if successful.
      */
     Maybe<List<Double>> getDoubleInvalidStringAsync();
@@ -892,7 +836,6 @@ public interface Arrays {
     /**
      * Get string array value ['foo1', 'foo2', 'foo3'].
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the List&lt;String&gt; object if successful.
@@ -906,12 +849,11 @@ public interface Arrays {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;List&lt;String&gt;&gt;} object.
      */
-    ServiceFuture<List<String>> getStringValidAsync(final ServiceCallback<List<String>> serviceCallback);
+    ServiceFuture<List<String>> getStringValidAsync(ServiceCallback<List<String>> serviceCallback);
 
     /**
      * Get string array value ['foo1', 'foo2', 'foo3'].
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, List&lt;String&gt;&gt;&gt;} object if successful.
      */
     Single<RestResponse<Void, List<String>>> getStringValidWithRestResponseAsync();
@@ -919,7 +861,6 @@ public interface Arrays {
     /**
      * Get string array value ['foo1', 'foo2', 'foo3'].
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Maybe&lt;List&lt;String&gt;&gt;} object if successful.
      */
     Maybe<List<String>> getStringValidAsync();
@@ -942,7 +883,7 @@ public interface Arrays {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    ServiceFuture<Void> putStringValidAsync(List<String> arrayBody, final ServiceCallback<Void> serviceCallback);
+    ServiceFuture<Void> putStringValidAsync(List<String> arrayBody, ServiceCallback<Void> serviceCallback);
 
     /**
      * Set array value ['foo1', 'foo2', 'foo3'].
@@ -965,7 +906,6 @@ public interface Arrays {
     /**
      * Get string array value ['foo', null, 'foo2'].
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the List&lt;String&gt; object if successful.
@@ -979,12 +919,11 @@ public interface Arrays {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;List&lt;String&gt;&gt;} object.
      */
-    ServiceFuture<List<String>> getStringWithNullAsync(final ServiceCallback<List<String>> serviceCallback);
+    ServiceFuture<List<String>> getStringWithNullAsync(ServiceCallback<List<String>> serviceCallback);
 
     /**
      * Get string array value ['foo', null, 'foo2'].
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, List&lt;String&gt;&gt;&gt;} object if successful.
      */
     Single<RestResponse<Void, List<String>>> getStringWithNullWithRestResponseAsync();
@@ -992,7 +931,6 @@ public interface Arrays {
     /**
      * Get string array value ['foo', null, 'foo2'].
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Maybe&lt;List&lt;String&gt;&gt;} object if successful.
      */
     Maybe<List<String>> getStringWithNullAsync();
@@ -1000,7 +938,6 @@ public interface Arrays {
     /**
      * Get string array value ['foo', 123, 'foo2'].
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the List&lt;String&gt; object if successful.
@@ -1014,12 +951,11 @@ public interface Arrays {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;List&lt;String&gt;&gt;} object.
      */
-    ServiceFuture<List<String>> getStringWithInvalidAsync(final ServiceCallback<List<String>> serviceCallback);
+    ServiceFuture<List<String>> getStringWithInvalidAsync(ServiceCallback<List<String>> serviceCallback);
 
     /**
      * Get string array value ['foo', 123, 'foo2'].
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, List&lt;String&gt;&gt;&gt;} object if successful.
      */
     Single<RestResponse<Void, List<String>>> getStringWithInvalidWithRestResponseAsync();
@@ -1027,7 +963,6 @@ public interface Arrays {
     /**
      * Get string array value ['foo', 123, 'foo2'].
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Maybe&lt;List&lt;String&gt;&gt;} object if successful.
      */
     Maybe<List<String>> getStringWithInvalidAsync();
@@ -1035,7 +970,6 @@ public interface Arrays {
     /**
      * Get uuid array value ['6dcc7237-45fe-45c4-8a6b-3a8a3f625652', 'd1399005-30f7-40d6-8da6-dd7c89ad34db', 'f42f6aa1-a5bc-4ddf-907e-5f915de43205'].
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the List&lt;UUID&gt; object if successful.
@@ -1049,12 +983,11 @@ public interface Arrays {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;List&lt;UUID&gt;&gt;} object.
      */
-    ServiceFuture<List<UUID>> getUuidValidAsync(final ServiceCallback<List<UUID>> serviceCallback);
+    ServiceFuture<List<UUID>> getUuidValidAsync(ServiceCallback<List<UUID>> serviceCallback);
 
     /**
      * Get uuid array value ['6dcc7237-45fe-45c4-8a6b-3a8a3f625652', 'd1399005-30f7-40d6-8da6-dd7c89ad34db', 'f42f6aa1-a5bc-4ddf-907e-5f915de43205'].
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, List&lt;UUID&gt;&gt;&gt;} object if successful.
      */
     Single<RestResponse<Void, List<UUID>>> getUuidValidWithRestResponseAsync();
@@ -1062,7 +995,6 @@ public interface Arrays {
     /**
      * Get uuid array value ['6dcc7237-45fe-45c4-8a6b-3a8a3f625652', 'd1399005-30f7-40d6-8da6-dd7c89ad34db', 'f42f6aa1-a5bc-4ddf-907e-5f915de43205'].
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Maybe&lt;List&lt;UUID&gt;&gt;} object if successful.
      */
     Maybe<List<UUID>> getUuidValidAsync();
@@ -1085,7 +1017,7 @@ public interface Arrays {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    ServiceFuture<Void> putUuidValidAsync(List<UUID> arrayBody, final ServiceCallback<Void> serviceCallback);
+    ServiceFuture<Void> putUuidValidAsync(List<UUID> arrayBody, ServiceCallback<Void> serviceCallback);
 
     /**
      * Set array value  ['6dcc7237-45fe-45c4-8a6b-3a8a3f625652', 'd1399005-30f7-40d6-8da6-dd7c89ad34db', 'f42f6aa1-a5bc-4ddf-907e-5f915de43205'].
@@ -1108,7 +1040,6 @@ public interface Arrays {
     /**
      * Get uuid array value ['6dcc7237-45fe-45c4-8a6b-3a8a3f625652', 'foo'].
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the List&lt;UUID&gt; object if successful.
@@ -1122,12 +1053,11 @@ public interface Arrays {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;List&lt;UUID&gt;&gt;} object.
      */
-    ServiceFuture<List<UUID>> getUuidInvalidCharsAsync(final ServiceCallback<List<UUID>> serviceCallback);
+    ServiceFuture<List<UUID>> getUuidInvalidCharsAsync(ServiceCallback<List<UUID>> serviceCallback);
 
     /**
      * Get uuid array value ['6dcc7237-45fe-45c4-8a6b-3a8a3f625652', 'foo'].
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, List&lt;UUID&gt;&gt;&gt;} object if successful.
      */
     Single<RestResponse<Void, List<UUID>>> getUuidInvalidCharsWithRestResponseAsync();
@@ -1135,7 +1065,6 @@ public interface Arrays {
     /**
      * Get uuid array value ['6dcc7237-45fe-45c4-8a6b-3a8a3f625652', 'foo'].
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Maybe&lt;List&lt;UUID&gt;&gt;} object if successful.
      */
     Maybe<List<UUID>> getUuidInvalidCharsAsync();
@@ -1143,7 +1072,6 @@ public interface Arrays {
     /**
      * Get integer array value ['2000-12-01', '1980-01-02', '1492-10-12'].
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the List&lt;LocalDate&gt; object if successful.
@@ -1157,12 +1085,11 @@ public interface Arrays {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;List&lt;LocalDate&gt;&gt;} object.
      */
-    ServiceFuture<List<LocalDate>> getDateValidAsync(final ServiceCallback<List<LocalDate>> serviceCallback);
+    ServiceFuture<List<LocalDate>> getDateValidAsync(ServiceCallback<List<LocalDate>> serviceCallback);
 
     /**
      * Get integer array value ['2000-12-01', '1980-01-02', '1492-10-12'].
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, List&lt;LocalDate&gt;&gt;&gt;} object if successful.
      */
     Single<RestResponse<Void, List<LocalDate>>> getDateValidWithRestResponseAsync();
@@ -1170,7 +1097,6 @@ public interface Arrays {
     /**
      * Get integer array value ['2000-12-01', '1980-01-02', '1492-10-12'].
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Maybe&lt;List&lt;LocalDate&gt;&gt;} object if successful.
      */
     Maybe<List<LocalDate>> getDateValidAsync();
@@ -1193,7 +1119,7 @@ public interface Arrays {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    ServiceFuture<Void> putDateValidAsync(List<LocalDate> arrayBody, final ServiceCallback<Void> serviceCallback);
+    ServiceFuture<Void> putDateValidAsync(List<LocalDate> arrayBody, ServiceCallback<Void> serviceCallback);
 
     /**
      * Set array value  ['2000-12-01', '1980-01-02', '1492-10-12'].
@@ -1216,7 +1142,6 @@ public interface Arrays {
     /**
      * Get date array value ['2012-01-01', null, '1776-07-04'].
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the List&lt;LocalDate&gt; object if successful.
@@ -1230,12 +1155,11 @@ public interface Arrays {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;List&lt;LocalDate&gt;&gt;} object.
      */
-    ServiceFuture<List<LocalDate>> getDateInvalidNullAsync(final ServiceCallback<List<LocalDate>> serviceCallback);
+    ServiceFuture<List<LocalDate>> getDateInvalidNullAsync(ServiceCallback<List<LocalDate>> serviceCallback);
 
     /**
      * Get date array value ['2012-01-01', null, '1776-07-04'].
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, List&lt;LocalDate&gt;&gt;&gt;} object if successful.
      */
     Single<RestResponse<Void, List<LocalDate>>> getDateInvalidNullWithRestResponseAsync();
@@ -1243,7 +1167,6 @@ public interface Arrays {
     /**
      * Get date array value ['2012-01-01', null, '1776-07-04'].
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Maybe&lt;List&lt;LocalDate&gt;&gt;} object if successful.
      */
     Maybe<List<LocalDate>> getDateInvalidNullAsync();
@@ -1251,7 +1174,6 @@ public interface Arrays {
     /**
      * Get date array value ['2011-03-22', 'date'].
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the List&lt;LocalDate&gt; object if successful.
@@ -1265,12 +1187,11 @@ public interface Arrays {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;List&lt;LocalDate&gt;&gt;} object.
      */
-    ServiceFuture<List<LocalDate>> getDateInvalidCharsAsync(final ServiceCallback<List<LocalDate>> serviceCallback);
+    ServiceFuture<List<LocalDate>> getDateInvalidCharsAsync(ServiceCallback<List<LocalDate>> serviceCallback);
 
     /**
      * Get date array value ['2011-03-22', 'date'].
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, List&lt;LocalDate&gt;&gt;&gt;} object if successful.
      */
     Single<RestResponse<Void, List<LocalDate>>> getDateInvalidCharsWithRestResponseAsync();
@@ -1278,7 +1199,6 @@ public interface Arrays {
     /**
      * Get date array value ['2011-03-22', 'date'].
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Maybe&lt;List&lt;LocalDate&gt;&gt;} object if successful.
      */
     Maybe<List<LocalDate>> getDateInvalidCharsAsync();
@@ -1286,7 +1206,6 @@ public interface Arrays {
     /**
      * Get date-time array value ['2000-12-01t00:00:01z', '1980-01-02T00:11:35+01:00', '1492-10-12T10:15:01-08:00'].
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the List&lt;DateTime&gt; object if successful.
@@ -1300,12 +1219,11 @@ public interface Arrays {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;List&lt;DateTime&gt;&gt;} object.
      */
-    ServiceFuture<List<DateTime>> getDateTimeValidAsync(final ServiceCallback<List<DateTime>> serviceCallback);
+    ServiceFuture<List<DateTime>> getDateTimeValidAsync(ServiceCallback<List<DateTime>> serviceCallback);
 
     /**
      * Get date-time array value ['2000-12-01t00:00:01z', '1980-01-02T00:11:35+01:00', '1492-10-12T10:15:01-08:00'].
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, List&lt;DateTime&gt;&gt;&gt;} object if successful.
      */
     Single<RestResponse<Void, List<DateTime>>> getDateTimeValidWithRestResponseAsync();
@@ -1313,7 +1231,6 @@ public interface Arrays {
     /**
      * Get date-time array value ['2000-12-01t00:00:01z', '1980-01-02T00:11:35+01:00', '1492-10-12T10:15:01-08:00'].
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Maybe&lt;List&lt;DateTime&gt;&gt;} object if successful.
      */
     Maybe<List<DateTime>> getDateTimeValidAsync();
@@ -1336,7 +1253,7 @@ public interface Arrays {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    ServiceFuture<Void> putDateTimeValidAsync(List<DateTime> arrayBody, final ServiceCallback<Void> serviceCallback);
+    ServiceFuture<Void> putDateTimeValidAsync(List<DateTime> arrayBody, ServiceCallback<Void> serviceCallback);
 
     /**
      * Set array value  ['2000-12-01t00:00:01z', '1980-01-02T00:11:35+01:00', '1492-10-12T10:15:01-08:00'].
@@ -1359,7 +1276,6 @@ public interface Arrays {
     /**
      * Get date array value ['2000-12-01t00:00:01z', null].
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the List&lt;DateTime&gt; object if successful.
@@ -1373,12 +1289,11 @@ public interface Arrays {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;List&lt;DateTime&gt;&gt;} object.
      */
-    ServiceFuture<List<DateTime>> getDateTimeInvalidNullAsync(final ServiceCallback<List<DateTime>> serviceCallback);
+    ServiceFuture<List<DateTime>> getDateTimeInvalidNullAsync(ServiceCallback<List<DateTime>> serviceCallback);
 
     /**
      * Get date array value ['2000-12-01t00:00:01z', null].
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, List&lt;DateTime&gt;&gt;&gt;} object if successful.
      */
     Single<RestResponse<Void, List<DateTime>>> getDateTimeInvalidNullWithRestResponseAsync();
@@ -1386,7 +1301,6 @@ public interface Arrays {
     /**
      * Get date array value ['2000-12-01t00:00:01z', null].
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Maybe&lt;List&lt;DateTime&gt;&gt;} object if successful.
      */
     Maybe<List<DateTime>> getDateTimeInvalidNullAsync();
@@ -1394,7 +1308,6 @@ public interface Arrays {
     /**
      * Get date array value ['2000-12-01t00:00:01z', 'date-time'].
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the List&lt;DateTime&gt; object if successful.
@@ -1408,12 +1321,11 @@ public interface Arrays {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;List&lt;DateTime&gt;&gt;} object.
      */
-    ServiceFuture<List<DateTime>> getDateTimeInvalidCharsAsync(final ServiceCallback<List<DateTime>> serviceCallback);
+    ServiceFuture<List<DateTime>> getDateTimeInvalidCharsAsync(ServiceCallback<List<DateTime>> serviceCallback);
 
     /**
      * Get date array value ['2000-12-01t00:00:01z', 'date-time'].
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, List&lt;DateTime&gt;&gt;&gt;} object if successful.
      */
     Single<RestResponse<Void, List<DateTime>>> getDateTimeInvalidCharsWithRestResponseAsync();
@@ -1421,7 +1333,6 @@ public interface Arrays {
     /**
      * Get date array value ['2000-12-01t00:00:01z', 'date-time'].
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Maybe&lt;List&lt;DateTime&gt;&gt;} object if successful.
      */
     Maybe<List<DateTime>> getDateTimeInvalidCharsAsync();
@@ -1429,7 +1340,6 @@ public interface Arrays {
     /**
      * Get date-time array value ['Fri, 01 Dec 2000 00:00:01 GMT', 'Wed, 02 Jan 1980 00:11:35 GMT', 'Wed, 12 Oct 1492 10:15:01 GMT'].
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the List&lt;DateTime&gt; object if successful.
@@ -1443,12 +1353,11 @@ public interface Arrays {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;List&lt;DateTime&gt;&gt;} object.
      */
-    ServiceFuture<List<DateTime>> getDateTimeRfc1123ValidAsync(final ServiceCallback<List<DateTime>> serviceCallback);
+    ServiceFuture<List<DateTime>> getDateTimeRfc1123ValidAsync(ServiceCallback<List<DateTime>> serviceCallback);
 
     /**
      * Get date-time array value ['Fri, 01 Dec 2000 00:00:01 GMT', 'Wed, 02 Jan 1980 00:11:35 GMT', 'Wed, 12 Oct 1492 10:15:01 GMT'].
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, List&lt;DateTime&gt;&gt;&gt;} object if successful.
      */
     Single<RestResponse<Void, List<DateTime>>> getDateTimeRfc1123ValidWithRestResponseAsync();
@@ -1456,7 +1365,6 @@ public interface Arrays {
     /**
      * Get date-time array value ['Fri, 01 Dec 2000 00:00:01 GMT', 'Wed, 02 Jan 1980 00:11:35 GMT', 'Wed, 12 Oct 1492 10:15:01 GMT'].
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Maybe&lt;List&lt;DateTime&gt;&gt;} object if successful.
      */
     Maybe<List<DateTime>> getDateTimeRfc1123ValidAsync();
@@ -1464,7 +1372,7 @@ public interface Arrays {
     /**
      * Set array value  ['Fri, 01 Dec 2000 00:00:01 GMT', 'Wed, 02 Jan 1980 00:11:35 GMT', 'Wed, 12 Oct 1492 10:15:01 GMT'].
      *
-     * @param arrayBody the List&lt;DateTimeRfc1123&gt; value.
+     * @param arrayBody the List&lt;DateTime&gt; value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -1474,17 +1382,17 @@ public interface Arrays {
     /**
      * Set array value  ['Fri, 01 Dec 2000 00:00:01 GMT', 'Wed, 02 Jan 1980 00:11:35 GMT', 'Wed, 12 Oct 1492 10:15:01 GMT'].
      *
-     * @param arrayBody the List&lt;DateTimeRfc1123&gt; value.
+     * @param arrayBody the List&lt;DateTime&gt; value.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    ServiceFuture<Void> putDateTimeRfc1123ValidAsync(List<DateTime> arrayBody, final ServiceCallback<Void> serviceCallback);
+    ServiceFuture<Void> putDateTimeRfc1123ValidAsync(List<DateTime> arrayBody, ServiceCallback<Void> serviceCallback);
 
     /**
      * Set array value  ['Fri, 01 Dec 2000 00:00:01 GMT', 'Wed, 02 Jan 1980 00:11:35 GMT', 'Wed, 12 Oct 1492 10:15:01 GMT'].
      *
-     * @param arrayBody the List&lt;DateTimeRfc1123&gt; value.
+     * @param arrayBody the List&lt;DateTime&gt; value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
      */
@@ -1493,7 +1401,7 @@ public interface Arrays {
     /**
      * Set array value  ['Fri, 01 Dec 2000 00:00:01 GMT', 'Wed, 02 Jan 1980 00:11:35 GMT', 'Wed, 12 Oct 1492 10:15:01 GMT'].
      *
-     * @param arrayBody the List&lt;DateTimeRfc1123&gt; value.
+     * @param arrayBody the List&lt;DateTime&gt; value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Completable} object if successful.
      */
@@ -1502,7 +1410,6 @@ public interface Arrays {
     /**
      * Get duration array value ['P123DT22H14M12.011S', 'P5DT1H0M0S'].
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the List&lt;Period&gt; object if successful.
@@ -1516,12 +1423,11 @@ public interface Arrays {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;List&lt;Period&gt;&gt;} object.
      */
-    ServiceFuture<List<Period>> getDurationValidAsync(final ServiceCallback<List<Period>> serviceCallback);
+    ServiceFuture<List<Period>> getDurationValidAsync(ServiceCallback<List<Period>> serviceCallback);
 
     /**
      * Get duration array value ['P123DT22H14M12.011S', 'P5DT1H0M0S'].
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, List&lt;Period&gt;&gt;&gt;} object if successful.
      */
     Single<RestResponse<Void, List<Period>>> getDurationValidWithRestResponseAsync();
@@ -1529,7 +1435,6 @@ public interface Arrays {
     /**
      * Get duration array value ['P123DT22H14M12.011S', 'P5DT1H0M0S'].
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Maybe&lt;List&lt;Period&gt;&gt;} object if successful.
      */
     Maybe<List<Period>> getDurationValidAsync();
@@ -1552,7 +1457,7 @@ public interface Arrays {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    ServiceFuture<Void> putDurationValidAsync(List<Period> arrayBody, final ServiceCallback<Void> serviceCallback);
+    ServiceFuture<Void> putDurationValidAsync(List<Period> arrayBody, ServiceCallback<Void> serviceCallback);
 
     /**
      * Set array value  ['P123DT22H14M12.011S', 'P5DT1H0M0S'].
@@ -1575,7 +1480,6 @@ public interface Arrays {
     /**
      * Get byte array value [hex(FF FF FF FA), hex(01 02 03), hex (25, 29, 43)] with each item encoded in base64.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the List&lt;byte[]&gt; object if successful.
@@ -1589,12 +1493,11 @@ public interface Arrays {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;List&lt;byte[]&gt;&gt;} object.
      */
-    ServiceFuture<List<byte[]>> getByteValidAsync(final ServiceCallback<List<byte[]>> serviceCallback);
+    ServiceFuture<List<byte[]>> getByteValidAsync(ServiceCallback<List<byte[]>> serviceCallback);
 
     /**
      * Get byte array value [hex(FF FF FF FA), hex(01 02 03), hex (25, 29, 43)] with each item encoded in base64.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, List&lt;byte[]&gt;&gt;&gt;} object if successful.
      */
     Single<RestResponse<Void, List<byte[]>>> getByteValidWithRestResponseAsync();
@@ -1602,7 +1505,6 @@ public interface Arrays {
     /**
      * Get byte array value [hex(FF FF FF FA), hex(01 02 03), hex (25, 29, 43)] with each item encoded in base64.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Maybe&lt;List&lt;byte[]&gt;&gt;} object if successful.
      */
     Maybe<List<byte[]>> getByteValidAsync();
@@ -1625,7 +1527,7 @@ public interface Arrays {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    ServiceFuture<Void> putByteValidAsync(List<byte[]> arrayBody, final ServiceCallback<Void> serviceCallback);
+    ServiceFuture<Void> putByteValidAsync(List<byte[]> arrayBody, ServiceCallback<Void> serviceCallback);
 
     /**
      * Put the array value [hex(FF FF FF FA), hex(01 02 03), hex (25, 29, 43)] with each elementencoded in base 64.
@@ -1648,7 +1550,6 @@ public interface Arrays {
     /**
      * Get byte array value [hex(AB, AC, AD), null] with the first item base64 encoded.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the List&lt;byte[]&gt; object if successful.
@@ -1662,12 +1563,11 @@ public interface Arrays {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;List&lt;byte[]&gt;&gt;} object.
      */
-    ServiceFuture<List<byte[]>> getByteInvalidNullAsync(final ServiceCallback<List<byte[]>> serviceCallback);
+    ServiceFuture<List<byte[]>> getByteInvalidNullAsync(ServiceCallback<List<byte[]>> serviceCallback);
 
     /**
      * Get byte array value [hex(AB, AC, AD), null] with the first item base64 encoded.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, List&lt;byte[]&gt;&gt;&gt;} object if successful.
      */
     Single<RestResponse<Void, List<byte[]>>> getByteInvalidNullWithRestResponseAsync();
@@ -1675,7 +1575,6 @@ public interface Arrays {
     /**
      * Get byte array value [hex(AB, AC, AD), null] with the first item base64 encoded.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Maybe&lt;List&lt;byte[]&gt;&gt;} object if successful.
      */
     Maybe<List<byte[]>> getByteInvalidNullAsync();
@@ -1683,7 +1582,6 @@ public interface Arrays {
     /**
      * Get array value ['a string that gets encoded with base64url', 'test string' 'Lorem ipsum'] with the items base64url encoded.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the List&lt;byte[]&gt; object if successful.
@@ -1697,12 +1595,11 @@ public interface Arrays {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;List&lt;byte[]&gt;&gt;} object.
      */
-    ServiceFuture<List<byte[]>> getBase64UrlAsync(final ServiceCallback<List<byte[]>> serviceCallback);
+    ServiceFuture<List<byte[]>> getBase64UrlAsync(ServiceCallback<List<byte[]>> serviceCallback);
 
     /**
      * Get array value ['a string that gets encoded with base64url', 'test string' 'Lorem ipsum'] with the items base64url encoded.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, List&lt;byte[]&gt;&gt;&gt;} object if successful.
      */
     Single<RestResponse<Void, List<byte[]>>> getBase64UrlWithRestResponseAsync();
@@ -1710,7 +1607,6 @@ public interface Arrays {
     /**
      * Get array value ['a string that gets encoded with base64url', 'test string' 'Lorem ipsum'] with the items base64url encoded.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Maybe&lt;List&lt;byte[]&gt;&gt;} object if successful.
      */
     Maybe<List<byte[]>> getBase64UrlAsync();
@@ -1718,7 +1614,6 @@ public interface Arrays {
     /**
      * Get array of complex type null value.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the List&lt;Product&gt; object if successful.
@@ -1732,12 +1627,11 @@ public interface Arrays {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;List&lt;Product&gt;&gt;} object.
      */
-    ServiceFuture<List<Product>> getComplexNullAsync(final ServiceCallback<List<Product>> serviceCallback);
+    ServiceFuture<List<Product>> getComplexNullAsync(ServiceCallback<List<Product>> serviceCallback);
 
     /**
      * Get array of complex type null value.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, List&lt;Product&gt;&gt;&gt;} object if successful.
      */
     Single<RestResponse<Void, List<Product>>> getComplexNullWithRestResponseAsync();
@@ -1745,7 +1639,6 @@ public interface Arrays {
     /**
      * Get array of complex type null value.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Maybe&lt;List&lt;Product&gt;&gt;} object if successful.
      */
     Maybe<List<Product>> getComplexNullAsync();
@@ -1753,7 +1646,6 @@ public interface Arrays {
     /**
      * Get empty array of complex type [].
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the List&lt;Product&gt; object if successful.
@@ -1767,12 +1659,11 @@ public interface Arrays {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;List&lt;Product&gt;&gt;} object.
      */
-    ServiceFuture<List<Product>> getComplexEmptyAsync(final ServiceCallback<List<Product>> serviceCallback);
+    ServiceFuture<List<Product>> getComplexEmptyAsync(ServiceCallback<List<Product>> serviceCallback);
 
     /**
      * Get empty array of complex type [].
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, List&lt;Product&gt;&gt;&gt;} object if successful.
      */
     Single<RestResponse<Void, List<Product>>> getComplexEmptyWithRestResponseAsync();
@@ -1780,7 +1671,6 @@ public interface Arrays {
     /**
      * Get empty array of complex type [].
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Maybe&lt;List&lt;Product&gt;&gt;} object if successful.
      */
     Maybe<List<Product>> getComplexEmptyAsync();
@@ -1788,7 +1678,6 @@ public interface Arrays {
     /**
      * Get array of complex type with null item [{'integer': 1 'string': '2'}, null, {'integer': 5, 'string': '6'}].
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the List&lt;Product&gt; object if successful.
@@ -1802,12 +1691,11 @@ public interface Arrays {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;List&lt;Product&gt;&gt;} object.
      */
-    ServiceFuture<List<Product>> getComplexItemNullAsync(final ServiceCallback<List<Product>> serviceCallback);
+    ServiceFuture<List<Product>> getComplexItemNullAsync(ServiceCallback<List<Product>> serviceCallback);
 
     /**
      * Get array of complex type with null item [{'integer': 1 'string': '2'}, null, {'integer': 5, 'string': '6'}].
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, List&lt;Product&gt;&gt;&gt;} object if successful.
      */
     Single<RestResponse<Void, List<Product>>> getComplexItemNullWithRestResponseAsync();
@@ -1815,7 +1703,6 @@ public interface Arrays {
     /**
      * Get array of complex type with null item [{'integer': 1 'string': '2'}, null, {'integer': 5, 'string': '6'}].
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Maybe&lt;List&lt;Product&gt;&gt;} object if successful.
      */
     Maybe<List<Product>> getComplexItemNullAsync();
@@ -1823,7 +1710,6 @@ public interface Arrays {
     /**
      * Get array of complex type with empty item [{'integer': 1 'string': '2'}, {}, {'integer': 5, 'string': '6'}].
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the List&lt;Product&gt; object if successful.
@@ -1837,12 +1723,11 @@ public interface Arrays {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;List&lt;Product&gt;&gt;} object.
      */
-    ServiceFuture<List<Product>> getComplexItemEmptyAsync(final ServiceCallback<List<Product>> serviceCallback);
+    ServiceFuture<List<Product>> getComplexItemEmptyAsync(ServiceCallback<List<Product>> serviceCallback);
 
     /**
      * Get array of complex type with empty item [{'integer': 1 'string': '2'}, {}, {'integer': 5, 'string': '6'}].
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, List&lt;Product&gt;&gt;&gt;} object if successful.
      */
     Single<RestResponse<Void, List<Product>>> getComplexItemEmptyWithRestResponseAsync();
@@ -1850,7 +1735,6 @@ public interface Arrays {
     /**
      * Get array of complex type with empty item [{'integer': 1 'string': '2'}, {}, {'integer': 5, 'string': '6'}].
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Maybe&lt;List&lt;Product&gt;&gt;} object if successful.
      */
     Maybe<List<Product>> getComplexItemEmptyAsync();
@@ -1858,7 +1742,6 @@ public interface Arrays {
     /**
      * Get array of complex type with [{'integer': 1 'string': '2'}, {'integer': 3, 'string': '4'}, {'integer': 5, 'string': '6'}].
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the List&lt;Product&gt; object if successful.
@@ -1872,12 +1755,11 @@ public interface Arrays {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;List&lt;Product&gt;&gt;} object.
      */
-    ServiceFuture<List<Product>> getComplexValidAsync(final ServiceCallback<List<Product>> serviceCallback);
+    ServiceFuture<List<Product>> getComplexValidAsync(ServiceCallback<List<Product>> serviceCallback);
 
     /**
      * Get array of complex type with [{'integer': 1 'string': '2'}, {'integer': 3, 'string': '4'}, {'integer': 5, 'string': '6'}].
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, List&lt;Product&gt;&gt;&gt;} object if successful.
      */
     Single<RestResponse<Void, List<Product>>> getComplexValidWithRestResponseAsync();
@@ -1885,7 +1767,6 @@ public interface Arrays {
     /**
      * Get array of complex type with [{'integer': 1 'string': '2'}, {'integer': 3, 'string': '4'}, {'integer': 5, 'string': '6'}].
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Maybe&lt;List&lt;Product&gt;&gt;} object if successful.
      */
     Maybe<List<Product>> getComplexValidAsync();
@@ -1908,7 +1789,7 @@ public interface Arrays {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    ServiceFuture<Void> putComplexValidAsync(List<Product> arrayBody, final ServiceCallback<Void> serviceCallback);
+    ServiceFuture<Void> putComplexValidAsync(List<Product> arrayBody, ServiceCallback<Void> serviceCallback);
 
     /**
      * Put an array of complex type with values [{'integer': 1 'string': '2'}, {'integer': 3, 'string': '4'}, {'integer': 5, 'string': '6'}].
@@ -1931,7 +1812,6 @@ public interface Arrays {
     /**
      * Get a null array.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the List&lt;List&lt;String&gt;&gt; object if successful.
@@ -1945,12 +1825,11 @@ public interface Arrays {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;List&lt;List&lt;String&gt;&gt;&gt;} object.
      */
-    ServiceFuture<List<List<String>>> getArrayNullAsync(final ServiceCallback<List<List<String>>> serviceCallback);
+    ServiceFuture<List<List<String>>> getArrayNullAsync(ServiceCallback<List<List<String>>> serviceCallback);
 
     /**
      * Get a null array.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, List&lt;List&lt;String&gt;&gt;&gt;&gt;} object if successful.
      */
     Single<RestResponse<Void, List<List<String>>>> getArrayNullWithRestResponseAsync();
@@ -1958,7 +1837,6 @@ public interface Arrays {
     /**
      * Get a null array.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Maybe&lt;List&lt;List&lt;String&gt;&gt;&gt;} object if successful.
      */
     Maybe<List<List<String>>> getArrayNullAsync();
@@ -1966,7 +1844,6 @@ public interface Arrays {
     /**
      * Get an empty array [].
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the List&lt;List&lt;String&gt;&gt; object if successful.
@@ -1980,12 +1857,11 @@ public interface Arrays {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;List&lt;List&lt;String&gt;&gt;&gt;} object.
      */
-    ServiceFuture<List<List<String>>> getArrayEmptyAsync(final ServiceCallback<List<List<String>>> serviceCallback);
+    ServiceFuture<List<List<String>>> getArrayEmptyAsync(ServiceCallback<List<List<String>>> serviceCallback);
 
     /**
      * Get an empty array [].
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, List&lt;List&lt;String&gt;&gt;&gt;&gt;} object if successful.
      */
     Single<RestResponse<Void, List<List<String>>>> getArrayEmptyWithRestResponseAsync();
@@ -1993,7 +1869,6 @@ public interface Arrays {
     /**
      * Get an empty array [].
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Maybe&lt;List&lt;List&lt;String&gt;&gt;&gt;} object if successful.
      */
     Maybe<List<List<String>>> getArrayEmptyAsync();
@@ -2001,7 +1876,6 @@ public interface Arrays {
     /**
      * Get an array of array of strings [['1', '2', '3'], null, ['7', '8', '9']].
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the List&lt;List&lt;String&gt;&gt; object if successful.
@@ -2015,12 +1889,11 @@ public interface Arrays {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;List&lt;List&lt;String&gt;&gt;&gt;} object.
      */
-    ServiceFuture<List<List<String>>> getArrayItemNullAsync(final ServiceCallback<List<List<String>>> serviceCallback);
+    ServiceFuture<List<List<String>>> getArrayItemNullAsync(ServiceCallback<List<List<String>>> serviceCallback);
 
     /**
      * Get an array of array of strings [['1', '2', '3'], null, ['7', '8', '9']].
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, List&lt;List&lt;String&gt;&gt;&gt;&gt;} object if successful.
      */
     Single<RestResponse<Void, List<List<String>>>> getArrayItemNullWithRestResponseAsync();
@@ -2028,7 +1901,6 @@ public interface Arrays {
     /**
      * Get an array of array of strings [['1', '2', '3'], null, ['7', '8', '9']].
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Maybe&lt;List&lt;List&lt;String&gt;&gt;&gt;} object if successful.
      */
     Maybe<List<List<String>>> getArrayItemNullAsync();
@@ -2036,7 +1908,6 @@ public interface Arrays {
     /**
      * Get an array of array of strings [['1', '2', '3'], [], ['7', '8', '9']].
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the List&lt;List&lt;String&gt;&gt; object if successful.
@@ -2050,12 +1921,11 @@ public interface Arrays {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;List&lt;List&lt;String&gt;&gt;&gt;} object.
      */
-    ServiceFuture<List<List<String>>> getArrayItemEmptyAsync(final ServiceCallback<List<List<String>>> serviceCallback);
+    ServiceFuture<List<List<String>>> getArrayItemEmptyAsync(ServiceCallback<List<List<String>>> serviceCallback);
 
     /**
      * Get an array of array of strings [['1', '2', '3'], [], ['7', '8', '9']].
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, List&lt;List&lt;String&gt;&gt;&gt;&gt;} object if successful.
      */
     Single<RestResponse<Void, List<List<String>>>> getArrayItemEmptyWithRestResponseAsync();
@@ -2063,7 +1933,6 @@ public interface Arrays {
     /**
      * Get an array of array of strings [['1', '2', '3'], [], ['7', '8', '9']].
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Maybe&lt;List&lt;List&lt;String&gt;&gt;&gt;} object if successful.
      */
     Maybe<List<List<String>>> getArrayItemEmptyAsync();
@@ -2071,7 +1940,6 @@ public interface Arrays {
     /**
      * Get an array of array of strings [['1', '2', '3'], ['4', '5', '6'], ['7', '8', '9']].
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the List&lt;List&lt;String&gt;&gt; object if successful.
@@ -2085,12 +1953,11 @@ public interface Arrays {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;List&lt;List&lt;String&gt;&gt;&gt;} object.
      */
-    ServiceFuture<List<List<String>>> getArrayValidAsync(final ServiceCallback<List<List<String>>> serviceCallback);
+    ServiceFuture<List<List<String>>> getArrayValidAsync(ServiceCallback<List<List<String>>> serviceCallback);
 
     /**
      * Get an array of array of strings [['1', '2', '3'], ['4', '5', '6'], ['7', '8', '9']].
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, List&lt;List&lt;String&gt;&gt;&gt;&gt;} object if successful.
      */
     Single<RestResponse<Void, List<List<String>>>> getArrayValidWithRestResponseAsync();
@@ -2098,7 +1965,6 @@ public interface Arrays {
     /**
      * Get an array of array of strings [['1', '2', '3'], ['4', '5', '6'], ['7', '8', '9']].
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Maybe&lt;List&lt;List&lt;String&gt;&gt;&gt;} object if successful.
      */
     Maybe<List<List<String>>> getArrayValidAsync();
@@ -2121,7 +1987,7 @@ public interface Arrays {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    ServiceFuture<Void> putArrayValidAsync(List<List<String>> arrayBody, final ServiceCallback<Void> serviceCallback);
+    ServiceFuture<Void> putArrayValidAsync(List<List<String>> arrayBody, ServiceCallback<Void> serviceCallback);
 
     /**
      * Put An array of array of strings [['1', '2', '3'], ['4', '5', '6'], ['7', '8', '9']].
@@ -2144,7 +2010,6 @@ public interface Arrays {
     /**
      * Get an array of Dictionaries with value null.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the List&lt;Map&lt;String, String&gt;&gt; object if successful.
@@ -2158,12 +2023,11 @@ public interface Arrays {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;List&lt;Map&lt;String, String&gt;&gt;&gt;} object.
      */
-    ServiceFuture<List<Map<String, String>>> getDictionaryNullAsync(final ServiceCallback<List<Map<String, String>>> serviceCallback);
+    ServiceFuture<List<Map<String, String>>> getDictionaryNullAsync(ServiceCallback<List<Map<String, String>>> serviceCallback);
 
     /**
      * Get an array of Dictionaries with value null.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, List&lt;Map&lt;String, String&gt;&gt;&gt;&gt;} object if successful.
      */
     Single<RestResponse<Void, List<Map<String, String>>>> getDictionaryNullWithRestResponseAsync();
@@ -2171,7 +2035,6 @@ public interface Arrays {
     /**
      * Get an array of Dictionaries with value null.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Maybe&lt;List&lt;Map&lt;String, String&gt;&gt;&gt;} object if successful.
      */
     Maybe<List<Map<String, String>>> getDictionaryNullAsync();
@@ -2179,7 +2042,6 @@ public interface Arrays {
     /**
      * Get an array of Dictionaries of type &lt;string, string&gt; with value [].
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the List&lt;Map&lt;String, String&gt;&gt; object if successful.
@@ -2193,12 +2055,11 @@ public interface Arrays {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;List&lt;Map&lt;String, String&gt;&gt;&gt;} object.
      */
-    ServiceFuture<List<Map<String, String>>> getDictionaryEmptyAsync(final ServiceCallback<List<Map<String, String>>> serviceCallback);
+    ServiceFuture<List<Map<String, String>>> getDictionaryEmptyAsync(ServiceCallback<List<Map<String, String>>> serviceCallback);
 
     /**
      * Get an array of Dictionaries of type &lt;string, string&gt; with value [].
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, List&lt;Map&lt;String, String&gt;&gt;&gt;&gt;} object if successful.
      */
     Single<RestResponse<Void, List<Map<String, String>>>> getDictionaryEmptyWithRestResponseAsync();
@@ -2206,7 +2067,6 @@ public interface Arrays {
     /**
      * Get an array of Dictionaries of type &lt;string, string&gt; with value [].
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Maybe&lt;List&lt;Map&lt;String, String&gt;&gt;&gt;} object if successful.
      */
     Maybe<List<Map<String, String>>> getDictionaryEmptyAsync();
@@ -2214,7 +2074,6 @@ public interface Arrays {
     /**
      * Get an array of Dictionaries of type &lt;string, string&gt; with value [{'1': 'one', '2': 'two', '3': 'three'}, null, {'7': 'seven', '8': 'eight', '9': 'nine'}].
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the List&lt;Map&lt;String, String&gt;&gt; object if successful.
@@ -2228,12 +2087,11 @@ public interface Arrays {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;List&lt;Map&lt;String, String&gt;&gt;&gt;} object.
      */
-    ServiceFuture<List<Map<String, String>>> getDictionaryItemNullAsync(final ServiceCallback<List<Map<String, String>>> serviceCallback);
+    ServiceFuture<List<Map<String, String>>> getDictionaryItemNullAsync(ServiceCallback<List<Map<String, String>>> serviceCallback);
 
     /**
      * Get an array of Dictionaries of type &lt;string, string&gt; with value [{'1': 'one', '2': 'two', '3': 'three'}, null, {'7': 'seven', '8': 'eight', '9': 'nine'}].
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, List&lt;Map&lt;String, String&gt;&gt;&gt;&gt;} object if successful.
      */
     Single<RestResponse<Void, List<Map<String, String>>>> getDictionaryItemNullWithRestResponseAsync();
@@ -2241,7 +2099,6 @@ public interface Arrays {
     /**
      * Get an array of Dictionaries of type &lt;string, string&gt; with value [{'1': 'one', '2': 'two', '3': 'three'}, null, {'7': 'seven', '8': 'eight', '9': 'nine'}].
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Maybe&lt;List&lt;Map&lt;String, String&gt;&gt;&gt;} object if successful.
      */
     Maybe<List<Map<String, String>>> getDictionaryItemNullAsync();
@@ -2249,7 +2106,6 @@ public interface Arrays {
     /**
      * Get an array of Dictionaries of type &lt;string, string&gt; with value [{'1': 'one', '2': 'two', '3': 'three'}, {}, {'7': 'seven', '8': 'eight', '9': 'nine'}].
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the List&lt;Map&lt;String, String&gt;&gt; object if successful.
@@ -2263,12 +2119,11 @@ public interface Arrays {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;List&lt;Map&lt;String, String&gt;&gt;&gt;} object.
      */
-    ServiceFuture<List<Map<String, String>>> getDictionaryItemEmptyAsync(final ServiceCallback<List<Map<String, String>>> serviceCallback);
+    ServiceFuture<List<Map<String, String>>> getDictionaryItemEmptyAsync(ServiceCallback<List<Map<String, String>>> serviceCallback);
 
     /**
      * Get an array of Dictionaries of type &lt;string, string&gt; with value [{'1': 'one', '2': 'two', '3': 'three'}, {}, {'7': 'seven', '8': 'eight', '9': 'nine'}].
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, List&lt;Map&lt;String, String&gt;&gt;&gt;&gt;} object if successful.
      */
     Single<RestResponse<Void, List<Map<String, String>>>> getDictionaryItemEmptyWithRestResponseAsync();
@@ -2276,7 +2131,6 @@ public interface Arrays {
     /**
      * Get an array of Dictionaries of type &lt;string, string&gt; with value [{'1': 'one', '2': 'two', '3': 'three'}, {}, {'7': 'seven', '8': 'eight', '9': 'nine'}].
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Maybe&lt;List&lt;Map&lt;String, String&gt;&gt;&gt;} object if successful.
      */
     Maybe<List<Map<String, String>>> getDictionaryItemEmptyAsync();
@@ -2284,7 +2138,6 @@ public interface Arrays {
     /**
      * Get an array of Dictionaries of type &lt;string, string&gt; with value [{'1': 'one', '2': 'two', '3': 'three'}, {'4': 'four', '5': 'five', '6': 'six'}, {'7': 'seven', '8': 'eight', '9': 'nine'}].
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the List&lt;Map&lt;String, String&gt;&gt; object if successful.
@@ -2298,12 +2151,11 @@ public interface Arrays {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;List&lt;Map&lt;String, String&gt;&gt;&gt;} object.
      */
-    ServiceFuture<List<Map<String, String>>> getDictionaryValidAsync(final ServiceCallback<List<Map<String, String>>> serviceCallback);
+    ServiceFuture<List<Map<String, String>>> getDictionaryValidAsync(ServiceCallback<List<Map<String, String>>> serviceCallback);
 
     /**
      * Get an array of Dictionaries of type &lt;string, string&gt; with value [{'1': 'one', '2': 'two', '3': 'three'}, {'4': 'four', '5': 'five', '6': 'six'}, {'7': 'seven', '8': 'eight', '9': 'nine'}].
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, List&lt;Map&lt;String, String&gt;&gt;&gt;&gt;} object if successful.
      */
     Single<RestResponse<Void, List<Map<String, String>>>> getDictionaryValidWithRestResponseAsync();
@@ -2311,7 +2163,6 @@ public interface Arrays {
     /**
      * Get an array of Dictionaries of type &lt;string, string&gt; with value [{'1': 'one', '2': 'two', '3': 'three'}, {'4': 'four', '5': 'five', '6': 'six'}, {'7': 'seven', '8': 'eight', '9': 'nine'}].
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Maybe&lt;List&lt;Map&lt;String, String&gt;&gt;&gt;} object if successful.
      */
     Maybe<List<Map<String, String>>> getDictionaryValidAsync();
@@ -2334,7 +2185,7 @@ public interface Arrays {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    ServiceFuture<Void> putDictionaryValidAsync(List<Map<String, String>> arrayBody, final ServiceCallback<Void> serviceCallback);
+    ServiceFuture<Void> putDictionaryValidAsync(List<Map<String, String>> arrayBody, ServiceCallback<Void> serviceCallback);
 
     /**
      * Get an array of Dictionaries of type &lt;string, string&gt; with value [{'1': 'one', '2': 'two', '3': 'three'}, {'4': 'four', '5': 'five', '6': 'six'}, {'7': 'seven', '8': 'eight', '9': 'nine'}].

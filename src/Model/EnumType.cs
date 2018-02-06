@@ -8,13 +8,8 @@ namespace AutoRest.Java.Model
     /// <summary>
     /// The details of an enumerated type that is used by a service.
     /// </summary>
-    public class ServiceEnum
+    public class EnumType : IType
     {
-        private readonly string name;
-        private readonly string subpackage;
-        private readonly bool expandable;
-        private readonly IEnumerable<ServiceEnumValue> values;
-
         /// <summary>
         /// Create a new Enum with the provided properties.
         /// </summary>
@@ -22,32 +17,52 @@ namespace AutoRest.Java.Model
         /// <param name="subpackage">The subpackage that this Enum will appear in.</param>
         /// <param name="expandable">Whether or not this will be an ExpandableStringEnum type.</param>
         /// <param name="values">The values of the Enum.</param>
-        public ServiceEnum(string name, string subpackage, bool expandable, IEnumerable<ServiceEnumValue> values)
+        public EnumType(string package, string name, bool expandable, IEnumerable<ServiceEnumValue> values)
         {
-            this.name = name;
-            this.subpackage = subpackage;
-            this.expandable = expandable;
-            this.values = values;
+            Name = name;
+            Package = package;
+            Expandable = expandable;
+            Values = values;
         }
 
         /// <summary>
         /// The name of the new Enum.
         /// </summary>
-        public string Name => name;
+        public string Name { get; }
 
         /// <summary>
-        /// The subpackage that this Enum will appear in.
+        /// The package that this enumeration belongs to.
         /// </summary>
-        public string Subpackage => subpackage;
+        public string Package { get; }
 
         /// <summary>
         /// Whether or not this will be an ExpandableStringEnum type.
         /// </summary>
-        public bool Expandable => expandable;
+        public bool Expandable { get; }
 
         /// <summary>
         /// The values of the Enum.
         /// </summary>
-        public IEnumerable<ServiceEnumValue> Values => values;
+        public IEnumerable<ServiceEnumValue> Values { get; }
+
+        public void AddImportsTo(ISet<string> imports, bool includeImplementationImports)
+        {
+            imports.Add($"{Package}.{Name}");
+        }
+
+        public IType AsNullable()
+        {
+            return this;
+        }
+
+        public bool Contains(IType type)
+        {
+            return this == type;
+        }
+
+        public override string ToString()
+        {
+            return Name;
+        }
     }
 }

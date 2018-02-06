@@ -24,8 +24,6 @@ public class GroupTests {
             new ProtocolPolicyFactory("http"),
             new HostPolicyFactory("localhost"),
             new PortPolicyFactory(3000),
-            new RetryPolicyFactory(),
-            new CookiePolicyFactory(),
             new DecodingPolicyFactory());
         client = new MicrosoftAzureTestUrlImpl(httpPipeline);
     }

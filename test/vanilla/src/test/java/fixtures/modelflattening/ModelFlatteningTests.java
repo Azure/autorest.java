@@ -22,7 +22,7 @@ public class ModelFlatteningTests {
 
     @BeforeClass
     public static void setup() {
-        client = new AutoRestResourceFlatteningTestServiceImpl(HttpPipeline.build(new DecodingPolicyFactory()));
+        client = new AutoRestResourceFlatteningTestServiceImpl();
     }
 
     @Test

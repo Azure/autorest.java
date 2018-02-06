@@ -24,7 +24,6 @@ import fixtures.bodyduration.Durations;
 import fixtures.bodyduration.models.ErrorException;
 import io.reactivex.Completable;
 import io.reactivex.Maybe;
-import io.reactivex.Observable;
 import io.reactivex.Single;
 import io.reactivex.functions.Function;
 import org.joda.time.Period;
@@ -84,7 +83,6 @@ public class DurationsImpl implements Durations {
     /**
      * Get null duration value.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the Period object if successful.
@@ -100,14 +98,13 @@ public class DurationsImpl implements Durations {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Period&gt;} object.
      */
-    public ServiceFuture<Period> getNullAsync(final ServiceCallback<Period> serviceCallback) {
+    public ServiceFuture<Period> getNullAsync(ServiceCallback<Period> serviceCallback) {
         return ServiceFuture.fromBody(getNullAsync(), serviceCallback);
     }
 
     /**
      * Get null duration value.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, Period&gt;&gt;} object if successful.
      */
     public Single<RestResponse<Void, Period>> getNullWithRestResponseAsync() {
@@ -117,7 +114,6 @@ public class DurationsImpl implements Durations {
     /**
      * Get null duration value.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Maybe&lt;Period&gt;} object if successful.
      */
     public Maybe<Period> getNullAsync() {
@@ -153,7 +149,7 @@ public class DurationsImpl implements Durations {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    public ServiceFuture<Void> putPositiveDurationAsync(Period durationBody, final ServiceCallback<Void> serviceCallback) {
+    public ServiceFuture<Void> putPositiveDurationAsync(Period durationBody, ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(putPositiveDurationAsync(durationBody), serviceCallback);
     }
 
@@ -186,7 +182,6 @@ public class DurationsImpl implements Durations {
     /**
      * Get a positive duration value.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the Period object if successful.
@@ -202,14 +197,13 @@ public class DurationsImpl implements Durations {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Period&gt;} object.
      */
-    public ServiceFuture<Period> getPositiveDurationAsync(final ServiceCallback<Period> serviceCallback) {
+    public ServiceFuture<Period> getPositiveDurationAsync(ServiceCallback<Period> serviceCallback) {
         return ServiceFuture.fromBody(getPositiveDurationAsync(), serviceCallback);
     }
 
     /**
      * Get a positive duration value.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, Period&gt;&gt;} object if successful.
      */
     public Single<RestResponse<Void, Period>> getPositiveDurationWithRestResponseAsync() {
@@ -219,7 +213,6 @@ public class DurationsImpl implements Durations {
     /**
      * Get a positive duration value.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Maybe&lt;Period&gt;} object if successful.
      */
     public Maybe<Period> getPositiveDurationAsync() {
@@ -238,7 +231,6 @@ public class DurationsImpl implements Durations {
     /**
      * Get an invalid duration value.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the Period object if successful.
@@ -254,14 +246,13 @@ public class DurationsImpl implements Durations {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Period&gt;} object.
      */
-    public ServiceFuture<Period> getInvalidAsync(final ServiceCallback<Period> serviceCallback) {
+    public ServiceFuture<Period> getInvalidAsync(ServiceCallback<Period> serviceCallback) {
         return ServiceFuture.fromBody(getInvalidAsync(), serviceCallback);
     }
 
     /**
      * Get an invalid duration value.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, Period&gt;&gt;} object if successful.
      */
     public Single<RestResponse<Void, Period>> getInvalidWithRestResponseAsync() {
@@ -271,7 +262,6 @@ public class DurationsImpl implements Durations {
     /**
      * Get an invalid duration value.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Maybe&lt;Period&gt;} object if successful.
      */
     public Maybe<Period> getInvalidAsync() {

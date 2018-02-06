@@ -14,10 +14,8 @@ import com.microsoft.rest.v2.RestResponse;
 import com.microsoft.rest.v2.ServiceCallback;
 import com.microsoft.rest.v2.ServiceFuture;
 import fixtures.bodycomplex.models.DictionaryWrapper;
-import fixtures.bodycomplex.models.ErrorException;
 import io.reactivex.Completable;
 import io.reactivex.Maybe;
-import io.reactivex.Observable;
 import io.reactivex.Single;
 
 /**
@@ -28,7 +26,6 @@ public interface Dictionarys {
     /**
      * Get complex types with dictionary property.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the DictionaryWrapper object if successful.
@@ -42,12 +39,11 @@ public interface Dictionarys {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;DictionaryWrapper&gt;} object.
      */
-    ServiceFuture<DictionaryWrapper> getValidAsync(final ServiceCallback<DictionaryWrapper> serviceCallback);
+    ServiceFuture<DictionaryWrapper> getValidAsync(ServiceCallback<DictionaryWrapper> serviceCallback);
 
     /**
      * Get complex types with dictionary property.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, DictionaryWrapper&gt;&gt;} object if successful.
      */
     Single<RestResponse<Void, DictionaryWrapper>> getValidWithRestResponseAsync();
@@ -55,7 +51,6 @@ public interface Dictionarys {
     /**
      * Get complex types with dictionary property.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Maybe&lt;DictionaryWrapper&gt;} object if successful.
      */
     Maybe<DictionaryWrapper> getValidAsync();
@@ -78,7 +73,7 @@ public interface Dictionarys {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    ServiceFuture<Void> putValidAsync(DictionaryWrapper complexBody, final ServiceCallback<Void> serviceCallback);
+    ServiceFuture<Void> putValidAsync(DictionaryWrapper complexBody, ServiceCallback<Void> serviceCallback);
 
     /**
      * Put complex types with dictionary property.
@@ -101,7 +96,6 @@ public interface Dictionarys {
     /**
      * Get complex types with dictionary property which is empty.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the DictionaryWrapper object if successful.
@@ -115,12 +109,11 @@ public interface Dictionarys {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;DictionaryWrapper&gt;} object.
      */
-    ServiceFuture<DictionaryWrapper> getEmptyAsync(final ServiceCallback<DictionaryWrapper> serviceCallback);
+    ServiceFuture<DictionaryWrapper> getEmptyAsync(ServiceCallback<DictionaryWrapper> serviceCallback);
 
     /**
      * Get complex types with dictionary property which is empty.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, DictionaryWrapper&gt;&gt;} object if successful.
      */
     Single<RestResponse<Void, DictionaryWrapper>> getEmptyWithRestResponseAsync();
@@ -128,7 +121,6 @@ public interface Dictionarys {
     /**
      * Get complex types with dictionary property which is empty.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Maybe&lt;DictionaryWrapper&gt;} object if successful.
      */
     Maybe<DictionaryWrapper> getEmptyAsync();
@@ -151,7 +143,7 @@ public interface Dictionarys {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    ServiceFuture<Void> putEmptyAsync(DictionaryWrapper complexBody, final ServiceCallback<Void> serviceCallback);
+    ServiceFuture<Void> putEmptyAsync(DictionaryWrapper complexBody, ServiceCallback<Void> serviceCallback);
 
     /**
      * Put complex types with dictionary property which is empty.
@@ -174,7 +166,6 @@ public interface Dictionarys {
     /**
      * Get complex types with dictionary property which is null.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the DictionaryWrapper object if successful.
@@ -188,12 +179,11 @@ public interface Dictionarys {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;DictionaryWrapper&gt;} object.
      */
-    ServiceFuture<DictionaryWrapper> getNullAsync(final ServiceCallback<DictionaryWrapper> serviceCallback);
+    ServiceFuture<DictionaryWrapper> getNullAsync(ServiceCallback<DictionaryWrapper> serviceCallback);
 
     /**
      * Get complex types with dictionary property which is null.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, DictionaryWrapper&gt;&gt;} object if successful.
      */
     Single<RestResponse<Void, DictionaryWrapper>> getNullWithRestResponseAsync();
@@ -201,7 +191,6 @@ public interface Dictionarys {
     /**
      * Get complex types with dictionary property which is null.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Maybe&lt;DictionaryWrapper&gt;} object if successful.
      */
     Maybe<DictionaryWrapper> getNullAsync();
@@ -209,7 +198,6 @@ public interface Dictionarys {
     /**
      * Get complex types with dictionary property while server doesn't provide a response payload.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the DictionaryWrapper object if successful.
@@ -223,12 +211,11 @@ public interface Dictionarys {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;DictionaryWrapper&gt;} object.
      */
-    ServiceFuture<DictionaryWrapper> getNotProvidedAsync(final ServiceCallback<DictionaryWrapper> serviceCallback);
+    ServiceFuture<DictionaryWrapper> getNotProvidedAsync(ServiceCallback<DictionaryWrapper> serviceCallback);
 
     /**
      * Get complex types with dictionary property while server doesn't provide a response payload.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, DictionaryWrapper&gt;&gt;} object if successful.
      */
     Single<RestResponse<Void, DictionaryWrapper>> getNotProvidedWithRestResponseAsync();
@@ -236,7 +223,6 @@ public interface Dictionarys {
     /**
      * Get complex types with dictionary property while server doesn't provide a response payload.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Maybe&lt;DictionaryWrapper&gt;} object if successful.
      */
     Maybe<DictionaryWrapper> getNotProvidedAsync();

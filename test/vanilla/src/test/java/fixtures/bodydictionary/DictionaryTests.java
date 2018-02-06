@@ -1,11 +1,7 @@
 package fixtures.bodydictionary;
 
-import com.microsoft.rest.v2.RestException;
-import com.microsoft.rest.v2.http.HttpPipeline;
-import com.microsoft.rest.v2.policy.DecodingPolicyFactory;
 import fixtures.bodydictionary.implementation.AutoRestSwaggerBATdictionaryServiceImpl;
 import fixtures.bodydictionary.models.Widget;
-import org.hamcrest.CoreMatchers;
 import org.joda.time.DateTime;
 import org.joda.time.DateTimeZone;
 import org.joda.time.LocalDate;
@@ -27,7 +23,7 @@ public class DictionaryTests {
 
     @BeforeClass
     public static void setup() {
-        client = new AutoRestSwaggerBATdictionaryServiceImpl(HttpPipeline.build(new DecodingPolicyFactory()));
+        client = new AutoRestSwaggerBATdictionaryServiceImpl();
     }
 
     @Test
@@ -40,8 +36,9 @@ public class DictionaryTests {
         try {
             client.dictionarys().getInvalid();
             fail();
-        } catch (RestException exception) {
-            assertThat(exception.getMessage(), CoreMatchers.containsString("HTTP response has a malformed body"));
+        } catch (RuntimeException exception) {
+            // expected
+            Assert.assertTrue(exception.getMessage().contains("HTTP response has a malformed body"));
         }
     }
 
@@ -67,8 +64,9 @@ public class DictionaryTests {
         try {
             client.dictionarys().getNullKey();
             fail();
-        } catch (RestException exception) {
-            assertThat(exception.getMessage(), CoreMatchers.containsString("HTTP response has a malformed body"));
+        } catch (RuntimeException exception) {
+            // expected
+            Assert.assertTrue(exception.getMessage().contains("HTTP response has a malformed body"));
         }
     }
 

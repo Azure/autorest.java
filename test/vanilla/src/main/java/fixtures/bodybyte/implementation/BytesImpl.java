@@ -24,7 +24,6 @@ import fixtures.bodybyte.Bytes;
 import fixtures.bodybyte.models.ErrorException;
 import io.reactivex.Completable;
 import io.reactivex.Maybe;
-import io.reactivex.Observable;
 import io.reactivex.Single;
 import io.reactivex.functions.Function;
 
@@ -88,7 +87,6 @@ public class BytesImpl implements Bytes {
     /**
      * Get null byte value.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the byte[] object if successful.
@@ -104,14 +102,13 @@ public class BytesImpl implements Bytes {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;byte[]&gt;} object.
      */
-    public ServiceFuture<byte[]> getNullAsync(final ServiceCallback<byte[]> serviceCallback) {
+    public ServiceFuture<byte[]> getNullAsync(ServiceCallback<byte[]> serviceCallback) {
         return ServiceFuture.fromBody(getNullAsync(), serviceCallback);
     }
 
     /**
      * Get null byte value.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, byte[]&gt;&gt;} object if successful.
      */
     public Single<RestResponse<Void, byte[]>> getNullWithRestResponseAsync() {
@@ -121,7 +118,6 @@ public class BytesImpl implements Bytes {
     /**
      * Get null byte value.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Maybe&lt;byte[]&gt;} object if successful.
      */
     public Maybe<byte[]> getNullAsync() {
@@ -140,7 +136,6 @@ public class BytesImpl implements Bytes {
     /**
      * Get empty byte value ''.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the byte[] object if successful.
@@ -156,14 +151,13 @@ public class BytesImpl implements Bytes {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;byte[]&gt;} object.
      */
-    public ServiceFuture<byte[]> getEmptyAsync(final ServiceCallback<byte[]> serviceCallback) {
+    public ServiceFuture<byte[]> getEmptyAsync(ServiceCallback<byte[]> serviceCallback) {
         return ServiceFuture.fromBody(getEmptyAsync(), serviceCallback);
     }
 
     /**
      * Get empty byte value ''.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, byte[]&gt;&gt;} object if successful.
      */
     public Single<RestResponse<Void, byte[]>> getEmptyWithRestResponseAsync() {
@@ -173,7 +167,6 @@ public class BytesImpl implements Bytes {
     /**
      * Get empty byte value ''.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Maybe&lt;byte[]&gt;} object if successful.
      */
     public Maybe<byte[]> getEmptyAsync() {
@@ -192,7 +185,6 @@ public class BytesImpl implements Bytes {
     /**
      * Get non-ascii byte string hex(FF FE FD FC FB FA F9 F8 F7 F6).
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the byte[] object if successful.
@@ -208,14 +200,13 @@ public class BytesImpl implements Bytes {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;byte[]&gt;} object.
      */
-    public ServiceFuture<byte[]> getNonAsciiAsync(final ServiceCallback<byte[]> serviceCallback) {
+    public ServiceFuture<byte[]> getNonAsciiAsync(ServiceCallback<byte[]> serviceCallback) {
         return ServiceFuture.fromBody(getNonAsciiAsync(), serviceCallback);
     }
 
     /**
      * Get non-ascii byte string hex(FF FE FD FC FB FA F9 F8 F7 F6).
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, byte[]&gt;&gt;} object if successful.
      */
     public Single<RestResponse<Void, byte[]>> getNonAsciiWithRestResponseAsync() {
@@ -225,7 +216,6 @@ public class BytesImpl implements Bytes {
     /**
      * Get non-ascii byte string hex(FF FE FD FC FB FA F9 F8 F7 F6).
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Maybe&lt;byte[]&gt;} object if successful.
      */
     public Maybe<byte[]> getNonAsciiAsync() {
@@ -261,7 +251,7 @@ public class BytesImpl implements Bytes {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    public ServiceFuture<Void> putNonAsciiAsync(byte[] byteBody, final ServiceCallback<Void> serviceCallback) {
+    public ServiceFuture<Void> putNonAsciiAsync(byte[] byteBody, ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(putNonAsciiAsync(byteBody), serviceCallback);
     }
 
@@ -294,7 +284,6 @@ public class BytesImpl implements Bytes {
     /**
      * Get invalid byte value ':::SWAGGER::::'.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the byte[] object if successful.
@@ -310,14 +299,13 @@ public class BytesImpl implements Bytes {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;byte[]&gt;} object.
      */
-    public ServiceFuture<byte[]> getInvalidAsync(final ServiceCallback<byte[]> serviceCallback) {
+    public ServiceFuture<byte[]> getInvalidAsync(ServiceCallback<byte[]> serviceCallback) {
         return ServiceFuture.fromBody(getInvalidAsync(), serviceCallback);
     }
 
     /**
      * Get invalid byte value ':::SWAGGER::::'.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, byte[]&gt;&gt;} object if successful.
      */
     public Single<RestResponse<Void, byte[]>> getInvalidWithRestResponseAsync() {
@@ -327,7 +315,6 @@ public class BytesImpl implements Bytes {
     /**
      * Get invalid byte value ':::SWAGGER::::'.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Maybe&lt;byte[]&gt;} object if successful.
      */
     public Maybe<byte[]> getInvalidAsync() {

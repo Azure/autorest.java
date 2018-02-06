@@ -1,7 +1,5 @@
 package fixtures.bodydatetime;
 
-import com.microsoft.rest.v2.http.HttpPipeline;
-import com.microsoft.rest.v2.policy.DecodingPolicyFactory;
 import fixtures.bodydatetime.implementation.AutoRestDateTimeTestServiceImpl;
 import org.joda.time.DateTime;
 import org.joda.time.DateTimeZone;
@@ -15,7 +13,7 @@ public class DatetimeOperationsTests {
 
     @BeforeClass
     public static void setup() {
-        client = new AutoRestDateTimeTestServiceImpl(HttpPipeline.build(new DecodingPolicyFactory()));
+        client = new AutoRestDateTimeTestServiceImpl();
     }
 
     @Test

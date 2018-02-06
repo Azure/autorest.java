@@ -1,4 +1,9 @@
-﻿namespace AutoRest.Java
+﻿// Copyright (c) Microsoft Corporation. All rights reserved.
+// Licensed under the MIT License. See License.txt in the project root for license information.
+
+using AutoRest.Core.Utilities;
+
+namespace AutoRest.Java
 {
     public class JavaJavadocComment
     {
@@ -19,38 +24,41 @@
             }
         }
 
-        public JavaJavadocComment Description(string description)
+        public void Description(string description)
         {
-            contents.Line(ProcessText(description));
-            expectsLineSeparator = true;
-            return this;
+            string processedText = ProcessText(description);
+            if (!string.IsNullOrEmpty(processedText))
+            {
+                contents.Line(processedText);
+                expectsLineSeparator = true;
+            }
         }
 
-        public JavaJavadocComment Param(string parameterName, string parameterDescription)
+        public void Param(string parameterName, string parameterDescription)
         {
             AddExpectedLineSeparator();
-            contents.CommentParam(parameterName, ProcessText(parameterDescription));
-            return this;
+            contents.Line($"@param {parameterName} {ProcessText(parameterDescription)}");
         }
 
-        public JavaJavadocComment Return(string returnValueDescription)
+        public void Return(string returnValueDescription)
         {
-            AddExpectedLineSeparator();
-            contents.CommentReturn(ProcessText(returnValueDescription));
-            return this;
+            if (!string.IsNullOrEmpty(returnValueDescription))
+            {
+                AddExpectedLineSeparator();
+                contents.Line($"@return {ProcessText(returnValueDescription)}");
+            }
         }
 
-        public JavaJavadocComment Throws(string exceptionTypeName, string description)
+        public void Throws(string exceptionTypeName, string description)
         {
             AddExpectedLineSeparator();
-            contents.CommentThrows(exceptionTypeName, ProcessText(description));
-            return this;
+            contents.Line($"@throws {exceptionTypeName} {ProcessText(description)}");
         }
 
         private static string Trim(string value) => string.IsNullOrEmpty(value) ? value : value.Trim();
 
         private static string EnsurePeriod(string value) => string.IsNullOrEmpty(value) || value.EndsWith('.') ? value : value + '.';
 
-        private static string ProcessText(string value) => EnsurePeriod(Trim(value));
+        private static string ProcessText(string value) => EnsurePeriod(Trim(value)).EscapeXmlComment();
     }
 }

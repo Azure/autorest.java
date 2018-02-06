@@ -10,7 +10,6 @@
 
 package fixtures.parameterflattening.implementation;
 
-import com.microsoft.rest.v2.RestException;
 import com.microsoft.rest.v2.RestProxy;
 import com.microsoft.rest.v2.RestResponse;
 import com.microsoft.rest.v2.ServiceCallback;
@@ -24,9 +23,8 @@ import com.microsoft.rest.v2.annotations.PathParam;
 import fixtures.parameterflattening.AvailabilitySets;
 import fixtures.parameterflattening.models.AvailabilitySetUpdateParameters;
 import io.reactivex.Completable;
-import io.reactivex.Observable;
 import io.reactivex.Single;
-import io.reactivex.functions.Function;
+import java.util.HashMap;
 import java.util.Map;
 
 /**
@@ -72,7 +70,6 @@ public class AvailabilitySetsImpl implements AvailabilitySets {
      * @param avset The name of the storage availability set.
      * @param tags A set of tags. A description about the set of tags.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws RestException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     public void update(String resourceGroupName, String avset, Map<String, String> tags) {
@@ -89,7 +86,7 @@ public class AvailabilitySetsImpl implements AvailabilitySets {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    public ServiceFuture<Void> updateAsync(String resourceGroupName, String avset, Map<String, String> tags, final ServiceCallback<Void> serviceCallback) {
+    public ServiceFuture<Void> updateAsync(String resourceGroupName, String avset, Map<String, String> tags, ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(updateAsync(resourceGroupName, avset, tags), serviceCallback);
     }
 

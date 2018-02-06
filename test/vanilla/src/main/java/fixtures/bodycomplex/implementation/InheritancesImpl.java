@@ -26,7 +26,6 @@ import fixtures.bodycomplex.models.ErrorException;
 import fixtures.bodycomplex.models.Siamese;
 import io.reactivex.Completable;
 import io.reactivex.Maybe;
-import io.reactivex.Observable;
 import io.reactivex.Single;
 import io.reactivex.functions.Function;
 
@@ -75,7 +74,6 @@ public class InheritancesImpl implements Inheritances {
     /**
      * Get complex types that extend others.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the Siamese object if successful.
@@ -91,14 +89,13 @@ public class InheritancesImpl implements Inheritances {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Siamese&gt;} object.
      */
-    public ServiceFuture<Siamese> getValidAsync(final ServiceCallback<Siamese> serviceCallback) {
+    public ServiceFuture<Siamese> getValidAsync(ServiceCallback<Siamese> serviceCallback) {
         return ServiceFuture.fromBody(getValidAsync(), serviceCallback);
     }
 
     /**
      * Get complex types that extend others.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, Siamese&gt;&gt;} object if successful.
      */
     public Single<RestResponse<Void, Siamese>> getValidWithRestResponseAsync() {
@@ -108,7 +105,6 @@ public class InheritancesImpl implements Inheritances {
     /**
      * Get complex types that extend others.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Maybe&lt;Siamese&gt;} object if successful.
      */
     public Maybe<Siamese> getValidAsync() {
@@ -144,7 +140,7 @@ public class InheritancesImpl implements Inheritances {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    public ServiceFuture<Void> putValidAsync(Siamese complexBody, final ServiceCallback<Void> serviceCallback) {
+    public ServiceFuture<Void> putValidAsync(Siamese complexBody, ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(putValidAsync(complexBody), serviceCallback);
     }
 

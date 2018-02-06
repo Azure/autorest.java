@@ -386,21 +386,6 @@ namespace AutoRest.Java
             Line($"}}");
         }
 
-        public void CommentParam(string parameterName, string parameterDescription)
-        {
-            Line($"@param {parameterName} {parameterDescription}");
-        }
-
-        public void CommentReturn(string returnValueDescription)
-        {
-            Line($"@return {returnValueDescription.EscapeXmlComment()}");
-        }
-
-        public void CommentThrows(string exceptionTypeName, string description)
-        {
-            Line($"@throws {exceptionTypeName} {description}");
-        }
-
         public void If(string condition, Action<JavaBlock> ifAction)
         {
             Line($"if ({condition}) {{");

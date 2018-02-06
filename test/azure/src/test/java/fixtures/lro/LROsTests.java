@@ -2,13 +2,8 @@ package fixtures.lro;
 
 import com.microsoft.azure.v2.AzureProxy;
 import com.microsoft.azure.v2.CloudException;
+import com.microsoft.rest.v2.credentials.BasicAuthenticationCredentials;
 import com.microsoft.rest.v2.ServiceCallback;
-import com.microsoft.rest.v2.http.HttpPipeline;
-import com.microsoft.rest.v2.policy.CookiePolicyFactory;
-import com.microsoft.rest.v2.policy.DecodingPolicyFactory;
-import com.microsoft.rest.v2.policy.PortPolicyFactory;
-import com.microsoft.rest.v2.policy.ProtocolPolicyFactory;
-import com.microsoft.rest.v2.policy.RetryPolicyFactory;
 import fixtures.lro.implementation.AutoRestLongRunningOperationTestServiceImpl;
 import fixtures.lro.models.Product;
 import fixtures.lro.models.Sku;
@@ -28,18 +23,14 @@ public class LROsTests {
 
     @BeforeClass
     public static void setup() {
-        final HttpPipeline httpPipeline = HttpPipeline.build(
-                new ProtocolPolicyFactory("http"),
-                new PortPolicyFactory(3000),
-                new RetryPolicyFactory(),
-                new CookiePolicyFactory(),
-                new DecodingPolicyFactory());
-        client = new AutoRestLongRunningOperationTestServiceImpl(httpPipeline);
+        client = new AutoRestLongRunningOperationTestServiceImpl(
+            new BasicAuthenticationCredentials(null, null)
+        );
         AzureProxy.setDefaultPollingDelayInMilliseconds(0);
     }
 
     @Test
-    public void put200Succeeded() throws Exception {
+    public void put200Succeeded() {
         Product product = new Product();
         product.withLocation("West US");
         Product response = client.lROs().put200Succeeded(product);
@@ -47,7 +38,7 @@ public class LROsTests {
     }
 
     @Test
-    public void put200SucceededNoState() throws Exception {
+    public void put200SucceededNoState() {
         Product product = new Product();
         product.withLocation("West US");
         Product response = client.lROs().put200SucceededNoState(product);
@@ -55,7 +46,7 @@ public class LROsTests {
     }
 
     @Test
-    public void put202Retry200() throws Exception {
+    public void put202Retry200() {
         Product product = new Product();
         product.withLocation("West US");
         Product response = client.lROs().put202Retry200(product);
@@ -63,7 +54,7 @@ public class LROsTests {
     }
 
     @Ignore("Can cause flakiness - only run manually")
-    public void put202Retry200Async() throws Exception {
+    public void put202Retry200Async() throws InterruptedException {
         final CountDownLatch lock = new CountDownLatch(1);
         long startTime = System.currentTimeMillis();
         final long[] callbackTime = new long[1];
@@ -91,7 +82,7 @@ public class LROsTests {
     }
 
     @Test
-    public void put201CreatingSucceeded200() throws Exception {
+    public void put201CreatingSucceeded200() {
         Product product = new Product();
         product.withLocation("West US");
         Product response = client.lROs().put201CreatingSucceeded200(product);
@@ -99,7 +90,7 @@ public class LROsTests {
     }
 
     @Test
-    public void put200UpdatingSucceeded204() throws Exception {
+    public void put200UpdatingSucceeded204() {
         Product product = new Product();
         product.withLocation("West US");
         Product response = client.lROs().put200UpdatingSucceeded204(product);
@@ -107,7 +98,7 @@ public class LROsTests {
     }
 
     @Test
-    public void put201CreatingFailed200() throws Exception {
+    public void put201CreatingFailed200() {
         Product product = new Product();
         product.withLocation("West US");
         try {
@@ -119,7 +110,7 @@ public class LROsTests {
     }
 
     @Test
-    public void put200Acceptedcanceled200() throws Exception {
+    public void put200Acceptedcanceled200() {
         Product product = new Product();
         product.withLocation("West US");
         try {
@@ -131,7 +122,7 @@ public class LROsTests {
     }
 
     @Test
-    public void putNoHeaderInRetry() throws Exception {
+    public void putNoHeaderInRetry() {
         Product product = new Product();
         product.withLocation("West US");
         Product response = client.lROs().putNoHeaderInRetry(product);
@@ -139,7 +130,7 @@ public class LROsTests {
     }
 
     @Test
-    public void putAsyncRetrySucceeded() throws Exception {
+    public void putAsyncRetrySucceeded() {
         Product product = new Product();
         product.withLocation("West US");
         Product response = client.lROs().putAsyncRetrySucceeded(product);
@@ -147,7 +138,7 @@ public class LROsTests {
     }
 
     @Test
-    public void putAsyncNoRetrySucceeded() throws Exception {
+    public void putAsyncNoRetrySucceeded() {
         Product product = new Product();
         product.withLocation("West US");
         Product response = client.lROs().putAsyncNoRetrySucceeded(product);
@@ -155,7 +146,7 @@ public class LROsTests {
     }
 
     @Test
-    public void putAsyncRetryFailed() throws Exception {
+    public void putAsyncRetryFailed() {
         Product product = new Product();
         product.withLocation("West US");
         try {
@@ -167,7 +158,7 @@ public class LROsTests {
     }
 
     @Test
-    public void putAsyncNoRetrycanceled() throws Exception {
+    public void putAsyncNoRetrycanceled() {
         Product product = new Product();
         product.withLocation("West US");
         try {
@@ -179,7 +170,7 @@ public class LROsTests {
     }
 
     @Test
-    public void putAsyncNoHeaderInRetry() throws Exception {
+    public void putAsyncNoHeaderInRetry() {
         Product product = new Product();
         product.withLocation("West US");
         Product response = client.lROs().putAsyncNoHeaderInRetry(product);
@@ -187,88 +178,88 @@ public class LROsTests {
     }
 
     @Test
-    public void putNonResource() throws Exception {
+    public void putNonResource() {
         Sku sku = new Sku();
         Sku response = client.lROs().putNonResource(sku);
         Assert.assertEquals("100", response.id());
     }
 
     @Test
-    public void putAsyncNonResource() throws Exception {
+    public void putAsyncNonResource() {
         Sku sku = new Sku();
         Sku response = client.lROs().putAsyncNonResource(sku);
         Assert.assertEquals("100", response.id());
     }
 
     @Test
-    public void putSubResource() throws Exception {
+    public void putSubResource() {
         SubProduct subProduct = new SubProduct();
         SubProduct response = client.lROs().putSubResource(subProduct);
         Assert.assertEquals("Succeeded", response.provisioningState());
     }
 
     @Test
-    public void putAsyncSubResource() throws Exception {
+    public void putAsyncSubResource() {
         SubProduct subProduct = new SubProduct();
         SubProduct response = client.lROs().putAsyncSubResource(subProduct);
         Assert.assertEquals("Succeeded", response.provisioningState());
     }
 
     @Test
-    public void deleteProvisioning202Accepted200Succeeded() throws Exception {
+    public void deleteProvisioning202Accepted200Succeeded() {
         Product response = client.lROs().deleteProvisioning202Accepted200Succeeded();
         Assert.assertEquals("Succeeded", response.provisioningState());
     }
 
     @Test
-    public void deleteProvisioning202DeletingFailed200() throws Exception {
+    public void deleteProvisioning202DeletingFailed200() {
         Product response = client.lROs().deleteProvisioning202DeletingFailed200();
         Assert.assertEquals("Failed", response.provisioningState());
     }
 
     @Test
-    public void deleteProvisioning202Deletingcanceled200() throws Exception {
+    public void deleteProvisioning202Deletingcanceled200() {
         Product response = client.lROs().deleteProvisioning202Deletingcanceled200();
         Assert.assertEquals("Canceled", response.provisioningState());
     }
 
     @Test
-    public void delete204Succeeded() throws Exception {
+    public void delete204Succeeded() {
         client.lROs().delete204Succeeded();
     }
 
     @Test
-    public void delete202Retry200() throws Exception {
+    public void delete202Retry200() {
         Product response = client.lROs().delete202Retry200();
     }
 
     @Test
-    public void delete202NoRetry204() throws Exception {
+    public void delete202NoRetry204() {
         Product response = client.lROs().delete202NoRetry204();
     }
 
     @Test
-    public void deleteNoHeaderInRetry() throws Exception {
+    public void deleteNoHeaderInRetry() {
         client.lROs().deleteNoHeaderInRetry();
     }
 
     @Test
-    public void deleteAsyncNoHeaderInRetry() throws Exception {
+    public void deleteAsyncNoHeaderInRetry() {
         client.lROs().deleteAsyncNoHeaderInRetry();
     }
 
     @Test
-    public void deleteAsyncRetrySucceeded() throws Exception {
+    public void deleteAsyncRetrySucceeded() {
         client.lROs().deleteAsyncRetrySucceeded();
     }
 
     @Test
-    public void deleteAsyncNoRetrySucceeded() throws Exception {
+    public void deleteAsyncNoRetrySucceeded() {
         client.lROs().deleteAsyncNoRetrySucceeded();
     }
 
     @Test
-    public void deleteAsyncRetryFailed() throws Exception {
+    public void deleteAsyncRetryFailed() {
         try {
             client.lROs().deleteAsyncRetryFailed();
             fail();
@@ -278,7 +269,7 @@ public class LROsTests {
     }
 
     @Test
-    public void deleteAsyncRetrycanceled() throws Exception {
+    public void deleteAsyncRetrycanceled() {
         try {
             client.lROs().deleteAsyncRetrycanceled();
             fail();
@@ -288,41 +279,41 @@ public class LROsTests {
     }
 
     @Test
-    public void post200WithPayload() throws Exception {
+    public void post200WithPayload() {
         Sku response = client.lROs().post200WithPayload();
         Assert.assertEquals("1", response.id());
     }
 
     @Test
-    public void post202Retry200() throws Exception {
+    public void post202Retry200() {
         Product product = new Product();
         product.withLocation("West US");
         client.lROs().post202Retry200(product);
     }
 
     @Test
-    public void post202NoRetry204() throws Exception {
+    public void post202NoRetry204() {
         Product product = new Product();
         product.withLocation("West US");
         Product response = client.lROs().post202NoRetry204WithRestResponseAsync(product).blockingGet().body();
     }
 
     @Test
-    public void postAsyncRetrySucceeded() throws Exception {
+    public void postAsyncRetrySucceeded() {
         Product product = new Product();
         product.withLocation("West US");
         Product response = client.lROs().postAsyncRetrySucceeded(product);
     }
 
     @Test
-    public void postAsyncNoRetrySucceeded() throws Exception {
+    public void postAsyncNoRetrySucceeded() {
         Product product = new Product();
         product.withLocation("West US");
         Product response = client.lROs().postAsyncNoRetrySucceeded(product);
     }
 
     @Test
-    public void postAsyncRetryFailed() throws Exception {
+    public void postAsyncRetryFailed() {
         try {
             Product product = new Product();
             product.withLocation("West US");
@@ -334,7 +325,7 @@ public class LROsTests {
     }
 
     @Test
-    public void postAsyncRetrycanceled() throws Exception {
+    public void postAsyncRetrycanceled() {
         try {
             Product product = new Product();
             product.withLocation("West US");

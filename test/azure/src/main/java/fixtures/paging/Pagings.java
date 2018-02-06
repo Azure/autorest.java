@@ -10,21 +10,16 @@
 
 package fixtures.paging;
 
-import com.microsoft.azure.v2.CloudException;
 import com.microsoft.azure.v2.Page;
 import com.microsoft.azure.v2.PagedList;
-import com.microsoft.rest.v2.RestResponse;
-import com.microsoft.rest.v2.ServiceFuture;
 import fixtures.paging.models.CustomParameterGroup;
 import fixtures.paging.models.PagingGetMultiplePagesOptions;
 import fixtures.paging.models.PagingGetMultiplePagesWithOffsetNextOptions;
 import fixtures.paging.models.PagingGetMultiplePagesWithOffsetOptions;
 import fixtures.paging.models.PagingGetOdataMultiplePagesOptions;
 import fixtures.paging.models.Product;
-import io.reactivex.Maybe;
 import io.reactivex.Observable;
 import io.reactivex.Single;
-import java.util.List;
 
 /**
  * An instance of this class provides access to all the operations defined in
@@ -34,7 +29,6 @@ public interface Pagings {
     /**
      * A paging operation that finishes on the first call without a nextlink.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws CloudException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the PagedList&lt;Product&gt; object if successful.
@@ -44,7 +38,6 @@ public interface Pagings {
     /**
      * A paging operation that finishes on the first call without a nextlink.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the observable to the PagedList&lt;Product&gt; object.
      */
     Observable<Page<Product>> getSinglePagesAsync();
@@ -52,7 +45,6 @@ public interface Pagings {
     /**
      * A paging operation that finishes on the first call without a nextlink.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;Page&lt;Product&gt;&gt;} object if successful.
      */
     Single<Page<Product>> getSinglePagesSinglePageAsync();
@@ -60,7 +52,6 @@ public interface Pagings {
     /**
      * A paging operation that includes a nextLink that has 10 pages.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws CloudException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the PagedList&lt;Product&gt; object if successful.
@@ -70,7 +61,6 @@ public interface Pagings {
     /**
      * A paging operation that includes a nextLink that has 10 pages.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the observable to the PagedList&lt;Product&gt; object.
      */
     Observable<Page<Product>> getMultiplePagesAsync();
@@ -78,7 +68,6 @@ public interface Pagings {
     /**
      * A paging operation that includes a nextLink that has 10 pages.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;Page&lt;Product&gt;&gt;} object if successful.
      */
     Single<Page<Product>> getMultiplePagesSinglePageAsync();
@@ -118,7 +107,6 @@ public interface Pagings {
     /**
      * A paging operation that includes a nextLink in odata format that has 10 pages.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws CloudException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the PagedList&lt;Product&gt; object if successful.
@@ -128,7 +116,6 @@ public interface Pagings {
     /**
      * A paging operation that includes a nextLink in odata format that has 10 pages.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the observable to the PagedList&lt;Product&gt; object.
      */
     Observable<Page<Product>> getOdataMultiplePagesAsync();
@@ -136,7 +123,6 @@ public interface Pagings {
     /**
      * A paging operation that includes a nextLink in odata format that has 10 pages.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;Page&lt;Product&gt;&gt;} object if successful.
      */
     Single<Page<Product>> getOdataMultiplePagesSinglePageAsync();
@@ -237,7 +223,6 @@ public interface Pagings {
     /**
      * A paging operation that fails on the first call with 500 and then retries and then get a response including a nextLink that has 10 pages.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws CloudException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the PagedList&lt;Product&gt; object if successful.
@@ -247,7 +232,6 @@ public interface Pagings {
     /**
      * A paging operation that fails on the first call with 500 and then retries and then get a response including a nextLink that has 10 pages.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the observable to the PagedList&lt;Product&gt; object.
      */
     Observable<Page<Product>> getMultiplePagesRetryFirstAsync();
@@ -255,7 +239,6 @@ public interface Pagings {
     /**
      * A paging operation that fails on the first call with 500 and then retries and then get a response including a nextLink that has 10 pages.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;Page&lt;Product&gt;&gt;} object if successful.
      */
     Single<Page<Product>> getMultiplePagesRetryFirstSinglePageAsync();
@@ -263,7 +246,6 @@ public interface Pagings {
     /**
      * A paging operation that includes a nextLink that has 10 pages, of which the 2nd call fails first with 500. The client should retry and finish all 10 pages eventually.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws CloudException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the PagedList&lt;Product&gt; object if successful.
@@ -273,7 +255,6 @@ public interface Pagings {
     /**
      * A paging operation that includes a nextLink that has 10 pages, of which the 2nd call fails first with 500. The client should retry and finish all 10 pages eventually.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the observable to the PagedList&lt;Product&gt; object.
      */
     Observable<Page<Product>> getMultiplePagesRetrySecondAsync();
@@ -281,7 +262,6 @@ public interface Pagings {
     /**
      * A paging operation that includes a nextLink that has 10 pages, of which the 2nd call fails first with 500. The client should retry and finish all 10 pages eventually.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;Page&lt;Product&gt;&gt;} object if successful.
      */
     Single<Page<Product>> getMultiplePagesRetrySecondSinglePageAsync();
@@ -289,7 +269,6 @@ public interface Pagings {
     /**
      * A paging operation that receives a 400 on the first call.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws CloudException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the PagedList&lt;Product&gt; object if successful.
@@ -299,7 +278,6 @@ public interface Pagings {
     /**
      * A paging operation that receives a 400 on the first call.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the observable to the PagedList&lt;Product&gt; object.
      */
     Observable<Page<Product>> getSinglePagesFailureAsync();
@@ -307,7 +285,6 @@ public interface Pagings {
     /**
      * A paging operation that receives a 400 on the first call.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;Page&lt;Product&gt;&gt;} object if successful.
      */
     Single<Page<Product>> getSinglePagesFailureSinglePageAsync();
@@ -315,7 +292,6 @@ public interface Pagings {
     /**
      * A paging operation that receives a 400 on the second call.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws CloudException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the PagedList&lt;Product&gt; object if successful.
@@ -325,7 +301,6 @@ public interface Pagings {
     /**
      * A paging operation that receives a 400 on the second call.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the observable to the PagedList&lt;Product&gt; object.
      */
     Observable<Page<Product>> getMultiplePagesFailureAsync();
@@ -333,7 +308,6 @@ public interface Pagings {
     /**
      * A paging operation that receives a 400 on the second call.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;Page&lt;Product&gt;&gt;} object if successful.
      */
     Single<Page<Product>> getMultiplePagesFailureSinglePageAsync();
@@ -341,7 +315,6 @@ public interface Pagings {
     /**
      * A paging operation that receives an invalid nextLink.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws CloudException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the PagedList&lt;Product&gt; object if successful.
@@ -351,7 +324,6 @@ public interface Pagings {
     /**
      * A paging operation that receives an invalid nextLink.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the observable to the PagedList&lt;Product&gt; object.
      */
     Observable<Page<Product>> getMultiplePagesFailureUriAsync();
@@ -359,7 +331,6 @@ public interface Pagings {
     /**
      * A paging operation that receives an invalid nextLink.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;Page&lt;Product&gt;&gt;} object if successful.
      */
     Single<Page<Product>> getMultiplePagesFailureUriSinglePageAsync();

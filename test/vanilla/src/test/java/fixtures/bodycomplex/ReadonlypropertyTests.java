@@ -1,7 +1,8 @@
 package fixtures.bodycomplex;
 
-import com.microsoft.rest.v2.http.HttpPipeline;
-import com.microsoft.rest.v2.policy.DecodingPolicyFactory;
+import org.junit.BeforeClass;
+import org.junit.Test;
+
 import fixtures.bodycomplex.implementation.AutoRestComplexTestServiceImpl;
 import fixtures.bodycomplex.models.ReadonlyObj;
 import org.junit.BeforeClass;
@@ -12,7 +13,7 @@ public class ReadonlypropertyTests {
 
     @BeforeClass
     public static void setup() {
-        client = new AutoRestComplexTestServiceImpl(HttpPipeline.build(new DecodingPolicyFactory()));
+        client = new AutoRestComplexTestServiceImpl();
     }
 
     @Test

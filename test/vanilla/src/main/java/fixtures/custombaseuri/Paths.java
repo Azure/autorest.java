@@ -13,9 +13,7 @@ package fixtures.custombaseuri;
 import com.microsoft.rest.v2.RestResponse;
 import com.microsoft.rest.v2.ServiceCallback;
 import com.microsoft.rest.v2.ServiceFuture;
-import fixtures.custombaseuri.models.ErrorException;
 import io.reactivex.Completable;
-import io.reactivex.Observable;
 import io.reactivex.Single;
 
 /**
@@ -41,7 +39,7 @@ public interface Paths {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    ServiceFuture<Void> getEmptyAsync(String accountName, final ServiceCallback<Void> serviceCallback);
+    ServiceFuture<Void> getEmptyAsync(String accountName, ServiceCallback<Void> serviceCallback);
 
     /**
      * Get a 200 to test a valid base uri.

@@ -24,9 +24,9 @@ import com.microsoft.rest.v2.http.HttpPipeline;
 import fixtures.report.AutoRestReportService;
 import fixtures.report.models.ErrorException;
 import io.reactivex.Maybe;
-import io.reactivex.Observable;
 import io.reactivex.Single;
 import io.reactivex.functions.Function;
+import java.util.HashMap;
 import java.util.Map;
 
 /**
@@ -70,7 +70,6 @@ public class AutoRestReportServiceImpl extends ServiceClient implements AutoRest
     /**
      * Get test coverage report.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the Map&lt;String, Integer&gt; object if successful.
@@ -86,14 +85,13 @@ public class AutoRestReportServiceImpl extends ServiceClient implements AutoRest
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Map&lt;String, Integer&gt;&gt;} object.
      */
-    public ServiceFuture<Map<String, Integer>> getReportAsync(final ServiceCallback<Map<String, Integer>> serviceCallback) {
+    public ServiceFuture<Map<String, Integer>> getReportAsync(ServiceCallback<Map<String, Integer>> serviceCallback) {
         return ServiceFuture.fromBody(getReportAsync(), serviceCallback);
     }
 
     /**
      * Get test coverage report.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, Map&lt;String, Integer&gt;&gt;&gt;} object if successful.
      */
     public Single<RestResponse<Void, Map<String, Integer>>> getReportWithRestResponseAsync() {
@@ -104,7 +102,6 @@ public class AutoRestReportServiceImpl extends ServiceClient implements AutoRest
     /**
      * Get test coverage report.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Maybe&lt;Map&lt;String, Integer&gt;&gt;} object if successful.
      */
     public Maybe<Map<String, Integer>> getReportAsync() {
@@ -141,7 +138,7 @@ public class AutoRestReportServiceImpl extends ServiceClient implements AutoRest
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Map&lt;String, Integer&gt;&gt;} object.
      */
-    public ServiceFuture<Map<String, Integer>> getReportAsync(String qualifier, final ServiceCallback<Map<String, Integer>> serviceCallback) {
+    public ServiceFuture<Map<String, Integer>> getReportAsync(String qualifier, ServiceCallback<Map<String, Integer>> serviceCallback) {
         return ServiceFuture.fromBody(getReportAsync(qualifier), serviceCallback);
     }
 

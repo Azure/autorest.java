@@ -1,7 +1,9 @@
 package fixtures.report;
 
-import com.microsoft.rest.v2.http.HttpPipeline;
-import com.microsoft.rest.v2.policy.DecodingPolicyFactory;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
+
 import fixtures.report.implementation.AutoRestReportServiceImpl;
 import org.junit.runner.Result;
 import org.junit.runner.notification.RunListener;
@@ -11,7 +13,7 @@ import java.util.List;
 import java.util.Map;
 
 public final class CoverageReporter extends RunListener {
-    private AutoRestReportService client = new AutoRestReportServiceImpl(HttpPipeline.build(new DecodingPolicyFactory()));
+    private AutoRestReportService client = new AutoRestReportServiceImpl();
 
     @Override
     public void testRunFinished(Result result) throws Exception {

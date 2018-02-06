@@ -36,7 +36,6 @@ import fixtures.bodycomplex.models.LongWrapper;
 import fixtures.bodycomplex.models.StringWrapper;
 import io.reactivex.Completable;
 import io.reactivex.Maybe;
-import io.reactivex.Observable;
 import io.reactivex.Single;
 import io.reactivex.functions.Function;
 
@@ -185,7 +184,6 @@ public class PrimitivesImpl implements Primitives {
     /**
      * Get complex types with integer properties.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the IntWrapper object if successful.
@@ -201,14 +199,13 @@ public class PrimitivesImpl implements Primitives {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;IntWrapper&gt;} object.
      */
-    public ServiceFuture<IntWrapper> getIntAsync(final ServiceCallback<IntWrapper> serviceCallback) {
+    public ServiceFuture<IntWrapper> getIntAsync(ServiceCallback<IntWrapper> serviceCallback) {
         return ServiceFuture.fromBody(getIntAsync(), serviceCallback);
     }
 
     /**
      * Get complex types with integer properties.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, IntWrapper&gt;&gt;} object if successful.
      */
     public Single<RestResponse<Void, IntWrapper>> getIntWithRestResponseAsync() {
@@ -218,7 +215,6 @@ public class PrimitivesImpl implements Primitives {
     /**
      * Get complex types with integer properties.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Maybe&lt;IntWrapper&gt;} object if successful.
      */
     public Maybe<IntWrapper> getIntAsync() {
@@ -254,7 +250,7 @@ public class PrimitivesImpl implements Primitives {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    public ServiceFuture<Void> putIntAsync(IntWrapper complexBody, final ServiceCallback<Void> serviceCallback) {
+    public ServiceFuture<Void> putIntAsync(IntWrapper complexBody, ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(putIntAsync(complexBody), serviceCallback);
     }
 
@@ -288,7 +284,6 @@ public class PrimitivesImpl implements Primitives {
     /**
      * Get complex types with long properties.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the LongWrapper object if successful.
@@ -304,14 +299,13 @@ public class PrimitivesImpl implements Primitives {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;LongWrapper&gt;} object.
      */
-    public ServiceFuture<LongWrapper> getLongAsync(final ServiceCallback<LongWrapper> serviceCallback) {
+    public ServiceFuture<LongWrapper> getLongAsync(ServiceCallback<LongWrapper> serviceCallback) {
         return ServiceFuture.fromBody(getLongAsync(), serviceCallback);
     }
 
     /**
      * Get complex types with long properties.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, LongWrapper&gt;&gt;} object if successful.
      */
     public Single<RestResponse<Void, LongWrapper>> getLongWithRestResponseAsync() {
@@ -321,7 +315,6 @@ public class PrimitivesImpl implements Primitives {
     /**
      * Get complex types with long properties.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Maybe&lt;LongWrapper&gt;} object if successful.
      */
     public Maybe<LongWrapper> getLongAsync() {
@@ -357,7 +350,7 @@ public class PrimitivesImpl implements Primitives {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    public ServiceFuture<Void> putLongAsync(LongWrapper complexBody, final ServiceCallback<Void> serviceCallback) {
+    public ServiceFuture<Void> putLongAsync(LongWrapper complexBody, ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(putLongAsync(complexBody), serviceCallback);
     }
 
@@ -391,7 +384,6 @@ public class PrimitivesImpl implements Primitives {
     /**
      * Get complex types with float properties.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the FloatWrapper object if successful.
@@ -407,14 +399,13 @@ public class PrimitivesImpl implements Primitives {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;FloatWrapper&gt;} object.
      */
-    public ServiceFuture<FloatWrapper> getFloatAsync(final ServiceCallback<FloatWrapper> serviceCallback) {
+    public ServiceFuture<FloatWrapper> getFloatAsync(ServiceCallback<FloatWrapper> serviceCallback) {
         return ServiceFuture.fromBody(getFloatAsync(), serviceCallback);
     }
 
     /**
      * Get complex types with float properties.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, FloatWrapper&gt;&gt;} object if successful.
      */
     public Single<RestResponse<Void, FloatWrapper>> getFloatWithRestResponseAsync() {
@@ -424,7 +415,6 @@ public class PrimitivesImpl implements Primitives {
     /**
      * Get complex types with float properties.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Maybe&lt;FloatWrapper&gt;} object if successful.
      */
     public Maybe<FloatWrapper> getFloatAsync() {
@@ -460,7 +450,7 @@ public class PrimitivesImpl implements Primitives {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    public ServiceFuture<Void> putFloatAsync(FloatWrapper complexBody, final ServiceCallback<Void> serviceCallback) {
+    public ServiceFuture<Void> putFloatAsync(FloatWrapper complexBody, ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(putFloatAsync(complexBody), serviceCallback);
     }
 
@@ -494,7 +484,6 @@ public class PrimitivesImpl implements Primitives {
     /**
      * Get complex types with double properties.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the DoubleWrapper object if successful.
@@ -510,14 +499,13 @@ public class PrimitivesImpl implements Primitives {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;DoubleWrapper&gt;} object.
      */
-    public ServiceFuture<DoubleWrapper> getDoubleAsync(final ServiceCallback<DoubleWrapper> serviceCallback) {
+    public ServiceFuture<DoubleWrapper> getDoubleAsync(ServiceCallback<DoubleWrapper> serviceCallback) {
         return ServiceFuture.fromBody(getDoubleAsync(), serviceCallback);
     }
 
     /**
      * Get complex types with double properties.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, DoubleWrapper&gt;&gt;} object if successful.
      */
     public Single<RestResponse<Void, DoubleWrapper>> getDoubleWithRestResponseAsync() {
@@ -527,7 +515,6 @@ public class PrimitivesImpl implements Primitives {
     /**
      * Get complex types with double properties.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Maybe&lt;DoubleWrapper&gt;} object if successful.
      */
     public Maybe<DoubleWrapper> getDoubleAsync() {
@@ -563,7 +550,7 @@ public class PrimitivesImpl implements Primitives {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    public ServiceFuture<Void> putDoubleAsync(DoubleWrapper complexBody, final ServiceCallback<Void> serviceCallback) {
+    public ServiceFuture<Void> putDoubleAsync(DoubleWrapper complexBody, ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(putDoubleAsync(complexBody), serviceCallback);
     }
 
@@ -597,7 +584,6 @@ public class PrimitivesImpl implements Primitives {
     /**
      * Get complex types with bool properties.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the BooleanWrapper object if successful.
@@ -613,14 +599,13 @@ public class PrimitivesImpl implements Primitives {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;BooleanWrapper&gt;} object.
      */
-    public ServiceFuture<BooleanWrapper> getBoolAsync(final ServiceCallback<BooleanWrapper> serviceCallback) {
+    public ServiceFuture<BooleanWrapper> getBoolAsync(ServiceCallback<BooleanWrapper> serviceCallback) {
         return ServiceFuture.fromBody(getBoolAsync(), serviceCallback);
     }
 
     /**
      * Get complex types with bool properties.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, BooleanWrapper&gt;&gt;} object if successful.
      */
     public Single<RestResponse<Void, BooleanWrapper>> getBoolWithRestResponseAsync() {
@@ -630,7 +615,6 @@ public class PrimitivesImpl implements Primitives {
     /**
      * Get complex types with bool properties.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Maybe&lt;BooleanWrapper&gt;} object if successful.
      */
     public Maybe<BooleanWrapper> getBoolAsync() {
@@ -666,7 +650,7 @@ public class PrimitivesImpl implements Primitives {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    public ServiceFuture<Void> putBoolAsync(BooleanWrapper complexBody, final ServiceCallback<Void> serviceCallback) {
+    public ServiceFuture<Void> putBoolAsync(BooleanWrapper complexBody, ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(putBoolAsync(complexBody), serviceCallback);
     }
 
@@ -700,7 +684,6 @@ public class PrimitivesImpl implements Primitives {
     /**
      * Get complex types with string properties.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the StringWrapper object if successful.
@@ -716,14 +699,13 @@ public class PrimitivesImpl implements Primitives {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;StringWrapper&gt;} object.
      */
-    public ServiceFuture<StringWrapper> getStringAsync(final ServiceCallback<StringWrapper> serviceCallback) {
+    public ServiceFuture<StringWrapper> getStringAsync(ServiceCallback<StringWrapper> serviceCallback) {
         return ServiceFuture.fromBody(getStringAsync(), serviceCallback);
     }
 
     /**
      * Get complex types with string properties.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, StringWrapper&gt;&gt;} object if successful.
      */
     public Single<RestResponse<Void, StringWrapper>> getStringWithRestResponseAsync() {
@@ -733,7 +715,6 @@ public class PrimitivesImpl implements Primitives {
     /**
      * Get complex types with string properties.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Maybe&lt;StringWrapper&gt;} object if successful.
      */
     public Maybe<StringWrapper> getStringAsync() {
@@ -769,7 +750,7 @@ public class PrimitivesImpl implements Primitives {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    public ServiceFuture<Void> putStringAsync(StringWrapper complexBody, final ServiceCallback<Void> serviceCallback) {
+    public ServiceFuture<Void> putStringAsync(StringWrapper complexBody, ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(putStringAsync(complexBody), serviceCallback);
     }
 
@@ -803,7 +784,6 @@ public class PrimitivesImpl implements Primitives {
     /**
      * Get complex types with date properties.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the DateWrapper object if successful.
@@ -819,14 +799,13 @@ public class PrimitivesImpl implements Primitives {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;DateWrapper&gt;} object.
      */
-    public ServiceFuture<DateWrapper> getDateAsync(final ServiceCallback<DateWrapper> serviceCallback) {
+    public ServiceFuture<DateWrapper> getDateAsync(ServiceCallback<DateWrapper> serviceCallback) {
         return ServiceFuture.fromBody(getDateAsync(), serviceCallback);
     }
 
     /**
      * Get complex types with date properties.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, DateWrapper&gt;&gt;} object if successful.
      */
     public Single<RestResponse<Void, DateWrapper>> getDateWithRestResponseAsync() {
@@ -836,7 +815,6 @@ public class PrimitivesImpl implements Primitives {
     /**
      * Get complex types with date properties.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Maybe&lt;DateWrapper&gt;} object if successful.
      */
     public Maybe<DateWrapper> getDateAsync() {
@@ -872,7 +850,7 @@ public class PrimitivesImpl implements Primitives {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    public ServiceFuture<Void> putDateAsync(DateWrapper complexBody, final ServiceCallback<Void> serviceCallback) {
+    public ServiceFuture<Void> putDateAsync(DateWrapper complexBody, ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(putDateAsync(complexBody), serviceCallback);
     }
 
@@ -906,7 +884,6 @@ public class PrimitivesImpl implements Primitives {
     /**
      * Get complex types with datetime properties.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the DatetimeWrapper object if successful.
@@ -922,14 +899,13 @@ public class PrimitivesImpl implements Primitives {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;DatetimeWrapper&gt;} object.
      */
-    public ServiceFuture<DatetimeWrapper> getDateTimeAsync(final ServiceCallback<DatetimeWrapper> serviceCallback) {
+    public ServiceFuture<DatetimeWrapper> getDateTimeAsync(ServiceCallback<DatetimeWrapper> serviceCallback) {
         return ServiceFuture.fromBody(getDateTimeAsync(), serviceCallback);
     }
 
     /**
      * Get complex types with datetime properties.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, DatetimeWrapper&gt;&gt;} object if successful.
      */
     public Single<RestResponse<Void, DatetimeWrapper>> getDateTimeWithRestResponseAsync() {
@@ -939,7 +915,6 @@ public class PrimitivesImpl implements Primitives {
     /**
      * Get complex types with datetime properties.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Maybe&lt;DatetimeWrapper&gt;} object if successful.
      */
     public Maybe<DatetimeWrapper> getDateTimeAsync() {
@@ -975,7 +950,7 @@ public class PrimitivesImpl implements Primitives {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    public ServiceFuture<Void> putDateTimeAsync(DatetimeWrapper complexBody, final ServiceCallback<Void> serviceCallback) {
+    public ServiceFuture<Void> putDateTimeAsync(DatetimeWrapper complexBody, ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(putDateTimeAsync(complexBody), serviceCallback);
     }
 
@@ -1009,7 +984,6 @@ public class PrimitivesImpl implements Primitives {
     /**
      * Get complex types with datetimeRfc1123 properties.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the Datetimerfc1123Wrapper object if successful.
@@ -1025,14 +999,13 @@ public class PrimitivesImpl implements Primitives {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Datetimerfc1123Wrapper&gt;} object.
      */
-    public ServiceFuture<Datetimerfc1123Wrapper> getDateTimeRfc1123Async(final ServiceCallback<Datetimerfc1123Wrapper> serviceCallback) {
+    public ServiceFuture<Datetimerfc1123Wrapper> getDateTimeRfc1123Async(ServiceCallback<Datetimerfc1123Wrapper> serviceCallback) {
         return ServiceFuture.fromBody(getDateTimeRfc1123Async(), serviceCallback);
     }
 
     /**
      * Get complex types with datetimeRfc1123 properties.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, Datetimerfc1123Wrapper&gt;&gt;} object if successful.
      */
     public Single<RestResponse<Void, Datetimerfc1123Wrapper>> getDateTimeRfc1123WithRestResponseAsync() {
@@ -1042,7 +1015,6 @@ public class PrimitivesImpl implements Primitives {
     /**
      * Get complex types with datetimeRfc1123 properties.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Maybe&lt;Datetimerfc1123Wrapper&gt;} object if successful.
      */
     public Maybe<Datetimerfc1123Wrapper> getDateTimeRfc1123Async() {
@@ -1078,7 +1050,7 @@ public class PrimitivesImpl implements Primitives {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    public ServiceFuture<Void> putDateTimeRfc1123Async(Datetimerfc1123Wrapper complexBody, final ServiceCallback<Void> serviceCallback) {
+    public ServiceFuture<Void> putDateTimeRfc1123Async(Datetimerfc1123Wrapper complexBody, ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(putDateTimeRfc1123Async(complexBody), serviceCallback);
     }
 
@@ -1112,7 +1084,6 @@ public class PrimitivesImpl implements Primitives {
     /**
      * Get complex types with duration properties.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the DurationWrapper object if successful.
@@ -1128,14 +1099,13 @@ public class PrimitivesImpl implements Primitives {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;DurationWrapper&gt;} object.
      */
-    public ServiceFuture<DurationWrapper> getDurationAsync(final ServiceCallback<DurationWrapper> serviceCallback) {
+    public ServiceFuture<DurationWrapper> getDurationAsync(ServiceCallback<DurationWrapper> serviceCallback) {
         return ServiceFuture.fromBody(getDurationAsync(), serviceCallback);
     }
 
     /**
      * Get complex types with duration properties.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, DurationWrapper&gt;&gt;} object if successful.
      */
     public Single<RestResponse<Void, DurationWrapper>> getDurationWithRestResponseAsync() {
@@ -1145,7 +1115,6 @@ public class PrimitivesImpl implements Primitives {
     /**
      * Get complex types with duration properties.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Maybe&lt;DurationWrapper&gt;} object if successful.
      */
     public Maybe<DurationWrapper> getDurationAsync() {
@@ -1181,7 +1150,7 @@ public class PrimitivesImpl implements Primitives {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    public ServiceFuture<Void> putDurationAsync(DurationWrapper complexBody, final ServiceCallback<Void> serviceCallback) {
+    public ServiceFuture<Void> putDurationAsync(DurationWrapper complexBody, ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(putDurationAsync(complexBody), serviceCallback);
     }
 
@@ -1215,7 +1184,6 @@ public class PrimitivesImpl implements Primitives {
     /**
      * Get complex types with byte properties.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the ByteWrapper object if successful.
@@ -1231,14 +1199,13 @@ public class PrimitivesImpl implements Primitives {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;ByteWrapper&gt;} object.
      */
-    public ServiceFuture<ByteWrapper> getByteAsync(final ServiceCallback<ByteWrapper> serviceCallback) {
+    public ServiceFuture<ByteWrapper> getByteAsync(ServiceCallback<ByteWrapper> serviceCallback) {
         return ServiceFuture.fromBody(getByteAsync(), serviceCallback);
     }
 
     /**
      * Get complex types with byte properties.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, ByteWrapper&gt;&gt;} object if successful.
      */
     public Single<RestResponse<Void, ByteWrapper>> getByteWithRestResponseAsync() {
@@ -1248,7 +1215,6 @@ public class PrimitivesImpl implements Primitives {
     /**
      * Get complex types with byte properties.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Maybe&lt;ByteWrapper&gt;} object if successful.
      */
     public Maybe<ByteWrapper> getByteAsync() {
@@ -1284,7 +1250,7 @@ public class PrimitivesImpl implements Primitives {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    public ServiceFuture<Void> putByteAsync(ByteWrapper complexBody, final ServiceCallback<Void> serviceCallback) {
+    public ServiceFuture<Void> putByteAsync(ByteWrapper complexBody, ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(putByteAsync(complexBody), serviceCallback);
     }
 

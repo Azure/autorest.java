@@ -14,11 +14,9 @@ import com.microsoft.rest.v2.RestResponse;
 import com.microsoft.rest.v2.ServiceCallback;
 import com.microsoft.rest.v2.ServiceFuture;
 import fixtures.bodystring.models.Colors;
-import fixtures.bodystring.models.ErrorException;
 import fixtures.bodystring.models.RefColorConstant;
 import io.reactivex.Completable;
 import io.reactivex.Maybe;
-import io.reactivex.Observable;
 import io.reactivex.Single;
 
 /**
@@ -29,7 +27,6 @@ public interface Enums {
     /**
      * Get enum value 'red color' from enumeration of 'red color', 'green-color', 'blue_color'.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the Colors object if successful.
@@ -43,12 +40,11 @@ public interface Enums {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Colors&gt;} object.
      */
-    ServiceFuture<Colors> getNotExpandableAsync(final ServiceCallback<Colors> serviceCallback);
+    ServiceFuture<Colors> getNotExpandableAsync(ServiceCallback<Colors> serviceCallback);
 
     /**
      * Get enum value 'red color' from enumeration of 'red color', 'green-color', 'blue_color'.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, Colors&gt;&gt;} object if successful.
      */
     Single<RestResponse<Void, Colors>> getNotExpandableWithRestResponseAsync();
@@ -56,7 +52,6 @@ public interface Enums {
     /**
      * Get enum value 'red color' from enumeration of 'red color', 'green-color', 'blue_color'.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Maybe&lt;Colors&gt;} object if successful.
      */
     Maybe<Colors> getNotExpandableAsync();
@@ -79,7 +74,7 @@ public interface Enums {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    ServiceFuture<Void> putNotExpandableAsync(Colors stringBody, final ServiceCallback<Void> serviceCallback);
+    ServiceFuture<Void> putNotExpandableAsync(Colors stringBody, ServiceCallback<Void> serviceCallback);
 
     /**
      * Sends value 'red color' from enumeration of 'red color', 'green-color', 'blue_color'.
@@ -102,7 +97,6 @@ public interface Enums {
     /**
      * Get enum value 'red color' from enumeration of 'red color', 'green-color', 'blue_color'.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the Colors object if successful.
@@ -116,12 +110,11 @@ public interface Enums {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Colors&gt;} object.
      */
-    ServiceFuture<Colors> getReferencedAsync(final ServiceCallback<Colors> serviceCallback);
+    ServiceFuture<Colors> getReferencedAsync(ServiceCallback<Colors> serviceCallback);
 
     /**
      * Get enum value 'red color' from enumeration of 'red color', 'green-color', 'blue_color'.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, Colors&gt;&gt;} object if successful.
      */
     Single<RestResponse<Void, Colors>> getReferencedWithRestResponseAsync();
@@ -129,7 +122,6 @@ public interface Enums {
     /**
      * Get enum value 'red color' from enumeration of 'red color', 'green-color', 'blue_color'.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Maybe&lt;Colors&gt;} object if successful.
      */
     Maybe<Colors> getReferencedAsync();
@@ -152,7 +144,7 @@ public interface Enums {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    ServiceFuture<Void> putReferencedAsync(Colors enumStringBody, final ServiceCallback<Void> serviceCallback);
+    ServiceFuture<Void> putReferencedAsync(Colors enumStringBody, ServiceCallback<Void> serviceCallback);
 
     /**
      * Sends value 'red color' from enumeration of 'red color', 'green-color', 'blue_color'.
@@ -175,7 +167,6 @@ public interface Enums {
     /**
      * Get value 'green-color' from the constant.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the RefColorConstant object if successful.
@@ -189,12 +180,11 @@ public interface Enums {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;RefColorConstant&gt;} object.
      */
-    ServiceFuture<RefColorConstant> getReferencedConstantAsync(final ServiceCallback<RefColorConstant> serviceCallback);
+    ServiceFuture<RefColorConstant> getReferencedConstantAsync(ServiceCallback<RefColorConstant> serviceCallback);
 
     /**
      * Get value 'green-color' from the constant.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, RefColorConstant&gt;&gt;} object if successful.
      */
     Single<RestResponse<Void, RefColorConstant>> getReferencedConstantWithRestResponseAsync();
@@ -202,7 +192,6 @@ public interface Enums {
     /**
      * Get value 'green-color' from the constant.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Maybe&lt;RefColorConstant&gt;} object if successful.
      */
     Maybe<RefColorConstant> getReferencedConstantAsync();
@@ -225,7 +214,7 @@ public interface Enums {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    ServiceFuture<Void> putReferencedConstantAsync(RefColorConstant enumStringBody, final ServiceCallback<Void> serviceCallback);
+    ServiceFuture<Void> putReferencedConstantAsync(RefColorConstant enumStringBody, ServiceCallback<Void> serviceCallback);
 
     /**
      * Sends value 'green-color' from a constant.

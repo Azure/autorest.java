@@ -1,7 +1,5 @@
 package fixtures.bodycomplex;
 
-import com.microsoft.rest.v2.http.HttpPipeline;
-import com.microsoft.rest.v2.policy.DecodingPolicyFactory;
 import fixtures.bodycomplex.implementation.AutoRestComplexTestServiceImpl;
 import fixtures.bodycomplex.models.BooleanWrapper;
 import fixtures.bodycomplex.models.ByteWrapper;
@@ -27,7 +25,7 @@ public class PrimitiveTests {
 
     @BeforeClass
     public static void setup() {
-        client = new AutoRestComplexTestServiceImpl(HttpPipeline.build(new DecodingPolicyFactory()));
+        client = new AutoRestComplexTestServiceImpl();
     }
 
     @Test

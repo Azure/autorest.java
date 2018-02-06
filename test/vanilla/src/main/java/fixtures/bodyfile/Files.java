@@ -13,10 +13,8 @@ package fixtures.bodyfile;
 import com.microsoft.rest.v2.RestResponse;
 import com.microsoft.rest.v2.ServiceCallback;
 import com.microsoft.rest.v2.ServiceFuture;
-import fixtures.bodyfile.models.ErrorException;
 import io.reactivex.Flowable;
 import io.reactivex.Maybe;
-import io.reactivex.Observable;
 import io.reactivex.Single;
 import java.nio.ByteBuffer;
 
@@ -28,7 +26,6 @@ public interface Files {
     /**
      * Get file.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the Flowable&lt;ByteBuffer&gt; object if successful.
@@ -42,12 +39,11 @@ public interface Files {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Flowable&lt;ByteBuffer&gt;&gt;} object.
      */
-    ServiceFuture<Flowable<ByteBuffer>> getFileAsync(final ServiceCallback<Flowable<ByteBuffer>> serviceCallback);
+    ServiceFuture<Flowable<ByteBuffer>> getFileAsync(ServiceCallback<Flowable<ByteBuffer>> serviceCallback);
 
     /**
      * Get file.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, Flowable&lt;ByteBuffer&gt;&gt;&gt;} object if successful.
      */
     Single<RestResponse<Void, Flowable<ByteBuffer>>> getFileWithRestResponseAsync();
@@ -55,7 +51,6 @@ public interface Files {
     /**
      * Get file.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Maybe&lt;Flowable&lt;ByteBuffer&gt;&gt;} object if successful.
      */
     Maybe<Flowable<ByteBuffer>> getFileAsync();
@@ -63,7 +58,6 @@ public interface Files {
     /**
      * Get a large file.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the Flowable&lt;ByteBuffer&gt; object if successful.
@@ -77,12 +71,11 @@ public interface Files {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Flowable&lt;ByteBuffer&gt;&gt;} object.
      */
-    ServiceFuture<Flowable<ByteBuffer>> getFileLargeAsync(final ServiceCallback<Flowable<ByteBuffer>> serviceCallback);
+    ServiceFuture<Flowable<ByteBuffer>> getFileLargeAsync(ServiceCallback<Flowable<ByteBuffer>> serviceCallback);
 
     /**
      * Get a large file.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, Flowable&lt;ByteBuffer&gt;&gt;&gt;} object if successful.
      */
     Single<RestResponse<Void, Flowable<ByteBuffer>>> getFileLargeWithRestResponseAsync();
@@ -90,7 +83,6 @@ public interface Files {
     /**
      * Get a large file.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Maybe&lt;Flowable&lt;ByteBuffer&gt;&gt;} object if successful.
      */
     Maybe<Flowable<ByteBuffer>> getFileLargeAsync();
@@ -98,7 +90,6 @@ public interface Files {
     /**
      * Get empty file.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the Flowable&lt;ByteBuffer&gt; object if successful.
@@ -112,12 +103,11 @@ public interface Files {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Flowable&lt;ByteBuffer&gt;&gt;} object.
      */
-    ServiceFuture<Flowable<ByteBuffer>> getEmptyFileAsync(final ServiceCallback<Flowable<ByteBuffer>> serviceCallback);
+    ServiceFuture<Flowable<ByteBuffer>> getEmptyFileAsync(ServiceCallback<Flowable<ByteBuffer>> serviceCallback);
 
     /**
      * Get empty file.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, Flowable&lt;ByteBuffer&gt;&gt;&gt;} object if successful.
      */
     Single<RestResponse<Void, Flowable<ByteBuffer>>> getEmptyFileWithRestResponseAsync();
@@ -125,7 +115,6 @@ public interface Files {
     /**
      * Get empty file.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Maybe&lt;Flowable&lt;ByteBuffer&gt;&gt;} object if successful.
      */
     Maybe<Flowable<ByteBuffer>> getEmptyFileAsync();

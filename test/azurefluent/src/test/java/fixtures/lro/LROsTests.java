@@ -3,12 +3,7 @@ package fixtures.lro;
 import com.microsoft.azure.v2.AzureProxy;
 import com.microsoft.azure.v2.CloudException;
 import com.microsoft.rest.v2.ServiceCallback;
-import com.microsoft.rest.v2.http.HttpPipeline;
-import com.microsoft.rest.v2.policy.CookiePolicyFactory;
-import com.microsoft.rest.v2.policy.DecodingPolicyFactory;
-import com.microsoft.rest.v2.policy.PortPolicyFactory;
-import com.microsoft.rest.v2.policy.ProtocolPolicyFactory;
-import com.microsoft.rest.v2.policy.RetryPolicyFactory;
+import com.microsoft.rest.v2.credentials.BasicAuthenticationCredentials;
 import fixtures.lro.implementation.AutoRestLongRunningOperationTestServiceImpl;
 import fixtures.lro.implementation.ProductInner;
 import fixtures.lro.implementation.SkuInner;
@@ -31,13 +26,8 @@ public class LROsTests {
     @BeforeClass
     public static void setup() {
         AzureProxy.setDefaultPollingDelayInMilliseconds(0);
-        final HttpPipeline httpPipeline = HttpPipeline.build(
-            new ProtocolPolicyFactory("http"),
-            new PortPolicyFactory(3000),
-            new RetryPolicyFactory(),
-            new CookiePolicyFactory(),
-            new DecodingPolicyFactory());
-        client = new AutoRestLongRunningOperationTestServiceImpl(httpPipeline);
+        client = new AutoRestLongRunningOperationTestServiceImpl(
+            new BasicAuthenticationCredentials(null, null));
     }
 
     @Test

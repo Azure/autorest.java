@@ -1,7 +1,5 @@
 package fixtures.bodydate;
 
-import com.microsoft.rest.v2.http.HttpPipeline;
-import com.microsoft.rest.v2.policy.DecodingPolicyFactory;
 import fixtures.bodydate.implementation.AutoRestDateTestServiceImpl;
 import org.joda.time.IllegalFieldValueException;
 import org.joda.time.LocalDate;
@@ -17,7 +15,7 @@ public class DateOperationsTests {
 
     @BeforeClass
     public static void setup() {
-        client = new AutoRestDateTestServiceImpl(HttpPipeline.build(new DecodingPolicyFactory()));
+        client = new AutoRestDateTestServiceImpl();
     }
 
     @Test

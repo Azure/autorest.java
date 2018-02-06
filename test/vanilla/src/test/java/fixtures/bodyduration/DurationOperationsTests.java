@@ -1,20 +1,18 @@
 package fixtures.bodyduration;
 
-import com.microsoft.rest.v2.http.HttpPipeline;
-import com.microsoft.rest.v2.policy.DecodingPolicyFactory;
-import fixtures.bodyduration.implementation.AutoRestDurationTestServiceImpl;
 import org.joda.time.Period;
 import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
+import fixtures.bodyduration.implementation.AutoRestDurationTestServiceImpl;
 
 public class DurationOperationsTests {
     private static AutoRestDurationTestService client;
 
     @BeforeClass
     public static void setup() {
-        client = new AutoRestDurationTestServiceImpl(HttpPipeline.build(new DecodingPolicyFactory()));
+        client = new AutoRestDurationTestServiceImpl();
     }
 
     @Test

@@ -27,9 +27,7 @@ import com.microsoft.rest.v2.annotations.UnexpectedResponseExceptionType;
 import fixtures.http.HttpRetrys;
 import fixtures.http.models.ErrorException;
 import io.reactivex.Completable;
-import io.reactivex.Observable;
 import io.reactivex.Single;
-import io.reactivex.functions.Function;
 
 /**
  * An instance of this class provides access to all the operations defined in
@@ -106,7 +104,6 @@ public class HttpRetrysImpl implements HttpRetrys {
     /**
      * Return 408 status code, then 200 after retry.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
@@ -121,14 +118,13 @@ public class HttpRetrysImpl implements HttpRetrys {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    public ServiceFuture<Void> head408Async(final ServiceCallback<Void> serviceCallback) {
+    public ServiceFuture<Void> head408Async(ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(head408Async(), serviceCallback);
     }
 
     /**
      * Return 408 status code, then 200 after retry.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
      */
     public Single<RestResponse<Void, Void>> head408WithRestResponseAsync() {
@@ -138,7 +134,6 @@ public class HttpRetrysImpl implements HttpRetrys {
     /**
      * Return 408 status code, then 200 after retry.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Completable} object if successful.
      */
     public Completable head408Async() {
@@ -149,7 +144,6 @@ public class HttpRetrysImpl implements HttpRetrys {
     /**
      * Return 500 status code, then 200 after retry.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
@@ -164,14 +158,13 @@ public class HttpRetrysImpl implements HttpRetrys {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    public ServiceFuture<Void> put500Async(final ServiceCallback<Void> serviceCallback) {
+    public ServiceFuture<Void> put500Async(ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(put500Async(), serviceCallback);
     }
 
     /**
      * Return 500 status code, then 200 after retry.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
      */
     public Single<RestResponse<Void, Void>> put500WithRestResponseAsync() {
@@ -182,7 +175,6 @@ public class HttpRetrysImpl implements HttpRetrys {
     /**
      * Return 500 status code, then 200 after retry.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Completable} object if successful.
      */
     public Completable put500Async() {
@@ -210,7 +202,7 @@ public class HttpRetrysImpl implements HttpRetrys {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    public ServiceFuture<Void> put500Async(Boolean booleanValue, final ServiceCallback<Void> serviceCallback) {
+    public ServiceFuture<Void> put500Async(Boolean booleanValue, ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(put500Async(booleanValue), serviceCallback);
     }
 
@@ -240,7 +232,6 @@ public class HttpRetrysImpl implements HttpRetrys {
     /**
      * Return 500 status code, then 200 after retry.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
@@ -255,14 +246,13 @@ public class HttpRetrysImpl implements HttpRetrys {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    public ServiceFuture<Void> patch500Async(final ServiceCallback<Void> serviceCallback) {
+    public ServiceFuture<Void> patch500Async(ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(patch500Async(), serviceCallback);
     }
 
     /**
      * Return 500 status code, then 200 after retry.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
      */
     public Single<RestResponse<Void, Void>> patch500WithRestResponseAsync() {
@@ -273,7 +263,6 @@ public class HttpRetrysImpl implements HttpRetrys {
     /**
      * Return 500 status code, then 200 after retry.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Completable} object if successful.
      */
     public Completable patch500Async() {
@@ -301,7 +290,7 @@ public class HttpRetrysImpl implements HttpRetrys {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    public ServiceFuture<Void> patch500Async(Boolean booleanValue, final ServiceCallback<Void> serviceCallback) {
+    public ServiceFuture<Void> patch500Async(Boolean booleanValue, ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(patch500Async(booleanValue), serviceCallback);
     }
 
@@ -331,7 +320,6 @@ public class HttpRetrysImpl implements HttpRetrys {
     /**
      * Return 502 status code, then 200 after retry.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
@@ -346,14 +334,13 @@ public class HttpRetrysImpl implements HttpRetrys {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    public ServiceFuture<Void> get502Async(final ServiceCallback<Void> serviceCallback) {
+    public ServiceFuture<Void> get502Async(ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(get502Async(), serviceCallback);
     }
 
     /**
      * Return 502 status code, then 200 after retry.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
      */
     public Single<RestResponse<Void, Void>> get502WithRestResponseAsync() {
@@ -363,7 +350,6 @@ public class HttpRetrysImpl implements HttpRetrys {
     /**
      * Return 502 status code, then 200 after retry.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Completable} object if successful.
      */
     public Completable get502Async() {
@@ -374,7 +360,6 @@ public class HttpRetrysImpl implements HttpRetrys {
     /**
      * Return 503 status code, then 200 after retry.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
@@ -389,14 +374,13 @@ public class HttpRetrysImpl implements HttpRetrys {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    public ServiceFuture<Void> post503Async(final ServiceCallback<Void> serviceCallback) {
+    public ServiceFuture<Void> post503Async(ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(post503Async(), serviceCallback);
     }
 
     /**
      * Return 503 status code, then 200 after retry.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
      */
     public Single<RestResponse<Void, Void>> post503WithRestResponseAsync() {
@@ -407,7 +391,6 @@ public class HttpRetrysImpl implements HttpRetrys {
     /**
      * Return 503 status code, then 200 after retry.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Completable} object if successful.
      */
     public Completable post503Async() {
@@ -435,7 +418,7 @@ public class HttpRetrysImpl implements HttpRetrys {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    public ServiceFuture<Void> post503Async(Boolean booleanValue, final ServiceCallback<Void> serviceCallback) {
+    public ServiceFuture<Void> post503Async(Boolean booleanValue, ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(post503Async(booleanValue), serviceCallback);
     }
 
@@ -465,7 +448,6 @@ public class HttpRetrysImpl implements HttpRetrys {
     /**
      * Return 503 status code, then 200 after retry.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
@@ -480,14 +462,13 @@ public class HttpRetrysImpl implements HttpRetrys {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    public ServiceFuture<Void> delete503Async(final ServiceCallback<Void> serviceCallback) {
+    public ServiceFuture<Void> delete503Async(ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(delete503Async(), serviceCallback);
     }
 
     /**
      * Return 503 status code, then 200 after retry.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
      */
     public Single<RestResponse<Void, Void>> delete503WithRestResponseAsync() {
@@ -498,7 +479,6 @@ public class HttpRetrysImpl implements HttpRetrys {
     /**
      * Return 503 status code, then 200 after retry.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Completable} object if successful.
      */
     public Completable delete503Async() {
@@ -526,7 +506,7 @@ public class HttpRetrysImpl implements HttpRetrys {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    public ServiceFuture<Void> delete503Async(Boolean booleanValue, final ServiceCallback<Void> serviceCallback) {
+    public ServiceFuture<Void> delete503Async(Boolean booleanValue, ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(delete503Async(booleanValue), serviceCallback);
     }
 
@@ -556,7 +536,6 @@ public class HttpRetrysImpl implements HttpRetrys {
     /**
      * Return 504 status code, then 200 after retry.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
@@ -571,14 +550,13 @@ public class HttpRetrysImpl implements HttpRetrys {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    public ServiceFuture<Void> put504Async(final ServiceCallback<Void> serviceCallback) {
+    public ServiceFuture<Void> put504Async(ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(put504Async(), serviceCallback);
     }
 
     /**
      * Return 504 status code, then 200 after retry.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
      */
     public Single<RestResponse<Void, Void>> put504WithRestResponseAsync() {
@@ -589,7 +567,6 @@ public class HttpRetrysImpl implements HttpRetrys {
     /**
      * Return 504 status code, then 200 after retry.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Completable} object if successful.
      */
     public Completable put504Async() {
@@ -617,7 +594,7 @@ public class HttpRetrysImpl implements HttpRetrys {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    public ServiceFuture<Void> put504Async(Boolean booleanValue, final ServiceCallback<Void> serviceCallback) {
+    public ServiceFuture<Void> put504Async(Boolean booleanValue, ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(put504Async(booleanValue), serviceCallback);
     }
 
@@ -647,7 +624,6 @@ public class HttpRetrysImpl implements HttpRetrys {
     /**
      * Return 504 status code, then 200 after retry.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
@@ -662,14 +638,13 @@ public class HttpRetrysImpl implements HttpRetrys {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    public ServiceFuture<Void> patch504Async(final ServiceCallback<Void> serviceCallback) {
+    public ServiceFuture<Void> patch504Async(ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(patch504Async(), serviceCallback);
     }
 
     /**
      * Return 504 status code, then 200 after retry.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
      */
     public Single<RestResponse<Void, Void>> patch504WithRestResponseAsync() {
@@ -680,7 +655,6 @@ public class HttpRetrysImpl implements HttpRetrys {
     /**
      * Return 504 status code, then 200 after retry.
      *
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link Completable} object if successful.
      */
     public Completable patch504Async() {
@@ -708,7 +682,7 @@ public class HttpRetrysImpl implements HttpRetrys {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    public ServiceFuture<Void> patch504Async(Boolean booleanValue, final ServiceCallback<Void> serviceCallback) {
+    public ServiceFuture<Void> patch504Async(Boolean booleanValue, ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(patch504Async(booleanValue), serviceCallback);
     }
 
