@@ -1524,33 +1524,46 @@ namespace AutoRest.Java
                 }
                 else if (autoRestIModelType is AutoRestCompositeType autoRestCompositeType)
                 {
-                    bool isInnerModelType = innerModelCompositeType.Contains(autoRestCompositeType);
-
-                    string classSubPackage = "";
-                    if (!settings.IsFluent)
-                    {
-                        classSubPackage = ".models";
-                    }
-                    else if (isInnerModelType)
-                    {
-                        classSubPackage = ".implementation";
-                    }
-                    string classPackage = settings.Package + classSubPackage;
-
                     string classTypeName = AutoRestCompositeTypeName(autoRestCompositeType, settings);
-
-                    IDictionary<string, string> extensions = null;
-                    if (autoRestCompositeType.Extensions.ContainsKey(SwaggerExtensions.NameOverrideExtension))
+                    if (settings.IsAzureOrFluent)
                     {
-                        JContainer ext = autoRestCompositeType.Extensions[SwaggerExtensions.NameOverrideExtension] as JContainer;
-                        if (ext != null && ext["name"] != null)
+                        if (classTypeName == ClassType.Resource.Name)
                         {
-                            extensions = new Dictionary<string, string>();
-                            extensions[SwaggerExtensions.NameOverrideExtension] = ext["name"].ToString();
+                            result = ClassType.Resource;
+                        }
+                        else if (classTypeName == ClassType.SubResource.Name)
+                        {
+                            result = ClassType.SubResource;
                         }
                     }
+                    
+                    if (result == null)
+                    {
+                        bool isInnerModelType = innerModelCompositeType.Contains(autoRestCompositeType);
 
-                    result = new ClassType(classPackage, classTypeName, null, extensions, isInnerModelType);
+                        string classSubPackage = "";
+                        if (!settings.IsFluent)
+                        {
+                            classSubPackage = ".models";
+                        }
+                        else if (isInnerModelType)
+                        {
+                            classSubPackage = ".implementation";
+                        }
+                        string classPackage = settings.Package + classSubPackage;
+
+                        IDictionary<string, string> extensions = null;
+                        if (autoRestCompositeType.Extensions.ContainsKey(SwaggerExtensions.NameOverrideExtension))
+                        {
+                            JContainer ext = autoRestCompositeType.Extensions[SwaggerExtensions.NameOverrideExtension] as JContainer;
+                            if (ext != null && ext["name"] != null)
+                            {
+                                extensions = new Dictionary<string, string>();
+                                extensions[SwaggerExtensions.NameOverrideExtension] = ext["name"].ToString();
+                            }
+                        }
+                        result = new ClassType(classPackage, classTypeName, null, extensions, isInnerModelType);
+                    }
                 }
                 else if (autoRestIModelType is AutoRestPrimaryType autoRestPrimaryType)
                 {
@@ -2524,241 +2537,6 @@ namespace AutoRest.Java
 
             HashSet<string> imports = new HashSet<string>();
             serviceClient.AddImportsTo(imports, false, settings);
-            foreach (AutoRestMethod codeModelRestAPIMethod in codeModel.Methods.Where(m => m.Group.IsNullOrEmpty()))
-            {
-                HashSet<string> methodImports = new HashSet<string>()
-                {
-                    "io.reactivex.Observable",
-                    "io.reactivex.Single",
-                    "com.microsoft.rest.v2.RestResponse",
-                    "com.microsoft.rest.v2.ServiceCallback",
-                    "com.microsoft.rest.v2.ServiceFuture",
-                };
-
-                AutoRestResponse restAPIMethodReturnType = codeModelRestAPIMethod.ReturnType;
-                if (restAPIMethodReturnType.Body == null)
-                {
-                    methodImports.Add("io.reactivex.Completable");
-                }
-                else
-                {
-                    methodImports.Add("io.reactivex.Maybe");
-                }
-
-                // parameter types
-                foreach (AutoRestParameter parameter in codeModelRestAPIMethod.Parameters)
-                {
-                    AutoRestIModelType parameterModelType = parameter.ModelType;
-                    if (parameterModelType != null && !IsNullable(parameter))
-                    {
-                        if (parameterModelType is AutoRestPrimaryType parameterModelPrimaryType)
-                        {
-                            AutoRestPrimaryType nonNullableParameterModelPrimaryType = DependencyInjection.New<AutoRestPrimaryType>(parameterModelPrimaryType.KnownPrimaryType);
-                            nonNullableParameterModelPrimaryType.Format = parameterModelPrimaryType.Format;
-                            primaryTypeNotWantNullable.Add(nonNullableParameterModelPrimaryType);
-
-                            parameterModelType = nonNullableParameterModelPrimaryType;
-                        }
-                    }
-                    AutoRestIModelType parameterClientType = ConvertToClientType(parameterModelType);
-                    methodImports.AddRange(GetIModelTypeImports(parameterClientType, settings));
-                }
-
-                // return type
-                AutoRestIModelType restAPIMethodReturnBodyClientType = ConvertToClientType(restAPIMethodReturnType.Body ?? DependencyInjection.New<AutoRestPrimaryType>(AutoRestKnownPrimaryType.None));
-                AutoRestSequenceType restAPIMethodReturnBodyClientSequenceType = restAPIMethodReturnBodyClientType as AutoRestSequenceType;
-
-                bool restAPIMethodReturnTypeIsPaged = GetExtensionBool(codeModelRestAPIMethod.Extensions, "nextLinkMethod") ||
-                    (codeModelRestAPIMethod.Extensions.ContainsKey(AzureExtensions.PageableExtension) &&
-                     codeModelRestAPIMethod.Extensions[AzureExtensions.PageableExtension] != null);
-
-                if (settings.IsAzureOrFluent && restAPIMethodReturnBodyClientSequenceType != null && restAPIMethodReturnTypeIsPaged)
-                {
-                    AutoRestSequenceType resultSequenceType = DependencyInjection.New<AutoRestSequenceType>();
-                    resultSequenceType.ElementType = restAPIMethodReturnBodyClientSequenceType.ElementType;
-                    SequenceTypeSetPageImplType(resultSequenceType, SequenceTypeGetPageImplType(restAPIMethodReturnBodyClientSequenceType));
-                    autoRestPagedListTypes.Add(resultSequenceType);
-                    restAPIMethodReturnBodyClientType = resultSequenceType;
-                }
-
-                methodImports.AddRange(GetIModelTypeImports(restAPIMethodReturnBodyClientType, settings));
-                methodImports.AddRange(GetIModelTypeImports(ConvertToClientType(restAPIMethodReturnType.Headers), settings));
-
-                // exceptions
-                string methodOperationExceptionTypeName;
-                AutoRestIModelType restAPIMethodExceptionType = codeModelRestAPIMethod.DefaultResponse.Body;
-                if (settings.IsAzureOrFluent && (restAPIMethodExceptionType == null || AutoRestIModelTypeName(restAPIMethodExceptionType, settings) == "CloudError"))
-                {
-                    methodOperationExceptionTypeName = "CloudException";
-                }
-                else if (restAPIMethodExceptionType is AutoRestCompositeType compositeReturnType)
-                {
-                    methodOperationExceptionTypeName = compositeReturnType.Name.ToString();
-                    if (settings.IsFluent && !string.IsNullOrEmpty(methodOperationExceptionTypeName) && innerModelCompositeType.Contains(compositeReturnType))
-                    {
-                        methodOperationExceptionTypeName += "Inner";
-                    }
-                    methodOperationExceptionTypeName += "Exception";
-
-                    if (compositeReturnType.Extensions.ContainsKey(SwaggerExtensions.NameOverrideExtension))
-                    {
-                        JContainer ext = compositeReturnType.Extensions[SwaggerExtensions.NameOverrideExtension] as JContainer;
-                        if (ext != null && ext["name"] != null)
-                        {
-                            methodOperationExceptionTypeName = ext["name"].ToString();
-                        }
-                    }
-                }
-                else
-                {
-                    methodOperationExceptionTypeName = "RestException";
-                }
-
-                switch (methodOperationExceptionTypeName)
-                {
-                    case "CloudException":
-                        methodImports.Add("com.microsoft.azure.v2.CloudException");
-                        break;
-                    case "RestException":
-                        methodImports.Add("com.microsoft.rest.v2.RestException");
-                        break;
-                    default:
-                        methodImports.Add($"{settings.Package}.models.{methodOperationExceptionTypeName}");
-                        break;
-                }
-
-                if (settings.IsAzure)
-                {
-                    bool methodIsLongRunningOperation = GetExtensionBool(codeModelRestAPIMethod?.Extensions, AzureExtensions.LongRunningExtension);
-                    if (methodIsLongRunningOperation)
-                    {
-                        methodImports.Add("com.microsoft.azure.v2.OperationStatus");
-                    }
-
-                    bool methodIsPagingOperation = codeModelRestAPIMethod.Extensions.ContainsKey(AzureExtensions.PageableExtension) &&
-                        codeModelRestAPIMethod.Extensions[AzureExtensions.PageableExtension] != null;
-
-                    if (methodIsPagingOperation)
-                    {
-                        methodImports.Remove("com.microsoft.rest.v2.ServiceCallback");
-                        methodImports.Add("com.microsoft.azure.v2.Page");
-                        methodImports.Add("com.microsoft.azure.v2.PagedList");
-                    }
-
-                    if (settings.IsFluent)
-                    {
-                        bool simulateMethodAsPagingOperation = false;
-                        AutoRestMethodGroup methodGroup = codeModelRestAPIMethod.MethodGroup;
-                        if (!string.IsNullOrEmpty(methodGroup?.Name?.ToString()))
-                        {
-                            MethodType restAPIMethodType = MethodType.Other;
-                            string methodUrl = methodTypeTrailing.Replace(methodTypeLeading.Replace(codeModelRestAPIMethod.Url, ""), "");
-                            string[] methodUrlSplits = methodUrl.Split('/');
-                            switch (codeModelRestAPIMethod.HttpMethod)
-                            {
-                                case AutoRestHttpMethod.Get:
-                                    if ((methodUrlSplits.Length == 5 || methodUrlSplits.Length == 7)
-                                        && methodUrlSplits[0].EqualsIgnoreCase("subscriptions")
-                                        && MethodHasSequenceType(codeModelRestAPIMethod.ReturnType.Body, settings))
-                                    {
-                                        if (methodUrlSplits.Length == 5)
-                                        {
-                                            if (methodUrlSplits[2].EqualsIgnoreCase("providers"))
-                                            {
-                                                restAPIMethodType = MethodType.ListBySubscription;
-                                            }
-                                            else
-                                            {
-                                                restAPIMethodType = MethodType.ListByResourceGroup;
-                                            }
-                                        }
-                                        else if (methodUrlSplits[2].EqualsIgnoreCase("resourceGroups"))
-                                        {
-                                            restAPIMethodType = MethodType.ListByResourceGroup;
-                                        }
-                                    }
-                                    else if (IsTopLevelResourceUrl(methodUrlSplits))
-                                    {
-                                        restAPIMethodType = MethodType.Get;
-                                    }
-                                    break;
-
-                                case AutoRestHttpMethod.Delete:
-                                    if (IsTopLevelResourceUrl(methodUrlSplits))
-                                    {
-                                        restAPIMethodType = MethodType.Delete;
-                                    }
-                                    break;
-                            }
-
-                            simulateMethodAsPagingOperation = (restAPIMethodType == MethodType.ListByResourceGroup || restAPIMethodType == MethodType.ListBySubscription) &&
-                                1 == methodGroup.Methods.Count((AutoRestMethod methodGroupMethod) =>
-                                {
-                                    MethodType methodGroupMethodType = MethodType.Other;
-                                    string methodGroupMethodUrl = methodTypeTrailing.Replace(methodTypeLeading.Replace(methodGroupMethod.Url, ""), "");
-                                    string[] methodGroupMethodUrlSplits = methodGroupMethodUrl.Split('/');
-                                    switch (methodGroupMethod.HttpMethod)
-                                    {
-                                        case AutoRestHttpMethod.Get:
-                                            if ((methodGroupMethodUrlSplits.Length == 5 || methodGroupMethodUrlSplits.Length == 7)
-                                            && methodGroupMethodUrlSplits[0].EqualsIgnoreCase("subscriptions")
-                                            && MethodHasSequenceType(methodGroupMethod.ReturnType.Body, settings))
-                                            {
-                                                if (methodGroupMethodUrlSplits.Length == 5)
-                                                {
-                                                    if (methodGroupMethodUrlSplits[2].EqualsIgnoreCase("providers"))
-                                                    {
-                                                        methodGroupMethodType = MethodType.ListBySubscription;
-                                                    }
-                                                    else
-                                                    {
-                                                        methodGroupMethodType = MethodType.ListByResourceGroup;
-                                                    }
-                                                }
-                                                else if (methodGroupMethodUrlSplits[2].EqualsIgnoreCase("resourceGroups"))
-                                                {
-                                                    methodGroupMethodType = MethodType.ListByResourceGroup;
-                                                }
-                                            }
-                                            else if (IsTopLevelResourceUrl(methodGroupMethodUrlSplits))
-                                            {
-                                                methodGroupMethodType = MethodType.Get;
-                                            }
-                                            break;
-
-                                        case AutoRestHttpMethod.Delete:
-                                            if (IsTopLevelResourceUrl(methodGroupMethodUrlSplits))
-                                            {
-                                                methodGroupMethodType = MethodType.Delete;
-                                            }
-                                            break;
-                                    }
-                                    return methodGroupMethodType == restAPIMethodType;
-                                });
-                        }
-                        if (methodIsPagingOperation || simulateMethodAsPagingOperation)
-                        {
-                            methodImports.Add("com.microsoft.azure.v2.PagedList");
-
-                            if (!simulateMethodAsPagingOperation)
-                            {
-                                methodImports.Remove("com.microsoft.rest.v2.ServiceCallback");
-                            }
-
-                            if (restAPIMethodReturnBodyClientSequenceType != null)
-                            {
-                                string pageImplType = SequenceTypeGetPageImplType(restAPIMethodReturnBodyClientSequenceType);
-                                methodImports.AddRange(CompositeTypeImports(pageImplType, false, false, false, true, settings.Package));
-                            }
-                        }
-                    }
-                }
-                imports.AddRange(methodImports);
-            }
-            if (settings.IsFluent)
-            {
-                imports.Add("com.microsoft.azure.v2.AzureClient");
-            }
             javaFile.Import(imports);
 
             javaFile.JavadocComment(comment =>

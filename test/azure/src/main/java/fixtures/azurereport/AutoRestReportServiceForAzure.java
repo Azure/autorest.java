@@ -13,9 +13,7 @@ package fixtures.azurereport;
 import com.microsoft.rest.v2.RestResponse;
 import com.microsoft.rest.v2.ServiceCallback;
 import com.microsoft.rest.v2.ServiceFuture;
-import fixtures.azurereport.models.ErrorException;
 import io.reactivex.Maybe;
-import io.reactivex.Observable;
 import io.reactivex.Single;
 import java.util.Map;
 

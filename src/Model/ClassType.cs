@@ -37,6 +37,8 @@ namespace AutoRest.Java.Model
         public static readonly ClassType Validator = new ClassType("com.microsoft.rest.v2", "Validator", null, null, false);
         public static readonly ClassType Function = new ClassType("io.reactivex.functions", "Function", null, null, false);
         public static readonly ClassType ByteBuffer = new ClassType("java.nio", "ByteBuffer", null, null, false);
+        public static readonly ClassType Resource = new ClassType("com.microsoft.azure.v2", "Resource", null, null, false);
+        public static readonly ClassType SubResource = new ClassType("com.microsoft.azure.v2", "SubResource", null, null, false);
         
         public ClassType(string package, string name, IEnumerable<string> implementationImports, IDictionary<string,string> extensions, bool isInnerModelType)
         {
@@ -81,9 +83,7 @@ namespace AutoRest.Java.Model
 
         public void AddImportsTo(ISet<string> imports, bool includeImplementationImports)
         {
-            if (Package != "java.lang" &&
-                (Name != "Resource" || Package == "com.microsoft.azure.v2") &&
-                (Name != "SubResource" || Package == "com.microsoft.azure.v2"))
+            if (Package != "java.lang")
             {
                 imports.Add($"{Package}.{Name}");
             }

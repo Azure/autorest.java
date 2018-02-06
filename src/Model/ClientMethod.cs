@@ -2,7 +2,6 @@
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
 using AutoRest.Core.Utilities;
-using AutoRest.Extensions;
 using System.Collections.Generic;
 using System.Linq;
 using AutoRestIModelType = AutoRest.Core.Model.IModelType;
@@ -10,7 +9,6 @@ using AutoRestKnownPrimaryType = AutoRest.Core.Model.KnownPrimaryType;
 using AutoRestMethod = AutoRest.Core.Model.Method;
 using AutoRestParameter = AutoRest.Core.Model.Parameter;
 using AutoRestParameterLocation = AutoRest.Core.Model.ParameterLocation;
-using AutoRestPrimaryType = AutoRest.Core.Model.PrimaryType;
 using AutoRestSequenceType = AutoRest.Core.Model.SequenceType;
 
 namespace AutoRest.Java.Model

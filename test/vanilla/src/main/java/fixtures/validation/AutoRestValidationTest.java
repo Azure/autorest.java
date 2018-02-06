@@ -10,15 +10,12 @@
 
 package fixtures.validation;
 
-import com.microsoft.rest.v2.RestException;
 import com.microsoft.rest.v2.RestResponse;
 import com.microsoft.rest.v2.ServiceCallback;
 import com.microsoft.rest.v2.ServiceFuture;
-import fixtures.validation.models.ErrorException;
 import fixtures.validation.models.Product;
 import io.reactivex.Completable;
 import io.reactivex.Maybe;
-import io.reactivex.Observable;
 import io.reactivex.Single;
 
 /**
