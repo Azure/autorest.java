@@ -16,7 +16,6 @@ import com.microsoft.rest.v2.ServiceFuture;
 import fixtures.bodydatetime.models.ErrorException;
 import io.reactivex.Completable;
 import io.reactivex.Maybe;
-import io.reactivex.Observable;
 import io.reactivex.Single;
 import org.joda.time.DateTime;
 

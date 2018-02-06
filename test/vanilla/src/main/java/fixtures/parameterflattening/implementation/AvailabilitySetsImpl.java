@@ -10,7 +10,6 @@
 
 package fixtures.parameterflattening.implementation;
 
-import com.microsoft.rest.v2.RestException;
 import com.microsoft.rest.v2.RestProxy;
 import com.microsoft.rest.v2.RestResponse;
 import com.microsoft.rest.v2.ServiceCallback;
@@ -24,9 +23,8 @@ import com.microsoft.rest.v2.annotations.PathParam;
 import fixtures.parameterflattening.AvailabilitySets;
 import fixtures.parameterflattening.models.AvailabilitySetUpdateParameters;
 import io.reactivex.Completable;
-import io.reactivex.Observable;
 import io.reactivex.Single;
-import io.reactivex.functions.Function;
+import java.util.HashMap;
 import java.util.Map;
 
 /**

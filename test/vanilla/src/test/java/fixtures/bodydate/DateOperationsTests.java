@@ -1,8 +1,5 @@
 package fixtures.bodydate;
 
-import com.microsoft.rest.v2.http.HttpPipeline;
-import com.microsoft.rest.v2.policy.PortPolicyFactory;
-import com.microsoft.rest.v2.policy.ProtocolPolicyFactory;
 import org.joda.time.IllegalFieldValueException;
 import org.joda.time.LocalDate;
 import org.junit.Assert;
@@ -19,9 +16,7 @@ public class DateOperationsTests {
 
     @BeforeClass
     public static void setup() {
-        client = new AutoRestDateTestServiceImpl(HttpPipeline.build(
-                new ProtocolPolicyFactory("http"),
-                new PortPolicyFactory(3000)));
+        client = new AutoRestDateTestServiceImpl();
     }
 
     @Test

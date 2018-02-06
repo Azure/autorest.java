@@ -1,6 +1,5 @@
 package fixtures.subscriptionidapiversion;
 
-import com.microsoft.rest.v2.credentials.BasicAuthenticationCredentials;
 import com.microsoft.rest.v2.http.HttpPipeline;
 import com.microsoft.rest.v2.policy.*;
 import org.junit.Assert;
@@ -21,8 +20,7 @@ public class GroupTests {
             new ProtocolPolicyFactory("http"),
             new HostPolicyFactory("localhost"),
             new PortPolicyFactory(3000),
-            new RetryPolicyFactory(),
-            new CookiePolicyFactory());
+            new DecodingPolicyFactory());
         client = new MicrosoftAzureTestUrlImpl(httpPipeline);
     }
 

@@ -1,11 +1,5 @@
 package fixtures.bodyarray;
 
-import com.microsoft.rest.v2.http.HttpPipeline;
-import com.microsoft.rest.v2.http.HttpRequest;
-import com.microsoft.rest.v2.http.HttpResponse;
-import com.microsoft.rest.v2.http.UrlBuilder;
-import com.microsoft.rest.v2.policy.PortPolicyFactory;
-import com.microsoft.rest.v2.policy.RequestPolicy;
 import org.joda.time.DateTime;
 import org.joda.time.DateTimeZone;
 import org.joda.time.LocalDate;
@@ -14,8 +8,6 @@ import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-import java.net.MalformedURLException;
-import java.net.URL;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
@@ -31,8 +23,8 @@ public class ArrayTests {
     private static AutoRestSwaggerBATArrayService client;
 
     @BeforeClass
-    public static void setup() throws Exception {
-        client = new AutoRestSwaggerBATArrayServiceImpl(HttpPipeline.build(new PortPolicyFactory(3000)));
+    public static void setup() {
+        client = new AutoRestSwaggerBATArrayServiceImpl();
     }
 
     @Test
@@ -47,7 +39,7 @@ public class ArrayTests {
             Assert.assertTrue(false);
         } catch (RuntimeException exception) {
             // expected
-            Assert.assertTrue(exception.getMessage().contains("Unexpected end-of-input"));
+            Assert.assertTrue(exception.getMessage().contains("HTTP response has a malformed body"));
         }
     }
 

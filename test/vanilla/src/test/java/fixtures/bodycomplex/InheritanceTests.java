@@ -1,7 +1,5 @@
 package fixtures.bodycomplex;
 
-import com.microsoft.rest.v2.http.HttpPipeline;
-import com.microsoft.rest.v2.policy.PortPolicyFactory;
 import fixtures.bodycomplex.implementation.AutoRestComplexTestServiceImpl;
 import fixtures.bodycomplex.models.Dog;
 import fixtures.bodycomplex.models.Siamese;
@@ -16,7 +14,7 @@ public class InheritanceTests {
 
     @BeforeClass
     public static void setup() {
-        client = new AutoRestComplexTestServiceImpl(HttpPipeline.build(new PortPolicyFactory(3000)));
+        client = new AutoRestComplexTestServiceImpl();
     }
 
     @Test

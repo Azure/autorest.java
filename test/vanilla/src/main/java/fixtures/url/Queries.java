@@ -16,7 +16,6 @@ import com.microsoft.rest.v2.ServiceFuture;
 import fixtures.url.models.ErrorException;
 import fixtures.url.models.UriColor;
 import io.reactivex.Completable;
-import io.reactivex.Observable;
 import io.reactivex.Single;
 import java.util.List;
 import org.joda.time.DateTime;

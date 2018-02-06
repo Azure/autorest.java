@@ -2,11 +2,7 @@ package fixtures.paging;
 
 import com.microsoft.azure.v2.CloudException;
 import com.microsoft.azure.v2.Page;
-import com.microsoft.rest.v2.policy.CookiePolicyFactory;
-import com.microsoft.rest.v2.http.HttpPipeline;
-import com.microsoft.rest.v2.policy.PortPolicyFactory;
-import com.microsoft.rest.v2.policy.ProtocolPolicyFactory;
-import com.microsoft.rest.v2.policy.RetryPolicyFactory;
+import com.microsoft.rest.v2.credentials.BasicAuthenticationCredentials;
 import fixtures.paging.implementation.AutoRestPagingTestServiceImpl;
 import fixtures.paging.models.CustomParameterGroup;
 import fixtures.paging.models.PagingGetMultiplePagesWithOffsetOptions;
@@ -15,7 +11,6 @@ import fixtures.paging.models.ProductProperties;
 import io.reactivex.disposables.Disposable;
 import org.junit.Assert;
 import org.junit.BeforeClass;
-import org.junit.Ignore;
 import org.junit.Test;
 import io.reactivex.Observer;
 
@@ -30,12 +25,9 @@ public class PagingTests {
 
     @BeforeClass
     public static void setup() {
-        final HttpPipeline httpPipeline = HttpPipeline.build(
-                new ProtocolPolicyFactory("http"),
-                new PortPolicyFactory(3000),
-                new RetryPolicyFactory(),
-                new CookiePolicyFactory());
-        client = new AutoRestPagingTestServiceImpl(httpPipeline);
+        client = new AutoRestPagingTestServiceImpl(
+            new BasicAuthenticationCredentials(null, null)
+        );
     }
 
     @Test

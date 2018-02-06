@@ -23,7 +23,7 @@ namespace AutoRest.Java.Model
         public static GenericType Single(IType typeArgument) => new GenericType("io.reactivex", "Single", typeArgument);
         public static GenericType Function(IType inputType, IType outputType) => new GenericType("io.reactivex.functions", "Function", inputType, outputType);
 
-        public static readonly GenericType FlowableByteArray = Flowable(ArrayType.ByteArray);
+        public static readonly GenericType FlowableByteBuffer = Flowable(ClassType.ByteBuffer);
 
         /// <summary>
         /// Create a new GenericType from the provided properties.

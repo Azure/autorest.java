@@ -2,8 +2,6 @@ package fixtures.lro;
 
 import com.microsoft.azure.v2.AzureProxy;
 import com.microsoft.rest.v2.credentials.BasicAuthenticationCredentials;
-import com.microsoft.rest.v2.http.HttpPipeline;
-import com.microsoft.rest.v2.policy.*;
 import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -11,19 +9,14 @@ import org.junit.Test;
 import fixtures.lro.implementation.AutoRestLongRunningOperationTestServiceImpl;
 import fixtures.lro.implementation.ProductInner;
 
-
 public class LRORetrysTests {
     private static AutoRestLongRunningOperationTestServiceImpl client;
 
     @BeforeClass
     public static void setup() {
         AzureProxy.setDefaultPollingDelayInMilliseconds(0);
-        final HttpPipeline httpPipeline = HttpPipeline.build(
-            new ProtocolPolicyFactory("http"),
-            new PortPolicyFactory(3000),
-            new RetryPolicyFactory(),
-            new CookiePolicyFactory());
-        client = new AutoRestLongRunningOperationTestServiceImpl(httpPipeline);
+        client = new AutoRestLongRunningOperationTestServiceImpl(
+            new BasicAuthenticationCredentials(null, null));
     }
 
     @Test

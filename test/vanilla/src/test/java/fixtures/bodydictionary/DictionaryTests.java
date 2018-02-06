@@ -1,7 +1,5 @@
 package fixtures.bodydictionary;
 
-import com.microsoft.rest.v2.http.HttpPipeline;
-import com.microsoft.rest.v2.policy.PortPolicyFactory;
 import org.joda.time.DateTime;
 import org.joda.time.DateTimeZone;
 import org.joda.time.LocalDate;
@@ -25,7 +23,7 @@ public class DictionaryTests {
 
     @BeforeClass
     public static void setup() {
-        client = new AutoRestSwaggerBATdictionaryServiceImpl(HttpPipeline.build(new PortPolicyFactory(3000)));
+        client = new AutoRestSwaggerBATdictionaryServiceImpl();
     }
 
     @Test
@@ -40,7 +38,7 @@ public class DictionaryTests {
             fail();
         } catch (RuntimeException exception) {
             // expected
-            Assert.assertTrue(exception.getMessage().contains("Unexpected character (','"));
+            Assert.assertTrue(exception.getMessage().contains("HTTP response has a malformed body"));
         }
     }
 
@@ -68,7 +66,7 @@ public class DictionaryTests {
             fail();
         } catch (RuntimeException exception) {
             // expected
-            Assert.assertTrue(exception.getMessage().contains("Unexpected character ('n'"));
+            Assert.assertTrue(exception.getMessage().contains("HTTP response has a malformed body"));
         }
     }
 

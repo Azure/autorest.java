@@ -17,18 +17,16 @@ namespace AutoRest.Java.Model
         /// <param name="interfaceName">The name of the client's interface.</param>
         /// <param name="implementedInterfaces">The interfaces that the client implements.</param>
         /// <param name="restAPI">The REST API that the client will send requests to.</param>
-        /// <param name="imports">The imports for the client.</param>
         /// <param name="serviceClientName">The name of the ServiceClient that contains this MethodGroupClient.</param>
         /// <param name="variableType">The type of this MethodGroupClient when it is used as a variable.</param>
         /// <param name="variableName">The variable name for any instances of this MethodGroupClient.</param>
         /// <param name="clientMethods">The ClientMethods for this MethodGroupClient.</param>
-        public MethodGroupClient(string className, string interfaceName, IEnumerable<string> implementedInterfaces, RestAPI restAPI, IEnumerable<string> imports, string serviceClientName, string variableType, string variableName, IEnumerable<ClientMethod> clientMethods)
+        public MethodGroupClient(string className, string interfaceName, IEnumerable<string> implementedInterfaces, RestAPI restAPI, string serviceClientName, string variableType, string variableName, IEnumerable<ClientMethod> clientMethods)
         {
             ClassName = className;
             InterfaceName = interfaceName;
             ImplementedInterfaces = implementedInterfaces;
             RestAPI = restAPI;
-            Imports = imports;
             ServiceClientName = serviceClientName;
             VariableType = variableType;
             VariableName = variableName;
@@ -54,11 +52,6 @@ namespace AutoRest.Java.Model
         /// Get the REST API that this client will send requests to.
         /// </summary>
         public RestAPI RestAPI { get; }
-
-        /// <summary>
-        /// Get the imports for this client.
-        /// </summary>
-        public IEnumerable<string> Imports { get; }
 
         /// <summary>
         /// Get the name of the ServiceClient that contains this MethodGroupClient.
@@ -96,9 +89,9 @@ namespace AutoRest.Java.Model
             {
                 ClassType proxyType = settings.IsAzureOrFluent ? ClassType.AzureProxy : ClassType.RestProxy;
                 imports.Add(proxyType.FullName);
-            }
 
-            RestAPI.AddImportsTo(imports, includeImplementationImports, settings);
+                RestAPI.AddImportsTo(imports, includeImplementationImports, settings);
+            }
 
             foreach (ClientMethod clientMethod in ClientMethods)
             {

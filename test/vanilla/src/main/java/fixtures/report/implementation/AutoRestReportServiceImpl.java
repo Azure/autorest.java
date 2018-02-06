@@ -26,6 +26,7 @@ import fixtures.report.models.ErrorException;
 import io.reactivex.Maybe;
 import io.reactivex.Single;
 import io.reactivex.functions.Function;
+import java.util.HashMap;
 import java.util.Map;
 
 /**

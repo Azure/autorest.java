@@ -24,9 +24,7 @@ public class ModelFlatteningTests {
 
     @BeforeClass
     public static void setup() {
-        client = new AutoRestResourceFlatteningTestServiceImpl(HttpPipeline.build(
-                new ProtocolPolicyFactory("http"),
-                new PortPolicyFactory(3000)));
+        client = new AutoRestResourceFlatteningTestServiceImpl();
     }
 
     @Test

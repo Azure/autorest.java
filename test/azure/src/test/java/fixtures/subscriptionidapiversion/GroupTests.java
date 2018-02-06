@@ -1,6 +1,7 @@
 package fixtures.subscriptionidapiversion;
 
 import com.microsoft.rest.v2.http.HttpPipeline;
+import com.microsoft.rest.v2.policy.DecodingPolicyFactory;
 import com.microsoft.rest.v2.policy.HostPolicyFactory;
 import com.microsoft.rest.v2.policy.PortPolicyFactory;
 import com.microsoft.rest.v2.policy.ProtocolPolicyFactory;
@@ -22,7 +23,8 @@ public class GroupTests {
             HttpPipeline.build(
                 new ProtocolPolicyFactory("http"),
                 new HostPolicyFactory("localhost"),
-                new PortPolicyFactory(3000)));
+                new PortPolicyFactory(3000),
+                new DecodingPolicyFactory()));
     }
 
     @Test

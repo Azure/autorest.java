@@ -1,15 +1,13 @@
 package fixtures.bodyfile;
 
-import com.microsoft.rest.v2.http.AsyncInputStream;
-import com.microsoft.rest.v2.util.FlowableUtil;
+import com.google.common.io.ByteArrayDataOutput;
+import com.google.common.io.ByteStreams;
+import com.microsoft.rest.v2.util.ByteBufferUtil;
 import io.reactivex.Flowable;
-import io.reactivex.Maybe;
 import io.reactivex.Single;
 import io.reactivex.functions.BiConsumer;
 import io.reactivex.functions.BiFunction;
 import io.reactivex.functions.Function;
-import com.microsoft.rest.v2.http.HttpPipeline;
-import com.microsoft.rest.v2.policy.PortPolicyFactory;
 import org.apache.commons.io.IOUtils;
 import org.junit.Assert;
 import org.junit.BeforeClass;
@@ -17,20 +15,18 @@ import org.junit.Ignore;
 import org.junit.Test;
 
 import java.io.InputStream;
+import java.nio.ByteBuffer;
 
 import fixtures.bodyfile.implementation.AutoRestSwaggerBATFileServiceImpl;
-import org.reactivestreams.Subscriber;
-import org.reactivestreams.Subscription;
 
 import static org.junit.Assert.assertArrayEquals;
-import static org.junit.Assert.fail;
 
 public class FilesTests {
     private static AutoRestSwaggerBATFileService client;
 
     @BeforeClass
     public static void setup() {
-        client = new AutoRestSwaggerBATFileServiceImpl(HttpPipeline.build(new PortPolicyFactory(3000)));
+        client = new AutoRestSwaggerBATFileServiceImpl();
     }
 
     @Test
@@ -38,10 +34,10 @@ public class FilesTests {
         ClassLoader classLoader = getClass().getClassLoader();
         try (InputStream file = classLoader.getResourceAsStream("sample.png")) {
             byte[] actual = client.files().getFileAsync()
-                .flatMapSingle(new Function<Flowable<byte[]>, Single<byte[]>>() {
+                .flatMapSingle(new Function<Flowable<ByteBuffer>, Single<byte[]>>() {
                     @Override
-                    public Single<byte[]> apply(Flowable<byte[]> stream) {
-                        return FlowableUtil.collectBytes(stream);
+                    public Single<byte[]> apply(Flowable<ByteBuffer> stream) {
+                        return coalesce(stream);
                     }
                 }).blockingGet();
             byte[] expected = IOUtils.toByteArray(file);
@@ -51,17 +47,17 @@ public class FilesTests {
 
     @Test
     @Ignore("Uses Transfer-Encoding: chunked which is not currently supported by RestProxy")
-    public void getLargeFile() throws Exception {
+    public void getLargeFile() {
         final long streamSize = 3000L * 1024L * 1024L;
         long skipped = client.files().getFileLargeAsync()
-            .flatMapSingle(new Function<Flowable<byte[]>, Single<Long>>() {
+            .flatMapSingle(new Function<Flowable<ByteBuffer>, Single<Long>>() {
                 @Override
-                public Single<Long> apply(Flowable<byte[]> asyncInputStream) throws Exception {
+                public Single<Long> apply(Flowable<ByteBuffer> asyncInputStream) {
                     // Dispose of the response content stream
-                    return asyncInputStream.reduce(0L, new BiFunction<Long, byte[], Long>() {
+                    return asyncInputStream.reduce(0L, new BiFunction<Long, ByteBuffer, Long>() {
                         @Override
-                        public Long apply(Long sum, byte[] bytes) throws Exception {
-                            return sum + bytes.length;
+                        public Long apply(Long sum, ByteBuffer bytes) {
+                            return sum + bytes.remaining();
                         }
                     });
                 }
@@ -71,8 +67,27 @@ public class FilesTests {
 
     @Test
     public void getEmptyFile() {
-        Flowable<byte[]> stream = client.files().getEmptyFile();
-        final byte[] bytes = FlowableUtil.collectBytes(stream).blockingGet();
+        Flowable<ByteBuffer> stream = client.files().getEmptyFile();
+        final byte[] bytes = coalesce(stream).blockingGet();
         assertArrayEquals(new byte[0], bytes);
+    }
+
+    /**
+     * Coalesce ByteBuffers emitted by a Flowable into a single byte array.
+     * @param content A stream which emits ByteBuffers.
+     * @return A Single which emits the concatenation of all the ByteBuffers given by the source Flowable.
+     */
+    private static Single<byte[]> coalesce(Flowable<ByteBuffer> content) {
+        return content.collectInto(ByteStreams.newDataOutput(), new BiConsumer<ByteArrayDataOutput, ByteBuffer>() {
+            @Override
+            public void accept(ByteArrayDataOutput out, ByteBuffer chunk) {
+                out.write(ByteBufferUtil.toByteArray(chunk));
+            }
+        }).map(new Function<ByteArrayDataOutput, byte[]>() {
+            @Override
+            public byte[] apply(ByteArrayDataOutput out) {
+                return out.toByteArray();
+            }
+        });
     }
 }

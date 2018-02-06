@@ -10,7 +10,6 @@
 
 package fixtures.http.implementation;
 
-import com.microsoft.rest.v2.RestException;
 import com.microsoft.rest.v2.RestProxy;
 import com.microsoft.rest.v2.RestResponse;
 import com.microsoft.rest.v2.ServiceCallback;
@@ -22,13 +21,9 @@ import com.microsoft.rest.v2.annotations.UnexpectedResponseExceptionType;
 import fixtures.http.MultipleResponses;
 import fixtures.http.models.A;
 import fixtures.http.models.AException;
-import fixtures.http.models.B;
-import fixtures.http.models.C;
-import fixtures.http.models.D;
 import fixtures.http.models.ErrorException;
 import io.reactivex.Completable;
 import io.reactivex.Maybe;
-import io.reactivex.Observable;
 import io.reactivex.Single;
 import io.reactivex.functions.Function;
 

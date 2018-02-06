@@ -132,6 +132,11 @@ namespace AutoRest.Java.Model
                     imports.Add(ClassType.Function.FullName);
                 }
 
+                if (Type == ClientMethodType.LongRunningAsyncServiceCallback)
+                {
+                    imports.Add("com.microsoft.azure.v2.util.ServiceFutureUtil");
+                }
+
                 List<AutoRestParameter> methodRetrofitParameters = AutoRestMethod.LogicalParameters.Where(p => p.Location != AutoRestParameterLocation.None).ToList();
                 if (settings.IsAzureOrFluent && AutoRestMethod.Extensions.Get<bool>("nextLinkMethod") == true)
                 {

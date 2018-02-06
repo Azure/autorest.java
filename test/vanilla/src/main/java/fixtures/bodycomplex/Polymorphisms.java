@@ -18,7 +18,6 @@ import fixtures.bodycomplex.models.Fish;
 import fixtures.bodycomplex.models.Salmon;
 import io.reactivex.Completable;
 import io.reactivex.Maybe;
-import io.reactivex.Observable;
 import io.reactivex.Single;
 
 /**

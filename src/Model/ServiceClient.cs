@@ -81,41 +81,44 @@ namespace AutoRest.Java.Model
         /// <param name="includeImplementationImports">Whether or not to include imports that are only necessary for method implementations.</param>
         public void AddImportsTo(ISet<string> imports, bool includeImplementationImports, JavaSettings settings)
         {
-            if (settings.IsAzureOrFluent)
-            {
-                imports.Add("com.microsoft.azure.v2.AzureServiceClient");
-                imports.Add("com.microsoft.azure.v2.AzureProxy");
-            }
-            else
-            {
-                imports.Add("com.microsoft.rest.v2.ServiceClient");
-                imports.Add("com.microsoft.rest.v2.RestProxy");
-            }
-
-            if (!settings.IsFluent)
-            {
-                imports.Add($"{settings.Package}.{InterfaceName}");
-                foreach (MethodGroupClient methodGroupClient in MethodGroupClients)
-                {
-                    imports.Add($"{settings.Package}.{methodGroupClient.InterfaceName}");
-                }
-            }
-
-            foreach (ServiceClientProperty serviceClientProperty in Properties)
-            {
-                serviceClientProperty.AddImportsTo(imports, includeImplementationImports);
-            }
-
-            foreach (Constructor constructor in Constructors)
-            {
-                constructor.AddImportsTo(imports, includeImplementationImports);
-            }
-
-            RestAPI?.AddImportsTo(imports, includeImplementationImports, settings);
-
             foreach (ClientMethod clientMethod in ClientMethods)
             {
                 clientMethod.AddImportsTo(imports, includeImplementationImports, settings);
+            }
+
+            if (includeImplementationImports)
+            {
+                if (settings.IsAzureOrFluent)
+                {
+                    imports.Add("com.microsoft.azure.v2.AzureServiceClient");
+                    imports.Add("com.microsoft.azure.v2.AzureProxy");
+                }
+                else
+                {
+                    imports.Add("com.microsoft.rest.v2.ServiceClient");
+                    imports.Add("com.microsoft.rest.v2.RestProxy");
+                }
+
+                if (!settings.IsFluent)
+                {
+                    imports.Add($"{settings.Package}.{InterfaceName}");
+                    foreach (MethodGroupClient methodGroupClient in MethodGroupClients)
+                    {
+                        imports.Add($"{settings.Package}.{methodGroupClient.InterfaceName}");
+                    }
+                }
+
+                foreach (ServiceClientProperty serviceClientProperty in Properties)
+                {
+                    serviceClientProperty.AddImportsTo(imports, includeImplementationImports);
+                }
+
+                foreach (Constructor constructor in Constructors)
+                {
+                    constructor.AddImportsTo(imports, includeImplementationImports);
+                }
+
+                RestAPI?.AddImportsTo(imports, includeImplementationImports, settings);
             }
         }
     }

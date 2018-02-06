@@ -36,7 +36,8 @@ namespace AutoRest.Java.Model
         public static readonly ClassType RestProxy = new ClassType("com.microsoft.rest.v2", "RestProxy", null, null, false);
         public static readonly ClassType Validator = new ClassType("com.microsoft.rest.v2", "Validator", null, null, false);
         public static readonly ClassType Function = new ClassType("io.reactivex.functions", "Function", null, null, false);
-
+        public static readonly ClassType ByteBuffer = new ClassType("java.nio", "ByteBuffer", null, null, false);
+        
         public ClassType(string package, string name, IEnumerable<string> implementationImports, IDictionary<string,string> extensions, bool isInnerModelType)
         {
             Package = package;

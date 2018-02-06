@@ -16,7 +16,6 @@ import com.microsoft.rest.v2.ServiceFuture;
 import fixtures.http.models.Error;
 import fixtures.http.models.ErrorException;
 import io.reactivex.Maybe;
-import io.reactivex.Observable;
 import io.reactivex.Single;
 
 /**
