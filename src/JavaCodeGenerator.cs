@@ -146,7 +146,7 @@ namespace AutoRest.Java
 
             List<JavaFile> javaFiles = new List<JavaFile>();
 
-            javaFiles.Add(GetServiceClientJavaFile(codeModel, javaSettings));
+            javaFiles.Add(GetServiceClientJavaFile(service.ServiceClient, javaSettings));
 
             foreach (MethodGroupClient methodGroupClient in service.ServiceClient.MethodGroupClients)
             {
@@ -193,7 +193,7 @@ namespace AutoRest.Java
 
             if (!javaSettings.IsFluent)
             {
-                javaFiles.Add(GetServiceClientInterfaceJavaFile(codeModel, javaSettings));
+                javaFiles.Add(GetServiceClientInterfaceJavaFile(service.ServiceClient, javaSettings));
 
                 foreach (MethodGroupClient methodGroupClient in service.ServiceClient.MethodGroupClients)
                 {
@@ -2339,10 +2339,8 @@ namespace AutoRest.Java
             return javaFile;
         }
 
-        public static JavaFile GetServiceClientJavaFile(AutoRestCodeModel codeModel, JavaSettings settings)
+        public static JavaFile GetServiceClientJavaFile(ServiceClient serviceClient, JavaSettings settings)
         {
-            ServiceClient serviceClient = ParseServiceClient(codeModel, settings);
-
             JavaFile javaFile = GetJavaFileWithHeaderAndPackage(implPackage, settings, serviceClient.ClassName);
 
             string serviceClientClassDeclaration = $"{serviceClient.ClassName} extends ";
@@ -2529,10 +2527,8 @@ namespace AutoRest.Java
             return javaFile;
         }
 
-        public static JavaFile GetServiceClientInterfaceJavaFile(AutoRestCodeModel codeModel, JavaSettings settings)
+        public static JavaFile GetServiceClientInterfaceJavaFile(ServiceClient serviceClient, JavaSettings settings)
         {
-            ServiceClient serviceClient = ParseServiceClient(codeModel, settings);
-
             JavaFile javaFile = GetJavaFileWithHeaderAndPackage(null, settings, serviceClient.InterfaceName);
 
             HashSet<string> imports = new HashSet<string>();
