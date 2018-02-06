@@ -3708,7 +3708,9 @@ namespace AutoRest.Java
                     type: GenericType.ServiceCallback(restAPIMethodReturnBodyClientType),
                     name: "serviceCallback",
                     isRequired: true,
-                    annotations: GetClientMethodParameterAnnotations(true, settings));
+                    // GetClientMethodParameterAnnotations() is provided false for isRequired so
+                    // that this parameter won't get marked as NonNull.
+                    annotations: GetClientMethodParameterAnnotations(false, settings));
 
                 GenericType serviceFutureReturnType = GenericType.ServiceFuture(restAPIMethodReturnBodyClientType);
 
