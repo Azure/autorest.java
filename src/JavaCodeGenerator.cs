@@ -1400,7 +1400,14 @@ namespace AutoRest.Java
                             result = GenericType.FlowableByteBuffer;
                             break;
                         case AutoRestKnownPrimaryType.String:
-                            result = ClassType.String;
+                            if (autoRestPrimaryType.Format.EqualsIgnoreCase(ClassType.URL.Name))
+                            {
+                                result = ClassType.URL;
+                            }
+                            else
+                            {
+                                result = ClassType.String;
+                            }
                             break;
                         case AutoRestKnownPrimaryType.TimeSpan:
                             result = ClassType.Period;
