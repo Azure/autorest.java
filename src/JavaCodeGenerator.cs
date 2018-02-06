@@ -148,9 +148,9 @@ namespace AutoRest.Java
 
             javaFiles.Add(GetServiceClientJavaFile(codeModel, javaSettings));
 
-            foreach (AutoRestMethodGroup methodGroup in codeModel.Operations.Where((AutoRestMethodGroup methodGroup) => !string.IsNullOrEmpty(methodGroup?.Name?.ToString())))
+            foreach (MethodGroupClient methodGroupClient in service.ServiceClient.MethodGroupClients)
             {
-                javaFiles.Add(GetMethodGroupClientJavaFile(methodGroup, javaSettings));
+                javaFiles.Add(GetMethodGroupClientJavaFile(methodGroupClient, javaSettings));
             }
 
             foreach (ServiceModel model in service.Models)
@@ -195,10 +195,9 @@ namespace AutoRest.Java
             {
                 javaFiles.Add(GetServiceClientInterfaceJavaFile(codeModel, javaSettings));
 
-                IEnumerable<AutoRestMethodGroup> methodGroups = codeModel.Operations.Where((AutoRestMethodGroup methodGroup) => !string.IsNullOrEmpty(methodGroup?.Name?.ToString()));
-                foreach (AutoRestMethodGroup methodGroup in methodGroups)
+                foreach (MethodGroupClient methodGroupClient in service.ServiceClient.MethodGroupClients)
                 {
-                    javaFiles.Add(GetMethodGroupClientInterfaceJavaFile(methodGroup, javaSettings));
+                    javaFiles.Add(GetMethodGroupClientInterfaceJavaFile(methodGroupClient, javaSettings));
                 }
             }
             else
@@ -2805,10 +2804,8 @@ namespace AutoRest.Java
             return javaFile;
         }
 
-        public static JavaFile GetMethodGroupClientJavaFile(AutoRestMethodGroup methodGroup, JavaSettings settings)
+        public static JavaFile GetMethodGroupClientJavaFile(MethodGroupClient methodGroupClient, JavaSettings settings)
         {
-            MethodGroupClient methodGroupClient = ParseMethodGroupClient(methodGroup, settings);
-
             JavaFile javaFile = GetJavaFileWithHeaderAndPackage(implPackage, settings, methodGroupClient.ClassName);
 
             ISet<string> imports = new HashSet<string>();
@@ -2852,10 +2849,8 @@ namespace AutoRest.Java
             return javaFile;
         }
 
-        public static JavaFile GetMethodGroupClientInterfaceJavaFile(AutoRestMethodGroup methodGroup, JavaSettings settings)
+        public static JavaFile GetMethodGroupClientInterfaceJavaFile(MethodGroupClient methodGroupClient, JavaSettings settings)
         {
-            MethodGroupClient methodGroupClient = ParseMethodGroupClient(methodGroup, settings);
-
             JavaFile javaFile = GetJavaFileWithHeaderAndPackage(null, settings, methodGroupClient.InterfaceName);
 
             HashSet<string> imports = new HashSet<string>();
