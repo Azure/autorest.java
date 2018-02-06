@@ -44,7 +44,7 @@ import io.reactivex.functions.Function;
  * An instance of this class provides access to all the operations defined in
  * LRORetrys.
  */
-public class LRORetrysImpl implements LRORetrys {
+public final class LRORetrysImpl implements LRORetrys {
     /**
      * The proxy service used to perform REST calls.
      */

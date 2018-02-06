@@ -30,7 +30,7 @@ import java.nio.ByteBuffer;
  * An instance of this class provides access to all the operations defined in
  * Files.
  */
-public class FilesImpl implements Files {
+public final class FilesImpl implements Files {
     /**
      * The proxy service used to perform REST calls.
      */

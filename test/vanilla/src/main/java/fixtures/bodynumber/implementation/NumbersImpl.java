@@ -32,7 +32,7 @@ import java.math.BigDecimal;
  * An instance of this class provides access to all the operations defined in
  * Numbers.
  */
-public class NumbersImpl implements Numbers {
+public final class NumbersImpl implements Numbers {
     /**
      * The proxy service used to perform REST calls.
      */

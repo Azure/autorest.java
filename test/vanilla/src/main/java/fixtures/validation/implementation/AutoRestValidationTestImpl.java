@@ -37,7 +37,7 @@ import io.reactivex.functions.Function;
 /**
  * Initializes a new instance of the AutoRestValidationTest type.
  */
-public class AutoRestValidationTestImpl extends ServiceClient implements AutoRestValidationTest {
+public final class AutoRestValidationTestImpl extends ServiceClient implements AutoRestValidationTest {
     /**
      * The proxy service used to perform REST calls.
      */

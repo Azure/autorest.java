@@ -28,7 +28,7 @@ import io.reactivex.Single;
  * An instance of this class provides access to all the operations defined in
  * HeadExceptions.
  */
-public class HeadExceptionsImpl implements HeadExceptions {
+public final class HeadExceptionsImpl implements HeadExceptions {
     /**
      * The proxy service used to perform REST calls.
      */

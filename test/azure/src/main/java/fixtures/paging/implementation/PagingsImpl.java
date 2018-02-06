@@ -40,7 +40,7 @@ import io.reactivex.functions.Function;
  * An instance of this class provides access to all the operations defined in
  * Pagings.
  */
-public class PagingsImpl implements Pagings {
+public final class PagingsImpl implements Pagings {
     /**
      * The proxy service used to perform REST calls.
      */

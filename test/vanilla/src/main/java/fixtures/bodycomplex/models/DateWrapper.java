@@ -16,7 +16,7 @@ import org.joda.time.LocalDate;
 /**
  * The DateWrapper model.
  */
-public class DateWrapper {
+public final class DateWrapper {
     /**
      * The field property.
      */

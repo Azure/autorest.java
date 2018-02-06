@@ -34,7 +34,7 @@ import io.reactivex.functions.Function;
  * An instance of this class provides access to all the operations defined in
  * Polymorphisms.
  */
-public class PolymorphismsImpl implements Polymorphisms {
+public final class PolymorphismsImpl implements Polymorphisms {
     /**
      * The proxy service used to perform REST calls.
      */

@@ -16,7 +16,7 @@ import java.util.Map;
 /**
  * The AvailabilitySetUpdateParameters model.
  */
-public class AvailabilitySetUpdateParameters {
+public final class AvailabilitySetUpdateParameters {
     /**
      * A set of tags.
      * A description about the set of tags.

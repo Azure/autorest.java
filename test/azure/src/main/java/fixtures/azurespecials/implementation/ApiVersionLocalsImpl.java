@@ -29,7 +29,7 @@ import io.reactivex.Single;
  * An instance of this class provides access to all the operations defined in
  * ApiVersionLocals.
  */
-public class ApiVersionLocalsImpl implements ApiVersionLocals {
+public final class ApiVersionLocalsImpl implements ApiVersionLocals {
     /**
      * The proxy service used to perform REST calls.
      */

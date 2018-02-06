@@ -15,7 +15,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 /**
  * Defines headers for deleteAsyncRelativeRetryInvalidJsonPolling operation.
  */
-public class LROSADsDeleteAsyncRelativeRetryInvalidJsonPollingHeaders {
+public final class LROSADsDeleteAsyncRelativeRetryInvalidJsonPollingHeaders {
     /**
      * Location to poll for result status: will be set to
      * /lro/error/deleteasync/retry/failed/operationResults/invalidjsonpolling.

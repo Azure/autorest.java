@@ -19,7 +19,7 @@ import fixtures.bodybyte.Bytes;
 /**
  * Initializes a new instance of the AutoRestSwaggerBATByteService type.
  */
-public class AutoRestSwaggerBATByteServiceImpl extends ServiceClient implements AutoRestSwaggerBATByteService {
+public final class AutoRestSwaggerBATByteServiceImpl extends ServiceClient implements AutoRestSwaggerBATByteService {
     /**
      * The Bytes object to access its operations.
      */

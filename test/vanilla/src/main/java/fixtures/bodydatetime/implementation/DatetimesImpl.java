@@ -32,7 +32,7 @@ import org.joda.time.DateTime;
  * An instance of this class provides access to all the operations defined in
  * Datetimes.
  */
-public class DatetimesImpl implements Datetimes {
+public final class DatetimesImpl implements Datetimes {
     /**
      * The proxy service used to perform REST calls.
      */

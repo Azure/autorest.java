@@ -15,7 +15,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 /**
  * Defines headers for responseProtectedKey operation.
  */
-public class HeaderResponseProtectedKeyHeaders {
+public final class HeaderResponseProtectedKeyHeaders {
     /**
      * response with header value "Content-Type": "text/html".
      */

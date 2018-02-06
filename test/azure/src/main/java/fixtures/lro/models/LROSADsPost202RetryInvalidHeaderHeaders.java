@@ -15,7 +15,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 /**
  * Defines headers for post202RetryInvalidHeader operation.
  */
-public class LROSADsPost202RetryInvalidHeaderHeaders {
+public final class LROSADsPost202RetryInvalidHeaderHeaders {
     /**
      * Location to poll for result status: will be set to /foo.
      */

@@ -15,7 +15,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 /**
  * The product documentation.
  */
-public class ChildProduct {
+public final class ChildProduct {
     /**
      * Constant string.
      */

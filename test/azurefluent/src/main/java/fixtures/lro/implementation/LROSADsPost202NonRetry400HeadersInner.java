@@ -15,7 +15,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 /**
  * Defines headers for post202NonRetry400 operation.
  */
-public class LROSADsPost202NonRetry400HeadersInner {
+public final class LROSADsPost202NonRetry400HeadersInner {
     /**
      * Location to poll for result status: will be set to
      * /lro/retryerror/post/202/retry/200.

@@ -16,14 +16,14 @@ import com.microsoft.rest.v2.http.HttpResponse;
 /**
  * Exception thrown for an invalid response with Error information.
  */
-public class ErrorException extends RestException {
+public final class ErrorException extends RestException {
     /**
      * Initializes a new instance of the ErrorException class.
      *
      * @param message the exception message or the response content if a message is not available.
      * @param response the HTTP response.
      */
-    public ErrorException(final String message, HttpResponse response) {
+    public ErrorException(String message, HttpResponse response) {
         super(message, response);
     }
 
@@ -34,7 +34,7 @@ public class ErrorException extends RestException {
      * @param response the HTTP response.
      * @param body the deserialized response body.
      */
-    public ErrorException(final String message, final HttpResponse response, final Error body) {
+    public ErrorException(String message, HttpResponse response, Error body) {
         super(message, response, body);
     }
 

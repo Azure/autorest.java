@@ -19,7 +19,7 @@ import fixtures.parameterflattening.AvailabilitySets;
 /**
  * Initializes a new instance of the AutoRestParameterFlattening type.
  */
-public class AutoRestParameterFlatteningImpl extends ServiceClient implements AutoRestParameterFlattening {
+public final class AutoRestParameterFlatteningImpl extends ServiceClient implements AutoRestParameterFlattening {
     /**
      * The AvailabilitySets object to access its operations.
      */

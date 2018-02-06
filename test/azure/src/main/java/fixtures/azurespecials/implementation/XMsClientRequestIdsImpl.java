@@ -29,7 +29,7 @@ import io.reactivex.Single;
  * An instance of this class provides access to all the operations defined in
  * XMsClientRequestIds.
  */
-public class XMsClientRequestIdsImpl implements XMsClientRequestIds {
+public final class XMsClientRequestIdsImpl implements XMsClientRequestIds {
     /**
      * The proxy service used to perform REST calls.
      */

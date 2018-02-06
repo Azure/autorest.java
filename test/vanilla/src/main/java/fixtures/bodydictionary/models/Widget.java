@@ -15,7 +15,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 /**
  * The Widget model.
  */
-public class Widget {
+public final class Widget {
     /**
      * The integer property.
      */

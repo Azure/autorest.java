@@ -15,7 +15,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 /**
  * Defines headers for post303 operation.
  */
-public class HttpRedirectsPost303Headers {
+public final class HttpRedirectsPost303Headers {
     /**
      * The redirect location for this request. Possible values include:
      * '/http/success/get/200'.

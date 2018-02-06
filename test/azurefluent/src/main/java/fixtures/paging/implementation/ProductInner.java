@@ -16,7 +16,7 @@ import fixtures.paging.ProductProperties;
 /**
  * The ProductInner model.
  */
-public class ProductInner {
+public final class ProductInner {
     /**
      * The properties property.
      */

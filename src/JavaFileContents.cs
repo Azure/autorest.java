@@ -325,21 +325,9 @@ namespace AutoRest.Java
             }
         }
 
-        public void PublicFinalClass(string classDeclaration, Action<JavaClass> classAction)
+        public void PublicClass(bool isFinal, string classDeclaration, Action<JavaClass> classAction)
         {
-            Block($"public final class {classDeclaration}", (blockAction) =>
-            {
-                if (classAction != null)
-                {
-                    JavaClass javaClass = new JavaClass(this);
-                    classAction.Invoke(javaClass);
-                }
-            });
-        }
-
-        public void PublicClass(string classDeclaration, Action<JavaClass> classAction)
-        {
-            Block($"public class {classDeclaration}", (blockAction) =>
+            Block($"public {(isFinal ? "final " : "")}class {classDeclaration}", (blockAction) =>
             {
                 if (classAction != null)
                 {

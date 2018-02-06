@@ -29,7 +29,7 @@ import io.reactivex.Single;
  * An instance of this class provides access to all the operations defined in
  * PathItems.
  */
-public class PathItemsImpl implements PathItems {
+public final class PathItemsImpl implements PathItems {
     /**
      * The proxy service used to perform REST calls.
      */

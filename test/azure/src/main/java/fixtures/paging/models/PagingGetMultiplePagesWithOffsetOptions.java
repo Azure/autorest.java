@@ -15,7 +15,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 /**
  * Additional parameters for getMultiplePagesWithOffset operation.
  */
-public class PagingGetMultiplePagesWithOffsetOptions {
+public final class PagingGetMultiplePagesWithOffsetOptions {
     /**
      * Sets the maximum number of items to return in the response.
      */

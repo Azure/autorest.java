@@ -20,7 +20,7 @@ import fixtures.bodystring.Strings;
 /**
  * Initializes a new instance of the AutoRestSwaggerBATService type.
  */
-public class AutoRestSwaggerBATServiceImpl extends ServiceClient implements AutoRestSwaggerBATService {
+public final class AutoRestSwaggerBATServiceImpl extends ServiceClient implements AutoRestSwaggerBATService {
     /**
      * The Strings object to access its operations.
      */

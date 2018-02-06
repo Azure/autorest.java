@@ -19,7 +19,7 @@ import com.microsoft.rest.v2.http.HttpPipeline;
 /**
  * Initializes a new instance of the AutoRestHeadExceptionTestServiceImpl type.
  */
-public class AutoRestHeadExceptionTestServiceImpl extends AzureServiceClient {
+public final class AutoRestHeadExceptionTestServiceImpl extends AzureServiceClient {
     /**
      * Gets or sets the preferred language for the response.
      */

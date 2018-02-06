@@ -21,7 +21,7 @@ import fixtures.azureparametergrouping.ParameterGroupings;
 /**
  * Initializes a new instance of the AutoRestParameterGroupingTestService type.
  */
-public class AutoRestParameterGroupingTestServiceImpl extends AzureServiceClient implements AutoRestParameterGroupingTestService {
+public final class AutoRestParameterGroupingTestServiceImpl extends AzureServiceClient implements AutoRestParameterGroupingTestService {
     /**
      * Gets or sets the preferred language for the response.
      */

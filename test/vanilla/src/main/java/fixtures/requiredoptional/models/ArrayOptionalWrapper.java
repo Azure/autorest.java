@@ -16,7 +16,7 @@ import java.util.List;
 /**
  * The ArrayOptionalWrapper model.
  */
-public class ArrayOptionalWrapper {
+public final class ArrayOptionalWrapper {
     /**
      * The value property.
      */

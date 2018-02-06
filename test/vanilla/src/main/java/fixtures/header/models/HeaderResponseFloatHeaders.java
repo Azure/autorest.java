@@ -15,7 +15,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 /**
  * Defines headers for responseFloat operation.
  */
-public class HeaderResponseFloatHeaders {
+public final class HeaderResponseFloatHeaders {
     /**
      * response with header value "value": 0.07 or -3.0.
      */

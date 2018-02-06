@@ -15,7 +15,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 /**
  * Defines headers for responseEnum operation.
  */
-public class HeaderResponseEnumHeaders {
+public final class HeaderResponseEnumHeaders {
     /**
      * response with header values "GREY" or null. Possible values include:
      * 'White', 'black', 'GREY'.

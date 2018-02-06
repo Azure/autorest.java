@@ -29,7 +29,7 @@ import io.reactivex.functions.Function;
  * An instance of this class provides access to all the operations defined in
  * HttpSuccess.
  */
-public class HttpSuccessImpl implements HttpSuccess {
+public final class HttpSuccessImpl implements HttpSuccess {
     /**
      * The proxy service used to perform REST calls.
      */

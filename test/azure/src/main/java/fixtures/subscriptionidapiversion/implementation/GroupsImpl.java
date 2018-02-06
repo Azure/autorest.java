@@ -32,7 +32,7 @@ import io.reactivex.functions.Function;
  * An instance of this class provides access to all the operations defined in
  * Groups.
  */
-public class GroupsImpl implements Groups {
+public final class GroupsImpl implements Groups {
     /**
      * The proxy service used to perform REST calls.
      */

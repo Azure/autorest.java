@@ -16,7 +16,7 @@ import java.util.Map;
 /**
  * The DictionaryWrapper model.
  */
-public class DictionaryWrapper {
+public final class DictionaryWrapper {
     /**
      * The defaultProgram property.
      */

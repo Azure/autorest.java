@@ -45,7 +45,7 @@ import java.util.List;
  * An instance of this class provides access to all the operations defined in
  * Explicits.
  */
-public class ExplicitsImpl implements Explicits {
+public final class ExplicitsImpl implements Explicits {
     /**
      * The proxy service used to perform REST calls.
      */

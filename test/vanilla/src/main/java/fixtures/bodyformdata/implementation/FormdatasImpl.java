@@ -32,7 +32,7 @@ import java.nio.ByteBuffer;
  * An instance of this class provides access to all the operations defined in
  * Formdatas.
  */
-public class FormdatasImpl implements Formdatas {
+public final class FormdatasImpl implements Formdatas {
     /**
      * The proxy service used to perform REST calls.
      */

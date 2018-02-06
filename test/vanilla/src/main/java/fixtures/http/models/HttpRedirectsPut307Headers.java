@@ -15,7 +15,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 /**
  * Defines headers for put307 operation.
  */
-public class HttpRedirectsPut307Headers {
+public final class HttpRedirectsPut307Headers {
     /**
      * The redirect location for this request. Possible values include:
      * '/http/success/put/200'.

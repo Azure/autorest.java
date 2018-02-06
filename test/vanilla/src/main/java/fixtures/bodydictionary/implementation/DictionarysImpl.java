@@ -43,7 +43,7 @@ import org.joda.time.Period;
  * An instance of this class provides access to all the operations defined in
  * Dictionarys.
  */
-public class DictionarysImpl implements Dictionarys {
+public final class DictionarysImpl implements Dictionarys {
     /**
      * The proxy service used to perform REST calls.
      */

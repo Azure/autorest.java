@@ -19,7 +19,7 @@ import com.microsoft.rest.v2.http.HttpPipeline;
 /**
  * Initializes a new instance of the AutoRestLongRunningOperationTestServiceImpl type.
  */
-public class AutoRestLongRunningOperationTestServiceImpl extends AzureServiceClient {
+public final class AutoRestLongRunningOperationTestServiceImpl extends AzureServiceClient {
     /**
      * Gets or sets the preferred language for the response.
      */
