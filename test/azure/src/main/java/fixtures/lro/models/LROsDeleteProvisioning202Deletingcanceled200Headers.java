@@ -15,7 +15,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 /**
  * Defines headers for deleteProvisioning202Deletingcanceled200 operation.
  */
-public class LROsDeleteProvisioning202Deletingcanceled200Headers {
+public final class LROsDeleteProvisioning202Deletingcanceled200Headers {
     /**
      * Location to poll for result status: will be set to
      * /lro/delete/provisioning/202/deleting/200/canceled.

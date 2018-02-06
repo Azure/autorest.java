@@ -15,7 +15,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 /**
  * The SkuInner model.
  */
-public class SkuInner {
+public final class SkuInner {
     /**
      * The name property.
      */

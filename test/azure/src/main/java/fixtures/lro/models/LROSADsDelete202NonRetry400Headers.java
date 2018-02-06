@@ -15,7 +15,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 /**
  * Defines headers for delete202NonRetry400 operation.
  */
-public class LROSADsDelete202NonRetry400Headers {
+public final class LROSADsDelete202NonRetry400Headers {
     /**
      * Location to poll for result status: will be set to
      * /lro/retryerror/delete/202/retry/200.

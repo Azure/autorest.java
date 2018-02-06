@@ -28,7 +28,7 @@ import io.reactivex.Single;
  * An instance of this class provides access to all the operations defined in
  * SubscriptionInMethods.
  */
-public class SubscriptionInMethodsInner {
+public final class SubscriptionInMethodsInner {
     /**
      * The proxy service used to perform REST calls.
      */

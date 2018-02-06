@@ -15,7 +15,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 /**
  * The D model.
  */
-public class D {
+public final class D {
     /**
      * The httpStatusCode property.
      */

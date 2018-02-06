@@ -15,7 +15,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 /**
  * The RefColorConstant model.
  */
-public class RefColorConstant {
+public final class RefColorConstant {
     /**
      * Referenced Color Constant Description.
      */

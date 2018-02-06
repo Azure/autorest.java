@@ -38,7 +38,7 @@ import org.joda.time.LocalDate;
  * An instance of this class provides access to all the operations defined in
  * Paths.
  */
-public class PathsImpl implements Paths {
+public final class PathsImpl implements Paths {
     /**
      * The proxy service used to perform REST calls.
      */

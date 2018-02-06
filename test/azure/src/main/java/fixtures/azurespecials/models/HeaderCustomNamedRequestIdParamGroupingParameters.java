@@ -15,7 +15,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 /**
  * Additional parameters for customNamedRequestIdParamGrouping operation.
  */
-public class HeaderCustomNamedRequestIdParamGroupingParameters {
+public final class HeaderCustomNamedRequestIdParamGroupingParameters {
     /**
      * The fooRequestId.
      */

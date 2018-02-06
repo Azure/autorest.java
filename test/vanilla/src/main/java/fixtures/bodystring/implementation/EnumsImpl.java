@@ -34,7 +34,7 @@ import io.reactivex.functions.Function;
  * An instance of this class provides access to all the operations defined in
  * Enums.
  */
-public class EnumsImpl implements Enums {
+public final class EnumsImpl implements Enums {
     /**
      * The proxy service used to perform REST calls.
      */

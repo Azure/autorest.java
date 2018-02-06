@@ -31,7 +31,7 @@ import io.reactivex.functions.Function;
  * An instance of this class provides access to all the operations defined in
  * Bools.
  */
-public class BoolsImpl implements Bools {
+public final class BoolsImpl implements Bools {
     /**
      * The proxy service used to perform REST calls.
      */

@@ -15,7 +15,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 /**
  * Defines headers for postAsyncNoRetrySucceeded operation.
  */
-public class LROsPostAsyncNoRetrySucceededHeadersInner {
+public final class LROsPostAsyncNoRetrySucceededHeadersInner {
     /**
      * Location to poll for result status: will be set to
      * /lro/putasync/retry/succeeded/operationResults/200.

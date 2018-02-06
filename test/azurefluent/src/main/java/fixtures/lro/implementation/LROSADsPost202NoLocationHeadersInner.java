@@ -15,7 +15,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 /**
  * Defines headers for post202NoLocation operation.
  */
-public class LROSADsPost202NoLocationHeadersInner {
+public final class LROSADsPost202NoLocationHeadersInner {
     /**
      * Location to poll for result status: will not be set.
      */

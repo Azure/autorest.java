@@ -26,7 +26,7 @@ import fixtures.bodycomplex.Readonlypropertys;
 /**
  * Initializes a new instance of the AutoRestComplexTestService type.
  */
-public class AutoRestComplexTestServiceImpl extends ServiceClient implements AutoRestComplexTestService {
+public final class AutoRestComplexTestServiceImpl extends ServiceClient implements AutoRestComplexTestService {
     /**
      * API ID.
      */

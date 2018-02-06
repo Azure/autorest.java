@@ -16,7 +16,7 @@ import java.util.List;
 /**
  * The ArrayWrapper model.
  */
-public class ArrayWrapper {
+public final class ArrayWrapper {
     /**
      * The value property.
      */

@@ -19,7 +19,7 @@ import fixtures.bodydatetime.Datetimes;
 /**
  * Initializes a new instance of the AutoRestDateTimeTestService type.
  */
-public class AutoRestDateTimeTestServiceImpl extends ServiceClient implements AutoRestDateTimeTestService {
+public final class AutoRestDateTimeTestServiceImpl extends ServiceClient implements AutoRestDateTimeTestService {
     /**
      * The Datetimes object to access its operations.
      */

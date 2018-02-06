@@ -33,7 +33,7 @@ import io.reactivex.functions.Function;
  * An instance of this class provides access to all the operations defined in
  * Arrays.
  */
-public class ArraysImpl implements Arrays {
+public final class ArraysImpl implements Arrays {
     /**
      * The proxy service used to perform REST calls.
      */

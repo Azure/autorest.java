@@ -34,7 +34,7 @@ import io.reactivex.functions.Function;
  * An instance of this class provides access to all the operations defined in
  * Basics.
  */
-public class BasicsImpl implements Basics {
+public final class BasicsImpl implements Basics {
     /**
      * The proxy service used to perform REST calls.
      */

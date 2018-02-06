@@ -48,7 +48,7 @@ import org.joda.time.Period;
  * An instance of this class provides access to all the operations defined in
  * Headers.
  */
-public class HeadersImpl implements Headers {
+public final class HeadersImpl implements Headers {
     /**
      * The proxy service used to perform REST calls.
      */

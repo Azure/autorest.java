@@ -19,7 +19,7 @@ import fixtures.custombaseurimoreoptions.Paths;
 /**
  * Initializes a new instance of the AutoRestParameterizedCustomHostTestClient type.
  */
-public class AutoRestParameterizedCustomHostTestClientImpl extends ServiceClient implements AutoRestParameterizedCustomHostTestClient {
+public final class AutoRestParameterizedCustomHostTestClientImpl extends ServiceClient implements AutoRestParameterizedCustomHostTestClient {
     /**
      * The subscription id with value 'test12'.
      */

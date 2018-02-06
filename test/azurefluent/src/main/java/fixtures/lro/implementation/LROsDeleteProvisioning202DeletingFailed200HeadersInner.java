@@ -15,7 +15,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 /**
  * Defines headers for deleteProvisioning202DeletingFailed200 operation.
  */
-public class LROsDeleteProvisioning202DeletingFailed200HeadersInner {
+public final class LROsDeleteProvisioning202DeletingFailed200HeadersInner {
     /**
      * Location to poll for result status: will be set to
      * /lro/delete/provisioning/202/deleting/200/failed.

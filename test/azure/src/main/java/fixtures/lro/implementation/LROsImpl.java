@@ -63,7 +63,7 @@ import io.reactivex.functions.Function;
  * An instance of this class provides access to all the operations defined in
  * LROs.
  */
-public class LROsImpl implements LROs {
+public final class LROsImpl implements LROs {
     /**
      * The proxy service used to perform REST calls.
      */

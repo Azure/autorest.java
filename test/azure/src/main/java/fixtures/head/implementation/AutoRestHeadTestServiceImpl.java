@@ -21,7 +21,7 @@ import fixtures.head.HttpSuccess;
 /**
  * Initializes a new instance of the AutoRestHeadTestService type.
  */
-public class AutoRestHeadTestServiceImpl extends AzureServiceClient implements AutoRestHeadTestService {
+public final class AutoRestHeadTestServiceImpl extends AzureServiceClient implements AutoRestHeadTestService {
     /**
      * Gets or sets the preferred language for the response.
      */

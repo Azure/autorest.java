@@ -15,7 +15,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 /**
  * The B model.
  */
-public class B extends A {
+public final class B extends A {
     /**
      * The textStatusCode property.
      */

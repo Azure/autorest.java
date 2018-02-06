@@ -20,7 +20,7 @@ import fixtures.requiredoptional.Implicits;
 /**
  * Initializes a new instance of the AutoRestRequiredOptionalTestService type.
  */
-public class AutoRestRequiredOptionalTestServiceImpl extends ServiceClient implements AutoRestRequiredOptionalTestService {
+public final class AutoRestRequiredOptionalTestServiceImpl extends ServiceClient implements AutoRestRequiredOptionalTestService {
     /**
      * number of items to skip.
      */

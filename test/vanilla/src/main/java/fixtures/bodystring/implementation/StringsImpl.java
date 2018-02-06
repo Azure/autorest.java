@@ -33,7 +33,7 @@ import io.reactivex.functions.Function;
  * An instance of this class provides access to all the operations defined in
  * Strings.
  */
-public class StringsImpl implements Strings {
+public final class StringsImpl implements Strings {
     /**
      * The proxy service used to perform REST calls.
      */

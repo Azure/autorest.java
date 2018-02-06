@@ -35,7 +35,7 @@ import org.joda.time.DateTimeZone;
  * An instance of this class provides access to all the operations defined in
  * Ints.
  */
-public class IntsImpl implements Ints {
+public final class IntsImpl implements Ints {
     /**
      * The proxy service used to perform REST calls.
      */

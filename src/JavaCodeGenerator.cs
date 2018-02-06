@@ -1968,7 +1968,7 @@ namespace AutoRest.Java
                 comment.Description("An instance of this class defines a page of Azure resources and a link to get the next page of resources, if any.");
                 comment.Param("<T>", "type of Azure resource");
             });
-            javaFile.PublicClass($"{pageClass.ClassName}<T> implements Page<T>", classBlock =>
+            javaFile.PublicFinalClass($"{pageClass.ClassName}<T> implements Page<T>", classBlock =>
             {
                 classBlock.JavadocComment(comment =>
                 {
@@ -2042,7 +2042,7 @@ namespace AutoRest.Java
             JavaFile javaFile = GetJavaFileWithHeaderAndPackage(implPackage, settings, xmlSequenceWrapper.WrapperClassName);
             javaFile.Import(xmlSequenceWrapper.Imports);
             javaFile.Annotation($"JacksonXmlRootElement(localName = \"{xmlElementName}\")");
-            javaFile.PublicClass(xmlSequenceWrapper.WrapperClassName, classBlock =>
+            javaFile.PublicFinalClass(xmlSequenceWrapper.WrapperClassName, classBlock =>
             {
                 classBlock.Annotation($"JacksonXmlProperty(localName = \"{xmlElementName}\")");
                 classBlock.PrivateFinalMemberVariable(xmlSequenceWrapper.SequenceType, xmlElementNameCamelCase);
@@ -2091,7 +2091,7 @@ namespace AutoRest.Java
                 string serviceClientTypeName = settings.IsFluent ? serviceClient.ClassName : serviceClient.InterfaceName;
                 comment.Description($"Initializes a new instance of the {serviceClientTypeName} type.");
             });
-            javaFile.PublicClass(serviceClientClassDeclaration, classBlock =>
+            javaFile.PublicFinalClass(serviceClientClassDeclaration, classBlock =>
             {
                 // Add proxy service member variable
                 if (serviceClient.RestAPI != null)
@@ -2320,7 +2320,7 @@ namespace AutoRest.Java
             {
                 comment.Description($"An instance of this class provides access to all the operations defined in {methodGroupClient.InterfaceName}.");
             });
-            javaFile.PublicClass($"{methodGroupClient.ClassName}{parentDeclaration}", classBlock =>
+            javaFile.PublicFinalClass($"{methodGroupClient.ClassName}{parentDeclaration}", classBlock =>
             {
                 classBlock.JavadocComment($"The proxy service used to perform REST calls.");
                 classBlock.PrivateMemberVariable(methodGroupClient.RestAPI.Name, "service");
@@ -2459,10 +2459,9 @@ namespace AutoRest.Java
                 comment.Description(model.Description);
             });
 
+            bool hasDerivedModels = model.DerivedModels.Any();
             if (model.IsPolymorphic)
             {
-                bool hasDerivedModels = model.DerivedModels.Any();
-
                 javaFile.Annotation($"JsonTypeInfo(use = JsonTypeInfo.Id.NAME, include = JsonTypeInfo.As.PROPERTY, property = \"{model.PolymorphicDiscriminator}\"{(hasDerivedModels ? $", defaultImpl = {model.Name}.class" : "")})");
                 javaFile.Annotation($"JsonTypeName(\"{model.SerializedName}\")");
 
@@ -2494,12 +2493,14 @@ namespace AutoRest.Java
                 javaFile.Annotation("JsonFlatten");
             }
 
+            bool isFinal = !hasDerivedModels && !model.NeedsFlatten;
+
             string classNameWithBaseType = model.Name;
             if (model.ParentModel != null)
             {
                 classNameWithBaseType += $" extends {model.ParentModel.Name}";
             }
-            javaFile.PublicClass(classNameWithBaseType, (classBlock) =>
+            javaFile.PublicClass(isFinal, classNameWithBaseType, (classBlock) =>
             {
                 foreach (ServiceModelProperty property in model.Properties)
                 {
@@ -2687,7 +2688,7 @@ namespace AutoRest.Java
             {
                 comment.Description($"Exception thrown for an invalid response with {exception.ErrorName} information.");
             });
-            javaFile.Block($"public class {exception.Name} extends RestException", (classBlock) =>
+            javaFile.PublicFinalClass($"{exception.Name} extends RestException", (classBlock) =>
             {
                 classBlock.JavadocComment((comment) =>
                 {
@@ -2695,11 +2696,11 @@ namespace AutoRest.Java
                     comment.Param("message", "the exception message or the response content if a message is not available");
                     comment.Param("response", "the HTTP response");
                 });
-                classBlock.Block($"public {exception.Name}(final String message, HttpResponse response)", (constructorBlock) =>
+                classBlock.PublicConstructor($"{exception.Name}(String message, HttpResponse response)", (constructorBlock) =>
                 {
                     constructorBlock.Line("super(message, response);");
                 });
-                classBlock.Line();
+                
                 classBlock.JavadocComment((comment) =>
                 {
                     comment.Description($"Initializes a new instance of the {exception.Name} class.");
@@ -2707,13 +2708,13 @@ namespace AutoRest.Java
                     comment.Param("response", "the HTTP response");
                     comment.Param("body", "the deserialized response body");
                 });
-                classBlock.Block($"public {exception.Name}(final String message, final HttpResponse response, final {exception.ErrorName} body)", (constructorBlock) =>
+                classBlock.PublicConstructor($"{exception.Name}(String message, HttpResponse response, {exception.ErrorName} body)", (constructorBlock) =>
                 {
                     constructorBlock.Line("super(message, response, body);");
                 });
-                classBlock.Line();
+                
                 classBlock.Annotation("Override");
-                classBlock.Block($"public {exception.ErrorName} body()", (methodBlock) =>
+                classBlock.PublicMethod($"{exception.ErrorName} body()", (methodBlock) =>
                 {
                     methodBlock.Return($"({exception.ErrorName}) super.body()");
                 });

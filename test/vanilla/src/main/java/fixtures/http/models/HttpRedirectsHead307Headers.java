@@ -15,7 +15,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 /**
  * Defines headers for head307 operation.
  */
-public class HttpRedirectsHead307Headers {
+public final class HttpRedirectsHead307Headers {
     /**
      * The redirect location for this request. Possible values include:
      * '/http/success/head/200'.

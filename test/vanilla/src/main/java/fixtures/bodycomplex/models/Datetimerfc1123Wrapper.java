@@ -17,7 +17,7 @@ import org.joda.time.DateTime;
 /**
  * The Datetimerfc1123Wrapper model.
  */
-public class Datetimerfc1123Wrapper {
+public final class Datetimerfc1123Wrapper {
     /**
      * The field property.
      */

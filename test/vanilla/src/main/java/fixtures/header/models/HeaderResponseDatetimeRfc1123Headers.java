@@ -17,7 +17,7 @@ import org.joda.time.DateTime;
 /**
  * Defines headers for responseDatetimeRfc1123 operation.
  */
-public class HeaderResponseDatetimeRfc1123Headers {
+public final class HeaderResponseDatetimeRfc1123Headers {
     /**
      * response with header values "Wed, 01 Jan 2010 12:34:56 GMT" or "Mon, 01
      * Jan 0001 00:00:00 GMT".

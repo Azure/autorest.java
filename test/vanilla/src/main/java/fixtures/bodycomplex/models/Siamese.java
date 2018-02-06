@@ -15,7 +15,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 /**
  * The Siamese model.
  */
-public class Siamese extends Cat {
+public final class Siamese extends Cat {
     /**
      * The breed property.
      */

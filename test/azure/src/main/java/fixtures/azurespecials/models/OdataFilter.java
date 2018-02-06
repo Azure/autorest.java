@@ -15,7 +15,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 /**
  * The OdataFilter model.
  */
-public class OdataFilter {
+public final class OdataFilter {
     /**
      * The id property.
      */

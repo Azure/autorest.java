@@ -36,7 +36,7 @@ import org.joda.time.LocalDate;
  * An instance of this class provides access to all the operations defined in
  * Queries.
  */
-public class QueriesImpl implements Queries {
+public final class QueriesImpl implements Queries {
     /**
      * The proxy service used to perform REST calls.
      */

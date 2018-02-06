@@ -29,7 +29,7 @@ import io.reactivex.Single;
  * An instance of this class provides access to all the operations defined in
  * SubscriptionInCredentials.
  */
-public class SubscriptionInCredentialsInner {
+public final class SubscriptionInCredentialsInner {
     /**
      * The proxy service used to perform REST calls.
      */

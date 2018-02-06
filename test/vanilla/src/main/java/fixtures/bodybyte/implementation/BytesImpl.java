@@ -31,7 +31,7 @@ import io.reactivex.functions.Function;
  * An instance of this class provides access to all the operations defined in
  * Bytes.
  */
-public class BytesImpl implements Bytes {
+public final class BytesImpl implements Bytes {
     /**
      * The proxy service used to perform REST calls.
      */

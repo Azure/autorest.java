@@ -15,7 +15,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 /**
  * Defines headers for putAsyncRelativeRetryInvalidJsonPolling operation.
  */
-public class LROSADsPutAsyncRelativeRetryInvalidJsonPollingHeaders {
+public final class LROSADsPutAsyncRelativeRetryInvalidJsonPollingHeaders {
     /**
      * Location to poll for result status: will be set to
      * /lro/putasync/retry/failed/operationResults/200.

@@ -15,7 +15,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 /**
  * Defines headers for responseBool operation.
  */
-public class HeaderResponseBoolHeaders {
+public final class HeaderResponseBoolHeaders {
     /**
      * response with header value "value": true or false.
      */

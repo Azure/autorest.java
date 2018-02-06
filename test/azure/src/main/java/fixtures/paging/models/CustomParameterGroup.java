@@ -17,7 +17,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
  * Paging_getMultiplePagesFragmentWithGroupingNextLink,
  * Paging_nextFragmentWithGrouping.
  */
-public class CustomParameterGroup {
+public final class CustomParameterGroup {
     /**
      * Sets the api version to use.
      */

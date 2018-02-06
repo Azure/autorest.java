@@ -16,7 +16,7 @@ import org.joda.time.DateTime;
 /**
  * The DatetimeWrapper model.
  */
-public class DatetimeWrapper {
+public final class DatetimeWrapper {
     /**
      * The field property.
      */

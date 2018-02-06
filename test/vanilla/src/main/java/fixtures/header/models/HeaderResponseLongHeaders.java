@@ -15,7 +15,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 /**
  * Defines headers for responseLong operation.
  */
-public class HeaderResponseLongHeaders {
+public final class HeaderResponseLongHeaders {
     /**
      * response with header value "value": 105 or -2.
      */

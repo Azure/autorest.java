@@ -16,7 +16,7 @@ import org.joda.time.Period;
 /**
  * Defines headers for responseDuration operation.
  */
-public class HeaderResponseDurationHeaders {
+public final class HeaderResponseDurationHeaders {
     /**
      * response with header values "P123DT22H14M12.011S".
      */

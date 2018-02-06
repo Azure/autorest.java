@@ -15,7 +15,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 /**
  * Defines headers for get301 operation.
  */
-public class HttpRedirectsGet301Headers {
+public final class HttpRedirectsGet301Headers {
     /**
      * The redirect location for this request. Possible values include:
      * '/http/success/get/200'.

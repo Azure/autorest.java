@@ -15,7 +15,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 /**
  * Defines headers for put301 operation.
  */
-public class HttpRedirectsPut301Headers {
+public final class HttpRedirectsPut301Headers {
     /**
      * The redirect location for this request. Possible values include:
      * '/http/failure/500'.

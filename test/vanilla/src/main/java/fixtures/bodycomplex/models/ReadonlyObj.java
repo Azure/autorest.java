@@ -15,7 +15,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 /**
  * The ReadonlyObj model.
  */
-public class ReadonlyObj {
+public final class ReadonlyObj {
     /**
      * The id property.
      */

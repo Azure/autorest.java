@@ -16,7 +16,7 @@ import java.util.List;
 /**
  * The product documentation.
  */
-public class Product {
+public final class Product {
     /**
      * Non required array of unique items from 0 to 6 elements.
      */

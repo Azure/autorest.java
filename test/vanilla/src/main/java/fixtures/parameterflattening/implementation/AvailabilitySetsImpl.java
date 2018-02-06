@@ -31,7 +31,7 @@ import java.util.Map;
  * An instance of this class provides access to all the operations defined in
  * AvailabilitySets.
  */
-public class AvailabilitySetsImpl implements AvailabilitySets {
+public final class AvailabilitySetsImpl implements AvailabilitySets {
     /**
      * The proxy service used to perform REST calls.
      */

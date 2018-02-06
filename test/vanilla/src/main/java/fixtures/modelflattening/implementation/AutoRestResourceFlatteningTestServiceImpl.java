@@ -46,7 +46,7 @@ import java.util.Map;
 /**
  * Initializes a new instance of the AutoRestResourceFlatteningTestService type.
  */
-public class AutoRestResourceFlatteningTestServiceImpl extends ServiceClient implements AutoRestResourceFlatteningTestService {
+public final class AutoRestResourceFlatteningTestServiceImpl extends ServiceClient implements AutoRestResourceFlatteningTestService {
     /**
      * The proxy service used to perform REST calls.
      */
