@@ -3870,8 +3870,8 @@ namespace AutoRest.Java
                 }
                 else if (restAPIMethod.IsPagingOperation)
                 {
-                    string nextMethodName = autoRestMethod.Extensions.GetValue<Fixable<string>>("nextMethodName")?.ToCamelCase();
-                    string nextMethodGroup = autoRestMethod.Extensions.GetValue<Fixable<string>>("nextMethodGroup");
+                    string nextMethodName = autoRestMethod.Extensions?.GetValue<Fixable<string>>("nextMethodName")?.ToCamelCase();
+                    string nextMethodGroup = autoRestMethod.Extensions?.GetValue<Fixable<string>>("nextMethodGroup") ?? null;
 
                     nextMethod = autoRestMethod.CodeModel.Methods
                         .FirstOrDefault((AutoRestMethod codeModelMethod) =>
