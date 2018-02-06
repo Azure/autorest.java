@@ -39,6 +39,7 @@ namespace AutoRest.Java.Model
         public static readonly ClassType ByteBuffer = new ClassType("java.nio", "ByteBuffer", null, null, false);
         public static readonly ClassType Resource = new ClassType("com.microsoft.azure.v2", "Resource", null, null, false);
         public static readonly ClassType SubResource = new ClassType("com.microsoft.azure.v2", "SubResource", null, null, false);
+        public static readonly ClassType URL = new ClassType("java.net", "URL", null, null, false);
         
         public ClassType(string package, string name, IEnumerable<string> implementationImports, IDictionary<string,string> extensions, bool isInnerModelType)
         {
