@@ -35,7 +35,7 @@ import io.reactivex.functions.Function;
  * An instance of this class provides access to all the operations defined in
  * Implicits.
  */
-public class ImplicitsImpl implements Implicits {
+public final class ImplicitsImpl implements Implicits {
     /**
      * The proxy service used to perform REST calls.
      */

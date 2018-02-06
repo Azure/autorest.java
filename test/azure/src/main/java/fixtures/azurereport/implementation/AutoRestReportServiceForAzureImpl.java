@@ -35,7 +35,7 @@ import java.util.Map;
 /**
  * Initializes a new instance of the AutoRestReportServiceForAzure type.
  */
-public class AutoRestReportServiceForAzureImpl extends AzureServiceClient implements AutoRestReportServiceForAzure {
+public final class AutoRestReportServiceForAzureImpl extends AzureServiceClient implements AutoRestReportServiceForAzure {
     /**
      * The proxy service used to perform REST calls.
      */

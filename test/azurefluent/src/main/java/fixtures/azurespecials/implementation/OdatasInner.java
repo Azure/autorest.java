@@ -28,7 +28,7 @@ import io.reactivex.Single;
  * An instance of this class provides access to all the operations defined in
  * Odatas.
  */
-public class OdatasInner {
+public final class OdatasInner {
     /**
      * The proxy service used to perform REST calls.
      */

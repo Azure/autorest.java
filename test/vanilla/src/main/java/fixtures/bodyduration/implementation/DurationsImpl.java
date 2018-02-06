@@ -32,7 +32,7 @@ import org.joda.time.Period;
  * An instance of this class provides access to all the operations defined in
  * Durations.
  */
-public class DurationsImpl implements Durations {
+public final class DurationsImpl implements Durations {
     /**
      * The proxy service used to perform REST calls.
      */

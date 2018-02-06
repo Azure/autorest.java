@@ -15,7 +15,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 /**
  * Defines headers for putAsyncNoHeaderInRetry operation.
  */
-public class LROsPutAsyncNoHeaderInRetryHeadersInner {
+public final class LROsPutAsyncNoHeaderInRetryHeadersInner {
     /**
      * The azureAsyncOperation property.
      */

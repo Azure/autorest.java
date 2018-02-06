@@ -15,7 +15,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 /**
  * Defines headers for deleteAsyncRelativeRetryInvalidHeader operation.
  */
-public class LROSADsDeleteAsyncRelativeRetryInvalidHeaderHeaders {
+public final class LROSADsDeleteAsyncRelativeRetryInvalidHeaderHeaders {
     /**
      * Location to poll for result status: will be set to /foo.
      */

@@ -31,7 +31,7 @@ import io.reactivex.functions.Function;
  * An instance of this class provides access to all the operations defined in
  * MultipleResponses.
  */
-public class MultipleResponsesImpl implements MultipleResponses {
+public final class MultipleResponsesImpl implements MultipleResponses {
     /**
      * The proxy service used to perform REST calls.
      */

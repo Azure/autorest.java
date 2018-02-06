@@ -29,7 +29,7 @@ import io.reactivex.Single;
  * An instance of this class provides access to all the operations defined in
  * Odatas.
  */
-public class OdatasImpl implements Odatas {
+public final class OdatasImpl implements Odatas {
     /**
      * The proxy service used to perform REST calls.
      */

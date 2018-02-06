@@ -32,7 +32,7 @@ import org.joda.time.LocalDate;
  * An instance of this class provides access to all the operations defined in
  * Dates.
  */
-public class DatesImpl implements Dates {
+public final class DatesImpl implements Dates {
     /**
      * The proxy service used to perform REST calls.
      */

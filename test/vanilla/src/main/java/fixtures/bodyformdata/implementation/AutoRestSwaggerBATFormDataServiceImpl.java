@@ -19,7 +19,7 @@ import fixtures.bodyformdata.Formdatas;
 /**
  * Initializes a new instance of the AutoRestSwaggerBATFormDataService type.
  */
-public class AutoRestSwaggerBATFormDataServiceImpl extends ServiceClient implements AutoRestSwaggerBATFormDataService {
+public final class AutoRestSwaggerBATFormDataServiceImpl extends ServiceClient implements AutoRestSwaggerBATFormDataService {
     /**
      * The Formdatas object to access its operations.
      */

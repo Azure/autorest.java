@@ -43,7 +43,7 @@ import java.util.Map;
 /**
  * Initializes a new instance of the AutoRestResourceFlatteningTestService type.
  */
-public class AutoRestResourceFlatteningTestServiceImpl extends AzureServiceClient implements AutoRestResourceFlatteningTestService {
+public final class AutoRestResourceFlatteningTestServiceImpl extends AzureServiceClient implements AutoRestResourceFlatteningTestService {
     /**
      * The proxy service used to perform REST calls.
      */

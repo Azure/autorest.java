@@ -24,7 +24,7 @@ import fixtures.lro.LROsCustomHeaders;
 /**
  * Initializes a new instance of the AutoRestLongRunningOperationTestService type.
  */
-public class AutoRestLongRunningOperationTestServiceImpl extends AzureServiceClient implements AutoRestLongRunningOperationTestService {
+public final class AutoRestLongRunningOperationTestServiceImpl extends AzureServiceClient implements AutoRestLongRunningOperationTestService {
     /**
      * Gets or sets the preferred language for the response.
      */

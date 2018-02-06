@@ -31,7 +31,7 @@ import io.reactivex.Single;
  * An instance of this class provides access to all the operations defined in
  * ParameterGroupings.
  */
-public class ParameterGroupingsInner {
+public final class ParameterGroupingsInner {
     /**
      * The proxy service used to perform REST calls.
      */

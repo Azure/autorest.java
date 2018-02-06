@@ -43,7 +43,7 @@ import io.reactivex.functions.Function;
  * An instance of this class provides access to all the operations defined in
  * Primitives.
  */
-public class PrimitivesImpl implements Primitives {
+public final class PrimitivesImpl implements Primitives {
     /**
      * The proxy service used to perform REST calls.
      */

@@ -15,7 +15,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 /**
  * Defines headers for responseString operation.
  */
-public class HeaderResponseStringHeaders {
+public final class HeaderResponseStringHeaders {
     /**
      * response with header values "The quick brown fox jumps over the lazy
      * dog" or null or "".

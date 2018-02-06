@@ -15,7 +15,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 /**
  * Additional parameters for postMultiParamGroups operation.
  */
-public class ParameterGroupingPostMultiParamGroupsSecondParamGroupInner {
+public final class ParameterGroupingPostMultiParamGroupsSecondParamGroupInner {
     /**
      * The headerTwo property.
      */

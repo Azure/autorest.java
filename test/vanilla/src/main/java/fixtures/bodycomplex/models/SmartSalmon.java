@@ -20,7 +20,7 @@ import java.util.Map;
  */
 @JsonTypeInfo(use = JsonTypeInfo.Id.NAME, include = JsonTypeInfo.As.PROPERTY, property = "fishtype")
 @JsonTypeName("smart_salmon")
-public class SmartSalmon extends Salmon {
+public final class SmartSalmon extends Salmon {
     /**
      * Unmatched properties from the message are deserialized this collection.
      */

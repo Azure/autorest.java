@@ -33,7 +33,7 @@ import io.reactivex.functions.Function;
  * An instance of this class provides access to all the operations defined in
  * Polymorphicrecursives.
  */
-public class PolymorphicrecursivesImpl implements Polymorphicrecursives {
+public final class PolymorphicrecursivesImpl implements Polymorphicrecursives {
     /**
      * The proxy service used to perform REST calls.
      */

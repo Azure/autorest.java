@@ -15,7 +15,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 /**
  * The ProductProperties model.
  */
-public class ProductProperties {
+public final class ProductProperties {
     /**
      * The id property.
      */

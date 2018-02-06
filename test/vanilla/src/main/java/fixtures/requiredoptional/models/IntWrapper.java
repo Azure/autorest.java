@@ -15,7 +15,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 /**
  * The IntWrapper model.
  */
-public class IntWrapper {
+public final class IntWrapper {
     /**
      * The value property.
      */

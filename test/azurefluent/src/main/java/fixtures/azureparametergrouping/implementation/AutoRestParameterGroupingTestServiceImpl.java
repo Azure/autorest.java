@@ -19,7 +19,7 @@ import com.microsoft.rest.v2.http.HttpPipeline;
 /**
  * Initializes a new instance of the AutoRestParameterGroupingTestServiceImpl type.
  */
-public class AutoRestParameterGroupingTestServiceImpl extends AzureServiceClient {
+public final class AutoRestParameterGroupingTestServiceImpl extends AzureServiceClient {
     /**
      * Gets or sets the preferred language for the response.
      */

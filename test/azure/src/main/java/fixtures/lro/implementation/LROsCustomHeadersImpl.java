@@ -40,7 +40,7 @@ import io.reactivex.functions.Function;
  * An instance of this class provides access to all the operations defined in
  * LROsCustomHeaders.
  */
-public class LROsCustomHeadersImpl implements LROsCustomHeaders {
+public final class LROsCustomHeadersImpl implements LROsCustomHeaders {
     /**
      * The proxy service used to perform REST calls.
      */

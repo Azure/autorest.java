@@ -15,7 +15,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 /**
  * The OperationResult model.
  */
-public class OperationResult {
+public final class OperationResult {
     /**
      * The status of the request. Possible values include: 'Succeeded',
      * 'Failed', 'canceled', 'Accepted', 'Creating', 'Created', 'Updating',

@@ -15,7 +15,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 /**
  * Defines headers for deleteAsyncRelativeRetry400 operation.
  */
-public class LROSADsDeleteAsyncRelativeRetry400HeadersInner {
+public final class LROSADsDeleteAsyncRelativeRetry400HeadersInner {
     /**
      * Location to poll for result status: will be set to
      * /lro/nonretryerror/deleteasync/retry/operationResults/400.

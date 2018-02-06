@@ -34,7 +34,7 @@ import org.joda.time.DateTime;
  * An instance of this class provides access to all the operations defined in
  * Datetimerfc1123s.
  */
-public class Datetimerfc1123sImpl implements Datetimerfc1123s {
+public final class Datetimerfc1123sImpl implements Datetimerfc1123s {
     /**
      * The proxy service used to perform REST calls.
      */

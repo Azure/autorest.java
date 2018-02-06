@@ -15,7 +15,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 /**
  * Defines headers for postAsyncRetrycanceled operation.
  */
-public class LROsPostAsyncRetrycanceledHeaders {
+public final class LROsPostAsyncRetrycanceledHeaders {
     /**
      * Location to poll for result status: will be set to
      * /lro/putasync/retry/canceled/operationResults/200.

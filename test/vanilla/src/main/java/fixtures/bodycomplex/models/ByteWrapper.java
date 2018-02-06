@@ -15,7 +15,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 /**
  * The ByteWrapper model.
  */
-public class ByteWrapper {
+public final class ByteWrapper {
     /**
      * The field property.
      */

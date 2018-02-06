@@ -15,7 +15,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 /**
  * Defines headers for putAsyncRelativeRetry400 operation.
  */
-public class LROSADsPutAsyncRelativeRetry400HeadersInner {
+public final class LROSADsPutAsyncRelativeRetry400HeadersInner {
     /**
      * Location to poll for result status: will be set to
      * /lro/nonretryerror/putasync/retry/operationResults/400.

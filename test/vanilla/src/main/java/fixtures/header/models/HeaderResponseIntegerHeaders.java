@@ -15,7 +15,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 /**
  * Defines headers for responseInteger operation.
  */
-public class HeaderResponseIntegerHeaders {
+public final class HeaderResponseIntegerHeaders {
     /**
      * response with header value "value": 1 or -2.
      */

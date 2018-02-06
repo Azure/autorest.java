@@ -15,7 +15,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 /**
  * The OperationResultError model.
  */
-public class OperationResultError {
+public final class OperationResultError {
     /**
      * The error code for an operation failure.
      */

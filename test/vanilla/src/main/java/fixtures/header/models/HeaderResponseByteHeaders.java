@@ -15,7 +15,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 /**
  * Defines headers for responseByte operation.
  */
-public class HeaderResponseByteHeaders {
+public final class HeaderResponseByteHeaders {
     /**
      * response with header values "啊齄丂狛狜隣郎隣兀﨩".
      */

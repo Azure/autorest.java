@@ -29,7 +29,7 @@ import io.reactivex.Single;
  * An instance of this class provides access to all the operations defined in
  * SkipUrlEncodings.
  */
-public class SkipUrlEncodingsInner {
+public final class SkipUrlEncodingsInner {
     /**
      * The proxy service used to perform REST calls.
      */

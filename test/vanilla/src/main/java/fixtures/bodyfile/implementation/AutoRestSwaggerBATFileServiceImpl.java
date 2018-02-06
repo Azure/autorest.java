@@ -19,7 +19,7 @@ import fixtures.bodyfile.Files;
 /**
  * Initializes a new instance of the AutoRestSwaggerBATFileService type.
  */
-public class AutoRestSwaggerBATFileServiceImpl extends ServiceClient implements AutoRestSwaggerBATFileService {
+public final class AutoRestSwaggerBATFileServiceImpl extends ServiceClient implements AutoRestSwaggerBATFileService {
     /**
      * The Files object to access its operations.
      */

@@ -32,7 +32,7 @@ import java.util.Map;
 /**
  * Initializes a new instance of the AutoRestReportService type.
  */
-public class AutoRestReportServiceImpl extends ServiceClient implements AutoRestReportService {
+public final class AutoRestReportServiceImpl extends ServiceClient implements AutoRestReportService {
     /**
      * The proxy service used to perform REST calls.
      */
