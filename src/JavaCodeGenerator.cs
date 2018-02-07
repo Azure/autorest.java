@@ -1577,7 +1577,7 @@ namespace AutoRest.Java
                     if (parameterModelType is AutoRestSequenceType sequenceType)
                     {
                         string xmlElementName = sequenceType.XmlName.ToPascalCase();
-                        if (xmlSequenceWrappers.Any(existingWrapper => existingWrapper.XmlElementName != xmlElementName))
+                        if (!xmlSequenceWrappers.Any(existingWrapper => existingWrapper.XmlElementName == xmlElementName))
                         {
                             string sequenceTypeName = $"List<{AutoRestIModelTypeName(sequenceType.ElementType, settings)}>";
 
@@ -2131,12 +2131,22 @@ namespace AutoRest.Java
             IEnumerable<JavaModifier> classModifiers = new[] { JavaModifier.Final };
 
             javaFile.Import(xmlSequenceWrapper.Imports);
+
+            javaFile.JavadocComment(comment =>
+            {
+                comment.Description($"A wrapper around {xmlSequenceWrapper.SequenceType} which provides top-level metadata for serialization.");
+            });
             javaFile.Annotation($"JacksonXmlRootElement(localName = \"{xmlElementName}\")");
             javaFile.Class(classVisibility, classModifiers, xmlSequenceWrapper.WrapperClassName, classBlock =>
             {
                 classBlock.Annotation($"JacksonXmlProperty(localName = \"{xmlElementName}\")");
                 classBlock.PrivateFinalMemberVariable(xmlSequenceWrapper.SequenceType, xmlElementNameCamelCase);
 
+                classBlock.JavadocComment(comment =>
+                {
+                    comment.Description($"Creates an instance of {xmlSequenceWrapper.WrapperClassName}.");
+                    comment.Param(xmlElementNameCamelCase, "the list");
+                });
                 classBlock.Annotation("JsonCreator");
                 classBlock.PublicConstructor($"{xmlSequenceWrapper.WrapperClassName}(@JsonProperty(\"{xmlElementName}\") {xmlSequenceWrapper.SequenceType} {xmlElementNameCamelCase})", constructor =>
                 {
@@ -2145,8 +2155,8 @@ namespace AutoRest.Java
 
                 classBlock.JavadocComment(comment =>
                 {
-                    comment.Description($"Get the {xmlElementName} value.");
-                    comment.Return($"the {xmlElementName} value");
+                    comment.Description($"Get the {xmlSequenceWrapper.SequenceType} contained in this wrapper.");
+                    comment.Return($"the {xmlSequenceWrapper.SequenceType}");
                 });
                 classBlock.PublicMethod($"{xmlSequenceWrapper.SequenceType} items()", function =>
                 {
