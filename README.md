@@ -14,6 +14,10 @@ This project enables Java code generation in [AutoRest](https://github.com/Azure
   - Default: `false`
   - Without Argument: `public class MyType { ... }`
   - With Argument: `class MyType { ... }`
+- *--java.string-dates*: Whether or not DateTime types should be represented as Strings (generally for better/different precision).
+  - Default: `false`
+  - Without Argument: `public DateTime duration(DateTime startTime, DateTime endTime)`
+  - With Argument: `public String duration(String startTime, String endTime)`
 
 # Contributing
 
