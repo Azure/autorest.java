@@ -1115,7 +1115,8 @@ namespace AutoRest.Java
                     alreadyEncoded: true,
                     isConstant: false,
                     isRequired: true,
-                    isServiceClientProperty: false));
+                    isServiceClientProperty: false,
+                    headerCollectionPrefix: null));
 
                 autoRestMethodLogicalParameters.RemoveAll(p => p.Location == AutoRestParameterLocation.Path);
             }
@@ -1213,13 +1214,19 @@ namespace AutoRest.Java
 
                 bool parameterSkipUrlEncodingExtension = GetExtensionBool(autoRestParameter.Extensions, SwaggerExtensions.SkipUrlEncodingExtension);
 
+                string parameterHeaderCollectionPrefix = GetExtensionString(autoRestParameter.Extensions, SwaggerExtensions.HeaderCollectionPrefix);
+                if (!string.IsNullOrEmpty(parameterHeaderCollectionPrefix))
+                {
+                    parameterType = new MapType(ClassType.String);
+                }
+
                 bool parameterIsConstant = autoRestParameter.IsConstant;
 
                 bool parameterIsRequired = autoRestParameter.IsRequired;
 
                 bool parameterIsServiceClientProperty = autoRestParameter.IsClientProperty;
 
-                restAPIMethodParameters.Add(new RestAPIParameter(parameterDescription, parameterType, parameterVariableName, parameterRequestLocation, parameterRequestName, parameterSkipUrlEncodingExtension, parameterIsConstant, parameterIsRequired, parameterIsServiceClientProperty));
+                restAPIMethodParameters.Add(new RestAPIParameter(parameterDescription, parameterType, parameterVariableName, parameterRequestLocation, parameterRequestName, parameterSkipUrlEncodingExtension, parameterIsConstant, parameterIsRequired, parameterIsServiceClientProperty, parameterHeaderCollectionPrefix));
             }
 
             string restAPIMethodDescription = "";
@@ -3442,6 +3449,9 @@ namespace AutoRest.Java
             return autoRestPrimaryTypeName;
         }
 
+        private static string GetExtensionString(IDictionary<string, object> extensions, string extensionName)
+            => extensions?.GetValue<string>(extensionName);
+
         private static bool GetExtensionBool(IDictionary<string, object> extensions, string extensionName)
             => extensions?.Get<bool>(extensionName) == true;
 
@@ -3655,9 +3665,13 @@ namespace AutoRest.Java
                                 case RequestParameterLocation.Query:
                                 case RequestParameterLocation.Header:
                                     parameterDeclarationBuilder.Append($"@{parameter.RequestParameterLocation}Param(");
-                                    if (settings.IsAzureOrFluent && parameter.AlreadyEncoded && (parameter.RequestParameterLocation == RequestParameterLocation.Path || parameter.RequestParameterLocation == RequestParameterLocation.Query))
+                                    if ((parameter.RequestParameterLocation == RequestParameterLocation.Path || parameter.RequestParameterLocation == RequestParameterLocation.Query) && settings.IsAzureOrFluent && parameter.AlreadyEncoded)
                                     {
                                         parameterDeclarationBuilder.Append($"value = \"{parameter.RequestParameterName}\", encoded = true");
+                                    }
+                                    else if (parameter.RequestParameterLocation == RequestParameterLocation.Header && !string.IsNullOrEmpty(parameter.HeaderCollectionPrefix))
+                                    {
+                                        parameterDeclarationBuilder.Append($"\"{parameter.HeaderCollectionPrefix}\"");
                                     }
                                     else
                                     {
