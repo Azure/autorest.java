@@ -22,7 +22,8 @@ namespace AutoRest.Java.Model
         /// <param name="isConstant">Whether or not this parameter is a constant value.</param>
         /// <param name="isRequired">Whether or not this parameter is required.</param>
         /// <param name="isServiceClientProperty">Whether or not this parameter's value comes from a ServiceClientProperty.</param>
-        public RestAPIParameter(string description, IType type, string name, RequestParameterLocation requestParameterLocation, string requestParameterName, bool alreadyEncoded, bool isConstant, bool isRequired, bool isServiceClientProperty)
+        /// <param name="headerCollectionPrefix">The x-ms-header-collection-prefix extension value.</param>
+        public RestAPIParameter(string description, IType type, string name, RequestParameterLocation requestParameterLocation, string requestParameterName, bool alreadyEncoded, bool isConstant, bool isRequired, bool isServiceClientProperty, string headerCollectionPrefix)
         {
             Description = description;
             Type = type;
@@ -32,6 +33,7 @@ namespace AutoRest.Java.Model
             AlreadyEncoded = alreadyEncoded;
             IsConstant = isConstant;
             IsRequired = isRequired;
+            HeaderCollectionPrefix = headerCollectionPrefix;
         }
 
         /// <summary>
@@ -78,6 +80,11 @@ namespace AutoRest.Java.Model
         /// Whether or not this parameter's value comes from a ServiceClientProperty.
         /// </summary>
         public bool IsServiceClientProperty { get; }
+
+        /// <summary>
+        /// The x-ms-header-collection-prefix extension value.
+        /// </summary>
+        public string HeaderCollectionPrefix { get; }
 
         /// <summary>
         /// Add this property's imports to the provided ISet of imports.
