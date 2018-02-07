@@ -177,7 +177,8 @@ namespace AutoRest.Java
                 package: codeModel.Namespace.ToLowerInvariant(),
                 shouldGenerateXmlSerialization: codeModel.ShouldGenerateXmlSerialization,
                 nonNullAnnotations: GetBoolSetting(autoRestSettings, "non-null-annotations", true),
-                packagePrivate: GetBoolSetting(autoRestSettings, "package-private"));
+                packagePrivate: GetBoolSetting(autoRestSettings, "package-private"),
+                stringDates: GetBoolSetting(autoRestSettings, "string-dates"));
 
             serviceClientCredentialsParameter = new Lazy<Parameter>(() =>
                 new Parameter(
@@ -1383,10 +1384,10 @@ namespace AutoRest.Java
                             result = ArrayType.ByteArray;
                             break;
                         case AutoRestKnownPrimaryType.Date:
-                            result = ClassType.LocalDate;
+                            result = settings.StringDates ? ClassType.String : ClassType.LocalDate;
                             break;
                         case AutoRestKnownPrimaryType.DateTime:
-                            result = ClassType.DateTime;
+                            result = settings.StringDates ? ClassType.String : ClassType.DateTime;
                             break;
                         case AutoRestKnownPrimaryType.DateTimeRfc1123:
                             result = ClassType.DateTimeRfc1123;
