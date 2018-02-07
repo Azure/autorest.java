@@ -1390,7 +1390,7 @@ namespace AutoRest.Java
                             result = settings.StringDates ? ClassType.String : ClassType.DateTime;
                             break;
                         case AutoRestKnownPrimaryType.DateTimeRfc1123:
-                            result = ClassType.DateTimeRfc1123;
+                            result = settings.StringDates ? ClassType.String : ClassType.DateTimeRfc1123;
                             break;
                         case AutoRestKnownPrimaryType.Double:
                             result = PrimitiveType.Double;
@@ -1421,7 +1421,7 @@ namespace AutoRest.Java
                             result = ClassType.Period;
                             break;
                         case AutoRestKnownPrimaryType.UnixTime:
-                            result = PrimitiveType.UnixTimeLong;
+                            result = settings.StringDates ? (IType)ClassType.String : PrimitiveType.UnixTimeLong;
                             break;
                         case AutoRestKnownPrimaryType.Uuid:
                             result = ClassType.UUID;
