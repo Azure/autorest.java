@@ -2607,9 +2607,11 @@ namespace AutoRest.Java
             }
             javaFile.Class(classVisibility, classModifiers, classNameWithBaseType, (classBlock) =>
             {
+                string propertyXmlWrapperClassName(ServiceModelProperty property) => property.XmlName + "Wrapper";
+
                 foreach (ServiceModelProperty property in model.Properties)
                 {
-                    string xmlWrapperClassName = property.XmlName + "Wrapper";
+                    string xmlWrapperClassName = propertyXmlWrapperClassName(property);
                     if (settings.ShouldGenerateXmlSerialization && property.ModelTypeIsSequence)
                     {
                         classBlock.PrivateStaticFinalClass(xmlWrapperClassName, innerClass =>
@@ -2797,7 +2799,7 @@ namespace AutoRest.Java
                             {
                                 if (settings.ShouldGenerateXmlSerialization && property.ModelTypeIsSequence)
                                 {
-                                    methodBlock.Line($"this.{property.Name} = new {property.XmlName}Wrapper({property.Name});");
+                                    methodBlock.Line($"this.{property.Name} = new {propertyXmlWrapperClassName(property)}({property.Name});");
                                 }
                                 else
                                 {
