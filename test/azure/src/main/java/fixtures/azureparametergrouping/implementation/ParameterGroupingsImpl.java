@@ -63,7 +63,7 @@ public final class ParameterGroupingsImpl implements ParameterGroupings {
      * used by the proxy service to perform REST calls.
      */
     @Host("http://localhost:3000")
-    interface ParameterGroupingsService {
+    private interface ParameterGroupingsService {
         @POST("parameterGrouping/postRequired/{path}")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)

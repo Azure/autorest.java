@@ -60,7 +60,7 @@ public final class InheritancesImpl implements Inheritances {
      * the proxy service to perform REST calls.
      */
     @Host("http://localhost:3000")
-    interface InheritancesService {
+    private interface InheritancesService {
         @GET("complex/inheritance/valid")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)

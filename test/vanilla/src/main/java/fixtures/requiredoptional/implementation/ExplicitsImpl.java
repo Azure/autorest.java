@@ -72,7 +72,7 @@ public final class ExplicitsImpl implements Explicits {
      * proxy service to perform REST calls.
      */
     @Host("http://localhost:3000")
-    interface ExplicitsService {
+    private interface ExplicitsService {
         @POST("reqopt/requied/integer/parameter")
         @UnexpectedResponseExceptionType(ErrorException.class)
         Single<RestResponse<Void, Error>> postRequiredIntegerParameter(@BodyParam("application/json; charset=utf-8") int bodyParameter);

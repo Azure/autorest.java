@@ -170,7 +170,7 @@ public final class AutoRestResourceFlatteningTestServiceImpl extends AzureServic
      * perform REST calls.
      */
     @Host("http://localhost:3000")
-    interface AutoRestResourceFlatteningTestServiceService {
+    private interface AutoRestResourceFlatteningTestServiceService {
         @PUT("azure/resource-flatten/array")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)

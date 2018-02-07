@@ -59,7 +59,7 @@ public final class NumbersImpl implements Numbers {
      * proxy service to perform REST calls.
      */
     @Host("http://localhost:3000")
-    interface NumbersService {
+    private interface NumbersService {
         @GET("number/null")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)

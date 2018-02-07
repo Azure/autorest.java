@@ -55,7 +55,7 @@ public final class HeadExceptionsImpl implements HeadExceptions {
      * the proxy service to perform REST calls.
      */
     @Host("http://localhost:3000")
-    interface HeadExceptionsService {
+    private interface HeadExceptionsService {
         @HEAD("http/success/200")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(CloudException.class)

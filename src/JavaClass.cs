@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace AutoRest.Java
 {
@@ -54,45 +55,44 @@ namespace AutoRest.Java
             addNewLine = true;
         }
 
-        public void PublicMethod(string methodSignature, Action<JavaBlock> method)
+        public void Method(JavaVisibility visibility, IEnumerable<JavaModifier> modifiers, string methodSignature, Action<JavaBlock> method)
         {
             AddExpectedNewLine();
-            contents.Block($"public {methodSignature}", method);
+            contents.Method(visibility, modifiers, methodSignature, method);
             addNewLine = true;
+        }
+
+        public void PublicMethod(string methodSignature, Action<JavaBlock> method)
+        {
+            Method(JavaVisibility.Public, null, methodSignature, method);
         }
 
         public void PrivateMethod(string methodSignature, Action<JavaBlock> method)
         {
-            AddExpectedNewLine();
-            contents.Block($"private {methodSignature}", method);
-            addNewLine = true;
+            Method(JavaVisibility.Private, null, methodSignature, method);
         }
 
         public void PublicStaticMethod(string methodSignature, Action<JavaBlock> method)
         {
+            Method(JavaVisibility.Public, new[] { JavaModifier.Static }, methodSignature, method);
+        }
+
+        public void Interface(JavaVisibility visibility, string interfaceSignature, Action<JavaInterface> interfaceBlock)
+        {
             AddExpectedNewLine();
-            contents.Block($"public static {methodSignature}", method);
+            contents.Interface(visibility, interfaceSignature, interfaceBlock);
             addNewLine = true;
         }
 
         public void PublicInterface(string interfaceSignature, Action<JavaInterface> interfaceBlock)
         {
-            AddExpectedNewLine();
-            contents.PublicInterface(interfaceSignature, interfaceBlock);
-            addNewLine = true;
-        }
-
-        public void Interface(string interfaceSignature, Action<JavaInterface> interfaceBlock)
-        {
-            AddExpectedNewLine();
-            contents.Interface(interfaceSignature, interfaceBlock);
-            addNewLine = true;
+            Interface(JavaVisibility.Public, interfaceSignature, interfaceBlock);
         }
 
         public void PrivateStaticFinalClass(string classSignature, Action<JavaClass> classBlock)
         {
             AddExpectedNewLine();
-            contents.PrivateStaticFinalClass(classSignature, classBlock);
+            contents.Class(JavaVisibility.Private, new[] { JavaModifier.Static, JavaModifier.Final }, classSignature, classBlock);
             addNewLine = true;
         }
 

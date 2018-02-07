@@ -62,7 +62,7 @@ public final class IntsImpl implements Ints {
      * service to perform REST calls.
      */
     @Host("http://localhost:3000")
-    interface IntsService {
+    private interface IntsService {
         @GET("int/null")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)

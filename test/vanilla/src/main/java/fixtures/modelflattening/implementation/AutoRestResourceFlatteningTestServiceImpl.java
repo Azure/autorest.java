@@ -76,7 +76,7 @@ public final class AutoRestResourceFlatteningTestServiceImpl extends ServiceClie
      * perform REST calls.
      */
     @Host("http://localhost:3000")
-    interface AutoRestResourceFlatteningTestServiceService {
+    private interface AutoRestResourceFlatteningTestServiceService {
         @PUT("model-flatten/array")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)

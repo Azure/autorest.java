@@ -60,7 +60,7 @@ public final class PolymorphicrecursivesImpl implements Polymorphicrecursives {
      * used by the proxy service to perform REST calls.
      */
     @Host("http://localhost:3000")
-    interface PolymorphicrecursivesService {
+    private interface PolymorphicrecursivesService {
         @GET("complex/polymorphicrecursive/valid")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)

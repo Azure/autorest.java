@@ -56,7 +56,7 @@ public final class PathItemsImpl implements PathItems {
      * proxy service to perform REST calls.
      */
     @Host("http://localhost:3000")
-    interface PathItemsService {
+    private interface PathItemsService {
         @GET("pathitem/nullable/globalStringPath/{globalStringPath}/pathItemStringPath/{pathItemStringPath}/localStringPath/{localStringPath}/globalStringQuery/pathItemStringQuery/localStringQuery")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)

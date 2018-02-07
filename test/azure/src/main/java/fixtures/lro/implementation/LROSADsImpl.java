@@ -85,7 +85,7 @@ public final class LROSADsImpl implements LROSADs {
      * proxy service to perform REST calls.
      */
     @Host("http://localhost:3000")
-    interface LROSADsService {
+    private interface LROSADsService {
         @PUT("lro/nonretryerror/put/400")
         @ExpectedResponses({200, 201, 202, 204})
         @UnexpectedResponseExceptionType(CloudException.class)

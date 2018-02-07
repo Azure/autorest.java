@@ -57,7 +57,7 @@ public final class FilesImpl implements Files {
      * proxy service to perform REST calls.
      */
     @Host("http://localhost:3000")
-    interface FilesService {
+    private interface FilesService {
         @GET("files/stream/nonempty")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)

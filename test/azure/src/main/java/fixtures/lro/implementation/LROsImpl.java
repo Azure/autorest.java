@@ -90,7 +90,7 @@ public final class LROsImpl implements LROs {
      * service to perform REST calls.
      */
     @Host("http://localhost:3000")
-    interface LROsService {
+    private interface LROsService {
         @PUT("lro/put/200/succeeded")
         @ExpectedResponses({200, 202, 204})
         @UnexpectedResponseExceptionType(CloudException.class)

@@ -57,7 +57,7 @@ public final class SkipUrlEncodingsImpl implements SkipUrlEncodings {
      * by the proxy service to perform REST calls.
      */
     @Host("http://localhost:3000")
-    interface SkipUrlEncodingsService {
+    private interface SkipUrlEncodingsService {
         @GET("azurespecials/skipUrlEncoding/method/path/valid/{unencodedPathParam}")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)

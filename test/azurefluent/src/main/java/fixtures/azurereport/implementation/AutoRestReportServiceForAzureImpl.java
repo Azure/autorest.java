@@ -164,7 +164,7 @@ public final class AutoRestReportServiceForAzureImpl extends AzureServiceClient 
      * REST calls.
      */
     @Host("http://localhost:3000")
-    interface AutoRestReportServiceForAzureService {
+    private interface AutoRestReportServiceForAzureService {
         @GET("report/azure")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)

@@ -60,7 +60,7 @@ public final class ArraysImpl implements Arrays {
      * proxy service to perform REST calls.
      */
     @Host("http://localhost:3000")
-    interface ArraysService {
+    private interface ArraysService {
         @GET("complex/array/valid")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)

@@ -58,7 +58,7 @@ public final class AvailabilitySetsImpl implements AvailabilitySets {
      * by the proxy service to perform REST calls.
      */
     @Host("http://localhost:3000")
-    interface AvailabilitySetsService {
+    private interface AvailabilitySetsService {
         @PATCH("parameterFlattening/{resourceGroupName}/{availabilitySetName}")
         @ExpectedResponses({200})
         Single<RestResponse<Void, Void>> update(@PathParam("resourceGroupName") String resourceGroupName, @PathParam("availabilitySetName") String avset, @BodyParam("application/json; charset=utf-8") AvailabilitySetUpdateParameters tags);

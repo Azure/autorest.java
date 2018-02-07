@@ -62,7 +62,7 @@ public final class HttpSuccessImpl implements HttpSuccess {
      * the proxy service to perform REST calls.
      */
     @Host("http://localhost:3000")
-    interface HttpSuccessService {
+    private interface HttpSuccessService {
         @HEAD("http/success/200")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)

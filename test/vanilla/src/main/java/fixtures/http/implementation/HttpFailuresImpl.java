@@ -55,7 +55,7 @@ public final class HttpFailuresImpl implements HttpFailures {
      * the proxy service to perform REST calls.
      */
     @Host("http://localhost:3000")
-    interface HttpFailuresService {
+    private interface HttpFailuresService {
         @GET("http/failure/emptybody/error")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)

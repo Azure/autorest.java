@@ -62,7 +62,7 @@ public final class ImplicitsImpl implements Implicits {
      * proxy service to perform REST calls.
      */
     @Host("http://localhost:3000")
-    interface ImplicitsService {
+    private interface ImplicitsService {
         @GET("reqopt/implicit/required/path/{pathParameter}")
         @UnexpectedResponseExceptionType(ErrorException.class)
         Single<RestResponse<Void, Error>> getRequiredPath(@PathParam("pathParameter") String pathParameter);

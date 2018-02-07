@@ -58,7 +58,7 @@ public final class PagingsInner {
      * proxy service to perform REST calls.
      */
     @Host("http://localhost:3000")
-    interface PagingsService {
+    private interface PagingsService {
         @GET("paging/single")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(CloudException.class)

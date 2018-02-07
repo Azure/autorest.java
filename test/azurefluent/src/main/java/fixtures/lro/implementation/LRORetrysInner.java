@@ -63,7 +63,7 @@ public final class LRORetrysInner {
      * proxy service to perform REST calls.
      */
     @Host("http://localhost:3000")
-    interface LRORetrysService {
+    private interface LRORetrysService {
         @PUT("lro/retryerror/put/201/creating/succeeded/200")
         @ExpectedResponses({200, 201, 202, 204})
         @UnexpectedResponseExceptionType(CloudException.class)

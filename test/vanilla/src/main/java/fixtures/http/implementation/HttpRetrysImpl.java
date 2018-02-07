@@ -60,7 +60,7 @@ public final class HttpRetrysImpl implements HttpRetrys {
      * proxy service to perform REST calls.
      */
     @Host("http://localhost:3000")
-    interface HttpRetrysService {
+    private interface HttpRetrysService {
         @HEAD("http/retry/408")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)

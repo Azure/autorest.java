@@ -61,7 +61,7 @@ public final class BasicsImpl implements Basics {
      * proxy service to perform REST calls.
      */
     @Host("http://localhost:3000")
-    interface BasicsService {
+    private interface BasicsService {
         @GET("complex/basic/valid")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)

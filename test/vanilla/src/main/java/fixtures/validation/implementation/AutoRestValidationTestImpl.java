@@ -116,7 +116,7 @@ public final class AutoRestValidationTestImpl extends ServiceClient implements A
      * used by the proxy service to perform REST calls.
      */
     @Host("http://localhost:3000")
-    interface AutoRestValidationTestService {
+    private interface AutoRestValidationTestService {
         @GET("fakepath/{subscriptionId}/{resourceGroupName}/{id}")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)

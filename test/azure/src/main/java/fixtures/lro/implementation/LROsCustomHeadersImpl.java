@@ -67,7 +67,7 @@ public final class LROsCustomHeadersImpl implements LROsCustomHeaders {
      * by the proxy service to perform REST calls.
      */
     @Host("http://localhost:3000")
-    interface LROsCustomHeadersService {
+    private interface LROsCustomHeadersService {
         @PUT("lro/customheader/putasync/retry/succeeded")
         @ExpectedResponses({200, 202, 204})
         @UnexpectedResponseExceptionType(CloudException.class)
