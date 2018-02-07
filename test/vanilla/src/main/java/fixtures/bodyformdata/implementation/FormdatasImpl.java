@@ -59,7 +59,7 @@ public final class FormdatasImpl implements Formdatas {
      * proxy service to perform REST calls.
      */
     @Host("http://localhost:3000")
-    interface FormdatasService {
+    private interface FormdatasService {
         // @Multipart not supported by RestProxy
         @POST("formdata/stream/uploadfile")
         @ExpectedResponses({200})

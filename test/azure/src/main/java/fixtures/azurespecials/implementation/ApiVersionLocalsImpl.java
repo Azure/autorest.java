@@ -56,7 +56,7 @@ public final class ApiVersionLocalsImpl implements ApiVersionLocals {
      * by the proxy service to perform REST calls.
      */
     @Host("http://localhost:3000")
-    interface ApiVersionLocalsService {
+    private interface ApiVersionLocalsService {
         @GET("azurespecials/apiVersion/method/string/none/query/local/2.0")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)

@@ -60,7 +60,7 @@ public final class ReadonlypropertysImpl implements Readonlypropertys {
      * by the proxy service to perform REST calls.
      */
     @Host("http://localhost:3000")
-    interface ReadonlypropertysService {
+    private interface ReadonlypropertysService {
         @GET("complex/readonlyproperty/valid")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)

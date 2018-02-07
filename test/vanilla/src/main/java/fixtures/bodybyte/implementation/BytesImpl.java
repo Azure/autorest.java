@@ -58,7 +58,7 @@ public final class BytesImpl implements Bytes {
      * proxy service to perform REST calls.
      */
     @Host("http://localhost:3000")
-    interface BytesService {
+    private interface BytesService {
         @GET("byte/null")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)

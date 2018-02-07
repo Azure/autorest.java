@@ -61,7 +61,7 @@ public final class Datetimerfc1123sImpl implements Datetimerfc1123s {
      * by the proxy service to perform REST calls.
      */
     @Host("http://localhost:3000")
-    interface Datetimerfc1123sService {
+    private interface Datetimerfc1123sService {
         @GET("datetimerfc1123/null")
         @ExpectedResponses({200})
         @ReturnValueWireType(DateTimeRfc1123.class)

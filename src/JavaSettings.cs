@@ -26,7 +26,8 @@ namespace AutoRest.Java
         /// <param name="package"></param>
         /// <param name="shouldGenerateXmlSerialization"></param>
         /// <param name="nonNullAnnotations">Whether or not to add the @NotNull annotation to required parameters in client methods.</param>
-        public JavaSettings(Action<bool> setAddCredentials, bool isAzure, bool isFluent, bool regenerateManagers, bool regeneratePom, string fileHeaderText, int maximumJavadocCommentWidth, string serviceName, string package, bool shouldGenerateXmlSerialization, bool nonNullAnnotations)
+        /// <param name="packagePrivate">Whether or not the created types will be package private.</param>
+        public JavaSettings(Action<bool> setAddCredentials, bool isAzure, bool isFluent, bool regenerateManagers, bool regeneratePom, string fileHeaderText, int maximumJavadocCommentWidth, string serviceName, string package, bool shouldGenerateXmlSerialization, bool nonNullAnnotations, bool packagePrivate)
         {
             this.setAddCredentials = setAddCredentials;
             IsAzure = isAzure;
@@ -39,6 +40,7 @@ namespace AutoRest.Java
             Package = package;
             ShouldGenerateXmlSerialization = shouldGenerateXmlSerialization;
             NonNullAnnotations = nonNullAnnotations;
+            PackagePrivate = packagePrivate;
         }
 
         public bool IsAzure { get; }
@@ -70,5 +72,10 @@ namespace AutoRest.Java
         /// Whether or not to add the @NotNull annotation to required parameters in client methods.
         /// </summary>
         public bool NonNullAnnotations { get; }
+
+        /// <summary>
+        /// Whether or not the created types will be package private.
+        /// </summary>
+        public bool PackagePrivate { get; }
     }
 }

@@ -61,7 +61,7 @@ public final class PolymorphismsImpl implements Polymorphisms {
      * the proxy service to perform REST calls.
      */
     @Host("http://localhost:3000")
-    interface PolymorphismsService {
+    private interface PolymorphismsService {
         @GET("complex/polymorphism/valid")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)

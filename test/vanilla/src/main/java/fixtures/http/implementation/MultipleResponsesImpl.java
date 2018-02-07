@@ -58,7 +58,7 @@ public final class MultipleResponsesImpl implements MultipleResponses {
      * by the proxy service to perform REST calls.
      */
     @Host("http://localhost:3000")
-    interface MultipleResponsesService {
+    private interface MultipleResponsesService {
         @GET("http/payloads/200/A/204/none/default/Error/response/200/valid")
         @ExpectedResponses({200, 204})
         @UnexpectedResponseExceptionType(ErrorException.class)

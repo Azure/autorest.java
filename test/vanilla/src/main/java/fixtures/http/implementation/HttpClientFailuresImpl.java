@@ -62,7 +62,7 @@ public final class HttpClientFailuresImpl implements HttpClientFailures {
      * used by the proxy service to perform REST calls.
      */
     @Host("http://localhost:3000")
-    interface HttpClientFailuresService {
+    private interface HttpClientFailuresService {
         @HEAD("http/failure/client/400")
         @UnexpectedResponseExceptionType(ErrorException.class)
         Single<RestResponse<Void, Error>> head400();

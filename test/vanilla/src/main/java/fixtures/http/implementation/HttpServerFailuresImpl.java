@@ -60,7 +60,7 @@ public final class HttpServerFailuresImpl implements HttpServerFailures {
      * used by the proxy service to perform REST calls.
      */
     @Host("http://localhost:3000")
-    interface HttpServerFailuresService {
+    private interface HttpServerFailuresService {
         @HEAD("http/failure/server/501")
         @UnexpectedResponseExceptionType(ErrorException.class)
         Single<RestResponse<Void, Error>> head501();

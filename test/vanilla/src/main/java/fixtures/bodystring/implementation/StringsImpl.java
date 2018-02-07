@@ -60,7 +60,7 @@ public final class StringsImpl implements Strings {
      * proxy service to perform REST calls.
      */
     @Host("http://localhost:3000")
-    interface StringsService {
+    private interface StringsService {
         @GET("string/null")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)

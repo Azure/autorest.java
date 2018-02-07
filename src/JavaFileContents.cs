@@ -325,9 +325,28 @@ namespace AutoRest.Java
             }
         }
 
-        public void PublicClass(bool isFinal, string classDeclaration, Action<JavaClass> classAction)
+        private static string ToString(JavaVisibility visiblity)
         {
-            Block($"public {(isFinal ? "final " : "")}class {classDeclaration}", (blockAction) =>
+            string result;
+            switch (visiblity)
+            {
+                case JavaVisibility.PackagePrivate:
+                    result = "";
+                    break;
+
+                default:
+                    result = visiblity.ToString().ToLower() + ' ';
+                    break;
+            }
+            return result;
+        }
+
+        private static string ToString(IEnumerable<JavaModifier> modifiers)
+            => modifiers == null ? "" : string.Join("", modifiers.Select(modifier => modifier.ToString().ToLower() + ' '));
+
+        public void Class(JavaVisibility visibility, IEnumerable<JavaModifier> modifiers, string classDeclaration, Action<JavaClass> classAction)
+        {
+            Block($"{ToString(visibility)}{ToString(modifiers)}class {classDeclaration}", blockAction =>
             {
                 if (classAction != null)
                 {
@@ -337,41 +356,24 @@ namespace AutoRest.Java
             });
         }
 
-        public void PrivateStaticFinalClass(string classSignature, Action<JavaClass> classAction)
+        public void Method(JavaVisibility visibility, IEnumerable<JavaModifier> modifiers, string methodSignature, Action<JavaBlock> method)
         {
-            Block($"private static final class {classSignature}", (blockAction) =>
-            {
-                if (classAction != null)
-                {
-                    JavaClass javaClass = new JavaClass(this);
-                    classAction.Invoke(javaClass);
-                }
-            });
+            Block($"{ToString(visibility)}{ToString(modifiers)}{methodSignature}", method);
         }
 
-        public void PublicEnum(string enumName, Action<JavaBlock> enumAction)
+        public void Enum(JavaVisibility visibility, string enumName, Action<JavaBlock> enumAction)
         {
-            Block($"public enum {enumName}", enumAction);
+            Block($"{ToString(visibility)}enum {enumName}", enumAction);
         }
 
-        public void PublicInterface(string interfaceSignature, Action<JavaInterface> interfaceAction)
+        public void Interface(JavaVisibility visibility, string interfaceSignature, Action<JavaInterface> interfaceAction)
         {
-            Line($"public interface {interfaceSignature} {{");
+            Line($"{ToString(visibility)}interface {interfaceSignature} {{");
             Indent(() =>
             {
                 interfaceAction.Invoke(new JavaInterface(this));
             });
-            Line($"}}");
-        }
-
-        public void Interface(string interfaceSignature, Action<JavaInterface> interfaceAction)
-        {
-            Line($"interface {interfaceSignature} {{");
-            Indent(() =>
-            {
-                interfaceAction.Invoke(new JavaInterface(this));
-            });
-            Line($"}}");
+            Line("}");
         }
 
         public void If(string condition, Action<JavaBlock> ifAction)

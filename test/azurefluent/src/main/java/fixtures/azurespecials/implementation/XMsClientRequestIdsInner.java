@@ -55,7 +55,7 @@ public final class XMsClientRequestIdsInner {
      * used by the proxy service to perform REST calls.
      */
     @Host("http://localhost:3000")
-    interface XMsClientRequestIdsService {
+    private interface XMsClientRequestIdsService {
         @GET("azurespecials/overwrite/x-ms-client-request-id/method/")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(CloudException.class)

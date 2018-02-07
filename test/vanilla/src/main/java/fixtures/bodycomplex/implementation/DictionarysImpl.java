@@ -60,7 +60,7 @@ public final class DictionarysImpl implements Dictionarys {
      * the proxy service to perform REST calls.
      */
     @Host("http://localhost:3000")
-    interface DictionarysService {
+    private interface DictionarysService {
         @GET("complex/dictionary/typed/valid")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)

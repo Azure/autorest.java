@@ -59,7 +59,7 @@ public final class DurationsImpl implements Durations {
      * proxy service to perform REST calls.
      */
     @Host("http://localhost:3000")
-    interface DurationsService {
+    private interface DurationsService {
         @GET("duration/null")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)

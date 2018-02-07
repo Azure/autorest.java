@@ -55,7 +55,7 @@ public final class OdatasInner {
      * proxy service to perform REST calls.
      */
     @Host("http://localhost:3000")
-    interface OdatasService {
+    private interface OdatasService {
         @GET("azurespecials/odata/filter")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)

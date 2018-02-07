@@ -65,7 +65,7 @@ public final class PathsImpl implements Paths {
      * proxy service to perform REST calls.
      */
     @Host("http://localhost:3000")
-    interface PathsService {
+    private interface PathsService {
         @GET("paths/bool/true/{boolPath}")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)

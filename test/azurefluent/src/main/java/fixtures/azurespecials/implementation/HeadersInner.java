@@ -58,7 +58,7 @@ public final class HeadersInner {
      * proxy service to perform REST calls.
      */
     @Host("http://localhost:3000")
-    interface HeadersService {
+    private interface HeadersService {
         @POST("azurespecials/customNamedRequestId")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)

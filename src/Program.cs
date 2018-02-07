@@ -83,9 +83,16 @@ namespace AutoRest.Java
             Settings.Instance.CustomSettings["UseDateTimeOffset"] = GetXmsCodeGenSetting<bool?>(codeModelT, "useDateTimeOffset") ?? await GetValue<bool?>("use-datetimeoffset") ?? false;
             Settings.Instance.CustomSettings["ClientSideValidation"] = await GetValue<bool?>("client-side-validation") ?? false;
 
-            Settings.Instance.CustomSettings["azure-arm"] = await GetValue("azure-arm").ConfigureAwait(false);
-            Settings.Instance.CustomSettings["fluent"] = await GetValue("fluent").ConfigureAwait(false);
-            Settings.Instance.CustomSettings["non-null-annotations"] = await GetValue("non-null-annotations").ConfigureAwait(false);
+            string[] expectedSettingNames = new[]
+            {
+                "azure-arm",
+                "fluent",
+                "non-null-annotations"
+            };
+            foreach (string expectedSettingName in expectedSettingNames)
+            {
+                Settings.Instance.CustomSettings[expectedSettingName] = await GetValue(expectedSettingName).ConfigureAwait(false);
+            }
 
             Settings.Instance.MaximumCommentColumns = await GetValue<int?>("max-comment-columns") ?? Settings.DefaultMaximumCommentColumns;
             Settings.Instance.OutputFileName = await GetValue<string>("output-file");

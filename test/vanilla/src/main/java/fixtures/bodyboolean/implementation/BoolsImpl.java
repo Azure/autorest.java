@@ -58,7 +58,7 @@ public final class BoolsImpl implements Bools {
      * proxy service to perform REST calls.
      */
     @Host("http://localhost:3000")
-    interface BoolsService {
+    private interface BoolsService {
         @GET("bool/true")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)

@@ -63,7 +63,7 @@ public final class QueriesImpl implements Queries {
      * proxy service to perform REST calls.
      */
     @Host("http://localhost:3000")
-    interface QueriesService {
+    private interface QueriesService {
         @GET("queries/bool/true")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)

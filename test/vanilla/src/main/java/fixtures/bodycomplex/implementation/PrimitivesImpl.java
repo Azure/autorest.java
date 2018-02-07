@@ -70,7 +70,7 @@ public final class PrimitivesImpl implements Primitives {
      * proxy service to perform REST calls.
      */
     @Host("http://localhost:3000")
-    interface PrimitivesService {
+    private interface PrimitivesService {
         @GET("complex/primitive/integer")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)

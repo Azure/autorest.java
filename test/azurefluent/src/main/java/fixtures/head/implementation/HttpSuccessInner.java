@@ -55,7 +55,7 @@ public final class HttpSuccessInner {
      * the proxy service to perform REST calls.
      */
     @Host("http://localhost:3000")
-    interface HttpSuccessService {
+    private interface HttpSuccessService {
         @HEAD("http/success/200")
         @ExpectedResponses({200, 404})
         @UnexpectedResponseExceptionType(CloudException.class)

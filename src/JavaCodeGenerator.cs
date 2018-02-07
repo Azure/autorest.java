@@ -131,14 +131,20 @@ namespace AutoRest.Java
             return customSettingValue;
         }
 
+        private static string ToComparableString(string value)
+            => value?.Replace("-", "").ToLowerInvariant();
+
         private static string GetStringSetting(Settings autoRestSettings, string settingName, string defaultValue = null)
         {
             IDictionary<string, object> customSettings = autoRestSettings.CustomSettings;
 
+            string comparableSettingName = ToComparableString(settingName);
+
             string customSettingValue = defaultValue;
             foreach (KeyValuePair<string, object> entry in customSettings)
             {
-                if (entry.Key.EqualsIgnoreCase(settingName))
+                string comparableEntryKey = ToComparableString(entry.Key);
+                if (comparableEntryKey == comparableSettingName)
                 {
                     string entryValueString = (string)entry.Value;
                     if (!string.IsNullOrEmpty(entryValueString))
@@ -170,7 +176,8 @@ namespace AutoRest.Java
                 serviceName: GetAutoRestSettingsServiceName(autoRestSettings),
                 package: codeModel.Namespace.ToLowerInvariant(),
                 shouldGenerateXmlSerialization: codeModel.ShouldGenerateXmlSerialization,
-                nonNullAnnotations: GetBoolSetting(autoRestSettings, "non-null-annotations", true));
+                nonNullAnnotations: GetBoolSetting(autoRestSettings, "non-null-annotations", true),
+                packagePrivate: GetBoolSetting(autoRestSettings, "package-private"));
 
             serviceClientCredentialsParameter = new Lazy<Parameter>(() =>
                 new Parameter(
@@ -1943,12 +1950,15 @@ namespace AutoRest.Java
                 $"{ClassType.AzureTokenCredentials.Package}.{ClassType.AzureTokenCredentials.Name}",
                 "com.microsoft.azure.v2.serializer.AzureJacksonAdapter");
 
+            JavaVisibility classVisibility = GetTypeVisibility(settings);
+            IEnumerable<JavaModifier> classModifiers = new[] { JavaModifier.Final };
+
             javaFile.JavadocComment(comment =>
             {
                 comment.Description($"Entry point to Azure {manager.ServiceName} resource management.");
             });
             javaFile.Annotation($"Beta(SinceVersion.{betaSinceVersion})");
-            javaFile.PublicFinalClass($"{className} extends Manager<{className}, {manager.ServiceClientName + "Impl"}>", classBlock =>
+            javaFile.Class(classVisibility, classModifiers, $"{className} extends Manager<{className}, {manager.ServiceClientName + "Impl"}>", classBlock =>
             {
                 classBlock.JavadocComment(comment =>
                 {
@@ -2036,12 +2046,15 @@ namespace AutoRest.Java
                             "com.microsoft.azure.v2.Page",
                             "java.util.List");
 
+            JavaVisibility classVisibility = GetTypeVisibility(settings);
+            IEnumerable<JavaModifier> classModifiers = new[] { JavaModifier.Final };
+
             javaFile.JavadocComment(settings.MaximumJavadocCommentWidth, comment =>
             {
                 comment.Description("An instance of this class defines a page of Azure resources and a link to get the next page of resources, if any.");
                 comment.Param("<T>", "type of Azure resource");
             });
-            javaFile.PublicFinalClass($"{pageClass.ClassName}<T> implements Page<T>", classBlock =>
+            javaFile.Class(classVisibility, classModifiers, $"{pageClass.ClassName}<T> implements Page<T>", classBlock =>
             {
                 classBlock.JavadocComment(comment =>
                 {
@@ -2113,9 +2126,13 @@ namespace AutoRest.Java
             string xmlElementNameCamelCase = xmlElementName.ToCamelCase();
 
             JavaFile javaFile = GetJavaFileWithHeaderAndPackage(implPackage, settings, xmlSequenceWrapper.WrapperClassName);
+
+            JavaVisibility classVisibility = GetTypeVisibility(settings);
+            IEnumerable<JavaModifier> classModifiers = new[] { JavaModifier.Final };
+
             javaFile.Import(xmlSequenceWrapper.Imports);
             javaFile.Annotation($"JacksonXmlRootElement(localName = \"{xmlElementName}\")");
-            javaFile.PublicFinalClass(xmlSequenceWrapper.WrapperClassName, classBlock =>
+            javaFile.Class(classVisibility, classModifiers, xmlSequenceWrapper.WrapperClassName, classBlock =>
             {
                 classBlock.Annotation($"JacksonXmlProperty(localName = \"{xmlElementName}\")");
                 classBlock.PrivateFinalMemberVariable(xmlSequenceWrapper.SequenceType, xmlElementNameCamelCase);
@@ -2159,12 +2176,15 @@ namespace AutoRest.Java
             serviceClient.AddImportsTo(imports, true, settings);
             javaFile.Import(imports);
 
+            JavaVisibility classVisibility = GetTypeVisibility(settings);
+            IEnumerable<JavaModifier> classModifiers = new[] { JavaModifier.Final };
+
             javaFile.JavadocComment(comment =>
             {
                 string serviceClientTypeName = settings.IsFluent ? serviceClient.ClassName : serviceClient.InterfaceName;
                 comment.Description($"Initializes a new instance of the {serviceClientTypeName} type.");
             });
-            javaFile.PublicFinalClass(serviceClientClassDeclaration, classBlock =>
+            javaFile.Class(classVisibility, classModifiers, serviceClientClassDeclaration, classBlock =>
             {
                 // Add proxy service member variable
                 if (serviceClient.RestAPI != null)
@@ -2336,11 +2356,13 @@ namespace AutoRest.Java
             serviceClient.AddImportsTo(imports, false, settings);
             javaFile.Import(imports);
 
+            JavaVisibility interfaceVisibility = GetTypeVisibility(settings);
+
             javaFile.JavadocComment(comment =>
             {
                 comment.Description($"The interface for {serviceClient.InterfaceName} class.");
             });
-            javaFile.PublicInterface(serviceClient.InterfaceName, interfaceBlock =>
+            javaFile.Interface(interfaceVisibility, serviceClient.InterfaceName, interfaceBlock =>
             {
                 foreach (ServiceClientProperty property in serviceClient.Properties)
                 {
@@ -2389,11 +2411,14 @@ namespace AutoRest.Java
 
             string parentDeclaration = methodGroupClient.ImplementedInterfaces.Any() ? $" implements {string.Join(", ", methodGroupClient.ImplementedInterfaces)}" : "";
 
+            JavaVisibility classVisibility = GetTypeVisibility(settings);
+            IEnumerable<JavaModifier> classModifiers = new[] { JavaModifier.Final };
+
             javaFile.JavadocComment(settings.MaximumJavadocCommentWidth, comment =>
             {
                 comment.Description($"An instance of this class provides access to all the operations defined in {methodGroupClient.InterfaceName}.");
             });
-            javaFile.PublicFinalClass($"{methodGroupClient.ClassName}{parentDeclaration}", classBlock =>
+            javaFile.Class(classVisibility, classModifiers, $"{methodGroupClient.ClassName}{parentDeclaration}", classBlock =>
             {
                 classBlock.JavadocComment($"The proxy service used to perform REST calls.");
                 classBlock.PrivateMemberVariable(methodGroupClient.RestAPI.Name, "service");
@@ -2432,11 +2457,13 @@ namespace AutoRest.Java
             methodGroupClient.AddImportsTo(imports, false, settings);
             javaFile.Import(imports);
 
+            JavaVisibility interfaceVisibility = GetTypeVisibility(settings);
+
             javaFile.JavadocComment(settings.MaximumJavadocCommentWidth, (comment) =>
             {
                 comment.Description($"An instance of this class provides access to all the operations defined in {methodGroupClient.InterfaceName}.");
             });
-            javaFile.PublicInterface(methodGroupClient.InterfaceName, interfaceBlock =>
+            javaFile.Interface(interfaceVisibility, methodGroupClient.InterfaceName, interfaceBlock =>
             {
                 AddClientMethods(interfaceBlock, methodGroupClient.ClientMethods, settings);
             });
@@ -2566,14 +2593,19 @@ namespace AutoRest.Java
                 javaFile.Annotation("JsonFlatten");
             }
 
-            bool isFinal = !hasDerivedModels && !model.NeedsFlatten;
+            JavaVisibility classVisibility = GetTypeVisibility(settings);
+            List<JavaModifier> classModifiers = new List<JavaModifier>();
+            if (!hasDerivedModels && !model.NeedsFlatten)
+            {
+                classModifiers.Add(JavaModifier.Final);
+            }
 
             string classNameWithBaseType = model.Name;
             if (model.ParentModel != null)
             {
                 classNameWithBaseType += $" extends {model.ParentModel.Name}";
             }
-            javaFile.PublicClass(isFinal, classNameWithBaseType, (classBlock) =>
+            javaFile.Class(classVisibility, classModifiers, classNameWithBaseType, (classBlock) =>
             {
                 foreach (ServiceModelProperty property in model.Properties)
                 {
@@ -2755,13 +2787,17 @@ namespace AutoRest.Java
         public static JavaFile GetExceptionJavaFile(ServiceException exception, JavaSettings settings)
         {
             JavaFile javaFile = GetJavaFileWithHeaderAndPackage(exception.Subpackage, settings, exception.Name);
+
+            JavaVisibility classVisibility = GetTypeVisibility(settings);
+            IEnumerable<JavaModifier> classModifiers = new[] { JavaModifier.Final };
+
             javaFile.Import("com.microsoft.rest.v2.RestException",
                             "com.microsoft.rest.v2.http.HttpResponse");
             javaFile.JavadocComment((comment) =>
             {
                 comment.Description($"Exception thrown for an invalid response with {exception.ErrorName} information.");
             });
-            javaFile.PublicFinalClass($"{exception.Name} extends RestException", (classBlock) =>
+            javaFile.Class(classVisibility, classModifiers, $"{exception.Name} extends RestException", (classBlock) =>
             {
                 classBlock.JavadocComment((comment) =>
                 {
@@ -2800,10 +2836,14 @@ namespace AutoRest.Java
         {
             string enumTypeComment = $"Defines values for {serviceEnum.Name}.";
 
+            JavaVisibility enumVisibility = GetTypeVisibility(settings);
+
             string subpackage = settings.IsFluent ? null : modelsPackage;
             JavaFile javaFile = GetJavaFileWithHeaderAndPackage(subpackage, settings, serviceEnum.Name);
             if (serviceEnum.Expandable)
             {
+                IEnumerable<JavaModifier> classModifiers = new[] { JavaModifier.Final };
+
                 javaFile.Import("java.util.Collection",
                                 "com.fasterxml.jackson.annotation.JsonCreator",
                                 "com.microsoft.rest.v2.ExpandableStringEnum");
@@ -2811,7 +2851,7 @@ namespace AutoRest.Java
                 {
                     comment.Description(enumTypeComment);
                 });
-                javaFile.PublicFinalClass($"{serviceEnum.Name} extends ExpandableStringEnum<{serviceEnum.Name}>", (classBlock) =>
+                javaFile.Class(enumVisibility, classModifiers, $"{serviceEnum.Name} extends ExpandableStringEnum<{serviceEnum.Name}>", (classBlock) =>
                 {
                     foreach (ServiceEnumValue enumValue in serviceEnum.Values)
                     {
@@ -2849,7 +2889,7 @@ namespace AutoRest.Java
                 {
                     comment.Description(enumTypeComment);
                 });
-                javaFile.PublicEnum(serviceEnum.Name, (enumBlock) =>
+                javaFile.Enum(enumVisibility, serviceEnum.Name, (enumBlock) =>
                 {
                     if (serviceEnum.Values.Any())
                     {
@@ -3528,7 +3568,7 @@ namespace AutoRest.Java
                     comment.Description($"The interface defining all the services for {clientTypeName} to be used by the proxy service to perform REST calls.");
                 });
                 classBlock.Annotation($"Host(\"{restAPI.BaseURL}\")");
-                classBlock.Interface(restAPI.Name, interfaceBlock =>
+                classBlock.Interface(JavaVisibility.Private, restAPI.Name, interfaceBlock =>
                 {
                     foreach (RestAPIMethod restAPIMethod in restAPI.Methods)
                     {
@@ -3871,7 +3911,7 @@ namespace AutoRest.Java
                 else if (restAPIMethod.IsPagingOperation)
                 {
                     string nextMethodName = autoRestMethod.Extensions?.GetValue<Fixable<string>>("nextMethodName")?.ToCamelCase();
-                    string nextMethodGroup = autoRestMethod.Extensions?.GetValue<Fixable<string>>("nextMethodGroup") ?? null;
+                    string nextMethodGroup = autoRestMethod.Extensions?.GetValue<Fixable<string>>("nextMethodGroup")?.Value;
 
                     nextMethod = autoRestMethod.CodeModel.Methods
                         .FirstOrDefault((AutoRestMethod codeModelMethod) =>
@@ -6780,6 +6820,11 @@ namespace AutoRest.Java
         private static IEnumerable<ClassType> GetClientMethodParameterAnnotations(bool isRequired, JavaSettings settings)
         {
             return settings.NonNullAnnotations && isRequired ? nonNullAnnotation : Enumerable.Empty<ClassType>();
+        }
+
+        private static JavaVisibility GetTypeVisibility(JavaSettings settings)
+        {
+            return settings.PackagePrivate ? JavaVisibility.PackagePrivate : JavaVisibility.Public;
         }
     }
 }

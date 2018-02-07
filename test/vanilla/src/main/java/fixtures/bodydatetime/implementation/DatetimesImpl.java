@@ -59,7 +59,7 @@ public final class DatetimesImpl implements Datetimes {
      * proxy service to perform REST calls.
      */
     @Host("http://localhost:3000")
-    interface DatetimesService {
+    private interface DatetimesService {
         @GET("datetime/null")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)

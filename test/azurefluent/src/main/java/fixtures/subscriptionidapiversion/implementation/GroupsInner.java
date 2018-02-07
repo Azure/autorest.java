@@ -57,7 +57,7 @@ public final class GroupsInner {
      * proxy service to perform REST calls.
      */
     @Host("https://management.azure.com/")
-    interface GroupsService {
+    private interface GroupsService {
         @GET("subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)

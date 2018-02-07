@@ -79,7 +79,7 @@ public final class HttpRedirectsImpl implements HttpRedirects {
      * the proxy service to perform REST calls.
      */
     @Host("http://localhost:3000")
-    interface HttpRedirectsService {
+    private interface HttpRedirectsService {
         @HEAD("http/redirect/300")
         @ExpectedResponses({200, 300})
         @UnexpectedResponseExceptionType(ErrorException.class)

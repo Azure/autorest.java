@@ -61,7 +61,7 @@ public final class EnumsImpl implements Enums {
      * proxy service to perform REST calls.
      */
     @Host("http://localhost:3000")
-    interface EnumsService {
+    private interface EnumsService {
         @GET("string/enum/notExpandable")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)

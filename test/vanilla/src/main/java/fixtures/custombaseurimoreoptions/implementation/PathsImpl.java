@@ -57,7 +57,7 @@ public final class PathsImpl implements Paths {
      * proxy service to perform REST calls.
      */
     @Host("{vault}{secret}{dnsSuffix}")
-    interface PathsService {
+    private interface PathsService {
         @GET("customuri/{subscriptionId}/{keyName}")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)

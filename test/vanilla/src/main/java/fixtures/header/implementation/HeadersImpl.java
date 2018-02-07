@@ -75,7 +75,7 @@ public final class HeadersImpl implements Headers {
      * proxy service to perform REST calls.
      */
     @Host("http://localhost:3000")
-    interface HeadersService {
+    private interface HeadersService {
         @POST("header/param/existingkey")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)

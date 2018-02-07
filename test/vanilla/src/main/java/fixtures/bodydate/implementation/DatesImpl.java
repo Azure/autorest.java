@@ -59,7 +59,7 @@ public final class DatesImpl implements Dates {
      * proxy service to perform REST calls.
      */
     @Host("http://localhost:3000")
-    interface DatesService {
+    private interface DatesService {
         @GET("date/null")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)

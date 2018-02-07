@@ -56,7 +56,7 @@ public final class ApiVersionDefaultsImpl implements ApiVersionDefaults {
      * used by the proxy service to perform REST calls.
      */
     @Host("http://localhost:3000")
-    interface ApiVersionDefaultsService {
+    private interface ApiVersionDefaultsService {
         @GET("azurespecials/apiVersion/method/string/none/query/global/2015-07-01-preview")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)

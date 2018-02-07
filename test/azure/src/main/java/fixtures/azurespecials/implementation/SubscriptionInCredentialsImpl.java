@@ -57,7 +57,7 @@ public final class SubscriptionInCredentialsImpl implements SubscriptionInCreden
      * be used by the proxy service to perform REST calls.
      */
     @Host("http://localhost:3000")
-    interface SubscriptionInCredentialsService {
+    private interface SubscriptionInCredentialsService {
         @POST("azurespecials/subscriptionId/method/string/none/path/global/1234-5678-9012-3456/{subscriptionId}")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)

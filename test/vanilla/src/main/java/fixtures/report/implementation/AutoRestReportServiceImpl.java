@@ -61,7 +61,7 @@ public final class AutoRestReportServiceImpl extends ServiceClient implements Au
      * used by the proxy service to perform REST calls.
      */
     @Host("http://localhost:3000")
-    interface AutoRestReportServiceService {
+    private interface AutoRestReportServiceService {
         @GET("report")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
