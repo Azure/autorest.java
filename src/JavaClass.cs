@@ -48,6 +48,13 @@ namespace AutoRest.Java
             addNewLine = true;
         }
 
+        public void PrivateConstructor(string constructorSignature, Action<JavaBlock> constructor)
+        {
+            AddExpectedNewLine();
+            contents.Block($"private {constructorSignature}", constructor);
+            addNewLine = true;
+        }
+
         public void PublicConstructor(string constructorSignature, Action<JavaBlock> constructor)
         {
             AddExpectedNewLine();

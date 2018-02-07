@@ -194,7 +194,7 @@ namespace AutoRest.Java
                     isFinal: false,
                     type: ClassType.AzureTokenCredentials,
                     name: "credentials",
-                    isRequired: true, 
+                    isRequired: true,
                     annotations: GetClientMethodParameterAnnotations(true, javaSettings)));
 
             azureEnvironmentParameter = new Lazy<Parameter>(() =>
@@ -1337,7 +1337,7 @@ namespace AutoRest.Java
                             result = ClassType.SubResource;
                         }
                     }
-                    
+
                     if (result == null)
                     {
                         bool isInnerModelType = innerModelCompositeType.Contains(autoRestCompositeType);
@@ -1664,19 +1664,19 @@ namespace AutoRest.Java
 
                 if (compositeTypeProperties.Any())
                 {
-                    modelImports.Add("com.fasterxml.jackson.annotation.JsonProperty");
-                }
-                if (compositeTypeProperties.Any(p => p.XmlIsAttribute))
-                {
-                    modelImports.Add("com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlProperty");
-                }
-                if (settings.ShouldGenerateXmlSerialization)
-                {
-                    modelImports.Add("com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlRootElement");
-
-                    if (compositeTypeProperties.Any(p => p.XmlIsWrapped && p.ModelType is AutoRestSequenceType))
+                    if (settings.ShouldGenerateXmlSerialization)
                     {
-                        modelImports.Add("com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlElementWrapper");
+                        modelImports.Add("com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlRootElement");
+                        modelImports.Add("com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlProperty");
+
+                        if (compositeTypeProperties.Any(p => p.ModelType is AutoRestSequenceType))
+                        {
+                            modelImports.Add("com.fasterxml.jackson.annotation.JsonCreator");
+                        }
+                    }
+                    else
+                    {
+                        modelImports.Add("com.fasterxml.jackson.annotation.JsonProperty");
                     }
                 }
 
@@ -2138,7 +2138,7 @@ namespace AutoRest.Java
                 classBlock.PrivateFinalMemberVariable(xmlSequenceWrapper.SequenceType, xmlElementNameCamelCase);
 
                 classBlock.Annotation("JsonCreator");
-                classBlock.PublicConstructor($"{xmlSequenceWrapper.WrapperClassName}(@JsonProperty(\"{xmlElementNameCamelCase}\") {xmlSequenceWrapper.SequenceType} {xmlElementNameCamelCase})", constructor =>
+                classBlock.PublicConstructor($"{xmlSequenceWrapper.WrapperClassName}(@JsonProperty(\"{xmlElementName}\") {xmlSequenceWrapper.SequenceType} {xmlElementNameCamelCase})", constructor =>
                 {
                     constructor.Line($"this.{xmlElementNameCamelCase} = {xmlElementNameCamelCase};");
                 });
@@ -2148,7 +2148,7 @@ namespace AutoRest.Java
                     comment.Description($"Get the {xmlElementName} value.");
                     comment.Return($"the {xmlElementName} value");
                 });
-                classBlock.PublicMethod($"{xmlSequenceWrapper.SequenceType} {xmlElementNameCamelCase}()", function =>
+                classBlock.PublicMethod($"{xmlSequenceWrapper.SequenceType} items()", function =>
                 {
                     function.Return(xmlElementNameCamelCase);
                 });
@@ -2609,31 +2609,46 @@ namespace AutoRest.Java
             {
                 foreach (ServiceModelProperty property in model.Properties)
                 {
+                    string xmlWrapperClassName = property.XmlName + "Wrapper";
+                    if (settings.ShouldGenerateXmlSerialization && property.ModelTypeIsSequence)
+                    {
+                        classBlock.PrivateStaticFinalClass(xmlWrapperClassName, innerClass =>
+                        {
+                            innerClass.Annotation($"JacksonXmlProperty(localName = \"{property.XmlListElementName}\")");
+                            innerClass.PrivateFinalMemberVariable(property.ClientTypeName, "items");
+
+                            innerClass.Annotation("JsonCreator");
+                            innerClass.PrivateConstructor(
+                                $"{xmlWrapperClassName}(@JacksonXmlProperty(localName = \"{property.XmlListElementName}\") {property.ClientTypeName} items)",
+                                constructor => constructor.Line("this.items = items;"));
+                        });
+                    }
+
                     classBlock.JavadocComment(settings.MaximumJavadocCommentWidth, (comment) =>
                     {
                         comment.Description(property.Description);
                     });
 
-                    if (!string.IsNullOrEmpty(property.AnnotationArguments))
+                    if (settings.ShouldGenerateXmlSerialization)
                     {
-                        if (property.IsXmlAttribute)
-                        {
-                            string localName = settings.ShouldGenerateXmlSerialization ? property.XmlName : property.SerializedName;
-                            classBlock.Annotation($"JacksonXmlProperty(localName = \"{localName}\", isAttribute = true)");
-                        }
-                        else if (settings.ShouldGenerateXmlSerialization && property.IsXmlWrapper && property.ModelTypeIsSequence)
-                        {
-                            string localName = settings.ShouldGenerateXmlSerialization ? property.XmlName : property.SerializedName.ToString();
-                            classBlock.Annotation($"JacksonXmlElementWrapper(localName = \"{localName}\")");
-
-                            classBlock.Annotation($"JsonProperty(\"{property.XmlListElementName}\")");
-                        }
-                        else
-                        {
-                            classBlock.Annotation($"JsonProperty({property.AnnotationArguments})");
-                        }
+                        string localName = settings.ShouldGenerateXmlSerialization ? property.XmlName : property.SerializedName;
+                        classBlock.Annotation(property.IsXmlAttribute
+                            ? $"JacksonXmlProperty(localName = \"{localName}\", isAttribute = true)"
+                            : $"JacksonXmlProperty(localName = \"{localName}\")");
                     }
-                    classBlock.PrivateMemberVariable($"{property.WireTypeName} {property.Name}");
+                    else if (!string.IsNullOrEmpty(property.AnnotationArguments))
+                    {
+                        classBlock.Annotation($"JsonProperty({property.AnnotationArguments})");
+                    }
+
+                    if (settings.ShouldGenerateXmlSerialization && property.ModelTypeIsSequence)
+                    {
+                        classBlock.PrivateMemberVariable($"{xmlWrapperClassName} {property.Name}");
+                    }
+                    else
+                    {
+                        classBlock.PrivateMemberVariable($"{property.WireTypeName} {property.Name}");
+                    }
                 }
 
                 IEnumerable<ServiceModelProperty> constantProperties = model.Properties.Where(property => property.IsConstant);
@@ -2674,7 +2689,14 @@ namespace AutoRest.Java
                         string expression = $"this.{property.Name}";
                         if (sourceTypeName == targetTypeName)
                         {
-                            methodBlock.Return($"this.{property.Name}");
+                            if (settings.ShouldGenerateXmlSerialization && property.ModelTypeIsSequence)
+                            {
+                                methodBlock.Return($"this.{property.Name}.items");
+                            }
+                            else
+                            {
+                                methodBlock.Return($"this.{property.Name}");
+                            }
                         }
                         else
                         {
@@ -2773,7 +2795,14 @@ namespace AutoRest.Java
                             }
                             else
                             {
-                                methodBlock.Line($"this.{property.Name} = {property.Name};");
+                                if (settings.ShouldGenerateXmlSerialization && property.ModelTypeIsSequence)
+                                {
+                                    methodBlock.Line($"this.{property.Name} = new {property.XmlName}Wrapper({property.Name});");
+                                }
+                                else
+                                {
+                                    methodBlock.Line($"this.{property.Name} = {property.Name};");
+                                }
                             }
                             methodBlock.Return("this");
                         });
@@ -2809,7 +2838,7 @@ namespace AutoRest.Java
                 {
                     constructorBlock.Line("super(message, response);");
                 });
-                
+
                 classBlock.JavadocComment((comment) =>
                 {
                     comment.Description($"Initializes a new instance of the {exception.Name} class.");
@@ -2821,7 +2850,7 @@ namespace AutoRest.Java
                 {
                     constructorBlock.Line("super(message, response, body);");
                 });
-                
+
                 classBlock.Annotation("Override");
                 classBlock.PublicMethod($"{exception.ErrorName} body()", (methodBlock) =>
                 {
@@ -3373,7 +3402,7 @@ namespace AutoRest.Java
                     autoRestPrimaryTypeName = PrimaryTypeGetWantNullable(autoRestPrimaryType) ? "Long" : "long";
                     break;
                 case AutoRestKnownPrimaryType.Stream:
-                    autoRestPrimaryTypeName = "Flowable<byte[]>";
+                    autoRestPrimaryTypeName = "Flowable<ByteBuffer>";
                     break;
                 case AutoRestKnownPrimaryType.String:
                     autoRestPrimaryTypeName = "String";
