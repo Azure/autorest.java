@@ -2,6 +2,7 @@
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
 using System.Collections.Generic;
+using System.Linq;
 
 namespace AutoRest.Java.Model
 {
@@ -13,8 +14,8 @@ namespace AutoRest.Java.Model
         /// <summary>
         /// Create a new ServiceModel with the provided properties.
         /// </summary>
+        /// <param name="package">The package that this model class belongs to.</param>
         /// <param name="name">The name of this model.</param>
-        /// <param name="subPackage">The subpackage that this model is in.</param>
         /// <param name="imports">The imports for this model.</param>
         /// <param name="description">The description of this model.</param>
         /// <param name="isPolymorphic">Whether or not this model has model types that derive from it.</param>
@@ -25,10 +26,10 @@ namespace AutoRest.Java.Model
         /// <param name="derivedModels">The models that derive from this model.</param>
         /// <param name="xmlName">The name that will be used for this model's XML element representation.</param>
         /// <param name="properties">The properties for this model.</param>
-        public ServiceModel(string name, string subPackage, IEnumerable<string> imports, string description, bool isPolymorphic, string polymorphicDiscriminator, string serializedName, bool needsFlatten, ServiceModel parentModel, IEnumerable<ServiceModel> derivedModels, string xmlName, IEnumerable<ServiceModelProperty> properties)
+        public ServiceModel(string package, string name, IEnumerable<string> imports, string description, bool isPolymorphic, string polymorphicDiscriminator, string serializedName, bool needsFlatten, ServiceModel parentModel, IEnumerable<ServiceModel> derivedModels, string xmlName, IEnumerable<ServiceModelProperty> properties)
         {
+            Package = package;
             Name = name;
-            SubPackage = subPackage;
             Imports = imports;
             Description = description;
             IsPolymorphic = isPolymorphic;
@@ -42,14 +43,19 @@ namespace AutoRest.Java.Model
         }
 
         /// <summary>
+        /// The package that this model class belongs to.
+        /// </summary>
+        public string Package { get; }
+        
+        /// <summary>
         /// Get the name of this model.
         /// </summary>
         public string Name { get; }
 
         /// <summary>
-        /// Get the subpackage that this model is in.
+        /// The full name of this model class (package and name).
         /// </summary>
-        public string SubPackage { get; }
+        public string FullName => $"{Package}.{Name}";
 
         /// <summary>
         /// Get the imports for this model.
@@ -100,5 +106,50 @@ namespace AutoRest.Java.Model
         /// Get the properties for this model.
         /// </summary>
         public IEnumerable<ServiceModelProperty> Properties { get; }
+
+        /// <summary>
+        /// Add this ServiceModel's imports to the provided ISet of imports.
+        /// </summary>
+        /// <param name="imports">The set of imports to add to.</param>
+        /// <param name="settings">The settings for this Java generator session.</param>
+        public void AddImportsTo(ISet<string> imports, JavaSettings settings)
+        {
+            foreach (string import in Imports)
+            {
+                imports.Add(import);
+            }
+
+            if (ParentModel != null && settings.IsAzureOrFluent)
+            {
+                if (ParentModel.Name == ClassType.Resource.Name)
+                {
+                    ClassType.Resource.AddImportsTo(imports, false);
+                }
+                else if (ParentModel.Name == ClassType.SubResource.Name)
+                {
+                    ClassType.SubResource.AddImportsTo(imports, false);
+                }
+                else
+                {
+                    imports.Add(ParentModel.FullName);
+                }
+            }
+
+            if (IsPolymorphic)
+            {
+                imports.Add("com.fasterxml.jackson.annotation.JsonTypeInfo");
+                imports.Add("com.fasterxml.jackson.annotation.JsonTypeName");
+
+                if (DerivedModels != null && DerivedModels.Any())
+                {
+                    imports.Add("com.fasterxml.jackson.annotation.JsonSubTypes");
+                }
+            }
+
+            foreach (ServiceModelProperty property in Properties)
+            {
+                property.AddImportsTo(imports, settings);
+            }
+        }
     }
 }

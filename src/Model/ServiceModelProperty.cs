@@ -1,6 +1,8 @@
 ﻿// Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
+using System.Collections.Generic;
+
 namespace AutoRest.Java.Model
 {
     /// <summary>
@@ -19,14 +21,12 @@ namespace AutoRest.Java.Model
         /// <param name="serializedName">This property's name when it is serialized.</param>
         /// <param name="isXmlWrapper">Whether or not this property is a container.</param>
         /// <param name="xmlListElementName">The name of each list element tag within an XML list property.</param>
-        /// <param name="wireTypeName">The name of this property's type when it is sent through the network (across the wire).</param>
+        /// <param name="wireType">The type of this property as it is transmitted across the network (across the wire).</param>
+        /// <param name="clientType">The type of this property as it will be exposed via the client.</param>
         /// <param name="isConstant">Whether or not this property has a constant value.</param>
-        /// <param name="modelTypeIsSequence">Whether or not this property's model type is a sequence type.</param>
-        /// <param name="modelTypeIsComposite">Whether or not this property's model type is a composite type.</param>
-        /// <param name="clientTypeName">The name of this property's type when it is exposed via the client library.</param>
         /// <param name="defaultValue">The default value expression of this property.</param>
         /// <param name="isReadOnly">Whether or not this property's value can be changed by the client library.</param>
-        public ServiceModelProperty(string name, string description, string annotationArguments, bool isXmlAttribute, string xmlName, string serializedName, bool isXmlWrapper, string xmlListElementName, string wireTypeName, bool isConstant, bool modelTypeIsSequence, bool modelTypeIsComposite, string clientTypeName, string defaultValue, bool isReadOnly)
+        public ServiceModelProperty(string name, string description, string annotationArguments, bool isXmlAttribute, string xmlName, string serializedName, bool isXmlWrapper, string xmlListElementName, IType wireType, IType clientType, bool isConstant, string defaultValue, bool isReadOnly, bool wasFlattened)
         {
             Name = name;
             Description = description;
@@ -36,13 +36,12 @@ namespace AutoRest.Java.Model
             SerializedName = serializedName;
             IsXmlWrapper = isXmlWrapper;
             XmlListElementName = xmlListElementName;
-            WireTypeName = wireTypeName;
+            WireType = wireType;
+            ClientType = clientType;
             IsConstant = isConstant;
-            ModelTypeIsSequence = modelTypeIsSequence;
-            ModelTypeIsComposite = modelTypeIsComposite;
-            ClientTypeName = clientTypeName;
             DefaultValue = defaultValue;
             IsReadOnly = isReadOnly;
+            WasFlattened = wasFlattened;
         }
 
         /// <summary>
@@ -86,29 +85,19 @@ namespace AutoRest.Java.Model
         public string XmlListElementName { get; }
 
         /// <summary>
-        /// Get the name of this property's type when it is sent through the network (across the wire).
+        /// The type of this property as it is transmitted across the network (across the wire).
         /// </summary>
-        public string WireTypeName { get; }
+        public IType WireType { get; }
+
+        /// <summary>
+        /// The type of this property as it will be exposed via the client.
+        /// </summary>
+        public IType ClientType { get; }
 
         /// <summary>
         /// Get whether or not this property has a constant value.
         /// </summary>
         public bool IsConstant { get; }
-
-        /// <summary>
-        /// Get whether or not this property's model type is a sequence type.
-        /// </summary>
-        public bool ModelTypeIsSequence { get; }
-
-        /// <summary>
-        /// Get whether or not this property's model type is a composite type.
-        /// </summary>
-        public bool ModelTypeIsComposite { get; }
-
-        /// <summary>
-        /// Get the name of this property's type when it is exposed via the client library.
-        /// </summary>
-        public string ClientTypeName { get; }
 
         /// <summary>
         /// Get the default value expression of this property.
@@ -119,5 +108,41 @@ namespace AutoRest.Java.Model
         /// Get whether or not this property's value can be changed by the client library.
         /// </summary>
         public bool IsReadOnly { get; }
+
+        /// <summary>
+        /// Whether or not this property was flattened.
+        /// </summary>
+        public bool WasFlattened { get; }
+
+        /// <summary>
+        /// Add this ServiceModelProperty's imports to the provided ISet of imports.
+        /// </summary>
+        /// <param name="imports">The set of imports to add to.</param>
+        /// <param name="settings">The settings for this Java generator session.</param>
+        public void AddImportsTo(ISet<string> imports, JavaSettings settings)
+        {
+            WireType.AddImportsTo(imports, false);
+            ClientType.AddImportsTo(imports, false);
+
+            if (WasFlattened)
+            {
+                imports.Add("com.microsoft.rest.v2.serializer.JsonFlatten");
+            }
+
+            if (settings.ShouldGenerateXmlSerialization)
+            {
+                imports.Add("com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlRootElement");
+                imports.Add("com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlProperty");
+
+                if (WireType is ListType)
+                {
+                    imports.Add("com.fasterxml.jackson.annotation.JsonCreator");
+                }
+            }
+            else
+            {
+                imports.Add("com.fasterxml.jackson.annotation.JsonProperty");
+            }
+        }
     }
 }
