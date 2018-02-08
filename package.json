@@ -1,6 +1,6 @@
 {
   "name": "@microsoft.azure/autorest.java",
-  "version": "2.0.10",
+  "version": "2.0.11",
   "description": "The Java extension for classic generators in AutoRest.",
   "scripts": {
     "autorest": "autorest",
