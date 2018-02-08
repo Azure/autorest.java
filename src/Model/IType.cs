@@ -29,5 +29,12 @@ namespace AutoRest.Java.Model
         /// <param name="imports">The set of imports to add to.</param>
         /// <param name="includeImplementationImports">Whether or not to include imports that are only necessary for method implementations.</param>
         void AddImportsTo(ISet<string> imports, bool includeImplementationImports);
+
+        /// <summary>
+        /// Convert the provided default value expression to this type's default value expression.
+        /// </summary>
+        /// <param name="sourceExpression">The source expression to convert to this type's default value expression.</param>
+        /// <returns>This type's default value expression.</returns>
+        string DefaultValueExpression(string sourceExpression);
     }
 }

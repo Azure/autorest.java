@@ -60,6 +60,11 @@ namespace AutoRest.Java.Model
             return this == type;
         }
 
+        public string DefaultValueExpression(string sourceExpression)
+        {
+            return sourceExpression;
+        }
+
         public override string ToString()
         {
             return Name;

@@ -90,5 +90,10 @@ namespace AutoRest.Java.Model
                 typeArgument.AddImportsTo(imports, includeImplementationImports);
             }
         }
+
+        public string DefaultValueExpression(string sourceExpression)
+        {
+            return sourceExpression;
+        }
     }
 }
