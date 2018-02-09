@@ -3,8 +3,16 @@ using System;
 
 namespace AutoRest.Java.DanModel
 {
+    [TestClass]
     public static class JavaFileContentsAssert
     {
+        public static void AreEqual(string expectedText, JavaFileContents actual)
+        {
+            JavaFileContents expected = new JavaFileContents();
+            expected.Text(expectedText);
+            AreEqual(expected, actual);
+        }
+
         public static void AreEqual(JavaFileContents expected, JavaFileContents actual)
         {
             if (expected != actual)

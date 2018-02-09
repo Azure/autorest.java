@@ -25,9 +25,9 @@ public enum EnumConst {
     /**
      * The actual serialized value for a EnumConst instance.
      */
-    private String value;
+    private final String value;
 
-    EnumConst(String value) {
+    private EnumConst(String value) {
         this.value = value;
     }
 

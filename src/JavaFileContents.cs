@@ -15,7 +15,13 @@ namespace AutoRest.Java
 
         private int? wordWrapWidth;
 
-        private bool previousLineEndingPending;
+        private CurrentLineType currentLineType;
+        private enum CurrentLineType
+        {
+            Empty,
+            AfterIf,
+            Text,
+        }
 
         public JavaFileContents()
             : this(null)
@@ -160,44 +166,56 @@ namespace AutoRest.Java
             }
         }
 
-        private void ClosePreviousLineEnding()
-        {
-            if (previousLineEndingPending)
-            {
-                previousLineEndingPending = false;
-
-                Line();
-            }
-        }
-
         public void Text(string text)
         {
-            ClosePreviousLineEnding();
-
-            Text(text, addPrefix: true);
+            if (currentLineType == CurrentLineType.Empty)
+            {
+                Text(text, addPrefix: true);
+            }
+            else if (currentLineType == CurrentLineType.Text)
+            {
+                Text(text, addPrefix: false);
+            }
+            else if (currentLineType == CurrentLineType.AfterIf)
+            {
+                Line("", addPrefix: false);
+                Text(text, addPrefix: true);
+            }
+            currentLineType = CurrentLineType.Text;
         }
 
         private void Line(string text, bool addPrefix)
         {
             Text($"{text}{Environment.NewLine}", addPrefix);
+            currentLineType = CurrentLineType.Empty;
         }
 
-        public JavaFileContents Line(string text, params object[] formattedArguments)
+        public void Line(string text, params object[] formattedArguments)
         {
-            ClosePreviousLineEnding();
-
             if (formattedArguments != null && formattedArguments.Length > 0)
             {
                 text = string.Format(text, formattedArguments);
             }
 
-            Line(text, addPrefix: true);
-            return this;
+            if (currentLineType == CurrentLineType.Empty)
+            {
+                Line(text, addPrefix: true);
+            }
+            else if (currentLineType == CurrentLineType.Text)
+            {
+                Line(text, addPrefix: false);
+            }
+            else if (currentLineType == CurrentLineType.AfterIf)
+            {
+                Line("", addPrefix: false);
+                Line(text, addPrefix: true);
+            }
+            currentLineType = CurrentLineType.Empty;
         }
 
-        public JavaFileContents Line()
+        public void Line()
         {
-            return Line("");
+            Line("");
         }
 
         public void Package(string package)
@@ -361,9 +379,17 @@ namespace AutoRest.Java
             Block($"{ToString(visibility)}{ToString(modifiers)}{methodSignature}", method);
         }
 
-        public void Enum(JavaVisibility visibility, string enumName, Action<JavaBlock> enumAction)
+        public void Enum(JavaVisibility visibility, string enumName, Action<JavaEnum> enumAction)
         {
-            Block($"{ToString(visibility)}enum {enumName}", enumAction);
+            Block($"{ToString(visibility)}enum {enumName}", block =>
+            {
+                if (enumAction != null)
+                {
+                    JavaEnum javaEnum = new JavaEnum(this);
+                    enumAction.Invoke(javaEnum);
+                    javaEnum.AddExpectedNewLineAfterLastValue();
+                }
+            });
         }
 
         public void Interface(JavaVisibility visibility, string interfaceSignature, Action<JavaInterface> interfaceAction)
@@ -384,14 +410,11 @@ namespace AutoRest.Java
                 ifAction.Invoke(new JavaBlock(this));
             });
             Text($"}}");
-
-            previousLineEndingPending = true;
+            currentLineType = CurrentLineType.AfterIf;
         }
 
         public void Else(Action<JavaBlock> elseAction)
         {
-            previousLineEndingPending = false;
-
             Line($" else {{", addPrefix: false);
             Indent(() =>
             {
