@@ -10,7 +10,7 @@ This project enables Java code generation in [AutoRest](https://github.com/Azure
   - Default: `true`
   - Without Argument: `int Plus(Integer val1, Integer val2)`
   - With Argument: `int Plus(@NonNull Integer val1, @NonNull Integer val2)`
-- *--java.package-private*: Whether or not all created types will be package-private.
+- *--java.package-private*: Whether or not created client types (ServiceClient and MethodGroupClients) will be package-private.
   - Default: `false`
   - Without Argument: `public class MyType { ... }`
   - With Argument: `class MyType { ... }`

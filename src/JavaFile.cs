@@ -44,6 +44,16 @@ namespace AutoRest.Java
             Contents.Indent(indentAction);
         }
 
+        public void PublicFinalClass(string classDeclaration, Action<JavaClass> classAction)
+        {
+            PublicClass(new[] { JavaModifier.Final }, classDeclaration, classAction);
+        }
+
+        public void PublicClass(IEnumerable<JavaModifier> modifiers, string classDeclaration, Action<JavaClass> classAction)
+        {
+            Class(JavaVisibility.Public, modifiers, classDeclaration, classAction);
+        }
+
         public void Class(JavaVisibility visibility, IEnumerable<JavaModifier> modifiers, string classDeclaration, Action<JavaClass> classAction)
         {
             Contents.Class(visibility, modifiers, classDeclaration, classAction);
@@ -103,7 +113,12 @@ namespace AutoRest.Java
             Contents.Annotation(annotations);
         }
 
-        public void Enum(JavaVisibility visibility, string enumName, Action<JavaBlock> enumAction)
+        public void PublicEnum(string enumName, Action<JavaEnum> enumAction)
+        {
+            Enum(JavaVisibility.Public, enumName, enumAction);
+        }
+
+        public void Enum(JavaVisibility visibility, string enumName, Action<JavaEnum> enumAction)
         {
             Contents.Enum(visibility, enumName, enumAction);
         }
