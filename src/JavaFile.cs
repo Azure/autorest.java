@@ -123,6 +123,11 @@ namespace AutoRest.Java
             Contents.Enum(visibility, enumName, enumAction);
         }
 
+        public void PublicInterface(string interfaceName, Action<JavaInterface> interfaceAction)
+        {
+            Interface(JavaVisibility.Public, interfaceName, interfaceAction);
+        }
+
         public void Interface(JavaVisibility visibility, string interfaceName, Action<JavaInterface> interfaceAction)
         {
             Contents.Interface(visibility, interfaceName, interfaceAction);

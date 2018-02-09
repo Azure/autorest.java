@@ -88,7 +88,6 @@ namespace AutoRest.Java
                 "azure-arm",
                 "fluent",
                 "non-null-annotations",
-                "package-private",
                 "string-dates",
             };
             foreach (string expectedSettingName in expectedSettingNames)
