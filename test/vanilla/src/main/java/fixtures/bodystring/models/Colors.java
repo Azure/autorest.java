@@ -35,9 +35,9 @@ public enum Colors {
     /**
      * The actual serialized value for a Colors instance.
      */
-    private String value;
+    private final String value;
 
-    Colors(String value) {
+    private Colors(String value) {
         this.value = value;
     }
 
