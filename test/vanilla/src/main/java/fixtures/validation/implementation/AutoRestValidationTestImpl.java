@@ -449,8 +449,8 @@ public final class AutoRestValidationTestImpl extends ServiceClient implements A
      * @return the {@link Single&lt;RestResponse&lt;Void, Product&gt;&gt;} object if successful.
      */
     public Single<RestResponse<Void, Product>> postWithConstantInBodyWithRestResponseAsync(Product body) {
-        final String constantParam = "constant";
         Validator.validate(body);
+        final String constantParam = "constant";
         return service.postWithConstantInBody(constantParam, body);
     }
 

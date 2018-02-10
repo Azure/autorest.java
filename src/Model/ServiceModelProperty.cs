@@ -26,7 +26,8 @@ namespace AutoRest.Java.Model
         /// <param name="isConstant">Whether or not this property has a constant value.</param>
         /// <param name="defaultValue">The default value expression of this property.</param>
         /// <param name="isReadOnly">Whether or not this property's value can be changed by the client library.</param>
-        public ServiceModelProperty(string name, string description, string annotationArguments, bool isXmlAttribute, string xmlName, string serializedName, bool isXmlWrapper, string xmlListElementName, IType wireType, IType clientType, bool isConstant, string defaultValue, bool isReadOnly, bool wasFlattened)
+        /// <param name="headerCollectionPrefix">The prefix of the headers that make up this property's values.</param>
+        public ServiceModelProperty(string name, string description, string annotationArguments, bool isXmlAttribute, string xmlName, string serializedName, bool isXmlWrapper, string xmlListElementName, IType wireType, IType clientType, bool isConstant, string defaultValue, bool isReadOnly, bool wasFlattened, string headerCollectionPrefix)
         {
             Name = name;
             Description = description;
@@ -42,6 +43,7 @@ namespace AutoRest.Java.Model
             DefaultValue = defaultValue;
             IsReadOnly = isReadOnly;
             WasFlattened = wasFlattened;
+            HeaderCollectionPrefix = headerCollectionPrefix;
         }
 
         /// <summary>
@@ -115,12 +117,22 @@ namespace AutoRest.Java.Model
         public bool WasFlattened { get; }
 
         /// <summary>
+        /// The prefix of the headers that make up this property's values.
+        /// </summary>
+        public string HeaderCollectionPrefix { get; }
+
+        /// <summary>
         /// Add this ServiceModelProperty's imports to the provided ISet of imports.
         /// </summary>
         /// <param name="imports">The set of imports to add to.</param>
         /// <param name="settings">The settings for this Java generator session.</param>
         public void AddImportsTo(ISet<string> imports, JavaSettings settings)
         {
+            if (!string.IsNullOrEmpty(HeaderCollectionPrefix))
+            {
+                imports.Add("com.microsoft.rest.v2.annotations.HeaderCollection");
+            }
+
             WireType.AddImportsTo(imports, false);
             ClientType.AddImportsTo(imports, false);
 

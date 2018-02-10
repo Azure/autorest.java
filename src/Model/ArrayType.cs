@@ -8,7 +8,7 @@ namespace AutoRest.Java.Model
 {
     public class ArrayType : IType
     {
-        public static readonly ArrayType ByteArray = new ArrayType(PrimitiveType.Byte, (string defaultValueExpression) => $"\"{defaultValueExpression}\".getBytes()");
+        public static readonly ArrayType ByteArray = new ArrayType(PrimitiveType.Byte, (string defaultValueExpression) => defaultValueExpression == null ? "new byte[0]" : $"\"{defaultValueExpression}\".getBytes()");
 
         private ArrayType(IType elementType, Func<string,string> defaultValueExpressionConverter)
         {
@@ -42,12 +42,7 @@ namespace AutoRest.Java.Model
 
         public string DefaultValueExpression(string sourceExpression)
         {
-            string result = sourceExpression;
-            if (result != null && DefaultValueExpressionConverter != null)
-            {
-                result = DefaultValueExpressionConverter(sourceExpression);
-            }
-            return result;
+            return DefaultValueExpressionConverter(sourceExpression);
         }
     }
 }
