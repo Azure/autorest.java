@@ -117,7 +117,7 @@ public final class PathsImpl implements Paths {
         if (this.client.subscriptionId() == null) {
             throw new IllegalArgumentException("Parameter this.client.subscriptionId() is required and cannot be null.");
         }
-        final String keyVersion = null;
+        final String keyVersion = "v1";
         return service.getEmpty(vault, secret, this.client.dnsSuffix(), keyName, this.client.subscriptionId(), keyVersion);
     }
 
