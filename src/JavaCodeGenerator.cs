@@ -178,7 +178,8 @@ namespace AutoRest.Java
                 shouldGenerateXmlSerialization: codeModel.ShouldGenerateXmlSerialization,
                 nonNullAnnotations: GetBoolSetting(autoRestSettings, "non-null-annotations", true),
                 stringDates: GetBoolSetting(autoRestSettings, "string-dates"),
-                clientTypePrefix: GetStringSetting(autoRestSettings, "client-type-prefix"));
+                clientTypePrefix: GetStringSetting(autoRestSettings, "client-type-prefix"),
+                generateClientInterfaces: GetBoolSetting(autoRestSettings, "generate-client-interfaces", true));
 
             serviceClientCredentialsParameter = new Lazy<Parameter>(() =>
                 new Parameter(
@@ -267,11 +268,14 @@ namespace AutoRest.Java
 
             if (!javaSettings.IsFluent)
             {
-                javaFiles.Add(GetServiceClientInterfaceJavaFile(service.ServiceClient, javaSettings));
-
-                foreach (MethodGroupClient methodGroupClient in service.ServiceClient.MethodGroupClients)
+                if (javaSettings.GenerateClientInterfaces)
                 {
-                    javaFiles.Add(GetMethodGroupClientInterfaceJavaFile(methodGroupClient, javaSettings));
+                    javaFiles.Add(GetServiceClientInterfaceJavaFile(service.ServiceClient, javaSettings));
+
+                    foreach (MethodGroupClient methodGroupClient in service.ServiceClient.MethodGroupClients)
+                    {
+                        javaFiles.Add(GetMethodGroupClientInterfaceJavaFile(methodGroupClient, javaSettings));
+                    }
                 }
             }
             else
@@ -707,7 +711,11 @@ namespace AutoRest.Java
         {
             string serviceClientInterfaceName = AddClientTypePrefix(codeModel.Name.ToPascalCase(), settings);
 
-            string serviceClientClassName = serviceClientInterfaceName + "Impl";
+            string serviceClientClassName = serviceClientInterfaceName;
+            if (settings.GenerateClientInterfaces)
+            {
+                serviceClientClassName += "Impl";
+            }
 
             RestAPI serviceClientRestAPI = null;
             IEnumerable<ClientMethod> serviceClientMethods = Enumerable.Empty<ClientMethod>();
@@ -794,9 +802,15 @@ namespace AutoRest.Java
             }
             interfaceName = AddClientTypePrefix(interfaceName, settings);
 
-            string className = interfaceName + (settings.IsFluent ? "Inner" : "Impl");
-
-            string methodGroupClientInterfacePath = settings.Package + "." + interfaceName;
+            string className = interfaceName;
+            if (settings.IsFluent)
+            {
+                className += "Inner";
+            }
+            else if (settings.GenerateClientInterfaces)
+            {
+                className += "Impl";
+            }
 
             string restAPIName = methodGroup.Name.ToString().ToPascalCase();
             if (!restAPIName.EndsWith('s'))
@@ -813,7 +827,7 @@ namespace AutoRest.Java
             RestAPI restAPI = new RestAPI(restAPIName, restAPIBaseURL, restAPIMethods);
 
             List<string> implementedInterfaces = new List<string>();
-            if (!settings.IsFluent)
+            if (!settings.IsFluent && settings.GenerateClientInterfaces)
             {
                 implementedInterfaces.Add(interfaceName);
             }
@@ -1999,7 +2013,8 @@ namespace AutoRest.Java
 
         public static JavaFile GetServiceClientJavaFile(ServiceClient serviceClient, JavaSettings settings)
         {
-            JavaFile javaFile = GetJavaFileWithHeaderAndSubPackage(implPackage, settings, serviceClient.ClassName);
+            string subPackage = settings.GenerateClientInterfaces ? implPackage : null;
+            JavaFile javaFile = GetJavaFileWithHeaderAndSubPackage(subPackage, settings, serviceClient.ClassName);
 
             string serviceClientClassDeclaration = $"{serviceClient.ClassName} extends ";
             if (settings.IsAzureOrFluent)
@@ -2007,7 +2022,7 @@ namespace AutoRest.Java
                 serviceClientClassDeclaration += "Azure";
             }
             serviceClientClassDeclaration += "ServiceClient";
-            if (!settings.IsFluent)
+            if (!settings.IsFluent && settings.GenerateClientInterfaces)
             {
                 serviceClientClassDeclaration += $" implements {serviceClient.InterfaceName}";
             }
@@ -2238,7 +2253,8 @@ namespace AutoRest.Java
 
         public static JavaFile GetMethodGroupClientJavaFile(MethodGroupClient methodGroupClient, JavaSettings settings)
         {
-            JavaFile javaFile = GetJavaFileWithHeaderAndSubPackage(implPackage, settings, methodGroupClient.ClassName);
+            string subPackage = settings.GenerateClientInterfaces ? implPackage : null;
+            JavaFile javaFile = GetJavaFileWithHeaderAndSubPackage(subPackage, settings, methodGroupClient.ClassName);
 
             ISet<string> imports = new HashSet<string>();
             methodGroupClient.AddImportsTo(imports, true, settings);
