@@ -1613,7 +1613,16 @@ namespace AutoRest.Java
                     if (settings.ShouldGenerateXmlSerialization)
                     {
                         modelImports.Add("com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlRootElement");
-                        modelImports.Add("com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlProperty");
+
+                        if (compositeTypeProperties.Any(p => p.XmlIsAttribute))
+                        {
+                            modelImports.Add("com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlProperty");
+                        }
+
+                        if (compositeTypeProperties.Any(p => !p.XmlIsAttribute))
+                        {
+                            modelImports.Add("com.fasterxml.jackson.annotation.JsonProperty");
+                        }
 
                         if (compositeTypeProperties.Any(p => p.ModelType is AutoRestSequenceType))
                         {
@@ -2453,12 +2462,10 @@ namespace AutoRest.Java
                     {
                         classBlock.Annotation("HeaderCollection(\"" + property.HeaderCollectionPrefix + "\")");
                     }
-                    else if (settings.ShouldGenerateXmlSerialization)
+                    else if (settings.ShouldGenerateXmlSerialization && property.IsXmlAttribute)
                     {
                         string localName = settings.ShouldGenerateXmlSerialization ? property.XmlName : property.SerializedName;
-                        classBlock.Annotation(property.IsXmlAttribute
-                            ? $"JacksonXmlProperty(localName = \"{localName}\", isAttribute = true)"
-                            : $"JacksonXmlProperty(localName = \"{localName}\")");
+                        classBlock.Annotation($"JacksonXmlProperty(localName = \"{localName}\", isAttribute = true)");
                     }
                     else if (!string.IsNullOrEmpty(property.AnnotationArguments))
                     {
@@ -2739,7 +2746,7 @@ namespace AutoRest.Java
 
                     enumBlock.JavadocComment($"The actual serialized value for a {serviceEnum.Name} instance.");
                     enumBlock.PrivateFinalMemberVariable("String", "value");
-                    
+
                     enumBlock.PrivateConstructor($"{serviceEnum.Name}(String value)", (constructor) =>
                     {
                         constructor.Line("this.value = value;");
@@ -2764,7 +2771,7 @@ namespace AutoRest.Java
                         });
                         function.Return("null");
                     });
-                    
+
                     enumBlock.Annotation("JsonValue",
                                          "Override");
                     enumBlock.PublicMethod("String toString()", (function) =>
