@@ -198,5 +198,6 @@
     <module>test/vanilla</module>
     <module>test/azure</module>
     <module>test/azurefluent</module>
+    <module>test/nonnull</module>
   </modules>
 </project>
