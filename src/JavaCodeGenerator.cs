@@ -674,9 +674,17 @@ namespace AutoRest.Java
             string serviceClientName = codeModel.Name;
             string serviceClientDescription = codeModel.Documentation;
 
-            ServiceClient serviceClient = ParseServiceClient(codeModel, settings);
+            List<string> subpackages = new List<string>() { "" };
+            if (settings.GenerateClientInterfaces)
+            {
+                subpackages.Add("implementation");
+            }
+            if (!settings.IsFluent)
+            {
+                subpackages.Add("models");
+            }
 
-            IEnumerable<string> subpackages = ParseSubpackages(settings);
+            ServiceClient serviceClient = ParseServiceClient(codeModel, settings);
 
             List<EnumType> enumTypes = new List<EnumType>();
             foreach (AutoRestEnumType autoRestEnumType in codeModel.EnumTypes)
@@ -1480,16 +1488,6 @@ namespace AutoRest.Java
 
         private static bool IsNullable(AutoRestIVariable variable)
             => variable.IsXNullable.HasValue ? variable.IsXNullable.Value : !variable.IsRequired;
-
-        private static IEnumerable<string> ParseSubpackages(JavaSettings settings)
-        {
-            List<string> subpackages = new List<string>() { "", "implementation" };
-            if (!settings.IsFluent)
-            {
-                subpackages.Add("models");
-            }
-            return subpackages;
-        }
 
         internal static ServiceEnumValue ParseEnumValue(string name, string value)
         {

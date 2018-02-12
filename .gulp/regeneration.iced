@@ -130,12 +130,25 @@ task 'regenerate-clienttypeprefix', '', (done) ->
   },done
   return null
 
+task 'regenerate-generateclientinterfaces', '', (done) ->
+  regenExpected {
+    'outputDir': 'test/generateclientinterfaces',
+    'mappings': {
+      'BodyByte': 'body-byte.json'
+    },
+    'extraArguments': [
+      '--java.generate-client-interfaces=false'
+    ]
+  },done
+  return null
+
 regenerateTasks = [
   'regenerate-java',
   'regenerate-javaazure',
   'regenerate-javaazurefluent',
   'regenerate-nonnull',
-  'regenerate-clienttypeprefix'
+  'regenerate-clienttypeprefix',
+  'regenerate-generateclientinterfaces'
 ]
 task 'regenerate', "regenerate expected code for tests", regenerateTasks, (done) ->
   done();
