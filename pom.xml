@@ -199,5 +199,6 @@
     <module>test/azure</module>
     <module>test/azurefluent</module>
     <module>test/nonnull</module>
+    <module>test/clienttypeprefix</module>
   </modules>
 </project>
