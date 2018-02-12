@@ -177,7 +177,9 @@ namespace AutoRest.Java
                 package: codeModel.Namespace.ToLowerInvariant(),
                 shouldGenerateXmlSerialization: codeModel.ShouldGenerateXmlSerialization,
                 nonNullAnnotations: GetBoolSetting(autoRestSettings, "non-null-annotations", true),
-                stringDates: GetBoolSetting(autoRestSettings, "string-dates"));
+                stringDates: GetBoolSetting(autoRestSettings, "string-dates"),
+                clientTypePrefix: GetStringSetting(autoRestSettings, "client-type-prefix"),
+                generateClientInterfaces: GetBoolSetting(autoRestSettings, "generate-client-interfaces", true));
 
             serviceClientCredentialsParameter = new Lazy<Parameter>(() =>
                 new Parameter(
@@ -266,11 +268,14 @@ namespace AutoRest.Java
 
             if (!javaSettings.IsFluent)
             {
-                javaFiles.Add(GetServiceClientInterfaceJavaFile(service.ServiceClient, javaSettings));
-
-                foreach (MethodGroupClient methodGroupClient in service.ServiceClient.MethodGroupClients)
+                if (javaSettings.GenerateClientInterfaces)
                 {
-                    javaFiles.Add(GetMethodGroupClientInterfaceJavaFile(methodGroupClient, javaSettings));
+                    javaFiles.Add(GetServiceClientInterfaceJavaFile(service.ServiceClient, javaSettings));
+
+                    foreach (MethodGroupClient methodGroupClient in service.ServiceClient.MethodGroupClients)
+                    {
+                        javaFiles.Add(GetMethodGroupClientInterfaceJavaFile(methodGroupClient, javaSettings));
+                    }
                 }
             }
             else
@@ -669,9 +674,17 @@ namespace AutoRest.Java
             string serviceClientName = codeModel.Name;
             string serviceClientDescription = codeModel.Documentation;
 
-            ServiceClient serviceClient = ParseServiceClient(codeModel, settings);
+            List<string> subpackages = new List<string>() { "" };
+            if (settings.GenerateClientInterfaces)
+            {
+                subpackages.Add("implementation");
+            }
+            if (!settings.IsFluent)
+            {
+                subpackages.Add("models");
+            }
 
-            IEnumerable<string> subpackages = ParseSubpackages(settings);
+            ServiceClient serviceClient = ParseServiceClient(codeModel, settings);
 
             List<EnumType> enumTypes = new List<EnumType>();
             foreach (AutoRestEnumType autoRestEnumType in codeModel.EnumTypes)
@@ -704,9 +717,13 @@ namespace AutoRest.Java
 
         private static ServiceClient ParseServiceClient(AutoRestCodeModel codeModel, JavaSettings settings)
         {
-            string serviceClientInterfaceName = codeModel.Name.ToPascalCase();
+            string serviceClientInterfaceName = AddClientTypePrefix(codeModel.Name.ToPascalCase(), settings);
 
-            string serviceClientClassName = serviceClientInterfaceName + "Impl";
+            string serviceClientClassName = serviceClientInterfaceName;
+            if (settings.GenerateClientInterfaces)
+            {
+                serviceClientClassName += "Impl";
+            }
 
             RestAPI serviceClientRestAPI = null;
             IEnumerable<ClientMethod> serviceClientMethods = Enumerable.Empty<ClientMethod>();
@@ -729,7 +746,7 @@ namespace AutoRest.Java
             IEnumerable<AutoRestMethodGroup> codeModelMethodGroups = codeModel.Operations.Where((AutoRestMethodGroup methodGroup) => !string.IsNullOrEmpty(methodGroup?.Name?.ToString()));
             foreach (AutoRestMethodGroup codeModelMethodGroup in codeModelMethodGroups)
             {
-                serviceClientMethodGroupClients.Add(ParseMethodGroupClient(codeModelMethodGroup, settings));
+                serviceClientMethodGroupClients.Add(ParseMethodGroupClient(codeModelMethodGroup, serviceClientClassName, settings));
             }
 
             bool usesCredentials = false;
@@ -784,17 +801,24 @@ namespace AutoRest.Java
             return new ServiceClient(serviceClientClassName, serviceClientInterfaceName, serviceClientRestAPI, serviceClientMethodGroupClients, serviceClientProperties, serviceClientConstructors, serviceClientMethods);
         }
 
-        private static MethodGroupClient ParseMethodGroupClient(AutoRestMethodGroup methodGroup, JavaSettings settings)
+        private static MethodGroupClient ParseMethodGroupClient(AutoRestMethodGroup methodGroup, string serviceClientTypeName, JavaSettings settings)
         {
             string interfaceName = methodGroup.Name.ToString().ToPascalCase();
             if (!interfaceName.EndsWith('s'))
             {
                 interfaceName += 's';
             }
+            interfaceName = AddClientTypePrefix(interfaceName, settings);
 
-            string className = interfaceName + (settings.IsFluent ? "Inner" : "Impl");
-
-            string methodGroupClientInterfacePath = settings.Package + "." + interfaceName;
+            string className = interfaceName;
+            if (settings.IsFluent)
+            {
+                className += "Inner";
+            }
+            else if (settings.GenerateClientInterfaces)
+            {
+                className += "Impl";
+            }
 
             string restAPIName = methodGroup.Name.ToString().ToPascalCase();
             if (!restAPIName.EndsWith('s'))
@@ -811,19 +835,17 @@ namespace AutoRest.Java
             RestAPI restAPI = new RestAPI(restAPIName, restAPIBaseURL, restAPIMethods);
 
             List<string> implementedInterfaces = new List<string>();
-            if (!settings.IsFluent)
+            if (!settings.IsFluent && settings.GenerateClientInterfaces)
             {
                 implementedInterfaces.Add(interfaceName);
             }
-
-            string serviceClientName = methodGroup.CodeModel.Name + "Impl";
 
             string variableType = interfaceName + (settings.IsFluent ? "Inner" : "");
             string variableName = interfaceName.ToCamelCase();
 
             IEnumerable<ClientMethod> clientMethods = ParseClientMethods(restAPI, settings);
 
-            return new MethodGroupClient(className, interfaceName, implementedInterfaces, restAPI, serviceClientName, variableType, variableName, clientMethods);
+            return new MethodGroupClient(className, interfaceName, implementedInterfaces, restAPI, serviceClientTypeName, variableType, variableName, clientMethods);
         }
 
         private static RestAPIMethod ParseRestAPIMethod(AutoRestMethod autoRestMethod, JavaSettings settings)
@@ -1467,16 +1489,6 @@ namespace AutoRest.Java
         private static bool IsNullable(AutoRestIVariable variable)
             => variable.IsXNullable.HasValue ? variable.IsXNullable.Value : !variable.IsRequired;
 
-        private static IEnumerable<string> ParseSubpackages(JavaSettings settings)
-        {
-            List<string> subpackages = new List<string>() { "", "implementation" };
-            if (!settings.IsFluent)
-            {
-                subpackages.Add("models");
-            }
-            return subpackages;
-        }
-
         internal static ServiceEnumValue ParseEnumValue(string name, string value)
         {
             if (!string.IsNullOrWhiteSpace(name))
@@ -2008,7 +2020,8 @@ namespace AutoRest.Java
 
         public static JavaFile GetServiceClientJavaFile(ServiceClient serviceClient, JavaSettings settings)
         {
-            JavaFile javaFile = GetJavaFileWithHeaderAndSubPackage(implPackage, settings, serviceClient.ClassName);
+            string subPackage = settings.GenerateClientInterfaces ? implPackage : null;
+            JavaFile javaFile = GetJavaFileWithHeaderAndSubPackage(subPackage, settings, serviceClient.ClassName);
 
             string serviceClientClassDeclaration = $"{serviceClient.ClassName} extends ";
             if (settings.IsAzureOrFluent)
@@ -2016,7 +2029,7 @@ namespace AutoRest.Java
                 serviceClientClassDeclaration += "Azure";
             }
             serviceClientClassDeclaration += "ServiceClient";
-            if (!settings.IsFluent)
+            if (!settings.IsFluent && settings.GenerateClientInterfaces)
             {
                 serviceClientClassDeclaration += $" implements {serviceClient.InterfaceName}";
             }
@@ -2247,7 +2260,8 @@ namespace AutoRest.Java
 
         public static JavaFile GetMethodGroupClientJavaFile(MethodGroupClient methodGroupClient, JavaSettings settings)
         {
-            JavaFile javaFile = GetJavaFileWithHeaderAndSubPackage(implPackage, settings, methodGroupClient.ClassName);
+            string subPackage = settings.GenerateClientInterfaces ? implPackage : null;
+            JavaFile javaFile = GetJavaFileWithHeaderAndSubPackage(subPackage, settings, methodGroupClient.ClassName);
 
             ISet<string> imports = new HashSet<string>();
             methodGroupClient.AddImportsTo(imports, true, settings);
@@ -5212,5 +5226,8 @@ namespace AutoRest.Java
                 });
             return string.Join(", ", restAPIMethodArguments);
         }
+
+        private static string AddClientTypePrefix(string clientType, JavaSettings settings)
+            => string.IsNullOrEmpty(settings.ClientTypePrefix) ? clientType : settings.ClientTypePrefix + clientType;
     }
 }

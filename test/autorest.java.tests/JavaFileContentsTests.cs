@@ -5,6 +5,8 @@ namespace AutoRest.Java.DanModel
     [TestClass]
     public class JavaFileContentsTests
     {
+        private static readonly string newLine = System.Environment.NewLine;
+
         [TestMethod]
         public void Constructor()
         {
@@ -198,10 +200,10 @@ namespace AutoRest.Java.DanModel
             JavaFileContentsAssert.AreEqual(" * ABCDEFGHI", contents);
 
             contents.Line();
-            JavaFileContentsAssert.AreEqual(" * ABCDEFGHI\r\n", contents);
+            JavaFileContentsAssert.AreEqual($" * ABCDEFGHI{newLine}", contents);
 
             contents.Line();
-            JavaFileContentsAssert.AreEqual(" * ABCDEFGHI\r\n * \r\n", contents);
+            JavaFileContentsAssert.AreEqual($" * ABCDEFGHI{newLine} * {newLine}", contents);
         }
 
         [TestMethod]
@@ -214,9 +216,9 @@ namespace AutoRest.Java.DanModel
                 ifBlock.Line("// hello!");
             });
 
-            const string expectedText =
-                "if (apples) {\r\n" +
-                "    // hello!\r\n" +
+            string expectedText =
+                "if (apples) {" + newLine +
+                "    // hello!" + newLine +
                 "}";
 
             JavaFileContentsAssert.AreEqual(expectedText, contents);

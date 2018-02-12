@@ -6,14 +6,22 @@ This project enables Java code generation in [AutoRest](https://github.com/Azure
 
 # Java AutoRest Generator Command Line Arguments
 
+- *--java.client-type-prefix*: The prefix to add to the beginning on the Service and Method Group clients that are generated.
+  - Default: Nothing
+  - Without Argument: `public class MyServiceClient { ... }`
+  - With Argument (`zzz`): `public class zzzMyServiceClient { ... }`
+- *--java.generate-client-interfaces*: Whether or not to generate interfaces for Service and Method Group clients.
+  - Default: `true`
+  - Without Argument: `public class MyServiceClientImpl extends ServiceClient implements MyServiceClient { ... }`
+  - With Argument (`false`): `public class MyServiceClient extends ServiceClient { ... }`
 - *--java.non-null-annotations*: Whether or not to add `@NonNull` (from the `io.reactivex.annotations` package) annotations to each required parameter in client methods.
   - Default: `true`
   - Without Argument: `int Plus(Integer val1, Integer val2)`
-  - With Argument: `int Plus(@NonNull Integer val1, @NonNull Integer val2)`
+  - With Argument (`true`): `int Plus(@NonNull Integer val1, @NonNull Integer val2)`
 - *--java.string-dates*: Whether or not DateTime types should be represented as Strings (generally for better/different precision).
   - Default: `false`
   - Without Argument: `public DateTime duration(DateTime startTime, DateTime endTime)`
-  - With Argument: `public String duration(String startTime, String endTime)`
+  - With Argument (`true`): `public String duration(String startTime, String endTime)`
 
 # Contributing
 
