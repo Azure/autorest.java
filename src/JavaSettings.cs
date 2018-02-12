@@ -27,7 +27,8 @@ namespace AutoRest.Java
         /// <param name="shouldGenerateXmlSerialization"></param>
         /// <param name="nonNullAnnotations">Whether or not to add the @NotNull annotation to required parameters in client methods.</param>
         /// <param name="stringDates">Whether or not DateTime types should be represented as Strings (generally for better/different precision).</param>
-        public JavaSettings(Action<bool> setAddCredentials, bool isAzure, bool isFluent, bool regenerateManagers, bool regeneratePom, string fileHeaderText, int maximumJavadocCommentWidth, string serviceName, string package, bool shouldGenerateXmlSerialization, bool nonNullAnnotations, bool stringDates)
+        /// <param name="clientTypePrefix">The prefix that will be added to each generated client type.</param>
+        public JavaSettings(Action<bool> setAddCredentials, bool isAzure, bool isFluent, bool regenerateManagers, bool regeneratePom, string fileHeaderText, int maximumJavadocCommentWidth, string serviceName, string package, bool shouldGenerateXmlSerialization, bool nonNullAnnotations, bool stringDates, string clientTypePrefix)
         {
             this.setAddCredentials = setAddCredentials;
             IsAzure = isAzure;
@@ -41,6 +42,7 @@ namespace AutoRest.Java
             ShouldGenerateXmlSerialization = shouldGenerateXmlSerialization;
             NonNullAnnotations = nonNullAnnotations;
             StringDates = stringDates;
+            ClientTypePrefix = clientTypePrefix;
         }
 
         public bool IsAzure { get; }
@@ -77,5 +79,10 @@ namespace AutoRest.Java
         /// Whether or not DateTime types should be represented as Strings (generally for better/different precision).
         /// </summary>
         public bool StringDates { get; }
+
+        /// <summary>
+        /// The prefix that will be added to each generated client type.
+        /// </summary>
+        public string ClientTypePrefix { get; }
     }
 }

@@ -89,6 +89,7 @@ namespace AutoRest.Java
                 "fluent",
                 "non-null-annotations",
                 "string-dates",
+                "client-type-prefix",
             };
             foreach (string expectedSettingName in expectedSettingNames)
             {

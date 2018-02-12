@@ -177,7 +177,8 @@ namespace AutoRest.Java
                 package: codeModel.Namespace.ToLowerInvariant(),
                 shouldGenerateXmlSerialization: codeModel.ShouldGenerateXmlSerialization,
                 nonNullAnnotations: GetBoolSetting(autoRestSettings, "non-null-annotations", true),
-                stringDates: GetBoolSetting(autoRestSettings, "string-dates"));
+                stringDates: GetBoolSetting(autoRestSettings, "string-dates"),
+                clientTypePrefix: GetStringSetting(autoRestSettings, "client-type-prefix"));
 
             serviceClientCredentialsParameter = new Lazy<Parameter>(() =>
                 new Parameter(
@@ -704,7 +705,7 @@ namespace AutoRest.Java
 
         private static ServiceClient ParseServiceClient(AutoRestCodeModel codeModel, JavaSettings settings)
         {
-            string serviceClientInterfaceName = codeModel.Name.ToPascalCase();
+            string serviceClientInterfaceName = AddClientTypePrefix(codeModel.Name.ToPascalCase(), settings);
 
             string serviceClientClassName = serviceClientInterfaceName + "Impl";
 
@@ -729,7 +730,7 @@ namespace AutoRest.Java
             IEnumerable<AutoRestMethodGroup> codeModelMethodGroups = codeModel.Operations.Where((AutoRestMethodGroup methodGroup) => !string.IsNullOrEmpty(methodGroup?.Name?.ToString()));
             foreach (AutoRestMethodGroup codeModelMethodGroup in codeModelMethodGroups)
             {
-                serviceClientMethodGroupClients.Add(ParseMethodGroupClient(codeModelMethodGroup, settings));
+                serviceClientMethodGroupClients.Add(ParseMethodGroupClient(codeModelMethodGroup, serviceClientClassName, settings));
             }
 
             bool usesCredentials = false;
@@ -784,13 +785,14 @@ namespace AutoRest.Java
             return new ServiceClient(serviceClientClassName, serviceClientInterfaceName, serviceClientRestAPI, serviceClientMethodGroupClients, serviceClientProperties, serviceClientConstructors, serviceClientMethods);
         }
 
-        private static MethodGroupClient ParseMethodGroupClient(AutoRestMethodGroup methodGroup, JavaSettings settings)
+        private static MethodGroupClient ParseMethodGroupClient(AutoRestMethodGroup methodGroup, string serviceClientTypeName, JavaSettings settings)
         {
             string interfaceName = methodGroup.Name.ToString().ToPascalCase();
             if (!interfaceName.EndsWith('s'))
             {
                 interfaceName += 's';
             }
+            interfaceName = AddClientTypePrefix(interfaceName, settings);
 
             string className = interfaceName + (settings.IsFluent ? "Inner" : "Impl");
 
@@ -816,14 +818,12 @@ namespace AutoRest.Java
                 implementedInterfaces.Add(interfaceName);
             }
 
-            string serviceClientName = methodGroup.CodeModel.Name + "Impl";
-
             string variableType = interfaceName + (settings.IsFluent ? "Inner" : "");
             string variableName = interfaceName.ToCamelCase();
 
             IEnumerable<ClientMethod> clientMethods = ParseClientMethods(restAPI, settings);
 
-            return new MethodGroupClient(className, interfaceName, implementedInterfaces, restAPI, serviceClientName, variableType, variableName, clientMethods);
+            return new MethodGroupClient(className, interfaceName, implementedInterfaces, restAPI, serviceClientTypeName, variableType, variableName, clientMethods);
         }
 
         private static RestAPIMethod ParseRestAPIMethod(AutoRestMethod autoRestMethod, JavaSettings settings)
@@ -5205,5 +5205,8 @@ namespace AutoRest.Java
                 });
             return string.Join(", ", restAPIMethodArguments);
         }
+
+        private static string AddClientTypePrefix(string clientType, JavaSettings settings)
+            => string.IsNullOrEmpty(settings.ClientTypePrefix) ? clientType : settings.ClientTypePrefix + clientType;
     }
 }
