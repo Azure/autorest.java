@@ -23,6 +23,9 @@ regenExpected = (opts,done) ->
       "--java.namespace=#{['Fixtures', namespace].join('.')}",
       "--input-file=#{swaggerDir}/#{optsMappingsValue}",
     ]
+    if opts.extraArguments
+      for extraArgument in opts.extraArguments
+        args.push extraArgument
 
     if (opts.azureArm)
       args.push("--java.azure-arm=true")
@@ -103,5 +106,36 @@ task 'regenerate-java', '', (done) ->
   },done
   return null
 
-task 'regenerate', "regenerate expected code for tests", ['regenerate-java', 'regenerate-javaazure', 'regenerate-javaazurefluent'], (done) ->
+task 'regenerate-nonnull', '', (done) ->
+  regenExpected {
+    'outputDir': 'test/nonnull',
+    'mappings': {
+      'BodyByte': 'body-byte.json'
+    },
+    'extraArguments': [
+      '--java.non-null-annotations=false'
+    ]
+  },done
+  return null
+
+task 'regenerate-clienttypeprefix', '', (done) ->
+  regenExpected {
+    'outputDir': 'test/clienttypeprefix',
+    'mappings': {
+      'BodyByte': 'body-byte.json'
+    },
+    'extraArguments': [
+      '--java.client-type-prefix=zzz'
+    ]
+  },done
+  return null
+
+regenerateTasks = [
+  'regenerate-java',
+  'regenerate-javaazure',
+  'regenerate-javaazurefluent',
+  'regenerate-nonnull',
+  'regenerate-clienttypeprefix'
+]
+task 'regenerate', "regenerate expected code for tests", regenerateTasks, (done) ->
   done();
