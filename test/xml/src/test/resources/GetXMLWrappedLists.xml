@@ -1,0 +1,10 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<AppleBarrel>
+    <GoodApples>
+        <Apple>Fuji</Apple>
+        <Apple>Gala</Apple>
+    </GoodApples>
+    <BadApples>
+        <Apple>Red Delicious</Apple>
+    </BadApples>
+</AppleBarrel>
