@@ -31,7 +31,25 @@ namespace AutoRest.Java
         /// <param name="generateClientInterfaces">Whether or not interfaces will be generated for Service and Method Group clients.</param>
         /// <param name="implementationSubpackage">The sub-package that the Service and Method Group client implementation classes will be put into.</param>
         /// <param name="modelsSubpackage">The sub-package that Enums, Exceptions, and Model types will be put into.</param>
-        public JavaSettings(Action<bool> setAddCredentials, bool isAzure, bool isFluent, bool regenerateManagers, bool regeneratePom, string fileHeaderText, int maximumJavadocCommentWidth, string serviceName, string package, bool shouldGenerateXmlSerialization, bool nonNullAnnotations, bool stringDates, string clientTypePrefix, bool generateClientInterfaces, string implementationSubpackage, string modelsSubpackage)
+        /// <param name="requiredParameterClientMethods">Whether or not Service and Method Group client method overloads that omit optional parameters will be created.</param>
+        public JavaSettings(
+            Action<bool> setAddCredentials,
+            bool isAzure,
+            bool isFluent,
+            bool regenerateManagers,
+            bool regeneratePom,
+            string fileHeaderText,
+            int maximumJavadocCommentWidth,
+            string serviceName,
+            string package,
+            bool shouldGenerateXmlSerialization,
+            bool nonNullAnnotations,
+            bool stringDates,
+            string clientTypePrefix,
+            bool generateClientInterfaces,
+            string implementationSubpackage,
+            string modelsSubpackage,
+            bool requiredParameterClientMethods)
         {
             this.setAddCredentials = setAddCredentials;
             IsAzure = isAzure;
@@ -49,6 +67,7 @@ namespace AutoRest.Java
             GenerateClientInterfaces = generateClientInterfaces;
             ImplementationSubpackage = implementationSubpackage;
             ModelsSubpackage = modelsSubpackage;
+            RequiredParameterClientMethods = requiredParameterClientMethods;
         }
 
         public bool IsAzure { get; }
@@ -105,5 +124,10 @@ namespace AutoRest.Java
         /// The sub-package that Enums, Exceptions, and Model types will be put into.
         /// </summary>
         public string ModelsSubpackage { get; }
+
+        /// <summary>
+        /// Whether or not Service and Method Group client method overloads that omit optional parameters will be created.
+        /// </summary>
+        public bool RequiredParameterClientMethods { get; }
     }
 }

@@ -157,7 +157,8 @@ namespace AutoRest.Java
                 clientTypePrefix: GetStringSetting(autoRestSettings, "client-type-prefix"),
                 generateClientInterfaces: GetBoolSetting(autoRestSettings, "generate-client-interfaces", true),
                 implementationSubpackage: GetStringSetting(autoRestSettings, "implementation-subpackage", "implementation"),
-                modelsSubpackage: GetStringSetting(autoRestSettings, "models-subpackage", "models"));
+                modelsSubpackage: GetStringSetting(autoRestSettings, "models-subpackage", "models"),
+                requiredParameterClientMethods: GetBoolSetting(autoRestSettings, "required-parameter-client-methods", true));
 
             serviceClientCredentialsParameter = new Lazy<Parameter>(() =>
                 new Parameter(
@@ -4571,7 +4572,7 @@ namespace AutoRest.Java
                 {
                     autoRestClientMethodParameters
                 };
-                if (autoRestClientMethodParameters.Any(parameter => !parameter.IsRequired))
+                if (settings.RequiredParameterClientMethods && autoRestClientMethodParameters.Any(parameter => !parameter.IsRequired))
                 {
                     autoRestParameterLists.Insert(0, autoRestRequiredClientMethodParameters);
                 }
