@@ -188,6 +188,17 @@ task 'regenerate-modelssubpackage-empty', '', (done) ->
     ]
   },done
   
+task 'regenerate-requiredparameterclientmethods-false', '', (done) ->
+  regenExpected {
+    'outputDir': 'test/requiredparameterclientmethods-false',
+    'mappings': {
+      'RequiredOptional': 'required-optional.json',
+    },
+    'extraArguments': [
+      "--java.required-parameter-client-methods=false"
+    ]
+  },done
+
 task 'regenerate-xml', '', (done) ->
   outputDir = 'test/xml'
 
@@ -219,6 +230,7 @@ regenerateTasks = [
   'regenerate-implementationsubpackage-empty',
   'regenerate-modelssubpackage',
   'regenerate-modelssubpackage-empty',
+  'regenerate-requiredparameterclientmethods-false',
   'regenerate-xml'
 ]
 
