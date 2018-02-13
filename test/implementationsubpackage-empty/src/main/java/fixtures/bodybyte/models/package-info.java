@@ -7,7 +7,7 @@
 // regenerated.
 
 /**
- * This package contains the classes for AutoRestHeadTestService.
- * Test Infrastructure for AutoRest.
+ * This package contains the models classes for AutoRestSwaggerBATByteService.
+ * Test Infrastructure for AutoRest Swagger BAT.
  */
-package fixtures.head;
+package fixtures.bodybyte.models;

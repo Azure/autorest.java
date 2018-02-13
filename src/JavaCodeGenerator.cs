@@ -54,7 +54,6 @@ namespace AutoRest.Java
         private static Lazy<Parameter> azureEnvironmentParameter;
         private static Lazy<Parameter> httpPipelineParameter;
 
-        private const string implPackage = "implementation";
         private const string modelsPackage = ".models";
 
         private const string innerSupportsImportPrefix = "com.microsoft.azure.v2.management.resources.fluentcore.collection.InnerSupports";
@@ -131,30 +130,9 @@ namespace AutoRest.Java
             return customSettingValue;
         }
 
-        private static string ToComparableString(string value)
-            => value?.Replace("-", "").ToLowerInvariant();
-
         private static string GetStringSetting(Settings autoRestSettings, string settingName, string defaultValue = null)
         {
-            IDictionary<string, object> customSettings = autoRestSettings.CustomSettings;
-
-            string comparableSettingName = ToComparableString(settingName);
-
-            string customSettingValue = defaultValue;
-            foreach (KeyValuePair<string, object> entry in customSettings)
-            {
-                string comparableEntryKey = ToComparableString(entry.Key);
-                if (comparableEntryKey == comparableSettingName)
-                {
-                    string entryValueString = (string)entry.Value;
-                    if (!string.IsNullOrEmpty(entryValueString))
-                    {
-                        customSettingValue = entryValueString;
-                    }
-                    break;
-                }
-            }
-            return customSettingValue;
+            return autoRestSettings.Host.GetValue(settingName).Result ?? defaultValue;
         }
 
         /// <summary>
@@ -179,7 +157,8 @@ namespace AutoRest.Java
                 nonNullAnnotations: GetBoolSetting(autoRestSettings, "non-null-annotations", true),
                 stringDates: GetBoolSetting(autoRestSettings, "string-dates"),
                 clientTypePrefix: GetStringSetting(autoRestSettings, "client-type-prefix"),
-                generateClientInterfaces: GetBoolSetting(autoRestSettings, "generate-client-interfaces", true));
+                generateClientInterfaces: GetBoolSetting(autoRestSettings, "generate-client-interfaces", true),
+                implementationSubpackage: GetStringSetting(autoRestSettings, "implementation-subpackage", "implementation"));
 
             serviceClientCredentialsParameter = new Lazy<Parameter>(() =>
                 new Parameter(
@@ -217,7 +196,7 @@ namespace AutoRest.Java
                     isRequired: true,
                     annotations: GetClientMethodParameterAnnotations(true, javaSettings)));
 
-        Service service = ParseService(codeModel, javaSettings);
+            Service service = ParseService(codeModel, javaSettings);
 
             List<JavaFile> javaFiles = new List<JavaFile>();
 
@@ -248,10 +227,6 @@ namespace AutoRest.Java
                 javaFiles.Add(GetExceptionJavaFile(exception, javaSettings));
             }
 
-            foreach (string subPackage in service.SubPackages)
-            {
-                javaFiles.Add(GetPackageInfoJavaFiles(service, subPackage, javaSettings));
-            }
 
             if (javaSettings.IsAzureOrFluent)
             {
@@ -290,6 +265,18 @@ namespace AutoRest.Java
                     }
                     javaFiles.Add(new JavaFile("pom.xml", pomContentsBuilder.ToString()));
                 }
+            }
+
+            string folderPrefix = "src/main/java/" + javaSettings.Package.Replace('.', '/').Trim('/');
+            ISet<string> foldersWithGeneratedFiles = new HashSet<string>(javaFiles.Select((JavaFile javaFile) => Path.GetDirectoryName(javaFile.FilePath)));
+            foreach (string folderWithGeneratedFiles in foldersWithGeneratedFiles)
+            {
+                string subpackage = folderWithGeneratedFiles
+                    .Substring(folderPrefix.Length)
+                    .Replace('/', '.')
+                    .Replace('\\', '.')
+                    .Trim('.');
+                javaFiles.Add(GetPackageInfoJavaFiles(service, subpackage, javaSettings));
             }
 
             return Task.WhenAll(javaFiles.Select(javaFile => Write(javaFile.Contents.ToString(), javaFile.FilePath)));
@@ -674,16 +661,6 @@ namespace AutoRest.Java
             string serviceClientName = codeModel.Name;
             string serviceClientDescription = codeModel.Documentation;
 
-            List<string> subpackages = new List<string>() { "" };
-            if (settings.GenerateClientInterfaces)
-            {
-                subpackages.Add("implementation");
-            }
-            if (!settings.IsFluent)
-            {
-                subpackages.Add("models");
-            }
-
             ServiceClient serviceClient = ParseServiceClient(codeModel, settings);
 
             List<EnumType> enumTypes = new List<EnumType>();
@@ -712,7 +689,7 @@ namespace AutoRest.Java
 
             ServiceManager manager = ParseManager(serviceClientName, codeModel, settings);
 
-            return new Service(serviceClientName, serviceClientDescription, subpackages, enumTypes, exceptions, xmlSequenceWrappers, models, manager, serviceClient);
+            return new Service(serviceClientName, serviceClientDescription, enumTypes, exceptions, xmlSequenceWrappers, models, manager, serviceClient);
         }
 
         private static ServiceClient ParseServiceClient(AutoRestCodeModel codeModel, JavaSettings settings)
@@ -877,7 +854,7 @@ namespace AutoRest.Java
                     {
                         if (innerModelCompositeType.Contains(autoRestExceptionType))
                         {
-                            exceptionPackage += ".implementation";
+                            exceptionPackage += GetPackage(settings, settings.ImplementationSubpackage);
                         }
                     }
                     else
@@ -1051,7 +1028,7 @@ namespace AutoRest.Java
                 AutoRestSequenceType autoRestRestAPIMethodReturnClientPageListType = DependencyInjection.New<AutoRestSequenceType>();
                 autoRestRestAPIMethodReturnClientPageListType.ElementType = autorestRestAPIMethodReturnClientSequenceType.ElementType;
 
-                string pageContainerSubPackage = (settings.IsFluent ? "implementation" : "models");
+                string pageContainerSubPackage = (settings.IsFluent ? settings.ImplementationSubpackage : "models");
                 string pageContainerPackage = $"{settings.Package}.{pageContainerSubPackage}";
                 string pageContainerTypeName = SequenceTypeGetPageImplType(autorestRestAPIMethodReturnClientSequenceType);
 
@@ -1139,7 +1116,7 @@ namespace AutoRest.Java
                 IType parameterType = ParseType(autoRestParameter, settings);
                 if (parameterType is ListType && settings.ShouldGenerateXmlSerialization && parameterRequestLocation == RequestParameterLocation.Body)
                 {
-                    string parameterTypePackage = settings.Package + ".implementation";
+                    string parameterTypePackage = GetPackage(settings, settings.ImplementationSubpackage);
                     string parameterTypeName = autoRestParameterWireType.XmlName + "Wrapper";
                     parameterType = new ClassType(parameterTypePackage, parameterTypeName, null, null, false);
                 }
@@ -1354,16 +1331,19 @@ namespace AutoRest.Java
                     {
                         bool isInnerModelType = innerModelCompositeType.Contains(autoRestCompositeType);
 
-                        string classSubPackage = "";
+                        string classPackage;
                         if (!settings.IsFluent)
                         {
-                            classSubPackage = ".models";
+                            classPackage = GetPackage(settings, "models");
                         }
                         else if (isInnerModelType)
                         {
-                            classSubPackage = ".implementation";
+                            classPackage = GetPackage(settings, settings.ImplementationSubpackage);
                         }
-                        string classPackage = settings.Package + classSubPackage;
+                        else
+                        {
+                            classPackage = GetPackage(settings);
+                        }
 
                         IDictionary<string, string> extensions = null;
                         if (autoRestCompositeType.Extensions.ContainsKey(SwaggerExtensions.NameOverrideExtension))
@@ -1539,7 +1519,7 @@ namespace AutoRest.Java
                     string exceptionSubPackage;
                     if (settings.IsFluent)
                     {
-                        exceptionSubPackage = innerModelCompositeType.Contains(exceptionType) ? ".implementation" : "";
+                        exceptionSubPackage = innerModelCompositeType.Contains(exceptionType) ? settings.ImplementationSubpackage : "";
                     }
                     else
                     {
@@ -1598,7 +1578,7 @@ namespace AutoRest.Java
             ServiceModel result = serviceModels.GetModel(modelName);
             if (result == null)
             {
-                string modelSubPackage = !settings.IsFluent ? modelsPackage : (innerModelCompositeType.Contains(autoRestCompositeType) ? ".implementation" : "");
+                string modelSubPackage = !settings.IsFluent ? modelsPackage : (innerModelCompositeType.Contains(autoRestCompositeType) ? settings.ImplementationSubpackage : "");
                 string modelPackage = GetPackage(settings, modelSubPackage);
 
                 bool isPolymorphic = autoRestCompositeType.BaseIsPolymorphic;
@@ -1796,7 +1776,8 @@ namespace AutoRest.Java
             int newMinorVersion = (patchVersion == 0 ? minorVersion : minorVersion + 1);
             string betaSinceVersion = "V" + versionParts[0] + "_" + newMinorVersion + "_0";
 
-            JavaFile javaFile = GetJavaFileWithHeaderAndSubPackage(implPackage, settings, className);
+            string subpackage = settings.ImplementationSubpackage;
+            JavaFile javaFile = GetJavaFileWithHeaderAndSubPackage(subpackage, settings, className);
 
             javaFile.Import(
                 "com.microsoft.azure.management.apigeneration.Beta",
@@ -1895,7 +1876,7 @@ namespace AutoRest.Java
 
         public static JavaFile GetPageJavaFile(PageDetails pageClass, JavaSettings settings)
         {
-            string subPackage = settings.IsFluent ? implPackage : modelsPackage;
+            string subPackage = settings.IsFluent ? settings.ImplementationSubpackage : modelsPackage;
             JavaFile javaFile = GetJavaFileWithHeaderAndSubPackage(subPackage, settings, pageClass.ClassName);
             javaFile.Import("com.fasterxml.jackson.annotation.JsonProperty",
                             "com.microsoft.azure.v2.Page",
@@ -1977,7 +1958,7 @@ namespace AutoRest.Java
             string xmlElementName = xmlSequenceWrapper.XmlElementName;
             string xmlElementNameCamelCase = xmlElementName.ToCamelCase();
 
-            JavaFile javaFile = GetJavaFileWithHeaderAndSubPackage(implPackage, settings, xmlSequenceWrapper.WrapperClassName);
+            JavaFile javaFile = GetJavaFileWithHeaderAndSubPackage(settings.ImplementationSubpackage, settings, xmlSequenceWrapper.WrapperClassName);
 
             ListType sequenceType = xmlSequenceWrapper.SequenceType;
 
@@ -2020,7 +2001,7 @@ namespace AutoRest.Java
 
         public static JavaFile GetServiceClientJavaFile(ServiceClient serviceClient, JavaSettings settings)
         {
-            string subPackage = settings.GenerateClientInterfaces ? implPackage : null;
+            string subPackage = settings.GenerateClientInterfaces ? settings.ImplementationSubpackage : null;
             JavaFile javaFile = GetJavaFileWithHeaderAndSubPackage(subPackage, settings, serviceClient.ClassName);
 
             string serviceClientClassDeclaration = $"{serviceClient.ClassName} extends ";
@@ -2260,7 +2241,7 @@ namespace AutoRest.Java
 
         public static JavaFile GetMethodGroupClientJavaFile(MethodGroupClient methodGroupClient, JavaSettings settings)
         {
-            string subPackage = settings.GenerateClientInterfaces ? implPackage : null;
+            string subPackage = settings.GenerateClientInterfaces ? settings.ImplementationSubpackage : null;
             JavaFile javaFile = GetJavaFileWithHeaderAndSubPackage(subPackage, settings, methodGroupClient.ClassName);
 
             ISet<string> imports = new HashSet<string>();
@@ -3442,7 +3423,7 @@ namespace AutoRest.Java
 
                     string pageImplTypeName = SequenceTypeGetPageImplType(autoRestRestAPIMethodReturnBodyType);
 
-                    string pageImplSubPackage = settings.IsFluent ? implPackage : modelsPackage;
+                    string pageImplSubPackage = settings.IsFluent ? settings.ImplementationSubpackage : modelsPackage;
                     string pageImplPackage = $"{settings.Package}.{pageImplSubPackage}";
 
                     pageImplType = new GenericType(pageImplPackage, pageImplTypeName, restAPIMethodReturnBodyClientListElementType);
@@ -4559,7 +4540,7 @@ namespace AutoRest.Java
 
                     string pageImplTypeName = SequenceTypeGetPageImplType(autoRestRestAPIMethodReturnBodyType);
 
-                    string pageImplSubPackage = settings.IsFluent ? implPackage : modelsPackage;
+                    string pageImplSubPackage = settings.IsFluent ? settings.ImplementationSubpackage : modelsPackage;
                     string pageImplPackage = $"{settings.Package}.{pageImplSubPackage}";
 
                     pageImplType = new GenericType(pageImplPackage, pageImplTypeName, restAPIMethodReturnBodyClientListElementType);

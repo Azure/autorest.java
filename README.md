@@ -14,6 +14,18 @@ This project enables Java code generation in [AutoRest](https://github.com/Azure
   - Default: `true`
   - Without Argument: `public class MyServiceClientImpl extends ServiceClient implements MyServiceClient { ... }`
   - With Argument (`false`): `public class MyServiceClient extends ServiceClient { ... }`
+- *--java.implementation-subpackage*: The sub-package that service and method group clients, Manager, Page, and XmlWrapper classes will be generated.
+  - Default: `implementation`
+  - Without Argument:
+    ```java
+    package com.fruit.service.implementation;
+    public class ApplesServiceClient { ... }
+    ```
+  - With Argument (`spam`):
+    ```java
+    package com.fruit.service.spam;
+    public class ApplesServiceClient { ... }
+    ```
 - *--java.non-null-annotations*: Whether or not to add `@NonNull` (from the `io.reactivex.annotations` package) annotations to each required parameter in client methods.
   - Default: `true`
   - Without Argument: `int Plus(Integer val1, Integer val2)`

@@ -113,7 +113,7 @@ task 'regenerate-nonnull', '', (done) ->
       'BodyByte': 'body-byte.json'
     },
     'extraArguments': [
-      '--java.non-null-annotations=false'
+      '--java.non-null-annotations=false',
     ]
   },done
   return null
@@ -142,6 +142,29 @@ task 'regenerate-generateclientinterfaces', '', (done) ->
   },done
   return null
 
+task 'regenerate-implementationsubpackage', '', (done) ->
+  regenExpected {
+    'outputDir': 'test/implementationsubpackage',
+    'mappings': {
+      'BodyByte': 'body-byte.json'
+    },
+    'extraArguments': [
+      '--java.implementation-subpackage=spam'
+    ]
+  },done
+  return null
+
+task 'regenerate-implementationsubpackage-empty', '', (done) ->
+  regenExpected {
+    'outputDir': 'test/implementationsubpackage-empty',
+    'mappings': {
+      'BodyByte': 'body-byte.json'
+    },
+    'extraArguments': [
+      "--java.implementation-subpackage=''"
+    ]
+  },done
+  
 task 'regenerate-xml', '', (done) ->
   outputDir = 'test/xml'
 
@@ -169,6 +192,8 @@ regenerateTasks = [
   'regenerate-nonnull',
   'regenerate-clienttypeprefix',
   'regenerate-generateclientinterfaces',
+  'regenerate-implementationsubpackage',
+  'regenerate-implementationsubpackage-empty'
   'regenerate-xml'
 ]
 

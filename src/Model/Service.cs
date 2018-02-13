@@ -15,18 +15,16 @@ namespace AutoRest.Java.Model
         /// </summary>
         /// <param name="clientName">The name of the service client.</param>
         /// <param name="clientDescription">The description of the service client.</param>
-        /// <param name="subpackages">The subpackage folder paths that will get package-info.java files.</param>
         /// <param name="enums">The enum types that are used by the service.</param>
         /// <param name="exceptions">The exception types that are used by the service.</param>
         /// <param name="xmlSequenceWrappers"></param>
         /// <param name="models"></param>
         /// <param name="manager"></param>
         /// <param name="serviceClient"></param>
-        public Service(string clientName, string clientDescription, IEnumerable<string> subpackages, IEnumerable<EnumType> enums, IEnumerable<ServiceException> exceptions, IEnumerable<XmlSequenceWrapper> xmlSequenceWrappers, IEnumerable<ServiceModel> models, ServiceManager manager, ServiceClient serviceClient)
+        public Service(string clientName, string clientDescription, IEnumerable<EnumType> enums, IEnumerable<ServiceException> exceptions, IEnumerable<XmlSequenceWrapper> xmlSequenceWrappers, IEnumerable<ServiceModel> models, ServiceManager manager, ServiceClient serviceClient)
         {
             ClientName = clientName;
             ClientDescription = clientDescription;
-            SubPackages = subpackages;
             Enums = enums;
             Exceptions = exceptions;
             XmlSequenceWrappers = xmlSequenceWrappers;
@@ -44,11 +42,6 @@ namespace AutoRest.Java.Model
         /// The description of this service.
         /// </summary>
         public string ClientDescription { get; }
-
-        /// <summary>
-        /// The subpackage folder paths that will get package-info.java files.
-        /// </summary>
-        public IEnumerable<string> SubPackages { get; }
 
         /// <summary>
         /// Get the enum types that are used by this service.

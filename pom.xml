@@ -195,12 +195,14 @@
     </pluginManagement>
   </build>
   <modules>
-    <module>test/vanilla</module>
     <module>test/azure</module>
     <module>test/azurefluent</module>
-    <module>test/nonnull</module>
     <module>test/clienttypeprefix</module>
     <module>test/generateclientinterfaces</module>
+    <module>test/implementationsubpackage</module>
+    <module>test/implementationsubpackage-empty</module>
+    <module>test/nonnull</module>
+    <module>test/vanilla</module>
     <module>test/xml</module>
   </modules>
 </project>
