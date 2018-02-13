@@ -14,7 +14,7 @@ This project enables Java code generation in [AutoRest](https://github.com/Azure
   - Default: `true`
   - Without Argument: `public class MyServiceClientImpl extends ServiceClient implements MyServiceClient { ... }`
   - With Argument (`false`): `public class MyServiceClient extends ServiceClient { ... }`
-- *--java.implementation-subpackage*: The sub-package that service and method group clients, Manager, Page, and XmlWrapper classes will be generated.
+- *--java.implementation-subpackage*: The sub-package where service and method group clients, Manager, Page, and XmlWrapper classes will be generated.
   - Default: `implementation`
   - Without Argument:
     ```java
@@ -26,7 +26,7 @@ This project enables Java code generation in [AutoRest](https://github.com/Azure
     package com.fruit.service.spam;
     public class ApplesServiceClient { ... }
     ```
-- *--java.models-subpackage*: The sub-package that Enums, Exceptions, and Model types will be generated.
+- *--java.models-subpackage*: The sub-package where Enums, Exceptions, and Model types will be generated.
   - Default: `models`
   - Without Argument:
   ```java
