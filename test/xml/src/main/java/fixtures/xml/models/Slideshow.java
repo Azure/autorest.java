@@ -19,7 +19,7 @@ import java.util.List;
 /**
  * Data about a slideshow.
  */
-@JacksonXmlRootElement(localName = "Slideshow")
+@JacksonXmlRootElement(localName = "slideshow")
 public final class Slideshow {
     /**
      * The title property.

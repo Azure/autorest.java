@@ -37,6 +37,34 @@
             }
           }
         }
+      },
+      "put": {
+        "operationId": "xml_putSimple",
+        "description": "Put a simple XML document",
+        "tags": [
+          "XML Operations"
+        ],
+        "parameters": [
+          {
+            "name": "wrappedLists",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/Slideshow"
+            },
+            "required": true
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Indicates success"
+          },
+          "default": {
+            "description": "Unexpected error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
       }
     },
     "/xml/wrapped-lists": {
@@ -51,6 +79,34 @@
             "description": "The XML document with multiple wrapped lists",
             "schema": {
               "$ref": "#/definitions/AppleBarrel"
+            }
+          }
+        }
+      },
+      "put": {
+        "operationId": "xml_putWrappedLists",
+        "description": "Put an XML document with multiple wrapped lists",
+        "tags": [
+          "XML Operations"
+        ],
+        "parameters": [
+          {
+            "name": "wrappedLists",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/AppleBarrel"
+            },
+            "required": true
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Indicates success"
+          },
+          "default": {
+            "description": "Unexpected error",
+            "schema": {
+              "$ref": "#/definitions/Error"
             }
           }
         }
@@ -116,6 +172,9 @@
     "Slideshow": {
       "type": "object",
       "description": "Data about a slideshow",
+      "xml": {
+        "name": "slideshow"
+      },
       "properties": {
         "title": {
           "type": "string",

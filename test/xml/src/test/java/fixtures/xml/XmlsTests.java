@@ -14,7 +14,6 @@ import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertNull;
 
 public class XmlsTests {
-
     private static AutoRestSwaggerBATXMLService client;
 
     @BeforeClass
@@ -23,7 +22,7 @@ public class XmlsTests {
     }
 
     @Test
-    public void testSimpleDocument() {
+    public void getSimpleDocument() {
         Slideshow slideshow = client.xmls().getSimple();
         assertNotNull(slideshow);
         assertEquals("Yours Truly", slideshow.author());
@@ -45,7 +44,13 @@ public class XmlsTests {
     }
 
     @Test
-    public void testWrappedLists() {
+    public void putSimpleDocument() {
+        Slideshow slideshow = client.xmls().getSimple();
+        client.xmls().putSimple(slideshow);
+    }
+
+    @Test
+    public void getWrappedLists() {
         AppleBarrel barrel = client.xmls().getWrappedLists();
         assertNotNull(barrel);
 
@@ -55,6 +60,12 @@ public class XmlsTests {
 
         assertNotNull(barrel.badApples());
         assertEquals("Red Delicious", barrel.badApples().get(0));
+    }
+
+    @Test
+    public void putWrappedLists() {
+        AppleBarrel barrel = client.xmls().getWrappedLists();
+        client.xmls().putWrappedLists(barrel);
     }
 
     @Test

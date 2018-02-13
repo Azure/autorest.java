@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version='1.0' encoding='UTF-8'?>
 <slideshow
         title="Sample Slide Show"
         date="Date of publication"
@@ -10,7 +10,7 @@
     <slide type="all">
         <title>Overview</title>
         <item>Why WonderWidgets are great</item>
-        <item/>
+        <item></item>
         <item>Who buys WonderWidgets</item>
     </slide>
 </slideshow>

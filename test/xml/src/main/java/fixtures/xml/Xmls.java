@@ -59,6 +59,44 @@ public interface Xmls {
     Maybe<Slideshow> getSimpleAsync();
 
     /**
+     * Put a simple XML document.
+     *
+     * @param wrappedLists the Slideshow value.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
+    void putSimple(@NonNull Slideshow wrappedLists);
+
+    /**
+     * Put a simple XML document.
+     *
+     * @param wrappedLists the Slideshow value.
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link ServiceFuture&lt;Void&gt;} object.
+     */
+    ServiceFuture<Void> putSimpleAsync(@NonNull Slideshow wrappedLists, @NonNull ServiceCallback<Void> serviceCallback);
+
+    /**
+     * Put a simple XML document.
+     *
+     * @param wrappedLists the Slideshow value.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
+     */
+    Single<RestResponse<Void, Void>> putSimpleWithRestResponseAsync(@NonNull Slideshow wrappedLists);
+
+    /**
+     * Put a simple XML document.
+     *
+     * @param wrappedLists the Slideshow value.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link Completable} object if successful.
+     */
+    Completable putSimpleAsync(@NonNull Slideshow wrappedLists);
+
+    /**
      * Get an XML document with multiple wrapped lists.
      *
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -88,6 +126,44 @@ public interface Xmls {
      * @return the {@link Maybe&lt;AppleBarrel&gt;} object if successful.
      */
     Maybe<AppleBarrel> getWrappedListsAsync();
+
+    /**
+     * Put an XML document with multiple wrapped lists.
+     *
+     * @param wrappedLists the AppleBarrel value.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
+    void putWrappedLists(@NonNull AppleBarrel wrappedLists);
+
+    /**
+     * Put an XML document with multiple wrapped lists.
+     *
+     * @param wrappedLists the AppleBarrel value.
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link ServiceFuture&lt;Void&gt;} object.
+     */
+    ServiceFuture<Void> putWrappedListsAsync(@NonNull AppleBarrel wrappedLists, @NonNull ServiceCallback<Void> serviceCallback);
+
+    /**
+     * Put an XML document with multiple wrapped lists.
+     *
+     * @param wrappedLists the AppleBarrel value.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
+     */
+    Single<RestResponse<Void, Void>> putWrappedListsWithRestResponseAsync(@NonNull AppleBarrel wrappedLists);
+
+    /**
+     * Put an XML document with multiple wrapped lists.
+     *
+     * @param wrappedLists the AppleBarrel value.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link Completable} object if successful.
+     */
+    Completable putWrappedListsAsync(@NonNull AppleBarrel wrappedLists);
 
     /**
      * Get strongly-typed response headers.

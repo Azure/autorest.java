@@ -14,9 +14,12 @@ import com.microsoft.rest.v2.RestProxy;
 import com.microsoft.rest.v2.RestResponse;
 import com.microsoft.rest.v2.ServiceCallback;
 import com.microsoft.rest.v2.ServiceFuture;
+import com.microsoft.rest.v2.Validator;
+import com.microsoft.rest.v2.annotations.BodyParam;
 import com.microsoft.rest.v2.annotations.ExpectedResponses;
 import com.microsoft.rest.v2.annotations.GET;
 import com.microsoft.rest.v2.annotations.Host;
+import com.microsoft.rest.v2.annotations.PUT;
 import com.microsoft.rest.v2.annotations.UnexpectedResponseExceptionType;
 import fixtures.xml.Xmls;
 import fixtures.xml.models.AppleBarrel;
@@ -65,9 +68,19 @@ public final class XmlsImpl implements Xmls {
         @UnexpectedResponseExceptionType(ErrorException.class)
         Single<RestResponse<Void, Slideshow>> getSimple();
 
+        @PUT("xml/simple")
+        @ExpectedResponses({201})
+        @UnexpectedResponseExceptionType(ErrorException.class)
+        Single<RestResponse<Void, Void>> putSimple(@BodyParam("application/xml; charset=utf-8") Slideshow wrappedLists);
+
         @GET("xml/wrapped-lists")
         @ExpectedResponses({200})
         Single<RestResponse<Void, AppleBarrel>> getWrappedLists();
+
+        @PUT("xml/wrapped-lists")
+        @ExpectedResponses({201})
+        @UnexpectedResponseExceptionType(ErrorException.class)
+        Single<RestResponse<Void, Void>> putWrappedLists(@BodyParam("application/xml; charset=utf-8") AppleBarrel wrappedLists);
 
         @GET("xml/headers")
         @ExpectedResponses({200})
@@ -124,6 +137,57 @@ public final class XmlsImpl implements Xmls {
     }
 
     /**
+     * Put a simple XML document.
+     *
+     * @param wrappedLists the Slideshow value.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
+    public void putSimple(@NonNull Slideshow wrappedLists) {
+        putSimpleAsync(wrappedLists).blockingAwait();
+    }
+
+    /**
+     * Put a simple XML document.
+     *
+     * @param wrappedLists the Slideshow value.
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link ServiceFuture&lt;Void&gt;} object.
+     */
+    public ServiceFuture<Void> putSimpleAsync(@NonNull Slideshow wrappedLists, @NonNull ServiceCallback<Void> serviceCallback) {
+        return ServiceFuture.fromBody(putSimpleAsync(wrappedLists), serviceCallback);
+    }
+
+    /**
+     * Put a simple XML document.
+     *
+     * @param wrappedLists the Slideshow value.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
+     */
+    public Single<RestResponse<Void, Void>> putSimpleWithRestResponseAsync(@NonNull Slideshow wrappedLists) {
+        if (wrappedLists == null) {
+            throw new IllegalArgumentException("Parameter wrappedLists is required and cannot be null.");
+        }
+        Validator.validate(wrappedLists);
+        return service.putSimple(wrappedLists);
+    }
+
+    /**
+     * Put a simple XML document.
+     *
+     * @param wrappedLists the Slideshow value.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link Completable} object if successful.
+     */
+    public Completable putSimpleAsync(@NonNull Slideshow wrappedLists) {
+        return putSimpleWithRestResponseAsync(wrappedLists)
+            .toCompletable();
+    }
+
+    /**
      * Get an XML document with multiple wrapped lists.
      *
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -169,6 +233,57 @@ public final class XmlsImpl implements Xmls {
                     }
                 }
             });
+    }
+
+    /**
+     * Put an XML document with multiple wrapped lists.
+     *
+     * @param wrappedLists the AppleBarrel value.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
+    public void putWrappedLists(@NonNull AppleBarrel wrappedLists) {
+        putWrappedListsAsync(wrappedLists).blockingAwait();
+    }
+
+    /**
+     * Put an XML document with multiple wrapped lists.
+     *
+     * @param wrappedLists the AppleBarrel value.
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link ServiceFuture&lt;Void&gt;} object.
+     */
+    public ServiceFuture<Void> putWrappedListsAsync(@NonNull AppleBarrel wrappedLists, @NonNull ServiceCallback<Void> serviceCallback) {
+        return ServiceFuture.fromBody(putWrappedListsAsync(wrappedLists), serviceCallback);
+    }
+
+    /**
+     * Put an XML document with multiple wrapped lists.
+     *
+     * @param wrappedLists the AppleBarrel value.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
+     */
+    public Single<RestResponse<Void, Void>> putWrappedListsWithRestResponseAsync(@NonNull AppleBarrel wrappedLists) {
+        if (wrappedLists == null) {
+            throw new IllegalArgumentException("Parameter wrappedLists is required and cannot be null.");
+        }
+        Validator.validate(wrappedLists);
+        return service.putWrappedLists(wrappedLists);
+    }
+
+    /**
+     * Put an XML document with multiple wrapped lists.
+     *
+     * @param wrappedLists the AppleBarrel value.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link Completable} object if successful.
+     */
+    public Completable putWrappedListsAsync(@NonNull AppleBarrel wrappedLists) {
+        return putWrappedListsWithRestResponseAsync(wrappedLists)
+            .toCompletable();
     }
 
     /**
