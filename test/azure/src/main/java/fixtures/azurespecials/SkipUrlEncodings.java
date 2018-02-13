@@ -40,7 +40,7 @@ public interface SkipUrlEncodings {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    ServiceFuture<Void> getMethodPathValidAsync(@NonNull String unencodedPathParam, @NonNull ServiceCallback<Void> serviceCallback);
+    ServiceFuture<Void> getMethodPathValidAsync(@NonNull String unencodedPathParam, ServiceCallback<Void> serviceCallback);
 
     /**
      * Get method with unencoded path parameter with value 'path1/path2/path3'.
@@ -78,7 +78,7 @@ public interface SkipUrlEncodings {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    ServiceFuture<Void> getPathPathValidAsync(@NonNull String unencodedPathParam, @NonNull ServiceCallback<Void> serviceCallback);
+    ServiceFuture<Void> getPathPathValidAsync(@NonNull String unencodedPathParam, ServiceCallback<Void> serviceCallback);
 
     /**
      * Get method with unencoded path parameter with value 'path1/path2/path3'.
@@ -113,7 +113,7 @@ public interface SkipUrlEncodings {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    ServiceFuture<Void> getSwaggerPathValidAsync(@NonNull ServiceCallback<Void> serviceCallback);
+    ServiceFuture<Void> getSwaggerPathValidAsync(ServiceCallback<Void> serviceCallback);
 
     /**
      * Get method with unencoded path parameter with value 'path1/path2/path3'.
@@ -147,7 +147,7 @@ public interface SkipUrlEncodings {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    ServiceFuture<Void> getMethodQueryValidAsync(@NonNull String q1, @NonNull ServiceCallback<Void> serviceCallback);
+    ServiceFuture<Void> getMethodQueryValidAsync(@NonNull String q1, ServiceCallback<Void> serviceCallback);
 
     /**
      * Get method with unencoded query parameter with value 'value1&amp;q2=value2&amp;q3=value3'.
@@ -182,7 +182,7 @@ public interface SkipUrlEncodings {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    ServiceFuture<Void> getMethodQueryNullAsync(@NonNull ServiceCallback<Void> serviceCallback);
+    ServiceFuture<Void> getMethodQueryNullAsync(ServiceCallback<Void> serviceCallback);
 
     /**
      * Get method with unencoded query parameter with value null.
@@ -216,7 +216,7 @@ public interface SkipUrlEncodings {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    ServiceFuture<Void> getMethodQueryNullAsync(String q1, @NonNull ServiceCallback<Void> serviceCallback);
+    ServiceFuture<Void> getMethodQueryNullAsync(String q1, ServiceCallback<Void> serviceCallback);
 
     /**
      * Get method with unencoded query parameter with value null.
@@ -254,7 +254,7 @@ public interface SkipUrlEncodings {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    ServiceFuture<Void> getPathQueryValidAsync(@NonNull String q1, @NonNull ServiceCallback<Void> serviceCallback);
+    ServiceFuture<Void> getPathQueryValidAsync(@NonNull String q1, ServiceCallback<Void> serviceCallback);
 
     /**
      * Get method with unencoded query parameter with value 'value1&amp;q2=value2&amp;q3=value3'.
@@ -289,7 +289,7 @@ public interface SkipUrlEncodings {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    ServiceFuture<Void> getSwaggerQueryValidAsync(@NonNull ServiceCallback<Void> serviceCallback);
+    ServiceFuture<Void> getSwaggerQueryValidAsync(ServiceCallback<Void> serviceCallback);
 
     /**
      * Get method with unencoded query parameter with value 'value1&amp;q2=value2&amp;q3=value3'.

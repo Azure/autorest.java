@@ -16,7 +16,6 @@ import com.microsoft.rest.v2.ServiceFuture;
 import io.reactivex.Completable;
 import io.reactivex.Maybe;
 import io.reactivex.Single;
-import io.reactivex.annotations.NonNull;
 
 /**
  * An instance of this class provides access to all the operations defined in
@@ -38,7 +37,7 @@ public interface HttpSuccess {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    ServiceFuture<Void> head200Async(@NonNull ServiceCallback<Void> serviceCallback);
+    ServiceFuture<Void> head200Async(ServiceCallback<Void> serviceCallback);
 
     /**
      * Return 200 status code if successful.
@@ -70,7 +69,7 @@ public interface HttpSuccess {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Boolean&gt;} object.
      */
-    ServiceFuture<Boolean> get200Async(@NonNull ServiceCallback<Boolean> serviceCallback);
+    ServiceFuture<Boolean> get200Async(ServiceCallback<Boolean> serviceCallback);
 
     /**
      * Get 200 success.
@@ -101,7 +100,7 @@ public interface HttpSuccess {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    ServiceFuture<Void> put200Async(@NonNull ServiceCallback<Void> serviceCallback);
+    ServiceFuture<Void> put200Async(ServiceCallback<Void> serviceCallback);
 
     /**
      * Put boolean value true returning 200 success.
@@ -135,7 +134,7 @@ public interface HttpSuccess {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    ServiceFuture<Void> put200Async(Boolean booleanValue, @NonNull ServiceCallback<Void> serviceCallback);
+    ServiceFuture<Void> put200Async(Boolean booleanValue, ServiceCallback<Void> serviceCallback);
 
     /**
      * Put boolean value true returning 200 success.
@@ -170,7 +169,7 @@ public interface HttpSuccess {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    ServiceFuture<Void> patch200Async(@NonNull ServiceCallback<Void> serviceCallback);
+    ServiceFuture<Void> patch200Async(ServiceCallback<Void> serviceCallback);
 
     /**
      * Patch true Boolean value in request returning 200.
@@ -204,7 +203,7 @@ public interface HttpSuccess {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    ServiceFuture<Void> patch200Async(Boolean booleanValue, @NonNull ServiceCallback<Void> serviceCallback);
+    ServiceFuture<Void> patch200Async(Boolean booleanValue, ServiceCallback<Void> serviceCallback);
 
     /**
      * Patch true Boolean value in request returning 200.
@@ -239,7 +238,7 @@ public interface HttpSuccess {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    ServiceFuture<Void> post200Async(@NonNull ServiceCallback<Void> serviceCallback);
+    ServiceFuture<Void> post200Async(ServiceCallback<Void> serviceCallback);
 
     /**
      * Post bollean value true in request that returns a 200.
@@ -273,7 +272,7 @@ public interface HttpSuccess {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    ServiceFuture<Void> post200Async(Boolean booleanValue, @NonNull ServiceCallback<Void> serviceCallback);
+    ServiceFuture<Void> post200Async(Boolean booleanValue, ServiceCallback<Void> serviceCallback);
 
     /**
      * Post bollean value true in request that returns a 200.
@@ -308,7 +307,7 @@ public interface HttpSuccess {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    ServiceFuture<Void> delete200Async(@NonNull ServiceCallback<Void> serviceCallback);
+    ServiceFuture<Void> delete200Async(ServiceCallback<Void> serviceCallback);
 
     /**
      * Delete simple boolean value true returns 200.
@@ -342,7 +341,7 @@ public interface HttpSuccess {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    ServiceFuture<Void> delete200Async(Boolean booleanValue, @NonNull ServiceCallback<Void> serviceCallback);
+    ServiceFuture<Void> delete200Async(Boolean booleanValue, ServiceCallback<Void> serviceCallback);
 
     /**
      * Delete simple boolean value true returns 200.
@@ -377,7 +376,7 @@ public interface HttpSuccess {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    ServiceFuture<Void> put201Async(@NonNull ServiceCallback<Void> serviceCallback);
+    ServiceFuture<Void> put201Async(ServiceCallback<Void> serviceCallback);
 
     /**
      * Put true Boolean value in request returns 201.
@@ -411,7 +410,7 @@ public interface HttpSuccess {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    ServiceFuture<Void> put201Async(Boolean booleanValue, @NonNull ServiceCallback<Void> serviceCallback);
+    ServiceFuture<Void> put201Async(Boolean booleanValue, ServiceCallback<Void> serviceCallback);
 
     /**
      * Put true Boolean value in request returns 201.
@@ -446,7 +445,7 @@ public interface HttpSuccess {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    ServiceFuture<Void> post201Async(@NonNull ServiceCallback<Void> serviceCallback);
+    ServiceFuture<Void> post201Async(ServiceCallback<Void> serviceCallback);
 
     /**
      * Post true Boolean value in request returns 201 (Created).
@@ -480,7 +479,7 @@ public interface HttpSuccess {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    ServiceFuture<Void> post201Async(Boolean booleanValue, @NonNull ServiceCallback<Void> serviceCallback);
+    ServiceFuture<Void> post201Async(Boolean booleanValue, ServiceCallback<Void> serviceCallback);
 
     /**
      * Post true Boolean value in request returns 201 (Created).
@@ -515,7 +514,7 @@ public interface HttpSuccess {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    ServiceFuture<Void> put202Async(@NonNull ServiceCallback<Void> serviceCallback);
+    ServiceFuture<Void> put202Async(ServiceCallback<Void> serviceCallback);
 
     /**
      * Put true Boolean value in request returns 202 (Accepted).
@@ -549,7 +548,7 @@ public interface HttpSuccess {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    ServiceFuture<Void> put202Async(Boolean booleanValue, @NonNull ServiceCallback<Void> serviceCallback);
+    ServiceFuture<Void> put202Async(Boolean booleanValue, ServiceCallback<Void> serviceCallback);
 
     /**
      * Put true Boolean value in request returns 202 (Accepted).
@@ -584,7 +583,7 @@ public interface HttpSuccess {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    ServiceFuture<Void> patch202Async(@NonNull ServiceCallback<Void> serviceCallback);
+    ServiceFuture<Void> patch202Async(ServiceCallback<Void> serviceCallback);
 
     /**
      * Patch true Boolean value in request returns 202.
@@ -618,7 +617,7 @@ public interface HttpSuccess {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    ServiceFuture<Void> patch202Async(Boolean booleanValue, @NonNull ServiceCallback<Void> serviceCallback);
+    ServiceFuture<Void> patch202Async(Boolean booleanValue, ServiceCallback<Void> serviceCallback);
 
     /**
      * Patch true Boolean value in request returns 202.
@@ -653,7 +652,7 @@ public interface HttpSuccess {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    ServiceFuture<Void> post202Async(@NonNull ServiceCallback<Void> serviceCallback);
+    ServiceFuture<Void> post202Async(ServiceCallback<Void> serviceCallback);
 
     /**
      * Post true Boolean value in request returns 202 (Accepted).
@@ -687,7 +686,7 @@ public interface HttpSuccess {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    ServiceFuture<Void> post202Async(Boolean booleanValue, @NonNull ServiceCallback<Void> serviceCallback);
+    ServiceFuture<Void> post202Async(Boolean booleanValue, ServiceCallback<Void> serviceCallback);
 
     /**
      * Post true Boolean value in request returns 202 (Accepted).
@@ -722,7 +721,7 @@ public interface HttpSuccess {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    ServiceFuture<Void> delete202Async(@NonNull ServiceCallback<Void> serviceCallback);
+    ServiceFuture<Void> delete202Async(ServiceCallback<Void> serviceCallback);
 
     /**
      * Delete true Boolean value in request returns 202 (accepted).
@@ -756,7 +755,7 @@ public interface HttpSuccess {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    ServiceFuture<Void> delete202Async(Boolean booleanValue, @NonNull ServiceCallback<Void> serviceCallback);
+    ServiceFuture<Void> delete202Async(Boolean booleanValue, ServiceCallback<Void> serviceCallback);
 
     /**
      * Delete true Boolean value in request returns 202 (accepted).
@@ -791,7 +790,7 @@ public interface HttpSuccess {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    ServiceFuture<Void> head204Async(@NonNull ServiceCallback<Void> serviceCallback);
+    ServiceFuture<Void> head204Async(ServiceCallback<Void> serviceCallback);
 
     /**
      * Return 204 status code if successful.
@@ -822,7 +821,7 @@ public interface HttpSuccess {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    ServiceFuture<Void> put204Async(@NonNull ServiceCallback<Void> serviceCallback);
+    ServiceFuture<Void> put204Async(ServiceCallback<Void> serviceCallback);
 
     /**
      * Put true Boolean value in request returns 204 (no content).
@@ -856,7 +855,7 @@ public interface HttpSuccess {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    ServiceFuture<Void> put204Async(Boolean booleanValue, @NonNull ServiceCallback<Void> serviceCallback);
+    ServiceFuture<Void> put204Async(Boolean booleanValue, ServiceCallback<Void> serviceCallback);
 
     /**
      * Put true Boolean value in request returns 204 (no content).
@@ -891,7 +890,7 @@ public interface HttpSuccess {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    ServiceFuture<Void> patch204Async(@NonNull ServiceCallback<Void> serviceCallback);
+    ServiceFuture<Void> patch204Async(ServiceCallback<Void> serviceCallback);
 
     /**
      * Patch true Boolean value in request returns 204 (no content).
@@ -925,7 +924,7 @@ public interface HttpSuccess {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    ServiceFuture<Void> patch204Async(Boolean booleanValue, @NonNull ServiceCallback<Void> serviceCallback);
+    ServiceFuture<Void> patch204Async(Boolean booleanValue, ServiceCallback<Void> serviceCallback);
 
     /**
      * Patch true Boolean value in request returns 204 (no content).
@@ -960,7 +959,7 @@ public interface HttpSuccess {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    ServiceFuture<Void> post204Async(@NonNull ServiceCallback<Void> serviceCallback);
+    ServiceFuture<Void> post204Async(ServiceCallback<Void> serviceCallback);
 
     /**
      * Post true Boolean value in request returns 204 (no content).
@@ -994,7 +993,7 @@ public interface HttpSuccess {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    ServiceFuture<Void> post204Async(Boolean booleanValue, @NonNull ServiceCallback<Void> serviceCallback);
+    ServiceFuture<Void> post204Async(Boolean booleanValue, ServiceCallback<Void> serviceCallback);
 
     /**
      * Post true Boolean value in request returns 204 (no content).
@@ -1029,7 +1028,7 @@ public interface HttpSuccess {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    ServiceFuture<Void> delete204Async(@NonNull ServiceCallback<Void> serviceCallback);
+    ServiceFuture<Void> delete204Async(ServiceCallback<Void> serviceCallback);
 
     /**
      * Delete true Boolean value in request returns 204 (no content).
@@ -1063,7 +1062,7 @@ public interface HttpSuccess {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    ServiceFuture<Void> delete204Async(Boolean booleanValue, @NonNull ServiceCallback<Void> serviceCallback);
+    ServiceFuture<Void> delete204Async(Boolean booleanValue, ServiceCallback<Void> serviceCallback);
 
     /**
      * Delete true Boolean value in request returns 204 (no content).
@@ -1098,7 +1097,7 @@ public interface HttpSuccess {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    ServiceFuture<Void> head404Async(@NonNull ServiceCallback<Void> serviceCallback);
+    ServiceFuture<Void> head404Async(ServiceCallback<Void> serviceCallback);
 
     /**
      * Return 404 status code.

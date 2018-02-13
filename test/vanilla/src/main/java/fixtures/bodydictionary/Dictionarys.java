@@ -45,7 +45,7 @@ public interface Dictionarys {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Map&lt;String, Integer&gt;&gt;} object.
      */
-    ServiceFuture<Map<String, Integer>> getNullAsync(@NonNull ServiceCallback<Map<String, Integer>> serviceCallback);
+    ServiceFuture<Map<String, Integer>> getNullAsync(ServiceCallback<Map<String, Integer>> serviceCallback);
 
     /**
      * Get null dictionary value.
@@ -77,7 +77,7 @@ public interface Dictionarys {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Map&lt;String, Integer&gt;&gt;} object.
      */
-    ServiceFuture<Map<String, Integer>> getEmptyAsync(@NonNull ServiceCallback<Map<String, Integer>> serviceCallback);
+    ServiceFuture<Map<String, Integer>> getEmptyAsync(ServiceCallback<Map<String, Integer>> serviceCallback);
 
     /**
      * Get empty dictionary value {}.
@@ -111,7 +111,7 @@ public interface Dictionarys {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    ServiceFuture<Void> putEmptyAsync(@NonNull Map<String, String> arrayBody, @NonNull ServiceCallback<Void> serviceCallback);
+    ServiceFuture<Void> putEmptyAsync(@NonNull Map<String, String> arrayBody, ServiceCallback<Void> serviceCallback);
 
     /**
      * Set dictionary value empty {}.
@@ -147,7 +147,7 @@ public interface Dictionarys {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Map&lt;String, String&gt;&gt;} object.
      */
-    ServiceFuture<Map<String, String>> getNullValueAsync(@NonNull ServiceCallback<Map<String, String>> serviceCallback);
+    ServiceFuture<Map<String, String>> getNullValueAsync(ServiceCallback<Map<String, String>> serviceCallback);
 
     /**
      * Get Dictionary with null value.
@@ -179,7 +179,7 @@ public interface Dictionarys {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Map&lt;String, String&gt;&gt;} object.
      */
-    ServiceFuture<Map<String, String>> getNullKeyAsync(@NonNull ServiceCallback<Map<String, String>> serviceCallback);
+    ServiceFuture<Map<String, String>> getNullKeyAsync(ServiceCallback<Map<String, String>> serviceCallback);
 
     /**
      * Get Dictionary with null key.
@@ -211,7 +211,7 @@ public interface Dictionarys {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Map&lt;String, String&gt;&gt;} object.
      */
-    ServiceFuture<Map<String, String>> getEmptyStringKeyAsync(@NonNull ServiceCallback<Map<String, String>> serviceCallback);
+    ServiceFuture<Map<String, String>> getEmptyStringKeyAsync(ServiceCallback<Map<String, String>> serviceCallback);
 
     /**
      * Get Dictionary with key as empty string.
@@ -243,7 +243,7 @@ public interface Dictionarys {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Map&lt;String, String&gt;&gt;} object.
      */
-    ServiceFuture<Map<String, String>> getInvalidAsync(@NonNull ServiceCallback<Map<String, String>> serviceCallback);
+    ServiceFuture<Map<String, String>> getInvalidAsync(ServiceCallback<Map<String, String>> serviceCallback);
 
     /**
      * Get invalid Dictionary value.
@@ -275,7 +275,7 @@ public interface Dictionarys {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Map&lt;String, Boolean&gt;&gt;} object.
      */
-    ServiceFuture<Map<String, Boolean>> getBooleanTfftAsync(@NonNull ServiceCallback<Map<String, Boolean>> serviceCallback);
+    ServiceFuture<Map<String, Boolean>> getBooleanTfftAsync(ServiceCallback<Map<String, Boolean>> serviceCallback);
 
     /**
      * Get boolean dictionary value {"0": true, "1": false, "2": false, "3": true }.
@@ -309,7 +309,7 @@ public interface Dictionarys {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    ServiceFuture<Void> putBooleanTfftAsync(@NonNull Map<String, Boolean> arrayBody, @NonNull ServiceCallback<Void> serviceCallback);
+    ServiceFuture<Void> putBooleanTfftAsync(@NonNull Map<String, Boolean> arrayBody, ServiceCallback<Void> serviceCallback);
 
     /**
      * Set dictionary value empty {"0": true, "1": false, "2": false, "3": true }.
@@ -345,7 +345,7 @@ public interface Dictionarys {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Map&lt;String, Boolean&gt;&gt;} object.
      */
-    ServiceFuture<Map<String, Boolean>> getBooleanInvalidNullAsync(@NonNull ServiceCallback<Map<String, Boolean>> serviceCallback);
+    ServiceFuture<Map<String, Boolean>> getBooleanInvalidNullAsync(ServiceCallback<Map<String, Boolean>> serviceCallback);
 
     /**
      * Get boolean dictionary value {"0": true, "1": null, "2": false }.
@@ -377,7 +377,7 @@ public interface Dictionarys {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Map&lt;String, Boolean&gt;&gt;} object.
      */
-    ServiceFuture<Map<String, Boolean>> getBooleanInvalidStringAsync(@NonNull ServiceCallback<Map<String, Boolean>> serviceCallback);
+    ServiceFuture<Map<String, Boolean>> getBooleanInvalidStringAsync(ServiceCallback<Map<String, Boolean>> serviceCallback);
 
     /**
      * Get boolean dictionary value '{"0": true, "1": "boolean", "2": false}'.
@@ -409,7 +409,7 @@ public interface Dictionarys {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Map&lt;String, Integer&gt;&gt;} object.
      */
-    ServiceFuture<Map<String, Integer>> getIntegerValidAsync(@NonNull ServiceCallback<Map<String, Integer>> serviceCallback);
+    ServiceFuture<Map<String, Integer>> getIntegerValidAsync(ServiceCallback<Map<String, Integer>> serviceCallback);
 
     /**
      * Get integer dictionary value {"0": 1, "1": -1, "2": 3, "3": 300}.
@@ -443,7 +443,7 @@ public interface Dictionarys {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    ServiceFuture<Void> putIntegerValidAsync(@NonNull Map<String, Integer> arrayBody, @NonNull ServiceCallback<Void> serviceCallback);
+    ServiceFuture<Void> putIntegerValidAsync(@NonNull Map<String, Integer> arrayBody, ServiceCallback<Void> serviceCallback);
 
     /**
      * Set dictionary value empty {"0": 1, "1": -1, "2": 3, "3": 300}.
@@ -479,7 +479,7 @@ public interface Dictionarys {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Map&lt;String, Integer&gt;&gt;} object.
      */
-    ServiceFuture<Map<String, Integer>> getIntInvalidNullAsync(@NonNull ServiceCallback<Map<String, Integer>> serviceCallback);
+    ServiceFuture<Map<String, Integer>> getIntInvalidNullAsync(ServiceCallback<Map<String, Integer>> serviceCallback);
 
     /**
      * Get integer dictionary value {"0": 1, "1": null, "2": 0}.
@@ -511,7 +511,7 @@ public interface Dictionarys {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Map&lt;String, Integer&gt;&gt;} object.
      */
-    ServiceFuture<Map<String, Integer>> getIntInvalidStringAsync(@NonNull ServiceCallback<Map<String, Integer>> serviceCallback);
+    ServiceFuture<Map<String, Integer>> getIntInvalidStringAsync(ServiceCallback<Map<String, Integer>> serviceCallback);
 
     /**
      * Get integer dictionary value {"0": 1, "1": "integer", "2": 0}.
@@ -543,7 +543,7 @@ public interface Dictionarys {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Map&lt;String, Long&gt;&gt;} object.
      */
-    ServiceFuture<Map<String, Long>> getLongValidAsync(@NonNull ServiceCallback<Map<String, Long>> serviceCallback);
+    ServiceFuture<Map<String, Long>> getLongValidAsync(ServiceCallback<Map<String, Long>> serviceCallback);
 
     /**
      * Get integer dictionary value {"0": 1, "1": -1, "2": 3, "3": 300}.
@@ -577,7 +577,7 @@ public interface Dictionarys {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    ServiceFuture<Void> putLongValidAsync(@NonNull Map<String, Long> arrayBody, @NonNull ServiceCallback<Void> serviceCallback);
+    ServiceFuture<Void> putLongValidAsync(@NonNull Map<String, Long> arrayBody, ServiceCallback<Void> serviceCallback);
 
     /**
      * Set dictionary value empty {"0": 1, "1": -1, "2": 3, "3": 300}.
@@ -613,7 +613,7 @@ public interface Dictionarys {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Map&lt;String, Long&gt;&gt;} object.
      */
-    ServiceFuture<Map<String, Long>> getLongInvalidNullAsync(@NonNull ServiceCallback<Map<String, Long>> serviceCallback);
+    ServiceFuture<Map<String, Long>> getLongInvalidNullAsync(ServiceCallback<Map<String, Long>> serviceCallback);
 
     /**
      * Get long dictionary value {"0": 1, "1": null, "2": 0}.
@@ -645,7 +645,7 @@ public interface Dictionarys {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Map&lt;String, Long&gt;&gt;} object.
      */
-    ServiceFuture<Map<String, Long>> getLongInvalidStringAsync(@NonNull ServiceCallback<Map<String, Long>> serviceCallback);
+    ServiceFuture<Map<String, Long>> getLongInvalidStringAsync(ServiceCallback<Map<String, Long>> serviceCallback);
 
     /**
      * Get long dictionary value {"0": 1, "1": "integer", "2": 0}.
@@ -677,7 +677,7 @@ public interface Dictionarys {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Map&lt;String, Double&gt;&gt;} object.
      */
-    ServiceFuture<Map<String, Double>> getFloatValidAsync(@NonNull ServiceCallback<Map<String, Double>> serviceCallback);
+    ServiceFuture<Map<String, Double>> getFloatValidAsync(ServiceCallback<Map<String, Double>> serviceCallback);
 
     /**
      * Get float dictionary value {"0": 0, "1": -0.01, "2": 1.2e20}.
@@ -711,7 +711,7 @@ public interface Dictionarys {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    ServiceFuture<Void> putFloatValidAsync(@NonNull Map<String, Double> arrayBody, @NonNull ServiceCallback<Void> serviceCallback);
+    ServiceFuture<Void> putFloatValidAsync(@NonNull Map<String, Double> arrayBody, ServiceCallback<Void> serviceCallback);
 
     /**
      * Set dictionary value {"0": 0, "1": -0.01, "2": 1.2e20}.
@@ -747,7 +747,7 @@ public interface Dictionarys {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Map&lt;String, Double&gt;&gt;} object.
      */
-    ServiceFuture<Map<String, Double>> getFloatInvalidNullAsync(@NonNull ServiceCallback<Map<String, Double>> serviceCallback);
+    ServiceFuture<Map<String, Double>> getFloatInvalidNullAsync(ServiceCallback<Map<String, Double>> serviceCallback);
 
     /**
      * Get float dictionary value {"0": 0.0, "1": null, "2": 1.2e20}.
@@ -779,7 +779,7 @@ public interface Dictionarys {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Map&lt;String, Double&gt;&gt;} object.
      */
-    ServiceFuture<Map<String, Double>> getFloatInvalidStringAsync(@NonNull ServiceCallback<Map<String, Double>> serviceCallback);
+    ServiceFuture<Map<String, Double>> getFloatInvalidStringAsync(ServiceCallback<Map<String, Double>> serviceCallback);
 
     /**
      * Get boolean dictionary value {"0": 1.0, "1": "number", "2": 0.0}.
@@ -811,7 +811,7 @@ public interface Dictionarys {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Map&lt;String, Double&gt;&gt;} object.
      */
-    ServiceFuture<Map<String, Double>> getDoubleValidAsync(@NonNull ServiceCallback<Map<String, Double>> serviceCallback);
+    ServiceFuture<Map<String, Double>> getDoubleValidAsync(ServiceCallback<Map<String, Double>> serviceCallback);
 
     /**
      * Get float dictionary value {"0": 0, "1": -0.01, "2": 1.2e20}.
@@ -845,7 +845,7 @@ public interface Dictionarys {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    ServiceFuture<Void> putDoubleValidAsync(@NonNull Map<String, Double> arrayBody, @NonNull ServiceCallback<Void> serviceCallback);
+    ServiceFuture<Void> putDoubleValidAsync(@NonNull Map<String, Double> arrayBody, ServiceCallback<Void> serviceCallback);
 
     /**
      * Set dictionary value {"0": 0, "1": -0.01, "2": 1.2e20}.
@@ -881,7 +881,7 @@ public interface Dictionarys {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Map&lt;String, Double&gt;&gt;} object.
      */
-    ServiceFuture<Map<String, Double>> getDoubleInvalidNullAsync(@NonNull ServiceCallback<Map<String, Double>> serviceCallback);
+    ServiceFuture<Map<String, Double>> getDoubleInvalidNullAsync(ServiceCallback<Map<String, Double>> serviceCallback);
 
     /**
      * Get float dictionary value {"0": 0.0, "1": null, "2": 1.2e20}.
@@ -913,7 +913,7 @@ public interface Dictionarys {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Map&lt;String, Double&gt;&gt;} object.
      */
-    ServiceFuture<Map<String, Double>> getDoubleInvalidStringAsync(@NonNull ServiceCallback<Map<String, Double>> serviceCallback);
+    ServiceFuture<Map<String, Double>> getDoubleInvalidStringAsync(ServiceCallback<Map<String, Double>> serviceCallback);
 
     /**
      * Get boolean dictionary value {"0": 1.0, "1": "number", "2": 0.0}.
@@ -945,7 +945,7 @@ public interface Dictionarys {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Map&lt;String, String&gt;&gt;} object.
      */
-    ServiceFuture<Map<String, String>> getStringValidAsync(@NonNull ServiceCallback<Map<String, String>> serviceCallback);
+    ServiceFuture<Map<String, String>> getStringValidAsync(ServiceCallback<Map<String, String>> serviceCallback);
 
     /**
      * Get string dictionary value {"0": "foo1", "1": "foo2", "2": "foo3"}.
@@ -979,7 +979,7 @@ public interface Dictionarys {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    ServiceFuture<Void> putStringValidAsync(@NonNull Map<String, String> arrayBody, @NonNull ServiceCallback<Void> serviceCallback);
+    ServiceFuture<Void> putStringValidAsync(@NonNull Map<String, String> arrayBody, ServiceCallback<Void> serviceCallback);
 
     /**
      * Set dictionary value {"0": "foo1", "1": "foo2", "2": "foo3"}.
@@ -1015,7 +1015,7 @@ public interface Dictionarys {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Map&lt;String, String&gt;&gt;} object.
      */
-    ServiceFuture<Map<String, String>> getStringWithNullAsync(@NonNull ServiceCallback<Map<String, String>> serviceCallback);
+    ServiceFuture<Map<String, String>> getStringWithNullAsync(ServiceCallback<Map<String, String>> serviceCallback);
 
     /**
      * Get string dictionary value {"0": "foo", "1": null, "2": "foo2"}.
@@ -1047,7 +1047,7 @@ public interface Dictionarys {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Map&lt;String, String&gt;&gt;} object.
      */
-    ServiceFuture<Map<String, String>> getStringWithInvalidAsync(@NonNull ServiceCallback<Map<String, String>> serviceCallback);
+    ServiceFuture<Map<String, String>> getStringWithInvalidAsync(ServiceCallback<Map<String, String>> serviceCallback);
 
     /**
      * Get string dictionary value {"0": "foo", "1": 123, "2": "foo2"}.
@@ -1079,7 +1079,7 @@ public interface Dictionarys {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Map&lt;String, LocalDate&gt;&gt;} object.
      */
-    ServiceFuture<Map<String, LocalDate>> getDateValidAsync(@NonNull ServiceCallback<Map<String, LocalDate>> serviceCallback);
+    ServiceFuture<Map<String, LocalDate>> getDateValidAsync(ServiceCallback<Map<String, LocalDate>> serviceCallback);
 
     /**
      * Get integer dictionary value {"0": "2000-12-01", "1": "1980-01-02", "2": "1492-10-12"}.
@@ -1113,7 +1113,7 @@ public interface Dictionarys {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    ServiceFuture<Void> putDateValidAsync(@NonNull Map<String, LocalDate> arrayBody, @NonNull ServiceCallback<Void> serviceCallback);
+    ServiceFuture<Void> putDateValidAsync(@NonNull Map<String, LocalDate> arrayBody, ServiceCallback<Void> serviceCallback);
 
     /**
      * Set dictionary value  {"0": "2000-12-01", "1": "1980-01-02", "2": "1492-10-12"}.
@@ -1149,7 +1149,7 @@ public interface Dictionarys {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Map&lt;String, LocalDate&gt;&gt;} object.
      */
-    ServiceFuture<Map<String, LocalDate>> getDateInvalidNullAsync(@NonNull ServiceCallback<Map<String, LocalDate>> serviceCallback);
+    ServiceFuture<Map<String, LocalDate>> getDateInvalidNullAsync(ServiceCallback<Map<String, LocalDate>> serviceCallback);
 
     /**
      * Get date dictionary value {"0": "2012-01-01", "1": null, "2": "1776-07-04"}.
@@ -1181,7 +1181,7 @@ public interface Dictionarys {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Map&lt;String, LocalDate&gt;&gt;} object.
      */
-    ServiceFuture<Map<String, LocalDate>> getDateInvalidCharsAsync(@NonNull ServiceCallback<Map<String, LocalDate>> serviceCallback);
+    ServiceFuture<Map<String, LocalDate>> getDateInvalidCharsAsync(ServiceCallback<Map<String, LocalDate>> serviceCallback);
 
     /**
      * Get date dictionary value {"0": "2011-03-22", "1": "date"}.
@@ -1213,7 +1213,7 @@ public interface Dictionarys {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Map&lt;String, DateTime&gt;&gt;} object.
      */
-    ServiceFuture<Map<String, DateTime>> getDateTimeValidAsync(@NonNull ServiceCallback<Map<String, DateTime>> serviceCallback);
+    ServiceFuture<Map<String, DateTime>> getDateTimeValidAsync(ServiceCallback<Map<String, DateTime>> serviceCallback);
 
     /**
      * Get date-time dictionary value {"0": "2000-12-01t00:00:01z", "1": "1980-01-02T00:11:35+01:00", "2": "1492-10-12T10:15:01-08:00"}.
@@ -1247,7 +1247,7 @@ public interface Dictionarys {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    ServiceFuture<Void> putDateTimeValidAsync(@NonNull Map<String, DateTime> arrayBody, @NonNull ServiceCallback<Void> serviceCallback);
+    ServiceFuture<Void> putDateTimeValidAsync(@NonNull Map<String, DateTime> arrayBody, ServiceCallback<Void> serviceCallback);
 
     /**
      * Set dictionary value  {"0": "2000-12-01t00:00:01z", "1": "1980-01-02T00:11:35+01:00", "2": "1492-10-12T10:15:01-08:00"}.
@@ -1283,7 +1283,7 @@ public interface Dictionarys {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Map&lt;String, DateTime&gt;&gt;} object.
      */
-    ServiceFuture<Map<String, DateTime>> getDateTimeInvalidNullAsync(@NonNull ServiceCallback<Map<String, DateTime>> serviceCallback);
+    ServiceFuture<Map<String, DateTime>> getDateTimeInvalidNullAsync(ServiceCallback<Map<String, DateTime>> serviceCallback);
 
     /**
      * Get date dictionary value {"0": "2000-12-01t00:00:01z", "1": null}.
@@ -1315,7 +1315,7 @@ public interface Dictionarys {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Map&lt;String, DateTime&gt;&gt;} object.
      */
-    ServiceFuture<Map<String, DateTime>> getDateTimeInvalidCharsAsync(@NonNull ServiceCallback<Map<String, DateTime>> serviceCallback);
+    ServiceFuture<Map<String, DateTime>> getDateTimeInvalidCharsAsync(ServiceCallback<Map<String, DateTime>> serviceCallback);
 
     /**
      * Get date dictionary value {"0": "2000-12-01t00:00:01z", "1": "date-time"}.
@@ -1347,7 +1347,7 @@ public interface Dictionarys {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Map&lt;String, DateTime&gt;&gt;} object.
      */
-    ServiceFuture<Map<String, DateTime>> getDateTimeRfc1123ValidAsync(@NonNull ServiceCallback<Map<String, DateTime>> serviceCallback);
+    ServiceFuture<Map<String, DateTime>> getDateTimeRfc1123ValidAsync(ServiceCallback<Map<String, DateTime>> serviceCallback);
 
     /**
      * Get date-time-rfc1123 dictionary value {"0": "Fri, 01 Dec 2000 00:00:01 GMT", "1": "Wed, 02 Jan 1980 00:11:35 GMT", "2": "Wed, 12 Oct 1492 10:15:01 GMT"}.
@@ -1381,7 +1381,7 @@ public interface Dictionarys {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    ServiceFuture<Void> putDateTimeRfc1123ValidAsync(@NonNull Map<String, DateTime> arrayBody, @NonNull ServiceCallback<Void> serviceCallback);
+    ServiceFuture<Void> putDateTimeRfc1123ValidAsync(@NonNull Map<String, DateTime> arrayBody, ServiceCallback<Void> serviceCallback);
 
     /**
      * Set dictionary value empty {"0": "Fri, 01 Dec 2000 00:00:01 GMT", "1": "Wed, 02 Jan 1980 00:11:35 GMT", "2": "Wed, 12 Oct 1492 10:15:01 GMT"}.
@@ -1417,7 +1417,7 @@ public interface Dictionarys {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Map&lt;String, Period&gt;&gt;} object.
      */
-    ServiceFuture<Map<String, Period>> getDurationValidAsync(@NonNull ServiceCallback<Map<String, Period>> serviceCallback);
+    ServiceFuture<Map<String, Period>> getDurationValidAsync(ServiceCallback<Map<String, Period>> serviceCallback);
 
     /**
      * Get duration dictionary value {"0": "P123DT22H14M12.011S", "1": "P5DT1H0M0S"}.
@@ -1451,7 +1451,7 @@ public interface Dictionarys {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    ServiceFuture<Void> putDurationValidAsync(@NonNull Map<String, Period> arrayBody, @NonNull ServiceCallback<Void> serviceCallback);
+    ServiceFuture<Void> putDurationValidAsync(@NonNull Map<String, Period> arrayBody, ServiceCallback<Void> serviceCallback);
 
     /**
      * Set dictionary value  {"0": "P123DT22H14M12.011S", "1": "P5DT1H0M0S"}.
@@ -1487,7 +1487,7 @@ public interface Dictionarys {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Map&lt;String, byte[]&gt;&gt;} object.
      */
-    ServiceFuture<Map<String, byte[]>> getByteValidAsync(@NonNull ServiceCallback<Map<String, byte[]>> serviceCallback);
+    ServiceFuture<Map<String, byte[]>> getByteValidAsync(ServiceCallback<Map<String, byte[]>> serviceCallback);
 
     /**
      * Get byte dictionary value {"0": hex(FF FF FF FA), "1": hex(01 02 03), "2": hex (25, 29, 43)} with each item encoded in base64.
@@ -1521,7 +1521,7 @@ public interface Dictionarys {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    ServiceFuture<Void> putByteValidAsync(@NonNull Map<String, byte[]> arrayBody, @NonNull ServiceCallback<Void> serviceCallback);
+    ServiceFuture<Void> putByteValidAsync(@NonNull Map<String, byte[]> arrayBody, ServiceCallback<Void> serviceCallback);
 
     /**
      * Put the dictionary value {"0": hex(FF FF FF FA), "1": hex(01 02 03), "2": hex (25, 29, 43)} with each elementencoded in base 64.
@@ -1557,7 +1557,7 @@ public interface Dictionarys {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Map&lt;String, byte[]&gt;&gt;} object.
      */
-    ServiceFuture<Map<String, byte[]>> getByteInvalidNullAsync(@NonNull ServiceCallback<Map<String, byte[]>> serviceCallback);
+    ServiceFuture<Map<String, byte[]>> getByteInvalidNullAsync(ServiceCallback<Map<String, byte[]>> serviceCallback);
 
     /**
      * Get byte dictionary value {"0": hex(FF FF FF FA), "1": null} with the first item base64 encoded.
@@ -1589,7 +1589,7 @@ public interface Dictionarys {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Map&lt;String, byte[]&gt;&gt;} object.
      */
-    ServiceFuture<Map<String, byte[]>> getBase64UrlAsync(@NonNull ServiceCallback<Map<String, byte[]>> serviceCallback);
+    ServiceFuture<Map<String, byte[]>> getBase64UrlAsync(ServiceCallback<Map<String, byte[]>> serviceCallback);
 
     /**
      * Get base64url dictionary value {"0": "a string that gets encoded with base64url", "1": "test string", "2": "Lorem ipsum"}.
@@ -1621,7 +1621,7 @@ public interface Dictionarys {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Map&lt;String, Widget&gt;&gt;} object.
      */
-    ServiceFuture<Map<String, Widget>> getComplexNullAsync(@NonNull ServiceCallback<Map<String, Widget>> serviceCallback);
+    ServiceFuture<Map<String, Widget>> getComplexNullAsync(ServiceCallback<Map<String, Widget>> serviceCallback);
 
     /**
      * Get dictionary of complex type null value.
@@ -1653,7 +1653,7 @@ public interface Dictionarys {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Map&lt;String, Widget&gt;&gt;} object.
      */
-    ServiceFuture<Map<String, Widget>> getComplexEmptyAsync(@NonNull ServiceCallback<Map<String, Widget>> serviceCallback);
+    ServiceFuture<Map<String, Widget>> getComplexEmptyAsync(ServiceCallback<Map<String, Widget>> serviceCallback);
 
     /**
      * Get empty dictionary of complex type {}.
@@ -1685,7 +1685,7 @@ public interface Dictionarys {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Map&lt;String, Widget&gt;&gt;} object.
      */
-    ServiceFuture<Map<String, Widget>> getComplexItemNullAsync(@NonNull ServiceCallback<Map<String, Widget>> serviceCallback);
+    ServiceFuture<Map<String, Widget>> getComplexItemNullAsync(ServiceCallback<Map<String, Widget>> serviceCallback);
 
     /**
      * Get dictionary of complex type with null item {"0": {"integer": 1, "string": "2"}, "1": null, "2": {"integer": 5, "string": "6"}}.
@@ -1717,7 +1717,7 @@ public interface Dictionarys {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Map&lt;String, Widget&gt;&gt;} object.
      */
-    ServiceFuture<Map<String, Widget>> getComplexItemEmptyAsync(@NonNull ServiceCallback<Map<String, Widget>> serviceCallback);
+    ServiceFuture<Map<String, Widget>> getComplexItemEmptyAsync(ServiceCallback<Map<String, Widget>> serviceCallback);
 
     /**
      * Get dictionary of complex type with empty item {"0": {"integer": 1, "string": "2"}, "1:" {}, "2": {"integer": 5, "string": "6"}}.
@@ -1749,7 +1749,7 @@ public interface Dictionarys {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Map&lt;String, Widget&gt;&gt;} object.
      */
-    ServiceFuture<Map<String, Widget>> getComplexValidAsync(@NonNull ServiceCallback<Map<String, Widget>> serviceCallback);
+    ServiceFuture<Map<String, Widget>> getComplexValidAsync(ServiceCallback<Map<String, Widget>> serviceCallback);
 
     /**
      * Get dictionary of complex type with {"0": {"integer": 1, "string": "2"}, "1": {"integer": 3, "string": "4"}, "2": {"integer": 5, "string": "6"}}.
@@ -1783,7 +1783,7 @@ public interface Dictionarys {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    ServiceFuture<Void> putComplexValidAsync(@NonNull Map<String, Widget> arrayBody, @NonNull ServiceCallback<Void> serviceCallback);
+    ServiceFuture<Void> putComplexValidAsync(@NonNull Map<String, Widget> arrayBody, ServiceCallback<Void> serviceCallback);
 
     /**
      * Put an dictionary of complex type with values {"0": {"integer": 1, "string": "2"}, "1": {"integer": 3, "string": "4"}, "2": {"integer": 5, "string": "6"}}.
@@ -1819,7 +1819,7 @@ public interface Dictionarys {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Map&lt;String, List&lt;String&gt;&gt;&gt;} object.
      */
-    ServiceFuture<Map<String, List<String>>> getArrayNullAsync(@NonNull ServiceCallback<Map<String, List<String>>> serviceCallback);
+    ServiceFuture<Map<String, List<String>>> getArrayNullAsync(ServiceCallback<Map<String, List<String>>> serviceCallback);
 
     /**
      * Get a null array.
@@ -1851,7 +1851,7 @@ public interface Dictionarys {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Map&lt;String, List&lt;String&gt;&gt;&gt;} object.
      */
-    ServiceFuture<Map<String, List<String>>> getArrayEmptyAsync(@NonNull ServiceCallback<Map<String, List<String>>> serviceCallback);
+    ServiceFuture<Map<String, List<String>>> getArrayEmptyAsync(ServiceCallback<Map<String, List<String>>> serviceCallback);
 
     /**
      * Get an empty dictionary {}.
@@ -1883,7 +1883,7 @@ public interface Dictionarys {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Map&lt;String, List&lt;String&gt;&gt;&gt;} object.
      */
-    ServiceFuture<Map<String, List<String>>> getArrayItemNullAsync(@NonNull ServiceCallback<Map<String, List<String>>> serviceCallback);
+    ServiceFuture<Map<String, List<String>>> getArrayItemNullAsync(ServiceCallback<Map<String, List<String>>> serviceCallback);
 
     /**
      * Get an dictionary of array of strings {"0": ["1", "2", "3"], "1": null, "2": ["7", "8", "9"]}.
@@ -1915,7 +1915,7 @@ public interface Dictionarys {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Map&lt;String, List&lt;String&gt;&gt;&gt;} object.
      */
-    ServiceFuture<Map<String, List<String>>> getArrayItemEmptyAsync(@NonNull ServiceCallback<Map<String, List<String>>> serviceCallback);
+    ServiceFuture<Map<String, List<String>>> getArrayItemEmptyAsync(ServiceCallback<Map<String, List<String>>> serviceCallback);
 
     /**
      * Get an array of array of strings [{"0": ["1", "2", "3"], "1": [], "2": ["7", "8", "9"]}.
@@ -1947,7 +1947,7 @@ public interface Dictionarys {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Map&lt;String, List&lt;String&gt;&gt;&gt;} object.
      */
-    ServiceFuture<Map<String, List<String>>> getArrayValidAsync(@NonNull ServiceCallback<Map<String, List<String>>> serviceCallback);
+    ServiceFuture<Map<String, List<String>>> getArrayValidAsync(ServiceCallback<Map<String, List<String>>> serviceCallback);
 
     /**
      * Get an array of array of strings {"0": ["1", "2", "3"], "1": ["4", "5", "6"], "2": ["7", "8", "9"]}.
@@ -1981,7 +1981,7 @@ public interface Dictionarys {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    ServiceFuture<Void> putArrayValidAsync(@NonNull Map<String, List<String>> arrayBody, @NonNull ServiceCallback<Void> serviceCallback);
+    ServiceFuture<Void> putArrayValidAsync(@NonNull Map<String, List<String>> arrayBody, ServiceCallback<Void> serviceCallback);
 
     /**
      * Put An array of array of strings {"0": ["1", "2", "3"], "1": ["4", "5", "6"], "2": ["7", "8", "9"]}.
@@ -2017,7 +2017,7 @@ public interface Dictionarys {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Map&lt;String, Map&lt;String, String&gt;&gt;&gt;} object.
      */
-    ServiceFuture<Map<String, Map<String, String>>> getDictionaryNullAsync(@NonNull ServiceCallback<Map<String, Map<String, String>>> serviceCallback);
+    ServiceFuture<Map<String, Map<String, String>>> getDictionaryNullAsync(ServiceCallback<Map<String, Map<String, String>>> serviceCallback);
 
     /**
      * Get an dictionaries of dictionaries with value null.
@@ -2049,7 +2049,7 @@ public interface Dictionarys {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Map&lt;String, Map&lt;String, String&gt;&gt;&gt;} object.
      */
-    ServiceFuture<Map<String, Map<String, String>>> getDictionaryEmptyAsync(@NonNull ServiceCallback<Map<String, Map<String, String>>> serviceCallback);
+    ServiceFuture<Map<String, Map<String, String>>> getDictionaryEmptyAsync(ServiceCallback<Map<String, Map<String, String>>> serviceCallback);
 
     /**
      * Get an dictionaries of dictionaries of type &lt;string, string&gt; with value {}.
@@ -2081,7 +2081,7 @@ public interface Dictionarys {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Map&lt;String, Map&lt;String, String&gt;&gt;&gt;} object.
      */
-    ServiceFuture<Map<String, Map<String, String>>> getDictionaryItemNullAsync(@NonNull ServiceCallback<Map<String, Map<String, String>>> serviceCallback);
+    ServiceFuture<Map<String, Map<String, String>>> getDictionaryItemNullAsync(ServiceCallback<Map<String, Map<String, String>>> serviceCallback);
 
     /**
      * Get an dictionaries of dictionaries of type &lt;string, string&gt; with value {"0": {"1": "one", "2": "two", "3": "three"}, "1": null, "2": {"7": "seven", "8": "eight", "9": "nine"}}.
@@ -2113,7 +2113,7 @@ public interface Dictionarys {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Map&lt;String, Map&lt;String, String&gt;&gt;&gt;} object.
      */
-    ServiceFuture<Map<String, Map<String, String>>> getDictionaryItemEmptyAsync(@NonNull ServiceCallback<Map<String, Map<String, String>>> serviceCallback);
+    ServiceFuture<Map<String, Map<String, String>>> getDictionaryItemEmptyAsync(ServiceCallback<Map<String, Map<String, String>>> serviceCallback);
 
     /**
      * Get an dictionaries of dictionaries of type &lt;string, string&gt; with value {"0": {"1": "one", "2": "two", "3": "three"}, "1": {}, "2": {"7": "seven", "8": "eight", "9": "nine"}}.
@@ -2145,7 +2145,7 @@ public interface Dictionarys {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Map&lt;String, Map&lt;String, String&gt;&gt;&gt;} object.
      */
-    ServiceFuture<Map<String, Map<String, String>>> getDictionaryValidAsync(@NonNull ServiceCallback<Map<String, Map<String, String>>> serviceCallback);
+    ServiceFuture<Map<String, Map<String, String>>> getDictionaryValidAsync(ServiceCallback<Map<String, Map<String, String>>> serviceCallback);
 
     /**
      * Get an dictionaries of dictionaries of type &lt;string, string&gt; with value {"0": {"1": "one", "2": "two", "3": "three"}, "1": {"4": "four", "5": "five", "6": "six"}, "2": {"7": "seven", "8": "eight", "9": "nine"}}.
@@ -2179,7 +2179,7 @@ public interface Dictionarys {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    ServiceFuture<Void> putDictionaryValidAsync(@NonNull Map<String, Map<String, String>> arrayBody, @NonNull ServiceCallback<Void> serviceCallback);
+    ServiceFuture<Void> putDictionaryValidAsync(@NonNull Map<String, Map<String, String>> arrayBody, ServiceCallback<Void> serviceCallback);
 
     /**
      * Get an dictionaries of dictionaries of type &lt;string, string&gt; with value {"0": {"1": "one", "2": "two", "3": "three"}, "1": {"4": "four", "5": "five", "6": "six"}, "2": {"7": "seven", "8": "eight", "9": "nine"}}.

@@ -4580,7 +4580,7 @@ namespace AutoRest.Java
                     type: GenericType.ServiceCallback(restAPIMethodReturnBodyClientType),
                     name: "serviceCallback",
                     isRequired: true,
-                    annotations: GetClientMethodParameterAnnotations(true, settings));
+                    annotations: GetClientMethodParameterAnnotations(false, settings));
 
                 GenericType serviceFutureReturnType = GenericType.ServiceFuture(restAPIMethodReturnBodyClientType);
 

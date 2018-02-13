@@ -40,7 +40,7 @@ public interface Readonlypropertys {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;ReadonlyObj&gt;} object.
      */
-    ServiceFuture<ReadonlyObj> getValidAsync(@NonNull ServiceCallback<ReadonlyObj> serviceCallback);
+    ServiceFuture<ReadonlyObj> getValidAsync(ServiceCallback<ReadonlyObj> serviceCallback);
 
     /**
      * Get complex types that have readonly properties.
@@ -74,7 +74,7 @@ public interface Readonlypropertys {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    ServiceFuture<Void> putValidAsync(@NonNull ReadonlyObj complexBody, @NonNull ServiceCallback<Void> serviceCallback);
+    ServiceFuture<Void> putValidAsync(@NonNull ReadonlyObj complexBody, ServiceCallback<Void> serviceCallback);
 
     /**
      * Put complex types that have readonly properties.

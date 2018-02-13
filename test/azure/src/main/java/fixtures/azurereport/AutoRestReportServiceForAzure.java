@@ -15,7 +15,6 @@ import com.microsoft.rest.v2.ServiceCallback;
 import com.microsoft.rest.v2.ServiceFuture;
 import io.reactivex.Maybe;
 import io.reactivex.Single;
-import io.reactivex.annotations.NonNull;
 import java.util.Map;
 
 /**
@@ -83,7 +82,7 @@ public interface AutoRestReportServiceForAzure {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Map&lt;String, Integer&gt;&gt;} object.
      */
-    ServiceFuture<Map<String, Integer>> getReportAsync(@NonNull ServiceCallback<Map<String, Integer>> serviceCallback);
+    ServiceFuture<Map<String, Integer>> getReportAsync(ServiceCallback<Map<String, Integer>> serviceCallback);
 
     /**
      * Get test coverage report.
@@ -118,7 +117,7 @@ public interface AutoRestReportServiceForAzure {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Map&lt;String, Integer&gt;&gt;} object.
      */
-    ServiceFuture<Map<String, Integer>> getReportAsync(String qualifier, @NonNull ServiceCallback<Map<String, Integer>> serviceCallback);
+    ServiceFuture<Map<String, Integer>> getReportAsync(String qualifier, ServiceCallback<Map<String, Integer>> serviceCallback);
 
     /**
      * Get test coverage report.

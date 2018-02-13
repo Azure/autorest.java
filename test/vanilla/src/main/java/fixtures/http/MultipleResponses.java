@@ -17,7 +17,6 @@ import fixtures.http.models.A;
 import io.reactivex.Completable;
 import io.reactivex.Maybe;
 import io.reactivex.Single;
-import io.reactivex.annotations.NonNull;
 
 /**
  * An instance of this class provides access to all the operations defined in
@@ -40,7 +39,7 @@ public interface MultipleResponses {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;A&gt;} object.
      */
-    ServiceFuture<A> get200Model204NoModelDefaultError200ValidAsync(@NonNull ServiceCallback<A> serviceCallback);
+    ServiceFuture<A> get200Model204NoModelDefaultError200ValidAsync(ServiceCallback<A> serviceCallback);
 
     /**
      * Send a 200 response with valid payload: {'statusCode': '200'}.
@@ -72,7 +71,7 @@ public interface MultipleResponses {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;A&gt;} object.
      */
-    ServiceFuture<A> get200Model204NoModelDefaultError204ValidAsync(@NonNull ServiceCallback<A> serviceCallback);
+    ServiceFuture<A> get200Model204NoModelDefaultError204ValidAsync(ServiceCallback<A> serviceCallback);
 
     /**
      * Send a 204 response with no payload.
@@ -104,7 +103,7 @@ public interface MultipleResponses {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;A&gt;} object.
      */
-    ServiceFuture<A> get200Model204NoModelDefaultError201InvalidAsync(@NonNull ServiceCallback<A> serviceCallback);
+    ServiceFuture<A> get200Model204NoModelDefaultError201InvalidAsync(ServiceCallback<A> serviceCallback);
 
     /**
      * Send a 201 response with valid payload: {'statusCode': '201'}.
@@ -136,7 +135,7 @@ public interface MultipleResponses {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;A&gt;} object.
      */
-    ServiceFuture<A> get200Model204NoModelDefaultError202NoneAsync(@NonNull ServiceCallback<A> serviceCallback);
+    ServiceFuture<A> get200Model204NoModelDefaultError202NoneAsync(ServiceCallback<A> serviceCallback);
 
     /**
      * Send a 202 response with no payload:.
@@ -168,7 +167,7 @@ public interface MultipleResponses {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;A&gt;} object.
      */
-    ServiceFuture<A> get200Model204NoModelDefaultError400ValidAsync(@NonNull ServiceCallback<A> serviceCallback);
+    ServiceFuture<A> get200Model204NoModelDefaultError400ValidAsync(ServiceCallback<A> serviceCallback);
 
     /**
      * Send a 400 response with valid error payload: {'status': 400, 'message': 'client error'}.
@@ -200,7 +199,7 @@ public interface MultipleResponses {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;A&gt;} object.
      */
-    ServiceFuture<A> get200Model201ModelDefaultError200ValidAsync(@NonNull ServiceCallback<A> serviceCallback);
+    ServiceFuture<A> get200Model201ModelDefaultError200ValidAsync(ServiceCallback<A> serviceCallback);
 
     /**
      * Send a 200 response with valid payload: {'statusCode': '200'}.
@@ -232,7 +231,7 @@ public interface MultipleResponses {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;A&gt;} object.
      */
-    ServiceFuture<A> get200Model201ModelDefaultError201ValidAsync(@NonNull ServiceCallback<A> serviceCallback);
+    ServiceFuture<A> get200Model201ModelDefaultError201ValidAsync(ServiceCallback<A> serviceCallback);
 
     /**
      * Send a 201 response with valid payload: {'statusCode': '201', 'textStatusCode': 'Created'}.
@@ -264,7 +263,7 @@ public interface MultipleResponses {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;A&gt;} object.
      */
-    ServiceFuture<A> get200Model201ModelDefaultError400ValidAsync(@NonNull ServiceCallback<A> serviceCallback);
+    ServiceFuture<A> get200Model201ModelDefaultError400ValidAsync(ServiceCallback<A> serviceCallback);
 
     /**
      * Send a 400 response with valid payload: {'code': '400', 'message': 'client error'}.
@@ -296,7 +295,7 @@ public interface MultipleResponses {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Object&gt;} object.
      */
-    ServiceFuture<Object> get200ModelA201ModelC404ModelDDefaultError200ValidAsync(@NonNull ServiceCallback<Object> serviceCallback);
+    ServiceFuture<Object> get200ModelA201ModelC404ModelDDefaultError200ValidAsync(ServiceCallback<Object> serviceCallback);
 
     /**
      * Send a 200 response with valid payload: {'statusCode': '200'}.
@@ -328,7 +327,7 @@ public interface MultipleResponses {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Object&gt;} object.
      */
-    ServiceFuture<Object> get200ModelA201ModelC404ModelDDefaultError201ValidAsync(@NonNull ServiceCallback<Object> serviceCallback);
+    ServiceFuture<Object> get200ModelA201ModelC404ModelDDefaultError201ValidAsync(ServiceCallback<Object> serviceCallback);
 
     /**
      * Send a 200 response with valid payload: {'httpCode': '201'}.
@@ -360,7 +359,7 @@ public interface MultipleResponses {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Object&gt;} object.
      */
-    ServiceFuture<Object> get200ModelA201ModelC404ModelDDefaultError404ValidAsync(@NonNull ServiceCallback<Object> serviceCallback);
+    ServiceFuture<Object> get200ModelA201ModelC404ModelDDefaultError404ValidAsync(ServiceCallback<Object> serviceCallback);
 
     /**
      * Send a 200 response with valid payload: {'httpStatusCode': '404'}.
@@ -392,7 +391,7 @@ public interface MultipleResponses {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Object&gt;} object.
      */
-    ServiceFuture<Object> get200ModelA201ModelC404ModelDDefaultError400ValidAsync(@NonNull ServiceCallback<Object> serviceCallback);
+    ServiceFuture<Object> get200ModelA201ModelC404ModelDDefaultError400ValidAsync(ServiceCallback<Object> serviceCallback);
 
     /**
      * Send a 400 response with valid payload: {'code': '400', 'message': 'client error'}.
@@ -423,7 +422,7 @@ public interface MultipleResponses {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    ServiceFuture<Void> get202None204NoneDefaultError202NoneAsync(@NonNull ServiceCallback<Void> serviceCallback);
+    ServiceFuture<Void> get202None204NoneDefaultError202NoneAsync(ServiceCallback<Void> serviceCallback);
 
     /**
      * Send a 202 response with no payload.
@@ -454,7 +453,7 @@ public interface MultipleResponses {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    ServiceFuture<Void> get202None204NoneDefaultError204NoneAsync(@NonNull ServiceCallback<Void> serviceCallback);
+    ServiceFuture<Void> get202None204NoneDefaultError204NoneAsync(ServiceCallback<Void> serviceCallback);
 
     /**
      * Send a 204 response with no payload.
@@ -485,7 +484,7 @@ public interface MultipleResponses {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    ServiceFuture<Void> get202None204NoneDefaultError400ValidAsync(@NonNull ServiceCallback<Void> serviceCallback);
+    ServiceFuture<Void> get202None204NoneDefaultError400ValidAsync(ServiceCallback<Void> serviceCallback);
 
     /**
      * Send a 400 response with valid payload: {'code': '400', 'message': 'client error'}.
@@ -515,7 +514,7 @@ public interface MultipleResponses {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    ServiceFuture<Void> get202None204NoneDefaultNone202InvalidAsync(@NonNull ServiceCallback<Void> serviceCallback);
+    ServiceFuture<Void> get202None204NoneDefaultNone202InvalidAsync(ServiceCallback<Void> serviceCallback);
 
     /**
      * Send a 202 response with an unexpected payload {'property': 'value'}.
@@ -545,7 +544,7 @@ public interface MultipleResponses {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    ServiceFuture<Void> get202None204NoneDefaultNone204NoneAsync(@NonNull ServiceCallback<Void> serviceCallback);
+    ServiceFuture<Void> get202None204NoneDefaultNone204NoneAsync(ServiceCallback<Void> serviceCallback);
 
     /**
      * Send a 204 response with no payload.
@@ -575,7 +574,7 @@ public interface MultipleResponses {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    ServiceFuture<Void> get202None204NoneDefaultNone400NoneAsync(@NonNull ServiceCallback<Void> serviceCallback);
+    ServiceFuture<Void> get202None204NoneDefaultNone400NoneAsync(ServiceCallback<Void> serviceCallback);
 
     /**
      * Send a 400 response with no payload.
@@ -605,7 +604,7 @@ public interface MultipleResponses {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    ServiceFuture<Void> get202None204NoneDefaultNone400InvalidAsync(@NonNull ServiceCallback<Void> serviceCallback);
+    ServiceFuture<Void> get202None204NoneDefaultNone400InvalidAsync(ServiceCallback<Void> serviceCallback);
 
     /**
      * Send a 400 response with an unexpected payload {'property': 'value'}.
@@ -637,7 +636,7 @@ public interface MultipleResponses {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;A&gt;} object.
      */
-    ServiceFuture<A> getDefaultModelA200ValidAsync(@NonNull ServiceCallback<A> serviceCallback);
+    ServiceFuture<A> getDefaultModelA200ValidAsync(ServiceCallback<A> serviceCallback);
 
     /**
      * Send a 200 response with valid payload: {'statusCode': '200'}.
@@ -669,7 +668,7 @@ public interface MultipleResponses {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;A&gt;} object.
      */
-    ServiceFuture<A> getDefaultModelA200NoneAsync(@NonNull ServiceCallback<A> serviceCallback);
+    ServiceFuture<A> getDefaultModelA200NoneAsync(ServiceCallback<A> serviceCallback);
 
     /**
      * Send a 200 response with no payload.
@@ -701,7 +700,7 @@ public interface MultipleResponses {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;A&gt;} object.
      */
-    ServiceFuture<A> getDefaultModelA400ValidAsync(@NonNull ServiceCallback<A> serviceCallback);
+    ServiceFuture<A> getDefaultModelA400ValidAsync(ServiceCallback<A> serviceCallback);
 
     /**
      * Send a 400 response with valid payload: {'statusCode': '400'}.
@@ -733,7 +732,7 @@ public interface MultipleResponses {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;A&gt;} object.
      */
-    ServiceFuture<A> getDefaultModelA400NoneAsync(@NonNull ServiceCallback<A> serviceCallback);
+    ServiceFuture<A> getDefaultModelA400NoneAsync(ServiceCallback<A> serviceCallback);
 
     /**
      * Send a 400 response with no payload.
@@ -763,7 +762,7 @@ public interface MultipleResponses {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    ServiceFuture<Void> getDefaultNone200InvalidAsync(@NonNull ServiceCallback<Void> serviceCallback);
+    ServiceFuture<Void> getDefaultNone200InvalidAsync(ServiceCallback<Void> serviceCallback);
 
     /**
      * Send a 200 response with invalid payload: {'statusCode': '200'}.
@@ -793,7 +792,7 @@ public interface MultipleResponses {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    ServiceFuture<Void> getDefaultNone200NoneAsync(@NonNull ServiceCallback<Void> serviceCallback);
+    ServiceFuture<Void> getDefaultNone200NoneAsync(ServiceCallback<Void> serviceCallback);
 
     /**
      * Send a 200 response with no payload.
@@ -823,7 +822,7 @@ public interface MultipleResponses {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    ServiceFuture<Void> getDefaultNone400InvalidAsync(@NonNull ServiceCallback<Void> serviceCallback);
+    ServiceFuture<Void> getDefaultNone400InvalidAsync(ServiceCallback<Void> serviceCallback);
 
     /**
      * Send a 400 response with valid payload: {'statusCode': '400'}.
@@ -853,7 +852,7 @@ public interface MultipleResponses {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    ServiceFuture<Void> getDefaultNone400NoneAsync(@NonNull ServiceCallback<Void> serviceCallback);
+    ServiceFuture<Void> getDefaultNone400NoneAsync(ServiceCallback<Void> serviceCallback);
 
     /**
      * Send a 400 response with no payload.
@@ -884,7 +883,7 @@ public interface MultipleResponses {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;A&gt;} object.
      */
-    ServiceFuture<A> get200ModelA200NoneAsync(@NonNull ServiceCallback<A> serviceCallback);
+    ServiceFuture<A> get200ModelA200NoneAsync(ServiceCallback<A> serviceCallback);
 
     /**
      * Send a 200 response with no payload, when a payload is expected - client should return a null object of thde type for model A.
@@ -915,7 +914,7 @@ public interface MultipleResponses {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;A&gt;} object.
      */
-    ServiceFuture<A> get200ModelA200ValidAsync(@NonNull ServiceCallback<A> serviceCallback);
+    ServiceFuture<A> get200ModelA200ValidAsync(ServiceCallback<A> serviceCallback);
 
     /**
      * Send a 200 response with payload {'statusCode': '200'}.
@@ -946,7 +945,7 @@ public interface MultipleResponses {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;A&gt;} object.
      */
-    ServiceFuture<A> get200ModelA200InvalidAsync(@NonNull ServiceCallback<A> serviceCallback);
+    ServiceFuture<A> get200ModelA200InvalidAsync(ServiceCallback<A> serviceCallback);
 
     /**
      * Send a 200 response with invalid payload {'statusCodeInvalid': '200'}.
@@ -977,7 +976,7 @@ public interface MultipleResponses {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;A&gt;} object.
      */
-    ServiceFuture<A> get200ModelA400NoneAsync(@NonNull ServiceCallback<A> serviceCallback);
+    ServiceFuture<A> get200ModelA400NoneAsync(ServiceCallback<A> serviceCallback);
 
     /**
      * Send a 400 response with no payload client should treat as an http error with no error model.
@@ -1008,7 +1007,7 @@ public interface MultipleResponses {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;A&gt;} object.
      */
-    ServiceFuture<A> get200ModelA400ValidAsync(@NonNull ServiceCallback<A> serviceCallback);
+    ServiceFuture<A> get200ModelA400ValidAsync(ServiceCallback<A> serviceCallback);
 
     /**
      * Send a 200 response with payload {'statusCode': '400'}.
@@ -1039,7 +1038,7 @@ public interface MultipleResponses {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;A&gt;} object.
      */
-    ServiceFuture<A> get200ModelA400InvalidAsync(@NonNull ServiceCallback<A> serviceCallback);
+    ServiceFuture<A> get200ModelA400InvalidAsync(ServiceCallback<A> serviceCallback);
 
     /**
      * Send a 200 response with invalid payload {'statusCodeInvalid': '400'}.
@@ -1070,7 +1069,7 @@ public interface MultipleResponses {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;A&gt;} object.
      */
-    ServiceFuture<A> get200ModelA202ValidAsync(@NonNull ServiceCallback<A> serviceCallback);
+    ServiceFuture<A> get200ModelA202ValidAsync(ServiceCallback<A> serviceCallback);
 
     /**
      * Send a 202 response with payload {'statusCode': '202'}.
