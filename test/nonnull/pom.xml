@@ -131,14 +131,6 @@
 
       <plugin>
         <artifactId>maven-surefire-plugin</artifactId>
-        <configuration>
-          <properties>
-            <property>
-              <name>listener</name>
-              <value>fixtures.azurereport.CoverageReporter</value>
-            </property>
-          </properties>
-        </configuration>
       </plugin>
     </plugins>
   </build>
