@@ -164,6 +164,29 @@ task 'regenerate-implementationsubpackage-empty', '', (done) ->
       "--java.implementation-subpackage=''"
     ]
   },done
+
+task 'regenerate-modelssubpackage', '', (done) ->
+  regenExpected {
+    'outputDir': 'test/modelssubpackage',
+    'mappings': {
+      'BodyByte': 'body-byte.json'
+    },
+    'extraArguments': [
+      '--java.models-subpackage=spam'
+    ]
+  },done
+  return null
+
+task 'regenerate-modelssubpackage-empty', '', (done) ->
+  regenExpected {
+    'outputDir': 'test/modelssubpackage-empty',
+    'mappings': {
+      'BodyByte': 'body-byte.json'
+    },
+    'extraArguments': [
+      "--java.models-subpackage=''"
+    ]
+  },done
   
 task 'regenerate-xml', '', (done) ->
   outputDir = 'test/xml'
@@ -193,7 +216,9 @@ regenerateTasks = [
   'regenerate-clienttypeprefix',
   'regenerate-generateclientinterfaces',
   'regenerate-implementationsubpackage',
-  'regenerate-implementationsubpackage-empty'
+  'regenerate-implementationsubpackage-empty',
+  'regenerate-modelssubpackage',
+  'regenerate-modelssubpackage-empty',
   'regenerate-xml'
 ]
 

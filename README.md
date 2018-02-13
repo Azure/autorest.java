@@ -26,6 +26,18 @@ This project enables Java code generation in [AutoRest](https://github.com/Azure
     package com.fruit.service.spam;
     public class ApplesServiceClient { ... }
     ```
+- *--java.models-subpackage*: The sub-package that Enums, Exceptions, and Model types will be generated.
+  - Default: `models`
+  - Without Argument:
+  ```java
+  package com.fruit.service.models;
+  public class MyAppleClass { ... }
+  ```
+  - With Argument: (`spam`):
+  ```java
+  package com.fruit.service.spam;
+  public class MyAppleClass { ... }
+  ```
 - *--java.non-null-annotations*: Whether or not to add `@NonNull` (from the `io.reactivex.annotations` package) annotations to each required parameter in client methods.
   - Default: `true`
   - Without Argument: `int Plus(Integer val1, Integer val2)`

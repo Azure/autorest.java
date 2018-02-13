@@ -30,7 +30,8 @@ namespace AutoRest.Java
         /// <param name="clientTypePrefix">The prefix that will be added to each generated client type.</param>
         /// <param name="generateClientInterfaces">Whether or not interfaces will be generated for Service and Method Group clients.</param>
         /// <param name="implementationSubpackage">The sub-package that the Service and Method Group client implementation classes will be put into.</param>
-        public JavaSettings(Action<bool> setAddCredentials, bool isAzure, bool isFluent, bool regenerateManagers, bool regeneratePom, string fileHeaderText, int maximumJavadocCommentWidth, string serviceName, string package, bool shouldGenerateXmlSerialization, bool nonNullAnnotations, bool stringDates, string clientTypePrefix, bool generateClientInterfaces, string implementationSubpackage)
+        /// <param name="modelsSubpackage">The sub-package that Enums, Exceptions, and Model types will be put into.</param>
+        public JavaSettings(Action<bool> setAddCredentials, bool isAzure, bool isFluent, bool regenerateManagers, bool regeneratePom, string fileHeaderText, int maximumJavadocCommentWidth, string serviceName, string package, bool shouldGenerateXmlSerialization, bool nonNullAnnotations, bool stringDates, string clientTypePrefix, bool generateClientInterfaces, string implementationSubpackage, string modelsSubpackage)
         {
             this.setAddCredentials = setAddCredentials;
             IsAzure = isAzure;
@@ -47,6 +48,7 @@ namespace AutoRest.Java
             ClientTypePrefix = clientTypePrefix;
             GenerateClientInterfaces = generateClientInterfaces;
             ImplementationSubpackage = implementationSubpackage;
+            ModelsSubpackage = modelsSubpackage;
         }
 
         public bool IsAzure { get; }
@@ -98,5 +100,10 @@ namespace AutoRest.Java
         /// The sub-package that the Service and Method Group client implementation classes will be put into.
         /// </summary>
         public string ImplementationSubpackage { get; }
+
+        /// <summary>
+        /// The sub-package that Enums, Exceptions, and Model types will be put into.
+        /// </summary>
+        public string ModelsSubpackage { get; }
     }
 }

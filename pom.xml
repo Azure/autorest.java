@@ -201,6 +201,8 @@
     <module>test/generateclientinterfaces</module>
     <module>test/implementationsubpackage</module>
     <module>test/implementationsubpackage-empty</module>
+    <module>test/modelssubpackage</module>
+    <module>test/modelssubpackage-empty</module>
     <module>test/nonnull</module>
     <module>test/vanilla</module>
     <module>test/xml</module>
