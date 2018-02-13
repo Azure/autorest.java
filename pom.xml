@@ -201,5 +201,6 @@
     <module>test/nonnull</module>
     <module>test/clienttypeprefix</module>
     <module>test/generateclientinterfaces</module>
+    <module>test/xml</module>
   </modules>
 </project>

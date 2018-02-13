@@ -1,0 +1,180 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "AutoRest Swagger BAT XML Service",
+    "description": "Test Infrastructure for AutoRest Swagger BAT",
+    "version": "1.0.0"
+  },
+  "host": "localhost",
+  "schemes": [
+    "http"
+  ],
+  "produces": [
+    "application/xml"
+  ],
+  "consumes": [
+    "application/xml"
+  ],
+  "paths": {
+    "/xml/simple": {
+      "get": {
+        "operationId": "xml_getSimple",
+        "description": "Get a simple XML document",
+        "tags": [
+          "XML Operations"
+        ],
+        "responses": {
+          "200": {
+            "description": "The simple XML document",
+            "schema": {
+              "$ref": "#/definitions/Slideshow"
+            }
+          },
+          "default": {
+            "description": "Unexpected error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      }
+    },
+    "/xml/wrapped-lists": {
+      "get": {
+        "operationId": "xml_getWrappedLists",
+        "description": "Get an XML document with multiple wrapped lists",
+        "tags": [
+          "XML Operations"
+        ],
+        "responses": {
+          "200": {
+            "description": "The XML document with multiple wrapped lists",
+            "schema": {
+              "$ref": "#/definitions/AppleBarrel"
+            }
+          }
+        }
+      }
+    },
+    "/xml/headers": {
+      "get": {
+        "operationId": "xml_getHeaders",
+        "description": "Get strongly-typed response headers.",
+        "tags": [
+          "XML Operations"
+        ],
+        "responses": {
+          "200": {
+            "description": "The response header.",
+            "headers": {
+              "Custom-Header": {
+                "description": "A custom response header.",
+                "type": "string"
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "Error": {
+      "properties": {
+        "status": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "message": {
+          "type": "string"
+        }
+      }
+    },
+    "Slide": {
+      "type": "object",
+      "description": "A slide in a slideshow",
+      "properties": {
+        "type": {
+          "type": "string",
+          "xml": {
+            "attribute": true
+          }
+        },
+        "title": {
+          "type": "string"
+        },
+        "items": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "xml": {
+              "name": "item"
+            }
+          }
+        }
+      }
+    },
+    "Slideshow": {
+      "type": "object",
+      "description": "Data about a slideshow",
+      "properties": {
+        "title": {
+          "type": "string",
+          "xml": {
+            "attribute": true
+          }
+        },
+        "date": {
+          "type": "string",
+          "xml": {
+            "attribute": true
+          }
+        },
+        "author": {
+          "type": "string",
+          "xml": {
+            "attribute": true
+          }
+        },
+        "slides": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Slide",
+            "xml": {
+              "name": "slide"
+            }
+          }
+        }
+      }
+    },
+    "AppleBarrel": {
+      "type": "object",
+      "description": "A barrel of apples.",
+      "properties": {
+        "GoodApples": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "xml": {
+              "name": "Apple"
+            }
+          },
+          "xml": {
+            "wrapped": true
+          }
+        },
+        "BadApples": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "xml": {
+              "name": "Apple"
+            }
+          },
+          "xml": {
+            "wrapped": true
+          }
+        }
+      }
+    }
+  }
+}
