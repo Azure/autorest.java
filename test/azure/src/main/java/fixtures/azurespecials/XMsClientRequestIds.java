@@ -37,7 +37,7 @@ public interface XMsClientRequestIds {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    ServiceFuture<Void> getAsync(@NonNull ServiceCallback<Void> serviceCallback);
+    ServiceFuture<Void> getAsync(ServiceCallback<Void> serviceCallback);
 
     /**
      * Get method that overwrites x-ms-client-request header with value 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0.
@@ -71,7 +71,7 @@ public interface XMsClientRequestIds {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    ServiceFuture<Void> paramGetAsync(@NonNull String xMsClientRequestId, @NonNull ServiceCallback<Void> serviceCallback);
+    ServiceFuture<Void> paramGetAsync(@NonNull String xMsClientRequestId, ServiceCallback<Void> serviceCallback);
 
     /**
      * Get method that overwrites x-ms-client-request header with value 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0.

@@ -44,7 +44,7 @@ public interface AvailabilitySets {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    ServiceFuture<Void> updateAsync(@NonNull String resourceGroupName, @NonNull String avset, @NonNull Map<String, String> tags, @NonNull ServiceCallback<Void> serviceCallback);
+    ServiceFuture<Void> updateAsync(@NonNull String resourceGroupName, @NonNull String avset, @NonNull Map<String, String> tags, ServiceCallback<Void> serviceCallback);
 
     /**
      * Updates the tags for an availability set.

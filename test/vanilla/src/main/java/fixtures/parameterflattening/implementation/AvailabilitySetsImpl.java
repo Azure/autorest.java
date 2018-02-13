@@ -87,7 +87,7 @@ public final class AvailabilitySetsImpl implements AvailabilitySets {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    public ServiceFuture<Void> updateAsync(@NonNull String resourceGroupName, @NonNull String avset, @NonNull Map<String, String> tags, @NonNull ServiceCallback<Void> serviceCallback) {
+    public ServiceFuture<Void> updateAsync(@NonNull String resourceGroupName, @NonNull String avset, @NonNull Map<String, String> tags, ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(updateAsync(resourceGroupName, avset, tags), serviceCallback);
     }
 

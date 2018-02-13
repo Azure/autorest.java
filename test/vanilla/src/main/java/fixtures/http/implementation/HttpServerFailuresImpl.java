@@ -27,7 +27,6 @@ import fixtures.http.models.Error;
 import fixtures.http.models.ErrorException;
 import io.reactivex.Maybe;
 import io.reactivex.Single;
-import io.reactivex.annotations.NonNull;
 import io.reactivex.functions.Function;
 
 /**
@@ -96,7 +95,7 @@ public final class HttpServerFailuresImpl implements HttpServerFailures {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Error&gt;} object.
      */
-    public ServiceFuture<Error> head501Async(@NonNull ServiceCallback<Error> serviceCallback) {
+    public ServiceFuture<Error> head501Async(ServiceCallback<Error> serviceCallback) {
         return ServiceFuture.fromBody(head501Async(), serviceCallback);
     }
 
@@ -145,7 +144,7 @@ public final class HttpServerFailuresImpl implements HttpServerFailures {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Error&gt;} object.
      */
-    public ServiceFuture<Error> get501Async(@NonNull ServiceCallback<Error> serviceCallback) {
+    public ServiceFuture<Error> get501Async(ServiceCallback<Error> serviceCallback) {
         return ServiceFuture.fromBody(get501Async(), serviceCallback);
     }
 
@@ -194,7 +193,7 @@ public final class HttpServerFailuresImpl implements HttpServerFailures {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Error&gt;} object.
      */
-    public ServiceFuture<Error> post505Async(@NonNull ServiceCallback<Error> serviceCallback) {
+    public ServiceFuture<Error> post505Async(ServiceCallback<Error> serviceCallback) {
         return ServiceFuture.fromBody(post505Async(), serviceCallback);
     }
 
@@ -247,7 +246,7 @@ public final class HttpServerFailuresImpl implements HttpServerFailures {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Error&gt;} object.
      */
-    public ServiceFuture<Error> post505Async(Boolean booleanValue, @NonNull ServiceCallback<Error> serviceCallback) {
+    public ServiceFuture<Error> post505Async(Boolean booleanValue, ServiceCallback<Error> serviceCallback) {
         return ServiceFuture.fromBody(post505Async(booleanValue), serviceCallback);
     }
 
@@ -300,7 +299,7 @@ public final class HttpServerFailuresImpl implements HttpServerFailures {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Error&gt;} object.
      */
-    public ServiceFuture<Error> delete505Async(@NonNull ServiceCallback<Error> serviceCallback) {
+    public ServiceFuture<Error> delete505Async(ServiceCallback<Error> serviceCallback) {
         return ServiceFuture.fromBody(delete505Async(), serviceCallback);
     }
 
@@ -353,7 +352,7 @@ public final class HttpServerFailuresImpl implements HttpServerFailures {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Error&gt;} object.
      */
-    public ServiceFuture<Error> delete505Async(Boolean booleanValue, @NonNull ServiceCallback<Error> serviceCallback) {
+    public ServiceFuture<Error> delete505Async(Boolean booleanValue, ServiceCallback<Error> serviceCallback) {
         return ServiceFuture.fromBody(delete505Async(booleanValue), serviceCallback);
     }
 

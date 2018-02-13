@@ -103,7 +103,7 @@ public final class zzzBytesImpl implements zzzBytes {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;byte[]&gt;} object.
      */
-    public ServiceFuture<byte[]> getNullAsync(@NonNull ServiceCallback<byte[]> serviceCallback) {
+    public ServiceFuture<byte[]> getNullAsync(ServiceCallback<byte[]> serviceCallback) {
         return ServiceFuture.fromBody(getNullAsync(), serviceCallback);
     }
 
@@ -152,7 +152,7 @@ public final class zzzBytesImpl implements zzzBytes {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;byte[]&gt;} object.
      */
-    public ServiceFuture<byte[]> getEmptyAsync(@NonNull ServiceCallback<byte[]> serviceCallback) {
+    public ServiceFuture<byte[]> getEmptyAsync(ServiceCallback<byte[]> serviceCallback) {
         return ServiceFuture.fromBody(getEmptyAsync(), serviceCallback);
     }
 
@@ -201,7 +201,7 @@ public final class zzzBytesImpl implements zzzBytes {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;byte[]&gt;} object.
      */
-    public ServiceFuture<byte[]> getNonAsciiAsync(@NonNull ServiceCallback<byte[]> serviceCallback) {
+    public ServiceFuture<byte[]> getNonAsciiAsync(ServiceCallback<byte[]> serviceCallback) {
         return ServiceFuture.fromBody(getNonAsciiAsync(), serviceCallback);
     }
 
@@ -252,7 +252,7 @@ public final class zzzBytesImpl implements zzzBytes {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    public ServiceFuture<Void> putNonAsciiAsync(@NonNull byte[] byteBody, @NonNull ServiceCallback<Void> serviceCallback) {
+    public ServiceFuture<Void> putNonAsciiAsync(@NonNull byte[] byteBody, ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(putNonAsciiAsync(byteBody), serviceCallback);
     }
 
@@ -300,7 +300,7 @@ public final class zzzBytesImpl implements zzzBytes {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;byte[]&gt;} object.
      */
-    public ServiceFuture<byte[]> getInvalidAsync(@NonNull ServiceCallback<byte[]> serviceCallback) {
+    public ServiceFuture<byte[]> getInvalidAsync(ServiceCallback<byte[]> serviceCallback) {
         return ServiceFuture.fromBody(getInvalidAsync(), serviceCallback);
     }
 

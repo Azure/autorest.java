@@ -106,7 +106,7 @@ public final class PolymorphismsImpl implements Polymorphisms {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Fish&gt;} object.
      */
-    public ServiceFuture<Fish> getValidAsync(@NonNull ServiceCallback<Fish> serviceCallback) {
+    public ServiceFuture<Fish> getValidAsync(ServiceCallback<Fish> serviceCallback) {
         return ServiceFuture.fromBody(getValidAsync(), serviceCallback);
     }
 
@@ -221,7 +221,7 @@ public final class PolymorphismsImpl implements Polymorphisms {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    public ServiceFuture<Void> putValidAsync(@NonNull Fish complexBody, @NonNull ServiceCallback<Void> serviceCallback) {
+    public ServiceFuture<Void> putValidAsync(@NonNull Fish complexBody, ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(putValidAsync(complexBody), serviceCallback);
     }
 
@@ -334,7 +334,7 @@ public final class PolymorphismsImpl implements Polymorphisms {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Salmon&gt;} object.
      */
-    public ServiceFuture<Salmon> getComplicatedAsync(@NonNull ServiceCallback<Salmon> serviceCallback) {
+    public ServiceFuture<Salmon> getComplicatedAsync(ServiceCallback<Salmon> serviceCallback) {
         return ServiceFuture.fromBody(getComplicatedAsync(), serviceCallback);
     }
 
@@ -385,7 +385,7 @@ public final class PolymorphismsImpl implements Polymorphisms {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    public ServiceFuture<Void> putComplicatedAsync(@NonNull Salmon complexBody, @NonNull ServiceCallback<Void> serviceCallback) {
+    public ServiceFuture<Void> putComplicatedAsync(@NonNull Salmon complexBody, ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(putComplicatedAsync(complexBody), serviceCallback);
     }
 
@@ -486,7 +486,7 @@ public final class PolymorphismsImpl implements Polymorphisms {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    public ServiceFuture<Void> putValidMissingRequiredAsync(@NonNull Fish complexBody, @NonNull ServiceCallback<Void> serviceCallback) {
+    public ServiceFuture<Void> putValidMissingRequiredAsync(@NonNull Fish complexBody, ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(putValidMissingRequiredAsync(complexBody), serviceCallback);
     }
 

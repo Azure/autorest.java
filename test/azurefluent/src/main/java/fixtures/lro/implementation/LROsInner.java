@@ -30,7 +30,6 @@ import io.reactivex.Completable;
 import io.reactivex.Maybe;
 import io.reactivex.Observable;
 import io.reactivex.Single;
-import io.reactivex.annotations.NonNull;
 import io.reactivex.functions.Function;
 
 /**
@@ -443,7 +442,7 @@ public final class LROsInner {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;ProductInner&gt;} object.
      */
-    public ServiceFuture<ProductInner> beginPut200SucceededAsync(@NonNull ServiceCallback<ProductInner> serviceCallback) {
+    public ServiceFuture<ProductInner> beginPut200SucceededAsync(ServiceCallback<ProductInner> serviceCallback) {
         return ServiceFutureUtil.fromLRO(beginPut200SucceededAsync(), serviceCallback);
     }
 
@@ -477,7 +476,7 @@ public final class LROsInner {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;ProductInner&gt;} object.
      */
-    public ServiceFuture<ProductInner> beginPut200SucceededAsync(ProductInner product, @NonNull ServiceCallback<ProductInner> serviceCallback) {
+    public ServiceFuture<ProductInner> beginPut200SucceededAsync(ProductInner product, ServiceCallback<ProductInner> serviceCallback) {
         return ServiceFutureUtil.fromLRO(beginPut200SucceededAsync(product), serviceCallback);
     }
 
@@ -511,7 +510,7 @@ public final class LROsInner {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;ProductInner&gt;} object.
      */
-    public ServiceFuture<ProductInner> put200SucceededAsync(@NonNull ServiceCallback<ProductInner> serviceCallback) {
+    public ServiceFuture<ProductInner> put200SucceededAsync(ServiceCallback<ProductInner> serviceCallback) {
         return ServiceFuture.fromBody(put200SucceededAsync(), serviceCallback);
     }
 
@@ -564,7 +563,7 @@ public final class LROsInner {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;ProductInner&gt;} object.
      */
-    public ServiceFuture<ProductInner> put200SucceededAsync(ProductInner product, @NonNull ServiceCallback<ProductInner> serviceCallback) {
+    public ServiceFuture<ProductInner> put200SucceededAsync(ProductInner product, ServiceCallback<ProductInner> serviceCallback) {
         return ServiceFuture.fromBody(put200SucceededAsync(product), serviceCallback);
     }
 
@@ -618,7 +617,7 @@ public final class LROsInner {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;ProductInner&gt;} object.
      */
-    public ServiceFuture<ProductInner> beginPut200SucceededNoStateAsync(@NonNull ServiceCallback<ProductInner> serviceCallback) {
+    public ServiceFuture<ProductInner> beginPut200SucceededNoStateAsync(ServiceCallback<ProductInner> serviceCallback) {
         return ServiceFutureUtil.fromLRO(beginPut200SucceededNoStateAsync(), serviceCallback);
     }
 
@@ -652,7 +651,7 @@ public final class LROsInner {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;ProductInner&gt;} object.
      */
-    public ServiceFuture<ProductInner> beginPut200SucceededNoStateAsync(ProductInner product, @NonNull ServiceCallback<ProductInner> serviceCallback) {
+    public ServiceFuture<ProductInner> beginPut200SucceededNoStateAsync(ProductInner product, ServiceCallback<ProductInner> serviceCallback) {
         return ServiceFutureUtil.fromLRO(beginPut200SucceededNoStateAsync(product), serviceCallback);
     }
 
@@ -686,7 +685,7 @@ public final class LROsInner {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;ProductInner&gt;} object.
      */
-    public ServiceFuture<ProductInner> put200SucceededNoStateAsync(@NonNull ServiceCallback<ProductInner> serviceCallback) {
+    public ServiceFuture<ProductInner> put200SucceededNoStateAsync(ServiceCallback<ProductInner> serviceCallback) {
         return ServiceFuture.fromBody(put200SucceededNoStateAsync(), serviceCallback);
     }
 
@@ -739,7 +738,7 @@ public final class LROsInner {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;ProductInner&gt;} object.
      */
-    public ServiceFuture<ProductInner> put200SucceededNoStateAsync(ProductInner product, @NonNull ServiceCallback<ProductInner> serviceCallback) {
+    public ServiceFuture<ProductInner> put200SucceededNoStateAsync(ProductInner product, ServiceCallback<ProductInner> serviceCallback) {
         return ServiceFuture.fromBody(put200SucceededNoStateAsync(product), serviceCallback);
     }
 
@@ -793,7 +792,7 @@ public final class LROsInner {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;ProductInner&gt;} object.
      */
-    public ServiceFuture<ProductInner> beginPut202Retry200Async(@NonNull ServiceCallback<ProductInner> serviceCallback) {
+    public ServiceFuture<ProductInner> beginPut202Retry200Async(ServiceCallback<ProductInner> serviceCallback) {
         return ServiceFutureUtil.fromLRO(beginPut202Retry200Async(), serviceCallback);
     }
 
@@ -827,7 +826,7 @@ public final class LROsInner {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;ProductInner&gt;} object.
      */
-    public ServiceFuture<ProductInner> beginPut202Retry200Async(ProductInner product, @NonNull ServiceCallback<ProductInner> serviceCallback) {
+    public ServiceFuture<ProductInner> beginPut202Retry200Async(ProductInner product, ServiceCallback<ProductInner> serviceCallback) {
         return ServiceFutureUtil.fromLRO(beginPut202Retry200Async(product), serviceCallback);
     }
 
@@ -861,7 +860,7 @@ public final class LROsInner {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;ProductInner&gt;} object.
      */
-    public ServiceFuture<ProductInner> put202Retry200Async(@NonNull ServiceCallback<ProductInner> serviceCallback) {
+    public ServiceFuture<ProductInner> put202Retry200Async(ServiceCallback<ProductInner> serviceCallback) {
         return ServiceFuture.fromBody(put202Retry200Async(), serviceCallback);
     }
 
@@ -914,7 +913,7 @@ public final class LROsInner {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;ProductInner&gt;} object.
      */
-    public ServiceFuture<ProductInner> put202Retry200Async(ProductInner product, @NonNull ServiceCallback<ProductInner> serviceCallback) {
+    public ServiceFuture<ProductInner> put202Retry200Async(ProductInner product, ServiceCallback<ProductInner> serviceCallback) {
         return ServiceFuture.fromBody(put202Retry200Async(product), serviceCallback);
     }
 
@@ -968,7 +967,7 @@ public final class LROsInner {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;ProductInner&gt;} object.
      */
-    public ServiceFuture<ProductInner> beginPut201CreatingSucceeded200Async(@NonNull ServiceCallback<ProductInner> serviceCallback) {
+    public ServiceFuture<ProductInner> beginPut201CreatingSucceeded200Async(ServiceCallback<ProductInner> serviceCallback) {
         return ServiceFutureUtil.fromLRO(beginPut201CreatingSucceeded200Async(), serviceCallback);
     }
 
@@ -1002,7 +1001,7 @@ public final class LROsInner {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;ProductInner&gt;} object.
      */
-    public ServiceFuture<ProductInner> beginPut201CreatingSucceeded200Async(ProductInner product, @NonNull ServiceCallback<ProductInner> serviceCallback) {
+    public ServiceFuture<ProductInner> beginPut201CreatingSucceeded200Async(ProductInner product, ServiceCallback<ProductInner> serviceCallback) {
         return ServiceFutureUtil.fromLRO(beginPut201CreatingSucceeded200Async(product), serviceCallback);
     }
 
@@ -1036,7 +1035,7 @@ public final class LROsInner {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;ProductInner&gt;} object.
      */
-    public ServiceFuture<ProductInner> put201CreatingSucceeded200Async(@NonNull ServiceCallback<ProductInner> serviceCallback) {
+    public ServiceFuture<ProductInner> put201CreatingSucceeded200Async(ServiceCallback<ProductInner> serviceCallback) {
         return ServiceFuture.fromBody(put201CreatingSucceeded200Async(), serviceCallback);
     }
 
@@ -1089,7 +1088,7 @@ public final class LROsInner {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;ProductInner&gt;} object.
      */
-    public ServiceFuture<ProductInner> put201CreatingSucceeded200Async(ProductInner product, @NonNull ServiceCallback<ProductInner> serviceCallback) {
+    public ServiceFuture<ProductInner> put201CreatingSucceeded200Async(ProductInner product, ServiceCallback<ProductInner> serviceCallback) {
         return ServiceFuture.fromBody(put201CreatingSucceeded200Async(product), serviceCallback);
     }
 
@@ -1143,7 +1142,7 @@ public final class LROsInner {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;ProductInner&gt;} object.
      */
-    public ServiceFuture<ProductInner> beginPut200UpdatingSucceeded204Async(@NonNull ServiceCallback<ProductInner> serviceCallback) {
+    public ServiceFuture<ProductInner> beginPut200UpdatingSucceeded204Async(ServiceCallback<ProductInner> serviceCallback) {
         return ServiceFutureUtil.fromLRO(beginPut200UpdatingSucceeded204Async(), serviceCallback);
     }
 
@@ -1177,7 +1176,7 @@ public final class LROsInner {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;ProductInner&gt;} object.
      */
-    public ServiceFuture<ProductInner> beginPut200UpdatingSucceeded204Async(ProductInner product, @NonNull ServiceCallback<ProductInner> serviceCallback) {
+    public ServiceFuture<ProductInner> beginPut200UpdatingSucceeded204Async(ProductInner product, ServiceCallback<ProductInner> serviceCallback) {
         return ServiceFutureUtil.fromLRO(beginPut200UpdatingSucceeded204Async(product), serviceCallback);
     }
 
@@ -1211,7 +1210,7 @@ public final class LROsInner {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;ProductInner&gt;} object.
      */
-    public ServiceFuture<ProductInner> put200UpdatingSucceeded204Async(@NonNull ServiceCallback<ProductInner> serviceCallback) {
+    public ServiceFuture<ProductInner> put200UpdatingSucceeded204Async(ServiceCallback<ProductInner> serviceCallback) {
         return ServiceFuture.fromBody(put200UpdatingSucceeded204Async(), serviceCallback);
     }
 
@@ -1264,7 +1263,7 @@ public final class LROsInner {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;ProductInner&gt;} object.
      */
-    public ServiceFuture<ProductInner> put200UpdatingSucceeded204Async(ProductInner product, @NonNull ServiceCallback<ProductInner> serviceCallback) {
+    public ServiceFuture<ProductInner> put200UpdatingSucceeded204Async(ProductInner product, ServiceCallback<ProductInner> serviceCallback) {
         return ServiceFuture.fromBody(put200UpdatingSucceeded204Async(product), serviceCallback);
     }
 
@@ -1318,7 +1317,7 @@ public final class LROsInner {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;ProductInner&gt;} object.
      */
-    public ServiceFuture<ProductInner> beginPut201CreatingFailed200Async(@NonNull ServiceCallback<ProductInner> serviceCallback) {
+    public ServiceFuture<ProductInner> beginPut201CreatingFailed200Async(ServiceCallback<ProductInner> serviceCallback) {
         return ServiceFutureUtil.fromLRO(beginPut201CreatingFailed200Async(), serviceCallback);
     }
 
@@ -1352,7 +1351,7 @@ public final class LROsInner {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;ProductInner&gt;} object.
      */
-    public ServiceFuture<ProductInner> beginPut201CreatingFailed200Async(ProductInner product, @NonNull ServiceCallback<ProductInner> serviceCallback) {
+    public ServiceFuture<ProductInner> beginPut201CreatingFailed200Async(ProductInner product, ServiceCallback<ProductInner> serviceCallback) {
         return ServiceFutureUtil.fromLRO(beginPut201CreatingFailed200Async(product), serviceCallback);
     }
 
@@ -1386,7 +1385,7 @@ public final class LROsInner {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;ProductInner&gt;} object.
      */
-    public ServiceFuture<ProductInner> put201CreatingFailed200Async(@NonNull ServiceCallback<ProductInner> serviceCallback) {
+    public ServiceFuture<ProductInner> put201CreatingFailed200Async(ServiceCallback<ProductInner> serviceCallback) {
         return ServiceFuture.fromBody(put201CreatingFailed200Async(), serviceCallback);
     }
 
@@ -1439,7 +1438,7 @@ public final class LROsInner {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;ProductInner&gt;} object.
      */
-    public ServiceFuture<ProductInner> put201CreatingFailed200Async(ProductInner product, @NonNull ServiceCallback<ProductInner> serviceCallback) {
+    public ServiceFuture<ProductInner> put201CreatingFailed200Async(ProductInner product, ServiceCallback<ProductInner> serviceCallback) {
         return ServiceFuture.fromBody(put201CreatingFailed200Async(product), serviceCallback);
     }
 
@@ -1493,7 +1492,7 @@ public final class LROsInner {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;ProductInner&gt;} object.
      */
-    public ServiceFuture<ProductInner> beginPut200Acceptedcanceled200Async(@NonNull ServiceCallback<ProductInner> serviceCallback) {
+    public ServiceFuture<ProductInner> beginPut200Acceptedcanceled200Async(ServiceCallback<ProductInner> serviceCallback) {
         return ServiceFutureUtil.fromLRO(beginPut200Acceptedcanceled200Async(), serviceCallback);
     }
 
@@ -1527,7 +1526,7 @@ public final class LROsInner {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;ProductInner&gt;} object.
      */
-    public ServiceFuture<ProductInner> beginPut200Acceptedcanceled200Async(ProductInner product, @NonNull ServiceCallback<ProductInner> serviceCallback) {
+    public ServiceFuture<ProductInner> beginPut200Acceptedcanceled200Async(ProductInner product, ServiceCallback<ProductInner> serviceCallback) {
         return ServiceFutureUtil.fromLRO(beginPut200Acceptedcanceled200Async(product), serviceCallback);
     }
 
@@ -1561,7 +1560,7 @@ public final class LROsInner {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;ProductInner&gt;} object.
      */
-    public ServiceFuture<ProductInner> put200Acceptedcanceled200Async(@NonNull ServiceCallback<ProductInner> serviceCallback) {
+    public ServiceFuture<ProductInner> put200Acceptedcanceled200Async(ServiceCallback<ProductInner> serviceCallback) {
         return ServiceFuture.fromBody(put200Acceptedcanceled200Async(), serviceCallback);
     }
 
@@ -1614,7 +1613,7 @@ public final class LROsInner {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;ProductInner&gt;} object.
      */
-    public ServiceFuture<ProductInner> put200Acceptedcanceled200Async(ProductInner product, @NonNull ServiceCallback<ProductInner> serviceCallback) {
+    public ServiceFuture<ProductInner> put200Acceptedcanceled200Async(ProductInner product, ServiceCallback<ProductInner> serviceCallback) {
         return ServiceFuture.fromBody(put200Acceptedcanceled200Async(product), serviceCallback);
     }
 
@@ -1668,7 +1667,7 @@ public final class LROsInner {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;ProductInner&gt;} object.
      */
-    public ServiceFuture<ProductInner> beginPutNoHeaderInRetryAsync(@NonNull ServiceCallback<ProductInner> serviceCallback) {
+    public ServiceFuture<ProductInner> beginPutNoHeaderInRetryAsync(ServiceCallback<ProductInner> serviceCallback) {
         return ServiceFutureUtil.fromLRO(beginPutNoHeaderInRetryAsync(), serviceCallback);
     }
 
@@ -1702,7 +1701,7 @@ public final class LROsInner {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;ProductInner&gt;} object.
      */
-    public ServiceFuture<ProductInner> beginPutNoHeaderInRetryAsync(ProductInner product, @NonNull ServiceCallback<ProductInner> serviceCallback) {
+    public ServiceFuture<ProductInner> beginPutNoHeaderInRetryAsync(ProductInner product, ServiceCallback<ProductInner> serviceCallback) {
         return ServiceFutureUtil.fromLRO(beginPutNoHeaderInRetryAsync(product), serviceCallback);
     }
 
@@ -1736,7 +1735,7 @@ public final class LROsInner {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;ProductInner&gt;} object.
      */
-    public ServiceFuture<ProductInner> putNoHeaderInRetryAsync(@NonNull ServiceCallback<ProductInner> serviceCallback) {
+    public ServiceFuture<ProductInner> putNoHeaderInRetryAsync(ServiceCallback<ProductInner> serviceCallback) {
         return ServiceFuture.fromBody(putNoHeaderInRetryAsync(), serviceCallback);
     }
 
@@ -1789,7 +1788,7 @@ public final class LROsInner {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;ProductInner&gt;} object.
      */
-    public ServiceFuture<ProductInner> putNoHeaderInRetryAsync(ProductInner product, @NonNull ServiceCallback<ProductInner> serviceCallback) {
+    public ServiceFuture<ProductInner> putNoHeaderInRetryAsync(ProductInner product, ServiceCallback<ProductInner> serviceCallback) {
         return ServiceFuture.fromBody(putNoHeaderInRetryAsync(product), serviceCallback);
     }
 
@@ -1843,7 +1842,7 @@ public final class LROsInner {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;ProductInner&gt;} object.
      */
-    public ServiceFuture<ProductInner> beginPutAsyncRetrySucceededAsync(@NonNull ServiceCallback<ProductInner> serviceCallback) {
+    public ServiceFuture<ProductInner> beginPutAsyncRetrySucceededAsync(ServiceCallback<ProductInner> serviceCallback) {
         return ServiceFutureUtil.fromLRO(beginPutAsyncRetrySucceededAsync(), serviceCallback);
     }
 
@@ -1877,7 +1876,7 @@ public final class LROsInner {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;ProductInner&gt;} object.
      */
-    public ServiceFuture<ProductInner> beginPutAsyncRetrySucceededAsync(ProductInner product, @NonNull ServiceCallback<ProductInner> serviceCallback) {
+    public ServiceFuture<ProductInner> beginPutAsyncRetrySucceededAsync(ProductInner product, ServiceCallback<ProductInner> serviceCallback) {
         return ServiceFutureUtil.fromLRO(beginPutAsyncRetrySucceededAsync(product), serviceCallback);
     }
 
@@ -1911,7 +1910,7 @@ public final class LROsInner {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;ProductInner&gt;} object.
      */
-    public ServiceFuture<ProductInner> putAsyncRetrySucceededAsync(@NonNull ServiceCallback<ProductInner> serviceCallback) {
+    public ServiceFuture<ProductInner> putAsyncRetrySucceededAsync(ServiceCallback<ProductInner> serviceCallback) {
         return ServiceFuture.fromBody(putAsyncRetrySucceededAsync(), serviceCallback);
     }
 
@@ -1964,7 +1963,7 @@ public final class LROsInner {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;ProductInner&gt;} object.
      */
-    public ServiceFuture<ProductInner> putAsyncRetrySucceededAsync(ProductInner product, @NonNull ServiceCallback<ProductInner> serviceCallback) {
+    public ServiceFuture<ProductInner> putAsyncRetrySucceededAsync(ProductInner product, ServiceCallback<ProductInner> serviceCallback) {
         return ServiceFuture.fromBody(putAsyncRetrySucceededAsync(product), serviceCallback);
     }
 
@@ -2018,7 +2017,7 @@ public final class LROsInner {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;ProductInner&gt;} object.
      */
-    public ServiceFuture<ProductInner> beginPutAsyncNoRetrySucceededAsync(@NonNull ServiceCallback<ProductInner> serviceCallback) {
+    public ServiceFuture<ProductInner> beginPutAsyncNoRetrySucceededAsync(ServiceCallback<ProductInner> serviceCallback) {
         return ServiceFutureUtil.fromLRO(beginPutAsyncNoRetrySucceededAsync(), serviceCallback);
     }
 
@@ -2052,7 +2051,7 @@ public final class LROsInner {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;ProductInner&gt;} object.
      */
-    public ServiceFuture<ProductInner> beginPutAsyncNoRetrySucceededAsync(ProductInner product, @NonNull ServiceCallback<ProductInner> serviceCallback) {
+    public ServiceFuture<ProductInner> beginPutAsyncNoRetrySucceededAsync(ProductInner product, ServiceCallback<ProductInner> serviceCallback) {
         return ServiceFutureUtil.fromLRO(beginPutAsyncNoRetrySucceededAsync(product), serviceCallback);
     }
 
@@ -2086,7 +2085,7 @@ public final class LROsInner {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;ProductInner&gt;} object.
      */
-    public ServiceFuture<ProductInner> putAsyncNoRetrySucceededAsync(@NonNull ServiceCallback<ProductInner> serviceCallback) {
+    public ServiceFuture<ProductInner> putAsyncNoRetrySucceededAsync(ServiceCallback<ProductInner> serviceCallback) {
         return ServiceFuture.fromBody(putAsyncNoRetrySucceededAsync(), serviceCallback);
     }
 
@@ -2139,7 +2138,7 @@ public final class LROsInner {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;ProductInner&gt;} object.
      */
-    public ServiceFuture<ProductInner> putAsyncNoRetrySucceededAsync(ProductInner product, @NonNull ServiceCallback<ProductInner> serviceCallback) {
+    public ServiceFuture<ProductInner> putAsyncNoRetrySucceededAsync(ProductInner product, ServiceCallback<ProductInner> serviceCallback) {
         return ServiceFuture.fromBody(putAsyncNoRetrySucceededAsync(product), serviceCallback);
     }
 
@@ -2193,7 +2192,7 @@ public final class LROsInner {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;ProductInner&gt;} object.
      */
-    public ServiceFuture<ProductInner> beginPutAsyncRetryFailedAsync(@NonNull ServiceCallback<ProductInner> serviceCallback) {
+    public ServiceFuture<ProductInner> beginPutAsyncRetryFailedAsync(ServiceCallback<ProductInner> serviceCallback) {
         return ServiceFutureUtil.fromLRO(beginPutAsyncRetryFailedAsync(), serviceCallback);
     }
 
@@ -2227,7 +2226,7 @@ public final class LROsInner {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;ProductInner&gt;} object.
      */
-    public ServiceFuture<ProductInner> beginPutAsyncRetryFailedAsync(ProductInner product, @NonNull ServiceCallback<ProductInner> serviceCallback) {
+    public ServiceFuture<ProductInner> beginPutAsyncRetryFailedAsync(ProductInner product, ServiceCallback<ProductInner> serviceCallback) {
         return ServiceFutureUtil.fromLRO(beginPutAsyncRetryFailedAsync(product), serviceCallback);
     }
 
@@ -2261,7 +2260,7 @@ public final class LROsInner {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;ProductInner&gt;} object.
      */
-    public ServiceFuture<ProductInner> putAsyncRetryFailedAsync(@NonNull ServiceCallback<ProductInner> serviceCallback) {
+    public ServiceFuture<ProductInner> putAsyncRetryFailedAsync(ServiceCallback<ProductInner> serviceCallback) {
         return ServiceFuture.fromBody(putAsyncRetryFailedAsync(), serviceCallback);
     }
 
@@ -2314,7 +2313,7 @@ public final class LROsInner {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;ProductInner&gt;} object.
      */
-    public ServiceFuture<ProductInner> putAsyncRetryFailedAsync(ProductInner product, @NonNull ServiceCallback<ProductInner> serviceCallback) {
+    public ServiceFuture<ProductInner> putAsyncRetryFailedAsync(ProductInner product, ServiceCallback<ProductInner> serviceCallback) {
         return ServiceFuture.fromBody(putAsyncRetryFailedAsync(product), serviceCallback);
     }
 
@@ -2368,7 +2367,7 @@ public final class LROsInner {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;ProductInner&gt;} object.
      */
-    public ServiceFuture<ProductInner> beginPutAsyncNoRetrycanceledAsync(@NonNull ServiceCallback<ProductInner> serviceCallback) {
+    public ServiceFuture<ProductInner> beginPutAsyncNoRetrycanceledAsync(ServiceCallback<ProductInner> serviceCallback) {
         return ServiceFutureUtil.fromLRO(beginPutAsyncNoRetrycanceledAsync(), serviceCallback);
     }
 
@@ -2402,7 +2401,7 @@ public final class LROsInner {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;ProductInner&gt;} object.
      */
-    public ServiceFuture<ProductInner> beginPutAsyncNoRetrycanceledAsync(ProductInner product, @NonNull ServiceCallback<ProductInner> serviceCallback) {
+    public ServiceFuture<ProductInner> beginPutAsyncNoRetrycanceledAsync(ProductInner product, ServiceCallback<ProductInner> serviceCallback) {
         return ServiceFutureUtil.fromLRO(beginPutAsyncNoRetrycanceledAsync(product), serviceCallback);
     }
 
@@ -2436,7 +2435,7 @@ public final class LROsInner {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;ProductInner&gt;} object.
      */
-    public ServiceFuture<ProductInner> putAsyncNoRetrycanceledAsync(@NonNull ServiceCallback<ProductInner> serviceCallback) {
+    public ServiceFuture<ProductInner> putAsyncNoRetrycanceledAsync(ServiceCallback<ProductInner> serviceCallback) {
         return ServiceFuture.fromBody(putAsyncNoRetrycanceledAsync(), serviceCallback);
     }
 
@@ -2489,7 +2488,7 @@ public final class LROsInner {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;ProductInner&gt;} object.
      */
-    public ServiceFuture<ProductInner> putAsyncNoRetrycanceledAsync(ProductInner product, @NonNull ServiceCallback<ProductInner> serviceCallback) {
+    public ServiceFuture<ProductInner> putAsyncNoRetrycanceledAsync(ProductInner product, ServiceCallback<ProductInner> serviceCallback) {
         return ServiceFuture.fromBody(putAsyncNoRetrycanceledAsync(product), serviceCallback);
     }
 
@@ -2543,7 +2542,7 @@ public final class LROsInner {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;ProductInner&gt;} object.
      */
-    public ServiceFuture<ProductInner> beginPutAsyncNoHeaderInRetryAsync(@NonNull ServiceCallback<ProductInner> serviceCallback) {
+    public ServiceFuture<ProductInner> beginPutAsyncNoHeaderInRetryAsync(ServiceCallback<ProductInner> serviceCallback) {
         return ServiceFutureUtil.fromLRO(beginPutAsyncNoHeaderInRetryAsync(), serviceCallback);
     }
 
@@ -2577,7 +2576,7 @@ public final class LROsInner {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;ProductInner&gt;} object.
      */
-    public ServiceFuture<ProductInner> beginPutAsyncNoHeaderInRetryAsync(ProductInner product, @NonNull ServiceCallback<ProductInner> serviceCallback) {
+    public ServiceFuture<ProductInner> beginPutAsyncNoHeaderInRetryAsync(ProductInner product, ServiceCallback<ProductInner> serviceCallback) {
         return ServiceFutureUtil.fromLRO(beginPutAsyncNoHeaderInRetryAsync(product), serviceCallback);
     }
 
@@ -2611,7 +2610,7 @@ public final class LROsInner {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;ProductInner&gt;} object.
      */
-    public ServiceFuture<ProductInner> putAsyncNoHeaderInRetryAsync(@NonNull ServiceCallback<ProductInner> serviceCallback) {
+    public ServiceFuture<ProductInner> putAsyncNoHeaderInRetryAsync(ServiceCallback<ProductInner> serviceCallback) {
         return ServiceFuture.fromBody(putAsyncNoHeaderInRetryAsync(), serviceCallback);
     }
 
@@ -2664,7 +2663,7 @@ public final class LROsInner {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;ProductInner&gt;} object.
      */
-    public ServiceFuture<ProductInner> putAsyncNoHeaderInRetryAsync(ProductInner product, @NonNull ServiceCallback<ProductInner> serviceCallback) {
+    public ServiceFuture<ProductInner> putAsyncNoHeaderInRetryAsync(ProductInner product, ServiceCallback<ProductInner> serviceCallback) {
         return ServiceFuture.fromBody(putAsyncNoHeaderInRetryAsync(product), serviceCallback);
     }
 
@@ -2718,7 +2717,7 @@ public final class LROsInner {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;SkuInner&gt;} object.
      */
-    public ServiceFuture<SkuInner> beginPutNonResourceAsync(@NonNull ServiceCallback<SkuInner> serviceCallback) {
+    public ServiceFuture<SkuInner> beginPutNonResourceAsync(ServiceCallback<SkuInner> serviceCallback) {
         return ServiceFutureUtil.fromLRO(beginPutNonResourceAsync(), serviceCallback);
     }
 
@@ -2752,7 +2751,7 @@ public final class LROsInner {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;SkuInner&gt;} object.
      */
-    public ServiceFuture<SkuInner> beginPutNonResourceAsync(SkuInner sku, @NonNull ServiceCallback<SkuInner> serviceCallback) {
+    public ServiceFuture<SkuInner> beginPutNonResourceAsync(SkuInner sku, ServiceCallback<SkuInner> serviceCallback) {
         return ServiceFutureUtil.fromLRO(beginPutNonResourceAsync(sku), serviceCallback);
     }
 
@@ -2786,7 +2785,7 @@ public final class LROsInner {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;SkuInner&gt;} object.
      */
-    public ServiceFuture<SkuInner> putNonResourceAsync(@NonNull ServiceCallback<SkuInner> serviceCallback) {
+    public ServiceFuture<SkuInner> putNonResourceAsync(ServiceCallback<SkuInner> serviceCallback) {
         return ServiceFuture.fromBody(putNonResourceAsync(), serviceCallback);
     }
 
@@ -2839,7 +2838,7 @@ public final class LROsInner {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;SkuInner&gt;} object.
      */
-    public ServiceFuture<SkuInner> putNonResourceAsync(SkuInner sku, @NonNull ServiceCallback<SkuInner> serviceCallback) {
+    public ServiceFuture<SkuInner> putNonResourceAsync(SkuInner sku, ServiceCallback<SkuInner> serviceCallback) {
         return ServiceFuture.fromBody(putNonResourceAsync(sku), serviceCallback);
     }
 
@@ -2893,7 +2892,7 @@ public final class LROsInner {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;SkuInner&gt;} object.
      */
-    public ServiceFuture<SkuInner> beginPutAsyncNonResourceAsync(@NonNull ServiceCallback<SkuInner> serviceCallback) {
+    public ServiceFuture<SkuInner> beginPutAsyncNonResourceAsync(ServiceCallback<SkuInner> serviceCallback) {
         return ServiceFutureUtil.fromLRO(beginPutAsyncNonResourceAsync(), serviceCallback);
     }
 
@@ -2927,7 +2926,7 @@ public final class LROsInner {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;SkuInner&gt;} object.
      */
-    public ServiceFuture<SkuInner> beginPutAsyncNonResourceAsync(SkuInner sku, @NonNull ServiceCallback<SkuInner> serviceCallback) {
+    public ServiceFuture<SkuInner> beginPutAsyncNonResourceAsync(SkuInner sku, ServiceCallback<SkuInner> serviceCallback) {
         return ServiceFutureUtil.fromLRO(beginPutAsyncNonResourceAsync(sku), serviceCallback);
     }
 
@@ -2961,7 +2960,7 @@ public final class LROsInner {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;SkuInner&gt;} object.
      */
-    public ServiceFuture<SkuInner> putAsyncNonResourceAsync(@NonNull ServiceCallback<SkuInner> serviceCallback) {
+    public ServiceFuture<SkuInner> putAsyncNonResourceAsync(ServiceCallback<SkuInner> serviceCallback) {
         return ServiceFuture.fromBody(putAsyncNonResourceAsync(), serviceCallback);
     }
 
@@ -3014,7 +3013,7 @@ public final class LROsInner {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;SkuInner&gt;} object.
      */
-    public ServiceFuture<SkuInner> putAsyncNonResourceAsync(SkuInner sku, @NonNull ServiceCallback<SkuInner> serviceCallback) {
+    public ServiceFuture<SkuInner> putAsyncNonResourceAsync(SkuInner sku, ServiceCallback<SkuInner> serviceCallback) {
         return ServiceFuture.fromBody(putAsyncNonResourceAsync(sku), serviceCallback);
     }
 
@@ -3068,7 +3067,7 @@ public final class LROsInner {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;SubProductInner&gt;} object.
      */
-    public ServiceFuture<SubProductInner> beginPutSubResourceAsync(@NonNull ServiceCallback<SubProductInner> serviceCallback) {
+    public ServiceFuture<SubProductInner> beginPutSubResourceAsync(ServiceCallback<SubProductInner> serviceCallback) {
         return ServiceFutureUtil.fromLRO(beginPutSubResourceAsync(), serviceCallback);
     }
 
@@ -3102,7 +3101,7 @@ public final class LROsInner {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;SubProductInner&gt;} object.
      */
-    public ServiceFuture<SubProductInner> beginPutSubResourceAsync(SubProductInner product, @NonNull ServiceCallback<SubProductInner> serviceCallback) {
+    public ServiceFuture<SubProductInner> beginPutSubResourceAsync(SubProductInner product, ServiceCallback<SubProductInner> serviceCallback) {
         return ServiceFutureUtil.fromLRO(beginPutSubResourceAsync(product), serviceCallback);
     }
 
@@ -3136,7 +3135,7 @@ public final class LROsInner {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;SubProductInner&gt;} object.
      */
-    public ServiceFuture<SubProductInner> putSubResourceAsync(@NonNull ServiceCallback<SubProductInner> serviceCallback) {
+    public ServiceFuture<SubProductInner> putSubResourceAsync(ServiceCallback<SubProductInner> serviceCallback) {
         return ServiceFuture.fromBody(putSubResourceAsync(), serviceCallback);
     }
 
@@ -3189,7 +3188,7 @@ public final class LROsInner {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;SubProductInner&gt;} object.
      */
-    public ServiceFuture<SubProductInner> putSubResourceAsync(SubProductInner product, @NonNull ServiceCallback<SubProductInner> serviceCallback) {
+    public ServiceFuture<SubProductInner> putSubResourceAsync(SubProductInner product, ServiceCallback<SubProductInner> serviceCallback) {
         return ServiceFuture.fromBody(putSubResourceAsync(product), serviceCallback);
     }
 
@@ -3243,7 +3242,7 @@ public final class LROsInner {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;SubProductInner&gt;} object.
      */
-    public ServiceFuture<SubProductInner> beginPutAsyncSubResourceAsync(@NonNull ServiceCallback<SubProductInner> serviceCallback) {
+    public ServiceFuture<SubProductInner> beginPutAsyncSubResourceAsync(ServiceCallback<SubProductInner> serviceCallback) {
         return ServiceFutureUtil.fromLRO(beginPutAsyncSubResourceAsync(), serviceCallback);
     }
 
@@ -3277,7 +3276,7 @@ public final class LROsInner {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;SubProductInner&gt;} object.
      */
-    public ServiceFuture<SubProductInner> beginPutAsyncSubResourceAsync(SubProductInner product, @NonNull ServiceCallback<SubProductInner> serviceCallback) {
+    public ServiceFuture<SubProductInner> beginPutAsyncSubResourceAsync(SubProductInner product, ServiceCallback<SubProductInner> serviceCallback) {
         return ServiceFutureUtil.fromLRO(beginPutAsyncSubResourceAsync(product), serviceCallback);
     }
 
@@ -3311,7 +3310,7 @@ public final class LROsInner {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;SubProductInner&gt;} object.
      */
-    public ServiceFuture<SubProductInner> putAsyncSubResourceAsync(@NonNull ServiceCallback<SubProductInner> serviceCallback) {
+    public ServiceFuture<SubProductInner> putAsyncSubResourceAsync(ServiceCallback<SubProductInner> serviceCallback) {
         return ServiceFuture.fromBody(putAsyncSubResourceAsync(), serviceCallback);
     }
 
@@ -3364,7 +3363,7 @@ public final class LROsInner {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;SubProductInner&gt;} object.
      */
-    public ServiceFuture<SubProductInner> putAsyncSubResourceAsync(SubProductInner product, @NonNull ServiceCallback<SubProductInner> serviceCallback) {
+    public ServiceFuture<SubProductInner> putAsyncSubResourceAsync(SubProductInner product, ServiceCallback<SubProductInner> serviceCallback) {
         return ServiceFuture.fromBody(putAsyncSubResourceAsync(product), serviceCallback);
     }
 
@@ -3418,7 +3417,7 @@ public final class LROsInner {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;ProductInner&gt;} object.
      */
-    public ServiceFuture<ProductInner> beginDeleteProvisioning202Accepted200SucceededAsync(@NonNull ServiceCallback<ProductInner> serviceCallback) {
+    public ServiceFuture<ProductInner> beginDeleteProvisioning202Accepted200SucceededAsync(ServiceCallback<ProductInner> serviceCallback) {
         return ServiceFutureUtil.fromLRO(beginDeleteProvisioning202Accepted200SucceededAsync(), serviceCallback);
     }
 
@@ -3449,7 +3448,7 @@ public final class LROsInner {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;ProductInner&gt;} object.
      */
-    public ServiceFuture<ProductInner> deleteProvisioning202Accepted200SucceededAsync(@NonNull ServiceCallback<ProductInner> serviceCallback) {
+    public ServiceFuture<ProductInner> deleteProvisioning202Accepted200SucceededAsync(ServiceCallback<ProductInner> serviceCallback) {
         return ServiceFuture.fromBody(deleteProvisioning202Accepted200SucceededAsync(), serviceCallback);
     }
 
@@ -3498,7 +3497,7 @@ public final class LROsInner {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;ProductInner&gt;} object.
      */
-    public ServiceFuture<ProductInner> beginDeleteProvisioning202DeletingFailed200Async(@NonNull ServiceCallback<ProductInner> serviceCallback) {
+    public ServiceFuture<ProductInner> beginDeleteProvisioning202DeletingFailed200Async(ServiceCallback<ProductInner> serviceCallback) {
         return ServiceFutureUtil.fromLRO(beginDeleteProvisioning202DeletingFailed200Async(), serviceCallback);
     }
 
@@ -3529,7 +3528,7 @@ public final class LROsInner {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;ProductInner&gt;} object.
      */
-    public ServiceFuture<ProductInner> deleteProvisioning202DeletingFailed200Async(@NonNull ServiceCallback<ProductInner> serviceCallback) {
+    public ServiceFuture<ProductInner> deleteProvisioning202DeletingFailed200Async(ServiceCallback<ProductInner> serviceCallback) {
         return ServiceFuture.fromBody(deleteProvisioning202DeletingFailed200Async(), serviceCallback);
     }
 
@@ -3578,7 +3577,7 @@ public final class LROsInner {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;ProductInner&gt;} object.
      */
-    public ServiceFuture<ProductInner> beginDeleteProvisioning202Deletingcanceled200Async(@NonNull ServiceCallback<ProductInner> serviceCallback) {
+    public ServiceFuture<ProductInner> beginDeleteProvisioning202Deletingcanceled200Async(ServiceCallback<ProductInner> serviceCallback) {
         return ServiceFutureUtil.fromLRO(beginDeleteProvisioning202Deletingcanceled200Async(), serviceCallback);
     }
 
@@ -3609,7 +3608,7 @@ public final class LROsInner {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;ProductInner&gt;} object.
      */
-    public ServiceFuture<ProductInner> deleteProvisioning202Deletingcanceled200Async(@NonNull ServiceCallback<ProductInner> serviceCallback) {
+    public ServiceFuture<ProductInner> deleteProvisioning202Deletingcanceled200Async(ServiceCallback<ProductInner> serviceCallback) {
         return ServiceFuture.fromBody(deleteProvisioning202Deletingcanceled200Async(), serviceCallback);
     }
 
@@ -3657,7 +3656,7 @@ public final class LROsInner {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    public ServiceFuture<Void> beginDelete204SucceededAsync(@NonNull ServiceCallback<Void> serviceCallback) {
+    public ServiceFuture<Void> beginDelete204SucceededAsync(ServiceCallback<Void> serviceCallback) {
         return ServiceFutureUtil.fromLRO(beginDelete204SucceededAsync(), serviceCallback);
     }
 
@@ -3687,7 +3686,7 @@ public final class LROsInner {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    public ServiceFuture<Void> delete204SucceededAsync(@NonNull ServiceCallback<Void> serviceCallback) {
+    public ServiceFuture<Void> delete204SucceededAsync(ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(delete204SucceededAsync(), serviceCallback);
     }
 
@@ -3728,7 +3727,7 @@ public final class LROsInner {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;ProductInner&gt;} object.
      */
-    public ServiceFuture<ProductInner> beginDelete202Retry200Async(@NonNull ServiceCallback<ProductInner> serviceCallback) {
+    public ServiceFuture<ProductInner> beginDelete202Retry200Async(ServiceCallback<ProductInner> serviceCallback) {
         return ServiceFutureUtil.fromLRO(beginDelete202Retry200Async(), serviceCallback);
     }
 
@@ -3759,7 +3758,7 @@ public final class LROsInner {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;ProductInner&gt;} object.
      */
-    public ServiceFuture<ProductInner> delete202Retry200Async(@NonNull ServiceCallback<ProductInner> serviceCallback) {
+    public ServiceFuture<ProductInner> delete202Retry200Async(ServiceCallback<ProductInner> serviceCallback) {
         return ServiceFuture.fromBody(delete202Retry200Async(), serviceCallback);
     }
 
@@ -3808,7 +3807,7 @@ public final class LROsInner {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;ProductInner&gt;} object.
      */
-    public ServiceFuture<ProductInner> beginDelete202NoRetry204Async(@NonNull ServiceCallback<ProductInner> serviceCallback) {
+    public ServiceFuture<ProductInner> beginDelete202NoRetry204Async(ServiceCallback<ProductInner> serviceCallback) {
         return ServiceFutureUtil.fromLRO(beginDelete202NoRetry204Async(), serviceCallback);
     }
 
@@ -3839,7 +3838,7 @@ public final class LROsInner {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;ProductInner&gt;} object.
      */
-    public ServiceFuture<ProductInner> delete202NoRetry204Async(@NonNull ServiceCallback<ProductInner> serviceCallback) {
+    public ServiceFuture<ProductInner> delete202NoRetry204Async(ServiceCallback<ProductInner> serviceCallback) {
         return ServiceFuture.fromBody(delete202NoRetry204Async(), serviceCallback);
     }
 
@@ -3887,7 +3886,7 @@ public final class LROsInner {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    public ServiceFuture<Void> beginDeleteNoHeaderInRetryAsync(@NonNull ServiceCallback<Void> serviceCallback) {
+    public ServiceFuture<Void> beginDeleteNoHeaderInRetryAsync(ServiceCallback<Void> serviceCallback) {
         return ServiceFutureUtil.fromLRO(beginDeleteNoHeaderInRetryAsync(), serviceCallback);
     }
 
@@ -3917,7 +3916,7 @@ public final class LROsInner {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    public ServiceFuture<Void> deleteNoHeaderInRetryAsync(@NonNull ServiceCallback<Void> serviceCallback) {
+    public ServiceFuture<Void> deleteNoHeaderInRetryAsync(ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(deleteNoHeaderInRetryAsync(), serviceCallback);
     }
 
@@ -3957,7 +3956,7 @@ public final class LROsInner {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    public ServiceFuture<Void> beginDeleteAsyncNoHeaderInRetryAsync(@NonNull ServiceCallback<Void> serviceCallback) {
+    public ServiceFuture<Void> beginDeleteAsyncNoHeaderInRetryAsync(ServiceCallback<Void> serviceCallback) {
         return ServiceFutureUtil.fromLRO(beginDeleteAsyncNoHeaderInRetryAsync(), serviceCallback);
     }
 
@@ -3987,7 +3986,7 @@ public final class LROsInner {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    public ServiceFuture<Void> deleteAsyncNoHeaderInRetryAsync(@NonNull ServiceCallback<Void> serviceCallback) {
+    public ServiceFuture<Void> deleteAsyncNoHeaderInRetryAsync(ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(deleteAsyncNoHeaderInRetryAsync(), serviceCallback);
     }
 
@@ -4027,7 +4026,7 @@ public final class LROsInner {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    public ServiceFuture<Void> beginDeleteAsyncRetrySucceededAsync(@NonNull ServiceCallback<Void> serviceCallback) {
+    public ServiceFuture<Void> beginDeleteAsyncRetrySucceededAsync(ServiceCallback<Void> serviceCallback) {
         return ServiceFutureUtil.fromLRO(beginDeleteAsyncRetrySucceededAsync(), serviceCallback);
     }
 
@@ -4057,7 +4056,7 @@ public final class LROsInner {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    public ServiceFuture<Void> deleteAsyncRetrySucceededAsync(@NonNull ServiceCallback<Void> serviceCallback) {
+    public ServiceFuture<Void> deleteAsyncRetrySucceededAsync(ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(deleteAsyncRetrySucceededAsync(), serviceCallback);
     }
 
@@ -4097,7 +4096,7 @@ public final class LROsInner {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    public ServiceFuture<Void> beginDeleteAsyncNoRetrySucceededAsync(@NonNull ServiceCallback<Void> serviceCallback) {
+    public ServiceFuture<Void> beginDeleteAsyncNoRetrySucceededAsync(ServiceCallback<Void> serviceCallback) {
         return ServiceFutureUtil.fromLRO(beginDeleteAsyncNoRetrySucceededAsync(), serviceCallback);
     }
 
@@ -4127,7 +4126,7 @@ public final class LROsInner {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    public ServiceFuture<Void> deleteAsyncNoRetrySucceededAsync(@NonNull ServiceCallback<Void> serviceCallback) {
+    public ServiceFuture<Void> deleteAsyncNoRetrySucceededAsync(ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(deleteAsyncNoRetrySucceededAsync(), serviceCallback);
     }
 
@@ -4167,7 +4166,7 @@ public final class LROsInner {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    public ServiceFuture<Void> beginDeleteAsyncRetryFailedAsync(@NonNull ServiceCallback<Void> serviceCallback) {
+    public ServiceFuture<Void> beginDeleteAsyncRetryFailedAsync(ServiceCallback<Void> serviceCallback) {
         return ServiceFutureUtil.fromLRO(beginDeleteAsyncRetryFailedAsync(), serviceCallback);
     }
 
@@ -4197,7 +4196,7 @@ public final class LROsInner {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    public ServiceFuture<Void> deleteAsyncRetryFailedAsync(@NonNull ServiceCallback<Void> serviceCallback) {
+    public ServiceFuture<Void> deleteAsyncRetryFailedAsync(ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(deleteAsyncRetryFailedAsync(), serviceCallback);
     }
 
@@ -4237,7 +4236,7 @@ public final class LROsInner {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    public ServiceFuture<Void> beginDeleteAsyncRetrycanceledAsync(@NonNull ServiceCallback<Void> serviceCallback) {
+    public ServiceFuture<Void> beginDeleteAsyncRetrycanceledAsync(ServiceCallback<Void> serviceCallback) {
         return ServiceFutureUtil.fromLRO(beginDeleteAsyncRetrycanceledAsync(), serviceCallback);
     }
 
@@ -4267,7 +4266,7 @@ public final class LROsInner {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    public ServiceFuture<Void> deleteAsyncRetrycanceledAsync(@NonNull ServiceCallback<Void> serviceCallback) {
+    public ServiceFuture<Void> deleteAsyncRetrycanceledAsync(ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(deleteAsyncRetrycanceledAsync(), serviceCallback);
     }
 
@@ -4308,7 +4307,7 @@ public final class LROsInner {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;SkuInner&gt;} object.
      */
-    public ServiceFuture<SkuInner> beginPost200WithPayloadAsync(@NonNull ServiceCallback<SkuInner> serviceCallback) {
+    public ServiceFuture<SkuInner> beginPost200WithPayloadAsync(ServiceCallback<SkuInner> serviceCallback) {
         return ServiceFutureUtil.fromLRO(beginPost200WithPayloadAsync(), serviceCallback);
     }
 
@@ -4339,7 +4338,7 @@ public final class LROsInner {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;SkuInner&gt;} object.
      */
-    public ServiceFuture<SkuInner> post200WithPayloadAsync(@NonNull ServiceCallback<SkuInner> serviceCallback) {
+    public ServiceFuture<SkuInner> post200WithPayloadAsync(ServiceCallback<SkuInner> serviceCallback) {
         return ServiceFuture.fromBody(post200WithPayloadAsync(), serviceCallback);
     }
 
@@ -4387,7 +4386,7 @@ public final class LROsInner {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    public ServiceFuture<Void> beginPost202Retry200Async(@NonNull ServiceCallback<Void> serviceCallback) {
+    public ServiceFuture<Void> beginPost202Retry200Async(ServiceCallback<Void> serviceCallback) {
         return ServiceFutureUtil.fromLRO(beginPost202Retry200Async(), serviceCallback);
     }
 
@@ -4420,7 +4419,7 @@ public final class LROsInner {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    public ServiceFuture<Void> beginPost202Retry200Async(ProductInner product, @NonNull ServiceCallback<Void> serviceCallback) {
+    public ServiceFuture<Void> beginPost202Retry200Async(ProductInner product, ServiceCallback<Void> serviceCallback) {
         return ServiceFutureUtil.fromLRO(beginPost202Retry200Async(product), serviceCallback);
     }
 
@@ -4453,7 +4452,7 @@ public final class LROsInner {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    public ServiceFuture<Void> post202Retry200Async(@NonNull ServiceCallback<Void> serviceCallback) {
+    public ServiceFuture<Void> post202Retry200Async(ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(post202Retry200Async(), serviceCallback);
     }
 
@@ -4497,7 +4496,7 @@ public final class LROsInner {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    public ServiceFuture<Void> post202Retry200Async(ProductInner product, @NonNull ServiceCallback<Void> serviceCallback) {
+    public ServiceFuture<Void> post202Retry200Async(ProductInner product, ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(post202Retry200Async(product), serviceCallback);
     }
 
@@ -4543,7 +4542,7 @@ public final class LROsInner {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;ProductInner&gt;} object.
      */
-    public ServiceFuture<ProductInner> beginPost202NoRetry204Async(@NonNull ServiceCallback<ProductInner> serviceCallback) {
+    public ServiceFuture<ProductInner> beginPost202NoRetry204Async(ServiceCallback<ProductInner> serviceCallback) {
         return ServiceFutureUtil.fromLRO(beginPost202NoRetry204Async(), serviceCallback);
     }
 
@@ -4577,7 +4576,7 @@ public final class LROsInner {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;ProductInner&gt;} object.
      */
-    public ServiceFuture<ProductInner> beginPost202NoRetry204Async(ProductInner product, @NonNull ServiceCallback<ProductInner> serviceCallback) {
+    public ServiceFuture<ProductInner> beginPost202NoRetry204Async(ProductInner product, ServiceCallback<ProductInner> serviceCallback) {
         return ServiceFutureUtil.fromLRO(beginPost202NoRetry204Async(product), serviceCallback);
     }
 
@@ -4611,7 +4610,7 @@ public final class LROsInner {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;ProductInner&gt;} object.
      */
-    public ServiceFuture<ProductInner> post202NoRetry204Async(@NonNull ServiceCallback<ProductInner> serviceCallback) {
+    public ServiceFuture<ProductInner> post202NoRetry204Async(ServiceCallback<ProductInner> serviceCallback) {
         return ServiceFuture.fromBody(post202NoRetry204Async(), serviceCallback);
     }
 
@@ -4664,7 +4663,7 @@ public final class LROsInner {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;ProductInner&gt;} object.
      */
-    public ServiceFuture<ProductInner> post202NoRetry204Async(ProductInner product, @NonNull ServiceCallback<ProductInner> serviceCallback) {
+    public ServiceFuture<ProductInner> post202NoRetry204Async(ProductInner product, ServiceCallback<ProductInner> serviceCallback) {
         return ServiceFuture.fromBody(post202NoRetry204Async(product), serviceCallback);
     }
 
@@ -4718,7 +4717,7 @@ public final class LROsInner {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;ProductInner&gt;} object.
      */
-    public ServiceFuture<ProductInner> beginPostAsyncRetrySucceededAsync(@NonNull ServiceCallback<ProductInner> serviceCallback) {
+    public ServiceFuture<ProductInner> beginPostAsyncRetrySucceededAsync(ServiceCallback<ProductInner> serviceCallback) {
         return ServiceFutureUtil.fromLRO(beginPostAsyncRetrySucceededAsync(), serviceCallback);
     }
 
@@ -4752,7 +4751,7 @@ public final class LROsInner {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;ProductInner&gt;} object.
      */
-    public ServiceFuture<ProductInner> beginPostAsyncRetrySucceededAsync(ProductInner product, @NonNull ServiceCallback<ProductInner> serviceCallback) {
+    public ServiceFuture<ProductInner> beginPostAsyncRetrySucceededAsync(ProductInner product, ServiceCallback<ProductInner> serviceCallback) {
         return ServiceFutureUtil.fromLRO(beginPostAsyncRetrySucceededAsync(product), serviceCallback);
     }
 
@@ -4786,7 +4785,7 @@ public final class LROsInner {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;ProductInner&gt;} object.
      */
-    public ServiceFuture<ProductInner> postAsyncRetrySucceededAsync(@NonNull ServiceCallback<ProductInner> serviceCallback) {
+    public ServiceFuture<ProductInner> postAsyncRetrySucceededAsync(ServiceCallback<ProductInner> serviceCallback) {
         return ServiceFuture.fromBody(postAsyncRetrySucceededAsync(), serviceCallback);
     }
 
@@ -4839,7 +4838,7 @@ public final class LROsInner {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;ProductInner&gt;} object.
      */
-    public ServiceFuture<ProductInner> postAsyncRetrySucceededAsync(ProductInner product, @NonNull ServiceCallback<ProductInner> serviceCallback) {
+    public ServiceFuture<ProductInner> postAsyncRetrySucceededAsync(ProductInner product, ServiceCallback<ProductInner> serviceCallback) {
         return ServiceFuture.fromBody(postAsyncRetrySucceededAsync(product), serviceCallback);
     }
 
@@ -4893,7 +4892,7 @@ public final class LROsInner {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;ProductInner&gt;} object.
      */
-    public ServiceFuture<ProductInner> beginPostAsyncNoRetrySucceededAsync(@NonNull ServiceCallback<ProductInner> serviceCallback) {
+    public ServiceFuture<ProductInner> beginPostAsyncNoRetrySucceededAsync(ServiceCallback<ProductInner> serviceCallback) {
         return ServiceFutureUtil.fromLRO(beginPostAsyncNoRetrySucceededAsync(), serviceCallback);
     }
 
@@ -4927,7 +4926,7 @@ public final class LROsInner {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;ProductInner&gt;} object.
      */
-    public ServiceFuture<ProductInner> beginPostAsyncNoRetrySucceededAsync(ProductInner product, @NonNull ServiceCallback<ProductInner> serviceCallback) {
+    public ServiceFuture<ProductInner> beginPostAsyncNoRetrySucceededAsync(ProductInner product, ServiceCallback<ProductInner> serviceCallback) {
         return ServiceFutureUtil.fromLRO(beginPostAsyncNoRetrySucceededAsync(product), serviceCallback);
     }
 
@@ -4961,7 +4960,7 @@ public final class LROsInner {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;ProductInner&gt;} object.
      */
-    public ServiceFuture<ProductInner> postAsyncNoRetrySucceededAsync(@NonNull ServiceCallback<ProductInner> serviceCallback) {
+    public ServiceFuture<ProductInner> postAsyncNoRetrySucceededAsync(ServiceCallback<ProductInner> serviceCallback) {
         return ServiceFuture.fromBody(postAsyncNoRetrySucceededAsync(), serviceCallback);
     }
 
@@ -5014,7 +5013,7 @@ public final class LROsInner {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;ProductInner&gt;} object.
      */
-    public ServiceFuture<ProductInner> postAsyncNoRetrySucceededAsync(ProductInner product, @NonNull ServiceCallback<ProductInner> serviceCallback) {
+    public ServiceFuture<ProductInner> postAsyncNoRetrySucceededAsync(ProductInner product, ServiceCallback<ProductInner> serviceCallback) {
         return ServiceFuture.fromBody(postAsyncNoRetrySucceededAsync(product), serviceCallback);
     }
 
@@ -5067,7 +5066,7 @@ public final class LROsInner {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    public ServiceFuture<Void> beginPostAsyncRetryFailedAsync(@NonNull ServiceCallback<Void> serviceCallback) {
+    public ServiceFuture<Void> beginPostAsyncRetryFailedAsync(ServiceCallback<Void> serviceCallback) {
         return ServiceFutureUtil.fromLRO(beginPostAsyncRetryFailedAsync(), serviceCallback);
     }
 
@@ -5100,7 +5099,7 @@ public final class LROsInner {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    public ServiceFuture<Void> beginPostAsyncRetryFailedAsync(ProductInner product, @NonNull ServiceCallback<Void> serviceCallback) {
+    public ServiceFuture<Void> beginPostAsyncRetryFailedAsync(ProductInner product, ServiceCallback<Void> serviceCallback) {
         return ServiceFutureUtil.fromLRO(beginPostAsyncRetryFailedAsync(product), serviceCallback);
     }
 
@@ -5133,7 +5132,7 @@ public final class LROsInner {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    public ServiceFuture<Void> postAsyncRetryFailedAsync(@NonNull ServiceCallback<Void> serviceCallback) {
+    public ServiceFuture<Void> postAsyncRetryFailedAsync(ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(postAsyncRetryFailedAsync(), serviceCallback);
     }
 
@@ -5177,7 +5176,7 @@ public final class LROsInner {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    public ServiceFuture<Void> postAsyncRetryFailedAsync(ProductInner product, @NonNull ServiceCallback<Void> serviceCallback) {
+    public ServiceFuture<Void> postAsyncRetryFailedAsync(ProductInner product, ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(postAsyncRetryFailedAsync(product), serviceCallback);
     }
 
@@ -5222,7 +5221,7 @@ public final class LROsInner {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    public ServiceFuture<Void> beginPostAsyncRetrycanceledAsync(@NonNull ServiceCallback<Void> serviceCallback) {
+    public ServiceFuture<Void> beginPostAsyncRetrycanceledAsync(ServiceCallback<Void> serviceCallback) {
         return ServiceFutureUtil.fromLRO(beginPostAsyncRetrycanceledAsync(), serviceCallback);
     }
 
@@ -5255,7 +5254,7 @@ public final class LROsInner {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    public ServiceFuture<Void> beginPostAsyncRetrycanceledAsync(ProductInner product, @NonNull ServiceCallback<Void> serviceCallback) {
+    public ServiceFuture<Void> beginPostAsyncRetrycanceledAsync(ProductInner product, ServiceCallback<Void> serviceCallback) {
         return ServiceFutureUtil.fromLRO(beginPostAsyncRetrycanceledAsync(product), serviceCallback);
     }
 
@@ -5288,7 +5287,7 @@ public final class LROsInner {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    public ServiceFuture<Void> postAsyncRetrycanceledAsync(@NonNull ServiceCallback<Void> serviceCallback) {
+    public ServiceFuture<Void> postAsyncRetrycanceledAsync(ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(postAsyncRetrycanceledAsync(), serviceCallback);
     }
 
@@ -5332,7 +5331,7 @@ public final class LROsInner {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    public ServiceFuture<Void> postAsyncRetrycanceledAsync(ProductInner product, @NonNull ServiceCallback<Void> serviceCallback) {
+    public ServiceFuture<Void> postAsyncRetrycanceledAsync(ProductInner product, ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(postAsyncRetrycanceledAsync(product), serviceCallback);
     }
 

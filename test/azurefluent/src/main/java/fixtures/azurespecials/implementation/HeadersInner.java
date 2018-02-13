@@ -95,7 +95,7 @@ public final class HeadersInner {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    public ServiceFuture<Void> customNamedRequestIdAsync(@NonNull String fooClientRequestId, @NonNull ServiceCallback<Void> serviceCallback) {
+    public ServiceFuture<Void> customNamedRequestIdAsync(@NonNull String fooClientRequestId, ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(customNamedRequestIdAsync(fooClientRequestId), serviceCallback);
     }
 
@@ -145,7 +145,7 @@ public final class HeadersInner {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    public ServiceFuture<Void> customNamedRequestIdParamGroupingAsync(@NonNull HeaderCustomNamedRequestIdParamGroupingParametersInner headerCustomNamedRequestIdParamGroupingParameters, @NonNull ServiceCallback<Void> serviceCallback) {
+    public ServiceFuture<Void> customNamedRequestIdParamGroupingAsync(@NonNull HeaderCustomNamedRequestIdParamGroupingParametersInner headerCustomNamedRequestIdParamGroupingParameters, ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(customNamedRequestIdParamGroupingAsync(headerCustomNamedRequestIdParamGroupingParameters), serviceCallback);
     }
 
@@ -198,7 +198,7 @@ public final class HeadersInner {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Boolean&gt;} object.
      */
-    public ServiceFuture<Boolean> customNamedRequestIdHeadAsync(@NonNull String fooClientRequestId, @NonNull ServiceCallback<Boolean> serviceCallback) {
+    public ServiceFuture<Boolean> customNamedRequestIdHeadAsync(@NonNull String fooClientRequestId, ServiceCallback<Boolean> serviceCallback) {
         return ServiceFuture.fromBody(customNamedRequestIdHeadAsync(fooClientRequestId), serviceCallback);
     }
 

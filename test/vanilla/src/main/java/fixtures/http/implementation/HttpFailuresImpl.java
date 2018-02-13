@@ -22,7 +22,6 @@ import fixtures.http.HttpFailures;
 import fixtures.http.models.ErrorException;
 import io.reactivex.Maybe;
 import io.reactivex.Single;
-import io.reactivex.annotations.NonNull;
 import io.reactivex.functions.Function;
 
 /**
@@ -88,7 +87,7 @@ public final class HttpFailuresImpl implements HttpFailures {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Boolean&gt;} object.
      */
-    public ServiceFuture<Boolean> getEmptyErrorAsync(@NonNull ServiceCallback<Boolean> serviceCallback) {
+    public ServiceFuture<Boolean> getEmptyErrorAsync(ServiceCallback<Boolean> serviceCallback) {
         return ServiceFuture.fromBody(getEmptyErrorAsync(), serviceCallback);
     }
 
@@ -136,7 +135,7 @@ public final class HttpFailuresImpl implements HttpFailures {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Boolean&gt;} object.
      */
-    public ServiceFuture<Boolean> getNoModelErrorAsync(@NonNull ServiceCallback<Boolean> serviceCallback) {
+    public ServiceFuture<Boolean> getNoModelErrorAsync(ServiceCallback<Boolean> serviceCallback) {
         return ServiceFuture.fromBody(getNoModelErrorAsync(), serviceCallback);
     }
 
@@ -184,7 +183,7 @@ public final class HttpFailuresImpl implements HttpFailures {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Boolean&gt;} object.
      */
-    public ServiceFuture<Boolean> getNoModelEmptyAsync(@NonNull ServiceCallback<Boolean> serviceCallback) {
+    public ServiceFuture<Boolean> getNoModelEmptyAsync(ServiceCallback<Boolean> serviceCallback) {
         return ServiceFuture.fromBody(getNoModelEmptyAsync(), serviceCallback);
     }
 

@@ -85,7 +85,7 @@ public final class GroupsInner {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;SampleResourceGroupInner&gt;} object.
      */
-    public ServiceFuture<SampleResourceGroupInner> getSampleResourceGroupAsync(@NonNull String resourceGroupName, @NonNull ServiceCallback<SampleResourceGroupInner> serviceCallback) {
+    public ServiceFuture<SampleResourceGroupInner> getSampleResourceGroupAsync(@NonNull String resourceGroupName, ServiceCallback<SampleResourceGroupInner> serviceCallback) {
         return ServiceFuture.fromBody(getSampleResourceGroupAsync(resourceGroupName), serviceCallback);
     }
 

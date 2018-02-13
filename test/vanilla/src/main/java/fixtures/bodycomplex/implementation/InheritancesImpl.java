@@ -90,7 +90,7 @@ public final class InheritancesImpl implements Inheritances {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Siamese&gt;} object.
      */
-    public ServiceFuture<Siamese> getValidAsync(@NonNull ServiceCallback<Siamese> serviceCallback) {
+    public ServiceFuture<Siamese> getValidAsync(ServiceCallback<Siamese> serviceCallback) {
         return ServiceFuture.fromBody(getValidAsync(), serviceCallback);
     }
 
@@ -141,7 +141,7 @@ public final class InheritancesImpl implements Inheritances {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    public ServiceFuture<Void> putValidAsync(@NonNull Siamese complexBody, @NonNull ServiceCallback<Void> serviceCallback) {
+    public ServiceFuture<Void> putValidAsync(@NonNull Siamese complexBody, ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(putValidAsync(complexBody), serviceCallback);
     }
 

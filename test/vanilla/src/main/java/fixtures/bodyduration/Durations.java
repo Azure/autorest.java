@@ -40,7 +40,7 @@ public interface Durations {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Period&gt;} object.
      */
-    ServiceFuture<Period> getNullAsync(@NonNull ServiceCallback<Period> serviceCallback);
+    ServiceFuture<Period> getNullAsync(ServiceCallback<Period> serviceCallback);
 
     /**
      * Get null duration value.
@@ -74,7 +74,7 @@ public interface Durations {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    ServiceFuture<Void> putPositiveDurationAsync(@NonNull Period durationBody, @NonNull ServiceCallback<Void> serviceCallback);
+    ServiceFuture<Void> putPositiveDurationAsync(@NonNull Period durationBody, ServiceCallback<Void> serviceCallback);
 
     /**
      * Put a positive duration value.
@@ -110,7 +110,7 @@ public interface Durations {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Period&gt;} object.
      */
-    ServiceFuture<Period> getPositiveDurationAsync(@NonNull ServiceCallback<Period> serviceCallback);
+    ServiceFuture<Period> getPositiveDurationAsync(ServiceCallback<Period> serviceCallback);
 
     /**
      * Get a positive duration value.
@@ -142,7 +142,7 @@ public interface Durations {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Period&gt;} object.
      */
-    ServiceFuture<Period> getInvalidAsync(@NonNull ServiceCallback<Period> serviceCallback);
+    ServiceFuture<Period> getInvalidAsync(ServiceCallback<Period> serviceCallback);
 
     /**
      * Get an invalid duration value.

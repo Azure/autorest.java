@@ -99,7 +99,7 @@ public final class DurationsImpl implements Durations {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Period&gt;} object.
      */
-    public ServiceFuture<Period> getNullAsync(@NonNull ServiceCallback<Period> serviceCallback) {
+    public ServiceFuture<Period> getNullAsync(ServiceCallback<Period> serviceCallback) {
         return ServiceFuture.fromBody(getNullAsync(), serviceCallback);
     }
 
@@ -150,7 +150,7 @@ public final class DurationsImpl implements Durations {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    public ServiceFuture<Void> putPositiveDurationAsync(@NonNull Period durationBody, @NonNull ServiceCallback<Void> serviceCallback) {
+    public ServiceFuture<Void> putPositiveDurationAsync(@NonNull Period durationBody, ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(putPositiveDurationAsync(durationBody), serviceCallback);
     }
 
@@ -198,7 +198,7 @@ public final class DurationsImpl implements Durations {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Period&gt;} object.
      */
-    public ServiceFuture<Period> getPositiveDurationAsync(@NonNull ServiceCallback<Period> serviceCallback) {
+    public ServiceFuture<Period> getPositiveDurationAsync(ServiceCallback<Period> serviceCallback) {
         return ServiceFuture.fromBody(getPositiveDurationAsync(), serviceCallback);
     }
 
@@ -247,7 +247,7 @@ public final class DurationsImpl implements Durations {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Period&gt;} object.
      */
-    public ServiceFuture<Period> getInvalidAsync(@NonNull ServiceCallback<Period> serviceCallback) {
+    public ServiceFuture<Period> getInvalidAsync(ServiceCallback<Period> serviceCallback) {
         return ServiceFuture.fromBody(getInvalidAsync(), serviceCallback);
     }
 

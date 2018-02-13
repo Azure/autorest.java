@@ -40,7 +40,7 @@ public interface Arrays {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;ArrayWrapper&gt;} object.
      */
-    ServiceFuture<ArrayWrapper> getValidAsync(@NonNull ServiceCallback<ArrayWrapper> serviceCallback);
+    ServiceFuture<ArrayWrapper> getValidAsync(ServiceCallback<ArrayWrapper> serviceCallback);
 
     /**
      * Get complex types with array property.
@@ -74,7 +74,7 @@ public interface Arrays {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    ServiceFuture<Void> putValidAsync(@NonNull ArrayWrapper complexBody, @NonNull ServiceCallback<Void> serviceCallback);
+    ServiceFuture<Void> putValidAsync(@NonNull ArrayWrapper complexBody, ServiceCallback<Void> serviceCallback);
 
     /**
      * Put complex types with array property.
@@ -110,7 +110,7 @@ public interface Arrays {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;ArrayWrapper&gt;} object.
      */
-    ServiceFuture<ArrayWrapper> getEmptyAsync(@NonNull ServiceCallback<ArrayWrapper> serviceCallback);
+    ServiceFuture<ArrayWrapper> getEmptyAsync(ServiceCallback<ArrayWrapper> serviceCallback);
 
     /**
      * Get complex types with array property which is empty.
@@ -144,7 +144,7 @@ public interface Arrays {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    ServiceFuture<Void> putEmptyAsync(@NonNull ArrayWrapper complexBody, @NonNull ServiceCallback<Void> serviceCallback);
+    ServiceFuture<Void> putEmptyAsync(@NonNull ArrayWrapper complexBody, ServiceCallback<Void> serviceCallback);
 
     /**
      * Put complex types with array property which is empty.
@@ -180,7 +180,7 @@ public interface Arrays {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;ArrayWrapper&gt;} object.
      */
-    ServiceFuture<ArrayWrapper> getNotProvidedAsync(@NonNull ServiceCallback<ArrayWrapper> serviceCallback);
+    ServiceFuture<ArrayWrapper> getNotProvidedAsync(ServiceCallback<ArrayWrapper> serviceCallback);
 
     /**
      * Get complex types with array property while server doesn't provide a response payload.

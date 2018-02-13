@@ -30,7 +30,6 @@ import io.reactivex.Completable;
 import io.reactivex.Maybe;
 import io.reactivex.Observable;
 import io.reactivex.Single;
-import io.reactivex.annotations.NonNull;
 import io.reactivex.functions.Function;
 
 /**
@@ -343,7 +342,7 @@ public final class LROSADsInner {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;ProductInner&gt;} object.
      */
-    public ServiceFuture<ProductInner> beginPutNonRetry400Async(@NonNull ServiceCallback<ProductInner> serviceCallback) {
+    public ServiceFuture<ProductInner> beginPutNonRetry400Async(ServiceCallback<ProductInner> serviceCallback) {
         return ServiceFutureUtil.fromLRO(beginPutNonRetry400Async(), serviceCallback);
     }
 
@@ -377,7 +376,7 @@ public final class LROSADsInner {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;ProductInner&gt;} object.
      */
-    public ServiceFuture<ProductInner> beginPutNonRetry400Async(ProductInner product, @NonNull ServiceCallback<ProductInner> serviceCallback) {
+    public ServiceFuture<ProductInner> beginPutNonRetry400Async(ProductInner product, ServiceCallback<ProductInner> serviceCallback) {
         return ServiceFutureUtil.fromLRO(beginPutNonRetry400Async(product), serviceCallback);
     }
 
@@ -411,7 +410,7 @@ public final class LROSADsInner {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;ProductInner&gt;} object.
      */
-    public ServiceFuture<ProductInner> putNonRetry400Async(@NonNull ServiceCallback<ProductInner> serviceCallback) {
+    public ServiceFuture<ProductInner> putNonRetry400Async(ServiceCallback<ProductInner> serviceCallback) {
         return ServiceFuture.fromBody(putNonRetry400Async(), serviceCallback);
     }
 
@@ -464,7 +463,7 @@ public final class LROSADsInner {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;ProductInner&gt;} object.
      */
-    public ServiceFuture<ProductInner> putNonRetry400Async(ProductInner product, @NonNull ServiceCallback<ProductInner> serviceCallback) {
+    public ServiceFuture<ProductInner> putNonRetry400Async(ProductInner product, ServiceCallback<ProductInner> serviceCallback) {
         return ServiceFuture.fromBody(putNonRetry400Async(product), serviceCallback);
     }
 
@@ -518,7 +517,7 @@ public final class LROSADsInner {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;ProductInner&gt;} object.
      */
-    public ServiceFuture<ProductInner> beginPutNonRetry201Creating400Async(@NonNull ServiceCallback<ProductInner> serviceCallback) {
+    public ServiceFuture<ProductInner> beginPutNonRetry201Creating400Async(ServiceCallback<ProductInner> serviceCallback) {
         return ServiceFutureUtil.fromLRO(beginPutNonRetry201Creating400Async(), serviceCallback);
     }
 
@@ -552,7 +551,7 @@ public final class LROSADsInner {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;ProductInner&gt;} object.
      */
-    public ServiceFuture<ProductInner> beginPutNonRetry201Creating400Async(ProductInner product, @NonNull ServiceCallback<ProductInner> serviceCallback) {
+    public ServiceFuture<ProductInner> beginPutNonRetry201Creating400Async(ProductInner product, ServiceCallback<ProductInner> serviceCallback) {
         return ServiceFutureUtil.fromLRO(beginPutNonRetry201Creating400Async(product), serviceCallback);
     }
 
@@ -586,7 +585,7 @@ public final class LROSADsInner {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;ProductInner&gt;} object.
      */
-    public ServiceFuture<ProductInner> putNonRetry201Creating400Async(@NonNull ServiceCallback<ProductInner> serviceCallback) {
+    public ServiceFuture<ProductInner> putNonRetry201Creating400Async(ServiceCallback<ProductInner> serviceCallback) {
         return ServiceFuture.fromBody(putNonRetry201Creating400Async(), serviceCallback);
     }
 
@@ -639,7 +638,7 @@ public final class LROSADsInner {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;ProductInner&gt;} object.
      */
-    public ServiceFuture<ProductInner> putNonRetry201Creating400Async(ProductInner product, @NonNull ServiceCallback<ProductInner> serviceCallback) {
+    public ServiceFuture<ProductInner> putNonRetry201Creating400Async(ProductInner product, ServiceCallback<ProductInner> serviceCallback) {
         return ServiceFuture.fromBody(putNonRetry201Creating400Async(product), serviceCallback);
     }
 
@@ -693,7 +692,7 @@ public final class LROSADsInner {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;ProductInner&gt;} object.
      */
-    public ServiceFuture<ProductInner> beginPutNonRetry201Creating400InvalidJsonAsync(@NonNull ServiceCallback<ProductInner> serviceCallback) {
+    public ServiceFuture<ProductInner> beginPutNonRetry201Creating400InvalidJsonAsync(ServiceCallback<ProductInner> serviceCallback) {
         return ServiceFutureUtil.fromLRO(beginPutNonRetry201Creating400InvalidJsonAsync(), serviceCallback);
     }
 
@@ -727,7 +726,7 @@ public final class LROSADsInner {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;ProductInner&gt;} object.
      */
-    public ServiceFuture<ProductInner> beginPutNonRetry201Creating400InvalidJsonAsync(ProductInner product, @NonNull ServiceCallback<ProductInner> serviceCallback) {
+    public ServiceFuture<ProductInner> beginPutNonRetry201Creating400InvalidJsonAsync(ProductInner product, ServiceCallback<ProductInner> serviceCallback) {
         return ServiceFutureUtil.fromLRO(beginPutNonRetry201Creating400InvalidJsonAsync(product), serviceCallback);
     }
 
@@ -761,7 +760,7 @@ public final class LROSADsInner {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;ProductInner&gt;} object.
      */
-    public ServiceFuture<ProductInner> putNonRetry201Creating400InvalidJsonAsync(@NonNull ServiceCallback<ProductInner> serviceCallback) {
+    public ServiceFuture<ProductInner> putNonRetry201Creating400InvalidJsonAsync(ServiceCallback<ProductInner> serviceCallback) {
         return ServiceFuture.fromBody(putNonRetry201Creating400InvalidJsonAsync(), serviceCallback);
     }
 
@@ -814,7 +813,7 @@ public final class LROSADsInner {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;ProductInner&gt;} object.
      */
-    public ServiceFuture<ProductInner> putNonRetry201Creating400InvalidJsonAsync(ProductInner product, @NonNull ServiceCallback<ProductInner> serviceCallback) {
+    public ServiceFuture<ProductInner> putNonRetry201Creating400InvalidJsonAsync(ProductInner product, ServiceCallback<ProductInner> serviceCallback) {
         return ServiceFuture.fromBody(putNonRetry201Creating400InvalidJsonAsync(product), serviceCallback);
     }
 
@@ -868,7 +867,7 @@ public final class LROSADsInner {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;ProductInner&gt;} object.
      */
-    public ServiceFuture<ProductInner> beginPutAsyncRelativeRetry400Async(@NonNull ServiceCallback<ProductInner> serviceCallback) {
+    public ServiceFuture<ProductInner> beginPutAsyncRelativeRetry400Async(ServiceCallback<ProductInner> serviceCallback) {
         return ServiceFutureUtil.fromLRO(beginPutAsyncRelativeRetry400Async(), serviceCallback);
     }
 
@@ -902,7 +901,7 @@ public final class LROSADsInner {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;ProductInner&gt;} object.
      */
-    public ServiceFuture<ProductInner> beginPutAsyncRelativeRetry400Async(ProductInner product, @NonNull ServiceCallback<ProductInner> serviceCallback) {
+    public ServiceFuture<ProductInner> beginPutAsyncRelativeRetry400Async(ProductInner product, ServiceCallback<ProductInner> serviceCallback) {
         return ServiceFutureUtil.fromLRO(beginPutAsyncRelativeRetry400Async(product), serviceCallback);
     }
 
@@ -936,7 +935,7 @@ public final class LROSADsInner {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;ProductInner&gt;} object.
      */
-    public ServiceFuture<ProductInner> putAsyncRelativeRetry400Async(@NonNull ServiceCallback<ProductInner> serviceCallback) {
+    public ServiceFuture<ProductInner> putAsyncRelativeRetry400Async(ServiceCallback<ProductInner> serviceCallback) {
         return ServiceFuture.fromBody(putAsyncRelativeRetry400Async(), serviceCallback);
     }
 
@@ -989,7 +988,7 @@ public final class LROSADsInner {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;ProductInner&gt;} object.
      */
-    public ServiceFuture<ProductInner> putAsyncRelativeRetry400Async(ProductInner product, @NonNull ServiceCallback<ProductInner> serviceCallback) {
+    public ServiceFuture<ProductInner> putAsyncRelativeRetry400Async(ProductInner product, ServiceCallback<ProductInner> serviceCallback) {
         return ServiceFuture.fromBody(putAsyncRelativeRetry400Async(product), serviceCallback);
     }
 
@@ -1042,7 +1041,7 @@ public final class LROSADsInner {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    public ServiceFuture<Void> beginDeleteNonRetry400Async(@NonNull ServiceCallback<Void> serviceCallback) {
+    public ServiceFuture<Void> beginDeleteNonRetry400Async(ServiceCallback<Void> serviceCallback) {
         return ServiceFutureUtil.fromLRO(beginDeleteNonRetry400Async(), serviceCallback);
     }
 
@@ -1072,7 +1071,7 @@ public final class LROSADsInner {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    public ServiceFuture<Void> deleteNonRetry400Async(@NonNull ServiceCallback<Void> serviceCallback) {
+    public ServiceFuture<Void> deleteNonRetry400Async(ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(deleteNonRetry400Async(), serviceCallback);
     }
 
@@ -1112,7 +1111,7 @@ public final class LROSADsInner {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    public ServiceFuture<Void> beginDelete202NonRetry400Async(@NonNull ServiceCallback<Void> serviceCallback) {
+    public ServiceFuture<Void> beginDelete202NonRetry400Async(ServiceCallback<Void> serviceCallback) {
         return ServiceFutureUtil.fromLRO(beginDelete202NonRetry400Async(), serviceCallback);
     }
 
@@ -1142,7 +1141,7 @@ public final class LROSADsInner {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    public ServiceFuture<Void> delete202NonRetry400Async(@NonNull ServiceCallback<Void> serviceCallback) {
+    public ServiceFuture<Void> delete202NonRetry400Async(ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(delete202NonRetry400Async(), serviceCallback);
     }
 
@@ -1182,7 +1181,7 @@ public final class LROSADsInner {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    public ServiceFuture<Void> beginDeleteAsyncRelativeRetry400Async(@NonNull ServiceCallback<Void> serviceCallback) {
+    public ServiceFuture<Void> beginDeleteAsyncRelativeRetry400Async(ServiceCallback<Void> serviceCallback) {
         return ServiceFutureUtil.fromLRO(beginDeleteAsyncRelativeRetry400Async(), serviceCallback);
     }
 
@@ -1212,7 +1211,7 @@ public final class LROSADsInner {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    public ServiceFuture<Void> deleteAsyncRelativeRetry400Async(@NonNull ServiceCallback<Void> serviceCallback) {
+    public ServiceFuture<Void> deleteAsyncRelativeRetry400Async(ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(deleteAsyncRelativeRetry400Async(), serviceCallback);
     }
 
@@ -1252,7 +1251,7 @@ public final class LROSADsInner {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    public ServiceFuture<Void> beginPostNonRetry400Async(@NonNull ServiceCallback<Void> serviceCallback) {
+    public ServiceFuture<Void> beginPostNonRetry400Async(ServiceCallback<Void> serviceCallback) {
         return ServiceFutureUtil.fromLRO(beginPostNonRetry400Async(), serviceCallback);
     }
 
@@ -1285,7 +1284,7 @@ public final class LROSADsInner {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    public ServiceFuture<Void> beginPostNonRetry400Async(ProductInner product, @NonNull ServiceCallback<Void> serviceCallback) {
+    public ServiceFuture<Void> beginPostNonRetry400Async(ProductInner product, ServiceCallback<Void> serviceCallback) {
         return ServiceFutureUtil.fromLRO(beginPostNonRetry400Async(product), serviceCallback);
     }
 
@@ -1318,7 +1317,7 @@ public final class LROSADsInner {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    public ServiceFuture<Void> postNonRetry400Async(@NonNull ServiceCallback<Void> serviceCallback) {
+    public ServiceFuture<Void> postNonRetry400Async(ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(postNonRetry400Async(), serviceCallback);
     }
 
@@ -1362,7 +1361,7 @@ public final class LROSADsInner {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    public ServiceFuture<Void> postNonRetry400Async(ProductInner product, @NonNull ServiceCallback<Void> serviceCallback) {
+    public ServiceFuture<Void> postNonRetry400Async(ProductInner product, ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(postNonRetry400Async(product), serviceCallback);
     }
 
@@ -1407,7 +1406,7 @@ public final class LROSADsInner {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    public ServiceFuture<Void> beginPost202NonRetry400Async(@NonNull ServiceCallback<Void> serviceCallback) {
+    public ServiceFuture<Void> beginPost202NonRetry400Async(ServiceCallback<Void> serviceCallback) {
         return ServiceFutureUtil.fromLRO(beginPost202NonRetry400Async(), serviceCallback);
     }
 
@@ -1440,7 +1439,7 @@ public final class LROSADsInner {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    public ServiceFuture<Void> beginPost202NonRetry400Async(ProductInner product, @NonNull ServiceCallback<Void> serviceCallback) {
+    public ServiceFuture<Void> beginPost202NonRetry400Async(ProductInner product, ServiceCallback<Void> serviceCallback) {
         return ServiceFutureUtil.fromLRO(beginPost202NonRetry400Async(product), serviceCallback);
     }
 
@@ -1473,7 +1472,7 @@ public final class LROSADsInner {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    public ServiceFuture<Void> post202NonRetry400Async(@NonNull ServiceCallback<Void> serviceCallback) {
+    public ServiceFuture<Void> post202NonRetry400Async(ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(post202NonRetry400Async(), serviceCallback);
     }
 
@@ -1517,7 +1516,7 @@ public final class LROSADsInner {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    public ServiceFuture<Void> post202NonRetry400Async(ProductInner product, @NonNull ServiceCallback<Void> serviceCallback) {
+    public ServiceFuture<Void> post202NonRetry400Async(ProductInner product, ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(post202NonRetry400Async(product), serviceCallback);
     }
 
@@ -1562,7 +1561,7 @@ public final class LROSADsInner {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    public ServiceFuture<Void> beginPostAsyncRelativeRetry400Async(@NonNull ServiceCallback<Void> serviceCallback) {
+    public ServiceFuture<Void> beginPostAsyncRelativeRetry400Async(ServiceCallback<Void> serviceCallback) {
         return ServiceFutureUtil.fromLRO(beginPostAsyncRelativeRetry400Async(), serviceCallback);
     }
 
@@ -1595,7 +1594,7 @@ public final class LROSADsInner {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    public ServiceFuture<Void> beginPostAsyncRelativeRetry400Async(ProductInner product, @NonNull ServiceCallback<Void> serviceCallback) {
+    public ServiceFuture<Void> beginPostAsyncRelativeRetry400Async(ProductInner product, ServiceCallback<Void> serviceCallback) {
         return ServiceFutureUtil.fromLRO(beginPostAsyncRelativeRetry400Async(product), serviceCallback);
     }
 
@@ -1628,7 +1627,7 @@ public final class LROSADsInner {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    public ServiceFuture<Void> postAsyncRelativeRetry400Async(@NonNull ServiceCallback<Void> serviceCallback) {
+    public ServiceFuture<Void> postAsyncRelativeRetry400Async(ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(postAsyncRelativeRetry400Async(), serviceCallback);
     }
 
@@ -1672,7 +1671,7 @@ public final class LROSADsInner {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    public ServiceFuture<Void> postAsyncRelativeRetry400Async(ProductInner product, @NonNull ServiceCallback<Void> serviceCallback) {
+    public ServiceFuture<Void> postAsyncRelativeRetry400Async(ProductInner product, ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(postAsyncRelativeRetry400Async(product), serviceCallback);
     }
 
@@ -1718,7 +1717,7 @@ public final class LROSADsInner {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;ProductInner&gt;} object.
      */
-    public ServiceFuture<ProductInner> beginPutError201NoProvisioningStatePayloadAsync(@NonNull ServiceCallback<ProductInner> serviceCallback) {
+    public ServiceFuture<ProductInner> beginPutError201NoProvisioningStatePayloadAsync(ServiceCallback<ProductInner> serviceCallback) {
         return ServiceFutureUtil.fromLRO(beginPutError201NoProvisioningStatePayloadAsync(), serviceCallback);
     }
 
@@ -1752,7 +1751,7 @@ public final class LROSADsInner {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;ProductInner&gt;} object.
      */
-    public ServiceFuture<ProductInner> beginPutError201NoProvisioningStatePayloadAsync(ProductInner product, @NonNull ServiceCallback<ProductInner> serviceCallback) {
+    public ServiceFuture<ProductInner> beginPutError201NoProvisioningStatePayloadAsync(ProductInner product, ServiceCallback<ProductInner> serviceCallback) {
         return ServiceFutureUtil.fromLRO(beginPutError201NoProvisioningStatePayloadAsync(product), serviceCallback);
     }
 
@@ -1786,7 +1785,7 @@ public final class LROSADsInner {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;ProductInner&gt;} object.
      */
-    public ServiceFuture<ProductInner> putError201NoProvisioningStatePayloadAsync(@NonNull ServiceCallback<ProductInner> serviceCallback) {
+    public ServiceFuture<ProductInner> putError201NoProvisioningStatePayloadAsync(ServiceCallback<ProductInner> serviceCallback) {
         return ServiceFuture.fromBody(putError201NoProvisioningStatePayloadAsync(), serviceCallback);
     }
 
@@ -1839,7 +1838,7 @@ public final class LROSADsInner {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;ProductInner&gt;} object.
      */
-    public ServiceFuture<ProductInner> putError201NoProvisioningStatePayloadAsync(ProductInner product, @NonNull ServiceCallback<ProductInner> serviceCallback) {
+    public ServiceFuture<ProductInner> putError201NoProvisioningStatePayloadAsync(ProductInner product, ServiceCallback<ProductInner> serviceCallback) {
         return ServiceFuture.fromBody(putError201NoProvisioningStatePayloadAsync(product), serviceCallback);
     }
 
@@ -1893,7 +1892,7 @@ public final class LROSADsInner {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;ProductInner&gt;} object.
      */
-    public ServiceFuture<ProductInner> beginPutAsyncRelativeRetryNoStatusAsync(@NonNull ServiceCallback<ProductInner> serviceCallback) {
+    public ServiceFuture<ProductInner> beginPutAsyncRelativeRetryNoStatusAsync(ServiceCallback<ProductInner> serviceCallback) {
         return ServiceFutureUtil.fromLRO(beginPutAsyncRelativeRetryNoStatusAsync(), serviceCallback);
     }
 
@@ -1927,7 +1926,7 @@ public final class LROSADsInner {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;ProductInner&gt;} object.
      */
-    public ServiceFuture<ProductInner> beginPutAsyncRelativeRetryNoStatusAsync(ProductInner product, @NonNull ServiceCallback<ProductInner> serviceCallback) {
+    public ServiceFuture<ProductInner> beginPutAsyncRelativeRetryNoStatusAsync(ProductInner product, ServiceCallback<ProductInner> serviceCallback) {
         return ServiceFutureUtil.fromLRO(beginPutAsyncRelativeRetryNoStatusAsync(product), serviceCallback);
     }
 
@@ -1961,7 +1960,7 @@ public final class LROSADsInner {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;ProductInner&gt;} object.
      */
-    public ServiceFuture<ProductInner> putAsyncRelativeRetryNoStatusAsync(@NonNull ServiceCallback<ProductInner> serviceCallback) {
+    public ServiceFuture<ProductInner> putAsyncRelativeRetryNoStatusAsync(ServiceCallback<ProductInner> serviceCallback) {
         return ServiceFuture.fromBody(putAsyncRelativeRetryNoStatusAsync(), serviceCallback);
     }
 
@@ -2014,7 +2013,7 @@ public final class LROSADsInner {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;ProductInner&gt;} object.
      */
-    public ServiceFuture<ProductInner> putAsyncRelativeRetryNoStatusAsync(ProductInner product, @NonNull ServiceCallback<ProductInner> serviceCallback) {
+    public ServiceFuture<ProductInner> putAsyncRelativeRetryNoStatusAsync(ProductInner product, ServiceCallback<ProductInner> serviceCallback) {
         return ServiceFuture.fromBody(putAsyncRelativeRetryNoStatusAsync(product), serviceCallback);
     }
 
@@ -2068,7 +2067,7 @@ public final class LROSADsInner {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;ProductInner&gt;} object.
      */
-    public ServiceFuture<ProductInner> beginPutAsyncRelativeRetryNoStatusPayloadAsync(@NonNull ServiceCallback<ProductInner> serviceCallback) {
+    public ServiceFuture<ProductInner> beginPutAsyncRelativeRetryNoStatusPayloadAsync(ServiceCallback<ProductInner> serviceCallback) {
         return ServiceFutureUtil.fromLRO(beginPutAsyncRelativeRetryNoStatusPayloadAsync(), serviceCallback);
     }
 
@@ -2102,7 +2101,7 @@ public final class LROSADsInner {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;ProductInner&gt;} object.
      */
-    public ServiceFuture<ProductInner> beginPutAsyncRelativeRetryNoStatusPayloadAsync(ProductInner product, @NonNull ServiceCallback<ProductInner> serviceCallback) {
+    public ServiceFuture<ProductInner> beginPutAsyncRelativeRetryNoStatusPayloadAsync(ProductInner product, ServiceCallback<ProductInner> serviceCallback) {
         return ServiceFutureUtil.fromLRO(beginPutAsyncRelativeRetryNoStatusPayloadAsync(product), serviceCallback);
     }
 
@@ -2136,7 +2135,7 @@ public final class LROSADsInner {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;ProductInner&gt;} object.
      */
-    public ServiceFuture<ProductInner> putAsyncRelativeRetryNoStatusPayloadAsync(@NonNull ServiceCallback<ProductInner> serviceCallback) {
+    public ServiceFuture<ProductInner> putAsyncRelativeRetryNoStatusPayloadAsync(ServiceCallback<ProductInner> serviceCallback) {
         return ServiceFuture.fromBody(putAsyncRelativeRetryNoStatusPayloadAsync(), serviceCallback);
     }
 
@@ -2189,7 +2188,7 @@ public final class LROSADsInner {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;ProductInner&gt;} object.
      */
-    public ServiceFuture<ProductInner> putAsyncRelativeRetryNoStatusPayloadAsync(ProductInner product, @NonNull ServiceCallback<ProductInner> serviceCallback) {
+    public ServiceFuture<ProductInner> putAsyncRelativeRetryNoStatusPayloadAsync(ProductInner product, ServiceCallback<ProductInner> serviceCallback) {
         return ServiceFuture.fromBody(putAsyncRelativeRetryNoStatusPayloadAsync(product), serviceCallback);
     }
 
@@ -2242,7 +2241,7 @@ public final class LROSADsInner {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    public ServiceFuture<Void> beginDelete204SucceededAsync(@NonNull ServiceCallback<Void> serviceCallback) {
+    public ServiceFuture<Void> beginDelete204SucceededAsync(ServiceCallback<Void> serviceCallback) {
         return ServiceFutureUtil.fromLRO(beginDelete204SucceededAsync(), serviceCallback);
     }
 
@@ -2272,7 +2271,7 @@ public final class LROSADsInner {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    public ServiceFuture<Void> delete204SucceededAsync(@NonNull ServiceCallback<Void> serviceCallback) {
+    public ServiceFuture<Void> delete204SucceededAsync(ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(delete204SucceededAsync(), serviceCallback);
     }
 
@@ -2312,7 +2311,7 @@ public final class LROSADsInner {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    public ServiceFuture<Void> beginDeleteAsyncRelativeRetryNoStatusAsync(@NonNull ServiceCallback<Void> serviceCallback) {
+    public ServiceFuture<Void> beginDeleteAsyncRelativeRetryNoStatusAsync(ServiceCallback<Void> serviceCallback) {
         return ServiceFutureUtil.fromLRO(beginDeleteAsyncRelativeRetryNoStatusAsync(), serviceCallback);
     }
 
@@ -2342,7 +2341,7 @@ public final class LROSADsInner {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    public ServiceFuture<Void> deleteAsyncRelativeRetryNoStatusAsync(@NonNull ServiceCallback<Void> serviceCallback) {
+    public ServiceFuture<Void> deleteAsyncRelativeRetryNoStatusAsync(ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(deleteAsyncRelativeRetryNoStatusAsync(), serviceCallback);
     }
 
@@ -2382,7 +2381,7 @@ public final class LROSADsInner {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    public ServiceFuture<Void> beginPost202NoLocationAsync(@NonNull ServiceCallback<Void> serviceCallback) {
+    public ServiceFuture<Void> beginPost202NoLocationAsync(ServiceCallback<Void> serviceCallback) {
         return ServiceFutureUtil.fromLRO(beginPost202NoLocationAsync(), serviceCallback);
     }
 
@@ -2415,7 +2414,7 @@ public final class LROSADsInner {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    public ServiceFuture<Void> beginPost202NoLocationAsync(ProductInner product, @NonNull ServiceCallback<Void> serviceCallback) {
+    public ServiceFuture<Void> beginPost202NoLocationAsync(ProductInner product, ServiceCallback<Void> serviceCallback) {
         return ServiceFutureUtil.fromLRO(beginPost202NoLocationAsync(product), serviceCallback);
     }
 
@@ -2448,7 +2447,7 @@ public final class LROSADsInner {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    public ServiceFuture<Void> post202NoLocationAsync(@NonNull ServiceCallback<Void> serviceCallback) {
+    public ServiceFuture<Void> post202NoLocationAsync(ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(post202NoLocationAsync(), serviceCallback);
     }
 
@@ -2492,7 +2491,7 @@ public final class LROSADsInner {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    public ServiceFuture<Void> post202NoLocationAsync(ProductInner product, @NonNull ServiceCallback<Void> serviceCallback) {
+    public ServiceFuture<Void> post202NoLocationAsync(ProductInner product, ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(post202NoLocationAsync(product), serviceCallback);
     }
 
@@ -2537,7 +2536,7 @@ public final class LROSADsInner {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    public ServiceFuture<Void> beginPostAsyncRelativeRetryNoPayloadAsync(@NonNull ServiceCallback<Void> serviceCallback) {
+    public ServiceFuture<Void> beginPostAsyncRelativeRetryNoPayloadAsync(ServiceCallback<Void> serviceCallback) {
         return ServiceFutureUtil.fromLRO(beginPostAsyncRelativeRetryNoPayloadAsync(), serviceCallback);
     }
 
@@ -2570,7 +2569,7 @@ public final class LROSADsInner {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    public ServiceFuture<Void> beginPostAsyncRelativeRetryNoPayloadAsync(ProductInner product, @NonNull ServiceCallback<Void> serviceCallback) {
+    public ServiceFuture<Void> beginPostAsyncRelativeRetryNoPayloadAsync(ProductInner product, ServiceCallback<Void> serviceCallback) {
         return ServiceFutureUtil.fromLRO(beginPostAsyncRelativeRetryNoPayloadAsync(product), serviceCallback);
     }
 
@@ -2603,7 +2602,7 @@ public final class LROSADsInner {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    public ServiceFuture<Void> postAsyncRelativeRetryNoPayloadAsync(@NonNull ServiceCallback<Void> serviceCallback) {
+    public ServiceFuture<Void> postAsyncRelativeRetryNoPayloadAsync(ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(postAsyncRelativeRetryNoPayloadAsync(), serviceCallback);
     }
 
@@ -2647,7 +2646,7 @@ public final class LROSADsInner {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    public ServiceFuture<Void> postAsyncRelativeRetryNoPayloadAsync(ProductInner product, @NonNull ServiceCallback<Void> serviceCallback) {
+    public ServiceFuture<Void> postAsyncRelativeRetryNoPayloadAsync(ProductInner product, ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(postAsyncRelativeRetryNoPayloadAsync(product), serviceCallback);
     }
 
@@ -2693,7 +2692,7 @@ public final class LROSADsInner {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;ProductInner&gt;} object.
      */
-    public ServiceFuture<ProductInner> beginPut200InvalidJsonAsync(@NonNull ServiceCallback<ProductInner> serviceCallback) {
+    public ServiceFuture<ProductInner> beginPut200InvalidJsonAsync(ServiceCallback<ProductInner> serviceCallback) {
         return ServiceFutureUtil.fromLRO(beginPut200InvalidJsonAsync(), serviceCallback);
     }
 
@@ -2727,7 +2726,7 @@ public final class LROSADsInner {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;ProductInner&gt;} object.
      */
-    public ServiceFuture<ProductInner> beginPut200InvalidJsonAsync(ProductInner product, @NonNull ServiceCallback<ProductInner> serviceCallback) {
+    public ServiceFuture<ProductInner> beginPut200InvalidJsonAsync(ProductInner product, ServiceCallback<ProductInner> serviceCallback) {
         return ServiceFutureUtil.fromLRO(beginPut200InvalidJsonAsync(product), serviceCallback);
     }
 
@@ -2761,7 +2760,7 @@ public final class LROSADsInner {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;ProductInner&gt;} object.
      */
-    public ServiceFuture<ProductInner> put200InvalidJsonAsync(@NonNull ServiceCallback<ProductInner> serviceCallback) {
+    public ServiceFuture<ProductInner> put200InvalidJsonAsync(ServiceCallback<ProductInner> serviceCallback) {
         return ServiceFuture.fromBody(put200InvalidJsonAsync(), serviceCallback);
     }
 
@@ -2814,7 +2813,7 @@ public final class LROSADsInner {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;ProductInner&gt;} object.
      */
-    public ServiceFuture<ProductInner> put200InvalidJsonAsync(ProductInner product, @NonNull ServiceCallback<ProductInner> serviceCallback) {
+    public ServiceFuture<ProductInner> put200InvalidJsonAsync(ProductInner product, ServiceCallback<ProductInner> serviceCallback) {
         return ServiceFuture.fromBody(put200InvalidJsonAsync(product), serviceCallback);
     }
 
@@ -2868,7 +2867,7 @@ public final class LROSADsInner {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;ProductInner&gt;} object.
      */
-    public ServiceFuture<ProductInner> beginPutAsyncRelativeRetryInvalidHeaderAsync(@NonNull ServiceCallback<ProductInner> serviceCallback) {
+    public ServiceFuture<ProductInner> beginPutAsyncRelativeRetryInvalidHeaderAsync(ServiceCallback<ProductInner> serviceCallback) {
         return ServiceFutureUtil.fromLRO(beginPutAsyncRelativeRetryInvalidHeaderAsync(), serviceCallback);
     }
 
@@ -2902,7 +2901,7 @@ public final class LROSADsInner {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;ProductInner&gt;} object.
      */
-    public ServiceFuture<ProductInner> beginPutAsyncRelativeRetryInvalidHeaderAsync(ProductInner product, @NonNull ServiceCallback<ProductInner> serviceCallback) {
+    public ServiceFuture<ProductInner> beginPutAsyncRelativeRetryInvalidHeaderAsync(ProductInner product, ServiceCallback<ProductInner> serviceCallback) {
         return ServiceFutureUtil.fromLRO(beginPutAsyncRelativeRetryInvalidHeaderAsync(product), serviceCallback);
     }
 
@@ -2936,7 +2935,7 @@ public final class LROSADsInner {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;ProductInner&gt;} object.
      */
-    public ServiceFuture<ProductInner> putAsyncRelativeRetryInvalidHeaderAsync(@NonNull ServiceCallback<ProductInner> serviceCallback) {
+    public ServiceFuture<ProductInner> putAsyncRelativeRetryInvalidHeaderAsync(ServiceCallback<ProductInner> serviceCallback) {
         return ServiceFuture.fromBody(putAsyncRelativeRetryInvalidHeaderAsync(), serviceCallback);
     }
 
@@ -2989,7 +2988,7 @@ public final class LROSADsInner {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;ProductInner&gt;} object.
      */
-    public ServiceFuture<ProductInner> putAsyncRelativeRetryInvalidHeaderAsync(ProductInner product, @NonNull ServiceCallback<ProductInner> serviceCallback) {
+    public ServiceFuture<ProductInner> putAsyncRelativeRetryInvalidHeaderAsync(ProductInner product, ServiceCallback<ProductInner> serviceCallback) {
         return ServiceFuture.fromBody(putAsyncRelativeRetryInvalidHeaderAsync(product), serviceCallback);
     }
 
@@ -3043,7 +3042,7 @@ public final class LROSADsInner {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;ProductInner&gt;} object.
      */
-    public ServiceFuture<ProductInner> beginPutAsyncRelativeRetryInvalidJsonPollingAsync(@NonNull ServiceCallback<ProductInner> serviceCallback) {
+    public ServiceFuture<ProductInner> beginPutAsyncRelativeRetryInvalidJsonPollingAsync(ServiceCallback<ProductInner> serviceCallback) {
         return ServiceFutureUtil.fromLRO(beginPutAsyncRelativeRetryInvalidJsonPollingAsync(), serviceCallback);
     }
 
@@ -3077,7 +3076,7 @@ public final class LROSADsInner {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;ProductInner&gt;} object.
      */
-    public ServiceFuture<ProductInner> beginPutAsyncRelativeRetryInvalidJsonPollingAsync(ProductInner product, @NonNull ServiceCallback<ProductInner> serviceCallback) {
+    public ServiceFuture<ProductInner> beginPutAsyncRelativeRetryInvalidJsonPollingAsync(ProductInner product, ServiceCallback<ProductInner> serviceCallback) {
         return ServiceFutureUtil.fromLRO(beginPutAsyncRelativeRetryInvalidJsonPollingAsync(product), serviceCallback);
     }
 
@@ -3111,7 +3110,7 @@ public final class LROSADsInner {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;ProductInner&gt;} object.
      */
-    public ServiceFuture<ProductInner> putAsyncRelativeRetryInvalidJsonPollingAsync(@NonNull ServiceCallback<ProductInner> serviceCallback) {
+    public ServiceFuture<ProductInner> putAsyncRelativeRetryInvalidJsonPollingAsync(ServiceCallback<ProductInner> serviceCallback) {
         return ServiceFuture.fromBody(putAsyncRelativeRetryInvalidJsonPollingAsync(), serviceCallback);
     }
 
@@ -3164,7 +3163,7 @@ public final class LROSADsInner {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;ProductInner&gt;} object.
      */
-    public ServiceFuture<ProductInner> putAsyncRelativeRetryInvalidJsonPollingAsync(ProductInner product, @NonNull ServiceCallback<ProductInner> serviceCallback) {
+    public ServiceFuture<ProductInner> putAsyncRelativeRetryInvalidJsonPollingAsync(ProductInner product, ServiceCallback<ProductInner> serviceCallback) {
         return ServiceFuture.fromBody(putAsyncRelativeRetryInvalidJsonPollingAsync(product), serviceCallback);
     }
 
@@ -3217,7 +3216,7 @@ public final class LROSADsInner {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    public ServiceFuture<Void> beginDelete202RetryInvalidHeaderAsync(@NonNull ServiceCallback<Void> serviceCallback) {
+    public ServiceFuture<Void> beginDelete202RetryInvalidHeaderAsync(ServiceCallback<Void> serviceCallback) {
         return ServiceFutureUtil.fromLRO(beginDelete202RetryInvalidHeaderAsync(), serviceCallback);
     }
 
@@ -3247,7 +3246,7 @@ public final class LROSADsInner {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    public ServiceFuture<Void> delete202RetryInvalidHeaderAsync(@NonNull ServiceCallback<Void> serviceCallback) {
+    public ServiceFuture<Void> delete202RetryInvalidHeaderAsync(ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(delete202RetryInvalidHeaderAsync(), serviceCallback);
     }
 
@@ -3287,7 +3286,7 @@ public final class LROSADsInner {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    public ServiceFuture<Void> beginDeleteAsyncRelativeRetryInvalidHeaderAsync(@NonNull ServiceCallback<Void> serviceCallback) {
+    public ServiceFuture<Void> beginDeleteAsyncRelativeRetryInvalidHeaderAsync(ServiceCallback<Void> serviceCallback) {
         return ServiceFutureUtil.fromLRO(beginDeleteAsyncRelativeRetryInvalidHeaderAsync(), serviceCallback);
     }
 
@@ -3317,7 +3316,7 @@ public final class LROSADsInner {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    public ServiceFuture<Void> deleteAsyncRelativeRetryInvalidHeaderAsync(@NonNull ServiceCallback<Void> serviceCallback) {
+    public ServiceFuture<Void> deleteAsyncRelativeRetryInvalidHeaderAsync(ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(deleteAsyncRelativeRetryInvalidHeaderAsync(), serviceCallback);
     }
 
@@ -3357,7 +3356,7 @@ public final class LROSADsInner {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    public ServiceFuture<Void> beginDeleteAsyncRelativeRetryInvalidJsonPollingAsync(@NonNull ServiceCallback<Void> serviceCallback) {
+    public ServiceFuture<Void> beginDeleteAsyncRelativeRetryInvalidJsonPollingAsync(ServiceCallback<Void> serviceCallback) {
         return ServiceFutureUtil.fromLRO(beginDeleteAsyncRelativeRetryInvalidJsonPollingAsync(), serviceCallback);
     }
 
@@ -3387,7 +3386,7 @@ public final class LROSADsInner {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    public ServiceFuture<Void> deleteAsyncRelativeRetryInvalidJsonPollingAsync(@NonNull ServiceCallback<Void> serviceCallback) {
+    public ServiceFuture<Void> deleteAsyncRelativeRetryInvalidJsonPollingAsync(ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(deleteAsyncRelativeRetryInvalidJsonPollingAsync(), serviceCallback);
     }
 
@@ -3427,7 +3426,7 @@ public final class LROSADsInner {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    public ServiceFuture<Void> beginPost202RetryInvalidHeaderAsync(@NonNull ServiceCallback<Void> serviceCallback) {
+    public ServiceFuture<Void> beginPost202RetryInvalidHeaderAsync(ServiceCallback<Void> serviceCallback) {
         return ServiceFutureUtil.fromLRO(beginPost202RetryInvalidHeaderAsync(), serviceCallback);
     }
 
@@ -3460,7 +3459,7 @@ public final class LROSADsInner {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    public ServiceFuture<Void> beginPost202RetryInvalidHeaderAsync(ProductInner product, @NonNull ServiceCallback<Void> serviceCallback) {
+    public ServiceFuture<Void> beginPost202RetryInvalidHeaderAsync(ProductInner product, ServiceCallback<Void> serviceCallback) {
         return ServiceFutureUtil.fromLRO(beginPost202RetryInvalidHeaderAsync(product), serviceCallback);
     }
 
@@ -3493,7 +3492,7 @@ public final class LROSADsInner {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    public ServiceFuture<Void> post202RetryInvalidHeaderAsync(@NonNull ServiceCallback<Void> serviceCallback) {
+    public ServiceFuture<Void> post202RetryInvalidHeaderAsync(ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(post202RetryInvalidHeaderAsync(), serviceCallback);
     }
 
@@ -3537,7 +3536,7 @@ public final class LROSADsInner {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    public ServiceFuture<Void> post202RetryInvalidHeaderAsync(ProductInner product, @NonNull ServiceCallback<Void> serviceCallback) {
+    public ServiceFuture<Void> post202RetryInvalidHeaderAsync(ProductInner product, ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(post202RetryInvalidHeaderAsync(product), serviceCallback);
     }
 
@@ -3582,7 +3581,7 @@ public final class LROSADsInner {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    public ServiceFuture<Void> beginPostAsyncRelativeRetryInvalidHeaderAsync(@NonNull ServiceCallback<Void> serviceCallback) {
+    public ServiceFuture<Void> beginPostAsyncRelativeRetryInvalidHeaderAsync(ServiceCallback<Void> serviceCallback) {
         return ServiceFutureUtil.fromLRO(beginPostAsyncRelativeRetryInvalidHeaderAsync(), serviceCallback);
     }
 
@@ -3615,7 +3614,7 @@ public final class LROSADsInner {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    public ServiceFuture<Void> beginPostAsyncRelativeRetryInvalidHeaderAsync(ProductInner product, @NonNull ServiceCallback<Void> serviceCallback) {
+    public ServiceFuture<Void> beginPostAsyncRelativeRetryInvalidHeaderAsync(ProductInner product, ServiceCallback<Void> serviceCallback) {
         return ServiceFutureUtil.fromLRO(beginPostAsyncRelativeRetryInvalidHeaderAsync(product), serviceCallback);
     }
 
@@ -3648,7 +3647,7 @@ public final class LROSADsInner {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    public ServiceFuture<Void> postAsyncRelativeRetryInvalidHeaderAsync(@NonNull ServiceCallback<Void> serviceCallback) {
+    public ServiceFuture<Void> postAsyncRelativeRetryInvalidHeaderAsync(ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(postAsyncRelativeRetryInvalidHeaderAsync(), serviceCallback);
     }
 
@@ -3692,7 +3691,7 @@ public final class LROSADsInner {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    public ServiceFuture<Void> postAsyncRelativeRetryInvalidHeaderAsync(ProductInner product, @NonNull ServiceCallback<Void> serviceCallback) {
+    public ServiceFuture<Void> postAsyncRelativeRetryInvalidHeaderAsync(ProductInner product, ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(postAsyncRelativeRetryInvalidHeaderAsync(product), serviceCallback);
     }
 
@@ -3737,7 +3736,7 @@ public final class LROSADsInner {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    public ServiceFuture<Void> beginPostAsyncRelativeRetryInvalidJsonPollingAsync(@NonNull ServiceCallback<Void> serviceCallback) {
+    public ServiceFuture<Void> beginPostAsyncRelativeRetryInvalidJsonPollingAsync(ServiceCallback<Void> serviceCallback) {
         return ServiceFutureUtil.fromLRO(beginPostAsyncRelativeRetryInvalidJsonPollingAsync(), serviceCallback);
     }
 
@@ -3770,7 +3769,7 @@ public final class LROSADsInner {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    public ServiceFuture<Void> beginPostAsyncRelativeRetryInvalidJsonPollingAsync(ProductInner product, @NonNull ServiceCallback<Void> serviceCallback) {
+    public ServiceFuture<Void> beginPostAsyncRelativeRetryInvalidJsonPollingAsync(ProductInner product, ServiceCallback<Void> serviceCallback) {
         return ServiceFutureUtil.fromLRO(beginPostAsyncRelativeRetryInvalidJsonPollingAsync(product), serviceCallback);
     }
 
@@ -3803,7 +3802,7 @@ public final class LROSADsInner {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    public ServiceFuture<Void> postAsyncRelativeRetryInvalidJsonPollingAsync(@NonNull ServiceCallback<Void> serviceCallback) {
+    public ServiceFuture<Void> postAsyncRelativeRetryInvalidJsonPollingAsync(ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(postAsyncRelativeRetryInvalidJsonPollingAsync(), serviceCallback);
     }
 
@@ -3847,7 +3846,7 @@ public final class LROSADsInner {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    public ServiceFuture<Void> postAsyncRelativeRetryInvalidJsonPollingAsync(ProductInner product, @NonNull ServiceCallback<Void> serviceCallback) {
+    public ServiceFuture<Void> postAsyncRelativeRetryInvalidJsonPollingAsync(ProductInner product, ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(postAsyncRelativeRetryInvalidJsonPollingAsync(product), serviceCallback);
     }
 

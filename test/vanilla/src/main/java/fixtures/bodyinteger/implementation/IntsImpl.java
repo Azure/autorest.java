@@ -155,7 +155,7 @@ public final class IntsImpl implements Ints {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Integer&gt;} object.
      */
-    public ServiceFuture<Integer> getNullAsync(@NonNull ServiceCallback<Integer> serviceCallback) {
+    public ServiceFuture<Integer> getNullAsync(ServiceCallback<Integer> serviceCallback) {
         return ServiceFuture.fromBody(getNullAsync(), serviceCallback);
     }
 
@@ -204,7 +204,7 @@ public final class IntsImpl implements Ints {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Integer&gt;} object.
      */
-    public ServiceFuture<Integer> getInvalidAsync(@NonNull ServiceCallback<Integer> serviceCallback) {
+    public ServiceFuture<Integer> getInvalidAsync(ServiceCallback<Integer> serviceCallback) {
         return ServiceFuture.fromBody(getInvalidAsync(), serviceCallback);
     }
 
@@ -253,7 +253,7 @@ public final class IntsImpl implements Ints {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Integer&gt;} object.
      */
-    public ServiceFuture<Integer> getOverflowInt32Async(@NonNull ServiceCallback<Integer> serviceCallback) {
+    public ServiceFuture<Integer> getOverflowInt32Async(ServiceCallback<Integer> serviceCallback) {
         return ServiceFuture.fromBody(getOverflowInt32Async(), serviceCallback);
     }
 
@@ -302,7 +302,7 @@ public final class IntsImpl implements Ints {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Integer&gt;} object.
      */
-    public ServiceFuture<Integer> getUnderflowInt32Async(@NonNull ServiceCallback<Integer> serviceCallback) {
+    public ServiceFuture<Integer> getUnderflowInt32Async(ServiceCallback<Integer> serviceCallback) {
         return ServiceFuture.fromBody(getUnderflowInt32Async(), serviceCallback);
     }
 
@@ -351,7 +351,7 @@ public final class IntsImpl implements Ints {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Long&gt;} object.
      */
-    public ServiceFuture<Long> getOverflowInt64Async(@NonNull ServiceCallback<Long> serviceCallback) {
+    public ServiceFuture<Long> getOverflowInt64Async(ServiceCallback<Long> serviceCallback) {
         return ServiceFuture.fromBody(getOverflowInt64Async(), serviceCallback);
     }
 
@@ -400,7 +400,7 @@ public final class IntsImpl implements Ints {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Long&gt;} object.
      */
-    public ServiceFuture<Long> getUnderflowInt64Async(@NonNull ServiceCallback<Long> serviceCallback) {
+    public ServiceFuture<Long> getUnderflowInt64Async(ServiceCallback<Long> serviceCallback) {
         return ServiceFuture.fromBody(getUnderflowInt64Async(), serviceCallback);
     }
 
@@ -451,7 +451,7 @@ public final class IntsImpl implements Ints {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    public ServiceFuture<Void> putMax32Async(@NonNull int intBody, @NonNull ServiceCallback<Void> serviceCallback) {
+    public ServiceFuture<Void> putMax32Async(@NonNull int intBody, ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(putMax32Async(intBody), serviceCallback);
     }
 
@@ -498,7 +498,7 @@ public final class IntsImpl implements Ints {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    public ServiceFuture<Void> putMax64Async(@NonNull long intBody, @NonNull ServiceCallback<Void> serviceCallback) {
+    public ServiceFuture<Void> putMax64Async(@NonNull long intBody, ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(putMax64Async(intBody), serviceCallback);
     }
 
@@ -545,7 +545,7 @@ public final class IntsImpl implements Ints {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    public ServiceFuture<Void> putMin32Async(@NonNull int intBody, @NonNull ServiceCallback<Void> serviceCallback) {
+    public ServiceFuture<Void> putMin32Async(@NonNull int intBody, ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(putMin32Async(intBody), serviceCallback);
     }
 
@@ -592,7 +592,7 @@ public final class IntsImpl implements Ints {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    public ServiceFuture<Void> putMin64Async(@NonNull long intBody, @NonNull ServiceCallback<Void> serviceCallback) {
+    public ServiceFuture<Void> putMin64Async(@NonNull long intBody, ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(putMin64Async(intBody), serviceCallback);
     }
 
@@ -637,7 +637,7 @@ public final class IntsImpl implements Ints {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;DateTime&gt;} object.
      */
-    public ServiceFuture<DateTime> getUnixTimeAsync(@NonNull ServiceCallback<DateTime> serviceCallback) {
+    public ServiceFuture<DateTime> getUnixTimeAsync(ServiceCallback<DateTime> serviceCallback) {
         return ServiceFuture.fromBody(getUnixTimeAsync(), serviceCallback);
     }
 
@@ -688,7 +688,7 @@ public final class IntsImpl implements Ints {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    public ServiceFuture<Void> putUnixTimeDateAsync(@NonNull DateTime intBody, @NonNull ServiceCallback<Void> serviceCallback) {
+    public ServiceFuture<Void> putUnixTimeDateAsync(@NonNull DateTime intBody, ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(putUnixTimeDateAsync(intBody), serviceCallback);
     }
 
@@ -734,7 +734,7 @@ public final class IntsImpl implements Ints {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;DateTime&gt;} object.
      */
-    public ServiceFuture<DateTime> getInvalidUnixTimeAsync(@NonNull ServiceCallback<DateTime> serviceCallback) {
+    public ServiceFuture<DateTime> getInvalidUnixTimeAsync(ServiceCallback<DateTime> serviceCallback) {
         return ServiceFuture.fromBody(getInvalidUnixTimeAsync(), serviceCallback);
     }
 
@@ -783,7 +783,7 @@ public final class IntsImpl implements Ints {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;DateTime&gt;} object.
      */
-    public ServiceFuture<DateTime> getNullUnixTimeAsync(@NonNull ServiceCallback<DateTime> serviceCallback) {
+    public ServiceFuture<DateTime> getNullUnixTimeAsync(ServiceCallback<DateTime> serviceCallback) {
         return ServiceFuture.fromBody(getNullUnixTimeAsync(), serviceCallback);
     }
 

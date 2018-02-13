@@ -133,7 +133,7 @@ public final class Datetimerfc1123sImpl implements Datetimerfc1123s {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;DateTime&gt;} object.
      */
-    public ServiceFuture<DateTime> getNullAsync(@NonNull ServiceCallback<DateTime> serviceCallback) {
+    public ServiceFuture<DateTime> getNullAsync(ServiceCallback<DateTime> serviceCallback) {
         return ServiceFuture.fromBody(getNullAsync(), serviceCallback);
     }
 
@@ -182,7 +182,7 @@ public final class Datetimerfc1123sImpl implements Datetimerfc1123s {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;DateTime&gt;} object.
      */
-    public ServiceFuture<DateTime> getInvalidAsync(@NonNull ServiceCallback<DateTime> serviceCallback) {
+    public ServiceFuture<DateTime> getInvalidAsync(ServiceCallback<DateTime> serviceCallback) {
         return ServiceFuture.fromBody(getInvalidAsync(), serviceCallback);
     }
 
@@ -231,7 +231,7 @@ public final class Datetimerfc1123sImpl implements Datetimerfc1123s {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;DateTime&gt;} object.
      */
-    public ServiceFuture<DateTime> getOverflowAsync(@NonNull ServiceCallback<DateTime> serviceCallback) {
+    public ServiceFuture<DateTime> getOverflowAsync(ServiceCallback<DateTime> serviceCallback) {
         return ServiceFuture.fromBody(getOverflowAsync(), serviceCallback);
     }
 
@@ -280,7 +280,7 @@ public final class Datetimerfc1123sImpl implements Datetimerfc1123s {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;DateTime&gt;} object.
      */
-    public ServiceFuture<DateTime> getUnderflowAsync(@NonNull ServiceCallback<DateTime> serviceCallback) {
+    public ServiceFuture<DateTime> getUnderflowAsync(ServiceCallback<DateTime> serviceCallback) {
         return ServiceFuture.fromBody(getUnderflowAsync(), serviceCallback);
     }
 
@@ -331,7 +331,7 @@ public final class Datetimerfc1123sImpl implements Datetimerfc1123s {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    public ServiceFuture<Void> putUtcMaxDateTimeAsync(@NonNull DateTime datetimeBody, @NonNull ServiceCallback<Void> serviceCallback) {
+    public ServiceFuture<Void> putUtcMaxDateTimeAsync(@NonNull DateTime datetimeBody, ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(putUtcMaxDateTimeAsync(datetimeBody), serviceCallback);
     }
 
@@ -380,7 +380,7 @@ public final class Datetimerfc1123sImpl implements Datetimerfc1123s {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;DateTime&gt;} object.
      */
-    public ServiceFuture<DateTime> getUtcLowercaseMaxDateTimeAsync(@NonNull ServiceCallback<DateTime> serviceCallback) {
+    public ServiceFuture<DateTime> getUtcLowercaseMaxDateTimeAsync(ServiceCallback<DateTime> serviceCallback) {
         return ServiceFuture.fromBody(getUtcLowercaseMaxDateTimeAsync(), serviceCallback);
     }
 
@@ -429,7 +429,7 @@ public final class Datetimerfc1123sImpl implements Datetimerfc1123s {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;DateTime&gt;} object.
      */
-    public ServiceFuture<DateTime> getUtcUppercaseMaxDateTimeAsync(@NonNull ServiceCallback<DateTime> serviceCallback) {
+    public ServiceFuture<DateTime> getUtcUppercaseMaxDateTimeAsync(ServiceCallback<DateTime> serviceCallback) {
         return ServiceFuture.fromBody(getUtcUppercaseMaxDateTimeAsync(), serviceCallback);
     }
 
@@ -480,7 +480,7 @@ public final class Datetimerfc1123sImpl implements Datetimerfc1123s {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    public ServiceFuture<Void> putUtcMinDateTimeAsync(@NonNull DateTime datetimeBody, @NonNull ServiceCallback<Void> serviceCallback) {
+    public ServiceFuture<Void> putUtcMinDateTimeAsync(@NonNull DateTime datetimeBody, ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(putUtcMinDateTimeAsync(datetimeBody), serviceCallback);
     }
 
@@ -529,7 +529,7 @@ public final class Datetimerfc1123sImpl implements Datetimerfc1123s {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;DateTime&gt;} object.
      */
-    public ServiceFuture<DateTime> getUtcMinDateTimeAsync(@NonNull ServiceCallback<DateTime> serviceCallback) {
+    public ServiceFuture<DateTime> getUtcMinDateTimeAsync(ServiceCallback<DateTime> serviceCallback) {
         return ServiceFuture.fromBody(getUtcMinDateTimeAsync(), serviceCallback);
     }
 

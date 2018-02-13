@@ -19,7 +19,6 @@ import fixtures.azureresource.models.ResourceCollection;
 import io.reactivex.Completable;
 import io.reactivex.Maybe;
 import io.reactivex.Single;
-import io.reactivex.annotations.NonNull;
 import java.util.List;
 import java.util.Map;
 
@@ -87,7 +86,7 @@ public interface AutoRestResourceFlatteningTestService {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    ServiceFuture<Void> putArrayAsync(@NonNull ServiceCallback<Void> serviceCallback);
+    ServiceFuture<Void> putArrayAsync(ServiceCallback<Void> serviceCallback);
 
     /**
      * Put External Resource as an Array.
@@ -121,7 +120,7 @@ public interface AutoRestResourceFlatteningTestService {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    ServiceFuture<Void> putArrayAsync(List<Resource> resourceArray, @NonNull ServiceCallback<Void> serviceCallback);
+    ServiceFuture<Void> putArrayAsync(List<Resource> resourceArray, ServiceCallback<Void> serviceCallback);
 
     /**
      * Put External Resource as an Array.
@@ -157,7 +156,7 @@ public interface AutoRestResourceFlatteningTestService {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;List&lt;FlattenedProduct&gt;&gt;} object.
      */
-    ServiceFuture<List<FlattenedProduct>> getArrayAsync(@NonNull ServiceCallback<List<FlattenedProduct>> serviceCallback);
+    ServiceFuture<List<FlattenedProduct>> getArrayAsync(ServiceCallback<List<FlattenedProduct>> serviceCallback);
 
     /**
      * Get External Resource as an Array.
@@ -188,7 +187,7 @@ public interface AutoRestResourceFlatteningTestService {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    ServiceFuture<Void> putDictionaryAsync(@NonNull ServiceCallback<Void> serviceCallback);
+    ServiceFuture<Void> putDictionaryAsync(ServiceCallback<Void> serviceCallback);
 
     /**
      * Put External Resource as a Dictionary.
@@ -222,7 +221,7 @@ public interface AutoRestResourceFlatteningTestService {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    ServiceFuture<Void> putDictionaryAsync(Map<String, FlattenedProduct> resourceDictionary, @NonNull ServiceCallback<Void> serviceCallback);
+    ServiceFuture<Void> putDictionaryAsync(Map<String, FlattenedProduct> resourceDictionary, ServiceCallback<Void> serviceCallback);
 
     /**
      * Put External Resource as a Dictionary.
@@ -258,7 +257,7 @@ public interface AutoRestResourceFlatteningTestService {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Map&lt;String, FlattenedProduct&gt;&gt;} object.
      */
-    ServiceFuture<Map<String, FlattenedProduct>> getDictionaryAsync(@NonNull ServiceCallback<Map<String, FlattenedProduct>> serviceCallback);
+    ServiceFuture<Map<String, FlattenedProduct>> getDictionaryAsync(ServiceCallback<Map<String, FlattenedProduct>> serviceCallback);
 
     /**
      * Get External Resource as a Dictionary.
@@ -289,7 +288,7 @@ public interface AutoRestResourceFlatteningTestService {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    ServiceFuture<Void> putResourceCollectionAsync(@NonNull ServiceCallback<Void> serviceCallback);
+    ServiceFuture<Void> putResourceCollectionAsync(ServiceCallback<Void> serviceCallback);
 
     /**
      * Put External Resource as a ResourceCollection.
@@ -323,7 +322,7 @@ public interface AutoRestResourceFlatteningTestService {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    ServiceFuture<Void> putResourceCollectionAsync(ResourceCollection resourceComplexObject, @NonNull ServiceCallback<Void> serviceCallback);
+    ServiceFuture<Void> putResourceCollectionAsync(ResourceCollection resourceComplexObject, ServiceCallback<Void> serviceCallback);
 
     /**
      * Put External Resource as a ResourceCollection.
@@ -359,7 +358,7 @@ public interface AutoRestResourceFlatteningTestService {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;ResourceCollection&gt;} object.
      */
-    ServiceFuture<ResourceCollection> getResourceCollectionAsync(@NonNull ServiceCallback<ResourceCollection> serviceCallback);
+    ServiceFuture<ResourceCollection> getResourceCollectionAsync(ServiceCallback<ResourceCollection> serviceCallback);
 
     /**
      * Get External Resource as a ResourceCollection.

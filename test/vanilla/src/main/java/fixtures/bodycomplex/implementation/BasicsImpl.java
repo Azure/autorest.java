@@ -111,7 +111,7 @@ public final class BasicsImpl implements Basics {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Basic&gt;} object.
      */
-    public ServiceFuture<Basic> getValidAsync(@NonNull ServiceCallback<Basic> serviceCallback) {
+    public ServiceFuture<Basic> getValidAsync(ServiceCallback<Basic> serviceCallback) {
         return ServiceFuture.fromBody(getValidAsync(), serviceCallback);
     }
 
@@ -162,7 +162,7 @@ public final class BasicsImpl implements Basics {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    public ServiceFuture<Void> putValidAsync(@NonNull Basic complexBody, @NonNull ServiceCallback<Void> serviceCallback) {
+    public ServiceFuture<Void> putValidAsync(@NonNull Basic complexBody, ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(putValidAsync(complexBody), serviceCallback);
     }
 
@@ -211,7 +211,7 @@ public final class BasicsImpl implements Basics {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Basic&gt;} object.
      */
-    public ServiceFuture<Basic> getInvalidAsync(@NonNull ServiceCallback<Basic> serviceCallback) {
+    public ServiceFuture<Basic> getInvalidAsync(ServiceCallback<Basic> serviceCallback) {
         return ServiceFuture.fromBody(getInvalidAsync(), serviceCallback);
     }
 
@@ -260,7 +260,7 @@ public final class BasicsImpl implements Basics {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Basic&gt;} object.
      */
-    public ServiceFuture<Basic> getEmptyAsync(@NonNull ServiceCallback<Basic> serviceCallback) {
+    public ServiceFuture<Basic> getEmptyAsync(ServiceCallback<Basic> serviceCallback) {
         return ServiceFuture.fromBody(getEmptyAsync(), serviceCallback);
     }
 
@@ -309,7 +309,7 @@ public final class BasicsImpl implements Basics {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Basic&gt;} object.
      */
-    public ServiceFuture<Basic> getNullAsync(@NonNull ServiceCallback<Basic> serviceCallback) {
+    public ServiceFuture<Basic> getNullAsync(ServiceCallback<Basic> serviceCallback) {
         return ServiceFuture.fromBody(getNullAsync(), serviceCallback);
     }
 
@@ -358,7 +358,7 @@ public final class BasicsImpl implements Basics {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Basic&gt;} object.
      */
-    public ServiceFuture<Basic> getNotProvidedAsync(@NonNull ServiceCallback<Basic> serviceCallback) {
+    public ServiceFuture<Basic> getNotProvidedAsync(ServiceCallback<Basic> serviceCallback) {
         return ServiceFuture.fromBody(getNotProvidedAsync(), serviceCallback);
     }
 

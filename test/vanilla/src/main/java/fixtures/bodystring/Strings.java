@@ -39,7 +39,7 @@ public interface Strings {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;String&gt;} object.
      */
-    ServiceFuture<String> getNullAsync(@NonNull ServiceCallback<String> serviceCallback);
+    ServiceFuture<String> getNullAsync(ServiceCallback<String> serviceCallback);
 
     /**
      * Get null string value value.
@@ -70,7 +70,7 @@ public interface Strings {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    ServiceFuture<Void> putNullAsync(@NonNull ServiceCallback<Void> serviceCallback);
+    ServiceFuture<Void> putNullAsync(ServiceCallback<Void> serviceCallback);
 
     /**
      * Set string value null.
@@ -104,7 +104,7 @@ public interface Strings {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    ServiceFuture<Void> putNullAsync(String stringBody, @NonNull ServiceCallback<Void> serviceCallback);
+    ServiceFuture<Void> putNullAsync(String stringBody, ServiceCallback<Void> serviceCallback);
 
     /**
      * Set string value null.
@@ -140,7 +140,7 @@ public interface Strings {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;String&gt;} object.
      */
-    ServiceFuture<String> getEmptyAsync(@NonNull ServiceCallback<String> serviceCallback);
+    ServiceFuture<String> getEmptyAsync(ServiceCallback<String> serviceCallback);
 
     /**
      * Get empty string value value ''.
@@ -174,7 +174,7 @@ public interface Strings {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    ServiceFuture<Void> putEmptyAsync(@NonNull String stringBody, @NonNull ServiceCallback<Void> serviceCallback);
+    ServiceFuture<Void> putEmptyAsync(@NonNull String stringBody, ServiceCallback<Void> serviceCallback);
 
     /**
      * Set string value empty ''.
@@ -210,7 +210,7 @@ public interface Strings {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;String&gt;} object.
      */
-    ServiceFuture<String> getMbcsAsync(@NonNull ServiceCallback<String> serviceCallback);
+    ServiceFuture<String> getMbcsAsync(ServiceCallback<String> serviceCallback);
 
     /**
      * Get mbcs string value '啊齄丂狛狜隣郎隣兀﨩ˊ〞〡￤℡㈱‐ー﹡﹢﹫、〓ⅰⅹ⒈€㈠㈩ⅠⅫ！￣ぁんァヶΑ︴АЯаяāɡㄅㄩ─╋︵﹄︻︱︳︴ⅰⅹɑɡ〇〾⿻⺁䜣€'.
@@ -244,7 +244,7 @@ public interface Strings {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    ServiceFuture<Void> putMbcsAsync(@NonNull String stringBody, @NonNull ServiceCallback<Void> serviceCallback);
+    ServiceFuture<Void> putMbcsAsync(@NonNull String stringBody, ServiceCallback<Void> serviceCallback);
 
     /**
      * Set string value mbcs '啊齄丂狛狜隣郎隣兀﨩ˊ〞〡￤℡㈱‐ー﹡﹢﹫、〓ⅰⅹ⒈€㈠㈩ⅠⅫ！￣ぁんァヶΑ︴АЯаяāɡㄅㄩ─╋︵﹄︻︱︳︴ⅰⅹɑɡ〇〾⿻⺁䜣€'.
@@ -280,7 +280,7 @@ public interface Strings {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;String&gt;} object.
      */
-    ServiceFuture<String> getWhitespaceAsync(@NonNull ServiceCallback<String> serviceCallback);
+    ServiceFuture<String> getWhitespaceAsync(ServiceCallback<String> serviceCallback);
 
     /**
      * Get string value with leading and trailing whitespace '&lt;tab&gt;&lt;space&gt;&lt;space&gt;Now is the time for all good men to come to the aid of their country&lt;tab&gt;&lt;space&gt;&lt;space&gt;'.
@@ -314,7 +314,7 @@ public interface Strings {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    ServiceFuture<Void> putWhitespaceAsync(@NonNull String stringBody, @NonNull ServiceCallback<Void> serviceCallback);
+    ServiceFuture<Void> putWhitespaceAsync(@NonNull String stringBody, ServiceCallback<Void> serviceCallback);
 
     /**
      * Set String value with leading and trailing whitespace '&lt;tab&gt;&lt;space&gt;&lt;space&gt;Now is the time for all good men to come to the aid of their country&lt;tab&gt;&lt;space&gt;&lt;space&gt;'.
@@ -350,7 +350,7 @@ public interface Strings {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;String&gt;} object.
      */
-    ServiceFuture<String> getNotProvidedAsync(@NonNull ServiceCallback<String> serviceCallback);
+    ServiceFuture<String> getNotProvidedAsync(ServiceCallback<String> serviceCallback);
 
     /**
      * Get String value when no string value is sent in response payload.
@@ -382,7 +382,7 @@ public interface Strings {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;byte[]&gt;} object.
      */
-    ServiceFuture<byte[]> getBase64EncodedAsync(@NonNull ServiceCallback<byte[]> serviceCallback);
+    ServiceFuture<byte[]> getBase64EncodedAsync(ServiceCallback<byte[]> serviceCallback);
 
     /**
      * Get value that is base64 encoded.
@@ -414,7 +414,7 @@ public interface Strings {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;byte[]&gt;} object.
      */
-    ServiceFuture<byte[]> getBase64UrlEncodedAsync(@NonNull ServiceCallback<byte[]> serviceCallback);
+    ServiceFuture<byte[]> getBase64UrlEncodedAsync(ServiceCallback<byte[]> serviceCallback);
 
     /**
      * Get value that is base64url encoded.
@@ -448,7 +448,7 @@ public interface Strings {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    ServiceFuture<Void> putBase64UrlEncodedAsync(@NonNull byte[] stringBody, @NonNull ServiceCallback<Void> serviceCallback);
+    ServiceFuture<Void> putBase64UrlEncodedAsync(@NonNull byte[] stringBody, ServiceCallback<Void> serviceCallback);
 
     /**
      * Put value that is base64url encoded.
@@ -484,7 +484,7 @@ public interface Strings {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;byte[]&gt;} object.
      */
-    ServiceFuture<byte[]> getNullBase64UrlEncodedAsync(@NonNull ServiceCallback<byte[]> serviceCallback);
+    ServiceFuture<byte[]> getNullBase64UrlEncodedAsync(ServiceCallback<byte[]> serviceCallback);
 
     /**
      * Get null value that is expected to be base64url encoded.
