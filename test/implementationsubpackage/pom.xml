@@ -12,11 +12,11 @@
     <relativePath>../../pom.xml</relativePath>
   </parent>
 
-  <artifactId>nonnullannotations-codegen-tests</artifactId>
+  <artifactId>implementationsubpackage-codegen-tests</artifactId>
   <packaging>jar</packaging>
 
-  <name>AutoRest Java Code Generator Tests for non-null-annotations flag</name>
-  <description>This package contains the tests for the Azure Java code generator for the non-null-annotations flag.</description>
+  <name>AutoRest Java Code Generator Tests for implementation-subpackage flag</name>
+  <description>This package contains the tests for the Azure Java code generator for the implementation-subpackage flag.</description>
   <url>https://github.com/Azure/autorest</url>
 
   <licenses>

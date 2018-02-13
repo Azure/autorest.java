@@ -1,5 +1,5 @@
 ###############################################
-# LEGACY 
+# LEGACY
 # Instead: have bunch of configuration files sitting in a well-known spot, discover them, feed them to AutoRest, done.
 
 rimraf = require "rimraf"
@@ -9,13 +9,13 @@ regenExpected = (opts,done) ->
   instances = keys.length
 
   outputDir = opts.outputDir
-  
+
   for kkey in keys
     optsMappingsValue = opts.mappings[kkey]
     key = kkey.trim().toLowerCase()
 
     namespace = key.replace(/\/|\./, '')
-    
+
     args = [
       "--java",
       "--output-folder=#{outputDir}",
@@ -161,9 +161,28 @@ task 'regenerate-implementationsubpackage-empty', '', (done) ->
       'BodyByte': 'body-byte.json'
     },
     'extraArguments': [
-      '--java.implementation-subpackage=\"\""
+      "--java.implementation-subpackage=''"
     ]
   },done
+  
+task 'regenerate-xml', '', (done) ->
+  outputDir = 'test/xml'
+
+  namespace = 'xml'
+
+  args = [
+    "--java",
+    "--output-folder=#{outputDir}",
+    "--license-header=MICROSOFT_MIT_NO_VERSION",
+    "--java.namespace=#{['Fixtures', namespace].join('.')}",
+    "--input-file=test/swagger/xml-service.json",
+    "--enable-xml=true"
+  ]
+
+  baseFolderPath = "#{outputDir}/src/main/java/fixtures/#{namespace}"
+  rimraf.sync baseFolderPath
+
+  autorest args, done
   return null
 
 regenerateTasks = [
@@ -175,6 +194,8 @@ regenerateTasks = [
   'regenerate-generateclientinterfaces',
   'regenerate-implementationsubpackage',
   'regenerate-implementationsubpackage-empty'
+  'regenerate-xml'
 ]
+
 task 'regenerate', "regenerate expected code for tests", regenerateTasks, (done) ->
   done();

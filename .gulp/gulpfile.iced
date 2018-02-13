@@ -1,7 +1,7 @@
 require './common.iced'
 
 # ==============================================================================
-# tasks required for this build 
+# tasks required for this build
 Tasks "dotnet"  # dotnet functions
 Tasks "regeneration"
 Tasks "publishing"
@@ -19,7 +19,7 @@ Import
 task 'init', "" ,(done)->
   Fail "YOU MUST HAVE NODEJS VERSION GREATER THAN 7.10.0" if semver.lt( process.versions.node , "7.10.0" )
   done()
-  
+
 # Run language-specific tests:
 task 'test', "", [], (done) ->
   await execute "dotnet test test/autorest.java.tests/autorest.java.tests.csproj", defer code, stderr, stdout
@@ -46,4 +46,4 @@ task 'testci', "more", [], (done) ->
   echo stderr
   echo stdout
   throw "Potentially unnoticed regression (see diff above)! Run `npm run regenerate`, then review and commit the changes." if stdout.length + stderr.length > 0
-  done() 
+  done()

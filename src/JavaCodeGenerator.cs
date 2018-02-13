@@ -1616,7 +1616,7 @@ namespace AutoRest.Java
                             modelImports.Add("com.fasterxml.jackson.annotation.JsonProperty");
                         }
 
-                        if (compositeTypeProperties.Any(p => p.ModelType is AutoRestSequenceType))
+                        if (compositeTypeProperties.Any(p => p.XmlIsWrapped))
                         {
                             modelImports.Add("com.fasterxml.jackson.annotation.JsonCreator");
                         }
@@ -2432,7 +2432,7 @@ namespace AutoRest.Java
                 foreach (ServiceModelProperty property in model.Properties)
                 {
                     string xmlWrapperClassName = propertyXmlWrapperClassName(property);
-                    if (settings.ShouldGenerateXmlSerialization && property.WireType is ListType)
+                    if (settings.ShouldGenerateXmlSerialization && property.IsXmlWrapper)
                     {
                         classBlock.PrivateStaticFinalClass(xmlWrapperClassName, innerClass =>
                         {
@@ -2462,12 +2462,16 @@ namespace AutoRest.Java
                         string localName = settings.ShouldGenerateXmlSerialization ? property.XmlName : property.SerializedName;
                         classBlock.Annotation($"JacksonXmlProperty(localName = \"{localName}\", isAttribute = true)");
                     }
+                    else if (settings.ShouldGenerateXmlSerialization && property.WireType is ListType && !property.IsXmlWrapper)
+                    {
+                        classBlock.Annotation($"JsonProperty(\"{property.XmlListElementName}\")");
+                    }
                     else if (!string.IsNullOrEmpty(property.AnnotationArguments))
                     {
                         classBlock.Annotation($"JsonProperty({property.AnnotationArguments})");
                     }
 
-                    if (settings.ShouldGenerateXmlSerialization && property.WireType is ListType)
+                    if (settings.ShouldGenerateXmlSerialization && property.IsXmlWrapper)
                     {
                         classBlock.PrivateMemberVariable($"{xmlWrapperClassName} {property.Name}");
                     }
@@ -2510,7 +2514,7 @@ namespace AutoRest.Java
                         string expression = $"this.{property.Name}";
                         if (sourceTypeName == targetTypeName)
                         {
-                            if (settings.ShouldGenerateXmlSerialization && propertyType is ListType)
+                            if (settings.ShouldGenerateXmlSerialization && property.IsXmlWrapper)
                             {
                                 methodBlock.Return($"this.{property.Name}.items");
                             }
@@ -2616,7 +2620,7 @@ namespace AutoRest.Java
                             }
                             else
                             {
-                                if (settings.ShouldGenerateXmlSerialization && propertyType is ListType)
+                                if (settings.ShouldGenerateXmlSerialization && property.IsXmlWrapper)
                                 {
                                     methodBlock.Line($"this.{property.Name} = new {propertyXmlWrapperClassName(property)}({property.Name});");
                                 }
