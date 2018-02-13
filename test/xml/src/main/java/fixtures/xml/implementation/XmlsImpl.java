@@ -105,7 +105,7 @@ public final class XmlsImpl implements Xmls {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Slideshow&gt;} object.
      */
-    public ServiceFuture<Slideshow> getSimpleAsync(@NonNull ServiceCallback<Slideshow> serviceCallback) {
+    public ServiceFuture<Slideshow> getSimpleAsync(ServiceCallback<Slideshow> serviceCallback) {
         return ServiceFuture.fromBody(getSimpleAsync(), serviceCallback);
     }
 
@@ -156,7 +156,7 @@ public final class XmlsImpl implements Xmls {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    public ServiceFuture<Void> putSimpleAsync(@NonNull Slideshow wrappedLists, @NonNull ServiceCallback<Void> serviceCallback) {
+    public ServiceFuture<Void> putSimpleAsync(@NonNull Slideshow wrappedLists, ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(putSimpleAsync(wrappedLists), serviceCallback);
     }
 
@@ -204,7 +204,7 @@ public final class XmlsImpl implements Xmls {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;AppleBarrel&gt;} object.
      */
-    public ServiceFuture<AppleBarrel> getWrappedListsAsync(@NonNull ServiceCallback<AppleBarrel> serviceCallback) {
+    public ServiceFuture<AppleBarrel> getWrappedListsAsync(ServiceCallback<AppleBarrel> serviceCallback) {
         return ServiceFuture.fromBody(getWrappedListsAsync(), serviceCallback);
     }
 
@@ -255,7 +255,7 @@ public final class XmlsImpl implements Xmls {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    public ServiceFuture<Void> putWrappedListsAsync(@NonNull AppleBarrel wrappedLists, @NonNull ServiceCallback<Void> serviceCallback) {
+    public ServiceFuture<Void> putWrappedListsAsync(@NonNull AppleBarrel wrappedLists, ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(putWrappedListsAsync(wrappedLists), serviceCallback);
     }
 
@@ -302,7 +302,7 @@ public final class XmlsImpl implements Xmls {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    public ServiceFuture<Void> getHeadersAsync(@NonNull ServiceCallback<Void> serviceCallback) {
+    public ServiceFuture<Void> getHeadersAsync(ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(getHeadersAsync(), serviceCallback);
     }
 

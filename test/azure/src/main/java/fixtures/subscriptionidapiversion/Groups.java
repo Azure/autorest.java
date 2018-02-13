@@ -42,7 +42,7 @@ public interface Groups {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;SampleResourceGroup&gt;} object.
      */
-    ServiceFuture<SampleResourceGroup> getSampleResourceGroupAsync(@NonNull String resourceGroupName, @NonNull ServiceCallback<SampleResourceGroup> serviceCallback);
+    ServiceFuture<SampleResourceGroup> getSampleResourceGroupAsync(@NonNull String resourceGroupName, ServiceCallback<SampleResourceGroup> serviceCallback);
 
     /**
      * Provides a resouce group with name 'testgroup101' and location 'West US'.

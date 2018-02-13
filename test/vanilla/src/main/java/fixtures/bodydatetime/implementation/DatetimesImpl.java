@@ -174,7 +174,7 @@ public final class DatetimesImpl implements Datetimes {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;DateTime&gt;} object.
      */
-    public ServiceFuture<DateTime> getNullAsync(@NonNull ServiceCallback<DateTime> serviceCallback) {
+    public ServiceFuture<DateTime> getNullAsync(ServiceCallback<DateTime> serviceCallback) {
         return ServiceFuture.fromBody(getNullAsync(), serviceCallback);
     }
 
@@ -223,7 +223,7 @@ public final class DatetimesImpl implements Datetimes {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;DateTime&gt;} object.
      */
-    public ServiceFuture<DateTime> getInvalidAsync(@NonNull ServiceCallback<DateTime> serviceCallback) {
+    public ServiceFuture<DateTime> getInvalidAsync(ServiceCallback<DateTime> serviceCallback) {
         return ServiceFuture.fromBody(getInvalidAsync(), serviceCallback);
     }
 
@@ -272,7 +272,7 @@ public final class DatetimesImpl implements Datetimes {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;DateTime&gt;} object.
      */
-    public ServiceFuture<DateTime> getOverflowAsync(@NonNull ServiceCallback<DateTime> serviceCallback) {
+    public ServiceFuture<DateTime> getOverflowAsync(ServiceCallback<DateTime> serviceCallback) {
         return ServiceFuture.fromBody(getOverflowAsync(), serviceCallback);
     }
 
@@ -321,7 +321,7 @@ public final class DatetimesImpl implements Datetimes {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;DateTime&gt;} object.
      */
-    public ServiceFuture<DateTime> getUnderflowAsync(@NonNull ServiceCallback<DateTime> serviceCallback) {
+    public ServiceFuture<DateTime> getUnderflowAsync(ServiceCallback<DateTime> serviceCallback) {
         return ServiceFuture.fromBody(getUnderflowAsync(), serviceCallback);
     }
 
@@ -372,7 +372,7 @@ public final class DatetimesImpl implements Datetimes {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    public ServiceFuture<Void> putUtcMaxDateTimeAsync(@NonNull DateTime datetimeBody, @NonNull ServiceCallback<Void> serviceCallback) {
+    public ServiceFuture<Void> putUtcMaxDateTimeAsync(@NonNull DateTime datetimeBody, ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(putUtcMaxDateTimeAsync(datetimeBody), serviceCallback);
     }
 
@@ -420,7 +420,7 @@ public final class DatetimesImpl implements Datetimes {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;DateTime&gt;} object.
      */
-    public ServiceFuture<DateTime> getUtcLowercaseMaxDateTimeAsync(@NonNull ServiceCallback<DateTime> serviceCallback) {
+    public ServiceFuture<DateTime> getUtcLowercaseMaxDateTimeAsync(ServiceCallback<DateTime> serviceCallback) {
         return ServiceFuture.fromBody(getUtcLowercaseMaxDateTimeAsync(), serviceCallback);
     }
 
@@ -469,7 +469,7 @@ public final class DatetimesImpl implements Datetimes {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;DateTime&gt;} object.
      */
-    public ServiceFuture<DateTime> getUtcUppercaseMaxDateTimeAsync(@NonNull ServiceCallback<DateTime> serviceCallback) {
+    public ServiceFuture<DateTime> getUtcUppercaseMaxDateTimeAsync(ServiceCallback<DateTime> serviceCallback) {
         return ServiceFuture.fromBody(getUtcUppercaseMaxDateTimeAsync(), serviceCallback);
     }
 
@@ -520,7 +520,7 @@ public final class DatetimesImpl implements Datetimes {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    public ServiceFuture<Void> putLocalPositiveOffsetMaxDateTimeAsync(@NonNull DateTime datetimeBody, @NonNull ServiceCallback<Void> serviceCallback) {
+    public ServiceFuture<Void> putLocalPositiveOffsetMaxDateTimeAsync(@NonNull DateTime datetimeBody, ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(putLocalPositiveOffsetMaxDateTimeAsync(datetimeBody), serviceCallback);
     }
 
@@ -568,7 +568,7 @@ public final class DatetimesImpl implements Datetimes {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;DateTime&gt;} object.
      */
-    public ServiceFuture<DateTime> getLocalPositiveOffsetLowercaseMaxDateTimeAsync(@NonNull ServiceCallback<DateTime> serviceCallback) {
+    public ServiceFuture<DateTime> getLocalPositiveOffsetLowercaseMaxDateTimeAsync(ServiceCallback<DateTime> serviceCallback) {
         return ServiceFuture.fromBody(getLocalPositiveOffsetLowercaseMaxDateTimeAsync(), serviceCallback);
     }
 
@@ -617,7 +617,7 @@ public final class DatetimesImpl implements Datetimes {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;DateTime&gt;} object.
      */
-    public ServiceFuture<DateTime> getLocalPositiveOffsetUppercaseMaxDateTimeAsync(@NonNull ServiceCallback<DateTime> serviceCallback) {
+    public ServiceFuture<DateTime> getLocalPositiveOffsetUppercaseMaxDateTimeAsync(ServiceCallback<DateTime> serviceCallback) {
         return ServiceFuture.fromBody(getLocalPositiveOffsetUppercaseMaxDateTimeAsync(), serviceCallback);
     }
 
@@ -668,7 +668,7 @@ public final class DatetimesImpl implements Datetimes {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    public ServiceFuture<Void> putLocalNegativeOffsetMaxDateTimeAsync(@NonNull DateTime datetimeBody, @NonNull ServiceCallback<Void> serviceCallback) {
+    public ServiceFuture<Void> putLocalNegativeOffsetMaxDateTimeAsync(@NonNull DateTime datetimeBody, ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(putLocalNegativeOffsetMaxDateTimeAsync(datetimeBody), serviceCallback);
     }
 
@@ -716,7 +716,7 @@ public final class DatetimesImpl implements Datetimes {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;DateTime&gt;} object.
      */
-    public ServiceFuture<DateTime> getLocalNegativeOffsetUppercaseMaxDateTimeAsync(@NonNull ServiceCallback<DateTime> serviceCallback) {
+    public ServiceFuture<DateTime> getLocalNegativeOffsetUppercaseMaxDateTimeAsync(ServiceCallback<DateTime> serviceCallback) {
         return ServiceFuture.fromBody(getLocalNegativeOffsetUppercaseMaxDateTimeAsync(), serviceCallback);
     }
 
@@ -765,7 +765,7 @@ public final class DatetimesImpl implements Datetimes {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;DateTime&gt;} object.
      */
-    public ServiceFuture<DateTime> getLocalNegativeOffsetLowercaseMaxDateTimeAsync(@NonNull ServiceCallback<DateTime> serviceCallback) {
+    public ServiceFuture<DateTime> getLocalNegativeOffsetLowercaseMaxDateTimeAsync(ServiceCallback<DateTime> serviceCallback) {
         return ServiceFuture.fromBody(getLocalNegativeOffsetLowercaseMaxDateTimeAsync(), serviceCallback);
     }
 
@@ -816,7 +816,7 @@ public final class DatetimesImpl implements Datetimes {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    public ServiceFuture<Void> putUtcMinDateTimeAsync(@NonNull DateTime datetimeBody, @NonNull ServiceCallback<Void> serviceCallback) {
+    public ServiceFuture<Void> putUtcMinDateTimeAsync(@NonNull DateTime datetimeBody, ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(putUtcMinDateTimeAsync(datetimeBody), serviceCallback);
     }
 
@@ -864,7 +864,7 @@ public final class DatetimesImpl implements Datetimes {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;DateTime&gt;} object.
      */
-    public ServiceFuture<DateTime> getUtcMinDateTimeAsync(@NonNull ServiceCallback<DateTime> serviceCallback) {
+    public ServiceFuture<DateTime> getUtcMinDateTimeAsync(ServiceCallback<DateTime> serviceCallback) {
         return ServiceFuture.fromBody(getUtcMinDateTimeAsync(), serviceCallback);
     }
 
@@ -915,7 +915,7 @@ public final class DatetimesImpl implements Datetimes {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    public ServiceFuture<Void> putLocalPositiveOffsetMinDateTimeAsync(@NonNull DateTime datetimeBody, @NonNull ServiceCallback<Void> serviceCallback) {
+    public ServiceFuture<Void> putLocalPositiveOffsetMinDateTimeAsync(@NonNull DateTime datetimeBody, ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(putLocalPositiveOffsetMinDateTimeAsync(datetimeBody), serviceCallback);
     }
 
@@ -963,7 +963,7 @@ public final class DatetimesImpl implements Datetimes {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;DateTime&gt;} object.
      */
-    public ServiceFuture<DateTime> getLocalPositiveOffsetMinDateTimeAsync(@NonNull ServiceCallback<DateTime> serviceCallback) {
+    public ServiceFuture<DateTime> getLocalPositiveOffsetMinDateTimeAsync(ServiceCallback<DateTime> serviceCallback) {
         return ServiceFuture.fromBody(getLocalPositiveOffsetMinDateTimeAsync(), serviceCallback);
     }
 
@@ -1014,7 +1014,7 @@ public final class DatetimesImpl implements Datetimes {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    public ServiceFuture<Void> putLocalNegativeOffsetMinDateTimeAsync(@NonNull DateTime datetimeBody, @NonNull ServiceCallback<Void> serviceCallback) {
+    public ServiceFuture<Void> putLocalNegativeOffsetMinDateTimeAsync(@NonNull DateTime datetimeBody, ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(putLocalNegativeOffsetMinDateTimeAsync(datetimeBody), serviceCallback);
     }
 
@@ -1062,7 +1062,7 @@ public final class DatetimesImpl implements Datetimes {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;DateTime&gt;} object.
      */
-    public ServiceFuture<DateTime> getLocalNegativeOffsetMinDateTimeAsync(@NonNull ServiceCallback<DateTime> serviceCallback) {
+    public ServiceFuture<DateTime> getLocalNegativeOffsetMinDateTimeAsync(ServiceCallback<DateTime> serviceCallback) {
         return ServiceFuture.fromBody(getLocalNegativeOffsetMinDateTimeAsync(), serviceCallback);
     }
 

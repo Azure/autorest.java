@@ -53,7 +53,7 @@ public interface Explicits {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Error&gt;} object.
      */
-    ServiceFuture<Error> postRequiredIntegerParameterAsync(@NonNull int bodyParameter, @NonNull ServiceCallback<Error> serviceCallback);
+    ServiceFuture<Error> postRequiredIntegerParameterAsync(@NonNull int bodyParameter, ServiceCallback<Error> serviceCallback);
 
     /**
      * Test explicitly required integer. Please put null and the client library should throw before the request is sent.
@@ -88,7 +88,7 @@ public interface Explicits {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    ServiceFuture<Void> postOptionalIntegerParameterAsync(@NonNull ServiceCallback<Void> serviceCallback);
+    ServiceFuture<Void> postOptionalIntegerParameterAsync(ServiceCallback<Void> serviceCallback);
 
     /**
      * Test explicitly optional integer. Please put null.
@@ -122,7 +122,7 @@ public interface Explicits {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    ServiceFuture<Void> postOptionalIntegerParameterAsync(Integer bodyParameter, @NonNull ServiceCallback<Void> serviceCallback);
+    ServiceFuture<Void> postOptionalIntegerParameterAsync(Integer bodyParameter, ServiceCallback<Void> serviceCallback);
 
     /**
      * Test explicitly optional integer. Please put null.
@@ -161,7 +161,7 @@ public interface Explicits {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Error&gt;} object.
      */
-    ServiceFuture<Error> postRequiredIntegerPropertyAsync(@NonNull IntWrapper bodyParameter, @NonNull ServiceCallback<Error> serviceCallback);
+    ServiceFuture<Error> postRequiredIntegerPropertyAsync(@NonNull IntWrapper bodyParameter, ServiceCallback<Error> serviceCallback);
 
     /**
      * Test explicitly required integer. Please put a valid int-wrapper with 'value' = null and the client library should throw before the request is sent.
@@ -196,7 +196,7 @@ public interface Explicits {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    ServiceFuture<Void> postOptionalIntegerPropertyAsync(@NonNull ServiceCallback<Void> serviceCallback);
+    ServiceFuture<Void> postOptionalIntegerPropertyAsync(ServiceCallback<Void> serviceCallback);
 
     /**
      * Test explicitly optional integer. Please put a valid int-wrapper with 'value' = null.
@@ -230,7 +230,7 @@ public interface Explicits {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    ServiceFuture<Void> postOptionalIntegerPropertyAsync(IntOptionalWrapper bodyParameter, @NonNull ServiceCallback<Void> serviceCallback);
+    ServiceFuture<Void> postOptionalIntegerPropertyAsync(IntOptionalWrapper bodyParameter, ServiceCallback<Void> serviceCallback);
 
     /**
      * Test explicitly optional integer. Please put a valid int-wrapper with 'value' = null.
@@ -269,7 +269,7 @@ public interface Explicits {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Error&gt;} object.
      */
-    ServiceFuture<Error> postRequiredIntegerHeaderAsync(@NonNull int headerParameter, @NonNull ServiceCallback<Error> serviceCallback);
+    ServiceFuture<Error> postRequiredIntegerHeaderAsync(@NonNull int headerParameter, ServiceCallback<Error> serviceCallback);
 
     /**
      * Test explicitly required integer. Please put a header 'headerParameter' =&gt; null and the client library should throw before the request is sent.
@@ -304,7 +304,7 @@ public interface Explicits {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    ServiceFuture<Void> postOptionalIntegerHeaderAsync(@NonNull ServiceCallback<Void> serviceCallback);
+    ServiceFuture<Void> postOptionalIntegerHeaderAsync(ServiceCallback<Void> serviceCallback);
 
     /**
      * Test explicitly optional integer. Please put a header 'headerParameter' =&gt; null.
@@ -338,7 +338,7 @@ public interface Explicits {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    ServiceFuture<Void> postOptionalIntegerHeaderAsync(Integer headerParameter, @NonNull ServiceCallback<Void> serviceCallback);
+    ServiceFuture<Void> postOptionalIntegerHeaderAsync(Integer headerParameter, ServiceCallback<Void> serviceCallback);
 
     /**
      * Test explicitly optional integer. Please put a header 'headerParameter' =&gt; null.
@@ -377,7 +377,7 @@ public interface Explicits {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Error&gt;} object.
      */
-    ServiceFuture<Error> postRequiredStringParameterAsync(@NonNull String bodyParameter, @NonNull ServiceCallback<Error> serviceCallback);
+    ServiceFuture<Error> postRequiredStringParameterAsync(@NonNull String bodyParameter, ServiceCallback<Error> serviceCallback);
 
     /**
      * Test explicitly required string. Please put null and the client library should throw before the request is sent.
@@ -412,7 +412,7 @@ public interface Explicits {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    ServiceFuture<Void> postOptionalStringParameterAsync(@NonNull ServiceCallback<Void> serviceCallback);
+    ServiceFuture<Void> postOptionalStringParameterAsync(ServiceCallback<Void> serviceCallback);
 
     /**
      * Test explicitly optional string. Please put null.
@@ -446,7 +446,7 @@ public interface Explicits {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    ServiceFuture<Void> postOptionalStringParameterAsync(String bodyParameter, @NonNull ServiceCallback<Void> serviceCallback);
+    ServiceFuture<Void> postOptionalStringParameterAsync(String bodyParameter, ServiceCallback<Void> serviceCallback);
 
     /**
      * Test explicitly optional string. Please put null.
@@ -485,7 +485,7 @@ public interface Explicits {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Error&gt;} object.
      */
-    ServiceFuture<Error> postRequiredStringPropertyAsync(@NonNull StringWrapper bodyParameter, @NonNull ServiceCallback<Error> serviceCallback);
+    ServiceFuture<Error> postRequiredStringPropertyAsync(@NonNull StringWrapper bodyParameter, ServiceCallback<Error> serviceCallback);
 
     /**
      * Test explicitly required string. Please put a valid string-wrapper with 'value' = null and the client library should throw before the request is sent.
@@ -520,7 +520,7 @@ public interface Explicits {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    ServiceFuture<Void> postOptionalStringPropertyAsync(@NonNull ServiceCallback<Void> serviceCallback);
+    ServiceFuture<Void> postOptionalStringPropertyAsync(ServiceCallback<Void> serviceCallback);
 
     /**
      * Test explicitly optional integer. Please put a valid string-wrapper with 'value' = null.
@@ -554,7 +554,7 @@ public interface Explicits {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    ServiceFuture<Void> postOptionalStringPropertyAsync(StringOptionalWrapper bodyParameter, @NonNull ServiceCallback<Void> serviceCallback);
+    ServiceFuture<Void> postOptionalStringPropertyAsync(StringOptionalWrapper bodyParameter, ServiceCallback<Void> serviceCallback);
 
     /**
      * Test explicitly optional integer. Please put a valid string-wrapper with 'value' = null.
@@ -593,7 +593,7 @@ public interface Explicits {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Error&gt;} object.
      */
-    ServiceFuture<Error> postRequiredStringHeaderAsync(@NonNull String headerParameter, @NonNull ServiceCallback<Error> serviceCallback);
+    ServiceFuture<Error> postRequiredStringHeaderAsync(@NonNull String headerParameter, ServiceCallback<Error> serviceCallback);
 
     /**
      * Test explicitly required string. Please put a header 'headerParameter' =&gt; null and the client library should throw before the request is sent.
@@ -628,7 +628,7 @@ public interface Explicits {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    ServiceFuture<Void> postOptionalStringHeaderAsync(@NonNull ServiceCallback<Void> serviceCallback);
+    ServiceFuture<Void> postOptionalStringHeaderAsync(ServiceCallback<Void> serviceCallback);
 
     /**
      * Test explicitly optional string. Please put a header 'headerParameter' =&gt; null.
@@ -662,7 +662,7 @@ public interface Explicits {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    ServiceFuture<Void> postOptionalStringHeaderAsync(String bodyParameter, @NonNull ServiceCallback<Void> serviceCallback);
+    ServiceFuture<Void> postOptionalStringHeaderAsync(String bodyParameter, ServiceCallback<Void> serviceCallback);
 
     /**
      * Test explicitly optional string. Please put a header 'headerParameter' =&gt; null.
@@ -701,7 +701,7 @@ public interface Explicits {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Error&gt;} object.
      */
-    ServiceFuture<Error> postRequiredClassParameterAsync(@NonNull Product bodyParameter, @NonNull ServiceCallback<Error> serviceCallback);
+    ServiceFuture<Error> postRequiredClassParameterAsync(@NonNull Product bodyParameter, ServiceCallback<Error> serviceCallback);
 
     /**
      * Test explicitly required complex object. Please put null and the client library should throw before the request is sent.
@@ -736,7 +736,7 @@ public interface Explicits {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    ServiceFuture<Void> postOptionalClassParameterAsync(@NonNull ServiceCallback<Void> serviceCallback);
+    ServiceFuture<Void> postOptionalClassParameterAsync(ServiceCallback<Void> serviceCallback);
 
     /**
      * Test explicitly optional complex object. Please put null.
@@ -770,7 +770,7 @@ public interface Explicits {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    ServiceFuture<Void> postOptionalClassParameterAsync(Product bodyParameter, @NonNull ServiceCallback<Void> serviceCallback);
+    ServiceFuture<Void> postOptionalClassParameterAsync(Product bodyParameter, ServiceCallback<Void> serviceCallback);
 
     /**
      * Test explicitly optional complex object. Please put null.
@@ -809,7 +809,7 @@ public interface Explicits {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Error&gt;} object.
      */
-    ServiceFuture<Error> postRequiredClassPropertyAsync(@NonNull ClassWrapper bodyParameter, @NonNull ServiceCallback<Error> serviceCallback);
+    ServiceFuture<Error> postRequiredClassPropertyAsync(@NonNull ClassWrapper bodyParameter, ServiceCallback<Error> serviceCallback);
 
     /**
      * Test explicitly required complex object. Please put a valid class-wrapper with 'value' = null and the client library should throw before the request is sent.
@@ -844,7 +844,7 @@ public interface Explicits {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    ServiceFuture<Void> postOptionalClassPropertyAsync(@NonNull ServiceCallback<Void> serviceCallback);
+    ServiceFuture<Void> postOptionalClassPropertyAsync(ServiceCallback<Void> serviceCallback);
 
     /**
      * Test explicitly optional complex object. Please put a valid class-wrapper with 'value' = null.
@@ -878,7 +878,7 @@ public interface Explicits {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    ServiceFuture<Void> postOptionalClassPropertyAsync(ClassOptionalWrapper bodyParameter, @NonNull ServiceCallback<Void> serviceCallback);
+    ServiceFuture<Void> postOptionalClassPropertyAsync(ClassOptionalWrapper bodyParameter, ServiceCallback<Void> serviceCallback);
 
     /**
      * Test explicitly optional complex object. Please put a valid class-wrapper with 'value' = null.
@@ -917,7 +917,7 @@ public interface Explicits {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Error&gt;} object.
      */
-    ServiceFuture<Error> postRequiredArrayParameterAsync(@NonNull List<String> bodyParameter, @NonNull ServiceCallback<Error> serviceCallback);
+    ServiceFuture<Error> postRequiredArrayParameterAsync(@NonNull List<String> bodyParameter, ServiceCallback<Error> serviceCallback);
 
     /**
      * Test explicitly required array. Please put null and the client library should throw before the request is sent.
@@ -952,7 +952,7 @@ public interface Explicits {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    ServiceFuture<Void> postOptionalArrayParameterAsync(@NonNull ServiceCallback<Void> serviceCallback);
+    ServiceFuture<Void> postOptionalArrayParameterAsync(ServiceCallback<Void> serviceCallback);
 
     /**
      * Test explicitly optional array. Please put null.
@@ -986,7 +986,7 @@ public interface Explicits {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    ServiceFuture<Void> postOptionalArrayParameterAsync(List<String> bodyParameter, @NonNull ServiceCallback<Void> serviceCallback);
+    ServiceFuture<Void> postOptionalArrayParameterAsync(List<String> bodyParameter, ServiceCallback<Void> serviceCallback);
 
     /**
      * Test explicitly optional array. Please put null.
@@ -1025,7 +1025,7 @@ public interface Explicits {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Error&gt;} object.
      */
-    ServiceFuture<Error> postRequiredArrayPropertyAsync(@NonNull ArrayWrapper bodyParameter, @NonNull ServiceCallback<Error> serviceCallback);
+    ServiceFuture<Error> postRequiredArrayPropertyAsync(@NonNull ArrayWrapper bodyParameter, ServiceCallback<Error> serviceCallback);
 
     /**
      * Test explicitly required array. Please put a valid array-wrapper with 'value' = null and the client library should throw before the request is sent.
@@ -1060,7 +1060,7 @@ public interface Explicits {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    ServiceFuture<Void> postOptionalArrayPropertyAsync(@NonNull ServiceCallback<Void> serviceCallback);
+    ServiceFuture<Void> postOptionalArrayPropertyAsync(ServiceCallback<Void> serviceCallback);
 
     /**
      * Test explicitly optional array. Please put a valid array-wrapper with 'value' = null.
@@ -1094,7 +1094,7 @@ public interface Explicits {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    ServiceFuture<Void> postOptionalArrayPropertyAsync(ArrayOptionalWrapper bodyParameter, @NonNull ServiceCallback<Void> serviceCallback);
+    ServiceFuture<Void> postOptionalArrayPropertyAsync(ArrayOptionalWrapper bodyParameter, ServiceCallback<Void> serviceCallback);
 
     /**
      * Test explicitly optional array. Please put a valid array-wrapper with 'value' = null.
@@ -1133,7 +1133,7 @@ public interface Explicits {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Error&gt;} object.
      */
-    ServiceFuture<Error> postRequiredArrayHeaderAsync(@NonNull List<String> headerParameter, @NonNull ServiceCallback<Error> serviceCallback);
+    ServiceFuture<Error> postRequiredArrayHeaderAsync(@NonNull List<String> headerParameter, ServiceCallback<Error> serviceCallback);
 
     /**
      * Test explicitly required array. Please put a header 'headerParameter' =&gt; null and the client library should throw before the request is sent.
@@ -1168,7 +1168,7 @@ public interface Explicits {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    ServiceFuture<Void> postOptionalArrayHeaderAsync(@NonNull ServiceCallback<Void> serviceCallback);
+    ServiceFuture<Void> postOptionalArrayHeaderAsync(ServiceCallback<Void> serviceCallback);
 
     /**
      * Test explicitly optional integer. Please put a header 'headerParameter' =&gt; null.
@@ -1202,7 +1202,7 @@ public interface Explicits {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    ServiceFuture<Void> postOptionalArrayHeaderAsync(List<String> headerParameter, @NonNull ServiceCallback<Void> serviceCallback);
+    ServiceFuture<Void> postOptionalArrayHeaderAsync(List<String> headerParameter, ServiceCallback<Void> serviceCallback);
 
     /**
      * Test explicitly optional integer. Please put a header 'headerParameter' =&gt; null.

@@ -24,7 +24,6 @@ import fixtures.azurespecials.ApiVersionLocals;
 import fixtures.azurespecials.models.ErrorException;
 import io.reactivex.Completable;
 import io.reactivex.Single;
-import io.reactivex.annotations.NonNull;
 
 /**
  * An instance of this class provides access to all the operations defined in
@@ -95,7 +94,7 @@ public final class ApiVersionLocalsImpl implements ApiVersionLocals {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    public ServiceFuture<Void> getMethodLocalValidAsync(@NonNull ServiceCallback<Void> serviceCallback) {
+    public ServiceFuture<Void> getMethodLocalValidAsync(ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(getMethodLocalValidAsync(), serviceCallback);
     }
 
@@ -136,7 +135,7 @@ public final class ApiVersionLocalsImpl implements ApiVersionLocals {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    public ServiceFuture<Void> getMethodLocalNullAsync(@NonNull ServiceCallback<Void> serviceCallback) {
+    public ServiceFuture<Void> getMethodLocalNullAsync(ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(getMethodLocalNullAsync(), serviceCallback);
     }
 
@@ -180,7 +179,7 @@ public final class ApiVersionLocalsImpl implements ApiVersionLocals {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    public ServiceFuture<Void> getMethodLocalNullAsync(String apiVersion, @NonNull ServiceCallback<Void> serviceCallback) {
+    public ServiceFuture<Void> getMethodLocalNullAsync(String apiVersion, ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(getMethodLocalNullAsync(apiVersion), serviceCallback);
     }
 
@@ -224,7 +223,7 @@ public final class ApiVersionLocalsImpl implements ApiVersionLocals {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    public ServiceFuture<Void> getPathLocalValidAsync(@NonNull ServiceCallback<Void> serviceCallback) {
+    public ServiceFuture<Void> getPathLocalValidAsync(ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(getPathLocalValidAsync(), serviceCallback);
     }
 
@@ -265,7 +264,7 @@ public final class ApiVersionLocalsImpl implements ApiVersionLocals {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    public ServiceFuture<Void> getSwaggerLocalValidAsync(@NonNull ServiceCallback<Void> serviceCallback) {
+    public ServiceFuture<Void> getSwaggerLocalValidAsync(ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(getSwaggerLocalValidAsync(), serviceCallback);
     }
 

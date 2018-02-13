@@ -87,7 +87,7 @@ public final class GroupsImpl implements Groups {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;SampleResourceGroup&gt;} object.
      */
-    public ServiceFuture<SampleResourceGroup> getSampleResourceGroupAsync(@NonNull String resourceGroupName, @NonNull ServiceCallback<SampleResourceGroup> serviceCallback) {
+    public ServiceFuture<SampleResourceGroup> getSampleResourceGroupAsync(@NonNull String resourceGroupName, ServiceCallback<SampleResourceGroup> serviceCallback) {
         return ServiceFuture.fromBody(getSampleResourceGroupAsync(resourceGroupName), serviceCallback);
     }
 

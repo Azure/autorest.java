@@ -46,7 +46,7 @@ public interface Arrays {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;List&lt;Integer&gt;&gt;} object.
      */
-    ServiceFuture<List<Integer>> getNullAsync(@NonNull ServiceCallback<List<Integer>> serviceCallback);
+    ServiceFuture<List<Integer>> getNullAsync(ServiceCallback<List<Integer>> serviceCallback);
 
     /**
      * Get null array value.
@@ -78,7 +78,7 @@ public interface Arrays {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;List&lt;Integer&gt;&gt;} object.
      */
-    ServiceFuture<List<Integer>> getInvalidAsync(@NonNull ServiceCallback<List<Integer>> serviceCallback);
+    ServiceFuture<List<Integer>> getInvalidAsync(ServiceCallback<List<Integer>> serviceCallback);
 
     /**
      * Get invalid array [1, 2, 3.
@@ -110,7 +110,7 @@ public interface Arrays {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;List&lt;Integer&gt;&gt;} object.
      */
-    ServiceFuture<List<Integer>> getEmptyAsync(@NonNull ServiceCallback<List<Integer>> serviceCallback);
+    ServiceFuture<List<Integer>> getEmptyAsync(ServiceCallback<List<Integer>> serviceCallback);
 
     /**
      * Get empty array value [].
@@ -144,7 +144,7 @@ public interface Arrays {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    ServiceFuture<Void> putEmptyAsync(@NonNull List<String> arrayBody, @NonNull ServiceCallback<Void> serviceCallback);
+    ServiceFuture<Void> putEmptyAsync(@NonNull List<String> arrayBody, ServiceCallback<Void> serviceCallback);
 
     /**
      * Set array value empty [].
@@ -180,7 +180,7 @@ public interface Arrays {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;List&lt;Boolean&gt;&gt;} object.
      */
-    ServiceFuture<List<Boolean>> getBooleanTfftAsync(@NonNull ServiceCallback<List<Boolean>> serviceCallback);
+    ServiceFuture<List<Boolean>> getBooleanTfftAsync(ServiceCallback<List<Boolean>> serviceCallback);
 
     /**
      * Get boolean array value [true, false, false, true].
@@ -214,7 +214,7 @@ public interface Arrays {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    ServiceFuture<Void> putBooleanTfftAsync(@NonNull List<Boolean> arrayBody, @NonNull ServiceCallback<Void> serviceCallback);
+    ServiceFuture<Void> putBooleanTfftAsync(@NonNull List<Boolean> arrayBody, ServiceCallback<Void> serviceCallback);
 
     /**
      * Set array value empty [true, false, false, true].
@@ -250,7 +250,7 @@ public interface Arrays {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;List&lt;Boolean&gt;&gt;} object.
      */
-    ServiceFuture<List<Boolean>> getBooleanInvalidNullAsync(@NonNull ServiceCallback<List<Boolean>> serviceCallback);
+    ServiceFuture<List<Boolean>> getBooleanInvalidNullAsync(ServiceCallback<List<Boolean>> serviceCallback);
 
     /**
      * Get boolean array value [true, null, false].
@@ -282,7 +282,7 @@ public interface Arrays {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;List&lt;Boolean&gt;&gt;} object.
      */
-    ServiceFuture<List<Boolean>> getBooleanInvalidStringAsync(@NonNull ServiceCallback<List<Boolean>> serviceCallback);
+    ServiceFuture<List<Boolean>> getBooleanInvalidStringAsync(ServiceCallback<List<Boolean>> serviceCallback);
 
     /**
      * Get boolean array value [true, 'boolean', false].
@@ -314,7 +314,7 @@ public interface Arrays {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;List&lt;Integer&gt;&gt;} object.
      */
-    ServiceFuture<List<Integer>> getIntegerValidAsync(@NonNull ServiceCallback<List<Integer>> serviceCallback);
+    ServiceFuture<List<Integer>> getIntegerValidAsync(ServiceCallback<List<Integer>> serviceCallback);
 
     /**
      * Get integer array value [1, -1, 3, 300].
@@ -348,7 +348,7 @@ public interface Arrays {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    ServiceFuture<Void> putIntegerValidAsync(@NonNull List<Integer> arrayBody, @NonNull ServiceCallback<Void> serviceCallback);
+    ServiceFuture<Void> putIntegerValidAsync(@NonNull List<Integer> arrayBody, ServiceCallback<Void> serviceCallback);
 
     /**
      * Set array value empty [1, -1, 3, 300].
@@ -384,7 +384,7 @@ public interface Arrays {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;List&lt;Integer&gt;&gt;} object.
      */
-    ServiceFuture<List<Integer>> getIntInvalidNullAsync(@NonNull ServiceCallback<List<Integer>> serviceCallback);
+    ServiceFuture<List<Integer>> getIntInvalidNullAsync(ServiceCallback<List<Integer>> serviceCallback);
 
     /**
      * Get integer array value [1, null, 0].
@@ -416,7 +416,7 @@ public interface Arrays {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;List&lt;Integer&gt;&gt;} object.
      */
-    ServiceFuture<List<Integer>> getIntInvalidStringAsync(@NonNull ServiceCallback<List<Integer>> serviceCallback);
+    ServiceFuture<List<Integer>> getIntInvalidStringAsync(ServiceCallback<List<Integer>> serviceCallback);
 
     /**
      * Get integer array value [1, 'integer', 0].
@@ -448,7 +448,7 @@ public interface Arrays {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;List&lt;Long&gt;&gt;} object.
      */
-    ServiceFuture<List<Long>> getLongValidAsync(@NonNull ServiceCallback<List<Long>> serviceCallback);
+    ServiceFuture<List<Long>> getLongValidAsync(ServiceCallback<List<Long>> serviceCallback);
 
     /**
      * Get integer array value [1, -1, 3, 300].
@@ -482,7 +482,7 @@ public interface Arrays {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    ServiceFuture<Void> putLongValidAsync(@NonNull List<Long> arrayBody, @NonNull ServiceCallback<Void> serviceCallback);
+    ServiceFuture<Void> putLongValidAsync(@NonNull List<Long> arrayBody, ServiceCallback<Void> serviceCallback);
 
     /**
      * Set array value empty [1, -1, 3, 300].
@@ -518,7 +518,7 @@ public interface Arrays {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;List&lt;Long&gt;&gt;} object.
      */
-    ServiceFuture<List<Long>> getLongInvalidNullAsync(@NonNull ServiceCallback<List<Long>> serviceCallback);
+    ServiceFuture<List<Long>> getLongInvalidNullAsync(ServiceCallback<List<Long>> serviceCallback);
 
     /**
      * Get long array value [1, null, 0].
@@ -550,7 +550,7 @@ public interface Arrays {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;List&lt;Long&gt;&gt;} object.
      */
-    ServiceFuture<List<Long>> getLongInvalidStringAsync(@NonNull ServiceCallback<List<Long>> serviceCallback);
+    ServiceFuture<List<Long>> getLongInvalidStringAsync(ServiceCallback<List<Long>> serviceCallback);
 
     /**
      * Get long array value [1, 'integer', 0].
@@ -582,7 +582,7 @@ public interface Arrays {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;List&lt;Double&gt;&gt;} object.
      */
-    ServiceFuture<List<Double>> getFloatValidAsync(@NonNull ServiceCallback<List<Double>> serviceCallback);
+    ServiceFuture<List<Double>> getFloatValidAsync(ServiceCallback<List<Double>> serviceCallback);
 
     /**
      * Get float array value [0, -0.01, 1.2e20].
@@ -616,7 +616,7 @@ public interface Arrays {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    ServiceFuture<Void> putFloatValidAsync(@NonNull List<Double> arrayBody, @NonNull ServiceCallback<Void> serviceCallback);
+    ServiceFuture<Void> putFloatValidAsync(@NonNull List<Double> arrayBody, ServiceCallback<Void> serviceCallback);
 
     /**
      * Set array value [0, -0.01, 1.2e20].
@@ -652,7 +652,7 @@ public interface Arrays {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;List&lt;Double&gt;&gt;} object.
      */
-    ServiceFuture<List<Double>> getFloatInvalidNullAsync(@NonNull ServiceCallback<List<Double>> serviceCallback);
+    ServiceFuture<List<Double>> getFloatInvalidNullAsync(ServiceCallback<List<Double>> serviceCallback);
 
     /**
      * Get float array value [0.0, null, -1.2e20].
@@ -684,7 +684,7 @@ public interface Arrays {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;List&lt;Double&gt;&gt;} object.
      */
-    ServiceFuture<List<Double>> getFloatInvalidStringAsync(@NonNull ServiceCallback<List<Double>> serviceCallback);
+    ServiceFuture<List<Double>> getFloatInvalidStringAsync(ServiceCallback<List<Double>> serviceCallback);
 
     /**
      * Get boolean array value [1.0, 'number', 0.0].
@@ -716,7 +716,7 @@ public interface Arrays {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;List&lt;Double&gt;&gt;} object.
      */
-    ServiceFuture<List<Double>> getDoubleValidAsync(@NonNull ServiceCallback<List<Double>> serviceCallback);
+    ServiceFuture<List<Double>> getDoubleValidAsync(ServiceCallback<List<Double>> serviceCallback);
 
     /**
      * Get float array value [0, -0.01, 1.2e20].
@@ -750,7 +750,7 @@ public interface Arrays {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    ServiceFuture<Void> putDoubleValidAsync(@NonNull List<Double> arrayBody, @NonNull ServiceCallback<Void> serviceCallback);
+    ServiceFuture<Void> putDoubleValidAsync(@NonNull List<Double> arrayBody, ServiceCallback<Void> serviceCallback);
 
     /**
      * Set array value [0, -0.01, 1.2e20].
@@ -786,7 +786,7 @@ public interface Arrays {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;List&lt;Double&gt;&gt;} object.
      */
-    ServiceFuture<List<Double>> getDoubleInvalidNullAsync(@NonNull ServiceCallback<List<Double>> serviceCallback);
+    ServiceFuture<List<Double>> getDoubleInvalidNullAsync(ServiceCallback<List<Double>> serviceCallback);
 
     /**
      * Get float array value [0.0, null, -1.2e20].
@@ -818,7 +818,7 @@ public interface Arrays {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;List&lt;Double&gt;&gt;} object.
      */
-    ServiceFuture<List<Double>> getDoubleInvalidStringAsync(@NonNull ServiceCallback<List<Double>> serviceCallback);
+    ServiceFuture<List<Double>> getDoubleInvalidStringAsync(ServiceCallback<List<Double>> serviceCallback);
 
     /**
      * Get boolean array value [1.0, 'number', 0.0].
@@ -850,7 +850,7 @@ public interface Arrays {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;List&lt;String&gt;&gt;} object.
      */
-    ServiceFuture<List<String>> getStringValidAsync(@NonNull ServiceCallback<List<String>> serviceCallback);
+    ServiceFuture<List<String>> getStringValidAsync(ServiceCallback<List<String>> serviceCallback);
 
     /**
      * Get string array value ['foo1', 'foo2', 'foo3'].
@@ -884,7 +884,7 @@ public interface Arrays {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    ServiceFuture<Void> putStringValidAsync(@NonNull List<String> arrayBody, @NonNull ServiceCallback<Void> serviceCallback);
+    ServiceFuture<Void> putStringValidAsync(@NonNull List<String> arrayBody, ServiceCallback<Void> serviceCallback);
 
     /**
      * Set array value ['foo1', 'foo2', 'foo3'].
@@ -920,7 +920,7 @@ public interface Arrays {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;List&lt;String&gt;&gt;} object.
      */
-    ServiceFuture<List<String>> getStringWithNullAsync(@NonNull ServiceCallback<List<String>> serviceCallback);
+    ServiceFuture<List<String>> getStringWithNullAsync(ServiceCallback<List<String>> serviceCallback);
 
     /**
      * Get string array value ['foo', null, 'foo2'].
@@ -952,7 +952,7 @@ public interface Arrays {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;List&lt;String&gt;&gt;} object.
      */
-    ServiceFuture<List<String>> getStringWithInvalidAsync(@NonNull ServiceCallback<List<String>> serviceCallback);
+    ServiceFuture<List<String>> getStringWithInvalidAsync(ServiceCallback<List<String>> serviceCallback);
 
     /**
      * Get string array value ['foo', 123, 'foo2'].
@@ -984,7 +984,7 @@ public interface Arrays {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;List&lt;UUID&gt;&gt;} object.
      */
-    ServiceFuture<List<UUID>> getUuidValidAsync(@NonNull ServiceCallback<List<UUID>> serviceCallback);
+    ServiceFuture<List<UUID>> getUuidValidAsync(ServiceCallback<List<UUID>> serviceCallback);
 
     /**
      * Get uuid array value ['6dcc7237-45fe-45c4-8a6b-3a8a3f625652', 'd1399005-30f7-40d6-8da6-dd7c89ad34db', 'f42f6aa1-a5bc-4ddf-907e-5f915de43205'].
@@ -1018,7 +1018,7 @@ public interface Arrays {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    ServiceFuture<Void> putUuidValidAsync(@NonNull List<UUID> arrayBody, @NonNull ServiceCallback<Void> serviceCallback);
+    ServiceFuture<Void> putUuidValidAsync(@NonNull List<UUID> arrayBody, ServiceCallback<Void> serviceCallback);
 
     /**
      * Set array value  ['6dcc7237-45fe-45c4-8a6b-3a8a3f625652', 'd1399005-30f7-40d6-8da6-dd7c89ad34db', 'f42f6aa1-a5bc-4ddf-907e-5f915de43205'].
@@ -1054,7 +1054,7 @@ public interface Arrays {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;List&lt;UUID&gt;&gt;} object.
      */
-    ServiceFuture<List<UUID>> getUuidInvalidCharsAsync(@NonNull ServiceCallback<List<UUID>> serviceCallback);
+    ServiceFuture<List<UUID>> getUuidInvalidCharsAsync(ServiceCallback<List<UUID>> serviceCallback);
 
     /**
      * Get uuid array value ['6dcc7237-45fe-45c4-8a6b-3a8a3f625652', 'foo'].
@@ -1086,7 +1086,7 @@ public interface Arrays {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;List&lt;LocalDate&gt;&gt;} object.
      */
-    ServiceFuture<List<LocalDate>> getDateValidAsync(@NonNull ServiceCallback<List<LocalDate>> serviceCallback);
+    ServiceFuture<List<LocalDate>> getDateValidAsync(ServiceCallback<List<LocalDate>> serviceCallback);
 
     /**
      * Get integer array value ['2000-12-01', '1980-01-02', '1492-10-12'].
@@ -1120,7 +1120,7 @@ public interface Arrays {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    ServiceFuture<Void> putDateValidAsync(@NonNull List<LocalDate> arrayBody, @NonNull ServiceCallback<Void> serviceCallback);
+    ServiceFuture<Void> putDateValidAsync(@NonNull List<LocalDate> arrayBody, ServiceCallback<Void> serviceCallback);
 
     /**
      * Set array value  ['2000-12-01', '1980-01-02', '1492-10-12'].
@@ -1156,7 +1156,7 @@ public interface Arrays {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;List&lt;LocalDate&gt;&gt;} object.
      */
-    ServiceFuture<List<LocalDate>> getDateInvalidNullAsync(@NonNull ServiceCallback<List<LocalDate>> serviceCallback);
+    ServiceFuture<List<LocalDate>> getDateInvalidNullAsync(ServiceCallback<List<LocalDate>> serviceCallback);
 
     /**
      * Get date array value ['2012-01-01', null, '1776-07-04'].
@@ -1188,7 +1188,7 @@ public interface Arrays {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;List&lt;LocalDate&gt;&gt;} object.
      */
-    ServiceFuture<List<LocalDate>> getDateInvalidCharsAsync(@NonNull ServiceCallback<List<LocalDate>> serviceCallback);
+    ServiceFuture<List<LocalDate>> getDateInvalidCharsAsync(ServiceCallback<List<LocalDate>> serviceCallback);
 
     /**
      * Get date array value ['2011-03-22', 'date'].
@@ -1220,7 +1220,7 @@ public interface Arrays {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;List&lt;DateTime&gt;&gt;} object.
      */
-    ServiceFuture<List<DateTime>> getDateTimeValidAsync(@NonNull ServiceCallback<List<DateTime>> serviceCallback);
+    ServiceFuture<List<DateTime>> getDateTimeValidAsync(ServiceCallback<List<DateTime>> serviceCallback);
 
     /**
      * Get date-time array value ['2000-12-01t00:00:01z', '1980-01-02T00:11:35+01:00', '1492-10-12T10:15:01-08:00'].
@@ -1254,7 +1254,7 @@ public interface Arrays {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    ServiceFuture<Void> putDateTimeValidAsync(@NonNull List<DateTime> arrayBody, @NonNull ServiceCallback<Void> serviceCallback);
+    ServiceFuture<Void> putDateTimeValidAsync(@NonNull List<DateTime> arrayBody, ServiceCallback<Void> serviceCallback);
 
     /**
      * Set array value  ['2000-12-01t00:00:01z', '1980-01-02T00:11:35+01:00', '1492-10-12T10:15:01-08:00'].
@@ -1290,7 +1290,7 @@ public interface Arrays {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;List&lt;DateTime&gt;&gt;} object.
      */
-    ServiceFuture<List<DateTime>> getDateTimeInvalidNullAsync(@NonNull ServiceCallback<List<DateTime>> serviceCallback);
+    ServiceFuture<List<DateTime>> getDateTimeInvalidNullAsync(ServiceCallback<List<DateTime>> serviceCallback);
 
     /**
      * Get date array value ['2000-12-01t00:00:01z', null].
@@ -1322,7 +1322,7 @@ public interface Arrays {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;List&lt;DateTime&gt;&gt;} object.
      */
-    ServiceFuture<List<DateTime>> getDateTimeInvalidCharsAsync(@NonNull ServiceCallback<List<DateTime>> serviceCallback);
+    ServiceFuture<List<DateTime>> getDateTimeInvalidCharsAsync(ServiceCallback<List<DateTime>> serviceCallback);
 
     /**
      * Get date array value ['2000-12-01t00:00:01z', 'date-time'].
@@ -1354,7 +1354,7 @@ public interface Arrays {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;List&lt;DateTime&gt;&gt;} object.
      */
-    ServiceFuture<List<DateTime>> getDateTimeRfc1123ValidAsync(@NonNull ServiceCallback<List<DateTime>> serviceCallback);
+    ServiceFuture<List<DateTime>> getDateTimeRfc1123ValidAsync(ServiceCallback<List<DateTime>> serviceCallback);
 
     /**
      * Get date-time array value ['Fri, 01 Dec 2000 00:00:01 GMT', 'Wed, 02 Jan 1980 00:11:35 GMT', 'Wed, 12 Oct 1492 10:15:01 GMT'].
@@ -1388,7 +1388,7 @@ public interface Arrays {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    ServiceFuture<Void> putDateTimeRfc1123ValidAsync(@NonNull List<DateTime> arrayBody, @NonNull ServiceCallback<Void> serviceCallback);
+    ServiceFuture<Void> putDateTimeRfc1123ValidAsync(@NonNull List<DateTime> arrayBody, ServiceCallback<Void> serviceCallback);
 
     /**
      * Set array value  ['Fri, 01 Dec 2000 00:00:01 GMT', 'Wed, 02 Jan 1980 00:11:35 GMT', 'Wed, 12 Oct 1492 10:15:01 GMT'].
@@ -1424,7 +1424,7 @@ public interface Arrays {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;List&lt;Period&gt;&gt;} object.
      */
-    ServiceFuture<List<Period>> getDurationValidAsync(@NonNull ServiceCallback<List<Period>> serviceCallback);
+    ServiceFuture<List<Period>> getDurationValidAsync(ServiceCallback<List<Period>> serviceCallback);
 
     /**
      * Get duration array value ['P123DT22H14M12.011S', 'P5DT1H0M0S'].
@@ -1458,7 +1458,7 @@ public interface Arrays {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    ServiceFuture<Void> putDurationValidAsync(@NonNull List<Period> arrayBody, @NonNull ServiceCallback<Void> serviceCallback);
+    ServiceFuture<Void> putDurationValidAsync(@NonNull List<Period> arrayBody, ServiceCallback<Void> serviceCallback);
 
     /**
      * Set array value  ['P123DT22H14M12.011S', 'P5DT1H0M0S'].
@@ -1494,7 +1494,7 @@ public interface Arrays {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;List&lt;byte[]&gt;&gt;} object.
      */
-    ServiceFuture<List<byte[]>> getByteValidAsync(@NonNull ServiceCallback<List<byte[]>> serviceCallback);
+    ServiceFuture<List<byte[]>> getByteValidAsync(ServiceCallback<List<byte[]>> serviceCallback);
 
     /**
      * Get byte array value [hex(FF FF FF FA), hex(01 02 03), hex (25, 29, 43)] with each item encoded in base64.
@@ -1528,7 +1528,7 @@ public interface Arrays {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    ServiceFuture<Void> putByteValidAsync(@NonNull List<byte[]> arrayBody, @NonNull ServiceCallback<Void> serviceCallback);
+    ServiceFuture<Void> putByteValidAsync(@NonNull List<byte[]> arrayBody, ServiceCallback<Void> serviceCallback);
 
     /**
      * Put the array value [hex(FF FF FF FA), hex(01 02 03), hex (25, 29, 43)] with each elementencoded in base 64.
@@ -1564,7 +1564,7 @@ public interface Arrays {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;List&lt;byte[]&gt;&gt;} object.
      */
-    ServiceFuture<List<byte[]>> getByteInvalidNullAsync(@NonNull ServiceCallback<List<byte[]>> serviceCallback);
+    ServiceFuture<List<byte[]>> getByteInvalidNullAsync(ServiceCallback<List<byte[]>> serviceCallback);
 
     /**
      * Get byte array value [hex(AB, AC, AD), null] with the first item base64 encoded.
@@ -1596,7 +1596,7 @@ public interface Arrays {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;List&lt;byte[]&gt;&gt;} object.
      */
-    ServiceFuture<List<byte[]>> getBase64UrlAsync(@NonNull ServiceCallback<List<byte[]>> serviceCallback);
+    ServiceFuture<List<byte[]>> getBase64UrlAsync(ServiceCallback<List<byte[]>> serviceCallback);
 
     /**
      * Get array value ['a string that gets encoded with base64url', 'test string' 'Lorem ipsum'] with the items base64url encoded.
@@ -1628,7 +1628,7 @@ public interface Arrays {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;List&lt;Product&gt;&gt;} object.
      */
-    ServiceFuture<List<Product>> getComplexNullAsync(@NonNull ServiceCallback<List<Product>> serviceCallback);
+    ServiceFuture<List<Product>> getComplexNullAsync(ServiceCallback<List<Product>> serviceCallback);
 
     /**
      * Get array of complex type null value.
@@ -1660,7 +1660,7 @@ public interface Arrays {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;List&lt;Product&gt;&gt;} object.
      */
-    ServiceFuture<List<Product>> getComplexEmptyAsync(@NonNull ServiceCallback<List<Product>> serviceCallback);
+    ServiceFuture<List<Product>> getComplexEmptyAsync(ServiceCallback<List<Product>> serviceCallback);
 
     /**
      * Get empty array of complex type [].
@@ -1692,7 +1692,7 @@ public interface Arrays {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;List&lt;Product&gt;&gt;} object.
      */
-    ServiceFuture<List<Product>> getComplexItemNullAsync(@NonNull ServiceCallback<List<Product>> serviceCallback);
+    ServiceFuture<List<Product>> getComplexItemNullAsync(ServiceCallback<List<Product>> serviceCallback);
 
     /**
      * Get array of complex type with null item [{'integer': 1 'string': '2'}, null, {'integer': 5, 'string': '6'}].
@@ -1724,7 +1724,7 @@ public interface Arrays {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;List&lt;Product&gt;&gt;} object.
      */
-    ServiceFuture<List<Product>> getComplexItemEmptyAsync(@NonNull ServiceCallback<List<Product>> serviceCallback);
+    ServiceFuture<List<Product>> getComplexItemEmptyAsync(ServiceCallback<List<Product>> serviceCallback);
 
     /**
      * Get array of complex type with empty item [{'integer': 1 'string': '2'}, {}, {'integer': 5, 'string': '6'}].
@@ -1756,7 +1756,7 @@ public interface Arrays {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;List&lt;Product&gt;&gt;} object.
      */
-    ServiceFuture<List<Product>> getComplexValidAsync(@NonNull ServiceCallback<List<Product>> serviceCallback);
+    ServiceFuture<List<Product>> getComplexValidAsync(ServiceCallback<List<Product>> serviceCallback);
 
     /**
      * Get array of complex type with [{'integer': 1 'string': '2'}, {'integer': 3, 'string': '4'}, {'integer': 5, 'string': '6'}].
@@ -1790,7 +1790,7 @@ public interface Arrays {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    ServiceFuture<Void> putComplexValidAsync(@NonNull List<Product> arrayBody, @NonNull ServiceCallback<Void> serviceCallback);
+    ServiceFuture<Void> putComplexValidAsync(@NonNull List<Product> arrayBody, ServiceCallback<Void> serviceCallback);
 
     /**
      * Put an array of complex type with values [{'integer': 1 'string': '2'}, {'integer': 3, 'string': '4'}, {'integer': 5, 'string': '6'}].
@@ -1826,7 +1826,7 @@ public interface Arrays {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;List&lt;List&lt;String&gt;&gt;&gt;} object.
      */
-    ServiceFuture<List<List<String>>> getArrayNullAsync(@NonNull ServiceCallback<List<List<String>>> serviceCallback);
+    ServiceFuture<List<List<String>>> getArrayNullAsync(ServiceCallback<List<List<String>>> serviceCallback);
 
     /**
      * Get a null array.
@@ -1858,7 +1858,7 @@ public interface Arrays {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;List&lt;List&lt;String&gt;&gt;&gt;} object.
      */
-    ServiceFuture<List<List<String>>> getArrayEmptyAsync(@NonNull ServiceCallback<List<List<String>>> serviceCallback);
+    ServiceFuture<List<List<String>>> getArrayEmptyAsync(ServiceCallback<List<List<String>>> serviceCallback);
 
     /**
      * Get an empty array [].
@@ -1890,7 +1890,7 @@ public interface Arrays {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;List&lt;List&lt;String&gt;&gt;&gt;} object.
      */
-    ServiceFuture<List<List<String>>> getArrayItemNullAsync(@NonNull ServiceCallback<List<List<String>>> serviceCallback);
+    ServiceFuture<List<List<String>>> getArrayItemNullAsync(ServiceCallback<List<List<String>>> serviceCallback);
 
     /**
      * Get an array of array of strings [['1', '2', '3'], null, ['7', '8', '9']].
@@ -1922,7 +1922,7 @@ public interface Arrays {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;List&lt;List&lt;String&gt;&gt;&gt;} object.
      */
-    ServiceFuture<List<List<String>>> getArrayItemEmptyAsync(@NonNull ServiceCallback<List<List<String>>> serviceCallback);
+    ServiceFuture<List<List<String>>> getArrayItemEmptyAsync(ServiceCallback<List<List<String>>> serviceCallback);
 
     /**
      * Get an array of array of strings [['1', '2', '3'], [], ['7', '8', '9']].
@@ -1954,7 +1954,7 @@ public interface Arrays {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;List&lt;List&lt;String&gt;&gt;&gt;} object.
      */
-    ServiceFuture<List<List<String>>> getArrayValidAsync(@NonNull ServiceCallback<List<List<String>>> serviceCallback);
+    ServiceFuture<List<List<String>>> getArrayValidAsync(ServiceCallback<List<List<String>>> serviceCallback);
 
     /**
      * Get an array of array of strings [['1', '2', '3'], ['4', '5', '6'], ['7', '8', '9']].
@@ -1988,7 +1988,7 @@ public interface Arrays {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    ServiceFuture<Void> putArrayValidAsync(@NonNull List<List<String>> arrayBody, @NonNull ServiceCallback<Void> serviceCallback);
+    ServiceFuture<Void> putArrayValidAsync(@NonNull List<List<String>> arrayBody, ServiceCallback<Void> serviceCallback);
 
     /**
      * Put An array of array of strings [['1', '2', '3'], ['4', '5', '6'], ['7', '8', '9']].
@@ -2024,7 +2024,7 @@ public interface Arrays {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;List&lt;Map&lt;String, String&gt;&gt;&gt;} object.
      */
-    ServiceFuture<List<Map<String, String>>> getDictionaryNullAsync(@NonNull ServiceCallback<List<Map<String, String>>> serviceCallback);
+    ServiceFuture<List<Map<String, String>>> getDictionaryNullAsync(ServiceCallback<List<Map<String, String>>> serviceCallback);
 
     /**
      * Get an array of Dictionaries with value null.
@@ -2056,7 +2056,7 @@ public interface Arrays {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;List&lt;Map&lt;String, String&gt;&gt;&gt;} object.
      */
-    ServiceFuture<List<Map<String, String>>> getDictionaryEmptyAsync(@NonNull ServiceCallback<List<Map<String, String>>> serviceCallback);
+    ServiceFuture<List<Map<String, String>>> getDictionaryEmptyAsync(ServiceCallback<List<Map<String, String>>> serviceCallback);
 
     /**
      * Get an array of Dictionaries of type &lt;string, string&gt; with value [].
@@ -2088,7 +2088,7 @@ public interface Arrays {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;List&lt;Map&lt;String, String&gt;&gt;&gt;} object.
      */
-    ServiceFuture<List<Map<String, String>>> getDictionaryItemNullAsync(@NonNull ServiceCallback<List<Map<String, String>>> serviceCallback);
+    ServiceFuture<List<Map<String, String>>> getDictionaryItemNullAsync(ServiceCallback<List<Map<String, String>>> serviceCallback);
 
     /**
      * Get an array of Dictionaries of type &lt;string, string&gt; with value [{'1': 'one', '2': 'two', '3': 'three'}, null, {'7': 'seven', '8': 'eight', '9': 'nine'}].
@@ -2120,7 +2120,7 @@ public interface Arrays {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;List&lt;Map&lt;String, String&gt;&gt;&gt;} object.
      */
-    ServiceFuture<List<Map<String, String>>> getDictionaryItemEmptyAsync(@NonNull ServiceCallback<List<Map<String, String>>> serviceCallback);
+    ServiceFuture<List<Map<String, String>>> getDictionaryItemEmptyAsync(ServiceCallback<List<Map<String, String>>> serviceCallback);
 
     /**
      * Get an array of Dictionaries of type &lt;string, string&gt; with value [{'1': 'one', '2': 'two', '3': 'three'}, {}, {'7': 'seven', '8': 'eight', '9': 'nine'}].
@@ -2152,7 +2152,7 @@ public interface Arrays {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;List&lt;Map&lt;String, String&gt;&gt;&gt;} object.
      */
-    ServiceFuture<List<Map<String, String>>> getDictionaryValidAsync(@NonNull ServiceCallback<List<Map<String, String>>> serviceCallback);
+    ServiceFuture<List<Map<String, String>>> getDictionaryValidAsync(ServiceCallback<List<Map<String, String>>> serviceCallback);
 
     /**
      * Get an array of Dictionaries of type &lt;string, string&gt; with value [{'1': 'one', '2': 'two', '3': 'three'}, {'4': 'four', '5': 'five', '6': 'six'}, {'7': 'seven', '8': 'eight', '9': 'nine'}].
@@ -2186,7 +2186,7 @@ public interface Arrays {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    ServiceFuture<Void> putDictionaryValidAsync(@NonNull List<Map<String, String>> arrayBody, @NonNull ServiceCallback<Void> serviceCallback);
+    ServiceFuture<Void> putDictionaryValidAsync(@NonNull List<Map<String, String>> arrayBody, ServiceCallback<Void> serviceCallback);
 
     /**
      * Get an array of Dictionaries of type &lt;string, string&gt; with value [{'1': 'one', '2': 'two', '3': 'three'}, {'4': 'four', '5': 'five', '6': 'six'}, {'7': 'seven', '8': 'eight', '9': 'nine'}].

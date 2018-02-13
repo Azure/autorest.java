@@ -116,7 +116,7 @@ public final class ImplicitsImpl implements Implicits {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Error&gt;} object.
      */
-    public ServiceFuture<Error> getRequiredPathAsync(@NonNull String pathParameter, @NonNull ServiceCallback<Error> serviceCallback) {
+    public ServiceFuture<Error> getRequiredPathAsync(@NonNull String pathParameter, ServiceCallback<Error> serviceCallback) {
         return ServiceFuture.fromBody(getRequiredPathAsync(pathParameter), serviceCallback);
     }
 
@@ -171,7 +171,7 @@ public final class ImplicitsImpl implements Implicits {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    public ServiceFuture<Void> putOptionalQueryAsync(@NonNull ServiceCallback<Void> serviceCallback) {
+    public ServiceFuture<Void> putOptionalQueryAsync(ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(putOptionalQueryAsync(), serviceCallback);
     }
 
@@ -215,7 +215,7 @@ public final class ImplicitsImpl implements Implicits {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    public ServiceFuture<Void> putOptionalQueryAsync(String queryParameter, @NonNull ServiceCallback<Void> serviceCallback) {
+    public ServiceFuture<Void> putOptionalQueryAsync(String queryParameter, ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(putOptionalQueryAsync(queryParameter), serviceCallback);
     }
 
@@ -259,7 +259,7 @@ public final class ImplicitsImpl implements Implicits {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    public ServiceFuture<Void> putOptionalHeaderAsync(@NonNull ServiceCallback<Void> serviceCallback) {
+    public ServiceFuture<Void> putOptionalHeaderAsync(ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(putOptionalHeaderAsync(), serviceCallback);
     }
 
@@ -303,7 +303,7 @@ public final class ImplicitsImpl implements Implicits {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    public ServiceFuture<Void> putOptionalHeaderAsync(String queryParameter, @NonNull ServiceCallback<Void> serviceCallback) {
+    public ServiceFuture<Void> putOptionalHeaderAsync(String queryParameter, ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(putOptionalHeaderAsync(queryParameter), serviceCallback);
     }
 
@@ -347,7 +347,7 @@ public final class ImplicitsImpl implements Implicits {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    public ServiceFuture<Void> putOptionalBodyAsync(@NonNull ServiceCallback<Void> serviceCallback) {
+    public ServiceFuture<Void> putOptionalBodyAsync(ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(putOptionalBodyAsync(), serviceCallback);
     }
 
@@ -391,7 +391,7 @@ public final class ImplicitsImpl implements Implicits {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    public ServiceFuture<Void> putOptionalBodyAsync(String bodyParameter, @NonNull ServiceCallback<Void> serviceCallback) {
+    public ServiceFuture<Void> putOptionalBodyAsync(String bodyParameter, ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(putOptionalBodyAsync(bodyParameter), serviceCallback);
     }
 
@@ -436,7 +436,7 @@ public final class ImplicitsImpl implements Implicits {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Error&gt;} object.
      */
-    public ServiceFuture<Error> getRequiredGlobalPathAsync(@NonNull ServiceCallback<Error> serviceCallback) {
+    public ServiceFuture<Error> getRequiredGlobalPathAsync(ServiceCallback<Error> serviceCallback) {
         return ServiceFuture.fromBody(getRequiredGlobalPathAsync(), serviceCallback);
     }
 
@@ -488,7 +488,7 @@ public final class ImplicitsImpl implements Implicits {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Error&gt;} object.
      */
-    public ServiceFuture<Error> getRequiredGlobalQueryAsync(@NonNull ServiceCallback<Error> serviceCallback) {
+    public ServiceFuture<Error> getRequiredGlobalQueryAsync(ServiceCallback<Error> serviceCallback) {
         return ServiceFuture.fromBody(getRequiredGlobalQueryAsync(), serviceCallback);
     }
 
@@ -540,7 +540,7 @@ public final class ImplicitsImpl implements Implicits {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Error&gt;} object.
      */
-    public ServiceFuture<Error> getOptionalGlobalQueryAsync(@NonNull ServiceCallback<Error> serviceCallback) {
+    public ServiceFuture<Error> getOptionalGlobalQueryAsync(ServiceCallback<Error> serviceCallback) {
         return ServiceFuture.fromBody(getOptionalGlobalQueryAsync(), serviceCallback);
     }
 

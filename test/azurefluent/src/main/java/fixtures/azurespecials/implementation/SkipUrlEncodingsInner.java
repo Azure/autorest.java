@@ -113,7 +113,7 @@ public final class SkipUrlEncodingsInner {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    public ServiceFuture<Void> getMethodPathValidAsync(@NonNull String unencodedPathParam, @NonNull ServiceCallback<Void> serviceCallback) {
+    public ServiceFuture<Void> getMethodPathValidAsync(@NonNull String unencodedPathParam, ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(getMethodPathValidAsync(unencodedPathParam), serviceCallback);
     }
 
@@ -163,7 +163,7 @@ public final class SkipUrlEncodingsInner {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    public ServiceFuture<Void> getPathPathValidAsync(@NonNull String unencodedPathParam, @NonNull ServiceCallback<Void> serviceCallback) {
+    public ServiceFuture<Void> getPathPathValidAsync(@NonNull String unencodedPathParam, ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(getPathPathValidAsync(unencodedPathParam), serviceCallback);
     }
 
@@ -210,7 +210,7 @@ public final class SkipUrlEncodingsInner {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    public ServiceFuture<Void> getSwaggerPathValidAsync(@NonNull ServiceCallback<Void> serviceCallback) {
+    public ServiceFuture<Void> getSwaggerPathValidAsync(ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(getSwaggerPathValidAsync(), serviceCallback);
     }
 
@@ -254,7 +254,7 @@ public final class SkipUrlEncodingsInner {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    public ServiceFuture<Void> getMethodQueryValidAsync(@NonNull String q1, @NonNull ServiceCallback<Void> serviceCallback) {
+    public ServiceFuture<Void> getMethodQueryValidAsync(@NonNull String q1, ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(getMethodQueryValidAsync(q1), serviceCallback);
     }
 
@@ -301,7 +301,7 @@ public final class SkipUrlEncodingsInner {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    public ServiceFuture<Void> getMethodQueryNullAsync(@NonNull ServiceCallback<Void> serviceCallback) {
+    public ServiceFuture<Void> getMethodQueryNullAsync(ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(getMethodQueryNullAsync(), serviceCallback);
     }
 
@@ -345,7 +345,7 @@ public final class SkipUrlEncodingsInner {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    public ServiceFuture<Void> getMethodQueryNullAsync(String q1, @NonNull ServiceCallback<Void> serviceCallback) {
+    public ServiceFuture<Void> getMethodQueryNullAsync(String q1, ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(getMethodQueryNullAsync(q1), serviceCallback);
     }
 
@@ -392,7 +392,7 @@ public final class SkipUrlEncodingsInner {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    public ServiceFuture<Void> getPathQueryValidAsync(@NonNull String q1, @NonNull ServiceCallback<Void> serviceCallback) {
+    public ServiceFuture<Void> getPathQueryValidAsync(@NonNull String q1, ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(getPathQueryValidAsync(q1), serviceCallback);
     }
 
@@ -439,7 +439,7 @@ public final class SkipUrlEncodingsInner {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    public ServiceFuture<Void> getSwaggerQueryValidAsync(@NonNull ServiceCallback<Void> serviceCallback) {
+    public ServiceFuture<Void> getSwaggerQueryValidAsync(ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(getSwaggerQueryValidAsync(), serviceCallback);
     }
 

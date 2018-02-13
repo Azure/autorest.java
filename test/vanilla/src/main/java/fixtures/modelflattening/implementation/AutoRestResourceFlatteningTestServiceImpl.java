@@ -150,7 +150,7 @@ public final class AutoRestResourceFlatteningTestServiceImpl extends ServiceClie
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    public ServiceFuture<Void> putArrayAsync(@NonNull ServiceCallback<Void> serviceCallback) {
+    public ServiceFuture<Void> putArrayAsync(ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(putArrayAsync(), serviceCallback);
     }
 
@@ -194,7 +194,7 @@ public final class AutoRestResourceFlatteningTestServiceImpl extends ServiceClie
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    public ServiceFuture<Void> putArrayAsync(List<Resource> resourceArray, @NonNull ServiceCallback<Void> serviceCallback) {
+    public ServiceFuture<Void> putArrayAsync(List<Resource> resourceArray, ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(putArrayAsync(resourceArray), serviceCallback);
     }
 
@@ -240,7 +240,7 @@ public final class AutoRestResourceFlatteningTestServiceImpl extends ServiceClie
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;List&lt;FlattenedProduct&gt;&gt;} object.
      */
-    public ServiceFuture<List<FlattenedProduct>> getArrayAsync(@NonNull ServiceCallback<List<FlattenedProduct>> serviceCallback) {
+    public ServiceFuture<List<FlattenedProduct>> getArrayAsync(ServiceCallback<List<FlattenedProduct>> serviceCallback) {
         return ServiceFuture.fromBody(getArrayAsync(), serviceCallback);
     }
 
@@ -288,7 +288,7 @@ public final class AutoRestResourceFlatteningTestServiceImpl extends ServiceClie
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    public ServiceFuture<Void> putWrappedArrayAsync(@NonNull ServiceCallback<Void> serviceCallback) {
+    public ServiceFuture<Void> putWrappedArrayAsync(ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(putWrappedArrayAsync(), serviceCallback);
     }
 
@@ -332,7 +332,7 @@ public final class AutoRestResourceFlatteningTestServiceImpl extends ServiceClie
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    public ServiceFuture<Void> putWrappedArrayAsync(List<WrappedProduct> resourceArray, @NonNull ServiceCallback<Void> serviceCallback) {
+    public ServiceFuture<Void> putWrappedArrayAsync(List<WrappedProduct> resourceArray, ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(putWrappedArrayAsync(resourceArray), serviceCallback);
     }
 
@@ -378,7 +378,7 @@ public final class AutoRestResourceFlatteningTestServiceImpl extends ServiceClie
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;List&lt;ProductWrapper&gt;&gt;} object.
      */
-    public ServiceFuture<List<ProductWrapper>> getWrappedArrayAsync(@NonNull ServiceCallback<List<ProductWrapper>> serviceCallback) {
+    public ServiceFuture<List<ProductWrapper>> getWrappedArrayAsync(ServiceCallback<List<ProductWrapper>> serviceCallback) {
         return ServiceFuture.fromBody(getWrappedArrayAsync(), serviceCallback);
     }
 
@@ -426,7 +426,7 @@ public final class AutoRestResourceFlatteningTestServiceImpl extends ServiceClie
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    public ServiceFuture<Void> putDictionaryAsync(@NonNull ServiceCallback<Void> serviceCallback) {
+    public ServiceFuture<Void> putDictionaryAsync(ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(putDictionaryAsync(), serviceCallback);
     }
 
@@ -470,7 +470,7 @@ public final class AutoRestResourceFlatteningTestServiceImpl extends ServiceClie
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    public ServiceFuture<Void> putDictionaryAsync(Map<String, FlattenedProduct> resourceDictionary, @NonNull ServiceCallback<Void> serviceCallback) {
+    public ServiceFuture<Void> putDictionaryAsync(Map<String, FlattenedProduct> resourceDictionary, ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(putDictionaryAsync(resourceDictionary), serviceCallback);
     }
 
@@ -516,7 +516,7 @@ public final class AutoRestResourceFlatteningTestServiceImpl extends ServiceClie
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Map&lt;String, FlattenedProduct&gt;&gt;} object.
      */
-    public ServiceFuture<Map<String, FlattenedProduct>> getDictionaryAsync(@NonNull ServiceCallback<Map<String, FlattenedProduct>> serviceCallback) {
+    public ServiceFuture<Map<String, FlattenedProduct>> getDictionaryAsync(ServiceCallback<Map<String, FlattenedProduct>> serviceCallback) {
         return ServiceFuture.fromBody(getDictionaryAsync(), serviceCallback);
     }
 
@@ -564,7 +564,7 @@ public final class AutoRestResourceFlatteningTestServiceImpl extends ServiceClie
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    public ServiceFuture<Void> putResourceCollectionAsync(@NonNull ServiceCallback<Void> serviceCallback) {
+    public ServiceFuture<Void> putResourceCollectionAsync(ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(putResourceCollectionAsync(), serviceCallback);
     }
 
@@ -608,7 +608,7 @@ public final class AutoRestResourceFlatteningTestServiceImpl extends ServiceClie
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    public ServiceFuture<Void> putResourceCollectionAsync(ResourceCollection resourceComplexObject, @NonNull ServiceCallback<Void> serviceCallback) {
+    public ServiceFuture<Void> putResourceCollectionAsync(ResourceCollection resourceComplexObject, ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(putResourceCollectionAsync(resourceComplexObject), serviceCallback);
     }
 
@@ -654,7 +654,7 @@ public final class AutoRestResourceFlatteningTestServiceImpl extends ServiceClie
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;ResourceCollection&gt;} object.
      */
-    public ServiceFuture<ResourceCollection> getResourceCollectionAsync(@NonNull ServiceCallback<ResourceCollection> serviceCallback) {
+    public ServiceFuture<ResourceCollection> getResourceCollectionAsync(ServiceCallback<ResourceCollection> serviceCallback) {
         return ServiceFuture.fromBody(getResourceCollectionAsync(), serviceCallback);
     }
 
@@ -703,7 +703,7 @@ public final class AutoRestResourceFlatteningTestServiceImpl extends ServiceClie
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;SimpleProduct&gt;} object.
      */
-    public ServiceFuture<SimpleProduct> putSimpleProductAsync(@NonNull ServiceCallback<SimpleProduct> serviceCallback) {
+    public ServiceFuture<SimpleProduct> putSimpleProductAsync(ServiceCallback<SimpleProduct> serviceCallback) {
         return ServiceFuture.fromBody(putSimpleProductAsync(), serviceCallback);
     }
 
@@ -756,7 +756,7 @@ public final class AutoRestResourceFlatteningTestServiceImpl extends ServiceClie
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;SimpleProduct&gt;} object.
      */
-    public ServiceFuture<SimpleProduct> putSimpleProductAsync(SimpleProduct simpleBodyProduct, @NonNull ServiceCallback<SimpleProduct> serviceCallback) {
+    public ServiceFuture<SimpleProduct> putSimpleProductAsync(SimpleProduct simpleBodyProduct, ServiceCallback<SimpleProduct> serviceCallback) {
         return ServiceFuture.fromBody(putSimpleProductAsync(simpleBodyProduct), serviceCallback);
     }
 
@@ -815,7 +815,7 @@ public final class AutoRestResourceFlatteningTestServiceImpl extends ServiceClie
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;SimpleProduct&gt;} object.
      */
-    public ServiceFuture<SimpleProduct> postFlattenedSimpleProductAsync(@NonNull String productId, @NonNull String maxProductDisplayName, @NonNull ServiceCallback<SimpleProduct> serviceCallback) {
+    public ServiceFuture<SimpleProduct> postFlattenedSimpleProductAsync(@NonNull String productId, @NonNull String maxProductDisplayName, ServiceCallback<SimpleProduct> serviceCallback) {
         return ServiceFuture.fromBody(postFlattenedSimpleProductAsync(productId, maxProductDisplayName), serviceCallback);
     }
 
@@ -896,7 +896,7 @@ public final class AutoRestResourceFlatteningTestServiceImpl extends ServiceClie
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;SimpleProduct&gt;} object.
      */
-    public ServiceFuture<SimpleProduct> postFlattenedSimpleProductAsync(@NonNull String productId, @NonNull String maxProductDisplayName, String description, String genericValue, String odatavalue, @NonNull ServiceCallback<SimpleProduct> serviceCallback) {
+    public ServiceFuture<SimpleProduct> postFlattenedSimpleProductAsync(@NonNull String productId, @NonNull String maxProductDisplayName, String description, String genericValue, String odatavalue, ServiceCallback<SimpleProduct> serviceCallback) {
         return ServiceFuture.fromBody(postFlattenedSimpleProductAsync(productId, maxProductDisplayName, description, genericValue, odatavalue), serviceCallback);
     }
 
@@ -975,7 +975,7 @@ public final class AutoRestResourceFlatteningTestServiceImpl extends ServiceClie
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;SimpleProduct&gt;} object.
      */
-    public ServiceFuture<SimpleProduct> putSimpleProductWithGroupingAsync(@NonNull FlattenParameterGroup flattenParameterGroup, @NonNull ServiceCallback<SimpleProduct> serviceCallback) {
+    public ServiceFuture<SimpleProduct> putSimpleProductWithGroupingAsync(@NonNull FlattenParameterGroup flattenParameterGroup, ServiceCallback<SimpleProduct> serviceCallback) {
         return ServiceFuture.fromBody(putSimpleProductWithGroupingAsync(flattenParameterGroup), serviceCallback);
     }
 

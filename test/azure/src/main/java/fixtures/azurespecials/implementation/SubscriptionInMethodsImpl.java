@@ -98,7 +98,7 @@ public final class SubscriptionInMethodsImpl implements SubscriptionInMethods {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    public ServiceFuture<Void> postMethodLocalValidAsync(@NonNull String subscriptionId, @NonNull ServiceCallback<Void> serviceCallback) {
+    public ServiceFuture<Void> postMethodLocalValidAsync(@NonNull String subscriptionId, ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(postMethodLocalValidAsync(subscriptionId), serviceCallback);
     }
 
@@ -148,7 +148,7 @@ public final class SubscriptionInMethodsImpl implements SubscriptionInMethods {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    public ServiceFuture<Void> postMethodLocalNullAsync(@NonNull String subscriptionId, @NonNull ServiceCallback<Void> serviceCallback) {
+    public ServiceFuture<Void> postMethodLocalNullAsync(@NonNull String subscriptionId, ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(postMethodLocalNullAsync(subscriptionId), serviceCallback);
     }
 
@@ -198,7 +198,7 @@ public final class SubscriptionInMethodsImpl implements SubscriptionInMethods {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    public ServiceFuture<Void> postPathLocalValidAsync(@NonNull String subscriptionId, @NonNull ServiceCallback<Void> serviceCallback) {
+    public ServiceFuture<Void> postPathLocalValidAsync(@NonNull String subscriptionId, ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(postPathLocalValidAsync(subscriptionId), serviceCallback);
     }
 
@@ -248,7 +248,7 @@ public final class SubscriptionInMethodsImpl implements SubscriptionInMethods {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    public ServiceFuture<Void> postSwaggerLocalValidAsync(@NonNull String subscriptionId, @NonNull ServiceCallback<Void> serviceCallback) {
+    public ServiceFuture<Void> postSwaggerLocalValidAsync(@NonNull String subscriptionId, ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(postSwaggerLocalValidAsync(subscriptionId), serviceCallback);
     }
 

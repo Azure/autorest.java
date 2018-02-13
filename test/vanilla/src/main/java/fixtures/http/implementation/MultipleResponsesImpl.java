@@ -25,7 +25,6 @@ import fixtures.http.models.ErrorException;
 import io.reactivex.Completable;
 import io.reactivex.Maybe;
 import io.reactivex.Single;
-import io.reactivex.annotations.NonNull;
 import io.reactivex.functions.Function;
 
 /**
@@ -225,7 +224,7 @@ public final class MultipleResponsesImpl implements MultipleResponses {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;A&gt;} object.
      */
-    public ServiceFuture<A> get200Model204NoModelDefaultError200ValidAsync(@NonNull ServiceCallback<A> serviceCallback) {
+    public ServiceFuture<A> get200Model204NoModelDefaultError200ValidAsync(ServiceCallback<A> serviceCallback) {
         return ServiceFuture.fromBody(get200Model204NoModelDefaultError200ValidAsync(), serviceCallback);
     }
 
@@ -274,7 +273,7 @@ public final class MultipleResponsesImpl implements MultipleResponses {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;A&gt;} object.
      */
-    public ServiceFuture<A> get200Model204NoModelDefaultError204ValidAsync(@NonNull ServiceCallback<A> serviceCallback) {
+    public ServiceFuture<A> get200Model204NoModelDefaultError204ValidAsync(ServiceCallback<A> serviceCallback) {
         return ServiceFuture.fromBody(get200Model204NoModelDefaultError204ValidAsync(), serviceCallback);
     }
 
@@ -323,7 +322,7 @@ public final class MultipleResponsesImpl implements MultipleResponses {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;A&gt;} object.
      */
-    public ServiceFuture<A> get200Model204NoModelDefaultError201InvalidAsync(@NonNull ServiceCallback<A> serviceCallback) {
+    public ServiceFuture<A> get200Model204NoModelDefaultError201InvalidAsync(ServiceCallback<A> serviceCallback) {
         return ServiceFuture.fromBody(get200Model204NoModelDefaultError201InvalidAsync(), serviceCallback);
     }
 
@@ -372,7 +371,7 @@ public final class MultipleResponsesImpl implements MultipleResponses {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;A&gt;} object.
      */
-    public ServiceFuture<A> get200Model204NoModelDefaultError202NoneAsync(@NonNull ServiceCallback<A> serviceCallback) {
+    public ServiceFuture<A> get200Model204NoModelDefaultError202NoneAsync(ServiceCallback<A> serviceCallback) {
         return ServiceFuture.fromBody(get200Model204NoModelDefaultError202NoneAsync(), serviceCallback);
     }
 
@@ -421,7 +420,7 @@ public final class MultipleResponsesImpl implements MultipleResponses {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;A&gt;} object.
      */
-    public ServiceFuture<A> get200Model204NoModelDefaultError400ValidAsync(@NonNull ServiceCallback<A> serviceCallback) {
+    public ServiceFuture<A> get200Model204NoModelDefaultError400ValidAsync(ServiceCallback<A> serviceCallback) {
         return ServiceFuture.fromBody(get200Model204NoModelDefaultError400ValidAsync(), serviceCallback);
     }
 
@@ -470,7 +469,7 @@ public final class MultipleResponsesImpl implements MultipleResponses {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;A&gt;} object.
      */
-    public ServiceFuture<A> get200Model201ModelDefaultError200ValidAsync(@NonNull ServiceCallback<A> serviceCallback) {
+    public ServiceFuture<A> get200Model201ModelDefaultError200ValidAsync(ServiceCallback<A> serviceCallback) {
         return ServiceFuture.fromBody(get200Model201ModelDefaultError200ValidAsync(), serviceCallback);
     }
 
@@ -519,7 +518,7 @@ public final class MultipleResponsesImpl implements MultipleResponses {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;A&gt;} object.
      */
-    public ServiceFuture<A> get200Model201ModelDefaultError201ValidAsync(@NonNull ServiceCallback<A> serviceCallback) {
+    public ServiceFuture<A> get200Model201ModelDefaultError201ValidAsync(ServiceCallback<A> serviceCallback) {
         return ServiceFuture.fromBody(get200Model201ModelDefaultError201ValidAsync(), serviceCallback);
     }
 
@@ -568,7 +567,7 @@ public final class MultipleResponsesImpl implements MultipleResponses {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;A&gt;} object.
      */
-    public ServiceFuture<A> get200Model201ModelDefaultError400ValidAsync(@NonNull ServiceCallback<A> serviceCallback) {
+    public ServiceFuture<A> get200Model201ModelDefaultError400ValidAsync(ServiceCallback<A> serviceCallback) {
         return ServiceFuture.fromBody(get200Model201ModelDefaultError400ValidAsync(), serviceCallback);
     }
 
@@ -617,7 +616,7 @@ public final class MultipleResponsesImpl implements MultipleResponses {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Object&gt;} object.
      */
-    public ServiceFuture<Object> get200ModelA201ModelC404ModelDDefaultError200ValidAsync(@NonNull ServiceCallback<Object> serviceCallback) {
+    public ServiceFuture<Object> get200ModelA201ModelC404ModelDDefaultError200ValidAsync(ServiceCallback<Object> serviceCallback) {
         return ServiceFuture.fromBody(get200ModelA201ModelC404ModelDDefaultError200ValidAsync(), serviceCallback);
     }
 
@@ -666,7 +665,7 @@ public final class MultipleResponsesImpl implements MultipleResponses {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Object&gt;} object.
      */
-    public ServiceFuture<Object> get200ModelA201ModelC404ModelDDefaultError201ValidAsync(@NonNull ServiceCallback<Object> serviceCallback) {
+    public ServiceFuture<Object> get200ModelA201ModelC404ModelDDefaultError201ValidAsync(ServiceCallback<Object> serviceCallback) {
         return ServiceFuture.fromBody(get200ModelA201ModelC404ModelDDefaultError201ValidAsync(), serviceCallback);
     }
 
@@ -715,7 +714,7 @@ public final class MultipleResponsesImpl implements MultipleResponses {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Object&gt;} object.
      */
-    public ServiceFuture<Object> get200ModelA201ModelC404ModelDDefaultError404ValidAsync(@NonNull ServiceCallback<Object> serviceCallback) {
+    public ServiceFuture<Object> get200ModelA201ModelC404ModelDDefaultError404ValidAsync(ServiceCallback<Object> serviceCallback) {
         return ServiceFuture.fromBody(get200ModelA201ModelC404ModelDDefaultError404ValidAsync(), serviceCallback);
     }
 
@@ -764,7 +763,7 @@ public final class MultipleResponsesImpl implements MultipleResponses {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Object&gt;} object.
      */
-    public ServiceFuture<Object> get200ModelA201ModelC404ModelDDefaultError400ValidAsync(@NonNull ServiceCallback<Object> serviceCallback) {
+    public ServiceFuture<Object> get200ModelA201ModelC404ModelDDefaultError400ValidAsync(ServiceCallback<Object> serviceCallback) {
         return ServiceFuture.fromBody(get200ModelA201ModelC404ModelDDefaultError400ValidAsync(), serviceCallback);
     }
 
@@ -812,7 +811,7 @@ public final class MultipleResponsesImpl implements MultipleResponses {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    public ServiceFuture<Void> get202None204NoneDefaultError202NoneAsync(@NonNull ServiceCallback<Void> serviceCallback) {
+    public ServiceFuture<Void> get202None204NoneDefaultError202NoneAsync(ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(get202None204NoneDefaultError202NoneAsync(), serviceCallback);
     }
 
@@ -852,7 +851,7 @@ public final class MultipleResponsesImpl implements MultipleResponses {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    public ServiceFuture<Void> get202None204NoneDefaultError204NoneAsync(@NonNull ServiceCallback<Void> serviceCallback) {
+    public ServiceFuture<Void> get202None204NoneDefaultError204NoneAsync(ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(get202None204NoneDefaultError204NoneAsync(), serviceCallback);
     }
 
@@ -892,7 +891,7 @@ public final class MultipleResponsesImpl implements MultipleResponses {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    public ServiceFuture<Void> get202None204NoneDefaultError400ValidAsync(@NonNull ServiceCallback<Void> serviceCallback) {
+    public ServiceFuture<Void> get202None204NoneDefaultError400ValidAsync(ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(get202None204NoneDefaultError400ValidAsync(), serviceCallback);
     }
 
@@ -931,7 +930,7 @@ public final class MultipleResponsesImpl implements MultipleResponses {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    public ServiceFuture<Void> get202None204NoneDefaultNone202InvalidAsync(@NonNull ServiceCallback<Void> serviceCallback) {
+    public ServiceFuture<Void> get202None204NoneDefaultNone202InvalidAsync(ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(get202None204NoneDefaultNone202InvalidAsync(), serviceCallback);
     }
 
@@ -970,7 +969,7 @@ public final class MultipleResponsesImpl implements MultipleResponses {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    public ServiceFuture<Void> get202None204NoneDefaultNone204NoneAsync(@NonNull ServiceCallback<Void> serviceCallback) {
+    public ServiceFuture<Void> get202None204NoneDefaultNone204NoneAsync(ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(get202None204NoneDefaultNone204NoneAsync(), serviceCallback);
     }
 
@@ -1009,7 +1008,7 @@ public final class MultipleResponsesImpl implements MultipleResponses {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    public ServiceFuture<Void> get202None204NoneDefaultNone400NoneAsync(@NonNull ServiceCallback<Void> serviceCallback) {
+    public ServiceFuture<Void> get202None204NoneDefaultNone400NoneAsync(ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(get202None204NoneDefaultNone400NoneAsync(), serviceCallback);
     }
 
@@ -1048,7 +1047,7 @@ public final class MultipleResponsesImpl implements MultipleResponses {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    public ServiceFuture<Void> get202None204NoneDefaultNone400InvalidAsync(@NonNull ServiceCallback<Void> serviceCallback) {
+    public ServiceFuture<Void> get202None204NoneDefaultNone400InvalidAsync(ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(get202None204NoneDefaultNone400InvalidAsync(), serviceCallback);
     }
 
@@ -1089,7 +1088,7 @@ public final class MultipleResponsesImpl implements MultipleResponses {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;A&gt;} object.
      */
-    public ServiceFuture<A> getDefaultModelA200ValidAsync(@NonNull ServiceCallback<A> serviceCallback) {
+    public ServiceFuture<A> getDefaultModelA200ValidAsync(ServiceCallback<A> serviceCallback) {
         return ServiceFuture.fromBody(getDefaultModelA200ValidAsync(), serviceCallback);
     }
 
@@ -1138,7 +1137,7 @@ public final class MultipleResponsesImpl implements MultipleResponses {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;A&gt;} object.
      */
-    public ServiceFuture<A> getDefaultModelA200NoneAsync(@NonNull ServiceCallback<A> serviceCallback) {
+    public ServiceFuture<A> getDefaultModelA200NoneAsync(ServiceCallback<A> serviceCallback) {
         return ServiceFuture.fromBody(getDefaultModelA200NoneAsync(), serviceCallback);
     }
 
@@ -1187,7 +1186,7 @@ public final class MultipleResponsesImpl implements MultipleResponses {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;A&gt;} object.
      */
-    public ServiceFuture<A> getDefaultModelA400ValidAsync(@NonNull ServiceCallback<A> serviceCallback) {
+    public ServiceFuture<A> getDefaultModelA400ValidAsync(ServiceCallback<A> serviceCallback) {
         return ServiceFuture.fromBody(getDefaultModelA400ValidAsync(), serviceCallback);
     }
 
@@ -1236,7 +1235,7 @@ public final class MultipleResponsesImpl implements MultipleResponses {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;A&gt;} object.
      */
-    public ServiceFuture<A> getDefaultModelA400NoneAsync(@NonNull ServiceCallback<A> serviceCallback) {
+    public ServiceFuture<A> getDefaultModelA400NoneAsync(ServiceCallback<A> serviceCallback) {
         return ServiceFuture.fromBody(getDefaultModelA400NoneAsync(), serviceCallback);
     }
 
@@ -1283,7 +1282,7 @@ public final class MultipleResponsesImpl implements MultipleResponses {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    public ServiceFuture<Void> getDefaultNone200InvalidAsync(@NonNull ServiceCallback<Void> serviceCallback) {
+    public ServiceFuture<Void> getDefaultNone200InvalidAsync(ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(getDefaultNone200InvalidAsync(), serviceCallback);
     }
 
@@ -1322,7 +1321,7 @@ public final class MultipleResponsesImpl implements MultipleResponses {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    public ServiceFuture<Void> getDefaultNone200NoneAsync(@NonNull ServiceCallback<Void> serviceCallback) {
+    public ServiceFuture<Void> getDefaultNone200NoneAsync(ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(getDefaultNone200NoneAsync(), serviceCallback);
     }
 
@@ -1361,7 +1360,7 @@ public final class MultipleResponsesImpl implements MultipleResponses {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    public ServiceFuture<Void> getDefaultNone400InvalidAsync(@NonNull ServiceCallback<Void> serviceCallback) {
+    public ServiceFuture<Void> getDefaultNone400InvalidAsync(ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(getDefaultNone400InvalidAsync(), serviceCallback);
     }
 
@@ -1400,7 +1399,7 @@ public final class MultipleResponsesImpl implements MultipleResponses {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    public ServiceFuture<Void> getDefaultNone400NoneAsync(@NonNull ServiceCallback<Void> serviceCallback) {
+    public ServiceFuture<Void> getDefaultNone400NoneAsync(ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(getDefaultNone400NoneAsync(), serviceCallback);
     }
 
@@ -1440,7 +1439,7 @@ public final class MultipleResponsesImpl implements MultipleResponses {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;A&gt;} object.
      */
-    public ServiceFuture<A> get200ModelA200NoneAsync(@NonNull ServiceCallback<A> serviceCallback) {
+    public ServiceFuture<A> get200ModelA200NoneAsync(ServiceCallback<A> serviceCallback) {
         return ServiceFuture.fromBody(get200ModelA200NoneAsync(), serviceCallback);
     }
 
@@ -1488,7 +1487,7 @@ public final class MultipleResponsesImpl implements MultipleResponses {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;A&gt;} object.
      */
-    public ServiceFuture<A> get200ModelA200ValidAsync(@NonNull ServiceCallback<A> serviceCallback) {
+    public ServiceFuture<A> get200ModelA200ValidAsync(ServiceCallback<A> serviceCallback) {
         return ServiceFuture.fromBody(get200ModelA200ValidAsync(), serviceCallback);
     }
 
@@ -1536,7 +1535,7 @@ public final class MultipleResponsesImpl implements MultipleResponses {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;A&gt;} object.
      */
-    public ServiceFuture<A> get200ModelA200InvalidAsync(@NonNull ServiceCallback<A> serviceCallback) {
+    public ServiceFuture<A> get200ModelA200InvalidAsync(ServiceCallback<A> serviceCallback) {
         return ServiceFuture.fromBody(get200ModelA200InvalidAsync(), serviceCallback);
     }
 
@@ -1584,7 +1583,7 @@ public final class MultipleResponsesImpl implements MultipleResponses {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;A&gt;} object.
      */
-    public ServiceFuture<A> get200ModelA400NoneAsync(@NonNull ServiceCallback<A> serviceCallback) {
+    public ServiceFuture<A> get200ModelA400NoneAsync(ServiceCallback<A> serviceCallback) {
         return ServiceFuture.fromBody(get200ModelA400NoneAsync(), serviceCallback);
     }
 
@@ -1632,7 +1631,7 @@ public final class MultipleResponsesImpl implements MultipleResponses {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;A&gt;} object.
      */
-    public ServiceFuture<A> get200ModelA400ValidAsync(@NonNull ServiceCallback<A> serviceCallback) {
+    public ServiceFuture<A> get200ModelA400ValidAsync(ServiceCallback<A> serviceCallback) {
         return ServiceFuture.fromBody(get200ModelA400ValidAsync(), serviceCallback);
     }
 
@@ -1680,7 +1679,7 @@ public final class MultipleResponsesImpl implements MultipleResponses {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;A&gt;} object.
      */
-    public ServiceFuture<A> get200ModelA400InvalidAsync(@NonNull ServiceCallback<A> serviceCallback) {
+    public ServiceFuture<A> get200ModelA400InvalidAsync(ServiceCallback<A> serviceCallback) {
         return ServiceFuture.fromBody(get200ModelA400InvalidAsync(), serviceCallback);
     }
 
@@ -1728,7 +1727,7 @@ public final class MultipleResponsesImpl implements MultipleResponses {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;A&gt;} object.
      */
-    public ServiceFuture<A> get200ModelA202ValidAsync(@NonNull ServiceCallback<A> serviceCallback) {
+    public ServiceFuture<A> get200ModelA202ValidAsync(ServiceCallback<A> serviceCallback) {
         return ServiceFuture.fromBody(get200ModelA202ValidAsync(), serviceCallback);
     }
 

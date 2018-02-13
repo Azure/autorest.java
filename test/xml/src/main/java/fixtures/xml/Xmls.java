@@ -42,7 +42,7 @@ public interface Xmls {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Slideshow&gt;} object.
      */
-    ServiceFuture<Slideshow> getSimpleAsync(@NonNull ServiceCallback<Slideshow> serviceCallback);
+    ServiceFuture<Slideshow> getSimpleAsync(ServiceCallback<Slideshow> serviceCallback);
 
     /**
      * Get a simple XML document.
@@ -76,7 +76,7 @@ public interface Xmls {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    ServiceFuture<Void> putSimpleAsync(@NonNull Slideshow wrappedLists, @NonNull ServiceCallback<Void> serviceCallback);
+    ServiceFuture<Void> putSimpleAsync(@NonNull Slideshow wrappedLists, ServiceCallback<Void> serviceCallback);
 
     /**
      * Put a simple XML document.
@@ -111,7 +111,7 @@ public interface Xmls {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;AppleBarrel&gt;} object.
      */
-    ServiceFuture<AppleBarrel> getWrappedListsAsync(@NonNull ServiceCallback<AppleBarrel> serviceCallback);
+    ServiceFuture<AppleBarrel> getWrappedListsAsync(ServiceCallback<AppleBarrel> serviceCallback);
 
     /**
      * Get an XML document with multiple wrapped lists.
@@ -145,7 +145,7 @@ public interface Xmls {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    ServiceFuture<Void> putWrappedListsAsync(@NonNull AppleBarrel wrappedLists, @NonNull ServiceCallback<Void> serviceCallback);
+    ServiceFuture<Void> putWrappedListsAsync(@NonNull AppleBarrel wrappedLists, ServiceCallback<Void> serviceCallback);
 
     /**
      * Put an XML document with multiple wrapped lists.
@@ -179,7 +179,7 @@ public interface Xmls {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    ServiceFuture<Void> getHeadersAsync(@NonNull ServiceCallback<Void> serviceCallback);
+    ServiceFuture<Void> getHeadersAsync(ServiceCallback<Void> serviceCallback);
 
     /**
      * Get strongly-typed response headers.

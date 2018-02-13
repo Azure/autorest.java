@@ -23,7 +23,6 @@ import fixtures.bodyfile.models.ErrorException;
 import io.reactivex.Flowable;
 import io.reactivex.Maybe;
 import io.reactivex.Single;
-import io.reactivex.annotations.NonNull;
 import io.reactivex.functions.Function;
 import java.nio.ByteBuffer;
 
@@ -92,7 +91,7 @@ public final class FilesImpl implements Files {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Flowable&lt;ByteBuffer&gt;&gt;} object.
      */
-    public ServiceFuture<Flowable<ByteBuffer>> getFileAsync(@NonNull ServiceCallback<Flowable<ByteBuffer>> serviceCallback) {
+    public ServiceFuture<Flowable<ByteBuffer>> getFileAsync(ServiceCallback<Flowable<ByteBuffer>> serviceCallback) {
         return ServiceFuture.fromBody(getFileAsync(), serviceCallback);
     }
 
@@ -141,7 +140,7 @@ public final class FilesImpl implements Files {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Flowable&lt;ByteBuffer&gt;&gt;} object.
      */
-    public ServiceFuture<Flowable<ByteBuffer>> getFileLargeAsync(@NonNull ServiceCallback<Flowable<ByteBuffer>> serviceCallback) {
+    public ServiceFuture<Flowable<ByteBuffer>> getFileLargeAsync(ServiceCallback<Flowable<ByteBuffer>> serviceCallback) {
         return ServiceFuture.fromBody(getFileLargeAsync(), serviceCallback);
     }
 
@@ -190,7 +189,7 @@ public final class FilesImpl implements Files {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Flowable&lt;ByteBuffer&gt;&gt;} object.
      */
-    public ServiceFuture<Flowable<ByteBuffer>> getEmptyFileAsync(@NonNull ServiceCallback<Flowable<ByteBuffer>> serviceCallback) {
+    public ServiceFuture<Flowable<ByteBuffer>> getEmptyFileAsync(ServiceCallback<Flowable<ByteBuffer>> serviceCallback) {
         return ServiceFuture.fromBody(getEmptyFileAsync(), serviceCallback);
     }
 

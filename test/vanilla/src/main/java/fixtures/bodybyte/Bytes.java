@@ -39,7 +39,7 @@ public interface Bytes {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;byte[]&gt;} object.
      */
-    ServiceFuture<byte[]> getNullAsync(@NonNull ServiceCallback<byte[]> serviceCallback);
+    ServiceFuture<byte[]> getNullAsync(ServiceCallback<byte[]> serviceCallback);
 
     /**
      * Get null byte value.
@@ -71,7 +71,7 @@ public interface Bytes {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;byte[]&gt;} object.
      */
-    ServiceFuture<byte[]> getEmptyAsync(@NonNull ServiceCallback<byte[]> serviceCallback);
+    ServiceFuture<byte[]> getEmptyAsync(ServiceCallback<byte[]> serviceCallback);
 
     /**
      * Get empty byte value ''.
@@ -103,7 +103,7 @@ public interface Bytes {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;byte[]&gt;} object.
      */
-    ServiceFuture<byte[]> getNonAsciiAsync(@NonNull ServiceCallback<byte[]> serviceCallback);
+    ServiceFuture<byte[]> getNonAsciiAsync(ServiceCallback<byte[]> serviceCallback);
 
     /**
      * Get non-ascii byte string hex(FF FE FD FC FB FA F9 F8 F7 F6).
@@ -137,7 +137,7 @@ public interface Bytes {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    ServiceFuture<Void> putNonAsciiAsync(@NonNull byte[] byteBody, @NonNull ServiceCallback<Void> serviceCallback);
+    ServiceFuture<Void> putNonAsciiAsync(@NonNull byte[] byteBody, ServiceCallback<Void> serviceCallback);
 
     /**
      * Put non-ascii byte string hex(FF FE FD FC FB FA F9 F8 F7 F6).
@@ -173,7 +173,7 @@ public interface Bytes {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;byte[]&gt;} object.
      */
-    ServiceFuture<byte[]> getInvalidAsync(@NonNull ServiceCallback<byte[]> serviceCallback);
+    ServiceFuture<byte[]> getInvalidAsync(ServiceCallback<byte[]> serviceCallback);
 
     /**
      * Get invalid byte value ':::SWAGGER::::'.

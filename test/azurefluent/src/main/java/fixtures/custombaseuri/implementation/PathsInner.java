@@ -82,7 +82,7 @@ public final class PathsInner {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the {@link ServiceFuture&lt;Void&gt;} object.
      */
-    public ServiceFuture<Void> getEmptyAsync(@NonNull String accountName, @NonNull ServiceCallback<Void> serviceCallback) {
+    public ServiceFuture<Void> getEmptyAsync(@NonNull String accountName, ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(getEmptyAsync(accountName), serviceCallback);
     }
 
