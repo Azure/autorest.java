@@ -54,8 +54,6 @@ namespace AutoRest.Java
         private static Lazy<Parameter> azureEnvironmentParameter;
         private static Lazy<Parameter> httpPipelineParameter;
 
-        private const string modelsPackage = ".models";
-
         private const string innerSupportsImportPrefix = "com.microsoft.azure.v2.management.resources.fluentcore.collection.InnerSupports";
         private const string innerSupportsGetImport = innerSupportsImportPrefix + "Get";
         private const string innerSupportsDeleteImport = innerSupportsImportPrefix + "Delete";
@@ -158,7 +156,8 @@ namespace AutoRest.Java
                 stringDates: GetBoolSetting(autoRestSettings, "string-dates"),
                 clientTypePrefix: GetStringSetting(autoRestSettings, "client-type-prefix"),
                 generateClientInterfaces: GetBoolSetting(autoRestSettings, "generate-client-interfaces", true),
-                implementationSubpackage: GetStringSetting(autoRestSettings, "implementation-subpackage", "implementation"));
+                implementationSubpackage: GetStringSetting(autoRestSettings, "implementation-subpackage", "implementation"),
+                modelsSubpackage: GetStringSetting(autoRestSettings, "models-subpackage", "models"));
 
             serviceClientCredentialsParameter = new Lazy<Parameter>(() =>
                 new Parameter(
@@ -854,12 +853,12 @@ namespace AutoRest.Java
                     {
                         if (innerModelCompositeType.Contains(autoRestExceptionType))
                         {
-                            exceptionPackage += GetPackage(settings, settings.ImplementationSubpackage);
+                            exceptionPackage = GetPackage(settings, settings.ImplementationSubpackage);
                         }
                     }
                     else
                     {
-                        exceptionPackage += ".models";
+                        exceptionPackage = GetPackage(settings, settings.ModelsSubpackage);
                     }
 
                     string exceptionName = errorClassType.GetExtensionValue(SwaggerExtensions.NameOverrideExtension);
@@ -1028,7 +1027,7 @@ namespace AutoRest.Java
                 AutoRestSequenceType autoRestRestAPIMethodReturnClientPageListType = DependencyInjection.New<AutoRestSequenceType>();
                 autoRestRestAPIMethodReturnClientPageListType.ElementType = autorestRestAPIMethodReturnClientSequenceType.ElementType;
 
-                string pageContainerSubPackage = (settings.IsFluent ? settings.ImplementationSubpackage : "models");
+                string pageContainerSubPackage = (settings.IsFluent ? settings.ImplementationSubpackage : settings.ModelsSubpackage);
                 string pageContainerPackage = $"{settings.Package}.{pageContainerSubPackage}";
                 string pageContainerTypeName = SequenceTypeGetPageImplType(autorestRestAPIMethodReturnClientSequenceType);
 
@@ -1334,7 +1333,7 @@ namespace AutoRest.Java
                         string classPackage;
                         if (!settings.IsFluent)
                         {
-                            classPackage = GetPackage(settings, "models");
+                            classPackage = GetPackage(settings, settings.ModelsSubpackage);
                         }
                         else if (isInnerModelType)
                         {
@@ -1448,7 +1447,8 @@ namespace AutoRest.Java
             }
             else
             {
-                string enumPackage = settings.Package + (settings.IsFluent ? "" : modelsPackage);
+                string enumSubpackage = (settings.IsFluent ? "" : settings.ModelsSubpackage);
+                string enumPackage = GetPackage(settings, enumSubpackage);
 
                 enumTypeName = CodeNamer.Instance.GetTypeName(enumTypeName);
 
@@ -1523,7 +1523,7 @@ namespace AutoRest.Java
                     }
                     else
                     {
-                        exceptionSubPackage = modelsPackage;
+                        exceptionSubPackage = settings.ModelsSubpackage;
                     }
 
                     exceptions.Add(new ServiceException(methodOperationExceptionTypeName, errorName, exceptionSubPackage));
@@ -1578,7 +1578,7 @@ namespace AutoRest.Java
             ServiceModel result = serviceModels.GetModel(modelName);
             if (result == null)
             {
-                string modelSubPackage = !settings.IsFluent ? modelsPackage : (innerModelCompositeType.Contains(autoRestCompositeType) ? settings.ImplementationSubpackage : "");
+                string modelSubPackage = !settings.IsFluent ? settings.ModelsSubpackage : (innerModelCompositeType.Contains(autoRestCompositeType) ? settings.ImplementationSubpackage : "");
                 string modelPackage = GetPackage(settings, modelSubPackage);
 
                 bool isPolymorphic = autoRestCompositeType.BaseIsPolymorphic;
@@ -1876,7 +1876,7 @@ namespace AutoRest.Java
 
         public static JavaFile GetPageJavaFile(PageDetails pageClass, JavaSettings settings)
         {
-            string subPackage = settings.IsFluent ? settings.ImplementationSubpackage : modelsPackage;
+            string subPackage = settings.IsFluent ? settings.ImplementationSubpackage : settings.ModelsSubpackage;
             JavaFile javaFile = GetJavaFileWithHeaderAndSubPackage(subPackage, settings, pageClass.ClassName);
             javaFile.Import("com.fasterxml.jackson.annotation.JsonProperty",
                             "com.microsoft.azure.v2.Page",
@@ -2687,7 +2687,7 @@ namespace AutoRest.Java
         {
             string enumTypeComment = $"Defines values for {serviceEnum.Name}.";
 
-            string subpackage = settings.IsFluent ? null : modelsPackage;
+            string subpackage = settings.IsFluent ? null : settings.ModelsSubpackage;
             JavaFile javaFile = GetJavaFileWithHeaderAndSubPackage(subpackage, settings, serviceEnum.Name);
             if (serviceEnum.Expandable)
             {
@@ -3423,7 +3423,7 @@ namespace AutoRest.Java
 
                     string pageImplTypeName = SequenceTypeGetPageImplType(autoRestRestAPIMethodReturnBodyType);
 
-                    string pageImplSubPackage = settings.IsFluent ? settings.ImplementationSubpackage : modelsPackage;
+                    string pageImplSubPackage = settings.IsFluent ? settings.ImplementationSubpackage : settings.ModelsSubpackage;
                     string pageImplPackage = $"{settings.Package}.{pageImplSubPackage}";
 
                     pageImplType = new GenericType(pageImplPackage, pageImplTypeName, restAPIMethodReturnBodyClientListElementType);
@@ -4540,7 +4540,7 @@ namespace AutoRest.Java
 
                     string pageImplTypeName = SequenceTypeGetPageImplType(autoRestRestAPIMethodReturnBodyType);
 
-                    string pageImplSubPackage = settings.IsFluent ? settings.ImplementationSubpackage : modelsPackage;
+                    string pageImplSubPackage = settings.IsFluent ? settings.ImplementationSubpackage : settings.ModelsSubpackage;
                     string pageImplPackage = $"{settings.Package}.{pageImplSubPackage}";
 
                     pageImplType = new GenericType(pageImplPackage, pageImplTypeName, restAPIMethodReturnBodyClientListElementType);
