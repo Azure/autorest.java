@@ -7,7 +7,7 @@
 // regenerated.
 
 /**
- * This package contains the classes for AutoRestHeadExceptionTestService.
- * Test Infrastructure for AutoRest.
+ * This package contains the spam classes for AutoRestSwaggerBATByteService.
+ * Test Infrastructure for AutoRest Swagger BAT.
  */
-package fixtures.headexceptions;
+package fixtures.bodybyte.spam;

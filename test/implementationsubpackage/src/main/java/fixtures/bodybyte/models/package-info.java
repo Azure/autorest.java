@@ -7,8 +7,7 @@
 // regenerated.
 
 /**
- * This package contains the models classes for
- * AutoRestHeadExceptionTestService.
- * Test Infrastructure for AutoRest.
+ * This package contains the models classes for AutoRestSwaggerBATByteService.
+ * Test Infrastructure for AutoRest Swagger BAT.
  */
-package fixtures.headexceptions.models;
+package fixtures.bodybyte.models;

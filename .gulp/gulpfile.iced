@@ -23,9 +23,7 @@ task 'init', "" ,(done)->
 # Run language-specific tests:
 task 'test', "", [], (done) ->
   await execute "dotnet test test/autorest.java.tests/autorest.java.tests.csproj", defer code, stderr, stdout
-  await execute "mvn test -pl test/vanilla", defer code, stderr, stdout
-  await execute "mvn test -pl test/azure", defer code, stderr, stdout
-  await execute "mvn test -pl test/azurefluent", defer code, stderr, stdout
+  await execute "mvn test", defer code, stderr, stdout
   done();
 
 # CI job

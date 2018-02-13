@@ -29,7 +29,8 @@ namespace AutoRest.Java
         /// <param name="stringDates">Whether or not DateTime types should be represented as Strings (generally for better/different precision).</param>
         /// <param name="clientTypePrefix">The prefix that will be added to each generated client type.</param>
         /// <param name="generateClientInterfaces">Whether or not interfaces will be generated for Service and Method Group clients.</param>
-        public JavaSettings(Action<bool> setAddCredentials, bool isAzure, bool isFluent, bool regenerateManagers, bool regeneratePom, string fileHeaderText, int maximumJavadocCommentWidth, string serviceName, string package, bool shouldGenerateXmlSerialization, bool nonNullAnnotations, bool stringDates, string clientTypePrefix, bool generateClientInterfaces)
+        /// <param name="implementationSubpackage">The sub-package that the Service and Method Group client implementation classes will be put into.</param>
+        public JavaSettings(Action<bool> setAddCredentials, bool isAzure, bool isFluent, bool regenerateManagers, bool regeneratePom, string fileHeaderText, int maximumJavadocCommentWidth, string serviceName, string package, bool shouldGenerateXmlSerialization, bool nonNullAnnotations, bool stringDates, string clientTypePrefix, bool generateClientInterfaces, string implementationSubpackage)
         {
             this.setAddCredentials = setAddCredentials;
             IsAzure = isAzure;
@@ -45,6 +46,7 @@ namespace AutoRest.Java
             StringDates = stringDates;
             ClientTypePrefix = clientTypePrefix;
             GenerateClientInterfaces = generateClientInterfaces;
+            ImplementationSubpackage = implementationSubpackage;
         }
 
         public bool IsAzure { get; }
@@ -91,5 +93,10 @@ namespace AutoRest.Java
         /// Whether or not interfaces will be generated for Service and Method Group clients.
         /// </summary>
         public bool GenerateClientInterfaces { get; }
+
+        /// <summary>
+        /// The sub-package that the Service and Method Group client implementation classes will be put into.
+        /// </summary>
+        public string ImplementationSubpackage { get; }
     }
 }

@@ -113,7 +113,7 @@ task 'regenerate-nonnull', '', (done) ->
       'BodyByte': 'body-byte.json'
     },
     'extraArguments': [
-      '--java.non-null-annotations=false'
+      '--java.non-null-annotations=false',
     ]
   },done
   return null
@@ -142,13 +142,39 @@ task 'regenerate-generateclientinterfaces', '', (done) ->
   },done
   return null
 
+task 'regenerate-implementationsubpackage', '', (done) ->
+  regenExpected {
+    'outputDir': 'test/implementationsubpackage',
+    'mappings': {
+      'BodyByte': 'body-byte.json'
+    },
+    'extraArguments': [
+      '--java.implementation-subpackage=spam'
+    ]
+  },done
+  return null
+
+task 'regenerate-implementationsubpackage-empty', '', (done) ->
+  regenExpected {
+    'outputDir': 'test/implementationsubpackage-empty',
+    'mappings': {
+      'BodyByte': 'body-byte.json'
+    },
+    'extraArguments': [
+      '--java.implementation-subpackage=\"\""
+    ]
+  },done
+  return null
+
 regenerateTasks = [
   'regenerate-java',
   'regenerate-javaazure',
   'regenerate-javaazurefluent',
   'regenerate-nonnull',
   'regenerate-clienttypeprefix',
-  'regenerate-generateclientinterfaces'
+  'regenerate-generateclientinterfaces',
+  'regenerate-implementationsubpackage',
+  'regenerate-implementationsubpackage-empty'
 ]
 task 'regenerate', "regenerate expected code for tests", regenerateTasks, (done) ->
   done();
