@@ -119,6 +119,7 @@ public final class GroupsInner {
     public Maybe<SampleResourceGroupInner> getSampleResourceGroupAsync(@NonNull String resourceGroupName) {
         return getSampleResourceGroupWithRestResponseAsync(resourceGroupName)
             .flatMapMaybe(new Function<RestResponse<Void, SampleResourceGroupInner>, Maybe<SampleResourceGroupInner>>() {
+                @Override
                 public Maybe<SampleResourceGroupInner> apply(RestResponse<Void, SampleResourceGroupInner> restResponse) {
                     if (restResponse.body() == null) {
                         return Maybe.empty();

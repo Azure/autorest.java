@@ -126,6 +126,7 @@ public final class XmlsImpl implements Xmls {
     public Maybe<Slideshow> getSimpleAsync() {
         return getSimpleWithRestResponseAsync()
             .flatMapMaybe(new Function<RestResponse<Void, Slideshow>, Maybe<Slideshow>>() {
+                @Override
                 public Maybe<Slideshow> apply(RestResponse<Void, Slideshow> restResponse) {
                     if (restResponse.body() == null) {
                         return Maybe.empty();
@@ -225,6 +226,7 @@ public final class XmlsImpl implements Xmls {
     public Maybe<AppleBarrel> getWrappedListsAsync() {
         return getWrappedListsWithRestResponseAsync()
             .flatMapMaybe(new Function<RestResponse<Void, AppleBarrel>, Maybe<AppleBarrel>>() {
+                @Override
                 public Maybe<AppleBarrel> apply(RestResponse<Void, AppleBarrel> restResponse) {
                     if (restResponse.body() == null) {
                         return Maybe.empty();

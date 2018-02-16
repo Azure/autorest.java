@@ -333,6 +333,7 @@ public final class AutoRestResourceFlatteningTestServiceImpl extends AzureServic
     public Maybe<List<FlattenedProduct>> getArrayAsync() {
         return getArrayWithRestResponseAsync()
             .flatMapMaybe(new Function<RestResponse<Void, List<FlattenedProduct>>, Maybe<List<FlattenedProduct>>>() {
+                @Override
                 public Maybe<List<FlattenedProduct>> apply(RestResponse<Void, List<FlattenedProduct>> restResponse) {
                     if (restResponse.body() == null) {
                         return Maybe.empty();
@@ -471,6 +472,7 @@ public final class AutoRestResourceFlatteningTestServiceImpl extends AzureServic
     public Maybe<Map<String, FlattenedProduct>> getDictionaryAsync() {
         return getDictionaryWithRestResponseAsync()
             .flatMapMaybe(new Function<RestResponse<Void, Map<String, FlattenedProduct>>, Maybe<Map<String, FlattenedProduct>>>() {
+                @Override
                 public Maybe<Map<String, FlattenedProduct>> apply(RestResponse<Void, Map<String, FlattenedProduct>> restResponse) {
                     if (restResponse.body() == null) {
                         return Maybe.empty();
@@ -609,6 +611,7 @@ public final class AutoRestResourceFlatteningTestServiceImpl extends AzureServic
     public Maybe<ResourceCollection> getResourceCollectionAsync() {
         return getResourceCollectionWithRestResponseAsync()
             .flatMapMaybe(new Function<RestResponse<Void, ResourceCollection>, Maybe<ResourceCollection>>() {
+                @Override
                 public Maybe<ResourceCollection> apply(RestResponse<Void, ResourceCollection> restResponse) {
                     if (restResponse.body() == null) {
                         return Maybe.empty();

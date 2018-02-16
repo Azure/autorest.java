@@ -116,6 +116,7 @@ public final class HttpServerFailuresImpl implements HttpServerFailures {
     public Maybe<Error> head501Async() {
         return head501WithRestResponseAsync()
             .flatMapMaybe(new Function<RestResponse<Void, Error>, Maybe<Error>>() {
+                @Override
                 public Maybe<Error> apply(RestResponse<Void, Error> restResponse) {
                     if (restResponse.body() == null) {
                         return Maybe.empty();
@@ -165,6 +166,7 @@ public final class HttpServerFailuresImpl implements HttpServerFailures {
     public Maybe<Error> get501Async() {
         return get501WithRestResponseAsync()
             .flatMapMaybe(new Function<RestResponse<Void, Error>, Maybe<Error>>() {
+                @Override
                 public Maybe<Error> apply(RestResponse<Void, Error> restResponse) {
                     if (restResponse.body() == null) {
                         return Maybe.empty();
@@ -215,6 +217,7 @@ public final class HttpServerFailuresImpl implements HttpServerFailures {
     public Maybe<Error> post505Async() {
         return post505WithRestResponseAsync()
             .flatMapMaybe(new Function<RestResponse<Void, Error>, Maybe<Error>>() {
+                @Override
                 public Maybe<Error> apply(RestResponse<Void, Error> restResponse) {
                     if (restResponse.body() == null) {
                         return Maybe.empty();
@@ -271,6 +274,7 @@ public final class HttpServerFailuresImpl implements HttpServerFailures {
     public Maybe<Error> post505Async(Boolean booleanValue) {
         return post505WithRestResponseAsync(booleanValue)
             .flatMapMaybe(new Function<RestResponse<Void, Error>, Maybe<Error>>() {
+                @Override
                 public Maybe<Error> apply(RestResponse<Void, Error> restResponse) {
                     if (restResponse.body() == null) {
                         return Maybe.empty();
@@ -321,6 +325,7 @@ public final class HttpServerFailuresImpl implements HttpServerFailures {
     public Maybe<Error> delete505Async() {
         return delete505WithRestResponseAsync()
             .flatMapMaybe(new Function<RestResponse<Void, Error>, Maybe<Error>>() {
+                @Override
                 public Maybe<Error> apply(RestResponse<Void, Error> restResponse) {
                     if (restResponse.body() == null) {
                         return Maybe.empty();
@@ -377,6 +382,7 @@ public final class HttpServerFailuresImpl implements HttpServerFailures {
     public Maybe<Error> delete505Async(Boolean booleanValue) {
         return delete505WithRestResponseAsync(booleanValue)
             .flatMapMaybe(new Function<RestResponse<Void, Error>, Maybe<Error>>() {
+                @Override
                 public Maybe<Error> apply(RestResponse<Void, Error> restResponse) {
                     if (restResponse.body() == null) {
                         return Maybe.empty();

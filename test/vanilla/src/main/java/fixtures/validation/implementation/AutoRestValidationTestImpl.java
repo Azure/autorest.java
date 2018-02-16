@@ -195,6 +195,7 @@ public final class AutoRestValidationTestImpl extends ServiceClient implements A
     public Maybe<Product> validationOfMethodParametersAsync(@NonNull String resourceGroupName, @NonNull int id) {
         return validationOfMethodParametersWithRestResponseAsync(resourceGroupName, id)
             .flatMapMaybe(new Function<RestResponse<Void, Product>, Maybe<Product>>() {
+                @Override
                 public Maybe<Product> apply(RestResponse<Void, Product> restResponse) {
                     if (restResponse.body() == null) {
                         return Maybe.empty();
@@ -265,6 +266,7 @@ public final class AutoRestValidationTestImpl extends ServiceClient implements A
     public Maybe<Product> validationOfBodyAsync(@NonNull String resourceGroupName, @NonNull int id) {
         return validationOfBodyWithRestResponseAsync(resourceGroupName, id)
             .flatMapMaybe(new Function<RestResponse<Void, Product>, Maybe<Product>>() {
+                @Override
                 public Maybe<Product> apply(RestResponse<Void, Product> restResponse) {
                     if (restResponse.body() == null) {
                         return Maybe.empty();
@@ -339,6 +341,7 @@ public final class AutoRestValidationTestImpl extends ServiceClient implements A
     public Maybe<Product> validationOfBodyAsync(@NonNull String resourceGroupName, @NonNull int id, Product body) {
         return validationOfBodyWithRestResponseAsync(resourceGroupName, id, body)
             .flatMapMaybe(new Function<RestResponse<Void, Product>, Maybe<Product>>() {
+                @Override
                 public Maybe<Product> apply(RestResponse<Void, Product> restResponse) {
                     if (restResponse.body() == null) {
                         return Maybe.empty();
@@ -413,6 +416,7 @@ public final class AutoRestValidationTestImpl extends ServiceClient implements A
     public Maybe<Product> postWithConstantInBodyAsync() {
         return postWithConstantInBodyWithRestResponseAsync()
             .flatMapMaybe(new Function<RestResponse<Void, Product>, Maybe<Product>>() {
+                @Override
                 public Maybe<Product> apply(RestResponse<Void, Product> restResponse) {
                     if (restResponse.body() == null) {
                         return Maybe.empty();
@@ -462,6 +466,7 @@ public final class AutoRestValidationTestImpl extends ServiceClient implements A
     public Maybe<Product> postWithConstantInBodyAsync(Product body) {
         return postWithConstantInBodyWithRestResponseAsync(body)
             .flatMapMaybe(new Function<RestResponse<Void, Product>, Maybe<Product>>() {
+                @Override
                 public Maybe<Product> apply(RestResponse<Void, Product> restResponse) {
                     if (restResponse.body() == null) {
                         return Maybe.empty();

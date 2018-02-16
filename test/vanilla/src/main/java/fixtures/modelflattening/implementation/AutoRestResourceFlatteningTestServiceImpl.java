@@ -261,6 +261,7 @@ public final class AutoRestResourceFlatteningTestServiceImpl extends ServiceClie
     public Maybe<List<FlattenedProduct>> getArrayAsync() {
         return getArrayWithRestResponseAsync()
             .flatMapMaybe(new Function<RestResponse<Void, List<FlattenedProduct>>, Maybe<List<FlattenedProduct>>>() {
+                @Override
                 public Maybe<List<FlattenedProduct>> apply(RestResponse<Void, List<FlattenedProduct>> restResponse) {
                     if (restResponse.body() == null) {
                         return Maybe.empty();
@@ -399,6 +400,7 @@ public final class AutoRestResourceFlatteningTestServiceImpl extends ServiceClie
     public Maybe<List<ProductWrapper>> getWrappedArrayAsync() {
         return getWrappedArrayWithRestResponseAsync()
             .flatMapMaybe(new Function<RestResponse<Void, List<ProductWrapper>>, Maybe<List<ProductWrapper>>>() {
+                @Override
                 public Maybe<List<ProductWrapper>> apply(RestResponse<Void, List<ProductWrapper>> restResponse) {
                     if (restResponse.body() == null) {
                         return Maybe.empty();
@@ -537,6 +539,7 @@ public final class AutoRestResourceFlatteningTestServiceImpl extends ServiceClie
     public Maybe<Map<String, FlattenedProduct>> getDictionaryAsync() {
         return getDictionaryWithRestResponseAsync()
             .flatMapMaybe(new Function<RestResponse<Void, Map<String, FlattenedProduct>>, Maybe<Map<String, FlattenedProduct>>>() {
+                @Override
                 public Maybe<Map<String, FlattenedProduct>> apply(RestResponse<Void, Map<String, FlattenedProduct>> restResponse) {
                     if (restResponse.body() == null) {
                         return Maybe.empty();
@@ -675,6 +678,7 @@ public final class AutoRestResourceFlatteningTestServiceImpl extends ServiceClie
     public Maybe<ResourceCollection> getResourceCollectionAsync() {
         return getResourceCollectionWithRestResponseAsync()
             .flatMapMaybe(new Function<RestResponse<Void, ResourceCollection>, Maybe<ResourceCollection>>() {
+                @Override
                 public Maybe<ResourceCollection> apply(RestResponse<Void, ResourceCollection> restResponse) {
                     if (restResponse.body() == null) {
                         return Maybe.empty();
@@ -725,6 +729,7 @@ public final class AutoRestResourceFlatteningTestServiceImpl extends ServiceClie
     public Maybe<SimpleProduct> putSimpleProductAsync() {
         return putSimpleProductWithRestResponseAsync()
             .flatMapMaybe(new Function<RestResponse<Void, SimpleProduct>, Maybe<SimpleProduct>>() {
+                @Override
                 public Maybe<SimpleProduct> apply(RestResponse<Void, SimpleProduct> restResponse) {
                     if (restResponse.body() == null) {
                         return Maybe.empty();
@@ -782,6 +787,7 @@ public final class AutoRestResourceFlatteningTestServiceImpl extends ServiceClie
     public Maybe<SimpleProduct> putSimpleProductAsync(SimpleProduct simpleBodyProduct) {
         return putSimpleProductWithRestResponseAsync(simpleBodyProduct)
             .flatMapMaybe(new Function<RestResponse<Void, SimpleProduct>, Maybe<SimpleProduct>>() {
+                @Override
                 public Maybe<SimpleProduct> apply(RestResponse<Void, SimpleProduct> restResponse) {
                     if (restResponse.body() == null) {
                         return Maybe.empty();
@@ -857,6 +863,7 @@ public final class AutoRestResourceFlatteningTestServiceImpl extends ServiceClie
     public Maybe<SimpleProduct> postFlattenedSimpleProductAsync(@NonNull String productId, @NonNull String maxProductDisplayName) {
         return postFlattenedSimpleProductWithRestResponseAsync(productId, maxProductDisplayName)
             .flatMapMaybe(new Function<RestResponse<Void, SimpleProduct>, Maybe<SimpleProduct>>() {
+                @Override
                 public Maybe<SimpleProduct> apply(RestResponse<Void, SimpleProduct> restResponse) {
                     if (restResponse.body() == null) {
                         return Maybe.empty();
@@ -944,6 +951,7 @@ public final class AutoRestResourceFlatteningTestServiceImpl extends ServiceClie
     public Maybe<SimpleProduct> postFlattenedSimpleProductAsync(@NonNull String productId, @NonNull String maxProductDisplayName, String description, String genericValue, String odatavalue) {
         return postFlattenedSimpleProductWithRestResponseAsync(productId, maxProductDisplayName, description, genericValue, odatavalue)
             .flatMapMaybe(new Function<RestResponse<Void, SimpleProduct>, Maybe<SimpleProduct>>() {
+                @Override
                 public Maybe<SimpleProduct> apply(RestResponse<Void, SimpleProduct> restResponse) {
                     if (restResponse.body() == null) {
                         return Maybe.empty();
@@ -1019,6 +1027,7 @@ public final class AutoRestResourceFlatteningTestServiceImpl extends ServiceClie
     public Maybe<SimpleProduct> putSimpleProductWithGroupingAsync(@NonNull FlattenParameterGroup flattenParameterGroup) {
         return putSimpleProductWithGroupingWithRestResponseAsync(flattenParameterGroup)
             .flatMapMaybe(new Function<RestResponse<Void, SimpleProduct>, Maybe<SimpleProduct>>() {
+                @Override
                 public Maybe<SimpleProduct> apply(RestResponse<Void, SimpleProduct> restResponse) {
                     if (restResponse.body() == null) {
                         return Maybe.empty();

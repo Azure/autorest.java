@@ -131,6 +131,7 @@ public final class DictionarysImpl implements Dictionarys {
     public Maybe<DictionaryWrapper> getValidAsync() {
         return getValidWithRestResponseAsync()
             .flatMapMaybe(new Function<RestResponse<Void, DictionaryWrapper>, Maybe<DictionaryWrapper>>() {
+                @Override
                 public Maybe<DictionaryWrapper> apply(RestResponse<Void, DictionaryWrapper> restResponse) {
                     if (restResponse.body() == null) {
                         return Maybe.empty();
@@ -231,6 +232,7 @@ public final class DictionarysImpl implements Dictionarys {
     public Maybe<DictionaryWrapper> getEmptyAsync() {
         return getEmptyWithRestResponseAsync()
             .flatMapMaybe(new Function<RestResponse<Void, DictionaryWrapper>, Maybe<DictionaryWrapper>>() {
+                @Override
                 public Maybe<DictionaryWrapper> apply(RestResponse<Void, DictionaryWrapper> restResponse) {
                     if (restResponse.body() == null) {
                         return Maybe.empty();
@@ -331,6 +333,7 @@ public final class DictionarysImpl implements Dictionarys {
     public Maybe<DictionaryWrapper> getNullAsync() {
         return getNullWithRestResponseAsync()
             .flatMapMaybe(new Function<RestResponse<Void, DictionaryWrapper>, Maybe<DictionaryWrapper>>() {
+                @Override
                 public Maybe<DictionaryWrapper> apply(RestResponse<Void, DictionaryWrapper> restResponse) {
                     if (restResponse.body() == null) {
                         return Maybe.empty();
@@ -380,6 +383,7 @@ public final class DictionarysImpl implements Dictionarys {
     public Maybe<DictionaryWrapper> getNotProvidedAsync() {
         return getNotProvidedWithRestResponseAsync()
             .flatMapMaybe(new Function<RestResponse<Void, DictionaryWrapper>, Maybe<DictionaryWrapper>>() {
+                @Override
                 public Maybe<DictionaryWrapper> apply(RestResponse<Void, DictionaryWrapper> restResponse) {
                     if (restResponse.body() == null) {
                         return Maybe.empty();

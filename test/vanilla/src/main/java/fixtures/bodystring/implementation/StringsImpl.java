@@ -169,6 +169,7 @@ public final class StringsImpl implements Strings {
     public Maybe<String> getNullAsync() {
         return getNullWithRestResponseAsync()
             .flatMapMaybe(new Function<RestResponse<Void, String>, Maybe<String>>() {
+                @Override
                 public Maybe<String> apply(RestResponse<Void, String> restResponse) {
                     if (restResponse.body() == null) {
                         return Maybe.empty();
@@ -306,6 +307,7 @@ public final class StringsImpl implements Strings {
     public Maybe<String> getEmptyAsync() {
         return getEmptyWithRestResponseAsync()
             .flatMapMaybe(new Function<RestResponse<Void, String>, Maybe<String>>() {
+                @Override
                 public Maybe<String> apply(RestResponse<Void, String> restResponse) {
                     if (restResponse.body() == null) {
                         return Maybe.empty();
@@ -405,6 +407,7 @@ public final class StringsImpl implements Strings {
     public Maybe<String> getMbcsAsync() {
         return getMbcsWithRestResponseAsync()
             .flatMapMaybe(new Function<RestResponse<Void, String>, Maybe<String>>() {
+                @Override
                 public Maybe<String> apply(RestResponse<Void, String> restResponse) {
                     if (restResponse.body() == null) {
                         return Maybe.empty();
@@ -504,6 +507,7 @@ public final class StringsImpl implements Strings {
     public Maybe<String> getWhitespaceAsync() {
         return getWhitespaceWithRestResponseAsync()
             .flatMapMaybe(new Function<RestResponse<Void, String>, Maybe<String>>() {
+                @Override
                 public Maybe<String> apply(RestResponse<Void, String> restResponse) {
                     if (restResponse.body() == null) {
                         return Maybe.empty();
@@ -603,6 +607,7 @@ public final class StringsImpl implements Strings {
     public Maybe<String> getNotProvidedAsync() {
         return getNotProvidedWithRestResponseAsync()
             .flatMapMaybe(new Function<RestResponse<Void, String>, Maybe<String>>() {
+                @Override
                 public Maybe<String> apply(RestResponse<Void, String> restResponse) {
                     if (restResponse.body() == null) {
                         return Maybe.empty();
@@ -652,6 +657,7 @@ public final class StringsImpl implements Strings {
     public Maybe<byte[]> getBase64EncodedAsync() {
         return getBase64EncodedWithRestResponseAsync()
             .flatMapMaybe(new Function<RestResponse<Void, byte[]>, Maybe<byte[]>>() {
+                @Override
                 public Maybe<byte[]> apply(RestResponse<Void, byte[]> restResponse) {
                     if (restResponse.body() == null) {
                         return Maybe.empty();
@@ -701,6 +707,7 @@ public final class StringsImpl implements Strings {
     public Maybe<byte[]> getBase64UrlEncodedAsync() {
         return getBase64UrlEncodedWithRestResponseAsync()
             .flatMapMaybe(new Function<RestResponse<Void, byte[]>, Maybe<byte[]>>() {
+                @Override
                 public Maybe<byte[]> apply(RestResponse<Void, byte[]> restResponse) {
                     if (restResponse.body() == null) {
                         return Maybe.empty();
@@ -801,6 +808,7 @@ public final class StringsImpl implements Strings {
     public Maybe<byte[]> getNullBase64UrlEncodedAsync() {
         return getNullBase64UrlEncodedWithRestResponseAsync()
             .flatMapMaybe(new Function<RestResponse<Void, byte[]>, Maybe<byte[]>>() {
+                @Override
                 public Maybe<byte[]> apply(RestResponse<Void, byte[]> restResponse) {
                     if (restResponse.body() == null) {
                         return Maybe.empty();

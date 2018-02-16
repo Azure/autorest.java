@@ -220,6 +220,7 @@ public final class NumbersImpl implements Numbers {
     public Maybe<Double> getNullAsync() {
         return getNullWithRestResponseAsync()
             .flatMapMaybe(new Function<RestResponse<Void, Double>, Maybe<Double>>() {
+                @Override
                 public Maybe<Double> apply(RestResponse<Void, Double> restResponse) {
                     if (restResponse.body() == null) {
                         return Maybe.empty();
@@ -269,6 +270,7 @@ public final class NumbersImpl implements Numbers {
     public Maybe<Double> getInvalidFloatAsync() {
         return getInvalidFloatWithRestResponseAsync()
             .flatMapMaybe(new Function<RestResponse<Void, Double>, Maybe<Double>>() {
+                @Override
                 public Maybe<Double> apply(RestResponse<Void, Double> restResponse) {
                     if (restResponse.body() == null) {
                         return Maybe.empty();
@@ -318,6 +320,7 @@ public final class NumbersImpl implements Numbers {
     public Maybe<Double> getInvalidDoubleAsync() {
         return getInvalidDoubleWithRestResponseAsync()
             .flatMapMaybe(new Function<RestResponse<Void, Double>, Maybe<Double>>() {
+                @Override
                 public Maybe<Double> apply(RestResponse<Void, Double> restResponse) {
                     if (restResponse.body() == null) {
                         return Maybe.empty();
@@ -367,6 +370,7 @@ public final class NumbersImpl implements Numbers {
     public Maybe<BigDecimal> getInvalidDecimalAsync() {
         return getInvalidDecimalWithRestResponseAsync()
             .flatMapMaybe(new Function<RestResponse<Void, BigDecimal>, Maybe<BigDecimal>>() {
+                @Override
                 public Maybe<BigDecimal> apply(RestResponse<Void, BigDecimal> restResponse) {
                     if (restResponse.body() == null) {
                         return Maybe.empty();
@@ -463,6 +467,7 @@ public final class NumbersImpl implements Numbers {
     public Maybe<Double> getBigFloatAsync() {
         return getBigFloatWithRestResponseAsync()
             .flatMapMaybe(new Function<RestResponse<Void, Double>, Maybe<Double>>() {
+                @Override
                 public Maybe<Double> apply(RestResponse<Void, Double> restResponse) {
                     if (restResponse.body() == null) {
                         return Maybe.empty();
@@ -559,6 +564,7 @@ public final class NumbersImpl implements Numbers {
     public Maybe<Double> getBigDoubleAsync() {
         return getBigDoubleWithRestResponseAsync()
             .flatMapMaybe(new Function<RestResponse<Void, Double>, Maybe<Double>>() {
+                @Override
                 public Maybe<Double> apply(RestResponse<Void, Double> restResponse) {
                     if (restResponse.body() == null) {
                         return Maybe.empty();
@@ -655,6 +661,7 @@ public final class NumbersImpl implements Numbers {
     public Maybe<Double> getBigDoublePositiveDecimalAsync() {
         return getBigDoublePositiveDecimalWithRestResponseAsync()
             .flatMapMaybe(new Function<RestResponse<Void, Double>, Maybe<Double>>() {
+                @Override
                 public Maybe<Double> apply(RestResponse<Void, Double> restResponse) {
                     if (restResponse.body() == null) {
                         return Maybe.empty();
@@ -751,6 +758,7 @@ public final class NumbersImpl implements Numbers {
     public Maybe<Double> getBigDoubleNegativeDecimalAsync() {
         return getBigDoubleNegativeDecimalWithRestResponseAsync()
             .flatMapMaybe(new Function<RestResponse<Void, Double>, Maybe<Double>>() {
+                @Override
                 public Maybe<Double> apply(RestResponse<Void, Double> restResponse) {
                     if (restResponse.body() == null) {
                         return Maybe.empty();
@@ -850,6 +858,7 @@ public final class NumbersImpl implements Numbers {
     public Maybe<BigDecimal> getBigDecimalAsync() {
         return getBigDecimalWithRestResponseAsync()
             .flatMapMaybe(new Function<RestResponse<Void, BigDecimal>, Maybe<BigDecimal>>() {
+                @Override
                 public Maybe<BigDecimal> apply(RestResponse<Void, BigDecimal> restResponse) {
                     if (restResponse.body() == null) {
                         return Maybe.empty();
@@ -949,6 +958,7 @@ public final class NumbersImpl implements Numbers {
     public Maybe<BigDecimal> getBigDecimalPositiveDecimalAsync() {
         return getBigDecimalPositiveDecimalWithRestResponseAsync()
             .flatMapMaybe(new Function<RestResponse<Void, BigDecimal>, Maybe<BigDecimal>>() {
+                @Override
                 public Maybe<BigDecimal> apply(RestResponse<Void, BigDecimal> restResponse) {
                     if (restResponse.body() == null) {
                         return Maybe.empty();
@@ -1048,6 +1058,7 @@ public final class NumbersImpl implements Numbers {
     public Maybe<BigDecimal> getBigDecimalNegativeDecimalAsync() {
         return getBigDecimalNegativeDecimalWithRestResponseAsync()
             .flatMapMaybe(new Function<RestResponse<Void, BigDecimal>, Maybe<BigDecimal>>() {
+                @Override
                 public Maybe<BigDecimal> apply(RestResponse<Void, BigDecimal> restResponse) {
                     if (restResponse.body() == null) {
                         return Maybe.empty();
@@ -1144,6 +1155,7 @@ public final class NumbersImpl implements Numbers {
     public Maybe<Double> getSmallFloatAsync() {
         return getSmallFloatWithRestResponseAsync()
             .flatMapMaybe(new Function<RestResponse<Void, Double>, Maybe<Double>>() {
+                @Override
                 public Maybe<Double> apply(RestResponse<Void, Double> restResponse) {
                     if (restResponse.body() == null) {
                         return Maybe.empty();
@@ -1240,6 +1252,7 @@ public final class NumbersImpl implements Numbers {
     public Maybe<Double> getSmallDoubleAsync() {
         return getSmallDoubleWithRestResponseAsync()
             .flatMapMaybe(new Function<RestResponse<Void, Double>, Maybe<Double>>() {
+                @Override
                 public Maybe<Double> apply(RestResponse<Void, Double> restResponse) {
                     if (restResponse.body() == null) {
                         return Maybe.empty();
@@ -1339,6 +1352,7 @@ public final class NumbersImpl implements Numbers {
     public Maybe<BigDecimal> getSmallDecimalAsync() {
         return getSmallDecimalWithRestResponseAsync()
             .flatMapMaybe(new Function<RestResponse<Void, BigDecimal>, Maybe<BigDecimal>>() {
+                @Override
                 public Maybe<BigDecimal> apply(RestResponse<Void, BigDecimal> restResponse) {
                     if (restResponse.body() == null) {
                         return Maybe.empty();

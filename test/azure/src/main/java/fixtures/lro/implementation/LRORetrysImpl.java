@@ -250,6 +250,7 @@ public final class LRORetrysImpl implements LRORetrys {
     public Maybe<Product> put201CreatingSucceeded200Async() {
         return put201CreatingSucceeded200WithRestResponseAsync()
             .flatMapMaybe(new Function<RestResponse<Void, Product>, Maybe<Product>>() {
+                @Override
                 public Maybe<Product> apply(RestResponse<Void, Product> restResponse) {
                     if (restResponse.body() == null) {
                         return Maybe.empty();
@@ -307,6 +308,7 @@ public final class LRORetrysImpl implements LRORetrys {
     public Maybe<Product> put201CreatingSucceeded200Async(Product product) {
         return put201CreatingSucceeded200WithRestResponseAsync(product)
             .flatMapMaybe(new Function<RestResponse<Void, Product>, Maybe<Product>>() {
+                @Override
                 public Maybe<Product> apply(RestResponse<Void, Product> restResponse) {
                     if (restResponse.body() == null) {
                         return Maybe.empty();
@@ -425,6 +427,7 @@ public final class LRORetrysImpl implements LRORetrys {
     public Maybe<Product> putAsyncRelativeRetrySucceededAsync() {
         return putAsyncRelativeRetrySucceededWithRestResponseAsync()
             .flatMapMaybe(new Function<RestResponse<LRORetrysPutAsyncRelativeRetrySucceededHeaders, Product>, Maybe<Product>>() {
+                @Override
                 public Maybe<Product> apply(RestResponse<LRORetrysPutAsyncRelativeRetrySucceededHeaders, Product> restResponse) {
                     if (restResponse.body() == null) {
                         return Maybe.empty();
@@ -482,6 +485,7 @@ public final class LRORetrysImpl implements LRORetrys {
     public Maybe<Product> putAsyncRelativeRetrySucceededAsync(Product product) {
         return putAsyncRelativeRetrySucceededWithRestResponseAsync(product)
             .flatMapMaybe(new Function<RestResponse<LRORetrysPutAsyncRelativeRetrySucceededHeaders, Product>, Maybe<Product>>() {
+                @Override
                 public Maybe<Product> apply(RestResponse<LRORetrysPutAsyncRelativeRetrySucceededHeaders, Product> restResponse) {
                     if (restResponse.body() == null) {
                         return Maybe.empty();
@@ -562,6 +566,7 @@ public final class LRORetrysImpl implements LRORetrys {
     public Maybe<Product> deleteProvisioning202Accepted200SucceededAsync() {
         return deleteProvisioning202Accepted200SucceededWithRestResponseAsync()
             .flatMapMaybe(new Function<RestResponse<LRORetrysDeleteProvisioning202Accepted200SucceededHeaders, Product>, Maybe<Product>>() {
+                @Override
                 public Maybe<Product> apply(RestResponse<LRORetrysDeleteProvisioning202Accepted200SucceededHeaders, Product> restResponse) {
                     if (restResponse.body() == null) {
                         return Maybe.empty();

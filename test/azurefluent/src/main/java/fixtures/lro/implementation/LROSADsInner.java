@@ -432,6 +432,7 @@ public final class LROSADsInner {
     public Maybe<ProductInner> putNonRetry400Async() {
         return putNonRetry400WithRestResponseAsync()
             .flatMapMaybe(new Function<RestResponse<Void, ProductInner>, Maybe<ProductInner>>() {
+                @Override
                 public Maybe<ProductInner> apply(RestResponse<Void, ProductInner> restResponse) {
                     if (restResponse.body() == null) {
                         return Maybe.empty();
@@ -489,6 +490,7 @@ public final class LROSADsInner {
     public Maybe<ProductInner> putNonRetry400Async(ProductInner product) {
         return putNonRetry400WithRestResponseAsync(product)
             .flatMapMaybe(new Function<RestResponse<Void, ProductInner>, Maybe<ProductInner>>() {
+                @Override
                 public Maybe<ProductInner> apply(RestResponse<Void, ProductInner> restResponse) {
                     if (restResponse.body() == null) {
                         return Maybe.empty();
@@ -607,6 +609,7 @@ public final class LROSADsInner {
     public Maybe<ProductInner> putNonRetry201Creating400Async() {
         return putNonRetry201Creating400WithRestResponseAsync()
             .flatMapMaybe(new Function<RestResponse<Void, ProductInner>, Maybe<ProductInner>>() {
+                @Override
                 public Maybe<ProductInner> apply(RestResponse<Void, ProductInner> restResponse) {
                     if (restResponse.body() == null) {
                         return Maybe.empty();
@@ -664,6 +667,7 @@ public final class LROSADsInner {
     public Maybe<ProductInner> putNonRetry201Creating400Async(ProductInner product) {
         return putNonRetry201Creating400WithRestResponseAsync(product)
             .flatMapMaybe(new Function<RestResponse<Void, ProductInner>, Maybe<ProductInner>>() {
+                @Override
                 public Maybe<ProductInner> apply(RestResponse<Void, ProductInner> restResponse) {
                     if (restResponse.body() == null) {
                         return Maybe.empty();
@@ -782,6 +786,7 @@ public final class LROSADsInner {
     public Maybe<ProductInner> putNonRetry201Creating400InvalidJsonAsync() {
         return putNonRetry201Creating400InvalidJsonWithRestResponseAsync()
             .flatMapMaybe(new Function<RestResponse<Void, ProductInner>, Maybe<ProductInner>>() {
+                @Override
                 public Maybe<ProductInner> apply(RestResponse<Void, ProductInner> restResponse) {
                     if (restResponse.body() == null) {
                         return Maybe.empty();
@@ -839,6 +844,7 @@ public final class LROSADsInner {
     public Maybe<ProductInner> putNonRetry201Creating400InvalidJsonAsync(ProductInner product) {
         return putNonRetry201Creating400InvalidJsonWithRestResponseAsync(product)
             .flatMapMaybe(new Function<RestResponse<Void, ProductInner>, Maybe<ProductInner>>() {
+                @Override
                 public Maybe<ProductInner> apply(RestResponse<Void, ProductInner> restResponse) {
                     if (restResponse.body() == null) {
                         return Maybe.empty();
@@ -957,6 +963,7 @@ public final class LROSADsInner {
     public Maybe<ProductInner> putAsyncRelativeRetry400Async() {
         return putAsyncRelativeRetry400WithRestResponseAsync()
             .flatMapMaybe(new Function<RestResponse<LROSADsPutAsyncRelativeRetry400HeadersInner, ProductInner>, Maybe<ProductInner>>() {
+                @Override
                 public Maybe<ProductInner> apply(RestResponse<LROSADsPutAsyncRelativeRetry400HeadersInner, ProductInner> restResponse) {
                     if (restResponse.body() == null) {
                         return Maybe.empty();
@@ -1014,6 +1021,7 @@ public final class LROSADsInner {
     public Maybe<ProductInner> putAsyncRelativeRetry400Async(ProductInner product) {
         return putAsyncRelativeRetry400WithRestResponseAsync(product)
             .flatMapMaybe(new Function<RestResponse<LROSADsPutAsyncRelativeRetry400HeadersInner, ProductInner>, Maybe<ProductInner>>() {
+                @Override
                 public Maybe<ProductInner> apply(RestResponse<LROSADsPutAsyncRelativeRetry400HeadersInner, ProductInner> restResponse) {
                     if (restResponse.body() == null) {
                         return Maybe.empty();
@@ -1807,6 +1815,7 @@ public final class LROSADsInner {
     public Maybe<ProductInner> putError201NoProvisioningStatePayloadAsync() {
         return putError201NoProvisioningStatePayloadWithRestResponseAsync()
             .flatMapMaybe(new Function<RestResponse<Void, ProductInner>, Maybe<ProductInner>>() {
+                @Override
                 public Maybe<ProductInner> apply(RestResponse<Void, ProductInner> restResponse) {
                     if (restResponse.body() == null) {
                         return Maybe.empty();
@@ -1864,6 +1873,7 @@ public final class LROSADsInner {
     public Maybe<ProductInner> putError201NoProvisioningStatePayloadAsync(ProductInner product) {
         return putError201NoProvisioningStatePayloadWithRestResponseAsync(product)
             .flatMapMaybe(new Function<RestResponse<Void, ProductInner>, Maybe<ProductInner>>() {
+                @Override
                 public Maybe<ProductInner> apply(RestResponse<Void, ProductInner> restResponse) {
                     if (restResponse.body() == null) {
                         return Maybe.empty();
@@ -1982,6 +1992,7 @@ public final class LROSADsInner {
     public Maybe<ProductInner> putAsyncRelativeRetryNoStatusAsync() {
         return putAsyncRelativeRetryNoStatusWithRestResponseAsync()
             .flatMapMaybe(new Function<RestResponse<LROSADsPutAsyncRelativeRetryNoStatusHeadersInner, ProductInner>, Maybe<ProductInner>>() {
+                @Override
                 public Maybe<ProductInner> apply(RestResponse<LROSADsPutAsyncRelativeRetryNoStatusHeadersInner, ProductInner> restResponse) {
                     if (restResponse.body() == null) {
                         return Maybe.empty();
@@ -2039,6 +2050,7 @@ public final class LROSADsInner {
     public Maybe<ProductInner> putAsyncRelativeRetryNoStatusAsync(ProductInner product) {
         return putAsyncRelativeRetryNoStatusWithRestResponseAsync(product)
             .flatMapMaybe(new Function<RestResponse<LROSADsPutAsyncRelativeRetryNoStatusHeadersInner, ProductInner>, Maybe<ProductInner>>() {
+                @Override
                 public Maybe<ProductInner> apply(RestResponse<LROSADsPutAsyncRelativeRetryNoStatusHeadersInner, ProductInner> restResponse) {
                     if (restResponse.body() == null) {
                         return Maybe.empty();
@@ -2157,6 +2169,7 @@ public final class LROSADsInner {
     public Maybe<ProductInner> putAsyncRelativeRetryNoStatusPayloadAsync() {
         return putAsyncRelativeRetryNoStatusPayloadWithRestResponseAsync()
             .flatMapMaybe(new Function<RestResponse<LROSADsPutAsyncRelativeRetryNoStatusPayloadHeadersInner, ProductInner>, Maybe<ProductInner>>() {
+                @Override
                 public Maybe<ProductInner> apply(RestResponse<LROSADsPutAsyncRelativeRetryNoStatusPayloadHeadersInner, ProductInner> restResponse) {
                     if (restResponse.body() == null) {
                         return Maybe.empty();
@@ -2214,6 +2227,7 @@ public final class LROSADsInner {
     public Maybe<ProductInner> putAsyncRelativeRetryNoStatusPayloadAsync(ProductInner product) {
         return putAsyncRelativeRetryNoStatusPayloadWithRestResponseAsync(product)
             .flatMapMaybe(new Function<RestResponse<LROSADsPutAsyncRelativeRetryNoStatusPayloadHeadersInner, ProductInner>, Maybe<ProductInner>>() {
+                @Override
                 public Maybe<ProductInner> apply(RestResponse<LROSADsPutAsyncRelativeRetryNoStatusPayloadHeadersInner, ProductInner> restResponse) {
                     if (restResponse.body() == null) {
                         return Maybe.empty();
@@ -2782,6 +2796,7 @@ public final class LROSADsInner {
     public Maybe<ProductInner> put200InvalidJsonAsync() {
         return put200InvalidJsonWithRestResponseAsync()
             .flatMapMaybe(new Function<RestResponse<Void, ProductInner>, Maybe<ProductInner>>() {
+                @Override
                 public Maybe<ProductInner> apply(RestResponse<Void, ProductInner> restResponse) {
                     if (restResponse.body() == null) {
                         return Maybe.empty();
@@ -2839,6 +2854,7 @@ public final class LROSADsInner {
     public Maybe<ProductInner> put200InvalidJsonAsync(ProductInner product) {
         return put200InvalidJsonWithRestResponseAsync(product)
             .flatMapMaybe(new Function<RestResponse<Void, ProductInner>, Maybe<ProductInner>>() {
+                @Override
                 public Maybe<ProductInner> apply(RestResponse<Void, ProductInner> restResponse) {
                     if (restResponse.body() == null) {
                         return Maybe.empty();
@@ -2957,6 +2973,7 @@ public final class LROSADsInner {
     public Maybe<ProductInner> putAsyncRelativeRetryInvalidHeaderAsync() {
         return putAsyncRelativeRetryInvalidHeaderWithRestResponseAsync()
             .flatMapMaybe(new Function<RestResponse<LROSADsPutAsyncRelativeRetryInvalidHeaderHeadersInner, ProductInner>, Maybe<ProductInner>>() {
+                @Override
                 public Maybe<ProductInner> apply(RestResponse<LROSADsPutAsyncRelativeRetryInvalidHeaderHeadersInner, ProductInner> restResponse) {
                     if (restResponse.body() == null) {
                         return Maybe.empty();
@@ -3014,6 +3031,7 @@ public final class LROSADsInner {
     public Maybe<ProductInner> putAsyncRelativeRetryInvalidHeaderAsync(ProductInner product) {
         return putAsyncRelativeRetryInvalidHeaderWithRestResponseAsync(product)
             .flatMapMaybe(new Function<RestResponse<LROSADsPutAsyncRelativeRetryInvalidHeaderHeadersInner, ProductInner>, Maybe<ProductInner>>() {
+                @Override
                 public Maybe<ProductInner> apply(RestResponse<LROSADsPutAsyncRelativeRetryInvalidHeaderHeadersInner, ProductInner> restResponse) {
                     if (restResponse.body() == null) {
                         return Maybe.empty();
@@ -3132,6 +3150,7 @@ public final class LROSADsInner {
     public Maybe<ProductInner> putAsyncRelativeRetryInvalidJsonPollingAsync() {
         return putAsyncRelativeRetryInvalidJsonPollingWithRestResponseAsync()
             .flatMapMaybe(new Function<RestResponse<LROSADsPutAsyncRelativeRetryInvalidJsonPollingHeadersInner, ProductInner>, Maybe<ProductInner>>() {
+                @Override
                 public Maybe<ProductInner> apply(RestResponse<LROSADsPutAsyncRelativeRetryInvalidJsonPollingHeadersInner, ProductInner> restResponse) {
                     if (restResponse.body() == null) {
                         return Maybe.empty();
@@ -3189,6 +3208,7 @@ public final class LROSADsInner {
     public Maybe<ProductInner> putAsyncRelativeRetryInvalidJsonPollingAsync(ProductInner product) {
         return putAsyncRelativeRetryInvalidJsonPollingWithRestResponseAsync(product)
             .flatMapMaybe(new Function<RestResponse<LROSADsPutAsyncRelativeRetryInvalidJsonPollingHeadersInner, ProductInner>, Maybe<ProductInner>>() {
+                @Override
                 public Maybe<ProductInner> apply(RestResponse<LROSADsPutAsyncRelativeRetryInvalidJsonPollingHeadersInner, ProductInner> restResponse) {
                     if (restResponse.body() == null) {
                         return Maybe.empty();

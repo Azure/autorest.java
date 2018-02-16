@@ -245,6 +245,7 @@ public final class MultipleResponsesImpl implements MultipleResponses {
     public Maybe<A> get200Model204NoModelDefaultError200ValidAsync() {
         return get200Model204NoModelDefaultError200ValidWithRestResponseAsync()
             .flatMapMaybe(new Function<RestResponse<Void, A>, Maybe<A>>() {
+                @Override
                 public Maybe<A> apply(RestResponse<Void, A> restResponse) {
                     if (restResponse.body() == null) {
                         return Maybe.empty();
@@ -294,6 +295,7 @@ public final class MultipleResponsesImpl implements MultipleResponses {
     public Maybe<A> get200Model204NoModelDefaultError204ValidAsync() {
         return get200Model204NoModelDefaultError204ValidWithRestResponseAsync()
             .flatMapMaybe(new Function<RestResponse<Void, A>, Maybe<A>>() {
+                @Override
                 public Maybe<A> apply(RestResponse<Void, A> restResponse) {
                     if (restResponse.body() == null) {
                         return Maybe.empty();
@@ -343,6 +345,7 @@ public final class MultipleResponsesImpl implements MultipleResponses {
     public Maybe<A> get200Model204NoModelDefaultError201InvalidAsync() {
         return get200Model204NoModelDefaultError201InvalidWithRestResponseAsync()
             .flatMapMaybe(new Function<RestResponse<Void, A>, Maybe<A>>() {
+                @Override
                 public Maybe<A> apply(RestResponse<Void, A> restResponse) {
                     if (restResponse.body() == null) {
                         return Maybe.empty();
@@ -392,6 +395,7 @@ public final class MultipleResponsesImpl implements MultipleResponses {
     public Maybe<A> get200Model204NoModelDefaultError202NoneAsync() {
         return get200Model204NoModelDefaultError202NoneWithRestResponseAsync()
             .flatMapMaybe(new Function<RestResponse<Void, A>, Maybe<A>>() {
+                @Override
                 public Maybe<A> apply(RestResponse<Void, A> restResponse) {
                     if (restResponse.body() == null) {
                         return Maybe.empty();
@@ -441,6 +445,7 @@ public final class MultipleResponsesImpl implements MultipleResponses {
     public Maybe<A> get200Model204NoModelDefaultError400ValidAsync() {
         return get200Model204NoModelDefaultError400ValidWithRestResponseAsync()
             .flatMapMaybe(new Function<RestResponse<Void, A>, Maybe<A>>() {
+                @Override
                 public Maybe<A> apply(RestResponse<Void, A> restResponse) {
                     if (restResponse.body() == null) {
                         return Maybe.empty();
@@ -490,6 +495,7 @@ public final class MultipleResponsesImpl implements MultipleResponses {
     public Maybe<A> get200Model201ModelDefaultError200ValidAsync() {
         return get200Model201ModelDefaultError200ValidWithRestResponseAsync()
             .flatMapMaybe(new Function<RestResponse<Void, A>, Maybe<A>>() {
+                @Override
                 public Maybe<A> apply(RestResponse<Void, A> restResponse) {
                     if (restResponse.body() == null) {
                         return Maybe.empty();
@@ -539,6 +545,7 @@ public final class MultipleResponsesImpl implements MultipleResponses {
     public Maybe<A> get200Model201ModelDefaultError201ValidAsync() {
         return get200Model201ModelDefaultError201ValidWithRestResponseAsync()
             .flatMapMaybe(new Function<RestResponse<Void, A>, Maybe<A>>() {
+                @Override
                 public Maybe<A> apply(RestResponse<Void, A> restResponse) {
                     if (restResponse.body() == null) {
                         return Maybe.empty();
@@ -588,6 +595,7 @@ public final class MultipleResponsesImpl implements MultipleResponses {
     public Maybe<A> get200Model201ModelDefaultError400ValidAsync() {
         return get200Model201ModelDefaultError400ValidWithRestResponseAsync()
             .flatMapMaybe(new Function<RestResponse<Void, A>, Maybe<A>>() {
+                @Override
                 public Maybe<A> apply(RestResponse<Void, A> restResponse) {
                     if (restResponse.body() == null) {
                         return Maybe.empty();
@@ -637,6 +645,7 @@ public final class MultipleResponsesImpl implements MultipleResponses {
     public Maybe<Object> get200ModelA201ModelC404ModelDDefaultError200ValidAsync() {
         return get200ModelA201ModelC404ModelDDefaultError200ValidWithRestResponseAsync()
             .flatMapMaybe(new Function<RestResponse<Void, Object>, Maybe<Object>>() {
+                @Override
                 public Maybe<Object> apply(RestResponse<Void, Object> restResponse) {
                     if (restResponse.body() == null) {
                         return Maybe.empty();
@@ -686,6 +695,7 @@ public final class MultipleResponsesImpl implements MultipleResponses {
     public Maybe<Object> get200ModelA201ModelC404ModelDDefaultError201ValidAsync() {
         return get200ModelA201ModelC404ModelDDefaultError201ValidWithRestResponseAsync()
             .flatMapMaybe(new Function<RestResponse<Void, Object>, Maybe<Object>>() {
+                @Override
                 public Maybe<Object> apply(RestResponse<Void, Object> restResponse) {
                     if (restResponse.body() == null) {
                         return Maybe.empty();
@@ -735,6 +745,7 @@ public final class MultipleResponsesImpl implements MultipleResponses {
     public Maybe<Object> get200ModelA201ModelC404ModelDDefaultError404ValidAsync() {
         return get200ModelA201ModelC404ModelDDefaultError404ValidWithRestResponseAsync()
             .flatMapMaybe(new Function<RestResponse<Void, Object>, Maybe<Object>>() {
+                @Override
                 public Maybe<Object> apply(RestResponse<Void, Object> restResponse) {
                     if (restResponse.body() == null) {
                         return Maybe.empty();
@@ -784,6 +795,7 @@ public final class MultipleResponsesImpl implements MultipleResponses {
     public Maybe<Object> get200ModelA201ModelC404ModelDDefaultError400ValidAsync() {
         return get200ModelA201ModelC404ModelDDefaultError400ValidWithRestResponseAsync()
             .flatMapMaybe(new Function<RestResponse<Void, Object>, Maybe<Object>>() {
+                @Override
                 public Maybe<Object> apply(RestResponse<Void, Object> restResponse) {
                     if (restResponse.body() == null) {
                         return Maybe.empty();
@@ -1109,6 +1121,7 @@ public final class MultipleResponsesImpl implements MultipleResponses {
     public Maybe<A> getDefaultModelA200ValidAsync() {
         return getDefaultModelA200ValidWithRestResponseAsync()
             .flatMapMaybe(new Function<RestResponse<Void, A>, Maybe<A>>() {
+                @Override
                 public Maybe<A> apply(RestResponse<Void, A> restResponse) {
                     if (restResponse.body() == null) {
                         return Maybe.empty();
@@ -1158,6 +1171,7 @@ public final class MultipleResponsesImpl implements MultipleResponses {
     public Maybe<A> getDefaultModelA200NoneAsync() {
         return getDefaultModelA200NoneWithRestResponseAsync()
             .flatMapMaybe(new Function<RestResponse<Void, A>, Maybe<A>>() {
+                @Override
                 public Maybe<A> apply(RestResponse<Void, A> restResponse) {
                     if (restResponse.body() == null) {
                         return Maybe.empty();
@@ -1207,6 +1221,7 @@ public final class MultipleResponsesImpl implements MultipleResponses {
     public Maybe<A> getDefaultModelA400ValidAsync() {
         return getDefaultModelA400ValidWithRestResponseAsync()
             .flatMapMaybe(new Function<RestResponse<Void, A>, Maybe<A>>() {
+                @Override
                 public Maybe<A> apply(RestResponse<Void, A> restResponse) {
                     if (restResponse.body() == null) {
                         return Maybe.empty();
@@ -1256,6 +1271,7 @@ public final class MultipleResponsesImpl implements MultipleResponses {
     public Maybe<A> getDefaultModelA400NoneAsync() {
         return getDefaultModelA400NoneWithRestResponseAsync()
             .flatMapMaybe(new Function<RestResponse<Void, A>, Maybe<A>>() {
+                @Override
                 public Maybe<A> apply(RestResponse<Void, A> restResponse) {
                     if (restResponse.body() == null) {
                         return Maybe.empty();
@@ -1460,6 +1476,7 @@ public final class MultipleResponsesImpl implements MultipleResponses {
     public Maybe<A> get200ModelA200NoneAsync() {
         return get200ModelA200NoneWithRestResponseAsync()
             .flatMapMaybe(new Function<RestResponse<Void, A>, Maybe<A>>() {
+                @Override
                 public Maybe<A> apply(RestResponse<Void, A> restResponse) {
                     if (restResponse.body() == null) {
                         return Maybe.empty();
@@ -1508,6 +1525,7 @@ public final class MultipleResponsesImpl implements MultipleResponses {
     public Maybe<A> get200ModelA200ValidAsync() {
         return get200ModelA200ValidWithRestResponseAsync()
             .flatMapMaybe(new Function<RestResponse<Void, A>, Maybe<A>>() {
+                @Override
                 public Maybe<A> apply(RestResponse<Void, A> restResponse) {
                     if (restResponse.body() == null) {
                         return Maybe.empty();
@@ -1556,6 +1574,7 @@ public final class MultipleResponsesImpl implements MultipleResponses {
     public Maybe<A> get200ModelA200InvalidAsync() {
         return get200ModelA200InvalidWithRestResponseAsync()
             .flatMapMaybe(new Function<RestResponse<Void, A>, Maybe<A>>() {
+                @Override
                 public Maybe<A> apply(RestResponse<Void, A> restResponse) {
                     if (restResponse.body() == null) {
                         return Maybe.empty();
@@ -1604,6 +1623,7 @@ public final class MultipleResponsesImpl implements MultipleResponses {
     public Maybe<A> get200ModelA400NoneAsync() {
         return get200ModelA400NoneWithRestResponseAsync()
             .flatMapMaybe(new Function<RestResponse<Void, A>, Maybe<A>>() {
+                @Override
                 public Maybe<A> apply(RestResponse<Void, A> restResponse) {
                     if (restResponse.body() == null) {
                         return Maybe.empty();
@@ -1652,6 +1672,7 @@ public final class MultipleResponsesImpl implements MultipleResponses {
     public Maybe<A> get200ModelA400ValidAsync() {
         return get200ModelA400ValidWithRestResponseAsync()
             .flatMapMaybe(new Function<RestResponse<Void, A>, Maybe<A>>() {
+                @Override
                 public Maybe<A> apply(RestResponse<Void, A> restResponse) {
                     if (restResponse.body() == null) {
                         return Maybe.empty();
@@ -1700,6 +1721,7 @@ public final class MultipleResponsesImpl implements MultipleResponses {
     public Maybe<A> get200ModelA400InvalidAsync() {
         return get200ModelA400InvalidWithRestResponseAsync()
             .flatMapMaybe(new Function<RestResponse<Void, A>, Maybe<A>>() {
+                @Override
                 public Maybe<A> apply(RestResponse<Void, A> restResponse) {
                     if (restResponse.body() == null) {
                         return Maybe.empty();
@@ -1748,6 +1770,7 @@ public final class MultipleResponsesImpl implements MultipleResponses {
     public Maybe<A> get200ModelA202ValidAsync() {
         return get200ModelA202ValidWithRestResponseAsync()
             .flatMapMaybe(new Function<RestResponse<Void, A>, Maybe<A>>() {
+                @Override
                 public Maybe<A> apply(RestResponse<Void, A> restResponse) {
                     if (restResponse.body() == null) {
                         return Maybe.empty();

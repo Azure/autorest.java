@@ -330,6 +330,7 @@ public final class AutoRestResourceFlatteningTestServiceImpl extends AzureServic
     public Maybe<List<FlattenedProductInner>> getArrayAsync() {
         return getArrayWithRestResponseAsync()
             .flatMapMaybe(new Function<RestResponse<Void, List<FlattenedProductInner>>, Maybe<List<FlattenedProductInner>>>() {
+                @Override
                 public Maybe<List<FlattenedProductInner>> apply(RestResponse<Void, List<FlattenedProductInner>> restResponse) {
                     if (restResponse.body() == null) {
                         return Maybe.empty();
@@ -468,6 +469,7 @@ public final class AutoRestResourceFlatteningTestServiceImpl extends AzureServic
     public Maybe<Map<String, FlattenedProductInner>> getDictionaryAsync() {
         return getDictionaryWithRestResponseAsync()
             .flatMapMaybe(new Function<RestResponse<Void, Map<String, FlattenedProductInner>>, Maybe<Map<String, FlattenedProductInner>>>() {
+                @Override
                 public Maybe<Map<String, FlattenedProductInner>> apply(RestResponse<Void, Map<String, FlattenedProductInner>> restResponse) {
                     if (restResponse.body() == null) {
                         return Maybe.empty();
@@ -606,6 +608,7 @@ public final class AutoRestResourceFlatteningTestServiceImpl extends AzureServic
     public Maybe<ResourceCollectionInner> getResourceCollectionAsync() {
         return getResourceCollectionWithRestResponseAsync()
             .flatMapMaybe(new Function<RestResponse<Void, ResourceCollectionInner>, Maybe<ResourceCollectionInner>>() {
+                @Override
                 public Maybe<ResourceCollectionInner> apply(RestResponse<Void, ResourceCollectionInner> restResponse) {
                     if (restResponse.body() == null) {
                         return Maybe.empty();

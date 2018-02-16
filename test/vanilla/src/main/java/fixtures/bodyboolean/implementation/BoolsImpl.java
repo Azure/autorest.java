@@ -129,6 +129,7 @@ public final class BoolsImpl implements Bools {
     public Maybe<Boolean> getTrueAsync() {
         return getTrueWithRestResponseAsync()
             .flatMapMaybe(new Function<RestResponse<Void, Boolean>, Maybe<Boolean>>() {
+                @Override
                 public Maybe<Boolean> apply(RestResponse<Void, Boolean> restResponse) {
                     if (restResponse.body() == null) {
                         return Maybe.empty();
@@ -225,6 +226,7 @@ public final class BoolsImpl implements Bools {
     public Maybe<Boolean> getFalseAsync() {
         return getFalseWithRestResponseAsync()
             .flatMapMaybe(new Function<RestResponse<Void, Boolean>, Maybe<Boolean>>() {
+                @Override
                 public Maybe<Boolean> apply(RestResponse<Void, Boolean> restResponse) {
                     if (restResponse.body() == null) {
                         return Maybe.empty();
@@ -321,6 +323,7 @@ public final class BoolsImpl implements Bools {
     public Maybe<Boolean> getNullAsync() {
         return getNullWithRestResponseAsync()
             .flatMapMaybe(new Function<RestResponse<Void, Boolean>, Maybe<Boolean>>() {
+                @Override
                 public Maybe<Boolean> apply(RestResponse<Void, Boolean> restResponse) {
                     if (restResponse.body() == null) {
                         return Maybe.empty();
@@ -370,6 +373,7 @@ public final class BoolsImpl implements Bools {
     public Maybe<Boolean> getInvalidAsync() {
         return getInvalidWithRestResponseAsync()
             .flatMapMaybe(new Function<RestResponse<Void, Boolean>, Maybe<Boolean>>() {
+                @Override
                 public Maybe<Boolean> apply(RestResponse<Void, Boolean> restResponse) {
                     if (restResponse.body() == null) {
                         return Maybe.empty();

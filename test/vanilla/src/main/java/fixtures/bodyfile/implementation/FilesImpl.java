@@ -112,6 +112,7 @@ public final class FilesImpl implements Files {
     public Maybe<Flowable<ByteBuffer>> getFileAsync() {
         return getFileWithRestResponseAsync()
             .flatMapMaybe(new Function<RestResponse<Void, Flowable<ByteBuffer>>, Maybe<Flowable<ByteBuffer>>>() {
+                @Override
                 public Maybe<Flowable<ByteBuffer>> apply(RestResponse<Void, Flowable<ByteBuffer>> restResponse) {
                     if (restResponse.body() == null) {
                         return Maybe.empty();
@@ -161,6 +162,7 @@ public final class FilesImpl implements Files {
     public Maybe<Flowable<ByteBuffer>> getFileLargeAsync() {
         return getFileLargeWithRestResponseAsync()
             .flatMapMaybe(new Function<RestResponse<Void, Flowable<ByteBuffer>>, Maybe<Flowable<ByteBuffer>>>() {
+                @Override
                 public Maybe<Flowable<ByteBuffer>> apply(RestResponse<Void, Flowable<ByteBuffer>> restResponse) {
                     if (restResponse.body() == null) {
                         return Maybe.empty();
@@ -210,6 +212,7 @@ public final class FilesImpl implements Files {
     public Maybe<Flowable<ByteBuffer>> getEmptyFileAsync() {
         return getEmptyFileWithRestResponseAsync()
             .flatMapMaybe(new Function<RestResponse<Void, Flowable<ByteBuffer>>, Maybe<Flowable<ByteBuffer>>>() {
+                @Override
                 public Maybe<Flowable<ByteBuffer>> apply(RestResponse<Void, Flowable<ByteBuffer>> restResponse) {
                     if (restResponse.body() == null) {
                         return Maybe.empty();

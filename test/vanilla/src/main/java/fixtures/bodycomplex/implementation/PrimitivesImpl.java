@@ -221,6 +221,7 @@ public final class PrimitivesImpl implements Primitives {
     public Maybe<IntWrapper> getIntAsync() {
         return getIntWithRestResponseAsync()
             .flatMapMaybe(new Function<RestResponse<Void, IntWrapper>, Maybe<IntWrapper>>() {
+                @Override
                 public Maybe<IntWrapper> apply(RestResponse<Void, IntWrapper> restResponse) {
                     if (restResponse.body() == null) {
                         return Maybe.empty();
@@ -321,6 +322,7 @@ public final class PrimitivesImpl implements Primitives {
     public Maybe<LongWrapper> getLongAsync() {
         return getLongWithRestResponseAsync()
             .flatMapMaybe(new Function<RestResponse<Void, LongWrapper>, Maybe<LongWrapper>>() {
+                @Override
                 public Maybe<LongWrapper> apply(RestResponse<Void, LongWrapper> restResponse) {
                     if (restResponse.body() == null) {
                         return Maybe.empty();
@@ -421,6 +423,7 @@ public final class PrimitivesImpl implements Primitives {
     public Maybe<FloatWrapper> getFloatAsync() {
         return getFloatWithRestResponseAsync()
             .flatMapMaybe(new Function<RestResponse<Void, FloatWrapper>, Maybe<FloatWrapper>>() {
+                @Override
                 public Maybe<FloatWrapper> apply(RestResponse<Void, FloatWrapper> restResponse) {
                     if (restResponse.body() == null) {
                         return Maybe.empty();
@@ -521,6 +524,7 @@ public final class PrimitivesImpl implements Primitives {
     public Maybe<DoubleWrapper> getDoubleAsync() {
         return getDoubleWithRestResponseAsync()
             .flatMapMaybe(new Function<RestResponse<Void, DoubleWrapper>, Maybe<DoubleWrapper>>() {
+                @Override
                 public Maybe<DoubleWrapper> apply(RestResponse<Void, DoubleWrapper> restResponse) {
                     if (restResponse.body() == null) {
                         return Maybe.empty();
@@ -621,6 +625,7 @@ public final class PrimitivesImpl implements Primitives {
     public Maybe<BooleanWrapper> getBoolAsync() {
         return getBoolWithRestResponseAsync()
             .flatMapMaybe(new Function<RestResponse<Void, BooleanWrapper>, Maybe<BooleanWrapper>>() {
+                @Override
                 public Maybe<BooleanWrapper> apply(RestResponse<Void, BooleanWrapper> restResponse) {
                     if (restResponse.body() == null) {
                         return Maybe.empty();
@@ -721,6 +726,7 @@ public final class PrimitivesImpl implements Primitives {
     public Maybe<StringWrapper> getStringAsync() {
         return getStringWithRestResponseAsync()
             .flatMapMaybe(new Function<RestResponse<Void, StringWrapper>, Maybe<StringWrapper>>() {
+                @Override
                 public Maybe<StringWrapper> apply(RestResponse<Void, StringWrapper> restResponse) {
                     if (restResponse.body() == null) {
                         return Maybe.empty();
@@ -821,6 +827,7 @@ public final class PrimitivesImpl implements Primitives {
     public Maybe<DateWrapper> getDateAsync() {
         return getDateWithRestResponseAsync()
             .flatMapMaybe(new Function<RestResponse<Void, DateWrapper>, Maybe<DateWrapper>>() {
+                @Override
                 public Maybe<DateWrapper> apply(RestResponse<Void, DateWrapper> restResponse) {
                     if (restResponse.body() == null) {
                         return Maybe.empty();
@@ -921,6 +928,7 @@ public final class PrimitivesImpl implements Primitives {
     public Maybe<DatetimeWrapper> getDateTimeAsync() {
         return getDateTimeWithRestResponseAsync()
             .flatMapMaybe(new Function<RestResponse<Void, DatetimeWrapper>, Maybe<DatetimeWrapper>>() {
+                @Override
                 public Maybe<DatetimeWrapper> apply(RestResponse<Void, DatetimeWrapper> restResponse) {
                     if (restResponse.body() == null) {
                         return Maybe.empty();
@@ -1021,6 +1029,7 @@ public final class PrimitivesImpl implements Primitives {
     public Maybe<Datetimerfc1123Wrapper> getDateTimeRfc1123Async() {
         return getDateTimeRfc1123WithRestResponseAsync()
             .flatMapMaybe(new Function<RestResponse<Void, Datetimerfc1123Wrapper>, Maybe<Datetimerfc1123Wrapper>>() {
+                @Override
                 public Maybe<Datetimerfc1123Wrapper> apply(RestResponse<Void, Datetimerfc1123Wrapper> restResponse) {
                     if (restResponse.body() == null) {
                         return Maybe.empty();
@@ -1121,6 +1130,7 @@ public final class PrimitivesImpl implements Primitives {
     public Maybe<DurationWrapper> getDurationAsync() {
         return getDurationWithRestResponseAsync()
             .flatMapMaybe(new Function<RestResponse<Void, DurationWrapper>, Maybe<DurationWrapper>>() {
+                @Override
                 public Maybe<DurationWrapper> apply(RestResponse<Void, DurationWrapper> restResponse) {
                     if (restResponse.body() == null) {
                         return Maybe.empty();
@@ -1221,6 +1231,7 @@ public final class PrimitivesImpl implements Primitives {
     public Maybe<ByteWrapper> getByteAsync() {
         return getByteWithRestResponseAsync()
             .flatMapMaybe(new Function<RestResponse<Void, ByteWrapper>, Maybe<ByteWrapper>>() {
+                @Override
                 public Maybe<ByteWrapper> apply(RestResponse<Void, ByteWrapper> restResponse) {
                     if (restResponse.body() == null) {
                         return Maybe.empty();

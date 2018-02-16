@@ -211,6 +211,7 @@ public final class LROsCustomHeadersInner {
     public Maybe<ProductInner> putAsyncRetrySucceededAsync() {
         return putAsyncRetrySucceededWithRestResponseAsync()
             .flatMapMaybe(new Function<RestResponse<LROsCustomHeaderPutAsyncRetrySucceededHeadersInner, ProductInner>, Maybe<ProductInner>>() {
+                @Override
                 public Maybe<ProductInner> apply(RestResponse<LROsCustomHeaderPutAsyncRetrySucceededHeadersInner, ProductInner> restResponse) {
                     if (restResponse.body() == null) {
                         return Maybe.empty();
@@ -268,6 +269,7 @@ public final class LROsCustomHeadersInner {
     public Maybe<ProductInner> putAsyncRetrySucceededAsync(ProductInner product) {
         return putAsyncRetrySucceededWithRestResponseAsync(product)
             .flatMapMaybe(new Function<RestResponse<LROsCustomHeaderPutAsyncRetrySucceededHeadersInner, ProductInner>, Maybe<ProductInner>>() {
+                @Override
                 public Maybe<ProductInner> apply(RestResponse<LROsCustomHeaderPutAsyncRetrySucceededHeadersInner, ProductInner> restResponse) {
                     if (restResponse.body() == null) {
                         return Maybe.empty();
@@ -386,6 +388,7 @@ public final class LROsCustomHeadersInner {
     public Maybe<ProductInner> put201CreatingSucceeded200Async() {
         return put201CreatingSucceeded200WithRestResponseAsync()
             .flatMapMaybe(new Function<RestResponse<Void, ProductInner>, Maybe<ProductInner>>() {
+                @Override
                 public Maybe<ProductInner> apply(RestResponse<Void, ProductInner> restResponse) {
                     if (restResponse.body() == null) {
                         return Maybe.empty();
@@ -443,6 +446,7 @@ public final class LROsCustomHeadersInner {
     public Maybe<ProductInner> put201CreatingSucceeded200Async(ProductInner product) {
         return put201CreatingSucceeded200WithRestResponseAsync(product)
             .flatMapMaybe(new Function<RestResponse<Void, ProductInner>, Maybe<ProductInner>>() {
+                @Override
                 public Maybe<ProductInner> apply(RestResponse<Void, ProductInner> restResponse) {
                     if (restResponse.body() == null) {
                         return Maybe.empty();

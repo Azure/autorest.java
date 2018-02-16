@@ -122,10 +122,11 @@ namespace AutoRest.Java.Model
                     imports.Add(ClassType.Validator.FullName);
                 }
 
-                if (Type == ClientMethodType.PagingAsync ||
-                    Type == ClientMethodType.PagingAsyncSinglePage ||
-                    Type == ClientMethodType.SimulatedPagingAsync ||
-                    (Type == ClientMethodType.SimpleAsync && ReturnValue.Type is GenericType))
+                if (settings.JavaVersion == JavaVersion.Java7 &&
+                    (Type == ClientMethodType.PagingAsync ||
+                     Type == ClientMethodType.PagingAsyncSinglePage ||
+                     Type == ClientMethodType.SimulatedPagingAsync ||
+                     (Type == ClientMethodType.SimpleAsync && ReturnValue.Type is GenericType)))
                 {
                     imports.Add(ClassType.Function.FullName);
                 }

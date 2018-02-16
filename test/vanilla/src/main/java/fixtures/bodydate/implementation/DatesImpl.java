@@ -140,6 +140,7 @@ public final class DatesImpl implements Dates {
     public Maybe<LocalDate> getNullAsync() {
         return getNullWithRestResponseAsync()
             .flatMapMaybe(new Function<RestResponse<Void, LocalDate>, Maybe<LocalDate>>() {
+                @Override
                 public Maybe<LocalDate> apply(RestResponse<Void, LocalDate> restResponse) {
                     if (restResponse.body() == null) {
                         return Maybe.empty();
@@ -189,6 +190,7 @@ public final class DatesImpl implements Dates {
     public Maybe<LocalDate> getInvalidDateAsync() {
         return getInvalidDateWithRestResponseAsync()
             .flatMapMaybe(new Function<RestResponse<Void, LocalDate>, Maybe<LocalDate>>() {
+                @Override
                 public Maybe<LocalDate> apply(RestResponse<Void, LocalDate> restResponse) {
                     if (restResponse.body() == null) {
                         return Maybe.empty();
@@ -238,6 +240,7 @@ public final class DatesImpl implements Dates {
     public Maybe<LocalDate> getOverflowDateAsync() {
         return getOverflowDateWithRestResponseAsync()
             .flatMapMaybe(new Function<RestResponse<Void, LocalDate>, Maybe<LocalDate>>() {
+                @Override
                 public Maybe<LocalDate> apply(RestResponse<Void, LocalDate> restResponse) {
                     if (restResponse.body() == null) {
                         return Maybe.empty();
@@ -287,6 +290,7 @@ public final class DatesImpl implements Dates {
     public Maybe<LocalDate> getUnderflowDateAsync() {
         return getUnderflowDateWithRestResponseAsync()
             .flatMapMaybe(new Function<RestResponse<Void, LocalDate>, Maybe<LocalDate>>() {
+                @Override
                 public Maybe<LocalDate> apply(RestResponse<Void, LocalDate> restResponse) {
                     if (restResponse.body() == null) {
                         return Maybe.empty();
@@ -386,6 +390,7 @@ public final class DatesImpl implements Dates {
     public Maybe<LocalDate> getMaxDateAsync() {
         return getMaxDateWithRestResponseAsync()
             .flatMapMaybe(new Function<RestResponse<Void, LocalDate>, Maybe<LocalDate>>() {
+                @Override
                 public Maybe<LocalDate> apply(RestResponse<Void, LocalDate> restResponse) {
                     if (restResponse.body() == null) {
                         return Maybe.empty();
@@ -485,6 +490,7 @@ public final class DatesImpl implements Dates {
     public Maybe<LocalDate> getMinDateAsync() {
         return getMinDateWithRestResponseAsync()
             .flatMapMaybe(new Function<RestResponse<Void, LocalDate>, Maybe<LocalDate>>() {
+                @Override
                 public Maybe<LocalDate> apply(RestResponse<Void, LocalDate> restResponse) {
                     if (restResponse.body() == null) {
                         return Maybe.empty();

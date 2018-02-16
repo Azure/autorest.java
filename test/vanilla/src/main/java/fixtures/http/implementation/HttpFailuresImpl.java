@@ -108,6 +108,7 @@ public final class HttpFailuresImpl implements HttpFailures {
     public Maybe<Boolean> getEmptyErrorAsync() {
         return getEmptyErrorWithRestResponseAsync()
             .flatMapMaybe(new Function<RestResponse<Void, Boolean>, Maybe<Boolean>>() {
+                @Override
                 public Maybe<Boolean> apply(RestResponse<Void, Boolean> restResponse) {
                     if (restResponse.body() == null) {
                         return Maybe.empty();
@@ -156,6 +157,7 @@ public final class HttpFailuresImpl implements HttpFailures {
     public Maybe<Boolean> getNoModelErrorAsync() {
         return getNoModelErrorWithRestResponseAsync()
             .flatMapMaybe(new Function<RestResponse<Void, Boolean>, Maybe<Boolean>>() {
+                @Override
                 public Maybe<Boolean> apply(RestResponse<Void, Boolean> restResponse) {
                     if (restResponse.body() == null) {
                         return Maybe.empty();
@@ -204,6 +206,7 @@ public final class HttpFailuresImpl implements HttpFailures {
     public Maybe<Boolean> getNoModelEmptyAsync() {
         return getNoModelEmptyWithRestResponseAsync()
             .flatMapMaybe(new Function<RestResponse<Void, Boolean>, Maybe<Boolean>>() {
+                @Override
                 public Maybe<Boolean> apply(RestResponse<Void, Boolean> restResponse) {
                     if (restResponse.body() == null) {
                         return Maybe.empty();

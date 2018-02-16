@@ -26,6 +26,11 @@ namespace AutoRest.Java
             contents.DecreaseIndent();
         }
 
+        public void Text(string text)
+        {
+            contents.Text(text);
+        }
+
         public void Line(string text, params object[] formattedArguments)
         {
             contents.Line(text, formattedArguments);

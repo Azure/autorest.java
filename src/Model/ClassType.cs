@@ -17,11 +17,11 @@ namespace AutoRest.Java.Model
         public static readonly ClassType Double = new ClassType("java.lang", "Double", defaultValueExpressionConverter: (string defaultValueExpression) => double.Parse(defaultValueExpression).ToString());
         public static readonly ClassType String = new ClassType("java.lang", "String", defaultValueExpressionConverter: (string defaultValueExpression) => CodeNamer.Instance.QuoteValue(defaultValueExpression));
         public static readonly ClassType Base64Url = new ClassType("com.microsoft.rest.v2", "Base64Url");
-        public static readonly ClassType LocalDate = new ClassType("org.joda.time", "LocalDate", defaultValueExpressionConverter: (string defaultValueExpression) => $"LocalDate.parse(\"{defaultValueExpression}\")");
-        public static readonly ClassType DateTime = new ClassType("org.joda.time", "DateTime", defaultValueExpressionConverter: (string defaultValueExpression) => $"DateTime.parse(\"{defaultValueExpression}\")");
+        public static readonly ClassType JodaLocalDate = new ClassType("org.joda.time", "LocalDate", defaultValueExpressionConverter: (string defaultValueExpression) => $"LocalDate.parse(\"{defaultValueExpression}\")");
+        public static readonly ClassType JodaDateTime = new ClassType("org.joda.time", "DateTime", defaultValueExpressionConverter: (string defaultValueExpression) => $"DateTime.parse(\"{defaultValueExpression}\")");
+        public static readonly ClassType JodaPeriod = new ClassType("org.joda.time", "Period", defaultValueExpressionConverter: (string defaultValueExpression) => $"Period.parse(\"{defaultValueExpression}\")");
         public static readonly ClassType DateTimeRfc1123 = new ClassType("com.microsoft.rest.v2", "DateTimeRfc1123", defaultValueExpressionConverter: (string defaultValueExpression) => $"DateTime.parse(\"{defaultValueExpression}\")");
         public static readonly ClassType BigDecimal = new ClassType("java.math", "BigDecimal");
-        public static readonly ClassType Period = new ClassType("org.joda.time", "Period", defaultValueExpressionConverter: (string defaultValueExpression) => $"Period.parse(\"{defaultValueExpression}\")");
         public static readonly ClassType UUID = new ClassType("java.util", "UUID");
         public static readonly ClassType Object = new ClassType("java.lang", "Object");
         public static readonly ClassType ServiceClientCredentials = new ClassType("com.microsoft.rest.v2.credentials", "ServiceClientCredentials");

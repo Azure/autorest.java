@@ -232,6 +232,7 @@ public final class HttpSuccessImpl implements HttpSuccess {
     public Maybe<Boolean> get200Async() {
         return get200WithRestResponseAsync()
             .flatMapMaybe(new Function<RestResponse<Void, Boolean>, Maybe<Boolean>>() {
+                @Override
                 public Maybe<Boolean> apply(RestResponse<Void, Boolean> restResponse) {
                     if (restResponse.body() == null) {
                         return Maybe.empty();

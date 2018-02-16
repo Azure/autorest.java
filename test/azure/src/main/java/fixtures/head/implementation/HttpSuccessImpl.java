@@ -111,6 +111,7 @@ public final class HttpSuccessImpl implements HttpSuccess {
     public Maybe<Boolean> head200Async() {
         return head200WithRestResponseAsync()
             .flatMapMaybe(new Function<RestResponse<Void, Boolean>, Maybe<Boolean>>() {
+                @Override
                 public Maybe<Boolean> apply(RestResponse<Void, Boolean> restResponse) {
                     if (restResponse.body() == null) {
                         return Maybe.empty();
@@ -160,6 +161,7 @@ public final class HttpSuccessImpl implements HttpSuccess {
     public Maybe<Boolean> head204Async() {
         return head204WithRestResponseAsync()
             .flatMapMaybe(new Function<RestResponse<Void, Boolean>, Maybe<Boolean>>() {
+                @Override
                 public Maybe<Boolean> apply(RestResponse<Void, Boolean> restResponse) {
                     if (restResponse.body() == null) {
                         return Maybe.empty();
@@ -209,6 +211,7 @@ public final class HttpSuccessImpl implements HttpSuccess {
     public Maybe<Boolean> head404Async() {
         return head404WithRestResponseAsync()
             .flatMapMaybe(new Function<RestResponse<Void, Boolean>, Maybe<Boolean>>() {
+                @Override
                 public Maybe<Boolean> apply(RestResponse<Void, Boolean> restResponse) {
                     if (restResponse.body() == null) {
                         return Maybe.empty();

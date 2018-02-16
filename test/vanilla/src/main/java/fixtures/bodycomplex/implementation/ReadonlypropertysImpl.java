@@ -111,6 +111,7 @@ public final class ReadonlypropertysImpl implements Readonlypropertys {
     public Maybe<ReadonlyObj> getValidAsync() {
         return getValidWithRestResponseAsync()
             .flatMapMaybe(new Function<RestResponse<Void, ReadonlyObj>, Maybe<ReadonlyObj>>() {
+                @Override
                 public Maybe<ReadonlyObj> apply(RestResponse<Void, ReadonlyObj> restResponse) {
                     if (restResponse.body() == null) {
                         return Maybe.empty();

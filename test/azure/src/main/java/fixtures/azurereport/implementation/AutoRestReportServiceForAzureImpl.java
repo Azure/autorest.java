@@ -212,6 +212,7 @@ public final class AutoRestReportServiceForAzureImpl extends AzureServiceClient 
     public Maybe<Map<String, Integer>> getReportAsync() {
         return getReportWithRestResponseAsync()
             .flatMapMaybe(new Function<RestResponse<Void, Map<String, Integer>>, Maybe<Map<String, Integer>>>() {
+                @Override
                 public Maybe<Map<String, Integer>> apply(RestResponse<Void, Map<String, Integer>> restResponse) {
                     if (restResponse.body() == null) {
                         return Maybe.empty();
@@ -268,6 +269,7 @@ public final class AutoRestReportServiceForAzureImpl extends AzureServiceClient 
     public Maybe<Map<String, Integer>> getReportAsync(String qualifier) {
         return getReportWithRestResponseAsync(qualifier)
             .flatMapMaybe(new Function<RestResponse<Void, Map<String, Integer>>, Maybe<Map<String, Integer>>>() {
+                @Override
                 public Maybe<Map<String, Integer>> apply(RestResponse<Void, Map<String, Integer>> restResponse) {
                     if (restResponse.body() == null) {
                         return Maybe.empty();

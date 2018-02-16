@@ -127,6 +127,7 @@ public final class PolymorphismsImpl implements Polymorphisms {
     public Maybe<Fish> getValidAsync() {
         return getValidWithRestResponseAsync()
             .flatMapMaybe(new Function<RestResponse<Void, Fish>, Maybe<Fish>>() {
+                @Override
                 public Maybe<Fish> apply(RestResponse<Void, Fish> restResponse) {
                     if (restResponse.body() == null) {
                         return Maybe.empty();
@@ -355,6 +356,7 @@ public final class PolymorphismsImpl implements Polymorphisms {
     public Maybe<Salmon> getComplicatedAsync() {
         return getComplicatedWithRestResponseAsync()
             .flatMapMaybe(new Function<RestResponse<Void, Salmon>, Maybe<Salmon>>() {
+                @Override
                 public Maybe<Salmon> apply(RestResponse<Void, Salmon> restResponse) {
                     if (restResponse.body() == null) {
                         return Maybe.empty();

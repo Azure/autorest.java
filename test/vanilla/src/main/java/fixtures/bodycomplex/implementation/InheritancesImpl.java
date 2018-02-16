@@ -111,6 +111,7 @@ public final class InheritancesImpl implements Inheritances {
     public Maybe<Siamese> getValidAsync() {
         return getValidWithRestResponseAsync()
             .flatMapMaybe(new Function<RestResponse<Void, Siamese>, Maybe<Siamese>>() {
+                @Override
                 public Maybe<Siamese> apply(RestResponse<Void, Siamese> restResponse) {
                     if (restResponse.body() == null) {
                         return Maybe.empty();

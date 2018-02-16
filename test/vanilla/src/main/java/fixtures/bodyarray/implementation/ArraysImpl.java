@@ -439,6 +439,7 @@ public final class ArraysImpl implements Arrays {
     public Maybe<List<Integer>> getNullAsync() {
         return getNullWithRestResponseAsync()
             .flatMapMaybe(new Function<RestResponse<Void, List<Integer>>, Maybe<List<Integer>>>() {
+                @Override
                 public Maybe<List<Integer>> apply(RestResponse<Void, List<Integer>> restResponse) {
                     if (restResponse.body() == null) {
                         return Maybe.empty();
@@ -488,6 +489,7 @@ public final class ArraysImpl implements Arrays {
     public Maybe<List<Integer>> getInvalidAsync() {
         return getInvalidWithRestResponseAsync()
             .flatMapMaybe(new Function<RestResponse<Void, List<Integer>>, Maybe<List<Integer>>>() {
+                @Override
                 public Maybe<List<Integer>> apply(RestResponse<Void, List<Integer>> restResponse) {
                     if (restResponse.body() == null) {
                         return Maybe.empty();
@@ -537,6 +539,7 @@ public final class ArraysImpl implements Arrays {
     public Maybe<List<Integer>> getEmptyAsync() {
         return getEmptyWithRestResponseAsync()
             .flatMapMaybe(new Function<RestResponse<Void, List<Integer>>, Maybe<List<Integer>>>() {
+                @Override
                 public Maybe<List<Integer>> apply(RestResponse<Void, List<Integer>> restResponse) {
                     if (restResponse.body() == null) {
                         return Maybe.empty();
@@ -637,6 +640,7 @@ public final class ArraysImpl implements Arrays {
     public Maybe<List<Boolean>> getBooleanTfftAsync() {
         return getBooleanTfftWithRestResponseAsync()
             .flatMapMaybe(new Function<RestResponse<Void, List<Boolean>>, Maybe<List<Boolean>>>() {
+                @Override
                 public Maybe<List<Boolean>> apply(RestResponse<Void, List<Boolean>> restResponse) {
                     if (restResponse.body() == null) {
                         return Maybe.empty();
@@ -737,6 +741,7 @@ public final class ArraysImpl implements Arrays {
     public Maybe<List<Boolean>> getBooleanInvalidNullAsync() {
         return getBooleanInvalidNullWithRestResponseAsync()
             .flatMapMaybe(new Function<RestResponse<Void, List<Boolean>>, Maybe<List<Boolean>>>() {
+                @Override
                 public Maybe<List<Boolean>> apply(RestResponse<Void, List<Boolean>> restResponse) {
                     if (restResponse.body() == null) {
                         return Maybe.empty();
@@ -786,6 +791,7 @@ public final class ArraysImpl implements Arrays {
     public Maybe<List<Boolean>> getBooleanInvalidStringAsync() {
         return getBooleanInvalidStringWithRestResponseAsync()
             .flatMapMaybe(new Function<RestResponse<Void, List<Boolean>>, Maybe<List<Boolean>>>() {
+                @Override
                 public Maybe<List<Boolean>> apply(RestResponse<Void, List<Boolean>> restResponse) {
                     if (restResponse.body() == null) {
                         return Maybe.empty();
@@ -835,6 +841,7 @@ public final class ArraysImpl implements Arrays {
     public Maybe<List<Integer>> getIntegerValidAsync() {
         return getIntegerValidWithRestResponseAsync()
             .flatMapMaybe(new Function<RestResponse<Void, List<Integer>>, Maybe<List<Integer>>>() {
+                @Override
                 public Maybe<List<Integer>> apply(RestResponse<Void, List<Integer>> restResponse) {
                     if (restResponse.body() == null) {
                         return Maybe.empty();
@@ -935,6 +942,7 @@ public final class ArraysImpl implements Arrays {
     public Maybe<List<Integer>> getIntInvalidNullAsync() {
         return getIntInvalidNullWithRestResponseAsync()
             .flatMapMaybe(new Function<RestResponse<Void, List<Integer>>, Maybe<List<Integer>>>() {
+                @Override
                 public Maybe<List<Integer>> apply(RestResponse<Void, List<Integer>> restResponse) {
                     if (restResponse.body() == null) {
                         return Maybe.empty();
@@ -984,6 +992,7 @@ public final class ArraysImpl implements Arrays {
     public Maybe<List<Integer>> getIntInvalidStringAsync() {
         return getIntInvalidStringWithRestResponseAsync()
             .flatMapMaybe(new Function<RestResponse<Void, List<Integer>>, Maybe<List<Integer>>>() {
+                @Override
                 public Maybe<List<Integer>> apply(RestResponse<Void, List<Integer>> restResponse) {
                     if (restResponse.body() == null) {
                         return Maybe.empty();
@@ -1033,6 +1042,7 @@ public final class ArraysImpl implements Arrays {
     public Maybe<List<Long>> getLongValidAsync() {
         return getLongValidWithRestResponseAsync()
             .flatMapMaybe(new Function<RestResponse<Void, List<Long>>, Maybe<List<Long>>>() {
+                @Override
                 public Maybe<List<Long>> apply(RestResponse<Void, List<Long>> restResponse) {
                     if (restResponse.body() == null) {
                         return Maybe.empty();
@@ -1133,6 +1143,7 @@ public final class ArraysImpl implements Arrays {
     public Maybe<List<Long>> getLongInvalidNullAsync() {
         return getLongInvalidNullWithRestResponseAsync()
             .flatMapMaybe(new Function<RestResponse<Void, List<Long>>, Maybe<List<Long>>>() {
+                @Override
                 public Maybe<List<Long>> apply(RestResponse<Void, List<Long>> restResponse) {
                     if (restResponse.body() == null) {
                         return Maybe.empty();
@@ -1182,6 +1193,7 @@ public final class ArraysImpl implements Arrays {
     public Maybe<List<Long>> getLongInvalidStringAsync() {
         return getLongInvalidStringWithRestResponseAsync()
             .flatMapMaybe(new Function<RestResponse<Void, List<Long>>, Maybe<List<Long>>>() {
+                @Override
                 public Maybe<List<Long>> apply(RestResponse<Void, List<Long>> restResponse) {
                     if (restResponse.body() == null) {
                         return Maybe.empty();
@@ -1231,6 +1243,7 @@ public final class ArraysImpl implements Arrays {
     public Maybe<List<Double>> getFloatValidAsync() {
         return getFloatValidWithRestResponseAsync()
             .flatMapMaybe(new Function<RestResponse<Void, List<Double>>, Maybe<List<Double>>>() {
+                @Override
                 public Maybe<List<Double>> apply(RestResponse<Void, List<Double>> restResponse) {
                     if (restResponse.body() == null) {
                         return Maybe.empty();
@@ -1331,6 +1344,7 @@ public final class ArraysImpl implements Arrays {
     public Maybe<List<Double>> getFloatInvalidNullAsync() {
         return getFloatInvalidNullWithRestResponseAsync()
             .flatMapMaybe(new Function<RestResponse<Void, List<Double>>, Maybe<List<Double>>>() {
+                @Override
                 public Maybe<List<Double>> apply(RestResponse<Void, List<Double>> restResponse) {
                     if (restResponse.body() == null) {
                         return Maybe.empty();
@@ -1380,6 +1394,7 @@ public final class ArraysImpl implements Arrays {
     public Maybe<List<Double>> getFloatInvalidStringAsync() {
         return getFloatInvalidStringWithRestResponseAsync()
             .flatMapMaybe(new Function<RestResponse<Void, List<Double>>, Maybe<List<Double>>>() {
+                @Override
                 public Maybe<List<Double>> apply(RestResponse<Void, List<Double>> restResponse) {
                     if (restResponse.body() == null) {
                         return Maybe.empty();
@@ -1429,6 +1444,7 @@ public final class ArraysImpl implements Arrays {
     public Maybe<List<Double>> getDoubleValidAsync() {
         return getDoubleValidWithRestResponseAsync()
             .flatMapMaybe(new Function<RestResponse<Void, List<Double>>, Maybe<List<Double>>>() {
+                @Override
                 public Maybe<List<Double>> apply(RestResponse<Void, List<Double>> restResponse) {
                     if (restResponse.body() == null) {
                         return Maybe.empty();
@@ -1529,6 +1545,7 @@ public final class ArraysImpl implements Arrays {
     public Maybe<List<Double>> getDoubleInvalidNullAsync() {
         return getDoubleInvalidNullWithRestResponseAsync()
             .flatMapMaybe(new Function<RestResponse<Void, List<Double>>, Maybe<List<Double>>>() {
+                @Override
                 public Maybe<List<Double>> apply(RestResponse<Void, List<Double>> restResponse) {
                     if (restResponse.body() == null) {
                         return Maybe.empty();
@@ -1578,6 +1595,7 @@ public final class ArraysImpl implements Arrays {
     public Maybe<List<Double>> getDoubleInvalidStringAsync() {
         return getDoubleInvalidStringWithRestResponseAsync()
             .flatMapMaybe(new Function<RestResponse<Void, List<Double>>, Maybe<List<Double>>>() {
+                @Override
                 public Maybe<List<Double>> apply(RestResponse<Void, List<Double>> restResponse) {
                     if (restResponse.body() == null) {
                         return Maybe.empty();
@@ -1627,6 +1645,7 @@ public final class ArraysImpl implements Arrays {
     public Maybe<List<String>> getStringValidAsync() {
         return getStringValidWithRestResponseAsync()
             .flatMapMaybe(new Function<RestResponse<Void, List<String>>, Maybe<List<String>>>() {
+                @Override
                 public Maybe<List<String>> apply(RestResponse<Void, List<String>> restResponse) {
                     if (restResponse.body() == null) {
                         return Maybe.empty();
@@ -1727,6 +1746,7 @@ public final class ArraysImpl implements Arrays {
     public Maybe<List<String>> getStringWithNullAsync() {
         return getStringWithNullWithRestResponseAsync()
             .flatMapMaybe(new Function<RestResponse<Void, List<String>>, Maybe<List<String>>>() {
+                @Override
                 public Maybe<List<String>> apply(RestResponse<Void, List<String>> restResponse) {
                     if (restResponse.body() == null) {
                         return Maybe.empty();
@@ -1776,6 +1796,7 @@ public final class ArraysImpl implements Arrays {
     public Maybe<List<String>> getStringWithInvalidAsync() {
         return getStringWithInvalidWithRestResponseAsync()
             .flatMapMaybe(new Function<RestResponse<Void, List<String>>, Maybe<List<String>>>() {
+                @Override
                 public Maybe<List<String>> apply(RestResponse<Void, List<String>> restResponse) {
                     if (restResponse.body() == null) {
                         return Maybe.empty();
@@ -1825,6 +1846,7 @@ public final class ArraysImpl implements Arrays {
     public Maybe<List<UUID>> getUuidValidAsync() {
         return getUuidValidWithRestResponseAsync()
             .flatMapMaybe(new Function<RestResponse<Void, List<UUID>>, Maybe<List<UUID>>>() {
+                @Override
                 public Maybe<List<UUID>> apply(RestResponse<Void, List<UUID>> restResponse) {
                     if (restResponse.body() == null) {
                         return Maybe.empty();
@@ -1925,6 +1947,7 @@ public final class ArraysImpl implements Arrays {
     public Maybe<List<UUID>> getUuidInvalidCharsAsync() {
         return getUuidInvalidCharsWithRestResponseAsync()
             .flatMapMaybe(new Function<RestResponse<Void, List<UUID>>, Maybe<List<UUID>>>() {
+                @Override
                 public Maybe<List<UUID>> apply(RestResponse<Void, List<UUID>> restResponse) {
                     if (restResponse.body() == null) {
                         return Maybe.empty();
@@ -1974,6 +1997,7 @@ public final class ArraysImpl implements Arrays {
     public Maybe<List<LocalDate>> getDateValidAsync() {
         return getDateValidWithRestResponseAsync()
             .flatMapMaybe(new Function<RestResponse<Void, List<LocalDate>>, Maybe<List<LocalDate>>>() {
+                @Override
                 public Maybe<List<LocalDate>> apply(RestResponse<Void, List<LocalDate>> restResponse) {
                     if (restResponse.body() == null) {
                         return Maybe.empty();
@@ -2074,6 +2098,7 @@ public final class ArraysImpl implements Arrays {
     public Maybe<List<LocalDate>> getDateInvalidNullAsync() {
         return getDateInvalidNullWithRestResponseAsync()
             .flatMapMaybe(new Function<RestResponse<Void, List<LocalDate>>, Maybe<List<LocalDate>>>() {
+                @Override
                 public Maybe<List<LocalDate>> apply(RestResponse<Void, List<LocalDate>> restResponse) {
                     if (restResponse.body() == null) {
                         return Maybe.empty();
@@ -2123,6 +2148,7 @@ public final class ArraysImpl implements Arrays {
     public Maybe<List<LocalDate>> getDateInvalidCharsAsync() {
         return getDateInvalidCharsWithRestResponseAsync()
             .flatMapMaybe(new Function<RestResponse<Void, List<LocalDate>>, Maybe<List<LocalDate>>>() {
+                @Override
                 public Maybe<List<LocalDate>> apply(RestResponse<Void, List<LocalDate>> restResponse) {
                     if (restResponse.body() == null) {
                         return Maybe.empty();
@@ -2172,6 +2198,7 @@ public final class ArraysImpl implements Arrays {
     public Maybe<List<DateTime>> getDateTimeValidAsync() {
         return getDateTimeValidWithRestResponseAsync()
             .flatMapMaybe(new Function<RestResponse<Void, List<DateTime>>, Maybe<List<DateTime>>>() {
+                @Override
                 public Maybe<List<DateTime>> apply(RestResponse<Void, List<DateTime>> restResponse) {
                     if (restResponse.body() == null) {
                         return Maybe.empty();
@@ -2272,6 +2299,7 @@ public final class ArraysImpl implements Arrays {
     public Maybe<List<DateTime>> getDateTimeInvalidNullAsync() {
         return getDateTimeInvalidNullWithRestResponseAsync()
             .flatMapMaybe(new Function<RestResponse<Void, List<DateTime>>, Maybe<List<DateTime>>>() {
+                @Override
                 public Maybe<List<DateTime>> apply(RestResponse<Void, List<DateTime>> restResponse) {
                     if (restResponse.body() == null) {
                         return Maybe.empty();
@@ -2321,6 +2349,7 @@ public final class ArraysImpl implements Arrays {
     public Maybe<List<DateTime>> getDateTimeInvalidCharsAsync() {
         return getDateTimeInvalidCharsWithRestResponseAsync()
             .flatMapMaybe(new Function<RestResponse<Void, List<DateTime>>, Maybe<List<DateTime>>>() {
+                @Override
                 public Maybe<List<DateTime>> apply(RestResponse<Void, List<DateTime>> restResponse) {
                     if (restResponse.body() == null) {
                         return Maybe.empty();
@@ -2370,6 +2399,7 @@ public final class ArraysImpl implements Arrays {
     public Maybe<List<DateTime>> getDateTimeRfc1123ValidAsync() {
         return getDateTimeRfc1123ValidWithRestResponseAsync()
             .flatMapMaybe(new Function<RestResponse<Void, List<DateTime>>, Maybe<List<DateTime>>>() {
+                @Override
                 public Maybe<List<DateTime>> apply(RestResponse<Void, List<DateTime>> restResponse) {
                     if (restResponse.body() == null) {
                         return Maybe.empty();
@@ -2475,6 +2505,7 @@ public final class ArraysImpl implements Arrays {
     public Maybe<List<Period>> getDurationValidAsync() {
         return getDurationValidWithRestResponseAsync()
             .flatMapMaybe(new Function<RestResponse<Void, List<Period>>, Maybe<List<Period>>>() {
+                @Override
                 public Maybe<List<Period>> apply(RestResponse<Void, List<Period>> restResponse) {
                     if (restResponse.body() == null) {
                         return Maybe.empty();
@@ -2575,6 +2606,7 @@ public final class ArraysImpl implements Arrays {
     public Maybe<List<byte[]>> getByteValidAsync() {
         return getByteValidWithRestResponseAsync()
             .flatMapMaybe(new Function<RestResponse<Void, List<byte[]>>, Maybe<List<byte[]>>>() {
+                @Override
                 public Maybe<List<byte[]>> apply(RestResponse<Void, List<byte[]>> restResponse) {
                     if (restResponse.body() == null) {
                         return Maybe.empty();
@@ -2675,6 +2707,7 @@ public final class ArraysImpl implements Arrays {
     public Maybe<List<byte[]>> getByteInvalidNullAsync() {
         return getByteInvalidNullWithRestResponseAsync()
             .flatMapMaybe(new Function<RestResponse<Void, List<byte[]>>, Maybe<List<byte[]>>>() {
+                @Override
                 public Maybe<List<byte[]>> apply(RestResponse<Void, List<byte[]>> restResponse) {
                     if (restResponse.body() == null) {
                         return Maybe.empty();
@@ -2724,6 +2757,7 @@ public final class ArraysImpl implements Arrays {
     public Maybe<List<byte[]>> getBase64UrlAsync() {
         return getBase64UrlWithRestResponseAsync()
             .flatMapMaybe(new Function<RestResponse<Void, List<byte[]>>, Maybe<List<byte[]>>>() {
+                @Override
                 public Maybe<List<byte[]>> apply(RestResponse<Void, List<byte[]>> restResponse) {
                     if (restResponse.body() == null) {
                         return Maybe.empty();
@@ -2773,6 +2807,7 @@ public final class ArraysImpl implements Arrays {
     public Maybe<List<Product>> getComplexNullAsync() {
         return getComplexNullWithRestResponseAsync()
             .flatMapMaybe(new Function<RestResponse<Void, List<Product>>, Maybe<List<Product>>>() {
+                @Override
                 public Maybe<List<Product>> apply(RestResponse<Void, List<Product>> restResponse) {
                     if (restResponse.body() == null) {
                         return Maybe.empty();
@@ -2822,6 +2857,7 @@ public final class ArraysImpl implements Arrays {
     public Maybe<List<Product>> getComplexEmptyAsync() {
         return getComplexEmptyWithRestResponseAsync()
             .flatMapMaybe(new Function<RestResponse<Void, List<Product>>, Maybe<List<Product>>>() {
+                @Override
                 public Maybe<List<Product>> apply(RestResponse<Void, List<Product>> restResponse) {
                     if (restResponse.body() == null) {
                         return Maybe.empty();
@@ -2871,6 +2907,7 @@ public final class ArraysImpl implements Arrays {
     public Maybe<List<Product>> getComplexItemNullAsync() {
         return getComplexItemNullWithRestResponseAsync()
             .flatMapMaybe(new Function<RestResponse<Void, List<Product>>, Maybe<List<Product>>>() {
+                @Override
                 public Maybe<List<Product>> apply(RestResponse<Void, List<Product>> restResponse) {
                     if (restResponse.body() == null) {
                         return Maybe.empty();
@@ -2920,6 +2957,7 @@ public final class ArraysImpl implements Arrays {
     public Maybe<List<Product>> getComplexItemEmptyAsync() {
         return getComplexItemEmptyWithRestResponseAsync()
             .flatMapMaybe(new Function<RestResponse<Void, List<Product>>, Maybe<List<Product>>>() {
+                @Override
                 public Maybe<List<Product>> apply(RestResponse<Void, List<Product>> restResponse) {
                     if (restResponse.body() == null) {
                         return Maybe.empty();
@@ -2969,6 +3007,7 @@ public final class ArraysImpl implements Arrays {
     public Maybe<List<Product>> getComplexValidAsync() {
         return getComplexValidWithRestResponseAsync()
             .flatMapMaybe(new Function<RestResponse<Void, List<Product>>, Maybe<List<Product>>>() {
+                @Override
                 public Maybe<List<Product>> apply(RestResponse<Void, List<Product>> restResponse) {
                     if (restResponse.body() == null) {
                         return Maybe.empty();
@@ -3069,6 +3108,7 @@ public final class ArraysImpl implements Arrays {
     public Maybe<List<List<String>>> getArrayNullAsync() {
         return getArrayNullWithRestResponseAsync()
             .flatMapMaybe(new Function<RestResponse<Void, List<List<String>>>, Maybe<List<List<String>>>>() {
+                @Override
                 public Maybe<List<List<String>>> apply(RestResponse<Void, List<List<String>>> restResponse) {
                     if (restResponse.body() == null) {
                         return Maybe.empty();
@@ -3118,6 +3158,7 @@ public final class ArraysImpl implements Arrays {
     public Maybe<List<List<String>>> getArrayEmptyAsync() {
         return getArrayEmptyWithRestResponseAsync()
             .flatMapMaybe(new Function<RestResponse<Void, List<List<String>>>, Maybe<List<List<String>>>>() {
+                @Override
                 public Maybe<List<List<String>>> apply(RestResponse<Void, List<List<String>>> restResponse) {
                     if (restResponse.body() == null) {
                         return Maybe.empty();
@@ -3167,6 +3208,7 @@ public final class ArraysImpl implements Arrays {
     public Maybe<List<List<String>>> getArrayItemNullAsync() {
         return getArrayItemNullWithRestResponseAsync()
             .flatMapMaybe(new Function<RestResponse<Void, List<List<String>>>, Maybe<List<List<String>>>>() {
+                @Override
                 public Maybe<List<List<String>>> apply(RestResponse<Void, List<List<String>>> restResponse) {
                     if (restResponse.body() == null) {
                         return Maybe.empty();
@@ -3216,6 +3258,7 @@ public final class ArraysImpl implements Arrays {
     public Maybe<List<List<String>>> getArrayItemEmptyAsync() {
         return getArrayItemEmptyWithRestResponseAsync()
             .flatMapMaybe(new Function<RestResponse<Void, List<List<String>>>, Maybe<List<List<String>>>>() {
+                @Override
                 public Maybe<List<List<String>>> apply(RestResponse<Void, List<List<String>>> restResponse) {
                     if (restResponse.body() == null) {
                         return Maybe.empty();
@@ -3265,6 +3308,7 @@ public final class ArraysImpl implements Arrays {
     public Maybe<List<List<String>>> getArrayValidAsync() {
         return getArrayValidWithRestResponseAsync()
             .flatMapMaybe(new Function<RestResponse<Void, List<List<String>>>, Maybe<List<List<String>>>>() {
+                @Override
                 public Maybe<List<List<String>>> apply(RestResponse<Void, List<List<String>>> restResponse) {
                     if (restResponse.body() == null) {
                         return Maybe.empty();
@@ -3365,6 +3409,7 @@ public final class ArraysImpl implements Arrays {
     public Maybe<List<Map<String, String>>> getDictionaryNullAsync() {
         return getDictionaryNullWithRestResponseAsync()
             .flatMapMaybe(new Function<RestResponse<Void, List<Map<String, String>>>, Maybe<List<Map<String, String>>>>() {
+                @Override
                 public Maybe<List<Map<String, String>>> apply(RestResponse<Void, List<Map<String, String>>> restResponse) {
                     if (restResponse.body() == null) {
                         return Maybe.empty();
@@ -3414,6 +3459,7 @@ public final class ArraysImpl implements Arrays {
     public Maybe<List<Map<String, String>>> getDictionaryEmptyAsync() {
         return getDictionaryEmptyWithRestResponseAsync()
             .flatMapMaybe(new Function<RestResponse<Void, List<Map<String, String>>>, Maybe<List<Map<String, String>>>>() {
+                @Override
                 public Maybe<List<Map<String, String>>> apply(RestResponse<Void, List<Map<String, String>>> restResponse) {
                     if (restResponse.body() == null) {
                         return Maybe.empty();
@@ -3463,6 +3509,7 @@ public final class ArraysImpl implements Arrays {
     public Maybe<List<Map<String, String>>> getDictionaryItemNullAsync() {
         return getDictionaryItemNullWithRestResponseAsync()
             .flatMapMaybe(new Function<RestResponse<Void, List<Map<String, String>>>, Maybe<List<Map<String, String>>>>() {
+                @Override
                 public Maybe<List<Map<String, String>>> apply(RestResponse<Void, List<Map<String, String>>> restResponse) {
                     if (restResponse.body() == null) {
                         return Maybe.empty();
@@ -3512,6 +3559,7 @@ public final class ArraysImpl implements Arrays {
     public Maybe<List<Map<String, String>>> getDictionaryItemEmptyAsync() {
         return getDictionaryItemEmptyWithRestResponseAsync()
             .flatMapMaybe(new Function<RestResponse<Void, List<Map<String, String>>>, Maybe<List<Map<String, String>>>>() {
+                @Override
                 public Maybe<List<Map<String, String>>> apply(RestResponse<Void, List<Map<String, String>>> restResponse) {
                     if (restResponse.body() == null) {
                         return Maybe.empty();
@@ -3561,6 +3609,7 @@ public final class ArraysImpl implements Arrays {
     public Maybe<List<Map<String, String>>> getDictionaryValidAsync() {
         return getDictionaryValidWithRestResponseAsync()
             .flatMapMaybe(new Function<RestResponse<Void, List<Map<String, String>>>, Maybe<List<Map<String, String>>>>() {
+                @Override
                 public Maybe<List<Map<String, String>>> apply(RestResponse<Void, List<Map<String, String>>> restResponse) {
                     if (restResponse.body() == null) {
                         return Maybe.empty();

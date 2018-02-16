@@ -226,6 +226,7 @@ public final class HeadersInner {
     public Maybe<Boolean> customNamedRequestIdHeadAsync(@NonNull String fooClientRequestId) {
         return customNamedRequestIdHeadWithRestResponseAsync(fooClientRequestId)
             .flatMapMaybe(new Function<RestResponse<HeaderCustomNamedRequestIdHeadHeadersInner, Boolean>, Maybe<Boolean>>() {
+                @Override
                 public Maybe<Boolean> apply(RestResponse<HeaderCustomNamedRequestIdHeadHeadersInner, Boolean> restResponse) {
                     if (restResponse.body() == null) {
                         return Maybe.empty();

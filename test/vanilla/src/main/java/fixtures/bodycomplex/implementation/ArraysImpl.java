@@ -126,6 +126,7 @@ public final class ArraysImpl implements Arrays {
     public Maybe<ArrayWrapper> getValidAsync() {
         return getValidWithRestResponseAsync()
             .flatMapMaybe(new Function<RestResponse<Void, ArrayWrapper>, Maybe<ArrayWrapper>>() {
+                @Override
                 public Maybe<ArrayWrapper> apply(RestResponse<Void, ArrayWrapper> restResponse) {
                     if (restResponse.body() == null) {
                         return Maybe.empty();
@@ -226,6 +227,7 @@ public final class ArraysImpl implements Arrays {
     public Maybe<ArrayWrapper> getEmptyAsync() {
         return getEmptyWithRestResponseAsync()
             .flatMapMaybe(new Function<RestResponse<Void, ArrayWrapper>, Maybe<ArrayWrapper>>() {
+                @Override
                 public Maybe<ArrayWrapper> apply(RestResponse<Void, ArrayWrapper> restResponse) {
                     if (restResponse.body() == null) {
                         return Maybe.empty();
@@ -326,6 +328,7 @@ public final class ArraysImpl implements Arrays {
     public Maybe<ArrayWrapper> getNotProvidedAsync() {
         return getNotProvidedWithRestResponseAsync()
             .flatMapMaybe(new Function<RestResponse<Void, ArrayWrapper>, Maybe<ArrayWrapper>>() {
+                @Override
                 public Maybe<ArrayWrapper> apply(RestResponse<Void, ArrayWrapper> restResponse) {
                     if (restResponse.body() == null) {
                         return Maybe.empty();

@@ -176,6 +176,7 @@ public final class IntsImpl implements Ints {
     public Maybe<Integer> getNullAsync() {
         return getNullWithRestResponseAsync()
             .flatMapMaybe(new Function<RestResponse<Void, Integer>, Maybe<Integer>>() {
+                @Override
                 public Maybe<Integer> apply(RestResponse<Void, Integer> restResponse) {
                     if (restResponse.body() == null) {
                         return Maybe.empty();
@@ -225,6 +226,7 @@ public final class IntsImpl implements Ints {
     public Maybe<Integer> getInvalidAsync() {
         return getInvalidWithRestResponseAsync()
             .flatMapMaybe(new Function<RestResponse<Void, Integer>, Maybe<Integer>>() {
+                @Override
                 public Maybe<Integer> apply(RestResponse<Void, Integer> restResponse) {
                     if (restResponse.body() == null) {
                         return Maybe.empty();
@@ -274,6 +276,7 @@ public final class IntsImpl implements Ints {
     public Maybe<Integer> getOverflowInt32Async() {
         return getOverflowInt32WithRestResponseAsync()
             .flatMapMaybe(new Function<RestResponse<Void, Integer>, Maybe<Integer>>() {
+                @Override
                 public Maybe<Integer> apply(RestResponse<Void, Integer> restResponse) {
                     if (restResponse.body() == null) {
                         return Maybe.empty();
@@ -323,6 +326,7 @@ public final class IntsImpl implements Ints {
     public Maybe<Integer> getUnderflowInt32Async() {
         return getUnderflowInt32WithRestResponseAsync()
             .flatMapMaybe(new Function<RestResponse<Void, Integer>, Maybe<Integer>>() {
+                @Override
                 public Maybe<Integer> apply(RestResponse<Void, Integer> restResponse) {
                     if (restResponse.body() == null) {
                         return Maybe.empty();
@@ -372,6 +376,7 @@ public final class IntsImpl implements Ints {
     public Maybe<Long> getOverflowInt64Async() {
         return getOverflowInt64WithRestResponseAsync()
             .flatMapMaybe(new Function<RestResponse<Void, Long>, Maybe<Long>>() {
+                @Override
                 public Maybe<Long> apply(RestResponse<Void, Long> restResponse) {
                     if (restResponse.body() == null) {
                         return Maybe.empty();
@@ -421,6 +426,7 @@ public final class IntsImpl implements Ints {
     public Maybe<Long> getUnderflowInt64Async() {
         return getUnderflowInt64WithRestResponseAsync()
             .flatMapMaybe(new Function<RestResponse<Void, Long>, Maybe<Long>>() {
+                @Override
                 public Maybe<Long> apply(RestResponse<Void, Long> restResponse) {
                     if (restResponse.body() == null) {
                         return Maybe.empty();
@@ -658,6 +664,7 @@ public final class IntsImpl implements Ints {
     public Maybe<DateTime> getUnixTimeAsync() {
         return getUnixTimeWithRestResponseAsync()
             .flatMapMaybe(new Function<RestResponse<Void, DateTime>, Maybe<DateTime>>() {
+                @Override
                 public Maybe<DateTime> apply(RestResponse<Void, DateTime> restResponse) {
                     if (restResponse.body() == null) {
                         return Maybe.empty();
@@ -755,6 +762,7 @@ public final class IntsImpl implements Ints {
     public Maybe<DateTime> getInvalidUnixTimeAsync() {
         return getInvalidUnixTimeWithRestResponseAsync()
             .flatMapMaybe(new Function<RestResponse<Void, DateTime>, Maybe<DateTime>>() {
+                @Override
                 public Maybe<DateTime> apply(RestResponse<Void, DateTime> restResponse) {
                     if (restResponse.body() == null) {
                         return Maybe.empty();
@@ -804,6 +812,7 @@ public final class IntsImpl implements Ints {
     public Maybe<DateTime> getNullUnixTimeAsync() {
         return getNullUnixTimeWithRestResponseAsync()
             .flatMapMaybe(new Function<RestResponse<Void, DateTime>, Maybe<DateTime>>() {
+                @Override
                 public Maybe<DateTime> apply(RestResponse<Void, DateTime> restResponse) {
                     if (restResponse.body() == null) {
                         return Maybe.empty();

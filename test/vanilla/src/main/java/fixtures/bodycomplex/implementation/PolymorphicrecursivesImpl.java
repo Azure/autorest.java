@@ -111,6 +111,7 @@ public final class PolymorphicrecursivesImpl implements Polymorphicrecursives {
     public Maybe<Fish> getValidAsync() {
         return getValidWithRestResponseAsync()
             .flatMapMaybe(new Function<RestResponse<Void, Fish>, Maybe<Fish>>() {
+                @Override
                 public Maybe<Fish> apply(RestResponse<Void, Fish> restResponse) {
                     if (restResponse.body() == null) {
                         return Maybe.empty();

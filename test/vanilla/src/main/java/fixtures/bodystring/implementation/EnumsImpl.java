@@ -132,6 +132,7 @@ public final class EnumsImpl implements Enums {
     public Maybe<Colors> getNotExpandableAsync() {
         return getNotExpandableWithRestResponseAsync()
             .flatMapMaybe(new Function<RestResponse<Void, Colors>, Maybe<Colors>>() {
+                @Override
                 public Maybe<Colors> apply(RestResponse<Void, Colors> restResponse) {
                     if (restResponse.body() == null) {
                         return Maybe.empty();
@@ -231,6 +232,7 @@ public final class EnumsImpl implements Enums {
     public Maybe<Colors> getReferencedAsync() {
         return getReferencedWithRestResponseAsync()
             .flatMapMaybe(new Function<RestResponse<Void, Colors>, Maybe<Colors>>() {
+                @Override
                 public Maybe<Colors> apply(RestResponse<Void, Colors> restResponse) {
                     if (restResponse.body() == null) {
                         return Maybe.empty();
@@ -330,6 +332,7 @@ public final class EnumsImpl implements Enums {
     public Maybe<RefColorConstant> getReferencedConstantAsync() {
         return getReferencedConstantWithRestResponseAsync()
             .flatMapMaybe(new Function<RestResponse<Void, RefColorConstant>, Maybe<RefColorConstant>>() {
+                @Override
                 public Maybe<RefColorConstant> apply(RestResponse<Void, RefColorConstant> restResponse) {
                     if (restResponse.body() == null) {
                         return Maybe.empty();

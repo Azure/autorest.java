@@ -234,6 +234,7 @@ public final class HttpRedirectsImpl implements HttpRedirects {
     public Maybe<List<String>> get300Async() {
         return get300WithRestResponseAsync()
             .flatMapMaybe(new Function<RestResponse<HttpRedirectsGet300Headers, List<String>>, Maybe<List<String>>>() {
+                @Override
                 public Maybe<List<String>> apply(RestResponse<HttpRedirectsGet300Headers, List<String>> restResponse) {
                     if (restResponse.body() == null) {
                         return Maybe.empty();

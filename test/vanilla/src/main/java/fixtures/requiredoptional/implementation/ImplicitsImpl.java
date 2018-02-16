@@ -144,6 +144,7 @@ public final class ImplicitsImpl implements Implicits {
     public Maybe<Error> getRequiredPathAsync(@NonNull String pathParameter) {
         return getRequiredPathWithRestResponseAsync(pathParameter)
             .flatMapMaybe(new Function<RestResponse<Void, Error>, Maybe<Error>>() {
+                @Override
                 public Maybe<Error> apply(RestResponse<Void, Error> restResponse) {
                     if (restResponse.body() == null) {
                         return Maybe.empty();
@@ -460,6 +461,7 @@ public final class ImplicitsImpl implements Implicits {
     public Maybe<Error> getRequiredGlobalPathAsync() {
         return getRequiredGlobalPathWithRestResponseAsync()
             .flatMapMaybe(new Function<RestResponse<Void, Error>, Maybe<Error>>() {
+                @Override
                 public Maybe<Error> apply(RestResponse<Void, Error> restResponse) {
                     if (restResponse.body() == null) {
                         return Maybe.empty();
@@ -512,6 +514,7 @@ public final class ImplicitsImpl implements Implicits {
     public Maybe<Error> getRequiredGlobalQueryAsync() {
         return getRequiredGlobalQueryWithRestResponseAsync()
             .flatMapMaybe(new Function<RestResponse<Void, Error>, Maybe<Error>>() {
+                @Override
                 public Maybe<Error> apply(RestResponse<Void, Error> restResponse) {
                     if (restResponse.body() == null) {
                         return Maybe.empty();
@@ -561,6 +564,7 @@ public final class ImplicitsImpl implements Implicits {
     public Maybe<Error> getOptionalGlobalQueryAsync() {
         return getOptionalGlobalQueryWithRestResponseAsync()
             .flatMapMaybe(new Function<RestResponse<Void, Error>, Maybe<Error>>() {
+                @Override
                 public Maybe<Error> apply(RestResponse<Void, Error> restResponse) {
                     if (restResponse.body() == null) {
                         return Maybe.empty();

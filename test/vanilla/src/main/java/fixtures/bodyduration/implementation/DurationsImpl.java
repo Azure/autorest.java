@@ -120,6 +120,7 @@ public final class DurationsImpl implements Durations {
     public Maybe<Period> getNullAsync() {
         return getNullWithRestResponseAsync()
             .flatMapMaybe(new Function<RestResponse<Void, Period>, Maybe<Period>>() {
+                @Override
                 public Maybe<Period> apply(RestResponse<Void, Period> restResponse) {
                     if (restResponse.body() == null) {
                         return Maybe.empty();
@@ -219,6 +220,7 @@ public final class DurationsImpl implements Durations {
     public Maybe<Period> getPositiveDurationAsync() {
         return getPositiveDurationWithRestResponseAsync()
             .flatMapMaybe(new Function<RestResponse<Void, Period>, Maybe<Period>>() {
+                @Override
                 public Maybe<Period> apply(RestResponse<Void, Period> restResponse) {
                     if (restResponse.body() == null) {
                         return Maybe.empty();
@@ -268,6 +270,7 @@ public final class DurationsImpl implements Durations {
     public Maybe<Period> getInvalidAsync() {
         return getInvalidWithRestResponseAsync()
             .flatMapMaybe(new Function<RestResponse<Void, Period>, Maybe<Period>>() {
+                @Override
                 public Maybe<Period> apply(RestResponse<Void, Period> restResponse) {
                     if (restResponse.body() == null) {
                         return Maybe.empty();

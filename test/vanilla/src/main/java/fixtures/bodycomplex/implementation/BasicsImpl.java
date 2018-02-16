@@ -132,6 +132,7 @@ public final class BasicsImpl implements Basics {
     public Maybe<Basic> getValidAsync() {
         return getValidWithRestResponseAsync()
             .flatMapMaybe(new Function<RestResponse<Void, Basic>, Maybe<Basic>>() {
+                @Override
                 public Maybe<Basic> apply(RestResponse<Void, Basic> restResponse) {
                     if (restResponse.body() == null) {
                         return Maybe.empty();
@@ -232,6 +233,7 @@ public final class BasicsImpl implements Basics {
     public Maybe<Basic> getInvalidAsync() {
         return getInvalidWithRestResponseAsync()
             .flatMapMaybe(new Function<RestResponse<Void, Basic>, Maybe<Basic>>() {
+                @Override
                 public Maybe<Basic> apply(RestResponse<Void, Basic> restResponse) {
                     if (restResponse.body() == null) {
                         return Maybe.empty();
@@ -281,6 +283,7 @@ public final class BasicsImpl implements Basics {
     public Maybe<Basic> getEmptyAsync() {
         return getEmptyWithRestResponseAsync()
             .flatMapMaybe(new Function<RestResponse<Void, Basic>, Maybe<Basic>>() {
+                @Override
                 public Maybe<Basic> apply(RestResponse<Void, Basic> restResponse) {
                     if (restResponse.body() == null) {
                         return Maybe.empty();
@@ -330,6 +333,7 @@ public final class BasicsImpl implements Basics {
     public Maybe<Basic> getNullAsync() {
         return getNullWithRestResponseAsync()
             .flatMapMaybe(new Function<RestResponse<Void, Basic>, Maybe<Basic>>() {
+                @Override
                 public Maybe<Basic> apply(RestResponse<Void, Basic> restResponse) {
                     if (restResponse.body() == null) {
                         return Maybe.empty();
@@ -379,6 +383,7 @@ public final class BasicsImpl implements Basics {
     public Maybe<Basic> getNotProvidedAsync() {
         return getNotProvidedWithRestResponseAsync()
             .flatMapMaybe(new Function<RestResponse<Void, Basic>, Maybe<Basic>>() {
+                @Override
                 public Maybe<Basic> apply(RestResponse<Void, Basic> restResponse) {
                     if (restResponse.body() == null) {
                         return Maybe.empty();

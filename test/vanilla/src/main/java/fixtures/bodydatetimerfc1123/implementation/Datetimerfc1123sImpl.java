@@ -154,6 +154,7 @@ public final class Datetimerfc1123sImpl implements Datetimerfc1123s {
     public Maybe<DateTime> getNullAsync() {
         return getNullWithRestResponseAsync()
             .flatMapMaybe(new Function<RestResponse<Void, DateTime>, Maybe<DateTime>>() {
+                @Override
                 public Maybe<DateTime> apply(RestResponse<Void, DateTime> restResponse) {
                     if (restResponse.body() == null) {
                         return Maybe.empty();
@@ -203,6 +204,7 @@ public final class Datetimerfc1123sImpl implements Datetimerfc1123s {
     public Maybe<DateTime> getInvalidAsync() {
         return getInvalidWithRestResponseAsync()
             .flatMapMaybe(new Function<RestResponse<Void, DateTime>, Maybe<DateTime>>() {
+                @Override
                 public Maybe<DateTime> apply(RestResponse<Void, DateTime> restResponse) {
                     if (restResponse.body() == null) {
                         return Maybe.empty();
@@ -252,6 +254,7 @@ public final class Datetimerfc1123sImpl implements Datetimerfc1123s {
     public Maybe<DateTime> getOverflowAsync() {
         return getOverflowWithRestResponseAsync()
             .flatMapMaybe(new Function<RestResponse<Void, DateTime>, Maybe<DateTime>>() {
+                @Override
                 public Maybe<DateTime> apply(RestResponse<Void, DateTime> restResponse) {
                     if (restResponse.body() == null) {
                         return Maybe.empty();
@@ -301,6 +304,7 @@ public final class Datetimerfc1123sImpl implements Datetimerfc1123s {
     public Maybe<DateTime> getUnderflowAsync() {
         return getUnderflowWithRestResponseAsync()
             .flatMapMaybe(new Function<RestResponse<Void, DateTime>, Maybe<DateTime>>() {
+                @Override
                 public Maybe<DateTime> apply(RestResponse<Void, DateTime> restResponse) {
                     if (restResponse.body() == null) {
                         return Maybe.empty();
@@ -401,6 +405,7 @@ public final class Datetimerfc1123sImpl implements Datetimerfc1123s {
     public Maybe<DateTime> getUtcLowercaseMaxDateTimeAsync() {
         return getUtcLowercaseMaxDateTimeWithRestResponseAsync()
             .flatMapMaybe(new Function<RestResponse<Void, DateTime>, Maybe<DateTime>>() {
+                @Override
                 public Maybe<DateTime> apply(RestResponse<Void, DateTime> restResponse) {
                     if (restResponse.body() == null) {
                         return Maybe.empty();
@@ -450,6 +455,7 @@ public final class Datetimerfc1123sImpl implements Datetimerfc1123s {
     public Maybe<DateTime> getUtcUppercaseMaxDateTimeAsync() {
         return getUtcUppercaseMaxDateTimeWithRestResponseAsync()
             .flatMapMaybe(new Function<RestResponse<Void, DateTime>, Maybe<DateTime>>() {
+                @Override
                 public Maybe<DateTime> apply(RestResponse<Void, DateTime> restResponse) {
                     if (restResponse.body() == null) {
                         return Maybe.empty();
@@ -550,6 +556,7 @@ public final class Datetimerfc1123sImpl implements Datetimerfc1123s {
     public Maybe<DateTime> getUtcMinDateTimeAsync() {
         return getUtcMinDateTimeWithRestResponseAsync()
             .flatMapMaybe(new Function<RestResponse<Void, DateTime>, Maybe<DateTime>>() {
+                @Override
                 public Maybe<DateTime> apply(RestResponse<Void, DateTime> restResponse) {
                     if (restResponse.body() == null) {
                         return Maybe.empty();

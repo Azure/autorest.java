@@ -242,6 +242,7 @@ public final class LRORetrysInner {
     public Maybe<ProductInner> put201CreatingSucceeded200Async() {
         return put201CreatingSucceeded200WithRestResponseAsync()
             .flatMapMaybe(new Function<RestResponse<Void, ProductInner>, Maybe<ProductInner>>() {
+                @Override
                 public Maybe<ProductInner> apply(RestResponse<Void, ProductInner> restResponse) {
                     if (restResponse.body() == null) {
                         return Maybe.empty();
@@ -299,6 +300,7 @@ public final class LRORetrysInner {
     public Maybe<ProductInner> put201CreatingSucceeded200Async(ProductInner product) {
         return put201CreatingSucceeded200WithRestResponseAsync(product)
             .flatMapMaybe(new Function<RestResponse<Void, ProductInner>, Maybe<ProductInner>>() {
+                @Override
                 public Maybe<ProductInner> apply(RestResponse<Void, ProductInner> restResponse) {
                     if (restResponse.body() == null) {
                         return Maybe.empty();
@@ -417,6 +419,7 @@ public final class LRORetrysInner {
     public Maybe<ProductInner> putAsyncRelativeRetrySucceededAsync() {
         return putAsyncRelativeRetrySucceededWithRestResponseAsync()
             .flatMapMaybe(new Function<RestResponse<LRORetrysPutAsyncRelativeRetrySucceededHeadersInner, ProductInner>, Maybe<ProductInner>>() {
+                @Override
                 public Maybe<ProductInner> apply(RestResponse<LRORetrysPutAsyncRelativeRetrySucceededHeadersInner, ProductInner> restResponse) {
                     if (restResponse.body() == null) {
                         return Maybe.empty();
@@ -474,6 +477,7 @@ public final class LRORetrysInner {
     public Maybe<ProductInner> putAsyncRelativeRetrySucceededAsync(ProductInner product) {
         return putAsyncRelativeRetrySucceededWithRestResponseAsync(product)
             .flatMapMaybe(new Function<RestResponse<LRORetrysPutAsyncRelativeRetrySucceededHeadersInner, ProductInner>, Maybe<ProductInner>>() {
+                @Override
                 public Maybe<ProductInner> apply(RestResponse<LRORetrysPutAsyncRelativeRetrySucceededHeadersInner, ProductInner> restResponse) {
                     if (restResponse.body() == null) {
                         return Maybe.empty();
@@ -554,6 +558,7 @@ public final class LRORetrysInner {
     public Maybe<ProductInner> deleteProvisioning202Accepted200SucceededAsync() {
         return deleteProvisioning202Accepted200SucceededWithRestResponseAsync()
             .flatMapMaybe(new Function<RestResponse<LRORetrysDeleteProvisioning202Accepted200SucceededHeadersInner, ProductInner>, Maybe<ProductInner>>() {
+                @Override
                 public Maybe<ProductInner> apply(RestResponse<LRORetrysDeleteProvisioning202Accepted200SucceededHeadersInner, ProductInner> restResponse) {
                     if (restResponse.body() == null) {
                         return Maybe.empty();

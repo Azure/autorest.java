@@ -123,6 +123,7 @@ public final class BytesImpl implements Bytes {
     public Maybe<byte[]> getNullAsync() {
         return getNullWithRestResponseAsync()
             .flatMapMaybe(new Function<RestResponse<Void, byte[]>, Maybe<byte[]>>() {
+                @Override
                 public Maybe<byte[]> apply(RestResponse<Void, byte[]> restResponse) {
                     if (restResponse.body() == null) {
                         return Maybe.empty();
@@ -172,6 +173,7 @@ public final class BytesImpl implements Bytes {
     public Maybe<byte[]> getEmptyAsync() {
         return getEmptyWithRestResponseAsync()
             .flatMapMaybe(new Function<RestResponse<Void, byte[]>, Maybe<byte[]>>() {
+                @Override
                 public Maybe<byte[]> apply(RestResponse<Void, byte[]> restResponse) {
                     if (restResponse.body() == null) {
                         return Maybe.empty();
@@ -221,6 +223,7 @@ public final class BytesImpl implements Bytes {
     public Maybe<byte[]> getNonAsciiAsync() {
         return getNonAsciiWithRestResponseAsync()
             .flatMapMaybe(new Function<RestResponse<Void, byte[]>, Maybe<byte[]>>() {
+                @Override
                 public Maybe<byte[]> apply(RestResponse<Void, byte[]> restResponse) {
                     if (restResponse.body() == null) {
                         return Maybe.empty();
@@ -320,6 +323,7 @@ public final class BytesImpl implements Bytes {
     public Maybe<byte[]> getInvalidAsync() {
         return getInvalidWithRestResponseAsync()
             .flatMapMaybe(new Function<RestResponse<Void, byte[]>, Maybe<byte[]>>() {
+                @Override
                 public Maybe<byte[]> apply(RestResponse<Void, byte[]> restResponse) {
                     if (restResponse.body() == null) {
                         return Maybe.empty();
