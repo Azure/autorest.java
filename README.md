@@ -48,6 +48,8 @@ This project enables Java code generation in [AutoRest](https://github.com/Azure
   - Default: `false`
   - Without Argument: `public DateTime duration(DateTime startTime, DateTime endTime)`
   - With Argument (`true`): `public String duration(String startTime, String endTime)`
+- *--java.java-version*: The version of Java that the generated code will target.
+  - Default: `1.7`
 
 # Contributing
 

@@ -3768,6 +3768,7 @@ namespace AutoRest.Java
                 }
 
                 string nextPageLinkParameterName = null;
+                string nextPageLinkVariableName = null;
                 string nextGroupTypeName = null;
                 string groupedTypeName = null;
                 string nextMethodParameterInvocation = null;
@@ -3775,27 +3776,19 @@ namespace AutoRest.Java
                 if (nextMethod != null)
                 {
                     nextPageLinkParameterName = nextMethod.Parameters
-                        .Select((AutoRestParameter parameter) =>
-                        {
-                            string parameterName;
-                            if (!parameter.IsClientProperty)
-                            {
-                                parameterName = parameter.Name;
-                            }
-                            else
-                            {
-                                string caller = (parameter.Method != null && parameter.Method.Group.IsNullOrEmpty() ? "this" : "this.client");
-                                string clientPropertyName = parameter.ClientProperty?.Name?.ToString();
-                                if (!string.IsNullOrEmpty(clientPropertyName))
-                                {
-                                    CodeNamer codeNamer = CodeNamer.Instance;
-                                    clientPropertyName = codeNamer.CamelCase(codeNamer.RemoveInvalidCharacters(clientPropertyName));
-                                }
-                                parameterName = $"{caller}.{clientPropertyName}()";
-                            }
-                            return parameterName;
-                        })
+                        .Select((AutoRestParameter parameter) => parameter.Name.Value)
                         .First((string parameterName) => parameterName.StartsWith("next", StringComparison.OrdinalIgnoreCase));
+
+                    nextPageLinkVariableName = nextPageLinkParameterName;
+                    if (settings.JavaVersion != JavaVersion.Java7 && clientMethod.Type != ClientMethodType.PagingSync)
+                    {
+                        int count = 0;
+                        while (clientMethod.Parameters.Any((Parameter clientMethodParameter) => clientMethodParameter.Name == nextPageLinkVariableName))
+                        {
+                            ++count;
+                            nextPageLinkVariableName = nextPageLinkParameterName + count;
+                        }
+                    }
 
                     IEnumerable<AutoRestParameter> nextMethodRestAPIParameters = nextMethod.Parameters
                         .Where((AutoRestParameter parameter) => parameter != null && !parameter.IsClientProperty && !string.IsNullOrWhiteSpace(parameter.Name))
@@ -3804,11 +3797,14 @@ namespace AutoRest.Java
                     AutoRestParameter nextGroupType = null;
                     if (!clientMethod.OnlyRequiredParameters)
                     {
-                        nextMethodParameterInvocation = string.Join(", ", nextMethodRestAPIParameters.Where(p => !p.IsConstant).Select((AutoRestParameter parameter) => parameter.Name));
+                        nextMethodParameterInvocation = string.Join(", ", nextMethodRestAPIParameters
+                            .Where(p => !p.IsConstant)
+                            .Select((AutoRestParameter parameter) => parameter.Name == nextPageLinkParameterName ? nextPageLinkVariableName : parameter.Name.Value));
                     }
                     else if (autoRestMethod.InputParameterTransformation.IsNullOrEmpty() || nextMethod.InputParameterTransformation.IsNullOrEmpty())
                     {
-                        nextMethodParameterInvocation = string.Join(", ", nextMethodRestAPIParameters.Select((AutoRestParameter parameter) => parameter.IsRequired ? parameter.Name.ToString() : "null"));
+                        nextMethodParameterInvocation = string.Join(", ", nextMethodRestAPIParameters
+                            .Select((AutoRestParameter parameter) => parameter.IsRequired ? (parameter.Name == nextPageLinkParameterName ? nextPageLinkVariableName : parameter.Name.ToString()) : "null"));
                     }
                     else
                     {
@@ -3821,11 +3817,11 @@ namespace AutoRest.Java
 
                             if (parameter.IsRequired)
                             {
-                                invocations.Add(parameterName);
+                                invocations.Add(parameterName == nextPageLinkParameterName ? nextPageLinkVariableName : parameterName);
                             }
                             else if (parameterName == nextGroupType.Name && groupedType.IsRequired)
                             {
-                                invocations.Add(parameterName);
+                                invocations.Add(parameterName == nextPageLinkParameterName ? nextPageLinkVariableName : parameterName);
                             }
                             else
                             {
@@ -3984,8 +3980,8 @@ namespace AutoRest.Java
                                 function.Text($".concatMap(");
                                 Lambda(function, pageType, "page", clientMethod.ReturnValue.Type, settings, subFunction =>
                                 {
-                                    subFunction.Line($"String {nextPageLinkParameterName} = page.nextPageLink();");
-                                    subFunction.If($"{nextPageLinkParameterName} == null", ifBlock =>
+                                    subFunction.Line($"String {nextPageLinkVariableName} = page.nextPageLink();");
+                                    subFunction.If($"{nextPageLinkVariableName} == null", ifBlock =>
                                     {
                                         ifBlock.Return("Observable.just(page)");
                                     });
@@ -4592,7 +4588,8 @@ namespace AutoRest.Java
 
                             IEnumerable<string> expressionsToValidate = GetExpressionsToValidate(restAPIMethod, onlyRequiredParameters, settings);
 
-                            IEnumerable<Parameter> parameters = ParseClientMethodParameters(autoRestParameters, true, settings);
+                            bool parametersAreFinal = settings.JavaVersion == JavaVersion.Java7;
+                            IEnumerable<Parameter> parameters = ParseClientMethodParameters(autoRestParameters, parametersAreFinal, settings);
 
                             clientMethods.Add(new ClientMethod(
                                 description: restAPIMethod.Description,
@@ -5221,16 +5218,28 @@ namespace AutoRest.Java
 
         private static void Lambda(JavaBlock function, IType parameterType, string parameterName, IType returnType, JavaSettings settings, Action<JavaBlock> lambdaBody)
         {
-            function.Line($"new {GenericType.Function(parameterType, returnType)}() {{");
-            function.Indent(() =>
+            if (settings.JavaVersion == JavaVersion.Java7)
             {
-                function.Annotation("Override");
-                function.Block($"public {returnType} apply({parameterType} {parameterName})", subFunction =>
+                function.Line($"new {GenericType.Function(parameterType, returnType)}() {{");
+                function.Indent(() =>
                 {
-                    lambdaBody.Invoke(subFunction);
+                    function.Annotation("Override");
+                    function.Block($"public {returnType} apply({parameterType} {parameterName})", subFunction =>
+                    {
+                        lambdaBody.Invoke(subFunction);
+                    });
                 });
-            });
-            function.Text("}");
+                function.Text("}");
+            }
+            else
+            {
+                function.Line($"({parameterType} {parameterName}) -> {{");
+                function.Indent(() =>
+                {
+                    lambdaBody.Invoke(function);
+                });
+                function.Text("}");
+            }
         }
     }
 }
