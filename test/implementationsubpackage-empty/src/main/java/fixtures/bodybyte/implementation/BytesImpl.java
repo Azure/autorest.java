@@ -8,7 +8,7 @@
  * regenerated.
  */
 
-package fixtures.bodybyte;
+package fixtures.bodybyte.implementation;
 
 import com.microsoft.rest.v2.RestProxy;
 import com.microsoft.rest.v2.RestResponse;
@@ -20,6 +20,7 @@ import com.microsoft.rest.v2.annotations.GET;
 import com.microsoft.rest.v2.annotations.Host;
 import com.microsoft.rest.v2.annotations.PUT;
 import com.microsoft.rest.v2.annotations.UnexpectedResponseExceptionType;
+import fixtures.bodybyte.Bytes;
 import fixtures.bodybyte.models.ErrorException;
 import io.reactivex.Completable;
 import io.reactivex.Maybe;
