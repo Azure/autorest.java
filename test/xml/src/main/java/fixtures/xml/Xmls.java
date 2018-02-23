@@ -14,12 +14,14 @@ import com.microsoft.rest.v2.RestResponse;
 import com.microsoft.rest.v2.ServiceCallback;
 import com.microsoft.rest.v2.ServiceFuture;
 import fixtures.xml.models.AppleBarrel;
+import fixtures.xml.models.Banana;
 import fixtures.xml.models.Slideshow;
 import fixtures.xml.models.XmlGetHeadersHeaders;
 import io.reactivex.Completable;
 import io.reactivex.Maybe;
 import io.reactivex.Single;
 import io.reactivex.annotations.NonNull;
+import java.util.List;
 
 /**
  * An instance of this class provides access to all the operations defined in
@@ -194,4 +196,134 @@ public interface Xmls {
      * @return the {@link Completable} object if successful.
      */
     Completable getHeadersAsync();
+
+    /**
+     * Get an empty list.
+     *
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the Slideshow object if successful.
+     */
+    Slideshow getEmptyList();
+
+    /**
+     * Get an empty list.
+     *
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link ServiceFuture&lt;Slideshow&gt;} object.
+     */
+    ServiceFuture<Slideshow> getEmptyListAsync(ServiceCallback<Slideshow> serviceCallback);
+
+    /**
+     * Get an empty list.
+     *
+     * @return the {@link Single&lt;RestResponse&lt;Void, Slideshow&gt;&gt;} object if successful.
+     */
+    Single<RestResponse<Void, Slideshow>> getEmptyListWithRestResponseAsync();
+
+    /**
+     * Get an empty list.
+     *
+     * @return the {@link Maybe&lt;Slideshow&gt;} object if successful.
+     */
+    Maybe<Slideshow> getEmptyListAsync();
+
+    /**
+     * Gets some empty wrapped lists.
+     *
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the AppleBarrel object if successful.
+     */
+    AppleBarrel getEmptyWrappedLists();
+
+    /**
+     * Gets some empty wrapped lists.
+     *
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link ServiceFuture&lt;AppleBarrel&gt;} object.
+     */
+    ServiceFuture<AppleBarrel> getEmptyWrappedListsAsync(ServiceCallback<AppleBarrel> serviceCallback);
+
+    /**
+     * Gets some empty wrapped lists.
+     *
+     * @return the {@link Single&lt;RestResponse&lt;Void, AppleBarrel&gt;&gt;} object if successful.
+     */
+    Single<RestResponse<Void, AppleBarrel>> getEmptyWrappedListsWithRestResponseAsync();
+
+    /**
+     * Gets some empty wrapped lists.
+     *
+     * @return the {@link Maybe&lt;AppleBarrel&gt;} object if successful.
+     */
+    Maybe<AppleBarrel> getEmptyWrappedListsAsync();
+
+    /**
+     * Gets a list as the root element.
+     *
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the List&lt;Banana&gt; object if successful.
+     */
+    List<Banana> getRootList();
+
+    /**
+     * Gets a list as the root element.
+     *
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link ServiceFuture&lt;List&lt;Banana&gt;&gt;} object.
+     */
+    ServiceFuture<List<Banana>> getRootListAsync(ServiceCallback<List<Banana>> serviceCallback);
+
+    /**
+     * Gets a list as the root element.
+     *
+     * @return the {@link Single&lt;RestResponse&lt;Void, List&lt;Banana&gt;&gt;&gt;} object if successful.
+     */
+    Single<RestResponse<Void, List<Banana>>> getRootListWithRestResponseAsync();
+
+    /**
+     * Gets a list as the root element.
+     *
+     * @return the {@link Maybe&lt;List&lt;Banana&gt;&gt;} object if successful.
+     */
+    Maybe<List<Banana>> getRootListAsync();
+
+    /**
+     * Puts a list as the root element.
+     *
+     * @param bananas the List&lt;Banana&gt; value.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
+    void putRootList(@NonNull List<Banana> bananas);
+
+    /**
+     * Puts a list as the root element.
+     *
+     * @param bananas the List&lt;Banana&gt; value.
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link ServiceFuture&lt;Void&gt;} object.
+     */
+    ServiceFuture<Void> putRootListAsync(@NonNull List<Banana> bananas, ServiceCallback<Void> serviceCallback);
+
+    /**
+     * Puts a list as the root element.
+     *
+     * @param bananas the List&lt;Banana&gt; value.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
+     */
+    Single<RestResponse<Void, Void>> putRootListWithRestResponseAsync(@NonNull List<Banana> bananas);
+
+    /**
+     * Puts a list as the root element.
+     *
+     * @param bananas the List&lt;Banana&gt; value.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link Completable} object if successful.
+     */
+    Completable putRootListAsync(@NonNull List<Banana> bananas);
 }

@@ -14,6 +14,7 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlProperty;
 import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlRootElement;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -59,6 +60,9 @@ public final class AppleBarrel {
      * @return the goodApples value.
      */
     public List<String> goodApples() {
+        if (this.goodApples == null) {
+            this.goodApples = new GoodApplesWrapper(new ArrayList<String>());
+        }
         return this.goodApples.items;
     }
 
@@ -79,6 +83,9 @@ public final class AppleBarrel {
      * @return the badApples value.
      */
     public List<String> badApples() {
+        if (this.badApples == null) {
+            this.badApples = new BadApplesWrapper(new ArrayList<String>());
+        }
         return this.badApples.items;
     }
 
