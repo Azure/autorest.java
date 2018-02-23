@@ -14,6 +14,7 @@ import com.microsoft.azure.v2.AzureProxy;
 import com.microsoft.azure.v2.CloudException;
 import com.microsoft.azure.v2.OperationStatus;
 import com.microsoft.azure.v2.util.ServiceFutureUtil;
+import com.microsoft.rest.v2.OperationDescription;
 import com.microsoft.rest.v2.RestResponse;
 import com.microsoft.rest.v2.ServiceCallback;
 import com.microsoft.rest.v2.ServiceFuture;
@@ -100,7 +101,7 @@ public final class LROSADsImpl implements LROSADs {
         @ExpectedResponses({200, 201, 202, 204})
         @UnexpectedResponseExceptionType(CloudException.class)
         @ResumeOperation
-        Observable<OperationStatus<Product>> resumePutNonRetry400(@BodyParam("application/json; charset=utf-8") Product product, @HeaderParam("accept-language") String acceptLanguage);
+        Observable<OperationStatus<Product>> resumePutNonRetry400(OperationDescription operationDescription);
 
         @PUT("lro/nonretryerror/put/201/creating/400")
         @ExpectedResponses({200, 201, 202, 204})
@@ -116,7 +117,7 @@ public final class LROSADsImpl implements LROSADs {
         @ExpectedResponses({200, 201, 202, 204})
         @UnexpectedResponseExceptionType(CloudException.class)
         @ResumeOperation
-        Observable<OperationStatus<Product>> resumePutNonRetry201Creating400(@BodyParam("application/json; charset=utf-8") Product product, @HeaderParam("accept-language") String acceptLanguage);
+        Observable<OperationStatus<Product>> resumePutNonRetry201Creating400(OperationDescription operationDescription);
 
         @PUT("lro/nonretryerror/put/201/creating/400/invalidjson")
         @ExpectedResponses({200, 201, 202, 204})
@@ -132,7 +133,7 @@ public final class LROSADsImpl implements LROSADs {
         @ExpectedResponses({200, 201, 202, 204})
         @UnexpectedResponseExceptionType(CloudException.class)
         @ResumeOperation
-        Observable<OperationStatus<Product>> resumePutNonRetry201Creating400InvalidJson(@BodyParam("application/json; charset=utf-8") Product product, @HeaderParam("accept-language") String acceptLanguage);
+        Observable<OperationStatus<Product>> resumePutNonRetry201Creating400InvalidJson(OperationDescription operationDescription);
 
         @PUT("lro/nonretryerror/putasync/retry/400")
         @ExpectedResponses({200, 202, 204})
@@ -148,7 +149,7 @@ public final class LROSADsImpl implements LROSADs {
         @ExpectedResponses({200, 202, 204})
         @UnexpectedResponseExceptionType(CloudException.class)
         @ResumeOperation
-        Observable<OperationStatus<Product>> resumePutAsyncRelativeRetry400(@BodyParam("application/json; charset=utf-8") Product product, @HeaderParam("accept-language") String acceptLanguage);
+        Observable<OperationStatus<Product>> resumePutAsyncRelativeRetry400(OperationDescription operationDescription);
 
         @DELETE("lro/nonretryerror/delete/400")
         @ExpectedResponses({200, 202, 204})
@@ -164,7 +165,7 @@ public final class LROSADsImpl implements LROSADs {
         @ExpectedResponses({200, 202, 204})
         @UnexpectedResponseExceptionType(CloudException.class)
         @ResumeOperation
-        Observable<OperationStatus<Void>> resumeDeleteNonRetry400(@HeaderParam("accept-language") String acceptLanguage);
+        Observable<OperationStatus<Void>> resumeDeleteNonRetry400(OperationDescription operationDescription);
 
         @DELETE("lro/nonretryerror/delete/202/retry/400")
         @ExpectedResponses({200, 202, 204})
@@ -180,7 +181,7 @@ public final class LROSADsImpl implements LROSADs {
         @ExpectedResponses({200, 202, 204})
         @UnexpectedResponseExceptionType(CloudException.class)
         @ResumeOperation
-        Observable<OperationStatus<Void>> resumeDelete202NonRetry400(@HeaderParam("accept-language") String acceptLanguage);
+        Observable<OperationStatus<Void>> resumeDelete202NonRetry400(OperationDescription operationDescription);
 
         @DELETE("lro/nonretryerror/deleteasync/retry/400")
         @ExpectedResponses({200, 202, 204})
@@ -196,7 +197,7 @@ public final class LROSADsImpl implements LROSADs {
         @ExpectedResponses({200, 202, 204})
         @UnexpectedResponseExceptionType(CloudException.class)
         @ResumeOperation
-        Observable<OperationStatus<Void>> resumeDeleteAsyncRelativeRetry400(@HeaderParam("accept-language") String acceptLanguage);
+        Observable<OperationStatus<Void>> resumeDeleteAsyncRelativeRetry400(OperationDescription operationDescription);
 
         @POST("lro/nonretryerror/post/400")
         @ExpectedResponses({200, 202, 204})
@@ -212,7 +213,7 @@ public final class LROSADsImpl implements LROSADs {
         @ExpectedResponses({200, 202, 204})
         @UnexpectedResponseExceptionType(CloudException.class)
         @ResumeOperation
-        Observable<OperationStatus<Void>> resumePostNonRetry400(@BodyParam("application/json; charset=utf-8") Product product, @HeaderParam("accept-language") String acceptLanguage);
+        Observable<OperationStatus<Void>> resumePostNonRetry400(OperationDescription operationDescription);
 
         @POST("lro/nonretryerror/post/202/retry/400")
         @ExpectedResponses({200, 202, 204})
@@ -228,7 +229,7 @@ public final class LROSADsImpl implements LROSADs {
         @ExpectedResponses({200, 202, 204})
         @UnexpectedResponseExceptionType(CloudException.class)
         @ResumeOperation
-        Observable<OperationStatus<Void>> resumePost202NonRetry400(@BodyParam("application/json; charset=utf-8") Product product, @HeaderParam("accept-language") String acceptLanguage);
+        Observable<OperationStatus<Void>> resumePost202NonRetry400(OperationDescription operationDescription);
 
         @POST("lro/nonretryerror/postasync/retry/400")
         @ExpectedResponses({200, 202, 204})
@@ -244,7 +245,7 @@ public final class LROSADsImpl implements LROSADs {
         @ExpectedResponses({200, 202, 204})
         @UnexpectedResponseExceptionType(CloudException.class)
         @ResumeOperation
-        Observable<OperationStatus<Void>> resumePostAsyncRelativeRetry400(@BodyParam("application/json; charset=utf-8") Product product, @HeaderParam("accept-language") String acceptLanguage);
+        Observable<OperationStatus<Void>> resumePostAsyncRelativeRetry400(OperationDescription operationDescription);
 
         @PUT("lro/error/put/201/noprovisioningstatepayload")
         @ExpectedResponses({200, 201, 202, 204})
@@ -260,7 +261,7 @@ public final class LROSADsImpl implements LROSADs {
         @ExpectedResponses({200, 201, 202, 204})
         @UnexpectedResponseExceptionType(CloudException.class)
         @ResumeOperation
-        Observable<OperationStatus<Product>> resumePutError201NoProvisioningStatePayload(@BodyParam("application/json; charset=utf-8") Product product, @HeaderParam("accept-language") String acceptLanguage);
+        Observable<OperationStatus<Product>> resumePutError201NoProvisioningStatePayload(OperationDescription operationDescription);
 
         @PUT("lro/error/putasync/retry/nostatus")
         @ExpectedResponses({200, 202, 204})
@@ -276,7 +277,7 @@ public final class LROSADsImpl implements LROSADs {
         @ExpectedResponses({200, 202, 204})
         @UnexpectedResponseExceptionType(CloudException.class)
         @ResumeOperation
-        Observable<OperationStatus<Product>> resumePutAsyncRelativeRetryNoStatus(@BodyParam("application/json; charset=utf-8") Product product, @HeaderParam("accept-language") String acceptLanguage);
+        Observable<OperationStatus<Product>> resumePutAsyncRelativeRetryNoStatus(OperationDescription operationDescription);
 
         @PUT("lro/error/putasync/retry/nostatuspayload")
         @ExpectedResponses({200, 202, 204})
@@ -292,7 +293,7 @@ public final class LROSADsImpl implements LROSADs {
         @ExpectedResponses({200, 202, 204})
         @UnexpectedResponseExceptionType(CloudException.class)
         @ResumeOperation
-        Observable<OperationStatus<Product>> resumePutAsyncRelativeRetryNoStatusPayload(@BodyParam("application/json; charset=utf-8") Product product, @HeaderParam("accept-language") String acceptLanguage);
+        Observable<OperationStatus<Product>> resumePutAsyncRelativeRetryNoStatusPayload(OperationDescription operationDescription);
 
         @DELETE("lro/error/delete/204/nolocation")
         @ExpectedResponses({200, 202, 204})
@@ -308,7 +309,7 @@ public final class LROSADsImpl implements LROSADs {
         @ExpectedResponses({200, 202, 204})
         @UnexpectedResponseExceptionType(CloudException.class)
         @ResumeOperation
-        Observable<OperationStatus<Void>> resumeDelete204Succeeded(@HeaderParam("accept-language") String acceptLanguage);
+        Observable<OperationStatus<Void>> resumeDelete204Succeeded(OperationDescription operationDescription);
 
         @DELETE("lro/error/deleteasync/retry/nostatus")
         @ExpectedResponses({200, 202, 204})
@@ -324,7 +325,7 @@ public final class LROSADsImpl implements LROSADs {
         @ExpectedResponses({200, 202, 204})
         @UnexpectedResponseExceptionType(CloudException.class)
         @ResumeOperation
-        Observable<OperationStatus<Void>> resumeDeleteAsyncRelativeRetryNoStatus(@HeaderParam("accept-language") String acceptLanguage);
+        Observable<OperationStatus<Void>> resumeDeleteAsyncRelativeRetryNoStatus(OperationDescription operationDescription);
 
         @POST("lro/error/post/202/nolocation")
         @ExpectedResponses({200, 202, 204})
@@ -340,7 +341,7 @@ public final class LROSADsImpl implements LROSADs {
         @ExpectedResponses({200, 202, 204})
         @UnexpectedResponseExceptionType(CloudException.class)
         @ResumeOperation
-        Observable<OperationStatus<Void>> resumePost202NoLocation(@BodyParam("application/json; charset=utf-8") Product product, @HeaderParam("accept-language") String acceptLanguage);
+        Observable<OperationStatus<Void>> resumePost202NoLocation(OperationDescription operationDescription);
 
         @POST("lro/error/postasync/retry/nopayload")
         @ExpectedResponses({200, 202, 204})
@@ -356,7 +357,7 @@ public final class LROSADsImpl implements LROSADs {
         @ExpectedResponses({200, 202, 204})
         @UnexpectedResponseExceptionType(CloudException.class)
         @ResumeOperation
-        Observable<OperationStatus<Void>> resumePostAsyncRelativeRetryNoPayload(@BodyParam("application/json; charset=utf-8") Product product, @HeaderParam("accept-language") String acceptLanguage);
+        Observable<OperationStatus<Void>> resumePostAsyncRelativeRetryNoPayload(OperationDescription operationDescription);
 
         @PUT("lro/error/put/200/invalidjson")
         @ExpectedResponses({200, 202, 204})
@@ -372,7 +373,7 @@ public final class LROSADsImpl implements LROSADs {
         @ExpectedResponses({200, 202, 204})
         @UnexpectedResponseExceptionType(CloudException.class)
         @ResumeOperation
-        Observable<OperationStatus<Product>> resumePut200InvalidJson(@BodyParam("application/json; charset=utf-8") Product product, @HeaderParam("accept-language") String acceptLanguage);
+        Observable<OperationStatus<Product>> resumePut200InvalidJson(OperationDescription operationDescription);
 
         @PUT("lro/error/putasync/retry/invalidheader")
         @ExpectedResponses({200, 202, 204})
@@ -388,7 +389,7 @@ public final class LROSADsImpl implements LROSADs {
         @ExpectedResponses({200, 202, 204})
         @UnexpectedResponseExceptionType(CloudException.class)
         @ResumeOperation
-        Observable<OperationStatus<Product>> resumePutAsyncRelativeRetryInvalidHeader(@BodyParam("application/json; charset=utf-8") Product product, @HeaderParam("accept-language") String acceptLanguage);
+        Observable<OperationStatus<Product>> resumePutAsyncRelativeRetryInvalidHeader(OperationDescription operationDescription);
 
         @PUT("lro/error/putasync/retry/invalidjsonpolling")
         @ExpectedResponses({200, 202, 204})
@@ -404,7 +405,7 @@ public final class LROSADsImpl implements LROSADs {
         @ExpectedResponses({200, 202, 204})
         @UnexpectedResponseExceptionType(CloudException.class)
         @ResumeOperation
-        Observable<OperationStatus<Product>> resumePutAsyncRelativeRetryInvalidJsonPolling(@BodyParam("application/json; charset=utf-8") Product product, @HeaderParam("accept-language") String acceptLanguage);
+        Observable<OperationStatus<Product>> resumePutAsyncRelativeRetryInvalidJsonPolling(OperationDescription operationDescription);
 
         @DELETE("lro/error/delete/202/retry/invalidheader")
         @ExpectedResponses({200, 202, 204})
@@ -420,7 +421,7 @@ public final class LROSADsImpl implements LROSADs {
         @ExpectedResponses({200, 202, 204})
         @UnexpectedResponseExceptionType(CloudException.class)
         @ResumeOperation
-        Observable<OperationStatus<Void>> resumeDelete202RetryInvalidHeader(@HeaderParam("accept-language") String acceptLanguage);
+        Observable<OperationStatus<Void>> resumeDelete202RetryInvalidHeader(OperationDescription operationDescription);
 
         @DELETE("lro/error/deleteasync/retry/invalidheader")
         @ExpectedResponses({200, 202, 204})
@@ -436,7 +437,7 @@ public final class LROSADsImpl implements LROSADs {
         @ExpectedResponses({200, 202, 204})
         @UnexpectedResponseExceptionType(CloudException.class)
         @ResumeOperation
-        Observable<OperationStatus<Void>> resumeDeleteAsyncRelativeRetryInvalidHeader(@HeaderParam("accept-language") String acceptLanguage);
+        Observable<OperationStatus<Void>> resumeDeleteAsyncRelativeRetryInvalidHeader(OperationDescription operationDescription);
 
         @DELETE("lro/error/deleteasync/retry/invalidjsonpolling")
         @ExpectedResponses({200, 202, 204})
@@ -452,7 +453,7 @@ public final class LROSADsImpl implements LROSADs {
         @ExpectedResponses({200, 202, 204})
         @UnexpectedResponseExceptionType(CloudException.class)
         @ResumeOperation
-        Observable<OperationStatus<Void>> resumeDeleteAsyncRelativeRetryInvalidJsonPolling(@HeaderParam("accept-language") String acceptLanguage);
+        Observable<OperationStatus<Void>> resumeDeleteAsyncRelativeRetryInvalidJsonPolling(OperationDescription operationDescription);
 
         @POST("lro/error/post/202/retry/invalidheader")
         @ExpectedResponses({200, 202, 204})
@@ -468,7 +469,7 @@ public final class LROSADsImpl implements LROSADs {
         @ExpectedResponses({200, 202, 204})
         @UnexpectedResponseExceptionType(CloudException.class)
         @ResumeOperation
-        Observable<OperationStatus<Void>> resumePost202RetryInvalidHeader(@BodyParam("application/json; charset=utf-8") Product product, @HeaderParam("accept-language") String acceptLanguage);
+        Observable<OperationStatus<Void>> resumePost202RetryInvalidHeader(OperationDescription operationDescription);
 
         @POST("lro/error/postasync/retry/invalidheader")
         @ExpectedResponses({200, 202, 204})
@@ -484,7 +485,7 @@ public final class LROSADsImpl implements LROSADs {
         @ExpectedResponses({200, 202, 204})
         @UnexpectedResponseExceptionType(CloudException.class)
         @ResumeOperation
-        Observable<OperationStatus<Void>> resumePostAsyncRelativeRetryInvalidHeader(@BodyParam("application/json; charset=utf-8") Product product, @HeaderParam("accept-language") String acceptLanguage);
+        Observable<OperationStatus<Void>> resumePostAsyncRelativeRetryInvalidHeader(OperationDescription operationDescription);
 
         @POST("lro/error/postasync/retry/invalidjsonpolling")
         @ExpectedResponses({200, 202, 204})
@@ -500,7 +501,7 @@ public final class LROSADsImpl implements LROSADs {
         @ExpectedResponses({200, 202, 204})
         @UnexpectedResponseExceptionType(CloudException.class)
         @ResumeOperation
-        Observable<OperationStatus<Void>> resumePostAsyncRelativeRetryInvalidJsonPolling(@BodyParam("application/json; charset=utf-8") Product product, @HeaderParam("accept-language") String acceptLanguage);
+        Observable<OperationStatus<Void>> resumePostAsyncRelativeRetryInvalidJsonPolling(OperationDescription operationDescription);
     }
 
     /**

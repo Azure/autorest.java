@@ -14,6 +14,7 @@ import com.microsoft.azure.v2.AzureProxy;
 import com.microsoft.azure.v2.CloudException;
 import com.microsoft.azure.v2.OperationStatus;
 import com.microsoft.azure.v2.util.ServiceFutureUtil;
+import com.microsoft.rest.v2.OperationDescription;
 import com.microsoft.rest.v2.RestResponse;
 import com.microsoft.rest.v2.ServiceCallback;
 import com.microsoft.rest.v2.ServiceFuture;
@@ -78,7 +79,7 @@ public final class LRORetrysInner {
         @ExpectedResponses({200, 201, 202, 204})
         @UnexpectedResponseExceptionType(CloudException.class)
         @ResumeOperation
-        Observable<OperationStatus<ProductInner>> resumePut201CreatingSucceeded200(@BodyParam("application/json; charset=utf-8") ProductInner product, @HeaderParam("accept-language") String acceptLanguage);
+        Observable<OperationStatus<ProductInner>> resumePut201CreatingSucceeded200(OperationDescription operationDescription);
 
         @PUT("lro/retryerror/putasync/retry/succeeded")
         @ExpectedResponses({200, 202, 204})
@@ -94,7 +95,7 @@ public final class LRORetrysInner {
         @ExpectedResponses({200, 202, 204})
         @UnexpectedResponseExceptionType(CloudException.class)
         @ResumeOperation
-        Observable<OperationStatus<ProductInner>> resumePutAsyncRelativeRetrySucceeded(@BodyParam("application/json; charset=utf-8") ProductInner product, @HeaderParam("accept-language") String acceptLanguage);
+        Observable<OperationStatus<ProductInner>> resumePutAsyncRelativeRetrySucceeded(OperationDescription operationDescription);
 
         @DELETE("lro/retryerror/delete/provisioning/202/accepted/200/succeeded")
         @ExpectedResponses({200, 202, 204})
@@ -110,7 +111,7 @@ public final class LRORetrysInner {
         @ExpectedResponses({200, 202, 204})
         @UnexpectedResponseExceptionType(CloudException.class)
         @ResumeOperation
-        Observable<OperationStatus<ProductInner>> resumeDeleteProvisioning202Accepted200Succeeded(@HeaderParam("accept-language") String acceptLanguage);
+        Observable<OperationStatus<ProductInner>> resumeDeleteProvisioning202Accepted200Succeeded(OperationDescription operationDescription);
 
         @DELETE("lro/retryerror/delete/202/retry/200")
         @ExpectedResponses({200, 202, 204})
@@ -126,7 +127,7 @@ public final class LRORetrysInner {
         @ExpectedResponses({200, 202, 204})
         @UnexpectedResponseExceptionType(CloudException.class)
         @ResumeOperation
-        Observable<OperationStatus<Void>> resumeDelete202Retry200(@HeaderParam("accept-language") String acceptLanguage);
+        Observable<OperationStatus<Void>> resumeDelete202Retry200(OperationDescription operationDescription);
 
         @DELETE("lro/retryerror/deleteasync/retry/succeeded")
         @ExpectedResponses({200, 202, 204})
@@ -142,7 +143,7 @@ public final class LRORetrysInner {
         @ExpectedResponses({200, 202, 204})
         @UnexpectedResponseExceptionType(CloudException.class)
         @ResumeOperation
-        Observable<OperationStatus<Void>> resumeDeleteAsyncRelativeRetrySucceeded(@HeaderParam("accept-language") String acceptLanguage);
+        Observable<OperationStatus<Void>> resumeDeleteAsyncRelativeRetrySucceeded(OperationDescription operationDescription);
 
         @POST("lro/retryerror/post/202/retry/200")
         @ExpectedResponses({200, 202, 204})
@@ -158,7 +159,7 @@ public final class LRORetrysInner {
         @ExpectedResponses({200, 202, 204})
         @UnexpectedResponseExceptionType(CloudException.class)
         @ResumeOperation
-        Observable<OperationStatus<Void>> resumePost202Retry200(@BodyParam("application/json; charset=utf-8") ProductInner product, @HeaderParam("accept-language") String acceptLanguage);
+        Observable<OperationStatus<Void>> resumePost202Retry200(OperationDescription operationDescription);
 
         @POST("lro/retryerror/postasync/retry/succeeded")
         @ExpectedResponses({200, 202, 204})
@@ -174,7 +175,7 @@ public final class LRORetrysInner {
         @ExpectedResponses({200, 202, 204})
         @UnexpectedResponseExceptionType(CloudException.class)
         @ResumeOperation
-        Observable<OperationStatus<Void>> resumePostAsyncRelativeRetrySucceeded(@BodyParam("application/json; charset=utf-8") ProductInner product, @HeaderParam("accept-language") String acceptLanguage);
+        Observable<OperationStatus<Void>> resumePostAsyncRelativeRetrySucceeded(OperationDescription operationDescription);
     }
 
     /**

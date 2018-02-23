@@ -3305,6 +3305,7 @@ namespace AutoRest.Java
                             interfaceBlock.Annotation($"ResumeOperation");
                             StringBuilder parameterDeclarationBuilder = new StringBuilder();
                             parameterDeclarationBuilder.Append("OperationDescription operationDescription");
+                            parameterDeclarationList.Add(parameterDeclarationBuilder.ToString());
                         }
                         else
                         {

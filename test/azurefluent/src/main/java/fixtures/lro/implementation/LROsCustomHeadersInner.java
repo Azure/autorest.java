@@ -14,6 +14,7 @@ import com.microsoft.azure.v2.AzureProxy;
 import com.microsoft.azure.v2.CloudException;
 import com.microsoft.azure.v2.OperationStatus;
 import com.microsoft.azure.v2.util.ServiceFutureUtil;
+import com.microsoft.rest.v2.OperationDescription;
 import com.microsoft.rest.v2.RestResponse;
 import com.microsoft.rest.v2.ServiceCallback;
 import com.microsoft.rest.v2.ServiceFuture;
@@ -77,7 +78,7 @@ public final class LROsCustomHeadersInner {
         @ExpectedResponses({200, 202, 204})
         @UnexpectedResponseExceptionType(CloudException.class)
         @ResumeOperation
-        Observable<OperationStatus<ProductInner>> resumePutAsyncRetrySucceeded(@BodyParam("application/json; charset=utf-8") ProductInner product, @HeaderParam("accept-language") String acceptLanguage);
+        Observable<OperationStatus<ProductInner>> resumePutAsyncRetrySucceeded(OperationDescription operationDescription);
 
         @PUT("lro/customheader/put/201/creating/succeeded/200")
         @ExpectedResponses({200, 201, 202, 204})
@@ -93,7 +94,7 @@ public final class LROsCustomHeadersInner {
         @ExpectedResponses({200, 201, 202, 204})
         @UnexpectedResponseExceptionType(CloudException.class)
         @ResumeOperation
-        Observable<OperationStatus<ProductInner>> resumePut201CreatingSucceeded200(@BodyParam("application/json; charset=utf-8") ProductInner product, @HeaderParam("accept-language") String acceptLanguage);
+        Observable<OperationStatus<ProductInner>> resumePut201CreatingSucceeded200(OperationDescription operationDescription);
 
         @POST("lro/customheader/post/202/retry/200")
         @ExpectedResponses({200, 202, 204})
@@ -109,7 +110,7 @@ public final class LROsCustomHeadersInner {
         @ExpectedResponses({200, 202, 204})
         @UnexpectedResponseExceptionType(CloudException.class)
         @ResumeOperation
-        Observable<OperationStatus<Void>> resumePost202Retry200(@BodyParam("application/json; charset=utf-8") ProductInner product, @HeaderParam("accept-language") String acceptLanguage);
+        Observable<OperationStatus<Void>> resumePost202Retry200(OperationDescription operationDescription);
 
         @POST("lro/customheader/postasync/retry/succeeded")
         @ExpectedResponses({200, 202, 204})
@@ -125,7 +126,7 @@ public final class LROsCustomHeadersInner {
         @ExpectedResponses({200, 202, 204})
         @UnexpectedResponseExceptionType(CloudException.class)
         @ResumeOperation
-        Observable<OperationStatus<Void>> resumePostAsyncRetrySucceeded(@BodyParam("application/json; charset=utf-8") ProductInner product, @HeaderParam("accept-language") String acceptLanguage);
+        Observable<OperationStatus<Void>> resumePostAsyncRetrySucceeded(OperationDescription operationDescription);
     }
 
     /**
