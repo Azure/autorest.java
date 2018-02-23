@@ -14,6 +14,7 @@ import com.microsoft.azure.v2.AzureProxy;
 import com.microsoft.azure.v2.CloudException;
 import com.microsoft.azure.v2.OperationStatus;
 import com.microsoft.azure.v2.util.ServiceFutureUtil;
+import com.microsoft.rest.v2.OperationDescription;
 import com.microsoft.rest.v2.RestResponse;
 import com.microsoft.rest.v2.ServiceCallback;
 import com.microsoft.rest.v2.ServiceFuture;
@@ -25,6 +26,7 @@ import com.microsoft.rest.v2.annotations.HeaderParam;
 import com.microsoft.rest.v2.annotations.Host;
 import com.microsoft.rest.v2.annotations.POST;
 import com.microsoft.rest.v2.annotations.PUT;
+import com.microsoft.rest.v2.annotations.ResumeOperation;
 import com.microsoft.rest.v2.annotations.UnexpectedResponseExceptionType;
 import io.reactivex.Completable;
 import io.reactivex.Maybe;
@@ -73,6 +75,12 @@ public final class LROsInner {
         @UnexpectedResponseExceptionType(CloudException.class)
         Single<RestResponse<Void, ProductInner>> put200Succeeded(@BodyParam("application/json; charset=utf-8") ProductInner product, @HeaderParam("accept-language") String acceptLanguage);
 
+        @PUT("lro/put/200/succeeded")
+        @ExpectedResponses({200, 202, 204})
+        @UnexpectedResponseExceptionType(CloudException.class)
+        @ResumeOperation
+        Observable<OperationStatus<ProductInner>> resumePut200Succeeded(OperationDescription operationDescription);
+
         @PUT("lro/put/200/succeeded/nostate")
         @ExpectedResponses({200, 202, 204})
         @UnexpectedResponseExceptionType(CloudException.class)
@@ -82,6 +90,12 @@ public final class LROsInner {
         @ExpectedResponses({200, 202, 204})
         @UnexpectedResponseExceptionType(CloudException.class)
         Single<RestResponse<Void, ProductInner>> put200SucceededNoState(@BodyParam("application/json; charset=utf-8") ProductInner product, @HeaderParam("accept-language") String acceptLanguage);
+
+        @PUT("lro/put/200/succeeded/nostate")
+        @ExpectedResponses({200, 202, 204})
+        @UnexpectedResponseExceptionType(CloudException.class)
+        @ResumeOperation
+        Observable<OperationStatus<ProductInner>> resumePut200SucceededNoState(OperationDescription operationDescription);
 
         @PUT("lro/put/202/retry/200")
         @ExpectedResponses({200, 202, 204})
@@ -93,6 +107,12 @@ public final class LROsInner {
         @UnexpectedResponseExceptionType(CloudException.class)
         Single<RestResponse<Void, ProductInner>> put202Retry200(@BodyParam("application/json; charset=utf-8") ProductInner product, @HeaderParam("accept-language") String acceptLanguage);
 
+        @PUT("lro/put/202/retry/200")
+        @ExpectedResponses({200, 202, 204})
+        @UnexpectedResponseExceptionType(CloudException.class)
+        @ResumeOperation
+        Observable<OperationStatus<ProductInner>> resumePut202Retry200(OperationDescription operationDescription);
+
         @PUT("lro/put/201/creating/succeeded/200")
         @ExpectedResponses({200, 201, 202, 204})
         @UnexpectedResponseExceptionType(CloudException.class)
@@ -102,6 +122,12 @@ public final class LROsInner {
         @ExpectedResponses({200, 201, 202, 204})
         @UnexpectedResponseExceptionType(CloudException.class)
         Single<RestResponse<Void, ProductInner>> put201CreatingSucceeded200(@BodyParam("application/json; charset=utf-8") ProductInner product, @HeaderParam("accept-language") String acceptLanguage);
+
+        @PUT("lro/put/201/creating/succeeded/200")
+        @ExpectedResponses({200, 201, 202, 204})
+        @UnexpectedResponseExceptionType(CloudException.class)
+        @ResumeOperation
+        Observable<OperationStatus<ProductInner>> resumePut201CreatingSucceeded200(OperationDescription operationDescription);
 
         @PUT("lro/put/200/updating/succeeded/200")
         @ExpectedResponses({200, 202, 204})
@@ -113,6 +139,12 @@ public final class LROsInner {
         @UnexpectedResponseExceptionType(CloudException.class)
         Single<RestResponse<Void, ProductInner>> put200UpdatingSucceeded204(@BodyParam("application/json; charset=utf-8") ProductInner product, @HeaderParam("accept-language") String acceptLanguage);
 
+        @PUT("lro/put/200/updating/succeeded/200")
+        @ExpectedResponses({200, 202, 204})
+        @UnexpectedResponseExceptionType(CloudException.class)
+        @ResumeOperation
+        Observable<OperationStatus<ProductInner>> resumePut200UpdatingSucceeded204(OperationDescription operationDescription);
+
         @PUT("lro/put/201/created/failed/200")
         @ExpectedResponses({200, 201, 202, 204})
         @UnexpectedResponseExceptionType(CloudException.class)
@@ -122,6 +154,12 @@ public final class LROsInner {
         @ExpectedResponses({200, 201, 202, 204})
         @UnexpectedResponseExceptionType(CloudException.class)
         Single<RestResponse<Void, ProductInner>> put201CreatingFailed200(@BodyParam("application/json; charset=utf-8") ProductInner product, @HeaderParam("accept-language") String acceptLanguage);
+
+        @PUT("lro/put/201/created/failed/200")
+        @ExpectedResponses({200, 201, 202, 204})
+        @UnexpectedResponseExceptionType(CloudException.class)
+        @ResumeOperation
+        Observable<OperationStatus<ProductInner>> resumePut201CreatingFailed200(OperationDescription operationDescription);
 
         @PUT("lro/put/200/accepted/canceled/200")
         @ExpectedResponses({200, 202, 204})
@@ -133,6 +171,12 @@ public final class LROsInner {
         @UnexpectedResponseExceptionType(CloudException.class)
         Single<RestResponse<Void, ProductInner>> put200Acceptedcanceled200(@BodyParam("application/json; charset=utf-8") ProductInner product, @HeaderParam("accept-language") String acceptLanguage);
 
+        @PUT("lro/put/200/accepted/canceled/200")
+        @ExpectedResponses({200, 202, 204})
+        @UnexpectedResponseExceptionType(CloudException.class)
+        @ResumeOperation
+        Observable<OperationStatus<ProductInner>> resumePut200Acceptedcanceled200(OperationDescription operationDescription);
+
         @PUT("lro/put/noheader/202/200")
         @ExpectedResponses({200, 202, 204})
         @UnexpectedResponseExceptionType(CloudException.class)
@@ -142,6 +186,12 @@ public final class LROsInner {
         @ExpectedResponses({200, 202, 204})
         @UnexpectedResponseExceptionType(CloudException.class)
         Single<RestResponse<LROsPutNoHeaderInRetryHeadersInner, ProductInner>> putNoHeaderInRetry(@BodyParam("application/json; charset=utf-8") ProductInner product, @HeaderParam("accept-language") String acceptLanguage);
+
+        @PUT("lro/put/noheader/202/200")
+        @ExpectedResponses({200, 202, 204})
+        @UnexpectedResponseExceptionType(CloudException.class)
+        @ResumeOperation
+        Observable<OperationStatus<ProductInner>> resumePutNoHeaderInRetry(OperationDescription operationDescription);
 
         @PUT("lro/putasync/retry/succeeded")
         @ExpectedResponses({200, 202, 204})
@@ -153,6 +203,12 @@ public final class LROsInner {
         @UnexpectedResponseExceptionType(CloudException.class)
         Single<RestResponse<LROsPutAsyncRetrySucceededHeadersInner, ProductInner>> putAsyncRetrySucceeded(@BodyParam("application/json; charset=utf-8") ProductInner product, @HeaderParam("accept-language") String acceptLanguage);
 
+        @PUT("lro/putasync/retry/succeeded")
+        @ExpectedResponses({200, 202, 204})
+        @UnexpectedResponseExceptionType(CloudException.class)
+        @ResumeOperation
+        Observable<OperationStatus<ProductInner>> resumePutAsyncRetrySucceeded(OperationDescription operationDescription);
+
         @PUT("lro/putasync/noretry/succeeded")
         @ExpectedResponses({200, 202, 204})
         @UnexpectedResponseExceptionType(CloudException.class)
@@ -162,6 +218,12 @@ public final class LROsInner {
         @ExpectedResponses({200, 202, 204})
         @UnexpectedResponseExceptionType(CloudException.class)
         Single<RestResponse<LROsPutAsyncNoRetrySucceededHeadersInner, ProductInner>> putAsyncNoRetrySucceeded(@BodyParam("application/json; charset=utf-8") ProductInner product, @HeaderParam("accept-language") String acceptLanguage);
+
+        @PUT("lro/putasync/noretry/succeeded")
+        @ExpectedResponses({200, 202, 204})
+        @UnexpectedResponseExceptionType(CloudException.class)
+        @ResumeOperation
+        Observable<OperationStatus<ProductInner>> resumePutAsyncNoRetrySucceeded(OperationDescription operationDescription);
 
         @PUT("lro/putasync/retry/failed")
         @ExpectedResponses({200, 202, 204})
@@ -173,6 +235,12 @@ public final class LROsInner {
         @UnexpectedResponseExceptionType(CloudException.class)
         Single<RestResponse<LROsPutAsyncRetryFailedHeadersInner, ProductInner>> putAsyncRetryFailed(@BodyParam("application/json; charset=utf-8") ProductInner product, @HeaderParam("accept-language") String acceptLanguage);
 
+        @PUT("lro/putasync/retry/failed")
+        @ExpectedResponses({200, 202, 204})
+        @UnexpectedResponseExceptionType(CloudException.class)
+        @ResumeOperation
+        Observable<OperationStatus<ProductInner>> resumePutAsyncRetryFailed(OperationDescription operationDescription);
+
         @PUT("lro/putasync/noretry/canceled")
         @ExpectedResponses({200, 202, 204})
         @UnexpectedResponseExceptionType(CloudException.class)
@@ -182,6 +250,12 @@ public final class LROsInner {
         @ExpectedResponses({200, 202, 204})
         @UnexpectedResponseExceptionType(CloudException.class)
         Single<RestResponse<LROsPutAsyncNoRetrycanceledHeadersInner, ProductInner>> putAsyncNoRetrycanceled(@BodyParam("application/json; charset=utf-8") ProductInner product, @HeaderParam("accept-language") String acceptLanguage);
+
+        @PUT("lro/putasync/noretry/canceled")
+        @ExpectedResponses({200, 202, 204})
+        @UnexpectedResponseExceptionType(CloudException.class)
+        @ResumeOperation
+        Observable<OperationStatus<ProductInner>> resumePutAsyncNoRetrycanceled(OperationDescription operationDescription);
 
         @PUT("lro/putasync/noheader/201/200")
         @ExpectedResponses({200, 201, 202, 204})
@@ -193,6 +267,12 @@ public final class LROsInner {
         @UnexpectedResponseExceptionType(CloudException.class)
         Single<RestResponse<LROsPutAsyncNoHeaderInRetryHeadersInner, ProductInner>> putAsyncNoHeaderInRetry(@BodyParam("application/json; charset=utf-8") ProductInner product, @HeaderParam("accept-language") String acceptLanguage);
 
+        @PUT("lro/putasync/noheader/201/200")
+        @ExpectedResponses({200, 201, 202, 204})
+        @UnexpectedResponseExceptionType(CloudException.class)
+        @ResumeOperation
+        Observable<OperationStatus<ProductInner>> resumePutAsyncNoHeaderInRetry(OperationDescription operationDescription);
+
         @PUT("lro/putnonresource/202/200")
         @ExpectedResponses({200, 202, 204})
         @UnexpectedResponseExceptionType(CloudException.class)
@@ -202,6 +282,12 @@ public final class LROsInner {
         @ExpectedResponses({200, 202, 204})
         @UnexpectedResponseExceptionType(CloudException.class)
         Single<RestResponse<Void, SkuInner>> putNonResource(@BodyParam("application/json; charset=utf-8") SkuInner sku, @HeaderParam("accept-language") String acceptLanguage);
+
+        @PUT("lro/putnonresource/202/200")
+        @ExpectedResponses({200, 202, 204})
+        @UnexpectedResponseExceptionType(CloudException.class)
+        @ResumeOperation
+        Observable<OperationStatus<SkuInner>> resumePutNonResource(OperationDescription operationDescription);
 
         @PUT("lro/putnonresourceasync/202/200")
         @ExpectedResponses({200, 202, 204})
@@ -213,6 +299,12 @@ public final class LROsInner {
         @UnexpectedResponseExceptionType(CloudException.class)
         Single<RestResponse<Void, SkuInner>> putAsyncNonResource(@BodyParam("application/json; charset=utf-8") SkuInner sku, @HeaderParam("accept-language") String acceptLanguage);
 
+        @PUT("lro/putnonresourceasync/202/200")
+        @ExpectedResponses({200, 202, 204})
+        @UnexpectedResponseExceptionType(CloudException.class)
+        @ResumeOperation
+        Observable<OperationStatus<SkuInner>> resumePutAsyncNonResource(OperationDescription operationDescription);
+
         @PUT("lro/putsubresource/202/200")
         @ExpectedResponses({200, 202, 204})
         @UnexpectedResponseExceptionType(CloudException.class)
@@ -222,6 +314,12 @@ public final class LROsInner {
         @ExpectedResponses({200, 202, 204})
         @UnexpectedResponseExceptionType(CloudException.class)
         Single<RestResponse<Void, SubProductInner>> putSubResource(@BodyParam("application/json; charset=utf-8") SubProductInner product, @HeaderParam("accept-language") String acceptLanguage);
+
+        @PUT("lro/putsubresource/202/200")
+        @ExpectedResponses({200, 202, 204})
+        @UnexpectedResponseExceptionType(CloudException.class)
+        @ResumeOperation
+        Observable<OperationStatus<SubProductInner>> resumePutSubResource(OperationDescription operationDescription);
 
         @PUT("lro/putsubresourceasync/202/200")
         @ExpectedResponses({200, 202, 204})
@@ -233,6 +331,12 @@ public final class LROsInner {
         @UnexpectedResponseExceptionType(CloudException.class)
         Single<RestResponse<Void, SubProductInner>> putAsyncSubResource(@BodyParam("application/json; charset=utf-8") SubProductInner product, @HeaderParam("accept-language") String acceptLanguage);
 
+        @PUT("lro/putsubresourceasync/202/200")
+        @ExpectedResponses({200, 202, 204})
+        @UnexpectedResponseExceptionType(CloudException.class)
+        @ResumeOperation
+        Observable<OperationStatus<SubProductInner>> resumePutAsyncSubResource(OperationDescription operationDescription);
+
         @DELETE("lro/delete/provisioning/202/accepted/200/succeeded")
         @ExpectedResponses({200, 202, 204})
         @UnexpectedResponseExceptionType(CloudException.class)
@@ -242,6 +346,12 @@ public final class LROsInner {
         @ExpectedResponses({200, 202, 204})
         @UnexpectedResponseExceptionType(CloudException.class)
         Single<RestResponse<LROsDeleteProvisioning202Accepted200SucceededHeadersInner, ProductInner>> deleteProvisioning202Accepted200Succeeded(@HeaderParam("accept-language") String acceptLanguage);
+
+        @DELETE("lro/delete/provisioning/202/accepted/200/succeeded")
+        @ExpectedResponses({200, 202, 204})
+        @UnexpectedResponseExceptionType(CloudException.class)
+        @ResumeOperation
+        Observable<OperationStatus<ProductInner>> resumeDeleteProvisioning202Accepted200Succeeded(OperationDescription operationDescription);
 
         @DELETE("lro/delete/provisioning/202/deleting/200/failed")
         @ExpectedResponses({200, 202, 204})
@@ -253,6 +363,12 @@ public final class LROsInner {
         @UnexpectedResponseExceptionType(CloudException.class)
         Single<RestResponse<LROsDeleteProvisioning202DeletingFailed200HeadersInner, ProductInner>> deleteProvisioning202DeletingFailed200(@HeaderParam("accept-language") String acceptLanguage);
 
+        @DELETE("lro/delete/provisioning/202/deleting/200/failed")
+        @ExpectedResponses({200, 202, 204})
+        @UnexpectedResponseExceptionType(CloudException.class)
+        @ResumeOperation
+        Observable<OperationStatus<ProductInner>> resumeDeleteProvisioning202DeletingFailed200(OperationDescription operationDescription);
+
         @DELETE("lro/delete/provisioning/202/deleting/200/canceled")
         @ExpectedResponses({200, 202, 204})
         @UnexpectedResponseExceptionType(CloudException.class)
@@ -262,6 +378,12 @@ public final class LROsInner {
         @ExpectedResponses({200, 202, 204})
         @UnexpectedResponseExceptionType(CloudException.class)
         Single<RestResponse<LROsDeleteProvisioning202Deletingcanceled200HeadersInner, ProductInner>> deleteProvisioning202Deletingcanceled200(@HeaderParam("accept-language") String acceptLanguage);
+
+        @DELETE("lro/delete/provisioning/202/deleting/200/canceled")
+        @ExpectedResponses({200, 202, 204})
+        @UnexpectedResponseExceptionType(CloudException.class)
+        @ResumeOperation
+        Observable<OperationStatus<ProductInner>> resumeDeleteProvisioning202Deletingcanceled200(OperationDescription operationDescription);
 
         @DELETE("lro/delete/204/succeeded")
         @ExpectedResponses({200, 202, 204})
@@ -273,6 +395,12 @@ public final class LROsInner {
         @UnexpectedResponseExceptionType(CloudException.class)
         Single<RestResponse<Void, Void>> delete204Succeeded(@HeaderParam("accept-language") String acceptLanguage);
 
+        @DELETE("lro/delete/204/succeeded")
+        @ExpectedResponses({200, 202, 204})
+        @UnexpectedResponseExceptionType(CloudException.class)
+        @ResumeOperation
+        Observable<OperationStatus<Void>> resumeDelete204Succeeded(OperationDescription operationDescription);
+
         @DELETE("lro/delete/202/retry/200")
         @ExpectedResponses({200, 202, 204})
         @UnexpectedResponseExceptionType(CloudException.class)
@@ -282,6 +410,12 @@ public final class LROsInner {
         @ExpectedResponses({200, 202, 204})
         @UnexpectedResponseExceptionType(CloudException.class)
         Single<RestResponse<LROsDelete202Retry200HeadersInner, ProductInner>> delete202Retry200(@HeaderParam("accept-language") String acceptLanguage);
+
+        @DELETE("lro/delete/202/retry/200")
+        @ExpectedResponses({200, 202, 204})
+        @UnexpectedResponseExceptionType(CloudException.class)
+        @ResumeOperation
+        Observable<OperationStatus<ProductInner>> resumeDelete202Retry200(OperationDescription operationDescription);
 
         @DELETE("lro/delete/202/noretry/204")
         @ExpectedResponses({200, 202, 204})
@@ -293,6 +427,12 @@ public final class LROsInner {
         @UnexpectedResponseExceptionType(CloudException.class)
         Single<RestResponse<LROsDelete202NoRetry204HeadersInner, ProductInner>> delete202NoRetry204(@HeaderParam("accept-language") String acceptLanguage);
 
+        @DELETE("lro/delete/202/noretry/204")
+        @ExpectedResponses({200, 202, 204})
+        @UnexpectedResponseExceptionType(CloudException.class)
+        @ResumeOperation
+        Observable<OperationStatus<ProductInner>> resumeDelete202NoRetry204(OperationDescription operationDescription);
+
         @DELETE("lro/delete/noheader")
         @ExpectedResponses({200, 202, 204})
         @UnexpectedResponseExceptionType(CloudException.class)
@@ -302,6 +442,12 @@ public final class LROsInner {
         @ExpectedResponses({200, 202, 204})
         @UnexpectedResponseExceptionType(CloudException.class)
         Single<RestResponse<LROsDeleteNoHeaderInRetryHeadersInner, Void>> deleteNoHeaderInRetry(@HeaderParam("accept-language") String acceptLanguage);
+
+        @DELETE("lro/delete/noheader")
+        @ExpectedResponses({200, 202, 204})
+        @UnexpectedResponseExceptionType(CloudException.class)
+        @ResumeOperation
+        Observable<OperationStatus<Void>> resumeDeleteNoHeaderInRetry(OperationDescription operationDescription);
 
         @DELETE("lro/deleteasync/noheader/202/204")
         @ExpectedResponses({200, 202, 204})
@@ -313,6 +459,12 @@ public final class LROsInner {
         @UnexpectedResponseExceptionType(CloudException.class)
         Single<RestResponse<LROsDeleteAsyncNoHeaderInRetryHeadersInner, Void>> deleteAsyncNoHeaderInRetry(@HeaderParam("accept-language") String acceptLanguage);
 
+        @DELETE("lro/deleteasync/noheader/202/204")
+        @ExpectedResponses({200, 202, 204})
+        @UnexpectedResponseExceptionType(CloudException.class)
+        @ResumeOperation
+        Observable<OperationStatus<Void>> resumeDeleteAsyncNoHeaderInRetry(OperationDescription operationDescription);
+
         @DELETE("lro/deleteasync/retry/succeeded")
         @ExpectedResponses({200, 202, 204})
         @UnexpectedResponseExceptionType(CloudException.class)
@@ -322,6 +474,12 @@ public final class LROsInner {
         @ExpectedResponses({200, 202, 204})
         @UnexpectedResponseExceptionType(CloudException.class)
         Single<RestResponse<LROsDeleteAsyncRetrySucceededHeadersInner, Void>> deleteAsyncRetrySucceeded(@HeaderParam("accept-language") String acceptLanguage);
+
+        @DELETE("lro/deleteasync/retry/succeeded")
+        @ExpectedResponses({200, 202, 204})
+        @UnexpectedResponseExceptionType(CloudException.class)
+        @ResumeOperation
+        Observable<OperationStatus<Void>> resumeDeleteAsyncRetrySucceeded(OperationDescription operationDescription);
 
         @DELETE("lro/deleteasync/noretry/succeeded")
         @ExpectedResponses({200, 202, 204})
@@ -333,6 +491,12 @@ public final class LROsInner {
         @UnexpectedResponseExceptionType(CloudException.class)
         Single<RestResponse<LROsDeleteAsyncNoRetrySucceededHeadersInner, Void>> deleteAsyncNoRetrySucceeded(@HeaderParam("accept-language") String acceptLanguage);
 
+        @DELETE("lro/deleteasync/noretry/succeeded")
+        @ExpectedResponses({200, 202, 204})
+        @UnexpectedResponseExceptionType(CloudException.class)
+        @ResumeOperation
+        Observable<OperationStatus<Void>> resumeDeleteAsyncNoRetrySucceeded(OperationDescription operationDescription);
+
         @DELETE("lro/deleteasync/retry/failed")
         @ExpectedResponses({200, 202, 204})
         @UnexpectedResponseExceptionType(CloudException.class)
@@ -342,6 +506,12 @@ public final class LROsInner {
         @ExpectedResponses({200, 202, 204})
         @UnexpectedResponseExceptionType(CloudException.class)
         Single<RestResponse<LROsDeleteAsyncRetryFailedHeadersInner, Void>> deleteAsyncRetryFailed(@HeaderParam("accept-language") String acceptLanguage);
+
+        @DELETE("lro/deleteasync/retry/failed")
+        @ExpectedResponses({200, 202, 204})
+        @UnexpectedResponseExceptionType(CloudException.class)
+        @ResumeOperation
+        Observable<OperationStatus<Void>> resumeDeleteAsyncRetryFailed(OperationDescription operationDescription);
 
         @DELETE("lro/deleteasync/retry/canceled")
         @ExpectedResponses({200, 202, 204})
@@ -353,6 +523,12 @@ public final class LROsInner {
         @UnexpectedResponseExceptionType(CloudException.class)
         Single<RestResponse<LROsDeleteAsyncRetrycanceledHeadersInner, Void>> deleteAsyncRetrycanceled(@HeaderParam("accept-language") String acceptLanguage);
 
+        @DELETE("lro/deleteasync/retry/canceled")
+        @ExpectedResponses({200, 202, 204})
+        @UnexpectedResponseExceptionType(CloudException.class)
+        @ResumeOperation
+        Observable<OperationStatus<Void>> resumeDeleteAsyncRetrycanceled(OperationDescription operationDescription);
+
         @POST("lro/post/payload/200")
         @ExpectedResponses({200, 202, 204})
         @UnexpectedResponseExceptionType(CloudException.class)
@@ -362,6 +538,12 @@ public final class LROsInner {
         @ExpectedResponses({200, 202, 204})
         @UnexpectedResponseExceptionType(CloudException.class)
         Single<RestResponse<Void, SkuInner>> post200WithPayload(@HeaderParam("accept-language") String acceptLanguage);
+
+        @POST("lro/post/payload/200")
+        @ExpectedResponses({200, 202, 204})
+        @UnexpectedResponseExceptionType(CloudException.class)
+        @ResumeOperation
+        Observable<OperationStatus<SkuInner>> resumePost200WithPayload(OperationDescription operationDescription);
 
         @POST("lro/post/202/retry/200")
         @ExpectedResponses({200, 202, 204})
@@ -373,6 +555,12 @@ public final class LROsInner {
         @UnexpectedResponseExceptionType(CloudException.class)
         Single<RestResponse<LROsPost202Retry200HeadersInner, Void>> post202Retry200(@BodyParam("application/json; charset=utf-8") ProductInner product, @HeaderParam("accept-language") String acceptLanguage);
 
+        @POST("lro/post/202/retry/200")
+        @ExpectedResponses({200, 202, 204})
+        @UnexpectedResponseExceptionType(CloudException.class)
+        @ResumeOperation
+        Observable<OperationStatus<Void>> resumePost202Retry200(OperationDescription operationDescription);
+
         @POST("lro/post/202/noretry/204")
         @ExpectedResponses({200, 202, 204})
         @UnexpectedResponseExceptionType(CloudException.class)
@@ -382,6 +570,12 @@ public final class LROsInner {
         @ExpectedResponses({200, 202, 204})
         @UnexpectedResponseExceptionType(CloudException.class)
         Single<RestResponse<LROsPost202NoRetry204HeadersInner, ProductInner>> post202NoRetry204(@BodyParam("application/json; charset=utf-8") ProductInner product, @HeaderParam("accept-language") String acceptLanguage);
+
+        @POST("lro/post/202/noretry/204")
+        @ExpectedResponses({200, 202, 204})
+        @UnexpectedResponseExceptionType(CloudException.class)
+        @ResumeOperation
+        Observable<OperationStatus<ProductInner>> resumePost202NoRetry204(OperationDescription operationDescription);
 
         @POST("lro/postasync/retry/succeeded")
         @ExpectedResponses({200, 202, 204})
@@ -393,6 +587,12 @@ public final class LROsInner {
         @UnexpectedResponseExceptionType(CloudException.class)
         Single<RestResponse<LROsPostAsyncRetrySucceededHeadersInner, ProductInner>> postAsyncRetrySucceeded(@BodyParam("application/json; charset=utf-8") ProductInner product, @HeaderParam("accept-language") String acceptLanguage);
 
+        @POST("lro/postasync/retry/succeeded")
+        @ExpectedResponses({200, 202, 204})
+        @UnexpectedResponseExceptionType(CloudException.class)
+        @ResumeOperation
+        Observable<OperationStatus<ProductInner>> resumePostAsyncRetrySucceeded(OperationDescription operationDescription);
+
         @POST("lro/postasync/noretry/succeeded")
         @ExpectedResponses({200, 202, 204})
         @UnexpectedResponseExceptionType(CloudException.class)
@@ -402,6 +602,12 @@ public final class LROsInner {
         @ExpectedResponses({200, 202, 204})
         @UnexpectedResponseExceptionType(CloudException.class)
         Single<RestResponse<LROsPostAsyncNoRetrySucceededHeadersInner, ProductInner>> postAsyncNoRetrySucceeded(@BodyParam("application/json; charset=utf-8") ProductInner product, @HeaderParam("accept-language") String acceptLanguage);
+
+        @POST("lro/postasync/noretry/succeeded")
+        @ExpectedResponses({200, 202, 204})
+        @UnexpectedResponseExceptionType(CloudException.class)
+        @ResumeOperation
+        Observable<OperationStatus<ProductInner>> resumePostAsyncNoRetrySucceeded(OperationDescription operationDescription);
 
         @POST("lro/postasync/retry/failed")
         @ExpectedResponses({200, 202, 204})
@@ -413,6 +619,12 @@ public final class LROsInner {
         @UnexpectedResponseExceptionType(CloudException.class)
         Single<RestResponse<LROsPostAsyncRetryFailedHeadersInner, Void>> postAsyncRetryFailed(@BodyParam("application/json; charset=utf-8") ProductInner product, @HeaderParam("accept-language") String acceptLanguage);
 
+        @POST("lro/postasync/retry/failed")
+        @ExpectedResponses({200, 202, 204})
+        @UnexpectedResponseExceptionType(CloudException.class)
+        @ResumeOperation
+        Observable<OperationStatus<Void>> resumePostAsyncRetryFailed(OperationDescription operationDescription);
+
         @POST("lro/postasync/retry/canceled")
         @ExpectedResponses({200, 202, 204})
         @UnexpectedResponseExceptionType(CloudException.class)
@@ -422,6 +634,12 @@ public final class LROsInner {
         @ExpectedResponses({200, 202, 204})
         @UnexpectedResponseExceptionType(CloudException.class)
         Single<RestResponse<LROsPostAsyncRetrycanceledHeadersInner, Void>> postAsyncRetrycanceled(@BodyParam("application/json; charset=utf-8") ProductInner product, @HeaderParam("accept-language") String acceptLanguage);
+
+        @POST("lro/postasync/retry/canceled")
+        @ExpectedResponses({200, 202, 204})
+        @UnexpectedResponseExceptionType(CloudException.class)
+        @ResumeOperation
+        Observable<OperationStatus<Void>> resumePostAsyncRetrycanceled(OperationDescription operationDescription);
     }
 
     /**
@@ -600,6 +818,74 @@ public final class LROsInner {
     }
 
     /**
+     * Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Succeeded’.
+     *
+     * @throws CloudException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the ProductInner object if successful.
+     */
+    public ProductInner resumePut200Succeeded() {
+        return resumePut200SucceededAsync().blockingLast().result();
+    }
+
+    /**
+     * Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Succeeded’.
+     *
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link ServiceFuture&lt;ProductInner&gt;} object.
+     */
+    public ServiceFuture<ProductInner> resumePut200SucceededAsync(ServiceCallback<ProductInner> serviceCallback) {
+        return ServiceFutureUtil.fromLRO(resumePut200SucceededAsync(), serviceCallback);
+    }
+
+    /**
+     * Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Succeeded’.
+     *
+     * @return the observable for the request.
+     */
+    public Observable<OperationStatus<ProductInner>> resumePut200SucceededAsync() {
+        final ProductInner product = null;
+        return service.resumePut200Succeeded(product, this.client.acceptLanguage());
+    }
+
+    /**
+     * Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Succeeded’.
+     *
+     * @param product Product to put.
+     * @throws CloudException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the ProductInner object if successful.
+     */
+    public ProductInner resumePut200Succeeded(ProductInner product) {
+        return resumePut200SucceededAsync(product).blockingLast().result();
+    }
+
+    /**
+     * Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Succeeded’.
+     *
+     * @param product Product to put.
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link ServiceFuture&lt;ProductInner&gt;} object.
+     */
+    public ServiceFuture<ProductInner> resumePut200SucceededAsync(ProductInner product, ServiceCallback<ProductInner> serviceCallback) {
+        return ServiceFutureUtil.fromLRO(resumePut200SucceededAsync(product), serviceCallback);
+    }
+
+    /**
+     * Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Succeeded’.
+     *
+     * @param product Product to put.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the observable for the request.
+     */
+    public Observable<OperationStatus<ProductInner>> resumePut200SucceededAsync(ProductInner product) {
+        Validator.validate(product);
+        return service.resumePut200Succeeded(product, this.client.acceptLanguage());
+    }
+
+    /**
      * Long running put request, service returns a 200 to the initial request, with an entity that does not contain ProvisioningState=’Succeeded’.
      *
      * @throws CloudException thrown if the request is rejected by server.
@@ -772,6 +1058,74 @@ public final class LROsInner {
                     }
                 }
             });
+    }
+
+    /**
+     * Long running put request, service returns a 200 to the initial request, with an entity that does not contain ProvisioningState=’Succeeded’.
+     *
+     * @throws CloudException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the ProductInner object if successful.
+     */
+    public ProductInner resumePut200SucceededNoState() {
+        return resumePut200SucceededNoStateAsync().blockingLast().result();
+    }
+
+    /**
+     * Long running put request, service returns a 200 to the initial request, with an entity that does not contain ProvisioningState=’Succeeded’.
+     *
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link ServiceFuture&lt;ProductInner&gt;} object.
+     */
+    public ServiceFuture<ProductInner> resumePut200SucceededNoStateAsync(ServiceCallback<ProductInner> serviceCallback) {
+        return ServiceFutureUtil.fromLRO(resumePut200SucceededNoStateAsync(), serviceCallback);
+    }
+
+    /**
+     * Long running put request, service returns a 200 to the initial request, with an entity that does not contain ProvisioningState=’Succeeded’.
+     *
+     * @return the observable for the request.
+     */
+    public Observable<OperationStatus<ProductInner>> resumePut200SucceededNoStateAsync() {
+        final ProductInner product = null;
+        return service.resumePut200SucceededNoState(product, this.client.acceptLanguage());
+    }
+
+    /**
+     * Long running put request, service returns a 200 to the initial request, with an entity that does not contain ProvisioningState=’Succeeded’.
+     *
+     * @param product Product to put.
+     * @throws CloudException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the ProductInner object if successful.
+     */
+    public ProductInner resumePut200SucceededNoState(ProductInner product) {
+        return resumePut200SucceededNoStateAsync(product).blockingLast().result();
+    }
+
+    /**
+     * Long running put request, service returns a 200 to the initial request, with an entity that does not contain ProvisioningState=’Succeeded’.
+     *
+     * @param product Product to put.
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link ServiceFuture&lt;ProductInner&gt;} object.
+     */
+    public ServiceFuture<ProductInner> resumePut200SucceededNoStateAsync(ProductInner product, ServiceCallback<ProductInner> serviceCallback) {
+        return ServiceFutureUtil.fromLRO(resumePut200SucceededNoStateAsync(product), serviceCallback);
+    }
+
+    /**
+     * Long running put request, service returns a 200 to the initial request, with an entity that does not contain ProvisioningState=’Succeeded’.
+     *
+     * @param product Product to put.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the observable for the request.
+     */
+    public Observable<OperationStatus<ProductInner>> resumePut200SucceededNoStateAsync(ProductInner product) {
+        Validator.validate(product);
+        return service.resumePut200SucceededNoState(product, this.client.acceptLanguage());
     }
 
     /**
@@ -950,6 +1304,74 @@ public final class LROsInner {
     }
 
     /**
+     * Long running put request, service returns a 202 to the initial request, with a location header that points to a polling URL that returns a 200 and an entity that doesn't contains ProvisioningState.
+     *
+     * @throws CloudException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the ProductInner object if successful.
+     */
+    public ProductInner resumePut202Retry200() {
+        return resumePut202Retry200Async().blockingLast().result();
+    }
+
+    /**
+     * Long running put request, service returns a 202 to the initial request, with a location header that points to a polling URL that returns a 200 and an entity that doesn't contains ProvisioningState.
+     *
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link ServiceFuture&lt;ProductInner&gt;} object.
+     */
+    public ServiceFuture<ProductInner> resumePut202Retry200Async(ServiceCallback<ProductInner> serviceCallback) {
+        return ServiceFutureUtil.fromLRO(resumePut202Retry200Async(), serviceCallback);
+    }
+
+    /**
+     * Long running put request, service returns a 202 to the initial request, with a location header that points to a polling URL that returns a 200 and an entity that doesn't contains ProvisioningState.
+     *
+     * @return the observable for the request.
+     */
+    public Observable<OperationStatus<ProductInner>> resumePut202Retry200Async() {
+        final ProductInner product = null;
+        return service.resumePut202Retry200(product, this.client.acceptLanguage());
+    }
+
+    /**
+     * Long running put request, service returns a 202 to the initial request, with a location header that points to a polling URL that returns a 200 and an entity that doesn't contains ProvisioningState.
+     *
+     * @param product Product to put.
+     * @throws CloudException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the ProductInner object if successful.
+     */
+    public ProductInner resumePut202Retry200(ProductInner product) {
+        return resumePut202Retry200Async(product).blockingLast().result();
+    }
+
+    /**
+     * Long running put request, service returns a 202 to the initial request, with a location header that points to a polling URL that returns a 200 and an entity that doesn't contains ProvisioningState.
+     *
+     * @param product Product to put.
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link ServiceFuture&lt;ProductInner&gt;} object.
+     */
+    public ServiceFuture<ProductInner> resumePut202Retry200Async(ProductInner product, ServiceCallback<ProductInner> serviceCallback) {
+        return ServiceFutureUtil.fromLRO(resumePut202Retry200Async(product), serviceCallback);
+    }
+
+    /**
+     * Long running put request, service returns a 202 to the initial request, with a location header that points to a polling URL that returns a 200 and an entity that doesn't contains ProvisioningState.
+     *
+     * @param product Product to put.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the observable for the request.
+     */
+    public Observable<OperationStatus<ProductInner>> resumePut202Retry200Async(ProductInner product) {
+        Validator.validate(product);
+        return service.resumePut202Retry200(product, this.client.acceptLanguage());
+    }
+
+    /**
      * Long running put request, service returns a 201 to the initial request, with an entity that contains ProvisioningState=’Creating’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Succeeded’.
      *
      * @throws CloudException thrown if the request is rejected by server.
@@ -1122,6 +1544,74 @@ public final class LROsInner {
                     }
                 }
             });
+    }
+
+    /**
+     * Long running put request, service returns a 201 to the initial request, with an entity that contains ProvisioningState=’Creating’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Succeeded’.
+     *
+     * @throws CloudException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the ProductInner object if successful.
+     */
+    public ProductInner resumePut201CreatingSucceeded200() {
+        return resumePut201CreatingSucceeded200Async().blockingLast().result();
+    }
+
+    /**
+     * Long running put request, service returns a 201 to the initial request, with an entity that contains ProvisioningState=’Creating’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Succeeded’.
+     *
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link ServiceFuture&lt;ProductInner&gt;} object.
+     */
+    public ServiceFuture<ProductInner> resumePut201CreatingSucceeded200Async(ServiceCallback<ProductInner> serviceCallback) {
+        return ServiceFutureUtil.fromLRO(resumePut201CreatingSucceeded200Async(), serviceCallback);
+    }
+
+    /**
+     * Long running put request, service returns a 201 to the initial request, with an entity that contains ProvisioningState=’Creating’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Succeeded’.
+     *
+     * @return the observable for the request.
+     */
+    public Observable<OperationStatus<ProductInner>> resumePut201CreatingSucceeded200Async() {
+        final ProductInner product = null;
+        return service.resumePut201CreatingSucceeded200(product, this.client.acceptLanguage());
+    }
+
+    /**
+     * Long running put request, service returns a 201 to the initial request, with an entity that contains ProvisioningState=’Creating’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Succeeded’.
+     *
+     * @param product Product to put.
+     * @throws CloudException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the ProductInner object if successful.
+     */
+    public ProductInner resumePut201CreatingSucceeded200(ProductInner product) {
+        return resumePut201CreatingSucceeded200Async(product).blockingLast().result();
+    }
+
+    /**
+     * Long running put request, service returns a 201 to the initial request, with an entity that contains ProvisioningState=’Creating’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Succeeded’.
+     *
+     * @param product Product to put.
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link ServiceFuture&lt;ProductInner&gt;} object.
+     */
+    public ServiceFuture<ProductInner> resumePut201CreatingSucceeded200Async(ProductInner product, ServiceCallback<ProductInner> serviceCallback) {
+        return ServiceFutureUtil.fromLRO(resumePut201CreatingSucceeded200Async(product), serviceCallback);
+    }
+
+    /**
+     * Long running put request, service returns a 201 to the initial request, with an entity that contains ProvisioningState=’Creating’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Succeeded’.
+     *
+     * @param product Product to put.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the observable for the request.
+     */
+    public Observable<OperationStatus<ProductInner>> resumePut201CreatingSucceeded200Async(ProductInner product) {
+        Validator.validate(product);
+        return service.resumePut201CreatingSucceeded200(product, this.client.acceptLanguage());
     }
 
     /**
@@ -1300,6 +1790,74 @@ public final class LROsInner {
     }
 
     /**
+     * Long running put request, service returns a 201 to the initial request, with an entity that contains ProvisioningState=’Updating’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Succeeded’.
+     *
+     * @throws CloudException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the ProductInner object if successful.
+     */
+    public ProductInner resumePut200UpdatingSucceeded204() {
+        return resumePut200UpdatingSucceeded204Async().blockingLast().result();
+    }
+
+    /**
+     * Long running put request, service returns a 201 to the initial request, with an entity that contains ProvisioningState=’Updating’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Succeeded’.
+     *
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link ServiceFuture&lt;ProductInner&gt;} object.
+     */
+    public ServiceFuture<ProductInner> resumePut200UpdatingSucceeded204Async(ServiceCallback<ProductInner> serviceCallback) {
+        return ServiceFutureUtil.fromLRO(resumePut200UpdatingSucceeded204Async(), serviceCallback);
+    }
+
+    /**
+     * Long running put request, service returns a 201 to the initial request, with an entity that contains ProvisioningState=’Updating’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Succeeded’.
+     *
+     * @return the observable for the request.
+     */
+    public Observable<OperationStatus<ProductInner>> resumePut200UpdatingSucceeded204Async() {
+        final ProductInner product = null;
+        return service.resumePut200UpdatingSucceeded204(product, this.client.acceptLanguage());
+    }
+
+    /**
+     * Long running put request, service returns a 201 to the initial request, with an entity that contains ProvisioningState=’Updating’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Succeeded’.
+     *
+     * @param product Product to put.
+     * @throws CloudException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the ProductInner object if successful.
+     */
+    public ProductInner resumePut200UpdatingSucceeded204(ProductInner product) {
+        return resumePut200UpdatingSucceeded204Async(product).blockingLast().result();
+    }
+
+    /**
+     * Long running put request, service returns a 201 to the initial request, with an entity that contains ProvisioningState=’Updating’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Succeeded’.
+     *
+     * @param product Product to put.
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link ServiceFuture&lt;ProductInner&gt;} object.
+     */
+    public ServiceFuture<ProductInner> resumePut200UpdatingSucceeded204Async(ProductInner product, ServiceCallback<ProductInner> serviceCallback) {
+        return ServiceFutureUtil.fromLRO(resumePut200UpdatingSucceeded204Async(product), serviceCallback);
+    }
+
+    /**
+     * Long running put request, service returns a 201 to the initial request, with an entity that contains ProvisioningState=’Updating’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Succeeded’.
+     *
+     * @param product Product to put.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the observable for the request.
+     */
+    public Observable<OperationStatus<ProductInner>> resumePut200UpdatingSucceeded204Async(ProductInner product) {
+        Validator.validate(product);
+        return service.resumePut200UpdatingSucceeded204(product, this.client.acceptLanguage());
+    }
+
+    /**
      * Long running put request, service returns a 201 to the initial request, with an entity that contains ProvisioningState=’Created’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Failed’.
      *
      * @throws CloudException thrown if the request is rejected by server.
@@ -1472,6 +2030,74 @@ public final class LROsInner {
                     }
                 }
             });
+    }
+
+    /**
+     * Long running put request, service returns a 201 to the initial request, with an entity that contains ProvisioningState=’Created’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Failed’.
+     *
+     * @throws CloudException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the ProductInner object if successful.
+     */
+    public ProductInner resumePut201CreatingFailed200() {
+        return resumePut201CreatingFailed200Async().blockingLast().result();
+    }
+
+    /**
+     * Long running put request, service returns a 201 to the initial request, with an entity that contains ProvisioningState=’Created’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Failed’.
+     *
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link ServiceFuture&lt;ProductInner&gt;} object.
+     */
+    public ServiceFuture<ProductInner> resumePut201CreatingFailed200Async(ServiceCallback<ProductInner> serviceCallback) {
+        return ServiceFutureUtil.fromLRO(resumePut201CreatingFailed200Async(), serviceCallback);
+    }
+
+    /**
+     * Long running put request, service returns a 201 to the initial request, with an entity that contains ProvisioningState=’Created’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Failed’.
+     *
+     * @return the observable for the request.
+     */
+    public Observable<OperationStatus<ProductInner>> resumePut201CreatingFailed200Async() {
+        final ProductInner product = null;
+        return service.resumePut201CreatingFailed200(product, this.client.acceptLanguage());
+    }
+
+    /**
+     * Long running put request, service returns a 201 to the initial request, with an entity that contains ProvisioningState=’Created’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Failed’.
+     *
+     * @param product Product to put.
+     * @throws CloudException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the ProductInner object if successful.
+     */
+    public ProductInner resumePut201CreatingFailed200(ProductInner product) {
+        return resumePut201CreatingFailed200Async(product).blockingLast().result();
+    }
+
+    /**
+     * Long running put request, service returns a 201 to the initial request, with an entity that contains ProvisioningState=’Created’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Failed’.
+     *
+     * @param product Product to put.
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link ServiceFuture&lt;ProductInner&gt;} object.
+     */
+    public ServiceFuture<ProductInner> resumePut201CreatingFailed200Async(ProductInner product, ServiceCallback<ProductInner> serviceCallback) {
+        return ServiceFutureUtil.fromLRO(resumePut201CreatingFailed200Async(product), serviceCallback);
+    }
+
+    /**
+     * Long running put request, service returns a 201 to the initial request, with an entity that contains ProvisioningState=’Created’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Failed’.
+     *
+     * @param product Product to put.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the observable for the request.
+     */
+    public Observable<OperationStatus<ProductInner>> resumePut201CreatingFailed200Async(ProductInner product) {
+        Validator.validate(product);
+        return service.resumePut201CreatingFailed200(product, this.client.acceptLanguage());
     }
 
     /**
@@ -1650,6 +2276,74 @@ public final class LROsInner {
     }
 
     /**
+     * Long running put request, service returns a 201 to the initial request, with an entity that contains ProvisioningState=’Creating’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Canceled’.
+     *
+     * @throws CloudException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the ProductInner object if successful.
+     */
+    public ProductInner resumePut200Acceptedcanceled200() {
+        return resumePut200Acceptedcanceled200Async().blockingLast().result();
+    }
+
+    /**
+     * Long running put request, service returns a 201 to the initial request, with an entity that contains ProvisioningState=’Creating’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Canceled’.
+     *
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link ServiceFuture&lt;ProductInner&gt;} object.
+     */
+    public ServiceFuture<ProductInner> resumePut200Acceptedcanceled200Async(ServiceCallback<ProductInner> serviceCallback) {
+        return ServiceFutureUtil.fromLRO(resumePut200Acceptedcanceled200Async(), serviceCallback);
+    }
+
+    /**
+     * Long running put request, service returns a 201 to the initial request, with an entity that contains ProvisioningState=’Creating’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Canceled’.
+     *
+     * @return the observable for the request.
+     */
+    public Observable<OperationStatus<ProductInner>> resumePut200Acceptedcanceled200Async() {
+        final ProductInner product = null;
+        return service.resumePut200Acceptedcanceled200(product, this.client.acceptLanguage());
+    }
+
+    /**
+     * Long running put request, service returns a 201 to the initial request, with an entity that contains ProvisioningState=’Creating’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Canceled’.
+     *
+     * @param product Product to put.
+     * @throws CloudException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the ProductInner object if successful.
+     */
+    public ProductInner resumePut200Acceptedcanceled200(ProductInner product) {
+        return resumePut200Acceptedcanceled200Async(product).blockingLast().result();
+    }
+
+    /**
+     * Long running put request, service returns a 201 to the initial request, with an entity that contains ProvisioningState=’Creating’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Canceled’.
+     *
+     * @param product Product to put.
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link ServiceFuture&lt;ProductInner&gt;} object.
+     */
+    public ServiceFuture<ProductInner> resumePut200Acceptedcanceled200Async(ProductInner product, ServiceCallback<ProductInner> serviceCallback) {
+        return ServiceFutureUtil.fromLRO(resumePut200Acceptedcanceled200Async(product), serviceCallback);
+    }
+
+    /**
+     * Long running put request, service returns a 201 to the initial request, with an entity that contains ProvisioningState=’Creating’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Canceled’.
+     *
+     * @param product Product to put.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the observable for the request.
+     */
+    public Observable<OperationStatus<ProductInner>> resumePut200Acceptedcanceled200Async(ProductInner product) {
+        Validator.validate(product);
+        return service.resumePut200Acceptedcanceled200(product, this.client.acceptLanguage());
+    }
+
+    /**
      * Long running put request, service returns a 202 to the initial request with location header. Subsequent calls to operation status do not contain location header.
      *
      * @throws CloudException thrown if the request is rejected by server.
@@ -1822,6 +2516,74 @@ public final class LROsInner {
                     }
                 }
             });
+    }
+
+    /**
+     * Long running put request, service returns a 202 to the initial request with location header. Subsequent calls to operation status do not contain location header.
+     *
+     * @throws CloudException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the ProductInner object if successful.
+     */
+    public ProductInner resumePutNoHeaderInRetry() {
+        return resumePutNoHeaderInRetryAsync().blockingLast().result();
+    }
+
+    /**
+     * Long running put request, service returns a 202 to the initial request with location header. Subsequent calls to operation status do not contain location header.
+     *
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link ServiceFuture&lt;ProductInner&gt;} object.
+     */
+    public ServiceFuture<ProductInner> resumePutNoHeaderInRetryAsync(ServiceCallback<ProductInner> serviceCallback) {
+        return ServiceFutureUtil.fromLRO(resumePutNoHeaderInRetryAsync(), serviceCallback);
+    }
+
+    /**
+     * Long running put request, service returns a 202 to the initial request with location header. Subsequent calls to operation status do not contain location header.
+     *
+     * @return the observable for the request.
+     */
+    public Observable<OperationStatus<ProductInner>> resumePutNoHeaderInRetryAsync() {
+        final ProductInner product = null;
+        return service.resumePutNoHeaderInRetry(product, this.client.acceptLanguage());
+    }
+
+    /**
+     * Long running put request, service returns a 202 to the initial request with location header. Subsequent calls to operation status do not contain location header.
+     *
+     * @param product Product to put.
+     * @throws CloudException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the ProductInner object if successful.
+     */
+    public ProductInner resumePutNoHeaderInRetry(ProductInner product) {
+        return resumePutNoHeaderInRetryAsync(product).blockingLast().result();
+    }
+
+    /**
+     * Long running put request, service returns a 202 to the initial request with location header. Subsequent calls to operation status do not contain location header.
+     *
+     * @param product Product to put.
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link ServiceFuture&lt;ProductInner&gt;} object.
+     */
+    public ServiceFuture<ProductInner> resumePutNoHeaderInRetryAsync(ProductInner product, ServiceCallback<ProductInner> serviceCallback) {
+        return ServiceFutureUtil.fromLRO(resumePutNoHeaderInRetryAsync(product), serviceCallback);
+    }
+
+    /**
+     * Long running put request, service returns a 202 to the initial request with location header. Subsequent calls to operation status do not contain location header.
+     *
+     * @param product Product to put.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the observable for the request.
+     */
+    public Observable<OperationStatus<ProductInner>> resumePutNoHeaderInRetryAsync(ProductInner product) {
+        Validator.validate(product);
+        return service.resumePutNoHeaderInRetry(product, this.client.acceptLanguage());
     }
 
     /**
@@ -2006,6 +2768,74 @@ public final class LROsInner {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the ProductInner object if successful.
      */
+    public ProductInner resumePutAsyncRetrySucceeded() {
+        return resumePutAsyncRetrySucceededAsync().blockingLast().result();
+    }
+
+    /**
+     * Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
+     *
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link ServiceFuture&lt;ProductInner&gt;} object.
+     */
+    public ServiceFuture<ProductInner> resumePutAsyncRetrySucceededAsync(ServiceCallback<ProductInner> serviceCallback) {
+        return ServiceFutureUtil.fromLRO(resumePutAsyncRetrySucceededAsync(), serviceCallback);
+    }
+
+    /**
+     * Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
+     *
+     * @return the observable for the request.
+     */
+    public Observable<OperationStatus<ProductInner>> resumePutAsyncRetrySucceededAsync() {
+        final ProductInner product = null;
+        return service.resumePutAsyncRetrySucceeded(product, this.client.acceptLanguage());
+    }
+
+    /**
+     * Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
+     *
+     * @param product Product to put.
+     * @throws CloudException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the ProductInner object if successful.
+     */
+    public ProductInner resumePutAsyncRetrySucceeded(ProductInner product) {
+        return resumePutAsyncRetrySucceededAsync(product).blockingLast().result();
+    }
+
+    /**
+     * Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
+     *
+     * @param product Product to put.
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link ServiceFuture&lt;ProductInner&gt;} object.
+     */
+    public ServiceFuture<ProductInner> resumePutAsyncRetrySucceededAsync(ProductInner product, ServiceCallback<ProductInner> serviceCallback) {
+        return ServiceFutureUtil.fromLRO(resumePutAsyncRetrySucceededAsync(product), serviceCallback);
+    }
+
+    /**
+     * Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
+     *
+     * @param product Product to put.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the observable for the request.
+     */
+    public Observable<OperationStatus<ProductInner>> resumePutAsyncRetrySucceededAsync(ProductInner product) {
+        Validator.validate(product);
+        return service.resumePutAsyncRetrySucceeded(product, this.client.acceptLanguage());
+    }
+
+    /**
+     * Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
+     *
+     * @throws CloudException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the ProductInner object if successful.
+     */
     public ProductInner beginPutAsyncNoRetrySucceeded() {
         return beginPutAsyncNoRetrySucceededAsync().blockingLast().result();
     }
@@ -2172,6 +3002,74 @@ public final class LROsInner {
                     }
                 }
             });
+    }
+
+    /**
+     * Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
+     *
+     * @throws CloudException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the ProductInner object if successful.
+     */
+    public ProductInner resumePutAsyncNoRetrySucceeded() {
+        return resumePutAsyncNoRetrySucceededAsync().blockingLast().result();
+    }
+
+    /**
+     * Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
+     *
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link ServiceFuture&lt;ProductInner&gt;} object.
+     */
+    public ServiceFuture<ProductInner> resumePutAsyncNoRetrySucceededAsync(ServiceCallback<ProductInner> serviceCallback) {
+        return ServiceFutureUtil.fromLRO(resumePutAsyncNoRetrySucceededAsync(), serviceCallback);
+    }
+
+    /**
+     * Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
+     *
+     * @return the observable for the request.
+     */
+    public Observable<OperationStatus<ProductInner>> resumePutAsyncNoRetrySucceededAsync() {
+        final ProductInner product = null;
+        return service.resumePutAsyncNoRetrySucceeded(product, this.client.acceptLanguage());
+    }
+
+    /**
+     * Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
+     *
+     * @param product Product to put.
+     * @throws CloudException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the ProductInner object if successful.
+     */
+    public ProductInner resumePutAsyncNoRetrySucceeded(ProductInner product) {
+        return resumePutAsyncNoRetrySucceededAsync(product).blockingLast().result();
+    }
+
+    /**
+     * Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
+     *
+     * @param product Product to put.
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link ServiceFuture&lt;ProductInner&gt;} object.
+     */
+    public ServiceFuture<ProductInner> resumePutAsyncNoRetrySucceededAsync(ProductInner product, ServiceCallback<ProductInner> serviceCallback) {
+        return ServiceFutureUtil.fromLRO(resumePutAsyncNoRetrySucceededAsync(product), serviceCallback);
+    }
+
+    /**
+     * Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
+     *
+     * @param product Product to put.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the observable for the request.
+     */
+    public Observable<OperationStatus<ProductInner>> resumePutAsyncNoRetrySucceededAsync(ProductInner product) {
+        Validator.validate(product);
+        return service.resumePutAsyncNoRetrySucceeded(product, this.client.acceptLanguage());
     }
 
     /**
@@ -2356,6 +3254,74 @@ public final class LROsInner {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the ProductInner object if successful.
      */
+    public ProductInner resumePutAsyncRetryFailed() {
+        return resumePutAsyncRetryFailedAsync().blockingLast().result();
+    }
+
+    /**
+     * Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
+     *
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link ServiceFuture&lt;ProductInner&gt;} object.
+     */
+    public ServiceFuture<ProductInner> resumePutAsyncRetryFailedAsync(ServiceCallback<ProductInner> serviceCallback) {
+        return ServiceFutureUtil.fromLRO(resumePutAsyncRetryFailedAsync(), serviceCallback);
+    }
+
+    /**
+     * Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
+     *
+     * @return the observable for the request.
+     */
+    public Observable<OperationStatus<ProductInner>> resumePutAsyncRetryFailedAsync() {
+        final ProductInner product = null;
+        return service.resumePutAsyncRetryFailed(product, this.client.acceptLanguage());
+    }
+
+    /**
+     * Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
+     *
+     * @param product Product to put.
+     * @throws CloudException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the ProductInner object if successful.
+     */
+    public ProductInner resumePutAsyncRetryFailed(ProductInner product) {
+        return resumePutAsyncRetryFailedAsync(product).blockingLast().result();
+    }
+
+    /**
+     * Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
+     *
+     * @param product Product to put.
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link ServiceFuture&lt;ProductInner&gt;} object.
+     */
+    public ServiceFuture<ProductInner> resumePutAsyncRetryFailedAsync(ProductInner product, ServiceCallback<ProductInner> serviceCallback) {
+        return ServiceFutureUtil.fromLRO(resumePutAsyncRetryFailedAsync(product), serviceCallback);
+    }
+
+    /**
+     * Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
+     *
+     * @param product Product to put.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the observable for the request.
+     */
+    public Observable<OperationStatus<ProductInner>> resumePutAsyncRetryFailedAsync(ProductInner product) {
+        Validator.validate(product);
+        return service.resumePutAsyncRetryFailed(product, this.client.acceptLanguage());
+    }
+
+    /**
+     * Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
+     *
+     * @throws CloudException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the ProductInner object if successful.
+     */
     public ProductInner beginPutAsyncNoRetrycanceled() {
         return beginPutAsyncNoRetrycanceledAsync().blockingLast().result();
     }
@@ -2522,6 +3488,74 @@ public final class LROsInner {
                     }
                 }
             });
+    }
+
+    /**
+     * Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
+     *
+     * @throws CloudException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the ProductInner object if successful.
+     */
+    public ProductInner resumePutAsyncNoRetrycanceled() {
+        return resumePutAsyncNoRetrycanceledAsync().blockingLast().result();
+    }
+
+    /**
+     * Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
+     *
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link ServiceFuture&lt;ProductInner&gt;} object.
+     */
+    public ServiceFuture<ProductInner> resumePutAsyncNoRetrycanceledAsync(ServiceCallback<ProductInner> serviceCallback) {
+        return ServiceFutureUtil.fromLRO(resumePutAsyncNoRetrycanceledAsync(), serviceCallback);
+    }
+
+    /**
+     * Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
+     *
+     * @return the observable for the request.
+     */
+    public Observable<OperationStatus<ProductInner>> resumePutAsyncNoRetrycanceledAsync() {
+        final ProductInner product = null;
+        return service.resumePutAsyncNoRetrycanceled(product, this.client.acceptLanguage());
+    }
+
+    /**
+     * Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
+     *
+     * @param product Product to put.
+     * @throws CloudException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the ProductInner object if successful.
+     */
+    public ProductInner resumePutAsyncNoRetrycanceled(ProductInner product) {
+        return resumePutAsyncNoRetrycanceledAsync(product).blockingLast().result();
+    }
+
+    /**
+     * Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
+     *
+     * @param product Product to put.
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link ServiceFuture&lt;ProductInner&gt;} object.
+     */
+    public ServiceFuture<ProductInner> resumePutAsyncNoRetrycanceledAsync(ProductInner product, ServiceCallback<ProductInner> serviceCallback) {
+        return ServiceFutureUtil.fromLRO(resumePutAsyncNoRetrycanceledAsync(product), serviceCallback);
+    }
+
+    /**
+     * Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
+     *
+     * @param product Product to put.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the observable for the request.
+     */
+    public Observable<OperationStatus<ProductInner>> resumePutAsyncNoRetrycanceledAsync(ProductInner product) {
+        Validator.validate(product);
+        return service.resumePutAsyncNoRetrycanceled(product, this.client.acceptLanguage());
     }
 
     /**
@@ -2697,6 +3731,74 @@ public final class LROsInner {
                     }
                 }
             });
+    }
+
+    /**
+     * Long running put request, service returns a 202 to the initial request with Azure-AsyncOperation header. Subsequent calls to operation status do not contain Azure-AsyncOperation header.
+     *
+     * @throws CloudException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the ProductInner object if successful.
+     */
+    public ProductInner resumePutAsyncNoHeaderInRetry() {
+        return resumePutAsyncNoHeaderInRetryAsync().blockingLast().result();
+    }
+
+    /**
+     * Long running put request, service returns a 202 to the initial request with Azure-AsyncOperation header. Subsequent calls to operation status do not contain Azure-AsyncOperation header.
+     *
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link ServiceFuture&lt;ProductInner&gt;} object.
+     */
+    public ServiceFuture<ProductInner> resumePutAsyncNoHeaderInRetryAsync(ServiceCallback<ProductInner> serviceCallback) {
+        return ServiceFutureUtil.fromLRO(resumePutAsyncNoHeaderInRetryAsync(), serviceCallback);
+    }
+
+    /**
+     * Long running put request, service returns a 202 to the initial request with Azure-AsyncOperation header. Subsequent calls to operation status do not contain Azure-AsyncOperation header.
+     *
+     * @return the observable for the request.
+     */
+    public Observable<OperationStatus<ProductInner>> resumePutAsyncNoHeaderInRetryAsync() {
+        final ProductInner product = null;
+        return service.resumePutAsyncNoHeaderInRetry(product, this.client.acceptLanguage());
+    }
+
+    /**
+     * Long running put request, service returns a 202 to the initial request with Azure-AsyncOperation header. Subsequent calls to operation status do not contain Azure-AsyncOperation header.
+     *
+     * @param product Product to put.
+     * @throws CloudException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the ProductInner object if successful.
+     */
+    public ProductInner resumePutAsyncNoHeaderInRetry(ProductInner product) {
+        return resumePutAsyncNoHeaderInRetryAsync(product).blockingLast().result();
+    }
+
+    /**
+     * Long running put request, service returns a 202 to the initial request with Azure-AsyncOperation header. Subsequent calls to operation status do not contain Azure-AsyncOperation header.
+     *
+     * @param product Product to put.
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link ServiceFuture&lt;ProductInner&gt;} object.
+     */
+    public ServiceFuture<ProductInner> resumePutAsyncNoHeaderInRetryAsync(ProductInner product, ServiceCallback<ProductInner> serviceCallback) {
+        return ServiceFutureUtil.fromLRO(resumePutAsyncNoHeaderInRetryAsync(product), serviceCallback);
+    }
+
+    /**
+     * Long running put request, service returns a 202 to the initial request with Azure-AsyncOperation header. Subsequent calls to operation status do not contain Azure-AsyncOperation header.
+     *
+     * @param product Product to put.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the observable for the request.
+     */
+    public Observable<OperationStatus<ProductInner>> resumePutAsyncNoHeaderInRetryAsync(ProductInner product) {
+        Validator.validate(product);
+        return service.resumePutAsyncNoHeaderInRetry(product, this.client.acceptLanguage());
     }
 
     /**
@@ -2881,6 +3983,74 @@ public final class LROsInner {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the SkuInner object if successful.
      */
+    public SkuInner resumePutNonResource() {
+        return resumePutNonResourceAsync().blockingLast().result();
+    }
+
+    /**
+     * Long running put request with non resource.
+     *
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link ServiceFuture&lt;SkuInner&gt;} object.
+     */
+    public ServiceFuture<SkuInner> resumePutNonResourceAsync(ServiceCallback<SkuInner> serviceCallback) {
+        return ServiceFutureUtil.fromLRO(resumePutNonResourceAsync(), serviceCallback);
+    }
+
+    /**
+     * Long running put request with non resource.
+     *
+     * @return the observable for the request.
+     */
+    public Observable<OperationStatus<SkuInner>> resumePutNonResourceAsync() {
+        final SkuInner sku = null;
+        return service.resumePutNonResource(sku, this.client.acceptLanguage());
+    }
+
+    /**
+     * Long running put request with non resource.
+     *
+     * @param sku sku to put.
+     * @throws CloudException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the SkuInner object if successful.
+     */
+    public SkuInner resumePutNonResource(SkuInner sku) {
+        return resumePutNonResourceAsync(sku).blockingLast().result();
+    }
+
+    /**
+     * Long running put request with non resource.
+     *
+     * @param sku sku to put.
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link ServiceFuture&lt;SkuInner&gt;} object.
+     */
+    public ServiceFuture<SkuInner> resumePutNonResourceAsync(SkuInner sku, ServiceCallback<SkuInner> serviceCallback) {
+        return ServiceFutureUtil.fromLRO(resumePutNonResourceAsync(sku), serviceCallback);
+    }
+
+    /**
+     * Long running put request with non resource.
+     *
+     * @param sku sku to put.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the observable for the request.
+     */
+    public Observable<OperationStatus<SkuInner>> resumePutNonResourceAsync(SkuInner sku) {
+        Validator.validate(sku);
+        return service.resumePutNonResource(sku, this.client.acceptLanguage());
+    }
+
+    /**
+     * Long running put request with non resource.
+     *
+     * @throws CloudException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the SkuInner object if successful.
+     */
     public SkuInner beginPutAsyncNonResource() {
         return beginPutAsyncNonResourceAsync().blockingLast().result();
     }
@@ -3047,6 +4217,74 @@ public final class LROsInner {
                     }
                 }
             });
+    }
+
+    /**
+     * Long running put request with non resource.
+     *
+     * @throws CloudException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the SkuInner object if successful.
+     */
+    public SkuInner resumePutAsyncNonResource() {
+        return resumePutAsyncNonResourceAsync().blockingLast().result();
+    }
+
+    /**
+     * Long running put request with non resource.
+     *
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link ServiceFuture&lt;SkuInner&gt;} object.
+     */
+    public ServiceFuture<SkuInner> resumePutAsyncNonResourceAsync(ServiceCallback<SkuInner> serviceCallback) {
+        return ServiceFutureUtil.fromLRO(resumePutAsyncNonResourceAsync(), serviceCallback);
+    }
+
+    /**
+     * Long running put request with non resource.
+     *
+     * @return the observable for the request.
+     */
+    public Observable<OperationStatus<SkuInner>> resumePutAsyncNonResourceAsync() {
+        final SkuInner sku = null;
+        return service.resumePutAsyncNonResource(sku, this.client.acceptLanguage());
+    }
+
+    /**
+     * Long running put request with non resource.
+     *
+     * @param sku Sku to put.
+     * @throws CloudException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the SkuInner object if successful.
+     */
+    public SkuInner resumePutAsyncNonResource(SkuInner sku) {
+        return resumePutAsyncNonResourceAsync(sku).blockingLast().result();
+    }
+
+    /**
+     * Long running put request with non resource.
+     *
+     * @param sku Sku to put.
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link ServiceFuture&lt;SkuInner&gt;} object.
+     */
+    public ServiceFuture<SkuInner> resumePutAsyncNonResourceAsync(SkuInner sku, ServiceCallback<SkuInner> serviceCallback) {
+        return ServiceFutureUtil.fromLRO(resumePutAsyncNonResourceAsync(sku), serviceCallback);
+    }
+
+    /**
+     * Long running put request with non resource.
+     *
+     * @param sku Sku to put.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the observable for the request.
+     */
+    public Observable<OperationStatus<SkuInner>> resumePutAsyncNonResourceAsync(SkuInner sku) {
+        Validator.validate(sku);
+        return service.resumePutAsyncNonResource(sku, this.client.acceptLanguage());
     }
 
     /**
@@ -3231,6 +4469,74 @@ public final class LROsInner {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the SubProductInner object if successful.
      */
+    public SubProductInner resumePutSubResource() {
+        return resumePutSubResourceAsync().blockingLast().result();
+    }
+
+    /**
+     * Long running put request with sub resource.
+     *
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link ServiceFuture&lt;SubProductInner&gt;} object.
+     */
+    public ServiceFuture<SubProductInner> resumePutSubResourceAsync(ServiceCallback<SubProductInner> serviceCallback) {
+        return ServiceFutureUtil.fromLRO(resumePutSubResourceAsync(), serviceCallback);
+    }
+
+    /**
+     * Long running put request with sub resource.
+     *
+     * @return the observable for the request.
+     */
+    public Observable<OperationStatus<SubProductInner>> resumePutSubResourceAsync() {
+        final SubProductInner product = null;
+        return service.resumePutSubResource(product, this.client.acceptLanguage());
+    }
+
+    /**
+     * Long running put request with sub resource.
+     *
+     * @param product Sub Product to put.
+     * @throws CloudException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the SubProductInner object if successful.
+     */
+    public SubProductInner resumePutSubResource(SubProductInner product) {
+        return resumePutSubResourceAsync(product).blockingLast().result();
+    }
+
+    /**
+     * Long running put request with sub resource.
+     *
+     * @param product Sub Product to put.
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link ServiceFuture&lt;SubProductInner&gt;} object.
+     */
+    public ServiceFuture<SubProductInner> resumePutSubResourceAsync(SubProductInner product, ServiceCallback<SubProductInner> serviceCallback) {
+        return ServiceFutureUtil.fromLRO(resumePutSubResourceAsync(product), serviceCallback);
+    }
+
+    /**
+     * Long running put request with sub resource.
+     *
+     * @param product Sub Product to put.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the observable for the request.
+     */
+    public Observable<OperationStatus<SubProductInner>> resumePutSubResourceAsync(SubProductInner product) {
+        Validator.validate(product);
+        return service.resumePutSubResource(product, this.client.acceptLanguage());
+    }
+
+    /**
+     * Long running put request with sub resource.
+     *
+     * @throws CloudException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the SubProductInner object if successful.
+     */
     public SubProductInner beginPutAsyncSubResource() {
         return beginPutAsyncSubResourceAsync().blockingLast().result();
     }
@@ -3400,6 +4706,74 @@ public final class LROsInner {
     }
 
     /**
+     * Long running put request with sub resource.
+     *
+     * @throws CloudException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the SubProductInner object if successful.
+     */
+    public SubProductInner resumePutAsyncSubResource() {
+        return resumePutAsyncSubResourceAsync().blockingLast().result();
+    }
+
+    /**
+     * Long running put request with sub resource.
+     *
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link ServiceFuture&lt;SubProductInner&gt;} object.
+     */
+    public ServiceFuture<SubProductInner> resumePutAsyncSubResourceAsync(ServiceCallback<SubProductInner> serviceCallback) {
+        return ServiceFutureUtil.fromLRO(resumePutAsyncSubResourceAsync(), serviceCallback);
+    }
+
+    /**
+     * Long running put request with sub resource.
+     *
+     * @return the observable for the request.
+     */
+    public Observable<OperationStatus<SubProductInner>> resumePutAsyncSubResourceAsync() {
+        final SubProductInner product = null;
+        return service.resumePutAsyncSubResource(product, this.client.acceptLanguage());
+    }
+
+    /**
+     * Long running put request with sub resource.
+     *
+     * @param product Sub Product to put.
+     * @throws CloudException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the SubProductInner object if successful.
+     */
+    public SubProductInner resumePutAsyncSubResource(SubProductInner product) {
+        return resumePutAsyncSubResourceAsync(product).blockingLast().result();
+    }
+
+    /**
+     * Long running put request with sub resource.
+     *
+     * @param product Sub Product to put.
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link ServiceFuture&lt;SubProductInner&gt;} object.
+     */
+    public ServiceFuture<SubProductInner> resumePutAsyncSubResourceAsync(SubProductInner product, ServiceCallback<SubProductInner> serviceCallback) {
+        return ServiceFutureUtil.fromLRO(resumePutAsyncSubResourceAsync(product), serviceCallback);
+    }
+
+    /**
+     * Long running put request with sub resource.
+     *
+     * @param product Sub Product to put.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the observable for the request.
+     */
+    public Observable<OperationStatus<SubProductInner>> resumePutAsyncSubResourceAsync(SubProductInner product) {
+        Validator.validate(product);
+        return service.resumePutAsyncSubResource(product, this.client.acceptLanguage());
+    }
+
+    /**
      * Long running delete request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Accepted’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Succeeded’.
      *
      * @throws CloudException thrown if the request is rejected by server.
@@ -3477,6 +4851,37 @@ public final class LROsInner {
                     }
                 }
             });
+    }
+
+    /**
+     * Long running delete request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Accepted’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Succeeded’.
+     *
+     * @throws CloudException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the ProductInner object if successful.
+     */
+    public ProductInner resumeDeleteProvisioning202Accepted200Succeeded() {
+        return resumeDeleteProvisioning202Accepted200SucceededAsync().blockingLast().result();
+    }
+
+    /**
+     * Long running delete request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Accepted’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Succeeded’.
+     *
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link ServiceFuture&lt;ProductInner&gt;} object.
+     */
+    public ServiceFuture<ProductInner> resumeDeleteProvisioning202Accepted200SucceededAsync(ServiceCallback<ProductInner> serviceCallback) {
+        return ServiceFutureUtil.fromLRO(resumeDeleteProvisioning202Accepted200SucceededAsync(), serviceCallback);
+    }
+
+    /**
+     * Long running delete request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Accepted’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Succeeded’.
+     *
+     * @return the observable for the request.
+     */
+    public Observable<OperationStatus<ProductInner>> resumeDeleteProvisioning202Accepted200SucceededAsync() {
+        return service.resumeDeleteProvisioning202Accepted200Succeeded(this.client.acceptLanguage());
     }
 
     /**
@@ -3560,6 +4965,37 @@ public final class LROsInner {
     }
 
     /**
+     * Long running delete request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Failed’.
+     *
+     * @throws CloudException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the ProductInner object if successful.
+     */
+    public ProductInner resumeDeleteProvisioning202DeletingFailed200() {
+        return resumeDeleteProvisioning202DeletingFailed200Async().blockingLast().result();
+    }
+
+    /**
+     * Long running delete request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Failed’.
+     *
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link ServiceFuture&lt;ProductInner&gt;} object.
+     */
+    public ServiceFuture<ProductInner> resumeDeleteProvisioning202DeletingFailed200Async(ServiceCallback<ProductInner> serviceCallback) {
+        return ServiceFutureUtil.fromLRO(resumeDeleteProvisioning202DeletingFailed200Async(), serviceCallback);
+    }
+
+    /**
+     * Long running delete request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Failed’.
+     *
+     * @return the observable for the request.
+     */
+    public Observable<OperationStatus<ProductInner>> resumeDeleteProvisioning202DeletingFailed200Async() {
+        return service.resumeDeleteProvisioning202DeletingFailed200(this.client.acceptLanguage());
+    }
+
+    /**
      * Long running delete request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Canceled’.
      *
      * @throws CloudException thrown if the request is rejected by server.
@@ -3640,6 +5076,37 @@ public final class LROsInner {
     }
 
     /**
+     * Long running delete request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Canceled’.
+     *
+     * @throws CloudException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the ProductInner object if successful.
+     */
+    public ProductInner resumeDeleteProvisioning202Deletingcanceled200() {
+        return resumeDeleteProvisioning202Deletingcanceled200Async().blockingLast().result();
+    }
+
+    /**
+     * Long running delete request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Canceled’.
+     *
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link ServiceFuture&lt;ProductInner&gt;} object.
+     */
+    public ServiceFuture<ProductInner> resumeDeleteProvisioning202Deletingcanceled200Async(ServiceCallback<ProductInner> serviceCallback) {
+        return ServiceFutureUtil.fromLRO(resumeDeleteProvisioning202Deletingcanceled200Async(), serviceCallback);
+    }
+
+    /**
+     * Long running delete request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Canceled’.
+     *
+     * @return the observable for the request.
+     */
+    public Observable<OperationStatus<ProductInner>> resumeDeleteProvisioning202Deletingcanceled200Async() {
+        return service.resumeDeleteProvisioning202Deletingcanceled200(this.client.acceptLanguage());
+    }
+
+    /**
      * Long running delete succeeds and returns right away.
      *
      * @throws CloudException thrown if the request is rejected by server.
@@ -3707,6 +5174,36 @@ public final class LROsInner {
     public Completable delete204SucceededAsync() {
         return delete204SucceededWithRestResponseAsync()
             .toCompletable();
+    }
+
+    /**
+     * Long running delete succeeds and returns right away.
+     *
+     * @throws CloudException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
+    public void resumeDelete204Succeeded() {
+        resumeDelete204SucceededAsync().blockingLast();
+    }
+
+    /**
+     * Long running delete succeeds and returns right away.
+     *
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link ServiceFuture&lt;Void&gt;} object.
+     */
+    public ServiceFuture<Void> resumeDelete204SucceededAsync(ServiceCallback<Void> serviceCallback) {
+        return ServiceFutureUtil.fromLRO(resumeDelete204SucceededAsync(), serviceCallback);
+    }
+
+    /**
+     * Long running delete succeeds and returns right away.
+     *
+     * @return the observable for the request.
+     */
+    public Observable<OperationStatus<Void>> resumeDelete204SucceededAsync() {
+        return service.resumeDelete204Succeeded(this.client.acceptLanguage());
     }
 
     /**
@@ -3796,6 +5293,37 @@ public final class LROsInner {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the ProductInner object if successful.
      */
+    public ProductInner resumeDelete202Retry200() {
+        return resumeDelete202Retry200Async().blockingLast().result();
+    }
+
+    /**
+     * Long running delete request, service returns a 202 to the initial request. Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Succeeded’.
+     *
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link ServiceFuture&lt;ProductInner&gt;} object.
+     */
+    public ServiceFuture<ProductInner> resumeDelete202Retry200Async(ServiceCallback<ProductInner> serviceCallback) {
+        return ServiceFutureUtil.fromLRO(resumeDelete202Retry200Async(), serviceCallback);
+    }
+
+    /**
+     * Long running delete request, service returns a 202 to the initial request. Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Succeeded’.
+     *
+     * @return the observable for the request.
+     */
+    public Observable<OperationStatus<ProductInner>> resumeDelete202Retry200Async() {
+        return service.resumeDelete202Retry200(this.client.acceptLanguage());
+    }
+
+    /**
+     * Long running delete request, service returns a 202 to the initial request. Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Succeeded’.
+     *
+     * @throws CloudException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the ProductInner object if successful.
+     */
     public ProductInner beginDelete202NoRetry204() {
         return beginDelete202NoRetry204Async().blockingLast().result();
     }
@@ -3870,6 +5398,37 @@ public final class LROsInner {
     }
 
     /**
+     * Long running delete request, service returns a 202 to the initial request. Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Succeeded’.
+     *
+     * @throws CloudException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the ProductInner object if successful.
+     */
+    public ProductInner resumeDelete202NoRetry204() {
+        return resumeDelete202NoRetry204Async().blockingLast().result();
+    }
+
+    /**
+     * Long running delete request, service returns a 202 to the initial request. Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Succeeded’.
+     *
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link ServiceFuture&lt;ProductInner&gt;} object.
+     */
+    public ServiceFuture<ProductInner> resumeDelete202NoRetry204Async(ServiceCallback<ProductInner> serviceCallback) {
+        return ServiceFutureUtil.fromLRO(resumeDelete202NoRetry204Async(), serviceCallback);
+    }
+
+    /**
+     * Long running delete request, service returns a 202 to the initial request. Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Succeeded’.
+     *
+     * @return the observable for the request.
+     */
+    public Observable<OperationStatus<ProductInner>> resumeDelete202NoRetry204Async() {
+        return service.resumeDelete202NoRetry204(this.client.acceptLanguage());
+    }
+
+    /**
      * Long running delete request, service returns a location header in the initial request. Subsequent calls to operation status do not contain location header.
      *
      * @throws CloudException thrown if the request is rejected by server.
@@ -3940,6 +5499,36 @@ public final class LROsInner {
     }
 
     /**
+     * Long running delete request, service returns a location header in the initial request. Subsequent calls to operation status do not contain location header.
+     *
+     * @throws CloudException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
+    public void resumeDeleteNoHeaderInRetry() {
+        resumeDeleteNoHeaderInRetryAsync().blockingLast();
+    }
+
+    /**
+     * Long running delete request, service returns a location header in the initial request. Subsequent calls to operation status do not contain location header.
+     *
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link ServiceFuture&lt;Void&gt;} object.
+     */
+    public ServiceFuture<Void> resumeDeleteNoHeaderInRetryAsync(ServiceCallback<Void> serviceCallback) {
+        return ServiceFutureUtil.fromLRO(resumeDeleteNoHeaderInRetryAsync(), serviceCallback);
+    }
+
+    /**
+     * Long running delete request, service returns a location header in the initial request. Subsequent calls to operation status do not contain location header.
+     *
+     * @return the observable for the request.
+     */
+    public Observable<OperationStatus<Void>> resumeDeleteNoHeaderInRetryAsync() {
+        return service.resumeDeleteNoHeaderInRetry(this.client.acceptLanguage());
+    }
+
+    /**
      * Long running delete request, service returns an Azure-AsyncOperation header in the initial request. Subsequent calls to operation status do not contain Azure-AsyncOperation header.
      *
      * @throws CloudException thrown if the request is rejected by server.
@@ -4007,6 +5596,36 @@ public final class LROsInner {
     public Completable deleteAsyncNoHeaderInRetryAsync() {
         return deleteAsyncNoHeaderInRetryWithRestResponseAsync()
             .toCompletable();
+    }
+
+    /**
+     * Long running delete request, service returns an Azure-AsyncOperation header in the initial request. Subsequent calls to operation status do not contain Azure-AsyncOperation header.
+     *
+     * @throws CloudException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
+    public void resumeDeleteAsyncNoHeaderInRetry() {
+        resumeDeleteAsyncNoHeaderInRetryAsync().blockingLast();
+    }
+
+    /**
+     * Long running delete request, service returns an Azure-AsyncOperation header in the initial request. Subsequent calls to operation status do not contain Azure-AsyncOperation header.
+     *
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link ServiceFuture&lt;Void&gt;} object.
+     */
+    public ServiceFuture<Void> resumeDeleteAsyncNoHeaderInRetryAsync(ServiceCallback<Void> serviceCallback) {
+        return ServiceFutureUtil.fromLRO(resumeDeleteAsyncNoHeaderInRetryAsync(), serviceCallback);
+    }
+
+    /**
+     * Long running delete request, service returns an Azure-AsyncOperation header in the initial request. Subsequent calls to operation status do not contain Azure-AsyncOperation header.
+     *
+     * @return the observable for the request.
+     */
+    public Observable<OperationStatus<Void>> resumeDeleteAsyncNoHeaderInRetryAsync() {
+        return service.resumeDeleteAsyncNoHeaderInRetry(this.client.acceptLanguage());
     }
 
     /**
@@ -4085,6 +5704,36 @@ public final class LROsInner {
      * @throws CloudException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
+    public void resumeDeleteAsyncRetrySucceeded() {
+        resumeDeleteAsyncRetrySucceededAsync().blockingLast();
+    }
+
+    /**
+     * Long running delete request, service returns a 202 to the initial request. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
+     *
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link ServiceFuture&lt;Void&gt;} object.
+     */
+    public ServiceFuture<Void> resumeDeleteAsyncRetrySucceededAsync(ServiceCallback<Void> serviceCallback) {
+        return ServiceFutureUtil.fromLRO(resumeDeleteAsyncRetrySucceededAsync(), serviceCallback);
+    }
+
+    /**
+     * Long running delete request, service returns a 202 to the initial request. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
+     *
+     * @return the observable for the request.
+     */
+    public Observable<OperationStatus<Void>> resumeDeleteAsyncRetrySucceededAsync() {
+        return service.resumeDeleteAsyncRetrySucceeded(this.client.acceptLanguage());
+    }
+
+    /**
+     * Long running delete request, service returns a 202 to the initial request. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
+     *
+     * @throws CloudException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     public void beginDeleteAsyncNoRetrySucceeded() {
         beginDeleteAsyncNoRetrySucceededAsync().blockingLast();
     }
@@ -4147,6 +5796,36 @@ public final class LROsInner {
     public Completable deleteAsyncNoRetrySucceededAsync() {
         return deleteAsyncNoRetrySucceededWithRestResponseAsync()
             .toCompletable();
+    }
+
+    /**
+     * Long running delete request, service returns a 202 to the initial request. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
+     *
+     * @throws CloudException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
+    public void resumeDeleteAsyncNoRetrySucceeded() {
+        resumeDeleteAsyncNoRetrySucceededAsync().blockingLast();
+    }
+
+    /**
+     * Long running delete request, service returns a 202 to the initial request. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
+     *
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link ServiceFuture&lt;Void&gt;} object.
+     */
+    public ServiceFuture<Void> resumeDeleteAsyncNoRetrySucceededAsync(ServiceCallback<Void> serviceCallback) {
+        return ServiceFutureUtil.fromLRO(resumeDeleteAsyncNoRetrySucceededAsync(), serviceCallback);
+    }
+
+    /**
+     * Long running delete request, service returns a 202 to the initial request. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
+     *
+     * @return the observable for the request.
+     */
+    public Observable<OperationStatus<Void>> resumeDeleteAsyncNoRetrySucceededAsync() {
+        return service.resumeDeleteAsyncNoRetrySucceeded(this.client.acceptLanguage());
     }
 
     /**
@@ -4225,6 +5904,36 @@ public final class LROsInner {
      * @throws CloudException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
+    public void resumeDeleteAsyncRetryFailed() {
+        resumeDeleteAsyncRetryFailedAsync().blockingLast();
+    }
+
+    /**
+     * Long running delete request, service returns a 202 to the initial request. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
+     *
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link ServiceFuture&lt;Void&gt;} object.
+     */
+    public ServiceFuture<Void> resumeDeleteAsyncRetryFailedAsync(ServiceCallback<Void> serviceCallback) {
+        return ServiceFutureUtil.fromLRO(resumeDeleteAsyncRetryFailedAsync(), serviceCallback);
+    }
+
+    /**
+     * Long running delete request, service returns a 202 to the initial request. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
+     *
+     * @return the observable for the request.
+     */
+    public Observable<OperationStatus<Void>> resumeDeleteAsyncRetryFailedAsync() {
+        return service.resumeDeleteAsyncRetryFailed(this.client.acceptLanguage());
+    }
+
+    /**
+     * Long running delete request, service returns a 202 to the initial request. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
+     *
+     * @throws CloudException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     public void beginDeleteAsyncRetrycanceled() {
         beginDeleteAsyncRetrycanceledAsync().blockingLast();
     }
@@ -4287,6 +5996,36 @@ public final class LROsInner {
     public Completable deleteAsyncRetrycanceledAsync() {
         return deleteAsyncRetrycanceledWithRestResponseAsync()
             .toCompletable();
+    }
+
+    /**
+     * Long running delete request, service returns a 202 to the initial request. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
+     *
+     * @throws CloudException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
+    public void resumeDeleteAsyncRetrycanceled() {
+        resumeDeleteAsyncRetrycanceledAsync().blockingLast();
+    }
+
+    /**
+     * Long running delete request, service returns a 202 to the initial request. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
+     *
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link ServiceFuture&lt;Void&gt;} object.
+     */
+    public ServiceFuture<Void> resumeDeleteAsyncRetrycanceledAsync(ServiceCallback<Void> serviceCallback) {
+        return ServiceFutureUtil.fromLRO(resumeDeleteAsyncRetrycanceledAsync(), serviceCallback);
+    }
+
+    /**
+     * Long running delete request, service returns a 202 to the initial request. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
+     *
+     * @return the observable for the request.
+     */
+    public Observable<OperationStatus<Void>> resumeDeleteAsyncRetrycanceledAsync() {
+        return service.resumeDeleteAsyncRetrycanceled(this.client.acceptLanguage());
     }
 
     /**
@@ -4367,6 +6106,37 @@ public final class LROsInner {
                     }
                 }
             });
+    }
+
+    /**
+     * Long running post request, service returns a 202 to the initial request, with 'Location' header. Poll returns a 200 with a response body after success.
+     *
+     * @throws CloudException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the SkuInner object if successful.
+     */
+    public SkuInner resumePost200WithPayload() {
+        return resumePost200WithPayloadAsync().blockingLast().result();
+    }
+
+    /**
+     * Long running post request, service returns a 202 to the initial request, with 'Location' header. Poll returns a 200 with a response body after success.
+     *
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link ServiceFuture&lt;SkuInner&gt;} object.
+     */
+    public ServiceFuture<SkuInner> resumePost200WithPayloadAsync(ServiceCallback<SkuInner> serviceCallback) {
+        return ServiceFutureUtil.fromLRO(resumePost200WithPayloadAsync(), serviceCallback);
+    }
+
+    /**
+     * Long running post request, service returns a 202 to the initial request, with 'Location' header. Poll returns a 200 with a response body after success.
+     *
+     * @return the observable for the request.
+     */
+    public Observable<OperationStatus<SkuInner>> resumePost200WithPayloadAsync() {
+        return service.resumePost200WithPayload(this.client.acceptLanguage());
     }
 
     /**
@@ -4522,6 +6292,72 @@ public final class LROsInner {
     public Completable post202Retry200Async(ProductInner product) {
         return post202Retry200WithRestResponseAsync(product)
             .toCompletable();
+    }
+
+    /**
+     * Long running post request, service returns a 202 to the initial request, with 'Location' and 'Retry-After' headers, Polls return a 200 with a response body after success.
+     *
+     * @throws CloudException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
+    public void resumePost202Retry200() {
+        resumePost202Retry200Async().blockingLast();
+    }
+
+    /**
+     * Long running post request, service returns a 202 to the initial request, with 'Location' and 'Retry-After' headers, Polls return a 200 with a response body after success.
+     *
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link ServiceFuture&lt;Void&gt;} object.
+     */
+    public ServiceFuture<Void> resumePost202Retry200Async(ServiceCallback<Void> serviceCallback) {
+        return ServiceFutureUtil.fromLRO(resumePost202Retry200Async(), serviceCallback);
+    }
+
+    /**
+     * Long running post request, service returns a 202 to the initial request, with 'Location' and 'Retry-After' headers, Polls return a 200 with a response body after success.
+     *
+     * @return the observable for the request.
+     */
+    public Observable<OperationStatus<Void>> resumePost202Retry200Async() {
+        final ProductInner product = null;
+        return service.resumePost202Retry200(product, this.client.acceptLanguage());
+    }
+
+    /**
+     * Long running post request, service returns a 202 to the initial request, with 'Location' and 'Retry-After' headers, Polls return a 200 with a response body after success.
+     *
+     * @param product Product to put.
+     * @throws CloudException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
+    public void resumePost202Retry200(ProductInner product) {
+        resumePost202Retry200Async(product).blockingLast();
+    }
+
+    /**
+     * Long running post request, service returns a 202 to the initial request, with 'Location' and 'Retry-After' headers, Polls return a 200 with a response body after success.
+     *
+     * @param product Product to put.
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link ServiceFuture&lt;Void&gt;} object.
+     */
+    public ServiceFuture<Void> resumePost202Retry200Async(ProductInner product, ServiceCallback<Void> serviceCallback) {
+        return ServiceFutureUtil.fromLRO(resumePost202Retry200Async(product), serviceCallback);
+    }
+
+    /**
+     * Long running post request, service returns a 202 to the initial request, with 'Location' and 'Retry-After' headers, Polls return a 200 with a response body after success.
+     *
+     * @param product Product to put.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the observable for the request.
+     */
+    public Observable<OperationStatus<Void>> resumePost202Retry200Async(ProductInner product) {
+        Validator.validate(product);
+        return service.resumePost202Retry200(product, this.client.acceptLanguage());
     }
 
     /**
@@ -4697,6 +6533,74 @@ public final class LROsInner {
                     }
                 }
             });
+    }
+
+    /**
+     * Long running post request, service returns a 202 to the initial request, with 'Location' header, 204 with noresponse body after success.
+     *
+     * @throws CloudException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the ProductInner object if successful.
+     */
+    public ProductInner resumePost202NoRetry204() {
+        return resumePost202NoRetry204Async().blockingLast().result();
+    }
+
+    /**
+     * Long running post request, service returns a 202 to the initial request, with 'Location' header, 204 with noresponse body after success.
+     *
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link ServiceFuture&lt;ProductInner&gt;} object.
+     */
+    public ServiceFuture<ProductInner> resumePost202NoRetry204Async(ServiceCallback<ProductInner> serviceCallback) {
+        return ServiceFutureUtil.fromLRO(resumePost202NoRetry204Async(), serviceCallback);
+    }
+
+    /**
+     * Long running post request, service returns a 202 to the initial request, with 'Location' header, 204 with noresponse body after success.
+     *
+     * @return the observable for the request.
+     */
+    public Observable<OperationStatus<ProductInner>> resumePost202NoRetry204Async() {
+        final ProductInner product = null;
+        return service.resumePost202NoRetry204(product, this.client.acceptLanguage());
+    }
+
+    /**
+     * Long running post request, service returns a 202 to the initial request, with 'Location' header, 204 with noresponse body after success.
+     *
+     * @param product Product to put.
+     * @throws CloudException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the ProductInner object if successful.
+     */
+    public ProductInner resumePost202NoRetry204(ProductInner product) {
+        return resumePost202NoRetry204Async(product).blockingLast().result();
+    }
+
+    /**
+     * Long running post request, service returns a 202 to the initial request, with 'Location' header, 204 with noresponse body after success.
+     *
+     * @param product Product to put.
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link ServiceFuture&lt;ProductInner&gt;} object.
+     */
+    public ServiceFuture<ProductInner> resumePost202NoRetry204Async(ProductInner product, ServiceCallback<ProductInner> serviceCallback) {
+        return ServiceFutureUtil.fromLRO(resumePost202NoRetry204Async(product), serviceCallback);
+    }
+
+    /**
+     * Long running post request, service returns a 202 to the initial request, with 'Location' header, 204 with noresponse body after success.
+     *
+     * @param product Product to put.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the observable for the request.
+     */
+    public Observable<OperationStatus<ProductInner>> resumePost202NoRetry204Async(ProductInner product) {
+        Validator.validate(product);
+        return service.resumePost202NoRetry204(product, this.client.acceptLanguage());
     }
 
     /**
@@ -4881,6 +6785,74 @@ public final class LROsInner {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the ProductInner object if successful.
      */
+    public ProductInner resumePostAsyncRetrySucceeded() {
+        return resumePostAsyncRetrySucceededAsync().blockingLast().result();
+    }
+
+    /**
+     * Long running post request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
+     *
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link ServiceFuture&lt;ProductInner&gt;} object.
+     */
+    public ServiceFuture<ProductInner> resumePostAsyncRetrySucceededAsync(ServiceCallback<ProductInner> serviceCallback) {
+        return ServiceFutureUtil.fromLRO(resumePostAsyncRetrySucceededAsync(), serviceCallback);
+    }
+
+    /**
+     * Long running post request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
+     *
+     * @return the observable for the request.
+     */
+    public Observable<OperationStatus<ProductInner>> resumePostAsyncRetrySucceededAsync() {
+        final ProductInner product = null;
+        return service.resumePostAsyncRetrySucceeded(product, this.client.acceptLanguage());
+    }
+
+    /**
+     * Long running post request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
+     *
+     * @param product Product to put.
+     * @throws CloudException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the ProductInner object if successful.
+     */
+    public ProductInner resumePostAsyncRetrySucceeded(ProductInner product) {
+        return resumePostAsyncRetrySucceededAsync(product).blockingLast().result();
+    }
+
+    /**
+     * Long running post request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
+     *
+     * @param product Product to put.
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link ServiceFuture&lt;ProductInner&gt;} object.
+     */
+    public ServiceFuture<ProductInner> resumePostAsyncRetrySucceededAsync(ProductInner product, ServiceCallback<ProductInner> serviceCallback) {
+        return ServiceFutureUtil.fromLRO(resumePostAsyncRetrySucceededAsync(product), serviceCallback);
+    }
+
+    /**
+     * Long running post request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
+     *
+     * @param product Product to put.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the observable for the request.
+     */
+    public Observable<OperationStatus<ProductInner>> resumePostAsyncRetrySucceededAsync(ProductInner product) {
+        Validator.validate(product);
+        return service.resumePostAsyncRetrySucceeded(product, this.client.acceptLanguage());
+    }
+
+    /**
+     * Long running post request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
+     *
+     * @throws CloudException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the ProductInner object if successful.
+     */
     public ProductInner beginPostAsyncNoRetrySucceeded() {
         return beginPostAsyncNoRetrySucceededAsync().blockingLast().result();
     }
@@ -5054,6 +7026,74 @@ public final class LROsInner {
      *
      * @throws CloudException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the ProductInner object if successful.
+     */
+    public ProductInner resumePostAsyncNoRetrySucceeded() {
+        return resumePostAsyncNoRetrySucceededAsync().blockingLast().result();
+    }
+
+    /**
+     * Long running post request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
+     *
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link ServiceFuture&lt;ProductInner&gt;} object.
+     */
+    public ServiceFuture<ProductInner> resumePostAsyncNoRetrySucceededAsync(ServiceCallback<ProductInner> serviceCallback) {
+        return ServiceFutureUtil.fromLRO(resumePostAsyncNoRetrySucceededAsync(), serviceCallback);
+    }
+
+    /**
+     * Long running post request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
+     *
+     * @return the observable for the request.
+     */
+    public Observable<OperationStatus<ProductInner>> resumePostAsyncNoRetrySucceededAsync() {
+        final ProductInner product = null;
+        return service.resumePostAsyncNoRetrySucceeded(product, this.client.acceptLanguage());
+    }
+
+    /**
+     * Long running post request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
+     *
+     * @param product Product to put.
+     * @throws CloudException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the ProductInner object if successful.
+     */
+    public ProductInner resumePostAsyncNoRetrySucceeded(ProductInner product) {
+        return resumePostAsyncNoRetrySucceededAsync(product).blockingLast().result();
+    }
+
+    /**
+     * Long running post request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
+     *
+     * @param product Product to put.
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link ServiceFuture&lt;ProductInner&gt;} object.
+     */
+    public ServiceFuture<ProductInner> resumePostAsyncNoRetrySucceededAsync(ProductInner product, ServiceCallback<ProductInner> serviceCallback) {
+        return ServiceFutureUtil.fromLRO(resumePostAsyncNoRetrySucceededAsync(product), serviceCallback);
+    }
+
+    /**
+     * Long running post request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
+     *
+     * @param product Product to put.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the observable for the request.
+     */
+    public Observable<OperationStatus<ProductInner>> resumePostAsyncNoRetrySucceededAsync(ProductInner product) {
+        Validator.validate(product);
+        return service.resumePostAsyncNoRetrySucceeded(product, this.client.acceptLanguage());
+    }
+
+    /**
+     * Long running post request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
+     *
+     * @throws CloudException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     public void beginPostAsyncRetryFailed() {
         beginPostAsyncRetryFailedAsync().blockingLast();
@@ -5210,6 +7250,72 @@ public final class LROsInner {
      * @throws CloudException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
+    public void resumePostAsyncRetryFailed() {
+        resumePostAsyncRetryFailedAsync().blockingLast();
+    }
+
+    /**
+     * Long running post request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
+     *
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link ServiceFuture&lt;Void&gt;} object.
+     */
+    public ServiceFuture<Void> resumePostAsyncRetryFailedAsync(ServiceCallback<Void> serviceCallback) {
+        return ServiceFutureUtil.fromLRO(resumePostAsyncRetryFailedAsync(), serviceCallback);
+    }
+
+    /**
+     * Long running post request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
+     *
+     * @return the observable for the request.
+     */
+    public Observable<OperationStatus<Void>> resumePostAsyncRetryFailedAsync() {
+        final ProductInner product = null;
+        return service.resumePostAsyncRetryFailed(product, this.client.acceptLanguage());
+    }
+
+    /**
+     * Long running post request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
+     *
+     * @param product Product to put.
+     * @throws CloudException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
+    public void resumePostAsyncRetryFailed(ProductInner product) {
+        resumePostAsyncRetryFailedAsync(product).blockingLast();
+    }
+
+    /**
+     * Long running post request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
+     *
+     * @param product Product to put.
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link ServiceFuture&lt;Void&gt;} object.
+     */
+    public ServiceFuture<Void> resumePostAsyncRetryFailedAsync(ProductInner product, ServiceCallback<Void> serviceCallback) {
+        return ServiceFutureUtil.fromLRO(resumePostAsyncRetryFailedAsync(product), serviceCallback);
+    }
+
+    /**
+     * Long running post request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
+     *
+     * @param product Product to put.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the observable for the request.
+     */
+    public Observable<OperationStatus<Void>> resumePostAsyncRetryFailedAsync(ProductInner product) {
+        Validator.validate(product);
+        return service.resumePostAsyncRetryFailed(product, this.client.acceptLanguage());
+    }
+
+    /**
+     * Long running post request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
+     *
+     * @throws CloudException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     public void beginPostAsyncRetrycanceled() {
         beginPostAsyncRetrycanceledAsync().blockingLast();
     }
@@ -5357,5 +7463,71 @@ public final class LROsInner {
     public Completable postAsyncRetrycanceledAsync(ProductInner product) {
         return postAsyncRetrycanceledWithRestResponseAsync(product)
             .toCompletable();
+    }
+
+    /**
+     * Long running post request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
+     *
+     * @throws CloudException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
+    public void resumePostAsyncRetrycanceled() {
+        resumePostAsyncRetrycanceledAsync().blockingLast();
+    }
+
+    /**
+     * Long running post request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
+     *
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link ServiceFuture&lt;Void&gt;} object.
+     */
+    public ServiceFuture<Void> resumePostAsyncRetrycanceledAsync(ServiceCallback<Void> serviceCallback) {
+        return ServiceFutureUtil.fromLRO(resumePostAsyncRetrycanceledAsync(), serviceCallback);
+    }
+
+    /**
+     * Long running post request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
+     *
+     * @return the observable for the request.
+     */
+    public Observable<OperationStatus<Void>> resumePostAsyncRetrycanceledAsync() {
+        final ProductInner product = null;
+        return service.resumePostAsyncRetrycanceled(product, this.client.acceptLanguage());
+    }
+
+    /**
+     * Long running post request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
+     *
+     * @param product Product to put.
+     * @throws CloudException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
+    public void resumePostAsyncRetrycanceled(ProductInner product) {
+        resumePostAsyncRetrycanceledAsync(product).blockingLast();
+    }
+
+    /**
+     * Long running post request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
+     *
+     * @param product Product to put.
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link ServiceFuture&lt;Void&gt;} object.
+     */
+    public ServiceFuture<Void> resumePostAsyncRetrycanceledAsync(ProductInner product, ServiceCallback<Void> serviceCallback) {
+        return ServiceFutureUtil.fromLRO(resumePostAsyncRetrycanceledAsync(product), serviceCallback);
+    }
+
+    /**
+     * Long running post request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
+     *
+     * @param product Product to put.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the observable for the request.
+     */
+    public Observable<OperationStatus<Void>> resumePostAsyncRetrycanceledAsync(ProductInner product) {
+        Validator.validate(product);
+        return service.resumePostAsyncRetrycanceled(product, this.client.acceptLanguage());
     }
 }
