@@ -1117,7 +1117,7 @@ namespace AutoRest.Java
                 if (parameterType is ListType && settings.ShouldGenerateXmlSerialization && parameterRequestLocation == RequestParameterLocation.Body)
                 {
                     string parameterTypePackage = GetPackage(settings, settings.ImplementationSubpackage);
-                    string parameterTypeName = autoRestParameterWireType.XmlName + "Wrapper";
+                    string parameterTypeName = autoRestParameterWireType.XmlName.ToPascalCase() + "Wrapper";
                     parameterType = new ClassType(parameterTypePackage, parameterTypeName, null, null, false);
                 }
                 else if (parameterType == ArrayType.ByteArray)
@@ -1546,10 +1546,11 @@ namespace AutoRest.Java
                 {
                     IType parameterType = ParseType(parameter.ModelType, settings);
 
-                    if (parameterType is ListType parameterListType)
+                    if (parameterType is ListType parameterListType && parameter.ModelType is AutoRestSequenceType sequenceType)
                     {
-                        string xmlElementName = parameter.ModelType.XmlName.ToPascalCase();
-                        if (!xmlSequenceWrappers.Any(existingWrapper => existingWrapper.XmlElementName == xmlElementName))
+                        string xmlRootElementName = sequenceType.XmlName;
+                        string xmlListElementName = sequenceType.ElementXmlName;
+                        if (!xmlSequenceWrappers.Any(existingWrapper => existingWrapper.XmlRootElementName == xmlRootElementName && existingWrapper.XmlListElementName == xmlListElementName))
                         {
                             HashSet<string> xmlSequenceWrapperImports = new HashSet<string>()
                             {
@@ -1560,7 +1561,7 @@ namespace AutoRest.Java
                             };
                             parameterListType.AddImportsTo(xmlSequenceWrapperImports, true);
 
-                            xmlSequenceWrappers.Add(new XmlSequenceWrapper(parameterListType, xmlElementName, xmlSequenceWrapperImports));
+                            xmlSequenceWrappers.Add(new XmlSequenceWrapper(parameterListType, xmlRootElementName, xmlListElementName, xmlSequenceWrapperImports));
                         }
                     }
                 }
@@ -1606,6 +1607,11 @@ namespace AutoRest.Java
                     if (settings.ShouldGenerateXmlSerialization)
                     {
                         modelImports.Add("com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlRootElement");
+
+                        if (compositeTypeProperties.Any(p => p.ModelType is AutoRestSequenceType))
+                        {
+                            modelImports.Add("java.util.ArrayList");
+                        }
 
                         if (compositeTypeProperties.Any(p => p.XmlIsAttribute))
                         {
@@ -1956,8 +1962,10 @@ namespace AutoRest.Java
 
         public static JavaFile GetXmlSequenceWrapperJavaFile(XmlSequenceWrapper xmlSequenceWrapper, JavaSettings settings)
         {
-            string xmlElementName = xmlSequenceWrapper.XmlElementName;
-            string xmlElementNameCamelCase = xmlElementName.ToCamelCase();
+            string xmlRootElementName = xmlSequenceWrapper.XmlRootElementName;
+            string xmlListElementName = xmlSequenceWrapper.XmlListElementName;
+
+            string xmlElementNameCamelCase = xmlRootElementName.ToCamelCase();
 
             JavaFile javaFile = GetJavaFileWithHeaderAndSubPackage(settings.ImplementationSubpackage, settings, xmlSequenceWrapper.WrapperClassName);
 
@@ -1969,10 +1977,10 @@ namespace AutoRest.Java
             {
                 comment.Description($"A wrapper around {sequenceType} which provides top-level metadata for serialization.");
             });
-            javaFile.Annotation($"JacksonXmlRootElement(localName = \"{xmlElementName}\")");
+            javaFile.Annotation($"JacksonXmlRootElement(localName = \"{xmlRootElementName}\")");
             javaFile.PublicFinalClass(xmlSequenceWrapper.WrapperClassName, classBlock =>
             {
-                classBlock.Annotation($"JacksonXmlProperty(localName = \"{xmlElementName}\")");
+                classBlock.Annotation($"JacksonXmlProperty(localName = \"{xmlListElementName}\")");
                 classBlock.PrivateFinalMemberVariable(sequenceType.ToString(), xmlElementNameCamelCase);
 
                 classBlock.JavadocComment(comment =>
@@ -1981,7 +1989,7 @@ namespace AutoRest.Java
                     comment.Param(xmlElementNameCamelCase, "the list");
                 });
                 classBlock.Annotation("JsonCreator");
-                classBlock.PublicConstructor($"{xmlSequenceWrapper.WrapperClassName}(@JsonProperty(\"{xmlElementName}\") {sequenceType} {xmlElementNameCamelCase})", constructor =>
+                classBlock.PublicConstructor($"{xmlSequenceWrapper.WrapperClassName}(@JsonProperty(\"{xmlListElementName}\") {sequenceType} {xmlElementNameCamelCase})", constructor =>
                 {
                     constructor.Line($"this.{xmlElementNameCamelCase} = {xmlElementNameCamelCase};");
                 });
@@ -2374,6 +2382,7 @@ namespace AutoRest.Java
 
             ISet<string> imports = new HashSet<string>();
             model.AddImportsTo(imports, settings);
+
             javaFile.Import(imports);
 
             javaFile.JavadocComment(settings.MaximumJavadocCommentWidth, (comment) =>
@@ -2472,9 +2481,20 @@ namespace AutoRest.Java
                         classBlock.Annotation($"JsonProperty({property.AnnotationArguments})");
                     }
 
-                    if (settings.ShouldGenerateXmlSerialization && property.IsXmlWrapper)
+                    if (settings.ShouldGenerateXmlSerialization)
                     {
-                        classBlock.PrivateMemberVariable($"{xmlWrapperClassName} {property.Name}");
+                        if (property.IsXmlWrapper)
+                        {
+                            classBlock.PrivateMemberVariable($"{xmlWrapperClassName} {property.Name}");
+                        }
+                        else if (property.WireType is ListType listType)
+                        {
+                            classBlock.PrivateMemberVariable($"{property.WireType} {property.Name} = new ArrayList<>()");
+                        }
+                        else
+                        {
+                            classBlock.PrivateMemberVariable($"{property.WireType} {property.Name}");
+                        }
                     }
                     else
                     {
@@ -2515,8 +2535,12 @@ namespace AutoRest.Java
                         string expression = $"this.{property.Name}";
                         if (sourceTypeName == targetTypeName)
                         {
-                            if (settings.ShouldGenerateXmlSerialization && property.IsXmlWrapper)
+                            if (settings.ShouldGenerateXmlSerialization && property.IsXmlWrapper && property.WireType is ListType listType)
                             {
+                                methodBlock.If($"this.{property.Name} == null", ifBlock =>
+                                {
+                                    ifBlock.Line($"this.{property.Name} = new {propertyXmlWrapperClassName(property)}(new ArrayList<{listType.ElementType}>());");
+                                });
                                 methodBlock.Return($"this.{property.Name}.items");
                             }
                             else
@@ -5202,7 +5226,7 @@ namespace AutoRest.Java
                     string result;
                     if (settings.ShouldGenerateXmlSerialization && autoRestParameterWireType is AutoRestSequenceType)
                     {
-                        result = $"new {autoRestParameterWireType.XmlName}Wrapper({parameterWireName})";
+                        result = $"new {autoRestParameterWireType.XmlName.ToPascalCase()}Wrapper({parameterWireName})";
                     }
                     else
                     {
