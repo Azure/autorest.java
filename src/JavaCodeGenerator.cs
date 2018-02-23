@@ -373,12 +373,13 @@ namespace AutoRest.Java
                             }
 
                             AutoRestMethod m = DependencyInjection.Duplicate(method);
-                            method.Name = "begin" + m.Name.ToPascalCase();
+                            var methodName = m.Name.ToPascalCase();
+                            method.Name = "begin" + methodName;
                             m.Extensions.Remove(AzureExtensions.LongRunningExtension);
                             methodGroup.Add(m);
 
                             m = DependencyInjection.Duplicate(method);
-                            m.Name = "resume" + m.Name.ToPascalCase();
+                            m.Name = "resume" + methodName;
                             m.Extensions.Add("java-resume", new object());
                             methodGroup.Add(m);
                         }
