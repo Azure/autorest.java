@@ -171,6 +171,60 @@ public interface LROSADs {
     Maybe<Product> putNonRetry400Async(Product product);
 
     /**
+     * Long running put request, service returns a 400 to the initial request.
+     *
+     * @throws CloudException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the Product object if successful.
+     */
+    Product resumePutNonRetry400();
+
+    /**
+     * Long running put request, service returns a 400 to the initial request.
+     *
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link ServiceFuture&lt;Product&gt;} object.
+     */
+    ServiceFuture<Product> resumePutNonRetry400Async(ServiceCallback<Product> serviceCallback);
+
+    /**
+     * Long running put request, service returns a 400 to the initial request.
+     *
+     * @return the observable for the request.
+     */
+    Observable<OperationStatus<Product>> resumePutNonRetry400Async();
+
+    /**
+     * Long running put request, service returns a 400 to the initial request.
+     *
+     * @param product Product to put.
+     * @throws CloudException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the Product object if successful.
+     */
+    Product resumePutNonRetry400(Product product);
+
+    /**
+     * Long running put request, service returns a 400 to the initial request.
+     *
+     * @param product Product to put.
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link ServiceFuture&lt;Product&gt;} object.
+     */
+    ServiceFuture<Product> resumePutNonRetry400Async(Product product, ServiceCallback<Product> serviceCallback);
+
+    /**
+     * Long running put request, service returns a 400 to the initial request.
+     *
+     * @param product Product to put.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the observable for the request.
+     */
+    Observable<OperationStatus<Product>> resumePutNonRetry400Async(Product product);
+
+    /**
      * Long running put request, service returns a Product with 'ProvisioningState' = 'Creating' and 201 response code.
      *
      * @throws CloudException thrown if the request is rejected by server.
@@ -302,6 +356,60 @@ public interface LROSADs {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the Product object if successful.
      */
+    Product resumePutNonRetry201Creating400();
+
+    /**
+     * Long running put request, service returns a Product with 'ProvisioningState' = 'Creating' and 201 response code.
+     *
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link ServiceFuture&lt;Product&gt;} object.
+     */
+    ServiceFuture<Product> resumePutNonRetry201Creating400Async(ServiceCallback<Product> serviceCallback);
+
+    /**
+     * Long running put request, service returns a Product with 'ProvisioningState' = 'Creating' and 201 response code.
+     *
+     * @return the observable for the request.
+     */
+    Observable<OperationStatus<Product>> resumePutNonRetry201Creating400Async();
+
+    /**
+     * Long running put request, service returns a Product with 'ProvisioningState' = 'Creating' and 201 response code.
+     *
+     * @param product Product to put.
+     * @throws CloudException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the Product object if successful.
+     */
+    Product resumePutNonRetry201Creating400(Product product);
+
+    /**
+     * Long running put request, service returns a Product with 'ProvisioningState' = 'Creating' and 201 response code.
+     *
+     * @param product Product to put.
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link ServiceFuture&lt;Product&gt;} object.
+     */
+    ServiceFuture<Product> resumePutNonRetry201Creating400Async(Product product, ServiceCallback<Product> serviceCallback);
+
+    /**
+     * Long running put request, service returns a Product with 'ProvisioningState' = 'Creating' and 201 response code.
+     *
+     * @param product Product to put.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the observable for the request.
+     */
+    Observable<OperationStatus<Product>> resumePutNonRetry201Creating400Async(Product product);
+
+    /**
+     * Long running put request, service returns a Product with 'ProvisioningState' = 'Creating' and 201 response code.
+     *
+     * @throws CloudException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the Product object if successful.
+     */
     Product beginPutNonRetry201Creating400InvalidJson();
 
     /**
@@ -419,6 +527,60 @@ public interface LROSADs {
      * @return the {@link Maybe&lt;Product&gt;} object if successful.
      */
     Maybe<Product> putNonRetry201Creating400InvalidJsonAsync(Product product);
+
+    /**
+     * Long running put request, service returns a Product with 'ProvisioningState' = 'Creating' and 201 response code.
+     *
+     * @throws CloudException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the Product object if successful.
+     */
+    Product resumePutNonRetry201Creating400InvalidJson();
+
+    /**
+     * Long running put request, service returns a Product with 'ProvisioningState' = 'Creating' and 201 response code.
+     *
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link ServiceFuture&lt;Product&gt;} object.
+     */
+    ServiceFuture<Product> resumePutNonRetry201Creating400InvalidJsonAsync(ServiceCallback<Product> serviceCallback);
+
+    /**
+     * Long running put request, service returns a Product with 'ProvisioningState' = 'Creating' and 201 response code.
+     *
+     * @return the observable for the request.
+     */
+    Observable<OperationStatus<Product>> resumePutNonRetry201Creating400InvalidJsonAsync();
+
+    /**
+     * Long running put request, service returns a Product with 'ProvisioningState' = 'Creating' and 201 response code.
+     *
+     * @param product Product to put.
+     * @throws CloudException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the Product object if successful.
+     */
+    Product resumePutNonRetry201Creating400InvalidJson(Product product);
+
+    /**
+     * Long running put request, service returns a Product with 'ProvisioningState' = 'Creating' and 201 response code.
+     *
+     * @param product Product to put.
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link ServiceFuture&lt;Product&gt;} object.
+     */
+    ServiceFuture<Product> resumePutNonRetry201Creating400InvalidJsonAsync(Product product, ServiceCallback<Product> serviceCallback);
+
+    /**
+     * Long running put request, service returns a Product with 'ProvisioningState' = 'Creating' and 201 response code.
+     *
+     * @param product Product to put.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the observable for the request.
+     */
+    Observable<OperationStatus<Product>> resumePutNonRetry201Creating400InvalidJsonAsync(Product product);
 
     /**
      * Long running put request, service returns a 200 with ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
@@ -546,6 +708,60 @@ public interface LROSADs {
     Maybe<Product> putAsyncRelativeRetry400Async(Product product);
 
     /**
+     * Long running put request, service returns a 200 with ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
+     *
+     * @throws CloudException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the Product object if successful.
+     */
+    Product resumePutAsyncRelativeRetry400();
+
+    /**
+     * Long running put request, service returns a 200 with ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
+     *
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link ServiceFuture&lt;Product&gt;} object.
+     */
+    ServiceFuture<Product> resumePutAsyncRelativeRetry400Async(ServiceCallback<Product> serviceCallback);
+
+    /**
+     * Long running put request, service returns a 200 with ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
+     *
+     * @return the observable for the request.
+     */
+    Observable<OperationStatus<Product>> resumePutAsyncRelativeRetry400Async();
+
+    /**
+     * Long running put request, service returns a 200 with ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
+     *
+     * @param product Product to put.
+     * @throws CloudException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the Product object if successful.
+     */
+    Product resumePutAsyncRelativeRetry400(Product product);
+
+    /**
+     * Long running put request, service returns a 200 with ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
+     *
+     * @param product Product to put.
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link ServiceFuture&lt;Product&gt;} object.
+     */
+    ServiceFuture<Product> resumePutAsyncRelativeRetry400Async(Product product, ServiceCallback<Product> serviceCallback);
+
+    /**
+     * Long running put request, service returns a 200 with ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
+     *
+     * @param product Product to put.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the observable for the request.
+     */
+    Observable<OperationStatus<Product>> resumePutAsyncRelativeRetry400Async(Product product);
+
+    /**
      * Long running delete request, service returns a 400 with an error body.
      *
      * @throws CloudException thrown if the request is rejected by server.
@@ -599,6 +815,30 @@ public interface LROSADs {
      * @return the {@link Completable} object if successful.
      */
     Completable deleteNonRetry400Async();
+
+    /**
+     * Long running delete request, service returns a 400 with an error body.
+     *
+     * @throws CloudException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
+    void resumeDeleteNonRetry400();
+
+    /**
+     * Long running delete request, service returns a 400 with an error body.
+     *
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link ServiceFuture&lt;Void&gt;} object.
+     */
+    ServiceFuture<Void> resumeDeleteNonRetry400Async(ServiceCallback<Void> serviceCallback);
+
+    /**
+     * Long running delete request, service returns a 400 with an error body.
+     *
+     * @return the observable for the request.
+     */
+    Observable<OperationStatus<Void>> resumeDeleteNonRetry400Async();
 
     /**
      * Long running delete request, service returns a 202 with a location header.
@@ -656,6 +896,30 @@ public interface LROSADs {
     Completable delete202NonRetry400Async();
 
     /**
+     * Long running delete request, service returns a 202 with a location header.
+     *
+     * @throws CloudException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
+    void resumeDelete202NonRetry400();
+
+    /**
+     * Long running delete request, service returns a 202 with a location header.
+     *
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link ServiceFuture&lt;Void&gt;} object.
+     */
+    ServiceFuture<Void> resumeDelete202NonRetry400Async(ServiceCallback<Void> serviceCallback);
+
+    /**
+     * Long running delete request, service returns a 202 with a location header.
+     *
+     * @return the observable for the request.
+     */
+    Observable<OperationStatus<Void>> resumeDelete202NonRetry400Async();
+
+    /**
      * Long running delete request, service returns a 202 to the initial request. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
      * @throws CloudException thrown if the request is rejected by server.
@@ -709,6 +973,30 @@ public interface LROSADs {
      * @return the {@link Completable} object if successful.
      */
     Completable deleteAsyncRelativeRetry400Async();
+
+    /**
+     * Long running delete request, service returns a 202 to the initial request. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
+     *
+     * @throws CloudException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
+    void resumeDeleteAsyncRelativeRetry400();
+
+    /**
+     * Long running delete request, service returns a 202 to the initial request. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
+     *
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link ServiceFuture&lt;Void&gt;} object.
+     */
+    ServiceFuture<Void> resumeDeleteAsyncRelativeRetry400Async(ServiceCallback<Void> serviceCallback);
+
+    /**
+     * Long running delete request, service returns a 202 to the initial request. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
+     *
+     * @return the observable for the request.
+     */
+    Observable<OperationStatus<Void>> resumeDeleteAsyncRelativeRetry400Async();
 
     /**
      * Long running post request, service returns a 400 with no error body.
@@ -832,6 +1120,58 @@ public interface LROSADs {
     Completable postNonRetry400Async(Product product);
 
     /**
+     * Long running post request, service returns a 400 with no error body.
+     *
+     * @throws CloudException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
+    void resumePostNonRetry400();
+
+    /**
+     * Long running post request, service returns a 400 with no error body.
+     *
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link ServiceFuture&lt;Void&gt;} object.
+     */
+    ServiceFuture<Void> resumePostNonRetry400Async(ServiceCallback<Void> serviceCallback);
+
+    /**
+     * Long running post request, service returns a 400 with no error body.
+     *
+     * @return the observable for the request.
+     */
+    Observable<OperationStatus<Void>> resumePostNonRetry400Async();
+
+    /**
+     * Long running post request, service returns a 400 with no error body.
+     *
+     * @param product Product to put.
+     * @throws CloudException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
+    void resumePostNonRetry400(Product product);
+
+    /**
+     * Long running post request, service returns a 400 with no error body.
+     *
+     * @param product Product to put.
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link ServiceFuture&lt;Void&gt;} object.
+     */
+    ServiceFuture<Void> resumePostNonRetry400Async(Product product, ServiceCallback<Void> serviceCallback);
+
+    /**
+     * Long running post request, service returns a 400 with no error body.
+     *
+     * @param product Product to put.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the observable for the request.
+     */
+    Observable<OperationStatus<Void>> resumePostNonRetry400Async(Product product);
+
+    /**
      * Long running post request, service returns a 202 with a location header.
      *
      * @throws CloudException thrown if the request is rejected by server.
@@ -953,6 +1293,58 @@ public interface LROSADs {
     Completable post202NonRetry400Async(Product product);
 
     /**
+     * Long running post request, service returns a 202 with a location header.
+     *
+     * @throws CloudException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
+    void resumePost202NonRetry400();
+
+    /**
+     * Long running post request, service returns a 202 with a location header.
+     *
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link ServiceFuture&lt;Void&gt;} object.
+     */
+    ServiceFuture<Void> resumePost202NonRetry400Async(ServiceCallback<Void> serviceCallback);
+
+    /**
+     * Long running post request, service returns a 202 with a location header.
+     *
+     * @return the observable for the request.
+     */
+    Observable<OperationStatus<Void>> resumePost202NonRetry400Async();
+
+    /**
+     * Long running post request, service returns a 202 with a location header.
+     *
+     * @param product Product to put.
+     * @throws CloudException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
+    void resumePost202NonRetry400(Product product);
+
+    /**
+     * Long running post request, service returns a 202 with a location header.
+     *
+     * @param product Product to put.
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link ServiceFuture&lt;Void&gt;} object.
+     */
+    ServiceFuture<Void> resumePost202NonRetry400Async(Product product, ServiceCallback<Void> serviceCallback);
+
+    /**
+     * Long running post request, service returns a 202 with a location header.
+     *
+     * @param product Product to put.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the observable for the request.
+     */
+    Observable<OperationStatus<Void>> resumePost202NonRetry400Async(Product product);
+
+    /**
      * Long running post request, service returns a 202 to the initial request Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
      * @throws CloudException thrown if the request is rejected by server.
@@ -1072,6 +1464,58 @@ public interface LROSADs {
      * @return the {@link Completable} object if successful.
      */
     Completable postAsyncRelativeRetry400Async(Product product);
+
+    /**
+     * Long running post request, service returns a 202 to the initial request Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
+     *
+     * @throws CloudException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
+    void resumePostAsyncRelativeRetry400();
+
+    /**
+     * Long running post request, service returns a 202 to the initial request Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
+     *
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link ServiceFuture&lt;Void&gt;} object.
+     */
+    ServiceFuture<Void> resumePostAsyncRelativeRetry400Async(ServiceCallback<Void> serviceCallback);
+
+    /**
+     * Long running post request, service returns a 202 to the initial request Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
+     *
+     * @return the observable for the request.
+     */
+    Observable<OperationStatus<Void>> resumePostAsyncRelativeRetry400Async();
+
+    /**
+     * Long running post request, service returns a 202 to the initial request Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
+     *
+     * @param product Product to put.
+     * @throws CloudException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
+    void resumePostAsyncRelativeRetry400(Product product);
+
+    /**
+     * Long running post request, service returns a 202 to the initial request Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
+     *
+     * @param product Product to put.
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link ServiceFuture&lt;Void&gt;} object.
+     */
+    ServiceFuture<Void> resumePostAsyncRelativeRetry400Async(Product product, ServiceCallback<Void> serviceCallback);
+
+    /**
+     * Long running post request, service returns a 202 to the initial request Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
+     *
+     * @param product Product to put.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the observable for the request.
+     */
+    Observable<OperationStatus<Void>> resumePostAsyncRelativeRetry400Async(Product product);
 
     /**
      * Long running put request, service returns a 201 to the initial request with no payload.
@@ -1197,6 +1641,60 @@ public interface LROSADs {
      * @return the {@link Maybe&lt;Product&gt;} object if successful.
      */
     Maybe<Product> putError201NoProvisioningStatePayloadAsync(Product product);
+
+    /**
+     * Long running put request, service returns a 201 to the initial request with no payload.
+     *
+     * @throws CloudException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the Product object if successful.
+     */
+    Product resumePutError201NoProvisioningStatePayload();
+
+    /**
+     * Long running put request, service returns a 201 to the initial request with no payload.
+     *
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link ServiceFuture&lt;Product&gt;} object.
+     */
+    ServiceFuture<Product> resumePutError201NoProvisioningStatePayloadAsync(ServiceCallback<Product> serviceCallback);
+
+    /**
+     * Long running put request, service returns a 201 to the initial request with no payload.
+     *
+     * @return the observable for the request.
+     */
+    Observable<OperationStatus<Product>> resumePutError201NoProvisioningStatePayloadAsync();
+
+    /**
+     * Long running put request, service returns a 201 to the initial request with no payload.
+     *
+     * @param product Product to put.
+     * @throws CloudException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the Product object if successful.
+     */
+    Product resumePutError201NoProvisioningStatePayload(Product product);
+
+    /**
+     * Long running put request, service returns a 201 to the initial request with no payload.
+     *
+     * @param product Product to put.
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link ServiceFuture&lt;Product&gt;} object.
+     */
+    ServiceFuture<Product> resumePutError201NoProvisioningStatePayloadAsync(Product product, ServiceCallback<Product> serviceCallback);
+
+    /**
+     * Long running put request, service returns a 201 to the initial request with no payload.
+     *
+     * @param product Product to put.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the observable for the request.
+     */
+    Observable<OperationStatus<Product>> resumePutError201NoProvisioningStatePayloadAsync(Product product);
 
     /**
      * Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
@@ -1330,6 +1828,60 @@ public interface LROSADs {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the Product object if successful.
      */
+    Product resumePutAsyncRelativeRetryNoStatus();
+
+    /**
+     * Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
+     *
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link ServiceFuture&lt;Product&gt;} object.
+     */
+    ServiceFuture<Product> resumePutAsyncRelativeRetryNoStatusAsync(ServiceCallback<Product> serviceCallback);
+
+    /**
+     * Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
+     *
+     * @return the observable for the request.
+     */
+    Observable<OperationStatus<Product>> resumePutAsyncRelativeRetryNoStatusAsync();
+
+    /**
+     * Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
+     *
+     * @param product Product to put.
+     * @throws CloudException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the Product object if successful.
+     */
+    Product resumePutAsyncRelativeRetryNoStatus(Product product);
+
+    /**
+     * Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
+     *
+     * @param product Product to put.
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link ServiceFuture&lt;Product&gt;} object.
+     */
+    ServiceFuture<Product> resumePutAsyncRelativeRetryNoStatusAsync(Product product, ServiceCallback<Product> serviceCallback);
+
+    /**
+     * Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
+     *
+     * @param product Product to put.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the observable for the request.
+     */
+    Observable<OperationStatus<Product>> resumePutAsyncRelativeRetryNoStatusAsync(Product product);
+
+    /**
+     * Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
+     *
+     * @throws CloudException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the Product object if successful.
+     */
     Product beginPutAsyncRelativeRetryNoStatusPayload();
 
     /**
@@ -1449,6 +2001,60 @@ public interface LROSADs {
     Maybe<Product> putAsyncRelativeRetryNoStatusPayloadAsync(Product product);
 
     /**
+     * Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
+     *
+     * @throws CloudException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the Product object if successful.
+     */
+    Product resumePutAsyncRelativeRetryNoStatusPayload();
+
+    /**
+     * Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
+     *
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link ServiceFuture&lt;Product&gt;} object.
+     */
+    ServiceFuture<Product> resumePutAsyncRelativeRetryNoStatusPayloadAsync(ServiceCallback<Product> serviceCallback);
+
+    /**
+     * Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
+     *
+     * @return the observable for the request.
+     */
+    Observable<OperationStatus<Product>> resumePutAsyncRelativeRetryNoStatusPayloadAsync();
+
+    /**
+     * Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
+     *
+     * @param product Product to put.
+     * @throws CloudException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the Product object if successful.
+     */
+    Product resumePutAsyncRelativeRetryNoStatusPayload(Product product);
+
+    /**
+     * Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
+     *
+     * @param product Product to put.
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link ServiceFuture&lt;Product&gt;} object.
+     */
+    ServiceFuture<Product> resumePutAsyncRelativeRetryNoStatusPayloadAsync(Product product, ServiceCallback<Product> serviceCallback);
+
+    /**
+     * Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
+     *
+     * @param product Product to put.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the observable for the request.
+     */
+    Observable<OperationStatus<Product>> resumePutAsyncRelativeRetryNoStatusPayloadAsync(Product product);
+
+    /**
      * Long running delete request, service returns a 204 to the initial request, indicating success.
      *
      * @throws CloudException thrown if the request is rejected by server.
@@ -1504,6 +2110,30 @@ public interface LROSADs {
     Completable delete204SucceededAsync();
 
     /**
+     * Long running delete request, service returns a 204 to the initial request, indicating success.
+     *
+     * @throws CloudException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
+    void resumeDelete204Succeeded();
+
+    /**
+     * Long running delete request, service returns a 204 to the initial request, indicating success.
+     *
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link ServiceFuture&lt;Void&gt;} object.
+     */
+    ServiceFuture<Void> resumeDelete204SucceededAsync(ServiceCallback<Void> serviceCallback);
+
+    /**
+     * Long running delete request, service returns a 204 to the initial request, indicating success.
+     *
+     * @return the observable for the request.
+     */
+    Observable<OperationStatus<Void>> resumeDelete204SucceededAsync();
+
+    /**
      * Long running delete request, service returns a 202 to the initial request. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
      * @throws CloudException thrown if the request is rejected by server.
@@ -1557,6 +2187,30 @@ public interface LROSADs {
      * @return the {@link Completable} object if successful.
      */
     Completable deleteAsyncRelativeRetryNoStatusAsync();
+
+    /**
+     * Long running delete request, service returns a 202 to the initial request. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
+     *
+     * @throws CloudException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
+    void resumeDeleteAsyncRelativeRetryNoStatus();
+
+    /**
+     * Long running delete request, service returns a 202 to the initial request. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
+     *
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link ServiceFuture&lt;Void&gt;} object.
+     */
+    ServiceFuture<Void> resumeDeleteAsyncRelativeRetryNoStatusAsync(ServiceCallback<Void> serviceCallback);
+
+    /**
+     * Long running delete request, service returns a 202 to the initial request. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
+     *
+     * @return the observable for the request.
+     */
+    Observable<OperationStatus<Void>> resumeDeleteAsyncRelativeRetryNoStatusAsync();
 
     /**
      * Long running post request, service returns a 202 to the initial request, without a location header.
@@ -1680,6 +2334,58 @@ public interface LROSADs {
     Completable post202NoLocationAsync(Product product);
 
     /**
+     * Long running post request, service returns a 202 to the initial request, without a location header.
+     *
+     * @throws CloudException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
+    void resumePost202NoLocation();
+
+    /**
+     * Long running post request, service returns a 202 to the initial request, without a location header.
+     *
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link ServiceFuture&lt;Void&gt;} object.
+     */
+    ServiceFuture<Void> resumePost202NoLocationAsync(ServiceCallback<Void> serviceCallback);
+
+    /**
+     * Long running post request, service returns a 202 to the initial request, without a location header.
+     *
+     * @return the observable for the request.
+     */
+    Observable<OperationStatus<Void>> resumePost202NoLocationAsync();
+
+    /**
+     * Long running post request, service returns a 202 to the initial request, without a location header.
+     *
+     * @param product Product to put.
+     * @throws CloudException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
+    void resumePost202NoLocation(Product product);
+
+    /**
+     * Long running post request, service returns a 202 to the initial request, without a location header.
+     *
+     * @param product Product to put.
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link ServiceFuture&lt;Void&gt;} object.
+     */
+    ServiceFuture<Void> resumePost202NoLocationAsync(Product product, ServiceCallback<Void> serviceCallback);
+
+    /**
+     * Long running post request, service returns a 202 to the initial request, without a location header.
+     *
+     * @param product Product to put.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the observable for the request.
+     */
+    Observable<OperationStatus<Void>> resumePost202NoLocationAsync(Product product);
+
+    /**
      * Long running post request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
      * @throws CloudException thrown if the request is rejected by server.
@@ -1799,6 +2505,58 @@ public interface LROSADs {
      * @return the {@link Completable} object if successful.
      */
     Completable postAsyncRelativeRetryNoPayloadAsync(Product product);
+
+    /**
+     * Long running post request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
+     *
+     * @throws CloudException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
+    void resumePostAsyncRelativeRetryNoPayload();
+
+    /**
+     * Long running post request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
+     *
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link ServiceFuture&lt;Void&gt;} object.
+     */
+    ServiceFuture<Void> resumePostAsyncRelativeRetryNoPayloadAsync(ServiceCallback<Void> serviceCallback);
+
+    /**
+     * Long running post request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
+     *
+     * @return the observable for the request.
+     */
+    Observable<OperationStatus<Void>> resumePostAsyncRelativeRetryNoPayloadAsync();
+
+    /**
+     * Long running post request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
+     *
+     * @param product Product to put.
+     * @throws CloudException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
+    void resumePostAsyncRelativeRetryNoPayload(Product product);
+
+    /**
+     * Long running post request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
+     *
+     * @param product Product to put.
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link ServiceFuture&lt;Void&gt;} object.
+     */
+    ServiceFuture<Void> resumePostAsyncRelativeRetryNoPayloadAsync(Product product, ServiceCallback<Void> serviceCallback);
+
+    /**
+     * Long running post request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
+     *
+     * @param product Product to put.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the observable for the request.
+     */
+    Observable<OperationStatus<Void>> resumePostAsyncRelativeRetryNoPayloadAsync(Product product);
 
     /**
      * Long running put request, service returns a 200 to the initial request, with an entity that is not a valid json.
@@ -1926,6 +2684,60 @@ public interface LROSADs {
     Maybe<Product> put200InvalidJsonAsync(Product product);
 
     /**
+     * Long running put request, service returns a 200 to the initial request, with an entity that is not a valid json.
+     *
+     * @throws CloudException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the Product object if successful.
+     */
+    Product resumePut200InvalidJson();
+
+    /**
+     * Long running put request, service returns a 200 to the initial request, with an entity that is not a valid json.
+     *
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link ServiceFuture&lt;Product&gt;} object.
+     */
+    ServiceFuture<Product> resumePut200InvalidJsonAsync(ServiceCallback<Product> serviceCallback);
+
+    /**
+     * Long running put request, service returns a 200 to the initial request, with an entity that is not a valid json.
+     *
+     * @return the observable for the request.
+     */
+    Observable<OperationStatus<Product>> resumePut200InvalidJsonAsync();
+
+    /**
+     * Long running put request, service returns a 200 to the initial request, with an entity that is not a valid json.
+     *
+     * @param product Product to put.
+     * @throws CloudException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the Product object if successful.
+     */
+    Product resumePut200InvalidJson(Product product);
+
+    /**
+     * Long running put request, service returns a 200 to the initial request, with an entity that is not a valid json.
+     *
+     * @param product Product to put.
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link ServiceFuture&lt;Product&gt;} object.
+     */
+    ServiceFuture<Product> resumePut200InvalidJsonAsync(Product product, ServiceCallback<Product> serviceCallback);
+
+    /**
+     * Long running put request, service returns a 200 to the initial request, with an entity that is not a valid json.
+     *
+     * @param product Product to put.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the observable for the request.
+     */
+    Observable<OperationStatus<Product>> resumePut200InvalidJsonAsync(Product product);
+
+    /**
      * Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. The endpoint indicated in the Azure-AsyncOperation header is invalid.
      *
      * @throws CloudException thrown if the request is rejected by server.
@@ -2049,6 +2861,60 @@ public interface LROSADs {
      * @return the {@link Maybe&lt;Product&gt;} object if successful.
      */
     Maybe<Product> putAsyncRelativeRetryInvalidHeaderAsync(Product product);
+
+    /**
+     * Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. The endpoint indicated in the Azure-AsyncOperation header is invalid.
+     *
+     * @throws CloudException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the Product object if successful.
+     */
+    Product resumePutAsyncRelativeRetryInvalidHeader();
+
+    /**
+     * Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. The endpoint indicated in the Azure-AsyncOperation header is invalid.
+     *
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link ServiceFuture&lt;Product&gt;} object.
+     */
+    ServiceFuture<Product> resumePutAsyncRelativeRetryInvalidHeaderAsync(ServiceCallback<Product> serviceCallback);
+
+    /**
+     * Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. The endpoint indicated in the Azure-AsyncOperation header is invalid.
+     *
+     * @return the observable for the request.
+     */
+    Observable<OperationStatus<Product>> resumePutAsyncRelativeRetryInvalidHeaderAsync();
+
+    /**
+     * Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. The endpoint indicated in the Azure-AsyncOperation header is invalid.
+     *
+     * @param product Product to put.
+     * @throws CloudException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the Product object if successful.
+     */
+    Product resumePutAsyncRelativeRetryInvalidHeader(Product product);
+
+    /**
+     * Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. The endpoint indicated in the Azure-AsyncOperation header is invalid.
+     *
+     * @param product Product to put.
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link ServiceFuture&lt;Product&gt;} object.
+     */
+    ServiceFuture<Product> resumePutAsyncRelativeRetryInvalidHeaderAsync(Product product, ServiceCallback<Product> serviceCallback);
+
+    /**
+     * Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. The endpoint indicated in the Azure-AsyncOperation header is invalid.
+     *
+     * @param product Product to put.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the observable for the request.
+     */
+    Observable<OperationStatus<Product>> resumePutAsyncRelativeRetryInvalidHeaderAsync(Product product);
 
     /**
      * Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
@@ -2176,6 +3042,60 @@ public interface LROSADs {
     Maybe<Product> putAsyncRelativeRetryInvalidJsonPollingAsync(Product product);
 
     /**
+     * Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
+     *
+     * @throws CloudException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the Product object if successful.
+     */
+    Product resumePutAsyncRelativeRetryInvalidJsonPolling();
+
+    /**
+     * Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
+     *
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link ServiceFuture&lt;Product&gt;} object.
+     */
+    ServiceFuture<Product> resumePutAsyncRelativeRetryInvalidJsonPollingAsync(ServiceCallback<Product> serviceCallback);
+
+    /**
+     * Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
+     *
+     * @return the observable for the request.
+     */
+    Observable<OperationStatus<Product>> resumePutAsyncRelativeRetryInvalidJsonPollingAsync();
+
+    /**
+     * Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
+     *
+     * @param product Product to put.
+     * @throws CloudException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the Product object if successful.
+     */
+    Product resumePutAsyncRelativeRetryInvalidJsonPolling(Product product);
+
+    /**
+     * Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
+     *
+     * @param product Product to put.
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link ServiceFuture&lt;Product&gt;} object.
+     */
+    ServiceFuture<Product> resumePutAsyncRelativeRetryInvalidJsonPollingAsync(Product product, ServiceCallback<Product> serviceCallback);
+
+    /**
+     * Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
+     *
+     * @param product Product to put.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the observable for the request.
+     */
+    Observable<OperationStatus<Product>> resumePutAsyncRelativeRetryInvalidJsonPollingAsync(Product product);
+
+    /**
      * Long running delete request, service returns a 202 to the initial request receing a reponse with an invalid 'Location' and 'Retry-After' headers.
      *
      * @throws CloudException thrown if the request is rejected by server.
@@ -2229,6 +3149,30 @@ public interface LROSADs {
      * @return the {@link Completable} object if successful.
      */
     Completable delete202RetryInvalidHeaderAsync();
+
+    /**
+     * Long running delete request, service returns a 202 to the initial request receing a reponse with an invalid 'Location' and 'Retry-After' headers.
+     *
+     * @throws CloudException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
+    void resumeDelete202RetryInvalidHeader();
+
+    /**
+     * Long running delete request, service returns a 202 to the initial request receing a reponse with an invalid 'Location' and 'Retry-After' headers.
+     *
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link ServiceFuture&lt;Void&gt;} object.
+     */
+    ServiceFuture<Void> resumeDelete202RetryInvalidHeaderAsync(ServiceCallback<Void> serviceCallback);
+
+    /**
+     * Long running delete request, service returns a 202 to the initial request receing a reponse with an invalid 'Location' and 'Retry-After' headers.
+     *
+     * @return the observable for the request.
+     */
+    Observable<OperationStatus<Void>> resumeDelete202RetryInvalidHeaderAsync();
 
     /**
      * Long running delete request, service returns a 202 to the initial request. The endpoint indicated in the Azure-AsyncOperation header is invalid.
@@ -2286,6 +3230,30 @@ public interface LROSADs {
     Completable deleteAsyncRelativeRetryInvalidHeaderAsync();
 
     /**
+     * Long running delete request, service returns a 202 to the initial request. The endpoint indicated in the Azure-AsyncOperation header is invalid.
+     *
+     * @throws CloudException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
+    void resumeDeleteAsyncRelativeRetryInvalidHeader();
+
+    /**
+     * Long running delete request, service returns a 202 to the initial request. The endpoint indicated in the Azure-AsyncOperation header is invalid.
+     *
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link ServiceFuture&lt;Void&gt;} object.
+     */
+    ServiceFuture<Void> resumeDeleteAsyncRelativeRetryInvalidHeaderAsync(ServiceCallback<Void> serviceCallback);
+
+    /**
+     * Long running delete request, service returns a 202 to the initial request. The endpoint indicated in the Azure-AsyncOperation header is invalid.
+     *
+     * @return the observable for the request.
+     */
+    Observable<OperationStatus<Void>> resumeDeleteAsyncRelativeRetryInvalidHeaderAsync();
+
+    /**
      * Long running delete request, service returns a 202 to the initial request. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
      * @throws CloudException thrown if the request is rejected by server.
@@ -2339,6 +3307,30 @@ public interface LROSADs {
      * @return the {@link Completable} object if successful.
      */
     Completable deleteAsyncRelativeRetryInvalidJsonPollingAsync();
+
+    /**
+     * Long running delete request, service returns a 202 to the initial request. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
+     *
+     * @throws CloudException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
+    void resumeDeleteAsyncRelativeRetryInvalidJsonPolling();
+
+    /**
+     * Long running delete request, service returns a 202 to the initial request. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
+     *
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link ServiceFuture&lt;Void&gt;} object.
+     */
+    ServiceFuture<Void> resumeDeleteAsyncRelativeRetryInvalidJsonPollingAsync(ServiceCallback<Void> serviceCallback);
+
+    /**
+     * Long running delete request, service returns a 202 to the initial request. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
+     *
+     * @return the observable for the request.
+     */
+    Observable<OperationStatus<Void>> resumeDeleteAsyncRelativeRetryInvalidJsonPollingAsync();
 
     /**
      * Long running post request, service returns a 202 to the initial request, with invalid 'Location' and 'Retry-After' headers.
@@ -2462,6 +3454,58 @@ public interface LROSADs {
     Completable post202RetryInvalidHeaderAsync(Product product);
 
     /**
+     * Long running post request, service returns a 202 to the initial request, with invalid 'Location' and 'Retry-After' headers.
+     *
+     * @throws CloudException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
+    void resumePost202RetryInvalidHeader();
+
+    /**
+     * Long running post request, service returns a 202 to the initial request, with invalid 'Location' and 'Retry-After' headers.
+     *
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link ServiceFuture&lt;Void&gt;} object.
+     */
+    ServiceFuture<Void> resumePost202RetryInvalidHeaderAsync(ServiceCallback<Void> serviceCallback);
+
+    /**
+     * Long running post request, service returns a 202 to the initial request, with invalid 'Location' and 'Retry-After' headers.
+     *
+     * @return the observable for the request.
+     */
+    Observable<OperationStatus<Void>> resumePost202RetryInvalidHeaderAsync();
+
+    /**
+     * Long running post request, service returns a 202 to the initial request, with invalid 'Location' and 'Retry-After' headers.
+     *
+     * @param product Product to put.
+     * @throws CloudException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
+    void resumePost202RetryInvalidHeader(Product product);
+
+    /**
+     * Long running post request, service returns a 202 to the initial request, with invalid 'Location' and 'Retry-After' headers.
+     *
+     * @param product Product to put.
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link ServiceFuture&lt;Void&gt;} object.
+     */
+    ServiceFuture<Void> resumePost202RetryInvalidHeaderAsync(Product product, ServiceCallback<Void> serviceCallback);
+
+    /**
+     * Long running post request, service returns a 202 to the initial request, with invalid 'Location' and 'Retry-After' headers.
+     *
+     * @param product Product to put.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the observable for the request.
+     */
+    Observable<OperationStatus<Void>> resumePost202RetryInvalidHeaderAsync(Product product);
+
+    /**
      * Long running post request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’. The endpoint indicated in the Azure-AsyncOperation header is invalid.
      *
      * @throws CloudException thrown if the request is rejected by server.
@@ -2583,6 +3627,58 @@ public interface LROSADs {
     Completable postAsyncRelativeRetryInvalidHeaderAsync(Product product);
 
     /**
+     * Long running post request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’. The endpoint indicated in the Azure-AsyncOperation header is invalid.
+     *
+     * @throws CloudException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
+    void resumePostAsyncRelativeRetryInvalidHeader();
+
+    /**
+     * Long running post request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’. The endpoint indicated in the Azure-AsyncOperation header is invalid.
+     *
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link ServiceFuture&lt;Void&gt;} object.
+     */
+    ServiceFuture<Void> resumePostAsyncRelativeRetryInvalidHeaderAsync(ServiceCallback<Void> serviceCallback);
+
+    /**
+     * Long running post request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’. The endpoint indicated in the Azure-AsyncOperation header is invalid.
+     *
+     * @return the observable for the request.
+     */
+    Observable<OperationStatus<Void>> resumePostAsyncRelativeRetryInvalidHeaderAsync();
+
+    /**
+     * Long running post request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’. The endpoint indicated in the Azure-AsyncOperation header is invalid.
+     *
+     * @param product Product to put.
+     * @throws CloudException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
+    void resumePostAsyncRelativeRetryInvalidHeader(Product product);
+
+    /**
+     * Long running post request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’. The endpoint indicated in the Azure-AsyncOperation header is invalid.
+     *
+     * @param product Product to put.
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link ServiceFuture&lt;Void&gt;} object.
+     */
+    ServiceFuture<Void> resumePostAsyncRelativeRetryInvalidHeaderAsync(Product product, ServiceCallback<Void> serviceCallback);
+
+    /**
+     * Long running post request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’. The endpoint indicated in the Azure-AsyncOperation header is invalid.
+     *
+     * @param product Product to put.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the observable for the request.
+     */
+    Observable<OperationStatus<Void>> resumePostAsyncRelativeRetryInvalidHeaderAsync(Product product);
+
+    /**
      * Long running post request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
      * @throws CloudException thrown if the request is rejected by server.
@@ -2702,4 +3798,56 @@ public interface LROSADs {
      * @return the {@link Completable} object if successful.
      */
     Completable postAsyncRelativeRetryInvalidJsonPollingAsync(Product product);
+
+    /**
+     * Long running post request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
+     *
+     * @throws CloudException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
+    void resumePostAsyncRelativeRetryInvalidJsonPolling();
+
+    /**
+     * Long running post request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
+     *
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link ServiceFuture&lt;Void&gt;} object.
+     */
+    ServiceFuture<Void> resumePostAsyncRelativeRetryInvalidJsonPollingAsync(ServiceCallback<Void> serviceCallback);
+
+    /**
+     * Long running post request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
+     *
+     * @return the observable for the request.
+     */
+    Observable<OperationStatus<Void>> resumePostAsyncRelativeRetryInvalidJsonPollingAsync();
+
+    /**
+     * Long running post request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
+     *
+     * @param product Product to put.
+     * @throws CloudException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
+    void resumePostAsyncRelativeRetryInvalidJsonPolling(Product product);
+
+    /**
+     * Long running post request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
+     *
+     * @param product Product to put.
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link ServiceFuture&lt;Void&gt;} object.
+     */
+    ServiceFuture<Void> resumePostAsyncRelativeRetryInvalidJsonPollingAsync(Product product, ServiceCallback<Void> serviceCallback);
+
+    /**
+     * Long running post request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
+     *
+     * @param product Product to put.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the observable for the request.
+     */
+    Observable<OperationStatus<Void>> resumePostAsyncRelativeRetryInvalidJsonPollingAsync(Product product);
 }

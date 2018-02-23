@@ -8,11 +8,13 @@
  * regenerated.
  */
 
-package fixtures.bodybyte;
+package fixtures.bodybyte.implementation;
 
 import com.microsoft.rest.v2.RestProxy;
 import com.microsoft.rest.v2.ServiceClient;
 import com.microsoft.rest.v2.http.HttpPipeline;
+import fixtures.bodybyte.AutoRestSwaggerBATByteService;
+import fixtures.bodybyte.Bytes;
 import io.reactivex.annotations.NonNull;
 
 /**

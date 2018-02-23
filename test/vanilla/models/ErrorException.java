@@ -8,33 +8,34 @@
  * regenerated.
  */
 
-package fixtures.bodybyte;
+package fixtures.bodydatetimerfc1123.models;
 
-import com.microsoft.rest.v2.RestException;
-import com.microsoft.rest.v2.http.HttpResponse;
+import com.microsoft.rest.RestException;
+import okhttp3.ResponseBody;
+import retrofit2.Response;
 
 /**
  * Exception thrown for an invalid response with Error information.
  */
-public final class ErrorException extends RestException {
+public class ErrorException extends RestException {
     /**
      * Initializes a new instance of the ErrorException class.
      *
-     * @param message the exception message or the response content if a message is not available.
-     * @param response the HTTP response.
+     * @param message the exception message or the response content if a message is not available
+     * @param response the HTTP response
      */
-    public ErrorException(String message, HttpResponse response) {
+    public ErrorException(final String message, final Response<ResponseBody> response) {
         super(message, response);
     }
 
     /**
      * Initializes a new instance of the ErrorException class.
      *
-     * @param message the exception message or the response content if a message is not available.
-     * @param response the HTTP response.
-     * @param body the deserialized response body.
+     * @param message the exception message or the response content if a message is not available
+     * @param response the HTTP response
+     * @param body the deserialized response body
      */
-    public ErrorException(String message, HttpResponse response, Error body) {
+    public ErrorException(final String message, final Response<ResponseBody> response, final Error body) {
         super(message, response, body);
     }
 

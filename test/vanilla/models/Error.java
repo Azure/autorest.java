@@ -8,14 +8,14 @@
  * regenerated.
  */
 
-package fixtures.bodybyte;
+package fixtures.bodydatetimerfc1123.models;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 /**
  * The Error model.
  */
-public final class Error {
+public class Error {
     /**
      * The status property.
      */
@@ -31,7 +31,7 @@ public final class Error {
     /**
      * Get the status value.
      *
-     * @return the status value.
+     * @return the status value
      */
     public Integer status() {
         return this.status;
@@ -40,7 +40,7 @@ public final class Error {
     /**
      * Set the status value.
      *
-     * @param status the status value to set.
+     * @param status the status value to set
      * @return the Error object itself.
      */
     public Error withStatus(Integer status) {
@@ -51,7 +51,7 @@ public final class Error {
     /**
      * Get the message value.
      *
-     * @return the message value.
+     * @return the message value
      */
     public String message() {
         return this.message;
@@ -60,11 +60,12 @@ public final class Error {
     /**
      * Set the message value.
      *
-     * @param message the message value to set.
+     * @param message the message value to set
      * @return the Error object itself.
      */
     public Error withMessage(String message) {
         this.message = message;
         return this;
     }
+
 }
