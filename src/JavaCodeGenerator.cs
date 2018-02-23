@@ -3299,57 +3299,60 @@ namespace AutoRest.Java
                             interfaceBlock.Annotation($"UnexpectedResponseExceptionType({restAPIMethod.UnexpectedResponseExceptionType}.class)");
                         }
 
+                        List<string> parameterDeclarationList = new List<string>();
                         if (restAPIMethod.IsResumable)
                         {
                             interfaceBlock.Annotation($"ResumeOperation");
-                        }
-
-                        List<string> parameterDeclarationList = new List<string>();
-                        foreach (RestAPIParameter parameter in restAPIMethod.Parameters)
-                        {
                             StringBuilder parameterDeclarationBuilder = new StringBuilder();
-
-                            switch (parameter.RequestParameterLocation)
+                            parameterDeclarationBuilder.Append("OperationDescription operationDescription");
+                        }
+                        else
+                        {
+                            foreach (RestAPIParameter parameter in restAPIMethod.Parameters)
                             {
-                                case RequestParameterLocation.Host:
-                                case RequestParameterLocation.Path:
-                                case RequestParameterLocation.Query:
-                                case RequestParameterLocation.Header:
-                                    parameterDeclarationBuilder.Append($"@{parameter.RequestParameterLocation}Param(");
-                                    if ((parameter.RequestParameterLocation == RequestParameterLocation.Path || parameter.RequestParameterLocation == RequestParameterLocation.Query) && settings.IsAzureOrFluent && parameter.AlreadyEncoded)
-                                    {
-                                        parameterDeclarationBuilder.Append($"value = \"{parameter.RequestParameterName}\", encoded = true");
-                                    }
-                                    else if (parameter.RequestParameterLocation == RequestParameterLocation.Header && !string.IsNullOrEmpty(parameter.HeaderCollectionPrefix))
-                                    {
-                                        parameterDeclarationBuilder.Append($"\"{parameter.HeaderCollectionPrefix}\"");
-                                    }
-                                    else
-                                    {
-                                        parameterDeclarationBuilder.Append($"\"{parameter.RequestParameterName}\"");
-                                    }
-                                    parameterDeclarationBuilder.Append(") ");
+                                StringBuilder parameterDeclarationBuilder = new StringBuilder();
 
-                                    break;
+                                switch (parameter.RequestParameterLocation)
+                                {
+                                    case RequestParameterLocation.Host:
+                                    case RequestParameterLocation.Path:
+                                    case RequestParameterLocation.Query:
+                                    case RequestParameterLocation.Header:
+                                        parameterDeclarationBuilder.Append($"@{parameter.RequestParameterLocation}Param(");
+                                        if ((parameter.RequestParameterLocation == RequestParameterLocation.Path || parameter.RequestParameterLocation == RequestParameterLocation.Query) && settings.IsAzureOrFluent && parameter.AlreadyEncoded)
+                                        {
+                                            parameterDeclarationBuilder.Append($"value = \"{parameter.RequestParameterName}\", encoded = true");
+                                        }
+                                        else if (parameter.RequestParameterLocation == RequestParameterLocation.Header && !string.IsNullOrEmpty(parameter.HeaderCollectionPrefix))
+                                        {
+                                            parameterDeclarationBuilder.Append($"\"{parameter.HeaderCollectionPrefix}\"");
+                                        }
+                                        else
+                                        {
+                                            parameterDeclarationBuilder.Append($"\"{parameter.RequestParameterName}\"");
+                                        }
+                                        parameterDeclarationBuilder.Append(") ");
 
-                                case RequestParameterLocation.Body:
-                                    parameterDeclarationBuilder.Append($"@BodyParam(\"{restAPIMethod.RequestContentType}\") ");
-                                    break;
+                                        break;
 
-                                case RequestParameterLocation.FormData:
-                                    parameterDeclarationBuilder.Append($"/* @Part(\"{parameter.RequestParameterName}\") not supported by RestProxy */");
-                                    break;
+                                    case RequestParameterLocation.Body:
+                                        parameterDeclarationBuilder.Append($"@BodyParam(\"{restAPIMethod.RequestContentType}\") ");
+                                        break;
 
-                                default:
-                                    throw new ArgumentException("Unrecognized RequestParameterLocation value: " + parameter.RequestParameterLocation);
+                                    case RequestParameterLocation.FormData:
+                                        parameterDeclarationBuilder.Append($"/* @Part(\"{parameter.RequestParameterName}\") not supported by RestProxy */");
+                                        break;
+
+                                    default:
+                                        throw new ArgumentException("Unrecognized RequestParameterLocation value: " + parameter.RequestParameterLocation);
+                                }
+
+                                parameterDeclarationBuilder.Append(parameter.Type + " " + parameter.Name);
+                                parameterDeclarationList.Add(parameterDeclarationBuilder.ToString());
                             }
-
-                            parameterDeclarationBuilder.Append(parameter.Type + " " + parameter.Name);
-                            parameterDeclarationList.Add(parameterDeclarationBuilder.ToString());
                         }
 
                         string parameterDeclarations = string.Join(", ", parameterDeclarationList);
-
                         IType restAPIMethodReturnValueClientType = ConvertToClientType(restAPIMethod.ReturnType);
                         interfaceBlock.PublicMethod($"{restAPIMethodReturnValueClientType} {restAPIMethod.Name}({parameterDeclarations})");
                     }
