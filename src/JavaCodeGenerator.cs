@@ -376,6 +376,11 @@ namespace AutoRest.Java
                             method.Name = "begin" + m.Name.ToPascalCase();
                             m.Extensions.Remove(AzureExtensions.LongRunningExtension);
                             methodGroup.Add(m);
+
+                            m = DependencyInjection.Duplicate(method);
+                            m.Name = "resume" + m.Name.ToPascalCase();
+                            m.Extensions.Add("java-resume", new object());
+                            methodGroup.Add(m);
                         }
                     }
                 }
@@ -1204,6 +1209,7 @@ namespace AutoRest.Java
                 restAPIMethodReturnValueWireType = ClassType.UnixTime;
             }
 
+            bool isResumable = autoRestMethod.Extensions.ContainsKey("java-resume");
             return new RestAPIMethod(
                 restAPIMethodRequestContentType,
                 restAPIMethodReturnType,
@@ -1219,7 +1225,8 @@ namespace AutoRest.Java
                 restAPIMethodSimulateMethodAsPagingOperation,
                 restAPIMethodIsLongRunningOperation,
                 restAPIMethodReturnValueWireType,
-                autoRestMethod);
+                autoRestMethod,
+                isResumable);
         }
 
         private static RequestParameterLocation ParseParameterRequestLocation(AutoRestParameterLocation autoRestParameterLocation)
@@ -3289,6 +3296,11 @@ namespace AutoRest.Java
                         if (restAPIMethod.UnexpectedResponseExceptionType != null)
                         {
                             interfaceBlock.Annotation($"UnexpectedResponseExceptionType({restAPIMethod.UnexpectedResponseExceptionType}.class)");
+                        }
+
+                        if (restAPIMethod.IsResumable)
+                        {
+                            interfaceBlock.Annotation($"ResumeOperation()");
                         }
 
                         List<string> parameterDeclarationList = new List<string>();
