@@ -131,7 +131,7 @@ namespace AutoRest.Java.Model
         public AutoRestMethod AutoRestMethod { get; }
 
         /// <summary>
-        /// Get whether or not this method is resumable.
+        /// Get whether or not this method resumes polling of an LRO.
         /// </summary>
         public bool IsResumable { get; }
 
