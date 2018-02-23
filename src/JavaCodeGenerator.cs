@@ -3300,7 +3300,7 @@ namespace AutoRest.Java
 
                         if (restAPIMethod.IsResumable)
                         {
-                            interfaceBlock.Annotation($"ResumeOperation()");
+                            interfaceBlock.Annotation($"ResumeOperation");
                         }
 
                         List<string> parameterDeclarationList = new List<string>();
