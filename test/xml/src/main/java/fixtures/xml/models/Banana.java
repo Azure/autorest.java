@@ -13,6 +13,7 @@ package fixtures.xml.models;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlProperty;
 import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlRootElement;
+import org.joda.time.DateTime;
 
 /**
  * A banana.
@@ -30,6 +31,12 @@ public final class Banana {
      */
     @JsonProperty(value = "flavor")
     private String flavor;
+
+    /**
+     * the time at which you should reconsider eating this banana.
+     */
+    @JsonProperty(value = "expiration")
+    private DateTime expiration;
 
     /**
      * Get the name value.
@@ -68,6 +75,26 @@ public final class Banana {
      */
     public Banana withFlavor(String flavor) {
         this.flavor = flavor;
+        return this;
+    }
+
+    /**
+     * Get the expiration value.
+     *
+     * @return the expiration value.
+     */
+    public DateTime expiration() {
+        return this.expiration;
+    }
+
+    /**
+     * Set the expiration value.
+     *
+     * @param expiration the expiration value to set.
+     * @return the Banana object itself.
+     */
+    public Banana withExpiration(DateTime expiration) {
+        this.expiration = expiration;
         return this;
     }
 }

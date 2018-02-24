@@ -220,6 +220,61 @@
           }
         }
       }
+    },
+    "/xml/empty-root-list": {
+      "get": {
+        "operationId": "xml_getEmptyRootList",
+        "description": "Gets an empty list as the root element.",
+        "tags": [
+          "XML Operations"
+        ],
+        "responses": {
+          "200": {
+            "description": "The root list.",
+            "schema": {
+              "type": "array",
+              "xml": {
+                "name": "bananas"
+              },
+              "items": {
+                "$ref": "#/definitions/Banana"
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "operationId": "xml_putEmptyRootList",
+        "description": "Puts an empty list as the root element.",
+        "tags": [
+          "XML Operations"
+        ],
+        "parameters": [
+          {
+            "name": "bananas",
+            "in": "body",
+            "schema": {
+              "type": "array",
+              "xml": {
+                "name": "bananas",
+                "wrapped": true
+              },
+              "items": {
+                "$ref": "#/definitions/Banana",
+                "xml": {
+                  "name": "banana"
+                }
+              }
+            },
+            "required": true
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Indicates success."
+          }
+        }
+      }
     }
   },
   "definitions": {
@@ -338,6 +393,14 @@
           "type": "string",
           "xml": {
             "name": "flavor"
+          }
+        },
+        "expiration": {
+          "description": "the time at which you should reconsider eating this banana",
+          "type": "string",
+          "format": "date-time",
+          "xml": {
+            "name": "expiration"
           }
         }
       }

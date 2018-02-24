@@ -7,6 +7,7 @@ import fixtures.xml.models.AppleBarrel;
 import fixtures.xml.models.Banana;
 import fixtures.xml.models.Slideshow;
 import fixtures.xml.models.XmlGetHeadersHeaders;
+import org.joda.time.DateTime;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
@@ -98,12 +99,38 @@ public class XmlsTests {
     public void getRootList() {
         List<Banana> bananas = client.xmls().getRootList();
         assertNotNull(bananas);
+        assertEquals(3, bananas.size());
+
+        assertEquals("Cavendish", bananas.get(0).name());
+        assertEquals("Sweet", bananas.get(0).flavor());
+        assertEquals("2018-02-28T00:40:00.000Z", bananas.get(0).expiration().toString());
+
+        assertEquals("Plantain", bananas.get(1).name());
+        assertEquals("Savory", bananas.get(1).flavor());
+        assertEquals("2018-02-28T00:40:00.000Z", bananas.get(1).expiration().toString());
+
+        assertEquals("Unknown Banana", bananas.get(2).name());
+        assertEquals("", bananas.get(2).flavor());
+        assertEquals("2012-02-24T00:53:52.780Z", bananas.get(2).expiration().toString());
     }
 
     @Test
     public void putRootList() {
         List<Banana> bananas = client.xmls().getRootList();
         client.xmls().putRootList(bananas);
+    }
+
+    @Test
+    public void getEmptyRootList() {
+        List<Banana> bananas = client.xmls().getEmptyRootList();
+        assertNotNull(bananas);
+        assertEquals(0, bananas.size());
+    }
+
+    @Test
+    public void putEmptyRootList() {
+        List<Banana> bananas = client.xmls().getEmptyRootList();
+        client.xmls().putEmptyRootList(bananas);
     }
 
     @Test

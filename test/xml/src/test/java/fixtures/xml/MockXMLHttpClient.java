@@ -54,6 +54,8 @@ public class MockXMLHttpClient extends HttpClient {
                     return Single.just(response("GetXMLEmptyWrappedLists.xml"));
                 } else if (path.contains("xml/root-list")) {
                     return Single.just(response("GetXMLRootList.xml"));
+                } else if (path.contains("xml/empty-root-list")) {
+                    return Single.just(response("GetXMLEmptyRootList.xml"));
                 } else if (path.contains("xml/headers")) {
                     return Single.<HttpResponse>just(new MockHttpResponse(200, new HttpHeaders().set("Custom-Header", "Custom value")));
                 }
@@ -79,6 +81,13 @@ public class MockXMLHttpClient extends HttpClient {
                         @Override
                         public SingleSource<? extends HttpResponse> apply(byte[] bytes) throws Exception {
                             return validate(new String(bytes, StandardCharsets.UTF_8), "GetXMLRootList.xml");
+                        }
+                    });
+                } else if (path.contains("xml/empty-root-list")) {
+                    return FlowableUtil.collectBytesInArray(request.body()).flatMap(new Function<byte[], SingleSource<? extends HttpResponse>>() {
+                        @Override
+                        public SingleSource<? extends HttpResponse> apply(byte[] bytes) throws Exception {
+                            return validate(new String(bytes, StandardCharsets.UTF_8), "GetXMLEmptyRootList.xml");
                         }
                     });
                 }

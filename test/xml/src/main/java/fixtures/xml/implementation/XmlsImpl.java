@@ -104,6 +104,14 @@ public final class XmlsImpl implements Xmls {
         @PUT("xml/root-list")
         @ExpectedResponses({201})
         Single<RestResponse<Void, Void>> putRootList(@BodyParam("application/xml; charset=utf-8") BananasWrapper bananas);
+
+        @GET("xml/empty-root-list")
+        @ExpectedResponses({200})
+        Single<RestResponse<Void, List<Banana>>> getEmptyRootList();
+
+        @PUT("xml/empty-root-list")
+        @ExpectedResponses({201})
+        Single<RestResponse<Void, Void>> putEmptyRootList(@BodyParam("application/xml; charset=utf-8") BananasWrapper bananas);
     }
 
     /**
@@ -535,6 +543,104 @@ public final class XmlsImpl implements Xmls {
      */
     public Completable putRootListAsync(@NonNull List<Banana> bananas) {
         return putRootListWithRestResponseAsync(bananas)
+            .toCompletable();
+    }
+
+    /**
+     * Gets an empty list as the root element.
+     *
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the List&lt;Banana&gt; object if successful.
+     */
+    public List<Banana> getEmptyRootList() {
+        return getEmptyRootListAsync().blockingGet();
+    }
+
+    /**
+     * Gets an empty list as the root element.
+     *
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link ServiceFuture&lt;List&lt;Banana&gt;&gt;} object.
+     */
+    public ServiceFuture<List<Banana>> getEmptyRootListAsync(ServiceCallback<List<Banana>> serviceCallback) {
+        return ServiceFuture.fromBody(getEmptyRootListAsync(), serviceCallback);
+    }
+
+    /**
+     * Gets an empty list as the root element.
+     *
+     * @return the {@link Single&lt;RestResponse&lt;Void, List&lt;Banana&gt;&gt;&gt;} object if successful.
+     */
+    public Single<RestResponse<Void, List<Banana>>> getEmptyRootListWithRestResponseAsync() {
+        return service.getEmptyRootList();
+    }
+
+    /**
+     * Gets an empty list as the root element.
+     *
+     * @return the {@link Maybe&lt;List&lt;Banana&gt;&gt;} object if successful.
+     */
+    public Maybe<List<Banana>> getEmptyRootListAsync() {
+        return getEmptyRootListWithRestResponseAsync()
+            .flatMapMaybe(new Function<RestResponse<Void, List<Banana>>, Maybe<List<Banana>>>() {
+                public Maybe<List<Banana>> apply(RestResponse<Void, List<Banana>> restResponse) {
+                    if (restResponse.body() == null) {
+                        return Maybe.empty();
+                    } else {
+                        return Maybe.just(restResponse.body());
+                    }
+                }
+            });
+    }
+
+    /**
+     * Puts an empty list as the root element.
+     *
+     * @param bananas the List&lt;Banana&gt; value.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
+    public void putEmptyRootList(@NonNull List<Banana> bananas) {
+        putEmptyRootListAsync(bananas).blockingAwait();
+    }
+
+    /**
+     * Puts an empty list as the root element.
+     *
+     * @param bananas the List&lt;Banana&gt; value.
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link ServiceFuture&lt;Void&gt;} object.
+     */
+    public ServiceFuture<Void> putEmptyRootListAsync(@NonNull List<Banana> bananas, ServiceCallback<Void> serviceCallback) {
+        return ServiceFuture.fromBody(putEmptyRootListAsync(bananas), serviceCallback);
+    }
+
+    /**
+     * Puts an empty list as the root element.
+     *
+     * @param bananas the List&lt;Banana&gt; value.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
+     */
+    public Single<RestResponse<Void, Void>> putEmptyRootListWithRestResponseAsync(@NonNull List<Banana> bananas) {
+        if (bananas == null) {
+            throw new IllegalArgumentException("Parameter bananas is required and cannot be null.");
+        }
+        Validator.validate(bananas);
+        return service.putEmptyRootList(new BananasWrapper(bananas));
+    }
+
+    /**
+     * Puts an empty list as the root element.
+     *
+     * @param bananas the List&lt;Banana&gt; value.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link Completable} object if successful.
+     */
+    public Completable putEmptyRootListAsync(@NonNull List<Banana> bananas) {
+        return putEmptyRootListWithRestResponseAsync(bananas)
             .toCompletable();
     }
 }
