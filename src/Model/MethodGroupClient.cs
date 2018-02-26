@@ -89,9 +89,9 @@ namespace AutoRest.Java.Model
             {
                 ClassType proxyType = settings.IsAzureOrFluent ? ClassType.AzureProxy : ClassType.RestProxy;
                 imports.Add(proxyType.FullName);
-
-                RestAPI.AddImportsTo(imports, includeImplementationImports, settings);
             }
+
+            RestAPI.AddImportsTo(imports, includeImplementationImports, settings);
 
             foreach (ClientMethod clientMethod in ClientMethods)
             {

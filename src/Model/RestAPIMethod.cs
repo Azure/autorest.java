@@ -142,32 +142,34 @@ namespace AutoRest.Java.Model
         /// <param name="includeImplementationImports">Whether or not to include imports that are only necessary for method implementations.</param>
         public void AddImportsTo(ISet<string> imports, bool includeImplementationImports, JavaSettings settings)
         {
-            imports.Add($"com.microsoft.rest.v2.annotations.{HttpMethod.ToUpperInvariant()}");
-            
-            imports.Add("com.microsoft.rest.v2.annotations.ExpectedResponses");
-
-            if (ReturnValueWireType != null)
-            {
-                imports.Add("com.microsoft.rest.v2.annotations.ReturnValueWireType");
-                ReturnValueWireType.AddImportsTo(imports, includeImplementationImports);
-            }
-
             if (UnexpectedResponseExceptionType != null)
             {
                 imports.Add("com.microsoft.rest.v2.annotations.UnexpectedResponseExceptionType");
                 UnexpectedResponseExceptionType.AddImportsTo(imports, includeImplementationImports);
             }
 
-            if (IsResumable)
+            if (includeImplementationImports)
             {
-                imports.Add("com.microsoft.rest.v2.annotations.ResumeOperation");
-            }
+                if (IsResumable)
+                {
+                    imports.Add("com.microsoft.rest.v2.annotations.ResumeOperation");
+                }
+                imports.Add($"com.microsoft.rest.v2.annotations.{HttpMethod.ToUpperInvariant()}");
 
-            ReturnType.AddImportsTo(imports, includeImplementationImports);
+                imports.Add("com.microsoft.rest.v2.annotations.ExpectedResponses");
 
-            foreach (RestAPIParameter parameter in Parameters)
-            {
-                parameter.AddImportsTo(imports, includeImplementationImports, settings);
+                if (ReturnValueWireType != null)
+                {
+                    imports.Add("com.microsoft.rest.v2.annotations.ReturnValueWireType");
+                    ReturnValueWireType.AddImportsTo(imports, includeImplementationImports);
+                }
+
+                ReturnType.AddImportsTo(imports, includeImplementationImports);
+
+                foreach (RestAPIParameter parameter in Parameters)
+                {
+                    parameter.AddImportsTo(imports, includeImplementationImports, settings);
+                }
             }
         }
     }

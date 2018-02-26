@@ -4720,7 +4720,7 @@ namespace AutoRest.Java
                             clientMethods.Add(new ClientMethod(
                                 description: restAPIMethod.Description,
                                 returnValue: new ReturnValue(
-                                    description: restAPIMethodReturnBodyClientType == PrimitiveType.Void ? $"the {{@link {observablePageType}}} object if successful." : $"the observable to the {restAPIMethodReturnBodyClientType} object",
+                                    description: restAPIMethodReturnBodyClientType == PrimitiveType.Void ? $"the {observablePageType} object if successful." : $"the observable to the {restAPIMethodReturnBodyClientType} object",
                                     type: observablePageType),
                                 name: restAPIMethod.Name + "Async",
                                 parameters: parameters,
@@ -4733,7 +4733,7 @@ namespace AutoRest.Java
                             clientMethods.Add(new ClientMethod(
                                 description: restAPIMethod.Description,
                                 returnValue: new ReturnValue(
-                                    description: $"the {{@link {singlePageMethodReturnType}}} object if successful.",
+                                    description: $"the {singlePageMethodReturnType} object if successful.",
                                     type: singlePageMethodReturnType),
                                 name: GetPagingAsyncSinglePageMethodName(restAPIMethod),
                                 parameters: parameters,
@@ -4770,7 +4770,7 @@ namespace AutoRest.Java
                             clientMethods.Add(new ClientMethod(
                                 description: restAPIMethod.Description,
                                 returnValue: new ReturnValue(
-                                    description: restAPIMethodReturnBodyClientType == PrimitiveType.Void ? $"the {{@link {observablePageType}}} object if successful." : $"the observable to the {restAPIMethodReturnBodyClientType} object",
+                                    description: restAPIMethodReturnBodyClientType == PrimitiveType.Void ? $"the {observablePageType} object if successful." : $"the observable to the {restAPIMethodReturnBodyClientType} object",
                                     type: GenericType.Observable(GenericType.Page(restAPIMethodReturnBodyClientType))),
                                 name: GetSimulatedPagingAsyncMethodName(restAPIMethod),
                                 parameters: parameters,
@@ -4807,7 +4807,7 @@ namespace AutoRest.Java
                             clientMethods.Add(new ClientMethod(
                                 description: restAPIMethod.Description,
                                 returnValue: new ReturnValue(
-                                    description: $"the {{@link {serviceFutureReturnType}}} object",
+                                    description: $"the {serviceFutureReturnType} object",
                                     type: serviceFutureReturnType),
                                 name: GetLongRunningAsyncMethodName(restAPIMethod),
                                 parameters: parameters.ConcatSingleItem(serviceCallbackParameter),
@@ -4860,7 +4860,7 @@ namespace AutoRest.Java
                         clientMethods.Add(new ClientMethod(
                             description: restAPIMethod.Description,
                             returnValue: new ReturnValue(
-                                description: $"the {{@link {serviceFutureReturnType}}} object",
+                                description: $"a ServiceFuture which will be completed with the result of the network request.",
                                 type: serviceFutureReturnType),
                             name: GetSimpleAsyncMethodName(restAPIMethod),
                             parameters: parameters.ConcatSingleItem(serviceCallbackParameter),
@@ -4875,7 +4875,7 @@ namespace AutoRest.Java
                         clientMethods.Add(new ClientMethod(
                             description: restAPIMethod.Description,
                             returnValue: new ReturnValue(
-                                description: $"the {{@link {singleRestResponseReturnType}}} object if successful.",
+                                description: $"a Single which performs the network request upon subscription.",
                                 type: singleRestResponseReturnType),
                             name: GetSimpleAsyncRestResponseMethodName(restAPIMethod),
                             parameters: parameters,
@@ -4900,7 +4900,7 @@ namespace AutoRest.Java
                         clientMethods.Add(new ClientMethod(
                             description: restAPIMethod.Description,
                             returnValue: new ReturnValue(
-                                description: $"the {{@link {asyncMethodReturnType}}} object if successful.",
+                                description: $"a Single which performs the network request upon subscription.",
                                 type: asyncMethodReturnType),
                             name: GetSimpleAsyncMethodName(restAPIMethod),
                             parameters: parameters,
