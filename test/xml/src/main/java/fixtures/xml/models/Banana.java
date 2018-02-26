@@ -18,7 +18,7 @@ import org.joda.time.DateTime;
 /**
  * A banana.
  */
-@JacksonXmlRootElement(localName = "Banana")
+@JacksonXmlRootElement(localName = "banana")
 public final class Banana {
     /**
      * The name property.
@@ -33,7 +33,7 @@ public final class Banana {
     private String flavor;
 
     /**
-     * the time at which you should reconsider eating this banana.
+     * The time at which you should reconsider eating this banana.
      */
     @JsonProperty(value = "expiration")
     private DateTime expiration;

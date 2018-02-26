@@ -9,6 +9,7 @@ import fixtures.xml.models.Slideshow;
 import fixtures.xml.models.XmlGetHeadersHeaders;
 import org.joda.time.DateTime;
 import org.junit.BeforeClass;
+import org.junit.Ignore;
 import org.junit.Test;
 
 import java.util.List;
@@ -99,7 +100,7 @@ public class XmlsTests {
     public void getRootList() {
         List<Banana> bananas = client.xmls().getRootList();
         assertNotNull(bananas);
-        assertEquals(3, bananas.size());
+        assertEquals(2, bananas.size());
 
         assertEquals("Cavendish", bananas.get(0).name());
         assertEquals("Sweet", bananas.get(0).flavor());
@@ -108,10 +109,24 @@ public class XmlsTests {
         assertEquals("Plantain", bananas.get(1).name());
         assertEquals("Savory", bananas.get(1).flavor());
         assertEquals("2018-02-28T00:40:00.000Z", bananas.get(1).expiration().toString());
+    }
 
-        assertEquals("Unknown Banana", bananas.get(2).name());
-        assertEquals("", bananas.get(2).flavor());
-        assertEquals("2012-02-24T00:53:52.780Z", bananas.get(2).expiration().toString());
+    @Test
+    @Ignore("FIXME: Update to Jackson 2.9 to interpret empty element for banana.flavor() as empty string")
+    public void getItemWithEmptyChildElement() {
+        Banana banana = client.xmls().getEmptyChildElement();
+        assertNotNull(banana);
+
+        assertEquals("Unknown Banana", banana.name());
+        assertEquals("", banana.flavor());
+        assertEquals("2012-02-24T00:53:52.780Z", banana.expiration().toString());
+    }
+
+    @Test
+    @Ignore("FIXME: Update to Jackson 2.9 to roundtrip empty element")
+    public void putItemWithEmptyChildElement() {
+        Banana banana = client.xmls().getEmptyChildElement();
+        client.xmls().putEmptyChildElement(banana);
     }
 
     @Test

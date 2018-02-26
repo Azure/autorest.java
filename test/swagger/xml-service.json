@@ -275,6 +275,48 @@
           }
         }
       }
+    },
+    "/xml/empty-child-element": {
+      "get": {
+        "operationId": "xml_getEmptyChildElement",
+        "description": "Gets an XML document with an empty child element.",
+        "tags": [
+          "XML Operations"
+        ],
+        "responses": {
+          "200": {
+            "description": "The unknown banana.",
+            "schema": {
+              "$ref": "#/definitions/Banana",
+              "xml": {
+                "name": "banana"
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "operationId": "xml_putEmptyChildElement",
+        "description": "Puts a value with an empty child element.",
+        "tags": [
+          "XML Operations"
+        ],
+        "parameters": [
+          {
+            "name": "banana",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/Banana"
+            },
+            "required": true
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Indicates success."
+          }
+        }
+      }
     }
   },
   "definitions": {
@@ -396,13 +438,16 @@
           }
         },
         "expiration": {
-          "description": "the time at which you should reconsider eating this banana",
+          "description": "The time at which you should reconsider eating this banana",
           "type": "string",
           "format": "date-time",
           "xml": {
             "name": "expiration"
           }
         }
+      },
+      "xml": {
+        "name": "banana"
       }
     }
   }

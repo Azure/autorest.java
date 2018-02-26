@@ -112,6 +112,14 @@ public final class XmlsImpl implements Xmls {
         @PUT("xml/empty-root-list")
         @ExpectedResponses({201})
         Single<RestResponse<Void, Void>> putEmptyRootList(@BodyParam("application/xml; charset=utf-8") BananasWrapper bananas);
+
+        @GET("xml/empty-child-element")
+        @ExpectedResponses({200})
+        Single<RestResponse<Void, Banana>> getEmptyChildElement();
+
+        @PUT("xml/empty-child-element")
+        @ExpectedResponses({201})
+        Single<RestResponse<Void, Void>> putEmptyChildElement(@BodyParam("application/xml; charset=utf-8") Banana banana);
     }
 
     /**
@@ -641,6 +649,104 @@ public final class XmlsImpl implements Xmls {
      */
     public Completable putEmptyRootListAsync(@NonNull List<Banana> bananas) {
         return putEmptyRootListWithRestResponseAsync(bananas)
+            .toCompletable();
+    }
+
+    /**
+     * Gets an XML document with an empty child element.
+     *
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the Banana object if successful.
+     */
+    public Banana getEmptyChildElement() {
+        return getEmptyChildElementAsync().blockingGet();
+    }
+
+    /**
+     * Gets an XML document with an empty child element.
+     *
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link ServiceFuture&lt;Banana&gt;} object.
+     */
+    public ServiceFuture<Banana> getEmptyChildElementAsync(ServiceCallback<Banana> serviceCallback) {
+        return ServiceFuture.fromBody(getEmptyChildElementAsync(), serviceCallback);
+    }
+
+    /**
+     * Gets an XML document with an empty child element.
+     *
+     * @return the {@link Single&lt;RestResponse&lt;Void, Banana&gt;&gt;} object if successful.
+     */
+    public Single<RestResponse<Void, Banana>> getEmptyChildElementWithRestResponseAsync() {
+        return service.getEmptyChildElement();
+    }
+
+    /**
+     * Gets an XML document with an empty child element.
+     *
+     * @return the {@link Maybe&lt;Banana&gt;} object if successful.
+     */
+    public Maybe<Banana> getEmptyChildElementAsync() {
+        return getEmptyChildElementWithRestResponseAsync()
+            .flatMapMaybe(new Function<RestResponse<Void, Banana>, Maybe<Banana>>() {
+                public Maybe<Banana> apply(RestResponse<Void, Banana> restResponse) {
+                    if (restResponse.body() == null) {
+                        return Maybe.empty();
+                    } else {
+                        return Maybe.just(restResponse.body());
+                    }
+                }
+            });
+    }
+
+    /**
+     * Puts a value with an empty child element.
+     *
+     * @param banana the Banana value.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
+    public void putEmptyChildElement(@NonNull Banana banana) {
+        putEmptyChildElementAsync(banana).blockingAwait();
+    }
+
+    /**
+     * Puts a value with an empty child element.
+     *
+     * @param banana the Banana value.
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link ServiceFuture&lt;Void&gt;} object.
+     */
+    public ServiceFuture<Void> putEmptyChildElementAsync(@NonNull Banana banana, ServiceCallback<Void> serviceCallback) {
+        return ServiceFuture.fromBody(putEmptyChildElementAsync(banana), serviceCallback);
+    }
+
+    /**
+     * Puts a value with an empty child element.
+     *
+     * @param banana the Banana value.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
+     */
+    public Single<RestResponse<Void, Void>> putEmptyChildElementWithRestResponseAsync(@NonNull Banana banana) {
+        if (banana == null) {
+            throw new IllegalArgumentException("Parameter banana is required and cannot be null.");
+        }
+        Validator.validate(banana);
+        return service.putEmptyChildElement(banana);
+    }
+
+    /**
+     * Puts a value with an empty child element.
+     *
+     * @param banana the Banana value.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the {@link Completable} object if successful.
+     */
+    public Completable putEmptyChildElementAsync(@NonNull Banana banana) {
+        return putEmptyChildElementWithRestResponseAsync(banana)
             .toCompletable();
     }
 }
