@@ -131,6 +131,192 @@
           }
         }
       }
+    },
+    "/xml/empty-list": {
+      "get": {
+        "operationId": "xml_getEmptyList",
+        "description": "Get an empty list.",
+        "tags": [
+          "XML Operations"
+        ],
+        "responses": {
+          "200": {
+            "description": "The empty list.",
+            "schema": {
+              "$ref": "#/definitions/Slideshow"
+            }
+          }
+        }
+      }
+    },
+    "/xml/empty-wrapped-lists": {
+      "get": {
+        "operationId": "xml_getEmptyWrappedLists",
+        "description": "Gets some empty wrapped lists.",
+        "tags": [
+          "XML Operations"
+        ],
+        "responses": {
+          "200": {
+            "description": "The empty lists.",
+            "schema": {
+              "$ref": "#/definitions/AppleBarrel"
+            }
+          }
+        }
+      }
+    },
+    "/xml/root-list": {
+      "get": {
+        "operationId": "xml_getRootList",
+        "description": "Gets a list as the root element.",
+        "tags": [
+          "XML Operations"
+        ],
+        "responses": {
+          "200": {
+            "description": "The root list.",
+            "schema": {
+              "type": "array",
+              "xml": {
+                "name": "bananas"
+              },
+              "items": {
+                "$ref": "#/definitions/Banana"
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "operationId": "xml_putRootList",
+        "description": "Puts a list as the root element.",
+        "tags": [
+          "XML Operations"
+        ],
+        "parameters": [
+          {
+            "name": "bananas",
+            "in": "body",
+            "schema": {
+              "type": "array",
+              "xml": {
+                "name": "bananas",
+                "wrapped": true
+              },
+              "items": {
+                "$ref": "#/definitions/Banana",
+                "xml": {
+                  "name": "banana"
+                }
+              }
+            },
+            "required": true
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Indicates success."
+          }
+        }
+      }
+    },
+    "/xml/empty-root-list": {
+      "get": {
+        "operationId": "xml_getEmptyRootList",
+        "description": "Gets an empty list as the root element.",
+        "tags": [
+          "XML Operations"
+        ],
+        "responses": {
+          "200": {
+            "description": "The root list.",
+            "schema": {
+              "type": "array",
+              "xml": {
+                "name": "bananas"
+              },
+              "items": {
+                "$ref": "#/definitions/Banana"
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "operationId": "xml_putEmptyRootList",
+        "description": "Puts an empty list as the root element.",
+        "tags": [
+          "XML Operations"
+        ],
+        "parameters": [
+          {
+            "name": "bananas",
+            "in": "body",
+            "schema": {
+              "type": "array",
+              "xml": {
+                "name": "bananas",
+                "wrapped": true
+              },
+              "items": {
+                "$ref": "#/definitions/Banana",
+                "xml": {
+                  "name": "banana"
+                }
+              }
+            },
+            "required": true
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Indicates success."
+          }
+        }
+      }
+    },
+    "/xml/empty-child-element": {
+      "get": {
+        "operationId": "xml_getEmptyChildElement",
+        "description": "Gets an XML document with an empty child element.",
+        "tags": [
+          "XML Operations"
+        ],
+        "responses": {
+          "200": {
+            "description": "The unknown banana.",
+            "schema": {
+              "$ref": "#/definitions/Banana",
+              "xml": {
+                "name": "banana"
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "operationId": "xml_putEmptyChildElement",
+        "description": "Puts a value with an empty child element.",
+        "tags": [
+          "XML Operations"
+        ],
+        "parameters": [
+          {
+            "name": "banana",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/Banana"
+            },
+            "required": true
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Indicates success."
+          }
+        }
+      }
     }
   },
   "definitions": {
@@ -233,6 +419,35 @@
             "wrapped": true
           }
         }
+      }
+    },
+    "Banana": {
+      "type": "object",
+      "description": "A banana.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "xml": {
+            "name": "name"
+          }
+        },
+        "flavor": {
+          "type": "string",
+          "xml": {
+            "name": "flavor"
+          }
+        },
+        "expiration": {
+          "description": "The time at which you should reconsider eating this banana",
+          "type": "string",
+          "format": "date-time",
+          "xml": {
+            "name": "expiration"
+          }
+        }
+      },
+      "xml": {
+        "name": "banana"
       }
     }
   }
