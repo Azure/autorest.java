@@ -144,7 +144,11 @@ namespace AutoRest.Java.Model
         {
             if (UnexpectedResponseExceptionType != null)
             {
-                imports.Add("com.microsoft.rest.v2.annotations.UnexpectedResponseExceptionType");
+                if (includeImplementationImports)
+                {
+                    imports.Add("com.microsoft.rest.v2.annotations.UnexpectedResponseExceptionType");
+                }
+
                 UnexpectedResponseExceptionType.AddImportsTo(imports, includeImplementationImports);
             }
 
