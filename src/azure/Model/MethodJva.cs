@@ -129,17 +129,7 @@ namespace AutoRest.Java.Azure.Model
                 {
                     declaration = declaration.Replace("@Path(\"nextUrl\")", "@Url");
                 }
-                foreach (var parameter in RetrofitParameters.Where(p => 
-                    p.Location == ParameterLocation.Path || p.Location == ParameterLocation.Query))
-                {
-                    if (parameter.Extensions.ContainsKey(AzureExtensions.SkipUrlEncodingExtension) &&
-                        (bool) parameter.Extensions[AzureExtensions.SkipUrlEncodingExtension] == true)
-                    {
-                        declaration = declaration.Replace(
-                            string.Format(CultureInfo.InvariantCulture, "@{0}(\"{1}\")", parameter.Location.ToString(), parameter.SerializedName),
-                            string.Format(CultureInfo.InvariantCulture, "@{0}(value = \"{1}\", encoded = true)", parameter.Location.ToString(), parameter.SerializedName));
-                    }
-                }
+
                 return declaration;
             }
         }
@@ -208,7 +198,7 @@ namespace AutoRest.Java.Azure.Model
                 {
                     parameters += string.Format(CultureInfo.InvariantCulture, "final ServiceCallback<{0}> serviceCallback", ReturnTypeJva.GenericBodyClientTypeString);
                 }
-                
+
                 return parameters;
             }
         }
@@ -269,8 +259,8 @@ namespace AutoRest.Java.Azure.Model
         }
 
         [JsonIgnore]
-        public override bool IsParameterizedHost => 
-            (CodeModel?.Extensions?.ContainsKey(SwaggerExtensions.ParameterizedHostExtension) ?? false) && 
+        public override bool IsParameterizedHost =>
+            (CodeModel?.Extensions?.ContainsKey(SwaggerExtensions.ParameterizedHostExtension) ?? false) &&
             !IsPagingNextOperation;
 
         [JsonIgnore]
@@ -351,7 +341,7 @@ namespace AutoRest.Java.Azure.Model
         }
 
         [JsonIgnore]
-        public override string ReturnTypeResponseName => 
+        public override string ReturnTypeResponseName =>
             ReturnTypeJv?.BodyClientType?.ServiceResponseVariant()?.Name;
 
         public string PagingGroupedParameterTransformation(bool filterRequired = false)
@@ -420,7 +410,7 @@ namespace AutoRest.Java.Azure.Model
                 var builder = new IndentedStringBuilder();
                 builder.AppendLine("{0} response = {1}Delegate(call.execute());",
                     ReturnTypeJva.WireResponseTypeString, this.Name);
-                    
+
                 string invocation;
                 MethodJva nextMethod = GetPagingNextMethodWithInvocation(out invocation);
 
@@ -432,7 +422,7 @@ namespace AutoRest.Java.Azure.Model
                         OperationExceptionTypeString)
                         .Indent();
                         TransformPagingGroupedParameter(builder, nextMethod, filterRequired);
-                        builder.AppendLine("return {0}({1}).body();", 
+                        builder.AppendLine("return {0}({1}).body();",
                             invocation, filterRequired ? nextMethod.MethodDefaultParameterInvocation : nextMethod.MethodParameterInvocation)
                     .Outdent().AppendLine("}")
                 .Outdent().AppendLine("};");
