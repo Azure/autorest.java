@@ -23,5 +23,7 @@ namespace AutoRest.Java.Model
         SimpleAsync,
         SimpleAsyncServiceCallback,
         SimpleAsyncRestResponse,
+
+        Resumable
     }
 }
