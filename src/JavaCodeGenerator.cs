@@ -4671,30 +4671,27 @@ namespace AutoRest.Java
                 {
                     if (restAPIMethod.IsResumable)
                     {
-                        foreach (IEnumerable<AutoRestParameter> autoRestParameters in autoRestParameterLists)
-                        {
-                            var opDefParam = restAPIMethod.Parameters.First();
-                            var parameters = new List<Parameter>();
-                            var expressionsToValidate = new List<string>();
-                            parameters.Add(
-                                new Parameter(
-                                    opDefParam.Description,
-                                    false,
-                                    opDefParam.Type,
-                                    opDefParam.Name, true,
-                                    new List<ClassType>()));
-                            clientMethods.Add(new ClientMethod(
-                                description: restAPIMethod.Description + " (resume watch)",
-                                returnValue: new ReturnValue(
-                                    description: "the observable for the request",
-                                    type: GenericType.Observable(GenericType.OperationStatus(restAPIMethodReturnBodyClientType))),
-                                name: restAPIMethod.Name,
-                                parameters: parameters,
-                                onlyRequiredParameters: true,
-                                type: ClientMethodType.Resumable,
-                                restAPIMethod: restAPIMethod,
-                                expressionsToValidate: expressionsToValidate));
-                        }
+                        var opDefParam = restAPIMethod.Parameters.First();
+                        var parameters = new List<Parameter>();
+                        var expressionsToValidate = new List<string>();
+                        parameters.Add(
+                            new Parameter(
+                                opDefParam.Description,
+                                false,
+                                opDefParam.Type,
+                                opDefParam.Name, true,
+                                new List<ClassType>()));
+                        clientMethods.Add(new ClientMethod(
+                            description: restAPIMethod.Description + " (resume watch)",
+                            returnValue: new ReturnValue(
+                                description: "the observable for the request",
+                                type: GenericType.Observable(GenericType.OperationStatus(restAPIMethodReturnBodyClientType))),
+                            name: restAPIMethod.Name,
+                            parameters: parameters,
+                            onlyRequiredParameters: true,
+                            type: ClientMethodType.Resumable,
+                            restAPIMethod: restAPIMethod,
+                            expressionsToValidate: expressionsToValidate));
 
                         addSimpleClientMethods = false;
                     }
