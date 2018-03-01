@@ -1081,33 +1081,23 @@ namespace AutoRest.Java
             }
             else
             {
-                IType restResponseBodyType;
-                if (settings.IsAzureOrFluent && responseBodyWireListType != null && (autorestRestAPIMethodReturnTypeIsPaged || restAPIMethodSimulateMethodAsPagingOperation))
-                {
-                    restResponseBodyType = responseBodyWireListType;
-                }
-                else
-                {
-                    restResponseBodyType = responseBodyType;
-                }
-
                 IType singleValueType;
                 if (autoRestRestAPIMethodReturnType.Headers != null)
                 {
                     string className = autoRestMethod.MethodGroup.Name.ToPascalCase() + autoRestMethod.Name.ToPascalCase() + "Response";
                     singleValueType = new ClassType(settings.Package + "." + settings.ModelsSubpackage, className);
                 }
-                else if (restResponseBodyType.Equals(GenericType.FlowableByteBuffer))
+                else if (responseBodyType.Equals(GenericType.FlowableByteBuffer))
                 {
                     singleValueType = ClassType.StreamResponse;
                 }
-                else if (restResponseBodyType.Equals(PrimitiveType.Void))
+                else if (responseBodyType.Equals(PrimitiveType.Void))
                 {
                     singleValueType = ClassType.VoidResponse;
                 }
                 else
                 {
-                    singleValueType = GenericType.BodyResponse(ConvertToClientType(responseBodyType));
+                    singleValueType = GenericType.BodyResponse(responseBodyType);
                 }
                 restAPIMethodReturnType = GenericType.Single(singleValueType);
             }
@@ -4928,7 +4918,7 @@ namespace AutoRest.Java
                             description: restAPIMethod.Description,
                             returnValue: new ReturnValue(
                                 description: $"a Single which performs the network request upon subscription.",
-                                type: restAPIMethod.ReturnType),
+                                type: ConvertToClientType(restAPIMethod.ReturnType)),
                             name: GetSimpleAsyncRestResponseMethodName(restAPIMethod),
                             parameters: parameters,
                             onlyRequiredParameters: onlyRequiredParameters,
