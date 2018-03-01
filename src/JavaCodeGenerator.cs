@@ -207,6 +207,11 @@ namespace AutoRest.Java
                 javaFiles.Add(GetMethodGroupClientJavaFile(methodGroupClient, javaSettings));
             }
 
+            foreach (ResponseModel rm in service.ResponseModels)
+            {
+                javaFiles.Add(GetResponseJavaFile(rm, javaSettings));
+            }
+
             foreach (ServiceModel model in service.Models)
             {
                 javaFiles.Add(GetModelJavaFile(model, javaSettings));
@@ -691,11 +696,26 @@ namespace AutoRest.Java
             IEnumerable<ServiceModel> models = autoRestModelTypes
                 .Select((AutoRestCompositeType autoRestCompositeType) => ParseModel(autoRestCompositeType, settings, serviceModels))
                 .ToArray();
+
+            IEnumerable<ResponseModel> responseModels = codeModel.Methods
+                .Where(m => m.ReturnType.Headers != null)
+                .Select(m => ParseResponse(m, settings))
+                .ToList();
+
             #endregion
 
             ServiceManager manager = ParseManager(serviceClientName, codeModel, settings);
 
-            return new Service(serviceClientName, serviceClientDescription, enumTypes, exceptions, xmlSequenceWrappers, models, manager, serviceClient);
+            return new Service(serviceClientName, serviceClientDescription, enumTypes, exceptions, xmlSequenceWrappers, responseModels, models, manager, serviceClient);
+        }
+
+        private static ResponseModel ParseResponse(AutoRestMethod method, JavaSettings settings)
+        {
+            string name = method.MethodGroup.Name.ToPascalCase() + method.Name.ToPascalCase() + "Response";
+            string package = settings.Package + "." + settings.ModelsSubpackage;
+            IType headersType = ParseType(method.ReturnType.Headers, method.Extensions, settings).AsNullable();
+            IType bodyType = ParseType(method.ReturnType.Body, method.Extensions, settings).AsNullable();
+            return new ResponseModel(name, package, headersType, bodyType);
         }
 
         private static ServiceClient ParseServiceClient(AutoRestCodeModel codeModel, JavaSettings settings)
@@ -1061,8 +1081,6 @@ namespace AutoRest.Java
             }
             else
             {
-                IType restResponseHeadersType = ConvertToClientType(ParseType(autoRestRestAPIMethodReturnType.Headers, settings));
-
                 IType restResponseBodyType;
                 if (settings.IsAzureOrFluent && responseBodyWireListType != null && (autorestRestAPIMethodReturnTypeIsPaged || restAPIMethodSimulateMethodAsPagingOperation))
                 {
@@ -1073,7 +1091,25 @@ namespace AutoRest.Java
                     restResponseBodyType = responseBodyType;
                 }
 
-                restAPIMethodReturnType = GenericType.Single(GenericType.RestResponse(restResponseHeadersType, responseBodyType));
+                IType singleValueType;
+                if (autoRestRestAPIMethodReturnType.Headers != null)
+                {
+                    string className = autoRestMethod.MethodGroup.Name.ToPascalCase() + autoRestMethod.Name.ToPascalCase() + "Response";
+                    singleValueType = new ClassType(settings.Package + "." + settings.ModelsSubpackage, className);
+                }
+                else if (restResponseBodyType.Equals(GenericType.FlowableByteBuffer))
+                {
+                    singleValueType = ClassType.StreamResponse;
+                }
+                else if (restResponseBodyType.Equals(PrimitiveType.Void))
+                {
+                    singleValueType = ClassType.VoidResponse;
+                }
+                else
+                {
+                    singleValueType = GenericType.BodyResponse(ConvertToClientType(responseBodyType));
+                }
+                restAPIMethodReturnType = GenericType.Single(singleValueType);
             }
 
             List<RestAPIParameter> restAPIMethodParameters = new List<RestAPIParameter>();
@@ -2401,6 +2437,70 @@ namespace AutoRest.Java
             return shouldParseModelType;
         }
 
+        public static JavaFile GetResponseJavaFile(ResponseModel response, JavaSettings settings)
+        {
+            JavaFile javaFile = GetJavaFileWithHeaderAndPackage(response.Package, settings, response.Name);
+            ISet<string> imports = new HashSet<string> { "java.util.Map" };
+            IType restResponseType = GenericType.RestResponse(response.HeadersType, response.BodyType);
+            restResponseType.AddImportsTo(imports, includeImplementationImports: true);
+
+            bool implementCloseable = response.BodyType.Equals(GenericType.FlowableByteBuffer);
+            if (implementCloseable)
+            {
+                imports.Add("java.io.Closeable");
+                imports.Add("io.reactivex.internal.functions.Functions");
+            }
+
+            javaFile.Import(imports);
+
+            string classSignature = implementCloseable
+                ? $"{response.Name} extends {restResponseType} implements Closeable"
+                : $"{response.Name} extends {restResponseType}";
+
+            javaFile.JavadocComment(javadoc =>
+            {
+                javadoc.Description($"Contains all response data for {response.Name}.");
+            });
+            javaFile.PublicFinalClass(classSignature, classBlock =>
+            {
+                if (!response.HeadersType.Equals(ClassType.Void))
+                {
+                    classBlock.JavadocComment(javadoc => javadoc.Return("the deserialized response headers"));
+                    classBlock.Annotation("Override");
+                    classBlock.PublicMethod($"{response.HeadersType} headers()", methodBlock => methodBlock.Return("super.headers()"));
+                }
+
+                if (!response.BodyType.Equals(ClassType.Void))
+                {
+                    if (response.BodyType.Equals(GenericType.FlowableByteBuffer))
+                    {
+                        classBlock.JavadocComment(javadoc => javadoc.Return("the response content stream"));
+                    }
+                    else
+                    {
+                        classBlock.JavadocComment(javadoc => javadoc.Return("the deserialized response body"));
+                    }
+
+
+                    classBlock.Annotation("Override");
+                    classBlock.PublicMethod($"{response.BodyType} body()", methodBlock => methodBlock.Return("super.body()"));
+                }
+
+                classBlock.PublicConstructor(
+                    $"{response.Name}(int statusCode, {response.HeadersType} headers, Map<String, String> rawHeaders, {response.BodyType} body)",
+                    ctorBlock => ctorBlock.Line("super(statusCode, headers, rawHeaders, body);"));
+
+                if (implementCloseable)
+                {
+                    classBlock.JavadocComment(javadoc => javadoc.Description("Disposes of the connection associated with this stream response."));
+                    classBlock.Annotation("Override");
+                    classBlock.PublicMethod("void close()",
+                        methodBlock => methodBlock.Line("body().subscribe(Functions.emptyConsumer(), Functions.<Throwable>emptyConsumer()).dispose();"));
+                }
+            });
+            return javaFile;
+        }
+
         public static JavaFile GetModelJavaFile(ServiceModel model, JavaSettings settings)
         {
             JavaFile javaFile = GetJavaFileWithHeaderAndPackage(model.Package, settings, model.Name);
@@ -3497,10 +3597,6 @@ namespace AutoRest.Java
                     pageType = restAPIMethodReturnBodyClientType.AsNullable();
                 }
 
-                GenericType restResponseType = GenericType.RestResponse(
-                    headersType: ConvertToClientType(ParseType(autoRestRestAPIMethodReturnType.Headers, settings)),
-                    bodyType: deserializedResponseBodyType);
-
                 Parameter serviceCallbackParameter = new Parameter(
                     description: "the async ServiceCallback to handle successful and failed responses.",
                     isFinal: false,
@@ -4193,16 +4289,7 @@ namespace AutoRest.Java
 
                             string restAPIMethodArgumentList = GetRestAPIMethodArgumentList(autoRestMethodOrderedRetrofitParameters, settings);
 
-                            function.Line($"return service.{restAPIMethod.Name}({restAPIMethodArgumentList}).map(new {GenericType.Function(restResponseType, pageType)}() {{");
-                            function.Indent(() =>
-                            {
-                                function.Annotation("Override");
-                                function.Block($"public {pageType} apply({restResponseType} response)", subFunction =>
-                                {
-                                    subFunction.Return("response.body()");
-                                });
-                            });
-                            function.Line("});");
+                            function.Return($"service.{restAPIMethod.Name}({restAPIMethodArgumentList}).map(res -> res.body())");
                         });
                         break;
 
@@ -4254,16 +4341,7 @@ namespace AutoRest.Java
                             ApplyParameterTransformations(function, clientMethod, settings);
                             ConvertClientTypesToWireTypes(function, autoRestMethodRetrofitParameters, methodClientReference, settings);
                             string restAPIMethodArgumentList = GetRestAPIMethodArgumentList(autoRestMethodOrderedRetrofitParameters, settings);
-                            function.Line($"return service.{clientMethod.RestAPIMethod.Name}({restAPIMethodArgumentList}).map(new {GenericType.Function(restResponseType, pageType)}() {{");
-                            function.Indent(() =>
-                            {
-                                function.Annotation("Override");
-                                function.Block($"public {pageType} apply({restResponseType} response)", subFunction =>
-                                {
-                                    subFunction.Return("response.body()");
-                                });
-                            });
-                            function.Line("}).toObservable();");
+                            function.Return($"service.{clientMethod.RestAPIMethod.Name}({restAPIMethodArgumentList}).map(res -> res.body()).toObservable()");
                         });
                         break;
 
@@ -4464,34 +4542,11 @@ namespace AutoRest.Java
                             {
                                 if (restAPIMethodReturnBodyClientType != PrimitiveType.Void)
                                 {
-                                    function.Line($".flatMapMaybe(new {GenericType.Function(restResponseType, clientMethod.ReturnValue.Type)}() {{");
-                                    function.Indent(() =>
-                                    {
-                                        function.Block($"public {clientMethod.ReturnValue.Type} apply({restResponseType} restResponse)", subFunction =>
-                                        {
-                                            subFunction.If("restResponse.body() == null", ifBlock =>
-                                            {
-                                                ifBlock.Return("Maybe.empty()");
-                                            })
-                                            .Else(elseBlock =>
-                                            {
-                                                elseBlock.Return("Maybe.just(restResponse.body())");
-                                            });
-                                        });
-                                    });
-                                    function.Line("});");
+                                    function.Line($".flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));");
                                 }
                                 else if (isFluentDelete)
                                 {
-                                    function.Line($".flatMapMaybe(new {GenericType.Function(restResponseType, clientMethod.ReturnValue.Type)}() {{");
-                                    function.Indent(() =>
-                                    {
-                                        function.Block($"public {clientMethod.ReturnValue.Type} apply({restResponseType} restResponse)", subFunction =>
-                                        {
-                                            subFunction.Return("Maybe.empty()");
-                                        });
-                                    });
-                                    function.Line("});");
+                                    function.Line($".flatMapMaybe(res -> Maybe.empty());");
                                 }
                                 else
                                 {
@@ -4869,14 +4924,11 @@ namespace AutoRest.Java
                             restAPIMethod: restAPIMethod,
                             expressionsToValidate: expressionsToValidate));
 
-                        GenericType singleRestResponseReturnType = GenericType.Single(GenericType.RestResponse(
-                            headersType: ConvertToClientType(ParseType(autoRestRestAPIMethodReturnType.Headers, settings)),
-                            bodyType: deserializedResponseBodyType));
                         clientMethods.Add(new ClientMethod(
                             description: restAPIMethod.Description,
                             returnValue: new ReturnValue(
                                 description: $"a Single which performs the network request upon subscription.",
-                                type: singleRestResponseReturnType),
+                                type: restAPIMethod.ReturnType),
                             name: GetSimpleAsyncRestResponseMethodName(restAPIMethod),
                             parameters: parameters,
                             onlyRequiredParameters: onlyRequiredParameters,

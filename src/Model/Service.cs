@@ -21,13 +21,23 @@ namespace AutoRest.Java.Model
         /// <param name="models"></param>
         /// <param name="manager"></param>
         /// <param name="serviceClient"></param>
-        public Service(string clientName, string clientDescription, IEnumerable<EnumType> enums, IEnumerable<ServiceException> exceptions, IEnumerable<XmlSequenceWrapper> xmlSequenceWrappers, IEnumerable<ServiceModel> models, ServiceManager manager, ServiceClient serviceClient)
+        public Service(
+            string clientName,
+            string clientDescription,
+            IEnumerable<EnumType> enums,
+            IEnumerable<ServiceException> exceptions,
+            IEnumerable<XmlSequenceWrapper> xmlSequenceWrappers,
+            IEnumerable<ResponseModel> responseModels,
+            IEnumerable<ServiceModel> models,
+            ServiceManager manager,
+            ServiceClient serviceClient)
         {
             ClientName = clientName;
             ClientDescription = clientDescription;
             Enums = enums;
             Exceptions = exceptions;
             XmlSequenceWrappers = xmlSequenceWrappers;
+            ResponseModels = responseModels;
             Models = models;
             Manager = manager;
             ServiceClient = serviceClient;
@@ -57,6 +67,11 @@ namespace AutoRest.Java.Model
         /// Get the XML sequence wrappers that are used by this service.
         /// </summary>
         public IEnumerable<XmlSequenceWrapper> XmlSequenceWrappers { get; }
+
+        /// <summary>
+        /// Get the response models which contain the response status code, headers and body for each service method.
+        /// </summary>
+        public IEnumerable<ResponseModel> ResponseModels { get; }
 
         /// <summary>
         /// Get the model types that are used by this service.
