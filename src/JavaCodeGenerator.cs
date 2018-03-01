@@ -713,9 +713,10 @@ namespace AutoRest.Java
         {
             string name = method.MethodGroup.Name.ToPascalCase() + method.Name.ToPascalCase() + "Response";
             string package = settings.Package + "." + settings.ModelsSubpackage;
+            string description = $"Contains all response data for the {method.Name} operation.";
             IType headersType = ParseType(method.ReturnType.Headers, method.Extensions, settings).AsNullable();
             IType bodyType = ParseType(method.ReturnType.Body, method.Extensions, settings).AsNullable();
-            return new ResponseModel(name, package, headersType, bodyType);
+            return new ResponseModel(name, package, description, headersType, bodyType);
         }
 
         private static ServiceClient ParseServiceClient(AutoRestCodeModel codeModel, JavaSettings settings)
@@ -2434,8 +2435,8 @@ namespace AutoRest.Java
             IType restResponseType = GenericType.RestResponse(response.HeadersType, response.BodyType);
             restResponseType.AddImportsTo(imports, includeImplementationImports: true);
 
-            bool implementCloseable = response.BodyType.Equals(GenericType.FlowableByteBuffer);
-            if (implementCloseable)
+            bool isStreamResponse = response.BodyType.Equals(GenericType.FlowableByteBuffer);
+            if (isStreamResponse)
             {
                 imports.Add("java.io.Closeable");
                 imports.Add("io.reactivex.internal.functions.Functions");
@@ -2443,16 +2444,29 @@ namespace AutoRest.Java
 
             javaFile.Import(imports);
 
-            string classSignature = implementCloseable
+            string classSignature = isStreamResponse
                 ? $"{response.Name} extends {restResponseType} implements Closeable"
                 : $"{response.Name} extends {restResponseType}";
 
             javaFile.JavadocComment(javadoc =>
             {
-                javadoc.Description($"Contains all response data for {response.Name}.");
+                javadoc.Description(response.Description);
             });
+
             javaFile.PublicFinalClass(classSignature, classBlock =>
             {
+                classBlock.JavadocComment(javadoc =>
+                {
+                    javadoc.Description($"Creates an instance of {response.Name}.");
+                    javadoc.Param("statusCode", "the status code of the HTTP response");
+                    javadoc.Param("headers", "the deserialized headers of the HTTP response");
+                    javadoc.Param("rawHeaders", "the raw headers of the HTTP response");
+                    javadoc.Param("body", isStreamResponse ? "the body content stream" : "the deserialized body of the HTTP response");
+                });
+                classBlock.PublicConstructor(
+                    $"{response.Name}(int statusCode, {response.HeadersType} headers, Map<String, String> rawHeaders, {response.BodyType} body)",
+                    ctorBlock => ctorBlock.Line("super(statusCode, headers, rawHeaders, body);"));
+
                 if (!response.HeadersType.Equals(ClassType.Void))
                 {
                     classBlock.JavadocComment(javadoc => javadoc.Return("the deserialized response headers"));
@@ -2476,11 +2490,7 @@ namespace AutoRest.Java
                     classBlock.PublicMethod($"{response.BodyType} body()", methodBlock => methodBlock.Return("super.body()"));
                 }
 
-                classBlock.PublicConstructor(
-                    $"{response.Name}(int statusCode, {response.HeadersType} headers, Map<String, String> rawHeaders, {response.BodyType} body)",
-                    ctorBlock => ctorBlock.Line("super(statusCode, headers, rawHeaders, body);"));
-
-                if (implementCloseable)
+                if (isStreamResponse)
                 {
                     classBlock.JavadocComment(javadoc => javadoc.Description("Disposes of the connection associated with this stream response."));
                     classBlock.Annotation("Override");
