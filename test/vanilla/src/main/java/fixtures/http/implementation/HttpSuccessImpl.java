@@ -168,7 +168,7 @@ public final class HttpSuccessImpl implements HttpSuccess {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;Void&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     public ServiceFuture<Void> head200Async(ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(head200Async(), serviceCallback);
@@ -177,7 +177,7 @@ public final class HttpSuccessImpl implements HttpSuccess {
     /**
      * Return 200 status code if successful.
      *
-     * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Single<RestResponse<Void, Void>> head200WithRestResponseAsync() {
         return service.head200();
@@ -186,7 +186,7 @@ public final class HttpSuccessImpl implements HttpSuccess {
     /**
      * Return 200 status code if successful.
      *
-     * @return the {@link Completable} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Completable head200Async() {
         return head200WithRestResponseAsync()
@@ -209,7 +209,7 @@ public final class HttpSuccessImpl implements HttpSuccess {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;Boolean&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     public ServiceFuture<Boolean> get200Async(ServiceCallback<Boolean> serviceCallback) {
         return ServiceFuture.fromBody(get200Async(), serviceCallback);
@@ -218,7 +218,7 @@ public final class HttpSuccessImpl implements HttpSuccess {
     /**
      * Get 200 success.
      *
-     * @return the {@link Single&lt;RestResponse&lt;Void, Boolean&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Single<RestResponse<Void, Boolean>> get200WithRestResponseAsync() {
         return service.get200();
@@ -227,7 +227,7 @@ public final class HttpSuccessImpl implements HttpSuccess {
     /**
      * Get 200 success.
      *
-     * @return the {@link Maybe&lt;Boolean&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Maybe<Boolean> get200Async() {
         return get200WithRestResponseAsync()
@@ -257,7 +257,7 @@ public final class HttpSuccessImpl implements HttpSuccess {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;Void&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     public ServiceFuture<Void> put200Async(ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(put200Async(), serviceCallback);
@@ -266,7 +266,7 @@ public final class HttpSuccessImpl implements HttpSuccess {
     /**
      * Put boolean value true returning 200 success.
      *
-     * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Single<RestResponse<Void, Void>> put200WithRestResponseAsync() {
         final Boolean booleanValue = null;
@@ -276,7 +276,7 @@ public final class HttpSuccessImpl implements HttpSuccess {
     /**
      * Put boolean value true returning 200 success.
      *
-     * @return the {@link Completable} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Completable put200Async() {
         return put200WithRestResponseAsync()
@@ -301,7 +301,7 @@ public final class HttpSuccessImpl implements HttpSuccess {
      * @param booleanValue Simple boolean value true.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;Void&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     public ServiceFuture<Void> put200Async(Boolean booleanValue, ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(put200Async(booleanValue), serviceCallback);
@@ -312,7 +312,7 @@ public final class HttpSuccessImpl implements HttpSuccess {
      *
      * @param booleanValue Simple boolean value true.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Single<RestResponse<Void, Void>> put200WithRestResponseAsync(Boolean booleanValue) {
         return service.put200(booleanValue);
@@ -323,7 +323,7 @@ public final class HttpSuccessImpl implements HttpSuccess {
      *
      * @param booleanValue Simple boolean value true.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link Completable} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Completable put200Async(Boolean booleanValue) {
         return put200WithRestResponseAsync(booleanValue)
@@ -345,7 +345,7 @@ public final class HttpSuccessImpl implements HttpSuccess {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;Void&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     public ServiceFuture<Void> patch200Async(ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(patch200Async(), serviceCallback);
@@ -354,7 +354,7 @@ public final class HttpSuccessImpl implements HttpSuccess {
     /**
      * Patch true Boolean value in request returning 200.
      *
-     * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Single<RestResponse<Void, Void>> patch200WithRestResponseAsync() {
         final Boolean booleanValue = null;
@@ -364,7 +364,7 @@ public final class HttpSuccessImpl implements HttpSuccess {
     /**
      * Patch true Boolean value in request returning 200.
      *
-     * @return the {@link Completable} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Completable patch200Async() {
         return patch200WithRestResponseAsync()
@@ -389,7 +389,7 @@ public final class HttpSuccessImpl implements HttpSuccess {
      * @param booleanValue Simple boolean value true.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;Void&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     public ServiceFuture<Void> patch200Async(Boolean booleanValue, ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(patch200Async(booleanValue), serviceCallback);
@@ -400,7 +400,7 @@ public final class HttpSuccessImpl implements HttpSuccess {
      *
      * @param booleanValue Simple boolean value true.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Single<RestResponse<Void, Void>> patch200WithRestResponseAsync(Boolean booleanValue) {
         return service.patch200(booleanValue);
@@ -411,7 +411,7 @@ public final class HttpSuccessImpl implements HttpSuccess {
      *
      * @param booleanValue Simple boolean value true.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link Completable} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Completable patch200Async(Boolean booleanValue) {
         return patch200WithRestResponseAsync(booleanValue)
@@ -433,7 +433,7 @@ public final class HttpSuccessImpl implements HttpSuccess {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;Void&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     public ServiceFuture<Void> post200Async(ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(post200Async(), serviceCallback);
@@ -442,7 +442,7 @@ public final class HttpSuccessImpl implements HttpSuccess {
     /**
      * Post bollean value true in request that returns a 200.
      *
-     * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Single<RestResponse<Void, Void>> post200WithRestResponseAsync() {
         final Boolean booleanValue = null;
@@ -452,7 +452,7 @@ public final class HttpSuccessImpl implements HttpSuccess {
     /**
      * Post bollean value true in request that returns a 200.
      *
-     * @return the {@link Completable} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Completable post200Async() {
         return post200WithRestResponseAsync()
@@ -477,7 +477,7 @@ public final class HttpSuccessImpl implements HttpSuccess {
      * @param booleanValue Simple boolean value true.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;Void&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     public ServiceFuture<Void> post200Async(Boolean booleanValue, ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(post200Async(booleanValue), serviceCallback);
@@ -488,7 +488,7 @@ public final class HttpSuccessImpl implements HttpSuccess {
      *
      * @param booleanValue Simple boolean value true.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Single<RestResponse<Void, Void>> post200WithRestResponseAsync(Boolean booleanValue) {
         return service.post200(booleanValue);
@@ -499,7 +499,7 @@ public final class HttpSuccessImpl implements HttpSuccess {
      *
      * @param booleanValue Simple boolean value true.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link Completable} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Completable post200Async(Boolean booleanValue) {
         return post200WithRestResponseAsync(booleanValue)
@@ -521,7 +521,7 @@ public final class HttpSuccessImpl implements HttpSuccess {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;Void&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     public ServiceFuture<Void> delete200Async(ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(delete200Async(), serviceCallback);
@@ -530,7 +530,7 @@ public final class HttpSuccessImpl implements HttpSuccess {
     /**
      * Delete simple boolean value true returns 200.
      *
-     * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Single<RestResponse<Void, Void>> delete200WithRestResponseAsync() {
         final Boolean booleanValue = null;
@@ -540,7 +540,7 @@ public final class HttpSuccessImpl implements HttpSuccess {
     /**
      * Delete simple boolean value true returns 200.
      *
-     * @return the {@link Completable} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Completable delete200Async() {
         return delete200WithRestResponseAsync()
@@ -565,7 +565,7 @@ public final class HttpSuccessImpl implements HttpSuccess {
      * @param booleanValue Simple boolean value true.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;Void&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     public ServiceFuture<Void> delete200Async(Boolean booleanValue, ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(delete200Async(booleanValue), serviceCallback);
@@ -576,7 +576,7 @@ public final class HttpSuccessImpl implements HttpSuccess {
      *
      * @param booleanValue Simple boolean value true.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Single<RestResponse<Void, Void>> delete200WithRestResponseAsync(Boolean booleanValue) {
         return service.delete200(booleanValue);
@@ -587,7 +587,7 @@ public final class HttpSuccessImpl implements HttpSuccess {
      *
      * @param booleanValue Simple boolean value true.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link Completable} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Completable delete200Async(Boolean booleanValue) {
         return delete200WithRestResponseAsync(booleanValue)
@@ -609,7 +609,7 @@ public final class HttpSuccessImpl implements HttpSuccess {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;Void&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     public ServiceFuture<Void> put201Async(ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(put201Async(), serviceCallback);
@@ -618,7 +618,7 @@ public final class HttpSuccessImpl implements HttpSuccess {
     /**
      * Put true Boolean value in request returns 201.
      *
-     * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Single<RestResponse<Void, Void>> put201WithRestResponseAsync() {
         final Boolean booleanValue = null;
@@ -628,7 +628,7 @@ public final class HttpSuccessImpl implements HttpSuccess {
     /**
      * Put true Boolean value in request returns 201.
      *
-     * @return the {@link Completable} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Completable put201Async() {
         return put201WithRestResponseAsync()
@@ -653,7 +653,7 @@ public final class HttpSuccessImpl implements HttpSuccess {
      * @param booleanValue Simple boolean value true.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;Void&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     public ServiceFuture<Void> put201Async(Boolean booleanValue, ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(put201Async(booleanValue), serviceCallback);
@@ -664,7 +664,7 @@ public final class HttpSuccessImpl implements HttpSuccess {
      *
      * @param booleanValue Simple boolean value true.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Single<RestResponse<Void, Void>> put201WithRestResponseAsync(Boolean booleanValue) {
         return service.put201(booleanValue);
@@ -675,7 +675,7 @@ public final class HttpSuccessImpl implements HttpSuccess {
      *
      * @param booleanValue Simple boolean value true.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link Completable} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Completable put201Async(Boolean booleanValue) {
         return put201WithRestResponseAsync(booleanValue)
@@ -697,7 +697,7 @@ public final class HttpSuccessImpl implements HttpSuccess {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;Void&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     public ServiceFuture<Void> post201Async(ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(post201Async(), serviceCallback);
@@ -706,7 +706,7 @@ public final class HttpSuccessImpl implements HttpSuccess {
     /**
      * Post true Boolean value in request returns 201 (Created).
      *
-     * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Single<RestResponse<Void, Void>> post201WithRestResponseAsync() {
         final Boolean booleanValue = null;
@@ -716,7 +716,7 @@ public final class HttpSuccessImpl implements HttpSuccess {
     /**
      * Post true Boolean value in request returns 201 (Created).
      *
-     * @return the {@link Completable} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Completable post201Async() {
         return post201WithRestResponseAsync()
@@ -741,7 +741,7 @@ public final class HttpSuccessImpl implements HttpSuccess {
      * @param booleanValue Simple boolean value true.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;Void&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     public ServiceFuture<Void> post201Async(Boolean booleanValue, ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(post201Async(booleanValue), serviceCallback);
@@ -752,7 +752,7 @@ public final class HttpSuccessImpl implements HttpSuccess {
      *
      * @param booleanValue Simple boolean value true.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Single<RestResponse<Void, Void>> post201WithRestResponseAsync(Boolean booleanValue) {
         return service.post201(booleanValue);
@@ -763,7 +763,7 @@ public final class HttpSuccessImpl implements HttpSuccess {
      *
      * @param booleanValue Simple boolean value true.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link Completable} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Completable post201Async(Boolean booleanValue) {
         return post201WithRestResponseAsync(booleanValue)
@@ -785,7 +785,7 @@ public final class HttpSuccessImpl implements HttpSuccess {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;Void&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     public ServiceFuture<Void> put202Async(ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(put202Async(), serviceCallback);
@@ -794,7 +794,7 @@ public final class HttpSuccessImpl implements HttpSuccess {
     /**
      * Put true Boolean value in request returns 202 (Accepted).
      *
-     * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Single<RestResponse<Void, Void>> put202WithRestResponseAsync() {
         final Boolean booleanValue = null;
@@ -804,7 +804,7 @@ public final class HttpSuccessImpl implements HttpSuccess {
     /**
      * Put true Boolean value in request returns 202 (Accepted).
      *
-     * @return the {@link Completable} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Completable put202Async() {
         return put202WithRestResponseAsync()
@@ -829,7 +829,7 @@ public final class HttpSuccessImpl implements HttpSuccess {
      * @param booleanValue Simple boolean value true.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;Void&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     public ServiceFuture<Void> put202Async(Boolean booleanValue, ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(put202Async(booleanValue), serviceCallback);
@@ -840,7 +840,7 @@ public final class HttpSuccessImpl implements HttpSuccess {
      *
      * @param booleanValue Simple boolean value true.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Single<RestResponse<Void, Void>> put202WithRestResponseAsync(Boolean booleanValue) {
         return service.put202(booleanValue);
@@ -851,7 +851,7 @@ public final class HttpSuccessImpl implements HttpSuccess {
      *
      * @param booleanValue Simple boolean value true.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link Completable} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Completable put202Async(Boolean booleanValue) {
         return put202WithRestResponseAsync(booleanValue)
@@ -873,7 +873,7 @@ public final class HttpSuccessImpl implements HttpSuccess {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;Void&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     public ServiceFuture<Void> patch202Async(ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(patch202Async(), serviceCallback);
@@ -882,7 +882,7 @@ public final class HttpSuccessImpl implements HttpSuccess {
     /**
      * Patch true Boolean value in request returns 202.
      *
-     * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Single<RestResponse<Void, Void>> patch202WithRestResponseAsync() {
         final Boolean booleanValue = null;
@@ -892,7 +892,7 @@ public final class HttpSuccessImpl implements HttpSuccess {
     /**
      * Patch true Boolean value in request returns 202.
      *
-     * @return the {@link Completable} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Completable patch202Async() {
         return patch202WithRestResponseAsync()
@@ -917,7 +917,7 @@ public final class HttpSuccessImpl implements HttpSuccess {
      * @param booleanValue Simple boolean value true.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;Void&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     public ServiceFuture<Void> patch202Async(Boolean booleanValue, ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(patch202Async(booleanValue), serviceCallback);
@@ -928,7 +928,7 @@ public final class HttpSuccessImpl implements HttpSuccess {
      *
      * @param booleanValue Simple boolean value true.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Single<RestResponse<Void, Void>> patch202WithRestResponseAsync(Boolean booleanValue) {
         return service.patch202(booleanValue);
@@ -939,7 +939,7 @@ public final class HttpSuccessImpl implements HttpSuccess {
      *
      * @param booleanValue Simple boolean value true.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link Completable} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Completable patch202Async(Boolean booleanValue) {
         return patch202WithRestResponseAsync(booleanValue)
@@ -961,7 +961,7 @@ public final class HttpSuccessImpl implements HttpSuccess {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;Void&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     public ServiceFuture<Void> post202Async(ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(post202Async(), serviceCallback);
@@ -970,7 +970,7 @@ public final class HttpSuccessImpl implements HttpSuccess {
     /**
      * Post true Boolean value in request returns 202 (Accepted).
      *
-     * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Single<RestResponse<Void, Void>> post202WithRestResponseAsync() {
         final Boolean booleanValue = null;
@@ -980,7 +980,7 @@ public final class HttpSuccessImpl implements HttpSuccess {
     /**
      * Post true Boolean value in request returns 202 (Accepted).
      *
-     * @return the {@link Completable} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Completable post202Async() {
         return post202WithRestResponseAsync()
@@ -1005,7 +1005,7 @@ public final class HttpSuccessImpl implements HttpSuccess {
      * @param booleanValue Simple boolean value true.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;Void&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     public ServiceFuture<Void> post202Async(Boolean booleanValue, ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(post202Async(booleanValue), serviceCallback);
@@ -1016,7 +1016,7 @@ public final class HttpSuccessImpl implements HttpSuccess {
      *
      * @param booleanValue Simple boolean value true.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Single<RestResponse<Void, Void>> post202WithRestResponseAsync(Boolean booleanValue) {
         return service.post202(booleanValue);
@@ -1027,7 +1027,7 @@ public final class HttpSuccessImpl implements HttpSuccess {
      *
      * @param booleanValue Simple boolean value true.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link Completable} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Completable post202Async(Boolean booleanValue) {
         return post202WithRestResponseAsync(booleanValue)
@@ -1049,7 +1049,7 @@ public final class HttpSuccessImpl implements HttpSuccess {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;Void&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     public ServiceFuture<Void> delete202Async(ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(delete202Async(), serviceCallback);
@@ -1058,7 +1058,7 @@ public final class HttpSuccessImpl implements HttpSuccess {
     /**
      * Delete true Boolean value in request returns 202 (accepted).
      *
-     * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Single<RestResponse<Void, Void>> delete202WithRestResponseAsync() {
         final Boolean booleanValue = null;
@@ -1068,7 +1068,7 @@ public final class HttpSuccessImpl implements HttpSuccess {
     /**
      * Delete true Boolean value in request returns 202 (accepted).
      *
-     * @return the {@link Completable} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Completable delete202Async() {
         return delete202WithRestResponseAsync()
@@ -1093,7 +1093,7 @@ public final class HttpSuccessImpl implements HttpSuccess {
      * @param booleanValue Simple boolean value true.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;Void&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     public ServiceFuture<Void> delete202Async(Boolean booleanValue, ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(delete202Async(booleanValue), serviceCallback);
@@ -1104,7 +1104,7 @@ public final class HttpSuccessImpl implements HttpSuccess {
      *
      * @param booleanValue Simple boolean value true.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Single<RestResponse<Void, Void>> delete202WithRestResponseAsync(Boolean booleanValue) {
         return service.delete202(booleanValue);
@@ -1115,7 +1115,7 @@ public final class HttpSuccessImpl implements HttpSuccess {
      *
      * @param booleanValue Simple boolean value true.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link Completable} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Completable delete202Async(Boolean booleanValue) {
         return delete202WithRestResponseAsync(booleanValue)
@@ -1137,7 +1137,7 @@ public final class HttpSuccessImpl implements HttpSuccess {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;Void&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     public ServiceFuture<Void> head204Async(ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(head204Async(), serviceCallback);
@@ -1146,7 +1146,7 @@ public final class HttpSuccessImpl implements HttpSuccess {
     /**
      * Return 204 status code if successful.
      *
-     * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Single<RestResponse<Void, Void>> head204WithRestResponseAsync() {
         return service.head204();
@@ -1155,7 +1155,7 @@ public final class HttpSuccessImpl implements HttpSuccess {
     /**
      * Return 204 status code if successful.
      *
-     * @return the {@link Completable} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Completable head204Async() {
         return head204WithRestResponseAsync()
@@ -1177,7 +1177,7 @@ public final class HttpSuccessImpl implements HttpSuccess {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;Void&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     public ServiceFuture<Void> put204Async(ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(put204Async(), serviceCallback);
@@ -1186,7 +1186,7 @@ public final class HttpSuccessImpl implements HttpSuccess {
     /**
      * Put true Boolean value in request returns 204 (no content).
      *
-     * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Single<RestResponse<Void, Void>> put204WithRestResponseAsync() {
         final Boolean booleanValue = null;
@@ -1196,7 +1196,7 @@ public final class HttpSuccessImpl implements HttpSuccess {
     /**
      * Put true Boolean value in request returns 204 (no content).
      *
-     * @return the {@link Completable} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Completable put204Async() {
         return put204WithRestResponseAsync()
@@ -1221,7 +1221,7 @@ public final class HttpSuccessImpl implements HttpSuccess {
      * @param booleanValue Simple boolean value true.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;Void&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     public ServiceFuture<Void> put204Async(Boolean booleanValue, ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(put204Async(booleanValue), serviceCallback);
@@ -1232,7 +1232,7 @@ public final class HttpSuccessImpl implements HttpSuccess {
      *
      * @param booleanValue Simple boolean value true.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Single<RestResponse<Void, Void>> put204WithRestResponseAsync(Boolean booleanValue) {
         return service.put204(booleanValue);
@@ -1243,7 +1243,7 @@ public final class HttpSuccessImpl implements HttpSuccess {
      *
      * @param booleanValue Simple boolean value true.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link Completable} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Completable put204Async(Boolean booleanValue) {
         return put204WithRestResponseAsync(booleanValue)
@@ -1265,7 +1265,7 @@ public final class HttpSuccessImpl implements HttpSuccess {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;Void&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     public ServiceFuture<Void> patch204Async(ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(patch204Async(), serviceCallback);
@@ -1274,7 +1274,7 @@ public final class HttpSuccessImpl implements HttpSuccess {
     /**
      * Patch true Boolean value in request returns 204 (no content).
      *
-     * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Single<RestResponse<Void, Void>> patch204WithRestResponseAsync() {
         final Boolean booleanValue = null;
@@ -1284,7 +1284,7 @@ public final class HttpSuccessImpl implements HttpSuccess {
     /**
      * Patch true Boolean value in request returns 204 (no content).
      *
-     * @return the {@link Completable} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Completable patch204Async() {
         return patch204WithRestResponseAsync()
@@ -1309,7 +1309,7 @@ public final class HttpSuccessImpl implements HttpSuccess {
      * @param booleanValue Simple boolean value true.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;Void&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     public ServiceFuture<Void> patch204Async(Boolean booleanValue, ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(patch204Async(booleanValue), serviceCallback);
@@ -1320,7 +1320,7 @@ public final class HttpSuccessImpl implements HttpSuccess {
      *
      * @param booleanValue Simple boolean value true.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Single<RestResponse<Void, Void>> patch204WithRestResponseAsync(Boolean booleanValue) {
         return service.patch204(booleanValue);
@@ -1331,7 +1331,7 @@ public final class HttpSuccessImpl implements HttpSuccess {
      *
      * @param booleanValue Simple boolean value true.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link Completable} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Completable patch204Async(Boolean booleanValue) {
         return patch204WithRestResponseAsync(booleanValue)
@@ -1353,7 +1353,7 @@ public final class HttpSuccessImpl implements HttpSuccess {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;Void&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     public ServiceFuture<Void> post204Async(ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(post204Async(), serviceCallback);
@@ -1362,7 +1362,7 @@ public final class HttpSuccessImpl implements HttpSuccess {
     /**
      * Post true Boolean value in request returns 204 (no content).
      *
-     * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Single<RestResponse<Void, Void>> post204WithRestResponseAsync() {
         final Boolean booleanValue = null;
@@ -1372,7 +1372,7 @@ public final class HttpSuccessImpl implements HttpSuccess {
     /**
      * Post true Boolean value in request returns 204 (no content).
      *
-     * @return the {@link Completable} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Completable post204Async() {
         return post204WithRestResponseAsync()
@@ -1397,7 +1397,7 @@ public final class HttpSuccessImpl implements HttpSuccess {
      * @param booleanValue Simple boolean value true.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;Void&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     public ServiceFuture<Void> post204Async(Boolean booleanValue, ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(post204Async(booleanValue), serviceCallback);
@@ -1408,7 +1408,7 @@ public final class HttpSuccessImpl implements HttpSuccess {
      *
      * @param booleanValue Simple boolean value true.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Single<RestResponse<Void, Void>> post204WithRestResponseAsync(Boolean booleanValue) {
         return service.post204(booleanValue);
@@ -1419,7 +1419,7 @@ public final class HttpSuccessImpl implements HttpSuccess {
      *
      * @param booleanValue Simple boolean value true.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link Completable} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Completable post204Async(Boolean booleanValue) {
         return post204WithRestResponseAsync(booleanValue)
@@ -1441,7 +1441,7 @@ public final class HttpSuccessImpl implements HttpSuccess {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;Void&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     public ServiceFuture<Void> delete204Async(ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(delete204Async(), serviceCallback);
@@ -1450,7 +1450,7 @@ public final class HttpSuccessImpl implements HttpSuccess {
     /**
      * Delete true Boolean value in request returns 204 (no content).
      *
-     * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Single<RestResponse<Void, Void>> delete204WithRestResponseAsync() {
         final Boolean booleanValue = null;
@@ -1460,7 +1460,7 @@ public final class HttpSuccessImpl implements HttpSuccess {
     /**
      * Delete true Boolean value in request returns 204 (no content).
      *
-     * @return the {@link Completable} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Completable delete204Async() {
         return delete204WithRestResponseAsync()
@@ -1485,7 +1485,7 @@ public final class HttpSuccessImpl implements HttpSuccess {
      * @param booleanValue Simple boolean value true.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;Void&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     public ServiceFuture<Void> delete204Async(Boolean booleanValue, ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(delete204Async(booleanValue), serviceCallback);
@@ -1496,7 +1496,7 @@ public final class HttpSuccessImpl implements HttpSuccess {
      *
      * @param booleanValue Simple boolean value true.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Single<RestResponse<Void, Void>> delete204WithRestResponseAsync(Boolean booleanValue) {
         return service.delete204(booleanValue);
@@ -1507,7 +1507,7 @@ public final class HttpSuccessImpl implements HttpSuccess {
      *
      * @param booleanValue Simple boolean value true.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link Completable} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Completable delete204Async(Boolean booleanValue) {
         return delete204WithRestResponseAsync(booleanValue)
@@ -1529,7 +1529,7 @@ public final class HttpSuccessImpl implements HttpSuccess {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;Void&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     public ServiceFuture<Void> head404Async(ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(head404Async(), serviceCallback);
@@ -1538,7 +1538,7 @@ public final class HttpSuccessImpl implements HttpSuccess {
     /**
      * Return 404 status code.
      *
-     * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Single<RestResponse<Void, Void>> head404WithRestResponseAsync() {
         return service.head404();
@@ -1547,7 +1547,7 @@ public final class HttpSuccessImpl implements HttpSuccess {
     /**
      * Return 404 status code.
      *
-     * @return the {@link Completable} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Completable head404Async() {
         return head404WithRestResponseAsync()

@@ -85,7 +85,7 @@ public final class AvailabilitySetsImpl implements AvailabilitySets {
      * @param tags A set of tags. A description about the set of tags.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;Void&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     public ServiceFuture<Void> updateAsync(@NonNull String resourceGroupName, @NonNull String avset, @NonNull Map<String, String> tags, ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(updateAsync(resourceGroupName, avset, tags), serviceCallback);
@@ -98,7 +98,7 @@ public final class AvailabilitySetsImpl implements AvailabilitySets {
      * @param avset The name of the storage availability set.
      * @param tags A set of tags. A description about the set of tags.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Single<RestResponse<Void, Void>> updateWithRestResponseAsync(@NonNull String resourceGroupName, @NonNull String avset, @NonNull Map<String, String> tags) {
         if (resourceGroupName == null) {
@@ -123,7 +123,7 @@ public final class AvailabilitySetsImpl implements AvailabilitySets {
      * @param avset The name of the storage availability set.
      * @param tags A set of tags. A description about the set of tags.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link Completable} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Completable updateAsync(@NonNull String resourceGroupName, @NonNull String avset, @NonNull Map<String, String> tags) {
         return updateWithRestResponseAsync(resourceGroupName, avset, tags)

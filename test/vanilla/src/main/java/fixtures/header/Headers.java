@@ -13,6 +13,7 @@ package fixtures.header;
 import com.microsoft.rest.v2.RestResponse;
 import com.microsoft.rest.v2.ServiceCallback;
 import com.microsoft.rest.v2.ServiceFuture;
+import fixtures.header.models.ErrorException;
 import fixtures.header.models.GreyscaleColors;
 import fixtures.header.models.HeaderResponseBoolHeaders;
 import fixtures.header.models.HeaderResponseByteHeaders;
@@ -56,7 +57,7 @@ public interface Headers {
      * @param userAgent Send a post request with header value "User-Agent": "overwrite".
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;Void&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     ServiceFuture<Void> paramExistingKeyAsync(@NonNull String userAgent, ServiceCallback<Void> serviceCallback);
 
@@ -65,7 +66,7 @@ public interface Headers {
      *
      * @param userAgent Send a post request with header value "User-Agent": "overwrite".
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     Single<RestResponse<Void, Void>> paramExistingKeyWithRestResponseAsync(@NonNull String userAgent);
 
@@ -74,7 +75,7 @@ public interface Headers {
      *
      * @param userAgent Send a post request with header value "User-Agent": "overwrite".
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link Completable} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     Completable paramExistingKeyAsync(@NonNull String userAgent);
 
@@ -91,21 +92,21 @@ public interface Headers {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;Void&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     ServiceFuture<Void> responseExistingKeyAsync(ServiceCallback<Void> serviceCallback);
 
     /**
      * Get a response with header value "User-Agent": "overwrite".
      *
-     * @return the {@link Single&lt;RestResponse&lt;HeaderResponseExistingKeyHeaders, Void&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     Single<RestResponse<HeaderResponseExistingKeyHeaders, Void>> responseExistingKeyWithRestResponseAsync();
 
     /**
      * Get a response with header value "User-Agent": "overwrite".
      *
-     * @return the {@link Completable} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     Completable responseExistingKeyAsync();
 
@@ -125,7 +126,7 @@ public interface Headers {
      * @param contentType Send a post request with header value "Content-Type": "text/html".
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;Void&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     ServiceFuture<Void> paramProtectedKeyAsync(@NonNull String contentType, ServiceCallback<Void> serviceCallback);
 
@@ -134,7 +135,7 @@ public interface Headers {
      *
      * @param contentType Send a post request with header value "Content-Type": "text/html".
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     Single<RestResponse<Void, Void>> paramProtectedKeyWithRestResponseAsync(@NonNull String contentType);
 
@@ -143,7 +144,7 @@ public interface Headers {
      *
      * @param contentType Send a post request with header value "Content-Type": "text/html".
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link Completable} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     Completable paramProtectedKeyAsync(@NonNull String contentType);
 
@@ -160,21 +161,21 @@ public interface Headers {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;Void&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     ServiceFuture<Void> responseProtectedKeyAsync(ServiceCallback<Void> serviceCallback);
 
     /**
      * Get a response with header value "Content-Type": "text/html".
      *
-     * @return the {@link Single&lt;RestResponse&lt;HeaderResponseProtectedKeyHeaders, Void&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     Single<RestResponse<HeaderResponseProtectedKeyHeaders, Void>> responseProtectedKeyWithRestResponseAsync();
 
     /**
      * Get a response with header value "Content-Type": "text/html".
      *
-     * @return the {@link Completable} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     Completable responseProtectedKeyAsync();
 
@@ -196,7 +197,7 @@ public interface Headers {
      * @param value Send a post request with header values 1 or -2.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;Void&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     ServiceFuture<Void> paramIntegerAsync(@NonNull String scenario, @NonNull int value, ServiceCallback<Void> serviceCallback);
 
@@ -206,7 +207,7 @@ public interface Headers {
      * @param scenario Send a post request with header values "scenario": "positive" or "negative".
      * @param value Send a post request with header values 1 or -2.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     Single<RestResponse<Void, Void>> paramIntegerWithRestResponseAsync(@NonNull String scenario, @NonNull int value);
 
@@ -216,7 +217,7 @@ public interface Headers {
      * @param scenario Send a post request with header values "scenario": "positive" or "negative".
      * @param value Send a post request with header values 1 or -2.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link Completable} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     Completable paramIntegerAsync(@NonNull String scenario, @NonNull int value);
 
@@ -236,7 +237,7 @@ public interface Headers {
      * @param scenario Send a post request with header values "scenario": "positive" or "negative".
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;Void&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     ServiceFuture<Void> responseIntegerAsync(@NonNull String scenario, ServiceCallback<Void> serviceCallback);
 
@@ -245,7 +246,7 @@ public interface Headers {
      *
      * @param scenario Send a post request with header values "scenario": "positive" or "negative".
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link Single&lt;RestResponse&lt;HeaderResponseIntegerHeaders, Void&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     Single<RestResponse<HeaderResponseIntegerHeaders, Void>> responseIntegerWithRestResponseAsync(@NonNull String scenario);
 
@@ -254,7 +255,7 @@ public interface Headers {
      *
      * @param scenario Send a post request with header values "scenario": "positive" or "negative".
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link Completable} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     Completable responseIntegerAsync(@NonNull String scenario);
 
@@ -276,7 +277,7 @@ public interface Headers {
      * @param value Send a post request with header values 105 or -2.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;Void&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     ServiceFuture<Void> paramLongAsync(@NonNull String scenario, @NonNull long value, ServiceCallback<Void> serviceCallback);
 
@@ -286,7 +287,7 @@ public interface Headers {
      * @param scenario Send a post request with header values "scenario": "positive" or "negative".
      * @param value Send a post request with header values 105 or -2.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     Single<RestResponse<Void, Void>> paramLongWithRestResponseAsync(@NonNull String scenario, @NonNull long value);
 
@@ -296,7 +297,7 @@ public interface Headers {
      * @param scenario Send a post request with header values "scenario": "positive" or "negative".
      * @param value Send a post request with header values 105 or -2.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link Completable} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     Completable paramLongAsync(@NonNull String scenario, @NonNull long value);
 
@@ -316,7 +317,7 @@ public interface Headers {
      * @param scenario Send a post request with header values "scenario": "positive" or "negative".
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;Void&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     ServiceFuture<Void> responseLongAsync(@NonNull String scenario, ServiceCallback<Void> serviceCallback);
 
@@ -325,7 +326,7 @@ public interface Headers {
      *
      * @param scenario Send a post request with header values "scenario": "positive" or "negative".
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link Single&lt;RestResponse&lt;HeaderResponseLongHeaders, Void&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     Single<RestResponse<HeaderResponseLongHeaders, Void>> responseLongWithRestResponseAsync(@NonNull String scenario);
 
@@ -334,7 +335,7 @@ public interface Headers {
      *
      * @param scenario Send a post request with header values "scenario": "positive" or "negative".
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link Completable} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     Completable responseLongAsync(@NonNull String scenario);
 
@@ -356,7 +357,7 @@ public interface Headers {
      * @param value Send a post request with header values 0.07 or -3.0.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;Void&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     ServiceFuture<Void> paramFloatAsync(@NonNull String scenario, @NonNull double value, ServiceCallback<Void> serviceCallback);
 
@@ -366,7 +367,7 @@ public interface Headers {
      * @param scenario Send a post request with header values "scenario": "positive" or "negative".
      * @param value Send a post request with header values 0.07 or -3.0.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     Single<RestResponse<Void, Void>> paramFloatWithRestResponseAsync(@NonNull String scenario, @NonNull double value);
 
@@ -376,7 +377,7 @@ public interface Headers {
      * @param scenario Send a post request with header values "scenario": "positive" or "negative".
      * @param value Send a post request with header values 0.07 or -3.0.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link Completable} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     Completable paramFloatAsync(@NonNull String scenario, @NonNull double value);
 
@@ -396,7 +397,7 @@ public interface Headers {
      * @param scenario Send a post request with header values "scenario": "positive" or "negative".
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;Void&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     ServiceFuture<Void> responseFloatAsync(@NonNull String scenario, ServiceCallback<Void> serviceCallback);
 
@@ -405,7 +406,7 @@ public interface Headers {
      *
      * @param scenario Send a post request with header values "scenario": "positive" or "negative".
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link Single&lt;RestResponse&lt;HeaderResponseFloatHeaders, Void&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     Single<RestResponse<HeaderResponseFloatHeaders, Void>> responseFloatWithRestResponseAsync(@NonNull String scenario);
 
@@ -414,7 +415,7 @@ public interface Headers {
      *
      * @param scenario Send a post request with header values "scenario": "positive" or "negative".
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link Completable} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     Completable responseFloatAsync(@NonNull String scenario);
 
@@ -436,7 +437,7 @@ public interface Headers {
      * @param value Send a post request with header values 7e120 or -3.0.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;Void&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     ServiceFuture<Void> paramDoubleAsync(@NonNull String scenario, @NonNull double value, ServiceCallback<Void> serviceCallback);
 
@@ -446,7 +447,7 @@ public interface Headers {
      * @param scenario Send a post request with header values "scenario": "positive" or "negative".
      * @param value Send a post request with header values 7e120 or -3.0.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     Single<RestResponse<Void, Void>> paramDoubleWithRestResponseAsync(@NonNull String scenario, @NonNull double value);
 
@@ -456,7 +457,7 @@ public interface Headers {
      * @param scenario Send a post request with header values "scenario": "positive" or "negative".
      * @param value Send a post request with header values 7e120 or -3.0.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link Completable} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     Completable paramDoubleAsync(@NonNull String scenario, @NonNull double value);
 
@@ -476,7 +477,7 @@ public interface Headers {
      * @param scenario Send a post request with header values "scenario": "positive" or "negative".
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;Void&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     ServiceFuture<Void> responseDoubleAsync(@NonNull String scenario, ServiceCallback<Void> serviceCallback);
 
@@ -485,7 +486,7 @@ public interface Headers {
      *
      * @param scenario Send a post request with header values "scenario": "positive" or "negative".
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link Single&lt;RestResponse&lt;HeaderResponseDoubleHeaders, Void&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     Single<RestResponse<HeaderResponseDoubleHeaders, Void>> responseDoubleWithRestResponseAsync(@NonNull String scenario);
 
@@ -494,7 +495,7 @@ public interface Headers {
      *
      * @param scenario Send a post request with header values "scenario": "positive" or "negative".
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link Completable} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     Completable responseDoubleAsync(@NonNull String scenario);
 
@@ -516,7 +517,7 @@ public interface Headers {
      * @param value Send a post request with header values true or false.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;Void&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     ServiceFuture<Void> paramBoolAsync(@NonNull String scenario, @NonNull boolean value, ServiceCallback<Void> serviceCallback);
 
@@ -526,7 +527,7 @@ public interface Headers {
      * @param scenario Send a post request with header values "scenario": "true" or "false".
      * @param value Send a post request with header values true or false.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     Single<RestResponse<Void, Void>> paramBoolWithRestResponseAsync(@NonNull String scenario, @NonNull boolean value);
 
@@ -536,7 +537,7 @@ public interface Headers {
      * @param scenario Send a post request with header values "scenario": "true" or "false".
      * @param value Send a post request with header values true or false.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link Completable} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     Completable paramBoolAsync(@NonNull String scenario, @NonNull boolean value);
 
@@ -556,7 +557,7 @@ public interface Headers {
      * @param scenario Send a post request with header values "scenario": "true" or "false".
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;Void&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     ServiceFuture<Void> responseBoolAsync(@NonNull String scenario, ServiceCallback<Void> serviceCallback);
 
@@ -565,7 +566,7 @@ public interface Headers {
      *
      * @param scenario Send a post request with header values "scenario": "true" or "false".
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link Single&lt;RestResponse&lt;HeaderResponseBoolHeaders, Void&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     Single<RestResponse<HeaderResponseBoolHeaders, Void>> responseBoolWithRestResponseAsync(@NonNull String scenario);
 
@@ -574,7 +575,7 @@ public interface Headers {
      *
      * @param scenario Send a post request with header values "scenario": "true" or "false".
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link Completable} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     Completable responseBoolAsync(@NonNull String scenario);
 
@@ -594,7 +595,7 @@ public interface Headers {
      * @param scenario Send a post request with header values "scenario": "valid" or "null" or "empty".
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;Void&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     ServiceFuture<Void> paramStringAsync(@NonNull String scenario, ServiceCallback<Void> serviceCallback);
 
@@ -603,7 +604,7 @@ public interface Headers {
      *
      * @param scenario Send a post request with header values "scenario": "valid" or "null" or "empty".
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     Single<RestResponse<Void, Void>> paramStringWithRestResponseAsync(@NonNull String scenario);
 
@@ -612,7 +613,7 @@ public interface Headers {
      *
      * @param scenario Send a post request with header values "scenario": "valid" or "null" or "empty".
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link Completable} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     Completable paramStringAsync(@NonNull String scenario);
 
@@ -634,7 +635,7 @@ public interface Headers {
      * @param value Send a post request with header values "The quick brown fox jumps over the lazy dog" or null or "".
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;Void&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     ServiceFuture<Void> paramStringAsync(@NonNull String scenario, String value, ServiceCallback<Void> serviceCallback);
 
@@ -644,7 +645,7 @@ public interface Headers {
      * @param scenario Send a post request with header values "scenario": "valid" or "null" or "empty".
      * @param value Send a post request with header values "The quick brown fox jumps over the lazy dog" or null or "".
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     Single<RestResponse<Void, Void>> paramStringWithRestResponseAsync(@NonNull String scenario, String value);
 
@@ -654,7 +655,7 @@ public interface Headers {
      * @param scenario Send a post request with header values "scenario": "valid" or "null" or "empty".
      * @param value Send a post request with header values "The quick brown fox jumps over the lazy dog" or null or "".
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link Completable} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     Completable paramStringAsync(@NonNull String scenario, String value);
 
@@ -674,7 +675,7 @@ public interface Headers {
      * @param scenario Send a post request with header values "scenario": "valid" or "null" or "empty".
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;Void&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     ServiceFuture<Void> responseStringAsync(@NonNull String scenario, ServiceCallback<Void> serviceCallback);
 
@@ -683,7 +684,7 @@ public interface Headers {
      *
      * @param scenario Send a post request with header values "scenario": "valid" or "null" or "empty".
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link Single&lt;RestResponse&lt;HeaderResponseStringHeaders, Void&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     Single<RestResponse<HeaderResponseStringHeaders, Void>> responseStringWithRestResponseAsync(@NonNull String scenario);
 
@@ -692,7 +693,7 @@ public interface Headers {
      *
      * @param scenario Send a post request with header values "scenario": "valid" or "null" or "empty".
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link Completable} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     Completable responseStringAsync(@NonNull String scenario);
 
@@ -714,7 +715,7 @@ public interface Headers {
      * @param value Send a post request with header values "2010-01-01" or "0001-01-01".
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;Void&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     ServiceFuture<Void> paramDateAsync(@NonNull String scenario, @NonNull LocalDate value, ServiceCallback<Void> serviceCallback);
 
@@ -724,7 +725,7 @@ public interface Headers {
      * @param scenario Send a post request with header values "scenario": "valid" or "min".
      * @param value Send a post request with header values "2010-01-01" or "0001-01-01".
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     Single<RestResponse<Void, Void>> paramDateWithRestResponseAsync(@NonNull String scenario, @NonNull LocalDate value);
 
@@ -734,7 +735,7 @@ public interface Headers {
      * @param scenario Send a post request with header values "scenario": "valid" or "min".
      * @param value Send a post request with header values "2010-01-01" or "0001-01-01".
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link Completable} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     Completable paramDateAsync(@NonNull String scenario, @NonNull LocalDate value);
 
@@ -754,7 +755,7 @@ public interface Headers {
      * @param scenario Send a post request with header values "scenario": "valid" or "min".
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;Void&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     ServiceFuture<Void> responseDateAsync(@NonNull String scenario, ServiceCallback<Void> serviceCallback);
 
@@ -763,7 +764,7 @@ public interface Headers {
      *
      * @param scenario Send a post request with header values "scenario": "valid" or "min".
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link Single&lt;RestResponse&lt;HeaderResponseDateHeaders, Void&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     Single<RestResponse<HeaderResponseDateHeaders, Void>> responseDateWithRestResponseAsync(@NonNull String scenario);
 
@@ -772,7 +773,7 @@ public interface Headers {
      *
      * @param scenario Send a post request with header values "scenario": "valid" or "min".
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link Completable} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     Completable responseDateAsync(@NonNull String scenario);
 
@@ -794,7 +795,7 @@ public interface Headers {
      * @param value Send a post request with header values "2010-01-01T12:34:56Z" or "0001-01-01T00:00:00Z".
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;Void&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     ServiceFuture<Void> paramDatetimeAsync(@NonNull String scenario, @NonNull DateTime value, ServiceCallback<Void> serviceCallback);
 
@@ -804,7 +805,7 @@ public interface Headers {
      * @param scenario Send a post request with header values "scenario": "valid" or "min".
      * @param value Send a post request with header values "2010-01-01T12:34:56Z" or "0001-01-01T00:00:00Z".
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     Single<RestResponse<Void, Void>> paramDatetimeWithRestResponseAsync(@NonNull String scenario, @NonNull DateTime value);
 
@@ -814,7 +815,7 @@ public interface Headers {
      * @param scenario Send a post request with header values "scenario": "valid" or "min".
      * @param value Send a post request with header values "2010-01-01T12:34:56Z" or "0001-01-01T00:00:00Z".
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link Completable} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     Completable paramDatetimeAsync(@NonNull String scenario, @NonNull DateTime value);
 
@@ -834,7 +835,7 @@ public interface Headers {
      * @param scenario Send a post request with header values "scenario": "valid" or "min".
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;Void&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     ServiceFuture<Void> responseDatetimeAsync(@NonNull String scenario, ServiceCallback<Void> serviceCallback);
 
@@ -843,7 +844,7 @@ public interface Headers {
      *
      * @param scenario Send a post request with header values "scenario": "valid" or "min".
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link Single&lt;RestResponse&lt;HeaderResponseDatetimeHeaders, Void&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     Single<RestResponse<HeaderResponseDatetimeHeaders, Void>> responseDatetimeWithRestResponseAsync(@NonNull String scenario);
 
@@ -852,7 +853,7 @@ public interface Headers {
      *
      * @param scenario Send a post request with header values "scenario": "valid" or "min".
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link Completable} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     Completable responseDatetimeAsync(@NonNull String scenario);
 
@@ -872,7 +873,7 @@ public interface Headers {
      * @param scenario Send a post request with header values "scenario": "valid" or "min".
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;Void&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     ServiceFuture<Void> paramDatetimeRfc1123Async(@NonNull String scenario, ServiceCallback<Void> serviceCallback);
 
@@ -881,7 +882,7 @@ public interface Headers {
      *
      * @param scenario Send a post request with header values "scenario": "valid" or "min".
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     Single<RestResponse<Void, Void>> paramDatetimeRfc1123WithRestResponseAsync(@NonNull String scenario);
 
@@ -890,7 +891,7 @@ public interface Headers {
      *
      * @param scenario Send a post request with header values "scenario": "valid" or "min".
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link Completable} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     Completable paramDatetimeRfc1123Async(@NonNull String scenario);
 
@@ -912,7 +913,7 @@ public interface Headers {
      * @param value Send a post request with header values "Wed, 01 Jan 2010 12:34:56 GMT" or "Mon, 01 Jan 0001 00:00:00 GMT".
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;Void&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     ServiceFuture<Void> paramDatetimeRfc1123Async(@NonNull String scenario, DateTime value, ServiceCallback<Void> serviceCallback);
 
@@ -922,7 +923,7 @@ public interface Headers {
      * @param scenario Send a post request with header values "scenario": "valid" or "min".
      * @param value Send a post request with header values "Wed, 01 Jan 2010 12:34:56 GMT" or "Mon, 01 Jan 0001 00:00:00 GMT".
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     Single<RestResponse<Void, Void>> paramDatetimeRfc1123WithRestResponseAsync(@NonNull String scenario, DateTime value);
 
@@ -932,7 +933,7 @@ public interface Headers {
      * @param scenario Send a post request with header values "scenario": "valid" or "min".
      * @param value Send a post request with header values "Wed, 01 Jan 2010 12:34:56 GMT" or "Mon, 01 Jan 0001 00:00:00 GMT".
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link Completable} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     Completable paramDatetimeRfc1123Async(@NonNull String scenario, DateTime value);
 
@@ -952,7 +953,7 @@ public interface Headers {
      * @param scenario Send a post request with header values "scenario": "valid" or "min".
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;Void&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     ServiceFuture<Void> responseDatetimeRfc1123Async(@NonNull String scenario, ServiceCallback<Void> serviceCallback);
 
@@ -961,7 +962,7 @@ public interface Headers {
      *
      * @param scenario Send a post request with header values "scenario": "valid" or "min".
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link Single&lt;RestResponse&lt;HeaderResponseDatetimeRfc1123Headers, Void&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     Single<RestResponse<HeaderResponseDatetimeRfc1123Headers, Void>> responseDatetimeRfc1123WithRestResponseAsync(@NonNull String scenario);
 
@@ -970,7 +971,7 @@ public interface Headers {
      *
      * @param scenario Send a post request with header values "scenario": "valid" or "min".
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link Completable} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     Completable responseDatetimeRfc1123Async(@NonNull String scenario);
 
@@ -992,7 +993,7 @@ public interface Headers {
      * @param value Send a post request with header values "P123DT22H14M12.011S".
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;Void&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     ServiceFuture<Void> paramDurationAsync(@NonNull String scenario, @NonNull Period value, ServiceCallback<Void> serviceCallback);
 
@@ -1002,7 +1003,7 @@ public interface Headers {
      * @param scenario Send a post request with header values "scenario": "valid".
      * @param value Send a post request with header values "P123DT22H14M12.011S".
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     Single<RestResponse<Void, Void>> paramDurationWithRestResponseAsync(@NonNull String scenario, @NonNull Period value);
 
@@ -1012,7 +1013,7 @@ public interface Headers {
      * @param scenario Send a post request with header values "scenario": "valid".
      * @param value Send a post request with header values "P123DT22H14M12.011S".
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link Completable} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     Completable paramDurationAsync(@NonNull String scenario, @NonNull Period value);
 
@@ -1032,7 +1033,7 @@ public interface Headers {
      * @param scenario Send a post request with header values "scenario": "valid".
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;Void&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     ServiceFuture<Void> responseDurationAsync(@NonNull String scenario, ServiceCallback<Void> serviceCallback);
 
@@ -1041,7 +1042,7 @@ public interface Headers {
      *
      * @param scenario Send a post request with header values "scenario": "valid".
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link Single&lt;RestResponse&lt;HeaderResponseDurationHeaders, Void&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     Single<RestResponse<HeaderResponseDurationHeaders, Void>> responseDurationWithRestResponseAsync(@NonNull String scenario);
 
@@ -1050,7 +1051,7 @@ public interface Headers {
      *
      * @param scenario Send a post request with header values "scenario": "valid".
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link Completable} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     Completable responseDurationAsync(@NonNull String scenario);
 
@@ -1072,7 +1073,7 @@ public interface Headers {
      * @param value Send a post request with header values "啊齄丂狛狜隣郎隣兀﨩".
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;Void&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     ServiceFuture<Void> paramByteAsync(@NonNull String scenario, @NonNull byte[] value, ServiceCallback<Void> serviceCallback);
 
@@ -1082,7 +1083,7 @@ public interface Headers {
      * @param scenario Send a post request with header values "scenario": "valid".
      * @param value Send a post request with header values "啊齄丂狛狜隣郎隣兀﨩".
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     Single<RestResponse<Void, Void>> paramByteWithRestResponseAsync(@NonNull String scenario, @NonNull byte[] value);
 
@@ -1092,7 +1093,7 @@ public interface Headers {
      * @param scenario Send a post request with header values "scenario": "valid".
      * @param value Send a post request with header values "啊齄丂狛狜隣郎隣兀﨩".
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link Completable} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     Completable paramByteAsync(@NonNull String scenario, @NonNull byte[] value);
 
@@ -1112,7 +1113,7 @@ public interface Headers {
      * @param scenario Send a post request with header values "scenario": "valid".
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;Void&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     ServiceFuture<Void> responseByteAsync(@NonNull String scenario, ServiceCallback<Void> serviceCallback);
 
@@ -1121,7 +1122,7 @@ public interface Headers {
      *
      * @param scenario Send a post request with header values "scenario": "valid".
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link Single&lt;RestResponse&lt;HeaderResponseByteHeaders, Void&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     Single<RestResponse<HeaderResponseByteHeaders, Void>> responseByteWithRestResponseAsync(@NonNull String scenario);
 
@@ -1130,7 +1131,7 @@ public interface Headers {
      *
      * @param scenario Send a post request with header values "scenario": "valid".
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link Completable} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     Completable responseByteAsync(@NonNull String scenario);
 
@@ -1150,7 +1151,7 @@ public interface Headers {
      * @param scenario Send a post request with header values "scenario": "valid" or "null" or "empty".
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;Void&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     ServiceFuture<Void> paramEnumAsync(@NonNull String scenario, ServiceCallback<Void> serviceCallback);
 
@@ -1159,7 +1160,7 @@ public interface Headers {
      *
      * @param scenario Send a post request with header values "scenario": "valid" or "null" or "empty".
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     Single<RestResponse<Void, Void>> paramEnumWithRestResponseAsync(@NonNull String scenario);
 
@@ -1168,7 +1169,7 @@ public interface Headers {
      *
      * @param scenario Send a post request with header values "scenario": "valid" or "null" or "empty".
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link Completable} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     Completable paramEnumAsync(@NonNull String scenario);
 
@@ -1190,7 +1191,7 @@ public interface Headers {
      * @param value Send a post request with header values 'GREY'. Possible values include: 'White', 'black', 'GREY'.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;Void&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     ServiceFuture<Void> paramEnumAsync(@NonNull String scenario, GreyscaleColors value, ServiceCallback<Void> serviceCallback);
 
@@ -1200,7 +1201,7 @@ public interface Headers {
      * @param scenario Send a post request with header values "scenario": "valid" or "null" or "empty".
      * @param value Send a post request with header values 'GREY'. Possible values include: 'White', 'black', 'GREY'.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     Single<RestResponse<Void, Void>> paramEnumWithRestResponseAsync(@NonNull String scenario, GreyscaleColors value);
 
@@ -1210,7 +1211,7 @@ public interface Headers {
      * @param scenario Send a post request with header values "scenario": "valid" or "null" or "empty".
      * @param value Send a post request with header values 'GREY'. Possible values include: 'White', 'black', 'GREY'.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link Completable} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     Completable paramEnumAsync(@NonNull String scenario, GreyscaleColors value);
 
@@ -1230,7 +1231,7 @@ public interface Headers {
      * @param scenario Send a post request with header values "scenario": "valid" or "null" or "empty".
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;Void&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     ServiceFuture<Void> responseEnumAsync(@NonNull String scenario, ServiceCallback<Void> serviceCallback);
 
@@ -1239,7 +1240,7 @@ public interface Headers {
      *
      * @param scenario Send a post request with header values "scenario": "valid" or "null" or "empty".
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link Single&lt;RestResponse&lt;HeaderResponseEnumHeaders, Void&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     Single<RestResponse<HeaderResponseEnumHeaders, Void>> responseEnumWithRestResponseAsync(@NonNull String scenario);
 
@@ -1248,7 +1249,7 @@ public interface Headers {
      *
      * @param scenario Send a post request with header values "scenario": "valid" or "null" or "empty".
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link Completable} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     Completable responseEnumAsync(@NonNull String scenario);
 
@@ -1265,21 +1266,21 @@ public interface Headers {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;Void&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     ServiceFuture<Void> customRequestIdAsync(ServiceCallback<Void> serviceCallback);
 
     /**
      * Send x-ms-client-request-id = 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0 in the header of the request.
      *
-     * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     Single<RestResponse<Void, Void>> customRequestIdWithRestResponseAsync();
 
     /**
      * Send x-ms-client-request-id = 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0 in the header of the request.
      *
-     * @return the {@link Completable} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     Completable customRequestIdAsync();
 }

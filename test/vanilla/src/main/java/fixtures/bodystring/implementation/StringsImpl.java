@@ -146,7 +146,7 @@ public final class StringsImpl implements Strings {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;String&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     public ServiceFuture<String> getNullAsync(ServiceCallback<String> serviceCallback) {
         return ServiceFuture.fromBody(getNullAsync(), serviceCallback);
@@ -155,7 +155,7 @@ public final class StringsImpl implements Strings {
     /**
      * Get null string value value.
      *
-     * @return the {@link Single&lt;RestResponse&lt;Void, String&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Single<RestResponse<Void, String>> getNullWithRestResponseAsync() {
         return service.getNull();
@@ -164,7 +164,7 @@ public final class StringsImpl implements Strings {
     /**
      * Get null string value value.
      *
-     * @return the {@link Maybe&lt;String&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Maybe<String> getNullAsync() {
         return getNullWithRestResponseAsync()
@@ -194,7 +194,7 @@ public final class StringsImpl implements Strings {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;Void&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     public ServiceFuture<Void> putNullAsync(ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(putNullAsync(), serviceCallback);
@@ -203,7 +203,7 @@ public final class StringsImpl implements Strings {
     /**
      * Set string value null.
      *
-     * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Single<RestResponse<Void, Void>> putNullWithRestResponseAsync() {
         final String stringBody = null;
@@ -213,7 +213,7 @@ public final class StringsImpl implements Strings {
     /**
      * Set string value null.
      *
-     * @return the {@link Completable} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Completable putNullAsync() {
         return putNullWithRestResponseAsync()
@@ -238,7 +238,7 @@ public final class StringsImpl implements Strings {
      * @param stringBody Possible values include: ''.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;Void&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     public ServiceFuture<Void> putNullAsync(String stringBody, ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(putNullAsync(stringBody), serviceCallback);
@@ -249,7 +249,7 @@ public final class StringsImpl implements Strings {
      *
      * @param stringBody Possible values include: ''.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Single<RestResponse<Void, Void>> putNullWithRestResponseAsync(String stringBody) {
         return service.putNull(stringBody);
@@ -260,7 +260,7 @@ public final class StringsImpl implements Strings {
      *
      * @param stringBody Possible values include: ''.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link Completable} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Completable putNullAsync(String stringBody) {
         return putNullWithRestResponseAsync(stringBody)
@@ -283,7 +283,7 @@ public final class StringsImpl implements Strings {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;String&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     public ServiceFuture<String> getEmptyAsync(ServiceCallback<String> serviceCallback) {
         return ServiceFuture.fromBody(getEmptyAsync(), serviceCallback);
@@ -292,7 +292,7 @@ public final class StringsImpl implements Strings {
     /**
      * Get empty string value value ''.
      *
-     * @return the {@link Single&lt;RestResponse&lt;Void, String&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Single<RestResponse<Void, String>> getEmptyWithRestResponseAsync() {
         return service.getEmpty();
@@ -301,7 +301,7 @@ public final class StringsImpl implements Strings {
     /**
      * Get empty string value value ''.
      *
-     * @return the {@link Maybe&lt;String&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Maybe<String> getEmptyAsync() {
         return getEmptyWithRestResponseAsync()
@@ -334,7 +334,7 @@ public final class StringsImpl implements Strings {
      * @param stringBody Possible values include: ''.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;Void&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     public ServiceFuture<Void> putEmptyAsync(@NonNull String stringBody, ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(putEmptyAsync(stringBody), serviceCallback);
@@ -345,7 +345,7 @@ public final class StringsImpl implements Strings {
      *
      * @param stringBody Possible values include: ''.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Single<RestResponse<Void, Void>> putEmptyWithRestResponseAsync(@NonNull String stringBody) {
         if (stringBody == null) {
@@ -359,7 +359,7 @@ public final class StringsImpl implements Strings {
      *
      * @param stringBody Possible values include: ''.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link Completable} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Completable putEmptyAsync(@NonNull String stringBody) {
         return putEmptyWithRestResponseAsync(stringBody)
@@ -382,7 +382,7 @@ public final class StringsImpl implements Strings {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;String&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     public ServiceFuture<String> getMbcsAsync(ServiceCallback<String> serviceCallback) {
         return ServiceFuture.fromBody(getMbcsAsync(), serviceCallback);
@@ -391,7 +391,7 @@ public final class StringsImpl implements Strings {
     /**
      * Get mbcs string value '啊齄丂狛狜隣郎隣兀﨩ˊ〞〡￤℡㈱‐ー﹡﹢﹫、〓ⅰⅹ⒈€㈠㈩ⅠⅫ！￣ぁんァヶΑ︴АЯаяāɡㄅㄩ─╋︵﹄︻︱︳︴ⅰⅹɑɡ〇〾⿻⺁䜣€'.
      *
-     * @return the {@link Single&lt;RestResponse&lt;Void, String&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Single<RestResponse<Void, String>> getMbcsWithRestResponseAsync() {
         return service.getMbcs();
@@ -400,7 +400,7 @@ public final class StringsImpl implements Strings {
     /**
      * Get mbcs string value '啊齄丂狛狜隣郎隣兀﨩ˊ〞〡￤℡㈱‐ー﹡﹢﹫、〓ⅰⅹ⒈€㈠㈩ⅠⅫ！￣ぁんァヶΑ︴АЯаяāɡㄅㄩ─╋︵﹄︻︱︳︴ⅰⅹɑɡ〇〾⿻⺁䜣€'.
      *
-     * @return the {@link Maybe&lt;String&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Maybe<String> getMbcsAsync() {
         return getMbcsWithRestResponseAsync()
@@ -433,7 +433,7 @@ public final class StringsImpl implements Strings {
      * @param stringBody Possible values include: '啊齄丂狛狜隣郎隣兀﨩ˊ〞〡￤℡㈱‐ー﹡﹢﹫、〓ⅰⅹ⒈€㈠㈩ⅠⅫ！￣ぁんァヶΑ︴АЯаяāɡㄅㄩ─╋︵﹄︻︱︳︴ⅰⅹɑɡ〇〾⿻⺁䜣€'.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;Void&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     public ServiceFuture<Void> putMbcsAsync(@NonNull String stringBody, ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(putMbcsAsync(stringBody), serviceCallback);
@@ -444,7 +444,7 @@ public final class StringsImpl implements Strings {
      *
      * @param stringBody Possible values include: '啊齄丂狛狜隣郎隣兀﨩ˊ〞〡￤℡㈱‐ー﹡﹢﹫、〓ⅰⅹ⒈€㈠㈩ⅠⅫ！￣ぁんァヶΑ︴АЯаяāɡㄅㄩ─╋︵﹄︻︱︳︴ⅰⅹɑɡ〇〾⿻⺁䜣€'.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Single<RestResponse<Void, Void>> putMbcsWithRestResponseAsync(@NonNull String stringBody) {
         if (stringBody == null) {
@@ -458,7 +458,7 @@ public final class StringsImpl implements Strings {
      *
      * @param stringBody Possible values include: '啊齄丂狛狜隣郎隣兀﨩ˊ〞〡￤℡㈱‐ー﹡﹢﹫、〓ⅰⅹ⒈€㈠㈩ⅠⅫ！￣ぁんァヶΑ︴АЯаяāɡㄅㄩ─╋︵﹄︻︱︳︴ⅰⅹɑɡ〇〾⿻⺁䜣€'.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link Completable} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Completable putMbcsAsync(@NonNull String stringBody) {
         return putMbcsWithRestResponseAsync(stringBody)
@@ -481,7 +481,7 @@ public final class StringsImpl implements Strings {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;String&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     public ServiceFuture<String> getWhitespaceAsync(ServiceCallback<String> serviceCallback) {
         return ServiceFuture.fromBody(getWhitespaceAsync(), serviceCallback);
@@ -490,7 +490,7 @@ public final class StringsImpl implements Strings {
     /**
      * Get string value with leading and trailing whitespace '&lt;tab&gt;&lt;space&gt;&lt;space&gt;Now is the time for all good men to come to the aid of their country&lt;tab&gt;&lt;space&gt;&lt;space&gt;'.
      *
-     * @return the {@link Single&lt;RestResponse&lt;Void, String&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Single<RestResponse<Void, String>> getWhitespaceWithRestResponseAsync() {
         return service.getWhitespace();
@@ -499,7 +499,7 @@ public final class StringsImpl implements Strings {
     /**
      * Get string value with leading and trailing whitespace '&lt;tab&gt;&lt;space&gt;&lt;space&gt;Now is the time for all good men to come to the aid of their country&lt;tab&gt;&lt;space&gt;&lt;space&gt;'.
      *
-     * @return the {@link Maybe&lt;String&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Maybe<String> getWhitespaceAsync() {
         return getWhitespaceWithRestResponseAsync()
@@ -532,7 +532,7 @@ public final class StringsImpl implements Strings {
      * @param stringBody Possible values include: '    Now is the time for all good men to come to the aid of their country    '.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;Void&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     public ServiceFuture<Void> putWhitespaceAsync(@NonNull String stringBody, ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(putWhitespaceAsync(stringBody), serviceCallback);
@@ -543,7 +543,7 @@ public final class StringsImpl implements Strings {
      *
      * @param stringBody Possible values include: '    Now is the time for all good men to come to the aid of their country    '.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Single<RestResponse<Void, Void>> putWhitespaceWithRestResponseAsync(@NonNull String stringBody) {
         if (stringBody == null) {
@@ -557,7 +557,7 @@ public final class StringsImpl implements Strings {
      *
      * @param stringBody Possible values include: '    Now is the time for all good men to come to the aid of their country    '.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link Completable} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Completable putWhitespaceAsync(@NonNull String stringBody) {
         return putWhitespaceWithRestResponseAsync(stringBody)
@@ -580,7 +580,7 @@ public final class StringsImpl implements Strings {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;String&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     public ServiceFuture<String> getNotProvidedAsync(ServiceCallback<String> serviceCallback) {
         return ServiceFuture.fromBody(getNotProvidedAsync(), serviceCallback);
@@ -589,7 +589,7 @@ public final class StringsImpl implements Strings {
     /**
      * Get String value when no string value is sent in response payload.
      *
-     * @return the {@link Single&lt;RestResponse&lt;Void, String&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Single<RestResponse<Void, String>> getNotProvidedWithRestResponseAsync() {
         return service.getNotProvided();
@@ -598,7 +598,7 @@ public final class StringsImpl implements Strings {
     /**
      * Get String value when no string value is sent in response payload.
      *
-     * @return the {@link Maybe&lt;String&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Maybe<String> getNotProvidedAsync() {
         return getNotProvidedWithRestResponseAsync()
@@ -629,7 +629,7 @@ public final class StringsImpl implements Strings {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;byte[]&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     public ServiceFuture<byte[]> getBase64EncodedAsync(ServiceCallback<byte[]> serviceCallback) {
         return ServiceFuture.fromBody(getBase64EncodedAsync(), serviceCallback);
@@ -638,7 +638,7 @@ public final class StringsImpl implements Strings {
     /**
      * Get value that is base64 encoded.
      *
-     * @return the {@link Single&lt;RestResponse&lt;Void, byte[]&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Single<RestResponse<Void, byte[]>> getBase64EncodedWithRestResponseAsync() {
         return service.getBase64Encoded();
@@ -647,7 +647,7 @@ public final class StringsImpl implements Strings {
     /**
      * Get value that is base64 encoded.
      *
-     * @return the {@link Maybe&lt;byte[]&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Maybe<byte[]> getBase64EncodedAsync() {
         return getBase64EncodedWithRestResponseAsync()
@@ -678,7 +678,7 @@ public final class StringsImpl implements Strings {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;byte[]&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     public ServiceFuture<byte[]> getBase64UrlEncodedAsync(ServiceCallback<byte[]> serviceCallback) {
         return ServiceFuture.fromBody(getBase64UrlEncodedAsync(), serviceCallback);
@@ -687,7 +687,7 @@ public final class StringsImpl implements Strings {
     /**
      * Get value that is base64url encoded.
      *
-     * @return the {@link Single&lt;RestResponse&lt;Void, byte[]&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Single<RestResponse<Void, byte[]>> getBase64UrlEncodedWithRestResponseAsync() {
         return service.getBase64UrlEncoded();
@@ -696,7 +696,7 @@ public final class StringsImpl implements Strings {
     /**
      * Get value that is base64url encoded.
      *
-     * @return the {@link Maybe&lt;byte[]&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Maybe<byte[]> getBase64UrlEncodedAsync() {
         return getBase64UrlEncodedWithRestResponseAsync()
@@ -729,7 +729,7 @@ public final class StringsImpl implements Strings {
      * @param stringBody the byte[] value.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;Void&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     public ServiceFuture<Void> putBase64UrlEncodedAsync(@NonNull byte[] stringBody, ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(putBase64UrlEncodedAsync(stringBody), serviceCallback);
@@ -740,7 +740,7 @@ public final class StringsImpl implements Strings {
      *
      * @param stringBody the byte[] value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Single<RestResponse<Void, Void>> putBase64UrlEncodedWithRestResponseAsync(@NonNull byte[] stringBody) {
         if (stringBody == null) {
@@ -755,7 +755,7 @@ public final class StringsImpl implements Strings {
      *
      * @param stringBody the byte[] value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link Completable} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Completable putBase64UrlEncodedAsync(@NonNull byte[] stringBody) {
         return putBase64UrlEncodedWithRestResponseAsync(stringBody)
@@ -778,7 +778,7 @@ public final class StringsImpl implements Strings {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;byte[]&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     public ServiceFuture<byte[]> getNullBase64UrlEncodedAsync(ServiceCallback<byte[]> serviceCallback) {
         return ServiceFuture.fromBody(getNullBase64UrlEncodedAsync(), serviceCallback);
@@ -787,7 +787,7 @@ public final class StringsImpl implements Strings {
     /**
      * Get null value that is expected to be base64url encoded.
      *
-     * @return the {@link Single&lt;RestResponse&lt;Void, byte[]&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Single<RestResponse<Void, byte[]>> getNullBase64UrlEncodedWithRestResponseAsync() {
         return service.getNullBase64UrlEncoded();
@@ -796,7 +796,7 @@ public final class StringsImpl implements Strings {
     /**
      * Get null value that is expected to be base64url encoded.
      *
-     * @return the {@link Maybe&lt;byte[]&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Maybe<byte[]> getNullBase64UrlEncodedAsync() {
         return getNullBase64UrlEncodedWithRestResponseAsync()

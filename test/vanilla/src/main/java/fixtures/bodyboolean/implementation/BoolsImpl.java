@@ -106,7 +106,7 @@ public final class BoolsImpl implements Bools {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;Boolean&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     public ServiceFuture<Boolean> getTrueAsync(ServiceCallback<Boolean> serviceCallback) {
         return ServiceFuture.fromBody(getTrueAsync(), serviceCallback);
@@ -115,7 +115,7 @@ public final class BoolsImpl implements Bools {
     /**
      * Get true Boolean value.
      *
-     * @return the {@link Single&lt;RestResponse&lt;Void, Boolean&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Single<RestResponse<Void, Boolean>> getTrueWithRestResponseAsync() {
         return service.getTrue();
@@ -124,7 +124,7 @@ public final class BoolsImpl implements Bools {
     /**
      * Get true Boolean value.
      *
-     * @return the {@link Maybe&lt;Boolean&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Maybe<Boolean> getTrueAsync() {
         return getTrueWithRestResponseAsync()
@@ -157,7 +157,7 @@ public final class BoolsImpl implements Bools {
      * @param boolBody the boolean value.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;Void&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     public ServiceFuture<Void> putTrueAsync(@NonNull boolean boolBody, ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(putTrueAsync(boolBody), serviceCallback);
@@ -168,7 +168,7 @@ public final class BoolsImpl implements Bools {
      *
      * @param boolBody the boolean value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Single<RestResponse<Void, Void>> putTrueWithRestResponseAsync(@NonNull boolean boolBody) {
         return service.putTrue(boolBody);
@@ -179,7 +179,7 @@ public final class BoolsImpl implements Bools {
      *
      * @param boolBody the boolean value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link Completable} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Completable putTrueAsync(@NonNull boolean boolBody) {
         return putTrueWithRestResponseAsync(boolBody)
@@ -202,7 +202,7 @@ public final class BoolsImpl implements Bools {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;Boolean&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     public ServiceFuture<Boolean> getFalseAsync(ServiceCallback<Boolean> serviceCallback) {
         return ServiceFuture.fromBody(getFalseAsync(), serviceCallback);
@@ -211,7 +211,7 @@ public final class BoolsImpl implements Bools {
     /**
      * Get false Boolean value.
      *
-     * @return the {@link Single&lt;RestResponse&lt;Void, Boolean&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Single<RestResponse<Void, Boolean>> getFalseWithRestResponseAsync() {
         return service.getFalse();
@@ -220,7 +220,7 @@ public final class BoolsImpl implements Bools {
     /**
      * Get false Boolean value.
      *
-     * @return the {@link Maybe&lt;Boolean&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Maybe<Boolean> getFalseAsync() {
         return getFalseWithRestResponseAsync()
@@ -253,7 +253,7 @@ public final class BoolsImpl implements Bools {
      * @param boolBody the boolean value.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;Void&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     public ServiceFuture<Void> putFalseAsync(@NonNull boolean boolBody, ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(putFalseAsync(boolBody), serviceCallback);
@@ -264,7 +264,7 @@ public final class BoolsImpl implements Bools {
      *
      * @param boolBody the boolean value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Single<RestResponse<Void, Void>> putFalseWithRestResponseAsync(@NonNull boolean boolBody) {
         return service.putFalse(boolBody);
@@ -275,7 +275,7 @@ public final class BoolsImpl implements Bools {
      *
      * @param boolBody the boolean value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link Completable} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Completable putFalseAsync(@NonNull boolean boolBody) {
         return putFalseWithRestResponseAsync(boolBody)
@@ -298,7 +298,7 @@ public final class BoolsImpl implements Bools {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;Boolean&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     public ServiceFuture<Boolean> getNullAsync(ServiceCallback<Boolean> serviceCallback) {
         return ServiceFuture.fromBody(getNullAsync(), serviceCallback);
@@ -307,7 +307,7 @@ public final class BoolsImpl implements Bools {
     /**
      * Get null Boolean value.
      *
-     * @return the {@link Single&lt;RestResponse&lt;Void, Boolean&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Single<RestResponse<Void, Boolean>> getNullWithRestResponseAsync() {
         return service.getNull();
@@ -316,7 +316,7 @@ public final class BoolsImpl implements Bools {
     /**
      * Get null Boolean value.
      *
-     * @return the {@link Maybe&lt;Boolean&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Maybe<Boolean> getNullAsync() {
         return getNullWithRestResponseAsync()
@@ -347,7 +347,7 @@ public final class BoolsImpl implements Bools {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;Boolean&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     public ServiceFuture<Boolean> getInvalidAsync(ServiceCallback<Boolean> serviceCallback) {
         return ServiceFuture.fromBody(getInvalidAsync(), serviceCallback);
@@ -356,7 +356,7 @@ public final class BoolsImpl implements Bools {
     /**
      * Get invalid Boolean value.
      *
-     * @return the {@link Single&lt;RestResponse&lt;Void, Boolean&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Single<RestResponse<Void, Boolean>> getInvalidWithRestResponseAsync() {
         return service.getInvalid();
@@ -365,7 +365,7 @@ public final class BoolsImpl implements Bools {
     /**
      * Get invalid Boolean value.
      *
-     * @return the {@link Maybe&lt;Boolean&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Maybe<Boolean> getInvalidAsync() {
         return getInvalidWithRestResponseAsync()

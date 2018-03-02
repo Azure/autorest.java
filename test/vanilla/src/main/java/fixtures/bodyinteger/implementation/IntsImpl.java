@@ -153,7 +153,7 @@ public final class IntsImpl implements Ints {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;Integer&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     public ServiceFuture<Integer> getNullAsync(ServiceCallback<Integer> serviceCallback) {
         return ServiceFuture.fromBody(getNullAsync(), serviceCallback);
@@ -162,7 +162,7 @@ public final class IntsImpl implements Ints {
     /**
      * Get null Int value.
      *
-     * @return the {@link Single&lt;RestResponse&lt;Void, Integer&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Single<RestResponse<Void, Integer>> getNullWithRestResponseAsync() {
         return service.getNull();
@@ -171,7 +171,7 @@ public final class IntsImpl implements Ints {
     /**
      * Get null Int value.
      *
-     * @return the {@link Maybe&lt;Integer&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Maybe<Integer> getNullAsync() {
         return getNullWithRestResponseAsync()
@@ -202,7 +202,7 @@ public final class IntsImpl implements Ints {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;Integer&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     public ServiceFuture<Integer> getInvalidAsync(ServiceCallback<Integer> serviceCallback) {
         return ServiceFuture.fromBody(getInvalidAsync(), serviceCallback);
@@ -211,7 +211,7 @@ public final class IntsImpl implements Ints {
     /**
      * Get invalid Int value.
      *
-     * @return the {@link Single&lt;RestResponse&lt;Void, Integer&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Single<RestResponse<Void, Integer>> getInvalidWithRestResponseAsync() {
         return service.getInvalid();
@@ -220,7 +220,7 @@ public final class IntsImpl implements Ints {
     /**
      * Get invalid Int value.
      *
-     * @return the {@link Maybe&lt;Integer&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Maybe<Integer> getInvalidAsync() {
         return getInvalidWithRestResponseAsync()
@@ -251,7 +251,7 @@ public final class IntsImpl implements Ints {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;Integer&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     public ServiceFuture<Integer> getOverflowInt32Async(ServiceCallback<Integer> serviceCallback) {
         return ServiceFuture.fromBody(getOverflowInt32Async(), serviceCallback);
@@ -260,7 +260,7 @@ public final class IntsImpl implements Ints {
     /**
      * Get overflow Int32 value.
      *
-     * @return the {@link Single&lt;RestResponse&lt;Void, Integer&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Single<RestResponse<Void, Integer>> getOverflowInt32WithRestResponseAsync() {
         return service.getOverflowInt32();
@@ -269,7 +269,7 @@ public final class IntsImpl implements Ints {
     /**
      * Get overflow Int32 value.
      *
-     * @return the {@link Maybe&lt;Integer&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Maybe<Integer> getOverflowInt32Async() {
         return getOverflowInt32WithRestResponseAsync()
@@ -300,7 +300,7 @@ public final class IntsImpl implements Ints {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;Integer&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     public ServiceFuture<Integer> getUnderflowInt32Async(ServiceCallback<Integer> serviceCallback) {
         return ServiceFuture.fromBody(getUnderflowInt32Async(), serviceCallback);
@@ -309,7 +309,7 @@ public final class IntsImpl implements Ints {
     /**
      * Get underflow Int32 value.
      *
-     * @return the {@link Single&lt;RestResponse&lt;Void, Integer&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Single<RestResponse<Void, Integer>> getUnderflowInt32WithRestResponseAsync() {
         return service.getUnderflowInt32();
@@ -318,7 +318,7 @@ public final class IntsImpl implements Ints {
     /**
      * Get underflow Int32 value.
      *
-     * @return the {@link Maybe&lt;Integer&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Maybe<Integer> getUnderflowInt32Async() {
         return getUnderflowInt32WithRestResponseAsync()
@@ -349,7 +349,7 @@ public final class IntsImpl implements Ints {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;Long&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     public ServiceFuture<Long> getOverflowInt64Async(ServiceCallback<Long> serviceCallback) {
         return ServiceFuture.fromBody(getOverflowInt64Async(), serviceCallback);
@@ -358,7 +358,7 @@ public final class IntsImpl implements Ints {
     /**
      * Get overflow Int64 value.
      *
-     * @return the {@link Single&lt;RestResponse&lt;Void, Long&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Single<RestResponse<Void, Long>> getOverflowInt64WithRestResponseAsync() {
         return service.getOverflowInt64();
@@ -367,7 +367,7 @@ public final class IntsImpl implements Ints {
     /**
      * Get overflow Int64 value.
      *
-     * @return the {@link Maybe&lt;Long&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Maybe<Long> getOverflowInt64Async() {
         return getOverflowInt64WithRestResponseAsync()
@@ -398,7 +398,7 @@ public final class IntsImpl implements Ints {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;Long&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     public ServiceFuture<Long> getUnderflowInt64Async(ServiceCallback<Long> serviceCallback) {
         return ServiceFuture.fromBody(getUnderflowInt64Async(), serviceCallback);
@@ -407,7 +407,7 @@ public final class IntsImpl implements Ints {
     /**
      * Get underflow Int64 value.
      *
-     * @return the {@link Single&lt;RestResponse&lt;Void, Long&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Single<RestResponse<Void, Long>> getUnderflowInt64WithRestResponseAsync() {
         return service.getUnderflowInt64();
@@ -416,7 +416,7 @@ public final class IntsImpl implements Ints {
     /**
      * Get underflow Int64 value.
      *
-     * @return the {@link Maybe&lt;Long&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Maybe<Long> getUnderflowInt64Async() {
         return getUnderflowInt64WithRestResponseAsync()
@@ -449,7 +449,7 @@ public final class IntsImpl implements Ints {
      * @param intBody the int value.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;Void&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     public ServiceFuture<Void> putMax32Async(@NonNull int intBody, ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(putMax32Async(intBody), serviceCallback);
@@ -460,7 +460,7 @@ public final class IntsImpl implements Ints {
      *
      * @param intBody the int value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Single<RestResponse<Void, Void>> putMax32WithRestResponseAsync(@NonNull int intBody) {
         return service.putMax32(intBody);
@@ -471,7 +471,7 @@ public final class IntsImpl implements Ints {
      *
      * @param intBody the int value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link Completable} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Completable putMax32Async(@NonNull int intBody) {
         return putMax32WithRestResponseAsync(intBody)
@@ -496,7 +496,7 @@ public final class IntsImpl implements Ints {
      * @param intBody the long value.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;Void&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     public ServiceFuture<Void> putMax64Async(@NonNull long intBody, ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(putMax64Async(intBody), serviceCallback);
@@ -507,7 +507,7 @@ public final class IntsImpl implements Ints {
      *
      * @param intBody the long value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Single<RestResponse<Void, Void>> putMax64WithRestResponseAsync(@NonNull long intBody) {
         return service.putMax64(intBody);
@@ -518,7 +518,7 @@ public final class IntsImpl implements Ints {
      *
      * @param intBody the long value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link Completable} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Completable putMax64Async(@NonNull long intBody) {
         return putMax64WithRestResponseAsync(intBody)
@@ -543,7 +543,7 @@ public final class IntsImpl implements Ints {
      * @param intBody the int value.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;Void&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     public ServiceFuture<Void> putMin32Async(@NonNull int intBody, ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(putMin32Async(intBody), serviceCallback);
@@ -554,7 +554,7 @@ public final class IntsImpl implements Ints {
      *
      * @param intBody the int value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Single<RestResponse<Void, Void>> putMin32WithRestResponseAsync(@NonNull int intBody) {
         return service.putMin32(intBody);
@@ -565,7 +565,7 @@ public final class IntsImpl implements Ints {
      *
      * @param intBody the int value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link Completable} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Completable putMin32Async(@NonNull int intBody) {
         return putMin32WithRestResponseAsync(intBody)
@@ -590,7 +590,7 @@ public final class IntsImpl implements Ints {
      * @param intBody the long value.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;Void&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     public ServiceFuture<Void> putMin64Async(@NonNull long intBody, ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(putMin64Async(intBody), serviceCallback);
@@ -601,7 +601,7 @@ public final class IntsImpl implements Ints {
      *
      * @param intBody the long value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Single<RestResponse<Void, Void>> putMin64WithRestResponseAsync(@NonNull long intBody) {
         return service.putMin64(intBody);
@@ -612,7 +612,7 @@ public final class IntsImpl implements Ints {
      *
      * @param intBody the long value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link Completable} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Completable putMin64Async(@NonNull long intBody) {
         return putMin64WithRestResponseAsync(intBody)
@@ -635,7 +635,7 @@ public final class IntsImpl implements Ints {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;DateTime&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     public ServiceFuture<DateTime> getUnixTimeAsync(ServiceCallback<DateTime> serviceCallback) {
         return ServiceFuture.fromBody(getUnixTimeAsync(), serviceCallback);
@@ -644,7 +644,7 @@ public final class IntsImpl implements Ints {
     /**
      * Get datetime encoded as Unix time value.
      *
-     * @return the {@link Single&lt;RestResponse&lt;Void, DateTime&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Single<RestResponse<Void, DateTime>> getUnixTimeWithRestResponseAsync() {
         return service.getUnixTime();
@@ -653,7 +653,7 @@ public final class IntsImpl implements Ints {
     /**
      * Get datetime encoded as Unix time value.
      *
-     * @return the {@link Maybe&lt;DateTime&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Maybe<DateTime> getUnixTimeAsync() {
         return getUnixTimeWithRestResponseAsync()
@@ -686,7 +686,7 @@ public final class IntsImpl implements Ints {
      * @param intBody the DateTime value.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;Void&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     public ServiceFuture<Void> putUnixTimeDateAsync(@NonNull DateTime intBody, ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(putUnixTimeDateAsync(intBody), serviceCallback);
@@ -697,7 +697,7 @@ public final class IntsImpl implements Ints {
      *
      * @param intBody the DateTime value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Single<RestResponse<Void, Void>> putUnixTimeDateWithRestResponseAsync(@NonNull DateTime intBody) {
         Long intBodyConverted = intBody.toDateTime(DateTimeZone.UTC).getMillis() / 1000;
@@ -709,7 +709,7 @@ public final class IntsImpl implements Ints {
      *
      * @param intBody the DateTime value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link Completable} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Completable putUnixTimeDateAsync(@NonNull DateTime intBody) {
         return putUnixTimeDateWithRestResponseAsync(intBody)
@@ -732,7 +732,7 @@ public final class IntsImpl implements Ints {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;DateTime&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     public ServiceFuture<DateTime> getInvalidUnixTimeAsync(ServiceCallback<DateTime> serviceCallback) {
         return ServiceFuture.fromBody(getInvalidUnixTimeAsync(), serviceCallback);
@@ -741,7 +741,7 @@ public final class IntsImpl implements Ints {
     /**
      * Get invalid Unix time value.
      *
-     * @return the {@link Single&lt;RestResponse&lt;Void, DateTime&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Single<RestResponse<Void, DateTime>> getInvalidUnixTimeWithRestResponseAsync() {
         return service.getInvalidUnixTime();
@@ -750,7 +750,7 @@ public final class IntsImpl implements Ints {
     /**
      * Get invalid Unix time value.
      *
-     * @return the {@link Maybe&lt;DateTime&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Maybe<DateTime> getInvalidUnixTimeAsync() {
         return getInvalidUnixTimeWithRestResponseAsync()
@@ -781,7 +781,7 @@ public final class IntsImpl implements Ints {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;DateTime&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     public ServiceFuture<DateTime> getNullUnixTimeAsync(ServiceCallback<DateTime> serviceCallback) {
         return ServiceFuture.fromBody(getNullUnixTimeAsync(), serviceCallback);
@@ -790,7 +790,7 @@ public final class IntsImpl implements Ints {
     /**
      * Get null Unix time value.
      *
-     * @return the {@link Single&lt;RestResponse&lt;Void, DateTime&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Single<RestResponse<Void, DateTime>> getNullUnixTimeWithRestResponseAsync() {
         return service.getNullUnixTime();
@@ -799,7 +799,7 @@ public final class IntsImpl implements Ints {
     /**
      * Get null Unix time value.
      *
-     * @return the {@link Maybe&lt;DateTime&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Maybe<DateTime> getNullUnixTimeAsync() {
         return getNullUnixTimeWithRestResponseAsync()

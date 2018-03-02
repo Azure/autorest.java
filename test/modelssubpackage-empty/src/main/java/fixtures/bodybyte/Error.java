@@ -8,7 +8,7 @@
  * regenerated.
  */
 
-package fixtures.bodybyte.models;
+package fixtures.bodybyte;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 

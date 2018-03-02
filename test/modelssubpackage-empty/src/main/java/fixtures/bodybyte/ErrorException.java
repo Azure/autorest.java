@@ -8,7 +8,7 @@
  * regenerated.
  */
 
-package fixtures.bodybyte.models;
+package fixtures.bodybyte;
 
 import com.microsoft.rest.v2.RestException;
 import com.microsoft.rest.v2.http.HttpResponse;

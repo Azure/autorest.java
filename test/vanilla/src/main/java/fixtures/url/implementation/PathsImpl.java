@@ -212,7 +212,7 @@ public final class PathsImpl implements Paths {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;Void&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     public ServiceFuture<Void> getBooleanTrueAsync(ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(getBooleanTrueAsync(), serviceCallback);
@@ -221,7 +221,7 @@ public final class PathsImpl implements Paths {
     /**
      * Get true Boolean value on path.
      *
-     * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Single<RestResponse<Void, Void>> getBooleanTrueWithRestResponseAsync() {
         final boolean boolPath = true;
@@ -231,7 +231,7 @@ public final class PathsImpl implements Paths {
     /**
      * Get true Boolean value on path.
      *
-     * @return the {@link Completable} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Completable getBooleanTrueAsync() {
         return getBooleanTrueWithRestResponseAsync()
@@ -253,7 +253,7 @@ public final class PathsImpl implements Paths {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;Void&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     public ServiceFuture<Void> getBooleanFalseAsync(ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(getBooleanFalseAsync(), serviceCallback);
@@ -262,7 +262,7 @@ public final class PathsImpl implements Paths {
     /**
      * Get false Boolean value on path.
      *
-     * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Single<RestResponse<Void, Void>> getBooleanFalseWithRestResponseAsync() {
         final boolean boolPath = false;
@@ -272,7 +272,7 @@ public final class PathsImpl implements Paths {
     /**
      * Get false Boolean value on path.
      *
-     * @return the {@link Completable} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Completable getBooleanFalseAsync() {
         return getBooleanFalseWithRestResponseAsync()
@@ -294,7 +294,7 @@ public final class PathsImpl implements Paths {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;Void&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     public ServiceFuture<Void> getIntOneMillionAsync(ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(getIntOneMillionAsync(), serviceCallback);
@@ -303,7 +303,7 @@ public final class PathsImpl implements Paths {
     /**
      * Get '1000000' integer value.
      *
-     * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Single<RestResponse<Void, Void>> getIntOneMillionWithRestResponseAsync() {
         final int intPath = 1000000;
@@ -313,7 +313,7 @@ public final class PathsImpl implements Paths {
     /**
      * Get '1000000' integer value.
      *
-     * @return the {@link Completable} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Completable getIntOneMillionAsync() {
         return getIntOneMillionWithRestResponseAsync()
@@ -335,7 +335,7 @@ public final class PathsImpl implements Paths {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;Void&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     public ServiceFuture<Void> getIntNegativeOneMillionAsync(ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(getIntNegativeOneMillionAsync(), serviceCallback);
@@ -344,7 +344,7 @@ public final class PathsImpl implements Paths {
     /**
      * Get '-1000000' integer value.
      *
-     * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Single<RestResponse<Void, Void>> getIntNegativeOneMillionWithRestResponseAsync() {
         final int intPath = -1000000;
@@ -354,7 +354,7 @@ public final class PathsImpl implements Paths {
     /**
      * Get '-1000000' integer value.
      *
-     * @return the {@link Completable} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Completable getIntNegativeOneMillionAsync() {
         return getIntNegativeOneMillionWithRestResponseAsync()
@@ -376,7 +376,7 @@ public final class PathsImpl implements Paths {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;Void&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     public ServiceFuture<Void> getTenBillionAsync(ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(getTenBillionAsync(), serviceCallback);
@@ -385,7 +385,7 @@ public final class PathsImpl implements Paths {
     /**
      * Get '10000000000' 64 bit integer value.
      *
-     * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Single<RestResponse<Void, Void>> getTenBillionWithRestResponseAsync() {
         final long longPath = 10000000000L;
@@ -395,7 +395,7 @@ public final class PathsImpl implements Paths {
     /**
      * Get '10000000000' 64 bit integer value.
      *
-     * @return the {@link Completable} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Completable getTenBillionAsync() {
         return getTenBillionWithRestResponseAsync()
@@ -417,7 +417,7 @@ public final class PathsImpl implements Paths {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;Void&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     public ServiceFuture<Void> getNegativeTenBillionAsync(ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(getNegativeTenBillionAsync(), serviceCallback);
@@ -426,7 +426,7 @@ public final class PathsImpl implements Paths {
     /**
      * Get '-10000000000' 64 bit integer value.
      *
-     * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Single<RestResponse<Void, Void>> getNegativeTenBillionWithRestResponseAsync() {
         final long longPath = -10000000000L;
@@ -436,7 +436,7 @@ public final class PathsImpl implements Paths {
     /**
      * Get '-10000000000' 64 bit integer value.
      *
-     * @return the {@link Completable} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Completable getNegativeTenBillionAsync() {
         return getNegativeTenBillionWithRestResponseAsync()
@@ -458,7 +458,7 @@ public final class PathsImpl implements Paths {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;Void&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     public ServiceFuture<Void> floatScientificPositiveAsync(ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(floatScientificPositiveAsync(), serviceCallback);
@@ -467,7 +467,7 @@ public final class PathsImpl implements Paths {
     /**
      * Get '1.034E+20' numeric value.
      *
-     * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Single<RestResponse<Void, Void>> floatScientificPositiveWithRestResponseAsync() {
         final double floatPath = 1.034E+20;
@@ -477,7 +477,7 @@ public final class PathsImpl implements Paths {
     /**
      * Get '1.034E+20' numeric value.
      *
-     * @return the {@link Completable} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Completable floatScientificPositiveAsync() {
         return floatScientificPositiveWithRestResponseAsync()
@@ -499,7 +499,7 @@ public final class PathsImpl implements Paths {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;Void&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     public ServiceFuture<Void> floatScientificNegativeAsync(ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(floatScientificNegativeAsync(), serviceCallback);
@@ -508,7 +508,7 @@ public final class PathsImpl implements Paths {
     /**
      * Get '-1.034E-20' numeric value.
      *
-     * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Single<RestResponse<Void, Void>> floatScientificNegativeWithRestResponseAsync() {
         final double floatPath = -1.034E-20;
@@ -518,7 +518,7 @@ public final class PathsImpl implements Paths {
     /**
      * Get '-1.034E-20' numeric value.
      *
-     * @return the {@link Completable} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Completable floatScientificNegativeAsync() {
         return floatScientificNegativeWithRestResponseAsync()
@@ -540,7 +540,7 @@ public final class PathsImpl implements Paths {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;Void&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     public ServiceFuture<Void> doubleDecimalPositiveAsync(ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(doubleDecimalPositiveAsync(), serviceCallback);
@@ -549,7 +549,7 @@ public final class PathsImpl implements Paths {
     /**
      * Get '9999999.999' numeric value.
      *
-     * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Single<RestResponse<Void, Void>> doubleDecimalPositiveWithRestResponseAsync() {
         final double doublePath = 9999999.999;
@@ -559,7 +559,7 @@ public final class PathsImpl implements Paths {
     /**
      * Get '9999999.999' numeric value.
      *
-     * @return the {@link Completable} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Completable doubleDecimalPositiveAsync() {
         return doubleDecimalPositiveWithRestResponseAsync()
@@ -581,7 +581,7 @@ public final class PathsImpl implements Paths {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;Void&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     public ServiceFuture<Void> doubleDecimalNegativeAsync(ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(doubleDecimalNegativeAsync(), serviceCallback);
@@ -590,7 +590,7 @@ public final class PathsImpl implements Paths {
     /**
      * Get '-9999999.999' numeric value.
      *
-     * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Single<RestResponse<Void, Void>> doubleDecimalNegativeWithRestResponseAsync() {
         final double doublePath = -9999999.999;
@@ -600,7 +600,7 @@ public final class PathsImpl implements Paths {
     /**
      * Get '-9999999.999' numeric value.
      *
-     * @return the {@link Completable} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Completable doubleDecimalNegativeAsync() {
         return doubleDecimalNegativeWithRestResponseAsync()
@@ -622,7 +622,7 @@ public final class PathsImpl implements Paths {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;Void&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     public ServiceFuture<Void> stringUnicodeAsync(ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(stringUnicodeAsync(), serviceCallback);
@@ -631,7 +631,7 @@ public final class PathsImpl implements Paths {
     /**
      * Get '啊齄丂狛狜隣郎隣兀﨩' multi-byte string value.
      *
-     * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Single<RestResponse<Void, Void>> stringUnicodeWithRestResponseAsync() {
         final String stringPath = "啊齄丂狛狜隣郎隣兀﨩";
@@ -641,7 +641,7 @@ public final class PathsImpl implements Paths {
     /**
      * Get '啊齄丂狛狜隣郎隣兀﨩' multi-byte string value.
      *
-     * @return the {@link Completable} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Completable stringUnicodeAsync() {
         return stringUnicodeWithRestResponseAsync()
@@ -663,7 +663,7 @@ public final class PathsImpl implements Paths {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;Void&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     public ServiceFuture<Void> stringUrlEncodedAsync(ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(stringUrlEncodedAsync(), serviceCallback);
@@ -672,7 +672,7 @@ public final class PathsImpl implements Paths {
     /**
      * Get 'begin!*'();:@ &amp;=+$,/?#[]end.
      *
-     * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Single<RestResponse<Void, Void>> stringUrlEncodedWithRestResponseAsync() {
         final String stringPath = "begin!*'();:@ &=+$,/?#[]end";
@@ -682,7 +682,7 @@ public final class PathsImpl implements Paths {
     /**
      * Get 'begin!*'();:@ &amp;=+$,/?#[]end.
      *
-     * @return the {@link Completable} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Completable stringUrlEncodedAsync() {
         return stringUrlEncodedWithRestResponseAsync()
@@ -704,7 +704,7 @@ public final class PathsImpl implements Paths {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;Void&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     public ServiceFuture<Void> stringEmptyAsync(ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(stringEmptyAsync(), serviceCallback);
@@ -713,7 +713,7 @@ public final class PathsImpl implements Paths {
     /**
      * Get ''.
      *
-     * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Single<RestResponse<Void, Void>> stringEmptyWithRestResponseAsync() {
         final String stringPath = "";
@@ -723,7 +723,7 @@ public final class PathsImpl implements Paths {
     /**
      * Get ''.
      *
-     * @return the {@link Completable} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Completable stringEmptyAsync() {
         return stringEmptyWithRestResponseAsync()
@@ -748,7 +748,7 @@ public final class PathsImpl implements Paths {
      * @param stringPath null string value.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;Void&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     public ServiceFuture<Void> stringNullAsync(@NonNull String stringPath, ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(stringNullAsync(stringPath), serviceCallback);
@@ -759,7 +759,7 @@ public final class PathsImpl implements Paths {
      *
      * @param stringPath null string value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Single<RestResponse<Void, Void>> stringNullWithRestResponseAsync(@NonNull String stringPath) {
         if (stringPath == null) {
@@ -773,7 +773,7 @@ public final class PathsImpl implements Paths {
      *
      * @param stringPath null string value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link Completable} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Completable stringNullAsync(@NonNull String stringPath) {
         return stringNullWithRestResponseAsync(stringPath)
@@ -798,7 +798,7 @@ public final class PathsImpl implements Paths {
      * @param enumPath send the value green. Possible values include: 'red color', 'green color', 'blue color'.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;Void&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     public ServiceFuture<Void> enumValidAsync(@NonNull UriColor enumPath, ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(enumValidAsync(enumPath), serviceCallback);
@@ -809,7 +809,7 @@ public final class PathsImpl implements Paths {
      *
      * @param enumPath send the value green. Possible values include: 'red color', 'green color', 'blue color'.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Single<RestResponse<Void, Void>> enumValidWithRestResponseAsync(@NonNull UriColor enumPath) {
         if (enumPath == null) {
@@ -823,7 +823,7 @@ public final class PathsImpl implements Paths {
      *
      * @param enumPath send the value green. Possible values include: 'red color', 'green color', 'blue color'.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link Completable} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Completable enumValidAsync(@NonNull UriColor enumPath) {
         return enumValidWithRestResponseAsync(enumPath)
@@ -848,7 +848,7 @@ public final class PathsImpl implements Paths {
      * @param enumPath send null should throw. Possible values include: 'red color', 'green color', 'blue color'.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;Void&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     public ServiceFuture<Void> enumNullAsync(@NonNull UriColor enumPath, ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(enumNullAsync(enumPath), serviceCallback);
@@ -859,7 +859,7 @@ public final class PathsImpl implements Paths {
      *
      * @param enumPath send null should throw. Possible values include: 'red color', 'green color', 'blue color'.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Single<RestResponse<Void, Void>> enumNullWithRestResponseAsync(@NonNull UriColor enumPath) {
         if (enumPath == null) {
@@ -873,7 +873,7 @@ public final class PathsImpl implements Paths {
      *
      * @param enumPath send null should throw. Possible values include: 'red color', 'green color', 'blue color'.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link Completable} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Completable enumNullAsync(@NonNull UriColor enumPath) {
         return enumNullWithRestResponseAsync(enumPath)
@@ -898,7 +898,7 @@ public final class PathsImpl implements Paths {
      * @param bytePath '啊齄丂狛狜隣郎隣兀﨩' multibyte value as utf-8 encoded byte array.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;Void&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     public ServiceFuture<Void> byteMultiByteAsync(@NonNull byte[] bytePath, ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(byteMultiByteAsync(bytePath), serviceCallback);
@@ -909,7 +909,7 @@ public final class PathsImpl implements Paths {
      *
      * @param bytePath '啊齄丂狛狜隣郎隣兀﨩' multibyte value as utf-8 encoded byte array.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Single<RestResponse<Void, Void>> byteMultiByteWithRestResponseAsync(@NonNull byte[] bytePath) {
         if (bytePath == null) {
@@ -924,7 +924,7 @@ public final class PathsImpl implements Paths {
      *
      * @param bytePath '啊齄丂狛狜隣郎隣兀﨩' multibyte value as utf-8 encoded byte array.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link Completable} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Completable byteMultiByteAsync(@NonNull byte[] bytePath) {
         return byteMultiByteWithRestResponseAsync(bytePath)
@@ -946,7 +946,7 @@ public final class PathsImpl implements Paths {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;Void&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     public ServiceFuture<Void> byteEmptyAsync(ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(byteEmptyAsync(), serviceCallback);
@@ -955,7 +955,7 @@ public final class PathsImpl implements Paths {
     /**
      * Get '' as byte array.
      *
-     * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Single<RestResponse<Void, Void>> byteEmptyWithRestResponseAsync() {
         final byte[] bytePath = "".getBytes();
@@ -966,7 +966,7 @@ public final class PathsImpl implements Paths {
     /**
      * Get '' as byte array.
      *
-     * @return the {@link Completable} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Completable byteEmptyAsync() {
         return byteEmptyWithRestResponseAsync()
@@ -991,7 +991,7 @@ public final class PathsImpl implements Paths {
      * @param bytePath null as byte array (should throw).
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;Void&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     public ServiceFuture<Void> byteNullAsync(@NonNull byte[] bytePath, ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(byteNullAsync(bytePath), serviceCallback);
@@ -1002,7 +1002,7 @@ public final class PathsImpl implements Paths {
      *
      * @param bytePath null as byte array (should throw).
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Single<RestResponse<Void, Void>> byteNullWithRestResponseAsync(@NonNull byte[] bytePath) {
         if (bytePath == null) {
@@ -1017,7 +1017,7 @@ public final class PathsImpl implements Paths {
      *
      * @param bytePath null as byte array (should throw).
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link Completable} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Completable byteNullAsync(@NonNull byte[] bytePath) {
         return byteNullWithRestResponseAsync(bytePath)
@@ -1039,7 +1039,7 @@ public final class PathsImpl implements Paths {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;Void&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     public ServiceFuture<Void> dateValidAsync(ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(dateValidAsync(), serviceCallback);
@@ -1048,7 +1048,7 @@ public final class PathsImpl implements Paths {
     /**
      * Get '2012-01-01' as date.
      *
-     * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Single<RestResponse<Void, Void>> dateValidWithRestResponseAsync() {
         final LocalDate datePath = LocalDate.parse("2012-01-01");
@@ -1058,7 +1058,7 @@ public final class PathsImpl implements Paths {
     /**
      * Get '2012-01-01' as date.
      *
-     * @return the {@link Completable} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Completable dateValidAsync() {
         return dateValidWithRestResponseAsync()
@@ -1083,7 +1083,7 @@ public final class PathsImpl implements Paths {
      * @param datePath null as date (should throw).
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;Void&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     public ServiceFuture<Void> dateNullAsync(@NonNull LocalDate datePath, ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(dateNullAsync(datePath), serviceCallback);
@@ -1094,7 +1094,7 @@ public final class PathsImpl implements Paths {
      *
      * @param datePath null as date (should throw).
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Single<RestResponse<Void, Void>> dateNullWithRestResponseAsync(@NonNull LocalDate datePath) {
         if (datePath == null) {
@@ -1108,7 +1108,7 @@ public final class PathsImpl implements Paths {
      *
      * @param datePath null as date (should throw).
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link Completable} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Completable dateNullAsync(@NonNull LocalDate datePath) {
         return dateNullWithRestResponseAsync(datePath)
@@ -1130,7 +1130,7 @@ public final class PathsImpl implements Paths {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;Void&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     public ServiceFuture<Void> dateTimeValidAsync(ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(dateTimeValidAsync(), serviceCallback);
@@ -1139,7 +1139,7 @@ public final class PathsImpl implements Paths {
     /**
      * Get '2012-01-01T01:01:01Z' as date-time.
      *
-     * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Single<RestResponse<Void, Void>> dateTimeValidWithRestResponseAsync() {
         final DateTime dateTimePath = DateTime.parse("2012-01-01T01:01:01Z");
@@ -1149,7 +1149,7 @@ public final class PathsImpl implements Paths {
     /**
      * Get '2012-01-01T01:01:01Z' as date-time.
      *
-     * @return the {@link Completable} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Completable dateTimeValidAsync() {
         return dateTimeValidWithRestResponseAsync()
@@ -1174,7 +1174,7 @@ public final class PathsImpl implements Paths {
      * @param dateTimePath null as date-time.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;Void&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     public ServiceFuture<Void> dateTimeNullAsync(@NonNull DateTime dateTimePath, ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(dateTimeNullAsync(dateTimePath), serviceCallback);
@@ -1185,7 +1185,7 @@ public final class PathsImpl implements Paths {
      *
      * @param dateTimePath null as date-time.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Single<RestResponse<Void, Void>> dateTimeNullWithRestResponseAsync(@NonNull DateTime dateTimePath) {
         if (dateTimePath == null) {
@@ -1199,7 +1199,7 @@ public final class PathsImpl implements Paths {
      *
      * @param dateTimePath null as date-time.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link Completable} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Completable dateTimeNullAsync(@NonNull DateTime dateTimePath) {
         return dateTimeNullWithRestResponseAsync(dateTimePath)
@@ -1224,7 +1224,7 @@ public final class PathsImpl implements Paths {
      * @param base64UrlPath base64url encoded value.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;Void&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     public ServiceFuture<Void> base64UrlAsync(@NonNull byte[] base64UrlPath, ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(base64UrlAsync(base64UrlPath), serviceCallback);
@@ -1235,7 +1235,7 @@ public final class PathsImpl implements Paths {
      *
      * @param base64UrlPath base64url encoded value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Single<RestResponse<Void, Void>> base64UrlWithRestResponseAsync(@NonNull byte[] base64UrlPath) {
         if (base64UrlPath == null) {
@@ -1250,7 +1250,7 @@ public final class PathsImpl implements Paths {
      *
      * @param base64UrlPath base64url encoded value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link Completable} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Completable base64UrlAsync(@NonNull byte[] base64UrlPath) {
         return base64UrlWithRestResponseAsync(base64UrlPath)
@@ -1275,7 +1275,7 @@ public final class PathsImpl implements Paths {
      * @param arrayPath an array of string ['ArrayPath1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the csv-array format.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;Void&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     public ServiceFuture<Void> arrayCsvInPathAsync(@NonNull List<String> arrayPath, ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(arrayCsvInPathAsync(arrayPath), serviceCallback);
@@ -1286,7 +1286,7 @@ public final class PathsImpl implements Paths {
      *
      * @param arrayPath an array of string ['ArrayPath1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the csv-array format.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Single<RestResponse<Void, Void>> arrayCsvInPathWithRestResponseAsync(@NonNull List<String> arrayPath) {
         if (arrayPath == null) {
@@ -1302,7 +1302,7 @@ public final class PathsImpl implements Paths {
      *
      * @param arrayPath an array of string ['ArrayPath1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the csv-array format.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link Completable} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Completable arrayCsvInPathAsync(@NonNull List<String> arrayPath) {
         return arrayCsvInPathWithRestResponseAsync(arrayPath)
@@ -1327,7 +1327,7 @@ public final class PathsImpl implements Paths {
      * @param unixTimeUrlPath Unix time encoded value.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;Void&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     public ServiceFuture<Void> unixTimeUrlAsync(@NonNull DateTime unixTimeUrlPath, ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(unixTimeUrlAsync(unixTimeUrlPath), serviceCallback);
@@ -1338,7 +1338,7 @@ public final class PathsImpl implements Paths {
      *
      * @param unixTimeUrlPath Unix time encoded value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Single<RestResponse<Void, Void>> unixTimeUrlWithRestResponseAsync(@NonNull DateTime unixTimeUrlPath) {
         Long unixTimeUrlPathConverted = unixTimeUrlPath.toDateTime(DateTimeZone.UTC).getMillis() / 1000;
@@ -1350,7 +1350,7 @@ public final class PathsImpl implements Paths {
      *
      * @param unixTimeUrlPath Unix time encoded value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link Completable} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Completable unixTimeUrlAsync(@NonNull DateTime unixTimeUrlPath) {
         return unixTimeUrlWithRestResponseAsync(unixTimeUrlPath)

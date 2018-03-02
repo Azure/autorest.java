@@ -87,7 +87,7 @@ public final class HttpSuccessInner {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;Boolean&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     public ServiceFuture<Boolean> head200Async(ServiceCallback<Boolean> serviceCallback) {
         return ServiceFuture.fromBody(head200Async(), serviceCallback);
@@ -96,7 +96,7 @@ public final class HttpSuccessInner {
     /**
      * Return 200 status code if successful.
      *
-     * @return the {@link Single&lt;RestResponse&lt;Void, Boolean&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Single<RestResponse<Void, Boolean>> head200WithRestResponseAsync() {
         return service.head200(this.client.acceptLanguage());
@@ -105,7 +105,7 @@ public final class HttpSuccessInner {
     /**
      * Return 200 status code if successful.
      *
-     * @return the {@link Maybe&lt;Boolean&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Maybe<Boolean> head200Async() {
         return head200WithRestResponseAsync()
@@ -136,7 +136,7 @@ public final class HttpSuccessInner {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;Boolean&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     public ServiceFuture<Boolean> head204Async(ServiceCallback<Boolean> serviceCallback) {
         return ServiceFuture.fromBody(head204Async(), serviceCallback);
@@ -145,7 +145,7 @@ public final class HttpSuccessInner {
     /**
      * Return 204 status code if successful.
      *
-     * @return the {@link Single&lt;RestResponse&lt;Void, Boolean&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Single<RestResponse<Void, Boolean>> head204WithRestResponseAsync() {
         return service.head204(this.client.acceptLanguage());
@@ -154,7 +154,7 @@ public final class HttpSuccessInner {
     /**
      * Return 204 status code if successful.
      *
-     * @return the {@link Maybe&lt;Boolean&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Maybe<Boolean> head204Async() {
         return head204WithRestResponseAsync()
@@ -185,7 +185,7 @@ public final class HttpSuccessInner {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;Boolean&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     public ServiceFuture<Boolean> head404Async(ServiceCallback<Boolean> serviceCallback) {
         return ServiceFuture.fromBody(head404Async(), serviceCallback);
@@ -194,7 +194,7 @@ public final class HttpSuccessInner {
     /**
      * Return 404 status code if successful.
      *
-     * @return the {@link Single&lt;RestResponse&lt;Void, Boolean&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Single<RestResponse<Void, Boolean>> head404WithRestResponseAsync() {
         return service.head404(this.client.acceptLanguage());
@@ -203,7 +203,7 @@ public final class HttpSuccessInner {
     /**
      * Return 404 status code if successful.
      *
-     * @return the {@link Maybe&lt;Boolean&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Maybe<Boolean> head404Async() {
         return head404WithRestResponseAsync()

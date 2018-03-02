@@ -14,6 +14,7 @@ import com.microsoft.rest.v2.RestResponse;
 import com.microsoft.rest.v2.ServiceCallback;
 import com.microsoft.rest.v2.ServiceFuture;
 import fixtures.http.models.Error;
+import fixtures.http.models.ErrorException;
 import io.reactivex.Maybe;
 import io.reactivex.Single;
 
@@ -36,21 +37,21 @@ public interface HttpServerFailures {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;Error&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     ServiceFuture<Error> head501Async(ServiceCallback<Error> serviceCallback);
 
     /**
      * Return 501 status code - should be represented in the client as an error.
      *
-     * @return the {@link Single&lt;RestResponse&lt;Void, Error&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     Single<RestResponse<Void, Error>> head501WithRestResponseAsync();
 
     /**
      * Return 501 status code - should be represented in the client as an error.
      *
-     * @return the {@link Maybe&lt;Error&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     Maybe<Error> head501Async();
 
@@ -68,21 +69,21 @@ public interface HttpServerFailures {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;Error&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     ServiceFuture<Error> get501Async(ServiceCallback<Error> serviceCallback);
 
     /**
      * Return 501 status code - should be represented in the client as an error.
      *
-     * @return the {@link Single&lt;RestResponse&lt;Void, Error&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     Single<RestResponse<Void, Error>> get501WithRestResponseAsync();
 
     /**
      * Return 501 status code - should be represented in the client as an error.
      *
-     * @return the {@link Maybe&lt;Error&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     Maybe<Error> get501Async();
 
@@ -100,21 +101,21 @@ public interface HttpServerFailures {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;Error&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     ServiceFuture<Error> post505Async(ServiceCallback<Error> serviceCallback);
 
     /**
      * Return 505 status code - should be represented in the client as an error.
      *
-     * @return the {@link Single&lt;RestResponse&lt;Void, Error&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     Single<RestResponse<Void, Error>> post505WithRestResponseAsync();
 
     /**
      * Return 505 status code - should be represented in the client as an error.
      *
-     * @return the {@link Maybe&lt;Error&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     Maybe<Error> post505Async();
 
@@ -135,7 +136,7 @@ public interface HttpServerFailures {
      * @param booleanValue Simple boolean value true.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;Error&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     ServiceFuture<Error> post505Async(Boolean booleanValue, ServiceCallback<Error> serviceCallback);
 
@@ -144,7 +145,7 @@ public interface HttpServerFailures {
      *
      * @param booleanValue Simple boolean value true.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link Single&lt;RestResponse&lt;Void, Error&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     Single<RestResponse<Void, Error>> post505WithRestResponseAsync(Boolean booleanValue);
 
@@ -153,7 +154,7 @@ public interface HttpServerFailures {
      *
      * @param booleanValue Simple boolean value true.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link Maybe&lt;Error&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     Maybe<Error> post505Async(Boolean booleanValue);
 
@@ -171,21 +172,21 @@ public interface HttpServerFailures {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;Error&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     ServiceFuture<Error> delete505Async(ServiceCallback<Error> serviceCallback);
 
     /**
      * Return 505 status code - should be represented in the client as an error.
      *
-     * @return the {@link Single&lt;RestResponse&lt;Void, Error&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     Single<RestResponse<Void, Error>> delete505WithRestResponseAsync();
 
     /**
      * Return 505 status code - should be represented in the client as an error.
      *
-     * @return the {@link Maybe&lt;Error&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     Maybe<Error> delete505Async();
 
@@ -206,7 +207,7 @@ public interface HttpServerFailures {
      * @param booleanValue Simple boolean value true.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;Error&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     ServiceFuture<Error> delete505Async(Boolean booleanValue, ServiceCallback<Error> serviceCallback);
 
@@ -215,7 +216,7 @@ public interface HttpServerFailures {
      *
      * @param booleanValue Simple boolean value true.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link Single&lt;RestResponse&lt;Void, Error&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     Single<RestResponse<Void, Error>> delete505WithRestResponseAsync(Boolean booleanValue);
 
@@ -224,7 +225,7 @@ public interface HttpServerFailures {
      *
      * @param booleanValue Simple boolean value true.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link Maybe&lt;Error&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     Maybe<Error> delete505Async(Boolean booleanValue);
 }

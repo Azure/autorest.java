@@ -18,6 +18,7 @@ import fixtures.requiredoptional.models.ArrayWrapper;
 import fixtures.requiredoptional.models.ClassOptionalWrapper;
 import fixtures.requiredoptional.models.ClassWrapper;
 import fixtures.requiredoptional.models.Error;
+import fixtures.requiredoptional.models.ErrorException;
 import fixtures.requiredoptional.models.IntOptionalWrapper;
 import fixtures.requiredoptional.models.IntWrapper;
 import fixtures.requiredoptional.models.Product;
@@ -51,7 +52,7 @@ public interface Explicits {
      * @param bodyParameter the int value.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;Error&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     ServiceFuture<Error> postRequiredIntegerParameterAsync(@NonNull int bodyParameter, ServiceCallback<Error> serviceCallback);
 
@@ -60,7 +61,7 @@ public interface Explicits {
      *
      * @param bodyParameter the int value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link Single&lt;RestResponse&lt;Void, Error&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     Single<RestResponse<Void, Error>> postRequiredIntegerParameterWithRestResponseAsync(@NonNull int bodyParameter);
 
@@ -69,7 +70,7 @@ public interface Explicits {
      *
      * @param bodyParameter the int value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link Maybe&lt;Error&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     Maybe<Error> postRequiredIntegerParameterAsync(@NonNull int bodyParameter);
 
@@ -89,7 +90,7 @@ public interface Explicits {
      * @param bodyParameter the Integer value.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;Void&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     ServiceFuture<Void> postOptionalIntegerParameterAsync(Integer bodyParameter, ServiceCallback<Void> serviceCallback);
 
@@ -98,7 +99,7 @@ public interface Explicits {
      *
      * @param bodyParameter the Integer value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     Single<RestResponse<Void, Void>> postOptionalIntegerParameterWithRestResponseAsync(Integer bodyParameter);
 
@@ -107,7 +108,7 @@ public interface Explicits {
      *
      * @param bodyParameter the Integer value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link Completable} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     Completable postOptionalIntegerParameterAsync(Integer bodyParameter);
 
@@ -128,7 +129,7 @@ public interface Explicits {
      * @param bodyParameter the IntWrapper value.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;Error&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     ServiceFuture<Error> postRequiredIntegerPropertyAsync(@NonNull IntWrapper bodyParameter, ServiceCallback<Error> serviceCallback);
 
@@ -137,7 +138,7 @@ public interface Explicits {
      *
      * @param bodyParameter the IntWrapper value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link Single&lt;RestResponse&lt;Void, Error&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     Single<RestResponse<Void, Error>> postRequiredIntegerPropertyWithRestResponseAsync(@NonNull IntWrapper bodyParameter);
 
@@ -146,7 +147,7 @@ public interface Explicits {
      *
      * @param bodyParameter the IntWrapper value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link Maybe&lt;Error&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     Maybe<Error> postRequiredIntegerPropertyAsync(@NonNull IntWrapper bodyParameter);
 
@@ -166,7 +167,7 @@ public interface Explicits {
      * @param bodyParameter the IntOptionalWrapper value.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;Void&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     ServiceFuture<Void> postOptionalIntegerPropertyAsync(IntOptionalWrapper bodyParameter, ServiceCallback<Void> serviceCallback);
 
@@ -175,7 +176,7 @@ public interface Explicits {
      *
      * @param bodyParameter the IntOptionalWrapper value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     Single<RestResponse<Void, Void>> postOptionalIntegerPropertyWithRestResponseAsync(IntOptionalWrapper bodyParameter);
 
@@ -184,7 +185,7 @@ public interface Explicits {
      *
      * @param bodyParameter the IntOptionalWrapper value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link Completable} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     Completable postOptionalIntegerPropertyAsync(IntOptionalWrapper bodyParameter);
 
@@ -205,7 +206,7 @@ public interface Explicits {
      * @param headerParameter the int value.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;Error&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     ServiceFuture<Error> postRequiredIntegerHeaderAsync(@NonNull int headerParameter, ServiceCallback<Error> serviceCallback);
 
@@ -214,7 +215,7 @@ public interface Explicits {
      *
      * @param headerParameter the int value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link Single&lt;RestResponse&lt;Void, Error&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     Single<RestResponse<Void, Error>> postRequiredIntegerHeaderWithRestResponseAsync(@NonNull int headerParameter);
 
@@ -223,7 +224,7 @@ public interface Explicits {
      *
      * @param headerParameter the int value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link Maybe&lt;Error&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     Maybe<Error> postRequiredIntegerHeaderAsync(@NonNull int headerParameter);
 
@@ -243,7 +244,7 @@ public interface Explicits {
      * @param headerParameter the Integer value.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;Void&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     ServiceFuture<Void> postOptionalIntegerHeaderAsync(Integer headerParameter, ServiceCallback<Void> serviceCallback);
 
@@ -252,7 +253,7 @@ public interface Explicits {
      *
      * @param headerParameter the Integer value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     Single<RestResponse<Void, Void>> postOptionalIntegerHeaderWithRestResponseAsync(Integer headerParameter);
 
@@ -261,7 +262,7 @@ public interface Explicits {
      *
      * @param headerParameter the Integer value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link Completable} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     Completable postOptionalIntegerHeaderAsync(Integer headerParameter);
 
@@ -282,7 +283,7 @@ public interface Explicits {
      * @param bodyParameter the String value.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;Error&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     ServiceFuture<Error> postRequiredStringParameterAsync(@NonNull String bodyParameter, ServiceCallback<Error> serviceCallback);
 
@@ -291,7 +292,7 @@ public interface Explicits {
      *
      * @param bodyParameter the String value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link Single&lt;RestResponse&lt;Void, Error&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     Single<RestResponse<Void, Error>> postRequiredStringParameterWithRestResponseAsync(@NonNull String bodyParameter);
 
@@ -300,7 +301,7 @@ public interface Explicits {
      *
      * @param bodyParameter the String value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link Maybe&lt;Error&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     Maybe<Error> postRequiredStringParameterAsync(@NonNull String bodyParameter);
 
@@ -320,7 +321,7 @@ public interface Explicits {
      * @param bodyParameter the String value.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;Void&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     ServiceFuture<Void> postOptionalStringParameterAsync(String bodyParameter, ServiceCallback<Void> serviceCallback);
 
@@ -329,7 +330,7 @@ public interface Explicits {
      *
      * @param bodyParameter the String value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     Single<RestResponse<Void, Void>> postOptionalStringParameterWithRestResponseAsync(String bodyParameter);
 
@@ -338,7 +339,7 @@ public interface Explicits {
      *
      * @param bodyParameter the String value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link Completable} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     Completable postOptionalStringParameterAsync(String bodyParameter);
 
@@ -359,7 +360,7 @@ public interface Explicits {
      * @param bodyParameter the StringWrapper value.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;Error&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     ServiceFuture<Error> postRequiredStringPropertyAsync(@NonNull StringWrapper bodyParameter, ServiceCallback<Error> serviceCallback);
 
@@ -368,7 +369,7 @@ public interface Explicits {
      *
      * @param bodyParameter the StringWrapper value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link Single&lt;RestResponse&lt;Void, Error&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     Single<RestResponse<Void, Error>> postRequiredStringPropertyWithRestResponseAsync(@NonNull StringWrapper bodyParameter);
 
@@ -377,7 +378,7 @@ public interface Explicits {
      *
      * @param bodyParameter the StringWrapper value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link Maybe&lt;Error&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     Maybe<Error> postRequiredStringPropertyAsync(@NonNull StringWrapper bodyParameter);
 
@@ -397,7 +398,7 @@ public interface Explicits {
      * @param bodyParameter the StringOptionalWrapper value.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;Void&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     ServiceFuture<Void> postOptionalStringPropertyAsync(StringOptionalWrapper bodyParameter, ServiceCallback<Void> serviceCallback);
 
@@ -406,7 +407,7 @@ public interface Explicits {
      *
      * @param bodyParameter the StringOptionalWrapper value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     Single<RestResponse<Void, Void>> postOptionalStringPropertyWithRestResponseAsync(StringOptionalWrapper bodyParameter);
 
@@ -415,7 +416,7 @@ public interface Explicits {
      *
      * @param bodyParameter the StringOptionalWrapper value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link Completable} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     Completable postOptionalStringPropertyAsync(StringOptionalWrapper bodyParameter);
 
@@ -436,7 +437,7 @@ public interface Explicits {
      * @param headerParameter the String value.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;Error&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     ServiceFuture<Error> postRequiredStringHeaderAsync(@NonNull String headerParameter, ServiceCallback<Error> serviceCallback);
 
@@ -445,7 +446,7 @@ public interface Explicits {
      *
      * @param headerParameter the String value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link Single&lt;RestResponse&lt;Void, Error&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     Single<RestResponse<Void, Error>> postRequiredStringHeaderWithRestResponseAsync(@NonNull String headerParameter);
 
@@ -454,7 +455,7 @@ public interface Explicits {
      *
      * @param headerParameter the String value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link Maybe&lt;Error&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     Maybe<Error> postRequiredStringHeaderAsync(@NonNull String headerParameter);
 
@@ -474,7 +475,7 @@ public interface Explicits {
      * @param bodyParameter the String value.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;Void&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     ServiceFuture<Void> postOptionalStringHeaderAsync(String bodyParameter, ServiceCallback<Void> serviceCallback);
 
@@ -483,7 +484,7 @@ public interface Explicits {
      *
      * @param bodyParameter the String value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     Single<RestResponse<Void, Void>> postOptionalStringHeaderWithRestResponseAsync(String bodyParameter);
 
@@ -492,7 +493,7 @@ public interface Explicits {
      *
      * @param bodyParameter the String value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link Completable} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     Completable postOptionalStringHeaderAsync(String bodyParameter);
 
@@ -513,7 +514,7 @@ public interface Explicits {
      * @param bodyParameter the Product value.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;Error&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     ServiceFuture<Error> postRequiredClassParameterAsync(@NonNull Product bodyParameter, ServiceCallback<Error> serviceCallback);
 
@@ -522,7 +523,7 @@ public interface Explicits {
      *
      * @param bodyParameter the Product value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link Single&lt;RestResponse&lt;Void, Error&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     Single<RestResponse<Void, Error>> postRequiredClassParameterWithRestResponseAsync(@NonNull Product bodyParameter);
 
@@ -531,7 +532,7 @@ public interface Explicits {
      *
      * @param bodyParameter the Product value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link Maybe&lt;Error&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     Maybe<Error> postRequiredClassParameterAsync(@NonNull Product bodyParameter);
 
@@ -551,7 +552,7 @@ public interface Explicits {
      * @param bodyParameter the Product value.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;Void&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     ServiceFuture<Void> postOptionalClassParameterAsync(Product bodyParameter, ServiceCallback<Void> serviceCallback);
 
@@ -560,7 +561,7 @@ public interface Explicits {
      *
      * @param bodyParameter the Product value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     Single<RestResponse<Void, Void>> postOptionalClassParameterWithRestResponseAsync(Product bodyParameter);
 
@@ -569,7 +570,7 @@ public interface Explicits {
      *
      * @param bodyParameter the Product value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link Completable} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     Completable postOptionalClassParameterAsync(Product bodyParameter);
 
@@ -590,7 +591,7 @@ public interface Explicits {
      * @param bodyParameter the ClassWrapper value.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;Error&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     ServiceFuture<Error> postRequiredClassPropertyAsync(@NonNull ClassWrapper bodyParameter, ServiceCallback<Error> serviceCallback);
 
@@ -599,7 +600,7 @@ public interface Explicits {
      *
      * @param bodyParameter the ClassWrapper value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link Single&lt;RestResponse&lt;Void, Error&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     Single<RestResponse<Void, Error>> postRequiredClassPropertyWithRestResponseAsync(@NonNull ClassWrapper bodyParameter);
 
@@ -608,7 +609,7 @@ public interface Explicits {
      *
      * @param bodyParameter the ClassWrapper value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link Maybe&lt;Error&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     Maybe<Error> postRequiredClassPropertyAsync(@NonNull ClassWrapper bodyParameter);
 
@@ -628,7 +629,7 @@ public interface Explicits {
      * @param bodyParameter the ClassOptionalWrapper value.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;Void&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     ServiceFuture<Void> postOptionalClassPropertyAsync(ClassOptionalWrapper bodyParameter, ServiceCallback<Void> serviceCallback);
 
@@ -637,7 +638,7 @@ public interface Explicits {
      *
      * @param bodyParameter the ClassOptionalWrapper value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     Single<RestResponse<Void, Void>> postOptionalClassPropertyWithRestResponseAsync(ClassOptionalWrapper bodyParameter);
 
@@ -646,7 +647,7 @@ public interface Explicits {
      *
      * @param bodyParameter the ClassOptionalWrapper value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link Completable} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     Completable postOptionalClassPropertyAsync(ClassOptionalWrapper bodyParameter);
 
@@ -667,7 +668,7 @@ public interface Explicits {
      * @param bodyParameter the List&lt;String&gt; value.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;Error&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     ServiceFuture<Error> postRequiredArrayParameterAsync(@NonNull List<String> bodyParameter, ServiceCallback<Error> serviceCallback);
 
@@ -676,7 +677,7 @@ public interface Explicits {
      *
      * @param bodyParameter the List&lt;String&gt; value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link Single&lt;RestResponse&lt;Void, Error&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     Single<RestResponse<Void, Error>> postRequiredArrayParameterWithRestResponseAsync(@NonNull List<String> bodyParameter);
 
@@ -685,7 +686,7 @@ public interface Explicits {
      *
      * @param bodyParameter the List&lt;String&gt; value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link Maybe&lt;Error&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     Maybe<Error> postRequiredArrayParameterAsync(@NonNull List<String> bodyParameter);
 
@@ -705,7 +706,7 @@ public interface Explicits {
      * @param bodyParameter the List&lt;String&gt; value.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;Void&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     ServiceFuture<Void> postOptionalArrayParameterAsync(List<String> bodyParameter, ServiceCallback<Void> serviceCallback);
 
@@ -714,7 +715,7 @@ public interface Explicits {
      *
      * @param bodyParameter the List&lt;String&gt; value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     Single<RestResponse<Void, Void>> postOptionalArrayParameterWithRestResponseAsync(List<String> bodyParameter);
 
@@ -723,7 +724,7 @@ public interface Explicits {
      *
      * @param bodyParameter the List&lt;String&gt; value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link Completable} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     Completable postOptionalArrayParameterAsync(List<String> bodyParameter);
 
@@ -744,7 +745,7 @@ public interface Explicits {
      * @param bodyParameter the ArrayWrapper value.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;Error&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     ServiceFuture<Error> postRequiredArrayPropertyAsync(@NonNull ArrayWrapper bodyParameter, ServiceCallback<Error> serviceCallback);
 
@@ -753,7 +754,7 @@ public interface Explicits {
      *
      * @param bodyParameter the ArrayWrapper value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link Single&lt;RestResponse&lt;Void, Error&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     Single<RestResponse<Void, Error>> postRequiredArrayPropertyWithRestResponseAsync(@NonNull ArrayWrapper bodyParameter);
 
@@ -762,7 +763,7 @@ public interface Explicits {
      *
      * @param bodyParameter the ArrayWrapper value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link Maybe&lt;Error&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     Maybe<Error> postRequiredArrayPropertyAsync(@NonNull ArrayWrapper bodyParameter);
 
@@ -782,7 +783,7 @@ public interface Explicits {
      * @param bodyParameter the ArrayOptionalWrapper value.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;Void&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     ServiceFuture<Void> postOptionalArrayPropertyAsync(ArrayOptionalWrapper bodyParameter, ServiceCallback<Void> serviceCallback);
 
@@ -791,7 +792,7 @@ public interface Explicits {
      *
      * @param bodyParameter the ArrayOptionalWrapper value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     Single<RestResponse<Void, Void>> postOptionalArrayPropertyWithRestResponseAsync(ArrayOptionalWrapper bodyParameter);
 
@@ -800,7 +801,7 @@ public interface Explicits {
      *
      * @param bodyParameter the ArrayOptionalWrapper value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link Completable} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     Completable postOptionalArrayPropertyAsync(ArrayOptionalWrapper bodyParameter);
 
@@ -821,7 +822,7 @@ public interface Explicits {
      * @param headerParameter the List&lt;String&gt; value.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;Error&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     ServiceFuture<Error> postRequiredArrayHeaderAsync(@NonNull List<String> headerParameter, ServiceCallback<Error> serviceCallback);
 
@@ -830,7 +831,7 @@ public interface Explicits {
      *
      * @param headerParameter the List&lt;String&gt; value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link Single&lt;RestResponse&lt;Void, Error&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     Single<RestResponse<Void, Error>> postRequiredArrayHeaderWithRestResponseAsync(@NonNull List<String> headerParameter);
 
@@ -839,7 +840,7 @@ public interface Explicits {
      *
      * @param headerParameter the List&lt;String&gt; value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link Maybe&lt;Error&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     Maybe<Error> postRequiredArrayHeaderAsync(@NonNull List<String> headerParameter);
 
@@ -859,7 +860,7 @@ public interface Explicits {
      * @param headerParameter the List&lt;String&gt; value.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;Void&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     ServiceFuture<Void> postOptionalArrayHeaderAsync(List<String> headerParameter, ServiceCallback<Void> serviceCallback);
 
@@ -868,7 +869,7 @@ public interface Explicits {
      *
      * @param headerParameter the List&lt;String&gt; value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     Single<RestResponse<Void, Void>> postOptionalArrayHeaderWithRestResponseAsync(List<String> headerParameter);
 
@@ -877,7 +878,7 @@ public interface Explicits {
      *
      * @param headerParameter the List&lt;String&gt; value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link Completable} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     Completable postOptionalArrayHeaderAsync(List<String> headerParameter);
 }

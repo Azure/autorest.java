@@ -85,7 +85,7 @@ public final class HttpFailuresImpl implements HttpFailures {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;Boolean&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     public ServiceFuture<Boolean> getEmptyErrorAsync(ServiceCallback<Boolean> serviceCallback) {
         return ServiceFuture.fromBody(getEmptyErrorAsync(), serviceCallback);
@@ -94,7 +94,7 @@ public final class HttpFailuresImpl implements HttpFailures {
     /**
      * Get empty error form server.
      *
-     * @return the {@link Single&lt;RestResponse&lt;Void, Boolean&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Single<RestResponse<Void, Boolean>> getEmptyErrorWithRestResponseAsync() {
         return service.getEmptyError();
@@ -103,7 +103,7 @@ public final class HttpFailuresImpl implements HttpFailures {
     /**
      * Get empty error form server.
      *
-     * @return the {@link Maybe&lt;Boolean&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Maybe<Boolean> getEmptyErrorAsync() {
         return getEmptyErrorWithRestResponseAsync()
@@ -133,7 +133,7 @@ public final class HttpFailuresImpl implements HttpFailures {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;Boolean&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     public ServiceFuture<Boolean> getNoModelErrorAsync(ServiceCallback<Boolean> serviceCallback) {
         return ServiceFuture.fromBody(getNoModelErrorAsync(), serviceCallback);
@@ -142,7 +142,7 @@ public final class HttpFailuresImpl implements HttpFailures {
     /**
      * Get empty error form server.
      *
-     * @return the {@link Single&lt;RestResponse&lt;Void, Boolean&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Single<RestResponse<Void, Boolean>> getNoModelErrorWithRestResponseAsync() {
         return service.getNoModelError();
@@ -151,7 +151,7 @@ public final class HttpFailuresImpl implements HttpFailures {
     /**
      * Get empty error form server.
      *
-     * @return the {@link Maybe&lt;Boolean&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Maybe<Boolean> getNoModelErrorAsync() {
         return getNoModelErrorWithRestResponseAsync()
@@ -181,7 +181,7 @@ public final class HttpFailuresImpl implements HttpFailures {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;Boolean&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     public ServiceFuture<Boolean> getNoModelEmptyAsync(ServiceCallback<Boolean> serviceCallback) {
         return ServiceFuture.fromBody(getNoModelEmptyAsync(), serviceCallback);
@@ -190,7 +190,7 @@ public final class HttpFailuresImpl implements HttpFailures {
     /**
      * Get empty response from server.
      *
-     * @return the {@link Single&lt;RestResponse&lt;Void, Boolean&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Single<RestResponse<Void, Boolean>> getNoModelEmptyWithRestResponseAsync() {
         return service.getNoModelEmpty();
@@ -199,7 +199,7 @@ public final class HttpFailuresImpl implements HttpFailures {
     /**
      * Get empty response from server.
      *
-     * @return the {@link Maybe&lt;Boolean&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Maybe<Boolean> getNoModelEmptyAsync() {
         return getNoModelEmptyWithRestResponseAsync()

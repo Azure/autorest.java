@@ -197,7 +197,7 @@ public final class NumbersImpl implements Numbers {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;Double&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     public ServiceFuture<Double> getNullAsync(ServiceCallback<Double> serviceCallback) {
         return ServiceFuture.fromBody(getNullAsync(), serviceCallback);
@@ -206,7 +206,7 @@ public final class NumbersImpl implements Numbers {
     /**
      * Get null Number value.
      *
-     * @return the {@link Single&lt;RestResponse&lt;Void, Double&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Single<RestResponse<Void, Double>> getNullWithRestResponseAsync() {
         return service.getNull();
@@ -215,7 +215,7 @@ public final class NumbersImpl implements Numbers {
     /**
      * Get null Number value.
      *
-     * @return the {@link Maybe&lt;Double&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Maybe<Double> getNullAsync() {
         return getNullWithRestResponseAsync()
@@ -246,7 +246,7 @@ public final class NumbersImpl implements Numbers {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;Double&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     public ServiceFuture<Double> getInvalidFloatAsync(ServiceCallback<Double> serviceCallback) {
         return ServiceFuture.fromBody(getInvalidFloatAsync(), serviceCallback);
@@ -255,7 +255,7 @@ public final class NumbersImpl implements Numbers {
     /**
      * Get invalid float Number value.
      *
-     * @return the {@link Single&lt;RestResponse&lt;Void, Double&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Single<RestResponse<Void, Double>> getInvalidFloatWithRestResponseAsync() {
         return service.getInvalidFloat();
@@ -264,7 +264,7 @@ public final class NumbersImpl implements Numbers {
     /**
      * Get invalid float Number value.
      *
-     * @return the {@link Maybe&lt;Double&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Maybe<Double> getInvalidFloatAsync() {
         return getInvalidFloatWithRestResponseAsync()
@@ -295,7 +295,7 @@ public final class NumbersImpl implements Numbers {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;Double&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     public ServiceFuture<Double> getInvalidDoubleAsync(ServiceCallback<Double> serviceCallback) {
         return ServiceFuture.fromBody(getInvalidDoubleAsync(), serviceCallback);
@@ -304,7 +304,7 @@ public final class NumbersImpl implements Numbers {
     /**
      * Get invalid double Number value.
      *
-     * @return the {@link Single&lt;RestResponse&lt;Void, Double&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Single<RestResponse<Void, Double>> getInvalidDoubleWithRestResponseAsync() {
         return service.getInvalidDouble();
@@ -313,7 +313,7 @@ public final class NumbersImpl implements Numbers {
     /**
      * Get invalid double Number value.
      *
-     * @return the {@link Maybe&lt;Double&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Maybe<Double> getInvalidDoubleAsync() {
         return getInvalidDoubleWithRestResponseAsync()
@@ -344,7 +344,7 @@ public final class NumbersImpl implements Numbers {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;BigDecimal&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     public ServiceFuture<BigDecimal> getInvalidDecimalAsync(ServiceCallback<BigDecimal> serviceCallback) {
         return ServiceFuture.fromBody(getInvalidDecimalAsync(), serviceCallback);
@@ -353,7 +353,7 @@ public final class NumbersImpl implements Numbers {
     /**
      * Get invalid decimal Number value.
      *
-     * @return the {@link Single&lt;RestResponse&lt;Void, BigDecimal&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Single<RestResponse<Void, BigDecimal>> getInvalidDecimalWithRestResponseAsync() {
         return service.getInvalidDecimal();
@@ -362,7 +362,7 @@ public final class NumbersImpl implements Numbers {
     /**
      * Get invalid decimal Number value.
      *
-     * @return the {@link Maybe&lt;BigDecimal&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Maybe<BigDecimal> getInvalidDecimalAsync() {
         return getInvalidDecimalWithRestResponseAsync()
@@ -395,7 +395,7 @@ public final class NumbersImpl implements Numbers {
      * @param numberBody the double value.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;Void&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     public ServiceFuture<Void> putBigFloatAsync(@NonNull double numberBody, ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(putBigFloatAsync(numberBody), serviceCallback);
@@ -406,7 +406,7 @@ public final class NumbersImpl implements Numbers {
      *
      * @param numberBody the double value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Single<RestResponse<Void, Void>> putBigFloatWithRestResponseAsync(@NonNull double numberBody) {
         return service.putBigFloat(numberBody);
@@ -417,7 +417,7 @@ public final class NumbersImpl implements Numbers {
      *
      * @param numberBody the double value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link Completable} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Completable putBigFloatAsync(@NonNull double numberBody) {
         return putBigFloatWithRestResponseAsync(numberBody)
@@ -440,7 +440,7 @@ public final class NumbersImpl implements Numbers {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;Double&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     public ServiceFuture<Double> getBigFloatAsync(ServiceCallback<Double> serviceCallback) {
         return ServiceFuture.fromBody(getBigFloatAsync(), serviceCallback);
@@ -449,7 +449,7 @@ public final class NumbersImpl implements Numbers {
     /**
      * Get big float value 3.402823e+20.
      *
-     * @return the {@link Single&lt;RestResponse&lt;Void, Double&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Single<RestResponse<Void, Double>> getBigFloatWithRestResponseAsync() {
         return service.getBigFloat();
@@ -458,7 +458,7 @@ public final class NumbersImpl implements Numbers {
     /**
      * Get big float value 3.402823e+20.
      *
-     * @return the {@link Maybe&lt;Double&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Maybe<Double> getBigFloatAsync() {
         return getBigFloatWithRestResponseAsync()
@@ -491,7 +491,7 @@ public final class NumbersImpl implements Numbers {
      * @param numberBody the double value.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;Void&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     public ServiceFuture<Void> putBigDoubleAsync(@NonNull double numberBody, ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(putBigDoubleAsync(numberBody), serviceCallback);
@@ -502,7 +502,7 @@ public final class NumbersImpl implements Numbers {
      *
      * @param numberBody the double value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Single<RestResponse<Void, Void>> putBigDoubleWithRestResponseAsync(@NonNull double numberBody) {
         return service.putBigDouble(numberBody);
@@ -513,7 +513,7 @@ public final class NumbersImpl implements Numbers {
      *
      * @param numberBody the double value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link Completable} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Completable putBigDoubleAsync(@NonNull double numberBody) {
         return putBigDoubleWithRestResponseAsync(numberBody)
@@ -536,7 +536,7 @@ public final class NumbersImpl implements Numbers {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;Double&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     public ServiceFuture<Double> getBigDoubleAsync(ServiceCallback<Double> serviceCallback) {
         return ServiceFuture.fromBody(getBigDoubleAsync(), serviceCallback);
@@ -545,7 +545,7 @@ public final class NumbersImpl implements Numbers {
     /**
      * Get big double value 2.5976931e+101.
      *
-     * @return the {@link Single&lt;RestResponse&lt;Void, Double&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Single<RestResponse<Void, Double>> getBigDoubleWithRestResponseAsync() {
         return service.getBigDouble();
@@ -554,7 +554,7 @@ public final class NumbersImpl implements Numbers {
     /**
      * Get big double value 2.5976931e+101.
      *
-     * @return the {@link Maybe&lt;Double&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Maybe<Double> getBigDoubleAsync() {
         return getBigDoubleWithRestResponseAsync()
@@ -587,7 +587,7 @@ public final class NumbersImpl implements Numbers {
      * @param numberBody the double value.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;Void&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     public ServiceFuture<Void> putBigDoublePositiveDecimalAsync(@NonNull double numberBody, ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(putBigDoublePositiveDecimalAsync(numberBody), serviceCallback);
@@ -598,7 +598,7 @@ public final class NumbersImpl implements Numbers {
      *
      * @param numberBody the double value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Single<RestResponse<Void, Void>> putBigDoublePositiveDecimalWithRestResponseAsync(@NonNull double numberBody) {
         return service.putBigDoublePositiveDecimal(numberBody);
@@ -609,7 +609,7 @@ public final class NumbersImpl implements Numbers {
      *
      * @param numberBody the double value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link Completable} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Completable putBigDoublePositiveDecimalAsync(@NonNull double numberBody) {
         return putBigDoublePositiveDecimalWithRestResponseAsync(numberBody)
@@ -632,7 +632,7 @@ public final class NumbersImpl implements Numbers {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;Double&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     public ServiceFuture<Double> getBigDoublePositiveDecimalAsync(ServiceCallback<Double> serviceCallback) {
         return ServiceFuture.fromBody(getBigDoublePositiveDecimalAsync(), serviceCallback);
@@ -641,7 +641,7 @@ public final class NumbersImpl implements Numbers {
     /**
      * Get big double value 99999999.99.
      *
-     * @return the {@link Single&lt;RestResponse&lt;Void, Double&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Single<RestResponse<Void, Double>> getBigDoublePositiveDecimalWithRestResponseAsync() {
         return service.getBigDoublePositiveDecimal();
@@ -650,7 +650,7 @@ public final class NumbersImpl implements Numbers {
     /**
      * Get big double value 99999999.99.
      *
-     * @return the {@link Maybe&lt;Double&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Maybe<Double> getBigDoublePositiveDecimalAsync() {
         return getBigDoublePositiveDecimalWithRestResponseAsync()
@@ -683,7 +683,7 @@ public final class NumbersImpl implements Numbers {
      * @param numberBody the double value.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;Void&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     public ServiceFuture<Void> putBigDoubleNegativeDecimalAsync(@NonNull double numberBody, ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(putBigDoubleNegativeDecimalAsync(numberBody), serviceCallback);
@@ -694,7 +694,7 @@ public final class NumbersImpl implements Numbers {
      *
      * @param numberBody the double value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Single<RestResponse<Void, Void>> putBigDoubleNegativeDecimalWithRestResponseAsync(@NonNull double numberBody) {
         return service.putBigDoubleNegativeDecimal(numberBody);
@@ -705,7 +705,7 @@ public final class NumbersImpl implements Numbers {
      *
      * @param numberBody the double value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link Completable} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Completable putBigDoubleNegativeDecimalAsync(@NonNull double numberBody) {
         return putBigDoubleNegativeDecimalWithRestResponseAsync(numberBody)
@@ -728,7 +728,7 @@ public final class NumbersImpl implements Numbers {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;Double&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     public ServiceFuture<Double> getBigDoubleNegativeDecimalAsync(ServiceCallback<Double> serviceCallback) {
         return ServiceFuture.fromBody(getBigDoubleNegativeDecimalAsync(), serviceCallback);
@@ -737,7 +737,7 @@ public final class NumbersImpl implements Numbers {
     /**
      * Get big double value -99999999.99.
      *
-     * @return the {@link Single&lt;RestResponse&lt;Void, Double&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Single<RestResponse<Void, Double>> getBigDoubleNegativeDecimalWithRestResponseAsync() {
         return service.getBigDoubleNegativeDecimal();
@@ -746,7 +746,7 @@ public final class NumbersImpl implements Numbers {
     /**
      * Get big double value -99999999.99.
      *
-     * @return the {@link Maybe&lt;Double&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Maybe<Double> getBigDoubleNegativeDecimalAsync() {
         return getBigDoubleNegativeDecimalWithRestResponseAsync()
@@ -779,7 +779,7 @@ public final class NumbersImpl implements Numbers {
      * @param numberBody the BigDecimal value.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;Void&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     public ServiceFuture<Void> putBigDecimalAsync(@NonNull BigDecimal numberBody, ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(putBigDecimalAsync(numberBody), serviceCallback);
@@ -790,7 +790,7 @@ public final class NumbersImpl implements Numbers {
      *
      * @param numberBody the BigDecimal value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Single<RestResponse<Void, Void>> putBigDecimalWithRestResponseAsync(@NonNull BigDecimal numberBody) {
         if (numberBody == null) {
@@ -804,7 +804,7 @@ public final class NumbersImpl implements Numbers {
      *
      * @param numberBody the BigDecimal value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link Completable} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Completable putBigDecimalAsync(@NonNull BigDecimal numberBody) {
         return putBigDecimalWithRestResponseAsync(numberBody)
@@ -827,7 +827,7 @@ public final class NumbersImpl implements Numbers {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;BigDecimal&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     public ServiceFuture<BigDecimal> getBigDecimalAsync(ServiceCallback<BigDecimal> serviceCallback) {
         return ServiceFuture.fromBody(getBigDecimalAsync(), serviceCallback);
@@ -836,7 +836,7 @@ public final class NumbersImpl implements Numbers {
     /**
      * Get big decimal value 2.5976931e+101.
      *
-     * @return the {@link Single&lt;RestResponse&lt;Void, BigDecimal&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Single<RestResponse<Void, BigDecimal>> getBigDecimalWithRestResponseAsync() {
         return service.getBigDecimal();
@@ -845,7 +845,7 @@ public final class NumbersImpl implements Numbers {
     /**
      * Get big decimal value 2.5976931e+101.
      *
-     * @return the {@link Maybe&lt;BigDecimal&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Maybe<BigDecimal> getBigDecimalAsync() {
         return getBigDecimalWithRestResponseAsync()
@@ -878,7 +878,7 @@ public final class NumbersImpl implements Numbers {
      * @param numberBody the BigDecimal value.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;Void&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     public ServiceFuture<Void> putBigDecimalPositiveDecimalAsync(@NonNull BigDecimal numberBody, ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(putBigDecimalPositiveDecimalAsync(numberBody), serviceCallback);
@@ -889,7 +889,7 @@ public final class NumbersImpl implements Numbers {
      *
      * @param numberBody the BigDecimal value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Single<RestResponse<Void, Void>> putBigDecimalPositiveDecimalWithRestResponseAsync(@NonNull BigDecimal numberBody) {
         if (numberBody == null) {
@@ -903,7 +903,7 @@ public final class NumbersImpl implements Numbers {
      *
      * @param numberBody the BigDecimal value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link Completable} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Completable putBigDecimalPositiveDecimalAsync(@NonNull BigDecimal numberBody) {
         return putBigDecimalPositiveDecimalWithRestResponseAsync(numberBody)
@@ -926,7 +926,7 @@ public final class NumbersImpl implements Numbers {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;BigDecimal&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     public ServiceFuture<BigDecimal> getBigDecimalPositiveDecimalAsync(ServiceCallback<BigDecimal> serviceCallback) {
         return ServiceFuture.fromBody(getBigDecimalPositiveDecimalAsync(), serviceCallback);
@@ -935,7 +935,7 @@ public final class NumbersImpl implements Numbers {
     /**
      * Get big decimal value 99999999.99.
      *
-     * @return the {@link Single&lt;RestResponse&lt;Void, BigDecimal&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Single<RestResponse<Void, BigDecimal>> getBigDecimalPositiveDecimalWithRestResponseAsync() {
         return service.getBigDecimalPositiveDecimal();
@@ -944,7 +944,7 @@ public final class NumbersImpl implements Numbers {
     /**
      * Get big decimal value 99999999.99.
      *
-     * @return the {@link Maybe&lt;BigDecimal&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Maybe<BigDecimal> getBigDecimalPositiveDecimalAsync() {
         return getBigDecimalPositiveDecimalWithRestResponseAsync()
@@ -977,7 +977,7 @@ public final class NumbersImpl implements Numbers {
      * @param numberBody the BigDecimal value.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;Void&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     public ServiceFuture<Void> putBigDecimalNegativeDecimalAsync(@NonNull BigDecimal numberBody, ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(putBigDecimalNegativeDecimalAsync(numberBody), serviceCallback);
@@ -988,7 +988,7 @@ public final class NumbersImpl implements Numbers {
      *
      * @param numberBody the BigDecimal value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Single<RestResponse<Void, Void>> putBigDecimalNegativeDecimalWithRestResponseAsync(@NonNull BigDecimal numberBody) {
         if (numberBody == null) {
@@ -1002,7 +1002,7 @@ public final class NumbersImpl implements Numbers {
      *
      * @param numberBody the BigDecimal value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link Completable} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Completable putBigDecimalNegativeDecimalAsync(@NonNull BigDecimal numberBody) {
         return putBigDecimalNegativeDecimalWithRestResponseAsync(numberBody)
@@ -1025,7 +1025,7 @@ public final class NumbersImpl implements Numbers {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;BigDecimal&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     public ServiceFuture<BigDecimal> getBigDecimalNegativeDecimalAsync(ServiceCallback<BigDecimal> serviceCallback) {
         return ServiceFuture.fromBody(getBigDecimalNegativeDecimalAsync(), serviceCallback);
@@ -1034,7 +1034,7 @@ public final class NumbersImpl implements Numbers {
     /**
      * Get big decimal value -99999999.99.
      *
-     * @return the {@link Single&lt;RestResponse&lt;Void, BigDecimal&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Single<RestResponse<Void, BigDecimal>> getBigDecimalNegativeDecimalWithRestResponseAsync() {
         return service.getBigDecimalNegativeDecimal();
@@ -1043,7 +1043,7 @@ public final class NumbersImpl implements Numbers {
     /**
      * Get big decimal value -99999999.99.
      *
-     * @return the {@link Maybe&lt;BigDecimal&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Maybe<BigDecimal> getBigDecimalNegativeDecimalAsync() {
         return getBigDecimalNegativeDecimalWithRestResponseAsync()
@@ -1076,7 +1076,7 @@ public final class NumbersImpl implements Numbers {
      * @param numberBody the double value.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;Void&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     public ServiceFuture<Void> putSmallFloatAsync(@NonNull double numberBody, ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(putSmallFloatAsync(numberBody), serviceCallback);
@@ -1087,7 +1087,7 @@ public final class NumbersImpl implements Numbers {
      *
      * @param numberBody the double value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Single<RestResponse<Void, Void>> putSmallFloatWithRestResponseAsync(@NonNull double numberBody) {
         return service.putSmallFloat(numberBody);
@@ -1098,7 +1098,7 @@ public final class NumbersImpl implements Numbers {
      *
      * @param numberBody the double value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link Completable} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Completable putSmallFloatAsync(@NonNull double numberBody) {
         return putSmallFloatWithRestResponseAsync(numberBody)
@@ -1121,7 +1121,7 @@ public final class NumbersImpl implements Numbers {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;Double&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     public ServiceFuture<Double> getSmallFloatAsync(ServiceCallback<Double> serviceCallback) {
         return ServiceFuture.fromBody(getSmallFloatAsync(), serviceCallback);
@@ -1130,7 +1130,7 @@ public final class NumbersImpl implements Numbers {
     /**
      * Get big double value 3.402823e-20.
      *
-     * @return the {@link Single&lt;RestResponse&lt;Void, Double&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Single<RestResponse<Void, Double>> getSmallFloatWithRestResponseAsync() {
         return service.getSmallFloat();
@@ -1139,7 +1139,7 @@ public final class NumbersImpl implements Numbers {
     /**
      * Get big double value 3.402823e-20.
      *
-     * @return the {@link Maybe&lt;Double&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Maybe<Double> getSmallFloatAsync() {
         return getSmallFloatWithRestResponseAsync()
@@ -1172,7 +1172,7 @@ public final class NumbersImpl implements Numbers {
      * @param numberBody the double value.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;Void&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     public ServiceFuture<Void> putSmallDoubleAsync(@NonNull double numberBody, ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(putSmallDoubleAsync(numberBody), serviceCallback);
@@ -1183,7 +1183,7 @@ public final class NumbersImpl implements Numbers {
      *
      * @param numberBody the double value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Single<RestResponse<Void, Void>> putSmallDoubleWithRestResponseAsync(@NonNull double numberBody) {
         return service.putSmallDouble(numberBody);
@@ -1194,7 +1194,7 @@ public final class NumbersImpl implements Numbers {
      *
      * @param numberBody the double value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link Completable} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Completable putSmallDoubleAsync(@NonNull double numberBody) {
         return putSmallDoubleWithRestResponseAsync(numberBody)
@@ -1217,7 +1217,7 @@ public final class NumbersImpl implements Numbers {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;Double&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     public ServiceFuture<Double> getSmallDoubleAsync(ServiceCallback<Double> serviceCallback) {
         return ServiceFuture.fromBody(getSmallDoubleAsync(), serviceCallback);
@@ -1226,7 +1226,7 @@ public final class NumbersImpl implements Numbers {
     /**
      * Get big double value 2.5976931e-101.
      *
-     * @return the {@link Single&lt;RestResponse&lt;Void, Double&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Single<RestResponse<Void, Double>> getSmallDoubleWithRestResponseAsync() {
         return service.getSmallDouble();
@@ -1235,7 +1235,7 @@ public final class NumbersImpl implements Numbers {
     /**
      * Get big double value 2.5976931e-101.
      *
-     * @return the {@link Maybe&lt;Double&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Maybe<Double> getSmallDoubleAsync() {
         return getSmallDoubleWithRestResponseAsync()
@@ -1268,7 +1268,7 @@ public final class NumbersImpl implements Numbers {
      * @param numberBody the BigDecimal value.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;Void&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     public ServiceFuture<Void> putSmallDecimalAsync(@NonNull BigDecimal numberBody, ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(putSmallDecimalAsync(numberBody), serviceCallback);
@@ -1279,7 +1279,7 @@ public final class NumbersImpl implements Numbers {
      *
      * @param numberBody the BigDecimal value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Single<RestResponse<Void, Void>> putSmallDecimalWithRestResponseAsync(@NonNull BigDecimal numberBody) {
         if (numberBody == null) {
@@ -1293,7 +1293,7 @@ public final class NumbersImpl implements Numbers {
      *
      * @param numberBody the BigDecimal value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link Completable} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Completable putSmallDecimalAsync(@NonNull BigDecimal numberBody) {
         return putSmallDecimalWithRestResponseAsync(numberBody)
@@ -1316,7 +1316,7 @@ public final class NumbersImpl implements Numbers {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;BigDecimal&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     public ServiceFuture<BigDecimal> getSmallDecimalAsync(ServiceCallback<BigDecimal> serviceCallback) {
         return ServiceFuture.fromBody(getSmallDecimalAsync(), serviceCallback);
@@ -1325,7 +1325,7 @@ public final class NumbersImpl implements Numbers {
     /**
      * Get small decimal value 2.5976931e-101.
      *
-     * @return the {@link Single&lt;RestResponse&lt;Void, BigDecimal&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Single<RestResponse<Void, BigDecimal>> getSmallDecimalWithRestResponseAsync() {
         return service.getSmallDecimal();
@@ -1334,7 +1334,7 @@ public final class NumbersImpl implements Numbers {
     /**
      * Get small decimal value 2.5976931e-101.
      *
-     * @return the {@link Maybe&lt;BigDecimal&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Maybe<BigDecimal> getSmallDecimalAsync() {
         return getSmallDecimalWithRestResponseAsync()

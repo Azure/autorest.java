@@ -192,7 +192,7 @@ public final class ExplicitsImpl implements Explicits {
      * @param bodyParameter the int value.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;Error&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     public ServiceFuture<Error> postRequiredIntegerParameterAsync(@NonNull int bodyParameter, ServiceCallback<Error> serviceCallback) {
         return ServiceFuture.fromBody(postRequiredIntegerParameterAsync(bodyParameter), serviceCallback);
@@ -203,7 +203,7 @@ public final class ExplicitsImpl implements Explicits {
      *
      * @param bodyParameter the int value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link Single&lt;RestResponse&lt;Void, Error&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Single<RestResponse<Void, Error>> postRequiredIntegerParameterWithRestResponseAsync(@NonNull int bodyParameter) {
         return service.postRequiredIntegerParameter(bodyParameter);
@@ -214,7 +214,7 @@ public final class ExplicitsImpl implements Explicits {
      *
      * @param bodyParameter the int value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link Maybe&lt;Error&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Maybe<Error> postRequiredIntegerParameterAsync(@NonNull int bodyParameter) {
         return postRequiredIntegerParameterWithRestResponseAsync(bodyParameter)
@@ -247,7 +247,7 @@ public final class ExplicitsImpl implements Explicits {
      * @param bodyParameter the Integer value.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;Void&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     public ServiceFuture<Void> postOptionalIntegerParameterAsync(Integer bodyParameter, ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(postOptionalIntegerParameterAsync(bodyParameter), serviceCallback);
@@ -258,7 +258,7 @@ public final class ExplicitsImpl implements Explicits {
      *
      * @param bodyParameter the Integer value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Single<RestResponse<Void, Void>> postOptionalIntegerParameterWithRestResponseAsync(Integer bodyParameter) {
         return service.postOptionalIntegerParameter(bodyParameter);
@@ -269,7 +269,7 @@ public final class ExplicitsImpl implements Explicits {
      *
      * @param bodyParameter the Integer value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link Completable} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Completable postOptionalIntegerParameterAsync(Integer bodyParameter) {
         return postOptionalIntegerParameterWithRestResponseAsync(bodyParameter)
@@ -295,7 +295,7 @@ public final class ExplicitsImpl implements Explicits {
      * @param bodyParameter the IntWrapper value.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;Error&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     public ServiceFuture<Error> postRequiredIntegerPropertyAsync(@NonNull IntWrapper bodyParameter, ServiceCallback<Error> serviceCallback) {
         return ServiceFuture.fromBody(postRequiredIntegerPropertyAsync(bodyParameter), serviceCallback);
@@ -306,7 +306,7 @@ public final class ExplicitsImpl implements Explicits {
      *
      * @param bodyParameter the IntWrapper value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link Single&lt;RestResponse&lt;Void, Error&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Single<RestResponse<Void, Error>> postRequiredIntegerPropertyWithRestResponseAsync(@NonNull IntWrapper bodyParameter) {
         if (bodyParameter == null) {
@@ -321,7 +321,7 @@ public final class ExplicitsImpl implements Explicits {
      *
      * @param bodyParameter the IntWrapper value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link Maybe&lt;Error&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Maybe<Error> postRequiredIntegerPropertyAsync(@NonNull IntWrapper bodyParameter) {
         return postRequiredIntegerPropertyWithRestResponseAsync(bodyParameter)
@@ -354,7 +354,7 @@ public final class ExplicitsImpl implements Explicits {
      * @param bodyParameter the IntOptionalWrapper value.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;Void&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     public ServiceFuture<Void> postOptionalIntegerPropertyAsync(IntOptionalWrapper bodyParameter, ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(postOptionalIntegerPropertyAsync(bodyParameter), serviceCallback);
@@ -365,7 +365,7 @@ public final class ExplicitsImpl implements Explicits {
      *
      * @param bodyParameter the IntOptionalWrapper value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Single<RestResponse<Void, Void>> postOptionalIntegerPropertyWithRestResponseAsync(IntOptionalWrapper bodyParameter) {
         Validator.validate(bodyParameter);
@@ -377,7 +377,7 @@ public final class ExplicitsImpl implements Explicits {
      *
      * @param bodyParameter the IntOptionalWrapper value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link Completable} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Completable postOptionalIntegerPropertyAsync(IntOptionalWrapper bodyParameter) {
         return postOptionalIntegerPropertyWithRestResponseAsync(bodyParameter)
@@ -403,7 +403,7 @@ public final class ExplicitsImpl implements Explicits {
      * @param headerParameter the int value.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;Error&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     public ServiceFuture<Error> postRequiredIntegerHeaderAsync(@NonNull int headerParameter, ServiceCallback<Error> serviceCallback) {
         return ServiceFuture.fromBody(postRequiredIntegerHeaderAsync(headerParameter), serviceCallback);
@@ -414,7 +414,7 @@ public final class ExplicitsImpl implements Explicits {
      *
      * @param headerParameter the int value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link Single&lt;RestResponse&lt;Void, Error&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Single<RestResponse<Void, Error>> postRequiredIntegerHeaderWithRestResponseAsync(@NonNull int headerParameter) {
         return service.postRequiredIntegerHeader(headerParameter);
@@ -425,7 +425,7 @@ public final class ExplicitsImpl implements Explicits {
      *
      * @param headerParameter the int value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link Maybe&lt;Error&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Maybe<Error> postRequiredIntegerHeaderAsync(@NonNull int headerParameter) {
         return postRequiredIntegerHeaderWithRestResponseAsync(headerParameter)
@@ -458,7 +458,7 @@ public final class ExplicitsImpl implements Explicits {
      * @param headerParameter the Integer value.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;Void&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     public ServiceFuture<Void> postOptionalIntegerHeaderAsync(Integer headerParameter, ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(postOptionalIntegerHeaderAsync(headerParameter), serviceCallback);
@@ -469,7 +469,7 @@ public final class ExplicitsImpl implements Explicits {
      *
      * @param headerParameter the Integer value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Single<RestResponse<Void, Void>> postOptionalIntegerHeaderWithRestResponseAsync(Integer headerParameter) {
         return service.postOptionalIntegerHeader(headerParameter);
@@ -480,7 +480,7 @@ public final class ExplicitsImpl implements Explicits {
      *
      * @param headerParameter the Integer value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link Completable} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Completable postOptionalIntegerHeaderAsync(Integer headerParameter) {
         return postOptionalIntegerHeaderWithRestResponseAsync(headerParameter)
@@ -506,7 +506,7 @@ public final class ExplicitsImpl implements Explicits {
      * @param bodyParameter the String value.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;Error&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     public ServiceFuture<Error> postRequiredStringParameterAsync(@NonNull String bodyParameter, ServiceCallback<Error> serviceCallback) {
         return ServiceFuture.fromBody(postRequiredStringParameterAsync(bodyParameter), serviceCallback);
@@ -517,7 +517,7 @@ public final class ExplicitsImpl implements Explicits {
      *
      * @param bodyParameter the String value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link Single&lt;RestResponse&lt;Void, Error&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Single<RestResponse<Void, Error>> postRequiredStringParameterWithRestResponseAsync(@NonNull String bodyParameter) {
         if (bodyParameter == null) {
@@ -531,7 +531,7 @@ public final class ExplicitsImpl implements Explicits {
      *
      * @param bodyParameter the String value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link Maybe&lt;Error&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Maybe<Error> postRequiredStringParameterAsync(@NonNull String bodyParameter) {
         return postRequiredStringParameterWithRestResponseAsync(bodyParameter)
@@ -564,7 +564,7 @@ public final class ExplicitsImpl implements Explicits {
      * @param bodyParameter the String value.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;Void&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     public ServiceFuture<Void> postOptionalStringParameterAsync(String bodyParameter, ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(postOptionalStringParameterAsync(bodyParameter), serviceCallback);
@@ -575,7 +575,7 @@ public final class ExplicitsImpl implements Explicits {
      *
      * @param bodyParameter the String value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Single<RestResponse<Void, Void>> postOptionalStringParameterWithRestResponseAsync(String bodyParameter) {
         return service.postOptionalStringParameter(bodyParameter);
@@ -586,7 +586,7 @@ public final class ExplicitsImpl implements Explicits {
      *
      * @param bodyParameter the String value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link Completable} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Completable postOptionalStringParameterAsync(String bodyParameter) {
         return postOptionalStringParameterWithRestResponseAsync(bodyParameter)
@@ -612,7 +612,7 @@ public final class ExplicitsImpl implements Explicits {
      * @param bodyParameter the StringWrapper value.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;Error&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     public ServiceFuture<Error> postRequiredStringPropertyAsync(@NonNull StringWrapper bodyParameter, ServiceCallback<Error> serviceCallback) {
         return ServiceFuture.fromBody(postRequiredStringPropertyAsync(bodyParameter), serviceCallback);
@@ -623,7 +623,7 @@ public final class ExplicitsImpl implements Explicits {
      *
      * @param bodyParameter the StringWrapper value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link Single&lt;RestResponse&lt;Void, Error&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Single<RestResponse<Void, Error>> postRequiredStringPropertyWithRestResponseAsync(@NonNull StringWrapper bodyParameter) {
         if (bodyParameter == null) {
@@ -638,7 +638,7 @@ public final class ExplicitsImpl implements Explicits {
      *
      * @param bodyParameter the StringWrapper value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link Maybe&lt;Error&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Maybe<Error> postRequiredStringPropertyAsync(@NonNull StringWrapper bodyParameter) {
         return postRequiredStringPropertyWithRestResponseAsync(bodyParameter)
@@ -671,7 +671,7 @@ public final class ExplicitsImpl implements Explicits {
      * @param bodyParameter the StringOptionalWrapper value.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;Void&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     public ServiceFuture<Void> postOptionalStringPropertyAsync(StringOptionalWrapper bodyParameter, ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(postOptionalStringPropertyAsync(bodyParameter), serviceCallback);
@@ -682,7 +682,7 @@ public final class ExplicitsImpl implements Explicits {
      *
      * @param bodyParameter the StringOptionalWrapper value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Single<RestResponse<Void, Void>> postOptionalStringPropertyWithRestResponseAsync(StringOptionalWrapper bodyParameter) {
         Validator.validate(bodyParameter);
@@ -694,7 +694,7 @@ public final class ExplicitsImpl implements Explicits {
      *
      * @param bodyParameter the StringOptionalWrapper value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link Completable} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Completable postOptionalStringPropertyAsync(StringOptionalWrapper bodyParameter) {
         return postOptionalStringPropertyWithRestResponseAsync(bodyParameter)
@@ -720,7 +720,7 @@ public final class ExplicitsImpl implements Explicits {
      * @param headerParameter the String value.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;Error&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     public ServiceFuture<Error> postRequiredStringHeaderAsync(@NonNull String headerParameter, ServiceCallback<Error> serviceCallback) {
         return ServiceFuture.fromBody(postRequiredStringHeaderAsync(headerParameter), serviceCallback);
@@ -731,7 +731,7 @@ public final class ExplicitsImpl implements Explicits {
      *
      * @param headerParameter the String value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link Single&lt;RestResponse&lt;Void, Error&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Single<RestResponse<Void, Error>> postRequiredStringHeaderWithRestResponseAsync(@NonNull String headerParameter) {
         if (headerParameter == null) {
@@ -745,7 +745,7 @@ public final class ExplicitsImpl implements Explicits {
      *
      * @param headerParameter the String value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link Maybe&lt;Error&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Maybe<Error> postRequiredStringHeaderAsync(@NonNull String headerParameter) {
         return postRequiredStringHeaderWithRestResponseAsync(headerParameter)
@@ -778,7 +778,7 @@ public final class ExplicitsImpl implements Explicits {
      * @param bodyParameter the String value.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;Void&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     public ServiceFuture<Void> postOptionalStringHeaderAsync(String bodyParameter, ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(postOptionalStringHeaderAsync(bodyParameter), serviceCallback);
@@ -789,7 +789,7 @@ public final class ExplicitsImpl implements Explicits {
      *
      * @param bodyParameter the String value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Single<RestResponse<Void, Void>> postOptionalStringHeaderWithRestResponseAsync(String bodyParameter) {
         return service.postOptionalStringHeader(bodyParameter);
@@ -800,7 +800,7 @@ public final class ExplicitsImpl implements Explicits {
      *
      * @param bodyParameter the String value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link Completable} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Completable postOptionalStringHeaderAsync(String bodyParameter) {
         return postOptionalStringHeaderWithRestResponseAsync(bodyParameter)
@@ -826,7 +826,7 @@ public final class ExplicitsImpl implements Explicits {
      * @param bodyParameter the Product value.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;Error&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     public ServiceFuture<Error> postRequiredClassParameterAsync(@NonNull Product bodyParameter, ServiceCallback<Error> serviceCallback) {
         return ServiceFuture.fromBody(postRequiredClassParameterAsync(bodyParameter), serviceCallback);
@@ -837,7 +837,7 @@ public final class ExplicitsImpl implements Explicits {
      *
      * @param bodyParameter the Product value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link Single&lt;RestResponse&lt;Void, Error&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Single<RestResponse<Void, Error>> postRequiredClassParameterWithRestResponseAsync(@NonNull Product bodyParameter) {
         if (bodyParameter == null) {
@@ -852,7 +852,7 @@ public final class ExplicitsImpl implements Explicits {
      *
      * @param bodyParameter the Product value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link Maybe&lt;Error&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Maybe<Error> postRequiredClassParameterAsync(@NonNull Product bodyParameter) {
         return postRequiredClassParameterWithRestResponseAsync(bodyParameter)
@@ -885,7 +885,7 @@ public final class ExplicitsImpl implements Explicits {
      * @param bodyParameter the Product value.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;Void&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     public ServiceFuture<Void> postOptionalClassParameterAsync(Product bodyParameter, ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(postOptionalClassParameterAsync(bodyParameter), serviceCallback);
@@ -896,7 +896,7 @@ public final class ExplicitsImpl implements Explicits {
      *
      * @param bodyParameter the Product value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Single<RestResponse<Void, Void>> postOptionalClassParameterWithRestResponseAsync(Product bodyParameter) {
         Validator.validate(bodyParameter);
@@ -908,7 +908,7 @@ public final class ExplicitsImpl implements Explicits {
      *
      * @param bodyParameter the Product value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link Completable} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Completable postOptionalClassParameterAsync(Product bodyParameter) {
         return postOptionalClassParameterWithRestResponseAsync(bodyParameter)
@@ -934,7 +934,7 @@ public final class ExplicitsImpl implements Explicits {
      * @param bodyParameter the ClassWrapper value.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;Error&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     public ServiceFuture<Error> postRequiredClassPropertyAsync(@NonNull ClassWrapper bodyParameter, ServiceCallback<Error> serviceCallback) {
         return ServiceFuture.fromBody(postRequiredClassPropertyAsync(bodyParameter), serviceCallback);
@@ -945,7 +945,7 @@ public final class ExplicitsImpl implements Explicits {
      *
      * @param bodyParameter the ClassWrapper value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link Single&lt;RestResponse&lt;Void, Error&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Single<RestResponse<Void, Error>> postRequiredClassPropertyWithRestResponseAsync(@NonNull ClassWrapper bodyParameter) {
         if (bodyParameter == null) {
@@ -960,7 +960,7 @@ public final class ExplicitsImpl implements Explicits {
      *
      * @param bodyParameter the ClassWrapper value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link Maybe&lt;Error&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Maybe<Error> postRequiredClassPropertyAsync(@NonNull ClassWrapper bodyParameter) {
         return postRequiredClassPropertyWithRestResponseAsync(bodyParameter)
@@ -993,7 +993,7 @@ public final class ExplicitsImpl implements Explicits {
      * @param bodyParameter the ClassOptionalWrapper value.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;Void&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     public ServiceFuture<Void> postOptionalClassPropertyAsync(ClassOptionalWrapper bodyParameter, ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(postOptionalClassPropertyAsync(bodyParameter), serviceCallback);
@@ -1004,7 +1004,7 @@ public final class ExplicitsImpl implements Explicits {
      *
      * @param bodyParameter the ClassOptionalWrapper value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Single<RestResponse<Void, Void>> postOptionalClassPropertyWithRestResponseAsync(ClassOptionalWrapper bodyParameter) {
         Validator.validate(bodyParameter);
@@ -1016,7 +1016,7 @@ public final class ExplicitsImpl implements Explicits {
      *
      * @param bodyParameter the ClassOptionalWrapper value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link Completable} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Completable postOptionalClassPropertyAsync(ClassOptionalWrapper bodyParameter) {
         return postOptionalClassPropertyWithRestResponseAsync(bodyParameter)
@@ -1042,7 +1042,7 @@ public final class ExplicitsImpl implements Explicits {
      * @param bodyParameter the List&lt;String&gt; value.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;Error&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     public ServiceFuture<Error> postRequiredArrayParameterAsync(@NonNull List<String> bodyParameter, ServiceCallback<Error> serviceCallback) {
         return ServiceFuture.fromBody(postRequiredArrayParameterAsync(bodyParameter), serviceCallback);
@@ -1053,7 +1053,7 @@ public final class ExplicitsImpl implements Explicits {
      *
      * @param bodyParameter the List&lt;String&gt; value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link Single&lt;RestResponse&lt;Void, Error&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Single<RestResponse<Void, Error>> postRequiredArrayParameterWithRestResponseAsync(@NonNull List<String> bodyParameter) {
         if (bodyParameter == null) {
@@ -1068,7 +1068,7 @@ public final class ExplicitsImpl implements Explicits {
      *
      * @param bodyParameter the List&lt;String&gt; value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link Maybe&lt;Error&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Maybe<Error> postRequiredArrayParameterAsync(@NonNull List<String> bodyParameter) {
         return postRequiredArrayParameterWithRestResponseAsync(bodyParameter)
@@ -1101,7 +1101,7 @@ public final class ExplicitsImpl implements Explicits {
      * @param bodyParameter the List&lt;String&gt; value.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;Void&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     public ServiceFuture<Void> postOptionalArrayParameterAsync(List<String> bodyParameter, ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(postOptionalArrayParameterAsync(bodyParameter), serviceCallback);
@@ -1112,7 +1112,7 @@ public final class ExplicitsImpl implements Explicits {
      *
      * @param bodyParameter the List&lt;String&gt; value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Single<RestResponse<Void, Void>> postOptionalArrayParameterWithRestResponseAsync(List<String> bodyParameter) {
         Validator.validate(bodyParameter);
@@ -1124,7 +1124,7 @@ public final class ExplicitsImpl implements Explicits {
      *
      * @param bodyParameter the List&lt;String&gt; value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link Completable} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Completable postOptionalArrayParameterAsync(List<String> bodyParameter) {
         return postOptionalArrayParameterWithRestResponseAsync(bodyParameter)
@@ -1150,7 +1150,7 @@ public final class ExplicitsImpl implements Explicits {
      * @param bodyParameter the ArrayWrapper value.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;Error&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     public ServiceFuture<Error> postRequiredArrayPropertyAsync(@NonNull ArrayWrapper bodyParameter, ServiceCallback<Error> serviceCallback) {
         return ServiceFuture.fromBody(postRequiredArrayPropertyAsync(bodyParameter), serviceCallback);
@@ -1161,7 +1161,7 @@ public final class ExplicitsImpl implements Explicits {
      *
      * @param bodyParameter the ArrayWrapper value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link Single&lt;RestResponse&lt;Void, Error&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Single<RestResponse<Void, Error>> postRequiredArrayPropertyWithRestResponseAsync(@NonNull ArrayWrapper bodyParameter) {
         if (bodyParameter == null) {
@@ -1176,7 +1176,7 @@ public final class ExplicitsImpl implements Explicits {
      *
      * @param bodyParameter the ArrayWrapper value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link Maybe&lt;Error&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Maybe<Error> postRequiredArrayPropertyAsync(@NonNull ArrayWrapper bodyParameter) {
         return postRequiredArrayPropertyWithRestResponseAsync(bodyParameter)
@@ -1209,7 +1209,7 @@ public final class ExplicitsImpl implements Explicits {
      * @param bodyParameter the ArrayOptionalWrapper value.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;Void&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     public ServiceFuture<Void> postOptionalArrayPropertyAsync(ArrayOptionalWrapper bodyParameter, ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(postOptionalArrayPropertyAsync(bodyParameter), serviceCallback);
@@ -1220,7 +1220,7 @@ public final class ExplicitsImpl implements Explicits {
      *
      * @param bodyParameter the ArrayOptionalWrapper value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Single<RestResponse<Void, Void>> postOptionalArrayPropertyWithRestResponseAsync(ArrayOptionalWrapper bodyParameter) {
         Validator.validate(bodyParameter);
@@ -1232,7 +1232,7 @@ public final class ExplicitsImpl implements Explicits {
      *
      * @param bodyParameter the ArrayOptionalWrapper value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link Completable} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Completable postOptionalArrayPropertyAsync(ArrayOptionalWrapper bodyParameter) {
         return postOptionalArrayPropertyWithRestResponseAsync(bodyParameter)
@@ -1258,7 +1258,7 @@ public final class ExplicitsImpl implements Explicits {
      * @param headerParameter the List&lt;String&gt; value.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;Error&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     public ServiceFuture<Error> postRequiredArrayHeaderAsync(@NonNull List<String> headerParameter, ServiceCallback<Error> serviceCallback) {
         return ServiceFuture.fromBody(postRequiredArrayHeaderAsync(headerParameter), serviceCallback);
@@ -1269,7 +1269,7 @@ public final class ExplicitsImpl implements Explicits {
      *
      * @param headerParameter the List&lt;String&gt; value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link Single&lt;RestResponse&lt;Void, Error&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Single<RestResponse<Void, Error>> postRequiredArrayHeaderWithRestResponseAsync(@NonNull List<String> headerParameter) {
         if (headerParameter == null) {
@@ -1285,7 +1285,7 @@ public final class ExplicitsImpl implements Explicits {
      *
      * @param headerParameter the List&lt;String&gt; value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link Maybe&lt;Error&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Maybe<Error> postRequiredArrayHeaderAsync(@NonNull List<String> headerParameter) {
         return postRequiredArrayHeaderWithRestResponseAsync(headerParameter)
@@ -1318,7 +1318,7 @@ public final class ExplicitsImpl implements Explicits {
      * @param headerParameter the List&lt;String&gt; value.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;Void&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     public ServiceFuture<Void> postOptionalArrayHeaderAsync(List<String> headerParameter, ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(postOptionalArrayHeaderAsync(headerParameter), serviceCallback);
@@ -1329,7 +1329,7 @@ public final class ExplicitsImpl implements Explicits {
      *
      * @param headerParameter the List&lt;String&gt; value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Single<RestResponse<Void, Void>> postOptionalArrayHeaderWithRestResponseAsync(List<String> headerParameter) {
         Validator.validate(headerParameter);
@@ -1342,7 +1342,7 @@ public final class ExplicitsImpl implements Explicits {
      *
      * @param headerParameter the List&lt;String&gt; value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link Completable} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Completable postOptionalArrayHeaderAsync(List<String> headerParameter) {
         return postOptionalArrayHeaderWithRestResponseAsync(headerParameter)

@@ -114,7 +114,7 @@ public final class ImplicitsImpl implements Implicits {
      * @param pathParameter the String value.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;Error&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     public ServiceFuture<Error> getRequiredPathAsync(@NonNull String pathParameter, ServiceCallback<Error> serviceCallback) {
         return ServiceFuture.fromBody(getRequiredPathAsync(pathParameter), serviceCallback);
@@ -125,7 +125,7 @@ public final class ImplicitsImpl implements Implicits {
      *
      * @param pathParameter the String value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link Single&lt;RestResponse&lt;Void, Error&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Single<RestResponse<Void, Error>> getRequiredPathWithRestResponseAsync(@NonNull String pathParameter) {
         if (pathParameter == null) {
@@ -139,7 +139,7 @@ public final class ImplicitsImpl implements Implicits {
      *
      * @param pathParameter the String value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link Maybe&lt;Error&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Maybe<Error> getRequiredPathAsync(@NonNull String pathParameter) {
         return getRequiredPathWithRestResponseAsync(pathParameter)
@@ -169,7 +169,7 @@ public final class ImplicitsImpl implements Implicits {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;Void&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     public ServiceFuture<Void> putOptionalQueryAsync(ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(putOptionalQueryAsync(), serviceCallback);
@@ -178,7 +178,7 @@ public final class ImplicitsImpl implements Implicits {
     /**
      * Test implicitly optional query parameter.
      *
-     * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Single<RestResponse<Void, Void>> putOptionalQueryWithRestResponseAsync() {
         final String queryParameter = null;
@@ -188,7 +188,7 @@ public final class ImplicitsImpl implements Implicits {
     /**
      * Test implicitly optional query parameter.
      *
-     * @return the {@link Completable} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Completable putOptionalQueryAsync() {
         return putOptionalQueryWithRestResponseAsync()
@@ -213,7 +213,7 @@ public final class ImplicitsImpl implements Implicits {
      * @param queryParameter the String value.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;Void&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     public ServiceFuture<Void> putOptionalQueryAsync(String queryParameter, ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(putOptionalQueryAsync(queryParameter), serviceCallback);
@@ -224,7 +224,7 @@ public final class ImplicitsImpl implements Implicits {
      *
      * @param queryParameter the String value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Single<RestResponse<Void, Void>> putOptionalQueryWithRestResponseAsync(String queryParameter) {
         return service.putOptionalQuery(queryParameter);
@@ -235,7 +235,7 @@ public final class ImplicitsImpl implements Implicits {
      *
      * @param queryParameter the String value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link Completable} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Completable putOptionalQueryAsync(String queryParameter) {
         return putOptionalQueryWithRestResponseAsync(queryParameter)
@@ -257,7 +257,7 @@ public final class ImplicitsImpl implements Implicits {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;Void&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     public ServiceFuture<Void> putOptionalHeaderAsync(ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(putOptionalHeaderAsync(), serviceCallback);
@@ -266,7 +266,7 @@ public final class ImplicitsImpl implements Implicits {
     /**
      * Test implicitly optional header parameter.
      *
-     * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Single<RestResponse<Void, Void>> putOptionalHeaderWithRestResponseAsync() {
         final String queryParameter = null;
@@ -276,7 +276,7 @@ public final class ImplicitsImpl implements Implicits {
     /**
      * Test implicitly optional header parameter.
      *
-     * @return the {@link Completable} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Completable putOptionalHeaderAsync() {
         return putOptionalHeaderWithRestResponseAsync()
@@ -301,7 +301,7 @@ public final class ImplicitsImpl implements Implicits {
      * @param queryParameter the String value.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;Void&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     public ServiceFuture<Void> putOptionalHeaderAsync(String queryParameter, ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(putOptionalHeaderAsync(queryParameter), serviceCallback);
@@ -312,7 +312,7 @@ public final class ImplicitsImpl implements Implicits {
      *
      * @param queryParameter the String value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Single<RestResponse<Void, Void>> putOptionalHeaderWithRestResponseAsync(String queryParameter) {
         return service.putOptionalHeader(queryParameter);
@@ -323,7 +323,7 @@ public final class ImplicitsImpl implements Implicits {
      *
      * @param queryParameter the String value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link Completable} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Completable putOptionalHeaderAsync(String queryParameter) {
         return putOptionalHeaderWithRestResponseAsync(queryParameter)
@@ -345,7 +345,7 @@ public final class ImplicitsImpl implements Implicits {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;Void&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     public ServiceFuture<Void> putOptionalBodyAsync(ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(putOptionalBodyAsync(), serviceCallback);
@@ -354,7 +354,7 @@ public final class ImplicitsImpl implements Implicits {
     /**
      * Test implicitly optional body parameter.
      *
-     * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Single<RestResponse<Void, Void>> putOptionalBodyWithRestResponseAsync() {
         final String bodyParameter = null;
@@ -364,7 +364,7 @@ public final class ImplicitsImpl implements Implicits {
     /**
      * Test implicitly optional body parameter.
      *
-     * @return the {@link Completable} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Completable putOptionalBodyAsync() {
         return putOptionalBodyWithRestResponseAsync()
@@ -389,7 +389,7 @@ public final class ImplicitsImpl implements Implicits {
      * @param bodyParameter the String value.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;Void&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     public ServiceFuture<Void> putOptionalBodyAsync(String bodyParameter, ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(putOptionalBodyAsync(bodyParameter), serviceCallback);
@@ -400,7 +400,7 @@ public final class ImplicitsImpl implements Implicits {
      *
      * @param bodyParameter the String value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Single<RestResponse<Void, Void>> putOptionalBodyWithRestResponseAsync(String bodyParameter) {
         return service.putOptionalBody(bodyParameter);
@@ -411,7 +411,7 @@ public final class ImplicitsImpl implements Implicits {
      *
      * @param bodyParameter the String value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link Completable} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Completable putOptionalBodyAsync(String bodyParameter) {
         return putOptionalBodyWithRestResponseAsync(bodyParameter)
@@ -434,7 +434,7 @@ public final class ImplicitsImpl implements Implicits {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;Error&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     public ServiceFuture<Error> getRequiredGlobalPathAsync(ServiceCallback<Error> serviceCallback) {
         return ServiceFuture.fromBody(getRequiredGlobalPathAsync(), serviceCallback);
@@ -443,7 +443,7 @@ public final class ImplicitsImpl implements Implicits {
     /**
      * Test implicitly required path parameter.
      *
-     * @return the {@link Single&lt;RestResponse&lt;Void, Error&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Single<RestResponse<Void, Error>> getRequiredGlobalPathWithRestResponseAsync() {
         if (this.client.requiredGlobalPath() == null) {
@@ -455,7 +455,7 @@ public final class ImplicitsImpl implements Implicits {
     /**
      * Test implicitly required path parameter.
      *
-     * @return the {@link Maybe&lt;Error&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Maybe<Error> getRequiredGlobalPathAsync() {
         return getRequiredGlobalPathWithRestResponseAsync()
@@ -486,7 +486,7 @@ public final class ImplicitsImpl implements Implicits {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;Error&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     public ServiceFuture<Error> getRequiredGlobalQueryAsync(ServiceCallback<Error> serviceCallback) {
         return ServiceFuture.fromBody(getRequiredGlobalQueryAsync(), serviceCallback);
@@ -495,7 +495,7 @@ public final class ImplicitsImpl implements Implicits {
     /**
      * Test implicitly required query parameter.
      *
-     * @return the {@link Single&lt;RestResponse&lt;Void, Error&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Single<RestResponse<Void, Error>> getRequiredGlobalQueryWithRestResponseAsync() {
         if (this.client.requiredGlobalQuery() == null) {
@@ -507,7 +507,7 @@ public final class ImplicitsImpl implements Implicits {
     /**
      * Test implicitly required query parameter.
      *
-     * @return the {@link Maybe&lt;Error&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Maybe<Error> getRequiredGlobalQueryAsync() {
         return getRequiredGlobalQueryWithRestResponseAsync()
@@ -538,7 +538,7 @@ public final class ImplicitsImpl implements Implicits {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;Error&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     public ServiceFuture<Error> getOptionalGlobalQueryAsync(ServiceCallback<Error> serviceCallback) {
         return ServiceFuture.fromBody(getOptionalGlobalQueryAsync(), serviceCallback);
@@ -547,7 +547,7 @@ public final class ImplicitsImpl implements Implicits {
     /**
      * Test implicitly optional query parameter.
      *
-     * @return the {@link Single&lt;RestResponse&lt;Void, Error&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Single<RestResponse<Void, Error>> getOptionalGlobalQueryWithRestResponseAsync() {
         return service.getOptionalGlobalQuery(this.client.optionalGlobalQuery());
@@ -556,7 +556,7 @@ public final class ImplicitsImpl implements Implicits {
     /**
      * Test implicitly optional query parameter.
      *
-     * @return the {@link Maybe&lt;Error&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Maybe<Error> getOptionalGlobalQueryAsync() {
         return getOptionalGlobalQueryWithRestResponseAsync()

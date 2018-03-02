@@ -88,7 +88,7 @@ public final class InheritancesImpl implements Inheritances {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;Siamese&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     public ServiceFuture<Siamese> getValidAsync(ServiceCallback<Siamese> serviceCallback) {
         return ServiceFuture.fromBody(getValidAsync(), serviceCallback);
@@ -97,7 +97,7 @@ public final class InheritancesImpl implements Inheritances {
     /**
      * Get complex types that extend others.
      *
-     * @return the {@link Single&lt;RestResponse&lt;Void, Siamese&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Single<RestResponse<Void, Siamese>> getValidWithRestResponseAsync() {
         return service.getValid();
@@ -106,7 +106,7 @@ public final class InheritancesImpl implements Inheritances {
     /**
      * Get complex types that extend others.
      *
-     * @return the {@link Maybe&lt;Siamese&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Maybe<Siamese> getValidAsync() {
         return getValidWithRestResponseAsync()
@@ -139,7 +139,7 @@ public final class InheritancesImpl implements Inheritances {
      * @param complexBody Please put a siamese with id=2, name="Siameee", color=green, breed=persion, which hates 2 dogs, the 1st one named "Potato" with id=1 and food="tomato", and the 2nd one named "Tomato" with id=-1 and food="french fries".
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;Void&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     public ServiceFuture<Void> putValidAsync(@NonNull Siamese complexBody, ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(putValidAsync(complexBody), serviceCallback);
@@ -150,7 +150,7 @@ public final class InheritancesImpl implements Inheritances {
      *
      * @param complexBody Please put a siamese with id=2, name="Siameee", color=green, breed=persion, which hates 2 dogs, the 1st one named "Potato" with id=1 and food="tomato", and the 2nd one named "Tomato" with id=-1 and food="french fries".
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Single<RestResponse<Void, Void>> putValidWithRestResponseAsync(@NonNull Siamese complexBody) {
         if (complexBody == null) {
@@ -165,7 +165,7 @@ public final class InheritancesImpl implements Inheritances {
      *
      * @param complexBody Please put a siamese with id=2, name="Siameee", color=green, breed=persion, which hates 2 dogs, the 1st one named "Potato" with id=1 and food="tomato", and the 2nd one named "Tomato" with id=-1 and food="french fries".
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link Completable} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Completable putValidAsync(@NonNull Siamese complexBody) {
         return putValidWithRestResponseAsync(complexBody)

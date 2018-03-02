@@ -81,7 +81,7 @@ public final class PathsImpl implements Paths {
      * @param accountName Account Name.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;Void&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     public ServiceFuture<Void> getEmptyAsync(@NonNull String accountName, ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(getEmptyAsync(accountName), serviceCallback);
@@ -92,7 +92,7 @@ public final class PathsImpl implements Paths {
      *
      * @param accountName Account Name.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Single<RestResponse<Void, Void>> getEmptyWithRestResponseAsync(@NonNull String accountName) {
         if (accountName == null) {
@@ -109,7 +109,7 @@ public final class PathsImpl implements Paths {
      *
      * @param accountName Account Name.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link Completable} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Completable getEmptyAsync(@NonNull String accountName) {
         return getEmptyWithRestResponseAsync(accountName)

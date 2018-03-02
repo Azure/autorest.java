@@ -148,7 +148,7 @@ public final class AutoRestResourceFlatteningTestServiceImpl extends ServiceClie
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;Void&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     public ServiceFuture<Void> putArrayAsync(ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(putArrayAsync(), serviceCallback);
@@ -157,7 +157,7 @@ public final class AutoRestResourceFlatteningTestServiceImpl extends ServiceClie
     /**
      * Put External Resource as an Array.
      *
-     * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Single<RestResponse<Void, Void>> putArrayWithRestResponseAsync() {
         final List<Resource> resourceArray = null;
@@ -167,7 +167,7 @@ public final class AutoRestResourceFlatteningTestServiceImpl extends ServiceClie
     /**
      * Put External Resource as an Array.
      *
-     * @return the {@link Completable} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Completable putArrayAsync() {
         return putArrayWithRestResponseAsync()
@@ -192,7 +192,7 @@ public final class AutoRestResourceFlatteningTestServiceImpl extends ServiceClie
      * @param resourceArray External Resource as an Array to put.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;Void&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     public ServiceFuture<Void> putArrayAsync(List<Resource> resourceArray, ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(putArrayAsync(resourceArray), serviceCallback);
@@ -203,7 +203,7 @@ public final class AutoRestResourceFlatteningTestServiceImpl extends ServiceClie
      *
      * @param resourceArray External Resource as an Array to put.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Single<RestResponse<Void, Void>> putArrayWithRestResponseAsync(List<Resource> resourceArray) {
         Validator.validate(resourceArray);
@@ -215,7 +215,7 @@ public final class AutoRestResourceFlatteningTestServiceImpl extends ServiceClie
      *
      * @param resourceArray External Resource as an Array to put.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link Completable} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Completable putArrayAsync(List<Resource> resourceArray) {
         return putArrayWithRestResponseAsync(resourceArray)
@@ -238,7 +238,7 @@ public final class AutoRestResourceFlatteningTestServiceImpl extends ServiceClie
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;List&lt;FlattenedProduct&gt;&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     public ServiceFuture<List<FlattenedProduct>> getArrayAsync(ServiceCallback<List<FlattenedProduct>> serviceCallback) {
         return ServiceFuture.fromBody(getArrayAsync(), serviceCallback);
@@ -247,7 +247,7 @@ public final class AutoRestResourceFlatteningTestServiceImpl extends ServiceClie
     /**
      * Get External Resource as an Array.
      *
-     * @return the {@link Single&lt;RestResponse&lt;Void, List&lt;FlattenedProduct&gt;&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Single<RestResponse<Void, List<FlattenedProduct>>> getArrayWithRestResponseAsync() {
         return service.getArray();
@@ -256,7 +256,7 @@ public final class AutoRestResourceFlatteningTestServiceImpl extends ServiceClie
     /**
      * Get External Resource as an Array.
      *
-     * @return the {@link Maybe&lt;List&lt;FlattenedProduct&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Maybe<List<FlattenedProduct>> getArrayAsync() {
         return getArrayWithRestResponseAsync()
@@ -286,7 +286,7 @@ public final class AutoRestResourceFlatteningTestServiceImpl extends ServiceClie
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;Void&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     public ServiceFuture<Void> putWrappedArrayAsync(ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(putWrappedArrayAsync(), serviceCallback);
@@ -295,7 +295,7 @@ public final class AutoRestResourceFlatteningTestServiceImpl extends ServiceClie
     /**
      * No need to have a route in Express server for this operation. Used to verify the type flattened is not removed if it's referenced in an array.
      *
-     * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Single<RestResponse<Void, Void>> putWrappedArrayWithRestResponseAsync() {
         final List<WrappedProduct> resourceArray = null;
@@ -305,7 +305,7 @@ public final class AutoRestResourceFlatteningTestServiceImpl extends ServiceClie
     /**
      * No need to have a route in Express server for this operation. Used to verify the type flattened is not removed if it's referenced in an array.
      *
-     * @return the {@link Completable} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Completable putWrappedArrayAsync() {
         return putWrappedArrayWithRestResponseAsync()
@@ -330,7 +330,7 @@ public final class AutoRestResourceFlatteningTestServiceImpl extends ServiceClie
      * @param resourceArray External Resource as an Array to put.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;Void&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     public ServiceFuture<Void> putWrappedArrayAsync(List<WrappedProduct> resourceArray, ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(putWrappedArrayAsync(resourceArray), serviceCallback);
@@ -341,7 +341,7 @@ public final class AutoRestResourceFlatteningTestServiceImpl extends ServiceClie
      *
      * @param resourceArray External Resource as an Array to put.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Single<RestResponse<Void, Void>> putWrappedArrayWithRestResponseAsync(List<WrappedProduct> resourceArray) {
         Validator.validate(resourceArray);
@@ -353,7 +353,7 @@ public final class AutoRestResourceFlatteningTestServiceImpl extends ServiceClie
      *
      * @param resourceArray External Resource as an Array to put.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link Completable} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Completable putWrappedArrayAsync(List<WrappedProduct> resourceArray) {
         return putWrappedArrayWithRestResponseAsync(resourceArray)
@@ -376,7 +376,7 @@ public final class AutoRestResourceFlatteningTestServiceImpl extends ServiceClie
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;List&lt;ProductWrapper&gt;&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     public ServiceFuture<List<ProductWrapper>> getWrappedArrayAsync(ServiceCallback<List<ProductWrapper>> serviceCallback) {
         return ServiceFuture.fromBody(getWrappedArrayAsync(), serviceCallback);
@@ -385,7 +385,7 @@ public final class AutoRestResourceFlatteningTestServiceImpl extends ServiceClie
     /**
      * No need to have a route in Express server for this operation. Used to verify the type flattened is not removed if it's referenced in an array.
      *
-     * @return the {@link Single&lt;RestResponse&lt;Void, List&lt;ProductWrapper&gt;&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Single<RestResponse<Void, List<ProductWrapper>>> getWrappedArrayWithRestResponseAsync() {
         return service.getWrappedArray();
@@ -394,7 +394,7 @@ public final class AutoRestResourceFlatteningTestServiceImpl extends ServiceClie
     /**
      * No need to have a route in Express server for this operation. Used to verify the type flattened is not removed if it's referenced in an array.
      *
-     * @return the {@link Maybe&lt;List&lt;ProductWrapper&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Maybe<List<ProductWrapper>> getWrappedArrayAsync() {
         return getWrappedArrayWithRestResponseAsync()
@@ -424,7 +424,7 @@ public final class AutoRestResourceFlatteningTestServiceImpl extends ServiceClie
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;Void&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     public ServiceFuture<Void> putDictionaryAsync(ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(putDictionaryAsync(), serviceCallback);
@@ -433,7 +433,7 @@ public final class AutoRestResourceFlatteningTestServiceImpl extends ServiceClie
     /**
      * Put External Resource as a Dictionary.
      *
-     * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Single<RestResponse<Void, Void>> putDictionaryWithRestResponseAsync() {
         final Map<String, FlattenedProduct> resourceDictionary = null;
@@ -443,7 +443,7 @@ public final class AutoRestResourceFlatteningTestServiceImpl extends ServiceClie
     /**
      * Put External Resource as a Dictionary.
      *
-     * @return the {@link Completable} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Completable putDictionaryAsync() {
         return putDictionaryWithRestResponseAsync()
@@ -468,7 +468,7 @@ public final class AutoRestResourceFlatteningTestServiceImpl extends ServiceClie
      * @param resourceDictionary External Resource as a Dictionary to put.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;Void&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     public ServiceFuture<Void> putDictionaryAsync(Map<String, FlattenedProduct> resourceDictionary, ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(putDictionaryAsync(resourceDictionary), serviceCallback);
@@ -479,7 +479,7 @@ public final class AutoRestResourceFlatteningTestServiceImpl extends ServiceClie
      *
      * @param resourceDictionary External Resource as a Dictionary to put.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Single<RestResponse<Void, Void>> putDictionaryWithRestResponseAsync(Map<String, FlattenedProduct> resourceDictionary) {
         Validator.validate(resourceDictionary);
@@ -491,7 +491,7 @@ public final class AutoRestResourceFlatteningTestServiceImpl extends ServiceClie
      *
      * @param resourceDictionary External Resource as a Dictionary to put.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link Completable} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Completable putDictionaryAsync(Map<String, FlattenedProduct> resourceDictionary) {
         return putDictionaryWithRestResponseAsync(resourceDictionary)
@@ -514,7 +514,7 @@ public final class AutoRestResourceFlatteningTestServiceImpl extends ServiceClie
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;Map&lt;String, FlattenedProduct&gt;&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     public ServiceFuture<Map<String, FlattenedProduct>> getDictionaryAsync(ServiceCallback<Map<String, FlattenedProduct>> serviceCallback) {
         return ServiceFuture.fromBody(getDictionaryAsync(), serviceCallback);
@@ -523,7 +523,7 @@ public final class AutoRestResourceFlatteningTestServiceImpl extends ServiceClie
     /**
      * Get External Resource as a Dictionary.
      *
-     * @return the {@link Single&lt;RestResponse&lt;Void, Map&lt;String, FlattenedProduct&gt;&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Single<RestResponse<Void, Map<String, FlattenedProduct>>> getDictionaryWithRestResponseAsync() {
         return service.getDictionary();
@@ -532,7 +532,7 @@ public final class AutoRestResourceFlatteningTestServiceImpl extends ServiceClie
     /**
      * Get External Resource as a Dictionary.
      *
-     * @return the {@link Maybe&lt;Map&lt;String, FlattenedProduct&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Maybe<Map<String, FlattenedProduct>> getDictionaryAsync() {
         return getDictionaryWithRestResponseAsync()
@@ -562,7 +562,7 @@ public final class AutoRestResourceFlatteningTestServiceImpl extends ServiceClie
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;Void&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     public ServiceFuture<Void> putResourceCollectionAsync(ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(putResourceCollectionAsync(), serviceCallback);
@@ -571,7 +571,7 @@ public final class AutoRestResourceFlatteningTestServiceImpl extends ServiceClie
     /**
      * Put External Resource as a ResourceCollection.
      *
-     * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Single<RestResponse<Void, Void>> putResourceCollectionWithRestResponseAsync() {
         final ResourceCollection resourceComplexObject = null;
@@ -581,7 +581,7 @@ public final class AutoRestResourceFlatteningTestServiceImpl extends ServiceClie
     /**
      * Put External Resource as a ResourceCollection.
      *
-     * @return the {@link Completable} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Completable putResourceCollectionAsync() {
         return putResourceCollectionWithRestResponseAsync()
@@ -606,7 +606,7 @@ public final class AutoRestResourceFlatteningTestServiceImpl extends ServiceClie
      * @param resourceComplexObject External Resource as a ResourceCollection to put.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;Void&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     public ServiceFuture<Void> putResourceCollectionAsync(ResourceCollection resourceComplexObject, ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(putResourceCollectionAsync(resourceComplexObject), serviceCallback);
@@ -617,7 +617,7 @@ public final class AutoRestResourceFlatteningTestServiceImpl extends ServiceClie
      *
      * @param resourceComplexObject External Resource as a ResourceCollection to put.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Single<RestResponse<Void, Void>> putResourceCollectionWithRestResponseAsync(ResourceCollection resourceComplexObject) {
         Validator.validate(resourceComplexObject);
@@ -629,7 +629,7 @@ public final class AutoRestResourceFlatteningTestServiceImpl extends ServiceClie
      *
      * @param resourceComplexObject External Resource as a ResourceCollection to put.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link Completable} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Completable putResourceCollectionAsync(ResourceCollection resourceComplexObject) {
         return putResourceCollectionWithRestResponseAsync(resourceComplexObject)
@@ -652,7 +652,7 @@ public final class AutoRestResourceFlatteningTestServiceImpl extends ServiceClie
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;ResourceCollection&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     public ServiceFuture<ResourceCollection> getResourceCollectionAsync(ServiceCallback<ResourceCollection> serviceCallback) {
         return ServiceFuture.fromBody(getResourceCollectionAsync(), serviceCallback);
@@ -661,7 +661,7 @@ public final class AutoRestResourceFlatteningTestServiceImpl extends ServiceClie
     /**
      * Get External Resource as a ResourceCollection.
      *
-     * @return the {@link Single&lt;RestResponse&lt;Void, ResourceCollection&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Single<RestResponse<Void, ResourceCollection>> getResourceCollectionWithRestResponseAsync() {
         return service.getResourceCollection();
@@ -670,7 +670,7 @@ public final class AutoRestResourceFlatteningTestServiceImpl extends ServiceClie
     /**
      * Get External Resource as a ResourceCollection.
      *
-     * @return the {@link Maybe&lt;ResourceCollection&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Maybe<ResourceCollection> getResourceCollectionAsync() {
         return getResourceCollectionWithRestResponseAsync()
@@ -701,7 +701,7 @@ public final class AutoRestResourceFlatteningTestServiceImpl extends ServiceClie
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;SimpleProduct&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     public ServiceFuture<SimpleProduct> putSimpleProductAsync(ServiceCallback<SimpleProduct> serviceCallback) {
         return ServiceFuture.fromBody(putSimpleProductAsync(), serviceCallback);
@@ -710,7 +710,7 @@ public final class AutoRestResourceFlatteningTestServiceImpl extends ServiceClie
     /**
      * Put Simple Product with client flattening true on the model.
      *
-     * @return the {@link Single&lt;RestResponse&lt;Void, SimpleProduct&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Single<RestResponse<Void, SimpleProduct>> putSimpleProductWithRestResponseAsync() {
         final SimpleProduct simpleBodyProduct = null;
@@ -720,7 +720,7 @@ public final class AutoRestResourceFlatteningTestServiceImpl extends ServiceClie
     /**
      * Put Simple Product with client flattening true on the model.
      *
-     * @return the {@link Maybe&lt;SimpleProduct&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Maybe<SimpleProduct> putSimpleProductAsync() {
         return putSimpleProductWithRestResponseAsync()
@@ -754,7 +754,7 @@ public final class AutoRestResourceFlatteningTestServiceImpl extends ServiceClie
      * @param simpleBodyProduct Simple body product to put.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;SimpleProduct&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     public ServiceFuture<SimpleProduct> putSimpleProductAsync(SimpleProduct simpleBodyProduct, ServiceCallback<SimpleProduct> serviceCallback) {
         return ServiceFuture.fromBody(putSimpleProductAsync(simpleBodyProduct), serviceCallback);
@@ -765,7 +765,7 @@ public final class AutoRestResourceFlatteningTestServiceImpl extends ServiceClie
      *
      * @param simpleBodyProduct Simple body product to put.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link Single&lt;RestResponse&lt;Void, SimpleProduct&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Single<RestResponse<Void, SimpleProduct>> putSimpleProductWithRestResponseAsync(SimpleProduct simpleBodyProduct) {
         Validator.validate(simpleBodyProduct);
@@ -777,7 +777,7 @@ public final class AutoRestResourceFlatteningTestServiceImpl extends ServiceClie
      *
      * @param simpleBodyProduct Simple body product to put.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link Maybe&lt;SimpleProduct&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Maybe<SimpleProduct> putSimpleProductAsync(SimpleProduct simpleBodyProduct) {
         return putSimpleProductWithRestResponseAsync(simpleBodyProduct)
@@ -813,7 +813,7 @@ public final class AutoRestResourceFlatteningTestServiceImpl extends ServiceClie
      * @param maxProductDisplayName Display name of product.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;SimpleProduct&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     public ServiceFuture<SimpleProduct> postFlattenedSimpleProductAsync(@NonNull String productId, @NonNull String maxProductDisplayName, ServiceCallback<SimpleProduct> serviceCallback) {
         return ServiceFuture.fromBody(postFlattenedSimpleProductAsync(productId, maxProductDisplayName), serviceCallback);
@@ -825,7 +825,7 @@ public final class AutoRestResourceFlatteningTestServiceImpl extends ServiceClie
      * @param productId Unique identifier representing a specific product for a given latitude &amp; longitude. For example, uberX in San Francisco will have a different product_id than uberX in Los Angeles.
      * @param maxProductDisplayName Display name of product.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link Single&lt;RestResponse&lt;Void, SimpleProduct&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Single<RestResponse<Void, SimpleProduct>> postFlattenedSimpleProductWithRestResponseAsync(@NonNull String productId, @NonNull String maxProductDisplayName) {
         if (productId == null) {
@@ -852,7 +852,7 @@ public final class AutoRestResourceFlatteningTestServiceImpl extends ServiceClie
      * @param productId Unique identifier representing a specific product for a given latitude &amp; longitude. For example, uberX in San Francisco will have a different product_id than uberX in Los Angeles.
      * @param maxProductDisplayName Display name of product.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link Maybe&lt;SimpleProduct&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Maybe<SimpleProduct> postFlattenedSimpleProductAsync(@NonNull String productId, @NonNull String maxProductDisplayName) {
         return postFlattenedSimpleProductWithRestResponseAsync(productId, maxProductDisplayName)
@@ -894,7 +894,7 @@ public final class AutoRestResourceFlatteningTestServiceImpl extends ServiceClie
      * @param odatavalue URL value.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;SimpleProduct&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     public ServiceFuture<SimpleProduct> postFlattenedSimpleProductAsync(@NonNull String productId, @NonNull String maxProductDisplayName, String description, String genericValue, String odatavalue, ServiceCallback<SimpleProduct> serviceCallback) {
         return ServiceFuture.fromBody(postFlattenedSimpleProductAsync(productId, maxProductDisplayName, description, genericValue, odatavalue), serviceCallback);
@@ -909,7 +909,7 @@ public final class AutoRestResourceFlatteningTestServiceImpl extends ServiceClie
      * @param genericValue Generic URL value.
      * @param odatavalue URL value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link Single&lt;RestResponse&lt;Void, SimpleProduct&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Single<RestResponse<Void, SimpleProduct>> postFlattenedSimpleProductWithRestResponseAsync(@NonNull String productId, @NonNull String maxProductDisplayName, String description, String genericValue, String odatavalue) {
         if (productId == null) {
@@ -939,7 +939,7 @@ public final class AutoRestResourceFlatteningTestServiceImpl extends ServiceClie
      * @param genericValue Generic URL value.
      * @param odatavalue URL value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link Maybe&lt;SimpleProduct&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Maybe<SimpleProduct> postFlattenedSimpleProductAsync(@NonNull String productId, @NonNull String maxProductDisplayName, String description, String genericValue, String odatavalue) {
         return postFlattenedSimpleProductWithRestResponseAsync(productId, maxProductDisplayName, description, genericValue, odatavalue)
@@ -973,7 +973,7 @@ public final class AutoRestResourceFlatteningTestServiceImpl extends ServiceClie
      * @param flattenParameterGroup Additional parameters for the operation.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;SimpleProduct&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     public ServiceFuture<SimpleProduct> putSimpleProductWithGroupingAsync(@NonNull FlattenParameterGroup flattenParameterGroup, ServiceCallback<SimpleProduct> serviceCallback) {
         return ServiceFuture.fromBody(putSimpleProductWithGroupingAsync(flattenParameterGroup), serviceCallback);
@@ -984,7 +984,7 @@ public final class AutoRestResourceFlatteningTestServiceImpl extends ServiceClie
      *
      * @param flattenParameterGroup Additional parameters for the operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link Single&lt;RestResponse&lt;Void, SimpleProduct&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Single<RestResponse<Void, SimpleProduct>> putSimpleProductWithGroupingWithRestResponseAsync(@NonNull FlattenParameterGroup flattenParameterGroup) {
         if (flattenParameterGroup == null) {
@@ -1014,7 +1014,7 @@ public final class AutoRestResourceFlatteningTestServiceImpl extends ServiceClie
      *
      * @param flattenParameterGroup Additional parameters for the operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link Maybe&lt;SimpleProduct&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Maybe<SimpleProduct> putSimpleProductWithGroupingAsync(@NonNull FlattenParameterGroup flattenParameterGroup) {
         return putSimpleProductWithGroupingWithRestResponseAsync(flattenParameterGroup)

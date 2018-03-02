@@ -85,7 +85,7 @@ public final class GroupsImpl implements Groups {
      * @param resourceGroupName Resource Group name 'testgroup101'.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;SampleResourceGroup&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     public ServiceFuture<SampleResourceGroup> getSampleResourceGroupAsync(@NonNull String resourceGroupName, ServiceCallback<SampleResourceGroup> serviceCallback) {
         return ServiceFuture.fromBody(getSampleResourceGroupAsync(resourceGroupName), serviceCallback);
@@ -96,7 +96,7 @@ public final class GroupsImpl implements Groups {
      *
      * @param resourceGroupName Resource Group name 'testgroup101'.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link Single&lt;RestResponse&lt;Void, SampleResourceGroup&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Single<RestResponse<Void, SampleResourceGroup>> getSampleResourceGroupWithRestResponseAsync(@NonNull String resourceGroupName) {
         if (this.client.subscriptionId() == null) {
@@ -116,7 +116,7 @@ public final class GroupsImpl implements Groups {
      *
      * @param resourceGroupName Resource Group name 'testgroup101'.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link Maybe&lt;SampleResourceGroup&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Maybe<SampleResourceGroup> getSampleResourceGroupAsync(@NonNull String resourceGroupName) {
         return getSampleResourceGroupWithRestResponseAsync(resourceGroupName)

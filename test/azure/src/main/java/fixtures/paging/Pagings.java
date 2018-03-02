@@ -10,6 +10,7 @@
 
 package fixtures.paging;
 
+import com.microsoft.azure.v2.CloudException;
 import com.microsoft.azure.v2.Page;
 import com.microsoft.azure.v2.PagedList;
 import fixtures.paging.models.CustomParameterGroup;
@@ -46,7 +47,7 @@ public interface Pagings {
     /**
      * A paging operation that finishes on the first call without a nextlink.
      *
-     * @return the {@link Single&lt;Page&lt;Product&gt;&gt;} object if successful.
+     * @return the Single&lt;Page&lt;Product&gt;&gt; object if successful.
      */
     Single<Page<Product>> getSinglePagesSinglePageAsync();
 
@@ -69,7 +70,7 @@ public interface Pagings {
     /**
      * A paging operation that includes a nextLink that has 10 pages.
      *
-     * @return the {@link Single&lt;Page&lt;Product&gt;&gt;} object if successful.
+     * @return the Single&lt;Page&lt;Product&gt;&gt; object if successful.
      */
     Single<Page<Product>> getMultiplePagesSinglePageAsync();
 
@@ -101,7 +102,7 @@ public interface Pagings {
      * @param clientRequestId the String value.
      * @param pagingGetMultiplePagesOptions Additional parameters for the operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link Single&lt;Page&lt;Product&gt;&gt;} object if successful.
+     * @return the Single&lt;Page&lt;Product&gt;&gt; object if successful.
      */
     Single<Page<Product>> getMultiplePagesSinglePageAsync(final String clientRequestId, final PagingGetMultiplePagesOptions pagingGetMultiplePagesOptions);
 
@@ -124,7 +125,7 @@ public interface Pagings {
     /**
      * A paging operation that includes a nextLink in odata format that has 10 pages.
      *
-     * @return the {@link Single&lt;Page&lt;Product&gt;&gt;} object if successful.
+     * @return the Single&lt;Page&lt;Product&gt;&gt; object if successful.
      */
     Single<Page<Product>> getOdataMultiplePagesSinglePageAsync();
 
@@ -156,7 +157,7 @@ public interface Pagings {
      * @param clientRequestId the String value.
      * @param pagingGetOdataMultiplePagesOptions Additional parameters for the operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link Single&lt;Page&lt;Product&gt;&gt;} object if successful.
+     * @return the Single&lt;Page&lt;Product&gt;&gt; object if successful.
      */
     Single<Page<Product>> getOdataMultiplePagesSinglePageAsync(final String clientRequestId, final PagingGetOdataMultiplePagesOptions pagingGetOdataMultiplePagesOptions);
 
@@ -185,7 +186,7 @@ public interface Pagings {
      *
      * @param pagingGetMultiplePagesWithOffsetOptions Additional parameters for the operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link Single&lt;Page&lt;Product&gt;&gt;} object if successful.
+     * @return the Single&lt;Page&lt;Product&gt;&gt; object if successful.
      */
     Single<Page<Product>> getMultiplePagesWithOffsetSinglePageAsync(@NonNull final PagingGetMultiplePagesWithOffsetOptions pagingGetMultiplePagesWithOffsetOptions);
 
@@ -217,7 +218,7 @@ public interface Pagings {
      * @param pagingGetMultiplePagesWithOffsetOptions Additional parameters for the operation.
      * @param clientRequestId the String value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link Single&lt;Page&lt;Product&gt;&gt;} object if successful.
+     * @return the Single&lt;Page&lt;Product&gt;&gt; object if successful.
      */
     Single<Page<Product>> getMultiplePagesWithOffsetSinglePageAsync(@NonNull final PagingGetMultiplePagesWithOffsetOptions pagingGetMultiplePagesWithOffsetOptions, final String clientRequestId);
 
@@ -240,7 +241,7 @@ public interface Pagings {
     /**
      * A paging operation that fails on the first call with 500 and then retries and then get a response including a nextLink that has 10 pages.
      *
-     * @return the {@link Single&lt;Page&lt;Product&gt;&gt;} object if successful.
+     * @return the Single&lt;Page&lt;Product&gt;&gt; object if successful.
      */
     Single<Page<Product>> getMultiplePagesRetryFirstSinglePageAsync();
 
@@ -263,7 +264,7 @@ public interface Pagings {
     /**
      * A paging operation that includes a nextLink that has 10 pages, of which the 2nd call fails first with 500. The client should retry and finish all 10 pages eventually.
      *
-     * @return the {@link Single&lt;Page&lt;Product&gt;&gt;} object if successful.
+     * @return the Single&lt;Page&lt;Product&gt;&gt; object if successful.
      */
     Single<Page<Product>> getMultiplePagesRetrySecondSinglePageAsync();
 
@@ -286,7 +287,7 @@ public interface Pagings {
     /**
      * A paging operation that receives a 400 on the first call.
      *
-     * @return the {@link Single&lt;Page&lt;Product&gt;&gt;} object if successful.
+     * @return the Single&lt;Page&lt;Product&gt;&gt; object if successful.
      */
     Single<Page<Product>> getSinglePagesFailureSinglePageAsync();
 
@@ -309,7 +310,7 @@ public interface Pagings {
     /**
      * A paging operation that receives a 400 on the second call.
      *
-     * @return the {@link Single&lt;Page&lt;Product&gt;&gt;} object if successful.
+     * @return the Single&lt;Page&lt;Product&gt;&gt; object if successful.
      */
     Single<Page<Product>> getMultiplePagesFailureSinglePageAsync();
 
@@ -332,7 +333,7 @@ public interface Pagings {
     /**
      * A paging operation that receives an invalid nextLink.
      *
-     * @return the {@link Single&lt;Page&lt;Product&gt;&gt;} object if successful.
+     * @return the Single&lt;Page&lt;Product&gt;&gt; object if successful.
      */
     Single<Page<Product>> getMultiplePagesFailureUriSinglePageAsync();
 
@@ -364,7 +365,7 @@ public interface Pagings {
      * @param tenant Sets the tenant to use.
      * @param apiVersion Sets the api version to use.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link Single&lt;Page&lt;Product&gt;&gt;} object if successful.
+     * @return the Single&lt;Page&lt;Product&gt;&gt; object if successful.
      */
     Single<Page<Product>> getMultiplePagesFragmentNextLinkSinglePageAsync(@NonNull final String tenant, @NonNull final String apiVersion);
 
@@ -393,7 +394,7 @@ public interface Pagings {
      *
      * @param customParameterGroup Additional parameters for the operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link Single&lt;Page&lt;Product&gt;&gt;} object if successful.
+     * @return the Single&lt;Page&lt;Product&gt;&gt; object if successful.
      */
     Single<Page<Product>> getMultiplePagesFragmentWithGroupingNextLinkSinglePageAsync(@NonNull final CustomParameterGroup customParameterGroup);
 
@@ -428,7 +429,7 @@ public interface Pagings {
      * @param nextLink Next link for list operation.
      * @param apiVersion Sets the api version to use.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link Single&lt;Page&lt;Product&gt;&gt;} object if successful.
+     * @return the Single&lt;Page&lt;Product&gt;&gt; object if successful.
      */
     Single<Page<Product>> nextFragmentSinglePageAsync(@NonNull final String tenant, @NonNull final String nextLink, @NonNull final String apiVersion);
 
@@ -460,7 +461,7 @@ public interface Pagings {
      * @param nextLink Next link for list operation.
      * @param customParameterGroup Additional parameters for the operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link Single&lt;Page&lt;Product&gt;&gt;} object if successful.
+     * @return the Single&lt;Page&lt;Product&gt;&gt; object if successful.
      */
     Single<Page<Product>> nextFragmentWithGroupingSinglePageAsync(@NonNull final String nextLink, @NonNull final CustomParameterGroup customParameterGroup);
 
@@ -489,7 +490,7 @@ public interface Pagings {
      *
      * @param nextPageLink The NextLink from the previous successful call to List operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link Single&lt;Page&lt;Product&gt;&gt;} object if successful.
+     * @return the Single&lt;Page&lt;Product&gt;&gt; object if successful.
      */
     Single<Page<Product>> getSinglePagesNextSinglePageAsync(@NonNull final String nextPageLink);
 
@@ -518,7 +519,7 @@ public interface Pagings {
      *
      * @param nextPageLink The NextLink from the previous successful call to List operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link Single&lt;Page&lt;Product&gt;&gt;} object if successful.
+     * @return the Single&lt;Page&lt;Product&gt;&gt; object if successful.
      */
     Single<Page<Product>> getMultiplePagesNextSinglePageAsync(@NonNull final String nextPageLink);
 
@@ -553,7 +554,7 @@ public interface Pagings {
      * @param clientRequestId the String value.
      * @param pagingGetMultiplePagesOptions Additional parameters for the operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link Single&lt;Page&lt;Product&gt;&gt;} object if successful.
+     * @return the Single&lt;Page&lt;Product&gt;&gt; object if successful.
      */
     Single<Page<Product>> getMultiplePagesNextSinglePageAsync(@NonNull final String nextPageLink, final String clientRequestId, final PagingGetMultiplePagesOptions pagingGetMultiplePagesOptions);
 
@@ -582,7 +583,7 @@ public interface Pagings {
      *
      * @param nextPageLink The NextLink from the previous successful call to List operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link Single&lt;Page&lt;Product&gt;&gt;} object if successful.
+     * @return the Single&lt;Page&lt;Product&gt;&gt; object if successful.
      */
     Single<Page<Product>> getOdataMultiplePagesNextSinglePageAsync(@NonNull final String nextPageLink);
 
@@ -617,7 +618,7 @@ public interface Pagings {
      * @param clientRequestId the String value.
      * @param pagingGetOdataMultiplePagesOptions Additional parameters for the operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link Single&lt;Page&lt;Product&gt;&gt;} object if successful.
+     * @return the Single&lt;Page&lt;Product&gt;&gt; object if successful.
      */
     Single<Page<Product>> getOdataMultiplePagesNextSinglePageAsync(@NonNull final String nextPageLink, final String clientRequestId, final PagingGetOdataMultiplePagesOptions pagingGetOdataMultiplePagesOptions);
 
@@ -646,7 +647,7 @@ public interface Pagings {
      *
      * @param nextPageLink The NextLink from the previous successful call to List operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link Single&lt;Page&lt;Product&gt;&gt;} object if successful.
+     * @return the Single&lt;Page&lt;Product&gt;&gt; object if successful.
      */
     Single<Page<Product>> getMultiplePagesWithOffsetNextSinglePageAsync(@NonNull final String nextPageLink);
 
@@ -681,7 +682,7 @@ public interface Pagings {
      * @param clientRequestId the String value.
      * @param pagingGetMultiplePagesWithOffsetNextOptions Additional parameters for the operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link Single&lt;Page&lt;Product&gt;&gt;} object if successful.
+     * @return the Single&lt;Page&lt;Product&gt;&gt; object if successful.
      */
     Single<Page<Product>> getMultiplePagesWithOffsetNextSinglePageAsync(@NonNull final String nextPageLink, final String clientRequestId, final PagingGetMultiplePagesWithOffsetNextOptions pagingGetMultiplePagesWithOffsetNextOptions);
 
@@ -710,7 +711,7 @@ public interface Pagings {
      *
      * @param nextPageLink The NextLink from the previous successful call to List operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link Single&lt;Page&lt;Product&gt;&gt;} object if successful.
+     * @return the Single&lt;Page&lt;Product&gt;&gt; object if successful.
      */
     Single<Page<Product>> getMultiplePagesRetryFirstNextSinglePageAsync(@NonNull final String nextPageLink);
 
@@ -739,7 +740,7 @@ public interface Pagings {
      *
      * @param nextPageLink The NextLink from the previous successful call to List operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link Single&lt;Page&lt;Product&gt;&gt;} object if successful.
+     * @return the Single&lt;Page&lt;Product&gt;&gt; object if successful.
      */
     Single<Page<Product>> getMultiplePagesRetrySecondNextSinglePageAsync(@NonNull final String nextPageLink);
 
@@ -768,7 +769,7 @@ public interface Pagings {
      *
      * @param nextPageLink The NextLink from the previous successful call to List operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link Single&lt;Page&lt;Product&gt;&gt;} object if successful.
+     * @return the Single&lt;Page&lt;Product&gt;&gt; object if successful.
      */
     Single<Page<Product>> getSinglePagesFailureNextSinglePageAsync(@NonNull final String nextPageLink);
 
@@ -797,7 +798,7 @@ public interface Pagings {
      *
      * @param nextPageLink The NextLink from the previous successful call to List operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link Single&lt;Page&lt;Product&gt;&gt;} object if successful.
+     * @return the Single&lt;Page&lt;Product&gt;&gt; object if successful.
      */
     Single<Page<Product>> getMultiplePagesFailureNextSinglePageAsync(@NonNull final String nextPageLink);
 
@@ -826,7 +827,7 @@ public interface Pagings {
      *
      * @param nextPageLink The NextLink from the previous successful call to List operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link Single&lt;Page&lt;Product&gt;&gt;} object if successful.
+     * @return the Single&lt;Page&lt;Product&gt;&gt; object if successful.
      */
     Single<Page<Product>> getMultiplePagesFailureUriNextSinglePageAsync(@NonNull final String nextPageLink);
 }

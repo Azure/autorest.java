@@ -8,7 +8,7 @@
  * regenerated.
  */
 
-package fixtures.bodybyte.implementation;
+package fixtures.bodybyte;
 
 import com.microsoft.rest.v2.RestProxy;
 import com.microsoft.rest.v2.RestResponse;
@@ -20,7 +20,6 @@ import com.microsoft.rest.v2.annotations.GET;
 import com.microsoft.rest.v2.annotations.Host;
 import com.microsoft.rest.v2.annotations.PUT;
 import com.microsoft.rest.v2.annotations.UnexpectedResponseExceptionType;
-import fixtures.bodybyte.Bytes;
 import fixtures.bodybyte.models.ErrorException;
 import io.reactivex.Completable;
 import io.reactivex.Maybe;
@@ -101,7 +100,7 @@ public final class BytesImpl implements Bytes {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;byte[]&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     public ServiceFuture<byte[]> getNullAsync(ServiceCallback<byte[]> serviceCallback) {
         return ServiceFuture.fromBody(getNullAsync(), serviceCallback);
@@ -110,7 +109,7 @@ public final class BytesImpl implements Bytes {
     /**
      * Get null byte value.
      *
-     * @return the {@link Single&lt;RestResponse&lt;Void, byte[]&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Single<RestResponse<Void, byte[]>> getNullWithRestResponseAsync() {
         return service.getNull();
@@ -119,7 +118,7 @@ public final class BytesImpl implements Bytes {
     /**
      * Get null byte value.
      *
-     * @return the {@link Maybe&lt;byte[]&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Maybe<byte[]> getNullAsync() {
         return getNullWithRestResponseAsync()
@@ -150,7 +149,7 @@ public final class BytesImpl implements Bytes {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;byte[]&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     public ServiceFuture<byte[]> getEmptyAsync(ServiceCallback<byte[]> serviceCallback) {
         return ServiceFuture.fromBody(getEmptyAsync(), serviceCallback);
@@ -159,7 +158,7 @@ public final class BytesImpl implements Bytes {
     /**
      * Get empty byte value ''.
      *
-     * @return the {@link Single&lt;RestResponse&lt;Void, byte[]&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Single<RestResponse<Void, byte[]>> getEmptyWithRestResponseAsync() {
         return service.getEmpty();
@@ -168,7 +167,7 @@ public final class BytesImpl implements Bytes {
     /**
      * Get empty byte value ''.
      *
-     * @return the {@link Maybe&lt;byte[]&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Maybe<byte[]> getEmptyAsync() {
         return getEmptyWithRestResponseAsync()
@@ -199,7 +198,7 @@ public final class BytesImpl implements Bytes {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;byte[]&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     public ServiceFuture<byte[]> getNonAsciiAsync(ServiceCallback<byte[]> serviceCallback) {
         return ServiceFuture.fromBody(getNonAsciiAsync(), serviceCallback);
@@ -208,7 +207,7 @@ public final class BytesImpl implements Bytes {
     /**
      * Get non-ascii byte string hex(FF FE FD FC FB FA F9 F8 F7 F6).
      *
-     * @return the {@link Single&lt;RestResponse&lt;Void, byte[]&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Single<RestResponse<Void, byte[]>> getNonAsciiWithRestResponseAsync() {
         return service.getNonAscii();
@@ -217,7 +216,7 @@ public final class BytesImpl implements Bytes {
     /**
      * Get non-ascii byte string hex(FF FE FD FC FB FA F9 F8 F7 F6).
      *
-     * @return the {@link Maybe&lt;byte[]&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Maybe<byte[]> getNonAsciiAsync() {
         return getNonAsciiWithRestResponseAsync()
@@ -250,7 +249,7 @@ public final class BytesImpl implements Bytes {
      * @param byteBody Base64-encoded non-ascii byte string hex(FF FE FD FC FB FA F9 F8 F7 F6).
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;Void&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     public ServiceFuture<Void> putNonAsciiAsync(@NonNull byte[] byteBody, ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(putNonAsciiAsync(byteBody), serviceCallback);
@@ -261,7 +260,7 @@ public final class BytesImpl implements Bytes {
      *
      * @param byteBody Base64-encoded non-ascii byte string hex(FF FE FD FC FB FA F9 F8 F7 F6).
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Single<RestResponse<Void, Void>> putNonAsciiWithRestResponseAsync(@NonNull byte[] byteBody) {
         if (byteBody == null) {
@@ -275,7 +274,7 @@ public final class BytesImpl implements Bytes {
      *
      * @param byteBody Base64-encoded non-ascii byte string hex(FF FE FD FC FB FA F9 F8 F7 F6).
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link Completable} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Completable putNonAsciiAsync(@NonNull byte[] byteBody) {
         return putNonAsciiWithRestResponseAsync(byteBody)
@@ -298,7 +297,7 @@ public final class BytesImpl implements Bytes {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;byte[]&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     public ServiceFuture<byte[]> getInvalidAsync(ServiceCallback<byte[]> serviceCallback) {
         return ServiceFuture.fromBody(getInvalidAsync(), serviceCallback);
@@ -307,7 +306,7 @@ public final class BytesImpl implements Bytes {
     /**
      * Get invalid byte value ':::SWAGGER::::'.
      *
-     * @return the {@link Single&lt;RestResponse&lt;Void, byte[]&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Single<RestResponse<Void, byte[]>> getInvalidWithRestResponseAsync() {
         return service.getInvalid();
@@ -316,7 +315,7 @@ public final class BytesImpl implements Bytes {
     /**
      * Get invalid byte value ':::SWAGGER::::'.
      *
-     * @return the {@link Maybe&lt;byte[]&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Maybe<byte[]> getInvalidAsync() {
         return getInvalidWithRestResponseAsync()

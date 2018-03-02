@@ -92,7 +92,7 @@ public final class ApiVersionLocalsImpl implements ApiVersionLocals {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;Void&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     public ServiceFuture<Void> getMethodLocalValidAsync(ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(getMethodLocalValidAsync(), serviceCallback);
@@ -101,7 +101,7 @@ public final class ApiVersionLocalsImpl implements ApiVersionLocals {
     /**
      * Get method with api-version modeled in the method.  pass in api-version = '2.0' to succeed.
      *
-     * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Single<RestResponse<Void, Void>> getMethodLocalValidWithRestResponseAsync() {
         final String apiVersion = "2.0";
@@ -111,7 +111,7 @@ public final class ApiVersionLocalsImpl implements ApiVersionLocals {
     /**
      * Get method with api-version modeled in the method.  pass in api-version = '2.0' to succeed.
      *
-     * @return the {@link Completable} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Completable getMethodLocalValidAsync() {
         return getMethodLocalValidWithRestResponseAsync()
@@ -133,7 +133,7 @@ public final class ApiVersionLocalsImpl implements ApiVersionLocals {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;Void&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     public ServiceFuture<Void> getMethodLocalNullAsync(ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(getMethodLocalNullAsync(), serviceCallback);
@@ -142,7 +142,7 @@ public final class ApiVersionLocalsImpl implements ApiVersionLocals {
     /**
      * Get method with api-version modeled in the method.  pass in api-version = null to succeed.
      *
-     * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Single<RestResponse<Void, Void>> getMethodLocalNullWithRestResponseAsync() {
         final String apiVersion = null;
@@ -152,7 +152,7 @@ public final class ApiVersionLocalsImpl implements ApiVersionLocals {
     /**
      * Get method with api-version modeled in the method.  pass in api-version = null to succeed.
      *
-     * @return the {@link Completable} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Completable getMethodLocalNullAsync() {
         return getMethodLocalNullWithRestResponseAsync()
@@ -177,7 +177,7 @@ public final class ApiVersionLocalsImpl implements ApiVersionLocals {
      * @param apiVersion This should appear as a method parameter, use value null, this should result in no serialized parameter.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;Void&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     public ServiceFuture<Void> getMethodLocalNullAsync(String apiVersion, ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(getMethodLocalNullAsync(apiVersion), serviceCallback);
@@ -188,7 +188,7 @@ public final class ApiVersionLocalsImpl implements ApiVersionLocals {
      *
      * @param apiVersion This should appear as a method parameter, use value null, this should result in no serialized parameter.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Single<RestResponse<Void, Void>> getMethodLocalNullWithRestResponseAsync(String apiVersion) {
         return service.getMethodLocalNull(apiVersion, this.client.acceptLanguage());
@@ -199,7 +199,7 @@ public final class ApiVersionLocalsImpl implements ApiVersionLocals {
      *
      * @param apiVersion This should appear as a method parameter, use value null, this should result in no serialized parameter.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link Completable} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Completable getMethodLocalNullAsync(String apiVersion) {
         return getMethodLocalNullWithRestResponseAsync(apiVersion)
@@ -221,7 +221,7 @@ public final class ApiVersionLocalsImpl implements ApiVersionLocals {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;Void&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     public ServiceFuture<Void> getPathLocalValidAsync(ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(getPathLocalValidAsync(), serviceCallback);
@@ -230,7 +230,7 @@ public final class ApiVersionLocalsImpl implements ApiVersionLocals {
     /**
      * Get method with api-version modeled in the method.  pass in api-version = '2.0' to succeed.
      *
-     * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Single<RestResponse<Void, Void>> getPathLocalValidWithRestResponseAsync() {
         final String apiVersion = "2.0";
@@ -240,7 +240,7 @@ public final class ApiVersionLocalsImpl implements ApiVersionLocals {
     /**
      * Get method with api-version modeled in the method.  pass in api-version = '2.0' to succeed.
      *
-     * @return the {@link Completable} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Completable getPathLocalValidAsync() {
         return getPathLocalValidWithRestResponseAsync()
@@ -262,7 +262,7 @@ public final class ApiVersionLocalsImpl implements ApiVersionLocals {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;Void&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     public ServiceFuture<Void> getSwaggerLocalValidAsync(ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(getSwaggerLocalValidAsync(), serviceCallback);
@@ -271,7 +271,7 @@ public final class ApiVersionLocalsImpl implements ApiVersionLocals {
     /**
      * Get method with api-version modeled in the method.  pass in api-version = '2.0' to succeed.
      *
-     * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Single<RestResponse<Void, Void>> getSwaggerLocalValidWithRestResponseAsync() {
         final String apiVersion = "2.0";
@@ -281,7 +281,7 @@ public final class ApiVersionLocalsImpl implements ApiVersionLocals {
     /**
      * Get method with api-version modeled in the method.  pass in api-version = '2.0' to succeed.
      *
-     * @return the {@link Completable} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Completable getSwaggerLocalValidAsync() {
         return getSwaggerLocalValidWithRestResponseAsync()

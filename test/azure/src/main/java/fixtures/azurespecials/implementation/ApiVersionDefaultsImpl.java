@@ -92,7 +92,7 @@ public final class ApiVersionDefaultsImpl implements ApiVersionDefaults {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;Void&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     public ServiceFuture<Void> getMethodGlobalValidAsync(ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(getMethodGlobalValidAsync(), serviceCallback);
@@ -101,7 +101,7 @@ public final class ApiVersionDefaultsImpl implements ApiVersionDefaults {
     /**
      * GET method with api-version modeled in global settings.
      *
-     * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Single<RestResponse<Void, Void>> getMethodGlobalValidWithRestResponseAsync() {
         if (this.client.apiVersion() == null) {
@@ -113,7 +113,7 @@ public final class ApiVersionDefaultsImpl implements ApiVersionDefaults {
     /**
      * GET method with api-version modeled in global settings.
      *
-     * @return the {@link Completable} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Completable getMethodGlobalValidAsync() {
         return getMethodGlobalValidWithRestResponseAsync()
@@ -135,7 +135,7 @@ public final class ApiVersionDefaultsImpl implements ApiVersionDefaults {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;Void&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     public ServiceFuture<Void> getMethodGlobalNotProvidedValidAsync(ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(getMethodGlobalNotProvidedValidAsync(), serviceCallback);
@@ -144,7 +144,7 @@ public final class ApiVersionDefaultsImpl implements ApiVersionDefaults {
     /**
      * GET method with api-version modeled in global settings.
      *
-     * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Single<RestResponse<Void, Void>> getMethodGlobalNotProvidedValidWithRestResponseAsync() {
         if (this.client.apiVersion() == null) {
@@ -156,7 +156,7 @@ public final class ApiVersionDefaultsImpl implements ApiVersionDefaults {
     /**
      * GET method with api-version modeled in global settings.
      *
-     * @return the {@link Completable} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Completable getMethodGlobalNotProvidedValidAsync() {
         return getMethodGlobalNotProvidedValidWithRestResponseAsync()
@@ -178,7 +178,7 @@ public final class ApiVersionDefaultsImpl implements ApiVersionDefaults {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;Void&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     public ServiceFuture<Void> getPathGlobalValidAsync(ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(getPathGlobalValidAsync(), serviceCallback);
@@ -187,7 +187,7 @@ public final class ApiVersionDefaultsImpl implements ApiVersionDefaults {
     /**
      * GET method with api-version modeled in global settings.
      *
-     * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Single<RestResponse<Void, Void>> getPathGlobalValidWithRestResponseAsync() {
         if (this.client.apiVersion() == null) {
@@ -199,7 +199,7 @@ public final class ApiVersionDefaultsImpl implements ApiVersionDefaults {
     /**
      * GET method with api-version modeled in global settings.
      *
-     * @return the {@link Completable} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Completable getPathGlobalValidAsync() {
         return getPathGlobalValidWithRestResponseAsync()
@@ -221,7 +221,7 @@ public final class ApiVersionDefaultsImpl implements ApiVersionDefaults {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;Void&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     public ServiceFuture<Void> getSwaggerGlobalValidAsync(ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(getSwaggerGlobalValidAsync(), serviceCallback);
@@ -230,7 +230,7 @@ public final class ApiVersionDefaultsImpl implements ApiVersionDefaults {
     /**
      * GET method with api-version modeled in global settings.
      *
-     * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Single<RestResponse<Void, Void>> getSwaggerGlobalValidWithRestResponseAsync() {
         if (this.client.apiVersion() == null) {
@@ -242,7 +242,7 @@ public final class ApiVersionDefaultsImpl implements ApiVersionDefaults {
     /**
      * GET method with api-version modeled in global settings.
      *
-     * @return the {@link Completable} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Completable getSwaggerGlobalValidAsync() {
         return getSwaggerGlobalValidWithRestResponseAsync()

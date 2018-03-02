@@ -171,7 +171,7 @@ public final class HttpClientFailuresImpl implements HttpClientFailures {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;Error&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     public ServiceFuture<Error> head400Async(ServiceCallback<Error> serviceCallback) {
         return ServiceFuture.fromBody(head400Async(), serviceCallback);
@@ -180,7 +180,7 @@ public final class HttpClientFailuresImpl implements HttpClientFailures {
     /**
      * Return 400 status code - should be represented in the client as an error.
      *
-     * @return the {@link Single&lt;RestResponse&lt;Void, Error&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Single<RestResponse<Void, Error>> head400WithRestResponseAsync() {
         return service.head400();
@@ -189,7 +189,7 @@ public final class HttpClientFailuresImpl implements HttpClientFailures {
     /**
      * Return 400 status code - should be represented in the client as an error.
      *
-     * @return the {@link Maybe&lt;Error&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Maybe<Error> head400Async() {
         return head400WithRestResponseAsync()
@@ -220,7 +220,7 @@ public final class HttpClientFailuresImpl implements HttpClientFailures {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;Error&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     public ServiceFuture<Error> get400Async(ServiceCallback<Error> serviceCallback) {
         return ServiceFuture.fromBody(get400Async(), serviceCallback);
@@ -229,7 +229,7 @@ public final class HttpClientFailuresImpl implements HttpClientFailures {
     /**
      * Return 400 status code - should be represented in the client as an error.
      *
-     * @return the {@link Single&lt;RestResponse&lt;Void, Error&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Single<RestResponse<Void, Error>> get400WithRestResponseAsync() {
         return service.get400();
@@ -238,7 +238,7 @@ public final class HttpClientFailuresImpl implements HttpClientFailures {
     /**
      * Return 400 status code - should be represented in the client as an error.
      *
-     * @return the {@link Maybe&lt;Error&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Maybe<Error> get400Async() {
         return get400WithRestResponseAsync()
@@ -269,7 +269,7 @@ public final class HttpClientFailuresImpl implements HttpClientFailures {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;Error&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     public ServiceFuture<Error> put400Async(ServiceCallback<Error> serviceCallback) {
         return ServiceFuture.fromBody(put400Async(), serviceCallback);
@@ -278,7 +278,7 @@ public final class HttpClientFailuresImpl implements HttpClientFailures {
     /**
      * Return 400 status code - should be represented in the client as an error.
      *
-     * @return the {@link Single&lt;RestResponse&lt;Void, Error&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Single<RestResponse<Void, Error>> put400WithRestResponseAsync() {
         final Boolean booleanValue = null;
@@ -288,7 +288,7 @@ public final class HttpClientFailuresImpl implements HttpClientFailures {
     /**
      * Return 400 status code - should be represented in the client as an error.
      *
-     * @return the {@link Maybe&lt;Error&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Maybe<Error> put400Async() {
         return put400WithRestResponseAsync()
@@ -322,7 +322,7 @@ public final class HttpClientFailuresImpl implements HttpClientFailures {
      * @param booleanValue Simple boolean value true.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;Error&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     public ServiceFuture<Error> put400Async(Boolean booleanValue, ServiceCallback<Error> serviceCallback) {
         return ServiceFuture.fromBody(put400Async(booleanValue), serviceCallback);
@@ -333,7 +333,7 @@ public final class HttpClientFailuresImpl implements HttpClientFailures {
      *
      * @param booleanValue Simple boolean value true.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link Single&lt;RestResponse&lt;Void, Error&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Single<RestResponse<Void, Error>> put400WithRestResponseAsync(Boolean booleanValue) {
         return service.put400(booleanValue);
@@ -344,7 +344,7 @@ public final class HttpClientFailuresImpl implements HttpClientFailures {
      *
      * @param booleanValue Simple boolean value true.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link Maybe&lt;Error&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Maybe<Error> put400Async(Boolean booleanValue) {
         return put400WithRestResponseAsync(booleanValue)
@@ -375,7 +375,7 @@ public final class HttpClientFailuresImpl implements HttpClientFailures {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;Error&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     public ServiceFuture<Error> patch400Async(ServiceCallback<Error> serviceCallback) {
         return ServiceFuture.fromBody(patch400Async(), serviceCallback);
@@ -384,7 +384,7 @@ public final class HttpClientFailuresImpl implements HttpClientFailures {
     /**
      * Return 400 status code - should be represented in the client as an error.
      *
-     * @return the {@link Single&lt;RestResponse&lt;Void, Error&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Single<RestResponse<Void, Error>> patch400WithRestResponseAsync() {
         final Boolean booleanValue = null;
@@ -394,7 +394,7 @@ public final class HttpClientFailuresImpl implements HttpClientFailures {
     /**
      * Return 400 status code - should be represented in the client as an error.
      *
-     * @return the {@link Maybe&lt;Error&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Maybe<Error> patch400Async() {
         return patch400WithRestResponseAsync()
@@ -428,7 +428,7 @@ public final class HttpClientFailuresImpl implements HttpClientFailures {
      * @param booleanValue Simple boolean value true.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;Error&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     public ServiceFuture<Error> patch400Async(Boolean booleanValue, ServiceCallback<Error> serviceCallback) {
         return ServiceFuture.fromBody(patch400Async(booleanValue), serviceCallback);
@@ -439,7 +439,7 @@ public final class HttpClientFailuresImpl implements HttpClientFailures {
      *
      * @param booleanValue Simple boolean value true.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link Single&lt;RestResponse&lt;Void, Error&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Single<RestResponse<Void, Error>> patch400WithRestResponseAsync(Boolean booleanValue) {
         return service.patch400(booleanValue);
@@ -450,7 +450,7 @@ public final class HttpClientFailuresImpl implements HttpClientFailures {
      *
      * @param booleanValue Simple boolean value true.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link Maybe&lt;Error&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Maybe<Error> patch400Async(Boolean booleanValue) {
         return patch400WithRestResponseAsync(booleanValue)
@@ -481,7 +481,7 @@ public final class HttpClientFailuresImpl implements HttpClientFailures {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;Error&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     public ServiceFuture<Error> post400Async(ServiceCallback<Error> serviceCallback) {
         return ServiceFuture.fromBody(post400Async(), serviceCallback);
@@ -490,7 +490,7 @@ public final class HttpClientFailuresImpl implements HttpClientFailures {
     /**
      * Return 400 status code - should be represented in the client as an error.
      *
-     * @return the {@link Single&lt;RestResponse&lt;Void, Error&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Single<RestResponse<Void, Error>> post400WithRestResponseAsync() {
         final Boolean booleanValue = null;
@@ -500,7 +500,7 @@ public final class HttpClientFailuresImpl implements HttpClientFailures {
     /**
      * Return 400 status code - should be represented in the client as an error.
      *
-     * @return the {@link Maybe&lt;Error&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Maybe<Error> post400Async() {
         return post400WithRestResponseAsync()
@@ -534,7 +534,7 @@ public final class HttpClientFailuresImpl implements HttpClientFailures {
      * @param booleanValue Simple boolean value true.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;Error&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     public ServiceFuture<Error> post400Async(Boolean booleanValue, ServiceCallback<Error> serviceCallback) {
         return ServiceFuture.fromBody(post400Async(booleanValue), serviceCallback);
@@ -545,7 +545,7 @@ public final class HttpClientFailuresImpl implements HttpClientFailures {
      *
      * @param booleanValue Simple boolean value true.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link Single&lt;RestResponse&lt;Void, Error&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Single<RestResponse<Void, Error>> post400WithRestResponseAsync(Boolean booleanValue) {
         return service.post400(booleanValue);
@@ -556,7 +556,7 @@ public final class HttpClientFailuresImpl implements HttpClientFailures {
      *
      * @param booleanValue Simple boolean value true.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link Maybe&lt;Error&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Maybe<Error> post400Async(Boolean booleanValue) {
         return post400WithRestResponseAsync(booleanValue)
@@ -587,7 +587,7 @@ public final class HttpClientFailuresImpl implements HttpClientFailures {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;Error&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     public ServiceFuture<Error> delete400Async(ServiceCallback<Error> serviceCallback) {
         return ServiceFuture.fromBody(delete400Async(), serviceCallback);
@@ -596,7 +596,7 @@ public final class HttpClientFailuresImpl implements HttpClientFailures {
     /**
      * Return 400 status code - should be represented in the client as an error.
      *
-     * @return the {@link Single&lt;RestResponse&lt;Void, Error&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Single<RestResponse<Void, Error>> delete400WithRestResponseAsync() {
         final Boolean booleanValue = null;
@@ -606,7 +606,7 @@ public final class HttpClientFailuresImpl implements HttpClientFailures {
     /**
      * Return 400 status code - should be represented in the client as an error.
      *
-     * @return the {@link Maybe&lt;Error&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Maybe<Error> delete400Async() {
         return delete400WithRestResponseAsync()
@@ -640,7 +640,7 @@ public final class HttpClientFailuresImpl implements HttpClientFailures {
      * @param booleanValue Simple boolean value true.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;Error&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     public ServiceFuture<Error> delete400Async(Boolean booleanValue, ServiceCallback<Error> serviceCallback) {
         return ServiceFuture.fromBody(delete400Async(booleanValue), serviceCallback);
@@ -651,7 +651,7 @@ public final class HttpClientFailuresImpl implements HttpClientFailures {
      *
      * @param booleanValue Simple boolean value true.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link Single&lt;RestResponse&lt;Void, Error&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Single<RestResponse<Void, Error>> delete400WithRestResponseAsync(Boolean booleanValue) {
         return service.delete400(booleanValue);
@@ -662,7 +662,7 @@ public final class HttpClientFailuresImpl implements HttpClientFailures {
      *
      * @param booleanValue Simple boolean value true.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link Maybe&lt;Error&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Maybe<Error> delete400Async(Boolean booleanValue) {
         return delete400WithRestResponseAsync(booleanValue)
@@ -693,7 +693,7 @@ public final class HttpClientFailuresImpl implements HttpClientFailures {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;Error&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     public ServiceFuture<Error> head401Async(ServiceCallback<Error> serviceCallback) {
         return ServiceFuture.fromBody(head401Async(), serviceCallback);
@@ -702,7 +702,7 @@ public final class HttpClientFailuresImpl implements HttpClientFailures {
     /**
      * Return 401 status code - should be represented in the client as an error.
      *
-     * @return the {@link Single&lt;RestResponse&lt;Void, Error&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Single<RestResponse<Void, Error>> head401WithRestResponseAsync() {
         return service.head401();
@@ -711,7 +711,7 @@ public final class HttpClientFailuresImpl implements HttpClientFailures {
     /**
      * Return 401 status code - should be represented in the client as an error.
      *
-     * @return the {@link Maybe&lt;Error&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Maybe<Error> head401Async() {
         return head401WithRestResponseAsync()
@@ -742,7 +742,7 @@ public final class HttpClientFailuresImpl implements HttpClientFailures {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;Error&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     public ServiceFuture<Error> get402Async(ServiceCallback<Error> serviceCallback) {
         return ServiceFuture.fromBody(get402Async(), serviceCallback);
@@ -751,7 +751,7 @@ public final class HttpClientFailuresImpl implements HttpClientFailures {
     /**
      * Return 402 status code - should be represented in the client as an error.
      *
-     * @return the {@link Single&lt;RestResponse&lt;Void, Error&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Single<RestResponse<Void, Error>> get402WithRestResponseAsync() {
         return service.get402();
@@ -760,7 +760,7 @@ public final class HttpClientFailuresImpl implements HttpClientFailures {
     /**
      * Return 402 status code - should be represented in the client as an error.
      *
-     * @return the {@link Maybe&lt;Error&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Maybe<Error> get402Async() {
         return get402WithRestResponseAsync()
@@ -791,7 +791,7 @@ public final class HttpClientFailuresImpl implements HttpClientFailures {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;Error&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     public ServiceFuture<Error> get403Async(ServiceCallback<Error> serviceCallback) {
         return ServiceFuture.fromBody(get403Async(), serviceCallback);
@@ -800,7 +800,7 @@ public final class HttpClientFailuresImpl implements HttpClientFailures {
     /**
      * Return 403 status code - should be represented in the client as an error.
      *
-     * @return the {@link Single&lt;RestResponse&lt;Void, Error&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Single<RestResponse<Void, Error>> get403WithRestResponseAsync() {
         return service.get403();
@@ -809,7 +809,7 @@ public final class HttpClientFailuresImpl implements HttpClientFailures {
     /**
      * Return 403 status code - should be represented in the client as an error.
      *
-     * @return the {@link Maybe&lt;Error&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Maybe<Error> get403Async() {
         return get403WithRestResponseAsync()
@@ -840,7 +840,7 @@ public final class HttpClientFailuresImpl implements HttpClientFailures {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;Error&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     public ServiceFuture<Error> put404Async(ServiceCallback<Error> serviceCallback) {
         return ServiceFuture.fromBody(put404Async(), serviceCallback);
@@ -849,7 +849,7 @@ public final class HttpClientFailuresImpl implements HttpClientFailures {
     /**
      * Return 404 status code - should be represented in the client as an error.
      *
-     * @return the {@link Single&lt;RestResponse&lt;Void, Error&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Single<RestResponse<Void, Error>> put404WithRestResponseAsync() {
         final Boolean booleanValue = null;
@@ -859,7 +859,7 @@ public final class HttpClientFailuresImpl implements HttpClientFailures {
     /**
      * Return 404 status code - should be represented in the client as an error.
      *
-     * @return the {@link Maybe&lt;Error&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Maybe<Error> put404Async() {
         return put404WithRestResponseAsync()
@@ -893,7 +893,7 @@ public final class HttpClientFailuresImpl implements HttpClientFailures {
      * @param booleanValue Simple boolean value true.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;Error&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     public ServiceFuture<Error> put404Async(Boolean booleanValue, ServiceCallback<Error> serviceCallback) {
         return ServiceFuture.fromBody(put404Async(booleanValue), serviceCallback);
@@ -904,7 +904,7 @@ public final class HttpClientFailuresImpl implements HttpClientFailures {
      *
      * @param booleanValue Simple boolean value true.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link Single&lt;RestResponse&lt;Void, Error&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Single<RestResponse<Void, Error>> put404WithRestResponseAsync(Boolean booleanValue) {
         return service.put404(booleanValue);
@@ -915,7 +915,7 @@ public final class HttpClientFailuresImpl implements HttpClientFailures {
      *
      * @param booleanValue Simple boolean value true.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link Maybe&lt;Error&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Maybe<Error> put404Async(Boolean booleanValue) {
         return put404WithRestResponseAsync(booleanValue)
@@ -946,7 +946,7 @@ public final class HttpClientFailuresImpl implements HttpClientFailures {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;Error&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     public ServiceFuture<Error> patch405Async(ServiceCallback<Error> serviceCallback) {
         return ServiceFuture.fromBody(patch405Async(), serviceCallback);
@@ -955,7 +955,7 @@ public final class HttpClientFailuresImpl implements HttpClientFailures {
     /**
      * Return 405 status code - should be represented in the client as an error.
      *
-     * @return the {@link Single&lt;RestResponse&lt;Void, Error&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Single<RestResponse<Void, Error>> patch405WithRestResponseAsync() {
         final Boolean booleanValue = null;
@@ -965,7 +965,7 @@ public final class HttpClientFailuresImpl implements HttpClientFailures {
     /**
      * Return 405 status code - should be represented in the client as an error.
      *
-     * @return the {@link Maybe&lt;Error&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Maybe<Error> patch405Async() {
         return patch405WithRestResponseAsync()
@@ -999,7 +999,7 @@ public final class HttpClientFailuresImpl implements HttpClientFailures {
      * @param booleanValue Simple boolean value true.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;Error&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     public ServiceFuture<Error> patch405Async(Boolean booleanValue, ServiceCallback<Error> serviceCallback) {
         return ServiceFuture.fromBody(patch405Async(booleanValue), serviceCallback);
@@ -1010,7 +1010,7 @@ public final class HttpClientFailuresImpl implements HttpClientFailures {
      *
      * @param booleanValue Simple boolean value true.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link Single&lt;RestResponse&lt;Void, Error&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Single<RestResponse<Void, Error>> patch405WithRestResponseAsync(Boolean booleanValue) {
         return service.patch405(booleanValue);
@@ -1021,7 +1021,7 @@ public final class HttpClientFailuresImpl implements HttpClientFailures {
      *
      * @param booleanValue Simple boolean value true.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link Maybe&lt;Error&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Maybe<Error> patch405Async(Boolean booleanValue) {
         return patch405WithRestResponseAsync(booleanValue)
@@ -1052,7 +1052,7 @@ public final class HttpClientFailuresImpl implements HttpClientFailures {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;Error&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     public ServiceFuture<Error> post406Async(ServiceCallback<Error> serviceCallback) {
         return ServiceFuture.fromBody(post406Async(), serviceCallback);
@@ -1061,7 +1061,7 @@ public final class HttpClientFailuresImpl implements HttpClientFailures {
     /**
      * Return 406 status code - should be represented in the client as an error.
      *
-     * @return the {@link Single&lt;RestResponse&lt;Void, Error&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Single<RestResponse<Void, Error>> post406WithRestResponseAsync() {
         final Boolean booleanValue = null;
@@ -1071,7 +1071,7 @@ public final class HttpClientFailuresImpl implements HttpClientFailures {
     /**
      * Return 406 status code - should be represented in the client as an error.
      *
-     * @return the {@link Maybe&lt;Error&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Maybe<Error> post406Async() {
         return post406WithRestResponseAsync()
@@ -1105,7 +1105,7 @@ public final class HttpClientFailuresImpl implements HttpClientFailures {
      * @param booleanValue Simple boolean value true.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;Error&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     public ServiceFuture<Error> post406Async(Boolean booleanValue, ServiceCallback<Error> serviceCallback) {
         return ServiceFuture.fromBody(post406Async(booleanValue), serviceCallback);
@@ -1116,7 +1116,7 @@ public final class HttpClientFailuresImpl implements HttpClientFailures {
      *
      * @param booleanValue Simple boolean value true.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link Single&lt;RestResponse&lt;Void, Error&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Single<RestResponse<Void, Error>> post406WithRestResponseAsync(Boolean booleanValue) {
         return service.post406(booleanValue);
@@ -1127,7 +1127,7 @@ public final class HttpClientFailuresImpl implements HttpClientFailures {
      *
      * @param booleanValue Simple boolean value true.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link Maybe&lt;Error&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Maybe<Error> post406Async(Boolean booleanValue) {
         return post406WithRestResponseAsync(booleanValue)
@@ -1158,7 +1158,7 @@ public final class HttpClientFailuresImpl implements HttpClientFailures {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;Error&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     public ServiceFuture<Error> delete407Async(ServiceCallback<Error> serviceCallback) {
         return ServiceFuture.fromBody(delete407Async(), serviceCallback);
@@ -1167,7 +1167,7 @@ public final class HttpClientFailuresImpl implements HttpClientFailures {
     /**
      * Return 407 status code - should be represented in the client as an error.
      *
-     * @return the {@link Single&lt;RestResponse&lt;Void, Error&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Single<RestResponse<Void, Error>> delete407WithRestResponseAsync() {
         final Boolean booleanValue = null;
@@ -1177,7 +1177,7 @@ public final class HttpClientFailuresImpl implements HttpClientFailures {
     /**
      * Return 407 status code - should be represented in the client as an error.
      *
-     * @return the {@link Maybe&lt;Error&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Maybe<Error> delete407Async() {
         return delete407WithRestResponseAsync()
@@ -1211,7 +1211,7 @@ public final class HttpClientFailuresImpl implements HttpClientFailures {
      * @param booleanValue Simple boolean value true.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;Error&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     public ServiceFuture<Error> delete407Async(Boolean booleanValue, ServiceCallback<Error> serviceCallback) {
         return ServiceFuture.fromBody(delete407Async(booleanValue), serviceCallback);
@@ -1222,7 +1222,7 @@ public final class HttpClientFailuresImpl implements HttpClientFailures {
      *
      * @param booleanValue Simple boolean value true.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link Single&lt;RestResponse&lt;Void, Error&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Single<RestResponse<Void, Error>> delete407WithRestResponseAsync(Boolean booleanValue) {
         return service.delete407(booleanValue);
@@ -1233,7 +1233,7 @@ public final class HttpClientFailuresImpl implements HttpClientFailures {
      *
      * @param booleanValue Simple boolean value true.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link Maybe&lt;Error&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Maybe<Error> delete407Async(Boolean booleanValue) {
         return delete407WithRestResponseAsync(booleanValue)
@@ -1264,7 +1264,7 @@ public final class HttpClientFailuresImpl implements HttpClientFailures {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;Error&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     public ServiceFuture<Error> put409Async(ServiceCallback<Error> serviceCallback) {
         return ServiceFuture.fromBody(put409Async(), serviceCallback);
@@ -1273,7 +1273,7 @@ public final class HttpClientFailuresImpl implements HttpClientFailures {
     /**
      * Return 409 status code - should be represented in the client as an error.
      *
-     * @return the {@link Single&lt;RestResponse&lt;Void, Error&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Single<RestResponse<Void, Error>> put409WithRestResponseAsync() {
         final Boolean booleanValue = null;
@@ -1283,7 +1283,7 @@ public final class HttpClientFailuresImpl implements HttpClientFailures {
     /**
      * Return 409 status code - should be represented in the client as an error.
      *
-     * @return the {@link Maybe&lt;Error&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Maybe<Error> put409Async() {
         return put409WithRestResponseAsync()
@@ -1317,7 +1317,7 @@ public final class HttpClientFailuresImpl implements HttpClientFailures {
      * @param booleanValue Simple boolean value true.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;Error&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     public ServiceFuture<Error> put409Async(Boolean booleanValue, ServiceCallback<Error> serviceCallback) {
         return ServiceFuture.fromBody(put409Async(booleanValue), serviceCallback);
@@ -1328,7 +1328,7 @@ public final class HttpClientFailuresImpl implements HttpClientFailures {
      *
      * @param booleanValue Simple boolean value true.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link Single&lt;RestResponse&lt;Void, Error&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Single<RestResponse<Void, Error>> put409WithRestResponseAsync(Boolean booleanValue) {
         return service.put409(booleanValue);
@@ -1339,7 +1339,7 @@ public final class HttpClientFailuresImpl implements HttpClientFailures {
      *
      * @param booleanValue Simple boolean value true.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link Maybe&lt;Error&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Maybe<Error> put409Async(Boolean booleanValue) {
         return put409WithRestResponseAsync(booleanValue)
@@ -1370,7 +1370,7 @@ public final class HttpClientFailuresImpl implements HttpClientFailures {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;Error&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     public ServiceFuture<Error> head410Async(ServiceCallback<Error> serviceCallback) {
         return ServiceFuture.fromBody(head410Async(), serviceCallback);
@@ -1379,7 +1379,7 @@ public final class HttpClientFailuresImpl implements HttpClientFailures {
     /**
      * Return 410 status code - should be represented in the client as an error.
      *
-     * @return the {@link Single&lt;RestResponse&lt;Void, Error&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Single<RestResponse<Void, Error>> head410WithRestResponseAsync() {
         return service.head410();
@@ -1388,7 +1388,7 @@ public final class HttpClientFailuresImpl implements HttpClientFailures {
     /**
      * Return 410 status code - should be represented in the client as an error.
      *
-     * @return the {@link Maybe&lt;Error&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Maybe<Error> head410Async() {
         return head410WithRestResponseAsync()
@@ -1419,7 +1419,7 @@ public final class HttpClientFailuresImpl implements HttpClientFailures {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;Error&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     public ServiceFuture<Error> get411Async(ServiceCallback<Error> serviceCallback) {
         return ServiceFuture.fromBody(get411Async(), serviceCallback);
@@ -1428,7 +1428,7 @@ public final class HttpClientFailuresImpl implements HttpClientFailures {
     /**
      * Return 411 status code - should be represented in the client as an error.
      *
-     * @return the {@link Single&lt;RestResponse&lt;Void, Error&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Single<RestResponse<Void, Error>> get411WithRestResponseAsync() {
         return service.get411();
@@ -1437,7 +1437,7 @@ public final class HttpClientFailuresImpl implements HttpClientFailures {
     /**
      * Return 411 status code - should be represented in the client as an error.
      *
-     * @return the {@link Maybe&lt;Error&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Maybe<Error> get411Async() {
         return get411WithRestResponseAsync()
@@ -1468,7 +1468,7 @@ public final class HttpClientFailuresImpl implements HttpClientFailures {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;Error&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     public ServiceFuture<Error> get412Async(ServiceCallback<Error> serviceCallback) {
         return ServiceFuture.fromBody(get412Async(), serviceCallback);
@@ -1477,7 +1477,7 @@ public final class HttpClientFailuresImpl implements HttpClientFailures {
     /**
      * Return 412 status code - should be represented in the client as an error.
      *
-     * @return the {@link Single&lt;RestResponse&lt;Void, Error&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Single<RestResponse<Void, Error>> get412WithRestResponseAsync() {
         return service.get412();
@@ -1486,7 +1486,7 @@ public final class HttpClientFailuresImpl implements HttpClientFailures {
     /**
      * Return 412 status code - should be represented in the client as an error.
      *
-     * @return the {@link Maybe&lt;Error&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Maybe<Error> get412Async() {
         return get412WithRestResponseAsync()
@@ -1517,7 +1517,7 @@ public final class HttpClientFailuresImpl implements HttpClientFailures {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;Error&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     public ServiceFuture<Error> put413Async(ServiceCallback<Error> serviceCallback) {
         return ServiceFuture.fromBody(put413Async(), serviceCallback);
@@ -1526,7 +1526,7 @@ public final class HttpClientFailuresImpl implements HttpClientFailures {
     /**
      * Return 413 status code - should be represented in the client as an error.
      *
-     * @return the {@link Single&lt;RestResponse&lt;Void, Error&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Single<RestResponse<Void, Error>> put413WithRestResponseAsync() {
         final Boolean booleanValue = null;
@@ -1536,7 +1536,7 @@ public final class HttpClientFailuresImpl implements HttpClientFailures {
     /**
      * Return 413 status code - should be represented in the client as an error.
      *
-     * @return the {@link Maybe&lt;Error&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Maybe<Error> put413Async() {
         return put413WithRestResponseAsync()
@@ -1570,7 +1570,7 @@ public final class HttpClientFailuresImpl implements HttpClientFailures {
      * @param booleanValue Simple boolean value true.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;Error&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     public ServiceFuture<Error> put413Async(Boolean booleanValue, ServiceCallback<Error> serviceCallback) {
         return ServiceFuture.fromBody(put413Async(booleanValue), serviceCallback);
@@ -1581,7 +1581,7 @@ public final class HttpClientFailuresImpl implements HttpClientFailures {
      *
      * @param booleanValue Simple boolean value true.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link Single&lt;RestResponse&lt;Void, Error&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Single<RestResponse<Void, Error>> put413WithRestResponseAsync(Boolean booleanValue) {
         return service.put413(booleanValue);
@@ -1592,7 +1592,7 @@ public final class HttpClientFailuresImpl implements HttpClientFailures {
      *
      * @param booleanValue Simple boolean value true.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link Maybe&lt;Error&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Maybe<Error> put413Async(Boolean booleanValue) {
         return put413WithRestResponseAsync(booleanValue)
@@ -1623,7 +1623,7 @@ public final class HttpClientFailuresImpl implements HttpClientFailures {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;Error&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     public ServiceFuture<Error> patch414Async(ServiceCallback<Error> serviceCallback) {
         return ServiceFuture.fromBody(patch414Async(), serviceCallback);
@@ -1632,7 +1632,7 @@ public final class HttpClientFailuresImpl implements HttpClientFailures {
     /**
      * Return 414 status code - should be represented in the client as an error.
      *
-     * @return the {@link Single&lt;RestResponse&lt;Void, Error&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Single<RestResponse<Void, Error>> patch414WithRestResponseAsync() {
         final Boolean booleanValue = null;
@@ -1642,7 +1642,7 @@ public final class HttpClientFailuresImpl implements HttpClientFailures {
     /**
      * Return 414 status code - should be represented in the client as an error.
      *
-     * @return the {@link Maybe&lt;Error&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Maybe<Error> patch414Async() {
         return patch414WithRestResponseAsync()
@@ -1676,7 +1676,7 @@ public final class HttpClientFailuresImpl implements HttpClientFailures {
      * @param booleanValue Simple boolean value true.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;Error&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     public ServiceFuture<Error> patch414Async(Boolean booleanValue, ServiceCallback<Error> serviceCallback) {
         return ServiceFuture.fromBody(patch414Async(booleanValue), serviceCallback);
@@ -1687,7 +1687,7 @@ public final class HttpClientFailuresImpl implements HttpClientFailures {
      *
      * @param booleanValue Simple boolean value true.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link Single&lt;RestResponse&lt;Void, Error&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Single<RestResponse<Void, Error>> patch414WithRestResponseAsync(Boolean booleanValue) {
         return service.patch414(booleanValue);
@@ -1698,7 +1698,7 @@ public final class HttpClientFailuresImpl implements HttpClientFailures {
      *
      * @param booleanValue Simple boolean value true.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link Maybe&lt;Error&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Maybe<Error> patch414Async(Boolean booleanValue) {
         return patch414WithRestResponseAsync(booleanValue)
@@ -1729,7 +1729,7 @@ public final class HttpClientFailuresImpl implements HttpClientFailures {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;Error&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     public ServiceFuture<Error> post415Async(ServiceCallback<Error> serviceCallback) {
         return ServiceFuture.fromBody(post415Async(), serviceCallback);
@@ -1738,7 +1738,7 @@ public final class HttpClientFailuresImpl implements HttpClientFailures {
     /**
      * Return 415 status code - should be represented in the client as an error.
      *
-     * @return the {@link Single&lt;RestResponse&lt;Void, Error&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Single<RestResponse<Void, Error>> post415WithRestResponseAsync() {
         final Boolean booleanValue = null;
@@ -1748,7 +1748,7 @@ public final class HttpClientFailuresImpl implements HttpClientFailures {
     /**
      * Return 415 status code - should be represented in the client as an error.
      *
-     * @return the {@link Maybe&lt;Error&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Maybe<Error> post415Async() {
         return post415WithRestResponseAsync()
@@ -1782,7 +1782,7 @@ public final class HttpClientFailuresImpl implements HttpClientFailures {
      * @param booleanValue Simple boolean value true.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;Error&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     public ServiceFuture<Error> post415Async(Boolean booleanValue, ServiceCallback<Error> serviceCallback) {
         return ServiceFuture.fromBody(post415Async(booleanValue), serviceCallback);
@@ -1793,7 +1793,7 @@ public final class HttpClientFailuresImpl implements HttpClientFailures {
      *
      * @param booleanValue Simple boolean value true.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link Single&lt;RestResponse&lt;Void, Error&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Single<RestResponse<Void, Error>> post415WithRestResponseAsync(Boolean booleanValue) {
         return service.post415(booleanValue);
@@ -1804,7 +1804,7 @@ public final class HttpClientFailuresImpl implements HttpClientFailures {
      *
      * @param booleanValue Simple boolean value true.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link Maybe&lt;Error&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Maybe<Error> post415Async(Boolean booleanValue) {
         return post415WithRestResponseAsync(booleanValue)
@@ -1835,7 +1835,7 @@ public final class HttpClientFailuresImpl implements HttpClientFailures {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;Error&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     public ServiceFuture<Error> get416Async(ServiceCallback<Error> serviceCallback) {
         return ServiceFuture.fromBody(get416Async(), serviceCallback);
@@ -1844,7 +1844,7 @@ public final class HttpClientFailuresImpl implements HttpClientFailures {
     /**
      * Return 416 status code - should be represented in the client as an error.
      *
-     * @return the {@link Single&lt;RestResponse&lt;Void, Error&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Single<RestResponse<Void, Error>> get416WithRestResponseAsync() {
         return service.get416();
@@ -1853,7 +1853,7 @@ public final class HttpClientFailuresImpl implements HttpClientFailures {
     /**
      * Return 416 status code - should be represented in the client as an error.
      *
-     * @return the {@link Maybe&lt;Error&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Maybe<Error> get416Async() {
         return get416WithRestResponseAsync()
@@ -1884,7 +1884,7 @@ public final class HttpClientFailuresImpl implements HttpClientFailures {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;Error&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     public ServiceFuture<Error> delete417Async(ServiceCallback<Error> serviceCallback) {
         return ServiceFuture.fromBody(delete417Async(), serviceCallback);
@@ -1893,7 +1893,7 @@ public final class HttpClientFailuresImpl implements HttpClientFailures {
     /**
      * Return 417 status code - should be represented in the client as an error.
      *
-     * @return the {@link Single&lt;RestResponse&lt;Void, Error&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Single<RestResponse<Void, Error>> delete417WithRestResponseAsync() {
         final Boolean booleanValue = null;
@@ -1903,7 +1903,7 @@ public final class HttpClientFailuresImpl implements HttpClientFailures {
     /**
      * Return 417 status code - should be represented in the client as an error.
      *
-     * @return the {@link Maybe&lt;Error&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Maybe<Error> delete417Async() {
         return delete417WithRestResponseAsync()
@@ -1937,7 +1937,7 @@ public final class HttpClientFailuresImpl implements HttpClientFailures {
      * @param booleanValue Simple boolean value true.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;Error&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     public ServiceFuture<Error> delete417Async(Boolean booleanValue, ServiceCallback<Error> serviceCallback) {
         return ServiceFuture.fromBody(delete417Async(booleanValue), serviceCallback);
@@ -1948,7 +1948,7 @@ public final class HttpClientFailuresImpl implements HttpClientFailures {
      *
      * @param booleanValue Simple boolean value true.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link Single&lt;RestResponse&lt;Void, Error&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Single<RestResponse<Void, Error>> delete417WithRestResponseAsync(Boolean booleanValue) {
         return service.delete417(booleanValue);
@@ -1959,7 +1959,7 @@ public final class HttpClientFailuresImpl implements HttpClientFailures {
      *
      * @param booleanValue Simple boolean value true.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link Maybe&lt;Error&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Maybe<Error> delete417Async(Boolean booleanValue) {
         return delete417WithRestResponseAsync(booleanValue)
@@ -1990,7 +1990,7 @@ public final class HttpClientFailuresImpl implements HttpClientFailures {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;Error&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     public ServiceFuture<Error> head429Async(ServiceCallback<Error> serviceCallback) {
         return ServiceFuture.fromBody(head429Async(), serviceCallback);
@@ -1999,7 +1999,7 @@ public final class HttpClientFailuresImpl implements HttpClientFailures {
     /**
      * Return 429 status code - should be represented in the client as an error.
      *
-     * @return the {@link Single&lt;RestResponse&lt;Void, Error&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Single<RestResponse<Void, Error>> head429WithRestResponseAsync() {
         return service.head429();
@@ -2008,7 +2008,7 @@ public final class HttpClientFailuresImpl implements HttpClientFailures {
     /**
      * Return 429 status code - should be represented in the client as an error.
      *
-     * @return the {@link Maybe&lt;Error&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Maybe<Error> head429Async() {
         return head429WithRestResponseAsync()

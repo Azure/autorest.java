@@ -14,6 +14,8 @@ import com.microsoft.rest.v2.RestResponse;
 import com.microsoft.rest.v2.ServiceCallback;
 import com.microsoft.rest.v2.ServiceFuture;
 import fixtures.http.models.A;
+import fixtures.http.models.AException;
+import fixtures.http.models.ErrorException;
 import io.reactivex.Completable;
 import io.reactivex.Maybe;
 import io.reactivex.Single;
@@ -37,21 +39,21 @@ public interface MultipleResponses {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;A&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     ServiceFuture<A> get200Model204NoModelDefaultError200ValidAsync(ServiceCallback<A> serviceCallback);
 
     /**
      * Send a 200 response with valid payload: {'statusCode': '200'}.
      *
-     * @return the {@link Single&lt;RestResponse&lt;Void, A&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     Single<RestResponse<Void, A>> get200Model204NoModelDefaultError200ValidWithRestResponseAsync();
 
     /**
      * Send a 200 response with valid payload: {'statusCode': '200'}.
      *
-     * @return the {@link Maybe&lt;A&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     Maybe<A> get200Model204NoModelDefaultError200ValidAsync();
 
@@ -69,21 +71,21 @@ public interface MultipleResponses {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;A&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     ServiceFuture<A> get200Model204NoModelDefaultError204ValidAsync(ServiceCallback<A> serviceCallback);
 
     /**
      * Send a 204 response with no payload.
      *
-     * @return the {@link Single&lt;RestResponse&lt;Void, A&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     Single<RestResponse<Void, A>> get200Model204NoModelDefaultError204ValidWithRestResponseAsync();
 
     /**
      * Send a 204 response with no payload.
      *
-     * @return the {@link Maybe&lt;A&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     Maybe<A> get200Model204NoModelDefaultError204ValidAsync();
 
@@ -101,21 +103,21 @@ public interface MultipleResponses {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;A&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     ServiceFuture<A> get200Model204NoModelDefaultError201InvalidAsync(ServiceCallback<A> serviceCallback);
 
     /**
      * Send a 201 response with valid payload: {'statusCode': '201'}.
      *
-     * @return the {@link Single&lt;RestResponse&lt;Void, A&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     Single<RestResponse<Void, A>> get200Model204NoModelDefaultError201InvalidWithRestResponseAsync();
 
     /**
      * Send a 201 response with valid payload: {'statusCode': '201'}.
      *
-     * @return the {@link Maybe&lt;A&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     Maybe<A> get200Model204NoModelDefaultError201InvalidAsync();
 
@@ -133,21 +135,21 @@ public interface MultipleResponses {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;A&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     ServiceFuture<A> get200Model204NoModelDefaultError202NoneAsync(ServiceCallback<A> serviceCallback);
 
     /**
      * Send a 202 response with no payload:.
      *
-     * @return the {@link Single&lt;RestResponse&lt;Void, A&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     Single<RestResponse<Void, A>> get200Model204NoModelDefaultError202NoneWithRestResponseAsync();
 
     /**
      * Send a 202 response with no payload:.
      *
-     * @return the {@link Maybe&lt;A&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     Maybe<A> get200Model204NoModelDefaultError202NoneAsync();
 
@@ -165,21 +167,21 @@ public interface MultipleResponses {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;A&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     ServiceFuture<A> get200Model204NoModelDefaultError400ValidAsync(ServiceCallback<A> serviceCallback);
 
     /**
      * Send a 400 response with valid error payload: {'status': 400, 'message': 'client error'}.
      *
-     * @return the {@link Single&lt;RestResponse&lt;Void, A&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     Single<RestResponse<Void, A>> get200Model204NoModelDefaultError400ValidWithRestResponseAsync();
 
     /**
      * Send a 400 response with valid error payload: {'status': 400, 'message': 'client error'}.
      *
-     * @return the {@link Maybe&lt;A&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     Maybe<A> get200Model204NoModelDefaultError400ValidAsync();
 
@@ -197,21 +199,21 @@ public interface MultipleResponses {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;A&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     ServiceFuture<A> get200Model201ModelDefaultError200ValidAsync(ServiceCallback<A> serviceCallback);
 
     /**
      * Send a 200 response with valid payload: {'statusCode': '200'}.
      *
-     * @return the {@link Single&lt;RestResponse&lt;Void, A&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     Single<RestResponse<Void, A>> get200Model201ModelDefaultError200ValidWithRestResponseAsync();
 
     /**
      * Send a 200 response with valid payload: {'statusCode': '200'}.
      *
-     * @return the {@link Maybe&lt;A&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     Maybe<A> get200Model201ModelDefaultError200ValidAsync();
 
@@ -229,21 +231,21 @@ public interface MultipleResponses {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;A&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     ServiceFuture<A> get200Model201ModelDefaultError201ValidAsync(ServiceCallback<A> serviceCallback);
 
     /**
      * Send a 201 response with valid payload: {'statusCode': '201', 'textStatusCode': 'Created'}.
      *
-     * @return the {@link Single&lt;RestResponse&lt;Void, A&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     Single<RestResponse<Void, A>> get200Model201ModelDefaultError201ValidWithRestResponseAsync();
 
     /**
      * Send a 201 response with valid payload: {'statusCode': '201', 'textStatusCode': 'Created'}.
      *
-     * @return the {@link Maybe&lt;A&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     Maybe<A> get200Model201ModelDefaultError201ValidAsync();
 
@@ -261,21 +263,21 @@ public interface MultipleResponses {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;A&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     ServiceFuture<A> get200Model201ModelDefaultError400ValidAsync(ServiceCallback<A> serviceCallback);
 
     /**
      * Send a 400 response with valid payload: {'code': '400', 'message': 'client error'}.
      *
-     * @return the {@link Single&lt;RestResponse&lt;Void, A&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     Single<RestResponse<Void, A>> get200Model201ModelDefaultError400ValidWithRestResponseAsync();
 
     /**
      * Send a 400 response with valid payload: {'code': '400', 'message': 'client error'}.
      *
-     * @return the {@link Maybe&lt;A&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     Maybe<A> get200Model201ModelDefaultError400ValidAsync();
 
@@ -293,21 +295,21 @@ public interface MultipleResponses {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;Object&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     ServiceFuture<Object> get200ModelA201ModelC404ModelDDefaultError200ValidAsync(ServiceCallback<Object> serviceCallback);
 
     /**
      * Send a 200 response with valid payload: {'statusCode': '200'}.
      *
-     * @return the {@link Single&lt;RestResponse&lt;Void, Object&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     Single<RestResponse<Void, Object>> get200ModelA201ModelC404ModelDDefaultError200ValidWithRestResponseAsync();
 
     /**
      * Send a 200 response with valid payload: {'statusCode': '200'}.
      *
-     * @return the {@link Maybe&lt;Object&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     Maybe<Object> get200ModelA201ModelC404ModelDDefaultError200ValidAsync();
 
@@ -325,21 +327,21 @@ public interface MultipleResponses {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;Object&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     ServiceFuture<Object> get200ModelA201ModelC404ModelDDefaultError201ValidAsync(ServiceCallback<Object> serviceCallback);
 
     /**
      * Send a 200 response with valid payload: {'httpCode': '201'}.
      *
-     * @return the {@link Single&lt;RestResponse&lt;Void, Object&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     Single<RestResponse<Void, Object>> get200ModelA201ModelC404ModelDDefaultError201ValidWithRestResponseAsync();
 
     /**
      * Send a 200 response with valid payload: {'httpCode': '201'}.
      *
-     * @return the {@link Maybe&lt;Object&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     Maybe<Object> get200ModelA201ModelC404ModelDDefaultError201ValidAsync();
 
@@ -357,21 +359,21 @@ public interface MultipleResponses {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;Object&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     ServiceFuture<Object> get200ModelA201ModelC404ModelDDefaultError404ValidAsync(ServiceCallback<Object> serviceCallback);
 
     /**
      * Send a 200 response with valid payload: {'httpStatusCode': '404'}.
      *
-     * @return the {@link Single&lt;RestResponse&lt;Void, Object&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     Single<RestResponse<Void, Object>> get200ModelA201ModelC404ModelDDefaultError404ValidWithRestResponseAsync();
 
     /**
      * Send a 200 response with valid payload: {'httpStatusCode': '404'}.
      *
-     * @return the {@link Maybe&lt;Object&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     Maybe<Object> get200ModelA201ModelC404ModelDDefaultError404ValidAsync();
 
@@ -389,21 +391,21 @@ public interface MultipleResponses {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;Object&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     ServiceFuture<Object> get200ModelA201ModelC404ModelDDefaultError400ValidAsync(ServiceCallback<Object> serviceCallback);
 
     /**
      * Send a 400 response with valid payload: {'code': '400', 'message': 'client error'}.
      *
-     * @return the {@link Single&lt;RestResponse&lt;Void, Object&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     Single<RestResponse<Void, Object>> get200ModelA201ModelC404ModelDDefaultError400ValidWithRestResponseAsync();
 
     /**
      * Send a 400 response with valid payload: {'code': '400', 'message': 'client error'}.
      *
-     * @return the {@link Maybe&lt;Object&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     Maybe<Object> get200ModelA201ModelC404ModelDDefaultError400ValidAsync();
 
@@ -420,21 +422,21 @@ public interface MultipleResponses {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;Void&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     ServiceFuture<Void> get202None204NoneDefaultError202NoneAsync(ServiceCallback<Void> serviceCallback);
 
     /**
      * Send a 202 response with no payload.
      *
-     * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     Single<RestResponse<Void, Void>> get202None204NoneDefaultError202NoneWithRestResponseAsync();
 
     /**
      * Send a 202 response with no payload.
      *
-     * @return the {@link Completable} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     Completable get202None204NoneDefaultError202NoneAsync();
 
@@ -451,21 +453,21 @@ public interface MultipleResponses {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;Void&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     ServiceFuture<Void> get202None204NoneDefaultError204NoneAsync(ServiceCallback<Void> serviceCallback);
 
     /**
      * Send a 204 response with no payload.
      *
-     * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     Single<RestResponse<Void, Void>> get202None204NoneDefaultError204NoneWithRestResponseAsync();
 
     /**
      * Send a 204 response with no payload.
      *
-     * @return the {@link Completable} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     Completable get202None204NoneDefaultError204NoneAsync();
 
@@ -482,21 +484,21 @@ public interface MultipleResponses {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;Void&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     ServiceFuture<Void> get202None204NoneDefaultError400ValidAsync(ServiceCallback<Void> serviceCallback);
 
     /**
      * Send a 400 response with valid payload: {'code': '400', 'message': 'client error'}.
      *
-     * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     Single<RestResponse<Void, Void>> get202None204NoneDefaultError400ValidWithRestResponseAsync();
 
     /**
      * Send a 400 response with valid payload: {'code': '400', 'message': 'client error'}.
      *
-     * @return the {@link Completable} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     Completable get202None204NoneDefaultError400ValidAsync();
 
@@ -512,21 +514,21 @@ public interface MultipleResponses {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;Void&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     ServiceFuture<Void> get202None204NoneDefaultNone202InvalidAsync(ServiceCallback<Void> serviceCallback);
 
     /**
      * Send a 202 response with an unexpected payload {'property': 'value'}.
      *
-     * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     Single<RestResponse<Void, Void>> get202None204NoneDefaultNone202InvalidWithRestResponseAsync();
 
     /**
      * Send a 202 response with an unexpected payload {'property': 'value'}.
      *
-     * @return the {@link Completable} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     Completable get202None204NoneDefaultNone202InvalidAsync();
 
@@ -542,21 +544,21 @@ public interface MultipleResponses {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;Void&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     ServiceFuture<Void> get202None204NoneDefaultNone204NoneAsync(ServiceCallback<Void> serviceCallback);
 
     /**
      * Send a 204 response with no payload.
      *
-     * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     Single<RestResponse<Void, Void>> get202None204NoneDefaultNone204NoneWithRestResponseAsync();
 
     /**
      * Send a 204 response with no payload.
      *
-     * @return the {@link Completable} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     Completable get202None204NoneDefaultNone204NoneAsync();
 
@@ -572,21 +574,21 @@ public interface MultipleResponses {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;Void&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     ServiceFuture<Void> get202None204NoneDefaultNone400NoneAsync(ServiceCallback<Void> serviceCallback);
 
     /**
      * Send a 400 response with no payload.
      *
-     * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     Single<RestResponse<Void, Void>> get202None204NoneDefaultNone400NoneWithRestResponseAsync();
 
     /**
      * Send a 400 response with no payload.
      *
-     * @return the {@link Completable} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     Completable get202None204NoneDefaultNone400NoneAsync();
 
@@ -602,21 +604,21 @@ public interface MultipleResponses {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;Void&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     ServiceFuture<Void> get202None204NoneDefaultNone400InvalidAsync(ServiceCallback<Void> serviceCallback);
 
     /**
      * Send a 400 response with an unexpected payload {'property': 'value'}.
      *
-     * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     Single<RestResponse<Void, Void>> get202None204NoneDefaultNone400InvalidWithRestResponseAsync();
 
     /**
      * Send a 400 response with an unexpected payload {'property': 'value'}.
      *
-     * @return the {@link Completable} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     Completable get202None204NoneDefaultNone400InvalidAsync();
 
@@ -634,21 +636,21 @@ public interface MultipleResponses {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;A&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     ServiceFuture<A> getDefaultModelA200ValidAsync(ServiceCallback<A> serviceCallback);
 
     /**
      * Send a 200 response with valid payload: {'statusCode': '200'}.
      *
-     * @return the {@link Single&lt;RestResponse&lt;Void, A&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     Single<RestResponse<Void, A>> getDefaultModelA200ValidWithRestResponseAsync();
 
     /**
      * Send a 200 response with valid payload: {'statusCode': '200'}.
      *
-     * @return the {@link Maybe&lt;A&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     Maybe<A> getDefaultModelA200ValidAsync();
 
@@ -666,21 +668,21 @@ public interface MultipleResponses {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;A&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     ServiceFuture<A> getDefaultModelA200NoneAsync(ServiceCallback<A> serviceCallback);
 
     /**
      * Send a 200 response with no payload.
      *
-     * @return the {@link Single&lt;RestResponse&lt;Void, A&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     Single<RestResponse<Void, A>> getDefaultModelA200NoneWithRestResponseAsync();
 
     /**
      * Send a 200 response with no payload.
      *
-     * @return the {@link Maybe&lt;A&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     Maybe<A> getDefaultModelA200NoneAsync();
 
@@ -698,21 +700,21 @@ public interface MultipleResponses {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;A&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     ServiceFuture<A> getDefaultModelA400ValidAsync(ServiceCallback<A> serviceCallback);
 
     /**
      * Send a 400 response with valid payload: {'statusCode': '400'}.
      *
-     * @return the {@link Single&lt;RestResponse&lt;Void, A&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     Single<RestResponse<Void, A>> getDefaultModelA400ValidWithRestResponseAsync();
 
     /**
      * Send a 400 response with valid payload: {'statusCode': '400'}.
      *
-     * @return the {@link Maybe&lt;A&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     Maybe<A> getDefaultModelA400ValidAsync();
 
@@ -730,21 +732,21 @@ public interface MultipleResponses {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;A&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     ServiceFuture<A> getDefaultModelA400NoneAsync(ServiceCallback<A> serviceCallback);
 
     /**
      * Send a 400 response with no payload.
      *
-     * @return the {@link Single&lt;RestResponse&lt;Void, A&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     Single<RestResponse<Void, A>> getDefaultModelA400NoneWithRestResponseAsync();
 
     /**
      * Send a 400 response with no payload.
      *
-     * @return the {@link Maybe&lt;A&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     Maybe<A> getDefaultModelA400NoneAsync();
 
@@ -760,21 +762,21 @@ public interface MultipleResponses {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;Void&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     ServiceFuture<Void> getDefaultNone200InvalidAsync(ServiceCallback<Void> serviceCallback);
 
     /**
      * Send a 200 response with invalid payload: {'statusCode': '200'}.
      *
-     * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     Single<RestResponse<Void, Void>> getDefaultNone200InvalidWithRestResponseAsync();
 
     /**
      * Send a 200 response with invalid payload: {'statusCode': '200'}.
      *
-     * @return the {@link Completable} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     Completable getDefaultNone200InvalidAsync();
 
@@ -790,21 +792,21 @@ public interface MultipleResponses {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;Void&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     ServiceFuture<Void> getDefaultNone200NoneAsync(ServiceCallback<Void> serviceCallback);
 
     /**
      * Send a 200 response with no payload.
      *
-     * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     Single<RestResponse<Void, Void>> getDefaultNone200NoneWithRestResponseAsync();
 
     /**
      * Send a 200 response with no payload.
      *
-     * @return the {@link Completable} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     Completable getDefaultNone200NoneAsync();
 
@@ -820,21 +822,21 @@ public interface MultipleResponses {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;Void&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     ServiceFuture<Void> getDefaultNone400InvalidAsync(ServiceCallback<Void> serviceCallback);
 
     /**
      * Send a 400 response with valid payload: {'statusCode': '400'}.
      *
-     * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     Single<RestResponse<Void, Void>> getDefaultNone400InvalidWithRestResponseAsync();
 
     /**
      * Send a 400 response with valid payload: {'statusCode': '400'}.
      *
-     * @return the {@link Completable} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     Completable getDefaultNone400InvalidAsync();
 
@@ -850,21 +852,21 @@ public interface MultipleResponses {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;Void&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     ServiceFuture<Void> getDefaultNone400NoneAsync(ServiceCallback<Void> serviceCallback);
 
     /**
      * Send a 400 response with no payload.
      *
-     * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     Single<RestResponse<Void, Void>> getDefaultNone400NoneWithRestResponseAsync();
 
     /**
      * Send a 400 response with no payload.
      *
-     * @return the {@link Completable} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     Completable getDefaultNone400NoneAsync();
 
@@ -881,21 +883,21 @@ public interface MultipleResponses {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;A&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     ServiceFuture<A> get200ModelA200NoneAsync(ServiceCallback<A> serviceCallback);
 
     /**
      * Send a 200 response with no payload, when a payload is expected - client should return a null object of thde type for model A.
      *
-     * @return the {@link Single&lt;RestResponse&lt;Void, A&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     Single<RestResponse<Void, A>> get200ModelA200NoneWithRestResponseAsync();
 
     /**
      * Send a 200 response with no payload, when a payload is expected - client should return a null object of thde type for model A.
      *
-     * @return the {@link Maybe&lt;A&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     Maybe<A> get200ModelA200NoneAsync();
 
@@ -912,21 +914,21 @@ public interface MultipleResponses {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;A&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     ServiceFuture<A> get200ModelA200ValidAsync(ServiceCallback<A> serviceCallback);
 
     /**
      * Send a 200 response with payload {'statusCode': '200'}.
      *
-     * @return the {@link Single&lt;RestResponse&lt;Void, A&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     Single<RestResponse<Void, A>> get200ModelA200ValidWithRestResponseAsync();
 
     /**
      * Send a 200 response with payload {'statusCode': '200'}.
      *
-     * @return the {@link Maybe&lt;A&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     Maybe<A> get200ModelA200ValidAsync();
 
@@ -943,21 +945,21 @@ public interface MultipleResponses {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;A&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     ServiceFuture<A> get200ModelA200InvalidAsync(ServiceCallback<A> serviceCallback);
 
     /**
      * Send a 200 response with invalid payload {'statusCodeInvalid': '200'}.
      *
-     * @return the {@link Single&lt;RestResponse&lt;Void, A&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     Single<RestResponse<Void, A>> get200ModelA200InvalidWithRestResponseAsync();
 
     /**
      * Send a 200 response with invalid payload {'statusCodeInvalid': '200'}.
      *
-     * @return the {@link Maybe&lt;A&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     Maybe<A> get200ModelA200InvalidAsync();
 
@@ -974,21 +976,21 @@ public interface MultipleResponses {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;A&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     ServiceFuture<A> get200ModelA400NoneAsync(ServiceCallback<A> serviceCallback);
 
     /**
      * Send a 400 response with no payload client should treat as an http error with no error model.
      *
-     * @return the {@link Single&lt;RestResponse&lt;Void, A&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     Single<RestResponse<Void, A>> get200ModelA400NoneWithRestResponseAsync();
 
     /**
      * Send a 400 response with no payload client should treat as an http error with no error model.
      *
-     * @return the {@link Maybe&lt;A&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     Maybe<A> get200ModelA400NoneAsync();
 
@@ -1005,21 +1007,21 @@ public interface MultipleResponses {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;A&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     ServiceFuture<A> get200ModelA400ValidAsync(ServiceCallback<A> serviceCallback);
 
     /**
      * Send a 200 response with payload {'statusCode': '400'}.
      *
-     * @return the {@link Single&lt;RestResponse&lt;Void, A&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     Single<RestResponse<Void, A>> get200ModelA400ValidWithRestResponseAsync();
 
     /**
      * Send a 200 response with payload {'statusCode': '400'}.
      *
-     * @return the {@link Maybe&lt;A&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     Maybe<A> get200ModelA400ValidAsync();
 
@@ -1036,21 +1038,21 @@ public interface MultipleResponses {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;A&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     ServiceFuture<A> get200ModelA400InvalidAsync(ServiceCallback<A> serviceCallback);
 
     /**
      * Send a 200 response with invalid payload {'statusCodeInvalid': '400'}.
      *
-     * @return the {@link Single&lt;RestResponse&lt;Void, A&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     Single<RestResponse<Void, A>> get200ModelA400InvalidWithRestResponseAsync();
 
     /**
      * Send a 200 response with invalid payload {'statusCodeInvalid': '400'}.
      *
-     * @return the {@link Maybe&lt;A&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     Maybe<A> get200ModelA400InvalidAsync();
 
@@ -1067,21 +1069,21 @@ public interface MultipleResponses {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;A&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     ServiceFuture<A> get200ModelA202ValidAsync(ServiceCallback<A> serviceCallback);
 
     /**
      * Send a 202 response with payload {'statusCode': '202'}.
      *
-     * @return the {@link Single&lt;RestResponse&lt;Void, A&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     Single<RestResponse<Void, A>> get200ModelA202ValidWithRestResponseAsync();
 
     /**
      * Send a 202 response with payload {'statusCode': '202'}.
      *
-     * @return the {@link Maybe&lt;A&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     Maybe<A> get200ModelA202ValidAsync();
 }

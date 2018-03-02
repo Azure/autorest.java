@@ -85,7 +85,7 @@ public final class HeadExceptionsInner {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;Void&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     public ServiceFuture<Void> head200Async(ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(head200Async(), serviceCallback);
@@ -94,7 +94,7 @@ public final class HeadExceptionsInner {
     /**
      * Return 200 status code if successful.
      *
-     * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Single<RestResponse<Void, Void>> head200WithRestResponseAsync() {
         return service.head200(this.client.acceptLanguage());
@@ -103,7 +103,7 @@ public final class HeadExceptionsInner {
     /**
      * Return 200 status code if successful.
      *
-     * @return the {@link Completable} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Completable head200Async() {
         return head200WithRestResponseAsync()
@@ -125,7 +125,7 @@ public final class HeadExceptionsInner {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;Void&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     public ServiceFuture<Void> head204Async(ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(head204Async(), serviceCallback);
@@ -134,7 +134,7 @@ public final class HeadExceptionsInner {
     /**
      * Return 204 status code if successful.
      *
-     * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Single<RestResponse<Void, Void>> head204WithRestResponseAsync() {
         return service.head204(this.client.acceptLanguage());
@@ -143,7 +143,7 @@ public final class HeadExceptionsInner {
     /**
      * Return 204 status code if successful.
      *
-     * @return the {@link Completable} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Completable head204Async() {
         return head204WithRestResponseAsync()
@@ -165,7 +165,7 @@ public final class HeadExceptionsInner {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;Void&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     public ServiceFuture<Void> head404Async(ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(head404Async(), serviceCallback);
@@ -174,7 +174,7 @@ public final class HeadExceptionsInner {
     /**
      * Return 404 status code if successful.
      *
-     * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Single<RestResponse<Void, Void>> head404WithRestResponseAsync() {
         return service.head404(this.client.acceptLanguage());
@@ -183,7 +183,7 @@ public final class HeadExceptionsInner {
     /**
      * Return 404 status code if successful.
      *
-     * @return the {@link Completable} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Completable head404Async() {
         return head404WithRestResponseAsync()
