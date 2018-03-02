@@ -10,9 +10,10 @@
 
 package fixtures.bodynumber;
 
-import com.microsoft.rest.v2.RestResponse;
+import com.microsoft.rest.v2.BodyResponse;
 import com.microsoft.rest.v2.ServiceCallback;
 import com.microsoft.rest.v2.ServiceFuture;
+import com.microsoft.rest.v2.VoidResponse;
 import fixtures.bodynumber.models.ErrorException;
 import io.reactivex.Completable;
 import io.reactivex.Maybe;
@@ -48,7 +49,7 @@ public interface Numbers {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, Double>> getNullWithRestResponseAsync();
+    Single<BodyResponse<Double>> getNullWithRestResponseAsync();
 
     /**
      * Get null Number value.
@@ -80,7 +81,7 @@ public interface Numbers {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, Double>> getInvalidFloatWithRestResponseAsync();
+    Single<BodyResponse<Double>> getInvalidFloatWithRestResponseAsync();
 
     /**
      * Get invalid float Number value.
@@ -112,7 +113,7 @@ public interface Numbers {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, Double>> getInvalidDoubleWithRestResponseAsync();
+    Single<BodyResponse<Double>> getInvalidDoubleWithRestResponseAsync();
 
     /**
      * Get invalid double Number value.
@@ -144,7 +145,7 @@ public interface Numbers {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, BigDecimal>> getInvalidDecimalWithRestResponseAsync();
+    Single<BodyResponse<BigDecimal>> getInvalidDecimalWithRestResponseAsync();
 
     /**
      * Get invalid decimal Number value.
@@ -180,7 +181,7 @@ public interface Numbers {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, Void>> putBigFloatWithRestResponseAsync(@NonNull double numberBody);
+    Single<VoidResponse> putBigFloatWithRestResponseAsync(@NonNull double numberBody);
 
     /**
      * Put big float value 3.402823e+20.
@@ -214,7 +215,7 @@ public interface Numbers {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, Double>> getBigFloatWithRestResponseAsync();
+    Single<BodyResponse<Double>> getBigFloatWithRestResponseAsync();
 
     /**
      * Get big float value 3.402823e+20.
@@ -250,7 +251,7 @@ public interface Numbers {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, Void>> putBigDoubleWithRestResponseAsync(@NonNull double numberBody);
+    Single<VoidResponse> putBigDoubleWithRestResponseAsync(@NonNull double numberBody);
 
     /**
      * Put big double value 2.5976931e+101.
@@ -284,7 +285,7 @@ public interface Numbers {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, Double>> getBigDoubleWithRestResponseAsync();
+    Single<BodyResponse<Double>> getBigDoubleWithRestResponseAsync();
 
     /**
      * Get big double value 2.5976931e+101.
@@ -320,7 +321,7 @@ public interface Numbers {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, Void>> putBigDoublePositiveDecimalWithRestResponseAsync(@NonNull double numberBody);
+    Single<VoidResponse> putBigDoublePositiveDecimalWithRestResponseAsync(@NonNull double numberBody);
 
     /**
      * Put big double value 99999999.99.
@@ -354,7 +355,7 @@ public interface Numbers {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, Double>> getBigDoublePositiveDecimalWithRestResponseAsync();
+    Single<BodyResponse<Double>> getBigDoublePositiveDecimalWithRestResponseAsync();
 
     /**
      * Get big double value 99999999.99.
@@ -390,7 +391,7 @@ public interface Numbers {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, Void>> putBigDoubleNegativeDecimalWithRestResponseAsync(@NonNull double numberBody);
+    Single<VoidResponse> putBigDoubleNegativeDecimalWithRestResponseAsync(@NonNull double numberBody);
 
     /**
      * Put big double value -99999999.99.
@@ -424,7 +425,7 @@ public interface Numbers {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, Double>> getBigDoubleNegativeDecimalWithRestResponseAsync();
+    Single<BodyResponse<Double>> getBigDoubleNegativeDecimalWithRestResponseAsync();
 
     /**
      * Get big double value -99999999.99.
@@ -460,7 +461,7 @@ public interface Numbers {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, Void>> putBigDecimalWithRestResponseAsync(@NonNull BigDecimal numberBody);
+    Single<VoidResponse> putBigDecimalWithRestResponseAsync(@NonNull BigDecimal numberBody);
 
     /**
      * Put big decimal value 2.5976931e+101.
@@ -494,7 +495,7 @@ public interface Numbers {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, BigDecimal>> getBigDecimalWithRestResponseAsync();
+    Single<BodyResponse<BigDecimal>> getBigDecimalWithRestResponseAsync();
 
     /**
      * Get big decimal value 2.5976931e+101.
@@ -530,7 +531,7 @@ public interface Numbers {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, Void>> putBigDecimalPositiveDecimalWithRestResponseAsync(@NonNull BigDecimal numberBody);
+    Single<VoidResponse> putBigDecimalPositiveDecimalWithRestResponseAsync(@NonNull BigDecimal numberBody);
 
     /**
      * Put big decimal value 99999999.99.
@@ -564,7 +565,7 @@ public interface Numbers {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, BigDecimal>> getBigDecimalPositiveDecimalWithRestResponseAsync();
+    Single<BodyResponse<BigDecimal>> getBigDecimalPositiveDecimalWithRestResponseAsync();
 
     /**
      * Get big decimal value 99999999.99.
@@ -600,7 +601,7 @@ public interface Numbers {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, Void>> putBigDecimalNegativeDecimalWithRestResponseAsync(@NonNull BigDecimal numberBody);
+    Single<VoidResponse> putBigDecimalNegativeDecimalWithRestResponseAsync(@NonNull BigDecimal numberBody);
 
     /**
      * Put big decimal value -99999999.99.
@@ -634,7 +635,7 @@ public interface Numbers {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, BigDecimal>> getBigDecimalNegativeDecimalWithRestResponseAsync();
+    Single<BodyResponse<BigDecimal>> getBigDecimalNegativeDecimalWithRestResponseAsync();
 
     /**
      * Get big decimal value -99999999.99.
@@ -670,7 +671,7 @@ public interface Numbers {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, Void>> putSmallFloatWithRestResponseAsync(@NonNull double numberBody);
+    Single<VoidResponse> putSmallFloatWithRestResponseAsync(@NonNull double numberBody);
 
     /**
      * Put small float value 3.402823e-20.
@@ -704,7 +705,7 @@ public interface Numbers {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, Double>> getSmallFloatWithRestResponseAsync();
+    Single<BodyResponse<Double>> getSmallFloatWithRestResponseAsync();
 
     /**
      * Get big double value 3.402823e-20.
@@ -740,7 +741,7 @@ public interface Numbers {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, Void>> putSmallDoubleWithRestResponseAsync(@NonNull double numberBody);
+    Single<VoidResponse> putSmallDoubleWithRestResponseAsync(@NonNull double numberBody);
 
     /**
      * Put small double value 2.5976931e-101.
@@ -774,7 +775,7 @@ public interface Numbers {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, Double>> getSmallDoubleWithRestResponseAsync();
+    Single<BodyResponse<Double>> getSmallDoubleWithRestResponseAsync();
 
     /**
      * Get big double value 2.5976931e-101.
@@ -810,7 +811,7 @@ public interface Numbers {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, Void>> putSmallDecimalWithRestResponseAsync(@NonNull BigDecimal numberBody);
+    Single<VoidResponse> putSmallDecimalWithRestResponseAsync(@NonNull BigDecimal numberBody);
 
     /**
      * Put small decimal value 2.5976931e-101.
@@ -844,7 +845,7 @@ public interface Numbers {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, BigDecimal>> getSmallDecimalWithRestResponseAsync();
+    Single<BodyResponse<BigDecimal>> getSmallDecimalWithRestResponseAsync();
 
     /**
      * Get small decimal value 2.5976931e-101.

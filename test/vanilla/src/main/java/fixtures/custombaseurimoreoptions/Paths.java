@@ -10,9 +10,9 @@
 
 package fixtures.custombaseurimoreoptions;
 
-import com.microsoft.rest.v2.RestResponse;
 import com.microsoft.rest.v2.ServiceCallback;
 import com.microsoft.rest.v2.ServiceFuture;
+import com.microsoft.rest.v2.VoidResponse;
 import fixtures.custombaseurimoreoptions.models.ErrorException;
 import io.reactivex.Completable;
 import io.reactivex.Single;
@@ -56,7 +56,7 @@ public interface Paths {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, Void>> getEmptyWithRestResponseAsync(@NonNull String vault, @NonNull String secret, @NonNull String keyName);
+    Single<VoidResponse> getEmptyWithRestResponseAsync(@NonNull String vault, @NonNull String secret, @NonNull String keyName);
 
     /**
      * Get a 200 to test a valid base uri.
@@ -105,7 +105,7 @@ public interface Paths {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, Void>> getEmptyWithRestResponseAsync(@NonNull String vault, @NonNull String secret, @NonNull String keyName, String keyVersion);
+    Single<VoidResponse> getEmptyWithRestResponseAsync(@NonNull String vault, @NonNull String secret, @NonNull String keyName, String keyVersion);
 
     /**
      * Get a 200 to test a valid base uri.

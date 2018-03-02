@@ -10,9 +10,10 @@
 
 package fixtures.requiredoptional;
 
-import com.microsoft.rest.v2.RestResponse;
+import com.microsoft.rest.v2.BodyResponse;
 import com.microsoft.rest.v2.ServiceCallback;
 import com.microsoft.rest.v2.ServiceFuture;
+import com.microsoft.rest.v2.VoidResponse;
 import fixtures.requiredoptional.models.Error;
 import fixtures.requiredoptional.models.ErrorException;
 import io.reactivex.Completable;
@@ -53,7 +54,7 @@ public interface Implicits {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, Error>> getRequiredPathWithRestResponseAsync(@NonNull String pathParameter);
+    Single<BodyResponse<Error>> getRequiredPathWithRestResponseAsync(@NonNull String pathParameter);
 
     /**
      * Test implicitly required path parameter.
@@ -91,7 +92,7 @@ public interface Implicits {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, Void>> putOptionalQueryWithRestResponseAsync(String queryParameter);
+    Single<VoidResponse> putOptionalQueryWithRestResponseAsync(String queryParameter);
 
     /**
      * Test implicitly optional query parameter.
@@ -129,7 +130,7 @@ public interface Implicits {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, Void>> putOptionalHeaderWithRestResponseAsync(String queryParameter);
+    Single<VoidResponse> putOptionalHeaderWithRestResponseAsync(String queryParameter);
 
     /**
      * Test implicitly optional header parameter.
@@ -167,7 +168,7 @@ public interface Implicits {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, Void>> putOptionalBodyWithRestResponseAsync(String bodyParameter);
+    Single<VoidResponse> putOptionalBodyWithRestResponseAsync(String bodyParameter);
 
     /**
      * Test implicitly optional body parameter.
@@ -201,7 +202,7 @@ public interface Implicits {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, Error>> getRequiredGlobalPathWithRestResponseAsync();
+    Single<BodyResponse<Error>> getRequiredGlobalPathWithRestResponseAsync();
 
     /**
      * Test implicitly required path parameter.
@@ -233,7 +234,7 @@ public interface Implicits {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, Error>> getRequiredGlobalQueryWithRestResponseAsync();
+    Single<BodyResponse<Error>> getRequiredGlobalQueryWithRestResponseAsync();
 
     /**
      * Test implicitly required query parameter.
@@ -265,7 +266,7 @@ public interface Implicits {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, Error>> getOptionalGlobalQueryWithRestResponseAsync();
+    Single<BodyResponse<Error>> getOptionalGlobalQueryWithRestResponseAsync();
 
     /**
      * Test implicitly optional query parameter.

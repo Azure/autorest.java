@@ -11,9 +11,9 @@
 package fixtures.bodyformdata.implementation;
 
 import com.microsoft.rest.v2.RestProxy;
-import com.microsoft.rest.v2.RestResponse;
 import com.microsoft.rest.v2.ServiceCallback;
 import com.microsoft.rest.v2.ServiceFuture;
+import com.microsoft.rest.v2.StreamResponse;
 import com.microsoft.rest.v2.annotations.BodyParam;
 import com.microsoft.rest.v2.annotations.ExpectedResponses;
 import com.microsoft.rest.v2.annotations.Host;
@@ -64,12 +64,12 @@ public final class FormdatasImpl implements Formdatas {
         @POST("formdata/stream/uploadfile")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<RestResponse<Void, Flowable<ByteBuffer>>> uploadFile(/* @Part("fileContent") not supported by RestProxy */Flowable<ByteBuffer> fileContent, /* @Part("fileName") not supported by RestProxy */String fileName);
+        Single<StreamResponse> uploadFile(/* @Part("fileContent") not supported by RestProxy */Flowable<ByteBuffer> fileContent, /* @Part("fileName") not supported by RestProxy */String fileName);
 
         @PUT("formdata/stream/uploadfile")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<RestResponse<Void, Flowable<ByteBuffer>>> uploadFileViaBody(@BodyParam("application/octet-stream") Flowable<ByteBuffer> fileContent);
+        Single<StreamResponse> uploadFileViaBody(@BodyParam("application/octet-stream") Flowable<ByteBuffer> fileContent);
     }
 
     /**
@@ -107,7 +107,7 @@ public final class FormdatasImpl implements Formdatas {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<Void, Flowable<ByteBuffer>>> uploadFileWithRestResponseAsync(@NonNull Flowable<ByteBuffer> fileContent, @NonNull String fileName) {
+    public Single<StreamResponse> uploadFileWithRestResponseAsync(@NonNull Flowable<ByteBuffer> fileContent, @NonNull String fileName) {
         if (fileContent == null) {
             throw new IllegalArgumentException("Parameter fileContent is required and cannot be null.");
         }
@@ -127,15 +127,7 @@ public final class FormdatasImpl implements Formdatas {
      */
     public Maybe<Flowable<ByteBuffer>> uploadFileAsync(@NonNull Flowable<ByteBuffer> fileContent, @NonNull String fileName) {
         return uploadFileWithRestResponseAsync(fileContent, fileName)
-            .flatMapMaybe(new Function<RestResponse<Void, Flowable<ByteBuffer>>, Maybe<Flowable<ByteBuffer>>>() {
-                public Maybe<Flowable<ByteBuffer>> apply(RestResponse<Void, Flowable<ByteBuffer>> restResponse) {
-                    if (restResponse.body() == null) {
-                        return Maybe.empty();
-                    } else {
-                        return Maybe.just(restResponse.body());
-                    }
-                }
-            });
+            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -170,7 +162,7 @@ public final class FormdatasImpl implements Formdatas {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<Void, Flowable<ByteBuffer>>> uploadFileViaBodyWithRestResponseAsync(@NonNull Flowable<ByteBuffer> fileContent) {
+    public Single<StreamResponse> uploadFileViaBodyWithRestResponseAsync(@NonNull Flowable<ByteBuffer> fileContent) {
         if (fileContent == null) {
             throw new IllegalArgumentException("Parameter fileContent is required and cannot be null.");
         }
@@ -186,14 +178,6 @@ public final class FormdatasImpl implements Formdatas {
      */
     public Maybe<Flowable<ByteBuffer>> uploadFileViaBodyAsync(@NonNull Flowable<ByteBuffer> fileContent) {
         return uploadFileViaBodyWithRestResponseAsync(fileContent)
-            .flatMapMaybe(new Function<RestResponse<Void, Flowable<ByteBuffer>>, Maybe<Flowable<ByteBuffer>>>() {
-                public Maybe<Flowable<ByteBuffer>> apply(RestResponse<Void, Flowable<ByteBuffer>> restResponse) {
-                    if (restResponse.body() == null) {
-                        return Maybe.empty();
-                    } else {
-                        return Maybe.just(restResponse.body());
-                    }
-                }
-            });
+            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 }

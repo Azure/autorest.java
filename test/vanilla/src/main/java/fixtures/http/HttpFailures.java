@@ -10,7 +10,7 @@
 
 package fixtures.http;
 
-import com.microsoft.rest.v2.RestResponse;
+import com.microsoft.rest.v2.BodyResponse;
 import com.microsoft.rest.v2.ServiceCallback;
 import com.microsoft.rest.v2.ServiceFuture;
 import fixtures.http.models.ErrorException;
@@ -45,7 +45,7 @@ public interface HttpFailures {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, Boolean>> getEmptyErrorWithRestResponseAsync();
+    Single<BodyResponse<Boolean>> getEmptyErrorWithRestResponseAsync();
 
     /**
      * Get empty error form server.
@@ -76,7 +76,7 @@ public interface HttpFailures {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, Boolean>> getNoModelErrorWithRestResponseAsync();
+    Single<BodyResponse<Boolean>> getNoModelErrorWithRestResponseAsync();
 
     /**
      * Get empty error form server.
@@ -107,7 +107,7 @@ public interface HttpFailures {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, Boolean>> getNoModelEmptyWithRestResponseAsync();
+    Single<BodyResponse<Boolean>> getNoModelEmptyWithRestResponseAsync();
 
     /**
      * Get empty response from server.

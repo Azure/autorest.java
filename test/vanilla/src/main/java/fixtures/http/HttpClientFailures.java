@@ -10,7 +10,7 @@
 
 package fixtures.http;
 
-import com.microsoft.rest.v2.RestResponse;
+import com.microsoft.rest.v2.BodyResponse;
 import com.microsoft.rest.v2.ServiceCallback;
 import com.microsoft.rest.v2.ServiceFuture;
 import fixtures.http.models.Error;
@@ -46,7 +46,7 @@ public interface HttpClientFailures {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, Error>> head400WithRestResponseAsync();
+    Single<BodyResponse<Error>> head400WithRestResponseAsync();
 
     /**
      * Return 400 status code - should be represented in the client as an error.
@@ -78,7 +78,7 @@ public interface HttpClientFailures {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, Error>> get400WithRestResponseAsync();
+    Single<BodyResponse<Error>> get400WithRestResponseAsync();
 
     /**
      * Return 400 status code - should be represented in the client as an error.
@@ -110,7 +110,7 @@ public interface HttpClientFailures {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, Error>> put400WithRestResponseAsync();
+    Single<BodyResponse<Error>> put400WithRestResponseAsync();
 
     /**
      * Return 400 status code - should be represented in the client as an error.
@@ -147,7 +147,7 @@ public interface HttpClientFailures {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, Error>> put400WithRestResponseAsync(Boolean booleanValue);
+    Single<BodyResponse<Error>> put400WithRestResponseAsync(Boolean booleanValue);
 
     /**
      * Return 400 status code - should be represented in the client as an error.
@@ -181,7 +181,7 @@ public interface HttpClientFailures {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, Error>> patch400WithRestResponseAsync();
+    Single<BodyResponse<Error>> patch400WithRestResponseAsync();
 
     /**
      * Return 400 status code - should be represented in the client as an error.
@@ -218,7 +218,7 @@ public interface HttpClientFailures {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, Error>> patch400WithRestResponseAsync(Boolean booleanValue);
+    Single<BodyResponse<Error>> patch400WithRestResponseAsync(Boolean booleanValue);
 
     /**
      * Return 400 status code - should be represented in the client as an error.
@@ -252,7 +252,7 @@ public interface HttpClientFailures {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, Error>> post400WithRestResponseAsync();
+    Single<BodyResponse<Error>> post400WithRestResponseAsync();
 
     /**
      * Return 400 status code - should be represented in the client as an error.
@@ -289,7 +289,7 @@ public interface HttpClientFailures {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, Error>> post400WithRestResponseAsync(Boolean booleanValue);
+    Single<BodyResponse<Error>> post400WithRestResponseAsync(Boolean booleanValue);
 
     /**
      * Return 400 status code - should be represented in the client as an error.
@@ -323,7 +323,7 @@ public interface HttpClientFailures {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, Error>> delete400WithRestResponseAsync();
+    Single<BodyResponse<Error>> delete400WithRestResponseAsync();
 
     /**
      * Return 400 status code - should be represented in the client as an error.
@@ -360,7 +360,7 @@ public interface HttpClientFailures {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, Error>> delete400WithRestResponseAsync(Boolean booleanValue);
+    Single<BodyResponse<Error>> delete400WithRestResponseAsync(Boolean booleanValue);
 
     /**
      * Return 400 status code - should be represented in the client as an error.
@@ -394,7 +394,7 @@ public interface HttpClientFailures {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, Error>> head401WithRestResponseAsync();
+    Single<BodyResponse<Error>> head401WithRestResponseAsync();
 
     /**
      * Return 401 status code - should be represented in the client as an error.
@@ -426,7 +426,7 @@ public interface HttpClientFailures {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, Error>> get402WithRestResponseAsync();
+    Single<BodyResponse<Error>> get402WithRestResponseAsync();
 
     /**
      * Return 402 status code - should be represented in the client as an error.
@@ -458,7 +458,7 @@ public interface HttpClientFailures {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, Error>> get403WithRestResponseAsync();
+    Single<BodyResponse<Error>> get403WithRestResponseAsync();
 
     /**
      * Return 403 status code - should be represented in the client as an error.
@@ -490,7 +490,7 @@ public interface HttpClientFailures {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, Error>> put404WithRestResponseAsync();
+    Single<BodyResponse<Error>> put404WithRestResponseAsync();
 
     /**
      * Return 404 status code - should be represented in the client as an error.
@@ -527,7 +527,7 @@ public interface HttpClientFailures {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, Error>> put404WithRestResponseAsync(Boolean booleanValue);
+    Single<BodyResponse<Error>> put404WithRestResponseAsync(Boolean booleanValue);
 
     /**
      * Return 404 status code - should be represented in the client as an error.
@@ -561,7 +561,7 @@ public interface HttpClientFailures {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, Error>> patch405WithRestResponseAsync();
+    Single<BodyResponse<Error>> patch405WithRestResponseAsync();
 
     /**
      * Return 405 status code - should be represented in the client as an error.
@@ -598,7 +598,7 @@ public interface HttpClientFailures {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, Error>> patch405WithRestResponseAsync(Boolean booleanValue);
+    Single<BodyResponse<Error>> patch405WithRestResponseAsync(Boolean booleanValue);
 
     /**
      * Return 405 status code - should be represented in the client as an error.
@@ -632,7 +632,7 @@ public interface HttpClientFailures {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, Error>> post406WithRestResponseAsync();
+    Single<BodyResponse<Error>> post406WithRestResponseAsync();
 
     /**
      * Return 406 status code - should be represented in the client as an error.
@@ -669,7 +669,7 @@ public interface HttpClientFailures {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, Error>> post406WithRestResponseAsync(Boolean booleanValue);
+    Single<BodyResponse<Error>> post406WithRestResponseAsync(Boolean booleanValue);
 
     /**
      * Return 406 status code - should be represented in the client as an error.
@@ -703,7 +703,7 @@ public interface HttpClientFailures {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, Error>> delete407WithRestResponseAsync();
+    Single<BodyResponse<Error>> delete407WithRestResponseAsync();
 
     /**
      * Return 407 status code - should be represented in the client as an error.
@@ -740,7 +740,7 @@ public interface HttpClientFailures {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, Error>> delete407WithRestResponseAsync(Boolean booleanValue);
+    Single<BodyResponse<Error>> delete407WithRestResponseAsync(Boolean booleanValue);
 
     /**
      * Return 407 status code - should be represented in the client as an error.
@@ -774,7 +774,7 @@ public interface HttpClientFailures {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, Error>> put409WithRestResponseAsync();
+    Single<BodyResponse<Error>> put409WithRestResponseAsync();
 
     /**
      * Return 409 status code - should be represented in the client as an error.
@@ -811,7 +811,7 @@ public interface HttpClientFailures {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, Error>> put409WithRestResponseAsync(Boolean booleanValue);
+    Single<BodyResponse<Error>> put409WithRestResponseAsync(Boolean booleanValue);
 
     /**
      * Return 409 status code - should be represented in the client as an error.
@@ -845,7 +845,7 @@ public interface HttpClientFailures {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, Error>> head410WithRestResponseAsync();
+    Single<BodyResponse<Error>> head410WithRestResponseAsync();
 
     /**
      * Return 410 status code - should be represented in the client as an error.
@@ -877,7 +877,7 @@ public interface HttpClientFailures {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, Error>> get411WithRestResponseAsync();
+    Single<BodyResponse<Error>> get411WithRestResponseAsync();
 
     /**
      * Return 411 status code - should be represented in the client as an error.
@@ -909,7 +909,7 @@ public interface HttpClientFailures {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, Error>> get412WithRestResponseAsync();
+    Single<BodyResponse<Error>> get412WithRestResponseAsync();
 
     /**
      * Return 412 status code - should be represented in the client as an error.
@@ -941,7 +941,7 @@ public interface HttpClientFailures {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, Error>> put413WithRestResponseAsync();
+    Single<BodyResponse<Error>> put413WithRestResponseAsync();
 
     /**
      * Return 413 status code - should be represented in the client as an error.
@@ -978,7 +978,7 @@ public interface HttpClientFailures {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, Error>> put413WithRestResponseAsync(Boolean booleanValue);
+    Single<BodyResponse<Error>> put413WithRestResponseAsync(Boolean booleanValue);
 
     /**
      * Return 413 status code - should be represented in the client as an error.
@@ -1012,7 +1012,7 @@ public interface HttpClientFailures {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, Error>> patch414WithRestResponseAsync();
+    Single<BodyResponse<Error>> patch414WithRestResponseAsync();
 
     /**
      * Return 414 status code - should be represented in the client as an error.
@@ -1049,7 +1049,7 @@ public interface HttpClientFailures {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, Error>> patch414WithRestResponseAsync(Boolean booleanValue);
+    Single<BodyResponse<Error>> patch414WithRestResponseAsync(Boolean booleanValue);
 
     /**
      * Return 414 status code - should be represented in the client as an error.
@@ -1083,7 +1083,7 @@ public interface HttpClientFailures {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, Error>> post415WithRestResponseAsync();
+    Single<BodyResponse<Error>> post415WithRestResponseAsync();
 
     /**
      * Return 415 status code - should be represented in the client as an error.
@@ -1120,7 +1120,7 @@ public interface HttpClientFailures {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, Error>> post415WithRestResponseAsync(Boolean booleanValue);
+    Single<BodyResponse<Error>> post415WithRestResponseAsync(Boolean booleanValue);
 
     /**
      * Return 415 status code - should be represented in the client as an error.
@@ -1154,7 +1154,7 @@ public interface HttpClientFailures {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, Error>> get416WithRestResponseAsync();
+    Single<BodyResponse<Error>> get416WithRestResponseAsync();
 
     /**
      * Return 416 status code - should be represented in the client as an error.
@@ -1186,7 +1186,7 @@ public interface HttpClientFailures {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, Error>> delete417WithRestResponseAsync();
+    Single<BodyResponse<Error>> delete417WithRestResponseAsync();
 
     /**
      * Return 417 status code - should be represented in the client as an error.
@@ -1223,7 +1223,7 @@ public interface HttpClientFailures {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, Error>> delete417WithRestResponseAsync(Boolean booleanValue);
+    Single<BodyResponse<Error>> delete417WithRestResponseAsync(Boolean booleanValue);
 
     /**
      * Return 417 status code - should be represented in the client as an error.
@@ -1257,7 +1257,7 @@ public interface HttpClientFailures {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, Error>> head429WithRestResponseAsync();
+    Single<BodyResponse<Error>> head429WithRestResponseAsync();
 
     /**
      * Return 429 status code - should be represented in the client as an error.

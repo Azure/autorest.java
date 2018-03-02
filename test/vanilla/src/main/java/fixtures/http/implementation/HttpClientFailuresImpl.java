@@ -10,8 +10,8 @@
 
 package fixtures.http.implementation;
 
+import com.microsoft.rest.v2.BodyResponse;
 import com.microsoft.rest.v2.RestProxy;
-import com.microsoft.rest.v2.RestResponse;
 import com.microsoft.rest.v2.ServiceCallback;
 import com.microsoft.rest.v2.ServiceFuture;
 import com.microsoft.rest.v2.annotations.BodyParam;
@@ -64,95 +64,95 @@ public final class HttpClientFailuresImpl implements HttpClientFailures {
     private interface HttpClientFailuresService {
         @HEAD("http/failure/client/400")
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<RestResponse<Void, Error>> head400();
+        Single<BodyResponse<Error>> head400();
 
         @GET("http/failure/client/400")
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<RestResponse<Void, Error>> get400();
+        Single<BodyResponse<Error>> get400();
 
         @PUT("http/failure/client/400")
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<RestResponse<Void, Error>> put400(@BodyParam("application/json; charset=utf-8") Boolean booleanValue);
+        Single<BodyResponse<Error>> put400(@BodyParam("application/json; charset=utf-8") Boolean booleanValue);
 
         @PATCH("http/failure/client/400")
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<RestResponse<Void, Error>> patch400(@BodyParam("application/json; charset=utf-8") Boolean booleanValue);
+        Single<BodyResponse<Error>> patch400(@BodyParam("application/json; charset=utf-8") Boolean booleanValue);
 
         @POST("http/failure/client/400")
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<RestResponse<Void, Error>> post400(@BodyParam("application/json; charset=utf-8") Boolean booleanValue);
+        Single<BodyResponse<Error>> post400(@BodyParam("application/json; charset=utf-8") Boolean booleanValue);
 
         @DELETE("http/failure/client/400")
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<RestResponse<Void, Error>> delete400(@BodyParam("application/json; charset=utf-8") Boolean booleanValue);
+        Single<BodyResponse<Error>> delete400(@BodyParam("application/json; charset=utf-8") Boolean booleanValue);
 
         @HEAD("http/failure/client/401")
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<RestResponse<Void, Error>> head401();
+        Single<BodyResponse<Error>> head401();
 
         @GET("http/failure/client/402")
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<RestResponse<Void, Error>> get402();
+        Single<BodyResponse<Error>> get402();
 
         @GET("http/failure/client/403")
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<RestResponse<Void, Error>> get403();
+        Single<BodyResponse<Error>> get403();
 
         @PUT("http/failure/client/404")
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<RestResponse<Void, Error>> put404(@BodyParam("application/json; charset=utf-8") Boolean booleanValue);
+        Single<BodyResponse<Error>> put404(@BodyParam("application/json; charset=utf-8") Boolean booleanValue);
 
         @PATCH("http/failure/client/405")
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<RestResponse<Void, Error>> patch405(@BodyParam("application/json; charset=utf-8") Boolean booleanValue);
+        Single<BodyResponse<Error>> patch405(@BodyParam("application/json; charset=utf-8") Boolean booleanValue);
 
         @POST("http/failure/client/406")
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<RestResponse<Void, Error>> post406(@BodyParam("application/json; charset=utf-8") Boolean booleanValue);
+        Single<BodyResponse<Error>> post406(@BodyParam("application/json; charset=utf-8") Boolean booleanValue);
 
         @DELETE("http/failure/client/407")
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<RestResponse<Void, Error>> delete407(@BodyParam("application/json; charset=utf-8") Boolean booleanValue);
+        Single<BodyResponse<Error>> delete407(@BodyParam("application/json; charset=utf-8") Boolean booleanValue);
 
         @PUT("http/failure/client/409")
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<RestResponse<Void, Error>> put409(@BodyParam("application/json; charset=utf-8") Boolean booleanValue);
+        Single<BodyResponse<Error>> put409(@BodyParam("application/json; charset=utf-8") Boolean booleanValue);
 
         @HEAD("http/failure/client/410")
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<RestResponse<Void, Error>> head410();
+        Single<BodyResponse<Error>> head410();
 
         @GET("http/failure/client/411")
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<RestResponse<Void, Error>> get411();
+        Single<BodyResponse<Error>> get411();
 
         @GET("http/failure/client/412")
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<RestResponse<Void, Error>> get412();
+        Single<BodyResponse<Error>> get412();
 
         @PUT("http/failure/client/413")
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<RestResponse<Void, Error>> put413(@BodyParam("application/json; charset=utf-8") Boolean booleanValue);
+        Single<BodyResponse<Error>> put413(@BodyParam("application/json; charset=utf-8") Boolean booleanValue);
 
         @PATCH("http/failure/client/414")
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<RestResponse<Void, Error>> patch414(@BodyParam("application/json; charset=utf-8") Boolean booleanValue);
+        Single<BodyResponse<Error>> patch414(@BodyParam("application/json; charset=utf-8") Boolean booleanValue);
 
         @POST("http/failure/client/415")
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<RestResponse<Void, Error>> post415(@BodyParam("application/json; charset=utf-8") Boolean booleanValue);
+        Single<BodyResponse<Error>> post415(@BodyParam("application/json; charset=utf-8") Boolean booleanValue);
 
         @GET("http/failure/client/416")
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<RestResponse<Void, Error>> get416();
+        Single<BodyResponse<Error>> get416();
 
         @DELETE("http/failure/client/417")
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<RestResponse<Void, Error>> delete417(@BodyParam("application/json; charset=utf-8") Boolean booleanValue);
+        Single<BodyResponse<Error>> delete417(@BodyParam("application/json; charset=utf-8") Boolean booleanValue);
 
         @HEAD("http/failure/client/429")
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<RestResponse<Void, Error>> head429();
+        Single<BodyResponse<Error>> head429();
     }
 
     /**
@@ -182,7 +182,7 @@ public final class HttpClientFailuresImpl implements HttpClientFailures {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<Void, Error>> head400WithRestResponseAsync() {
+    public Single<BodyResponse<Error>> head400WithRestResponseAsync() {
         return service.head400();
     }
 
@@ -193,15 +193,7 @@ public final class HttpClientFailuresImpl implements HttpClientFailures {
      */
     public Maybe<Error> head400Async() {
         return head400WithRestResponseAsync()
-            .flatMapMaybe(new Function<RestResponse<Void, Error>, Maybe<Error>>() {
-                public Maybe<Error> apply(RestResponse<Void, Error> restResponse) {
-                    if (restResponse.body() == null) {
-                        return Maybe.empty();
-                    } else {
-                        return Maybe.just(restResponse.body());
-                    }
-                }
-            });
+            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -231,7 +223,7 @@ public final class HttpClientFailuresImpl implements HttpClientFailures {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<Void, Error>> get400WithRestResponseAsync() {
+    public Single<BodyResponse<Error>> get400WithRestResponseAsync() {
         return service.get400();
     }
 
@@ -242,15 +234,7 @@ public final class HttpClientFailuresImpl implements HttpClientFailures {
      */
     public Maybe<Error> get400Async() {
         return get400WithRestResponseAsync()
-            .flatMapMaybe(new Function<RestResponse<Void, Error>, Maybe<Error>>() {
-                public Maybe<Error> apply(RestResponse<Void, Error> restResponse) {
-                    if (restResponse.body() == null) {
-                        return Maybe.empty();
-                    } else {
-                        return Maybe.just(restResponse.body());
-                    }
-                }
-            });
+            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -280,7 +264,7 @@ public final class HttpClientFailuresImpl implements HttpClientFailures {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<Void, Error>> put400WithRestResponseAsync() {
+    public Single<BodyResponse<Error>> put400WithRestResponseAsync() {
         final Boolean booleanValue = null;
         return service.put400(booleanValue);
     }
@@ -292,15 +276,7 @@ public final class HttpClientFailuresImpl implements HttpClientFailures {
      */
     public Maybe<Error> put400Async() {
         return put400WithRestResponseAsync()
-            .flatMapMaybe(new Function<RestResponse<Void, Error>, Maybe<Error>>() {
-                public Maybe<Error> apply(RestResponse<Void, Error> restResponse) {
-                    if (restResponse.body() == null) {
-                        return Maybe.empty();
-                    } else {
-                        return Maybe.just(restResponse.body());
-                    }
-                }
-            });
+            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -335,7 +311,7 @@ public final class HttpClientFailuresImpl implements HttpClientFailures {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<Void, Error>> put400WithRestResponseAsync(Boolean booleanValue) {
+    public Single<BodyResponse<Error>> put400WithRestResponseAsync(Boolean booleanValue) {
         return service.put400(booleanValue);
     }
 
@@ -348,15 +324,7 @@ public final class HttpClientFailuresImpl implements HttpClientFailures {
      */
     public Maybe<Error> put400Async(Boolean booleanValue) {
         return put400WithRestResponseAsync(booleanValue)
-            .flatMapMaybe(new Function<RestResponse<Void, Error>, Maybe<Error>>() {
-                public Maybe<Error> apply(RestResponse<Void, Error> restResponse) {
-                    if (restResponse.body() == null) {
-                        return Maybe.empty();
-                    } else {
-                        return Maybe.just(restResponse.body());
-                    }
-                }
-            });
+            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -386,7 +354,7 @@ public final class HttpClientFailuresImpl implements HttpClientFailures {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<Void, Error>> patch400WithRestResponseAsync() {
+    public Single<BodyResponse<Error>> patch400WithRestResponseAsync() {
         final Boolean booleanValue = null;
         return service.patch400(booleanValue);
     }
@@ -398,15 +366,7 @@ public final class HttpClientFailuresImpl implements HttpClientFailures {
      */
     public Maybe<Error> patch400Async() {
         return patch400WithRestResponseAsync()
-            .flatMapMaybe(new Function<RestResponse<Void, Error>, Maybe<Error>>() {
-                public Maybe<Error> apply(RestResponse<Void, Error> restResponse) {
-                    if (restResponse.body() == null) {
-                        return Maybe.empty();
-                    } else {
-                        return Maybe.just(restResponse.body());
-                    }
-                }
-            });
+            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -441,7 +401,7 @@ public final class HttpClientFailuresImpl implements HttpClientFailures {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<Void, Error>> patch400WithRestResponseAsync(Boolean booleanValue) {
+    public Single<BodyResponse<Error>> patch400WithRestResponseAsync(Boolean booleanValue) {
         return service.patch400(booleanValue);
     }
 
@@ -454,15 +414,7 @@ public final class HttpClientFailuresImpl implements HttpClientFailures {
      */
     public Maybe<Error> patch400Async(Boolean booleanValue) {
         return patch400WithRestResponseAsync(booleanValue)
-            .flatMapMaybe(new Function<RestResponse<Void, Error>, Maybe<Error>>() {
-                public Maybe<Error> apply(RestResponse<Void, Error> restResponse) {
-                    if (restResponse.body() == null) {
-                        return Maybe.empty();
-                    } else {
-                        return Maybe.just(restResponse.body());
-                    }
-                }
-            });
+            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -492,7 +444,7 @@ public final class HttpClientFailuresImpl implements HttpClientFailures {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<Void, Error>> post400WithRestResponseAsync() {
+    public Single<BodyResponse<Error>> post400WithRestResponseAsync() {
         final Boolean booleanValue = null;
         return service.post400(booleanValue);
     }
@@ -504,15 +456,7 @@ public final class HttpClientFailuresImpl implements HttpClientFailures {
      */
     public Maybe<Error> post400Async() {
         return post400WithRestResponseAsync()
-            .flatMapMaybe(new Function<RestResponse<Void, Error>, Maybe<Error>>() {
-                public Maybe<Error> apply(RestResponse<Void, Error> restResponse) {
-                    if (restResponse.body() == null) {
-                        return Maybe.empty();
-                    } else {
-                        return Maybe.just(restResponse.body());
-                    }
-                }
-            });
+            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -547,7 +491,7 @@ public final class HttpClientFailuresImpl implements HttpClientFailures {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<Void, Error>> post400WithRestResponseAsync(Boolean booleanValue) {
+    public Single<BodyResponse<Error>> post400WithRestResponseAsync(Boolean booleanValue) {
         return service.post400(booleanValue);
     }
 
@@ -560,15 +504,7 @@ public final class HttpClientFailuresImpl implements HttpClientFailures {
      */
     public Maybe<Error> post400Async(Boolean booleanValue) {
         return post400WithRestResponseAsync(booleanValue)
-            .flatMapMaybe(new Function<RestResponse<Void, Error>, Maybe<Error>>() {
-                public Maybe<Error> apply(RestResponse<Void, Error> restResponse) {
-                    if (restResponse.body() == null) {
-                        return Maybe.empty();
-                    } else {
-                        return Maybe.just(restResponse.body());
-                    }
-                }
-            });
+            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -598,7 +534,7 @@ public final class HttpClientFailuresImpl implements HttpClientFailures {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<Void, Error>> delete400WithRestResponseAsync() {
+    public Single<BodyResponse<Error>> delete400WithRestResponseAsync() {
         final Boolean booleanValue = null;
         return service.delete400(booleanValue);
     }
@@ -610,15 +546,7 @@ public final class HttpClientFailuresImpl implements HttpClientFailures {
      */
     public Maybe<Error> delete400Async() {
         return delete400WithRestResponseAsync()
-            .flatMapMaybe(new Function<RestResponse<Void, Error>, Maybe<Error>>() {
-                public Maybe<Error> apply(RestResponse<Void, Error> restResponse) {
-                    if (restResponse.body() == null) {
-                        return Maybe.empty();
-                    } else {
-                        return Maybe.just(restResponse.body());
-                    }
-                }
-            });
+            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -653,7 +581,7 @@ public final class HttpClientFailuresImpl implements HttpClientFailures {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<Void, Error>> delete400WithRestResponseAsync(Boolean booleanValue) {
+    public Single<BodyResponse<Error>> delete400WithRestResponseAsync(Boolean booleanValue) {
         return service.delete400(booleanValue);
     }
 
@@ -666,15 +594,7 @@ public final class HttpClientFailuresImpl implements HttpClientFailures {
      */
     public Maybe<Error> delete400Async(Boolean booleanValue) {
         return delete400WithRestResponseAsync(booleanValue)
-            .flatMapMaybe(new Function<RestResponse<Void, Error>, Maybe<Error>>() {
-                public Maybe<Error> apply(RestResponse<Void, Error> restResponse) {
-                    if (restResponse.body() == null) {
-                        return Maybe.empty();
-                    } else {
-                        return Maybe.just(restResponse.body());
-                    }
-                }
-            });
+            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -704,7 +624,7 @@ public final class HttpClientFailuresImpl implements HttpClientFailures {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<Void, Error>> head401WithRestResponseAsync() {
+    public Single<BodyResponse<Error>> head401WithRestResponseAsync() {
         return service.head401();
     }
 
@@ -715,15 +635,7 @@ public final class HttpClientFailuresImpl implements HttpClientFailures {
      */
     public Maybe<Error> head401Async() {
         return head401WithRestResponseAsync()
-            .flatMapMaybe(new Function<RestResponse<Void, Error>, Maybe<Error>>() {
-                public Maybe<Error> apply(RestResponse<Void, Error> restResponse) {
-                    if (restResponse.body() == null) {
-                        return Maybe.empty();
-                    } else {
-                        return Maybe.just(restResponse.body());
-                    }
-                }
-            });
+            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -753,7 +665,7 @@ public final class HttpClientFailuresImpl implements HttpClientFailures {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<Void, Error>> get402WithRestResponseAsync() {
+    public Single<BodyResponse<Error>> get402WithRestResponseAsync() {
         return service.get402();
     }
 
@@ -764,15 +676,7 @@ public final class HttpClientFailuresImpl implements HttpClientFailures {
      */
     public Maybe<Error> get402Async() {
         return get402WithRestResponseAsync()
-            .flatMapMaybe(new Function<RestResponse<Void, Error>, Maybe<Error>>() {
-                public Maybe<Error> apply(RestResponse<Void, Error> restResponse) {
-                    if (restResponse.body() == null) {
-                        return Maybe.empty();
-                    } else {
-                        return Maybe.just(restResponse.body());
-                    }
-                }
-            });
+            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -802,7 +706,7 @@ public final class HttpClientFailuresImpl implements HttpClientFailures {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<Void, Error>> get403WithRestResponseAsync() {
+    public Single<BodyResponse<Error>> get403WithRestResponseAsync() {
         return service.get403();
     }
 
@@ -813,15 +717,7 @@ public final class HttpClientFailuresImpl implements HttpClientFailures {
      */
     public Maybe<Error> get403Async() {
         return get403WithRestResponseAsync()
-            .flatMapMaybe(new Function<RestResponse<Void, Error>, Maybe<Error>>() {
-                public Maybe<Error> apply(RestResponse<Void, Error> restResponse) {
-                    if (restResponse.body() == null) {
-                        return Maybe.empty();
-                    } else {
-                        return Maybe.just(restResponse.body());
-                    }
-                }
-            });
+            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -851,7 +747,7 @@ public final class HttpClientFailuresImpl implements HttpClientFailures {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<Void, Error>> put404WithRestResponseAsync() {
+    public Single<BodyResponse<Error>> put404WithRestResponseAsync() {
         final Boolean booleanValue = null;
         return service.put404(booleanValue);
     }
@@ -863,15 +759,7 @@ public final class HttpClientFailuresImpl implements HttpClientFailures {
      */
     public Maybe<Error> put404Async() {
         return put404WithRestResponseAsync()
-            .flatMapMaybe(new Function<RestResponse<Void, Error>, Maybe<Error>>() {
-                public Maybe<Error> apply(RestResponse<Void, Error> restResponse) {
-                    if (restResponse.body() == null) {
-                        return Maybe.empty();
-                    } else {
-                        return Maybe.just(restResponse.body());
-                    }
-                }
-            });
+            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -906,7 +794,7 @@ public final class HttpClientFailuresImpl implements HttpClientFailures {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<Void, Error>> put404WithRestResponseAsync(Boolean booleanValue) {
+    public Single<BodyResponse<Error>> put404WithRestResponseAsync(Boolean booleanValue) {
         return service.put404(booleanValue);
     }
 
@@ -919,15 +807,7 @@ public final class HttpClientFailuresImpl implements HttpClientFailures {
      */
     public Maybe<Error> put404Async(Boolean booleanValue) {
         return put404WithRestResponseAsync(booleanValue)
-            .flatMapMaybe(new Function<RestResponse<Void, Error>, Maybe<Error>>() {
-                public Maybe<Error> apply(RestResponse<Void, Error> restResponse) {
-                    if (restResponse.body() == null) {
-                        return Maybe.empty();
-                    } else {
-                        return Maybe.just(restResponse.body());
-                    }
-                }
-            });
+            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -957,7 +837,7 @@ public final class HttpClientFailuresImpl implements HttpClientFailures {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<Void, Error>> patch405WithRestResponseAsync() {
+    public Single<BodyResponse<Error>> patch405WithRestResponseAsync() {
         final Boolean booleanValue = null;
         return service.patch405(booleanValue);
     }
@@ -969,15 +849,7 @@ public final class HttpClientFailuresImpl implements HttpClientFailures {
      */
     public Maybe<Error> patch405Async() {
         return patch405WithRestResponseAsync()
-            .flatMapMaybe(new Function<RestResponse<Void, Error>, Maybe<Error>>() {
-                public Maybe<Error> apply(RestResponse<Void, Error> restResponse) {
-                    if (restResponse.body() == null) {
-                        return Maybe.empty();
-                    } else {
-                        return Maybe.just(restResponse.body());
-                    }
-                }
-            });
+            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -1012,7 +884,7 @@ public final class HttpClientFailuresImpl implements HttpClientFailures {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<Void, Error>> patch405WithRestResponseAsync(Boolean booleanValue) {
+    public Single<BodyResponse<Error>> patch405WithRestResponseAsync(Boolean booleanValue) {
         return service.patch405(booleanValue);
     }
 
@@ -1025,15 +897,7 @@ public final class HttpClientFailuresImpl implements HttpClientFailures {
      */
     public Maybe<Error> patch405Async(Boolean booleanValue) {
         return patch405WithRestResponseAsync(booleanValue)
-            .flatMapMaybe(new Function<RestResponse<Void, Error>, Maybe<Error>>() {
-                public Maybe<Error> apply(RestResponse<Void, Error> restResponse) {
-                    if (restResponse.body() == null) {
-                        return Maybe.empty();
-                    } else {
-                        return Maybe.just(restResponse.body());
-                    }
-                }
-            });
+            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -1063,7 +927,7 @@ public final class HttpClientFailuresImpl implements HttpClientFailures {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<Void, Error>> post406WithRestResponseAsync() {
+    public Single<BodyResponse<Error>> post406WithRestResponseAsync() {
         final Boolean booleanValue = null;
         return service.post406(booleanValue);
     }
@@ -1075,15 +939,7 @@ public final class HttpClientFailuresImpl implements HttpClientFailures {
      */
     public Maybe<Error> post406Async() {
         return post406WithRestResponseAsync()
-            .flatMapMaybe(new Function<RestResponse<Void, Error>, Maybe<Error>>() {
-                public Maybe<Error> apply(RestResponse<Void, Error> restResponse) {
-                    if (restResponse.body() == null) {
-                        return Maybe.empty();
-                    } else {
-                        return Maybe.just(restResponse.body());
-                    }
-                }
-            });
+            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -1118,7 +974,7 @@ public final class HttpClientFailuresImpl implements HttpClientFailures {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<Void, Error>> post406WithRestResponseAsync(Boolean booleanValue) {
+    public Single<BodyResponse<Error>> post406WithRestResponseAsync(Boolean booleanValue) {
         return service.post406(booleanValue);
     }
 
@@ -1131,15 +987,7 @@ public final class HttpClientFailuresImpl implements HttpClientFailures {
      */
     public Maybe<Error> post406Async(Boolean booleanValue) {
         return post406WithRestResponseAsync(booleanValue)
-            .flatMapMaybe(new Function<RestResponse<Void, Error>, Maybe<Error>>() {
-                public Maybe<Error> apply(RestResponse<Void, Error> restResponse) {
-                    if (restResponse.body() == null) {
-                        return Maybe.empty();
-                    } else {
-                        return Maybe.just(restResponse.body());
-                    }
-                }
-            });
+            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -1169,7 +1017,7 @@ public final class HttpClientFailuresImpl implements HttpClientFailures {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<Void, Error>> delete407WithRestResponseAsync() {
+    public Single<BodyResponse<Error>> delete407WithRestResponseAsync() {
         final Boolean booleanValue = null;
         return service.delete407(booleanValue);
     }
@@ -1181,15 +1029,7 @@ public final class HttpClientFailuresImpl implements HttpClientFailures {
      */
     public Maybe<Error> delete407Async() {
         return delete407WithRestResponseAsync()
-            .flatMapMaybe(new Function<RestResponse<Void, Error>, Maybe<Error>>() {
-                public Maybe<Error> apply(RestResponse<Void, Error> restResponse) {
-                    if (restResponse.body() == null) {
-                        return Maybe.empty();
-                    } else {
-                        return Maybe.just(restResponse.body());
-                    }
-                }
-            });
+            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -1224,7 +1064,7 @@ public final class HttpClientFailuresImpl implements HttpClientFailures {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<Void, Error>> delete407WithRestResponseAsync(Boolean booleanValue) {
+    public Single<BodyResponse<Error>> delete407WithRestResponseAsync(Boolean booleanValue) {
         return service.delete407(booleanValue);
     }
 
@@ -1237,15 +1077,7 @@ public final class HttpClientFailuresImpl implements HttpClientFailures {
      */
     public Maybe<Error> delete407Async(Boolean booleanValue) {
         return delete407WithRestResponseAsync(booleanValue)
-            .flatMapMaybe(new Function<RestResponse<Void, Error>, Maybe<Error>>() {
-                public Maybe<Error> apply(RestResponse<Void, Error> restResponse) {
-                    if (restResponse.body() == null) {
-                        return Maybe.empty();
-                    } else {
-                        return Maybe.just(restResponse.body());
-                    }
-                }
-            });
+            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -1275,7 +1107,7 @@ public final class HttpClientFailuresImpl implements HttpClientFailures {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<Void, Error>> put409WithRestResponseAsync() {
+    public Single<BodyResponse<Error>> put409WithRestResponseAsync() {
         final Boolean booleanValue = null;
         return service.put409(booleanValue);
     }
@@ -1287,15 +1119,7 @@ public final class HttpClientFailuresImpl implements HttpClientFailures {
      */
     public Maybe<Error> put409Async() {
         return put409WithRestResponseAsync()
-            .flatMapMaybe(new Function<RestResponse<Void, Error>, Maybe<Error>>() {
-                public Maybe<Error> apply(RestResponse<Void, Error> restResponse) {
-                    if (restResponse.body() == null) {
-                        return Maybe.empty();
-                    } else {
-                        return Maybe.just(restResponse.body());
-                    }
-                }
-            });
+            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -1330,7 +1154,7 @@ public final class HttpClientFailuresImpl implements HttpClientFailures {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<Void, Error>> put409WithRestResponseAsync(Boolean booleanValue) {
+    public Single<BodyResponse<Error>> put409WithRestResponseAsync(Boolean booleanValue) {
         return service.put409(booleanValue);
     }
 
@@ -1343,15 +1167,7 @@ public final class HttpClientFailuresImpl implements HttpClientFailures {
      */
     public Maybe<Error> put409Async(Boolean booleanValue) {
         return put409WithRestResponseAsync(booleanValue)
-            .flatMapMaybe(new Function<RestResponse<Void, Error>, Maybe<Error>>() {
-                public Maybe<Error> apply(RestResponse<Void, Error> restResponse) {
-                    if (restResponse.body() == null) {
-                        return Maybe.empty();
-                    } else {
-                        return Maybe.just(restResponse.body());
-                    }
-                }
-            });
+            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -1381,7 +1197,7 @@ public final class HttpClientFailuresImpl implements HttpClientFailures {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<Void, Error>> head410WithRestResponseAsync() {
+    public Single<BodyResponse<Error>> head410WithRestResponseAsync() {
         return service.head410();
     }
 
@@ -1392,15 +1208,7 @@ public final class HttpClientFailuresImpl implements HttpClientFailures {
      */
     public Maybe<Error> head410Async() {
         return head410WithRestResponseAsync()
-            .flatMapMaybe(new Function<RestResponse<Void, Error>, Maybe<Error>>() {
-                public Maybe<Error> apply(RestResponse<Void, Error> restResponse) {
-                    if (restResponse.body() == null) {
-                        return Maybe.empty();
-                    } else {
-                        return Maybe.just(restResponse.body());
-                    }
-                }
-            });
+            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -1430,7 +1238,7 @@ public final class HttpClientFailuresImpl implements HttpClientFailures {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<Void, Error>> get411WithRestResponseAsync() {
+    public Single<BodyResponse<Error>> get411WithRestResponseAsync() {
         return service.get411();
     }
 
@@ -1441,15 +1249,7 @@ public final class HttpClientFailuresImpl implements HttpClientFailures {
      */
     public Maybe<Error> get411Async() {
         return get411WithRestResponseAsync()
-            .flatMapMaybe(new Function<RestResponse<Void, Error>, Maybe<Error>>() {
-                public Maybe<Error> apply(RestResponse<Void, Error> restResponse) {
-                    if (restResponse.body() == null) {
-                        return Maybe.empty();
-                    } else {
-                        return Maybe.just(restResponse.body());
-                    }
-                }
-            });
+            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -1479,7 +1279,7 @@ public final class HttpClientFailuresImpl implements HttpClientFailures {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<Void, Error>> get412WithRestResponseAsync() {
+    public Single<BodyResponse<Error>> get412WithRestResponseAsync() {
         return service.get412();
     }
 
@@ -1490,15 +1290,7 @@ public final class HttpClientFailuresImpl implements HttpClientFailures {
      */
     public Maybe<Error> get412Async() {
         return get412WithRestResponseAsync()
-            .flatMapMaybe(new Function<RestResponse<Void, Error>, Maybe<Error>>() {
-                public Maybe<Error> apply(RestResponse<Void, Error> restResponse) {
-                    if (restResponse.body() == null) {
-                        return Maybe.empty();
-                    } else {
-                        return Maybe.just(restResponse.body());
-                    }
-                }
-            });
+            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -1528,7 +1320,7 @@ public final class HttpClientFailuresImpl implements HttpClientFailures {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<Void, Error>> put413WithRestResponseAsync() {
+    public Single<BodyResponse<Error>> put413WithRestResponseAsync() {
         final Boolean booleanValue = null;
         return service.put413(booleanValue);
     }
@@ -1540,15 +1332,7 @@ public final class HttpClientFailuresImpl implements HttpClientFailures {
      */
     public Maybe<Error> put413Async() {
         return put413WithRestResponseAsync()
-            .flatMapMaybe(new Function<RestResponse<Void, Error>, Maybe<Error>>() {
-                public Maybe<Error> apply(RestResponse<Void, Error> restResponse) {
-                    if (restResponse.body() == null) {
-                        return Maybe.empty();
-                    } else {
-                        return Maybe.just(restResponse.body());
-                    }
-                }
-            });
+            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -1583,7 +1367,7 @@ public final class HttpClientFailuresImpl implements HttpClientFailures {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<Void, Error>> put413WithRestResponseAsync(Boolean booleanValue) {
+    public Single<BodyResponse<Error>> put413WithRestResponseAsync(Boolean booleanValue) {
         return service.put413(booleanValue);
     }
 
@@ -1596,15 +1380,7 @@ public final class HttpClientFailuresImpl implements HttpClientFailures {
      */
     public Maybe<Error> put413Async(Boolean booleanValue) {
         return put413WithRestResponseAsync(booleanValue)
-            .flatMapMaybe(new Function<RestResponse<Void, Error>, Maybe<Error>>() {
-                public Maybe<Error> apply(RestResponse<Void, Error> restResponse) {
-                    if (restResponse.body() == null) {
-                        return Maybe.empty();
-                    } else {
-                        return Maybe.just(restResponse.body());
-                    }
-                }
-            });
+            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -1634,7 +1410,7 @@ public final class HttpClientFailuresImpl implements HttpClientFailures {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<Void, Error>> patch414WithRestResponseAsync() {
+    public Single<BodyResponse<Error>> patch414WithRestResponseAsync() {
         final Boolean booleanValue = null;
         return service.patch414(booleanValue);
     }
@@ -1646,15 +1422,7 @@ public final class HttpClientFailuresImpl implements HttpClientFailures {
      */
     public Maybe<Error> patch414Async() {
         return patch414WithRestResponseAsync()
-            .flatMapMaybe(new Function<RestResponse<Void, Error>, Maybe<Error>>() {
-                public Maybe<Error> apply(RestResponse<Void, Error> restResponse) {
-                    if (restResponse.body() == null) {
-                        return Maybe.empty();
-                    } else {
-                        return Maybe.just(restResponse.body());
-                    }
-                }
-            });
+            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -1689,7 +1457,7 @@ public final class HttpClientFailuresImpl implements HttpClientFailures {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<Void, Error>> patch414WithRestResponseAsync(Boolean booleanValue) {
+    public Single<BodyResponse<Error>> patch414WithRestResponseAsync(Boolean booleanValue) {
         return service.patch414(booleanValue);
     }
 
@@ -1702,15 +1470,7 @@ public final class HttpClientFailuresImpl implements HttpClientFailures {
      */
     public Maybe<Error> patch414Async(Boolean booleanValue) {
         return patch414WithRestResponseAsync(booleanValue)
-            .flatMapMaybe(new Function<RestResponse<Void, Error>, Maybe<Error>>() {
-                public Maybe<Error> apply(RestResponse<Void, Error> restResponse) {
-                    if (restResponse.body() == null) {
-                        return Maybe.empty();
-                    } else {
-                        return Maybe.just(restResponse.body());
-                    }
-                }
-            });
+            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -1740,7 +1500,7 @@ public final class HttpClientFailuresImpl implements HttpClientFailures {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<Void, Error>> post415WithRestResponseAsync() {
+    public Single<BodyResponse<Error>> post415WithRestResponseAsync() {
         final Boolean booleanValue = null;
         return service.post415(booleanValue);
     }
@@ -1752,15 +1512,7 @@ public final class HttpClientFailuresImpl implements HttpClientFailures {
      */
     public Maybe<Error> post415Async() {
         return post415WithRestResponseAsync()
-            .flatMapMaybe(new Function<RestResponse<Void, Error>, Maybe<Error>>() {
-                public Maybe<Error> apply(RestResponse<Void, Error> restResponse) {
-                    if (restResponse.body() == null) {
-                        return Maybe.empty();
-                    } else {
-                        return Maybe.just(restResponse.body());
-                    }
-                }
-            });
+            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -1795,7 +1547,7 @@ public final class HttpClientFailuresImpl implements HttpClientFailures {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<Void, Error>> post415WithRestResponseAsync(Boolean booleanValue) {
+    public Single<BodyResponse<Error>> post415WithRestResponseAsync(Boolean booleanValue) {
         return service.post415(booleanValue);
     }
 
@@ -1808,15 +1560,7 @@ public final class HttpClientFailuresImpl implements HttpClientFailures {
      */
     public Maybe<Error> post415Async(Boolean booleanValue) {
         return post415WithRestResponseAsync(booleanValue)
-            .flatMapMaybe(new Function<RestResponse<Void, Error>, Maybe<Error>>() {
-                public Maybe<Error> apply(RestResponse<Void, Error> restResponse) {
-                    if (restResponse.body() == null) {
-                        return Maybe.empty();
-                    } else {
-                        return Maybe.just(restResponse.body());
-                    }
-                }
-            });
+            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -1846,7 +1590,7 @@ public final class HttpClientFailuresImpl implements HttpClientFailures {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<Void, Error>> get416WithRestResponseAsync() {
+    public Single<BodyResponse<Error>> get416WithRestResponseAsync() {
         return service.get416();
     }
 
@@ -1857,15 +1601,7 @@ public final class HttpClientFailuresImpl implements HttpClientFailures {
      */
     public Maybe<Error> get416Async() {
         return get416WithRestResponseAsync()
-            .flatMapMaybe(new Function<RestResponse<Void, Error>, Maybe<Error>>() {
-                public Maybe<Error> apply(RestResponse<Void, Error> restResponse) {
-                    if (restResponse.body() == null) {
-                        return Maybe.empty();
-                    } else {
-                        return Maybe.just(restResponse.body());
-                    }
-                }
-            });
+            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -1895,7 +1631,7 @@ public final class HttpClientFailuresImpl implements HttpClientFailures {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<Void, Error>> delete417WithRestResponseAsync() {
+    public Single<BodyResponse<Error>> delete417WithRestResponseAsync() {
         final Boolean booleanValue = null;
         return service.delete417(booleanValue);
     }
@@ -1907,15 +1643,7 @@ public final class HttpClientFailuresImpl implements HttpClientFailures {
      */
     public Maybe<Error> delete417Async() {
         return delete417WithRestResponseAsync()
-            .flatMapMaybe(new Function<RestResponse<Void, Error>, Maybe<Error>>() {
-                public Maybe<Error> apply(RestResponse<Void, Error> restResponse) {
-                    if (restResponse.body() == null) {
-                        return Maybe.empty();
-                    } else {
-                        return Maybe.just(restResponse.body());
-                    }
-                }
-            });
+            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -1950,7 +1678,7 @@ public final class HttpClientFailuresImpl implements HttpClientFailures {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<Void, Error>> delete417WithRestResponseAsync(Boolean booleanValue) {
+    public Single<BodyResponse<Error>> delete417WithRestResponseAsync(Boolean booleanValue) {
         return service.delete417(booleanValue);
     }
 
@@ -1963,15 +1691,7 @@ public final class HttpClientFailuresImpl implements HttpClientFailures {
      */
     public Maybe<Error> delete417Async(Boolean booleanValue) {
         return delete417WithRestResponseAsync(booleanValue)
-            .flatMapMaybe(new Function<RestResponse<Void, Error>, Maybe<Error>>() {
-                public Maybe<Error> apply(RestResponse<Void, Error> restResponse) {
-                    if (restResponse.body() == null) {
-                        return Maybe.empty();
-                    } else {
-                        return Maybe.just(restResponse.body());
-                    }
-                }
-            });
+            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -2001,7 +1721,7 @@ public final class HttpClientFailuresImpl implements HttpClientFailures {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<Void, Error>> head429WithRestResponseAsync() {
+    public Single<BodyResponse<Error>> head429WithRestResponseAsync() {
         return service.head429();
     }
 
@@ -2012,14 +1732,6 @@ public final class HttpClientFailuresImpl implements HttpClientFailures {
      */
     public Maybe<Error> head429Async() {
         return head429WithRestResponseAsync()
-            .flatMapMaybe(new Function<RestResponse<Void, Error>, Maybe<Error>>() {
-                public Maybe<Error> apply(RestResponse<Void, Error> restResponse) {
-                    if (restResponse.body() == null) {
-                        return Maybe.empty();
-                    } else {
-                        return Maybe.just(restResponse.body());
-                    }
-                }
-            });
+            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 }

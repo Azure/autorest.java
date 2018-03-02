@@ -10,9 +10,10 @@
 
 package fixtures.requiredoptional;
 
-import com.microsoft.rest.v2.RestResponse;
+import com.microsoft.rest.v2.BodyResponse;
 import com.microsoft.rest.v2.ServiceCallback;
 import com.microsoft.rest.v2.ServiceFuture;
+import com.microsoft.rest.v2.VoidResponse;
 import fixtures.requiredoptional.models.ArrayOptionalWrapper;
 import fixtures.requiredoptional.models.ArrayWrapper;
 import fixtures.requiredoptional.models.ClassOptionalWrapper;
@@ -63,7 +64,7 @@ public interface Explicits {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, Error>> postRequiredIntegerParameterWithRestResponseAsync(@NonNull int bodyParameter);
+    Single<BodyResponse<Error>> postRequiredIntegerParameterWithRestResponseAsync(@NonNull int bodyParameter);
 
     /**
      * Test explicitly required integer. Please put null and the client library should throw before the request is sent.
@@ -96,7 +97,7 @@ public interface Explicits {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, Void>> postOptionalIntegerParameterWithRestResponseAsync();
+    Single<VoidResponse> postOptionalIntegerParameterWithRestResponseAsync();
 
     /**
      * Test explicitly optional integer. Please put null.
@@ -132,7 +133,7 @@ public interface Explicits {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, Void>> postOptionalIntegerParameterWithRestResponseAsync(Integer bodyParameter);
+    Single<VoidResponse> postOptionalIntegerParameterWithRestResponseAsync(Integer bodyParameter);
 
     /**
      * Test explicitly optional integer. Please put null.
@@ -171,7 +172,7 @@ public interface Explicits {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, Error>> postRequiredIntegerPropertyWithRestResponseAsync(@NonNull IntWrapper bodyParameter);
+    Single<BodyResponse<Error>> postRequiredIntegerPropertyWithRestResponseAsync(@NonNull IntWrapper bodyParameter);
 
     /**
      * Test explicitly required integer. Please put a valid int-wrapper with 'value' = null and the client library should throw before the request is sent.
@@ -204,7 +205,7 @@ public interface Explicits {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, Void>> postOptionalIntegerPropertyWithRestResponseAsync();
+    Single<VoidResponse> postOptionalIntegerPropertyWithRestResponseAsync();
 
     /**
      * Test explicitly optional integer. Please put a valid int-wrapper with 'value' = null.
@@ -240,7 +241,7 @@ public interface Explicits {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, Void>> postOptionalIntegerPropertyWithRestResponseAsync(IntOptionalWrapper bodyParameter);
+    Single<VoidResponse> postOptionalIntegerPropertyWithRestResponseAsync(IntOptionalWrapper bodyParameter);
 
     /**
      * Test explicitly optional integer. Please put a valid int-wrapper with 'value' = null.
@@ -279,7 +280,7 @@ public interface Explicits {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, Error>> postRequiredIntegerHeaderWithRestResponseAsync(@NonNull int headerParameter);
+    Single<BodyResponse<Error>> postRequiredIntegerHeaderWithRestResponseAsync(@NonNull int headerParameter);
 
     /**
      * Test explicitly required integer. Please put a header 'headerParameter' =&gt; null and the client library should throw before the request is sent.
@@ -312,7 +313,7 @@ public interface Explicits {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, Void>> postOptionalIntegerHeaderWithRestResponseAsync();
+    Single<VoidResponse> postOptionalIntegerHeaderWithRestResponseAsync();
 
     /**
      * Test explicitly optional integer. Please put a header 'headerParameter' =&gt; null.
@@ -348,7 +349,7 @@ public interface Explicits {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, Void>> postOptionalIntegerHeaderWithRestResponseAsync(Integer headerParameter);
+    Single<VoidResponse> postOptionalIntegerHeaderWithRestResponseAsync(Integer headerParameter);
 
     /**
      * Test explicitly optional integer. Please put a header 'headerParameter' =&gt; null.
@@ -387,7 +388,7 @@ public interface Explicits {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, Error>> postRequiredStringParameterWithRestResponseAsync(@NonNull String bodyParameter);
+    Single<BodyResponse<Error>> postRequiredStringParameterWithRestResponseAsync(@NonNull String bodyParameter);
 
     /**
      * Test explicitly required string. Please put null and the client library should throw before the request is sent.
@@ -420,7 +421,7 @@ public interface Explicits {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, Void>> postOptionalStringParameterWithRestResponseAsync();
+    Single<VoidResponse> postOptionalStringParameterWithRestResponseAsync();
 
     /**
      * Test explicitly optional string. Please put null.
@@ -456,7 +457,7 @@ public interface Explicits {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, Void>> postOptionalStringParameterWithRestResponseAsync(String bodyParameter);
+    Single<VoidResponse> postOptionalStringParameterWithRestResponseAsync(String bodyParameter);
 
     /**
      * Test explicitly optional string. Please put null.
@@ -495,7 +496,7 @@ public interface Explicits {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, Error>> postRequiredStringPropertyWithRestResponseAsync(@NonNull StringWrapper bodyParameter);
+    Single<BodyResponse<Error>> postRequiredStringPropertyWithRestResponseAsync(@NonNull StringWrapper bodyParameter);
 
     /**
      * Test explicitly required string. Please put a valid string-wrapper with 'value' = null and the client library should throw before the request is sent.
@@ -528,7 +529,7 @@ public interface Explicits {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, Void>> postOptionalStringPropertyWithRestResponseAsync();
+    Single<VoidResponse> postOptionalStringPropertyWithRestResponseAsync();
 
     /**
      * Test explicitly optional integer. Please put a valid string-wrapper with 'value' = null.
@@ -564,7 +565,7 @@ public interface Explicits {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, Void>> postOptionalStringPropertyWithRestResponseAsync(StringOptionalWrapper bodyParameter);
+    Single<VoidResponse> postOptionalStringPropertyWithRestResponseAsync(StringOptionalWrapper bodyParameter);
 
     /**
      * Test explicitly optional integer. Please put a valid string-wrapper with 'value' = null.
@@ -603,7 +604,7 @@ public interface Explicits {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, Error>> postRequiredStringHeaderWithRestResponseAsync(@NonNull String headerParameter);
+    Single<BodyResponse<Error>> postRequiredStringHeaderWithRestResponseAsync(@NonNull String headerParameter);
 
     /**
      * Test explicitly required string. Please put a header 'headerParameter' =&gt; null and the client library should throw before the request is sent.
@@ -636,7 +637,7 @@ public interface Explicits {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, Void>> postOptionalStringHeaderWithRestResponseAsync();
+    Single<VoidResponse> postOptionalStringHeaderWithRestResponseAsync();
 
     /**
      * Test explicitly optional string. Please put a header 'headerParameter' =&gt; null.
@@ -672,7 +673,7 @@ public interface Explicits {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, Void>> postOptionalStringHeaderWithRestResponseAsync(String bodyParameter);
+    Single<VoidResponse> postOptionalStringHeaderWithRestResponseAsync(String bodyParameter);
 
     /**
      * Test explicitly optional string. Please put a header 'headerParameter' =&gt; null.
@@ -711,7 +712,7 @@ public interface Explicits {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, Error>> postRequiredClassParameterWithRestResponseAsync(@NonNull Product bodyParameter);
+    Single<BodyResponse<Error>> postRequiredClassParameterWithRestResponseAsync(@NonNull Product bodyParameter);
 
     /**
      * Test explicitly required complex object. Please put null and the client library should throw before the request is sent.
@@ -744,7 +745,7 @@ public interface Explicits {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, Void>> postOptionalClassParameterWithRestResponseAsync();
+    Single<VoidResponse> postOptionalClassParameterWithRestResponseAsync();
 
     /**
      * Test explicitly optional complex object. Please put null.
@@ -780,7 +781,7 @@ public interface Explicits {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, Void>> postOptionalClassParameterWithRestResponseAsync(Product bodyParameter);
+    Single<VoidResponse> postOptionalClassParameterWithRestResponseAsync(Product bodyParameter);
 
     /**
      * Test explicitly optional complex object. Please put null.
@@ -819,7 +820,7 @@ public interface Explicits {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, Error>> postRequiredClassPropertyWithRestResponseAsync(@NonNull ClassWrapper bodyParameter);
+    Single<BodyResponse<Error>> postRequiredClassPropertyWithRestResponseAsync(@NonNull ClassWrapper bodyParameter);
 
     /**
      * Test explicitly required complex object. Please put a valid class-wrapper with 'value' = null and the client library should throw before the request is sent.
@@ -852,7 +853,7 @@ public interface Explicits {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, Void>> postOptionalClassPropertyWithRestResponseAsync();
+    Single<VoidResponse> postOptionalClassPropertyWithRestResponseAsync();
 
     /**
      * Test explicitly optional complex object. Please put a valid class-wrapper with 'value' = null.
@@ -888,7 +889,7 @@ public interface Explicits {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, Void>> postOptionalClassPropertyWithRestResponseAsync(ClassOptionalWrapper bodyParameter);
+    Single<VoidResponse> postOptionalClassPropertyWithRestResponseAsync(ClassOptionalWrapper bodyParameter);
 
     /**
      * Test explicitly optional complex object. Please put a valid class-wrapper with 'value' = null.
@@ -927,7 +928,7 @@ public interface Explicits {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, Error>> postRequiredArrayParameterWithRestResponseAsync(@NonNull List<String> bodyParameter);
+    Single<BodyResponse<Error>> postRequiredArrayParameterWithRestResponseAsync(@NonNull List<String> bodyParameter);
 
     /**
      * Test explicitly required array. Please put null and the client library should throw before the request is sent.
@@ -960,7 +961,7 @@ public interface Explicits {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, Void>> postOptionalArrayParameterWithRestResponseAsync();
+    Single<VoidResponse> postOptionalArrayParameterWithRestResponseAsync();
 
     /**
      * Test explicitly optional array. Please put null.
@@ -996,7 +997,7 @@ public interface Explicits {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, Void>> postOptionalArrayParameterWithRestResponseAsync(List<String> bodyParameter);
+    Single<VoidResponse> postOptionalArrayParameterWithRestResponseAsync(List<String> bodyParameter);
 
     /**
      * Test explicitly optional array. Please put null.
@@ -1035,7 +1036,7 @@ public interface Explicits {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, Error>> postRequiredArrayPropertyWithRestResponseAsync(@NonNull ArrayWrapper bodyParameter);
+    Single<BodyResponse<Error>> postRequiredArrayPropertyWithRestResponseAsync(@NonNull ArrayWrapper bodyParameter);
 
     /**
      * Test explicitly required array. Please put a valid array-wrapper with 'value' = null and the client library should throw before the request is sent.
@@ -1068,7 +1069,7 @@ public interface Explicits {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, Void>> postOptionalArrayPropertyWithRestResponseAsync();
+    Single<VoidResponse> postOptionalArrayPropertyWithRestResponseAsync();
 
     /**
      * Test explicitly optional array. Please put a valid array-wrapper with 'value' = null.
@@ -1104,7 +1105,7 @@ public interface Explicits {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, Void>> postOptionalArrayPropertyWithRestResponseAsync(ArrayOptionalWrapper bodyParameter);
+    Single<VoidResponse> postOptionalArrayPropertyWithRestResponseAsync(ArrayOptionalWrapper bodyParameter);
 
     /**
      * Test explicitly optional array. Please put a valid array-wrapper with 'value' = null.
@@ -1143,7 +1144,7 @@ public interface Explicits {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, Error>> postRequiredArrayHeaderWithRestResponseAsync(@NonNull List<String> headerParameter);
+    Single<BodyResponse<Error>> postRequiredArrayHeaderWithRestResponseAsync(@NonNull List<String> headerParameter);
 
     /**
      * Test explicitly required array. Please put a header 'headerParameter' =&gt; null and the client library should throw before the request is sent.
@@ -1176,7 +1177,7 @@ public interface Explicits {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, Void>> postOptionalArrayHeaderWithRestResponseAsync();
+    Single<VoidResponse> postOptionalArrayHeaderWithRestResponseAsync();
 
     /**
      * Test explicitly optional integer. Please put a header 'headerParameter' =&gt; null.
@@ -1212,7 +1213,7 @@ public interface Explicits {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, Void>> postOptionalArrayHeaderWithRestResponseAsync(List<String> headerParameter);
+    Single<VoidResponse> postOptionalArrayHeaderWithRestResponseAsync(List<String> headerParameter);
 
     /**
      * Test explicitly optional integer. Please put a header 'headerParameter' =&gt; null.

@@ -10,12 +10,13 @@
 
 package fixtures.modelflattening.implementation;
 
+import com.microsoft.rest.v2.BodyResponse;
 import com.microsoft.rest.v2.RestProxy;
-import com.microsoft.rest.v2.RestResponse;
 import com.microsoft.rest.v2.ServiceCallback;
 import com.microsoft.rest.v2.ServiceClient;
 import com.microsoft.rest.v2.ServiceFuture;
 import com.microsoft.rest.v2.Validator;
+import com.microsoft.rest.v2.VoidResponse;
 import com.microsoft.rest.v2.annotations.BodyParam;
 import com.microsoft.rest.v2.annotations.ExpectedResponses;
 import com.microsoft.rest.v2.annotations.GET;
@@ -80,57 +81,57 @@ public final class AutoRestResourceFlatteningTestServiceImpl extends ServiceClie
         @PUT("model-flatten/array")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<RestResponse<Void, Void>> putArray(@BodyParam("application/json; charset=utf-8") List<Resource> resourceArray);
+        Single<VoidResponse> putArray(@BodyParam("application/json; charset=utf-8") List<Resource> resourceArray);
 
         @GET("model-flatten/array")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<RestResponse<Void, List<FlattenedProduct>>> getArray();
+        Single<BodyResponse<List<FlattenedProduct>>> getArray();
 
         @PUT("model-flatten/wrappedarray")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<RestResponse<Void, Void>> putWrappedArray(@BodyParam("application/json; charset=utf-8") List<WrappedProduct> resourceArray);
+        Single<VoidResponse> putWrappedArray(@BodyParam("application/json; charset=utf-8") List<WrappedProduct> resourceArray);
 
         @GET("model-flatten/wrappedarray")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<RestResponse<Void, List<ProductWrapper>>> getWrappedArray();
+        Single<BodyResponse<List<ProductWrapper>>> getWrappedArray();
 
         @PUT("model-flatten/dictionary")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<RestResponse<Void, Void>> putDictionary(@BodyParam("application/json; charset=utf-8") Map<String, FlattenedProduct> resourceDictionary);
+        Single<VoidResponse> putDictionary(@BodyParam("application/json; charset=utf-8") Map<String, FlattenedProduct> resourceDictionary);
 
         @GET("model-flatten/dictionary")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<RestResponse<Void, Map<String, FlattenedProduct>>> getDictionary();
+        Single<BodyResponse<Map<String, FlattenedProduct>>> getDictionary();
 
         @PUT("model-flatten/resourcecollection")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<RestResponse<Void, Void>> putResourceCollection(@BodyParam("application/json; charset=utf-8") ResourceCollection resourceComplexObject);
+        Single<VoidResponse> putResourceCollection(@BodyParam("application/json; charset=utf-8") ResourceCollection resourceComplexObject);
 
         @GET("model-flatten/resourcecollection")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<RestResponse<Void, ResourceCollection>> getResourceCollection();
+        Single<BodyResponse<ResourceCollection>> getResourceCollection();
 
         @PUT("model-flatten/customFlattening")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<RestResponse<Void, SimpleProduct>> putSimpleProduct(@BodyParam("application/json; charset=utf-8") SimpleProduct simpleBodyProduct);
+        Single<BodyResponse<SimpleProduct>> putSimpleProduct(@BodyParam("application/json; charset=utf-8") SimpleProduct simpleBodyProduct);
 
         @POST("model-flatten/customFlattening")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<RestResponse<Void, SimpleProduct>> postFlattenedSimpleProduct(@BodyParam("application/json; charset=utf-8") SimpleProduct simpleBodyProduct);
+        Single<BodyResponse<SimpleProduct>> postFlattenedSimpleProduct(@BodyParam("application/json; charset=utf-8") SimpleProduct simpleBodyProduct);
 
         @PUT("model-flatten/customFlattening/parametergrouping/{name}/")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<RestResponse<Void, SimpleProduct>> putSimpleProductWithGrouping(@PathParam("name") String name, @BodyParam("application/json; charset=utf-8") SimpleProduct simpleBodyProduct);
+        Single<BodyResponse<SimpleProduct>> putSimpleProductWithGrouping(@PathParam("name") String name, @BodyParam("application/json; charset=utf-8") SimpleProduct simpleBodyProduct);
     }
 
     /**
@@ -159,7 +160,7 @@ public final class AutoRestResourceFlatteningTestServiceImpl extends ServiceClie
      *
      * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<Void, Void>> putArrayWithRestResponseAsync() {
+    public Single<VoidResponse> putArrayWithRestResponseAsync() {
         final List<Resource> resourceArray = null;
         return service.putArray(resourceArray);
     }
@@ -205,7 +206,7 @@ public final class AutoRestResourceFlatteningTestServiceImpl extends ServiceClie
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<Void, Void>> putArrayWithRestResponseAsync(List<Resource> resourceArray) {
+    public Single<VoidResponse> putArrayWithRestResponseAsync(List<Resource> resourceArray) {
         Validator.validate(resourceArray);
         return service.putArray(resourceArray);
     }
@@ -249,7 +250,7 @@ public final class AutoRestResourceFlatteningTestServiceImpl extends ServiceClie
      *
      * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<Void, List<FlattenedProduct>>> getArrayWithRestResponseAsync() {
+    public Single<BodyResponse<List<FlattenedProduct>>> getArrayWithRestResponseAsync() {
         return service.getArray();
     }
 
@@ -260,15 +261,7 @@ public final class AutoRestResourceFlatteningTestServiceImpl extends ServiceClie
      */
     public Maybe<List<FlattenedProduct>> getArrayAsync() {
         return getArrayWithRestResponseAsync()
-            .flatMapMaybe(new Function<RestResponse<Void, List<FlattenedProduct>>, Maybe<List<FlattenedProduct>>>() {
-                public Maybe<List<FlattenedProduct>> apply(RestResponse<Void, List<FlattenedProduct>> restResponse) {
-                    if (restResponse.body() == null) {
-                        return Maybe.empty();
-                    } else {
-                        return Maybe.just(restResponse.body());
-                    }
-                }
-            });
+            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -297,7 +290,7 @@ public final class AutoRestResourceFlatteningTestServiceImpl extends ServiceClie
      *
      * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<Void, Void>> putWrappedArrayWithRestResponseAsync() {
+    public Single<VoidResponse> putWrappedArrayWithRestResponseAsync() {
         final List<WrappedProduct> resourceArray = null;
         return service.putWrappedArray(resourceArray);
     }
@@ -343,7 +336,7 @@ public final class AutoRestResourceFlatteningTestServiceImpl extends ServiceClie
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<Void, Void>> putWrappedArrayWithRestResponseAsync(List<WrappedProduct> resourceArray) {
+    public Single<VoidResponse> putWrappedArrayWithRestResponseAsync(List<WrappedProduct> resourceArray) {
         Validator.validate(resourceArray);
         return service.putWrappedArray(resourceArray);
     }
@@ -387,7 +380,7 @@ public final class AutoRestResourceFlatteningTestServiceImpl extends ServiceClie
      *
      * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<Void, List<ProductWrapper>>> getWrappedArrayWithRestResponseAsync() {
+    public Single<BodyResponse<List<ProductWrapper>>> getWrappedArrayWithRestResponseAsync() {
         return service.getWrappedArray();
     }
 
@@ -398,15 +391,7 @@ public final class AutoRestResourceFlatteningTestServiceImpl extends ServiceClie
      */
     public Maybe<List<ProductWrapper>> getWrappedArrayAsync() {
         return getWrappedArrayWithRestResponseAsync()
-            .flatMapMaybe(new Function<RestResponse<Void, List<ProductWrapper>>, Maybe<List<ProductWrapper>>>() {
-                public Maybe<List<ProductWrapper>> apply(RestResponse<Void, List<ProductWrapper>> restResponse) {
-                    if (restResponse.body() == null) {
-                        return Maybe.empty();
-                    } else {
-                        return Maybe.just(restResponse.body());
-                    }
-                }
-            });
+            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -435,7 +420,7 @@ public final class AutoRestResourceFlatteningTestServiceImpl extends ServiceClie
      *
      * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<Void, Void>> putDictionaryWithRestResponseAsync() {
+    public Single<VoidResponse> putDictionaryWithRestResponseAsync() {
         final Map<String, FlattenedProduct> resourceDictionary = null;
         return service.putDictionary(resourceDictionary);
     }
@@ -481,7 +466,7 @@ public final class AutoRestResourceFlatteningTestServiceImpl extends ServiceClie
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<Void, Void>> putDictionaryWithRestResponseAsync(Map<String, FlattenedProduct> resourceDictionary) {
+    public Single<VoidResponse> putDictionaryWithRestResponseAsync(Map<String, FlattenedProduct> resourceDictionary) {
         Validator.validate(resourceDictionary);
         return service.putDictionary(resourceDictionary);
     }
@@ -525,7 +510,7 @@ public final class AutoRestResourceFlatteningTestServiceImpl extends ServiceClie
      *
      * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<Void, Map<String, FlattenedProduct>>> getDictionaryWithRestResponseAsync() {
+    public Single<BodyResponse<Map<String, FlattenedProduct>>> getDictionaryWithRestResponseAsync() {
         return service.getDictionary();
     }
 
@@ -536,15 +521,7 @@ public final class AutoRestResourceFlatteningTestServiceImpl extends ServiceClie
      */
     public Maybe<Map<String, FlattenedProduct>> getDictionaryAsync() {
         return getDictionaryWithRestResponseAsync()
-            .flatMapMaybe(new Function<RestResponse<Void, Map<String, FlattenedProduct>>, Maybe<Map<String, FlattenedProduct>>>() {
-                public Maybe<Map<String, FlattenedProduct>> apply(RestResponse<Void, Map<String, FlattenedProduct>> restResponse) {
-                    if (restResponse.body() == null) {
-                        return Maybe.empty();
-                    } else {
-                        return Maybe.just(restResponse.body());
-                    }
-                }
-            });
+            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -573,7 +550,7 @@ public final class AutoRestResourceFlatteningTestServiceImpl extends ServiceClie
      *
      * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<Void, Void>> putResourceCollectionWithRestResponseAsync() {
+    public Single<VoidResponse> putResourceCollectionWithRestResponseAsync() {
         final ResourceCollection resourceComplexObject = null;
         return service.putResourceCollection(resourceComplexObject);
     }
@@ -619,7 +596,7 @@ public final class AutoRestResourceFlatteningTestServiceImpl extends ServiceClie
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<Void, Void>> putResourceCollectionWithRestResponseAsync(ResourceCollection resourceComplexObject) {
+    public Single<VoidResponse> putResourceCollectionWithRestResponseAsync(ResourceCollection resourceComplexObject) {
         Validator.validate(resourceComplexObject);
         return service.putResourceCollection(resourceComplexObject);
     }
@@ -663,7 +640,7 @@ public final class AutoRestResourceFlatteningTestServiceImpl extends ServiceClie
      *
      * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<Void, ResourceCollection>> getResourceCollectionWithRestResponseAsync() {
+    public Single<BodyResponse<ResourceCollection>> getResourceCollectionWithRestResponseAsync() {
         return service.getResourceCollection();
     }
 
@@ -674,15 +651,7 @@ public final class AutoRestResourceFlatteningTestServiceImpl extends ServiceClie
      */
     public Maybe<ResourceCollection> getResourceCollectionAsync() {
         return getResourceCollectionWithRestResponseAsync()
-            .flatMapMaybe(new Function<RestResponse<Void, ResourceCollection>, Maybe<ResourceCollection>>() {
-                public Maybe<ResourceCollection> apply(RestResponse<Void, ResourceCollection> restResponse) {
-                    if (restResponse.body() == null) {
-                        return Maybe.empty();
-                    } else {
-                        return Maybe.just(restResponse.body());
-                    }
-                }
-            });
+            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -712,7 +681,7 @@ public final class AutoRestResourceFlatteningTestServiceImpl extends ServiceClie
      *
      * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<Void, SimpleProduct>> putSimpleProductWithRestResponseAsync() {
+    public Single<BodyResponse<SimpleProduct>> putSimpleProductWithRestResponseAsync() {
         final SimpleProduct simpleBodyProduct = null;
         return service.putSimpleProduct(simpleBodyProduct);
     }
@@ -724,15 +693,7 @@ public final class AutoRestResourceFlatteningTestServiceImpl extends ServiceClie
      */
     public Maybe<SimpleProduct> putSimpleProductAsync() {
         return putSimpleProductWithRestResponseAsync()
-            .flatMapMaybe(new Function<RestResponse<Void, SimpleProduct>, Maybe<SimpleProduct>>() {
-                public Maybe<SimpleProduct> apply(RestResponse<Void, SimpleProduct> restResponse) {
-                    if (restResponse.body() == null) {
-                        return Maybe.empty();
-                    } else {
-                        return Maybe.just(restResponse.body());
-                    }
-                }
-            });
+            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -767,7 +728,7 @@ public final class AutoRestResourceFlatteningTestServiceImpl extends ServiceClie
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<Void, SimpleProduct>> putSimpleProductWithRestResponseAsync(SimpleProduct simpleBodyProduct) {
+    public Single<BodyResponse<SimpleProduct>> putSimpleProductWithRestResponseAsync(SimpleProduct simpleBodyProduct) {
         Validator.validate(simpleBodyProduct);
         return service.putSimpleProduct(simpleBodyProduct);
     }
@@ -781,15 +742,7 @@ public final class AutoRestResourceFlatteningTestServiceImpl extends ServiceClie
      */
     public Maybe<SimpleProduct> putSimpleProductAsync(SimpleProduct simpleBodyProduct) {
         return putSimpleProductWithRestResponseAsync(simpleBodyProduct)
-            .flatMapMaybe(new Function<RestResponse<Void, SimpleProduct>, Maybe<SimpleProduct>>() {
-                public Maybe<SimpleProduct> apply(RestResponse<Void, SimpleProduct> restResponse) {
-                    if (restResponse.body() == null) {
-                        return Maybe.empty();
-                    } else {
-                        return Maybe.just(restResponse.body());
-                    }
-                }
-            });
+            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -827,7 +780,7 @@ public final class AutoRestResourceFlatteningTestServiceImpl extends ServiceClie
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<Void, SimpleProduct>> postFlattenedSimpleProductWithRestResponseAsync(@NonNull String productId, @NonNull String maxProductDisplayName) {
+    public Single<BodyResponse<SimpleProduct>> postFlattenedSimpleProductWithRestResponseAsync(@NonNull String productId, @NonNull String maxProductDisplayName) {
         if (productId == null) {
             throw new IllegalArgumentException("Parameter productId is required and cannot be null.");
         }
@@ -856,15 +809,7 @@ public final class AutoRestResourceFlatteningTestServiceImpl extends ServiceClie
      */
     public Maybe<SimpleProduct> postFlattenedSimpleProductAsync(@NonNull String productId, @NonNull String maxProductDisplayName) {
         return postFlattenedSimpleProductWithRestResponseAsync(productId, maxProductDisplayName)
-            .flatMapMaybe(new Function<RestResponse<Void, SimpleProduct>, Maybe<SimpleProduct>>() {
-                public Maybe<SimpleProduct> apply(RestResponse<Void, SimpleProduct> restResponse) {
-                    if (restResponse.body() == null) {
-                        return Maybe.empty();
-                    } else {
-                        return Maybe.just(restResponse.body());
-                    }
-                }
-            });
+            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -911,7 +856,7 @@ public final class AutoRestResourceFlatteningTestServiceImpl extends ServiceClie
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<Void, SimpleProduct>> postFlattenedSimpleProductWithRestResponseAsync(@NonNull String productId, @NonNull String maxProductDisplayName, String description, String genericValue, String odatavalue) {
+    public Single<BodyResponse<SimpleProduct>> postFlattenedSimpleProductWithRestResponseAsync(@NonNull String productId, @NonNull String maxProductDisplayName, String description, String genericValue, String odatavalue) {
         if (productId == null) {
             throw new IllegalArgumentException("Parameter productId is required and cannot be null.");
         }
@@ -943,15 +888,7 @@ public final class AutoRestResourceFlatteningTestServiceImpl extends ServiceClie
      */
     public Maybe<SimpleProduct> postFlattenedSimpleProductAsync(@NonNull String productId, @NonNull String maxProductDisplayName, String description, String genericValue, String odatavalue) {
         return postFlattenedSimpleProductWithRestResponseAsync(productId, maxProductDisplayName, description, genericValue, odatavalue)
-            .flatMapMaybe(new Function<RestResponse<Void, SimpleProduct>, Maybe<SimpleProduct>>() {
-                public Maybe<SimpleProduct> apply(RestResponse<Void, SimpleProduct> restResponse) {
-                    if (restResponse.body() == null) {
-                        return Maybe.empty();
-                    } else {
-                        return Maybe.just(restResponse.body());
-                    }
-                }
-            });
+            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -986,7 +923,7 @@ public final class AutoRestResourceFlatteningTestServiceImpl extends ServiceClie
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<Void, SimpleProduct>> putSimpleProductWithGroupingWithRestResponseAsync(@NonNull FlattenParameterGroup flattenParameterGroup) {
+    public Single<BodyResponse<SimpleProduct>> putSimpleProductWithGroupingWithRestResponseAsync(@NonNull FlattenParameterGroup flattenParameterGroup) {
         if (flattenParameterGroup == null) {
             throw new IllegalArgumentException("Parameter flattenParameterGroup is required and cannot be null.");
         }
@@ -1018,14 +955,6 @@ public final class AutoRestResourceFlatteningTestServiceImpl extends ServiceClie
      */
     public Maybe<SimpleProduct> putSimpleProductWithGroupingAsync(@NonNull FlattenParameterGroup flattenParameterGroup) {
         return putSimpleProductWithGroupingWithRestResponseAsync(flattenParameterGroup)
-            .flatMapMaybe(new Function<RestResponse<Void, SimpleProduct>, Maybe<SimpleProduct>>() {
-                public Maybe<SimpleProduct> apply(RestResponse<Void, SimpleProduct> restResponse) {
-                    if (restResponse.body() == null) {
-                        return Maybe.empty();
-                    } else {
-                        return Maybe.just(restResponse.body());
-                    }
-                }
-            });
+            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 }

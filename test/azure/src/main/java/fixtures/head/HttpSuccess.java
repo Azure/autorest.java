@@ -11,7 +11,7 @@
 package fixtures.head;
 
 import com.microsoft.azure.v2.CloudException;
-import com.microsoft.rest.v2.RestResponse;
+import com.microsoft.rest.v2.BodyResponse;
 import com.microsoft.rest.v2.ServiceCallback;
 import com.microsoft.rest.v2.ServiceFuture;
 import io.reactivex.Maybe;
@@ -45,7 +45,7 @@ public interface HttpSuccess {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, Boolean>> head200WithRestResponseAsync();
+    Single<BodyResponse<Boolean>> head200WithRestResponseAsync();
 
     /**
      * Return 200 status code if successful.
@@ -77,7 +77,7 @@ public interface HttpSuccess {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, Boolean>> head204WithRestResponseAsync();
+    Single<BodyResponse<Boolean>> head204WithRestResponseAsync();
 
     /**
      * Return 204 status code if successful.
@@ -109,7 +109,7 @@ public interface HttpSuccess {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, Boolean>> head404WithRestResponseAsync();
+    Single<BodyResponse<Boolean>> head404WithRestResponseAsync();
 
     /**
      * Return 404 status code if successful.

@@ -10,11 +10,12 @@
 
 package fixtures.bodyinteger.implementation;
 
+import com.microsoft.rest.v2.BodyResponse;
 import com.microsoft.rest.v2.RestProxy;
-import com.microsoft.rest.v2.RestResponse;
 import com.microsoft.rest.v2.ServiceCallback;
 import com.microsoft.rest.v2.ServiceFuture;
 import com.microsoft.rest.v2.UnixTime;
+import com.microsoft.rest.v2.VoidResponse;
 import com.microsoft.rest.v2.annotations.BodyParam;
 import com.microsoft.rest.v2.annotations.ExpectedResponses;
 import com.microsoft.rest.v2.annotations.GET;
@@ -66,75 +67,75 @@ public final class IntsImpl implements Ints {
         @GET("int/null")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<RestResponse<Void, Integer>> getNull();
+        Single<BodyResponse<Integer>> getNull();
 
         @GET("int/invalid")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<RestResponse<Void, Integer>> getInvalid();
+        Single<BodyResponse<Integer>> getInvalid();
 
         @GET("int/overflowint32")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<RestResponse<Void, Integer>> getOverflowInt32();
+        Single<BodyResponse<Integer>> getOverflowInt32();
 
         @GET("int/underflowint32")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<RestResponse<Void, Integer>> getUnderflowInt32();
+        Single<BodyResponse<Integer>> getUnderflowInt32();
 
         @GET("int/overflowint64")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<RestResponse<Void, Long>> getOverflowInt64();
+        Single<BodyResponse<Long>> getOverflowInt64();
 
         @GET("int/underflowint64")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<RestResponse<Void, Long>> getUnderflowInt64();
+        Single<BodyResponse<Long>> getUnderflowInt64();
 
         @PUT("int/max/32")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<RestResponse<Void, Void>> putMax32(@BodyParam("application/json; charset=utf-8") int intBody);
+        Single<VoidResponse> putMax32(@BodyParam("application/json; charset=utf-8") int intBody);
 
         @PUT("int/max/64")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<RestResponse<Void, Void>> putMax64(@BodyParam("application/json; charset=utf-8") long intBody);
+        Single<VoidResponse> putMax64(@BodyParam("application/json; charset=utf-8") long intBody);
 
         @PUT("int/min/32")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<RestResponse<Void, Void>> putMin32(@BodyParam("application/json; charset=utf-8") int intBody);
+        Single<VoidResponse> putMin32(@BodyParam("application/json; charset=utf-8") int intBody);
 
         @PUT("int/min/64")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<RestResponse<Void, Void>> putMin64(@BodyParam("application/json; charset=utf-8") long intBody);
+        Single<VoidResponse> putMin64(@BodyParam("application/json; charset=utf-8") long intBody);
 
         @GET("int/unixtime")
         @ExpectedResponses({200})
         @ReturnValueWireType(UnixTime.class)
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<RestResponse<Void, DateTime>> getUnixTime();
+        Single<BodyResponse<DateTime>> getUnixTime();
 
         @PUT("int/unixtime")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<RestResponse<Void, Void>> putUnixTimeDate(@BodyParam("application/json; charset=utf-8") long intBody);
+        Single<VoidResponse> putUnixTimeDate(@BodyParam("application/json; charset=utf-8") long intBody);
 
         @GET("int/invalidunixtime")
         @ExpectedResponses({200})
         @ReturnValueWireType(UnixTime.class)
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<RestResponse<Void, DateTime>> getInvalidUnixTime();
+        Single<BodyResponse<DateTime>> getInvalidUnixTime();
 
         @GET("int/nullunixtime")
         @ExpectedResponses({200})
         @ReturnValueWireType(UnixTime.class)
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<RestResponse<Void, DateTime>> getNullUnixTime();
+        Single<BodyResponse<DateTime>> getNullUnixTime();
     }
 
     /**
@@ -164,7 +165,7 @@ public final class IntsImpl implements Ints {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<Void, Integer>> getNullWithRestResponseAsync() {
+    public Single<BodyResponse<Integer>> getNullWithRestResponseAsync() {
         return service.getNull();
     }
 
@@ -175,15 +176,7 @@ public final class IntsImpl implements Ints {
      */
     public Maybe<Integer> getNullAsync() {
         return getNullWithRestResponseAsync()
-            .flatMapMaybe(new Function<RestResponse<Void, Integer>, Maybe<Integer>>() {
-                public Maybe<Integer> apply(RestResponse<Void, Integer> restResponse) {
-                    if (restResponse.body() == null) {
-                        return Maybe.empty();
-                    } else {
-                        return Maybe.just(restResponse.body());
-                    }
-                }
-            });
+            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -213,7 +206,7 @@ public final class IntsImpl implements Ints {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<Void, Integer>> getInvalidWithRestResponseAsync() {
+    public Single<BodyResponse<Integer>> getInvalidWithRestResponseAsync() {
         return service.getInvalid();
     }
 
@@ -224,15 +217,7 @@ public final class IntsImpl implements Ints {
      */
     public Maybe<Integer> getInvalidAsync() {
         return getInvalidWithRestResponseAsync()
-            .flatMapMaybe(new Function<RestResponse<Void, Integer>, Maybe<Integer>>() {
-                public Maybe<Integer> apply(RestResponse<Void, Integer> restResponse) {
-                    if (restResponse.body() == null) {
-                        return Maybe.empty();
-                    } else {
-                        return Maybe.just(restResponse.body());
-                    }
-                }
-            });
+            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -262,7 +247,7 @@ public final class IntsImpl implements Ints {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<Void, Integer>> getOverflowInt32WithRestResponseAsync() {
+    public Single<BodyResponse<Integer>> getOverflowInt32WithRestResponseAsync() {
         return service.getOverflowInt32();
     }
 
@@ -273,15 +258,7 @@ public final class IntsImpl implements Ints {
      */
     public Maybe<Integer> getOverflowInt32Async() {
         return getOverflowInt32WithRestResponseAsync()
-            .flatMapMaybe(new Function<RestResponse<Void, Integer>, Maybe<Integer>>() {
-                public Maybe<Integer> apply(RestResponse<Void, Integer> restResponse) {
-                    if (restResponse.body() == null) {
-                        return Maybe.empty();
-                    } else {
-                        return Maybe.just(restResponse.body());
-                    }
-                }
-            });
+            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -311,7 +288,7 @@ public final class IntsImpl implements Ints {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<Void, Integer>> getUnderflowInt32WithRestResponseAsync() {
+    public Single<BodyResponse<Integer>> getUnderflowInt32WithRestResponseAsync() {
         return service.getUnderflowInt32();
     }
 
@@ -322,15 +299,7 @@ public final class IntsImpl implements Ints {
      */
     public Maybe<Integer> getUnderflowInt32Async() {
         return getUnderflowInt32WithRestResponseAsync()
-            .flatMapMaybe(new Function<RestResponse<Void, Integer>, Maybe<Integer>>() {
-                public Maybe<Integer> apply(RestResponse<Void, Integer> restResponse) {
-                    if (restResponse.body() == null) {
-                        return Maybe.empty();
-                    } else {
-                        return Maybe.just(restResponse.body());
-                    }
-                }
-            });
+            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -360,7 +329,7 @@ public final class IntsImpl implements Ints {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<Void, Long>> getOverflowInt64WithRestResponseAsync() {
+    public Single<BodyResponse<Long>> getOverflowInt64WithRestResponseAsync() {
         return service.getOverflowInt64();
     }
 
@@ -371,15 +340,7 @@ public final class IntsImpl implements Ints {
      */
     public Maybe<Long> getOverflowInt64Async() {
         return getOverflowInt64WithRestResponseAsync()
-            .flatMapMaybe(new Function<RestResponse<Void, Long>, Maybe<Long>>() {
-                public Maybe<Long> apply(RestResponse<Void, Long> restResponse) {
-                    if (restResponse.body() == null) {
-                        return Maybe.empty();
-                    } else {
-                        return Maybe.just(restResponse.body());
-                    }
-                }
-            });
+            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -409,7 +370,7 @@ public final class IntsImpl implements Ints {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<Void, Long>> getUnderflowInt64WithRestResponseAsync() {
+    public Single<BodyResponse<Long>> getUnderflowInt64WithRestResponseAsync() {
         return service.getUnderflowInt64();
     }
 
@@ -420,15 +381,7 @@ public final class IntsImpl implements Ints {
      */
     public Maybe<Long> getUnderflowInt64Async() {
         return getUnderflowInt64WithRestResponseAsync()
-            .flatMapMaybe(new Function<RestResponse<Void, Long>, Maybe<Long>>() {
-                public Maybe<Long> apply(RestResponse<Void, Long> restResponse) {
-                    if (restResponse.body() == null) {
-                        return Maybe.empty();
-                    } else {
-                        return Maybe.just(restResponse.body());
-                    }
-                }
-            });
+            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -462,7 +415,7 @@ public final class IntsImpl implements Ints {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<Void, Void>> putMax32WithRestResponseAsync(@NonNull int intBody) {
+    public Single<VoidResponse> putMax32WithRestResponseAsync(@NonNull int intBody) {
         return service.putMax32(intBody);
     }
 
@@ -509,7 +462,7 @@ public final class IntsImpl implements Ints {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<Void, Void>> putMax64WithRestResponseAsync(@NonNull long intBody) {
+    public Single<VoidResponse> putMax64WithRestResponseAsync(@NonNull long intBody) {
         return service.putMax64(intBody);
     }
 
@@ -556,7 +509,7 @@ public final class IntsImpl implements Ints {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<Void, Void>> putMin32WithRestResponseAsync(@NonNull int intBody) {
+    public Single<VoidResponse> putMin32WithRestResponseAsync(@NonNull int intBody) {
         return service.putMin32(intBody);
     }
 
@@ -603,7 +556,7 @@ public final class IntsImpl implements Ints {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<Void, Void>> putMin64WithRestResponseAsync(@NonNull long intBody) {
+    public Single<VoidResponse> putMin64WithRestResponseAsync(@NonNull long intBody) {
         return service.putMin64(intBody);
     }
 
@@ -646,7 +599,7 @@ public final class IntsImpl implements Ints {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<Void, DateTime>> getUnixTimeWithRestResponseAsync() {
+    public Single<BodyResponse<DateTime>> getUnixTimeWithRestResponseAsync() {
         return service.getUnixTime();
     }
 
@@ -657,15 +610,7 @@ public final class IntsImpl implements Ints {
      */
     public Maybe<DateTime> getUnixTimeAsync() {
         return getUnixTimeWithRestResponseAsync()
-            .flatMapMaybe(new Function<RestResponse<Void, DateTime>, Maybe<DateTime>>() {
-                public Maybe<DateTime> apply(RestResponse<Void, DateTime> restResponse) {
-                    if (restResponse.body() == null) {
-                        return Maybe.empty();
-                    } else {
-                        return Maybe.just(restResponse.body());
-                    }
-                }
-            });
+            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -699,7 +644,7 @@ public final class IntsImpl implements Ints {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<Void, Void>> putUnixTimeDateWithRestResponseAsync(@NonNull DateTime intBody) {
+    public Single<VoidResponse> putUnixTimeDateWithRestResponseAsync(@NonNull DateTime intBody) {
         Long intBodyConverted = intBody.toDateTime(DateTimeZone.UTC).getMillis() / 1000;
         return service.putUnixTimeDate(intBodyConverted);
     }
@@ -743,7 +688,7 @@ public final class IntsImpl implements Ints {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<Void, DateTime>> getInvalidUnixTimeWithRestResponseAsync() {
+    public Single<BodyResponse<DateTime>> getInvalidUnixTimeWithRestResponseAsync() {
         return service.getInvalidUnixTime();
     }
 
@@ -754,15 +699,7 @@ public final class IntsImpl implements Ints {
      */
     public Maybe<DateTime> getInvalidUnixTimeAsync() {
         return getInvalidUnixTimeWithRestResponseAsync()
-            .flatMapMaybe(new Function<RestResponse<Void, DateTime>, Maybe<DateTime>>() {
-                public Maybe<DateTime> apply(RestResponse<Void, DateTime> restResponse) {
-                    if (restResponse.body() == null) {
-                        return Maybe.empty();
-                    } else {
-                        return Maybe.just(restResponse.body());
-                    }
-                }
-            });
+            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -792,7 +729,7 @@ public final class IntsImpl implements Ints {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<Void, DateTime>> getNullUnixTimeWithRestResponseAsync() {
+    public Single<BodyResponse<DateTime>> getNullUnixTimeWithRestResponseAsync() {
         return service.getNullUnixTime();
     }
 
@@ -803,14 +740,6 @@ public final class IntsImpl implements Ints {
      */
     public Maybe<DateTime> getNullUnixTimeAsync() {
         return getNullUnixTimeWithRestResponseAsync()
-            .flatMapMaybe(new Function<RestResponse<Void, DateTime>, Maybe<DateTime>>() {
-                public Maybe<DateTime> apply(RestResponse<Void, DateTime> restResponse) {
-                    if (restResponse.body() == null) {
-                        return Maybe.empty();
-                    } else {
-                        return Maybe.just(restResponse.body());
-                    }
-                }
-            });
+            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 }

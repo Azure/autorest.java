@@ -10,9 +10,10 @@
 
 package fixtures.bodystring;
 
-import com.microsoft.rest.v2.RestResponse;
+import com.microsoft.rest.v2.BodyResponse;
 import com.microsoft.rest.v2.ServiceCallback;
 import com.microsoft.rest.v2.ServiceFuture;
+import com.microsoft.rest.v2.VoidResponse;
 import fixtures.bodystring.models.Colors;
 import fixtures.bodystring.models.ErrorException;
 import fixtures.bodystring.models.RefColorConstant;
@@ -49,7 +50,7 @@ public interface Enums {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, Colors>> getNotExpandableWithRestResponseAsync();
+    Single<BodyResponse<Colors>> getNotExpandableWithRestResponseAsync();
 
     /**
      * Get enum value 'red color' from enumeration of 'red color', 'green-color', 'blue_color'.
@@ -85,7 +86,7 @@ public interface Enums {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, Void>> putNotExpandableWithRestResponseAsync(@NonNull Colors stringBody);
+    Single<VoidResponse> putNotExpandableWithRestResponseAsync(@NonNull Colors stringBody);
 
     /**
      * Sends value 'red color' from enumeration of 'red color', 'green-color', 'blue_color'.
@@ -119,7 +120,7 @@ public interface Enums {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, Colors>> getReferencedWithRestResponseAsync();
+    Single<BodyResponse<Colors>> getReferencedWithRestResponseAsync();
 
     /**
      * Get enum value 'red color' from enumeration of 'red color', 'green-color', 'blue_color'.
@@ -155,7 +156,7 @@ public interface Enums {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, Void>> putReferencedWithRestResponseAsync(@NonNull Colors enumStringBody);
+    Single<VoidResponse> putReferencedWithRestResponseAsync(@NonNull Colors enumStringBody);
 
     /**
      * Sends value 'red color' from enumeration of 'red color', 'green-color', 'blue_color'.
@@ -189,7 +190,7 @@ public interface Enums {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, RefColorConstant>> getReferencedConstantWithRestResponseAsync();
+    Single<BodyResponse<RefColorConstant>> getReferencedConstantWithRestResponseAsync();
 
     /**
      * Get value 'green-color' from the constant.
@@ -225,7 +226,7 @@ public interface Enums {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, Void>> putReferencedConstantWithRestResponseAsync(@NonNull RefColorConstant enumStringBody);
+    Single<VoidResponse> putReferencedConstantWithRestResponseAsync(@NonNull RefColorConstant enumStringBody);
 
     /**
      * Sends value 'green-color' from a constant.

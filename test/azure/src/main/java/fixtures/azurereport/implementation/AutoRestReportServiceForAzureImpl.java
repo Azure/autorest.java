@@ -13,7 +13,7 @@ package fixtures.azurereport.implementation;
 import com.microsoft.azure.v2.AzureEnvironment;
 import com.microsoft.azure.v2.AzureProxy;
 import com.microsoft.azure.v2.AzureServiceClient;
-import com.microsoft.rest.v2.RestResponse;
+import com.microsoft.rest.v2.BodyResponse;
 import com.microsoft.rest.v2.ServiceCallback;
 import com.microsoft.rest.v2.ServiceFuture;
 import com.microsoft.rest.v2.annotations.ExpectedResponses;
@@ -169,7 +169,7 @@ public final class AutoRestReportServiceForAzureImpl extends AzureServiceClient 
         @GET("report/azure")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<RestResponse<Void, Map<String, Integer>>> getReport(@QueryParam("qualifier") String qualifier, @HeaderParam("accept-language") String acceptLanguage);
+        Single<BodyResponse<Map<String, Integer>>> getReport(@QueryParam("qualifier") String qualifier, @HeaderParam("accept-language") String acceptLanguage);
     }
 
     /**
@@ -199,7 +199,7 @@ public final class AutoRestReportServiceForAzureImpl extends AzureServiceClient 
      *
      * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<Void, Map<String, Integer>>> getReportWithRestResponseAsync() {
+    public Single<BodyResponse<Map<String, Integer>>> getReportWithRestResponseAsync() {
         final String qualifier = null;
         return service.getReport(qualifier, this.acceptLanguage());
     }
@@ -211,15 +211,7 @@ public final class AutoRestReportServiceForAzureImpl extends AzureServiceClient 
      */
     public Maybe<Map<String, Integer>> getReportAsync() {
         return getReportWithRestResponseAsync()
-            .flatMapMaybe(new Function<RestResponse<Void, Map<String, Integer>>, Maybe<Map<String, Integer>>>() {
-                public Maybe<Map<String, Integer>> apply(RestResponse<Void, Map<String, Integer>> restResponse) {
-                    if (restResponse.body() == null) {
-                        return Maybe.empty();
-                    } else {
-                        return Maybe.just(restResponse.body());
-                    }
-                }
-            });
+            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -254,7 +246,7 @@ public final class AutoRestReportServiceForAzureImpl extends AzureServiceClient 
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<Void, Map<String, Integer>>> getReportWithRestResponseAsync(String qualifier) {
+    public Single<BodyResponse<Map<String, Integer>>> getReportWithRestResponseAsync(String qualifier) {
         return service.getReport(qualifier, this.acceptLanguage());
     }
 
@@ -267,14 +259,6 @@ public final class AutoRestReportServiceForAzureImpl extends AzureServiceClient 
      */
     public Maybe<Map<String, Integer>> getReportAsync(String qualifier) {
         return getReportWithRestResponseAsync(qualifier)
-            .flatMapMaybe(new Function<RestResponse<Void, Map<String, Integer>>, Maybe<Map<String, Integer>>>() {
-                public Maybe<Map<String, Integer>> apply(RestResponse<Void, Map<String, Integer>> restResponse) {
-                    if (restResponse.body() == null) {
-                        return Maybe.empty();
-                    } else {
-                        return Maybe.just(restResponse.body());
-                    }
-                }
-            });
+            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 }

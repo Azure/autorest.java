@@ -10,10 +10,11 @@
 
 package fixtures.bodydate.implementation;
 
+import com.microsoft.rest.v2.BodyResponse;
 import com.microsoft.rest.v2.RestProxy;
-import com.microsoft.rest.v2.RestResponse;
 import com.microsoft.rest.v2.ServiceCallback;
 import com.microsoft.rest.v2.ServiceFuture;
+import com.microsoft.rest.v2.VoidResponse;
 import com.microsoft.rest.v2.annotations.BodyParam;
 import com.microsoft.rest.v2.annotations.ExpectedResponses;
 import com.microsoft.rest.v2.annotations.GET;
@@ -63,42 +64,42 @@ public final class DatesImpl implements Dates {
         @GET("date/null")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<RestResponse<Void, LocalDate>> getNull();
+        Single<BodyResponse<LocalDate>> getNull();
 
         @GET("date/invaliddate")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<RestResponse<Void, LocalDate>> getInvalidDate();
+        Single<BodyResponse<LocalDate>> getInvalidDate();
 
         @GET("date/overflowdate")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<RestResponse<Void, LocalDate>> getOverflowDate();
+        Single<BodyResponse<LocalDate>> getOverflowDate();
 
         @GET("date/underflowdate")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<RestResponse<Void, LocalDate>> getUnderflowDate();
+        Single<BodyResponse<LocalDate>> getUnderflowDate();
 
         @PUT("date/max")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<RestResponse<Void, Void>> putMaxDate(@BodyParam("application/json; charset=utf-8") LocalDate dateBody);
+        Single<VoidResponse> putMaxDate(@BodyParam("application/json; charset=utf-8") LocalDate dateBody);
 
         @GET("date/max")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<RestResponse<Void, LocalDate>> getMaxDate();
+        Single<BodyResponse<LocalDate>> getMaxDate();
 
         @PUT("date/min")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<RestResponse<Void, Void>> putMinDate(@BodyParam("application/json; charset=utf-8") LocalDate dateBody);
+        Single<VoidResponse> putMinDate(@BodyParam("application/json; charset=utf-8") LocalDate dateBody);
 
         @GET("date/min")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<RestResponse<Void, LocalDate>> getMinDate();
+        Single<BodyResponse<LocalDate>> getMinDate();
     }
 
     /**
@@ -128,7 +129,7 @@ public final class DatesImpl implements Dates {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<Void, LocalDate>> getNullWithRestResponseAsync() {
+    public Single<BodyResponse<LocalDate>> getNullWithRestResponseAsync() {
         return service.getNull();
     }
 
@@ -139,15 +140,7 @@ public final class DatesImpl implements Dates {
      */
     public Maybe<LocalDate> getNullAsync() {
         return getNullWithRestResponseAsync()
-            .flatMapMaybe(new Function<RestResponse<Void, LocalDate>, Maybe<LocalDate>>() {
-                public Maybe<LocalDate> apply(RestResponse<Void, LocalDate> restResponse) {
-                    if (restResponse.body() == null) {
-                        return Maybe.empty();
-                    } else {
-                        return Maybe.just(restResponse.body());
-                    }
-                }
-            });
+            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -177,7 +170,7 @@ public final class DatesImpl implements Dates {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<Void, LocalDate>> getInvalidDateWithRestResponseAsync() {
+    public Single<BodyResponse<LocalDate>> getInvalidDateWithRestResponseAsync() {
         return service.getInvalidDate();
     }
 
@@ -188,15 +181,7 @@ public final class DatesImpl implements Dates {
      */
     public Maybe<LocalDate> getInvalidDateAsync() {
         return getInvalidDateWithRestResponseAsync()
-            .flatMapMaybe(new Function<RestResponse<Void, LocalDate>, Maybe<LocalDate>>() {
-                public Maybe<LocalDate> apply(RestResponse<Void, LocalDate> restResponse) {
-                    if (restResponse.body() == null) {
-                        return Maybe.empty();
-                    } else {
-                        return Maybe.just(restResponse.body());
-                    }
-                }
-            });
+            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -226,7 +211,7 @@ public final class DatesImpl implements Dates {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<Void, LocalDate>> getOverflowDateWithRestResponseAsync() {
+    public Single<BodyResponse<LocalDate>> getOverflowDateWithRestResponseAsync() {
         return service.getOverflowDate();
     }
 
@@ -237,15 +222,7 @@ public final class DatesImpl implements Dates {
      */
     public Maybe<LocalDate> getOverflowDateAsync() {
         return getOverflowDateWithRestResponseAsync()
-            .flatMapMaybe(new Function<RestResponse<Void, LocalDate>, Maybe<LocalDate>>() {
-                public Maybe<LocalDate> apply(RestResponse<Void, LocalDate> restResponse) {
-                    if (restResponse.body() == null) {
-                        return Maybe.empty();
-                    } else {
-                        return Maybe.just(restResponse.body());
-                    }
-                }
-            });
+            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -275,7 +252,7 @@ public final class DatesImpl implements Dates {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<Void, LocalDate>> getUnderflowDateWithRestResponseAsync() {
+    public Single<BodyResponse<LocalDate>> getUnderflowDateWithRestResponseAsync() {
         return service.getUnderflowDate();
     }
 
@@ -286,15 +263,7 @@ public final class DatesImpl implements Dates {
      */
     public Maybe<LocalDate> getUnderflowDateAsync() {
         return getUnderflowDateWithRestResponseAsync()
-            .flatMapMaybe(new Function<RestResponse<Void, LocalDate>, Maybe<LocalDate>>() {
-                public Maybe<LocalDate> apply(RestResponse<Void, LocalDate> restResponse) {
-                    if (restResponse.body() == null) {
-                        return Maybe.empty();
-                    } else {
-                        return Maybe.just(restResponse.body());
-                    }
-                }
-            });
+            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -328,7 +297,7 @@ public final class DatesImpl implements Dates {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<Void, Void>> putMaxDateWithRestResponseAsync(@NonNull LocalDate dateBody) {
+    public Single<VoidResponse> putMaxDateWithRestResponseAsync(@NonNull LocalDate dateBody) {
         if (dateBody == null) {
             throw new IllegalArgumentException("Parameter dateBody is required and cannot be null.");
         }
@@ -374,7 +343,7 @@ public final class DatesImpl implements Dates {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<Void, LocalDate>> getMaxDateWithRestResponseAsync() {
+    public Single<BodyResponse<LocalDate>> getMaxDateWithRestResponseAsync() {
         return service.getMaxDate();
     }
 
@@ -385,15 +354,7 @@ public final class DatesImpl implements Dates {
      */
     public Maybe<LocalDate> getMaxDateAsync() {
         return getMaxDateWithRestResponseAsync()
-            .flatMapMaybe(new Function<RestResponse<Void, LocalDate>, Maybe<LocalDate>>() {
-                public Maybe<LocalDate> apply(RestResponse<Void, LocalDate> restResponse) {
-                    if (restResponse.body() == null) {
-                        return Maybe.empty();
-                    } else {
-                        return Maybe.just(restResponse.body());
-                    }
-                }
-            });
+            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -427,7 +388,7 @@ public final class DatesImpl implements Dates {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<Void, Void>> putMinDateWithRestResponseAsync(@NonNull LocalDate dateBody) {
+    public Single<VoidResponse> putMinDateWithRestResponseAsync(@NonNull LocalDate dateBody) {
         if (dateBody == null) {
             throw new IllegalArgumentException("Parameter dateBody is required and cannot be null.");
         }
@@ -473,7 +434,7 @@ public final class DatesImpl implements Dates {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<Void, LocalDate>> getMinDateWithRestResponseAsync() {
+    public Single<BodyResponse<LocalDate>> getMinDateWithRestResponseAsync() {
         return service.getMinDate();
     }
 
@@ -484,14 +445,6 @@ public final class DatesImpl implements Dates {
      */
     public Maybe<LocalDate> getMinDateAsync() {
         return getMinDateWithRestResponseAsync()
-            .flatMapMaybe(new Function<RestResponse<Void, LocalDate>, Maybe<LocalDate>>() {
-                public Maybe<LocalDate> apply(RestResponse<Void, LocalDate> restResponse) {
-                    if (restResponse.body() == null) {
-                        return Maybe.empty();
-                    } else {
-                        return Maybe.just(restResponse.body());
-                    }
-                }
-            });
+            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 }

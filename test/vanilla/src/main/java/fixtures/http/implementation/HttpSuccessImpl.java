@@ -10,10 +10,11 @@
 
 package fixtures.http.implementation;
 
+import com.microsoft.rest.v2.BodyResponse;
 import com.microsoft.rest.v2.RestProxy;
-import com.microsoft.rest.v2.RestResponse;
 import com.microsoft.rest.v2.ServiceCallback;
 import com.microsoft.rest.v2.ServiceFuture;
+import com.microsoft.rest.v2.VoidResponse;
 import com.microsoft.rest.v2.annotations.BodyParam;
 import com.microsoft.rest.v2.annotations.DELETE;
 import com.microsoft.rest.v2.annotations.ExpectedResponses;
@@ -65,92 +66,92 @@ public final class HttpSuccessImpl implements HttpSuccess {
         @HEAD("http/success/200")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<RestResponse<Void, Void>> head200();
+        Single<VoidResponse> head200();
 
         @GET("http/success/200")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<RestResponse<Void, Boolean>> get200();
+        Single<BodyResponse<Boolean>> get200();
 
         @PUT("http/success/200")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<RestResponse<Void, Void>> put200(@BodyParam("application/json; charset=utf-8") Boolean booleanValue);
+        Single<VoidResponse> put200(@BodyParam("application/json; charset=utf-8") Boolean booleanValue);
 
         @PATCH("http/success/200")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<RestResponse<Void, Void>> patch200(@BodyParam("application/json; charset=utf-8") Boolean booleanValue);
+        Single<VoidResponse> patch200(@BodyParam("application/json; charset=utf-8") Boolean booleanValue);
 
         @POST("http/success/200")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<RestResponse<Void, Void>> post200(@BodyParam("application/json; charset=utf-8") Boolean booleanValue);
+        Single<VoidResponse> post200(@BodyParam("application/json; charset=utf-8") Boolean booleanValue);
 
         @DELETE("http/success/200")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<RestResponse<Void, Void>> delete200(@BodyParam("application/json; charset=utf-8") Boolean booleanValue);
+        Single<VoidResponse> delete200(@BodyParam("application/json; charset=utf-8") Boolean booleanValue);
 
         @PUT("http/success/201")
         @ExpectedResponses({201})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<RestResponse<Void, Void>> put201(@BodyParam("application/json; charset=utf-8") Boolean booleanValue);
+        Single<VoidResponse> put201(@BodyParam("application/json; charset=utf-8") Boolean booleanValue);
 
         @POST("http/success/201")
         @ExpectedResponses({201})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<RestResponse<Void, Void>> post201(@BodyParam("application/json; charset=utf-8") Boolean booleanValue);
+        Single<VoidResponse> post201(@BodyParam("application/json; charset=utf-8") Boolean booleanValue);
 
         @PUT("http/success/202")
         @ExpectedResponses({202})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<RestResponse<Void, Void>> put202(@BodyParam("application/json; charset=utf-8") Boolean booleanValue);
+        Single<VoidResponse> put202(@BodyParam("application/json; charset=utf-8") Boolean booleanValue);
 
         @PATCH("http/success/202")
         @ExpectedResponses({202})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<RestResponse<Void, Void>> patch202(@BodyParam("application/json; charset=utf-8") Boolean booleanValue);
+        Single<VoidResponse> patch202(@BodyParam("application/json; charset=utf-8") Boolean booleanValue);
 
         @POST("http/success/202")
         @ExpectedResponses({202})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<RestResponse<Void, Void>> post202(@BodyParam("application/json; charset=utf-8") Boolean booleanValue);
+        Single<VoidResponse> post202(@BodyParam("application/json; charset=utf-8") Boolean booleanValue);
 
         @DELETE("http/success/202")
         @ExpectedResponses({202})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<RestResponse<Void, Void>> delete202(@BodyParam("application/json; charset=utf-8") Boolean booleanValue);
+        Single<VoidResponse> delete202(@BodyParam("application/json; charset=utf-8") Boolean booleanValue);
 
         @HEAD("http/success/204")
         @ExpectedResponses({204})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<RestResponse<Void, Void>> head204();
+        Single<VoidResponse> head204();
 
         @PUT("http/success/204")
         @ExpectedResponses({204})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<RestResponse<Void, Void>> put204(@BodyParam("application/json; charset=utf-8") Boolean booleanValue);
+        Single<VoidResponse> put204(@BodyParam("application/json; charset=utf-8") Boolean booleanValue);
 
         @PATCH("http/success/204")
         @ExpectedResponses({204})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<RestResponse<Void, Void>> patch204(@BodyParam("application/json; charset=utf-8") Boolean booleanValue);
+        Single<VoidResponse> patch204(@BodyParam("application/json; charset=utf-8") Boolean booleanValue);
 
         @POST("http/success/204")
         @ExpectedResponses({204})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<RestResponse<Void, Void>> post204(@BodyParam("application/json; charset=utf-8") Boolean booleanValue);
+        Single<VoidResponse> post204(@BodyParam("application/json; charset=utf-8") Boolean booleanValue);
 
         @DELETE("http/success/204")
         @ExpectedResponses({204})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<RestResponse<Void, Void>> delete204(@BodyParam("application/json; charset=utf-8") Boolean booleanValue);
+        Single<VoidResponse> delete204(@BodyParam("application/json; charset=utf-8") Boolean booleanValue);
 
         @HEAD("http/success/404")
         @ExpectedResponses({204, 404})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<RestResponse<Void, Void>> head404();
+        Single<VoidResponse> head404();
     }
 
     /**
@@ -179,7 +180,7 @@ public final class HttpSuccessImpl implements HttpSuccess {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<Void, Void>> head200WithRestResponseAsync() {
+    public Single<VoidResponse> head200WithRestResponseAsync() {
         return service.head200();
     }
 
@@ -220,7 +221,7 @@ public final class HttpSuccessImpl implements HttpSuccess {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<Void, Boolean>> get200WithRestResponseAsync() {
+    public Single<BodyResponse<Boolean>> get200WithRestResponseAsync() {
         return service.get200();
     }
 
@@ -231,15 +232,7 @@ public final class HttpSuccessImpl implements HttpSuccess {
      */
     public Maybe<Boolean> get200Async() {
         return get200WithRestResponseAsync()
-            .flatMapMaybe(new Function<RestResponse<Void, Boolean>, Maybe<Boolean>>() {
-                public Maybe<Boolean> apply(RestResponse<Void, Boolean> restResponse) {
-                    if (restResponse.body() == null) {
-                        return Maybe.empty();
-                    } else {
-                        return Maybe.just(restResponse.body());
-                    }
-                }
-            });
+            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -268,7 +261,7 @@ public final class HttpSuccessImpl implements HttpSuccess {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<Void, Void>> put200WithRestResponseAsync() {
+    public Single<VoidResponse> put200WithRestResponseAsync() {
         final Boolean booleanValue = null;
         return service.put200(booleanValue);
     }
@@ -314,7 +307,7 @@ public final class HttpSuccessImpl implements HttpSuccess {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<Void, Void>> put200WithRestResponseAsync(Boolean booleanValue) {
+    public Single<VoidResponse> put200WithRestResponseAsync(Boolean booleanValue) {
         return service.put200(booleanValue);
     }
 
@@ -356,7 +349,7 @@ public final class HttpSuccessImpl implements HttpSuccess {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<Void, Void>> patch200WithRestResponseAsync() {
+    public Single<VoidResponse> patch200WithRestResponseAsync() {
         final Boolean booleanValue = null;
         return service.patch200(booleanValue);
     }
@@ -402,7 +395,7 @@ public final class HttpSuccessImpl implements HttpSuccess {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<Void, Void>> patch200WithRestResponseAsync(Boolean booleanValue) {
+    public Single<VoidResponse> patch200WithRestResponseAsync(Boolean booleanValue) {
         return service.patch200(booleanValue);
     }
 
@@ -444,7 +437,7 @@ public final class HttpSuccessImpl implements HttpSuccess {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<Void, Void>> post200WithRestResponseAsync() {
+    public Single<VoidResponse> post200WithRestResponseAsync() {
         final Boolean booleanValue = null;
         return service.post200(booleanValue);
     }
@@ -490,7 +483,7 @@ public final class HttpSuccessImpl implements HttpSuccess {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<Void, Void>> post200WithRestResponseAsync(Boolean booleanValue) {
+    public Single<VoidResponse> post200WithRestResponseAsync(Boolean booleanValue) {
         return service.post200(booleanValue);
     }
 
@@ -532,7 +525,7 @@ public final class HttpSuccessImpl implements HttpSuccess {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<Void, Void>> delete200WithRestResponseAsync() {
+    public Single<VoidResponse> delete200WithRestResponseAsync() {
         final Boolean booleanValue = null;
         return service.delete200(booleanValue);
     }
@@ -578,7 +571,7 @@ public final class HttpSuccessImpl implements HttpSuccess {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<Void, Void>> delete200WithRestResponseAsync(Boolean booleanValue) {
+    public Single<VoidResponse> delete200WithRestResponseAsync(Boolean booleanValue) {
         return service.delete200(booleanValue);
     }
 
@@ -620,7 +613,7 @@ public final class HttpSuccessImpl implements HttpSuccess {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<Void, Void>> put201WithRestResponseAsync() {
+    public Single<VoidResponse> put201WithRestResponseAsync() {
         final Boolean booleanValue = null;
         return service.put201(booleanValue);
     }
@@ -666,7 +659,7 @@ public final class HttpSuccessImpl implements HttpSuccess {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<Void, Void>> put201WithRestResponseAsync(Boolean booleanValue) {
+    public Single<VoidResponse> put201WithRestResponseAsync(Boolean booleanValue) {
         return service.put201(booleanValue);
     }
 
@@ -708,7 +701,7 @@ public final class HttpSuccessImpl implements HttpSuccess {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<Void, Void>> post201WithRestResponseAsync() {
+    public Single<VoidResponse> post201WithRestResponseAsync() {
         final Boolean booleanValue = null;
         return service.post201(booleanValue);
     }
@@ -754,7 +747,7 @@ public final class HttpSuccessImpl implements HttpSuccess {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<Void, Void>> post201WithRestResponseAsync(Boolean booleanValue) {
+    public Single<VoidResponse> post201WithRestResponseAsync(Boolean booleanValue) {
         return service.post201(booleanValue);
     }
 
@@ -796,7 +789,7 @@ public final class HttpSuccessImpl implements HttpSuccess {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<Void, Void>> put202WithRestResponseAsync() {
+    public Single<VoidResponse> put202WithRestResponseAsync() {
         final Boolean booleanValue = null;
         return service.put202(booleanValue);
     }
@@ -842,7 +835,7 @@ public final class HttpSuccessImpl implements HttpSuccess {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<Void, Void>> put202WithRestResponseAsync(Boolean booleanValue) {
+    public Single<VoidResponse> put202WithRestResponseAsync(Boolean booleanValue) {
         return service.put202(booleanValue);
     }
 
@@ -884,7 +877,7 @@ public final class HttpSuccessImpl implements HttpSuccess {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<Void, Void>> patch202WithRestResponseAsync() {
+    public Single<VoidResponse> patch202WithRestResponseAsync() {
         final Boolean booleanValue = null;
         return service.patch202(booleanValue);
     }
@@ -930,7 +923,7 @@ public final class HttpSuccessImpl implements HttpSuccess {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<Void, Void>> patch202WithRestResponseAsync(Boolean booleanValue) {
+    public Single<VoidResponse> patch202WithRestResponseAsync(Boolean booleanValue) {
         return service.patch202(booleanValue);
     }
 
@@ -972,7 +965,7 @@ public final class HttpSuccessImpl implements HttpSuccess {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<Void, Void>> post202WithRestResponseAsync() {
+    public Single<VoidResponse> post202WithRestResponseAsync() {
         final Boolean booleanValue = null;
         return service.post202(booleanValue);
     }
@@ -1018,7 +1011,7 @@ public final class HttpSuccessImpl implements HttpSuccess {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<Void, Void>> post202WithRestResponseAsync(Boolean booleanValue) {
+    public Single<VoidResponse> post202WithRestResponseAsync(Boolean booleanValue) {
         return service.post202(booleanValue);
     }
 
@@ -1060,7 +1053,7 @@ public final class HttpSuccessImpl implements HttpSuccess {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<Void, Void>> delete202WithRestResponseAsync() {
+    public Single<VoidResponse> delete202WithRestResponseAsync() {
         final Boolean booleanValue = null;
         return service.delete202(booleanValue);
     }
@@ -1106,7 +1099,7 @@ public final class HttpSuccessImpl implements HttpSuccess {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<Void, Void>> delete202WithRestResponseAsync(Boolean booleanValue) {
+    public Single<VoidResponse> delete202WithRestResponseAsync(Boolean booleanValue) {
         return service.delete202(booleanValue);
     }
 
@@ -1148,7 +1141,7 @@ public final class HttpSuccessImpl implements HttpSuccess {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<Void, Void>> head204WithRestResponseAsync() {
+    public Single<VoidResponse> head204WithRestResponseAsync() {
         return service.head204();
     }
 
@@ -1188,7 +1181,7 @@ public final class HttpSuccessImpl implements HttpSuccess {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<Void, Void>> put204WithRestResponseAsync() {
+    public Single<VoidResponse> put204WithRestResponseAsync() {
         final Boolean booleanValue = null;
         return service.put204(booleanValue);
     }
@@ -1234,7 +1227,7 @@ public final class HttpSuccessImpl implements HttpSuccess {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<Void, Void>> put204WithRestResponseAsync(Boolean booleanValue) {
+    public Single<VoidResponse> put204WithRestResponseAsync(Boolean booleanValue) {
         return service.put204(booleanValue);
     }
 
@@ -1276,7 +1269,7 @@ public final class HttpSuccessImpl implements HttpSuccess {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<Void, Void>> patch204WithRestResponseAsync() {
+    public Single<VoidResponse> patch204WithRestResponseAsync() {
         final Boolean booleanValue = null;
         return service.patch204(booleanValue);
     }
@@ -1322,7 +1315,7 @@ public final class HttpSuccessImpl implements HttpSuccess {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<Void, Void>> patch204WithRestResponseAsync(Boolean booleanValue) {
+    public Single<VoidResponse> patch204WithRestResponseAsync(Boolean booleanValue) {
         return service.patch204(booleanValue);
     }
 
@@ -1364,7 +1357,7 @@ public final class HttpSuccessImpl implements HttpSuccess {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<Void, Void>> post204WithRestResponseAsync() {
+    public Single<VoidResponse> post204WithRestResponseAsync() {
         final Boolean booleanValue = null;
         return service.post204(booleanValue);
     }
@@ -1410,7 +1403,7 @@ public final class HttpSuccessImpl implements HttpSuccess {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<Void, Void>> post204WithRestResponseAsync(Boolean booleanValue) {
+    public Single<VoidResponse> post204WithRestResponseAsync(Boolean booleanValue) {
         return service.post204(booleanValue);
     }
 
@@ -1452,7 +1445,7 @@ public final class HttpSuccessImpl implements HttpSuccess {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<Void, Void>> delete204WithRestResponseAsync() {
+    public Single<VoidResponse> delete204WithRestResponseAsync() {
         final Boolean booleanValue = null;
         return service.delete204(booleanValue);
     }
@@ -1498,7 +1491,7 @@ public final class HttpSuccessImpl implements HttpSuccess {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<Void, Void>> delete204WithRestResponseAsync(Boolean booleanValue) {
+    public Single<VoidResponse> delete204WithRestResponseAsync(Boolean booleanValue) {
         return service.delete204(booleanValue);
     }
 
@@ -1540,7 +1533,7 @@ public final class HttpSuccessImpl implements HttpSuccess {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<Void, Void>> head404WithRestResponseAsync() {
+    public Single<VoidResponse> head404WithRestResponseAsync() {
         return service.head404();
     }
 

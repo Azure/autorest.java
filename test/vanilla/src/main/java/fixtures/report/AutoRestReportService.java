@@ -10,7 +10,7 @@
 
 package fixtures.report;
 
-import com.microsoft.rest.v2.RestResponse;
+import com.microsoft.rest.v2.BodyResponse;
 import com.microsoft.rest.v2.ServiceCallback;
 import com.microsoft.rest.v2.ServiceFuture;
 import fixtures.report.models.ErrorException;
@@ -45,7 +45,7 @@ public interface AutoRestReportService {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, Map<String, Integer>>> getReportWithRestResponseAsync();
+    Single<BodyResponse<Map<String, Integer>>> getReportWithRestResponseAsync();
 
     /**
      * Get test coverage report.
@@ -82,7 +82,7 @@ public interface AutoRestReportService {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, Map<String, Integer>>> getReportWithRestResponseAsync(String qualifier);
+    Single<BodyResponse<Map<String, Integer>>> getReportWithRestResponseAsync(String qualifier);
 
     /**
      * Get test coverage report.

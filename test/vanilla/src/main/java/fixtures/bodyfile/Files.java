@@ -10,9 +10,9 @@
 
 package fixtures.bodyfile;
 
-import com.microsoft.rest.v2.RestResponse;
 import com.microsoft.rest.v2.ServiceCallback;
 import com.microsoft.rest.v2.ServiceFuture;
+import com.microsoft.rest.v2.StreamResponse;
 import fixtures.bodyfile.models.ErrorException;
 import io.reactivex.Flowable;
 import io.reactivex.Maybe;
@@ -47,7 +47,7 @@ public interface Files {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, Flowable<ByteBuffer>>> getFileWithRestResponseAsync();
+    Single<StreamResponse> getFileWithRestResponseAsync();
 
     /**
      * Get file.
@@ -79,7 +79,7 @@ public interface Files {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, Flowable<ByteBuffer>>> getFileLargeWithRestResponseAsync();
+    Single<StreamResponse> getFileLargeWithRestResponseAsync();
 
     /**
      * Get a large file.
@@ -111,7 +111,7 @@ public interface Files {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, Flowable<ByteBuffer>>> getEmptyFileWithRestResponseAsync();
+    Single<StreamResponse> getEmptyFileWithRestResponseAsync();
 
     /**
      * Get empty file.

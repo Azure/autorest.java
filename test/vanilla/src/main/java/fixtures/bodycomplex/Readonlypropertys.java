@@ -10,9 +10,10 @@
 
 package fixtures.bodycomplex;
 
-import com.microsoft.rest.v2.RestResponse;
+import com.microsoft.rest.v2.BodyResponse;
 import com.microsoft.rest.v2.ServiceCallback;
 import com.microsoft.rest.v2.ServiceFuture;
+import com.microsoft.rest.v2.VoidResponse;
 import fixtures.bodycomplex.models.ErrorException;
 import fixtures.bodycomplex.models.ReadonlyObj;
 import io.reactivex.Completable;
@@ -48,7 +49,7 @@ public interface Readonlypropertys {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, ReadonlyObj>> getValidWithRestResponseAsync();
+    Single<BodyResponse<ReadonlyObj>> getValidWithRestResponseAsync();
 
     /**
      * Get complex types that have readonly properties.
@@ -84,7 +85,7 @@ public interface Readonlypropertys {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, Void>> putValidWithRestResponseAsync(@NonNull ReadonlyObj complexBody);
+    Single<VoidResponse> putValidWithRestResponseAsync(@NonNull ReadonlyObj complexBody);
 
     /**
      * Put complex types that have readonly properties.

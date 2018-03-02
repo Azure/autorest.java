@@ -12,9 +12,9 @@ package fixtures.header.implementation;
 
 import com.microsoft.rest.v2.DateTimeRfc1123;
 import com.microsoft.rest.v2.RestProxy;
-import com.microsoft.rest.v2.RestResponse;
 import com.microsoft.rest.v2.ServiceCallback;
 import com.microsoft.rest.v2.ServiceFuture;
+import com.microsoft.rest.v2.VoidResponse;
 import com.microsoft.rest.v2.annotations.ExpectedResponses;
 import com.microsoft.rest.v2.annotations.HeaderParam;
 import com.microsoft.rest.v2.annotations.Host;
@@ -23,20 +23,20 @@ import com.microsoft.rest.v2.annotations.UnexpectedResponseExceptionType;
 import fixtures.header.Headers;
 import fixtures.header.models.ErrorException;
 import fixtures.header.models.GreyscaleColors;
-import fixtures.header.models.HeaderResponseBoolHeaders;
-import fixtures.header.models.HeaderResponseByteHeaders;
-import fixtures.header.models.HeaderResponseDateHeaders;
-import fixtures.header.models.HeaderResponseDatetimeHeaders;
-import fixtures.header.models.HeaderResponseDatetimeRfc1123Headers;
-import fixtures.header.models.HeaderResponseDoubleHeaders;
-import fixtures.header.models.HeaderResponseDurationHeaders;
-import fixtures.header.models.HeaderResponseEnumHeaders;
-import fixtures.header.models.HeaderResponseExistingKeyHeaders;
-import fixtures.header.models.HeaderResponseFloatHeaders;
-import fixtures.header.models.HeaderResponseIntegerHeaders;
-import fixtures.header.models.HeaderResponseLongHeaders;
-import fixtures.header.models.HeaderResponseProtectedKeyHeaders;
-import fixtures.header.models.HeaderResponseStringHeaders;
+import fixtures.header.models.HeaderResponseBoolResponse;
+import fixtures.header.models.HeaderResponseByteResponse;
+import fixtures.header.models.HeaderResponseDateResponse;
+import fixtures.header.models.HeaderResponseDatetimeResponse;
+import fixtures.header.models.HeaderResponseDatetimeRfc1123Response;
+import fixtures.header.models.HeaderResponseDoubleResponse;
+import fixtures.header.models.HeaderResponseDurationResponse;
+import fixtures.header.models.HeaderResponseEnumResponse;
+import fixtures.header.models.HeaderResponseExistingKeyResponse;
+import fixtures.header.models.HeaderResponseFloatResponse;
+import fixtures.header.models.HeaderResponseIntegerResponse;
+import fixtures.header.models.HeaderResponseLongResponse;
+import fixtures.header.models.HeaderResponseProtectedKeyResponse;
+import fixtures.header.models.HeaderResponseStringResponse;
 import io.reactivex.Completable;
 import io.reactivex.Single;
 import io.reactivex.annotations.NonNull;
@@ -79,147 +79,147 @@ public final class HeadersImpl implements Headers {
         @POST("header/param/existingkey")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<RestResponse<Void, Void>> paramExistingKey(@HeaderParam("User-Agent") String userAgent);
+        Single<VoidResponse> paramExistingKey(@HeaderParam("User-Agent") String userAgent);
 
         @POST("header/response/existingkey")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<RestResponse<HeaderResponseExistingKeyHeaders, Void>> responseExistingKey();
+        Single<HeaderResponseExistingKeyResponse> responseExistingKey();
 
         @POST("header/param/protectedkey")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<RestResponse<Void, Void>> paramProtectedKey(@HeaderParam("Content-Type") String contentType);
+        Single<VoidResponse> paramProtectedKey(@HeaderParam("Content-Type") String contentType);
 
         @POST("header/response/protectedkey")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<RestResponse<HeaderResponseProtectedKeyHeaders, Void>> responseProtectedKey();
+        Single<HeaderResponseProtectedKeyResponse> responseProtectedKey();
 
         @POST("header/param/prim/integer")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<RestResponse<Void, Void>> paramInteger(@HeaderParam("scenario") String scenario, @HeaderParam("value") int value);
+        Single<VoidResponse> paramInteger(@HeaderParam("scenario") String scenario, @HeaderParam("value") int value);
 
         @POST("header/response/prim/integer")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<RestResponse<HeaderResponseIntegerHeaders, Void>> responseInteger(@HeaderParam("scenario") String scenario);
+        Single<HeaderResponseIntegerResponse> responseInteger(@HeaderParam("scenario") String scenario);
 
         @POST("header/param/prim/long")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<RestResponse<Void, Void>> paramLong(@HeaderParam("scenario") String scenario, @HeaderParam("value") long value);
+        Single<VoidResponse> paramLong(@HeaderParam("scenario") String scenario, @HeaderParam("value") long value);
 
         @POST("header/response/prim/long")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<RestResponse<HeaderResponseLongHeaders, Void>> responseLong(@HeaderParam("scenario") String scenario);
+        Single<HeaderResponseLongResponse> responseLong(@HeaderParam("scenario") String scenario);
 
         @POST("header/param/prim/float")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<RestResponse<Void, Void>> paramFloat(@HeaderParam("scenario") String scenario, @HeaderParam("value") double value);
+        Single<VoidResponse> paramFloat(@HeaderParam("scenario") String scenario, @HeaderParam("value") double value);
 
         @POST("header/response/prim/float")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<RestResponse<HeaderResponseFloatHeaders, Void>> responseFloat(@HeaderParam("scenario") String scenario);
+        Single<HeaderResponseFloatResponse> responseFloat(@HeaderParam("scenario") String scenario);
 
         @POST("header/param/prim/double")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<RestResponse<Void, Void>> paramDouble(@HeaderParam("scenario") String scenario, @HeaderParam("value") double value);
+        Single<VoidResponse> paramDouble(@HeaderParam("scenario") String scenario, @HeaderParam("value") double value);
 
         @POST("header/response/prim/double")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<RestResponse<HeaderResponseDoubleHeaders, Void>> responseDouble(@HeaderParam("scenario") String scenario);
+        Single<HeaderResponseDoubleResponse> responseDouble(@HeaderParam("scenario") String scenario);
 
         @POST("header/param/prim/bool")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<RestResponse<Void, Void>> paramBool(@HeaderParam("scenario") String scenario, @HeaderParam("value") boolean value);
+        Single<VoidResponse> paramBool(@HeaderParam("scenario") String scenario, @HeaderParam("value") boolean value);
 
         @POST("header/response/prim/bool")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<RestResponse<HeaderResponseBoolHeaders, Void>> responseBool(@HeaderParam("scenario") String scenario);
+        Single<HeaderResponseBoolResponse> responseBool(@HeaderParam("scenario") String scenario);
 
         @POST("header/param/prim/string")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<RestResponse<Void, Void>> paramString(@HeaderParam("scenario") String scenario, @HeaderParam("value") String value);
+        Single<VoidResponse> paramString(@HeaderParam("scenario") String scenario, @HeaderParam("value") String value);
 
         @POST("header/response/prim/string")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<RestResponse<HeaderResponseStringHeaders, Void>> responseString(@HeaderParam("scenario") String scenario);
+        Single<HeaderResponseStringResponse> responseString(@HeaderParam("scenario") String scenario);
 
         @POST("header/param/prim/date")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<RestResponse<Void, Void>> paramDate(@HeaderParam("scenario") String scenario, @HeaderParam("value") LocalDate value);
+        Single<VoidResponse> paramDate(@HeaderParam("scenario") String scenario, @HeaderParam("value") LocalDate value);
 
         @POST("header/response/prim/date")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<RestResponse<HeaderResponseDateHeaders, Void>> responseDate(@HeaderParam("scenario") String scenario);
+        Single<HeaderResponseDateResponse> responseDate(@HeaderParam("scenario") String scenario);
 
         @POST("header/param/prim/datetime")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<RestResponse<Void, Void>> paramDatetime(@HeaderParam("scenario") String scenario, @HeaderParam("value") DateTime value);
+        Single<VoidResponse> paramDatetime(@HeaderParam("scenario") String scenario, @HeaderParam("value") DateTime value);
 
         @POST("header/response/prim/datetime")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<RestResponse<HeaderResponseDatetimeHeaders, Void>> responseDatetime(@HeaderParam("scenario") String scenario);
+        Single<HeaderResponseDatetimeResponse> responseDatetime(@HeaderParam("scenario") String scenario);
 
         @POST("header/param/prim/datetimerfc1123")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<RestResponse<Void, Void>> paramDatetimeRfc1123(@HeaderParam("scenario") String scenario, @HeaderParam("value") DateTimeRfc1123 value);
+        Single<VoidResponse> paramDatetimeRfc1123(@HeaderParam("scenario") String scenario, @HeaderParam("value") DateTimeRfc1123 value);
 
         @POST("header/response/prim/datetimerfc1123")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<RestResponse<HeaderResponseDatetimeRfc1123Headers, Void>> responseDatetimeRfc1123(@HeaderParam("scenario") String scenario);
+        Single<HeaderResponseDatetimeRfc1123Response> responseDatetimeRfc1123(@HeaderParam("scenario") String scenario);
 
         @POST("header/param/prim/duration")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<RestResponse<Void, Void>> paramDuration(@HeaderParam("scenario") String scenario, @HeaderParam("value") Period value);
+        Single<VoidResponse> paramDuration(@HeaderParam("scenario") String scenario, @HeaderParam("value") Period value);
 
         @POST("header/response/prim/duration")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<RestResponse<HeaderResponseDurationHeaders, Void>> responseDuration(@HeaderParam("scenario") String scenario);
+        Single<HeaderResponseDurationResponse> responseDuration(@HeaderParam("scenario") String scenario);
 
         @POST("header/param/prim/byte")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<RestResponse<Void, Void>> paramByte(@HeaderParam("scenario") String scenario, @HeaderParam("value") String value);
+        Single<VoidResponse> paramByte(@HeaderParam("scenario") String scenario, @HeaderParam("value") String value);
 
         @POST("header/response/prim/byte")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<RestResponse<HeaderResponseByteHeaders, Void>> responseByte(@HeaderParam("scenario") String scenario);
+        Single<HeaderResponseByteResponse> responseByte(@HeaderParam("scenario") String scenario);
 
         @POST("header/param/prim/enum")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<RestResponse<Void, Void>> paramEnum(@HeaderParam("scenario") String scenario, @HeaderParam("value") GreyscaleColors value);
+        Single<VoidResponse> paramEnum(@HeaderParam("scenario") String scenario, @HeaderParam("value") GreyscaleColors value);
 
         @POST("header/response/prim/enum")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<RestResponse<HeaderResponseEnumHeaders, Void>> responseEnum(@HeaderParam("scenario") String scenario);
+        Single<HeaderResponseEnumResponse> responseEnum(@HeaderParam("scenario") String scenario);
 
         @POST("header/custom/x-ms-client-request-id/9C4D50EE-2D56-4CD3-8152-34347DC9F2B0")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<RestResponse<Void, Void>> customRequestId();
+        Single<VoidResponse> customRequestId();
     }
 
     /**
@@ -253,7 +253,7 @@ public final class HeadersImpl implements Headers {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<Void, Void>> paramExistingKeyWithRestResponseAsync(@NonNull String userAgent) {
+    public Single<VoidResponse> paramExistingKeyWithRestResponseAsync(@NonNull String userAgent) {
         if (userAgent == null) {
             throw new IllegalArgumentException("Parameter userAgent is required and cannot be null.");
         }
@@ -298,7 +298,7 @@ public final class HeadersImpl implements Headers {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<HeaderResponseExistingKeyHeaders, Void>> responseExistingKeyWithRestResponseAsync() {
+    public Single<HeaderResponseExistingKeyResponse> responseExistingKeyWithRestResponseAsync() {
         return service.responseExistingKey();
     }
 
@@ -343,7 +343,7 @@ public final class HeadersImpl implements Headers {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<Void, Void>> paramProtectedKeyWithRestResponseAsync(@NonNull String contentType) {
+    public Single<VoidResponse> paramProtectedKeyWithRestResponseAsync(@NonNull String contentType) {
         if (contentType == null) {
             throw new IllegalArgumentException("Parameter contentType is required and cannot be null.");
         }
@@ -388,7 +388,7 @@ public final class HeadersImpl implements Headers {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<HeaderResponseProtectedKeyHeaders, Void>> responseProtectedKeyWithRestResponseAsync() {
+    public Single<HeaderResponseProtectedKeyResponse> responseProtectedKeyWithRestResponseAsync() {
         return service.responseProtectedKey();
     }
 
@@ -436,7 +436,7 @@ public final class HeadersImpl implements Headers {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<Void, Void>> paramIntegerWithRestResponseAsync(@NonNull String scenario, @NonNull int value) {
+    public Single<VoidResponse> paramIntegerWithRestResponseAsync(@NonNull String scenario, @NonNull int value) {
         if (scenario == null) {
             throw new IllegalArgumentException("Parameter scenario is required and cannot be null.");
         }
@@ -487,7 +487,7 @@ public final class HeadersImpl implements Headers {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<HeaderResponseIntegerHeaders, Void>> responseIntegerWithRestResponseAsync(@NonNull String scenario) {
+    public Single<HeaderResponseIntegerResponse> responseIntegerWithRestResponseAsync(@NonNull String scenario) {
         if (scenario == null) {
             throw new IllegalArgumentException("Parameter scenario is required and cannot be null.");
         }
@@ -540,7 +540,7 @@ public final class HeadersImpl implements Headers {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<Void, Void>> paramLongWithRestResponseAsync(@NonNull String scenario, @NonNull long value) {
+    public Single<VoidResponse> paramLongWithRestResponseAsync(@NonNull String scenario, @NonNull long value) {
         if (scenario == null) {
             throw new IllegalArgumentException("Parameter scenario is required and cannot be null.");
         }
@@ -591,7 +591,7 @@ public final class HeadersImpl implements Headers {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<HeaderResponseLongHeaders, Void>> responseLongWithRestResponseAsync(@NonNull String scenario) {
+    public Single<HeaderResponseLongResponse> responseLongWithRestResponseAsync(@NonNull String scenario) {
         if (scenario == null) {
             throw new IllegalArgumentException("Parameter scenario is required and cannot be null.");
         }
@@ -644,7 +644,7 @@ public final class HeadersImpl implements Headers {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<Void, Void>> paramFloatWithRestResponseAsync(@NonNull String scenario, @NonNull double value) {
+    public Single<VoidResponse> paramFloatWithRestResponseAsync(@NonNull String scenario, @NonNull double value) {
         if (scenario == null) {
             throw new IllegalArgumentException("Parameter scenario is required and cannot be null.");
         }
@@ -695,7 +695,7 @@ public final class HeadersImpl implements Headers {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<HeaderResponseFloatHeaders, Void>> responseFloatWithRestResponseAsync(@NonNull String scenario) {
+    public Single<HeaderResponseFloatResponse> responseFloatWithRestResponseAsync(@NonNull String scenario) {
         if (scenario == null) {
             throw new IllegalArgumentException("Parameter scenario is required and cannot be null.");
         }
@@ -748,7 +748,7 @@ public final class HeadersImpl implements Headers {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<Void, Void>> paramDoubleWithRestResponseAsync(@NonNull String scenario, @NonNull double value) {
+    public Single<VoidResponse> paramDoubleWithRestResponseAsync(@NonNull String scenario, @NonNull double value) {
         if (scenario == null) {
             throw new IllegalArgumentException("Parameter scenario is required and cannot be null.");
         }
@@ -799,7 +799,7 @@ public final class HeadersImpl implements Headers {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<HeaderResponseDoubleHeaders, Void>> responseDoubleWithRestResponseAsync(@NonNull String scenario) {
+    public Single<HeaderResponseDoubleResponse> responseDoubleWithRestResponseAsync(@NonNull String scenario) {
         if (scenario == null) {
             throw new IllegalArgumentException("Parameter scenario is required and cannot be null.");
         }
@@ -852,7 +852,7 @@ public final class HeadersImpl implements Headers {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<Void, Void>> paramBoolWithRestResponseAsync(@NonNull String scenario, @NonNull boolean value) {
+    public Single<VoidResponse> paramBoolWithRestResponseAsync(@NonNull String scenario, @NonNull boolean value) {
         if (scenario == null) {
             throw new IllegalArgumentException("Parameter scenario is required and cannot be null.");
         }
@@ -903,7 +903,7 @@ public final class HeadersImpl implements Headers {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<HeaderResponseBoolHeaders, Void>> responseBoolWithRestResponseAsync(@NonNull String scenario) {
+    public Single<HeaderResponseBoolResponse> responseBoolWithRestResponseAsync(@NonNull String scenario) {
         if (scenario == null) {
             throw new IllegalArgumentException("Parameter scenario is required and cannot be null.");
         }
@@ -953,7 +953,7 @@ public final class HeadersImpl implements Headers {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<Void, Void>> paramStringWithRestResponseAsync(@NonNull String scenario) {
+    public Single<VoidResponse> paramStringWithRestResponseAsync(@NonNull String scenario) {
         if (scenario == null) {
             throw new IllegalArgumentException("Parameter scenario is required and cannot be null.");
         }
@@ -1007,7 +1007,7 @@ public final class HeadersImpl implements Headers {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<Void, Void>> paramStringWithRestResponseAsync(@NonNull String scenario, String value) {
+    public Single<VoidResponse> paramStringWithRestResponseAsync(@NonNull String scenario, String value) {
         if (scenario == null) {
             throw new IllegalArgumentException("Parameter scenario is required and cannot be null.");
         }
@@ -1058,7 +1058,7 @@ public final class HeadersImpl implements Headers {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<HeaderResponseStringHeaders, Void>> responseStringWithRestResponseAsync(@NonNull String scenario) {
+    public Single<HeaderResponseStringResponse> responseStringWithRestResponseAsync(@NonNull String scenario) {
         if (scenario == null) {
             throw new IllegalArgumentException("Parameter scenario is required and cannot be null.");
         }
@@ -1111,7 +1111,7 @@ public final class HeadersImpl implements Headers {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<Void, Void>> paramDateWithRestResponseAsync(@NonNull String scenario, @NonNull LocalDate value) {
+    public Single<VoidResponse> paramDateWithRestResponseAsync(@NonNull String scenario, @NonNull LocalDate value) {
         if (scenario == null) {
             throw new IllegalArgumentException("Parameter scenario is required and cannot be null.");
         }
@@ -1165,7 +1165,7 @@ public final class HeadersImpl implements Headers {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<HeaderResponseDateHeaders, Void>> responseDateWithRestResponseAsync(@NonNull String scenario) {
+    public Single<HeaderResponseDateResponse> responseDateWithRestResponseAsync(@NonNull String scenario) {
         if (scenario == null) {
             throw new IllegalArgumentException("Parameter scenario is required and cannot be null.");
         }
@@ -1218,7 +1218,7 @@ public final class HeadersImpl implements Headers {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<Void, Void>> paramDatetimeWithRestResponseAsync(@NonNull String scenario, @NonNull DateTime value) {
+    public Single<VoidResponse> paramDatetimeWithRestResponseAsync(@NonNull String scenario, @NonNull DateTime value) {
         if (scenario == null) {
             throw new IllegalArgumentException("Parameter scenario is required and cannot be null.");
         }
@@ -1272,7 +1272,7 @@ public final class HeadersImpl implements Headers {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<HeaderResponseDatetimeHeaders, Void>> responseDatetimeWithRestResponseAsync(@NonNull String scenario) {
+    public Single<HeaderResponseDatetimeResponse> responseDatetimeWithRestResponseAsync(@NonNull String scenario) {
         if (scenario == null) {
             throw new IllegalArgumentException("Parameter scenario is required and cannot be null.");
         }
@@ -1322,7 +1322,7 @@ public final class HeadersImpl implements Headers {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<Void, Void>> paramDatetimeRfc1123WithRestResponseAsync(@NonNull String scenario) {
+    public Single<VoidResponse> paramDatetimeRfc1123WithRestResponseAsync(@NonNull String scenario) {
         if (scenario == null) {
             throw new IllegalArgumentException("Parameter scenario is required and cannot be null.");
         }
@@ -1380,7 +1380,7 @@ public final class HeadersImpl implements Headers {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<Void, Void>> paramDatetimeRfc1123WithRestResponseAsync(@NonNull String scenario, DateTime value) {
+    public Single<VoidResponse> paramDatetimeRfc1123WithRestResponseAsync(@NonNull String scenario, DateTime value) {
         if (scenario == null) {
             throw new IllegalArgumentException("Parameter scenario is required and cannot be null.");
         }
@@ -1435,7 +1435,7 @@ public final class HeadersImpl implements Headers {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<HeaderResponseDatetimeRfc1123Headers, Void>> responseDatetimeRfc1123WithRestResponseAsync(@NonNull String scenario) {
+    public Single<HeaderResponseDatetimeRfc1123Response> responseDatetimeRfc1123WithRestResponseAsync(@NonNull String scenario) {
         if (scenario == null) {
             throw new IllegalArgumentException("Parameter scenario is required and cannot be null.");
         }
@@ -1488,7 +1488,7 @@ public final class HeadersImpl implements Headers {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<Void, Void>> paramDurationWithRestResponseAsync(@NonNull String scenario, @NonNull Period value) {
+    public Single<VoidResponse> paramDurationWithRestResponseAsync(@NonNull String scenario, @NonNull Period value) {
         if (scenario == null) {
             throw new IllegalArgumentException("Parameter scenario is required and cannot be null.");
         }
@@ -1542,7 +1542,7 @@ public final class HeadersImpl implements Headers {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<HeaderResponseDurationHeaders, Void>> responseDurationWithRestResponseAsync(@NonNull String scenario) {
+    public Single<HeaderResponseDurationResponse> responseDurationWithRestResponseAsync(@NonNull String scenario) {
         if (scenario == null) {
             throw new IllegalArgumentException("Parameter scenario is required and cannot be null.");
         }
@@ -1595,7 +1595,7 @@ public final class HeadersImpl implements Headers {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<Void, Void>> paramByteWithRestResponseAsync(@NonNull String scenario, @NonNull byte[] value) {
+    public Single<VoidResponse> paramByteWithRestResponseAsync(@NonNull String scenario, @NonNull byte[] value) {
         if (scenario == null) {
             throw new IllegalArgumentException("Parameter scenario is required and cannot be null.");
         }
@@ -1650,7 +1650,7 @@ public final class HeadersImpl implements Headers {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<HeaderResponseByteHeaders, Void>> responseByteWithRestResponseAsync(@NonNull String scenario) {
+    public Single<HeaderResponseByteResponse> responseByteWithRestResponseAsync(@NonNull String scenario) {
         if (scenario == null) {
             throw new IllegalArgumentException("Parameter scenario is required and cannot be null.");
         }
@@ -1700,7 +1700,7 @@ public final class HeadersImpl implements Headers {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<Void, Void>> paramEnumWithRestResponseAsync(@NonNull String scenario) {
+    public Single<VoidResponse> paramEnumWithRestResponseAsync(@NonNull String scenario) {
         if (scenario == null) {
             throw new IllegalArgumentException("Parameter scenario is required and cannot be null.");
         }
@@ -1754,7 +1754,7 @@ public final class HeadersImpl implements Headers {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<Void, Void>> paramEnumWithRestResponseAsync(@NonNull String scenario, GreyscaleColors value) {
+    public Single<VoidResponse> paramEnumWithRestResponseAsync(@NonNull String scenario, GreyscaleColors value) {
         if (scenario == null) {
             throw new IllegalArgumentException("Parameter scenario is required and cannot be null.");
         }
@@ -1805,7 +1805,7 @@ public final class HeadersImpl implements Headers {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<HeaderResponseEnumHeaders, Void>> responseEnumWithRestResponseAsync(@NonNull String scenario) {
+    public Single<HeaderResponseEnumResponse> responseEnumWithRestResponseAsync(@NonNull String scenario) {
         if (scenario == null) {
             throw new IllegalArgumentException("Parameter scenario is required and cannot be null.");
         }
@@ -1850,7 +1850,7 @@ public final class HeadersImpl implements Headers {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<Void, Void>> customRequestIdWithRestResponseAsync() {
+    public Single<VoidResponse> customRequestIdWithRestResponseAsync() {
         return service.customRequestId();
     }
 

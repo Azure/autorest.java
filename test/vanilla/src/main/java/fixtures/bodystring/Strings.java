@@ -10,9 +10,10 @@
 
 package fixtures.bodystring;
 
-import com.microsoft.rest.v2.RestResponse;
+import com.microsoft.rest.v2.BodyResponse;
 import com.microsoft.rest.v2.ServiceCallback;
 import com.microsoft.rest.v2.ServiceFuture;
+import com.microsoft.rest.v2.VoidResponse;
 import fixtures.bodystring.models.ErrorException;
 import io.reactivex.Completable;
 import io.reactivex.Maybe;
@@ -47,7 +48,7 @@ public interface Strings {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, String>> getNullWithRestResponseAsync();
+    Single<BodyResponse<String>> getNullWithRestResponseAsync();
 
     /**
      * Get null string value value.
@@ -78,7 +79,7 @@ public interface Strings {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, Void>> putNullWithRestResponseAsync();
+    Single<VoidResponse> putNullWithRestResponseAsync();
 
     /**
      * Set string value null.
@@ -114,7 +115,7 @@ public interface Strings {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, Void>> putNullWithRestResponseAsync(String stringBody);
+    Single<VoidResponse> putNullWithRestResponseAsync(String stringBody);
 
     /**
      * Set string value null.
@@ -148,7 +149,7 @@ public interface Strings {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, String>> getEmptyWithRestResponseAsync();
+    Single<BodyResponse<String>> getEmptyWithRestResponseAsync();
 
     /**
      * Get empty string value value ''.
@@ -184,7 +185,7 @@ public interface Strings {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, Void>> putEmptyWithRestResponseAsync(@NonNull String stringBody);
+    Single<VoidResponse> putEmptyWithRestResponseAsync(@NonNull String stringBody);
 
     /**
      * Set string value empty ''.
@@ -218,7 +219,7 @@ public interface Strings {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, String>> getMbcsWithRestResponseAsync();
+    Single<BodyResponse<String>> getMbcsWithRestResponseAsync();
 
     /**
      * Get mbcs string value '啊齄丂狛狜隣郎隣兀﨩ˊ〞〡￤℡㈱‐ー﹡﹢﹫、〓ⅰⅹ⒈€㈠㈩ⅠⅫ！￣ぁんァヶΑ︴АЯаяāɡㄅㄩ─╋︵﹄︻︱︳︴ⅰⅹɑɡ〇〾⿻⺁䜣€'.
@@ -254,7 +255,7 @@ public interface Strings {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, Void>> putMbcsWithRestResponseAsync(@NonNull String stringBody);
+    Single<VoidResponse> putMbcsWithRestResponseAsync(@NonNull String stringBody);
 
     /**
      * Set string value mbcs '啊齄丂狛狜隣郎隣兀﨩ˊ〞〡￤℡㈱‐ー﹡﹢﹫、〓ⅰⅹ⒈€㈠㈩ⅠⅫ！￣ぁんァヶΑ︴АЯаяāɡㄅㄩ─╋︵﹄︻︱︳︴ⅰⅹɑɡ〇〾⿻⺁䜣€'.
@@ -288,7 +289,7 @@ public interface Strings {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, String>> getWhitespaceWithRestResponseAsync();
+    Single<BodyResponse<String>> getWhitespaceWithRestResponseAsync();
 
     /**
      * Get string value with leading and trailing whitespace '&lt;tab&gt;&lt;space&gt;&lt;space&gt;Now is the time for all good men to come to the aid of their country&lt;tab&gt;&lt;space&gt;&lt;space&gt;'.
@@ -324,7 +325,7 @@ public interface Strings {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, Void>> putWhitespaceWithRestResponseAsync(@NonNull String stringBody);
+    Single<VoidResponse> putWhitespaceWithRestResponseAsync(@NonNull String stringBody);
 
     /**
      * Set String value with leading and trailing whitespace '&lt;tab&gt;&lt;space&gt;&lt;space&gt;Now is the time for all good men to come to the aid of their country&lt;tab&gt;&lt;space&gt;&lt;space&gt;'.
@@ -358,7 +359,7 @@ public interface Strings {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, String>> getNotProvidedWithRestResponseAsync();
+    Single<BodyResponse<String>> getNotProvidedWithRestResponseAsync();
 
     /**
      * Get String value when no string value is sent in response payload.
@@ -390,7 +391,7 @@ public interface Strings {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, byte[]>> getBase64EncodedWithRestResponseAsync();
+    Single<BodyResponse<byte[]>> getBase64EncodedWithRestResponseAsync();
 
     /**
      * Get value that is base64 encoded.
@@ -422,7 +423,7 @@ public interface Strings {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, byte[]>> getBase64UrlEncodedWithRestResponseAsync();
+    Single<BodyResponse<byte[]>> getBase64UrlEncodedWithRestResponseAsync();
 
     /**
      * Get value that is base64url encoded.
@@ -458,7 +459,7 @@ public interface Strings {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, Void>> putBase64UrlEncodedWithRestResponseAsync(@NonNull byte[] stringBody);
+    Single<VoidResponse> putBase64UrlEncodedWithRestResponseAsync(@NonNull byte[] stringBody);
 
     /**
      * Put value that is base64url encoded.
@@ -492,7 +493,7 @@ public interface Strings {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, byte[]>> getNullBase64UrlEncodedWithRestResponseAsync();
+    Single<BodyResponse<byte[]>> getNullBase64UrlEncodedWithRestResponseAsync();
 
     /**
      * Get null value that is expected to be base64url encoded.

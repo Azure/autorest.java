@@ -11,9 +11,9 @@
 package fixtures.headexceptions;
 
 import com.microsoft.azure.v2.CloudException;
-import com.microsoft.rest.v2.RestResponse;
 import com.microsoft.rest.v2.ServiceCallback;
 import com.microsoft.rest.v2.ServiceFuture;
+import com.microsoft.rest.v2.VoidResponse;
 import io.reactivex.Completable;
 import io.reactivex.Single;
 
@@ -44,7 +44,7 @@ public interface HeadExceptions {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, Void>> head200WithRestResponseAsync();
+    Single<VoidResponse> head200WithRestResponseAsync();
 
     /**
      * Return 200 status code if successful.
@@ -75,7 +75,7 @@ public interface HeadExceptions {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, Void>> head204WithRestResponseAsync();
+    Single<VoidResponse> head204WithRestResponseAsync();
 
     /**
      * Return 204 status code if successful.
@@ -106,7 +106,7 @@ public interface HeadExceptions {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, Void>> head404WithRestResponseAsync();
+    Single<VoidResponse> head404WithRestResponseAsync();
 
     /**
      * Return 404 status code if successful.

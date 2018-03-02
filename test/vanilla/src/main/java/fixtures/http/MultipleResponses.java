@@ -10,9 +10,10 @@
 
 package fixtures.http;
 
-import com.microsoft.rest.v2.RestResponse;
+import com.microsoft.rest.v2.BodyResponse;
 import com.microsoft.rest.v2.ServiceCallback;
 import com.microsoft.rest.v2.ServiceFuture;
+import com.microsoft.rest.v2.VoidResponse;
 import fixtures.http.models.A;
 import fixtures.http.models.AException;
 import fixtures.http.models.ErrorException;
@@ -48,7 +49,7 @@ public interface MultipleResponses {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, A>> get200Model204NoModelDefaultError200ValidWithRestResponseAsync();
+    Single<BodyResponse<A>> get200Model204NoModelDefaultError200ValidWithRestResponseAsync();
 
     /**
      * Send a 200 response with valid payload: {'statusCode': '200'}.
@@ -80,7 +81,7 @@ public interface MultipleResponses {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, A>> get200Model204NoModelDefaultError204ValidWithRestResponseAsync();
+    Single<BodyResponse<A>> get200Model204NoModelDefaultError204ValidWithRestResponseAsync();
 
     /**
      * Send a 204 response with no payload.
@@ -112,7 +113,7 @@ public interface MultipleResponses {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, A>> get200Model204NoModelDefaultError201InvalidWithRestResponseAsync();
+    Single<BodyResponse<A>> get200Model204NoModelDefaultError201InvalidWithRestResponseAsync();
 
     /**
      * Send a 201 response with valid payload: {'statusCode': '201'}.
@@ -144,7 +145,7 @@ public interface MultipleResponses {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, A>> get200Model204NoModelDefaultError202NoneWithRestResponseAsync();
+    Single<BodyResponse<A>> get200Model204NoModelDefaultError202NoneWithRestResponseAsync();
 
     /**
      * Send a 202 response with no payload:.
@@ -176,7 +177,7 @@ public interface MultipleResponses {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, A>> get200Model204NoModelDefaultError400ValidWithRestResponseAsync();
+    Single<BodyResponse<A>> get200Model204NoModelDefaultError400ValidWithRestResponseAsync();
 
     /**
      * Send a 400 response with valid error payload: {'status': 400, 'message': 'client error'}.
@@ -208,7 +209,7 @@ public interface MultipleResponses {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, A>> get200Model201ModelDefaultError200ValidWithRestResponseAsync();
+    Single<BodyResponse<A>> get200Model201ModelDefaultError200ValidWithRestResponseAsync();
 
     /**
      * Send a 200 response with valid payload: {'statusCode': '200'}.
@@ -240,7 +241,7 @@ public interface MultipleResponses {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, A>> get200Model201ModelDefaultError201ValidWithRestResponseAsync();
+    Single<BodyResponse<A>> get200Model201ModelDefaultError201ValidWithRestResponseAsync();
 
     /**
      * Send a 201 response with valid payload: {'statusCode': '201', 'textStatusCode': 'Created'}.
@@ -272,7 +273,7 @@ public interface MultipleResponses {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, A>> get200Model201ModelDefaultError400ValidWithRestResponseAsync();
+    Single<BodyResponse<A>> get200Model201ModelDefaultError400ValidWithRestResponseAsync();
 
     /**
      * Send a 400 response with valid payload: {'code': '400', 'message': 'client error'}.
@@ -304,7 +305,7 @@ public interface MultipleResponses {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, Object>> get200ModelA201ModelC404ModelDDefaultError200ValidWithRestResponseAsync();
+    Single<BodyResponse<Object>> get200ModelA201ModelC404ModelDDefaultError200ValidWithRestResponseAsync();
 
     /**
      * Send a 200 response with valid payload: {'statusCode': '200'}.
@@ -336,7 +337,7 @@ public interface MultipleResponses {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, Object>> get200ModelA201ModelC404ModelDDefaultError201ValidWithRestResponseAsync();
+    Single<BodyResponse<Object>> get200ModelA201ModelC404ModelDDefaultError201ValidWithRestResponseAsync();
 
     /**
      * Send a 200 response with valid payload: {'httpCode': '201'}.
@@ -368,7 +369,7 @@ public interface MultipleResponses {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, Object>> get200ModelA201ModelC404ModelDDefaultError404ValidWithRestResponseAsync();
+    Single<BodyResponse<Object>> get200ModelA201ModelC404ModelDDefaultError404ValidWithRestResponseAsync();
 
     /**
      * Send a 200 response with valid payload: {'httpStatusCode': '404'}.
@@ -400,7 +401,7 @@ public interface MultipleResponses {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, Object>> get200ModelA201ModelC404ModelDDefaultError400ValidWithRestResponseAsync();
+    Single<BodyResponse<Object>> get200ModelA201ModelC404ModelDDefaultError400ValidWithRestResponseAsync();
 
     /**
      * Send a 400 response with valid payload: {'code': '400', 'message': 'client error'}.
@@ -431,7 +432,7 @@ public interface MultipleResponses {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, Void>> get202None204NoneDefaultError202NoneWithRestResponseAsync();
+    Single<VoidResponse> get202None204NoneDefaultError202NoneWithRestResponseAsync();
 
     /**
      * Send a 202 response with no payload.
@@ -462,7 +463,7 @@ public interface MultipleResponses {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, Void>> get202None204NoneDefaultError204NoneWithRestResponseAsync();
+    Single<VoidResponse> get202None204NoneDefaultError204NoneWithRestResponseAsync();
 
     /**
      * Send a 204 response with no payload.
@@ -493,7 +494,7 @@ public interface MultipleResponses {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, Void>> get202None204NoneDefaultError400ValidWithRestResponseAsync();
+    Single<VoidResponse> get202None204NoneDefaultError400ValidWithRestResponseAsync();
 
     /**
      * Send a 400 response with valid payload: {'code': '400', 'message': 'client error'}.
@@ -523,7 +524,7 @@ public interface MultipleResponses {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, Void>> get202None204NoneDefaultNone202InvalidWithRestResponseAsync();
+    Single<VoidResponse> get202None204NoneDefaultNone202InvalidWithRestResponseAsync();
 
     /**
      * Send a 202 response with an unexpected payload {'property': 'value'}.
@@ -553,7 +554,7 @@ public interface MultipleResponses {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, Void>> get202None204NoneDefaultNone204NoneWithRestResponseAsync();
+    Single<VoidResponse> get202None204NoneDefaultNone204NoneWithRestResponseAsync();
 
     /**
      * Send a 204 response with no payload.
@@ -583,7 +584,7 @@ public interface MultipleResponses {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, Void>> get202None204NoneDefaultNone400NoneWithRestResponseAsync();
+    Single<VoidResponse> get202None204NoneDefaultNone400NoneWithRestResponseAsync();
 
     /**
      * Send a 400 response with no payload.
@@ -613,7 +614,7 @@ public interface MultipleResponses {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, Void>> get202None204NoneDefaultNone400InvalidWithRestResponseAsync();
+    Single<VoidResponse> get202None204NoneDefaultNone400InvalidWithRestResponseAsync();
 
     /**
      * Send a 400 response with an unexpected payload {'property': 'value'}.
@@ -645,7 +646,7 @@ public interface MultipleResponses {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, A>> getDefaultModelA200ValidWithRestResponseAsync();
+    Single<BodyResponse<A>> getDefaultModelA200ValidWithRestResponseAsync();
 
     /**
      * Send a 200 response with valid payload: {'statusCode': '200'}.
@@ -677,7 +678,7 @@ public interface MultipleResponses {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, A>> getDefaultModelA200NoneWithRestResponseAsync();
+    Single<BodyResponse<A>> getDefaultModelA200NoneWithRestResponseAsync();
 
     /**
      * Send a 200 response with no payload.
@@ -709,7 +710,7 @@ public interface MultipleResponses {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, A>> getDefaultModelA400ValidWithRestResponseAsync();
+    Single<BodyResponse<A>> getDefaultModelA400ValidWithRestResponseAsync();
 
     /**
      * Send a 400 response with valid payload: {'statusCode': '400'}.
@@ -741,7 +742,7 @@ public interface MultipleResponses {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, A>> getDefaultModelA400NoneWithRestResponseAsync();
+    Single<BodyResponse<A>> getDefaultModelA400NoneWithRestResponseAsync();
 
     /**
      * Send a 400 response with no payload.
@@ -771,7 +772,7 @@ public interface MultipleResponses {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, Void>> getDefaultNone200InvalidWithRestResponseAsync();
+    Single<VoidResponse> getDefaultNone200InvalidWithRestResponseAsync();
 
     /**
      * Send a 200 response with invalid payload: {'statusCode': '200'}.
@@ -801,7 +802,7 @@ public interface MultipleResponses {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, Void>> getDefaultNone200NoneWithRestResponseAsync();
+    Single<VoidResponse> getDefaultNone200NoneWithRestResponseAsync();
 
     /**
      * Send a 200 response with no payload.
@@ -831,7 +832,7 @@ public interface MultipleResponses {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, Void>> getDefaultNone400InvalidWithRestResponseAsync();
+    Single<VoidResponse> getDefaultNone400InvalidWithRestResponseAsync();
 
     /**
      * Send a 400 response with valid payload: {'statusCode': '400'}.
@@ -861,7 +862,7 @@ public interface MultipleResponses {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, Void>> getDefaultNone400NoneWithRestResponseAsync();
+    Single<VoidResponse> getDefaultNone400NoneWithRestResponseAsync();
 
     /**
      * Send a 400 response with no payload.
@@ -892,7 +893,7 @@ public interface MultipleResponses {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, A>> get200ModelA200NoneWithRestResponseAsync();
+    Single<BodyResponse<A>> get200ModelA200NoneWithRestResponseAsync();
 
     /**
      * Send a 200 response with no payload, when a payload is expected - client should return a null object of thde type for model A.
@@ -923,7 +924,7 @@ public interface MultipleResponses {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, A>> get200ModelA200ValidWithRestResponseAsync();
+    Single<BodyResponse<A>> get200ModelA200ValidWithRestResponseAsync();
 
     /**
      * Send a 200 response with payload {'statusCode': '200'}.
@@ -954,7 +955,7 @@ public interface MultipleResponses {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, A>> get200ModelA200InvalidWithRestResponseAsync();
+    Single<BodyResponse<A>> get200ModelA200InvalidWithRestResponseAsync();
 
     /**
      * Send a 200 response with invalid payload {'statusCodeInvalid': '200'}.
@@ -985,7 +986,7 @@ public interface MultipleResponses {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, A>> get200ModelA400NoneWithRestResponseAsync();
+    Single<BodyResponse<A>> get200ModelA400NoneWithRestResponseAsync();
 
     /**
      * Send a 400 response with no payload client should treat as an http error with no error model.
@@ -1016,7 +1017,7 @@ public interface MultipleResponses {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, A>> get200ModelA400ValidWithRestResponseAsync();
+    Single<BodyResponse<A>> get200ModelA400ValidWithRestResponseAsync();
 
     /**
      * Send a 200 response with payload {'statusCode': '400'}.
@@ -1047,7 +1048,7 @@ public interface MultipleResponses {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, A>> get200ModelA400InvalidWithRestResponseAsync();
+    Single<BodyResponse<A>> get200ModelA400InvalidWithRestResponseAsync();
 
     /**
      * Send a 200 response with invalid payload {'statusCodeInvalid': '400'}.
@@ -1078,7 +1079,7 @@ public interface MultipleResponses {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, A>> get200ModelA202ValidWithRestResponseAsync();
+    Single<BodyResponse<A>> get200ModelA202ValidWithRestResponseAsync();
 
     /**
      * Send a 202 response with payload {'statusCode': '202'}.

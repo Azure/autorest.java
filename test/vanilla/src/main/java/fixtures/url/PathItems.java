@@ -10,9 +10,9 @@
 
 package fixtures.url;
 
-import com.microsoft.rest.v2.RestResponse;
 import com.microsoft.rest.v2.ServiceCallback;
 import com.microsoft.rest.v2.ServiceFuture;
+import com.microsoft.rest.v2.VoidResponse;
 import fixtures.url.models.ErrorException;
 import io.reactivex.Completable;
 import io.reactivex.Single;
@@ -53,7 +53,7 @@ public interface PathItems {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, Void>> getAllWithValuesWithRestResponseAsync(@NonNull String localStringPath, @NonNull String pathItemStringPath);
+    Single<VoidResponse> getAllWithValuesWithRestResponseAsync(@NonNull String localStringPath, @NonNull String pathItemStringPath);
 
     /**
      * send globalStringPath='globalStringPath', pathItemStringPath='pathItemStringPath', localStringPath='localStringPath', globalStringQuery='globalStringQuery', pathItemStringQuery='pathItemStringQuery', localStringQuery='localStringQuery'.
@@ -101,7 +101,7 @@ public interface PathItems {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, Void>> getAllWithValuesWithRestResponseAsync(@NonNull String localStringPath, @NonNull String pathItemStringPath, String localStringQuery, String pathItemStringQuery);
+    Single<VoidResponse> getAllWithValuesWithRestResponseAsync(@NonNull String localStringPath, @NonNull String pathItemStringPath, String localStringQuery, String pathItemStringQuery);
 
     /**
      * send globalStringPath='globalStringPath', pathItemStringPath='pathItemStringPath', localStringPath='localStringPath', globalStringQuery='globalStringQuery', pathItemStringQuery='pathItemStringQuery', localStringQuery='localStringQuery'.
@@ -145,7 +145,7 @@ public interface PathItems {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, Void>> getGlobalQueryNullWithRestResponseAsync(@NonNull String localStringPath, @NonNull String pathItemStringPath);
+    Single<VoidResponse> getGlobalQueryNullWithRestResponseAsync(@NonNull String localStringPath, @NonNull String pathItemStringPath);
 
     /**
      * send globalStringPath='globalStringPath', pathItemStringPath='pathItemStringPath', localStringPath='localStringPath', globalStringQuery=null, pathItemStringQuery='pathItemStringQuery', localStringQuery='localStringQuery'.
@@ -193,7 +193,7 @@ public interface PathItems {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, Void>> getGlobalQueryNullWithRestResponseAsync(@NonNull String localStringPath, @NonNull String pathItemStringPath, String localStringQuery, String pathItemStringQuery);
+    Single<VoidResponse> getGlobalQueryNullWithRestResponseAsync(@NonNull String localStringPath, @NonNull String pathItemStringPath, String localStringQuery, String pathItemStringQuery);
 
     /**
      * send globalStringPath='globalStringPath', pathItemStringPath='pathItemStringPath', localStringPath='localStringPath', globalStringQuery=null, pathItemStringQuery='pathItemStringQuery', localStringQuery='localStringQuery'.
@@ -237,7 +237,7 @@ public interface PathItems {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, Void>> getGlobalAndLocalQueryNullWithRestResponseAsync(@NonNull String localStringPath, @NonNull String pathItemStringPath);
+    Single<VoidResponse> getGlobalAndLocalQueryNullWithRestResponseAsync(@NonNull String localStringPath, @NonNull String pathItemStringPath);
 
     /**
      * send globalStringPath=globalStringPath, pathItemStringPath='pathItemStringPath', localStringPath='localStringPath', globalStringQuery=null, pathItemStringQuery='pathItemStringQuery', localStringQuery=null.
@@ -285,7 +285,7 @@ public interface PathItems {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, Void>> getGlobalAndLocalQueryNullWithRestResponseAsync(@NonNull String localStringPath, @NonNull String pathItemStringPath, String localStringQuery, String pathItemStringQuery);
+    Single<VoidResponse> getGlobalAndLocalQueryNullWithRestResponseAsync(@NonNull String localStringPath, @NonNull String pathItemStringPath, String localStringQuery, String pathItemStringQuery);
 
     /**
      * send globalStringPath=globalStringPath, pathItemStringPath='pathItemStringPath', localStringPath='localStringPath', globalStringQuery=null, pathItemStringQuery='pathItemStringQuery', localStringQuery=null.
@@ -329,7 +329,7 @@ public interface PathItems {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, Void>> getLocalPathItemQueryNullWithRestResponseAsync(@NonNull String localStringPath, @NonNull String pathItemStringPath);
+    Single<VoidResponse> getLocalPathItemQueryNullWithRestResponseAsync(@NonNull String localStringPath, @NonNull String pathItemStringPath);
 
     /**
      * send globalStringPath='globalStringPath', pathItemStringPath='pathItemStringPath', localStringPath='localStringPath', globalStringQuery='globalStringQuery', pathItemStringQuery=null, localStringQuery=null.
@@ -377,7 +377,7 @@ public interface PathItems {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, Void>> getLocalPathItemQueryNullWithRestResponseAsync(@NonNull String localStringPath, @NonNull String pathItemStringPath, String localStringQuery, String pathItemStringQuery);
+    Single<VoidResponse> getLocalPathItemQueryNullWithRestResponseAsync(@NonNull String localStringPath, @NonNull String pathItemStringPath, String localStringQuery, String pathItemStringQuery);
 
     /**
      * send globalStringPath='globalStringPath', pathItemStringPath='pathItemStringPath', localStringPath='localStringPath', globalStringQuery='globalStringQuery', pathItemStringQuery=null, localStringQuery=null.

@@ -10,14 +10,15 @@
 
 package fixtures.xml;
 
-import com.microsoft.rest.v2.RestResponse;
+import com.microsoft.rest.v2.BodyResponse;
 import com.microsoft.rest.v2.ServiceCallback;
 import com.microsoft.rest.v2.ServiceFuture;
+import com.microsoft.rest.v2.VoidResponse;
 import fixtures.xml.models.AppleBarrel;
 import fixtures.xml.models.Banana;
 import fixtures.xml.models.ErrorException;
 import fixtures.xml.models.Slideshow;
-import fixtures.xml.models.XmlGetHeadersHeaders;
+import fixtures.xml.models.XmlGetHeadersResponse;
 import io.reactivex.Completable;
 import io.reactivex.Maybe;
 import io.reactivex.Single;
@@ -52,7 +53,7 @@ public interface Xmls {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, Slideshow>> getSimpleWithRestResponseAsync();
+    Single<BodyResponse<Slideshow>> getSimpleWithRestResponseAsync();
 
     /**
      * Get a simple XML document.
@@ -88,7 +89,7 @@ public interface Xmls {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, Void>> putSimpleWithRestResponseAsync(@NonNull Slideshow wrappedLists);
+    Single<VoidResponse> putSimpleWithRestResponseAsync(@NonNull Slideshow wrappedLists);
 
     /**
      * Put a simple XML document.
@@ -121,7 +122,7 @@ public interface Xmls {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, AppleBarrel>> getWrappedListsWithRestResponseAsync();
+    Single<BodyResponse<AppleBarrel>> getWrappedListsWithRestResponseAsync();
 
     /**
      * Get an XML document with multiple wrapped lists.
@@ -157,7 +158,7 @@ public interface Xmls {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, Void>> putWrappedListsWithRestResponseAsync(@NonNull AppleBarrel wrappedLists);
+    Single<VoidResponse> putWrappedListsWithRestResponseAsync(@NonNull AppleBarrel wrappedLists);
 
     /**
      * Put an XML document with multiple wrapped lists.
@@ -189,7 +190,7 @@ public interface Xmls {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<XmlGetHeadersHeaders, Void>> getHeadersWithRestResponseAsync();
+    Single<XmlGetHeadersResponse> getHeadersWithRestResponseAsync();
 
     /**
      * Get strongly-typed response headers.
@@ -220,7 +221,7 @@ public interface Xmls {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, Slideshow>> getEmptyListWithRestResponseAsync();
+    Single<BodyResponse<Slideshow>> getEmptyListWithRestResponseAsync();
 
     /**
      * Get an empty list.
@@ -251,7 +252,7 @@ public interface Xmls {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, AppleBarrel>> getEmptyWrappedListsWithRestResponseAsync();
+    Single<BodyResponse<AppleBarrel>> getEmptyWrappedListsWithRestResponseAsync();
 
     /**
      * Gets some empty wrapped lists.
@@ -282,7 +283,7 @@ public interface Xmls {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, List<Banana>>> getRootListWithRestResponseAsync();
+    Single<BodyResponse<List<Banana>>> getRootListWithRestResponseAsync();
 
     /**
      * Gets a list as the root element.
@@ -317,7 +318,7 @@ public interface Xmls {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, Void>> putRootListWithRestResponseAsync(@NonNull List<Banana> bananas);
+    Single<VoidResponse> putRootListWithRestResponseAsync(@NonNull List<Banana> bananas);
 
     /**
      * Puts a list as the root element.
@@ -350,7 +351,7 @@ public interface Xmls {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, List<Banana>>> getEmptyRootListWithRestResponseAsync();
+    Single<BodyResponse<List<Banana>>> getEmptyRootListWithRestResponseAsync();
 
     /**
      * Gets an empty list as the root element.
@@ -385,7 +386,7 @@ public interface Xmls {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, Void>> putEmptyRootListWithRestResponseAsync(@NonNull List<Banana> bananas);
+    Single<VoidResponse> putEmptyRootListWithRestResponseAsync(@NonNull List<Banana> bananas);
 
     /**
      * Puts an empty list as the root element.
@@ -418,7 +419,7 @@ public interface Xmls {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, Banana>> getEmptyChildElementWithRestResponseAsync();
+    Single<BodyResponse<Banana>> getEmptyChildElementWithRestResponseAsync();
 
     /**
      * Gets an XML document with an empty child element.
@@ -453,7 +454,7 @@ public interface Xmls {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, Void>> putEmptyChildElementWithRestResponseAsync(@NonNull Banana banana);
+    Single<VoidResponse> putEmptyChildElementWithRestResponseAsync(@NonNull Banana banana);
 
     /**
      * Puts a value with an empty child element.

@@ -10,9 +10,9 @@
 
 package fixtures.bodyformdata;
 
-import com.microsoft.rest.v2.RestResponse;
 import com.microsoft.rest.v2.ServiceCallback;
 import com.microsoft.rest.v2.ServiceFuture;
+import com.microsoft.rest.v2.StreamResponse;
 import fixtures.bodyformdata.models.ErrorException;
 import io.reactivex.Flowable;
 import io.reactivex.Maybe;
@@ -56,7 +56,7 @@ public interface Formdatas {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, Flowable<ByteBuffer>>> uploadFileWithRestResponseAsync(@NonNull Flowable<ByteBuffer> fileContent, @NonNull String fileName);
+    Single<StreamResponse> uploadFileWithRestResponseAsync(@NonNull Flowable<ByteBuffer> fileContent, @NonNull String fileName);
 
     /**
      * Upload file.
@@ -96,7 +96,7 @@ public interface Formdatas {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, Flowable<ByteBuffer>>> uploadFileViaBodyWithRestResponseAsync(@NonNull Flowable<ByteBuffer> fileContent);
+    Single<StreamResponse> uploadFileViaBodyWithRestResponseAsync(@NonNull Flowable<ByteBuffer> fileContent);
 
     /**
      * Upload file.

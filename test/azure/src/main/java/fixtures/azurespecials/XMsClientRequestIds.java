@@ -11,9 +11,9 @@
 package fixtures.azurespecials;
 
 import com.microsoft.azure.v2.CloudException;
-import com.microsoft.rest.v2.RestResponse;
 import com.microsoft.rest.v2.ServiceCallback;
 import com.microsoft.rest.v2.ServiceFuture;
+import com.microsoft.rest.v2.VoidResponse;
 import fixtures.azurespecials.models.ErrorException;
 import io.reactivex.Completable;
 import io.reactivex.Single;
@@ -46,7 +46,7 @@ public interface XMsClientRequestIds {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, Void>> getWithRestResponseAsync();
+    Single<VoidResponse> getWithRestResponseAsync();
 
     /**
      * Get method that overwrites x-ms-client-request header with value 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0.
@@ -82,7 +82,7 @@ public interface XMsClientRequestIds {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, Void>> paramGetWithRestResponseAsync(@NonNull String xMsClientRequestId);
+    Single<VoidResponse> paramGetWithRestResponseAsync(@NonNull String xMsClientRequestId);
 
     /**
      * Get method that overwrites x-ms-client-request header with value 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0.

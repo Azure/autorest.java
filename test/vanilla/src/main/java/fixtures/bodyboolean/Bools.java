@@ -10,9 +10,10 @@
 
 package fixtures.bodyboolean;
 
-import com.microsoft.rest.v2.RestResponse;
+import com.microsoft.rest.v2.BodyResponse;
 import com.microsoft.rest.v2.ServiceCallback;
 import com.microsoft.rest.v2.ServiceFuture;
+import com.microsoft.rest.v2.VoidResponse;
 import fixtures.bodyboolean.models.ErrorException;
 import io.reactivex.Completable;
 import io.reactivex.Maybe;
@@ -47,7 +48,7 @@ public interface Bools {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, Boolean>> getTrueWithRestResponseAsync();
+    Single<BodyResponse<Boolean>> getTrueWithRestResponseAsync();
 
     /**
      * Get true Boolean value.
@@ -83,7 +84,7 @@ public interface Bools {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, Void>> putTrueWithRestResponseAsync(@NonNull boolean boolBody);
+    Single<VoidResponse> putTrueWithRestResponseAsync(@NonNull boolean boolBody);
 
     /**
      * Set Boolean value true.
@@ -117,7 +118,7 @@ public interface Bools {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, Boolean>> getFalseWithRestResponseAsync();
+    Single<BodyResponse<Boolean>> getFalseWithRestResponseAsync();
 
     /**
      * Get false Boolean value.
@@ -153,7 +154,7 @@ public interface Bools {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, Void>> putFalseWithRestResponseAsync(@NonNull boolean boolBody);
+    Single<VoidResponse> putFalseWithRestResponseAsync(@NonNull boolean boolBody);
 
     /**
      * Set Boolean value false.
@@ -187,7 +188,7 @@ public interface Bools {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, Boolean>> getNullWithRestResponseAsync();
+    Single<BodyResponse<Boolean>> getNullWithRestResponseAsync();
 
     /**
      * Get null Boolean value.
@@ -219,7 +220,7 @@ public interface Bools {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, Boolean>> getInvalidWithRestResponseAsync();
+    Single<BodyResponse<Boolean>> getInvalidWithRestResponseAsync();
 
     /**
      * Get invalid Boolean value.

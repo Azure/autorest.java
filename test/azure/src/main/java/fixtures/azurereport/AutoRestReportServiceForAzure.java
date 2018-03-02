@@ -10,7 +10,7 @@
 
 package fixtures.azurereport;
 
-import com.microsoft.rest.v2.RestResponse;
+import com.microsoft.rest.v2.BodyResponse;
 import com.microsoft.rest.v2.ServiceCallback;
 import com.microsoft.rest.v2.ServiceFuture;
 import fixtures.azurereport.models.ErrorException;
@@ -90,7 +90,7 @@ public interface AutoRestReportServiceForAzure {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, Map<String, Integer>>> getReportWithRestResponseAsync();
+    Single<BodyResponse<Map<String, Integer>>> getReportWithRestResponseAsync();
 
     /**
      * Get test coverage report.
@@ -127,7 +127,7 @@ public interface AutoRestReportServiceForAzure {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, Map<String, Integer>>> getReportWithRestResponseAsync(String qualifier);
+    Single<BodyResponse<Map<String, Integer>>> getReportWithRestResponseAsync(String qualifier);
 
     /**
      * Get test coverage report.

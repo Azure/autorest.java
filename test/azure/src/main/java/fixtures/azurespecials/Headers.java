@@ -10,14 +10,13 @@
 
 package fixtures.azurespecials;
 
-import com.microsoft.rest.v2.RestResponse;
 import com.microsoft.rest.v2.ServiceCallback;
 import com.microsoft.rest.v2.ServiceFuture;
 import fixtures.azurespecials.models.ErrorException;
-import fixtures.azurespecials.models.HeaderCustomNamedRequestIdHeaders;
-import fixtures.azurespecials.models.HeaderCustomNamedRequestIdHeadHeaders;
-import fixtures.azurespecials.models.HeaderCustomNamedRequestIdParamGroupingHeaders;
+import fixtures.azurespecials.models.HeaderCustomNamedRequestIdHeadResponse;
 import fixtures.azurespecials.models.HeaderCustomNamedRequestIdParamGroupingParameters;
+import fixtures.azurespecials.models.HeaderCustomNamedRequestIdParamGroupingResponse;
+import fixtures.azurespecials.models.HeaderCustomNamedRequestIdResponse;
 import io.reactivex.Completable;
 import io.reactivex.Maybe;
 import io.reactivex.Single;
@@ -55,7 +54,7 @@ public interface Headers {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<HeaderCustomNamedRequestIdHeaders, Void>> customNamedRequestIdWithRestResponseAsync(@NonNull String fooClientRequestId);
+    Single<HeaderCustomNamedRequestIdResponse> customNamedRequestIdWithRestResponseAsync(@NonNull String fooClientRequestId);
 
     /**
      * Send foo-client-request-id = 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0 in the header of the request.
@@ -93,7 +92,7 @@ public interface Headers {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<HeaderCustomNamedRequestIdParamGroupingHeaders, Void>> customNamedRequestIdParamGroupingWithRestResponseAsync(@NonNull HeaderCustomNamedRequestIdParamGroupingParameters headerCustomNamedRequestIdParamGroupingParameters);
+    Single<HeaderCustomNamedRequestIdParamGroupingResponse> customNamedRequestIdParamGroupingWithRestResponseAsync(@NonNull HeaderCustomNamedRequestIdParamGroupingParameters headerCustomNamedRequestIdParamGroupingParameters);
 
     /**
      * Send foo-client-request-id = 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0 in the header of the request, via a parameter group.
@@ -132,7 +131,7 @@ public interface Headers {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<HeaderCustomNamedRequestIdHeadHeaders, Boolean>> customNamedRequestIdHeadWithRestResponseAsync(@NonNull String fooClientRequestId);
+    Single<HeaderCustomNamedRequestIdHeadResponse> customNamedRequestIdHeadWithRestResponseAsync(@NonNull String fooClientRequestId);
 
     /**
      * Send foo-client-request-id = 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0 in the header of the request.

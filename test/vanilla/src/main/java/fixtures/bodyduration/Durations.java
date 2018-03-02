@@ -10,9 +10,10 @@
 
 package fixtures.bodyduration;
 
-import com.microsoft.rest.v2.RestResponse;
+import com.microsoft.rest.v2.BodyResponse;
 import com.microsoft.rest.v2.ServiceCallback;
 import com.microsoft.rest.v2.ServiceFuture;
+import com.microsoft.rest.v2.VoidResponse;
 import fixtures.bodyduration.models.ErrorException;
 import io.reactivex.Completable;
 import io.reactivex.Maybe;
@@ -48,7 +49,7 @@ public interface Durations {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, Period>> getNullWithRestResponseAsync();
+    Single<BodyResponse<Period>> getNullWithRestResponseAsync();
 
     /**
      * Get null duration value.
@@ -84,7 +85,7 @@ public interface Durations {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, Void>> putPositiveDurationWithRestResponseAsync(@NonNull Period durationBody);
+    Single<VoidResponse> putPositiveDurationWithRestResponseAsync(@NonNull Period durationBody);
 
     /**
      * Put a positive duration value.
@@ -118,7 +119,7 @@ public interface Durations {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, Period>> getPositiveDurationWithRestResponseAsync();
+    Single<BodyResponse<Period>> getPositiveDurationWithRestResponseAsync();
 
     /**
      * Get a positive duration value.
@@ -150,7 +151,7 @@ public interface Durations {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, Period>> getInvalidWithRestResponseAsync();
+    Single<BodyResponse<Period>> getInvalidWithRestResponseAsync();
 
     /**
      * Get an invalid duration value.

@@ -10,25 +10,24 @@
 
 package fixtures.http;
 
-import com.microsoft.rest.v2.RestResponse;
 import com.microsoft.rest.v2.ServiceCallback;
 import com.microsoft.rest.v2.ServiceFuture;
 import fixtures.http.models.ErrorException;
-import fixtures.http.models.HttpRedirectsDelete307Headers;
-import fixtures.http.models.HttpRedirectsGet300Headers;
-import fixtures.http.models.HttpRedirectsGet301Headers;
-import fixtures.http.models.HttpRedirectsGet302Headers;
-import fixtures.http.models.HttpRedirectsGet307Headers;
-import fixtures.http.models.HttpRedirectsHead300Headers;
-import fixtures.http.models.HttpRedirectsHead301Headers;
-import fixtures.http.models.HttpRedirectsHead302Headers;
-import fixtures.http.models.HttpRedirectsHead307Headers;
-import fixtures.http.models.HttpRedirectsPatch302Headers;
-import fixtures.http.models.HttpRedirectsPatch307Headers;
-import fixtures.http.models.HttpRedirectsPost303Headers;
-import fixtures.http.models.HttpRedirectsPost307Headers;
-import fixtures.http.models.HttpRedirectsPut301Headers;
-import fixtures.http.models.HttpRedirectsPut307Headers;
+import fixtures.http.models.HttpRedirectsDelete307Response;
+import fixtures.http.models.HttpRedirectsGet300Response;
+import fixtures.http.models.HttpRedirectsGet301Response;
+import fixtures.http.models.HttpRedirectsGet302Response;
+import fixtures.http.models.HttpRedirectsGet307Response;
+import fixtures.http.models.HttpRedirectsHead300Response;
+import fixtures.http.models.HttpRedirectsHead301Response;
+import fixtures.http.models.HttpRedirectsHead302Response;
+import fixtures.http.models.HttpRedirectsHead307Response;
+import fixtures.http.models.HttpRedirectsPatch302Response;
+import fixtures.http.models.HttpRedirectsPatch307Response;
+import fixtures.http.models.HttpRedirectsPost303Response;
+import fixtures.http.models.HttpRedirectsPost307Response;
+import fixtures.http.models.HttpRedirectsPut301Response;
+import fixtures.http.models.HttpRedirectsPut307Response;
 import io.reactivex.Completable;
 import io.reactivex.Maybe;
 import io.reactivex.Single;
@@ -61,7 +60,7 @@ public interface HttpRedirects {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<HttpRedirectsHead300Headers, Void>> head300WithRestResponseAsync();
+    Single<HttpRedirectsHead300Response> head300WithRestResponseAsync();
 
     /**
      * Return 300 status code and redirect to /http/success/200.
@@ -93,7 +92,7 @@ public interface HttpRedirects {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<HttpRedirectsGet300Headers, List<String>>> get300WithRestResponseAsync();
+    Single<HttpRedirectsGet300Response> get300WithRestResponseAsync();
 
     /**
      * Return 300 status code and redirect to /http/success/200.
@@ -124,7 +123,7 @@ public interface HttpRedirects {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<HttpRedirectsHead301Headers, Void>> head301WithRestResponseAsync();
+    Single<HttpRedirectsHead301Response> head301WithRestResponseAsync();
 
     /**
      * Return 301 status code and redirect to /http/success/200.
@@ -155,7 +154,7 @@ public interface HttpRedirects {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<HttpRedirectsGet301Headers, Void>> get301WithRestResponseAsync();
+    Single<HttpRedirectsGet301Response> get301WithRestResponseAsync();
 
     /**
      * Return 301 status code and redirect to /http/success/200.
@@ -186,7 +185,7 @@ public interface HttpRedirects {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<HttpRedirectsPut301Headers, Void>> put301WithRestResponseAsync();
+    Single<HttpRedirectsPut301Response> put301WithRestResponseAsync();
 
     /**
      * Put true Boolean value in request returns 301.  This request should not be automatically redirected, but should return the received 301 to the caller for evaluation.
@@ -222,7 +221,7 @@ public interface HttpRedirects {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<HttpRedirectsPut301Headers, Void>> put301WithRestResponseAsync(Boolean booleanValue);
+    Single<HttpRedirectsPut301Response> put301WithRestResponseAsync(Boolean booleanValue);
 
     /**
      * Put true Boolean value in request returns 301.  This request should not be automatically redirected, but should return the received 301 to the caller for evaluation.
@@ -255,7 +254,7 @@ public interface HttpRedirects {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<HttpRedirectsHead302Headers, Void>> head302WithRestResponseAsync();
+    Single<HttpRedirectsHead302Response> head302WithRestResponseAsync();
 
     /**
      * Return 302 status code and redirect to /http/success/200.
@@ -286,7 +285,7 @@ public interface HttpRedirects {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<HttpRedirectsGet302Headers, Void>> get302WithRestResponseAsync();
+    Single<HttpRedirectsGet302Response> get302WithRestResponseAsync();
 
     /**
      * Return 302 status code and redirect to /http/success/200.
@@ -317,7 +316,7 @@ public interface HttpRedirects {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<HttpRedirectsPatch302Headers, Void>> patch302WithRestResponseAsync();
+    Single<HttpRedirectsPatch302Response> patch302WithRestResponseAsync();
 
     /**
      * Patch true Boolean value in request returns 302.  This request should not be automatically redirected, but should return the received 302 to the caller for evaluation.
@@ -353,7 +352,7 @@ public interface HttpRedirects {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<HttpRedirectsPatch302Headers, Void>> patch302WithRestResponseAsync(Boolean booleanValue);
+    Single<HttpRedirectsPatch302Response> patch302WithRestResponseAsync(Boolean booleanValue);
 
     /**
      * Patch true Boolean value in request returns 302.  This request should not be automatically redirected, but should return the received 302 to the caller for evaluation.
@@ -386,7 +385,7 @@ public interface HttpRedirects {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<HttpRedirectsPost303Headers, Void>> post303WithRestResponseAsync();
+    Single<HttpRedirectsPost303Response> post303WithRestResponseAsync();
 
     /**
      * Post true Boolean value in request returns 303.  This request should be automatically redirected usign a get, ultimately returning a 200 status code.
@@ -422,7 +421,7 @@ public interface HttpRedirects {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<HttpRedirectsPost303Headers, Void>> post303WithRestResponseAsync(Boolean booleanValue);
+    Single<HttpRedirectsPost303Response> post303WithRestResponseAsync(Boolean booleanValue);
 
     /**
      * Post true Boolean value in request returns 303.  This request should be automatically redirected usign a get, ultimately returning a 200 status code.
@@ -455,7 +454,7 @@ public interface HttpRedirects {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<HttpRedirectsHead307Headers, Void>> head307WithRestResponseAsync();
+    Single<HttpRedirectsHead307Response> head307WithRestResponseAsync();
 
     /**
      * Redirect with 307, resulting in a 200 success.
@@ -486,7 +485,7 @@ public interface HttpRedirects {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<HttpRedirectsGet307Headers, Void>> get307WithRestResponseAsync();
+    Single<HttpRedirectsGet307Response> get307WithRestResponseAsync();
 
     /**
      * Redirect get with 307, resulting in a 200 success.
@@ -517,7 +516,7 @@ public interface HttpRedirects {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<HttpRedirectsPut307Headers, Void>> put307WithRestResponseAsync();
+    Single<HttpRedirectsPut307Response> put307WithRestResponseAsync();
 
     /**
      * Put redirected with 307, resulting in a 200 after redirect.
@@ -553,7 +552,7 @@ public interface HttpRedirects {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<HttpRedirectsPut307Headers, Void>> put307WithRestResponseAsync(Boolean booleanValue);
+    Single<HttpRedirectsPut307Response> put307WithRestResponseAsync(Boolean booleanValue);
 
     /**
      * Put redirected with 307, resulting in a 200 after redirect.
@@ -586,7 +585,7 @@ public interface HttpRedirects {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<HttpRedirectsPatch307Headers, Void>> patch307WithRestResponseAsync();
+    Single<HttpRedirectsPatch307Response> patch307WithRestResponseAsync();
 
     /**
      * Patch redirected with 307, resulting in a 200 after redirect.
@@ -622,7 +621,7 @@ public interface HttpRedirects {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<HttpRedirectsPatch307Headers, Void>> patch307WithRestResponseAsync(Boolean booleanValue);
+    Single<HttpRedirectsPatch307Response> patch307WithRestResponseAsync(Boolean booleanValue);
 
     /**
      * Patch redirected with 307, resulting in a 200 after redirect.
@@ -655,7 +654,7 @@ public interface HttpRedirects {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<HttpRedirectsPost307Headers, Void>> post307WithRestResponseAsync();
+    Single<HttpRedirectsPost307Response> post307WithRestResponseAsync();
 
     /**
      * Post redirected with 307, resulting in a 200 after redirect.
@@ -691,7 +690,7 @@ public interface HttpRedirects {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<HttpRedirectsPost307Headers, Void>> post307WithRestResponseAsync(Boolean booleanValue);
+    Single<HttpRedirectsPost307Response> post307WithRestResponseAsync(Boolean booleanValue);
 
     /**
      * Post redirected with 307, resulting in a 200 after redirect.
@@ -724,7 +723,7 @@ public interface HttpRedirects {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<HttpRedirectsDelete307Headers, Void>> delete307WithRestResponseAsync();
+    Single<HttpRedirectsDelete307Response> delete307WithRestResponseAsync();
 
     /**
      * Delete redirected with 307, resulting in a 200 after redirect.
@@ -760,7 +759,7 @@ public interface HttpRedirects {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<HttpRedirectsDelete307Headers, Void>> delete307WithRestResponseAsync(Boolean booleanValue);
+    Single<HttpRedirectsDelete307Response> delete307WithRestResponseAsync(Boolean booleanValue);
 
     /**
      * Delete redirected with 307, resulting in a 200 after redirect.

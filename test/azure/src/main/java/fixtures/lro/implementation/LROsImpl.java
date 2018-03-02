@@ -14,11 +14,12 @@ import com.microsoft.azure.v2.AzureProxy;
 import com.microsoft.azure.v2.CloudException;
 import com.microsoft.azure.v2.OperationStatus;
 import com.microsoft.azure.v2.util.ServiceFutureUtil;
+import com.microsoft.rest.v2.BodyResponse;
 import com.microsoft.rest.v2.OperationDescription;
-import com.microsoft.rest.v2.RestResponse;
 import com.microsoft.rest.v2.ServiceCallback;
 import com.microsoft.rest.v2.ServiceFuture;
 import com.microsoft.rest.v2.Validator;
+import com.microsoft.rest.v2.VoidResponse;
 import com.microsoft.rest.v2.annotations.BodyParam;
 import com.microsoft.rest.v2.annotations.DELETE;
 import com.microsoft.rest.v2.annotations.ExpectedResponses;
@@ -29,29 +30,29 @@ import com.microsoft.rest.v2.annotations.PUT;
 import com.microsoft.rest.v2.annotations.ResumeOperation;
 import com.microsoft.rest.v2.annotations.UnexpectedResponseExceptionType;
 import fixtures.lro.LROs;
-import fixtures.lro.models.LROsDelete202NoRetry204Headers;
-import fixtures.lro.models.LROsDelete202Retry200Headers;
-import fixtures.lro.models.LROsDeleteAsyncNoHeaderInRetryHeaders;
-import fixtures.lro.models.LROsDeleteAsyncNoRetrySucceededHeaders;
-import fixtures.lro.models.LROsDeleteAsyncRetrycanceledHeaders;
-import fixtures.lro.models.LROsDeleteAsyncRetryFailedHeaders;
-import fixtures.lro.models.LROsDeleteAsyncRetrySucceededHeaders;
-import fixtures.lro.models.LROsDeleteNoHeaderInRetryHeaders;
-import fixtures.lro.models.LROsDeleteProvisioning202Accepted200SucceededHeaders;
-import fixtures.lro.models.LROsDeleteProvisioning202Deletingcanceled200Headers;
-import fixtures.lro.models.LROsDeleteProvisioning202DeletingFailed200Headers;
-import fixtures.lro.models.LROsPost202NoRetry204Headers;
-import fixtures.lro.models.LROsPost202Retry200Headers;
-import fixtures.lro.models.LROsPostAsyncNoRetrySucceededHeaders;
-import fixtures.lro.models.LROsPostAsyncRetrycanceledHeaders;
-import fixtures.lro.models.LROsPostAsyncRetryFailedHeaders;
-import fixtures.lro.models.LROsPostAsyncRetrySucceededHeaders;
-import fixtures.lro.models.LROsPutAsyncNoHeaderInRetryHeaders;
-import fixtures.lro.models.LROsPutAsyncNoRetrycanceledHeaders;
-import fixtures.lro.models.LROsPutAsyncNoRetrySucceededHeaders;
-import fixtures.lro.models.LROsPutAsyncRetryFailedHeaders;
-import fixtures.lro.models.LROsPutAsyncRetrySucceededHeaders;
-import fixtures.lro.models.LROsPutNoHeaderInRetryHeaders;
+import fixtures.lro.models.LROsDelete202NoRetry204Response;
+import fixtures.lro.models.LROsDelete202Retry200Response;
+import fixtures.lro.models.LROsDeleteAsyncNoHeaderInRetryResponse;
+import fixtures.lro.models.LROsDeleteAsyncNoRetrySucceededResponse;
+import fixtures.lro.models.LROsDeleteAsyncRetrycanceledResponse;
+import fixtures.lro.models.LROsDeleteAsyncRetryFailedResponse;
+import fixtures.lro.models.LROsDeleteAsyncRetrySucceededResponse;
+import fixtures.lro.models.LROsDeleteNoHeaderInRetryResponse;
+import fixtures.lro.models.LROsDeleteProvisioning202Accepted200SucceededResponse;
+import fixtures.lro.models.LROsDeleteProvisioning202Deletingcanceled200Response;
+import fixtures.lro.models.LROsDeleteProvisioning202DeletingFailed200Response;
+import fixtures.lro.models.LROsPost202NoRetry204Response;
+import fixtures.lro.models.LROsPost202Retry200Response;
+import fixtures.lro.models.LROsPostAsyncNoRetrySucceededResponse;
+import fixtures.lro.models.LROsPostAsyncRetrycanceledResponse;
+import fixtures.lro.models.LROsPostAsyncRetryFailedResponse;
+import fixtures.lro.models.LROsPostAsyncRetrySucceededResponse;
+import fixtures.lro.models.LROsPutAsyncNoHeaderInRetryResponse;
+import fixtures.lro.models.LROsPutAsyncNoRetrycanceledResponse;
+import fixtures.lro.models.LROsPutAsyncNoRetrySucceededResponse;
+import fixtures.lro.models.LROsPutAsyncRetryFailedResponse;
+import fixtures.lro.models.LROsPutAsyncRetrySucceededResponse;
+import fixtures.lro.models.LROsPutNoHeaderInRetryResponse;
 import fixtures.lro.models.Product;
 import fixtures.lro.models.Sku;
 import fixtures.lro.models.SubProduct;
@@ -100,7 +101,7 @@ public final class LROsImpl implements LROs {
         @PUT("lro/put/200/succeeded")
         @ExpectedResponses({200, 202, 204})
         @UnexpectedResponseExceptionType(CloudException.class)
-        Single<RestResponse<Void, Product>> put200Succeeded(@BodyParam("application/json; charset=utf-8") Product product, @HeaderParam("accept-language") String acceptLanguage);
+        Single<BodyResponse<Product>> put200Succeeded(@BodyParam("application/json; charset=utf-8") Product product, @HeaderParam("accept-language") String acceptLanguage);
 
         @PUT("lro/put/200/succeeded")
         @ExpectedResponses({200, 202, 204})
@@ -116,7 +117,7 @@ public final class LROsImpl implements LROs {
         @PUT("lro/put/200/succeeded/nostate")
         @ExpectedResponses({200, 202, 204})
         @UnexpectedResponseExceptionType(CloudException.class)
-        Single<RestResponse<Void, Product>> put200SucceededNoState(@BodyParam("application/json; charset=utf-8") Product product, @HeaderParam("accept-language") String acceptLanguage);
+        Single<BodyResponse<Product>> put200SucceededNoState(@BodyParam("application/json; charset=utf-8") Product product, @HeaderParam("accept-language") String acceptLanguage);
 
         @PUT("lro/put/200/succeeded/nostate")
         @ExpectedResponses({200, 202, 204})
@@ -132,7 +133,7 @@ public final class LROsImpl implements LROs {
         @PUT("lro/put/202/retry/200")
         @ExpectedResponses({200, 202, 204})
         @UnexpectedResponseExceptionType(CloudException.class)
-        Single<RestResponse<Void, Product>> put202Retry200(@BodyParam("application/json; charset=utf-8") Product product, @HeaderParam("accept-language") String acceptLanguage);
+        Single<BodyResponse<Product>> put202Retry200(@BodyParam("application/json; charset=utf-8") Product product, @HeaderParam("accept-language") String acceptLanguage);
 
         @PUT("lro/put/202/retry/200")
         @ExpectedResponses({200, 202, 204})
@@ -148,7 +149,7 @@ public final class LROsImpl implements LROs {
         @PUT("lro/put/201/creating/succeeded/200")
         @ExpectedResponses({200, 201, 202, 204})
         @UnexpectedResponseExceptionType(CloudException.class)
-        Single<RestResponse<Void, Product>> put201CreatingSucceeded200(@BodyParam("application/json; charset=utf-8") Product product, @HeaderParam("accept-language") String acceptLanguage);
+        Single<BodyResponse<Product>> put201CreatingSucceeded200(@BodyParam("application/json; charset=utf-8") Product product, @HeaderParam("accept-language") String acceptLanguage);
 
         @PUT("lro/put/201/creating/succeeded/200")
         @ExpectedResponses({200, 201, 202, 204})
@@ -164,7 +165,7 @@ public final class LROsImpl implements LROs {
         @PUT("lro/put/200/updating/succeeded/200")
         @ExpectedResponses({200, 202, 204})
         @UnexpectedResponseExceptionType(CloudException.class)
-        Single<RestResponse<Void, Product>> put200UpdatingSucceeded204(@BodyParam("application/json; charset=utf-8") Product product, @HeaderParam("accept-language") String acceptLanguage);
+        Single<BodyResponse<Product>> put200UpdatingSucceeded204(@BodyParam("application/json; charset=utf-8") Product product, @HeaderParam("accept-language") String acceptLanguage);
 
         @PUT("lro/put/200/updating/succeeded/200")
         @ExpectedResponses({200, 202, 204})
@@ -180,7 +181,7 @@ public final class LROsImpl implements LROs {
         @PUT("lro/put/201/created/failed/200")
         @ExpectedResponses({200, 201, 202, 204})
         @UnexpectedResponseExceptionType(CloudException.class)
-        Single<RestResponse<Void, Product>> put201CreatingFailed200(@BodyParam("application/json; charset=utf-8") Product product, @HeaderParam("accept-language") String acceptLanguage);
+        Single<BodyResponse<Product>> put201CreatingFailed200(@BodyParam("application/json; charset=utf-8") Product product, @HeaderParam("accept-language") String acceptLanguage);
 
         @PUT("lro/put/201/created/failed/200")
         @ExpectedResponses({200, 201, 202, 204})
@@ -196,7 +197,7 @@ public final class LROsImpl implements LROs {
         @PUT("lro/put/200/accepted/canceled/200")
         @ExpectedResponses({200, 202, 204})
         @UnexpectedResponseExceptionType(CloudException.class)
-        Single<RestResponse<Void, Product>> put200Acceptedcanceled200(@BodyParam("application/json; charset=utf-8") Product product, @HeaderParam("accept-language") String acceptLanguage);
+        Single<BodyResponse<Product>> put200Acceptedcanceled200(@BodyParam("application/json; charset=utf-8") Product product, @HeaderParam("accept-language") String acceptLanguage);
 
         @PUT("lro/put/200/accepted/canceled/200")
         @ExpectedResponses({200, 202, 204})
@@ -212,7 +213,7 @@ public final class LROsImpl implements LROs {
         @PUT("lro/put/noheader/202/200")
         @ExpectedResponses({200, 202, 204})
         @UnexpectedResponseExceptionType(CloudException.class)
-        Single<RestResponse<LROsPutNoHeaderInRetryHeaders, Product>> putNoHeaderInRetry(@BodyParam("application/json; charset=utf-8") Product product, @HeaderParam("accept-language") String acceptLanguage);
+        Single<LROsPutNoHeaderInRetryResponse> putNoHeaderInRetry(@BodyParam("application/json; charset=utf-8") Product product, @HeaderParam("accept-language") String acceptLanguage);
 
         @PUT("lro/put/noheader/202/200")
         @ExpectedResponses({200, 202, 204})
@@ -228,7 +229,7 @@ public final class LROsImpl implements LROs {
         @PUT("lro/putasync/retry/succeeded")
         @ExpectedResponses({200, 202, 204})
         @UnexpectedResponseExceptionType(CloudException.class)
-        Single<RestResponse<LROsPutAsyncRetrySucceededHeaders, Product>> putAsyncRetrySucceeded(@BodyParam("application/json; charset=utf-8") Product product, @HeaderParam("accept-language") String acceptLanguage);
+        Single<LROsPutAsyncRetrySucceededResponse> putAsyncRetrySucceeded(@BodyParam("application/json; charset=utf-8") Product product, @HeaderParam("accept-language") String acceptLanguage);
 
         @PUT("lro/putasync/retry/succeeded")
         @ExpectedResponses({200, 202, 204})
@@ -244,7 +245,7 @@ public final class LROsImpl implements LROs {
         @PUT("lro/putasync/noretry/succeeded")
         @ExpectedResponses({200, 202, 204})
         @UnexpectedResponseExceptionType(CloudException.class)
-        Single<RestResponse<LROsPutAsyncNoRetrySucceededHeaders, Product>> putAsyncNoRetrySucceeded(@BodyParam("application/json; charset=utf-8") Product product, @HeaderParam("accept-language") String acceptLanguage);
+        Single<LROsPutAsyncNoRetrySucceededResponse> putAsyncNoRetrySucceeded(@BodyParam("application/json; charset=utf-8") Product product, @HeaderParam("accept-language") String acceptLanguage);
 
         @PUT("lro/putasync/noretry/succeeded")
         @ExpectedResponses({200, 202, 204})
@@ -260,7 +261,7 @@ public final class LROsImpl implements LROs {
         @PUT("lro/putasync/retry/failed")
         @ExpectedResponses({200, 202, 204})
         @UnexpectedResponseExceptionType(CloudException.class)
-        Single<RestResponse<LROsPutAsyncRetryFailedHeaders, Product>> putAsyncRetryFailed(@BodyParam("application/json; charset=utf-8") Product product, @HeaderParam("accept-language") String acceptLanguage);
+        Single<LROsPutAsyncRetryFailedResponse> putAsyncRetryFailed(@BodyParam("application/json; charset=utf-8") Product product, @HeaderParam("accept-language") String acceptLanguage);
 
         @PUT("lro/putasync/retry/failed")
         @ExpectedResponses({200, 202, 204})
@@ -276,7 +277,7 @@ public final class LROsImpl implements LROs {
         @PUT("lro/putasync/noretry/canceled")
         @ExpectedResponses({200, 202, 204})
         @UnexpectedResponseExceptionType(CloudException.class)
-        Single<RestResponse<LROsPutAsyncNoRetrycanceledHeaders, Product>> putAsyncNoRetrycanceled(@BodyParam("application/json; charset=utf-8") Product product, @HeaderParam("accept-language") String acceptLanguage);
+        Single<LROsPutAsyncNoRetrycanceledResponse> putAsyncNoRetrycanceled(@BodyParam("application/json; charset=utf-8") Product product, @HeaderParam("accept-language") String acceptLanguage);
 
         @PUT("lro/putasync/noretry/canceled")
         @ExpectedResponses({200, 202, 204})
@@ -292,7 +293,7 @@ public final class LROsImpl implements LROs {
         @PUT("lro/putasync/noheader/201/200")
         @ExpectedResponses({200, 201, 202, 204})
         @UnexpectedResponseExceptionType(CloudException.class)
-        Single<RestResponse<LROsPutAsyncNoHeaderInRetryHeaders, Product>> putAsyncNoHeaderInRetry(@BodyParam("application/json; charset=utf-8") Product product, @HeaderParam("accept-language") String acceptLanguage);
+        Single<LROsPutAsyncNoHeaderInRetryResponse> putAsyncNoHeaderInRetry(@BodyParam("application/json; charset=utf-8") Product product, @HeaderParam("accept-language") String acceptLanguage);
 
         @PUT("lro/putasync/noheader/201/200")
         @ExpectedResponses({200, 201, 202, 204})
@@ -308,7 +309,7 @@ public final class LROsImpl implements LROs {
         @PUT("lro/putnonresource/202/200")
         @ExpectedResponses({200, 202, 204})
         @UnexpectedResponseExceptionType(CloudException.class)
-        Single<RestResponse<Void, Sku>> putNonResource(@BodyParam("application/json; charset=utf-8") Sku sku, @HeaderParam("accept-language") String acceptLanguage);
+        Single<BodyResponse<Sku>> putNonResource(@BodyParam("application/json; charset=utf-8") Sku sku, @HeaderParam("accept-language") String acceptLanguage);
 
         @PUT("lro/putnonresource/202/200")
         @ExpectedResponses({200, 202, 204})
@@ -324,7 +325,7 @@ public final class LROsImpl implements LROs {
         @PUT("lro/putnonresourceasync/202/200")
         @ExpectedResponses({200, 202, 204})
         @UnexpectedResponseExceptionType(CloudException.class)
-        Single<RestResponse<Void, Sku>> putAsyncNonResource(@BodyParam("application/json; charset=utf-8") Sku sku, @HeaderParam("accept-language") String acceptLanguage);
+        Single<BodyResponse<Sku>> putAsyncNonResource(@BodyParam("application/json; charset=utf-8") Sku sku, @HeaderParam("accept-language") String acceptLanguage);
 
         @PUT("lro/putnonresourceasync/202/200")
         @ExpectedResponses({200, 202, 204})
@@ -340,7 +341,7 @@ public final class LROsImpl implements LROs {
         @PUT("lro/putsubresource/202/200")
         @ExpectedResponses({200, 202, 204})
         @UnexpectedResponseExceptionType(CloudException.class)
-        Single<RestResponse<Void, SubProduct>> putSubResource(@BodyParam("application/json; charset=utf-8") SubProduct product, @HeaderParam("accept-language") String acceptLanguage);
+        Single<BodyResponse<SubProduct>> putSubResource(@BodyParam("application/json; charset=utf-8") SubProduct product, @HeaderParam("accept-language") String acceptLanguage);
 
         @PUT("lro/putsubresource/202/200")
         @ExpectedResponses({200, 202, 204})
@@ -356,7 +357,7 @@ public final class LROsImpl implements LROs {
         @PUT("lro/putsubresourceasync/202/200")
         @ExpectedResponses({200, 202, 204})
         @UnexpectedResponseExceptionType(CloudException.class)
-        Single<RestResponse<Void, SubProduct>> putAsyncSubResource(@BodyParam("application/json; charset=utf-8") SubProduct product, @HeaderParam("accept-language") String acceptLanguage);
+        Single<BodyResponse<SubProduct>> putAsyncSubResource(@BodyParam("application/json; charset=utf-8") SubProduct product, @HeaderParam("accept-language") String acceptLanguage);
 
         @PUT("lro/putsubresourceasync/202/200")
         @ExpectedResponses({200, 202, 204})
@@ -372,7 +373,7 @@ public final class LROsImpl implements LROs {
         @DELETE("lro/delete/provisioning/202/accepted/200/succeeded")
         @ExpectedResponses({200, 202, 204})
         @UnexpectedResponseExceptionType(CloudException.class)
-        Single<RestResponse<LROsDeleteProvisioning202Accepted200SucceededHeaders, Product>> deleteProvisioning202Accepted200Succeeded(@HeaderParam("accept-language") String acceptLanguage);
+        Single<LROsDeleteProvisioning202Accepted200SucceededResponse> deleteProvisioning202Accepted200Succeeded(@HeaderParam("accept-language") String acceptLanguage);
 
         @DELETE("lro/delete/provisioning/202/accepted/200/succeeded")
         @ExpectedResponses({200, 202, 204})
@@ -388,7 +389,7 @@ public final class LROsImpl implements LROs {
         @DELETE("lro/delete/provisioning/202/deleting/200/failed")
         @ExpectedResponses({200, 202, 204})
         @UnexpectedResponseExceptionType(CloudException.class)
-        Single<RestResponse<LROsDeleteProvisioning202DeletingFailed200Headers, Product>> deleteProvisioning202DeletingFailed200(@HeaderParam("accept-language") String acceptLanguage);
+        Single<LROsDeleteProvisioning202DeletingFailed200Response> deleteProvisioning202DeletingFailed200(@HeaderParam("accept-language") String acceptLanguage);
 
         @DELETE("lro/delete/provisioning/202/deleting/200/failed")
         @ExpectedResponses({200, 202, 204})
@@ -404,7 +405,7 @@ public final class LROsImpl implements LROs {
         @DELETE("lro/delete/provisioning/202/deleting/200/canceled")
         @ExpectedResponses({200, 202, 204})
         @UnexpectedResponseExceptionType(CloudException.class)
-        Single<RestResponse<LROsDeleteProvisioning202Deletingcanceled200Headers, Product>> deleteProvisioning202Deletingcanceled200(@HeaderParam("accept-language") String acceptLanguage);
+        Single<LROsDeleteProvisioning202Deletingcanceled200Response> deleteProvisioning202Deletingcanceled200(@HeaderParam("accept-language") String acceptLanguage);
 
         @DELETE("lro/delete/provisioning/202/deleting/200/canceled")
         @ExpectedResponses({200, 202, 204})
@@ -420,7 +421,7 @@ public final class LROsImpl implements LROs {
         @DELETE("lro/delete/204/succeeded")
         @ExpectedResponses({200, 202, 204})
         @UnexpectedResponseExceptionType(CloudException.class)
-        Single<RestResponse<Void, Void>> delete204Succeeded(@HeaderParam("accept-language") String acceptLanguage);
+        Single<VoidResponse> delete204Succeeded(@HeaderParam("accept-language") String acceptLanguage);
 
         @DELETE("lro/delete/204/succeeded")
         @ExpectedResponses({200, 202, 204})
@@ -436,7 +437,7 @@ public final class LROsImpl implements LROs {
         @DELETE("lro/delete/202/retry/200")
         @ExpectedResponses({200, 202, 204})
         @UnexpectedResponseExceptionType(CloudException.class)
-        Single<RestResponse<LROsDelete202Retry200Headers, Product>> delete202Retry200(@HeaderParam("accept-language") String acceptLanguage);
+        Single<LROsDelete202Retry200Response> delete202Retry200(@HeaderParam("accept-language") String acceptLanguage);
 
         @DELETE("lro/delete/202/retry/200")
         @ExpectedResponses({200, 202, 204})
@@ -452,7 +453,7 @@ public final class LROsImpl implements LROs {
         @DELETE("lro/delete/202/noretry/204")
         @ExpectedResponses({200, 202, 204})
         @UnexpectedResponseExceptionType(CloudException.class)
-        Single<RestResponse<LROsDelete202NoRetry204Headers, Product>> delete202NoRetry204(@HeaderParam("accept-language") String acceptLanguage);
+        Single<LROsDelete202NoRetry204Response> delete202NoRetry204(@HeaderParam("accept-language") String acceptLanguage);
 
         @DELETE("lro/delete/202/noretry/204")
         @ExpectedResponses({200, 202, 204})
@@ -468,7 +469,7 @@ public final class LROsImpl implements LROs {
         @DELETE("lro/delete/noheader")
         @ExpectedResponses({200, 202, 204})
         @UnexpectedResponseExceptionType(CloudException.class)
-        Single<RestResponse<LROsDeleteNoHeaderInRetryHeaders, Void>> deleteNoHeaderInRetry(@HeaderParam("accept-language") String acceptLanguage);
+        Single<LROsDeleteNoHeaderInRetryResponse> deleteNoHeaderInRetry(@HeaderParam("accept-language") String acceptLanguage);
 
         @DELETE("lro/delete/noheader")
         @ExpectedResponses({200, 202, 204})
@@ -484,7 +485,7 @@ public final class LROsImpl implements LROs {
         @DELETE("lro/deleteasync/noheader/202/204")
         @ExpectedResponses({200, 202, 204})
         @UnexpectedResponseExceptionType(CloudException.class)
-        Single<RestResponse<LROsDeleteAsyncNoHeaderInRetryHeaders, Void>> deleteAsyncNoHeaderInRetry(@HeaderParam("accept-language") String acceptLanguage);
+        Single<LROsDeleteAsyncNoHeaderInRetryResponse> deleteAsyncNoHeaderInRetry(@HeaderParam("accept-language") String acceptLanguage);
 
         @DELETE("lro/deleteasync/noheader/202/204")
         @ExpectedResponses({200, 202, 204})
@@ -500,7 +501,7 @@ public final class LROsImpl implements LROs {
         @DELETE("lro/deleteasync/retry/succeeded")
         @ExpectedResponses({200, 202, 204})
         @UnexpectedResponseExceptionType(CloudException.class)
-        Single<RestResponse<LROsDeleteAsyncRetrySucceededHeaders, Void>> deleteAsyncRetrySucceeded(@HeaderParam("accept-language") String acceptLanguage);
+        Single<LROsDeleteAsyncRetrySucceededResponse> deleteAsyncRetrySucceeded(@HeaderParam("accept-language") String acceptLanguage);
 
         @DELETE("lro/deleteasync/retry/succeeded")
         @ExpectedResponses({200, 202, 204})
@@ -516,7 +517,7 @@ public final class LROsImpl implements LROs {
         @DELETE("lro/deleteasync/noretry/succeeded")
         @ExpectedResponses({200, 202, 204})
         @UnexpectedResponseExceptionType(CloudException.class)
-        Single<RestResponse<LROsDeleteAsyncNoRetrySucceededHeaders, Void>> deleteAsyncNoRetrySucceeded(@HeaderParam("accept-language") String acceptLanguage);
+        Single<LROsDeleteAsyncNoRetrySucceededResponse> deleteAsyncNoRetrySucceeded(@HeaderParam("accept-language") String acceptLanguage);
 
         @DELETE("lro/deleteasync/noretry/succeeded")
         @ExpectedResponses({200, 202, 204})
@@ -532,7 +533,7 @@ public final class LROsImpl implements LROs {
         @DELETE("lro/deleteasync/retry/failed")
         @ExpectedResponses({200, 202, 204})
         @UnexpectedResponseExceptionType(CloudException.class)
-        Single<RestResponse<LROsDeleteAsyncRetryFailedHeaders, Void>> deleteAsyncRetryFailed(@HeaderParam("accept-language") String acceptLanguage);
+        Single<LROsDeleteAsyncRetryFailedResponse> deleteAsyncRetryFailed(@HeaderParam("accept-language") String acceptLanguage);
 
         @DELETE("lro/deleteasync/retry/failed")
         @ExpectedResponses({200, 202, 204})
@@ -548,7 +549,7 @@ public final class LROsImpl implements LROs {
         @DELETE("lro/deleteasync/retry/canceled")
         @ExpectedResponses({200, 202, 204})
         @UnexpectedResponseExceptionType(CloudException.class)
-        Single<RestResponse<LROsDeleteAsyncRetrycanceledHeaders, Void>> deleteAsyncRetrycanceled(@HeaderParam("accept-language") String acceptLanguage);
+        Single<LROsDeleteAsyncRetrycanceledResponse> deleteAsyncRetrycanceled(@HeaderParam("accept-language") String acceptLanguage);
 
         @DELETE("lro/deleteasync/retry/canceled")
         @ExpectedResponses({200, 202, 204})
@@ -564,7 +565,7 @@ public final class LROsImpl implements LROs {
         @POST("lro/post/payload/200")
         @ExpectedResponses({200, 202, 204})
         @UnexpectedResponseExceptionType(CloudException.class)
-        Single<RestResponse<Void, Sku>> post200WithPayload(@HeaderParam("accept-language") String acceptLanguage);
+        Single<BodyResponse<Sku>> post200WithPayload(@HeaderParam("accept-language") String acceptLanguage);
 
         @POST("lro/post/payload/200")
         @ExpectedResponses({200, 202, 204})
@@ -580,7 +581,7 @@ public final class LROsImpl implements LROs {
         @POST("lro/post/202/retry/200")
         @ExpectedResponses({200, 202, 204})
         @UnexpectedResponseExceptionType(CloudException.class)
-        Single<RestResponse<LROsPost202Retry200Headers, Void>> post202Retry200(@BodyParam("application/json; charset=utf-8") Product product, @HeaderParam("accept-language") String acceptLanguage);
+        Single<LROsPost202Retry200Response> post202Retry200(@BodyParam("application/json; charset=utf-8") Product product, @HeaderParam("accept-language") String acceptLanguage);
 
         @POST("lro/post/202/retry/200")
         @ExpectedResponses({200, 202, 204})
@@ -596,7 +597,7 @@ public final class LROsImpl implements LROs {
         @POST("lro/post/202/noretry/204")
         @ExpectedResponses({200, 202, 204})
         @UnexpectedResponseExceptionType(CloudException.class)
-        Single<RestResponse<LROsPost202NoRetry204Headers, Product>> post202NoRetry204(@BodyParam("application/json; charset=utf-8") Product product, @HeaderParam("accept-language") String acceptLanguage);
+        Single<LROsPost202NoRetry204Response> post202NoRetry204(@BodyParam("application/json; charset=utf-8") Product product, @HeaderParam("accept-language") String acceptLanguage);
 
         @POST("lro/post/202/noretry/204")
         @ExpectedResponses({200, 202, 204})
@@ -612,7 +613,7 @@ public final class LROsImpl implements LROs {
         @POST("lro/postasync/retry/succeeded")
         @ExpectedResponses({200, 202, 204})
         @UnexpectedResponseExceptionType(CloudException.class)
-        Single<RestResponse<LROsPostAsyncRetrySucceededHeaders, Product>> postAsyncRetrySucceeded(@BodyParam("application/json; charset=utf-8") Product product, @HeaderParam("accept-language") String acceptLanguage);
+        Single<LROsPostAsyncRetrySucceededResponse> postAsyncRetrySucceeded(@BodyParam("application/json; charset=utf-8") Product product, @HeaderParam("accept-language") String acceptLanguage);
 
         @POST("lro/postasync/retry/succeeded")
         @ExpectedResponses({200, 202, 204})
@@ -628,7 +629,7 @@ public final class LROsImpl implements LROs {
         @POST("lro/postasync/noretry/succeeded")
         @ExpectedResponses({200, 202, 204})
         @UnexpectedResponseExceptionType(CloudException.class)
-        Single<RestResponse<LROsPostAsyncNoRetrySucceededHeaders, Product>> postAsyncNoRetrySucceeded(@BodyParam("application/json; charset=utf-8") Product product, @HeaderParam("accept-language") String acceptLanguage);
+        Single<LROsPostAsyncNoRetrySucceededResponse> postAsyncNoRetrySucceeded(@BodyParam("application/json; charset=utf-8") Product product, @HeaderParam("accept-language") String acceptLanguage);
 
         @POST("lro/postasync/noretry/succeeded")
         @ExpectedResponses({200, 202, 204})
@@ -644,7 +645,7 @@ public final class LROsImpl implements LROs {
         @POST("lro/postasync/retry/failed")
         @ExpectedResponses({200, 202, 204})
         @UnexpectedResponseExceptionType(CloudException.class)
-        Single<RestResponse<LROsPostAsyncRetryFailedHeaders, Void>> postAsyncRetryFailed(@BodyParam("application/json; charset=utf-8") Product product, @HeaderParam("accept-language") String acceptLanguage);
+        Single<LROsPostAsyncRetryFailedResponse> postAsyncRetryFailed(@BodyParam("application/json; charset=utf-8") Product product, @HeaderParam("accept-language") String acceptLanguage);
 
         @POST("lro/postasync/retry/failed")
         @ExpectedResponses({200, 202, 204})
@@ -660,7 +661,7 @@ public final class LROsImpl implements LROs {
         @POST("lro/postasync/retry/canceled")
         @ExpectedResponses({200, 202, 204})
         @UnexpectedResponseExceptionType(CloudException.class)
-        Single<RestResponse<LROsPostAsyncRetrycanceledHeaders, Void>> postAsyncRetrycanceled(@BodyParam("application/json; charset=utf-8") Product product, @HeaderParam("accept-language") String acceptLanguage);
+        Single<LROsPostAsyncRetrycanceledResponse> postAsyncRetrycanceled(@BodyParam("application/json; charset=utf-8") Product product, @HeaderParam("accept-language") String acceptLanguage);
 
         @POST("lro/postasync/retry/canceled")
         @ExpectedResponses({200, 202, 204})
@@ -764,7 +765,7 @@ public final class LROsImpl implements LROs {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<Void, Product>> put200SucceededWithRestResponseAsync() {
+    public Single<BodyResponse<Product>> put200SucceededWithRestResponseAsync() {
         final Product product = null;
         return service.put200Succeeded(product, this.client.acceptLanguage());
     }
@@ -776,15 +777,7 @@ public final class LROsImpl implements LROs {
      */
     public Maybe<Product> put200SucceededAsync() {
         return put200SucceededWithRestResponseAsync()
-            .flatMapMaybe(new Function<RestResponse<Void, Product>, Maybe<Product>>() {
-                public Maybe<Product> apply(RestResponse<Void, Product> restResponse) {
-                    if (restResponse.body() == null) {
-                        return Maybe.empty();
-                    } else {
-                        return Maybe.just(restResponse.body());
-                    }
-                }
-            });
+            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -819,7 +812,7 @@ public final class LROsImpl implements LROs {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<Void, Product>> put200SucceededWithRestResponseAsync(Product product) {
+    public Single<BodyResponse<Product>> put200SucceededWithRestResponseAsync(Product product) {
         Validator.validate(product);
         return service.put200Succeeded(product, this.client.acceptLanguage());
     }
@@ -833,15 +826,7 @@ public final class LROsImpl implements LROs {
      */
     public Maybe<Product> put200SucceededAsync(Product product) {
         return put200SucceededWithRestResponseAsync(product)
-            .flatMapMaybe(new Function<RestResponse<Void, Product>, Maybe<Product>>() {
-                public Maybe<Product> apply(RestResponse<Void, Product> restResponse) {
-                    if (restResponse.body() == null) {
-                        return Maybe.empty();
-                    } else {
-                        return Maybe.just(restResponse.body());
-                    }
-                }
-            });
+            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -953,7 +938,7 @@ public final class LROsImpl implements LROs {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<Void, Product>> put200SucceededNoStateWithRestResponseAsync() {
+    public Single<BodyResponse<Product>> put200SucceededNoStateWithRestResponseAsync() {
         final Product product = null;
         return service.put200SucceededNoState(product, this.client.acceptLanguage());
     }
@@ -965,15 +950,7 @@ public final class LROsImpl implements LROs {
      */
     public Maybe<Product> put200SucceededNoStateAsync() {
         return put200SucceededNoStateWithRestResponseAsync()
-            .flatMapMaybe(new Function<RestResponse<Void, Product>, Maybe<Product>>() {
-                public Maybe<Product> apply(RestResponse<Void, Product> restResponse) {
-                    if (restResponse.body() == null) {
-                        return Maybe.empty();
-                    } else {
-                        return Maybe.just(restResponse.body());
-                    }
-                }
-            });
+            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -1008,7 +985,7 @@ public final class LROsImpl implements LROs {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<Void, Product>> put200SucceededNoStateWithRestResponseAsync(Product product) {
+    public Single<BodyResponse<Product>> put200SucceededNoStateWithRestResponseAsync(Product product) {
         Validator.validate(product);
         return service.put200SucceededNoState(product, this.client.acceptLanguage());
     }
@@ -1022,15 +999,7 @@ public final class LROsImpl implements LROs {
      */
     public Maybe<Product> put200SucceededNoStateAsync(Product product) {
         return put200SucceededNoStateWithRestResponseAsync(product)
-            .flatMapMaybe(new Function<RestResponse<Void, Product>, Maybe<Product>>() {
-                public Maybe<Product> apply(RestResponse<Void, Product> restResponse) {
-                    if (restResponse.body() == null) {
-                        return Maybe.empty();
-                    } else {
-                        return Maybe.just(restResponse.body());
-                    }
-                }
-            });
+            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -1142,7 +1111,7 @@ public final class LROsImpl implements LROs {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<Void, Product>> put202Retry200WithRestResponseAsync() {
+    public Single<BodyResponse<Product>> put202Retry200WithRestResponseAsync() {
         final Product product = null;
         return service.put202Retry200(product, this.client.acceptLanguage());
     }
@@ -1154,15 +1123,7 @@ public final class LROsImpl implements LROs {
      */
     public Maybe<Product> put202Retry200Async() {
         return put202Retry200WithRestResponseAsync()
-            .flatMapMaybe(new Function<RestResponse<Void, Product>, Maybe<Product>>() {
-                public Maybe<Product> apply(RestResponse<Void, Product> restResponse) {
-                    if (restResponse.body() == null) {
-                        return Maybe.empty();
-                    } else {
-                        return Maybe.just(restResponse.body());
-                    }
-                }
-            });
+            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -1197,7 +1158,7 @@ public final class LROsImpl implements LROs {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<Void, Product>> put202Retry200WithRestResponseAsync(Product product) {
+    public Single<BodyResponse<Product>> put202Retry200WithRestResponseAsync(Product product) {
         Validator.validate(product);
         return service.put202Retry200(product, this.client.acceptLanguage());
     }
@@ -1211,15 +1172,7 @@ public final class LROsImpl implements LROs {
      */
     public Maybe<Product> put202Retry200Async(Product product) {
         return put202Retry200WithRestResponseAsync(product)
-            .flatMapMaybe(new Function<RestResponse<Void, Product>, Maybe<Product>>() {
-                public Maybe<Product> apply(RestResponse<Void, Product> restResponse) {
-                    if (restResponse.body() == null) {
-                        return Maybe.empty();
-                    } else {
-                        return Maybe.just(restResponse.body());
-                    }
-                }
-            });
+            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -1331,7 +1284,7 @@ public final class LROsImpl implements LROs {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<Void, Product>> put201CreatingSucceeded200WithRestResponseAsync() {
+    public Single<BodyResponse<Product>> put201CreatingSucceeded200WithRestResponseAsync() {
         final Product product = null;
         return service.put201CreatingSucceeded200(product, this.client.acceptLanguage());
     }
@@ -1343,15 +1296,7 @@ public final class LROsImpl implements LROs {
      */
     public Maybe<Product> put201CreatingSucceeded200Async() {
         return put201CreatingSucceeded200WithRestResponseAsync()
-            .flatMapMaybe(new Function<RestResponse<Void, Product>, Maybe<Product>>() {
-                public Maybe<Product> apply(RestResponse<Void, Product> restResponse) {
-                    if (restResponse.body() == null) {
-                        return Maybe.empty();
-                    } else {
-                        return Maybe.just(restResponse.body());
-                    }
-                }
-            });
+            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -1386,7 +1331,7 @@ public final class LROsImpl implements LROs {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<Void, Product>> put201CreatingSucceeded200WithRestResponseAsync(Product product) {
+    public Single<BodyResponse<Product>> put201CreatingSucceeded200WithRestResponseAsync(Product product) {
         Validator.validate(product);
         return service.put201CreatingSucceeded200(product, this.client.acceptLanguage());
     }
@@ -1400,15 +1345,7 @@ public final class LROsImpl implements LROs {
      */
     public Maybe<Product> put201CreatingSucceeded200Async(Product product) {
         return put201CreatingSucceeded200WithRestResponseAsync(product)
-            .flatMapMaybe(new Function<RestResponse<Void, Product>, Maybe<Product>>() {
-                public Maybe<Product> apply(RestResponse<Void, Product> restResponse) {
-                    if (restResponse.body() == null) {
-                        return Maybe.empty();
-                    } else {
-                        return Maybe.just(restResponse.body());
-                    }
-                }
-            });
+            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -1520,7 +1457,7 @@ public final class LROsImpl implements LROs {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<Void, Product>> put200UpdatingSucceeded204WithRestResponseAsync() {
+    public Single<BodyResponse<Product>> put200UpdatingSucceeded204WithRestResponseAsync() {
         final Product product = null;
         return service.put200UpdatingSucceeded204(product, this.client.acceptLanguage());
     }
@@ -1532,15 +1469,7 @@ public final class LROsImpl implements LROs {
      */
     public Maybe<Product> put200UpdatingSucceeded204Async() {
         return put200UpdatingSucceeded204WithRestResponseAsync()
-            .flatMapMaybe(new Function<RestResponse<Void, Product>, Maybe<Product>>() {
-                public Maybe<Product> apply(RestResponse<Void, Product> restResponse) {
-                    if (restResponse.body() == null) {
-                        return Maybe.empty();
-                    } else {
-                        return Maybe.just(restResponse.body());
-                    }
-                }
-            });
+            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -1575,7 +1504,7 @@ public final class LROsImpl implements LROs {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<Void, Product>> put200UpdatingSucceeded204WithRestResponseAsync(Product product) {
+    public Single<BodyResponse<Product>> put200UpdatingSucceeded204WithRestResponseAsync(Product product) {
         Validator.validate(product);
         return service.put200UpdatingSucceeded204(product, this.client.acceptLanguage());
     }
@@ -1589,15 +1518,7 @@ public final class LROsImpl implements LROs {
      */
     public Maybe<Product> put200UpdatingSucceeded204Async(Product product) {
         return put200UpdatingSucceeded204WithRestResponseAsync(product)
-            .flatMapMaybe(new Function<RestResponse<Void, Product>, Maybe<Product>>() {
-                public Maybe<Product> apply(RestResponse<Void, Product> restResponse) {
-                    if (restResponse.body() == null) {
-                        return Maybe.empty();
-                    } else {
-                        return Maybe.just(restResponse.body());
-                    }
-                }
-            });
+            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -1709,7 +1630,7 @@ public final class LROsImpl implements LROs {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<Void, Product>> put201CreatingFailed200WithRestResponseAsync() {
+    public Single<BodyResponse<Product>> put201CreatingFailed200WithRestResponseAsync() {
         final Product product = null;
         return service.put201CreatingFailed200(product, this.client.acceptLanguage());
     }
@@ -1721,15 +1642,7 @@ public final class LROsImpl implements LROs {
      */
     public Maybe<Product> put201CreatingFailed200Async() {
         return put201CreatingFailed200WithRestResponseAsync()
-            .flatMapMaybe(new Function<RestResponse<Void, Product>, Maybe<Product>>() {
-                public Maybe<Product> apply(RestResponse<Void, Product> restResponse) {
-                    if (restResponse.body() == null) {
-                        return Maybe.empty();
-                    } else {
-                        return Maybe.just(restResponse.body());
-                    }
-                }
-            });
+            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -1764,7 +1677,7 @@ public final class LROsImpl implements LROs {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<Void, Product>> put201CreatingFailed200WithRestResponseAsync(Product product) {
+    public Single<BodyResponse<Product>> put201CreatingFailed200WithRestResponseAsync(Product product) {
         Validator.validate(product);
         return service.put201CreatingFailed200(product, this.client.acceptLanguage());
     }
@@ -1778,15 +1691,7 @@ public final class LROsImpl implements LROs {
      */
     public Maybe<Product> put201CreatingFailed200Async(Product product) {
         return put201CreatingFailed200WithRestResponseAsync(product)
-            .flatMapMaybe(new Function<RestResponse<Void, Product>, Maybe<Product>>() {
-                public Maybe<Product> apply(RestResponse<Void, Product> restResponse) {
-                    if (restResponse.body() == null) {
-                        return Maybe.empty();
-                    } else {
-                        return Maybe.just(restResponse.body());
-                    }
-                }
-            });
+            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -1898,7 +1803,7 @@ public final class LROsImpl implements LROs {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<Void, Product>> put200Acceptedcanceled200WithRestResponseAsync() {
+    public Single<BodyResponse<Product>> put200Acceptedcanceled200WithRestResponseAsync() {
         final Product product = null;
         return service.put200Acceptedcanceled200(product, this.client.acceptLanguage());
     }
@@ -1910,15 +1815,7 @@ public final class LROsImpl implements LROs {
      */
     public Maybe<Product> put200Acceptedcanceled200Async() {
         return put200Acceptedcanceled200WithRestResponseAsync()
-            .flatMapMaybe(new Function<RestResponse<Void, Product>, Maybe<Product>>() {
-                public Maybe<Product> apply(RestResponse<Void, Product> restResponse) {
-                    if (restResponse.body() == null) {
-                        return Maybe.empty();
-                    } else {
-                        return Maybe.just(restResponse.body());
-                    }
-                }
-            });
+            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -1953,7 +1850,7 @@ public final class LROsImpl implements LROs {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<Void, Product>> put200Acceptedcanceled200WithRestResponseAsync(Product product) {
+    public Single<BodyResponse<Product>> put200Acceptedcanceled200WithRestResponseAsync(Product product) {
         Validator.validate(product);
         return service.put200Acceptedcanceled200(product, this.client.acceptLanguage());
     }
@@ -1967,15 +1864,7 @@ public final class LROsImpl implements LROs {
      */
     public Maybe<Product> put200Acceptedcanceled200Async(Product product) {
         return put200Acceptedcanceled200WithRestResponseAsync(product)
-            .flatMapMaybe(new Function<RestResponse<Void, Product>, Maybe<Product>>() {
-                public Maybe<Product> apply(RestResponse<Void, Product> restResponse) {
-                    if (restResponse.body() == null) {
-                        return Maybe.empty();
-                    } else {
-                        return Maybe.just(restResponse.body());
-                    }
-                }
-            });
+            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -2087,7 +1976,7 @@ public final class LROsImpl implements LROs {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<LROsPutNoHeaderInRetryHeaders, Product>> putNoHeaderInRetryWithRestResponseAsync() {
+    public Single<LROsPutNoHeaderInRetryResponse> putNoHeaderInRetryWithRestResponseAsync() {
         final Product product = null;
         return service.putNoHeaderInRetry(product, this.client.acceptLanguage());
     }
@@ -2099,15 +1988,7 @@ public final class LROsImpl implements LROs {
      */
     public Maybe<Product> putNoHeaderInRetryAsync() {
         return putNoHeaderInRetryWithRestResponseAsync()
-            .flatMapMaybe(new Function<RestResponse<LROsPutNoHeaderInRetryHeaders, Product>, Maybe<Product>>() {
-                public Maybe<Product> apply(RestResponse<LROsPutNoHeaderInRetryHeaders, Product> restResponse) {
-                    if (restResponse.body() == null) {
-                        return Maybe.empty();
-                    } else {
-                        return Maybe.just(restResponse.body());
-                    }
-                }
-            });
+            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -2142,7 +2023,7 @@ public final class LROsImpl implements LROs {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<LROsPutNoHeaderInRetryHeaders, Product>> putNoHeaderInRetryWithRestResponseAsync(Product product) {
+    public Single<LROsPutNoHeaderInRetryResponse> putNoHeaderInRetryWithRestResponseAsync(Product product) {
         Validator.validate(product);
         return service.putNoHeaderInRetry(product, this.client.acceptLanguage());
     }
@@ -2156,15 +2037,7 @@ public final class LROsImpl implements LROs {
      */
     public Maybe<Product> putNoHeaderInRetryAsync(Product product) {
         return putNoHeaderInRetryWithRestResponseAsync(product)
-            .flatMapMaybe(new Function<RestResponse<LROsPutNoHeaderInRetryHeaders, Product>, Maybe<Product>>() {
-                public Maybe<Product> apply(RestResponse<LROsPutNoHeaderInRetryHeaders, Product> restResponse) {
-                    if (restResponse.body() == null) {
-                        return Maybe.empty();
-                    } else {
-                        return Maybe.just(restResponse.body());
-                    }
-                }
-            });
+            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -2276,7 +2149,7 @@ public final class LROsImpl implements LROs {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<LROsPutAsyncRetrySucceededHeaders, Product>> putAsyncRetrySucceededWithRestResponseAsync() {
+    public Single<LROsPutAsyncRetrySucceededResponse> putAsyncRetrySucceededWithRestResponseAsync() {
         final Product product = null;
         return service.putAsyncRetrySucceeded(product, this.client.acceptLanguage());
     }
@@ -2288,15 +2161,7 @@ public final class LROsImpl implements LROs {
      */
     public Maybe<Product> putAsyncRetrySucceededAsync() {
         return putAsyncRetrySucceededWithRestResponseAsync()
-            .flatMapMaybe(new Function<RestResponse<LROsPutAsyncRetrySucceededHeaders, Product>, Maybe<Product>>() {
-                public Maybe<Product> apply(RestResponse<LROsPutAsyncRetrySucceededHeaders, Product> restResponse) {
-                    if (restResponse.body() == null) {
-                        return Maybe.empty();
-                    } else {
-                        return Maybe.just(restResponse.body());
-                    }
-                }
-            });
+            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -2331,7 +2196,7 @@ public final class LROsImpl implements LROs {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<LROsPutAsyncRetrySucceededHeaders, Product>> putAsyncRetrySucceededWithRestResponseAsync(Product product) {
+    public Single<LROsPutAsyncRetrySucceededResponse> putAsyncRetrySucceededWithRestResponseAsync(Product product) {
         Validator.validate(product);
         return service.putAsyncRetrySucceeded(product, this.client.acceptLanguage());
     }
@@ -2345,15 +2210,7 @@ public final class LROsImpl implements LROs {
      */
     public Maybe<Product> putAsyncRetrySucceededAsync(Product product) {
         return putAsyncRetrySucceededWithRestResponseAsync(product)
-            .flatMapMaybe(new Function<RestResponse<LROsPutAsyncRetrySucceededHeaders, Product>, Maybe<Product>>() {
-                public Maybe<Product> apply(RestResponse<LROsPutAsyncRetrySucceededHeaders, Product> restResponse) {
-                    if (restResponse.body() == null) {
-                        return Maybe.empty();
-                    } else {
-                        return Maybe.just(restResponse.body());
-                    }
-                }
-            });
+            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -2465,7 +2322,7 @@ public final class LROsImpl implements LROs {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<LROsPutAsyncNoRetrySucceededHeaders, Product>> putAsyncNoRetrySucceededWithRestResponseAsync() {
+    public Single<LROsPutAsyncNoRetrySucceededResponse> putAsyncNoRetrySucceededWithRestResponseAsync() {
         final Product product = null;
         return service.putAsyncNoRetrySucceeded(product, this.client.acceptLanguage());
     }
@@ -2477,15 +2334,7 @@ public final class LROsImpl implements LROs {
      */
     public Maybe<Product> putAsyncNoRetrySucceededAsync() {
         return putAsyncNoRetrySucceededWithRestResponseAsync()
-            .flatMapMaybe(new Function<RestResponse<LROsPutAsyncNoRetrySucceededHeaders, Product>, Maybe<Product>>() {
-                public Maybe<Product> apply(RestResponse<LROsPutAsyncNoRetrySucceededHeaders, Product> restResponse) {
-                    if (restResponse.body() == null) {
-                        return Maybe.empty();
-                    } else {
-                        return Maybe.just(restResponse.body());
-                    }
-                }
-            });
+            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -2520,7 +2369,7 @@ public final class LROsImpl implements LROs {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<LROsPutAsyncNoRetrySucceededHeaders, Product>> putAsyncNoRetrySucceededWithRestResponseAsync(Product product) {
+    public Single<LROsPutAsyncNoRetrySucceededResponse> putAsyncNoRetrySucceededWithRestResponseAsync(Product product) {
         Validator.validate(product);
         return service.putAsyncNoRetrySucceeded(product, this.client.acceptLanguage());
     }
@@ -2534,15 +2383,7 @@ public final class LROsImpl implements LROs {
      */
     public Maybe<Product> putAsyncNoRetrySucceededAsync(Product product) {
         return putAsyncNoRetrySucceededWithRestResponseAsync(product)
-            .flatMapMaybe(new Function<RestResponse<LROsPutAsyncNoRetrySucceededHeaders, Product>, Maybe<Product>>() {
-                public Maybe<Product> apply(RestResponse<LROsPutAsyncNoRetrySucceededHeaders, Product> restResponse) {
-                    if (restResponse.body() == null) {
-                        return Maybe.empty();
-                    } else {
-                        return Maybe.just(restResponse.body());
-                    }
-                }
-            });
+            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -2654,7 +2495,7 @@ public final class LROsImpl implements LROs {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<LROsPutAsyncRetryFailedHeaders, Product>> putAsyncRetryFailedWithRestResponseAsync() {
+    public Single<LROsPutAsyncRetryFailedResponse> putAsyncRetryFailedWithRestResponseAsync() {
         final Product product = null;
         return service.putAsyncRetryFailed(product, this.client.acceptLanguage());
     }
@@ -2666,15 +2507,7 @@ public final class LROsImpl implements LROs {
      */
     public Maybe<Product> putAsyncRetryFailedAsync() {
         return putAsyncRetryFailedWithRestResponseAsync()
-            .flatMapMaybe(new Function<RestResponse<LROsPutAsyncRetryFailedHeaders, Product>, Maybe<Product>>() {
-                public Maybe<Product> apply(RestResponse<LROsPutAsyncRetryFailedHeaders, Product> restResponse) {
-                    if (restResponse.body() == null) {
-                        return Maybe.empty();
-                    } else {
-                        return Maybe.just(restResponse.body());
-                    }
-                }
-            });
+            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -2709,7 +2542,7 @@ public final class LROsImpl implements LROs {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<LROsPutAsyncRetryFailedHeaders, Product>> putAsyncRetryFailedWithRestResponseAsync(Product product) {
+    public Single<LROsPutAsyncRetryFailedResponse> putAsyncRetryFailedWithRestResponseAsync(Product product) {
         Validator.validate(product);
         return service.putAsyncRetryFailed(product, this.client.acceptLanguage());
     }
@@ -2723,15 +2556,7 @@ public final class LROsImpl implements LROs {
      */
     public Maybe<Product> putAsyncRetryFailedAsync(Product product) {
         return putAsyncRetryFailedWithRestResponseAsync(product)
-            .flatMapMaybe(new Function<RestResponse<LROsPutAsyncRetryFailedHeaders, Product>, Maybe<Product>>() {
-                public Maybe<Product> apply(RestResponse<LROsPutAsyncRetryFailedHeaders, Product> restResponse) {
-                    if (restResponse.body() == null) {
-                        return Maybe.empty();
-                    } else {
-                        return Maybe.just(restResponse.body());
-                    }
-                }
-            });
+            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -2843,7 +2668,7 @@ public final class LROsImpl implements LROs {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<LROsPutAsyncNoRetrycanceledHeaders, Product>> putAsyncNoRetrycanceledWithRestResponseAsync() {
+    public Single<LROsPutAsyncNoRetrycanceledResponse> putAsyncNoRetrycanceledWithRestResponseAsync() {
         final Product product = null;
         return service.putAsyncNoRetrycanceled(product, this.client.acceptLanguage());
     }
@@ -2855,15 +2680,7 @@ public final class LROsImpl implements LROs {
      */
     public Maybe<Product> putAsyncNoRetrycanceledAsync() {
         return putAsyncNoRetrycanceledWithRestResponseAsync()
-            .flatMapMaybe(new Function<RestResponse<LROsPutAsyncNoRetrycanceledHeaders, Product>, Maybe<Product>>() {
-                public Maybe<Product> apply(RestResponse<LROsPutAsyncNoRetrycanceledHeaders, Product> restResponse) {
-                    if (restResponse.body() == null) {
-                        return Maybe.empty();
-                    } else {
-                        return Maybe.just(restResponse.body());
-                    }
-                }
-            });
+            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -2898,7 +2715,7 @@ public final class LROsImpl implements LROs {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<LROsPutAsyncNoRetrycanceledHeaders, Product>> putAsyncNoRetrycanceledWithRestResponseAsync(Product product) {
+    public Single<LROsPutAsyncNoRetrycanceledResponse> putAsyncNoRetrycanceledWithRestResponseAsync(Product product) {
         Validator.validate(product);
         return service.putAsyncNoRetrycanceled(product, this.client.acceptLanguage());
     }
@@ -2912,15 +2729,7 @@ public final class LROsImpl implements LROs {
      */
     public Maybe<Product> putAsyncNoRetrycanceledAsync(Product product) {
         return putAsyncNoRetrycanceledWithRestResponseAsync(product)
-            .flatMapMaybe(new Function<RestResponse<LROsPutAsyncNoRetrycanceledHeaders, Product>, Maybe<Product>>() {
-                public Maybe<Product> apply(RestResponse<LROsPutAsyncNoRetrycanceledHeaders, Product> restResponse) {
-                    if (restResponse.body() == null) {
-                        return Maybe.empty();
-                    } else {
-                        return Maybe.just(restResponse.body());
-                    }
-                }
-            });
+            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -3032,7 +2841,7 @@ public final class LROsImpl implements LROs {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<LROsPutAsyncNoHeaderInRetryHeaders, Product>> putAsyncNoHeaderInRetryWithRestResponseAsync() {
+    public Single<LROsPutAsyncNoHeaderInRetryResponse> putAsyncNoHeaderInRetryWithRestResponseAsync() {
         final Product product = null;
         return service.putAsyncNoHeaderInRetry(product, this.client.acceptLanguage());
     }
@@ -3044,15 +2853,7 @@ public final class LROsImpl implements LROs {
      */
     public Maybe<Product> putAsyncNoHeaderInRetryAsync() {
         return putAsyncNoHeaderInRetryWithRestResponseAsync()
-            .flatMapMaybe(new Function<RestResponse<LROsPutAsyncNoHeaderInRetryHeaders, Product>, Maybe<Product>>() {
-                public Maybe<Product> apply(RestResponse<LROsPutAsyncNoHeaderInRetryHeaders, Product> restResponse) {
-                    if (restResponse.body() == null) {
-                        return Maybe.empty();
-                    } else {
-                        return Maybe.just(restResponse.body());
-                    }
-                }
-            });
+            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -3087,7 +2888,7 @@ public final class LROsImpl implements LROs {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<LROsPutAsyncNoHeaderInRetryHeaders, Product>> putAsyncNoHeaderInRetryWithRestResponseAsync(Product product) {
+    public Single<LROsPutAsyncNoHeaderInRetryResponse> putAsyncNoHeaderInRetryWithRestResponseAsync(Product product) {
         Validator.validate(product);
         return service.putAsyncNoHeaderInRetry(product, this.client.acceptLanguage());
     }
@@ -3101,15 +2902,7 @@ public final class LROsImpl implements LROs {
      */
     public Maybe<Product> putAsyncNoHeaderInRetryAsync(Product product) {
         return putAsyncNoHeaderInRetryWithRestResponseAsync(product)
-            .flatMapMaybe(new Function<RestResponse<LROsPutAsyncNoHeaderInRetryHeaders, Product>, Maybe<Product>>() {
-                public Maybe<Product> apply(RestResponse<LROsPutAsyncNoHeaderInRetryHeaders, Product> restResponse) {
-                    if (restResponse.body() == null) {
-                        return Maybe.empty();
-                    } else {
-                        return Maybe.just(restResponse.body());
-                    }
-                }
-            });
+            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -3221,7 +3014,7 @@ public final class LROsImpl implements LROs {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<Void, Sku>> putNonResourceWithRestResponseAsync() {
+    public Single<BodyResponse<Sku>> putNonResourceWithRestResponseAsync() {
         final Sku sku = null;
         return service.putNonResource(sku, this.client.acceptLanguage());
     }
@@ -3233,15 +3026,7 @@ public final class LROsImpl implements LROs {
      */
     public Maybe<Sku> putNonResourceAsync() {
         return putNonResourceWithRestResponseAsync()
-            .flatMapMaybe(new Function<RestResponse<Void, Sku>, Maybe<Sku>>() {
-                public Maybe<Sku> apply(RestResponse<Void, Sku> restResponse) {
-                    if (restResponse.body() == null) {
-                        return Maybe.empty();
-                    } else {
-                        return Maybe.just(restResponse.body());
-                    }
-                }
-            });
+            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -3276,7 +3061,7 @@ public final class LROsImpl implements LROs {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<Void, Sku>> putNonResourceWithRestResponseAsync(Sku sku) {
+    public Single<BodyResponse<Sku>> putNonResourceWithRestResponseAsync(Sku sku) {
         Validator.validate(sku);
         return service.putNonResource(sku, this.client.acceptLanguage());
     }
@@ -3290,15 +3075,7 @@ public final class LROsImpl implements LROs {
      */
     public Maybe<Sku> putNonResourceAsync(Sku sku) {
         return putNonResourceWithRestResponseAsync(sku)
-            .flatMapMaybe(new Function<RestResponse<Void, Sku>, Maybe<Sku>>() {
-                public Maybe<Sku> apply(RestResponse<Void, Sku> restResponse) {
-                    if (restResponse.body() == null) {
-                        return Maybe.empty();
-                    } else {
-                        return Maybe.just(restResponse.body());
-                    }
-                }
-            });
+            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -3410,7 +3187,7 @@ public final class LROsImpl implements LROs {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<Void, Sku>> putAsyncNonResourceWithRestResponseAsync() {
+    public Single<BodyResponse<Sku>> putAsyncNonResourceWithRestResponseAsync() {
         final Sku sku = null;
         return service.putAsyncNonResource(sku, this.client.acceptLanguage());
     }
@@ -3422,15 +3199,7 @@ public final class LROsImpl implements LROs {
      */
     public Maybe<Sku> putAsyncNonResourceAsync() {
         return putAsyncNonResourceWithRestResponseAsync()
-            .flatMapMaybe(new Function<RestResponse<Void, Sku>, Maybe<Sku>>() {
-                public Maybe<Sku> apply(RestResponse<Void, Sku> restResponse) {
-                    if (restResponse.body() == null) {
-                        return Maybe.empty();
-                    } else {
-                        return Maybe.just(restResponse.body());
-                    }
-                }
-            });
+            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -3465,7 +3234,7 @@ public final class LROsImpl implements LROs {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<Void, Sku>> putAsyncNonResourceWithRestResponseAsync(Sku sku) {
+    public Single<BodyResponse<Sku>> putAsyncNonResourceWithRestResponseAsync(Sku sku) {
         Validator.validate(sku);
         return service.putAsyncNonResource(sku, this.client.acceptLanguage());
     }
@@ -3479,15 +3248,7 @@ public final class LROsImpl implements LROs {
      */
     public Maybe<Sku> putAsyncNonResourceAsync(Sku sku) {
         return putAsyncNonResourceWithRestResponseAsync(sku)
-            .flatMapMaybe(new Function<RestResponse<Void, Sku>, Maybe<Sku>>() {
-                public Maybe<Sku> apply(RestResponse<Void, Sku> restResponse) {
-                    if (restResponse.body() == null) {
-                        return Maybe.empty();
-                    } else {
-                        return Maybe.just(restResponse.body());
-                    }
-                }
-            });
+            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -3599,7 +3360,7 @@ public final class LROsImpl implements LROs {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<Void, SubProduct>> putSubResourceWithRestResponseAsync() {
+    public Single<BodyResponse<SubProduct>> putSubResourceWithRestResponseAsync() {
         final SubProduct product = null;
         return service.putSubResource(product, this.client.acceptLanguage());
     }
@@ -3611,15 +3372,7 @@ public final class LROsImpl implements LROs {
      */
     public Maybe<SubProduct> putSubResourceAsync() {
         return putSubResourceWithRestResponseAsync()
-            .flatMapMaybe(new Function<RestResponse<Void, SubProduct>, Maybe<SubProduct>>() {
-                public Maybe<SubProduct> apply(RestResponse<Void, SubProduct> restResponse) {
-                    if (restResponse.body() == null) {
-                        return Maybe.empty();
-                    } else {
-                        return Maybe.just(restResponse.body());
-                    }
-                }
-            });
+            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -3654,7 +3407,7 @@ public final class LROsImpl implements LROs {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<Void, SubProduct>> putSubResourceWithRestResponseAsync(SubProduct product) {
+    public Single<BodyResponse<SubProduct>> putSubResourceWithRestResponseAsync(SubProduct product) {
         Validator.validate(product);
         return service.putSubResource(product, this.client.acceptLanguage());
     }
@@ -3668,15 +3421,7 @@ public final class LROsImpl implements LROs {
      */
     public Maybe<SubProduct> putSubResourceAsync(SubProduct product) {
         return putSubResourceWithRestResponseAsync(product)
-            .flatMapMaybe(new Function<RestResponse<Void, SubProduct>, Maybe<SubProduct>>() {
-                public Maybe<SubProduct> apply(RestResponse<Void, SubProduct> restResponse) {
-                    if (restResponse.body() == null) {
-                        return Maybe.empty();
-                    } else {
-                        return Maybe.just(restResponse.body());
-                    }
-                }
-            });
+            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -3788,7 +3533,7 @@ public final class LROsImpl implements LROs {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<Void, SubProduct>> putAsyncSubResourceWithRestResponseAsync() {
+    public Single<BodyResponse<SubProduct>> putAsyncSubResourceWithRestResponseAsync() {
         final SubProduct product = null;
         return service.putAsyncSubResource(product, this.client.acceptLanguage());
     }
@@ -3800,15 +3545,7 @@ public final class LROsImpl implements LROs {
      */
     public Maybe<SubProduct> putAsyncSubResourceAsync() {
         return putAsyncSubResourceWithRestResponseAsync()
-            .flatMapMaybe(new Function<RestResponse<Void, SubProduct>, Maybe<SubProduct>>() {
-                public Maybe<SubProduct> apply(RestResponse<Void, SubProduct> restResponse) {
-                    if (restResponse.body() == null) {
-                        return Maybe.empty();
-                    } else {
-                        return Maybe.just(restResponse.body());
-                    }
-                }
-            });
+            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -3843,7 +3580,7 @@ public final class LROsImpl implements LROs {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<Void, SubProduct>> putAsyncSubResourceWithRestResponseAsync(SubProduct product) {
+    public Single<BodyResponse<SubProduct>> putAsyncSubResourceWithRestResponseAsync(SubProduct product) {
         Validator.validate(product);
         return service.putAsyncSubResource(product, this.client.acceptLanguage());
     }
@@ -3857,15 +3594,7 @@ public final class LROsImpl implements LROs {
      */
     public Maybe<SubProduct> putAsyncSubResourceAsync(SubProduct product) {
         return putAsyncSubResourceWithRestResponseAsync(product)
-            .flatMapMaybe(new Function<RestResponse<Void, SubProduct>, Maybe<SubProduct>>() {
-                public Maybe<SubProduct> apply(RestResponse<Void, SubProduct> restResponse) {
-                    if (restResponse.body() == null) {
-                        return Maybe.empty();
-                    } else {
-                        return Maybe.just(restResponse.body());
-                    }
-                }
-            });
+            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -3940,7 +3669,7 @@ public final class LROsImpl implements LROs {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<LROsDeleteProvisioning202Accepted200SucceededHeaders, Product>> deleteProvisioning202Accepted200SucceededWithRestResponseAsync() {
+    public Single<LROsDeleteProvisioning202Accepted200SucceededResponse> deleteProvisioning202Accepted200SucceededWithRestResponseAsync() {
         return service.deleteProvisioning202Accepted200Succeeded(this.client.acceptLanguage());
     }
 
@@ -3951,15 +3680,7 @@ public final class LROsImpl implements LROs {
      */
     public Maybe<Product> deleteProvisioning202Accepted200SucceededAsync() {
         return deleteProvisioning202Accepted200SucceededWithRestResponseAsync()
-            .flatMapMaybe(new Function<RestResponse<LROsDeleteProvisioning202Accepted200SucceededHeaders, Product>, Maybe<Product>>() {
-                public Maybe<Product> apply(RestResponse<LROsDeleteProvisioning202Accepted200SucceededHeaders, Product> restResponse) {
-                    if (restResponse.body() == null) {
-                        return Maybe.empty();
-                    } else {
-                        return Maybe.just(restResponse.body());
-                    }
-                }
-            });
+            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -4034,7 +3755,7 @@ public final class LROsImpl implements LROs {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<LROsDeleteProvisioning202DeletingFailed200Headers, Product>> deleteProvisioning202DeletingFailed200WithRestResponseAsync() {
+    public Single<LROsDeleteProvisioning202DeletingFailed200Response> deleteProvisioning202DeletingFailed200WithRestResponseAsync() {
         return service.deleteProvisioning202DeletingFailed200(this.client.acceptLanguage());
     }
 
@@ -4045,15 +3766,7 @@ public final class LROsImpl implements LROs {
      */
     public Maybe<Product> deleteProvisioning202DeletingFailed200Async() {
         return deleteProvisioning202DeletingFailed200WithRestResponseAsync()
-            .flatMapMaybe(new Function<RestResponse<LROsDeleteProvisioning202DeletingFailed200Headers, Product>, Maybe<Product>>() {
-                public Maybe<Product> apply(RestResponse<LROsDeleteProvisioning202DeletingFailed200Headers, Product> restResponse) {
-                    if (restResponse.body() == null) {
-                        return Maybe.empty();
-                    } else {
-                        return Maybe.just(restResponse.body());
-                    }
-                }
-            });
+            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -4128,7 +3841,7 @@ public final class LROsImpl implements LROs {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<LROsDeleteProvisioning202Deletingcanceled200Headers, Product>> deleteProvisioning202Deletingcanceled200WithRestResponseAsync() {
+    public Single<LROsDeleteProvisioning202Deletingcanceled200Response> deleteProvisioning202Deletingcanceled200WithRestResponseAsync() {
         return service.deleteProvisioning202Deletingcanceled200(this.client.acceptLanguage());
     }
 
@@ -4139,15 +3852,7 @@ public final class LROsImpl implements LROs {
      */
     public Maybe<Product> deleteProvisioning202Deletingcanceled200Async() {
         return deleteProvisioning202Deletingcanceled200WithRestResponseAsync()
-            .flatMapMaybe(new Function<RestResponse<LROsDeleteProvisioning202Deletingcanceled200Headers, Product>, Maybe<Product>>() {
-                public Maybe<Product> apply(RestResponse<LROsDeleteProvisioning202Deletingcanceled200Headers, Product> restResponse) {
-                    if (restResponse.body() == null) {
-                        return Maybe.empty();
-                    } else {
-                        return Maybe.just(restResponse.body());
-                    }
-                }
-            });
+            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -4220,7 +3925,7 @@ public final class LROsImpl implements LROs {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<Void, Void>> delete204SucceededWithRestResponseAsync() {
+    public Single<VoidResponse> delete204SucceededWithRestResponseAsync() {
         return service.delete204Succeeded(this.client.acceptLanguage());
     }
 
@@ -4306,7 +4011,7 @@ public final class LROsImpl implements LROs {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<LROsDelete202Retry200Headers, Product>> delete202Retry200WithRestResponseAsync() {
+    public Single<LROsDelete202Retry200Response> delete202Retry200WithRestResponseAsync() {
         return service.delete202Retry200(this.client.acceptLanguage());
     }
 
@@ -4317,15 +4022,7 @@ public final class LROsImpl implements LROs {
      */
     public Maybe<Product> delete202Retry200Async() {
         return delete202Retry200WithRestResponseAsync()
-            .flatMapMaybe(new Function<RestResponse<LROsDelete202Retry200Headers, Product>, Maybe<Product>>() {
-                public Maybe<Product> apply(RestResponse<LROsDelete202Retry200Headers, Product> restResponse) {
-                    if (restResponse.body() == null) {
-                        return Maybe.empty();
-                    } else {
-                        return Maybe.just(restResponse.body());
-                    }
-                }
-            });
+            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -4400,7 +4097,7 @@ public final class LROsImpl implements LROs {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<LROsDelete202NoRetry204Headers, Product>> delete202NoRetry204WithRestResponseAsync() {
+    public Single<LROsDelete202NoRetry204Response> delete202NoRetry204WithRestResponseAsync() {
         return service.delete202NoRetry204(this.client.acceptLanguage());
     }
 
@@ -4411,15 +4108,7 @@ public final class LROsImpl implements LROs {
      */
     public Maybe<Product> delete202NoRetry204Async() {
         return delete202NoRetry204WithRestResponseAsync()
-            .flatMapMaybe(new Function<RestResponse<LROsDelete202NoRetry204Headers, Product>, Maybe<Product>>() {
-                public Maybe<Product> apply(RestResponse<LROsDelete202NoRetry204Headers, Product> restResponse) {
-                    if (restResponse.body() == null) {
-                        return Maybe.empty();
-                    } else {
-                        return Maybe.just(restResponse.body());
-                    }
-                }
-            });
+            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -4492,7 +4181,7 @@ public final class LROsImpl implements LROs {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<LROsDeleteNoHeaderInRetryHeaders, Void>> deleteNoHeaderInRetryWithRestResponseAsync() {
+    public Single<LROsDeleteNoHeaderInRetryResponse> deleteNoHeaderInRetryWithRestResponseAsync() {
         return service.deleteNoHeaderInRetry(this.client.acceptLanguage());
     }
 
@@ -4576,7 +4265,7 @@ public final class LROsImpl implements LROs {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<LROsDeleteAsyncNoHeaderInRetryHeaders, Void>> deleteAsyncNoHeaderInRetryWithRestResponseAsync() {
+    public Single<LROsDeleteAsyncNoHeaderInRetryResponse> deleteAsyncNoHeaderInRetryWithRestResponseAsync() {
         return service.deleteAsyncNoHeaderInRetry(this.client.acceptLanguage());
     }
 
@@ -4660,7 +4349,7 @@ public final class LROsImpl implements LROs {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<LROsDeleteAsyncRetrySucceededHeaders, Void>> deleteAsyncRetrySucceededWithRestResponseAsync() {
+    public Single<LROsDeleteAsyncRetrySucceededResponse> deleteAsyncRetrySucceededWithRestResponseAsync() {
         return service.deleteAsyncRetrySucceeded(this.client.acceptLanguage());
     }
 
@@ -4744,7 +4433,7 @@ public final class LROsImpl implements LROs {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<LROsDeleteAsyncNoRetrySucceededHeaders, Void>> deleteAsyncNoRetrySucceededWithRestResponseAsync() {
+    public Single<LROsDeleteAsyncNoRetrySucceededResponse> deleteAsyncNoRetrySucceededWithRestResponseAsync() {
         return service.deleteAsyncNoRetrySucceeded(this.client.acceptLanguage());
     }
 
@@ -4828,7 +4517,7 @@ public final class LROsImpl implements LROs {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<LROsDeleteAsyncRetryFailedHeaders, Void>> deleteAsyncRetryFailedWithRestResponseAsync() {
+    public Single<LROsDeleteAsyncRetryFailedResponse> deleteAsyncRetryFailedWithRestResponseAsync() {
         return service.deleteAsyncRetryFailed(this.client.acceptLanguage());
     }
 
@@ -4912,7 +4601,7 @@ public final class LROsImpl implements LROs {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<LROsDeleteAsyncRetrycanceledHeaders, Void>> deleteAsyncRetrycanceledWithRestResponseAsync() {
+    public Single<LROsDeleteAsyncRetrycanceledResponse> deleteAsyncRetrycanceledWithRestResponseAsync() {
         return service.deleteAsyncRetrycanceled(this.client.acceptLanguage());
     }
 
@@ -4998,7 +4687,7 @@ public final class LROsImpl implements LROs {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<Void, Sku>> post200WithPayloadWithRestResponseAsync() {
+    public Single<BodyResponse<Sku>> post200WithPayloadWithRestResponseAsync() {
         return service.post200WithPayload(this.client.acceptLanguage());
     }
 
@@ -5009,15 +4698,7 @@ public final class LROsImpl implements LROs {
      */
     public Maybe<Sku> post200WithPayloadAsync() {
         return post200WithPayloadWithRestResponseAsync()
-            .flatMapMaybe(new Function<RestResponse<Void, Sku>, Maybe<Sku>>() {
-                public Maybe<Sku> apply(RestResponse<Void, Sku> restResponse) {
-                    if (restResponse.body() == null) {
-                        return Maybe.empty();
-                    } else {
-                        return Maybe.just(restResponse.body());
-                    }
-                }
-            });
+            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -5126,7 +4807,7 @@ public final class LROsImpl implements LROs {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<LROsPost202Retry200Headers, Void>> post202Retry200WithRestResponseAsync() {
+    public Single<LROsPost202Retry200Response> post202Retry200WithRestResponseAsync() {
         final Product product = null;
         return service.post202Retry200(product, this.client.acceptLanguage());
     }
@@ -5172,7 +4853,7 @@ public final class LROsImpl implements LROs {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<LROsPost202Retry200Headers, Void>> post202Retry200WithRestResponseAsync(Product product) {
+    public Single<LROsPost202Retry200Response> post202Retry200WithRestResponseAsync(Product product) {
         Validator.validate(product);
         return service.post202Retry200(product, this.client.acceptLanguage());
     }
@@ -5298,7 +4979,7 @@ public final class LROsImpl implements LROs {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<LROsPost202NoRetry204Headers, Product>> post202NoRetry204WithRestResponseAsync() {
+    public Single<LROsPost202NoRetry204Response> post202NoRetry204WithRestResponseAsync() {
         final Product product = null;
         return service.post202NoRetry204(product, this.client.acceptLanguage());
     }
@@ -5310,15 +4991,7 @@ public final class LROsImpl implements LROs {
      */
     public Maybe<Product> post202NoRetry204Async() {
         return post202NoRetry204WithRestResponseAsync()
-            .flatMapMaybe(new Function<RestResponse<LROsPost202NoRetry204Headers, Product>, Maybe<Product>>() {
-                public Maybe<Product> apply(RestResponse<LROsPost202NoRetry204Headers, Product> restResponse) {
-                    if (restResponse.body() == null) {
-                        return Maybe.empty();
-                    } else {
-                        return Maybe.just(restResponse.body());
-                    }
-                }
-            });
+            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -5353,7 +5026,7 @@ public final class LROsImpl implements LROs {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<LROsPost202NoRetry204Headers, Product>> post202NoRetry204WithRestResponseAsync(Product product) {
+    public Single<LROsPost202NoRetry204Response> post202NoRetry204WithRestResponseAsync(Product product) {
         Validator.validate(product);
         return service.post202NoRetry204(product, this.client.acceptLanguage());
     }
@@ -5367,15 +5040,7 @@ public final class LROsImpl implements LROs {
      */
     public Maybe<Product> post202NoRetry204Async(Product product) {
         return post202NoRetry204WithRestResponseAsync(product)
-            .flatMapMaybe(new Function<RestResponse<LROsPost202NoRetry204Headers, Product>, Maybe<Product>>() {
-                public Maybe<Product> apply(RestResponse<LROsPost202NoRetry204Headers, Product> restResponse) {
-                    if (restResponse.body() == null) {
-                        return Maybe.empty();
-                    } else {
-                        return Maybe.just(restResponse.body());
-                    }
-                }
-            });
+            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -5487,7 +5152,7 @@ public final class LROsImpl implements LROs {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<LROsPostAsyncRetrySucceededHeaders, Product>> postAsyncRetrySucceededWithRestResponseAsync() {
+    public Single<LROsPostAsyncRetrySucceededResponse> postAsyncRetrySucceededWithRestResponseAsync() {
         final Product product = null;
         return service.postAsyncRetrySucceeded(product, this.client.acceptLanguage());
     }
@@ -5499,15 +5164,7 @@ public final class LROsImpl implements LROs {
      */
     public Maybe<Product> postAsyncRetrySucceededAsync() {
         return postAsyncRetrySucceededWithRestResponseAsync()
-            .flatMapMaybe(new Function<RestResponse<LROsPostAsyncRetrySucceededHeaders, Product>, Maybe<Product>>() {
-                public Maybe<Product> apply(RestResponse<LROsPostAsyncRetrySucceededHeaders, Product> restResponse) {
-                    if (restResponse.body() == null) {
-                        return Maybe.empty();
-                    } else {
-                        return Maybe.just(restResponse.body());
-                    }
-                }
-            });
+            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -5542,7 +5199,7 @@ public final class LROsImpl implements LROs {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<LROsPostAsyncRetrySucceededHeaders, Product>> postAsyncRetrySucceededWithRestResponseAsync(Product product) {
+    public Single<LROsPostAsyncRetrySucceededResponse> postAsyncRetrySucceededWithRestResponseAsync(Product product) {
         Validator.validate(product);
         return service.postAsyncRetrySucceeded(product, this.client.acceptLanguage());
     }
@@ -5556,15 +5213,7 @@ public final class LROsImpl implements LROs {
      */
     public Maybe<Product> postAsyncRetrySucceededAsync(Product product) {
         return postAsyncRetrySucceededWithRestResponseAsync(product)
-            .flatMapMaybe(new Function<RestResponse<LROsPostAsyncRetrySucceededHeaders, Product>, Maybe<Product>>() {
-                public Maybe<Product> apply(RestResponse<LROsPostAsyncRetrySucceededHeaders, Product> restResponse) {
-                    if (restResponse.body() == null) {
-                        return Maybe.empty();
-                    } else {
-                        return Maybe.just(restResponse.body());
-                    }
-                }
-            });
+            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -5676,7 +5325,7 @@ public final class LROsImpl implements LROs {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<LROsPostAsyncNoRetrySucceededHeaders, Product>> postAsyncNoRetrySucceededWithRestResponseAsync() {
+    public Single<LROsPostAsyncNoRetrySucceededResponse> postAsyncNoRetrySucceededWithRestResponseAsync() {
         final Product product = null;
         return service.postAsyncNoRetrySucceeded(product, this.client.acceptLanguage());
     }
@@ -5688,15 +5337,7 @@ public final class LROsImpl implements LROs {
      */
     public Maybe<Product> postAsyncNoRetrySucceededAsync() {
         return postAsyncNoRetrySucceededWithRestResponseAsync()
-            .flatMapMaybe(new Function<RestResponse<LROsPostAsyncNoRetrySucceededHeaders, Product>, Maybe<Product>>() {
-                public Maybe<Product> apply(RestResponse<LROsPostAsyncNoRetrySucceededHeaders, Product> restResponse) {
-                    if (restResponse.body() == null) {
-                        return Maybe.empty();
-                    } else {
-                        return Maybe.just(restResponse.body());
-                    }
-                }
-            });
+            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -5731,7 +5372,7 @@ public final class LROsImpl implements LROs {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<LROsPostAsyncNoRetrySucceededHeaders, Product>> postAsyncNoRetrySucceededWithRestResponseAsync(Product product) {
+    public Single<LROsPostAsyncNoRetrySucceededResponse> postAsyncNoRetrySucceededWithRestResponseAsync(Product product) {
         Validator.validate(product);
         return service.postAsyncNoRetrySucceeded(product, this.client.acceptLanguage());
     }
@@ -5745,15 +5386,7 @@ public final class LROsImpl implements LROs {
      */
     public Maybe<Product> postAsyncNoRetrySucceededAsync(Product product) {
         return postAsyncNoRetrySucceededWithRestResponseAsync(product)
-            .flatMapMaybe(new Function<RestResponse<LROsPostAsyncNoRetrySucceededHeaders, Product>, Maybe<Product>>() {
-                public Maybe<Product> apply(RestResponse<LROsPostAsyncNoRetrySucceededHeaders, Product> restResponse) {
-                    if (restResponse.body() == null) {
-                        return Maybe.empty();
-                    } else {
-                        return Maybe.just(restResponse.body());
-                    }
-                }
-            });
+            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -5862,7 +5495,7 @@ public final class LROsImpl implements LROs {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<LROsPostAsyncRetryFailedHeaders, Void>> postAsyncRetryFailedWithRestResponseAsync() {
+    public Single<LROsPostAsyncRetryFailedResponse> postAsyncRetryFailedWithRestResponseAsync() {
         final Product product = null;
         return service.postAsyncRetryFailed(product, this.client.acceptLanguage());
     }
@@ -5908,7 +5541,7 @@ public final class LROsImpl implements LROs {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<LROsPostAsyncRetryFailedHeaders, Void>> postAsyncRetryFailedWithRestResponseAsync(Product product) {
+    public Single<LROsPostAsyncRetryFailedResponse> postAsyncRetryFailedWithRestResponseAsync(Product product) {
         Validator.validate(product);
         return service.postAsyncRetryFailed(product, this.client.acceptLanguage());
     }
@@ -6031,7 +5664,7 @@ public final class LROsImpl implements LROs {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<LROsPostAsyncRetrycanceledHeaders, Void>> postAsyncRetrycanceledWithRestResponseAsync() {
+    public Single<LROsPostAsyncRetrycanceledResponse> postAsyncRetrycanceledWithRestResponseAsync() {
         final Product product = null;
         return service.postAsyncRetrycanceled(product, this.client.acceptLanguage());
     }
@@ -6077,7 +5710,7 @@ public final class LROsImpl implements LROs {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<LROsPostAsyncRetrycanceledHeaders, Void>> postAsyncRetrycanceledWithRestResponseAsync(Product product) {
+    public Single<LROsPostAsyncRetrycanceledResponse> postAsyncRetrycanceledWithRestResponseAsync(Product product) {
         Validator.validate(product);
         return service.postAsyncRetrycanceled(product, this.client.acceptLanguage());
     }

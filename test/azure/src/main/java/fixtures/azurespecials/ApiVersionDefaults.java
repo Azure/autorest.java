@@ -10,9 +10,9 @@
 
 package fixtures.azurespecials;
 
-import com.microsoft.rest.v2.RestResponse;
 import com.microsoft.rest.v2.ServiceCallback;
 import com.microsoft.rest.v2.ServiceFuture;
+import com.microsoft.rest.v2.VoidResponse;
 import fixtures.azurespecials.models.ErrorException;
 import io.reactivex.Completable;
 import io.reactivex.Single;
@@ -44,7 +44,7 @@ public interface ApiVersionDefaults {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, Void>> getMethodGlobalValidWithRestResponseAsync();
+    Single<VoidResponse> getMethodGlobalValidWithRestResponseAsync();
 
     /**
      * GET method with api-version modeled in global settings.
@@ -75,7 +75,7 @@ public interface ApiVersionDefaults {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, Void>> getMethodGlobalNotProvidedValidWithRestResponseAsync();
+    Single<VoidResponse> getMethodGlobalNotProvidedValidWithRestResponseAsync();
 
     /**
      * GET method with api-version modeled in global settings.
@@ -106,7 +106,7 @@ public interface ApiVersionDefaults {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, Void>> getPathGlobalValidWithRestResponseAsync();
+    Single<VoidResponse> getPathGlobalValidWithRestResponseAsync();
 
     /**
      * GET method with api-version modeled in global settings.
@@ -137,7 +137,7 @@ public interface ApiVersionDefaults {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, Void>> getSwaggerGlobalValidWithRestResponseAsync();
+    Single<VoidResponse> getSwaggerGlobalValidWithRestResponseAsync();
 
     /**
      * GET method with api-version modeled in global settings.

@@ -10,9 +10,10 @@
 
 package fixtures.bodybyte;
 
-import com.microsoft.rest.v2.RestResponse;
+import com.microsoft.rest.v2.BodyResponse;
 import com.microsoft.rest.v2.ServiceCallback;
 import com.microsoft.rest.v2.ServiceFuture;
+import com.microsoft.rest.v2.VoidResponse;
 import fixtures.bodybyte.models.ErrorException;
 import io.reactivex.Completable;
 import io.reactivex.Maybe;
@@ -46,7 +47,7 @@ public interface Bytes {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, byte[]>> getNullWithRestResponseAsync();
+    Single<BodyResponse<byte[]>> getNullWithRestResponseAsync();
 
     /**
      * Get null byte value.
@@ -78,7 +79,7 @@ public interface Bytes {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, byte[]>> getEmptyWithRestResponseAsync();
+    Single<BodyResponse<byte[]>> getEmptyWithRestResponseAsync();
 
     /**
      * Get empty byte value ''.
@@ -110,7 +111,7 @@ public interface Bytes {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, byte[]>> getNonAsciiWithRestResponseAsync();
+    Single<BodyResponse<byte[]>> getNonAsciiWithRestResponseAsync();
 
     /**
      * Get non-ascii byte string hex(FF FE FD FC FB FA F9 F8 F7 F6).
@@ -146,7 +147,7 @@ public interface Bytes {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, Void>> putNonAsciiWithRestResponseAsync(byte[] byteBody);
+    Single<VoidResponse> putNonAsciiWithRestResponseAsync(byte[] byteBody);
 
     /**
      * Put non-ascii byte string hex(FF FE FD FC FB FA F9 F8 F7 F6).
@@ -180,7 +181,7 @@ public interface Bytes {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, byte[]>> getInvalidWithRestResponseAsync();
+    Single<BodyResponse<byte[]>> getInvalidWithRestResponseAsync();
 
     /**
      * Get invalid byte value ':::SWAGGER::::'.

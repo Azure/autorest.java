@@ -11,10 +11,11 @@
 package fixtures.bodystring.implementation;
 
 import com.microsoft.rest.v2.Base64Url;
+import com.microsoft.rest.v2.BodyResponse;
 import com.microsoft.rest.v2.RestProxy;
-import com.microsoft.rest.v2.RestResponse;
 import com.microsoft.rest.v2.ServiceCallback;
 import com.microsoft.rest.v2.ServiceFuture;
+import com.microsoft.rest.v2.VoidResponse;
 import com.microsoft.rest.v2.annotations.BodyParam;
 import com.microsoft.rest.v2.annotations.ExpectedResponses;
 import com.microsoft.rest.v2.annotations.GET;
@@ -64,70 +65,70 @@ public final class StringsImpl implements Strings {
         @GET("string/null")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<RestResponse<Void, String>> getNull();
+        Single<BodyResponse<String>> getNull();
 
         @PUT("string/null")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<RestResponse<Void, Void>> putNull(@BodyParam("application/json; charset=utf-8") String stringBody);
+        Single<VoidResponse> putNull(@BodyParam("application/json; charset=utf-8") String stringBody);
 
         @GET("string/empty")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<RestResponse<Void, String>> getEmpty();
+        Single<BodyResponse<String>> getEmpty();
 
         @PUT("string/empty")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<RestResponse<Void, Void>> putEmpty(@BodyParam("application/json; charset=utf-8") String stringBody);
+        Single<VoidResponse> putEmpty(@BodyParam("application/json; charset=utf-8") String stringBody);
 
         @GET("string/mbcs")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<RestResponse<Void, String>> getMbcs();
+        Single<BodyResponse<String>> getMbcs();
 
         @PUT("string/mbcs")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<RestResponse<Void, Void>> putMbcs(@BodyParam("application/json; charset=utf-8") String stringBody);
+        Single<VoidResponse> putMbcs(@BodyParam("application/json; charset=utf-8") String stringBody);
 
         @GET("string/whitespace")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<RestResponse<Void, String>> getWhitespace();
+        Single<BodyResponse<String>> getWhitespace();
 
         @PUT("string/whitespace")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<RestResponse<Void, Void>> putWhitespace(@BodyParam("application/json; charset=utf-8") String stringBody);
+        Single<VoidResponse> putWhitespace(@BodyParam("application/json; charset=utf-8") String stringBody);
 
         @GET("string/notProvided")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<RestResponse<Void, String>> getNotProvided();
+        Single<BodyResponse<String>> getNotProvided();
 
         @GET("string/base64Encoding")
         @ExpectedResponses({200})
         @ReturnValueWireType(Base64Url.class)
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<RestResponse<Void, byte[]>> getBase64Encoded();
+        Single<BodyResponse<byte[]>> getBase64Encoded();
 
         @GET("string/base64UrlEncoding")
         @ExpectedResponses({200})
         @ReturnValueWireType(Base64Url.class)
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<RestResponse<Void, byte[]>> getBase64UrlEncoded();
+        Single<BodyResponse<byte[]>> getBase64UrlEncoded();
 
         @PUT("string/base64UrlEncoding")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<RestResponse<Void, Void>> putBase64UrlEncoded(@BodyParam("application/json; charset=utf-8") Base64Url stringBody);
+        Single<VoidResponse> putBase64UrlEncoded(@BodyParam("application/json; charset=utf-8") Base64Url stringBody);
 
         @GET("string/nullBase64UrlEncoding")
         @ExpectedResponses({200})
         @ReturnValueWireType(Base64Url.class)
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<RestResponse<Void, byte[]>> getNullBase64UrlEncoded();
+        Single<BodyResponse<byte[]>> getNullBase64UrlEncoded();
     }
 
     /**
@@ -157,7 +158,7 @@ public final class StringsImpl implements Strings {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<Void, String>> getNullWithRestResponseAsync() {
+    public Single<BodyResponse<String>> getNullWithRestResponseAsync() {
         return service.getNull();
     }
 
@@ -168,15 +169,7 @@ public final class StringsImpl implements Strings {
      */
     public Maybe<String> getNullAsync() {
         return getNullWithRestResponseAsync()
-            .flatMapMaybe(new Function<RestResponse<Void, String>, Maybe<String>>() {
-                public Maybe<String> apply(RestResponse<Void, String> restResponse) {
-                    if (restResponse.body() == null) {
-                        return Maybe.empty();
-                    } else {
-                        return Maybe.just(restResponse.body());
-                    }
-                }
-            });
+            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -205,7 +198,7 @@ public final class StringsImpl implements Strings {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<Void, Void>> putNullWithRestResponseAsync() {
+    public Single<VoidResponse> putNullWithRestResponseAsync() {
         final String stringBody = null;
         return service.putNull(stringBody);
     }
@@ -251,7 +244,7 @@ public final class StringsImpl implements Strings {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<Void, Void>> putNullWithRestResponseAsync(String stringBody) {
+    public Single<VoidResponse> putNullWithRestResponseAsync(String stringBody) {
         return service.putNull(stringBody);
     }
 
@@ -294,7 +287,7 @@ public final class StringsImpl implements Strings {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<Void, String>> getEmptyWithRestResponseAsync() {
+    public Single<BodyResponse<String>> getEmptyWithRestResponseAsync() {
         return service.getEmpty();
     }
 
@@ -305,15 +298,7 @@ public final class StringsImpl implements Strings {
      */
     public Maybe<String> getEmptyAsync() {
         return getEmptyWithRestResponseAsync()
-            .flatMapMaybe(new Function<RestResponse<Void, String>, Maybe<String>>() {
-                public Maybe<String> apply(RestResponse<Void, String> restResponse) {
-                    if (restResponse.body() == null) {
-                        return Maybe.empty();
-                    } else {
-                        return Maybe.just(restResponse.body());
-                    }
-                }
-            });
+            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -347,7 +332,7 @@ public final class StringsImpl implements Strings {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<Void, Void>> putEmptyWithRestResponseAsync(@NonNull String stringBody) {
+    public Single<VoidResponse> putEmptyWithRestResponseAsync(@NonNull String stringBody) {
         if (stringBody == null) {
             throw new IllegalArgumentException("Parameter stringBody is required and cannot be null.");
         }
@@ -393,7 +378,7 @@ public final class StringsImpl implements Strings {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<Void, String>> getMbcsWithRestResponseAsync() {
+    public Single<BodyResponse<String>> getMbcsWithRestResponseAsync() {
         return service.getMbcs();
     }
 
@@ -404,15 +389,7 @@ public final class StringsImpl implements Strings {
      */
     public Maybe<String> getMbcsAsync() {
         return getMbcsWithRestResponseAsync()
-            .flatMapMaybe(new Function<RestResponse<Void, String>, Maybe<String>>() {
-                public Maybe<String> apply(RestResponse<Void, String> restResponse) {
-                    if (restResponse.body() == null) {
-                        return Maybe.empty();
-                    } else {
-                        return Maybe.just(restResponse.body());
-                    }
-                }
-            });
+            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -446,7 +423,7 @@ public final class StringsImpl implements Strings {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<Void, Void>> putMbcsWithRestResponseAsync(@NonNull String stringBody) {
+    public Single<VoidResponse> putMbcsWithRestResponseAsync(@NonNull String stringBody) {
         if (stringBody == null) {
             throw new IllegalArgumentException("Parameter stringBody is required and cannot be null.");
         }
@@ -492,7 +469,7 @@ public final class StringsImpl implements Strings {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<Void, String>> getWhitespaceWithRestResponseAsync() {
+    public Single<BodyResponse<String>> getWhitespaceWithRestResponseAsync() {
         return service.getWhitespace();
     }
 
@@ -503,15 +480,7 @@ public final class StringsImpl implements Strings {
      */
     public Maybe<String> getWhitespaceAsync() {
         return getWhitespaceWithRestResponseAsync()
-            .flatMapMaybe(new Function<RestResponse<Void, String>, Maybe<String>>() {
-                public Maybe<String> apply(RestResponse<Void, String> restResponse) {
-                    if (restResponse.body() == null) {
-                        return Maybe.empty();
-                    } else {
-                        return Maybe.just(restResponse.body());
-                    }
-                }
-            });
+            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -545,7 +514,7 @@ public final class StringsImpl implements Strings {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<Void, Void>> putWhitespaceWithRestResponseAsync(@NonNull String stringBody) {
+    public Single<VoidResponse> putWhitespaceWithRestResponseAsync(@NonNull String stringBody) {
         if (stringBody == null) {
             throw new IllegalArgumentException("Parameter stringBody is required and cannot be null.");
         }
@@ -591,7 +560,7 @@ public final class StringsImpl implements Strings {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<Void, String>> getNotProvidedWithRestResponseAsync() {
+    public Single<BodyResponse<String>> getNotProvidedWithRestResponseAsync() {
         return service.getNotProvided();
     }
 
@@ -602,15 +571,7 @@ public final class StringsImpl implements Strings {
      */
     public Maybe<String> getNotProvidedAsync() {
         return getNotProvidedWithRestResponseAsync()
-            .flatMapMaybe(new Function<RestResponse<Void, String>, Maybe<String>>() {
-                public Maybe<String> apply(RestResponse<Void, String> restResponse) {
-                    if (restResponse.body() == null) {
-                        return Maybe.empty();
-                    } else {
-                        return Maybe.just(restResponse.body());
-                    }
-                }
-            });
+            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -640,7 +601,7 @@ public final class StringsImpl implements Strings {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<Void, byte[]>> getBase64EncodedWithRestResponseAsync() {
+    public Single<BodyResponse<byte[]>> getBase64EncodedWithRestResponseAsync() {
         return service.getBase64Encoded();
     }
 
@@ -651,15 +612,7 @@ public final class StringsImpl implements Strings {
      */
     public Maybe<byte[]> getBase64EncodedAsync() {
         return getBase64EncodedWithRestResponseAsync()
-            .flatMapMaybe(new Function<RestResponse<Void, byte[]>, Maybe<byte[]>>() {
-                public Maybe<byte[]> apply(RestResponse<Void, byte[]> restResponse) {
-                    if (restResponse.body() == null) {
-                        return Maybe.empty();
-                    } else {
-                        return Maybe.just(restResponse.body());
-                    }
-                }
-            });
+            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -689,7 +642,7 @@ public final class StringsImpl implements Strings {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<Void, byte[]>> getBase64UrlEncodedWithRestResponseAsync() {
+    public Single<BodyResponse<byte[]>> getBase64UrlEncodedWithRestResponseAsync() {
         return service.getBase64UrlEncoded();
     }
 
@@ -700,15 +653,7 @@ public final class StringsImpl implements Strings {
      */
     public Maybe<byte[]> getBase64UrlEncodedAsync() {
         return getBase64UrlEncodedWithRestResponseAsync()
-            .flatMapMaybe(new Function<RestResponse<Void, byte[]>, Maybe<byte[]>>() {
-                public Maybe<byte[]> apply(RestResponse<Void, byte[]> restResponse) {
-                    if (restResponse.body() == null) {
-                        return Maybe.empty();
-                    } else {
-                        return Maybe.just(restResponse.body());
-                    }
-                }
-            });
+            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -742,7 +687,7 @@ public final class StringsImpl implements Strings {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<Void, Void>> putBase64UrlEncodedWithRestResponseAsync(@NonNull byte[] stringBody) {
+    public Single<VoidResponse> putBase64UrlEncodedWithRestResponseAsync(@NonNull byte[] stringBody) {
         if (stringBody == null) {
             throw new IllegalArgumentException("Parameter stringBody is required and cannot be null.");
         }
@@ -789,7 +734,7 @@ public final class StringsImpl implements Strings {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<Void, byte[]>> getNullBase64UrlEncodedWithRestResponseAsync() {
+    public Single<BodyResponse<byte[]>> getNullBase64UrlEncodedWithRestResponseAsync() {
         return service.getNullBase64UrlEncoded();
     }
 
@@ -800,14 +745,6 @@ public final class StringsImpl implements Strings {
      */
     public Maybe<byte[]> getNullBase64UrlEncodedAsync() {
         return getNullBase64UrlEncodedWithRestResponseAsync()
-            .flatMapMaybe(new Function<RestResponse<Void, byte[]>, Maybe<byte[]>>() {
-                public Maybe<byte[]> apply(RestResponse<Void, byte[]> restResponse) {
-                    if (restResponse.body() == null) {
-                        return Maybe.empty();
-                    } else {
-                        return Maybe.just(restResponse.body());
-                    }
-                }
-            });
+            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 }

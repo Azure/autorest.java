@@ -10,9 +10,10 @@
 
 package fixtures.bodydictionary;
 
-import com.microsoft.rest.v2.RestResponse;
+import com.microsoft.rest.v2.BodyResponse;
 import com.microsoft.rest.v2.ServiceCallback;
 import com.microsoft.rest.v2.ServiceFuture;
+import com.microsoft.rest.v2.VoidResponse;
 import fixtures.bodydictionary.models.ErrorException;
 import fixtures.bodydictionary.models.Widget;
 import io.reactivex.Completable;
@@ -53,7 +54,7 @@ public interface Dictionarys {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, Map<String, Integer>>> getNullWithRestResponseAsync();
+    Single<BodyResponse<Map<String, Integer>>> getNullWithRestResponseAsync();
 
     /**
      * Get null dictionary value.
@@ -85,7 +86,7 @@ public interface Dictionarys {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, Map<String, Integer>>> getEmptyWithRestResponseAsync();
+    Single<BodyResponse<Map<String, Integer>>> getEmptyWithRestResponseAsync();
 
     /**
      * Get empty dictionary value {}.
@@ -121,7 +122,7 @@ public interface Dictionarys {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, Void>> putEmptyWithRestResponseAsync(@NonNull Map<String, String> arrayBody);
+    Single<VoidResponse> putEmptyWithRestResponseAsync(@NonNull Map<String, String> arrayBody);
 
     /**
      * Set dictionary value empty {}.
@@ -155,7 +156,7 @@ public interface Dictionarys {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, Map<String, String>>> getNullValueWithRestResponseAsync();
+    Single<BodyResponse<Map<String, String>>> getNullValueWithRestResponseAsync();
 
     /**
      * Get Dictionary with null value.
@@ -187,7 +188,7 @@ public interface Dictionarys {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, Map<String, String>>> getNullKeyWithRestResponseAsync();
+    Single<BodyResponse<Map<String, String>>> getNullKeyWithRestResponseAsync();
 
     /**
      * Get Dictionary with null key.
@@ -219,7 +220,7 @@ public interface Dictionarys {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, Map<String, String>>> getEmptyStringKeyWithRestResponseAsync();
+    Single<BodyResponse<Map<String, String>>> getEmptyStringKeyWithRestResponseAsync();
 
     /**
      * Get Dictionary with key as empty string.
@@ -251,7 +252,7 @@ public interface Dictionarys {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, Map<String, String>>> getInvalidWithRestResponseAsync();
+    Single<BodyResponse<Map<String, String>>> getInvalidWithRestResponseAsync();
 
     /**
      * Get invalid Dictionary value.
@@ -283,7 +284,7 @@ public interface Dictionarys {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, Map<String, Boolean>>> getBooleanTfftWithRestResponseAsync();
+    Single<BodyResponse<Map<String, Boolean>>> getBooleanTfftWithRestResponseAsync();
 
     /**
      * Get boolean dictionary value {"0": true, "1": false, "2": false, "3": true }.
@@ -319,7 +320,7 @@ public interface Dictionarys {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, Void>> putBooleanTfftWithRestResponseAsync(@NonNull Map<String, Boolean> arrayBody);
+    Single<VoidResponse> putBooleanTfftWithRestResponseAsync(@NonNull Map<String, Boolean> arrayBody);
 
     /**
      * Set dictionary value empty {"0": true, "1": false, "2": false, "3": true }.
@@ -353,7 +354,7 @@ public interface Dictionarys {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, Map<String, Boolean>>> getBooleanInvalidNullWithRestResponseAsync();
+    Single<BodyResponse<Map<String, Boolean>>> getBooleanInvalidNullWithRestResponseAsync();
 
     /**
      * Get boolean dictionary value {"0": true, "1": null, "2": false }.
@@ -385,7 +386,7 @@ public interface Dictionarys {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, Map<String, Boolean>>> getBooleanInvalidStringWithRestResponseAsync();
+    Single<BodyResponse<Map<String, Boolean>>> getBooleanInvalidStringWithRestResponseAsync();
 
     /**
      * Get boolean dictionary value '{"0": true, "1": "boolean", "2": false}'.
@@ -417,7 +418,7 @@ public interface Dictionarys {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, Map<String, Integer>>> getIntegerValidWithRestResponseAsync();
+    Single<BodyResponse<Map<String, Integer>>> getIntegerValidWithRestResponseAsync();
 
     /**
      * Get integer dictionary value {"0": 1, "1": -1, "2": 3, "3": 300}.
@@ -453,7 +454,7 @@ public interface Dictionarys {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, Void>> putIntegerValidWithRestResponseAsync(@NonNull Map<String, Integer> arrayBody);
+    Single<VoidResponse> putIntegerValidWithRestResponseAsync(@NonNull Map<String, Integer> arrayBody);
 
     /**
      * Set dictionary value empty {"0": 1, "1": -1, "2": 3, "3": 300}.
@@ -487,7 +488,7 @@ public interface Dictionarys {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, Map<String, Integer>>> getIntInvalidNullWithRestResponseAsync();
+    Single<BodyResponse<Map<String, Integer>>> getIntInvalidNullWithRestResponseAsync();
 
     /**
      * Get integer dictionary value {"0": 1, "1": null, "2": 0}.
@@ -519,7 +520,7 @@ public interface Dictionarys {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, Map<String, Integer>>> getIntInvalidStringWithRestResponseAsync();
+    Single<BodyResponse<Map<String, Integer>>> getIntInvalidStringWithRestResponseAsync();
 
     /**
      * Get integer dictionary value {"0": 1, "1": "integer", "2": 0}.
@@ -551,7 +552,7 @@ public interface Dictionarys {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, Map<String, Long>>> getLongValidWithRestResponseAsync();
+    Single<BodyResponse<Map<String, Long>>> getLongValidWithRestResponseAsync();
 
     /**
      * Get integer dictionary value {"0": 1, "1": -1, "2": 3, "3": 300}.
@@ -587,7 +588,7 @@ public interface Dictionarys {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, Void>> putLongValidWithRestResponseAsync(@NonNull Map<String, Long> arrayBody);
+    Single<VoidResponse> putLongValidWithRestResponseAsync(@NonNull Map<String, Long> arrayBody);
 
     /**
      * Set dictionary value empty {"0": 1, "1": -1, "2": 3, "3": 300}.
@@ -621,7 +622,7 @@ public interface Dictionarys {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, Map<String, Long>>> getLongInvalidNullWithRestResponseAsync();
+    Single<BodyResponse<Map<String, Long>>> getLongInvalidNullWithRestResponseAsync();
 
     /**
      * Get long dictionary value {"0": 1, "1": null, "2": 0}.
@@ -653,7 +654,7 @@ public interface Dictionarys {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, Map<String, Long>>> getLongInvalidStringWithRestResponseAsync();
+    Single<BodyResponse<Map<String, Long>>> getLongInvalidStringWithRestResponseAsync();
 
     /**
      * Get long dictionary value {"0": 1, "1": "integer", "2": 0}.
@@ -685,7 +686,7 @@ public interface Dictionarys {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, Map<String, Double>>> getFloatValidWithRestResponseAsync();
+    Single<BodyResponse<Map<String, Double>>> getFloatValidWithRestResponseAsync();
 
     /**
      * Get float dictionary value {"0": 0, "1": -0.01, "2": 1.2e20}.
@@ -721,7 +722,7 @@ public interface Dictionarys {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, Void>> putFloatValidWithRestResponseAsync(@NonNull Map<String, Double> arrayBody);
+    Single<VoidResponse> putFloatValidWithRestResponseAsync(@NonNull Map<String, Double> arrayBody);
 
     /**
      * Set dictionary value {"0": 0, "1": -0.01, "2": 1.2e20}.
@@ -755,7 +756,7 @@ public interface Dictionarys {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, Map<String, Double>>> getFloatInvalidNullWithRestResponseAsync();
+    Single<BodyResponse<Map<String, Double>>> getFloatInvalidNullWithRestResponseAsync();
 
     /**
      * Get float dictionary value {"0": 0.0, "1": null, "2": 1.2e20}.
@@ -787,7 +788,7 @@ public interface Dictionarys {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, Map<String, Double>>> getFloatInvalidStringWithRestResponseAsync();
+    Single<BodyResponse<Map<String, Double>>> getFloatInvalidStringWithRestResponseAsync();
 
     /**
      * Get boolean dictionary value {"0": 1.0, "1": "number", "2": 0.0}.
@@ -819,7 +820,7 @@ public interface Dictionarys {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, Map<String, Double>>> getDoubleValidWithRestResponseAsync();
+    Single<BodyResponse<Map<String, Double>>> getDoubleValidWithRestResponseAsync();
 
     /**
      * Get float dictionary value {"0": 0, "1": -0.01, "2": 1.2e20}.
@@ -855,7 +856,7 @@ public interface Dictionarys {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, Void>> putDoubleValidWithRestResponseAsync(@NonNull Map<String, Double> arrayBody);
+    Single<VoidResponse> putDoubleValidWithRestResponseAsync(@NonNull Map<String, Double> arrayBody);
 
     /**
      * Set dictionary value {"0": 0, "1": -0.01, "2": 1.2e20}.
@@ -889,7 +890,7 @@ public interface Dictionarys {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, Map<String, Double>>> getDoubleInvalidNullWithRestResponseAsync();
+    Single<BodyResponse<Map<String, Double>>> getDoubleInvalidNullWithRestResponseAsync();
 
     /**
      * Get float dictionary value {"0": 0.0, "1": null, "2": 1.2e20}.
@@ -921,7 +922,7 @@ public interface Dictionarys {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, Map<String, Double>>> getDoubleInvalidStringWithRestResponseAsync();
+    Single<BodyResponse<Map<String, Double>>> getDoubleInvalidStringWithRestResponseAsync();
 
     /**
      * Get boolean dictionary value {"0": 1.0, "1": "number", "2": 0.0}.
@@ -953,7 +954,7 @@ public interface Dictionarys {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, Map<String, String>>> getStringValidWithRestResponseAsync();
+    Single<BodyResponse<Map<String, String>>> getStringValidWithRestResponseAsync();
 
     /**
      * Get string dictionary value {"0": "foo1", "1": "foo2", "2": "foo3"}.
@@ -989,7 +990,7 @@ public interface Dictionarys {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, Void>> putStringValidWithRestResponseAsync(@NonNull Map<String, String> arrayBody);
+    Single<VoidResponse> putStringValidWithRestResponseAsync(@NonNull Map<String, String> arrayBody);
 
     /**
      * Set dictionary value {"0": "foo1", "1": "foo2", "2": "foo3"}.
@@ -1023,7 +1024,7 @@ public interface Dictionarys {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, Map<String, String>>> getStringWithNullWithRestResponseAsync();
+    Single<BodyResponse<Map<String, String>>> getStringWithNullWithRestResponseAsync();
 
     /**
      * Get string dictionary value {"0": "foo", "1": null, "2": "foo2"}.
@@ -1055,7 +1056,7 @@ public interface Dictionarys {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, Map<String, String>>> getStringWithInvalidWithRestResponseAsync();
+    Single<BodyResponse<Map<String, String>>> getStringWithInvalidWithRestResponseAsync();
 
     /**
      * Get string dictionary value {"0": "foo", "1": 123, "2": "foo2"}.
@@ -1087,7 +1088,7 @@ public interface Dictionarys {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, Map<String, LocalDate>>> getDateValidWithRestResponseAsync();
+    Single<BodyResponse<Map<String, LocalDate>>> getDateValidWithRestResponseAsync();
 
     /**
      * Get integer dictionary value {"0": "2000-12-01", "1": "1980-01-02", "2": "1492-10-12"}.
@@ -1123,7 +1124,7 @@ public interface Dictionarys {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, Void>> putDateValidWithRestResponseAsync(@NonNull Map<String, LocalDate> arrayBody);
+    Single<VoidResponse> putDateValidWithRestResponseAsync(@NonNull Map<String, LocalDate> arrayBody);
 
     /**
      * Set dictionary value  {"0": "2000-12-01", "1": "1980-01-02", "2": "1492-10-12"}.
@@ -1157,7 +1158,7 @@ public interface Dictionarys {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, Map<String, LocalDate>>> getDateInvalidNullWithRestResponseAsync();
+    Single<BodyResponse<Map<String, LocalDate>>> getDateInvalidNullWithRestResponseAsync();
 
     /**
      * Get date dictionary value {"0": "2012-01-01", "1": null, "2": "1776-07-04"}.
@@ -1189,7 +1190,7 @@ public interface Dictionarys {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, Map<String, LocalDate>>> getDateInvalidCharsWithRestResponseAsync();
+    Single<BodyResponse<Map<String, LocalDate>>> getDateInvalidCharsWithRestResponseAsync();
 
     /**
      * Get date dictionary value {"0": "2011-03-22", "1": "date"}.
@@ -1221,7 +1222,7 @@ public interface Dictionarys {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, Map<String, DateTime>>> getDateTimeValidWithRestResponseAsync();
+    Single<BodyResponse<Map<String, DateTime>>> getDateTimeValidWithRestResponseAsync();
 
     /**
      * Get date-time dictionary value {"0": "2000-12-01t00:00:01z", "1": "1980-01-02T00:11:35+01:00", "2": "1492-10-12T10:15:01-08:00"}.
@@ -1257,7 +1258,7 @@ public interface Dictionarys {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, Void>> putDateTimeValidWithRestResponseAsync(@NonNull Map<String, DateTime> arrayBody);
+    Single<VoidResponse> putDateTimeValidWithRestResponseAsync(@NonNull Map<String, DateTime> arrayBody);
 
     /**
      * Set dictionary value  {"0": "2000-12-01t00:00:01z", "1": "1980-01-02T00:11:35+01:00", "2": "1492-10-12T10:15:01-08:00"}.
@@ -1291,7 +1292,7 @@ public interface Dictionarys {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, Map<String, DateTime>>> getDateTimeInvalidNullWithRestResponseAsync();
+    Single<BodyResponse<Map<String, DateTime>>> getDateTimeInvalidNullWithRestResponseAsync();
 
     /**
      * Get date dictionary value {"0": "2000-12-01t00:00:01z", "1": null}.
@@ -1323,7 +1324,7 @@ public interface Dictionarys {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, Map<String, DateTime>>> getDateTimeInvalidCharsWithRestResponseAsync();
+    Single<BodyResponse<Map<String, DateTime>>> getDateTimeInvalidCharsWithRestResponseAsync();
 
     /**
      * Get date dictionary value {"0": "2000-12-01t00:00:01z", "1": "date-time"}.
@@ -1355,7 +1356,7 @@ public interface Dictionarys {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, Map<String, DateTime>>> getDateTimeRfc1123ValidWithRestResponseAsync();
+    Single<BodyResponse<Map<String, DateTime>>> getDateTimeRfc1123ValidWithRestResponseAsync();
 
     /**
      * Get date-time-rfc1123 dictionary value {"0": "Fri, 01 Dec 2000 00:00:01 GMT", "1": "Wed, 02 Jan 1980 00:11:35 GMT", "2": "Wed, 12 Oct 1492 10:15:01 GMT"}.
@@ -1391,7 +1392,7 @@ public interface Dictionarys {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, Void>> putDateTimeRfc1123ValidWithRestResponseAsync(@NonNull Map<String, DateTime> arrayBody);
+    Single<VoidResponse> putDateTimeRfc1123ValidWithRestResponseAsync(@NonNull Map<String, DateTime> arrayBody);
 
     /**
      * Set dictionary value empty {"0": "Fri, 01 Dec 2000 00:00:01 GMT", "1": "Wed, 02 Jan 1980 00:11:35 GMT", "2": "Wed, 12 Oct 1492 10:15:01 GMT"}.
@@ -1425,7 +1426,7 @@ public interface Dictionarys {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, Map<String, Period>>> getDurationValidWithRestResponseAsync();
+    Single<BodyResponse<Map<String, Period>>> getDurationValidWithRestResponseAsync();
 
     /**
      * Get duration dictionary value {"0": "P123DT22H14M12.011S", "1": "P5DT1H0M0S"}.
@@ -1461,7 +1462,7 @@ public interface Dictionarys {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, Void>> putDurationValidWithRestResponseAsync(@NonNull Map<String, Period> arrayBody);
+    Single<VoidResponse> putDurationValidWithRestResponseAsync(@NonNull Map<String, Period> arrayBody);
 
     /**
      * Set dictionary value  {"0": "P123DT22H14M12.011S", "1": "P5DT1H0M0S"}.
@@ -1495,7 +1496,7 @@ public interface Dictionarys {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, Map<String, byte[]>>> getByteValidWithRestResponseAsync();
+    Single<BodyResponse<Map<String, byte[]>>> getByteValidWithRestResponseAsync();
 
     /**
      * Get byte dictionary value {"0": hex(FF FF FF FA), "1": hex(01 02 03), "2": hex (25, 29, 43)} with each item encoded in base64.
@@ -1531,7 +1532,7 @@ public interface Dictionarys {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, Void>> putByteValidWithRestResponseAsync(@NonNull Map<String, byte[]> arrayBody);
+    Single<VoidResponse> putByteValidWithRestResponseAsync(@NonNull Map<String, byte[]> arrayBody);
 
     /**
      * Put the dictionary value {"0": hex(FF FF FF FA), "1": hex(01 02 03), "2": hex (25, 29, 43)} with each elementencoded in base 64.
@@ -1565,7 +1566,7 @@ public interface Dictionarys {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, Map<String, byte[]>>> getByteInvalidNullWithRestResponseAsync();
+    Single<BodyResponse<Map<String, byte[]>>> getByteInvalidNullWithRestResponseAsync();
 
     /**
      * Get byte dictionary value {"0": hex(FF FF FF FA), "1": null} with the first item base64 encoded.
@@ -1597,7 +1598,7 @@ public interface Dictionarys {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, Map<String, byte[]>>> getBase64UrlWithRestResponseAsync();
+    Single<BodyResponse<Map<String, byte[]>>> getBase64UrlWithRestResponseAsync();
 
     /**
      * Get base64url dictionary value {"0": "a string that gets encoded with base64url", "1": "test string", "2": "Lorem ipsum"}.
@@ -1629,7 +1630,7 @@ public interface Dictionarys {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, Map<String, Widget>>> getComplexNullWithRestResponseAsync();
+    Single<BodyResponse<Map<String, Widget>>> getComplexNullWithRestResponseAsync();
 
     /**
      * Get dictionary of complex type null value.
@@ -1661,7 +1662,7 @@ public interface Dictionarys {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, Map<String, Widget>>> getComplexEmptyWithRestResponseAsync();
+    Single<BodyResponse<Map<String, Widget>>> getComplexEmptyWithRestResponseAsync();
 
     /**
      * Get empty dictionary of complex type {}.
@@ -1693,7 +1694,7 @@ public interface Dictionarys {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, Map<String, Widget>>> getComplexItemNullWithRestResponseAsync();
+    Single<BodyResponse<Map<String, Widget>>> getComplexItemNullWithRestResponseAsync();
 
     /**
      * Get dictionary of complex type with null item {"0": {"integer": 1, "string": "2"}, "1": null, "2": {"integer": 5, "string": "6"}}.
@@ -1725,7 +1726,7 @@ public interface Dictionarys {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, Map<String, Widget>>> getComplexItemEmptyWithRestResponseAsync();
+    Single<BodyResponse<Map<String, Widget>>> getComplexItemEmptyWithRestResponseAsync();
 
     /**
      * Get dictionary of complex type with empty item {"0": {"integer": 1, "string": "2"}, "1:" {}, "2": {"integer": 5, "string": "6"}}.
@@ -1757,7 +1758,7 @@ public interface Dictionarys {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, Map<String, Widget>>> getComplexValidWithRestResponseAsync();
+    Single<BodyResponse<Map<String, Widget>>> getComplexValidWithRestResponseAsync();
 
     /**
      * Get dictionary of complex type with {"0": {"integer": 1, "string": "2"}, "1": {"integer": 3, "string": "4"}, "2": {"integer": 5, "string": "6"}}.
@@ -1793,7 +1794,7 @@ public interface Dictionarys {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, Void>> putComplexValidWithRestResponseAsync(@NonNull Map<String, Widget> arrayBody);
+    Single<VoidResponse> putComplexValidWithRestResponseAsync(@NonNull Map<String, Widget> arrayBody);
 
     /**
      * Put an dictionary of complex type with values {"0": {"integer": 1, "string": "2"}, "1": {"integer": 3, "string": "4"}, "2": {"integer": 5, "string": "6"}}.
@@ -1827,7 +1828,7 @@ public interface Dictionarys {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, Map<String, List<String>>>> getArrayNullWithRestResponseAsync();
+    Single<BodyResponse<Map<String, List<String>>>> getArrayNullWithRestResponseAsync();
 
     /**
      * Get a null array.
@@ -1859,7 +1860,7 @@ public interface Dictionarys {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, Map<String, List<String>>>> getArrayEmptyWithRestResponseAsync();
+    Single<BodyResponse<Map<String, List<String>>>> getArrayEmptyWithRestResponseAsync();
 
     /**
      * Get an empty dictionary {}.
@@ -1891,7 +1892,7 @@ public interface Dictionarys {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, Map<String, List<String>>>> getArrayItemNullWithRestResponseAsync();
+    Single<BodyResponse<Map<String, List<String>>>> getArrayItemNullWithRestResponseAsync();
 
     /**
      * Get an dictionary of array of strings {"0": ["1", "2", "3"], "1": null, "2": ["7", "8", "9"]}.
@@ -1923,7 +1924,7 @@ public interface Dictionarys {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, Map<String, List<String>>>> getArrayItemEmptyWithRestResponseAsync();
+    Single<BodyResponse<Map<String, List<String>>>> getArrayItemEmptyWithRestResponseAsync();
 
     /**
      * Get an array of array of strings [{"0": ["1", "2", "3"], "1": [], "2": ["7", "8", "9"]}.
@@ -1955,7 +1956,7 @@ public interface Dictionarys {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, Map<String, List<String>>>> getArrayValidWithRestResponseAsync();
+    Single<BodyResponse<Map<String, List<String>>>> getArrayValidWithRestResponseAsync();
 
     /**
      * Get an array of array of strings {"0": ["1", "2", "3"], "1": ["4", "5", "6"], "2": ["7", "8", "9"]}.
@@ -1991,7 +1992,7 @@ public interface Dictionarys {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, Void>> putArrayValidWithRestResponseAsync(@NonNull Map<String, List<String>> arrayBody);
+    Single<VoidResponse> putArrayValidWithRestResponseAsync(@NonNull Map<String, List<String>> arrayBody);
 
     /**
      * Put An array of array of strings {"0": ["1", "2", "3"], "1": ["4", "5", "6"], "2": ["7", "8", "9"]}.
@@ -2025,7 +2026,7 @@ public interface Dictionarys {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, Map<String, Map<String, String>>>> getDictionaryNullWithRestResponseAsync();
+    Single<BodyResponse<Map<String, Map<String, String>>>> getDictionaryNullWithRestResponseAsync();
 
     /**
      * Get an dictionaries of dictionaries with value null.
@@ -2057,7 +2058,7 @@ public interface Dictionarys {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, Map<String, Map<String, String>>>> getDictionaryEmptyWithRestResponseAsync();
+    Single<BodyResponse<Map<String, Map<String, String>>>> getDictionaryEmptyWithRestResponseAsync();
 
     /**
      * Get an dictionaries of dictionaries of type &lt;string, string&gt; with value {}.
@@ -2089,7 +2090,7 @@ public interface Dictionarys {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, Map<String, Map<String, String>>>> getDictionaryItemNullWithRestResponseAsync();
+    Single<BodyResponse<Map<String, Map<String, String>>>> getDictionaryItemNullWithRestResponseAsync();
 
     /**
      * Get an dictionaries of dictionaries of type &lt;string, string&gt; with value {"0": {"1": "one", "2": "two", "3": "three"}, "1": null, "2": {"7": "seven", "8": "eight", "9": "nine"}}.
@@ -2121,7 +2122,7 @@ public interface Dictionarys {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, Map<String, Map<String, String>>>> getDictionaryItemEmptyWithRestResponseAsync();
+    Single<BodyResponse<Map<String, Map<String, String>>>> getDictionaryItemEmptyWithRestResponseAsync();
 
     /**
      * Get an dictionaries of dictionaries of type &lt;string, string&gt; with value {"0": {"1": "one", "2": "two", "3": "three"}, "1": {}, "2": {"7": "seven", "8": "eight", "9": "nine"}}.
@@ -2153,7 +2154,7 @@ public interface Dictionarys {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, Map<String, Map<String, String>>>> getDictionaryValidWithRestResponseAsync();
+    Single<BodyResponse<Map<String, Map<String, String>>>> getDictionaryValidWithRestResponseAsync();
 
     /**
      * Get an dictionaries of dictionaries of type &lt;string, string&gt; with value {"0": {"1": "one", "2": "two", "3": "three"}, "1": {"4": "four", "5": "five", "6": "six"}, "2": {"7": "seven", "8": "eight", "9": "nine"}}.
@@ -2189,7 +2190,7 @@ public interface Dictionarys {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, Void>> putDictionaryValidWithRestResponseAsync(@NonNull Map<String, Map<String, String>> arrayBody);
+    Single<VoidResponse> putDictionaryValidWithRestResponseAsync(@NonNull Map<String, Map<String, String>> arrayBody);
 
     /**
      * Get an dictionaries of dictionaries of type &lt;string, string&gt; with value {"0": {"1": "one", "2": "two", "3": "three"}, "1": {"4": "four", "5": "five", "6": "six"}, "2": {"7": "seven", "8": "eight", "9": "nine"}}.

@@ -10,9 +10,10 @@
 
 package fixtures.bodycomplex;
 
-import com.microsoft.rest.v2.RestResponse;
+import com.microsoft.rest.v2.BodyResponse;
 import com.microsoft.rest.v2.ServiceCallback;
 import com.microsoft.rest.v2.ServiceFuture;
+import com.microsoft.rest.v2.VoidResponse;
 import fixtures.bodycomplex.models.ErrorException;
 import fixtures.bodycomplex.models.Fish;
 import io.reactivex.Completable;
@@ -48,7 +49,7 @@ public interface Polymorphicrecursives {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, Fish>> getValidWithRestResponseAsync();
+    Single<BodyResponse<Fish>> getValidWithRestResponseAsync();
 
     /**
      * Get complex types that are polymorphic and have recursive references.
@@ -240,7 +241,7 @@ public interface Polymorphicrecursives {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, Void>> putValidWithRestResponseAsync(@NonNull Fish complexBody);
+    Single<VoidResponse> putValidWithRestResponseAsync(@NonNull Fish complexBody);
 
     /**
      * Put complex types that are polymorphic and have recursive references.

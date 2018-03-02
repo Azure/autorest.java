@@ -12,9 +12,9 @@ package fixtures.azurespecials.implementation;
 
 import com.microsoft.azure.v2.AzureProxy;
 import com.microsoft.azure.v2.CloudException;
-import com.microsoft.rest.v2.RestResponse;
 import com.microsoft.rest.v2.ServiceCallback;
 import com.microsoft.rest.v2.ServiceFuture;
+import com.microsoft.rest.v2.VoidResponse;
 import com.microsoft.rest.v2.annotations.ExpectedResponses;
 import com.microsoft.rest.v2.annotations.GET;
 import com.microsoft.rest.v2.annotations.HeaderParam;
@@ -60,12 +60,12 @@ public final class XMsClientRequestIdsImpl implements XMsClientRequestIds {
         @GET("azurespecials/overwrite/x-ms-client-request-id/method/")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(CloudException.class)
-        Single<RestResponse<Void, Void>> get(@HeaderParam("accept-language") String acceptLanguage);
+        Single<VoidResponse> get(@HeaderParam("accept-language") String acceptLanguage);
 
         @GET("azurespecials/overwrite/x-ms-client-request-id/via-param/method/")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<RestResponse<Void, Void>> paramGet(@HeaderParam("x-ms-client-request-id") String xMsClientRequestId, @HeaderParam("accept-language") String acceptLanguage);
+        Single<VoidResponse> paramGet(@HeaderParam("x-ms-client-request-id") String xMsClientRequestId, @HeaderParam("accept-language") String acceptLanguage);
     }
 
     /**
@@ -94,7 +94,7 @@ public final class XMsClientRequestIdsImpl implements XMsClientRequestIds {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<Void, Void>> getWithRestResponseAsync() {
+    public Single<VoidResponse> getWithRestResponseAsync() {
         return service.get(this.client.acceptLanguage());
     }
 
@@ -139,7 +139,7 @@ public final class XMsClientRequestIdsImpl implements XMsClientRequestIds {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<Void, Void>> paramGetWithRestResponseAsync(@NonNull String xMsClientRequestId) {
+    public Single<VoidResponse> paramGetWithRestResponseAsync(@NonNull String xMsClientRequestId) {
         if (xMsClientRequestId == null) {
             throw new IllegalArgumentException("Parameter xMsClientRequestId is required and cannot be null.");
         }

@@ -11,9 +11,9 @@
 package fixtures.azurespecials.implementation;
 
 import com.microsoft.azure.v2.AzureProxy;
-import com.microsoft.rest.v2.RestResponse;
 import com.microsoft.rest.v2.ServiceCallback;
 import com.microsoft.rest.v2.ServiceFuture;
+import com.microsoft.rest.v2.VoidResponse;
 import com.microsoft.rest.v2.annotations.ExpectedResponses;
 import com.microsoft.rest.v2.annotations.GET;
 import com.microsoft.rest.v2.annotations.HeaderParam;
@@ -61,37 +61,37 @@ public final class SkipUrlEncodingsImpl implements SkipUrlEncodings {
         @GET("azurespecials/skipUrlEncoding/method/path/valid/{unencodedPathParam}")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<RestResponse<Void, Void>> getMethodPathValid(@PathParam(value = "unencodedPathParam", encoded = true) String unencodedPathParam, @HeaderParam("accept-language") String acceptLanguage);
+        Single<VoidResponse> getMethodPathValid(@PathParam(value = "unencodedPathParam", encoded = true) String unencodedPathParam, @HeaderParam("accept-language") String acceptLanguage);
 
         @GET("azurespecials/skipUrlEncoding/path/path/valid/{unencodedPathParam}")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<RestResponse<Void, Void>> getPathPathValid(@PathParam(value = "unencodedPathParam", encoded = true) String unencodedPathParam, @HeaderParam("accept-language") String acceptLanguage);
+        Single<VoidResponse> getPathPathValid(@PathParam(value = "unencodedPathParam", encoded = true) String unencodedPathParam, @HeaderParam("accept-language") String acceptLanguage);
 
         @GET("azurespecials/skipUrlEncoding/swagger/path/valid/{unencodedPathParam}")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<RestResponse<Void, Void>> getSwaggerPathValid(@PathParam(value = "unencodedPathParam", encoded = true) String unencodedPathParam, @HeaderParam("accept-language") String acceptLanguage);
+        Single<VoidResponse> getSwaggerPathValid(@PathParam(value = "unencodedPathParam", encoded = true) String unencodedPathParam, @HeaderParam("accept-language") String acceptLanguage);
 
         @GET("azurespecials/skipUrlEncoding/method/query/valid")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<RestResponse<Void, Void>> getMethodQueryValid(@QueryParam(value = "q1", encoded = true) String q1, @HeaderParam("accept-language") String acceptLanguage);
+        Single<VoidResponse> getMethodQueryValid(@QueryParam(value = "q1", encoded = true) String q1, @HeaderParam("accept-language") String acceptLanguage);
 
         @GET("azurespecials/skipUrlEncoding/method/query/null")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<RestResponse<Void, Void>> getMethodQueryNull(@QueryParam(value = "q1", encoded = true) String q1, @HeaderParam("accept-language") String acceptLanguage);
+        Single<VoidResponse> getMethodQueryNull(@QueryParam(value = "q1", encoded = true) String q1, @HeaderParam("accept-language") String acceptLanguage);
 
         @GET("azurespecials/skipUrlEncoding/path/query/valid")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<RestResponse<Void, Void>> getPathQueryValid(@QueryParam(value = "q1", encoded = true) String q1, @HeaderParam("accept-language") String acceptLanguage);
+        Single<VoidResponse> getPathQueryValid(@QueryParam(value = "q1", encoded = true) String q1, @HeaderParam("accept-language") String acceptLanguage);
 
         @GET("azurespecials/skipUrlEncoding/swagger/query/valid")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<RestResponse<Void, Void>> getSwaggerQueryValid(@QueryParam(value = "q1", encoded = true) String q1, @HeaderParam("accept-language") String acceptLanguage);
+        Single<VoidResponse> getSwaggerQueryValid(@QueryParam(value = "q1", encoded = true) String q1, @HeaderParam("accept-language") String acceptLanguage);
     }
 
     /**
@@ -125,7 +125,7 @@ public final class SkipUrlEncodingsImpl implements SkipUrlEncodings {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<Void, Void>> getMethodPathValidWithRestResponseAsync(@NonNull String unencodedPathParam) {
+    public Single<VoidResponse> getMethodPathValidWithRestResponseAsync(@NonNull String unencodedPathParam) {
         if (unencodedPathParam == null) {
             throw new IllegalArgumentException("Parameter unencodedPathParam is required and cannot be null.");
         }
@@ -175,7 +175,7 @@ public final class SkipUrlEncodingsImpl implements SkipUrlEncodings {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<Void, Void>> getPathPathValidWithRestResponseAsync(@NonNull String unencodedPathParam) {
+    public Single<VoidResponse> getPathPathValidWithRestResponseAsync(@NonNull String unencodedPathParam) {
         if (unencodedPathParam == null) {
             throw new IllegalArgumentException("Parameter unencodedPathParam is required and cannot be null.");
         }
@@ -220,7 +220,7 @@ public final class SkipUrlEncodingsImpl implements SkipUrlEncodings {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<Void, Void>> getSwaggerPathValidWithRestResponseAsync() {
+    public Single<VoidResponse> getSwaggerPathValidWithRestResponseAsync() {
         final String unencodedPathParam = "path1/path2/path3";
         return service.getSwaggerPathValid(unencodedPathParam, this.client.acceptLanguage());
     }
@@ -266,7 +266,7 @@ public final class SkipUrlEncodingsImpl implements SkipUrlEncodings {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<Void, Void>> getMethodQueryValidWithRestResponseAsync(@NonNull String q1) {
+    public Single<VoidResponse> getMethodQueryValidWithRestResponseAsync(@NonNull String q1) {
         if (q1 == null) {
             throw new IllegalArgumentException("Parameter q1 is required and cannot be null.");
         }
@@ -311,7 +311,7 @@ public final class SkipUrlEncodingsImpl implements SkipUrlEncodings {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<Void, Void>> getMethodQueryNullWithRestResponseAsync() {
+    public Single<VoidResponse> getMethodQueryNullWithRestResponseAsync() {
         final String q1 = null;
         return service.getMethodQueryNull(q1, this.client.acceptLanguage());
     }
@@ -357,7 +357,7 @@ public final class SkipUrlEncodingsImpl implements SkipUrlEncodings {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<Void, Void>> getMethodQueryNullWithRestResponseAsync(String q1) {
+    public Single<VoidResponse> getMethodQueryNullWithRestResponseAsync(String q1) {
         return service.getMethodQueryNull(q1, this.client.acceptLanguage());
     }
 
@@ -404,7 +404,7 @@ public final class SkipUrlEncodingsImpl implements SkipUrlEncodings {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<Void, Void>> getPathQueryValidWithRestResponseAsync(@NonNull String q1) {
+    public Single<VoidResponse> getPathQueryValidWithRestResponseAsync(@NonNull String q1) {
         if (q1 == null) {
             throw new IllegalArgumentException("Parameter q1 is required and cannot be null.");
         }
@@ -449,7 +449,7 @@ public final class SkipUrlEncodingsImpl implements SkipUrlEncodings {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<Void, Void>> getSwaggerQueryValidWithRestResponseAsync() {
+    public Single<VoidResponse> getSwaggerQueryValidWithRestResponseAsync() {
         final String q1 = "value1&q2=value2&q3=value3";
         return service.getSwaggerQueryValid(q1, this.client.acceptLanguage());
     }

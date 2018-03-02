@@ -10,9 +10,9 @@
 
 package fixtures.azureparametergrouping;
 
-import com.microsoft.rest.v2.RestResponse;
 import com.microsoft.rest.v2.ServiceCallback;
 import com.microsoft.rest.v2.ServiceFuture;
+import com.microsoft.rest.v2.VoidResponse;
 import fixtures.azureparametergrouping.models.ErrorException;
 import fixtures.azureparametergrouping.models.FirstParameterGroup;
 import fixtures.azureparametergrouping.models.ParameterGroupingPostMultiParamGroupsSecondParamGroup;
@@ -54,7 +54,7 @@ public interface ParameterGroupings {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, Void>> postRequiredWithRestResponseAsync(@NonNull ParameterGroupingPostRequiredParameters parameterGroupingPostRequiredParameters);
+    Single<VoidResponse> postRequiredWithRestResponseAsync(@NonNull ParameterGroupingPostRequiredParameters parameterGroupingPostRequiredParameters);
 
     /**
      * Post a bunch of required parameters grouped.
@@ -87,7 +87,7 @@ public interface ParameterGroupings {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, Void>> postOptionalWithRestResponseAsync();
+    Single<VoidResponse> postOptionalWithRestResponseAsync();
 
     /**
      * Post a bunch of optional parameters grouped.
@@ -123,7 +123,7 @@ public interface ParameterGroupings {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, Void>> postOptionalWithRestResponseAsync(ParameterGroupingPostOptionalParameters parameterGroupingPostOptionalParameters);
+    Single<VoidResponse> postOptionalWithRestResponseAsync(ParameterGroupingPostOptionalParameters parameterGroupingPostOptionalParameters);
 
     /**
      * Post a bunch of optional parameters grouped.
@@ -156,7 +156,7 @@ public interface ParameterGroupings {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, Void>> postMultiParamGroupsWithRestResponseAsync();
+    Single<VoidResponse> postMultiParamGroupsWithRestResponseAsync();
 
     /**
      * Post parameters from multiple different parameter groups.
@@ -195,7 +195,7 @@ public interface ParameterGroupings {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, Void>> postMultiParamGroupsWithRestResponseAsync(FirstParameterGroup firstParameterGroup, ParameterGroupingPostMultiParamGroupsSecondParamGroup parameterGroupingPostMultiParamGroupsSecondParamGroup);
+    Single<VoidResponse> postMultiParamGroupsWithRestResponseAsync(FirstParameterGroup firstParameterGroup, ParameterGroupingPostMultiParamGroupsSecondParamGroup parameterGroupingPostMultiParamGroupsSecondParamGroup);
 
     /**
      * Post parameters from multiple different parameter groups.
@@ -229,7 +229,7 @@ public interface ParameterGroupings {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, Void>> postSharedParameterGroupObjectWithRestResponseAsync();
+    Single<VoidResponse> postSharedParameterGroupObjectWithRestResponseAsync();
 
     /**
      * Post parameters with a shared parameter group object.
@@ -265,7 +265,7 @@ public interface ParameterGroupings {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, Void>> postSharedParameterGroupObjectWithRestResponseAsync(FirstParameterGroup firstParameterGroup);
+    Single<VoidResponse> postSharedParameterGroupObjectWithRestResponseAsync(FirstParameterGroup firstParameterGroup);
 
     /**
      * Post parameters with a shared parameter group object.

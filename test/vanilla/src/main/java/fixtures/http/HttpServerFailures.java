@@ -10,7 +10,7 @@
 
 package fixtures.http;
 
-import com.microsoft.rest.v2.RestResponse;
+import com.microsoft.rest.v2.BodyResponse;
 import com.microsoft.rest.v2.ServiceCallback;
 import com.microsoft.rest.v2.ServiceFuture;
 import fixtures.http.models.Error;
@@ -46,7 +46,7 @@ public interface HttpServerFailures {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, Error>> head501WithRestResponseAsync();
+    Single<BodyResponse<Error>> head501WithRestResponseAsync();
 
     /**
      * Return 501 status code - should be represented in the client as an error.
@@ -78,7 +78,7 @@ public interface HttpServerFailures {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, Error>> get501WithRestResponseAsync();
+    Single<BodyResponse<Error>> get501WithRestResponseAsync();
 
     /**
      * Return 501 status code - should be represented in the client as an error.
@@ -110,7 +110,7 @@ public interface HttpServerFailures {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, Error>> post505WithRestResponseAsync();
+    Single<BodyResponse<Error>> post505WithRestResponseAsync();
 
     /**
      * Return 505 status code - should be represented in the client as an error.
@@ -147,7 +147,7 @@ public interface HttpServerFailures {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, Error>> post505WithRestResponseAsync(Boolean booleanValue);
+    Single<BodyResponse<Error>> post505WithRestResponseAsync(Boolean booleanValue);
 
     /**
      * Return 505 status code - should be represented in the client as an error.
@@ -181,7 +181,7 @@ public interface HttpServerFailures {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, Error>> delete505WithRestResponseAsync();
+    Single<BodyResponse<Error>> delete505WithRestResponseAsync();
 
     /**
      * Return 505 status code - should be represented in the client as an error.
@@ -218,7 +218,7 @@ public interface HttpServerFailures {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, Error>> delete505WithRestResponseAsync(Boolean booleanValue);
+    Single<BodyResponse<Error>> delete505WithRestResponseAsync(Boolean booleanValue);
 
     /**
      * Return 505 status code - should be represented in the client as an error.

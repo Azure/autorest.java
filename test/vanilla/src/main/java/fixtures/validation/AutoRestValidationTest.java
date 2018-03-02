@@ -10,9 +10,10 @@
 
 package fixtures.validation;
 
-import com.microsoft.rest.v2.RestResponse;
+import com.microsoft.rest.v2.BodyResponse;
 import com.microsoft.rest.v2.ServiceCallback;
 import com.microsoft.rest.v2.ServiceFuture;
+import com.microsoft.rest.v2.VoidResponse;
 import fixtures.validation.models.ErrorException;
 import fixtures.validation.models.Product;
 import io.reactivex.Completable;
@@ -85,7 +86,7 @@ public interface AutoRestValidationTest {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, Product>> validationOfMethodParametersWithRestResponseAsync(@NonNull String resourceGroupName, @NonNull int id);
+    Single<BodyResponse<Product>> validationOfMethodParametersWithRestResponseAsync(@NonNull String resourceGroupName, @NonNull int id);
 
     /**
      * Validates input parameters on the method. See swagger for details.
@@ -128,7 +129,7 @@ public interface AutoRestValidationTest {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, Product>> validationOfBodyWithRestResponseAsync(@NonNull String resourceGroupName, @NonNull int id);
+    Single<BodyResponse<Product>> validationOfBodyWithRestResponseAsync(@NonNull String resourceGroupName, @NonNull int id);
 
     /**
      * Validates body parameters on the method. See swagger for details.
@@ -174,7 +175,7 @@ public interface AutoRestValidationTest {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, Product>> validationOfBodyWithRestResponseAsync(@NonNull String resourceGroupName, @NonNull int id, Product body);
+    Single<BodyResponse<Product>> validationOfBodyWithRestResponseAsync(@NonNull String resourceGroupName, @NonNull int id, Product body);
 
     /**
      * Validates body parameters on the method. See swagger for details.
@@ -202,7 +203,7 @@ public interface AutoRestValidationTest {
     /**
      * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, Void>> getWithConstantInPathWithRestResponseAsync();
+    Single<VoidResponse> getWithConstantInPathWithRestResponseAsync();
 
     /**
      * @return a Single which performs the network request upon subscription.
@@ -225,7 +226,7 @@ public interface AutoRestValidationTest {
     /**
      * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, Product>> postWithConstantInBodyWithRestResponseAsync();
+    Single<BodyResponse<Product>> postWithConstantInBodyWithRestResponseAsync();
 
     /**
      * @return a Single which performs the network request upon subscription.
@@ -253,7 +254,7 @@ public interface AutoRestValidationTest {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, Product>> postWithConstantInBodyWithRestResponseAsync(Product body);
+    Single<BodyResponse<Product>> postWithConstantInBodyWithRestResponseAsync(Product body);
 
     /**
      * @param body the Product value.

@@ -12,33 +12,34 @@ package fixtures.lro;
 
 import com.microsoft.azure.v2.CloudException;
 import com.microsoft.azure.v2.OperationStatus;
+import com.microsoft.rest.v2.BodyResponse;
 import com.microsoft.rest.v2.OperationDescription;
-import com.microsoft.rest.v2.RestResponse;
 import com.microsoft.rest.v2.ServiceCallback;
 import com.microsoft.rest.v2.ServiceFuture;
-import fixtures.lro.models.LROsDelete202NoRetry204Headers;
-import fixtures.lro.models.LROsDelete202Retry200Headers;
-import fixtures.lro.models.LROsDeleteAsyncNoHeaderInRetryHeaders;
-import fixtures.lro.models.LROsDeleteAsyncNoRetrySucceededHeaders;
-import fixtures.lro.models.LROsDeleteAsyncRetrycanceledHeaders;
-import fixtures.lro.models.LROsDeleteAsyncRetryFailedHeaders;
-import fixtures.lro.models.LROsDeleteAsyncRetrySucceededHeaders;
-import fixtures.lro.models.LROsDeleteNoHeaderInRetryHeaders;
-import fixtures.lro.models.LROsDeleteProvisioning202Accepted200SucceededHeaders;
-import fixtures.lro.models.LROsDeleteProvisioning202Deletingcanceled200Headers;
-import fixtures.lro.models.LROsDeleteProvisioning202DeletingFailed200Headers;
-import fixtures.lro.models.LROsPost202NoRetry204Headers;
-import fixtures.lro.models.LROsPost202Retry200Headers;
-import fixtures.lro.models.LROsPostAsyncNoRetrySucceededHeaders;
-import fixtures.lro.models.LROsPostAsyncRetrycanceledHeaders;
-import fixtures.lro.models.LROsPostAsyncRetryFailedHeaders;
-import fixtures.lro.models.LROsPostAsyncRetrySucceededHeaders;
-import fixtures.lro.models.LROsPutAsyncNoHeaderInRetryHeaders;
-import fixtures.lro.models.LROsPutAsyncNoRetrycanceledHeaders;
-import fixtures.lro.models.LROsPutAsyncNoRetrySucceededHeaders;
-import fixtures.lro.models.LROsPutAsyncRetryFailedHeaders;
-import fixtures.lro.models.LROsPutAsyncRetrySucceededHeaders;
-import fixtures.lro.models.LROsPutNoHeaderInRetryHeaders;
+import com.microsoft.rest.v2.VoidResponse;
+import fixtures.lro.models.LROsDelete202NoRetry204Response;
+import fixtures.lro.models.LROsDelete202Retry200Response;
+import fixtures.lro.models.LROsDeleteAsyncNoHeaderInRetryResponse;
+import fixtures.lro.models.LROsDeleteAsyncNoRetrySucceededResponse;
+import fixtures.lro.models.LROsDeleteAsyncRetrycanceledResponse;
+import fixtures.lro.models.LROsDeleteAsyncRetryFailedResponse;
+import fixtures.lro.models.LROsDeleteAsyncRetrySucceededResponse;
+import fixtures.lro.models.LROsDeleteNoHeaderInRetryResponse;
+import fixtures.lro.models.LROsDeleteProvisioning202Accepted200SucceededResponse;
+import fixtures.lro.models.LROsDeleteProvisioning202Deletingcanceled200Response;
+import fixtures.lro.models.LROsDeleteProvisioning202DeletingFailed200Response;
+import fixtures.lro.models.LROsPost202NoRetry204Response;
+import fixtures.lro.models.LROsPost202Retry200Response;
+import fixtures.lro.models.LROsPostAsyncNoRetrySucceededResponse;
+import fixtures.lro.models.LROsPostAsyncRetrycanceledResponse;
+import fixtures.lro.models.LROsPostAsyncRetryFailedResponse;
+import fixtures.lro.models.LROsPostAsyncRetrySucceededResponse;
+import fixtures.lro.models.LROsPutAsyncNoHeaderInRetryResponse;
+import fixtures.lro.models.LROsPutAsyncNoRetrycanceledResponse;
+import fixtures.lro.models.LROsPutAsyncNoRetrySucceededResponse;
+import fixtures.lro.models.LROsPutAsyncRetryFailedResponse;
+import fixtures.lro.models.LROsPutAsyncRetrySucceededResponse;
+import fixtures.lro.models.LROsPutNoHeaderInRetryResponse;
 import fixtures.lro.models.Product;
 import fixtures.lro.models.Sku;
 import fixtures.lro.models.SubProduct;
@@ -129,7 +130,7 @@ public interface LROs {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, Product>> put200SucceededWithRestResponseAsync();
+    Single<BodyResponse<Product>> put200SucceededWithRestResponseAsync();
 
     /**
      * Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Succeeded’.
@@ -166,7 +167,7 @@ public interface LROs {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, Product>> put200SucceededWithRestResponseAsync(Product product);
+    Single<BodyResponse<Product>> put200SucceededWithRestResponseAsync(Product product);
 
     /**
      * Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Succeeded’.
@@ -263,7 +264,7 @@ public interface LROs {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, Product>> put200SucceededNoStateWithRestResponseAsync();
+    Single<BodyResponse<Product>> put200SucceededNoStateWithRestResponseAsync();
 
     /**
      * Long running put request, service returns a 200 to the initial request, with an entity that does not contain ProvisioningState=’Succeeded’.
@@ -300,7 +301,7 @@ public interface LROs {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, Product>> put200SucceededNoStateWithRestResponseAsync(Product product);
+    Single<BodyResponse<Product>> put200SucceededNoStateWithRestResponseAsync(Product product);
 
     /**
      * Long running put request, service returns a 200 to the initial request, with an entity that does not contain ProvisioningState=’Succeeded’.
@@ -397,7 +398,7 @@ public interface LROs {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, Product>> put202Retry200WithRestResponseAsync();
+    Single<BodyResponse<Product>> put202Retry200WithRestResponseAsync();
 
     /**
      * Long running put request, service returns a 202 to the initial request, with a location header that points to a polling URL that returns a 200 and an entity that doesn't contains ProvisioningState.
@@ -434,7 +435,7 @@ public interface LROs {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, Product>> put202Retry200WithRestResponseAsync(Product product);
+    Single<BodyResponse<Product>> put202Retry200WithRestResponseAsync(Product product);
 
     /**
      * Long running put request, service returns a 202 to the initial request, with a location header that points to a polling URL that returns a 200 and an entity that doesn't contains ProvisioningState.
@@ -531,7 +532,7 @@ public interface LROs {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, Product>> put201CreatingSucceeded200WithRestResponseAsync();
+    Single<BodyResponse<Product>> put201CreatingSucceeded200WithRestResponseAsync();
 
     /**
      * Long running put request, service returns a 201 to the initial request, with an entity that contains ProvisioningState=’Creating’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Succeeded’.
@@ -568,7 +569,7 @@ public interface LROs {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, Product>> put201CreatingSucceeded200WithRestResponseAsync(Product product);
+    Single<BodyResponse<Product>> put201CreatingSucceeded200WithRestResponseAsync(Product product);
 
     /**
      * Long running put request, service returns a 201 to the initial request, with an entity that contains ProvisioningState=’Creating’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Succeeded’.
@@ -665,7 +666,7 @@ public interface LROs {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, Product>> put200UpdatingSucceeded204WithRestResponseAsync();
+    Single<BodyResponse<Product>> put200UpdatingSucceeded204WithRestResponseAsync();
 
     /**
      * Long running put request, service returns a 201 to the initial request, with an entity that contains ProvisioningState=’Updating’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Succeeded’.
@@ -702,7 +703,7 @@ public interface LROs {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, Product>> put200UpdatingSucceeded204WithRestResponseAsync(Product product);
+    Single<BodyResponse<Product>> put200UpdatingSucceeded204WithRestResponseAsync(Product product);
 
     /**
      * Long running put request, service returns a 201 to the initial request, with an entity that contains ProvisioningState=’Updating’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Succeeded’.
@@ -799,7 +800,7 @@ public interface LROs {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, Product>> put201CreatingFailed200WithRestResponseAsync();
+    Single<BodyResponse<Product>> put201CreatingFailed200WithRestResponseAsync();
 
     /**
      * Long running put request, service returns a 201 to the initial request, with an entity that contains ProvisioningState=’Created’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Failed’.
@@ -836,7 +837,7 @@ public interface LROs {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, Product>> put201CreatingFailed200WithRestResponseAsync(Product product);
+    Single<BodyResponse<Product>> put201CreatingFailed200WithRestResponseAsync(Product product);
 
     /**
      * Long running put request, service returns a 201 to the initial request, with an entity that contains ProvisioningState=’Created’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Failed’.
@@ -933,7 +934,7 @@ public interface LROs {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, Product>> put200Acceptedcanceled200WithRestResponseAsync();
+    Single<BodyResponse<Product>> put200Acceptedcanceled200WithRestResponseAsync();
 
     /**
      * Long running put request, service returns a 201 to the initial request, with an entity that contains ProvisioningState=’Creating’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Canceled’.
@@ -970,7 +971,7 @@ public interface LROs {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, Product>> put200Acceptedcanceled200WithRestResponseAsync(Product product);
+    Single<BodyResponse<Product>> put200Acceptedcanceled200WithRestResponseAsync(Product product);
 
     /**
      * Long running put request, service returns a 201 to the initial request, with an entity that contains ProvisioningState=’Creating’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Canceled’.
@@ -1067,7 +1068,7 @@ public interface LROs {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<LROsPutNoHeaderInRetryHeaders, Product>> putNoHeaderInRetryWithRestResponseAsync();
+    Single<LROsPutNoHeaderInRetryResponse> putNoHeaderInRetryWithRestResponseAsync();
 
     /**
      * Long running put request, service returns a 202 to the initial request with location header. Subsequent calls to operation status do not contain location header.
@@ -1104,7 +1105,7 @@ public interface LROs {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<LROsPutNoHeaderInRetryHeaders, Product>> putNoHeaderInRetryWithRestResponseAsync(Product product);
+    Single<LROsPutNoHeaderInRetryResponse> putNoHeaderInRetryWithRestResponseAsync(Product product);
 
     /**
      * Long running put request, service returns a 202 to the initial request with location header. Subsequent calls to operation status do not contain location header.
@@ -1201,7 +1202,7 @@ public interface LROs {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<LROsPutAsyncRetrySucceededHeaders, Product>> putAsyncRetrySucceededWithRestResponseAsync();
+    Single<LROsPutAsyncRetrySucceededResponse> putAsyncRetrySucceededWithRestResponseAsync();
 
     /**
      * Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
@@ -1238,7 +1239,7 @@ public interface LROs {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<LROsPutAsyncRetrySucceededHeaders, Product>> putAsyncRetrySucceededWithRestResponseAsync(Product product);
+    Single<LROsPutAsyncRetrySucceededResponse> putAsyncRetrySucceededWithRestResponseAsync(Product product);
 
     /**
      * Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
@@ -1335,7 +1336,7 @@ public interface LROs {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<LROsPutAsyncNoRetrySucceededHeaders, Product>> putAsyncNoRetrySucceededWithRestResponseAsync();
+    Single<LROsPutAsyncNoRetrySucceededResponse> putAsyncNoRetrySucceededWithRestResponseAsync();
 
     /**
      * Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
@@ -1372,7 +1373,7 @@ public interface LROs {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<LROsPutAsyncNoRetrySucceededHeaders, Product>> putAsyncNoRetrySucceededWithRestResponseAsync(Product product);
+    Single<LROsPutAsyncNoRetrySucceededResponse> putAsyncNoRetrySucceededWithRestResponseAsync(Product product);
 
     /**
      * Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
@@ -1469,7 +1470,7 @@ public interface LROs {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<LROsPutAsyncRetryFailedHeaders, Product>> putAsyncRetryFailedWithRestResponseAsync();
+    Single<LROsPutAsyncRetryFailedResponse> putAsyncRetryFailedWithRestResponseAsync();
 
     /**
      * Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
@@ -1506,7 +1507,7 @@ public interface LROs {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<LROsPutAsyncRetryFailedHeaders, Product>> putAsyncRetryFailedWithRestResponseAsync(Product product);
+    Single<LROsPutAsyncRetryFailedResponse> putAsyncRetryFailedWithRestResponseAsync(Product product);
 
     /**
      * Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
@@ -1603,7 +1604,7 @@ public interface LROs {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<LROsPutAsyncNoRetrycanceledHeaders, Product>> putAsyncNoRetrycanceledWithRestResponseAsync();
+    Single<LROsPutAsyncNoRetrycanceledResponse> putAsyncNoRetrycanceledWithRestResponseAsync();
 
     /**
      * Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
@@ -1640,7 +1641,7 @@ public interface LROs {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<LROsPutAsyncNoRetrycanceledHeaders, Product>> putAsyncNoRetrycanceledWithRestResponseAsync(Product product);
+    Single<LROsPutAsyncNoRetrycanceledResponse> putAsyncNoRetrycanceledWithRestResponseAsync(Product product);
 
     /**
      * Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
@@ -1737,7 +1738,7 @@ public interface LROs {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<LROsPutAsyncNoHeaderInRetryHeaders, Product>> putAsyncNoHeaderInRetryWithRestResponseAsync();
+    Single<LROsPutAsyncNoHeaderInRetryResponse> putAsyncNoHeaderInRetryWithRestResponseAsync();
 
     /**
      * Long running put request, service returns a 202 to the initial request with Azure-AsyncOperation header. Subsequent calls to operation status do not contain Azure-AsyncOperation header.
@@ -1774,7 +1775,7 @@ public interface LROs {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<LROsPutAsyncNoHeaderInRetryHeaders, Product>> putAsyncNoHeaderInRetryWithRestResponseAsync(Product product);
+    Single<LROsPutAsyncNoHeaderInRetryResponse> putAsyncNoHeaderInRetryWithRestResponseAsync(Product product);
 
     /**
      * Long running put request, service returns a 202 to the initial request with Azure-AsyncOperation header. Subsequent calls to operation status do not contain Azure-AsyncOperation header.
@@ -1871,7 +1872,7 @@ public interface LROs {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, Sku>> putNonResourceWithRestResponseAsync();
+    Single<BodyResponse<Sku>> putNonResourceWithRestResponseAsync();
 
     /**
      * Long running put request with non resource.
@@ -1908,7 +1909,7 @@ public interface LROs {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, Sku>> putNonResourceWithRestResponseAsync(Sku sku);
+    Single<BodyResponse<Sku>> putNonResourceWithRestResponseAsync(Sku sku);
 
     /**
      * Long running put request with non resource.
@@ -2005,7 +2006,7 @@ public interface LROs {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, Sku>> putAsyncNonResourceWithRestResponseAsync();
+    Single<BodyResponse<Sku>> putAsyncNonResourceWithRestResponseAsync();
 
     /**
      * Long running put request with non resource.
@@ -2042,7 +2043,7 @@ public interface LROs {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, Sku>> putAsyncNonResourceWithRestResponseAsync(Sku sku);
+    Single<BodyResponse<Sku>> putAsyncNonResourceWithRestResponseAsync(Sku sku);
 
     /**
      * Long running put request with non resource.
@@ -2139,7 +2140,7 @@ public interface LROs {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, SubProduct>> putSubResourceWithRestResponseAsync();
+    Single<BodyResponse<SubProduct>> putSubResourceWithRestResponseAsync();
 
     /**
      * Long running put request with sub resource.
@@ -2176,7 +2177,7 @@ public interface LROs {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, SubProduct>> putSubResourceWithRestResponseAsync(SubProduct product);
+    Single<BodyResponse<SubProduct>> putSubResourceWithRestResponseAsync(SubProduct product);
 
     /**
      * Long running put request with sub resource.
@@ -2273,7 +2274,7 @@ public interface LROs {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, SubProduct>> putAsyncSubResourceWithRestResponseAsync();
+    Single<BodyResponse<SubProduct>> putAsyncSubResourceWithRestResponseAsync();
 
     /**
      * Long running put request with sub resource.
@@ -2310,7 +2311,7 @@ public interface LROs {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, SubProduct>> putAsyncSubResourceWithRestResponseAsync(SubProduct product);
+    Single<BodyResponse<SubProduct>> putAsyncSubResourceWithRestResponseAsync(SubProduct product);
 
     /**
      * Long running put request with sub resource.
@@ -2378,7 +2379,7 @@ public interface LROs {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<LROsDeleteProvisioning202Accepted200SucceededHeaders, Product>> deleteProvisioning202Accepted200SucceededWithRestResponseAsync();
+    Single<LROsDeleteProvisioning202Accepted200SucceededResponse> deleteProvisioning202Accepted200SucceededWithRestResponseAsync();
 
     /**
      * Long running delete request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Accepted’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Succeeded’.
@@ -2444,7 +2445,7 @@ public interface LROs {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<LROsDeleteProvisioning202DeletingFailed200Headers, Product>> deleteProvisioning202DeletingFailed200WithRestResponseAsync();
+    Single<LROsDeleteProvisioning202DeletingFailed200Response> deleteProvisioning202DeletingFailed200WithRestResponseAsync();
 
     /**
      * Long running delete request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Failed’.
@@ -2510,7 +2511,7 @@ public interface LROs {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<LROsDeleteProvisioning202Deletingcanceled200Headers, Product>> deleteProvisioning202Deletingcanceled200WithRestResponseAsync();
+    Single<LROsDeleteProvisioning202Deletingcanceled200Response> deleteProvisioning202Deletingcanceled200WithRestResponseAsync();
 
     /**
      * Long running delete request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Canceled’.
@@ -2574,7 +2575,7 @@ public interface LROs {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, Void>> delete204SucceededWithRestResponseAsync();
+    Single<VoidResponse> delete204SucceededWithRestResponseAsync();
 
     /**
      * Long running delete succeeds and returns right away.
@@ -2640,7 +2641,7 @@ public interface LROs {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<LROsDelete202Retry200Headers, Product>> delete202Retry200WithRestResponseAsync();
+    Single<LROsDelete202Retry200Response> delete202Retry200WithRestResponseAsync();
 
     /**
      * Long running delete request, service returns a 202 to the initial request. Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Succeeded’.
@@ -2706,7 +2707,7 @@ public interface LROs {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<LROsDelete202NoRetry204Headers, Product>> delete202NoRetry204WithRestResponseAsync();
+    Single<LROsDelete202NoRetry204Response> delete202NoRetry204WithRestResponseAsync();
 
     /**
      * Long running delete request, service returns a 202 to the initial request. Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Succeeded’.
@@ -2770,7 +2771,7 @@ public interface LROs {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<LROsDeleteNoHeaderInRetryHeaders, Void>> deleteNoHeaderInRetryWithRestResponseAsync();
+    Single<LROsDeleteNoHeaderInRetryResponse> deleteNoHeaderInRetryWithRestResponseAsync();
 
     /**
      * Long running delete request, service returns a location header in the initial request. Subsequent calls to operation status do not contain location header.
@@ -2834,7 +2835,7 @@ public interface LROs {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<LROsDeleteAsyncNoHeaderInRetryHeaders, Void>> deleteAsyncNoHeaderInRetryWithRestResponseAsync();
+    Single<LROsDeleteAsyncNoHeaderInRetryResponse> deleteAsyncNoHeaderInRetryWithRestResponseAsync();
 
     /**
      * Long running delete request, service returns an Azure-AsyncOperation header in the initial request. Subsequent calls to operation status do not contain Azure-AsyncOperation header.
@@ -2898,7 +2899,7 @@ public interface LROs {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<LROsDeleteAsyncRetrySucceededHeaders, Void>> deleteAsyncRetrySucceededWithRestResponseAsync();
+    Single<LROsDeleteAsyncRetrySucceededResponse> deleteAsyncRetrySucceededWithRestResponseAsync();
 
     /**
      * Long running delete request, service returns a 202 to the initial request. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
@@ -2962,7 +2963,7 @@ public interface LROs {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<LROsDeleteAsyncNoRetrySucceededHeaders, Void>> deleteAsyncNoRetrySucceededWithRestResponseAsync();
+    Single<LROsDeleteAsyncNoRetrySucceededResponse> deleteAsyncNoRetrySucceededWithRestResponseAsync();
 
     /**
      * Long running delete request, service returns a 202 to the initial request. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
@@ -3026,7 +3027,7 @@ public interface LROs {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<LROsDeleteAsyncRetryFailedHeaders, Void>> deleteAsyncRetryFailedWithRestResponseAsync();
+    Single<LROsDeleteAsyncRetryFailedResponse> deleteAsyncRetryFailedWithRestResponseAsync();
 
     /**
      * Long running delete request, service returns a 202 to the initial request. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
@@ -3090,7 +3091,7 @@ public interface LROs {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<LROsDeleteAsyncRetrycanceledHeaders, Void>> deleteAsyncRetrycanceledWithRestResponseAsync();
+    Single<LROsDeleteAsyncRetrycanceledResponse> deleteAsyncRetrycanceledWithRestResponseAsync();
 
     /**
      * Long running delete request, service returns a 202 to the initial request. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
@@ -3156,7 +3157,7 @@ public interface LROs {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, Sku>> post200WithPayloadWithRestResponseAsync();
+    Single<BodyResponse<Sku>> post200WithPayloadWithRestResponseAsync();
 
     /**
      * Long running post request, service returns a 202 to the initial request, with 'Location' header. Poll returns a 200 with a response body after success.
@@ -3248,7 +3249,7 @@ public interface LROs {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<LROsPost202Retry200Headers, Void>> post202Retry200WithRestResponseAsync();
+    Single<LROsPost202Retry200Response> post202Retry200WithRestResponseAsync();
 
     /**
      * Long running post request, service returns a 202 to the initial request, with 'Location' and 'Retry-After' headers, Polls return a 200 with a response body after success.
@@ -3284,7 +3285,7 @@ public interface LROs {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<LROsPost202Retry200Headers, Void>> post202Retry200WithRestResponseAsync(Product product);
+    Single<LROsPost202Retry200Response> post202Retry200WithRestResponseAsync(Product product);
 
     /**
      * Long running post request, service returns a 202 to the initial request, with 'Location' and 'Retry-After' headers, Polls return a 200 with a response body after success.
@@ -3381,7 +3382,7 @@ public interface LROs {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<LROsPost202NoRetry204Headers, Product>> post202NoRetry204WithRestResponseAsync();
+    Single<LROsPost202NoRetry204Response> post202NoRetry204WithRestResponseAsync();
 
     /**
      * Long running post request, service returns a 202 to the initial request, with 'Location' header, 204 with noresponse body after success.
@@ -3418,7 +3419,7 @@ public interface LROs {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<LROsPost202NoRetry204Headers, Product>> post202NoRetry204WithRestResponseAsync(Product product);
+    Single<LROsPost202NoRetry204Response> post202NoRetry204WithRestResponseAsync(Product product);
 
     /**
      * Long running post request, service returns a 202 to the initial request, with 'Location' header, 204 with noresponse body after success.
@@ -3515,7 +3516,7 @@ public interface LROs {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<LROsPostAsyncRetrySucceededHeaders, Product>> postAsyncRetrySucceededWithRestResponseAsync();
+    Single<LROsPostAsyncRetrySucceededResponse> postAsyncRetrySucceededWithRestResponseAsync();
 
     /**
      * Long running post request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
@@ -3552,7 +3553,7 @@ public interface LROs {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<LROsPostAsyncRetrySucceededHeaders, Product>> postAsyncRetrySucceededWithRestResponseAsync(Product product);
+    Single<LROsPostAsyncRetrySucceededResponse> postAsyncRetrySucceededWithRestResponseAsync(Product product);
 
     /**
      * Long running post request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
@@ -3649,7 +3650,7 @@ public interface LROs {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<LROsPostAsyncNoRetrySucceededHeaders, Product>> postAsyncNoRetrySucceededWithRestResponseAsync();
+    Single<LROsPostAsyncNoRetrySucceededResponse> postAsyncNoRetrySucceededWithRestResponseAsync();
 
     /**
      * Long running post request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
@@ -3686,7 +3687,7 @@ public interface LROs {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<LROsPostAsyncNoRetrySucceededHeaders, Product>> postAsyncNoRetrySucceededWithRestResponseAsync(Product product);
+    Single<LROsPostAsyncNoRetrySucceededResponse> postAsyncNoRetrySucceededWithRestResponseAsync(Product product);
 
     /**
      * Long running post request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
@@ -3780,7 +3781,7 @@ public interface LROs {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<LROsPostAsyncRetryFailedHeaders, Void>> postAsyncRetryFailedWithRestResponseAsync();
+    Single<LROsPostAsyncRetryFailedResponse> postAsyncRetryFailedWithRestResponseAsync();
 
     /**
      * Long running post request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
@@ -3816,7 +3817,7 @@ public interface LROs {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<LROsPostAsyncRetryFailedHeaders, Void>> postAsyncRetryFailedWithRestResponseAsync(Product product);
+    Single<LROsPostAsyncRetryFailedResponse> postAsyncRetryFailedWithRestResponseAsync(Product product);
 
     /**
      * Long running post request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
@@ -3910,7 +3911,7 @@ public interface LROs {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<LROsPostAsyncRetrycanceledHeaders, Void>> postAsyncRetrycanceledWithRestResponseAsync();
+    Single<LROsPostAsyncRetrycanceledResponse> postAsyncRetrycanceledWithRestResponseAsync();
 
     /**
      * Long running post request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
@@ -3946,7 +3947,7 @@ public interface LROs {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<LROsPostAsyncRetrycanceledHeaders, Void>> postAsyncRetrycanceledWithRestResponseAsync(Product product);
+    Single<LROsPostAsyncRetrycanceledResponse> postAsyncRetrycanceledWithRestResponseAsync(Product product);
 
     /**
      * Long running post request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.

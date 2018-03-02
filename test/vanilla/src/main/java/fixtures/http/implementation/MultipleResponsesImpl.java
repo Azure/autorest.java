@@ -10,10 +10,11 @@
 
 package fixtures.http.implementation;
 
+import com.microsoft.rest.v2.BodyResponse;
 import com.microsoft.rest.v2.RestProxy;
-import com.microsoft.rest.v2.RestResponse;
 import com.microsoft.rest.v2.ServiceCallback;
 import com.microsoft.rest.v2.ServiceFuture;
+import com.microsoft.rest.v2.VoidResponse;
 import com.microsoft.rest.v2.annotations.ExpectedResponses;
 import com.microsoft.rest.v2.annotations.GET;
 import com.microsoft.rest.v2.annotations.Host;
@@ -61,149 +62,149 @@ public final class MultipleResponsesImpl implements MultipleResponses {
         @GET("http/payloads/200/A/204/none/default/Error/response/200/valid")
         @ExpectedResponses({200, 204})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<RestResponse<Void, A>> get200Model204NoModelDefaultError200Valid();
+        Single<BodyResponse<A>> get200Model204NoModelDefaultError200Valid();
 
         @GET("http/payloads/200/A/204/none/default/Error/response/204/none")
         @ExpectedResponses({200, 204})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<RestResponse<Void, A>> get200Model204NoModelDefaultError204Valid();
+        Single<BodyResponse<A>> get200Model204NoModelDefaultError204Valid();
 
         @GET("http/payloads/200/A/204/none/default/Error/response/201/valid")
         @ExpectedResponses({200, 204})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<RestResponse<Void, A>> get200Model204NoModelDefaultError201Invalid();
+        Single<BodyResponse<A>> get200Model204NoModelDefaultError201Invalid();
 
         @GET("http/payloads/200/A/204/none/default/Error/response/202/none")
         @ExpectedResponses({200, 204})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<RestResponse<Void, A>> get200Model204NoModelDefaultError202None();
+        Single<BodyResponse<A>> get200Model204NoModelDefaultError202None();
 
         @GET("http/payloads/200/A/204/none/default/Error/response/400/valid")
         @ExpectedResponses({200, 204})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<RestResponse<Void, A>> get200Model204NoModelDefaultError400Valid();
+        Single<BodyResponse<A>> get200Model204NoModelDefaultError400Valid();
 
         @GET("http/payloads/200/A/201/B/default/Error/response/200/valid")
         @ExpectedResponses({200, 201})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<RestResponse<Void, A>> get200Model201ModelDefaultError200Valid();
+        Single<BodyResponse<A>> get200Model201ModelDefaultError200Valid();
 
         @GET("http/payloads/200/A/201/B/default/Error/response/201/valid")
         @ExpectedResponses({200, 201})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<RestResponse<Void, A>> get200Model201ModelDefaultError201Valid();
+        Single<BodyResponse<A>> get200Model201ModelDefaultError201Valid();
 
         @GET("http/payloads/200/A/201/B/default/Error/response/400/valid")
         @ExpectedResponses({200, 201})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<RestResponse<Void, A>> get200Model201ModelDefaultError400Valid();
+        Single<BodyResponse<A>> get200Model201ModelDefaultError400Valid();
 
         @GET("http/payloads/200/A/201/C/404/D/default/Error/response/200/valid")
         @ExpectedResponses({200, 201, 404})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<RestResponse<Void, Object>> get200ModelA201ModelC404ModelDDefaultError200Valid();
+        Single<BodyResponse<Object>> get200ModelA201ModelC404ModelDDefaultError200Valid();
 
         @GET("http/payloads/200/A/201/C/404/D/default/Error/response/201/valid")
         @ExpectedResponses({200, 201, 404})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<RestResponse<Void, Object>> get200ModelA201ModelC404ModelDDefaultError201Valid();
+        Single<BodyResponse<Object>> get200ModelA201ModelC404ModelDDefaultError201Valid();
 
         @GET("http/payloads/200/A/201/C/404/D/default/Error/response/404/valid")
         @ExpectedResponses({200, 201, 404})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<RestResponse<Void, Object>> get200ModelA201ModelC404ModelDDefaultError404Valid();
+        Single<BodyResponse<Object>> get200ModelA201ModelC404ModelDDefaultError404Valid();
 
         @GET("http/payloads/200/A/201/C/404/D/default/Error/response/400/valid")
         @ExpectedResponses({200, 201, 404})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<RestResponse<Void, Object>> get200ModelA201ModelC404ModelDDefaultError400Valid();
+        Single<BodyResponse<Object>> get200ModelA201ModelC404ModelDDefaultError400Valid();
 
         @GET("http/payloads/202/none/204/none/default/Error/response/202/none")
         @ExpectedResponses({202, 204})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<RestResponse<Void, Void>> get202None204NoneDefaultError202None();
+        Single<VoidResponse> get202None204NoneDefaultError202None();
 
         @GET("http/payloads/202/none/204/none/default/Error/response/204/none")
         @ExpectedResponses({202, 204})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<RestResponse<Void, Void>> get202None204NoneDefaultError204None();
+        Single<VoidResponse> get202None204NoneDefaultError204None();
 
         @GET("http/payloads/202/none/204/none/default/Error/response/400/valid")
         @ExpectedResponses({202, 204})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<RestResponse<Void, Void>> get202None204NoneDefaultError400Valid();
+        Single<VoidResponse> get202None204NoneDefaultError400Valid();
 
         @GET("http/payloads/202/none/204/none/default/none/response/202/invalid")
         @ExpectedResponses({202, 204})
-        Single<RestResponse<Void, Void>> get202None204NoneDefaultNone202Invalid();
+        Single<VoidResponse> get202None204NoneDefaultNone202Invalid();
 
         @GET("http/payloads/202/none/204/none/default/none/response/204/none")
         @ExpectedResponses({202, 204})
-        Single<RestResponse<Void, Void>> get202None204NoneDefaultNone204None();
+        Single<VoidResponse> get202None204NoneDefaultNone204None();
 
         @GET("http/payloads/202/none/204/none/default/none/response/400/none")
         @ExpectedResponses({202, 204})
-        Single<RestResponse<Void, Void>> get202None204NoneDefaultNone400None();
+        Single<VoidResponse> get202None204NoneDefaultNone400None();
 
         @GET("http/payloads/202/none/204/none/default/none/response/400/invalid")
         @ExpectedResponses({202, 204})
-        Single<RestResponse<Void, Void>> get202None204NoneDefaultNone400Invalid();
+        Single<VoidResponse> get202None204NoneDefaultNone400Invalid();
 
         @GET("http/payloads/default/A/response/200/valid")
         @UnexpectedResponseExceptionType(AException.class)
-        Single<RestResponse<Void, A>> getDefaultModelA200Valid();
+        Single<BodyResponse<A>> getDefaultModelA200Valid();
 
         @GET("http/payloads/default/A/response/200/none")
         @UnexpectedResponseExceptionType(AException.class)
-        Single<RestResponse<Void, A>> getDefaultModelA200None();
+        Single<BodyResponse<A>> getDefaultModelA200None();
 
         @GET("http/payloads/default/A/response/400/valid")
         @UnexpectedResponseExceptionType(AException.class)
-        Single<RestResponse<Void, A>> getDefaultModelA400Valid();
+        Single<BodyResponse<A>> getDefaultModelA400Valid();
 
         @GET("http/payloads/default/A/response/400/none")
         @UnexpectedResponseExceptionType(AException.class)
-        Single<RestResponse<Void, A>> getDefaultModelA400None();
+        Single<BodyResponse<A>> getDefaultModelA400None();
 
         @GET("http/payloads/default/none/response/200/invalid")
-        Single<RestResponse<Void, Void>> getDefaultNone200Invalid();
+        Single<VoidResponse> getDefaultNone200Invalid();
 
         @GET("http/payloads/default/none/response/200/none")
-        Single<RestResponse<Void, Void>> getDefaultNone200None();
+        Single<VoidResponse> getDefaultNone200None();
 
         @GET("http/payloads/default/none/response/400/invalid")
-        Single<RestResponse<Void, Void>> getDefaultNone400Invalid();
+        Single<VoidResponse> getDefaultNone400Invalid();
 
         @GET("http/payloads/default/none/response/400/none")
-        Single<RestResponse<Void, Void>> getDefaultNone400None();
+        Single<VoidResponse> getDefaultNone400None();
 
         @GET("http/payloads/200/A/response/200/none")
         @ExpectedResponses({200})
-        Single<RestResponse<Void, A>> get200ModelA200None();
+        Single<BodyResponse<A>> get200ModelA200None();
 
         @GET("http/payloads/200/A/response/200/valid")
         @ExpectedResponses({200})
-        Single<RestResponse<Void, A>> get200ModelA200Valid();
+        Single<BodyResponse<A>> get200ModelA200Valid();
 
         @GET("http/payloads/200/A/response/200/invalid")
         @ExpectedResponses({200})
-        Single<RestResponse<Void, A>> get200ModelA200Invalid();
+        Single<BodyResponse<A>> get200ModelA200Invalid();
 
         @GET("http/payloads/200/A/response/400/none")
         @ExpectedResponses({200})
-        Single<RestResponse<Void, A>> get200ModelA400None();
+        Single<BodyResponse<A>> get200ModelA400None();
 
         @GET("http/payloads/200/A/response/400/valid")
         @ExpectedResponses({200})
-        Single<RestResponse<Void, A>> get200ModelA400Valid();
+        Single<BodyResponse<A>> get200ModelA400Valid();
 
         @GET("http/payloads/200/A/response/400/invalid")
         @ExpectedResponses({200})
-        Single<RestResponse<Void, A>> get200ModelA400Invalid();
+        Single<BodyResponse<A>> get200ModelA400Invalid();
 
         @GET("http/payloads/200/A/response/202/valid")
         @ExpectedResponses({200})
-        Single<RestResponse<Void, A>> get200ModelA202Valid();
+        Single<BodyResponse<A>> get200ModelA202Valid();
     }
 
     /**
@@ -233,7 +234,7 @@ public final class MultipleResponsesImpl implements MultipleResponses {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<Void, A>> get200Model204NoModelDefaultError200ValidWithRestResponseAsync() {
+    public Single<BodyResponse<A>> get200Model204NoModelDefaultError200ValidWithRestResponseAsync() {
         return service.get200Model204NoModelDefaultError200Valid();
     }
 
@@ -244,15 +245,7 @@ public final class MultipleResponsesImpl implements MultipleResponses {
      */
     public Maybe<A> get200Model204NoModelDefaultError200ValidAsync() {
         return get200Model204NoModelDefaultError200ValidWithRestResponseAsync()
-            .flatMapMaybe(new Function<RestResponse<Void, A>, Maybe<A>>() {
-                public Maybe<A> apply(RestResponse<Void, A> restResponse) {
-                    if (restResponse.body() == null) {
-                        return Maybe.empty();
-                    } else {
-                        return Maybe.just(restResponse.body());
-                    }
-                }
-            });
+            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -282,7 +275,7 @@ public final class MultipleResponsesImpl implements MultipleResponses {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<Void, A>> get200Model204NoModelDefaultError204ValidWithRestResponseAsync() {
+    public Single<BodyResponse<A>> get200Model204NoModelDefaultError204ValidWithRestResponseAsync() {
         return service.get200Model204NoModelDefaultError204Valid();
     }
 
@@ -293,15 +286,7 @@ public final class MultipleResponsesImpl implements MultipleResponses {
      */
     public Maybe<A> get200Model204NoModelDefaultError204ValidAsync() {
         return get200Model204NoModelDefaultError204ValidWithRestResponseAsync()
-            .flatMapMaybe(new Function<RestResponse<Void, A>, Maybe<A>>() {
-                public Maybe<A> apply(RestResponse<Void, A> restResponse) {
-                    if (restResponse.body() == null) {
-                        return Maybe.empty();
-                    } else {
-                        return Maybe.just(restResponse.body());
-                    }
-                }
-            });
+            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -331,7 +316,7 @@ public final class MultipleResponsesImpl implements MultipleResponses {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<Void, A>> get200Model204NoModelDefaultError201InvalidWithRestResponseAsync() {
+    public Single<BodyResponse<A>> get200Model204NoModelDefaultError201InvalidWithRestResponseAsync() {
         return service.get200Model204NoModelDefaultError201Invalid();
     }
 
@@ -342,15 +327,7 @@ public final class MultipleResponsesImpl implements MultipleResponses {
      */
     public Maybe<A> get200Model204NoModelDefaultError201InvalidAsync() {
         return get200Model204NoModelDefaultError201InvalidWithRestResponseAsync()
-            .flatMapMaybe(new Function<RestResponse<Void, A>, Maybe<A>>() {
-                public Maybe<A> apply(RestResponse<Void, A> restResponse) {
-                    if (restResponse.body() == null) {
-                        return Maybe.empty();
-                    } else {
-                        return Maybe.just(restResponse.body());
-                    }
-                }
-            });
+            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -380,7 +357,7 @@ public final class MultipleResponsesImpl implements MultipleResponses {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<Void, A>> get200Model204NoModelDefaultError202NoneWithRestResponseAsync() {
+    public Single<BodyResponse<A>> get200Model204NoModelDefaultError202NoneWithRestResponseAsync() {
         return service.get200Model204NoModelDefaultError202None();
     }
 
@@ -391,15 +368,7 @@ public final class MultipleResponsesImpl implements MultipleResponses {
      */
     public Maybe<A> get200Model204NoModelDefaultError202NoneAsync() {
         return get200Model204NoModelDefaultError202NoneWithRestResponseAsync()
-            .flatMapMaybe(new Function<RestResponse<Void, A>, Maybe<A>>() {
-                public Maybe<A> apply(RestResponse<Void, A> restResponse) {
-                    if (restResponse.body() == null) {
-                        return Maybe.empty();
-                    } else {
-                        return Maybe.just(restResponse.body());
-                    }
-                }
-            });
+            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -429,7 +398,7 @@ public final class MultipleResponsesImpl implements MultipleResponses {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<Void, A>> get200Model204NoModelDefaultError400ValidWithRestResponseAsync() {
+    public Single<BodyResponse<A>> get200Model204NoModelDefaultError400ValidWithRestResponseAsync() {
         return service.get200Model204NoModelDefaultError400Valid();
     }
 
@@ -440,15 +409,7 @@ public final class MultipleResponsesImpl implements MultipleResponses {
      */
     public Maybe<A> get200Model204NoModelDefaultError400ValidAsync() {
         return get200Model204NoModelDefaultError400ValidWithRestResponseAsync()
-            .flatMapMaybe(new Function<RestResponse<Void, A>, Maybe<A>>() {
-                public Maybe<A> apply(RestResponse<Void, A> restResponse) {
-                    if (restResponse.body() == null) {
-                        return Maybe.empty();
-                    } else {
-                        return Maybe.just(restResponse.body());
-                    }
-                }
-            });
+            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -478,7 +439,7 @@ public final class MultipleResponsesImpl implements MultipleResponses {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<Void, A>> get200Model201ModelDefaultError200ValidWithRestResponseAsync() {
+    public Single<BodyResponse<A>> get200Model201ModelDefaultError200ValidWithRestResponseAsync() {
         return service.get200Model201ModelDefaultError200Valid();
     }
 
@@ -489,15 +450,7 @@ public final class MultipleResponsesImpl implements MultipleResponses {
      */
     public Maybe<A> get200Model201ModelDefaultError200ValidAsync() {
         return get200Model201ModelDefaultError200ValidWithRestResponseAsync()
-            .flatMapMaybe(new Function<RestResponse<Void, A>, Maybe<A>>() {
-                public Maybe<A> apply(RestResponse<Void, A> restResponse) {
-                    if (restResponse.body() == null) {
-                        return Maybe.empty();
-                    } else {
-                        return Maybe.just(restResponse.body());
-                    }
-                }
-            });
+            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -527,7 +480,7 @@ public final class MultipleResponsesImpl implements MultipleResponses {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<Void, A>> get200Model201ModelDefaultError201ValidWithRestResponseAsync() {
+    public Single<BodyResponse<A>> get200Model201ModelDefaultError201ValidWithRestResponseAsync() {
         return service.get200Model201ModelDefaultError201Valid();
     }
 
@@ -538,15 +491,7 @@ public final class MultipleResponsesImpl implements MultipleResponses {
      */
     public Maybe<A> get200Model201ModelDefaultError201ValidAsync() {
         return get200Model201ModelDefaultError201ValidWithRestResponseAsync()
-            .flatMapMaybe(new Function<RestResponse<Void, A>, Maybe<A>>() {
-                public Maybe<A> apply(RestResponse<Void, A> restResponse) {
-                    if (restResponse.body() == null) {
-                        return Maybe.empty();
-                    } else {
-                        return Maybe.just(restResponse.body());
-                    }
-                }
-            });
+            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -576,7 +521,7 @@ public final class MultipleResponsesImpl implements MultipleResponses {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<Void, A>> get200Model201ModelDefaultError400ValidWithRestResponseAsync() {
+    public Single<BodyResponse<A>> get200Model201ModelDefaultError400ValidWithRestResponseAsync() {
         return service.get200Model201ModelDefaultError400Valid();
     }
 
@@ -587,15 +532,7 @@ public final class MultipleResponsesImpl implements MultipleResponses {
      */
     public Maybe<A> get200Model201ModelDefaultError400ValidAsync() {
         return get200Model201ModelDefaultError400ValidWithRestResponseAsync()
-            .flatMapMaybe(new Function<RestResponse<Void, A>, Maybe<A>>() {
-                public Maybe<A> apply(RestResponse<Void, A> restResponse) {
-                    if (restResponse.body() == null) {
-                        return Maybe.empty();
-                    } else {
-                        return Maybe.just(restResponse.body());
-                    }
-                }
-            });
+            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -625,7 +562,7 @@ public final class MultipleResponsesImpl implements MultipleResponses {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<Void, Object>> get200ModelA201ModelC404ModelDDefaultError200ValidWithRestResponseAsync() {
+    public Single<BodyResponse<Object>> get200ModelA201ModelC404ModelDDefaultError200ValidWithRestResponseAsync() {
         return service.get200ModelA201ModelC404ModelDDefaultError200Valid();
     }
 
@@ -636,15 +573,7 @@ public final class MultipleResponsesImpl implements MultipleResponses {
      */
     public Maybe<Object> get200ModelA201ModelC404ModelDDefaultError200ValidAsync() {
         return get200ModelA201ModelC404ModelDDefaultError200ValidWithRestResponseAsync()
-            .flatMapMaybe(new Function<RestResponse<Void, Object>, Maybe<Object>>() {
-                public Maybe<Object> apply(RestResponse<Void, Object> restResponse) {
-                    if (restResponse.body() == null) {
-                        return Maybe.empty();
-                    } else {
-                        return Maybe.just(restResponse.body());
-                    }
-                }
-            });
+            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -674,7 +603,7 @@ public final class MultipleResponsesImpl implements MultipleResponses {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<Void, Object>> get200ModelA201ModelC404ModelDDefaultError201ValidWithRestResponseAsync() {
+    public Single<BodyResponse<Object>> get200ModelA201ModelC404ModelDDefaultError201ValidWithRestResponseAsync() {
         return service.get200ModelA201ModelC404ModelDDefaultError201Valid();
     }
 
@@ -685,15 +614,7 @@ public final class MultipleResponsesImpl implements MultipleResponses {
      */
     public Maybe<Object> get200ModelA201ModelC404ModelDDefaultError201ValidAsync() {
         return get200ModelA201ModelC404ModelDDefaultError201ValidWithRestResponseAsync()
-            .flatMapMaybe(new Function<RestResponse<Void, Object>, Maybe<Object>>() {
-                public Maybe<Object> apply(RestResponse<Void, Object> restResponse) {
-                    if (restResponse.body() == null) {
-                        return Maybe.empty();
-                    } else {
-                        return Maybe.just(restResponse.body());
-                    }
-                }
-            });
+            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -723,7 +644,7 @@ public final class MultipleResponsesImpl implements MultipleResponses {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<Void, Object>> get200ModelA201ModelC404ModelDDefaultError404ValidWithRestResponseAsync() {
+    public Single<BodyResponse<Object>> get200ModelA201ModelC404ModelDDefaultError404ValidWithRestResponseAsync() {
         return service.get200ModelA201ModelC404ModelDDefaultError404Valid();
     }
 
@@ -734,15 +655,7 @@ public final class MultipleResponsesImpl implements MultipleResponses {
      */
     public Maybe<Object> get200ModelA201ModelC404ModelDDefaultError404ValidAsync() {
         return get200ModelA201ModelC404ModelDDefaultError404ValidWithRestResponseAsync()
-            .flatMapMaybe(new Function<RestResponse<Void, Object>, Maybe<Object>>() {
-                public Maybe<Object> apply(RestResponse<Void, Object> restResponse) {
-                    if (restResponse.body() == null) {
-                        return Maybe.empty();
-                    } else {
-                        return Maybe.just(restResponse.body());
-                    }
-                }
-            });
+            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -772,7 +685,7 @@ public final class MultipleResponsesImpl implements MultipleResponses {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<Void, Object>> get200ModelA201ModelC404ModelDDefaultError400ValidWithRestResponseAsync() {
+    public Single<BodyResponse<Object>> get200ModelA201ModelC404ModelDDefaultError400ValidWithRestResponseAsync() {
         return service.get200ModelA201ModelC404ModelDDefaultError400Valid();
     }
 
@@ -783,15 +696,7 @@ public final class MultipleResponsesImpl implements MultipleResponses {
      */
     public Maybe<Object> get200ModelA201ModelC404ModelDDefaultError400ValidAsync() {
         return get200ModelA201ModelC404ModelDDefaultError400ValidWithRestResponseAsync()
-            .flatMapMaybe(new Function<RestResponse<Void, Object>, Maybe<Object>>() {
-                public Maybe<Object> apply(RestResponse<Void, Object> restResponse) {
-                    if (restResponse.body() == null) {
-                        return Maybe.empty();
-                    } else {
-                        return Maybe.just(restResponse.body());
-                    }
-                }
-            });
+            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -820,7 +725,7 @@ public final class MultipleResponsesImpl implements MultipleResponses {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<Void, Void>> get202None204NoneDefaultError202NoneWithRestResponseAsync() {
+    public Single<VoidResponse> get202None204NoneDefaultError202NoneWithRestResponseAsync() {
         return service.get202None204NoneDefaultError202None();
     }
 
@@ -860,7 +765,7 @@ public final class MultipleResponsesImpl implements MultipleResponses {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<Void, Void>> get202None204NoneDefaultError204NoneWithRestResponseAsync() {
+    public Single<VoidResponse> get202None204NoneDefaultError204NoneWithRestResponseAsync() {
         return service.get202None204NoneDefaultError204None();
     }
 
@@ -900,7 +805,7 @@ public final class MultipleResponsesImpl implements MultipleResponses {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<Void, Void>> get202None204NoneDefaultError400ValidWithRestResponseAsync() {
+    public Single<VoidResponse> get202None204NoneDefaultError400ValidWithRestResponseAsync() {
         return service.get202None204NoneDefaultError400Valid();
     }
 
@@ -939,7 +844,7 @@ public final class MultipleResponsesImpl implements MultipleResponses {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<Void, Void>> get202None204NoneDefaultNone202InvalidWithRestResponseAsync() {
+    public Single<VoidResponse> get202None204NoneDefaultNone202InvalidWithRestResponseAsync() {
         return service.get202None204NoneDefaultNone202Invalid();
     }
 
@@ -978,7 +883,7 @@ public final class MultipleResponsesImpl implements MultipleResponses {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<Void, Void>> get202None204NoneDefaultNone204NoneWithRestResponseAsync() {
+    public Single<VoidResponse> get202None204NoneDefaultNone204NoneWithRestResponseAsync() {
         return service.get202None204NoneDefaultNone204None();
     }
 
@@ -1017,7 +922,7 @@ public final class MultipleResponsesImpl implements MultipleResponses {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<Void, Void>> get202None204NoneDefaultNone400NoneWithRestResponseAsync() {
+    public Single<VoidResponse> get202None204NoneDefaultNone400NoneWithRestResponseAsync() {
         return service.get202None204NoneDefaultNone400None();
     }
 
@@ -1056,7 +961,7 @@ public final class MultipleResponsesImpl implements MultipleResponses {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<Void, Void>> get202None204NoneDefaultNone400InvalidWithRestResponseAsync() {
+    public Single<VoidResponse> get202None204NoneDefaultNone400InvalidWithRestResponseAsync() {
         return service.get202None204NoneDefaultNone400Invalid();
     }
 
@@ -1097,7 +1002,7 @@ public final class MultipleResponsesImpl implements MultipleResponses {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<Void, A>> getDefaultModelA200ValidWithRestResponseAsync() {
+    public Single<BodyResponse<A>> getDefaultModelA200ValidWithRestResponseAsync() {
         return service.getDefaultModelA200Valid();
     }
 
@@ -1108,15 +1013,7 @@ public final class MultipleResponsesImpl implements MultipleResponses {
      */
     public Maybe<A> getDefaultModelA200ValidAsync() {
         return getDefaultModelA200ValidWithRestResponseAsync()
-            .flatMapMaybe(new Function<RestResponse<Void, A>, Maybe<A>>() {
-                public Maybe<A> apply(RestResponse<Void, A> restResponse) {
-                    if (restResponse.body() == null) {
-                        return Maybe.empty();
-                    } else {
-                        return Maybe.just(restResponse.body());
-                    }
-                }
-            });
+            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -1146,7 +1043,7 @@ public final class MultipleResponsesImpl implements MultipleResponses {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<Void, A>> getDefaultModelA200NoneWithRestResponseAsync() {
+    public Single<BodyResponse<A>> getDefaultModelA200NoneWithRestResponseAsync() {
         return service.getDefaultModelA200None();
     }
 
@@ -1157,15 +1054,7 @@ public final class MultipleResponsesImpl implements MultipleResponses {
      */
     public Maybe<A> getDefaultModelA200NoneAsync() {
         return getDefaultModelA200NoneWithRestResponseAsync()
-            .flatMapMaybe(new Function<RestResponse<Void, A>, Maybe<A>>() {
-                public Maybe<A> apply(RestResponse<Void, A> restResponse) {
-                    if (restResponse.body() == null) {
-                        return Maybe.empty();
-                    } else {
-                        return Maybe.just(restResponse.body());
-                    }
-                }
-            });
+            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -1195,7 +1084,7 @@ public final class MultipleResponsesImpl implements MultipleResponses {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<Void, A>> getDefaultModelA400ValidWithRestResponseAsync() {
+    public Single<BodyResponse<A>> getDefaultModelA400ValidWithRestResponseAsync() {
         return service.getDefaultModelA400Valid();
     }
 
@@ -1206,15 +1095,7 @@ public final class MultipleResponsesImpl implements MultipleResponses {
      */
     public Maybe<A> getDefaultModelA400ValidAsync() {
         return getDefaultModelA400ValidWithRestResponseAsync()
-            .flatMapMaybe(new Function<RestResponse<Void, A>, Maybe<A>>() {
-                public Maybe<A> apply(RestResponse<Void, A> restResponse) {
-                    if (restResponse.body() == null) {
-                        return Maybe.empty();
-                    } else {
-                        return Maybe.just(restResponse.body());
-                    }
-                }
-            });
+            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -1244,7 +1125,7 @@ public final class MultipleResponsesImpl implements MultipleResponses {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<Void, A>> getDefaultModelA400NoneWithRestResponseAsync() {
+    public Single<BodyResponse<A>> getDefaultModelA400NoneWithRestResponseAsync() {
         return service.getDefaultModelA400None();
     }
 
@@ -1255,15 +1136,7 @@ public final class MultipleResponsesImpl implements MultipleResponses {
      */
     public Maybe<A> getDefaultModelA400NoneAsync() {
         return getDefaultModelA400NoneWithRestResponseAsync()
-            .flatMapMaybe(new Function<RestResponse<Void, A>, Maybe<A>>() {
-                public Maybe<A> apply(RestResponse<Void, A> restResponse) {
-                    if (restResponse.body() == null) {
-                        return Maybe.empty();
-                    } else {
-                        return Maybe.just(restResponse.body());
-                    }
-                }
-            });
+            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -1291,7 +1164,7 @@ public final class MultipleResponsesImpl implements MultipleResponses {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<Void, Void>> getDefaultNone200InvalidWithRestResponseAsync() {
+    public Single<VoidResponse> getDefaultNone200InvalidWithRestResponseAsync() {
         return service.getDefaultNone200Invalid();
     }
 
@@ -1330,7 +1203,7 @@ public final class MultipleResponsesImpl implements MultipleResponses {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<Void, Void>> getDefaultNone200NoneWithRestResponseAsync() {
+    public Single<VoidResponse> getDefaultNone200NoneWithRestResponseAsync() {
         return service.getDefaultNone200None();
     }
 
@@ -1369,7 +1242,7 @@ public final class MultipleResponsesImpl implements MultipleResponses {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<Void, Void>> getDefaultNone400InvalidWithRestResponseAsync() {
+    public Single<VoidResponse> getDefaultNone400InvalidWithRestResponseAsync() {
         return service.getDefaultNone400Invalid();
     }
 
@@ -1408,7 +1281,7 @@ public final class MultipleResponsesImpl implements MultipleResponses {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<Void, Void>> getDefaultNone400NoneWithRestResponseAsync() {
+    public Single<VoidResponse> getDefaultNone400NoneWithRestResponseAsync() {
         return service.getDefaultNone400None();
     }
 
@@ -1448,7 +1321,7 @@ public final class MultipleResponsesImpl implements MultipleResponses {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<Void, A>> get200ModelA200NoneWithRestResponseAsync() {
+    public Single<BodyResponse<A>> get200ModelA200NoneWithRestResponseAsync() {
         return service.get200ModelA200None();
     }
 
@@ -1459,15 +1332,7 @@ public final class MultipleResponsesImpl implements MultipleResponses {
      */
     public Maybe<A> get200ModelA200NoneAsync() {
         return get200ModelA200NoneWithRestResponseAsync()
-            .flatMapMaybe(new Function<RestResponse<Void, A>, Maybe<A>>() {
-                public Maybe<A> apply(RestResponse<Void, A> restResponse) {
-                    if (restResponse.body() == null) {
-                        return Maybe.empty();
-                    } else {
-                        return Maybe.just(restResponse.body());
-                    }
-                }
-            });
+            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -1496,7 +1361,7 @@ public final class MultipleResponsesImpl implements MultipleResponses {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<Void, A>> get200ModelA200ValidWithRestResponseAsync() {
+    public Single<BodyResponse<A>> get200ModelA200ValidWithRestResponseAsync() {
         return service.get200ModelA200Valid();
     }
 
@@ -1507,15 +1372,7 @@ public final class MultipleResponsesImpl implements MultipleResponses {
      */
     public Maybe<A> get200ModelA200ValidAsync() {
         return get200ModelA200ValidWithRestResponseAsync()
-            .flatMapMaybe(new Function<RestResponse<Void, A>, Maybe<A>>() {
-                public Maybe<A> apply(RestResponse<Void, A> restResponse) {
-                    if (restResponse.body() == null) {
-                        return Maybe.empty();
-                    } else {
-                        return Maybe.just(restResponse.body());
-                    }
-                }
-            });
+            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -1544,7 +1401,7 @@ public final class MultipleResponsesImpl implements MultipleResponses {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<Void, A>> get200ModelA200InvalidWithRestResponseAsync() {
+    public Single<BodyResponse<A>> get200ModelA200InvalidWithRestResponseAsync() {
         return service.get200ModelA200Invalid();
     }
 
@@ -1555,15 +1412,7 @@ public final class MultipleResponsesImpl implements MultipleResponses {
      */
     public Maybe<A> get200ModelA200InvalidAsync() {
         return get200ModelA200InvalidWithRestResponseAsync()
-            .flatMapMaybe(new Function<RestResponse<Void, A>, Maybe<A>>() {
-                public Maybe<A> apply(RestResponse<Void, A> restResponse) {
-                    if (restResponse.body() == null) {
-                        return Maybe.empty();
-                    } else {
-                        return Maybe.just(restResponse.body());
-                    }
-                }
-            });
+            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -1592,7 +1441,7 @@ public final class MultipleResponsesImpl implements MultipleResponses {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<Void, A>> get200ModelA400NoneWithRestResponseAsync() {
+    public Single<BodyResponse<A>> get200ModelA400NoneWithRestResponseAsync() {
         return service.get200ModelA400None();
     }
 
@@ -1603,15 +1452,7 @@ public final class MultipleResponsesImpl implements MultipleResponses {
      */
     public Maybe<A> get200ModelA400NoneAsync() {
         return get200ModelA400NoneWithRestResponseAsync()
-            .flatMapMaybe(new Function<RestResponse<Void, A>, Maybe<A>>() {
-                public Maybe<A> apply(RestResponse<Void, A> restResponse) {
-                    if (restResponse.body() == null) {
-                        return Maybe.empty();
-                    } else {
-                        return Maybe.just(restResponse.body());
-                    }
-                }
-            });
+            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -1640,7 +1481,7 @@ public final class MultipleResponsesImpl implements MultipleResponses {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<Void, A>> get200ModelA400ValidWithRestResponseAsync() {
+    public Single<BodyResponse<A>> get200ModelA400ValidWithRestResponseAsync() {
         return service.get200ModelA400Valid();
     }
 
@@ -1651,15 +1492,7 @@ public final class MultipleResponsesImpl implements MultipleResponses {
      */
     public Maybe<A> get200ModelA400ValidAsync() {
         return get200ModelA400ValidWithRestResponseAsync()
-            .flatMapMaybe(new Function<RestResponse<Void, A>, Maybe<A>>() {
-                public Maybe<A> apply(RestResponse<Void, A> restResponse) {
-                    if (restResponse.body() == null) {
-                        return Maybe.empty();
-                    } else {
-                        return Maybe.just(restResponse.body());
-                    }
-                }
-            });
+            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -1688,7 +1521,7 @@ public final class MultipleResponsesImpl implements MultipleResponses {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<Void, A>> get200ModelA400InvalidWithRestResponseAsync() {
+    public Single<BodyResponse<A>> get200ModelA400InvalidWithRestResponseAsync() {
         return service.get200ModelA400Invalid();
     }
 
@@ -1699,15 +1532,7 @@ public final class MultipleResponsesImpl implements MultipleResponses {
      */
     public Maybe<A> get200ModelA400InvalidAsync() {
         return get200ModelA400InvalidWithRestResponseAsync()
-            .flatMapMaybe(new Function<RestResponse<Void, A>, Maybe<A>>() {
-                public Maybe<A> apply(RestResponse<Void, A> restResponse) {
-                    if (restResponse.body() == null) {
-                        return Maybe.empty();
-                    } else {
-                        return Maybe.just(restResponse.body());
-                    }
-                }
-            });
+            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -1736,7 +1561,7 @@ public final class MultipleResponsesImpl implements MultipleResponses {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<Void, A>> get200ModelA202ValidWithRestResponseAsync() {
+    public Single<BodyResponse<A>> get200ModelA202ValidWithRestResponseAsync() {
         return service.get200ModelA202Valid();
     }
 
@@ -1747,14 +1572,6 @@ public final class MultipleResponsesImpl implements MultipleResponses {
      */
     public Maybe<A> get200ModelA202ValidAsync() {
         return get200ModelA202ValidWithRestResponseAsync()
-            .flatMapMaybe(new Function<RestResponse<Void, A>, Maybe<A>>() {
-                public Maybe<A> apply(RestResponse<Void, A> restResponse) {
-                    if (restResponse.body() == null) {
-                        return Maybe.empty();
-                    } else {
-                        return Maybe.just(restResponse.body());
-                    }
-                }
-            });
+            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 }

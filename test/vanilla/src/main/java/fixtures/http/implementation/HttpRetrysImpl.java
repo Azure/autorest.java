@@ -11,9 +11,9 @@
 package fixtures.http.implementation;
 
 import com.microsoft.rest.v2.RestProxy;
-import com.microsoft.rest.v2.RestResponse;
 import com.microsoft.rest.v2.ServiceCallback;
 import com.microsoft.rest.v2.ServiceFuture;
+import com.microsoft.rest.v2.VoidResponse;
 import com.microsoft.rest.v2.annotations.BodyParam;
 import com.microsoft.rest.v2.annotations.DELETE;
 import com.microsoft.rest.v2.annotations.ExpectedResponses;
@@ -63,42 +63,42 @@ public final class HttpRetrysImpl implements HttpRetrys {
         @HEAD("http/retry/408")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<RestResponse<Void, Void>> head408();
+        Single<VoidResponse> head408();
 
         @PUT("http/retry/500")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<RestResponse<Void, Void>> put500(@BodyParam("application/json; charset=utf-8") Boolean booleanValue);
+        Single<VoidResponse> put500(@BodyParam("application/json; charset=utf-8") Boolean booleanValue);
 
         @PATCH("http/retry/500")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<RestResponse<Void, Void>> patch500(@BodyParam("application/json; charset=utf-8") Boolean booleanValue);
+        Single<VoidResponse> patch500(@BodyParam("application/json; charset=utf-8") Boolean booleanValue);
 
         @GET("http/retry/502")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<RestResponse<Void, Void>> get502();
+        Single<VoidResponse> get502();
 
         @POST("http/retry/503")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<RestResponse<Void, Void>> post503(@BodyParam("application/json; charset=utf-8") Boolean booleanValue);
+        Single<VoidResponse> post503(@BodyParam("application/json; charset=utf-8") Boolean booleanValue);
 
         @DELETE("http/retry/503")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<RestResponse<Void, Void>> delete503(@BodyParam("application/json; charset=utf-8") Boolean booleanValue);
+        Single<VoidResponse> delete503(@BodyParam("application/json; charset=utf-8") Boolean booleanValue);
 
         @PUT("http/retry/504")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<RestResponse<Void, Void>> put504(@BodyParam("application/json; charset=utf-8") Boolean booleanValue);
+        Single<VoidResponse> put504(@BodyParam("application/json; charset=utf-8") Boolean booleanValue);
 
         @PATCH("http/retry/504")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<RestResponse<Void, Void>> patch504(@BodyParam("application/json; charset=utf-8") Boolean booleanValue);
+        Single<VoidResponse> patch504(@BodyParam("application/json; charset=utf-8") Boolean booleanValue);
     }
 
     /**
@@ -127,7 +127,7 @@ public final class HttpRetrysImpl implements HttpRetrys {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<Void, Void>> head408WithRestResponseAsync() {
+    public Single<VoidResponse> head408WithRestResponseAsync() {
         return service.head408();
     }
 
@@ -167,7 +167,7 @@ public final class HttpRetrysImpl implements HttpRetrys {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<Void, Void>> put500WithRestResponseAsync() {
+    public Single<VoidResponse> put500WithRestResponseAsync() {
         final Boolean booleanValue = null;
         return service.put500(booleanValue);
     }
@@ -213,7 +213,7 @@ public final class HttpRetrysImpl implements HttpRetrys {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<Void, Void>> put500WithRestResponseAsync(Boolean booleanValue) {
+    public Single<VoidResponse> put500WithRestResponseAsync(Boolean booleanValue) {
         return service.put500(booleanValue);
     }
 
@@ -255,7 +255,7 @@ public final class HttpRetrysImpl implements HttpRetrys {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<Void, Void>> patch500WithRestResponseAsync() {
+    public Single<VoidResponse> patch500WithRestResponseAsync() {
         final Boolean booleanValue = null;
         return service.patch500(booleanValue);
     }
@@ -301,7 +301,7 @@ public final class HttpRetrysImpl implements HttpRetrys {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<Void, Void>> patch500WithRestResponseAsync(Boolean booleanValue) {
+    public Single<VoidResponse> patch500WithRestResponseAsync(Boolean booleanValue) {
         return service.patch500(booleanValue);
     }
 
@@ -343,7 +343,7 @@ public final class HttpRetrysImpl implements HttpRetrys {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<Void, Void>> get502WithRestResponseAsync() {
+    public Single<VoidResponse> get502WithRestResponseAsync() {
         return service.get502();
     }
 
@@ -383,7 +383,7 @@ public final class HttpRetrysImpl implements HttpRetrys {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<Void, Void>> post503WithRestResponseAsync() {
+    public Single<VoidResponse> post503WithRestResponseAsync() {
         final Boolean booleanValue = null;
         return service.post503(booleanValue);
     }
@@ -429,7 +429,7 @@ public final class HttpRetrysImpl implements HttpRetrys {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<Void, Void>> post503WithRestResponseAsync(Boolean booleanValue) {
+    public Single<VoidResponse> post503WithRestResponseAsync(Boolean booleanValue) {
         return service.post503(booleanValue);
     }
 
@@ -471,7 +471,7 @@ public final class HttpRetrysImpl implements HttpRetrys {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<Void, Void>> delete503WithRestResponseAsync() {
+    public Single<VoidResponse> delete503WithRestResponseAsync() {
         final Boolean booleanValue = null;
         return service.delete503(booleanValue);
     }
@@ -517,7 +517,7 @@ public final class HttpRetrysImpl implements HttpRetrys {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<Void, Void>> delete503WithRestResponseAsync(Boolean booleanValue) {
+    public Single<VoidResponse> delete503WithRestResponseAsync(Boolean booleanValue) {
         return service.delete503(booleanValue);
     }
 
@@ -559,7 +559,7 @@ public final class HttpRetrysImpl implements HttpRetrys {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<Void, Void>> put504WithRestResponseAsync() {
+    public Single<VoidResponse> put504WithRestResponseAsync() {
         final Boolean booleanValue = null;
         return service.put504(booleanValue);
     }
@@ -605,7 +605,7 @@ public final class HttpRetrysImpl implements HttpRetrys {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<Void, Void>> put504WithRestResponseAsync(Boolean booleanValue) {
+    public Single<VoidResponse> put504WithRestResponseAsync(Boolean booleanValue) {
         return service.put504(booleanValue);
     }
 
@@ -647,7 +647,7 @@ public final class HttpRetrysImpl implements HttpRetrys {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<Void, Void>> patch504WithRestResponseAsync() {
+    public Single<VoidResponse> patch504WithRestResponseAsync() {
         final Boolean booleanValue = null;
         return service.patch504(booleanValue);
     }
@@ -693,7 +693,7 @@ public final class HttpRetrysImpl implements HttpRetrys {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<Void, Void>> patch504WithRestResponseAsync(Boolean booleanValue) {
+    public Single<VoidResponse> patch504WithRestResponseAsync(Boolean booleanValue) {
         return service.patch504(booleanValue);
     }
 

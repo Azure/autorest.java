@@ -11,12 +11,13 @@
 package fixtures.bodydictionary.implementation;
 
 import com.microsoft.rest.v2.Base64Url;
+import com.microsoft.rest.v2.BodyResponse;
 import com.microsoft.rest.v2.DateTimeRfc1123;
 import com.microsoft.rest.v2.RestProxy;
-import com.microsoft.rest.v2.RestResponse;
 import com.microsoft.rest.v2.ServiceCallback;
 import com.microsoft.rest.v2.ServiceFuture;
 import com.microsoft.rest.v2.Validator;
+import com.microsoft.rest.v2.VoidResponse;
 import com.microsoft.rest.v2.annotations.BodyParam;
 import com.microsoft.rest.v2.annotations.ExpectedResponses;
 import com.microsoft.rest.v2.annotations.GET;
@@ -74,329 +75,329 @@ public final class DictionarysImpl implements Dictionarys {
         @GET("dictionary/null")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<RestResponse<Void, Map<String, Integer>>> getNull();
+        Single<BodyResponse<Map<String, Integer>>> getNull();
 
         @GET("dictionary/empty")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<RestResponse<Void, Map<String, Integer>>> getEmpty();
+        Single<BodyResponse<Map<String, Integer>>> getEmpty();
 
         @PUT("dictionary/empty")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<RestResponse<Void, Void>> putEmpty(@BodyParam("application/json; charset=utf-8") Map<String, String> arrayBody);
+        Single<VoidResponse> putEmpty(@BodyParam("application/json; charset=utf-8") Map<String, String> arrayBody);
 
         @GET("dictionary/nullvalue")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<RestResponse<Void, Map<String, String>>> getNullValue();
+        Single<BodyResponse<Map<String, String>>> getNullValue();
 
         @GET("dictionary/nullkey")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<RestResponse<Void, Map<String, String>>> getNullKey();
+        Single<BodyResponse<Map<String, String>>> getNullKey();
 
         @GET("dictionary/keyemptystring")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<RestResponse<Void, Map<String, String>>> getEmptyStringKey();
+        Single<BodyResponse<Map<String, String>>> getEmptyStringKey();
 
         @GET("dictionary/invalid")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<RestResponse<Void, Map<String, String>>> getInvalid();
+        Single<BodyResponse<Map<String, String>>> getInvalid();
 
         @GET("dictionary/prim/boolean/tfft")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<RestResponse<Void, Map<String, Boolean>>> getBooleanTfft();
+        Single<BodyResponse<Map<String, Boolean>>> getBooleanTfft();
 
         @PUT("dictionary/prim/boolean/tfft")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<RestResponse<Void, Void>> putBooleanTfft(@BodyParam("application/json; charset=utf-8") Map<String, Boolean> arrayBody);
+        Single<VoidResponse> putBooleanTfft(@BodyParam("application/json; charset=utf-8") Map<String, Boolean> arrayBody);
 
         @GET("dictionary/prim/boolean/true.null.false")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<RestResponse<Void, Map<String, Boolean>>> getBooleanInvalidNull();
+        Single<BodyResponse<Map<String, Boolean>>> getBooleanInvalidNull();
 
         @GET("dictionary/prim/boolean/true.boolean.false")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<RestResponse<Void, Map<String, Boolean>>> getBooleanInvalidString();
+        Single<BodyResponse<Map<String, Boolean>>> getBooleanInvalidString();
 
         @GET("dictionary/prim/integer/1.-1.3.300")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<RestResponse<Void, Map<String, Integer>>> getIntegerValid();
+        Single<BodyResponse<Map<String, Integer>>> getIntegerValid();
 
         @PUT("dictionary/prim/integer/1.-1.3.300")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<RestResponse<Void, Void>> putIntegerValid(@BodyParam("application/json; charset=utf-8") Map<String, Integer> arrayBody);
+        Single<VoidResponse> putIntegerValid(@BodyParam("application/json; charset=utf-8") Map<String, Integer> arrayBody);
 
         @GET("dictionary/prim/integer/1.null.zero")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<RestResponse<Void, Map<String, Integer>>> getIntInvalidNull();
+        Single<BodyResponse<Map<String, Integer>>> getIntInvalidNull();
 
         @GET("dictionary/prim/integer/1.integer.0")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<RestResponse<Void, Map<String, Integer>>> getIntInvalidString();
+        Single<BodyResponse<Map<String, Integer>>> getIntInvalidString();
 
         @GET("dictionary/prim/long/1.-1.3.300")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<RestResponse<Void, Map<String, Long>>> getLongValid();
+        Single<BodyResponse<Map<String, Long>>> getLongValid();
 
         @PUT("dictionary/prim/long/1.-1.3.300")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<RestResponse<Void, Void>> putLongValid(@BodyParam("application/json; charset=utf-8") Map<String, Long> arrayBody);
+        Single<VoidResponse> putLongValid(@BodyParam("application/json; charset=utf-8") Map<String, Long> arrayBody);
 
         @GET("dictionary/prim/long/1.null.zero")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<RestResponse<Void, Map<String, Long>>> getLongInvalidNull();
+        Single<BodyResponse<Map<String, Long>>> getLongInvalidNull();
 
         @GET("dictionary/prim/long/1.integer.0")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<RestResponse<Void, Map<String, Long>>> getLongInvalidString();
+        Single<BodyResponse<Map<String, Long>>> getLongInvalidString();
 
         @GET("dictionary/prim/float/0--0.01-1.2e20")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<RestResponse<Void, Map<String, Double>>> getFloatValid();
+        Single<BodyResponse<Map<String, Double>>> getFloatValid();
 
         @PUT("dictionary/prim/float/0--0.01-1.2e20")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<RestResponse<Void, Void>> putFloatValid(@BodyParam("application/json; charset=utf-8") Map<String, Double> arrayBody);
+        Single<VoidResponse> putFloatValid(@BodyParam("application/json; charset=utf-8") Map<String, Double> arrayBody);
 
         @GET("dictionary/prim/float/0.0-null-1.2e20")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<RestResponse<Void, Map<String, Double>>> getFloatInvalidNull();
+        Single<BodyResponse<Map<String, Double>>> getFloatInvalidNull();
 
         @GET("dictionary/prim/float/1.number.0")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<RestResponse<Void, Map<String, Double>>> getFloatInvalidString();
+        Single<BodyResponse<Map<String, Double>>> getFloatInvalidString();
 
         @GET("dictionary/prim/double/0--0.01-1.2e20")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<RestResponse<Void, Map<String, Double>>> getDoubleValid();
+        Single<BodyResponse<Map<String, Double>>> getDoubleValid();
 
         @PUT("dictionary/prim/double/0--0.01-1.2e20")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<RestResponse<Void, Void>> putDoubleValid(@BodyParam("application/json; charset=utf-8") Map<String, Double> arrayBody);
+        Single<VoidResponse> putDoubleValid(@BodyParam("application/json; charset=utf-8") Map<String, Double> arrayBody);
 
         @GET("dictionary/prim/double/0.0-null-1.2e20")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<RestResponse<Void, Map<String, Double>>> getDoubleInvalidNull();
+        Single<BodyResponse<Map<String, Double>>> getDoubleInvalidNull();
 
         @GET("dictionary/prim/double/1.number.0")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<RestResponse<Void, Map<String, Double>>> getDoubleInvalidString();
+        Single<BodyResponse<Map<String, Double>>> getDoubleInvalidString();
 
         @GET("dictionary/prim/string/foo1.foo2.foo3")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<RestResponse<Void, Map<String, String>>> getStringValid();
+        Single<BodyResponse<Map<String, String>>> getStringValid();
 
         @PUT("dictionary/prim/string/foo1.foo2.foo3")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<RestResponse<Void, Void>> putStringValid(@BodyParam("application/json; charset=utf-8") Map<String, String> arrayBody);
+        Single<VoidResponse> putStringValid(@BodyParam("application/json; charset=utf-8") Map<String, String> arrayBody);
 
         @GET("dictionary/prim/string/foo.null.foo2")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<RestResponse<Void, Map<String, String>>> getStringWithNull();
+        Single<BodyResponse<Map<String, String>>> getStringWithNull();
 
         @GET("dictionary/prim/string/foo.123.foo2")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<RestResponse<Void, Map<String, String>>> getStringWithInvalid();
+        Single<BodyResponse<Map<String, String>>> getStringWithInvalid();
 
         @GET("dictionary/prim/date/valid")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<RestResponse<Void, Map<String, LocalDate>>> getDateValid();
+        Single<BodyResponse<Map<String, LocalDate>>> getDateValid();
 
         @PUT("dictionary/prim/date/valid")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<RestResponse<Void, Void>> putDateValid(@BodyParam("application/json; charset=utf-8") Map<String, LocalDate> arrayBody);
+        Single<VoidResponse> putDateValid(@BodyParam("application/json; charset=utf-8") Map<String, LocalDate> arrayBody);
 
         @GET("dictionary/prim/date/invalidnull")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<RestResponse<Void, Map<String, LocalDate>>> getDateInvalidNull();
+        Single<BodyResponse<Map<String, LocalDate>>> getDateInvalidNull();
 
         @GET("dictionary/prim/date/invalidchars")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<RestResponse<Void, Map<String, LocalDate>>> getDateInvalidChars();
+        Single<BodyResponse<Map<String, LocalDate>>> getDateInvalidChars();
 
         @GET("dictionary/prim/date-time/valid")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<RestResponse<Void, Map<String, DateTime>>> getDateTimeValid();
+        Single<BodyResponse<Map<String, DateTime>>> getDateTimeValid();
 
         @PUT("dictionary/prim/date-time/valid")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<RestResponse<Void, Void>> putDateTimeValid(@BodyParam("application/json; charset=utf-8") Map<String, DateTime> arrayBody);
+        Single<VoidResponse> putDateTimeValid(@BodyParam("application/json; charset=utf-8") Map<String, DateTime> arrayBody);
 
         @GET("dictionary/prim/date-time/invalidnull")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<RestResponse<Void, Map<String, DateTime>>> getDateTimeInvalidNull();
+        Single<BodyResponse<Map<String, DateTime>>> getDateTimeInvalidNull();
 
         @GET("dictionary/prim/date-time/invalidchars")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<RestResponse<Void, Map<String, DateTime>>> getDateTimeInvalidChars();
+        Single<BodyResponse<Map<String, DateTime>>> getDateTimeInvalidChars();
 
         @GET("dictionary/prim/date-time-rfc1123/valid")
         @ExpectedResponses({200})
         @ReturnValueWireType(DateTimeRfc1123.class)
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<RestResponse<Void, Map<String, DateTime>>> getDateTimeRfc1123Valid();
+        Single<BodyResponse<Map<String, DateTime>>> getDateTimeRfc1123Valid();
 
         @PUT("dictionary/prim/date-time-rfc1123/valid")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<RestResponse<Void, Void>> putDateTimeRfc1123Valid(@BodyParam("application/json; charset=utf-8") Map<String, DateTimeRfc1123> arrayBody);
+        Single<VoidResponse> putDateTimeRfc1123Valid(@BodyParam("application/json; charset=utf-8") Map<String, DateTimeRfc1123> arrayBody);
 
         @GET("dictionary/prim/duration/valid")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<RestResponse<Void, Map<String, Period>>> getDurationValid();
+        Single<BodyResponse<Map<String, Period>>> getDurationValid();
 
         @PUT("dictionary/prim/duration/valid")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<RestResponse<Void, Void>> putDurationValid(@BodyParam("application/json; charset=utf-8") Map<String, Period> arrayBody);
+        Single<VoidResponse> putDurationValid(@BodyParam("application/json; charset=utf-8") Map<String, Period> arrayBody);
 
         @GET("dictionary/prim/byte/valid")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<RestResponse<Void, Map<String, byte[]>>> getByteValid();
+        Single<BodyResponse<Map<String, byte[]>>> getByteValid();
 
         @PUT("dictionary/prim/byte/valid")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<RestResponse<Void, Void>> putByteValid(@BodyParam("application/json; charset=utf-8") Map<String, byte[]> arrayBody);
+        Single<VoidResponse> putByteValid(@BodyParam("application/json; charset=utf-8") Map<String, byte[]> arrayBody);
 
         @GET("dictionary/prim/byte/invalidnull")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<RestResponse<Void, Map<String, byte[]>>> getByteInvalidNull();
+        Single<BodyResponse<Map<String, byte[]>>> getByteInvalidNull();
 
         @GET("dictionary/prim/base64url/valid")
         @ExpectedResponses({200})
         @ReturnValueWireType(Base64Url.class)
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<RestResponse<Void, Map<String, byte[]>>> getBase64Url();
+        Single<BodyResponse<Map<String, byte[]>>> getBase64Url();
 
         @GET("dictionary/complex/null")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<RestResponse<Void, Map<String, Widget>>> getComplexNull();
+        Single<BodyResponse<Map<String, Widget>>> getComplexNull();
 
         @GET("dictionary/complex/empty")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<RestResponse<Void, Map<String, Widget>>> getComplexEmpty();
+        Single<BodyResponse<Map<String, Widget>>> getComplexEmpty();
 
         @GET("dictionary/complex/itemnull")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<RestResponse<Void, Map<String, Widget>>> getComplexItemNull();
+        Single<BodyResponse<Map<String, Widget>>> getComplexItemNull();
 
         @GET("dictionary/complex/itemempty")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<RestResponse<Void, Map<String, Widget>>> getComplexItemEmpty();
+        Single<BodyResponse<Map<String, Widget>>> getComplexItemEmpty();
 
         @GET("dictionary/complex/valid")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<RestResponse<Void, Map<String, Widget>>> getComplexValid();
+        Single<BodyResponse<Map<String, Widget>>> getComplexValid();
 
         @PUT("dictionary/complex/valid")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<RestResponse<Void, Void>> putComplexValid(@BodyParam("application/json; charset=utf-8") Map<String, Widget> arrayBody);
+        Single<VoidResponse> putComplexValid(@BodyParam("application/json; charset=utf-8") Map<String, Widget> arrayBody);
 
         @GET("dictionary/array/null")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<RestResponse<Void, Map<String, List<String>>>> getArrayNull();
+        Single<BodyResponse<Map<String, List<String>>>> getArrayNull();
 
         @GET("dictionary/array/empty")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<RestResponse<Void, Map<String, List<String>>>> getArrayEmpty();
+        Single<BodyResponse<Map<String, List<String>>>> getArrayEmpty();
 
         @GET("dictionary/array/itemnull")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<RestResponse<Void, Map<String, List<String>>>> getArrayItemNull();
+        Single<BodyResponse<Map<String, List<String>>>> getArrayItemNull();
 
         @GET("dictionary/array/itemempty")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<RestResponse<Void, Map<String, List<String>>>> getArrayItemEmpty();
+        Single<BodyResponse<Map<String, List<String>>>> getArrayItemEmpty();
 
         @GET("dictionary/array/valid")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<RestResponse<Void, Map<String, List<String>>>> getArrayValid();
+        Single<BodyResponse<Map<String, List<String>>>> getArrayValid();
 
         @PUT("dictionary/array/valid")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<RestResponse<Void, Void>> putArrayValid(@BodyParam("application/json; charset=utf-8") Map<String, List<String>> arrayBody);
+        Single<VoidResponse> putArrayValid(@BodyParam("application/json; charset=utf-8") Map<String, List<String>> arrayBody);
 
         @GET("dictionary/dictionary/null")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<RestResponse<Void, Map<String, Map<String, String>>>> getDictionaryNull();
+        Single<BodyResponse<Map<String, Map<String, String>>>> getDictionaryNull();
 
         @GET("dictionary/dictionary/empty")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<RestResponse<Void, Map<String, Map<String, String>>>> getDictionaryEmpty();
+        Single<BodyResponse<Map<String, Map<String, String>>>> getDictionaryEmpty();
 
         @GET("dictionary/dictionary/itemnull")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<RestResponse<Void, Map<String, Map<String, String>>>> getDictionaryItemNull();
+        Single<BodyResponse<Map<String, Map<String, String>>>> getDictionaryItemNull();
 
         @GET("dictionary/dictionary/itemempty")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<RestResponse<Void, Map<String, Map<String, String>>>> getDictionaryItemEmpty();
+        Single<BodyResponse<Map<String, Map<String, String>>>> getDictionaryItemEmpty();
 
         @GET("dictionary/dictionary/valid")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<RestResponse<Void, Map<String, Map<String, String>>>> getDictionaryValid();
+        Single<BodyResponse<Map<String, Map<String, String>>>> getDictionaryValid();
 
         @PUT("dictionary/dictionary/valid")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<RestResponse<Void, Void>> putDictionaryValid(@BodyParam("application/json; charset=utf-8") Map<String, Map<String, String>> arrayBody);
+        Single<VoidResponse> putDictionaryValid(@BodyParam("application/json; charset=utf-8") Map<String, Map<String, String>> arrayBody);
     }
 
     /**
@@ -426,7 +427,7 @@ public final class DictionarysImpl implements Dictionarys {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<Void, Map<String, Integer>>> getNullWithRestResponseAsync() {
+    public Single<BodyResponse<Map<String, Integer>>> getNullWithRestResponseAsync() {
         return service.getNull();
     }
 
@@ -437,15 +438,7 @@ public final class DictionarysImpl implements Dictionarys {
      */
     public Maybe<Map<String, Integer>> getNullAsync() {
         return getNullWithRestResponseAsync()
-            .flatMapMaybe(new Function<RestResponse<Void, Map<String, Integer>>, Maybe<Map<String, Integer>>>() {
-                public Maybe<Map<String, Integer>> apply(RestResponse<Void, Map<String, Integer>> restResponse) {
-                    if (restResponse.body() == null) {
-                        return Maybe.empty();
-                    } else {
-                        return Maybe.just(restResponse.body());
-                    }
-                }
-            });
+            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -475,7 +468,7 @@ public final class DictionarysImpl implements Dictionarys {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<Void, Map<String, Integer>>> getEmptyWithRestResponseAsync() {
+    public Single<BodyResponse<Map<String, Integer>>> getEmptyWithRestResponseAsync() {
         return service.getEmpty();
     }
 
@@ -486,15 +479,7 @@ public final class DictionarysImpl implements Dictionarys {
      */
     public Maybe<Map<String, Integer>> getEmptyAsync() {
         return getEmptyWithRestResponseAsync()
-            .flatMapMaybe(new Function<RestResponse<Void, Map<String, Integer>>, Maybe<Map<String, Integer>>>() {
-                public Maybe<Map<String, Integer>> apply(RestResponse<Void, Map<String, Integer>> restResponse) {
-                    if (restResponse.body() == null) {
-                        return Maybe.empty();
-                    } else {
-                        return Maybe.just(restResponse.body());
-                    }
-                }
-            });
+            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -528,7 +513,7 @@ public final class DictionarysImpl implements Dictionarys {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<Void, Void>> putEmptyWithRestResponseAsync(@NonNull Map<String, String> arrayBody) {
+    public Single<VoidResponse> putEmptyWithRestResponseAsync(@NonNull Map<String, String> arrayBody) {
         if (arrayBody == null) {
             throw new IllegalArgumentException("Parameter arrayBody is required and cannot be null.");
         }
@@ -575,7 +560,7 @@ public final class DictionarysImpl implements Dictionarys {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<Void, Map<String, String>>> getNullValueWithRestResponseAsync() {
+    public Single<BodyResponse<Map<String, String>>> getNullValueWithRestResponseAsync() {
         return service.getNullValue();
     }
 
@@ -586,15 +571,7 @@ public final class DictionarysImpl implements Dictionarys {
      */
     public Maybe<Map<String, String>> getNullValueAsync() {
         return getNullValueWithRestResponseAsync()
-            .flatMapMaybe(new Function<RestResponse<Void, Map<String, String>>, Maybe<Map<String, String>>>() {
-                public Maybe<Map<String, String>> apply(RestResponse<Void, Map<String, String>> restResponse) {
-                    if (restResponse.body() == null) {
-                        return Maybe.empty();
-                    } else {
-                        return Maybe.just(restResponse.body());
-                    }
-                }
-            });
+            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -624,7 +601,7 @@ public final class DictionarysImpl implements Dictionarys {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<Void, Map<String, String>>> getNullKeyWithRestResponseAsync() {
+    public Single<BodyResponse<Map<String, String>>> getNullKeyWithRestResponseAsync() {
         return service.getNullKey();
     }
 
@@ -635,15 +612,7 @@ public final class DictionarysImpl implements Dictionarys {
      */
     public Maybe<Map<String, String>> getNullKeyAsync() {
         return getNullKeyWithRestResponseAsync()
-            .flatMapMaybe(new Function<RestResponse<Void, Map<String, String>>, Maybe<Map<String, String>>>() {
-                public Maybe<Map<String, String>> apply(RestResponse<Void, Map<String, String>> restResponse) {
-                    if (restResponse.body() == null) {
-                        return Maybe.empty();
-                    } else {
-                        return Maybe.just(restResponse.body());
-                    }
-                }
-            });
+            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -673,7 +642,7 @@ public final class DictionarysImpl implements Dictionarys {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<Void, Map<String, String>>> getEmptyStringKeyWithRestResponseAsync() {
+    public Single<BodyResponse<Map<String, String>>> getEmptyStringKeyWithRestResponseAsync() {
         return service.getEmptyStringKey();
     }
 
@@ -684,15 +653,7 @@ public final class DictionarysImpl implements Dictionarys {
      */
     public Maybe<Map<String, String>> getEmptyStringKeyAsync() {
         return getEmptyStringKeyWithRestResponseAsync()
-            .flatMapMaybe(new Function<RestResponse<Void, Map<String, String>>, Maybe<Map<String, String>>>() {
-                public Maybe<Map<String, String>> apply(RestResponse<Void, Map<String, String>> restResponse) {
-                    if (restResponse.body() == null) {
-                        return Maybe.empty();
-                    } else {
-                        return Maybe.just(restResponse.body());
-                    }
-                }
-            });
+            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -722,7 +683,7 @@ public final class DictionarysImpl implements Dictionarys {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<Void, Map<String, String>>> getInvalidWithRestResponseAsync() {
+    public Single<BodyResponse<Map<String, String>>> getInvalidWithRestResponseAsync() {
         return service.getInvalid();
     }
 
@@ -733,15 +694,7 @@ public final class DictionarysImpl implements Dictionarys {
      */
     public Maybe<Map<String, String>> getInvalidAsync() {
         return getInvalidWithRestResponseAsync()
-            .flatMapMaybe(new Function<RestResponse<Void, Map<String, String>>, Maybe<Map<String, String>>>() {
-                public Maybe<Map<String, String>> apply(RestResponse<Void, Map<String, String>> restResponse) {
-                    if (restResponse.body() == null) {
-                        return Maybe.empty();
-                    } else {
-                        return Maybe.just(restResponse.body());
-                    }
-                }
-            });
+            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -771,7 +724,7 @@ public final class DictionarysImpl implements Dictionarys {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<Void, Map<String, Boolean>>> getBooleanTfftWithRestResponseAsync() {
+    public Single<BodyResponse<Map<String, Boolean>>> getBooleanTfftWithRestResponseAsync() {
         return service.getBooleanTfft();
     }
 
@@ -782,15 +735,7 @@ public final class DictionarysImpl implements Dictionarys {
      */
     public Maybe<Map<String, Boolean>> getBooleanTfftAsync() {
         return getBooleanTfftWithRestResponseAsync()
-            .flatMapMaybe(new Function<RestResponse<Void, Map<String, Boolean>>, Maybe<Map<String, Boolean>>>() {
-                public Maybe<Map<String, Boolean>> apply(RestResponse<Void, Map<String, Boolean>> restResponse) {
-                    if (restResponse.body() == null) {
-                        return Maybe.empty();
-                    } else {
-                        return Maybe.just(restResponse.body());
-                    }
-                }
-            });
+            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -824,7 +769,7 @@ public final class DictionarysImpl implements Dictionarys {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<Void, Void>> putBooleanTfftWithRestResponseAsync(@NonNull Map<String, Boolean> arrayBody) {
+    public Single<VoidResponse> putBooleanTfftWithRestResponseAsync(@NonNull Map<String, Boolean> arrayBody) {
         if (arrayBody == null) {
             throw new IllegalArgumentException("Parameter arrayBody is required and cannot be null.");
         }
@@ -871,7 +816,7 @@ public final class DictionarysImpl implements Dictionarys {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<Void, Map<String, Boolean>>> getBooleanInvalidNullWithRestResponseAsync() {
+    public Single<BodyResponse<Map<String, Boolean>>> getBooleanInvalidNullWithRestResponseAsync() {
         return service.getBooleanInvalidNull();
     }
 
@@ -882,15 +827,7 @@ public final class DictionarysImpl implements Dictionarys {
      */
     public Maybe<Map<String, Boolean>> getBooleanInvalidNullAsync() {
         return getBooleanInvalidNullWithRestResponseAsync()
-            .flatMapMaybe(new Function<RestResponse<Void, Map<String, Boolean>>, Maybe<Map<String, Boolean>>>() {
-                public Maybe<Map<String, Boolean>> apply(RestResponse<Void, Map<String, Boolean>> restResponse) {
-                    if (restResponse.body() == null) {
-                        return Maybe.empty();
-                    } else {
-                        return Maybe.just(restResponse.body());
-                    }
-                }
-            });
+            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -920,7 +857,7 @@ public final class DictionarysImpl implements Dictionarys {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<Void, Map<String, Boolean>>> getBooleanInvalidStringWithRestResponseAsync() {
+    public Single<BodyResponse<Map<String, Boolean>>> getBooleanInvalidStringWithRestResponseAsync() {
         return service.getBooleanInvalidString();
     }
 
@@ -931,15 +868,7 @@ public final class DictionarysImpl implements Dictionarys {
      */
     public Maybe<Map<String, Boolean>> getBooleanInvalidStringAsync() {
         return getBooleanInvalidStringWithRestResponseAsync()
-            .flatMapMaybe(new Function<RestResponse<Void, Map<String, Boolean>>, Maybe<Map<String, Boolean>>>() {
-                public Maybe<Map<String, Boolean>> apply(RestResponse<Void, Map<String, Boolean>> restResponse) {
-                    if (restResponse.body() == null) {
-                        return Maybe.empty();
-                    } else {
-                        return Maybe.just(restResponse.body());
-                    }
-                }
-            });
+            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -969,7 +898,7 @@ public final class DictionarysImpl implements Dictionarys {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<Void, Map<String, Integer>>> getIntegerValidWithRestResponseAsync() {
+    public Single<BodyResponse<Map<String, Integer>>> getIntegerValidWithRestResponseAsync() {
         return service.getIntegerValid();
     }
 
@@ -980,15 +909,7 @@ public final class DictionarysImpl implements Dictionarys {
      */
     public Maybe<Map<String, Integer>> getIntegerValidAsync() {
         return getIntegerValidWithRestResponseAsync()
-            .flatMapMaybe(new Function<RestResponse<Void, Map<String, Integer>>, Maybe<Map<String, Integer>>>() {
-                public Maybe<Map<String, Integer>> apply(RestResponse<Void, Map<String, Integer>> restResponse) {
-                    if (restResponse.body() == null) {
-                        return Maybe.empty();
-                    } else {
-                        return Maybe.just(restResponse.body());
-                    }
-                }
-            });
+            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -1022,7 +943,7 @@ public final class DictionarysImpl implements Dictionarys {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<Void, Void>> putIntegerValidWithRestResponseAsync(@NonNull Map<String, Integer> arrayBody) {
+    public Single<VoidResponse> putIntegerValidWithRestResponseAsync(@NonNull Map<String, Integer> arrayBody) {
         if (arrayBody == null) {
             throw new IllegalArgumentException("Parameter arrayBody is required and cannot be null.");
         }
@@ -1069,7 +990,7 @@ public final class DictionarysImpl implements Dictionarys {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<Void, Map<String, Integer>>> getIntInvalidNullWithRestResponseAsync() {
+    public Single<BodyResponse<Map<String, Integer>>> getIntInvalidNullWithRestResponseAsync() {
         return service.getIntInvalidNull();
     }
 
@@ -1080,15 +1001,7 @@ public final class DictionarysImpl implements Dictionarys {
      */
     public Maybe<Map<String, Integer>> getIntInvalidNullAsync() {
         return getIntInvalidNullWithRestResponseAsync()
-            .flatMapMaybe(new Function<RestResponse<Void, Map<String, Integer>>, Maybe<Map<String, Integer>>>() {
-                public Maybe<Map<String, Integer>> apply(RestResponse<Void, Map<String, Integer>> restResponse) {
-                    if (restResponse.body() == null) {
-                        return Maybe.empty();
-                    } else {
-                        return Maybe.just(restResponse.body());
-                    }
-                }
-            });
+            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -1118,7 +1031,7 @@ public final class DictionarysImpl implements Dictionarys {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<Void, Map<String, Integer>>> getIntInvalidStringWithRestResponseAsync() {
+    public Single<BodyResponse<Map<String, Integer>>> getIntInvalidStringWithRestResponseAsync() {
         return service.getIntInvalidString();
     }
 
@@ -1129,15 +1042,7 @@ public final class DictionarysImpl implements Dictionarys {
      */
     public Maybe<Map<String, Integer>> getIntInvalidStringAsync() {
         return getIntInvalidStringWithRestResponseAsync()
-            .flatMapMaybe(new Function<RestResponse<Void, Map<String, Integer>>, Maybe<Map<String, Integer>>>() {
-                public Maybe<Map<String, Integer>> apply(RestResponse<Void, Map<String, Integer>> restResponse) {
-                    if (restResponse.body() == null) {
-                        return Maybe.empty();
-                    } else {
-                        return Maybe.just(restResponse.body());
-                    }
-                }
-            });
+            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -1167,7 +1072,7 @@ public final class DictionarysImpl implements Dictionarys {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<Void, Map<String, Long>>> getLongValidWithRestResponseAsync() {
+    public Single<BodyResponse<Map<String, Long>>> getLongValidWithRestResponseAsync() {
         return service.getLongValid();
     }
 
@@ -1178,15 +1083,7 @@ public final class DictionarysImpl implements Dictionarys {
      */
     public Maybe<Map<String, Long>> getLongValidAsync() {
         return getLongValidWithRestResponseAsync()
-            .flatMapMaybe(new Function<RestResponse<Void, Map<String, Long>>, Maybe<Map<String, Long>>>() {
-                public Maybe<Map<String, Long>> apply(RestResponse<Void, Map<String, Long>> restResponse) {
-                    if (restResponse.body() == null) {
-                        return Maybe.empty();
-                    } else {
-                        return Maybe.just(restResponse.body());
-                    }
-                }
-            });
+            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -1220,7 +1117,7 @@ public final class DictionarysImpl implements Dictionarys {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<Void, Void>> putLongValidWithRestResponseAsync(@NonNull Map<String, Long> arrayBody) {
+    public Single<VoidResponse> putLongValidWithRestResponseAsync(@NonNull Map<String, Long> arrayBody) {
         if (arrayBody == null) {
             throw new IllegalArgumentException("Parameter arrayBody is required and cannot be null.");
         }
@@ -1267,7 +1164,7 @@ public final class DictionarysImpl implements Dictionarys {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<Void, Map<String, Long>>> getLongInvalidNullWithRestResponseAsync() {
+    public Single<BodyResponse<Map<String, Long>>> getLongInvalidNullWithRestResponseAsync() {
         return service.getLongInvalidNull();
     }
 
@@ -1278,15 +1175,7 @@ public final class DictionarysImpl implements Dictionarys {
      */
     public Maybe<Map<String, Long>> getLongInvalidNullAsync() {
         return getLongInvalidNullWithRestResponseAsync()
-            .flatMapMaybe(new Function<RestResponse<Void, Map<String, Long>>, Maybe<Map<String, Long>>>() {
-                public Maybe<Map<String, Long>> apply(RestResponse<Void, Map<String, Long>> restResponse) {
-                    if (restResponse.body() == null) {
-                        return Maybe.empty();
-                    } else {
-                        return Maybe.just(restResponse.body());
-                    }
-                }
-            });
+            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -1316,7 +1205,7 @@ public final class DictionarysImpl implements Dictionarys {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<Void, Map<String, Long>>> getLongInvalidStringWithRestResponseAsync() {
+    public Single<BodyResponse<Map<String, Long>>> getLongInvalidStringWithRestResponseAsync() {
         return service.getLongInvalidString();
     }
 
@@ -1327,15 +1216,7 @@ public final class DictionarysImpl implements Dictionarys {
      */
     public Maybe<Map<String, Long>> getLongInvalidStringAsync() {
         return getLongInvalidStringWithRestResponseAsync()
-            .flatMapMaybe(new Function<RestResponse<Void, Map<String, Long>>, Maybe<Map<String, Long>>>() {
-                public Maybe<Map<String, Long>> apply(RestResponse<Void, Map<String, Long>> restResponse) {
-                    if (restResponse.body() == null) {
-                        return Maybe.empty();
-                    } else {
-                        return Maybe.just(restResponse.body());
-                    }
-                }
-            });
+            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -1365,7 +1246,7 @@ public final class DictionarysImpl implements Dictionarys {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<Void, Map<String, Double>>> getFloatValidWithRestResponseAsync() {
+    public Single<BodyResponse<Map<String, Double>>> getFloatValidWithRestResponseAsync() {
         return service.getFloatValid();
     }
 
@@ -1376,15 +1257,7 @@ public final class DictionarysImpl implements Dictionarys {
      */
     public Maybe<Map<String, Double>> getFloatValidAsync() {
         return getFloatValidWithRestResponseAsync()
-            .flatMapMaybe(new Function<RestResponse<Void, Map<String, Double>>, Maybe<Map<String, Double>>>() {
-                public Maybe<Map<String, Double>> apply(RestResponse<Void, Map<String, Double>> restResponse) {
-                    if (restResponse.body() == null) {
-                        return Maybe.empty();
-                    } else {
-                        return Maybe.just(restResponse.body());
-                    }
-                }
-            });
+            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -1418,7 +1291,7 @@ public final class DictionarysImpl implements Dictionarys {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<Void, Void>> putFloatValidWithRestResponseAsync(@NonNull Map<String, Double> arrayBody) {
+    public Single<VoidResponse> putFloatValidWithRestResponseAsync(@NonNull Map<String, Double> arrayBody) {
         if (arrayBody == null) {
             throw new IllegalArgumentException("Parameter arrayBody is required and cannot be null.");
         }
@@ -1465,7 +1338,7 @@ public final class DictionarysImpl implements Dictionarys {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<Void, Map<String, Double>>> getFloatInvalidNullWithRestResponseAsync() {
+    public Single<BodyResponse<Map<String, Double>>> getFloatInvalidNullWithRestResponseAsync() {
         return service.getFloatInvalidNull();
     }
 
@@ -1476,15 +1349,7 @@ public final class DictionarysImpl implements Dictionarys {
      */
     public Maybe<Map<String, Double>> getFloatInvalidNullAsync() {
         return getFloatInvalidNullWithRestResponseAsync()
-            .flatMapMaybe(new Function<RestResponse<Void, Map<String, Double>>, Maybe<Map<String, Double>>>() {
-                public Maybe<Map<String, Double>> apply(RestResponse<Void, Map<String, Double>> restResponse) {
-                    if (restResponse.body() == null) {
-                        return Maybe.empty();
-                    } else {
-                        return Maybe.just(restResponse.body());
-                    }
-                }
-            });
+            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -1514,7 +1379,7 @@ public final class DictionarysImpl implements Dictionarys {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<Void, Map<String, Double>>> getFloatInvalidStringWithRestResponseAsync() {
+    public Single<BodyResponse<Map<String, Double>>> getFloatInvalidStringWithRestResponseAsync() {
         return service.getFloatInvalidString();
     }
 
@@ -1525,15 +1390,7 @@ public final class DictionarysImpl implements Dictionarys {
      */
     public Maybe<Map<String, Double>> getFloatInvalidStringAsync() {
         return getFloatInvalidStringWithRestResponseAsync()
-            .flatMapMaybe(new Function<RestResponse<Void, Map<String, Double>>, Maybe<Map<String, Double>>>() {
-                public Maybe<Map<String, Double>> apply(RestResponse<Void, Map<String, Double>> restResponse) {
-                    if (restResponse.body() == null) {
-                        return Maybe.empty();
-                    } else {
-                        return Maybe.just(restResponse.body());
-                    }
-                }
-            });
+            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -1563,7 +1420,7 @@ public final class DictionarysImpl implements Dictionarys {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<Void, Map<String, Double>>> getDoubleValidWithRestResponseAsync() {
+    public Single<BodyResponse<Map<String, Double>>> getDoubleValidWithRestResponseAsync() {
         return service.getDoubleValid();
     }
 
@@ -1574,15 +1431,7 @@ public final class DictionarysImpl implements Dictionarys {
      */
     public Maybe<Map<String, Double>> getDoubleValidAsync() {
         return getDoubleValidWithRestResponseAsync()
-            .flatMapMaybe(new Function<RestResponse<Void, Map<String, Double>>, Maybe<Map<String, Double>>>() {
-                public Maybe<Map<String, Double>> apply(RestResponse<Void, Map<String, Double>> restResponse) {
-                    if (restResponse.body() == null) {
-                        return Maybe.empty();
-                    } else {
-                        return Maybe.just(restResponse.body());
-                    }
-                }
-            });
+            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -1616,7 +1465,7 @@ public final class DictionarysImpl implements Dictionarys {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<Void, Void>> putDoubleValidWithRestResponseAsync(@NonNull Map<String, Double> arrayBody) {
+    public Single<VoidResponse> putDoubleValidWithRestResponseAsync(@NonNull Map<String, Double> arrayBody) {
         if (arrayBody == null) {
             throw new IllegalArgumentException("Parameter arrayBody is required and cannot be null.");
         }
@@ -1663,7 +1512,7 @@ public final class DictionarysImpl implements Dictionarys {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<Void, Map<String, Double>>> getDoubleInvalidNullWithRestResponseAsync() {
+    public Single<BodyResponse<Map<String, Double>>> getDoubleInvalidNullWithRestResponseAsync() {
         return service.getDoubleInvalidNull();
     }
 
@@ -1674,15 +1523,7 @@ public final class DictionarysImpl implements Dictionarys {
      */
     public Maybe<Map<String, Double>> getDoubleInvalidNullAsync() {
         return getDoubleInvalidNullWithRestResponseAsync()
-            .flatMapMaybe(new Function<RestResponse<Void, Map<String, Double>>, Maybe<Map<String, Double>>>() {
-                public Maybe<Map<String, Double>> apply(RestResponse<Void, Map<String, Double>> restResponse) {
-                    if (restResponse.body() == null) {
-                        return Maybe.empty();
-                    } else {
-                        return Maybe.just(restResponse.body());
-                    }
-                }
-            });
+            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -1712,7 +1553,7 @@ public final class DictionarysImpl implements Dictionarys {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<Void, Map<String, Double>>> getDoubleInvalidStringWithRestResponseAsync() {
+    public Single<BodyResponse<Map<String, Double>>> getDoubleInvalidStringWithRestResponseAsync() {
         return service.getDoubleInvalidString();
     }
 
@@ -1723,15 +1564,7 @@ public final class DictionarysImpl implements Dictionarys {
      */
     public Maybe<Map<String, Double>> getDoubleInvalidStringAsync() {
         return getDoubleInvalidStringWithRestResponseAsync()
-            .flatMapMaybe(new Function<RestResponse<Void, Map<String, Double>>, Maybe<Map<String, Double>>>() {
-                public Maybe<Map<String, Double>> apply(RestResponse<Void, Map<String, Double>> restResponse) {
-                    if (restResponse.body() == null) {
-                        return Maybe.empty();
-                    } else {
-                        return Maybe.just(restResponse.body());
-                    }
-                }
-            });
+            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -1761,7 +1594,7 @@ public final class DictionarysImpl implements Dictionarys {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<Void, Map<String, String>>> getStringValidWithRestResponseAsync() {
+    public Single<BodyResponse<Map<String, String>>> getStringValidWithRestResponseAsync() {
         return service.getStringValid();
     }
 
@@ -1772,15 +1605,7 @@ public final class DictionarysImpl implements Dictionarys {
      */
     public Maybe<Map<String, String>> getStringValidAsync() {
         return getStringValidWithRestResponseAsync()
-            .flatMapMaybe(new Function<RestResponse<Void, Map<String, String>>, Maybe<Map<String, String>>>() {
-                public Maybe<Map<String, String>> apply(RestResponse<Void, Map<String, String>> restResponse) {
-                    if (restResponse.body() == null) {
-                        return Maybe.empty();
-                    } else {
-                        return Maybe.just(restResponse.body());
-                    }
-                }
-            });
+            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -1814,7 +1639,7 @@ public final class DictionarysImpl implements Dictionarys {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<Void, Void>> putStringValidWithRestResponseAsync(@NonNull Map<String, String> arrayBody) {
+    public Single<VoidResponse> putStringValidWithRestResponseAsync(@NonNull Map<String, String> arrayBody) {
         if (arrayBody == null) {
             throw new IllegalArgumentException("Parameter arrayBody is required and cannot be null.");
         }
@@ -1861,7 +1686,7 @@ public final class DictionarysImpl implements Dictionarys {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<Void, Map<String, String>>> getStringWithNullWithRestResponseAsync() {
+    public Single<BodyResponse<Map<String, String>>> getStringWithNullWithRestResponseAsync() {
         return service.getStringWithNull();
     }
 
@@ -1872,15 +1697,7 @@ public final class DictionarysImpl implements Dictionarys {
      */
     public Maybe<Map<String, String>> getStringWithNullAsync() {
         return getStringWithNullWithRestResponseAsync()
-            .flatMapMaybe(new Function<RestResponse<Void, Map<String, String>>, Maybe<Map<String, String>>>() {
-                public Maybe<Map<String, String>> apply(RestResponse<Void, Map<String, String>> restResponse) {
-                    if (restResponse.body() == null) {
-                        return Maybe.empty();
-                    } else {
-                        return Maybe.just(restResponse.body());
-                    }
-                }
-            });
+            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -1910,7 +1727,7 @@ public final class DictionarysImpl implements Dictionarys {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<Void, Map<String, String>>> getStringWithInvalidWithRestResponseAsync() {
+    public Single<BodyResponse<Map<String, String>>> getStringWithInvalidWithRestResponseAsync() {
         return service.getStringWithInvalid();
     }
 
@@ -1921,15 +1738,7 @@ public final class DictionarysImpl implements Dictionarys {
      */
     public Maybe<Map<String, String>> getStringWithInvalidAsync() {
         return getStringWithInvalidWithRestResponseAsync()
-            .flatMapMaybe(new Function<RestResponse<Void, Map<String, String>>, Maybe<Map<String, String>>>() {
-                public Maybe<Map<String, String>> apply(RestResponse<Void, Map<String, String>> restResponse) {
-                    if (restResponse.body() == null) {
-                        return Maybe.empty();
-                    } else {
-                        return Maybe.just(restResponse.body());
-                    }
-                }
-            });
+            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -1959,7 +1768,7 @@ public final class DictionarysImpl implements Dictionarys {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<Void, Map<String, LocalDate>>> getDateValidWithRestResponseAsync() {
+    public Single<BodyResponse<Map<String, LocalDate>>> getDateValidWithRestResponseAsync() {
         return service.getDateValid();
     }
 
@@ -1970,15 +1779,7 @@ public final class DictionarysImpl implements Dictionarys {
      */
     public Maybe<Map<String, LocalDate>> getDateValidAsync() {
         return getDateValidWithRestResponseAsync()
-            .flatMapMaybe(new Function<RestResponse<Void, Map<String, LocalDate>>, Maybe<Map<String, LocalDate>>>() {
-                public Maybe<Map<String, LocalDate>> apply(RestResponse<Void, Map<String, LocalDate>> restResponse) {
-                    if (restResponse.body() == null) {
-                        return Maybe.empty();
-                    } else {
-                        return Maybe.just(restResponse.body());
-                    }
-                }
-            });
+            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -2012,7 +1813,7 @@ public final class DictionarysImpl implements Dictionarys {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<Void, Void>> putDateValidWithRestResponseAsync(@NonNull Map<String, LocalDate> arrayBody) {
+    public Single<VoidResponse> putDateValidWithRestResponseAsync(@NonNull Map<String, LocalDate> arrayBody) {
         if (arrayBody == null) {
             throw new IllegalArgumentException("Parameter arrayBody is required and cannot be null.");
         }
@@ -2059,7 +1860,7 @@ public final class DictionarysImpl implements Dictionarys {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<Void, Map<String, LocalDate>>> getDateInvalidNullWithRestResponseAsync() {
+    public Single<BodyResponse<Map<String, LocalDate>>> getDateInvalidNullWithRestResponseAsync() {
         return service.getDateInvalidNull();
     }
 
@@ -2070,15 +1871,7 @@ public final class DictionarysImpl implements Dictionarys {
      */
     public Maybe<Map<String, LocalDate>> getDateInvalidNullAsync() {
         return getDateInvalidNullWithRestResponseAsync()
-            .flatMapMaybe(new Function<RestResponse<Void, Map<String, LocalDate>>, Maybe<Map<String, LocalDate>>>() {
-                public Maybe<Map<String, LocalDate>> apply(RestResponse<Void, Map<String, LocalDate>> restResponse) {
-                    if (restResponse.body() == null) {
-                        return Maybe.empty();
-                    } else {
-                        return Maybe.just(restResponse.body());
-                    }
-                }
-            });
+            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -2108,7 +1901,7 @@ public final class DictionarysImpl implements Dictionarys {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<Void, Map<String, LocalDate>>> getDateInvalidCharsWithRestResponseAsync() {
+    public Single<BodyResponse<Map<String, LocalDate>>> getDateInvalidCharsWithRestResponseAsync() {
         return service.getDateInvalidChars();
     }
 
@@ -2119,15 +1912,7 @@ public final class DictionarysImpl implements Dictionarys {
      */
     public Maybe<Map<String, LocalDate>> getDateInvalidCharsAsync() {
         return getDateInvalidCharsWithRestResponseAsync()
-            .flatMapMaybe(new Function<RestResponse<Void, Map<String, LocalDate>>, Maybe<Map<String, LocalDate>>>() {
-                public Maybe<Map<String, LocalDate>> apply(RestResponse<Void, Map<String, LocalDate>> restResponse) {
-                    if (restResponse.body() == null) {
-                        return Maybe.empty();
-                    } else {
-                        return Maybe.just(restResponse.body());
-                    }
-                }
-            });
+            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -2157,7 +1942,7 @@ public final class DictionarysImpl implements Dictionarys {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<Void, Map<String, DateTime>>> getDateTimeValidWithRestResponseAsync() {
+    public Single<BodyResponse<Map<String, DateTime>>> getDateTimeValidWithRestResponseAsync() {
         return service.getDateTimeValid();
     }
 
@@ -2168,15 +1953,7 @@ public final class DictionarysImpl implements Dictionarys {
      */
     public Maybe<Map<String, DateTime>> getDateTimeValidAsync() {
         return getDateTimeValidWithRestResponseAsync()
-            .flatMapMaybe(new Function<RestResponse<Void, Map<String, DateTime>>, Maybe<Map<String, DateTime>>>() {
-                public Maybe<Map<String, DateTime>> apply(RestResponse<Void, Map<String, DateTime>> restResponse) {
-                    if (restResponse.body() == null) {
-                        return Maybe.empty();
-                    } else {
-                        return Maybe.just(restResponse.body());
-                    }
-                }
-            });
+            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -2210,7 +1987,7 @@ public final class DictionarysImpl implements Dictionarys {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<Void, Void>> putDateTimeValidWithRestResponseAsync(@NonNull Map<String, DateTime> arrayBody) {
+    public Single<VoidResponse> putDateTimeValidWithRestResponseAsync(@NonNull Map<String, DateTime> arrayBody) {
         if (arrayBody == null) {
             throw new IllegalArgumentException("Parameter arrayBody is required and cannot be null.");
         }
@@ -2257,7 +2034,7 @@ public final class DictionarysImpl implements Dictionarys {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<Void, Map<String, DateTime>>> getDateTimeInvalidNullWithRestResponseAsync() {
+    public Single<BodyResponse<Map<String, DateTime>>> getDateTimeInvalidNullWithRestResponseAsync() {
         return service.getDateTimeInvalidNull();
     }
 
@@ -2268,15 +2045,7 @@ public final class DictionarysImpl implements Dictionarys {
      */
     public Maybe<Map<String, DateTime>> getDateTimeInvalidNullAsync() {
         return getDateTimeInvalidNullWithRestResponseAsync()
-            .flatMapMaybe(new Function<RestResponse<Void, Map<String, DateTime>>, Maybe<Map<String, DateTime>>>() {
-                public Maybe<Map<String, DateTime>> apply(RestResponse<Void, Map<String, DateTime>> restResponse) {
-                    if (restResponse.body() == null) {
-                        return Maybe.empty();
-                    } else {
-                        return Maybe.just(restResponse.body());
-                    }
-                }
-            });
+            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -2306,7 +2075,7 @@ public final class DictionarysImpl implements Dictionarys {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<Void, Map<String, DateTime>>> getDateTimeInvalidCharsWithRestResponseAsync() {
+    public Single<BodyResponse<Map<String, DateTime>>> getDateTimeInvalidCharsWithRestResponseAsync() {
         return service.getDateTimeInvalidChars();
     }
 
@@ -2317,15 +2086,7 @@ public final class DictionarysImpl implements Dictionarys {
      */
     public Maybe<Map<String, DateTime>> getDateTimeInvalidCharsAsync() {
         return getDateTimeInvalidCharsWithRestResponseAsync()
-            .flatMapMaybe(new Function<RestResponse<Void, Map<String, DateTime>>, Maybe<Map<String, DateTime>>>() {
-                public Maybe<Map<String, DateTime>> apply(RestResponse<Void, Map<String, DateTime>> restResponse) {
-                    if (restResponse.body() == null) {
-                        return Maybe.empty();
-                    } else {
-                        return Maybe.just(restResponse.body());
-                    }
-                }
-            });
+            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -2355,7 +2116,7 @@ public final class DictionarysImpl implements Dictionarys {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<Void, Map<String, DateTime>>> getDateTimeRfc1123ValidWithRestResponseAsync() {
+    public Single<BodyResponse<Map<String, DateTime>>> getDateTimeRfc1123ValidWithRestResponseAsync() {
         return service.getDateTimeRfc1123Valid();
     }
 
@@ -2366,15 +2127,7 @@ public final class DictionarysImpl implements Dictionarys {
      */
     public Maybe<Map<String, DateTime>> getDateTimeRfc1123ValidAsync() {
         return getDateTimeRfc1123ValidWithRestResponseAsync()
-            .flatMapMaybe(new Function<RestResponse<Void, Map<String, DateTime>>, Maybe<Map<String, DateTime>>>() {
-                public Maybe<Map<String, DateTime>> apply(RestResponse<Void, Map<String, DateTime>> restResponse) {
-                    if (restResponse.body() == null) {
-                        return Maybe.empty();
-                    } else {
-                        return Maybe.just(restResponse.body());
-                    }
-                }
-            });
+            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -2408,7 +2161,7 @@ public final class DictionarysImpl implements Dictionarys {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<Void, Void>> putDateTimeRfc1123ValidWithRestResponseAsync(@NonNull Map<String, DateTime> arrayBody) {
+    public Single<VoidResponse> putDateTimeRfc1123ValidWithRestResponseAsync(@NonNull Map<String, DateTime> arrayBody) {
         if (arrayBody == null) {
             throw new IllegalArgumentException("Parameter arrayBody is required and cannot be null.");
         }
@@ -2460,7 +2213,7 @@ public final class DictionarysImpl implements Dictionarys {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<Void, Map<String, Period>>> getDurationValidWithRestResponseAsync() {
+    public Single<BodyResponse<Map<String, Period>>> getDurationValidWithRestResponseAsync() {
         return service.getDurationValid();
     }
 
@@ -2471,15 +2224,7 @@ public final class DictionarysImpl implements Dictionarys {
      */
     public Maybe<Map<String, Period>> getDurationValidAsync() {
         return getDurationValidWithRestResponseAsync()
-            .flatMapMaybe(new Function<RestResponse<Void, Map<String, Period>>, Maybe<Map<String, Period>>>() {
-                public Maybe<Map<String, Period>> apply(RestResponse<Void, Map<String, Period>> restResponse) {
-                    if (restResponse.body() == null) {
-                        return Maybe.empty();
-                    } else {
-                        return Maybe.just(restResponse.body());
-                    }
-                }
-            });
+            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -2513,7 +2258,7 @@ public final class DictionarysImpl implements Dictionarys {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<Void, Void>> putDurationValidWithRestResponseAsync(@NonNull Map<String, Period> arrayBody) {
+    public Single<VoidResponse> putDurationValidWithRestResponseAsync(@NonNull Map<String, Period> arrayBody) {
         if (arrayBody == null) {
             throw new IllegalArgumentException("Parameter arrayBody is required and cannot be null.");
         }
@@ -2560,7 +2305,7 @@ public final class DictionarysImpl implements Dictionarys {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<Void, Map<String, byte[]>>> getByteValidWithRestResponseAsync() {
+    public Single<BodyResponse<Map<String, byte[]>>> getByteValidWithRestResponseAsync() {
         return service.getByteValid();
     }
 
@@ -2571,15 +2316,7 @@ public final class DictionarysImpl implements Dictionarys {
      */
     public Maybe<Map<String, byte[]>> getByteValidAsync() {
         return getByteValidWithRestResponseAsync()
-            .flatMapMaybe(new Function<RestResponse<Void, Map<String, byte[]>>, Maybe<Map<String, byte[]>>>() {
-                public Maybe<Map<String, byte[]>> apply(RestResponse<Void, Map<String, byte[]>> restResponse) {
-                    if (restResponse.body() == null) {
-                        return Maybe.empty();
-                    } else {
-                        return Maybe.just(restResponse.body());
-                    }
-                }
-            });
+            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -2613,7 +2350,7 @@ public final class DictionarysImpl implements Dictionarys {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<Void, Void>> putByteValidWithRestResponseAsync(@NonNull Map<String, byte[]> arrayBody) {
+    public Single<VoidResponse> putByteValidWithRestResponseAsync(@NonNull Map<String, byte[]> arrayBody) {
         if (arrayBody == null) {
             throw new IllegalArgumentException("Parameter arrayBody is required and cannot be null.");
         }
@@ -2660,7 +2397,7 @@ public final class DictionarysImpl implements Dictionarys {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<Void, Map<String, byte[]>>> getByteInvalidNullWithRestResponseAsync() {
+    public Single<BodyResponse<Map<String, byte[]>>> getByteInvalidNullWithRestResponseAsync() {
         return service.getByteInvalidNull();
     }
 
@@ -2671,15 +2408,7 @@ public final class DictionarysImpl implements Dictionarys {
      */
     public Maybe<Map<String, byte[]>> getByteInvalidNullAsync() {
         return getByteInvalidNullWithRestResponseAsync()
-            .flatMapMaybe(new Function<RestResponse<Void, Map<String, byte[]>>, Maybe<Map<String, byte[]>>>() {
-                public Maybe<Map<String, byte[]>> apply(RestResponse<Void, Map<String, byte[]>> restResponse) {
-                    if (restResponse.body() == null) {
-                        return Maybe.empty();
-                    } else {
-                        return Maybe.just(restResponse.body());
-                    }
-                }
-            });
+            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -2709,7 +2438,7 @@ public final class DictionarysImpl implements Dictionarys {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<Void, Map<String, byte[]>>> getBase64UrlWithRestResponseAsync() {
+    public Single<BodyResponse<Map<String, byte[]>>> getBase64UrlWithRestResponseAsync() {
         return service.getBase64Url();
     }
 
@@ -2720,15 +2449,7 @@ public final class DictionarysImpl implements Dictionarys {
      */
     public Maybe<Map<String, byte[]>> getBase64UrlAsync() {
         return getBase64UrlWithRestResponseAsync()
-            .flatMapMaybe(new Function<RestResponse<Void, Map<String, byte[]>>, Maybe<Map<String, byte[]>>>() {
-                public Maybe<Map<String, byte[]>> apply(RestResponse<Void, Map<String, byte[]>> restResponse) {
-                    if (restResponse.body() == null) {
-                        return Maybe.empty();
-                    } else {
-                        return Maybe.just(restResponse.body());
-                    }
-                }
-            });
+            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -2758,7 +2479,7 @@ public final class DictionarysImpl implements Dictionarys {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<Void, Map<String, Widget>>> getComplexNullWithRestResponseAsync() {
+    public Single<BodyResponse<Map<String, Widget>>> getComplexNullWithRestResponseAsync() {
         return service.getComplexNull();
     }
 
@@ -2769,15 +2490,7 @@ public final class DictionarysImpl implements Dictionarys {
      */
     public Maybe<Map<String, Widget>> getComplexNullAsync() {
         return getComplexNullWithRestResponseAsync()
-            .flatMapMaybe(new Function<RestResponse<Void, Map<String, Widget>>, Maybe<Map<String, Widget>>>() {
-                public Maybe<Map<String, Widget>> apply(RestResponse<Void, Map<String, Widget>> restResponse) {
-                    if (restResponse.body() == null) {
-                        return Maybe.empty();
-                    } else {
-                        return Maybe.just(restResponse.body());
-                    }
-                }
-            });
+            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -2807,7 +2520,7 @@ public final class DictionarysImpl implements Dictionarys {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<Void, Map<String, Widget>>> getComplexEmptyWithRestResponseAsync() {
+    public Single<BodyResponse<Map<String, Widget>>> getComplexEmptyWithRestResponseAsync() {
         return service.getComplexEmpty();
     }
 
@@ -2818,15 +2531,7 @@ public final class DictionarysImpl implements Dictionarys {
      */
     public Maybe<Map<String, Widget>> getComplexEmptyAsync() {
         return getComplexEmptyWithRestResponseAsync()
-            .flatMapMaybe(new Function<RestResponse<Void, Map<String, Widget>>, Maybe<Map<String, Widget>>>() {
-                public Maybe<Map<String, Widget>> apply(RestResponse<Void, Map<String, Widget>> restResponse) {
-                    if (restResponse.body() == null) {
-                        return Maybe.empty();
-                    } else {
-                        return Maybe.just(restResponse.body());
-                    }
-                }
-            });
+            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -2856,7 +2561,7 @@ public final class DictionarysImpl implements Dictionarys {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<Void, Map<String, Widget>>> getComplexItemNullWithRestResponseAsync() {
+    public Single<BodyResponse<Map<String, Widget>>> getComplexItemNullWithRestResponseAsync() {
         return service.getComplexItemNull();
     }
 
@@ -2867,15 +2572,7 @@ public final class DictionarysImpl implements Dictionarys {
      */
     public Maybe<Map<String, Widget>> getComplexItemNullAsync() {
         return getComplexItemNullWithRestResponseAsync()
-            .flatMapMaybe(new Function<RestResponse<Void, Map<String, Widget>>, Maybe<Map<String, Widget>>>() {
-                public Maybe<Map<String, Widget>> apply(RestResponse<Void, Map<String, Widget>> restResponse) {
-                    if (restResponse.body() == null) {
-                        return Maybe.empty();
-                    } else {
-                        return Maybe.just(restResponse.body());
-                    }
-                }
-            });
+            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -2905,7 +2602,7 @@ public final class DictionarysImpl implements Dictionarys {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<Void, Map<String, Widget>>> getComplexItemEmptyWithRestResponseAsync() {
+    public Single<BodyResponse<Map<String, Widget>>> getComplexItemEmptyWithRestResponseAsync() {
         return service.getComplexItemEmpty();
     }
 
@@ -2916,15 +2613,7 @@ public final class DictionarysImpl implements Dictionarys {
      */
     public Maybe<Map<String, Widget>> getComplexItemEmptyAsync() {
         return getComplexItemEmptyWithRestResponseAsync()
-            .flatMapMaybe(new Function<RestResponse<Void, Map<String, Widget>>, Maybe<Map<String, Widget>>>() {
-                public Maybe<Map<String, Widget>> apply(RestResponse<Void, Map<String, Widget>> restResponse) {
-                    if (restResponse.body() == null) {
-                        return Maybe.empty();
-                    } else {
-                        return Maybe.just(restResponse.body());
-                    }
-                }
-            });
+            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -2954,7 +2643,7 @@ public final class DictionarysImpl implements Dictionarys {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<Void, Map<String, Widget>>> getComplexValidWithRestResponseAsync() {
+    public Single<BodyResponse<Map<String, Widget>>> getComplexValidWithRestResponseAsync() {
         return service.getComplexValid();
     }
 
@@ -2965,15 +2654,7 @@ public final class DictionarysImpl implements Dictionarys {
      */
     public Maybe<Map<String, Widget>> getComplexValidAsync() {
         return getComplexValidWithRestResponseAsync()
-            .flatMapMaybe(new Function<RestResponse<Void, Map<String, Widget>>, Maybe<Map<String, Widget>>>() {
-                public Maybe<Map<String, Widget>> apply(RestResponse<Void, Map<String, Widget>> restResponse) {
-                    if (restResponse.body() == null) {
-                        return Maybe.empty();
-                    } else {
-                        return Maybe.just(restResponse.body());
-                    }
-                }
-            });
+            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -3007,7 +2688,7 @@ public final class DictionarysImpl implements Dictionarys {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<Void, Void>> putComplexValidWithRestResponseAsync(@NonNull Map<String, Widget> arrayBody) {
+    public Single<VoidResponse> putComplexValidWithRestResponseAsync(@NonNull Map<String, Widget> arrayBody) {
         if (arrayBody == null) {
             throw new IllegalArgumentException("Parameter arrayBody is required and cannot be null.");
         }
@@ -3054,7 +2735,7 @@ public final class DictionarysImpl implements Dictionarys {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<Void, Map<String, List<String>>>> getArrayNullWithRestResponseAsync() {
+    public Single<BodyResponse<Map<String, List<String>>>> getArrayNullWithRestResponseAsync() {
         return service.getArrayNull();
     }
 
@@ -3065,15 +2746,7 @@ public final class DictionarysImpl implements Dictionarys {
      */
     public Maybe<Map<String, List<String>>> getArrayNullAsync() {
         return getArrayNullWithRestResponseAsync()
-            .flatMapMaybe(new Function<RestResponse<Void, Map<String, List<String>>>, Maybe<Map<String, List<String>>>>() {
-                public Maybe<Map<String, List<String>>> apply(RestResponse<Void, Map<String, List<String>>> restResponse) {
-                    if (restResponse.body() == null) {
-                        return Maybe.empty();
-                    } else {
-                        return Maybe.just(restResponse.body());
-                    }
-                }
-            });
+            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -3103,7 +2776,7 @@ public final class DictionarysImpl implements Dictionarys {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<Void, Map<String, List<String>>>> getArrayEmptyWithRestResponseAsync() {
+    public Single<BodyResponse<Map<String, List<String>>>> getArrayEmptyWithRestResponseAsync() {
         return service.getArrayEmpty();
     }
 
@@ -3114,15 +2787,7 @@ public final class DictionarysImpl implements Dictionarys {
      */
     public Maybe<Map<String, List<String>>> getArrayEmptyAsync() {
         return getArrayEmptyWithRestResponseAsync()
-            .flatMapMaybe(new Function<RestResponse<Void, Map<String, List<String>>>, Maybe<Map<String, List<String>>>>() {
-                public Maybe<Map<String, List<String>>> apply(RestResponse<Void, Map<String, List<String>>> restResponse) {
-                    if (restResponse.body() == null) {
-                        return Maybe.empty();
-                    } else {
-                        return Maybe.just(restResponse.body());
-                    }
-                }
-            });
+            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -3152,7 +2817,7 @@ public final class DictionarysImpl implements Dictionarys {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<Void, Map<String, List<String>>>> getArrayItemNullWithRestResponseAsync() {
+    public Single<BodyResponse<Map<String, List<String>>>> getArrayItemNullWithRestResponseAsync() {
         return service.getArrayItemNull();
     }
 
@@ -3163,15 +2828,7 @@ public final class DictionarysImpl implements Dictionarys {
      */
     public Maybe<Map<String, List<String>>> getArrayItemNullAsync() {
         return getArrayItemNullWithRestResponseAsync()
-            .flatMapMaybe(new Function<RestResponse<Void, Map<String, List<String>>>, Maybe<Map<String, List<String>>>>() {
-                public Maybe<Map<String, List<String>>> apply(RestResponse<Void, Map<String, List<String>>> restResponse) {
-                    if (restResponse.body() == null) {
-                        return Maybe.empty();
-                    } else {
-                        return Maybe.just(restResponse.body());
-                    }
-                }
-            });
+            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -3201,7 +2858,7 @@ public final class DictionarysImpl implements Dictionarys {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<Void, Map<String, List<String>>>> getArrayItemEmptyWithRestResponseAsync() {
+    public Single<BodyResponse<Map<String, List<String>>>> getArrayItemEmptyWithRestResponseAsync() {
         return service.getArrayItemEmpty();
     }
 
@@ -3212,15 +2869,7 @@ public final class DictionarysImpl implements Dictionarys {
      */
     public Maybe<Map<String, List<String>>> getArrayItemEmptyAsync() {
         return getArrayItemEmptyWithRestResponseAsync()
-            .flatMapMaybe(new Function<RestResponse<Void, Map<String, List<String>>>, Maybe<Map<String, List<String>>>>() {
-                public Maybe<Map<String, List<String>>> apply(RestResponse<Void, Map<String, List<String>>> restResponse) {
-                    if (restResponse.body() == null) {
-                        return Maybe.empty();
-                    } else {
-                        return Maybe.just(restResponse.body());
-                    }
-                }
-            });
+            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -3250,7 +2899,7 @@ public final class DictionarysImpl implements Dictionarys {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<Void, Map<String, List<String>>>> getArrayValidWithRestResponseAsync() {
+    public Single<BodyResponse<Map<String, List<String>>>> getArrayValidWithRestResponseAsync() {
         return service.getArrayValid();
     }
 
@@ -3261,15 +2910,7 @@ public final class DictionarysImpl implements Dictionarys {
      */
     public Maybe<Map<String, List<String>>> getArrayValidAsync() {
         return getArrayValidWithRestResponseAsync()
-            .flatMapMaybe(new Function<RestResponse<Void, Map<String, List<String>>>, Maybe<Map<String, List<String>>>>() {
-                public Maybe<Map<String, List<String>>> apply(RestResponse<Void, Map<String, List<String>>> restResponse) {
-                    if (restResponse.body() == null) {
-                        return Maybe.empty();
-                    } else {
-                        return Maybe.just(restResponse.body());
-                    }
-                }
-            });
+            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -3303,7 +2944,7 @@ public final class DictionarysImpl implements Dictionarys {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<Void, Void>> putArrayValidWithRestResponseAsync(@NonNull Map<String, List<String>> arrayBody) {
+    public Single<VoidResponse> putArrayValidWithRestResponseAsync(@NonNull Map<String, List<String>> arrayBody) {
         if (arrayBody == null) {
             throw new IllegalArgumentException("Parameter arrayBody is required and cannot be null.");
         }
@@ -3350,7 +2991,7 @@ public final class DictionarysImpl implements Dictionarys {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<Void, Map<String, Map<String, String>>>> getDictionaryNullWithRestResponseAsync() {
+    public Single<BodyResponse<Map<String, Map<String, String>>>> getDictionaryNullWithRestResponseAsync() {
         return service.getDictionaryNull();
     }
 
@@ -3361,15 +3002,7 @@ public final class DictionarysImpl implements Dictionarys {
      */
     public Maybe<Map<String, Map<String, String>>> getDictionaryNullAsync() {
         return getDictionaryNullWithRestResponseAsync()
-            .flatMapMaybe(new Function<RestResponse<Void, Map<String, Map<String, String>>>, Maybe<Map<String, Map<String, String>>>>() {
-                public Maybe<Map<String, Map<String, String>>> apply(RestResponse<Void, Map<String, Map<String, String>>> restResponse) {
-                    if (restResponse.body() == null) {
-                        return Maybe.empty();
-                    } else {
-                        return Maybe.just(restResponse.body());
-                    }
-                }
-            });
+            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -3399,7 +3032,7 @@ public final class DictionarysImpl implements Dictionarys {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<Void, Map<String, Map<String, String>>>> getDictionaryEmptyWithRestResponseAsync() {
+    public Single<BodyResponse<Map<String, Map<String, String>>>> getDictionaryEmptyWithRestResponseAsync() {
         return service.getDictionaryEmpty();
     }
 
@@ -3410,15 +3043,7 @@ public final class DictionarysImpl implements Dictionarys {
      */
     public Maybe<Map<String, Map<String, String>>> getDictionaryEmptyAsync() {
         return getDictionaryEmptyWithRestResponseAsync()
-            .flatMapMaybe(new Function<RestResponse<Void, Map<String, Map<String, String>>>, Maybe<Map<String, Map<String, String>>>>() {
-                public Maybe<Map<String, Map<String, String>>> apply(RestResponse<Void, Map<String, Map<String, String>>> restResponse) {
-                    if (restResponse.body() == null) {
-                        return Maybe.empty();
-                    } else {
-                        return Maybe.just(restResponse.body());
-                    }
-                }
-            });
+            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -3448,7 +3073,7 @@ public final class DictionarysImpl implements Dictionarys {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<Void, Map<String, Map<String, String>>>> getDictionaryItemNullWithRestResponseAsync() {
+    public Single<BodyResponse<Map<String, Map<String, String>>>> getDictionaryItemNullWithRestResponseAsync() {
         return service.getDictionaryItemNull();
     }
 
@@ -3459,15 +3084,7 @@ public final class DictionarysImpl implements Dictionarys {
      */
     public Maybe<Map<String, Map<String, String>>> getDictionaryItemNullAsync() {
         return getDictionaryItemNullWithRestResponseAsync()
-            .flatMapMaybe(new Function<RestResponse<Void, Map<String, Map<String, String>>>, Maybe<Map<String, Map<String, String>>>>() {
-                public Maybe<Map<String, Map<String, String>>> apply(RestResponse<Void, Map<String, Map<String, String>>> restResponse) {
-                    if (restResponse.body() == null) {
-                        return Maybe.empty();
-                    } else {
-                        return Maybe.just(restResponse.body());
-                    }
-                }
-            });
+            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -3497,7 +3114,7 @@ public final class DictionarysImpl implements Dictionarys {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<Void, Map<String, Map<String, String>>>> getDictionaryItemEmptyWithRestResponseAsync() {
+    public Single<BodyResponse<Map<String, Map<String, String>>>> getDictionaryItemEmptyWithRestResponseAsync() {
         return service.getDictionaryItemEmpty();
     }
 
@@ -3508,15 +3125,7 @@ public final class DictionarysImpl implements Dictionarys {
      */
     public Maybe<Map<String, Map<String, String>>> getDictionaryItemEmptyAsync() {
         return getDictionaryItemEmptyWithRestResponseAsync()
-            .flatMapMaybe(new Function<RestResponse<Void, Map<String, Map<String, String>>>, Maybe<Map<String, Map<String, String>>>>() {
-                public Maybe<Map<String, Map<String, String>>> apply(RestResponse<Void, Map<String, Map<String, String>>> restResponse) {
-                    if (restResponse.body() == null) {
-                        return Maybe.empty();
-                    } else {
-                        return Maybe.just(restResponse.body());
-                    }
-                }
-            });
+            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -3546,7 +3155,7 @@ public final class DictionarysImpl implements Dictionarys {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<Void, Map<String, Map<String, String>>>> getDictionaryValidWithRestResponseAsync() {
+    public Single<BodyResponse<Map<String, Map<String, String>>>> getDictionaryValidWithRestResponseAsync() {
         return service.getDictionaryValid();
     }
 
@@ -3557,15 +3166,7 @@ public final class DictionarysImpl implements Dictionarys {
      */
     public Maybe<Map<String, Map<String, String>>> getDictionaryValidAsync() {
         return getDictionaryValidWithRestResponseAsync()
-            .flatMapMaybe(new Function<RestResponse<Void, Map<String, Map<String, String>>>, Maybe<Map<String, Map<String, String>>>>() {
-                public Maybe<Map<String, Map<String, String>>> apply(RestResponse<Void, Map<String, Map<String, String>>> restResponse) {
-                    if (restResponse.body() == null) {
-                        return Maybe.empty();
-                    } else {
-                        return Maybe.just(restResponse.body());
-                    }
-                }
-            });
+            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -3599,7 +3200,7 @@ public final class DictionarysImpl implements Dictionarys {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<Void, Void>> putDictionaryValidWithRestResponseAsync(@NonNull Map<String, Map<String, String>> arrayBody) {
+    public Single<VoidResponse> putDictionaryValidWithRestResponseAsync(@NonNull Map<String, Map<String, String>> arrayBody) {
         if (arrayBody == null) {
             throw new IllegalArgumentException("Parameter arrayBody is required and cannot be null.");
         }

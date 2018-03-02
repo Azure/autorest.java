@@ -10,9 +10,9 @@
 
 package fixtures.url;
 
-import com.microsoft.rest.v2.RestResponse;
 import com.microsoft.rest.v2.ServiceCallback;
 import com.microsoft.rest.v2.ServiceFuture;
+import com.microsoft.rest.v2.VoidResponse;
 import fixtures.url.models.ErrorException;
 import fixtures.url.models.UriColor;
 import io.reactivex.Completable;
@@ -48,7 +48,7 @@ public interface Queries {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, Void>> getBooleanTrueWithRestResponseAsync();
+    Single<VoidResponse> getBooleanTrueWithRestResponseAsync();
 
     /**
      * Get true Boolean value on path.
@@ -79,7 +79,7 @@ public interface Queries {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, Void>> getBooleanFalseWithRestResponseAsync();
+    Single<VoidResponse> getBooleanFalseWithRestResponseAsync();
 
     /**
      * Get false Boolean value on path.
@@ -110,7 +110,7 @@ public interface Queries {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, Void>> getBooleanNullWithRestResponseAsync();
+    Single<VoidResponse> getBooleanNullWithRestResponseAsync();
 
     /**
      * Get null Boolean value on query (query string should be absent).
@@ -146,7 +146,7 @@ public interface Queries {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, Void>> getBooleanNullWithRestResponseAsync(Boolean boolQuery);
+    Single<VoidResponse> getBooleanNullWithRestResponseAsync(Boolean boolQuery);
 
     /**
      * Get null Boolean value on query (query string should be absent).
@@ -179,7 +179,7 @@ public interface Queries {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, Void>> getIntOneMillionWithRestResponseAsync();
+    Single<VoidResponse> getIntOneMillionWithRestResponseAsync();
 
     /**
      * Get '1000000' integer value.
@@ -210,7 +210,7 @@ public interface Queries {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, Void>> getIntNegativeOneMillionWithRestResponseAsync();
+    Single<VoidResponse> getIntNegativeOneMillionWithRestResponseAsync();
 
     /**
      * Get '-1000000' integer value.
@@ -241,7 +241,7 @@ public interface Queries {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, Void>> getIntNullWithRestResponseAsync();
+    Single<VoidResponse> getIntNullWithRestResponseAsync();
 
     /**
      * Get null integer value (no query parameter).
@@ -277,7 +277,7 @@ public interface Queries {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, Void>> getIntNullWithRestResponseAsync(Integer intQuery);
+    Single<VoidResponse> getIntNullWithRestResponseAsync(Integer intQuery);
 
     /**
      * Get null integer value (no query parameter).
@@ -310,7 +310,7 @@ public interface Queries {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, Void>> getTenBillionWithRestResponseAsync();
+    Single<VoidResponse> getTenBillionWithRestResponseAsync();
 
     /**
      * Get '10000000000' 64 bit integer value.
@@ -341,7 +341,7 @@ public interface Queries {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, Void>> getNegativeTenBillionWithRestResponseAsync();
+    Single<VoidResponse> getNegativeTenBillionWithRestResponseAsync();
 
     /**
      * Get '-10000000000' 64 bit integer value.
@@ -372,7 +372,7 @@ public interface Queries {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, Void>> getLongNullWithRestResponseAsync();
+    Single<VoidResponse> getLongNullWithRestResponseAsync();
 
     /**
      * Get 'null 64 bit integer value (no query param in uri).
@@ -408,7 +408,7 @@ public interface Queries {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, Void>> getLongNullWithRestResponseAsync(Long longQuery);
+    Single<VoidResponse> getLongNullWithRestResponseAsync(Long longQuery);
 
     /**
      * Get 'null 64 bit integer value (no query param in uri).
@@ -441,7 +441,7 @@ public interface Queries {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, Void>> floatScientificPositiveWithRestResponseAsync();
+    Single<VoidResponse> floatScientificPositiveWithRestResponseAsync();
 
     /**
      * Get '1.034E+20' numeric value.
@@ -472,7 +472,7 @@ public interface Queries {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, Void>> floatScientificNegativeWithRestResponseAsync();
+    Single<VoidResponse> floatScientificNegativeWithRestResponseAsync();
 
     /**
      * Get '-1.034E-20' numeric value.
@@ -503,7 +503,7 @@ public interface Queries {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, Void>> floatNullWithRestResponseAsync();
+    Single<VoidResponse> floatNullWithRestResponseAsync();
 
     /**
      * Get null numeric value (no query parameter).
@@ -539,7 +539,7 @@ public interface Queries {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, Void>> floatNullWithRestResponseAsync(Double floatQuery);
+    Single<VoidResponse> floatNullWithRestResponseAsync(Double floatQuery);
 
     /**
      * Get null numeric value (no query parameter).
@@ -572,7 +572,7 @@ public interface Queries {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, Void>> doubleDecimalPositiveWithRestResponseAsync();
+    Single<VoidResponse> doubleDecimalPositiveWithRestResponseAsync();
 
     /**
      * Get '9999999.999' numeric value.
@@ -603,7 +603,7 @@ public interface Queries {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, Void>> doubleDecimalNegativeWithRestResponseAsync();
+    Single<VoidResponse> doubleDecimalNegativeWithRestResponseAsync();
 
     /**
      * Get '-9999999.999' numeric value.
@@ -634,7 +634,7 @@ public interface Queries {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, Void>> doubleNullWithRestResponseAsync();
+    Single<VoidResponse> doubleNullWithRestResponseAsync();
 
     /**
      * Get null numeric value (no query parameter).
@@ -670,7 +670,7 @@ public interface Queries {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, Void>> doubleNullWithRestResponseAsync(Double doubleQuery);
+    Single<VoidResponse> doubleNullWithRestResponseAsync(Double doubleQuery);
 
     /**
      * Get null numeric value (no query parameter).
@@ -703,7 +703,7 @@ public interface Queries {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, Void>> stringUnicodeWithRestResponseAsync();
+    Single<VoidResponse> stringUnicodeWithRestResponseAsync();
 
     /**
      * Get '啊齄丂狛狜隣郎隣兀﨩' multi-byte string value.
@@ -734,7 +734,7 @@ public interface Queries {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, Void>> stringUrlEncodedWithRestResponseAsync();
+    Single<VoidResponse> stringUrlEncodedWithRestResponseAsync();
 
     /**
      * Get 'begin!*'();:@ &amp;=+$,/?#[]end.
@@ -765,7 +765,7 @@ public interface Queries {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, Void>> stringEmptyWithRestResponseAsync();
+    Single<VoidResponse> stringEmptyWithRestResponseAsync();
 
     /**
      * Get ''.
@@ -796,7 +796,7 @@ public interface Queries {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, Void>> stringNullWithRestResponseAsync();
+    Single<VoidResponse> stringNullWithRestResponseAsync();
 
     /**
      * Get null (no query parameter in url).
@@ -832,7 +832,7 @@ public interface Queries {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, Void>> stringNullWithRestResponseAsync(String stringQuery);
+    Single<VoidResponse> stringNullWithRestResponseAsync(String stringQuery);
 
     /**
      * Get null (no query parameter in url).
@@ -865,7 +865,7 @@ public interface Queries {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, Void>> enumValidWithRestResponseAsync();
+    Single<VoidResponse> enumValidWithRestResponseAsync();
 
     /**
      * Get using uri with query parameter 'green color'.
@@ -901,7 +901,7 @@ public interface Queries {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, Void>> enumValidWithRestResponseAsync(UriColor enumQuery);
+    Single<VoidResponse> enumValidWithRestResponseAsync(UriColor enumQuery);
 
     /**
      * Get using uri with query parameter 'green color'.
@@ -934,7 +934,7 @@ public interface Queries {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, Void>> enumNullWithRestResponseAsync();
+    Single<VoidResponse> enumNullWithRestResponseAsync();
 
     /**
      * Get null (no query parameter in url).
@@ -970,7 +970,7 @@ public interface Queries {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, Void>> enumNullWithRestResponseAsync(UriColor enumQuery);
+    Single<VoidResponse> enumNullWithRestResponseAsync(UriColor enumQuery);
 
     /**
      * Get null (no query parameter in url).
@@ -1003,7 +1003,7 @@ public interface Queries {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, Void>> byteMultiByteWithRestResponseAsync();
+    Single<VoidResponse> byteMultiByteWithRestResponseAsync();
 
     /**
      * Get '啊齄丂狛狜隣郎隣兀﨩' multibyte value as utf-8 encoded byte array.
@@ -1039,7 +1039,7 @@ public interface Queries {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, Void>> byteMultiByteWithRestResponseAsync(byte[] byteQuery);
+    Single<VoidResponse> byteMultiByteWithRestResponseAsync(byte[] byteQuery);
 
     /**
      * Get '啊齄丂狛狜隣郎隣兀﨩' multibyte value as utf-8 encoded byte array.
@@ -1072,7 +1072,7 @@ public interface Queries {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, Void>> byteEmptyWithRestResponseAsync();
+    Single<VoidResponse> byteEmptyWithRestResponseAsync();
 
     /**
      * Get '' as byte array.
@@ -1103,7 +1103,7 @@ public interface Queries {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, Void>> byteNullWithRestResponseAsync();
+    Single<VoidResponse> byteNullWithRestResponseAsync();
 
     /**
      * Get null as byte array (no query parameters in uri).
@@ -1139,7 +1139,7 @@ public interface Queries {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, Void>> byteNullWithRestResponseAsync(byte[] byteQuery);
+    Single<VoidResponse> byteNullWithRestResponseAsync(byte[] byteQuery);
 
     /**
      * Get null as byte array (no query parameters in uri).
@@ -1172,7 +1172,7 @@ public interface Queries {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, Void>> dateValidWithRestResponseAsync();
+    Single<VoidResponse> dateValidWithRestResponseAsync();
 
     /**
      * Get '2012-01-01' as date.
@@ -1203,7 +1203,7 @@ public interface Queries {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, Void>> dateNullWithRestResponseAsync();
+    Single<VoidResponse> dateNullWithRestResponseAsync();
 
     /**
      * Get null as date - this should result in no query parameters in uri.
@@ -1239,7 +1239,7 @@ public interface Queries {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, Void>> dateNullWithRestResponseAsync(LocalDate dateQuery);
+    Single<VoidResponse> dateNullWithRestResponseAsync(LocalDate dateQuery);
 
     /**
      * Get null as date - this should result in no query parameters in uri.
@@ -1272,7 +1272,7 @@ public interface Queries {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, Void>> dateTimeValidWithRestResponseAsync();
+    Single<VoidResponse> dateTimeValidWithRestResponseAsync();
 
     /**
      * Get '2012-01-01T01:01:01Z' as date-time.
@@ -1303,7 +1303,7 @@ public interface Queries {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, Void>> dateTimeNullWithRestResponseAsync();
+    Single<VoidResponse> dateTimeNullWithRestResponseAsync();
 
     /**
      * Get null as date-time, should result in no query parameters in uri.
@@ -1339,7 +1339,7 @@ public interface Queries {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, Void>> dateTimeNullWithRestResponseAsync(DateTime dateTimeQuery);
+    Single<VoidResponse> dateTimeNullWithRestResponseAsync(DateTime dateTimeQuery);
 
     /**
      * Get null as date-time, should result in no query parameters in uri.
@@ -1372,7 +1372,7 @@ public interface Queries {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, Void>> arrayStringCsvValidWithRestResponseAsync();
+    Single<VoidResponse> arrayStringCsvValidWithRestResponseAsync();
 
     /**
      * Get an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the csv-array format.
@@ -1408,7 +1408,7 @@ public interface Queries {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, Void>> arrayStringCsvValidWithRestResponseAsync(List<String> arrayQuery);
+    Single<VoidResponse> arrayStringCsvValidWithRestResponseAsync(List<String> arrayQuery);
 
     /**
      * Get an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the csv-array format.
@@ -1441,7 +1441,7 @@ public interface Queries {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, Void>> arrayStringCsvNullWithRestResponseAsync();
+    Single<VoidResponse> arrayStringCsvNullWithRestResponseAsync();
 
     /**
      * Get a null array of string using the csv-array format.
@@ -1477,7 +1477,7 @@ public interface Queries {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, Void>> arrayStringCsvNullWithRestResponseAsync(List<String> arrayQuery);
+    Single<VoidResponse> arrayStringCsvNullWithRestResponseAsync(List<String> arrayQuery);
 
     /**
      * Get a null array of string using the csv-array format.
@@ -1510,7 +1510,7 @@ public interface Queries {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, Void>> arrayStringCsvEmptyWithRestResponseAsync();
+    Single<VoidResponse> arrayStringCsvEmptyWithRestResponseAsync();
 
     /**
      * Get an empty array [] of string using the csv-array format.
@@ -1546,7 +1546,7 @@ public interface Queries {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, Void>> arrayStringCsvEmptyWithRestResponseAsync(List<String> arrayQuery);
+    Single<VoidResponse> arrayStringCsvEmptyWithRestResponseAsync(List<String> arrayQuery);
 
     /**
      * Get an empty array [] of string using the csv-array format.
@@ -1579,7 +1579,7 @@ public interface Queries {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, Void>> arrayStringSsvValidWithRestResponseAsync();
+    Single<VoidResponse> arrayStringSsvValidWithRestResponseAsync();
 
     /**
      * Get an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the ssv-array format.
@@ -1615,7 +1615,7 @@ public interface Queries {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, Void>> arrayStringSsvValidWithRestResponseAsync(List<String> arrayQuery);
+    Single<VoidResponse> arrayStringSsvValidWithRestResponseAsync(List<String> arrayQuery);
 
     /**
      * Get an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the ssv-array format.
@@ -1648,7 +1648,7 @@ public interface Queries {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, Void>> arrayStringTsvValidWithRestResponseAsync();
+    Single<VoidResponse> arrayStringTsvValidWithRestResponseAsync();
 
     /**
      * Get an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the tsv-array format.
@@ -1684,7 +1684,7 @@ public interface Queries {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, Void>> arrayStringTsvValidWithRestResponseAsync(List<String> arrayQuery);
+    Single<VoidResponse> arrayStringTsvValidWithRestResponseAsync(List<String> arrayQuery);
 
     /**
      * Get an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the tsv-array format.
@@ -1717,7 +1717,7 @@ public interface Queries {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, Void>> arrayStringPipesValidWithRestResponseAsync();
+    Single<VoidResponse> arrayStringPipesValidWithRestResponseAsync();
 
     /**
      * Get an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the pipes-array format.
@@ -1753,7 +1753,7 @@ public interface Queries {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, Void>> arrayStringPipesValidWithRestResponseAsync(List<String> arrayQuery);
+    Single<VoidResponse> arrayStringPipesValidWithRestResponseAsync(List<String> arrayQuery);
 
     /**
      * Get an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the pipes-array format.

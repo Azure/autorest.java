@@ -10,9 +10,10 @@
 
 package fixtures.bodydatetimerfc1123;
 
-import com.microsoft.rest.v2.RestResponse;
+import com.microsoft.rest.v2.BodyResponse;
 import com.microsoft.rest.v2.ServiceCallback;
 import com.microsoft.rest.v2.ServiceFuture;
+import com.microsoft.rest.v2.VoidResponse;
 import fixtures.bodydatetimerfc1123.models.ErrorException;
 import io.reactivex.Completable;
 import io.reactivex.Maybe;
@@ -48,7 +49,7 @@ public interface Datetimerfc1123s {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, DateTime>> getNullWithRestResponseAsync();
+    Single<BodyResponse<DateTime>> getNullWithRestResponseAsync();
 
     /**
      * Get null datetime value.
@@ -80,7 +81,7 @@ public interface Datetimerfc1123s {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, DateTime>> getInvalidWithRestResponseAsync();
+    Single<BodyResponse<DateTime>> getInvalidWithRestResponseAsync();
 
     /**
      * Get invalid datetime value.
@@ -112,7 +113,7 @@ public interface Datetimerfc1123s {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, DateTime>> getOverflowWithRestResponseAsync();
+    Single<BodyResponse<DateTime>> getOverflowWithRestResponseAsync();
 
     /**
      * Get overflow datetime value.
@@ -144,7 +145,7 @@ public interface Datetimerfc1123s {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, DateTime>> getUnderflowWithRestResponseAsync();
+    Single<BodyResponse<DateTime>> getUnderflowWithRestResponseAsync();
 
     /**
      * Get underflow datetime value.
@@ -180,7 +181,7 @@ public interface Datetimerfc1123s {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, Void>> putUtcMaxDateTimeWithRestResponseAsync(@NonNull DateTime datetimeBody);
+    Single<VoidResponse> putUtcMaxDateTimeWithRestResponseAsync(@NonNull DateTime datetimeBody);
 
     /**
      * Put max datetime value Fri, 31 Dec 9999 23:59:59 GMT.
@@ -214,7 +215,7 @@ public interface Datetimerfc1123s {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, DateTime>> getUtcLowercaseMaxDateTimeWithRestResponseAsync();
+    Single<BodyResponse<DateTime>> getUtcLowercaseMaxDateTimeWithRestResponseAsync();
 
     /**
      * Get max datetime value fri, 31 dec 9999 23:59:59 gmt.
@@ -246,7 +247,7 @@ public interface Datetimerfc1123s {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, DateTime>> getUtcUppercaseMaxDateTimeWithRestResponseAsync();
+    Single<BodyResponse<DateTime>> getUtcUppercaseMaxDateTimeWithRestResponseAsync();
 
     /**
      * Get max datetime value FRI, 31 DEC 9999 23:59:59 GMT.
@@ -282,7 +283,7 @@ public interface Datetimerfc1123s {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, Void>> putUtcMinDateTimeWithRestResponseAsync(@NonNull DateTime datetimeBody);
+    Single<VoidResponse> putUtcMinDateTimeWithRestResponseAsync(@NonNull DateTime datetimeBody);
 
     /**
      * Put min datetime value Mon, 1 Jan 0001 00:00:00 GMT.
@@ -316,7 +317,7 @@ public interface Datetimerfc1123s {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, DateTime>> getUtcMinDateTimeWithRestResponseAsync();
+    Single<BodyResponse<DateTime>> getUtcMinDateTimeWithRestResponseAsync();
 
     /**
      * Get min datetime value Mon, 1 Jan 0001 00:00:00 GMT.

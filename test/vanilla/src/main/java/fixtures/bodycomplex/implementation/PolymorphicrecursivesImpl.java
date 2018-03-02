@@ -10,11 +10,12 @@
 
 package fixtures.bodycomplex.implementation;
 
+import com.microsoft.rest.v2.BodyResponse;
 import com.microsoft.rest.v2.RestProxy;
-import com.microsoft.rest.v2.RestResponse;
 import com.microsoft.rest.v2.ServiceCallback;
 import com.microsoft.rest.v2.ServiceFuture;
 import com.microsoft.rest.v2.Validator;
+import com.microsoft.rest.v2.VoidResponse;
 import com.microsoft.rest.v2.annotations.BodyParam;
 import com.microsoft.rest.v2.annotations.ExpectedResponses;
 import com.microsoft.rest.v2.annotations.GET;
@@ -64,12 +65,12 @@ public final class PolymorphicrecursivesImpl implements Polymorphicrecursives {
         @GET("complex/polymorphicrecursive/valid")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<RestResponse<Void, Fish>> getValid();
+        Single<BodyResponse<Fish>> getValid();
 
         @PUT("complex/polymorphicrecursive/valid")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<RestResponse<Void, Void>> putValid(@BodyParam("application/json; charset=utf-8") Fish complexBody);
+        Single<VoidResponse> putValid(@BodyParam("application/json; charset=utf-8") Fish complexBody);
     }
 
     /**
@@ -99,7 +100,7 @@ public final class PolymorphicrecursivesImpl implements Polymorphicrecursives {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<Void, Fish>> getValidWithRestResponseAsync() {
+    public Single<BodyResponse<Fish>> getValidWithRestResponseAsync() {
         return service.getValid();
     }
 
@@ -110,15 +111,7 @@ public final class PolymorphicrecursivesImpl implements Polymorphicrecursives {
      */
     public Maybe<Fish> getValidAsync() {
         return getValidWithRestResponseAsync()
-            .flatMapMaybe(new Function<RestResponse<Void, Fish>, Maybe<Fish>>() {
-                public Maybe<Fish> apply(RestResponse<Void, Fish> restResponse) {
-                    if (restResponse.body() == null) {
-                        return Maybe.empty();
-                    } else {
-                        return Maybe.just(restResponse.body());
-                    }
-                }
-            });
+            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -308,7 +301,7 @@ public final class PolymorphicrecursivesImpl implements Polymorphicrecursives {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<Void, Void>> putValidWithRestResponseAsync(@NonNull Fish complexBody) {
+    public Single<VoidResponse> putValidWithRestResponseAsync(@NonNull Fish complexBody) {
         if (complexBody == null) {
             throw new IllegalArgumentException("Parameter complexBody is required and cannot be null.");
         }

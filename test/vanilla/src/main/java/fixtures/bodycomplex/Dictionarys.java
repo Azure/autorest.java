@@ -10,9 +10,10 @@
 
 package fixtures.bodycomplex;
 
-import com.microsoft.rest.v2.RestResponse;
+import com.microsoft.rest.v2.BodyResponse;
 import com.microsoft.rest.v2.ServiceCallback;
 import com.microsoft.rest.v2.ServiceFuture;
+import com.microsoft.rest.v2.VoidResponse;
 import fixtures.bodycomplex.models.DictionaryWrapper;
 import fixtures.bodycomplex.models.ErrorException;
 import io.reactivex.Completable;
@@ -48,7 +49,7 @@ public interface Dictionarys {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, DictionaryWrapper>> getValidWithRestResponseAsync();
+    Single<BodyResponse<DictionaryWrapper>> getValidWithRestResponseAsync();
 
     /**
      * Get complex types with dictionary property.
@@ -84,7 +85,7 @@ public interface Dictionarys {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, Void>> putValidWithRestResponseAsync(@NonNull DictionaryWrapper complexBody);
+    Single<VoidResponse> putValidWithRestResponseAsync(@NonNull DictionaryWrapper complexBody);
 
     /**
      * Put complex types with dictionary property.
@@ -118,7 +119,7 @@ public interface Dictionarys {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, DictionaryWrapper>> getEmptyWithRestResponseAsync();
+    Single<BodyResponse<DictionaryWrapper>> getEmptyWithRestResponseAsync();
 
     /**
      * Get complex types with dictionary property which is empty.
@@ -154,7 +155,7 @@ public interface Dictionarys {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, Void>> putEmptyWithRestResponseAsync(@NonNull DictionaryWrapper complexBody);
+    Single<VoidResponse> putEmptyWithRestResponseAsync(@NonNull DictionaryWrapper complexBody);
 
     /**
      * Put complex types with dictionary property which is empty.
@@ -188,7 +189,7 @@ public interface Dictionarys {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, DictionaryWrapper>> getNullWithRestResponseAsync();
+    Single<BodyResponse<DictionaryWrapper>> getNullWithRestResponseAsync();
 
     /**
      * Get complex types with dictionary property which is null.
@@ -220,7 +221,7 @@ public interface Dictionarys {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, DictionaryWrapper>> getNotProvidedWithRestResponseAsync();
+    Single<BodyResponse<DictionaryWrapper>> getNotProvidedWithRestResponseAsync();
 
     /**
      * Get complex types with dictionary property while server doesn't provide a response payload.

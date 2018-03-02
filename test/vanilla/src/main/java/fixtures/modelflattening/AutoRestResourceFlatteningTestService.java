@@ -10,9 +10,10 @@
 
 package fixtures.modelflattening;
 
-import com.microsoft.rest.v2.RestResponse;
+import com.microsoft.rest.v2.BodyResponse;
 import com.microsoft.rest.v2.ServiceCallback;
 import com.microsoft.rest.v2.ServiceFuture;
+import com.microsoft.rest.v2.VoidResponse;
 import fixtures.modelflattening.models.ErrorException;
 import fixtures.modelflattening.models.FlattenedProduct;
 import fixtures.modelflattening.models.FlattenParameterGroup;
@@ -54,7 +55,7 @@ public interface AutoRestResourceFlatteningTestService {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, Void>> putArrayWithRestResponseAsync();
+    Single<VoidResponse> putArrayWithRestResponseAsync();
 
     /**
      * Put External Resource as an Array.
@@ -90,7 +91,7 @@ public interface AutoRestResourceFlatteningTestService {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, Void>> putArrayWithRestResponseAsync(List<Resource> resourceArray);
+    Single<VoidResponse> putArrayWithRestResponseAsync(List<Resource> resourceArray);
 
     /**
      * Put External Resource as an Array.
@@ -124,7 +125,7 @@ public interface AutoRestResourceFlatteningTestService {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, List<FlattenedProduct>>> getArrayWithRestResponseAsync();
+    Single<BodyResponse<List<FlattenedProduct>>> getArrayWithRestResponseAsync();
 
     /**
      * Get External Resource as an Array.
@@ -155,7 +156,7 @@ public interface AutoRestResourceFlatteningTestService {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, Void>> putWrappedArrayWithRestResponseAsync();
+    Single<VoidResponse> putWrappedArrayWithRestResponseAsync();
 
     /**
      * No need to have a route in Express server for this operation. Used to verify the type flattened is not removed if it's referenced in an array.
@@ -191,7 +192,7 @@ public interface AutoRestResourceFlatteningTestService {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, Void>> putWrappedArrayWithRestResponseAsync(List<WrappedProduct> resourceArray);
+    Single<VoidResponse> putWrappedArrayWithRestResponseAsync(List<WrappedProduct> resourceArray);
 
     /**
      * No need to have a route in Express server for this operation. Used to verify the type flattened is not removed if it's referenced in an array.
@@ -225,7 +226,7 @@ public interface AutoRestResourceFlatteningTestService {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, List<ProductWrapper>>> getWrappedArrayWithRestResponseAsync();
+    Single<BodyResponse<List<ProductWrapper>>> getWrappedArrayWithRestResponseAsync();
 
     /**
      * No need to have a route in Express server for this operation. Used to verify the type flattened is not removed if it's referenced in an array.
@@ -256,7 +257,7 @@ public interface AutoRestResourceFlatteningTestService {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, Void>> putDictionaryWithRestResponseAsync();
+    Single<VoidResponse> putDictionaryWithRestResponseAsync();
 
     /**
      * Put External Resource as a Dictionary.
@@ -292,7 +293,7 @@ public interface AutoRestResourceFlatteningTestService {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, Void>> putDictionaryWithRestResponseAsync(Map<String, FlattenedProduct> resourceDictionary);
+    Single<VoidResponse> putDictionaryWithRestResponseAsync(Map<String, FlattenedProduct> resourceDictionary);
 
     /**
      * Put External Resource as a Dictionary.
@@ -326,7 +327,7 @@ public interface AutoRestResourceFlatteningTestService {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, Map<String, FlattenedProduct>>> getDictionaryWithRestResponseAsync();
+    Single<BodyResponse<Map<String, FlattenedProduct>>> getDictionaryWithRestResponseAsync();
 
     /**
      * Get External Resource as a Dictionary.
@@ -357,7 +358,7 @@ public interface AutoRestResourceFlatteningTestService {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, Void>> putResourceCollectionWithRestResponseAsync();
+    Single<VoidResponse> putResourceCollectionWithRestResponseAsync();
 
     /**
      * Put External Resource as a ResourceCollection.
@@ -393,7 +394,7 @@ public interface AutoRestResourceFlatteningTestService {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, Void>> putResourceCollectionWithRestResponseAsync(ResourceCollection resourceComplexObject);
+    Single<VoidResponse> putResourceCollectionWithRestResponseAsync(ResourceCollection resourceComplexObject);
 
     /**
      * Put External Resource as a ResourceCollection.
@@ -427,7 +428,7 @@ public interface AutoRestResourceFlatteningTestService {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, ResourceCollection>> getResourceCollectionWithRestResponseAsync();
+    Single<BodyResponse<ResourceCollection>> getResourceCollectionWithRestResponseAsync();
 
     /**
      * Get External Resource as a ResourceCollection.
@@ -459,7 +460,7 @@ public interface AutoRestResourceFlatteningTestService {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, SimpleProduct>> putSimpleProductWithRestResponseAsync();
+    Single<BodyResponse<SimpleProduct>> putSimpleProductWithRestResponseAsync();
 
     /**
      * Put Simple Product with client flattening true on the model.
@@ -496,7 +497,7 @@ public interface AutoRestResourceFlatteningTestService {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, SimpleProduct>> putSimpleProductWithRestResponseAsync(SimpleProduct simpleBodyProduct);
+    Single<BodyResponse<SimpleProduct>> putSimpleProductWithRestResponseAsync(SimpleProduct simpleBodyProduct);
 
     /**
      * Put Simple Product with client flattening true on the model.
@@ -538,7 +539,7 @@ public interface AutoRestResourceFlatteningTestService {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, SimpleProduct>> postFlattenedSimpleProductWithRestResponseAsync(@NonNull String productId, @NonNull String maxProductDisplayName);
+    Single<BodyResponse<SimpleProduct>> postFlattenedSimpleProductWithRestResponseAsync(@NonNull String productId, @NonNull String maxProductDisplayName);
 
     /**
      * Put Flattened Simple Product with client flattening true on the parameter.
@@ -590,7 +591,7 @@ public interface AutoRestResourceFlatteningTestService {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, SimpleProduct>> postFlattenedSimpleProductWithRestResponseAsync(@NonNull String productId, @NonNull String maxProductDisplayName, String description, String genericValue, String odatavalue);
+    Single<BodyResponse<SimpleProduct>> postFlattenedSimpleProductWithRestResponseAsync(@NonNull String productId, @NonNull String maxProductDisplayName, String description, String genericValue, String odatavalue);
 
     /**
      * Put Flattened Simple Product with client flattening true on the parameter.
@@ -633,7 +634,7 @@ public interface AutoRestResourceFlatteningTestService {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, SimpleProduct>> putSimpleProductWithGroupingWithRestResponseAsync(@NonNull FlattenParameterGroup flattenParameterGroup);
+    Single<BodyResponse<SimpleProduct>> putSimpleProductWithGroupingWithRestResponseAsync(@NonNull FlattenParameterGroup flattenParameterGroup);
 
     /**
      * Put Simple Product with client flattening true on the model.

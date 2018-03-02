@@ -10,8 +10,8 @@
 
 package fixtures.http.implementation;
 
+import com.microsoft.rest.v2.BodyResponse;
 import com.microsoft.rest.v2.RestProxy;
-import com.microsoft.rest.v2.RestResponse;
 import com.microsoft.rest.v2.ServiceCallback;
 import com.microsoft.rest.v2.ServiceFuture;
 import com.microsoft.rest.v2.annotations.BodyParam;
@@ -62,19 +62,19 @@ public final class HttpServerFailuresImpl implements HttpServerFailures {
     private interface HttpServerFailuresService {
         @HEAD("http/failure/server/501")
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<RestResponse<Void, Error>> head501();
+        Single<BodyResponse<Error>> head501();
 
         @GET("http/failure/server/501")
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<RestResponse<Void, Error>> get501();
+        Single<BodyResponse<Error>> get501();
 
         @POST("http/failure/server/505")
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<RestResponse<Void, Error>> post505(@BodyParam("application/json; charset=utf-8") Boolean booleanValue);
+        Single<BodyResponse<Error>> post505(@BodyParam("application/json; charset=utf-8") Boolean booleanValue);
 
         @DELETE("http/failure/server/505")
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<RestResponse<Void, Error>> delete505(@BodyParam("application/json; charset=utf-8") Boolean booleanValue);
+        Single<BodyResponse<Error>> delete505(@BodyParam("application/json; charset=utf-8") Boolean booleanValue);
     }
 
     /**
@@ -104,7 +104,7 @@ public final class HttpServerFailuresImpl implements HttpServerFailures {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<Void, Error>> head501WithRestResponseAsync() {
+    public Single<BodyResponse<Error>> head501WithRestResponseAsync() {
         return service.head501();
     }
 
@@ -115,15 +115,7 @@ public final class HttpServerFailuresImpl implements HttpServerFailures {
      */
     public Maybe<Error> head501Async() {
         return head501WithRestResponseAsync()
-            .flatMapMaybe(new Function<RestResponse<Void, Error>, Maybe<Error>>() {
-                public Maybe<Error> apply(RestResponse<Void, Error> restResponse) {
-                    if (restResponse.body() == null) {
-                        return Maybe.empty();
-                    } else {
-                        return Maybe.just(restResponse.body());
-                    }
-                }
-            });
+            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -153,7 +145,7 @@ public final class HttpServerFailuresImpl implements HttpServerFailures {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<Void, Error>> get501WithRestResponseAsync() {
+    public Single<BodyResponse<Error>> get501WithRestResponseAsync() {
         return service.get501();
     }
 
@@ -164,15 +156,7 @@ public final class HttpServerFailuresImpl implements HttpServerFailures {
      */
     public Maybe<Error> get501Async() {
         return get501WithRestResponseAsync()
-            .flatMapMaybe(new Function<RestResponse<Void, Error>, Maybe<Error>>() {
-                public Maybe<Error> apply(RestResponse<Void, Error> restResponse) {
-                    if (restResponse.body() == null) {
-                        return Maybe.empty();
-                    } else {
-                        return Maybe.just(restResponse.body());
-                    }
-                }
-            });
+            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -202,7 +186,7 @@ public final class HttpServerFailuresImpl implements HttpServerFailures {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<Void, Error>> post505WithRestResponseAsync() {
+    public Single<BodyResponse<Error>> post505WithRestResponseAsync() {
         final Boolean booleanValue = null;
         return service.post505(booleanValue);
     }
@@ -214,15 +198,7 @@ public final class HttpServerFailuresImpl implements HttpServerFailures {
      */
     public Maybe<Error> post505Async() {
         return post505WithRestResponseAsync()
-            .flatMapMaybe(new Function<RestResponse<Void, Error>, Maybe<Error>>() {
-                public Maybe<Error> apply(RestResponse<Void, Error> restResponse) {
-                    if (restResponse.body() == null) {
-                        return Maybe.empty();
-                    } else {
-                        return Maybe.just(restResponse.body());
-                    }
-                }
-            });
+            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -257,7 +233,7 @@ public final class HttpServerFailuresImpl implements HttpServerFailures {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<Void, Error>> post505WithRestResponseAsync(Boolean booleanValue) {
+    public Single<BodyResponse<Error>> post505WithRestResponseAsync(Boolean booleanValue) {
         return service.post505(booleanValue);
     }
 
@@ -270,15 +246,7 @@ public final class HttpServerFailuresImpl implements HttpServerFailures {
      */
     public Maybe<Error> post505Async(Boolean booleanValue) {
         return post505WithRestResponseAsync(booleanValue)
-            .flatMapMaybe(new Function<RestResponse<Void, Error>, Maybe<Error>>() {
-                public Maybe<Error> apply(RestResponse<Void, Error> restResponse) {
-                    if (restResponse.body() == null) {
-                        return Maybe.empty();
-                    } else {
-                        return Maybe.just(restResponse.body());
-                    }
-                }
-            });
+            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -308,7 +276,7 @@ public final class HttpServerFailuresImpl implements HttpServerFailures {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<Void, Error>> delete505WithRestResponseAsync() {
+    public Single<BodyResponse<Error>> delete505WithRestResponseAsync() {
         final Boolean booleanValue = null;
         return service.delete505(booleanValue);
     }
@@ -320,15 +288,7 @@ public final class HttpServerFailuresImpl implements HttpServerFailures {
      */
     public Maybe<Error> delete505Async() {
         return delete505WithRestResponseAsync()
-            .flatMapMaybe(new Function<RestResponse<Void, Error>, Maybe<Error>>() {
-                public Maybe<Error> apply(RestResponse<Void, Error> restResponse) {
-                    if (restResponse.body() == null) {
-                        return Maybe.empty();
-                    } else {
-                        return Maybe.just(restResponse.body());
-                    }
-                }
-            });
+            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -363,7 +323,7 @@ public final class HttpServerFailuresImpl implements HttpServerFailures {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<Void, Error>> delete505WithRestResponseAsync(Boolean booleanValue) {
+    public Single<BodyResponse<Error>> delete505WithRestResponseAsync(Boolean booleanValue) {
         return service.delete505(booleanValue);
     }
 
@@ -376,14 +336,6 @@ public final class HttpServerFailuresImpl implements HttpServerFailures {
      */
     public Maybe<Error> delete505Async(Boolean booleanValue) {
         return delete505WithRestResponseAsync(booleanValue)
-            .flatMapMaybe(new Function<RestResponse<Void, Error>, Maybe<Error>>() {
-                public Maybe<Error> apply(RestResponse<Void, Error> restResponse) {
-                    if (restResponse.body() == null) {
-                        return Maybe.empty();
-                    } else {
-                        return Maybe.just(restResponse.body());
-                    }
-                }
-            });
+            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 }

@@ -10,11 +10,12 @@
 
 package fixtures.bodycomplex.implementation;
 
+import com.microsoft.rest.v2.BodyResponse;
 import com.microsoft.rest.v2.RestProxy;
-import com.microsoft.rest.v2.RestResponse;
 import com.microsoft.rest.v2.ServiceCallback;
 import com.microsoft.rest.v2.ServiceFuture;
 import com.microsoft.rest.v2.Validator;
+import com.microsoft.rest.v2.VoidResponse;
 import com.microsoft.rest.v2.annotations.BodyParam;
 import com.microsoft.rest.v2.annotations.ExpectedResponses;
 import com.microsoft.rest.v2.annotations.GET;
@@ -64,27 +65,27 @@ public final class ArraysImpl implements Arrays {
         @GET("complex/array/valid")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<RestResponse<Void, ArrayWrapper>> getValid();
+        Single<BodyResponse<ArrayWrapper>> getValid();
 
         @PUT("complex/array/valid")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<RestResponse<Void, Void>> putValid(@BodyParam("application/json; charset=utf-8") ArrayWrapper complexBody);
+        Single<VoidResponse> putValid(@BodyParam("application/json; charset=utf-8") ArrayWrapper complexBody);
 
         @GET("complex/array/empty")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<RestResponse<Void, ArrayWrapper>> getEmpty();
+        Single<BodyResponse<ArrayWrapper>> getEmpty();
 
         @PUT("complex/array/empty")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<RestResponse<Void, Void>> putEmpty(@BodyParam("application/json; charset=utf-8") ArrayWrapper complexBody);
+        Single<VoidResponse> putEmpty(@BodyParam("application/json; charset=utf-8") ArrayWrapper complexBody);
 
         @GET("complex/array/notprovided")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<RestResponse<Void, ArrayWrapper>> getNotProvided();
+        Single<BodyResponse<ArrayWrapper>> getNotProvided();
     }
 
     /**
@@ -114,7 +115,7 @@ public final class ArraysImpl implements Arrays {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<Void, ArrayWrapper>> getValidWithRestResponseAsync() {
+    public Single<BodyResponse<ArrayWrapper>> getValidWithRestResponseAsync() {
         return service.getValid();
     }
 
@@ -125,15 +126,7 @@ public final class ArraysImpl implements Arrays {
      */
     public Maybe<ArrayWrapper> getValidAsync() {
         return getValidWithRestResponseAsync()
-            .flatMapMaybe(new Function<RestResponse<Void, ArrayWrapper>, Maybe<ArrayWrapper>>() {
-                public Maybe<ArrayWrapper> apply(RestResponse<Void, ArrayWrapper> restResponse) {
-                    if (restResponse.body() == null) {
-                        return Maybe.empty();
-                    } else {
-                        return Maybe.just(restResponse.body());
-                    }
-                }
-            });
+            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -167,7 +160,7 @@ public final class ArraysImpl implements Arrays {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<Void, Void>> putValidWithRestResponseAsync(@NonNull ArrayWrapper complexBody) {
+    public Single<VoidResponse> putValidWithRestResponseAsync(@NonNull ArrayWrapper complexBody) {
         if (complexBody == null) {
             throw new IllegalArgumentException("Parameter complexBody is required and cannot be null.");
         }
@@ -214,7 +207,7 @@ public final class ArraysImpl implements Arrays {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<Void, ArrayWrapper>> getEmptyWithRestResponseAsync() {
+    public Single<BodyResponse<ArrayWrapper>> getEmptyWithRestResponseAsync() {
         return service.getEmpty();
     }
 
@@ -225,15 +218,7 @@ public final class ArraysImpl implements Arrays {
      */
     public Maybe<ArrayWrapper> getEmptyAsync() {
         return getEmptyWithRestResponseAsync()
-            .flatMapMaybe(new Function<RestResponse<Void, ArrayWrapper>, Maybe<ArrayWrapper>>() {
-                public Maybe<ArrayWrapper> apply(RestResponse<Void, ArrayWrapper> restResponse) {
-                    if (restResponse.body() == null) {
-                        return Maybe.empty();
-                    } else {
-                        return Maybe.just(restResponse.body());
-                    }
-                }
-            });
+            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -267,7 +252,7 @@ public final class ArraysImpl implements Arrays {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<Void, Void>> putEmptyWithRestResponseAsync(@NonNull ArrayWrapper complexBody) {
+    public Single<VoidResponse> putEmptyWithRestResponseAsync(@NonNull ArrayWrapper complexBody) {
         if (complexBody == null) {
             throw new IllegalArgumentException("Parameter complexBody is required and cannot be null.");
         }
@@ -314,7 +299,7 @@ public final class ArraysImpl implements Arrays {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<Void, ArrayWrapper>> getNotProvidedWithRestResponseAsync() {
+    public Single<BodyResponse<ArrayWrapper>> getNotProvidedWithRestResponseAsync() {
         return service.getNotProvided();
     }
 
@@ -325,14 +310,6 @@ public final class ArraysImpl implements Arrays {
      */
     public Maybe<ArrayWrapper> getNotProvidedAsync() {
         return getNotProvidedWithRestResponseAsync()
-            .flatMapMaybe(new Function<RestResponse<Void, ArrayWrapper>, Maybe<ArrayWrapper>>() {
-                public Maybe<ArrayWrapper> apply(RestResponse<Void, ArrayWrapper> restResponse) {
-                    if (restResponse.body() == null) {
-                        return Maybe.empty();
-                    } else {
-                        return Maybe.just(restResponse.body());
-                    }
-                }
-            });
+            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 }

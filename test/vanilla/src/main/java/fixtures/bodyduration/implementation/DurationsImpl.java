@@ -10,10 +10,11 @@
 
 package fixtures.bodyduration.implementation;
 
+import com.microsoft.rest.v2.BodyResponse;
 import com.microsoft.rest.v2.RestProxy;
-import com.microsoft.rest.v2.RestResponse;
 import com.microsoft.rest.v2.ServiceCallback;
 import com.microsoft.rest.v2.ServiceFuture;
+import com.microsoft.rest.v2.VoidResponse;
 import com.microsoft.rest.v2.annotations.BodyParam;
 import com.microsoft.rest.v2.annotations.ExpectedResponses;
 import com.microsoft.rest.v2.annotations.GET;
@@ -63,22 +64,22 @@ public final class DurationsImpl implements Durations {
         @GET("duration/null")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<RestResponse<Void, Period>> getNull();
+        Single<BodyResponse<Period>> getNull();
 
         @PUT("duration/positiveduration")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<RestResponse<Void, Void>> putPositiveDuration(@BodyParam("application/json; charset=utf-8") Period durationBody);
+        Single<VoidResponse> putPositiveDuration(@BodyParam("application/json; charset=utf-8") Period durationBody);
 
         @GET("duration/positiveduration")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<RestResponse<Void, Period>> getPositiveDuration();
+        Single<BodyResponse<Period>> getPositiveDuration();
 
         @GET("duration/invalid")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<RestResponse<Void, Period>> getInvalid();
+        Single<BodyResponse<Period>> getInvalid();
     }
 
     /**
@@ -108,7 +109,7 @@ public final class DurationsImpl implements Durations {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<Void, Period>> getNullWithRestResponseAsync() {
+    public Single<BodyResponse<Period>> getNullWithRestResponseAsync() {
         return service.getNull();
     }
 
@@ -119,15 +120,7 @@ public final class DurationsImpl implements Durations {
      */
     public Maybe<Period> getNullAsync() {
         return getNullWithRestResponseAsync()
-            .flatMapMaybe(new Function<RestResponse<Void, Period>, Maybe<Period>>() {
-                public Maybe<Period> apply(RestResponse<Void, Period> restResponse) {
-                    if (restResponse.body() == null) {
-                        return Maybe.empty();
-                    } else {
-                        return Maybe.just(restResponse.body());
-                    }
-                }
-            });
+            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -161,7 +154,7 @@ public final class DurationsImpl implements Durations {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<Void, Void>> putPositiveDurationWithRestResponseAsync(@NonNull Period durationBody) {
+    public Single<VoidResponse> putPositiveDurationWithRestResponseAsync(@NonNull Period durationBody) {
         if (durationBody == null) {
             throw new IllegalArgumentException("Parameter durationBody is required and cannot be null.");
         }
@@ -207,7 +200,7 @@ public final class DurationsImpl implements Durations {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<Void, Period>> getPositiveDurationWithRestResponseAsync() {
+    public Single<BodyResponse<Period>> getPositiveDurationWithRestResponseAsync() {
         return service.getPositiveDuration();
     }
 
@@ -218,15 +211,7 @@ public final class DurationsImpl implements Durations {
      */
     public Maybe<Period> getPositiveDurationAsync() {
         return getPositiveDurationWithRestResponseAsync()
-            .flatMapMaybe(new Function<RestResponse<Void, Period>, Maybe<Period>>() {
-                public Maybe<Period> apply(RestResponse<Void, Period> restResponse) {
-                    if (restResponse.body() == null) {
-                        return Maybe.empty();
-                    } else {
-                        return Maybe.just(restResponse.body());
-                    }
-                }
-            });
+            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -256,7 +241,7 @@ public final class DurationsImpl implements Durations {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<Void, Period>> getInvalidWithRestResponseAsync() {
+    public Single<BodyResponse<Period>> getInvalidWithRestResponseAsync() {
         return service.getInvalid();
     }
 
@@ -267,14 +252,6 @@ public final class DurationsImpl implements Durations {
      */
     public Maybe<Period> getInvalidAsync() {
         return getInvalidWithRestResponseAsync()
-            .flatMapMaybe(new Function<RestResponse<Void, Period>, Maybe<Period>>() {
-                public Maybe<Period> apply(RestResponse<Void, Period> restResponse) {
-                    if (restResponse.body() == null) {
-                        return Maybe.empty();
-                    } else {
-                        return Maybe.just(restResponse.body());
-                    }
-                }
-            });
+            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 }

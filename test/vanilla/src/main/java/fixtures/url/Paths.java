@@ -10,9 +10,9 @@
 
 package fixtures.url;
 
-import com.microsoft.rest.v2.RestResponse;
 import com.microsoft.rest.v2.ServiceCallback;
 import com.microsoft.rest.v2.ServiceFuture;
+import com.microsoft.rest.v2.VoidResponse;
 import fixtures.url.models.ErrorException;
 import fixtures.url.models.UriColor;
 import io.reactivex.Completable;
@@ -49,7 +49,7 @@ public interface Paths {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, Void>> getBooleanTrueWithRestResponseAsync();
+    Single<VoidResponse> getBooleanTrueWithRestResponseAsync();
 
     /**
      * Get true Boolean value on path.
@@ -80,7 +80,7 @@ public interface Paths {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, Void>> getBooleanFalseWithRestResponseAsync();
+    Single<VoidResponse> getBooleanFalseWithRestResponseAsync();
 
     /**
      * Get false Boolean value on path.
@@ -111,7 +111,7 @@ public interface Paths {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, Void>> getIntOneMillionWithRestResponseAsync();
+    Single<VoidResponse> getIntOneMillionWithRestResponseAsync();
 
     /**
      * Get '1000000' integer value.
@@ -142,7 +142,7 @@ public interface Paths {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, Void>> getIntNegativeOneMillionWithRestResponseAsync();
+    Single<VoidResponse> getIntNegativeOneMillionWithRestResponseAsync();
 
     /**
      * Get '-1000000' integer value.
@@ -173,7 +173,7 @@ public interface Paths {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, Void>> getTenBillionWithRestResponseAsync();
+    Single<VoidResponse> getTenBillionWithRestResponseAsync();
 
     /**
      * Get '10000000000' 64 bit integer value.
@@ -204,7 +204,7 @@ public interface Paths {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, Void>> getNegativeTenBillionWithRestResponseAsync();
+    Single<VoidResponse> getNegativeTenBillionWithRestResponseAsync();
 
     /**
      * Get '-10000000000' 64 bit integer value.
@@ -235,7 +235,7 @@ public interface Paths {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, Void>> floatScientificPositiveWithRestResponseAsync();
+    Single<VoidResponse> floatScientificPositiveWithRestResponseAsync();
 
     /**
      * Get '1.034E+20' numeric value.
@@ -266,7 +266,7 @@ public interface Paths {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, Void>> floatScientificNegativeWithRestResponseAsync();
+    Single<VoidResponse> floatScientificNegativeWithRestResponseAsync();
 
     /**
      * Get '-1.034E-20' numeric value.
@@ -297,7 +297,7 @@ public interface Paths {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, Void>> doubleDecimalPositiveWithRestResponseAsync();
+    Single<VoidResponse> doubleDecimalPositiveWithRestResponseAsync();
 
     /**
      * Get '9999999.999' numeric value.
@@ -328,7 +328,7 @@ public interface Paths {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, Void>> doubleDecimalNegativeWithRestResponseAsync();
+    Single<VoidResponse> doubleDecimalNegativeWithRestResponseAsync();
 
     /**
      * Get '-9999999.999' numeric value.
@@ -359,7 +359,7 @@ public interface Paths {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, Void>> stringUnicodeWithRestResponseAsync();
+    Single<VoidResponse> stringUnicodeWithRestResponseAsync();
 
     /**
      * Get '啊齄丂狛狜隣郎隣兀﨩' multi-byte string value.
@@ -390,7 +390,7 @@ public interface Paths {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, Void>> stringUrlEncodedWithRestResponseAsync();
+    Single<VoidResponse> stringUrlEncodedWithRestResponseAsync();
 
     /**
      * Get 'begin!*'();:@ &amp;=+$,/?#[]end.
@@ -421,7 +421,7 @@ public interface Paths {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, Void>> stringEmptyWithRestResponseAsync();
+    Single<VoidResponse> stringEmptyWithRestResponseAsync();
 
     /**
      * Get ''.
@@ -457,7 +457,7 @@ public interface Paths {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, Void>> stringNullWithRestResponseAsync(@NonNull String stringPath);
+    Single<VoidResponse> stringNullWithRestResponseAsync(@NonNull String stringPath);
 
     /**
      * Get null (should throw).
@@ -495,7 +495,7 @@ public interface Paths {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, Void>> enumValidWithRestResponseAsync(@NonNull UriColor enumPath);
+    Single<VoidResponse> enumValidWithRestResponseAsync(@NonNull UriColor enumPath);
 
     /**
      * Get using uri with 'green color' in path parameter.
@@ -533,7 +533,7 @@ public interface Paths {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, Void>> enumNullWithRestResponseAsync(@NonNull UriColor enumPath);
+    Single<VoidResponse> enumNullWithRestResponseAsync(@NonNull UriColor enumPath);
 
     /**
      * Get null (should throw on the client before the request is sent on wire).
@@ -571,7 +571,7 @@ public interface Paths {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, Void>> byteMultiByteWithRestResponseAsync(@NonNull byte[] bytePath);
+    Single<VoidResponse> byteMultiByteWithRestResponseAsync(@NonNull byte[] bytePath);
 
     /**
      * Get '啊齄丂狛狜隣郎隣兀﨩' multibyte value as utf-8 encoded byte array.
@@ -604,7 +604,7 @@ public interface Paths {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, Void>> byteEmptyWithRestResponseAsync();
+    Single<VoidResponse> byteEmptyWithRestResponseAsync();
 
     /**
      * Get '' as byte array.
@@ -640,7 +640,7 @@ public interface Paths {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, Void>> byteNullWithRestResponseAsync(@NonNull byte[] bytePath);
+    Single<VoidResponse> byteNullWithRestResponseAsync(@NonNull byte[] bytePath);
 
     /**
      * Get null as byte array (should throw).
@@ -673,7 +673,7 @@ public interface Paths {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, Void>> dateValidWithRestResponseAsync();
+    Single<VoidResponse> dateValidWithRestResponseAsync();
 
     /**
      * Get '2012-01-01' as date.
@@ -709,7 +709,7 @@ public interface Paths {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, Void>> dateNullWithRestResponseAsync(@NonNull LocalDate datePath);
+    Single<VoidResponse> dateNullWithRestResponseAsync(@NonNull LocalDate datePath);
 
     /**
      * Get null as date - this should throw or be unusable on the client side, depending on date representation.
@@ -742,7 +742,7 @@ public interface Paths {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, Void>> dateTimeValidWithRestResponseAsync();
+    Single<VoidResponse> dateTimeValidWithRestResponseAsync();
 
     /**
      * Get '2012-01-01T01:01:01Z' as date-time.
@@ -778,7 +778,7 @@ public interface Paths {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, Void>> dateTimeNullWithRestResponseAsync(@NonNull DateTime dateTimePath);
+    Single<VoidResponse> dateTimeNullWithRestResponseAsync(@NonNull DateTime dateTimePath);
 
     /**
      * Get null as date-time, should be disallowed or throw depending on representation of date-time.
@@ -816,7 +816,7 @@ public interface Paths {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, Void>> base64UrlWithRestResponseAsync(@NonNull byte[] base64UrlPath);
+    Single<VoidResponse> base64UrlWithRestResponseAsync(@NonNull byte[] base64UrlPath);
 
     /**
      * Get 'lorem' encoded value as 'bG9yZW0' (base64url).
@@ -854,7 +854,7 @@ public interface Paths {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, Void>> arrayCsvInPathWithRestResponseAsync(@NonNull List<String> arrayPath);
+    Single<VoidResponse> arrayCsvInPathWithRestResponseAsync(@NonNull List<String> arrayPath);
 
     /**
      * Get an array of string ['ArrayPath1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the csv-array format.
@@ -892,7 +892,7 @@ public interface Paths {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, Void>> unixTimeUrlWithRestResponseAsync(@NonNull DateTime unixTimeUrlPath);
+    Single<VoidResponse> unixTimeUrlWithRestResponseAsync(@NonNull DateTime unixTimeUrlPath);
 
     /**
      * Get the date 2016-04-13 encoded value as '1460505600' (Unix time).

@@ -10,9 +10,9 @@
 
 package fixtures.azurespecials;
 
-import com.microsoft.rest.v2.RestResponse;
 import com.microsoft.rest.v2.ServiceCallback;
 import com.microsoft.rest.v2.ServiceFuture;
+import com.microsoft.rest.v2.VoidResponse;
 import fixtures.azurespecials.models.ErrorException;
 import io.reactivex.Completable;
 import io.reactivex.Single;
@@ -50,7 +50,7 @@ public interface SkipUrlEncodings {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, Void>> getMethodPathValidWithRestResponseAsync(@NonNull String unencodedPathParam);
+    Single<VoidResponse> getMethodPathValidWithRestResponseAsync(@NonNull String unencodedPathParam);
 
     /**
      * Get method with unencoded path parameter with value 'path1/path2/path3'.
@@ -88,7 +88,7 @@ public interface SkipUrlEncodings {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, Void>> getPathPathValidWithRestResponseAsync(@NonNull String unencodedPathParam);
+    Single<VoidResponse> getPathPathValidWithRestResponseAsync(@NonNull String unencodedPathParam);
 
     /**
      * Get method with unencoded path parameter with value 'path1/path2/path3'.
@@ -121,7 +121,7 @@ public interface SkipUrlEncodings {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, Void>> getSwaggerPathValidWithRestResponseAsync();
+    Single<VoidResponse> getSwaggerPathValidWithRestResponseAsync();
 
     /**
      * Get method with unencoded path parameter with value 'path1/path2/path3'.
@@ -157,7 +157,7 @@ public interface SkipUrlEncodings {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, Void>> getMethodQueryValidWithRestResponseAsync(@NonNull String q1);
+    Single<VoidResponse> getMethodQueryValidWithRestResponseAsync(@NonNull String q1);
 
     /**
      * Get method with unencoded query parameter with value 'value1&amp;q2=value2&amp;q3=value3'.
@@ -190,7 +190,7 @@ public interface SkipUrlEncodings {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, Void>> getMethodQueryNullWithRestResponseAsync();
+    Single<VoidResponse> getMethodQueryNullWithRestResponseAsync();
 
     /**
      * Get method with unencoded query parameter with value null.
@@ -226,7 +226,7 @@ public interface SkipUrlEncodings {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, Void>> getMethodQueryNullWithRestResponseAsync(String q1);
+    Single<VoidResponse> getMethodQueryNullWithRestResponseAsync(String q1);
 
     /**
      * Get method with unencoded query parameter with value null.
@@ -264,7 +264,7 @@ public interface SkipUrlEncodings {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, Void>> getPathQueryValidWithRestResponseAsync(@NonNull String q1);
+    Single<VoidResponse> getPathQueryValidWithRestResponseAsync(@NonNull String q1);
 
     /**
      * Get method with unencoded query parameter with value 'value1&amp;q2=value2&amp;q3=value3'.
@@ -297,7 +297,7 @@ public interface SkipUrlEncodings {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, Void>> getSwaggerQueryValidWithRestResponseAsync();
+    Single<VoidResponse> getSwaggerQueryValidWithRestResponseAsync();
 
     /**
      * Get method with unencoded query parameter with value 'value1&amp;q2=value2&amp;q3=value3'.

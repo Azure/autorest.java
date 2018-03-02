@@ -10,11 +10,12 @@
 
 package fixtures.xml.implementation;
 
+import com.microsoft.rest.v2.BodyResponse;
 import com.microsoft.rest.v2.RestProxy;
-import com.microsoft.rest.v2.RestResponse;
 import com.microsoft.rest.v2.ServiceCallback;
 import com.microsoft.rest.v2.ServiceFuture;
 import com.microsoft.rest.v2.Validator;
+import com.microsoft.rest.v2.VoidResponse;
 import com.microsoft.rest.v2.annotations.BodyParam;
 import com.microsoft.rest.v2.annotations.ExpectedResponses;
 import com.microsoft.rest.v2.annotations.GET;
@@ -26,7 +27,7 @@ import fixtures.xml.models.AppleBarrel;
 import fixtures.xml.models.Banana;
 import fixtures.xml.models.ErrorException;
 import fixtures.xml.models.Slideshow;
-import fixtures.xml.models.XmlGetHeadersHeaders;
+import fixtures.xml.models.XmlGetHeadersResponse;
 import io.reactivex.Completable;
 import io.reactivex.Maybe;
 import io.reactivex.Single;
@@ -69,57 +70,57 @@ public final class XmlsImpl implements Xmls {
         @GET("xml/simple")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<RestResponse<Void, Slideshow>> getSimple();
+        Single<BodyResponse<Slideshow>> getSimple();
 
         @PUT("xml/simple")
         @ExpectedResponses({201})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<RestResponse<Void, Void>> putSimple(@BodyParam("application/xml; charset=utf-8") Slideshow wrappedLists);
+        Single<VoidResponse> putSimple(@BodyParam("application/xml; charset=utf-8") Slideshow wrappedLists);
 
         @GET("xml/wrapped-lists")
         @ExpectedResponses({200})
-        Single<RestResponse<Void, AppleBarrel>> getWrappedLists();
+        Single<BodyResponse<AppleBarrel>> getWrappedLists();
 
         @PUT("xml/wrapped-lists")
         @ExpectedResponses({201})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<RestResponse<Void, Void>> putWrappedLists(@BodyParam("application/xml; charset=utf-8") AppleBarrel wrappedLists);
+        Single<VoidResponse> putWrappedLists(@BodyParam("application/xml; charset=utf-8") AppleBarrel wrappedLists);
 
         @GET("xml/headers")
         @ExpectedResponses({200})
-        Single<RestResponse<XmlGetHeadersHeaders, Void>> getHeaders();
+        Single<XmlGetHeadersResponse> getHeaders();
 
         @GET("xml/empty-list")
         @ExpectedResponses({200})
-        Single<RestResponse<Void, Slideshow>> getEmptyList();
+        Single<BodyResponse<Slideshow>> getEmptyList();
 
         @GET("xml/empty-wrapped-lists")
         @ExpectedResponses({200})
-        Single<RestResponse<Void, AppleBarrel>> getEmptyWrappedLists();
+        Single<BodyResponse<AppleBarrel>> getEmptyWrappedLists();
 
         @GET("xml/root-list")
         @ExpectedResponses({200})
-        Single<RestResponse<Void, List<Banana>>> getRootList();
+        Single<BodyResponse<List<Banana>>> getRootList();
 
         @PUT("xml/root-list")
         @ExpectedResponses({201})
-        Single<RestResponse<Void, Void>> putRootList(@BodyParam("application/xml; charset=utf-8") BananasWrapper bananas);
+        Single<VoidResponse> putRootList(@BodyParam("application/xml; charset=utf-8") BananasWrapper bananas);
 
         @GET("xml/empty-root-list")
         @ExpectedResponses({200})
-        Single<RestResponse<Void, List<Banana>>> getEmptyRootList();
+        Single<BodyResponse<List<Banana>>> getEmptyRootList();
 
         @PUT("xml/empty-root-list")
         @ExpectedResponses({201})
-        Single<RestResponse<Void, Void>> putEmptyRootList(@BodyParam("application/xml; charset=utf-8") BananasWrapper bananas);
+        Single<VoidResponse> putEmptyRootList(@BodyParam("application/xml; charset=utf-8") BananasWrapper bananas);
 
         @GET("xml/empty-child-element")
         @ExpectedResponses({200})
-        Single<RestResponse<Void, Banana>> getEmptyChildElement();
+        Single<BodyResponse<Banana>> getEmptyChildElement();
 
         @PUT("xml/empty-child-element")
         @ExpectedResponses({201})
-        Single<RestResponse<Void, Void>> putEmptyChildElement(@BodyParam("application/xml; charset=utf-8") Banana banana);
+        Single<VoidResponse> putEmptyChildElement(@BodyParam("application/xml; charset=utf-8") Banana banana);
     }
 
     /**
@@ -149,7 +150,7 @@ public final class XmlsImpl implements Xmls {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<Void, Slideshow>> getSimpleWithRestResponseAsync() {
+    public Single<BodyResponse<Slideshow>> getSimpleWithRestResponseAsync() {
         return service.getSimple();
     }
 
@@ -160,15 +161,7 @@ public final class XmlsImpl implements Xmls {
      */
     public Maybe<Slideshow> getSimpleAsync() {
         return getSimpleWithRestResponseAsync()
-            .flatMapMaybe(new Function<RestResponse<Void, Slideshow>, Maybe<Slideshow>>() {
-                public Maybe<Slideshow> apply(RestResponse<Void, Slideshow> restResponse) {
-                    if (restResponse.body() == null) {
-                        return Maybe.empty();
-                    } else {
-                        return Maybe.just(restResponse.body());
-                    }
-                }
-            });
+            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -202,7 +195,7 @@ public final class XmlsImpl implements Xmls {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<Void, Void>> putSimpleWithRestResponseAsync(@NonNull Slideshow wrappedLists) {
+    public Single<VoidResponse> putSimpleWithRestResponseAsync(@NonNull Slideshow wrappedLists) {
         if (wrappedLists == null) {
             throw new IllegalArgumentException("Parameter wrappedLists is required and cannot be null.");
         }
@@ -248,7 +241,7 @@ public final class XmlsImpl implements Xmls {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<Void, AppleBarrel>> getWrappedListsWithRestResponseAsync() {
+    public Single<BodyResponse<AppleBarrel>> getWrappedListsWithRestResponseAsync() {
         return service.getWrappedLists();
     }
 
@@ -259,15 +252,7 @@ public final class XmlsImpl implements Xmls {
      */
     public Maybe<AppleBarrel> getWrappedListsAsync() {
         return getWrappedListsWithRestResponseAsync()
-            .flatMapMaybe(new Function<RestResponse<Void, AppleBarrel>, Maybe<AppleBarrel>>() {
-                public Maybe<AppleBarrel> apply(RestResponse<Void, AppleBarrel> restResponse) {
-                    if (restResponse.body() == null) {
-                        return Maybe.empty();
-                    } else {
-                        return Maybe.just(restResponse.body());
-                    }
-                }
-            });
+            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -301,7 +286,7 @@ public final class XmlsImpl implements Xmls {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<Void, Void>> putWrappedListsWithRestResponseAsync(@NonNull AppleBarrel wrappedLists) {
+    public Single<VoidResponse> putWrappedListsWithRestResponseAsync(@NonNull AppleBarrel wrappedLists) {
         if (wrappedLists == null) {
             throw new IllegalArgumentException("Parameter wrappedLists is required and cannot be null.");
         }
@@ -346,7 +331,7 @@ public final class XmlsImpl implements Xmls {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<XmlGetHeadersHeaders, Void>> getHeadersWithRestResponseAsync() {
+    public Single<XmlGetHeadersResponse> getHeadersWithRestResponseAsync() {
         return service.getHeaders();
     }
 
@@ -386,7 +371,7 @@ public final class XmlsImpl implements Xmls {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<Void, Slideshow>> getEmptyListWithRestResponseAsync() {
+    public Single<BodyResponse<Slideshow>> getEmptyListWithRestResponseAsync() {
         return service.getEmptyList();
     }
 
@@ -397,15 +382,7 @@ public final class XmlsImpl implements Xmls {
      */
     public Maybe<Slideshow> getEmptyListAsync() {
         return getEmptyListWithRestResponseAsync()
-            .flatMapMaybe(new Function<RestResponse<Void, Slideshow>, Maybe<Slideshow>>() {
-                public Maybe<Slideshow> apply(RestResponse<Void, Slideshow> restResponse) {
-                    if (restResponse.body() == null) {
-                        return Maybe.empty();
-                    } else {
-                        return Maybe.just(restResponse.body());
-                    }
-                }
-            });
+            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -434,7 +411,7 @@ public final class XmlsImpl implements Xmls {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<Void, AppleBarrel>> getEmptyWrappedListsWithRestResponseAsync() {
+    public Single<BodyResponse<AppleBarrel>> getEmptyWrappedListsWithRestResponseAsync() {
         return service.getEmptyWrappedLists();
     }
 
@@ -445,15 +422,7 @@ public final class XmlsImpl implements Xmls {
      */
     public Maybe<AppleBarrel> getEmptyWrappedListsAsync() {
         return getEmptyWrappedListsWithRestResponseAsync()
-            .flatMapMaybe(new Function<RestResponse<Void, AppleBarrel>, Maybe<AppleBarrel>>() {
-                public Maybe<AppleBarrel> apply(RestResponse<Void, AppleBarrel> restResponse) {
-                    if (restResponse.body() == null) {
-                        return Maybe.empty();
-                    } else {
-                        return Maybe.just(restResponse.body());
-                    }
-                }
-            });
+            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -482,7 +451,7 @@ public final class XmlsImpl implements Xmls {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<Void, List<Banana>>> getRootListWithRestResponseAsync() {
+    public Single<BodyResponse<List<Banana>>> getRootListWithRestResponseAsync() {
         return service.getRootList();
     }
 
@@ -493,15 +462,7 @@ public final class XmlsImpl implements Xmls {
      */
     public Maybe<List<Banana>> getRootListAsync() {
         return getRootListWithRestResponseAsync()
-            .flatMapMaybe(new Function<RestResponse<Void, List<Banana>>, Maybe<List<Banana>>>() {
-                public Maybe<List<Banana>> apply(RestResponse<Void, List<Banana>> restResponse) {
-                    if (restResponse.body() == null) {
-                        return Maybe.empty();
-                    } else {
-                        return Maybe.just(restResponse.body());
-                    }
-                }
-            });
+            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -534,7 +495,7 @@ public final class XmlsImpl implements Xmls {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<Void, Void>> putRootListWithRestResponseAsync(@NonNull List<Banana> bananas) {
+    public Single<VoidResponse> putRootListWithRestResponseAsync(@NonNull List<Banana> bananas) {
         if (bananas == null) {
             throw new IllegalArgumentException("Parameter bananas is required and cannot be null.");
         }
@@ -580,7 +541,7 @@ public final class XmlsImpl implements Xmls {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<Void, List<Banana>>> getEmptyRootListWithRestResponseAsync() {
+    public Single<BodyResponse<List<Banana>>> getEmptyRootListWithRestResponseAsync() {
         return service.getEmptyRootList();
     }
 
@@ -591,15 +552,7 @@ public final class XmlsImpl implements Xmls {
      */
     public Maybe<List<Banana>> getEmptyRootListAsync() {
         return getEmptyRootListWithRestResponseAsync()
-            .flatMapMaybe(new Function<RestResponse<Void, List<Banana>>, Maybe<List<Banana>>>() {
-                public Maybe<List<Banana>> apply(RestResponse<Void, List<Banana>> restResponse) {
-                    if (restResponse.body() == null) {
-                        return Maybe.empty();
-                    } else {
-                        return Maybe.just(restResponse.body());
-                    }
-                }
-            });
+            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -632,7 +585,7 @@ public final class XmlsImpl implements Xmls {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<Void, Void>> putEmptyRootListWithRestResponseAsync(@NonNull List<Banana> bananas) {
+    public Single<VoidResponse> putEmptyRootListWithRestResponseAsync(@NonNull List<Banana> bananas) {
         if (bananas == null) {
             throw new IllegalArgumentException("Parameter bananas is required and cannot be null.");
         }
@@ -678,7 +631,7 @@ public final class XmlsImpl implements Xmls {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<Void, Banana>> getEmptyChildElementWithRestResponseAsync() {
+    public Single<BodyResponse<Banana>> getEmptyChildElementWithRestResponseAsync() {
         return service.getEmptyChildElement();
     }
 
@@ -689,15 +642,7 @@ public final class XmlsImpl implements Xmls {
      */
     public Maybe<Banana> getEmptyChildElementAsync() {
         return getEmptyChildElementWithRestResponseAsync()
-            .flatMapMaybe(new Function<RestResponse<Void, Banana>, Maybe<Banana>>() {
-                public Maybe<Banana> apply(RestResponse<Void, Banana> restResponse) {
-                    if (restResponse.body() == null) {
-                        return Maybe.empty();
-                    } else {
-                        return Maybe.just(restResponse.body());
-                    }
-                }
-            });
+            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -730,7 +675,7 @@ public final class XmlsImpl implements Xmls {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<Void, Void>> putEmptyChildElementWithRestResponseAsync(@NonNull Banana banana) {
+    public Single<VoidResponse> putEmptyChildElementWithRestResponseAsync(@NonNull Banana banana) {
         if (banana == null) {
             throw new IllegalArgumentException("Parameter banana is required and cannot be null.");
         }
