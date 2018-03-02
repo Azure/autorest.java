@@ -97,7 +97,7 @@ public final class DurationsImpl implements Durations {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;Period&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     public ServiceFuture<Period> getNullAsync(ServiceCallback<Period> serviceCallback) {
         return ServiceFuture.fromBody(getNullAsync(), serviceCallback);
@@ -106,7 +106,7 @@ public final class DurationsImpl implements Durations {
     /**
      * Get null duration value.
      *
-     * @return the {@link Single&lt;RestResponse&lt;Void, Period&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Single<RestResponse<Void, Period>> getNullWithRestResponseAsync() {
         return service.getNull();
@@ -115,7 +115,7 @@ public final class DurationsImpl implements Durations {
     /**
      * Get null duration value.
      *
-     * @return the {@link Maybe&lt;Period&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Maybe<Period> getNullAsync() {
         return getNullWithRestResponseAsync()
@@ -148,7 +148,7 @@ public final class DurationsImpl implements Durations {
      * @param durationBody the Period value.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;Void&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     public ServiceFuture<Void> putPositiveDurationAsync(@NonNull Period durationBody, ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(putPositiveDurationAsync(durationBody), serviceCallback);
@@ -159,7 +159,7 @@ public final class DurationsImpl implements Durations {
      *
      * @param durationBody the Period value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Single<RestResponse<Void, Void>> putPositiveDurationWithRestResponseAsync(@NonNull Period durationBody) {
         if (durationBody == null) {
@@ -173,7 +173,7 @@ public final class DurationsImpl implements Durations {
      *
      * @param durationBody the Period value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link Completable} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Completable putPositiveDurationAsync(@NonNull Period durationBody) {
         return putPositiveDurationWithRestResponseAsync(durationBody)
@@ -196,7 +196,7 @@ public final class DurationsImpl implements Durations {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;Period&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     public ServiceFuture<Period> getPositiveDurationAsync(ServiceCallback<Period> serviceCallback) {
         return ServiceFuture.fromBody(getPositiveDurationAsync(), serviceCallback);
@@ -205,7 +205,7 @@ public final class DurationsImpl implements Durations {
     /**
      * Get a positive duration value.
      *
-     * @return the {@link Single&lt;RestResponse&lt;Void, Period&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Single<RestResponse<Void, Period>> getPositiveDurationWithRestResponseAsync() {
         return service.getPositiveDuration();
@@ -214,7 +214,7 @@ public final class DurationsImpl implements Durations {
     /**
      * Get a positive duration value.
      *
-     * @return the {@link Maybe&lt;Period&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Maybe<Period> getPositiveDurationAsync() {
         return getPositiveDurationWithRestResponseAsync()
@@ -245,7 +245,7 @@ public final class DurationsImpl implements Durations {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;Period&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     public ServiceFuture<Period> getInvalidAsync(ServiceCallback<Period> serviceCallback) {
         return ServiceFuture.fromBody(getInvalidAsync(), serviceCallback);
@@ -254,7 +254,7 @@ public final class DurationsImpl implements Durations {
     /**
      * Get an invalid duration value.
      *
-     * @return the {@link Single&lt;RestResponse&lt;Void, Period&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Single<RestResponse<Void, Period>> getInvalidWithRestResponseAsync() {
         return service.getInvalid();
@@ -263,7 +263,7 @@ public final class DurationsImpl implements Durations {
     /**
      * Get an invalid duration value.
      *
-     * @return the {@link Maybe&lt;Period&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Maybe<Period> getInvalidAsync() {
         return getInvalidWithRestResponseAsync()

@@ -96,7 +96,7 @@ public final class SubscriptionInMethodsImpl implements SubscriptionInMethods {
      * @param subscriptionId This should appear as a method parameter, use value '1234-5678-9012-3456'.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;Void&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     public ServiceFuture<Void> postMethodLocalValidAsync(@NonNull String subscriptionId, ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(postMethodLocalValidAsync(subscriptionId), serviceCallback);
@@ -107,7 +107,7 @@ public final class SubscriptionInMethodsImpl implements SubscriptionInMethods {
      *
      * @param subscriptionId This should appear as a method parameter, use value '1234-5678-9012-3456'.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Single<RestResponse<Void, Void>> postMethodLocalValidWithRestResponseAsync(@NonNull String subscriptionId) {
         if (subscriptionId == null) {
@@ -121,7 +121,7 @@ public final class SubscriptionInMethodsImpl implements SubscriptionInMethods {
      *
      * @param subscriptionId This should appear as a method parameter, use value '1234-5678-9012-3456'.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link Completable} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Completable postMethodLocalValidAsync(@NonNull String subscriptionId) {
         return postMethodLocalValidWithRestResponseAsync(subscriptionId)
@@ -146,7 +146,7 @@ public final class SubscriptionInMethodsImpl implements SubscriptionInMethods {
      * @param subscriptionId This should appear as a method parameter, use value null, client-side validation should prvenet the call.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;Void&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     public ServiceFuture<Void> postMethodLocalNullAsync(@NonNull String subscriptionId, ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(postMethodLocalNullAsync(subscriptionId), serviceCallback);
@@ -157,7 +157,7 @@ public final class SubscriptionInMethodsImpl implements SubscriptionInMethods {
      *
      * @param subscriptionId This should appear as a method parameter, use value null, client-side validation should prvenet the call.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Single<RestResponse<Void, Void>> postMethodLocalNullWithRestResponseAsync(@NonNull String subscriptionId) {
         if (subscriptionId == null) {
@@ -171,7 +171,7 @@ public final class SubscriptionInMethodsImpl implements SubscriptionInMethods {
      *
      * @param subscriptionId This should appear as a method parameter, use value null, client-side validation should prvenet the call.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link Completable} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Completable postMethodLocalNullAsync(@NonNull String subscriptionId) {
         return postMethodLocalNullWithRestResponseAsync(subscriptionId)
@@ -196,7 +196,7 @@ public final class SubscriptionInMethodsImpl implements SubscriptionInMethods {
      * @param subscriptionId Should appear as a method parameter -use value '1234-5678-9012-3456'.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;Void&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     public ServiceFuture<Void> postPathLocalValidAsync(@NonNull String subscriptionId, ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(postPathLocalValidAsync(subscriptionId), serviceCallback);
@@ -207,7 +207,7 @@ public final class SubscriptionInMethodsImpl implements SubscriptionInMethods {
      *
      * @param subscriptionId Should appear as a method parameter -use value '1234-5678-9012-3456'.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Single<RestResponse<Void, Void>> postPathLocalValidWithRestResponseAsync(@NonNull String subscriptionId) {
         if (subscriptionId == null) {
@@ -221,7 +221,7 @@ public final class SubscriptionInMethodsImpl implements SubscriptionInMethods {
      *
      * @param subscriptionId Should appear as a method parameter -use value '1234-5678-9012-3456'.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link Completable} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Completable postPathLocalValidAsync(@NonNull String subscriptionId) {
         return postPathLocalValidWithRestResponseAsync(subscriptionId)
@@ -246,7 +246,7 @@ public final class SubscriptionInMethodsImpl implements SubscriptionInMethods {
      * @param subscriptionId The subscriptionId, which appears in the path, the value is always '1234-5678-9012-3456'.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;Void&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     public ServiceFuture<Void> postSwaggerLocalValidAsync(@NonNull String subscriptionId, ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(postSwaggerLocalValidAsync(subscriptionId), serviceCallback);
@@ -257,7 +257,7 @@ public final class SubscriptionInMethodsImpl implements SubscriptionInMethods {
      *
      * @param subscriptionId The subscriptionId, which appears in the path, the value is always '1234-5678-9012-3456'.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Single<RestResponse<Void, Void>> postSwaggerLocalValidWithRestResponseAsync(@NonNull String subscriptionId) {
         if (subscriptionId == null) {
@@ -271,7 +271,7 @@ public final class SubscriptionInMethodsImpl implements SubscriptionInMethods {
      *
      * @param subscriptionId The subscriptionId, which appears in the path, the value is always '1234-5678-9012-3456'.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link Completable} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Completable postSwaggerLocalValidAsync(@NonNull String subscriptionId) {
         return postSwaggerLocalValidWithRestResponseAsync(subscriptionId)

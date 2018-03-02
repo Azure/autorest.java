@@ -15,6 +15,7 @@ import com.microsoft.rest.v2.ServiceCallback;
 import com.microsoft.rest.v2.ServiceFuture;
 import fixtures.xml.models.AppleBarrel;
 import fixtures.xml.models.Banana;
+import fixtures.xml.models.ErrorException;
 import fixtures.xml.models.Slideshow;
 import fixtures.xml.models.XmlGetHeadersHeaders;
 import io.reactivex.Completable;
@@ -42,21 +43,21 @@ public interface Xmls {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;Slideshow&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     ServiceFuture<Slideshow> getSimpleAsync(ServiceCallback<Slideshow> serviceCallback);
 
     /**
      * Get a simple XML document.
      *
-     * @return the {@link Single&lt;RestResponse&lt;Void, Slideshow&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     Single<RestResponse<Void, Slideshow>> getSimpleWithRestResponseAsync();
 
     /**
      * Get a simple XML document.
      *
-     * @return the {@link Maybe&lt;Slideshow&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     Maybe<Slideshow> getSimpleAsync();
 
@@ -76,7 +77,7 @@ public interface Xmls {
      * @param wrappedLists the Slideshow value.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;Void&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     ServiceFuture<Void> putSimpleAsync(@NonNull Slideshow wrappedLists, ServiceCallback<Void> serviceCallback);
 
@@ -85,7 +86,7 @@ public interface Xmls {
      *
      * @param wrappedLists the Slideshow value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     Single<RestResponse<Void, Void>> putSimpleWithRestResponseAsync(@NonNull Slideshow wrappedLists);
 
@@ -94,7 +95,7 @@ public interface Xmls {
      *
      * @param wrappedLists the Slideshow value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link Completable} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     Completable putSimpleAsync(@NonNull Slideshow wrappedLists);
 
@@ -111,21 +112,21 @@ public interface Xmls {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;AppleBarrel&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     ServiceFuture<AppleBarrel> getWrappedListsAsync(ServiceCallback<AppleBarrel> serviceCallback);
 
     /**
      * Get an XML document with multiple wrapped lists.
      *
-     * @return the {@link Single&lt;RestResponse&lt;Void, AppleBarrel&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     Single<RestResponse<Void, AppleBarrel>> getWrappedListsWithRestResponseAsync();
 
     /**
      * Get an XML document with multiple wrapped lists.
      *
-     * @return the {@link Maybe&lt;AppleBarrel&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     Maybe<AppleBarrel> getWrappedListsAsync();
 
@@ -145,7 +146,7 @@ public interface Xmls {
      * @param wrappedLists the AppleBarrel value.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;Void&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     ServiceFuture<Void> putWrappedListsAsync(@NonNull AppleBarrel wrappedLists, ServiceCallback<Void> serviceCallback);
 
@@ -154,7 +155,7 @@ public interface Xmls {
      *
      * @param wrappedLists the AppleBarrel value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     Single<RestResponse<Void, Void>> putWrappedListsWithRestResponseAsync(@NonNull AppleBarrel wrappedLists);
 
@@ -163,7 +164,7 @@ public interface Xmls {
      *
      * @param wrappedLists the AppleBarrel value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link Completable} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     Completable putWrappedListsAsync(@NonNull AppleBarrel wrappedLists);
 
@@ -179,21 +180,21 @@ public interface Xmls {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;Void&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     ServiceFuture<Void> getHeadersAsync(ServiceCallback<Void> serviceCallback);
 
     /**
      * Get strongly-typed response headers.
      *
-     * @return the {@link Single&lt;RestResponse&lt;XmlGetHeadersHeaders, Void&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     Single<RestResponse<XmlGetHeadersHeaders, Void>> getHeadersWithRestResponseAsync();
 
     /**
      * Get strongly-typed response headers.
      *
-     * @return the {@link Completable} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     Completable getHeadersAsync();
 
@@ -210,21 +211,21 @@ public interface Xmls {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;Slideshow&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     ServiceFuture<Slideshow> getEmptyListAsync(ServiceCallback<Slideshow> serviceCallback);
 
     /**
      * Get an empty list.
      *
-     * @return the {@link Single&lt;RestResponse&lt;Void, Slideshow&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     Single<RestResponse<Void, Slideshow>> getEmptyListWithRestResponseAsync();
 
     /**
      * Get an empty list.
      *
-     * @return the {@link Maybe&lt;Slideshow&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     Maybe<Slideshow> getEmptyListAsync();
 
@@ -241,21 +242,21 @@ public interface Xmls {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;AppleBarrel&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     ServiceFuture<AppleBarrel> getEmptyWrappedListsAsync(ServiceCallback<AppleBarrel> serviceCallback);
 
     /**
      * Gets some empty wrapped lists.
      *
-     * @return the {@link Single&lt;RestResponse&lt;Void, AppleBarrel&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     Single<RestResponse<Void, AppleBarrel>> getEmptyWrappedListsWithRestResponseAsync();
 
     /**
      * Gets some empty wrapped lists.
      *
-     * @return the {@link Maybe&lt;AppleBarrel&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     Maybe<AppleBarrel> getEmptyWrappedListsAsync();
 
@@ -272,21 +273,21 @@ public interface Xmls {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;List&lt;Banana&gt;&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     ServiceFuture<List<Banana>> getRootListAsync(ServiceCallback<List<Banana>> serviceCallback);
 
     /**
      * Gets a list as the root element.
      *
-     * @return the {@link Single&lt;RestResponse&lt;Void, List&lt;Banana&gt;&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     Single<RestResponse<Void, List<Banana>>> getRootListWithRestResponseAsync();
 
     /**
      * Gets a list as the root element.
      *
-     * @return the {@link Maybe&lt;List&lt;Banana&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     Maybe<List<Banana>> getRootListAsync();
 
@@ -305,7 +306,7 @@ public interface Xmls {
      * @param bananas the List&lt;Banana&gt; value.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;Void&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     ServiceFuture<Void> putRootListAsync(@NonNull List<Banana> bananas, ServiceCallback<Void> serviceCallback);
 
@@ -314,7 +315,7 @@ public interface Xmls {
      *
      * @param bananas the List&lt;Banana&gt; value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     Single<RestResponse<Void, Void>> putRootListWithRestResponseAsync(@NonNull List<Banana> bananas);
 
@@ -323,7 +324,7 @@ public interface Xmls {
      *
      * @param bananas the List&lt;Banana&gt; value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link Completable} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     Completable putRootListAsync(@NonNull List<Banana> bananas);
 
@@ -340,21 +341,21 @@ public interface Xmls {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;List&lt;Banana&gt;&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     ServiceFuture<List<Banana>> getEmptyRootListAsync(ServiceCallback<List<Banana>> serviceCallback);
 
     /**
      * Gets an empty list as the root element.
      *
-     * @return the {@link Single&lt;RestResponse&lt;Void, List&lt;Banana&gt;&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     Single<RestResponse<Void, List<Banana>>> getEmptyRootListWithRestResponseAsync();
 
     /**
      * Gets an empty list as the root element.
      *
-     * @return the {@link Maybe&lt;List&lt;Banana&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     Maybe<List<Banana>> getEmptyRootListAsync();
 
@@ -373,7 +374,7 @@ public interface Xmls {
      * @param bananas the List&lt;Banana&gt; value.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;Void&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     ServiceFuture<Void> putEmptyRootListAsync(@NonNull List<Banana> bananas, ServiceCallback<Void> serviceCallback);
 
@@ -382,7 +383,7 @@ public interface Xmls {
      *
      * @param bananas the List&lt;Banana&gt; value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     Single<RestResponse<Void, Void>> putEmptyRootListWithRestResponseAsync(@NonNull List<Banana> bananas);
 
@@ -391,7 +392,7 @@ public interface Xmls {
      *
      * @param bananas the List&lt;Banana&gt; value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link Completable} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     Completable putEmptyRootListAsync(@NonNull List<Banana> bananas);
 
@@ -408,21 +409,21 @@ public interface Xmls {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;Banana&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     ServiceFuture<Banana> getEmptyChildElementAsync(ServiceCallback<Banana> serviceCallback);
 
     /**
      * Gets an XML document with an empty child element.
      *
-     * @return the {@link Single&lt;RestResponse&lt;Void, Banana&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     Single<RestResponse<Void, Banana>> getEmptyChildElementWithRestResponseAsync();
 
     /**
      * Gets an XML document with an empty child element.
      *
-     * @return the {@link Maybe&lt;Banana&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     Maybe<Banana> getEmptyChildElementAsync();
 
@@ -441,7 +442,7 @@ public interface Xmls {
      * @param banana the Banana value.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;Void&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     ServiceFuture<Void> putEmptyChildElementAsync(@NonNull Banana banana, ServiceCallback<Void> serviceCallback);
 
@@ -450,7 +451,7 @@ public interface Xmls {
      *
      * @param banana the Banana value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     Single<RestResponse<Void, Void>> putEmptyChildElementWithRestResponseAsync(@NonNull Banana banana);
 
@@ -459,7 +460,7 @@ public interface Xmls {
      *
      * @param banana the Banana value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link Completable} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     Completable putEmptyChildElementAsync(@NonNull Banana banana);
 }

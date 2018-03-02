@@ -170,7 +170,7 @@ public final class HttpRedirectsImpl implements HttpRedirects {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;Void&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     public ServiceFuture<Void> head300Async(ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(head300Async(), serviceCallback);
@@ -179,7 +179,7 @@ public final class HttpRedirectsImpl implements HttpRedirects {
     /**
      * Return 300 status code and redirect to /http/success/200.
      *
-     * @return the {@link Single&lt;RestResponse&lt;HttpRedirectsHead300Headers, Void&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Single<RestResponse<HttpRedirectsHead300Headers, Void>> head300WithRestResponseAsync() {
         return service.head300();
@@ -188,7 +188,7 @@ public final class HttpRedirectsImpl implements HttpRedirects {
     /**
      * Return 300 status code and redirect to /http/success/200.
      *
-     * @return the {@link Completable} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Completable head300Async() {
         return head300WithRestResponseAsync()
@@ -211,7 +211,7 @@ public final class HttpRedirectsImpl implements HttpRedirects {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;List&lt;String&gt;&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     public ServiceFuture<List<String>> get300Async(ServiceCallback<List<String>> serviceCallback) {
         return ServiceFuture.fromBody(get300Async(), serviceCallback);
@@ -220,7 +220,7 @@ public final class HttpRedirectsImpl implements HttpRedirects {
     /**
      * Return 300 status code and redirect to /http/success/200.
      *
-     * @return the {@link Single&lt;RestResponse&lt;HttpRedirectsGet300Headers, List&lt;String&gt;&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Single<RestResponse<HttpRedirectsGet300Headers, List<String>>> get300WithRestResponseAsync() {
         return service.get300();
@@ -229,7 +229,7 @@ public final class HttpRedirectsImpl implements HttpRedirects {
     /**
      * Return 300 status code and redirect to /http/success/200.
      *
-     * @return the {@link Maybe&lt;List&lt;String&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Maybe<List<String>> get300Async() {
         return get300WithRestResponseAsync()
@@ -259,7 +259,7 @@ public final class HttpRedirectsImpl implements HttpRedirects {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;Void&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     public ServiceFuture<Void> head301Async(ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(head301Async(), serviceCallback);
@@ -268,7 +268,7 @@ public final class HttpRedirectsImpl implements HttpRedirects {
     /**
      * Return 301 status code and redirect to /http/success/200.
      *
-     * @return the {@link Single&lt;RestResponse&lt;HttpRedirectsHead301Headers, Void&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Single<RestResponse<HttpRedirectsHead301Headers, Void>> head301WithRestResponseAsync() {
         return service.head301();
@@ -277,7 +277,7 @@ public final class HttpRedirectsImpl implements HttpRedirects {
     /**
      * Return 301 status code and redirect to /http/success/200.
      *
-     * @return the {@link Completable} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Completable head301Async() {
         return head301WithRestResponseAsync()
@@ -299,7 +299,7 @@ public final class HttpRedirectsImpl implements HttpRedirects {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;Void&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     public ServiceFuture<Void> get301Async(ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(get301Async(), serviceCallback);
@@ -308,7 +308,7 @@ public final class HttpRedirectsImpl implements HttpRedirects {
     /**
      * Return 301 status code and redirect to /http/success/200.
      *
-     * @return the {@link Single&lt;RestResponse&lt;HttpRedirectsGet301Headers, Void&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Single<RestResponse<HttpRedirectsGet301Headers, Void>> get301WithRestResponseAsync() {
         return service.get301();
@@ -317,7 +317,7 @@ public final class HttpRedirectsImpl implements HttpRedirects {
     /**
      * Return 301 status code and redirect to /http/success/200.
      *
-     * @return the {@link Completable} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Completable get301Async() {
         return get301WithRestResponseAsync()
@@ -339,7 +339,7 @@ public final class HttpRedirectsImpl implements HttpRedirects {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;Void&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     public ServiceFuture<Void> put301Async(ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(put301Async(), serviceCallback);
@@ -348,7 +348,7 @@ public final class HttpRedirectsImpl implements HttpRedirects {
     /**
      * Put true Boolean value in request returns 301.  This request should not be automatically redirected, but should return the received 301 to the caller for evaluation.
      *
-     * @return the {@link Single&lt;RestResponse&lt;HttpRedirectsPut301Headers, Void&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Single<RestResponse<HttpRedirectsPut301Headers, Void>> put301WithRestResponseAsync() {
         final Boolean booleanValue = null;
@@ -358,7 +358,7 @@ public final class HttpRedirectsImpl implements HttpRedirects {
     /**
      * Put true Boolean value in request returns 301.  This request should not be automatically redirected, but should return the received 301 to the caller for evaluation.
      *
-     * @return the {@link Completable} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Completable put301Async() {
         return put301WithRestResponseAsync()
@@ -383,7 +383,7 @@ public final class HttpRedirectsImpl implements HttpRedirects {
      * @param booleanValue Simple boolean value true.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;Void&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     public ServiceFuture<Void> put301Async(Boolean booleanValue, ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(put301Async(booleanValue), serviceCallback);
@@ -394,7 +394,7 @@ public final class HttpRedirectsImpl implements HttpRedirects {
      *
      * @param booleanValue Simple boolean value true.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link Single&lt;RestResponse&lt;HttpRedirectsPut301Headers, Void&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Single<RestResponse<HttpRedirectsPut301Headers, Void>> put301WithRestResponseAsync(Boolean booleanValue) {
         return service.put301(booleanValue);
@@ -405,7 +405,7 @@ public final class HttpRedirectsImpl implements HttpRedirects {
      *
      * @param booleanValue Simple boolean value true.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link Completable} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Completable put301Async(Boolean booleanValue) {
         return put301WithRestResponseAsync(booleanValue)
@@ -427,7 +427,7 @@ public final class HttpRedirectsImpl implements HttpRedirects {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;Void&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     public ServiceFuture<Void> head302Async(ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(head302Async(), serviceCallback);
@@ -436,7 +436,7 @@ public final class HttpRedirectsImpl implements HttpRedirects {
     /**
      * Return 302 status code and redirect to /http/success/200.
      *
-     * @return the {@link Single&lt;RestResponse&lt;HttpRedirectsHead302Headers, Void&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Single<RestResponse<HttpRedirectsHead302Headers, Void>> head302WithRestResponseAsync() {
         return service.head302();
@@ -445,7 +445,7 @@ public final class HttpRedirectsImpl implements HttpRedirects {
     /**
      * Return 302 status code and redirect to /http/success/200.
      *
-     * @return the {@link Completable} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Completable head302Async() {
         return head302WithRestResponseAsync()
@@ -467,7 +467,7 @@ public final class HttpRedirectsImpl implements HttpRedirects {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;Void&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     public ServiceFuture<Void> get302Async(ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(get302Async(), serviceCallback);
@@ -476,7 +476,7 @@ public final class HttpRedirectsImpl implements HttpRedirects {
     /**
      * Return 302 status code and redirect to /http/success/200.
      *
-     * @return the {@link Single&lt;RestResponse&lt;HttpRedirectsGet302Headers, Void&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Single<RestResponse<HttpRedirectsGet302Headers, Void>> get302WithRestResponseAsync() {
         return service.get302();
@@ -485,7 +485,7 @@ public final class HttpRedirectsImpl implements HttpRedirects {
     /**
      * Return 302 status code and redirect to /http/success/200.
      *
-     * @return the {@link Completable} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Completable get302Async() {
         return get302WithRestResponseAsync()
@@ -507,7 +507,7 @@ public final class HttpRedirectsImpl implements HttpRedirects {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;Void&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     public ServiceFuture<Void> patch302Async(ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(patch302Async(), serviceCallback);
@@ -516,7 +516,7 @@ public final class HttpRedirectsImpl implements HttpRedirects {
     /**
      * Patch true Boolean value in request returns 302.  This request should not be automatically redirected, but should return the received 302 to the caller for evaluation.
      *
-     * @return the {@link Single&lt;RestResponse&lt;HttpRedirectsPatch302Headers, Void&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Single<RestResponse<HttpRedirectsPatch302Headers, Void>> patch302WithRestResponseAsync() {
         final Boolean booleanValue = null;
@@ -526,7 +526,7 @@ public final class HttpRedirectsImpl implements HttpRedirects {
     /**
      * Patch true Boolean value in request returns 302.  This request should not be automatically redirected, but should return the received 302 to the caller for evaluation.
      *
-     * @return the {@link Completable} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Completable patch302Async() {
         return patch302WithRestResponseAsync()
@@ -551,7 +551,7 @@ public final class HttpRedirectsImpl implements HttpRedirects {
      * @param booleanValue Simple boolean value true.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;Void&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     public ServiceFuture<Void> patch302Async(Boolean booleanValue, ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(patch302Async(booleanValue), serviceCallback);
@@ -562,7 +562,7 @@ public final class HttpRedirectsImpl implements HttpRedirects {
      *
      * @param booleanValue Simple boolean value true.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link Single&lt;RestResponse&lt;HttpRedirectsPatch302Headers, Void&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Single<RestResponse<HttpRedirectsPatch302Headers, Void>> patch302WithRestResponseAsync(Boolean booleanValue) {
         return service.patch302(booleanValue);
@@ -573,7 +573,7 @@ public final class HttpRedirectsImpl implements HttpRedirects {
      *
      * @param booleanValue Simple boolean value true.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link Completable} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Completable patch302Async(Boolean booleanValue) {
         return patch302WithRestResponseAsync(booleanValue)
@@ -595,7 +595,7 @@ public final class HttpRedirectsImpl implements HttpRedirects {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;Void&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     public ServiceFuture<Void> post303Async(ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(post303Async(), serviceCallback);
@@ -604,7 +604,7 @@ public final class HttpRedirectsImpl implements HttpRedirects {
     /**
      * Post true Boolean value in request returns 303.  This request should be automatically redirected usign a get, ultimately returning a 200 status code.
      *
-     * @return the {@link Single&lt;RestResponse&lt;HttpRedirectsPost303Headers, Void&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Single<RestResponse<HttpRedirectsPost303Headers, Void>> post303WithRestResponseAsync() {
         final Boolean booleanValue = null;
@@ -614,7 +614,7 @@ public final class HttpRedirectsImpl implements HttpRedirects {
     /**
      * Post true Boolean value in request returns 303.  This request should be automatically redirected usign a get, ultimately returning a 200 status code.
      *
-     * @return the {@link Completable} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Completable post303Async() {
         return post303WithRestResponseAsync()
@@ -639,7 +639,7 @@ public final class HttpRedirectsImpl implements HttpRedirects {
      * @param booleanValue Simple boolean value true.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;Void&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     public ServiceFuture<Void> post303Async(Boolean booleanValue, ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(post303Async(booleanValue), serviceCallback);
@@ -650,7 +650,7 @@ public final class HttpRedirectsImpl implements HttpRedirects {
      *
      * @param booleanValue Simple boolean value true.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link Single&lt;RestResponse&lt;HttpRedirectsPost303Headers, Void&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Single<RestResponse<HttpRedirectsPost303Headers, Void>> post303WithRestResponseAsync(Boolean booleanValue) {
         return service.post303(booleanValue);
@@ -661,7 +661,7 @@ public final class HttpRedirectsImpl implements HttpRedirects {
      *
      * @param booleanValue Simple boolean value true.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link Completable} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Completable post303Async(Boolean booleanValue) {
         return post303WithRestResponseAsync(booleanValue)
@@ -683,7 +683,7 @@ public final class HttpRedirectsImpl implements HttpRedirects {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;Void&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     public ServiceFuture<Void> head307Async(ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(head307Async(), serviceCallback);
@@ -692,7 +692,7 @@ public final class HttpRedirectsImpl implements HttpRedirects {
     /**
      * Redirect with 307, resulting in a 200 success.
      *
-     * @return the {@link Single&lt;RestResponse&lt;HttpRedirectsHead307Headers, Void&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Single<RestResponse<HttpRedirectsHead307Headers, Void>> head307WithRestResponseAsync() {
         return service.head307();
@@ -701,7 +701,7 @@ public final class HttpRedirectsImpl implements HttpRedirects {
     /**
      * Redirect with 307, resulting in a 200 success.
      *
-     * @return the {@link Completable} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Completable head307Async() {
         return head307WithRestResponseAsync()
@@ -723,7 +723,7 @@ public final class HttpRedirectsImpl implements HttpRedirects {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;Void&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     public ServiceFuture<Void> get307Async(ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(get307Async(), serviceCallback);
@@ -732,7 +732,7 @@ public final class HttpRedirectsImpl implements HttpRedirects {
     /**
      * Redirect get with 307, resulting in a 200 success.
      *
-     * @return the {@link Single&lt;RestResponse&lt;HttpRedirectsGet307Headers, Void&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Single<RestResponse<HttpRedirectsGet307Headers, Void>> get307WithRestResponseAsync() {
         return service.get307();
@@ -741,7 +741,7 @@ public final class HttpRedirectsImpl implements HttpRedirects {
     /**
      * Redirect get with 307, resulting in a 200 success.
      *
-     * @return the {@link Completable} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Completable get307Async() {
         return get307WithRestResponseAsync()
@@ -763,7 +763,7 @@ public final class HttpRedirectsImpl implements HttpRedirects {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;Void&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     public ServiceFuture<Void> put307Async(ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(put307Async(), serviceCallback);
@@ -772,7 +772,7 @@ public final class HttpRedirectsImpl implements HttpRedirects {
     /**
      * Put redirected with 307, resulting in a 200 after redirect.
      *
-     * @return the {@link Single&lt;RestResponse&lt;HttpRedirectsPut307Headers, Void&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Single<RestResponse<HttpRedirectsPut307Headers, Void>> put307WithRestResponseAsync() {
         final Boolean booleanValue = null;
@@ -782,7 +782,7 @@ public final class HttpRedirectsImpl implements HttpRedirects {
     /**
      * Put redirected with 307, resulting in a 200 after redirect.
      *
-     * @return the {@link Completable} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Completable put307Async() {
         return put307WithRestResponseAsync()
@@ -807,7 +807,7 @@ public final class HttpRedirectsImpl implements HttpRedirects {
      * @param booleanValue Simple boolean value true.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;Void&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     public ServiceFuture<Void> put307Async(Boolean booleanValue, ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(put307Async(booleanValue), serviceCallback);
@@ -818,7 +818,7 @@ public final class HttpRedirectsImpl implements HttpRedirects {
      *
      * @param booleanValue Simple boolean value true.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link Single&lt;RestResponse&lt;HttpRedirectsPut307Headers, Void&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Single<RestResponse<HttpRedirectsPut307Headers, Void>> put307WithRestResponseAsync(Boolean booleanValue) {
         return service.put307(booleanValue);
@@ -829,7 +829,7 @@ public final class HttpRedirectsImpl implements HttpRedirects {
      *
      * @param booleanValue Simple boolean value true.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link Completable} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Completable put307Async(Boolean booleanValue) {
         return put307WithRestResponseAsync(booleanValue)
@@ -851,7 +851,7 @@ public final class HttpRedirectsImpl implements HttpRedirects {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;Void&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     public ServiceFuture<Void> patch307Async(ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(patch307Async(), serviceCallback);
@@ -860,7 +860,7 @@ public final class HttpRedirectsImpl implements HttpRedirects {
     /**
      * Patch redirected with 307, resulting in a 200 after redirect.
      *
-     * @return the {@link Single&lt;RestResponse&lt;HttpRedirectsPatch307Headers, Void&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Single<RestResponse<HttpRedirectsPatch307Headers, Void>> patch307WithRestResponseAsync() {
         final Boolean booleanValue = null;
@@ -870,7 +870,7 @@ public final class HttpRedirectsImpl implements HttpRedirects {
     /**
      * Patch redirected with 307, resulting in a 200 after redirect.
      *
-     * @return the {@link Completable} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Completable patch307Async() {
         return patch307WithRestResponseAsync()
@@ -895,7 +895,7 @@ public final class HttpRedirectsImpl implements HttpRedirects {
      * @param booleanValue Simple boolean value true.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;Void&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     public ServiceFuture<Void> patch307Async(Boolean booleanValue, ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(patch307Async(booleanValue), serviceCallback);
@@ -906,7 +906,7 @@ public final class HttpRedirectsImpl implements HttpRedirects {
      *
      * @param booleanValue Simple boolean value true.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link Single&lt;RestResponse&lt;HttpRedirectsPatch307Headers, Void&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Single<RestResponse<HttpRedirectsPatch307Headers, Void>> patch307WithRestResponseAsync(Boolean booleanValue) {
         return service.patch307(booleanValue);
@@ -917,7 +917,7 @@ public final class HttpRedirectsImpl implements HttpRedirects {
      *
      * @param booleanValue Simple boolean value true.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link Completable} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Completable patch307Async(Boolean booleanValue) {
         return patch307WithRestResponseAsync(booleanValue)
@@ -939,7 +939,7 @@ public final class HttpRedirectsImpl implements HttpRedirects {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;Void&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     public ServiceFuture<Void> post307Async(ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(post307Async(), serviceCallback);
@@ -948,7 +948,7 @@ public final class HttpRedirectsImpl implements HttpRedirects {
     /**
      * Post redirected with 307, resulting in a 200 after redirect.
      *
-     * @return the {@link Single&lt;RestResponse&lt;HttpRedirectsPost307Headers, Void&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Single<RestResponse<HttpRedirectsPost307Headers, Void>> post307WithRestResponseAsync() {
         final Boolean booleanValue = null;
@@ -958,7 +958,7 @@ public final class HttpRedirectsImpl implements HttpRedirects {
     /**
      * Post redirected with 307, resulting in a 200 after redirect.
      *
-     * @return the {@link Completable} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Completable post307Async() {
         return post307WithRestResponseAsync()
@@ -983,7 +983,7 @@ public final class HttpRedirectsImpl implements HttpRedirects {
      * @param booleanValue Simple boolean value true.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;Void&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     public ServiceFuture<Void> post307Async(Boolean booleanValue, ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(post307Async(booleanValue), serviceCallback);
@@ -994,7 +994,7 @@ public final class HttpRedirectsImpl implements HttpRedirects {
      *
      * @param booleanValue Simple boolean value true.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link Single&lt;RestResponse&lt;HttpRedirectsPost307Headers, Void&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Single<RestResponse<HttpRedirectsPost307Headers, Void>> post307WithRestResponseAsync(Boolean booleanValue) {
         return service.post307(booleanValue);
@@ -1005,7 +1005,7 @@ public final class HttpRedirectsImpl implements HttpRedirects {
      *
      * @param booleanValue Simple boolean value true.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link Completable} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Completable post307Async(Boolean booleanValue) {
         return post307WithRestResponseAsync(booleanValue)
@@ -1027,7 +1027,7 @@ public final class HttpRedirectsImpl implements HttpRedirects {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;Void&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     public ServiceFuture<Void> delete307Async(ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(delete307Async(), serviceCallback);
@@ -1036,7 +1036,7 @@ public final class HttpRedirectsImpl implements HttpRedirects {
     /**
      * Delete redirected with 307, resulting in a 200 after redirect.
      *
-     * @return the {@link Single&lt;RestResponse&lt;HttpRedirectsDelete307Headers, Void&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Single<RestResponse<HttpRedirectsDelete307Headers, Void>> delete307WithRestResponseAsync() {
         final Boolean booleanValue = null;
@@ -1046,7 +1046,7 @@ public final class HttpRedirectsImpl implements HttpRedirects {
     /**
      * Delete redirected with 307, resulting in a 200 after redirect.
      *
-     * @return the {@link Completable} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Completable delete307Async() {
         return delete307WithRestResponseAsync()
@@ -1071,7 +1071,7 @@ public final class HttpRedirectsImpl implements HttpRedirects {
      * @param booleanValue Simple boolean value true.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;Void&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     public ServiceFuture<Void> delete307Async(Boolean booleanValue, ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(delete307Async(booleanValue), serviceCallback);
@@ -1082,7 +1082,7 @@ public final class HttpRedirectsImpl implements HttpRedirects {
      *
      * @param booleanValue Simple boolean value true.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link Single&lt;RestResponse&lt;HttpRedirectsDelete307Headers, Void&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Single<RestResponse<HttpRedirectsDelete307Headers, Void>> delete307WithRestResponseAsync(Boolean booleanValue) {
         return service.delete307(booleanValue);
@@ -1093,7 +1093,7 @@ public final class HttpRedirectsImpl implements HttpRedirects {
      *
      * @param booleanValue Simple boolean value true.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link Completable} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Completable delete307Async(Boolean booleanValue) {
         return delete307WithRestResponseAsync(booleanValue)

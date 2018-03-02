@@ -13,6 +13,7 @@ package fixtures.bodyfile;
 import com.microsoft.rest.v2.RestResponse;
 import com.microsoft.rest.v2.ServiceCallback;
 import com.microsoft.rest.v2.ServiceFuture;
+import fixtures.bodyfile.models.ErrorException;
 import io.reactivex.Flowable;
 import io.reactivex.Maybe;
 import io.reactivex.Single;
@@ -37,21 +38,21 @@ public interface Files {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;Flowable&lt;ByteBuffer&gt;&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     ServiceFuture<Flowable<ByteBuffer>> getFileAsync(ServiceCallback<Flowable<ByteBuffer>> serviceCallback);
 
     /**
      * Get file.
      *
-     * @return the {@link Single&lt;RestResponse&lt;Void, Flowable&lt;ByteBuffer&gt;&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     Single<RestResponse<Void, Flowable<ByteBuffer>>> getFileWithRestResponseAsync();
 
     /**
      * Get file.
      *
-     * @return the {@link Maybe&lt;Flowable&lt;ByteBuffer&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     Maybe<Flowable<ByteBuffer>> getFileAsync();
 
@@ -69,21 +70,21 @@ public interface Files {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;Flowable&lt;ByteBuffer&gt;&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     ServiceFuture<Flowable<ByteBuffer>> getFileLargeAsync(ServiceCallback<Flowable<ByteBuffer>> serviceCallback);
 
     /**
      * Get a large file.
      *
-     * @return the {@link Single&lt;RestResponse&lt;Void, Flowable&lt;ByteBuffer&gt;&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     Single<RestResponse<Void, Flowable<ByteBuffer>>> getFileLargeWithRestResponseAsync();
 
     /**
      * Get a large file.
      *
-     * @return the {@link Maybe&lt;Flowable&lt;ByteBuffer&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     Maybe<Flowable<ByteBuffer>> getFileLargeAsync();
 
@@ -101,21 +102,21 @@ public interface Files {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;Flowable&lt;ByteBuffer&gt;&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     ServiceFuture<Flowable<ByteBuffer>> getEmptyFileAsync(ServiceCallback<Flowable<ByteBuffer>> serviceCallback);
 
     /**
      * Get empty file.
      *
-     * @return the {@link Single&lt;RestResponse&lt;Void, Flowable&lt;ByteBuffer&gt;&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     Single<RestResponse<Void, Flowable<ByteBuffer>>> getEmptyFileWithRestResponseAsync();
 
     /**
      * Get empty file.
      *
-     * @return the {@link Maybe&lt;Flowable&lt;ByteBuffer&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     Maybe<Flowable<ByteBuffer>> getEmptyFileAsync();
 }

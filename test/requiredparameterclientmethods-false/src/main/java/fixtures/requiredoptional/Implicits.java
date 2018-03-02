@@ -14,6 +14,7 @@ import com.microsoft.rest.v2.RestResponse;
 import com.microsoft.rest.v2.ServiceCallback;
 import com.microsoft.rest.v2.ServiceFuture;
 import fixtures.requiredoptional.models.Error;
+import fixtures.requiredoptional.models.ErrorException;
 import io.reactivex.Completable;
 import io.reactivex.Maybe;
 import io.reactivex.Single;
@@ -41,7 +42,7 @@ public interface Implicits {
      * @param pathParameter the String value.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;Error&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     ServiceFuture<Error> getRequiredPathAsync(@NonNull String pathParameter, ServiceCallback<Error> serviceCallback);
 
@@ -50,7 +51,7 @@ public interface Implicits {
      *
      * @param pathParameter the String value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link Single&lt;RestResponse&lt;Void, Error&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     Single<RestResponse<Void, Error>> getRequiredPathWithRestResponseAsync(@NonNull String pathParameter);
 
@@ -59,7 +60,7 @@ public interface Implicits {
      *
      * @param pathParameter the String value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link Maybe&lt;Error&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     Maybe<Error> getRequiredPathAsync(@NonNull String pathParameter);
 
@@ -79,7 +80,7 @@ public interface Implicits {
      * @param queryParameter the String value.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;Void&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     ServiceFuture<Void> putOptionalQueryAsync(String queryParameter, ServiceCallback<Void> serviceCallback);
 
@@ -88,7 +89,7 @@ public interface Implicits {
      *
      * @param queryParameter the String value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     Single<RestResponse<Void, Void>> putOptionalQueryWithRestResponseAsync(String queryParameter);
 
@@ -97,7 +98,7 @@ public interface Implicits {
      *
      * @param queryParameter the String value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link Completable} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     Completable putOptionalQueryAsync(String queryParameter);
 
@@ -117,7 +118,7 @@ public interface Implicits {
      * @param queryParameter the String value.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;Void&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     ServiceFuture<Void> putOptionalHeaderAsync(String queryParameter, ServiceCallback<Void> serviceCallback);
 
@@ -126,7 +127,7 @@ public interface Implicits {
      *
      * @param queryParameter the String value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     Single<RestResponse<Void, Void>> putOptionalHeaderWithRestResponseAsync(String queryParameter);
 
@@ -135,7 +136,7 @@ public interface Implicits {
      *
      * @param queryParameter the String value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link Completable} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     Completable putOptionalHeaderAsync(String queryParameter);
 
@@ -155,7 +156,7 @@ public interface Implicits {
      * @param bodyParameter the String value.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;Void&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     ServiceFuture<Void> putOptionalBodyAsync(String bodyParameter, ServiceCallback<Void> serviceCallback);
 
@@ -164,7 +165,7 @@ public interface Implicits {
      *
      * @param bodyParameter the String value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     Single<RestResponse<Void, Void>> putOptionalBodyWithRestResponseAsync(String bodyParameter);
 
@@ -173,7 +174,7 @@ public interface Implicits {
      *
      * @param bodyParameter the String value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link Completable} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     Completable putOptionalBodyAsync(String bodyParameter);
 
@@ -191,21 +192,21 @@ public interface Implicits {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;Error&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     ServiceFuture<Error> getRequiredGlobalPathAsync(ServiceCallback<Error> serviceCallback);
 
     /**
      * Test implicitly required path parameter.
      *
-     * @return the {@link Single&lt;RestResponse&lt;Void, Error&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     Single<RestResponse<Void, Error>> getRequiredGlobalPathWithRestResponseAsync();
 
     /**
      * Test implicitly required path parameter.
      *
-     * @return the {@link Maybe&lt;Error&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     Maybe<Error> getRequiredGlobalPathAsync();
 
@@ -223,21 +224,21 @@ public interface Implicits {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;Error&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     ServiceFuture<Error> getRequiredGlobalQueryAsync(ServiceCallback<Error> serviceCallback);
 
     /**
      * Test implicitly required query parameter.
      *
-     * @return the {@link Single&lt;RestResponse&lt;Void, Error&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     Single<RestResponse<Void, Error>> getRequiredGlobalQueryWithRestResponseAsync();
 
     /**
      * Test implicitly required query parameter.
      *
-     * @return the {@link Maybe&lt;Error&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     Maybe<Error> getRequiredGlobalQueryAsync();
 
@@ -255,21 +256,21 @@ public interface Implicits {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;Error&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     ServiceFuture<Error> getOptionalGlobalQueryAsync(ServiceCallback<Error> serviceCallback);
 
     /**
      * Test implicitly optional query parameter.
      *
-     * @return the {@link Single&lt;RestResponse&lt;Void, Error&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     Single<RestResponse<Void, Error>> getOptionalGlobalQueryWithRestResponseAsync();
 
     /**
      * Test implicitly optional query parameter.
      *
-     * @return the {@link Maybe&lt;Error&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     Maybe<Error> getOptionalGlobalQueryAsync();
 }

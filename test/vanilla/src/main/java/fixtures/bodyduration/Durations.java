@@ -13,6 +13,7 @@ package fixtures.bodyduration;
 import com.microsoft.rest.v2.RestResponse;
 import com.microsoft.rest.v2.ServiceCallback;
 import com.microsoft.rest.v2.ServiceFuture;
+import fixtures.bodyduration.models.ErrorException;
 import io.reactivex.Completable;
 import io.reactivex.Maybe;
 import io.reactivex.Single;
@@ -38,21 +39,21 @@ public interface Durations {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;Period&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     ServiceFuture<Period> getNullAsync(ServiceCallback<Period> serviceCallback);
 
     /**
      * Get null duration value.
      *
-     * @return the {@link Single&lt;RestResponse&lt;Void, Period&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     Single<RestResponse<Void, Period>> getNullWithRestResponseAsync();
 
     /**
      * Get null duration value.
      *
-     * @return the {@link Maybe&lt;Period&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     Maybe<Period> getNullAsync();
 
@@ -72,7 +73,7 @@ public interface Durations {
      * @param durationBody the Period value.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;Void&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     ServiceFuture<Void> putPositiveDurationAsync(@NonNull Period durationBody, ServiceCallback<Void> serviceCallback);
 
@@ -81,7 +82,7 @@ public interface Durations {
      *
      * @param durationBody the Period value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     Single<RestResponse<Void, Void>> putPositiveDurationWithRestResponseAsync(@NonNull Period durationBody);
 
@@ -90,7 +91,7 @@ public interface Durations {
      *
      * @param durationBody the Period value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link Completable} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     Completable putPositiveDurationAsync(@NonNull Period durationBody);
 
@@ -108,21 +109,21 @@ public interface Durations {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;Period&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     ServiceFuture<Period> getPositiveDurationAsync(ServiceCallback<Period> serviceCallback);
 
     /**
      * Get a positive duration value.
      *
-     * @return the {@link Single&lt;RestResponse&lt;Void, Period&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     Single<RestResponse<Void, Period>> getPositiveDurationWithRestResponseAsync();
 
     /**
      * Get a positive duration value.
      *
-     * @return the {@link Maybe&lt;Period&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     Maybe<Period> getPositiveDurationAsync();
 
@@ -140,21 +141,21 @@ public interface Durations {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;Period&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     ServiceFuture<Period> getInvalidAsync(ServiceCallback<Period> serviceCallback);
 
     /**
      * Get an invalid duration value.
      *
-     * @return the {@link Single&lt;RestResponse&lt;Void, Period&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     Single<RestResponse<Void, Period>> getInvalidWithRestResponseAsync();
 
     /**
      * Get an invalid duration value.
      *
-     * @return the {@link Maybe&lt;Period&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     Maybe<Period> getInvalidAsync();
 }

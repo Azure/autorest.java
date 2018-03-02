@@ -111,7 +111,7 @@ public final class SkipUrlEncodingsInner {
      * @param unencodedPathParam Unencoded path parameter with value 'path1/path2/path3'.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;Void&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     public ServiceFuture<Void> getMethodPathValidAsync(@NonNull String unencodedPathParam, ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(getMethodPathValidAsync(unencodedPathParam), serviceCallback);
@@ -122,7 +122,7 @@ public final class SkipUrlEncodingsInner {
      *
      * @param unencodedPathParam Unencoded path parameter with value 'path1/path2/path3'.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Single<RestResponse<Void, Void>> getMethodPathValidWithRestResponseAsync(@NonNull String unencodedPathParam) {
         if (unencodedPathParam == null) {
@@ -136,7 +136,7 @@ public final class SkipUrlEncodingsInner {
      *
      * @param unencodedPathParam Unencoded path parameter with value 'path1/path2/path3'.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link Completable} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Completable getMethodPathValidAsync(@NonNull String unencodedPathParam) {
         return getMethodPathValidWithRestResponseAsync(unencodedPathParam)
@@ -161,7 +161,7 @@ public final class SkipUrlEncodingsInner {
      * @param unencodedPathParam Unencoded path parameter with value 'path1/path2/path3'.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;Void&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     public ServiceFuture<Void> getPathPathValidAsync(@NonNull String unencodedPathParam, ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(getPathPathValidAsync(unencodedPathParam), serviceCallback);
@@ -172,7 +172,7 @@ public final class SkipUrlEncodingsInner {
      *
      * @param unencodedPathParam Unencoded path parameter with value 'path1/path2/path3'.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Single<RestResponse<Void, Void>> getPathPathValidWithRestResponseAsync(@NonNull String unencodedPathParam) {
         if (unencodedPathParam == null) {
@@ -186,7 +186,7 @@ public final class SkipUrlEncodingsInner {
      *
      * @param unencodedPathParam Unencoded path parameter with value 'path1/path2/path3'.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link Completable} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Completable getPathPathValidAsync(@NonNull String unencodedPathParam) {
         return getPathPathValidWithRestResponseAsync(unencodedPathParam)
@@ -208,7 +208,7 @@ public final class SkipUrlEncodingsInner {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;Void&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     public ServiceFuture<Void> getSwaggerPathValidAsync(ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(getSwaggerPathValidAsync(), serviceCallback);
@@ -217,7 +217,7 @@ public final class SkipUrlEncodingsInner {
     /**
      * Get method with unencoded path parameter with value 'path1/path2/path3'.
      *
-     * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Single<RestResponse<Void, Void>> getSwaggerPathValidWithRestResponseAsync() {
         final String unencodedPathParam = "path1/path2/path3";
@@ -227,7 +227,7 @@ public final class SkipUrlEncodingsInner {
     /**
      * Get method with unencoded path parameter with value 'path1/path2/path3'.
      *
-     * @return the {@link Completable} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Completable getSwaggerPathValidAsync() {
         return getSwaggerPathValidWithRestResponseAsync()
@@ -252,7 +252,7 @@ public final class SkipUrlEncodingsInner {
      * @param q1 Unencoded query parameter with value 'value1&amp;q2=value2&amp;q3=value3'.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;Void&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     public ServiceFuture<Void> getMethodQueryValidAsync(@NonNull String q1, ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(getMethodQueryValidAsync(q1), serviceCallback);
@@ -263,7 +263,7 @@ public final class SkipUrlEncodingsInner {
      *
      * @param q1 Unencoded query parameter with value 'value1&amp;q2=value2&amp;q3=value3'.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Single<RestResponse<Void, Void>> getMethodQueryValidWithRestResponseAsync(@NonNull String q1) {
         if (q1 == null) {
@@ -277,7 +277,7 @@ public final class SkipUrlEncodingsInner {
      *
      * @param q1 Unencoded query parameter with value 'value1&amp;q2=value2&amp;q3=value3'.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link Completable} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Completable getMethodQueryValidAsync(@NonNull String q1) {
         return getMethodQueryValidWithRestResponseAsync(q1)
@@ -299,7 +299,7 @@ public final class SkipUrlEncodingsInner {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;Void&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     public ServiceFuture<Void> getMethodQueryNullAsync(ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(getMethodQueryNullAsync(), serviceCallback);
@@ -308,7 +308,7 @@ public final class SkipUrlEncodingsInner {
     /**
      * Get method with unencoded query parameter with value null.
      *
-     * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Single<RestResponse<Void, Void>> getMethodQueryNullWithRestResponseAsync() {
         final String q1 = null;
@@ -318,7 +318,7 @@ public final class SkipUrlEncodingsInner {
     /**
      * Get method with unencoded query parameter with value null.
      *
-     * @return the {@link Completable} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Completable getMethodQueryNullAsync() {
         return getMethodQueryNullWithRestResponseAsync()
@@ -343,7 +343,7 @@ public final class SkipUrlEncodingsInner {
      * @param q1 Unencoded query parameter with value null.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;Void&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     public ServiceFuture<Void> getMethodQueryNullAsync(String q1, ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(getMethodQueryNullAsync(q1), serviceCallback);
@@ -354,7 +354,7 @@ public final class SkipUrlEncodingsInner {
      *
      * @param q1 Unencoded query parameter with value null.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Single<RestResponse<Void, Void>> getMethodQueryNullWithRestResponseAsync(String q1) {
         return service.getMethodQueryNull(q1, this.client.acceptLanguage());
@@ -365,7 +365,7 @@ public final class SkipUrlEncodingsInner {
      *
      * @param q1 Unencoded query parameter with value null.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link Completable} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Completable getMethodQueryNullAsync(String q1) {
         return getMethodQueryNullWithRestResponseAsync(q1)
@@ -390,7 +390,7 @@ public final class SkipUrlEncodingsInner {
      * @param q1 Unencoded query parameter with value 'value1&amp;q2=value2&amp;q3=value3'.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;Void&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     public ServiceFuture<Void> getPathQueryValidAsync(@NonNull String q1, ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(getPathQueryValidAsync(q1), serviceCallback);
@@ -401,7 +401,7 @@ public final class SkipUrlEncodingsInner {
      *
      * @param q1 Unencoded query parameter with value 'value1&amp;q2=value2&amp;q3=value3'.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Single<RestResponse<Void, Void>> getPathQueryValidWithRestResponseAsync(@NonNull String q1) {
         if (q1 == null) {
@@ -415,7 +415,7 @@ public final class SkipUrlEncodingsInner {
      *
      * @param q1 Unencoded query parameter with value 'value1&amp;q2=value2&amp;q3=value3'.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link Completable} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Completable getPathQueryValidAsync(@NonNull String q1) {
         return getPathQueryValidWithRestResponseAsync(q1)
@@ -437,7 +437,7 @@ public final class SkipUrlEncodingsInner {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;Void&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     public ServiceFuture<Void> getSwaggerQueryValidAsync(ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(getSwaggerQueryValidAsync(), serviceCallback);
@@ -446,7 +446,7 @@ public final class SkipUrlEncodingsInner {
     /**
      * Get method with unencoded query parameter with value 'value1&amp;q2=value2&amp;q3=value3'.
      *
-     * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Single<RestResponse<Void, Void>> getSwaggerQueryValidWithRestResponseAsync() {
         final String q1 = "value1&q2=value2&q3=value3";
@@ -456,7 +456,7 @@ public final class SkipUrlEncodingsInner {
     /**
      * Get method with unencoded query parameter with value 'value1&amp;q2=value2&amp;q3=value3'.
      *
-     * @return the {@link Completable} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Completable getSwaggerQueryValidAsync() {
         return getSwaggerQueryValidWithRestResponseAsync()

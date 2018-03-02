@@ -217,7 +217,7 @@ public final class AutoRestResourceFlatteningTestServiceImpl extends AzureServic
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;Void&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     public ServiceFuture<Void> putArrayAsync(ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(putArrayAsync(), serviceCallback);
@@ -226,7 +226,7 @@ public final class AutoRestResourceFlatteningTestServiceImpl extends AzureServic
     /**
      * Put External Resource as an Array.
      *
-     * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Single<RestResponse<Void, Void>> putArrayWithRestResponseAsync() {
         final List<Resource> resourceArray = null;
@@ -236,7 +236,7 @@ public final class AutoRestResourceFlatteningTestServiceImpl extends AzureServic
     /**
      * Put External Resource as an Array.
      *
-     * @return the {@link Completable} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Completable putArrayAsync() {
         return putArrayWithRestResponseAsync()
@@ -261,7 +261,7 @@ public final class AutoRestResourceFlatteningTestServiceImpl extends AzureServic
      * @param resourceArray External Resource as an Array to put.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;Void&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     public ServiceFuture<Void> putArrayAsync(List<Resource> resourceArray, ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(putArrayAsync(resourceArray), serviceCallback);
@@ -272,7 +272,7 @@ public final class AutoRestResourceFlatteningTestServiceImpl extends AzureServic
      *
      * @param resourceArray External Resource as an Array to put.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Single<RestResponse<Void, Void>> putArrayWithRestResponseAsync(List<Resource> resourceArray) {
         Validator.validate(resourceArray);
@@ -284,7 +284,7 @@ public final class AutoRestResourceFlatteningTestServiceImpl extends AzureServic
      *
      * @param resourceArray External Resource as an Array to put.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link Completable} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Completable putArrayAsync(List<Resource> resourceArray) {
         return putArrayWithRestResponseAsync(resourceArray)
@@ -307,7 +307,7 @@ public final class AutoRestResourceFlatteningTestServiceImpl extends AzureServic
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;List&lt;FlattenedProductInner&gt;&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     public ServiceFuture<List<FlattenedProductInner>> getArrayAsync(ServiceCallback<List<FlattenedProductInner>> serviceCallback) {
         return ServiceFuture.fromBody(getArrayAsync(), serviceCallback);
@@ -316,7 +316,7 @@ public final class AutoRestResourceFlatteningTestServiceImpl extends AzureServic
     /**
      * Get External Resource as an Array.
      *
-     * @return the {@link Single&lt;RestResponse&lt;Void, List&lt;FlattenedProductInner&gt;&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Single<RestResponse<Void, List<FlattenedProductInner>>> getArrayWithRestResponseAsync() {
         return service.getArray(this.acceptLanguage());
@@ -325,7 +325,7 @@ public final class AutoRestResourceFlatteningTestServiceImpl extends AzureServic
     /**
      * Get External Resource as an Array.
      *
-     * @return the {@link Maybe&lt;List&lt;FlattenedProductInner&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Maybe<List<FlattenedProductInner>> getArrayAsync() {
         return getArrayWithRestResponseAsync()
@@ -355,7 +355,7 @@ public final class AutoRestResourceFlatteningTestServiceImpl extends AzureServic
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;Void&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     public ServiceFuture<Void> putDictionaryAsync(ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(putDictionaryAsync(), serviceCallback);
@@ -364,7 +364,7 @@ public final class AutoRestResourceFlatteningTestServiceImpl extends AzureServic
     /**
      * Put External Resource as a Dictionary.
      *
-     * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Single<RestResponse<Void, Void>> putDictionaryWithRestResponseAsync() {
         final Map<String, FlattenedProductInner> resourceDictionary = null;
@@ -374,7 +374,7 @@ public final class AutoRestResourceFlatteningTestServiceImpl extends AzureServic
     /**
      * Put External Resource as a Dictionary.
      *
-     * @return the {@link Completable} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Completable putDictionaryAsync() {
         return putDictionaryWithRestResponseAsync()
@@ -399,7 +399,7 @@ public final class AutoRestResourceFlatteningTestServiceImpl extends AzureServic
      * @param resourceDictionary External Resource as a Dictionary to put.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;Void&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     public ServiceFuture<Void> putDictionaryAsync(Map<String, FlattenedProductInner> resourceDictionary, ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(putDictionaryAsync(resourceDictionary), serviceCallback);
@@ -410,7 +410,7 @@ public final class AutoRestResourceFlatteningTestServiceImpl extends AzureServic
      *
      * @param resourceDictionary External Resource as a Dictionary to put.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Single<RestResponse<Void, Void>> putDictionaryWithRestResponseAsync(Map<String, FlattenedProductInner> resourceDictionary) {
         Validator.validate(resourceDictionary);
@@ -422,7 +422,7 @@ public final class AutoRestResourceFlatteningTestServiceImpl extends AzureServic
      *
      * @param resourceDictionary External Resource as a Dictionary to put.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link Completable} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Completable putDictionaryAsync(Map<String, FlattenedProductInner> resourceDictionary) {
         return putDictionaryWithRestResponseAsync(resourceDictionary)
@@ -445,7 +445,7 @@ public final class AutoRestResourceFlatteningTestServiceImpl extends AzureServic
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;Map&lt;String, FlattenedProductInner&gt;&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     public ServiceFuture<Map<String, FlattenedProductInner>> getDictionaryAsync(ServiceCallback<Map<String, FlattenedProductInner>> serviceCallback) {
         return ServiceFuture.fromBody(getDictionaryAsync(), serviceCallback);
@@ -454,7 +454,7 @@ public final class AutoRestResourceFlatteningTestServiceImpl extends AzureServic
     /**
      * Get External Resource as a Dictionary.
      *
-     * @return the {@link Single&lt;RestResponse&lt;Void, Map&lt;String, FlattenedProductInner&gt;&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Single<RestResponse<Void, Map<String, FlattenedProductInner>>> getDictionaryWithRestResponseAsync() {
         return service.getDictionary(this.acceptLanguage());
@@ -463,7 +463,7 @@ public final class AutoRestResourceFlatteningTestServiceImpl extends AzureServic
     /**
      * Get External Resource as a Dictionary.
      *
-     * @return the {@link Maybe&lt;Map&lt;String, FlattenedProductInner&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Maybe<Map<String, FlattenedProductInner>> getDictionaryAsync() {
         return getDictionaryWithRestResponseAsync()
@@ -493,7 +493,7 @@ public final class AutoRestResourceFlatteningTestServiceImpl extends AzureServic
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;Void&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     public ServiceFuture<Void> putResourceCollectionAsync(ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(putResourceCollectionAsync(), serviceCallback);
@@ -502,7 +502,7 @@ public final class AutoRestResourceFlatteningTestServiceImpl extends AzureServic
     /**
      * Put External Resource as a ResourceCollection.
      *
-     * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Single<RestResponse<Void, Void>> putResourceCollectionWithRestResponseAsync() {
         final ResourceCollectionInner resourceComplexObject = null;
@@ -512,7 +512,7 @@ public final class AutoRestResourceFlatteningTestServiceImpl extends AzureServic
     /**
      * Put External Resource as a ResourceCollection.
      *
-     * @return the {@link Completable} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Completable putResourceCollectionAsync() {
         return putResourceCollectionWithRestResponseAsync()
@@ -537,7 +537,7 @@ public final class AutoRestResourceFlatteningTestServiceImpl extends AzureServic
      * @param resourceComplexObject External Resource as a ResourceCollection to put.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;Void&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     public ServiceFuture<Void> putResourceCollectionAsync(ResourceCollectionInner resourceComplexObject, ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(putResourceCollectionAsync(resourceComplexObject), serviceCallback);
@@ -548,7 +548,7 @@ public final class AutoRestResourceFlatteningTestServiceImpl extends AzureServic
      *
      * @param resourceComplexObject External Resource as a ResourceCollection to put.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Single<RestResponse<Void, Void>> putResourceCollectionWithRestResponseAsync(ResourceCollectionInner resourceComplexObject) {
         Validator.validate(resourceComplexObject);
@@ -560,7 +560,7 @@ public final class AutoRestResourceFlatteningTestServiceImpl extends AzureServic
      *
      * @param resourceComplexObject External Resource as a ResourceCollection to put.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link Completable} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Completable putResourceCollectionAsync(ResourceCollectionInner resourceComplexObject) {
         return putResourceCollectionWithRestResponseAsync(resourceComplexObject)
@@ -583,7 +583,7 @@ public final class AutoRestResourceFlatteningTestServiceImpl extends AzureServic
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;ResourceCollectionInner&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     public ServiceFuture<ResourceCollectionInner> getResourceCollectionAsync(ServiceCallback<ResourceCollectionInner> serviceCallback) {
         return ServiceFuture.fromBody(getResourceCollectionAsync(), serviceCallback);
@@ -592,7 +592,7 @@ public final class AutoRestResourceFlatteningTestServiceImpl extends AzureServic
     /**
      * Get External Resource as a ResourceCollection.
      *
-     * @return the {@link Single&lt;RestResponse&lt;Void, ResourceCollectionInner&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Single<RestResponse<Void, ResourceCollectionInner>> getResourceCollectionWithRestResponseAsync() {
         return service.getResourceCollection(this.acceptLanguage());
@@ -601,7 +601,7 @@ public final class AutoRestResourceFlatteningTestServiceImpl extends AzureServic
     /**
      * Get External Resource as a ResourceCollection.
      *
-     * @return the {@link Maybe&lt;ResourceCollectionInner&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Maybe<ResourceCollectionInner> getResourceCollectionAsync() {
         return getResourceCollectionWithRestResponseAsync()

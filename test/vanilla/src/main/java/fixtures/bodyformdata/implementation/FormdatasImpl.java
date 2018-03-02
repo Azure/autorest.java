@@ -93,7 +93,7 @@ public final class FormdatasImpl implements Formdatas {
      * @param fileName File name to upload. Name has to be spelled exactly as written here.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;Flowable&lt;ByteBuffer&gt;&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     public ServiceFuture<Flowable<ByteBuffer>> uploadFileAsync(@NonNull Flowable<ByteBuffer> fileContent, @NonNull String fileName, ServiceCallback<Flowable<ByteBuffer>> serviceCallback) {
         return ServiceFuture.fromBody(uploadFileAsync(fileContent, fileName), serviceCallback);
@@ -105,7 +105,7 @@ public final class FormdatasImpl implements Formdatas {
      * @param fileContent File to upload.
      * @param fileName File name to upload. Name has to be spelled exactly as written here.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link Single&lt;RestResponse&lt;Void, Flowable&lt;ByteBuffer&gt;&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Single<RestResponse<Void, Flowable<ByteBuffer>>> uploadFileWithRestResponseAsync(@NonNull Flowable<ByteBuffer> fileContent, @NonNull String fileName) {
         if (fileContent == null) {
@@ -123,7 +123,7 @@ public final class FormdatasImpl implements Formdatas {
      * @param fileContent File to upload.
      * @param fileName File name to upload. Name has to be spelled exactly as written here.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link Maybe&lt;Flowable&lt;ByteBuffer&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Maybe<Flowable<ByteBuffer>> uploadFileAsync(@NonNull Flowable<ByteBuffer> fileContent, @NonNull String fileName) {
         return uploadFileWithRestResponseAsync(fileContent, fileName)
@@ -157,7 +157,7 @@ public final class FormdatasImpl implements Formdatas {
      * @param fileContent File to upload.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;Flowable&lt;ByteBuffer&gt;&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     public ServiceFuture<Flowable<ByteBuffer>> uploadFileViaBodyAsync(@NonNull Flowable<ByteBuffer> fileContent, ServiceCallback<Flowable<ByteBuffer>> serviceCallback) {
         return ServiceFuture.fromBody(uploadFileViaBodyAsync(fileContent), serviceCallback);
@@ -168,7 +168,7 @@ public final class FormdatasImpl implements Formdatas {
      *
      * @param fileContent File to upload.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link Single&lt;RestResponse&lt;Void, Flowable&lt;ByteBuffer&gt;&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Single<RestResponse<Void, Flowable<ByteBuffer>>> uploadFileViaBodyWithRestResponseAsync(@NonNull Flowable<ByteBuffer> fileContent) {
         if (fileContent == null) {
@@ -182,7 +182,7 @@ public final class FormdatasImpl implements Formdatas {
      *
      * @param fileContent File to upload.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link Maybe&lt;Flowable&lt;ByteBuffer&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Maybe<Flowable<ByteBuffer>> uploadFileViaBodyAsync(@NonNull Flowable<ByteBuffer> fileContent) {
         return uploadFileViaBodyWithRestResponseAsync(fileContent)

@@ -103,7 +103,7 @@ public final class ArraysImpl implements Arrays {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;ArrayWrapper&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     public ServiceFuture<ArrayWrapper> getValidAsync(ServiceCallback<ArrayWrapper> serviceCallback) {
         return ServiceFuture.fromBody(getValidAsync(), serviceCallback);
@@ -112,7 +112,7 @@ public final class ArraysImpl implements Arrays {
     /**
      * Get complex types with array property.
      *
-     * @return the {@link Single&lt;RestResponse&lt;Void, ArrayWrapper&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Single<RestResponse<Void, ArrayWrapper>> getValidWithRestResponseAsync() {
         return service.getValid();
@@ -121,7 +121,7 @@ public final class ArraysImpl implements Arrays {
     /**
      * Get complex types with array property.
      *
-     * @return the {@link Maybe&lt;ArrayWrapper&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Maybe<ArrayWrapper> getValidAsync() {
         return getValidWithRestResponseAsync()
@@ -154,7 +154,7 @@ public final class ArraysImpl implements Arrays {
      * @param complexBody Please put an array with 4 items: "1, 2, 3, 4", "", null, "&amp;S#$(*Y", "The quick brown fox jumps over the lazy dog".
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;Void&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     public ServiceFuture<Void> putValidAsync(@NonNull ArrayWrapper complexBody, ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(putValidAsync(complexBody), serviceCallback);
@@ -165,7 +165,7 @@ public final class ArraysImpl implements Arrays {
      *
      * @param complexBody Please put an array with 4 items: "1, 2, 3, 4", "", null, "&amp;S#$(*Y", "The quick brown fox jumps over the lazy dog".
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Single<RestResponse<Void, Void>> putValidWithRestResponseAsync(@NonNull ArrayWrapper complexBody) {
         if (complexBody == null) {
@@ -180,7 +180,7 @@ public final class ArraysImpl implements Arrays {
      *
      * @param complexBody Please put an array with 4 items: "1, 2, 3, 4", "", null, "&amp;S#$(*Y", "The quick brown fox jumps over the lazy dog".
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link Completable} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Completable putValidAsync(@NonNull ArrayWrapper complexBody) {
         return putValidWithRestResponseAsync(complexBody)
@@ -203,7 +203,7 @@ public final class ArraysImpl implements Arrays {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;ArrayWrapper&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     public ServiceFuture<ArrayWrapper> getEmptyAsync(ServiceCallback<ArrayWrapper> serviceCallback) {
         return ServiceFuture.fromBody(getEmptyAsync(), serviceCallback);
@@ -212,7 +212,7 @@ public final class ArraysImpl implements Arrays {
     /**
      * Get complex types with array property which is empty.
      *
-     * @return the {@link Single&lt;RestResponse&lt;Void, ArrayWrapper&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Single<RestResponse<Void, ArrayWrapper>> getEmptyWithRestResponseAsync() {
         return service.getEmpty();
@@ -221,7 +221,7 @@ public final class ArraysImpl implements Arrays {
     /**
      * Get complex types with array property which is empty.
      *
-     * @return the {@link Maybe&lt;ArrayWrapper&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Maybe<ArrayWrapper> getEmptyAsync() {
         return getEmptyWithRestResponseAsync()
@@ -254,7 +254,7 @@ public final class ArraysImpl implements Arrays {
      * @param complexBody Please put an empty array.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;Void&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     public ServiceFuture<Void> putEmptyAsync(@NonNull ArrayWrapper complexBody, ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(putEmptyAsync(complexBody), serviceCallback);
@@ -265,7 +265,7 @@ public final class ArraysImpl implements Arrays {
      *
      * @param complexBody Please put an empty array.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Single<RestResponse<Void, Void>> putEmptyWithRestResponseAsync(@NonNull ArrayWrapper complexBody) {
         if (complexBody == null) {
@@ -280,7 +280,7 @@ public final class ArraysImpl implements Arrays {
      *
      * @param complexBody Please put an empty array.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link Completable} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Completable putEmptyAsync(@NonNull ArrayWrapper complexBody) {
         return putEmptyWithRestResponseAsync(complexBody)
@@ -303,7 +303,7 @@ public final class ArraysImpl implements Arrays {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;ArrayWrapper&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     public ServiceFuture<ArrayWrapper> getNotProvidedAsync(ServiceCallback<ArrayWrapper> serviceCallback) {
         return ServiceFuture.fromBody(getNotProvidedAsync(), serviceCallback);
@@ -312,7 +312,7 @@ public final class ArraysImpl implements Arrays {
     /**
      * Get complex types with array property while server doesn't provide a response payload.
      *
-     * @return the {@link Single&lt;RestResponse&lt;Void, ArrayWrapper&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Single<RestResponse<Void, ArrayWrapper>> getNotProvidedWithRestResponseAsync() {
         return service.getNotProvided();
@@ -321,7 +321,7 @@ public final class ArraysImpl implements Arrays {
     /**
      * Get complex types with array property while server doesn't provide a response payload.
      *
-     * @return the {@link Maybe&lt;ArrayWrapper&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Maybe<ArrayWrapper> getNotProvidedAsync() {
         return getNotProvidedWithRestResponseAsync()

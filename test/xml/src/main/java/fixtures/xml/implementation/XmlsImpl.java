@@ -138,7 +138,7 @@ public final class XmlsImpl implements Xmls {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;Slideshow&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     public ServiceFuture<Slideshow> getSimpleAsync(ServiceCallback<Slideshow> serviceCallback) {
         return ServiceFuture.fromBody(getSimpleAsync(), serviceCallback);
@@ -147,7 +147,7 @@ public final class XmlsImpl implements Xmls {
     /**
      * Get a simple XML document.
      *
-     * @return the {@link Single&lt;RestResponse&lt;Void, Slideshow&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Single<RestResponse<Void, Slideshow>> getSimpleWithRestResponseAsync() {
         return service.getSimple();
@@ -156,7 +156,7 @@ public final class XmlsImpl implements Xmls {
     /**
      * Get a simple XML document.
      *
-     * @return the {@link Maybe&lt;Slideshow&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Maybe<Slideshow> getSimpleAsync() {
         return getSimpleWithRestResponseAsync()
@@ -189,7 +189,7 @@ public final class XmlsImpl implements Xmls {
      * @param wrappedLists the Slideshow value.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;Void&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     public ServiceFuture<Void> putSimpleAsync(@NonNull Slideshow wrappedLists, ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(putSimpleAsync(wrappedLists), serviceCallback);
@@ -200,7 +200,7 @@ public final class XmlsImpl implements Xmls {
      *
      * @param wrappedLists the Slideshow value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Single<RestResponse<Void, Void>> putSimpleWithRestResponseAsync(@NonNull Slideshow wrappedLists) {
         if (wrappedLists == null) {
@@ -215,7 +215,7 @@ public final class XmlsImpl implements Xmls {
      *
      * @param wrappedLists the Slideshow value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link Completable} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Completable putSimpleAsync(@NonNull Slideshow wrappedLists) {
         return putSimpleWithRestResponseAsync(wrappedLists)
@@ -237,7 +237,7 @@ public final class XmlsImpl implements Xmls {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;AppleBarrel&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     public ServiceFuture<AppleBarrel> getWrappedListsAsync(ServiceCallback<AppleBarrel> serviceCallback) {
         return ServiceFuture.fromBody(getWrappedListsAsync(), serviceCallback);
@@ -246,7 +246,7 @@ public final class XmlsImpl implements Xmls {
     /**
      * Get an XML document with multiple wrapped lists.
      *
-     * @return the {@link Single&lt;RestResponse&lt;Void, AppleBarrel&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Single<RestResponse<Void, AppleBarrel>> getWrappedListsWithRestResponseAsync() {
         return service.getWrappedLists();
@@ -255,7 +255,7 @@ public final class XmlsImpl implements Xmls {
     /**
      * Get an XML document with multiple wrapped lists.
      *
-     * @return the {@link Maybe&lt;AppleBarrel&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Maybe<AppleBarrel> getWrappedListsAsync() {
         return getWrappedListsWithRestResponseAsync()
@@ -288,7 +288,7 @@ public final class XmlsImpl implements Xmls {
      * @param wrappedLists the AppleBarrel value.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;Void&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     public ServiceFuture<Void> putWrappedListsAsync(@NonNull AppleBarrel wrappedLists, ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(putWrappedListsAsync(wrappedLists), serviceCallback);
@@ -299,7 +299,7 @@ public final class XmlsImpl implements Xmls {
      *
      * @param wrappedLists the AppleBarrel value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Single<RestResponse<Void, Void>> putWrappedListsWithRestResponseAsync(@NonNull AppleBarrel wrappedLists) {
         if (wrappedLists == null) {
@@ -314,7 +314,7 @@ public final class XmlsImpl implements Xmls {
      *
      * @param wrappedLists the AppleBarrel value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link Completable} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Completable putWrappedListsAsync(@NonNull AppleBarrel wrappedLists) {
         return putWrappedListsWithRestResponseAsync(wrappedLists)
@@ -335,7 +335,7 @@ public final class XmlsImpl implements Xmls {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;Void&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     public ServiceFuture<Void> getHeadersAsync(ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(getHeadersAsync(), serviceCallback);
@@ -344,7 +344,7 @@ public final class XmlsImpl implements Xmls {
     /**
      * Get strongly-typed response headers.
      *
-     * @return the {@link Single&lt;RestResponse&lt;XmlGetHeadersHeaders, Void&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Single<RestResponse<XmlGetHeadersHeaders, Void>> getHeadersWithRestResponseAsync() {
         return service.getHeaders();
@@ -353,7 +353,7 @@ public final class XmlsImpl implements Xmls {
     /**
      * Get strongly-typed response headers.
      *
-     * @return the {@link Completable} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Completable getHeadersAsync() {
         return getHeadersWithRestResponseAsync()
@@ -375,7 +375,7 @@ public final class XmlsImpl implements Xmls {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;Slideshow&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     public ServiceFuture<Slideshow> getEmptyListAsync(ServiceCallback<Slideshow> serviceCallback) {
         return ServiceFuture.fromBody(getEmptyListAsync(), serviceCallback);
@@ -384,7 +384,7 @@ public final class XmlsImpl implements Xmls {
     /**
      * Get an empty list.
      *
-     * @return the {@link Single&lt;RestResponse&lt;Void, Slideshow&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Single<RestResponse<Void, Slideshow>> getEmptyListWithRestResponseAsync() {
         return service.getEmptyList();
@@ -393,7 +393,7 @@ public final class XmlsImpl implements Xmls {
     /**
      * Get an empty list.
      *
-     * @return the {@link Maybe&lt;Slideshow&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Maybe<Slideshow> getEmptyListAsync() {
         return getEmptyListWithRestResponseAsync()
@@ -423,7 +423,7 @@ public final class XmlsImpl implements Xmls {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;AppleBarrel&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     public ServiceFuture<AppleBarrel> getEmptyWrappedListsAsync(ServiceCallback<AppleBarrel> serviceCallback) {
         return ServiceFuture.fromBody(getEmptyWrappedListsAsync(), serviceCallback);
@@ -432,7 +432,7 @@ public final class XmlsImpl implements Xmls {
     /**
      * Gets some empty wrapped lists.
      *
-     * @return the {@link Single&lt;RestResponse&lt;Void, AppleBarrel&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Single<RestResponse<Void, AppleBarrel>> getEmptyWrappedListsWithRestResponseAsync() {
         return service.getEmptyWrappedLists();
@@ -441,7 +441,7 @@ public final class XmlsImpl implements Xmls {
     /**
      * Gets some empty wrapped lists.
      *
-     * @return the {@link Maybe&lt;AppleBarrel&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Maybe<AppleBarrel> getEmptyWrappedListsAsync() {
         return getEmptyWrappedListsWithRestResponseAsync()
@@ -471,7 +471,7 @@ public final class XmlsImpl implements Xmls {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;List&lt;Banana&gt;&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     public ServiceFuture<List<Banana>> getRootListAsync(ServiceCallback<List<Banana>> serviceCallback) {
         return ServiceFuture.fromBody(getRootListAsync(), serviceCallback);
@@ -480,7 +480,7 @@ public final class XmlsImpl implements Xmls {
     /**
      * Gets a list as the root element.
      *
-     * @return the {@link Single&lt;RestResponse&lt;Void, List&lt;Banana&gt;&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Single<RestResponse<Void, List<Banana>>> getRootListWithRestResponseAsync() {
         return service.getRootList();
@@ -489,7 +489,7 @@ public final class XmlsImpl implements Xmls {
     /**
      * Gets a list as the root element.
      *
-     * @return the {@link Maybe&lt;List&lt;Banana&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Maybe<List<Banana>> getRootListAsync() {
         return getRootListWithRestResponseAsync()
@@ -521,7 +521,7 @@ public final class XmlsImpl implements Xmls {
      * @param bananas the List&lt;Banana&gt; value.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;Void&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     public ServiceFuture<Void> putRootListAsync(@NonNull List<Banana> bananas, ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(putRootListAsync(bananas), serviceCallback);
@@ -532,7 +532,7 @@ public final class XmlsImpl implements Xmls {
      *
      * @param bananas the List&lt;Banana&gt; value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Single<RestResponse<Void, Void>> putRootListWithRestResponseAsync(@NonNull List<Banana> bananas) {
         if (bananas == null) {
@@ -547,7 +547,7 @@ public final class XmlsImpl implements Xmls {
      *
      * @param bananas the List&lt;Banana&gt; value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link Completable} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Completable putRootListAsync(@NonNull List<Banana> bananas) {
         return putRootListWithRestResponseAsync(bananas)
@@ -569,7 +569,7 @@ public final class XmlsImpl implements Xmls {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;List&lt;Banana&gt;&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     public ServiceFuture<List<Banana>> getEmptyRootListAsync(ServiceCallback<List<Banana>> serviceCallback) {
         return ServiceFuture.fromBody(getEmptyRootListAsync(), serviceCallback);
@@ -578,7 +578,7 @@ public final class XmlsImpl implements Xmls {
     /**
      * Gets an empty list as the root element.
      *
-     * @return the {@link Single&lt;RestResponse&lt;Void, List&lt;Banana&gt;&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Single<RestResponse<Void, List<Banana>>> getEmptyRootListWithRestResponseAsync() {
         return service.getEmptyRootList();
@@ -587,7 +587,7 @@ public final class XmlsImpl implements Xmls {
     /**
      * Gets an empty list as the root element.
      *
-     * @return the {@link Maybe&lt;List&lt;Banana&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Maybe<List<Banana>> getEmptyRootListAsync() {
         return getEmptyRootListWithRestResponseAsync()
@@ -619,7 +619,7 @@ public final class XmlsImpl implements Xmls {
      * @param bananas the List&lt;Banana&gt; value.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;Void&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     public ServiceFuture<Void> putEmptyRootListAsync(@NonNull List<Banana> bananas, ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(putEmptyRootListAsync(bananas), serviceCallback);
@@ -630,7 +630,7 @@ public final class XmlsImpl implements Xmls {
      *
      * @param bananas the List&lt;Banana&gt; value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Single<RestResponse<Void, Void>> putEmptyRootListWithRestResponseAsync(@NonNull List<Banana> bananas) {
         if (bananas == null) {
@@ -645,7 +645,7 @@ public final class XmlsImpl implements Xmls {
      *
      * @param bananas the List&lt;Banana&gt; value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link Completable} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Completable putEmptyRootListAsync(@NonNull List<Banana> bananas) {
         return putEmptyRootListWithRestResponseAsync(bananas)
@@ -667,7 +667,7 @@ public final class XmlsImpl implements Xmls {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;Banana&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     public ServiceFuture<Banana> getEmptyChildElementAsync(ServiceCallback<Banana> serviceCallback) {
         return ServiceFuture.fromBody(getEmptyChildElementAsync(), serviceCallback);
@@ -676,7 +676,7 @@ public final class XmlsImpl implements Xmls {
     /**
      * Gets an XML document with an empty child element.
      *
-     * @return the {@link Single&lt;RestResponse&lt;Void, Banana&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Single<RestResponse<Void, Banana>> getEmptyChildElementWithRestResponseAsync() {
         return service.getEmptyChildElement();
@@ -685,7 +685,7 @@ public final class XmlsImpl implements Xmls {
     /**
      * Gets an XML document with an empty child element.
      *
-     * @return the {@link Maybe&lt;Banana&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Maybe<Banana> getEmptyChildElementAsync() {
         return getEmptyChildElementWithRestResponseAsync()
@@ -717,7 +717,7 @@ public final class XmlsImpl implements Xmls {
      * @param banana the Banana value.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;Void&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     public ServiceFuture<Void> putEmptyChildElementAsync(@NonNull Banana banana, ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(putEmptyChildElementAsync(banana), serviceCallback);
@@ -728,7 +728,7 @@ public final class XmlsImpl implements Xmls {
      *
      * @param banana the Banana value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Single<RestResponse<Void, Void>> putEmptyChildElementWithRestResponseAsync(@NonNull Banana banana) {
         if (banana == null) {
@@ -743,7 +743,7 @@ public final class XmlsImpl implements Xmls {
      *
      * @param banana the Banana value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link Completable} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Completable putEmptyChildElementAsync(@NonNull Banana banana) {
         return putEmptyChildElementWithRestResponseAsync(banana)

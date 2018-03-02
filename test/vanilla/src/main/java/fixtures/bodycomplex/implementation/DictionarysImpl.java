@@ -108,7 +108,7 @@ public final class DictionarysImpl implements Dictionarys {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;DictionaryWrapper&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     public ServiceFuture<DictionaryWrapper> getValidAsync(ServiceCallback<DictionaryWrapper> serviceCallback) {
         return ServiceFuture.fromBody(getValidAsync(), serviceCallback);
@@ -117,7 +117,7 @@ public final class DictionarysImpl implements Dictionarys {
     /**
      * Get complex types with dictionary property.
      *
-     * @return the {@link Single&lt;RestResponse&lt;Void, DictionaryWrapper&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Single<RestResponse<Void, DictionaryWrapper>> getValidWithRestResponseAsync() {
         return service.getValid();
@@ -126,7 +126,7 @@ public final class DictionarysImpl implements Dictionarys {
     /**
      * Get complex types with dictionary property.
      *
-     * @return the {@link Maybe&lt;DictionaryWrapper&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Maybe<DictionaryWrapper> getValidAsync() {
         return getValidWithRestResponseAsync()
@@ -159,7 +159,7 @@ public final class DictionarysImpl implements Dictionarys {
      * @param complexBody Please put a dictionary with 5 key-value pairs: "txt":"notepad", "bmp":"mspaint", "xls":"excel", "exe":"", "":null.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;Void&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     public ServiceFuture<Void> putValidAsync(@NonNull DictionaryWrapper complexBody, ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(putValidAsync(complexBody), serviceCallback);
@@ -170,7 +170,7 @@ public final class DictionarysImpl implements Dictionarys {
      *
      * @param complexBody Please put a dictionary with 5 key-value pairs: "txt":"notepad", "bmp":"mspaint", "xls":"excel", "exe":"", "":null.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Single<RestResponse<Void, Void>> putValidWithRestResponseAsync(@NonNull DictionaryWrapper complexBody) {
         if (complexBody == null) {
@@ -185,7 +185,7 @@ public final class DictionarysImpl implements Dictionarys {
      *
      * @param complexBody Please put a dictionary with 5 key-value pairs: "txt":"notepad", "bmp":"mspaint", "xls":"excel", "exe":"", "":null.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link Completable} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Completable putValidAsync(@NonNull DictionaryWrapper complexBody) {
         return putValidWithRestResponseAsync(complexBody)
@@ -208,7 +208,7 @@ public final class DictionarysImpl implements Dictionarys {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;DictionaryWrapper&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     public ServiceFuture<DictionaryWrapper> getEmptyAsync(ServiceCallback<DictionaryWrapper> serviceCallback) {
         return ServiceFuture.fromBody(getEmptyAsync(), serviceCallback);
@@ -217,7 +217,7 @@ public final class DictionarysImpl implements Dictionarys {
     /**
      * Get complex types with dictionary property which is empty.
      *
-     * @return the {@link Single&lt;RestResponse&lt;Void, DictionaryWrapper&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Single<RestResponse<Void, DictionaryWrapper>> getEmptyWithRestResponseAsync() {
         return service.getEmpty();
@@ -226,7 +226,7 @@ public final class DictionarysImpl implements Dictionarys {
     /**
      * Get complex types with dictionary property which is empty.
      *
-     * @return the {@link Maybe&lt;DictionaryWrapper&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Maybe<DictionaryWrapper> getEmptyAsync() {
         return getEmptyWithRestResponseAsync()
@@ -259,7 +259,7 @@ public final class DictionarysImpl implements Dictionarys {
      * @param complexBody Please put an empty dictionary.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;Void&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     public ServiceFuture<Void> putEmptyAsync(@NonNull DictionaryWrapper complexBody, ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(putEmptyAsync(complexBody), serviceCallback);
@@ -270,7 +270,7 @@ public final class DictionarysImpl implements Dictionarys {
      *
      * @param complexBody Please put an empty dictionary.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Single<RestResponse<Void, Void>> putEmptyWithRestResponseAsync(@NonNull DictionaryWrapper complexBody) {
         if (complexBody == null) {
@@ -285,7 +285,7 @@ public final class DictionarysImpl implements Dictionarys {
      *
      * @param complexBody Please put an empty dictionary.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link Completable} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Completable putEmptyAsync(@NonNull DictionaryWrapper complexBody) {
         return putEmptyWithRestResponseAsync(complexBody)
@@ -308,7 +308,7 @@ public final class DictionarysImpl implements Dictionarys {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;DictionaryWrapper&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     public ServiceFuture<DictionaryWrapper> getNullAsync(ServiceCallback<DictionaryWrapper> serviceCallback) {
         return ServiceFuture.fromBody(getNullAsync(), serviceCallback);
@@ -317,7 +317,7 @@ public final class DictionarysImpl implements Dictionarys {
     /**
      * Get complex types with dictionary property which is null.
      *
-     * @return the {@link Single&lt;RestResponse&lt;Void, DictionaryWrapper&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Single<RestResponse<Void, DictionaryWrapper>> getNullWithRestResponseAsync() {
         return service.getNull();
@@ -326,7 +326,7 @@ public final class DictionarysImpl implements Dictionarys {
     /**
      * Get complex types with dictionary property which is null.
      *
-     * @return the {@link Maybe&lt;DictionaryWrapper&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Maybe<DictionaryWrapper> getNullAsync() {
         return getNullWithRestResponseAsync()
@@ -357,7 +357,7 @@ public final class DictionarysImpl implements Dictionarys {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;DictionaryWrapper&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     public ServiceFuture<DictionaryWrapper> getNotProvidedAsync(ServiceCallback<DictionaryWrapper> serviceCallback) {
         return ServiceFuture.fromBody(getNotProvidedAsync(), serviceCallback);
@@ -366,7 +366,7 @@ public final class DictionarysImpl implements Dictionarys {
     /**
      * Get complex types with dictionary property while server doesn't provide a response payload.
      *
-     * @return the {@link Single&lt;RestResponse&lt;Void, DictionaryWrapper&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Single<RestResponse<Void, DictionaryWrapper>> getNotProvidedWithRestResponseAsync() {
         return service.getNotProvided();
@@ -375,7 +375,7 @@ public final class DictionarysImpl implements Dictionarys {
     /**
      * Get complex types with dictionary property while server doesn't provide a response payload.
      *
-     * @return the {@link Maybe&lt;DictionaryWrapper&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Maybe<DictionaryWrapper> getNotProvidedAsync() {
         return getNotProvidedWithRestResponseAsync()

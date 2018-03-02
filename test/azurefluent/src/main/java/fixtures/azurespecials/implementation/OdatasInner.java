@@ -76,7 +76,7 @@ public final class OdatasInner {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;Void&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     public ServiceFuture<Void> getWithFilterAsync(ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(getWithFilterAsync(), serviceCallback);
@@ -85,7 +85,7 @@ public final class OdatasInner {
     /**
      * Specify filter parameter with value '$filter=id gt 5 and name eq 'foo'&amp;$orderby=id&amp;$top=10'.
      *
-     * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Single<RestResponse<Void, Void>> getWithFilterWithRestResponseAsync() {
         final String filter = null;
@@ -97,7 +97,7 @@ public final class OdatasInner {
     /**
      * Specify filter parameter with value '$filter=id gt 5 and name eq 'foo'&amp;$orderby=id&amp;$top=10'.
      *
-     * @return the {@link Completable} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Completable getWithFilterAsync() {
         return getWithFilterWithRestResponseAsync()
@@ -126,7 +126,7 @@ public final class OdatasInner {
      * @param orderby The orderby parameter with value id.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;Void&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     public ServiceFuture<Void> getWithFilterAsync(String filter, Integer top, String orderby, ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(getWithFilterAsync(filter, top, orderby), serviceCallback);
@@ -139,7 +139,7 @@ public final class OdatasInner {
      * @param top The top parameter with value 10.
      * @param orderby The orderby parameter with value id.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Single<RestResponse<Void, Void>> getWithFilterWithRestResponseAsync(String filter, Integer top, String orderby) {
         return service.getWithFilter(filter, top, orderby, this.client.acceptLanguage());
@@ -152,7 +152,7 @@ public final class OdatasInner {
      * @param top The top parameter with value 10.
      * @param orderby The orderby parameter with value id.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link Completable} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Completable getWithFilterAsync(String filter, Integer top, String orderby) {
         return getWithFilterWithRestResponseAsync(filter, top, orderby)
