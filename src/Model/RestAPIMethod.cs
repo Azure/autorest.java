@@ -161,7 +161,6 @@ namespace AutoRest.Java.Model
             if (IsResumable)
             {
                 imports.Add("com.microsoft.rest.v2.annotations.ResumeOperation");
-                imports.Add("com.microsoft.rest.v2.OperationDescription");
             }
 
             ReturnType.AddImportsTo(imports, includeImplementationImports);
