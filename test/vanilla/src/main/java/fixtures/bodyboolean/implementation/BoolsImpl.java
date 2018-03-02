@@ -10,10 +10,11 @@
 
 package fixtures.bodyboolean.implementation;
 
+import com.microsoft.rest.v2.BodyResponse;
 import com.microsoft.rest.v2.RestProxy;
-import com.microsoft.rest.v2.RestResponse;
 import com.microsoft.rest.v2.ServiceCallback;
 import com.microsoft.rest.v2.ServiceFuture;
+import com.microsoft.rest.v2.VoidResponse;
 import com.microsoft.rest.v2.annotations.BodyParam;
 import com.microsoft.rest.v2.annotations.ExpectedResponses;
 import com.microsoft.rest.v2.annotations.GET;
@@ -62,32 +63,32 @@ public final class BoolsImpl implements Bools {
         @GET("bool/true")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<RestResponse<Void, Boolean>> getTrue();
+        Single<BodyResponse<Boolean>> getTrue();
 
         @PUT("bool/true")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<RestResponse<Void, Void>> putTrue(@BodyParam("application/json; charset=utf-8") boolean boolBody);
+        Single<VoidResponse> putTrue(@BodyParam("application/json; charset=utf-8") boolean boolBody);
 
         @GET("bool/false")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<RestResponse<Void, Boolean>> getFalse();
+        Single<BodyResponse<Boolean>> getFalse();
 
         @PUT("bool/false")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<RestResponse<Void, Void>> putFalse(@BodyParam("application/json; charset=utf-8") boolean boolBody);
+        Single<VoidResponse> putFalse(@BodyParam("application/json; charset=utf-8") boolean boolBody);
 
         @GET("bool/null")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<RestResponse<Void, Boolean>> getNull();
+        Single<BodyResponse<Boolean>> getNull();
 
         @GET("bool/invalid")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<RestResponse<Void, Boolean>> getInvalid();
+        Single<BodyResponse<Boolean>> getInvalid();
     }
 
     /**
@@ -117,7 +118,7 @@ public final class BoolsImpl implements Bools {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<Void, Boolean>> getTrueWithRestResponseAsync() {
+    public Single<BodyResponse<Boolean>> getTrueWithRestResponseAsync() {
         return service.getTrue();
     }
 
@@ -128,15 +129,7 @@ public final class BoolsImpl implements Bools {
      */
     public Maybe<Boolean> getTrueAsync() {
         return getTrueWithRestResponseAsync()
-            .flatMapMaybe(new Function<RestResponse<Void, Boolean>, Maybe<Boolean>>() {
-                public Maybe<Boolean> apply(RestResponse<Void, Boolean> restResponse) {
-                    if (restResponse.body() == null) {
-                        return Maybe.empty();
-                    } else {
-                        return Maybe.just(restResponse.body());
-                    }
-                }
-            });
+            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -170,7 +163,7 @@ public final class BoolsImpl implements Bools {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<Void, Void>> putTrueWithRestResponseAsync(@NonNull boolean boolBody) {
+    public Single<VoidResponse> putTrueWithRestResponseAsync(@NonNull boolean boolBody) {
         return service.putTrue(boolBody);
     }
 
@@ -213,7 +206,7 @@ public final class BoolsImpl implements Bools {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<Void, Boolean>> getFalseWithRestResponseAsync() {
+    public Single<BodyResponse<Boolean>> getFalseWithRestResponseAsync() {
         return service.getFalse();
     }
 
@@ -224,15 +217,7 @@ public final class BoolsImpl implements Bools {
      */
     public Maybe<Boolean> getFalseAsync() {
         return getFalseWithRestResponseAsync()
-            .flatMapMaybe(new Function<RestResponse<Void, Boolean>, Maybe<Boolean>>() {
-                public Maybe<Boolean> apply(RestResponse<Void, Boolean> restResponse) {
-                    if (restResponse.body() == null) {
-                        return Maybe.empty();
-                    } else {
-                        return Maybe.just(restResponse.body());
-                    }
-                }
-            });
+            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -266,7 +251,7 @@ public final class BoolsImpl implements Bools {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<Void, Void>> putFalseWithRestResponseAsync(@NonNull boolean boolBody) {
+    public Single<VoidResponse> putFalseWithRestResponseAsync(@NonNull boolean boolBody) {
         return service.putFalse(boolBody);
     }
 
@@ -309,7 +294,7 @@ public final class BoolsImpl implements Bools {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<Void, Boolean>> getNullWithRestResponseAsync() {
+    public Single<BodyResponse<Boolean>> getNullWithRestResponseAsync() {
         return service.getNull();
     }
 
@@ -320,15 +305,7 @@ public final class BoolsImpl implements Bools {
      */
     public Maybe<Boolean> getNullAsync() {
         return getNullWithRestResponseAsync()
-            .flatMapMaybe(new Function<RestResponse<Void, Boolean>, Maybe<Boolean>>() {
-                public Maybe<Boolean> apply(RestResponse<Void, Boolean> restResponse) {
-                    if (restResponse.body() == null) {
-                        return Maybe.empty();
-                    } else {
-                        return Maybe.just(restResponse.body());
-                    }
-                }
-            });
+            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -358,7 +335,7 @@ public final class BoolsImpl implements Bools {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<Void, Boolean>> getInvalidWithRestResponseAsync() {
+    public Single<BodyResponse<Boolean>> getInvalidWithRestResponseAsync() {
         return service.getInvalid();
     }
 
@@ -369,14 +346,6 @@ public final class BoolsImpl implements Bools {
      */
     public Maybe<Boolean> getInvalidAsync() {
         return getInvalidWithRestResponseAsync()
-            .flatMapMaybe(new Function<RestResponse<Void, Boolean>, Maybe<Boolean>>() {
-                public Maybe<Boolean> apply(RestResponse<Void, Boolean> restResponse) {
-                    if (restResponse.body() == null) {
-                        return Maybe.empty();
-                    } else {
-                        return Maybe.just(restResponse.body());
-                    }
-                }
-            });
+            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 }

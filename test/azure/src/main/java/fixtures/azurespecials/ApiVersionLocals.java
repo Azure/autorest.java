@@ -10,9 +10,9 @@
 
 package fixtures.azurespecials;
 
-import com.microsoft.rest.v2.RestResponse;
 import com.microsoft.rest.v2.ServiceCallback;
 import com.microsoft.rest.v2.ServiceFuture;
+import com.microsoft.rest.v2.VoidResponse;
 import fixtures.azurespecials.models.ErrorException;
 import io.reactivex.Completable;
 import io.reactivex.Single;
@@ -44,7 +44,7 @@ public interface ApiVersionLocals {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, Void>> getMethodLocalValidWithRestResponseAsync();
+    Single<VoidResponse> getMethodLocalValidWithRestResponseAsync();
 
     /**
      * Get method with api-version modeled in the method.  pass in api-version = '2.0' to succeed.
@@ -75,7 +75,7 @@ public interface ApiVersionLocals {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, Void>> getMethodLocalNullWithRestResponseAsync();
+    Single<VoidResponse> getMethodLocalNullWithRestResponseAsync();
 
     /**
      * Get method with api-version modeled in the method.  pass in api-version = null to succeed.
@@ -111,7 +111,7 @@ public interface ApiVersionLocals {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, Void>> getMethodLocalNullWithRestResponseAsync(String apiVersion);
+    Single<VoidResponse> getMethodLocalNullWithRestResponseAsync(String apiVersion);
 
     /**
      * Get method with api-version modeled in the method.  pass in api-version = null to succeed.
@@ -144,7 +144,7 @@ public interface ApiVersionLocals {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, Void>> getPathLocalValidWithRestResponseAsync();
+    Single<VoidResponse> getPathLocalValidWithRestResponseAsync();
 
     /**
      * Get method with api-version modeled in the method.  pass in api-version = '2.0' to succeed.
@@ -175,7 +175,7 @@ public interface ApiVersionLocals {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, Void>> getSwaggerLocalValidWithRestResponseAsync();
+    Single<VoidResponse> getSwaggerLocalValidWithRestResponseAsync();
 
     /**
      * Get method with api-version modeled in the method.  pass in api-version = '2.0' to succeed.

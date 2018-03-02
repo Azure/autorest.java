@@ -10,10 +10,11 @@
 
 package fixtures.bodydatetime.implementation;
 
+import com.microsoft.rest.v2.BodyResponse;
 import com.microsoft.rest.v2.RestProxy;
-import com.microsoft.rest.v2.RestResponse;
 import com.microsoft.rest.v2.ServiceCallback;
 import com.microsoft.rest.v2.ServiceFuture;
+import com.microsoft.rest.v2.VoidResponse;
 import com.microsoft.rest.v2.annotations.BodyParam;
 import com.microsoft.rest.v2.annotations.ExpectedResponses;
 import com.microsoft.rest.v2.annotations.GET;
@@ -63,97 +64,97 @@ public final class DatetimesImpl implements Datetimes {
         @GET("datetime/null")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<RestResponse<Void, DateTime>> getNull();
+        Single<BodyResponse<DateTime>> getNull();
 
         @GET("datetime/invalid")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<RestResponse<Void, DateTime>> getInvalid();
+        Single<BodyResponse<DateTime>> getInvalid();
 
         @GET("datetime/overflow")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<RestResponse<Void, DateTime>> getOverflow();
+        Single<BodyResponse<DateTime>> getOverflow();
 
         @GET("datetime/underflow")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<RestResponse<Void, DateTime>> getUnderflow();
+        Single<BodyResponse<DateTime>> getUnderflow();
 
         @PUT("datetime/max/utc")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<RestResponse<Void, Void>> putUtcMaxDateTime(@BodyParam("application/json; charset=utf-8") DateTime datetimeBody);
+        Single<VoidResponse> putUtcMaxDateTime(@BodyParam("application/json; charset=utf-8") DateTime datetimeBody);
 
         @GET("datetime/max/utc/lowercase")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<RestResponse<Void, DateTime>> getUtcLowercaseMaxDateTime();
+        Single<BodyResponse<DateTime>> getUtcLowercaseMaxDateTime();
 
         @GET("datetime/max/utc/uppercase")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<RestResponse<Void, DateTime>> getUtcUppercaseMaxDateTime();
+        Single<BodyResponse<DateTime>> getUtcUppercaseMaxDateTime();
 
         @PUT("datetime/max/localpositiveoffset")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<RestResponse<Void, Void>> putLocalPositiveOffsetMaxDateTime(@BodyParam("application/json; charset=utf-8") DateTime datetimeBody);
+        Single<VoidResponse> putLocalPositiveOffsetMaxDateTime(@BodyParam("application/json; charset=utf-8") DateTime datetimeBody);
 
         @GET("datetime/max/localpositiveoffset/lowercase")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<RestResponse<Void, DateTime>> getLocalPositiveOffsetLowercaseMaxDateTime();
+        Single<BodyResponse<DateTime>> getLocalPositiveOffsetLowercaseMaxDateTime();
 
         @GET("datetime/max/localpositiveoffset/uppercase")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<RestResponse<Void, DateTime>> getLocalPositiveOffsetUppercaseMaxDateTime();
+        Single<BodyResponse<DateTime>> getLocalPositiveOffsetUppercaseMaxDateTime();
 
         @PUT("datetime/max/localnegativeoffset")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<RestResponse<Void, Void>> putLocalNegativeOffsetMaxDateTime(@BodyParam("application/json; charset=utf-8") DateTime datetimeBody);
+        Single<VoidResponse> putLocalNegativeOffsetMaxDateTime(@BodyParam("application/json; charset=utf-8") DateTime datetimeBody);
 
         @GET("datetime/max/localnegativeoffset/uppercase")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<RestResponse<Void, DateTime>> getLocalNegativeOffsetUppercaseMaxDateTime();
+        Single<BodyResponse<DateTime>> getLocalNegativeOffsetUppercaseMaxDateTime();
 
         @GET("datetime/max/localnegativeoffset/lowercase")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<RestResponse<Void, DateTime>> getLocalNegativeOffsetLowercaseMaxDateTime();
+        Single<BodyResponse<DateTime>> getLocalNegativeOffsetLowercaseMaxDateTime();
 
         @PUT("datetime/min/utc")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<RestResponse<Void, Void>> putUtcMinDateTime(@BodyParam("application/json; charset=utf-8") DateTime datetimeBody);
+        Single<VoidResponse> putUtcMinDateTime(@BodyParam("application/json; charset=utf-8") DateTime datetimeBody);
 
         @GET("datetime/min/utc")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<RestResponse<Void, DateTime>> getUtcMinDateTime();
+        Single<BodyResponse<DateTime>> getUtcMinDateTime();
 
         @PUT("datetime/min/localpositiveoffset")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<RestResponse<Void, Void>> putLocalPositiveOffsetMinDateTime(@BodyParam("application/json; charset=utf-8") DateTime datetimeBody);
+        Single<VoidResponse> putLocalPositiveOffsetMinDateTime(@BodyParam("application/json; charset=utf-8") DateTime datetimeBody);
 
         @GET("datetime/min/localpositiveoffset")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<RestResponse<Void, DateTime>> getLocalPositiveOffsetMinDateTime();
+        Single<BodyResponse<DateTime>> getLocalPositiveOffsetMinDateTime();
 
         @PUT("datetime/min/localnegativeoffset")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<RestResponse<Void, Void>> putLocalNegativeOffsetMinDateTime(@BodyParam("application/json; charset=utf-8") DateTime datetimeBody);
+        Single<VoidResponse> putLocalNegativeOffsetMinDateTime(@BodyParam("application/json; charset=utf-8") DateTime datetimeBody);
 
         @GET("datetime/min/localnegativeoffset")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<RestResponse<Void, DateTime>> getLocalNegativeOffsetMinDateTime();
+        Single<BodyResponse<DateTime>> getLocalNegativeOffsetMinDateTime();
     }
 
     /**
@@ -183,7 +184,7 @@ public final class DatetimesImpl implements Datetimes {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<Void, DateTime>> getNullWithRestResponseAsync() {
+    public Single<BodyResponse<DateTime>> getNullWithRestResponseAsync() {
         return service.getNull();
     }
 
@@ -194,15 +195,7 @@ public final class DatetimesImpl implements Datetimes {
      */
     public Maybe<DateTime> getNullAsync() {
         return getNullWithRestResponseAsync()
-            .flatMapMaybe(new Function<RestResponse<Void, DateTime>, Maybe<DateTime>>() {
-                public Maybe<DateTime> apply(RestResponse<Void, DateTime> restResponse) {
-                    if (restResponse.body() == null) {
-                        return Maybe.empty();
-                    } else {
-                        return Maybe.just(restResponse.body());
-                    }
-                }
-            });
+            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -232,7 +225,7 @@ public final class DatetimesImpl implements Datetimes {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<Void, DateTime>> getInvalidWithRestResponseAsync() {
+    public Single<BodyResponse<DateTime>> getInvalidWithRestResponseAsync() {
         return service.getInvalid();
     }
 
@@ -243,15 +236,7 @@ public final class DatetimesImpl implements Datetimes {
      */
     public Maybe<DateTime> getInvalidAsync() {
         return getInvalidWithRestResponseAsync()
-            .flatMapMaybe(new Function<RestResponse<Void, DateTime>, Maybe<DateTime>>() {
-                public Maybe<DateTime> apply(RestResponse<Void, DateTime> restResponse) {
-                    if (restResponse.body() == null) {
-                        return Maybe.empty();
-                    } else {
-                        return Maybe.just(restResponse.body());
-                    }
-                }
-            });
+            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -281,7 +266,7 @@ public final class DatetimesImpl implements Datetimes {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<Void, DateTime>> getOverflowWithRestResponseAsync() {
+    public Single<BodyResponse<DateTime>> getOverflowWithRestResponseAsync() {
         return service.getOverflow();
     }
 
@@ -292,15 +277,7 @@ public final class DatetimesImpl implements Datetimes {
      */
     public Maybe<DateTime> getOverflowAsync() {
         return getOverflowWithRestResponseAsync()
-            .flatMapMaybe(new Function<RestResponse<Void, DateTime>, Maybe<DateTime>>() {
-                public Maybe<DateTime> apply(RestResponse<Void, DateTime> restResponse) {
-                    if (restResponse.body() == null) {
-                        return Maybe.empty();
-                    } else {
-                        return Maybe.just(restResponse.body());
-                    }
-                }
-            });
+            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -330,7 +307,7 @@ public final class DatetimesImpl implements Datetimes {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<Void, DateTime>> getUnderflowWithRestResponseAsync() {
+    public Single<BodyResponse<DateTime>> getUnderflowWithRestResponseAsync() {
         return service.getUnderflow();
     }
 
@@ -341,15 +318,7 @@ public final class DatetimesImpl implements Datetimes {
      */
     public Maybe<DateTime> getUnderflowAsync() {
         return getUnderflowWithRestResponseAsync()
-            .flatMapMaybe(new Function<RestResponse<Void, DateTime>, Maybe<DateTime>>() {
-                public Maybe<DateTime> apply(RestResponse<Void, DateTime> restResponse) {
-                    if (restResponse.body() == null) {
-                        return Maybe.empty();
-                    } else {
-                        return Maybe.just(restResponse.body());
-                    }
-                }
-            });
+            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -383,7 +352,7 @@ public final class DatetimesImpl implements Datetimes {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<Void, Void>> putUtcMaxDateTimeWithRestResponseAsync(@NonNull DateTime datetimeBody) {
+    public Single<VoidResponse> putUtcMaxDateTimeWithRestResponseAsync(@NonNull DateTime datetimeBody) {
         if (datetimeBody == null) {
             throw new IllegalArgumentException("Parameter datetimeBody is required and cannot be null.");
         }
@@ -429,7 +398,7 @@ public final class DatetimesImpl implements Datetimes {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<Void, DateTime>> getUtcLowercaseMaxDateTimeWithRestResponseAsync() {
+    public Single<BodyResponse<DateTime>> getUtcLowercaseMaxDateTimeWithRestResponseAsync() {
         return service.getUtcLowercaseMaxDateTime();
     }
 
@@ -440,15 +409,7 @@ public final class DatetimesImpl implements Datetimes {
      */
     public Maybe<DateTime> getUtcLowercaseMaxDateTimeAsync() {
         return getUtcLowercaseMaxDateTimeWithRestResponseAsync()
-            .flatMapMaybe(new Function<RestResponse<Void, DateTime>, Maybe<DateTime>>() {
-                public Maybe<DateTime> apply(RestResponse<Void, DateTime> restResponse) {
-                    if (restResponse.body() == null) {
-                        return Maybe.empty();
-                    } else {
-                        return Maybe.just(restResponse.body());
-                    }
-                }
-            });
+            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -478,7 +439,7 @@ public final class DatetimesImpl implements Datetimes {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<Void, DateTime>> getUtcUppercaseMaxDateTimeWithRestResponseAsync() {
+    public Single<BodyResponse<DateTime>> getUtcUppercaseMaxDateTimeWithRestResponseAsync() {
         return service.getUtcUppercaseMaxDateTime();
     }
 
@@ -489,15 +450,7 @@ public final class DatetimesImpl implements Datetimes {
      */
     public Maybe<DateTime> getUtcUppercaseMaxDateTimeAsync() {
         return getUtcUppercaseMaxDateTimeWithRestResponseAsync()
-            .flatMapMaybe(new Function<RestResponse<Void, DateTime>, Maybe<DateTime>>() {
-                public Maybe<DateTime> apply(RestResponse<Void, DateTime> restResponse) {
-                    if (restResponse.body() == null) {
-                        return Maybe.empty();
-                    } else {
-                        return Maybe.just(restResponse.body());
-                    }
-                }
-            });
+            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -531,7 +484,7 @@ public final class DatetimesImpl implements Datetimes {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<Void, Void>> putLocalPositiveOffsetMaxDateTimeWithRestResponseAsync(@NonNull DateTime datetimeBody) {
+    public Single<VoidResponse> putLocalPositiveOffsetMaxDateTimeWithRestResponseAsync(@NonNull DateTime datetimeBody) {
         if (datetimeBody == null) {
             throw new IllegalArgumentException("Parameter datetimeBody is required and cannot be null.");
         }
@@ -577,7 +530,7 @@ public final class DatetimesImpl implements Datetimes {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<Void, DateTime>> getLocalPositiveOffsetLowercaseMaxDateTimeWithRestResponseAsync() {
+    public Single<BodyResponse<DateTime>> getLocalPositiveOffsetLowercaseMaxDateTimeWithRestResponseAsync() {
         return service.getLocalPositiveOffsetLowercaseMaxDateTime();
     }
 
@@ -588,15 +541,7 @@ public final class DatetimesImpl implements Datetimes {
      */
     public Maybe<DateTime> getLocalPositiveOffsetLowercaseMaxDateTimeAsync() {
         return getLocalPositiveOffsetLowercaseMaxDateTimeWithRestResponseAsync()
-            .flatMapMaybe(new Function<RestResponse<Void, DateTime>, Maybe<DateTime>>() {
-                public Maybe<DateTime> apply(RestResponse<Void, DateTime> restResponse) {
-                    if (restResponse.body() == null) {
-                        return Maybe.empty();
-                    } else {
-                        return Maybe.just(restResponse.body());
-                    }
-                }
-            });
+            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -626,7 +571,7 @@ public final class DatetimesImpl implements Datetimes {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<Void, DateTime>> getLocalPositiveOffsetUppercaseMaxDateTimeWithRestResponseAsync() {
+    public Single<BodyResponse<DateTime>> getLocalPositiveOffsetUppercaseMaxDateTimeWithRestResponseAsync() {
         return service.getLocalPositiveOffsetUppercaseMaxDateTime();
     }
 
@@ -637,15 +582,7 @@ public final class DatetimesImpl implements Datetimes {
      */
     public Maybe<DateTime> getLocalPositiveOffsetUppercaseMaxDateTimeAsync() {
         return getLocalPositiveOffsetUppercaseMaxDateTimeWithRestResponseAsync()
-            .flatMapMaybe(new Function<RestResponse<Void, DateTime>, Maybe<DateTime>>() {
-                public Maybe<DateTime> apply(RestResponse<Void, DateTime> restResponse) {
-                    if (restResponse.body() == null) {
-                        return Maybe.empty();
-                    } else {
-                        return Maybe.just(restResponse.body());
-                    }
-                }
-            });
+            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -679,7 +616,7 @@ public final class DatetimesImpl implements Datetimes {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<Void, Void>> putLocalNegativeOffsetMaxDateTimeWithRestResponseAsync(@NonNull DateTime datetimeBody) {
+    public Single<VoidResponse> putLocalNegativeOffsetMaxDateTimeWithRestResponseAsync(@NonNull DateTime datetimeBody) {
         if (datetimeBody == null) {
             throw new IllegalArgumentException("Parameter datetimeBody is required and cannot be null.");
         }
@@ -725,7 +662,7 @@ public final class DatetimesImpl implements Datetimes {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<Void, DateTime>> getLocalNegativeOffsetUppercaseMaxDateTimeWithRestResponseAsync() {
+    public Single<BodyResponse<DateTime>> getLocalNegativeOffsetUppercaseMaxDateTimeWithRestResponseAsync() {
         return service.getLocalNegativeOffsetUppercaseMaxDateTime();
     }
 
@@ -736,15 +673,7 @@ public final class DatetimesImpl implements Datetimes {
      */
     public Maybe<DateTime> getLocalNegativeOffsetUppercaseMaxDateTimeAsync() {
         return getLocalNegativeOffsetUppercaseMaxDateTimeWithRestResponseAsync()
-            .flatMapMaybe(new Function<RestResponse<Void, DateTime>, Maybe<DateTime>>() {
-                public Maybe<DateTime> apply(RestResponse<Void, DateTime> restResponse) {
-                    if (restResponse.body() == null) {
-                        return Maybe.empty();
-                    } else {
-                        return Maybe.just(restResponse.body());
-                    }
-                }
-            });
+            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -774,7 +703,7 @@ public final class DatetimesImpl implements Datetimes {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<Void, DateTime>> getLocalNegativeOffsetLowercaseMaxDateTimeWithRestResponseAsync() {
+    public Single<BodyResponse<DateTime>> getLocalNegativeOffsetLowercaseMaxDateTimeWithRestResponseAsync() {
         return service.getLocalNegativeOffsetLowercaseMaxDateTime();
     }
 
@@ -785,15 +714,7 @@ public final class DatetimesImpl implements Datetimes {
      */
     public Maybe<DateTime> getLocalNegativeOffsetLowercaseMaxDateTimeAsync() {
         return getLocalNegativeOffsetLowercaseMaxDateTimeWithRestResponseAsync()
-            .flatMapMaybe(new Function<RestResponse<Void, DateTime>, Maybe<DateTime>>() {
-                public Maybe<DateTime> apply(RestResponse<Void, DateTime> restResponse) {
-                    if (restResponse.body() == null) {
-                        return Maybe.empty();
-                    } else {
-                        return Maybe.just(restResponse.body());
-                    }
-                }
-            });
+            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -827,7 +748,7 @@ public final class DatetimesImpl implements Datetimes {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<Void, Void>> putUtcMinDateTimeWithRestResponseAsync(@NonNull DateTime datetimeBody) {
+    public Single<VoidResponse> putUtcMinDateTimeWithRestResponseAsync(@NonNull DateTime datetimeBody) {
         if (datetimeBody == null) {
             throw new IllegalArgumentException("Parameter datetimeBody is required and cannot be null.");
         }
@@ -873,7 +794,7 @@ public final class DatetimesImpl implements Datetimes {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<Void, DateTime>> getUtcMinDateTimeWithRestResponseAsync() {
+    public Single<BodyResponse<DateTime>> getUtcMinDateTimeWithRestResponseAsync() {
         return service.getUtcMinDateTime();
     }
 
@@ -884,15 +805,7 @@ public final class DatetimesImpl implements Datetimes {
      */
     public Maybe<DateTime> getUtcMinDateTimeAsync() {
         return getUtcMinDateTimeWithRestResponseAsync()
-            .flatMapMaybe(new Function<RestResponse<Void, DateTime>, Maybe<DateTime>>() {
-                public Maybe<DateTime> apply(RestResponse<Void, DateTime> restResponse) {
-                    if (restResponse.body() == null) {
-                        return Maybe.empty();
-                    } else {
-                        return Maybe.just(restResponse.body());
-                    }
-                }
-            });
+            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -926,7 +839,7 @@ public final class DatetimesImpl implements Datetimes {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<Void, Void>> putLocalPositiveOffsetMinDateTimeWithRestResponseAsync(@NonNull DateTime datetimeBody) {
+    public Single<VoidResponse> putLocalPositiveOffsetMinDateTimeWithRestResponseAsync(@NonNull DateTime datetimeBody) {
         if (datetimeBody == null) {
             throw new IllegalArgumentException("Parameter datetimeBody is required and cannot be null.");
         }
@@ -972,7 +885,7 @@ public final class DatetimesImpl implements Datetimes {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<Void, DateTime>> getLocalPositiveOffsetMinDateTimeWithRestResponseAsync() {
+    public Single<BodyResponse<DateTime>> getLocalPositiveOffsetMinDateTimeWithRestResponseAsync() {
         return service.getLocalPositiveOffsetMinDateTime();
     }
 
@@ -983,15 +896,7 @@ public final class DatetimesImpl implements Datetimes {
      */
     public Maybe<DateTime> getLocalPositiveOffsetMinDateTimeAsync() {
         return getLocalPositiveOffsetMinDateTimeWithRestResponseAsync()
-            .flatMapMaybe(new Function<RestResponse<Void, DateTime>, Maybe<DateTime>>() {
-                public Maybe<DateTime> apply(RestResponse<Void, DateTime> restResponse) {
-                    if (restResponse.body() == null) {
-                        return Maybe.empty();
-                    } else {
-                        return Maybe.just(restResponse.body());
-                    }
-                }
-            });
+            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -1025,7 +930,7 @@ public final class DatetimesImpl implements Datetimes {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<Void, Void>> putLocalNegativeOffsetMinDateTimeWithRestResponseAsync(@NonNull DateTime datetimeBody) {
+    public Single<VoidResponse> putLocalNegativeOffsetMinDateTimeWithRestResponseAsync(@NonNull DateTime datetimeBody) {
         if (datetimeBody == null) {
             throw new IllegalArgumentException("Parameter datetimeBody is required and cannot be null.");
         }
@@ -1071,7 +976,7 @@ public final class DatetimesImpl implements Datetimes {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<Void, DateTime>> getLocalNegativeOffsetMinDateTimeWithRestResponseAsync() {
+    public Single<BodyResponse<DateTime>> getLocalNegativeOffsetMinDateTimeWithRestResponseAsync() {
         return service.getLocalNegativeOffsetMinDateTime();
     }
 
@@ -1082,14 +987,6 @@ public final class DatetimesImpl implements Datetimes {
      */
     public Maybe<DateTime> getLocalNegativeOffsetMinDateTimeAsync() {
         return getLocalNegativeOffsetMinDateTimeWithRestResponseAsync()
-            .flatMapMaybe(new Function<RestResponse<Void, DateTime>, Maybe<DateTime>>() {
-                public Maybe<DateTime> apply(RestResponse<Void, DateTime> restResponse) {
-                    if (restResponse.body() == null) {
-                        return Maybe.empty();
-                    } else {
-                        return Maybe.just(restResponse.body());
-                    }
-                }
-            });
+            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 }

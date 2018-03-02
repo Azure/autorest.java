@@ -10,8 +10,8 @@
 
 package fixtures.http.implementation;
 
+import com.microsoft.rest.v2.BodyResponse;
 import com.microsoft.rest.v2.RestProxy;
-import com.microsoft.rest.v2.RestResponse;
 import com.microsoft.rest.v2.ServiceCallback;
 import com.microsoft.rest.v2.ServiceFuture;
 import com.microsoft.rest.v2.annotations.ExpectedResponses;
@@ -58,15 +58,15 @@ public final class HttpFailuresImpl implements HttpFailures {
         @GET("http/failure/emptybody/error")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<RestResponse<Void, Boolean>> getEmptyError();
+        Single<BodyResponse<Boolean>> getEmptyError();
 
         @GET("http/failure/nomodel/error")
         @ExpectedResponses({200})
-        Single<RestResponse<Void, Boolean>> getNoModelError();
+        Single<BodyResponse<Boolean>> getNoModelError();
 
         @GET("http/failure/nomodel/empty")
         @ExpectedResponses({200})
-        Single<RestResponse<Void, Boolean>> getNoModelEmpty();
+        Single<BodyResponse<Boolean>> getNoModelEmpty();
     }
 
     /**
@@ -96,7 +96,7 @@ public final class HttpFailuresImpl implements HttpFailures {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<Void, Boolean>> getEmptyErrorWithRestResponseAsync() {
+    public Single<BodyResponse<Boolean>> getEmptyErrorWithRestResponseAsync() {
         return service.getEmptyError();
     }
 
@@ -107,15 +107,7 @@ public final class HttpFailuresImpl implements HttpFailures {
      */
     public Maybe<Boolean> getEmptyErrorAsync() {
         return getEmptyErrorWithRestResponseAsync()
-            .flatMapMaybe(new Function<RestResponse<Void, Boolean>, Maybe<Boolean>>() {
-                public Maybe<Boolean> apply(RestResponse<Void, Boolean> restResponse) {
-                    if (restResponse.body() == null) {
-                        return Maybe.empty();
-                    } else {
-                        return Maybe.just(restResponse.body());
-                    }
-                }
-            });
+            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -144,7 +136,7 @@ public final class HttpFailuresImpl implements HttpFailures {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<Void, Boolean>> getNoModelErrorWithRestResponseAsync() {
+    public Single<BodyResponse<Boolean>> getNoModelErrorWithRestResponseAsync() {
         return service.getNoModelError();
     }
 
@@ -155,15 +147,7 @@ public final class HttpFailuresImpl implements HttpFailures {
      */
     public Maybe<Boolean> getNoModelErrorAsync() {
         return getNoModelErrorWithRestResponseAsync()
-            .flatMapMaybe(new Function<RestResponse<Void, Boolean>, Maybe<Boolean>>() {
-                public Maybe<Boolean> apply(RestResponse<Void, Boolean> restResponse) {
-                    if (restResponse.body() == null) {
-                        return Maybe.empty();
-                    } else {
-                        return Maybe.just(restResponse.body());
-                    }
-                }
-            });
+            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -192,7 +176,7 @@ public final class HttpFailuresImpl implements HttpFailures {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<Void, Boolean>> getNoModelEmptyWithRestResponseAsync() {
+    public Single<BodyResponse<Boolean>> getNoModelEmptyWithRestResponseAsync() {
         return service.getNoModelEmpty();
     }
 
@@ -203,14 +187,6 @@ public final class HttpFailuresImpl implements HttpFailures {
      */
     public Maybe<Boolean> getNoModelEmptyAsync() {
         return getNoModelEmptyWithRestResponseAsync()
-            .flatMapMaybe(new Function<RestResponse<Void, Boolean>, Maybe<Boolean>>() {
-                public Maybe<Boolean> apply(RestResponse<Void, Boolean> restResponse) {
-                    if (restResponse.body() == null) {
-                        return Maybe.empty();
-                    } else {
-                        return Maybe.just(restResponse.body());
-                    }
-                }
-            });
+            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 }

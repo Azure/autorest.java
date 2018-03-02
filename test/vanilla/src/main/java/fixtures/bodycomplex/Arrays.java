@@ -10,9 +10,10 @@
 
 package fixtures.bodycomplex;
 
-import com.microsoft.rest.v2.RestResponse;
+import com.microsoft.rest.v2.BodyResponse;
 import com.microsoft.rest.v2.ServiceCallback;
 import com.microsoft.rest.v2.ServiceFuture;
+import com.microsoft.rest.v2.VoidResponse;
 import fixtures.bodycomplex.models.ArrayWrapper;
 import fixtures.bodycomplex.models.ErrorException;
 import io.reactivex.Completable;
@@ -48,7 +49,7 @@ public interface Arrays {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, ArrayWrapper>> getValidWithRestResponseAsync();
+    Single<BodyResponse<ArrayWrapper>> getValidWithRestResponseAsync();
 
     /**
      * Get complex types with array property.
@@ -84,7 +85,7 @@ public interface Arrays {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, Void>> putValidWithRestResponseAsync(@NonNull ArrayWrapper complexBody);
+    Single<VoidResponse> putValidWithRestResponseAsync(@NonNull ArrayWrapper complexBody);
 
     /**
      * Put complex types with array property.
@@ -118,7 +119,7 @@ public interface Arrays {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, ArrayWrapper>> getEmptyWithRestResponseAsync();
+    Single<BodyResponse<ArrayWrapper>> getEmptyWithRestResponseAsync();
 
     /**
      * Get complex types with array property which is empty.
@@ -154,7 +155,7 @@ public interface Arrays {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, Void>> putEmptyWithRestResponseAsync(@NonNull ArrayWrapper complexBody);
+    Single<VoidResponse> putEmptyWithRestResponseAsync(@NonNull ArrayWrapper complexBody);
 
     /**
      * Put complex types with array property which is empty.
@@ -188,7 +189,7 @@ public interface Arrays {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, ArrayWrapper>> getNotProvidedWithRestResponseAsync();
+    Single<BodyResponse<ArrayWrapper>> getNotProvidedWithRestResponseAsync();
 
     /**
      * Get complex types with array property while server doesn't provide a response payload.

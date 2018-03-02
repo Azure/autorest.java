@@ -10,9 +10,9 @@
 
 package fixtures.parameterflattening;
 
-import com.microsoft.rest.v2.RestResponse;
 import com.microsoft.rest.v2.ServiceCallback;
 import com.microsoft.rest.v2.ServiceFuture;
+import com.microsoft.rest.v2.VoidResponse;
 import io.reactivex.Completable;
 import io.reactivex.Single;
 import io.reactivex.annotations.NonNull;
@@ -55,7 +55,7 @@ public interface AvailabilitySets {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, Void>> updateWithRestResponseAsync(@NonNull String resourceGroupName, @NonNull String avset, @NonNull Map<String, String> tags);
+    Single<VoidResponse> updateWithRestResponseAsync(@NonNull String resourceGroupName, @NonNull String avset, @NonNull Map<String, String> tags);
 
     /**
      * Updates the tags for an availability set.

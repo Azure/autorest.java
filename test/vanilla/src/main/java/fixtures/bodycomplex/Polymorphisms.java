@@ -10,9 +10,10 @@
 
 package fixtures.bodycomplex;
 
-import com.microsoft.rest.v2.RestResponse;
+import com.microsoft.rest.v2.BodyResponse;
 import com.microsoft.rest.v2.ServiceCallback;
 import com.microsoft.rest.v2.ServiceFuture;
+import com.microsoft.rest.v2.VoidResponse;
 import fixtures.bodycomplex.models.ErrorException;
 import fixtures.bodycomplex.models.Fish;
 import fixtures.bodycomplex.models.Salmon;
@@ -49,7 +50,7 @@ public interface Polymorphisms {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, Fish>> getValidWithRestResponseAsync();
+    Single<BodyResponse<Fish>> getValidWithRestResponseAsync();
 
     /**
      * Get complex types that are polymorphic.
@@ -181,7 +182,7 @@ public interface Polymorphisms {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, Void>> putValidWithRestResponseAsync(@NonNull Fish complexBody);
+    Single<VoidResponse> putValidWithRestResponseAsync(@NonNull Fish complexBody);
 
     /**
      * Put complex types that are polymorphic.
@@ -247,7 +248,7 @@ public interface Polymorphisms {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, Salmon>> getComplicatedWithRestResponseAsync();
+    Single<BodyResponse<Salmon>> getComplicatedWithRestResponseAsync();
 
     /**
      * Get complex types that are polymorphic, but not at the root of the hierarchy; also have additional properties.
@@ -283,7 +284,7 @@ public interface Polymorphisms {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, Void>> putComplicatedWithRestResponseAsync(@NonNull Salmon complexBody);
+    Single<VoidResponse> putComplicatedWithRestResponseAsync(@NonNull Salmon complexBody);
 
     /**
      * Put complex types that are polymorphic, but not at the root of the hierarchy; also have additional properties.
@@ -396,7 +397,7 @@ public interface Polymorphisms {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, Void>> putValidMissingRequiredWithRestResponseAsync(@NonNull Fish complexBody);
+    Single<VoidResponse> putValidMissingRequiredWithRestResponseAsync(@NonNull Fish complexBody);
 
     /**
      * Put complex types that are polymorphic, attempting to omit required 'birthday' field - the request should not be allowed from the client.

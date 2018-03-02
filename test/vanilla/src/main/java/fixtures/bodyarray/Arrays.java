@@ -10,9 +10,10 @@
 
 package fixtures.bodyarray;
 
-import com.microsoft.rest.v2.RestResponse;
+import com.microsoft.rest.v2.BodyResponse;
 import com.microsoft.rest.v2.ServiceCallback;
 import com.microsoft.rest.v2.ServiceFuture;
+import com.microsoft.rest.v2.VoidResponse;
 import fixtures.bodyarray.models.ErrorException;
 import fixtures.bodyarray.models.Product;
 import io.reactivex.Completable;
@@ -54,7 +55,7 @@ public interface Arrays {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, List<Integer>>> getNullWithRestResponseAsync();
+    Single<BodyResponse<List<Integer>>> getNullWithRestResponseAsync();
 
     /**
      * Get null array value.
@@ -86,7 +87,7 @@ public interface Arrays {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, List<Integer>>> getInvalidWithRestResponseAsync();
+    Single<BodyResponse<List<Integer>>> getInvalidWithRestResponseAsync();
 
     /**
      * Get invalid array [1, 2, 3.
@@ -118,7 +119,7 @@ public interface Arrays {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, List<Integer>>> getEmptyWithRestResponseAsync();
+    Single<BodyResponse<List<Integer>>> getEmptyWithRestResponseAsync();
 
     /**
      * Get empty array value [].
@@ -154,7 +155,7 @@ public interface Arrays {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, Void>> putEmptyWithRestResponseAsync(@NonNull List<String> arrayBody);
+    Single<VoidResponse> putEmptyWithRestResponseAsync(@NonNull List<String> arrayBody);
 
     /**
      * Set array value empty [].
@@ -188,7 +189,7 @@ public interface Arrays {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, List<Boolean>>> getBooleanTfftWithRestResponseAsync();
+    Single<BodyResponse<List<Boolean>>> getBooleanTfftWithRestResponseAsync();
 
     /**
      * Get boolean array value [true, false, false, true].
@@ -224,7 +225,7 @@ public interface Arrays {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, Void>> putBooleanTfftWithRestResponseAsync(@NonNull List<Boolean> arrayBody);
+    Single<VoidResponse> putBooleanTfftWithRestResponseAsync(@NonNull List<Boolean> arrayBody);
 
     /**
      * Set array value empty [true, false, false, true].
@@ -258,7 +259,7 @@ public interface Arrays {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, List<Boolean>>> getBooleanInvalidNullWithRestResponseAsync();
+    Single<BodyResponse<List<Boolean>>> getBooleanInvalidNullWithRestResponseAsync();
 
     /**
      * Get boolean array value [true, null, false].
@@ -290,7 +291,7 @@ public interface Arrays {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, List<Boolean>>> getBooleanInvalidStringWithRestResponseAsync();
+    Single<BodyResponse<List<Boolean>>> getBooleanInvalidStringWithRestResponseAsync();
 
     /**
      * Get boolean array value [true, 'boolean', false].
@@ -322,7 +323,7 @@ public interface Arrays {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, List<Integer>>> getIntegerValidWithRestResponseAsync();
+    Single<BodyResponse<List<Integer>>> getIntegerValidWithRestResponseAsync();
 
     /**
      * Get integer array value [1, -1, 3, 300].
@@ -358,7 +359,7 @@ public interface Arrays {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, Void>> putIntegerValidWithRestResponseAsync(@NonNull List<Integer> arrayBody);
+    Single<VoidResponse> putIntegerValidWithRestResponseAsync(@NonNull List<Integer> arrayBody);
 
     /**
      * Set array value empty [1, -1, 3, 300].
@@ -392,7 +393,7 @@ public interface Arrays {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, List<Integer>>> getIntInvalidNullWithRestResponseAsync();
+    Single<BodyResponse<List<Integer>>> getIntInvalidNullWithRestResponseAsync();
 
     /**
      * Get integer array value [1, null, 0].
@@ -424,7 +425,7 @@ public interface Arrays {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, List<Integer>>> getIntInvalidStringWithRestResponseAsync();
+    Single<BodyResponse<List<Integer>>> getIntInvalidStringWithRestResponseAsync();
 
     /**
      * Get integer array value [1, 'integer', 0].
@@ -456,7 +457,7 @@ public interface Arrays {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, List<Long>>> getLongValidWithRestResponseAsync();
+    Single<BodyResponse<List<Long>>> getLongValidWithRestResponseAsync();
 
     /**
      * Get integer array value [1, -1, 3, 300].
@@ -492,7 +493,7 @@ public interface Arrays {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, Void>> putLongValidWithRestResponseAsync(@NonNull List<Long> arrayBody);
+    Single<VoidResponse> putLongValidWithRestResponseAsync(@NonNull List<Long> arrayBody);
 
     /**
      * Set array value empty [1, -1, 3, 300].
@@ -526,7 +527,7 @@ public interface Arrays {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, List<Long>>> getLongInvalidNullWithRestResponseAsync();
+    Single<BodyResponse<List<Long>>> getLongInvalidNullWithRestResponseAsync();
 
     /**
      * Get long array value [1, null, 0].
@@ -558,7 +559,7 @@ public interface Arrays {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, List<Long>>> getLongInvalidStringWithRestResponseAsync();
+    Single<BodyResponse<List<Long>>> getLongInvalidStringWithRestResponseAsync();
 
     /**
      * Get long array value [1, 'integer', 0].
@@ -590,7 +591,7 @@ public interface Arrays {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, List<Double>>> getFloatValidWithRestResponseAsync();
+    Single<BodyResponse<List<Double>>> getFloatValidWithRestResponseAsync();
 
     /**
      * Get float array value [0, -0.01, 1.2e20].
@@ -626,7 +627,7 @@ public interface Arrays {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, Void>> putFloatValidWithRestResponseAsync(@NonNull List<Double> arrayBody);
+    Single<VoidResponse> putFloatValidWithRestResponseAsync(@NonNull List<Double> arrayBody);
 
     /**
      * Set array value [0, -0.01, 1.2e20].
@@ -660,7 +661,7 @@ public interface Arrays {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, List<Double>>> getFloatInvalidNullWithRestResponseAsync();
+    Single<BodyResponse<List<Double>>> getFloatInvalidNullWithRestResponseAsync();
 
     /**
      * Get float array value [0.0, null, -1.2e20].
@@ -692,7 +693,7 @@ public interface Arrays {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, List<Double>>> getFloatInvalidStringWithRestResponseAsync();
+    Single<BodyResponse<List<Double>>> getFloatInvalidStringWithRestResponseAsync();
 
     /**
      * Get boolean array value [1.0, 'number', 0.0].
@@ -724,7 +725,7 @@ public interface Arrays {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, List<Double>>> getDoubleValidWithRestResponseAsync();
+    Single<BodyResponse<List<Double>>> getDoubleValidWithRestResponseAsync();
 
     /**
      * Get float array value [0, -0.01, 1.2e20].
@@ -760,7 +761,7 @@ public interface Arrays {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, Void>> putDoubleValidWithRestResponseAsync(@NonNull List<Double> arrayBody);
+    Single<VoidResponse> putDoubleValidWithRestResponseAsync(@NonNull List<Double> arrayBody);
 
     /**
      * Set array value [0, -0.01, 1.2e20].
@@ -794,7 +795,7 @@ public interface Arrays {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, List<Double>>> getDoubleInvalidNullWithRestResponseAsync();
+    Single<BodyResponse<List<Double>>> getDoubleInvalidNullWithRestResponseAsync();
 
     /**
      * Get float array value [0.0, null, -1.2e20].
@@ -826,7 +827,7 @@ public interface Arrays {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, List<Double>>> getDoubleInvalidStringWithRestResponseAsync();
+    Single<BodyResponse<List<Double>>> getDoubleInvalidStringWithRestResponseAsync();
 
     /**
      * Get boolean array value [1.0, 'number', 0.0].
@@ -858,7 +859,7 @@ public interface Arrays {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, List<String>>> getStringValidWithRestResponseAsync();
+    Single<BodyResponse<List<String>>> getStringValidWithRestResponseAsync();
 
     /**
      * Get string array value ['foo1', 'foo2', 'foo3'].
@@ -894,7 +895,7 @@ public interface Arrays {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, Void>> putStringValidWithRestResponseAsync(@NonNull List<String> arrayBody);
+    Single<VoidResponse> putStringValidWithRestResponseAsync(@NonNull List<String> arrayBody);
 
     /**
      * Set array value ['foo1', 'foo2', 'foo3'].
@@ -928,7 +929,7 @@ public interface Arrays {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, List<String>>> getStringWithNullWithRestResponseAsync();
+    Single<BodyResponse<List<String>>> getStringWithNullWithRestResponseAsync();
 
     /**
      * Get string array value ['foo', null, 'foo2'].
@@ -960,7 +961,7 @@ public interface Arrays {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, List<String>>> getStringWithInvalidWithRestResponseAsync();
+    Single<BodyResponse<List<String>>> getStringWithInvalidWithRestResponseAsync();
 
     /**
      * Get string array value ['foo', 123, 'foo2'].
@@ -992,7 +993,7 @@ public interface Arrays {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, List<UUID>>> getUuidValidWithRestResponseAsync();
+    Single<BodyResponse<List<UUID>>> getUuidValidWithRestResponseAsync();
 
     /**
      * Get uuid array value ['6dcc7237-45fe-45c4-8a6b-3a8a3f625652', 'd1399005-30f7-40d6-8da6-dd7c89ad34db', 'f42f6aa1-a5bc-4ddf-907e-5f915de43205'].
@@ -1028,7 +1029,7 @@ public interface Arrays {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, Void>> putUuidValidWithRestResponseAsync(@NonNull List<UUID> arrayBody);
+    Single<VoidResponse> putUuidValidWithRestResponseAsync(@NonNull List<UUID> arrayBody);
 
     /**
      * Set array value  ['6dcc7237-45fe-45c4-8a6b-3a8a3f625652', 'd1399005-30f7-40d6-8da6-dd7c89ad34db', 'f42f6aa1-a5bc-4ddf-907e-5f915de43205'].
@@ -1062,7 +1063,7 @@ public interface Arrays {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, List<UUID>>> getUuidInvalidCharsWithRestResponseAsync();
+    Single<BodyResponse<List<UUID>>> getUuidInvalidCharsWithRestResponseAsync();
 
     /**
      * Get uuid array value ['6dcc7237-45fe-45c4-8a6b-3a8a3f625652', 'foo'].
@@ -1094,7 +1095,7 @@ public interface Arrays {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, List<LocalDate>>> getDateValidWithRestResponseAsync();
+    Single<BodyResponse<List<LocalDate>>> getDateValidWithRestResponseAsync();
 
     /**
      * Get integer array value ['2000-12-01', '1980-01-02', '1492-10-12'].
@@ -1130,7 +1131,7 @@ public interface Arrays {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, Void>> putDateValidWithRestResponseAsync(@NonNull List<LocalDate> arrayBody);
+    Single<VoidResponse> putDateValidWithRestResponseAsync(@NonNull List<LocalDate> arrayBody);
 
     /**
      * Set array value  ['2000-12-01', '1980-01-02', '1492-10-12'].
@@ -1164,7 +1165,7 @@ public interface Arrays {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, List<LocalDate>>> getDateInvalidNullWithRestResponseAsync();
+    Single<BodyResponse<List<LocalDate>>> getDateInvalidNullWithRestResponseAsync();
 
     /**
      * Get date array value ['2012-01-01', null, '1776-07-04'].
@@ -1196,7 +1197,7 @@ public interface Arrays {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, List<LocalDate>>> getDateInvalidCharsWithRestResponseAsync();
+    Single<BodyResponse<List<LocalDate>>> getDateInvalidCharsWithRestResponseAsync();
 
     /**
      * Get date array value ['2011-03-22', 'date'].
@@ -1228,7 +1229,7 @@ public interface Arrays {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, List<DateTime>>> getDateTimeValidWithRestResponseAsync();
+    Single<BodyResponse<List<DateTime>>> getDateTimeValidWithRestResponseAsync();
 
     /**
      * Get date-time array value ['2000-12-01t00:00:01z', '1980-01-02T00:11:35+01:00', '1492-10-12T10:15:01-08:00'].
@@ -1264,7 +1265,7 @@ public interface Arrays {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, Void>> putDateTimeValidWithRestResponseAsync(@NonNull List<DateTime> arrayBody);
+    Single<VoidResponse> putDateTimeValidWithRestResponseAsync(@NonNull List<DateTime> arrayBody);
 
     /**
      * Set array value  ['2000-12-01t00:00:01z', '1980-01-02T00:11:35+01:00', '1492-10-12T10:15:01-08:00'].
@@ -1298,7 +1299,7 @@ public interface Arrays {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, List<DateTime>>> getDateTimeInvalidNullWithRestResponseAsync();
+    Single<BodyResponse<List<DateTime>>> getDateTimeInvalidNullWithRestResponseAsync();
 
     /**
      * Get date array value ['2000-12-01t00:00:01z', null].
@@ -1330,7 +1331,7 @@ public interface Arrays {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, List<DateTime>>> getDateTimeInvalidCharsWithRestResponseAsync();
+    Single<BodyResponse<List<DateTime>>> getDateTimeInvalidCharsWithRestResponseAsync();
 
     /**
      * Get date array value ['2000-12-01t00:00:01z', 'date-time'].
@@ -1362,7 +1363,7 @@ public interface Arrays {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, List<DateTime>>> getDateTimeRfc1123ValidWithRestResponseAsync();
+    Single<BodyResponse<List<DateTime>>> getDateTimeRfc1123ValidWithRestResponseAsync();
 
     /**
      * Get date-time array value ['Fri, 01 Dec 2000 00:00:01 GMT', 'Wed, 02 Jan 1980 00:11:35 GMT', 'Wed, 12 Oct 1492 10:15:01 GMT'].
@@ -1398,7 +1399,7 @@ public interface Arrays {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, Void>> putDateTimeRfc1123ValidWithRestResponseAsync(@NonNull List<DateTime> arrayBody);
+    Single<VoidResponse> putDateTimeRfc1123ValidWithRestResponseAsync(@NonNull List<DateTime> arrayBody);
 
     /**
      * Set array value  ['Fri, 01 Dec 2000 00:00:01 GMT', 'Wed, 02 Jan 1980 00:11:35 GMT', 'Wed, 12 Oct 1492 10:15:01 GMT'].
@@ -1432,7 +1433,7 @@ public interface Arrays {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, List<Period>>> getDurationValidWithRestResponseAsync();
+    Single<BodyResponse<List<Period>>> getDurationValidWithRestResponseAsync();
 
     /**
      * Get duration array value ['P123DT22H14M12.011S', 'P5DT1H0M0S'].
@@ -1468,7 +1469,7 @@ public interface Arrays {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, Void>> putDurationValidWithRestResponseAsync(@NonNull List<Period> arrayBody);
+    Single<VoidResponse> putDurationValidWithRestResponseAsync(@NonNull List<Period> arrayBody);
 
     /**
      * Set array value  ['P123DT22H14M12.011S', 'P5DT1H0M0S'].
@@ -1502,7 +1503,7 @@ public interface Arrays {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, List<byte[]>>> getByteValidWithRestResponseAsync();
+    Single<BodyResponse<List<byte[]>>> getByteValidWithRestResponseAsync();
 
     /**
      * Get byte array value [hex(FF FF FF FA), hex(01 02 03), hex (25, 29, 43)] with each item encoded in base64.
@@ -1538,7 +1539,7 @@ public interface Arrays {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, Void>> putByteValidWithRestResponseAsync(@NonNull List<byte[]> arrayBody);
+    Single<VoidResponse> putByteValidWithRestResponseAsync(@NonNull List<byte[]> arrayBody);
 
     /**
      * Put the array value [hex(FF FF FF FA), hex(01 02 03), hex (25, 29, 43)] with each elementencoded in base 64.
@@ -1572,7 +1573,7 @@ public interface Arrays {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, List<byte[]>>> getByteInvalidNullWithRestResponseAsync();
+    Single<BodyResponse<List<byte[]>>> getByteInvalidNullWithRestResponseAsync();
 
     /**
      * Get byte array value [hex(AB, AC, AD), null] with the first item base64 encoded.
@@ -1604,7 +1605,7 @@ public interface Arrays {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, List<byte[]>>> getBase64UrlWithRestResponseAsync();
+    Single<BodyResponse<List<byte[]>>> getBase64UrlWithRestResponseAsync();
 
     /**
      * Get array value ['a string that gets encoded with base64url', 'test string' 'Lorem ipsum'] with the items base64url encoded.
@@ -1636,7 +1637,7 @@ public interface Arrays {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, List<Product>>> getComplexNullWithRestResponseAsync();
+    Single<BodyResponse<List<Product>>> getComplexNullWithRestResponseAsync();
 
     /**
      * Get array of complex type null value.
@@ -1668,7 +1669,7 @@ public interface Arrays {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, List<Product>>> getComplexEmptyWithRestResponseAsync();
+    Single<BodyResponse<List<Product>>> getComplexEmptyWithRestResponseAsync();
 
     /**
      * Get empty array of complex type [].
@@ -1700,7 +1701,7 @@ public interface Arrays {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, List<Product>>> getComplexItemNullWithRestResponseAsync();
+    Single<BodyResponse<List<Product>>> getComplexItemNullWithRestResponseAsync();
 
     /**
      * Get array of complex type with null item [{'integer': 1 'string': '2'}, null, {'integer': 5, 'string': '6'}].
@@ -1732,7 +1733,7 @@ public interface Arrays {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, List<Product>>> getComplexItemEmptyWithRestResponseAsync();
+    Single<BodyResponse<List<Product>>> getComplexItemEmptyWithRestResponseAsync();
 
     /**
      * Get array of complex type with empty item [{'integer': 1 'string': '2'}, {}, {'integer': 5, 'string': '6'}].
@@ -1764,7 +1765,7 @@ public interface Arrays {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, List<Product>>> getComplexValidWithRestResponseAsync();
+    Single<BodyResponse<List<Product>>> getComplexValidWithRestResponseAsync();
 
     /**
      * Get array of complex type with [{'integer': 1 'string': '2'}, {'integer': 3, 'string': '4'}, {'integer': 5, 'string': '6'}].
@@ -1800,7 +1801,7 @@ public interface Arrays {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, Void>> putComplexValidWithRestResponseAsync(@NonNull List<Product> arrayBody);
+    Single<VoidResponse> putComplexValidWithRestResponseAsync(@NonNull List<Product> arrayBody);
 
     /**
      * Put an array of complex type with values [{'integer': 1 'string': '2'}, {'integer': 3, 'string': '4'}, {'integer': 5, 'string': '6'}].
@@ -1834,7 +1835,7 @@ public interface Arrays {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, List<List<String>>>> getArrayNullWithRestResponseAsync();
+    Single<BodyResponse<List<List<String>>>> getArrayNullWithRestResponseAsync();
 
     /**
      * Get a null array.
@@ -1866,7 +1867,7 @@ public interface Arrays {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, List<List<String>>>> getArrayEmptyWithRestResponseAsync();
+    Single<BodyResponse<List<List<String>>>> getArrayEmptyWithRestResponseAsync();
 
     /**
      * Get an empty array [].
@@ -1898,7 +1899,7 @@ public interface Arrays {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, List<List<String>>>> getArrayItemNullWithRestResponseAsync();
+    Single<BodyResponse<List<List<String>>>> getArrayItemNullWithRestResponseAsync();
 
     /**
      * Get an array of array of strings [['1', '2', '3'], null, ['7', '8', '9']].
@@ -1930,7 +1931,7 @@ public interface Arrays {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, List<List<String>>>> getArrayItemEmptyWithRestResponseAsync();
+    Single<BodyResponse<List<List<String>>>> getArrayItemEmptyWithRestResponseAsync();
 
     /**
      * Get an array of array of strings [['1', '2', '3'], [], ['7', '8', '9']].
@@ -1962,7 +1963,7 @@ public interface Arrays {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, List<List<String>>>> getArrayValidWithRestResponseAsync();
+    Single<BodyResponse<List<List<String>>>> getArrayValidWithRestResponseAsync();
 
     /**
      * Get an array of array of strings [['1', '2', '3'], ['4', '5', '6'], ['7', '8', '9']].
@@ -1998,7 +1999,7 @@ public interface Arrays {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, Void>> putArrayValidWithRestResponseAsync(@NonNull List<List<String>> arrayBody);
+    Single<VoidResponse> putArrayValidWithRestResponseAsync(@NonNull List<List<String>> arrayBody);
 
     /**
      * Put An array of array of strings [['1', '2', '3'], ['4', '5', '6'], ['7', '8', '9']].
@@ -2032,7 +2033,7 @@ public interface Arrays {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, List<Map<String, String>>>> getDictionaryNullWithRestResponseAsync();
+    Single<BodyResponse<List<Map<String, String>>>> getDictionaryNullWithRestResponseAsync();
 
     /**
      * Get an array of Dictionaries with value null.
@@ -2064,7 +2065,7 @@ public interface Arrays {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, List<Map<String, String>>>> getDictionaryEmptyWithRestResponseAsync();
+    Single<BodyResponse<List<Map<String, String>>>> getDictionaryEmptyWithRestResponseAsync();
 
     /**
      * Get an array of Dictionaries of type &lt;string, string&gt; with value [].
@@ -2096,7 +2097,7 @@ public interface Arrays {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, List<Map<String, String>>>> getDictionaryItemNullWithRestResponseAsync();
+    Single<BodyResponse<List<Map<String, String>>>> getDictionaryItemNullWithRestResponseAsync();
 
     /**
      * Get an array of Dictionaries of type &lt;string, string&gt; with value [{'1': 'one', '2': 'two', '3': 'three'}, null, {'7': 'seven', '8': 'eight', '9': 'nine'}].
@@ -2128,7 +2129,7 @@ public interface Arrays {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, List<Map<String, String>>>> getDictionaryItemEmptyWithRestResponseAsync();
+    Single<BodyResponse<List<Map<String, String>>>> getDictionaryItemEmptyWithRestResponseAsync();
 
     /**
      * Get an array of Dictionaries of type &lt;string, string&gt; with value [{'1': 'one', '2': 'two', '3': 'three'}, {}, {'7': 'seven', '8': 'eight', '9': 'nine'}].
@@ -2160,7 +2161,7 @@ public interface Arrays {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, List<Map<String, String>>>> getDictionaryValidWithRestResponseAsync();
+    Single<BodyResponse<List<Map<String, String>>>> getDictionaryValidWithRestResponseAsync();
 
     /**
      * Get an array of Dictionaries of type &lt;string, string&gt; with value [{'1': 'one', '2': 'two', '3': 'three'}, {'4': 'four', '5': 'five', '6': 'six'}, {'7': 'seven', '8': 'eight', '9': 'nine'}].
@@ -2196,7 +2197,7 @@ public interface Arrays {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, Void>> putDictionaryValidWithRestResponseAsync(@NonNull List<Map<String, String>> arrayBody);
+    Single<VoidResponse> putDictionaryValidWithRestResponseAsync(@NonNull List<Map<String, String>> arrayBody);
 
     /**
      * Get an array of Dictionaries of type &lt;string, string&gt; with value [{'1': 'one', '2': 'two', '3': 'three'}, {'4': 'four', '5': 'five', '6': 'six'}, {'7': 'seven', '8': 'eight', '9': 'nine'}].

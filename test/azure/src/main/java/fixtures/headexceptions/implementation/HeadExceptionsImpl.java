@@ -12,9 +12,9 @@ package fixtures.headexceptions.implementation;
 
 import com.microsoft.azure.v2.AzureProxy;
 import com.microsoft.azure.v2.CloudException;
-import com.microsoft.rest.v2.RestResponse;
 import com.microsoft.rest.v2.ServiceCallback;
 import com.microsoft.rest.v2.ServiceFuture;
+import com.microsoft.rest.v2.VoidResponse;
 import com.microsoft.rest.v2.annotations.ExpectedResponses;
 import com.microsoft.rest.v2.annotations.HEAD;
 import com.microsoft.rest.v2.annotations.HeaderParam;
@@ -58,17 +58,17 @@ public final class HeadExceptionsImpl implements HeadExceptions {
         @HEAD("http/success/200")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(CloudException.class)
-        Single<RestResponse<Void, Void>> head200(@HeaderParam("accept-language") String acceptLanguage);
+        Single<VoidResponse> head200(@HeaderParam("accept-language") String acceptLanguage);
 
         @HEAD("http/success/204")
         @ExpectedResponses({204})
         @UnexpectedResponseExceptionType(CloudException.class)
-        Single<RestResponse<Void, Void>> head204(@HeaderParam("accept-language") String acceptLanguage);
+        Single<VoidResponse> head204(@HeaderParam("accept-language") String acceptLanguage);
 
         @HEAD("http/success/404")
         @ExpectedResponses({204})
         @UnexpectedResponseExceptionType(CloudException.class)
-        Single<RestResponse<Void, Void>> head404(@HeaderParam("accept-language") String acceptLanguage);
+        Single<VoidResponse> head404(@HeaderParam("accept-language") String acceptLanguage);
     }
 
     /**
@@ -97,7 +97,7 @@ public final class HeadExceptionsImpl implements HeadExceptions {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<Void, Void>> head200WithRestResponseAsync() {
+    public Single<VoidResponse> head200WithRestResponseAsync() {
         return service.head200(this.client.acceptLanguage());
     }
 
@@ -137,7 +137,7 @@ public final class HeadExceptionsImpl implements HeadExceptions {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<Void, Void>> head204WithRestResponseAsync() {
+    public Single<VoidResponse> head204WithRestResponseAsync() {
         return service.head204(this.client.acceptLanguage());
     }
 
@@ -177,7 +177,7 @@ public final class HeadExceptionsImpl implements HeadExceptions {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<Void, Void>> head404WithRestResponseAsync() {
+    public Single<VoidResponse> head404WithRestResponseAsync() {
         return service.head404(this.client.acceptLanguage());
     }
 

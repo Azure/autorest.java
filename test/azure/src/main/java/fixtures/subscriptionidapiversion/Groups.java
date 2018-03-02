@@ -10,7 +10,7 @@
 
 package fixtures.subscriptionidapiversion;
 
-import com.microsoft.rest.v2.RestResponse;
+import com.microsoft.rest.v2.BodyResponse;
 import com.microsoft.rest.v2.ServiceCallback;
 import com.microsoft.rest.v2.ServiceFuture;
 import fixtures.subscriptionidapiversion.models.ErrorException;
@@ -52,7 +52,7 @@ public interface Groups {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, SampleResourceGroup>> getSampleResourceGroupWithRestResponseAsync(@NonNull String resourceGroupName);
+    Single<BodyResponse<SampleResourceGroup>> getSampleResourceGroupWithRestResponseAsync(@NonNull String resourceGroupName);
 
     /**
      * Provides a resouce group with name 'testgroup101' and location 'West US'.

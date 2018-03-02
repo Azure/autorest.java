@@ -14,11 +14,12 @@ import com.microsoft.azure.v2.AzureProxy;
 import com.microsoft.azure.v2.CloudException;
 import com.microsoft.azure.v2.OperationStatus;
 import com.microsoft.azure.v2.util.ServiceFutureUtil;
+import com.microsoft.rest.v2.BodyResponse;
 import com.microsoft.rest.v2.OperationDescription;
-import com.microsoft.rest.v2.RestResponse;
 import com.microsoft.rest.v2.ServiceCallback;
 import com.microsoft.rest.v2.ServiceFuture;
 import com.microsoft.rest.v2.Validator;
+import com.microsoft.rest.v2.VoidResponse;
 import com.microsoft.rest.v2.annotations.BodyParam;
 import com.microsoft.rest.v2.annotations.DELETE;
 import com.microsoft.rest.v2.annotations.ExpectedResponses;
@@ -28,6 +29,26 @@ import com.microsoft.rest.v2.annotations.POST;
 import com.microsoft.rest.v2.annotations.PUT;
 import com.microsoft.rest.v2.annotations.ResumeOperation;
 import com.microsoft.rest.v2.annotations.UnexpectedResponseExceptionType;
+import fixtures.lro.models.LROSADsDelete202NonRetry400Response;
+import fixtures.lro.models.LROSADsDelete202RetryInvalidHeaderResponse;
+import fixtures.lro.models.LROSADsDeleteAsyncRelativeRetry400Response;
+import fixtures.lro.models.LROSADsDeleteAsyncRelativeRetryInvalidHeaderResponse;
+import fixtures.lro.models.LROSADsDeleteAsyncRelativeRetryInvalidJsonPollingResponse;
+import fixtures.lro.models.LROSADsDeleteAsyncRelativeRetryNoStatusResponse;
+import fixtures.lro.models.LROSADsDeleteNonRetry400Response;
+import fixtures.lro.models.LROSADsPost202NoLocationResponse;
+import fixtures.lro.models.LROSADsPost202NonRetry400Response;
+import fixtures.lro.models.LROSADsPost202RetryInvalidHeaderResponse;
+import fixtures.lro.models.LROSADsPostAsyncRelativeRetry400Response;
+import fixtures.lro.models.LROSADsPostAsyncRelativeRetryInvalidHeaderResponse;
+import fixtures.lro.models.LROSADsPostAsyncRelativeRetryInvalidJsonPollingResponse;
+import fixtures.lro.models.LROSADsPostAsyncRelativeRetryNoPayloadResponse;
+import fixtures.lro.models.LROSADsPostNonRetry400Response;
+import fixtures.lro.models.LROSADsPutAsyncRelativeRetry400Response;
+import fixtures.lro.models.LROSADsPutAsyncRelativeRetryInvalidHeaderResponse;
+import fixtures.lro.models.LROSADsPutAsyncRelativeRetryInvalidJsonPollingResponse;
+import fixtures.lro.models.LROSADsPutAsyncRelativeRetryNoStatusPayloadResponse;
+import fixtures.lro.models.LROSADsPutAsyncRelativeRetryNoStatusResponse;
 import io.reactivex.Completable;
 import io.reactivex.Maybe;
 import io.reactivex.Observable;
@@ -73,7 +94,7 @@ public final class LROSADsInner {
         @PUT("lro/nonretryerror/put/400")
         @ExpectedResponses({200, 201, 202, 204})
         @UnexpectedResponseExceptionType(CloudException.class)
-        Single<RestResponse<Void, ProductInner>> putNonRetry400(@BodyParam("application/json; charset=utf-8") ProductInner product, @HeaderParam("accept-language") String acceptLanguage);
+        Single<BodyResponse<ProductInner>> putNonRetry400(@BodyParam("application/json; charset=utf-8") ProductInner product, @HeaderParam("accept-language") String acceptLanguage);
 
         @PUT("lro/nonretryerror/put/400")
         @ExpectedResponses({200, 201, 202, 204})
@@ -89,7 +110,7 @@ public final class LROSADsInner {
         @PUT("lro/nonretryerror/put/201/creating/400")
         @ExpectedResponses({200, 201, 202, 204})
         @UnexpectedResponseExceptionType(CloudException.class)
-        Single<RestResponse<Void, ProductInner>> putNonRetry201Creating400(@BodyParam("application/json; charset=utf-8") ProductInner product, @HeaderParam("accept-language") String acceptLanguage);
+        Single<BodyResponse<ProductInner>> putNonRetry201Creating400(@BodyParam("application/json; charset=utf-8") ProductInner product, @HeaderParam("accept-language") String acceptLanguage);
 
         @PUT("lro/nonretryerror/put/201/creating/400")
         @ExpectedResponses({200, 201, 202, 204})
@@ -105,7 +126,7 @@ public final class LROSADsInner {
         @PUT("lro/nonretryerror/put/201/creating/400/invalidjson")
         @ExpectedResponses({200, 201, 202, 204})
         @UnexpectedResponseExceptionType(CloudException.class)
-        Single<RestResponse<Void, ProductInner>> putNonRetry201Creating400InvalidJson(@BodyParam("application/json; charset=utf-8") ProductInner product, @HeaderParam("accept-language") String acceptLanguage);
+        Single<BodyResponse<ProductInner>> putNonRetry201Creating400InvalidJson(@BodyParam("application/json; charset=utf-8") ProductInner product, @HeaderParam("accept-language") String acceptLanguage);
 
         @PUT("lro/nonretryerror/put/201/creating/400/invalidjson")
         @ExpectedResponses({200, 201, 202, 204})
@@ -121,7 +142,7 @@ public final class LROSADsInner {
         @PUT("lro/nonretryerror/putasync/retry/400")
         @ExpectedResponses({200, 202, 204})
         @UnexpectedResponseExceptionType(CloudException.class)
-        Single<RestResponse<LROSADsPutAsyncRelativeRetry400HeadersInner, ProductInner>> putAsyncRelativeRetry400(@BodyParam("application/json; charset=utf-8") ProductInner product, @HeaderParam("accept-language") String acceptLanguage);
+        Single<LROSADsPutAsyncRelativeRetry400Response> putAsyncRelativeRetry400(@BodyParam("application/json; charset=utf-8") ProductInner product, @HeaderParam("accept-language") String acceptLanguage);
 
         @PUT("lro/nonretryerror/putasync/retry/400")
         @ExpectedResponses({200, 202, 204})
@@ -137,7 +158,7 @@ public final class LROSADsInner {
         @DELETE("lro/nonretryerror/delete/400")
         @ExpectedResponses({200, 202, 204})
         @UnexpectedResponseExceptionType(CloudException.class)
-        Single<RestResponse<LROSADsDeleteNonRetry400HeadersInner, Void>> deleteNonRetry400(@HeaderParam("accept-language") String acceptLanguage);
+        Single<LROSADsDeleteNonRetry400Response> deleteNonRetry400(@HeaderParam("accept-language") String acceptLanguage);
 
         @DELETE("lro/nonretryerror/delete/400")
         @ExpectedResponses({200, 202, 204})
@@ -153,7 +174,7 @@ public final class LROSADsInner {
         @DELETE("lro/nonretryerror/delete/202/retry/400")
         @ExpectedResponses({200, 202, 204})
         @UnexpectedResponseExceptionType(CloudException.class)
-        Single<RestResponse<LROSADsDelete202NonRetry400HeadersInner, Void>> delete202NonRetry400(@HeaderParam("accept-language") String acceptLanguage);
+        Single<LROSADsDelete202NonRetry400Response> delete202NonRetry400(@HeaderParam("accept-language") String acceptLanguage);
 
         @DELETE("lro/nonretryerror/delete/202/retry/400")
         @ExpectedResponses({200, 202, 204})
@@ -169,7 +190,7 @@ public final class LROSADsInner {
         @DELETE("lro/nonretryerror/deleteasync/retry/400")
         @ExpectedResponses({200, 202, 204})
         @UnexpectedResponseExceptionType(CloudException.class)
-        Single<RestResponse<LROSADsDeleteAsyncRelativeRetry400HeadersInner, Void>> deleteAsyncRelativeRetry400(@HeaderParam("accept-language") String acceptLanguage);
+        Single<LROSADsDeleteAsyncRelativeRetry400Response> deleteAsyncRelativeRetry400(@HeaderParam("accept-language") String acceptLanguage);
 
         @DELETE("lro/nonretryerror/deleteasync/retry/400")
         @ExpectedResponses({200, 202, 204})
@@ -185,7 +206,7 @@ public final class LROSADsInner {
         @POST("lro/nonretryerror/post/400")
         @ExpectedResponses({200, 202, 204})
         @UnexpectedResponseExceptionType(CloudException.class)
-        Single<RestResponse<LROSADsPostNonRetry400HeadersInner, Void>> postNonRetry400(@BodyParam("application/json; charset=utf-8") ProductInner product, @HeaderParam("accept-language") String acceptLanguage);
+        Single<LROSADsPostNonRetry400Response> postNonRetry400(@BodyParam("application/json; charset=utf-8") ProductInner product, @HeaderParam("accept-language") String acceptLanguage);
 
         @POST("lro/nonretryerror/post/400")
         @ExpectedResponses({200, 202, 204})
@@ -201,7 +222,7 @@ public final class LROSADsInner {
         @POST("lro/nonretryerror/post/202/retry/400")
         @ExpectedResponses({200, 202, 204})
         @UnexpectedResponseExceptionType(CloudException.class)
-        Single<RestResponse<LROSADsPost202NonRetry400HeadersInner, Void>> post202NonRetry400(@BodyParam("application/json; charset=utf-8") ProductInner product, @HeaderParam("accept-language") String acceptLanguage);
+        Single<LROSADsPost202NonRetry400Response> post202NonRetry400(@BodyParam("application/json; charset=utf-8") ProductInner product, @HeaderParam("accept-language") String acceptLanguage);
 
         @POST("lro/nonretryerror/post/202/retry/400")
         @ExpectedResponses({200, 202, 204})
@@ -217,7 +238,7 @@ public final class LROSADsInner {
         @POST("lro/nonretryerror/postasync/retry/400")
         @ExpectedResponses({200, 202, 204})
         @UnexpectedResponseExceptionType(CloudException.class)
-        Single<RestResponse<LROSADsPostAsyncRelativeRetry400HeadersInner, Void>> postAsyncRelativeRetry400(@BodyParam("application/json; charset=utf-8") ProductInner product, @HeaderParam("accept-language") String acceptLanguage);
+        Single<LROSADsPostAsyncRelativeRetry400Response> postAsyncRelativeRetry400(@BodyParam("application/json; charset=utf-8") ProductInner product, @HeaderParam("accept-language") String acceptLanguage);
 
         @POST("lro/nonretryerror/postasync/retry/400")
         @ExpectedResponses({200, 202, 204})
@@ -233,7 +254,7 @@ public final class LROSADsInner {
         @PUT("lro/error/put/201/noprovisioningstatepayload")
         @ExpectedResponses({200, 201, 202, 204})
         @UnexpectedResponseExceptionType(CloudException.class)
-        Single<RestResponse<Void, ProductInner>> putError201NoProvisioningStatePayload(@BodyParam("application/json; charset=utf-8") ProductInner product, @HeaderParam("accept-language") String acceptLanguage);
+        Single<BodyResponse<ProductInner>> putError201NoProvisioningStatePayload(@BodyParam("application/json; charset=utf-8") ProductInner product, @HeaderParam("accept-language") String acceptLanguage);
 
         @PUT("lro/error/put/201/noprovisioningstatepayload")
         @ExpectedResponses({200, 201, 202, 204})
@@ -249,7 +270,7 @@ public final class LROSADsInner {
         @PUT("lro/error/putasync/retry/nostatus")
         @ExpectedResponses({200, 202, 204})
         @UnexpectedResponseExceptionType(CloudException.class)
-        Single<RestResponse<LROSADsPutAsyncRelativeRetryNoStatusHeadersInner, ProductInner>> putAsyncRelativeRetryNoStatus(@BodyParam("application/json; charset=utf-8") ProductInner product, @HeaderParam("accept-language") String acceptLanguage);
+        Single<LROSADsPutAsyncRelativeRetryNoStatusResponse> putAsyncRelativeRetryNoStatus(@BodyParam("application/json; charset=utf-8") ProductInner product, @HeaderParam("accept-language") String acceptLanguage);
 
         @PUT("lro/error/putasync/retry/nostatus")
         @ExpectedResponses({200, 202, 204})
@@ -265,7 +286,7 @@ public final class LROSADsInner {
         @PUT("lro/error/putasync/retry/nostatuspayload")
         @ExpectedResponses({200, 202, 204})
         @UnexpectedResponseExceptionType(CloudException.class)
-        Single<RestResponse<LROSADsPutAsyncRelativeRetryNoStatusPayloadHeadersInner, ProductInner>> putAsyncRelativeRetryNoStatusPayload(@BodyParam("application/json; charset=utf-8") ProductInner product, @HeaderParam("accept-language") String acceptLanguage);
+        Single<LROSADsPutAsyncRelativeRetryNoStatusPayloadResponse> putAsyncRelativeRetryNoStatusPayload(@BodyParam("application/json; charset=utf-8") ProductInner product, @HeaderParam("accept-language") String acceptLanguage);
 
         @PUT("lro/error/putasync/retry/nostatuspayload")
         @ExpectedResponses({200, 202, 204})
@@ -281,7 +302,7 @@ public final class LROSADsInner {
         @DELETE("lro/error/delete/204/nolocation")
         @ExpectedResponses({200, 202, 204})
         @UnexpectedResponseExceptionType(CloudException.class)
-        Single<RestResponse<Void, Void>> delete204Succeeded(@HeaderParam("accept-language") String acceptLanguage);
+        Single<VoidResponse> delete204Succeeded(@HeaderParam("accept-language") String acceptLanguage);
 
         @DELETE("lro/error/delete/204/nolocation")
         @ExpectedResponses({200, 202, 204})
@@ -297,7 +318,7 @@ public final class LROSADsInner {
         @DELETE("lro/error/deleteasync/retry/nostatus")
         @ExpectedResponses({200, 202, 204})
         @UnexpectedResponseExceptionType(CloudException.class)
-        Single<RestResponse<LROSADsDeleteAsyncRelativeRetryNoStatusHeadersInner, Void>> deleteAsyncRelativeRetryNoStatus(@HeaderParam("accept-language") String acceptLanguage);
+        Single<LROSADsDeleteAsyncRelativeRetryNoStatusResponse> deleteAsyncRelativeRetryNoStatus(@HeaderParam("accept-language") String acceptLanguage);
 
         @DELETE("lro/error/deleteasync/retry/nostatus")
         @ExpectedResponses({200, 202, 204})
@@ -313,7 +334,7 @@ public final class LROSADsInner {
         @POST("lro/error/post/202/nolocation")
         @ExpectedResponses({200, 202, 204})
         @UnexpectedResponseExceptionType(CloudException.class)
-        Single<RestResponse<LROSADsPost202NoLocationHeadersInner, Void>> post202NoLocation(@BodyParam("application/json; charset=utf-8") ProductInner product, @HeaderParam("accept-language") String acceptLanguage);
+        Single<LROSADsPost202NoLocationResponse> post202NoLocation(@BodyParam("application/json; charset=utf-8") ProductInner product, @HeaderParam("accept-language") String acceptLanguage);
 
         @POST("lro/error/post/202/nolocation")
         @ExpectedResponses({200, 202, 204})
@@ -329,7 +350,7 @@ public final class LROSADsInner {
         @POST("lro/error/postasync/retry/nopayload")
         @ExpectedResponses({200, 202, 204})
         @UnexpectedResponseExceptionType(CloudException.class)
-        Single<RestResponse<LROSADsPostAsyncRelativeRetryNoPayloadHeadersInner, Void>> postAsyncRelativeRetryNoPayload(@BodyParam("application/json; charset=utf-8") ProductInner product, @HeaderParam("accept-language") String acceptLanguage);
+        Single<LROSADsPostAsyncRelativeRetryNoPayloadResponse> postAsyncRelativeRetryNoPayload(@BodyParam("application/json; charset=utf-8") ProductInner product, @HeaderParam("accept-language") String acceptLanguage);
 
         @POST("lro/error/postasync/retry/nopayload")
         @ExpectedResponses({200, 202, 204})
@@ -345,7 +366,7 @@ public final class LROSADsInner {
         @PUT("lro/error/put/200/invalidjson")
         @ExpectedResponses({200, 202, 204})
         @UnexpectedResponseExceptionType(CloudException.class)
-        Single<RestResponse<Void, ProductInner>> put200InvalidJson(@BodyParam("application/json; charset=utf-8") ProductInner product, @HeaderParam("accept-language") String acceptLanguage);
+        Single<BodyResponse<ProductInner>> put200InvalidJson(@BodyParam("application/json; charset=utf-8") ProductInner product, @HeaderParam("accept-language") String acceptLanguage);
 
         @PUT("lro/error/put/200/invalidjson")
         @ExpectedResponses({200, 202, 204})
@@ -361,7 +382,7 @@ public final class LROSADsInner {
         @PUT("lro/error/putasync/retry/invalidheader")
         @ExpectedResponses({200, 202, 204})
         @UnexpectedResponseExceptionType(CloudException.class)
-        Single<RestResponse<LROSADsPutAsyncRelativeRetryInvalidHeaderHeadersInner, ProductInner>> putAsyncRelativeRetryInvalidHeader(@BodyParam("application/json; charset=utf-8") ProductInner product, @HeaderParam("accept-language") String acceptLanguage);
+        Single<LROSADsPutAsyncRelativeRetryInvalidHeaderResponse> putAsyncRelativeRetryInvalidHeader(@BodyParam("application/json; charset=utf-8") ProductInner product, @HeaderParam("accept-language") String acceptLanguage);
 
         @PUT("lro/error/putasync/retry/invalidheader")
         @ExpectedResponses({200, 202, 204})
@@ -377,7 +398,7 @@ public final class LROSADsInner {
         @PUT("lro/error/putasync/retry/invalidjsonpolling")
         @ExpectedResponses({200, 202, 204})
         @UnexpectedResponseExceptionType(CloudException.class)
-        Single<RestResponse<LROSADsPutAsyncRelativeRetryInvalidJsonPollingHeadersInner, ProductInner>> putAsyncRelativeRetryInvalidJsonPolling(@BodyParam("application/json; charset=utf-8") ProductInner product, @HeaderParam("accept-language") String acceptLanguage);
+        Single<LROSADsPutAsyncRelativeRetryInvalidJsonPollingResponse> putAsyncRelativeRetryInvalidJsonPolling(@BodyParam("application/json; charset=utf-8") ProductInner product, @HeaderParam("accept-language") String acceptLanguage);
 
         @PUT("lro/error/putasync/retry/invalidjsonpolling")
         @ExpectedResponses({200, 202, 204})
@@ -393,7 +414,7 @@ public final class LROSADsInner {
         @DELETE("lro/error/delete/202/retry/invalidheader")
         @ExpectedResponses({200, 202, 204})
         @UnexpectedResponseExceptionType(CloudException.class)
-        Single<RestResponse<LROSADsDelete202RetryInvalidHeaderHeadersInner, Void>> delete202RetryInvalidHeader(@HeaderParam("accept-language") String acceptLanguage);
+        Single<LROSADsDelete202RetryInvalidHeaderResponse> delete202RetryInvalidHeader(@HeaderParam("accept-language") String acceptLanguage);
 
         @DELETE("lro/error/delete/202/retry/invalidheader")
         @ExpectedResponses({200, 202, 204})
@@ -409,7 +430,7 @@ public final class LROSADsInner {
         @DELETE("lro/error/deleteasync/retry/invalidheader")
         @ExpectedResponses({200, 202, 204})
         @UnexpectedResponseExceptionType(CloudException.class)
-        Single<RestResponse<LROSADsDeleteAsyncRelativeRetryInvalidHeaderHeadersInner, Void>> deleteAsyncRelativeRetryInvalidHeader(@HeaderParam("accept-language") String acceptLanguage);
+        Single<LROSADsDeleteAsyncRelativeRetryInvalidHeaderResponse> deleteAsyncRelativeRetryInvalidHeader(@HeaderParam("accept-language") String acceptLanguage);
 
         @DELETE("lro/error/deleteasync/retry/invalidheader")
         @ExpectedResponses({200, 202, 204})
@@ -425,7 +446,7 @@ public final class LROSADsInner {
         @DELETE("lro/error/deleteasync/retry/invalidjsonpolling")
         @ExpectedResponses({200, 202, 204})
         @UnexpectedResponseExceptionType(CloudException.class)
-        Single<RestResponse<LROSADsDeleteAsyncRelativeRetryInvalidJsonPollingHeadersInner, Void>> deleteAsyncRelativeRetryInvalidJsonPolling(@HeaderParam("accept-language") String acceptLanguage);
+        Single<LROSADsDeleteAsyncRelativeRetryInvalidJsonPollingResponse> deleteAsyncRelativeRetryInvalidJsonPolling(@HeaderParam("accept-language") String acceptLanguage);
 
         @DELETE("lro/error/deleteasync/retry/invalidjsonpolling")
         @ExpectedResponses({200, 202, 204})
@@ -441,7 +462,7 @@ public final class LROSADsInner {
         @POST("lro/error/post/202/retry/invalidheader")
         @ExpectedResponses({200, 202, 204})
         @UnexpectedResponseExceptionType(CloudException.class)
-        Single<RestResponse<LROSADsPost202RetryInvalidHeaderHeadersInner, Void>> post202RetryInvalidHeader(@BodyParam("application/json; charset=utf-8") ProductInner product, @HeaderParam("accept-language") String acceptLanguage);
+        Single<LROSADsPost202RetryInvalidHeaderResponse> post202RetryInvalidHeader(@BodyParam("application/json; charset=utf-8") ProductInner product, @HeaderParam("accept-language") String acceptLanguage);
 
         @POST("lro/error/post/202/retry/invalidheader")
         @ExpectedResponses({200, 202, 204})
@@ -457,7 +478,7 @@ public final class LROSADsInner {
         @POST("lro/error/postasync/retry/invalidheader")
         @ExpectedResponses({200, 202, 204})
         @UnexpectedResponseExceptionType(CloudException.class)
-        Single<RestResponse<LROSADsPostAsyncRelativeRetryInvalidHeaderHeadersInner, Void>> postAsyncRelativeRetryInvalidHeader(@BodyParam("application/json; charset=utf-8") ProductInner product, @HeaderParam("accept-language") String acceptLanguage);
+        Single<LROSADsPostAsyncRelativeRetryInvalidHeaderResponse> postAsyncRelativeRetryInvalidHeader(@BodyParam("application/json; charset=utf-8") ProductInner product, @HeaderParam("accept-language") String acceptLanguage);
 
         @POST("lro/error/postasync/retry/invalidheader")
         @ExpectedResponses({200, 202, 204})
@@ -473,7 +494,7 @@ public final class LROSADsInner {
         @POST("lro/error/postasync/retry/invalidjsonpolling")
         @ExpectedResponses({200, 202, 204})
         @UnexpectedResponseExceptionType(CloudException.class)
-        Single<RestResponse<LROSADsPostAsyncRelativeRetryInvalidJsonPollingHeadersInner, Void>> postAsyncRelativeRetryInvalidJsonPolling(@BodyParam("application/json; charset=utf-8") ProductInner product, @HeaderParam("accept-language") String acceptLanguage);
+        Single<LROSADsPostAsyncRelativeRetryInvalidJsonPollingResponse> postAsyncRelativeRetryInvalidJsonPolling(@BodyParam("application/json; charset=utf-8") ProductInner product, @HeaderParam("accept-language") String acceptLanguage);
 
         @POST("lro/error/postasync/retry/invalidjsonpolling")
         @ExpectedResponses({200, 202, 204})
@@ -577,7 +598,7 @@ public final class LROSADsInner {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<Void, ProductInner>> putNonRetry400WithRestResponseAsync() {
+    public Single<BodyResponse<ProductInner>> putNonRetry400WithRestResponseAsync() {
         final ProductInner product = null;
         return service.putNonRetry400(product, this.client.acceptLanguage());
     }
@@ -589,15 +610,7 @@ public final class LROSADsInner {
      */
     public Maybe<ProductInner> putNonRetry400Async() {
         return putNonRetry400WithRestResponseAsync()
-            .flatMapMaybe(new Function<RestResponse<Void, ProductInner>, Maybe<ProductInner>>() {
-                public Maybe<ProductInner> apply(RestResponse<Void, ProductInner> restResponse) {
-                    if (restResponse.body() == null) {
-                        return Maybe.empty();
-                    } else {
-                        return Maybe.just(restResponse.body());
-                    }
-                }
-            });
+            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -632,7 +645,7 @@ public final class LROSADsInner {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<Void, ProductInner>> putNonRetry400WithRestResponseAsync(ProductInner product) {
+    public Single<BodyResponse<ProductInner>> putNonRetry400WithRestResponseAsync(ProductInner product) {
         Validator.validate(product);
         return service.putNonRetry400(product, this.client.acceptLanguage());
     }
@@ -646,15 +659,7 @@ public final class LROSADsInner {
      */
     public Maybe<ProductInner> putNonRetry400Async(ProductInner product) {
         return putNonRetry400WithRestResponseAsync(product)
-            .flatMapMaybe(new Function<RestResponse<Void, ProductInner>, Maybe<ProductInner>>() {
-                public Maybe<ProductInner> apply(RestResponse<Void, ProductInner> restResponse) {
-                    if (restResponse.body() == null) {
-                        return Maybe.empty();
-                    } else {
-                        return Maybe.just(restResponse.body());
-                    }
-                }
-            });
+            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -766,7 +771,7 @@ public final class LROSADsInner {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<Void, ProductInner>> putNonRetry201Creating400WithRestResponseAsync() {
+    public Single<BodyResponse<ProductInner>> putNonRetry201Creating400WithRestResponseAsync() {
         final ProductInner product = null;
         return service.putNonRetry201Creating400(product, this.client.acceptLanguage());
     }
@@ -778,15 +783,7 @@ public final class LROSADsInner {
      */
     public Maybe<ProductInner> putNonRetry201Creating400Async() {
         return putNonRetry201Creating400WithRestResponseAsync()
-            .flatMapMaybe(new Function<RestResponse<Void, ProductInner>, Maybe<ProductInner>>() {
-                public Maybe<ProductInner> apply(RestResponse<Void, ProductInner> restResponse) {
-                    if (restResponse.body() == null) {
-                        return Maybe.empty();
-                    } else {
-                        return Maybe.just(restResponse.body());
-                    }
-                }
-            });
+            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -821,7 +818,7 @@ public final class LROSADsInner {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<Void, ProductInner>> putNonRetry201Creating400WithRestResponseAsync(ProductInner product) {
+    public Single<BodyResponse<ProductInner>> putNonRetry201Creating400WithRestResponseAsync(ProductInner product) {
         Validator.validate(product);
         return service.putNonRetry201Creating400(product, this.client.acceptLanguage());
     }
@@ -835,15 +832,7 @@ public final class LROSADsInner {
      */
     public Maybe<ProductInner> putNonRetry201Creating400Async(ProductInner product) {
         return putNonRetry201Creating400WithRestResponseAsync(product)
-            .flatMapMaybe(new Function<RestResponse<Void, ProductInner>, Maybe<ProductInner>>() {
-                public Maybe<ProductInner> apply(RestResponse<Void, ProductInner> restResponse) {
-                    if (restResponse.body() == null) {
-                        return Maybe.empty();
-                    } else {
-                        return Maybe.just(restResponse.body());
-                    }
-                }
-            });
+            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -955,7 +944,7 @@ public final class LROSADsInner {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<Void, ProductInner>> putNonRetry201Creating400InvalidJsonWithRestResponseAsync() {
+    public Single<BodyResponse<ProductInner>> putNonRetry201Creating400InvalidJsonWithRestResponseAsync() {
         final ProductInner product = null;
         return service.putNonRetry201Creating400InvalidJson(product, this.client.acceptLanguage());
     }
@@ -967,15 +956,7 @@ public final class LROSADsInner {
      */
     public Maybe<ProductInner> putNonRetry201Creating400InvalidJsonAsync() {
         return putNonRetry201Creating400InvalidJsonWithRestResponseAsync()
-            .flatMapMaybe(new Function<RestResponse<Void, ProductInner>, Maybe<ProductInner>>() {
-                public Maybe<ProductInner> apply(RestResponse<Void, ProductInner> restResponse) {
-                    if (restResponse.body() == null) {
-                        return Maybe.empty();
-                    } else {
-                        return Maybe.just(restResponse.body());
-                    }
-                }
-            });
+            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -1010,7 +991,7 @@ public final class LROSADsInner {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<Void, ProductInner>> putNonRetry201Creating400InvalidJsonWithRestResponseAsync(ProductInner product) {
+    public Single<BodyResponse<ProductInner>> putNonRetry201Creating400InvalidJsonWithRestResponseAsync(ProductInner product) {
         Validator.validate(product);
         return service.putNonRetry201Creating400InvalidJson(product, this.client.acceptLanguage());
     }
@@ -1024,15 +1005,7 @@ public final class LROSADsInner {
      */
     public Maybe<ProductInner> putNonRetry201Creating400InvalidJsonAsync(ProductInner product) {
         return putNonRetry201Creating400InvalidJsonWithRestResponseAsync(product)
-            .flatMapMaybe(new Function<RestResponse<Void, ProductInner>, Maybe<ProductInner>>() {
-                public Maybe<ProductInner> apply(RestResponse<Void, ProductInner> restResponse) {
-                    if (restResponse.body() == null) {
-                        return Maybe.empty();
-                    } else {
-                        return Maybe.just(restResponse.body());
-                    }
-                }
-            });
+            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -1144,7 +1117,7 @@ public final class LROSADsInner {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<LROSADsPutAsyncRelativeRetry400HeadersInner, ProductInner>> putAsyncRelativeRetry400WithRestResponseAsync() {
+    public Single<LROSADsPutAsyncRelativeRetry400Response> putAsyncRelativeRetry400WithRestResponseAsync() {
         final ProductInner product = null;
         return service.putAsyncRelativeRetry400(product, this.client.acceptLanguage());
     }
@@ -1156,15 +1129,7 @@ public final class LROSADsInner {
      */
     public Maybe<ProductInner> putAsyncRelativeRetry400Async() {
         return putAsyncRelativeRetry400WithRestResponseAsync()
-            .flatMapMaybe(new Function<RestResponse<LROSADsPutAsyncRelativeRetry400HeadersInner, ProductInner>, Maybe<ProductInner>>() {
-                public Maybe<ProductInner> apply(RestResponse<LROSADsPutAsyncRelativeRetry400HeadersInner, ProductInner> restResponse) {
-                    if (restResponse.body() == null) {
-                        return Maybe.empty();
-                    } else {
-                        return Maybe.just(restResponse.body());
-                    }
-                }
-            });
+            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -1199,7 +1164,7 @@ public final class LROSADsInner {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<LROSADsPutAsyncRelativeRetry400HeadersInner, ProductInner>> putAsyncRelativeRetry400WithRestResponseAsync(ProductInner product) {
+    public Single<LROSADsPutAsyncRelativeRetry400Response> putAsyncRelativeRetry400WithRestResponseAsync(ProductInner product) {
         Validator.validate(product);
         return service.putAsyncRelativeRetry400(product, this.client.acceptLanguage());
     }
@@ -1213,15 +1178,7 @@ public final class LROSADsInner {
      */
     public Maybe<ProductInner> putAsyncRelativeRetry400Async(ProductInner product) {
         return putAsyncRelativeRetry400WithRestResponseAsync(product)
-            .flatMapMaybe(new Function<RestResponse<LROSADsPutAsyncRelativeRetry400HeadersInner, ProductInner>, Maybe<ProductInner>>() {
-                public Maybe<ProductInner> apply(RestResponse<LROSADsPutAsyncRelativeRetry400HeadersInner, ProductInner> restResponse) {
-                    if (restResponse.body() == null) {
-                        return Maybe.empty();
-                    } else {
-                        return Maybe.just(restResponse.body());
-                    }
-                }
-            });
+            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -1294,7 +1251,7 @@ public final class LROSADsInner {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<LROSADsDeleteNonRetry400HeadersInner, Void>> deleteNonRetry400WithRestResponseAsync() {
+    public Single<LROSADsDeleteNonRetry400Response> deleteNonRetry400WithRestResponseAsync() {
         return service.deleteNonRetry400(this.client.acceptLanguage());
     }
 
@@ -1378,7 +1335,7 @@ public final class LROSADsInner {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<LROSADsDelete202NonRetry400HeadersInner, Void>> delete202NonRetry400WithRestResponseAsync() {
+    public Single<LROSADsDelete202NonRetry400Response> delete202NonRetry400WithRestResponseAsync() {
         return service.delete202NonRetry400(this.client.acceptLanguage());
     }
 
@@ -1462,7 +1419,7 @@ public final class LROSADsInner {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<LROSADsDeleteAsyncRelativeRetry400HeadersInner, Void>> deleteAsyncRelativeRetry400WithRestResponseAsync() {
+    public Single<LROSADsDeleteAsyncRelativeRetry400Response> deleteAsyncRelativeRetry400WithRestResponseAsync() {
         return service.deleteAsyncRelativeRetry400(this.client.acceptLanguage());
     }
 
@@ -1582,7 +1539,7 @@ public final class LROSADsInner {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<LROSADsPostNonRetry400HeadersInner, Void>> postNonRetry400WithRestResponseAsync() {
+    public Single<LROSADsPostNonRetry400Response> postNonRetry400WithRestResponseAsync() {
         final ProductInner product = null;
         return service.postNonRetry400(product, this.client.acceptLanguage());
     }
@@ -1628,7 +1585,7 @@ public final class LROSADsInner {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<LROSADsPostNonRetry400HeadersInner, Void>> postNonRetry400WithRestResponseAsync(ProductInner product) {
+    public Single<LROSADsPostNonRetry400Response> postNonRetry400WithRestResponseAsync(ProductInner product) {
         Validator.validate(product);
         return service.postNonRetry400(product, this.client.acceptLanguage());
     }
@@ -1751,7 +1708,7 @@ public final class LROSADsInner {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<LROSADsPost202NonRetry400HeadersInner, Void>> post202NonRetry400WithRestResponseAsync() {
+    public Single<LROSADsPost202NonRetry400Response> post202NonRetry400WithRestResponseAsync() {
         final ProductInner product = null;
         return service.post202NonRetry400(product, this.client.acceptLanguage());
     }
@@ -1797,7 +1754,7 @@ public final class LROSADsInner {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<LROSADsPost202NonRetry400HeadersInner, Void>> post202NonRetry400WithRestResponseAsync(ProductInner product) {
+    public Single<LROSADsPost202NonRetry400Response> post202NonRetry400WithRestResponseAsync(ProductInner product) {
         Validator.validate(product);
         return service.post202NonRetry400(product, this.client.acceptLanguage());
     }
@@ -1920,7 +1877,7 @@ public final class LROSADsInner {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<LROSADsPostAsyncRelativeRetry400HeadersInner, Void>> postAsyncRelativeRetry400WithRestResponseAsync() {
+    public Single<LROSADsPostAsyncRelativeRetry400Response> postAsyncRelativeRetry400WithRestResponseAsync() {
         final ProductInner product = null;
         return service.postAsyncRelativeRetry400(product, this.client.acceptLanguage());
     }
@@ -1966,7 +1923,7 @@ public final class LROSADsInner {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<LROSADsPostAsyncRelativeRetry400HeadersInner, Void>> postAsyncRelativeRetry400WithRestResponseAsync(ProductInner product) {
+    public Single<LROSADsPostAsyncRelativeRetry400Response> postAsyncRelativeRetry400WithRestResponseAsync(ProductInner product) {
         Validator.validate(product);
         return service.postAsyncRelativeRetry400(product, this.client.acceptLanguage());
     }
@@ -2092,7 +2049,7 @@ public final class LROSADsInner {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<Void, ProductInner>> putError201NoProvisioningStatePayloadWithRestResponseAsync() {
+    public Single<BodyResponse<ProductInner>> putError201NoProvisioningStatePayloadWithRestResponseAsync() {
         final ProductInner product = null;
         return service.putError201NoProvisioningStatePayload(product, this.client.acceptLanguage());
     }
@@ -2104,15 +2061,7 @@ public final class LROSADsInner {
      */
     public Maybe<ProductInner> putError201NoProvisioningStatePayloadAsync() {
         return putError201NoProvisioningStatePayloadWithRestResponseAsync()
-            .flatMapMaybe(new Function<RestResponse<Void, ProductInner>, Maybe<ProductInner>>() {
-                public Maybe<ProductInner> apply(RestResponse<Void, ProductInner> restResponse) {
-                    if (restResponse.body() == null) {
-                        return Maybe.empty();
-                    } else {
-                        return Maybe.just(restResponse.body());
-                    }
-                }
-            });
+            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -2147,7 +2096,7 @@ public final class LROSADsInner {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<Void, ProductInner>> putError201NoProvisioningStatePayloadWithRestResponseAsync(ProductInner product) {
+    public Single<BodyResponse<ProductInner>> putError201NoProvisioningStatePayloadWithRestResponseAsync(ProductInner product) {
         Validator.validate(product);
         return service.putError201NoProvisioningStatePayload(product, this.client.acceptLanguage());
     }
@@ -2161,15 +2110,7 @@ public final class LROSADsInner {
      */
     public Maybe<ProductInner> putError201NoProvisioningStatePayloadAsync(ProductInner product) {
         return putError201NoProvisioningStatePayloadWithRestResponseAsync(product)
-            .flatMapMaybe(new Function<RestResponse<Void, ProductInner>, Maybe<ProductInner>>() {
-                public Maybe<ProductInner> apply(RestResponse<Void, ProductInner> restResponse) {
-                    if (restResponse.body() == null) {
-                        return Maybe.empty();
-                    } else {
-                        return Maybe.just(restResponse.body());
-                    }
-                }
-            });
+            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -2281,7 +2222,7 @@ public final class LROSADsInner {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<LROSADsPutAsyncRelativeRetryNoStatusHeadersInner, ProductInner>> putAsyncRelativeRetryNoStatusWithRestResponseAsync() {
+    public Single<LROSADsPutAsyncRelativeRetryNoStatusResponse> putAsyncRelativeRetryNoStatusWithRestResponseAsync() {
         final ProductInner product = null;
         return service.putAsyncRelativeRetryNoStatus(product, this.client.acceptLanguage());
     }
@@ -2293,15 +2234,7 @@ public final class LROSADsInner {
      */
     public Maybe<ProductInner> putAsyncRelativeRetryNoStatusAsync() {
         return putAsyncRelativeRetryNoStatusWithRestResponseAsync()
-            .flatMapMaybe(new Function<RestResponse<LROSADsPutAsyncRelativeRetryNoStatusHeadersInner, ProductInner>, Maybe<ProductInner>>() {
-                public Maybe<ProductInner> apply(RestResponse<LROSADsPutAsyncRelativeRetryNoStatusHeadersInner, ProductInner> restResponse) {
-                    if (restResponse.body() == null) {
-                        return Maybe.empty();
-                    } else {
-                        return Maybe.just(restResponse.body());
-                    }
-                }
-            });
+            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -2336,7 +2269,7 @@ public final class LROSADsInner {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<LROSADsPutAsyncRelativeRetryNoStatusHeadersInner, ProductInner>> putAsyncRelativeRetryNoStatusWithRestResponseAsync(ProductInner product) {
+    public Single<LROSADsPutAsyncRelativeRetryNoStatusResponse> putAsyncRelativeRetryNoStatusWithRestResponseAsync(ProductInner product) {
         Validator.validate(product);
         return service.putAsyncRelativeRetryNoStatus(product, this.client.acceptLanguage());
     }
@@ -2350,15 +2283,7 @@ public final class LROSADsInner {
      */
     public Maybe<ProductInner> putAsyncRelativeRetryNoStatusAsync(ProductInner product) {
         return putAsyncRelativeRetryNoStatusWithRestResponseAsync(product)
-            .flatMapMaybe(new Function<RestResponse<LROSADsPutAsyncRelativeRetryNoStatusHeadersInner, ProductInner>, Maybe<ProductInner>>() {
-                public Maybe<ProductInner> apply(RestResponse<LROSADsPutAsyncRelativeRetryNoStatusHeadersInner, ProductInner> restResponse) {
-                    if (restResponse.body() == null) {
-                        return Maybe.empty();
-                    } else {
-                        return Maybe.just(restResponse.body());
-                    }
-                }
-            });
+            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -2470,7 +2395,7 @@ public final class LROSADsInner {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<LROSADsPutAsyncRelativeRetryNoStatusPayloadHeadersInner, ProductInner>> putAsyncRelativeRetryNoStatusPayloadWithRestResponseAsync() {
+    public Single<LROSADsPutAsyncRelativeRetryNoStatusPayloadResponse> putAsyncRelativeRetryNoStatusPayloadWithRestResponseAsync() {
         final ProductInner product = null;
         return service.putAsyncRelativeRetryNoStatusPayload(product, this.client.acceptLanguage());
     }
@@ -2482,15 +2407,7 @@ public final class LROSADsInner {
      */
     public Maybe<ProductInner> putAsyncRelativeRetryNoStatusPayloadAsync() {
         return putAsyncRelativeRetryNoStatusPayloadWithRestResponseAsync()
-            .flatMapMaybe(new Function<RestResponse<LROSADsPutAsyncRelativeRetryNoStatusPayloadHeadersInner, ProductInner>, Maybe<ProductInner>>() {
-                public Maybe<ProductInner> apply(RestResponse<LROSADsPutAsyncRelativeRetryNoStatusPayloadHeadersInner, ProductInner> restResponse) {
-                    if (restResponse.body() == null) {
-                        return Maybe.empty();
-                    } else {
-                        return Maybe.just(restResponse.body());
-                    }
-                }
-            });
+            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -2525,7 +2442,7 @@ public final class LROSADsInner {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<LROSADsPutAsyncRelativeRetryNoStatusPayloadHeadersInner, ProductInner>> putAsyncRelativeRetryNoStatusPayloadWithRestResponseAsync(ProductInner product) {
+    public Single<LROSADsPutAsyncRelativeRetryNoStatusPayloadResponse> putAsyncRelativeRetryNoStatusPayloadWithRestResponseAsync(ProductInner product) {
         Validator.validate(product);
         return service.putAsyncRelativeRetryNoStatusPayload(product, this.client.acceptLanguage());
     }
@@ -2539,15 +2456,7 @@ public final class LROSADsInner {
      */
     public Maybe<ProductInner> putAsyncRelativeRetryNoStatusPayloadAsync(ProductInner product) {
         return putAsyncRelativeRetryNoStatusPayloadWithRestResponseAsync(product)
-            .flatMapMaybe(new Function<RestResponse<LROSADsPutAsyncRelativeRetryNoStatusPayloadHeadersInner, ProductInner>, Maybe<ProductInner>>() {
-                public Maybe<ProductInner> apply(RestResponse<LROSADsPutAsyncRelativeRetryNoStatusPayloadHeadersInner, ProductInner> restResponse) {
-                    if (restResponse.body() == null) {
-                        return Maybe.empty();
-                    } else {
-                        return Maybe.just(restResponse.body());
-                    }
-                }
-            });
+            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -2620,7 +2529,7 @@ public final class LROSADsInner {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<Void, Void>> delete204SucceededWithRestResponseAsync() {
+    public Single<VoidResponse> delete204SucceededWithRestResponseAsync() {
         return service.delete204Succeeded(this.client.acceptLanguage());
     }
 
@@ -2704,7 +2613,7 @@ public final class LROSADsInner {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<LROSADsDeleteAsyncRelativeRetryNoStatusHeadersInner, Void>> deleteAsyncRelativeRetryNoStatusWithRestResponseAsync() {
+    public Single<LROSADsDeleteAsyncRelativeRetryNoStatusResponse> deleteAsyncRelativeRetryNoStatusWithRestResponseAsync() {
         return service.deleteAsyncRelativeRetryNoStatus(this.client.acceptLanguage());
     }
 
@@ -2824,7 +2733,7 @@ public final class LROSADsInner {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<LROSADsPost202NoLocationHeadersInner, Void>> post202NoLocationWithRestResponseAsync() {
+    public Single<LROSADsPost202NoLocationResponse> post202NoLocationWithRestResponseAsync() {
         final ProductInner product = null;
         return service.post202NoLocation(product, this.client.acceptLanguage());
     }
@@ -2870,7 +2779,7 @@ public final class LROSADsInner {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<LROSADsPost202NoLocationHeadersInner, Void>> post202NoLocationWithRestResponseAsync(ProductInner product) {
+    public Single<LROSADsPost202NoLocationResponse> post202NoLocationWithRestResponseAsync(ProductInner product) {
         Validator.validate(product);
         return service.post202NoLocation(product, this.client.acceptLanguage());
     }
@@ -2993,7 +2902,7 @@ public final class LROSADsInner {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<LROSADsPostAsyncRelativeRetryNoPayloadHeadersInner, Void>> postAsyncRelativeRetryNoPayloadWithRestResponseAsync() {
+    public Single<LROSADsPostAsyncRelativeRetryNoPayloadResponse> postAsyncRelativeRetryNoPayloadWithRestResponseAsync() {
         final ProductInner product = null;
         return service.postAsyncRelativeRetryNoPayload(product, this.client.acceptLanguage());
     }
@@ -3039,7 +2948,7 @@ public final class LROSADsInner {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<LROSADsPostAsyncRelativeRetryNoPayloadHeadersInner, Void>> postAsyncRelativeRetryNoPayloadWithRestResponseAsync(ProductInner product) {
+    public Single<LROSADsPostAsyncRelativeRetryNoPayloadResponse> postAsyncRelativeRetryNoPayloadWithRestResponseAsync(ProductInner product) {
         Validator.validate(product);
         return service.postAsyncRelativeRetryNoPayload(product, this.client.acceptLanguage());
     }
@@ -3165,7 +3074,7 @@ public final class LROSADsInner {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<Void, ProductInner>> put200InvalidJsonWithRestResponseAsync() {
+    public Single<BodyResponse<ProductInner>> put200InvalidJsonWithRestResponseAsync() {
         final ProductInner product = null;
         return service.put200InvalidJson(product, this.client.acceptLanguage());
     }
@@ -3177,15 +3086,7 @@ public final class LROSADsInner {
      */
     public Maybe<ProductInner> put200InvalidJsonAsync() {
         return put200InvalidJsonWithRestResponseAsync()
-            .flatMapMaybe(new Function<RestResponse<Void, ProductInner>, Maybe<ProductInner>>() {
-                public Maybe<ProductInner> apply(RestResponse<Void, ProductInner> restResponse) {
-                    if (restResponse.body() == null) {
-                        return Maybe.empty();
-                    } else {
-                        return Maybe.just(restResponse.body());
-                    }
-                }
-            });
+            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -3220,7 +3121,7 @@ public final class LROSADsInner {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<Void, ProductInner>> put200InvalidJsonWithRestResponseAsync(ProductInner product) {
+    public Single<BodyResponse<ProductInner>> put200InvalidJsonWithRestResponseAsync(ProductInner product) {
         Validator.validate(product);
         return service.put200InvalidJson(product, this.client.acceptLanguage());
     }
@@ -3234,15 +3135,7 @@ public final class LROSADsInner {
      */
     public Maybe<ProductInner> put200InvalidJsonAsync(ProductInner product) {
         return put200InvalidJsonWithRestResponseAsync(product)
-            .flatMapMaybe(new Function<RestResponse<Void, ProductInner>, Maybe<ProductInner>>() {
-                public Maybe<ProductInner> apply(RestResponse<Void, ProductInner> restResponse) {
-                    if (restResponse.body() == null) {
-                        return Maybe.empty();
-                    } else {
-                        return Maybe.just(restResponse.body());
-                    }
-                }
-            });
+            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -3354,7 +3247,7 @@ public final class LROSADsInner {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<LROSADsPutAsyncRelativeRetryInvalidHeaderHeadersInner, ProductInner>> putAsyncRelativeRetryInvalidHeaderWithRestResponseAsync() {
+    public Single<LROSADsPutAsyncRelativeRetryInvalidHeaderResponse> putAsyncRelativeRetryInvalidHeaderWithRestResponseAsync() {
         final ProductInner product = null;
         return service.putAsyncRelativeRetryInvalidHeader(product, this.client.acceptLanguage());
     }
@@ -3366,15 +3259,7 @@ public final class LROSADsInner {
      */
     public Maybe<ProductInner> putAsyncRelativeRetryInvalidHeaderAsync() {
         return putAsyncRelativeRetryInvalidHeaderWithRestResponseAsync()
-            .flatMapMaybe(new Function<RestResponse<LROSADsPutAsyncRelativeRetryInvalidHeaderHeadersInner, ProductInner>, Maybe<ProductInner>>() {
-                public Maybe<ProductInner> apply(RestResponse<LROSADsPutAsyncRelativeRetryInvalidHeaderHeadersInner, ProductInner> restResponse) {
-                    if (restResponse.body() == null) {
-                        return Maybe.empty();
-                    } else {
-                        return Maybe.just(restResponse.body());
-                    }
-                }
-            });
+            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -3409,7 +3294,7 @@ public final class LROSADsInner {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<LROSADsPutAsyncRelativeRetryInvalidHeaderHeadersInner, ProductInner>> putAsyncRelativeRetryInvalidHeaderWithRestResponseAsync(ProductInner product) {
+    public Single<LROSADsPutAsyncRelativeRetryInvalidHeaderResponse> putAsyncRelativeRetryInvalidHeaderWithRestResponseAsync(ProductInner product) {
         Validator.validate(product);
         return service.putAsyncRelativeRetryInvalidHeader(product, this.client.acceptLanguage());
     }
@@ -3423,15 +3308,7 @@ public final class LROSADsInner {
      */
     public Maybe<ProductInner> putAsyncRelativeRetryInvalidHeaderAsync(ProductInner product) {
         return putAsyncRelativeRetryInvalidHeaderWithRestResponseAsync(product)
-            .flatMapMaybe(new Function<RestResponse<LROSADsPutAsyncRelativeRetryInvalidHeaderHeadersInner, ProductInner>, Maybe<ProductInner>>() {
-                public Maybe<ProductInner> apply(RestResponse<LROSADsPutAsyncRelativeRetryInvalidHeaderHeadersInner, ProductInner> restResponse) {
-                    if (restResponse.body() == null) {
-                        return Maybe.empty();
-                    } else {
-                        return Maybe.just(restResponse.body());
-                    }
-                }
-            });
+            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -3543,7 +3420,7 @@ public final class LROSADsInner {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<LROSADsPutAsyncRelativeRetryInvalidJsonPollingHeadersInner, ProductInner>> putAsyncRelativeRetryInvalidJsonPollingWithRestResponseAsync() {
+    public Single<LROSADsPutAsyncRelativeRetryInvalidJsonPollingResponse> putAsyncRelativeRetryInvalidJsonPollingWithRestResponseAsync() {
         final ProductInner product = null;
         return service.putAsyncRelativeRetryInvalidJsonPolling(product, this.client.acceptLanguage());
     }
@@ -3555,15 +3432,7 @@ public final class LROSADsInner {
      */
     public Maybe<ProductInner> putAsyncRelativeRetryInvalidJsonPollingAsync() {
         return putAsyncRelativeRetryInvalidJsonPollingWithRestResponseAsync()
-            .flatMapMaybe(new Function<RestResponse<LROSADsPutAsyncRelativeRetryInvalidJsonPollingHeadersInner, ProductInner>, Maybe<ProductInner>>() {
-                public Maybe<ProductInner> apply(RestResponse<LROSADsPutAsyncRelativeRetryInvalidJsonPollingHeadersInner, ProductInner> restResponse) {
-                    if (restResponse.body() == null) {
-                        return Maybe.empty();
-                    } else {
-                        return Maybe.just(restResponse.body());
-                    }
-                }
-            });
+            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -3598,7 +3467,7 @@ public final class LROSADsInner {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<LROSADsPutAsyncRelativeRetryInvalidJsonPollingHeadersInner, ProductInner>> putAsyncRelativeRetryInvalidJsonPollingWithRestResponseAsync(ProductInner product) {
+    public Single<LROSADsPutAsyncRelativeRetryInvalidJsonPollingResponse> putAsyncRelativeRetryInvalidJsonPollingWithRestResponseAsync(ProductInner product) {
         Validator.validate(product);
         return service.putAsyncRelativeRetryInvalidJsonPolling(product, this.client.acceptLanguage());
     }
@@ -3612,15 +3481,7 @@ public final class LROSADsInner {
      */
     public Maybe<ProductInner> putAsyncRelativeRetryInvalidJsonPollingAsync(ProductInner product) {
         return putAsyncRelativeRetryInvalidJsonPollingWithRestResponseAsync(product)
-            .flatMapMaybe(new Function<RestResponse<LROSADsPutAsyncRelativeRetryInvalidJsonPollingHeadersInner, ProductInner>, Maybe<ProductInner>>() {
-                public Maybe<ProductInner> apply(RestResponse<LROSADsPutAsyncRelativeRetryInvalidJsonPollingHeadersInner, ProductInner> restResponse) {
-                    if (restResponse.body() == null) {
-                        return Maybe.empty();
-                    } else {
-                        return Maybe.just(restResponse.body());
-                    }
-                }
-            });
+            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -3693,7 +3554,7 @@ public final class LROSADsInner {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<LROSADsDelete202RetryInvalidHeaderHeadersInner, Void>> delete202RetryInvalidHeaderWithRestResponseAsync() {
+    public Single<LROSADsDelete202RetryInvalidHeaderResponse> delete202RetryInvalidHeaderWithRestResponseAsync() {
         return service.delete202RetryInvalidHeader(this.client.acceptLanguage());
     }
 
@@ -3777,7 +3638,7 @@ public final class LROSADsInner {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<LROSADsDeleteAsyncRelativeRetryInvalidHeaderHeadersInner, Void>> deleteAsyncRelativeRetryInvalidHeaderWithRestResponseAsync() {
+    public Single<LROSADsDeleteAsyncRelativeRetryInvalidHeaderResponse> deleteAsyncRelativeRetryInvalidHeaderWithRestResponseAsync() {
         return service.deleteAsyncRelativeRetryInvalidHeader(this.client.acceptLanguage());
     }
 
@@ -3861,7 +3722,7 @@ public final class LROSADsInner {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<LROSADsDeleteAsyncRelativeRetryInvalidJsonPollingHeadersInner, Void>> deleteAsyncRelativeRetryInvalidJsonPollingWithRestResponseAsync() {
+    public Single<LROSADsDeleteAsyncRelativeRetryInvalidJsonPollingResponse> deleteAsyncRelativeRetryInvalidJsonPollingWithRestResponseAsync() {
         return service.deleteAsyncRelativeRetryInvalidJsonPolling(this.client.acceptLanguage());
     }
 
@@ -3981,7 +3842,7 @@ public final class LROSADsInner {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<LROSADsPost202RetryInvalidHeaderHeadersInner, Void>> post202RetryInvalidHeaderWithRestResponseAsync() {
+    public Single<LROSADsPost202RetryInvalidHeaderResponse> post202RetryInvalidHeaderWithRestResponseAsync() {
         final ProductInner product = null;
         return service.post202RetryInvalidHeader(product, this.client.acceptLanguage());
     }
@@ -4027,7 +3888,7 @@ public final class LROSADsInner {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<LROSADsPost202RetryInvalidHeaderHeadersInner, Void>> post202RetryInvalidHeaderWithRestResponseAsync(ProductInner product) {
+    public Single<LROSADsPost202RetryInvalidHeaderResponse> post202RetryInvalidHeaderWithRestResponseAsync(ProductInner product) {
         Validator.validate(product);
         return service.post202RetryInvalidHeader(product, this.client.acceptLanguage());
     }
@@ -4150,7 +4011,7 @@ public final class LROSADsInner {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<LROSADsPostAsyncRelativeRetryInvalidHeaderHeadersInner, Void>> postAsyncRelativeRetryInvalidHeaderWithRestResponseAsync() {
+    public Single<LROSADsPostAsyncRelativeRetryInvalidHeaderResponse> postAsyncRelativeRetryInvalidHeaderWithRestResponseAsync() {
         final ProductInner product = null;
         return service.postAsyncRelativeRetryInvalidHeader(product, this.client.acceptLanguage());
     }
@@ -4196,7 +4057,7 @@ public final class LROSADsInner {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<LROSADsPostAsyncRelativeRetryInvalidHeaderHeadersInner, Void>> postAsyncRelativeRetryInvalidHeaderWithRestResponseAsync(ProductInner product) {
+    public Single<LROSADsPostAsyncRelativeRetryInvalidHeaderResponse> postAsyncRelativeRetryInvalidHeaderWithRestResponseAsync(ProductInner product) {
         Validator.validate(product);
         return service.postAsyncRelativeRetryInvalidHeader(product, this.client.acceptLanguage());
     }
@@ -4319,7 +4180,7 @@ public final class LROSADsInner {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<LROSADsPostAsyncRelativeRetryInvalidJsonPollingHeadersInner, Void>> postAsyncRelativeRetryInvalidJsonPollingWithRestResponseAsync() {
+    public Single<LROSADsPostAsyncRelativeRetryInvalidJsonPollingResponse> postAsyncRelativeRetryInvalidJsonPollingWithRestResponseAsync() {
         final ProductInner product = null;
         return service.postAsyncRelativeRetryInvalidJsonPolling(product, this.client.acceptLanguage());
     }
@@ -4365,7 +4226,7 @@ public final class LROSADsInner {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<LROSADsPostAsyncRelativeRetryInvalidJsonPollingHeadersInner, Void>> postAsyncRelativeRetryInvalidJsonPollingWithRestResponseAsync(ProductInner product) {
+    public Single<LROSADsPostAsyncRelativeRetryInvalidJsonPollingResponse> postAsyncRelativeRetryInvalidJsonPollingWithRestResponseAsync(ProductInner product) {
         Validator.validate(product);
         return service.postAsyncRelativeRetryInvalidJsonPolling(product, this.client.acceptLanguage());
     }

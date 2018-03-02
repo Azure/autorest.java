@@ -11,9 +11,10 @@
 package fixtures.azureresource;
 
 import com.microsoft.azure.v2.Resource;
-import com.microsoft.rest.v2.RestResponse;
+import com.microsoft.rest.v2.BodyResponse;
 import com.microsoft.rest.v2.ServiceCallback;
 import com.microsoft.rest.v2.ServiceFuture;
+import com.microsoft.rest.v2.VoidResponse;
 import fixtures.azureresource.models.ErrorException;
 import fixtures.azureresource.models.FlattenedProduct;
 import fixtures.azureresource.models.ResourceCollection;
@@ -94,7 +95,7 @@ public interface AutoRestResourceFlatteningTestService {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, Void>> putArrayWithRestResponseAsync();
+    Single<VoidResponse> putArrayWithRestResponseAsync();
 
     /**
      * Put External Resource as an Array.
@@ -130,7 +131,7 @@ public interface AutoRestResourceFlatteningTestService {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, Void>> putArrayWithRestResponseAsync(List<Resource> resourceArray);
+    Single<VoidResponse> putArrayWithRestResponseAsync(List<Resource> resourceArray);
 
     /**
      * Put External Resource as an Array.
@@ -164,7 +165,7 @@ public interface AutoRestResourceFlatteningTestService {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, List<FlattenedProduct>>> getArrayWithRestResponseAsync();
+    Single<BodyResponse<List<FlattenedProduct>>> getArrayWithRestResponseAsync();
 
     /**
      * Get External Resource as an Array.
@@ -195,7 +196,7 @@ public interface AutoRestResourceFlatteningTestService {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, Void>> putDictionaryWithRestResponseAsync();
+    Single<VoidResponse> putDictionaryWithRestResponseAsync();
 
     /**
      * Put External Resource as a Dictionary.
@@ -231,7 +232,7 @@ public interface AutoRestResourceFlatteningTestService {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, Void>> putDictionaryWithRestResponseAsync(Map<String, FlattenedProduct> resourceDictionary);
+    Single<VoidResponse> putDictionaryWithRestResponseAsync(Map<String, FlattenedProduct> resourceDictionary);
 
     /**
      * Put External Resource as a Dictionary.
@@ -265,7 +266,7 @@ public interface AutoRestResourceFlatteningTestService {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, Map<String, FlattenedProduct>>> getDictionaryWithRestResponseAsync();
+    Single<BodyResponse<Map<String, FlattenedProduct>>> getDictionaryWithRestResponseAsync();
 
     /**
      * Get External Resource as a Dictionary.
@@ -296,7 +297,7 @@ public interface AutoRestResourceFlatteningTestService {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, Void>> putResourceCollectionWithRestResponseAsync();
+    Single<VoidResponse> putResourceCollectionWithRestResponseAsync();
 
     /**
      * Put External Resource as a ResourceCollection.
@@ -332,7 +333,7 @@ public interface AutoRestResourceFlatteningTestService {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, Void>> putResourceCollectionWithRestResponseAsync(ResourceCollection resourceComplexObject);
+    Single<VoidResponse> putResourceCollectionWithRestResponseAsync(ResourceCollection resourceComplexObject);
 
     /**
      * Put External Resource as a ResourceCollection.
@@ -366,7 +367,7 @@ public interface AutoRestResourceFlatteningTestService {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, ResourceCollection>> getResourceCollectionWithRestResponseAsync();
+    Single<BodyResponse<ResourceCollection>> getResourceCollectionWithRestResponseAsync();
 
     /**
      * Get External Resource as a ResourceCollection.

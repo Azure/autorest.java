@@ -12,7 +12,7 @@ package fixtures.head.implementation;
 
 import com.microsoft.azure.v2.AzureProxy;
 import com.microsoft.azure.v2.CloudException;
-import com.microsoft.rest.v2.RestResponse;
+import com.microsoft.rest.v2.BodyResponse;
 import com.microsoft.rest.v2.ServiceCallback;
 import com.microsoft.rest.v2.ServiceFuture;
 import com.microsoft.rest.v2.annotations.ExpectedResponses;
@@ -58,17 +58,17 @@ public final class HttpSuccessInner {
         @HEAD("http/success/200")
         @ExpectedResponses({200, 404})
         @UnexpectedResponseExceptionType(CloudException.class)
-        Single<RestResponse<Void, Boolean>> head200(@HeaderParam("accept-language") String acceptLanguage);
+        Single<BodyResponse<Boolean>> head200(@HeaderParam("accept-language") String acceptLanguage);
 
         @HEAD("http/success/204")
         @ExpectedResponses({204, 404})
         @UnexpectedResponseExceptionType(CloudException.class)
-        Single<RestResponse<Void, Boolean>> head204(@HeaderParam("accept-language") String acceptLanguage);
+        Single<BodyResponse<Boolean>> head204(@HeaderParam("accept-language") String acceptLanguage);
 
         @HEAD("http/success/404")
         @ExpectedResponses({204, 404})
         @UnexpectedResponseExceptionType(CloudException.class)
-        Single<RestResponse<Void, Boolean>> head404(@HeaderParam("accept-language") String acceptLanguage);
+        Single<BodyResponse<Boolean>> head404(@HeaderParam("accept-language") String acceptLanguage);
     }
 
     /**
@@ -98,7 +98,7 @@ public final class HttpSuccessInner {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<Void, Boolean>> head200WithRestResponseAsync() {
+    public Single<BodyResponse<Boolean>> head200WithRestResponseAsync() {
         return service.head200(this.client.acceptLanguage());
     }
 
@@ -109,15 +109,7 @@ public final class HttpSuccessInner {
      */
     public Maybe<Boolean> head200Async() {
         return head200WithRestResponseAsync()
-            .flatMapMaybe(new Function<RestResponse<Void, Boolean>, Maybe<Boolean>>() {
-                public Maybe<Boolean> apply(RestResponse<Void, Boolean> restResponse) {
-                    if (restResponse.body() == null) {
-                        return Maybe.empty();
-                    } else {
-                        return Maybe.just(restResponse.body());
-                    }
-                }
-            });
+            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -147,7 +139,7 @@ public final class HttpSuccessInner {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<Void, Boolean>> head204WithRestResponseAsync() {
+    public Single<BodyResponse<Boolean>> head204WithRestResponseAsync() {
         return service.head204(this.client.acceptLanguage());
     }
 
@@ -158,15 +150,7 @@ public final class HttpSuccessInner {
      */
     public Maybe<Boolean> head204Async() {
         return head204WithRestResponseAsync()
-            .flatMapMaybe(new Function<RestResponse<Void, Boolean>, Maybe<Boolean>>() {
-                public Maybe<Boolean> apply(RestResponse<Void, Boolean> restResponse) {
-                    if (restResponse.body() == null) {
-                        return Maybe.empty();
-                    } else {
-                        return Maybe.just(restResponse.body());
-                    }
-                }
-            });
+            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -196,7 +180,7 @@ public final class HttpSuccessInner {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<Void, Boolean>> head404WithRestResponseAsync() {
+    public Single<BodyResponse<Boolean>> head404WithRestResponseAsync() {
         return service.head404(this.client.acceptLanguage());
     }
 
@@ -207,14 +191,6 @@ public final class HttpSuccessInner {
      */
     public Maybe<Boolean> head404Async() {
         return head404WithRestResponseAsync()
-            .flatMapMaybe(new Function<RestResponse<Void, Boolean>, Maybe<Boolean>>() {
-                public Maybe<Boolean> apply(RestResponse<Void, Boolean> restResponse) {
-                    if (restResponse.body() == null) {
-                        return Maybe.empty();
-                    } else {
-                        return Maybe.just(restResponse.body());
-                    }
-                }
-            });
+            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 }

@@ -10,9 +10,10 @@
 
 package fixtures.bodycomplex;
 
-import com.microsoft.rest.v2.RestResponse;
+import com.microsoft.rest.v2.BodyResponse;
 import com.microsoft.rest.v2.ServiceCallback;
 import com.microsoft.rest.v2.ServiceFuture;
+import com.microsoft.rest.v2.VoidResponse;
 import fixtures.bodycomplex.models.ErrorException;
 import fixtures.bodycomplex.models.Siamese;
 import io.reactivex.Completable;
@@ -48,7 +49,7 @@ public interface Inheritances {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, Siamese>> getValidWithRestResponseAsync();
+    Single<BodyResponse<Siamese>> getValidWithRestResponseAsync();
 
     /**
      * Get complex types that extend others.
@@ -84,7 +85,7 @@ public interface Inheritances {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, Void>> putValidWithRestResponseAsync(@NonNull Siamese complexBody);
+    Single<VoidResponse> putValidWithRestResponseAsync(@NonNull Siamese complexBody);
 
     /**
      * Put complex types that extend others.

@@ -10,9 +10,10 @@
 
 package fixtures.bodydate;
 
-import com.microsoft.rest.v2.RestResponse;
+import com.microsoft.rest.v2.BodyResponse;
 import com.microsoft.rest.v2.ServiceCallback;
 import com.microsoft.rest.v2.ServiceFuture;
+import com.microsoft.rest.v2.VoidResponse;
 import fixtures.bodydate.models.ErrorException;
 import io.reactivex.Completable;
 import io.reactivex.Maybe;
@@ -48,7 +49,7 @@ public interface Dates {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, LocalDate>> getNullWithRestResponseAsync();
+    Single<BodyResponse<LocalDate>> getNullWithRestResponseAsync();
 
     /**
      * Get null date value.
@@ -80,7 +81,7 @@ public interface Dates {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, LocalDate>> getInvalidDateWithRestResponseAsync();
+    Single<BodyResponse<LocalDate>> getInvalidDateWithRestResponseAsync();
 
     /**
      * Get invalid date value.
@@ -112,7 +113,7 @@ public interface Dates {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, LocalDate>> getOverflowDateWithRestResponseAsync();
+    Single<BodyResponse<LocalDate>> getOverflowDateWithRestResponseAsync();
 
     /**
      * Get overflow date value.
@@ -144,7 +145,7 @@ public interface Dates {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, LocalDate>> getUnderflowDateWithRestResponseAsync();
+    Single<BodyResponse<LocalDate>> getUnderflowDateWithRestResponseAsync();
 
     /**
      * Get underflow date value.
@@ -180,7 +181,7 @@ public interface Dates {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, Void>> putMaxDateWithRestResponseAsync(@NonNull LocalDate dateBody);
+    Single<VoidResponse> putMaxDateWithRestResponseAsync(@NonNull LocalDate dateBody);
 
     /**
      * Put max date value 9999-12-31.
@@ -214,7 +215,7 @@ public interface Dates {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, LocalDate>> getMaxDateWithRestResponseAsync();
+    Single<BodyResponse<LocalDate>> getMaxDateWithRestResponseAsync();
 
     /**
      * Get max date value 9999-12-31.
@@ -250,7 +251,7 @@ public interface Dates {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, Void>> putMinDateWithRestResponseAsync(@NonNull LocalDate dateBody);
+    Single<VoidResponse> putMinDateWithRestResponseAsync(@NonNull LocalDate dateBody);
 
     /**
      * Put min date value 0000-01-01.
@@ -284,7 +285,7 @@ public interface Dates {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, LocalDate>> getMinDateWithRestResponseAsync();
+    Single<BodyResponse<LocalDate>> getMinDateWithRestResponseAsync();
 
     /**
      * Get min date value 0000-01-01.

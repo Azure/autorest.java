@@ -14,8 +14,8 @@ import com.microsoft.azure.v2.AzureProxy;
 import com.microsoft.azure.v2.CloudException;
 import com.microsoft.azure.v2.OperationStatus;
 import com.microsoft.azure.v2.util.ServiceFutureUtil;
+import com.microsoft.rest.v2.BodyResponse;
 import com.microsoft.rest.v2.OperationDescription;
-import com.microsoft.rest.v2.RestResponse;
 import com.microsoft.rest.v2.ServiceCallback;
 import com.microsoft.rest.v2.ServiceFuture;
 import com.microsoft.rest.v2.Validator;
@@ -28,9 +28,9 @@ import com.microsoft.rest.v2.annotations.PUT;
 import com.microsoft.rest.v2.annotations.ResumeOperation;
 import com.microsoft.rest.v2.annotations.UnexpectedResponseExceptionType;
 import fixtures.lro.LROsCustomHeaders;
-import fixtures.lro.models.LROsCustomHeaderPost202Retry200Headers;
-import fixtures.lro.models.LROsCustomHeaderPostAsyncRetrySucceededHeaders;
-import fixtures.lro.models.LROsCustomHeaderPutAsyncRetrySucceededHeaders;
+import fixtures.lro.models.LROsCustomHeaderPost202Retry200Response;
+import fixtures.lro.models.LROsCustomHeaderPostAsyncRetrySucceededResponse;
+import fixtures.lro.models.LROsCustomHeaderPutAsyncRetrySucceededResponse;
 import fixtures.lro.models.Product;
 import io.reactivex.Completable;
 import io.reactivex.Maybe;
@@ -77,7 +77,7 @@ public final class LROsCustomHeadersImpl implements LROsCustomHeaders {
         @PUT("lro/customheader/putasync/retry/succeeded")
         @ExpectedResponses({200, 202, 204})
         @UnexpectedResponseExceptionType(CloudException.class)
-        Single<RestResponse<LROsCustomHeaderPutAsyncRetrySucceededHeaders, Product>> putAsyncRetrySucceeded(@BodyParam("application/json; charset=utf-8") Product product, @HeaderParam("accept-language") String acceptLanguage);
+        Single<LROsCustomHeaderPutAsyncRetrySucceededResponse> putAsyncRetrySucceeded(@BodyParam("application/json; charset=utf-8") Product product, @HeaderParam("accept-language") String acceptLanguage);
 
         @PUT("lro/customheader/putasync/retry/succeeded")
         @ExpectedResponses({200, 202, 204})
@@ -93,7 +93,7 @@ public final class LROsCustomHeadersImpl implements LROsCustomHeaders {
         @PUT("lro/customheader/put/201/creating/succeeded/200")
         @ExpectedResponses({200, 201, 202, 204})
         @UnexpectedResponseExceptionType(CloudException.class)
-        Single<RestResponse<Void, Product>> put201CreatingSucceeded200(@BodyParam("application/json; charset=utf-8") Product product, @HeaderParam("accept-language") String acceptLanguage);
+        Single<BodyResponse<Product>> put201CreatingSucceeded200(@BodyParam("application/json; charset=utf-8") Product product, @HeaderParam("accept-language") String acceptLanguage);
 
         @PUT("lro/customheader/put/201/creating/succeeded/200")
         @ExpectedResponses({200, 201, 202, 204})
@@ -109,7 +109,7 @@ public final class LROsCustomHeadersImpl implements LROsCustomHeaders {
         @POST("lro/customheader/post/202/retry/200")
         @ExpectedResponses({200, 202, 204})
         @UnexpectedResponseExceptionType(CloudException.class)
-        Single<RestResponse<LROsCustomHeaderPost202Retry200Headers, Void>> post202Retry200(@BodyParam("application/json; charset=utf-8") Product product, @HeaderParam("accept-language") String acceptLanguage);
+        Single<LROsCustomHeaderPost202Retry200Response> post202Retry200(@BodyParam("application/json; charset=utf-8") Product product, @HeaderParam("accept-language") String acceptLanguage);
 
         @POST("lro/customheader/post/202/retry/200")
         @ExpectedResponses({200, 202, 204})
@@ -125,7 +125,7 @@ public final class LROsCustomHeadersImpl implements LROsCustomHeaders {
         @POST("lro/customheader/postasync/retry/succeeded")
         @ExpectedResponses({200, 202, 204})
         @UnexpectedResponseExceptionType(CloudException.class)
-        Single<RestResponse<LROsCustomHeaderPostAsyncRetrySucceededHeaders, Void>> postAsyncRetrySucceeded(@BodyParam("application/json; charset=utf-8") Product product, @HeaderParam("accept-language") String acceptLanguage);
+        Single<LROsCustomHeaderPostAsyncRetrySucceededResponse> postAsyncRetrySucceeded(@BodyParam("application/json; charset=utf-8") Product product, @HeaderParam("accept-language") String acceptLanguage);
 
         @POST("lro/customheader/postasync/retry/succeeded")
         @ExpectedResponses({200, 202, 204})
@@ -229,7 +229,7 @@ public final class LROsCustomHeadersImpl implements LROsCustomHeaders {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<LROsCustomHeaderPutAsyncRetrySucceededHeaders, Product>> putAsyncRetrySucceededWithRestResponseAsync() {
+    public Single<LROsCustomHeaderPutAsyncRetrySucceededResponse> putAsyncRetrySucceededWithRestResponseAsync() {
         final Product product = null;
         return service.putAsyncRetrySucceeded(product, this.client.acceptLanguage());
     }
@@ -241,15 +241,7 @@ public final class LROsCustomHeadersImpl implements LROsCustomHeaders {
      */
     public Maybe<Product> putAsyncRetrySucceededAsync() {
         return putAsyncRetrySucceededWithRestResponseAsync()
-            .flatMapMaybe(new Function<RestResponse<LROsCustomHeaderPutAsyncRetrySucceededHeaders, Product>, Maybe<Product>>() {
-                public Maybe<Product> apply(RestResponse<LROsCustomHeaderPutAsyncRetrySucceededHeaders, Product> restResponse) {
-                    if (restResponse.body() == null) {
-                        return Maybe.empty();
-                    } else {
-                        return Maybe.just(restResponse.body());
-                    }
-                }
-            });
+            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -284,7 +276,7 @@ public final class LROsCustomHeadersImpl implements LROsCustomHeaders {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<LROsCustomHeaderPutAsyncRetrySucceededHeaders, Product>> putAsyncRetrySucceededWithRestResponseAsync(Product product) {
+    public Single<LROsCustomHeaderPutAsyncRetrySucceededResponse> putAsyncRetrySucceededWithRestResponseAsync(Product product) {
         Validator.validate(product);
         return service.putAsyncRetrySucceeded(product, this.client.acceptLanguage());
     }
@@ -298,15 +290,7 @@ public final class LROsCustomHeadersImpl implements LROsCustomHeaders {
      */
     public Maybe<Product> putAsyncRetrySucceededAsync(Product product) {
         return putAsyncRetrySucceededWithRestResponseAsync(product)
-            .flatMapMaybe(new Function<RestResponse<LROsCustomHeaderPutAsyncRetrySucceededHeaders, Product>, Maybe<Product>>() {
-                public Maybe<Product> apply(RestResponse<LROsCustomHeaderPutAsyncRetrySucceededHeaders, Product> restResponse) {
-                    if (restResponse.body() == null) {
-                        return Maybe.empty();
-                    } else {
-                        return Maybe.just(restResponse.body());
-                    }
-                }
-            });
+            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -418,7 +402,7 @@ public final class LROsCustomHeadersImpl implements LROsCustomHeaders {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<Void, Product>> put201CreatingSucceeded200WithRestResponseAsync() {
+    public Single<BodyResponse<Product>> put201CreatingSucceeded200WithRestResponseAsync() {
         final Product product = null;
         return service.put201CreatingSucceeded200(product, this.client.acceptLanguage());
     }
@@ -430,15 +414,7 @@ public final class LROsCustomHeadersImpl implements LROsCustomHeaders {
      */
     public Maybe<Product> put201CreatingSucceeded200Async() {
         return put201CreatingSucceeded200WithRestResponseAsync()
-            .flatMapMaybe(new Function<RestResponse<Void, Product>, Maybe<Product>>() {
-                public Maybe<Product> apply(RestResponse<Void, Product> restResponse) {
-                    if (restResponse.body() == null) {
-                        return Maybe.empty();
-                    } else {
-                        return Maybe.just(restResponse.body());
-                    }
-                }
-            });
+            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -473,7 +449,7 @@ public final class LROsCustomHeadersImpl implements LROsCustomHeaders {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<Void, Product>> put201CreatingSucceeded200WithRestResponseAsync(Product product) {
+    public Single<BodyResponse<Product>> put201CreatingSucceeded200WithRestResponseAsync(Product product) {
         Validator.validate(product);
         return service.put201CreatingSucceeded200(product, this.client.acceptLanguage());
     }
@@ -487,15 +463,7 @@ public final class LROsCustomHeadersImpl implements LROsCustomHeaders {
      */
     public Maybe<Product> put201CreatingSucceeded200Async(Product product) {
         return put201CreatingSucceeded200WithRestResponseAsync(product)
-            .flatMapMaybe(new Function<RestResponse<Void, Product>, Maybe<Product>>() {
-                public Maybe<Product> apply(RestResponse<Void, Product> restResponse) {
-                    if (restResponse.body() == null) {
-                        return Maybe.empty();
-                    } else {
-                        return Maybe.just(restResponse.body());
-                    }
-                }
-            });
+            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -604,7 +572,7 @@ public final class LROsCustomHeadersImpl implements LROsCustomHeaders {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<LROsCustomHeaderPost202Retry200Headers, Void>> post202Retry200WithRestResponseAsync() {
+    public Single<LROsCustomHeaderPost202Retry200Response> post202Retry200WithRestResponseAsync() {
         final Product product = null;
         return service.post202Retry200(product, this.client.acceptLanguage());
     }
@@ -650,7 +618,7 @@ public final class LROsCustomHeadersImpl implements LROsCustomHeaders {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<LROsCustomHeaderPost202Retry200Headers, Void>> post202Retry200WithRestResponseAsync(Product product) {
+    public Single<LROsCustomHeaderPost202Retry200Response> post202Retry200WithRestResponseAsync(Product product) {
         Validator.validate(product);
         return service.post202Retry200(product, this.client.acceptLanguage());
     }
@@ -773,7 +741,7 @@ public final class LROsCustomHeadersImpl implements LROsCustomHeaders {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<LROsCustomHeaderPostAsyncRetrySucceededHeaders, Void>> postAsyncRetrySucceededWithRestResponseAsync() {
+    public Single<LROsCustomHeaderPostAsyncRetrySucceededResponse> postAsyncRetrySucceededWithRestResponseAsync() {
         final Product product = null;
         return service.postAsyncRetrySucceeded(product, this.client.acceptLanguage());
     }
@@ -819,7 +787,7 @@ public final class LROsCustomHeadersImpl implements LROsCustomHeaders {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<LROsCustomHeaderPostAsyncRetrySucceededHeaders, Void>> postAsyncRetrySucceededWithRestResponseAsync(Product product) {
+    public Single<LROsCustomHeaderPostAsyncRetrySucceededResponse> postAsyncRetrySucceededWithRestResponseAsync(Product product) {
         Validator.validate(product);
         return service.postAsyncRetrySucceeded(product, this.client.acceptLanguage());
     }

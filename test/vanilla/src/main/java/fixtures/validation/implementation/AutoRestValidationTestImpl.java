@@ -10,12 +10,13 @@
 
 package fixtures.validation.implementation;
 
+import com.microsoft.rest.v2.BodyResponse;
 import com.microsoft.rest.v2.RestProxy;
-import com.microsoft.rest.v2.RestResponse;
 import com.microsoft.rest.v2.ServiceCallback;
 import com.microsoft.rest.v2.ServiceClient;
 import com.microsoft.rest.v2.ServiceFuture;
 import com.microsoft.rest.v2.Validator;
+import com.microsoft.rest.v2.VoidResponse;
 import com.microsoft.rest.v2.annotations.BodyParam;
 import com.microsoft.rest.v2.annotations.ExpectedResponses;
 import com.microsoft.rest.v2.annotations.GET;
@@ -120,20 +121,20 @@ public final class AutoRestValidationTestImpl extends ServiceClient implements A
         @GET("fakepath/{subscriptionId}/{resourceGroupName}/{id}")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<RestResponse<Void, Product>> validationOfMethodParameters(@PathParam("subscriptionId") String subscriptionId, @PathParam("resourceGroupName") String resourceGroupName, @PathParam("id") int id, @QueryParam("apiVersion") String apiVersion);
+        Single<BodyResponse<Product>> validationOfMethodParameters(@PathParam("subscriptionId") String subscriptionId, @PathParam("resourceGroupName") String resourceGroupName, @PathParam("id") int id, @QueryParam("apiVersion") String apiVersion);
 
         @PUT("fakepath/{subscriptionId}/{resourceGroupName}/{id}")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<RestResponse<Void, Product>> validationOfBody(@PathParam("subscriptionId") String subscriptionId, @PathParam("resourceGroupName") String resourceGroupName, @PathParam("id") int id, @BodyParam("application/json; charset=utf-8") Product body, @QueryParam("apiVersion") String apiVersion);
+        Single<BodyResponse<Product>> validationOfBody(@PathParam("subscriptionId") String subscriptionId, @PathParam("resourceGroupName") String resourceGroupName, @PathParam("id") int id, @BodyParam("application/json; charset=utf-8") Product body, @QueryParam("apiVersion") String apiVersion);
 
         @GET("validation/constantsInPath/{constantParam}/value")
         @ExpectedResponses({200})
-        Single<RestResponse<Void, Void>> getWithConstantInPath(@PathParam("constantParam") String constantParam);
+        Single<VoidResponse> getWithConstantInPath(@PathParam("constantParam") String constantParam);
 
         @POST("validation/constantsInPath/{constantParam}/value")
         @ExpectedResponses({200})
-        Single<RestResponse<Void, Product>> postWithConstantInBody(@PathParam("constantParam") String constantParam, @BodyParam("application/json; charset=utf-8") Product body);
+        Single<BodyResponse<Product>> postWithConstantInBody(@PathParam("constantParam") String constantParam, @BodyParam("application/json; charset=utf-8") Product body);
     }
 
     /**
@@ -171,7 +172,7 @@ public final class AutoRestValidationTestImpl extends ServiceClient implements A
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<Void, Product>> validationOfMethodParametersWithRestResponseAsync(@NonNull String resourceGroupName, @NonNull int id) {
+    public Single<BodyResponse<Product>> validationOfMethodParametersWithRestResponseAsync(@NonNull String resourceGroupName, @NonNull int id) {
         if (this.subscriptionId() == null) {
             throw new IllegalArgumentException("Parameter this.subscriptionId() is required and cannot be null.");
         }
@@ -194,15 +195,7 @@ public final class AutoRestValidationTestImpl extends ServiceClient implements A
      */
     public Maybe<Product> validationOfMethodParametersAsync(@NonNull String resourceGroupName, @NonNull int id) {
         return validationOfMethodParametersWithRestResponseAsync(resourceGroupName, id)
-            .flatMapMaybe(new Function<RestResponse<Void, Product>, Maybe<Product>>() {
-                public Maybe<Product> apply(RestResponse<Void, Product> restResponse) {
-                    if (restResponse.body() == null) {
-                        return Maybe.empty();
-                    } else {
-                        return Maybe.just(restResponse.body());
-                    }
-                }
-            });
+            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -240,7 +233,7 @@ public final class AutoRestValidationTestImpl extends ServiceClient implements A
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<Void, Product>> validationOfBodyWithRestResponseAsync(@NonNull String resourceGroupName, @NonNull int id) {
+    public Single<BodyResponse<Product>> validationOfBodyWithRestResponseAsync(@NonNull String resourceGroupName, @NonNull int id) {
         if (this.subscriptionId() == null) {
             throw new IllegalArgumentException("Parameter this.subscriptionId() is required and cannot be null.");
         }
@@ -264,15 +257,7 @@ public final class AutoRestValidationTestImpl extends ServiceClient implements A
      */
     public Maybe<Product> validationOfBodyAsync(@NonNull String resourceGroupName, @NonNull int id) {
         return validationOfBodyWithRestResponseAsync(resourceGroupName, id)
-            .flatMapMaybe(new Function<RestResponse<Void, Product>, Maybe<Product>>() {
-                public Maybe<Product> apply(RestResponse<Void, Product> restResponse) {
-                    if (restResponse.body() == null) {
-                        return Maybe.empty();
-                    } else {
-                        return Maybe.just(restResponse.body());
-                    }
-                }
-            });
+            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -313,7 +298,7 @@ public final class AutoRestValidationTestImpl extends ServiceClient implements A
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<Void, Product>> validationOfBodyWithRestResponseAsync(@NonNull String resourceGroupName, @NonNull int id, Product body) {
+    public Single<BodyResponse<Product>> validationOfBodyWithRestResponseAsync(@NonNull String resourceGroupName, @NonNull int id, Product body) {
         if (this.subscriptionId() == null) {
             throw new IllegalArgumentException("Parameter this.subscriptionId() is required and cannot be null.");
         }
@@ -338,15 +323,7 @@ public final class AutoRestValidationTestImpl extends ServiceClient implements A
      */
     public Maybe<Product> validationOfBodyAsync(@NonNull String resourceGroupName, @NonNull int id, Product body) {
         return validationOfBodyWithRestResponseAsync(resourceGroupName, id, body)
-            .flatMapMaybe(new Function<RestResponse<Void, Product>, Maybe<Product>>() {
-                public Maybe<Product> apply(RestResponse<Void, Product> restResponse) {
-                    if (restResponse.body() == null) {
-                        return Maybe.empty();
-                    } else {
-                        return Maybe.just(restResponse.body());
-                    }
-                }
-            });
+            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -368,7 +345,7 @@ public final class AutoRestValidationTestImpl extends ServiceClient implements A
     /**
      * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<Void, Void>> getWithConstantInPathWithRestResponseAsync() {
+    public Single<VoidResponse> getWithConstantInPathWithRestResponseAsync() {
         final String constantParam = "constant";
         return service.getWithConstantInPath(constantParam);
     }
@@ -401,7 +378,7 @@ public final class AutoRestValidationTestImpl extends ServiceClient implements A
     /**
      * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<Void, Product>> postWithConstantInBodyWithRestResponseAsync() {
+    public Single<BodyResponse<Product>> postWithConstantInBodyWithRestResponseAsync() {
         final String constantParam = "constant";
         final Product body = null;
         return service.postWithConstantInBody(constantParam, body);
@@ -412,15 +389,7 @@ public final class AutoRestValidationTestImpl extends ServiceClient implements A
      */
     public Maybe<Product> postWithConstantInBodyAsync() {
         return postWithConstantInBodyWithRestResponseAsync()
-            .flatMapMaybe(new Function<RestResponse<Void, Product>, Maybe<Product>>() {
-                public Maybe<Product> apply(RestResponse<Void, Product> restResponse) {
-                    if (restResponse.body() == null) {
-                        return Maybe.empty();
-                    } else {
-                        return Maybe.just(restResponse.body());
-                    }
-                }
-            });
+            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -448,7 +417,7 @@ public final class AutoRestValidationTestImpl extends ServiceClient implements A
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<Void, Product>> postWithConstantInBodyWithRestResponseAsync(Product body) {
+    public Single<BodyResponse<Product>> postWithConstantInBodyWithRestResponseAsync(Product body) {
         Validator.validate(body);
         final String constantParam = "constant";
         return service.postWithConstantInBody(constantParam, body);
@@ -461,14 +430,6 @@ public final class AutoRestValidationTestImpl extends ServiceClient implements A
      */
     public Maybe<Product> postWithConstantInBodyAsync(Product body) {
         return postWithConstantInBodyWithRestResponseAsync(body)
-            .flatMapMaybe(new Function<RestResponse<Void, Product>, Maybe<Product>>() {
-                public Maybe<Product> apply(RestResponse<Void, Product> restResponse) {
-                    if (restResponse.body() == null) {
-                        return Maybe.empty();
-                    } else {
-                        return Maybe.just(restResponse.body());
-                    }
-                }
-            });
+            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 }

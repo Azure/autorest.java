@@ -14,10 +14,11 @@ import com.microsoft.azure.v2.AzureEnvironment;
 import com.microsoft.azure.v2.AzureProxy;
 import com.microsoft.azure.v2.AzureServiceClient;
 import com.microsoft.azure.v2.Resource;
-import com.microsoft.rest.v2.RestResponse;
+import com.microsoft.rest.v2.BodyResponse;
 import com.microsoft.rest.v2.ServiceCallback;
 import com.microsoft.rest.v2.ServiceFuture;
 import com.microsoft.rest.v2.Validator;
+import com.microsoft.rest.v2.VoidResponse;
 import com.microsoft.rest.v2.annotations.BodyParam;
 import com.microsoft.rest.v2.annotations.ExpectedResponses;
 import com.microsoft.rest.v2.annotations.GET;
@@ -177,32 +178,32 @@ public final class AutoRestResourceFlatteningTestServiceImpl extends AzureServic
         @PUT("azure/resource-flatten/array")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<RestResponse<Void, Void>> putArray(@BodyParam("application/json; charset=utf-8") List<Resource> resourceArray, @HeaderParam("accept-language") String acceptLanguage);
+        Single<VoidResponse> putArray(@BodyParam("application/json; charset=utf-8") List<Resource> resourceArray, @HeaderParam("accept-language") String acceptLanguage);
 
         @GET("azure/resource-flatten/array")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<RestResponse<Void, List<FlattenedProduct>>> getArray(@HeaderParam("accept-language") String acceptLanguage);
+        Single<BodyResponse<List<FlattenedProduct>>> getArray(@HeaderParam("accept-language") String acceptLanguage);
 
         @PUT("azure/resource-flatten/dictionary")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<RestResponse<Void, Void>> putDictionary(@BodyParam("application/json; charset=utf-8") Map<String, FlattenedProduct> resourceDictionary, @HeaderParam("accept-language") String acceptLanguage);
+        Single<VoidResponse> putDictionary(@BodyParam("application/json; charset=utf-8") Map<String, FlattenedProduct> resourceDictionary, @HeaderParam("accept-language") String acceptLanguage);
 
         @GET("azure/resource-flatten/dictionary")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<RestResponse<Void, Map<String, FlattenedProduct>>> getDictionary(@HeaderParam("accept-language") String acceptLanguage);
+        Single<BodyResponse<Map<String, FlattenedProduct>>> getDictionary(@HeaderParam("accept-language") String acceptLanguage);
 
         @PUT("azure/resource-flatten/resourcecollection")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<RestResponse<Void, Void>> putResourceCollection(@BodyParam("application/json; charset=utf-8") ResourceCollection resourceComplexObject, @HeaderParam("accept-language") String acceptLanguage);
+        Single<VoidResponse> putResourceCollection(@BodyParam("application/json; charset=utf-8") ResourceCollection resourceComplexObject, @HeaderParam("accept-language") String acceptLanguage);
 
         @GET("azure/resource-flatten/resourcecollection")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<RestResponse<Void, ResourceCollection>> getResourceCollection(@HeaderParam("accept-language") String acceptLanguage);
+        Single<BodyResponse<ResourceCollection>> getResourceCollection(@HeaderParam("accept-language") String acceptLanguage);
     }
 
     /**
@@ -231,7 +232,7 @@ public final class AutoRestResourceFlatteningTestServiceImpl extends AzureServic
      *
      * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<Void, Void>> putArrayWithRestResponseAsync() {
+    public Single<VoidResponse> putArrayWithRestResponseAsync() {
         final List<Resource> resourceArray = null;
         return service.putArray(resourceArray, this.acceptLanguage());
     }
@@ -277,7 +278,7 @@ public final class AutoRestResourceFlatteningTestServiceImpl extends AzureServic
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<Void, Void>> putArrayWithRestResponseAsync(List<Resource> resourceArray) {
+    public Single<VoidResponse> putArrayWithRestResponseAsync(List<Resource> resourceArray) {
         Validator.validate(resourceArray);
         return service.putArray(resourceArray, this.acceptLanguage());
     }
@@ -321,7 +322,7 @@ public final class AutoRestResourceFlatteningTestServiceImpl extends AzureServic
      *
      * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<Void, List<FlattenedProduct>>> getArrayWithRestResponseAsync() {
+    public Single<BodyResponse<List<FlattenedProduct>>> getArrayWithRestResponseAsync() {
         return service.getArray(this.acceptLanguage());
     }
 
@@ -332,15 +333,7 @@ public final class AutoRestResourceFlatteningTestServiceImpl extends AzureServic
      */
     public Maybe<List<FlattenedProduct>> getArrayAsync() {
         return getArrayWithRestResponseAsync()
-            .flatMapMaybe(new Function<RestResponse<Void, List<FlattenedProduct>>, Maybe<List<FlattenedProduct>>>() {
-                public Maybe<List<FlattenedProduct>> apply(RestResponse<Void, List<FlattenedProduct>> restResponse) {
-                    if (restResponse.body() == null) {
-                        return Maybe.empty();
-                    } else {
-                        return Maybe.just(restResponse.body());
-                    }
-                }
-            });
+            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -369,7 +362,7 @@ public final class AutoRestResourceFlatteningTestServiceImpl extends AzureServic
      *
      * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<Void, Void>> putDictionaryWithRestResponseAsync() {
+    public Single<VoidResponse> putDictionaryWithRestResponseAsync() {
         final Map<String, FlattenedProduct> resourceDictionary = null;
         return service.putDictionary(resourceDictionary, this.acceptLanguage());
     }
@@ -415,7 +408,7 @@ public final class AutoRestResourceFlatteningTestServiceImpl extends AzureServic
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<Void, Void>> putDictionaryWithRestResponseAsync(Map<String, FlattenedProduct> resourceDictionary) {
+    public Single<VoidResponse> putDictionaryWithRestResponseAsync(Map<String, FlattenedProduct> resourceDictionary) {
         Validator.validate(resourceDictionary);
         return service.putDictionary(resourceDictionary, this.acceptLanguage());
     }
@@ -459,7 +452,7 @@ public final class AutoRestResourceFlatteningTestServiceImpl extends AzureServic
      *
      * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<Void, Map<String, FlattenedProduct>>> getDictionaryWithRestResponseAsync() {
+    public Single<BodyResponse<Map<String, FlattenedProduct>>> getDictionaryWithRestResponseAsync() {
         return service.getDictionary(this.acceptLanguage());
     }
 
@@ -470,15 +463,7 @@ public final class AutoRestResourceFlatteningTestServiceImpl extends AzureServic
      */
     public Maybe<Map<String, FlattenedProduct>> getDictionaryAsync() {
         return getDictionaryWithRestResponseAsync()
-            .flatMapMaybe(new Function<RestResponse<Void, Map<String, FlattenedProduct>>, Maybe<Map<String, FlattenedProduct>>>() {
-                public Maybe<Map<String, FlattenedProduct>> apply(RestResponse<Void, Map<String, FlattenedProduct>> restResponse) {
-                    if (restResponse.body() == null) {
-                        return Maybe.empty();
-                    } else {
-                        return Maybe.just(restResponse.body());
-                    }
-                }
-            });
+            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -507,7 +492,7 @@ public final class AutoRestResourceFlatteningTestServiceImpl extends AzureServic
      *
      * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<Void, Void>> putResourceCollectionWithRestResponseAsync() {
+    public Single<VoidResponse> putResourceCollectionWithRestResponseAsync() {
         final ResourceCollection resourceComplexObject = null;
         return service.putResourceCollection(resourceComplexObject, this.acceptLanguage());
     }
@@ -553,7 +538,7 @@ public final class AutoRestResourceFlatteningTestServiceImpl extends AzureServic
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<Void, Void>> putResourceCollectionWithRestResponseAsync(ResourceCollection resourceComplexObject) {
+    public Single<VoidResponse> putResourceCollectionWithRestResponseAsync(ResourceCollection resourceComplexObject) {
         Validator.validate(resourceComplexObject);
         return service.putResourceCollection(resourceComplexObject, this.acceptLanguage());
     }
@@ -597,7 +582,7 @@ public final class AutoRestResourceFlatteningTestServiceImpl extends AzureServic
      *
      * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<Void, ResourceCollection>> getResourceCollectionWithRestResponseAsync() {
+    public Single<BodyResponse<ResourceCollection>> getResourceCollectionWithRestResponseAsync() {
         return service.getResourceCollection(this.acceptLanguage());
     }
 
@@ -608,14 +593,6 @@ public final class AutoRestResourceFlatteningTestServiceImpl extends AzureServic
      */
     public Maybe<ResourceCollection> getResourceCollectionAsync() {
         return getResourceCollectionWithRestResponseAsync()
-            .flatMapMaybe(new Function<RestResponse<Void, ResourceCollection>, Maybe<ResourceCollection>>() {
-                public Maybe<ResourceCollection> apply(RestResponse<Void, ResourceCollection> restResponse) {
-                    if (restResponse.body() == null) {
-                        return Maybe.empty();
-                    } else {
-                        return Maybe.just(restResponse.body());
-                    }
-                }
-            });
+            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 }

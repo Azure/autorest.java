@@ -11,7 +11,6 @@
 package fixtures.http.implementation;
 
 import com.microsoft.rest.v2.RestProxy;
-import com.microsoft.rest.v2.RestResponse;
 import com.microsoft.rest.v2.ServiceCallback;
 import com.microsoft.rest.v2.ServiceFuture;
 import com.microsoft.rest.v2.annotations.BodyParam;
@@ -26,21 +25,21 @@ import com.microsoft.rest.v2.annotations.PUT;
 import com.microsoft.rest.v2.annotations.UnexpectedResponseExceptionType;
 import fixtures.http.HttpRedirects;
 import fixtures.http.models.ErrorException;
-import fixtures.http.models.HttpRedirectsDelete307Headers;
-import fixtures.http.models.HttpRedirectsGet300Headers;
-import fixtures.http.models.HttpRedirectsGet301Headers;
-import fixtures.http.models.HttpRedirectsGet302Headers;
-import fixtures.http.models.HttpRedirectsGet307Headers;
-import fixtures.http.models.HttpRedirectsHead300Headers;
-import fixtures.http.models.HttpRedirectsHead301Headers;
-import fixtures.http.models.HttpRedirectsHead302Headers;
-import fixtures.http.models.HttpRedirectsHead307Headers;
-import fixtures.http.models.HttpRedirectsPatch302Headers;
-import fixtures.http.models.HttpRedirectsPatch307Headers;
-import fixtures.http.models.HttpRedirectsPost303Headers;
-import fixtures.http.models.HttpRedirectsPost307Headers;
-import fixtures.http.models.HttpRedirectsPut301Headers;
-import fixtures.http.models.HttpRedirectsPut307Headers;
+import fixtures.http.models.HttpRedirectsDelete307Response;
+import fixtures.http.models.HttpRedirectsGet300Response;
+import fixtures.http.models.HttpRedirectsGet301Response;
+import fixtures.http.models.HttpRedirectsGet302Response;
+import fixtures.http.models.HttpRedirectsGet307Response;
+import fixtures.http.models.HttpRedirectsHead300Response;
+import fixtures.http.models.HttpRedirectsHead301Response;
+import fixtures.http.models.HttpRedirectsHead302Response;
+import fixtures.http.models.HttpRedirectsHead307Response;
+import fixtures.http.models.HttpRedirectsPatch302Response;
+import fixtures.http.models.HttpRedirectsPatch307Response;
+import fixtures.http.models.HttpRedirectsPost303Response;
+import fixtures.http.models.HttpRedirectsPost307Response;
+import fixtures.http.models.HttpRedirectsPut301Response;
+import fixtures.http.models.HttpRedirectsPut307Response;
 import io.reactivex.Completable;
 import io.reactivex.Maybe;
 import io.reactivex.Single;
@@ -82,77 +81,77 @@ public final class HttpRedirectsImpl implements HttpRedirects {
         @HEAD("http/redirect/300")
         @ExpectedResponses({200, 300})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<RestResponse<HttpRedirectsHead300Headers, Void>> head300();
+        Single<HttpRedirectsHead300Response> head300();
 
         @GET("http/redirect/300")
         @ExpectedResponses({200, 300})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<RestResponse<HttpRedirectsGet300Headers, List<String>>> get300();
+        Single<HttpRedirectsGet300Response> get300();
 
         @HEAD("http/redirect/301")
         @ExpectedResponses({200, 301})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<RestResponse<HttpRedirectsHead301Headers, Void>> head301();
+        Single<HttpRedirectsHead301Response> head301();
 
         @GET("http/redirect/301")
         @ExpectedResponses({200, 301})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<RestResponse<HttpRedirectsGet301Headers, Void>> get301();
+        Single<HttpRedirectsGet301Response> get301();
 
         @PUT("http/redirect/301")
         @ExpectedResponses({301})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<RestResponse<HttpRedirectsPut301Headers, Void>> put301(@BodyParam("application/json; charset=utf-8") Boolean booleanValue);
+        Single<HttpRedirectsPut301Response> put301(@BodyParam("application/json; charset=utf-8") Boolean booleanValue);
 
         @HEAD("http/redirect/302")
         @ExpectedResponses({200, 302})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<RestResponse<HttpRedirectsHead302Headers, Void>> head302();
+        Single<HttpRedirectsHead302Response> head302();
 
         @GET("http/redirect/302")
         @ExpectedResponses({200, 302})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<RestResponse<HttpRedirectsGet302Headers, Void>> get302();
+        Single<HttpRedirectsGet302Response> get302();
 
         @PATCH("http/redirect/302")
         @ExpectedResponses({302})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<RestResponse<HttpRedirectsPatch302Headers, Void>> patch302(@BodyParam("application/json; charset=utf-8") Boolean booleanValue);
+        Single<HttpRedirectsPatch302Response> patch302(@BodyParam("application/json; charset=utf-8") Boolean booleanValue);
 
         @POST("http/redirect/303")
         @ExpectedResponses({200, 303})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<RestResponse<HttpRedirectsPost303Headers, Void>> post303(@BodyParam("application/json; charset=utf-8") Boolean booleanValue);
+        Single<HttpRedirectsPost303Response> post303(@BodyParam("application/json; charset=utf-8") Boolean booleanValue);
 
         @HEAD("http/redirect/307")
         @ExpectedResponses({200, 307})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<RestResponse<HttpRedirectsHead307Headers, Void>> head307();
+        Single<HttpRedirectsHead307Response> head307();
 
         @GET("http/redirect/307")
         @ExpectedResponses({200, 307})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<RestResponse<HttpRedirectsGet307Headers, Void>> get307();
+        Single<HttpRedirectsGet307Response> get307();
 
         @PUT("http/redirect/307")
         @ExpectedResponses({200, 307})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<RestResponse<HttpRedirectsPut307Headers, Void>> put307(@BodyParam("application/json; charset=utf-8") Boolean booleanValue);
+        Single<HttpRedirectsPut307Response> put307(@BodyParam("application/json; charset=utf-8") Boolean booleanValue);
 
         @PATCH("http/redirect/307")
         @ExpectedResponses({200, 307})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<RestResponse<HttpRedirectsPatch307Headers, Void>> patch307(@BodyParam("application/json; charset=utf-8") Boolean booleanValue);
+        Single<HttpRedirectsPatch307Response> patch307(@BodyParam("application/json; charset=utf-8") Boolean booleanValue);
 
         @POST("http/redirect/307")
         @ExpectedResponses({200, 307})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<RestResponse<HttpRedirectsPost307Headers, Void>> post307(@BodyParam("application/json; charset=utf-8") Boolean booleanValue);
+        Single<HttpRedirectsPost307Response> post307(@BodyParam("application/json; charset=utf-8") Boolean booleanValue);
 
         @DELETE("http/redirect/307")
         @ExpectedResponses({200, 307})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<RestResponse<HttpRedirectsDelete307Headers, Void>> delete307(@BodyParam("application/json; charset=utf-8") Boolean booleanValue);
+        Single<HttpRedirectsDelete307Response> delete307(@BodyParam("application/json; charset=utf-8") Boolean booleanValue);
     }
 
     /**
@@ -181,7 +180,7 @@ public final class HttpRedirectsImpl implements HttpRedirects {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<HttpRedirectsHead300Headers, Void>> head300WithRestResponseAsync() {
+    public Single<HttpRedirectsHead300Response> head300WithRestResponseAsync() {
         return service.head300();
     }
 
@@ -222,7 +221,7 @@ public final class HttpRedirectsImpl implements HttpRedirects {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<HttpRedirectsGet300Headers, List<String>>> get300WithRestResponseAsync() {
+    public Single<HttpRedirectsGet300Response> get300WithRestResponseAsync() {
         return service.get300();
     }
 
@@ -233,15 +232,7 @@ public final class HttpRedirectsImpl implements HttpRedirects {
      */
     public Maybe<List<String>> get300Async() {
         return get300WithRestResponseAsync()
-            .flatMapMaybe(new Function<RestResponse<HttpRedirectsGet300Headers, List<String>>, Maybe<List<String>>>() {
-                public Maybe<List<String>> apply(RestResponse<HttpRedirectsGet300Headers, List<String>> restResponse) {
-                    if (restResponse.body() == null) {
-                        return Maybe.empty();
-                    } else {
-                        return Maybe.just(restResponse.body());
-                    }
-                }
-            });
+            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -270,7 +261,7 @@ public final class HttpRedirectsImpl implements HttpRedirects {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<HttpRedirectsHead301Headers, Void>> head301WithRestResponseAsync() {
+    public Single<HttpRedirectsHead301Response> head301WithRestResponseAsync() {
         return service.head301();
     }
 
@@ -310,7 +301,7 @@ public final class HttpRedirectsImpl implements HttpRedirects {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<HttpRedirectsGet301Headers, Void>> get301WithRestResponseAsync() {
+    public Single<HttpRedirectsGet301Response> get301WithRestResponseAsync() {
         return service.get301();
     }
 
@@ -350,7 +341,7 @@ public final class HttpRedirectsImpl implements HttpRedirects {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<HttpRedirectsPut301Headers, Void>> put301WithRestResponseAsync() {
+    public Single<HttpRedirectsPut301Response> put301WithRestResponseAsync() {
         final Boolean booleanValue = null;
         return service.put301(booleanValue);
     }
@@ -396,7 +387,7 @@ public final class HttpRedirectsImpl implements HttpRedirects {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<HttpRedirectsPut301Headers, Void>> put301WithRestResponseAsync(Boolean booleanValue) {
+    public Single<HttpRedirectsPut301Response> put301WithRestResponseAsync(Boolean booleanValue) {
         return service.put301(booleanValue);
     }
 
@@ -438,7 +429,7 @@ public final class HttpRedirectsImpl implements HttpRedirects {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<HttpRedirectsHead302Headers, Void>> head302WithRestResponseAsync() {
+    public Single<HttpRedirectsHead302Response> head302WithRestResponseAsync() {
         return service.head302();
     }
 
@@ -478,7 +469,7 @@ public final class HttpRedirectsImpl implements HttpRedirects {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<HttpRedirectsGet302Headers, Void>> get302WithRestResponseAsync() {
+    public Single<HttpRedirectsGet302Response> get302WithRestResponseAsync() {
         return service.get302();
     }
 
@@ -518,7 +509,7 @@ public final class HttpRedirectsImpl implements HttpRedirects {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<HttpRedirectsPatch302Headers, Void>> patch302WithRestResponseAsync() {
+    public Single<HttpRedirectsPatch302Response> patch302WithRestResponseAsync() {
         final Boolean booleanValue = null;
         return service.patch302(booleanValue);
     }
@@ -564,7 +555,7 @@ public final class HttpRedirectsImpl implements HttpRedirects {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<HttpRedirectsPatch302Headers, Void>> patch302WithRestResponseAsync(Boolean booleanValue) {
+    public Single<HttpRedirectsPatch302Response> patch302WithRestResponseAsync(Boolean booleanValue) {
         return service.patch302(booleanValue);
     }
 
@@ -606,7 +597,7 @@ public final class HttpRedirectsImpl implements HttpRedirects {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<HttpRedirectsPost303Headers, Void>> post303WithRestResponseAsync() {
+    public Single<HttpRedirectsPost303Response> post303WithRestResponseAsync() {
         final Boolean booleanValue = null;
         return service.post303(booleanValue);
     }
@@ -652,7 +643,7 @@ public final class HttpRedirectsImpl implements HttpRedirects {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<HttpRedirectsPost303Headers, Void>> post303WithRestResponseAsync(Boolean booleanValue) {
+    public Single<HttpRedirectsPost303Response> post303WithRestResponseAsync(Boolean booleanValue) {
         return service.post303(booleanValue);
     }
 
@@ -694,7 +685,7 @@ public final class HttpRedirectsImpl implements HttpRedirects {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<HttpRedirectsHead307Headers, Void>> head307WithRestResponseAsync() {
+    public Single<HttpRedirectsHead307Response> head307WithRestResponseAsync() {
         return service.head307();
     }
 
@@ -734,7 +725,7 @@ public final class HttpRedirectsImpl implements HttpRedirects {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<HttpRedirectsGet307Headers, Void>> get307WithRestResponseAsync() {
+    public Single<HttpRedirectsGet307Response> get307WithRestResponseAsync() {
         return service.get307();
     }
 
@@ -774,7 +765,7 @@ public final class HttpRedirectsImpl implements HttpRedirects {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<HttpRedirectsPut307Headers, Void>> put307WithRestResponseAsync() {
+    public Single<HttpRedirectsPut307Response> put307WithRestResponseAsync() {
         final Boolean booleanValue = null;
         return service.put307(booleanValue);
     }
@@ -820,7 +811,7 @@ public final class HttpRedirectsImpl implements HttpRedirects {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<HttpRedirectsPut307Headers, Void>> put307WithRestResponseAsync(Boolean booleanValue) {
+    public Single<HttpRedirectsPut307Response> put307WithRestResponseAsync(Boolean booleanValue) {
         return service.put307(booleanValue);
     }
 
@@ -862,7 +853,7 @@ public final class HttpRedirectsImpl implements HttpRedirects {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<HttpRedirectsPatch307Headers, Void>> patch307WithRestResponseAsync() {
+    public Single<HttpRedirectsPatch307Response> patch307WithRestResponseAsync() {
         final Boolean booleanValue = null;
         return service.patch307(booleanValue);
     }
@@ -908,7 +899,7 @@ public final class HttpRedirectsImpl implements HttpRedirects {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<HttpRedirectsPatch307Headers, Void>> patch307WithRestResponseAsync(Boolean booleanValue) {
+    public Single<HttpRedirectsPatch307Response> patch307WithRestResponseAsync(Boolean booleanValue) {
         return service.patch307(booleanValue);
     }
 
@@ -950,7 +941,7 @@ public final class HttpRedirectsImpl implements HttpRedirects {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<HttpRedirectsPost307Headers, Void>> post307WithRestResponseAsync() {
+    public Single<HttpRedirectsPost307Response> post307WithRestResponseAsync() {
         final Boolean booleanValue = null;
         return service.post307(booleanValue);
     }
@@ -996,7 +987,7 @@ public final class HttpRedirectsImpl implements HttpRedirects {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<HttpRedirectsPost307Headers, Void>> post307WithRestResponseAsync(Boolean booleanValue) {
+    public Single<HttpRedirectsPost307Response> post307WithRestResponseAsync(Boolean booleanValue) {
         return service.post307(booleanValue);
     }
 
@@ -1038,7 +1029,7 @@ public final class HttpRedirectsImpl implements HttpRedirects {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<HttpRedirectsDelete307Headers, Void>> delete307WithRestResponseAsync() {
+    public Single<HttpRedirectsDelete307Response> delete307WithRestResponseAsync() {
         final Boolean booleanValue = null;
         return service.delete307(booleanValue);
     }
@@ -1084,7 +1075,7 @@ public final class HttpRedirectsImpl implements HttpRedirects {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<HttpRedirectsDelete307Headers, Void>> delete307WithRestResponseAsync(Boolean booleanValue) {
+    public Single<HttpRedirectsDelete307Response> delete307WithRestResponseAsync(Boolean booleanValue) {
         return service.delete307(booleanValue);
     }
 

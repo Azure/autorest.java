@@ -10,11 +10,12 @@
 
 package fixtures.bodycomplex.implementation;
 
+import com.microsoft.rest.v2.BodyResponse;
 import com.microsoft.rest.v2.RestProxy;
-import com.microsoft.rest.v2.RestResponse;
 import com.microsoft.rest.v2.ServiceCallback;
 import com.microsoft.rest.v2.ServiceFuture;
 import com.microsoft.rest.v2.Validator;
+import com.microsoft.rest.v2.VoidResponse;
 import com.microsoft.rest.v2.annotations.BodyParam;
 import com.microsoft.rest.v2.annotations.ExpectedResponses;
 import com.microsoft.rest.v2.annotations.GET;
@@ -64,32 +65,32 @@ public final class DictionarysImpl implements Dictionarys {
         @GET("complex/dictionary/typed/valid")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<RestResponse<Void, DictionaryWrapper>> getValid();
+        Single<BodyResponse<DictionaryWrapper>> getValid();
 
         @PUT("complex/dictionary/typed/valid")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<RestResponse<Void, Void>> putValid(@BodyParam("application/json; charset=utf-8") DictionaryWrapper complexBody);
+        Single<VoidResponse> putValid(@BodyParam("application/json; charset=utf-8") DictionaryWrapper complexBody);
 
         @GET("complex/dictionary/typed/empty")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<RestResponse<Void, DictionaryWrapper>> getEmpty();
+        Single<BodyResponse<DictionaryWrapper>> getEmpty();
 
         @PUT("complex/dictionary/typed/empty")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<RestResponse<Void, Void>> putEmpty(@BodyParam("application/json; charset=utf-8") DictionaryWrapper complexBody);
+        Single<VoidResponse> putEmpty(@BodyParam("application/json; charset=utf-8") DictionaryWrapper complexBody);
 
         @GET("complex/dictionary/typed/null")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<RestResponse<Void, DictionaryWrapper>> getNull();
+        Single<BodyResponse<DictionaryWrapper>> getNull();
 
         @GET("complex/dictionary/typed/notprovided")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<RestResponse<Void, DictionaryWrapper>> getNotProvided();
+        Single<BodyResponse<DictionaryWrapper>> getNotProvided();
     }
 
     /**
@@ -119,7 +120,7 @@ public final class DictionarysImpl implements Dictionarys {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<Void, DictionaryWrapper>> getValidWithRestResponseAsync() {
+    public Single<BodyResponse<DictionaryWrapper>> getValidWithRestResponseAsync() {
         return service.getValid();
     }
 
@@ -130,15 +131,7 @@ public final class DictionarysImpl implements Dictionarys {
      */
     public Maybe<DictionaryWrapper> getValidAsync() {
         return getValidWithRestResponseAsync()
-            .flatMapMaybe(new Function<RestResponse<Void, DictionaryWrapper>, Maybe<DictionaryWrapper>>() {
-                public Maybe<DictionaryWrapper> apply(RestResponse<Void, DictionaryWrapper> restResponse) {
-                    if (restResponse.body() == null) {
-                        return Maybe.empty();
-                    } else {
-                        return Maybe.just(restResponse.body());
-                    }
-                }
-            });
+            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -172,7 +165,7 @@ public final class DictionarysImpl implements Dictionarys {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<Void, Void>> putValidWithRestResponseAsync(@NonNull DictionaryWrapper complexBody) {
+    public Single<VoidResponse> putValidWithRestResponseAsync(@NonNull DictionaryWrapper complexBody) {
         if (complexBody == null) {
             throw new IllegalArgumentException("Parameter complexBody is required and cannot be null.");
         }
@@ -219,7 +212,7 @@ public final class DictionarysImpl implements Dictionarys {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<Void, DictionaryWrapper>> getEmptyWithRestResponseAsync() {
+    public Single<BodyResponse<DictionaryWrapper>> getEmptyWithRestResponseAsync() {
         return service.getEmpty();
     }
 
@@ -230,15 +223,7 @@ public final class DictionarysImpl implements Dictionarys {
      */
     public Maybe<DictionaryWrapper> getEmptyAsync() {
         return getEmptyWithRestResponseAsync()
-            .flatMapMaybe(new Function<RestResponse<Void, DictionaryWrapper>, Maybe<DictionaryWrapper>>() {
-                public Maybe<DictionaryWrapper> apply(RestResponse<Void, DictionaryWrapper> restResponse) {
-                    if (restResponse.body() == null) {
-                        return Maybe.empty();
-                    } else {
-                        return Maybe.just(restResponse.body());
-                    }
-                }
-            });
+            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -272,7 +257,7 @@ public final class DictionarysImpl implements Dictionarys {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<Void, Void>> putEmptyWithRestResponseAsync(@NonNull DictionaryWrapper complexBody) {
+    public Single<VoidResponse> putEmptyWithRestResponseAsync(@NonNull DictionaryWrapper complexBody) {
         if (complexBody == null) {
             throw new IllegalArgumentException("Parameter complexBody is required and cannot be null.");
         }
@@ -319,7 +304,7 @@ public final class DictionarysImpl implements Dictionarys {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<Void, DictionaryWrapper>> getNullWithRestResponseAsync() {
+    public Single<BodyResponse<DictionaryWrapper>> getNullWithRestResponseAsync() {
         return service.getNull();
     }
 
@@ -330,15 +315,7 @@ public final class DictionarysImpl implements Dictionarys {
      */
     public Maybe<DictionaryWrapper> getNullAsync() {
         return getNullWithRestResponseAsync()
-            .flatMapMaybe(new Function<RestResponse<Void, DictionaryWrapper>, Maybe<DictionaryWrapper>>() {
-                public Maybe<DictionaryWrapper> apply(RestResponse<Void, DictionaryWrapper> restResponse) {
-                    if (restResponse.body() == null) {
-                        return Maybe.empty();
-                    } else {
-                        return Maybe.just(restResponse.body());
-                    }
-                }
-            });
+            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -368,7 +345,7 @@ public final class DictionarysImpl implements Dictionarys {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<Void, DictionaryWrapper>> getNotProvidedWithRestResponseAsync() {
+    public Single<BodyResponse<DictionaryWrapper>> getNotProvidedWithRestResponseAsync() {
         return service.getNotProvided();
     }
 
@@ -379,14 +356,6 @@ public final class DictionarysImpl implements Dictionarys {
      */
     public Maybe<DictionaryWrapper> getNotProvidedAsync() {
         return getNotProvidedWithRestResponseAsync()
-            .flatMapMaybe(new Function<RestResponse<Void, DictionaryWrapper>, Maybe<DictionaryWrapper>>() {
-                public Maybe<DictionaryWrapper> apply(RestResponse<Void, DictionaryWrapper> restResponse) {
-                    if (restResponse.body() == null) {
-                        return Maybe.empty();
-                    } else {
-                        return Maybe.just(restResponse.body());
-                    }
-                }
-            });
+            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 }

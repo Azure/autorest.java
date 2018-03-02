@@ -14,7 +14,7 @@ import com.microsoft.azure.v2.AzureProxy;
 import com.microsoft.azure.v2.CloudException;
 import com.microsoft.azure.v2.Page;
 import com.microsoft.azure.v2.PagedList;
-import com.microsoft.rest.v2.RestResponse;
+import com.microsoft.rest.v2.BodyResponse;
 import com.microsoft.rest.v2.Validator;
 import com.microsoft.rest.v2.annotations.ExpectedResponses;
 import com.microsoft.rest.v2.annotations.GET;
@@ -62,112 +62,112 @@ public final class PagingsInner {
         @GET("paging/single")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(CloudException.class)
-        Single<RestResponse<Void, PageImpl<ProductInner>>> getSinglePages(@HeaderParam("accept-language") String acceptLanguage);
+        Single<BodyResponse<PageImpl<ProductInner>>> getSinglePages(@HeaderParam("accept-language") String acceptLanguage);
 
         @GET("paging/multiple")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(CloudException.class)
-        Single<RestResponse<Void, PageImpl<ProductInner>>> getMultiplePages(@HeaderParam("client-request-id") String clientRequestId, @HeaderParam("accept-language") String acceptLanguage, @HeaderParam("maxresults") Integer maxresults, @HeaderParam("timeout") Integer timeout);
+        Single<BodyResponse<PageImpl<ProductInner>>> getMultiplePages(@HeaderParam("client-request-id") String clientRequestId, @HeaderParam("accept-language") String acceptLanguage, @HeaderParam("maxresults") Integer maxresults, @HeaderParam("timeout") Integer timeout);
 
         @GET("paging/multiple/odata")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(CloudException.class)
-        Single<RestResponse<Void, PageImpl1<ProductInner>>> getOdataMultiplePages(@HeaderParam("client-request-id") String clientRequestId, @HeaderParam("accept-language") String acceptLanguage, @HeaderParam("maxresults") Integer maxresults, @HeaderParam("timeout") Integer timeout);
+        Single<BodyResponse<PageImpl1<ProductInner>>> getOdataMultiplePages(@HeaderParam("client-request-id") String clientRequestId, @HeaderParam("accept-language") String acceptLanguage, @HeaderParam("maxresults") Integer maxresults, @HeaderParam("timeout") Integer timeout);
 
         @GET("paging/multiple/withpath/{offset}")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(CloudException.class)
-        Single<RestResponse<Void, PageImpl<ProductInner>>> getMultiplePagesWithOffset(@PathParam("offset") int offset, @HeaderParam("client-request-id") String clientRequestId, @HeaderParam("accept-language") String acceptLanguage, @HeaderParam("maxresults") Integer maxresults, @HeaderParam("timeout") Integer timeout);
+        Single<BodyResponse<PageImpl<ProductInner>>> getMultiplePagesWithOffset(@PathParam("offset") int offset, @HeaderParam("client-request-id") String clientRequestId, @HeaderParam("accept-language") String acceptLanguage, @HeaderParam("maxresults") Integer maxresults, @HeaderParam("timeout") Integer timeout);
 
         @GET("paging/multiple/retryfirst")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(CloudException.class)
-        Single<RestResponse<Void, PageImpl<ProductInner>>> getMultiplePagesRetryFirst(@HeaderParam("accept-language") String acceptLanguage);
+        Single<BodyResponse<PageImpl<ProductInner>>> getMultiplePagesRetryFirst(@HeaderParam("accept-language") String acceptLanguage);
 
         @GET("paging/multiple/retrysecond")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(CloudException.class)
-        Single<RestResponse<Void, PageImpl<ProductInner>>> getMultiplePagesRetrySecond(@HeaderParam("accept-language") String acceptLanguage);
+        Single<BodyResponse<PageImpl<ProductInner>>> getMultiplePagesRetrySecond(@HeaderParam("accept-language") String acceptLanguage);
 
         @GET("paging/single/failure")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(CloudException.class)
-        Single<RestResponse<Void, PageImpl<ProductInner>>> getSinglePagesFailure(@HeaderParam("accept-language") String acceptLanguage);
+        Single<BodyResponse<PageImpl<ProductInner>>> getSinglePagesFailure(@HeaderParam("accept-language") String acceptLanguage);
 
         @GET("paging/multiple/failure")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(CloudException.class)
-        Single<RestResponse<Void, PageImpl<ProductInner>>> getMultiplePagesFailure(@HeaderParam("accept-language") String acceptLanguage);
+        Single<BodyResponse<PageImpl<ProductInner>>> getMultiplePagesFailure(@HeaderParam("accept-language") String acceptLanguage);
 
         @GET("paging/multiple/failureuri")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(CloudException.class)
-        Single<RestResponse<Void, PageImpl<ProductInner>>> getMultiplePagesFailureUri(@HeaderParam("accept-language") String acceptLanguage);
+        Single<BodyResponse<PageImpl<ProductInner>>> getMultiplePagesFailureUri(@HeaderParam("accept-language") String acceptLanguage);
 
         @GET("paging/multiple/fragment/{tenant}")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(CloudException.class)
-        Single<RestResponse<Void, PageImpl1<ProductInner>>> getMultiplePagesFragmentNextLink(@PathParam("tenant") String tenant, @QueryParam("api_version") String apiVersion, @HeaderParam("accept-language") String acceptLanguage);
+        Single<BodyResponse<PageImpl1<ProductInner>>> getMultiplePagesFragmentNextLink(@PathParam("tenant") String tenant, @QueryParam("api_version") String apiVersion, @HeaderParam("accept-language") String acceptLanguage);
 
         @GET("paging/multiple/fragmentwithgrouping/{tenant}")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(CloudException.class)
-        Single<RestResponse<Void, PageImpl1<ProductInner>>> getMultiplePagesFragmentWithGroupingNextLink(@PathParam("tenant") String tenant, @HeaderParam("accept-language") String acceptLanguage, @QueryParam("api_version") String apiVersion);
+        Single<BodyResponse<PageImpl1<ProductInner>>> getMultiplePagesFragmentWithGroupingNextLink(@PathParam("tenant") String tenant, @HeaderParam("accept-language") String acceptLanguage, @QueryParam("api_version") String apiVersion);
 
         @GET("{nextUrl}")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(CloudException.class)
-        Single<RestResponse<Void, PageImpl1<ProductInner>>> nextFragment(@PathParam(value = "nextUrl", encoded = true) String nextUrl, @QueryParam("api_version") String apiVersion, @HeaderParam("accept-language") String acceptLanguage);
+        Single<BodyResponse<PageImpl1<ProductInner>>> nextFragment(@PathParam(value = "nextUrl", encoded = true) String nextUrl, @QueryParam("api_version") String apiVersion, @HeaderParam("accept-language") String acceptLanguage);
 
         @GET("{nextUrl}")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(CloudException.class)
-        Single<RestResponse<Void, PageImpl1<ProductInner>>> nextFragmentWithGrouping(@PathParam(value = "nextUrl", encoded = true) String nextUrl, @HeaderParam("accept-language") String acceptLanguage, @QueryParam("api_version") String apiVersion);
+        Single<BodyResponse<PageImpl1<ProductInner>>> nextFragmentWithGrouping(@PathParam(value = "nextUrl", encoded = true) String nextUrl, @HeaderParam("accept-language") String acceptLanguage, @QueryParam("api_version") String apiVersion);
 
         @GET("{nextUrl}")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(CloudException.class)
-        Single<RestResponse<Void, PageImpl<ProductInner>>> getSinglePagesNext(@PathParam(value = "nextUrl", encoded = true) String nextUrl, @HeaderParam("accept-language") String acceptLanguage);
+        Single<BodyResponse<PageImpl<ProductInner>>> getSinglePagesNext(@PathParam(value = "nextUrl", encoded = true) String nextUrl, @HeaderParam("accept-language") String acceptLanguage);
 
         @GET("{nextUrl}")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(CloudException.class)
-        Single<RestResponse<Void, PageImpl<ProductInner>>> getMultiplePagesNext(@PathParam(value = "nextUrl", encoded = true) String nextUrl, @HeaderParam("client-request-id") String clientRequestId, @HeaderParam("accept-language") String acceptLanguage, @HeaderParam("maxresults") Integer maxresults, @HeaderParam("timeout") Integer timeout);
+        Single<BodyResponse<PageImpl<ProductInner>>> getMultiplePagesNext(@PathParam(value = "nextUrl", encoded = true) String nextUrl, @HeaderParam("client-request-id") String clientRequestId, @HeaderParam("accept-language") String acceptLanguage, @HeaderParam("maxresults") Integer maxresults, @HeaderParam("timeout") Integer timeout);
 
         @GET("{nextUrl}")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(CloudException.class)
-        Single<RestResponse<Void, PageImpl1<ProductInner>>> getOdataMultiplePagesNext(@PathParam(value = "nextUrl", encoded = true) String nextUrl, @HeaderParam("client-request-id") String clientRequestId, @HeaderParam("accept-language") String acceptLanguage, @HeaderParam("maxresults") Integer maxresults, @HeaderParam("timeout") Integer timeout);
+        Single<BodyResponse<PageImpl1<ProductInner>>> getOdataMultiplePagesNext(@PathParam(value = "nextUrl", encoded = true) String nextUrl, @HeaderParam("client-request-id") String clientRequestId, @HeaderParam("accept-language") String acceptLanguage, @HeaderParam("maxresults") Integer maxresults, @HeaderParam("timeout") Integer timeout);
 
         @GET("{nextUrl}")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(CloudException.class)
-        Single<RestResponse<Void, PageImpl<ProductInner>>> getMultiplePagesWithOffsetNext(@PathParam(value = "nextUrl", encoded = true) String nextUrl, @HeaderParam("client-request-id") String clientRequestId, @HeaderParam("accept-language") String acceptLanguage, @HeaderParam("maxresults") Integer maxresults, @HeaderParam("timeout") Integer timeout);
+        Single<BodyResponse<PageImpl<ProductInner>>> getMultiplePagesWithOffsetNext(@PathParam(value = "nextUrl", encoded = true) String nextUrl, @HeaderParam("client-request-id") String clientRequestId, @HeaderParam("accept-language") String acceptLanguage, @HeaderParam("maxresults") Integer maxresults, @HeaderParam("timeout") Integer timeout);
 
         @GET("{nextUrl}")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(CloudException.class)
-        Single<RestResponse<Void, PageImpl<ProductInner>>> getMultiplePagesRetryFirstNext(@PathParam(value = "nextUrl", encoded = true) String nextUrl, @HeaderParam("accept-language") String acceptLanguage);
+        Single<BodyResponse<PageImpl<ProductInner>>> getMultiplePagesRetryFirstNext(@PathParam(value = "nextUrl", encoded = true) String nextUrl, @HeaderParam("accept-language") String acceptLanguage);
 
         @GET("{nextUrl}")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(CloudException.class)
-        Single<RestResponse<Void, PageImpl<ProductInner>>> getMultiplePagesRetrySecondNext(@PathParam(value = "nextUrl", encoded = true) String nextUrl, @HeaderParam("accept-language") String acceptLanguage);
+        Single<BodyResponse<PageImpl<ProductInner>>> getMultiplePagesRetrySecondNext(@PathParam(value = "nextUrl", encoded = true) String nextUrl, @HeaderParam("accept-language") String acceptLanguage);
 
         @GET("{nextUrl}")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(CloudException.class)
-        Single<RestResponse<Void, PageImpl<ProductInner>>> getSinglePagesFailureNext(@PathParam(value = "nextUrl", encoded = true) String nextUrl, @HeaderParam("accept-language") String acceptLanguage);
+        Single<BodyResponse<PageImpl<ProductInner>>> getSinglePagesFailureNext(@PathParam(value = "nextUrl", encoded = true) String nextUrl, @HeaderParam("accept-language") String acceptLanguage);
 
         @GET("{nextUrl}")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(CloudException.class)
-        Single<RestResponse<Void, PageImpl<ProductInner>>> getMultiplePagesFailureNext(@PathParam(value = "nextUrl", encoded = true) String nextUrl, @HeaderParam("accept-language") String acceptLanguage);
+        Single<BodyResponse<PageImpl<ProductInner>>> getMultiplePagesFailureNext(@PathParam(value = "nextUrl", encoded = true) String nextUrl, @HeaderParam("accept-language") String acceptLanguage);
 
         @GET("{nextUrl}")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(CloudException.class)
-        Single<RestResponse<Void, PageImpl<ProductInner>>> getMultiplePagesFailureUriNext(@PathParam(value = "nextUrl", encoded = true) String nextUrl, @HeaderParam("accept-language") String acceptLanguage);
+        Single<BodyResponse<PageImpl<ProductInner>>> getMultiplePagesFailureUriNext(@PathParam(value = "nextUrl", encoded = true) String nextUrl, @HeaderParam("accept-language") String acceptLanguage);
     }
 
     /**
@@ -213,12 +213,7 @@ public final class PagingsInner {
      * @return the Single&lt;Page&lt;ProductInner&gt;&gt; object if successful.
      */
     public Single<Page<ProductInner>> getSinglePagesSinglePageAsync() {
-        return service.getSinglePages(this.client.acceptLanguage()).map(new Function<RestResponse<Void, PageImpl<ProductInner>>, Page<ProductInner>>() {
-            @Override
-            public Page<ProductInner> apply(RestResponse<Void, PageImpl<ProductInner>> response) {
-                return response.body();
-            }
-        });
+        return service.getSinglePages(this.client.acceptLanguage()).map(res -> res.body());
     }
 
     /**
@@ -268,12 +263,7 @@ public final class PagingsInner {
         final PagingGetMultiplePagesOptionsInner pagingGetMultiplePagesOptions = null;
         Integer maxresults = null;
         Integer timeout = null;
-        return service.getMultiplePages(clientRequestId, this.client.acceptLanguage(), maxresults, timeout).map(new Function<RestResponse<Void, PageImpl<ProductInner>>, Page<ProductInner>>() {
-            @Override
-            public Page<ProductInner> apply(RestResponse<Void, PageImpl<ProductInner>> response) {
-                return response.body();
-            }
-        });
+        return service.getMultiplePages(clientRequestId, this.client.acceptLanguage(), maxresults, timeout).map(res -> res.body());
     }
 
     /**
@@ -337,12 +327,7 @@ public final class PagingsInner {
         if (pagingGetMultiplePagesOptions != null) {
             timeout = pagingGetMultiplePagesOptions.timeout();
         }
-        return service.getMultiplePages(clientRequestId, this.client.acceptLanguage(), maxresults, timeout).map(new Function<RestResponse<Void, PageImpl<ProductInner>>, Page<ProductInner>>() {
-            @Override
-            public Page<ProductInner> apply(RestResponse<Void, PageImpl<ProductInner>> response) {
-                return response.body();
-            }
-        });
+        return service.getMultiplePages(clientRequestId, this.client.acceptLanguage(), maxresults, timeout).map(res -> res.body());
     }
 
     /**
@@ -392,12 +377,7 @@ public final class PagingsInner {
         final PagingGetOdataMultiplePagesOptionsInner pagingGetOdataMultiplePagesOptions = null;
         Integer maxresults = null;
         Integer timeout = null;
-        return service.getOdataMultiplePages(clientRequestId, this.client.acceptLanguage(), maxresults, timeout).map(new Function<RestResponse<Void, PageImpl1<ProductInner>>, Page<ProductInner>>() {
-            @Override
-            public Page<ProductInner> apply(RestResponse<Void, PageImpl1<ProductInner>> response) {
-                return response.body();
-            }
-        });
+        return service.getOdataMultiplePages(clientRequestId, this.client.acceptLanguage(), maxresults, timeout).map(res -> res.body());
     }
 
     /**
@@ -461,12 +441,7 @@ public final class PagingsInner {
         if (pagingGetOdataMultiplePagesOptions != null) {
             timeout = pagingGetOdataMultiplePagesOptions.timeout();
         }
-        return service.getOdataMultiplePages(clientRequestId, this.client.acceptLanguage(), maxresults, timeout).map(new Function<RestResponse<Void, PageImpl1<ProductInner>>, Page<ProductInner>>() {
-            @Override
-            public Page<ProductInner> apply(RestResponse<Void, PageImpl1<ProductInner>> response) {
-                return response.body();
-            }
-        });
+        return service.getOdataMultiplePages(clientRequestId, this.client.acceptLanguage(), maxresults, timeout).map(res -> res.body());
     }
 
     /**
@@ -532,12 +507,7 @@ public final class PagingsInner {
         Integer maxresults = pagingGetMultiplePagesWithOffsetOptions.maxresults();
         int offset = pagingGetMultiplePagesWithOffsetOptions.offset();
         Integer timeout = pagingGetMultiplePagesWithOffsetOptions.timeout();
-        return service.getMultiplePagesWithOffset(offset, clientRequestId, this.client.acceptLanguage(), maxresults, timeout).map(new Function<RestResponse<Void, PageImpl<ProductInner>>, Page<ProductInner>>() {
-            @Override
-            public Page<ProductInner> apply(RestResponse<Void, PageImpl<ProductInner>> response) {
-                return response.body();
-            }
-        });
+        return service.getMultiplePagesWithOffset(offset, clientRequestId, this.client.acceptLanguage(), maxresults, timeout).map(res -> res.body());
     }
 
     /**
@@ -605,12 +575,7 @@ public final class PagingsInner {
         Integer maxresults = pagingGetMultiplePagesWithOffsetOptions.maxresults();
         int offset = pagingGetMultiplePagesWithOffsetOptions.offset();
         Integer timeout = pagingGetMultiplePagesWithOffsetOptions.timeout();
-        return service.getMultiplePagesWithOffset(offset, clientRequestId, this.client.acceptLanguage(), maxresults, timeout).map(new Function<RestResponse<Void, PageImpl<ProductInner>>, Page<ProductInner>>() {
-            @Override
-            public Page<ProductInner> apply(RestResponse<Void, PageImpl<ProductInner>> response) {
-                return response.body();
-            }
-        });
+        return service.getMultiplePagesWithOffset(offset, clientRequestId, this.client.acceptLanguage(), maxresults, timeout).map(res -> res.body());
     }
 
     /**
@@ -656,12 +621,7 @@ public final class PagingsInner {
      * @return the Single&lt;Page&lt;ProductInner&gt;&gt; object if successful.
      */
     public Single<Page<ProductInner>> getMultiplePagesRetryFirstSinglePageAsync() {
-        return service.getMultiplePagesRetryFirst(this.client.acceptLanguage()).map(new Function<RestResponse<Void, PageImpl<ProductInner>>, Page<ProductInner>>() {
-            @Override
-            public Page<ProductInner> apply(RestResponse<Void, PageImpl<ProductInner>> response) {
-                return response.body();
-            }
-        });
+        return service.getMultiplePagesRetryFirst(this.client.acceptLanguage()).map(res -> res.body());
     }
 
     /**
@@ -707,12 +667,7 @@ public final class PagingsInner {
      * @return the Single&lt;Page&lt;ProductInner&gt;&gt; object if successful.
      */
     public Single<Page<ProductInner>> getMultiplePagesRetrySecondSinglePageAsync() {
-        return service.getMultiplePagesRetrySecond(this.client.acceptLanguage()).map(new Function<RestResponse<Void, PageImpl<ProductInner>>, Page<ProductInner>>() {
-            @Override
-            public Page<ProductInner> apply(RestResponse<Void, PageImpl<ProductInner>> response) {
-                return response.body();
-            }
-        });
+        return service.getMultiplePagesRetrySecond(this.client.acceptLanguage()).map(res -> res.body());
     }
 
     /**
@@ -758,12 +713,7 @@ public final class PagingsInner {
      * @return the Single&lt;Page&lt;ProductInner&gt;&gt; object if successful.
      */
     public Single<Page<ProductInner>> getSinglePagesFailureSinglePageAsync() {
-        return service.getSinglePagesFailure(this.client.acceptLanguage()).map(new Function<RestResponse<Void, PageImpl<ProductInner>>, Page<ProductInner>>() {
-            @Override
-            public Page<ProductInner> apply(RestResponse<Void, PageImpl<ProductInner>> response) {
-                return response.body();
-            }
-        });
+        return service.getSinglePagesFailure(this.client.acceptLanguage()).map(res -> res.body());
     }
 
     /**
@@ -809,12 +759,7 @@ public final class PagingsInner {
      * @return the Single&lt;Page&lt;ProductInner&gt;&gt; object if successful.
      */
     public Single<Page<ProductInner>> getMultiplePagesFailureSinglePageAsync() {
-        return service.getMultiplePagesFailure(this.client.acceptLanguage()).map(new Function<RestResponse<Void, PageImpl<ProductInner>>, Page<ProductInner>>() {
-            @Override
-            public Page<ProductInner> apply(RestResponse<Void, PageImpl<ProductInner>> response) {
-                return response.body();
-            }
-        });
+        return service.getMultiplePagesFailure(this.client.acceptLanguage()).map(res -> res.body());
     }
 
     /**
@@ -860,12 +805,7 @@ public final class PagingsInner {
      * @return the Single&lt;Page&lt;ProductInner&gt;&gt; object if successful.
      */
     public Single<Page<ProductInner>> getMultiplePagesFailureUriSinglePageAsync() {
-        return service.getMultiplePagesFailureUri(this.client.acceptLanguage()).map(new Function<RestResponse<Void, PageImpl<ProductInner>>, Page<ProductInner>>() {
-            @Override
-            public Page<ProductInner> apply(RestResponse<Void, PageImpl<ProductInner>> response) {
-                return response.body();
-            }
-        });
+        return service.getMultiplePagesFailureUri(this.client.acceptLanguage()).map(res -> res.body());
     }
 
     /**
@@ -926,12 +866,7 @@ public final class PagingsInner {
         if (apiVersion == null) {
             throw new IllegalArgumentException("Parameter apiVersion is required and cannot be null.");
         }
-        return service.getMultiplePagesFragmentNextLink(tenant, apiVersion, this.client.acceptLanguage()).map(new Function<RestResponse<Void, PageImpl1<ProductInner>>, Page<ProductInner>>() {
-            @Override
-            public Page<ProductInner> apply(RestResponse<Void, PageImpl1<ProductInner>> response) {
-                return response.body();
-            }
-        });
+        return service.getMultiplePagesFragmentNextLink(tenant, apiVersion, this.client.acceptLanguage()).map(res -> res.body());
     }
 
     /**
@@ -989,12 +924,7 @@ public final class PagingsInner {
         Validator.validate(customParameterGroup);
         String apiVersion = customParameterGroup.apiVersion();
         String tenant = customParameterGroup.tenant();
-        return service.getMultiplePagesFragmentWithGroupingNextLink(tenant, this.client.acceptLanguage(), apiVersion).map(new Function<RestResponse<Void, PageImpl1<ProductInner>>, Page<ProductInner>>() {
-            @Override
-            public Page<ProductInner> apply(RestResponse<Void, PageImpl1<ProductInner>> response) {
-                return response.body();
-            }
-        });
+        return service.getMultiplePagesFragmentWithGroupingNextLink(tenant, this.client.acceptLanguage(), apiVersion).map(res -> res.body());
     }
 
     /**
@@ -1062,12 +992,7 @@ public final class PagingsInner {
             throw new IllegalArgumentException("Parameter apiVersion is required and cannot be null.");
         }
         String nextUrl = String.format("paging/multiple/fragment/%s/%s", tenant, nextLink);
-        return service.nextFragment(nextUrl, apiVersion, this.client.acceptLanguage()).map(new Function<RestResponse<Void, PageImpl1<ProductInner>>, Page<ProductInner>>() {
-            @Override
-            public Page<ProductInner> apply(RestResponse<Void, PageImpl1<ProductInner>> response) {
-                return response.body();
-            }
-        });
+        return service.nextFragment(nextUrl, apiVersion, this.client.acceptLanguage()).map(res -> res.body());
     }
 
     /**
@@ -1132,12 +1057,7 @@ public final class PagingsInner {
         String apiVersion = customParameterGroup.apiVersion();
         String tenant = customParameterGroup.tenant();
         String nextUrl = String.format("paging/multiple/fragmentwithgrouping/%s/%s", tenant, nextLink);
-        return service.nextFragmentWithGrouping(nextUrl, this.client.acceptLanguage(), apiVersion).map(new Function<RestResponse<Void, PageImpl1<ProductInner>>, Page<ProductInner>>() {
-            @Override
-            public Page<ProductInner> apply(RestResponse<Void, PageImpl1<ProductInner>> response) {
-                return response.body();
-            }
-        });
+        return service.nextFragmentWithGrouping(nextUrl, this.client.acceptLanguage(), apiVersion).map(res -> res.body());
     }
 
     /**
@@ -1193,12 +1113,7 @@ public final class PagingsInner {
             throw new IllegalArgumentException("Parameter nextPageLink is required and cannot be null.");
         }
         String nextUrl = String.format("%s", nextPageLink);
-        return service.getSinglePagesNext(nextUrl, this.client.acceptLanguage()).map(new Function<RestResponse<Void, PageImpl<ProductInner>>, Page<ProductInner>>() {
-            @Override
-            public Page<ProductInner> apply(RestResponse<Void, PageImpl<ProductInner>> response) {
-                return response.body();
-            }
-        });
+        return service.getSinglePagesNext(nextUrl, this.client.acceptLanguage()).map(res -> res.body());
     }
 
     /**
@@ -1258,12 +1173,7 @@ public final class PagingsInner {
         Integer maxresults = null;
         Integer timeout = null;
         String nextUrl = String.format("%s", nextPageLink);
-        return service.getMultiplePagesNext(nextUrl, clientRequestId, this.client.acceptLanguage(), maxresults, timeout).map(new Function<RestResponse<Void, PageImpl<ProductInner>>, Page<ProductInner>>() {
-            @Override
-            public Page<ProductInner> apply(RestResponse<Void, PageImpl<ProductInner>> response) {
-                return response.body();
-            }
-        });
+        return service.getMultiplePagesNext(nextUrl, clientRequestId, this.client.acceptLanguage(), maxresults, timeout).map(res -> res.body());
     }
 
     /**
@@ -1334,12 +1244,7 @@ public final class PagingsInner {
             timeout = pagingGetMultiplePagesOptions.timeout();
         }
         String nextUrl = String.format("%s", nextPageLink);
-        return service.getMultiplePagesNext(nextUrl, clientRequestId, this.client.acceptLanguage(), maxresults, timeout).map(new Function<RestResponse<Void, PageImpl<ProductInner>>, Page<ProductInner>>() {
-            @Override
-            public Page<ProductInner> apply(RestResponse<Void, PageImpl<ProductInner>> response) {
-                return response.body();
-            }
-        });
+        return service.getMultiplePagesNext(nextUrl, clientRequestId, this.client.acceptLanguage(), maxresults, timeout).map(res -> res.body());
     }
 
     /**
@@ -1399,12 +1304,7 @@ public final class PagingsInner {
         Integer maxresults = null;
         Integer timeout = null;
         String nextUrl = String.format("%s", nextPageLink);
-        return service.getOdataMultiplePagesNext(nextUrl, clientRequestId, this.client.acceptLanguage(), maxresults, timeout).map(new Function<RestResponse<Void, PageImpl1<ProductInner>>, Page<ProductInner>>() {
-            @Override
-            public Page<ProductInner> apply(RestResponse<Void, PageImpl1<ProductInner>> response) {
-                return response.body();
-            }
-        });
+        return service.getOdataMultiplePagesNext(nextUrl, clientRequestId, this.client.acceptLanguage(), maxresults, timeout).map(res -> res.body());
     }
 
     /**
@@ -1475,12 +1375,7 @@ public final class PagingsInner {
             timeout = pagingGetOdataMultiplePagesOptions.timeout();
         }
         String nextUrl = String.format("%s", nextPageLink);
-        return service.getOdataMultiplePagesNext(nextUrl, clientRequestId, this.client.acceptLanguage(), maxresults, timeout).map(new Function<RestResponse<Void, PageImpl1<ProductInner>>, Page<ProductInner>>() {
-            @Override
-            public Page<ProductInner> apply(RestResponse<Void, PageImpl1<ProductInner>> response) {
-                return response.body();
-            }
-        });
+        return service.getOdataMultiplePagesNext(nextUrl, clientRequestId, this.client.acceptLanguage(), maxresults, timeout).map(res -> res.body());
     }
 
     /**
@@ -1540,12 +1435,7 @@ public final class PagingsInner {
         Integer maxresults = null;
         Integer timeout = null;
         String nextUrl = String.format("%s", nextPageLink);
-        return service.getMultiplePagesWithOffsetNext(nextUrl, clientRequestId, this.client.acceptLanguage(), maxresults, timeout).map(new Function<RestResponse<Void, PageImpl<ProductInner>>, Page<ProductInner>>() {
-            @Override
-            public Page<ProductInner> apply(RestResponse<Void, PageImpl<ProductInner>> response) {
-                return response.body();
-            }
-        });
+        return service.getMultiplePagesWithOffsetNext(nextUrl, clientRequestId, this.client.acceptLanguage(), maxresults, timeout).map(res -> res.body());
     }
 
     /**
@@ -1616,12 +1506,7 @@ public final class PagingsInner {
             timeout = pagingGetMultiplePagesWithOffsetNextOptions.timeout();
         }
         String nextUrl = String.format("%s", nextPageLink);
-        return service.getMultiplePagesWithOffsetNext(nextUrl, clientRequestId, this.client.acceptLanguage(), maxresults, timeout).map(new Function<RestResponse<Void, PageImpl<ProductInner>>, Page<ProductInner>>() {
-            @Override
-            public Page<ProductInner> apply(RestResponse<Void, PageImpl<ProductInner>> response) {
-                return response.body();
-            }
-        });
+        return service.getMultiplePagesWithOffsetNext(nextUrl, clientRequestId, this.client.acceptLanguage(), maxresults, timeout).map(res -> res.body());
     }
 
     /**
@@ -1677,12 +1562,7 @@ public final class PagingsInner {
             throw new IllegalArgumentException("Parameter nextPageLink is required and cannot be null.");
         }
         String nextUrl = String.format("%s", nextPageLink);
-        return service.getMultiplePagesRetryFirstNext(nextUrl, this.client.acceptLanguage()).map(new Function<RestResponse<Void, PageImpl<ProductInner>>, Page<ProductInner>>() {
-            @Override
-            public Page<ProductInner> apply(RestResponse<Void, PageImpl<ProductInner>> response) {
-                return response.body();
-            }
-        });
+        return service.getMultiplePagesRetryFirstNext(nextUrl, this.client.acceptLanguage()).map(res -> res.body());
     }
 
     /**
@@ -1738,12 +1618,7 @@ public final class PagingsInner {
             throw new IllegalArgumentException("Parameter nextPageLink is required and cannot be null.");
         }
         String nextUrl = String.format("%s", nextPageLink);
-        return service.getMultiplePagesRetrySecondNext(nextUrl, this.client.acceptLanguage()).map(new Function<RestResponse<Void, PageImpl<ProductInner>>, Page<ProductInner>>() {
-            @Override
-            public Page<ProductInner> apply(RestResponse<Void, PageImpl<ProductInner>> response) {
-                return response.body();
-            }
-        });
+        return service.getMultiplePagesRetrySecondNext(nextUrl, this.client.acceptLanguage()).map(res -> res.body());
     }
 
     /**
@@ -1799,12 +1674,7 @@ public final class PagingsInner {
             throw new IllegalArgumentException("Parameter nextPageLink is required and cannot be null.");
         }
         String nextUrl = String.format("%s", nextPageLink);
-        return service.getSinglePagesFailureNext(nextUrl, this.client.acceptLanguage()).map(new Function<RestResponse<Void, PageImpl<ProductInner>>, Page<ProductInner>>() {
-            @Override
-            public Page<ProductInner> apply(RestResponse<Void, PageImpl<ProductInner>> response) {
-                return response.body();
-            }
-        });
+        return service.getSinglePagesFailureNext(nextUrl, this.client.acceptLanguage()).map(res -> res.body());
     }
 
     /**
@@ -1860,12 +1730,7 @@ public final class PagingsInner {
             throw new IllegalArgumentException("Parameter nextPageLink is required and cannot be null.");
         }
         String nextUrl = String.format("%s", nextPageLink);
-        return service.getMultiplePagesFailureNext(nextUrl, this.client.acceptLanguage()).map(new Function<RestResponse<Void, PageImpl<ProductInner>>, Page<ProductInner>>() {
-            @Override
-            public Page<ProductInner> apply(RestResponse<Void, PageImpl<ProductInner>> response) {
-                return response.body();
-            }
-        });
+        return service.getMultiplePagesFailureNext(nextUrl, this.client.acceptLanguage()).map(res -> res.body());
     }
 
     /**
@@ -1921,11 +1786,6 @@ public final class PagingsInner {
             throw new IllegalArgumentException("Parameter nextPageLink is required and cannot be null.");
         }
         String nextUrl = String.format("%s", nextPageLink);
-        return service.getMultiplePagesFailureUriNext(nextUrl, this.client.acceptLanguage()).map(new Function<RestResponse<Void, PageImpl<ProductInner>>, Page<ProductInner>>() {
-            @Override
-            public Page<ProductInner> apply(RestResponse<Void, PageImpl<ProductInner>> response) {
-                return response.body();
-            }
-        });
+        return service.getMultiplePagesFailureUriNext(nextUrl, this.client.acceptLanguage()).map(res -> res.body());
     }
 }

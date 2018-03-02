@@ -10,11 +10,12 @@
 
 package fixtures.bodycomplex.implementation;
 
+import com.microsoft.rest.v2.BodyResponse;
 import com.microsoft.rest.v2.RestProxy;
-import com.microsoft.rest.v2.RestResponse;
 import com.microsoft.rest.v2.ServiceCallback;
 import com.microsoft.rest.v2.ServiceFuture;
 import com.microsoft.rest.v2.Validator;
+import com.microsoft.rest.v2.VoidResponse;
 import com.microsoft.rest.v2.annotations.BodyParam;
 import com.microsoft.rest.v2.annotations.ExpectedResponses;
 import com.microsoft.rest.v2.annotations.GET;
@@ -64,12 +65,12 @@ public final class InheritancesImpl implements Inheritances {
         @GET("complex/inheritance/valid")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<RestResponse<Void, Siamese>> getValid();
+        Single<BodyResponse<Siamese>> getValid();
 
         @PUT("complex/inheritance/valid")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<RestResponse<Void, Void>> putValid(@BodyParam("application/json; charset=utf-8") Siamese complexBody);
+        Single<VoidResponse> putValid(@BodyParam("application/json; charset=utf-8") Siamese complexBody);
     }
 
     /**
@@ -99,7 +100,7 @@ public final class InheritancesImpl implements Inheritances {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<Void, Siamese>> getValidWithRestResponseAsync() {
+    public Single<BodyResponse<Siamese>> getValidWithRestResponseAsync() {
         return service.getValid();
     }
 
@@ -110,15 +111,7 @@ public final class InheritancesImpl implements Inheritances {
      */
     public Maybe<Siamese> getValidAsync() {
         return getValidWithRestResponseAsync()
-            .flatMapMaybe(new Function<RestResponse<Void, Siamese>, Maybe<Siamese>>() {
-                public Maybe<Siamese> apply(RestResponse<Void, Siamese> restResponse) {
-                    if (restResponse.body() == null) {
-                        return Maybe.empty();
-                    } else {
-                        return Maybe.just(restResponse.body());
-                    }
-                }
-            });
+            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -152,7 +145,7 @@ public final class InheritancesImpl implements Inheritances {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<Void, Void>> putValidWithRestResponseAsync(@NonNull Siamese complexBody) {
+    public Single<VoidResponse> putValidWithRestResponseAsync(@NonNull Siamese complexBody) {
         if (complexBody == null) {
             throw new IllegalArgumentException("Parameter complexBody is required and cannot be null.");
         }

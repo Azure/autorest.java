@@ -11,7 +11,7 @@
 package fixtures.subscriptionidapiversion.implementation;
 
 import com.microsoft.azure.v2.AzureProxy;
-import com.microsoft.rest.v2.RestResponse;
+import com.microsoft.rest.v2.BodyResponse;
 import com.microsoft.rest.v2.ServiceCallback;
 import com.microsoft.rest.v2.ServiceFuture;
 import com.microsoft.rest.v2.annotations.ExpectedResponses;
@@ -63,7 +63,7 @@ public final class GroupsImpl implements Groups {
         @GET("subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<RestResponse<Void, SampleResourceGroup>> getSampleResourceGroup(@PathParam("subscriptionId") String subscriptionId, @PathParam("resourceGroupName") String resourceGroupName, @QueryParam("api-version") String apiVersion, @HeaderParam("accept-language") String acceptLanguage);
+        Single<BodyResponse<SampleResourceGroup>> getSampleResourceGroup(@PathParam("subscriptionId") String subscriptionId, @PathParam("resourceGroupName") String resourceGroupName, @QueryParam("api-version") String apiVersion, @HeaderParam("accept-language") String acceptLanguage);
     }
 
     /**
@@ -98,7 +98,7 @@ public final class GroupsImpl implements Groups {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<Void, SampleResourceGroup>> getSampleResourceGroupWithRestResponseAsync(@NonNull String resourceGroupName) {
+    public Single<BodyResponse<SampleResourceGroup>> getSampleResourceGroupWithRestResponseAsync(@NonNull String resourceGroupName) {
         if (this.client.subscriptionId() == null) {
             throw new IllegalArgumentException("Parameter this.client.subscriptionId() is required and cannot be null.");
         }
@@ -120,14 +120,6 @@ public final class GroupsImpl implements Groups {
      */
     public Maybe<SampleResourceGroup> getSampleResourceGroupAsync(@NonNull String resourceGroupName) {
         return getSampleResourceGroupWithRestResponseAsync(resourceGroupName)
-            .flatMapMaybe(new Function<RestResponse<Void, SampleResourceGroup>, Maybe<SampleResourceGroup>>() {
-                public Maybe<SampleResourceGroup> apply(RestResponse<Void, SampleResourceGroup> restResponse) {
-                    if (restResponse.body() == null) {
-                        return Maybe.empty();
-                    } else {
-                        return Maybe.just(restResponse.body());
-                    }
-                }
-            });
+            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 }

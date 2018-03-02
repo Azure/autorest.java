@@ -10,12 +10,13 @@
 
 package fixtures.requiredoptional.implementation;
 
+import com.microsoft.rest.v2.BodyResponse;
 import com.microsoft.rest.v2.CollectionFormat;
 import com.microsoft.rest.v2.RestProxy;
-import com.microsoft.rest.v2.RestResponse;
 import com.microsoft.rest.v2.ServiceCallback;
 import com.microsoft.rest.v2.ServiceFuture;
 import com.microsoft.rest.v2.Validator;
+import com.microsoft.rest.v2.VoidResponse;
 import com.microsoft.rest.v2.annotations.BodyParam;
 import com.microsoft.rest.v2.annotations.ExpectedResponses;
 import com.microsoft.rest.v2.annotations.HeaderParam;
@@ -75,102 +76,102 @@ public final class ExplicitsImpl implements Explicits {
     private interface ExplicitsService {
         @POST("reqopt/requied/integer/parameter")
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<RestResponse<Void, Error>> postRequiredIntegerParameter(@BodyParam("application/json; charset=utf-8") int bodyParameter);
+        Single<BodyResponse<Error>> postRequiredIntegerParameter(@BodyParam("application/json; charset=utf-8") int bodyParameter);
 
         @POST("reqopt/optional/integer/parameter")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<RestResponse<Void, Void>> postOptionalIntegerParameter(@BodyParam("application/json; charset=utf-8") Integer bodyParameter);
+        Single<VoidResponse> postOptionalIntegerParameter(@BodyParam("application/json; charset=utf-8") Integer bodyParameter);
 
         @POST("reqopt/requied/integer/property")
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<RestResponse<Void, Error>> postRequiredIntegerProperty(@BodyParam("application/json; charset=utf-8") IntWrapper bodyParameter);
+        Single<BodyResponse<Error>> postRequiredIntegerProperty(@BodyParam("application/json; charset=utf-8") IntWrapper bodyParameter);
 
         @POST("reqopt/optional/integer/property")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<RestResponse<Void, Void>> postOptionalIntegerProperty(@BodyParam("application/json; charset=utf-8") IntOptionalWrapper bodyParameter);
+        Single<VoidResponse> postOptionalIntegerProperty(@BodyParam("application/json; charset=utf-8") IntOptionalWrapper bodyParameter);
 
         @POST("reqopt/requied/integer/header")
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<RestResponse<Void, Error>> postRequiredIntegerHeader(@HeaderParam("headerParameter") int headerParameter);
+        Single<BodyResponse<Error>> postRequiredIntegerHeader(@HeaderParam("headerParameter") int headerParameter);
 
         @POST("reqopt/optional/integer/header")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<RestResponse<Void, Void>> postOptionalIntegerHeader(@HeaderParam("headerParameter") Integer headerParameter);
+        Single<VoidResponse> postOptionalIntegerHeader(@HeaderParam("headerParameter") Integer headerParameter);
 
         @POST("reqopt/requied/string/parameter")
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<RestResponse<Void, Error>> postRequiredStringParameter(@BodyParam("application/json; charset=utf-8") String bodyParameter);
+        Single<BodyResponse<Error>> postRequiredStringParameter(@BodyParam("application/json; charset=utf-8") String bodyParameter);
 
         @POST("reqopt/optional/string/parameter")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<RestResponse<Void, Void>> postOptionalStringParameter(@BodyParam("application/json; charset=utf-8") String bodyParameter);
+        Single<VoidResponse> postOptionalStringParameter(@BodyParam("application/json; charset=utf-8") String bodyParameter);
 
         @POST("reqopt/requied/string/property")
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<RestResponse<Void, Error>> postRequiredStringProperty(@BodyParam("application/json; charset=utf-8") StringWrapper bodyParameter);
+        Single<BodyResponse<Error>> postRequiredStringProperty(@BodyParam("application/json; charset=utf-8") StringWrapper bodyParameter);
 
         @POST("reqopt/optional/string/property")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<RestResponse<Void, Void>> postOptionalStringProperty(@BodyParam("application/json; charset=utf-8") StringOptionalWrapper bodyParameter);
+        Single<VoidResponse> postOptionalStringProperty(@BodyParam("application/json; charset=utf-8") StringOptionalWrapper bodyParameter);
 
         @POST("reqopt/requied/string/header")
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<RestResponse<Void, Error>> postRequiredStringHeader(@HeaderParam("headerParameter") String headerParameter);
+        Single<BodyResponse<Error>> postRequiredStringHeader(@HeaderParam("headerParameter") String headerParameter);
 
         @POST("reqopt/optional/string/header")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<RestResponse<Void, Void>> postOptionalStringHeader(@HeaderParam("bodyParameter") String bodyParameter);
+        Single<VoidResponse> postOptionalStringHeader(@HeaderParam("bodyParameter") String bodyParameter);
 
         @POST("reqopt/requied/class/parameter")
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<RestResponse<Void, Error>> postRequiredClassParameter(@BodyParam("application/json; charset=utf-8") Product bodyParameter);
+        Single<BodyResponse<Error>> postRequiredClassParameter(@BodyParam("application/json; charset=utf-8") Product bodyParameter);
 
         @POST("reqopt/optional/class/parameter")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<RestResponse<Void, Void>> postOptionalClassParameter(@BodyParam("application/json; charset=utf-8") Product bodyParameter);
+        Single<VoidResponse> postOptionalClassParameter(@BodyParam("application/json; charset=utf-8") Product bodyParameter);
 
         @POST("reqopt/requied/class/property")
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<RestResponse<Void, Error>> postRequiredClassProperty(@BodyParam("application/json; charset=utf-8") ClassWrapper bodyParameter);
+        Single<BodyResponse<Error>> postRequiredClassProperty(@BodyParam("application/json; charset=utf-8") ClassWrapper bodyParameter);
 
         @POST("reqopt/optional/class/property")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<RestResponse<Void, Void>> postOptionalClassProperty(@BodyParam("application/json; charset=utf-8") ClassOptionalWrapper bodyParameter);
+        Single<VoidResponse> postOptionalClassProperty(@BodyParam("application/json; charset=utf-8") ClassOptionalWrapper bodyParameter);
 
         @POST("reqopt/requied/array/parameter")
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<RestResponse<Void, Error>> postRequiredArrayParameter(@BodyParam("application/json; charset=utf-8") List<String> bodyParameter);
+        Single<BodyResponse<Error>> postRequiredArrayParameter(@BodyParam("application/json; charset=utf-8") List<String> bodyParameter);
 
         @POST("reqopt/optional/array/parameter")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<RestResponse<Void, Void>> postOptionalArrayParameter(@BodyParam("application/json; charset=utf-8") List<String> bodyParameter);
+        Single<VoidResponse> postOptionalArrayParameter(@BodyParam("application/json; charset=utf-8") List<String> bodyParameter);
 
         @POST("reqopt/requied/array/property")
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<RestResponse<Void, Error>> postRequiredArrayProperty(@BodyParam("application/json; charset=utf-8") ArrayWrapper bodyParameter);
+        Single<BodyResponse<Error>> postRequiredArrayProperty(@BodyParam("application/json; charset=utf-8") ArrayWrapper bodyParameter);
 
         @POST("reqopt/optional/array/property")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<RestResponse<Void, Void>> postOptionalArrayProperty(@BodyParam("application/json; charset=utf-8") ArrayOptionalWrapper bodyParameter);
+        Single<VoidResponse> postOptionalArrayProperty(@BodyParam("application/json; charset=utf-8") ArrayOptionalWrapper bodyParameter);
 
         @POST("reqopt/requied/array/header")
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<RestResponse<Void, Error>> postRequiredArrayHeader(@HeaderParam("headerParameter") String headerParameter);
+        Single<BodyResponse<Error>> postRequiredArrayHeader(@HeaderParam("headerParameter") String headerParameter);
 
         @POST("reqopt/optional/array/header")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<RestResponse<Void, Void>> postOptionalArrayHeader(@HeaderParam("headerParameter") String headerParameter);
+        Single<VoidResponse> postOptionalArrayHeader(@HeaderParam("headerParameter") String headerParameter);
     }
 
     /**
@@ -205,7 +206,7 @@ public final class ExplicitsImpl implements Explicits {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<Void, Error>> postRequiredIntegerParameterWithRestResponseAsync(@NonNull int bodyParameter) {
+    public Single<BodyResponse<Error>> postRequiredIntegerParameterWithRestResponseAsync(@NonNull int bodyParameter) {
         return service.postRequiredIntegerParameter(bodyParameter);
     }
 
@@ -218,15 +219,7 @@ public final class ExplicitsImpl implements Explicits {
      */
     public Maybe<Error> postRequiredIntegerParameterAsync(@NonNull int bodyParameter) {
         return postRequiredIntegerParameterWithRestResponseAsync(bodyParameter)
-            .flatMapMaybe(new Function<RestResponse<Void, Error>, Maybe<Error>>() {
-                public Maybe<Error> apply(RestResponse<Void, Error> restResponse) {
-                    if (restResponse.body() == null) {
-                        return Maybe.empty();
-                    } else {
-                        return Maybe.just(restResponse.body());
-                    }
-                }
-            });
+            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -255,7 +248,7 @@ public final class ExplicitsImpl implements Explicits {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<Void, Void>> postOptionalIntegerParameterWithRestResponseAsync() {
+    public Single<VoidResponse> postOptionalIntegerParameterWithRestResponseAsync() {
         final Integer bodyParameter = null;
         return service.postOptionalIntegerParameter(bodyParameter);
     }
@@ -301,7 +294,7 @@ public final class ExplicitsImpl implements Explicits {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<Void, Void>> postOptionalIntegerParameterWithRestResponseAsync(Integer bodyParameter) {
+    public Single<VoidResponse> postOptionalIntegerParameterWithRestResponseAsync(Integer bodyParameter) {
         return service.postOptionalIntegerParameter(bodyParameter);
     }
 
@@ -349,7 +342,7 @@ public final class ExplicitsImpl implements Explicits {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<Void, Error>> postRequiredIntegerPropertyWithRestResponseAsync(@NonNull IntWrapper bodyParameter) {
+    public Single<BodyResponse<Error>> postRequiredIntegerPropertyWithRestResponseAsync(@NonNull IntWrapper bodyParameter) {
         if (bodyParameter == null) {
             throw new IllegalArgumentException("Parameter bodyParameter is required and cannot be null.");
         }
@@ -366,15 +359,7 @@ public final class ExplicitsImpl implements Explicits {
      */
     public Maybe<Error> postRequiredIntegerPropertyAsync(@NonNull IntWrapper bodyParameter) {
         return postRequiredIntegerPropertyWithRestResponseAsync(bodyParameter)
-            .flatMapMaybe(new Function<RestResponse<Void, Error>, Maybe<Error>>() {
-                public Maybe<Error> apply(RestResponse<Void, Error> restResponse) {
-                    if (restResponse.body() == null) {
-                        return Maybe.empty();
-                    } else {
-                        return Maybe.just(restResponse.body());
-                    }
-                }
-            });
+            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -403,7 +388,7 @@ public final class ExplicitsImpl implements Explicits {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<Void, Void>> postOptionalIntegerPropertyWithRestResponseAsync() {
+    public Single<VoidResponse> postOptionalIntegerPropertyWithRestResponseAsync() {
         final IntOptionalWrapper bodyParameter = null;
         return service.postOptionalIntegerProperty(bodyParameter);
     }
@@ -449,7 +434,7 @@ public final class ExplicitsImpl implements Explicits {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<Void, Void>> postOptionalIntegerPropertyWithRestResponseAsync(IntOptionalWrapper bodyParameter) {
+    public Single<VoidResponse> postOptionalIntegerPropertyWithRestResponseAsync(IntOptionalWrapper bodyParameter) {
         Validator.validate(bodyParameter);
         return service.postOptionalIntegerProperty(bodyParameter);
     }
@@ -498,7 +483,7 @@ public final class ExplicitsImpl implements Explicits {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<Void, Error>> postRequiredIntegerHeaderWithRestResponseAsync(@NonNull int headerParameter) {
+    public Single<BodyResponse<Error>> postRequiredIntegerHeaderWithRestResponseAsync(@NonNull int headerParameter) {
         return service.postRequiredIntegerHeader(headerParameter);
     }
 
@@ -511,15 +496,7 @@ public final class ExplicitsImpl implements Explicits {
      */
     public Maybe<Error> postRequiredIntegerHeaderAsync(@NonNull int headerParameter) {
         return postRequiredIntegerHeaderWithRestResponseAsync(headerParameter)
-            .flatMapMaybe(new Function<RestResponse<Void, Error>, Maybe<Error>>() {
-                public Maybe<Error> apply(RestResponse<Void, Error> restResponse) {
-                    if (restResponse.body() == null) {
-                        return Maybe.empty();
-                    } else {
-                        return Maybe.just(restResponse.body());
-                    }
-                }
-            });
+            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -548,7 +525,7 @@ public final class ExplicitsImpl implements Explicits {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<Void, Void>> postOptionalIntegerHeaderWithRestResponseAsync() {
+    public Single<VoidResponse> postOptionalIntegerHeaderWithRestResponseAsync() {
         final Integer headerParameter = null;
         return service.postOptionalIntegerHeader(headerParameter);
     }
@@ -594,7 +571,7 @@ public final class ExplicitsImpl implements Explicits {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<Void, Void>> postOptionalIntegerHeaderWithRestResponseAsync(Integer headerParameter) {
+    public Single<VoidResponse> postOptionalIntegerHeaderWithRestResponseAsync(Integer headerParameter) {
         return service.postOptionalIntegerHeader(headerParameter);
     }
 
@@ -642,7 +619,7 @@ public final class ExplicitsImpl implements Explicits {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<Void, Error>> postRequiredStringParameterWithRestResponseAsync(@NonNull String bodyParameter) {
+    public Single<BodyResponse<Error>> postRequiredStringParameterWithRestResponseAsync(@NonNull String bodyParameter) {
         if (bodyParameter == null) {
             throw new IllegalArgumentException("Parameter bodyParameter is required and cannot be null.");
         }
@@ -658,15 +635,7 @@ public final class ExplicitsImpl implements Explicits {
      */
     public Maybe<Error> postRequiredStringParameterAsync(@NonNull String bodyParameter) {
         return postRequiredStringParameterWithRestResponseAsync(bodyParameter)
-            .flatMapMaybe(new Function<RestResponse<Void, Error>, Maybe<Error>>() {
-                public Maybe<Error> apply(RestResponse<Void, Error> restResponse) {
-                    if (restResponse.body() == null) {
-                        return Maybe.empty();
-                    } else {
-                        return Maybe.just(restResponse.body());
-                    }
-                }
-            });
+            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -695,7 +664,7 @@ public final class ExplicitsImpl implements Explicits {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<Void, Void>> postOptionalStringParameterWithRestResponseAsync() {
+    public Single<VoidResponse> postOptionalStringParameterWithRestResponseAsync() {
         final String bodyParameter = null;
         return service.postOptionalStringParameter(bodyParameter);
     }
@@ -741,7 +710,7 @@ public final class ExplicitsImpl implements Explicits {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<Void, Void>> postOptionalStringParameterWithRestResponseAsync(String bodyParameter) {
+    public Single<VoidResponse> postOptionalStringParameterWithRestResponseAsync(String bodyParameter) {
         return service.postOptionalStringParameter(bodyParameter);
     }
 
@@ -789,7 +758,7 @@ public final class ExplicitsImpl implements Explicits {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<Void, Error>> postRequiredStringPropertyWithRestResponseAsync(@NonNull StringWrapper bodyParameter) {
+    public Single<BodyResponse<Error>> postRequiredStringPropertyWithRestResponseAsync(@NonNull StringWrapper bodyParameter) {
         if (bodyParameter == null) {
             throw new IllegalArgumentException("Parameter bodyParameter is required and cannot be null.");
         }
@@ -806,15 +775,7 @@ public final class ExplicitsImpl implements Explicits {
      */
     public Maybe<Error> postRequiredStringPropertyAsync(@NonNull StringWrapper bodyParameter) {
         return postRequiredStringPropertyWithRestResponseAsync(bodyParameter)
-            .flatMapMaybe(new Function<RestResponse<Void, Error>, Maybe<Error>>() {
-                public Maybe<Error> apply(RestResponse<Void, Error> restResponse) {
-                    if (restResponse.body() == null) {
-                        return Maybe.empty();
-                    } else {
-                        return Maybe.just(restResponse.body());
-                    }
-                }
-            });
+            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -843,7 +804,7 @@ public final class ExplicitsImpl implements Explicits {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<Void, Void>> postOptionalStringPropertyWithRestResponseAsync() {
+    public Single<VoidResponse> postOptionalStringPropertyWithRestResponseAsync() {
         final StringOptionalWrapper bodyParameter = null;
         return service.postOptionalStringProperty(bodyParameter);
     }
@@ -889,7 +850,7 @@ public final class ExplicitsImpl implements Explicits {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<Void, Void>> postOptionalStringPropertyWithRestResponseAsync(StringOptionalWrapper bodyParameter) {
+    public Single<VoidResponse> postOptionalStringPropertyWithRestResponseAsync(StringOptionalWrapper bodyParameter) {
         Validator.validate(bodyParameter);
         return service.postOptionalStringProperty(bodyParameter);
     }
@@ -938,7 +899,7 @@ public final class ExplicitsImpl implements Explicits {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<Void, Error>> postRequiredStringHeaderWithRestResponseAsync(@NonNull String headerParameter) {
+    public Single<BodyResponse<Error>> postRequiredStringHeaderWithRestResponseAsync(@NonNull String headerParameter) {
         if (headerParameter == null) {
             throw new IllegalArgumentException("Parameter headerParameter is required and cannot be null.");
         }
@@ -954,15 +915,7 @@ public final class ExplicitsImpl implements Explicits {
      */
     public Maybe<Error> postRequiredStringHeaderAsync(@NonNull String headerParameter) {
         return postRequiredStringHeaderWithRestResponseAsync(headerParameter)
-            .flatMapMaybe(new Function<RestResponse<Void, Error>, Maybe<Error>>() {
-                public Maybe<Error> apply(RestResponse<Void, Error> restResponse) {
-                    if (restResponse.body() == null) {
-                        return Maybe.empty();
-                    } else {
-                        return Maybe.just(restResponse.body());
-                    }
-                }
-            });
+            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -991,7 +944,7 @@ public final class ExplicitsImpl implements Explicits {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<Void, Void>> postOptionalStringHeaderWithRestResponseAsync() {
+    public Single<VoidResponse> postOptionalStringHeaderWithRestResponseAsync() {
         final String bodyParameter = null;
         return service.postOptionalStringHeader(bodyParameter);
     }
@@ -1037,7 +990,7 @@ public final class ExplicitsImpl implements Explicits {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<Void, Void>> postOptionalStringHeaderWithRestResponseAsync(String bodyParameter) {
+    public Single<VoidResponse> postOptionalStringHeaderWithRestResponseAsync(String bodyParameter) {
         return service.postOptionalStringHeader(bodyParameter);
     }
 
@@ -1085,7 +1038,7 @@ public final class ExplicitsImpl implements Explicits {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<Void, Error>> postRequiredClassParameterWithRestResponseAsync(@NonNull Product bodyParameter) {
+    public Single<BodyResponse<Error>> postRequiredClassParameterWithRestResponseAsync(@NonNull Product bodyParameter) {
         if (bodyParameter == null) {
             throw new IllegalArgumentException("Parameter bodyParameter is required and cannot be null.");
         }
@@ -1102,15 +1055,7 @@ public final class ExplicitsImpl implements Explicits {
      */
     public Maybe<Error> postRequiredClassParameterAsync(@NonNull Product bodyParameter) {
         return postRequiredClassParameterWithRestResponseAsync(bodyParameter)
-            .flatMapMaybe(new Function<RestResponse<Void, Error>, Maybe<Error>>() {
-                public Maybe<Error> apply(RestResponse<Void, Error> restResponse) {
-                    if (restResponse.body() == null) {
-                        return Maybe.empty();
-                    } else {
-                        return Maybe.just(restResponse.body());
-                    }
-                }
-            });
+            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -1139,7 +1084,7 @@ public final class ExplicitsImpl implements Explicits {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<Void, Void>> postOptionalClassParameterWithRestResponseAsync() {
+    public Single<VoidResponse> postOptionalClassParameterWithRestResponseAsync() {
         final Product bodyParameter = null;
         return service.postOptionalClassParameter(bodyParameter);
     }
@@ -1185,7 +1130,7 @@ public final class ExplicitsImpl implements Explicits {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<Void, Void>> postOptionalClassParameterWithRestResponseAsync(Product bodyParameter) {
+    public Single<VoidResponse> postOptionalClassParameterWithRestResponseAsync(Product bodyParameter) {
         Validator.validate(bodyParameter);
         return service.postOptionalClassParameter(bodyParameter);
     }
@@ -1234,7 +1179,7 @@ public final class ExplicitsImpl implements Explicits {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<Void, Error>> postRequiredClassPropertyWithRestResponseAsync(@NonNull ClassWrapper bodyParameter) {
+    public Single<BodyResponse<Error>> postRequiredClassPropertyWithRestResponseAsync(@NonNull ClassWrapper bodyParameter) {
         if (bodyParameter == null) {
             throw new IllegalArgumentException("Parameter bodyParameter is required and cannot be null.");
         }
@@ -1251,15 +1196,7 @@ public final class ExplicitsImpl implements Explicits {
      */
     public Maybe<Error> postRequiredClassPropertyAsync(@NonNull ClassWrapper bodyParameter) {
         return postRequiredClassPropertyWithRestResponseAsync(bodyParameter)
-            .flatMapMaybe(new Function<RestResponse<Void, Error>, Maybe<Error>>() {
-                public Maybe<Error> apply(RestResponse<Void, Error> restResponse) {
-                    if (restResponse.body() == null) {
-                        return Maybe.empty();
-                    } else {
-                        return Maybe.just(restResponse.body());
-                    }
-                }
-            });
+            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -1288,7 +1225,7 @@ public final class ExplicitsImpl implements Explicits {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<Void, Void>> postOptionalClassPropertyWithRestResponseAsync() {
+    public Single<VoidResponse> postOptionalClassPropertyWithRestResponseAsync() {
         final ClassOptionalWrapper bodyParameter = null;
         return service.postOptionalClassProperty(bodyParameter);
     }
@@ -1334,7 +1271,7 @@ public final class ExplicitsImpl implements Explicits {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<Void, Void>> postOptionalClassPropertyWithRestResponseAsync(ClassOptionalWrapper bodyParameter) {
+    public Single<VoidResponse> postOptionalClassPropertyWithRestResponseAsync(ClassOptionalWrapper bodyParameter) {
         Validator.validate(bodyParameter);
         return service.postOptionalClassProperty(bodyParameter);
     }
@@ -1383,7 +1320,7 @@ public final class ExplicitsImpl implements Explicits {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<Void, Error>> postRequiredArrayParameterWithRestResponseAsync(@NonNull List<String> bodyParameter) {
+    public Single<BodyResponse<Error>> postRequiredArrayParameterWithRestResponseAsync(@NonNull List<String> bodyParameter) {
         if (bodyParameter == null) {
             throw new IllegalArgumentException("Parameter bodyParameter is required and cannot be null.");
         }
@@ -1400,15 +1337,7 @@ public final class ExplicitsImpl implements Explicits {
      */
     public Maybe<Error> postRequiredArrayParameterAsync(@NonNull List<String> bodyParameter) {
         return postRequiredArrayParameterWithRestResponseAsync(bodyParameter)
-            .flatMapMaybe(new Function<RestResponse<Void, Error>, Maybe<Error>>() {
-                public Maybe<Error> apply(RestResponse<Void, Error> restResponse) {
-                    if (restResponse.body() == null) {
-                        return Maybe.empty();
-                    } else {
-                        return Maybe.just(restResponse.body());
-                    }
-                }
-            });
+            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -1437,7 +1366,7 @@ public final class ExplicitsImpl implements Explicits {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<Void, Void>> postOptionalArrayParameterWithRestResponseAsync() {
+    public Single<VoidResponse> postOptionalArrayParameterWithRestResponseAsync() {
         final List<String> bodyParameter = null;
         return service.postOptionalArrayParameter(bodyParameter);
     }
@@ -1483,7 +1412,7 @@ public final class ExplicitsImpl implements Explicits {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<Void, Void>> postOptionalArrayParameterWithRestResponseAsync(List<String> bodyParameter) {
+    public Single<VoidResponse> postOptionalArrayParameterWithRestResponseAsync(List<String> bodyParameter) {
         Validator.validate(bodyParameter);
         return service.postOptionalArrayParameter(bodyParameter);
     }
@@ -1532,7 +1461,7 @@ public final class ExplicitsImpl implements Explicits {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<Void, Error>> postRequiredArrayPropertyWithRestResponseAsync(@NonNull ArrayWrapper bodyParameter) {
+    public Single<BodyResponse<Error>> postRequiredArrayPropertyWithRestResponseAsync(@NonNull ArrayWrapper bodyParameter) {
         if (bodyParameter == null) {
             throw new IllegalArgumentException("Parameter bodyParameter is required and cannot be null.");
         }
@@ -1549,15 +1478,7 @@ public final class ExplicitsImpl implements Explicits {
      */
     public Maybe<Error> postRequiredArrayPropertyAsync(@NonNull ArrayWrapper bodyParameter) {
         return postRequiredArrayPropertyWithRestResponseAsync(bodyParameter)
-            .flatMapMaybe(new Function<RestResponse<Void, Error>, Maybe<Error>>() {
-                public Maybe<Error> apply(RestResponse<Void, Error> restResponse) {
-                    if (restResponse.body() == null) {
-                        return Maybe.empty();
-                    } else {
-                        return Maybe.just(restResponse.body());
-                    }
-                }
-            });
+            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -1586,7 +1507,7 @@ public final class ExplicitsImpl implements Explicits {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<Void, Void>> postOptionalArrayPropertyWithRestResponseAsync() {
+    public Single<VoidResponse> postOptionalArrayPropertyWithRestResponseAsync() {
         final ArrayOptionalWrapper bodyParameter = null;
         return service.postOptionalArrayProperty(bodyParameter);
     }
@@ -1632,7 +1553,7 @@ public final class ExplicitsImpl implements Explicits {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<Void, Void>> postOptionalArrayPropertyWithRestResponseAsync(ArrayOptionalWrapper bodyParameter) {
+    public Single<VoidResponse> postOptionalArrayPropertyWithRestResponseAsync(ArrayOptionalWrapper bodyParameter) {
         Validator.validate(bodyParameter);
         return service.postOptionalArrayProperty(bodyParameter);
     }
@@ -1681,7 +1602,7 @@ public final class ExplicitsImpl implements Explicits {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<Void, Error>> postRequiredArrayHeaderWithRestResponseAsync(@NonNull List<String> headerParameter) {
+    public Single<BodyResponse<Error>> postRequiredArrayHeaderWithRestResponseAsync(@NonNull List<String> headerParameter) {
         if (headerParameter == null) {
             throw new IllegalArgumentException("Parameter headerParameter is required and cannot be null.");
         }
@@ -1699,15 +1620,7 @@ public final class ExplicitsImpl implements Explicits {
      */
     public Maybe<Error> postRequiredArrayHeaderAsync(@NonNull List<String> headerParameter) {
         return postRequiredArrayHeaderWithRestResponseAsync(headerParameter)
-            .flatMapMaybe(new Function<RestResponse<Void, Error>, Maybe<Error>>() {
-                public Maybe<Error> apply(RestResponse<Void, Error> restResponse) {
-                    if (restResponse.body() == null) {
-                        return Maybe.empty();
-                    } else {
-                        return Maybe.just(restResponse.body());
-                    }
-                }
-            });
+            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -1736,7 +1649,7 @@ public final class ExplicitsImpl implements Explicits {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<Void, Void>> postOptionalArrayHeaderWithRestResponseAsync() {
+    public Single<VoidResponse> postOptionalArrayHeaderWithRestResponseAsync() {
         final List<String> headerParameter = null;
         String headerParameterConverted = this.client.serializerAdapter().serializeList(headerParameter, CollectionFormat.CSV);
         return service.postOptionalArrayHeader(headerParameterConverted);
@@ -1783,7 +1696,7 @@ public final class ExplicitsImpl implements Explicits {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<Void, Void>> postOptionalArrayHeaderWithRestResponseAsync(List<String> headerParameter) {
+    public Single<VoidResponse> postOptionalArrayHeaderWithRestResponseAsync(List<String> headerParameter) {
         Validator.validate(headerParameter);
         String headerParameterConverted = this.client.serializerAdapter().serializeList(headerParameter, CollectionFormat.CSV);
         return service.postOptionalArrayHeader(headerParameterConverted);

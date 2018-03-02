@@ -10,9 +10,10 @@
 
 package fixtures.bodyinteger;
 
-import com.microsoft.rest.v2.RestResponse;
+import com.microsoft.rest.v2.BodyResponse;
 import com.microsoft.rest.v2.ServiceCallback;
 import com.microsoft.rest.v2.ServiceFuture;
+import com.microsoft.rest.v2.VoidResponse;
 import fixtures.bodyinteger.models.ErrorException;
 import io.reactivex.Completable;
 import io.reactivex.Maybe;
@@ -48,7 +49,7 @@ public interface Ints {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, Integer>> getNullWithRestResponseAsync();
+    Single<BodyResponse<Integer>> getNullWithRestResponseAsync();
 
     /**
      * Get null Int value.
@@ -80,7 +81,7 @@ public interface Ints {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, Integer>> getInvalidWithRestResponseAsync();
+    Single<BodyResponse<Integer>> getInvalidWithRestResponseAsync();
 
     /**
      * Get invalid Int value.
@@ -112,7 +113,7 @@ public interface Ints {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, Integer>> getOverflowInt32WithRestResponseAsync();
+    Single<BodyResponse<Integer>> getOverflowInt32WithRestResponseAsync();
 
     /**
      * Get overflow Int32 value.
@@ -144,7 +145,7 @@ public interface Ints {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, Integer>> getUnderflowInt32WithRestResponseAsync();
+    Single<BodyResponse<Integer>> getUnderflowInt32WithRestResponseAsync();
 
     /**
      * Get underflow Int32 value.
@@ -176,7 +177,7 @@ public interface Ints {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, Long>> getOverflowInt64WithRestResponseAsync();
+    Single<BodyResponse<Long>> getOverflowInt64WithRestResponseAsync();
 
     /**
      * Get overflow Int64 value.
@@ -208,7 +209,7 @@ public interface Ints {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, Long>> getUnderflowInt64WithRestResponseAsync();
+    Single<BodyResponse<Long>> getUnderflowInt64WithRestResponseAsync();
 
     /**
      * Get underflow Int64 value.
@@ -244,7 +245,7 @@ public interface Ints {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, Void>> putMax32WithRestResponseAsync(@NonNull int intBody);
+    Single<VoidResponse> putMax32WithRestResponseAsync(@NonNull int intBody);
 
     /**
      * Put max int32 value.
@@ -282,7 +283,7 @@ public interface Ints {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, Void>> putMax64WithRestResponseAsync(@NonNull long intBody);
+    Single<VoidResponse> putMax64WithRestResponseAsync(@NonNull long intBody);
 
     /**
      * Put max int64 value.
@@ -320,7 +321,7 @@ public interface Ints {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, Void>> putMin32WithRestResponseAsync(@NonNull int intBody);
+    Single<VoidResponse> putMin32WithRestResponseAsync(@NonNull int intBody);
 
     /**
      * Put min int32 value.
@@ -358,7 +359,7 @@ public interface Ints {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, Void>> putMin64WithRestResponseAsync(@NonNull long intBody);
+    Single<VoidResponse> putMin64WithRestResponseAsync(@NonNull long intBody);
 
     /**
      * Put min int64 value.
@@ -392,7 +393,7 @@ public interface Ints {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, DateTime>> getUnixTimeWithRestResponseAsync();
+    Single<BodyResponse<DateTime>> getUnixTimeWithRestResponseAsync();
 
     /**
      * Get datetime encoded as Unix time value.
@@ -428,7 +429,7 @@ public interface Ints {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, Void>> putUnixTimeDateWithRestResponseAsync(@NonNull DateTime intBody);
+    Single<VoidResponse> putUnixTimeDateWithRestResponseAsync(@NonNull DateTime intBody);
 
     /**
      * Put datetime encoded as Unix time.
@@ -462,7 +463,7 @@ public interface Ints {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, DateTime>> getInvalidUnixTimeWithRestResponseAsync();
+    Single<BodyResponse<DateTime>> getInvalidUnixTimeWithRestResponseAsync();
 
     /**
      * Get invalid Unix time value.
@@ -494,7 +495,7 @@ public interface Ints {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, DateTime>> getNullUnixTimeWithRestResponseAsync();
+    Single<BodyResponse<DateTime>> getNullUnixTimeWithRestResponseAsync();
 
     /**
      * Get null Unix time value.

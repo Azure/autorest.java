@@ -12,10 +12,10 @@ package fixtures.url.implementation;
 
 import com.microsoft.rest.v2.CollectionFormat;
 import com.microsoft.rest.v2.RestProxy;
-import com.microsoft.rest.v2.RestResponse;
 import com.microsoft.rest.v2.ServiceCallback;
 import com.microsoft.rest.v2.ServiceFuture;
 import com.microsoft.rest.v2.Validator;
+import com.microsoft.rest.v2.VoidResponse;
 import com.microsoft.rest.v2.annotations.ExpectedResponses;
 import com.microsoft.rest.v2.annotations.GET;
 import com.microsoft.rest.v2.annotations.Host;
@@ -66,172 +66,172 @@ public final class QueriesImpl implements Queries {
         @GET("queries/bool/true")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<RestResponse<Void, Void>> getBooleanTrue(@QueryParam("boolQuery") boolean boolQuery);
+        Single<VoidResponse> getBooleanTrue(@QueryParam("boolQuery") boolean boolQuery);
 
         @GET("queries/bool/false")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<RestResponse<Void, Void>> getBooleanFalse(@QueryParam("boolQuery") boolean boolQuery);
+        Single<VoidResponse> getBooleanFalse(@QueryParam("boolQuery") boolean boolQuery);
 
         @GET("queries/bool/null")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<RestResponse<Void, Void>> getBooleanNull(@QueryParam("boolQuery") Boolean boolQuery);
+        Single<VoidResponse> getBooleanNull(@QueryParam("boolQuery") Boolean boolQuery);
 
         @GET("queries/int/1000000")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<RestResponse<Void, Void>> getIntOneMillion(@QueryParam("intQuery") int intQuery);
+        Single<VoidResponse> getIntOneMillion(@QueryParam("intQuery") int intQuery);
 
         @GET("queries/int/-1000000")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<RestResponse<Void, Void>> getIntNegativeOneMillion(@QueryParam("intQuery") int intQuery);
+        Single<VoidResponse> getIntNegativeOneMillion(@QueryParam("intQuery") int intQuery);
 
         @GET("queries/int/null")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<RestResponse<Void, Void>> getIntNull(@QueryParam("intQuery") Integer intQuery);
+        Single<VoidResponse> getIntNull(@QueryParam("intQuery") Integer intQuery);
 
         @GET("queries/long/10000000000")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<RestResponse<Void, Void>> getTenBillion(@QueryParam("longQuery") long longQuery);
+        Single<VoidResponse> getTenBillion(@QueryParam("longQuery") long longQuery);
 
         @GET("queries/long/-10000000000")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<RestResponse<Void, Void>> getNegativeTenBillion(@QueryParam("longQuery") long longQuery);
+        Single<VoidResponse> getNegativeTenBillion(@QueryParam("longQuery") long longQuery);
 
         @GET("queries/long/null")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<RestResponse<Void, Void>> getLongNull(@QueryParam("longQuery") Long longQuery);
+        Single<VoidResponse> getLongNull(@QueryParam("longQuery") Long longQuery);
 
         @GET("queries/float/1.034E+20")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<RestResponse<Void, Void>> floatScientificPositive(@QueryParam("floatQuery") double floatQuery);
+        Single<VoidResponse> floatScientificPositive(@QueryParam("floatQuery") double floatQuery);
 
         @GET("queries/float/-1.034E-20")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<RestResponse<Void, Void>> floatScientificNegative(@QueryParam("floatQuery") double floatQuery);
+        Single<VoidResponse> floatScientificNegative(@QueryParam("floatQuery") double floatQuery);
 
         @GET("queries/float/null")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<RestResponse<Void, Void>> floatNull(@QueryParam("floatQuery") Double floatQuery);
+        Single<VoidResponse> floatNull(@QueryParam("floatQuery") Double floatQuery);
 
         @GET("queries/double/9999999.999")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<RestResponse<Void, Void>> doubleDecimalPositive(@QueryParam("doubleQuery") double doubleQuery);
+        Single<VoidResponse> doubleDecimalPositive(@QueryParam("doubleQuery") double doubleQuery);
 
         @GET("queries/double/-9999999.999")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<RestResponse<Void, Void>> doubleDecimalNegative(@QueryParam("doubleQuery") double doubleQuery);
+        Single<VoidResponse> doubleDecimalNegative(@QueryParam("doubleQuery") double doubleQuery);
 
         @GET("queries/double/null")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<RestResponse<Void, Void>> doubleNull(@QueryParam("doubleQuery") Double doubleQuery);
+        Single<VoidResponse> doubleNull(@QueryParam("doubleQuery") Double doubleQuery);
 
         @GET("queries/string/unicode/")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<RestResponse<Void, Void>> stringUnicode(@QueryParam("stringQuery") String stringQuery);
+        Single<VoidResponse> stringUnicode(@QueryParam("stringQuery") String stringQuery);
 
         @GET("queries/string/begin%21%2A%27%28%29%3B%3A%40%20%26%3D%2B%24%2C%2F%3F%23%5B%5Dend")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<RestResponse<Void, Void>> stringUrlEncoded(@QueryParam("stringQuery") String stringQuery);
+        Single<VoidResponse> stringUrlEncoded(@QueryParam("stringQuery") String stringQuery);
 
         @GET("queries/string/empty")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<RestResponse<Void, Void>> stringEmpty(@QueryParam("stringQuery") String stringQuery);
+        Single<VoidResponse> stringEmpty(@QueryParam("stringQuery") String stringQuery);
 
         @GET("queries/string/null")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<RestResponse<Void, Void>> stringNull(@QueryParam("stringQuery") String stringQuery);
+        Single<VoidResponse> stringNull(@QueryParam("stringQuery") String stringQuery);
 
         @GET("queries/enum/green%20color")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<RestResponse<Void, Void>> enumValid(@QueryParam("enumQuery") UriColor enumQuery);
+        Single<VoidResponse> enumValid(@QueryParam("enumQuery") UriColor enumQuery);
 
         @GET("queries/enum/null")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<RestResponse<Void, Void>> enumNull(@QueryParam("enumQuery") UriColor enumQuery);
+        Single<VoidResponse> enumNull(@QueryParam("enumQuery") UriColor enumQuery);
 
         @GET("queries/byte/multibyte")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<RestResponse<Void, Void>> byteMultiByte(@QueryParam("byteQuery") String byteQuery);
+        Single<VoidResponse> byteMultiByte(@QueryParam("byteQuery") String byteQuery);
 
         @GET("queries/byte/empty")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<RestResponse<Void, Void>> byteEmpty(@QueryParam("byteQuery") String byteQuery);
+        Single<VoidResponse> byteEmpty(@QueryParam("byteQuery") String byteQuery);
 
         @GET("queries/byte/null")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<RestResponse<Void, Void>> byteNull(@QueryParam("byteQuery") String byteQuery);
+        Single<VoidResponse> byteNull(@QueryParam("byteQuery") String byteQuery);
 
         @GET("queries/date/2012-01-01")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<RestResponse<Void, Void>> dateValid(@QueryParam("dateQuery") LocalDate dateQuery);
+        Single<VoidResponse> dateValid(@QueryParam("dateQuery") LocalDate dateQuery);
 
         @GET("queries/date/null")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<RestResponse<Void, Void>> dateNull(@QueryParam("dateQuery") LocalDate dateQuery);
+        Single<VoidResponse> dateNull(@QueryParam("dateQuery") LocalDate dateQuery);
 
         @GET("queries/datetime/2012-01-01T01%3A01%3A01Z")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<RestResponse<Void, Void>> dateTimeValid(@QueryParam("dateTimeQuery") DateTime dateTimeQuery);
+        Single<VoidResponse> dateTimeValid(@QueryParam("dateTimeQuery") DateTime dateTimeQuery);
 
         @GET("queries/datetime/null")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<RestResponse<Void, Void>> dateTimeNull(@QueryParam("dateTimeQuery") DateTime dateTimeQuery);
+        Single<VoidResponse> dateTimeNull(@QueryParam("dateTimeQuery") DateTime dateTimeQuery);
 
         @GET("queries/array/csv/string/valid")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<RestResponse<Void, Void>> arrayStringCsvValid(@QueryParam("arrayQuery") String arrayQuery);
+        Single<VoidResponse> arrayStringCsvValid(@QueryParam("arrayQuery") String arrayQuery);
 
         @GET("queries/array/csv/string/null")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<RestResponse<Void, Void>> arrayStringCsvNull(@QueryParam("arrayQuery") String arrayQuery);
+        Single<VoidResponse> arrayStringCsvNull(@QueryParam("arrayQuery") String arrayQuery);
 
         @GET("queries/array/csv/string/empty")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<RestResponse<Void, Void>> arrayStringCsvEmpty(@QueryParam("arrayQuery") String arrayQuery);
+        Single<VoidResponse> arrayStringCsvEmpty(@QueryParam("arrayQuery") String arrayQuery);
 
         @GET("queries/array/ssv/string/valid")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<RestResponse<Void, Void>> arrayStringSsvValid(@QueryParam("arrayQuery") String arrayQuery);
+        Single<VoidResponse> arrayStringSsvValid(@QueryParam("arrayQuery") String arrayQuery);
 
         @GET("queries/array/tsv/string/valid")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<RestResponse<Void, Void>> arrayStringTsvValid(@QueryParam("arrayQuery") String arrayQuery);
+        Single<VoidResponse> arrayStringTsvValid(@QueryParam("arrayQuery") String arrayQuery);
 
         @GET("queries/array/pipes/string/valid")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<RestResponse<Void, Void>> arrayStringPipesValid(@QueryParam("arrayQuery") String arrayQuery);
+        Single<VoidResponse> arrayStringPipesValid(@QueryParam("arrayQuery") String arrayQuery);
     }
 
     /**
@@ -260,7 +260,7 @@ public final class QueriesImpl implements Queries {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<Void, Void>> getBooleanTrueWithRestResponseAsync() {
+    public Single<VoidResponse> getBooleanTrueWithRestResponseAsync() {
         final boolean boolQuery = true;
         return service.getBooleanTrue(boolQuery);
     }
@@ -301,7 +301,7 @@ public final class QueriesImpl implements Queries {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<Void, Void>> getBooleanFalseWithRestResponseAsync() {
+    public Single<VoidResponse> getBooleanFalseWithRestResponseAsync() {
         final boolean boolQuery = false;
         return service.getBooleanFalse(boolQuery);
     }
@@ -342,7 +342,7 @@ public final class QueriesImpl implements Queries {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<Void, Void>> getBooleanNullWithRestResponseAsync() {
+    public Single<VoidResponse> getBooleanNullWithRestResponseAsync() {
         final Boolean boolQuery = null;
         return service.getBooleanNull(boolQuery);
     }
@@ -388,7 +388,7 @@ public final class QueriesImpl implements Queries {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<Void, Void>> getBooleanNullWithRestResponseAsync(Boolean boolQuery) {
+    public Single<VoidResponse> getBooleanNullWithRestResponseAsync(Boolean boolQuery) {
         return service.getBooleanNull(boolQuery);
     }
 
@@ -430,7 +430,7 @@ public final class QueriesImpl implements Queries {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<Void, Void>> getIntOneMillionWithRestResponseAsync() {
+    public Single<VoidResponse> getIntOneMillionWithRestResponseAsync() {
         final int intQuery = 1000000;
         return service.getIntOneMillion(intQuery);
     }
@@ -471,7 +471,7 @@ public final class QueriesImpl implements Queries {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<Void, Void>> getIntNegativeOneMillionWithRestResponseAsync() {
+    public Single<VoidResponse> getIntNegativeOneMillionWithRestResponseAsync() {
         final int intQuery = -1000000;
         return service.getIntNegativeOneMillion(intQuery);
     }
@@ -512,7 +512,7 @@ public final class QueriesImpl implements Queries {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<Void, Void>> getIntNullWithRestResponseAsync() {
+    public Single<VoidResponse> getIntNullWithRestResponseAsync() {
         final Integer intQuery = null;
         return service.getIntNull(intQuery);
     }
@@ -558,7 +558,7 @@ public final class QueriesImpl implements Queries {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<Void, Void>> getIntNullWithRestResponseAsync(Integer intQuery) {
+    public Single<VoidResponse> getIntNullWithRestResponseAsync(Integer intQuery) {
         return service.getIntNull(intQuery);
     }
 
@@ -600,7 +600,7 @@ public final class QueriesImpl implements Queries {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<Void, Void>> getTenBillionWithRestResponseAsync() {
+    public Single<VoidResponse> getTenBillionWithRestResponseAsync() {
         final long longQuery = 10000000000L;
         return service.getTenBillion(longQuery);
     }
@@ -641,7 +641,7 @@ public final class QueriesImpl implements Queries {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<Void, Void>> getNegativeTenBillionWithRestResponseAsync() {
+    public Single<VoidResponse> getNegativeTenBillionWithRestResponseAsync() {
         final long longQuery = -10000000000L;
         return service.getNegativeTenBillion(longQuery);
     }
@@ -682,7 +682,7 @@ public final class QueriesImpl implements Queries {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<Void, Void>> getLongNullWithRestResponseAsync() {
+    public Single<VoidResponse> getLongNullWithRestResponseAsync() {
         final Long longQuery = null;
         return service.getLongNull(longQuery);
     }
@@ -728,7 +728,7 @@ public final class QueriesImpl implements Queries {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<Void, Void>> getLongNullWithRestResponseAsync(Long longQuery) {
+    public Single<VoidResponse> getLongNullWithRestResponseAsync(Long longQuery) {
         return service.getLongNull(longQuery);
     }
 
@@ -770,7 +770,7 @@ public final class QueriesImpl implements Queries {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<Void, Void>> floatScientificPositiveWithRestResponseAsync() {
+    public Single<VoidResponse> floatScientificPositiveWithRestResponseAsync() {
         final double floatQuery = 1.034E+20;
         return service.floatScientificPositive(floatQuery);
     }
@@ -811,7 +811,7 @@ public final class QueriesImpl implements Queries {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<Void, Void>> floatScientificNegativeWithRestResponseAsync() {
+    public Single<VoidResponse> floatScientificNegativeWithRestResponseAsync() {
         final double floatQuery = -1.034E-20;
         return service.floatScientificNegative(floatQuery);
     }
@@ -852,7 +852,7 @@ public final class QueriesImpl implements Queries {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<Void, Void>> floatNullWithRestResponseAsync() {
+    public Single<VoidResponse> floatNullWithRestResponseAsync() {
         final Double floatQuery = null;
         return service.floatNull(floatQuery);
     }
@@ -898,7 +898,7 @@ public final class QueriesImpl implements Queries {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<Void, Void>> floatNullWithRestResponseAsync(Double floatQuery) {
+    public Single<VoidResponse> floatNullWithRestResponseAsync(Double floatQuery) {
         return service.floatNull(floatQuery);
     }
 
@@ -940,7 +940,7 @@ public final class QueriesImpl implements Queries {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<Void, Void>> doubleDecimalPositiveWithRestResponseAsync() {
+    public Single<VoidResponse> doubleDecimalPositiveWithRestResponseAsync() {
         final double doubleQuery = 9999999.999;
         return service.doubleDecimalPositive(doubleQuery);
     }
@@ -981,7 +981,7 @@ public final class QueriesImpl implements Queries {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<Void, Void>> doubleDecimalNegativeWithRestResponseAsync() {
+    public Single<VoidResponse> doubleDecimalNegativeWithRestResponseAsync() {
         final double doubleQuery = -9999999.999;
         return service.doubleDecimalNegative(doubleQuery);
     }
@@ -1022,7 +1022,7 @@ public final class QueriesImpl implements Queries {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<Void, Void>> doubleNullWithRestResponseAsync() {
+    public Single<VoidResponse> doubleNullWithRestResponseAsync() {
         final Double doubleQuery = null;
         return service.doubleNull(doubleQuery);
     }
@@ -1068,7 +1068,7 @@ public final class QueriesImpl implements Queries {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<Void, Void>> doubleNullWithRestResponseAsync(Double doubleQuery) {
+    public Single<VoidResponse> doubleNullWithRestResponseAsync(Double doubleQuery) {
         return service.doubleNull(doubleQuery);
     }
 
@@ -1110,7 +1110,7 @@ public final class QueriesImpl implements Queries {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<Void, Void>> stringUnicodeWithRestResponseAsync() {
+    public Single<VoidResponse> stringUnicodeWithRestResponseAsync() {
         final String stringQuery = "啊齄丂狛狜隣郎隣兀﨩";
         return service.stringUnicode(stringQuery);
     }
@@ -1151,7 +1151,7 @@ public final class QueriesImpl implements Queries {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<Void, Void>> stringUrlEncodedWithRestResponseAsync() {
+    public Single<VoidResponse> stringUrlEncodedWithRestResponseAsync() {
         final String stringQuery = "begin!*'();:@ &=+$,/?#[]end";
         return service.stringUrlEncoded(stringQuery);
     }
@@ -1192,7 +1192,7 @@ public final class QueriesImpl implements Queries {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<Void, Void>> stringEmptyWithRestResponseAsync() {
+    public Single<VoidResponse> stringEmptyWithRestResponseAsync() {
         final String stringQuery = "";
         return service.stringEmpty(stringQuery);
     }
@@ -1233,7 +1233,7 @@ public final class QueriesImpl implements Queries {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<Void, Void>> stringNullWithRestResponseAsync() {
+    public Single<VoidResponse> stringNullWithRestResponseAsync() {
         final String stringQuery = null;
         return service.stringNull(stringQuery);
     }
@@ -1279,7 +1279,7 @@ public final class QueriesImpl implements Queries {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<Void, Void>> stringNullWithRestResponseAsync(String stringQuery) {
+    public Single<VoidResponse> stringNullWithRestResponseAsync(String stringQuery) {
         return service.stringNull(stringQuery);
     }
 
@@ -1321,7 +1321,7 @@ public final class QueriesImpl implements Queries {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<Void, Void>> enumValidWithRestResponseAsync() {
+    public Single<VoidResponse> enumValidWithRestResponseAsync() {
         final UriColor enumQuery = null;
         return service.enumValid(enumQuery);
     }
@@ -1367,7 +1367,7 @@ public final class QueriesImpl implements Queries {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<Void, Void>> enumValidWithRestResponseAsync(UriColor enumQuery) {
+    public Single<VoidResponse> enumValidWithRestResponseAsync(UriColor enumQuery) {
         return service.enumValid(enumQuery);
     }
 
@@ -1409,7 +1409,7 @@ public final class QueriesImpl implements Queries {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<Void, Void>> enumNullWithRestResponseAsync() {
+    public Single<VoidResponse> enumNullWithRestResponseAsync() {
         final UriColor enumQuery = null;
         return service.enumNull(enumQuery);
     }
@@ -1455,7 +1455,7 @@ public final class QueriesImpl implements Queries {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<Void, Void>> enumNullWithRestResponseAsync(UriColor enumQuery) {
+    public Single<VoidResponse> enumNullWithRestResponseAsync(UriColor enumQuery) {
         return service.enumNull(enumQuery);
     }
 
@@ -1497,7 +1497,7 @@ public final class QueriesImpl implements Queries {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<Void, Void>> byteMultiByteWithRestResponseAsync() {
+    public Single<VoidResponse> byteMultiByteWithRestResponseAsync() {
         final byte[] byteQuery = new byte[0];
         String byteQueryConverted = Base64.encodeBase64String(byteQuery);
         return service.byteMultiByte(byteQueryConverted);
@@ -1544,7 +1544,7 @@ public final class QueriesImpl implements Queries {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<Void, Void>> byteMultiByteWithRestResponseAsync(byte[] byteQuery) {
+    public Single<VoidResponse> byteMultiByteWithRestResponseAsync(byte[] byteQuery) {
         String byteQueryConverted = Base64.encodeBase64String(byteQuery);
         return service.byteMultiByte(byteQueryConverted);
     }
@@ -1587,7 +1587,7 @@ public final class QueriesImpl implements Queries {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<Void, Void>> byteEmptyWithRestResponseAsync() {
+    public Single<VoidResponse> byteEmptyWithRestResponseAsync() {
         final byte[] byteQuery = "".getBytes();
         String byteQueryConverted = Base64.encodeBase64String(byteQuery);
         return service.byteEmpty(byteQueryConverted);
@@ -1629,7 +1629,7 @@ public final class QueriesImpl implements Queries {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<Void, Void>> byteNullWithRestResponseAsync() {
+    public Single<VoidResponse> byteNullWithRestResponseAsync() {
         final byte[] byteQuery = new byte[0];
         String byteQueryConverted = Base64.encodeBase64String(byteQuery);
         return service.byteNull(byteQueryConverted);
@@ -1676,7 +1676,7 @@ public final class QueriesImpl implements Queries {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<Void, Void>> byteNullWithRestResponseAsync(byte[] byteQuery) {
+    public Single<VoidResponse> byteNullWithRestResponseAsync(byte[] byteQuery) {
         String byteQueryConverted = Base64.encodeBase64String(byteQuery);
         return service.byteNull(byteQueryConverted);
     }
@@ -1719,7 +1719,7 @@ public final class QueriesImpl implements Queries {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<Void, Void>> dateValidWithRestResponseAsync() {
+    public Single<VoidResponse> dateValidWithRestResponseAsync() {
         final LocalDate dateQuery = LocalDate.parse("2012-01-01");
         return service.dateValid(dateQuery);
     }
@@ -1760,7 +1760,7 @@ public final class QueriesImpl implements Queries {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<Void, Void>> dateNullWithRestResponseAsync() {
+    public Single<VoidResponse> dateNullWithRestResponseAsync() {
         final LocalDate dateQuery = null;
         return service.dateNull(dateQuery);
     }
@@ -1806,7 +1806,7 @@ public final class QueriesImpl implements Queries {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<Void, Void>> dateNullWithRestResponseAsync(LocalDate dateQuery) {
+    public Single<VoidResponse> dateNullWithRestResponseAsync(LocalDate dateQuery) {
         return service.dateNull(dateQuery);
     }
 
@@ -1848,7 +1848,7 @@ public final class QueriesImpl implements Queries {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<Void, Void>> dateTimeValidWithRestResponseAsync() {
+    public Single<VoidResponse> dateTimeValidWithRestResponseAsync() {
         final DateTime dateTimeQuery = DateTime.parse("2012-01-01T01:01:01Z");
         return service.dateTimeValid(dateTimeQuery);
     }
@@ -1889,7 +1889,7 @@ public final class QueriesImpl implements Queries {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<Void, Void>> dateTimeNullWithRestResponseAsync() {
+    public Single<VoidResponse> dateTimeNullWithRestResponseAsync() {
         final DateTime dateTimeQuery = null;
         return service.dateTimeNull(dateTimeQuery);
     }
@@ -1935,7 +1935,7 @@ public final class QueriesImpl implements Queries {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<Void, Void>> dateTimeNullWithRestResponseAsync(DateTime dateTimeQuery) {
+    public Single<VoidResponse> dateTimeNullWithRestResponseAsync(DateTime dateTimeQuery) {
         return service.dateTimeNull(dateTimeQuery);
     }
 
@@ -1977,7 +1977,7 @@ public final class QueriesImpl implements Queries {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<Void, Void>> arrayStringCsvValidWithRestResponseAsync() {
+    public Single<VoidResponse> arrayStringCsvValidWithRestResponseAsync() {
         final List<String> arrayQuery = null;
         String arrayQueryConverted = this.client.serializerAdapter().serializeList(arrayQuery, CollectionFormat.CSV);
         return service.arrayStringCsvValid(arrayQueryConverted);
@@ -2024,7 +2024,7 @@ public final class QueriesImpl implements Queries {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<Void, Void>> arrayStringCsvValidWithRestResponseAsync(List<String> arrayQuery) {
+    public Single<VoidResponse> arrayStringCsvValidWithRestResponseAsync(List<String> arrayQuery) {
         Validator.validate(arrayQuery);
         String arrayQueryConverted = this.client.serializerAdapter().serializeList(arrayQuery, CollectionFormat.CSV);
         return service.arrayStringCsvValid(arrayQueryConverted);
@@ -2068,7 +2068,7 @@ public final class QueriesImpl implements Queries {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<Void, Void>> arrayStringCsvNullWithRestResponseAsync() {
+    public Single<VoidResponse> arrayStringCsvNullWithRestResponseAsync() {
         final List<String> arrayQuery = null;
         String arrayQueryConverted = this.client.serializerAdapter().serializeList(arrayQuery, CollectionFormat.CSV);
         return service.arrayStringCsvNull(arrayQueryConverted);
@@ -2115,7 +2115,7 @@ public final class QueriesImpl implements Queries {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<Void, Void>> arrayStringCsvNullWithRestResponseAsync(List<String> arrayQuery) {
+    public Single<VoidResponse> arrayStringCsvNullWithRestResponseAsync(List<String> arrayQuery) {
         Validator.validate(arrayQuery);
         String arrayQueryConverted = this.client.serializerAdapter().serializeList(arrayQuery, CollectionFormat.CSV);
         return service.arrayStringCsvNull(arrayQueryConverted);
@@ -2159,7 +2159,7 @@ public final class QueriesImpl implements Queries {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<Void, Void>> arrayStringCsvEmptyWithRestResponseAsync() {
+    public Single<VoidResponse> arrayStringCsvEmptyWithRestResponseAsync() {
         final List<String> arrayQuery = null;
         String arrayQueryConverted = this.client.serializerAdapter().serializeList(arrayQuery, CollectionFormat.CSV);
         return service.arrayStringCsvEmpty(arrayQueryConverted);
@@ -2206,7 +2206,7 @@ public final class QueriesImpl implements Queries {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<Void, Void>> arrayStringCsvEmptyWithRestResponseAsync(List<String> arrayQuery) {
+    public Single<VoidResponse> arrayStringCsvEmptyWithRestResponseAsync(List<String> arrayQuery) {
         Validator.validate(arrayQuery);
         String arrayQueryConverted = this.client.serializerAdapter().serializeList(arrayQuery, CollectionFormat.CSV);
         return service.arrayStringCsvEmpty(arrayQueryConverted);
@@ -2250,7 +2250,7 @@ public final class QueriesImpl implements Queries {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<Void, Void>> arrayStringSsvValidWithRestResponseAsync() {
+    public Single<VoidResponse> arrayStringSsvValidWithRestResponseAsync() {
         final List<String> arrayQuery = null;
         String arrayQueryConverted = this.client.serializerAdapter().serializeList(arrayQuery, CollectionFormat.SSV);
         return service.arrayStringSsvValid(arrayQueryConverted);
@@ -2297,7 +2297,7 @@ public final class QueriesImpl implements Queries {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<Void, Void>> arrayStringSsvValidWithRestResponseAsync(List<String> arrayQuery) {
+    public Single<VoidResponse> arrayStringSsvValidWithRestResponseAsync(List<String> arrayQuery) {
         Validator.validate(arrayQuery);
         String arrayQueryConverted = this.client.serializerAdapter().serializeList(arrayQuery, CollectionFormat.SSV);
         return service.arrayStringSsvValid(arrayQueryConverted);
@@ -2341,7 +2341,7 @@ public final class QueriesImpl implements Queries {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<Void, Void>> arrayStringTsvValidWithRestResponseAsync() {
+    public Single<VoidResponse> arrayStringTsvValidWithRestResponseAsync() {
         final List<String> arrayQuery = null;
         String arrayQueryConverted = this.client.serializerAdapter().serializeList(arrayQuery, CollectionFormat.TSV);
         return service.arrayStringTsvValid(arrayQueryConverted);
@@ -2388,7 +2388,7 @@ public final class QueriesImpl implements Queries {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<Void, Void>> arrayStringTsvValidWithRestResponseAsync(List<String> arrayQuery) {
+    public Single<VoidResponse> arrayStringTsvValidWithRestResponseAsync(List<String> arrayQuery) {
         Validator.validate(arrayQuery);
         String arrayQueryConverted = this.client.serializerAdapter().serializeList(arrayQuery, CollectionFormat.TSV);
         return service.arrayStringTsvValid(arrayQueryConverted);
@@ -2432,7 +2432,7 @@ public final class QueriesImpl implements Queries {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<Void, Void>> arrayStringPipesValidWithRestResponseAsync() {
+    public Single<VoidResponse> arrayStringPipesValidWithRestResponseAsync() {
         final List<String> arrayQuery = null;
         String arrayQueryConverted = this.client.serializerAdapter().serializeList(arrayQuery, CollectionFormat.PIPES);
         return service.arrayStringPipesValid(arrayQueryConverted);
@@ -2479,7 +2479,7 @@ public final class QueriesImpl implements Queries {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<Void, Void>> arrayStringPipesValidWithRestResponseAsync(List<String> arrayQuery) {
+    public Single<VoidResponse> arrayStringPipesValidWithRestResponseAsync(List<String> arrayQuery) {
         Validator.validate(arrayQuery);
         String arrayQueryConverted = this.client.serializerAdapter().serializeList(arrayQuery, CollectionFormat.PIPES);
         return service.arrayStringPipesValid(arrayQueryConverted);

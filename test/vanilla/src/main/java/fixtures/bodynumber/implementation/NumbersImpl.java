@@ -10,10 +10,11 @@
 
 package fixtures.bodynumber.implementation;
 
+import com.microsoft.rest.v2.BodyResponse;
 import com.microsoft.rest.v2.RestProxy;
-import com.microsoft.rest.v2.RestResponse;
 import com.microsoft.rest.v2.ServiceCallback;
 import com.microsoft.rest.v2.ServiceFuture;
+import com.microsoft.rest.v2.VoidResponse;
 import com.microsoft.rest.v2.annotations.BodyParam;
 import com.microsoft.rest.v2.annotations.ExpectedResponses;
 import com.microsoft.rest.v2.annotations.GET;
@@ -63,122 +64,122 @@ public final class NumbersImpl implements Numbers {
         @GET("number/null")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<RestResponse<Void, Double>> getNull();
+        Single<BodyResponse<Double>> getNull();
 
         @GET("number/invalidfloat")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<RestResponse<Void, Double>> getInvalidFloat();
+        Single<BodyResponse<Double>> getInvalidFloat();
 
         @GET("number/invaliddouble")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<RestResponse<Void, Double>> getInvalidDouble();
+        Single<BodyResponse<Double>> getInvalidDouble();
 
         @GET("number/invaliddecimal")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<RestResponse<Void, BigDecimal>> getInvalidDecimal();
+        Single<BodyResponse<BigDecimal>> getInvalidDecimal();
 
         @PUT("number/big/float/3.402823e+20")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<RestResponse<Void, Void>> putBigFloat(@BodyParam("application/json; charset=utf-8") double numberBody);
+        Single<VoidResponse> putBigFloat(@BodyParam("application/json; charset=utf-8") double numberBody);
 
         @GET("number/big/float/3.402823e+20")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<RestResponse<Void, Double>> getBigFloat();
+        Single<BodyResponse<Double>> getBigFloat();
 
         @PUT("number/big/double/2.5976931e+101")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<RestResponse<Void, Void>> putBigDouble(@BodyParam("application/json; charset=utf-8") double numberBody);
+        Single<VoidResponse> putBigDouble(@BodyParam("application/json; charset=utf-8") double numberBody);
 
         @GET("number/big/double/2.5976931e+101")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<RestResponse<Void, Double>> getBigDouble();
+        Single<BodyResponse<Double>> getBigDouble();
 
         @PUT("number/big/double/99999999.99")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<RestResponse<Void, Void>> putBigDoublePositiveDecimal(@BodyParam("application/json; charset=utf-8") double numberBody);
+        Single<VoidResponse> putBigDoublePositiveDecimal(@BodyParam("application/json; charset=utf-8") double numberBody);
 
         @GET("number/big/double/99999999.99")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<RestResponse<Void, Double>> getBigDoublePositiveDecimal();
+        Single<BodyResponse<Double>> getBigDoublePositiveDecimal();
 
         @PUT("number/big/double/-99999999.99")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<RestResponse<Void, Void>> putBigDoubleNegativeDecimal(@BodyParam("application/json; charset=utf-8") double numberBody);
+        Single<VoidResponse> putBigDoubleNegativeDecimal(@BodyParam("application/json; charset=utf-8") double numberBody);
 
         @GET("number/big/double/-99999999.99")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<RestResponse<Void, Double>> getBigDoubleNegativeDecimal();
+        Single<BodyResponse<Double>> getBigDoubleNegativeDecimal();
 
         @PUT("number/big/decimal/2.5976931e+101")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<RestResponse<Void, Void>> putBigDecimal(@BodyParam("application/json; charset=utf-8") BigDecimal numberBody);
+        Single<VoidResponse> putBigDecimal(@BodyParam("application/json; charset=utf-8") BigDecimal numberBody);
 
         @GET("number/big/decimal/2.5976931e+101")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<RestResponse<Void, BigDecimal>> getBigDecimal();
+        Single<BodyResponse<BigDecimal>> getBigDecimal();
 
         @PUT("number/big/decimal/99999999.99")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<RestResponse<Void, Void>> putBigDecimalPositiveDecimal(@BodyParam("application/json; charset=utf-8") BigDecimal numberBody);
+        Single<VoidResponse> putBigDecimalPositiveDecimal(@BodyParam("application/json; charset=utf-8") BigDecimal numberBody);
 
         @GET("number/big/decimal/99999999.99")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<RestResponse<Void, BigDecimal>> getBigDecimalPositiveDecimal();
+        Single<BodyResponse<BigDecimal>> getBigDecimalPositiveDecimal();
 
         @PUT("number/big/decimal/-99999999.99")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<RestResponse<Void, Void>> putBigDecimalNegativeDecimal(@BodyParam("application/json; charset=utf-8") BigDecimal numberBody);
+        Single<VoidResponse> putBigDecimalNegativeDecimal(@BodyParam("application/json; charset=utf-8") BigDecimal numberBody);
 
         @GET("number/big/decimal/-99999999.99")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<RestResponse<Void, BigDecimal>> getBigDecimalNegativeDecimal();
+        Single<BodyResponse<BigDecimal>> getBigDecimalNegativeDecimal();
 
         @PUT("number/small/float/3.402823e-20")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<RestResponse<Void, Void>> putSmallFloat(@BodyParam("application/json; charset=utf-8") double numberBody);
+        Single<VoidResponse> putSmallFloat(@BodyParam("application/json; charset=utf-8") double numberBody);
 
         @GET("number/small/float/3.402823e-20")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<RestResponse<Void, Double>> getSmallFloat();
+        Single<BodyResponse<Double>> getSmallFloat();
 
         @PUT("number/small/double/2.5976931e-101")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<RestResponse<Void, Void>> putSmallDouble(@BodyParam("application/json; charset=utf-8") double numberBody);
+        Single<VoidResponse> putSmallDouble(@BodyParam("application/json; charset=utf-8") double numberBody);
 
         @GET("number/small/double/2.5976931e-101")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<RestResponse<Void, Double>> getSmallDouble();
+        Single<BodyResponse<Double>> getSmallDouble();
 
         @PUT("number/small/decimal/2.5976931e-101")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<RestResponse<Void, Void>> putSmallDecimal(@BodyParam("application/json; charset=utf-8") BigDecimal numberBody);
+        Single<VoidResponse> putSmallDecimal(@BodyParam("application/json; charset=utf-8") BigDecimal numberBody);
 
         @GET("number/small/decimal/2.5976931e-101")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<RestResponse<Void, BigDecimal>> getSmallDecimal();
+        Single<BodyResponse<BigDecimal>> getSmallDecimal();
     }
 
     /**
@@ -208,7 +209,7 @@ public final class NumbersImpl implements Numbers {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<Void, Double>> getNullWithRestResponseAsync() {
+    public Single<BodyResponse<Double>> getNullWithRestResponseAsync() {
         return service.getNull();
     }
 
@@ -219,15 +220,7 @@ public final class NumbersImpl implements Numbers {
      */
     public Maybe<Double> getNullAsync() {
         return getNullWithRestResponseAsync()
-            .flatMapMaybe(new Function<RestResponse<Void, Double>, Maybe<Double>>() {
-                public Maybe<Double> apply(RestResponse<Void, Double> restResponse) {
-                    if (restResponse.body() == null) {
-                        return Maybe.empty();
-                    } else {
-                        return Maybe.just(restResponse.body());
-                    }
-                }
-            });
+            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -257,7 +250,7 @@ public final class NumbersImpl implements Numbers {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<Void, Double>> getInvalidFloatWithRestResponseAsync() {
+    public Single<BodyResponse<Double>> getInvalidFloatWithRestResponseAsync() {
         return service.getInvalidFloat();
     }
 
@@ -268,15 +261,7 @@ public final class NumbersImpl implements Numbers {
      */
     public Maybe<Double> getInvalidFloatAsync() {
         return getInvalidFloatWithRestResponseAsync()
-            .flatMapMaybe(new Function<RestResponse<Void, Double>, Maybe<Double>>() {
-                public Maybe<Double> apply(RestResponse<Void, Double> restResponse) {
-                    if (restResponse.body() == null) {
-                        return Maybe.empty();
-                    } else {
-                        return Maybe.just(restResponse.body());
-                    }
-                }
-            });
+            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -306,7 +291,7 @@ public final class NumbersImpl implements Numbers {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<Void, Double>> getInvalidDoubleWithRestResponseAsync() {
+    public Single<BodyResponse<Double>> getInvalidDoubleWithRestResponseAsync() {
         return service.getInvalidDouble();
     }
 
@@ -317,15 +302,7 @@ public final class NumbersImpl implements Numbers {
      */
     public Maybe<Double> getInvalidDoubleAsync() {
         return getInvalidDoubleWithRestResponseAsync()
-            .flatMapMaybe(new Function<RestResponse<Void, Double>, Maybe<Double>>() {
-                public Maybe<Double> apply(RestResponse<Void, Double> restResponse) {
-                    if (restResponse.body() == null) {
-                        return Maybe.empty();
-                    } else {
-                        return Maybe.just(restResponse.body());
-                    }
-                }
-            });
+            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -355,7 +332,7 @@ public final class NumbersImpl implements Numbers {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<Void, BigDecimal>> getInvalidDecimalWithRestResponseAsync() {
+    public Single<BodyResponse<BigDecimal>> getInvalidDecimalWithRestResponseAsync() {
         return service.getInvalidDecimal();
     }
 
@@ -366,15 +343,7 @@ public final class NumbersImpl implements Numbers {
      */
     public Maybe<BigDecimal> getInvalidDecimalAsync() {
         return getInvalidDecimalWithRestResponseAsync()
-            .flatMapMaybe(new Function<RestResponse<Void, BigDecimal>, Maybe<BigDecimal>>() {
-                public Maybe<BigDecimal> apply(RestResponse<Void, BigDecimal> restResponse) {
-                    if (restResponse.body() == null) {
-                        return Maybe.empty();
-                    } else {
-                        return Maybe.just(restResponse.body());
-                    }
-                }
-            });
+            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -408,7 +377,7 @@ public final class NumbersImpl implements Numbers {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<Void, Void>> putBigFloatWithRestResponseAsync(@NonNull double numberBody) {
+    public Single<VoidResponse> putBigFloatWithRestResponseAsync(@NonNull double numberBody) {
         return service.putBigFloat(numberBody);
     }
 
@@ -451,7 +420,7 @@ public final class NumbersImpl implements Numbers {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<Void, Double>> getBigFloatWithRestResponseAsync() {
+    public Single<BodyResponse<Double>> getBigFloatWithRestResponseAsync() {
         return service.getBigFloat();
     }
 
@@ -462,15 +431,7 @@ public final class NumbersImpl implements Numbers {
      */
     public Maybe<Double> getBigFloatAsync() {
         return getBigFloatWithRestResponseAsync()
-            .flatMapMaybe(new Function<RestResponse<Void, Double>, Maybe<Double>>() {
-                public Maybe<Double> apply(RestResponse<Void, Double> restResponse) {
-                    if (restResponse.body() == null) {
-                        return Maybe.empty();
-                    } else {
-                        return Maybe.just(restResponse.body());
-                    }
-                }
-            });
+            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -504,7 +465,7 @@ public final class NumbersImpl implements Numbers {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<Void, Void>> putBigDoubleWithRestResponseAsync(@NonNull double numberBody) {
+    public Single<VoidResponse> putBigDoubleWithRestResponseAsync(@NonNull double numberBody) {
         return service.putBigDouble(numberBody);
     }
 
@@ -547,7 +508,7 @@ public final class NumbersImpl implements Numbers {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<Void, Double>> getBigDoubleWithRestResponseAsync() {
+    public Single<BodyResponse<Double>> getBigDoubleWithRestResponseAsync() {
         return service.getBigDouble();
     }
 
@@ -558,15 +519,7 @@ public final class NumbersImpl implements Numbers {
      */
     public Maybe<Double> getBigDoubleAsync() {
         return getBigDoubleWithRestResponseAsync()
-            .flatMapMaybe(new Function<RestResponse<Void, Double>, Maybe<Double>>() {
-                public Maybe<Double> apply(RestResponse<Void, Double> restResponse) {
-                    if (restResponse.body() == null) {
-                        return Maybe.empty();
-                    } else {
-                        return Maybe.just(restResponse.body());
-                    }
-                }
-            });
+            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -600,7 +553,7 @@ public final class NumbersImpl implements Numbers {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<Void, Void>> putBigDoublePositiveDecimalWithRestResponseAsync(@NonNull double numberBody) {
+    public Single<VoidResponse> putBigDoublePositiveDecimalWithRestResponseAsync(@NonNull double numberBody) {
         return service.putBigDoublePositiveDecimal(numberBody);
     }
 
@@ -643,7 +596,7 @@ public final class NumbersImpl implements Numbers {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<Void, Double>> getBigDoublePositiveDecimalWithRestResponseAsync() {
+    public Single<BodyResponse<Double>> getBigDoublePositiveDecimalWithRestResponseAsync() {
         return service.getBigDoublePositiveDecimal();
     }
 
@@ -654,15 +607,7 @@ public final class NumbersImpl implements Numbers {
      */
     public Maybe<Double> getBigDoublePositiveDecimalAsync() {
         return getBigDoublePositiveDecimalWithRestResponseAsync()
-            .flatMapMaybe(new Function<RestResponse<Void, Double>, Maybe<Double>>() {
-                public Maybe<Double> apply(RestResponse<Void, Double> restResponse) {
-                    if (restResponse.body() == null) {
-                        return Maybe.empty();
-                    } else {
-                        return Maybe.just(restResponse.body());
-                    }
-                }
-            });
+            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -696,7 +641,7 @@ public final class NumbersImpl implements Numbers {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<Void, Void>> putBigDoubleNegativeDecimalWithRestResponseAsync(@NonNull double numberBody) {
+    public Single<VoidResponse> putBigDoubleNegativeDecimalWithRestResponseAsync(@NonNull double numberBody) {
         return service.putBigDoubleNegativeDecimal(numberBody);
     }
 
@@ -739,7 +684,7 @@ public final class NumbersImpl implements Numbers {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<Void, Double>> getBigDoubleNegativeDecimalWithRestResponseAsync() {
+    public Single<BodyResponse<Double>> getBigDoubleNegativeDecimalWithRestResponseAsync() {
         return service.getBigDoubleNegativeDecimal();
     }
 
@@ -750,15 +695,7 @@ public final class NumbersImpl implements Numbers {
      */
     public Maybe<Double> getBigDoubleNegativeDecimalAsync() {
         return getBigDoubleNegativeDecimalWithRestResponseAsync()
-            .flatMapMaybe(new Function<RestResponse<Void, Double>, Maybe<Double>>() {
-                public Maybe<Double> apply(RestResponse<Void, Double> restResponse) {
-                    if (restResponse.body() == null) {
-                        return Maybe.empty();
-                    } else {
-                        return Maybe.just(restResponse.body());
-                    }
-                }
-            });
+            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -792,7 +729,7 @@ public final class NumbersImpl implements Numbers {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<Void, Void>> putBigDecimalWithRestResponseAsync(@NonNull BigDecimal numberBody) {
+    public Single<VoidResponse> putBigDecimalWithRestResponseAsync(@NonNull BigDecimal numberBody) {
         if (numberBody == null) {
             throw new IllegalArgumentException("Parameter numberBody is required and cannot be null.");
         }
@@ -838,7 +775,7 @@ public final class NumbersImpl implements Numbers {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<Void, BigDecimal>> getBigDecimalWithRestResponseAsync() {
+    public Single<BodyResponse<BigDecimal>> getBigDecimalWithRestResponseAsync() {
         return service.getBigDecimal();
     }
 
@@ -849,15 +786,7 @@ public final class NumbersImpl implements Numbers {
      */
     public Maybe<BigDecimal> getBigDecimalAsync() {
         return getBigDecimalWithRestResponseAsync()
-            .flatMapMaybe(new Function<RestResponse<Void, BigDecimal>, Maybe<BigDecimal>>() {
-                public Maybe<BigDecimal> apply(RestResponse<Void, BigDecimal> restResponse) {
-                    if (restResponse.body() == null) {
-                        return Maybe.empty();
-                    } else {
-                        return Maybe.just(restResponse.body());
-                    }
-                }
-            });
+            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -891,7 +820,7 @@ public final class NumbersImpl implements Numbers {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<Void, Void>> putBigDecimalPositiveDecimalWithRestResponseAsync(@NonNull BigDecimal numberBody) {
+    public Single<VoidResponse> putBigDecimalPositiveDecimalWithRestResponseAsync(@NonNull BigDecimal numberBody) {
         if (numberBody == null) {
             throw new IllegalArgumentException("Parameter numberBody is required and cannot be null.");
         }
@@ -937,7 +866,7 @@ public final class NumbersImpl implements Numbers {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<Void, BigDecimal>> getBigDecimalPositiveDecimalWithRestResponseAsync() {
+    public Single<BodyResponse<BigDecimal>> getBigDecimalPositiveDecimalWithRestResponseAsync() {
         return service.getBigDecimalPositiveDecimal();
     }
 
@@ -948,15 +877,7 @@ public final class NumbersImpl implements Numbers {
      */
     public Maybe<BigDecimal> getBigDecimalPositiveDecimalAsync() {
         return getBigDecimalPositiveDecimalWithRestResponseAsync()
-            .flatMapMaybe(new Function<RestResponse<Void, BigDecimal>, Maybe<BigDecimal>>() {
-                public Maybe<BigDecimal> apply(RestResponse<Void, BigDecimal> restResponse) {
-                    if (restResponse.body() == null) {
-                        return Maybe.empty();
-                    } else {
-                        return Maybe.just(restResponse.body());
-                    }
-                }
-            });
+            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -990,7 +911,7 @@ public final class NumbersImpl implements Numbers {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<Void, Void>> putBigDecimalNegativeDecimalWithRestResponseAsync(@NonNull BigDecimal numberBody) {
+    public Single<VoidResponse> putBigDecimalNegativeDecimalWithRestResponseAsync(@NonNull BigDecimal numberBody) {
         if (numberBody == null) {
             throw new IllegalArgumentException("Parameter numberBody is required and cannot be null.");
         }
@@ -1036,7 +957,7 @@ public final class NumbersImpl implements Numbers {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<Void, BigDecimal>> getBigDecimalNegativeDecimalWithRestResponseAsync() {
+    public Single<BodyResponse<BigDecimal>> getBigDecimalNegativeDecimalWithRestResponseAsync() {
         return service.getBigDecimalNegativeDecimal();
     }
 
@@ -1047,15 +968,7 @@ public final class NumbersImpl implements Numbers {
      */
     public Maybe<BigDecimal> getBigDecimalNegativeDecimalAsync() {
         return getBigDecimalNegativeDecimalWithRestResponseAsync()
-            .flatMapMaybe(new Function<RestResponse<Void, BigDecimal>, Maybe<BigDecimal>>() {
-                public Maybe<BigDecimal> apply(RestResponse<Void, BigDecimal> restResponse) {
-                    if (restResponse.body() == null) {
-                        return Maybe.empty();
-                    } else {
-                        return Maybe.just(restResponse.body());
-                    }
-                }
-            });
+            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -1089,7 +1002,7 @@ public final class NumbersImpl implements Numbers {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<Void, Void>> putSmallFloatWithRestResponseAsync(@NonNull double numberBody) {
+    public Single<VoidResponse> putSmallFloatWithRestResponseAsync(@NonNull double numberBody) {
         return service.putSmallFloat(numberBody);
     }
 
@@ -1132,7 +1045,7 @@ public final class NumbersImpl implements Numbers {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<Void, Double>> getSmallFloatWithRestResponseAsync() {
+    public Single<BodyResponse<Double>> getSmallFloatWithRestResponseAsync() {
         return service.getSmallFloat();
     }
 
@@ -1143,15 +1056,7 @@ public final class NumbersImpl implements Numbers {
      */
     public Maybe<Double> getSmallFloatAsync() {
         return getSmallFloatWithRestResponseAsync()
-            .flatMapMaybe(new Function<RestResponse<Void, Double>, Maybe<Double>>() {
-                public Maybe<Double> apply(RestResponse<Void, Double> restResponse) {
-                    if (restResponse.body() == null) {
-                        return Maybe.empty();
-                    } else {
-                        return Maybe.just(restResponse.body());
-                    }
-                }
-            });
+            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -1185,7 +1090,7 @@ public final class NumbersImpl implements Numbers {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<Void, Void>> putSmallDoubleWithRestResponseAsync(@NonNull double numberBody) {
+    public Single<VoidResponse> putSmallDoubleWithRestResponseAsync(@NonNull double numberBody) {
         return service.putSmallDouble(numberBody);
     }
 
@@ -1228,7 +1133,7 @@ public final class NumbersImpl implements Numbers {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<Void, Double>> getSmallDoubleWithRestResponseAsync() {
+    public Single<BodyResponse<Double>> getSmallDoubleWithRestResponseAsync() {
         return service.getSmallDouble();
     }
 
@@ -1239,15 +1144,7 @@ public final class NumbersImpl implements Numbers {
      */
     public Maybe<Double> getSmallDoubleAsync() {
         return getSmallDoubleWithRestResponseAsync()
-            .flatMapMaybe(new Function<RestResponse<Void, Double>, Maybe<Double>>() {
-                public Maybe<Double> apply(RestResponse<Void, Double> restResponse) {
-                    if (restResponse.body() == null) {
-                        return Maybe.empty();
-                    } else {
-                        return Maybe.just(restResponse.body());
-                    }
-                }
-            });
+            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -1281,7 +1178,7 @@ public final class NumbersImpl implements Numbers {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<Void, Void>> putSmallDecimalWithRestResponseAsync(@NonNull BigDecimal numberBody) {
+    public Single<VoidResponse> putSmallDecimalWithRestResponseAsync(@NonNull BigDecimal numberBody) {
         if (numberBody == null) {
             throw new IllegalArgumentException("Parameter numberBody is required and cannot be null.");
         }
@@ -1327,7 +1224,7 @@ public final class NumbersImpl implements Numbers {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<Void, BigDecimal>> getSmallDecimalWithRestResponseAsync() {
+    public Single<BodyResponse<BigDecimal>> getSmallDecimalWithRestResponseAsync() {
         return service.getSmallDecimal();
     }
 
@@ -1338,14 +1235,6 @@ public final class NumbersImpl implements Numbers {
      */
     public Maybe<BigDecimal> getSmallDecimalAsync() {
         return getSmallDecimalWithRestResponseAsync()
-            .flatMapMaybe(new Function<RestResponse<Void, BigDecimal>, Maybe<BigDecimal>>() {
-                public Maybe<BigDecimal> apply(RestResponse<Void, BigDecimal> restResponse) {
-                    if (restResponse.body() == null) {
-                        return Maybe.empty();
-                    } else {
-                        return Maybe.just(restResponse.body());
-                    }
-                }
-            });
+            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 }

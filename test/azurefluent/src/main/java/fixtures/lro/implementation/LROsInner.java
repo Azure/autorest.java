@@ -14,11 +14,12 @@ import com.microsoft.azure.v2.AzureProxy;
 import com.microsoft.azure.v2.CloudException;
 import com.microsoft.azure.v2.OperationStatus;
 import com.microsoft.azure.v2.util.ServiceFutureUtil;
+import com.microsoft.rest.v2.BodyResponse;
 import com.microsoft.rest.v2.OperationDescription;
-import com.microsoft.rest.v2.RestResponse;
 import com.microsoft.rest.v2.ServiceCallback;
 import com.microsoft.rest.v2.ServiceFuture;
 import com.microsoft.rest.v2.Validator;
+import com.microsoft.rest.v2.VoidResponse;
 import com.microsoft.rest.v2.annotations.BodyParam;
 import com.microsoft.rest.v2.annotations.DELETE;
 import com.microsoft.rest.v2.annotations.ExpectedResponses;
@@ -28,6 +29,29 @@ import com.microsoft.rest.v2.annotations.POST;
 import com.microsoft.rest.v2.annotations.PUT;
 import com.microsoft.rest.v2.annotations.ResumeOperation;
 import com.microsoft.rest.v2.annotations.UnexpectedResponseExceptionType;
+import fixtures.lro.models.LROsDelete202NoRetry204Response;
+import fixtures.lro.models.LROsDelete202Retry200Response;
+import fixtures.lro.models.LROsDeleteAsyncNoHeaderInRetryResponse;
+import fixtures.lro.models.LROsDeleteAsyncNoRetrySucceededResponse;
+import fixtures.lro.models.LROsDeleteAsyncRetrycanceledResponse;
+import fixtures.lro.models.LROsDeleteAsyncRetryFailedResponse;
+import fixtures.lro.models.LROsDeleteAsyncRetrySucceededResponse;
+import fixtures.lro.models.LROsDeleteNoHeaderInRetryResponse;
+import fixtures.lro.models.LROsDeleteProvisioning202Accepted200SucceededResponse;
+import fixtures.lro.models.LROsDeleteProvisioning202Deletingcanceled200Response;
+import fixtures.lro.models.LROsDeleteProvisioning202DeletingFailed200Response;
+import fixtures.lro.models.LROsPost202NoRetry204Response;
+import fixtures.lro.models.LROsPost202Retry200Response;
+import fixtures.lro.models.LROsPostAsyncNoRetrySucceededResponse;
+import fixtures.lro.models.LROsPostAsyncRetrycanceledResponse;
+import fixtures.lro.models.LROsPostAsyncRetryFailedResponse;
+import fixtures.lro.models.LROsPostAsyncRetrySucceededResponse;
+import fixtures.lro.models.LROsPutAsyncNoHeaderInRetryResponse;
+import fixtures.lro.models.LROsPutAsyncNoRetrycanceledResponse;
+import fixtures.lro.models.LROsPutAsyncNoRetrySucceededResponse;
+import fixtures.lro.models.LROsPutAsyncRetryFailedResponse;
+import fixtures.lro.models.LROsPutAsyncRetrySucceededResponse;
+import fixtures.lro.models.LROsPutNoHeaderInRetryResponse;
 import io.reactivex.Completable;
 import io.reactivex.Maybe;
 import io.reactivex.Observable;
@@ -73,7 +97,7 @@ public final class LROsInner {
         @PUT("lro/put/200/succeeded")
         @ExpectedResponses({200, 202, 204})
         @UnexpectedResponseExceptionType(CloudException.class)
-        Single<RestResponse<Void, ProductInner>> put200Succeeded(@BodyParam("application/json; charset=utf-8") ProductInner product, @HeaderParam("accept-language") String acceptLanguage);
+        Single<BodyResponse<ProductInner>> put200Succeeded(@BodyParam("application/json; charset=utf-8") ProductInner product, @HeaderParam("accept-language") String acceptLanguage);
 
         @PUT("lro/put/200/succeeded")
         @ExpectedResponses({200, 202, 204})
@@ -89,7 +113,7 @@ public final class LROsInner {
         @PUT("lro/put/200/succeeded/nostate")
         @ExpectedResponses({200, 202, 204})
         @UnexpectedResponseExceptionType(CloudException.class)
-        Single<RestResponse<Void, ProductInner>> put200SucceededNoState(@BodyParam("application/json; charset=utf-8") ProductInner product, @HeaderParam("accept-language") String acceptLanguage);
+        Single<BodyResponse<ProductInner>> put200SucceededNoState(@BodyParam("application/json; charset=utf-8") ProductInner product, @HeaderParam("accept-language") String acceptLanguage);
 
         @PUT("lro/put/200/succeeded/nostate")
         @ExpectedResponses({200, 202, 204})
@@ -105,7 +129,7 @@ public final class LROsInner {
         @PUT("lro/put/202/retry/200")
         @ExpectedResponses({200, 202, 204})
         @UnexpectedResponseExceptionType(CloudException.class)
-        Single<RestResponse<Void, ProductInner>> put202Retry200(@BodyParam("application/json; charset=utf-8") ProductInner product, @HeaderParam("accept-language") String acceptLanguage);
+        Single<BodyResponse<ProductInner>> put202Retry200(@BodyParam("application/json; charset=utf-8") ProductInner product, @HeaderParam("accept-language") String acceptLanguage);
 
         @PUT("lro/put/202/retry/200")
         @ExpectedResponses({200, 202, 204})
@@ -121,7 +145,7 @@ public final class LROsInner {
         @PUT("lro/put/201/creating/succeeded/200")
         @ExpectedResponses({200, 201, 202, 204})
         @UnexpectedResponseExceptionType(CloudException.class)
-        Single<RestResponse<Void, ProductInner>> put201CreatingSucceeded200(@BodyParam("application/json; charset=utf-8") ProductInner product, @HeaderParam("accept-language") String acceptLanguage);
+        Single<BodyResponse<ProductInner>> put201CreatingSucceeded200(@BodyParam("application/json; charset=utf-8") ProductInner product, @HeaderParam("accept-language") String acceptLanguage);
 
         @PUT("lro/put/201/creating/succeeded/200")
         @ExpectedResponses({200, 201, 202, 204})
@@ -137,7 +161,7 @@ public final class LROsInner {
         @PUT("lro/put/200/updating/succeeded/200")
         @ExpectedResponses({200, 202, 204})
         @UnexpectedResponseExceptionType(CloudException.class)
-        Single<RestResponse<Void, ProductInner>> put200UpdatingSucceeded204(@BodyParam("application/json; charset=utf-8") ProductInner product, @HeaderParam("accept-language") String acceptLanguage);
+        Single<BodyResponse<ProductInner>> put200UpdatingSucceeded204(@BodyParam("application/json; charset=utf-8") ProductInner product, @HeaderParam("accept-language") String acceptLanguage);
 
         @PUT("lro/put/200/updating/succeeded/200")
         @ExpectedResponses({200, 202, 204})
@@ -153,7 +177,7 @@ public final class LROsInner {
         @PUT("lro/put/201/created/failed/200")
         @ExpectedResponses({200, 201, 202, 204})
         @UnexpectedResponseExceptionType(CloudException.class)
-        Single<RestResponse<Void, ProductInner>> put201CreatingFailed200(@BodyParam("application/json; charset=utf-8") ProductInner product, @HeaderParam("accept-language") String acceptLanguage);
+        Single<BodyResponse<ProductInner>> put201CreatingFailed200(@BodyParam("application/json; charset=utf-8") ProductInner product, @HeaderParam("accept-language") String acceptLanguage);
 
         @PUT("lro/put/201/created/failed/200")
         @ExpectedResponses({200, 201, 202, 204})
@@ -169,7 +193,7 @@ public final class LROsInner {
         @PUT("lro/put/200/accepted/canceled/200")
         @ExpectedResponses({200, 202, 204})
         @UnexpectedResponseExceptionType(CloudException.class)
-        Single<RestResponse<Void, ProductInner>> put200Acceptedcanceled200(@BodyParam("application/json; charset=utf-8") ProductInner product, @HeaderParam("accept-language") String acceptLanguage);
+        Single<BodyResponse<ProductInner>> put200Acceptedcanceled200(@BodyParam("application/json; charset=utf-8") ProductInner product, @HeaderParam("accept-language") String acceptLanguage);
 
         @PUT("lro/put/200/accepted/canceled/200")
         @ExpectedResponses({200, 202, 204})
@@ -185,7 +209,7 @@ public final class LROsInner {
         @PUT("lro/put/noheader/202/200")
         @ExpectedResponses({200, 202, 204})
         @UnexpectedResponseExceptionType(CloudException.class)
-        Single<RestResponse<LROsPutNoHeaderInRetryHeadersInner, ProductInner>> putNoHeaderInRetry(@BodyParam("application/json; charset=utf-8") ProductInner product, @HeaderParam("accept-language") String acceptLanguage);
+        Single<LROsPutNoHeaderInRetryResponse> putNoHeaderInRetry(@BodyParam("application/json; charset=utf-8") ProductInner product, @HeaderParam("accept-language") String acceptLanguage);
 
         @PUT("lro/put/noheader/202/200")
         @ExpectedResponses({200, 202, 204})
@@ -201,7 +225,7 @@ public final class LROsInner {
         @PUT("lro/putasync/retry/succeeded")
         @ExpectedResponses({200, 202, 204})
         @UnexpectedResponseExceptionType(CloudException.class)
-        Single<RestResponse<LROsPutAsyncRetrySucceededHeadersInner, ProductInner>> putAsyncRetrySucceeded(@BodyParam("application/json; charset=utf-8") ProductInner product, @HeaderParam("accept-language") String acceptLanguage);
+        Single<LROsPutAsyncRetrySucceededResponse> putAsyncRetrySucceeded(@BodyParam("application/json; charset=utf-8") ProductInner product, @HeaderParam("accept-language") String acceptLanguage);
 
         @PUT("lro/putasync/retry/succeeded")
         @ExpectedResponses({200, 202, 204})
@@ -217,7 +241,7 @@ public final class LROsInner {
         @PUT("lro/putasync/noretry/succeeded")
         @ExpectedResponses({200, 202, 204})
         @UnexpectedResponseExceptionType(CloudException.class)
-        Single<RestResponse<LROsPutAsyncNoRetrySucceededHeadersInner, ProductInner>> putAsyncNoRetrySucceeded(@BodyParam("application/json; charset=utf-8") ProductInner product, @HeaderParam("accept-language") String acceptLanguage);
+        Single<LROsPutAsyncNoRetrySucceededResponse> putAsyncNoRetrySucceeded(@BodyParam("application/json; charset=utf-8") ProductInner product, @HeaderParam("accept-language") String acceptLanguage);
 
         @PUT("lro/putasync/noretry/succeeded")
         @ExpectedResponses({200, 202, 204})
@@ -233,7 +257,7 @@ public final class LROsInner {
         @PUT("lro/putasync/retry/failed")
         @ExpectedResponses({200, 202, 204})
         @UnexpectedResponseExceptionType(CloudException.class)
-        Single<RestResponse<LROsPutAsyncRetryFailedHeadersInner, ProductInner>> putAsyncRetryFailed(@BodyParam("application/json; charset=utf-8") ProductInner product, @HeaderParam("accept-language") String acceptLanguage);
+        Single<LROsPutAsyncRetryFailedResponse> putAsyncRetryFailed(@BodyParam("application/json; charset=utf-8") ProductInner product, @HeaderParam("accept-language") String acceptLanguage);
 
         @PUT("lro/putasync/retry/failed")
         @ExpectedResponses({200, 202, 204})
@@ -249,7 +273,7 @@ public final class LROsInner {
         @PUT("lro/putasync/noretry/canceled")
         @ExpectedResponses({200, 202, 204})
         @UnexpectedResponseExceptionType(CloudException.class)
-        Single<RestResponse<LROsPutAsyncNoRetrycanceledHeadersInner, ProductInner>> putAsyncNoRetrycanceled(@BodyParam("application/json; charset=utf-8") ProductInner product, @HeaderParam("accept-language") String acceptLanguage);
+        Single<LROsPutAsyncNoRetrycanceledResponse> putAsyncNoRetrycanceled(@BodyParam("application/json; charset=utf-8") ProductInner product, @HeaderParam("accept-language") String acceptLanguage);
 
         @PUT("lro/putasync/noretry/canceled")
         @ExpectedResponses({200, 202, 204})
@@ -265,7 +289,7 @@ public final class LROsInner {
         @PUT("lro/putasync/noheader/201/200")
         @ExpectedResponses({200, 201, 202, 204})
         @UnexpectedResponseExceptionType(CloudException.class)
-        Single<RestResponse<LROsPutAsyncNoHeaderInRetryHeadersInner, ProductInner>> putAsyncNoHeaderInRetry(@BodyParam("application/json; charset=utf-8") ProductInner product, @HeaderParam("accept-language") String acceptLanguage);
+        Single<LROsPutAsyncNoHeaderInRetryResponse> putAsyncNoHeaderInRetry(@BodyParam("application/json; charset=utf-8") ProductInner product, @HeaderParam("accept-language") String acceptLanguage);
 
         @PUT("lro/putasync/noheader/201/200")
         @ExpectedResponses({200, 201, 202, 204})
@@ -281,7 +305,7 @@ public final class LROsInner {
         @PUT("lro/putnonresource/202/200")
         @ExpectedResponses({200, 202, 204})
         @UnexpectedResponseExceptionType(CloudException.class)
-        Single<RestResponse<Void, SkuInner>> putNonResource(@BodyParam("application/json; charset=utf-8") SkuInner sku, @HeaderParam("accept-language") String acceptLanguage);
+        Single<BodyResponse<SkuInner>> putNonResource(@BodyParam("application/json; charset=utf-8") SkuInner sku, @HeaderParam("accept-language") String acceptLanguage);
 
         @PUT("lro/putnonresource/202/200")
         @ExpectedResponses({200, 202, 204})
@@ -297,7 +321,7 @@ public final class LROsInner {
         @PUT("lro/putnonresourceasync/202/200")
         @ExpectedResponses({200, 202, 204})
         @UnexpectedResponseExceptionType(CloudException.class)
-        Single<RestResponse<Void, SkuInner>> putAsyncNonResource(@BodyParam("application/json; charset=utf-8") SkuInner sku, @HeaderParam("accept-language") String acceptLanguage);
+        Single<BodyResponse<SkuInner>> putAsyncNonResource(@BodyParam("application/json; charset=utf-8") SkuInner sku, @HeaderParam("accept-language") String acceptLanguage);
 
         @PUT("lro/putnonresourceasync/202/200")
         @ExpectedResponses({200, 202, 204})
@@ -313,7 +337,7 @@ public final class LROsInner {
         @PUT("lro/putsubresource/202/200")
         @ExpectedResponses({200, 202, 204})
         @UnexpectedResponseExceptionType(CloudException.class)
-        Single<RestResponse<Void, SubProductInner>> putSubResource(@BodyParam("application/json; charset=utf-8") SubProductInner product, @HeaderParam("accept-language") String acceptLanguage);
+        Single<BodyResponse<SubProductInner>> putSubResource(@BodyParam("application/json; charset=utf-8") SubProductInner product, @HeaderParam("accept-language") String acceptLanguage);
 
         @PUT("lro/putsubresource/202/200")
         @ExpectedResponses({200, 202, 204})
@@ -329,7 +353,7 @@ public final class LROsInner {
         @PUT("lro/putsubresourceasync/202/200")
         @ExpectedResponses({200, 202, 204})
         @UnexpectedResponseExceptionType(CloudException.class)
-        Single<RestResponse<Void, SubProductInner>> putAsyncSubResource(@BodyParam("application/json; charset=utf-8") SubProductInner product, @HeaderParam("accept-language") String acceptLanguage);
+        Single<BodyResponse<SubProductInner>> putAsyncSubResource(@BodyParam("application/json; charset=utf-8") SubProductInner product, @HeaderParam("accept-language") String acceptLanguage);
 
         @PUT("lro/putsubresourceasync/202/200")
         @ExpectedResponses({200, 202, 204})
@@ -345,7 +369,7 @@ public final class LROsInner {
         @DELETE("lro/delete/provisioning/202/accepted/200/succeeded")
         @ExpectedResponses({200, 202, 204})
         @UnexpectedResponseExceptionType(CloudException.class)
-        Single<RestResponse<LROsDeleteProvisioning202Accepted200SucceededHeadersInner, ProductInner>> deleteProvisioning202Accepted200Succeeded(@HeaderParam("accept-language") String acceptLanguage);
+        Single<LROsDeleteProvisioning202Accepted200SucceededResponse> deleteProvisioning202Accepted200Succeeded(@HeaderParam("accept-language") String acceptLanguage);
 
         @DELETE("lro/delete/provisioning/202/accepted/200/succeeded")
         @ExpectedResponses({200, 202, 204})
@@ -361,7 +385,7 @@ public final class LROsInner {
         @DELETE("lro/delete/provisioning/202/deleting/200/failed")
         @ExpectedResponses({200, 202, 204})
         @UnexpectedResponseExceptionType(CloudException.class)
-        Single<RestResponse<LROsDeleteProvisioning202DeletingFailed200HeadersInner, ProductInner>> deleteProvisioning202DeletingFailed200(@HeaderParam("accept-language") String acceptLanguage);
+        Single<LROsDeleteProvisioning202DeletingFailed200Response> deleteProvisioning202DeletingFailed200(@HeaderParam("accept-language") String acceptLanguage);
 
         @DELETE("lro/delete/provisioning/202/deleting/200/failed")
         @ExpectedResponses({200, 202, 204})
@@ -377,7 +401,7 @@ public final class LROsInner {
         @DELETE("lro/delete/provisioning/202/deleting/200/canceled")
         @ExpectedResponses({200, 202, 204})
         @UnexpectedResponseExceptionType(CloudException.class)
-        Single<RestResponse<LROsDeleteProvisioning202Deletingcanceled200HeadersInner, ProductInner>> deleteProvisioning202Deletingcanceled200(@HeaderParam("accept-language") String acceptLanguage);
+        Single<LROsDeleteProvisioning202Deletingcanceled200Response> deleteProvisioning202Deletingcanceled200(@HeaderParam("accept-language") String acceptLanguage);
 
         @DELETE("lro/delete/provisioning/202/deleting/200/canceled")
         @ExpectedResponses({200, 202, 204})
@@ -393,7 +417,7 @@ public final class LROsInner {
         @DELETE("lro/delete/204/succeeded")
         @ExpectedResponses({200, 202, 204})
         @UnexpectedResponseExceptionType(CloudException.class)
-        Single<RestResponse<Void, Void>> delete204Succeeded(@HeaderParam("accept-language") String acceptLanguage);
+        Single<VoidResponse> delete204Succeeded(@HeaderParam("accept-language") String acceptLanguage);
 
         @DELETE("lro/delete/204/succeeded")
         @ExpectedResponses({200, 202, 204})
@@ -409,7 +433,7 @@ public final class LROsInner {
         @DELETE("lro/delete/202/retry/200")
         @ExpectedResponses({200, 202, 204})
         @UnexpectedResponseExceptionType(CloudException.class)
-        Single<RestResponse<LROsDelete202Retry200HeadersInner, ProductInner>> delete202Retry200(@HeaderParam("accept-language") String acceptLanguage);
+        Single<LROsDelete202Retry200Response> delete202Retry200(@HeaderParam("accept-language") String acceptLanguage);
 
         @DELETE("lro/delete/202/retry/200")
         @ExpectedResponses({200, 202, 204})
@@ -425,7 +449,7 @@ public final class LROsInner {
         @DELETE("lro/delete/202/noretry/204")
         @ExpectedResponses({200, 202, 204})
         @UnexpectedResponseExceptionType(CloudException.class)
-        Single<RestResponse<LROsDelete202NoRetry204HeadersInner, ProductInner>> delete202NoRetry204(@HeaderParam("accept-language") String acceptLanguage);
+        Single<LROsDelete202NoRetry204Response> delete202NoRetry204(@HeaderParam("accept-language") String acceptLanguage);
 
         @DELETE("lro/delete/202/noretry/204")
         @ExpectedResponses({200, 202, 204})
@@ -441,7 +465,7 @@ public final class LROsInner {
         @DELETE("lro/delete/noheader")
         @ExpectedResponses({200, 202, 204})
         @UnexpectedResponseExceptionType(CloudException.class)
-        Single<RestResponse<LROsDeleteNoHeaderInRetryHeadersInner, Void>> deleteNoHeaderInRetry(@HeaderParam("accept-language") String acceptLanguage);
+        Single<LROsDeleteNoHeaderInRetryResponse> deleteNoHeaderInRetry(@HeaderParam("accept-language") String acceptLanguage);
 
         @DELETE("lro/delete/noheader")
         @ExpectedResponses({200, 202, 204})
@@ -457,7 +481,7 @@ public final class LROsInner {
         @DELETE("lro/deleteasync/noheader/202/204")
         @ExpectedResponses({200, 202, 204})
         @UnexpectedResponseExceptionType(CloudException.class)
-        Single<RestResponse<LROsDeleteAsyncNoHeaderInRetryHeadersInner, Void>> deleteAsyncNoHeaderInRetry(@HeaderParam("accept-language") String acceptLanguage);
+        Single<LROsDeleteAsyncNoHeaderInRetryResponse> deleteAsyncNoHeaderInRetry(@HeaderParam("accept-language") String acceptLanguage);
 
         @DELETE("lro/deleteasync/noheader/202/204")
         @ExpectedResponses({200, 202, 204})
@@ -473,7 +497,7 @@ public final class LROsInner {
         @DELETE("lro/deleteasync/retry/succeeded")
         @ExpectedResponses({200, 202, 204})
         @UnexpectedResponseExceptionType(CloudException.class)
-        Single<RestResponse<LROsDeleteAsyncRetrySucceededHeadersInner, Void>> deleteAsyncRetrySucceeded(@HeaderParam("accept-language") String acceptLanguage);
+        Single<LROsDeleteAsyncRetrySucceededResponse> deleteAsyncRetrySucceeded(@HeaderParam("accept-language") String acceptLanguage);
 
         @DELETE("lro/deleteasync/retry/succeeded")
         @ExpectedResponses({200, 202, 204})
@@ -489,7 +513,7 @@ public final class LROsInner {
         @DELETE("lro/deleteasync/noretry/succeeded")
         @ExpectedResponses({200, 202, 204})
         @UnexpectedResponseExceptionType(CloudException.class)
-        Single<RestResponse<LROsDeleteAsyncNoRetrySucceededHeadersInner, Void>> deleteAsyncNoRetrySucceeded(@HeaderParam("accept-language") String acceptLanguage);
+        Single<LROsDeleteAsyncNoRetrySucceededResponse> deleteAsyncNoRetrySucceeded(@HeaderParam("accept-language") String acceptLanguage);
 
         @DELETE("lro/deleteasync/noretry/succeeded")
         @ExpectedResponses({200, 202, 204})
@@ -505,7 +529,7 @@ public final class LROsInner {
         @DELETE("lro/deleteasync/retry/failed")
         @ExpectedResponses({200, 202, 204})
         @UnexpectedResponseExceptionType(CloudException.class)
-        Single<RestResponse<LROsDeleteAsyncRetryFailedHeadersInner, Void>> deleteAsyncRetryFailed(@HeaderParam("accept-language") String acceptLanguage);
+        Single<LROsDeleteAsyncRetryFailedResponse> deleteAsyncRetryFailed(@HeaderParam("accept-language") String acceptLanguage);
 
         @DELETE("lro/deleteasync/retry/failed")
         @ExpectedResponses({200, 202, 204})
@@ -521,7 +545,7 @@ public final class LROsInner {
         @DELETE("lro/deleteasync/retry/canceled")
         @ExpectedResponses({200, 202, 204})
         @UnexpectedResponseExceptionType(CloudException.class)
-        Single<RestResponse<LROsDeleteAsyncRetrycanceledHeadersInner, Void>> deleteAsyncRetrycanceled(@HeaderParam("accept-language") String acceptLanguage);
+        Single<LROsDeleteAsyncRetrycanceledResponse> deleteAsyncRetrycanceled(@HeaderParam("accept-language") String acceptLanguage);
 
         @DELETE("lro/deleteasync/retry/canceled")
         @ExpectedResponses({200, 202, 204})
@@ -537,7 +561,7 @@ public final class LROsInner {
         @POST("lro/post/payload/200")
         @ExpectedResponses({200, 202, 204})
         @UnexpectedResponseExceptionType(CloudException.class)
-        Single<RestResponse<Void, SkuInner>> post200WithPayload(@HeaderParam("accept-language") String acceptLanguage);
+        Single<BodyResponse<SkuInner>> post200WithPayload(@HeaderParam("accept-language") String acceptLanguage);
 
         @POST("lro/post/payload/200")
         @ExpectedResponses({200, 202, 204})
@@ -553,7 +577,7 @@ public final class LROsInner {
         @POST("lro/post/202/retry/200")
         @ExpectedResponses({200, 202, 204})
         @UnexpectedResponseExceptionType(CloudException.class)
-        Single<RestResponse<LROsPost202Retry200HeadersInner, Void>> post202Retry200(@BodyParam("application/json; charset=utf-8") ProductInner product, @HeaderParam("accept-language") String acceptLanguage);
+        Single<LROsPost202Retry200Response> post202Retry200(@BodyParam("application/json; charset=utf-8") ProductInner product, @HeaderParam("accept-language") String acceptLanguage);
 
         @POST("lro/post/202/retry/200")
         @ExpectedResponses({200, 202, 204})
@@ -569,7 +593,7 @@ public final class LROsInner {
         @POST("lro/post/202/noretry/204")
         @ExpectedResponses({200, 202, 204})
         @UnexpectedResponseExceptionType(CloudException.class)
-        Single<RestResponse<LROsPost202NoRetry204HeadersInner, ProductInner>> post202NoRetry204(@BodyParam("application/json; charset=utf-8") ProductInner product, @HeaderParam("accept-language") String acceptLanguage);
+        Single<LROsPost202NoRetry204Response> post202NoRetry204(@BodyParam("application/json; charset=utf-8") ProductInner product, @HeaderParam("accept-language") String acceptLanguage);
 
         @POST("lro/post/202/noretry/204")
         @ExpectedResponses({200, 202, 204})
@@ -585,7 +609,7 @@ public final class LROsInner {
         @POST("lro/postasync/retry/succeeded")
         @ExpectedResponses({200, 202, 204})
         @UnexpectedResponseExceptionType(CloudException.class)
-        Single<RestResponse<LROsPostAsyncRetrySucceededHeadersInner, ProductInner>> postAsyncRetrySucceeded(@BodyParam("application/json; charset=utf-8") ProductInner product, @HeaderParam("accept-language") String acceptLanguage);
+        Single<LROsPostAsyncRetrySucceededResponse> postAsyncRetrySucceeded(@BodyParam("application/json; charset=utf-8") ProductInner product, @HeaderParam("accept-language") String acceptLanguage);
 
         @POST("lro/postasync/retry/succeeded")
         @ExpectedResponses({200, 202, 204})
@@ -601,7 +625,7 @@ public final class LROsInner {
         @POST("lro/postasync/noretry/succeeded")
         @ExpectedResponses({200, 202, 204})
         @UnexpectedResponseExceptionType(CloudException.class)
-        Single<RestResponse<LROsPostAsyncNoRetrySucceededHeadersInner, ProductInner>> postAsyncNoRetrySucceeded(@BodyParam("application/json; charset=utf-8") ProductInner product, @HeaderParam("accept-language") String acceptLanguage);
+        Single<LROsPostAsyncNoRetrySucceededResponse> postAsyncNoRetrySucceeded(@BodyParam("application/json; charset=utf-8") ProductInner product, @HeaderParam("accept-language") String acceptLanguage);
 
         @POST("lro/postasync/noretry/succeeded")
         @ExpectedResponses({200, 202, 204})
@@ -617,7 +641,7 @@ public final class LROsInner {
         @POST("lro/postasync/retry/failed")
         @ExpectedResponses({200, 202, 204})
         @UnexpectedResponseExceptionType(CloudException.class)
-        Single<RestResponse<LROsPostAsyncRetryFailedHeadersInner, Void>> postAsyncRetryFailed(@BodyParam("application/json; charset=utf-8") ProductInner product, @HeaderParam("accept-language") String acceptLanguage);
+        Single<LROsPostAsyncRetryFailedResponse> postAsyncRetryFailed(@BodyParam("application/json; charset=utf-8") ProductInner product, @HeaderParam("accept-language") String acceptLanguage);
 
         @POST("lro/postasync/retry/failed")
         @ExpectedResponses({200, 202, 204})
@@ -633,7 +657,7 @@ public final class LROsInner {
         @POST("lro/postasync/retry/canceled")
         @ExpectedResponses({200, 202, 204})
         @UnexpectedResponseExceptionType(CloudException.class)
-        Single<RestResponse<LROsPostAsyncRetrycanceledHeadersInner, Void>> postAsyncRetrycanceled(@BodyParam("application/json; charset=utf-8") ProductInner product, @HeaderParam("accept-language") String acceptLanguage);
+        Single<LROsPostAsyncRetrycanceledResponse> postAsyncRetrycanceled(@BodyParam("application/json; charset=utf-8") ProductInner product, @HeaderParam("accept-language") String acceptLanguage);
 
         @POST("lro/postasync/retry/canceled")
         @ExpectedResponses({200, 202, 204})
@@ -737,7 +761,7 @@ public final class LROsInner {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<Void, ProductInner>> put200SucceededWithRestResponseAsync() {
+    public Single<BodyResponse<ProductInner>> put200SucceededWithRestResponseAsync() {
         final ProductInner product = null;
         return service.put200Succeeded(product, this.client.acceptLanguage());
     }
@@ -749,15 +773,7 @@ public final class LROsInner {
      */
     public Maybe<ProductInner> put200SucceededAsync() {
         return put200SucceededWithRestResponseAsync()
-            .flatMapMaybe(new Function<RestResponse<Void, ProductInner>, Maybe<ProductInner>>() {
-                public Maybe<ProductInner> apply(RestResponse<Void, ProductInner> restResponse) {
-                    if (restResponse.body() == null) {
-                        return Maybe.empty();
-                    } else {
-                        return Maybe.just(restResponse.body());
-                    }
-                }
-            });
+            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -792,7 +808,7 @@ public final class LROsInner {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<Void, ProductInner>> put200SucceededWithRestResponseAsync(ProductInner product) {
+    public Single<BodyResponse<ProductInner>> put200SucceededWithRestResponseAsync(ProductInner product) {
         Validator.validate(product);
         return service.put200Succeeded(product, this.client.acceptLanguage());
     }
@@ -806,15 +822,7 @@ public final class LROsInner {
      */
     public Maybe<ProductInner> put200SucceededAsync(ProductInner product) {
         return put200SucceededWithRestResponseAsync(product)
-            .flatMapMaybe(new Function<RestResponse<Void, ProductInner>, Maybe<ProductInner>>() {
-                public Maybe<ProductInner> apply(RestResponse<Void, ProductInner> restResponse) {
-                    if (restResponse.body() == null) {
-                        return Maybe.empty();
-                    } else {
-                        return Maybe.just(restResponse.body());
-                    }
-                }
-            });
+            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -926,7 +934,7 @@ public final class LROsInner {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<Void, ProductInner>> put200SucceededNoStateWithRestResponseAsync() {
+    public Single<BodyResponse<ProductInner>> put200SucceededNoStateWithRestResponseAsync() {
         final ProductInner product = null;
         return service.put200SucceededNoState(product, this.client.acceptLanguage());
     }
@@ -938,15 +946,7 @@ public final class LROsInner {
      */
     public Maybe<ProductInner> put200SucceededNoStateAsync() {
         return put200SucceededNoStateWithRestResponseAsync()
-            .flatMapMaybe(new Function<RestResponse<Void, ProductInner>, Maybe<ProductInner>>() {
-                public Maybe<ProductInner> apply(RestResponse<Void, ProductInner> restResponse) {
-                    if (restResponse.body() == null) {
-                        return Maybe.empty();
-                    } else {
-                        return Maybe.just(restResponse.body());
-                    }
-                }
-            });
+            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -981,7 +981,7 @@ public final class LROsInner {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<Void, ProductInner>> put200SucceededNoStateWithRestResponseAsync(ProductInner product) {
+    public Single<BodyResponse<ProductInner>> put200SucceededNoStateWithRestResponseAsync(ProductInner product) {
         Validator.validate(product);
         return service.put200SucceededNoState(product, this.client.acceptLanguage());
     }
@@ -995,15 +995,7 @@ public final class LROsInner {
      */
     public Maybe<ProductInner> put200SucceededNoStateAsync(ProductInner product) {
         return put200SucceededNoStateWithRestResponseAsync(product)
-            .flatMapMaybe(new Function<RestResponse<Void, ProductInner>, Maybe<ProductInner>>() {
-                public Maybe<ProductInner> apply(RestResponse<Void, ProductInner> restResponse) {
-                    if (restResponse.body() == null) {
-                        return Maybe.empty();
-                    } else {
-                        return Maybe.just(restResponse.body());
-                    }
-                }
-            });
+            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -1115,7 +1107,7 @@ public final class LROsInner {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<Void, ProductInner>> put202Retry200WithRestResponseAsync() {
+    public Single<BodyResponse<ProductInner>> put202Retry200WithRestResponseAsync() {
         final ProductInner product = null;
         return service.put202Retry200(product, this.client.acceptLanguage());
     }
@@ -1127,15 +1119,7 @@ public final class LROsInner {
      */
     public Maybe<ProductInner> put202Retry200Async() {
         return put202Retry200WithRestResponseAsync()
-            .flatMapMaybe(new Function<RestResponse<Void, ProductInner>, Maybe<ProductInner>>() {
-                public Maybe<ProductInner> apply(RestResponse<Void, ProductInner> restResponse) {
-                    if (restResponse.body() == null) {
-                        return Maybe.empty();
-                    } else {
-                        return Maybe.just(restResponse.body());
-                    }
-                }
-            });
+            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -1170,7 +1154,7 @@ public final class LROsInner {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<Void, ProductInner>> put202Retry200WithRestResponseAsync(ProductInner product) {
+    public Single<BodyResponse<ProductInner>> put202Retry200WithRestResponseAsync(ProductInner product) {
         Validator.validate(product);
         return service.put202Retry200(product, this.client.acceptLanguage());
     }
@@ -1184,15 +1168,7 @@ public final class LROsInner {
      */
     public Maybe<ProductInner> put202Retry200Async(ProductInner product) {
         return put202Retry200WithRestResponseAsync(product)
-            .flatMapMaybe(new Function<RestResponse<Void, ProductInner>, Maybe<ProductInner>>() {
-                public Maybe<ProductInner> apply(RestResponse<Void, ProductInner> restResponse) {
-                    if (restResponse.body() == null) {
-                        return Maybe.empty();
-                    } else {
-                        return Maybe.just(restResponse.body());
-                    }
-                }
-            });
+            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -1304,7 +1280,7 @@ public final class LROsInner {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<Void, ProductInner>> put201CreatingSucceeded200WithRestResponseAsync() {
+    public Single<BodyResponse<ProductInner>> put201CreatingSucceeded200WithRestResponseAsync() {
         final ProductInner product = null;
         return service.put201CreatingSucceeded200(product, this.client.acceptLanguage());
     }
@@ -1316,15 +1292,7 @@ public final class LROsInner {
      */
     public Maybe<ProductInner> put201CreatingSucceeded200Async() {
         return put201CreatingSucceeded200WithRestResponseAsync()
-            .flatMapMaybe(new Function<RestResponse<Void, ProductInner>, Maybe<ProductInner>>() {
-                public Maybe<ProductInner> apply(RestResponse<Void, ProductInner> restResponse) {
-                    if (restResponse.body() == null) {
-                        return Maybe.empty();
-                    } else {
-                        return Maybe.just(restResponse.body());
-                    }
-                }
-            });
+            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -1359,7 +1327,7 @@ public final class LROsInner {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<Void, ProductInner>> put201CreatingSucceeded200WithRestResponseAsync(ProductInner product) {
+    public Single<BodyResponse<ProductInner>> put201CreatingSucceeded200WithRestResponseAsync(ProductInner product) {
         Validator.validate(product);
         return service.put201CreatingSucceeded200(product, this.client.acceptLanguage());
     }
@@ -1373,15 +1341,7 @@ public final class LROsInner {
      */
     public Maybe<ProductInner> put201CreatingSucceeded200Async(ProductInner product) {
         return put201CreatingSucceeded200WithRestResponseAsync(product)
-            .flatMapMaybe(new Function<RestResponse<Void, ProductInner>, Maybe<ProductInner>>() {
-                public Maybe<ProductInner> apply(RestResponse<Void, ProductInner> restResponse) {
-                    if (restResponse.body() == null) {
-                        return Maybe.empty();
-                    } else {
-                        return Maybe.just(restResponse.body());
-                    }
-                }
-            });
+            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -1493,7 +1453,7 @@ public final class LROsInner {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<Void, ProductInner>> put200UpdatingSucceeded204WithRestResponseAsync() {
+    public Single<BodyResponse<ProductInner>> put200UpdatingSucceeded204WithRestResponseAsync() {
         final ProductInner product = null;
         return service.put200UpdatingSucceeded204(product, this.client.acceptLanguage());
     }
@@ -1505,15 +1465,7 @@ public final class LROsInner {
      */
     public Maybe<ProductInner> put200UpdatingSucceeded204Async() {
         return put200UpdatingSucceeded204WithRestResponseAsync()
-            .flatMapMaybe(new Function<RestResponse<Void, ProductInner>, Maybe<ProductInner>>() {
-                public Maybe<ProductInner> apply(RestResponse<Void, ProductInner> restResponse) {
-                    if (restResponse.body() == null) {
-                        return Maybe.empty();
-                    } else {
-                        return Maybe.just(restResponse.body());
-                    }
-                }
-            });
+            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -1548,7 +1500,7 @@ public final class LROsInner {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<Void, ProductInner>> put200UpdatingSucceeded204WithRestResponseAsync(ProductInner product) {
+    public Single<BodyResponse<ProductInner>> put200UpdatingSucceeded204WithRestResponseAsync(ProductInner product) {
         Validator.validate(product);
         return service.put200UpdatingSucceeded204(product, this.client.acceptLanguage());
     }
@@ -1562,15 +1514,7 @@ public final class LROsInner {
      */
     public Maybe<ProductInner> put200UpdatingSucceeded204Async(ProductInner product) {
         return put200UpdatingSucceeded204WithRestResponseAsync(product)
-            .flatMapMaybe(new Function<RestResponse<Void, ProductInner>, Maybe<ProductInner>>() {
-                public Maybe<ProductInner> apply(RestResponse<Void, ProductInner> restResponse) {
-                    if (restResponse.body() == null) {
-                        return Maybe.empty();
-                    } else {
-                        return Maybe.just(restResponse.body());
-                    }
-                }
-            });
+            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -1682,7 +1626,7 @@ public final class LROsInner {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<Void, ProductInner>> put201CreatingFailed200WithRestResponseAsync() {
+    public Single<BodyResponse<ProductInner>> put201CreatingFailed200WithRestResponseAsync() {
         final ProductInner product = null;
         return service.put201CreatingFailed200(product, this.client.acceptLanguage());
     }
@@ -1694,15 +1638,7 @@ public final class LROsInner {
      */
     public Maybe<ProductInner> put201CreatingFailed200Async() {
         return put201CreatingFailed200WithRestResponseAsync()
-            .flatMapMaybe(new Function<RestResponse<Void, ProductInner>, Maybe<ProductInner>>() {
-                public Maybe<ProductInner> apply(RestResponse<Void, ProductInner> restResponse) {
-                    if (restResponse.body() == null) {
-                        return Maybe.empty();
-                    } else {
-                        return Maybe.just(restResponse.body());
-                    }
-                }
-            });
+            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -1737,7 +1673,7 @@ public final class LROsInner {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<Void, ProductInner>> put201CreatingFailed200WithRestResponseAsync(ProductInner product) {
+    public Single<BodyResponse<ProductInner>> put201CreatingFailed200WithRestResponseAsync(ProductInner product) {
         Validator.validate(product);
         return service.put201CreatingFailed200(product, this.client.acceptLanguage());
     }
@@ -1751,15 +1687,7 @@ public final class LROsInner {
      */
     public Maybe<ProductInner> put201CreatingFailed200Async(ProductInner product) {
         return put201CreatingFailed200WithRestResponseAsync(product)
-            .flatMapMaybe(new Function<RestResponse<Void, ProductInner>, Maybe<ProductInner>>() {
-                public Maybe<ProductInner> apply(RestResponse<Void, ProductInner> restResponse) {
-                    if (restResponse.body() == null) {
-                        return Maybe.empty();
-                    } else {
-                        return Maybe.just(restResponse.body());
-                    }
-                }
-            });
+            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -1871,7 +1799,7 @@ public final class LROsInner {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<Void, ProductInner>> put200Acceptedcanceled200WithRestResponseAsync() {
+    public Single<BodyResponse<ProductInner>> put200Acceptedcanceled200WithRestResponseAsync() {
         final ProductInner product = null;
         return service.put200Acceptedcanceled200(product, this.client.acceptLanguage());
     }
@@ -1883,15 +1811,7 @@ public final class LROsInner {
      */
     public Maybe<ProductInner> put200Acceptedcanceled200Async() {
         return put200Acceptedcanceled200WithRestResponseAsync()
-            .flatMapMaybe(new Function<RestResponse<Void, ProductInner>, Maybe<ProductInner>>() {
-                public Maybe<ProductInner> apply(RestResponse<Void, ProductInner> restResponse) {
-                    if (restResponse.body() == null) {
-                        return Maybe.empty();
-                    } else {
-                        return Maybe.just(restResponse.body());
-                    }
-                }
-            });
+            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -1926,7 +1846,7 @@ public final class LROsInner {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<Void, ProductInner>> put200Acceptedcanceled200WithRestResponseAsync(ProductInner product) {
+    public Single<BodyResponse<ProductInner>> put200Acceptedcanceled200WithRestResponseAsync(ProductInner product) {
         Validator.validate(product);
         return service.put200Acceptedcanceled200(product, this.client.acceptLanguage());
     }
@@ -1940,15 +1860,7 @@ public final class LROsInner {
      */
     public Maybe<ProductInner> put200Acceptedcanceled200Async(ProductInner product) {
         return put200Acceptedcanceled200WithRestResponseAsync(product)
-            .flatMapMaybe(new Function<RestResponse<Void, ProductInner>, Maybe<ProductInner>>() {
-                public Maybe<ProductInner> apply(RestResponse<Void, ProductInner> restResponse) {
-                    if (restResponse.body() == null) {
-                        return Maybe.empty();
-                    } else {
-                        return Maybe.just(restResponse.body());
-                    }
-                }
-            });
+            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -2060,7 +1972,7 @@ public final class LROsInner {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<LROsPutNoHeaderInRetryHeadersInner, ProductInner>> putNoHeaderInRetryWithRestResponseAsync() {
+    public Single<LROsPutNoHeaderInRetryResponse> putNoHeaderInRetryWithRestResponseAsync() {
         final ProductInner product = null;
         return service.putNoHeaderInRetry(product, this.client.acceptLanguage());
     }
@@ -2072,15 +1984,7 @@ public final class LROsInner {
      */
     public Maybe<ProductInner> putNoHeaderInRetryAsync() {
         return putNoHeaderInRetryWithRestResponseAsync()
-            .flatMapMaybe(new Function<RestResponse<LROsPutNoHeaderInRetryHeadersInner, ProductInner>, Maybe<ProductInner>>() {
-                public Maybe<ProductInner> apply(RestResponse<LROsPutNoHeaderInRetryHeadersInner, ProductInner> restResponse) {
-                    if (restResponse.body() == null) {
-                        return Maybe.empty();
-                    } else {
-                        return Maybe.just(restResponse.body());
-                    }
-                }
-            });
+            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -2115,7 +2019,7 @@ public final class LROsInner {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<LROsPutNoHeaderInRetryHeadersInner, ProductInner>> putNoHeaderInRetryWithRestResponseAsync(ProductInner product) {
+    public Single<LROsPutNoHeaderInRetryResponse> putNoHeaderInRetryWithRestResponseAsync(ProductInner product) {
         Validator.validate(product);
         return service.putNoHeaderInRetry(product, this.client.acceptLanguage());
     }
@@ -2129,15 +2033,7 @@ public final class LROsInner {
      */
     public Maybe<ProductInner> putNoHeaderInRetryAsync(ProductInner product) {
         return putNoHeaderInRetryWithRestResponseAsync(product)
-            .flatMapMaybe(new Function<RestResponse<LROsPutNoHeaderInRetryHeadersInner, ProductInner>, Maybe<ProductInner>>() {
-                public Maybe<ProductInner> apply(RestResponse<LROsPutNoHeaderInRetryHeadersInner, ProductInner> restResponse) {
-                    if (restResponse.body() == null) {
-                        return Maybe.empty();
-                    } else {
-                        return Maybe.just(restResponse.body());
-                    }
-                }
-            });
+            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -2249,7 +2145,7 @@ public final class LROsInner {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<LROsPutAsyncRetrySucceededHeadersInner, ProductInner>> putAsyncRetrySucceededWithRestResponseAsync() {
+    public Single<LROsPutAsyncRetrySucceededResponse> putAsyncRetrySucceededWithRestResponseAsync() {
         final ProductInner product = null;
         return service.putAsyncRetrySucceeded(product, this.client.acceptLanguage());
     }
@@ -2261,15 +2157,7 @@ public final class LROsInner {
      */
     public Maybe<ProductInner> putAsyncRetrySucceededAsync() {
         return putAsyncRetrySucceededWithRestResponseAsync()
-            .flatMapMaybe(new Function<RestResponse<LROsPutAsyncRetrySucceededHeadersInner, ProductInner>, Maybe<ProductInner>>() {
-                public Maybe<ProductInner> apply(RestResponse<LROsPutAsyncRetrySucceededHeadersInner, ProductInner> restResponse) {
-                    if (restResponse.body() == null) {
-                        return Maybe.empty();
-                    } else {
-                        return Maybe.just(restResponse.body());
-                    }
-                }
-            });
+            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -2304,7 +2192,7 @@ public final class LROsInner {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<LROsPutAsyncRetrySucceededHeadersInner, ProductInner>> putAsyncRetrySucceededWithRestResponseAsync(ProductInner product) {
+    public Single<LROsPutAsyncRetrySucceededResponse> putAsyncRetrySucceededWithRestResponseAsync(ProductInner product) {
         Validator.validate(product);
         return service.putAsyncRetrySucceeded(product, this.client.acceptLanguage());
     }
@@ -2318,15 +2206,7 @@ public final class LROsInner {
      */
     public Maybe<ProductInner> putAsyncRetrySucceededAsync(ProductInner product) {
         return putAsyncRetrySucceededWithRestResponseAsync(product)
-            .flatMapMaybe(new Function<RestResponse<LROsPutAsyncRetrySucceededHeadersInner, ProductInner>, Maybe<ProductInner>>() {
-                public Maybe<ProductInner> apply(RestResponse<LROsPutAsyncRetrySucceededHeadersInner, ProductInner> restResponse) {
-                    if (restResponse.body() == null) {
-                        return Maybe.empty();
-                    } else {
-                        return Maybe.just(restResponse.body());
-                    }
-                }
-            });
+            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -2438,7 +2318,7 @@ public final class LROsInner {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<LROsPutAsyncNoRetrySucceededHeadersInner, ProductInner>> putAsyncNoRetrySucceededWithRestResponseAsync() {
+    public Single<LROsPutAsyncNoRetrySucceededResponse> putAsyncNoRetrySucceededWithRestResponseAsync() {
         final ProductInner product = null;
         return service.putAsyncNoRetrySucceeded(product, this.client.acceptLanguage());
     }
@@ -2450,15 +2330,7 @@ public final class LROsInner {
      */
     public Maybe<ProductInner> putAsyncNoRetrySucceededAsync() {
         return putAsyncNoRetrySucceededWithRestResponseAsync()
-            .flatMapMaybe(new Function<RestResponse<LROsPutAsyncNoRetrySucceededHeadersInner, ProductInner>, Maybe<ProductInner>>() {
-                public Maybe<ProductInner> apply(RestResponse<LROsPutAsyncNoRetrySucceededHeadersInner, ProductInner> restResponse) {
-                    if (restResponse.body() == null) {
-                        return Maybe.empty();
-                    } else {
-                        return Maybe.just(restResponse.body());
-                    }
-                }
-            });
+            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -2493,7 +2365,7 @@ public final class LROsInner {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<LROsPutAsyncNoRetrySucceededHeadersInner, ProductInner>> putAsyncNoRetrySucceededWithRestResponseAsync(ProductInner product) {
+    public Single<LROsPutAsyncNoRetrySucceededResponse> putAsyncNoRetrySucceededWithRestResponseAsync(ProductInner product) {
         Validator.validate(product);
         return service.putAsyncNoRetrySucceeded(product, this.client.acceptLanguage());
     }
@@ -2507,15 +2379,7 @@ public final class LROsInner {
      */
     public Maybe<ProductInner> putAsyncNoRetrySucceededAsync(ProductInner product) {
         return putAsyncNoRetrySucceededWithRestResponseAsync(product)
-            .flatMapMaybe(new Function<RestResponse<LROsPutAsyncNoRetrySucceededHeadersInner, ProductInner>, Maybe<ProductInner>>() {
-                public Maybe<ProductInner> apply(RestResponse<LROsPutAsyncNoRetrySucceededHeadersInner, ProductInner> restResponse) {
-                    if (restResponse.body() == null) {
-                        return Maybe.empty();
-                    } else {
-                        return Maybe.just(restResponse.body());
-                    }
-                }
-            });
+            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -2627,7 +2491,7 @@ public final class LROsInner {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<LROsPutAsyncRetryFailedHeadersInner, ProductInner>> putAsyncRetryFailedWithRestResponseAsync() {
+    public Single<LROsPutAsyncRetryFailedResponse> putAsyncRetryFailedWithRestResponseAsync() {
         final ProductInner product = null;
         return service.putAsyncRetryFailed(product, this.client.acceptLanguage());
     }
@@ -2639,15 +2503,7 @@ public final class LROsInner {
      */
     public Maybe<ProductInner> putAsyncRetryFailedAsync() {
         return putAsyncRetryFailedWithRestResponseAsync()
-            .flatMapMaybe(new Function<RestResponse<LROsPutAsyncRetryFailedHeadersInner, ProductInner>, Maybe<ProductInner>>() {
-                public Maybe<ProductInner> apply(RestResponse<LROsPutAsyncRetryFailedHeadersInner, ProductInner> restResponse) {
-                    if (restResponse.body() == null) {
-                        return Maybe.empty();
-                    } else {
-                        return Maybe.just(restResponse.body());
-                    }
-                }
-            });
+            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -2682,7 +2538,7 @@ public final class LROsInner {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<LROsPutAsyncRetryFailedHeadersInner, ProductInner>> putAsyncRetryFailedWithRestResponseAsync(ProductInner product) {
+    public Single<LROsPutAsyncRetryFailedResponse> putAsyncRetryFailedWithRestResponseAsync(ProductInner product) {
         Validator.validate(product);
         return service.putAsyncRetryFailed(product, this.client.acceptLanguage());
     }
@@ -2696,15 +2552,7 @@ public final class LROsInner {
      */
     public Maybe<ProductInner> putAsyncRetryFailedAsync(ProductInner product) {
         return putAsyncRetryFailedWithRestResponseAsync(product)
-            .flatMapMaybe(new Function<RestResponse<LROsPutAsyncRetryFailedHeadersInner, ProductInner>, Maybe<ProductInner>>() {
-                public Maybe<ProductInner> apply(RestResponse<LROsPutAsyncRetryFailedHeadersInner, ProductInner> restResponse) {
-                    if (restResponse.body() == null) {
-                        return Maybe.empty();
-                    } else {
-                        return Maybe.just(restResponse.body());
-                    }
-                }
-            });
+            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -2816,7 +2664,7 @@ public final class LROsInner {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<LROsPutAsyncNoRetrycanceledHeadersInner, ProductInner>> putAsyncNoRetrycanceledWithRestResponseAsync() {
+    public Single<LROsPutAsyncNoRetrycanceledResponse> putAsyncNoRetrycanceledWithRestResponseAsync() {
         final ProductInner product = null;
         return service.putAsyncNoRetrycanceled(product, this.client.acceptLanguage());
     }
@@ -2828,15 +2676,7 @@ public final class LROsInner {
      */
     public Maybe<ProductInner> putAsyncNoRetrycanceledAsync() {
         return putAsyncNoRetrycanceledWithRestResponseAsync()
-            .flatMapMaybe(new Function<RestResponse<LROsPutAsyncNoRetrycanceledHeadersInner, ProductInner>, Maybe<ProductInner>>() {
-                public Maybe<ProductInner> apply(RestResponse<LROsPutAsyncNoRetrycanceledHeadersInner, ProductInner> restResponse) {
-                    if (restResponse.body() == null) {
-                        return Maybe.empty();
-                    } else {
-                        return Maybe.just(restResponse.body());
-                    }
-                }
-            });
+            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -2871,7 +2711,7 @@ public final class LROsInner {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<LROsPutAsyncNoRetrycanceledHeadersInner, ProductInner>> putAsyncNoRetrycanceledWithRestResponseAsync(ProductInner product) {
+    public Single<LROsPutAsyncNoRetrycanceledResponse> putAsyncNoRetrycanceledWithRestResponseAsync(ProductInner product) {
         Validator.validate(product);
         return service.putAsyncNoRetrycanceled(product, this.client.acceptLanguage());
     }
@@ -2885,15 +2725,7 @@ public final class LROsInner {
      */
     public Maybe<ProductInner> putAsyncNoRetrycanceledAsync(ProductInner product) {
         return putAsyncNoRetrycanceledWithRestResponseAsync(product)
-            .flatMapMaybe(new Function<RestResponse<LROsPutAsyncNoRetrycanceledHeadersInner, ProductInner>, Maybe<ProductInner>>() {
-                public Maybe<ProductInner> apply(RestResponse<LROsPutAsyncNoRetrycanceledHeadersInner, ProductInner> restResponse) {
-                    if (restResponse.body() == null) {
-                        return Maybe.empty();
-                    } else {
-                        return Maybe.just(restResponse.body());
-                    }
-                }
-            });
+            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -3005,7 +2837,7 @@ public final class LROsInner {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<LROsPutAsyncNoHeaderInRetryHeadersInner, ProductInner>> putAsyncNoHeaderInRetryWithRestResponseAsync() {
+    public Single<LROsPutAsyncNoHeaderInRetryResponse> putAsyncNoHeaderInRetryWithRestResponseAsync() {
         final ProductInner product = null;
         return service.putAsyncNoHeaderInRetry(product, this.client.acceptLanguage());
     }
@@ -3017,15 +2849,7 @@ public final class LROsInner {
      */
     public Maybe<ProductInner> putAsyncNoHeaderInRetryAsync() {
         return putAsyncNoHeaderInRetryWithRestResponseAsync()
-            .flatMapMaybe(new Function<RestResponse<LROsPutAsyncNoHeaderInRetryHeadersInner, ProductInner>, Maybe<ProductInner>>() {
-                public Maybe<ProductInner> apply(RestResponse<LROsPutAsyncNoHeaderInRetryHeadersInner, ProductInner> restResponse) {
-                    if (restResponse.body() == null) {
-                        return Maybe.empty();
-                    } else {
-                        return Maybe.just(restResponse.body());
-                    }
-                }
-            });
+            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -3060,7 +2884,7 @@ public final class LROsInner {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<LROsPutAsyncNoHeaderInRetryHeadersInner, ProductInner>> putAsyncNoHeaderInRetryWithRestResponseAsync(ProductInner product) {
+    public Single<LROsPutAsyncNoHeaderInRetryResponse> putAsyncNoHeaderInRetryWithRestResponseAsync(ProductInner product) {
         Validator.validate(product);
         return service.putAsyncNoHeaderInRetry(product, this.client.acceptLanguage());
     }
@@ -3074,15 +2898,7 @@ public final class LROsInner {
      */
     public Maybe<ProductInner> putAsyncNoHeaderInRetryAsync(ProductInner product) {
         return putAsyncNoHeaderInRetryWithRestResponseAsync(product)
-            .flatMapMaybe(new Function<RestResponse<LROsPutAsyncNoHeaderInRetryHeadersInner, ProductInner>, Maybe<ProductInner>>() {
-                public Maybe<ProductInner> apply(RestResponse<LROsPutAsyncNoHeaderInRetryHeadersInner, ProductInner> restResponse) {
-                    if (restResponse.body() == null) {
-                        return Maybe.empty();
-                    } else {
-                        return Maybe.just(restResponse.body());
-                    }
-                }
-            });
+            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -3194,7 +3010,7 @@ public final class LROsInner {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<Void, SkuInner>> putNonResourceWithRestResponseAsync() {
+    public Single<BodyResponse<SkuInner>> putNonResourceWithRestResponseAsync() {
         final SkuInner sku = null;
         return service.putNonResource(sku, this.client.acceptLanguage());
     }
@@ -3206,15 +3022,7 @@ public final class LROsInner {
      */
     public Maybe<SkuInner> putNonResourceAsync() {
         return putNonResourceWithRestResponseAsync()
-            .flatMapMaybe(new Function<RestResponse<Void, SkuInner>, Maybe<SkuInner>>() {
-                public Maybe<SkuInner> apply(RestResponse<Void, SkuInner> restResponse) {
-                    if (restResponse.body() == null) {
-                        return Maybe.empty();
-                    } else {
-                        return Maybe.just(restResponse.body());
-                    }
-                }
-            });
+            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -3249,7 +3057,7 @@ public final class LROsInner {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<Void, SkuInner>> putNonResourceWithRestResponseAsync(SkuInner sku) {
+    public Single<BodyResponse<SkuInner>> putNonResourceWithRestResponseAsync(SkuInner sku) {
         Validator.validate(sku);
         return service.putNonResource(sku, this.client.acceptLanguage());
     }
@@ -3263,15 +3071,7 @@ public final class LROsInner {
      */
     public Maybe<SkuInner> putNonResourceAsync(SkuInner sku) {
         return putNonResourceWithRestResponseAsync(sku)
-            .flatMapMaybe(new Function<RestResponse<Void, SkuInner>, Maybe<SkuInner>>() {
-                public Maybe<SkuInner> apply(RestResponse<Void, SkuInner> restResponse) {
-                    if (restResponse.body() == null) {
-                        return Maybe.empty();
-                    } else {
-                        return Maybe.just(restResponse.body());
-                    }
-                }
-            });
+            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -3383,7 +3183,7 @@ public final class LROsInner {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<Void, SkuInner>> putAsyncNonResourceWithRestResponseAsync() {
+    public Single<BodyResponse<SkuInner>> putAsyncNonResourceWithRestResponseAsync() {
         final SkuInner sku = null;
         return service.putAsyncNonResource(sku, this.client.acceptLanguage());
     }
@@ -3395,15 +3195,7 @@ public final class LROsInner {
      */
     public Maybe<SkuInner> putAsyncNonResourceAsync() {
         return putAsyncNonResourceWithRestResponseAsync()
-            .flatMapMaybe(new Function<RestResponse<Void, SkuInner>, Maybe<SkuInner>>() {
-                public Maybe<SkuInner> apply(RestResponse<Void, SkuInner> restResponse) {
-                    if (restResponse.body() == null) {
-                        return Maybe.empty();
-                    } else {
-                        return Maybe.just(restResponse.body());
-                    }
-                }
-            });
+            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -3438,7 +3230,7 @@ public final class LROsInner {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<Void, SkuInner>> putAsyncNonResourceWithRestResponseAsync(SkuInner sku) {
+    public Single<BodyResponse<SkuInner>> putAsyncNonResourceWithRestResponseAsync(SkuInner sku) {
         Validator.validate(sku);
         return service.putAsyncNonResource(sku, this.client.acceptLanguage());
     }
@@ -3452,15 +3244,7 @@ public final class LROsInner {
      */
     public Maybe<SkuInner> putAsyncNonResourceAsync(SkuInner sku) {
         return putAsyncNonResourceWithRestResponseAsync(sku)
-            .flatMapMaybe(new Function<RestResponse<Void, SkuInner>, Maybe<SkuInner>>() {
-                public Maybe<SkuInner> apply(RestResponse<Void, SkuInner> restResponse) {
-                    if (restResponse.body() == null) {
-                        return Maybe.empty();
-                    } else {
-                        return Maybe.just(restResponse.body());
-                    }
-                }
-            });
+            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -3572,7 +3356,7 @@ public final class LROsInner {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<Void, SubProductInner>> putSubResourceWithRestResponseAsync() {
+    public Single<BodyResponse<SubProductInner>> putSubResourceWithRestResponseAsync() {
         final SubProductInner product = null;
         return service.putSubResource(product, this.client.acceptLanguage());
     }
@@ -3584,15 +3368,7 @@ public final class LROsInner {
      */
     public Maybe<SubProductInner> putSubResourceAsync() {
         return putSubResourceWithRestResponseAsync()
-            .flatMapMaybe(new Function<RestResponse<Void, SubProductInner>, Maybe<SubProductInner>>() {
-                public Maybe<SubProductInner> apply(RestResponse<Void, SubProductInner> restResponse) {
-                    if (restResponse.body() == null) {
-                        return Maybe.empty();
-                    } else {
-                        return Maybe.just(restResponse.body());
-                    }
-                }
-            });
+            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -3627,7 +3403,7 @@ public final class LROsInner {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<Void, SubProductInner>> putSubResourceWithRestResponseAsync(SubProductInner product) {
+    public Single<BodyResponse<SubProductInner>> putSubResourceWithRestResponseAsync(SubProductInner product) {
         Validator.validate(product);
         return service.putSubResource(product, this.client.acceptLanguage());
     }
@@ -3641,15 +3417,7 @@ public final class LROsInner {
      */
     public Maybe<SubProductInner> putSubResourceAsync(SubProductInner product) {
         return putSubResourceWithRestResponseAsync(product)
-            .flatMapMaybe(new Function<RestResponse<Void, SubProductInner>, Maybe<SubProductInner>>() {
-                public Maybe<SubProductInner> apply(RestResponse<Void, SubProductInner> restResponse) {
-                    if (restResponse.body() == null) {
-                        return Maybe.empty();
-                    } else {
-                        return Maybe.just(restResponse.body());
-                    }
-                }
-            });
+            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -3761,7 +3529,7 @@ public final class LROsInner {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<Void, SubProductInner>> putAsyncSubResourceWithRestResponseAsync() {
+    public Single<BodyResponse<SubProductInner>> putAsyncSubResourceWithRestResponseAsync() {
         final SubProductInner product = null;
         return service.putAsyncSubResource(product, this.client.acceptLanguage());
     }
@@ -3773,15 +3541,7 @@ public final class LROsInner {
      */
     public Maybe<SubProductInner> putAsyncSubResourceAsync() {
         return putAsyncSubResourceWithRestResponseAsync()
-            .flatMapMaybe(new Function<RestResponse<Void, SubProductInner>, Maybe<SubProductInner>>() {
-                public Maybe<SubProductInner> apply(RestResponse<Void, SubProductInner> restResponse) {
-                    if (restResponse.body() == null) {
-                        return Maybe.empty();
-                    } else {
-                        return Maybe.just(restResponse.body());
-                    }
-                }
-            });
+            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -3816,7 +3576,7 @@ public final class LROsInner {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<Void, SubProductInner>> putAsyncSubResourceWithRestResponseAsync(SubProductInner product) {
+    public Single<BodyResponse<SubProductInner>> putAsyncSubResourceWithRestResponseAsync(SubProductInner product) {
         Validator.validate(product);
         return service.putAsyncSubResource(product, this.client.acceptLanguage());
     }
@@ -3830,15 +3590,7 @@ public final class LROsInner {
      */
     public Maybe<SubProductInner> putAsyncSubResourceAsync(SubProductInner product) {
         return putAsyncSubResourceWithRestResponseAsync(product)
-            .flatMapMaybe(new Function<RestResponse<Void, SubProductInner>, Maybe<SubProductInner>>() {
-                public Maybe<SubProductInner> apply(RestResponse<Void, SubProductInner> restResponse) {
-                    if (restResponse.body() == null) {
-                        return Maybe.empty();
-                    } else {
-                        return Maybe.just(restResponse.body());
-                    }
-                }
-            });
+            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -3913,7 +3665,7 @@ public final class LROsInner {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<LROsDeleteProvisioning202Accepted200SucceededHeadersInner, ProductInner>> deleteProvisioning202Accepted200SucceededWithRestResponseAsync() {
+    public Single<LROsDeleteProvisioning202Accepted200SucceededResponse> deleteProvisioning202Accepted200SucceededWithRestResponseAsync() {
         return service.deleteProvisioning202Accepted200Succeeded(this.client.acceptLanguage());
     }
 
@@ -3924,15 +3676,7 @@ public final class LROsInner {
      */
     public Maybe<ProductInner> deleteProvisioning202Accepted200SucceededAsync() {
         return deleteProvisioning202Accepted200SucceededWithRestResponseAsync()
-            .flatMapMaybe(new Function<RestResponse<LROsDeleteProvisioning202Accepted200SucceededHeadersInner, ProductInner>, Maybe<ProductInner>>() {
-                public Maybe<ProductInner> apply(RestResponse<LROsDeleteProvisioning202Accepted200SucceededHeadersInner, ProductInner> restResponse) {
-                    if (restResponse.body() == null) {
-                        return Maybe.empty();
-                    } else {
-                        return Maybe.just(restResponse.body());
-                    }
-                }
-            });
+            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -4007,7 +3751,7 @@ public final class LROsInner {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<LROsDeleteProvisioning202DeletingFailed200HeadersInner, ProductInner>> deleteProvisioning202DeletingFailed200WithRestResponseAsync() {
+    public Single<LROsDeleteProvisioning202DeletingFailed200Response> deleteProvisioning202DeletingFailed200WithRestResponseAsync() {
         return service.deleteProvisioning202DeletingFailed200(this.client.acceptLanguage());
     }
 
@@ -4018,15 +3762,7 @@ public final class LROsInner {
      */
     public Maybe<ProductInner> deleteProvisioning202DeletingFailed200Async() {
         return deleteProvisioning202DeletingFailed200WithRestResponseAsync()
-            .flatMapMaybe(new Function<RestResponse<LROsDeleteProvisioning202DeletingFailed200HeadersInner, ProductInner>, Maybe<ProductInner>>() {
-                public Maybe<ProductInner> apply(RestResponse<LROsDeleteProvisioning202DeletingFailed200HeadersInner, ProductInner> restResponse) {
-                    if (restResponse.body() == null) {
-                        return Maybe.empty();
-                    } else {
-                        return Maybe.just(restResponse.body());
-                    }
-                }
-            });
+            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -4101,7 +3837,7 @@ public final class LROsInner {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<LROsDeleteProvisioning202Deletingcanceled200HeadersInner, ProductInner>> deleteProvisioning202Deletingcanceled200WithRestResponseAsync() {
+    public Single<LROsDeleteProvisioning202Deletingcanceled200Response> deleteProvisioning202Deletingcanceled200WithRestResponseAsync() {
         return service.deleteProvisioning202Deletingcanceled200(this.client.acceptLanguage());
     }
 
@@ -4112,15 +3848,7 @@ public final class LROsInner {
      */
     public Maybe<ProductInner> deleteProvisioning202Deletingcanceled200Async() {
         return deleteProvisioning202Deletingcanceled200WithRestResponseAsync()
-            .flatMapMaybe(new Function<RestResponse<LROsDeleteProvisioning202Deletingcanceled200HeadersInner, ProductInner>, Maybe<ProductInner>>() {
-                public Maybe<ProductInner> apply(RestResponse<LROsDeleteProvisioning202Deletingcanceled200HeadersInner, ProductInner> restResponse) {
-                    if (restResponse.body() == null) {
-                        return Maybe.empty();
-                    } else {
-                        return Maybe.just(restResponse.body());
-                    }
-                }
-            });
+            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -4193,7 +3921,7 @@ public final class LROsInner {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<Void, Void>> delete204SucceededWithRestResponseAsync() {
+    public Single<VoidResponse> delete204SucceededWithRestResponseAsync() {
         return service.delete204Succeeded(this.client.acceptLanguage());
     }
 
@@ -4279,7 +4007,7 @@ public final class LROsInner {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<LROsDelete202Retry200HeadersInner, ProductInner>> delete202Retry200WithRestResponseAsync() {
+    public Single<LROsDelete202Retry200Response> delete202Retry200WithRestResponseAsync() {
         return service.delete202Retry200(this.client.acceptLanguage());
     }
 
@@ -4290,15 +4018,7 @@ public final class LROsInner {
      */
     public Maybe<ProductInner> delete202Retry200Async() {
         return delete202Retry200WithRestResponseAsync()
-            .flatMapMaybe(new Function<RestResponse<LROsDelete202Retry200HeadersInner, ProductInner>, Maybe<ProductInner>>() {
-                public Maybe<ProductInner> apply(RestResponse<LROsDelete202Retry200HeadersInner, ProductInner> restResponse) {
-                    if (restResponse.body() == null) {
-                        return Maybe.empty();
-                    } else {
-                        return Maybe.just(restResponse.body());
-                    }
-                }
-            });
+            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -4373,7 +4093,7 @@ public final class LROsInner {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<LROsDelete202NoRetry204HeadersInner, ProductInner>> delete202NoRetry204WithRestResponseAsync() {
+    public Single<LROsDelete202NoRetry204Response> delete202NoRetry204WithRestResponseAsync() {
         return service.delete202NoRetry204(this.client.acceptLanguage());
     }
 
@@ -4384,15 +4104,7 @@ public final class LROsInner {
      */
     public Maybe<ProductInner> delete202NoRetry204Async() {
         return delete202NoRetry204WithRestResponseAsync()
-            .flatMapMaybe(new Function<RestResponse<LROsDelete202NoRetry204HeadersInner, ProductInner>, Maybe<ProductInner>>() {
-                public Maybe<ProductInner> apply(RestResponse<LROsDelete202NoRetry204HeadersInner, ProductInner> restResponse) {
-                    if (restResponse.body() == null) {
-                        return Maybe.empty();
-                    } else {
-                        return Maybe.just(restResponse.body());
-                    }
-                }
-            });
+            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -4465,7 +4177,7 @@ public final class LROsInner {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<LROsDeleteNoHeaderInRetryHeadersInner, Void>> deleteNoHeaderInRetryWithRestResponseAsync() {
+    public Single<LROsDeleteNoHeaderInRetryResponse> deleteNoHeaderInRetryWithRestResponseAsync() {
         return service.deleteNoHeaderInRetry(this.client.acceptLanguage());
     }
 
@@ -4549,7 +4261,7 @@ public final class LROsInner {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<LROsDeleteAsyncNoHeaderInRetryHeadersInner, Void>> deleteAsyncNoHeaderInRetryWithRestResponseAsync() {
+    public Single<LROsDeleteAsyncNoHeaderInRetryResponse> deleteAsyncNoHeaderInRetryWithRestResponseAsync() {
         return service.deleteAsyncNoHeaderInRetry(this.client.acceptLanguage());
     }
 
@@ -4633,7 +4345,7 @@ public final class LROsInner {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<LROsDeleteAsyncRetrySucceededHeadersInner, Void>> deleteAsyncRetrySucceededWithRestResponseAsync() {
+    public Single<LROsDeleteAsyncRetrySucceededResponse> deleteAsyncRetrySucceededWithRestResponseAsync() {
         return service.deleteAsyncRetrySucceeded(this.client.acceptLanguage());
     }
 
@@ -4717,7 +4429,7 @@ public final class LROsInner {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<LROsDeleteAsyncNoRetrySucceededHeadersInner, Void>> deleteAsyncNoRetrySucceededWithRestResponseAsync() {
+    public Single<LROsDeleteAsyncNoRetrySucceededResponse> deleteAsyncNoRetrySucceededWithRestResponseAsync() {
         return service.deleteAsyncNoRetrySucceeded(this.client.acceptLanguage());
     }
 
@@ -4801,7 +4513,7 @@ public final class LROsInner {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<LROsDeleteAsyncRetryFailedHeadersInner, Void>> deleteAsyncRetryFailedWithRestResponseAsync() {
+    public Single<LROsDeleteAsyncRetryFailedResponse> deleteAsyncRetryFailedWithRestResponseAsync() {
         return service.deleteAsyncRetryFailed(this.client.acceptLanguage());
     }
 
@@ -4885,7 +4597,7 @@ public final class LROsInner {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<LROsDeleteAsyncRetrycanceledHeadersInner, Void>> deleteAsyncRetrycanceledWithRestResponseAsync() {
+    public Single<LROsDeleteAsyncRetrycanceledResponse> deleteAsyncRetrycanceledWithRestResponseAsync() {
         return service.deleteAsyncRetrycanceled(this.client.acceptLanguage());
     }
 
@@ -4971,7 +4683,7 @@ public final class LROsInner {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<Void, SkuInner>> post200WithPayloadWithRestResponseAsync() {
+    public Single<BodyResponse<SkuInner>> post200WithPayloadWithRestResponseAsync() {
         return service.post200WithPayload(this.client.acceptLanguage());
     }
 
@@ -4982,15 +4694,7 @@ public final class LROsInner {
      */
     public Maybe<SkuInner> post200WithPayloadAsync() {
         return post200WithPayloadWithRestResponseAsync()
-            .flatMapMaybe(new Function<RestResponse<Void, SkuInner>, Maybe<SkuInner>>() {
-                public Maybe<SkuInner> apply(RestResponse<Void, SkuInner> restResponse) {
-                    if (restResponse.body() == null) {
-                        return Maybe.empty();
-                    } else {
-                        return Maybe.just(restResponse.body());
-                    }
-                }
-            });
+            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -5099,7 +4803,7 @@ public final class LROsInner {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<LROsPost202Retry200HeadersInner, Void>> post202Retry200WithRestResponseAsync() {
+    public Single<LROsPost202Retry200Response> post202Retry200WithRestResponseAsync() {
         final ProductInner product = null;
         return service.post202Retry200(product, this.client.acceptLanguage());
     }
@@ -5145,7 +4849,7 @@ public final class LROsInner {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<LROsPost202Retry200HeadersInner, Void>> post202Retry200WithRestResponseAsync(ProductInner product) {
+    public Single<LROsPost202Retry200Response> post202Retry200WithRestResponseAsync(ProductInner product) {
         Validator.validate(product);
         return service.post202Retry200(product, this.client.acceptLanguage());
     }
@@ -5271,7 +4975,7 @@ public final class LROsInner {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<LROsPost202NoRetry204HeadersInner, ProductInner>> post202NoRetry204WithRestResponseAsync() {
+    public Single<LROsPost202NoRetry204Response> post202NoRetry204WithRestResponseAsync() {
         final ProductInner product = null;
         return service.post202NoRetry204(product, this.client.acceptLanguage());
     }
@@ -5283,15 +4987,7 @@ public final class LROsInner {
      */
     public Maybe<ProductInner> post202NoRetry204Async() {
         return post202NoRetry204WithRestResponseAsync()
-            .flatMapMaybe(new Function<RestResponse<LROsPost202NoRetry204HeadersInner, ProductInner>, Maybe<ProductInner>>() {
-                public Maybe<ProductInner> apply(RestResponse<LROsPost202NoRetry204HeadersInner, ProductInner> restResponse) {
-                    if (restResponse.body() == null) {
-                        return Maybe.empty();
-                    } else {
-                        return Maybe.just(restResponse.body());
-                    }
-                }
-            });
+            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -5326,7 +5022,7 @@ public final class LROsInner {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<LROsPost202NoRetry204HeadersInner, ProductInner>> post202NoRetry204WithRestResponseAsync(ProductInner product) {
+    public Single<LROsPost202NoRetry204Response> post202NoRetry204WithRestResponseAsync(ProductInner product) {
         Validator.validate(product);
         return service.post202NoRetry204(product, this.client.acceptLanguage());
     }
@@ -5340,15 +5036,7 @@ public final class LROsInner {
      */
     public Maybe<ProductInner> post202NoRetry204Async(ProductInner product) {
         return post202NoRetry204WithRestResponseAsync(product)
-            .flatMapMaybe(new Function<RestResponse<LROsPost202NoRetry204HeadersInner, ProductInner>, Maybe<ProductInner>>() {
-                public Maybe<ProductInner> apply(RestResponse<LROsPost202NoRetry204HeadersInner, ProductInner> restResponse) {
-                    if (restResponse.body() == null) {
-                        return Maybe.empty();
-                    } else {
-                        return Maybe.just(restResponse.body());
-                    }
-                }
-            });
+            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -5460,7 +5148,7 @@ public final class LROsInner {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<LROsPostAsyncRetrySucceededHeadersInner, ProductInner>> postAsyncRetrySucceededWithRestResponseAsync() {
+    public Single<LROsPostAsyncRetrySucceededResponse> postAsyncRetrySucceededWithRestResponseAsync() {
         final ProductInner product = null;
         return service.postAsyncRetrySucceeded(product, this.client.acceptLanguage());
     }
@@ -5472,15 +5160,7 @@ public final class LROsInner {
      */
     public Maybe<ProductInner> postAsyncRetrySucceededAsync() {
         return postAsyncRetrySucceededWithRestResponseAsync()
-            .flatMapMaybe(new Function<RestResponse<LROsPostAsyncRetrySucceededHeadersInner, ProductInner>, Maybe<ProductInner>>() {
-                public Maybe<ProductInner> apply(RestResponse<LROsPostAsyncRetrySucceededHeadersInner, ProductInner> restResponse) {
-                    if (restResponse.body() == null) {
-                        return Maybe.empty();
-                    } else {
-                        return Maybe.just(restResponse.body());
-                    }
-                }
-            });
+            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -5515,7 +5195,7 @@ public final class LROsInner {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<LROsPostAsyncRetrySucceededHeadersInner, ProductInner>> postAsyncRetrySucceededWithRestResponseAsync(ProductInner product) {
+    public Single<LROsPostAsyncRetrySucceededResponse> postAsyncRetrySucceededWithRestResponseAsync(ProductInner product) {
         Validator.validate(product);
         return service.postAsyncRetrySucceeded(product, this.client.acceptLanguage());
     }
@@ -5529,15 +5209,7 @@ public final class LROsInner {
      */
     public Maybe<ProductInner> postAsyncRetrySucceededAsync(ProductInner product) {
         return postAsyncRetrySucceededWithRestResponseAsync(product)
-            .flatMapMaybe(new Function<RestResponse<LROsPostAsyncRetrySucceededHeadersInner, ProductInner>, Maybe<ProductInner>>() {
-                public Maybe<ProductInner> apply(RestResponse<LROsPostAsyncRetrySucceededHeadersInner, ProductInner> restResponse) {
-                    if (restResponse.body() == null) {
-                        return Maybe.empty();
-                    } else {
-                        return Maybe.just(restResponse.body());
-                    }
-                }
-            });
+            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -5649,7 +5321,7 @@ public final class LROsInner {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<LROsPostAsyncNoRetrySucceededHeadersInner, ProductInner>> postAsyncNoRetrySucceededWithRestResponseAsync() {
+    public Single<LROsPostAsyncNoRetrySucceededResponse> postAsyncNoRetrySucceededWithRestResponseAsync() {
         final ProductInner product = null;
         return service.postAsyncNoRetrySucceeded(product, this.client.acceptLanguage());
     }
@@ -5661,15 +5333,7 @@ public final class LROsInner {
      */
     public Maybe<ProductInner> postAsyncNoRetrySucceededAsync() {
         return postAsyncNoRetrySucceededWithRestResponseAsync()
-            .flatMapMaybe(new Function<RestResponse<LROsPostAsyncNoRetrySucceededHeadersInner, ProductInner>, Maybe<ProductInner>>() {
-                public Maybe<ProductInner> apply(RestResponse<LROsPostAsyncNoRetrySucceededHeadersInner, ProductInner> restResponse) {
-                    if (restResponse.body() == null) {
-                        return Maybe.empty();
-                    } else {
-                        return Maybe.just(restResponse.body());
-                    }
-                }
-            });
+            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -5704,7 +5368,7 @@ public final class LROsInner {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<LROsPostAsyncNoRetrySucceededHeadersInner, ProductInner>> postAsyncNoRetrySucceededWithRestResponseAsync(ProductInner product) {
+    public Single<LROsPostAsyncNoRetrySucceededResponse> postAsyncNoRetrySucceededWithRestResponseAsync(ProductInner product) {
         Validator.validate(product);
         return service.postAsyncNoRetrySucceeded(product, this.client.acceptLanguage());
     }
@@ -5718,15 +5382,7 @@ public final class LROsInner {
      */
     public Maybe<ProductInner> postAsyncNoRetrySucceededAsync(ProductInner product) {
         return postAsyncNoRetrySucceededWithRestResponseAsync(product)
-            .flatMapMaybe(new Function<RestResponse<LROsPostAsyncNoRetrySucceededHeadersInner, ProductInner>, Maybe<ProductInner>>() {
-                public Maybe<ProductInner> apply(RestResponse<LROsPostAsyncNoRetrySucceededHeadersInner, ProductInner> restResponse) {
-                    if (restResponse.body() == null) {
-                        return Maybe.empty();
-                    } else {
-                        return Maybe.just(restResponse.body());
-                    }
-                }
-            });
+            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -5835,7 +5491,7 @@ public final class LROsInner {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<LROsPostAsyncRetryFailedHeadersInner, Void>> postAsyncRetryFailedWithRestResponseAsync() {
+    public Single<LROsPostAsyncRetryFailedResponse> postAsyncRetryFailedWithRestResponseAsync() {
         final ProductInner product = null;
         return service.postAsyncRetryFailed(product, this.client.acceptLanguage());
     }
@@ -5881,7 +5537,7 @@ public final class LROsInner {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<LROsPostAsyncRetryFailedHeadersInner, Void>> postAsyncRetryFailedWithRestResponseAsync(ProductInner product) {
+    public Single<LROsPostAsyncRetryFailedResponse> postAsyncRetryFailedWithRestResponseAsync(ProductInner product) {
         Validator.validate(product);
         return service.postAsyncRetryFailed(product, this.client.acceptLanguage());
     }
@@ -6004,7 +5660,7 @@ public final class LROsInner {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<LROsPostAsyncRetrycanceledHeadersInner, Void>> postAsyncRetrycanceledWithRestResponseAsync() {
+    public Single<LROsPostAsyncRetrycanceledResponse> postAsyncRetrycanceledWithRestResponseAsync() {
         final ProductInner product = null;
         return service.postAsyncRetrycanceled(product, this.client.acceptLanguage());
     }
@@ -6050,7 +5706,7 @@ public final class LROsInner {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<LROsPostAsyncRetrycanceledHeadersInner, Void>> postAsyncRetrycanceledWithRestResponseAsync(ProductInner product) {
+    public Single<LROsPostAsyncRetrycanceledResponse> postAsyncRetrycanceledWithRestResponseAsync(ProductInner product) {
         Validator.validate(product);
         return service.postAsyncRetrycanceled(product, this.client.acceptLanguage());
     }

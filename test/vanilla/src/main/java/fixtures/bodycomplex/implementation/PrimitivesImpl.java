@@ -10,11 +10,12 @@
 
 package fixtures.bodycomplex.implementation;
 
+import com.microsoft.rest.v2.BodyResponse;
 import com.microsoft.rest.v2.RestProxy;
-import com.microsoft.rest.v2.RestResponse;
 import com.microsoft.rest.v2.ServiceCallback;
 import com.microsoft.rest.v2.ServiceFuture;
 import com.microsoft.rest.v2.Validator;
+import com.microsoft.rest.v2.VoidResponse;
 import com.microsoft.rest.v2.annotations.BodyParam;
 import com.microsoft.rest.v2.annotations.ExpectedResponses;
 import com.microsoft.rest.v2.annotations.GET;
@@ -74,112 +75,112 @@ public final class PrimitivesImpl implements Primitives {
         @GET("complex/primitive/integer")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<RestResponse<Void, IntWrapper>> getInt();
+        Single<BodyResponse<IntWrapper>> getInt();
 
         @PUT("complex/primitive/integer")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<RestResponse<Void, Void>> putInt(@BodyParam("application/json; charset=utf-8") IntWrapper complexBody);
+        Single<VoidResponse> putInt(@BodyParam("application/json; charset=utf-8") IntWrapper complexBody);
 
         @GET("complex/primitive/long")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<RestResponse<Void, LongWrapper>> getLong();
+        Single<BodyResponse<LongWrapper>> getLong();
 
         @PUT("complex/primitive/long")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<RestResponse<Void, Void>> putLong(@BodyParam("application/json; charset=utf-8") LongWrapper complexBody);
+        Single<VoidResponse> putLong(@BodyParam("application/json; charset=utf-8") LongWrapper complexBody);
 
         @GET("complex/primitive/float")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<RestResponse<Void, FloatWrapper>> getFloat();
+        Single<BodyResponse<FloatWrapper>> getFloat();
 
         @PUT("complex/primitive/float")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<RestResponse<Void, Void>> putFloat(@BodyParam("application/json; charset=utf-8") FloatWrapper complexBody);
+        Single<VoidResponse> putFloat(@BodyParam("application/json; charset=utf-8") FloatWrapper complexBody);
 
         @GET("complex/primitive/double")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<RestResponse<Void, DoubleWrapper>> getDouble();
+        Single<BodyResponse<DoubleWrapper>> getDouble();
 
         @PUT("complex/primitive/double")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<RestResponse<Void, Void>> putDouble(@BodyParam("application/json; charset=utf-8") DoubleWrapper complexBody);
+        Single<VoidResponse> putDouble(@BodyParam("application/json; charset=utf-8") DoubleWrapper complexBody);
 
         @GET("complex/primitive/bool")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<RestResponse<Void, BooleanWrapper>> getBool();
+        Single<BodyResponse<BooleanWrapper>> getBool();
 
         @PUT("complex/primitive/bool")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<RestResponse<Void, Void>> putBool(@BodyParam("application/json; charset=utf-8") BooleanWrapper complexBody);
+        Single<VoidResponse> putBool(@BodyParam("application/json; charset=utf-8") BooleanWrapper complexBody);
 
         @GET("complex/primitive/string")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<RestResponse<Void, StringWrapper>> getString();
+        Single<BodyResponse<StringWrapper>> getString();
 
         @PUT("complex/primitive/string")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<RestResponse<Void, Void>> putString(@BodyParam("application/json; charset=utf-8") StringWrapper complexBody);
+        Single<VoidResponse> putString(@BodyParam("application/json; charset=utf-8") StringWrapper complexBody);
 
         @GET("complex/primitive/date")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<RestResponse<Void, DateWrapper>> getDate();
+        Single<BodyResponse<DateWrapper>> getDate();
 
         @PUT("complex/primitive/date")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<RestResponse<Void, Void>> putDate(@BodyParam("application/json; charset=utf-8") DateWrapper complexBody);
+        Single<VoidResponse> putDate(@BodyParam("application/json; charset=utf-8") DateWrapper complexBody);
 
         @GET("complex/primitive/datetime")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<RestResponse<Void, DatetimeWrapper>> getDateTime();
+        Single<BodyResponse<DatetimeWrapper>> getDateTime();
 
         @PUT("complex/primitive/datetime")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<RestResponse<Void, Void>> putDateTime(@BodyParam("application/json; charset=utf-8") DatetimeWrapper complexBody);
+        Single<VoidResponse> putDateTime(@BodyParam("application/json; charset=utf-8") DatetimeWrapper complexBody);
 
         @GET("complex/primitive/datetimerfc1123")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<RestResponse<Void, Datetimerfc1123Wrapper>> getDateTimeRfc1123();
+        Single<BodyResponse<Datetimerfc1123Wrapper>> getDateTimeRfc1123();
 
         @PUT("complex/primitive/datetimerfc1123")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<RestResponse<Void, Void>> putDateTimeRfc1123(@BodyParam("application/json; charset=utf-8") Datetimerfc1123Wrapper complexBody);
+        Single<VoidResponse> putDateTimeRfc1123(@BodyParam("application/json; charset=utf-8") Datetimerfc1123Wrapper complexBody);
 
         @GET("complex/primitive/duration")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<RestResponse<Void, DurationWrapper>> getDuration();
+        Single<BodyResponse<DurationWrapper>> getDuration();
 
         @PUT("complex/primitive/duration")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<RestResponse<Void, Void>> putDuration(@BodyParam("application/json; charset=utf-8") DurationWrapper complexBody);
+        Single<VoidResponse> putDuration(@BodyParam("application/json; charset=utf-8") DurationWrapper complexBody);
 
         @GET("complex/primitive/byte")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<RestResponse<Void, ByteWrapper>> getByte();
+        Single<BodyResponse<ByteWrapper>> getByte();
 
         @PUT("complex/primitive/byte")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<RestResponse<Void, Void>> putByte(@BodyParam("application/json; charset=utf-8") ByteWrapper complexBody);
+        Single<VoidResponse> putByte(@BodyParam("application/json; charset=utf-8") ByteWrapper complexBody);
     }
 
     /**
@@ -209,7 +210,7 @@ public final class PrimitivesImpl implements Primitives {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<Void, IntWrapper>> getIntWithRestResponseAsync() {
+    public Single<BodyResponse<IntWrapper>> getIntWithRestResponseAsync() {
         return service.getInt();
     }
 
@@ -220,15 +221,7 @@ public final class PrimitivesImpl implements Primitives {
      */
     public Maybe<IntWrapper> getIntAsync() {
         return getIntWithRestResponseAsync()
-            .flatMapMaybe(new Function<RestResponse<Void, IntWrapper>, Maybe<IntWrapper>>() {
-                public Maybe<IntWrapper> apply(RestResponse<Void, IntWrapper> restResponse) {
-                    if (restResponse.body() == null) {
-                        return Maybe.empty();
-                    } else {
-                        return Maybe.just(restResponse.body());
-                    }
-                }
-            });
+            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -262,7 +255,7 @@ public final class PrimitivesImpl implements Primitives {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<Void, Void>> putIntWithRestResponseAsync(@NonNull IntWrapper complexBody) {
+    public Single<VoidResponse> putIntWithRestResponseAsync(@NonNull IntWrapper complexBody) {
         if (complexBody == null) {
             throw new IllegalArgumentException("Parameter complexBody is required and cannot be null.");
         }
@@ -309,7 +302,7 @@ public final class PrimitivesImpl implements Primitives {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<Void, LongWrapper>> getLongWithRestResponseAsync() {
+    public Single<BodyResponse<LongWrapper>> getLongWithRestResponseAsync() {
         return service.getLong();
     }
 
@@ -320,15 +313,7 @@ public final class PrimitivesImpl implements Primitives {
      */
     public Maybe<LongWrapper> getLongAsync() {
         return getLongWithRestResponseAsync()
-            .flatMapMaybe(new Function<RestResponse<Void, LongWrapper>, Maybe<LongWrapper>>() {
-                public Maybe<LongWrapper> apply(RestResponse<Void, LongWrapper> restResponse) {
-                    if (restResponse.body() == null) {
-                        return Maybe.empty();
-                    } else {
-                        return Maybe.just(restResponse.body());
-                    }
-                }
-            });
+            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -362,7 +347,7 @@ public final class PrimitivesImpl implements Primitives {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<Void, Void>> putLongWithRestResponseAsync(@NonNull LongWrapper complexBody) {
+    public Single<VoidResponse> putLongWithRestResponseAsync(@NonNull LongWrapper complexBody) {
         if (complexBody == null) {
             throw new IllegalArgumentException("Parameter complexBody is required and cannot be null.");
         }
@@ -409,7 +394,7 @@ public final class PrimitivesImpl implements Primitives {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<Void, FloatWrapper>> getFloatWithRestResponseAsync() {
+    public Single<BodyResponse<FloatWrapper>> getFloatWithRestResponseAsync() {
         return service.getFloat();
     }
 
@@ -420,15 +405,7 @@ public final class PrimitivesImpl implements Primitives {
      */
     public Maybe<FloatWrapper> getFloatAsync() {
         return getFloatWithRestResponseAsync()
-            .flatMapMaybe(new Function<RestResponse<Void, FloatWrapper>, Maybe<FloatWrapper>>() {
-                public Maybe<FloatWrapper> apply(RestResponse<Void, FloatWrapper> restResponse) {
-                    if (restResponse.body() == null) {
-                        return Maybe.empty();
-                    } else {
-                        return Maybe.just(restResponse.body());
-                    }
-                }
-            });
+            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -462,7 +439,7 @@ public final class PrimitivesImpl implements Primitives {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<Void, Void>> putFloatWithRestResponseAsync(@NonNull FloatWrapper complexBody) {
+    public Single<VoidResponse> putFloatWithRestResponseAsync(@NonNull FloatWrapper complexBody) {
         if (complexBody == null) {
             throw new IllegalArgumentException("Parameter complexBody is required and cannot be null.");
         }
@@ -509,7 +486,7 @@ public final class PrimitivesImpl implements Primitives {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<Void, DoubleWrapper>> getDoubleWithRestResponseAsync() {
+    public Single<BodyResponse<DoubleWrapper>> getDoubleWithRestResponseAsync() {
         return service.getDouble();
     }
 
@@ -520,15 +497,7 @@ public final class PrimitivesImpl implements Primitives {
      */
     public Maybe<DoubleWrapper> getDoubleAsync() {
         return getDoubleWithRestResponseAsync()
-            .flatMapMaybe(new Function<RestResponse<Void, DoubleWrapper>, Maybe<DoubleWrapper>>() {
-                public Maybe<DoubleWrapper> apply(RestResponse<Void, DoubleWrapper> restResponse) {
-                    if (restResponse.body() == null) {
-                        return Maybe.empty();
-                    } else {
-                        return Maybe.just(restResponse.body());
-                    }
-                }
-            });
+            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -562,7 +531,7 @@ public final class PrimitivesImpl implements Primitives {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<Void, Void>> putDoubleWithRestResponseAsync(@NonNull DoubleWrapper complexBody) {
+    public Single<VoidResponse> putDoubleWithRestResponseAsync(@NonNull DoubleWrapper complexBody) {
         if (complexBody == null) {
             throw new IllegalArgumentException("Parameter complexBody is required and cannot be null.");
         }
@@ -609,7 +578,7 @@ public final class PrimitivesImpl implements Primitives {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<Void, BooleanWrapper>> getBoolWithRestResponseAsync() {
+    public Single<BodyResponse<BooleanWrapper>> getBoolWithRestResponseAsync() {
         return service.getBool();
     }
 
@@ -620,15 +589,7 @@ public final class PrimitivesImpl implements Primitives {
      */
     public Maybe<BooleanWrapper> getBoolAsync() {
         return getBoolWithRestResponseAsync()
-            .flatMapMaybe(new Function<RestResponse<Void, BooleanWrapper>, Maybe<BooleanWrapper>>() {
-                public Maybe<BooleanWrapper> apply(RestResponse<Void, BooleanWrapper> restResponse) {
-                    if (restResponse.body() == null) {
-                        return Maybe.empty();
-                    } else {
-                        return Maybe.just(restResponse.body());
-                    }
-                }
-            });
+            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -662,7 +623,7 @@ public final class PrimitivesImpl implements Primitives {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<Void, Void>> putBoolWithRestResponseAsync(@NonNull BooleanWrapper complexBody) {
+    public Single<VoidResponse> putBoolWithRestResponseAsync(@NonNull BooleanWrapper complexBody) {
         if (complexBody == null) {
             throw new IllegalArgumentException("Parameter complexBody is required and cannot be null.");
         }
@@ -709,7 +670,7 @@ public final class PrimitivesImpl implements Primitives {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<Void, StringWrapper>> getStringWithRestResponseAsync() {
+    public Single<BodyResponse<StringWrapper>> getStringWithRestResponseAsync() {
         return service.getString();
     }
 
@@ -720,15 +681,7 @@ public final class PrimitivesImpl implements Primitives {
      */
     public Maybe<StringWrapper> getStringAsync() {
         return getStringWithRestResponseAsync()
-            .flatMapMaybe(new Function<RestResponse<Void, StringWrapper>, Maybe<StringWrapper>>() {
-                public Maybe<StringWrapper> apply(RestResponse<Void, StringWrapper> restResponse) {
-                    if (restResponse.body() == null) {
-                        return Maybe.empty();
-                    } else {
-                        return Maybe.just(restResponse.body());
-                    }
-                }
-            });
+            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -762,7 +715,7 @@ public final class PrimitivesImpl implements Primitives {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<Void, Void>> putStringWithRestResponseAsync(@NonNull StringWrapper complexBody) {
+    public Single<VoidResponse> putStringWithRestResponseAsync(@NonNull StringWrapper complexBody) {
         if (complexBody == null) {
             throw new IllegalArgumentException("Parameter complexBody is required and cannot be null.");
         }
@@ -809,7 +762,7 @@ public final class PrimitivesImpl implements Primitives {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<Void, DateWrapper>> getDateWithRestResponseAsync() {
+    public Single<BodyResponse<DateWrapper>> getDateWithRestResponseAsync() {
         return service.getDate();
     }
 
@@ -820,15 +773,7 @@ public final class PrimitivesImpl implements Primitives {
      */
     public Maybe<DateWrapper> getDateAsync() {
         return getDateWithRestResponseAsync()
-            .flatMapMaybe(new Function<RestResponse<Void, DateWrapper>, Maybe<DateWrapper>>() {
-                public Maybe<DateWrapper> apply(RestResponse<Void, DateWrapper> restResponse) {
-                    if (restResponse.body() == null) {
-                        return Maybe.empty();
-                    } else {
-                        return Maybe.just(restResponse.body());
-                    }
-                }
-            });
+            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -862,7 +807,7 @@ public final class PrimitivesImpl implements Primitives {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<Void, Void>> putDateWithRestResponseAsync(@NonNull DateWrapper complexBody) {
+    public Single<VoidResponse> putDateWithRestResponseAsync(@NonNull DateWrapper complexBody) {
         if (complexBody == null) {
             throw new IllegalArgumentException("Parameter complexBody is required and cannot be null.");
         }
@@ -909,7 +854,7 @@ public final class PrimitivesImpl implements Primitives {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<Void, DatetimeWrapper>> getDateTimeWithRestResponseAsync() {
+    public Single<BodyResponse<DatetimeWrapper>> getDateTimeWithRestResponseAsync() {
         return service.getDateTime();
     }
 
@@ -920,15 +865,7 @@ public final class PrimitivesImpl implements Primitives {
      */
     public Maybe<DatetimeWrapper> getDateTimeAsync() {
         return getDateTimeWithRestResponseAsync()
-            .flatMapMaybe(new Function<RestResponse<Void, DatetimeWrapper>, Maybe<DatetimeWrapper>>() {
-                public Maybe<DatetimeWrapper> apply(RestResponse<Void, DatetimeWrapper> restResponse) {
-                    if (restResponse.body() == null) {
-                        return Maybe.empty();
-                    } else {
-                        return Maybe.just(restResponse.body());
-                    }
-                }
-            });
+            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -962,7 +899,7 @@ public final class PrimitivesImpl implements Primitives {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<Void, Void>> putDateTimeWithRestResponseAsync(@NonNull DatetimeWrapper complexBody) {
+    public Single<VoidResponse> putDateTimeWithRestResponseAsync(@NonNull DatetimeWrapper complexBody) {
         if (complexBody == null) {
             throw new IllegalArgumentException("Parameter complexBody is required and cannot be null.");
         }
@@ -1009,7 +946,7 @@ public final class PrimitivesImpl implements Primitives {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<Void, Datetimerfc1123Wrapper>> getDateTimeRfc1123WithRestResponseAsync() {
+    public Single<BodyResponse<Datetimerfc1123Wrapper>> getDateTimeRfc1123WithRestResponseAsync() {
         return service.getDateTimeRfc1123();
     }
 
@@ -1020,15 +957,7 @@ public final class PrimitivesImpl implements Primitives {
      */
     public Maybe<Datetimerfc1123Wrapper> getDateTimeRfc1123Async() {
         return getDateTimeRfc1123WithRestResponseAsync()
-            .flatMapMaybe(new Function<RestResponse<Void, Datetimerfc1123Wrapper>, Maybe<Datetimerfc1123Wrapper>>() {
-                public Maybe<Datetimerfc1123Wrapper> apply(RestResponse<Void, Datetimerfc1123Wrapper> restResponse) {
-                    if (restResponse.body() == null) {
-                        return Maybe.empty();
-                    } else {
-                        return Maybe.just(restResponse.body());
-                    }
-                }
-            });
+            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -1062,7 +991,7 @@ public final class PrimitivesImpl implements Primitives {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<Void, Void>> putDateTimeRfc1123WithRestResponseAsync(@NonNull Datetimerfc1123Wrapper complexBody) {
+    public Single<VoidResponse> putDateTimeRfc1123WithRestResponseAsync(@NonNull Datetimerfc1123Wrapper complexBody) {
         if (complexBody == null) {
             throw new IllegalArgumentException("Parameter complexBody is required and cannot be null.");
         }
@@ -1109,7 +1038,7 @@ public final class PrimitivesImpl implements Primitives {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<Void, DurationWrapper>> getDurationWithRestResponseAsync() {
+    public Single<BodyResponse<DurationWrapper>> getDurationWithRestResponseAsync() {
         return service.getDuration();
     }
 
@@ -1120,15 +1049,7 @@ public final class PrimitivesImpl implements Primitives {
      */
     public Maybe<DurationWrapper> getDurationAsync() {
         return getDurationWithRestResponseAsync()
-            .flatMapMaybe(new Function<RestResponse<Void, DurationWrapper>, Maybe<DurationWrapper>>() {
-                public Maybe<DurationWrapper> apply(RestResponse<Void, DurationWrapper> restResponse) {
-                    if (restResponse.body() == null) {
-                        return Maybe.empty();
-                    } else {
-                        return Maybe.just(restResponse.body());
-                    }
-                }
-            });
+            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -1162,7 +1083,7 @@ public final class PrimitivesImpl implements Primitives {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<Void, Void>> putDurationWithRestResponseAsync(@NonNull DurationWrapper complexBody) {
+    public Single<VoidResponse> putDurationWithRestResponseAsync(@NonNull DurationWrapper complexBody) {
         if (complexBody == null) {
             throw new IllegalArgumentException("Parameter complexBody is required and cannot be null.");
         }
@@ -1209,7 +1130,7 @@ public final class PrimitivesImpl implements Primitives {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<Void, ByteWrapper>> getByteWithRestResponseAsync() {
+    public Single<BodyResponse<ByteWrapper>> getByteWithRestResponseAsync() {
         return service.getByte();
     }
 
@@ -1220,15 +1141,7 @@ public final class PrimitivesImpl implements Primitives {
      */
     public Maybe<ByteWrapper> getByteAsync() {
         return getByteWithRestResponseAsync()
-            .flatMapMaybe(new Function<RestResponse<Void, ByteWrapper>, Maybe<ByteWrapper>>() {
-                public Maybe<ByteWrapper> apply(RestResponse<Void, ByteWrapper> restResponse) {
-                    if (restResponse.body() == null) {
-                        return Maybe.empty();
-                    } else {
-                        return Maybe.just(restResponse.body());
-                    }
-                }
-            });
+            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -1262,7 +1175,7 @@ public final class PrimitivesImpl implements Primitives {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<Void, Void>> putByteWithRestResponseAsync(@NonNull ByteWrapper complexBody) {
+    public Single<VoidResponse> putByteWithRestResponseAsync(@NonNull ByteWrapper complexBody) {
         if (complexBody == null) {
             throw new IllegalArgumentException("Parameter complexBody is required and cannot be null.");
         }

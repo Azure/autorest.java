@@ -10,11 +10,12 @@
 
 package fixtures.bodycomplex.implementation;
 
+import com.microsoft.rest.v2.BodyResponse;
 import com.microsoft.rest.v2.RestProxy;
-import com.microsoft.rest.v2.RestResponse;
 import com.microsoft.rest.v2.ServiceCallback;
 import com.microsoft.rest.v2.ServiceFuture;
 import com.microsoft.rest.v2.Validator;
+import com.microsoft.rest.v2.VoidResponse;
 import com.microsoft.rest.v2.annotations.BodyParam;
 import com.microsoft.rest.v2.annotations.ExpectedResponses;
 import com.microsoft.rest.v2.annotations.GET;
@@ -65,32 +66,32 @@ public final class BasicsImpl implements Basics {
         @GET("complex/basic/valid")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<RestResponse<Void, Basic>> getValid();
+        Single<BodyResponse<Basic>> getValid();
 
         @PUT("complex/basic/valid")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<RestResponse<Void, Void>> putValid(@BodyParam("application/json; charset=utf-8") Basic complexBody, @QueryParam("api-version") String apiVersion);
+        Single<VoidResponse> putValid(@BodyParam("application/json; charset=utf-8") Basic complexBody, @QueryParam("api-version") String apiVersion);
 
         @GET("complex/basic/invalid")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<RestResponse<Void, Basic>> getInvalid();
+        Single<BodyResponse<Basic>> getInvalid();
 
         @GET("complex/basic/empty")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<RestResponse<Void, Basic>> getEmpty();
+        Single<BodyResponse<Basic>> getEmpty();
 
         @GET("complex/basic/null")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<RestResponse<Void, Basic>> getNull();
+        Single<BodyResponse<Basic>> getNull();
 
         @GET("complex/basic/notprovided")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<RestResponse<Void, Basic>> getNotProvided();
+        Single<BodyResponse<Basic>> getNotProvided();
     }
 
     /**
@@ -120,7 +121,7 @@ public final class BasicsImpl implements Basics {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<Void, Basic>> getValidWithRestResponseAsync() {
+    public Single<BodyResponse<Basic>> getValidWithRestResponseAsync() {
         return service.getValid();
     }
 
@@ -131,15 +132,7 @@ public final class BasicsImpl implements Basics {
      */
     public Maybe<Basic> getValidAsync() {
         return getValidWithRestResponseAsync()
-            .flatMapMaybe(new Function<RestResponse<Void, Basic>, Maybe<Basic>>() {
-                public Maybe<Basic> apply(RestResponse<Void, Basic> restResponse) {
-                    if (restResponse.body() == null) {
-                        return Maybe.empty();
-                    } else {
-                        return Maybe.just(restResponse.body());
-                    }
-                }
-            });
+            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -173,7 +166,7 @@ public final class BasicsImpl implements Basics {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<Void, Void>> putValidWithRestResponseAsync(@NonNull Basic complexBody) {
+    public Single<VoidResponse> putValidWithRestResponseAsync(@NonNull Basic complexBody) {
         if (complexBody == null) {
             throw new IllegalArgumentException("Parameter complexBody is required and cannot be null.");
         }
@@ -220,7 +213,7 @@ public final class BasicsImpl implements Basics {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<Void, Basic>> getInvalidWithRestResponseAsync() {
+    public Single<BodyResponse<Basic>> getInvalidWithRestResponseAsync() {
         return service.getInvalid();
     }
 
@@ -231,15 +224,7 @@ public final class BasicsImpl implements Basics {
      */
     public Maybe<Basic> getInvalidAsync() {
         return getInvalidWithRestResponseAsync()
-            .flatMapMaybe(new Function<RestResponse<Void, Basic>, Maybe<Basic>>() {
-                public Maybe<Basic> apply(RestResponse<Void, Basic> restResponse) {
-                    if (restResponse.body() == null) {
-                        return Maybe.empty();
-                    } else {
-                        return Maybe.just(restResponse.body());
-                    }
-                }
-            });
+            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -269,7 +254,7 @@ public final class BasicsImpl implements Basics {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<Void, Basic>> getEmptyWithRestResponseAsync() {
+    public Single<BodyResponse<Basic>> getEmptyWithRestResponseAsync() {
         return service.getEmpty();
     }
 
@@ -280,15 +265,7 @@ public final class BasicsImpl implements Basics {
      */
     public Maybe<Basic> getEmptyAsync() {
         return getEmptyWithRestResponseAsync()
-            .flatMapMaybe(new Function<RestResponse<Void, Basic>, Maybe<Basic>>() {
-                public Maybe<Basic> apply(RestResponse<Void, Basic> restResponse) {
-                    if (restResponse.body() == null) {
-                        return Maybe.empty();
-                    } else {
-                        return Maybe.just(restResponse.body());
-                    }
-                }
-            });
+            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -318,7 +295,7 @@ public final class BasicsImpl implements Basics {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<Void, Basic>> getNullWithRestResponseAsync() {
+    public Single<BodyResponse<Basic>> getNullWithRestResponseAsync() {
         return service.getNull();
     }
 
@@ -329,15 +306,7 @@ public final class BasicsImpl implements Basics {
      */
     public Maybe<Basic> getNullAsync() {
         return getNullWithRestResponseAsync()
-            .flatMapMaybe(new Function<RestResponse<Void, Basic>, Maybe<Basic>>() {
-                public Maybe<Basic> apply(RestResponse<Void, Basic> restResponse) {
-                    if (restResponse.body() == null) {
-                        return Maybe.empty();
-                    } else {
-                        return Maybe.just(restResponse.body());
-                    }
-                }
-            });
+            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -367,7 +336,7 @@ public final class BasicsImpl implements Basics {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<Void, Basic>> getNotProvidedWithRestResponseAsync() {
+    public Single<BodyResponse<Basic>> getNotProvidedWithRestResponseAsync() {
         return service.getNotProvided();
     }
 
@@ -378,14 +347,6 @@ public final class BasicsImpl implements Basics {
      */
     public Maybe<Basic> getNotProvidedAsync() {
         return getNotProvidedWithRestResponseAsync()
-            .flatMapMaybe(new Function<RestResponse<Void, Basic>, Maybe<Basic>>() {
-                public Maybe<Basic> apply(RestResponse<Void, Basic> restResponse) {
-                    if (restResponse.body() == null) {
-                        return Maybe.empty();
-                    } else {
-                        return Maybe.just(restResponse.body());
-                    }
-                }
-            });
+            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 }

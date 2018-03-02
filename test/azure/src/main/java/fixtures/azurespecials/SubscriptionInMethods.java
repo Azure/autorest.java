@@ -10,9 +10,9 @@
 
 package fixtures.azurespecials;
 
-import com.microsoft.rest.v2.RestResponse;
 import com.microsoft.rest.v2.ServiceCallback;
 import com.microsoft.rest.v2.ServiceFuture;
+import com.microsoft.rest.v2.VoidResponse;
 import fixtures.azurespecials.models.ErrorException;
 import io.reactivex.Completable;
 import io.reactivex.Single;
@@ -50,7 +50,7 @@ public interface SubscriptionInMethods {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, Void>> postMethodLocalValidWithRestResponseAsync(@NonNull String subscriptionId);
+    Single<VoidResponse> postMethodLocalValidWithRestResponseAsync(@NonNull String subscriptionId);
 
     /**
      * POST method with subscriptionId modeled in the method.  pass in subscription id = '1234-5678-9012-3456' to succeed.
@@ -88,7 +88,7 @@ public interface SubscriptionInMethods {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, Void>> postMethodLocalNullWithRestResponseAsync(@NonNull String subscriptionId);
+    Single<VoidResponse> postMethodLocalNullWithRestResponseAsync(@NonNull String subscriptionId);
 
     /**
      * POST method with subscriptionId modeled in the method.  pass in subscription id = null, client-side validation should prevent you from making this call.
@@ -126,7 +126,7 @@ public interface SubscriptionInMethods {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, Void>> postPathLocalValidWithRestResponseAsync(@NonNull String subscriptionId);
+    Single<VoidResponse> postPathLocalValidWithRestResponseAsync(@NonNull String subscriptionId);
 
     /**
      * POST method with subscriptionId modeled in the method.  pass in subscription id = '1234-5678-9012-3456' to succeed.
@@ -164,7 +164,7 @@ public interface SubscriptionInMethods {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, Void>> postSwaggerLocalValidWithRestResponseAsync(@NonNull String subscriptionId);
+    Single<VoidResponse> postSwaggerLocalValidWithRestResponseAsync(@NonNull String subscriptionId);
 
     /**
      * POST method with subscriptionId modeled in the method.  pass in subscription id = '1234-5678-9012-3456' to succeed.

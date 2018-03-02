@@ -10,9 +10,10 @@
 
 package fixtures.bodycomplex;
 
-import com.microsoft.rest.v2.RestResponse;
+import com.microsoft.rest.v2.BodyResponse;
 import com.microsoft.rest.v2.ServiceCallback;
 import com.microsoft.rest.v2.ServiceFuture;
+import com.microsoft.rest.v2.VoidResponse;
 import fixtures.bodycomplex.models.BooleanWrapper;
 import fixtures.bodycomplex.models.ByteWrapper;
 import fixtures.bodycomplex.models.Datetimerfc1123Wrapper;
@@ -58,7 +59,7 @@ public interface Primitives {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, IntWrapper>> getIntWithRestResponseAsync();
+    Single<BodyResponse<IntWrapper>> getIntWithRestResponseAsync();
 
     /**
      * Get complex types with integer properties.
@@ -94,7 +95,7 @@ public interface Primitives {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, Void>> putIntWithRestResponseAsync(@NonNull IntWrapper complexBody);
+    Single<VoidResponse> putIntWithRestResponseAsync(@NonNull IntWrapper complexBody);
 
     /**
      * Put complex types with integer properties.
@@ -128,7 +129,7 @@ public interface Primitives {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, LongWrapper>> getLongWithRestResponseAsync();
+    Single<BodyResponse<LongWrapper>> getLongWithRestResponseAsync();
 
     /**
      * Get complex types with long properties.
@@ -164,7 +165,7 @@ public interface Primitives {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, Void>> putLongWithRestResponseAsync(@NonNull LongWrapper complexBody);
+    Single<VoidResponse> putLongWithRestResponseAsync(@NonNull LongWrapper complexBody);
 
     /**
      * Put complex types with long properties.
@@ -198,7 +199,7 @@ public interface Primitives {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, FloatWrapper>> getFloatWithRestResponseAsync();
+    Single<BodyResponse<FloatWrapper>> getFloatWithRestResponseAsync();
 
     /**
      * Get complex types with float properties.
@@ -234,7 +235,7 @@ public interface Primitives {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, Void>> putFloatWithRestResponseAsync(@NonNull FloatWrapper complexBody);
+    Single<VoidResponse> putFloatWithRestResponseAsync(@NonNull FloatWrapper complexBody);
 
     /**
      * Put complex types with float properties.
@@ -268,7 +269,7 @@ public interface Primitives {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, DoubleWrapper>> getDoubleWithRestResponseAsync();
+    Single<BodyResponse<DoubleWrapper>> getDoubleWithRestResponseAsync();
 
     /**
      * Get complex types with double properties.
@@ -304,7 +305,7 @@ public interface Primitives {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, Void>> putDoubleWithRestResponseAsync(@NonNull DoubleWrapper complexBody);
+    Single<VoidResponse> putDoubleWithRestResponseAsync(@NonNull DoubleWrapper complexBody);
 
     /**
      * Put complex types with double properties.
@@ -338,7 +339,7 @@ public interface Primitives {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, BooleanWrapper>> getBoolWithRestResponseAsync();
+    Single<BodyResponse<BooleanWrapper>> getBoolWithRestResponseAsync();
 
     /**
      * Get complex types with bool properties.
@@ -374,7 +375,7 @@ public interface Primitives {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, Void>> putBoolWithRestResponseAsync(@NonNull BooleanWrapper complexBody);
+    Single<VoidResponse> putBoolWithRestResponseAsync(@NonNull BooleanWrapper complexBody);
 
     /**
      * Put complex types with bool properties.
@@ -408,7 +409,7 @@ public interface Primitives {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, StringWrapper>> getStringWithRestResponseAsync();
+    Single<BodyResponse<StringWrapper>> getStringWithRestResponseAsync();
 
     /**
      * Get complex types with string properties.
@@ -444,7 +445,7 @@ public interface Primitives {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, Void>> putStringWithRestResponseAsync(@NonNull StringWrapper complexBody);
+    Single<VoidResponse> putStringWithRestResponseAsync(@NonNull StringWrapper complexBody);
 
     /**
      * Put complex types with string properties.
@@ -478,7 +479,7 @@ public interface Primitives {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, DateWrapper>> getDateWithRestResponseAsync();
+    Single<BodyResponse<DateWrapper>> getDateWithRestResponseAsync();
 
     /**
      * Get complex types with date properties.
@@ -514,7 +515,7 @@ public interface Primitives {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, Void>> putDateWithRestResponseAsync(@NonNull DateWrapper complexBody);
+    Single<VoidResponse> putDateWithRestResponseAsync(@NonNull DateWrapper complexBody);
 
     /**
      * Put complex types with date properties.
@@ -548,7 +549,7 @@ public interface Primitives {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, DatetimeWrapper>> getDateTimeWithRestResponseAsync();
+    Single<BodyResponse<DatetimeWrapper>> getDateTimeWithRestResponseAsync();
 
     /**
      * Get complex types with datetime properties.
@@ -584,7 +585,7 @@ public interface Primitives {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, Void>> putDateTimeWithRestResponseAsync(@NonNull DatetimeWrapper complexBody);
+    Single<VoidResponse> putDateTimeWithRestResponseAsync(@NonNull DatetimeWrapper complexBody);
 
     /**
      * Put complex types with datetime properties.
@@ -618,7 +619,7 @@ public interface Primitives {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, Datetimerfc1123Wrapper>> getDateTimeRfc1123WithRestResponseAsync();
+    Single<BodyResponse<Datetimerfc1123Wrapper>> getDateTimeRfc1123WithRestResponseAsync();
 
     /**
      * Get complex types with datetimeRfc1123 properties.
@@ -654,7 +655,7 @@ public interface Primitives {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, Void>> putDateTimeRfc1123WithRestResponseAsync(@NonNull Datetimerfc1123Wrapper complexBody);
+    Single<VoidResponse> putDateTimeRfc1123WithRestResponseAsync(@NonNull Datetimerfc1123Wrapper complexBody);
 
     /**
      * Put complex types with datetimeRfc1123 properties.
@@ -688,7 +689,7 @@ public interface Primitives {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, DurationWrapper>> getDurationWithRestResponseAsync();
+    Single<BodyResponse<DurationWrapper>> getDurationWithRestResponseAsync();
 
     /**
      * Get complex types with duration properties.
@@ -724,7 +725,7 @@ public interface Primitives {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, Void>> putDurationWithRestResponseAsync(@NonNull DurationWrapper complexBody);
+    Single<VoidResponse> putDurationWithRestResponseAsync(@NonNull DurationWrapper complexBody);
 
     /**
      * Put complex types with duration properties.
@@ -758,7 +759,7 @@ public interface Primitives {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, ByteWrapper>> getByteWithRestResponseAsync();
+    Single<BodyResponse<ByteWrapper>> getByteWithRestResponseAsync();
 
     /**
      * Get complex types with byte properties.
@@ -794,7 +795,7 @@ public interface Primitives {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, Void>> putByteWithRestResponseAsync(@NonNull ByteWrapper complexBody);
+    Single<VoidResponse> putByteWithRestResponseAsync(@NonNull ByteWrapper complexBody);
 
     /**
      * Put complex types with byte properties.

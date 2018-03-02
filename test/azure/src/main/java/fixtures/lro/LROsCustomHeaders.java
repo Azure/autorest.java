@@ -12,13 +12,13 @@ package fixtures.lro;
 
 import com.microsoft.azure.v2.CloudException;
 import com.microsoft.azure.v2.OperationStatus;
+import com.microsoft.rest.v2.BodyResponse;
 import com.microsoft.rest.v2.OperationDescription;
-import com.microsoft.rest.v2.RestResponse;
 import com.microsoft.rest.v2.ServiceCallback;
 import com.microsoft.rest.v2.ServiceFuture;
-import fixtures.lro.models.LROsCustomHeaderPost202Retry200Headers;
-import fixtures.lro.models.LROsCustomHeaderPostAsyncRetrySucceededHeaders;
-import fixtures.lro.models.LROsCustomHeaderPutAsyncRetrySucceededHeaders;
+import fixtures.lro.models.LROsCustomHeaderPost202Retry200Response;
+import fixtures.lro.models.LROsCustomHeaderPostAsyncRetrySucceededResponse;
+import fixtures.lro.models.LROsCustomHeaderPutAsyncRetrySucceededResponse;
 import fixtures.lro.models.Product;
 import io.reactivex.Completable;
 import io.reactivex.Maybe;
@@ -107,7 +107,7 @@ public interface LROsCustomHeaders {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<LROsCustomHeaderPutAsyncRetrySucceededHeaders, Product>> putAsyncRetrySucceededWithRestResponseAsync();
+    Single<LROsCustomHeaderPutAsyncRetrySucceededResponse> putAsyncRetrySucceededWithRestResponseAsync();
 
     /**
      * x-ms-client-request-id = 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0 is required message header for all requests. Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
@@ -144,7 +144,7 @@ public interface LROsCustomHeaders {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<LROsCustomHeaderPutAsyncRetrySucceededHeaders, Product>> putAsyncRetrySucceededWithRestResponseAsync(Product product);
+    Single<LROsCustomHeaderPutAsyncRetrySucceededResponse> putAsyncRetrySucceededWithRestResponseAsync(Product product);
 
     /**
      * x-ms-client-request-id = 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0 is required message header for all requests. Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
@@ -241,7 +241,7 @@ public interface LROsCustomHeaders {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, Product>> put201CreatingSucceeded200WithRestResponseAsync();
+    Single<BodyResponse<Product>> put201CreatingSucceeded200WithRestResponseAsync();
 
     /**
      * x-ms-client-request-id = 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0 is required message header for all requests. Long running put request, service returns a 201 to the initial request, with an entity that contains ProvisioningState=’Creating’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Succeeded’.
@@ -278,7 +278,7 @@ public interface LROsCustomHeaders {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, Product>> put201CreatingSucceeded200WithRestResponseAsync(Product product);
+    Single<BodyResponse<Product>> put201CreatingSucceeded200WithRestResponseAsync(Product product);
 
     /**
      * x-ms-client-request-id = 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0 is required message header for all requests. Long running put request, service returns a 201 to the initial request, with an entity that contains ProvisioningState=’Creating’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Succeeded’.
@@ -372,7 +372,7 @@ public interface LROsCustomHeaders {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<LROsCustomHeaderPost202Retry200Headers, Void>> post202Retry200WithRestResponseAsync();
+    Single<LROsCustomHeaderPost202Retry200Response> post202Retry200WithRestResponseAsync();
 
     /**
      * x-ms-client-request-id = 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0 is required message header for all requests. Long running post request, service returns a 202 to the initial request, with 'Location' and 'Retry-After' headers, Polls return a 200 with a response body after success.
@@ -408,7 +408,7 @@ public interface LROsCustomHeaders {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<LROsCustomHeaderPost202Retry200Headers, Void>> post202Retry200WithRestResponseAsync(Product product);
+    Single<LROsCustomHeaderPost202Retry200Response> post202Retry200WithRestResponseAsync(Product product);
 
     /**
      * x-ms-client-request-id = 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0 is required message header for all requests. Long running post request, service returns a 202 to the initial request, with 'Location' and 'Retry-After' headers, Polls return a 200 with a response body after success.
@@ -502,7 +502,7 @@ public interface LROsCustomHeaders {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<LROsCustomHeaderPostAsyncRetrySucceededHeaders, Void>> postAsyncRetrySucceededWithRestResponseAsync();
+    Single<LROsCustomHeaderPostAsyncRetrySucceededResponse> postAsyncRetrySucceededWithRestResponseAsync();
 
     /**
      * x-ms-client-request-id = 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0 is required message header for all requests. Long running post request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
@@ -538,7 +538,7 @@ public interface LROsCustomHeaders {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<LROsCustomHeaderPostAsyncRetrySucceededHeaders, Void>> postAsyncRetrySucceededWithRestResponseAsync(Product product);
+    Single<LROsCustomHeaderPostAsyncRetrySucceededResponse> postAsyncRetrySucceededWithRestResponseAsync(Product product);
 
     /**
      * x-ms-client-request-id = 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0 is required message header for all requests. Long running post request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.

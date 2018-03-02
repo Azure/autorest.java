@@ -12,30 +12,31 @@ package fixtures.lro;
 
 import com.microsoft.azure.v2.CloudException;
 import com.microsoft.azure.v2.OperationStatus;
+import com.microsoft.rest.v2.BodyResponse;
 import com.microsoft.rest.v2.OperationDescription;
-import com.microsoft.rest.v2.RestResponse;
 import com.microsoft.rest.v2.ServiceCallback;
 import com.microsoft.rest.v2.ServiceFuture;
-import fixtures.lro.models.LROSADsDelete202NonRetry400Headers;
-import fixtures.lro.models.LROSADsDelete202RetryInvalidHeaderHeaders;
-import fixtures.lro.models.LROSADsDeleteAsyncRelativeRetry400Headers;
-import fixtures.lro.models.LROSADsDeleteAsyncRelativeRetryInvalidHeaderHeaders;
-import fixtures.lro.models.LROSADsDeleteAsyncRelativeRetryInvalidJsonPollingHeaders;
-import fixtures.lro.models.LROSADsDeleteAsyncRelativeRetryNoStatusHeaders;
-import fixtures.lro.models.LROSADsDeleteNonRetry400Headers;
-import fixtures.lro.models.LROSADsPost202NoLocationHeaders;
-import fixtures.lro.models.LROSADsPost202NonRetry400Headers;
-import fixtures.lro.models.LROSADsPost202RetryInvalidHeaderHeaders;
-import fixtures.lro.models.LROSADsPostAsyncRelativeRetry400Headers;
-import fixtures.lro.models.LROSADsPostAsyncRelativeRetryInvalidHeaderHeaders;
-import fixtures.lro.models.LROSADsPostAsyncRelativeRetryInvalidJsonPollingHeaders;
-import fixtures.lro.models.LROSADsPostAsyncRelativeRetryNoPayloadHeaders;
-import fixtures.lro.models.LROSADsPostNonRetry400Headers;
-import fixtures.lro.models.LROSADsPutAsyncRelativeRetry400Headers;
-import fixtures.lro.models.LROSADsPutAsyncRelativeRetryInvalidHeaderHeaders;
-import fixtures.lro.models.LROSADsPutAsyncRelativeRetryInvalidJsonPollingHeaders;
-import fixtures.lro.models.LROSADsPutAsyncRelativeRetryNoStatusHeaders;
-import fixtures.lro.models.LROSADsPutAsyncRelativeRetryNoStatusPayloadHeaders;
+import com.microsoft.rest.v2.VoidResponse;
+import fixtures.lro.models.LROSADsDelete202NonRetry400Response;
+import fixtures.lro.models.LROSADsDelete202RetryInvalidHeaderResponse;
+import fixtures.lro.models.LROSADsDeleteAsyncRelativeRetry400Response;
+import fixtures.lro.models.LROSADsDeleteAsyncRelativeRetryInvalidHeaderResponse;
+import fixtures.lro.models.LROSADsDeleteAsyncRelativeRetryInvalidJsonPollingResponse;
+import fixtures.lro.models.LROSADsDeleteAsyncRelativeRetryNoStatusResponse;
+import fixtures.lro.models.LROSADsDeleteNonRetry400Response;
+import fixtures.lro.models.LROSADsPost202NoLocationResponse;
+import fixtures.lro.models.LROSADsPost202NonRetry400Response;
+import fixtures.lro.models.LROSADsPost202RetryInvalidHeaderResponse;
+import fixtures.lro.models.LROSADsPostAsyncRelativeRetry400Response;
+import fixtures.lro.models.LROSADsPostAsyncRelativeRetryInvalidHeaderResponse;
+import fixtures.lro.models.LROSADsPostAsyncRelativeRetryInvalidJsonPollingResponse;
+import fixtures.lro.models.LROSADsPostAsyncRelativeRetryNoPayloadResponse;
+import fixtures.lro.models.LROSADsPostNonRetry400Response;
+import fixtures.lro.models.LROSADsPutAsyncRelativeRetry400Response;
+import fixtures.lro.models.LROSADsPutAsyncRelativeRetryInvalidHeaderResponse;
+import fixtures.lro.models.LROSADsPutAsyncRelativeRetryInvalidJsonPollingResponse;
+import fixtures.lro.models.LROSADsPutAsyncRelativeRetryNoStatusPayloadResponse;
+import fixtures.lro.models.LROSADsPutAsyncRelativeRetryNoStatusResponse;
 import fixtures.lro.models.Product;
 import io.reactivex.Completable;
 import io.reactivex.Maybe;
@@ -124,7 +125,7 @@ public interface LROSADs {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, Product>> putNonRetry400WithRestResponseAsync();
+    Single<BodyResponse<Product>> putNonRetry400WithRestResponseAsync();
 
     /**
      * Long running put request, service returns a 400 to the initial request.
@@ -161,7 +162,7 @@ public interface LROSADs {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, Product>> putNonRetry400WithRestResponseAsync(Product product);
+    Single<BodyResponse<Product>> putNonRetry400WithRestResponseAsync(Product product);
 
     /**
      * Long running put request, service returns a 400 to the initial request.
@@ -258,7 +259,7 @@ public interface LROSADs {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, Product>> putNonRetry201Creating400WithRestResponseAsync();
+    Single<BodyResponse<Product>> putNonRetry201Creating400WithRestResponseAsync();
 
     /**
      * Long running put request, service returns a Product with 'ProvisioningState' = 'Creating' and 201 response code.
@@ -295,7 +296,7 @@ public interface LROSADs {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, Product>> putNonRetry201Creating400WithRestResponseAsync(Product product);
+    Single<BodyResponse<Product>> putNonRetry201Creating400WithRestResponseAsync(Product product);
 
     /**
      * Long running put request, service returns a Product with 'ProvisioningState' = 'Creating' and 201 response code.
@@ -392,7 +393,7 @@ public interface LROSADs {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, Product>> putNonRetry201Creating400InvalidJsonWithRestResponseAsync();
+    Single<BodyResponse<Product>> putNonRetry201Creating400InvalidJsonWithRestResponseAsync();
 
     /**
      * Long running put request, service returns a Product with 'ProvisioningState' = 'Creating' and 201 response code.
@@ -429,7 +430,7 @@ public interface LROSADs {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, Product>> putNonRetry201Creating400InvalidJsonWithRestResponseAsync(Product product);
+    Single<BodyResponse<Product>> putNonRetry201Creating400InvalidJsonWithRestResponseAsync(Product product);
 
     /**
      * Long running put request, service returns a Product with 'ProvisioningState' = 'Creating' and 201 response code.
@@ -526,7 +527,7 @@ public interface LROSADs {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<LROSADsPutAsyncRelativeRetry400Headers, Product>> putAsyncRelativeRetry400WithRestResponseAsync();
+    Single<LROSADsPutAsyncRelativeRetry400Response> putAsyncRelativeRetry400WithRestResponseAsync();
 
     /**
      * Long running put request, service returns a 200 with ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
@@ -563,7 +564,7 @@ public interface LROSADs {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<LROSADsPutAsyncRelativeRetry400Headers, Product>> putAsyncRelativeRetry400WithRestResponseAsync(Product product);
+    Single<LROSADsPutAsyncRelativeRetry400Response> putAsyncRelativeRetry400WithRestResponseAsync(Product product);
 
     /**
      * Long running put request, service returns a 200 with ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
@@ -629,7 +630,7 @@ public interface LROSADs {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<LROSADsDeleteNonRetry400Headers, Void>> deleteNonRetry400WithRestResponseAsync();
+    Single<LROSADsDeleteNonRetry400Response> deleteNonRetry400WithRestResponseAsync();
 
     /**
      * Long running delete request, service returns a 400 with an error body.
@@ -693,7 +694,7 @@ public interface LROSADs {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<LROSADsDelete202NonRetry400Headers, Void>> delete202NonRetry400WithRestResponseAsync();
+    Single<LROSADsDelete202NonRetry400Response> delete202NonRetry400WithRestResponseAsync();
 
     /**
      * Long running delete request, service returns a 202 with a location header.
@@ -757,7 +758,7 @@ public interface LROSADs {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<LROSADsDeleteAsyncRelativeRetry400Headers, Void>> deleteAsyncRelativeRetry400WithRestResponseAsync();
+    Single<LROSADsDeleteAsyncRelativeRetry400Response> deleteAsyncRelativeRetry400WithRestResponseAsync();
 
     /**
      * Long running delete request, service returns a 202 to the initial request. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
@@ -849,7 +850,7 @@ public interface LROSADs {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<LROSADsPostNonRetry400Headers, Void>> postNonRetry400WithRestResponseAsync();
+    Single<LROSADsPostNonRetry400Response> postNonRetry400WithRestResponseAsync();
 
     /**
      * Long running post request, service returns a 400 with no error body.
@@ -885,7 +886,7 @@ public interface LROSADs {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<LROSADsPostNonRetry400Headers, Void>> postNonRetry400WithRestResponseAsync(Product product);
+    Single<LROSADsPostNonRetry400Response> postNonRetry400WithRestResponseAsync(Product product);
 
     /**
      * Long running post request, service returns a 400 with no error body.
@@ -979,7 +980,7 @@ public interface LROSADs {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<LROSADsPost202NonRetry400Headers, Void>> post202NonRetry400WithRestResponseAsync();
+    Single<LROSADsPost202NonRetry400Response> post202NonRetry400WithRestResponseAsync();
 
     /**
      * Long running post request, service returns a 202 with a location header.
@@ -1015,7 +1016,7 @@ public interface LROSADs {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<LROSADsPost202NonRetry400Headers, Void>> post202NonRetry400WithRestResponseAsync(Product product);
+    Single<LROSADsPost202NonRetry400Response> post202NonRetry400WithRestResponseAsync(Product product);
 
     /**
      * Long running post request, service returns a 202 with a location header.
@@ -1109,7 +1110,7 @@ public interface LROSADs {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<LROSADsPostAsyncRelativeRetry400Headers, Void>> postAsyncRelativeRetry400WithRestResponseAsync();
+    Single<LROSADsPostAsyncRelativeRetry400Response> postAsyncRelativeRetry400WithRestResponseAsync();
 
     /**
      * Long running post request, service returns a 202 to the initial request Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
@@ -1145,7 +1146,7 @@ public interface LROSADs {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<LROSADsPostAsyncRelativeRetry400Headers, Void>> postAsyncRelativeRetry400WithRestResponseAsync(Product product);
+    Single<LROSADsPostAsyncRelativeRetry400Response> postAsyncRelativeRetry400WithRestResponseAsync(Product product);
 
     /**
      * Long running post request, service returns a 202 to the initial request Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
@@ -1242,7 +1243,7 @@ public interface LROSADs {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, Product>> putError201NoProvisioningStatePayloadWithRestResponseAsync();
+    Single<BodyResponse<Product>> putError201NoProvisioningStatePayloadWithRestResponseAsync();
 
     /**
      * Long running put request, service returns a 201 to the initial request with no payload.
@@ -1279,7 +1280,7 @@ public interface LROSADs {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, Product>> putError201NoProvisioningStatePayloadWithRestResponseAsync(Product product);
+    Single<BodyResponse<Product>> putError201NoProvisioningStatePayloadWithRestResponseAsync(Product product);
 
     /**
      * Long running put request, service returns a 201 to the initial request with no payload.
@@ -1376,7 +1377,7 @@ public interface LROSADs {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<LROSADsPutAsyncRelativeRetryNoStatusHeaders, Product>> putAsyncRelativeRetryNoStatusWithRestResponseAsync();
+    Single<LROSADsPutAsyncRelativeRetryNoStatusResponse> putAsyncRelativeRetryNoStatusWithRestResponseAsync();
 
     /**
      * Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
@@ -1413,7 +1414,7 @@ public interface LROSADs {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<LROSADsPutAsyncRelativeRetryNoStatusHeaders, Product>> putAsyncRelativeRetryNoStatusWithRestResponseAsync(Product product);
+    Single<LROSADsPutAsyncRelativeRetryNoStatusResponse> putAsyncRelativeRetryNoStatusWithRestResponseAsync(Product product);
 
     /**
      * Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
@@ -1510,7 +1511,7 @@ public interface LROSADs {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<LROSADsPutAsyncRelativeRetryNoStatusPayloadHeaders, Product>> putAsyncRelativeRetryNoStatusPayloadWithRestResponseAsync();
+    Single<LROSADsPutAsyncRelativeRetryNoStatusPayloadResponse> putAsyncRelativeRetryNoStatusPayloadWithRestResponseAsync();
 
     /**
      * Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
@@ -1547,7 +1548,7 @@ public interface LROSADs {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<LROSADsPutAsyncRelativeRetryNoStatusPayloadHeaders, Product>> putAsyncRelativeRetryNoStatusPayloadWithRestResponseAsync(Product product);
+    Single<LROSADsPutAsyncRelativeRetryNoStatusPayloadResponse> putAsyncRelativeRetryNoStatusPayloadWithRestResponseAsync(Product product);
 
     /**
      * Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
@@ -1613,7 +1614,7 @@ public interface LROSADs {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, Void>> delete204SucceededWithRestResponseAsync();
+    Single<VoidResponse> delete204SucceededWithRestResponseAsync();
 
     /**
      * Long running delete request, service returns a 204 to the initial request, indicating success.
@@ -1677,7 +1678,7 @@ public interface LROSADs {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<LROSADsDeleteAsyncRelativeRetryNoStatusHeaders, Void>> deleteAsyncRelativeRetryNoStatusWithRestResponseAsync();
+    Single<LROSADsDeleteAsyncRelativeRetryNoStatusResponse> deleteAsyncRelativeRetryNoStatusWithRestResponseAsync();
 
     /**
      * Long running delete request, service returns a 202 to the initial request. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
@@ -1769,7 +1770,7 @@ public interface LROSADs {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<LROSADsPost202NoLocationHeaders, Void>> post202NoLocationWithRestResponseAsync();
+    Single<LROSADsPost202NoLocationResponse> post202NoLocationWithRestResponseAsync();
 
     /**
      * Long running post request, service returns a 202 to the initial request, without a location header.
@@ -1805,7 +1806,7 @@ public interface LROSADs {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<LROSADsPost202NoLocationHeaders, Void>> post202NoLocationWithRestResponseAsync(Product product);
+    Single<LROSADsPost202NoLocationResponse> post202NoLocationWithRestResponseAsync(Product product);
 
     /**
      * Long running post request, service returns a 202 to the initial request, without a location header.
@@ -1899,7 +1900,7 @@ public interface LROSADs {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<LROSADsPostAsyncRelativeRetryNoPayloadHeaders, Void>> postAsyncRelativeRetryNoPayloadWithRestResponseAsync();
+    Single<LROSADsPostAsyncRelativeRetryNoPayloadResponse> postAsyncRelativeRetryNoPayloadWithRestResponseAsync();
 
     /**
      * Long running post request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
@@ -1935,7 +1936,7 @@ public interface LROSADs {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<LROSADsPostAsyncRelativeRetryNoPayloadHeaders, Void>> postAsyncRelativeRetryNoPayloadWithRestResponseAsync(Product product);
+    Single<LROSADsPostAsyncRelativeRetryNoPayloadResponse> postAsyncRelativeRetryNoPayloadWithRestResponseAsync(Product product);
 
     /**
      * Long running post request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
@@ -2032,7 +2033,7 @@ public interface LROSADs {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, Product>> put200InvalidJsonWithRestResponseAsync();
+    Single<BodyResponse<Product>> put200InvalidJsonWithRestResponseAsync();
 
     /**
      * Long running put request, service returns a 200 to the initial request, with an entity that is not a valid json.
@@ -2069,7 +2070,7 @@ public interface LROSADs {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, Product>> put200InvalidJsonWithRestResponseAsync(Product product);
+    Single<BodyResponse<Product>> put200InvalidJsonWithRestResponseAsync(Product product);
 
     /**
      * Long running put request, service returns a 200 to the initial request, with an entity that is not a valid json.
@@ -2166,7 +2167,7 @@ public interface LROSADs {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<LROSADsPutAsyncRelativeRetryInvalidHeaderHeaders, Product>> putAsyncRelativeRetryInvalidHeaderWithRestResponseAsync();
+    Single<LROSADsPutAsyncRelativeRetryInvalidHeaderResponse> putAsyncRelativeRetryInvalidHeaderWithRestResponseAsync();
 
     /**
      * Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. The endpoint indicated in the Azure-AsyncOperation header is invalid.
@@ -2203,7 +2204,7 @@ public interface LROSADs {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<LROSADsPutAsyncRelativeRetryInvalidHeaderHeaders, Product>> putAsyncRelativeRetryInvalidHeaderWithRestResponseAsync(Product product);
+    Single<LROSADsPutAsyncRelativeRetryInvalidHeaderResponse> putAsyncRelativeRetryInvalidHeaderWithRestResponseAsync(Product product);
 
     /**
      * Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. The endpoint indicated in the Azure-AsyncOperation header is invalid.
@@ -2300,7 +2301,7 @@ public interface LROSADs {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<LROSADsPutAsyncRelativeRetryInvalidJsonPollingHeaders, Product>> putAsyncRelativeRetryInvalidJsonPollingWithRestResponseAsync();
+    Single<LROSADsPutAsyncRelativeRetryInvalidJsonPollingResponse> putAsyncRelativeRetryInvalidJsonPollingWithRestResponseAsync();
 
     /**
      * Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
@@ -2337,7 +2338,7 @@ public interface LROSADs {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<LROSADsPutAsyncRelativeRetryInvalidJsonPollingHeaders, Product>> putAsyncRelativeRetryInvalidJsonPollingWithRestResponseAsync(Product product);
+    Single<LROSADsPutAsyncRelativeRetryInvalidJsonPollingResponse> putAsyncRelativeRetryInvalidJsonPollingWithRestResponseAsync(Product product);
 
     /**
      * Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
@@ -2403,7 +2404,7 @@ public interface LROSADs {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<LROSADsDelete202RetryInvalidHeaderHeaders, Void>> delete202RetryInvalidHeaderWithRestResponseAsync();
+    Single<LROSADsDelete202RetryInvalidHeaderResponse> delete202RetryInvalidHeaderWithRestResponseAsync();
 
     /**
      * Long running delete request, service returns a 202 to the initial request receing a reponse with an invalid 'Location' and 'Retry-After' headers.
@@ -2467,7 +2468,7 @@ public interface LROSADs {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<LROSADsDeleteAsyncRelativeRetryInvalidHeaderHeaders, Void>> deleteAsyncRelativeRetryInvalidHeaderWithRestResponseAsync();
+    Single<LROSADsDeleteAsyncRelativeRetryInvalidHeaderResponse> deleteAsyncRelativeRetryInvalidHeaderWithRestResponseAsync();
 
     /**
      * Long running delete request, service returns a 202 to the initial request. The endpoint indicated in the Azure-AsyncOperation header is invalid.
@@ -2531,7 +2532,7 @@ public interface LROSADs {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<LROSADsDeleteAsyncRelativeRetryInvalidJsonPollingHeaders, Void>> deleteAsyncRelativeRetryInvalidJsonPollingWithRestResponseAsync();
+    Single<LROSADsDeleteAsyncRelativeRetryInvalidJsonPollingResponse> deleteAsyncRelativeRetryInvalidJsonPollingWithRestResponseAsync();
 
     /**
      * Long running delete request, service returns a 202 to the initial request. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
@@ -2623,7 +2624,7 @@ public interface LROSADs {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<LROSADsPost202RetryInvalidHeaderHeaders, Void>> post202RetryInvalidHeaderWithRestResponseAsync();
+    Single<LROSADsPost202RetryInvalidHeaderResponse> post202RetryInvalidHeaderWithRestResponseAsync();
 
     /**
      * Long running post request, service returns a 202 to the initial request, with invalid 'Location' and 'Retry-After' headers.
@@ -2659,7 +2660,7 @@ public interface LROSADs {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<LROSADsPost202RetryInvalidHeaderHeaders, Void>> post202RetryInvalidHeaderWithRestResponseAsync(Product product);
+    Single<LROSADsPost202RetryInvalidHeaderResponse> post202RetryInvalidHeaderWithRestResponseAsync(Product product);
 
     /**
      * Long running post request, service returns a 202 to the initial request, with invalid 'Location' and 'Retry-After' headers.
@@ -2753,7 +2754,7 @@ public interface LROSADs {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<LROSADsPostAsyncRelativeRetryInvalidHeaderHeaders, Void>> postAsyncRelativeRetryInvalidHeaderWithRestResponseAsync();
+    Single<LROSADsPostAsyncRelativeRetryInvalidHeaderResponse> postAsyncRelativeRetryInvalidHeaderWithRestResponseAsync();
 
     /**
      * Long running post request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’. The endpoint indicated in the Azure-AsyncOperation header is invalid.
@@ -2789,7 +2790,7 @@ public interface LROSADs {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<LROSADsPostAsyncRelativeRetryInvalidHeaderHeaders, Void>> postAsyncRelativeRetryInvalidHeaderWithRestResponseAsync(Product product);
+    Single<LROSADsPostAsyncRelativeRetryInvalidHeaderResponse> postAsyncRelativeRetryInvalidHeaderWithRestResponseAsync(Product product);
 
     /**
      * Long running post request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’. The endpoint indicated in the Azure-AsyncOperation header is invalid.
@@ -2883,7 +2884,7 @@ public interface LROSADs {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<LROSADsPostAsyncRelativeRetryInvalidJsonPollingHeaders, Void>> postAsyncRelativeRetryInvalidJsonPollingWithRestResponseAsync();
+    Single<LROSADsPostAsyncRelativeRetryInvalidJsonPollingResponse> postAsyncRelativeRetryInvalidJsonPollingWithRestResponseAsync();
 
     /**
      * Long running post request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
@@ -2919,7 +2920,7 @@ public interface LROSADs {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<LROSADsPostAsyncRelativeRetryInvalidJsonPollingHeaders, Void>> postAsyncRelativeRetryInvalidJsonPollingWithRestResponseAsync(Product product);
+    Single<LROSADsPostAsyncRelativeRetryInvalidJsonPollingResponse> postAsyncRelativeRetryInvalidJsonPollingWithRestResponseAsync(Product product);
 
     /**
      * Long running post request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.

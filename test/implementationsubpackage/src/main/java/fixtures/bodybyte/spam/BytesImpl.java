@@ -10,10 +10,11 @@
 
 package fixtures.bodybyte.spam;
 
+import com.microsoft.rest.v2.BodyResponse;
 import com.microsoft.rest.v2.RestProxy;
-import com.microsoft.rest.v2.RestResponse;
 import com.microsoft.rest.v2.ServiceCallback;
 import com.microsoft.rest.v2.ServiceFuture;
+import com.microsoft.rest.v2.VoidResponse;
 import com.microsoft.rest.v2.annotations.BodyParam;
 import com.microsoft.rest.v2.annotations.ExpectedResponses;
 import com.microsoft.rest.v2.annotations.GET;
@@ -62,27 +63,27 @@ public final class BytesImpl implements Bytes {
         @GET("byte/null")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<RestResponse<Void, byte[]>> getNull();
+        Single<BodyResponse<byte[]>> getNull();
 
         @GET("byte/empty")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<RestResponse<Void, byte[]>> getEmpty();
+        Single<BodyResponse<byte[]>> getEmpty();
 
         @GET("byte/nonAscii")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<RestResponse<Void, byte[]>> getNonAscii();
+        Single<BodyResponse<byte[]>> getNonAscii();
 
         @PUT("byte/nonAscii")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<RestResponse<Void, Void>> putNonAscii(@BodyParam("application/json; charset=utf-8") byte[] byteBody);
+        Single<VoidResponse> putNonAscii(@BodyParam("application/json; charset=utf-8") byte[] byteBody);
 
         @GET("byte/invalid")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<RestResponse<Void, byte[]>> getInvalid();
+        Single<BodyResponse<byte[]>> getInvalid();
     }
 
     /**
@@ -112,7 +113,7 @@ public final class BytesImpl implements Bytes {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<Void, byte[]>> getNullWithRestResponseAsync() {
+    public Single<BodyResponse<byte[]>> getNullWithRestResponseAsync() {
         return service.getNull();
     }
 
@@ -123,15 +124,7 @@ public final class BytesImpl implements Bytes {
      */
     public Maybe<byte[]> getNullAsync() {
         return getNullWithRestResponseAsync()
-            .flatMapMaybe(new Function<RestResponse<Void, byte[]>, Maybe<byte[]>>() {
-                public Maybe<byte[]> apply(RestResponse<Void, byte[]> restResponse) {
-                    if (restResponse.body() == null) {
-                        return Maybe.empty();
-                    } else {
-                        return Maybe.just(restResponse.body());
-                    }
-                }
-            });
+            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -161,7 +154,7 @@ public final class BytesImpl implements Bytes {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<Void, byte[]>> getEmptyWithRestResponseAsync() {
+    public Single<BodyResponse<byte[]>> getEmptyWithRestResponseAsync() {
         return service.getEmpty();
     }
 
@@ -172,15 +165,7 @@ public final class BytesImpl implements Bytes {
      */
     public Maybe<byte[]> getEmptyAsync() {
         return getEmptyWithRestResponseAsync()
-            .flatMapMaybe(new Function<RestResponse<Void, byte[]>, Maybe<byte[]>>() {
-                public Maybe<byte[]> apply(RestResponse<Void, byte[]> restResponse) {
-                    if (restResponse.body() == null) {
-                        return Maybe.empty();
-                    } else {
-                        return Maybe.just(restResponse.body());
-                    }
-                }
-            });
+            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -210,7 +195,7 @@ public final class BytesImpl implements Bytes {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<Void, byte[]>> getNonAsciiWithRestResponseAsync() {
+    public Single<BodyResponse<byte[]>> getNonAsciiWithRestResponseAsync() {
         return service.getNonAscii();
     }
 
@@ -221,15 +206,7 @@ public final class BytesImpl implements Bytes {
      */
     public Maybe<byte[]> getNonAsciiAsync() {
         return getNonAsciiWithRestResponseAsync()
-            .flatMapMaybe(new Function<RestResponse<Void, byte[]>, Maybe<byte[]>>() {
-                public Maybe<byte[]> apply(RestResponse<Void, byte[]> restResponse) {
-                    if (restResponse.body() == null) {
-                        return Maybe.empty();
-                    } else {
-                        return Maybe.just(restResponse.body());
-                    }
-                }
-            });
+            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -263,7 +240,7 @@ public final class BytesImpl implements Bytes {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<Void, Void>> putNonAsciiWithRestResponseAsync(@NonNull byte[] byteBody) {
+    public Single<VoidResponse> putNonAsciiWithRestResponseAsync(@NonNull byte[] byteBody) {
         if (byteBody == null) {
             throw new IllegalArgumentException("Parameter byteBody is required and cannot be null.");
         }
@@ -309,7 +286,7 @@ public final class BytesImpl implements Bytes {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<Void, byte[]>> getInvalidWithRestResponseAsync() {
+    public Single<BodyResponse<byte[]>> getInvalidWithRestResponseAsync() {
         return service.getInvalid();
     }
 
@@ -320,14 +297,6 @@ public final class BytesImpl implements Bytes {
      */
     public Maybe<byte[]> getInvalidAsync() {
         return getInvalidWithRestResponseAsync()
-            .flatMapMaybe(new Function<RestResponse<Void, byte[]>, Maybe<byte[]>>() {
-                public Maybe<byte[]> apply(RestResponse<Void, byte[]> restResponse) {
-                    if (restResponse.body() == null) {
-                        return Maybe.empty();
-                    } else {
-                        return Maybe.just(restResponse.body());
-                    }
-                }
-            });
+            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 }

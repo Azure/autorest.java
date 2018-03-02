@@ -10,11 +10,12 @@
 
 package fixtures.bodycomplex.implementation;
 
+import com.microsoft.rest.v2.BodyResponse;
 import com.microsoft.rest.v2.RestProxy;
-import com.microsoft.rest.v2.RestResponse;
 import com.microsoft.rest.v2.ServiceCallback;
 import com.microsoft.rest.v2.ServiceFuture;
 import com.microsoft.rest.v2.Validator;
+import com.microsoft.rest.v2.VoidResponse;
 import com.microsoft.rest.v2.annotations.BodyParam;
 import com.microsoft.rest.v2.annotations.ExpectedResponses;
 import com.microsoft.rest.v2.annotations.GET;
@@ -65,27 +66,27 @@ public final class PolymorphismsImpl implements Polymorphisms {
         @GET("complex/polymorphism/valid")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<RestResponse<Void, Fish>> getValid();
+        Single<BodyResponse<Fish>> getValid();
 
         @PUT("complex/polymorphism/valid")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<RestResponse<Void, Void>> putValid(@BodyParam("application/json; charset=utf-8") Fish complexBody);
+        Single<VoidResponse> putValid(@BodyParam("application/json; charset=utf-8") Fish complexBody);
 
         @GET("complex/polymorphism/complicated")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<RestResponse<Void, Salmon>> getComplicated();
+        Single<BodyResponse<Salmon>> getComplicated();
 
         @PUT("complex/polymorphism/complicated")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<RestResponse<Void, Void>> putComplicated(@BodyParam("application/json; charset=utf-8") Salmon complexBody);
+        Single<VoidResponse> putComplicated(@BodyParam("application/json; charset=utf-8") Salmon complexBody);
 
         @PUT("complex/polymorphism/missingrequired/invalid")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<RestResponse<Void, Void>> putValidMissingRequired(@BodyParam("application/json; charset=utf-8") Fish complexBody);
+        Single<VoidResponse> putValidMissingRequired(@BodyParam("application/json; charset=utf-8") Fish complexBody);
     }
 
     /**
@@ -115,7 +116,7 @@ public final class PolymorphismsImpl implements Polymorphisms {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<Void, Fish>> getValidWithRestResponseAsync() {
+    public Single<BodyResponse<Fish>> getValidWithRestResponseAsync() {
         return service.getValid();
     }
 
@@ -126,15 +127,7 @@ public final class PolymorphismsImpl implements Polymorphisms {
      */
     public Maybe<Fish> getValidAsync() {
         return getValidWithRestResponseAsync()
-            .flatMapMaybe(new Function<RestResponse<Void, Fish>, Maybe<Fish>>() {
-                public Maybe<Fish> apply(RestResponse<Void, Fish> restResponse) {
-                    if (restResponse.body() == null) {
-                        return Maybe.empty();
-                    } else {
-                        return Maybe.just(restResponse.body());
-                    }
-                }
-            });
+            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -264,7 +257,7 @@ public final class PolymorphismsImpl implements Polymorphisms {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<Void, Void>> putValidWithRestResponseAsync(@NonNull Fish complexBody) {
+    public Single<VoidResponse> putValidWithRestResponseAsync(@NonNull Fish complexBody) {
         if (complexBody == null) {
             throw new IllegalArgumentException("Parameter complexBody is required and cannot be null.");
         }
@@ -343,7 +336,7 @@ public final class PolymorphismsImpl implements Polymorphisms {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<Void, Salmon>> getComplicatedWithRestResponseAsync() {
+    public Single<BodyResponse<Salmon>> getComplicatedWithRestResponseAsync() {
         return service.getComplicated();
     }
 
@@ -354,15 +347,7 @@ public final class PolymorphismsImpl implements Polymorphisms {
      */
     public Maybe<Salmon> getComplicatedAsync() {
         return getComplicatedWithRestResponseAsync()
-            .flatMapMaybe(new Function<RestResponse<Void, Salmon>, Maybe<Salmon>>() {
-                public Maybe<Salmon> apply(RestResponse<Void, Salmon> restResponse) {
-                    if (restResponse.body() == null) {
-                        return Maybe.empty();
-                    } else {
-                        return Maybe.just(restResponse.body());
-                    }
-                }
-            });
+            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -396,7 +381,7 @@ public final class PolymorphismsImpl implements Polymorphisms {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<Void, Void>> putComplicatedWithRestResponseAsync(@NonNull Salmon complexBody) {
+    public Single<VoidResponse> putComplicatedWithRestResponseAsync(@NonNull Salmon complexBody) {
         if (complexBody == null) {
             throw new IllegalArgumentException("Parameter complexBody is required and cannot be null.");
         }
@@ -522,7 +507,7 @@ public final class PolymorphismsImpl implements Polymorphisms {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<Void, Void>> putValidMissingRequiredWithRestResponseAsync(@NonNull Fish complexBody) {
+    public Single<VoidResponse> putValidMissingRequiredWithRestResponseAsync(@NonNull Fish complexBody) {
         if (complexBody == null) {
             throw new IllegalArgumentException("Parameter complexBody is required and cannot be null.");
         }

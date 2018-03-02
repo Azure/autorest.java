@@ -11,9 +11,9 @@
 package fixtures.azurespecials.implementation;
 
 import com.microsoft.azure.v2.AzureProxy;
-import com.microsoft.rest.v2.RestResponse;
 import com.microsoft.rest.v2.ServiceCallback;
 import com.microsoft.rest.v2.ServiceFuture;
+import com.microsoft.rest.v2.VoidResponse;
 import com.microsoft.rest.v2.annotations.ExpectedResponses;
 import com.microsoft.rest.v2.annotations.GET;
 import com.microsoft.rest.v2.annotations.HeaderParam;
@@ -58,7 +58,7 @@ public final class OdatasInner {
         @GET("azurespecials/odata/filter")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<RestResponse<Void, Void>> getWithFilter(@QueryParam("$filter") String filter, @QueryParam("$top") Integer top, @QueryParam("$orderby") String orderby, @HeaderParam("accept-language") String acceptLanguage);
+        Single<VoidResponse> getWithFilter(@QueryParam("$filter") String filter, @QueryParam("$top") Integer top, @QueryParam("$orderby") String orderby, @HeaderParam("accept-language") String acceptLanguage);
     }
 
     /**
@@ -87,7 +87,7 @@ public final class OdatasInner {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<Void, Void>> getWithFilterWithRestResponseAsync() {
+    public Single<VoidResponse> getWithFilterWithRestResponseAsync() {
         final String filter = null;
         final Integer top = null;
         final String orderby = null;
@@ -141,7 +141,7 @@ public final class OdatasInner {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<Void, Void>> getWithFilterWithRestResponseAsync(String filter, Integer top, String orderby) {
+    public Single<VoidResponse> getWithFilterWithRestResponseAsync(String filter, Integer top, String orderby) {
         return service.getWithFilter(filter, top, orderby, this.client.acceptLanguage());
     }
 

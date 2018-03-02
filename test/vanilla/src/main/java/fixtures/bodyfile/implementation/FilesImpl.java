@@ -11,9 +11,9 @@
 package fixtures.bodyfile.implementation;
 
 import com.microsoft.rest.v2.RestProxy;
-import com.microsoft.rest.v2.RestResponse;
 import com.microsoft.rest.v2.ServiceCallback;
 import com.microsoft.rest.v2.ServiceFuture;
+import com.microsoft.rest.v2.StreamResponse;
 import com.microsoft.rest.v2.annotations.ExpectedResponses;
 import com.microsoft.rest.v2.annotations.GET;
 import com.microsoft.rest.v2.annotations.Host;
@@ -60,17 +60,17 @@ public final class FilesImpl implements Files {
         @GET("files/stream/nonempty")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<RestResponse<Void, Flowable<ByteBuffer>>> getFile();
+        Single<StreamResponse> getFile();
 
         @GET("files/stream/verylarge")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<RestResponse<Void, Flowable<ByteBuffer>>> getFileLarge();
+        Single<StreamResponse> getFileLarge();
 
         @GET("files/stream/empty")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<RestResponse<Void, Flowable<ByteBuffer>>> getEmptyFile();
+        Single<StreamResponse> getEmptyFile();
     }
 
     /**
@@ -100,7 +100,7 @@ public final class FilesImpl implements Files {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<Void, Flowable<ByteBuffer>>> getFileWithRestResponseAsync() {
+    public Single<StreamResponse> getFileWithRestResponseAsync() {
         return service.getFile();
     }
 
@@ -111,15 +111,7 @@ public final class FilesImpl implements Files {
      */
     public Maybe<Flowable<ByteBuffer>> getFileAsync() {
         return getFileWithRestResponseAsync()
-            .flatMapMaybe(new Function<RestResponse<Void, Flowable<ByteBuffer>>, Maybe<Flowable<ByteBuffer>>>() {
-                public Maybe<Flowable<ByteBuffer>> apply(RestResponse<Void, Flowable<ByteBuffer>> restResponse) {
-                    if (restResponse.body() == null) {
-                        return Maybe.empty();
-                    } else {
-                        return Maybe.just(restResponse.body());
-                    }
-                }
-            });
+            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -149,7 +141,7 @@ public final class FilesImpl implements Files {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<Void, Flowable<ByteBuffer>>> getFileLargeWithRestResponseAsync() {
+    public Single<StreamResponse> getFileLargeWithRestResponseAsync() {
         return service.getFileLarge();
     }
 
@@ -160,15 +152,7 @@ public final class FilesImpl implements Files {
      */
     public Maybe<Flowable<ByteBuffer>> getFileLargeAsync() {
         return getFileLargeWithRestResponseAsync()
-            .flatMapMaybe(new Function<RestResponse<Void, Flowable<ByteBuffer>>, Maybe<Flowable<ByteBuffer>>>() {
-                public Maybe<Flowable<ByteBuffer>> apply(RestResponse<Void, Flowable<ByteBuffer>> restResponse) {
-                    if (restResponse.body() == null) {
-                        return Maybe.empty();
-                    } else {
-                        return Maybe.just(restResponse.body());
-                    }
-                }
-            });
+            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -198,7 +182,7 @@ public final class FilesImpl implements Files {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<Void, Flowable<ByteBuffer>>> getEmptyFileWithRestResponseAsync() {
+    public Single<StreamResponse> getEmptyFileWithRestResponseAsync() {
         return service.getEmptyFile();
     }
 
@@ -209,14 +193,6 @@ public final class FilesImpl implements Files {
      */
     public Maybe<Flowable<ByteBuffer>> getEmptyFileAsync() {
         return getEmptyFileWithRestResponseAsync()
-            .flatMapMaybe(new Function<RestResponse<Void, Flowable<ByteBuffer>>, Maybe<Flowable<ByteBuffer>>>() {
-                public Maybe<Flowable<ByteBuffer>> apply(RestResponse<Void, Flowable<ByteBuffer>> restResponse) {
-                    if (restResponse.body() == null) {
-                        return Maybe.empty();
-                    } else {
-                        return Maybe.just(restResponse.body());
-                    }
-                }
-            });
+            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 }
