@@ -219,6 +219,7 @@ public final class ExplicitsImpl implements Explicits {
     public Maybe<Error> postRequiredIntegerParameterAsync(@NonNull int bodyParameter) {
         return postRequiredIntegerParameterWithRestResponseAsync(bodyParameter)
             .flatMapMaybe(new Function<RestResponse<Void, Error>, Maybe<Error>>() {
+                @Override
                 public Maybe<Error> apply(RestResponse<Void, Error> restResponse) {
                     if (restResponse.body() == null) {
                         return Maybe.empty();
@@ -326,6 +327,7 @@ public final class ExplicitsImpl implements Explicits {
     public Maybe<Error> postRequiredIntegerPropertyAsync(@NonNull IntWrapper bodyParameter) {
         return postRequiredIntegerPropertyWithRestResponseAsync(bodyParameter)
             .flatMapMaybe(new Function<RestResponse<Void, Error>, Maybe<Error>>() {
+                @Override
                 public Maybe<Error> apply(RestResponse<Void, Error> restResponse) {
                     if (restResponse.body() == null) {
                         return Maybe.empty();
@@ -430,6 +432,7 @@ public final class ExplicitsImpl implements Explicits {
     public Maybe<Error> postRequiredIntegerHeaderAsync(@NonNull int headerParameter) {
         return postRequiredIntegerHeaderWithRestResponseAsync(headerParameter)
             .flatMapMaybe(new Function<RestResponse<Void, Error>, Maybe<Error>>() {
+                @Override
                 public Maybe<Error> apply(RestResponse<Void, Error> restResponse) {
                     if (restResponse.body() == null) {
                         return Maybe.empty();
@@ -536,6 +539,7 @@ public final class ExplicitsImpl implements Explicits {
     public Maybe<Error> postRequiredStringParameterAsync(@NonNull String bodyParameter) {
         return postRequiredStringParameterWithRestResponseAsync(bodyParameter)
             .flatMapMaybe(new Function<RestResponse<Void, Error>, Maybe<Error>>() {
+                @Override
                 public Maybe<Error> apply(RestResponse<Void, Error> restResponse) {
                     if (restResponse.body() == null) {
                         return Maybe.empty();
@@ -643,6 +647,7 @@ public final class ExplicitsImpl implements Explicits {
     public Maybe<Error> postRequiredStringPropertyAsync(@NonNull StringWrapper bodyParameter) {
         return postRequiredStringPropertyWithRestResponseAsync(bodyParameter)
             .flatMapMaybe(new Function<RestResponse<Void, Error>, Maybe<Error>>() {
+                @Override
                 public Maybe<Error> apply(RestResponse<Void, Error> restResponse) {
                     if (restResponse.body() == null) {
                         return Maybe.empty();
@@ -750,6 +755,7 @@ public final class ExplicitsImpl implements Explicits {
     public Maybe<Error> postRequiredStringHeaderAsync(@NonNull String headerParameter) {
         return postRequiredStringHeaderWithRestResponseAsync(headerParameter)
             .flatMapMaybe(new Function<RestResponse<Void, Error>, Maybe<Error>>() {
+                @Override
                 public Maybe<Error> apply(RestResponse<Void, Error> restResponse) {
                     if (restResponse.body() == null) {
                         return Maybe.empty();
@@ -857,6 +863,7 @@ public final class ExplicitsImpl implements Explicits {
     public Maybe<Error> postRequiredClassParameterAsync(@NonNull Product bodyParameter) {
         return postRequiredClassParameterWithRestResponseAsync(bodyParameter)
             .flatMapMaybe(new Function<RestResponse<Void, Error>, Maybe<Error>>() {
+                @Override
                 public Maybe<Error> apply(RestResponse<Void, Error> restResponse) {
                     if (restResponse.body() == null) {
                         return Maybe.empty();
@@ -965,6 +972,7 @@ public final class ExplicitsImpl implements Explicits {
     public Maybe<Error> postRequiredClassPropertyAsync(@NonNull ClassWrapper bodyParameter) {
         return postRequiredClassPropertyWithRestResponseAsync(bodyParameter)
             .flatMapMaybe(new Function<RestResponse<Void, Error>, Maybe<Error>>() {
+                @Override
                 public Maybe<Error> apply(RestResponse<Void, Error> restResponse) {
                     if (restResponse.body() == null) {
                         return Maybe.empty();
@@ -1073,6 +1081,7 @@ public final class ExplicitsImpl implements Explicits {
     public Maybe<Error> postRequiredArrayParameterAsync(@NonNull List<String> bodyParameter) {
         return postRequiredArrayParameterWithRestResponseAsync(bodyParameter)
             .flatMapMaybe(new Function<RestResponse<Void, Error>, Maybe<Error>>() {
+                @Override
                 public Maybe<Error> apply(RestResponse<Void, Error> restResponse) {
                     if (restResponse.body() == null) {
                         return Maybe.empty();
@@ -1181,6 +1190,7 @@ public final class ExplicitsImpl implements Explicits {
     public Maybe<Error> postRequiredArrayPropertyAsync(@NonNull ArrayWrapper bodyParameter) {
         return postRequiredArrayPropertyWithRestResponseAsync(bodyParameter)
             .flatMapMaybe(new Function<RestResponse<Void, Error>, Maybe<Error>>() {
+                @Override
                 public Maybe<Error> apply(RestResponse<Void, Error> restResponse) {
                     if (restResponse.body() == null) {
                         return Maybe.empty();
@@ -1290,6 +1300,7 @@ public final class ExplicitsImpl implements Explicits {
     public Maybe<Error> postRequiredArrayHeaderAsync(@NonNull List<String> headerParameter) {
         return postRequiredArrayHeaderWithRestResponseAsync(headerParameter)
             .flatMapMaybe(new Function<RestResponse<Void, Error>, Maybe<Error>>() {
+                @Override
                 public Maybe<Error> apply(RestResponse<Void, Error> restResponse) {
                     if (restResponse.body() == null) {
                         return Maybe.empty();
