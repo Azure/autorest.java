@@ -43,6 +43,9 @@ namespace AutoRest.Java.Model
         public static readonly ClassType SubResource = new ClassType("com.microsoft.azure.v2", "SubResource");
         public static readonly ClassType URL = new ClassType("java.net", "URL");
         public static readonly ClassType NonNull = new ClassType("io.reactivex.annotations", "NonNull");
+        public static readonly ClassType OperationDescription = new ClassType("com.microsoft.rest.v2", "OperationDescription");
+        public static readonly ClassType VoidResponse = new ClassType("com.microsoft.rest.v2", "VoidResponse");
+        public static readonly ClassType StreamResponse = new ClassType("com.microsoft.rest.v2", "StreamResponse");
 
         public ClassType(string package, string name, IEnumerable<string> implementationImports = null, IDictionary<string,string> extensions = null, bool isInnerModelType = false, Func<string,string> defaultValueExpressionConverter = null)
         {

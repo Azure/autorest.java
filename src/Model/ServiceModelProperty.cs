@@ -145,11 +145,6 @@ namespace AutoRest.Java.Model
             {
                 imports.Add("com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlRootElement");
                 imports.Add("com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlProperty");
-
-                if (WireType is ListType)
-                {
-                    imports.Add("com.fasterxml.jackson.annotation.JsonCreator");
-                }
             }
             else
             {

@@ -20,6 +20,7 @@ namespace AutoRest.Java.Model
         public static GenericType Page(IType elementType) => new GenericType("com.microsoft.azure.v2", "Page", elementType);
         public static GenericType PagedList(IType elementType) => new GenericType("com.microsoft.azure.v2", "PagedList", elementType);
         public static GenericType RestResponse(IType headersType, IType bodyType) => new GenericType("com.microsoft.rest.v2", "RestResponse", headersType, bodyType);
+        public static GenericType BodyResponse(IType bodyType) => new GenericType("com.microsoft.rest.v2", "BodyResponse", bodyType);
         public static GenericType Single(IType typeArgument) => new GenericType("io.reactivex", "Single", typeArgument);
         public static GenericType Function(IType inputType, IType outputType) => new GenericType("io.reactivex.functions", "Function", inputType, outputType);
 

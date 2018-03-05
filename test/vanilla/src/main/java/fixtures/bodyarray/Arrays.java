@@ -10,9 +10,11 @@
 
 package fixtures.bodyarray;
 
-import com.microsoft.rest.v2.RestResponse;
+import com.microsoft.rest.v2.BodyResponse;
 import com.microsoft.rest.v2.ServiceCallback;
 import com.microsoft.rest.v2.ServiceFuture;
+import com.microsoft.rest.v2.VoidResponse;
+import fixtures.bodyarray.models.ErrorException;
 import fixtures.bodyarray.models.Product;
 import io.reactivex.Completable;
 import io.reactivex.Maybe;
@@ -44,21 +46,21 @@ public interface Arrays {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;List&lt;Integer&gt;&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     ServiceFuture<List<Integer>> getNullAsync(ServiceCallback<List<Integer>> serviceCallback);
 
     /**
      * Get null array value.
      *
-     * @return the {@link Single&lt;RestResponse&lt;Void, List&lt;Integer&gt;&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, List<Integer>>> getNullWithRestResponseAsync();
+    Single<BodyResponse<List<Integer>>> getNullWithRestResponseAsync();
 
     /**
      * Get null array value.
      *
-     * @return the {@link Maybe&lt;List&lt;Integer&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     Maybe<List<Integer>> getNullAsync();
 
@@ -76,21 +78,21 @@ public interface Arrays {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;List&lt;Integer&gt;&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     ServiceFuture<List<Integer>> getInvalidAsync(ServiceCallback<List<Integer>> serviceCallback);
 
     /**
      * Get invalid array [1, 2, 3.
      *
-     * @return the {@link Single&lt;RestResponse&lt;Void, List&lt;Integer&gt;&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, List<Integer>>> getInvalidWithRestResponseAsync();
+    Single<BodyResponse<List<Integer>>> getInvalidWithRestResponseAsync();
 
     /**
      * Get invalid array [1, 2, 3.
      *
-     * @return the {@link Maybe&lt;List&lt;Integer&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     Maybe<List<Integer>> getInvalidAsync();
 
@@ -108,21 +110,21 @@ public interface Arrays {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;List&lt;Integer&gt;&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     ServiceFuture<List<Integer>> getEmptyAsync(ServiceCallback<List<Integer>> serviceCallback);
 
     /**
      * Get empty array value [].
      *
-     * @return the {@link Single&lt;RestResponse&lt;Void, List&lt;Integer&gt;&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, List<Integer>>> getEmptyWithRestResponseAsync();
+    Single<BodyResponse<List<Integer>>> getEmptyWithRestResponseAsync();
 
     /**
      * Get empty array value [].
      *
-     * @return the {@link Maybe&lt;List&lt;Integer&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     Maybe<List<Integer>> getEmptyAsync();
 
@@ -142,7 +144,7 @@ public interface Arrays {
      * @param arrayBody the List&lt;String&gt; value.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;Void&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     ServiceFuture<Void> putEmptyAsync(@NonNull List<String> arrayBody, ServiceCallback<Void> serviceCallback);
 
@@ -151,16 +153,16 @@ public interface Arrays {
      *
      * @param arrayBody the List&lt;String&gt; value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, Void>> putEmptyWithRestResponseAsync(@NonNull List<String> arrayBody);
+    Single<VoidResponse> putEmptyWithRestResponseAsync(@NonNull List<String> arrayBody);
 
     /**
      * Set array value empty [].
      *
      * @param arrayBody the List&lt;String&gt; value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link Completable} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     Completable putEmptyAsync(@NonNull List<String> arrayBody);
 
@@ -178,21 +180,21 @@ public interface Arrays {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;List&lt;Boolean&gt;&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     ServiceFuture<List<Boolean>> getBooleanTfftAsync(ServiceCallback<List<Boolean>> serviceCallback);
 
     /**
      * Get boolean array value [true, false, false, true].
      *
-     * @return the {@link Single&lt;RestResponse&lt;Void, List&lt;Boolean&gt;&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, List<Boolean>>> getBooleanTfftWithRestResponseAsync();
+    Single<BodyResponse<List<Boolean>>> getBooleanTfftWithRestResponseAsync();
 
     /**
      * Get boolean array value [true, false, false, true].
      *
-     * @return the {@link Maybe&lt;List&lt;Boolean&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     Maybe<List<Boolean>> getBooleanTfftAsync();
 
@@ -212,7 +214,7 @@ public interface Arrays {
      * @param arrayBody the List&lt;Boolean&gt; value.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;Void&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     ServiceFuture<Void> putBooleanTfftAsync(@NonNull List<Boolean> arrayBody, ServiceCallback<Void> serviceCallback);
 
@@ -221,16 +223,16 @@ public interface Arrays {
      *
      * @param arrayBody the List&lt;Boolean&gt; value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, Void>> putBooleanTfftWithRestResponseAsync(@NonNull List<Boolean> arrayBody);
+    Single<VoidResponse> putBooleanTfftWithRestResponseAsync(@NonNull List<Boolean> arrayBody);
 
     /**
      * Set array value empty [true, false, false, true].
      *
      * @param arrayBody the List&lt;Boolean&gt; value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link Completable} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     Completable putBooleanTfftAsync(@NonNull List<Boolean> arrayBody);
 
@@ -248,21 +250,21 @@ public interface Arrays {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;List&lt;Boolean&gt;&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     ServiceFuture<List<Boolean>> getBooleanInvalidNullAsync(ServiceCallback<List<Boolean>> serviceCallback);
 
     /**
      * Get boolean array value [true, null, false].
      *
-     * @return the {@link Single&lt;RestResponse&lt;Void, List&lt;Boolean&gt;&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, List<Boolean>>> getBooleanInvalidNullWithRestResponseAsync();
+    Single<BodyResponse<List<Boolean>>> getBooleanInvalidNullWithRestResponseAsync();
 
     /**
      * Get boolean array value [true, null, false].
      *
-     * @return the {@link Maybe&lt;List&lt;Boolean&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     Maybe<List<Boolean>> getBooleanInvalidNullAsync();
 
@@ -280,21 +282,21 @@ public interface Arrays {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;List&lt;Boolean&gt;&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     ServiceFuture<List<Boolean>> getBooleanInvalidStringAsync(ServiceCallback<List<Boolean>> serviceCallback);
 
     /**
      * Get boolean array value [true, 'boolean', false].
      *
-     * @return the {@link Single&lt;RestResponse&lt;Void, List&lt;Boolean&gt;&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, List<Boolean>>> getBooleanInvalidStringWithRestResponseAsync();
+    Single<BodyResponse<List<Boolean>>> getBooleanInvalidStringWithRestResponseAsync();
 
     /**
      * Get boolean array value [true, 'boolean', false].
      *
-     * @return the {@link Maybe&lt;List&lt;Boolean&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     Maybe<List<Boolean>> getBooleanInvalidStringAsync();
 
@@ -312,21 +314,21 @@ public interface Arrays {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;List&lt;Integer&gt;&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     ServiceFuture<List<Integer>> getIntegerValidAsync(ServiceCallback<List<Integer>> serviceCallback);
 
     /**
      * Get integer array value [1, -1, 3, 300].
      *
-     * @return the {@link Single&lt;RestResponse&lt;Void, List&lt;Integer&gt;&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, List<Integer>>> getIntegerValidWithRestResponseAsync();
+    Single<BodyResponse<List<Integer>>> getIntegerValidWithRestResponseAsync();
 
     /**
      * Get integer array value [1, -1, 3, 300].
      *
-     * @return the {@link Maybe&lt;List&lt;Integer&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     Maybe<List<Integer>> getIntegerValidAsync();
 
@@ -346,7 +348,7 @@ public interface Arrays {
      * @param arrayBody the List&lt;Integer&gt; value.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;Void&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     ServiceFuture<Void> putIntegerValidAsync(@NonNull List<Integer> arrayBody, ServiceCallback<Void> serviceCallback);
 
@@ -355,16 +357,16 @@ public interface Arrays {
      *
      * @param arrayBody the List&lt;Integer&gt; value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, Void>> putIntegerValidWithRestResponseAsync(@NonNull List<Integer> arrayBody);
+    Single<VoidResponse> putIntegerValidWithRestResponseAsync(@NonNull List<Integer> arrayBody);
 
     /**
      * Set array value empty [1, -1, 3, 300].
      *
      * @param arrayBody the List&lt;Integer&gt; value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link Completable} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     Completable putIntegerValidAsync(@NonNull List<Integer> arrayBody);
 
@@ -382,21 +384,21 @@ public interface Arrays {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;List&lt;Integer&gt;&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     ServiceFuture<List<Integer>> getIntInvalidNullAsync(ServiceCallback<List<Integer>> serviceCallback);
 
     /**
      * Get integer array value [1, null, 0].
      *
-     * @return the {@link Single&lt;RestResponse&lt;Void, List&lt;Integer&gt;&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, List<Integer>>> getIntInvalidNullWithRestResponseAsync();
+    Single<BodyResponse<List<Integer>>> getIntInvalidNullWithRestResponseAsync();
 
     /**
      * Get integer array value [1, null, 0].
      *
-     * @return the {@link Maybe&lt;List&lt;Integer&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     Maybe<List<Integer>> getIntInvalidNullAsync();
 
@@ -414,21 +416,21 @@ public interface Arrays {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;List&lt;Integer&gt;&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     ServiceFuture<List<Integer>> getIntInvalidStringAsync(ServiceCallback<List<Integer>> serviceCallback);
 
     /**
      * Get integer array value [1, 'integer', 0].
      *
-     * @return the {@link Single&lt;RestResponse&lt;Void, List&lt;Integer&gt;&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, List<Integer>>> getIntInvalidStringWithRestResponseAsync();
+    Single<BodyResponse<List<Integer>>> getIntInvalidStringWithRestResponseAsync();
 
     /**
      * Get integer array value [1, 'integer', 0].
      *
-     * @return the {@link Maybe&lt;List&lt;Integer&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     Maybe<List<Integer>> getIntInvalidStringAsync();
 
@@ -446,21 +448,21 @@ public interface Arrays {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;List&lt;Long&gt;&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     ServiceFuture<List<Long>> getLongValidAsync(ServiceCallback<List<Long>> serviceCallback);
 
     /**
      * Get integer array value [1, -1, 3, 300].
      *
-     * @return the {@link Single&lt;RestResponse&lt;Void, List&lt;Long&gt;&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, List<Long>>> getLongValidWithRestResponseAsync();
+    Single<BodyResponse<List<Long>>> getLongValidWithRestResponseAsync();
 
     /**
      * Get integer array value [1, -1, 3, 300].
      *
-     * @return the {@link Maybe&lt;List&lt;Long&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     Maybe<List<Long>> getLongValidAsync();
 
@@ -480,7 +482,7 @@ public interface Arrays {
      * @param arrayBody the List&lt;Long&gt; value.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;Void&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     ServiceFuture<Void> putLongValidAsync(@NonNull List<Long> arrayBody, ServiceCallback<Void> serviceCallback);
 
@@ -489,16 +491,16 @@ public interface Arrays {
      *
      * @param arrayBody the List&lt;Long&gt; value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, Void>> putLongValidWithRestResponseAsync(@NonNull List<Long> arrayBody);
+    Single<VoidResponse> putLongValidWithRestResponseAsync(@NonNull List<Long> arrayBody);
 
     /**
      * Set array value empty [1, -1, 3, 300].
      *
      * @param arrayBody the List&lt;Long&gt; value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link Completable} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     Completable putLongValidAsync(@NonNull List<Long> arrayBody);
 
@@ -516,21 +518,21 @@ public interface Arrays {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;List&lt;Long&gt;&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     ServiceFuture<List<Long>> getLongInvalidNullAsync(ServiceCallback<List<Long>> serviceCallback);
 
     /**
      * Get long array value [1, null, 0].
      *
-     * @return the {@link Single&lt;RestResponse&lt;Void, List&lt;Long&gt;&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, List<Long>>> getLongInvalidNullWithRestResponseAsync();
+    Single<BodyResponse<List<Long>>> getLongInvalidNullWithRestResponseAsync();
 
     /**
      * Get long array value [1, null, 0].
      *
-     * @return the {@link Maybe&lt;List&lt;Long&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     Maybe<List<Long>> getLongInvalidNullAsync();
 
@@ -548,21 +550,21 @@ public interface Arrays {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;List&lt;Long&gt;&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     ServiceFuture<List<Long>> getLongInvalidStringAsync(ServiceCallback<List<Long>> serviceCallback);
 
     /**
      * Get long array value [1, 'integer', 0].
      *
-     * @return the {@link Single&lt;RestResponse&lt;Void, List&lt;Long&gt;&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, List<Long>>> getLongInvalidStringWithRestResponseAsync();
+    Single<BodyResponse<List<Long>>> getLongInvalidStringWithRestResponseAsync();
 
     /**
      * Get long array value [1, 'integer', 0].
      *
-     * @return the {@link Maybe&lt;List&lt;Long&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     Maybe<List<Long>> getLongInvalidStringAsync();
 
@@ -580,21 +582,21 @@ public interface Arrays {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;List&lt;Double&gt;&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     ServiceFuture<List<Double>> getFloatValidAsync(ServiceCallback<List<Double>> serviceCallback);
 
     /**
      * Get float array value [0, -0.01, 1.2e20].
      *
-     * @return the {@link Single&lt;RestResponse&lt;Void, List&lt;Double&gt;&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, List<Double>>> getFloatValidWithRestResponseAsync();
+    Single<BodyResponse<List<Double>>> getFloatValidWithRestResponseAsync();
 
     /**
      * Get float array value [0, -0.01, 1.2e20].
      *
-     * @return the {@link Maybe&lt;List&lt;Double&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     Maybe<List<Double>> getFloatValidAsync();
 
@@ -614,7 +616,7 @@ public interface Arrays {
      * @param arrayBody the List&lt;Double&gt; value.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;Void&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     ServiceFuture<Void> putFloatValidAsync(@NonNull List<Double> arrayBody, ServiceCallback<Void> serviceCallback);
 
@@ -623,16 +625,16 @@ public interface Arrays {
      *
      * @param arrayBody the List&lt;Double&gt; value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, Void>> putFloatValidWithRestResponseAsync(@NonNull List<Double> arrayBody);
+    Single<VoidResponse> putFloatValidWithRestResponseAsync(@NonNull List<Double> arrayBody);
 
     /**
      * Set array value [0, -0.01, 1.2e20].
      *
      * @param arrayBody the List&lt;Double&gt; value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link Completable} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     Completable putFloatValidAsync(@NonNull List<Double> arrayBody);
 
@@ -650,21 +652,21 @@ public interface Arrays {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;List&lt;Double&gt;&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     ServiceFuture<List<Double>> getFloatInvalidNullAsync(ServiceCallback<List<Double>> serviceCallback);
 
     /**
      * Get float array value [0.0, null, -1.2e20].
      *
-     * @return the {@link Single&lt;RestResponse&lt;Void, List&lt;Double&gt;&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, List<Double>>> getFloatInvalidNullWithRestResponseAsync();
+    Single<BodyResponse<List<Double>>> getFloatInvalidNullWithRestResponseAsync();
 
     /**
      * Get float array value [0.0, null, -1.2e20].
      *
-     * @return the {@link Maybe&lt;List&lt;Double&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     Maybe<List<Double>> getFloatInvalidNullAsync();
 
@@ -682,21 +684,21 @@ public interface Arrays {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;List&lt;Double&gt;&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     ServiceFuture<List<Double>> getFloatInvalidStringAsync(ServiceCallback<List<Double>> serviceCallback);
 
     /**
      * Get boolean array value [1.0, 'number', 0.0].
      *
-     * @return the {@link Single&lt;RestResponse&lt;Void, List&lt;Double&gt;&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, List<Double>>> getFloatInvalidStringWithRestResponseAsync();
+    Single<BodyResponse<List<Double>>> getFloatInvalidStringWithRestResponseAsync();
 
     /**
      * Get boolean array value [1.0, 'number', 0.0].
      *
-     * @return the {@link Maybe&lt;List&lt;Double&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     Maybe<List<Double>> getFloatInvalidStringAsync();
 
@@ -714,21 +716,21 @@ public interface Arrays {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;List&lt;Double&gt;&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     ServiceFuture<List<Double>> getDoubleValidAsync(ServiceCallback<List<Double>> serviceCallback);
 
     /**
      * Get float array value [0, -0.01, 1.2e20].
      *
-     * @return the {@link Single&lt;RestResponse&lt;Void, List&lt;Double&gt;&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, List<Double>>> getDoubleValidWithRestResponseAsync();
+    Single<BodyResponse<List<Double>>> getDoubleValidWithRestResponseAsync();
 
     /**
      * Get float array value [0, -0.01, 1.2e20].
      *
-     * @return the {@link Maybe&lt;List&lt;Double&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     Maybe<List<Double>> getDoubleValidAsync();
 
@@ -748,7 +750,7 @@ public interface Arrays {
      * @param arrayBody the List&lt;Double&gt; value.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;Void&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     ServiceFuture<Void> putDoubleValidAsync(@NonNull List<Double> arrayBody, ServiceCallback<Void> serviceCallback);
 
@@ -757,16 +759,16 @@ public interface Arrays {
      *
      * @param arrayBody the List&lt;Double&gt; value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, Void>> putDoubleValidWithRestResponseAsync(@NonNull List<Double> arrayBody);
+    Single<VoidResponse> putDoubleValidWithRestResponseAsync(@NonNull List<Double> arrayBody);
 
     /**
      * Set array value [0, -0.01, 1.2e20].
      *
      * @param arrayBody the List&lt;Double&gt; value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link Completable} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     Completable putDoubleValidAsync(@NonNull List<Double> arrayBody);
 
@@ -784,21 +786,21 @@ public interface Arrays {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;List&lt;Double&gt;&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     ServiceFuture<List<Double>> getDoubleInvalidNullAsync(ServiceCallback<List<Double>> serviceCallback);
 
     /**
      * Get float array value [0.0, null, -1.2e20].
      *
-     * @return the {@link Single&lt;RestResponse&lt;Void, List&lt;Double&gt;&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, List<Double>>> getDoubleInvalidNullWithRestResponseAsync();
+    Single<BodyResponse<List<Double>>> getDoubleInvalidNullWithRestResponseAsync();
 
     /**
      * Get float array value [0.0, null, -1.2e20].
      *
-     * @return the {@link Maybe&lt;List&lt;Double&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     Maybe<List<Double>> getDoubleInvalidNullAsync();
 
@@ -816,21 +818,21 @@ public interface Arrays {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;List&lt;Double&gt;&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     ServiceFuture<List<Double>> getDoubleInvalidStringAsync(ServiceCallback<List<Double>> serviceCallback);
 
     /**
      * Get boolean array value [1.0, 'number', 0.0].
      *
-     * @return the {@link Single&lt;RestResponse&lt;Void, List&lt;Double&gt;&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, List<Double>>> getDoubleInvalidStringWithRestResponseAsync();
+    Single<BodyResponse<List<Double>>> getDoubleInvalidStringWithRestResponseAsync();
 
     /**
      * Get boolean array value [1.0, 'number', 0.0].
      *
-     * @return the {@link Maybe&lt;List&lt;Double&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     Maybe<List<Double>> getDoubleInvalidStringAsync();
 
@@ -848,21 +850,21 @@ public interface Arrays {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;List&lt;String&gt;&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     ServiceFuture<List<String>> getStringValidAsync(ServiceCallback<List<String>> serviceCallback);
 
     /**
      * Get string array value ['foo1', 'foo2', 'foo3'].
      *
-     * @return the {@link Single&lt;RestResponse&lt;Void, List&lt;String&gt;&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, List<String>>> getStringValidWithRestResponseAsync();
+    Single<BodyResponse<List<String>>> getStringValidWithRestResponseAsync();
 
     /**
      * Get string array value ['foo1', 'foo2', 'foo3'].
      *
-     * @return the {@link Maybe&lt;List&lt;String&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     Maybe<List<String>> getStringValidAsync();
 
@@ -882,7 +884,7 @@ public interface Arrays {
      * @param arrayBody the List&lt;String&gt; value.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;Void&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     ServiceFuture<Void> putStringValidAsync(@NonNull List<String> arrayBody, ServiceCallback<Void> serviceCallback);
 
@@ -891,16 +893,16 @@ public interface Arrays {
      *
      * @param arrayBody the List&lt;String&gt; value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, Void>> putStringValidWithRestResponseAsync(@NonNull List<String> arrayBody);
+    Single<VoidResponse> putStringValidWithRestResponseAsync(@NonNull List<String> arrayBody);
 
     /**
      * Set array value ['foo1', 'foo2', 'foo3'].
      *
      * @param arrayBody the List&lt;String&gt; value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link Completable} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     Completable putStringValidAsync(@NonNull List<String> arrayBody);
 
@@ -918,21 +920,21 @@ public interface Arrays {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;List&lt;String&gt;&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     ServiceFuture<List<String>> getStringWithNullAsync(ServiceCallback<List<String>> serviceCallback);
 
     /**
      * Get string array value ['foo', null, 'foo2'].
      *
-     * @return the {@link Single&lt;RestResponse&lt;Void, List&lt;String&gt;&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, List<String>>> getStringWithNullWithRestResponseAsync();
+    Single<BodyResponse<List<String>>> getStringWithNullWithRestResponseAsync();
 
     /**
      * Get string array value ['foo', null, 'foo2'].
      *
-     * @return the {@link Maybe&lt;List&lt;String&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     Maybe<List<String>> getStringWithNullAsync();
 
@@ -950,21 +952,21 @@ public interface Arrays {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;List&lt;String&gt;&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     ServiceFuture<List<String>> getStringWithInvalidAsync(ServiceCallback<List<String>> serviceCallback);
 
     /**
      * Get string array value ['foo', 123, 'foo2'].
      *
-     * @return the {@link Single&lt;RestResponse&lt;Void, List&lt;String&gt;&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, List<String>>> getStringWithInvalidWithRestResponseAsync();
+    Single<BodyResponse<List<String>>> getStringWithInvalidWithRestResponseAsync();
 
     /**
      * Get string array value ['foo', 123, 'foo2'].
      *
-     * @return the {@link Maybe&lt;List&lt;String&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     Maybe<List<String>> getStringWithInvalidAsync();
 
@@ -982,21 +984,21 @@ public interface Arrays {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;List&lt;UUID&gt;&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     ServiceFuture<List<UUID>> getUuidValidAsync(ServiceCallback<List<UUID>> serviceCallback);
 
     /**
      * Get uuid array value ['6dcc7237-45fe-45c4-8a6b-3a8a3f625652', 'd1399005-30f7-40d6-8da6-dd7c89ad34db', 'f42f6aa1-a5bc-4ddf-907e-5f915de43205'].
      *
-     * @return the {@link Single&lt;RestResponse&lt;Void, List&lt;UUID&gt;&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, List<UUID>>> getUuidValidWithRestResponseAsync();
+    Single<BodyResponse<List<UUID>>> getUuidValidWithRestResponseAsync();
 
     /**
      * Get uuid array value ['6dcc7237-45fe-45c4-8a6b-3a8a3f625652', 'd1399005-30f7-40d6-8da6-dd7c89ad34db', 'f42f6aa1-a5bc-4ddf-907e-5f915de43205'].
      *
-     * @return the {@link Maybe&lt;List&lt;UUID&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     Maybe<List<UUID>> getUuidValidAsync();
 
@@ -1016,7 +1018,7 @@ public interface Arrays {
      * @param arrayBody the List&lt;UUID&gt; value.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;Void&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     ServiceFuture<Void> putUuidValidAsync(@NonNull List<UUID> arrayBody, ServiceCallback<Void> serviceCallback);
 
@@ -1025,16 +1027,16 @@ public interface Arrays {
      *
      * @param arrayBody the List&lt;UUID&gt; value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, Void>> putUuidValidWithRestResponseAsync(@NonNull List<UUID> arrayBody);
+    Single<VoidResponse> putUuidValidWithRestResponseAsync(@NonNull List<UUID> arrayBody);
 
     /**
      * Set array value  ['6dcc7237-45fe-45c4-8a6b-3a8a3f625652', 'd1399005-30f7-40d6-8da6-dd7c89ad34db', 'f42f6aa1-a5bc-4ddf-907e-5f915de43205'].
      *
      * @param arrayBody the List&lt;UUID&gt; value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link Completable} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     Completable putUuidValidAsync(@NonNull List<UUID> arrayBody);
 
@@ -1052,21 +1054,21 @@ public interface Arrays {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;List&lt;UUID&gt;&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     ServiceFuture<List<UUID>> getUuidInvalidCharsAsync(ServiceCallback<List<UUID>> serviceCallback);
 
     /**
      * Get uuid array value ['6dcc7237-45fe-45c4-8a6b-3a8a3f625652', 'foo'].
      *
-     * @return the {@link Single&lt;RestResponse&lt;Void, List&lt;UUID&gt;&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, List<UUID>>> getUuidInvalidCharsWithRestResponseAsync();
+    Single<BodyResponse<List<UUID>>> getUuidInvalidCharsWithRestResponseAsync();
 
     /**
      * Get uuid array value ['6dcc7237-45fe-45c4-8a6b-3a8a3f625652', 'foo'].
      *
-     * @return the {@link Maybe&lt;List&lt;UUID&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     Maybe<List<UUID>> getUuidInvalidCharsAsync();
 
@@ -1084,21 +1086,21 @@ public interface Arrays {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;List&lt;LocalDate&gt;&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     ServiceFuture<List<LocalDate>> getDateValidAsync(ServiceCallback<List<LocalDate>> serviceCallback);
 
     /**
      * Get integer array value ['2000-12-01', '1980-01-02', '1492-10-12'].
      *
-     * @return the {@link Single&lt;RestResponse&lt;Void, List&lt;LocalDate&gt;&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, List<LocalDate>>> getDateValidWithRestResponseAsync();
+    Single<BodyResponse<List<LocalDate>>> getDateValidWithRestResponseAsync();
 
     /**
      * Get integer array value ['2000-12-01', '1980-01-02', '1492-10-12'].
      *
-     * @return the {@link Maybe&lt;List&lt;LocalDate&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     Maybe<List<LocalDate>> getDateValidAsync();
 
@@ -1118,7 +1120,7 @@ public interface Arrays {
      * @param arrayBody the List&lt;LocalDate&gt; value.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;Void&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     ServiceFuture<Void> putDateValidAsync(@NonNull List<LocalDate> arrayBody, ServiceCallback<Void> serviceCallback);
 
@@ -1127,16 +1129,16 @@ public interface Arrays {
      *
      * @param arrayBody the List&lt;LocalDate&gt; value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, Void>> putDateValidWithRestResponseAsync(@NonNull List<LocalDate> arrayBody);
+    Single<VoidResponse> putDateValidWithRestResponseAsync(@NonNull List<LocalDate> arrayBody);
 
     /**
      * Set array value  ['2000-12-01', '1980-01-02', '1492-10-12'].
      *
      * @param arrayBody the List&lt;LocalDate&gt; value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link Completable} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     Completable putDateValidAsync(@NonNull List<LocalDate> arrayBody);
 
@@ -1154,21 +1156,21 @@ public interface Arrays {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;List&lt;LocalDate&gt;&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     ServiceFuture<List<LocalDate>> getDateInvalidNullAsync(ServiceCallback<List<LocalDate>> serviceCallback);
 
     /**
      * Get date array value ['2012-01-01', null, '1776-07-04'].
      *
-     * @return the {@link Single&lt;RestResponse&lt;Void, List&lt;LocalDate&gt;&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, List<LocalDate>>> getDateInvalidNullWithRestResponseAsync();
+    Single<BodyResponse<List<LocalDate>>> getDateInvalidNullWithRestResponseAsync();
 
     /**
      * Get date array value ['2012-01-01', null, '1776-07-04'].
      *
-     * @return the {@link Maybe&lt;List&lt;LocalDate&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     Maybe<List<LocalDate>> getDateInvalidNullAsync();
 
@@ -1186,21 +1188,21 @@ public interface Arrays {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;List&lt;LocalDate&gt;&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     ServiceFuture<List<LocalDate>> getDateInvalidCharsAsync(ServiceCallback<List<LocalDate>> serviceCallback);
 
     /**
      * Get date array value ['2011-03-22', 'date'].
      *
-     * @return the {@link Single&lt;RestResponse&lt;Void, List&lt;LocalDate&gt;&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, List<LocalDate>>> getDateInvalidCharsWithRestResponseAsync();
+    Single<BodyResponse<List<LocalDate>>> getDateInvalidCharsWithRestResponseAsync();
 
     /**
      * Get date array value ['2011-03-22', 'date'].
      *
-     * @return the {@link Maybe&lt;List&lt;LocalDate&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     Maybe<List<LocalDate>> getDateInvalidCharsAsync();
 
@@ -1218,21 +1220,21 @@ public interface Arrays {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;List&lt;DateTime&gt;&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     ServiceFuture<List<DateTime>> getDateTimeValidAsync(ServiceCallback<List<DateTime>> serviceCallback);
 
     /**
      * Get date-time array value ['2000-12-01t00:00:01z', '1980-01-02T00:11:35+01:00', '1492-10-12T10:15:01-08:00'].
      *
-     * @return the {@link Single&lt;RestResponse&lt;Void, List&lt;DateTime&gt;&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, List<DateTime>>> getDateTimeValidWithRestResponseAsync();
+    Single<BodyResponse<List<DateTime>>> getDateTimeValidWithRestResponseAsync();
 
     /**
      * Get date-time array value ['2000-12-01t00:00:01z', '1980-01-02T00:11:35+01:00', '1492-10-12T10:15:01-08:00'].
      *
-     * @return the {@link Maybe&lt;List&lt;DateTime&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     Maybe<List<DateTime>> getDateTimeValidAsync();
 
@@ -1252,7 +1254,7 @@ public interface Arrays {
      * @param arrayBody the List&lt;DateTime&gt; value.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;Void&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     ServiceFuture<Void> putDateTimeValidAsync(@NonNull List<DateTime> arrayBody, ServiceCallback<Void> serviceCallback);
 
@@ -1261,16 +1263,16 @@ public interface Arrays {
      *
      * @param arrayBody the List&lt;DateTime&gt; value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, Void>> putDateTimeValidWithRestResponseAsync(@NonNull List<DateTime> arrayBody);
+    Single<VoidResponse> putDateTimeValidWithRestResponseAsync(@NonNull List<DateTime> arrayBody);
 
     /**
      * Set array value  ['2000-12-01t00:00:01z', '1980-01-02T00:11:35+01:00', '1492-10-12T10:15:01-08:00'].
      *
      * @param arrayBody the List&lt;DateTime&gt; value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link Completable} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     Completable putDateTimeValidAsync(@NonNull List<DateTime> arrayBody);
 
@@ -1288,21 +1290,21 @@ public interface Arrays {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;List&lt;DateTime&gt;&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     ServiceFuture<List<DateTime>> getDateTimeInvalidNullAsync(ServiceCallback<List<DateTime>> serviceCallback);
 
     /**
      * Get date array value ['2000-12-01t00:00:01z', null].
      *
-     * @return the {@link Single&lt;RestResponse&lt;Void, List&lt;DateTime&gt;&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, List<DateTime>>> getDateTimeInvalidNullWithRestResponseAsync();
+    Single<BodyResponse<List<DateTime>>> getDateTimeInvalidNullWithRestResponseAsync();
 
     /**
      * Get date array value ['2000-12-01t00:00:01z', null].
      *
-     * @return the {@link Maybe&lt;List&lt;DateTime&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     Maybe<List<DateTime>> getDateTimeInvalidNullAsync();
 
@@ -1320,21 +1322,21 @@ public interface Arrays {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;List&lt;DateTime&gt;&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     ServiceFuture<List<DateTime>> getDateTimeInvalidCharsAsync(ServiceCallback<List<DateTime>> serviceCallback);
 
     /**
      * Get date array value ['2000-12-01t00:00:01z', 'date-time'].
      *
-     * @return the {@link Single&lt;RestResponse&lt;Void, List&lt;DateTime&gt;&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, List<DateTime>>> getDateTimeInvalidCharsWithRestResponseAsync();
+    Single<BodyResponse<List<DateTime>>> getDateTimeInvalidCharsWithRestResponseAsync();
 
     /**
      * Get date array value ['2000-12-01t00:00:01z', 'date-time'].
      *
-     * @return the {@link Maybe&lt;List&lt;DateTime&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     Maybe<List<DateTime>> getDateTimeInvalidCharsAsync();
 
@@ -1352,21 +1354,21 @@ public interface Arrays {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;List&lt;DateTime&gt;&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     ServiceFuture<List<DateTime>> getDateTimeRfc1123ValidAsync(ServiceCallback<List<DateTime>> serviceCallback);
 
     /**
      * Get date-time array value ['Fri, 01 Dec 2000 00:00:01 GMT', 'Wed, 02 Jan 1980 00:11:35 GMT', 'Wed, 12 Oct 1492 10:15:01 GMT'].
      *
-     * @return the {@link Single&lt;RestResponse&lt;Void, List&lt;DateTime&gt;&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, List<DateTime>>> getDateTimeRfc1123ValidWithRestResponseAsync();
+    Single<BodyResponse<List<DateTime>>> getDateTimeRfc1123ValidWithRestResponseAsync();
 
     /**
      * Get date-time array value ['Fri, 01 Dec 2000 00:00:01 GMT', 'Wed, 02 Jan 1980 00:11:35 GMT', 'Wed, 12 Oct 1492 10:15:01 GMT'].
      *
-     * @return the {@link Maybe&lt;List&lt;DateTime&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     Maybe<List<DateTime>> getDateTimeRfc1123ValidAsync();
 
@@ -1386,7 +1388,7 @@ public interface Arrays {
      * @param arrayBody the List&lt;DateTime&gt; value.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;Void&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     ServiceFuture<Void> putDateTimeRfc1123ValidAsync(@NonNull List<DateTime> arrayBody, ServiceCallback<Void> serviceCallback);
 
@@ -1395,16 +1397,16 @@ public interface Arrays {
      *
      * @param arrayBody the List&lt;DateTime&gt; value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, Void>> putDateTimeRfc1123ValidWithRestResponseAsync(@NonNull List<DateTime> arrayBody);
+    Single<VoidResponse> putDateTimeRfc1123ValidWithRestResponseAsync(@NonNull List<DateTime> arrayBody);
 
     /**
      * Set array value  ['Fri, 01 Dec 2000 00:00:01 GMT', 'Wed, 02 Jan 1980 00:11:35 GMT', 'Wed, 12 Oct 1492 10:15:01 GMT'].
      *
      * @param arrayBody the List&lt;DateTime&gt; value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link Completable} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     Completable putDateTimeRfc1123ValidAsync(@NonNull List<DateTime> arrayBody);
 
@@ -1422,21 +1424,21 @@ public interface Arrays {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;List&lt;Period&gt;&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     ServiceFuture<List<Period>> getDurationValidAsync(ServiceCallback<List<Period>> serviceCallback);
 
     /**
      * Get duration array value ['P123DT22H14M12.011S', 'P5DT1H0M0S'].
      *
-     * @return the {@link Single&lt;RestResponse&lt;Void, List&lt;Period&gt;&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, List<Period>>> getDurationValidWithRestResponseAsync();
+    Single<BodyResponse<List<Period>>> getDurationValidWithRestResponseAsync();
 
     /**
      * Get duration array value ['P123DT22H14M12.011S', 'P5DT1H0M0S'].
      *
-     * @return the {@link Maybe&lt;List&lt;Period&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     Maybe<List<Period>> getDurationValidAsync();
 
@@ -1456,7 +1458,7 @@ public interface Arrays {
      * @param arrayBody the List&lt;Period&gt; value.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;Void&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     ServiceFuture<Void> putDurationValidAsync(@NonNull List<Period> arrayBody, ServiceCallback<Void> serviceCallback);
 
@@ -1465,16 +1467,16 @@ public interface Arrays {
      *
      * @param arrayBody the List&lt;Period&gt; value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, Void>> putDurationValidWithRestResponseAsync(@NonNull List<Period> arrayBody);
+    Single<VoidResponse> putDurationValidWithRestResponseAsync(@NonNull List<Period> arrayBody);
 
     /**
      * Set array value  ['P123DT22H14M12.011S', 'P5DT1H0M0S'].
      *
      * @param arrayBody the List&lt;Period&gt; value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link Completable} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     Completable putDurationValidAsync(@NonNull List<Period> arrayBody);
 
@@ -1492,21 +1494,21 @@ public interface Arrays {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;List&lt;byte[]&gt;&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     ServiceFuture<List<byte[]>> getByteValidAsync(ServiceCallback<List<byte[]>> serviceCallback);
 
     /**
      * Get byte array value [hex(FF FF FF FA), hex(01 02 03), hex (25, 29, 43)] with each item encoded in base64.
      *
-     * @return the {@link Single&lt;RestResponse&lt;Void, List&lt;byte[]&gt;&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, List<byte[]>>> getByteValidWithRestResponseAsync();
+    Single<BodyResponse<List<byte[]>>> getByteValidWithRestResponseAsync();
 
     /**
      * Get byte array value [hex(FF FF FF FA), hex(01 02 03), hex (25, 29, 43)] with each item encoded in base64.
      *
-     * @return the {@link Maybe&lt;List&lt;byte[]&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     Maybe<List<byte[]>> getByteValidAsync();
 
@@ -1526,7 +1528,7 @@ public interface Arrays {
      * @param arrayBody the List&lt;byte[]&gt; value.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;Void&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     ServiceFuture<Void> putByteValidAsync(@NonNull List<byte[]> arrayBody, ServiceCallback<Void> serviceCallback);
 
@@ -1535,16 +1537,16 @@ public interface Arrays {
      *
      * @param arrayBody the List&lt;byte[]&gt; value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, Void>> putByteValidWithRestResponseAsync(@NonNull List<byte[]> arrayBody);
+    Single<VoidResponse> putByteValidWithRestResponseAsync(@NonNull List<byte[]> arrayBody);
 
     /**
      * Put the array value [hex(FF FF FF FA), hex(01 02 03), hex (25, 29, 43)] with each elementencoded in base 64.
      *
      * @param arrayBody the List&lt;byte[]&gt; value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link Completable} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     Completable putByteValidAsync(@NonNull List<byte[]> arrayBody);
 
@@ -1562,21 +1564,21 @@ public interface Arrays {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;List&lt;byte[]&gt;&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     ServiceFuture<List<byte[]>> getByteInvalidNullAsync(ServiceCallback<List<byte[]>> serviceCallback);
 
     /**
      * Get byte array value [hex(AB, AC, AD), null] with the first item base64 encoded.
      *
-     * @return the {@link Single&lt;RestResponse&lt;Void, List&lt;byte[]&gt;&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, List<byte[]>>> getByteInvalidNullWithRestResponseAsync();
+    Single<BodyResponse<List<byte[]>>> getByteInvalidNullWithRestResponseAsync();
 
     /**
      * Get byte array value [hex(AB, AC, AD), null] with the first item base64 encoded.
      *
-     * @return the {@link Maybe&lt;List&lt;byte[]&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     Maybe<List<byte[]>> getByteInvalidNullAsync();
 
@@ -1594,21 +1596,21 @@ public interface Arrays {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;List&lt;byte[]&gt;&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     ServiceFuture<List<byte[]>> getBase64UrlAsync(ServiceCallback<List<byte[]>> serviceCallback);
 
     /**
      * Get array value ['a string that gets encoded with base64url', 'test string' 'Lorem ipsum'] with the items base64url encoded.
      *
-     * @return the {@link Single&lt;RestResponse&lt;Void, List&lt;byte[]&gt;&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, List<byte[]>>> getBase64UrlWithRestResponseAsync();
+    Single<BodyResponse<List<byte[]>>> getBase64UrlWithRestResponseAsync();
 
     /**
      * Get array value ['a string that gets encoded with base64url', 'test string' 'Lorem ipsum'] with the items base64url encoded.
      *
-     * @return the {@link Maybe&lt;List&lt;byte[]&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     Maybe<List<byte[]>> getBase64UrlAsync();
 
@@ -1626,21 +1628,21 @@ public interface Arrays {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;List&lt;Product&gt;&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     ServiceFuture<List<Product>> getComplexNullAsync(ServiceCallback<List<Product>> serviceCallback);
 
     /**
      * Get array of complex type null value.
      *
-     * @return the {@link Single&lt;RestResponse&lt;Void, List&lt;Product&gt;&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, List<Product>>> getComplexNullWithRestResponseAsync();
+    Single<BodyResponse<List<Product>>> getComplexNullWithRestResponseAsync();
 
     /**
      * Get array of complex type null value.
      *
-     * @return the {@link Maybe&lt;List&lt;Product&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     Maybe<List<Product>> getComplexNullAsync();
 
@@ -1658,21 +1660,21 @@ public interface Arrays {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;List&lt;Product&gt;&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     ServiceFuture<List<Product>> getComplexEmptyAsync(ServiceCallback<List<Product>> serviceCallback);
 
     /**
      * Get empty array of complex type [].
      *
-     * @return the {@link Single&lt;RestResponse&lt;Void, List&lt;Product&gt;&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, List<Product>>> getComplexEmptyWithRestResponseAsync();
+    Single<BodyResponse<List<Product>>> getComplexEmptyWithRestResponseAsync();
 
     /**
      * Get empty array of complex type [].
      *
-     * @return the {@link Maybe&lt;List&lt;Product&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     Maybe<List<Product>> getComplexEmptyAsync();
 
@@ -1690,21 +1692,21 @@ public interface Arrays {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;List&lt;Product&gt;&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     ServiceFuture<List<Product>> getComplexItemNullAsync(ServiceCallback<List<Product>> serviceCallback);
 
     /**
      * Get array of complex type with null item [{'integer': 1 'string': '2'}, null, {'integer': 5, 'string': '6'}].
      *
-     * @return the {@link Single&lt;RestResponse&lt;Void, List&lt;Product&gt;&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, List<Product>>> getComplexItemNullWithRestResponseAsync();
+    Single<BodyResponse<List<Product>>> getComplexItemNullWithRestResponseAsync();
 
     /**
      * Get array of complex type with null item [{'integer': 1 'string': '2'}, null, {'integer': 5, 'string': '6'}].
      *
-     * @return the {@link Maybe&lt;List&lt;Product&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     Maybe<List<Product>> getComplexItemNullAsync();
 
@@ -1722,21 +1724,21 @@ public interface Arrays {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;List&lt;Product&gt;&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     ServiceFuture<List<Product>> getComplexItemEmptyAsync(ServiceCallback<List<Product>> serviceCallback);
 
     /**
      * Get array of complex type with empty item [{'integer': 1 'string': '2'}, {}, {'integer': 5, 'string': '6'}].
      *
-     * @return the {@link Single&lt;RestResponse&lt;Void, List&lt;Product&gt;&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, List<Product>>> getComplexItemEmptyWithRestResponseAsync();
+    Single<BodyResponse<List<Product>>> getComplexItemEmptyWithRestResponseAsync();
 
     /**
      * Get array of complex type with empty item [{'integer': 1 'string': '2'}, {}, {'integer': 5, 'string': '6'}].
      *
-     * @return the {@link Maybe&lt;List&lt;Product&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     Maybe<List<Product>> getComplexItemEmptyAsync();
 
@@ -1754,21 +1756,21 @@ public interface Arrays {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;List&lt;Product&gt;&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     ServiceFuture<List<Product>> getComplexValidAsync(ServiceCallback<List<Product>> serviceCallback);
 
     /**
      * Get array of complex type with [{'integer': 1 'string': '2'}, {'integer': 3, 'string': '4'}, {'integer': 5, 'string': '6'}].
      *
-     * @return the {@link Single&lt;RestResponse&lt;Void, List&lt;Product&gt;&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, List<Product>>> getComplexValidWithRestResponseAsync();
+    Single<BodyResponse<List<Product>>> getComplexValidWithRestResponseAsync();
 
     /**
      * Get array of complex type with [{'integer': 1 'string': '2'}, {'integer': 3, 'string': '4'}, {'integer': 5, 'string': '6'}].
      *
-     * @return the {@link Maybe&lt;List&lt;Product&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     Maybe<List<Product>> getComplexValidAsync();
 
@@ -1788,7 +1790,7 @@ public interface Arrays {
      * @param arrayBody the List&lt;Product&gt; value.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;Void&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     ServiceFuture<Void> putComplexValidAsync(@NonNull List<Product> arrayBody, ServiceCallback<Void> serviceCallback);
 
@@ -1797,16 +1799,16 @@ public interface Arrays {
      *
      * @param arrayBody the List&lt;Product&gt; value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, Void>> putComplexValidWithRestResponseAsync(@NonNull List<Product> arrayBody);
+    Single<VoidResponse> putComplexValidWithRestResponseAsync(@NonNull List<Product> arrayBody);
 
     /**
      * Put an array of complex type with values [{'integer': 1 'string': '2'}, {'integer': 3, 'string': '4'}, {'integer': 5, 'string': '6'}].
      *
      * @param arrayBody the List&lt;Product&gt; value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link Completable} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     Completable putComplexValidAsync(@NonNull List<Product> arrayBody);
 
@@ -1824,21 +1826,21 @@ public interface Arrays {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;List&lt;List&lt;String&gt;&gt;&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     ServiceFuture<List<List<String>>> getArrayNullAsync(ServiceCallback<List<List<String>>> serviceCallback);
 
     /**
      * Get a null array.
      *
-     * @return the {@link Single&lt;RestResponse&lt;Void, List&lt;List&lt;String&gt;&gt;&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, List<List<String>>>> getArrayNullWithRestResponseAsync();
+    Single<BodyResponse<List<List<String>>>> getArrayNullWithRestResponseAsync();
 
     /**
      * Get a null array.
      *
-     * @return the {@link Maybe&lt;List&lt;List&lt;String&gt;&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     Maybe<List<List<String>>> getArrayNullAsync();
 
@@ -1856,21 +1858,21 @@ public interface Arrays {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;List&lt;List&lt;String&gt;&gt;&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     ServiceFuture<List<List<String>>> getArrayEmptyAsync(ServiceCallback<List<List<String>>> serviceCallback);
 
     /**
      * Get an empty array [].
      *
-     * @return the {@link Single&lt;RestResponse&lt;Void, List&lt;List&lt;String&gt;&gt;&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, List<List<String>>>> getArrayEmptyWithRestResponseAsync();
+    Single<BodyResponse<List<List<String>>>> getArrayEmptyWithRestResponseAsync();
 
     /**
      * Get an empty array [].
      *
-     * @return the {@link Maybe&lt;List&lt;List&lt;String&gt;&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     Maybe<List<List<String>>> getArrayEmptyAsync();
 
@@ -1888,21 +1890,21 @@ public interface Arrays {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;List&lt;List&lt;String&gt;&gt;&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     ServiceFuture<List<List<String>>> getArrayItemNullAsync(ServiceCallback<List<List<String>>> serviceCallback);
 
     /**
      * Get an array of array of strings [['1', '2', '3'], null, ['7', '8', '9']].
      *
-     * @return the {@link Single&lt;RestResponse&lt;Void, List&lt;List&lt;String&gt;&gt;&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, List<List<String>>>> getArrayItemNullWithRestResponseAsync();
+    Single<BodyResponse<List<List<String>>>> getArrayItemNullWithRestResponseAsync();
 
     /**
      * Get an array of array of strings [['1', '2', '3'], null, ['7', '8', '9']].
      *
-     * @return the {@link Maybe&lt;List&lt;List&lt;String&gt;&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     Maybe<List<List<String>>> getArrayItemNullAsync();
 
@@ -1920,21 +1922,21 @@ public interface Arrays {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;List&lt;List&lt;String&gt;&gt;&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     ServiceFuture<List<List<String>>> getArrayItemEmptyAsync(ServiceCallback<List<List<String>>> serviceCallback);
 
     /**
      * Get an array of array of strings [['1', '2', '3'], [], ['7', '8', '9']].
      *
-     * @return the {@link Single&lt;RestResponse&lt;Void, List&lt;List&lt;String&gt;&gt;&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, List<List<String>>>> getArrayItemEmptyWithRestResponseAsync();
+    Single<BodyResponse<List<List<String>>>> getArrayItemEmptyWithRestResponseAsync();
 
     /**
      * Get an array of array of strings [['1', '2', '3'], [], ['7', '8', '9']].
      *
-     * @return the {@link Maybe&lt;List&lt;List&lt;String&gt;&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     Maybe<List<List<String>>> getArrayItemEmptyAsync();
 
@@ -1952,21 +1954,21 @@ public interface Arrays {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;List&lt;List&lt;String&gt;&gt;&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     ServiceFuture<List<List<String>>> getArrayValidAsync(ServiceCallback<List<List<String>>> serviceCallback);
 
     /**
      * Get an array of array of strings [['1', '2', '3'], ['4', '5', '6'], ['7', '8', '9']].
      *
-     * @return the {@link Single&lt;RestResponse&lt;Void, List&lt;List&lt;String&gt;&gt;&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, List<List<String>>>> getArrayValidWithRestResponseAsync();
+    Single<BodyResponse<List<List<String>>>> getArrayValidWithRestResponseAsync();
 
     /**
      * Get an array of array of strings [['1', '2', '3'], ['4', '5', '6'], ['7', '8', '9']].
      *
-     * @return the {@link Maybe&lt;List&lt;List&lt;String&gt;&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     Maybe<List<List<String>>> getArrayValidAsync();
 
@@ -1986,7 +1988,7 @@ public interface Arrays {
      * @param arrayBody the List&lt;List&lt;String&gt;&gt; value.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;Void&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     ServiceFuture<Void> putArrayValidAsync(@NonNull List<List<String>> arrayBody, ServiceCallback<Void> serviceCallback);
 
@@ -1995,16 +1997,16 @@ public interface Arrays {
      *
      * @param arrayBody the List&lt;List&lt;String&gt;&gt; value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, Void>> putArrayValidWithRestResponseAsync(@NonNull List<List<String>> arrayBody);
+    Single<VoidResponse> putArrayValidWithRestResponseAsync(@NonNull List<List<String>> arrayBody);
 
     /**
      * Put An array of array of strings [['1', '2', '3'], ['4', '5', '6'], ['7', '8', '9']].
      *
      * @param arrayBody the List&lt;List&lt;String&gt;&gt; value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link Completable} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     Completable putArrayValidAsync(@NonNull List<List<String>> arrayBody);
 
@@ -2022,21 +2024,21 @@ public interface Arrays {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;List&lt;Map&lt;String, String&gt;&gt;&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     ServiceFuture<List<Map<String, String>>> getDictionaryNullAsync(ServiceCallback<List<Map<String, String>>> serviceCallback);
 
     /**
      * Get an array of Dictionaries with value null.
      *
-     * @return the {@link Single&lt;RestResponse&lt;Void, List&lt;Map&lt;String, String&gt;&gt;&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, List<Map<String, String>>>> getDictionaryNullWithRestResponseAsync();
+    Single<BodyResponse<List<Map<String, String>>>> getDictionaryNullWithRestResponseAsync();
 
     /**
      * Get an array of Dictionaries with value null.
      *
-     * @return the {@link Maybe&lt;List&lt;Map&lt;String, String&gt;&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     Maybe<List<Map<String, String>>> getDictionaryNullAsync();
 
@@ -2054,21 +2056,21 @@ public interface Arrays {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;List&lt;Map&lt;String, String&gt;&gt;&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     ServiceFuture<List<Map<String, String>>> getDictionaryEmptyAsync(ServiceCallback<List<Map<String, String>>> serviceCallback);
 
     /**
      * Get an array of Dictionaries of type &lt;string, string&gt; with value [].
      *
-     * @return the {@link Single&lt;RestResponse&lt;Void, List&lt;Map&lt;String, String&gt;&gt;&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, List<Map<String, String>>>> getDictionaryEmptyWithRestResponseAsync();
+    Single<BodyResponse<List<Map<String, String>>>> getDictionaryEmptyWithRestResponseAsync();
 
     /**
      * Get an array of Dictionaries of type &lt;string, string&gt; with value [].
      *
-     * @return the {@link Maybe&lt;List&lt;Map&lt;String, String&gt;&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     Maybe<List<Map<String, String>>> getDictionaryEmptyAsync();
 
@@ -2086,21 +2088,21 @@ public interface Arrays {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;List&lt;Map&lt;String, String&gt;&gt;&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     ServiceFuture<List<Map<String, String>>> getDictionaryItemNullAsync(ServiceCallback<List<Map<String, String>>> serviceCallback);
 
     /**
      * Get an array of Dictionaries of type &lt;string, string&gt; with value [{'1': 'one', '2': 'two', '3': 'three'}, null, {'7': 'seven', '8': 'eight', '9': 'nine'}].
      *
-     * @return the {@link Single&lt;RestResponse&lt;Void, List&lt;Map&lt;String, String&gt;&gt;&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, List<Map<String, String>>>> getDictionaryItemNullWithRestResponseAsync();
+    Single<BodyResponse<List<Map<String, String>>>> getDictionaryItemNullWithRestResponseAsync();
 
     /**
      * Get an array of Dictionaries of type &lt;string, string&gt; with value [{'1': 'one', '2': 'two', '3': 'three'}, null, {'7': 'seven', '8': 'eight', '9': 'nine'}].
      *
-     * @return the {@link Maybe&lt;List&lt;Map&lt;String, String&gt;&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     Maybe<List<Map<String, String>>> getDictionaryItemNullAsync();
 
@@ -2118,21 +2120,21 @@ public interface Arrays {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;List&lt;Map&lt;String, String&gt;&gt;&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     ServiceFuture<List<Map<String, String>>> getDictionaryItemEmptyAsync(ServiceCallback<List<Map<String, String>>> serviceCallback);
 
     /**
      * Get an array of Dictionaries of type &lt;string, string&gt; with value [{'1': 'one', '2': 'two', '3': 'three'}, {}, {'7': 'seven', '8': 'eight', '9': 'nine'}].
      *
-     * @return the {@link Single&lt;RestResponse&lt;Void, List&lt;Map&lt;String, String&gt;&gt;&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, List<Map<String, String>>>> getDictionaryItemEmptyWithRestResponseAsync();
+    Single<BodyResponse<List<Map<String, String>>>> getDictionaryItemEmptyWithRestResponseAsync();
 
     /**
      * Get an array of Dictionaries of type &lt;string, string&gt; with value [{'1': 'one', '2': 'two', '3': 'three'}, {}, {'7': 'seven', '8': 'eight', '9': 'nine'}].
      *
-     * @return the {@link Maybe&lt;List&lt;Map&lt;String, String&gt;&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     Maybe<List<Map<String, String>>> getDictionaryItemEmptyAsync();
 
@@ -2150,21 +2152,21 @@ public interface Arrays {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;List&lt;Map&lt;String, String&gt;&gt;&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     ServiceFuture<List<Map<String, String>>> getDictionaryValidAsync(ServiceCallback<List<Map<String, String>>> serviceCallback);
 
     /**
      * Get an array of Dictionaries of type &lt;string, string&gt; with value [{'1': 'one', '2': 'two', '3': 'three'}, {'4': 'four', '5': 'five', '6': 'six'}, {'7': 'seven', '8': 'eight', '9': 'nine'}].
      *
-     * @return the {@link Single&lt;RestResponse&lt;Void, List&lt;Map&lt;String, String&gt;&gt;&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, List<Map<String, String>>>> getDictionaryValidWithRestResponseAsync();
+    Single<BodyResponse<List<Map<String, String>>>> getDictionaryValidWithRestResponseAsync();
 
     /**
      * Get an array of Dictionaries of type &lt;string, string&gt; with value [{'1': 'one', '2': 'two', '3': 'three'}, {'4': 'four', '5': 'five', '6': 'six'}, {'7': 'seven', '8': 'eight', '9': 'nine'}].
      *
-     * @return the {@link Maybe&lt;List&lt;Map&lt;String, String&gt;&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     Maybe<List<Map<String, String>>> getDictionaryValidAsync();
 
@@ -2184,7 +2186,7 @@ public interface Arrays {
      * @param arrayBody the List&lt;Map&lt;String, String&gt;&gt; value.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;Void&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     ServiceFuture<Void> putDictionaryValidAsync(@NonNull List<Map<String, String>> arrayBody, ServiceCallback<Void> serviceCallback);
 
@@ -2193,16 +2195,16 @@ public interface Arrays {
      *
      * @param arrayBody the List&lt;Map&lt;String, String&gt;&gt; value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, Void>> putDictionaryValidWithRestResponseAsync(@NonNull List<Map<String, String>> arrayBody);
+    Single<VoidResponse> putDictionaryValidWithRestResponseAsync(@NonNull List<Map<String, String>> arrayBody);
 
     /**
      * Get an array of Dictionaries of type &lt;string, string&gt; with value [{'1': 'one', '2': 'two', '3': 'three'}, {'4': 'four', '5': 'five', '6': 'six'}, {'7': 'seven', '8': 'eight', '9': 'nine'}].
      *
      * @param arrayBody the List&lt;Map&lt;String, String&gt;&gt; value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link Completable} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     Completable putDictionaryValidAsync(@NonNull List<Map<String, String>> arrayBody);
 }

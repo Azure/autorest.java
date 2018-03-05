@@ -11,9 +11,9 @@
 package fixtures.bodyfile.implementation;
 
 import com.microsoft.rest.v2.RestProxy;
-import com.microsoft.rest.v2.RestResponse;
 import com.microsoft.rest.v2.ServiceCallback;
 import com.microsoft.rest.v2.ServiceFuture;
+import com.microsoft.rest.v2.StreamResponse;
 import com.microsoft.rest.v2.annotations.ExpectedResponses;
 import com.microsoft.rest.v2.annotations.GET;
 import com.microsoft.rest.v2.annotations.Host;
@@ -23,7 +23,6 @@ import fixtures.bodyfile.models.ErrorException;
 import io.reactivex.Flowable;
 import io.reactivex.Maybe;
 import io.reactivex.Single;
-import io.reactivex.functions.Function;
 import java.nio.ByteBuffer;
 
 /**
@@ -60,17 +59,17 @@ public final class FilesImpl implements Files {
         @GET("files/stream/nonempty")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<RestResponse<Void, Flowable<ByteBuffer>>> getFile();
+        Single<StreamResponse> getFile();
 
         @GET("files/stream/verylarge")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<RestResponse<Void, Flowable<ByteBuffer>>> getFileLarge();
+        Single<StreamResponse> getFileLarge();
 
         @GET("files/stream/empty")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<RestResponse<Void, Flowable<ByteBuffer>>> getEmptyFile();
+        Single<StreamResponse> getEmptyFile();
     }
 
     /**
@@ -89,7 +88,7 @@ public final class FilesImpl implements Files {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;Flowable&lt;ByteBuffer&gt;&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     public ServiceFuture<Flowable<ByteBuffer>> getFileAsync(ServiceCallback<Flowable<ByteBuffer>> serviceCallback) {
         return ServiceFuture.fromBody(getFileAsync(), serviceCallback);
@@ -98,29 +97,20 @@ public final class FilesImpl implements Files {
     /**
      * Get file.
      *
-     * @return the {@link Single&lt;RestResponse&lt;Void, Flowable&lt;ByteBuffer&gt;&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<Void, Flowable<ByteBuffer>>> getFileWithRestResponseAsync() {
+    public Single<StreamResponse> getFileWithRestResponseAsync() {
         return service.getFile();
     }
 
     /**
      * Get file.
      *
-     * @return the {@link Maybe&lt;Flowable&lt;ByteBuffer&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Maybe<Flowable<ByteBuffer>> getFileAsync() {
         return getFileWithRestResponseAsync()
-            .flatMapMaybe(new Function<RestResponse<Void, Flowable<ByteBuffer>>, Maybe<Flowable<ByteBuffer>>>() {
-                @Override
-                public Maybe<Flowable<ByteBuffer>> apply(RestResponse<Void, Flowable<ByteBuffer>> restResponse) {
-                    if (restResponse.body() == null) {
-                        return Maybe.empty();
-                    } else {
-                        return Maybe.just(restResponse.body());
-                    }
-                }
-            });
+            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -139,7 +129,7 @@ public final class FilesImpl implements Files {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;Flowable&lt;ByteBuffer&gt;&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     public ServiceFuture<Flowable<ByteBuffer>> getFileLargeAsync(ServiceCallback<Flowable<ByteBuffer>> serviceCallback) {
         return ServiceFuture.fromBody(getFileLargeAsync(), serviceCallback);
@@ -148,29 +138,20 @@ public final class FilesImpl implements Files {
     /**
      * Get a large file.
      *
-     * @return the {@link Single&lt;RestResponse&lt;Void, Flowable&lt;ByteBuffer&gt;&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<Void, Flowable<ByteBuffer>>> getFileLargeWithRestResponseAsync() {
+    public Single<StreamResponse> getFileLargeWithRestResponseAsync() {
         return service.getFileLarge();
     }
 
     /**
      * Get a large file.
      *
-     * @return the {@link Maybe&lt;Flowable&lt;ByteBuffer&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Maybe<Flowable<ByteBuffer>> getFileLargeAsync() {
         return getFileLargeWithRestResponseAsync()
-            .flatMapMaybe(new Function<RestResponse<Void, Flowable<ByteBuffer>>, Maybe<Flowable<ByteBuffer>>>() {
-                @Override
-                public Maybe<Flowable<ByteBuffer>> apply(RestResponse<Void, Flowable<ByteBuffer>> restResponse) {
-                    if (restResponse.body() == null) {
-                        return Maybe.empty();
-                    } else {
-                        return Maybe.just(restResponse.body());
-                    }
-                }
-            });
+            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -189,7 +170,7 @@ public final class FilesImpl implements Files {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;Flowable&lt;ByteBuffer&gt;&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     public ServiceFuture<Flowable<ByteBuffer>> getEmptyFileAsync(ServiceCallback<Flowable<ByteBuffer>> serviceCallback) {
         return ServiceFuture.fromBody(getEmptyFileAsync(), serviceCallback);
@@ -198,28 +179,19 @@ public final class FilesImpl implements Files {
     /**
      * Get empty file.
      *
-     * @return the {@link Single&lt;RestResponse&lt;Void, Flowable&lt;ByteBuffer&gt;&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<Void, Flowable<ByteBuffer>>> getEmptyFileWithRestResponseAsync() {
+    public Single<StreamResponse> getEmptyFileWithRestResponseAsync() {
         return service.getEmptyFile();
     }
 
     /**
      * Get empty file.
      *
-     * @return the {@link Maybe&lt;Flowable&lt;ByteBuffer&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Maybe<Flowable<ByteBuffer>> getEmptyFileAsync() {
         return getEmptyFileWithRestResponseAsync()
-            .flatMapMaybe(new Function<RestResponse<Void, Flowable<ByteBuffer>>, Maybe<Flowable<ByteBuffer>>>() {
-                @Override
-                public Maybe<Flowable<ByteBuffer>> apply(RestResponse<Void, Flowable<ByteBuffer>> restResponse) {
-                    if (restResponse.body() == null) {
-                        return Maybe.empty();
-                    } else {
-                        return Maybe.just(restResponse.body());
-                    }
-                }
-            });
+            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 }

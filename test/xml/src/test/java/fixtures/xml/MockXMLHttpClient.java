@@ -1,10 +1,11 @@
 package fixtures.xml;
 
 import com.microsoft.rest.v2.RestException;
-import com.microsoft.rest.v2.http.*;
-import com.microsoft.rest.v2.protocol.SerializerAdapter;
-import com.microsoft.rest.v2.protocol.SerializerEncoding;
-import com.microsoft.rest.v2.serializer.JacksonAdapter;
+import com.microsoft.rest.v2.http.HttpClient;
+import com.microsoft.rest.v2.http.HttpHeaders;
+import com.microsoft.rest.v2.http.HttpMethod;
+import com.microsoft.rest.v2.http.HttpRequest;
+import com.microsoft.rest.v2.http.HttpResponse;
 import com.microsoft.rest.v2.util.FlowableUtil;
 import io.reactivex.Single;
 import io.reactivex.SingleSource;
@@ -47,6 +48,16 @@ public class MockXMLHttpClient extends HttpClient {
                     return Single.just(response("GetXMLWithAttributes.xml"));
                 } else if (path.contains("xml/wrapped-lists")) {
                     return Single.just(response("GetXMLWrappedLists.xml"));
+                } else if (path.contains("xml/empty-list")) {
+                    return Single.just(response("GetXMLEmptyList.xml"));
+                } else if (path.contains("xml/empty-wrapped-lists")) {
+                    return Single.just(response("GetXMLEmptyWrappedLists.xml"));
+                } else if (path.contains("xml/root-list")) {
+                    return Single.just(response("GetXMLRootList.xml"));
+                } else if (path.contains("xml/empty-root-list")) {
+                    return Single.just(response("GetXMLEmptyRootList.xml"));
+                } else if (path.contains("xml/empty-child-element")) {
+                    return Single.just(response("GetXMLEmptyChildElement.xml"));
                 } else if (path.contains("xml/headers")) {
                     return Single.<HttpResponse>just(new MockHttpResponse(200, new HttpHeaders().set("Custom-Header", "Custom value")));
                 }
@@ -65,6 +76,27 @@ public class MockXMLHttpClient extends HttpClient {
                         @Override
                         public SingleSource<? extends HttpResponse> apply(byte[] bytes) throws Exception {
                             return validate(new String(bytes, StandardCharsets.UTF_8), "GetXMLWrappedLists.xml");
+                        }
+                    });
+                } else if (path.contains("xml/root-list")) {
+                    return FlowableUtil.collectBytesInArray(request.body()).flatMap(new Function<byte[], SingleSource<? extends HttpResponse>>() {
+                        @Override
+                        public SingleSource<? extends HttpResponse> apply(byte[] bytes) throws Exception {
+                            return validate(new String(bytes, StandardCharsets.UTF_8), "GetXMLRootList.xml");
+                        }
+                    });
+                } else if (path.contains("xml/empty-root-list")) {
+                    return FlowableUtil.collectBytesInArray(request.body()).flatMap(new Function<byte[], SingleSource<? extends HttpResponse>>() {
+                        @Override
+                        public SingleSource<? extends HttpResponse> apply(byte[] bytes) throws Exception {
+                            return validate(new String(bytes, StandardCharsets.UTF_8), "GetXMLEmptyRootList.xml");
+                        }
+                    });
+                } else if (path.contains("xml/empty-child-element")) {
+                    return FlowableUtil.collectBytesInArray(request.body()).flatMap(new Function<byte[], SingleSource<? extends HttpResponse>>() {
+                        @Override
+                        public SingleSource<? extends HttpResponse> apply(byte[] bytes) throws Exception {
+                            return validate(new String(bytes, StandardCharsets.UTF_8), "GetXMLEmptyChildElement.xml");
                         }
                     });
                 }

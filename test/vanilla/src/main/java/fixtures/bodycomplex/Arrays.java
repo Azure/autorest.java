@@ -10,10 +10,12 @@
 
 package fixtures.bodycomplex;
 
-import com.microsoft.rest.v2.RestResponse;
+import com.microsoft.rest.v2.BodyResponse;
 import com.microsoft.rest.v2.ServiceCallback;
 import com.microsoft.rest.v2.ServiceFuture;
+import com.microsoft.rest.v2.VoidResponse;
 import fixtures.bodycomplex.models.ArrayWrapper;
+import fixtures.bodycomplex.models.ErrorException;
 import io.reactivex.Completable;
 import io.reactivex.Maybe;
 import io.reactivex.Single;
@@ -38,21 +40,21 @@ public interface Arrays {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;ArrayWrapper&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     ServiceFuture<ArrayWrapper> getValidAsync(ServiceCallback<ArrayWrapper> serviceCallback);
 
     /**
      * Get complex types with array property.
      *
-     * @return the {@link Single&lt;RestResponse&lt;Void, ArrayWrapper&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, ArrayWrapper>> getValidWithRestResponseAsync();
+    Single<BodyResponse<ArrayWrapper>> getValidWithRestResponseAsync();
 
     /**
      * Get complex types with array property.
      *
-     * @return the {@link Maybe&lt;ArrayWrapper&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     Maybe<ArrayWrapper> getValidAsync();
 
@@ -72,7 +74,7 @@ public interface Arrays {
      * @param complexBody Please put an array with 4 items: "1, 2, 3, 4", "", null, "&amp;S#$(*Y", "The quick brown fox jumps over the lazy dog".
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;Void&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     ServiceFuture<Void> putValidAsync(@NonNull ArrayWrapper complexBody, ServiceCallback<Void> serviceCallback);
 
@@ -81,16 +83,16 @@ public interface Arrays {
      *
      * @param complexBody Please put an array with 4 items: "1, 2, 3, 4", "", null, "&amp;S#$(*Y", "The quick brown fox jumps over the lazy dog".
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, Void>> putValidWithRestResponseAsync(@NonNull ArrayWrapper complexBody);
+    Single<VoidResponse> putValidWithRestResponseAsync(@NonNull ArrayWrapper complexBody);
 
     /**
      * Put complex types with array property.
      *
      * @param complexBody Please put an array with 4 items: "1, 2, 3, 4", "", null, "&amp;S#$(*Y", "The quick brown fox jumps over the lazy dog".
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link Completable} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     Completable putValidAsync(@NonNull ArrayWrapper complexBody);
 
@@ -108,21 +110,21 @@ public interface Arrays {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;ArrayWrapper&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     ServiceFuture<ArrayWrapper> getEmptyAsync(ServiceCallback<ArrayWrapper> serviceCallback);
 
     /**
      * Get complex types with array property which is empty.
      *
-     * @return the {@link Single&lt;RestResponse&lt;Void, ArrayWrapper&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, ArrayWrapper>> getEmptyWithRestResponseAsync();
+    Single<BodyResponse<ArrayWrapper>> getEmptyWithRestResponseAsync();
 
     /**
      * Get complex types with array property which is empty.
      *
-     * @return the {@link Maybe&lt;ArrayWrapper&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     Maybe<ArrayWrapper> getEmptyAsync();
 
@@ -142,7 +144,7 @@ public interface Arrays {
      * @param complexBody Please put an empty array.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;Void&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     ServiceFuture<Void> putEmptyAsync(@NonNull ArrayWrapper complexBody, ServiceCallback<Void> serviceCallback);
 
@@ -151,16 +153,16 @@ public interface Arrays {
      *
      * @param complexBody Please put an empty array.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, Void>> putEmptyWithRestResponseAsync(@NonNull ArrayWrapper complexBody);
+    Single<VoidResponse> putEmptyWithRestResponseAsync(@NonNull ArrayWrapper complexBody);
 
     /**
      * Put complex types with array property which is empty.
      *
      * @param complexBody Please put an empty array.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link Completable} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     Completable putEmptyAsync(@NonNull ArrayWrapper complexBody);
 
@@ -178,21 +180,21 @@ public interface Arrays {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;ArrayWrapper&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     ServiceFuture<ArrayWrapper> getNotProvidedAsync(ServiceCallback<ArrayWrapper> serviceCallback);
 
     /**
      * Get complex types with array property while server doesn't provide a response payload.
      *
-     * @return the {@link Single&lt;RestResponse&lt;Void, ArrayWrapper&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, ArrayWrapper>> getNotProvidedWithRestResponseAsync();
+    Single<BodyResponse<ArrayWrapper>> getNotProvidedWithRestResponseAsync();
 
     /**
      * Get complex types with array property while server doesn't provide a response payload.
      *
-     * @return the {@link Maybe&lt;ArrayWrapper&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     Maybe<ArrayWrapper> getNotProvidedAsync();
 }

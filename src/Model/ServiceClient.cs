@@ -110,9 +110,9 @@ namespace AutoRest.Java.Model
                 {
                     constructor.AddImportsTo(imports, includeImplementationImports);
                 }
-
-                RestAPI?.AddImportsTo(imports, includeImplementationImports, settings);
             }
+
+            RestAPI?.AddImportsTo(imports, includeImplementationImports, settings);
         }
     }
 }

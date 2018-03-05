@@ -10,9 +10,11 @@
 
 package fixtures.bodycomplex;
 
-import com.microsoft.rest.v2.RestResponse;
+import com.microsoft.rest.v2.BodyResponse;
 import com.microsoft.rest.v2.ServiceCallback;
 import com.microsoft.rest.v2.ServiceFuture;
+import com.microsoft.rest.v2.VoidResponse;
+import fixtures.bodycomplex.models.ErrorException;
 import fixtures.bodycomplex.models.Fish;
 import io.reactivex.Completable;
 import io.reactivex.Maybe;
@@ -38,21 +40,21 @@ public interface Polymorphicrecursives {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;Fish&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     ServiceFuture<Fish> getValidAsync(ServiceCallback<Fish> serviceCallback);
 
     /**
      * Get complex types that are polymorphic and have recursive references.
      *
-     * @return the {@link Single&lt;RestResponse&lt;Void, Fish&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, Fish>> getValidWithRestResponseAsync();
+    Single<BodyResponse<Fish>> getValidWithRestResponseAsync();
 
     /**
      * Get complex types that are polymorphic and have recursive references.
      *
-     * @return the {@link Maybe&lt;Fish&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     Maybe<Fish> getValidAsync();
 
@@ -176,7 +178,7 @@ public interface Polymorphicrecursives {
      * }.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;Void&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     ServiceFuture<Void> putValidAsync(@NonNull Fish complexBody, ServiceCallback<Void> serviceCallback);
 
@@ -237,9 +239,9 @@ public interface Polymorphicrecursives {
      *     ]
      * }.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, Void>> putValidWithRestResponseAsync(@NonNull Fish complexBody);
+    Single<VoidResponse> putValidWithRestResponseAsync(@NonNull Fish complexBody);
 
     /**
      * Put complex types that are polymorphic and have recursive references.
@@ -298,7 +300,7 @@ public interface Polymorphicrecursives {
      *     ]
      * }.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link Completable} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     Completable putValidAsync(@NonNull Fish complexBody);
 }

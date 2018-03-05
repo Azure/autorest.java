@@ -8,6 +8,10 @@ import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
+import static org.hamcrest.core.IsInstanceOf.instanceOf;
+import static org.junit.Assert.assertThat;
+import static org.junit.Assert.fail;
+
 public class DateTimeRfc1123OperationsTests {
     private static AutoRestRFC1123DateTimeTestService client;
 
@@ -25,10 +29,9 @@ public class DateTimeRfc1123OperationsTests {
     public void getInvalidDate() throws Exception {
         try {
             client.datetimerfc1123s().getInvalid();
-            Assert.assertTrue(false);
-        } catch (Exception exception) {
-            // expected
-            Assert.assertEquals(JsonMappingException.class, exception.getCause().getClass());
+            fail();
+        } catch (RuntimeException e) {
+            assertThat(e.getCause(), instanceOf(JsonMappingException.class));
         }
     }
 
@@ -44,10 +47,9 @@ public class DateTimeRfc1123OperationsTests {
     public void getUnderflowDate() throws Exception {
         try {
             client.datetimerfc1123s().getUnderflow();
-            Assert.assertTrue(false);
-        } catch (Exception exception) {
-            // expected
-            Assert.assertEquals(JsonMappingException.class, exception.getCause().getClass());
+            fail();
+        } catch (RuntimeException e) {
+            assertThat(e.getCause(), instanceOf(JsonMappingException.class));
         }
     }
 

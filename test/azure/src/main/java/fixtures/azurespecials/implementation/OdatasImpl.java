@@ -11,9 +11,9 @@
 package fixtures.azurespecials.implementation;
 
 import com.microsoft.azure.v2.AzureProxy;
-import com.microsoft.rest.v2.RestResponse;
 import com.microsoft.rest.v2.ServiceCallback;
 import com.microsoft.rest.v2.ServiceFuture;
+import com.microsoft.rest.v2.VoidResponse;
 import com.microsoft.rest.v2.annotations.ExpectedResponses;
 import com.microsoft.rest.v2.annotations.GET;
 import com.microsoft.rest.v2.annotations.HeaderParam;
@@ -59,7 +59,7 @@ public final class OdatasImpl implements Odatas {
         @GET("azurespecials/odata/filter")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<RestResponse<Void, Void>> getWithFilter(@QueryParam("$filter") String filter, @QueryParam("$top") Integer top, @QueryParam("$orderby") String orderby, @HeaderParam("accept-language") String acceptLanguage);
+        Single<VoidResponse> getWithFilter(@QueryParam("$filter") String filter, @QueryParam("$top") Integer top, @QueryParam("$orderby") String orderby, @HeaderParam("accept-language") String acceptLanguage);
     }
 
     /**
@@ -77,7 +77,7 @@ public final class OdatasImpl implements Odatas {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;Void&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     public ServiceFuture<Void> getWithFilterAsync(ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(getWithFilterAsync(), serviceCallback);
@@ -86,9 +86,9 @@ public final class OdatasImpl implements Odatas {
     /**
      * Specify filter parameter with value '$filter=id gt 5 and name eq 'foo'&amp;$orderby=id&amp;$top=10'.
      *
-     * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<Void, Void>> getWithFilterWithRestResponseAsync() {
+    public Single<VoidResponse> getWithFilterWithRestResponseAsync() {
         final String filter = null;
         final Integer top = null;
         final String orderby = null;
@@ -98,7 +98,7 @@ public final class OdatasImpl implements Odatas {
     /**
      * Specify filter parameter with value '$filter=id gt 5 and name eq 'foo'&amp;$orderby=id&amp;$top=10'.
      *
-     * @return the {@link Completable} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Completable getWithFilterAsync() {
         return getWithFilterWithRestResponseAsync()
@@ -127,7 +127,7 @@ public final class OdatasImpl implements Odatas {
      * @param orderby The orderby parameter with value id.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;Void&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     public ServiceFuture<Void> getWithFilterAsync(String filter, Integer top, String orderby, ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(getWithFilterAsync(filter, top, orderby), serviceCallback);
@@ -140,9 +140,9 @@ public final class OdatasImpl implements Odatas {
      * @param top The top parameter with value 10.
      * @param orderby The orderby parameter with value id.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<Void, Void>> getWithFilterWithRestResponseAsync(String filter, Integer top, String orderby) {
+    public Single<VoidResponse> getWithFilterWithRestResponseAsync(String filter, Integer top, String orderby) {
         return service.getWithFilter(filter, top, orderby, this.client.acceptLanguage());
     }
 
@@ -153,7 +153,7 @@ public final class OdatasImpl implements Odatas {
      * @param top The top parameter with value 10.
      * @param orderby The orderby parameter with value id.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link Completable} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Completable getWithFilterAsync(String filter, Integer top, String orderby) {
         return getWithFilterWithRestResponseAsync(filter, top, orderby)

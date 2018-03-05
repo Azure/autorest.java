@@ -10,11 +10,12 @@
 
 package fixtures.bodydatetimerfc1123.implementation;
 
+import com.microsoft.rest.v2.BodyResponse;
 import com.microsoft.rest.v2.DateTimeRfc1123;
 import com.microsoft.rest.v2.RestProxy;
-import com.microsoft.rest.v2.RestResponse;
 import com.microsoft.rest.v2.ServiceCallback;
 import com.microsoft.rest.v2.ServiceFuture;
+import com.microsoft.rest.v2.VoidResponse;
 import com.microsoft.rest.v2.annotations.BodyParam;
 import com.microsoft.rest.v2.annotations.ExpectedResponses;
 import com.microsoft.rest.v2.annotations.GET;
@@ -28,7 +29,6 @@ import io.reactivex.Completable;
 import io.reactivex.Maybe;
 import io.reactivex.Single;
 import io.reactivex.annotations.NonNull;
-import io.reactivex.functions.Function;
 import org.joda.time.DateTime;
 
 /**
@@ -66,53 +66,53 @@ public final class Datetimerfc1123sImpl implements Datetimerfc1123s {
         @ExpectedResponses({200})
         @ReturnValueWireType(DateTimeRfc1123.class)
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<RestResponse<Void, DateTime>> getNull();
+        Single<BodyResponse<DateTime>> getNull();
 
         @GET("datetimerfc1123/invalid")
         @ExpectedResponses({200})
         @ReturnValueWireType(DateTimeRfc1123.class)
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<RestResponse<Void, DateTime>> getInvalid();
+        Single<BodyResponse<DateTime>> getInvalid();
 
         @GET("datetimerfc1123/overflow")
         @ExpectedResponses({200})
         @ReturnValueWireType(DateTimeRfc1123.class)
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<RestResponse<Void, DateTime>> getOverflow();
+        Single<BodyResponse<DateTime>> getOverflow();
 
         @GET("datetimerfc1123/underflow")
         @ExpectedResponses({200})
         @ReturnValueWireType(DateTimeRfc1123.class)
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<RestResponse<Void, DateTime>> getUnderflow();
+        Single<BodyResponse<DateTime>> getUnderflow();
 
         @PUT("datetimerfc1123/max")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<RestResponse<Void, Void>> putUtcMaxDateTime(@BodyParam("application/json; charset=utf-8") DateTimeRfc1123 datetimeBody);
+        Single<VoidResponse> putUtcMaxDateTime(@BodyParam("application/json; charset=utf-8") DateTimeRfc1123 datetimeBody);
 
         @GET("datetimerfc1123/max/lowercase")
         @ExpectedResponses({200})
         @ReturnValueWireType(DateTimeRfc1123.class)
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<RestResponse<Void, DateTime>> getUtcLowercaseMaxDateTime();
+        Single<BodyResponse<DateTime>> getUtcLowercaseMaxDateTime();
 
         @GET("datetimerfc1123/max/uppercase")
         @ExpectedResponses({200})
         @ReturnValueWireType(DateTimeRfc1123.class)
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<RestResponse<Void, DateTime>> getUtcUppercaseMaxDateTime();
+        Single<BodyResponse<DateTime>> getUtcUppercaseMaxDateTime();
 
         @PUT("datetimerfc1123/min")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<RestResponse<Void, Void>> putUtcMinDateTime(@BodyParam("application/json; charset=utf-8") DateTimeRfc1123 datetimeBody);
+        Single<VoidResponse> putUtcMinDateTime(@BodyParam("application/json; charset=utf-8") DateTimeRfc1123 datetimeBody);
 
         @GET("datetimerfc1123/min")
         @ExpectedResponses({200})
         @ReturnValueWireType(DateTimeRfc1123.class)
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<RestResponse<Void, DateTime>> getUtcMinDateTime();
+        Single<BodyResponse<DateTime>> getUtcMinDateTime();
     }
 
     /**
@@ -131,7 +131,7 @@ public final class Datetimerfc1123sImpl implements Datetimerfc1123s {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;DateTime&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     public ServiceFuture<DateTime> getNullAsync(ServiceCallback<DateTime> serviceCallback) {
         return ServiceFuture.fromBody(getNullAsync(), serviceCallback);
@@ -140,29 +140,20 @@ public final class Datetimerfc1123sImpl implements Datetimerfc1123s {
     /**
      * Get null datetime value.
      *
-     * @return the {@link Single&lt;RestResponse&lt;Void, DateTime&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<Void, DateTime>> getNullWithRestResponseAsync() {
+    public Single<BodyResponse<DateTime>> getNullWithRestResponseAsync() {
         return service.getNull();
     }
 
     /**
      * Get null datetime value.
      *
-     * @return the {@link Maybe&lt;DateTime&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Maybe<DateTime> getNullAsync() {
         return getNullWithRestResponseAsync()
-            .flatMapMaybe(new Function<RestResponse<Void, DateTime>, Maybe<DateTime>>() {
-                @Override
-                public Maybe<DateTime> apply(RestResponse<Void, DateTime> restResponse) {
-                    if (restResponse.body() == null) {
-                        return Maybe.empty();
-                    } else {
-                        return Maybe.just(restResponse.body());
-                    }
-                }
-            });
+            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -181,7 +172,7 @@ public final class Datetimerfc1123sImpl implements Datetimerfc1123s {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;DateTime&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     public ServiceFuture<DateTime> getInvalidAsync(ServiceCallback<DateTime> serviceCallback) {
         return ServiceFuture.fromBody(getInvalidAsync(), serviceCallback);
@@ -190,29 +181,20 @@ public final class Datetimerfc1123sImpl implements Datetimerfc1123s {
     /**
      * Get invalid datetime value.
      *
-     * @return the {@link Single&lt;RestResponse&lt;Void, DateTime&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<Void, DateTime>> getInvalidWithRestResponseAsync() {
+    public Single<BodyResponse<DateTime>> getInvalidWithRestResponseAsync() {
         return service.getInvalid();
     }
 
     /**
      * Get invalid datetime value.
      *
-     * @return the {@link Maybe&lt;DateTime&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Maybe<DateTime> getInvalidAsync() {
         return getInvalidWithRestResponseAsync()
-            .flatMapMaybe(new Function<RestResponse<Void, DateTime>, Maybe<DateTime>>() {
-                @Override
-                public Maybe<DateTime> apply(RestResponse<Void, DateTime> restResponse) {
-                    if (restResponse.body() == null) {
-                        return Maybe.empty();
-                    } else {
-                        return Maybe.just(restResponse.body());
-                    }
-                }
-            });
+            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -231,7 +213,7 @@ public final class Datetimerfc1123sImpl implements Datetimerfc1123s {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;DateTime&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     public ServiceFuture<DateTime> getOverflowAsync(ServiceCallback<DateTime> serviceCallback) {
         return ServiceFuture.fromBody(getOverflowAsync(), serviceCallback);
@@ -240,29 +222,20 @@ public final class Datetimerfc1123sImpl implements Datetimerfc1123s {
     /**
      * Get overflow datetime value.
      *
-     * @return the {@link Single&lt;RestResponse&lt;Void, DateTime&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<Void, DateTime>> getOverflowWithRestResponseAsync() {
+    public Single<BodyResponse<DateTime>> getOverflowWithRestResponseAsync() {
         return service.getOverflow();
     }
 
     /**
      * Get overflow datetime value.
      *
-     * @return the {@link Maybe&lt;DateTime&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Maybe<DateTime> getOverflowAsync() {
         return getOverflowWithRestResponseAsync()
-            .flatMapMaybe(new Function<RestResponse<Void, DateTime>, Maybe<DateTime>>() {
-                @Override
-                public Maybe<DateTime> apply(RestResponse<Void, DateTime> restResponse) {
-                    if (restResponse.body() == null) {
-                        return Maybe.empty();
-                    } else {
-                        return Maybe.just(restResponse.body());
-                    }
-                }
-            });
+            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -281,7 +254,7 @@ public final class Datetimerfc1123sImpl implements Datetimerfc1123s {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;DateTime&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     public ServiceFuture<DateTime> getUnderflowAsync(ServiceCallback<DateTime> serviceCallback) {
         return ServiceFuture.fromBody(getUnderflowAsync(), serviceCallback);
@@ -290,29 +263,20 @@ public final class Datetimerfc1123sImpl implements Datetimerfc1123s {
     /**
      * Get underflow datetime value.
      *
-     * @return the {@link Single&lt;RestResponse&lt;Void, DateTime&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<Void, DateTime>> getUnderflowWithRestResponseAsync() {
+    public Single<BodyResponse<DateTime>> getUnderflowWithRestResponseAsync() {
         return service.getUnderflow();
     }
 
     /**
      * Get underflow datetime value.
      *
-     * @return the {@link Maybe&lt;DateTime&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Maybe<DateTime> getUnderflowAsync() {
         return getUnderflowWithRestResponseAsync()
-            .flatMapMaybe(new Function<RestResponse<Void, DateTime>, Maybe<DateTime>>() {
-                @Override
-                public Maybe<DateTime> apply(RestResponse<Void, DateTime> restResponse) {
-                    if (restResponse.body() == null) {
-                        return Maybe.empty();
-                    } else {
-                        return Maybe.just(restResponse.body());
-                    }
-                }
-            });
+            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -333,7 +297,7 @@ public final class Datetimerfc1123sImpl implements Datetimerfc1123s {
      * @param datetimeBody the DateTime value.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;Void&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     public ServiceFuture<Void> putUtcMaxDateTimeAsync(@NonNull DateTime datetimeBody, ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(putUtcMaxDateTimeAsync(datetimeBody), serviceCallback);
@@ -344,9 +308,9 @@ public final class Datetimerfc1123sImpl implements Datetimerfc1123s {
      *
      * @param datetimeBody the DateTime value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<Void, Void>> putUtcMaxDateTimeWithRestResponseAsync(@NonNull DateTime datetimeBody) {
+    public Single<VoidResponse> putUtcMaxDateTimeWithRestResponseAsync(@NonNull DateTime datetimeBody) {
         if (datetimeBody == null) {
             throw new IllegalArgumentException("Parameter datetimeBody is required and cannot be null.");
         }
@@ -359,7 +323,7 @@ public final class Datetimerfc1123sImpl implements Datetimerfc1123s {
      *
      * @param datetimeBody the DateTime value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link Completable} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Completable putUtcMaxDateTimeAsync(@NonNull DateTime datetimeBody) {
         return putUtcMaxDateTimeWithRestResponseAsync(datetimeBody)
@@ -382,7 +346,7 @@ public final class Datetimerfc1123sImpl implements Datetimerfc1123s {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;DateTime&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     public ServiceFuture<DateTime> getUtcLowercaseMaxDateTimeAsync(ServiceCallback<DateTime> serviceCallback) {
         return ServiceFuture.fromBody(getUtcLowercaseMaxDateTimeAsync(), serviceCallback);
@@ -391,29 +355,20 @@ public final class Datetimerfc1123sImpl implements Datetimerfc1123s {
     /**
      * Get max datetime value fri, 31 dec 9999 23:59:59 gmt.
      *
-     * @return the {@link Single&lt;RestResponse&lt;Void, DateTime&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<Void, DateTime>> getUtcLowercaseMaxDateTimeWithRestResponseAsync() {
+    public Single<BodyResponse<DateTime>> getUtcLowercaseMaxDateTimeWithRestResponseAsync() {
         return service.getUtcLowercaseMaxDateTime();
     }
 
     /**
      * Get max datetime value fri, 31 dec 9999 23:59:59 gmt.
      *
-     * @return the {@link Maybe&lt;DateTime&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Maybe<DateTime> getUtcLowercaseMaxDateTimeAsync() {
         return getUtcLowercaseMaxDateTimeWithRestResponseAsync()
-            .flatMapMaybe(new Function<RestResponse<Void, DateTime>, Maybe<DateTime>>() {
-                @Override
-                public Maybe<DateTime> apply(RestResponse<Void, DateTime> restResponse) {
-                    if (restResponse.body() == null) {
-                        return Maybe.empty();
-                    } else {
-                        return Maybe.just(restResponse.body());
-                    }
-                }
-            });
+            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -432,7 +387,7 @@ public final class Datetimerfc1123sImpl implements Datetimerfc1123s {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;DateTime&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     public ServiceFuture<DateTime> getUtcUppercaseMaxDateTimeAsync(ServiceCallback<DateTime> serviceCallback) {
         return ServiceFuture.fromBody(getUtcUppercaseMaxDateTimeAsync(), serviceCallback);
@@ -441,29 +396,20 @@ public final class Datetimerfc1123sImpl implements Datetimerfc1123s {
     /**
      * Get max datetime value FRI, 31 DEC 9999 23:59:59 GMT.
      *
-     * @return the {@link Single&lt;RestResponse&lt;Void, DateTime&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<Void, DateTime>> getUtcUppercaseMaxDateTimeWithRestResponseAsync() {
+    public Single<BodyResponse<DateTime>> getUtcUppercaseMaxDateTimeWithRestResponseAsync() {
         return service.getUtcUppercaseMaxDateTime();
     }
 
     /**
      * Get max datetime value FRI, 31 DEC 9999 23:59:59 GMT.
      *
-     * @return the {@link Maybe&lt;DateTime&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Maybe<DateTime> getUtcUppercaseMaxDateTimeAsync() {
         return getUtcUppercaseMaxDateTimeWithRestResponseAsync()
-            .flatMapMaybe(new Function<RestResponse<Void, DateTime>, Maybe<DateTime>>() {
-                @Override
-                public Maybe<DateTime> apply(RestResponse<Void, DateTime> restResponse) {
-                    if (restResponse.body() == null) {
-                        return Maybe.empty();
-                    } else {
-                        return Maybe.just(restResponse.body());
-                    }
-                }
-            });
+            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -484,7 +430,7 @@ public final class Datetimerfc1123sImpl implements Datetimerfc1123s {
      * @param datetimeBody the DateTime value.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;Void&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     public ServiceFuture<Void> putUtcMinDateTimeAsync(@NonNull DateTime datetimeBody, ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(putUtcMinDateTimeAsync(datetimeBody), serviceCallback);
@@ -495,9 +441,9 @@ public final class Datetimerfc1123sImpl implements Datetimerfc1123s {
      *
      * @param datetimeBody the DateTime value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<Void, Void>> putUtcMinDateTimeWithRestResponseAsync(@NonNull DateTime datetimeBody) {
+    public Single<VoidResponse> putUtcMinDateTimeWithRestResponseAsync(@NonNull DateTime datetimeBody) {
         if (datetimeBody == null) {
             throw new IllegalArgumentException("Parameter datetimeBody is required and cannot be null.");
         }
@@ -510,7 +456,7 @@ public final class Datetimerfc1123sImpl implements Datetimerfc1123s {
      *
      * @param datetimeBody the DateTime value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link Completable} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Completable putUtcMinDateTimeAsync(@NonNull DateTime datetimeBody) {
         return putUtcMinDateTimeWithRestResponseAsync(datetimeBody)
@@ -533,7 +479,7 @@ public final class Datetimerfc1123sImpl implements Datetimerfc1123s {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;DateTime&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     public ServiceFuture<DateTime> getUtcMinDateTimeAsync(ServiceCallback<DateTime> serviceCallback) {
         return ServiceFuture.fromBody(getUtcMinDateTimeAsync(), serviceCallback);
@@ -542,28 +488,19 @@ public final class Datetimerfc1123sImpl implements Datetimerfc1123s {
     /**
      * Get min datetime value Mon, 1 Jan 0001 00:00:00 GMT.
      *
-     * @return the {@link Single&lt;RestResponse&lt;Void, DateTime&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<Void, DateTime>> getUtcMinDateTimeWithRestResponseAsync() {
+    public Single<BodyResponse<DateTime>> getUtcMinDateTimeWithRestResponseAsync() {
         return service.getUtcMinDateTime();
     }
 
     /**
      * Get min datetime value Mon, 1 Jan 0001 00:00:00 GMT.
      *
-     * @return the {@link Maybe&lt;DateTime&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Maybe<DateTime> getUtcMinDateTimeAsync() {
         return getUtcMinDateTimeWithRestResponseAsync()
-            .flatMapMaybe(new Function<RestResponse<Void, DateTime>, Maybe<DateTime>>() {
-                @Override
-                public Maybe<DateTime> apply(RestResponse<Void, DateTime> restResponse) {
-                    if (restResponse.body() == null) {
-                        return Maybe.empty();
-                    } else {
-                        return Maybe.just(restResponse.body());
-                    }
-                }
-            });
+            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 }

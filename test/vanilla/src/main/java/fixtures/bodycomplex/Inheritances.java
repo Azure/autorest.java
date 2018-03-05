@@ -10,9 +10,11 @@
 
 package fixtures.bodycomplex;
 
-import com.microsoft.rest.v2.RestResponse;
+import com.microsoft.rest.v2.BodyResponse;
 import com.microsoft.rest.v2.ServiceCallback;
 import com.microsoft.rest.v2.ServiceFuture;
+import com.microsoft.rest.v2.VoidResponse;
+import fixtures.bodycomplex.models.ErrorException;
 import fixtures.bodycomplex.models.Siamese;
 import io.reactivex.Completable;
 import io.reactivex.Maybe;
@@ -38,21 +40,21 @@ public interface Inheritances {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;Siamese&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     ServiceFuture<Siamese> getValidAsync(ServiceCallback<Siamese> serviceCallback);
 
     /**
      * Get complex types that extend others.
      *
-     * @return the {@link Single&lt;RestResponse&lt;Void, Siamese&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, Siamese>> getValidWithRestResponseAsync();
+    Single<BodyResponse<Siamese>> getValidWithRestResponseAsync();
 
     /**
      * Get complex types that extend others.
      *
-     * @return the {@link Maybe&lt;Siamese&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     Maybe<Siamese> getValidAsync();
 
@@ -72,7 +74,7 @@ public interface Inheritances {
      * @param complexBody Please put a siamese with id=2, name="Siameee", color=green, breed=persion, which hates 2 dogs, the 1st one named "Potato" with id=1 and food="tomato", and the 2nd one named "Tomato" with id=-1 and food="french fries".
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;Void&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     ServiceFuture<Void> putValidAsync(@NonNull Siamese complexBody, ServiceCallback<Void> serviceCallback);
 
@@ -81,16 +83,16 @@ public interface Inheritances {
      *
      * @param complexBody Please put a siamese with id=2, name="Siameee", color=green, breed=persion, which hates 2 dogs, the 1st one named "Potato" with id=1 and food="tomato", and the 2nd one named "Tomato" with id=-1 and food="french fries".
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, Void>> putValidWithRestResponseAsync(@NonNull Siamese complexBody);
+    Single<VoidResponse> putValidWithRestResponseAsync(@NonNull Siamese complexBody);
 
     /**
      * Put complex types that extend others.
      *
      * @param complexBody Please put a siamese with id=2, name="Siameee", color=green, breed=persion, which hates 2 dogs, the 1st one named "Potato" with id=1 and food="tomato", and the 2nd one named "Tomato" with id=-1 and food="french fries".
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link Completable} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     Completable putValidAsync(@NonNull Siamese complexBody);
 }

@@ -10,9 +10,11 @@
 
 package fixtures.validation;
 
-import com.microsoft.rest.v2.RestResponse;
+import com.microsoft.rest.v2.BodyResponse;
 import com.microsoft.rest.v2.ServiceCallback;
 import com.microsoft.rest.v2.ServiceFuture;
+import com.microsoft.rest.v2.VoidResponse;
+import fixtures.validation.models.ErrorException;
 import fixtures.validation.models.Product;
 import io.reactivex.Completable;
 import io.reactivex.Maybe;
@@ -72,7 +74,7 @@ public interface AutoRestValidationTest {
      * @param id Required int multiple of 10 from 100 to 1000.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;Product&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     ServiceFuture<Product> validationOfMethodParametersAsync(@NonNull String resourceGroupName, @NonNull int id, ServiceCallback<Product> serviceCallback);
 
@@ -82,9 +84,9 @@ public interface AutoRestValidationTest {
      * @param resourceGroupName Required string between 3 and 10 chars with pattern [a-zA-Z0-9]+.
      * @param id Required int multiple of 10 from 100 to 1000.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link Single&lt;RestResponse&lt;Void, Product&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, Product>> validationOfMethodParametersWithRestResponseAsync(@NonNull String resourceGroupName, @NonNull int id);
+    Single<BodyResponse<Product>> validationOfMethodParametersWithRestResponseAsync(@NonNull String resourceGroupName, @NonNull int id);
 
     /**
      * Validates input parameters on the method. See swagger for details.
@@ -92,7 +94,7 @@ public interface AutoRestValidationTest {
      * @param resourceGroupName Required string between 3 and 10 chars with pattern [a-zA-Z0-9]+.
      * @param id Required int multiple of 10 from 100 to 1000.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link Maybe&lt;Product&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     Maybe<Product> validationOfMethodParametersAsync(@NonNull String resourceGroupName, @NonNull int id);
 
@@ -115,7 +117,7 @@ public interface AutoRestValidationTest {
      * @param id Required int multiple of 10 from 100 to 1000.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;Product&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     ServiceFuture<Product> validationOfBodyAsync(@NonNull String resourceGroupName, @NonNull int id, ServiceCallback<Product> serviceCallback);
 
@@ -125,9 +127,9 @@ public interface AutoRestValidationTest {
      * @param resourceGroupName Required string between 3 and 10 chars with pattern [a-zA-Z0-9]+.
      * @param id Required int multiple of 10 from 100 to 1000.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link Single&lt;RestResponse&lt;Void, Product&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, Product>> validationOfBodyWithRestResponseAsync(@NonNull String resourceGroupName, @NonNull int id);
+    Single<BodyResponse<Product>> validationOfBodyWithRestResponseAsync(@NonNull String resourceGroupName, @NonNull int id);
 
     /**
      * Validates body parameters on the method. See swagger for details.
@@ -135,7 +137,7 @@ public interface AutoRestValidationTest {
      * @param resourceGroupName Required string between 3 and 10 chars with pattern [a-zA-Z0-9]+.
      * @param id Required int multiple of 10 from 100 to 1000.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link Maybe&lt;Product&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     Maybe<Product> validationOfBodyAsync(@NonNull String resourceGroupName, @NonNull int id);
 
@@ -160,7 +162,7 @@ public interface AutoRestValidationTest {
      * @param body the Product value.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;Product&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     ServiceFuture<Product> validationOfBodyAsync(@NonNull String resourceGroupName, @NonNull int id, Product body, ServiceCallback<Product> serviceCallback);
 
@@ -171,9 +173,9 @@ public interface AutoRestValidationTest {
      * @param id Required int multiple of 10 from 100 to 1000.
      * @param body the Product value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link Single&lt;RestResponse&lt;Void, Product&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, Product>> validationOfBodyWithRestResponseAsync(@NonNull String resourceGroupName, @NonNull int id, Product body);
+    Single<BodyResponse<Product>> validationOfBodyWithRestResponseAsync(@NonNull String resourceGroupName, @NonNull int id, Product body);
 
     /**
      * Validates body parameters on the method. See swagger for details.
@@ -182,7 +184,7 @@ public interface AutoRestValidationTest {
      * @param id Required int multiple of 10 from 100 to 1000.
      * @param body the Product value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link Maybe&lt;Product&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     Maybe<Product> validationOfBodyAsync(@NonNull String resourceGroupName, @NonNull int id, Product body);
 
@@ -194,17 +196,17 @@ public interface AutoRestValidationTest {
     /**
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;Void&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     ServiceFuture<Void> getWithConstantInPathAsync(ServiceCallback<Void> serviceCallback);
 
     /**
-     * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, Void>> getWithConstantInPathWithRestResponseAsync();
+    Single<VoidResponse> getWithConstantInPathWithRestResponseAsync();
 
     /**
-     * @return the {@link Completable} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     Completable getWithConstantInPathAsync();
 
@@ -217,17 +219,17 @@ public interface AutoRestValidationTest {
     /**
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;Product&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     ServiceFuture<Product> postWithConstantInBodyAsync(ServiceCallback<Product> serviceCallback);
 
     /**
-     * @return the {@link Single&lt;RestResponse&lt;Void, Product&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, Product>> postWithConstantInBodyWithRestResponseAsync();
+    Single<BodyResponse<Product>> postWithConstantInBodyWithRestResponseAsync();
 
     /**
-     * @return the {@link Maybe&lt;Product&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     Maybe<Product> postWithConstantInBodyAsync();
 
@@ -243,21 +245,21 @@ public interface AutoRestValidationTest {
      * @param body the Product value.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;Product&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     ServiceFuture<Product> postWithConstantInBodyAsync(Product body, ServiceCallback<Product> serviceCallback);
 
     /**
      * @param body the Product value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link Single&lt;RestResponse&lt;Void, Product&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, Product>> postWithConstantInBodyWithRestResponseAsync(Product body);
+    Single<BodyResponse<Product>> postWithConstantInBodyWithRestResponseAsync(Product body);
 
     /**
      * @param body the Product value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link Maybe&lt;Product&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     Maybe<Product> postWithConstantInBodyAsync(Product body);
 }

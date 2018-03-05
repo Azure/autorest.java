@@ -10,8 +10,8 @@
 
 package fixtures.http.implementation;
 
+import com.microsoft.rest.v2.BodyResponse;
 import com.microsoft.rest.v2.RestProxy;
-import com.microsoft.rest.v2.RestResponse;
 import com.microsoft.rest.v2.ServiceCallback;
 import com.microsoft.rest.v2.ServiceFuture;
 import com.microsoft.rest.v2.annotations.BodyParam;
@@ -27,7 +27,6 @@ import fixtures.http.models.Error;
 import fixtures.http.models.ErrorException;
 import io.reactivex.Maybe;
 import io.reactivex.Single;
-import io.reactivex.functions.Function;
 
 /**
  * An instance of this class provides access to all the operations defined in
@@ -62,19 +61,19 @@ public final class HttpServerFailuresImpl implements HttpServerFailures {
     private interface HttpServerFailuresService {
         @HEAD("http/failure/server/501")
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<RestResponse<Void, Error>> head501();
+        Single<BodyResponse<Error>> head501();
 
         @GET("http/failure/server/501")
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<RestResponse<Void, Error>> get501();
+        Single<BodyResponse<Error>> get501();
 
         @POST("http/failure/server/505")
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<RestResponse<Void, Error>> post505(@BodyParam("application/json; charset=utf-8") Boolean booleanValue);
+        Single<BodyResponse<Error>> post505(@BodyParam("application/json; charset=utf-8") Boolean booleanValue);
 
         @DELETE("http/failure/server/505")
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<RestResponse<Void, Error>> delete505(@BodyParam("application/json; charset=utf-8") Boolean booleanValue);
+        Single<BodyResponse<Error>> delete505(@BodyParam("application/json; charset=utf-8") Boolean booleanValue);
     }
 
     /**
@@ -93,7 +92,7 @@ public final class HttpServerFailuresImpl implements HttpServerFailures {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;Error&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     public ServiceFuture<Error> head501Async(ServiceCallback<Error> serviceCallback) {
         return ServiceFuture.fromBody(head501Async(), serviceCallback);
@@ -102,29 +101,20 @@ public final class HttpServerFailuresImpl implements HttpServerFailures {
     /**
      * Return 501 status code - should be represented in the client as an error.
      *
-     * @return the {@link Single&lt;RestResponse&lt;Void, Error&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<Void, Error>> head501WithRestResponseAsync() {
+    public Single<BodyResponse<Error>> head501WithRestResponseAsync() {
         return service.head501();
     }
 
     /**
      * Return 501 status code - should be represented in the client as an error.
      *
-     * @return the {@link Maybe&lt;Error&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Maybe<Error> head501Async() {
         return head501WithRestResponseAsync()
-            .flatMapMaybe(new Function<RestResponse<Void, Error>, Maybe<Error>>() {
-                @Override
-                public Maybe<Error> apply(RestResponse<Void, Error> restResponse) {
-                    if (restResponse.body() == null) {
-                        return Maybe.empty();
-                    } else {
-                        return Maybe.just(restResponse.body());
-                    }
-                }
-            });
+            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -143,7 +133,7 @@ public final class HttpServerFailuresImpl implements HttpServerFailures {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;Error&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     public ServiceFuture<Error> get501Async(ServiceCallback<Error> serviceCallback) {
         return ServiceFuture.fromBody(get501Async(), serviceCallback);
@@ -152,29 +142,20 @@ public final class HttpServerFailuresImpl implements HttpServerFailures {
     /**
      * Return 501 status code - should be represented in the client as an error.
      *
-     * @return the {@link Single&lt;RestResponse&lt;Void, Error&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<Void, Error>> get501WithRestResponseAsync() {
+    public Single<BodyResponse<Error>> get501WithRestResponseAsync() {
         return service.get501();
     }
 
     /**
      * Return 501 status code - should be represented in the client as an error.
      *
-     * @return the {@link Maybe&lt;Error&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Maybe<Error> get501Async() {
         return get501WithRestResponseAsync()
-            .flatMapMaybe(new Function<RestResponse<Void, Error>, Maybe<Error>>() {
-                @Override
-                public Maybe<Error> apply(RestResponse<Void, Error> restResponse) {
-                    if (restResponse.body() == null) {
-                        return Maybe.empty();
-                    } else {
-                        return Maybe.just(restResponse.body());
-                    }
-                }
-            });
+            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -193,7 +174,7 @@ public final class HttpServerFailuresImpl implements HttpServerFailures {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;Error&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     public ServiceFuture<Error> post505Async(ServiceCallback<Error> serviceCallback) {
         return ServiceFuture.fromBody(post505Async(), serviceCallback);
@@ -202,9 +183,9 @@ public final class HttpServerFailuresImpl implements HttpServerFailures {
     /**
      * Return 505 status code - should be represented in the client as an error.
      *
-     * @return the {@link Single&lt;RestResponse&lt;Void, Error&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<Void, Error>> post505WithRestResponseAsync() {
+    public Single<BodyResponse<Error>> post505WithRestResponseAsync() {
         final Boolean booleanValue = null;
         return service.post505(booleanValue);
     }
@@ -212,20 +193,11 @@ public final class HttpServerFailuresImpl implements HttpServerFailures {
     /**
      * Return 505 status code - should be represented in the client as an error.
      *
-     * @return the {@link Maybe&lt;Error&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Maybe<Error> post505Async() {
         return post505WithRestResponseAsync()
-            .flatMapMaybe(new Function<RestResponse<Void, Error>, Maybe<Error>>() {
-                @Override
-                public Maybe<Error> apply(RestResponse<Void, Error> restResponse) {
-                    if (restResponse.body() == null) {
-                        return Maybe.empty();
-                    } else {
-                        return Maybe.just(restResponse.body());
-                    }
-                }
-            });
+            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -247,7 +219,7 @@ public final class HttpServerFailuresImpl implements HttpServerFailures {
      * @param booleanValue Simple boolean value true.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;Error&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     public ServiceFuture<Error> post505Async(Boolean booleanValue, ServiceCallback<Error> serviceCallback) {
         return ServiceFuture.fromBody(post505Async(booleanValue), serviceCallback);
@@ -258,9 +230,9 @@ public final class HttpServerFailuresImpl implements HttpServerFailures {
      *
      * @param booleanValue Simple boolean value true.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link Single&lt;RestResponse&lt;Void, Error&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<Void, Error>> post505WithRestResponseAsync(Boolean booleanValue) {
+    public Single<BodyResponse<Error>> post505WithRestResponseAsync(Boolean booleanValue) {
         return service.post505(booleanValue);
     }
 
@@ -269,20 +241,11 @@ public final class HttpServerFailuresImpl implements HttpServerFailures {
      *
      * @param booleanValue Simple boolean value true.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link Maybe&lt;Error&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Maybe<Error> post505Async(Boolean booleanValue) {
         return post505WithRestResponseAsync(booleanValue)
-            .flatMapMaybe(new Function<RestResponse<Void, Error>, Maybe<Error>>() {
-                @Override
-                public Maybe<Error> apply(RestResponse<Void, Error> restResponse) {
-                    if (restResponse.body() == null) {
-                        return Maybe.empty();
-                    } else {
-                        return Maybe.just(restResponse.body());
-                    }
-                }
-            });
+            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -301,7 +264,7 @@ public final class HttpServerFailuresImpl implements HttpServerFailures {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;Error&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     public ServiceFuture<Error> delete505Async(ServiceCallback<Error> serviceCallback) {
         return ServiceFuture.fromBody(delete505Async(), serviceCallback);
@@ -310,9 +273,9 @@ public final class HttpServerFailuresImpl implements HttpServerFailures {
     /**
      * Return 505 status code - should be represented in the client as an error.
      *
-     * @return the {@link Single&lt;RestResponse&lt;Void, Error&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<Void, Error>> delete505WithRestResponseAsync() {
+    public Single<BodyResponse<Error>> delete505WithRestResponseAsync() {
         final Boolean booleanValue = null;
         return service.delete505(booleanValue);
     }
@@ -320,20 +283,11 @@ public final class HttpServerFailuresImpl implements HttpServerFailures {
     /**
      * Return 505 status code - should be represented in the client as an error.
      *
-     * @return the {@link Maybe&lt;Error&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Maybe<Error> delete505Async() {
         return delete505WithRestResponseAsync()
-            .flatMapMaybe(new Function<RestResponse<Void, Error>, Maybe<Error>>() {
-                @Override
-                public Maybe<Error> apply(RestResponse<Void, Error> restResponse) {
-                    if (restResponse.body() == null) {
-                        return Maybe.empty();
-                    } else {
-                        return Maybe.just(restResponse.body());
-                    }
-                }
-            });
+            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -355,7 +309,7 @@ public final class HttpServerFailuresImpl implements HttpServerFailures {
      * @param booleanValue Simple boolean value true.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;Error&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     public ServiceFuture<Error> delete505Async(Boolean booleanValue, ServiceCallback<Error> serviceCallback) {
         return ServiceFuture.fromBody(delete505Async(booleanValue), serviceCallback);
@@ -366,9 +320,9 @@ public final class HttpServerFailuresImpl implements HttpServerFailures {
      *
      * @param booleanValue Simple boolean value true.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link Single&lt;RestResponse&lt;Void, Error&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<Void, Error>> delete505WithRestResponseAsync(Boolean booleanValue) {
+    public Single<BodyResponse<Error>> delete505WithRestResponseAsync(Boolean booleanValue) {
         return service.delete505(booleanValue);
     }
 
@@ -377,19 +331,10 @@ public final class HttpServerFailuresImpl implements HttpServerFailures {
      *
      * @param booleanValue Simple boolean value true.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link Maybe&lt;Error&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Maybe<Error> delete505Async(Boolean booleanValue) {
         return delete505WithRestResponseAsync(booleanValue)
-            .flatMapMaybe(new Function<RestResponse<Void, Error>, Maybe<Error>>() {
-                @Override
-                public Maybe<Error> apply(RestResponse<Void, Error> restResponse) {
-                    if (restResponse.body() == null) {
-                        return Maybe.empty();
-                    } else {
-                        return Maybe.just(restResponse.body());
-                    }
-                }
-            });
+            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 }

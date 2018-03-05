@@ -12,9 +12,9 @@ package fixtures.azurespecials.implementation;
 
 import com.microsoft.azure.v2.AzureProxy;
 import com.microsoft.azure.v2.CloudException;
-import com.microsoft.rest.v2.RestResponse;
 import com.microsoft.rest.v2.ServiceCallback;
 import com.microsoft.rest.v2.ServiceFuture;
+import com.microsoft.rest.v2.VoidResponse;
 import com.microsoft.rest.v2.annotations.ExpectedResponses;
 import com.microsoft.rest.v2.annotations.GET;
 import com.microsoft.rest.v2.annotations.HeaderParam;
@@ -60,12 +60,12 @@ public final class XMsClientRequestIdsImpl implements XMsClientRequestIds {
         @GET("azurespecials/overwrite/x-ms-client-request-id/method/")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(CloudException.class)
-        Single<RestResponse<Void, Void>> get(@HeaderParam("accept-language") String acceptLanguage);
+        Single<VoidResponse> get(@HeaderParam("accept-language") String acceptLanguage);
 
         @GET("azurespecials/overwrite/x-ms-client-request-id/via-param/method/")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<RestResponse<Void, Void>> paramGet(@HeaderParam("x-ms-client-request-id") String xMsClientRequestId, @HeaderParam("accept-language") String acceptLanguage);
+        Single<VoidResponse> paramGet(@HeaderParam("x-ms-client-request-id") String xMsClientRequestId, @HeaderParam("accept-language") String acceptLanguage);
     }
 
     /**
@@ -83,7 +83,7 @@ public final class XMsClientRequestIdsImpl implements XMsClientRequestIds {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;Void&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     public ServiceFuture<Void> getAsync(ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(getAsync(), serviceCallback);
@@ -92,16 +92,16 @@ public final class XMsClientRequestIdsImpl implements XMsClientRequestIds {
     /**
      * Get method that overwrites x-ms-client-request header with value 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0.
      *
-     * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<Void, Void>> getWithRestResponseAsync() {
+    public Single<VoidResponse> getWithRestResponseAsync() {
         return service.get(this.client.acceptLanguage());
     }
 
     /**
      * Get method that overwrites x-ms-client-request header with value 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0.
      *
-     * @return the {@link Completable} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Completable getAsync() {
         return getWithRestResponseAsync()
@@ -126,7 +126,7 @@ public final class XMsClientRequestIdsImpl implements XMsClientRequestIds {
      * @param xMsClientRequestId This should appear as a method parameter, use value '9C4D50EE-2D56-4CD3-8152-34347DC9F2B0'.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;Void&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     public ServiceFuture<Void> paramGetAsync(@NonNull String xMsClientRequestId, ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(paramGetAsync(xMsClientRequestId), serviceCallback);
@@ -137,9 +137,9 @@ public final class XMsClientRequestIdsImpl implements XMsClientRequestIds {
      *
      * @param xMsClientRequestId This should appear as a method parameter, use value '9C4D50EE-2D56-4CD3-8152-34347DC9F2B0'.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<Void, Void>> paramGetWithRestResponseAsync(@NonNull String xMsClientRequestId) {
+    public Single<VoidResponse> paramGetWithRestResponseAsync(@NonNull String xMsClientRequestId) {
         if (xMsClientRequestId == null) {
             throw new IllegalArgumentException("Parameter xMsClientRequestId is required and cannot be null.");
         }
@@ -151,7 +151,7 @@ public final class XMsClientRequestIdsImpl implements XMsClientRequestIds {
      *
      * @param xMsClientRequestId This should appear as a method parameter, use value '9C4D50EE-2D56-4CD3-8152-34347DC9F2B0'.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link Completable} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Completable paramGetAsync(@NonNull String xMsClientRequestId) {
         return paramGetWithRestResponseAsync(xMsClientRequestId)

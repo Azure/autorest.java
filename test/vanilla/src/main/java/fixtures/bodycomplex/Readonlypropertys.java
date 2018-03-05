@@ -10,9 +10,11 @@
 
 package fixtures.bodycomplex;
 
-import com.microsoft.rest.v2.RestResponse;
+import com.microsoft.rest.v2.BodyResponse;
 import com.microsoft.rest.v2.ServiceCallback;
 import com.microsoft.rest.v2.ServiceFuture;
+import com.microsoft.rest.v2.VoidResponse;
+import fixtures.bodycomplex.models.ErrorException;
 import fixtures.bodycomplex.models.ReadonlyObj;
 import io.reactivex.Completable;
 import io.reactivex.Maybe;
@@ -38,21 +40,21 @@ public interface Readonlypropertys {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;ReadonlyObj&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     ServiceFuture<ReadonlyObj> getValidAsync(ServiceCallback<ReadonlyObj> serviceCallback);
 
     /**
      * Get complex types that have readonly properties.
      *
-     * @return the {@link Single&lt;RestResponse&lt;Void, ReadonlyObj&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, ReadonlyObj>> getValidWithRestResponseAsync();
+    Single<BodyResponse<ReadonlyObj>> getValidWithRestResponseAsync();
 
     /**
      * Get complex types that have readonly properties.
      *
-     * @return the {@link Maybe&lt;ReadonlyObj&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     Maybe<ReadonlyObj> getValidAsync();
 
@@ -72,7 +74,7 @@ public interface Readonlypropertys {
      * @param complexBody the ReadonlyObj value.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;Void&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     ServiceFuture<Void> putValidAsync(@NonNull ReadonlyObj complexBody, ServiceCallback<Void> serviceCallback);
 
@@ -81,16 +83,16 @@ public interface Readonlypropertys {
      *
      * @param complexBody the ReadonlyObj value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, Void>> putValidWithRestResponseAsync(@NonNull ReadonlyObj complexBody);
+    Single<VoidResponse> putValidWithRestResponseAsync(@NonNull ReadonlyObj complexBody);
 
     /**
      * Put complex types that have readonly properties.
      *
      * @param complexBody the ReadonlyObj value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link Completable} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     Completable putValidAsync(@NonNull ReadonlyObj complexBody);
 }

@@ -10,9 +10,10 @@
 
 package fixtures.azurespecials;
 
-import com.microsoft.rest.v2.RestResponse;
 import com.microsoft.rest.v2.ServiceCallback;
 import com.microsoft.rest.v2.ServiceFuture;
+import com.microsoft.rest.v2.VoidResponse;
+import fixtures.azurespecials.models.ErrorException;
 import io.reactivex.Completable;
 import io.reactivex.Single;
 
@@ -34,21 +35,21 @@ public interface Odatas {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;Void&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     ServiceFuture<Void> getWithFilterAsync(ServiceCallback<Void> serviceCallback);
 
     /**
      * Specify filter parameter with value '$filter=id gt 5 and name eq 'foo'&amp;$orderby=id&amp;$top=10'.
      *
-     * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, Void>> getWithFilterWithRestResponseAsync();
+    Single<VoidResponse> getWithFilterWithRestResponseAsync();
 
     /**
      * Specify filter parameter with value '$filter=id gt 5 and name eq 'foo'&amp;$orderby=id&amp;$top=10'.
      *
-     * @return the {@link Completable} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     Completable getWithFilterAsync();
 
@@ -72,7 +73,7 @@ public interface Odatas {
      * @param orderby The orderby parameter with value id.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;Void&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     ServiceFuture<Void> getWithFilterAsync(String filter, Integer top, String orderby, ServiceCallback<Void> serviceCallback);
 
@@ -83,9 +84,9 @@ public interface Odatas {
      * @param top The top parameter with value 10.
      * @param orderby The orderby parameter with value id.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, Void>> getWithFilterWithRestResponseAsync(String filter, Integer top, String orderby);
+    Single<VoidResponse> getWithFilterWithRestResponseAsync(String filter, Integer top, String orderby);
 
     /**
      * Specify filter parameter with value '$filter=id gt 5 and name eq 'foo'&amp;$orderby=id&amp;$top=10'.
@@ -94,7 +95,7 @@ public interface Odatas {
      * @param top The top parameter with value 10.
      * @param orderby The orderby parameter with value id.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link Completable} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     Completable getWithFilterAsync(String filter, Integer top, String orderby);
 }

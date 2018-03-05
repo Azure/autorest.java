@@ -10,9 +10,10 @@
 
 package fixtures.url;
 
-import com.microsoft.rest.v2.RestResponse;
 import com.microsoft.rest.v2.ServiceCallback;
 import com.microsoft.rest.v2.ServiceFuture;
+import com.microsoft.rest.v2.VoidResponse;
+import fixtures.url.models.ErrorException;
 import fixtures.url.models.UriColor;
 import io.reactivex.Completable;
 import io.reactivex.Single;
@@ -38,21 +39,21 @@ public interface Queries {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;Void&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     ServiceFuture<Void> getBooleanTrueAsync(ServiceCallback<Void> serviceCallback);
 
     /**
      * Get true Boolean value on path.
      *
-     * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, Void>> getBooleanTrueWithRestResponseAsync();
+    Single<VoidResponse> getBooleanTrueWithRestResponseAsync();
 
     /**
      * Get true Boolean value on path.
      *
-     * @return the {@link Completable} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     Completable getBooleanTrueAsync();
 
@@ -69,21 +70,21 @@ public interface Queries {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;Void&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     ServiceFuture<Void> getBooleanFalseAsync(ServiceCallback<Void> serviceCallback);
 
     /**
      * Get false Boolean value on path.
      *
-     * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, Void>> getBooleanFalseWithRestResponseAsync();
+    Single<VoidResponse> getBooleanFalseWithRestResponseAsync();
 
     /**
      * Get false Boolean value on path.
      *
-     * @return the {@link Completable} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     Completable getBooleanFalseAsync();
 
@@ -100,21 +101,21 @@ public interface Queries {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;Void&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     ServiceFuture<Void> getBooleanNullAsync(ServiceCallback<Void> serviceCallback);
 
     /**
      * Get null Boolean value on query (query string should be absent).
      *
-     * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, Void>> getBooleanNullWithRestResponseAsync();
+    Single<VoidResponse> getBooleanNullWithRestResponseAsync();
 
     /**
      * Get null Boolean value on query (query string should be absent).
      *
-     * @return the {@link Completable} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     Completable getBooleanNullAsync();
 
@@ -134,7 +135,7 @@ public interface Queries {
      * @param boolQuery null boolean value.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;Void&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     ServiceFuture<Void> getBooleanNullAsync(Boolean boolQuery, ServiceCallback<Void> serviceCallback);
 
@@ -143,16 +144,16 @@ public interface Queries {
      *
      * @param boolQuery null boolean value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, Void>> getBooleanNullWithRestResponseAsync(Boolean boolQuery);
+    Single<VoidResponse> getBooleanNullWithRestResponseAsync(Boolean boolQuery);
 
     /**
      * Get null Boolean value on query (query string should be absent).
      *
      * @param boolQuery null boolean value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link Completable} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     Completable getBooleanNullAsync(Boolean boolQuery);
 
@@ -169,21 +170,21 @@ public interface Queries {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;Void&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     ServiceFuture<Void> getIntOneMillionAsync(ServiceCallback<Void> serviceCallback);
 
     /**
      * Get '1000000' integer value.
      *
-     * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, Void>> getIntOneMillionWithRestResponseAsync();
+    Single<VoidResponse> getIntOneMillionWithRestResponseAsync();
 
     /**
      * Get '1000000' integer value.
      *
-     * @return the {@link Completable} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     Completable getIntOneMillionAsync();
 
@@ -200,21 +201,21 @@ public interface Queries {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;Void&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     ServiceFuture<Void> getIntNegativeOneMillionAsync(ServiceCallback<Void> serviceCallback);
 
     /**
      * Get '-1000000' integer value.
      *
-     * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, Void>> getIntNegativeOneMillionWithRestResponseAsync();
+    Single<VoidResponse> getIntNegativeOneMillionWithRestResponseAsync();
 
     /**
      * Get '-1000000' integer value.
      *
-     * @return the {@link Completable} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     Completable getIntNegativeOneMillionAsync();
 
@@ -231,21 +232,21 @@ public interface Queries {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;Void&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     ServiceFuture<Void> getIntNullAsync(ServiceCallback<Void> serviceCallback);
 
     /**
      * Get null integer value (no query parameter).
      *
-     * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, Void>> getIntNullWithRestResponseAsync();
+    Single<VoidResponse> getIntNullWithRestResponseAsync();
 
     /**
      * Get null integer value (no query parameter).
      *
-     * @return the {@link Completable} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     Completable getIntNullAsync();
 
@@ -265,7 +266,7 @@ public interface Queries {
      * @param intQuery null integer value.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;Void&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     ServiceFuture<Void> getIntNullAsync(Integer intQuery, ServiceCallback<Void> serviceCallback);
 
@@ -274,16 +275,16 @@ public interface Queries {
      *
      * @param intQuery null integer value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, Void>> getIntNullWithRestResponseAsync(Integer intQuery);
+    Single<VoidResponse> getIntNullWithRestResponseAsync(Integer intQuery);
 
     /**
      * Get null integer value (no query parameter).
      *
      * @param intQuery null integer value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link Completable} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     Completable getIntNullAsync(Integer intQuery);
 
@@ -300,21 +301,21 @@ public interface Queries {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;Void&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     ServiceFuture<Void> getTenBillionAsync(ServiceCallback<Void> serviceCallback);
 
     /**
      * Get '10000000000' 64 bit integer value.
      *
-     * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, Void>> getTenBillionWithRestResponseAsync();
+    Single<VoidResponse> getTenBillionWithRestResponseAsync();
 
     /**
      * Get '10000000000' 64 bit integer value.
      *
-     * @return the {@link Completable} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     Completable getTenBillionAsync();
 
@@ -331,21 +332,21 @@ public interface Queries {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;Void&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     ServiceFuture<Void> getNegativeTenBillionAsync(ServiceCallback<Void> serviceCallback);
 
     /**
      * Get '-10000000000' 64 bit integer value.
      *
-     * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, Void>> getNegativeTenBillionWithRestResponseAsync();
+    Single<VoidResponse> getNegativeTenBillionWithRestResponseAsync();
 
     /**
      * Get '-10000000000' 64 bit integer value.
      *
-     * @return the {@link Completable} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     Completable getNegativeTenBillionAsync();
 
@@ -362,21 +363,21 @@ public interface Queries {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;Void&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     ServiceFuture<Void> getLongNullAsync(ServiceCallback<Void> serviceCallback);
 
     /**
      * Get 'null 64 bit integer value (no query param in uri).
      *
-     * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, Void>> getLongNullWithRestResponseAsync();
+    Single<VoidResponse> getLongNullWithRestResponseAsync();
 
     /**
      * Get 'null 64 bit integer value (no query param in uri).
      *
-     * @return the {@link Completable} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     Completable getLongNullAsync();
 
@@ -396,7 +397,7 @@ public interface Queries {
      * @param longQuery null 64 bit integer value.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;Void&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     ServiceFuture<Void> getLongNullAsync(Long longQuery, ServiceCallback<Void> serviceCallback);
 
@@ -405,16 +406,16 @@ public interface Queries {
      *
      * @param longQuery null 64 bit integer value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, Void>> getLongNullWithRestResponseAsync(Long longQuery);
+    Single<VoidResponse> getLongNullWithRestResponseAsync(Long longQuery);
 
     /**
      * Get 'null 64 bit integer value (no query param in uri).
      *
      * @param longQuery null 64 bit integer value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link Completable} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     Completable getLongNullAsync(Long longQuery);
 
@@ -431,21 +432,21 @@ public interface Queries {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;Void&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     ServiceFuture<Void> floatScientificPositiveAsync(ServiceCallback<Void> serviceCallback);
 
     /**
      * Get '1.034E+20' numeric value.
      *
-     * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, Void>> floatScientificPositiveWithRestResponseAsync();
+    Single<VoidResponse> floatScientificPositiveWithRestResponseAsync();
 
     /**
      * Get '1.034E+20' numeric value.
      *
-     * @return the {@link Completable} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     Completable floatScientificPositiveAsync();
 
@@ -462,21 +463,21 @@ public interface Queries {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;Void&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     ServiceFuture<Void> floatScientificNegativeAsync(ServiceCallback<Void> serviceCallback);
 
     /**
      * Get '-1.034E-20' numeric value.
      *
-     * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, Void>> floatScientificNegativeWithRestResponseAsync();
+    Single<VoidResponse> floatScientificNegativeWithRestResponseAsync();
 
     /**
      * Get '-1.034E-20' numeric value.
      *
-     * @return the {@link Completable} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     Completable floatScientificNegativeAsync();
 
@@ -493,21 +494,21 @@ public interface Queries {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;Void&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     ServiceFuture<Void> floatNullAsync(ServiceCallback<Void> serviceCallback);
 
     /**
      * Get null numeric value (no query parameter).
      *
-     * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, Void>> floatNullWithRestResponseAsync();
+    Single<VoidResponse> floatNullWithRestResponseAsync();
 
     /**
      * Get null numeric value (no query parameter).
      *
-     * @return the {@link Completable} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     Completable floatNullAsync();
 
@@ -527,7 +528,7 @@ public interface Queries {
      * @param floatQuery null numeric value.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;Void&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     ServiceFuture<Void> floatNullAsync(Double floatQuery, ServiceCallback<Void> serviceCallback);
 
@@ -536,16 +537,16 @@ public interface Queries {
      *
      * @param floatQuery null numeric value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, Void>> floatNullWithRestResponseAsync(Double floatQuery);
+    Single<VoidResponse> floatNullWithRestResponseAsync(Double floatQuery);
 
     /**
      * Get null numeric value (no query parameter).
      *
      * @param floatQuery null numeric value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link Completable} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     Completable floatNullAsync(Double floatQuery);
 
@@ -562,21 +563,21 @@ public interface Queries {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;Void&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     ServiceFuture<Void> doubleDecimalPositiveAsync(ServiceCallback<Void> serviceCallback);
 
     /**
      * Get '9999999.999' numeric value.
      *
-     * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, Void>> doubleDecimalPositiveWithRestResponseAsync();
+    Single<VoidResponse> doubleDecimalPositiveWithRestResponseAsync();
 
     /**
      * Get '9999999.999' numeric value.
      *
-     * @return the {@link Completable} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     Completable doubleDecimalPositiveAsync();
 
@@ -593,21 +594,21 @@ public interface Queries {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;Void&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     ServiceFuture<Void> doubleDecimalNegativeAsync(ServiceCallback<Void> serviceCallback);
 
     /**
      * Get '-9999999.999' numeric value.
      *
-     * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, Void>> doubleDecimalNegativeWithRestResponseAsync();
+    Single<VoidResponse> doubleDecimalNegativeWithRestResponseAsync();
 
     /**
      * Get '-9999999.999' numeric value.
      *
-     * @return the {@link Completable} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     Completable doubleDecimalNegativeAsync();
 
@@ -624,21 +625,21 @@ public interface Queries {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;Void&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     ServiceFuture<Void> doubleNullAsync(ServiceCallback<Void> serviceCallback);
 
     /**
      * Get null numeric value (no query parameter).
      *
-     * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, Void>> doubleNullWithRestResponseAsync();
+    Single<VoidResponse> doubleNullWithRestResponseAsync();
 
     /**
      * Get null numeric value (no query parameter).
      *
-     * @return the {@link Completable} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     Completable doubleNullAsync();
 
@@ -658,7 +659,7 @@ public interface Queries {
      * @param doubleQuery null numeric value.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;Void&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     ServiceFuture<Void> doubleNullAsync(Double doubleQuery, ServiceCallback<Void> serviceCallback);
 
@@ -667,16 +668,16 @@ public interface Queries {
      *
      * @param doubleQuery null numeric value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, Void>> doubleNullWithRestResponseAsync(Double doubleQuery);
+    Single<VoidResponse> doubleNullWithRestResponseAsync(Double doubleQuery);
 
     /**
      * Get null numeric value (no query parameter).
      *
      * @param doubleQuery null numeric value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link Completable} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     Completable doubleNullAsync(Double doubleQuery);
 
@@ -693,21 +694,21 @@ public interface Queries {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;Void&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     ServiceFuture<Void> stringUnicodeAsync(ServiceCallback<Void> serviceCallback);
 
     /**
      * Get '啊齄丂狛狜隣郎隣兀﨩' multi-byte string value.
      *
-     * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, Void>> stringUnicodeWithRestResponseAsync();
+    Single<VoidResponse> stringUnicodeWithRestResponseAsync();
 
     /**
      * Get '啊齄丂狛狜隣郎隣兀﨩' multi-byte string value.
      *
-     * @return the {@link Completable} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     Completable stringUnicodeAsync();
 
@@ -724,21 +725,21 @@ public interface Queries {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;Void&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     ServiceFuture<Void> stringUrlEncodedAsync(ServiceCallback<Void> serviceCallback);
 
     /**
      * Get 'begin!*'();:@ &amp;=+$,/?#[]end.
      *
-     * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, Void>> stringUrlEncodedWithRestResponseAsync();
+    Single<VoidResponse> stringUrlEncodedWithRestResponseAsync();
 
     /**
      * Get 'begin!*'();:@ &amp;=+$,/?#[]end.
      *
-     * @return the {@link Completable} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     Completable stringUrlEncodedAsync();
 
@@ -755,21 +756,21 @@ public interface Queries {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;Void&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     ServiceFuture<Void> stringEmptyAsync(ServiceCallback<Void> serviceCallback);
 
     /**
      * Get ''.
      *
-     * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, Void>> stringEmptyWithRestResponseAsync();
+    Single<VoidResponse> stringEmptyWithRestResponseAsync();
 
     /**
      * Get ''.
      *
-     * @return the {@link Completable} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     Completable stringEmptyAsync();
 
@@ -786,21 +787,21 @@ public interface Queries {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;Void&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     ServiceFuture<Void> stringNullAsync(ServiceCallback<Void> serviceCallback);
 
     /**
      * Get null (no query parameter in url).
      *
-     * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, Void>> stringNullWithRestResponseAsync();
+    Single<VoidResponse> stringNullWithRestResponseAsync();
 
     /**
      * Get null (no query parameter in url).
      *
-     * @return the {@link Completable} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     Completable stringNullAsync();
 
@@ -820,7 +821,7 @@ public interface Queries {
      * @param stringQuery null string value.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;Void&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     ServiceFuture<Void> stringNullAsync(String stringQuery, ServiceCallback<Void> serviceCallback);
 
@@ -829,16 +830,16 @@ public interface Queries {
      *
      * @param stringQuery null string value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, Void>> stringNullWithRestResponseAsync(String stringQuery);
+    Single<VoidResponse> stringNullWithRestResponseAsync(String stringQuery);
 
     /**
      * Get null (no query parameter in url).
      *
      * @param stringQuery null string value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link Completable} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     Completable stringNullAsync(String stringQuery);
 
@@ -855,21 +856,21 @@ public interface Queries {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;Void&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     ServiceFuture<Void> enumValidAsync(ServiceCallback<Void> serviceCallback);
 
     /**
      * Get using uri with query parameter 'green color'.
      *
-     * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, Void>> enumValidWithRestResponseAsync();
+    Single<VoidResponse> enumValidWithRestResponseAsync();
 
     /**
      * Get using uri with query parameter 'green color'.
      *
-     * @return the {@link Completable} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     Completable enumValidAsync();
 
@@ -889,7 +890,7 @@ public interface Queries {
      * @param enumQuery 'green color' enum value. Possible values include: 'red color', 'green color', 'blue color'.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;Void&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     ServiceFuture<Void> enumValidAsync(UriColor enumQuery, ServiceCallback<Void> serviceCallback);
 
@@ -898,16 +899,16 @@ public interface Queries {
      *
      * @param enumQuery 'green color' enum value. Possible values include: 'red color', 'green color', 'blue color'.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, Void>> enumValidWithRestResponseAsync(UriColor enumQuery);
+    Single<VoidResponse> enumValidWithRestResponseAsync(UriColor enumQuery);
 
     /**
      * Get using uri with query parameter 'green color'.
      *
      * @param enumQuery 'green color' enum value. Possible values include: 'red color', 'green color', 'blue color'.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link Completable} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     Completable enumValidAsync(UriColor enumQuery);
 
@@ -924,21 +925,21 @@ public interface Queries {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;Void&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     ServiceFuture<Void> enumNullAsync(ServiceCallback<Void> serviceCallback);
 
     /**
      * Get null (no query parameter in url).
      *
-     * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, Void>> enumNullWithRestResponseAsync();
+    Single<VoidResponse> enumNullWithRestResponseAsync();
 
     /**
      * Get null (no query parameter in url).
      *
-     * @return the {@link Completable} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     Completable enumNullAsync();
 
@@ -958,7 +959,7 @@ public interface Queries {
      * @param enumQuery null string value. Possible values include: 'red color', 'green color', 'blue color'.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;Void&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     ServiceFuture<Void> enumNullAsync(UriColor enumQuery, ServiceCallback<Void> serviceCallback);
 
@@ -967,16 +968,16 @@ public interface Queries {
      *
      * @param enumQuery null string value. Possible values include: 'red color', 'green color', 'blue color'.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, Void>> enumNullWithRestResponseAsync(UriColor enumQuery);
+    Single<VoidResponse> enumNullWithRestResponseAsync(UriColor enumQuery);
 
     /**
      * Get null (no query parameter in url).
      *
      * @param enumQuery null string value. Possible values include: 'red color', 'green color', 'blue color'.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link Completable} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     Completable enumNullAsync(UriColor enumQuery);
 
@@ -993,21 +994,21 @@ public interface Queries {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;Void&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     ServiceFuture<Void> byteMultiByteAsync(ServiceCallback<Void> serviceCallback);
 
     /**
      * Get '啊齄丂狛狜隣郎隣兀﨩' multibyte value as utf-8 encoded byte array.
      *
-     * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, Void>> byteMultiByteWithRestResponseAsync();
+    Single<VoidResponse> byteMultiByteWithRestResponseAsync();
 
     /**
      * Get '啊齄丂狛狜隣郎隣兀﨩' multibyte value as utf-8 encoded byte array.
      *
-     * @return the {@link Completable} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     Completable byteMultiByteAsync();
 
@@ -1027,7 +1028,7 @@ public interface Queries {
      * @param byteQuery '啊齄丂狛狜隣郎隣兀﨩' multibyte value as utf-8 encoded byte array.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;Void&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     ServiceFuture<Void> byteMultiByteAsync(byte[] byteQuery, ServiceCallback<Void> serviceCallback);
 
@@ -1036,16 +1037,16 @@ public interface Queries {
      *
      * @param byteQuery '啊齄丂狛狜隣郎隣兀﨩' multibyte value as utf-8 encoded byte array.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, Void>> byteMultiByteWithRestResponseAsync(byte[] byteQuery);
+    Single<VoidResponse> byteMultiByteWithRestResponseAsync(byte[] byteQuery);
 
     /**
      * Get '啊齄丂狛狜隣郎隣兀﨩' multibyte value as utf-8 encoded byte array.
      *
      * @param byteQuery '啊齄丂狛狜隣郎隣兀﨩' multibyte value as utf-8 encoded byte array.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link Completable} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     Completable byteMultiByteAsync(byte[] byteQuery);
 
@@ -1062,21 +1063,21 @@ public interface Queries {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;Void&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     ServiceFuture<Void> byteEmptyAsync(ServiceCallback<Void> serviceCallback);
 
     /**
      * Get '' as byte array.
      *
-     * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, Void>> byteEmptyWithRestResponseAsync();
+    Single<VoidResponse> byteEmptyWithRestResponseAsync();
 
     /**
      * Get '' as byte array.
      *
-     * @return the {@link Completable} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     Completable byteEmptyAsync();
 
@@ -1093,21 +1094,21 @@ public interface Queries {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;Void&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     ServiceFuture<Void> byteNullAsync(ServiceCallback<Void> serviceCallback);
 
     /**
      * Get null as byte array (no query parameters in uri).
      *
-     * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, Void>> byteNullWithRestResponseAsync();
+    Single<VoidResponse> byteNullWithRestResponseAsync();
 
     /**
      * Get null as byte array (no query parameters in uri).
      *
-     * @return the {@link Completable} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     Completable byteNullAsync();
 
@@ -1127,7 +1128,7 @@ public interface Queries {
      * @param byteQuery null as byte array (no query parameters in uri).
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;Void&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     ServiceFuture<Void> byteNullAsync(byte[] byteQuery, ServiceCallback<Void> serviceCallback);
 
@@ -1136,16 +1137,16 @@ public interface Queries {
      *
      * @param byteQuery null as byte array (no query parameters in uri).
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, Void>> byteNullWithRestResponseAsync(byte[] byteQuery);
+    Single<VoidResponse> byteNullWithRestResponseAsync(byte[] byteQuery);
 
     /**
      * Get null as byte array (no query parameters in uri).
      *
      * @param byteQuery null as byte array (no query parameters in uri).
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link Completable} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     Completable byteNullAsync(byte[] byteQuery);
 
@@ -1162,21 +1163,21 @@ public interface Queries {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;Void&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     ServiceFuture<Void> dateValidAsync(ServiceCallback<Void> serviceCallback);
 
     /**
      * Get '2012-01-01' as date.
      *
-     * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, Void>> dateValidWithRestResponseAsync();
+    Single<VoidResponse> dateValidWithRestResponseAsync();
 
     /**
      * Get '2012-01-01' as date.
      *
-     * @return the {@link Completable} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     Completable dateValidAsync();
 
@@ -1193,21 +1194,21 @@ public interface Queries {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;Void&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     ServiceFuture<Void> dateNullAsync(ServiceCallback<Void> serviceCallback);
 
     /**
      * Get null as date - this should result in no query parameters in uri.
      *
-     * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, Void>> dateNullWithRestResponseAsync();
+    Single<VoidResponse> dateNullWithRestResponseAsync();
 
     /**
      * Get null as date - this should result in no query parameters in uri.
      *
-     * @return the {@link Completable} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     Completable dateNullAsync();
 
@@ -1227,7 +1228,7 @@ public interface Queries {
      * @param dateQuery null as date (no query parameters in uri).
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;Void&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     ServiceFuture<Void> dateNullAsync(LocalDate dateQuery, ServiceCallback<Void> serviceCallback);
 
@@ -1236,16 +1237,16 @@ public interface Queries {
      *
      * @param dateQuery null as date (no query parameters in uri).
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, Void>> dateNullWithRestResponseAsync(LocalDate dateQuery);
+    Single<VoidResponse> dateNullWithRestResponseAsync(LocalDate dateQuery);
 
     /**
      * Get null as date - this should result in no query parameters in uri.
      *
      * @param dateQuery null as date (no query parameters in uri).
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link Completable} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     Completable dateNullAsync(LocalDate dateQuery);
 
@@ -1262,21 +1263,21 @@ public interface Queries {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;Void&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     ServiceFuture<Void> dateTimeValidAsync(ServiceCallback<Void> serviceCallback);
 
     /**
      * Get '2012-01-01T01:01:01Z' as date-time.
      *
-     * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, Void>> dateTimeValidWithRestResponseAsync();
+    Single<VoidResponse> dateTimeValidWithRestResponseAsync();
 
     /**
      * Get '2012-01-01T01:01:01Z' as date-time.
      *
-     * @return the {@link Completable} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     Completable dateTimeValidAsync();
 
@@ -1293,21 +1294,21 @@ public interface Queries {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;Void&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     ServiceFuture<Void> dateTimeNullAsync(ServiceCallback<Void> serviceCallback);
 
     /**
      * Get null as date-time, should result in no query parameters in uri.
      *
-     * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, Void>> dateTimeNullWithRestResponseAsync();
+    Single<VoidResponse> dateTimeNullWithRestResponseAsync();
 
     /**
      * Get null as date-time, should result in no query parameters in uri.
      *
-     * @return the {@link Completable} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     Completable dateTimeNullAsync();
 
@@ -1327,7 +1328,7 @@ public interface Queries {
      * @param dateTimeQuery null as date-time (no query parameters).
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;Void&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     ServiceFuture<Void> dateTimeNullAsync(DateTime dateTimeQuery, ServiceCallback<Void> serviceCallback);
 
@@ -1336,16 +1337,16 @@ public interface Queries {
      *
      * @param dateTimeQuery null as date-time (no query parameters).
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, Void>> dateTimeNullWithRestResponseAsync(DateTime dateTimeQuery);
+    Single<VoidResponse> dateTimeNullWithRestResponseAsync(DateTime dateTimeQuery);
 
     /**
      * Get null as date-time, should result in no query parameters in uri.
      *
      * @param dateTimeQuery null as date-time (no query parameters).
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link Completable} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     Completable dateTimeNullAsync(DateTime dateTimeQuery);
 
@@ -1362,21 +1363,21 @@ public interface Queries {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;Void&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     ServiceFuture<Void> arrayStringCsvValidAsync(ServiceCallback<Void> serviceCallback);
 
     /**
      * Get an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the csv-array format.
      *
-     * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, Void>> arrayStringCsvValidWithRestResponseAsync();
+    Single<VoidResponse> arrayStringCsvValidWithRestResponseAsync();
 
     /**
      * Get an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the csv-array format.
      *
-     * @return the {@link Completable} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     Completable arrayStringCsvValidAsync();
 
@@ -1396,7 +1397,7 @@ public interface Queries {
      * @param arrayQuery an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the csv-array format.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;Void&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     ServiceFuture<Void> arrayStringCsvValidAsync(List<String> arrayQuery, ServiceCallback<Void> serviceCallback);
 
@@ -1405,16 +1406,16 @@ public interface Queries {
      *
      * @param arrayQuery an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the csv-array format.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, Void>> arrayStringCsvValidWithRestResponseAsync(List<String> arrayQuery);
+    Single<VoidResponse> arrayStringCsvValidWithRestResponseAsync(List<String> arrayQuery);
 
     /**
      * Get an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the csv-array format.
      *
      * @param arrayQuery an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the csv-array format.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link Completable} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     Completable arrayStringCsvValidAsync(List<String> arrayQuery);
 
@@ -1431,21 +1432,21 @@ public interface Queries {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;Void&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     ServiceFuture<Void> arrayStringCsvNullAsync(ServiceCallback<Void> serviceCallback);
 
     /**
      * Get a null array of string using the csv-array format.
      *
-     * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, Void>> arrayStringCsvNullWithRestResponseAsync();
+    Single<VoidResponse> arrayStringCsvNullWithRestResponseAsync();
 
     /**
      * Get a null array of string using the csv-array format.
      *
-     * @return the {@link Completable} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     Completable arrayStringCsvNullAsync();
 
@@ -1465,7 +1466,7 @@ public interface Queries {
      * @param arrayQuery a null array of string using the csv-array format.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;Void&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     ServiceFuture<Void> arrayStringCsvNullAsync(List<String> arrayQuery, ServiceCallback<Void> serviceCallback);
 
@@ -1474,16 +1475,16 @@ public interface Queries {
      *
      * @param arrayQuery a null array of string using the csv-array format.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, Void>> arrayStringCsvNullWithRestResponseAsync(List<String> arrayQuery);
+    Single<VoidResponse> arrayStringCsvNullWithRestResponseAsync(List<String> arrayQuery);
 
     /**
      * Get a null array of string using the csv-array format.
      *
      * @param arrayQuery a null array of string using the csv-array format.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link Completable} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     Completable arrayStringCsvNullAsync(List<String> arrayQuery);
 
@@ -1500,21 +1501,21 @@ public interface Queries {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;Void&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     ServiceFuture<Void> arrayStringCsvEmptyAsync(ServiceCallback<Void> serviceCallback);
 
     /**
      * Get an empty array [] of string using the csv-array format.
      *
-     * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, Void>> arrayStringCsvEmptyWithRestResponseAsync();
+    Single<VoidResponse> arrayStringCsvEmptyWithRestResponseAsync();
 
     /**
      * Get an empty array [] of string using the csv-array format.
      *
-     * @return the {@link Completable} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     Completable arrayStringCsvEmptyAsync();
 
@@ -1534,7 +1535,7 @@ public interface Queries {
      * @param arrayQuery an empty array [] of string using the csv-array format.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;Void&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     ServiceFuture<Void> arrayStringCsvEmptyAsync(List<String> arrayQuery, ServiceCallback<Void> serviceCallback);
 
@@ -1543,16 +1544,16 @@ public interface Queries {
      *
      * @param arrayQuery an empty array [] of string using the csv-array format.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, Void>> arrayStringCsvEmptyWithRestResponseAsync(List<String> arrayQuery);
+    Single<VoidResponse> arrayStringCsvEmptyWithRestResponseAsync(List<String> arrayQuery);
 
     /**
      * Get an empty array [] of string using the csv-array format.
      *
      * @param arrayQuery an empty array [] of string using the csv-array format.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link Completable} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     Completable arrayStringCsvEmptyAsync(List<String> arrayQuery);
 
@@ -1569,21 +1570,21 @@ public interface Queries {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;Void&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     ServiceFuture<Void> arrayStringSsvValidAsync(ServiceCallback<Void> serviceCallback);
 
     /**
      * Get an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the ssv-array format.
      *
-     * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, Void>> arrayStringSsvValidWithRestResponseAsync();
+    Single<VoidResponse> arrayStringSsvValidWithRestResponseAsync();
 
     /**
      * Get an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the ssv-array format.
      *
-     * @return the {@link Completable} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     Completable arrayStringSsvValidAsync();
 
@@ -1603,7 +1604,7 @@ public interface Queries {
      * @param arrayQuery an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the ssv-array format.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;Void&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     ServiceFuture<Void> arrayStringSsvValidAsync(List<String> arrayQuery, ServiceCallback<Void> serviceCallback);
 
@@ -1612,16 +1613,16 @@ public interface Queries {
      *
      * @param arrayQuery an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the ssv-array format.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, Void>> arrayStringSsvValidWithRestResponseAsync(List<String> arrayQuery);
+    Single<VoidResponse> arrayStringSsvValidWithRestResponseAsync(List<String> arrayQuery);
 
     /**
      * Get an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the ssv-array format.
      *
      * @param arrayQuery an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the ssv-array format.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link Completable} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     Completable arrayStringSsvValidAsync(List<String> arrayQuery);
 
@@ -1638,21 +1639,21 @@ public interface Queries {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;Void&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     ServiceFuture<Void> arrayStringTsvValidAsync(ServiceCallback<Void> serviceCallback);
 
     /**
      * Get an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the tsv-array format.
      *
-     * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, Void>> arrayStringTsvValidWithRestResponseAsync();
+    Single<VoidResponse> arrayStringTsvValidWithRestResponseAsync();
 
     /**
      * Get an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the tsv-array format.
      *
-     * @return the {@link Completable} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     Completable arrayStringTsvValidAsync();
 
@@ -1672,7 +1673,7 @@ public interface Queries {
      * @param arrayQuery an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the tsv-array format.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;Void&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     ServiceFuture<Void> arrayStringTsvValidAsync(List<String> arrayQuery, ServiceCallback<Void> serviceCallback);
 
@@ -1681,16 +1682,16 @@ public interface Queries {
      *
      * @param arrayQuery an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the tsv-array format.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, Void>> arrayStringTsvValidWithRestResponseAsync(List<String> arrayQuery);
+    Single<VoidResponse> arrayStringTsvValidWithRestResponseAsync(List<String> arrayQuery);
 
     /**
      * Get an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the tsv-array format.
      *
      * @param arrayQuery an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the tsv-array format.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link Completable} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     Completable arrayStringTsvValidAsync(List<String> arrayQuery);
 
@@ -1707,21 +1708,21 @@ public interface Queries {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;Void&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     ServiceFuture<Void> arrayStringPipesValidAsync(ServiceCallback<Void> serviceCallback);
 
     /**
      * Get an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the pipes-array format.
      *
-     * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, Void>> arrayStringPipesValidWithRestResponseAsync();
+    Single<VoidResponse> arrayStringPipesValidWithRestResponseAsync();
 
     /**
      * Get an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the pipes-array format.
      *
-     * @return the {@link Completable} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     Completable arrayStringPipesValidAsync();
 
@@ -1741,7 +1742,7 @@ public interface Queries {
      * @param arrayQuery an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the pipes-array format.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;Void&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     ServiceFuture<Void> arrayStringPipesValidAsync(List<String> arrayQuery, ServiceCallback<Void> serviceCallback);
 
@@ -1750,16 +1751,16 @@ public interface Queries {
      *
      * @param arrayQuery an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the pipes-array format.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, Void>> arrayStringPipesValidWithRestResponseAsync(List<String> arrayQuery);
+    Single<VoidResponse> arrayStringPipesValidWithRestResponseAsync(List<String> arrayQuery);
 
     /**
      * Get an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the pipes-array format.
      *
      * @param arrayQuery an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the pipes-array format.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link Completable} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     Completable arrayStringPipesValidAsync(List<String> arrayQuery);
 }

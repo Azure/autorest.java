@@ -10,11 +10,12 @@
 
 package fixtures.bodycomplex.implementation;
 
+import com.microsoft.rest.v2.BodyResponse;
 import com.microsoft.rest.v2.RestProxy;
-import com.microsoft.rest.v2.RestResponse;
 import com.microsoft.rest.v2.ServiceCallback;
 import com.microsoft.rest.v2.ServiceFuture;
 import com.microsoft.rest.v2.Validator;
+import com.microsoft.rest.v2.VoidResponse;
 import com.microsoft.rest.v2.annotations.BodyParam;
 import com.microsoft.rest.v2.annotations.ExpectedResponses;
 import com.microsoft.rest.v2.annotations.GET;
@@ -29,7 +30,6 @@ import io.reactivex.Completable;
 import io.reactivex.Maybe;
 import io.reactivex.Single;
 import io.reactivex.annotations.NonNull;
-import io.reactivex.functions.Function;
 
 /**
  * An instance of this class provides access to all the operations defined in
@@ -65,27 +65,27 @@ public final class PolymorphismsImpl implements Polymorphisms {
         @GET("complex/polymorphism/valid")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<RestResponse<Void, Fish>> getValid();
+        Single<BodyResponse<Fish>> getValid();
 
         @PUT("complex/polymorphism/valid")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<RestResponse<Void, Void>> putValid(@BodyParam("application/json; charset=utf-8") Fish complexBody);
+        Single<VoidResponse> putValid(@BodyParam("application/json; charset=utf-8") Fish complexBody);
 
         @GET("complex/polymorphism/complicated")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<RestResponse<Void, Salmon>> getComplicated();
+        Single<BodyResponse<Salmon>> getComplicated();
 
         @PUT("complex/polymorphism/complicated")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<RestResponse<Void, Void>> putComplicated(@BodyParam("application/json; charset=utf-8") Salmon complexBody);
+        Single<VoidResponse> putComplicated(@BodyParam("application/json; charset=utf-8") Salmon complexBody);
 
         @PUT("complex/polymorphism/missingrequired/invalid")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<RestResponse<Void, Void>> putValidMissingRequired(@BodyParam("application/json; charset=utf-8") Fish complexBody);
+        Single<VoidResponse> putValidMissingRequired(@BodyParam("application/json; charset=utf-8") Fish complexBody);
     }
 
     /**
@@ -104,7 +104,7 @@ public final class PolymorphismsImpl implements Polymorphisms {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;Fish&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     public ServiceFuture<Fish> getValidAsync(ServiceCallback<Fish> serviceCallback) {
         return ServiceFuture.fromBody(getValidAsync(), serviceCallback);
@@ -113,29 +113,20 @@ public final class PolymorphismsImpl implements Polymorphisms {
     /**
      * Get complex types that are polymorphic.
      *
-     * @return the {@link Single&lt;RestResponse&lt;Void, Fish&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<Void, Fish>> getValidWithRestResponseAsync() {
+    public Single<BodyResponse<Fish>> getValidWithRestResponseAsync() {
         return service.getValid();
     }
 
     /**
      * Get complex types that are polymorphic.
      *
-     * @return the {@link Maybe&lt;Fish&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Maybe<Fish> getValidAsync() {
         return getValidWithRestResponseAsync()
-            .flatMapMaybe(new Function<RestResponse<Void, Fish>, Maybe<Fish>>() {
-                @Override
-                public Maybe<Fish> apply(RestResponse<Void, Fish> restResponse) {
-                    if (restResponse.body() == null) {
-                        return Maybe.empty();
-                    } else {
-                        return Maybe.just(restResponse.body());
-                    }
-                }
-            });
+            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -220,7 +211,7 @@ public final class PolymorphismsImpl implements Polymorphisms {
      *       };.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;Void&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     public ServiceFuture<Void> putValidAsync(@NonNull Fish complexBody, ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(putValidAsync(complexBody), serviceCallback);
@@ -263,9 +254,9 @@ public final class PolymorphismsImpl implements Polymorphisms {
      *         ]
      *       };.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<Void, Void>> putValidWithRestResponseAsync(@NonNull Fish complexBody) {
+    public Single<VoidResponse> putValidWithRestResponseAsync(@NonNull Fish complexBody) {
         if (complexBody == null) {
             throw new IllegalArgumentException("Parameter complexBody is required and cannot be null.");
         }
@@ -310,7 +301,7 @@ public final class PolymorphismsImpl implements Polymorphisms {
      *         ]
      *       };.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link Completable} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Completable putValidAsync(@NonNull Fish complexBody) {
         return putValidWithRestResponseAsync(complexBody)
@@ -333,7 +324,7 @@ public final class PolymorphismsImpl implements Polymorphisms {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;Salmon&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     public ServiceFuture<Salmon> getComplicatedAsync(ServiceCallback<Salmon> serviceCallback) {
         return ServiceFuture.fromBody(getComplicatedAsync(), serviceCallback);
@@ -342,29 +333,20 @@ public final class PolymorphismsImpl implements Polymorphisms {
     /**
      * Get complex types that are polymorphic, but not at the root of the hierarchy; also have additional properties.
      *
-     * @return the {@link Single&lt;RestResponse&lt;Void, Salmon&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<Void, Salmon>> getComplicatedWithRestResponseAsync() {
+    public Single<BodyResponse<Salmon>> getComplicatedWithRestResponseAsync() {
         return service.getComplicated();
     }
 
     /**
      * Get complex types that are polymorphic, but not at the root of the hierarchy; also have additional properties.
      *
-     * @return the {@link Maybe&lt;Salmon&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Maybe<Salmon> getComplicatedAsync() {
         return getComplicatedWithRestResponseAsync()
-            .flatMapMaybe(new Function<RestResponse<Void, Salmon>, Maybe<Salmon>>() {
-                @Override
-                public Maybe<Salmon> apply(RestResponse<Void, Salmon> restResponse) {
-                    if (restResponse.body() == null) {
-                        return Maybe.empty();
-                    } else {
-                        return Maybe.just(restResponse.body());
-                    }
-                }
-            });
+            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -385,7 +367,7 @@ public final class PolymorphismsImpl implements Polymorphisms {
      * @param complexBody the Salmon value.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;Void&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     public ServiceFuture<Void> putComplicatedAsync(@NonNull Salmon complexBody, ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(putComplicatedAsync(complexBody), serviceCallback);
@@ -396,9 +378,9 @@ public final class PolymorphismsImpl implements Polymorphisms {
      *
      * @param complexBody the Salmon value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<Void, Void>> putComplicatedWithRestResponseAsync(@NonNull Salmon complexBody) {
+    public Single<VoidResponse> putComplicatedWithRestResponseAsync(@NonNull Salmon complexBody) {
         if (complexBody == null) {
             throw new IllegalArgumentException("Parameter complexBody is required and cannot be null.");
         }
@@ -411,7 +393,7 @@ public final class PolymorphismsImpl implements Polymorphisms {
      *
      * @param complexBody the Salmon value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link Completable} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Completable putComplicatedAsync(@NonNull Salmon complexBody) {
         return putComplicatedWithRestResponseAsync(complexBody)
@@ -486,7 +468,7 @@ public final class PolymorphismsImpl implements Polymorphisms {
      * }.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;Void&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     public ServiceFuture<Void> putValidMissingRequiredAsync(@NonNull Fish complexBody, ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(putValidMissingRequiredAsync(complexBody), serviceCallback);
@@ -522,9 +504,9 @@ public final class PolymorphismsImpl implements Polymorphisms {
      *     ]
      * }.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<Void, Void>> putValidMissingRequiredWithRestResponseAsync(@NonNull Fish complexBody) {
+    public Single<VoidResponse> putValidMissingRequiredWithRestResponseAsync(@NonNull Fish complexBody) {
         if (complexBody == null) {
             throw new IllegalArgumentException("Parameter complexBody is required and cannot be null.");
         }
@@ -562,7 +544,7 @@ public final class PolymorphismsImpl implements Polymorphisms {
      *     ]
      * }.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link Completable} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Completable putValidMissingRequiredAsync(@NonNull Fish complexBody) {
         return putValidMissingRequiredWithRestResponseAsync(complexBody)

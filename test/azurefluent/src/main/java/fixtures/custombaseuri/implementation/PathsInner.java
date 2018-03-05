@@ -11,9 +11,9 @@
 package fixtures.custombaseuri.implementation;
 
 import com.microsoft.azure.v2.AzureProxy;
-import com.microsoft.rest.v2.RestResponse;
 import com.microsoft.rest.v2.ServiceCallback;
 import com.microsoft.rest.v2.ServiceFuture;
+import com.microsoft.rest.v2.VoidResponse;
 import com.microsoft.rest.v2.annotations.ExpectedResponses;
 import com.microsoft.rest.v2.annotations.GET;
 import com.microsoft.rest.v2.annotations.HeaderParam;
@@ -59,7 +59,7 @@ public final class PathsInner {
         @GET("customuri")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<RestResponse<Void, Void>> getEmpty(@HostParam("accountName") String accountName, @HostParam("host") String host, @HeaderParam("accept-language") String acceptLanguage);
+        Single<VoidResponse> getEmpty(@HostParam("accountName") String accountName, @HostParam("host") String host, @HeaderParam("accept-language") String acceptLanguage);
     }
 
     /**
@@ -80,7 +80,7 @@ public final class PathsInner {
      * @param accountName Account Name.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;Void&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     public ServiceFuture<Void> getEmptyAsync(@NonNull String accountName, ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(getEmptyAsync(accountName), serviceCallback);
@@ -91,9 +91,9 @@ public final class PathsInner {
      *
      * @param accountName Account Name.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<Void, Void>> getEmptyWithRestResponseAsync(@NonNull String accountName) {
+    public Single<VoidResponse> getEmptyWithRestResponseAsync(@NonNull String accountName) {
         if (accountName == null) {
             throw new IllegalArgumentException("Parameter accountName is required and cannot be null.");
         }
@@ -108,7 +108,7 @@ public final class PathsInner {
      *
      * @param accountName Account Name.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link Completable} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Completable getEmptyAsync(@NonNull String accountName) {
         return getEmptyWithRestResponseAsync(accountName)

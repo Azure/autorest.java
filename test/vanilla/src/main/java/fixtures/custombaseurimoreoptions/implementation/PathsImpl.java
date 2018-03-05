@@ -11,9 +11,9 @@
 package fixtures.custombaseurimoreoptions.implementation;
 
 import com.microsoft.rest.v2.RestProxy;
-import com.microsoft.rest.v2.RestResponse;
 import com.microsoft.rest.v2.ServiceCallback;
 import com.microsoft.rest.v2.ServiceFuture;
+import com.microsoft.rest.v2.VoidResponse;
 import com.microsoft.rest.v2.annotations.ExpectedResponses;
 import com.microsoft.rest.v2.annotations.GET;
 import com.microsoft.rest.v2.annotations.Host;
@@ -61,7 +61,7 @@ public final class PathsImpl implements Paths {
         @GET("customuri/{subscriptionId}/{keyName}")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<RestResponse<Void, Void>> getEmpty(@HostParam("vault") String vault, @HostParam("secret") String secret, @HostParam("dnsSuffix") String dnsSuffix, @PathParam("keyName") String keyName, @PathParam("subscriptionId") String subscriptionId, @QueryParam("keyVersion") String keyVersion);
+        Single<VoidResponse> getEmpty(@HostParam("vault") String vault, @HostParam("secret") String secret, @HostParam("dnsSuffix") String dnsSuffix, @PathParam("keyName") String keyName, @PathParam("subscriptionId") String subscriptionId, @QueryParam("keyVersion") String keyVersion);
     }
 
     /**
@@ -86,7 +86,7 @@ public final class PathsImpl implements Paths {
      * @param keyName The key name with value 'key1'.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;Void&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     public ServiceFuture<Void> getEmptyAsync(@NonNull String vault, @NonNull String secret, @NonNull String keyName, ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(getEmptyAsync(vault, secret, keyName), serviceCallback);
@@ -99,9 +99,9 @@ public final class PathsImpl implements Paths {
      * @param secret Secret value.
      * @param keyName The key name with value 'key1'.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<Void, Void>> getEmptyWithRestResponseAsync(@NonNull String vault, @NonNull String secret, @NonNull String keyName) {
+    public Single<VoidResponse> getEmptyWithRestResponseAsync(@NonNull String vault, @NonNull String secret, @NonNull String keyName) {
         if (vault == null) {
             throw new IllegalArgumentException("Parameter vault is required and cannot be null.");
         }
@@ -128,7 +128,7 @@ public final class PathsImpl implements Paths {
      * @param secret Secret value.
      * @param keyName The key name with value 'key1'.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link Completable} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Completable getEmptyAsync(@NonNull String vault, @NonNull String secret, @NonNull String keyName) {
         return getEmptyWithRestResponseAsync(vault, secret, keyName)
@@ -159,7 +159,7 @@ public final class PathsImpl implements Paths {
      * @param keyVersion The key version. Default value 'v1'.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;Void&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     public ServiceFuture<Void> getEmptyAsync(@NonNull String vault, @NonNull String secret, @NonNull String keyName, String keyVersion, ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(getEmptyAsync(vault, secret, keyName, keyVersion), serviceCallback);
@@ -173,9 +173,9 @@ public final class PathsImpl implements Paths {
      * @param keyName The key name with value 'key1'.
      * @param keyVersion The key version. Default value 'v1'.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<Void, Void>> getEmptyWithRestResponseAsync(@NonNull String vault, @NonNull String secret, @NonNull String keyName, String keyVersion) {
+    public Single<VoidResponse> getEmptyWithRestResponseAsync(@NonNull String vault, @NonNull String secret, @NonNull String keyName, String keyVersion) {
         if (vault == null) {
             throw new IllegalArgumentException("Parameter vault is required and cannot be null.");
         }
@@ -202,7 +202,7 @@ public final class PathsImpl implements Paths {
      * @param keyName The key name with value 'key1'.
      * @param keyVersion The key version. Default value 'v1'.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link Completable} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Completable getEmptyAsync(@NonNull String vault, @NonNull String secret, @NonNull String keyName, String keyVersion) {
         return getEmptyWithRestResponseAsync(vault, secret, keyName, keyVersion)

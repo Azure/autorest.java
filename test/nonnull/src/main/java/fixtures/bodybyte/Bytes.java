@@ -10,9 +10,11 @@
 
 package fixtures.bodybyte;
 
-import com.microsoft.rest.v2.RestResponse;
+import com.microsoft.rest.v2.BodyResponse;
 import com.microsoft.rest.v2.ServiceCallback;
 import com.microsoft.rest.v2.ServiceFuture;
+import com.microsoft.rest.v2.VoidResponse;
+import fixtures.bodybyte.models.ErrorException;
 import io.reactivex.Completable;
 import io.reactivex.Maybe;
 import io.reactivex.Single;
@@ -36,21 +38,21 @@ public interface Bytes {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;byte[]&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     ServiceFuture<byte[]> getNullAsync(ServiceCallback<byte[]> serviceCallback);
 
     /**
      * Get null byte value.
      *
-     * @return the {@link Single&lt;RestResponse&lt;Void, byte[]&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, byte[]>> getNullWithRestResponseAsync();
+    Single<BodyResponse<byte[]>> getNullWithRestResponseAsync();
 
     /**
      * Get null byte value.
      *
-     * @return the {@link Maybe&lt;byte[]&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     Maybe<byte[]> getNullAsync();
 
@@ -68,21 +70,21 @@ public interface Bytes {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;byte[]&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     ServiceFuture<byte[]> getEmptyAsync(ServiceCallback<byte[]> serviceCallback);
 
     /**
      * Get empty byte value ''.
      *
-     * @return the {@link Single&lt;RestResponse&lt;Void, byte[]&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, byte[]>> getEmptyWithRestResponseAsync();
+    Single<BodyResponse<byte[]>> getEmptyWithRestResponseAsync();
 
     /**
      * Get empty byte value ''.
      *
-     * @return the {@link Maybe&lt;byte[]&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     Maybe<byte[]> getEmptyAsync();
 
@@ -100,21 +102,21 @@ public interface Bytes {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;byte[]&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     ServiceFuture<byte[]> getNonAsciiAsync(ServiceCallback<byte[]> serviceCallback);
 
     /**
      * Get non-ascii byte string hex(FF FE FD FC FB FA F9 F8 F7 F6).
      *
-     * @return the {@link Single&lt;RestResponse&lt;Void, byte[]&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, byte[]>> getNonAsciiWithRestResponseAsync();
+    Single<BodyResponse<byte[]>> getNonAsciiWithRestResponseAsync();
 
     /**
      * Get non-ascii byte string hex(FF FE FD FC FB FA F9 F8 F7 F6).
      *
-     * @return the {@link Maybe&lt;byte[]&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     Maybe<byte[]> getNonAsciiAsync();
 
@@ -134,7 +136,7 @@ public interface Bytes {
      * @param byteBody Base64-encoded non-ascii byte string hex(FF FE FD FC FB FA F9 F8 F7 F6).
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;Void&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     ServiceFuture<Void> putNonAsciiAsync(byte[] byteBody, ServiceCallback<Void> serviceCallback);
 
@@ -143,16 +145,16 @@ public interface Bytes {
      *
      * @param byteBody Base64-encoded non-ascii byte string hex(FF FE FD FC FB FA F9 F8 F7 F6).
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, Void>> putNonAsciiWithRestResponseAsync(byte[] byteBody);
+    Single<VoidResponse> putNonAsciiWithRestResponseAsync(byte[] byteBody);
 
     /**
      * Put non-ascii byte string hex(FF FE FD FC FB FA F9 F8 F7 F6).
      *
      * @param byteBody Base64-encoded non-ascii byte string hex(FF FE FD FC FB FA F9 F8 F7 F6).
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link Completable} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     Completable putNonAsciiAsync(byte[] byteBody);
 
@@ -170,21 +172,21 @@ public interface Bytes {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;byte[]&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     ServiceFuture<byte[]> getInvalidAsync(ServiceCallback<byte[]> serviceCallback);
 
     /**
      * Get invalid byte value ':::SWAGGER::::'.
      *
-     * @return the {@link Single&lt;RestResponse&lt;Void, byte[]&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, byte[]>> getInvalidWithRestResponseAsync();
+    Single<BodyResponse<byte[]>> getInvalidWithRestResponseAsync();
 
     /**
      * Get invalid byte value ':::SWAGGER::::'.
      *
-     * @return the {@link Maybe&lt;byte[]&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     Maybe<byte[]> getInvalidAsync();
 }

@@ -10,9 +10,10 @@
 
 package fixtures.custombaseuri;
 
-import com.microsoft.rest.v2.RestResponse;
 import com.microsoft.rest.v2.ServiceCallback;
 import com.microsoft.rest.v2.ServiceFuture;
+import com.microsoft.rest.v2.VoidResponse;
+import fixtures.custombaseuri.models.ErrorException;
 import io.reactivex.Completable;
 import io.reactivex.Single;
 import io.reactivex.annotations.NonNull;
@@ -38,7 +39,7 @@ public interface Paths {
      * @param accountName Account Name.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;Void&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     ServiceFuture<Void> getEmptyAsync(@NonNull String accountName, ServiceCallback<Void> serviceCallback);
 
@@ -47,16 +48,16 @@ public interface Paths {
      *
      * @param accountName Account Name.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, Void>> getEmptyWithRestResponseAsync(@NonNull String accountName);
+    Single<VoidResponse> getEmptyWithRestResponseAsync(@NonNull String accountName);
 
     /**
      * Get a 200 to test a valid base uri.
      *
      * @param accountName Account Name.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link Completable} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     Completable getEmptyAsync(@NonNull String accountName);
 }

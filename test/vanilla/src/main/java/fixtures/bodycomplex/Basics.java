@@ -10,10 +10,12 @@
 
 package fixtures.bodycomplex;
 
-import com.microsoft.rest.v2.RestResponse;
+import com.microsoft.rest.v2.BodyResponse;
 import com.microsoft.rest.v2.ServiceCallback;
 import com.microsoft.rest.v2.ServiceFuture;
+import com.microsoft.rest.v2.VoidResponse;
 import fixtures.bodycomplex.models.Basic;
+import fixtures.bodycomplex.models.ErrorException;
 import io.reactivex.Completable;
 import io.reactivex.Maybe;
 import io.reactivex.Single;
@@ -38,21 +40,21 @@ public interface Basics {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;Basic&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     ServiceFuture<Basic> getValidAsync(ServiceCallback<Basic> serviceCallback);
 
     /**
      * Get complex type {id: 2, name: 'abc', color: 'YELLOW'}.
      *
-     * @return the {@link Single&lt;RestResponse&lt;Void, Basic&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, Basic>> getValidWithRestResponseAsync();
+    Single<BodyResponse<Basic>> getValidWithRestResponseAsync();
 
     /**
      * Get complex type {id: 2, name: 'abc', color: 'YELLOW'}.
      *
-     * @return the {@link Maybe&lt;Basic&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     Maybe<Basic> getValidAsync();
 
@@ -72,7 +74,7 @@ public interface Basics {
      * @param complexBody Please put {id: 2, name: 'abc', color: 'Magenta'}.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;Void&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     ServiceFuture<Void> putValidAsync(@NonNull Basic complexBody, ServiceCallback<Void> serviceCallback);
 
@@ -81,16 +83,16 @@ public interface Basics {
      *
      * @param complexBody Please put {id: 2, name: 'abc', color: 'Magenta'}.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, Void>> putValidWithRestResponseAsync(@NonNull Basic complexBody);
+    Single<VoidResponse> putValidWithRestResponseAsync(@NonNull Basic complexBody);
 
     /**
      * Please put {id: 2, name: 'abc', color: 'Magenta'}.
      *
      * @param complexBody Please put {id: 2, name: 'abc', color: 'Magenta'}.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link Completable} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     Completable putValidAsync(@NonNull Basic complexBody);
 
@@ -108,21 +110,21 @@ public interface Basics {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;Basic&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     ServiceFuture<Basic> getInvalidAsync(ServiceCallback<Basic> serviceCallback);
 
     /**
      * Get a basic complex type that is invalid for the local strong type.
      *
-     * @return the {@link Single&lt;RestResponse&lt;Void, Basic&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, Basic>> getInvalidWithRestResponseAsync();
+    Single<BodyResponse<Basic>> getInvalidWithRestResponseAsync();
 
     /**
      * Get a basic complex type that is invalid for the local strong type.
      *
-     * @return the {@link Maybe&lt;Basic&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     Maybe<Basic> getInvalidAsync();
 
@@ -140,21 +142,21 @@ public interface Basics {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;Basic&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     ServiceFuture<Basic> getEmptyAsync(ServiceCallback<Basic> serviceCallback);
 
     /**
      * Get a basic complex type that is empty.
      *
-     * @return the {@link Single&lt;RestResponse&lt;Void, Basic&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, Basic>> getEmptyWithRestResponseAsync();
+    Single<BodyResponse<Basic>> getEmptyWithRestResponseAsync();
 
     /**
      * Get a basic complex type that is empty.
      *
-     * @return the {@link Maybe&lt;Basic&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     Maybe<Basic> getEmptyAsync();
 
@@ -172,21 +174,21 @@ public interface Basics {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;Basic&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     ServiceFuture<Basic> getNullAsync(ServiceCallback<Basic> serviceCallback);
 
     /**
      * Get a basic complex type whose properties are null.
      *
-     * @return the {@link Single&lt;RestResponse&lt;Void, Basic&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, Basic>> getNullWithRestResponseAsync();
+    Single<BodyResponse<Basic>> getNullWithRestResponseAsync();
 
     /**
      * Get a basic complex type whose properties are null.
      *
-     * @return the {@link Maybe&lt;Basic&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     Maybe<Basic> getNullAsync();
 
@@ -204,21 +206,21 @@ public interface Basics {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;Basic&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     ServiceFuture<Basic> getNotProvidedAsync(ServiceCallback<Basic> serviceCallback);
 
     /**
      * Get a basic complex type while the server doesn't provide a response payload.
      *
-     * @return the {@link Single&lt;RestResponse&lt;Void, Basic&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, Basic>> getNotProvidedWithRestResponseAsync();
+    Single<BodyResponse<Basic>> getNotProvidedWithRestResponseAsync();
 
     /**
      * Get a basic complex type while the server doesn't provide a response payload.
      *
-     * @return the {@link Maybe&lt;Basic&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     Maybe<Basic> getNotProvidedAsync();
 }

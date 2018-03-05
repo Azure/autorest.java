@@ -10,10 +10,10 @@
 
 package fixtures.xml.models;
 
-import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlProperty;
 import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlRootElement;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -43,7 +43,7 @@ public final class Slideshow {
      * The slides property.
      */
     @JsonProperty("slide")
-    private List<Slide> slides;
+    private List<Slide> slides = new ArrayList<>();
 
     /**
      * Get the title value.

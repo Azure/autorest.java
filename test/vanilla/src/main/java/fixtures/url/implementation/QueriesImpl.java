@@ -12,10 +12,10 @@ package fixtures.url.implementation;
 
 import com.microsoft.rest.v2.CollectionFormat;
 import com.microsoft.rest.v2.RestProxy;
-import com.microsoft.rest.v2.RestResponse;
 import com.microsoft.rest.v2.ServiceCallback;
 import com.microsoft.rest.v2.ServiceFuture;
 import com.microsoft.rest.v2.Validator;
+import com.microsoft.rest.v2.VoidResponse;
 import com.microsoft.rest.v2.annotations.ExpectedResponses;
 import com.microsoft.rest.v2.annotations.GET;
 import com.microsoft.rest.v2.annotations.Host;
@@ -66,172 +66,172 @@ public final class QueriesImpl implements Queries {
         @GET("queries/bool/true")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<RestResponse<Void, Void>> getBooleanTrue(@QueryParam("boolQuery") boolean boolQuery);
+        Single<VoidResponse> getBooleanTrue(@QueryParam("boolQuery") boolean boolQuery);
 
         @GET("queries/bool/false")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<RestResponse<Void, Void>> getBooleanFalse(@QueryParam("boolQuery") boolean boolQuery);
+        Single<VoidResponse> getBooleanFalse(@QueryParam("boolQuery") boolean boolQuery);
 
         @GET("queries/bool/null")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<RestResponse<Void, Void>> getBooleanNull(@QueryParam("boolQuery") Boolean boolQuery);
+        Single<VoidResponse> getBooleanNull(@QueryParam("boolQuery") Boolean boolQuery);
 
         @GET("queries/int/1000000")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<RestResponse<Void, Void>> getIntOneMillion(@QueryParam("intQuery") int intQuery);
+        Single<VoidResponse> getIntOneMillion(@QueryParam("intQuery") int intQuery);
 
         @GET("queries/int/-1000000")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<RestResponse<Void, Void>> getIntNegativeOneMillion(@QueryParam("intQuery") int intQuery);
+        Single<VoidResponse> getIntNegativeOneMillion(@QueryParam("intQuery") int intQuery);
 
         @GET("queries/int/null")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<RestResponse<Void, Void>> getIntNull(@QueryParam("intQuery") Integer intQuery);
+        Single<VoidResponse> getIntNull(@QueryParam("intQuery") Integer intQuery);
 
         @GET("queries/long/10000000000")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<RestResponse<Void, Void>> getTenBillion(@QueryParam("longQuery") long longQuery);
+        Single<VoidResponse> getTenBillion(@QueryParam("longQuery") long longQuery);
 
         @GET("queries/long/-10000000000")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<RestResponse<Void, Void>> getNegativeTenBillion(@QueryParam("longQuery") long longQuery);
+        Single<VoidResponse> getNegativeTenBillion(@QueryParam("longQuery") long longQuery);
 
         @GET("queries/long/null")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<RestResponse<Void, Void>> getLongNull(@QueryParam("longQuery") Long longQuery);
+        Single<VoidResponse> getLongNull(@QueryParam("longQuery") Long longQuery);
 
         @GET("queries/float/1.034E+20")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<RestResponse<Void, Void>> floatScientificPositive(@QueryParam("floatQuery") double floatQuery);
+        Single<VoidResponse> floatScientificPositive(@QueryParam("floatQuery") double floatQuery);
 
         @GET("queries/float/-1.034E-20")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<RestResponse<Void, Void>> floatScientificNegative(@QueryParam("floatQuery") double floatQuery);
+        Single<VoidResponse> floatScientificNegative(@QueryParam("floatQuery") double floatQuery);
 
         @GET("queries/float/null")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<RestResponse<Void, Void>> floatNull(@QueryParam("floatQuery") Double floatQuery);
+        Single<VoidResponse> floatNull(@QueryParam("floatQuery") Double floatQuery);
 
         @GET("queries/double/9999999.999")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<RestResponse<Void, Void>> doubleDecimalPositive(@QueryParam("doubleQuery") double doubleQuery);
+        Single<VoidResponse> doubleDecimalPositive(@QueryParam("doubleQuery") double doubleQuery);
 
         @GET("queries/double/-9999999.999")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<RestResponse<Void, Void>> doubleDecimalNegative(@QueryParam("doubleQuery") double doubleQuery);
+        Single<VoidResponse> doubleDecimalNegative(@QueryParam("doubleQuery") double doubleQuery);
 
         @GET("queries/double/null")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<RestResponse<Void, Void>> doubleNull(@QueryParam("doubleQuery") Double doubleQuery);
+        Single<VoidResponse> doubleNull(@QueryParam("doubleQuery") Double doubleQuery);
 
         @GET("queries/string/unicode/")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<RestResponse<Void, Void>> stringUnicode(@QueryParam("stringQuery") String stringQuery);
+        Single<VoidResponse> stringUnicode(@QueryParam("stringQuery") String stringQuery);
 
         @GET("queries/string/begin%21%2A%27%28%29%3B%3A%40%20%26%3D%2B%24%2C%2F%3F%23%5B%5Dend")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<RestResponse<Void, Void>> stringUrlEncoded(@QueryParam("stringQuery") String stringQuery);
+        Single<VoidResponse> stringUrlEncoded(@QueryParam("stringQuery") String stringQuery);
 
         @GET("queries/string/empty")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<RestResponse<Void, Void>> stringEmpty(@QueryParam("stringQuery") String stringQuery);
+        Single<VoidResponse> stringEmpty(@QueryParam("stringQuery") String stringQuery);
 
         @GET("queries/string/null")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<RestResponse<Void, Void>> stringNull(@QueryParam("stringQuery") String stringQuery);
+        Single<VoidResponse> stringNull(@QueryParam("stringQuery") String stringQuery);
 
         @GET("queries/enum/green%20color")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<RestResponse<Void, Void>> enumValid(@QueryParam("enumQuery") UriColor enumQuery);
+        Single<VoidResponse> enumValid(@QueryParam("enumQuery") UriColor enumQuery);
 
         @GET("queries/enum/null")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<RestResponse<Void, Void>> enumNull(@QueryParam("enumQuery") UriColor enumQuery);
+        Single<VoidResponse> enumNull(@QueryParam("enumQuery") UriColor enumQuery);
 
         @GET("queries/byte/multibyte")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<RestResponse<Void, Void>> byteMultiByte(@QueryParam("byteQuery") String byteQuery);
+        Single<VoidResponse> byteMultiByte(@QueryParam("byteQuery") String byteQuery);
 
         @GET("queries/byte/empty")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<RestResponse<Void, Void>> byteEmpty(@QueryParam("byteQuery") String byteQuery);
+        Single<VoidResponse> byteEmpty(@QueryParam("byteQuery") String byteQuery);
 
         @GET("queries/byte/null")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<RestResponse<Void, Void>> byteNull(@QueryParam("byteQuery") String byteQuery);
+        Single<VoidResponse> byteNull(@QueryParam("byteQuery") String byteQuery);
 
         @GET("queries/date/2012-01-01")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<RestResponse<Void, Void>> dateValid(@QueryParam("dateQuery") LocalDate dateQuery);
+        Single<VoidResponse> dateValid(@QueryParam("dateQuery") LocalDate dateQuery);
 
         @GET("queries/date/null")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<RestResponse<Void, Void>> dateNull(@QueryParam("dateQuery") LocalDate dateQuery);
+        Single<VoidResponse> dateNull(@QueryParam("dateQuery") LocalDate dateQuery);
 
         @GET("queries/datetime/2012-01-01T01%3A01%3A01Z")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<RestResponse<Void, Void>> dateTimeValid(@QueryParam("dateTimeQuery") DateTime dateTimeQuery);
+        Single<VoidResponse> dateTimeValid(@QueryParam("dateTimeQuery") DateTime dateTimeQuery);
 
         @GET("queries/datetime/null")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<RestResponse<Void, Void>> dateTimeNull(@QueryParam("dateTimeQuery") DateTime dateTimeQuery);
+        Single<VoidResponse> dateTimeNull(@QueryParam("dateTimeQuery") DateTime dateTimeQuery);
 
         @GET("queries/array/csv/string/valid")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<RestResponse<Void, Void>> arrayStringCsvValid(@QueryParam("arrayQuery") String arrayQuery);
+        Single<VoidResponse> arrayStringCsvValid(@QueryParam("arrayQuery") String arrayQuery);
 
         @GET("queries/array/csv/string/null")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<RestResponse<Void, Void>> arrayStringCsvNull(@QueryParam("arrayQuery") String arrayQuery);
+        Single<VoidResponse> arrayStringCsvNull(@QueryParam("arrayQuery") String arrayQuery);
 
         @GET("queries/array/csv/string/empty")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<RestResponse<Void, Void>> arrayStringCsvEmpty(@QueryParam("arrayQuery") String arrayQuery);
+        Single<VoidResponse> arrayStringCsvEmpty(@QueryParam("arrayQuery") String arrayQuery);
 
         @GET("queries/array/ssv/string/valid")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<RestResponse<Void, Void>> arrayStringSsvValid(@QueryParam("arrayQuery") String arrayQuery);
+        Single<VoidResponse> arrayStringSsvValid(@QueryParam("arrayQuery") String arrayQuery);
 
         @GET("queries/array/tsv/string/valid")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<RestResponse<Void, Void>> arrayStringTsvValid(@QueryParam("arrayQuery") String arrayQuery);
+        Single<VoidResponse> arrayStringTsvValid(@QueryParam("arrayQuery") String arrayQuery);
 
         @GET("queries/array/pipes/string/valid")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<RestResponse<Void, Void>> arrayStringPipesValid(@QueryParam("arrayQuery") String arrayQuery);
+        Single<VoidResponse> arrayStringPipesValid(@QueryParam("arrayQuery") String arrayQuery);
     }
 
     /**
@@ -249,7 +249,7 @@ public final class QueriesImpl implements Queries {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;Void&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     public ServiceFuture<Void> getBooleanTrueAsync(ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(getBooleanTrueAsync(), serviceCallback);
@@ -258,9 +258,9 @@ public final class QueriesImpl implements Queries {
     /**
      * Get true Boolean value on path.
      *
-     * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<Void, Void>> getBooleanTrueWithRestResponseAsync() {
+    public Single<VoidResponse> getBooleanTrueWithRestResponseAsync() {
         final boolean boolQuery = true;
         return service.getBooleanTrue(boolQuery);
     }
@@ -268,7 +268,7 @@ public final class QueriesImpl implements Queries {
     /**
      * Get true Boolean value on path.
      *
-     * @return the {@link Completable} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Completable getBooleanTrueAsync() {
         return getBooleanTrueWithRestResponseAsync()
@@ -290,7 +290,7 @@ public final class QueriesImpl implements Queries {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;Void&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     public ServiceFuture<Void> getBooleanFalseAsync(ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(getBooleanFalseAsync(), serviceCallback);
@@ -299,9 +299,9 @@ public final class QueriesImpl implements Queries {
     /**
      * Get false Boolean value on path.
      *
-     * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<Void, Void>> getBooleanFalseWithRestResponseAsync() {
+    public Single<VoidResponse> getBooleanFalseWithRestResponseAsync() {
         final boolean boolQuery = false;
         return service.getBooleanFalse(boolQuery);
     }
@@ -309,7 +309,7 @@ public final class QueriesImpl implements Queries {
     /**
      * Get false Boolean value on path.
      *
-     * @return the {@link Completable} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Completable getBooleanFalseAsync() {
         return getBooleanFalseWithRestResponseAsync()
@@ -331,7 +331,7 @@ public final class QueriesImpl implements Queries {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;Void&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     public ServiceFuture<Void> getBooleanNullAsync(ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(getBooleanNullAsync(), serviceCallback);
@@ -340,9 +340,9 @@ public final class QueriesImpl implements Queries {
     /**
      * Get null Boolean value on query (query string should be absent).
      *
-     * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<Void, Void>> getBooleanNullWithRestResponseAsync() {
+    public Single<VoidResponse> getBooleanNullWithRestResponseAsync() {
         final Boolean boolQuery = null;
         return service.getBooleanNull(boolQuery);
     }
@@ -350,7 +350,7 @@ public final class QueriesImpl implements Queries {
     /**
      * Get null Boolean value on query (query string should be absent).
      *
-     * @return the {@link Completable} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Completable getBooleanNullAsync() {
         return getBooleanNullWithRestResponseAsync()
@@ -375,7 +375,7 @@ public final class QueriesImpl implements Queries {
      * @param boolQuery null boolean value.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;Void&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     public ServiceFuture<Void> getBooleanNullAsync(Boolean boolQuery, ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(getBooleanNullAsync(boolQuery), serviceCallback);
@@ -386,9 +386,9 @@ public final class QueriesImpl implements Queries {
      *
      * @param boolQuery null boolean value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<Void, Void>> getBooleanNullWithRestResponseAsync(Boolean boolQuery) {
+    public Single<VoidResponse> getBooleanNullWithRestResponseAsync(Boolean boolQuery) {
         return service.getBooleanNull(boolQuery);
     }
 
@@ -397,7 +397,7 @@ public final class QueriesImpl implements Queries {
      *
      * @param boolQuery null boolean value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link Completable} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Completable getBooleanNullAsync(Boolean boolQuery) {
         return getBooleanNullWithRestResponseAsync(boolQuery)
@@ -419,7 +419,7 @@ public final class QueriesImpl implements Queries {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;Void&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     public ServiceFuture<Void> getIntOneMillionAsync(ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(getIntOneMillionAsync(), serviceCallback);
@@ -428,9 +428,9 @@ public final class QueriesImpl implements Queries {
     /**
      * Get '1000000' integer value.
      *
-     * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<Void, Void>> getIntOneMillionWithRestResponseAsync() {
+    public Single<VoidResponse> getIntOneMillionWithRestResponseAsync() {
         final int intQuery = 1000000;
         return service.getIntOneMillion(intQuery);
     }
@@ -438,7 +438,7 @@ public final class QueriesImpl implements Queries {
     /**
      * Get '1000000' integer value.
      *
-     * @return the {@link Completable} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Completable getIntOneMillionAsync() {
         return getIntOneMillionWithRestResponseAsync()
@@ -460,7 +460,7 @@ public final class QueriesImpl implements Queries {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;Void&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     public ServiceFuture<Void> getIntNegativeOneMillionAsync(ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(getIntNegativeOneMillionAsync(), serviceCallback);
@@ -469,9 +469,9 @@ public final class QueriesImpl implements Queries {
     /**
      * Get '-1000000' integer value.
      *
-     * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<Void, Void>> getIntNegativeOneMillionWithRestResponseAsync() {
+    public Single<VoidResponse> getIntNegativeOneMillionWithRestResponseAsync() {
         final int intQuery = -1000000;
         return service.getIntNegativeOneMillion(intQuery);
     }
@@ -479,7 +479,7 @@ public final class QueriesImpl implements Queries {
     /**
      * Get '-1000000' integer value.
      *
-     * @return the {@link Completable} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Completable getIntNegativeOneMillionAsync() {
         return getIntNegativeOneMillionWithRestResponseAsync()
@@ -501,7 +501,7 @@ public final class QueriesImpl implements Queries {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;Void&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     public ServiceFuture<Void> getIntNullAsync(ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(getIntNullAsync(), serviceCallback);
@@ -510,9 +510,9 @@ public final class QueriesImpl implements Queries {
     /**
      * Get null integer value (no query parameter).
      *
-     * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<Void, Void>> getIntNullWithRestResponseAsync() {
+    public Single<VoidResponse> getIntNullWithRestResponseAsync() {
         final Integer intQuery = null;
         return service.getIntNull(intQuery);
     }
@@ -520,7 +520,7 @@ public final class QueriesImpl implements Queries {
     /**
      * Get null integer value (no query parameter).
      *
-     * @return the {@link Completable} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Completable getIntNullAsync() {
         return getIntNullWithRestResponseAsync()
@@ -545,7 +545,7 @@ public final class QueriesImpl implements Queries {
      * @param intQuery null integer value.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;Void&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     public ServiceFuture<Void> getIntNullAsync(Integer intQuery, ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(getIntNullAsync(intQuery), serviceCallback);
@@ -556,9 +556,9 @@ public final class QueriesImpl implements Queries {
      *
      * @param intQuery null integer value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<Void, Void>> getIntNullWithRestResponseAsync(Integer intQuery) {
+    public Single<VoidResponse> getIntNullWithRestResponseAsync(Integer intQuery) {
         return service.getIntNull(intQuery);
     }
 
@@ -567,7 +567,7 @@ public final class QueriesImpl implements Queries {
      *
      * @param intQuery null integer value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link Completable} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Completable getIntNullAsync(Integer intQuery) {
         return getIntNullWithRestResponseAsync(intQuery)
@@ -589,7 +589,7 @@ public final class QueriesImpl implements Queries {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;Void&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     public ServiceFuture<Void> getTenBillionAsync(ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(getTenBillionAsync(), serviceCallback);
@@ -598,9 +598,9 @@ public final class QueriesImpl implements Queries {
     /**
      * Get '10000000000' 64 bit integer value.
      *
-     * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<Void, Void>> getTenBillionWithRestResponseAsync() {
+    public Single<VoidResponse> getTenBillionWithRestResponseAsync() {
         final long longQuery = 10000000000L;
         return service.getTenBillion(longQuery);
     }
@@ -608,7 +608,7 @@ public final class QueriesImpl implements Queries {
     /**
      * Get '10000000000' 64 bit integer value.
      *
-     * @return the {@link Completable} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Completable getTenBillionAsync() {
         return getTenBillionWithRestResponseAsync()
@@ -630,7 +630,7 @@ public final class QueriesImpl implements Queries {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;Void&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     public ServiceFuture<Void> getNegativeTenBillionAsync(ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(getNegativeTenBillionAsync(), serviceCallback);
@@ -639,9 +639,9 @@ public final class QueriesImpl implements Queries {
     /**
      * Get '-10000000000' 64 bit integer value.
      *
-     * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<Void, Void>> getNegativeTenBillionWithRestResponseAsync() {
+    public Single<VoidResponse> getNegativeTenBillionWithRestResponseAsync() {
         final long longQuery = -10000000000L;
         return service.getNegativeTenBillion(longQuery);
     }
@@ -649,7 +649,7 @@ public final class QueriesImpl implements Queries {
     /**
      * Get '-10000000000' 64 bit integer value.
      *
-     * @return the {@link Completable} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Completable getNegativeTenBillionAsync() {
         return getNegativeTenBillionWithRestResponseAsync()
@@ -671,7 +671,7 @@ public final class QueriesImpl implements Queries {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;Void&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     public ServiceFuture<Void> getLongNullAsync(ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(getLongNullAsync(), serviceCallback);
@@ -680,9 +680,9 @@ public final class QueriesImpl implements Queries {
     /**
      * Get 'null 64 bit integer value (no query param in uri).
      *
-     * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<Void, Void>> getLongNullWithRestResponseAsync() {
+    public Single<VoidResponse> getLongNullWithRestResponseAsync() {
         final Long longQuery = null;
         return service.getLongNull(longQuery);
     }
@@ -690,7 +690,7 @@ public final class QueriesImpl implements Queries {
     /**
      * Get 'null 64 bit integer value (no query param in uri).
      *
-     * @return the {@link Completable} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Completable getLongNullAsync() {
         return getLongNullWithRestResponseAsync()
@@ -715,7 +715,7 @@ public final class QueriesImpl implements Queries {
      * @param longQuery null 64 bit integer value.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;Void&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     public ServiceFuture<Void> getLongNullAsync(Long longQuery, ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(getLongNullAsync(longQuery), serviceCallback);
@@ -726,9 +726,9 @@ public final class QueriesImpl implements Queries {
      *
      * @param longQuery null 64 bit integer value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<Void, Void>> getLongNullWithRestResponseAsync(Long longQuery) {
+    public Single<VoidResponse> getLongNullWithRestResponseAsync(Long longQuery) {
         return service.getLongNull(longQuery);
     }
 
@@ -737,7 +737,7 @@ public final class QueriesImpl implements Queries {
      *
      * @param longQuery null 64 bit integer value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link Completable} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Completable getLongNullAsync(Long longQuery) {
         return getLongNullWithRestResponseAsync(longQuery)
@@ -759,7 +759,7 @@ public final class QueriesImpl implements Queries {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;Void&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     public ServiceFuture<Void> floatScientificPositiveAsync(ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(floatScientificPositiveAsync(), serviceCallback);
@@ -768,9 +768,9 @@ public final class QueriesImpl implements Queries {
     /**
      * Get '1.034E+20' numeric value.
      *
-     * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<Void, Void>> floatScientificPositiveWithRestResponseAsync() {
+    public Single<VoidResponse> floatScientificPositiveWithRestResponseAsync() {
         final double floatQuery = 1.034E+20;
         return service.floatScientificPositive(floatQuery);
     }
@@ -778,7 +778,7 @@ public final class QueriesImpl implements Queries {
     /**
      * Get '1.034E+20' numeric value.
      *
-     * @return the {@link Completable} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Completable floatScientificPositiveAsync() {
         return floatScientificPositiveWithRestResponseAsync()
@@ -800,7 +800,7 @@ public final class QueriesImpl implements Queries {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;Void&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     public ServiceFuture<Void> floatScientificNegativeAsync(ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(floatScientificNegativeAsync(), serviceCallback);
@@ -809,9 +809,9 @@ public final class QueriesImpl implements Queries {
     /**
      * Get '-1.034E-20' numeric value.
      *
-     * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<Void, Void>> floatScientificNegativeWithRestResponseAsync() {
+    public Single<VoidResponse> floatScientificNegativeWithRestResponseAsync() {
         final double floatQuery = -1.034E-20;
         return service.floatScientificNegative(floatQuery);
     }
@@ -819,7 +819,7 @@ public final class QueriesImpl implements Queries {
     /**
      * Get '-1.034E-20' numeric value.
      *
-     * @return the {@link Completable} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Completable floatScientificNegativeAsync() {
         return floatScientificNegativeWithRestResponseAsync()
@@ -841,7 +841,7 @@ public final class QueriesImpl implements Queries {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;Void&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     public ServiceFuture<Void> floatNullAsync(ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(floatNullAsync(), serviceCallback);
@@ -850,9 +850,9 @@ public final class QueriesImpl implements Queries {
     /**
      * Get null numeric value (no query parameter).
      *
-     * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<Void, Void>> floatNullWithRestResponseAsync() {
+    public Single<VoidResponse> floatNullWithRestResponseAsync() {
         final Double floatQuery = null;
         return service.floatNull(floatQuery);
     }
@@ -860,7 +860,7 @@ public final class QueriesImpl implements Queries {
     /**
      * Get null numeric value (no query parameter).
      *
-     * @return the {@link Completable} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Completable floatNullAsync() {
         return floatNullWithRestResponseAsync()
@@ -885,7 +885,7 @@ public final class QueriesImpl implements Queries {
      * @param floatQuery null numeric value.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;Void&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     public ServiceFuture<Void> floatNullAsync(Double floatQuery, ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(floatNullAsync(floatQuery), serviceCallback);
@@ -896,9 +896,9 @@ public final class QueriesImpl implements Queries {
      *
      * @param floatQuery null numeric value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<Void, Void>> floatNullWithRestResponseAsync(Double floatQuery) {
+    public Single<VoidResponse> floatNullWithRestResponseAsync(Double floatQuery) {
         return service.floatNull(floatQuery);
     }
 
@@ -907,7 +907,7 @@ public final class QueriesImpl implements Queries {
      *
      * @param floatQuery null numeric value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link Completable} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Completable floatNullAsync(Double floatQuery) {
         return floatNullWithRestResponseAsync(floatQuery)
@@ -929,7 +929,7 @@ public final class QueriesImpl implements Queries {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;Void&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     public ServiceFuture<Void> doubleDecimalPositiveAsync(ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(doubleDecimalPositiveAsync(), serviceCallback);
@@ -938,9 +938,9 @@ public final class QueriesImpl implements Queries {
     /**
      * Get '9999999.999' numeric value.
      *
-     * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<Void, Void>> doubleDecimalPositiveWithRestResponseAsync() {
+    public Single<VoidResponse> doubleDecimalPositiveWithRestResponseAsync() {
         final double doubleQuery = 9999999.999;
         return service.doubleDecimalPositive(doubleQuery);
     }
@@ -948,7 +948,7 @@ public final class QueriesImpl implements Queries {
     /**
      * Get '9999999.999' numeric value.
      *
-     * @return the {@link Completable} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Completable doubleDecimalPositiveAsync() {
         return doubleDecimalPositiveWithRestResponseAsync()
@@ -970,7 +970,7 @@ public final class QueriesImpl implements Queries {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;Void&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     public ServiceFuture<Void> doubleDecimalNegativeAsync(ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(doubleDecimalNegativeAsync(), serviceCallback);
@@ -979,9 +979,9 @@ public final class QueriesImpl implements Queries {
     /**
      * Get '-9999999.999' numeric value.
      *
-     * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<Void, Void>> doubleDecimalNegativeWithRestResponseAsync() {
+    public Single<VoidResponse> doubleDecimalNegativeWithRestResponseAsync() {
         final double doubleQuery = -9999999.999;
         return service.doubleDecimalNegative(doubleQuery);
     }
@@ -989,7 +989,7 @@ public final class QueriesImpl implements Queries {
     /**
      * Get '-9999999.999' numeric value.
      *
-     * @return the {@link Completable} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Completable doubleDecimalNegativeAsync() {
         return doubleDecimalNegativeWithRestResponseAsync()
@@ -1011,7 +1011,7 @@ public final class QueriesImpl implements Queries {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;Void&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     public ServiceFuture<Void> doubleNullAsync(ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(doubleNullAsync(), serviceCallback);
@@ -1020,9 +1020,9 @@ public final class QueriesImpl implements Queries {
     /**
      * Get null numeric value (no query parameter).
      *
-     * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<Void, Void>> doubleNullWithRestResponseAsync() {
+    public Single<VoidResponse> doubleNullWithRestResponseAsync() {
         final Double doubleQuery = null;
         return service.doubleNull(doubleQuery);
     }
@@ -1030,7 +1030,7 @@ public final class QueriesImpl implements Queries {
     /**
      * Get null numeric value (no query parameter).
      *
-     * @return the {@link Completable} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Completable doubleNullAsync() {
         return doubleNullWithRestResponseAsync()
@@ -1055,7 +1055,7 @@ public final class QueriesImpl implements Queries {
      * @param doubleQuery null numeric value.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;Void&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     public ServiceFuture<Void> doubleNullAsync(Double doubleQuery, ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(doubleNullAsync(doubleQuery), serviceCallback);
@@ -1066,9 +1066,9 @@ public final class QueriesImpl implements Queries {
      *
      * @param doubleQuery null numeric value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<Void, Void>> doubleNullWithRestResponseAsync(Double doubleQuery) {
+    public Single<VoidResponse> doubleNullWithRestResponseAsync(Double doubleQuery) {
         return service.doubleNull(doubleQuery);
     }
 
@@ -1077,7 +1077,7 @@ public final class QueriesImpl implements Queries {
      *
      * @param doubleQuery null numeric value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link Completable} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Completable doubleNullAsync(Double doubleQuery) {
         return doubleNullWithRestResponseAsync(doubleQuery)
@@ -1099,7 +1099,7 @@ public final class QueriesImpl implements Queries {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;Void&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     public ServiceFuture<Void> stringUnicodeAsync(ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(stringUnicodeAsync(), serviceCallback);
@@ -1108,9 +1108,9 @@ public final class QueriesImpl implements Queries {
     /**
      * Get '啊齄丂狛狜隣郎隣兀﨩' multi-byte string value.
      *
-     * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<Void, Void>> stringUnicodeWithRestResponseAsync() {
+    public Single<VoidResponse> stringUnicodeWithRestResponseAsync() {
         final String stringQuery = "啊齄丂狛狜隣郎隣兀﨩";
         return service.stringUnicode(stringQuery);
     }
@@ -1118,7 +1118,7 @@ public final class QueriesImpl implements Queries {
     /**
      * Get '啊齄丂狛狜隣郎隣兀﨩' multi-byte string value.
      *
-     * @return the {@link Completable} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Completable stringUnicodeAsync() {
         return stringUnicodeWithRestResponseAsync()
@@ -1140,7 +1140,7 @@ public final class QueriesImpl implements Queries {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;Void&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     public ServiceFuture<Void> stringUrlEncodedAsync(ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(stringUrlEncodedAsync(), serviceCallback);
@@ -1149,9 +1149,9 @@ public final class QueriesImpl implements Queries {
     /**
      * Get 'begin!*'();:@ &amp;=+$,/?#[]end.
      *
-     * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<Void, Void>> stringUrlEncodedWithRestResponseAsync() {
+    public Single<VoidResponse> stringUrlEncodedWithRestResponseAsync() {
         final String stringQuery = "begin!*'();:@ &=+$,/?#[]end";
         return service.stringUrlEncoded(stringQuery);
     }
@@ -1159,7 +1159,7 @@ public final class QueriesImpl implements Queries {
     /**
      * Get 'begin!*'();:@ &amp;=+$,/?#[]end.
      *
-     * @return the {@link Completable} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Completable stringUrlEncodedAsync() {
         return stringUrlEncodedWithRestResponseAsync()
@@ -1181,7 +1181,7 @@ public final class QueriesImpl implements Queries {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;Void&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     public ServiceFuture<Void> stringEmptyAsync(ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(stringEmptyAsync(), serviceCallback);
@@ -1190,9 +1190,9 @@ public final class QueriesImpl implements Queries {
     /**
      * Get ''.
      *
-     * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<Void, Void>> stringEmptyWithRestResponseAsync() {
+    public Single<VoidResponse> stringEmptyWithRestResponseAsync() {
         final String stringQuery = "";
         return service.stringEmpty(stringQuery);
     }
@@ -1200,7 +1200,7 @@ public final class QueriesImpl implements Queries {
     /**
      * Get ''.
      *
-     * @return the {@link Completable} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Completable stringEmptyAsync() {
         return stringEmptyWithRestResponseAsync()
@@ -1222,7 +1222,7 @@ public final class QueriesImpl implements Queries {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;Void&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     public ServiceFuture<Void> stringNullAsync(ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(stringNullAsync(), serviceCallback);
@@ -1231,9 +1231,9 @@ public final class QueriesImpl implements Queries {
     /**
      * Get null (no query parameter in url).
      *
-     * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<Void, Void>> stringNullWithRestResponseAsync() {
+    public Single<VoidResponse> stringNullWithRestResponseAsync() {
         final String stringQuery = null;
         return service.stringNull(stringQuery);
     }
@@ -1241,7 +1241,7 @@ public final class QueriesImpl implements Queries {
     /**
      * Get null (no query parameter in url).
      *
-     * @return the {@link Completable} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Completable stringNullAsync() {
         return stringNullWithRestResponseAsync()
@@ -1266,7 +1266,7 @@ public final class QueriesImpl implements Queries {
      * @param stringQuery null string value.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;Void&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     public ServiceFuture<Void> stringNullAsync(String stringQuery, ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(stringNullAsync(stringQuery), serviceCallback);
@@ -1277,9 +1277,9 @@ public final class QueriesImpl implements Queries {
      *
      * @param stringQuery null string value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<Void, Void>> stringNullWithRestResponseAsync(String stringQuery) {
+    public Single<VoidResponse> stringNullWithRestResponseAsync(String stringQuery) {
         return service.stringNull(stringQuery);
     }
 
@@ -1288,7 +1288,7 @@ public final class QueriesImpl implements Queries {
      *
      * @param stringQuery null string value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link Completable} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Completable stringNullAsync(String stringQuery) {
         return stringNullWithRestResponseAsync(stringQuery)
@@ -1310,7 +1310,7 @@ public final class QueriesImpl implements Queries {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;Void&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     public ServiceFuture<Void> enumValidAsync(ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(enumValidAsync(), serviceCallback);
@@ -1319,9 +1319,9 @@ public final class QueriesImpl implements Queries {
     /**
      * Get using uri with query parameter 'green color'.
      *
-     * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<Void, Void>> enumValidWithRestResponseAsync() {
+    public Single<VoidResponse> enumValidWithRestResponseAsync() {
         final UriColor enumQuery = null;
         return service.enumValid(enumQuery);
     }
@@ -1329,7 +1329,7 @@ public final class QueriesImpl implements Queries {
     /**
      * Get using uri with query parameter 'green color'.
      *
-     * @return the {@link Completable} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Completable enumValidAsync() {
         return enumValidWithRestResponseAsync()
@@ -1354,7 +1354,7 @@ public final class QueriesImpl implements Queries {
      * @param enumQuery 'green color' enum value. Possible values include: 'red color', 'green color', 'blue color'.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;Void&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     public ServiceFuture<Void> enumValidAsync(UriColor enumQuery, ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(enumValidAsync(enumQuery), serviceCallback);
@@ -1365,9 +1365,9 @@ public final class QueriesImpl implements Queries {
      *
      * @param enumQuery 'green color' enum value. Possible values include: 'red color', 'green color', 'blue color'.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<Void, Void>> enumValidWithRestResponseAsync(UriColor enumQuery) {
+    public Single<VoidResponse> enumValidWithRestResponseAsync(UriColor enumQuery) {
         return service.enumValid(enumQuery);
     }
 
@@ -1376,7 +1376,7 @@ public final class QueriesImpl implements Queries {
      *
      * @param enumQuery 'green color' enum value. Possible values include: 'red color', 'green color', 'blue color'.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link Completable} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Completable enumValidAsync(UriColor enumQuery) {
         return enumValidWithRestResponseAsync(enumQuery)
@@ -1398,7 +1398,7 @@ public final class QueriesImpl implements Queries {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;Void&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     public ServiceFuture<Void> enumNullAsync(ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(enumNullAsync(), serviceCallback);
@@ -1407,9 +1407,9 @@ public final class QueriesImpl implements Queries {
     /**
      * Get null (no query parameter in url).
      *
-     * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<Void, Void>> enumNullWithRestResponseAsync() {
+    public Single<VoidResponse> enumNullWithRestResponseAsync() {
         final UriColor enumQuery = null;
         return service.enumNull(enumQuery);
     }
@@ -1417,7 +1417,7 @@ public final class QueriesImpl implements Queries {
     /**
      * Get null (no query parameter in url).
      *
-     * @return the {@link Completable} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Completable enumNullAsync() {
         return enumNullWithRestResponseAsync()
@@ -1442,7 +1442,7 @@ public final class QueriesImpl implements Queries {
      * @param enumQuery null string value. Possible values include: 'red color', 'green color', 'blue color'.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;Void&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     public ServiceFuture<Void> enumNullAsync(UriColor enumQuery, ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(enumNullAsync(enumQuery), serviceCallback);
@@ -1453,9 +1453,9 @@ public final class QueriesImpl implements Queries {
      *
      * @param enumQuery null string value. Possible values include: 'red color', 'green color', 'blue color'.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<Void, Void>> enumNullWithRestResponseAsync(UriColor enumQuery) {
+    public Single<VoidResponse> enumNullWithRestResponseAsync(UriColor enumQuery) {
         return service.enumNull(enumQuery);
     }
 
@@ -1464,7 +1464,7 @@ public final class QueriesImpl implements Queries {
      *
      * @param enumQuery null string value. Possible values include: 'red color', 'green color', 'blue color'.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link Completable} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Completable enumNullAsync(UriColor enumQuery) {
         return enumNullWithRestResponseAsync(enumQuery)
@@ -1486,7 +1486,7 @@ public final class QueriesImpl implements Queries {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;Void&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     public ServiceFuture<Void> byteMultiByteAsync(ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(byteMultiByteAsync(), serviceCallback);
@@ -1495,9 +1495,9 @@ public final class QueriesImpl implements Queries {
     /**
      * Get '啊齄丂狛狜隣郎隣兀﨩' multibyte value as utf-8 encoded byte array.
      *
-     * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<Void, Void>> byteMultiByteWithRestResponseAsync() {
+    public Single<VoidResponse> byteMultiByteWithRestResponseAsync() {
         final byte[] byteQuery = new byte[0];
         String byteQueryConverted = Base64.encodeBase64String(byteQuery);
         return service.byteMultiByte(byteQueryConverted);
@@ -1506,7 +1506,7 @@ public final class QueriesImpl implements Queries {
     /**
      * Get '啊齄丂狛狜隣郎隣兀﨩' multibyte value as utf-8 encoded byte array.
      *
-     * @return the {@link Completable} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Completable byteMultiByteAsync() {
         return byteMultiByteWithRestResponseAsync()
@@ -1531,7 +1531,7 @@ public final class QueriesImpl implements Queries {
      * @param byteQuery '啊齄丂狛狜隣郎隣兀﨩' multibyte value as utf-8 encoded byte array.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;Void&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     public ServiceFuture<Void> byteMultiByteAsync(byte[] byteQuery, ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(byteMultiByteAsync(byteQuery), serviceCallback);
@@ -1542,9 +1542,9 @@ public final class QueriesImpl implements Queries {
      *
      * @param byteQuery '啊齄丂狛狜隣郎隣兀﨩' multibyte value as utf-8 encoded byte array.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<Void, Void>> byteMultiByteWithRestResponseAsync(byte[] byteQuery) {
+    public Single<VoidResponse> byteMultiByteWithRestResponseAsync(byte[] byteQuery) {
         String byteQueryConverted = Base64.encodeBase64String(byteQuery);
         return service.byteMultiByte(byteQueryConverted);
     }
@@ -1554,7 +1554,7 @@ public final class QueriesImpl implements Queries {
      *
      * @param byteQuery '啊齄丂狛狜隣郎隣兀﨩' multibyte value as utf-8 encoded byte array.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link Completable} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Completable byteMultiByteAsync(byte[] byteQuery) {
         return byteMultiByteWithRestResponseAsync(byteQuery)
@@ -1576,7 +1576,7 @@ public final class QueriesImpl implements Queries {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;Void&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     public ServiceFuture<Void> byteEmptyAsync(ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(byteEmptyAsync(), serviceCallback);
@@ -1585,9 +1585,9 @@ public final class QueriesImpl implements Queries {
     /**
      * Get '' as byte array.
      *
-     * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<Void, Void>> byteEmptyWithRestResponseAsync() {
+    public Single<VoidResponse> byteEmptyWithRestResponseAsync() {
         final byte[] byteQuery = "".getBytes();
         String byteQueryConverted = Base64.encodeBase64String(byteQuery);
         return service.byteEmpty(byteQueryConverted);
@@ -1596,7 +1596,7 @@ public final class QueriesImpl implements Queries {
     /**
      * Get '' as byte array.
      *
-     * @return the {@link Completable} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Completable byteEmptyAsync() {
         return byteEmptyWithRestResponseAsync()
@@ -1618,7 +1618,7 @@ public final class QueriesImpl implements Queries {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;Void&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     public ServiceFuture<Void> byteNullAsync(ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(byteNullAsync(), serviceCallback);
@@ -1627,9 +1627,9 @@ public final class QueriesImpl implements Queries {
     /**
      * Get null as byte array (no query parameters in uri).
      *
-     * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<Void, Void>> byteNullWithRestResponseAsync() {
+    public Single<VoidResponse> byteNullWithRestResponseAsync() {
         final byte[] byteQuery = new byte[0];
         String byteQueryConverted = Base64.encodeBase64String(byteQuery);
         return service.byteNull(byteQueryConverted);
@@ -1638,7 +1638,7 @@ public final class QueriesImpl implements Queries {
     /**
      * Get null as byte array (no query parameters in uri).
      *
-     * @return the {@link Completable} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Completable byteNullAsync() {
         return byteNullWithRestResponseAsync()
@@ -1663,7 +1663,7 @@ public final class QueriesImpl implements Queries {
      * @param byteQuery null as byte array (no query parameters in uri).
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;Void&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     public ServiceFuture<Void> byteNullAsync(byte[] byteQuery, ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(byteNullAsync(byteQuery), serviceCallback);
@@ -1674,9 +1674,9 @@ public final class QueriesImpl implements Queries {
      *
      * @param byteQuery null as byte array (no query parameters in uri).
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<Void, Void>> byteNullWithRestResponseAsync(byte[] byteQuery) {
+    public Single<VoidResponse> byteNullWithRestResponseAsync(byte[] byteQuery) {
         String byteQueryConverted = Base64.encodeBase64String(byteQuery);
         return service.byteNull(byteQueryConverted);
     }
@@ -1686,7 +1686,7 @@ public final class QueriesImpl implements Queries {
      *
      * @param byteQuery null as byte array (no query parameters in uri).
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link Completable} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Completable byteNullAsync(byte[] byteQuery) {
         return byteNullWithRestResponseAsync(byteQuery)
@@ -1708,7 +1708,7 @@ public final class QueriesImpl implements Queries {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;Void&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     public ServiceFuture<Void> dateValidAsync(ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(dateValidAsync(), serviceCallback);
@@ -1717,9 +1717,9 @@ public final class QueriesImpl implements Queries {
     /**
      * Get '2012-01-01' as date.
      *
-     * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<Void, Void>> dateValidWithRestResponseAsync() {
+    public Single<VoidResponse> dateValidWithRestResponseAsync() {
         final LocalDate dateQuery = LocalDate.parse("2012-01-01");
         return service.dateValid(dateQuery);
     }
@@ -1727,7 +1727,7 @@ public final class QueriesImpl implements Queries {
     /**
      * Get '2012-01-01' as date.
      *
-     * @return the {@link Completable} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Completable dateValidAsync() {
         return dateValidWithRestResponseAsync()
@@ -1749,7 +1749,7 @@ public final class QueriesImpl implements Queries {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;Void&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     public ServiceFuture<Void> dateNullAsync(ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(dateNullAsync(), serviceCallback);
@@ -1758,9 +1758,9 @@ public final class QueriesImpl implements Queries {
     /**
      * Get null as date - this should result in no query parameters in uri.
      *
-     * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<Void, Void>> dateNullWithRestResponseAsync() {
+    public Single<VoidResponse> dateNullWithRestResponseAsync() {
         final LocalDate dateQuery = null;
         return service.dateNull(dateQuery);
     }
@@ -1768,7 +1768,7 @@ public final class QueriesImpl implements Queries {
     /**
      * Get null as date - this should result in no query parameters in uri.
      *
-     * @return the {@link Completable} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Completable dateNullAsync() {
         return dateNullWithRestResponseAsync()
@@ -1793,7 +1793,7 @@ public final class QueriesImpl implements Queries {
      * @param dateQuery null as date (no query parameters in uri).
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;Void&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     public ServiceFuture<Void> dateNullAsync(LocalDate dateQuery, ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(dateNullAsync(dateQuery), serviceCallback);
@@ -1804,9 +1804,9 @@ public final class QueriesImpl implements Queries {
      *
      * @param dateQuery null as date (no query parameters in uri).
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<Void, Void>> dateNullWithRestResponseAsync(LocalDate dateQuery) {
+    public Single<VoidResponse> dateNullWithRestResponseAsync(LocalDate dateQuery) {
         return service.dateNull(dateQuery);
     }
 
@@ -1815,7 +1815,7 @@ public final class QueriesImpl implements Queries {
      *
      * @param dateQuery null as date (no query parameters in uri).
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link Completable} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Completable dateNullAsync(LocalDate dateQuery) {
         return dateNullWithRestResponseAsync(dateQuery)
@@ -1837,7 +1837,7 @@ public final class QueriesImpl implements Queries {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;Void&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     public ServiceFuture<Void> dateTimeValidAsync(ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(dateTimeValidAsync(), serviceCallback);
@@ -1846,9 +1846,9 @@ public final class QueriesImpl implements Queries {
     /**
      * Get '2012-01-01T01:01:01Z' as date-time.
      *
-     * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<Void, Void>> dateTimeValidWithRestResponseAsync() {
+    public Single<VoidResponse> dateTimeValidWithRestResponseAsync() {
         final DateTime dateTimeQuery = DateTime.parse("2012-01-01T01:01:01Z");
         return service.dateTimeValid(dateTimeQuery);
     }
@@ -1856,7 +1856,7 @@ public final class QueriesImpl implements Queries {
     /**
      * Get '2012-01-01T01:01:01Z' as date-time.
      *
-     * @return the {@link Completable} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Completable dateTimeValidAsync() {
         return dateTimeValidWithRestResponseAsync()
@@ -1878,7 +1878,7 @@ public final class QueriesImpl implements Queries {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;Void&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     public ServiceFuture<Void> dateTimeNullAsync(ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(dateTimeNullAsync(), serviceCallback);
@@ -1887,9 +1887,9 @@ public final class QueriesImpl implements Queries {
     /**
      * Get null as date-time, should result in no query parameters in uri.
      *
-     * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<Void, Void>> dateTimeNullWithRestResponseAsync() {
+    public Single<VoidResponse> dateTimeNullWithRestResponseAsync() {
         final DateTime dateTimeQuery = null;
         return service.dateTimeNull(dateTimeQuery);
     }
@@ -1897,7 +1897,7 @@ public final class QueriesImpl implements Queries {
     /**
      * Get null as date-time, should result in no query parameters in uri.
      *
-     * @return the {@link Completable} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Completable dateTimeNullAsync() {
         return dateTimeNullWithRestResponseAsync()
@@ -1922,7 +1922,7 @@ public final class QueriesImpl implements Queries {
      * @param dateTimeQuery null as date-time (no query parameters).
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;Void&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     public ServiceFuture<Void> dateTimeNullAsync(DateTime dateTimeQuery, ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(dateTimeNullAsync(dateTimeQuery), serviceCallback);
@@ -1933,9 +1933,9 @@ public final class QueriesImpl implements Queries {
      *
      * @param dateTimeQuery null as date-time (no query parameters).
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<Void, Void>> dateTimeNullWithRestResponseAsync(DateTime dateTimeQuery) {
+    public Single<VoidResponse> dateTimeNullWithRestResponseAsync(DateTime dateTimeQuery) {
         return service.dateTimeNull(dateTimeQuery);
     }
 
@@ -1944,7 +1944,7 @@ public final class QueriesImpl implements Queries {
      *
      * @param dateTimeQuery null as date-time (no query parameters).
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link Completable} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Completable dateTimeNullAsync(DateTime dateTimeQuery) {
         return dateTimeNullWithRestResponseAsync(dateTimeQuery)
@@ -1966,7 +1966,7 @@ public final class QueriesImpl implements Queries {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;Void&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     public ServiceFuture<Void> arrayStringCsvValidAsync(ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(arrayStringCsvValidAsync(), serviceCallback);
@@ -1975,9 +1975,9 @@ public final class QueriesImpl implements Queries {
     /**
      * Get an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the csv-array format.
      *
-     * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<Void, Void>> arrayStringCsvValidWithRestResponseAsync() {
+    public Single<VoidResponse> arrayStringCsvValidWithRestResponseAsync() {
         final List<String> arrayQuery = null;
         String arrayQueryConverted = this.client.serializerAdapter().serializeList(arrayQuery, CollectionFormat.CSV);
         return service.arrayStringCsvValid(arrayQueryConverted);
@@ -1986,7 +1986,7 @@ public final class QueriesImpl implements Queries {
     /**
      * Get an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the csv-array format.
      *
-     * @return the {@link Completable} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Completable arrayStringCsvValidAsync() {
         return arrayStringCsvValidWithRestResponseAsync()
@@ -2011,7 +2011,7 @@ public final class QueriesImpl implements Queries {
      * @param arrayQuery an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the csv-array format.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;Void&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     public ServiceFuture<Void> arrayStringCsvValidAsync(List<String> arrayQuery, ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(arrayStringCsvValidAsync(arrayQuery), serviceCallback);
@@ -2022,9 +2022,9 @@ public final class QueriesImpl implements Queries {
      *
      * @param arrayQuery an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the csv-array format.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<Void, Void>> arrayStringCsvValidWithRestResponseAsync(List<String> arrayQuery) {
+    public Single<VoidResponse> arrayStringCsvValidWithRestResponseAsync(List<String> arrayQuery) {
         Validator.validate(arrayQuery);
         String arrayQueryConverted = this.client.serializerAdapter().serializeList(arrayQuery, CollectionFormat.CSV);
         return service.arrayStringCsvValid(arrayQueryConverted);
@@ -2035,7 +2035,7 @@ public final class QueriesImpl implements Queries {
      *
      * @param arrayQuery an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the csv-array format.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link Completable} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Completable arrayStringCsvValidAsync(List<String> arrayQuery) {
         return arrayStringCsvValidWithRestResponseAsync(arrayQuery)
@@ -2057,7 +2057,7 @@ public final class QueriesImpl implements Queries {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;Void&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     public ServiceFuture<Void> arrayStringCsvNullAsync(ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(arrayStringCsvNullAsync(), serviceCallback);
@@ -2066,9 +2066,9 @@ public final class QueriesImpl implements Queries {
     /**
      * Get a null array of string using the csv-array format.
      *
-     * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<Void, Void>> arrayStringCsvNullWithRestResponseAsync() {
+    public Single<VoidResponse> arrayStringCsvNullWithRestResponseAsync() {
         final List<String> arrayQuery = null;
         String arrayQueryConverted = this.client.serializerAdapter().serializeList(arrayQuery, CollectionFormat.CSV);
         return service.arrayStringCsvNull(arrayQueryConverted);
@@ -2077,7 +2077,7 @@ public final class QueriesImpl implements Queries {
     /**
      * Get a null array of string using the csv-array format.
      *
-     * @return the {@link Completable} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Completable arrayStringCsvNullAsync() {
         return arrayStringCsvNullWithRestResponseAsync()
@@ -2102,7 +2102,7 @@ public final class QueriesImpl implements Queries {
      * @param arrayQuery a null array of string using the csv-array format.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;Void&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     public ServiceFuture<Void> arrayStringCsvNullAsync(List<String> arrayQuery, ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(arrayStringCsvNullAsync(arrayQuery), serviceCallback);
@@ -2113,9 +2113,9 @@ public final class QueriesImpl implements Queries {
      *
      * @param arrayQuery a null array of string using the csv-array format.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<Void, Void>> arrayStringCsvNullWithRestResponseAsync(List<String> arrayQuery) {
+    public Single<VoidResponse> arrayStringCsvNullWithRestResponseAsync(List<String> arrayQuery) {
         Validator.validate(arrayQuery);
         String arrayQueryConverted = this.client.serializerAdapter().serializeList(arrayQuery, CollectionFormat.CSV);
         return service.arrayStringCsvNull(arrayQueryConverted);
@@ -2126,7 +2126,7 @@ public final class QueriesImpl implements Queries {
      *
      * @param arrayQuery a null array of string using the csv-array format.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link Completable} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Completable arrayStringCsvNullAsync(List<String> arrayQuery) {
         return arrayStringCsvNullWithRestResponseAsync(arrayQuery)
@@ -2148,7 +2148,7 @@ public final class QueriesImpl implements Queries {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;Void&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     public ServiceFuture<Void> arrayStringCsvEmptyAsync(ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(arrayStringCsvEmptyAsync(), serviceCallback);
@@ -2157,9 +2157,9 @@ public final class QueriesImpl implements Queries {
     /**
      * Get an empty array [] of string using the csv-array format.
      *
-     * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<Void, Void>> arrayStringCsvEmptyWithRestResponseAsync() {
+    public Single<VoidResponse> arrayStringCsvEmptyWithRestResponseAsync() {
         final List<String> arrayQuery = null;
         String arrayQueryConverted = this.client.serializerAdapter().serializeList(arrayQuery, CollectionFormat.CSV);
         return service.arrayStringCsvEmpty(arrayQueryConverted);
@@ -2168,7 +2168,7 @@ public final class QueriesImpl implements Queries {
     /**
      * Get an empty array [] of string using the csv-array format.
      *
-     * @return the {@link Completable} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Completable arrayStringCsvEmptyAsync() {
         return arrayStringCsvEmptyWithRestResponseAsync()
@@ -2193,7 +2193,7 @@ public final class QueriesImpl implements Queries {
      * @param arrayQuery an empty array [] of string using the csv-array format.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;Void&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     public ServiceFuture<Void> arrayStringCsvEmptyAsync(List<String> arrayQuery, ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(arrayStringCsvEmptyAsync(arrayQuery), serviceCallback);
@@ -2204,9 +2204,9 @@ public final class QueriesImpl implements Queries {
      *
      * @param arrayQuery an empty array [] of string using the csv-array format.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<Void, Void>> arrayStringCsvEmptyWithRestResponseAsync(List<String> arrayQuery) {
+    public Single<VoidResponse> arrayStringCsvEmptyWithRestResponseAsync(List<String> arrayQuery) {
         Validator.validate(arrayQuery);
         String arrayQueryConverted = this.client.serializerAdapter().serializeList(arrayQuery, CollectionFormat.CSV);
         return service.arrayStringCsvEmpty(arrayQueryConverted);
@@ -2217,7 +2217,7 @@ public final class QueriesImpl implements Queries {
      *
      * @param arrayQuery an empty array [] of string using the csv-array format.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link Completable} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Completable arrayStringCsvEmptyAsync(List<String> arrayQuery) {
         return arrayStringCsvEmptyWithRestResponseAsync(arrayQuery)
@@ -2239,7 +2239,7 @@ public final class QueriesImpl implements Queries {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;Void&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     public ServiceFuture<Void> arrayStringSsvValidAsync(ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(arrayStringSsvValidAsync(), serviceCallback);
@@ -2248,9 +2248,9 @@ public final class QueriesImpl implements Queries {
     /**
      * Get an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the ssv-array format.
      *
-     * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<Void, Void>> arrayStringSsvValidWithRestResponseAsync() {
+    public Single<VoidResponse> arrayStringSsvValidWithRestResponseAsync() {
         final List<String> arrayQuery = null;
         String arrayQueryConverted = this.client.serializerAdapter().serializeList(arrayQuery, CollectionFormat.SSV);
         return service.arrayStringSsvValid(arrayQueryConverted);
@@ -2259,7 +2259,7 @@ public final class QueriesImpl implements Queries {
     /**
      * Get an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the ssv-array format.
      *
-     * @return the {@link Completable} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Completable arrayStringSsvValidAsync() {
         return arrayStringSsvValidWithRestResponseAsync()
@@ -2284,7 +2284,7 @@ public final class QueriesImpl implements Queries {
      * @param arrayQuery an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the ssv-array format.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;Void&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     public ServiceFuture<Void> arrayStringSsvValidAsync(List<String> arrayQuery, ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(arrayStringSsvValidAsync(arrayQuery), serviceCallback);
@@ -2295,9 +2295,9 @@ public final class QueriesImpl implements Queries {
      *
      * @param arrayQuery an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the ssv-array format.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<Void, Void>> arrayStringSsvValidWithRestResponseAsync(List<String> arrayQuery) {
+    public Single<VoidResponse> arrayStringSsvValidWithRestResponseAsync(List<String> arrayQuery) {
         Validator.validate(arrayQuery);
         String arrayQueryConverted = this.client.serializerAdapter().serializeList(arrayQuery, CollectionFormat.SSV);
         return service.arrayStringSsvValid(arrayQueryConverted);
@@ -2308,7 +2308,7 @@ public final class QueriesImpl implements Queries {
      *
      * @param arrayQuery an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the ssv-array format.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link Completable} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Completable arrayStringSsvValidAsync(List<String> arrayQuery) {
         return arrayStringSsvValidWithRestResponseAsync(arrayQuery)
@@ -2330,7 +2330,7 @@ public final class QueriesImpl implements Queries {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;Void&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     public ServiceFuture<Void> arrayStringTsvValidAsync(ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(arrayStringTsvValidAsync(), serviceCallback);
@@ -2339,9 +2339,9 @@ public final class QueriesImpl implements Queries {
     /**
      * Get an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the tsv-array format.
      *
-     * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<Void, Void>> arrayStringTsvValidWithRestResponseAsync() {
+    public Single<VoidResponse> arrayStringTsvValidWithRestResponseAsync() {
         final List<String> arrayQuery = null;
         String arrayQueryConverted = this.client.serializerAdapter().serializeList(arrayQuery, CollectionFormat.TSV);
         return service.arrayStringTsvValid(arrayQueryConverted);
@@ -2350,7 +2350,7 @@ public final class QueriesImpl implements Queries {
     /**
      * Get an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the tsv-array format.
      *
-     * @return the {@link Completable} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Completable arrayStringTsvValidAsync() {
         return arrayStringTsvValidWithRestResponseAsync()
@@ -2375,7 +2375,7 @@ public final class QueriesImpl implements Queries {
      * @param arrayQuery an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the tsv-array format.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;Void&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     public ServiceFuture<Void> arrayStringTsvValidAsync(List<String> arrayQuery, ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(arrayStringTsvValidAsync(arrayQuery), serviceCallback);
@@ -2386,9 +2386,9 @@ public final class QueriesImpl implements Queries {
      *
      * @param arrayQuery an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the tsv-array format.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<Void, Void>> arrayStringTsvValidWithRestResponseAsync(List<String> arrayQuery) {
+    public Single<VoidResponse> arrayStringTsvValidWithRestResponseAsync(List<String> arrayQuery) {
         Validator.validate(arrayQuery);
         String arrayQueryConverted = this.client.serializerAdapter().serializeList(arrayQuery, CollectionFormat.TSV);
         return service.arrayStringTsvValid(arrayQueryConverted);
@@ -2399,7 +2399,7 @@ public final class QueriesImpl implements Queries {
      *
      * @param arrayQuery an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the tsv-array format.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link Completable} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Completable arrayStringTsvValidAsync(List<String> arrayQuery) {
         return arrayStringTsvValidWithRestResponseAsync(arrayQuery)
@@ -2421,7 +2421,7 @@ public final class QueriesImpl implements Queries {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;Void&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     public ServiceFuture<Void> arrayStringPipesValidAsync(ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(arrayStringPipesValidAsync(), serviceCallback);
@@ -2430,9 +2430,9 @@ public final class QueriesImpl implements Queries {
     /**
      * Get an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the pipes-array format.
      *
-     * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<Void, Void>> arrayStringPipesValidWithRestResponseAsync() {
+    public Single<VoidResponse> arrayStringPipesValidWithRestResponseAsync() {
         final List<String> arrayQuery = null;
         String arrayQueryConverted = this.client.serializerAdapter().serializeList(arrayQuery, CollectionFormat.PIPES);
         return service.arrayStringPipesValid(arrayQueryConverted);
@@ -2441,7 +2441,7 @@ public final class QueriesImpl implements Queries {
     /**
      * Get an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the pipes-array format.
      *
-     * @return the {@link Completable} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Completable arrayStringPipesValidAsync() {
         return arrayStringPipesValidWithRestResponseAsync()
@@ -2466,7 +2466,7 @@ public final class QueriesImpl implements Queries {
      * @param arrayQuery an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the pipes-array format.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;Void&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     public ServiceFuture<Void> arrayStringPipesValidAsync(List<String> arrayQuery, ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(arrayStringPipesValidAsync(arrayQuery), serviceCallback);
@@ -2477,9 +2477,9 @@ public final class QueriesImpl implements Queries {
      *
      * @param arrayQuery an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the pipes-array format.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<Void, Void>> arrayStringPipesValidWithRestResponseAsync(List<String> arrayQuery) {
+    public Single<VoidResponse> arrayStringPipesValidWithRestResponseAsync(List<String> arrayQuery) {
         Validator.validate(arrayQuery);
         String arrayQueryConverted = this.client.serializerAdapter().serializeList(arrayQuery, CollectionFormat.PIPES);
         return service.arrayStringPipesValid(arrayQueryConverted);
@@ -2490,7 +2490,7 @@ public final class QueriesImpl implements Queries {
      *
      * @param arrayQuery an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the pipes-array format.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link Completable} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Completable arrayStringPipesValidAsync(List<String> arrayQuery) {
         return arrayStringPipesValidWithRestResponseAsync(arrayQuery)

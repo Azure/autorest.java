@@ -10,9 +10,11 @@
 
 package fixtures.bodydatetime;
 
-import com.microsoft.rest.v2.RestResponse;
+import com.microsoft.rest.v2.BodyResponse;
 import com.microsoft.rest.v2.ServiceCallback;
 import com.microsoft.rest.v2.ServiceFuture;
+import com.microsoft.rest.v2.VoidResponse;
+import fixtures.bodydatetime.models.ErrorException;
 import io.reactivex.Completable;
 import io.reactivex.Maybe;
 import io.reactivex.Single;
@@ -38,21 +40,21 @@ public interface Datetimes {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;DateTime&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     ServiceFuture<DateTime> getNullAsync(ServiceCallback<DateTime> serviceCallback);
 
     /**
      * Get null datetime value.
      *
-     * @return the {@link Single&lt;RestResponse&lt;Void, DateTime&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, DateTime>> getNullWithRestResponseAsync();
+    Single<BodyResponse<DateTime>> getNullWithRestResponseAsync();
 
     /**
      * Get null datetime value.
      *
-     * @return the {@link Maybe&lt;DateTime&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     Maybe<DateTime> getNullAsync();
 
@@ -70,21 +72,21 @@ public interface Datetimes {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;DateTime&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     ServiceFuture<DateTime> getInvalidAsync(ServiceCallback<DateTime> serviceCallback);
 
     /**
      * Get invalid datetime value.
      *
-     * @return the {@link Single&lt;RestResponse&lt;Void, DateTime&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, DateTime>> getInvalidWithRestResponseAsync();
+    Single<BodyResponse<DateTime>> getInvalidWithRestResponseAsync();
 
     /**
      * Get invalid datetime value.
      *
-     * @return the {@link Maybe&lt;DateTime&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     Maybe<DateTime> getInvalidAsync();
 
@@ -102,21 +104,21 @@ public interface Datetimes {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;DateTime&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     ServiceFuture<DateTime> getOverflowAsync(ServiceCallback<DateTime> serviceCallback);
 
     /**
      * Get overflow datetime value.
      *
-     * @return the {@link Single&lt;RestResponse&lt;Void, DateTime&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, DateTime>> getOverflowWithRestResponseAsync();
+    Single<BodyResponse<DateTime>> getOverflowWithRestResponseAsync();
 
     /**
      * Get overflow datetime value.
      *
-     * @return the {@link Maybe&lt;DateTime&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     Maybe<DateTime> getOverflowAsync();
 
@@ -134,21 +136,21 @@ public interface Datetimes {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;DateTime&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     ServiceFuture<DateTime> getUnderflowAsync(ServiceCallback<DateTime> serviceCallback);
 
     /**
      * Get underflow datetime value.
      *
-     * @return the {@link Single&lt;RestResponse&lt;Void, DateTime&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, DateTime>> getUnderflowWithRestResponseAsync();
+    Single<BodyResponse<DateTime>> getUnderflowWithRestResponseAsync();
 
     /**
      * Get underflow datetime value.
      *
-     * @return the {@link Maybe&lt;DateTime&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     Maybe<DateTime> getUnderflowAsync();
 
@@ -168,7 +170,7 @@ public interface Datetimes {
      * @param datetimeBody the DateTime value.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;Void&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     ServiceFuture<Void> putUtcMaxDateTimeAsync(@NonNull DateTime datetimeBody, ServiceCallback<Void> serviceCallback);
 
@@ -177,16 +179,16 @@ public interface Datetimes {
      *
      * @param datetimeBody the DateTime value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, Void>> putUtcMaxDateTimeWithRestResponseAsync(@NonNull DateTime datetimeBody);
+    Single<VoidResponse> putUtcMaxDateTimeWithRestResponseAsync(@NonNull DateTime datetimeBody);
 
     /**
      * Put max datetime value 9999-12-31T23:59:59.9999999Z.
      *
      * @param datetimeBody the DateTime value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link Completable} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     Completable putUtcMaxDateTimeAsync(@NonNull DateTime datetimeBody);
 
@@ -204,21 +206,21 @@ public interface Datetimes {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;DateTime&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     ServiceFuture<DateTime> getUtcLowercaseMaxDateTimeAsync(ServiceCallback<DateTime> serviceCallback);
 
     /**
      * Get max datetime value 9999-12-31t23:59:59.9999999z.
      *
-     * @return the {@link Single&lt;RestResponse&lt;Void, DateTime&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, DateTime>> getUtcLowercaseMaxDateTimeWithRestResponseAsync();
+    Single<BodyResponse<DateTime>> getUtcLowercaseMaxDateTimeWithRestResponseAsync();
 
     /**
      * Get max datetime value 9999-12-31t23:59:59.9999999z.
      *
-     * @return the {@link Maybe&lt;DateTime&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     Maybe<DateTime> getUtcLowercaseMaxDateTimeAsync();
 
@@ -236,21 +238,21 @@ public interface Datetimes {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;DateTime&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     ServiceFuture<DateTime> getUtcUppercaseMaxDateTimeAsync(ServiceCallback<DateTime> serviceCallback);
 
     /**
      * Get max datetime value 9999-12-31T23:59:59.9999999Z.
      *
-     * @return the {@link Single&lt;RestResponse&lt;Void, DateTime&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, DateTime>> getUtcUppercaseMaxDateTimeWithRestResponseAsync();
+    Single<BodyResponse<DateTime>> getUtcUppercaseMaxDateTimeWithRestResponseAsync();
 
     /**
      * Get max datetime value 9999-12-31T23:59:59.9999999Z.
      *
-     * @return the {@link Maybe&lt;DateTime&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     Maybe<DateTime> getUtcUppercaseMaxDateTimeAsync();
 
@@ -270,7 +272,7 @@ public interface Datetimes {
      * @param datetimeBody the DateTime value.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;Void&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     ServiceFuture<Void> putLocalPositiveOffsetMaxDateTimeAsync(@NonNull DateTime datetimeBody, ServiceCallback<Void> serviceCallback);
 
@@ -279,16 +281,16 @@ public interface Datetimes {
      *
      * @param datetimeBody the DateTime value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, Void>> putLocalPositiveOffsetMaxDateTimeWithRestResponseAsync(@NonNull DateTime datetimeBody);
+    Single<VoidResponse> putLocalPositiveOffsetMaxDateTimeWithRestResponseAsync(@NonNull DateTime datetimeBody);
 
     /**
      * Put max datetime value with positive numoffset 9999-12-31t23:59:59.9999999+14:00.
      *
      * @param datetimeBody the DateTime value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link Completable} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     Completable putLocalPositiveOffsetMaxDateTimeAsync(@NonNull DateTime datetimeBody);
 
@@ -306,21 +308,21 @@ public interface Datetimes {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;DateTime&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     ServiceFuture<DateTime> getLocalPositiveOffsetLowercaseMaxDateTimeAsync(ServiceCallback<DateTime> serviceCallback);
 
     /**
      * Get max datetime value with positive num offset 9999-12-31t23:59:59.9999999+14:00.
      *
-     * @return the {@link Single&lt;RestResponse&lt;Void, DateTime&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, DateTime>> getLocalPositiveOffsetLowercaseMaxDateTimeWithRestResponseAsync();
+    Single<BodyResponse<DateTime>> getLocalPositiveOffsetLowercaseMaxDateTimeWithRestResponseAsync();
 
     /**
      * Get max datetime value with positive num offset 9999-12-31t23:59:59.9999999+14:00.
      *
-     * @return the {@link Maybe&lt;DateTime&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     Maybe<DateTime> getLocalPositiveOffsetLowercaseMaxDateTimeAsync();
 
@@ -338,21 +340,21 @@ public interface Datetimes {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;DateTime&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     ServiceFuture<DateTime> getLocalPositiveOffsetUppercaseMaxDateTimeAsync(ServiceCallback<DateTime> serviceCallback);
 
     /**
      * Get max datetime value with positive num offset 9999-12-31T23:59:59.9999999+14:00.
      *
-     * @return the {@link Single&lt;RestResponse&lt;Void, DateTime&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, DateTime>> getLocalPositiveOffsetUppercaseMaxDateTimeWithRestResponseAsync();
+    Single<BodyResponse<DateTime>> getLocalPositiveOffsetUppercaseMaxDateTimeWithRestResponseAsync();
 
     /**
      * Get max datetime value with positive num offset 9999-12-31T23:59:59.9999999+14:00.
      *
-     * @return the {@link Maybe&lt;DateTime&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     Maybe<DateTime> getLocalPositiveOffsetUppercaseMaxDateTimeAsync();
 
@@ -372,7 +374,7 @@ public interface Datetimes {
      * @param datetimeBody the DateTime value.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;Void&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     ServiceFuture<Void> putLocalNegativeOffsetMaxDateTimeAsync(@NonNull DateTime datetimeBody, ServiceCallback<Void> serviceCallback);
 
@@ -381,16 +383,16 @@ public interface Datetimes {
      *
      * @param datetimeBody the DateTime value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, Void>> putLocalNegativeOffsetMaxDateTimeWithRestResponseAsync(@NonNull DateTime datetimeBody);
+    Single<VoidResponse> putLocalNegativeOffsetMaxDateTimeWithRestResponseAsync(@NonNull DateTime datetimeBody);
 
     /**
      * Put max datetime value with positive numoffset 9999-12-31t23:59:59.9999999-14:00.
      *
      * @param datetimeBody the DateTime value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link Completable} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     Completable putLocalNegativeOffsetMaxDateTimeAsync(@NonNull DateTime datetimeBody);
 
@@ -408,21 +410,21 @@ public interface Datetimes {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;DateTime&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     ServiceFuture<DateTime> getLocalNegativeOffsetUppercaseMaxDateTimeAsync(ServiceCallback<DateTime> serviceCallback);
 
     /**
      * Get max datetime value with positive num offset 9999-12-31T23:59:59.9999999-14:00.
      *
-     * @return the {@link Single&lt;RestResponse&lt;Void, DateTime&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, DateTime>> getLocalNegativeOffsetUppercaseMaxDateTimeWithRestResponseAsync();
+    Single<BodyResponse<DateTime>> getLocalNegativeOffsetUppercaseMaxDateTimeWithRestResponseAsync();
 
     /**
      * Get max datetime value with positive num offset 9999-12-31T23:59:59.9999999-14:00.
      *
-     * @return the {@link Maybe&lt;DateTime&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     Maybe<DateTime> getLocalNegativeOffsetUppercaseMaxDateTimeAsync();
 
@@ -440,21 +442,21 @@ public interface Datetimes {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;DateTime&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     ServiceFuture<DateTime> getLocalNegativeOffsetLowercaseMaxDateTimeAsync(ServiceCallback<DateTime> serviceCallback);
 
     /**
      * Get max datetime value with positive num offset 9999-12-31t23:59:59.9999999-14:00.
      *
-     * @return the {@link Single&lt;RestResponse&lt;Void, DateTime&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, DateTime>> getLocalNegativeOffsetLowercaseMaxDateTimeWithRestResponseAsync();
+    Single<BodyResponse<DateTime>> getLocalNegativeOffsetLowercaseMaxDateTimeWithRestResponseAsync();
 
     /**
      * Get max datetime value with positive num offset 9999-12-31t23:59:59.9999999-14:00.
      *
-     * @return the {@link Maybe&lt;DateTime&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     Maybe<DateTime> getLocalNegativeOffsetLowercaseMaxDateTimeAsync();
 
@@ -474,7 +476,7 @@ public interface Datetimes {
      * @param datetimeBody the DateTime value.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;Void&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     ServiceFuture<Void> putUtcMinDateTimeAsync(@NonNull DateTime datetimeBody, ServiceCallback<Void> serviceCallback);
 
@@ -483,16 +485,16 @@ public interface Datetimes {
      *
      * @param datetimeBody the DateTime value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, Void>> putUtcMinDateTimeWithRestResponseAsync(@NonNull DateTime datetimeBody);
+    Single<VoidResponse> putUtcMinDateTimeWithRestResponseAsync(@NonNull DateTime datetimeBody);
 
     /**
      * Put min datetime value 0001-01-01T00:00:00Z.
      *
      * @param datetimeBody the DateTime value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link Completable} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     Completable putUtcMinDateTimeAsync(@NonNull DateTime datetimeBody);
 
@@ -510,21 +512,21 @@ public interface Datetimes {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;DateTime&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     ServiceFuture<DateTime> getUtcMinDateTimeAsync(ServiceCallback<DateTime> serviceCallback);
 
     /**
      * Get min datetime value 0001-01-01T00:00:00Z.
      *
-     * @return the {@link Single&lt;RestResponse&lt;Void, DateTime&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, DateTime>> getUtcMinDateTimeWithRestResponseAsync();
+    Single<BodyResponse<DateTime>> getUtcMinDateTimeWithRestResponseAsync();
 
     /**
      * Get min datetime value 0001-01-01T00:00:00Z.
      *
-     * @return the {@link Maybe&lt;DateTime&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     Maybe<DateTime> getUtcMinDateTimeAsync();
 
@@ -544,7 +546,7 @@ public interface Datetimes {
      * @param datetimeBody the DateTime value.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;Void&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     ServiceFuture<Void> putLocalPositiveOffsetMinDateTimeAsync(@NonNull DateTime datetimeBody, ServiceCallback<Void> serviceCallback);
 
@@ -553,16 +555,16 @@ public interface Datetimes {
      *
      * @param datetimeBody the DateTime value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, Void>> putLocalPositiveOffsetMinDateTimeWithRestResponseAsync(@NonNull DateTime datetimeBody);
+    Single<VoidResponse> putLocalPositiveOffsetMinDateTimeWithRestResponseAsync(@NonNull DateTime datetimeBody);
 
     /**
      * Put min datetime value 0001-01-01T00:00:00+14:00.
      *
      * @param datetimeBody the DateTime value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link Completable} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     Completable putLocalPositiveOffsetMinDateTimeAsync(@NonNull DateTime datetimeBody);
 
@@ -580,21 +582,21 @@ public interface Datetimes {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;DateTime&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     ServiceFuture<DateTime> getLocalPositiveOffsetMinDateTimeAsync(ServiceCallback<DateTime> serviceCallback);
 
     /**
      * Get min datetime value 0001-01-01T00:00:00+14:00.
      *
-     * @return the {@link Single&lt;RestResponse&lt;Void, DateTime&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, DateTime>> getLocalPositiveOffsetMinDateTimeWithRestResponseAsync();
+    Single<BodyResponse<DateTime>> getLocalPositiveOffsetMinDateTimeWithRestResponseAsync();
 
     /**
      * Get min datetime value 0001-01-01T00:00:00+14:00.
      *
-     * @return the {@link Maybe&lt;DateTime&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     Maybe<DateTime> getLocalPositiveOffsetMinDateTimeAsync();
 
@@ -614,7 +616,7 @@ public interface Datetimes {
      * @param datetimeBody the DateTime value.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;Void&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     ServiceFuture<Void> putLocalNegativeOffsetMinDateTimeAsync(@NonNull DateTime datetimeBody, ServiceCallback<Void> serviceCallback);
 
@@ -623,16 +625,16 @@ public interface Datetimes {
      *
      * @param datetimeBody the DateTime value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, Void>> putLocalNegativeOffsetMinDateTimeWithRestResponseAsync(@NonNull DateTime datetimeBody);
+    Single<VoidResponse> putLocalNegativeOffsetMinDateTimeWithRestResponseAsync(@NonNull DateTime datetimeBody);
 
     /**
      * Put min datetime value 0001-01-01T00:00:00-14:00.
      *
      * @param datetimeBody the DateTime value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link Completable} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     Completable putLocalNegativeOffsetMinDateTimeAsync(@NonNull DateTime datetimeBody);
 
@@ -650,21 +652,21 @@ public interface Datetimes {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;DateTime&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     ServiceFuture<DateTime> getLocalNegativeOffsetMinDateTimeAsync(ServiceCallback<DateTime> serviceCallback);
 
     /**
      * Get min datetime value 0001-01-01T00:00:00-14:00.
      *
-     * @return the {@link Single&lt;RestResponse&lt;Void, DateTime&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, DateTime>> getLocalNegativeOffsetMinDateTimeWithRestResponseAsync();
+    Single<BodyResponse<DateTime>> getLocalNegativeOffsetMinDateTimeWithRestResponseAsync();
 
     /**
      * Get min datetime value 0001-01-01T00:00:00-14:00.
      *
-     * @return the {@link Maybe&lt;DateTime&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     Maybe<DateTime> getLocalNegativeOffsetMinDateTimeAsync();
 }

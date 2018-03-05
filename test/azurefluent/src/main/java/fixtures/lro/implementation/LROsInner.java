@@ -14,10 +14,12 @@ import com.microsoft.azure.v2.AzureProxy;
 import com.microsoft.azure.v2.CloudException;
 import com.microsoft.azure.v2.OperationStatus;
 import com.microsoft.azure.v2.util.ServiceFutureUtil;
-import com.microsoft.rest.v2.RestResponse;
+import com.microsoft.rest.v2.BodyResponse;
+import com.microsoft.rest.v2.OperationDescription;
 import com.microsoft.rest.v2.ServiceCallback;
 import com.microsoft.rest.v2.ServiceFuture;
 import com.microsoft.rest.v2.Validator;
+import com.microsoft.rest.v2.VoidResponse;
 import com.microsoft.rest.v2.annotations.BodyParam;
 import com.microsoft.rest.v2.annotations.DELETE;
 import com.microsoft.rest.v2.annotations.ExpectedResponses;
@@ -25,12 +27,35 @@ import com.microsoft.rest.v2.annotations.HeaderParam;
 import com.microsoft.rest.v2.annotations.Host;
 import com.microsoft.rest.v2.annotations.POST;
 import com.microsoft.rest.v2.annotations.PUT;
+import com.microsoft.rest.v2.annotations.ResumeOperation;
 import com.microsoft.rest.v2.annotations.UnexpectedResponseExceptionType;
+import fixtures.lro.models.LROsDelete202NoRetry204Response;
+import fixtures.lro.models.LROsDelete202Retry200Response;
+import fixtures.lro.models.LROsDeleteAsyncNoHeaderInRetryResponse;
+import fixtures.lro.models.LROsDeleteAsyncNoRetrySucceededResponse;
+import fixtures.lro.models.LROsDeleteAsyncRetrycanceledResponse;
+import fixtures.lro.models.LROsDeleteAsyncRetryFailedResponse;
+import fixtures.lro.models.LROsDeleteAsyncRetrySucceededResponse;
+import fixtures.lro.models.LROsDeleteNoHeaderInRetryResponse;
+import fixtures.lro.models.LROsDeleteProvisioning202Accepted200SucceededResponse;
+import fixtures.lro.models.LROsDeleteProvisioning202Deletingcanceled200Response;
+import fixtures.lro.models.LROsDeleteProvisioning202DeletingFailed200Response;
+import fixtures.lro.models.LROsPost202NoRetry204Response;
+import fixtures.lro.models.LROsPost202Retry200Response;
+import fixtures.lro.models.LROsPostAsyncNoRetrySucceededResponse;
+import fixtures.lro.models.LROsPostAsyncRetrycanceledResponse;
+import fixtures.lro.models.LROsPostAsyncRetryFailedResponse;
+import fixtures.lro.models.LROsPostAsyncRetrySucceededResponse;
+import fixtures.lro.models.LROsPutAsyncNoHeaderInRetryResponse;
+import fixtures.lro.models.LROsPutAsyncNoRetrycanceledResponse;
+import fixtures.lro.models.LROsPutAsyncNoRetrySucceededResponse;
+import fixtures.lro.models.LROsPutAsyncRetryFailedResponse;
+import fixtures.lro.models.LROsPutAsyncRetrySucceededResponse;
+import fixtures.lro.models.LROsPutNoHeaderInRetryResponse;
 import io.reactivex.Completable;
 import io.reactivex.Maybe;
 import io.reactivex.Observable;
 import io.reactivex.Single;
-import io.reactivex.functions.Function;
 
 /**
  * An instance of this class provides access to all the operations defined in
@@ -71,7 +96,13 @@ public final class LROsInner {
         @PUT("lro/put/200/succeeded")
         @ExpectedResponses({200, 202, 204})
         @UnexpectedResponseExceptionType(CloudException.class)
-        Single<RestResponse<Void, ProductInner>> put200Succeeded(@BodyParam("application/json; charset=utf-8") ProductInner product, @HeaderParam("accept-language") String acceptLanguage);
+        Single<BodyResponse<ProductInner>> put200Succeeded(@BodyParam("application/json; charset=utf-8") ProductInner product, @HeaderParam("accept-language") String acceptLanguage);
+
+        @PUT("lro/put/200/succeeded")
+        @ExpectedResponses({200, 202, 204})
+        @UnexpectedResponseExceptionType(CloudException.class)
+        @ResumeOperation
+        Observable<OperationStatus<ProductInner>> resumePut200Succeeded(OperationDescription operationDescription);
 
         @PUT("lro/put/200/succeeded/nostate")
         @ExpectedResponses({200, 202, 204})
@@ -81,7 +112,13 @@ public final class LROsInner {
         @PUT("lro/put/200/succeeded/nostate")
         @ExpectedResponses({200, 202, 204})
         @UnexpectedResponseExceptionType(CloudException.class)
-        Single<RestResponse<Void, ProductInner>> put200SucceededNoState(@BodyParam("application/json; charset=utf-8") ProductInner product, @HeaderParam("accept-language") String acceptLanguage);
+        Single<BodyResponse<ProductInner>> put200SucceededNoState(@BodyParam("application/json; charset=utf-8") ProductInner product, @HeaderParam("accept-language") String acceptLanguage);
+
+        @PUT("lro/put/200/succeeded/nostate")
+        @ExpectedResponses({200, 202, 204})
+        @UnexpectedResponseExceptionType(CloudException.class)
+        @ResumeOperation
+        Observable<OperationStatus<ProductInner>> resumePut200SucceededNoState(OperationDescription operationDescription);
 
         @PUT("lro/put/202/retry/200")
         @ExpectedResponses({200, 202, 204})
@@ -91,7 +128,13 @@ public final class LROsInner {
         @PUT("lro/put/202/retry/200")
         @ExpectedResponses({200, 202, 204})
         @UnexpectedResponseExceptionType(CloudException.class)
-        Single<RestResponse<Void, ProductInner>> put202Retry200(@BodyParam("application/json; charset=utf-8") ProductInner product, @HeaderParam("accept-language") String acceptLanguage);
+        Single<BodyResponse<ProductInner>> put202Retry200(@BodyParam("application/json; charset=utf-8") ProductInner product, @HeaderParam("accept-language") String acceptLanguage);
+
+        @PUT("lro/put/202/retry/200")
+        @ExpectedResponses({200, 202, 204})
+        @UnexpectedResponseExceptionType(CloudException.class)
+        @ResumeOperation
+        Observable<OperationStatus<ProductInner>> resumePut202Retry200(OperationDescription operationDescription);
 
         @PUT("lro/put/201/creating/succeeded/200")
         @ExpectedResponses({200, 201, 202, 204})
@@ -101,7 +144,13 @@ public final class LROsInner {
         @PUT("lro/put/201/creating/succeeded/200")
         @ExpectedResponses({200, 201, 202, 204})
         @UnexpectedResponseExceptionType(CloudException.class)
-        Single<RestResponse<Void, ProductInner>> put201CreatingSucceeded200(@BodyParam("application/json; charset=utf-8") ProductInner product, @HeaderParam("accept-language") String acceptLanguage);
+        Single<BodyResponse<ProductInner>> put201CreatingSucceeded200(@BodyParam("application/json; charset=utf-8") ProductInner product, @HeaderParam("accept-language") String acceptLanguage);
+
+        @PUT("lro/put/201/creating/succeeded/200")
+        @ExpectedResponses({200, 201, 202, 204})
+        @UnexpectedResponseExceptionType(CloudException.class)
+        @ResumeOperation
+        Observable<OperationStatus<ProductInner>> resumePut201CreatingSucceeded200(OperationDescription operationDescription);
 
         @PUT("lro/put/200/updating/succeeded/200")
         @ExpectedResponses({200, 202, 204})
@@ -111,7 +160,13 @@ public final class LROsInner {
         @PUT("lro/put/200/updating/succeeded/200")
         @ExpectedResponses({200, 202, 204})
         @UnexpectedResponseExceptionType(CloudException.class)
-        Single<RestResponse<Void, ProductInner>> put200UpdatingSucceeded204(@BodyParam("application/json; charset=utf-8") ProductInner product, @HeaderParam("accept-language") String acceptLanguage);
+        Single<BodyResponse<ProductInner>> put200UpdatingSucceeded204(@BodyParam("application/json; charset=utf-8") ProductInner product, @HeaderParam("accept-language") String acceptLanguage);
+
+        @PUT("lro/put/200/updating/succeeded/200")
+        @ExpectedResponses({200, 202, 204})
+        @UnexpectedResponseExceptionType(CloudException.class)
+        @ResumeOperation
+        Observable<OperationStatus<ProductInner>> resumePut200UpdatingSucceeded204(OperationDescription operationDescription);
 
         @PUT("lro/put/201/created/failed/200")
         @ExpectedResponses({200, 201, 202, 204})
@@ -121,7 +176,13 @@ public final class LROsInner {
         @PUT("lro/put/201/created/failed/200")
         @ExpectedResponses({200, 201, 202, 204})
         @UnexpectedResponseExceptionType(CloudException.class)
-        Single<RestResponse<Void, ProductInner>> put201CreatingFailed200(@BodyParam("application/json; charset=utf-8") ProductInner product, @HeaderParam("accept-language") String acceptLanguage);
+        Single<BodyResponse<ProductInner>> put201CreatingFailed200(@BodyParam("application/json; charset=utf-8") ProductInner product, @HeaderParam("accept-language") String acceptLanguage);
+
+        @PUT("lro/put/201/created/failed/200")
+        @ExpectedResponses({200, 201, 202, 204})
+        @UnexpectedResponseExceptionType(CloudException.class)
+        @ResumeOperation
+        Observable<OperationStatus<ProductInner>> resumePut201CreatingFailed200(OperationDescription operationDescription);
 
         @PUT("lro/put/200/accepted/canceled/200")
         @ExpectedResponses({200, 202, 204})
@@ -131,7 +192,13 @@ public final class LROsInner {
         @PUT("lro/put/200/accepted/canceled/200")
         @ExpectedResponses({200, 202, 204})
         @UnexpectedResponseExceptionType(CloudException.class)
-        Single<RestResponse<Void, ProductInner>> put200Acceptedcanceled200(@BodyParam("application/json; charset=utf-8") ProductInner product, @HeaderParam("accept-language") String acceptLanguage);
+        Single<BodyResponse<ProductInner>> put200Acceptedcanceled200(@BodyParam("application/json; charset=utf-8") ProductInner product, @HeaderParam("accept-language") String acceptLanguage);
+
+        @PUT("lro/put/200/accepted/canceled/200")
+        @ExpectedResponses({200, 202, 204})
+        @UnexpectedResponseExceptionType(CloudException.class)
+        @ResumeOperation
+        Observable<OperationStatus<ProductInner>> resumePut200Acceptedcanceled200(OperationDescription operationDescription);
 
         @PUT("lro/put/noheader/202/200")
         @ExpectedResponses({200, 202, 204})
@@ -141,7 +208,13 @@ public final class LROsInner {
         @PUT("lro/put/noheader/202/200")
         @ExpectedResponses({200, 202, 204})
         @UnexpectedResponseExceptionType(CloudException.class)
-        Single<RestResponse<LROsPutNoHeaderInRetryHeadersInner, ProductInner>> putNoHeaderInRetry(@BodyParam("application/json; charset=utf-8") ProductInner product, @HeaderParam("accept-language") String acceptLanguage);
+        Single<LROsPutNoHeaderInRetryResponse> putNoHeaderInRetry(@BodyParam("application/json; charset=utf-8") ProductInner product, @HeaderParam("accept-language") String acceptLanguage);
+
+        @PUT("lro/put/noheader/202/200")
+        @ExpectedResponses({200, 202, 204})
+        @UnexpectedResponseExceptionType(CloudException.class)
+        @ResumeOperation
+        Observable<OperationStatus<ProductInner>> resumePutNoHeaderInRetry(OperationDescription operationDescription);
 
         @PUT("lro/putasync/retry/succeeded")
         @ExpectedResponses({200, 202, 204})
@@ -151,7 +224,13 @@ public final class LROsInner {
         @PUT("lro/putasync/retry/succeeded")
         @ExpectedResponses({200, 202, 204})
         @UnexpectedResponseExceptionType(CloudException.class)
-        Single<RestResponse<LROsPutAsyncRetrySucceededHeadersInner, ProductInner>> putAsyncRetrySucceeded(@BodyParam("application/json; charset=utf-8") ProductInner product, @HeaderParam("accept-language") String acceptLanguage);
+        Single<LROsPutAsyncRetrySucceededResponse> putAsyncRetrySucceeded(@BodyParam("application/json; charset=utf-8") ProductInner product, @HeaderParam("accept-language") String acceptLanguage);
+
+        @PUT("lro/putasync/retry/succeeded")
+        @ExpectedResponses({200, 202, 204})
+        @UnexpectedResponseExceptionType(CloudException.class)
+        @ResumeOperation
+        Observable<OperationStatus<ProductInner>> resumePutAsyncRetrySucceeded(OperationDescription operationDescription);
 
         @PUT("lro/putasync/noretry/succeeded")
         @ExpectedResponses({200, 202, 204})
@@ -161,7 +240,13 @@ public final class LROsInner {
         @PUT("lro/putasync/noretry/succeeded")
         @ExpectedResponses({200, 202, 204})
         @UnexpectedResponseExceptionType(CloudException.class)
-        Single<RestResponse<LROsPutAsyncNoRetrySucceededHeadersInner, ProductInner>> putAsyncNoRetrySucceeded(@BodyParam("application/json; charset=utf-8") ProductInner product, @HeaderParam("accept-language") String acceptLanguage);
+        Single<LROsPutAsyncNoRetrySucceededResponse> putAsyncNoRetrySucceeded(@BodyParam("application/json; charset=utf-8") ProductInner product, @HeaderParam("accept-language") String acceptLanguage);
+
+        @PUT("lro/putasync/noretry/succeeded")
+        @ExpectedResponses({200, 202, 204})
+        @UnexpectedResponseExceptionType(CloudException.class)
+        @ResumeOperation
+        Observable<OperationStatus<ProductInner>> resumePutAsyncNoRetrySucceeded(OperationDescription operationDescription);
 
         @PUT("lro/putasync/retry/failed")
         @ExpectedResponses({200, 202, 204})
@@ -171,7 +256,13 @@ public final class LROsInner {
         @PUT("lro/putasync/retry/failed")
         @ExpectedResponses({200, 202, 204})
         @UnexpectedResponseExceptionType(CloudException.class)
-        Single<RestResponse<LROsPutAsyncRetryFailedHeadersInner, ProductInner>> putAsyncRetryFailed(@BodyParam("application/json; charset=utf-8") ProductInner product, @HeaderParam("accept-language") String acceptLanguage);
+        Single<LROsPutAsyncRetryFailedResponse> putAsyncRetryFailed(@BodyParam("application/json; charset=utf-8") ProductInner product, @HeaderParam("accept-language") String acceptLanguage);
+
+        @PUT("lro/putasync/retry/failed")
+        @ExpectedResponses({200, 202, 204})
+        @UnexpectedResponseExceptionType(CloudException.class)
+        @ResumeOperation
+        Observable<OperationStatus<ProductInner>> resumePutAsyncRetryFailed(OperationDescription operationDescription);
 
         @PUT("lro/putasync/noretry/canceled")
         @ExpectedResponses({200, 202, 204})
@@ -181,7 +272,13 @@ public final class LROsInner {
         @PUT("lro/putasync/noretry/canceled")
         @ExpectedResponses({200, 202, 204})
         @UnexpectedResponseExceptionType(CloudException.class)
-        Single<RestResponse<LROsPutAsyncNoRetrycanceledHeadersInner, ProductInner>> putAsyncNoRetrycanceled(@BodyParam("application/json; charset=utf-8") ProductInner product, @HeaderParam("accept-language") String acceptLanguage);
+        Single<LROsPutAsyncNoRetrycanceledResponse> putAsyncNoRetrycanceled(@BodyParam("application/json; charset=utf-8") ProductInner product, @HeaderParam("accept-language") String acceptLanguage);
+
+        @PUT("lro/putasync/noretry/canceled")
+        @ExpectedResponses({200, 202, 204})
+        @UnexpectedResponseExceptionType(CloudException.class)
+        @ResumeOperation
+        Observable<OperationStatus<ProductInner>> resumePutAsyncNoRetrycanceled(OperationDescription operationDescription);
 
         @PUT("lro/putasync/noheader/201/200")
         @ExpectedResponses({200, 201, 202, 204})
@@ -191,7 +288,13 @@ public final class LROsInner {
         @PUT("lro/putasync/noheader/201/200")
         @ExpectedResponses({200, 201, 202, 204})
         @UnexpectedResponseExceptionType(CloudException.class)
-        Single<RestResponse<LROsPutAsyncNoHeaderInRetryHeadersInner, ProductInner>> putAsyncNoHeaderInRetry(@BodyParam("application/json; charset=utf-8") ProductInner product, @HeaderParam("accept-language") String acceptLanguage);
+        Single<LROsPutAsyncNoHeaderInRetryResponse> putAsyncNoHeaderInRetry(@BodyParam("application/json; charset=utf-8") ProductInner product, @HeaderParam("accept-language") String acceptLanguage);
+
+        @PUT("lro/putasync/noheader/201/200")
+        @ExpectedResponses({200, 201, 202, 204})
+        @UnexpectedResponseExceptionType(CloudException.class)
+        @ResumeOperation
+        Observable<OperationStatus<ProductInner>> resumePutAsyncNoHeaderInRetry(OperationDescription operationDescription);
 
         @PUT("lro/putnonresource/202/200")
         @ExpectedResponses({200, 202, 204})
@@ -201,7 +304,13 @@ public final class LROsInner {
         @PUT("lro/putnonresource/202/200")
         @ExpectedResponses({200, 202, 204})
         @UnexpectedResponseExceptionType(CloudException.class)
-        Single<RestResponse<Void, SkuInner>> putNonResource(@BodyParam("application/json; charset=utf-8") SkuInner sku, @HeaderParam("accept-language") String acceptLanguage);
+        Single<BodyResponse<SkuInner>> putNonResource(@BodyParam("application/json; charset=utf-8") SkuInner sku, @HeaderParam("accept-language") String acceptLanguage);
+
+        @PUT("lro/putnonresource/202/200")
+        @ExpectedResponses({200, 202, 204})
+        @UnexpectedResponseExceptionType(CloudException.class)
+        @ResumeOperation
+        Observable<OperationStatus<SkuInner>> resumePutNonResource(OperationDescription operationDescription);
 
         @PUT("lro/putnonresourceasync/202/200")
         @ExpectedResponses({200, 202, 204})
@@ -211,7 +320,13 @@ public final class LROsInner {
         @PUT("lro/putnonresourceasync/202/200")
         @ExpectedResponses({200, 202, 204})
         @UnexpectedResponseExceptionType(CloudException.class)
-        Single<RestResponse<Void, SkuInner>> putAsyncNonResource(@BodyParam("application/json; charset=utf-8") SkuInner sku, @HeaderParam("accept-language") String acceptLanguage);
+        Single<BodyResponse<SkuInner>> putAsyncNonResource(@BodyParam("application/json; charset=utf-8") SkuInner sku, @HeaderParam("accept-language") String acceptLanguage);
+
+        @PUT("lro/putnonresourceasync/202/200")
+        @ExpectedResponses({200, 202, 204})
+        @UnexpectedResponseExceptionType(CloudException.class)
+        @ResumeOperation
+        Observable<OperationStatus<SkuInner>> resumePutAsyncNonResource(OperationDescription operationDescription);
 
         @PUT("lro/putsubresource/202/200")
         @ExpectedResponses({200, 202, 204})
@@ -221,7 +336,13 @@ public final class LROsInner {
         @PUT("lro/putsubresource/202/200")
         @ExpectedResponses({200, 202, 204})
         @UnexpectedResponseExceptionType(CloudException.class)
-        Single<RestResponse<Void, SubProductInner>> putSubResource(@BodyParam("application/json; charset=utf-8") SubProductInner product, @HeaderParam("accept-language") String acceptLanguage);
+        Single<BodyResponse<SubProductInner>> putSubResource(@BodyParam("application/json; charset=utf-8") SubProductInner product, @HeaderParam("accept-language") String acceptLanguage);
+
+        @PUT("lro/putsubresource/202/200")
+        @ExpectedResponses({200, 202, 204})
+        @UnexpectedResponseExceptionType(CloudException.class)
+        @ResumeOperation
+        Observable<OperationStatus<SubProductInner>> resumePutSubResource(OperationDescription operationDescription);
 
         @PUT("lro/putsubresourceasync/202/200")
         @ExpectedResponses({200, 202, 204})
@@ -231,7 +352,13 @@ public final class LROsInner {
         @PUT("lro/putsubresourceasync/202/200")
         @ExpectedResponses({200, 202, 204})
         @UnexpectedResponseExceptionType(CloudException.class)
-        Single<RestResponse<Void, SubProductInner>> putAsyncSubResource(@BodyParam("application/json; charset=utf-8") SubProductInner product, @HeaderParam("accept-language") String acceptLanguage);
+        Single<BodyResponse<SubProductInner>> putAsyncSubResource(@BodyParam("application/json; charset=utf-8") SubProductInner product, @HeaderParam("accept-language") String acceptLanguage);
+
+        @PUT("lro/putsubresourceasync/202/200")
+        @ExpectedResponses({200, 202, 204})
+        @UnexpectedResponseExceptionType(CloudException.class)
+        @ResumeOperation
+        Observable<OperationStatus<SubProductInner>> resumePutAsyncSubResource(OperationDescription operationDescription);
 
         @DELETE("lro/delete/provisioning/202/accepted/200/succeeded")
         @ExpectedResponses({200, 202, 204})
@@ -241,7 +368,13 @@ public final class LROsInner {
         @DELETE("lro/delete/provisioning/202/accepted/200/succeeded")
         @ExpectedResponses({200, 202, 204})
         @UnexpectedResponseExceptionType(CloudException.class)
-        Single<RestResponse<LROsDeleteProvisioning202Accepted200SucceededHeadersInner, ProductInner>> deleteProvisioning202Accepted200Succeeded(@HeaderParam("accept-language") String acceptLanguage);
+        Single<LROsDeleteProvisioning202Accepted200SucceededResponse> deleteProvisioning202Accepted200Succeeded(@HeaderParam("accept-language") String acceptLanguage);
+
+        @DELETE("lro/delete/provisioning/202/accepted/200/succeeded")
+        @ExpectedResponses({200, 202, 204})
+        @UnexpectedResponseExceptionType(CloudException.class)
+        @ResumeOperation
+        Observable<OperationStatus<ProductInner>> resumeDeleteProvisioning202Accepted200Succeeded(OperationDescription operationDescription);
 
         @DELETE("lro/delete/provisioning/202/deleting/200/failed")
         @ExpectedResponses({200, 202, 204})
@@ -251,7 +384,13 @@ public final class LROsInner {
         @DELETE("lro/delete/provisioning/202/deleting/200/failed")
         @ExpectedResponses({200, 202, 204})
         @UnexpectedResponseExceptionType(CloudException.class)
-        Single<RestResponse<LROsDeleteProvisioning202DeletingFailed200HeadersInner, ProductInner>> deleteProvisioning202DeletingFailed200(@HeaderParam("accept-language") String acceptLanguage);
+        Single<LROsDeleteProvisioning202DeletingFailed200Response> deleteProvisioning202DeletingFailed200(@HeaderParam("accept-language") String acceptLanguage);
+
+        @DELETE("lro/delete/provisioning/202/deleting/200/failed")
+        @ExpectedResponses({200, 202, 204})
+        @UnexpectedResponseExceptionType(CloudException.class)
+        @ResumeOperation
+        Observable<OperationStatus<ProductInner>> resumeDeleteProvisioning202DeletingFailed200(OperationDescription operationDescription);
 
         @DELETE("lro/delete/provisioning/202/deleting/200/canceled")
         @ExpectedResponses({200, 202, 204})
@@ -261,7 +400,13 @@ public final class LROsInner {
         @DELETE("lro/delete/provisioning/202/deleting/200/canceled")
         @ExpectedResponses({200, 202, 204})
         @UnexpectedResponseExceptionType(CloudException.class)
-        Single<RestResponse<LROsDeleteProvisioning202Deletingcanceled200HeadersInner, ProductInner>> deleteProvisioning202Deletingcanceled200(@HeaderParam("accept-language") String acceptLanguage);
+        Single<LROsDeleteProvisioning202Deletingcanceled200Response> deleteProvisioning202Deletingcanceled200(@HeaderParam("accept-language") String acceptLanguage);
+
+        @DELETE("lro/delete/provisioning/202/deleting/200/canceled")
+        @ExpectedResponses({200, 202, 204})
+        @UnexpectedResponseExceptionType(CloudException.class)
+        @ResumeOperation
+        Observable<OperationStatus<ProductInner>> resumeDeleteProvisioning202Deletingcanceled200(OperationDescription operationDescription);
 
         @DELETE("lro/delete/204/succeeded")
         @ExpectedResponses({200, 202, 204})
@@ -271,7 +416,13 @@ public final class LROsInner {
         @DELETE("lro/delete/204/succeeded")
         @ExpectedResponses({200, 202, 204})
         @UnexpectedResponseExceptionType(CloudException.class)
-        Single<RestResponse<Void, Void>> delete204Succeeded(@HeaderParam("accept-language") String acceptLanguage);
+        Single<VoidResponse> delete204Succeeded(@HeaderParam("accept-language") String acceptLanguage);
+
+        @DELETE("lro/delete/204/succeeded")
+        @ExpectedResponses({200, 202, 204})
+        @UnexpectedResponseExceptionType(CloudException.class)
+        @ResumeOperation
+        Observable<OperationStatus<Void>> resumeDelete204Succeeded(OperationDescription operationDescription);
 
         @DELETE("lro/delete/202/retry/200")
         @ExpectedResponses({200, 202, 204})
@@ -281,7 +432,13 @@ public final class LROsInner {
         @DELETE("lro/delete/202/retry/200")
         @ExpectedResponses({200, 202, 204})
         @UnexpectedResponseExceptionType(CloudException.class)
-        Single<RestResponse<LROsDelete202Retry200HeadersInner, ProductInner>> delete202Retry200(@HeaderParam("accept-language") String acceptLanguage);
+        Single<LROsDelete202Retry200Response> delete202Retry200(@HeaderParam("accept-language") String acceptLanguage);
+
+        @DELETE("lro/delete/202/retry/200")
+        @ExpectedResponses({200, 202, 204})
+        @UnexpectedResponseExceptionType(CloudException.class)
+        @ResumeOperation
+        Observable<OperationStatus<ProductInner>> resumeDelete202Retry200(OperationDescription operationDescription);
 
         @DELETE("lro/delete/202/noretry/204")
         @ExpectedResponses({200, 202, 204})
@@ -291,7 +448,13 @@ public final class LROsInner {
         @DELETE("lro/delete/202/noretry/204")
         @ExpectedResponses({200, 202, 204})
         @UnexpectedResponseExceptionType(CloudException.class)
-        Single<RestResponse<LROsDelete202NoRetry204HeadersInner, ProductInner>> delete202NoRetry204(@HeaderParam("accept-language") String acceptLanguage);
+        Single<LROsDelete202NoRetry204Response> delete202NoRetry204(@HeaderParam("accept-language") String acceptLanguage);
+
+        @DELETE("lro/delete/202/noretry/204")
+        @ExpectedResponses({200, 202, 204})
+        @UnexpectedResponseExceptionType(CloudException.class)
+        @ResumeOperation
+        Observable<OperationStatus<ProductInner>> resumeDelete202NoRetry204(OperationDescription operationDescription);
 
         @DELETE("lro/delete/noheader")
         @ExpectedResponses({200, 202, 204})
@@ -301,7 +464,13 @@ public final class LROsInner {
         @DELETE("lro/delete/noheader")
         @ExpectedResponses({200, 202, 204})
         @UnexpectedResponseExceptionType(CloudException.class)
-        Single<RestResponse<LROsDeleteNoHeaderInRetryHeadersInner, Void>> deleteNoHeaderInRetry(@HeaderParam("accept-language") String acceptLanguage);
+        Single<LROsDeleteNoHeaderInRetryResponse> deleteNoHeaderInRetry(@HeaderParam("accept-language") String acceptLanguage);
+
+        @DELETE("lro/delete/noheader")
+        @ExpectedResponses({200, 202, 204})
+        @UnexpectedResponseExceptionType(CloudException.class)
+        @ResumeOperation
+        Observable<OperationStatus<Void>> resumeDeleteNoHeaderInRetry(OperationDescription operationDescription);
 
         @DELETE("lro/deleteasync/noheader/202/204")
         @ExpectedResponses({200, 202, 204})
@@ -311,7 +480,13 @@ public final class LROsInner {
         @DELETE("lro/deleteasync/noheader/202/204")
         @ExpectedResponses({200, 202, 204})
         @UnexpectedResponseExceptionType(CloudException.class)
-        Single<RestResponse<LROsDeleteAsyncNoHeaderInRetryHeadersInner, Void>> deleteAsyncNoHeaderInRetry(@HeaderParam("accept-language") String acceptLanguage);
+        Single<LROsDeleteAsyncNoHeaderInRetryResponse> deleteAsyncNoHeaderInRetry(@HeaderParam("accept-language") String acceptLanguage);
+
+        @DELETE("lro/deleteasync/noheader/202/204")
+        @ExpectedResponses({200, 202, 204})
+        @UnexpectedResponseExceptionType(CloudException.class)
+        @ResumeOperation
+        Observable<OperationStatus<Void>> resumeDeleteAsyncNoHeaderInRetry(OperationDescription operationDescription);
 
         @DELETE("lro/deleteasync/retry/succeeded")
         @ExpectedResponses({200, 202, 204})
@@ -321,7 +496,13 @@ public final class LROsInner {
         @DELETE("lro/deleteasync/retry/succeeded")
         @ExpectedResponses({200, 202, 204})
         @UnexpectedResponseExceptionType(CloudException.class)
-        Single<RestResponse<LROsDeleteAsyncRetrySucceededHeadersInner, Void>> deleteAsyncRetrySucceeded(@HeaderParam("accept-language") String acceptLanguage);
+        Single<LROsDeleteAsyncRetrySucceededResponse> deleteAsyncRetrySucceeded(@HeaderParam("accept-language") String acceptLanguage);
+
+        @DELETE("lro/deleteasync/retry/succeeded")
+        @ExpectedResponses({200, 202, 204})
+        @UnexpectedResponseExceptionType(CloudException.class)
+        @ResumeOperation
+        Observable<OperationStatus<Void>> resumeDeleteAsyncRetrySucceeded(OperationDescription operationDescription);
 
         @DELETE("lro/deleteasync/noretry/succeeded")
         @ExpectedResponses({200, 202, 204})
@@ -331,7 +512,13 @@ public final class LROsInner {
         @DELETE("lro/deleteasync/noretry/succeeded")
         @ExpectedResponses({200, 202, 204})
         @UnexpectedResponseExceptionType(CloudException.class)
-        Single<RestResponse<LROsDeleteAsyncNoRetrySucceededHeadersInner, Void>> deleteAsyncNoRetrySucceeded(@HeaderParam("accept-language") String acceptLanguage);
+        Single<LROsDeleteAsyncNoRetrySucceededResponse> deleteAsyncNoRetrySucceeded(@HeaderParam("accept-language") String acceptLanguage);
+
+        @DELETE("lro/deleteasync/noretry/succeeded")
+        @ExpectedResponses({200, 202, 204})
+        @UnexpectedResponseExceptionType(CloudException.class)
+        @ResumeOperation
+        Observable<OperationStatus<Void>> resumeDeleteAsyncNoRetrySucceeded(OperationDescription operationDescription);
 
         @DELETE("lro/deleteasync/retry/failed")
         @ExpectedResponses({200, 202, 204})
@@ -341,7 +528,13 @@ public final class LROsInner {
         @DELETE("lro/deleteasync/retry/failed")
         @ExpectedResponses({200, 202, 204})
         @UnexpectedResponseExceptionType(CloudException.class)
-        Single<RestResponse<LROsDeleteAsyncRetryFailedHeadersInner, Void>> deleteAsyncRetryFailed(@HeaderParam("accept-language") String acceptLanguage);
+        Single<LROsDeleteAsyncRetryFailedResponse> deleteAsyncRetryFailed(@HeaderParam("accept-language") String acceptLanguage);
+
+        @DELETE("lro/deleteasync/retry/failed")
+        @ExpectedResponses({200, 202, 204})
+        @UnexpectedResponseExceptionType(CloudException.class)
+        @ResumeOperation
+        Observable<OperationStatus<Void>> resumeDeleteAsyncRetryFailed(OperationDescription operationDescription);
 
         @DELETE("lro/deleteasync/retry/canceled")
         @ExpectedResponses({200, 202, 204})
@@ -351,7 +544,13 @@ public final class LROsInner {
         @DELETE("lro/deleteasync/retry/canceled")
         @ExpectedResponses({200, 202, 204})
         @UnexpectedResponseExceptionType(CloudException.class)
-        Single<RestResponse<LROsDeleteAsyncRetrycanceledHeadersInner, Void>> deleteAsyncRetrycanceled(@HeaderParam("accept-language") String acceptLanguage);
+        Single<LROsDeleteAsyncRetrycanceledResponse> deleteAsyncRetrycanceled(@HeaderParam("accept-language") String acceptLanguage);
+
+        @DELETE("lro/deleteasync/retry/canceled")
+        @ExpectedResponses({200, 202, 204})
+        @UnexpectedResponseExceptionType(CloudException.class)
+        @ResumeOperation
+        Observable<OperationStatus<Void>> resumeDeleteAsyncRetrycanceled(OperationDescription operationDescription);
 
         @POST("lro/post/payload/200")
         @ExpectedResponses({200, 202, 204})
@@ -361,7 +560,13 @@ public final class LROsInner {
         @POST("lro/post/payload/200")
         @ExpectedResponses({200, 202, 204})
         @UnexpectedResponseExceptionType(CloudException.class)
-        Single<RestResponse<Void, SkuInner>> post200WithPayload(@HeaderParam("accept-language") String acceptLanguage);
+        Single<BodyResponse<SkuInner>> post200WithPayload(@HeaderParam("accept-language") String acceptLanguage);
+
+        @POST("lro/post/payload/200")
+        @ExpectedResponses({200, 202, 204})
+        @UnexpectedResponseExceptionType(CloudException.class)
+        @ResumeOperation
+        Observable<OperationStatus<SkuInner>> resumePost200WithPayload(OperationDescription operationDescription);
 
         @POST("lro/post/202/retry/200")
         @ExpectedResponses({200, 202, 204})
@@ -371,7 +576,13 @@ public final class LROsInner {
         @POST("lro/post/202/retry/200")
         @ExpectedResponses({200, 202, 204})
         @UnexpectedResponseExceptionType(CloudException.class)
-        Single<RestResponse<LROsPost202Retry200HeadersInner, Void>> post202Retry200(@BodyParam("application/json; charset=utf-8") ProductInner product, @HeaderParam("accept-language") String acceptLanguage);
+        Single<LROsPost202Retry200Response> post202Retry200(@BodyParam("application/json; charset=utf-8") ProductInner product, @HeaderParam("accept-language") String acceptLanguage);
+
+        @POST("lro/post/202/retry/200")
+        @ExpectedResponses({200, 202, 204})
+        @UnexpectedResponseExceptionType(CloudException.class)
+        @ResumeOperation
+        Observable<OperationStatus<Void>> resumePost202Retry200(OperationDescription operationDescription);
 
         @POST("lro/post/202/noretry/204")
         @ExpectedResponses({200, 202, 204})
@@ -381,7 +592,13 @@ public final class LROsInner {
         @POST("lro/post/202/noretry/204")
         @ExpectedResponses({200, 202, 204})
         @UnexpectedResponseExceptionType(CloudException.class)
-        Single<RestResponse<LROsPost202NoRetry204HeadersInner, ProductInner>> post202NoRetry204(@BodyParam("application/json; charset=utf-8") ProductInner product, @HeaderParam("accept-language") String acceptLanguage);
+        Single<LROsPost202NoRetry204Response> post202NoRetry204(@BodyParam("application/json; charset=utf-8") ProductInner product, @HeaderParam("accept-language") String acceptLanguage);
+
+        @POST("lro/post/202/noretry/204")
+        @ExpectedResponses({200, 202, 204})
+        @UnexpectedResponseExceptionType(CloudException.class)
+        @ResumeOperation
+        Observable<OperationStatus<ProductInner>> resumePost202NoRetry204(OperationDescription operationDescription);
 
         @POST("lro/postasync/retry/succeeded")
         @ExpectedResponses({200, 202, 204})
@@ -391,7 +608,13 @@ public final class LROsInner {
         @POST("lro/postasync/retry/succeeded")
         @ExpectedResponses({200, 202, 204})
         @UnexpectedResponseExceptionType(CloudException.class)
-        Single<RestResponse<LROsPostAsyncRetrySucceededHeadersInner, ProductInner>> postAsyncRetrySucceeded(@BodyParam("application/json; charset=utf-8") ProductInner product, @HeaderParam("accept-language") String acceptLanguage);
+        Single<LROsPostAsyncRetrySucceededResponse> postAsyncRetrySucceeded(@BodyParam("application/json; charset=utf-8") ProductInner product, @HeaderParam("accept-language") String acceptLanguage);
+
+        @POST("lro/postasync/retry/succeeded")
+        @ExpectedResponses({200, 202, 204})
+        @UnexpectedResponseExceptionType(CloudException.class)
+        @ResumeOperation
+        Observable<OperationStatus<ProductInner>> resumePostAsyncRetrySucceeded(OperationDescription operationDescription);
 
         @POST("lro/postasync/noretry/succeeded")
         @ExpectedResponses({200, 202, 204})
@@ -401,7 +624,13 @@ public final class LROsInner {
         @POST("lro/postasync/noretry/succeeded")
         @ExpectedResponses({200, 202, 204})
         @UnexpectedResponseExceptionType(CloudException.class)
-        Single<RestResponse<LROsPostAsyncNoRetrySucceededHeadersInner, ProductInner>> postAsyncNoRetrySucceeded(@BodyParam("application/json; charset=utf-8") ProductInner product, @HeaderParam("accept-language") String acceptLanguage);
+        Single<LROsPostAsyncNoRetrySucceededResponse> postAsyncNoRetrySucceeded(@BodyParam("application/json; charset=utf-8") ProductInner product, @HeaderParam("accept-language") String acceptLanguage);
+
+        @POST("lro/postasync/noretry/succeeded")
+        @ExpectedResponses({200, 202, 204})
+        @UnexpectedResponseExceptionType(CloudException.class)
+        @ResumeOperation
+        Observable<OperationStatus<ProductInner>> resumePostAsyncNoRetrySucceeded(OperationDescription operationDescription);
 
         @POST("lro/postasync/retry/failed")
         @ExpectedResponses({200, 202, 204})
@@ -411,7 +640,13 @@ public final class LROsInner {
         @POST("lro/postasync/retry/failed")
         @ExpectedResponses({200, 202, 204})
         @UnexpectedResponseExceptionType(CloudException.class)
-        Single<RestResponse<LROsPostAsyncRetryFailedHeadersInner, Void>> postAsyncRetryFailed(@BodyParam("application/json; charset=utf-8") ProductInner product, @HeaderParam("accept-language") String acceptLanguage);
+        Single<LROsPostAsyncRetryFailedResponse> postAsyncRetryFailed(@BodyParam("application/json; charset=utf-8") ProductInner product, @HeaderParam("accept-language") String acceptLanguage);
+
+        @POST("lro/postasync/retry/failed")
+        @ExpectedResponses({200, 202, 204})
+        @UnexpectedResponseExceptionType(CloudException.class)
+        @ResumeOperation
+        Observable<OperationStatus<Void>> resumePostAsyncRetryFailed(OperationDescription operationDescription);
 
         @POST("lro/postasync/retry/canceled")
         @ExpectedResponses({200, 202, 204})
@@ -421,7 +656,13 @@ public final class LROsInner {
         @POST("lro/postasync/retry/canceled")
         @ExpectedResponses({200, 202, 204})
         @UnexpectedResponseExceptionType(CloudException.class)
-        Single<RestResponse<LROsPostAsyncRetrycanceledHeadersInner, Void>> postAsyncRetrycanceled(@BodyParam("application/json; charset=utf-8") ProductInner product, @HeaderParam("accept-language") String acceptLanguage);
+        Single<LROsPostAsyncRetrycanceledResponse> postAsyncRetrycanceled(@BodyParam("application/json; charset=utf-8") ProductInner product, @HeaderParam("accept-language") String acceptLanguage);
+
+        @POST("lro/postasync/retry/canceled")
+        @ExpectedResponses({200, 202, 204})
+        @UnexpectedResponseExceptionType(CloudException.class)
+        @ResumeOperation
+        Observable<OperationStatus<Void>> resumePostAsyncRetrycanceled(OperationDescription operationDescription);
     }
 
     /**
@@ -440,7 +681,7 @@ public final class LROsInner {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;ProductInner&gt;} object.
+     * @return the ServiceFuture&lt;ProductInner&gt; object.
      */
     public ServiceFuture<ProductInner> beginPut200SucceededAsync(ServiceCallback<ProductInner> serviceCallback) {
         return ServiceFutureUtil.fromLRO(beginPut200SucceededAsync(), serviceCallback);
@@ -474,7 +715,7 @@ public final class LROsInner {
      * @param product Product to put.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;ProductInner&gt;} object.
+     * @return the ServiceFuture&lt;ProductInner&gt; object.
      */
     public ServiceFuture<ProductInner> beginPut200SucceededAsync(ProductInner product, ServiceCallback<ProductInner> serviceCallback) {
         return ServiceFutureUtil.fromLRO(beginPut200SucceededAsync(product), serviceCallback);
@@ -508,7 +749,7 @@ public final class LROsInner {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;ProductInner&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     public ServiceFuture<ProductInner> put200SucceededAsync(ServiceCallback<ProductInner> serviceCallback) {
         return ServiceFuture.fromBody(put200SucceededAsync(), serviceCallback);
@@ -517,9 +758,9 @@ public final class LROsInner {
     /**
      * Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Succeeded’.
      *
-     * @return the {@link Single&lt;RestResponse&lt;Void, ProductInner&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<Void, ProductInner>> put200SucceededWithRestResponseAsync() {
+    public Single<BodyResponse<ProductInner>> put200SucceededWithRestResponseAsync() {
         final ProductInner product = null;
         return service.put200Succeeded(product, this.client.acceptLanguage());
     }
@@ -527,20 +768,11 @@ public final class LROsInner {
     /**
      * Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Succeeded’.
      *
-     * @return the {@link Maybe&lt;ProductInner&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Maybe<ProductInner> put200SucceededAsync() {
         return put200SucceededWithRestResponseAsync()
-            .flatMapMaybe(new Function<RestResponse<Void, ProductInner>, Maybe<ProductInner>>() {
-                @Override
-                public Maybe<ProductInner> apply(RestResponse<Void, ProductInner> restResponse) {
-                    if (restResponse.body() == null) {
-                        return Maybe.empty();
-                    } else {
-                        return Maybe.just(restResponse.body());
-                    }
-                }
-            });
+            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -562,7 +794,7 @@ public final class LROsInner {
      * @param product Product to put.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;ProductInner&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     public ServiceFuture<ProductInner> put200SucceededAsync(ProductInner product, ServiceCallback<ProductInner> serviceCallback) {
         return ServiceFuture.fromBody(put200SucceededAsync(product), serviceCallback);
@@ -573,9 +805,9 @@ public final class LROsInner {
      *
      * @param product Product to put.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link Single&lt;RestResponse&lt;Void, ProductInner&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<Void, ProductInner>> put200SucceededWithRestResponseAsync(ProductInner product) {
+    public Single<BodyResponse<ProductInner>> put200SucceededWithRestResponseAsync(ProductInner product) {
         Validator.validate(product);
         return service.put200Succeeded(product, this.client.acceptLanguage());
     }
@@ -585,20 +817,25 @@ public final class LROsInner {
      *
      * @param product Product to put.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link Maybe&lt;ProductInner&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Maybe<ProductInner> put200SucceededAsync(ProductInner product) {
         return put200SucceededWithRestResponseAsync(product)
-            .flatMapMaybe(new Function<RestResponse<Void, ProductInner>, Maybe<ProductInner>>() {
-                @Override
-                public Maybe<ProductInner> apply(RestResponse<Void, ProductInner> restResponse) {
-                    if (restResponse.body() == null) {
-                        return Maybe.empty();
-                    } else {
-                        return Maybe.just(restResponse.body());
-                    }
-                }
-            });
+            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+    }
+
+    /**
+     * Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Succeeded’. (resume watch).
+     *
+     * @param operationDescription The OperationDescription object.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the observable for the request.
+     */
+    public Observable<OperationStatus<ProductInner>> resumePut200Succeeded(OperationDescription operationDescription) {
+        if (operationDescription == null) {
+            throw new IllegalArgumentException("Parameter operationDescription is required and cannot be null.");
+        }
+        return service.resumePut200Succeeded(operationDescription);
     }
 
     /**
@@ -617,7 +854,7 @@ public final class LROsInner {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;ProductInner&gt;} object.
+     * @return the ServiceFuture&lt;ProductInner&gt; object.
      */
     public ServiceFuture<ProductInner> beginPut200SucceededNoStateAsync(ServiceCallback<ProductInner> serviceCallback) {
         return ServiceFutureUtil.fromLRO(beginPut200SucceededNoStateAsync(), serviceCallback);
@@ -651,7 +888,7 @@ public final class LROsInner {
      * @param product Product to put.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;ProductInner&gt;} object.
+     * @return the ServiceFuture&lt;ProductInner&gt; object.
      */
     public ServiceFuture<ProductInner> beginPut200SucceededNoStateAsync(ProductInner product, ServiceCallback<ProductInner> serviceCallback) {
         return ServiceFutureUtil.fromLRO(beginPut200SucceededNoStateAsync(product), serviceCallback);
@@ -685,7 +922,7 @@ public final class LROsInner {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;ProductInner&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     public ServiceFuture<ProductInner> put200SucceededNoStateAsync(ServiceCallback<ProductInner> serviceCallback) {
         return ServiceFuture.fromBody(put200SucceededNoStateAsync(), serviceCallback);
@@ -694,9 +931,9 @@ public final class LROsInner {
     /**
      * Long running put request, service returns a 200 to the initial request, with an entity that does not contain ProvisioningState=’Succeeded’.
      *
-     * @return the {@link Single&lt;RestResponse&lt;Void, ProductInner&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<Void, ProductInner>> put200SucceededNoStateWithRestResponseAsync() {
+    public Single<BodyResponse<ProductInner>> put200SucceededNoStateWithRestResponseAsync() {
         final ProductInner product = null;
         return service.put200SucceededNoState(product, this.client.acceptLanguage());
     }
@@ -704,20 +941,11 @@ public final class LROsInner {
     /**
      * Long running put request, service returns a 200 to the initial request, with an entity that does not contain ProvisioningState=’Succeeded’.
      *
-     * @return the {@link Maybe&lt;ProductInner&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Maybe<ProductInner> put200SucceededNoStateAsync() {
         return put200SucceededNoStateWithRestResponseAsync()
-            .flatMapMaybe(new Function<RestResponse<Void, ProductInner>, Maybe<ProductInner>>() {
-                @Override
-                public Maybe<ProductInner> apply(RestResponse<Void, ProductInner> restResponse) {
-                    if (restResponse.body() == null) {
-                        return Maybe.empty();
-                    } else {
-                        return Maybe.just(restResponse.body());
-                    }
-                }
-            });
+            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -739,7 +967,7 @@ public final class LROsInner {
      * @param product Product to put.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;ProductInner&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     public ServiceFuture<ProductInner> put200SucceededNoStateAsync(ProductInner product, ServiceCallback<ProductInner> serviceCallback) {
         return ServiceFuture.fromBody(put200SucceededNoStateAsync(product), serviceCallback);
@@ -750,9 +978,9 @@ public final class LROsInner {
      *
      * @param product Product to put.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link Single&lt;RestResponse&lt;Void, ProductInner&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<Void, ProductInner>> put200SucceededNoStateWithRestResponseAsync(ProductInner product) {
+    public Single<BodyResponse<ProductInner>> put200SucceededNoStateWithRestResponseAsync(ProductInner product) {
         Validator.validate(product);
         return service.put200SucceededNoState(product, this.client.acceptLanguage());
     }
@@ -762,20 +990,25 @@ public final class LROsInner {
      *
      * @param product Product to put.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link Maybe&lt;ProductInner&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Maybe<ProductInner> put200SucceededNoStateAsync(ProductInner product) {
         return put200SucceededNoStateWithRestResponseAsync(product)
-            .flatMapMaybe(new Function<RestResponse<Void, ProductInner>, Maybe<ProductInner>>() {
-                @Override
-                public Maybe<ProductInner> apply(RestResponse<Void, ProductInner> restResponse) {
-                    if (restResponse.body() == null) {
-                        return Maybe.empty();
-                    } else {
-                        return Maybe.just(restResponse.body());
-                    }
-                }
-            });
+            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+    }
+
+    /**
+     * Long running put request, service returns a 200 to the initial request, with an entity that does not contain ProvisioningState=’Succeeded’. (resume watch).
+     *
+     * @param operationDescription The OperationDescription object.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the observable for the request.
+     */
+    public Observable<OperationStatus<ProductInner>> resumePut200SucceededNoState(OperationDescription operationDescription) {
+        if (operationDescription == null) {
+            throw new IllegalArgumentException("Parameter operationDescription is required and cannot be null.");
+        }
+        return service.resumePut200SucceededNoState(operationDescription);
     }
 
     /**
@@ -794,7 +1027,7 @@ public final class LROsInner {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;ProductInner&gt;} object.
+     * @return the ServiceFuture&lt;ProductInner&gt; object.
      */
     public ServiceFuture<ProductInner> beginPut202Retry200Async(ServiceCallback<ProductInner> serviceCallback) {
         return ServiceFutureUtil.fromLRO(beginPut202Retry200Async(), serviceCallback);
@@ -828,7 +1061,7 @@ public final class LROsInner {
      * @param product Product to put.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;ProductInner&gt;} object.
+     * @return the ServiceFuture&lt;ProductInner&gt; object.
      */
     public ServiceFuture<ProductInner> beginPut202Retry200Async(ProductInner product, ServiceCallback<ProductInner> serviceCallback) {
         return ServiceFutureUtil.fromLRO(beginPut202Retry200Async(product), serviceCallback);
@@ -862,7 +1095,7 @@ public final class LROsInner {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;ProductInner&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     public ServiceFuture<ProductInner> put202Retry200Async(ServiceCallback<ProductInner> serviceCallback) {
         return ServiceFuture.fromBody(put202Retry200Async(), serviceCallback);
@@ -871,9 +1104,9 @@ public final class LROsInner {
     /**
      * Long running put request, service returns a 202 to the initial request, with a location header that points to a polling URL that returns a 200 and an entity that doesn't contains ProvisioningState.
      *
-     * @return the {@link Single&lt;RestResponse&lt;Void, ProductInner&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<Void, ProductInner>> put202Retry200WithRestResponseAsync() {
+    public Single<BodyResponse<ProductInner>> put202Retry200WithRestResponseAsync() {
         final ProductInner product = null;
         return service.put202Retry200(product, this.client.acceptLanguage());
     }
@@ -881,20 +1114,11 @@ public final class LROsInner {
     /**
      * Long running put request, service returns a 202 to the initial request, with a location header that points to a polling URL that returns a 200 and an entity that doesn't contains ProvisioningState.
      *
-     * @return the {@link Maybe&lt;ProductInner&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Maybe<ProductInner> put202Retry200Async() {
         return put202Retry200WithRestResponseAsync()
-            .flatMapMaybe(new Function<RestResponse<Void, ProductInner>, Maybe<ProductInner>>() {
-                @Override
-                public Maybe<ProductInner> apply(RestResponse<Void, ProductInner> restResponse) {
-                    if (restResponse.body() == null) {
-                        return Maybe.empty();
-                    } else {
-                        return Maybe.just(restResponse.body());
-                    }
-                }
-            });
+            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -916,7 +1140,7 @@ public final class LROsInner {
      * @param product Product to put.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;ProductInner&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     public ServiceFuture<ProductInner> put202Retry200Async(ProductInner product, ServiceCallback<ProductInner> serviceCallback) {
         return ServiceFuture.fromBody(put202Retry200Async(product), serviceCallback);
@@ -927,9 +1151,9 @@ public final class LROsInner {
      *
      * @param product Product to put.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link Single&lt;RestResponse&lt;Void, ProductInner&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<Void, ProductInner>> put202Retry200WithRestResponseAsync(ProductInner product) {
+    public Single<BodyResponse<ProductInner>> put202Retry200WithRestResponseAsync(ProductInner product) {
         Validator.validate(product);
         return service.put202Retry200(product, this.client.acceptLanguage());
     }
@@ -939,20 +1163,25 @@ public final class LROsInner {
      *
      * @param product Product to put.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link Maybe&lt;ProductInner&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Maybe<ProductInner> put202Retry200Async(ProductInner product) {
         return put202Retry200WithRestResponseAsync(product)
-            .flatMapMaybe(new Function<RestResponse<Void, ProductInner>, Maybe<ProductInner>>() {
-                @Override
-                public Maybe<ProductInner> apply(RestResponse<Void, ProductInner> restResponse) {
-                    if (restResponse.body() == null) {
-                        return Maybe.empty();
-                    } else {
-                        return Maybe.just(restResponse.body());
-                    }
-                }
-            });
+            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+    }
+
+    /**
+     * Long running put request, service returns a 202 to the initial request, with a location header that points to a polling URL that returns a 200 and an entity that doesn't contains ProvisioningState (resume watch).
+     *
+     * @param operationDescription The OperationDescription object.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the observable for the request.
+     */
+    public Observable<OperationStatus<ProductInner>> resumePut202Retry200(OperationDescription operationDescription) {
+        if (operationDescription == null) {
+            throw new IllegalArgumentException("Parameter operationDescription is required and cannot be null.");
+        }
+        return service.resumePut202Retry200(operationDescription);
     }
 
     /**
@@ -971,7 +1200,7 @@ public final class LROsInner {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;ProductInner&gt;} object.
+     * @return the ServiceFuture&lt;ProductInner&gt; object.
      */
     public ServiceFuture<ProductInner> beginPut201CreatingSucceeded200Async(ServiceCallback<ProductInner> serviceCallback) {
         return ServiceFutureUtil.fromLRO(beginPut201CreatingSucceeded200Async(), serviceCallback);
@@ -1005,7 +1234,7 @@ public final class LROsInner {
      * @param product Product to put.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;ProductInner&gt;} object.
+     * @return the ServiceFuture&lt;ProductInner&gt; object.
      */
     public ServiceFuture<ProductInner> beginPut201CreatingSucceeded200Async(ProductInner product, ServiceCallback<ProductInner> serviceCallback) {
         return ServiceFutureUtil.fromLRO(beginPut201CreatingSucceeded200Async(product), serviceCallback);
@@ -1039,7 +1268,7 @@ public final class LROsInner {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;ProductInner&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     public ServiceFuture<ProductInner> put201CreatingSucceeded200Async(ServiceCallback<ProductInner> serviceCallback) {
         return ServiceFuture.fromBody(put201CreatingSucceeded200Async(), serviceCallback);
@@ -1048,9 +1277,9 @@ public final class LROsInner {
     /**
      * Long running put request, service returns a 201 to the initial request, with an entity that contains ProvisioningState=’Creating’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Succeeded’.
      *
-     * @return the {@link Single&lt;RestResponse&lt;Void, ProductInner&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<Void, ProductInner>> put201CreatingSucceeded200WithRestResponseAsync() {
+    public Single<BodyResponse<ProductInner>> put201CreatingSucceeded200WithRestResponseAsync() {
         final ProductInner product = null;
         return service.put201CreatingSucceeded200(product, this.client.acceptLanguage());
     }
@@ -1058,20 +1287,11 @@ public final class LROsInner {
     /**
      * Long running put request, service returns a 201 to the initial request, with an entity that contains ProvisioningState=’Creating’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Succeeded’.
      *
-     * @return the {@link Maybe&lt;ProductInner&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Maybe<ProductInner> put201CreatingSucceeded200Async() {
         return put201CreatingSucceeded200WithRestResponseAsync()
-            .flatMapMaybe(new Function<RestResponse<Void, ProductInner>, Maybe<ProductInner>>() {
-                @Override
-                public Maybe<ProductInner> apply(RestResponse<Void, ProductInner> restResponse) {
-                    if (restResponse.body() == null) {
-                        return Maybe.empty();
-                    } else {
-                        return Maybe.just(restResponse.body());
-                    }
-                }
-            });
+            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -1093,7 +1313,7 @@ public final class LROsInner {
      * @param product Product to put.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;ProductInner&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     public ServiceFuture<ProductInner> put201CreatingSucceeded200Async(ProductInner product, ServiceCallback<ProductInner> serviceCallback) {
         return ServiceFuture.fromBody(put201CreatingSucceeded200Async(product), serviceCallback);
@@ -1104,9 +1324,9 @@ public final class LROsInner {
      *
      * @param product Product to put.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link Single&lt;RestResponse&lt;Void, ProductInner&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<Void, ProductInner>> put201CreatingSucceeded200WithRestResponseAsync(ProductInner product) {
+    public Single<BodyResponse<ProductInner>> put201CreatingSucceeded200WithRestResponseAsync(ProductInner product) {
         Validator.validate(product);
         return service.put201CreatingSucceeded200(product, this.client.acceptLanguage());
     }
@@ -1116,20 +1336,25 @@ public final class LROsInner {
      *
      * @param product Product to put.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link Maybe&lt;ProductInner&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Maybe<ProductInner> put201CreatingSucceeded200Async(ProductInner product) {
         return put201CreatingSucceeded200WithRestResponseAsync(product)
-            .flatMapMaybe(new Function<RestResponse<Void, ProductInner>, Maybe<ProductInner>>() {
-                @Override
-                public Maybe<ProductInner> apply(RestResponse<Void, ProductInner> restResponse) {
-                    if (restResponse.body() == null) {
-                        return Maybe.empty();
-                    } else {
-                        return Maybe.just(restResponse.body());
-                    }
-                }
-            });
+            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+    }
+
+    /**
+     * Long running put request, service returns a 201 to the initial request, with an entity that contains ProvisioningState=’Creating’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Succeeded’ (resume watch).
+     *
+     * @param operationDescription The OperationDescription object.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the observable for the request.
+     */
+    public Observable<OperationStatus<ProductInner>> resumePut201CreatingSucceeded200(OperationDescription operationDescription) {
+        if (operationDescription == null) {
+            throw new IllegalArgumentException("Parameter operationDescription is required and cannot be null.");
+        }
+        return service.resumePut201CreatingSucceeded200(operationDescription);
     }
 
     /**
@@ -1148,7 +1373,7 @@ public final class LROsInner {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;ProductInner&gt;} object.
+     * @return the ServiceFuture&lt;ProductInner&gt; object.
      */
     public ServiceFuture<ProductInner> beginPut200UpdatingSucceeded204Async(ServiceCallback<ProductInner> serviceCallback) {
         return ServiceFutureUtil.fromLRO(beginPut200UpdatingSucceeded204Async(), serviceCallback);
@@ -1182,7 +1407,7 @@ public final class LROsInner {
      * @param product Product to put.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;ProductInner&gt;} object.
+     * @return the ServiceFuture&lt;ProductInner&gt; object.
      */
     public ServiceFuture<ProductInner> beginPut200UpdatingSucceeded204Async(ProductInner product, ServiceCallback<ProductInner> serviceCallback) {
         return ServiceFutureUtil.fromLRO(beginPut200UpdatingSucceeded204Async(product), serviceCallback);
@@ -1216,7 +1441,7 @@ public final class LROsInner {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;ProductInner&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     public ServiceFuture<ProductInner> put200UpdatingSucceeded204Async(ServiceCallback<ProductInner> serviceCallback) {
         return ServiceFuture.fromBody(put200UpdatingSucceeded204Async(), serviceCallback);
@@ -1225,9 +1450,9 @@ public final class LROsInner {
     /**
      * Long running put request, service returns a 201 to the initial request, with an entity that contains ProvisioningState=’Updating’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Succeeded’.
      *
-     * @return the {@link Single&lt;RestResponse&lt;Void, ProductInner&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<Void, ProductInner>> put200UpdatingSucceeded204WithRestResponseAsync() {
+    public Single<BodyResponse<ProductInner>> put200UpdatingSucceeded204WithRestResponseAsync() {
         final ProductInner product = null;
         return service.put200UpdatingSucceeded204(product, this.client.acceptLanguage());
     }
@@ -1235,20 +1460,11 @@ public final class LROsInner {
     /**
      * Long running put request, service returns a 201 to the initial request, with an entity that contains ProvisioningState=’Updating’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Succeeded’.
      *
-     * @return the {@link Maybe&lt;ProductInner&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Maybe<ProductInner> put200UpdatingSucceeded204Async() {
         return put200UpdatingSucceeded204WithRestResponseAsync()
-            .flatMapMaybe(new Function<RestResponse<Void, ProductInner>, Maybe<ProductInner>>() {
-                @Override
-                public Maybe<ProductInner> apply(RestResponse<Void, ProductInner> restResponse) {
-                    if (restResponse.body() == null) {
-                        return Maybe.empty();
-                    } else {
-                        return Maybe.just(restResponse.body());
-                    }
-                }
-            });
+            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -1270,7 +1486,7 @@ public final class LROsInner {
      * @param product Product to put.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;ProductInner&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     public ServiceFuture<ProductInner> put200UpdatingSucceeded204Async(ProductInner product, ServiceCallback<ProductInner> serviceCallback) {
         return ServiceFuture.fromBody(put200UpdatingSucceeded204Async(product), serviceCallback);
@@ -1281,9 +1497,9 @@ public final class LROsInner {
      *
      * @param product Product to put.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link Single&lt;RestResponse&lt;Void, ProductInner&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<Void, ProductInner>> put200UpdatingSucceeded204WithRestResponseAsync(ProductInner product) {
+    public Single<BodyResponse<ProductInner>> put200UpdatingSucceeded204WithRestResponseAsync(ProductInner product) {
         Validator.validate(product);
         return service.put200UpdatingSucceeded204(product, this.client.acceptLanguage());
     }
@@ -1293,20 +1509,25 @@ public final class LROsInner {
      *
      * @param product Product to put.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link Maybe&lt;ProductInner&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Maybe<ProductInner> put200UpdatingSucceeded204Async(ProductInner product) {
         return put200UpdatingSucceeded204WithRestResponseAsync(product)
-            .flatMapMaybe(new Function<RestResponse<Void, ProductInner>, Maybe<ProductInner>>() {
-                @Override
-                public Maybe<ProductInner> apply(RestResponse<Void, ProductInner> restResponse) {
-                    if (restResponse.body() == null) {
-                        return Maybe.empty();
-                    } else {
-                        return Maybe.just(restResponse.body());
-                    }
-                }
-            });
+            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+    }
+
+    /**
+     * Long running put request, service returns a 201 to the initial request, with an entity that contains ProvisioningState=’Updating’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Succeeded’ (resume watch).
+     *
+     * @param operationDescription The OperationDescription object.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the observable for the request.
+     */
+    public Observable<OperationStatus<ProductInner>> resumePut200UpdatingSucceeded204(OperationDescription operationDescription) {
+        if (operationDescription == null) {
+            throw new IllegalArgumentException("Parameter operationDescription is required and cannot be null.");
+        }
+        return service.resumePut200UpdatingSucceeded204(operationDescription);
     }
 
     /**
@@ -1325,7 +1546,7 @@ public final class LROsInner {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;ProductInner&gt;} object.
+     * @return the ServiceFuture&lt;ProductInner&gt; object.
      */
     public ServiceFuture<ProductInner> beginPut201CreatingFailed200Async(ServiceCallback<ProductInner> serviceCallback) {
         return ServiceFutureUtil.fromLRO(beginPut201CreatingFailed200Async(), serviceCallback);
@@ -1359,7 +1580,7 @@ public final class LROsInner {
      * @param product Product to put.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;ProductInner&gt;} object.
+     * @return the ServiceFuture&lt;ProductInner&gt; object.
      */
     public ServiceFuture<ProductInner> beginPut201CreatingFailed200Async(ProductInner product, ServiceCallback<ProductInner> serviceCallback) {
         return ServiceFutureUtil.fromLRO(beginPut201CreatingFailed200Async(product), serviceCallback);
@@ -1393,7 +1614,7 @@ public final class LROsInner {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;ProductInner&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     public ServiceFuture<ProductInner> put201CreatingFailed200Async(ServiceCallback<ProductInner> serviceCallback) {
         return ServiceFuture.fromBody(put201CreatingFailed200Async(), serviceCallback);
@@ -1402,9 +1623,9 @@ public final class LROsInner {
     /**
      * Long running put request, service returns a 201 to the initial request, with an entity that contains ProvisioningState=’Created’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Failed’.
      *
-     * @return the {@link Single&lt;RestResponse&lt;Void, ProductInner&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<Void, ProductInner>> put201CreatingFailed200WithRestResponseAsync() {
+    public Single<BodyResponse<ProductInner>> put201CreatingFailed200WithRestResponseAsync() {
         final ProductInner product = null;
         return service.put201CreatingFailed200(product, this.client.acceptLanguage());
     }
@@ -1412,20 +1633,11 @@ public final class LROsInner {
     /**
      * Long running put request, service returns a 201 to the initial request, with an entity that contains ProvisioningState=’Created’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Failed’.
      *
-     * @return the {@link Maybe&lt;ProductInner&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Maybe<ProductInner> put201CreatingFailed200Async() {
         return put201CreatingFailed200WithRestResponseAsync()
-            .flatMapMaybe(new Function<RestResponse<Void, ProductInner>, Maybe<ProductInner>>() {
-                @Override
-                public Maybe<ProductInner> apply(RestResponse<Void, ProductInner> restResponse) {
-                    if (restResponse.body() == null) {
-                        return Maybe.empty();
-                    } else {
-                        return Maybe.just(restResponse.body());
-                    }
-                }
-            });
+            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -1447,7 +1659,7 @@ public final class LROsInner {
      * @param product Product to put.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;ProductInner&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     public ServiceFuture<ProductInner> put201CreatingFailed200Async(ProductInner product, ServiceCallback<ProductInner> serviceCallback) {
         return ServiceFuture.fromBody(put201CreatingFailed200Async(product), serviceCallback);
@@ -1458,9 +1670,9 @@ public final class LROsInner {
      *
      * @param product Product to put.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link Single&lt;RestResponse&lt;Void, ProductInner&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<Void, ProductInner>> put201CreatingFailed200WithRestResponseAsync(ProductInner product) {
+    public Single<BodyResponse<ProductInner>> put201CreatingFailed200WithRestResponseAsync(ProductInner product) {
         Validator.validate(product);
         return service.put201CreatingFailed200(product, this.client.acceptLanguage());
     }
@@ -1470,20 +1682,25 @@ public final class LROsInner {
      *
      * @param product Product to put.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link Maybe&lt;ProductInner&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Maybe<ProductInner> put201CreatingFailed200Async(ProductInner product) {
         return put201CreatingFailed200WithRestResponseAsync(product)
-            .flatMapMaybe(new Function<RestResponse<Void, ProductInner>, Maybe<ProductInner>>() {
-                @Override
-                public Maybe<ProductInner> apply(RestResponse<Void, ProductInner> restResponse) {
-                    if (restResponse.body() == null) {
-                        return Maybe.empty();
-                    } else {
-                        return Maybe.just(restResponse.body());
-                    }
-                }
-            });
+            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+    }
+
+    /**
+     * Long running put request, service returns a 201 to the initial request, with an entity that contains ProvisioningState=’Created’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Failed’ (resume watch).
+     *
+     * @param operationDescription The OperationDescription object.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the observable for the request.
+     */
+    public Observable<OperationStatus<ProductInner>> resumePut201CreatingFailed200(OperationDescription operationDescription) {
+        if (operationDescription == null) {
+            throw new IllegalArgumentException("Parameter operationDescription is required and cannot be null.");
+        }
+        return service.resumePut201CreatingFailed200(operationDescription);
     }
 
     /**
@@ -1502,7 +1719,7 @@ public final class LROsInner {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;ProductInner&gt;} object.
+     * @return the ServiceFuture&lt;ProductInner&gt; object.
      */
     public ServiceFuture<ProductInner> beginPut200Acceptedcanceled200Async(ServiceCallback<ProductInner> serviceCallback) {
         return ServiceFutureUtil.fromLRO(beginPut200Acceptedcanceled200Async(), serviceCallback);
@@ -1536,7 +1753,7 @@ public final class LROsInner {
      * @param product Product to put.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;ProductInner&gt;} object.
+     * @return the ServiceFuture&lt;ProductInner&gt; object.
      */
     public ServiceFuture<ProductInner> beginPut200Acceptedcanceled200Async(ProductInner product, ServiceCallback<ProductInner> serviceCallback) {
         return ServiceFutureUtil.fromLRO(beginPut200Acceptedcanceled200Async(product), serviceCallback);
@@ -1570,7 +1787,7 @@ public final class LROsInner {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;ProductInner&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     public ServiceFuture<ProductInner> put200Acceptedcanceled200Async(ServiceCallback<ProductInner> serviceCallback) {
         return ServiceFuture.fromBody(put200Acceptedcanceled200Async(), serviceCallback);
@@ -1579,9 +1796,9 @@ public final class LROsInner {
     /**
      * Long running put request, service returns a 201 to the initial request, with an entity that contains ProvisioningState=’Creating’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Canceled’.
      *
-     * @return the {@link Single&lt;RestResponse&lt;Void, ProductInner&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<Void, ProductInner>> put200Acceptedcanceled200WithRestResponseAsync() {
+    public Single<BodyResponse<ProductInner>> put200Acceptedcanceled200WithRestResponseAsync() {
         final ProductInner product = null;
         return service.put200Acceptedcanceled200(product, this.client.acceptLanguage());
     }
@@ -1589,20 +1806,11 @@ public final class LROsInner {
     /**
      * Long running put request, service returns a 201 to the initial request, with an entity that contains ProvisioningState=’Creating’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Canceled’.
      *
-     * @return the {@link Maybe&lt;ProductInner&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Maybe<ProductInner> put200Acceptedcanceled200Async() {
         return put200Acceptedcanceled200WithRestResponseAsync()
-            .flatMapMaybe(new Function<RestResponse<Void, ProductInner>, Maybe<ProductInner>>() {
-                @Override
-                public Maybe<ProductInner> apply(RestResponse<Void, ProductInner> restResponse) {
-                    if (restResponse.body() == null) {
-                        return Maybe.empty();
-                    } else {
-                        return Maybe.just(restResponse.body());
-                    }
-                }
-            });
+            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -1624,7 +1832,7 @@ public final class LROsInner {
      * @param product Product to put.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;ProductInner&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     public ServiceFuture<ProductInner> put200Acceptedcanceled200Async(ProductInner product, ServiceCallback<ProductInner> serviceCallback) {
         return ServiceFuture.fromBody(put200Acceptedcanceled200Async(product), serviceCallback);
@@ -1635,9 +1843,9 @@ public final class LROsInner {
      *
      * @param product Product to put.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link Single&lt;RestResponse&lt;Void, ProductInner&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<Void, ProductInner>> put200Acceptedcanceled200WithRestResponseAsync(ProductInner product) {
+    public Single<BodyResponse<ProductInner>> put200Acceptedcanceled200WithRestResponseAsync(ProductInner product) {
         Validator.validate(product);
         return service.put200Acceptedcanceled200(product, this.client.acceptLanguage());
     }
@@ -1647,20 +1855,25 @@ public final class LROsInner {
      *
      * @param product Product to put.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link Maybe&lt;ProductInner&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Maybe<ProductInner> put200Acceptedcanceled200Async(ProductInner product) {
         return put200Acceptedcanceled200WithRestResponseAsync(product)
-            .flatMapMaybe(new Function<RestResponse<Void, ProductInner>, Maybe<ProductInner>>() {
-                @Override
-                public Maybe<ProductInner> apply(RestResponse<Void, ProductInner> restResponse) {
-                    if (restResponse.body() == null) {
-                        return Maybe.empty();
-                    } else {
-                        return Maybe.just(restResponse.body());
-                    }
-                }
-            });
+            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+    }
+
+    /**
+     * Long running put request, service returns a 201 to the initial request, with an entity that contains ProvisioningState=’Creating’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Canceled’ (resume watch).
+     *
+     * @param operationDescription The OperationDescription object.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the observable for the request.
+     */
+    public Observable<OperationStatus<ProductInner>> resumePut200Acceptedcanceled200(OperationDescription operationDescription) {
+        if (operationDescription == null) {
+            throw new IllegalArgumentException("Parameter operationDescription is required and cannot be null.");
+        }
+        return service.resumePut200Acceptedcanceled200(operationDescription);
     }
 
     /**
@@ -1679,7 +1892,7 @@ public final class LROsInner {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;ProductInner&gt;} object.
+     * @return the ServiceFuture&lt;ProductInner&gt; object.
      */
     public ServiceFuture<ProductInner> beginPutNoHeaderInRetryAsync(ServiceCallback<ProductInner> serviceCallback) {
         return ServiceFutureUtil.fromLRO(beginPutNoHeaderInRetryAsync(), serviceCallback);
@@ -1713,7 +1926,7 @@ public final class LROsInner {
      * @param product Product to put.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;ProductInner&gt;} object.
+     * @return the ServiceFuture&lt;ProductInner&gt; object.
      */
     public ServiceFuture<ProductInner> beginPutNoHeaderInRetryAsync(ProductInner product, ServiceCallback<ProductInner> serviceCallback) {
         return ServiceFutureUtil.fromLRO(beginPutNoHeaderInRetryAsync(product), serviceCallback);
@@ -1747,7 +1960,7 @@ public final class LROsInner {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;ProductInner&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     public ServiceFuture<ProductInner> putNoHeaderInRetryAsync(ServiceCallback<ProductInner> serviceCallback) {
         return ServiceFuture.fromBody(putNoHeaderInRetryAsync(), serviceCallback);
@@ -1756,9 +1969,9 @@ public final class LROsInner {
     /**
      * Long running put request, service returns a 202 to the initial request with location header. Subsequent calls to operation status do not contain location header.
      *
-     * @return the {@link Single&lt;RestResponse&lt;LROsPutNoHeaderInRetryHeadersInner, ProductInner&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<LROsPutNoHeaderInRetryHeadersInner, ProductInner>> putNoHeaderInRetryWithRestResponseAsync() {
+    public Single<LROsPutNoHeaderInRetryResponse> putNoHeaderInRetryWithRestResponseAsync() {
         final ProductInner product = null;
         return service.putNoHeaderInRetry(product, this.client.acceptLanguage());
     }
@@ -1766,20 +1979,11 @@ public final class LROsInner {
     /**
      * Long running put request, service returns a 202 to the initial request with location header. Subsequent calls to operation status do not contain location header.
      *
-     * @return the {@link Maybe&lt;ProductInner&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Maybe<ProductInner> putNoHeaderInRetryAsync() {
         return putNoHeaderInRetryWithRestResponseAsync()
-            .flatMapMaybe(new Function<RestResponse<LROsPutNoHeaderInRetryHeadersInner, ProductInner>, Maybe<ProductInner>>() {
-                @Override
-                public Maybe<ProductInner> apply(RestResponse<LROsPutNoHeaderInRetryHeadersInner, ProductInner> restResponse) {
-                    if (restResponse.body() == null) {
-                        return Maybe.empty();
-                    } else {
-                        return Maybe.just(restResponse.body());
-                    }
-                }
-            });
+            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -1801,7 +2005,7 @@ public final class LROsInner {
      * @param product Product to put.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;ProductInner&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     public ServiceFuture<ProductInner> putNoHeaderInRetryAsync(ProductInner product, ServiceCallback<ProductInner> serviceCallback) {
         return ServiceFuture.fromBody(putNoHeaderInRetryAsync(product), serviceCallback);
@@ -1812,9 +2016,9 @@ public final class LROsInner {
      *
      * @param product Product to put.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link Single&lt;RestResponse&lt;LROsPutNoHeaderInRetryHeadersInner, ProductInner&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<LROsPutNoHeaderInRetryHeadersInner, ProductInner>> putNoHeaderInRetryWithRestResponseAsync(ProductInner product) {
+    public Single<LROsPutNoHeaderInRetryResponse> putNoHeaderInRetryWithRestResponseAsync(ProductInner product) {
         Validator.validate(product);
         return service.putNoHeaderInRetry(product, this.client.acceptLanguage());
     }
@@ -1824,20 +2028,25 @@ public final class LROsInner {
      *
      * @param product Product to put.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link Maybe&lt;ProductInner&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Maybe<ProductInner> putNoHeaderInRetryAsync(ProductInner product) {
         return putNoHeaderInRetryWithRestResponseAsync(product)
-            .flatMapMaybe(new Function<RestResponse<LROsPutNoHeaderInRetryHeadersInner, ProductInner>, Maybe<ProductInner>>() {
-                @Override
-                public Maybe<ProductInner> apply(RestResponse<LROsPutNoHeaderInRetryHeadersInner, ProductInner> restResponse) {
-                    if (restResponse.body() == null) {
-                        return Maybe.empty();
-                    } else {
-                        return Maybe.just(restResponse.body());
-                    }
-                }
-            });
+            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+    }
+
+    /**
+     * Long running put request, service returns a 202 to the initial request with location header. Subsequent calls to operation status do not contain location header. (resume watch).
+     *
+     * @param operationDescription The OperationDescription object.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the observable for the request.
+     */
+    public Observable<OperationStatus<ProductInner>> resumePutNoHeaderInRetry(OperationDescription operationDescription) {
+        if (operationDescription == null) {
+            throw new IllegalArgumentException("Parameter operationDescription is required and cannot be null.");
+        }
+        return service.resumePutNoHeaderInRetry(operationDescription);
     }
 
     /**
@@ -1856,7 +2065,7 @@ public final class LROsInner {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;ProductInner&gt;} object.
+     * @return the ServiceFuture&lt;ProductInner&gt; object.
      */
     public ServiceFuture<ProductInner> beginPutAsyncRetrySucceededAsync(ServiceCallback<ProductInner> serviceCallback) {
         return ServiceFutureUtil.fromLRO(beginPutAsyncRetrySucceededAsync(), serviceCallback);
@@ -1890,7 +2099,7 @@ public final class LROsInner {
      * @param product Product to put.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;ProductInner&gt;} object.
+     * @return the ServiceFuture&lt;ProductInner&gt; object.
      */
     public ServiceFuture<ProductInner> beginPutAsyncRetrySucceededAsync(ProductInner product, ServiceCallback<ProductInner> serviceCallback) {
         return ServiceFutureUtil.fromLRO(beginPutAsyncRetrySucceededAsync(product), serviceCallback);
@@ -1924,7 +2133,7 @@ public final class LROsInner {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;ProductInner&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     public ServiceFuture<ProductInner> putAsyncRetrySucceededAsync(ServiceCallback<ProductInner> serviceCallback) {
         return ServiceFuture.fromBody(putAsyncRetrySucceededAsync(), serviceCallback);
@@ -1933,9 +2142,9 @@ public final class LROsInner {
     /**
      * Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
-     * @return the {@link Single&lt;RestResponse&lt;LROsPutAsyncRetrySucceededHeadersInner, ProductInner&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<LROsPutAsyncRetrySucceededHeadersInner, ProductInner>> putAsyncRetrySucceededWithRestResponseAsync() {
+    public Single<LROsPutAsyncRetrySucceededResponse> putAsyncRetrySucceededWithRestResponseAsync() {
         final ProductInner product = null;
         return service.putAsyncRetrySucceeded(product, this.client.acceptLanguage());
     }
@@ -1943,20 +2152,11 @@ public final class LROsInner {
     /**
      * Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
-     * @return the {@link Maybe&lt;ProductInner&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Maybe<ProductInner> putAsyncRetrySucceededAsync() {
         return putAsyncRetrySucceededWithRestResponseAsync()
-            .flatMapMaybe(new Function<RestResponse<LROsPutAsyncRetrySucceededHeadersInner, ProductInner>, Maybe<ProductInner>>() {
-                @Override
-                public Maybe<ProductInner> apply(RestResponse<LROsPutAsyncRetrySucceededHeadersInner, ProductInner> restResponse) {
-                    if (restResponse.body() == null) {
-                        return Maybe.empty();
-                    } else {
-                        return Maybe.just(restResponse.body());
-                    }
-                }
-            });
+            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -1978,7 +2178,7 @@ public final class LROsInner {
      * @param product Product to put.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;ProductInner&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     public ServiceFuture<ProductInner> putAsyncRetrySucceededAsync(ProductInner product, ServiceCallback<ProductInner> serviceCallback) {
         return ServiceFuture.fromBody(putAsyncRetrySucceededAsync(product), serviceCallback);
@@ -1989,9 +2189,9 @@ public final class LROsInner {
      *
      * @param product Product to put.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link Single&lt;RestResponse&lt;LROsPutAsyncRetrySucceededHeadersInner, ProductInner&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<LROsPutAsyncRetrySucceededHeadersInner, ProductInner>> putAsyncRetrySucceededWithRestResponseAsync(ProductInner product) {
+    public Single<LROsPutAsyncRetrySucceededResponse> putAsyncRetrySucceededWithRestResponseAsync(ProductInner product) {
         Validator.validate(product);
         return service.putAsyncRetrySucceeded(product, this.client.acceptLanguage());
     }
@@ -2001,20 +2201,25 @@ public final class LROsInner {
      *
      * @param product Product to put.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link Maybe&lt;ProductInner&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Maybe<ProductInner> putAsyncRetrySucceededAsync(ProductInner product) {
         return putAsyncRetrySucceededWithRestResponseAsync(product)
-            .flatMapMaybe(new Function<RestResponse<LROsPutAsyncRetrySucceededHeadersInner, ProductInner>, Maybe<ProductInner>>() {
-                @Override
-                public Maybe<ProductInner> apply(RestResponse<LROsPutAsyncRetrySucceededHeadersInner, ProductInner> restResponse) {
-                    if (restResponse.body() == null) {
-                        return Maybe.empty();
-                    } else {
-                        return Maybe.just(restResponse.body());
-                    }
-                }
-            });
+            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+    }
+
+    /**
+     * Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status (resume watch).
+     *
+     * @param operationDescription The OperationDescription object.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the observable for the request.
+     */
+    public Observable<OperationStatus<ProductInner>> resumePutAsyncRetrySucceeded(OperationDescription operationDescription) {
+        if (operationDescription == null) {
+            throw new IllegalArgumentException("Parameter operationDescription is required and cannot be null.");
+        }
+        return service.resumePutAsyncRetrySucceeded(operationDescription);
     }
 
     /**
@@ -2033,7 +2238,7 @@ public final class LROsInner {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;ProductInner&gt;} object.
+     * @return the ServiceFuture&lt;ProductInner&gt; object.
      */
     public ServiceFuture<ProductInner> beginPutAsyncNoRetrySucceededAsync(ServiceCallback<ProductInner> serviceCallback) {
         return ServiceFutureUtil.fromLRO(beginPutAsyncNoRetrySucceededAsync(), serviceCallback);
@@ -2067,7 +2272,7 @@ public final class LROsInner {
      * @param product Product to put.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;ProductInner&gt;} object.
+     * @return the ServiceFuture&lt;ProductInner&gt; object.
      */
     public ServiceFuture<ProductInner> beginPutAsyncNoRetrySucceededAsync(ProductInner product, ServiceCallback<ProductInner> serviceCallback) {
         return ServiceFutureUtil.fromLRO(beginPutAsyncNoRetrySucceededAsync(product), serviceCallback);
@@ -2101,7 +2306,7 @@ public final class LROsInner {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;ProductInner&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     public ServiceFuture<ProductInner> putAsyncNoRetrySucceededAsync(ServiceCallback<ProductInner> serviceCallback) {
         return ServiceFuture.fromBody(putAsyncNoRetrySucceededAsync(), serviceCallback);
@@ -2110,9 +2315,9 @@ public final class LROsInner {
     /**
      * Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
-     * @return the {@link Single&lt;RestResponse&lt;LROsPutAsyncNoRetrySucceededHeadersInner, ProductInner&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<LROsPutAsyncNoRetrySucceededHeadersInner, ProductInner>> putAsyncNoRetrySucceededWithRestResponseAsync() {
+    public Single<LROsPutAsyncNoRetrySucceededResponse> putAsyncNoRetrySucceededWithRestResponseAsync() {
         final ProductInner product = null;
         return service.putAsyncNoRetrySucceeded(product, this.client.acceptLanguage());
     }
@@ -2120,20 +2325,11 @@ public final class LROsInner {
     /**
      * Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
-     * @return the {@link Maybe&lt;ProductInner&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Maybe<ProductInner> putAsyncNoRetrySucceededAsync() {
         return putAsyncNoRetrySucceededWithRestResponseAsync()
-            .flatMapMaybe(new Function<RestResponse<LROsPutAsyncNoRetrySucceededHeadersInner, ProductInner>, Maybe<ProductInner>>() {
-                @Override
-                public Maybe<ProductInner> apply(RestResponse<LROsPutAsyncNoRetrySucceededHeadersInner, ProductInner> restResponse) {
-                    if (restResponse.body() == null) {
-                        return Maybe.empty();
-                    } else {
-                        return Maybe.just(restResponse.body());
-                    }
-                }
-            });
+            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -2155,7 +2351,7 @@ public final class LROsInner {
      * @param product Product to put.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;ProductInner&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     public ServiceFuture<ProductInner> putAsyncNoRetrySucceededAsync(ProductInner product, ServiceCallback<ProductInner> serviceCallback) {
         return ServiceFuture.fromBody(putAsyncNoRetrySucceededAsync(product), serviceCallback);
@@ -2166,9 +2362,9 @@ public final class LROsInner {
      *
      * @param product Product to put.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link Single&lt;RestResponse&lt;LROsPutAsyncNoRetrySucceededHeadersInner, ProductInner&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<LROsPutAsyncNoRetrySucceededHeadersInner, ProductInner>> putAsyncNoRetrySucceededWithRestResponseAsync(ProductInner product) {
+    public Single<LROsPutAsyncNoRetrySucceededResponse> putAsyncNoRetrySucceededWithRestResponseAsync(ProductInner product) {
         Validator.validate(product);
         return service.putAsyncNoRetrySucceeded(product, this.client.acceptLanguage());
     }
@@ -2178,20 +2374,25 @@ public final class LROsInner {
      *
      * @param product Product to put.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link Maybe&lt;ProductInner&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Maybe<ProductInner> putAsyncNoRetrySucceededAsync(ProductInner product) {
         return putAsyncNoRetrySucceededWithRestResponseAsync(product)
-            .flatMapMaybe(new Function<RestResponse<LROsPutAsyncNoRetrySucceededHeadersInner, ProductInner>, Maybe<ProductInner>>() {
-                @Override
-                public Maybe<ProductInner> apply(RestResponse<LROsPutAsyncNoRetrySucceededHeadersInner, ProductInner> restResponse) {
-                    if (restResponse.body() == null) {
-                        return Maybe.empty();
-                    } else {
-                        return Maybe.just(restResponse.body());
-                    }
-                }
-            });
+            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+    }
+
+    /**
+     * Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status (resume watch).
+     *
+     * @param operationDescription The OperationDescription object.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the observable for the request.
+     */
+    public Observable<OperationStatus<ProductInner>> resumePutAsyncNoRetrySucceeded(OperationDescription operationDescription) {
+        if (operationDescription == null) {
+            throw new IllegalArgumentException("Parameter operationDescription is required and cannot be null.");
+        }
+        return service.resumePutAsyncNoRetrySucceeded(operationDescription);
     }
 
     /**
@@ -2210,7 +2411,7 @@ public final class LROsInner {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;ProductInner&gt;} object.
+     * @return the ServiceFuture&lt;ProductInner&gt; object.
      */
     public ServiceFuture<ProductInner> beginPutAsyncRetryFailedAsync(ServiceCallback<ProductInner> serviceCallback) {
         return ServiceFutureUtil.fromLRO(beginPutAsyncRetryFailedAsync(), serviceCallback);
@@ -2244,7 +2445,7 @@ public final class LROsInner {
      * @param product Product to put.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;ProductInner&gt;} object.
+     * @return the ServiceFuture&lt;ProductInner&gt; object.
      */
     public ServiceFuture<ProductInner> beginPutAsyncRetryFailedAsync(ProductInner product, ServiceCallback<ProductInner> serviceCallback) {
         return ServiceFutureUtil.fromLRO(beginPutAsyncRetryFailedAsync(product), serviceCallback);
@@ -2278,7 +2479,7 @@ public final class LROsInner {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;ProductInner&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     public ServiceFuture<ProductInner> putAsyncRetryFailedAsync(ServiceCallback<ProductInner> serviceCallback) {
         return ServiceFuture.fromBody(putAsyncRetryFailedAsync(), serviceCallback);
@@ -2287,9 +2488,9 @@ public final class LROsInner {
     /**
      * Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
-     * @return the {@link Single&lt;RestResponse&lt;LROsPutAsyncRetryFailedHeadersInner, ProductInner&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<LROsPutAsyncRetryFailedHeadersInner, ProductInner>> putAsyncRetryFailedWithRestResponseAsync() {
+    public Single<LROsPutAsyncRetryFailedResponse> putAsyncRetryFailedWithRestResponseAsync() {
         final ProductInner product = null;
         return service.putAsyncRetryFailed(product, this.client.acceptLanguage());
     }
@@ -2297,20 +2498,11 @@ public final class LROsInner {
     /**
      * Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
-     * @return the {@link Maybe&lt;ProductInner&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Maybe<ProductInner> putAsyncRetryFailedAsync() {
         return putAsyncRetryFailedWithRestResponseAsync()
-            .flatMapMaybe(new Function<RestResponse<LROsPutAsyncRetryFailedHeadersInner, ProductInner>, Maybe<ProductInner>>() {
-                @Override
-                public Maybe<ProductInner> apply(RestResponse<LROsPutAsyncRetryFailedHeadersInner, ProductInner> restResponse) {
-                    if (restResponse.body() == null) {
-                        return Maybe.empty();
-                    } else {
-                        return Maybe.just(restResponse.body());
-                    }
-                }
-            });
+            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -2332,7 +2524,7 @@ public final class LROsInner {
      * @param product Product to put.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;ProductInner&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     public ServiceFuture<ProductInner> putAsyncRetryFailedAsync(ProductInner product, ServiceCallback<ProductInner> serviceCallback) {
         return ServiceFuture.fromBody(putAsyncRetryFailedAsync(product), serviceCallback);
@@ -2343,9 +2535,9 @@ public final class LROsInner {
      *
      * @param product Product to put.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link Single&lt;RestResponse&lt;LROsPutAsyncRetryFailedHeadersInner, ProductInner&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<LROsPutAsyncRetryFailedHeadersInner, ProductInner>> putAsyncRetryFailedWithRestResponseAsync(ProductInner product) {
+    public Single<LROsPutAsyncRetryFailedResponse> putAsyncRetryFailedWithRestResponseAsync(ProductInner product) {
         Validator.validate(product);
         return service.putAsyncRetryFailed(product, this.client.acceptLanguage());
     }
@@ -2355,20 +2547,25 @@ public final class LROsInner {
      *
      * @param product Product to put.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link Maybe&lt;ProductInner&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Maybe<ProductInner> putAsyncRetryFailedAsync(ProductInner product) {
         return putAsyncRetryFailedWithRestResponseAsync(product)
-            .flatMapMaybe(new Function<RestResponse<LROsPutAsyncRetryFailedHeadersInner, ProductInner>, Maybe<ProductInner>>() {
-                @Override
-                public Maybe<ProductInner> apply(RestResponse<LROsPutAsyncRetryFailedHeadersInner, ProductInner> restResponse) {
-                    if (restResponse.body() == null) {
-                        return Maybe.empty();
-                    } else {
-                        return Maybe.just(restResponse.body());
-                    }
-                }
-            });
+            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+    }
+
+    /**
+     * Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status (resume watch).
+     *
+     * @param operationDescription The OperationDescription object.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the observable for the request.
+     */
+    public Observable<OperationStatus<ProductInner>> resumePutAsyncRetryFailed(OperationDescription operationDescription) {
+        if (operationDescription == null) {
+            throw new IllegalArgumentException("Parameter operationDescription is required and cannot be null.");
+        }
+        return service.resumePutAsyncRetryFailed(operationDescription);
     }
 
     /**
@@ -2387,7 +2584,7 @@ public final class LROsInner {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;ProductInner&gt;} object.
+     * @return the ServiceFuture&lt;ProductInner&gt; object.
      */
     public ServiceFuture<ProductInner> beginPutAsyncNoRetrycanceledAsync(ServiceCallback<ProductInner> serviceCallback) {
         return ServiceFutureUtil.fromLRO(beginPutAsyncNoRetrycanceledAsync(), serviceCallback);
@@ -2421,7 +2618,7 @@ public final class LROsInner {
      * @param product Product to put.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;ProductInner&gt;} object.
+     * @return the ServiceFuture&lt;ProductInner&gt; object.
      */
     public ServiceFuture<ProductInner> beginPutAsyncNoRetrycanceledAsync(ProductInner product, ServiceCallback<ProductInner> serviceCallback) {
         return ServiceFutureUtil.fromLRO(beginPutAsyncNoRetrycanceledAsync(product), serviceCallback);
@@ -2455,7 +2652,7 @@ public final class LROsInner {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;ProductInner&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     public ServiceFuture<ProductInner> putAsyncNoRetrycanceledAsync(ServiceCallback<ProductInner> serviceCallback) {
         return ServiceFuture.fromBody(putAsyncNoRetrycanceledAsync(), serviceCallback);
@@ -2464,9 +2661,9 @@ public final class LROsInner {
     /**
      * Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
-     * @return the {@link Single&lt;RestResponse&lt;LROsPutAsyncNoRetrycanceledHeadersInner, ProductInner&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<LROsPutAsyncNoRetrycanceledHeadersInner, ProductInner>> putAsyncNoRetrycanceledWithRestResponseAsync() {
+    public Single<LROsPutAsyncNoRetrycanceledResponse> putAsyncNoRetrycanceledWithRestResponseAsync() {
         final ProductInner product = null;
         return service.putAsyncNoRetrycanceled(product, this.client.acceptLanguage());
     }
@@ -2474,20 +2671,11 @@ public final class LROsInner {
     /**
      * Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
-     * @return the {@link Maybe&lt;ProductInner&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Maybe<ProductInner> putAsyncNoRetrycanceledAsync() {
         return putAsyncNoRetrycanceledWithRestResponseAsync()
-            .flatMapMaybe(new Function<RestResponse<LROsPutAsyncNoRetrycanceledHeadersInner, ProductInner>, Maybe<ProductInner>>() {
-                @Override
-                public Maybe<ProductInner> apply(RestResponse<LROsPutAsyncNoRetrycanceledHeadersInner, ProductInner> restResponse) {
-                    if (restResponse.body() == null) {
-                        return Maybe.empty();
-                    } else {
-                        return Maybe.just(restResponse.body());
-                    }
-                }
-            });
+            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -2509,7 +2697,7 @@ public final class LROsInner {
      * @param product Product to put.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;ProductInner&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     public ServiceFuture<ProductInner> putAsyncNoRetrycanceledAsync(ProductInner product, ServiceCallback<ProductInner> serviceCallback) {
         return ServiceFuture.fromBody(putAsyncNoRetrycanceledAsync(product), serviceCallback);
@@ -2520,9 +2708,9 @@ public final class LROsInner {
      *
      * @param product Product to put.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link Single&lt;RestResponse&lt;LROsPutAsyncNoRetrycanceledHeadersInner, ProductInner&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<LROsPutAsyncNoRetrycanceledHeadersInner, ProductInner>> putAsyncNoRetrycanceledWithRestResponseAsync(ProductInner product) {
+    public Single<LROsPutAsyncNoRetrycanceledResponse> putAsyncNoRetrycanceledWithRestResponseAsync(ProductInner product) {
         Validator.validate(product);
         return service.putAsyncNoRetrycanceled(product, this.client.acceptLanguage());
     }
@@ -2532,20 +2720,25 @@ public final class LROsInner {
      *
      * @param product Product to put.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link Maybe&lt;ProductInner&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Maybe<ProductInner> putAsyncNoRetrycanceledAsync(ProductInner product) {
         return putAsyncNoRetrycanceledWithRestResponseAsync(product)
-            .flatMapMaybe(new Function<RestResponse<LROsPutAsyncNoRetrycanceledHeadersInner, ProductInner>, Maybe<ProductInner>>() {
-                @Override
-                public Maybe<ProductInner> apply(RestResponse<LROsPutAsyncNoRetrycanceledHeadersInner, ProductInner> restResponse) {
-                    if (restResponse.body() == null) {
-                        return Maybe.empty();
-                    } else {
-                        return Maybe.just(restResponse.body());
-                    }
-                }
-            });
+            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+    }
+
+    /**
+     * Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status (resume watch).
+     *
+     * @param operationDescription The OperationDescription object.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the observable for the request.
+     */
+    public Observable<OperationStatus<ProductInner>> resumePutAsyncNoRetrycanceled(OperationDescription operationDescription) {
+        if (operationDescription == null) {
+            throw new IllegalArgumentException("Parameter operationDescription is required and cannot be null.");
+        }
+        return service.resumePutAsyncNoRetrycanceled(operationDescription);
     }
 
     /**
@@ -2564,7 +2757,7 @@ public final class LROsInner {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;ProductInner&gt;} object.
+     * @return the ServiceFuture&lt;ProductInner&gt; object.
      */
     public ServiceFuture<ProductInner> beginPutAsyncNoHeaderInRetryAsync(ServiceCallback<ProductInner> serviceCallback) {
         return ServiceFutureUtil.fromLRO(beginPutAsyncNoHeaderInRetryAsync(), serviceCallback);
@@ -2598,7 +2791,7 @@ public final class LROsInner {
      * @param product Product to put.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;ProductInner&gt;} object.
+     * @return the ServiceFuture&lt;ProductInner&gt; object.
      */
     public ServiceFuture<ProductInner> beginPutAsyncNoHeaderInRetryAsync(ProductInner product, ServiceCallback<ProductInner> serviceCallback) {
         return ServiceFutureUtil.fromLRO(beginPutAsyncNoHeaderInRetryAsync(product), serviceCallback);
@@ -2632,7 +2825,7 @@ public final class LROsInner {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;ProductInner&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     public ServiceFuture<ProductInner> putAsyncNoHeaderInRetryAsync(ServiceCallback<ProductInner> serviceCallback) {
         return ServiceFuture.fromBody(putAsyncNoHeaderInRetryAsync(), serviceCallback);
@@ -2641,9 +2834,9 @@ public final class LROsInner {
     /**
      * Long running put request, service returns a 202 to the initial request with Azure-AsyncOperation header. Subsequent calls to operation status do not contain Azure-AsyncOperation header.
      *
-     * @return the {@link Single&lt;RestResponse&lt;LROsPutAsyncNoHeaderInRetryHeadersInner, ProductInner&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<LROsPutAsyncNoHeaderInRetryHeadersInner, ProductInner>> putAsyncNoHeaderInRetryWithRestResponseAsync() {
+    public Single<LROsPutAsyncNoHeaderInRetryResponse> putAsyncNoHeaderInRetryWithRestResponseAsync() {
         final ProductInner product = null;
         return service.putAsyncNoHeaderInRetry(product, this.client.acceptLanguage());
     }
@@ -2651,20 +2844,11 @@ public final class LROsInner {
     /**
      * Long running put request, service returns a 202 to the initial request with Azure-AsyncOperation header. Subsequent calls to operation status do not contain Azure-AsyncOperation header.
      *
-     * @return the {@link Maybe&lt;ProductInner&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Maybe<ProductInner> putAsyncNoHeaderInRetryAsync() {
         return putAsyncNoHeaderInRetryWithRestResponseAsync()
-            .flatMapMaybe(new Function<RestResponse<LROsPutAsyncNoHeaderInRetryHeadersInner, ProductInner>, Maybe<ProductInner>>() {
-                @Override
-                public Maybe<ProductInner> apply(RestResponse<LROsPutAsyncNoHeaderInRetryHeadersInner, ProductInner> restResponse) {
-                    if (restResponse.body() == null) {
-                        return Maybe.empty();
-                    } else {
-                        return Maybe.just(restResponse.body());
-                    }
-                }
-            });
+            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -2686,7 +2870,7 @@ public final class LROsInner {
      * @param product Product to put.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;ProductInner&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     public ServiceFuture<ProductInner> putAsyncNoHeaderInRetryAsync(ProductInner product, ServiceCallback<ProductInner> serviceCallback) {
         return ServiceFuture.fromBody(putAsyncNoHeaderInRetryAsync(product), serviceCallback);
@@ -2697,9 +2881,9 @@ public final class LROsInner {
      *
      * @param product Product to put.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link Single&lt;RestResponse&lt;LROsPutAsyncNoHeaderInRetryHeadersInner, ProductInner&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<LROsPutAsyncNoHeaderInRetryHeadersInner, ProductInner>> putAsyncNoHeaderInRetryWithRestResponseAsync(ProductInner product) {
+    public Single<LROsPutAsyncNoHeaderInRetryResponse> putAsyncNoHeaderInRetryWithRestResponseAsync(ProductInner product) {
         Validator.validate(product);
         return service.putAsyncNoHeaderInRetry(product, this.client.acceptLanguage());
     }
@@ -2709,20 +2893,25 @@ public final class LROsInner {
      *
      * @param product Product to put.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link Maybe&lt;ProductInner&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Maybe<ProductInner> putAsyncNoHeaderInRetryAsync(ProductInner product) {
         return putAsyncNoHeaderInRetryWithRestResponseAsync(product)
-            .flatMapMaybe(new Function<RestResponse<LROsPutAsyncNoHeaderInRetryHeadersInner, ProductInner>, Maybe<ProductInner>>() {
-                @Override
-                public Maybe<ProductInner> apply(RestResponse<LROsPutAsyncNoHeaderInRetryHeadersInner, ProductInner> restResponse) {
-                    if (restResponse.body() == null) {
-                        return Maybe.empty();
-                    } else {
-                        return Maybe.just(restResponse.body());
-                    }
-                }
-            });
+            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+    }
+
+    /**
+     * Long running put request, service returns a 202 to the initial request with Azure-AsyncOperation header. Subsequent calls to operation status do not contain Azure-AsyncOperation header. (resume watch).
+     *
+     * @param operationDescription The OperationDescription object.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the observable for the request.
+     */
+    public Observable<OperationStatus<ProductInner>> resumePutAsyncNoHeaderInRetry(OperationDescription operationDescription) {
+        if (operationDescription == null) {
+            throw new IllegalArgumentException("Parameter operationDescription is required and cannot be null.");
+        }
+        return service.resumePutAsyncNoHeaderInRetry(operationDescription);
     }
 
     /**
@@ -2741,7 +2930,7 @@ public final class LROsInner {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;SkuInner&gt;} object.
+     * @return the ServiceFuture&lt;SkuInner&gt; object.
      */
     public ServiceFuture<SkuInner> beginPutNonResourceAsync(ServiceCallback<SkuInner> serviceCallback) {
         return ServiceFutureUtil.fromLRO(beginPutNonResourceAsync(), serviceCallback);
@@ -2775,7 +2964,7 @@ public final class LROsInner {
      * @param sku sku to put.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;SkuInner&gt;} object.
+     * @return the ServiceFuture&lt;SkuInner&gt; object.
      */
     public ServiceFuture<SkuInner> beginPutNonResourceAsync(SkuInner sku, ServiceCallback<SkuInner> serviceCallback) {
         return ServiceFutureUtil.fromLRO(beginPutNonResourceAsync(sku), serviceCallback);
@@ -2809,7 +2998,7 @@ public final class LROsInner {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;SkuInner&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     public ServiceFuture<SkuInner> putNonResourceAsync(ServiceCallback<SkuInner> serviceCallback) {
         return ServiceFuture.fromBody(putNonResourceAsync(), serviceCallback);
@@ -2818,9 +3007,9 @@ public final class LROsInner {
     /**
      * Long running put request with non resource.
      *
-     * @return the {@link Single&lt;RestResponse&lt;Void, SkuInner&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<Void, SkuInner>> putNonResourceWithRestResponseAsync() {
+    public Single<BodyResponse<SkuInner>> putNonResourceWithRestResponseAsync() {
         final SkuInner sku = null;
         return service.putNonResource(sku, this.client.acceptLanguage());
     }
@@ -2828,20 +3017,11 @@ public final class LROsInner {
     /**
      * Long running put request with non resource.
      *
-     * @return the {@link Maybe&lt;SkuInner&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Maybe<SkuInner> putNonResourceAsync() {
         return putNonResourceWithRestResponseAsync()
-            .flatMapMaybe(new Function<RestResponse<Void, SkuInner>, Maybe<SkuInner>>() {
-                @Override
-                public Maybe<SkuInner> apply(RestResponse<Void, SkuInner> restResponse) {
-                    if (restResponse.body() == null) {
-                        return Maybe.empty();
-                    } else {
-                        return Maybe.just(restResponse.body());
-                    }
-                }
-            });
+            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -2863,7 +3043,7 @@ public final class LROsInner {
      * @param sku sku to put.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;SkuInner&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     public ServiceFuture<SkuInner> putNonResourceAsync(SkuInner sku, ServiceCallback<SkuInner> serviceCallback) {
         return ServiceFuture.fromBody(putNonResourceAsync(sku), serviceCallback);
@@ -2874,9 +3054,9 @@ public final class LROsInner {
      *
      * @param sku sku to put.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link Single&lt;RestResponse&lt;Void, SkuInner&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<Void, SkuInner>> putNonResourceWithRestResponseAsync(SkuInner sku) {
+    public Single<BodyResponse<SkuInner>> putNonResourceWithRestResponseAsync(SkuInner sku) {
         Validator.validate(sku);
         return service.putNonResource(sku, this.client.acceptLanguage());
     }
@@ -2886,20 +3066,25 @@ public final class LROsInner {
      *
      * @param sku sku to put.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link Maybe&lt;SkuInner&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Maybe<SkuInner> putNonResourceAsync(SkuInner sku) {
         return putNonResourceWithRestResponseAsync(sku)
-            .flatMapMaybe(new Function<RestResponse<Void, SkuInner>, Maybe<SkuInner>>() {
-                @Override
-                public Maybe<SkuInner> apply(RestResponse<Void, SkuInner> restResponse) {
-                    if (restResponse.body() == null) {
-                        return Maybe.empty();
-                    } else {
-                        return Maybe.just(restResponse.body());
-                    }
-                }
-            });
+            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+    }
+
+    /**
+     * Long running put request with non resource. (resume watch).
+     *
+     * @param operationDescription The OperationDescription object.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the observable for the request.
+     */
+    public Observable<OperationStatus<SkuInner>> resumePutNonResource(OperationDescription operationDescription) {
+        if (operationDescription == null) {
+            throw new IllegalArgumentException("Parameter operationDescription is required and cannot be null.");
+        }
+        return service.resumePutNonResource(operationDescription);
     }
 
     /**
@@ -2918,7 +3103,7 @@ public final class LROsInner {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;SkuInner&gt;} object.
+     * @return the ServiceFuture&lt;SkuInner&gt; object.
      */
     public ServiceFuture<SkuInner> beginPutAsyncNonResourceAsync(ServiceCallback<SkuInner> serviceCallback) {
         return ServiceFutureUtil.fromLRO(beginPutAsyncNonResourceAsync(), serviceCallback);
@@ -2952,7 +3137,7 @@ public final class LROsInner {
      * @param sku Sku to put.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;SkuInner&gt;} object.
+     * @return the ServiceFuture&lt;SkuInner&gt; object.
      */
     public ServiceFuture<SkuInner> beginPutAsyncNonResourceAsync(SkuInner sku, ServiceCallback<SkuInner> serviceCallback) {
         return ServiceFutureUtil.fromLRO(beginPutAsyncNonResourceAsync(sku), serviceCallback);
@@ -2986,7 +3171,7 @@ public final class LROsInner {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;SkuInner&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     public ServiceFuture<SkuInner> putAsyncNonResourceAsync(ServiceCallback<SkuInner> serviceCallback) {
         return ServiceFuture.fromBody(putAsyncNonResourceAsync(), serviceCallback);
@@ -2995,9 +3180,9 @@ public final class LROsInner {
     /**
      * Long running put request with non resource.
      *
-     * @return the {@link Single&lt;RestResponse&lt;Void, SkuInner&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<Void, SkuInner>> putAsyncNonResourceWithRestResponseAsync() {
+    public Single<BodyResponse<SkuInner>> putAsyncNonResourceWithRestResponseAsync() {
         final SkuInner sku = null;
         return service.putAsyncNonResource(sku, this.client.acceptLanguage());
     }
@@ -3005,20 +3190,11 @@ public final class LROsInner {
     /**
      * Long running put request with non resource.
      *
-     * @return the {@link Maybe&lt;SkuInner&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Maybe<SkuInner> putAsyncNonResourceAsync() {
         return putAsyncNonResourceWithRestResponseAsync()
-            .flatMapMaybe(new Function<RestResponse<Void, SkuInner>, Maybe<SkuInner>>() {
-                @Override
-                public Maybe<SkuInner> apply(RestResponse<Void, SkuInner> restResponse) {
-                    if (restResponse.body() == null) {
-                        return Maybe.empty();
-                    } else {
-                        return Maybe.just(restResponse.body());
-                    }
-                }
-            });
+            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -3040,7 +3216,7 @@ public final class LROsInner {
      * @param sku Sku to put.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;SkuInner&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     public ServiceFuture<SkuInner> putAsyncNonResourceAsync(SkuInner sku, ServiceCallback<SkuInner> serviceCallback) {
         return ServiceFuture.fromBody(putAsyncNonResourceAsync(sku), serviceCallback);
@@ -3051,9 +3227,9 @@ public final class LROsInner {
      *
      * @param sku Sku to put.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link Single&lt;RestResponse&lt;Void, SkuInner&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<Void, SkuInner>> putAsyncNonResourceWithRestResponseAsync(SkuInner sku) {
+    public Single<BodyResponse<SkuInner>> putAsyncNonResourceWithRestResponseAsync(SkuInner sku) {
         Validator.validate(sku);
         return service.putAsyncNonResource(sku, this.client.acceptLanguage());
     }
@@ -3063,20 +3239,25 @@ public final class LROsInner {
      *
      * @param sku Sku to put.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link Maybe&lt;SkuInner&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Maybe<SkuInner> putAsyncNonResourceAsync(SkuInner sku) {
         return putAsyncNonResourceWithRestResponseAsync(sku)
-            .flatMapMaybe(new Function<RestResponse<Void, SkuInner>, Maybe<SkuInner>>() {
-                @Override
-                public Maybe<SkuInner> apply(RestResponse<Void, SkuInner> restResponse) {
-                    if (restResponse.body() == null) {
-                        return Maybe.empty();
-                    } else {
-                        return Maybe.just(restResponse.body());
-                    }
-                }
-            });
+            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+    }
+
+    /**
+     * Long running put request with non resource. (resume watch).
+     *
+     * @param operationDescription The OperationDescription object.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the observable for the request.
+     */
+    public Observable<OperationStatus<SkuInner>> resumePutAsyncNonResource(OperationDescription operationDescription) {
+        if (operationDescription == null) {
+            throw new IllegalArgumentException("Parameter operationDescription is required and cannot be null.");
+        }
+        return service.resumePutAsyncNonResource(operationDescription);
     }
 
     /**
@@ -3095,7 +3276,7 @@ public final class LROsInner {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;SubProductInner&gt;} object.
+     * @return the ServiceFuture&lt;SubProductInner&gt; object.
      */
     public ServiceFuture<SubProductInner> beginPutSubResourceAsync(ServiceCallback<SubProductInner> serviceCallback) {
         return ServiceFutureUtil.fromLRO(beginPutSubResourceAsync(), serviceCallback);
@@ -3129,7 +3310,7 @@ public final class LROsInner {
      * @param product Sub Product to put.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;SubProductInner&gt;} object.
+     * @return the ServiceFuture&lt;SubProductInner&gt; object.
      */
     public ServiceFuture<SubProductInner> beginPutSubResourceAsync(SubProductInner product, ServiceCallback<SubProductInner> serviceCallback) {
         return ServiceFutureUtil.fromLRO(beginPutSubResourceAsync(product), serviceCallback);
@@ -3163,7 +3344,7 @@ public final class LROsInner {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;SubProductInner&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     public ServiceFuture<SubProductInner> putSubResourceAsync(ServiceCallback<SubProductInner> serviceCallback) {
         return ServiceFuture.fromBody(putSubResourceAsync(), serviceCallback);
@@ -3172,9 +3353,9 @@ public final class LROsInner {
     /**
      * Long running put request with sub resource.
      *
-     * @return the {@link Single&lt;RestResponse&lt;Void, SubProductInner&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<Void, SubProductInner>> putSubResourceWithRestResponseAsync() {
+    public Single<BodyResponse<SubProductInner>> putSubResourceWithRestResponseAsync() {
         final SubProductInner product = null;
         return service.putSubResource(product, this.client.acceptLanguage());
     }
@@ -3182,20 +3363,11 @@ public final class LROsInner {
     /**
      * Long running put request with sub resource.
      *
-     * @return the {@link Maybe&lt;SubProductInner&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Maybe<SubProductInner> putSubResourceAsync() {
         return putSubResourceWithRestResponseAsync()
-            .flatMapMaybe(new Function<RestResponse<Void, SubProductInner>, Maybe<SubProductInner>>() {
-                @Override
-                public Maybe<SubProductInner> apply(RestResponse<Void, SubProductInner> restResponse) {
-                    if (restResponse.body() == null) {
-                        return Maybe.empty();
-                    } else {
-                        return Maybe.just(restResponse.body());
-                    }
-                }
-            });
+            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -3217,7 +3389,7 @@ public final class LROsInner {
      * @param product Sub Product to put.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;SubProductInner&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     public ServiceFuture<SubProductInner> putSubResourceAsync(SubProductInner product, ServiceCallback<SubProductInner> serviceCallback) {
         return ServiceFuture.fromBody(putSubResourceAsync(product), serviceCallback);
@@ -3228,9 +3400,9 @@ public final class LROsInner {
      *
      * @param product Sub Product to put.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link Single&lt;RestResponse&lt;Void, SubProductInner&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<Void, SubProductInner>> putSubResourceWithRestResponseAsync(SubProductInner product) {
+    public Single<BodyResponse<SubProductInner>> putSubResourceWithRestResponseAsync(SubProductInner product) {
         Validator.validate(product);
         return service.putSubResource(product, this.client.acceptLanguage());
     }
@@ -3240,20 +3412,25 @@ public final class LROsInner {
      *
      * @param product Sub Product to put.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link Maybe&lt;SubProductInner&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Maybe<SubProductInner> putSubResourceAsync(SubProductInner product) {
         return putSubResourceWithRestResponseAsync(product)
-            .flatMapMaybe(new Function<RestResponse<Void, SubProductInner>, Maybe<SubProductInner>>() {
-                @Override
-                public Maybe<SubProductInner> apply(RestResponse<Void, SubProductInner> restResponse) {
-                    if (restResponse.body() == null) {
-                        return Maybe.empty();
-                    } else {
-                        return Maybe.just(restResponse.body());
-                    }
-                }
-            });
+            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+    }
+
+    /**
+     * Long running put request with sub resource. (resume watch).
+     *
+     * @param operationDescription The OperationDescription object.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the observable for the request.
+     */
+    public Observable<OperationStatus<SubProductInner>> resumePutSubResource(OperationDescription operationDescription) {
+        if (operationDescription == null) {
+            throw new IllegalArgumentException("Parameter operationDescription is required and cannot be null.");
+        }
+        return service.resumePutSubResource(operationDescription);
     }
 
     /**
@@ -3272,7 +3449,7 @@ public final class LROsInner {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;SubProductInner&gt;} object.
+     * @return the ServiceFuture&lt;SubProductInner&gt; object.
      */
     public ServiceFuture<SubProductInner> beginPutAsyncSubResourceAsync(ServiceCallback<SubProductInner> serviceCallback) {
         return ServiceFutureUtil.fromLRO(beginPutAsyncSubResourceAsync(), serviceCallback);
@@ -3306,7 +3483,7 @@ public final class LROsInner {
      * @param product Sub Product to put.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;SubProductInner&gt;} object.
+     * @return the ServiceFuture&lt;SubProductInner&gt; object.
      */
     public ServiceFuture<SubProductInner> beginPutAsyncSubResourceAsync(SubProductInner product, ServiceCallback<SubProductInner> serviceCallback) {
         return ServiceFutureUtil.fromLRO(beginPutAsyncSubResourceAsync(product), serviceCallback);
@@ -3340,7 +3517,7 @@ public final class LROsInner {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;SubProductInner&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     public ServiceFuture<SubProductInner> putAsyncSubResourceAsync(ServiceCallback<SubProductInner> serviceCallback) {
         return ServiceFuture.fromBody(putAsyncSubResourceAsync(), serviceCallback);
@@ -3349,9 +3526,9 @@ public final class LROsInner {
     /**
      * Long running put request with sub resource.
      *
-     * @return the {@link Single&lt;RestResponse&lt;Void, SubProductInner&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<Void, SubProductInner>> putAsyncSubResourceWithRestResponseAsync() {
+    public Single<BodyResponse<SubProductInner>> putAsyncSubResourceWithRestResponseAsync() {
         final SubProductInner product = null;
         return service.putAsyncSubResource(product, this.client.acceptLanguage());
     }
@@ -3359,20 +3536,11 @@ public final class LROsInner {
     /**
      * Long running put request with sub resource.
      *
-     * @return the {@link Maybe&lt;SubProductInner&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Maybe<SubProductInner> putAsyncSubResourceAsync() {
         return putAsyncSubResourceWithRestResponseAsync()
-            .flatMapMaybe(new Function<RestResponse<Void, SubProductInner>, Maybe<SubProductInner>>() {
-                @Override
-                public Maybe<SubProductInner> apply(RestResponse<Void, SubProductInner> restResponse) {
-                    if (restResponse.body() == null) {
-                        return Maybe.empty();
-                    } else {
-                        return Maybe.just(restResponse.body());
-                    }
-                }
-            });
+            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -3394,7 +3562,7 @@ public final class LROsInner {
      * @param product Sub Product to put.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;SubProductInner&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     public ServiceFuture<SubProductInner> putAsyncSubResourceAsync(SubProductInner product, ServiceCallback<SubProductInner> serviceCallback) {
         return ServiceFuture.fromBody(putAsyncSubResourceAsync(product), serviceCallback);
@@ -3405,9 +3573,9 @@ public final class LROsInner {
      *
      * @param product Sub Product to put.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link Single&lt;RestResponse&lt;Void, SubProductInner&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<Void, SubProductInner>> putAsyncSubResourceWithRestResponseAsync(SubProductInner product) {
+    public Single<BodyResponse<SubProductInner>> putAsyncSubResourceWithRestResponseAsync(SubProductInner product) {
         Validator.validate(product);
         return service.putAsyncSubResource(product, this.client.acceptLanguage());
     }
@@ -3417,20 +3585,25 @@ public final class LROsInner {
      *
      * @param product Sub Product to put.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link Maybe&lt;SubProductInner&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Maybe<SubProductInner> putAsyncSubResourceAsync(SubProductInner product) {
         return putAsyncSubResourceWithRestResponseAsync(product)
-            .flatMapMaybe(new Function<RestResponse<Void, SubProductInner>, Maybe<SubProductInner>>() {
-                @Override
-                public Maybe<SubProductInner> apply(RestResponse<Void, SubProductInner> restResponse) {
-                    if (restResponse.body() == null) {
-                        return Maybe.empty();
-                    } else {
-                        return Maybe.just(restResponse.body());
-                    }
-                }
-            });
+            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+    }
+
+    /**
+     * Long running put request with sub resource. (resume watch).
+     *
+     * @param operationDescription The OperationDescription object.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the observable for the request.
+     */
+    public Observable<OperationStatus<SubProductInner>> resumePutAsyncSubResource(OperationDescription operationDescription) {
+        if (operationDescription == null) {
+            throw new IllegalArgumentException("Parameter operationDescription is required and cannot be null.");
+        }
+        return service.resumePutAsyncSubResource(operationDescription);
     }
 
     /**
@@ -3449,7 +3622,7 @@ public final class LROsInner {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;ProductInner&gt;} object.
+     * @return the ServiceFuture&lt;ProductInner&gt; object.
      */
     public ServiceFuture<ProductInner> beginDeleteProvisioning202Accepted200SucceededAsync(ServiceCallback<ProductInner> serviceCallback) {
         return ServiceFutureUtil.fromLRO(beginDeleteProvisioning202Accepted200SucceededAsync(), serviceCallback);
@@ -3480,7 +3653,7 @@ public final class LROsInner {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;ProductInner&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     public ServiceFuture<ProductInner> deleteProvisioning202Accepted200SucceededAsync(ServiceCallback<ProductInner> serviceCallback) {
         return ServiceFuture.fromBody(deleteProvisioning202Accepted200SucceededAsync(), serviceCallback);
@@ -3489,29 +3662,34 @@ public final class LROsInner {
     /**
      * Long running delete request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Accepted’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Succeeded’.
      *
-     * @return the {@link Single&lt;RestResponse&lt;LROsDeleteProvisioning202Accepted200SucceededHeadersInner, ProductInner&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<LROsDeleteProvisioning202Accepted200SucceededHeadersInner, ProductInner>> deleteProvisioning202Accepted200SucceededWithRestResponseAsync() {
+    public Single<LROsDeleteProvisioning202Accepted200SucceededResponse> deleteProvisioning202Accepted200SucceededWithRestResponseAsync() {
         return service.deleteProvisioning202Accepted200Succeeded(this.client.acceptLanguage());
     }
 
     /**
      * Long running delete request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Accepted’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Succeeded’.
      *
-     * @return the {@link Maybe&lt;ProductInner&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Maybe<ProductInner> deleteProvisioning202Accepted200SucceededAsync() {
         return deleteProvisioning202Accepted200SucceededWithRestResponseAsync()
-            .flatMapMaybe(new Function<RestResponse<LROsDeleteProvisioning202Accepted200SucceededHeadersInner, ProductInner>, Maybe<ProductInner>>() {
-                @Override
-                public Maybe<ProductInner> apply(RestResponse<LROsDeleteProvisioning202Accepted200SucceededHeadersInner, ProductInner> restResponse) {
-                    if (restResponse.body() == null) {
-                        return Maybe.empty();
-                    } else {
-                        return Maybe.just(restResponse.body());
-                    }
-                }
-            });
+            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+    }
+
+    /**
+     * Long running delete request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Accepted’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Succeeded’ (resume watch).
+     *
+     * @param operationDescription The OperationDescription object.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the observable for the request.
+     */
+    public Observable<OperationStatus<ProductInner>> resumeDeleteProvisioning202Accepted200Succeeded(OperationDescription operationDescription) {
+        if (operationDescription == null) {
+            throw new IllegalArgumentException("Parameter operationDescription is required and cannot be null.");
+        }
+        return service.resumeDeleteProvisioning202Accepted200Succeeded(operationDescription);
     }
 
     /**
@@ -3530,7 +3708,7 @@ public final class LROsInner {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;ProductInner&gt;} object.
+     * @return the ServiceFuture&lt;ProductInner&gt; object.
      */
     public ServiceFuture<ProductInner> beginDeleteProvisioning202DeletingFailed200Async(ServiceCallback<ProductInner> serviceCallback) {
         return ServiceFutureUtil.fromLRO(beginDeleteProvisioning202DeletingFailed200Async(), serviceCallback);
@@ -3561,7 +3739,7 @@ public final class LROsInner {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;ProductInner&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     public ServiceFuture<ProductInner> deleteProvisioning202DeletingFailed200Async(ServiceCallback<ProductInner> serviceCallback) {
         return ServiceFuture.fromBody(deleteProvisioning202DeletingFailed200Async(), serviceCallback);
@@ -3570,29 +3748,34 @@ public final class LROsInner {
     /**
      * Long running delete request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Failed’.
      *
-     * @return the {@link Single&lt;RestResponse&lt;LROsDeleteProvisioning202DeletingFailed200HeadersInner, ProductInner&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<LROsDeleteProvisioning202DeletingFailed200HeadersInner, ProductInner>> deleteProvisioning202DeletingFailed200WithRestResponseAsync() {
+    public Single<LROsDeleteProvisioning202DeletingFailed200Response> deleteProvisioning202DeletingFailed200WithRestResponseAsync() {
         return service.deleteProvisioning202DeletingFailed200(this.client.acceptLanguage());
     }
 
     /**
      * Long running delete request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Failed’.
      *
-     * @return the {@link Maybe&lt;ProductInner&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Maybe<ProductInner> deleteProvisioning202DeletingFailed200Async() {
         return deleteProvisioning202DeletingFailed200WithRestResponseAsync()
-            .flatMapMaybe(new Function<RestResponse<LROsDeleteProvisioning202DeletingFailed200HeadersInner, ProductInner>, Maybe<ProductInner>>() {
-                @Override
-                public Maybe<ProductInner> apply(RestResponse<LROsDeleteProvisioning202DeletingFailed200HeadersInner, ProductInner> restResponse) {
-                    if (restResponse.body() == null) {
-                        return Maybe.empty();
-                    } else {
-                        return Maybe.just(restResponse.body());
-                    }
-                }
-            });
+            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+    }
+
+    /**
+     * Long running delete request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Failed’ (resume watch).
+     *
+     * @param operationDescription The OperationDescription object.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the observable for the request.
+     */
+    public Observable<OperationStatus<ProductInner>> resumeDeleteProvisioning202DeletingFailed200(OperationDescription operationDescription) {
+        if (operationDescription == null) {
+            throw new IllegalArgumentException("Parameter operationDescription is required and cannot be null.");
+        }
+        return service.resumeDeleteProvisioning202DeletingFailed200(operationDescription);
     }
 
     /**
@@ -3611,7 +3794,7 @@ public final class LROsInner {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;ProductInner&gt;} object.
+     * @return the ServiceFuture&lt;ProductInner&gt; object.
      */
     public ServiceFuture<ProductInner> beginDeleteProvisioning202Deletingcanceled200Async(ServiceCallback<ProductInner> serviceCallback) {
         return ServiceFutureUtil.fromLRO(beginDeleteProvisioning202Deletingcanceled200Async(), serviceCallback);
@@ -3642,7 +3825,7 @@ public final class LROsInner {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;ProductInner&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     public ServiceFuture<ProductInner> deleteProvisioning202Deletingcanceled200Async(ServiceCallback<ProductInner> serviceCallback) {
         return ServiceFuture.fromBody(deleteProvisioning202Deletingcanceled200Async(), serviceCallback);
@@ -3651,29 +3834,34 @@ public final class LROsInner {
     /**
      * Long running delete request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Canceled’.
      *
-     * @return the {@link Single&lt;RestResponse&lt;LROsDeleteProvisioning202Deletingcanceled200HeadersInner, ProductInner&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<LROsDeleteProvisioning202Deletingcanceled200HeadersInner, ProductInner>> deleteProvisioning202Deletingcanceled200WithRestResponseAsync() {
+    public Single<LROsDeleteProvisioning202Deletingcanceled200Response> deleteProvisioning202Deletingcanceled200WithRestResponseAsync() {
         return service.deleteProvisioning202Deletingcanceled200(this.client.acceptLanguage());
     }
 
     /**
      * Long running delete request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Canceled’.
      *
-     * @return the {@link Maybe&lt;ProductInner&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Maybe<ProductInner> deleteProvisioning202Deletingcanceled200Async() {
         return deleteProvisioning202Deletingcanceled200WithRestResponseAsync()
-            .flatMapMaybe(new Function<RestResponse<LROsDeleteProvisioning202Deletingcanceled200HeadersInner, ProductInner>, Maybe<ProductInner>>() {
-                @Override
-                public Maybe<ProductInner> apply(RestResponse<LROsDeleteProvisioning202Deletingcanceled200HeadersInner, ProductInner> restResponse) {
-                    if (restResponse.body() == null) {
-                        return Maybe.empty();
-                    } else {
-                        return Maybe.just(restResponse.body());
-                    }
-                }
-            });
+            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+    }
+
+    /**
+     * Long running delete request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Canceled’ (resume watch).
+     *
+     * @param operationDescription The OperationDescription object.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the observable for the request.
+     */
+    public Observable<OperationStatus<ProductInner>> resumeDeleteProvisioning202Deletingcanceled200(OperationDescription operationDescription) {
+        if (operationDescription == null) {
+            throw new IllegalArgumentException("Parameter operationDescription is required and cannot be null.");
+        }
+        return service.resumeDeleteProvisioning202Deletingcanceled200(operationDescription);
     }
 
     /**
@@ -3691,7 +3879,7 @@ public final class LROsInner {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;Void&gt;} object.
+     * @return the ServiceFuture&lt;Void&gt; object.
      */
     public ServiceFuture<Void> beginDelete204SucceededAsync(ServiceCallback<Void> serviceCallback) {
         return ServiceFutureUtil.fromLRO(beginDelete204SucceededAsync(), serviceCallback);
@@ -3721,7 +3909,7 @@ public final class LROsInner {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;Void&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     public ServiceFuture<Void> delete204SucceededAsync(ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(delete204SucceededAsync(), serviceCallback);
@@ -3730,20 +3918,34 @@ public final class LROsInner {
     /**
      * Long running delete succeeds and returns right away.
      *
-     * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<Void, Void>> delete204SucceededWithRestResponseAsync() {
+    public Single<VoidResponse> delete204SucceededWithRestResponseAsync() {
         return service.delete204Succeeded(this.client.acceptLanguage());
     }
 
     /**
      * Long running delete succeeds and returns right away.
      *
-     * @return the {@link Completable} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Completable delete204SucceededAsync() {
         return delete204SucceededWithRestResponseAsync()
             .toCompletable();
+    }
+
+    /**
+     * Long running delete succeeds and returns right away (resume watch).
+     *
+     * @param operationDescription The OperationDescription object.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the observable for the request.
+     */
+    public Observable<OperationStatus<Void>> resumeDelete204Succeeded(OperationDescription operationDescription) {
+        if (operationDescription == null) {
+            throw new IllegalArgumentException("Parameter operationDescription is required and cannot be null.");
+        }
+        return service.resumeDelete204Succeeded(operationDescription);
     }
 
     /**
@@ -3762,7 +3964,7 @@ public final class LROsInner {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;ProductInner&gt;} object.
+     * @return the ServiceFuture&lt;ProductInner&gt; object.
      */
     public ServiceFuture<ProductInner> beginDelete202Retry200Async(ServiceCallback<ProductInner> serviceCallback) {
         return ServiceFutureUtil.fromLRO(beginDelete202Retry200Async(), serviceCallback);
@@ -3793,7 +3995,7 @@ public final class LROsInner {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;ProductInner&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     public ServiceFuture<ProductInner> delete202Retry200Async(ServiceCallback<ProductInner> serviceCallback) {
         return ServiceFuture.fromBody(delete202Retry200Async(), serviceCallback);
@@ -3802,29 +4004,34 @@ public final class LROsInner {
     /**
      * Long running delete request, service returns a 202 to the initial request. Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Succeeded’.
      *
-     * @return the {@link Single&lt;RestResponse&lt;LROsDelete202Retry200HeadersInner, ProductInner&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<LROsDelete202Retry200HeadersInner, ProductInner>> delete202Retry200WithRestResponseAsync() {
+    public Single<LROsDelete202Retry200Response> delete202Retry200WithRestResponseAsync() {
         return service.delete202Retry200(this.client.acceptLanguage());
     }
 
     /**
      * Long running delete request, service returns a 202 to the initial request. Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Succeeded’.
      *
-     * @return the {@link Maybe&lt;ProductInner&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Maybe<ProductInner> delete202Retry200Async() {
         return delete202Retry200WithRestResponseAsync()
-            .flatMapMaybe(new Function<RestResponse<LROsDelete202Retry200HeadersInner, ProductInner>, Maybe<ProductInner>>() {
-                @Override
-                public Maybe<ProductInner> apply(RestResponse<LROsDelete202Retry200HeadersInner, ProductInner> restResponse) {
-                    if (restResponse.body() == null) {
-                        return Maybe.empty();
-                    } else {
-                        return Maybe.just(restResponse.body());
-                    }
-                }
-            });
+            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+    }
+
+    /**
+     * Long running delete request, service returns a 202 to the initial request. Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Succeeded’ (resume watch).
+     *
+     * @param operationDescription The OperationDescription object.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the observable for the request.
+     */
+    public Observable<OperationStatus<ProductInner>> resumeDelete202Retry200(OperationDescription operationDescription) {
+        if (operationDescription == null) {
+            throw new IllegalArgumentException("Parameter operationDescription is required and cannot be null.");
+        }
+        return service.resumeDelete202Retry200(operationDescription);
     }
 
     /**
@@ -3843,7 +4050,7 @@ public final class LROsInner {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;ProductInner&gt;} object.
+     * @return the ServiceFuture&lt;ProductInner&gt; object.
      */
     public ServiceFuture<ProductInner> beginDelete202NoRetry204Async(ServiceCallback<ProductInner> serviceCallback) {
         return ServiceFutureUtil.fromLRO(beginDelete202NoRetry204Async(), serviceCallback);
@@ -3874,7 +4081,7 @@ public final class LROsInner {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;ProductInner&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     public ServiceFuture<ProductInner> delete202NoRetry204Async(ServiceCallback<ProductInner> serviceCallback) {
         return ServiceFuture.fromBody(delete202NoRetry204Async(), serviceCallback);
@@ -3883,29 +4090,34 @@ public final class LROsInner {
     /**
      * Long running delete request, service returns a 202 to the initial request. Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Succeeded’.
      *
-     * @return the {@link Single&lt;RestResponse&lt;LROsDelete202NoRetry204HeadersInner, ProductInner&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<LROsDelete202NoRetry204HeadersInner, ProductInner>> delete202NoRetry204WithRestResponseAsync() {
+    public Single<LROsDelete202NoRetry204Response> delete202NoRetry204WithRestResponseAsync() {
         return service.delete202NoRetry204(this.client.acceptLanguage());
     }
 
     /**
      * Long running delete request, service returns a 202 to the initial request. Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Succeeded’.
      *
-     * @return the {@link Maybe&lt;ProductInner&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Maybe<ProductInner> delete202NoRetry204Async() {
         return delete202NoRetry204WithRestResponseAsync()
-            .flatMapMaybe(new Function<RestResponse<LROsDelete202NoRetry204HeadersInner, ProductInner>, Maybe<ProductInner>>() {
-                @Override
-                public Maybe<ProductInner> apply(RestResponse<LROsDelete202NoRetry204HeadersInner, ProductInner> restResponse) {
-                    if (restResponse.body() == null) {
-                        return Maybe.empty();
-                    } else {
-                        return Maybe.just(restResponse.body());
-                    }
-                }
-            });
+            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+    }
+
+    /**
+     * Long running delete request, service returns a 202 to the initial request. Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Succeeded’ (resume watch).
+     *
+     * @param operationDescription The OperationDescription object.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the observable for the request.
+     */
+    public Observable<OperationStatus<ProductInner>> resumeDelete202NoRetry204(OperationDescription operationDescription) {
+        if (operationDescription == null) {
+            throw new IllegalArgumentException("Parameter operationDescription is required and cannot be null.");
+        }
+        return service.resumeDelete202NoRetry204(operationDescription);
     }
 
     /**
@@ -3923,7 +4135,7 @@ public final class LROsInner {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;Void&gt;} object.
+     * @return the ServiceFuture&lt;Void&gt; object.
      */
     public ServiceFuture<Void> beginDeleteNoHeaderInRetryAsync(ServiceCallback<Void> serviceCallback) {
         return ServiceFutureUtil.fromLRO(beginDeleteNoHeaderInRetryAsync(), serviceCallback);
@@ -3953,7 +4165,7 @@ public final class LROsInner {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;Void&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     public ServiceFuture<Void> deleteNoHeaderInRetryAsync(ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(deleteNoHeaderInRetryAsync(), serviceCallback);
@@ -3962,20 +4174,34 @@ public final class LROsInner {
     /**
      * Long running delete request, service returns a location header in the initial request. Subsequent calls to operation status do not contain location header.
      *
-     * @return the {@link Single&lt;RestResponse&lt;LROsDeleteNoHeaderInRetryHeadersInner, Void&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<LROsDeleteNoHeaderInRetryHeadersInner, Void>> deleteNoHeaderInRetryWithRestResponseAsync() {
+    public Single<LROsDeleteNoHeaderInRetryResponse> deleteNoHeaderInRetryWithRestResponseAsync() {
         return service.deleteNoHeaderInRetry(this.client.acceptLanguage());
     }
 
     /**
      * Long running delete request, service returns a location header in the initial request. Subsequent calls to operation status do not contain location header.
      *
-     * @return the {@link Completable} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Completable deleteNoHeaderInRetryAsync() {
         return deleteNoHeaderInRetryWithRestResponseAsync()
             .toCompletable();
+    }
+
+    /**
+     * Long running delete request, service returns a location header in the initial request. Subsequent calls to operation status do not contain location header. (resume watch).
+     *
+     * @param operationDescription The OperationDescription object.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the observable for the request.
+     */
+    public Observable<OperationStatus<Void>> resumeDeleteNoHeaderInRetry(OperationDescription operationDescription) {
+        if (operationDescription == null) {
+            throw new IllegalArgumentException("Parameter operationDescription is required and cannot be null.");
+        }
+        return service.resumeDeleteNoHeaderInRetry(operationDescription);
     }
 
     /**
@@ -3993,7 +4219,7 @@ public final class LROsInner {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;Void&gt;} object.
+     * @return the ServiceFuture&lt;Void&gt; object.
      */
     public ServiceFuture<Void> beginDeleteAsyncNoHeaderInRetryAsync(ServiceCallback<Void> serviceCallback) {
         return ServiceFutureUtil.fromLRO(beginDeleteAsyncNoHeaderInRetryAsync(), serviceCallback);
@@ -4023,7 +4249,7 @@ public final class LROsInner {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;Void&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     public ServiceFuture<Void> deleteAsyncNoHeaderInRetryAsync(ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(deleteAsyncNoHeaderInRetryAsync(), serviceCallback);
@@ -4032,20 +4258,34 @@ public final class LROsInner {
     /**
      * Long running delete request, service returns an Azure-AsyncOperation header in the initial request. Subsequent calls to operation status do not contain Azure-AsyncOperation header.
      *
-     * @return the {@link Single&lt;RestResponse&lt;LROsDeleteAsyncNoHeaderInRetryHeadersInner, Void&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<LROsDeleteAsyncNoHeaderInRetryHeadersInner, Void>> deleteAsyncNoHeaderInRetryWithRestResponseAsync() {
+    public Single<LROsDeleteAsyncNoHeaderInRetryResponse> deleteAsyncNoHeaderInRetryWithRestResponseAsync() {
         return service.deleteAsyncNoHeaderInRetry(this.client.acceptLanguage());
     }
 
     /**
      * Long running delete request, service returns an Azure-AsyncOperation header in the initial request. Subsequent calls to operation status do not contain Azure-AsyncOperation header.
      *
-     * @return the {@link Completable} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Completable deleteAsyncNoHeaderInRetryAsync() {
         return deleteAsyncNoHeaderInRetryWithRestResponseAsync()
             .toCompletable();
+    }
+
+    /**
+     * Long running delete request, service returns an Azure-AsyncOperation header in the initial request. Subsequent calls to operation status do not contain Azure-AsyncOperation header. (resume watch).
+     *
+     * @param operationDescription The OperationDescription object.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the observable for the request.
+     */
+    public Observable<OperationStatus<Void>> resumeDeleteAsyncNoHeaderInRetry(OperationDescription operationDescription) {
+        if (operationDescription == null) {
+            throw new IllegalArgumentException("Parameter operationDescription is required and cannot be null.");
+        }
+        return service.resumeDeleteAsyncNoHeaderInRetry(operationDescription);
     }
 
     /**
@@ -4063,7 +4303,7 @@ public final class LROsInner {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;Void&gt;} object.
+     * @return the ServiceFuture&lt;Void&gt; object.
      */
     public ServiceFuture<Void> beginDeleteAsyncRetrySucceededAsync(ServiceCallback<Void> serviceCallback) {
         return ServiceFutureUtil.fromLRO(beginDeleteAsyncRetrySucceededAsync(), serviceCallback);
@@ -4093,7 +4333,7 @@ public final class LROsInner {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;Void&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     public ServiceFuture<Void> deleteAsyncRetrySucceededAsync(ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(deleteAsyncRetrySucceededAsync(), serviceCallback);
@@ -4102,20 +4342,34 @@ public final class LROsInner {
     /**
      * Long running delete request, service returns a 202 to the initial request. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
-     * @return the {@link Single&lt;RestResponse&lt;LROsDeleteAsyncRetrySucceededHeadersInner, Void&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<LROsDeleteAsyncRetrySucceededHeadersInner, Void>> deleteAsyncRetrySucceededWithRestResponseAsync() {
+    public Single<LROsDeleteAsyncRetrySucceededResponse> deleteAsyncRetrySucceededWithRestResponseAsync() {
         return service.deleteAsyncRetrySucceeded(this.client.acceptLanguage());
     }
 
     /**
      * Long running delete request, service returns a 202 to the initial request. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
-     * @return the {@link Completable} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Completable deleteAsyncRetrySucceededAsync() {
         return deleteAsyncRetrySucceededWithRestResponseAsync()
             .toCompletable();
+    }
+
+    /**
+     * Long running delete request, service returns a 202 to the initial request. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status (resume watch).
+     *
+     * @param operationDescription The OperationDescription object.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the observable for the request.
+     */
+    public Observable<OperationStatus<Void>> resumeDeleteAsyncRetrySucceeded(OperationDescription operationDescription) {
+        if (operationDescription == null) {
+            throw new IllegalArgumentException("Parameter operationDescription is required and cannot be null.");
+        }
+        return service.resumeDeleteAsyncRetrySucceeded(operationDescription);
     }
 
     /**
@@ -4133,7 +4387,7 @@ public final class LROsInner {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;Void&gt;} object.
+     * @return the ServiceFuture&lt;Void&gt; object.
      */
     public ServiceFuture<Void> beginDeleteAsyncNoRetrySucceededAsync(ServiceCallback<Void> serviceCallback) {
         return ServiceFutureUtil.fromLRO(beginDeleteAsyncNoRetrySucceededAsync(), serviceCallback);
@@ -4163,7 +4417,7 @@ public final class LROsInner {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;Void&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     public ServiceFuture<Void> deleteAsyncNoRetrySucceededAsync(ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(deleteAsyncNoRetrySucceededAsync(), serviceCallback);
@@ -4172,20 +4426,34 @@ public final class LROsInner {
     /**
      * Long running delete request, service returns a 202 to the initial request. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
-     * @return the {@link Single&lt;RestResponse&lt;LROsDeleteAsyncNoRetrySucceededHeadersInner, Void&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<LROsDeleteAsyncNoRetrySucceededHeadersInner, Void>> deleteAsyncNoRetrySucceededWithRestResponseAsync() {
+    public Single<LROsDeleteAsyncNoRetrySucceededResponse> deleteAsyncNoRetrySucceededWithRestResponseAsync() {
         return service.deleteAsyncNoRetrySucceeded(this.client.acceptLanguage());
     }
 
     /**
      * Long running delete request, service returns a 202 to the initial request. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
-     * @return the {@link Completable} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Completable deleteAsyncNoRetrySucceededAsync() {
         return deleteAsyncNoRetrySucceededWithRestResponseAsync()
             .toCompletable();
+    }
+
+    /**
+     * Long running delete request, service returns a 202 to the initial request. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status (resume watch).
+     *
+     * @param operationDescription The OperationDescription object.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the observable for the request.
+     */
+    public Observable<OperationStatus<Void>> resumeDeleteAsyncNoRetrySucceeded(OperationDescription operationDescription) {
+        if (operationDescription == null) {
+            throw new IllegalArgumentException("Parameter operationDescription is required and cannot be null.");
+        }
+        return service.resumeDeleteAsyncNoRetrySucceeded(operationDescription);
     }
 
     /**
@@ -4203,7 +4471,7 @@ public final class LROsInner {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;Void&gt;} object.
+     * @return the ServiceFuture&lt;Void&gt; object.
      */
     public ServiceFuture<Void> beginDeleteAsyncRetryFailedAsync(ServiceCallback<Void> serviceCallback) {
         return ServiceFutureUtil.fromLRO(beginDeleteAsyncRetryFailedAsync(), serviceCallback);
@@ -4233,7 +4501,7 @@ public final class LROsInner {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;Void&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     public ServiceFuture<Void> deleteAsyncRetryFailedAsync(ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(deleteAsyncRetryFailedAsync(), serviceCallback);
@@ -4242,20 +4510,34 @@ public final class LROsInner {
     /**
      * Long running delete request, service returns a 202 to the initial request. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
-     * @return the {@link Single&lt;RestResponse&lt;LROsDeleteAsyncRetryFailedHeadersInner, Void&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<LROsDeleteAsyncRetryFailedHeadersInner, Void>> deleteAsyncRetryFailedWithRestResponseAsync() {
+    public Single<LROsDeleteAsyncRetryFailedResponse> deleteAsyncRetryFailedWithRestResponseAsync() {
         return service.deleteAsyncRetryFailed(this.client.acceptLanguage());
     }
 
     /**
      * Long running delete request, service returns a 202 to the initial request. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
-     * @return the {@link Completable} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Completable deleteAsyncRetryFailedAsync() {
         return deleteAsyncRetryFailedWithRestResponseAsync()
             .toCompletable();
+    }
+
+    /**
+     * Long running delete request, service returns a 202 to the initial request. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status (resume watch).
+     *
+     * @param operationDescription The OperationDescription object.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the observable for the request.
+     */
+    public Observable<OperationStatus<Void>> resumeDeleteAsyncRetryFailed(OperationDescription operationDescription) {
+        if (operationDescription == null) {
+            throw new IllegalArgumentException("Parameter operationDescription is required and cannot be null.");
+        }
+        return service.resumeDeleteAsyncRetryFailed(operationDescription);
     }
 
     /**
@@ -4273,7 +4555,7 @@ public final class LROsInner {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;Void&gt;} object.
+     * @return the ServiceFuture&lt;Void&gt; object.
      */
     public ServiceFuture<Void> beginDeleteAsyncRetrycanceledAsync(ServiceCallback<Void> serviceCallback) {
         return ServiceFutureUtil.fromLRO(beginDeleteAsyncRetrycanceledAsync(), serviceCallback);
@@ -4303,7 +4585,7 @@ public final class LROsInner {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;Void&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     public ServiceFuture<Void> deleteAsyncRetrycanceledAsync(ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(deleteAsyncRetrycanceledAsync(), serviceCallback);
@@ -4312,20 +4594,34 @@ public final class LROsInner {
     /**
      * Long running delete request, service returns a 202 to the initial request. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
-     * @return the {@link Single&lt;RestResponse&lt;LROsDeleteAsyncRetrycanceledHeadersInner, Void&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<LROsDeleteAsyncRetrycanceledHeadersInner, Void>> deleteAsyncRetrycanceledWithRestResponseAsync() {
+    public Single<LROsDeleteAsyncRetrycanceledResponse> deleteAsyncRetrycanceledWithRestResponseAsync() {
         return service.deleteAsyncRetrycanceled(this.client.acceptLanguage());
     }
 
     /**
      * Long running delete request, service returns a 202 to the initial request. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
-     * @return the {@link Completable} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Completable deleteAsyncRetrycanceledAsync() {
         return deleteAsyncRetrycanceledWithRestResponseAsync()
             .toCompletable();
+    }
+
+    /**
+     * Long running delete request, service returns a 202 to the initial request. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status (resume watch).
+     *
+     * @param operationDescription The OperationDescription object.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the observable for the request.
+     */
+    public Observable<OperationStatus<Void>> resumeDeleteAsyncRetrycanceled(OperationDescription operationDescription) {
+        if (operationDescription == null) {
+            throw new IllegalArgumentException("Parameter operationDescription is required and cannot be null.");
+        }
+        return service.resumeDeleteAsyncRetrycanceled(operationDescription);
     }
 
     /**
@@ -4344,7 +4640,7 @@ public final class LROsInner {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;SkuInner&gt;} object.
+     * @return the ServiceFuture&lt;SkuInner&gt; object.
      */
     public ServiceFuture<SkuInner> beginPost200WithPayloadAsync(ServiceCallback<SkuInner> serviceCallback) {
         return ServiceFutureUtil.fromLRO(beginPost200WithPayloadAsync(), serviceCallback);
@@ -4375,7 +4671,7 @@ public final class LROsInner {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;SkuInner&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     public ServiceFuture<SkuInner> post200WithPayloadAsync(ServiceCallback<SkuInner> serviceCallback) {
         return ServiceFuture.fromBody(post200WithPayloadAsync(), serviceCallback);
@@ -4384,29 +4680,34 @@ public final class LROsInner {
     /**
      * Long running post request, service returns a 202 to the initial request, with 'Location' header. Poll returns a 200 with a response body after success.
      *
-     * @return the {@link Single&lt;RestResponse&lt;Void, SkuInner&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<Void, SkuInner>> post200WithPayloadWithRestResponseAsync() {
+    public Single<BodyResponse<SkuInner>> post200WithPayloadWithRestResponseAsync() {
         return service.post200WithPayload(this.client.acceptLanguage());
     }
 
     /**
      * Long running post request, service returns a 202 to the initial request, with 'Location' header. Poll returns a 200 with a response body after success.
      *
-     * @return the {@link Maybe&lt;SkuInner&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Maybe<SkuInner> post200WithPayloadAsync() {
         return post200WithPayloadWithRestResponseAsync()
-            .flatMapMaybe(new Function<RestResponse<Void, SkuInner>, Maybe<SkuInner>>() {
-                @Override
-                public Maybe<SkuInner> apply(RestResponse<Void, SkuInner> restResponse) {
-                    if (restResponse.body() == null) {
-                        return Maybe.empty();
-                    } else {
-                        return Maybe.just(restResponse.body());
-                    }
-                }
-            });
+            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+    }
+
+    /**
+     * Long running post request, service returns a 202 to the initial request, with 'Location' header. Poll returns a 200 with a response body after success. (resume watch).
+     *
+     * @param operationDescription The OperationDescription object.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the observable for the request.
+     */
+    public Observable<OperationStatus<SkuInner>> resumePost200WithPayload(OperationDescription operationDescription) {
+        if (operationDescription == null) {
+            throw new IllegalArgumentException("Parameter operationDescription is required and cannot be null.");
+        }
+        return service.resumePost200WithPayload(operationDescription);
     }
 
     /**
@@ -4424,7 +4725,7 @@ public final class LROsInner {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;Void&gt;} object.
+     * @return the ServiceFuture&lt;Void&gt; object.
      */
     public ServiceFuture<Void> beginPost202Retry200Async(ServiceCallback<Void> serviceCallback) {
         return ServiceFutureUtil.fromLRO(beginPost202Retry200Async(), serviceCallback);
@@ -4457,7 +4758,7 @@ public final class LROsInner {
      * @param product Product to put.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;Void&gt;} object.
+     * @return the ServiceFuture&lt;Void&gt; object.
      */
     public ServiceFuture<Void> beginPost202Retry200Async(ProductInner product, ServiceCallback<Void> serviceCallback) {
         return ServiceFutureUtil.fromLRO(beginPost202Retry200Async(product), serviceCallback);
@@ -4490,7 +4791,7 @@ public final class LROsInner {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;Void&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     public ServiceFuture<Void> post202Retry200Async(ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(post202Retry200Async(), serviceCallback);
@@ -4499,9 +4800,9 @@ public final class LROsInner {
     /**
      * Long running post request, service returns a 202 to the initial request, with 'Location' and 'Retry-After' headers, Polls return a 200 with a response body after success.
      *
-     * @return the {@link Single&lt;RestResponse&lt;LROsPost202Retry200HeadersInner, Void&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<LROsPost202Retry200HeadersInner, Void>> post202Retry200WithRestResponseAsync() {
+    public Single<LROsPost202Retry200Response> post202Retry200WithRestResponseAsync() {
         final ProductInner product = null;
         return service.post202Retry200(product, this.client.acceptLanguage());
     }
@@ -4509,7 +4810,7 @@ public final class LROsInner {
     /**
      * Long running post request, service returns a 202 to the initial request, with 'Location' and 'Retry-After' headers, Polls return a 200 with a response body after success.
      *
-     * @return the {@link Completable} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Completable post202Retry200Async() {
         return post202Retry200WithRestResponseAsync()
@@ -4534,7 +4835,7 @@ public final class LROsInner {
      * @param product Product to put.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;Void&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     public ServiceFuture<Void> post202Retry200Async(ProductInner product, ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(post202Retry200Async(product), serviceCallback);
@@ -4545,9 +4846,9 @@ public final class LROsInner {
      *
      * @param product Product to put.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link Single&lt;RestResponse&lt;LROsPost202Retry200HeadersInner, Void&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<LROsPost202Retry200HeadersInner, Void>> post202Retry200WithRestResponseAsync(ProductInner product) {
+    public Single<LROsPost202Retry200Response> post202Retry200WithRestResponseAsync(ProductInner product) {
         Validator.validate(product);
         return service.post202Retry200(product, this.client.acceptLanguage());
     }
@@ -4557,11 +4858,25 @@ public final class LROsInner {
      *
      * @param product Product to put.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link Completable} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Completable post202Retry200Async(ProductInner product) {
         return post202Retry200WithRestResponseAsync(product)
             .toCompletable();
+    }
+
+    /**
+     * Long running post request, service returns a 202 to the initial request, with 'Location' and 'Retry-After' headers, Polls return a 200 with a response body after success (resume watch).
+     *
+     * @param operationDescription The OperationDescription object.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the observable for the request.
+     */
+    public Observable<OperationStatus<Void>> resumePost202Retry200(OperationDescription operationDescription) {
+        if (operationDescription == null) {
+            throw new IllegalArgumentException("Parameter operationDescription is required and cannot be null.");
+        }
+        return service.resumePost202Retry200(operationDescription);
     }
 
     /**
@@ -4580,7 +4895,7 @@ public final class LROsInner {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;ProductInner&gt;} object.
+     * @return the ServiceFuture&lt;ProductInner&gt; object.
      */
     public ServiceFuture<ProductInner> beginPost202NoRetry204Async(ServiceCallback<ProductInner> serviceCallback) {
         return ServiceFutureUtil.fromLRO(beginPost202NoRetry204Async(), serviceCallback);
@@ -4614,7 +4929,7 @@ public final class LROsInner {
      * @param product Product to put.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;ProductInner&gt;} object.
+     * @return the ServiceFuture&lt;ProductInner&gt; object.
      */
     public ServiceFuture<ProductInner> beginPost202NoRetry204Async(ProductInner product, ServiceCallback<ProductInner> serviceCallback) {
         return ServiceFutureUtil.fromLRO(beginPost202NoRetry204Async(product), serviceCallback);
@@ -4648,7 +4963,7 @@ public final class LROsInner {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;ProductInner&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     public ServiceFuture<ProductInner> post202NoRetry204Async(ServiceCallback<ProductInner> serviceCallback) {
         return ServiceFuture.fromBody(post202NoRetry204Async(), serviceCallback);
@@ -4657,9 +4972,9 @@ public final class LROsInner {
     /**
      * Long running post request, service returns a 202 to the initial request, with 'Location' header, 204 with noresponse body after success.
      *
-     * @return the {@link Single&lt;RestResponse&lt;LROsPost202NoRetry204HeadersInner, ProductInner&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<LROsPost202NoRetry204HeadersInner, ProductInner>> post202NoRetry204WithRestResponseAsync() {
+    public Single<LROsPost202NoRetry204Response> post202NoRetry204WithRestResponseAsync() {
         final ProductInner product = null;
         return service.post202NoRetry204(product, this.client.acceptLanguage());
     }
@@ -4667,20 +4982,11 @@ public final class LROsInner {
     /**
      * Long running post request, service returns a 202 to the initial request, with 'Location' header, 204 with noresponse body after success.
      *
-     * @return the {@link Maybe&lt;ProductInner&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Maybe<ProductInner> post202NoRetry204Async() {
         return post202NoRetry204WithRestResponseAsync()
-            .flatMapMaybe(new Function<RestResponse<LROsPost202NoRetry204HeadersInner, ProductInner>, Maybe<ProductInner>>() {
-                @Override
-                public Maybe<ProductInner> apply(RestResponse<LROsPost202NoRetry204HeadersInner, ProductInner> restResponse) {
-                    if (restResponse.body() == null) {
-                        return Maybe.empty();
-                    } else {
-                        return Maybe.just(restResponse.body());
-                    }
-                }
-            });
+            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -4702,7 +5008,7 @@ public final class LROsInner {
      * @param product Product to put.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;ProductInner&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     public ServiceFuture<ProductInner> post202NoRetry204Async(ProductInner product, ServiceCallback<ProductInner> serviceCallback) {
         return ServiceFuture.fromBody(post202NoRetry204Async(product), serviceCallback);
@@ -4713,9 +5019,9 @@ public final class LROsInner {
      *
      * @param product Product to put.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link Single&lt;RestResponse&lt;LROsPost202NoRetry204HeadersInner, ProductInner&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<LROsPost202NoRetry204HeadersInner, ProductInner>> post202NoRetry204WithRestResponseAsync(ProductInner product) {
+    public Single<LROsPost202NoRetry204Response> post202NoRetry204WithRestResponseAsync(ProductInner product) {
         Validator.validate(product);
         return service.post202NoRetry204(product, this.client.acceptLanguage());
     }
@@ -4725,20 +5031,25 @@ public final class LROsInner {
      *
      * @param product Product to put.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link Maybe&lt;ProductInner&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Maybe<ProductInner> post202NoRetry204Async(ProductInner product) {
         return post202NoRetry204WithRestResponseAsync(product)
-            .flatMapMaybe(new Function<RestResponse<LROsPost202NoRetry204HeadersInner, ProductInner>, Maybe<ProductInner>>() {
-                @Override
-                public Maybe<ProductInner> apply(RestResponse<LROsPost202NoRetry204HeadersInner, ProductInner> restResponse) {
-                    if (restResponse.body() == null) {
-                        return Maybe.empty();
-                    } else {
-                        return Maybe.just(restResponse.body());
-                    }
-                }
-            });
+            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+    }
+
+    /**
+     * Long running post request, service returns a 202 to the initial request, with 'Location' header, 204 with noresponse body after success (resume watch).
+     *
+     * @param operationDescription The OperationDescription object.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the observable for the request.
+     */
+    public Observable<OperationStatus<ProductInner>> resumePost202NoRetry204(OperationDescription operationDescription) {
+        if (operationDescription == null) {
+            throw new IllegalArgumentException("Parameter operationDescription is required and cannot be null.");
+        }
+        return service.resumePost202NoRetry204(operationDescription);
     }
 
     /**
@@ -4757,7 +5068,7 @@ public final class LROsInner {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;ProductInner&gt;} object.
+     * @return the ServiceFuture&lt;ProductInner&gt; object.
      */
     public ServiceFuture<ProductInner> beginPostAsyncRetrySucceededAsync(ServiceCallback<ProductInner> serviceCallback) {
         return ServiceFutureUtil.fromLRO(beginPostAsyncRetrySucceededAsync(), serviceCallback);
@@ -4791,7 +5102,7 @@ public final class LROsInner {
      * @param product Product to put.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;ProductInner&gt;} object.
+     * @return the ServiceFuture&lt;ProductInner&gt; object.
      */
     public ServiceFuture<ProductInner> beginPostAsyncRetrySucceededAsync(ProductInner product, ServiceCallback<ProductInner> serviceCallback) {
         return ServiceFutureUtil.fromLRO(beginPostAsyncRetrySucceededAsync(product), serviceCallback);
@@ -4825,7 +5136,7 @@ public final class LROsInner {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;ProductInner&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     public ServiceFuture<ProductInner> postAsyncRetrySucceededAsync(ServiceCallback<ProductInner> serviceCallback) {
         return ServiceFuture.fromBody(postAsyncRetrySucceededAsync(), serviceCallback);
@@ -4834,9 +5145,9 @@ public final class LROsInner {
     /**
      * Long running post request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
-     * @return the {@link Single&lt;RestResponse&lt;LROsPostAsyncRetrySucceededHeadersInner, ProductInner&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<LROsPostAsyncRetrySucceededHeadersInner, ProductInner>> postAsyncRetrySucceededWithRestResponseAsync() {
+    public Single<LROsPostAsyncRetrySucceededResponse> postAsyncRetrySucceededWithRestResponseAsync() {
         final ProductInner product = null;
         return service.postAsyncRetrySucceeded(product, this.client.acceptLanguage());
     }
@@ -4844,20 +5155,11 @@ public final class LROsInner {
     /**
      * Long running post request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
-     * @return the {@link Maybe&lt;ProductInner&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Maybe<ProductInner> postAsyncRetrySucceededAsync() {
         return postAsyncRetrySucceededWithRestResponseAsync()
-            .flatMapMaybe(new Function<RestResponse<LROsPostAsyncRetrySucceededHeadersInner, ProductInner>, Maybe<ProductInner>>() {
-                @Override
-                public Maybe<ProductInner> apply(RestResponse<LROsPostAsyncRetrySucceededHeadersInner, ProductInner> restResponse) {
-                    if (restResponse.body() == null) {
-                        return Maybe.empty();
-                    } else {
-                        return Maybe.just(restResponse.body());
-                    }
-                }
-            });
+            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -4879,7 +5181,7 @@ public final class LROsInner {
      * @param product Product to put.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;ProductInner&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     public ServiceFuture<ProductInner> postAsyncRetrySucceededAsync(ProductInner product, ServiceCallback<ProductInner> serviceCallback) {
         return ServiceFuture.fromBody(postAsyncRetrySucceededAsync(product), serviceCallback);
@@ -4890,9 +5192,9 @@ public final class LROsInner {
      *
      * @param product Product to put.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link Single&lt;RestResponse&lt;LROsPostAsyncRetrySucceededHeadersInner, ProductInner&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<LROsPostAsyncRetrySucceededHeadersInner, ProductInner>> postAsyncRetrySucceededWithRestResponseAsync(ProductInner product) {
+    public Single<LROsPostAsyncRetrySucceededResponse> postAsyncRetrySucceededWithRestResponseAsync(ProductInner product) {
         Validator.validate(product);
         return service.postAsyncRetrySucceeded(product, this.client.acceptLanguage());
     }
@@ -4902,20 +5204,25 @@ public final class LROsInner {
      *
      * @param product Product to put.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link Maybe&lt;ProductInner&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Maybe<ProductInner> postAsyncRetrySucceededAsync(ProductInner product) {
         return postAsyncRetrySucceededWithRestResponseAsync(product)
-            .flatMapMaybe(new Function<RestResponse<LROsPostAsyncRetrySucceededHeadersInner, ProductInner>, Maybe<ProductInner>>() {
-                @Override
-                public Maybe<ProductInner> apply(RestResponse<LROsPostAsyncRetrySucceededHeadersInner, ProductInner> restResponse) {
-                    if (restResponse.body() == null) {
-                        return Maybe.empty();
-                    } else {
-                        return Maybe.just(restResponse.body());
-                    }
-                }
-            });
+            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+    }
+
+    /**
+     * Long running post request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status (resume watch).
+     *
+     * @param operationDescription The OperationDescription object.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the observable for the request.
+     */
+    public Observable<OperationStatus<ProductInner>> resumePostAsyncRetrySucceeded(OperationDescription operationDescription) {
+        if (operationDescription == null) {
+            throw new IllegalArgumentException("Parameter operationDescription is required and cannot be null.");
+        }
+        return service.resumePostAsyncRetrySucceeded(operationDescription);
     }
 
     /**
@@ -4934,7 +5241,7 @@ public final class LROsInner {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;ProductInner&gt;} object.
+     * @return the ServiceFuture&lt;ProductInner&gt; object.
      */
     public ServiceFuture<ProductInner> beginPostAsyncNoRetrySucceededAsync(ServiceCallback<ProductInner> serviceCallback) {
         return ServiceFutureUtil.fromLRO(beginPostAsyncNoRetrySucceededAsync(), serviceCallback);
@@ -4968,7 +5275,7 @@ public final class LROsInner {
      * @param product Product to put.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;ProductInner&gt;} object.
+     * @return the ServiceFuture&lt;ProductInner&gt; object.
      */
     public ServiceFuture<ProductInner> beginPostAsyncNoRetrySucceededAsync(ProductInner product, ServiceCallback<ProductInner> serviceCallback) {
         return ServiceFutureUtil.fromLRO(beginPostAsyncNoRetrySucceededAsync(product), serviceCallback);
@@ -5002,7 +5309,7 @@ public final class LROsInner {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;ProductInner&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     public ServiceFuture<ProductInner> postAsyncNoRetrySucceededAsync(ServiceCallback<ProductInner> serviceCallback) {
         return ServiceFuture.fromBody(postAsyncNoRetrySucceededAsync(), serviceCallback);
@@ -5011,9 +5318,9 @@ public final class LROsInner {
     /**
      * Long running post request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
-     * @return the {@link Single&lt;RestResponse&lt;LROsPostAsyncNoRetrySucceededHeadersInner, ProductInner&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<LROsPostAsyncNoRetrySucceededHeadersInner, ProductInner>> postAsyncNoRetrySucceededWithRestResponseAsync() {
+    public Single<LROsPostAsyncNoRetrySucceededResponse> postAsyncNoRetrySucceededWithRestResponseAsync() {
         final ProductInner product = null;
         return service.postAsyncNoRetrySucceeded(product, this.client.acceptLanguage());
     }
@@ -5021,20 +5328,11 @@ public final class LROsInner {
     /**
      * Long running post request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
-     * @return the {@link Maybe&lt;ProductInner&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Maybe<ProductInner> postAsyncNoRetrySucceededAsync() {
         return postAsyncNoRetrySucceededWithRestResponseAsync()
-            .flatMapMaybe(new Function<RestResponse<LROsPostAsyncNoRetrySucceededHeadersInner, ProductInner>, Maybe<ProductInner>>() {
-                @Override
-                public Maybe<ProductInner> apply(RestResponse<LROsPostAsyncNoRetrySucceededHeadersInner, ProductInner> restResponse) {
-                    if (restResponse.body() == null) {
-                        return Maybe.empty();
-                    } else {
-                        return Maybe.just(restResponse.body());
-                    }
-                }
-            });
+            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -5056,7 +5354,7 @@ public final class LROsInner {
      * @param product Product to put.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;ProductInner&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     public ServiceFuture<ProductInner> postAsyncNoRetrySucceededAsync(ProductInner product, ServiceCallback<ProductInner> serviceCallback) {
         return ServiceFuture.fromBody(postAsyncNoRetrySucceededAsync(product), serviceCallback);
@@ -5067,9 +5365,9 @@ public final class LROsInner {
      *
      * @param product Product to put.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link Single&lt;RestResponse&lt;LROsPostAsyncNoRetrySucceededHeadersInner, ProductInner&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<LROsPostAsyncNoRetrySucceededHeadersInner, ProductInner>> postAsyncNoRetrySucceededWithRestResponseAsync(ProductInner product) {
+    public Single<LROsPostAsyncNoRetrySucceededResponse> postAsyncNoRetrySucceededWithRestResponseAsync(ProductInner product) {
         Validator.validate(product);
         return service.postAsyncNoRetrySucceeded(product, this.client.acceptLanguage());
     }
@@ -5079,20 +5377,25 @@ public final class LROsInner {
      *
      * @param product Product to put.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link Maybe&lt;ProductInner&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Maybe<ProductInner> postAsyncNoRetrySucceededAsync(ProductInner product) {
         return postAsyncNoRetrySucceededWithRestResponseAsync(product)
-            .flatMapMaybe(new Function<RestResponse<LROsPostAsyncNoRetrySucceededHeadersInner, ProductInner>, Maybe<ProductInner>>() {
-                @Override
-                public Maybe<ProductInner> apply(RestResponse<LROsPostAsyncNoRetrySucceededHeadersInner, ProductInner> restResponse) {
-                    if (restResponse.body() == null) {
-                        return Maybe.empty();
-                    } else {
-                        return Maybe.just(restResponse.body());
-                    }
-                }
-            });
+            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+    }
+
+    /**
+     * Long running post request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status (resume watch).
+     *
+     * @param operationDescription The OperationDescription object.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the observable for the request.
+     */
+    public Observable<OperationStatus<ProductInner>> resumePostAsyncNoRetrySucceeded(OperationDescription operationDescription) {
+        if (operationDescription == null) {
+            throw new IllegalArgumentException("Parameter operationDescription is required and cannot be null.");
+        }
+        return service.resumePostAsyncNoRetrySucceeded(operationDescription);
     }
 
     /**
@@ -5110,7 +5413,7 @@ public final class LROsInner {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;Void&gt;} object.
+     * @return the ServiceFuture&lt;Void&gt; object.
      */
     public ServiceFuture<Void> beginPostAsyncRetryFailedAsync(ServiceCallback<Void> serviceCallback) {
         return ServiceFutureUtil.fromLRO(beginPostAsyncRetryFailedAsync(), serviceCallback);
@@ -5143,7 +5446,7 @@ public final class LROsInner {
      * @param product Product to put.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;Void&gt;} object.
+     * @return the ServiceFuture&lt;Void&gt; object.
      */
     public ServiceFuture<Void> beginPostAsyncRetryFailedAsync(ProductInner product, ServiceCallback<Void> serviceCallback) {
         return ServiceFutureUtil.fromLRO(beginPostAsyncRetryFailedAsync(product), serviceCallback);
@@ -5176,7 +5479,7 @@ public final class LROsInner {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;Void&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     public ServiceFuture<Void> postAsyncRetryFailedAsync(ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(postAsyncRetryFailedAsync(), serviceCallback);
@@ -5185,9 +5488,9 @@ public final class LROsInner {
     /**
      * Long running post request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
-     * @return the {@link Single&lt;RestResponse&lt;LROsPostAsyncRetryFailedHeadersInner, Void&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<LROsPostAsyncRetryFailedHeadersInner, Void>> postAsyncRetryFailedWithRestResponseAsync() {
+    public Single<LROsPostAsyncRetryFailedResponse> postAsyncRetryFailedWithRestResponseAsync() {
         final ProductInner product = null;
         return service.postAsyncRetryFailed(product, this.client.acceptLanguage());
     }
@@ -5195,7 +5498,7 @@ public final class LROsInner {
     /**
      * Long running post request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
-     * @return the {@link Completable} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Completable postAsyncRetryFailedAsync() {
         return postAsyncRetryFailedWithRestResponseAsync()
@@ -5220,7 +5523,7 @@ public final class LROsInner {
      * @param product Product to put.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;Void&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     public ServiceFuture<Void> postAsyncRetryFailedAsync(ProductInner product, ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(postAsyncRetryFailedAsync(product), serviceCallback);
@@ -5231,9 +5534,9 @@ public final class LROsInner {
      *
      * @param product Product to put.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link Single&lt;RestResponse&lt;LROsPostAsyncRetryFailedHeadersInner, Void&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<LROsPostAsyncRetryFailedHeadersInner, Void>> postAsyncRetryFailedWithRestResponseAsync(ProductInner product) {
+    public Single<LROsPostAsyncRetryFailedResponse> postAsyncRetryFailedWithRestResponseAsync(ProductInner product) {
         Validator.validate(product);
         return service.postAsyncRetryFailed(product, this.client.acceptLanguage());
     }
@@ -5243,11 +5546,25 @@ public final class LROsInner {
      *
      * @param product Product to put.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link Completable} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Completable postAsyncRetryFailedAsync(ProductInner product) {
         return postAsyncRetryFailedWithRestResponseAsync(product)
             .toCompletable();
+    }
+
+    /**
+     * Long running post request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status (resume watch).
+     *
+     * @param operationDescription The OperationDescription object.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the observable for the request.
+     */
+    public Observable<OperationStatus<Void>> resumePostAsyncRetryFailed(OperationDescription operationDescription) {
+        if (operationDescription == null) {
+            throw new IllegalArgumentException("Parameter operationDescription is required and cannot be null.");
+        }
+        return service.resumePostAsyncRetryFailed(operationDescription);
     }
 
     /**
@@ -5265,7 +5582,7 @@ public final class LROsInner {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;Void&gt;} object.
+     * @return the ServiceFuture&lt;Void&gt; object.
      */
     public ServiceFuture<Void> beginPostAsyncRetrycanceledAsync(ServiceCallback<Void> serviceCallback) {
         return ServiceFutureUtil.fromLRO(beginPostAsyncRetrycanceledAsync(), serviceCallback);
@@ -5298,7 +5615,7 @@ public final class LROsInner {
      * @param product Product to put.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;Void&gt;} object.
+     * @return the ServiceFuture&lt;Void&gt; object.
      */
     public ServiceFuture<Void> beginPostAsyncRetrycanceledAsync(ProductInner product, ServiceCallback<Void> serviceCallback) {
         return ServiceFutureUtil.fromLRO(beginPostAsyncRetrycanceledAsync(product), serviceCallback);
@@ -5331,7 +5648,7 @@ public final class LROsInner {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;Void&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     public ServiceFuture<Void> postAsyncRetrycanceledAsync(ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(postAsyncRetrycanceledAsync(), serviceCallback);
@@ -5340,9 +5657,9 @@ public final class LROsInner {
     /**
      * Long running post request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
-     * @return the {@link Single&lt;RestResponse&lt;LROsPostAsyncRetrycanceledHeadersInner, Void&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<LROsPostAsyncRetrycanceledHeadersInner, Void>> postAsyncRetrycanceledWithRestResponseAsync() {
+    public Single<LROsPostAsyncRetrycanceledResponse> postAsyncRetrycanceledWithRestResponseAsync() {
         final ProductInner product = null;
         return service.postAsyncRetrycanceled(product, this.client.acceptLanguage());
     }
@@ -5350,7 +5667,7 @@ public final class LROsInner {
     /**
      * Long running post request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
-     * @return the {@link Completable} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Completable postAsyncRetrycanceledAsync() {
         return postAsyncRetrycanceledWithRestResponseAsync()
@@ -5375,7 +5692,7 @@ public final class LROsInner {
      * @param product Product to put.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;Void&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     public ServiceFuture<Void> postAsyncRetrycanceledAsync(ProductInner product, ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(postAsyncRetrycanceledAsync(product), serviceCallback);
@@ -5386,9 +5703,9 @@ public final class LROsInner {
      *
      * @param product Product to put.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link Single&lt;RestResponse&lt;LROsPostAsyncRetrycanceledHeadersInner, Void&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<LROsPostAsyncRetrycanceledHeadersInner, Void>> postAsyncRetrycanceledWithRestResponseAsync(ProductInner product) {
+    public Single<LROsPostAsyncRetrycanceledResponse> postAsyncRetrycanceledWithRestResponseAsync(ProductInner product) {
         Validator.validate(product);
         return service.postAsyncRetrycanceled(product, this.client.acceptLanguage());
     }
@@ -5398,10 +5715,24 @@ public final class LROsInner {
      *
      * @param product Product to put.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link Completable} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Completable postAsyncRetrycanceledAsync(ProductInner product) {
         return postAsyncRetrycanceledWithRestResponseAsync(product)
             .toCompletable();
+    }
+
+    /**
+     * Long running post request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status (resume watch).
+     *
+     * @param operationDescription The OperationDescription object.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the observable for the request.
+     */
+    public Observable<OperationStatus<Void>> resumePostAsyncRetrycanceled(OperationDescription operationDescription) {
+        if (operationDescription == null) {
+            throw new IllegalArgumentException("Parameter operationDescription is required and cannot be null.");
+        }
+        return service.resumePostAsyncRetrycanceled(operationDescription);
     }
 }

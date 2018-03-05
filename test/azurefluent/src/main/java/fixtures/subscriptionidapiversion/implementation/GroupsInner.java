@@ -11,7 +11,7 @@
 package fixtures.subscriptionidapiversion.implementation;
 
 import com.microsoft.azure.v2.AzureProxy;
-import com.microsoft.rest.v2.RestResponse;
+import com.microsoft.rest.v2.BodyResponse;
 import com.microsoft.rest.v2.ServiceCallback;
 import com.microsoft.rest.v2.ServiceFuture;
 import com.microsoft.rest.v2.annotations.ExpectedResponses;
@@ -25,7 +25,6 @@ import fixtures.subscriptionidapiversion.ErrorException;
 import io.reactivex.Maybe;
 import io.reactivex.Single;
 import io.reactivex.annotations.NonNull;
-import io.reactivex.functions.Function;
 
 /**
  * An instance of this class provides access to all the operations defined in
@@ -61,7 +60,7 @@ public final class GroupsInner {
         @GET("subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<RestResponse<Void, SampleResourceGroupInner>> getSampleResourceGroup(@PathParam("subscriptionId") String subscriptionId, @PathParam("resourceGroupName") String resourceGroupName, @QueryParam("api-version") String apiVersion, @HeaderParam("accept-language") String acceptLanguage);
+        Single<BodyResponse<SampleResourceGroupInner>> getSampleResourceGroup(@PathParam("subscriptionId") String subscriptionId, @PathParam("resourceGroupName") String resourceGroupName, @QueryParam("api-version") String apiVersion, @HeaderParam("accept-language") String acceptLanguage);
     }
 
     /**
@@ -83,7 +82,7 @@ public final class GroupsInner {
      * @param resourceGroupName Resource Group name 'testgroup101'.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;SampleResourceGroupInner&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     public ServiceFuture<SampleResourceGroupInner> getSampleResourceGroupAsync(@NonNull String resourceGroupName, ServiceCallback<SampleResourceGroupInner> serviceCallback) {
         return ServiceFuture.fromBody(getSampleResourceGroupAsync(resourceGroupName), serviceCallback);
@@ -94,9 +93,9 @@ public final class GroupsInner {
      *
      * @param resourceGroupName Resource Group name 'testgroup101'.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link Single&lt;RestResponse&lt;Void, SampleResourceGroupInner&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<Void, SampleResourceGroupInner>> getSampleResourceGroupWithRestResponseAsync(@NonNull String resourceGroupName) {
+    public Single<BodyResponse<SampleResourceGroupInner>> getSampleResourceGroupWithRestResponseAsync(@NonNull String resourceGroupName) {
         if (this.client.subscriptionId() == null) {
             throw new IllegalArgumentException("Parameter this.client.subscriptionId() is required and cannot be null.");
         }
@@ -114,19 +113,10 @@ public final class GroupsInner {
      *
      * @param resourceGroupName Resource Group name 'testgroup101'.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link Maybe&lt;SampleResourceGroupInner&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Maybe<SampleResourceGroupInner> getSampleResourceGroupAsync(@NonNull String resourceGroupName) {
         return getSampleResourceGroupWithRestResponseAsync(resourceGroupName)
-            .flatMapMaybe(new Function<RestResponse<Void, SampleResourceGroupInner>, Maybe<SampleResourceGroupInner>>() {
-                @Override
-                public Maybe<SampleResourceGroupInner> apply(RestResponse<Void, SampleResourceGroupInner> restResponse) {
-                    if (restResponse.body() == null) {
-                        return Maybe.empty();
-                    } else {
-                        return Maybe.just(restResponse.body());
-                    }
-                }
-            });
+            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 }

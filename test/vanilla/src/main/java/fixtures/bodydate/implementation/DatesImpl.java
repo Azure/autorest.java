@@ -10,10 +10,11 @@
 
 package fixtures.bodydate.implementation;
 
+import com.microsoft.rest.v2.BodyResponse;
 import com.microsoft.rest.v2.RestProxy;
-import com.microsoft.rest.v2.RestResponse;
 import com.microsoft.rest.v2.ServiceCallback;
 import com.microsoft.rest.v2.ServiceFuture;
+import com.microsoft.rest.v2.VoidResponse;
 import com.microsoft.rest.v2.annotations.BodyParam;
 import com.microsoft.rest.v2.annotations.ExpectedResponses;
 import com.microsoft.rest.v2.annotations.GET;
@@ -26,7 +27,6 @@ import io.reactivex.Completable;
 import io.reactivex.Maybe;
 import io.reactivex.Single;
 import io.reactivex.annotations.NonNull;
-import io.reactivex.functions.Function;
 import org.joda.time.LocalDate;
 
 /**
@@ -63,42 +63,42 @@ public final class DatesImpl implements Dates {
         @GET("date/null")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<RestResponse<Void, LocalDate>> getNull();
+        Single<BodyResponse<LocalDate>> getNull();
 
         @GET("date/invaliddate")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<RestResponse<Void, LocalDate>> getInvalidDate();
+        Single<BodyResponse<LocalDate>> getInvalidDate();
 
         @GET("date/overflowdate")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<RestResponse<Void, LocalDate>> getOverflowDate();
+        Single<BodyResponse<LocalDate>> getOverflowDate();
 
         @GET("date/underflowdate")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<RestResponse<Void, LocalDate>> getUnderflowDate();
+        Single<BodyResponse<LocalDate>> getUnderflowDate();
 
         @PUT("date/max")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<RestResponse<Void, Void>> putMaxDate(@BodyParam("application/json; charset=utf-8") LocalDate dateBody);
+        Single<VoidResponse> putMaxDate(@BodyParam("application/json; charset=utf-8") LocalDate dateBody);
 
         @GET("date/max")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<RestResponse<Void, LocalDate>> getMaxDate();
+        Single<BodyResponse<LocalDate>> getMaxDate();
 
         @PUT("date/min")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<RestResponse<Void, Void>> putMinDate(@BodyParam("application/json; charset=utf-8") LocalDate dateBody);
+        Single<VoidResponse> putMinDate(@BodyParam("application/json; charset=utf-8") LocalDate dateBody);
 
         @GET("date/min")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<RestResponse<Void, LocalDate>> getMinDate();
+        Single<BodyResponse<LocalDate>> getMinDate();
     }
 
     /**
@@ -117,7 +117,7 @@ public final class DatesImpl implements Dates {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;LocalDate&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     public ServiceFuture<LocalDate> getNullAsync(ServiceCallback<LocalDate> serviceCallback) {
         return ServiceFuture.fromBody(getNullAsync(), serviceCallback);
@@ -126,29 +126,20 @@ public final class DatesImpl implements Dates {
     /**
      * Get null date value.
      *
-     * @return the {@link Single&lt;RestResponse&lt;Void, LocalDate&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<Void, LocalDate>> getNullWithRestResponseAsync() {
+    public Single<BodyResponse<LocalDate>> getNullWithRestResponseAsync() {
         return service.getNull();
     }
 
     /**
      * Get null date value.
      *
-     * @return the {@link Maybe&lt;LocalDate&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Maybe<LocalDate> getNullAsync() {
         return getNullWithRestResponseAsync()
-            .flatMapMaybe(new Function<RestResponse<Void, LocalDate>, Maybe<LocalDate>>() {
-                @Override
-                public Maybe<LocalDate> apply(RestResponse<Void, LocalDate> restResponse) {
-                    if (restResponse.body() == null) {
-                        return Maybe.empty();
-                    } else {
-                        return Maybe.just(restResponse.body());
-                    }
-                }
-            });
+            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -167,7 +158,7 @@ public final class DatesImpl implements Dates {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;LocalDate&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     public ServiceFuture<LocalDate> getInvalidDateAsync(ServiceCallback<LocalDate> serviceCallback) {
         return ServiceFuture.fromBody(getInvalidDateAsync(), serviceCallback);
@@ -176,29 +167,20 @@ public final class DatesImpl implements Dates {
     /**
      * Get invalid date value.
      *
-     * @return the {@link Single&lt;RestResponse&lt;Void, LocalDate&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<Void, LocalDate>> getInvalidDateWithRestResponseAsync() {
+    public Single<BodyResponse<LocalDate>> getInvalidDateWithRestResponseAsync() {
         return service.getInvalidDate();
     }
 
     /**
      * Get invalid date value.
      *
-     * @return the {@link Maybe&lt;LocalDate&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Maybe<LocalDate> getInvalidDateAsync() {
         return getInvalidDateWithRestResponseAsync()
-            .flatMapMaybe(new Function<RestResponse<Void, LocalDate>, Maybe<LocalDate>>() {
-                @Override
-                public Maybe<LocalDate> apply(RestResponse<Void, LocalDate> restResponse) {
-                    if (restResponse.body() == null) {
-                        return Maybe.empty();
-                    } else {
-                        return Maybe.just(restResponse.body());
-                    }
-                }
-            });
+            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -217,7 +199,7 @@ public final class DatesImpl implements Dates {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;LocalDate&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     public ServiceFuture<LocalDate> getOverflowDateAsync(ServiceCallback<LocalDate> serviceCallback) {
         return ServiceFuture.fromBody(getOverflowDateAsync(), serviceCallback);
@@ -226,29 +208,20 @@ public final class DatesImpl implements Dates {
     /**
      * Get overflow date value.
      *
-     * @return the {@link Single&lt;RestResponse&lt;Void, LocalDate&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<Void, LocalDate>> getOverflowDateWithRestResponseAsync() {
+    public Single<BodyResponse<LocalDate>> getOverflowDateWithRestResponseAsync() {
         return service.getOverflowDate();
     }
 
     /**
      * Get overflow date value.
      *
-     * @return the {@link Maybe&lt;LocalDate&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Maybe<LocalDate> getOverflowDateAsync() {
         return getOverflowDateWithRestResponseAsync()
-            .flatMapMaybe(new Function<RestResponse<Void, LocalDate>, Maybe<LocalDate>>() {
-                @Override
-                public Maybe<LocalDate> apply(RestResponse<Void, LocalDate> restResponse) {
-                    if (restResponse.body() == null) {
-                        return Maybe.empty();
-                    } else {
-                        return Maybe.just(restResponse.body());
-                    }
-                }
-            });
+            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -267,7 +240,7 @@ public final class DatesImpl implements Dates {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;LocalDate&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     public ServiceFuture<LocalDate> getUnderflowDateAsync(ServiceCallback<LocalDate> serviceCallback) {
         return ServiceFuture.fromBody(getUnderflowDateAsync(), serviceCallback);
@@ -276,29 +249,20 @@ public final class DatesImpl implements Dates {
     /**
      * Get underflow date value.
      *
-     * @return the {@link Single&lt;RestResponse&lt;Void, LocalDate&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<Void, LocalDate>> getUnderflowDateWithRestResponseAsync() {
+    public Single<BodyResponse<LocalDate>> getUnderflowDateWithRestResponseAsync() {
         return service.getUnderflowDate();
     }
 
     /**
      * Get underflow date value.
      *
-     * @return the {@link Maybe&lt;LocalDate&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Maybe<LocalDate> getUnderflowDateAsync() {
         return getUnderflowDateWithRestResponseAsync()
-            .flatMapMaybe(new Function<RestResponse<Void, LocalDate>, Maybe<LocalDate>>() {
-                @Override
-                public Maybe<LocalDate> apply(RestResponse<Void, LocalDate> restResponse) {
-                    if (restResponse.body() == null) {
-                        return Maybe.empty();
-                    } else {
-                        return Maybe.just(restResponse.body());
-                    }
-                }
-            });
+            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -319,7 +283,7 @@ public final class DatesImpl implements Dates {
      * @param dateBody the LocalDate value.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;Void&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     public ServiceFuture<Void> putMaxDateAsync(@NonNull LocalDate dateBody, ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(putMaxDateAsync(dateBody), serviceCallback);
@@ -330,9 +294,9 @@ public final class DatesImpl implements Dates {
      *
      * @param dateBody the LocalDate value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<Void, Void>> putMaxDateWithRestResponseAsync(@NonNull LocalDate dateBody) {
+    public Single<VoidResponse> putMaxDateWithRestResponseAsync(@NonNull LocalDate dateBody) {
         if (dateBody == null) {
             throw new IllegalArgumentException("Parameter dateBody is required and cannot be null.");
         }
@@ -344,7 +308,7 @@ public final class DatesImpl implements Dates {
      *
      * @param dateBody the LocalDate value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link Completable} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Completable putMaxDateAsync(@NonNull LocalDate dateBody) {
         return putMaxDateWithRestResponseAsync(dateBody)
@@ -367,7 +331,7 @@ public final class DatesImpl implements Dates {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;LocalDate&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     public ServiceFuture<LocalDate> getMaxDateAsync(ServiceCallback<LocalDate> serviceCallback) {
         return ServiceFuture.fromBody(getMaxDateAsync(), serviceCallback);
@@ -376,29 +340,20 @@ public final class DatesImpl implements Dates {
     /**
      * Get max date value 9999-12-31.
      *
-     * @return the {@link Single&lt;RestResponse&lt;Void, LocalDate&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<Void, LocalDate>> getMaxDateWithRestResponseAsync() {
+    public Single<BodyResponse<LocalDate>> getMaxDateWithRestResponseAsync() {
         return service.getMaxDate();
     }
 
     /**
      * Get max date value 9999-12-31.
      *
-     * @return the {@link Maybe&lt;LocalDate&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Maybe<LocalDate> getMaxDateAsync() {
         return getMaxDateWithRestResponseAsync()
-            .flatMapMaybe(new Function<RestResponse<Void, LocalDate>, Maybe<LocalDate>>() {
-                @Override
-                public Maybe<LocalDate> apply(RestResponse<Void, LocalDate> restResponse) {
-                    if (restResponse.body() == null) {
-                        return Maybe.empty();
-                    } else {
-                        return Maybe.just(restResponse.body());
-                    }
-                }
-            });
+            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -419,7 +374,7 @@ public final class DatesImpl implements Dates {
      * @param dateBody the LocalDate value.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;Void&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     public ServiceFuture<Void> putMinDateAsync(@NonNull LocalDate dateBody, ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(putMinDateAsync(dateBody), serviceCallback);
@@ -430,9 +385,9 @@ public final class DatesImpl implements Dates {
      *
      * @param dateBody the LocalDate value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<Void, Void>> putMinDateWithRestResponseAsync(@NonNull LocalDate dateBody) {
+    public Single<VoidResponse> putMinDateWithRestResponseAsync(@NonNull LocalDate dateBody) {
         if (dateBody == null) {
             throw new IllegalArgumentException("Parameter dateBody is required and cannot be null.");
         }
@@ -444,7 +399,7 @@ public final class DatesImpl implements Dates {
      *
      * @param dateBody the LocalDate value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link Completable} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Completable putMinDateAsync(@NonNull LocalDate dateBody) {
         return putMinDateWithRestResponseAsync(dateBody)
@@ -467,7 +422,7 @@ public final class DatesImpl implements Dates {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;LocalDate&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     public ServiceFuture<LocalDate> getMinDateAsync(ServiceCallback<LocalDate> serviceCallback) {
         return ServiceFuture.fromBody(getMinDateAsync(), serviceCallback);
@@ -476,28 +431,19 @@ public final class DatesImpl implements Dates {
     /**
      * Get min date value 0000-01-01.
      *
-     * @return the {@link Single&lt;RestResponse&lt;Void, LocalDate&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<Void, LocalDate>> getMinDateWithRestResponseAsync() {
+    public Single<BodyResponse<LocalDate>> getMinDateWithRestResponseAsync() {
         return service.getMinDate();
     }
 
     /**
      * Get min date value 0000-01-01.
      *
-     * @return the {@link Maybe&lt;LocalDate&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Maybe<LocalDate> getMinDateAsync() {
         return getMinDateWithRestResponseAsync()
-            .flatMapMaybe(new Function<RestResponse<Void, LocalDate>, Maybe<LocalDate>>() {
-                @Override
-                public Maybe<LocalDate> apply(RestResponse<Void, LocalDate> restResponse) {
-                    if (restResponse.body() == null) {
-                        return Maybe.empty();
-                    } else {
-                        return Maybe.just(restResponse.body());
-                    }
-                }
-            });
+            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 }

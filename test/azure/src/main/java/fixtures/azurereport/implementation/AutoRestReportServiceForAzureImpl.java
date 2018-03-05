@@ -13,7 +13,7 @@ package fixtures.azurereport.implementation;
 import com.microsoft.azure.v2.AzureEnvironment;
 import com.microsoft.azure.v2.AzureProxy;
 import com.microsoft.azure.v2.AzureServiceClient;
-import com.microsoft.rest.v2.RestResponse;
+import com.microsoft.rest.v2.BodyResponse;
 import com.microsoft.rest.v2.ServiceCallback;
 import com.microsoft.rest.v2.ServiceFuture;
 import com.microsoft.rest.v2.annotations.ExpectedResponses;
@@ -29,7 +29,6 @@ import fixtures.azurereport.models.ErrorException;
 import io.reactivex.Maybe;
 import io.reactivex.Single;
 import io.reactivex.annotations.NonNull;
-import io.reactivex.functions.Function;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -169,7 +168,7 @@ public final class AutoRestReportServiceForAzureImpl extends AzureServiceClient 
         @GET("report/azure")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<RestResponse<Void, Map<String, Integer>>> getReport(@QueryParam("qualifier") String qualifier, @HeaderParam("accept-language") String acceptLanguage);
+        Single<BodyResponse<Map<String, Integer>>> getReport(@QueryParam("qualifier") String qualifier, @HeaderParam("accept-language") String acceptLanguage);
     }
 
     /**
@@ -188,7 +187,7 @@ public final class AutoRestReportServiceForAzureImpl extends AzureServiceClient 
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;Map&lt;String, Integer&gt;&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     public ServiceFuture<Map<String, Integer>> getReportAsync(ServiceCallback<Map<String, Integer>> serviceCallback) {
         return ServiceFuture.fromBody(getReportAsync(), serviceCallback);
@@ -197,9 +196,9 @@ public final class AutoRestReportServiceForAzureImpl extends AzureServiceClient 
     /**
      * Get test coverage report.
      *
-     * @return the {@link Single&lt;RestResponse&lt;Void, Map&lt;String, Integer&gt;&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<Void, Map<String, Integer>>> getReportWithRestResponseAsync() {
+    public Single<BodyResponse<Map<String, Integer>>> getReportWithRestResponseAsync() {
         final String qualifier = null;
         return service.getReport(qualifier, this.acceptLanguage());
     }
@@ -207,20 +206,11 @@ public final class AutoRestReportServiceForAzureImpl extends AzureServiceClient 
     /**
      * Get test coverage report.
      *
-     * @return the {@link Maybe&lt;Map&lt;String, Integer&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Maybe<Map<String, Integer>> getReportAsync() {
         return getReportWithRestResponseAsync()
-            .flatMapMaybe(new Function<RestResponse<Void, Map<String, Integer>>, Maybe<Map<String, Integer>>>() {
-                @Override
-                public Maybe<Map<String, Integer>> apply(RestResponse<Void, Map<String, Integer>> restResponse) {
-                    if (restResponse.body() == null) {
-                        return Maybe.empty();
-                    } else {
-                        return Maybe.just(restResponse.body());
-                    }
-                }
-            });
+            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -242,7 +232,7 @@ public final class AutoRestReportServiceForAzureImpl extends AzureServiceClient 
      * @param qualifier If specified, qualifies the generated report further (e.g. '2.7' vs '3.5' in for Python). The only effect is, that generators that run all tests several times, can distinguish the generated reports.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;Map&lt;String, Integer&gt;&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     public ServiceFuture<Map<String, Integer>> getReportAsync(String qualifier, ServiceCallback<Map<String, Integer>> serviceCallback) {
         return ServiceFuture.fromBody(getReportAsync(qualifier), serviceCallback);
@@ -253,9 +243,9 @@ public final class AutoRestReportServiceForAzureImpl extends AzureServiceClient 
      *
      * @param qualifier If specified, qualifies the generated report further (e.g. '2.7' vs '3.5' in for Python). The only effect is, that generators that run all tests several times, can distinguish the generated reports.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link Single&lt;RestResponse&lt;Void, Map&lt;String, Integer&gt;&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<Void, Map<String, Integer>>> getReportWithRestResponseAsync(String qualifier) {
+    public Single<BodyResponse<Map<String, Integer>>> getReportWithRestResponseAsync(String qualifier) {
         return service.getReport(qualifier, this.acceptLanguage());
     }
 
@@ -264,19 +254,10 @@ public final class AutoRestReportServiceForAzureImpl extends AzureServiceClient 
      *
      * @param qualifier If specified, qualifies the generated report further (e.g. '2.7' vs '3.5' in for Python). The only effect is, that generators that run all tests several times, can distinguish the generated reports.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link Maybe&lt;Map&lt;String, Integer&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Maybe<Map<String, Integer>> getReportAsync(String qualifier) {
         return getReportWithRestResponseAsync(qualifier)
-            .flatMapMaybe(new Function<RestResponse<Void, Map<String, Integer>>, Maybe<Map<String, Integer>>>() {
-                @Override
-                public Maybe<Map<String, Integer>> apply(RestResponse<Void, Map<String, Integer>> restResponse) {
-                    if (restResponse.body() == null) {
-                        return Maybe.empty();
-                    } else {
-                        return Maybe.just(restResponse.body());
-                    }
-                }
-            });
+            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 }

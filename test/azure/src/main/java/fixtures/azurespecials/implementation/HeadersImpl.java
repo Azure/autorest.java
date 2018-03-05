@@ -11,7 +11,6 @@
 package fixtures.azurespecials.implementation;
 
 import com.microsoft.azure.v2.AzureProxy;
-import com.microsoft.rest.v2.RestResponse;
 import com.microsoft.rest.v2.ServiceCallback;
 import com.microsoft.rest.v2.ServiceFuture;
 import com.microsoft.rest.v2.Validator;
@@ -23,15 +22,14 @@ import com.microsoft.rest.v2.annotations.POST;
 import com.microsoft.rest.v2.annotations.UnexpectedResponseExceptionType;
 import fixtures.azurespecials.Headers;
 import fixtures.azurespecials.models.ErrorException;
-import fixtures.azurespecials.models.HeaderCustomNamedRequestIdHeaders;
-import fixtures.azurespecials.models.HeaderCustomNamedRequestIdHeadHeaders;
-import fixtures.azurespecials.models.HeaderCustomNamedRequestIdParamGroupingHeaders;
+import fixtures.azurespecials.models.HeaderCustomNamedRequestIdHeadResponse;
 import fixtures.azurespecials.models.HeaderCustomNamedRequestIdParamGroupingParameters;
+import fixtures.azurespecials.models.HeaderCustomNamedRequestIdParamGroupingResponse;
+import fixtures.azurespecials.models.HeaderCustomNamedRequestIdResponse;
 import io.reactivex.Completable;
 import io.reactivex.Maybe;
 import io.reactivex.Single;
 import io.reactivex.annotations.NonNull;
-import io.reactivex.functions.Function;
 
 /**
  * An instance of this class provides access to all the operations defined in
@@ -67,17 +65,17 @@ public final class HeadersImpl implements Headers {
         @POST("azurespecials/customNamedRequestId")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<RestResponse<HeaderCustomNamedRequestIdHeaders, Void>> customNamedRequestId(@HeaderParam("foo-client-request-id") String fooClientRequestId, @HeaderParam("accept-language") String acceptLanguage);
+        Single<HeaderCustomNamedRequestIdResponse> customNamedRequestId(@HeaderParam("foo-client-request-id") String fooClientRequestId, @HeaderParam("accept-language") String acceptLanguage);
 
         @POST("azurespecials/customNamedRequestIdParamGrouping")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<RestResponse<HeaderCustomNamedRequestIdParamGroupingHeaders, Void>> customNamedRequestIdParamGrouping(@HeaderParam("accept-language") String acceptLanguage, @HeaderParam("foo-client-request-id") String fooClientRequestId);
+        Single<HeaderCustomNamedRequestIdParamGroupingResponse> customNamedRequestIdParamGrouping(@HeaderParam("accept-language") String acceptLanguage, @HeaderParam("foo-client-request-id") String fooClientRequestId);
 
         @HEAD("azurespecials/customNamedRequestIdHead")
         @ExpectedResponses({200, 404})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<RestResponse<HeaderCustomNamedRequestIdHeadHeaders, Boolean>> customNamedRequestIdHead(@HeaderParam("foo-client-request-id") String fooClientRequestId, @HeaderParam("accept-language") String acceptLanguage);
+        Single<HeaderCustomNamedRequestIdHeadResponse> customNamedRequestIdHead(@HeaderParam("foo-client-request-id") String fooClientRequestId, @HeaderParam("accept-language") String acceptLanguage);
     }
 
     /**
@@ -98,7 +96,7 @@ public final class HeadersImpl implements Headers {
      * @param fooClientRequestId The fooRequestId.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;Void&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     public ServiceFuture<Void> customNamedRequestIdAsync(@NonNull String fooClientRequestId, ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(customNamedRequestIdAsync(fooClientRequestId), serviceCallback);
@@ -109,9 +107,9 @@ public final class HeadersImpl implements Headers {
      *
      * @param fooClientRequestId The fooRequestId.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link Single&lt;RestResponse&lt;HeaderCustomNamedRequestIdHeaders, Void&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<HeaderCustomNamedRequestIdHeaders, Void>> customNamedRequestIdWithRestResponseAsync(@NonNull String fooClientRequestId) {
+    public Single<HeaderCustomNamedRequestIdResponse> customNamedRequestIdWithRestResponseAsync(@NonNull String fooClientRequestId) {
         if (fooClientRequestId == null) {
             throw new IllegalArgumentException("Parameter fooClientRequestId is required and cannot be null.");
         }
@@ -123,7 +121,7 @@ public final class HeadersImpl implements Headers {
      *
      * @param fooClientRequestId The fooRequestId.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link Completable} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Completable customNamedRequestIdAsync(@NonNull String fooClientRequestId) {
         return customNamedRequestIdWithRestResponseAsync(fooClientRequestId)
@@ -148,7 +146,7 @@ public final class HeadersImpl implements Headers {
      * @param headerCustomNamedRequestIdParamGroupingParameters Additional parameters for the operation.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;Void&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     public ServiceFuture<Void> customNamedRequestIdParamGroupingAsync(@NonNull HeaderCustomNamedRequestIdParamGroupingParameters headerCustomNamedRequestIdParamGroupingParameters, ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(customNamedRequestIdParamGroupingAsync(headerCustomNamedRequestIdParamGroupingParameters), serviceCallback);
@@ -159,9 +157,9 @@ public final class HeadersImpl implements Headers {
      *
      * @param headerCustomNamedRequestIdParamGroupingParameters Additional parameters for the operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link Single&lt;RestResponse&lt;HeaderCustomNamedRequestIdParamGroupingHeaders, Void&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<HeaderCustomNamedRequestIdParamGroupingHeaders, Void>> customNamedRequestIdParamGroupingWithRestResponseAsync(@NonNull HeaderCustomNamedRequestIdParamGroupingParameters headerCustomNamedRequestIdParamGroupingParameters) {
+    public Single<HeaderCustomNamedRequestIdParamGroupingResponse> customNamedRequestIdParamGroupingWithRestResponseAsync(@NonNull HeaderCustomNamedRequestIdParamGroupingParameters headerCustomNamedRequestIdParamGroupingParameters) {
         if (headerCustomNamedRequestIdParamGroupingParameters == null) {
             throw new IllegalArgumentException("Parameter headerCustomNamedRequestIdParamGroupingParameters is required and cannot be null.");
         }
@@ -175,7 +173,7 @@ public final class HeadersImpl implements Headers {
      *
      * @param headerCustomNamedRequestIdParamGroupingParameters Additional parameters for the operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link Completable} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Completable customNamedRequestIdParamGroupingAsync(@NonNull HeaderCustomNamedRequestIdParamGroupingParameters headerCustomNamedRequestIdParamGroupingParameters) {
         return customNamedRequestIdParamGroupingWithRestResponseAsync(headerCustomNamedRequestIdParamGroupingParameters)
@@ -201,7 +199,7 @@ public final class HeadersImpl implements Headers {
      * @param fooClientRequestId The fooRequestId.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;Boolean&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     public ServiceFuture<Boolean> customNamedRequestIdHeadAsync(@NonNull String fooClientRequestId, ServiceCallback<Boolean> serviceCallback) {
         return ServiceFuture.fromBody(customNamedRequestIdHeadAsync(fooClientRequestId), serviceCallback);
@@ -212,9 +210,9 @@ public final class HeadersImpl implements Headers {
      *
      * @param fooClientRequestId The fooRequestId.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link Single&lt;RestResponse&lt;HeaderCustomNamedRequestIdHeadHeaders, Boolean&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<HeaderCustomNamedRequestIdHeadHeaders, Boolean>> customNamedRequestIdHeadWithRestResponseAsync(@NonNull String fooClientRequestId) {
+    public Single<HeaderCustomNamedRequestIdHeadResponse> customNamedRequestIdHeadWithRestResponseAsync(@NonNull String fooClientRequestId) {
         if (fooClientRequestId == null) {
             throw new IllegalArgumentException("Parameter fooClientRequestId is required and cannot be null.");
         }
@@ -226,19 +224,10 @@ public final class HeadersImpl implements Headers {
      *
      * @param fooClientRequestId The fooRequestId.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link Maybe&lt;Boolean&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Maybe<Boolean> customNamedRequestIdHeadAsync(@NonNull String fooClientRequestId) {
         return customNamedRequestIdHeadWithRestResponseAsync(fooClientRequestId)
-            .flatMapMaybe(new Function<RestResponse<HeaderCustomNamedRequestIdHeadHeaders, Boolean>, Maybe<Boolean>>() {
-                @Override
-                public Maybe<Boolean> apply(RestResponse<HeaderCustomNamedRequestIdHeadHeaders, Boolean> restResponse) {
-                    if (restResponse.body() == null) {
-                        return Maybe.empty();
-                    } else {
-                        return Maybe.just(restResponse.body());
-                    }
-                }
-            });
+            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 }

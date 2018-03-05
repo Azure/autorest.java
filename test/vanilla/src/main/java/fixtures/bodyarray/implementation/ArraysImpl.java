@@ -11,12 +11,13 @@
 package fixtures.bodyarray.implementation;
 
 import com.microsoft.rest.v2.Base64Url;
+import com.microsoft.rest.v2.BodyResponse;
 import com.microsoft.rest.v2.DateTimeRfc1123;
 import com.microsoft.rest.v2.RestProxy;
-import com.microsoft.rest.v2.RestResponse;
 import com.microsoft.rest.v2.ServiceCallback;
 import com.microsoft.rest.v2.ServiceFuture;
 import com.microsoft.rest.v2.Validator;
+import com.microsoft.rest.v2.VoidResponse;
 import com.microsoft.rest.v2.annotations.BodyParam;
 import com.microsoft.rest.v2.annotations.ExpectedResponses;
 import com.microsoft.rest.v2.annotations.GET;
@@ -31,7 +32,6 @@ import io.reactivex.Completable;
 import io.reactivex.Maybe;
 import io.reactivex.Single;
 import io.reactivex.annotations.NonNull;
-import io.reactivex.functions.Function;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -75,329 +75,329 @@ public final class ArraysImpl implements Arrays {
         @GET("array/null")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<RestResponse<Void, List<Integer>>> getNull();
+        Single<BodyResponse<List<Integer>>> getNull();
 
         @GET("array/invalid")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<RestResponse<Void, List<Integer>>> getInvalid();
+        Single<BodyResponse<List<Integer>>> getInvalid();
 
         @GET("array/empty")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<RestResponse<Void, List<Integer>>> getEmpty();
+        Single<BodyResponse<List<Integer>>> getEmpty();
 
         @PUT("array/empty")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<RestResponse<Void, Void>> putEmpty(@BodyParam("application/json; charset=utf-8") List<String> arrayBody);
+        Single<VoidResponse> putEmpty(@BodyParam("application/json; charset=utf-8") List<String> arrayBody);
 
         @GET("array/prim/boolean/tfft")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<RestResponse<Void, List<Boolean>>> getBooleanTfft();
+        Single<BodyResponse<List<Boolean>>> getBooleanTfft();
 
         @PUT("array/prim/boolean/tfft")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<RestResponse<Void, Void>> putBooleanTfft(@BodyParam("application/json; charset=utf-8") List<Boolean> arrayBody);
+        Single<VoidResponse> putBooleanTfft(@BodyParam("application/json; charset=utf-8") List<Boolean> arrayBody);
 
         @GET("array/prim/boolean/true.null.false")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<RestResponse<Void, List<Boolean>>> getBooleanInvalidNull();
+        Single<BodyResponse<List<Boolean>>> getBooleanInvalidNull();
 
         @GET("array/prim/boolean/true.boolean.false")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<RestResponse<Void, List<Boolean>>> getBooleanInvalidString();
+        Single<BodyResponse<List<Boolean>>> getBooleanInvalidString();
 
         @GET("array/prim/integer/1.-1.3.300")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<RestResponse<Void, List<Integer>>> getIntegerValid();
+        Single<BodyResponse<List<Integer>>> getIntegerValid();
 
         @PUT("array/prim/integer/1.-1.3.300")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<RestResponse<Void, Void>> putIntegerValid(@BodyParam("application/json; charset=utf-8") List<Integer> arrayBody);
+        Single<VoidResponse> putIntegerValid(@BodyParam("application/json; charset=utf-8") List<Integer> arrayBody);
 
         @GET("array/prim/integer/1.null.zero")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<RestResponse<Void, List<Integer>>> getIntInvalidNull();
+        Single<BodyResponse<List<Integer>>> getIntInvalidNull();
 
         @GET("array/prim/integer/1.integer.0")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<RestResponse<Void, List<Integer>>> getIntInvalidString();
+        Single<BodyResponse<List<Integer>>> getIntInvalidString();
 
         @GET("array/prim/long/1.-1.3.300")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<RestResponse<Void, List<Long>>> getLongValid();
+        Single<BodyResponse<List<Long>>> getLongValid();
 
         @PUT("array/prim/long/1.-1.3.300")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<RestResponse<Void, Void>> putLongValid(@BodyParam("application/json; charset=utf-8") List<Long> arrayBody);
+        Single<VoidResponse> putLongValid(@BodyParam("application/json; charset=utf-8") List<Long> arrayBody);
 
         @GET("array/prim/long/1.null.zero")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<RestResponse<Void, List<Long>>> getLongInvalidNull();
+        Single<BodyResponse<List<Long>>> getLongInvalidNull();
 
         @GET("array/prim/long/1.integer.0")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<RestResponse<Void, List<Long>>> getLongInvalidString();
+        Single<BodyResponse<List<Long>>> getLongInvalidString();
 
         @GET("array/prim/float/0--0.01-1.2e20")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<RestResponse<Void, List<Double>>> getFloatValid();
+        Single<BodyResponse<List<Double>>> getFloatValid();
 
         @PUT("array/prim/float/0--0.01-1.2e20")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<RestResponse<Void, Void>> putFloatValid(@BodyParam("application/json; charset=utf-8") List<Double> arrayBody);
+        Single<VoidResponse> putFloatValid(@BodyParam("application/json; charset=utf-8") List<Double> arrayBody);
 
         @GET("array/prim/float/0.0-null-1.2e20")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<RestResponse<Void, List<Double>>> getFloatInvalidNull();
+        Single<BodyResponse<List<Double>>> getFloatInvalidNull();
 
         @GET("array/prim/float/1.number.0")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<RestResponse<Void, List<Double>>> getFloatInvalidString();
+        Single<BodyResponse<List<Double>>> getFloatInvalidString();
 
         @GET("array/prim/double/0--0.01-1.2e20")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<RestResponse<Void, List<Double>>> getDoubleValid();
+        Single<BodyResponse<List<Double>>> getDoubleValid();
 
         @PUT("array/prim/double/0--0.01-1.2e20")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<RestResponse<Void, Void>> putDoubleValid(@BodyParam("application/json; charset=utf-8") List<Double> arrayBody);
+        Single<VoidResponse> putDoubleValid(@BodyParam("application/json; charset=utf-8") List<Double> arrayBody);
 
         @GET("array/prim/double/0.0-null-1.2e20")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<RestResponse<Void, List<Double>>> getDoubleInvalidNull();
+        Single<BodyResponse<List<Double>>> getDoubleInvalidNull();
 
         @GET("array/prim/double/1.number.0")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<RestResponse<Void, List<Double>>> getDoubleInvalidString();
+        Single<BodyResponse<List<Double>>> getDoubleInvalidString();
 
         @GET("array/prim/string/foo1.foo2.foo3")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<RestResponse<Void, List<String>>> getStringValid();
+        Single<BodyResponse<List<String>>> getStringValid();
 
         @PUT("array/prim/string/foo1.foo2.foo3")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<RestResponse<Void, Void>> putStringValid(@BodyParam("application/json; charset=utf-8") List<String> arrayBody);
+        Single<VoidResponse> putStringValid(@BodyParam("application/json; charset=utf-8") List<String> arrayBody);
 
         @GET("array/prim/string/foo.null.foo2")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<RestResponse<Void, List<String>>> getStringWithNull();
+        Single<BodyResponse<List<String>>> getStringWithNull();
 
         @GET("array/prim/string/foo.123.foo2")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<RestResponse<Void, List<String>>> getStringWithInvalid();
+        Single<BodyResponse<List<String>>> getStringWithInvalid();
 
         @GET("array/prim/uuid/valid")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<RestResponse<Void, List<UUID>>> getUuidValid();
+        Single<BodyResponse<List<UUID>>> getUuidValid();
 
         @PUT("array/prim/uuid/valid")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<RestResponse<Void, Void>> putUuidValid(@BodyParam("application/json; charset=utf-8") List<UUID> arrayBody);
+        Single<VoidResponse> putUuidValid(@BodyParam("application/json; charset=utf-8") List<UUID> arrayBody);
 
         @GET("array/prim/uuid/invalidchars")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<RestResponse<Void, List<UUID>>> getUuidInvalidChars();
+        Single<BodyResponse<List<UUID>>> getUuidInvalidChars();
 
         @GET("array/prim/date/valid")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<RestResponse<Void, List<LocalDate>>> getDateValid();
+        Single<BodyResponse<List<LocalDate>>> getDateValid();
 
         @PUT("array/prim/date/valid")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<RestResponse<Void, Void>> putDateValid(@BodyParam("application/json; charset=utf-8") List<LocalDate> arrayBody);
+        Single<VoidResponse> putDateValid(@BodyParam("application/json; charset=utf-8") List<LocalDate> arrayBody);
 
         @GET("array/prim/date/invalidnull")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<RestResponse<Void, List<LocalDate>>> getDateInvalidNull();
+        Single<BodyResponse<List<LocalDate>>> getDateInvalidNull();
 
         @GET("array/prim/date/invalidchars")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<RestResponse<Void, List<LocalDate>>> getDateInvalidChars();
+        Single<BodyResponse<List<LocalDate>>> getDateInvalidChars();
 
         @GET("array/prim/date-time/valid")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<RestResponse<Void, List<DateTime>>> getDateTimeValid();
+        Single<BodyResponse<List<DateTime>>> getDateTimeValid();
 
         @PUT("array/prim/date-time/valid")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<RestResponse<Void, Void>> putDateTimeValid(@BodyParam("application/json; charset=utf-8") List<DateTime> arrayBody);
+        Single<VoidResponse> putDateTimeValid(@BodyParam("application/json; charset=utf-8") List<DateTime> arrayBody);
 
         @GET("array/prim/date-time/invalidnull")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<RestResponse<Void, List<DateTime>>> getDateTimeInvalidNull();
+        Single<BodyResponse<List<DateTime>>> getDateTimeInvalidNull();
 
         @GET("array/prim/date-time/invalidchars")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<RestResponse<Void, List<DateTime>>> getDateTimeInvalidChars();
+        Single<BodyResponse<List<DateTime>>> getDateTimeInvalidChars();
 
         @GET("array/prim/date-time-rfc1123/valid")
         @ExpectedResponses({200})
         @ReturnValueWireType(DateTimeRfc1123.class)
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<RestResponse<Void, List<DateTime>>> getDateTimeRfc1123Valid();
+        Single<BodyResponse<List<DateTime>>> getDateTimeRfc1123Valid();
 
         @PUT("array/prim/date-time-rfc1123/valid")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<RestResponse<Void, Void>> putDateTimeRfc1123Valid(@BodyParam("application/json; charset=utf-8") List<DateTimeRfc1123> arrayBody);
+        Single<VoidResponse> putDateTimeRfc1123Valid(@BodyParam("application/json; charset=utf-8") List<DateTimeRfc1123> arrayBody);
 
         @GET("array/prim/duration/valid")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<RestResponse<Void, List<Period>>> getDurationValid();
+        Single<BodyResponse<List<Period>>> getDurationValid();
 
         @PUT("array/prim/duration/valid")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<RestResponse<Void, Void>> putDurationValid(@BodyParam("application/json; charset=utf-8") List<Period> arrayBody);
+        Single<VoidResponse> putDurationValid(@BodyParam("application/json; charset=utf-8") List<Period> arrayBody);
 
         @GET("array/prim/byte/valid")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<RestResponse<Void, List<byte[]>>> getByteValid();
+        Single<BodyResponse<List<byte[]>>> getByteValid();
 
         @PUT("array/prim/byte/valid")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<RestResponse<Void, Void>> putByteValid(@BodyParam("application/json; charset=utf-8") List<byte[]> arrayBody);
+        Single<VoidResponse> putByteValid(@BodyParam("application/json; charset=utf-8") List<byte[]> arrayBody);
 
         @GET("array/prim/byte/invalidnull")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<RestResponse<Void, List<byte[]>>> getByteInvalidNull();
+        Single<BodyResponse<List<byte[]>>> getByteInvalidNull();
 
         @GET("array/prim/base64url/valid")
         @ExpectedResponses({200})
         @ReturnValueWireType(Base64Url.class)
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<RestResponse<Void, List<byte[]>>> getBase64Url();
+        Single<BodyResponse<List<byte[]>>> getBase64Url();
 
         @GET("array/complex/null")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<RestResponse<Void, List<Product>>> getComplexNull();
+        Single<BodyResponse<List<Product>>> getComplexNull();
 
         @GET("array/complex/empty")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<RestResponse<Void, List<Product>>> getComplexEmpty();
+        Single<BodyResponse<List<Product>>> getComplexEmpty();
 
         @GET("array/complex/itemnull")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<RestResponse<Void, List<Product>>> getComplexItemNull();
+        Single<BodyResponse<List<Product>>> getComplexItemNull();
 
         @GET("array/complex/itemempty")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<RestResponse<Void, List<Product>>> getComplexItemEmpty();
+        Single<BodyResponse<List<Product>>> getComplexItemEmpty();
 
         @GET("array/complex/valid")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<RestResponse<Void, List<Product>>> getComplexValid();
+        Single<BodyResponse<List<Product>>> getComplexValid();
 
         @PUT("array/complex/valid")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<RestResponse<Void, Void>> putComplexValid(@BodyParam("application/json; charset=utf-8") List<Product> arrayBody);
+        Single<VoidResponse> putComplexValid(@BodyParam("application/json; charset=utf-8") List<Product> arrayBody);
 
         @GET("array/array/null")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<RestResponse<Void, List<List<String>>>> getArrayNull();
+        Single<BodyResponse<List<List<String>>>> getArrayNull();
 
         @GET("array/array/empty")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<RestResponse<Void, List<List<String>>>> getArrayEmpty();
+        Single<BodyResponse<List<List<String>>>> getArrayEmpty();
 
         @GET("array/array/itemnull")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<RestResponse<Void, List<List<String>>>> getArrayItemNull();
+        Single<BodyResponse<List<List<String>>>> getArrayItemNull();
 
         @GET("array/array/itemempty")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<RestResponse<Void, List<List<String>>>> getArrayItemEmpty();
+        Single<BodyResponse<List<List<String>>>> getArrayItemEmpty();
 
         @GET("array/array/valid")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<RestResponse<Void, List<List<String>>>> getArrayValid();
+        Single<BodyResponse<List<List<String>>>> getArrayValid();
 
         @PUT("array/array/valid")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<RestResponse<Void, Void>> putArrayValid(@BodyParam("application/json; charset=utf-8") List<List<String>> arrayBody);
+        Single<VoidResponse> putArrayValid(@BodyParam("application/json; charset=utf-8") List<List<String>> arrayBody);
 
         @GET("array/dictionary/null")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<RestResponse<Void, List<Map<String, String>>>> getDictionaryNull();
+        Single<BodyResponse<List<Map<String, String>>>> getDictionaryNull();
 
         @GET("array/dictionary/empty")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<RestResponse<Void, List<Map<String, String>>>> getDictionaryEmpty();
+        Single<BodyResponse<List<Map<String, String>>>> getDictionaryEmpty();
 
         @GET("array/dictionary/itemnull")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<RestResponse<Void, List<Map<String, String>>>> getDictionaryItemNull();
+        Single<BodyResponse<List<Map<String, String>>>> getDictionaryItemNull();
 
         @GET("array/dictionary/itemempty")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<RestResponse<Void, List<Map<String, String>>>> getDictionaryItemEmpty();
+        Single<BodyResponse<List<Map<String, String>>>> getDictionaryItemEmpty();
 
         @GET("array/dictionary/valid")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<RestResponse<Void, List<Map<String, String>>>> getDictionaryValid();
+        Single<BodyResponse<List<Map<String, String>>>> getDictionaryValid();
 
         @PUT("array/dictionary/valid")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<RestResponse<Void, Void>> putDictionaryValid(@BodyParam("application/json; charset=utf-8") List<Map<String, String>> arrayBody);
+        Single<VoidResponse> putDictionaryValid(@BodyParam("application/json; charset=utf-8") List<Map<String, String>> arrayBody);
     }
 
     /**
@@ -416,7 +416,7 @@ public final class ArraysImpl implements Arrays {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;List&lt;Integer&gt;&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     public ServiceFuture<List<Integer>> getNullAsync(ServiceCallback<List<Integer>> serviceCallback) {
         return ServiceFuture.fromBody(getNullAsync(), serviceCallback);
@@ -425,29 +425,20 @@ public final class ArraysImpl implements Arrays {
     /**
      * Get null array value.
      *
-     * @return the {@link Single&lt;RestResponse&lt;Void, List&lt;Integer&gt;&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<Void, List<Integer>>> getNullWithRestResponseAsync() {
+    public Single<BodyResponse<List<Integer>>> getNullWithRestResponseAsync() {
         return service.getNull();
     }
 
     /**
      * Get null array value.
      *
-     * @return the {@link Maybe&lt;List&lt;Integer&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Maybe<List<Integer>> getNullAsync() {
         return getNullWithRestResponseAsync()
-            .flatMapMaybe(new Function<RestResponse<Void, List<Integer>>, Maybe<List<Integer>>>() {
-                @Override
-                public Maybe<List<Integer>> apply(RestResponse<Void, List<Integer>> restResponse) {
-                    if (restResponse.body() == null) {
-                        return Maybe.empty();
-                    } else {
-                        return Maybe.just(restResponse.body());
-                    }
-                }
-            });
+            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -466,7 +457,7 @@ public final class ArraysImpl implements Arrays {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;List&lt;Integer&gt;&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     public ServiceFuture<List<Integer>> getInvalidAsync(ServiceCallback<List<Integer>> serviceCallback) {
         return ServiceFuture.fromBody(getInvalidAsync(), serviceCallback);
@@ -475,29 +466,20 @@ public final class ArraysImpl implements Arrays {
     /**
      * Get invalid array [1, 2, 3.
      *
-     * @return the {@link Single&lt;RestResponse&lt;Void, List&lt;Integer&gt;&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<Void, List<Integer>>> getInvalidWithRestResponseAsync() {
+    public Single<BodyResponse<List<Integer>>> getInvalidWithRestResponseAsync() {
         return service.getInvalid();
     }
 
     /**
      * Get invalid array [1, 2, 3.
      *
-     * @return the {@link Maybe&lt;List&lt;Integer&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Maybe<List<Integer>> getInvalidAsync() {
         return getInvalidWithRestResponseAsync()
-            .flatMapMaybe(new Function<RestResponse<Void, List<Integer>>, Maybe<List<Integer>>>() {
-                @Override
-                public Maybe<List<Integer>> apply(RestResponse<Void, List<Integer>> restResponse) {
-                    if (restResponse.body() == null) {
-                        return Maybe.empty();
-                    } else {
-                        return Maybe.just(restResponse.body());
-                    }
-                }
-            });
+            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -516,7 +498,7 @@ public final class ArraysImpl implements Arrays {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;List&lt;Integer&gt;&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     public ServiceFuture<List<Integer>> getEmptyAsync(ServiceCallback<List<Integer>> serviceCallback) {
         return ServiceFuture.fromBody(getEmptyAsync(), serviceCallback);
@@ -525,29 +507,20 @@ public final class ArraysImpl implements Arrays {
     /**
      * Get empty array value [].
      *
-     * @return the {@link Single&lt;RestResponse&lt;Void, List&lt;Integer&gt;&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<Void, List<Integer>>> getEmptyWithRestResponseAsync() {
+    public Single<BodyResponse<List<Integer>>> getEmptyWithRestResponseAsync() {
         return service.getEmpty();
     }
 
     /**
      * Get empty array value [].
      *
-     * @return the {@link Maybe&lt;List&lt;Integer&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Maybe<List<Integer>> getEmptyAsync() {
         return getEmptyWithRestResponseAsync()
-            .flatMapMaybe(new Function<RestResponse<Void, List<Integer>>, Maybe<List<Integer>>>() {
-                @Override
-                public Maybe<List<Integer>> apply(RestResponse<Void, List<Integer>> restResponse) {
-                    if (restResponse.body() == null) {
-                        return Maybe.empty();
-                    } else {
-                        return Maybe.just(restResponse.body());
-                    }
-                }
-            });
+            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -568,7 +541,7 @@ public final class ArraysImpl implements Arrays {
      * @param arrayBody the List&lt;String&gt; value.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;Void&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     public ServiceFuture<Void> putEmptyAsync(@NonNull List<String> arrayBody, ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(putEmptyAsync(arrayBody), serviceCallback);
@@ -579,9 +552,9 @@ public final class ArraysImpl implements Arrays {
      *
      * @param arrayBody the List&lt;String&gt; value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<Void, Void>> putEmptyWithRestResponseAsync(@NonNull List<String> arrayBody) {
+    public Single<VoidResponse> putEmptyWithRestResponseAsync(@NonNull List<String> arrayBody) {
         if (arrayBody == null) {
             throw new IllegalArgumentException("Parameter arrayBody is required and cannot be null.");
         }
@@ -594,7 +567,7 @@ public final class ArraysImpl implements Arrays {
      *
      * @param arrayBody the List&lt;String&gt; value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link Completable} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Completable putEmptyAsync(@NonNull List<String> arrayBody) {
         return putEmptyWithRestResponseAsync(arrayBody)
@@ -617,7 +590,7 @@ public final class ArraysImpl implements Arrays {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;List&lt;Boolean&gt;&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     public ServiceFuture<List<Boolean>> getBooleanTfftAsync(ServiceCallback<List<Boolean>> serviceCallback) {
         return ServiceFuture.fromBody(getBooleanTfftAsync(), serviceCallback);
@@ -626,29 +599,20 @@ public final class ArraysImpl implements Arrays {
     /**
      * Get boolean array value [true, false, false, true].
      *
-     * @return the {@link Single&lt;RestResponse&lt;Void, List&lt;Boolean&gt;&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<Void, List<Boolean>>> getBooleanTfftWithRestResponseAsync() {
+    public Single<BodyResponse<List<Boolean>>> getBooleanTfftWithRestResponseAsync() {
         return service.getBooleanTfft();
     }
 
     /**
      * Get boolean array value [true, false, false, true].
      *
-     * @return the {@link Maybe&lt;List&lt;Boolean&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Maybe<List<Boolean>> getBooleanTfftAsync() {
         return getBooleanTfftWithRestResponseAsync()
-            .flatMapMaybe(new Function<RestResponse<Void, List<Boolean>>, Maybe<List<Boolean>>>() {
-                @Override
-                public Maybe<List<Boolean>> apply(RestResponse<Void, List<Boolean>> restResponse) {
-                    if (restResponse.body() == null) {
-                        return Maybe.empty();
-                    } else {
-                        return Maybe.just(restResponse.body());
-                    }
-                }
-            });
+            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -669,7 +633,7 @@ public final class ArraysImpl implements Arrays {
      * @param arrayBody the List&lt;Boolean&gt; value.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;Void&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     public ServiceFuture<Void> putBooleanTfftAsync(@NonNull List<Boolean> arrayBody, ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(putBooleanTfftAsync(arrayBody), serviceCallback);
@@ -680,9 +644,9 @@ public final class ArraysImpl implements Arrays {
      *
      * @param arrayBody the List&lt;Boolean&gt; value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<Void, Void>> putBooleanTfftWithRestResponseAsync(@NonNull List<Boolean> arrayBody) {
+    public Single<VoidResponse> putBooleanTfftWithRestResponseAsync(@NonNull List<Boolean> arrayBody) {
         if (arrayBody == null) {
             throw new IllegalArgumentException("Parameter arrayBody is required and cannot be null.");
         }
@@ -695,7 +659,7 @@ public final class ArraysImpl implements Arrays {
      *
      * @param arrayBody the List&lt;Boolean&gt; value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link Completable} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Completable putBooleanTfftAsync(@NonNull List<Boolean> arrayBody) {
         return putBooleanTfftWithRestResponseAsync(arrayBody)
@@ -718,7 +682,7 @@ public final class ArraysImpl implements Arrays {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;List&lt;Boolean&gt;&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     public ServiceFuture<List<Boolean>> getBooleanInvalidNullAsync(ServiceCallback<List<Boolean>> serviceCallback) {
         return ServiceFuture.fromBody(getBooleanInvalidNullAsync(), serviceCallback);
@@ -727,29 +691,20 @@ public final class ArraysImpl implements Arrays {
     /**
      * Get boolean array value [true, null, false].
      *
-     * @return the {@link Single&lt;RestResponse&lt;Void, List&lt;Boolean&gt;&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<Void, List<Boolean>>> getBooleanInvalidNullWithRestResponseAsync() {
+    public Single<BodyResponse<List<Boolean>>> getBooleanInvalidNullWithRestResponseAsync() {
         return service.getBooleanInvalidNull();
     }
 
     /**
      * Get boolean array value [true, null, false].
      *
-     * @return the {@link Maybe&lt;List&lt;Boolean&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Maybe<List<Boolean>> getBooleanInvalidNullAsync() {
         return getBooleanInvalidNullWithRestResponseAsync()
-            .flatMapMaybe(new Function<RestResponse<Void, List<Boolean>>, Maybe<List<Boolean>>>() {
-                @Override
-                public Maybe<List<Boolean>> apply(RestResponse<Void, List<Boolean>> restResponse) {
-                    if (restResponse.body() == null) {
-                        return Maybe.empty();
-                    } else {
-                        return Maybe.just(restResponse.body());
-                    }
-                }
-            });
+            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -768,7 +723,7 @@ public final class ArraysImpl implements Arrays {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;List&lt;Boolean&gt;&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     public ServiceFuture<List<Boolean>> getBooleanInvalidStringAsync(ServiceCallback<List<Boolean>> serviceCallback) {
         return ServiceFuture.fromBody(getBooleanInvalidStringAsync(), serviceCallback);
@@ -777,29 +732,20 @@ public final class ArraysImpl implements Arrays {
     /**
      * Get boolean array value [true, 'boolean', false].
      *
-     * @return the {@link Single&lt;RestResponse&lt;Void, List&lt;Boolean&gt;&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<Void, List<Boolean>>> getBooleanInvalidStringWithRestResponseAsync() {
+    public Single<BodyResponse<List<Boolean>>> getBooleanInvalidStringWithRestResponseAsync() {
         return service.getBooleanInvalidString();
     }
 
     /**
      * Get boolean array value [true, 'boolean', false].
      *
-     * @return the {@link Maybe&lt;List&lt;Boolean&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Maybe<List<Boolean>> getBooleanInvalidStringAsync() {
         return getBooleanInvalidStringWithRestResponseAsync()
-            .flatMapMaybe(new Function<RestResponse<Void, List<Boolean>>, Maybe<List<Boolean>>>() {
-                @Override
-                public Maybe<List<Boolean>> apply(RestResponse<Void, List<Boolean>> restResponse) {
-                    if (restResponse.body() == null) {
-                        return Maybe.empty();
-                    } else {
-                        return Maybe.just(restResponse.body());
-                    }
-                }
-            });
+            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -818,7 +764,7 @@ public final class ArraysImpl implements Arrays {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;List&lt;Integer&gt;&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     public ServiceFuture<List<Integer>> getIntegerValidAsync(ServiceCallback<List<Integer>> serviceCallback) {
         return ServiceFuture.fromBody(getIntegerValidAsync(), serviceCallback);
@@ -827,29 +773,20 @@ public final class ArraysImpl implements Arrays {
     /**
      * Get integer array value [1, -1, 3, 300].
      *
-     * @return the {@link Single&lt;RestResponse&lt;Void, List&lt;Integer&gt;&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<Void, List<Integer>>> getIntegerValidWithRestResponseAsync() {
+    public Single<BodyResponse<List<Integer>>> getIntegerValidWithRestResponseAsync() {
         return service.getIntegerValid();
     }
 
     /**
      * Get integer array value [1, -1, 3, 300].
      *
-     * @return the {@link Maybe&lt;List&lt;Integer&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Maybe<List<Integer>> getIntegerValidAsync() {
         return getIntegerValidWithRestResponseAsync()
-            .flatMapMaybe(new Function<RestResponse<Void, List<Integer>>, Maybe<List<Integer>>>() {
-                @Override
-                public Maybe<List<Integer>> apply(RestResponse<Void, List<Integer>> restResponse) {
-                    if (restResponse.body() == null) {
-                        return Maybe.empty();
-                    } else {
-                        return Maybe.just(restResponse.body());
-                    }
-                }
-            });
+            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -870,7 +807,7 @@ public final class ArraysImpl implements Arrays {
      * @param arrayBody the List&lt;Integer&gt; value.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;Void&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     public ServiceFuture<Void> putIntegerValidAsync(@NonNull List<Integer> arrayBody, ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(putIntegerValidAsync(arrayBody), serviceCallback);
@@ -881,9 +818,9 @@ public final class ArraysImpl implements Arrays {
      *
      * @param arrayBody the List&lt;Integer&gt; value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<Void, Void>> putIntegerValidWithRestResponseAsync(@NonNull List<Integer> arrayBody) {
+    public Single<VoidResponse> putIntegerValidWithRestResponseAsync(@NonNull List<Integer> arrayBody) {
         if (arrayBody == null) {
             throw new IllegalArgumentException("Parameter arrayBody is required and cannot be null.");
         }
@@ -896,7 +833,7 @@ public final class ArraysImpl implements Arrays {
      *
      * @param arrayBody the List&lt;Integer&gt; value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link Completable} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Completable putIntegerValidAsync(@NonNull List<Integer> arrayBody) {
         return putIntegerValidWithRestResponseAsync(arrayBody)
@@ -919,7 +856,7 @@ public final class ArraysImpl implements Arrays {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;List&lt;Integer&gt;&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     public ServiceFuture<List<Integer>> getIntInvalidNullAsync(ServiceCallback<List<Integer>> serviceCallback) {
         return ServiceFuture.fromBody(getIntInvalidNullAsync(), serviceCallback);
@@ -928,29 +865,20 @@ public final class ArraysImpl implements Arrays {
     /**
      * Get integer array value [1, null, 0].
      *
-     * @return the {@link Single&lt;RestResponse&lt;Void, List&lt;Integer&gt;&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<Void, List<Integer>>> getIntInvalidNullWithRestResponseAsync() {
+    public Single<BodyResponse<List<Integer>>> getIntInvalidNullWithRestResponseAsync() {
         return service.getIntInvalidNull();
     }
 
     /**
      * Get integer array value [1, null, 0].
      *
-     * @return the {@link Maybe&lt;List&lt;Integer&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Maybe<List<Integer>> getIntInvalidNullAsync() {
         return getIntInvalidNullWithRestResponseAsync()
-            .flatMapMaybe(new Function<RestResponse<Void, List<Integer>>, Maybe<List<Integer>>>() {
-                @Override
-                public Maybe<List<Integer>> apply(RestResponse<Void, List<Integer>> restResponse) {
-                    if (restResponse.body() == null) {
-                        return Maybe.empty();
-                    } else {
-                        return Maybe.just(restResponse.body());
-                    }
-                }
-            });
+            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -969,7 +897,7 @@ public final class ArraysImpl implements Arrays {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;List&lt;Integer&gt;&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     public ServiceFuture<List<Integer>> getIntInvalidStringAsync(ServiceCallback<List<Integer>> serviceCallback) {
         return ServiceFuture.fromBody(getIntInvalidStringAsync(), serviceCallback);
@@ -978,29 +906,20 @@ public final class ArraysImpl implements Arrays {
     /**
      * Get integer array value [1, 'integer', 0].
      *
-     * @return the {@link Single&lt;RestResponse&lt;Void, List&lt;Integer&gt;&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<Void, List<Integer>>> getIntInvalidStringWithRestResponseAsync() {
+    public Single<BodyResponse<List<Integer>>> getIntInvalidStringWithRestResponseAsync() {
         return service.getIntInvalidString();
     }
 
     /**
      * Get integer array value [1, 'integer', 0].
      *
-     * @return the {@link Maybe&lt;List&lt;Integer&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Maybe<List<Integer>> getIntInvalidStringAsync() {
         return getIntInvalidStringWithRestResponseAsync()
-            .flatMapMaybe(new Function<RestResponse<Void, List<Integer>>, Maybe<List<Integer>>>() {
-                @Override
-                public Maybe<List<Integer>> apply(RestResponse<Void, List<Integer>> restResponse) {
-                    if (restResponse.body() == null) {
-                        return Maybe.empty();
-                    } else {
-                        return Maybe.just(restResponse.body());
-                    }
-                }
-            });
+            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -1019,7 +938,7 @@ public final class ArraysImpl implements Arrays {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;List&lt;Long&gt;&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     public ServiceFuture<List<Long>> getLongValidAsync(ServiceCallback<List<Long>> serviceCallback) {
         return ServiceFuture.fromBody(getLongValidAsync(), serviceCallback);
@@ -1028,29 +947,20 @@ public final class ArraysImpl implements Arrays {
     /**
      * Get integer array value [1, -1, 3, 300].
      *
-     * @return the {@link Single&lt;RestResponse&lt;Void, List&lt;Long&gt;&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<Void, List<Long>>> getLongValidWithRestResponseAsync() {
+    public Single<BodyResponse<List<Long>>> getLongValidWithRestResponseAsync() {
         return service.getLongValid();
     }
 
     /**
      * Get integer array value [1, -1, 3, 300].
      *
-     * @return the {@link Maybe&lt;List&lt;Long&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Maybe<List<Long>> getLongValidAsync() {
         return getLongValidWithRestResponseAsync()
-            .flatMapMaybe(new Function<RestResponse<Void, List<Long>>, Maybe<List<Long>>>() {
-                @Override
-                public Maybe<List<Long>> apply(RestResponse<Void, List<Long>> restResponse) {
-                    if (restResponse.body() == null) {
-                        return Maybe.empty();
-                    } else {
-                        return Maybe.just(restResponse.body());
-                    }
-                }
-            });
+            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -1071,7 +981,7 @@ public final class ArraysImpl implements Arrays {
      * @param arrayBody the List&lt;Long&gt; value.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;Void&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     public ServiceFuture<Void> putLongValidAsync(@NonNull List<Long> arrayBody, ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(putLongValidAsync(arrayBody), serviceCallback);
@@ -1082,9 +992,9 @@ public final class ArraysImpl implements Arrays {
      *
      * @param arrayBody the List&lt;Long&gt; value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<Void, Void>> putLongValidWithRestResponseAsync(@NonNull List<Long> arrayBody) {
+    public Single<VoidResponse> putLongValidWithRestResponseAsync(@NonNull List<Long> arrayBody) {
         if (arrayBody == null) {
             throw new IllegalArgumentException("Parameter arrayBody is required and cannot be null.");
         }
@@ -1097,7 +1007,7 @@ public final class ArraysImpl implements Arrays {
      *
      * @param arrayBody the List&lt;Long&gt; value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link Completable} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Completable putLongValidAsync(@NonNull List<Long> arrayBody) {
         return putLongValidWithRestResponseAsync(arrayBody)
@@ -1120,7 +1030,7 @@ public final class ArraysImpl implements Arrays {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;List&lt;Long&gt;&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     public ServiceFuture<List<Long>> getLongInvalidNullAsync(ServiceCallback<List<Long>> serviceCallback) {
         return ServiceFuture.fromBody(getLongInvalidNullAsync(), serviceCallback);
@@ -1129,29 +1039,20 @@ public final class ArraysImpl implements Arrays {
     /**
      * Get long array value [1, null, 0].
      *
-     * @return the {@link Single&lt;RestResponse&lt;Void, List&lt;Long&gt;&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<Void, List<Long>>> getLongInvalidNullWithRestResponseAsync() {
+    public Single<BodyResponse<List<Long>>> getLongInvalidNullWithRestResponseAsync() {
         return service.getLongInvalidNull();
     }
 
     /**
      * Get long array value [1, null, 0].
      *
-     * @return the {@link Maybe&lt;List&lt;Long&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Maybe<List<Long>> getLongInvalidNullAsync() {
         return getLongInvalidNullWithRestResponseAsync()
-            .flatMapMaybe(new Function<RestResponse<Void, List<Long>>, Maybe<List<Long>>>() {
-                @Override
-                public Maybe<List<Long>> apply(RestResponse<Void, List<Long>> restResponse) {
-                    if (restResponse.body() == null) {
-                        return Maybe.empty();
-                    } else {
-                        return Maybe.just(restResponse.body());
-                    }
-                }
-            });
+            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -1170,7 +1071,7 @@ public final class ArraysImpl implements Arrays {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;List&lt;Long&gt;&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     public ServiceFuture<List<Long>> getLongInvalidStringAsync(ServiceCallback<List<Long>> serviceCallback) {
         return ServiceFuture.fromBody(getLongInvalidStringAsync(), serviceCallback);
@@ -1179,29 +1080,20 @@ public final class ArraysImpl implements Arrays {
     /**
      * Get long array value [1, 'integer', 0].
      *
-     * @return the {@link Single&lt;RestResponse&lt;Void, List&lt;Long&gt;&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<Void, List<Long>>> getLongInvalidStringWithRestResponseAsync() {
+    public Single<BodyResponse<List<Long>>> getLongInvalidStringWithRestResponseAsync() {
         return service.getLongInvalidString();
     }
 
     /**
      * Get long array value [1, 'integer', 0].
      *
-     * @return the {@link Maybe&lt;List&lt;Long&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Maybe<List<Long>> getLongInvalidStringAsync() {
         return getLongInvalidStringWithRestResponseAsync()
-            .flatMapMaybe(new Function<RestResponse<Void, List<Long>>, Maybe<List<Long>>>() {
-                @Override
-                public Maybe<List<Long>> apply(RestResponse<Void, List<Long>> restResponse) {
-                    if (restResponse.body() == null) {
-                        return Maybe.empty();
-                    } else {
-                        return Maybe.just(restResponse.body());
-                    }
-                }
-            });
+            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -1220,7 +1112,7 @@ public final class ArraysImpl implements Arrays {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;List&lt;Double&gt;&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     public ServiceFuture<List<Double>> getFloatValidAsync(ServiceCallback<List<Double>> serviceCallback) {
         return ServiceFuture.fromBody(getFloatValidAsync(), serviceCallback);
@@ -1229,29 +1121,20 @@ public final class ArraysImpl implements Arrays {
     /**
      * Get float array value [0, -0.01, 1.2e20].
      *
-     * @return the {@link Single&lt;RestResponse&lt;Void, List&lt;Double&gt;&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<Void, List<Double>>> getFloatValidWithRestResponseAsync() {
+    public Single<BodyResponse<List<Double>>> getFloatValidWithRestResponseAsync() {
         return service.getFloatValid();
     }
 
     /**
      * Get float array value [0, -0.01, 1.2e20].
      *
-     * @return the {@link Maybe&lt;List&lt;Double&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Maybe<List<Double>> getFloatValidAsync() {
         return getFloatValidWithRestResponseAsync()
-            .flatMapMaybe(new Function<RestResponse<Void, List<Double>>, Maybe<List<Double>>>() {
-                @Override
-                public Maybe<List<Double>> apply(RestResponse<Void, List<Double>> restResponse) {
-                    if (restResponse.body() == null) {
-                        return Maybe.empty();
-                    } else {
-                        return Maybe.just(restResponse.body());
-                    }
-                }
-            });
+            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -1272,7 +1155,7 @@ public final class ArraysImpl implements Arrays {
      * @param arrayBody the List&lt;Double&gt; value.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;Void&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     public ServiceFuture<Void> putFloatValidAsync(@NonNull List<Double> arrayBody, ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(putFloatValidAsync(arrayBody), serviceCallback);
@@ -1283,9 +1166,9 @@ public final class ArraysImpl implements Arrays {
      *
      * @param arrayBody the List&lt;Double&gt; value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<Void, Void>> putFloatValidWithRestResponseAsync(@NonNull List<Double> arrayBody) {
+    public Single<VoidResponse> putFloatValidWithRestResponseAsync(@NonNull List<Double> arrayBody) {
         if (arrayBody == null) {
             throw new IllegalArgumentException("Parameter arrayBody is required and cannot be null.");
         }
@@ -1298,7 +1181,7 @@ public final class ArraysImpl implements Arrays {
      *
      * @param arrayBody the List&lt;Double&gt; value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link Completable} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Completable putFloatValidAsync(@NonNull List<Double> arrayBody) {
         return putFloatValidWithRestResponseAsync(arrayBody)
@@ -1321,7 +1204,7 @@ public final class ArraysImpl implements Arrays {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;List&lt;Double&gt;&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     public ServiceFuture<List<Double>> getFloatInvalidNullAsync(ServiceCallback<List<Double>> serviceCallback) {
         return ServiceFuture.fromBody(getFloatInvalidNullAsync(), serviceCallback);
@@ -1330,29 +1213,20 @@ public final class ArraysImpl implements Arrays {
     /**
      * Get float array value [0.0, null, -1.2e20].
      *
-     * @return the {@link Single&lt;RestResponse&lt;Void, List&lt;Double&gt;&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<Void, List<Double>>> getFloatInvalidNullWithRestResponseAsync() {
+    public Single<BodyResponse<List<Double>>> getFloatInvalidNullWithRestResponseAsync() {
         return service.getFloatInvalidNull();
     }
 
     /**
      * Get float array value [0.0, null, -1.2e20].
      *
-     * @return the {@link Maybe&lt;List&lt;Double&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Maybe<List<Double>> getFloatInvalidNullAsync() {
         return getFloatInvalidNullWithRestResponseAsync()
-            .flatMapMaybe(new Function<RestResponse<Void, List<Double>>, Maybe<List<Double>>>() {
-                @Override
-                public Maybe<List<Double>> apply(RestResponse<Void, List<Double>> restResponse) {
-                    if (restResponse.body() == null) {
-                        return Maybe.empty();
-                    } else {
-                        return Maybe.just(restResponse.body());
-                    }
-                }
-            });
+            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -1371,7 +1245,7 @@ public final class ArraysImpl implements Arrays {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;List&lt;Double&gt;&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     public ServiceFuture<List<Double>> getFloatInvalidStringAsync(ServiceCallback<List<Double>> serviceCallback) {
         return ServiceFuture.fromBody(getFloatInvalidStringAsync(), serviceCallback);
@@ -1380,29 +1254,20 @@ public final class ArraysImpl implements Arrays {
     /**
      * Get boolean array value [1.0, 'number', 0.0].
      *
-     * @return the {@link Single&lt;RestResponse&lt;Void, List&lt;Double&gt;&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<Void, List<Double>>> getFloatInvalidStringWithRestResponseAsync() {
+    public Single<BodyResponse<List<Double>>> getFloatInvalidStringWithRestResponseAsync() {
         return service.getFloatInvalidString();
     }
 
     /**
      * Get boolean array value [1.0, 'number', 0.0].
      *
-     * @return the {@link Maybe&lt;List&lt;Double&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Maybe<List<Double>> getFloatInvalidStringAsync() {
         return getFloatInvalidStringWithRestResponseAsync()
-            .flatMapMaybe(new Function<RestResponse<Void, List<Double>>, Maybe<List<Double>>>() {
-                @Override
-                public Maybe<List<Double>> apply(RestResponse<Void, List<Double>> restResponse) {
-                    if (restResponse.body() == null) {
-                        return Maybe.empty();
-                    } else {
-                        return Maybe.just(restResponse.body());
-                    }
-                }
-            });
+            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -1421,7 +1286,7 @@ public final class ArraysImpl implements Arrays {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;List&lt;Double&gt;&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     public ServiceFuture<List<Double>> getDoubleValidAsync(ServiceCallback<List<Double>> serviceCallback) {
         return ServiceFuture.fromBody(getDoubleValidAsync(), serviceCallback);
@@ -1430,29 +1295,20 @@ public final class ArraysImpl implements Arrays {
     /**
      * Get float array value [0, -0.01, 1.2e20].
      *
-     * @return the {@link Single&lt;RestResponse&lt;Void, List&lt;Double&gt;&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<Void, List<Double>>> getDoubleValidWithRestResponseAsync() {
+    public Single<BodyResponse<List<Double>>> getDoubleValidWithRestResponseAsync() {
         return service.getDoubleValid();
     }
 
     /**
      * Get float array value [0, -0.01, 1.2e20].
      *
-     * @return the {@link Maybe&lt;List&lt;Double&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Maybe<List<Double>> getDoubleValidAsync() {
         return getDoubleValidWithRestResponseAsync()
-            .flatMapMaybe(new Function<RestResponse<Void, List<Double>>, Maybe<List<Double>>>() {
-                @Override
-                public Maybe<List<Double>> apply(RestResponse<Void, List<Double>> restResponse) {
-                    if (restResponse.body() == null) {
-                        return Maybe.empty();
-                    } else {
-                        return Maybe.just(restResponse.body());
-                    }
-                }
-            });
+            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -1473,7 +1329,7 @@ public final class ArraysImpl implements Arrays {
      * @param arrayBody the List&lt;Double&gt; value.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;Void&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     public ServiceFuture<Void> putDoubleValidAsync(@NonNull List<Double> arrayBody, ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(putDoubleValidAsync(arrayBody), serviceCallback);
@@ -1484,9 +1340,9 @@ public final class ArraysImpl implements Arrays {
      *
      * @param arrayBody the List&lt;Double&gt; value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<Void, Void>> putDoubleValidWithRestResponseAsync(@NonNull List<Double> arrayBody) {
+    public Single<VoidResponse> putDoubleValidWithRestResponseAsync(@NonNull List<Double> arrayBody) {
         if (arrayBody == null) {
             throw new IllegalArgumentException("Parameter arrayBody is required and cannot be null.");
         }
@@ -1499,7 +1355,7 @@ public final class ArraysImpl implements Arrays {
      *
      * @param arrayBody the List&lt;Double&gt; value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link Completable} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Completable putDoubleValidAsync(@NonNull List<Double> arrayBody) {
         return putDoubleValidWithRestResponseAsync(arrayBody)
@@ -1522,7 +1378,7 @@ public final class ArraysImpl implements Arrays {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;List&lt;Double&gt;&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     public ServiceFuture<List<Double>> getDoubleInvalidNullAsync(ServiceCallback<List<Double>> serviceCallback) {
         return ServiceFuture.fromBody(getDoubleInvalidNullAsync(), serviceCallback);
@@ -1531,29 +1387,20 @@ public final class ArraysImpl implements Arrays {
     /**
      * Get float array value [0.0, null, -1.2e20].
      *
-     * @return the {@link Single&lt;RestResponse&lt;Void, List&lt;Double&gt;&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<Void, List<Double>>> getDoubleInvalidNullWithRestResponseAsync() {
+    public Single<BodyResponse<List<Double>>> getDoubleInvalidNullWithRestResponseAsync() {
         return service.getDoubleInvalidNull();
     }
 
     /**
      * Get float array value [0.0, null, -1.2e20].
      *
-     * @return the {@link Maybe&lt;List&lt;Double&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Maybe<List<Double>> getDoubleInvalidNullAsync() {
         return getDoubleInvalidNullWithRestResponseAsync()
-            .flatMapMaybe(new Function<RestResponse<Void, List<Double>>, Maybe<List<Double>>>() {
-                @Override
-                public Maybe<List<Double>> apply(RestResponse<Void, List<Double>> restResponse) {
-                    if (restResponse.body() == null) {
-                        return Maybe.empty();
-                    } else {
-                        return Maybe.just(restResponse.body());
-                    }
-                }
-            });
+            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -1572,7 +1419,7 @@ public final class ArraysImpl implements Arrays {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;List&lt;Double&gt;&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     public ServiceFuture<List<Double>> getDoubleInvalidStringAsync(ServiceCallback<List<Double>> serviceCallback) {
         return ServiceFuture.fromBody(getDoubleInvalidStringAsync(), serviceCallback);
@@ -1581,29 +1428,20 @@ public final class ArraysImpl implements Arrays {
     /**
      * Get boolean array value [1.0, 'number', 0.0].
      *
-     * @return the {@link Single&lt;RestResponse&lt;Void, List&lt;Double&gt;&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<Void, List<Double>>> getDoubleInvalidStringWithRestResponseAsync() {
+    public Single<BodyResponse<List<Double>>> getDoubleInvalidStringWithRestResponseAsync() {
         return service.getDoubleInvalidString();
     }
 
     /**
      * Get boolean array value [1.0, 'number', 0.0].
      *
-     * @return the {@link Maybe&lt;List&lt;Double&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Maybe<List<Double>> getDoubleInvalidStringAsync() {
         return getDoubleInvalidStringWithRestResponseAsync()
-            .flatMapMaybe(new Function<RestResponse<Void, List<Double>>, Maybe<List<Double>>>() {
-                @Override
-                public Maybe<List<Double>> apply(RestResponse<Void, List<Double>> restResponse) {
-                    if (restResponse.body() == null) {
-                        return Maybe.empty();
-                    } else {
-                        return Maybe.just(restResponse.body());
-                    }
-                }
-            });
+            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -1622,7 +1460,7 @@ public final class ArraysImpl implements Arrays {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;List&lt;String&gt;&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     public ServiceFuture<List<String>> getStringValidAsync(ServiceCallback<List<String>> serviceCallback) {
         return ServiceFuture.fromBody(getStringValidAsync(), serviceCallback);
@@ -1631,29 +1469,20 @@ public final class ArraysImpl implements Arrays {
     /**
      * Get string array value ['foo1', 'foo2', 'foo3'].
      *
-     * @return the {@link Single&lt;RestResponse&lt;Void, List&lt;String&gt;&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<Void, List<String>>> getStringValidWithRestResponseAsync() {
+    public Single<BodyResponse<List<String>>> getStringValidWithRestResponseAsync() {
         return service.getStringValid();
     }
 
     /**
      * Get string array value ['foo1', 'foo2', 'foo3'].
      *
-     * @return the {@link Maybe&lt;List&lt;String&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Maybe<List<String>> getStringValidAsync() {
         return getStringValidWithRestResponseAsync()
-            .flatMapMaybe(new Function<RestResponse<Void, List<String>>, Maybe<List<String>>>() {
-                @Override
-                public Maybe<List<String>> apply(RestResponse<Void, List<String>> restResponse) {
-                    if (restResponse.body() == null) {
-                        return Maybe.empty();
-                    } else {
-                        return Maybe.just(restResponse.body());
-                    }
-                }
-            });
+            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -1674,7 +1503,7 @@ public final class ArraysImpl implements Arrays {
      * @param arrayBody the List&lt;String&gt; value.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;Void&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     public ServiceFuture<Void> putStringValidAsync(@NonNull List<String> arrayBody, ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(putStringValidAsync(arrayBody), serviceCallback);
@@ -1685,9 +1514,9 @@ public final class ArraysImpl implements Arrays {
      *
      * @param arrayBody the List&lt;String&gt; value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<Void, Void>> putStringValidWithRestResponseAsync(@NonNull List<String> arrayBody) {
+    public Single<VoidResponse> putStringValidWithRestResponseAsync(@NonNull List<String> arrayBody) {
         if (arrayBody == null) {
             throw new IllegalArgumentException("Parameter arrayBody is required and cannot be null.");
         }
@@ -1700,7 +1529,7 @@ public final class ArraysImpl implements Arrays {
      *
      * @param arrayBody the List&lt;String&gt; value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link Completable} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Completable putStringValidAsync(@NonNull List<String> arrayBody) {
         return putStringValidWithRestResponseAsync(arrayBody)
@@ -1723,7 +1552,7 @@ public final class ArraysImpl implements Arrays {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;List&lt;String&gt;&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     public ServiceFuture<List<String>> getStringWithNullAsync(ServiceCallback<List<String>> serviceCallback) {
         return ServiceFuture.fromBody(getStringWithNullAsync(), serviceCallback);
@@ -1732,29 +1561,20 @@ public final class ArraysImpl implements Arrays {
     /**
      * Get string array value ['foo', null, 'foo2'].
      *
-     * @return the {@link Single&lt;RestResponse&lt;Void, List&lt;String&gt;&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<Void, List<String>>> getStringWithNullWithRestResponseAsync() {
+    public Single<BodyResponse<List<String>>> getStringWithNullWithRestResponseAsync() {
         return service.getStringWithNull();
     }
 
     /**
      * Get string array value ['foo', null, 'foo2'].
      *
-     * @return the {@link Maybe&lt;List&lt;String&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Maybe<List<String>> getStringWithNullAsync() {
         return getStringWithNullWithRestResponseAsync()
-            .flatMapMaybe(new Function<RestResponse<Void, List<String>>, Maybe<List<String>>>() {
-                @Override
-                public Maybe<List<String>> apply(RestResponse<Void, List<String>> restResponse) {
-                    if (restResponse.body() == null) {
-                        return Maybe.empty();
-                    } else {
-                        return Maybe.just(restResponse.body());
-                    }
-                }
-            });
+            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -1773,7 +1593,7 @@ public final class ArraysImpl implements Arrays {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;List&lt;String&gt;&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     public ServiceFuture<List<String>> getStringWithInvalidAsync(ServiceCallback<List<String>> serviceCallback) {
         return ServiceFuture.fromBody(getStringWithInvalidAsync(), serviceCallback);
@@ -1782,29 +1602,20 @@ public final class ArraysImpl implements Arrays {
     /**
      * Get string array value ['foo', 123, 'foo2'].
      *
-     * @return the {@link Single&lt;RestResponse&lt;Void, List&lt;String&gt;&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<Void, List<String>>> getStringWithInvalidWithRestResponseAsync() {
+    public Single<BodyResponse<List<String>>> getStringWithInvalidWithRestResponseAsync() {
         return service.getStringWithInvalid();
     }
 
     /**
      * Get string array value ['foo', 123, 'foo2'].
      *
-     * @return the {@link Maybe&lt;List&lt;String&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Maybe<List<String>> getStringWithInvalidAsync() {
         return getStringWithInvalidWithRestResponseAsync()
-            .flatMapMaybe(new Function<RestResponse<Void, List<String>>, Maybe<List<String>>>() {
-                @Override
-                public Maybe<List<String>> apply(RestResponse<Void, List<String>> restResponse) {
-                    if (restResponse.body() == null) {
-                        return Maybe.empty();
-                    } else {
-                        return Maybe.just(restResponse.body());
-                    }
-                }
-            });
+            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -1823,7 +1634,7 @@ public final class ArraysImpl implements Arrays {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;List&lt;UUID&gt;&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     public ServiceFuture<List<UUID>> getUuidValidAsync(ServiceCallback<List<UUID>> serviceCallback) {
         return ServiceFuture.fromBody(getUuidValidAsync(), serviceCallback);
@@ -1832,29 +1643,20 @@ public final class ArraysImpl implements Arrays {
     /**
      * Get uuid array value ['6dcc7237-45fe-45c4-8a6b-3a8a3f625652', 'd1399005-30f7-40d6-8da6-dd7c89ad34db', 'f42f6aa1-a5bc-4ddf-907e-5f915de43205'].
      *
-     * @return the {@link Single&lt;RestResponse&lt;Void, List&lt;UUID&gt;&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<Void, List<UUID>>> getUuidValidWithRestResponseAsync() {
+    public Single<BodyResponse<List<UUID>>> getUuidValidWithRestResponseAsync() {
         return service.getUuidValid();
     }
 
     /**
      * Get uuid array value ['6dcc7237-45fe-45c4-8a6b-3a8a3f625652', 'd1399005-30f7-40d6-8da6-dd7c89ad34db', 'f42f6aa1-a5bc-4ddf-907e-5f915de43205'].
      *
-     * @return the {@link Maybe&lt;List&lt;UUID&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Maybe<List<UUID>> getUuidValidAsync() {
         return getUuidValidWithRestResponseAsync()
-            .flatMapMaybe(new Function<RestResponse<Void, List<UUID>>, Maybe<List<UUID>>>() {
-                @Override
-                public Maybe<List<UUID>> apply(RestResponse<Void, List<UUID>> restResponse) {
-                    if (restResponse.body() == null) {
-                        return Maybe.empty();
-                    } else {
-                        return Maybe.just(restResponse.body());
-                    }
-                }
-            });
+            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -1875,7 +1677,7 @@ public final class ArraysImpl implements Arrays {
      * @param arrayBody the List&lt;UUID&gt; value.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;Void&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     public ServiceFuture<Void> putUuidValidAsync(@NonNull List<UUID> arrayBody, ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(putUuidValidAsync(arrayBody), serviceCallback);
@@ -1886,9 +1688,9 @@ public final class ArraysImpl implements Arrays {
      *
      * @param arrayBody the List&lt;UUID&gt; value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<Void, Void>> putUuidValidWithRestResponseAsync(@NonNull List<UUID> arrayBody) {
+    public Single<VoidResponse> putUuidValidWithRestResponseAsync(@NonNull List<UUID> arrayBody) {
         if (arrayBody == null) {
             throw new IllegalArgumentException("Parameter arrayBody is required and cannot be null.");
         }
@@ -1901,7 +1703,7 @@ public final class ArraysImpl implements Arrays {
      *
      * @param arrayBody the List&lt;UUID&gt; value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link Completable} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Completable putUuidValidAsync(@NonNull List<UUID> arrayBody) {
         return putUuidValidWithRestResponseAsync(arrayBody)
@@ -1924,7 +1726,7 @@ public final class ArraysImpl implements Arrays {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;List&lt;UUID&gt;&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     public ServiceFuture<List<UUID>> getUuidInvalidCharsAsync(ServiceCallback<List<UUID>> serviceCallback) {
         return ServiceFuture.fromBody(getUuidInvalidCharsAsync(), serviceCallback);
@@ -1933,29 +1735,20 @@ public final class ArraysImpl implements Arrays {
     /**
      * Get uuid array value ['6dcc7237-45fe-45c4-8a6b-3a8a3f625652', 'foo'].
      *
-     * @return the {@link Single&lt;RestResponse&lt;Void, List&lt;UUID&gt;&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<Void, List<UUID>>> getUuidInvalidCharsWithRestResponseAsync() {
+    public Single<BodyResponse<List<UUID>>> getUuidInvalidCharsWithRestResponseAsync() {
         return service.getUuidInvalidChars();
     }
 
     /**
      * Get uuid array value ['6dcc7237-45fe-45c4-8a6b-3a8a3f625652', 'foo'].
      *
-     * @return the {@link Maybe&lt;List&lt;UUID&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Maybe<List<UUID>> getUuidInvalidCharsAsync() {
         return getUuidInvalidCharsWithRestResponseAsync()
-            .flatMapMaybe(new Function<RestResponse<Void, List<UUID>>, Maybe<List<UUID>>>() {
-                @Override
-                public Maybe<List<UUID>> apply(RestResponse<Void, List<UUID>> restResponse) {
-                    if (restResponse.body() == null) {
-                        return Maybe.empty();
-                    } else {
-                        return Maybe.just(restResponse.body());
-                    }
-                }
-            });
+            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -1974,7 +1767,7 @@ public final class ArraysImpl implements Arrays {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;List&lt;LocalDate&gt;&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     public ServiceFuture<List<LocalDate>> getDateValidAsync(ServiceCallback<List<LocalDate>> serviceCallback) {
         return ServiceFuture.fromBody(getDateValidAsync(), serviceCallback);
@@ -1983,29 +1776,20 @@ public final class ArraysImpl implements Arrays {
     /**
      * Get integer array value ['2000-12-01', '1980-01-02', '1492-10-12'].
      *
-     * @return the {@link Single&lt;RestResponse&lt;Void, List&lt;LocalDate&gt;&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<Void, List<LocalDate>>> getDateValidWithRestResponseAsync() {
+    public Single<BodyResponse<List<LocalDate>>> getDateValidWithRestResponseAsync() {
         return service.getDateValid();
     }
 
     /**
      * Get integer array value ['2000-12-01', '1980-01-02', '1492-10-12'].
      *
-     * @return the {@link Maybe&lt;List&lt;LocalDate&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Maybe<List<LocalDate>> getDateValidAsync() {
         return getDateValidWithRestResponseAsync()
-            .flatMapMaybe(new Function<RestResponse<Void, List<LocalDate>>, Maybe<List<LocalDate>>>() {
-                @Override
-                public Maybe<List<LocalDate>> apply(RestResponse<Void, List<LocalDate>> restResponse) {
-                    if (restResponse.body() == null) {
-                        return Maybe.empty();
-                    } else {
-                        return Maybe.just(restResponse.body());
-                    }
-                }
-            });
+            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -2026,7 +1810,7 @@ public final class ArraysImpl implements Arrays {
      * @param arrayBody the List&lt;LocalDate&gt; value.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;Void&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     public ServiceFuture<Void> putDateValidAsync(@NonNull List<LocalDate> arrayBody, ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(putDateValidAsync(arrayBody), serviceCallback);
@@ -2037,9 +1821,9 @@ public final class ArraysImpl implements Arrays {
      *
      * @param arrayBody the List&lt;LocalDate&gt; value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<Void, Void>> putDateValidWithRestResponseAsync(@NonNull List<LocalDate> arrayBody) {
+    public Single<VoidResponse> putDateValidWithRestResponseAsync(@NonNull List<LocalDate> arrayBody) {
         if (arrayBody == null) {
             throw new IllegalArgumentException("Parameter arrayBody is required and cannot be null.");
         }
@@ -2052,7 +1836,7 @@ public final class ArraysImpl implements Arrays {
      *
      * @param arrayBody the List&lt;LocalDate&gt; value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link Completable} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Completable putDateValidAsync(@NonNull List<LocalDate> arrayBody) {
         return putDateValidWithRestResponseAsync(arrayBody)
@@ -2075,7 +1859,7 @@ public final class ArraysImpl implements Arrays {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;List&lt;LocalDate&gt;&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     public ServiceFuture<List<LocalDate>> getDateInvalidNullAsync(ServiceCallback<List<LocalDate>> serviceCallback) {
         return ServiceFuture.fromBody(getDateInvalidNullAsync(), serviceCallback);
@@ -2084,29 +1868,20 @@ public final class ArraysImpl implements Arrays {
     /**
      * Get date array value ['2012-01-01', null, '1776-07-04'].
      *
-     * @return the {@link Single&lt;RestResponse&lt;Void, List&lt;LocalDate&gt;&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<Void, List<LocalDate>>> getDateInvalidNullWithRestResponseAsync() {
+    public Single<BodyResponse<List<LocalDate>>> getDateInvalidNullWithRestResponseAsync() {
         return service.getDateInvalidNull();
     }
 
     /**
      * Get date array value ['2012-01-01', null, '1776-07-04'].
      *
-     * @return the {@link Maybe&lt;List&lt;LocalDate&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Maybe<List<LocalDate>> getDateInvalidNullAsync() {
         return getDateInvalidNullWithRestResponseAsync()
-            .flatMapMaybe(new Function<RestResponse<Void, List<LocalDate>>, Maybe<List<LocalDate>>>() {
-                @Override
-                public Maybe<List<LocalDate>> apply(RestResponse<Void, List<LocalDate>> restResponse) {
-                    if (restResponse.body() == null) {
-                        return Maybe.empty();
-                    } else {
-                        return Maybe.just(restResponse.body());
-                    }
-                }
-            });
+            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -2125,7 +1900,7 @@ public final class ArraysImpl implements Arrays {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;List&lt;LocalDate&gt;&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     public ServiceFuture<List<LocalDate>> getDateInvalidCharsAsync(ServiceCallback<List<LocalDate>> serviceCallback) {
         return ServiceFuture.fromBody(getDateInvalidCharsAsync(), serviceCallback);
@@ -2134,29 +1909,20 @@ public final class ArraysImpl implements Arrays {
     /**
      * Get date array value ['2011-03-22', 'date'].
      *
-     * @return the {@link Single&lt;RestResponse&lt;Void, List&lt;LocalDate&gt;&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<Void, List<LocalDate>>> getDateInvalidCharsWithRestResponseAsync() {
+    public Single<BodyResponse<List<LocalDate>>> getDateInvalidCharsWithRestResponseAsync() {
         return service.getDateInvalidChars();
     }
 
     /**
      * Get date array value ['2011-03-22', 'date'].
      *
-     * @return the {@link Maybe&lt;List&lt;LocalDate&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Maybe<List<LocalDate>> getDateInvalidCharsAsync() {
         return getDateInvalidCharsWithRestResponseAsync()
-            .flatMapMaybe(new Function<RestResponse<Void, List<LocalDate>>, Maybe<List<LocalDate>>>() {
-                @Override
-                public Maybe<List<LocalDate>> apply(RestResponse<Void, List<LocalDate>> restResponse) {
-                    if (restResponse.body() == null) {
-                        return Maybe.empty();
-                    } else {
-                        return Maybe.just(restResponse.body());
-                    }
-                }
-            });
+            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -2175,7 +1941,7 @@ public final class ArraysImpl implements Arrays {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;List&lt;DateTime&gt;&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     public ServiceFuture<List<DateTime>> getDateTimeValidAsync(ServiceCallback<List<DateTime>> serviceCallback) {
         return ServiceFuture.fromBody(getDateTimeValidAsync(), serviceCallback);
@@ -2184,29 +1950,20 @@ public final class ArraysImpl implements Arrays {
     /**
      * Get date-time array value ['2000-12-01t00:00:01z', '1980-01-02T00:11:35+01:00', '1492-10-12T10:15:01-08:00'].
      *
-     * @return the {@link Single&lt;RestResponse&lt;Void, List&lt;DateTime&gt;&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<Void, List<DateTime>>> getDateTimeValidWithRestResponseAsync() {
+    public Single<BodyResponse<List<DateTime>>> getDateTimeValidWithRestResponseAsync() {
         return service.getDateTimeValid();
     }
 
     /**
      * Get date-time array value ['2000-12-01t00:00:01z', '1980-01-02T00:11:35+01:00', '1492-10-12T10:15:01-08:00'].
      *
-     * @return the {@link Maybe&lt;List&lt;DateTime&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Maybe<List<DateTime>> getDateTimeValidAsync() {
         return getDateTimeValidWithRestResponseAsync()
-            .flatMapMaybe(new Function<RestResponse<Void, List<DateTime>>, Maybe<List<DateTime>>>() {
-                @Override
-                public Maybe<List<DateTime>> apply(RestResponse<Void, List<DateTime>> restResponse) {
-                    if (restResponse.body() == null) {
-                        return Maybe.empty();
-                    } else {
-                        return Maybe.just(restResponse.body());
-                    }
-                }
-            });
+            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -2227,7 +1984,7 @@ public final class ArraysImpl implements Arrays {
      * @param arrayBody the List&lt;DateTime&gt; value.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;Void&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     public ServiceFuture<Void> putDateTimeValidAsync(@NonNull List<DateTime> arrayBody, ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(putDateTimeValidAsync(arrayBody), serviceCallback);
@@ -2238,9 +1995,9 @@ public final class ArraysImpl implements Arrays {
      *
      * @param arrayBody the List&lt;DateTime&gt; value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<Void, Void>> putDateTimeValidWithRestResponseAsync(@NonNull List<DateTime> arrayBody) {
+    public Single<VoidResponse> putDateTimeValidWithRestResponseAsync(@NonNull List<DateTime> arrayBody) {
         if (arrayBody == null) {
             throw new IllegalArgumentException("Parameter arrayBody is required and cannot be null.");
         }
@@ -2253,7 +2010,7 @@ public final class ArraysImpl implements Arrays {
      *
      * @param arrayBody the List&lt;DateTime&gt; value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link Completable} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Completable putDateTimeValidAsync(@NonNull List<DateTime> arrayBody) {
         return putDateTimeValidWithRestResponseAsync(arrayBody)
@@ -2276,7 +2033,7 @@ public final class ArraysImpl implements Arrays {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;List&lt;DateTime&gt;&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     public ServiceFuture<List<DateTime>> getDateTimeInvalidNullAsync(ServiceCallback<List<DateTime>> serviceCallback) {
         return ServiceFuture.fromBody(getDateTimeInvalidNullAsync(), serviceCallback);
@@ -2285,29 +2042,20 @@ public final class ArraysImpl implements Arrays {
     /**
      * Get date array value ['2000-12-01t00:00:01z', null].
      *
-     * @return the {@link Single&lt;RestResponse&lt;Void, List&lt;DateTime&gt;&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<Void, List<DateTime>>> getDateTimeInvalidNullWithRestResponseAsync() {
+    public Single<BodyResponse<List<DateTime>>> getDateTimeInvalidNullWithRestResponseAsync() {
         return service.getDateTimeInvalidNull();
     }
 
     /**
      * Get date array value ['2000-12-01t00:00:01z', null].
      *
-     * @return the {@link Maybe&lt;List&lt;DateTime&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Maybe<List<DateTime>> getDateTimeInvalidNullAsync() {
         return getDateTimeInvalidNullWithRestResponseAsync()
-            .flatMapMaybe(new Function<RestResponse<Void, List<DateTime>>, Maybe<List<DateTime>>>() {
-                @Override
-                public Maybe<List<DateTime>> apply(RestResponse<Void, List<DateTime>> restResponse) {
-                    if (restResponse.body() == null) {
-                        return Maybe.empty();
-                    } else {
-                        return Maybe.just(restResponse.body());
-                    }
-                }
-            });
+            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -2326,7 +2074,7 @@ public final class ArraysImpl implements Arrays {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;List&lt;DateTime&gt;&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     public ServiceFuture<List<DateTime>> getDateTimeInvalidCharsAsync(ServiceCallback<List<DateTime>> serviceCallback) {
         return ServiceFuture.fromBody(getDateTimeInvalidCharsAsync(), serviceCallback);
@@ -2335,29 +2083,20 @@ public final class ArraysImpl implements Arrays {
     /**
      * Get date array value ['2000-12-01t00:00:01z', 'date-time'].
      *
-     * @return the {@link Single&lt;RestResponse&lt;Void, List&lt;DateTime&gt;&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<Void, List<DateTime>>> getDateTimeInvalidCharsWithRestResponseAsync() {
+    public Single<BodyResponse<List<DateTime>>> getDateTimeInvalidCharsWithRestResponseAsync() {
         return service.getDateTimeInvalidChars();
     }
 
     /**
      * Get date array value ['2000-12-01t00:00:01z', 'date-time'].
      *
-     * @return the {@link Maybe&lt;List&lt;DateTime&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Maybe<List<DateTime>> getDateTimeInvalidCharsAsync() {
         return getDateTimeInvalidCharsWithRestResponseAsync()
-            .flatMapMaybe(new Function<RestResponse<Void, List<DateTime>>, Maybe<List<DateTime>>>() {
-                @Override
-                public Maybe<List<DateTime>> apply(RestResponse<Void, List<DateTime>> restResponse) {
-                    if (restResponse.body() == null) {
-                        return Maybe.empty();
-                    } else {
-                        return Maybe.just(restResponse.body());
-                    }
-                }
-            });
+            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -2376,7 +2115,7 @@ public final class ArraysImpl implements Arrays {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;List&lt;DateTime&gt;&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     public ServiceFuture<List<DateTime>> getDateTimeRfc1123ValidAsync(ServiceCallback<List<DateTime>> serviceCallback) {
         return ServiceFuture.fromBody(getDateTimeRfc1123ValidAsync(), serviceCallback);
@@ -2385,29 +2124,20 @@ public final class ArraysImpl implements Arrays {
     /**
      * Get date-time array value ['Fri, 01 Dec 2000 00:00:01 GMT', 'Wed, 02 Jan 1980 00:11:35 GMT', 'Wed, 12 Oct 1492 10:15:01 GMT'].
      *
-     * @return the {@link Single&lt;RestResponse&lt;Void, List&lt;DateTime&gt;&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<Void, List<DateTime>>> getDateTimeRfc1123ValidWithRestResponseAsync() {
+    public Single<BodyResponse<List<DateTime>>> getDateTimeRfc1123ValidWithRestResponseAsync() {
         return service.getDateTimeRfc1123Valid();
     }
 
     /**
      * Get date-time array value ['Fri, 01 Dec 2000 00:00:01 GMT', 'Wed, 02 Jan 1980 00:11:35 GMT', 'Wed, 12 Oct 1492 10:15:01 GMT'].
      *
-     * @return the {@link Maybe&lt;List&lt;DateTime&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Maybe<List<DateTime>> getDateTimeRfc1123ValidAsync() {
         return getDateTimeRfc1123ValidWithRestResponseAsync()
-            .flatMapMaybe(new Function<RestResponse<Void, List<DateTime>>, Maybe<List<DateTime>>>() {
-                @Override
-                public Maybe<List<DateTime>> apply(RestResponse<Void, List<DateTime>> restResponse) {
-                    if (restResponse.body() == null) {
-                        return Maybe.empty();
-                    } else {
-                        return Maybe.just(restResponse.body());
-                    }
-                }
-            });
+            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -2428,7 +2158,7 @@ public final class ArraysImpl implements Arrays {
      * @param arrayBody the List&lt;DateTime&gt; value.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;Void&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     public ServiceFuture<Void> putDateTimeRfc1123ValidAsync(@NonNull List<DateTime> arrayBody, ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(putDateTimeRfc1123ValidAsync(arrayBody), serviceCallback);
@@ -2439,9 +2169,9 @@ public final class ArraysImpl implements Arrays {
      *
      * @param arrayBody the List&lt;DateTime&gt; value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<Void, Void>> putDateTimeRfc1123ValidWithRestResponseAsync(@NonNull List<DateTime> arrayBody) {
+    public Single<VoidResponse> putDateTimeRfc1123ValidWithRestResponseAsync(@NonNull List<DateTime> arrayBody) {
         if (arrayBody == null) {
             throw new IllegalArgumentException("Parameter arrayBody is required and cannot be null.");
         }
@@ -2459,7 +2189,7 @@ public final class ArraysImpl implements Arrays {
      *
      * @param arrayBody the List&lt;DateTime&gt; value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link Completable} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Completable putDateTimeRfc1123ValidAsync(@NonNull List<DateTime> arrayBody) {
         return putDateTimeRfc1123ValidWithRestResponseAsync(arrayBody)
@@ -2482,7 +2212,7 @@ public final class ArraysImpl implements Arrays {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;List&lt;Period&gt;&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     public ServiceFuture<List<Period>> getDurationValidAsync(ServiceCallback<List<Period>> serviceCallback) {
         return ServiceFuture.fromBody(getDurationValidAsync(), serviceCallback);
@@ -2491,29 +2221,20 @@ public final class ArraysImpl implements Arrays {
     /**
      * Get duration array value ['P123DT22H14M12.011S', 'P5DT1H0M0S'].
      *
-     * @return the {@link Single&lt;RestResponse&lt;Void, List&lt;Period&gt;&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<Void, List<Period>>> getDurationValidWithRestResponseAsync() {
+    public Single<BodyResponse<List<Period>>> getDurationValidWithRestResponseAsync() {
         return service.getDurationValid();
     }
 
     /**
      * Get duration array value ['P123DT22H14M12.011S', 'P5DT1H0M0S'].
      *
-     * @return the {@link Maybe&lt;List&lt;Period&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Maybe<List<Period>> getDurationValidAsync() {
         return getDurationValidWithRestResponseAsync()
-            .flatMapMaybe(new Function<RestResponse<Void, List<Period>>, Maybe<List<Period>>>() {
-                @Override
-                public Maybe<List<Period>> apply(RestResponse<Void, List<Period>> restResponse) {
-                    if (restResponse.body() == null) {
-                        return Maybe.empty();
-                    } else {
-                        return Maybe.just(restResponse.body());
-                    }
-                }
-            });
+            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -2534,7 +2255,7 @@ public final class ArraysImpl implements Arrays {
      * @param arrayBody the List&lt;Period&gt; value.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;Void&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     public ServiceFuture<Void> putDurationValidAsync(@NonNull List<Period> arrayBody, ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(putDurationValidAsync(arrayBody), serviceCallback);
@@ -2545,9 +2266,9 @@ public final class ArraysImpl implements Arrays {
      *
      * @param arrayBody the List&lt;Period&gt; value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<Void, Void>> putDurationValidWithRestResponseAsync(@NonNull List<Period> arrayBody) {
+    public Single<VoidResponse> putDurationValidWithRestResponseAsync(@NonNull List<Period> arrayBody) {
         if (arrayBody == null) {
             throw new IllegalArgumentException("Parameter arrayBody is required and cannot be null.");
         }
@@ -2560,7 +2281,7 @@ public final class ArraysImpl implements Arrays {
      *
      * @param arrayBody the List&lt;Period&gt; value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link Completable} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Completable putDurationValidAsync(@NonNull List<Period> arrayBody) {
         return putDurationValidWithRestResponseAsync(arrayBody)
@@ -2583,7 +2304,7 @@ public final class ArraysImpl implements Arrays {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;List&lt;byte[]&gt;&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     public ServiceFuture<List<byte[]>> getByteValidAsync(ServiceCallback<List<byte[]>> serviceCallback) {
         return ServiceFuture.fromBody(getByteValidAsync(), serviceCallback);
@@ -2592,29 +2313,20 @@ public final class ArraysImpl implements Arrays {
     /**
      * Get byte array value [hex(FF FF FF FA), hex(01 02 03), hex (25, 29, 43)] with each item encoded in base64.
      *
-     * @return the {@link Single&lt;RestResponse&lt;Void, List&lt;byte[]&gt;&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<Void, List<byte[]>>> getByteValidWithRestResponseAsync() {
+    public Single<BodyResponse<List<byte[]>>> getByteValidWithRestResponseAsync() {
         return service.getByteValid();
     }
 
     /**
      * Get byte array value [hex(FF FF FF FA), hex(01 02 03), hex (25, 29, 43)] with each item encoded in base64.
      *
-     * @return the {@link Maybe&lt;List&lt;byte[]&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Maybe<List<byte[]>> getByteValidAsync() {
         return getByteValidWithRestResponseAsync()
-            .flatMapMaybe(new Function<RestResponse<Void, List<byte[]>>, Maybe<List<byte[]>>>() {
-                @Override
-                public Maybe<List<byte[]>> apply(RestResponse<Void, List<byte[]>> restResponse) {
-                    if (restResponse.body() == null) {
-                        return Maybe.empty();
-                    } else {
-                        return Maybe.just(restResponse.body());
-                    }
-                }
-            });
+            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -2635,7 +2347,7 @@ public final class ArraysImpl implements Arrays {
      * @param arrayBody the List&lt;byte[]&gt; value.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;Void&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     public ServiceFuture<Void> putByteValidAsync(@NonNull List<byte[]> arrayBody, ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(putByteValidAsync(arrayBody), serviceCallback);
@@ -2646,9 +2358,9 @@ public final class ArraysImpl implements Arrays {
      *
      * @param arrayBody the List&lt;byte[]&gt; value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<Void, Void>> putByteValidWithRestResponseAsync(@NonNull List<byte[]> arrayBody) {
+    public Single<VoidResponse> putByteValidWithRestResponseAsync(@NonNull List<byte[]> arrayBody) {
         if (arrayBody == null) {
             throw new IllegalArgumentException("Parameter arrayBody is required and cannot be null.");
         }
@@ -2661,7 +2373,7 @@ public final class ArraysImpl implements Arrays {
      *
      * @param arrayBody the List&lt;byte[]&gt; value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link Completable} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Completable putByteValidAsync(@NonNull List<byte[]> arrayBody) {
         return putByteValidWithRestResponseAsync(arrayBody)
@@ -2684,7 +2396,7 @@ public final class ArraysImpl implements Arrays {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;List&lt;byte[]&gt;&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     public ServiceFuture<List<byte[]>> getByteInvalidNullAsync(ServiceCallback<List<byte[]>> serviceCallback) {
         return ServiceFuture.fromBody(getByteInvalidNullAsync(), serviceCallback);
@@ -2693,29 +2405,20 @@ public final class ArraysImpl implements Arrays {
     /**
      * Get byte array value [hex(AB, AC, AD), null] with the first item base64 encoded.
      *
-     * @return the {@link Single&lt;RestResponse&lt;Void, List&lt;byte[]&gt;&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<Void, List<byte[]>>> getByteInvalidNullWithRestResponseAsync() {
+    public Single<BodyResponse<List<byte[]>>> getByteInvalidNullWithRestResponseAsync() {
         return service.getByteInvalidNull();
     }
 
     /**
      * Get byte array value [hex(AB, AC, AD), null] with the first item base64 encoded.
      *
-     * @return the {@link Maybe&lt;List&lt;byte[]&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Maybe<List<byte[]>> getByteInvalidNullAsync() {
         return getByteInvalidNullWithRestResponseAsync()
-            .flatMapMaybe(new Function<RestResponse<Void, List<byte[]>>, Maybe<List<byte[]>>>() {
-                @Override
-                public Maybe<List<byte[]>> apply(RestResponse<Void, List<byte[]>> restResponse) {
-                    if (restResponse.body() == null) {
-                        return Maybe.empty();
-                    } else {
-                        return Maybe.just(restResponse.body());
-                    }
-                }
-            });
+            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -2734,7 +2437,7 @@ public final class ArraysImpl implements Arrays {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;List&lt;byte[]&gt;&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     public ServiceFuture<List<byte[]>> getBase64UrlAsync(ServiceCallback<List<byte[]>> serviceCallback) {
         return ServiceFuture.fromBody(getBase64UrlAsync(), serviceCallback);
@@ -2743,29 +2446,20 @@ public final class ArraysImpl implements Arrays {
     /**
      * Get array value ['a string that gets encoded with base64url', 'test string' 'Lorem ipsum'] with the items base64url encoded.
      *
-     * @return the {@link Single&lt;RestResponse&lt;Void, List&lt;byte[]&gt;&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<Void, List<byte[]>>> getBase64UrlWithRestResponseAsync() {
+    public Single<BodyResponse<List<byte[]>>> getBase64UrlWithRestResponseAsync() {
         return service.getBase64Url();
     }
 
     /**
      * Get array value ['a string that gets encoded with base64url', 'test string' 'Lorem ipsum'] with the items base64url encoded.
      *
-     * @return the {@link Maybe&lt;List&lt;byte[]&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Maybe<List<byte[]>> getBase64UrlAsync() {
         return getBase64UrlWithRestResponseAsync()
-            .flatMapMaybe(new Function<RestResponse<Void, List<byte[]>>, Maybe<List<byte[]>>>() {
-                @Override
-                public Maybe<List<byte[]>> apply(RestResponse<Void, List<byte[]>> restResponse) {
-                    if (restResponse.body() == null) {
-                        return Maybe.empty();
-                    } else {
-                        return Maybe.just(restResponse.body());
-                    }
-                }
-            });
+            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -2784,7 +2478,7 @@ public final class ArraysImpl implements Arrays {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;List&lt;Product&gt;&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     public ServiceFuture<List<Product>> getComplexNullAsync(ServiceCallback<List<Product>> serviceCallback) {
         return ServiceFuture.fromBody(getComplexNullAsync(), serviceCallback);
@@ -2793,29 +2487,20 @@ public final class ArraysImpl implements Arrays {
     /**
      * Get array of complex type null value.
      *
-     * @return the {@link Single&lt;RestResponse&lt;Void, List&lt;Product&gt;&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<Void, List<Product>>> getComplexNullWithRestResponseAsync() {
+    public Single<BodyResponse<List<Product>>> getComplexNullWithRestResponseAsync() {
         return service.getComplexNull();
     }
 
     /**
      * Get array of complex type null value.
      *
-     * @return the {@link Maybe&lt;List&lt;Product&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Maybe<List<Product>> getComplexNullAsync() {
         return getComplexNullWithRestResponseAsync()
-            .flatMapMaybe(new Function<RestResponse<Void, List<Product>>, Maybe<List<Product>>>() {
-                @Override
-                public Maybe<List<Product>> apply(RestResponse<Void, List<Product>> restResponse) {
-                    if (restResponse.body() == null) {
-                        return Maybe.empty();
-                    } else {
-                        return Maybe.just(restResponse.body());
-                    }
-                }
-            });
+            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -2834,7 +2519,7 @@ public final class ArraysImpl implements Arrays {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;List&lt;Product&gt;&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     public ServiceFuture<List<Product>> getComplexEmptyAsync(ServiceCallback<List<Product>> serviceCallback) {
         return ServiceFuture.fromBody(getComplexEmptyAsync(), serviceCallback);
@@ -2843,29 +2528,20 @@ public final class ArraysImpl implements Arrays {
     /**
      * Get empty array of complex type [].
      *
-     * @return the {@link Single&lt;RestResponse&lt;Void, List&lt;Product&gt;&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<Void, List<Product>>> getComplexEmptyWithRestResponseAsync() {
+    public Single<BodyResponse<List<Product>>> getComplexEmptyWithRestResponseAsync() {
         return service.getComplexEmpty();
     }
 
     /**
      * Get empty array of complex type [].
      *
-     * @return the {@link Maybe&lt;List&lt;Product&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Maybe<List<Product>> getComplexEmptyAsync() {
         return getComplexEmptyWithRestResponseAsync()
-            .flatMapMaybe(new Function<RestResponse<Void, List<Product>>, Maybe<List<Product>>>() {
-                @Override
-                public Maybe<List<Product>> apply(RestResponse<Void, List<Product>> restResponse) {
-                    if (restResponse.body() == null) {
-                        return Maybe.empty();
-                    } else {
-                        return Maybe.just(restResponse.body());
-                    }
-                }
-            });
+            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -2884,7 +2560,7 @@ public final class ArraysImpl implements Arrays {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;List&lt;Product&gt;&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     public ServiceFuture<List<Product>> getComplexItemNullAsync(ServiceCallback<List<Product>> serviceCallback) {
         return ServiceFuture.fromBody(getComplexItemNullAsync(), serviceCallback);
@@ -2893,29 +2569,20 @@ public final class ArraysImpl implements Arrays {
     /**
      * Get array of complex type with null item [{'integer': 1 'string': '2'}, null, {'integer': 5, 'string': '6'}].
      *
-     * @return the {@link Single&lt;RestResponse&lt;Void, List&lt;Product&gt;&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<Void, List<Product>>> getComplexItemNullWithRestResponseAsync() {
+    public Single<BodyResponse<List<Product>>> getComplexItemNullWithRestResponseAsync() {
         return service.getComplexItemNull();
     }
 
     /**
      * Get array of complex type with null item [{'integer': 1 'string': '2'}, null, {'integer': 5, 'string': '6'}].
      *
-     * @return the {@link Maybe&lt;List&lt;Product&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Maybe<List<Product>> getComplexItemNullAsync() {
         return getComplexItemNullWithRestResponseAsync()
-            .flatMapMaybe(new Function<RestResponse<Void, List<Product>>, Maybe<List<Product>>>() {
-                @Override
-                public Maybe<List<Product>> apply(RestResponse<Void, List<Product>> restResponse) {
-                    if (restResponse.body() == null) {
-                        return Maybe.empty();
-                    } else {
-                        return Maybe.just(restResponse.body());
-                    }
-                }
-            });
+            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -2934,7 +2601,7 @@ public final class ArraysImpl implements Arrays {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;List&lt;Product&gt;&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     public ServiceFuture<List<Product>> getComplexItemEmptyAsync(ServiceCallback<List<Product>> serviceCallback) {
         return ServiceFuture.fromBody(getComplexItemEmptyAsync(), serviceCallback);
@@ -2943,29 +2610,20 @@ public final class ArraysImpl implements Arrays {
     /**
      * Get array of complex type with empty item [{'integer': 1 'string': '2'}, {}, {'integer': 5, 'string': '6'}].
      *
-     * @return the {@link Single&lt;RestResponse&lt;Void, List&lt;Product&gt;&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<Void, List<Product>>> getComplexItemEmptyWithRestResponseAsync() {
+    public Single<BodyResponse<List<Product>>> getComplexItemEmptyWithRestResponseAsync() {
         return service.getComplexItemEmpty();
     }
 
     /**
      * Get array of complex type with empty item [{'integer': 1 'string': '2'}, {}, {'integer': 5, 'string': '6'}].
      *
-     * @return the {@link Maybe&lt;List&lt;Product&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Maybe<List<Product>> getComplexItemEmptyAsync() {
         return getComplexItemEmptyWithRestResponseAsync()
-            .flatMapMaybe(new Function<RestResponse<Void, List<Product>>, Maybe<List<Product>>>() {
-                @Override
-                public Maybe<List<Product>> apply(RestResponse<Void, List<Product>> restResponse) {
-                    if (restResponse.body() == null) {
-                        return Maybe.empty();
-                    } else {
-                        return Maybe.just(restResponse.body());
-                    }
-                }
-            });
+            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -2984,7 +2642,7 @@ public final class ArraysImpl implements Arrays {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;List&lt;Product&gt;&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     public ServiceFuture<List<Product>> getComplexValidAsync(ServiceCallback<List<Product>> serviceCallback) {
         return ServiceFuture.fromBody(getComplexValidAsync(), serviceCallback);
@@ -2993,29 +2651,20 @@ public final class ArraysImpl implements Arrays {
     /**
      * Get array of complex type with [{'integer': 1 'string': '2'}, {'integer': 3, 'string': '4'}, {'integer': 5, 'string': '6'}].
      *
-     * @return the {@link Single&lt;RestResponse&lt;Void, List&lt;Product&gt;&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<Void, List<Product>>> getComplexValidWithRestResponseAsync() {
+    public Single<BodyResponse<List<Product>>> getComplexValidWithRestResponseAsync() {
         return service.getComplexValid();
     }
 
     /**
      * Get array of complex type with [{'integer': 1 'string': '2'}, {'integer': 3, 'string': '4'}, {'integer': 5, 'string': '6'}].
      *
-     * @return the {@link Maybe&lt;List&lt;Product&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Maybe<List<Product>> getComplexValidAsync() {
         return getComplexValidWithRestResponseAsync()
-            .flatMapMaybe(new Function<RestResponse<Void, List<Product>>, Maybe<List<Product>>>() {
-                @Override
-                public Maybe<List<Product>> apply(RestResponse<Void, List<Product>> restResponse) {
-                    if (restResponse.body() == null) {
-                        return Maybe.empty();
-                    } else {
-                        return Maybe.just(restResponse.body());
-                    }
-                }
-            });
+            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -3036,7 +2685,7 @@ public final class ArraysImpl implements Arrays {
      * @param arrayBody the List&lt;Product&gt; value.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;Void&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     public ServiceFuture<Void> putComplexValidAsync(@NonNull List<Product> arrayBody, ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(putComplexValidAsync(arrayBody), serviceCallback);
@@ -3047,9 +2696,9 @@ public final class ArraysImpl implements Arrays {
      *
      * @param arrayBody the List&lt;Product&gt; value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<Void, Void>> putComplexValidWithRestResponseAsync(@NonNull List<Product> arrayBody) {
+    public Single<VoidResponse> putComplexValidWithRestResponseAsync(@NonNull List<Product> arrayBody) {
         if (arrayBody == null) {
             throw new IllegalArgumentException("Parameter arrayBody is required and cannot be null.");
         }
@@ -3062,7 +2711,7 @@ public final class ArraysImpl implements Arrays {
      *
      * @param arrayBody the List&lt;Product&gt; value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link Completable} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Completable putComplexValidAsync(@NonNull List<Product> arrayBody) {
         return putComplexValidWithRestResponseAsync(arrayBody)
@@ -3085,7 +2734,7 @@ public final class ArraysImpl implements Arrays {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;List&lt;List&lt;String&gt;&gt;&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     public ServiceFuture<List<List<String>>> getArrayNullAsync(ServiceCallback<List<List<String>>> serviceCallback) {
         return ServiceFuture.fromBody(getArrayNullAsync(), serviceCallback);
@@ -3094,29 +2743,20 @@ public final class ArraysImpl implements Arrays {
     /**
      * Get a null array.
      *
-     * @return the {@link Single&lt;RestResponse&lt;Void, List&lt;List&lt;String&gt;&gt;&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<Void, List<List<String>>>> getArrayNullWithRestResponseAsync() {
+    public Single<BodyResponse<List<List<String>>>> getArrayNullWithRestResponseAsync() {
         return service.getArrayNull();
     }
 
     /**
      * Get a null array.
      *
-     * @return the {@link Maybe&lt;List&lt;List&lt;String&gt;&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Maybe<List<List<String>>> getArrayNullAsync() {
         return getArrayNullWithRestResponseAsync()
-            .flatMapMaybe(new Function<RestResponse<Void, List<List<String>>>, Maybe<List<List<String>>>>() {
-                @Override
-                public Maybe<List<List<String>>> apply(RestResponse<Void, List<List<String>>> restResponse) {
-                    if (restResponse.body() == null) {
-                        return Maybe.empty();
-                    } else {
-                        return Maybe.just(restResponse.body());
-                    }
-                }
-            });
+            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -3135,7 +2775,7 @@ public final class ArraysImpl implements Arrays {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;List&lt;List&lt;String&gt;&gt;&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     public ServiceFuture<List<List<String>>> getArrayEmptyAsync(ServiceCallback<List<List<String>>> serviceCallback) {
         return ServiceFuture.fromBody(getArrayEmptyAsync(), serviceCallback);
@@ -3144,29 +2784,20 @@ public final class ArraysImpl implements Arrays {
     /**
      * Get an empty array [].
      *
-     * @return the {@link Single&lt;RestResponse&lt;Void, List&lt;List&lt;String&gt;&gt;&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<Void, List<List<String>>>> getArrayEmptyWithRestResponseAsync() {
+    public Single<BodyResponse<List<List<String>>>> getArrayEmptyWithRestResponseAsync() {
         return service.getArrayEmpty();
     }
 
     /**
      * Get an empty array [].
      *
-     * @return the {@link Maybe&lt;List&lt;List&lt;String&gt;&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Maybe<List<List<String>>> getArrayEmptyAsync() {
         return getArrayEmptyWithRestResponseAsync()
-            .flatMapMaybe(new Function<RestResponse<Void, List<List<String>>>, Maybe<List<List<String>>>>() {
-                @Override
-                public Maybe<List<List<String>>> apply(RestResponse<Void, List<List<String>>> restResponse) {
-                    if (restResponse.body() == null) {
-                        return Maybe.empty();
-                    } else {
-                        return Maybe.just(restResponse.body());
-                    }
-                }
-            });
+            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -3185,7 +2816,7 @@ public final class ArraysImpl implements Arrays {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;List&lt;List&lt;String&gt;&gt;&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     public ServiceFuture<List<List<String>>> getArrayItemNullAsync(ServiceCallback<List<List<String>>> serviceCallback) {
         return ServiceFuture.fromBody(getArrayItemNullAsync(), serviceCallback);
@@ -3194,29 +2825,20 @@ public final class ArraysImpl implements Arrays {
     /**
      * Get an array of array of strings [['1', '2', '3'], null, ['7', '8', '9']].
      *
-     * @return the {@link Single&lt;RestResponse&lt;Void, List&lt;List&lt;String&gt;&gt;&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<Void, List<List<String>>>> getArrayItemNullWithRestResponseAsync() {
+    public Single<BodyResponse<List<List<String>>>> getArrayItemNullWithRestResponseAsync() {
         return service.getArrayItemNull();
     }
 
     /**
      * Get an array of array of strings [['1', '2', '3'], null, ['7', '8', '9']].
      *
-     * @return the {@link Maybe&lt;List&lt;List&lt;String&gt;&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Maybe<List<List<String>>> getArrayItemNullAsync() {
         return getArrayItemNullWithRestResponseAsync()
-            .flatMapMaybe(new Function<RestResponse<Void, List<List<String>>>, Maybe<List<List<String>>>>() {
-                @Override
-                public Maybe<List<List<String>>> apply(RestResponse<Void, List<List<String>>> restResponse) {
-                    if (restResponse.body() == null) {
-                        return Maybe.empty();
-                    } else {
-                        return Maybe.just(restResponse.body());
-                    }
-                }
-            });
+            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -3235,7 +2857,7 @@ public final class ArraysImpl implements Arrays {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;List&lt;List&lt;String&gt;&gt;&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     public ServiceFuture<List<List<String>>> getArrayItemEmptyAsync(ServiceCallback<List<List<String>>> serviceCallback) {
         return ServiceFuture.fromBody(getArrayItemEmptyAsync(), serviceCallback);
@@ -3244,29 +2866,20 @@ public final class ArraysImpl implements Arrays {
     /**
      * Get an array of array of strings [['1', '2', '3'], [], ['7', '8', '9']].
      *
-     * @return the {@link Single&lt;RestResponse&lt;Void, List&lt;List&lt;String&gt;&gt;&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<Void, List<List<String>>>> getArrayItemEmptyWithRestResponseAsync() {
+    public Single<BodyResponse<List<List<String>>>> getArrayItemEmptyWithRestResponseAsync() {
         return service.getArrayItemEmpty();
     }
 
     /**
      * Get an array of array of strings [['1', '2', '3'], [], ['7', '8', '9']].
      *
-     * @return the {@link Maybe&lt;List&lt;List&lt;String&gt;&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Maybe<List<List<String>>> getArrayItemEmptyAsync() {
         return getArrayItemEmptyWithRestResponseAsync()
-            .flatMapMaybe(new Function<RestResponse<Void, List<List<String>>>, Maybe<List<List<String>>>>() {
-                @Override
-                public Maybe<List<List<String>>> apply(RestResponse<Void, List<List<String>>> restResponse) {
-                    if (restResponse.body() == null) {
-                        return Maybe.empty();
-                    } else {
-                        return Maybe.just(restResponse.body());
-                    }
-                }
-            });
+            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -3285,7 +2898,7 @@ public final class ArraysImpl implements Arrays {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;List&lt;List&lt;String&gt;&gt;&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     public ServiceFuture<List<List<String>>> getArrayValidAsync(ServiceCallback<List<List<String>>> serviceCallback) {
         return ServiceFuture.fromBody(getArrayValidAsync(), serviceCallback);
@@ -3294,29 +2907,20 @@ public final class ArraysImpl implements Arrays {
     /**
      * Get an array of array of strings [['1', '2', '3'], ['4', '5', '6'], ['7', '8', '9']].
      *
-     * @return the {@link Single&lt;RestResponse&lt;Void, List&lt;List&lt;String&gt;&gt;&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<Void, List<List<String>>>> getArrayValidWithRestResponseAsync() {
+    public Single<BodyResponse<List<List<String>>>> getArrayValidWithRestResponseAsync() {
         return service.getArrayValid();
     }
 
     /**
      * Get an array of array of strings [['1', '2', '3'], ['4', '5', '6'], ['7', '8', '9']].
      *
-     * @return the {@link Maybe&lt;List&lt;List&lt;String&gt;&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Maybe<List<List<String>>> getArrayValidAsync() {
         return getArrayValidWithRestResponseAsync()
-            .flatMapMaybe(new Function<RestResponse<Void, List<List<String>>>, Maybe<List<List<String>>>>() {
-                @Override
-                public Maybe<List<List<String>>> apply(RestResponse<Void, List<List<String>>> restResponse) {
-                    if (restResponse.body() == null) {
-                        return Maybe.empty();
-                    } else {
-                        return Maybe.just(restResponse.body());
-                    }
-                }
-            });
+            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -3337,7 +2941,7 @@ public final class ArraysImpl implements Arrays {
      * @param arrayBody the List&lt;List&lt;String&gt;&gt; value.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;Void&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     public ServiceFuture<Void> putArrayValidAsync(@NonNull List<List<String>> arrayBody, ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(putArrayValidAsync(arrayBody), serviceCallback);
@@ -3348,9 +2952,9 @@ public final class ArraysImpl implements Arrays {
      *
      * @param arrayBody the List&lt;List&lt;String&gt;&gt; value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<Void, Void>> putArrayValidWithRestResponseAsync(@NonNull List<List<String>> arrayBody) {
+    public Single<VoidResponse> putArrayValidWithRestResponseAsync(@NonNull List<List<String>> arrayBody) {
         if (arrayBody == null) {
             throw new IllegalArgumentException("Parameter arrayBody is required and cannot be null.");
         }
@@ -3363,7 +2967,7 @@ public final class ArraysImpl implements Arrays {
      *
      * @param arrayBody the List&lt;List&lt;String&gt;&gt; value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link Completable} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Completable putArrayValidAsync(@NonNull List<List<String>> arrayBody) {
         return putArrayValidWithRestResponseAsync(arrayBody)
@@ -3386,7 +2990,7 @@ public final class ArraysImpl implements Arrays {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;List&lt;Map&lt;String, String&gt;&gt;&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     public ServiceFuture<List<Map<String, String>>> getDictionaryNullAsync(ServiceCallback<List<Map<String, String>>> serviceCallback) {
         return ServiceFuture.fromBody(getDictionaryNullAsync(), serviceCallback);
@@ -3395,29 +2999,20 @@ public final class ArraysImpl implements Arrays {
     /**
      * Get an array of Dictionaries with value null.
      *
-     * @return the {@link Single&lt;RestResponse&lt;Void, List&lt;Map&lt;String, String&gt;&gt;&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<Void, List<Map<String, String>>>> getDictionaryNullWithRestResponseAsync() {
+    public Single<BodyResponse<List<Map<String, String>>>> getDictionaryNullWithRestResponseAsync() {
         return service.getDictionaryNull();
     }
 
     /**
      * Get an array of Dictionaries with value null.
      *
-     * @return the {@link Maybe&lt;List&lt;Map&lt;String, String&gt;&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Maybe<List<Map<String, String>>> getDictionaryNullAsync() {
         return getDictionaryNullWithRestResponseAsync()
-            .flatMapMaybe(new Function<RestResponse<Void, List<Map<String, String>>>, Maybe<List<Map<String, String>>>>() {
-                @Override
-                public Maybe<List<Map<String, String>>> apply(RestResponse<Void, List<Map<String, String>>> restResponse) {
-                    if (restResponse.body() == null) {
-                        return Maybe.empty();
-                    } else {
-                        return Maybe.just(restResponse.body());
-                    }
-                }
-            });
+            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -3436,7 +3031,7 @@ public final class ArraysImpl implements Arrays {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;List&lt;Map&lt;String, String&gt;&gt;&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     public ServiceFuture<List<Map<String, String>>> getDictionaryEmptyAsync(ServiceCallback<List<Map<String, String>>> serviceCallback) {
         return ServiceFuture.fromBody(getDictionaryEmptyAsync(), serviceCallback);
@@ -3445,29 +3040,20 @@ public final class ArraysImpl implements Arrays {
     /**
      * Get an array of Dictionaries of type &lt;string, string&gt; with value [].
      *
-     * @return the {@link Single&lt;RestResponse&lt;Void, List&lt;Map&lt;String, String&gt;&gt;&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<Void, List<Map<String, String>>>> getDictionaryEmptyWithRestResponseAsync() {
+    public Single<BodyResponse<List<Map<String, String>>>> getDictionaryEmptyWithRestResponseAsync() {
         return service.getDictionaryEmpty();
     }
 
     /**
      * Get an array of Dictionaries of type &lt;string, string&gt; with value [].
      *
-     * @return the {@link Maybe&lt;List&lt;Map&lt;String, String&gt;&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Maybe<List<Map<String, String>>> getDictionaryEmptyAsync() {
         return getDictionaryEmptyWithRestResponseAsync()
-            .flatMapMaybe(new Function<RestResponse<Void, List<Map<String, String>>>, Maybe<List<Map<String, String>>>>() {
-                @Override
-                public Maybe<List<Map<String, String>>> apply(RestResponse<Void, List<Map<String, String>>> restResponse) {
-                    if (restResponse.body() == null) {
-                        return Maybe.empty();
-                    } else {
-                        return Maybe.just(restResponse.body());
-                    }
-                }
-            });
+            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -3486,7 +3072,7 @@ public final class ArraysImpl implements Arrays {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;List&lt;Map&lt;String, String&gt;&gt;&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     public ServiceFuture<List<Map<String, String>>> getDictionaryItemNullAsync(ServiceCallback<List<Map<String, String>>> serviceCallback) {
         return ServiceFuture.fromBody(getDictionaryItemNullAsync(), serviceCallback);
@@ -3495,29 +3081,20 @@ public final class ArraysImpl implements Arrays {
     /**
      * Get an array of Dictionaries of type &lt;string, string&gt; with value [{'1': 'one', '2': 'two', '3': 'three'}, null, {'7': 'seven', '8': 'eight', '9': 'nine'}].
      *
-     * @return the {@link Single&lt;RestResponse&lt;Void, List&lt;Map&lt;String, String&gt;&gt;&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<Void, List<Map<String, String>>>> getDictionaryItemNullWithRestResponseAsync() {
+    public Single<BodyResponse<List<Map<String, String>>>> getDictionaryItemNullWithRestResponseAsync() {
         return service.getDictionaryItemNull();
     }
 
     /**
      * Get an array of Dictionaries of type &lt;string, string&gt; with value [{'1': 'one', '2': 'two', '3': 'three'}, null, {'7': 'seven', '8': 'eight', '9': 'nine'}].
      *
-     * @return the {@link Maybe&lt;List&lt;Map&lt;String, String&gt;&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Maybe<List<Map<String, String>>> getDictionaryItemNullAsync() {
         return getDictionaryItemNullWithRestResponseAsync()
-            .flatMapMaybe(new Function<RestResponse<Void, List<Map<String, String>>>, Maybe<List<Map<String, String>>>>() {
-                @Override
-                public Maybe<List<Map<String, String>>> apply(RestResponse<Void, List<Map<String, String>>> restResponse) {
-                    if (restResponse.body() == null) {
-                        return Maybe.empty();
-                    } else {
-                        return Maybe.just(restResponse.body());
-                    }
-                }
-            });
+            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -3536,7 +3113,7 @@ public final class ArraysImpl implements Arrays {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;List&lt;Map&lt;String, String&gt;&gt;&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     public ServiceFuture<List<Map<String, String>>> getDictionaryItemEmptyAsync(ServiceCallback<List<Map<String, String>>> serviceCallback) {
         return ServiceFuture.fromBody(getDictionaryItemEmptyAsync(), serviceCallback);
@@ -3545,29 +3122,20 @@ public final class ArraysImpl implements Arrays {
     /**
      * Get an array of Dictionaries of type &lt;string, string&gt; with value [{'1': 'one', '2': 'two', '3': 'three'}, {}, {'7': 'seven', '8': 'eight', '9': 'nine'}].
      *
-     * @return the {@link Single&lt;RestResponse&lt;Void, List&lt;Map&lt;String, String&gt;&gt;&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<Void, List<Map<String, String>>>> getDictionaryItemEmptyWithRestResponseAsync() {
+    public Single<BodyResponse<List<Map<String, String>>>> getDictionaryItemEmptyWithRestResponseAsync() {
         return service.getDictionaryItemEmpty();
     }
 
     /**
      * Get an array of Dictionaries of type &lt;string, string&gt; with value [{'1': 'one', '2': 'two', '3': 'three'}, {}, {'7': 'seven', '8': 'eight', '9': 'nine'}].
      *
-     * @return the {@link Maybe&lt;List&lt;Map&lt;String, String&gt;&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Maybe<List<Map<String, String>>> getDictionaryItemEmptyAsync() {
         return getDictionaryItemEmptyWithRestResponseAsync()
-            .flatMapMaybe(new Function<RestResponse<Void, List<Map<String, String>>>, Maybe<List<Map<String, String>>>>() {
-                @Override
-                public Maybe<List<Map<String, String>>> apply(RestResponse<Void, List<Map<String, String>>> restResponse) {
-                    if (restResponse.body() == null) {
-                        return Maybe.empty();
-                    } else {
-                        return Maybe.just(restResponse.body());
-                    }
-                }
-            });
+            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -3586,7 +3154,7 @@ public final class ArraysImpl implements Arrays {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;List&lt;Map&lt;String, String&gt;&gt;&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     public ServiceFuture<List<Map<String, String>>> getDictionaryValidAsync(ServiceCallback<List<Map<String, String>>> serviceCallback) {
         return ServiceFuture.fromBody(getDictionaryValidAsync(), serviceCallback);
@@ -3595,29 +3163,20 @@ public final class ArraysImpl implements Arrays {
     /**
      * Get an array of Dictionaries of type &lt;string, string&gt; with value [{'1': 'one', '2': 'two', '3': 'three'}, {'4': 'four', '5': 'five', '6': 'six'}, {'7': 'seven', '8': 'eight', '9': 'nine'}].
      *
-     * @return the {@link Single&lt;RestResponse&lt;Void, List&lt;Map&lt;String, String&gt;&gt;&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<Void, List<Map<String, String>>>> getDictionaryValidWithRestResponseAsync() {
+    public Single<BodyResponse<List<Map<String, String>>>> getDictionaryValidWithRestResponseAsync() {
         return service.getDictionaryValid();
     }
 
     /**
      * Get an array of Dictionaries of type &lt;string, string&gt; with value [{'1': 'one', '2': 'two', '3': 'three'}, {'4': 'four', '5': 'five', '6': 'six'}, {'7': 'seven', '8': 'eight', '9': 'nine'}].
      *
-     * @return the {@link Maybe&lt;List&lt;Map&lt;String, String&gt;&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Maybe<List<Map<String, String>>> getDictionaryValidAsync() {
         return getDictionaryValidWithRestResponseAsync()
-            .flatMapMaybe(new Function<RestResponse<Void, List<Map<String, String>>>, Maybe<List<Map<String, String>>>>() {
-                @Override
-                public Maybe<List<Map<String, String>>> apply(RestResponse<Void, List<Map<String, String>>> restResponse) {
-                    if (restResponse.body() == null) {
-                        return Maybe.empty();
-                    } else {
-                        return Maybe.just(restResponse.body());
-                    }
-                }
-            });
+            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -3638,7 +3197,7 @@ public final class ArraysImpl implements Arrays {
      * @param arrayBody the List&lt;Map&lt;String, String&gt;&gt; value.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;Void&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     public ServiceFuture<Void> putDictionaryValidAsync(@NonNull List<Map<String, String>> arrayBody, ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(putDictionaryValidAsync(arrayBody), serviceCallback);
@@ -3649,9 +3208,9 @@ public final class ArraysImpl implements Arrays {
      *
      * @param arrayBody the List&lt;Map&lt;String, String&gt;&gt; value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<Void, Void>> putDictionaryValidWithRestResponseAsync(@NonNull List<Map<String, String>> arrayBody) {
+    public Single<VoidResponse> putDictionaryValidWithRestResponseAsync(@NonNull List<Map<String, String>> arrayBody) {
         if (arrayBody == null) {
             throw new IllegalArgumentException("Parameter arrayBody is required and cannot be null.");
         }
@@ -3664,7 +3223,7 @@ public final class ArraysImpl implements Arrays {
      *
      * @param arrayBody the List&lt;Map&lt;String, String&gt;&gt; value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link Completable} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Completable putDictionaryValidAsync(@NonNull List<Map<String, String>> arrayBody) {
         return putDictionaryValidWithRestResponseAsync(arrayBody)

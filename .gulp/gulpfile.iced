@@ -24,6 +24,7 @@ task 'init', "" ,(done)->
 task 'test', "", [], (done) ->
   await execute "dotnet test test/autorest.java.tests/autorest.java.tests.csproj", defer code, stderr, stdout
   await execute "mvn test", defer code, stderr, stdout
+  await execute "mvn javadoc:javadoc", defer code, stderr, stdout
   done();
 
 # CI job

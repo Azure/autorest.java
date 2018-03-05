@@ -33,7 +33,9 @@ namespace AutoRest.Java.Model
         /// <param name="isLongRunningOperation">Whether or not this method is a long running operation.</param>
         /// <param name="returnValueClientType">The return value's type as it is returned from the client.</param>
         /// <param name="autoRestMethod">The AutoRestMethod that this RestAPIMethod was created from.</param>
-        public RestAPIMethod(string requestContentType, IType returnType, bool isPagingNextOperation, string httpMethod, string urlPath, IEnumerable<HttpStatusCode> responseExpectedStatusCodes, ClassType unexpectedResponseExceptionType, string name, IEnumerable<RestAPIParameter> parameters, bool isPagingOperation, string description, bool simulateAsPagingOperation, bool isLongRunningOperation, IType returnValueWireType, AutoRestMethod autoRestMethod)
+        /// <param name="isResumable">Whether or not this method is resumable.</param>
+        public RestAPIMethod(string requestContentType, IType returnType, bool isPagingNextOperation, string httpMethod, string urlPath, IEnumerable<HttpStatusCode> responseExpectedStatusCodes, ClassType unexpectedResponseExceptionType, string name, IEnumerable<RestAPIParameter> parameters, bool isPagingOperation, string description, bool simulateAsPagingOperation, bool isLongRunningOperation, IType returnValueWireType, AutoRestMethod autoRestMethod,
+            bool isResumable)
         {
             RequestContentType = requestContentType;
             ReturnType = returnType;
@@ -50,6 +52,7 @@ namespace AutoRest.Java.Model
             IsLongRunningOperation = isLongRunningOperation;
             ReturnValueWireType = returnValueWireType;
             AutoRestMethod = autoRestMethod;
+            IsResumable = isResumable;
         }
 
         /// <summary>
@@ -128,33 +131,49 @@ namespace AutoRest.Java.Model
         public AutoRestMethod AutoRestMethod { get; }
 
         /// <summary>
+        /// Get whether or not this method resumes polling of an LRO.
+        /// </summary>
+        public bool IsResumable { get; }
+
+        /// <summary>
         /// Add this property's imports to the provided ISet of imports.
         /// </summary>
         /// <param name="imports">The set of imports to add to.</param>
         /// <param name="includeImplementationImports">Whether or not to include imports that are only necessary for method implementations.</param>
         public void AddImportsTo(ISet<string> imports, bool includeImplementationImports, JavaSettings settings)
         {
-            imports.Add($"com.microsoft.rest.v2.annotations.{HttpMethod.ToUpperInvariant()}");
-            
-            imports.Add("com.microsoft.rest.v2.annotations.ExpectedResponses");
-
-            if (ReturnValueWireType != null)
-            {
-                imports.Add("com.microsoft.rest.v2.annotations.ReturnValueWireType");
-                ReturnValueWireType.AddImportsTo(imports, includeImplementationImports);
-            }
-
             if (UnexpectedResponseExceptionType != null)
             {
-                imports.Add("com.microsoft.rest.v2.annotations.UnexpectedResponseExceptionType");
+                if (includeImplementationImports)
+                {
+                    imports.Add("com.microsoft.rest.v2.annotations.UnexpectedResponseExceptionType");
+                }
+
                 UnexpectedResponseExceptionType.AddImportsTo(imports, includeImplementationImports);
             }
 
-            ReturnType.AddImportsTo(imports, includeImplementationImports);
-
-            foreach (RestAPIParameter parameter in Parameters)
+            if (includeImplementationImports)
             {
-                parameter.AddImportsTo(imports, includeImplementationImports, settings);
+                if (IsResumable)
+                {
+                    imports.Add("com.microsoft.rest.v2.annotations.ResumeOperation");
+                }
+                imports.Add($"com.microsoft.rest.v2.annotations.{HttpMethod.ToUpperInvariant()}");
+
+                imports.Add("com.microsoft.rest.v2.annotations.ExpectedResponses");
+
+                if (ReturnValueWireType != null)
+                {
+                    imports.Add("com.microsoft.rest.v2.annotations.ReturnValueWireType");
+                    ReturnValueWireType.AddImportsTo(imports, includeImplementationImports);
+                }
+
+                ReturnType.AddImportsTo(imports, includeImplementationImports);
+
+                foreach (RestAPIParameter parameter in Parameters)
+                {
+                    parameter.AddImportsTo(imports, includeImplementationImports, settings);
+                }
             }
         }
     }

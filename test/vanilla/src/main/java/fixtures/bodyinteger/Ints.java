@@ -10,9 +10,11 @@
 
 package fixtures.bodyinteger;
 
-import com.microsoft.rest.v2.RestResponse;
+import com.microsoft.rest.v2.BodyResponse;
 import com.microsoft.rest.v2.ServiceCallback;
 import com.microsoft.rest.v2.ServiceFuture;
+import com.microsoft.rest.v2.VoidResponse;
+import fixtures.bodyinteger.models.ErrorException;
 import io.reactivex.Completable;
 import io.reactivex.Maybe;
 import io.reactivex.Single;
@@ -38,21 +40,21 @@ public interface Ints {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;Integer&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     ServiceFuture<Integer> getNullAsync(ServiceCallback<Integer> serviceCallback);
 
     /**
      * Get null Int value.
      *
-     * @return the {@link Single&lt;RestResponse&lt;Void, Integer&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, Integer>> getNullWithRestResponseAsync();
+    Single<BodyResponse<Integer>> getNullWithRestResponseAsync();
 
     /**
      * Get null Int value.
      *
-     * @return the {@link Maybe&lt;Integer&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     Maybe<Integer> getNullAsync();
 
@@ -70,21 +72,21 @@ public interface Ints {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;Integer&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     ServiceFuture<Integer> getInvalidAsync(ServiceCallback<Integer> serviceCallback);
 
     /**
      * Get invalid Int value.
      *
-     * @return the {@link Single&lt;RestResponse&lt;Void, Integer&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, Integer>> getInvalidWithRestResponseAsync();
+    Single<BodyResponse<Integer>> getInvalidWithRestResponseAsync();
 
     /**
      * Get invalid Int value.
      *
-     * @return the {@link Maybe&lt;Integer&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     Maybe<Integer> getInvalidAsync();
 
@@ -102,21 +104,21 @@ public interface Ints {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;Integer&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     ServiceFuture<Integer> getOverflowInt32Async(ServiceCallback<Integer> serviceCallback);
 
     /**
      * Get overflow Int32 value.
      *
-     * @return the {@link Single&lt;RestResponse&lt;Void, Integer&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, Integer>> getOverflowInt32WithRestResponseAsync();
+    Single<BodyResponse<Integer>> getOverflowInt32WithRestResponseAsync();
 
     /**
      * Get overflow Int32 value.
      *
-     * @return the {@link Maybe&lt;Integer&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     Maybe<Integer> getOverflowInt32Async();
 
@@ -134,21 +136,21 @@ public interface Ints {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;Integer&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     ServiceFuture<Integer> getUnderflowInt32Async(ServiceCallback<Integer> serviceCallback);
 
     /**
      * Get underflow Int32 value.
      *
-     * @return the {@link Single&lt;RestResponse&lt;Void, Integer&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, Integer>> getUnderflowInt32WithRestResponseAsync();
+    Single<BodyResponse<Integer>> getUnderflowInt32WithRestResponseAsync();
 
     /**
      * Get underflow Int32 value.
      *
-     * @return the {@link Maybe&lt;Integer&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     Maybe<Integer> getUnderflowInt32Async();
 
@@ -166,21 +168,21 @@ public interface Ints {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;Long&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     ServiceFuture<Long> getOverflowInt64Async(ServiceCallback<Long> serviceCallback);
 
     /**
      * Get overflow Int64 value.
      *
-     * @return the {@link Single&lt;RestResponse&lt;Void, Long&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, Long>> getOverflowInt64WithRestResponseAsync();
+    Single<BodyResponse<Long>> getOverflowInt64WithRestResponseAsync();
 
     /**
      * Get overflow Int64 value.
      *
-     * @return the {@link Maybe&lt;Long&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     Maybe<Long> getOverflowInt64Async();
 
@@ -198,21 +200,21 @@ public interface Ints {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;Long&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     ServiceFuture<Long> getUnderflowInt64Async(ServiceCallback<Long> serviceCallback);
 
     /**
      * Get underflow Int64 value.
      *
-     * @return the {@link Single&lt;RestResponse&lt;Void, Long&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, Long>> getUnderflowInt64WithRestResponseAsync();
+    Single<BodyResponse<Long>> getUnderflowInt64WithRestResponseAsync();
 
     /**
      * Get underflow Int64 value.
      *
-     * @return the {@link Maybe&lt;Long&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     Maybe<Long> getUnderflowInt64Async();
 
@@ -232,7 +234,7 @@ public interface Ints {
      * @param intBody the int value.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;Void&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     ServiceFuture<Void> putMax32Async(@NonNull int intBody, ServiceCallback<Void> serviceCallback);
 
@@ -241,16 +243,16 @@ public interface Ints {
      *
      * @param intBody the int value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, Void>> putMax32WithRestResponseAsync(@NonNull int intBody);
+    Single<VoidResponse> putMax32WithRestResponseAsync(@NonNull int intBody);
 
     /**
      * Put max int32 value.
      *
      * @param intBody the int value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link Completable} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     Completable putMax32Async(@NonNull int intBody);
 
@@ -270,7 +272,7 @@ public interface Ints {
      * @param intBody the long value.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;Void&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     ServiceFuture<Void> putMax64Async(@NonNull long intBody, ServiceCallback<Void> serviceCallback);
 
@@ -279,16 +281,16 @@ public interface Ints {
      *
      * @param intBody the long value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, Void>> putMax64WithRestResponseAsync(@NonNull long intBody);
+    Single<VoidResponse> putMax64WithRestResponseAsync(@NonNull long intBody);
 
     /**
      * Put max int64 value.
      *
      * @param intBody the long value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link Completable} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     Completable putMax64Async(@NonNull long intBody);
 
@@ -308,7 +310,7 @@ public interface Ints {
      * @param intBody the int value.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;Void&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     ServiceFuture<Void> putMin32Async(@NonNull int intBody, ServiceCallback<Void> serviceCallback);
 
@@ -317,16 +319,16 @@ public interface Ints {
      *
      * @param intBody the int value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, Void>> putMin32WithRestResponseAsync(@NonNull int intBody);
+    Single<VoidResponse> putMin32WithRestResponseAsync(@NonNull int intBody);
 
     /**
      * Put min int32 value.
      *
      * @param intBody the int value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link Completable} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     Completable putMin32Async(@NonNull int intBody);
 
@@ -346,7 +348,7 @@ public interface Ints {
      * @param intBody the long value.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;Void&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     ServiceFuture<Void> putMin64Async(@NonNull long intBody, ServiceCallback<Void> serviceCallback);
 
@@ -355,16 +357,16 @@ public interface Ints {
      *
      * @param intBody the long value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, Void>> putMin64WithRestResponseAsync(@NonNull long intBody);
+    Single<VoidResponse> putMin64WithRestResponseAsync(@NonNull long intBody);
 
     /**
      * Put min int64 value.
      *
      * @param intBody the long value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link Completable} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     Completable putMin64Async(@NonNull long intBody);
 
@@ -382,21 +384,21 @@ public interface Ints {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;DateTime&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     ServiceFuture<DateTime> getUnixTimeAsync(ServiceCallback<DateTime> serviceCallback);
 
     /**
      * Get datetime encoded as Unix time value.
      *
-     * @return the {@link Single&lt;RestResponse&lt;Void, DateTime&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, DateTime>> getUnixTimeWithRestResponseAsync();
+    Single<BodyResponse<DateTime>> getUnixTimeWithRestResponseAsync();
 
     /**
      * Get datetime encoded as Unix time value.
      *
-     * @return the {@link Maybe&lt;DateTime&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     Maybe<DateTime> getUnixTimeAsync();
 
@@ -416,7 +418,7 @@ public interface Ints {
      * @param intBody the DateTime value.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;Void&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     ServiceFuture<Void> putUnixTimeDateAsync(@NonNull DateTime intBody, ServiceCallback<Void> serviceCallback);
 
@@ -425,16 +427,16 @@ public interface Ints {
      *
      * @param intBody the DateTime value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, Void>> putUnixTimeDateWithRestResponseAsync(@NonNull DateTime intBody);
+    Single<VoidResponse> putUnixTimeDateWithRestResponseAsync(@NonNull DateTime intBody);
 
     /**
      * Put datetime encoded as Unix time.
      *
      * @param intBody the DateTime value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link Completable} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     Completable putUnixTimeDateAsync(@NonNull DateTime intBody);
 
@@ -452,21 +454,21 @@ public interface Ints {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;DateTime&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     ServiceFuture<DateTime> getInvalidUnixTimeAsync(ServiceCallback<DateTime> serviceCallback);
 
     /**
      * Get invalid Unix time value.
      *
-     * @return the {@link Single&lt;RestResponse&lt;Void, DateTime&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, DateTime>> getInvalidUnixTimeWithRestResponseAsync();
+    Single<BodyResponse<DateTime>> getInvalidUnixTimeWithRestResponseAsync();
 
     /**
      * Get invalid Unix time value.
      *
-     * @return the {@link Maybe&lt;DateTime&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     Maybe<DateTime> getInvalidUnixTimeAsync();
 
@@ -484,21 +486,21 @@ public interface Ints {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;DateTime&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     ServiceFuture<DateTime> getNullUnixTimeAsync(ServiceCallback<DateTime> serviceCallback);
 
     /**
      * Get null Unix time value.
      *
-     * @return the {@link Single&lt;RestResponse&lt;Void, DateTime&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, DateTime>> getNullUnixTimeWithRestResponseAsync();
+    Single<BodyResponse<DateTime>> getNullUnixTimeWithRestResponseAsync();
 
     /**
      * Get null Unix time value.
      *
-     * @return the {@link Maybe&lt;DateTime&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     Maybe<DateTime> getNullUnixTimeAsync();
 }

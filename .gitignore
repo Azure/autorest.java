@@ -291,6 +291,7 @@ __pycache__/
 package-lock.json
 *.tgz
 *.class
+target/
 test/*/target/
 .settings/
 .project

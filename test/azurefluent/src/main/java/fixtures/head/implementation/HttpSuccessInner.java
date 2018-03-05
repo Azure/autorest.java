@@ -12,7 +12,7 @@ package fixtures.head.implementation;
 
 import com.microsoft.azure.v2.AzureProxy;
 import com.microsoft.azure.v2.CloudException;
-import com.microsoft.rest.v2.RestResponse;
+import com.microsoft.rest.v2.BodyResponse;
 import com.microsoft.rest.v2.ServiceCallback;
 import com.microsoft.rest.v2.ServiceFuture;
 import com.microsoft.rest.v2.annotations.ExpectedResponses;
@@ -22,7 +22,6 @@ import com.microsoft.rest.v2.annotations.Host;
 import com.microsoft.rest.v2.annotations.UnexpectedResponseExceptionType;
 import io.reactivex.Maybe;
 import io.reactivex.Single;
-import io.reactivex.functions.Function;
 
 /**
  * An instance of this class provides access to all the operations defined in
@@ -58,17 +57,17 @@ public final class HttpSuccessInner {
         @HEAD("http/success/200")
         @ExpectedResponses({200, 404})
         @UnexpectedResponseExceptionType(CloudException.class)
-        Single<RestResponse<Void, Boolean>> head200(@HeaderParam("accept-language") String acceptLanguage);
+        Single<BodyResponse<Boolean>> head200(@HeaderParam("accept-language") String acceptLanguage);
 
         @HEAD("http/success/204")
         @ExpectedResponses({204, 404})
         @UnexpectedResponseExceptionType(CloudException.class)
-        Single<RestResponse<Void, Boolean>> head204(@HeaderParam("accept-language") String acceptLanguage);
+        Single<BodyResponse<Boolean>> head204(@HeaderParam("accept-language") String acceptLanguage);
 
         @HEAD("http/success/404")
         @ExpectedResponses({204, 404})
         @UnexpectedResponseExceptionType(CloudException.class)
-        Single<RestResponse<Void, Boolean>> head404(@HeaderParam("accept-language") String acceptLanguage);
+        Single<BodyResponse<Boolean>> head404(@HeaderParam("accept-language") String acceptLanguage);
     }
 
     /**
@@ -87,7 +86,7 @@ public final class HttpSuccessInner {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;Boolean&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     public ServiceFuture<Boolean> head200Async(ServiceCallback<Boolean> serviceCallback) {
         return ServiceFuture.fromBody(head200Async(), serviceCallback);
@@ -96,29 +95,20 @@ public final class HttpSuccessInner {
     /**
      * Return 200 status code if successful.
      *
-     * @return the {@link Single&lt;RestResponse&lt;Void, Boolean&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<Void, Boolean>> head200WithRestResponseAsync() {
+    public Single<BodyResponse<Boolean>> head200WithRestResponseAsync() {
         return service.head200(this.client.acceptLanguage());
     }
 
     /**
      * Return 200 status code if successful.
      *
-     * @return the {@link Maybe&lt;Boolean&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Maybe<Boolean> head200Async() {
         return head200WithRestResponseAsync()
-            .flatMapMaybe(new Function<RestResponse<Void, Boolean>, Maybe<Boolean>>() {
-                @Override
-                public Maybe<Boolean> apply(RestResponse<Void, Boolean> restResponse) {
-                    if (restResponse.body() == null) {
-                        return Maybe.empty();
-                    } else {
-                        return Maybe.just(restResponse.body());
-                    }
-                }
-            });
+            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -137,7 +127,7 @@ public final class HttpSuccessInner {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;Boolean&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     public ServiceFuture<Boolean> head204Async(ServiceCallback<Boolean> serviceCallback) {
         return ServiceFuture.fromBody(head204Async(), serviceCallback);
@@ -146,29 +136,20 @@ public final class HttpSuccessInner {
     /**
      * Return 204 status code if successful.
      *
-     * @return the {@link Single&lt;RestResponse&lt;Void, Boolean&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<Void, Boolean>> head204WithRestResponseAsync() {
+    public Single<BodyResponse<Boolean>> head204WithRestResponseAsync() {
         return service.head204(this.client.acceptLanguage());
     }
 
     /**
      * Return 204 status code if successful.
      *
-     * @return the {@link Maybe&lt;Boolean&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Maybe<Boolean> head204Async() {
         return head204WithRestResponseAsync()
-            .flatMapMaybe(new Function<RestResponse<Void, Boolean>, Maybe<Boolean>>() {
-                @Override
-                public Maybe<Boolean> apply(RestResponse<Void, Boolean> restResponse) {
-                    if (restResponse.body() == null) {
-                        return Maybe.empty();
-                    } else {
-                        return Maybe.just(restResponse.body());
-                    }
-                }
-            });
+            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -187,7 +168,7 @@ public final class HttpSuccessInner {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;Boolean&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     public ServiceFuture<Boolean> head404Async(ServiceCallback<Boolean> serviceCallback) {
         return ServiceFuture.fromBody(head404Async(), serviceCallback);
@@ -196,28 +177,19 @@ public final class HttpSuccessInner {
     /**
      * Return 404 status code if successful.
      *
-     * @return the {@link Single&lt;RestResponse&lt;Void, Boolean&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<Void, Boolean>> head404WithRestResponseAsync() {
+    public Single<BodyResponse<Boolean>> head404WithRestResponseAsync() {
         return service.head404(this.client.acceptLanguage());
     }
 
     /**
      * Return 404 status code if successful.
      *
-     * @return the {@link Maybe&lt;Boolean&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Maybe<Boolean> head404Async() {
         return head404WithRestResponseAsync()
-            .flatMapMaybe(new Function<RestResponse<Void, Boolean>, Maybe<Boolean>>() {
-                @Override
-                public Maybe<Boolean> apply(RestResponse<Void, Boolean> restResponse) {
-                    if (restResponse.body() == null) {
-                        return Maybe.empty();
-                    } else {
-                        return Maybe.just(restResponse.body());
-                    }
-                }
-            });
+            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 }

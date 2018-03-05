@@ -10,7 +10,8 @@
 
 package fixtures.head;
 
-import com.microsoft.rest.v2.RestResponse;
+import com.microsoft.azure.v2.CloudException;
+import com.microsoft.rest.v2.BodyResponse;
 import com.microsoft.rest.v2.ServiceCallback;
 import com.microsoft.rest.v2.ServiceFuture;
 import io.reactivex.Maybe;
@@ -35,21 +36,21 @@ public interface HttpSuccess {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;Boolean&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     ServiceFuture<Boolean> head200Async(ServiceCallback<Boolean> serviceCallback);
 
     /**
      * Return 200 status code if successful.
      *
-     * @return the {@link Single&lt;RestResponse&lt;Void, Boolean&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, Boolean>> head200WithRestResponseAsync();
+    Single<BodyResponse<Boolean>> head200WithRestResponseAsync();
 
     /**
      * Return 200 status code if successful.
      *
-     * @return the {@link Maybe&lt;Boolean&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     Maybe<Boolean> head200Async();
 
@@ -67,21 +68,21 @@ public interface HttpSuccess {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;Boolean&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     ServiceFuture<Boolean> head204Async(ServiceCallback<Boolean> serviceCallback);
 
     /**
      * Return 204 status code if successful.
      *
-     * @return the {@link Single&lt;RestResponse&lt;Void, Boolean&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, Boolean>> head204WithRestResponseAsync();
+    Single<BodyResponse<Boolean>> head204WithRestResponseAsync();
 
     /**
      * Return 204 status code if successful.
      *
-     * @return the {@link Maybe&lt;Boolean&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     Maybe<Boolean> head204Async();
 
@@ -99,21 +100,21 @@ public interface HttpSuccess {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;Boolean&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     ServiceFuture<Boolean> head404Async(ServiceCallback<Boolean> serviceCallback);
 
     /**
      * Return 404 status code if successful.
      *
-     * @return the {@link Single&lt;RestResponse&lt;Void, Boolean&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, Boolean>> head404WithRestResponseAsync();
+    Single<BodyResponse<Boolean>> head404WithRestResponseAsync();
 
     /**
      * Return 404 status code if successful.
      *
-     * @return the {@link Maybe&lt;Boolean&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     Maybe<Boolean> head404Async();
 }

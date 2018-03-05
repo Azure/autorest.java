@@ -10,11 +10,12 @@
 
 package fixtures.bodystring.implementation;
 
+import com.microsoft.rest.v2.BodyResponse;
 import com.microsoft.rest.v2.RestProxy;
-import com.microsoft.rest.v2.RestResponse;
 import com.microsoft.rest.v2.ServiceCallback;
 import com.microsoft.rest.v2.ServiceFuture;
 import com.microsoft.rest.v2.Validator;
+import com.microsoft.rest.v2.VoidResponse;
 import com.microsoft.rest.v2.annotations.BodyParam;
 import com.microsoft.rest.v2.annotations.ExpectedResponses;
 import com.microsoft.rest.v2.annotations.GET;
@@ -29,7 +30,6 @@ import io.reactivex.Completable;
 import io.reactivex.Maybe;
 import io.reactivex.Single;
 import io.reactivex.annotations.NonNull;
-import io.reactivex.functions.Function;
 
 /**
  * An instance of this class provides access to all the operations defined in
@@ -65,32 +65,32 @@ public final class EnumsImpl implements Enums {
         @GET("string/enum/notExpandable")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<RestResponse<Void, Colors>> getNotExpandable();
+        Single<BodyResponse<Colors>> getNotExpandable();
 
         @PUT("string/enum/notExpandable")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<RestResponse<Void, Void>> putNotExpandable(@BodyParam("application/json; charset=utf-8") Colors stringBody);
+        Single<VoidResponse> putNotExpandable(@BodyParam("application/json; charset=utf-8") Colors stringBody);
 
         @GET("string/enum/Referenced")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<RestResponse<Void, Colors>> getReferenced();
+        Single<BodyResponse<Colors>> getReferenced();
 
         @PUT("string/enum/Referenced")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<RestResponse<Void, Void>> putReferenced(@BodyParam("application/json; charset=utf-8") Colors enumStringBody);
+        Single<VoidResponse> putReferenced(@BodyParam("application/json; charset=utf-8") Colors enumStringBody);
 
         @GET("string/enum/ReferencedConstant")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<RestResponse<Void, RefColorConstant>> getReferencedConstant();
+        Single<BodyResponse<RefColorConstant>> getReferencedConstant();
 
         @PUT("string/enum/ReferencedConstant")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<RestResponse<Void, Void>> putReferencedConstant(@BodyParam("application/json; charset=utf-8") RefColorConstant enumStringBody);
+        Single<VoidResponse> putReferencedConstant(@BodyParam("application/json; charset=utf-8") RefColorConstant enumStringBody);
     }
 
     /**
@@ -109,7 +109,7 @@ public final class EnumsImpl implements Enums {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;Colors&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     public ServiceFuture<Colors> getNotExpandableAsync(ServiceCallback<Colors> serviceCallback) {
         return ServiceFuture.fromBody(getNotExpandableAsync(), serviceCallback);
@@ -118,29 +118,20 @@ public final class EnumsImpl implements Enums {
     /**
      * Get enum value 'red color' from enumeration of 'red color', 'green-color', 'blue_color'.
      *
-     * @return the {@link Single&lt;RestResponse&lt;Void, Colors&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<Void, Colors>> getNotExpandableWithRestResponseAsync() {
+    public Single<BodyResponse<Colors>> getNotExpandableWithRestResponseAsync() {
         return service.getNotExpandable();
     }
 
     /**
      * Get enum value 'red color' from enumeration of 'red color', 'green-color', 'blue_color'.
      *
-     * @return the {@link Maybe&lt;Colors&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Maybe<Colors> getNotExpandableAsync() {
         return getNotExpandableWithRestResponseAsync()
-            .flatMapMaybe(new Function<RestResponse<Void, Colors>, Maybe<Colors>>() {
-                @Override
-                public Maybe<Colors> apply(RestResponse<Void, Colors> restResponse) {
-                    if (restResponse.body() == null) {
-                        return Maybe.empty();
-                    } else {
-                        return Maybe.just(restResponse.body());
-                    }
-                }
-            });
+            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -161,7 +152,7 @@ public final class EnumsImpl implements Enums {
      * @param stringBody Possible values include: 'red color', 'green-color', 'blue_color'.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;Void&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     public ServiceFuture<Void> putNotExpandableAsync(@NonNull Colors stringBody, ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(putNotExpandableAsync(stringBody), serviceCallback);
@@ -172,9 +163,9 @@ public final class EnumsImpl implements Enums {
      *
      * @param stringBody Possible values include: 'red color', 'green-color', 'blue_color'.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<Void, Void>> putNotExpandableWithRestResponseAsync(@NonNull Colors stringBody) {
+    public Single<VoidResponse> putNotExpandableWithRestResponseAsync(@NonNull Colors stringBody) {
         if (stringBody == null) {
             throw new IllegalArgumentException("Parameter stringBody is required and cannot be null.");
         }
@@ -186,7 +177,7 @@ public final class EnumsImpl implements Enums {
      *
      * @param stringBody Possible values include: 'red color', 'green-color', 'blue_color'.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link Completable} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Completable putNotExpandableAsync(@NonNull Colors stringBody) {
         return putNotExpandableWithRestResponseAsync(stringBody)
@@ -209,7 +200,7 @@ public final class EnumsImpl implements Enums {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;Colors&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     public ServiceFuture<Colors> getReferencedAsync(ServiceCallback<Colors> serviceCallback) {
         return ServiceFuture.fromBody(getReferencedAsync(), serviceCallback);
@@ -218,29 +209,20 @@ public final class EnumsImpl implements Enums {
     /**
      * Get enum value 'red color' from enumeration of 'red color', 'green-color', 'blue_color'.
      *
-     * @return the {@link Single&lt;RestResponse&lt;Void, Colors&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<Void, Colors>> getReferencedWithRestResponseAsync() {
+    public Single<BodyResponse<Colors>> getReferencedWithRestResponseAsync() {
         return service.getReferenced();
     }
 
     /**
      * Get enum value 'red color' from enumeration of 'red color', 'green-color', 'blue_color'.
      *
-     * @return the {@link Maybe&lt;Colors&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Maybe<Colors> getReferencedAsync() {
         return getReferencedWithRestResponseAsync()
-            .flatMapMaybe(new Function<RestResponse<Void, Colors>, Maybe<Colors>>() {
-                @Override
-                public Maybe<Colors> apply(RestResponse<Void, Colors> restResponse) {
-                    if (restResponse.body() == null) {
-                        return Maybe.empty();
-                    } else {
-                        return Maybe.just(restResponse.body());
-                    }
-                }
-            });
+            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -261,7 +243,7 @@ public final class EnumsImpl implements Enums {
      * @param enumStringBody Possible values include: 'red color', 'green-color', 'blue_color'.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;Void&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     public ServiceFuture<Void> putReferencedAsync(@NonNull Colors enumStringBody, ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(putReferencedAsync(enumStringBody), serviceCallback);
@@ -272,9 +254,9 @@ public final class EnumsImpl implements Enums {
      *
      * @param enumStringBody Possible values include: 'red color', 'green-color', 'blue_color'.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<Void, Void>> putReferencedWithRestResponseAsync(@NonNull Colors enumStringBody) {
+    public Single<VoidResponse> putReferencedWithRestResponseAsync(@NonNull Colors enumStringBody) {
         if (enumStringBody == null) {
             throw new IllegalArgumentException("Parameter enumStringBody is required and cannot be null.");
         }
@@ -286,7 +268,7 @@ public final class EnumsImpl implements Enums {
      *
      * @param enumStringBody Possible values include: 'red color', 'green-color', 'blue_color'.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link Completable} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Completable putReferencedAsync(@NonNull Colors enumStringBody) {
         return putReferencedWithRestResponseAsync(enumStringBody)
@@ -309,7 +291,7 @@ public final class EnumsImpl implements Enums {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;RefColorConstant&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     public ServiceFuture<RefColorConstant> getReferencedConstantAsync(ServiceCallback<RefColorConstant> serviceCallback) {
         return ServiceFuture.fromBody(getReferencedConstantAsync(), serviceCallback);
@@ -318,29 +300,20 @@ public final class EnumsImpl implements Enums {
     /**
      * Get value 'green-color' from the constant.
      *
-     * @return the {@link Single&lt;RestResponse&lt;Void, RefColorConstant&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<Void, RefColorConstant>> getReferencedConstantWithRestResponseAsync() {
+    public Single<BodyResponse<RefColorConstant>> getReferencedConstantWithRestResponseAsync() {
         return service.getReferencedConstant();
     }
 
     /**
      * Get value 'green-color' from the constant.
      *
-     * @return the {@link Maybe&lt;RefColorConstant&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Maybe<RefColorConstant> getReferencedConstantAsync() {
         return getReferencedConstantWithRestResponseAsync()
-            .flatMapMaybe(new Function<RestResponse<Void, RefColorConstant>, Maybe<RefColorConstant>>() {
-                @Override
-                public Maybe<RefColorConstant> apply(RestResponse<Void, RefColorConstant> restResponse) {
-                    if (restResponse.body() == null) {
-                        return Maybe.empty();
-                    } else {
-                        return Maybe.just(restResponse.body());
-                    }
-                }
-            });
+            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -361,7 +334,7 @@ public final class EnumsImpl implements Enums {
      * @param enumStringBody the RefColorConstant value.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;Void&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     public ServiceFuture<Void> putReferencedConstantAsync(@NonNull RefColorConstant enumStringBody, ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(putReferencedConstantAsync(enumStringBody), serviceCallback);
@@ -372,9 +345,9 @@ public final class EnumsImpl implements Enums {
      *
      * @param enumStringBody the RefColorConstant value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<Void, Void>> putReferencedConstantWithRestResponseAsync(@NonNull RefColorConstant enumStringBody) {
+    public Single<VoidResponse> putReferencedConstantWithRestResponseAsync(@NonNull RefColorConstant enumStringBody) {
         if (enumStringBody == null) {
             throw new IllegalArgumentException("Parameter enumStringBody is required and cannot be null.");
         }
@@ -387,7 +360,7 @@ public final class EnumsImpl implements Enums {
      *
      * @param enumStringBody the RefColorConstant value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link Completable} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Completable putReferencedConstantAsync(@NonNull RefColorConstant enumStringBody) {
         return putReferencedConstantWithRestResponseAsync(enumStringBody)

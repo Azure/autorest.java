@@ -10,9 +10,10 @@
 
 package fixtures.bodycomplex;
 
-import com.microsoft.rest.v2.RestResponse;
+import com.microsoft.rest.v2.BodyResponse;
 import com.microsoft.rest.v2.ServiceCallback;
 import com.microsoft.rest.v2.ServiceFuture;
+import com.microsoft.rest.v2.VoidResponse;
 import fixtures.bodycomplex.models.BooleanWrapper;
 import fixtures.bodycomplex.models.ByteWrapper;
 import fixtures.bodycomplex.models.Datetimerfc1123Wrapper;
@@ -20,6 +21,7 @@ import fixtures.bodycomplex.models.DatetimeWrapper;
 import fixtures.bodycomplex.models.DateWrapper;
 import fixtures.bodycomplex.models.DoubleWrapper;
 import fixtures.bodycomplex.models.DurationWrapper;
+import fixtures.bodycomplex.models.ErrorException;
 import fixtures.bodycomplex.models.FloatWrapper;
 import fixtures.bodycomplex.models.IntWrapper;
 import fixtures.bodycomplex.models.LongWrapper;
@@ -48,21 +50,21 @@ public interface Primitives {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;IntWrapper&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     ServiceFuture<IntWrapper> getIntAsync(ServiceCallback<IntWrapper> serviceCallback);
 
     /**
      * Get complex types with integer properties.
      *
-     * @return the {@link Single&lt;RestResponse&lt;Void, IntWrapper&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, IntWrapper>> getIntWithRestResponseAsync();
+    Single<BodyResponse<IntWrapper>> getIntWithRestResponseAsync();
 
     /**
      * Get complex types with integer properties.
      *
-     * @return the {@link Maybe&lt;IntWrapper&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     Maybe<IntWrapper> getIntAsync();
 
@@ -82,7 +84,7 @@ public interface Primitives {
      * @param complexBody Please put -1 and 2.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;Void&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     ServiceFuture<Void> putIntAsync(@NonNull IntWrapper complexBody, ServiceCallback<Void> serviceCallback);
 
@@ -91,16 +93,16 @@ public interface Primitives {
      *
      * @param complexBody Please put -1 and 2.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, Void>> putIntWithRestResponseAsync(@NonNull IntWrapper complexBody);
+    Single<VoidResponse> putIntWithRestResponseAsync(@NonNull IntWrapper complexBody);
 
     /**
      * Put complex types with integer properties.
      *
      * @param complexBody Please put -1 and 2.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link Completable} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     Completable putIntAsync(@NonNull IntWrapper complexBody);
 
@@ -118,21 +120,21 @@ public interface Primitives {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;LongWrapper&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     ServiceFuture<LongWrapper> getLongAsync(ServiceCallback<LongWrapper> serviceCallback);
 
     /**
      * Get complex types with long properties.
      *
-     * @return the {@link Single&lt;RestResponse&lt;Void, LongWrapper&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, LongWrapper>> getLongWithRestResponseAsync();
+    Single<BodyResponse<LongWrapper>> getLongWithRestResponseAsync();
 
     /**
      * Get complex types with long properties.
      *
-     * @return the {@link Maybe&lt;LongWrapper&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     Maybe<LongWrapper> getLongAsync();
 
@@ -152,7 +154,7 @@ public interface Primitives {
      * @param complexBody Please put 1099511627775 and -999511627788.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;Void&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     ServiceFuture<Void> putLongAsync(@NonNull LongWrapper complexBody, ServiceCallback<Void> serviceCallback);
 
@@ -161,16 +163,16 @@ public interface Primitives {
      *
      * @param complexBody Please put 1099511627775 and -999511627788.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, Void>> putLongWithRestResponseAsync(@NonNull LongWrapper complexBody);
+    Single<VoidResponse> putLongWithRestResponseAsync(@NonNull LongWrapper complexBody);
 
     /**
      * Put complex types with long properties.
      *
      * @param complexBody Please put 1099511627775 and -999511627788.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link Completable} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     Completable putLongAsync(@NonNull LongWrapper complexBody);
 
@@ -188,21 +190,21 @@ public interface Primitives {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;FloatWrapper&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     ServiceFuture<FloatWrapper> getFloatAsync(ServiceCallback<FloatWrapper> serviceCallback);
 
     /**
      * Get complex types with float properties.
      *
-     * @return the {@link Single&lt;RestResponse&lt;Void, FloatWrapper&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, FloatWrapper>> getFloatWithRestResponseAsync();
+    Single<BodyResponse<FloatWrapper>> getFloatWithRestResponseAsync();
 
     /**
      * Get complex types with float properties.
      *
-     * @return the {@link Maybe&lt;FloatWrapper&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     Maybe<FloatWrapper> getFloatAsync();
 
@@ -222,7 +224,7 @@ public interface Primitives {
      * @param complexBody Please put 1.05 and -0.003.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;Void&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     ServiceFuture<Void> putFloatAsync(@NonNull FloatWrapper complexBody, ServiceCallback<Void> serviceCallback);
 
@@ -231,16 +233,16 @@ public interface Primitives {
      *
      * @param complexBody Please put 1.05 and -0.003.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, Void>> putFloatWithRestResponseAsync(@NonNull FloatWrapper complexBody);
+    Single<VoidResponse> putFloatWithRestResponseAsync(@NonNull FloatWrapper complexBody);
 
     /**
      * Put complex types with float properties.
      *
      * @param complexBody Please put 1.05 and -0.003.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link Completable} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     Completable putFloatAsync(@NonNull FloatWrapper complexBody);
 
@@ -258,21 +260,21 @@ public interface Primitives {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;DoubleWrapper&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     ServiceFuture<DoubleWrapper> getDoubleAsync(ServiceCallback<DoubleWrapper> serviceCallback);
 
     /**
      * Get complex types with double properties.
      *
-     * @return the {@link Single&lt;RestResponse&lt;Void, DoubleWrapper&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, DoubleWrapper>> getDoubleWithRestResponseAsync();
+    Single<BodyResponse<DoubleWrapper>> getDoubleWithRestResponseAsync();
 
     /**
      * Get complex types with double properties.
      *
-     * @return the {@link Maybe&lt;DoubleWrapper&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     Maybe<DoubleWrapper> getDoubleAsync();
 
@@ -292,7 +294,7 @@ public interface Primitives {
      * @param complexBody Please put 3e-100 and -0.000000000000000000000000000000000000000000000000000000005.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;Void&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     ServiceFuture<Void> putDoubleAsync(@NonNull DoubleWrapper complexBody, ServiceCallback<Void> serviceCallback);
 
@@ -301,16 +303,16 @@ public interface Primitives {
      *
      * @param complexBody Please put 3e-100 and -0.000000000000000000000000000000000000000000000000000000005.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, Void>> putDoubleWithRestResponseAsync(@NonNull DoubleWrapper complexBody);
+    Single<VoidResponse> putDoubleWithRestResponseAsync(@NonNull DoubleWrapper complexBody);
 
     /**
      * Put complex types with double properties.
      *
      * @param complexBody Please put 3e-100 and -0.000000000000000000000000000000000000000000000000000000005.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link Completable} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     Completable putDoubleAsync(@NonNull DoubleWrapper complexBody);
 
@@ -328,21 +330,21 @@ public interface Primitives {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;BooleanWrapper&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     ServiceFuture<BooleanWrapper> getBoolAsync(ServiceCallback<BooleanWrapper> serviceCallback);
 
     /**
      * Get complex types with bool properties.
      *
-     * @return the {@link Single&lt;RestResponse&lt;Void, BooleanWrapper&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, BooleanWrapper>> getBoolWithRestResponseAsync();
+    Single<BodyResponse<BooleanWrapper>> getBoolWithRestResponseAsync();
 
     /**
      * Get complex types with bool properties.
      *
-     * @return the {@link Maybe&lt;BooleanWrapper&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     Maybe<BooleanWrapper> getBoolAsync();
 
@@ -362,7 +364,7 @@ public interface Primitives {
      * @param complexBody Please put true and false.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;Void&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     ServiceFuture<Void> putBoolAsync(@NonNull BooleanWrapper complexBody, ServiceCallback<Void> serviceCallback);
 
@@ -371,16 +373,16 @@ public interface Primitives {
      *
      * @param complexBody Please put true and false.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, Void>> putBoolWithRestResponseAsync(@NonNull BooleanWrapper complexBody);
+    Single<VoidResponse> putBoolWithRestResponseAsync(@NonNull BooleanWrapper complexBody);
 
     /**
      * Put complex types with bool properties.
      *
      * @param complexBody Please put true and false.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link Completable} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     Completable putBoolAsync(@NonNull BooleanWrapper complexBody);
 
@@ -398,21 +400,21 @@ public interface Primitives {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;StringWrapper&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     ServiceFuture<StringWrapper> getStringAsync(ServiceCallback<StringWrapper> serviceCallback);
 
     /**
      * Get complex types with string properties.
      *
-     * @return the {@link Single&lt;RestResponse&lt;Void, StringWrapper&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, StringWrapper>> getStringWithRestResponseAsync();
+    Single<BodyResponse<StringWrapper>> getStringWithRestResponseAsync();
 
     /**
      * Get complex types with string properties.
      *
-     * @return the {@link Maybe&lt;StringWrapper&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     Maybe<StringWrapper> getStringAsync();
 
@@ -432,7 +434,7 @@ public interface Primitives {
      * @param complexBody Please put 'goodrequest', '', and null.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;Void&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     ServiceFuture<Void> putStringAsync(@NonNull StringWrapper complexBody, ServiceCallback<Void> serviceCallback);
 
@@ -441,16 +443,16 @@ public interface Primitives {
      *
      * @param complexBody Please put 'goodrequest', '', and null.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, Void>> putStringWithRestResponseAsync(@NonNull StringWrapper complexBody);
+    Single<VoidResponse> putStringWithRestResponseAsync(@NonNull StringWrapper complexBody);
 
     /**
      * Put complex types with string properties.
      *
      * @param complexBody Please put 'goodrequest', '', and null.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link Completable} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     Completable putStringAsync(@NonNull StringWrapper complexBody);
 
@@ -468,21 +470,21 @@ public interface Primitives {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;DateWrapper&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     ServiceFuture<DateWrapper> getDateAsync(ServiceCallback<DateWrapper> serviceCallback);
 
     /**
      * Get complex types with date properties.
      *
-     * @return the {@link Single&lt;RestResponse&lt;Void, DateWrapper&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, DateWrapper>> getDateWithRestResponseAsync();
+    Single<BodyResponse<DateWrapper>> getDateWithRestResponseAsync();
 
     /**
      * Get complex types with date properties.
      *
-     * @return the {@link Maybe&lt;DateWrapper&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     Maybe<DateWrapper> getDateAsync();
 
@@ -502,7 +504,7 @@ public interface Primitives {
      * @param complexBody Please put '0001-01-01' and '2016-02-29'.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;Void&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     ServiceFuture<Void> putDateAsync(@NonNull DateWrapper complexBody, ServiceCallback<Void> serviceCallback);
 
@@ -511,16 +513,16 @@ public interface Primitives {
      *
      * @param complexBody Please put '0001-01-01' and '2016-02-29'.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, Void>> putDateWithRestResponseAsync(@NonNull DateWrapper complexBody);
+    Single<VoidResponse> putDateWithRestResponseAsync(@NonNull DateWrapper complexBody);
 
     /**
      * Put complex types with date properties.
      *
      * @param complexBody Please put '0001-01-01' and '2016-02-29'.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link Completable} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     Completable putDateAsync(@NonNull DateWrapper complexBody);
 
@@ -538,21 +540,21 @@ public interface Primitives {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;DatetimeWrapper&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     ServiceFuture<DatetimeWrapper> getDateTimeAsync(ServiceCallback<DatetimeWrapper> serviceCallback);
 
     /**
      * Get complex types with datetime properties.
      *
-     * @return the {@link Single&lt;RestResponse&lt;Void, DatetimeWrapper&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, DatetimeWrapper>> getDateTimeWithRestResponseAsync();
+    Single<BodyResponse<DatetimeWrapper>> getDateTimeWithRestResponseAsync();
 
     /**
      * Get complex types with datetime properties.
      *
-     * @return the {@link Maybe&lt;DatetimeWrapper&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     Maybe<DatetimeWrapper> getDateTimeAsync();
 
@@ -572,7 +574,7 @@ public interface Primitives {
      * @param complexBody Please put '0001-01-01T12:00:00-04:00' and '2015-05-18T11:38:00-08:00'.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;Void&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     ServiceFuture<Void> putDateTimeAsync(@NonNull DatetimeWrapper complexBody, ServiceCallback<Void> serviceCallback);
 
@@ -581,16 +583,16 @@ public interface Primitives {
      *
      * @param complexBody Please put '0001-01-01T12:00:00-04:00' and '2015-05-18T11:38:00-08:00'.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, Void>> putDateTimeWithRestResponseAsync(@NonNull DatetimeWrapper complexBody);
+    Single<VoidResponse> putDateTimeWithRestResponseAsync(@NonNull DatetimeWrapper complexBody);
 
     /**
      * Put complex types with datetime properties.
      *
      * @param complexBody Please put '0001-01-01T12:00:00-04:00' and '2015-05-18T11:38:00-08:00'.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link Completable} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     Completable putDateTimeAsync(@NonNull DatetimeWrapper complexBody);
 
@@ -608,21 +610,21 @@ public interface Primitives {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;Datetimerfc1123Wrapper&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     ServiceFuture<Datetimerfc1123Wrapper> getDateTimeRfc1123Async(ServiceCallback<Datetimerfc1123Wrapper> serviceCallback);
 
     /**
      * Get complex types with datetimeRfc1123 properties.
      *
-     * @return the {@link Single&lt;RestResponse&lt;Void, Datetimerfc1123Wrapper&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, Datetimerfc1123Wrapper>> getDateTimeRfc1123WithRestResponseAsync();
+    Single<BodyResponse<Datetimerfc1123Wrapper>> getDateTimeRfc1123WithRestResponseAsync();
 
     /**
      * Get complex types with datetimeRfc1123 properties.
      *
-     * @return the {@link Maybe&lt;Datetimerfc1123Wrapper&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     Maybe<Datetimerfc1123Wrapper> getDateTimeRfc1123Async();
 
@@ -642,7 +644,7 @@ public interface Primitives {
      * @param complexBody Please put 'Mon, 01 Jan 0001 12:00:00 GMT' and 'Mon, 18 May 2015 11:38:00 GMT'.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;Void&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     ServiceFuture<Void> putDateTimeRfc1123Async(@NonNull Datetimerfc1123Wrapper complexBody, ServiceCallback<Void> serviceCallback);
 
@@ -651,16 +653,16 @@ public interface Primitives {
      *
      * @param complexBody Please put 'Mon, 01 Jan 0001 12:00:00 GMT' and 'Mon, 18 May 2015 11:38:00 GMT'.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, Void>> putDateTimeRfc1123WithRestResponseAsync(@NonNull Datetimerfc1123Wrapper complexBody);
+    Single<VoidResponse> putDateTimeRfc1123WithRestResponseAsync(@NonNull Datetimerfc1123Wrapper complexBody);
 
     /**
      * Put complex types with datetimeRfc1123 properties.
      *
      * @param complexBody Please put 'Mon, 01 Jan 0001 12:00:00 GMT' and 'Mon, 18 May 2015 11:38:00 GMT'.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link Completable} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     Completable putDateTimeRfc1123Async(@NonNull Datetimerfc1123Wrapper complexBody);
 
@@ -678,21 +680,21 @@ public interface Primitives {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;DurationWrapper&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     ServiceFuture<DurationWrapper> getDurationAsync(ServiceCallback<DurationWrapper> serviceCallback);
 
     /**
      * Get complex types with duration properties.
      *
-     * @return the {@link Single&lt;RestResponse&lt;Void, DurationWrapper&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, DurationWrapper>> getDurationWithRestResponseAsync();
+    Single<BodyResponse<DurationWrapper>> getDurationWithRestResponseAsync();
 
     /**
      * Get complex types with duration properties.
      *
-     * @return the {@link Maybe&lt;DurationWrapper&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     Maybe<DurationWrapper> getDurationAsync();
 
@@ -712,7 +714,7 @@ public interface Primitives {
      * @param complexBody Please put 'P123DT22H14M12.011S'.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;Void&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     ServiceFuture<Void> putDurationAsync(@NonNull DurationWrapper complexBody, ServiceCallback<Void> serviceCallback);
 
@@ -721,16 +723,16 @@ public interface Primitives {
      *
      * @param complexBody Please put 'P123DT22H14M12.011S'.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, Void>> putDurationWithRestResponseAsync(@NonNull DurationWrapper complexBody);
+    Single<VoidResponse> putDurationWithRestResponseAsync(@NonNull DurationWrapper complexBody);
 
     /**
      * Put complex types with duration properties.
      *
      * @param complexBody Please put 'P123DT22H14M12.011S'.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link Completable} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     Completable putDurationAsync(@NonNull DurationWrapper complexBody);
 
@@ -748,21 +750,21 @@ public interface Primitives {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;ByteWrapper&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     ServiceFuture<ByteWrapper> getByteAsync(ServiceCallback<ByteWrapper> serviceCallback);
 
     /**
      * Get complex types with byte properties.
      *
-     * @return the {@link Single&lt;RestResponse&lt;Void, ByteWrapper&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, ByteWrapper>> getByteWithRestResponseAsync();
+    Single<BodyResponse<ByteWrapper>> getByteWithRestResponseAsync();
 
     /**
      * Get complex types with byte properties.
      *
-     * @return the {@link Maybe&lt;ByteWrapper&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     Maybe<ByteWrapper> getByteAsync();
 
@@ -782,7 +784,7 @@ public interface Primitives {
      * @param complexBody Please put non-ascii byte string hex(FF FE FD FC 00 FA F9 F8 F7 F6).
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;Void&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     ServiceFuture<Void> putByteAsync(@NonNull ByteWrapper complexBody, ServiceCallback<Void> serviceCallback);
 
@@ -791,16 +793,16 @@ public interface Primitives {
      *
      * @param complexBody Please put non-ascii byte string hex(FF FE FD FC 00 FA F9 F8 F7 F6).
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, Void>> putByteWithRestResponseAsync(@NonNull ByteWrapper complexBody);
+    Single<VoidResponse> putByteWithRestResponseAsync(@NonNull ByteWrapper complexBody);
 
     /**
      * Put complex types with byte properties.
      *
      * @param complexBody Please put non-ascii byte string hex(FF FE FD FC 00 FA F9 F8 F7 F6).
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link Completable} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     Completable putByteAsync(@NonNull ByteWrapper complexBody);
 }

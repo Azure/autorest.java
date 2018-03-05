@@ -10,9 +10,10 @@
 
 package fixtures.http;
 
-import com.microsoft.rest.v2.RestResponse;
 import com.microsoft.rest.v2.ServiceCallback;
 import com.microsoft.rest.v2.ServiceFuture;
+import com.microsoft.rest.v2.VoidResponse;
+import fixtures.http.models.ErrorException;
 import io.reactivex.Completable;
 import io.reactivex.Single;
 
@@ -34,21 +35,21 @@ public interface HttpRetrys {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;Void&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     ServiceFuture<Void> head408Async(ServiceCallback<Void> serviceCallback);
 
     /**
      * Return 408 status code, then 200 after retry.
      *
-     * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, Void>> head408WithRestResponseAsync();
+    Single<VoidResponse> head408WithRestResponseAsync();
 
     /**
      * Return 408 status code, then 200 after retry.
      *
-     * @return the {@link Completable} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     Completable head408Async();
 
@@ -65,21 +66,21 @@ public interface HttpRetrys {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;Void&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     ServiceFuture<Void> put500Async(ServiceCallback<Void> serviceCallback);
 
     /**
      * Return 500 status code, then 200 after retry.
      *
-     * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, Void>> put500WithRestResponseAsync();
+    Single<VoidResponse> put500WithRestResponseAsync();
 
     /**
      * Return 500 status code, then 200 after retry.
      *
-     * @return the {@link Completable} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     Completable put500Async();
 
@@ -99,7 +100,7 @@ public interface HttpRetrys {
      * @param booleanValue Simple boolean value true.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;Void&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     ServiceFuture<Void> put500Async(Boolean booleanValue, ServiceCallback<Void> serviceCallback);
 
@@ -108,16 +109,16 @@ public interface HttpRetrys {
      *
      * @param booleanValue Simple boolean value true.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, Void>> put500WithRestResponseAsync(Boolean booleanValue);
+    Single<VoidResponse> put500WithRestResponseAsync(Boolean booleanValue);
 
     /**
      * Return 500 status code, then 200 after retry.
      *
      * @param booleanValue Simple boolean value true.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link Completable} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     Completable put500Async(Boolean booleanValue);
 
@@ -134,21 +135,21 @@ public interface HttpRetrys {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;Void&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     ServiceFuture<Void> patch500Async(ServiceCallback<Void> serviceCallback);
 
     /**
      * Return 500 status code, then 200 after retry.
      *
-     * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, Void>> patch500WithRestResponseAsync();
+    Single<VoidResponse> patch500WithRestResponseAsync();
 
     /**
      * Return 500 status code, then 200 after retry.
      *
-     * @return the {@link Completable} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     Completable patch500Async();
 
@@ -168,7 +169,7 @@ public interface HttpRetrys {
      * @param booleanValue Simple boolean value true.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;Void&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     ServiceFuture<Void> patch500Async(Boolean booleanValue, ServiceCallback<Void> serviceCallback);
 
@@ -177,16 +178,16 @@ public interface HttpRetrys {
      *
      * @param booleanValue Simple boolean value true.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, Void>> patch500WithRestResponseAsync(Boolean booleanValue);
+    Single<VoidResponse> patch500WithRestResponseAsync(Boolean booleanValue);
 
     /**
      * Return 500 status code, then 200 after retry.
      *
      * @param booleanValue Simple boolean value true.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link Completable} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     Completable patch500Async(Boolean booleanValue);
 
@@ -203,21 +204,21 @@ public interface HttpRetrys {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;Void&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     ServiceFuture<Void> get502Async(ServiceCallback<Void> serviceCallback);
 
     /**
      * Return 502 status code, then 200 after retry.
      *
-     * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, Void>> get502WithRestResponseAsync();
+    Single<VoidResponse> get502WithRestResponseAsync();
 
     /**
      * Return 502 status code, then 200 after retry.
      *
-     * @return the {@link Completable} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     Completable get502Async();
 
@@ -234,21 +235,21 @@ public interface HttpRetrys {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;Void&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     ServiceFuture<Void> post503Async(ServiceCallback<Void> serviceCallback);
 
     /**
      * Return 503 status code, then 200 after retry.
      *
-     * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, Void>> post503WithRestResponseAsync();
+    Single<VoidResponse> post503WithRestResponseAsync();
 
     /**
      * Return 503 status code, then 200 after retry.
      *
-     * @return the {@link Completable} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     Completable post503Async();
 
@@ -268,7 +269,7 @@ public interface HttpRetrys {
      * @param booleanValue Simple boolean value true.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;Void&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     ServiceFuture<Void> post503Async(Boolean booleanValue, ServiceCallback<Void> serviceCallback);
 
@@ -277,16 +278,16 @@ public interface HttpRetrys {
      *
      * @param booleanValue Simple boolean value true.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, Void>> post503WithRestResponseAsync(Boolean booleanValue);
+    Single<VoidResponse> post503WithRestResponseAsync(Boolean booleanValue);
 
     /**
      * Return 503 status code, then 200 after retry.
      *
      * @param booleanValue Simple boolean value true.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link Completable} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     Completable post503Async(Boolean booleanValue);
 
@@ -303,21 +304,21 @@ public interface HttpRetrys {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;Void&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     ServiceFuture<Void> delete503Async(ServiceCallback<Void> serviceCallback);
 
     /**
      * Return 503 status code, then 200 after retry.
      *
-     * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, Void>> delete503WithRestResponseAsync();
+    Single<VoidResponse> delete503WithRestResponseAsync();
 
     /**
      * Return 503 status code, then 200 after retry.
      *
-     * @return the {@link Completable} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     Completable delete503Async();
 
@@ -337,7 +338,7 @@ public interface HttpRetrys {
      * @param booleanValue Simple boolean value true.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;Void&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     ServiceFuture<Void> delete503Async(Boolean booleanValue, ServiceCallback<Void> serviceCallback);
 
@@ -346,16 +347,16 @@ public interface HttpRetrys {
      *
      * @param booleanValue Simple boolean value true.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, Void>> delete503WithRestResponseAsync(Boolean booleanValue);
+    Single<VoidResponse> delete503WithRestResponseAsync(Boolean booleanValue);
 
     /**
      * Return 503 status code, then 200 after retry.
      *
      * @param booleanValue Simple boolean value true.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link Completable} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     Completable delete503Async(Boolean booleanValue);
 
@@ -372,21 +373,21 @@ public interface HttpRetrys {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;Void&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     ServiceFuture<Void> put504Async(ServiceCallback<Void> serviceCallback);
 
     /**
      * Return 504 status code, then 200 after retry.
      *
-     * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, Void>> put504WithRestResponseAsync();
+    Single<VoidResponse> put504WithRestResponseAsync();
 
     /**
      * Return 504 status code, then 200 after retry.
      *
-     * @return the {@link Completable} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     Completable put504Async();
 
@@ -406,7 +407,7 @@ public interface HttpRetrys {
      * @param booleanValue Simple boolean value true.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;Void&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     ServiceFuture<Void> put504Async(Boolean booleanValue, ServiceCallback<Void> serviceCallback);
 
@@ -415,16 +416,16 @@ public interface HttpRetrys {
      *
      * @param booleanValue Simple boolean value true.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, Void>> put504WithRestResponseAsync(Boolean booleanValue);
+    Single<VoidResponse> put504WithRestResponseAsync(Boolean booleanValue);
 
     /**
      * Return 504 status code, then 200 after retry.
      *
      * @param booleanValue Simple boolean value true.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link Completable} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     Completable put504Async(Boolean booleanValue);
 
@@ -441,21 +442,21 @@ public interface HttpRetrys {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;Void&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     ServiceFuture<Void> patch504Async(ServiceCallback<Void> serviceCallback);
 
     /**
      * Return 504 status code, then 200 after retry.
      *
-     * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, Void>> patch504WithRestResponseAsync();
+    Single<VoidResponse> patch504WithRestResponseAsync();
 
     /**
      * Return 504 status code, then 200 after retry.
      *
-     * @return the {@link Completable} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     Completable patch504Async();
 
@@ -475,7 +476,7 @@ public interface HttpRetrys {
      * @param booleanValue Simple boolean value true.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;Void&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     ServiceFuture<Void> patch504Async(Boolean booleanValue, ServiceCallback<Void> serviceCallback);
 
@@ -484,16 +485,16 @@ public interface HttpRetrys {
      *
      * @param booleanValue Simple boolean value true.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, Void>> patch504WithRestResponseAsync(Boolean booleanValue);
+    Single<VoidResponse> patch504WithRestResponseAsync(Boolean booleanValue);
 
     /**
      * Return 504 status code, then 200 after retry.
      *
      * @param booleanValue Simple boolean value true.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link Completable} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     Completable patch504Async(Boolean booleanValue);
 }

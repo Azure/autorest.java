@@ -11,9 +11,9 @@
 package fixtures.azurespecials.implementation;
 
 import com.microsoft.azure.v2.AzureProxy;
-import com.microsoft.rest.v2.RestResponse;
 import com.microsoft.rest.v2.ServiceCallback;
 import com.microsoft.rest.v2.ServiceFuture;
+import com.microsoft.rest.v2.VoidResponse;
 import com.microsoft.rest.v2.annotations.ExpectedResponses;
 import com.microsoft.rest.v2.annotations.HeaderParam;
 import com.microsoft.rest.v2.annotations.Host;
@@ -60,27 +60,27 @@ public final class SubscriptionInCredentialsImpl implements SubscriptionInCreden
         @POST("azurespecials/subscriptionId/method/string/none/path/global/1234-5678-9012-3456/{subscriptionId}")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<RestResponse<Void, Void>> postMethodGlobalValid(@PathParam("subscriptionId") String subscriptionId, @HeaderParam("accept-language") String acceptLanguage);
+        Single<VoidResponse> postMethodGlobalValid(@PathParam("subscriptionId") String subscriptionId, @HeaderParam("accept-language") String acceptLanguage);
 
         @POST("azurespecials/subscriptionId/method/string/none/path/global/null/{subscriptionId}")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<RestResponse<Void, Void>> postMethodGlobalNull(@PathParam("subscriptionId") String subscriptionId, @HeaderParam("accept-language") String acceptLanguage);
+        Single<VoidResponse> postMethodGlobalNull(@PathParam("subscriptionId") String subscriptionId, @HeaderParam("accept-language") String acceptLanguage);
 
         @POST("azurespecials/subscriptionId/method/string/none/path/globalNotProvided/1234-5678-9012-3456/{subscriptionId}")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<RestResponse<Void, Void>> postMethodGlobalNotProvidedValid(@PathParam("subscriptionId") String subscriptionId, @QueryParam("api-version") String apiVersion, @HeaderParam("accept-language") String acceptLanguage);
+        Single<VoidResponse> postMethodGlobalNotProvidedValid(@PathParam("subscriptionId") String subscriptionId, @QueryParam("api-version") String apiVersion, @HeaderParam("accept-language") String acceptLanguage);
 
         @POST("azurespecials/subscriptionId/path/string/none/path/global/1234-5678-9012-3456/{subscriptionId}")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<RestResponse<Void, Void>> postPathGlobalValid(@PathParam("subscriptionId") String subscriptionId, @HeaderParam("accept-language") String acceptLanguage);
+        Single<VoidResponse> postPathGlobalValid(@PathParam("subscriptionId") String subscriptionId, @HeaderParam("accept-language") String acceptLanguage);
 
         @POST("azurespecials/subscriptionId/swagger/string/none/path/global/1234-5678-9012-3456/{subscriptionId}")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<RestResponse<Void, Void>> postSwaggerGlobalValid(@PathParam("subscriptionId") String subscriptionId, @HeaderParam("accept-language") String acceptLanguage);
+        Single<VoidResponse> postSwaggerGlobalValid(@PathParam("subscriptionId") String subscriptionId, @HeaderParam("accept-language") String acceptLanguage);
     }
 
     /**
@@ -98,7 +98,7 @@ public final class SubscriptionInCredentialsImpl implements SubscriptionInCreden
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;Void&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     public ServiceFuture<Void> postMethodGlobalValidAsync(ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(postMethodGlobalValidAsync(), serviceCallback);
@@ -107,9 +107,9 @@ public final class SubscriptionInCredentialsImpl implements SubscriptionInCreden
     /**
      * POST method with subscriptionId modeled in credentials.  Set the credential subscriptionId to '1234-5678-9012-3456' to succeed.
      *
-     * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<Void, Void>> postMethodGlobalValidWithRestResponseAsync() {
+    public Single<VoidResponse> postMethodGlobalValidWithRestResponseAsync() {
         if (this.client.subscriptionId() == null) {
             throw new IllegalArgumentException("Parameter this.client.subscriptionId() is required and cannot be null.");
         }
@@ -119,7 +119,7 @@ public final class SubscriptionInCredentialsImpl implements SubscriptionInCreden
     /**
      * POST method with subscriptionId modeled in credentials.  Set the credential subscriptionId to '1234-5678-9012-3456' to succeed.
      *
-     * @return the {@link Completable} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Completable postMethodGlobalValidAsync() {
         return postMethodGlobalValidWithRestResponseAsync()
@@ -141,7 +141,7 @@ public final class SubscriptionInCredentialsImpl implements SubscriptionInCreden
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;Void&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     public ServiceFuture<Void> postMethodGlobalNullAsync(ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(postMethodGlobalNullAsync(), serviceCallback);
@@ -150,9 +150,9 @@ public final class SubscriptionInCredentialsImpl implements SubscriptionInCreden
     /**
      * POST method with subscriptionId modeled in credentials.  Set the credential subscriptionId to null, and client-side validation should prevent you from making this call.
      *
-     * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<Void, Void>> postMethodGlobalNullWithRestResponseAsync() {
+    public Single<VoidResponse> postMethodGlobalNullWithRestResponseAsync() {
         if (this.client.subscriptionId() == null) {
             throw new IllegalArgumentException("Parameter this.client.subscriptionId() is required and cannot be null.");
         }
@@ -162,7 +162,7 @@ public final class SubscriptionInCredentialsImpl implements SubscriptionInCreden
     /**
      * POST method with subscriptionId modeled in credentials.  Set the credential subscriptionId to null, and client-side validation should prevent you from making this call.
      *
-     * @return the {@link Completable} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Completable postMethodGlobalNullAsync() {
         return postMethodGlobalNullWithRestResponseAsync()
@@ -184,7 +184,7 @@ public final class SubscriptionInCredentialsImpl implements SubscriptionInCreden
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;Void&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     public ServiceFuture<Void> postMethodGlobalNotProvidedValidAsync(ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(postMethodGlobalNotProvidedValidAsync(), serviceCallback);
@@ -193,9 +193,9 @@ public final class SubscriptionInCredentialsImpl implements SubscriptionInCreden
     /**
      * POST method with subscriptionId modeled in credentials.  Set the credential subscriptionId to '1234-5678-9012-3456' to succeed.
      *
-     * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<Void, Void>> postMethodGlobalNotProvidedValidWithRestResponseAsync() {
+    public Single<VoidResponse> postMethodGlobalNotProvidedValidWithRestResponseAsync() {
         if (this.client.subscriptionId() == null) {
             throw new IllegalArgumentException("Parameter this.client.subscriptionId() is required and cannot be null.");
         }
@@ -208,7 +208,7 @@ public final class SubscriptionInCredentialsImpl implements SubscriptionInCreden
     /**
      * POST method with subscriptionId modeled in credentials.  Set the credential subscriptionId to '1234-5678-9012-3456' to succeed.
      *
-     * @return the {@link Completable} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Completable postMethodGlobalNotProvidedValidAsync() {
         return postMethodGlobalNotProvidedValidWithRestResponseAsync()
@@ -230,7 +230,7 @@ public final class SubscriptionInCredentialsImpl implements SubscriptionInCreden
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;Void&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     public ServiceFuture<Void> postPathGlobalValidAsync(ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(postPathGlobalValidAsync(), serviceCallback);
@@ -239,9 +239,9 @@ public final class SubscriptionInCredentialsImpl implements SubscriptionInCreden
     /**
      * POST method with subscriptionId modeled in credentials.  Set the credential subscriptionId to '1234-5678-9012-3456' to succeed.
      *
-     * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<Void, Void>> postPathGlobalValidWithRestResponseAsync() {
+    public Single<VoidResponse> postPathGlobalValidWithRestResponseAsync() {
         if (this.client.subscriptionId() == null) {
             throw new IllegalArgumentException("Parameter this.client.subscriptionId() is required and cannot be null.");
         }
@@ -251,7 +251,7 @@ public final class SubscriptionInCredentialsImpl implements SubscriptionInCreden
     /**
      * POST method with subscriptionId modeled in credentials.  Set the credential subscriptionId to '1234-5678-9012-3456' to succeed.
      *
-     * @return the {@link Completable} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Completable postPathGlobalValidAsync() {
         return postPathGlobalValidWithRestResponseAsync()
@@ -273,7 +273,7 @@ public final class SubscriptionInCredentialsImpl implements SubscriptionInCreden
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;Void&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     public ServiceFuture<Void> postSwaggerGlobalValidAsync(ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(postSwaggerGlobalValidAsync(), serviceCallback);
@@ -282,9 +282,9 @@ public final class SubscriptionInCredentialsImpl implements SubscriptionInCreden
     /**
      * POST method with subscriptionId modeled in credentials.  Set the credential subscriptionId to '1234-5678-9012-3456' to succeed.
      *
-     * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<Void, Void>> postSwaggerGlobalValidWithRestResponseAsync() {
+    public Single<VoidResponse> postSwaggerGlobalValidWithRestResponseAsync() {
         if (this.client.subscriptionId() == null) {
             throw new IllegalArgumentException("Parameter this.client.subscriptionId() is required and cannot be null.");
         }
@@ -294,7 +294,7 @@ public final class SubscriptionInCredentialsImpl implements SubscriptionInCreden
     /**
      * POST method with subscriptionId modeled in credentials.  Set the credential subscriptionId to '1234-5678-9012-3456' to succeed.
      *
-     * @return the {@link Completable} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Completable postSwaggerGlobalValidAsync() {
         return postSwaggerGlobalValidWithRestResponseAsync()

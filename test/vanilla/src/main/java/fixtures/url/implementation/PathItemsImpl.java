@@ -11,9 +11,9 @@
 package fixtures.url.implementation;
 
 import com.microsoft.rest.v2.RestProxy;
-import com.microsoft.rest.v2.RestResponse;
 import com.microsoft.rest.v2.ServiceCallback;
 import com.microsoft.rest.v2.ServiceFuture;
+import com.microsoft.rest.v2.VoidResponse;
 import com.microsoft.rest.v2.annotations.ExpectedResponses;
 import com.microsoft.rest.v2.annotations.GET;
 import com.microsoft.rest.v2.annotations.Host;
@@ -60,22 +60,22 @@ public final class PathItemsImpl implements PathItems {
         @GET("pathitem/nullable/globalStringPath/{globalStringPath}/pathItemStringPath/{pathItemStringPath}/localStringPath/{localStringPath}/globalStringQuery/pathItemStringQuery/localStringQuery")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<RestResponse<Void, Void>> getAllWithValues(@PathParam("localStringPath") String localStringPath, @PathParam("pathItemStringPath") String pathItemStringPath, @PathParam("globalStringPath") String globalStringPath, @QueryParam("localStringQuery") String localStringQuery, @QueryParam("pathItemStringQuery") String pathItemStringQuery, @QueryParam("globalStringQuery") String globalStringQuery);
+        Single<VoidResponse> getAllWithValues(@PathParam("localStringPath") String localStringPath, @PathParam("pathItemStringPath") String pathItemStringPath, @PathParam("globalStringPath") String globalStringPath, @QueryParam("localStringQuery") String localStringQuery, @QueryParam("pathItemStringQuery") String pathItemStringQuery, @QueryParam("globalStringQuery") String globalStringQuery);
 
         @GET("pathitem/nullable/globalStringPath/{globalStringPath}/pathItemStringPath/{pathItemStringPath}/localStringPath/{localStringPath}/null/pathItemStringQuery/localStringQuery")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<RestResponse<Void, Void>> getGlobalQueryNull(@PathParam("localStringPath") String localStringPath, @PathParam("pathItemStringPath") String pathItemStringPath, @PathParam("globalStringPath") String globalStringPath, @QueryParam("localStringQuery") String localStringQuery, @QueryParam("pathItemStringQuery") String pathItemStringQuery, @QueryParam("globalStringQuery") String globalStringQuery);
+        Single<VoidResponse> getGlobalQueryNull(@PathParam("localStringPath") String localStringPath, @PathParam("pathItemStringPath") String pathItemStringPath, @PathParam("globalStringPath") String globalStringPath, @QueryParam("localStringQuery") String localStringQuery, @QueryParam("pathItemStringQuery") String pathItemStringQuery, @QueryParam("globalStringQuery") String globalStringQuery);
 
         @GET("pathitem/nullable/globalStringPath/{globalStringPath}/pathItemStringPath/{pathItemStringPath}/localStringPath/{localStringPath}/null/pathItemStringQuery/null")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<RestResponse<Void, Void>> getGlobalAndLocalQueryNull(@PathParam("localStringPath") String localStringPath, @PathParam("pathItemStringPath") String pathItemStringPath, @PathParam("globalStringPath") String globalStringPath, @QueryParam("localStringQuery") String localStringQuery, @QueryParam("pathItemStringQuery") String pathItemStringQuery, @QueryParam("globalStringQuery") String globalStringQuery);
+        Single<VoidResponse> getGlobalAndLocalQueryNull(@PathParam("localStringPath") String localStringPath, @PathParam("pathItemStringPath") String pathItemStringPath, @PathParam("globalStringPath") String globalStringPath, @QueryParam("localStringQuery") String localStringQuery, @QueryParam("pathItemStringQuery") String pathItemStringQuery, @QueryParam("globalStringQuery") String globalStringQuery);
 
         @GET("pathitem/nullable/globalStringPath/{globalStringPath}/pathItemStringPath/{pathItemStringPath}/localStringPath/{localStringPath}/globalStringQuery/null/null")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<RestResponse<Void, Void>> getLocalPathItemQueryNull(@PathParam("localStringPath") String localStringPath, @PathParam("pathItemStringPath") String pathItemStringPath, @PathParam("globalStringPath") String globalStringPath, @QueryParam("localStringQuery") String localStringQuery, @QueryParam("pathItemStringQuery") String pathItemStringQuery, @QueryParam("globalStringQuery") String globalStringQuery);
+        Single<VoidResponse> getLocalPathItemQueryNull(@PathParam("localStringPath") String localStringPath, @PathParam("pathItemStringPath") String pathItemStringPath, @PathParam("globalStringPath") String globalStringPath, @QueryParam("localStringQuery") String localStringQuery, @QueryParam("pathItemStringQuery") String pathItemStringQuery, @QueryParam("globalStringQuery") String globalStringQuery);
     }
 
     /**
@@ -98,7 +98,7 @@ public final class PathItemsImpl implements PathItems {
      * @param pathItemStringPath A string value 'pathItemStringPath' that appears in the path.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;Void&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     public ServiceFuture<Void> getAllWithValuesAsync(@NonNull String localStringPath, @NonNull String pathItemStringPath, ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(getAllWithValuesAsync(localStringPath, pathItemStringPath), serviceCallback);
@@ -110,9 +110,9 @@ public final class PathItemsImpl implements PathItems {
      * @param localStringPath should contain value 'localStringPath'.
      * @param pathItemStringPath A string value 'pathItemStringPath' that appears in the path.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<Void, Void>> getAllWithValuesWithRestResponseAsync(@NonNull String localStringPath, @NonNull String pathItemStringPath) {
+    public Single<VoidResponse> getAllWithValuesWithRestResponseAsync(@NonNull String localStringPath, @NonNull String pathItemStringPath) {
         if (localStringPath == null) {
             throw new IllegalArgumentException("Parameter localStringPath is required and cannot be null.");
         }
@@ -133,7 +133,7 @@ public final class PathItemsImpl implements PathItems {
      * @param localStringPath should contain value 'localStringPath'.
      * @param pathItemStringPath A string value 'pathItemStringPath' that appears in the path.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link Completable} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Completable getAllWithValuesAsync(@NonNull String localStringPath, @NonNull String pathItemStringPath) {
         return getAllWithValuesWithRestResponseAsync(localStringPath, pathItemStringPath)
@@ -164,7 +164,7 @@ public final class PathItemsImpl implements PathItems {
      * @param pathItemStringQuery A string value 'pathItemStringQuery' that appears as a query parameter.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;Void&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     public ServiceFuture<Void> getAllWithValuesAsync(@NonNull String localStringPath, @NonNull String pathItemStringPath, String localStringQuery, String pathItemStringQuery, ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(getAllWithValuesAsync(localStringPath, pathItemStringPath, localStringQuery, pathItemStringQuery), serviceCallback);
@@ -178,9 +178,9 @@ public final class PathItemsImpl implements PathItems {
      * @param localStringQuery should contain value 'localStringQuery'.
      * @param pathItemStringQuery A string value 'pathItemStringQuery' that appears as a query parameter.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<Void, Void>> getAllWithValuesWithRestResponseAsync(@NonNull String localStringPath, @NonNull String pathItemStringPath, String localStringQuery, String pathItemStringQuery) {
+    public Single<VoidResponse> getAllWithValuesWithRestResponseAsync(@NonNull String localStringPath, @NonNull String pathItemStringPath, String localStringQuery, String pathItemStringQuery) {
         if (localStringPath == null) {
             throw new IllegalArgumentException("Parameter localStringPath is required and cannot be null.");
         }
@@ -201,7 +201,7 @@ public final class PathItemsImpl implements PathItems {
      * @param localStringQuery should contain value 'localStringQuery'.
      * @param pathItemStringQuery A string value 'pathItemStringQuery' that appears as a query parameter.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link Completable} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Completable getAllWithValuesAsync(@NonNull String localStringPath, @NonNull String pathItemStringPath, String localStringQuery, String pathItemStringQuery) {
         return getAllWithValuesWithRestResponseAsync(localStringPath, pathItemStringPath, localStringQuery, pathItemStringQuery)
@@ -228,7 +228,7 @@ public final class PathItemsImpl implements PathItems {
      * @param pathItemStringPath A string value 'pathItemStringPath' that appears in the path.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;Void&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     public ServiceFuture<Void> getGlobalQueryNullAsync(@NonNull String localStringPath, @NonNull String pathItemStringPath, ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(getGlobalQueryNullAsync(localStringPath, pathItemStringPath), serviceCallback);
@@ -240,9 +240,9 @@ public final class PathItemsImpl implements PathItems {
      * @param localStringPath should contain value 'localStringPath'.
      * @param pathItemStringPath A string value 'pathItemStringPath' that appears in the path.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<Void, Void>> getGlobalQueryNullWithRestResponseAsync(@NonNull String localStringPath, @NonNull String pathItemStringPath) {
+    public Single<VoidResponse> getGlobalQueryNullWithRestResponseAsync(@NonNull String localStringPath, @NonNull String pathItemStringPath) {
         if (localStringPath == null) {
             throw new IllegalArgumentException("Parameter localStringPath is required and cannot be null.");
         }
@@ -263,7 +263,7 @@ public final class PathItemsImpl implements PathItems {
      * @param localStringPath should contain value 'localStringPath'.
      * @param pathItemStringPath A string value 'pathItemStringPath' that appears in the path.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link Completable} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Completable getGlobalQueryNullAsync(@NonNull String localStringPath, @NonNull String pathItemStringPath) {
         return getGlobalQueryNullWithRestResponseAsync(localStringPath, pathItemStringPath)
@@ -294,7 +294,7 @@ public final class PathItemsImpl implements PathItems {
      * @param pathItemStringQuery A string value 'pathItemStringQuery' that appears as a query parameter.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;Void&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     public ServiceFuture<Void> getGlobalQueryNullAsync(@NonNull String localStringPath, @NonNull String pathItemStringPath, String localStringQuery, String pathItemStringQuery, ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(getGlobalQueryNullAsync(localStringPath, pathItemStringPath, localStringQuery, pathItemStringQuery), serviceCallback);
@@ -308,9 +308,9 @@ public final class PathItemsImpl implements PathItems {
      * @param localStringQuery should contain value 'localStringQuery'.
      * @param pathItemStringQuery A string value 'pathItemStringQuery' that appears as a query parameter.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<Void, Void>> getGlobalQueryNullWithRestResponseAsync(@NonNull String localStringPath, @NonNull String pathItemStringPath, String localStringQuery, String pathItemStringQuery) {
+    public Single<VoidResponse> getGlobalQueryNullWithRestResponseAsync(@NonNull String localStringPath, @NonNull String pathItemStringPath, String localStringQuery, String pathItemStringQuery) {
         if (localStringPath == null) {
             throw new IllegalArgumentException("Parameter localStringPath is required and cannot be null.");
         }
@@ -331,7 +331,7 @@ public final class PathItemsImpl implements PathItems {
      * @param localStringQuery should contain value 'localStringQuery'.
      * @param pathItemStringQuery A string value 'pathItemStringQuery' that appears as a query parameter.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link Completable} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Completable getGlobalQueryNullAsync(@NonNull String localStringPath, @NonNull String pathItemStringPath, String localStringQuery, String pathItemStringQuery) {
         return getGlobalQueryNullWithRestResponseAsync(localStringPath, pathItemStringPath, localStringQuery, pathItemStringQuery)
@@ -358,7 +358,7 @@ public final class PathItemsImpl implements PathItems {
      * @param pathItemStringPath A string value 'pathItemStringPath' that appears in the path.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;Void&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     public ServiceFuture<Void> getGlobalAndLocalQueryNullAsync(@NonNull String localStringPath, @NonNull String pathItemStringPath, ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(getGlobalAndLocalQueryNullAsync(localStringPath, pathItemStringPath), serviceCallback);
@@ -370,9 +370,9 @@ public final class PathItemsImpl implements PathItems {
      * @param localStringPath should contain value 'localStringPath'.
      * @param pathItemStringPath A string value 'pathItemStringPath' that appears in the path.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<Void, Void>> getGlobalAndLocalQueryNullWithRestResponseAsync(@NonNull String localStringPath, @NonNull String pathItemStringPath) {
+    public Single<VoidResponse> getGlobalAndLocalQueryNullWithRestResponseAsync(@NonNull String localStringPath, @NonNull String pathItemStringPath) {
         if (localStringPath == null) {
             throw new IllegalArgumentException("Parameter localStringPath is required and cannot be null.");
         }
@@ -393,7 +393,7 @@ public final class PathItemsImpl implements PathItems {
      * @param localStringPath should contain value 'localStringPath'.
      * @param pathItemStringPath A string value 'pathItemStringPath' that appears in the path.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link Completable} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Completable getGlobalAndLocalQueryNullAsync(@NonNull String localStringPath, @NonNull String pathItemStringPath) {
         return getGlobalAndLocalQueryNullWithRestResponseAsync(localStringPath, pathItemStringPath)
@@ -424,7 +424,7 @@ public final class PathItemsImpl implements PathItems {
      * @param pathItemStringQuery A string value 'pathItemStringQuery' that appears as a query parameter.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;Void&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     public ServiceFuture<Void> getGlobalAndLocalQueryNullAsync(@NonNull String localStringPath, @NonNull String pathItemStringPath, String localStringQuery, String pathItemStringQuery, ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(getGlobalAndLocalQueryNullAsync(localStringPath, pathItemStringPath, localStringQuery, pathItemStringQuery), serviceCallback);
@@ -438,9 +438,9 @@ public final class PathItemsImpl implements PathItems {
      * @param localStringQuery should contain null value.
      * @param pathItemStringQuery A string value 'pathItemStringQuery' that appears as a query parameter.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<Void, Void>> getGlobalAndLocalQueryNullWithRestResponseAsync(@NonNull String localStringPath, @NonNull String pathItemStringPath, String localStringQuery, String pathItemStringQuery) {
+    public Single<VoidResponse> getGlobalAndLocalQueryNullWithRestResponseAsync(@NonNull String localStringPath, @NonNull String pathItemStringPath, String localStringQuery, String pathItemStringQuery) {
         if (localStringPath == null) {
             throw new IllegalArgumentException("Parameter localStringPath is required and cannot be null.");
         }
@@ -461,7 +461,7 @@ public final class PathItemsImpl implements PathItems {
      * @param localStringQuery should contain null value.
      * @param pathItemStringQuery A string value 'pathItemStringQuery' that appears as a query parameter.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link Completable} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Completable getGlobalAndLocalQueryNullAsync(@NonNull String localStringPath, @NonNull String pathItemStringPath, String localStringQuery, String pathItemStringQuery) {
         return getGlobalAndLocalQueryNullWithRestResponseAsync(localStringPath, pathItemStringPath, localStringQuery, pathItemStringQuery)
@@ -488,7 +488,7 @@ public final class PathItemsImpl implements PathItems {
      * @param pathItemStringPath A string value 'pathItemStringPath' that appears in the path.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;Void&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     public ServiceFuture<Void> getLocalPathItemQueryNullAsync(@NonNull String localStringPath, @NonNull String pathItemStringPath, ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(getLocalPathItemQueryNullAsync(localStringPath, pathItemStringPath), serviceCallback);
@@ -500,9 +500,9 @@ public final class PathItemsImpl implements PathItems {
      * @param localStringPath should contain value 'localStringPath'.
      * @param pathItemStringPath A string value 'pathItemStringPath' that appears in the path.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<Void, Void>> getLocalPathItemQueryNullWithRestResponseAsync(@NonNull String localStringPath, @NonNull String pathItemStringPath) {
+    public Single<VoidResponse> getLocalPathItemQueryNullWithRestResponseAsync(@NonNull String localStringPath, @NonNull String pathItemStringPath) {
         if (localStringPath == null) {
             throw new IllegalArgumentException("Parameter localStringPath is required and cannot be null.");
         }
@@ -523,7 +523,7 @@ public final class PathItemsImpl implements PathItems {
      * @param localStringPath should contain value 'localStringPath'.
      * @param pathItemStringPath A string value 'pathItemStringPath' that appears in the path.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link Completable} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Completable getLocalPathItemQueryNullAsync(@NonNull String localStringPath, @NonNull String pathItemStringPath) {
         return getLocalPathItemQueryNullWithRestResponseAsync(localStringPath, pathItemStringPath)
@@ -554,7 +554,7 @@ public final class PathItemsImpl implements PathItems {
      * @param pathItemStringQuery should contain value null.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;Void&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     public ServiceFuture<Void> getLocalPathItemQueryNullAsync(@NonNull String localStringPath, @NonNull String pathItemStringPath, String localStringQuery, String pathItemStringQuery, ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(getLocalPathItemQueryNullAsync(localStringPath, pathItemStringPath, localStringQuery, pathItemStringQuery), serviceCallback);
@@ -568,9 +568,9 @@ public final class PathItemsImpl implements PathItems {
      * @param localStringQuery should contain value null.
      * @param pathItemStringQuery should contain value null.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
-    public Single<RestResponse<Void, Void>> getLocalPathItemQueryNullWithRestResponseAsync(@NonNull String localStringPath, @NonNull String pathItemStringPath, String localStringQuery, String pathItemStringQuery) {
+    public Single<VoidResponse> getLocalPathItemQueryNullWithRestResponseAsync(@NonNull String localStringPath, @NonNull String pathItemStringPath, String localStringQuery, String pathItemStringQuery) {
         if (localStringPath == null) {
             throw new IllegalArgumentException("Parameter localStringPath is required and cannot be null.");
         }
@@ -591,7 +591,7 @@ public final class PathItemsImpl implements PathItems {
      * @param localStringQuery should contain value null.
      * @param pathItemStringQuery should contain value null.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link Completable} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     public Completable getLocalPathItemQueryNullAsync(@NonNull String localStringPath, @NonNull String pathItemStringPath, String localStringQuery, String pathItemStringQuery) {
         return getLocalPathItemQueryNullWithRestResponseAsync(localStringPath, pathItemStringPath, localStringQuery, pathItemStringQuery)

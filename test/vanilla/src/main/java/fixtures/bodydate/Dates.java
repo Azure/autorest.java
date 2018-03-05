@@ -10,9 +10,11 @@
 
 package fixtures.bodydate;
 
-import com.microsoft.rest.v2.RestResponse;
+import com.microsoft.rest.v2.BodyResponse;
 import com.microsoft.rest.v2.ServiceCallback;
 import com.microsoft.rest.v2.ServiceFuture;
+import com.microsoft.rest.v2.VoidResponse;
+import fixtures.bodydate.models.ErrorException;
 import io.reactivex.Completable;
 import io.reactivex.Maybe;
 import io.reactivex.Single;
@@ -38,21 +40,21 @@ public interface Dates {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;LocalDate&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     ServiceFuture<LocalDate> getNullAsync(ServiceCallback<LocalDate> serviceCallback);
 
     /**
      * Get null date value.
      *
-     * @return the {@link Single&lt;RestResponse&lt;Void, LocalDate&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, LocalDate>> getNullWithRestResponseAsync();
+    Single<BodyResponse<LocalDate>> getNullWithRestResponseAsync();
 
     /**
      * Get null date value.
      *
-     * @return the {@link Maybe&lt;LocalDate&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     Maybe<LocalDate> getNullAsync();
 
@@ -70,21 +72,21 @@ public interface Dates {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;LocalDate&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     ServiceFuture<LocalDate> getInvalidDateAsync(ServiceCallback<LocalDate> serviceCallback);
 
     /**
      * Get invalid date value.
      *
-     * @return the {@link Single&lt;RestResponse&lt;Void, LocalDate&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, LocalDate>> getInvalidDateWithRestResponseAsync();
+    Single<BodyResponse<LocalDate>> getInvalidDateWithRestResponseAsync();
 
     /**
      * Get invalid date value.
      *
-     * @return the {@link Maybe&lt;LocalDate&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     Maybe<LocalDate> getInvalidDateAsync();
 
@@ -102,21 +104,21 @@ public interface Dates {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;LocalDate&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     ServiceFuture<LocalDate> getOverflowDateAsync(ServiceCallback<LocalDate> serviceCallback);
 
     /**
      * Get overflow date value.
      *
-     * @return the {@link Single&lt;RestResponse&lt;Void, LocalDate&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, LocalDate>> getOverflowDateWithRestResponseAsync();
+    Single<BodyResponse<LocalDate>> getOverflowDateWithRestResponseAsync();
 
     /**
      * Get overflow date value.
      *
-     * @return the {@link Maybe&lt;LocalDate&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     Maybe<LocalDate> getOverflowDateAsync();
 
@@ -134,21 +136,21 @@ public interface Dates {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;LocalDate&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     ServiceFuture<LocalDate> getUnderflowDateAsync(ServiceCallback<LocalDate> serviceCallback);
 
     /**
      * Get underflow date value.
      *
-     * @return the {@link Single&lt;RestResponse&lt;Void, LocalDate&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, LocalDate>> getUnderflowDateWithRestResponseAsync();
+    Single<BodyResponse<LocalDate>> getUnderflowDateWithRestResponseAsync();
 
     /**
      * Get underflow date value.
      *
-     * @return the {@link Maybe&lt;LocalDate&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     Maybe<LocalDate> getUnderflowDateAsync();
 
@@ -168,7 +170,7 @@ public interface Dates {
      * @param dateBody the LocalDate value.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;Void&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     ServiceFuture<Void> putMaxDateAsync(@NonNull LocalDate dateBody, ServiceCallback<Void> serviceCallback);
 
@@ -177,16 +179,16 @@ public interface Dates {
      *
      * @param dateBody the LocalDate value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, Void>> putMaxDateWithRestResponseAsync(@NonNull LocalDate dateBody);
+    Single<VoidResponse> putMaxDateWithRestResponseAsync(@NonNull LocalDate dateBody);
 
     /**
      * Put max date value 9999-12-31.
      *
      * @param dateBody the LocalDate value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link Completable} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     Completable putMaxDateAsync(@NonNull LocalDate dateBody);
 
@@ -204,21 +206,21 @@ public interface Dates {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;LocalDate&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     ServiceFuture<LocalDate> getMaxDateAsync(ServiceCallback<LocalDate> serviceCallback);
 
     /**
      * Get max date value 9999-12-31.
      *
-     * @return the {@link Single&lt;RestResponse&lt;Void, LocalDate&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, LocalDate>> getMaxDateWithRestResponseAsync();
+    Single<BodyResponse<LocalDate>> getMaxDateWithRestResponseAsync();
 
     /**
      * Get max date value 9999-12-31.
      *
-     * @return the {@link Maybe&lt;LocalDate&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     Maybe<LocalDate> getMaxDateAsync();
 
@@ -238,7 +240,7 @@ public interface Dates {
      * @param dateBody the LocalDate value.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;Void&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     ServiceFuture<Void> putMinDateAsync(@NonNull LocalDate dateBody, ServiceCallback<Void> serviceCallback);
 
@@ -247,16 +249,16 @@ public interface Dates {
      *
      * @param dateBody the LocalDate value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, Void>> putMinDateWithRestResponseAsync(@NonNull LocalDate dateBody);
+    Single<VoidResponse> putMinDateWithRestResponseAsync(@NonNull LocalDate dateBody);
 
     /**
      * Put min date value 0000-01-01.
      *
      * @param dateBody the LocalDate value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link Completable} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     Completable putMinDateAsync(@NonNull LocalDate dateBody);
 
@@ -274,21 +276,21 @@ public interface Dates {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;LocalDate&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     ServiceFuture<LocalDate> getMinDateAsync(ServiceCallback<LocalDate> serviceCallback);
 
     /**
      * Get min date value 0000-01-01.
      *
-     * @return the {@link Single&lt;RestResponse&lt;Void, LocalDate&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, LocalDate>> getMinDateWithRestResponseAsync();
+    Single<BodyResponse<LocalDate>> getMinDateWithRestResponseAsync();
 
     /**
      * Get min date value 0000-01-01.
      *
-     * @return the {@link Maybe&lt;LocalDate&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     Maybe<LocalDate> getMinDateAsync();
 }

@@ -10,9 +10,11 @@
 
 package fixtures.bodystring;
 
-import com.microsoft.rest.v2.RestResponse;
+import com.microsoft.rest.v2.BodyResponse;
 import com.microsoft.rest.v2.ServiceCallback;
 import com.microsoft.rest.v2.ServiceFuture;
+import com.microsoft.rest.v2.VoidResponse;
+import fixtures.bodystring.models.ErrorException;
 import io.reactivex.Completable;
 import io.reactivex.Maybe;
 import io.reactivex.Single;
@@ -37,21 +39,21 @@ public interface Strings {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;String&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     ServiceFuture<String> getNullAsync(ServiceCallback<String> serviceCallback);
 
     /**
      * Get null string value value.
      *
-     * @return the {@link Single&lt;RestResponse&lt;Void, String&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, String>> getNullWithRestResponseAsync();
+    Single<BodyResponse<String>> getNullWithRestResponseAsync();
 
     /**
      * Get null string value value.
      *
-     * @return the {@link Maybe&lt;String&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     Maybe<String> getNullAsync();
 
@@ -68,21 +70,21 @@ public interface Strings {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;Void&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     ServiceFuture<Void> putNullAsync(ServiceCallback<Void> serviceCallback);
 
     /**
      * Set string value null.
      *
-     * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, Void>> putNullWithRestResponseAsync();
+    Single<VoidResponse> putNullWithRestResponseAsync();
 
     /**
      * Set string value null.
      *
-     * @return the {@link Completable} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     Completable putNullAsync();
 
@@ -102,7 +104,7 @@ public interface Strings {
      * @param stringBody Possible values include: ''.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;Void&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     ServiceFuture<Void> putNullAsync(String stringBody, ServiceCallback<Void> serviceCallback);
 
@@ -111,16 +113,16 @@ public interface Strings {
      *
      * @param stringBody Possible values include: ''.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, Void>> putNullWithRestResponseAsync(String stringBody);
+    Single<VoidResponse> putNullWithRestResponseAsync(String stringBody);
 
     /**
      * Set string value null.
      *
      * @param stringBody Possible values include: ''.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link Completable} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     Completable putNullAsync(String stringBody);
 
@@ -138,21 +140,21 @@ public interface Strings {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;String&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     ServiceFuture<String> getEmptyAsync(ServiceCallback<String> serviceCallback);
 
     /**
      * Get empty string value value ''.
      *
-     * @return the {@link Single&lt;RestResponse&lt;Void, String&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, String>> getEmptyWithRestResponseAsync();
+    Single<BodyResponse<String>> getEmptyWithRestResponseAsync();
 
     /**
      * Get empty string value value ''.
      *
-     * @return the {@link Maybe&lt;String&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     Maybe<String> getEmptyAsync();
 
@@ -172,7 +174,7 @@ public interface Strings {
      * @param stringBody Possible values include: ''.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;Void&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     ServiceFuture<Void> putEmptyAsync(@NonNull String stringBody, ServiceCallback<Void> serviceCallback);
 
@@ -181,16 +183,16 @@ public interface Strings {
      *
      * @param stringBody Possible values include: ''.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, Void>> putEmptyWithRestResponseAsync(@NonNull String stringBody);
+    Single<VoidResponse> putEmptyWithRestResponseAsync(@NonNull String stringBody);
 
     /**
      * Set string value empty ''.
      *
      * @param stringBody Possible values include: ''.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link Completable} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     Completable putEmptyAsync(@NonNull String stringBody);
 
@@ -208,21 +210,21 @@ public interface Strings {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;String&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     ServiceFuture<String> getMbcsAsync(ServiceCallback<String> serviceCallback);
 
     /**
      * Get mbcs string value '啊齄丂狛狜隣郎隣兀﨩ˊ〞〡￤℡㈱‐ー﹡﹢﹫、〓ⅰⅹ⒈€㈠㈩ⅠⅫ！￣ぁんァヶΑ︴АЯаяāɡㄅㄩ─╋︵﹄︻︱︳︴ⅰⅹɑɡ〇〾⿻⺁䜣€'.
      *
-     * @return the {@link Single&lt;RestResponse&lt;Void, String&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, String>> getMbcsWithRestResponseAsync();
+    Single<BodyResponse<String>> getMbcsWithRestResponseAsync();
 
     /**
      * Get mbcs string value '啊齄丂狛狜隣郎隣兀﨩ˊ〞〡￤℡㈱‐ー﹡﹢﹫、〓ⅰⅹ⒈€㈠㈩ⅠⅫ！￣ぁんァヶΑ︴АЯаяāɡㄅㄩ─╋︵﹄︻︱︳︴ⅰⅹɑɡ〇〾⿻⺁䜣€'.
      *
-     * @return the {@link Maybe&lt;String&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     Maybe<String> getMbcsAsync();
 
@@ -242,7 +244,7 @@ public interface Strings {
      * @param stringBody Possible values include: '啊齄丂狛狜隣郎隣兀﨩ˊ〞〡￤℡㈱‐ー﹡﹢﹫、〓ⅰⅹ⒈€㈠㈩ⅠⅫ！￣ぁんァヶΑ︴АЯаяāɡㄅㄩ─╋︵﹄︻︱︳︴ⅰⅹɑɡ〇〾⿻⺁䜣€'.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;Void&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     ServiceFuture<Void> putMbcsAsync(@NonNull String stringBody, ServiceCallback<Void> serviceCallback);
 
@@ -251,16 +253,16 @@ public interface Strings {
      *
      * @param stringBody Possible values include: '啊齄丂狛狜隣郎隣兀﨩ˊ〞〡￤℡㈱‐ー﹡﹢﹫、〓ⅰⅹ⒈€㈠㈩ⅠⅫ！￣ぁんァヶΑ︴АЯаяāɡㄅㄩ─╋︵﹄︻︱︳︴ⅰⅹɑɡ〇〾⿻⺁䜣€'.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, Void>> putMbcsWithRestResponseAsync(@NonNull String stringBody);
+    Single<VoidResponse> putMbcsWithRestResponseAsync(@NonNull String stringBody);
 
     /**
      * Set string value mbcs '啊齄丂狛狜隣郎隣兀﨩ˊ〞〡￤℡㈱‐ー﹡﹢﹫、〓ⅰⅹ⒈€㈠㈩ⅠⅫ！￣ぁんァヶΑ︴АЯаяāɡㄅㄩ─╋︵﹄︻︱︳︴ⅰⅹɑɡ〇〾⿻⺁䜣€'.
      *
      * @param stringBody Possible values include: '啊齄丂狛狜隣郎隣兀﨩ˊ〞〡￤℡㈱‐ー﹡﹢﹫、〓ⅰⅹ⒈€㈠㈩ⅠⅫ！￣ぁんァヶΑ︴АЯаяāɡㄅㄩ─╋︵﹄︻︱︳︴ⅰⅹɑɡ〇〾⿻⺁䜣€'.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link Completable} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     Completable putMbcsAsync(@NonNull String stringBody);
 
@@ -278,21 +280,21 @@ public interface Strings {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;String&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     ServiceFuture<String> getWhitespaceAsync(ServiceCallback<String> serviceCallback);
 
     /**
      * Get string value with leading and trailing whitespace '&lt;tab&gt;&lt;space&gt;&lt;space&gt;Now is the time for all good men to come to the aid of their country&lt;tab&gt;&lt;space&gt;&lt;space&gt;'.
      *
-     * @return the {@link Single&lt;RestResponse&lt;Void, String&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, String>> getWhitespaceWithRestResponseAsync();
+    Single<BodyResponse<String>> getWhitespaceWithRestResponseAsync();
 
     /**
      * Get string value with leading and trailing whitespace '&lt;tab&gt;&lt;space&gt;&lt;space&gt;Now is the time for all good men to come to the aid of their country&lt;tab&gt;&lt;space&gt;&lt;space&gt;'.
      *
-     * @return the {@link Maybe&lt;String&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     Maybe<String> getWhitespaceAsync();
 
@@ -312,7 +314,7 @@ public interface Strings {
      * @param stringBody Possible values include: '    Now is the time for all good men to come to the aid of their country    '.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;Void&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     ServiceFuture<Void> putWhitespaceAsync(@NonNull String stringBody, ServiceCallback<Void> serviceCallback);
 
@@ -321,16 +323,16 @@ public interface Strings {
      *
      * @param stringBody Possible values include: '    Now is the time for all good men to come to the aid of their country    '.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, Void>> putWhitespaceWithRestResponseAsync(@NonNull String stringBody);
+    Single<VoidResponse> putWhitespaceWithRestResponseAsync(@NonNull String stringBody);
 
     /**
      * Set String value with leading and trailing whitespace '&lt;tab&gt;&lt;space&gt;&lt;space&gt;Now is the time for all good men to come to the aid of their country&lt;tab&gt;&lt;space&gt;&lt;space&gt;'.
      *
      * @param stringBody Possible values include: '    Now is the time for all good men to come to the aid of their country    '.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link Completable} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     Completable putWhitespaceAsync(@NonNull String stringBody);
 
@@ -348,21 +350,21 @@ public interface Strings {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;String&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     ServiceFuture<String> getNotProvidedAsync(ServiceCallback<String> serviceCallback);
 
     /**
      * Get String value when no string value is sent in response payload.
      *
-     * @return the {@link Single&lt;RestResponse&lt;Void, String&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, String>> getNotProvidedWithRestResponseAsync();
+    Single<BodyResponse<String>> getNotProvidedWithRestResponseAsync();
 
     /**
      * Get String value when no string value is sent in response payload.
      *
-     * @return the {@link Maybe&lt;String&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     Maybe<String> getNotProvidedAsync();
 
@@ -380,21 +382,21 @@ public interface Strings {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;byte[]&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     ServiceFuture<byte[]> getBase64EncodedAsync(ServiceCallback<byte[]> serviceCallback);
 
     /**
      * Get value that is base64 encoded.
      *
-     * @return the {@link Single&lt;RestResponse&lt;Void, byte[]&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, byte[]>> getBase64EncodedWithRestResponseAsync();
+    Single<BodyResponse<byte[]>> getBase64EncodedWithRestResponseAsync();
 
     /**
      * Get value that is base64 encoded.
      *
-     * @return the {@link Maybe&lt;byte[]&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     Maybe<byte[]> getBase64EncodedAsync();
 
@@ -412,21 +414,21 @@ public interface Strings {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;byte[]&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     ServiceFuture<byte[]> getBase64UrlEncodedAsync(ServiceCallback<byte[]> serviceCallback);
 
     /**
      * Get value that is base64url encoded.
      *
-     * @return the {@link Single&lt;RestResponse&lt;Void, byte[]&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, byte[]>> getBase64UrlEncodedWithRestResponseAsync();
+    Single<BodyResponse<byte[]>> getBase64UrlEncodedWithRestResponseAsync();
 
     /**
      * Get value that is base64url encoded.
      *
-     * @return the {@link Maybe&lt;byte[]&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     Maybe<byte[]> getBase64UrlEncodedAsync();
 
@@ -446,7 +448,7 @@ public interface Strings {
      * @param stringBody the byte[] value.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;Void&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     ServiceFuture<Void> putBase64UrlEncodedAsync(@NonNull byte[] stringBody, ServiceCallback<Void> serviceCallback);
 
@@ -455,16 +457,16 @@ public interface Strings {
      *
      * @param stringBody the byte[] value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, Void>> putBase64UrlEncodedWithRestResponseAsync(@NonNull byte[] stringBody);
+    Single<VoidResponse> putBase64UrlEncodedWithRestResponseAsync(@NonNull byte[] stringBody);
 
     /**
      * Put value that is base64url encoded.
      *
      * @param stringBody the byte[] value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link Completable} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     Completable putBase64UrlEncodedAsync(@NonNull byte[] stringBody);
 
@@ -482,21 +484,21 @@ public interface Strings {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;byte[]&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     ServiceFuture<byte[]> getNullBase64UrlEncodedAsync(ServiceCallback<byte[]> serviceCallback);
 
     /**
      * Get null value that is expected to be base64url encoded.
      *
-     * @return the {@link Single&lt;RestResponse&lt;Void, byte[]&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, byte[]>> getNullBase64UrlEncodedWithRestResponseAsync();
+    Single<BodyResponse<byte[]>> getNullBase64UrlEncodedWithRestResponseAsync();
 
     /**
      * Get null value that is expected to be base64url encoded.
      *
-     * @return the {@link Maybe&lt;byte[]&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     Maybe<byte[]> getNullBase64UrlEncodedAsync();
 }

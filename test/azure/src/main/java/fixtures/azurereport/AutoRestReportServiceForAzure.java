@@ -10,9 +10,10 @@
 
 package fixtures.azurereport;
 
-import com.microsoft.rest.v2.RestResponse;
+import com.microsoft.rest.v2.BodyResponse;
 import com.microsoft.rest.v2.ServiceCallback;
 import com.microsoft.rest.v2.ServiceFuture;
+import fixtures.azurereport.models.ErrorException;
 import io.reactivex.Maybe;
 import io.reactivex.Single;
 import java.util.Map;
@@ -80,21 +81,21 @@ public interface AutoRestReportServiceForAzure {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;Map&lt;String, Integer&gt;&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     ServiceFuture<Map<String, Integer>> getReportAsync(ServiceCallback<Map<String, Integer>> serviceCallback);
 
     /**
      * Get test coverage report.
      *
-     * @return the {@link Single&lt;RestResponse&lt;Void, Map&lt;String, Integer&gt;&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, Map<String, Integer>>> getReportWithRestResponseAsync();
+    Single<BodyResponse<Map<String, Integer>>> getReportWithRestResponseAsync();
 
     /**
      * Get test coverage report.
      *
-     * @return the {@link Maybe&lt;Map&lt;String, Integer&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     Maybe<Map<String, Integer>> getReportAsync();
 
@@ -115,7 +116,7 @@ public interface AutoRestReportServiceForAzure {
      * @param qualifier If specified, qualifies the generated report further (e.g. '2.7' vs '3.5' in for Python). The only effect is, that generators that run all tests several times, can distinguish the generated reports.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link ServiceFuture&lt;Map&lt;String, Integer&gt;&gt;} object.
+     * @return a ServiceFuture which will be completed with the result of the network request.
      */
     ServiceFuture<Map<String, Integer>> getReportAsync(String qualifier, ServiceCallback<Map<String, Integer>> serviceCallback);
 
@@ -124,16 +125,16 @@ public interface AutoRestReportServiceForAzure {
      *
      * @param qualifier If specified, qualifies the generated report further (e.g. '2.7' vs '3.5' in for Python). The only effect is, that generators that run all tests several times, can distinguish the generated reports.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link Single&lt;RestResponse&lt;Void, Map&lt;String, Integer&gt;&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
-    Single<RestResponse<Void, Map<String, Integer>>> getReportWithRestResponseAsync(String qualifier);
+    Single<BodyResponse<Map<String, Integer>>> getReportWithRestResponseAsync(String qualifier);
 
     /**
      * Get test coverage report.
      *
      * @param qualifier If specified, qualifies the generated report further (e.g. '2.7' vs '3.5' in for Python). The only effect is, that generators that run all tests several times, can distinguish the generated reports.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the {@link Maybe&lt;Map&lt;String, Integer&gt;&gt;} object if successful.
+     * @return a Single which performs the network request upon subscription.
      */
     Maybe<Map<String, Integer>> getReportAsync(String qualifier);
 }
