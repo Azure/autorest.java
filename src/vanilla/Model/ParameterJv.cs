@@ -18,6 +18,11 @@ namespace AutoRest.Java.Model
                         "{0}.{1}()",
                         Method != null && true == Method.Group.IsNullOrEmpty() ? "this" : "this.client",
                         ClientProperty.Name.ToCamelCase());
+
+            if (ModelType is PrimaryType pt && pt.KnownPrimaryType == KnownPrimaryType.Decimal)
+            {
+                DefaultValue = $"new BigDecimal(\"{DefaultValue}\")";
+            }
         }
 
         [JsonIgnore]
