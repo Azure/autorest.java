@@ -33,11 +33,11 @@ import com.microsoft.rest.ExpandableStringEnum;
 public enum @(Model.Name) {
 @for (int i = 0; i < Model.Values.Count - 1; i++)
 {
-@:    /** Enum value @(Model.Values[i].SerializedName). */
+@:    /** @((Model.Values[i].Description != null ? Model.Values[i].Description.TrimEnd(new char[] {'.'}) : "Enum value " + Model.Values[i].SerializedName) + ".") */
 @:    @(Model.Values[i].MemberName)("@(Model.Values[i].SerializedName)"),
 @EmptyLine
 }
-    /** Enum value @(Model.Values.Last().SerializedName). */
+    /** @((Model.Values.Last().Description != null ? Model.Values.Last().Description.TrimEnd(new char[] {'.'}) : "Enum value " + Model.Values.Last().SerializedName) + ".") */
     @(Model.Values.Last().MemberName)("@(Model.Values.Last().SerializedName)");
     @EmptyLine
 
