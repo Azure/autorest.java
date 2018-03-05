@@ -26,7 +26,7 @@ public interface AutoRestUrlTestService {
     /**
      * The default base URL.
      */
-    String DEFAULT_BASE_URL = "http://localhost";
+    String DEFAULT_BASE_URL = "http://localhost:3000";
 
     /**
      * Gets A string value 'globalItemStringPath' that appears in the path.

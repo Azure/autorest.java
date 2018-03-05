@@ -39,7 +39,7 @@ public class AutoRestSwaggerBATFileServiceImpl extends ServiceClient implements 
      * Initializes an instance of AutoRestSwaggerBATFileService client.
      */
     public AutoRestSwaggerBATFileServiceImpl() {
-        this("http://localhost");
+        this("http://localhost:3000");
     }
 
     /**
@@ -59,7 +59,7 @@ public class AutoRestSwaggerBATFileServiceImpl extends ServiceClient implements 
      * @param restBuilder the builder for building an Retrofit client, bundled with user configurations
      */
     public AutoRestSwaggerBATFileServiceImpl(OkHttpClient.Builder clientBuilder, Retrofit.Builder restBuilder) {
-        this("http://localhost", clientBuilder, restBuilder);
+        this("http://localhost:3000", clientBuilder, restBuilder);
         initialize();
     }
 

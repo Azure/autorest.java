@@ -39,7 +39,7 @@ public class AutoRestSwaggerBATdictionaryServiceImpl extends ServiceClient imple
      * Initializes an instance of AutoRestSwaggerBATdictionaryService client.
      */
     public AutoRestSwaggerBATdictionaryServiceImpl() {
-        this("http://localhost");
+        this("http://localhost:3000");
     }
 
     /**
@@ -59,7 +59,7 @@ public class AutoRestSwaggerBATdictionaryServiceImpl extends ServiceClient imple
      * @param restBuilder the builder for building an Retrofit client, bundled with user configurations
      */
     public AutoRestSwaggerBATdictionaryServiceImpl(OkHttpClient.Builder clientBuilder, Retrofit.Builder restBuilder) {
-        this("http://localhost", clientBuilder, restBuilder);
+        this("http://localhost:3000", clientBuilder, restBuilder);
         initialize();
     }
 

@@ -118,7 +118,7 @@ public class AutoRestParameterGroupingTestServiceImpl extends AzureServiceClient
      * @param credentials the management credentials for Azure
      */
     public AutoRestParameterGroupingTestServiceImpl(ServiceClientCredentials credentials) {
-        this("https://localhost", credentials);
+        this("http://localhost:3000", credentials);
     }
 
     /**

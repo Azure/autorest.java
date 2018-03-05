@@ -113,7 +113,7 @@ public class AutoRestUrlTestServiceImpl extends ServiceClient implements AutoRes
      * Initializes an instance of AutoRestUrlTestService client.
      */
     public AutoRestUrlTestServiceImpl() {
-        this("http://localhost");
+        this("http://localhost:3000");
     }
 
     /**
@@ -133,7 +133,7 @@ public class AutoRestUrlTestServiceImpl extends ServiceClient implements AutoRes
      * @param restBuilder the builder for building an Retrofit client, bundled with user configurations
      */
     public AutoRestUrlTestServiceImpl(OkHttpClient.Builder clientBuilder, Retrofit.Builder restBuilder) {
-        this("http://localhost", clientBuilder, restBuilder);
+        this("http://localhost:3000", clientBuilder, restBuilder);
         initialize();
     }
 

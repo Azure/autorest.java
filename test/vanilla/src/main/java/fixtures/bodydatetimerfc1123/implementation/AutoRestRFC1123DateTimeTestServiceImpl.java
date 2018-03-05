@@ -39,7 +39,7 @@ public class AutoRestRFC1123DateTimeTestServiceImpl extends ServiceClient implem
      * Initializes an instance of AutoRestRFC1123DateTimeTestService client.
      */
     public AutoRestRFC1123DateTimeTestServiceImpl() {
-        this("https://localhost");
+        this("http://localhost:3000");
     }
 
     /**
@@ -59,7 +59,7 @@ public class AutoRestRFC1123DateTimeTestServiceImpl extends ServiceClient implem
      * @param restBuilder the builder for building an Retrofit client, bundled with user configurations
      */
     public AutoRestRFC1123DateTimeTestServiceImpl(OkHttpClient.Builder clientBuilder, Retrofit.Builder restBuilder) {
-        this("https://localhost", clientBuilder, restBuilder);
+        this("http://localhost:3000", clientBuilder, restBuilder);
         initialize();
     }
 

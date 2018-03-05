@@ -120,7 +120,7 @@ public class AutoRestHeadTestServiceImpl extends AzureServiceClient implements A
      * @param credentials the management credentials for Azure
      */
     public AutoRestHeadTestServiceImpl(ServiceClientCredentials credentials) {
-        this("http://localhost", credentials);
+        this("http://localhost:3000", credentials);
     }
 
     /**

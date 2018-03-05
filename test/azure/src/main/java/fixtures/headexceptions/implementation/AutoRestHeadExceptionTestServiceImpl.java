@@ -120,7 +120,7 @@ public class AutoRestHeadExceptionTestServiceImpl extends AzureServiceClient imp
      * @param credentials the management credentials for Azure
      */
     public AutoRestHeadExceptionTestServiceImpl(ServiceClientCredentials credentials) {
-        this("http://localhost", credentials);
+        this("http://localhost:3000", credentials);
     }
 
     /**

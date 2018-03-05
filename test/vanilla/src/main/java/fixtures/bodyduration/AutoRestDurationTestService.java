@@ -26,7 +26,7 @@ public interface AutoRestDurationTestService {
     /**
      * The default base URL.
      */
-    String DEFAULT_BASE_URL = "https://localhost";
+    String DEFAULT_BASE_URL = "http://localhost:3000";
 
     /**
      * Gets the Durations object to access its operations.

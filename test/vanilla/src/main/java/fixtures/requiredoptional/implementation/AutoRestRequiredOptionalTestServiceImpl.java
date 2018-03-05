@@ -122,7 +122,7 @@ public class AutoRestRequiredOptionalTestServiceImpl extends ServiceClient imple
      * Initializes an instance of AutoRestRequiredOptionalTestService client.
      */
     public AutoRestRequiredOptionalTestServiceImpl() {
-        this("http://localhost");
+        this("http://localhost:3000");
     }
 
     /**
@@ -142,7 +142,7 @@ public class AutoRestRequiredOptionalTestServiceImpl extends ServiceClient imple
      * @param restBuilder the builder for building an Retrofit client, bundled with user configurations
      */
     public AutoRestRequiredOptionalTestServiceImpl(OkHttpClient.Builder clientBuilder, Retrofit.Builder restBuilder) {
-        this("http://localhost", clientBuilder, restBuilder);
+        this("http://localhost:3000", clientBuilder, restBuilder);
         initialize();
     }
 

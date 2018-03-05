@@ -25,14 +25,21 @@ public class Error {
     /**
      * The constantId property.
      */
-    @JsonProperty(value = "constantId")
-    private Integer constantId;
+    @JsonProperty(value = "constantId", required = true)
+    private int constantId;
 
     /**
      * The message property.
      */
     @JsonProperty(value = "message")
     private String message;
+
+    /**
+     * Creates an instance of Error class.
+     */
+    public Error() {
+        constantId = 1;
+    }
 
     /**
      * Get the status value.
@@ -59,7 +66,7 @@ public class Error {
      *
      * @return the constantId value
      */
-    public Integer constantId() {
+    public int constantId() {
         return this.constantId;
     }
 
@@ -69,7 +76,7 @@ public class Error {
      * @param constantId the constantId value to set
      * @return the Error object itself.
      */
-    public Error withConstantId(Integer constantId) {
+    public Error withConstantId(int constantId) {
         this.constantId = constantId;
         return this;
     }

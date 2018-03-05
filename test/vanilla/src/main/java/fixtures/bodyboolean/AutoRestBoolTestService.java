@@ -26,7 +26,7 @@ public interface AutoRestBoolTestService {
     /**
      * The default base URL.
      */
-    String DEFAULT_BASE_URL = "http://localhost";
+    String DEFAULT_BASE_URL = "http://localhost:3000";
 
     /**
      * Gets the Bools object to access its operations.

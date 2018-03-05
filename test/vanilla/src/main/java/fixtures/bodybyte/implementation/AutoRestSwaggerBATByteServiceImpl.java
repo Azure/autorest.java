@@ -39,7 +39,7 @@ public class AutoRestSwaggerBATByteServiceImpl extends ServiceClient implements 
      * Initializes an instance of AutoRestSwaggerBATByteService client.
      */
     public AutoRestSwaggerBATByteServiceImpl() {
-        this("http://localhost");
+        this("http://localhost:3000");
     }
 
     /**
@@ -59,7 +59,7 @@ public class AutoRestSwaggerBATByteServiceImpl extends ServiceClient implements 
      * @param restBuilder the builder for building an Retrofit client, bundled with user configurations
      */
     public AutoRestSwaggerBATByteServiceImpl(OkHttpClient.Builder clientBuilder, Retrofit.Builder restBuilder) {
-        this("http://localhost", clientBuilder, restBuilder);
+        this("http://localhost:3000", clientBuilder, restBuilder);
         initialize();
     }
 

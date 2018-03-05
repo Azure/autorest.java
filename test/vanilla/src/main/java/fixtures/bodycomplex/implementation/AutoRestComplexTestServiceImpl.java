@@ -160,7 +160,7 @@ public class AutoRestComplexTestServiceImpl extends ServiceClient implements Aut
      * Initializes an instance of AutoRestComplexTestService client.
      */
     public AutoRestComplexTestServiceImpl() {
-        this("http://localhost");
+        this("http://localhost:3000");
     }
 
     /**
@@ -180,7 +180,7 @@ public class AutoRestComplexTestServiceImpl extends ServiceClient implements Aut
      * @param restBuilder the builder for building an Retrofit client, bundled with user configurations
      */
     public AutoRestComplexTestServiceImpl(OkHttpClient.Builder clientBuilder, Retrofit.Builder restBuilder) {
-        this("http://localhost", clientBuilder, restBuilder);
+        this("http://localhost:3000", clientBuilder, restBuilder);
         initialize();
     }
 
