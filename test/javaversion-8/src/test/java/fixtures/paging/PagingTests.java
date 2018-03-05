@@ -1,13 +1,13 @@
-package fixtures.javaversion8;
+package fixtures.paging;
 
 import com.microsoft.azure.v2.CloudException;
 import com.microsoft.azure.v2.Page;
 import com.microsoft.rest.v2.credentials.BasicAuthenticationCredentials;
-import fixtures.javaversion8.implementation.AutoRestPagingTestServiceImpl;
-import fixtures.javaversion8.models.CustomParameterGroup;
-import fixtures.javaversion8.models.PagingGetMultiplePagesWithOffsetOptions;
-import fixtures.javaversion8.models.Product;
-import fixtures.javaversion8.models.ProductProperties;
+import fixtures.paging.implementation.AutoRestPagingTestServiceImpl;
+import fixtures.paging.models.CustomParameterGroup;
+import fixtures.paging.models.PagingGetMultiplePagesWithOffsetOptions;
+import fixtures.paging.models.Product;
+import fixtures.paging.models.ProductProperties;
 import io.reactivex.Observer;
 import io.reactivex.disposables.Disposable;
 import org.junit.Assert;
