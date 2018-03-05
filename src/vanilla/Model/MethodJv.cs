@@ -61,12 +61,23 @@ namespace AutoRest.Java.Model
                 List<string> declarations = new List<string>();
                 foreach (ParameterJv parameter in OrderedRetrofitParameters)
                 {
+                    bool alreadyEncoded = parameter.Extensions.ContainsKey(SwaggerExtensions.SkipUrlEncodingExtension) &&
+                        (bool) parameter.Extensions[SwaggerExtensions.SkipUrlEncodingExtension] == true;
+
                     StringBuilder declarationBuilder = new StringBuilder();
                     if (Url.Contains("{" + parameter.Name + "}"))
                     {
                         parameter.Location = ParameterLocation.Path;
                     }
-                    if (parameter.Location == ParameterLocation.Path ||
+
+                    if ((parameter.Location == ParameterLocation.Path || parameter.Location == ParameterLocation.Query) && alreadyEncoded)
+                    {
+                        declarationBuilder.Append(string.Format(CultureInfo.InvariantCulture,
+                            "@{0}(value = \"{1}\", encoded = true) ",
+                            parameter.Location.ToString(),
+                            parameter.SerializedName));
+                    }
+                    else if (parameter.Location == ParameterLocation.Path ||
                         parameter.Location == ParameterLocation.Query ||
                         parameter.Location == ParameterLocation.Header)
                     {
@@ -222,7 +233,7 @@ namespace AutoRest.Java.Model
 
         [JsonIgnore]
         public virtual bool IsParameterizedHost => CodeModel.Extensions.ContainsKey(SwaggerExtensions.ParameterizedHostExtension);
-        
+
         /// <summary>
         /// Generate a reference to the ServiceClient
         /// </summary>
@@ -392,7 +403,7 @@ namespace AutoRest.Java.Model
         }
 
         /// <summary>
-        /// Gets the expression for response body initialization 
+        /// Gets the expression for response body initialization
         /// </summary>
         [JsonIgnore]
         public virtual string InitializeResponseBody
