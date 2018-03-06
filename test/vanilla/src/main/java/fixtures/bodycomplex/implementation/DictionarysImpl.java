@@ -130,7 +130,7 @@ public final class DictionarysImpl implements Dictionarys {
      */
     public Maybe<DictionaryWrapper> getValidAsync() {
         return getValidWithRestResponseAsync()
-            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .flatMapMaybe((BodyResponse<DictionaryWrapper> res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -222,7 +222,7 @@ public final class DictionarysImpl implements Dictionarys {
      */
     public Maybe<DictionaryWrapper> getEmptyAsync() {
         return getEmptyWithRestResponseAsync()
-            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .flatMapMaybe((BodyResponse<DictionaryWrapper> res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -314,7 +314,7 @@ public final class DictionarysImpl implements Dictionarys {
      */
     public Maybe<DictionaryWrapper> getNullAsync() {
         return getNullWithRestResponseAsync()
-            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .flatMapMaybe((BodyResponse<DictionaryWrapper> res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -355,6 +355,6 @@ public final class DictionarysImpl implements Dictionarys {
      */
     public Maybe<DictionaryWrapper> getNotProvidedAsync() {
         return getNotProvidedWithRestResponseAsync()
-            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .flatMapMaybe((BodyResponse<DictionaryWrapper> res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 }

@@ -142,24 +142,6 @@ namespace AutoRest.Java
         {
             Settings autoRestSettings = Settings.Instance;
 
-            JavaVersion javaVersion;
-            string javaVersionString = GetStringSetting(autoRestSettings, "java-version", "1.7");
-            switch (javaVersionString)
-            {
-                case "1.7":
-                case "7":
-                    javaVersion = JavaVersion.Java7;
-                    break;
-
-                case "1.8":
-                case "8":
-                    javaVersion = JavaVersion.Java8;
-                    break;
-
-                default:
-                    throw new ArgumentException($"Unrecognized \"java-version\" argument: \"{javaVersionString}\"");
-            }
-
             JavaSettings javaSettings = new JavaSettings(
                 setAddCredentials: (bool value) => autoRestSettings.AddCredentials = value,
                 isAzure: GetBoolSetting(autoRestSettings, "azure-arm"),
@@ -177,8 +159,7 @@ namespace AutoRest.Java
                 generateClientInterfaces: GetBoolSetting(autoRestSettings, "generate-client-interfaces", true),
                 implementationSubpackage: GetStringSetting(autoRestSettings, "implementation-subpackage", "implementation"),
                 modelsSubpackage: GetStringSetting(autoRestSettings, "models-subpackage", "models"),
-                requiredParameterClientMethods: GetBoolSetting(autoRestSettings, "required-parameter-client-methods", true),
-                javaVersion: javaVersion);
+                requiredParameterClientMethods: GetBoolSetting(autoRestSettings, "required-parameter-client-methods", true));
 
             serviceClientCredentialsParameter = new Lazy<Parameter>(() =>
                 new Parameter(
@@ -3942,7 +3923,7 @@ namespace AutoRest.Java
                         .First((string parameterName) => parameterName.StartsWith("next", StringComparison.OrdinalIgnoreCase));
 
                     nextPageLinkVariableName = nextPageLinkParameterName;
-                    if (settings.JavaVersion != JavaVersion.Java7 && clientMethod.Type != ClientMethodType.PagingSync)
+                    if (clientMethod.Type != ClientMethodType.PagingSync)
                     {
                         int count = 0;
                         while (clientMethod.Parameters.Any((Parameter clientMethodParameter) => clientMethodParameter.Name == nextPageLinkVariableName))
@@ -4140,10 +4121,10 @@ namespace AutoRest.Java
                             {
                                 function.Line(".toObservable()");
                                 function.Text($".concatMap(");
-                                Lambda(function, pageType, "page", clientMethod.ReturnValue.Type, settings, subFunction =>
+                                function.Lambda(pageType.ToString(), "page", lambda =>
                                 {
-                                    subFunction.Line($"String {nextPageLinkVariableName} = page.nextPageLink();");
-                                    subFunction.If($"{nextPageLinkVariableName} == null", ifBlock =>
+                                    lambda.Line($"String {nextPageLinkVariableName} = page.nextPageLink();");
+                                    lambda.If($"{nextPageLinkVariableName} == null", ifBlock =>
                                     {
                                         ifBlock.Return("Observable.just(page)");
                                     });
@@ -4159,14 +4140,14 @@ namespace AutoRest.Java
 
                                             if (!groupedType.IsRequired)
                                             {
-                                                subFunction.Line($"{nextGroupTypeCodeName} {nextGroupTypeCamelCaseName} = null;");
-                                                subFunction.Line($"if ({groupedTypeCamelCaseName} != null) {{");
-                                                subFunction.IncreaseIndent();
-                                                subFunction.Line($"{nextGroupTypeCamelCaseName} = new {nextGroupTypeCodeName}();");
+                                                lambda.Line($"{nextGroupTypeCodeName} {nextGroupTypeCamelCaseName} = null;");
+                                                lambda.Line($"if ({groupedTypeCamelCaseName} != null) {{");
+                                                lambda.IncreaseIndent();
+                                                lambda.Line($"{nextGroupTypeCamelCaseName} = new {nextGroupTypeCodeName}();");
                                             }
                                             else
                                             {
-                                                subFunction.Line($"{nextGroupTypeCodeName} {nextGroupTypeCamelCaseName} = new {nextGroupTypeCodeName}();");
+                                                lambda.Line($"{nextGroupTypeCodeName} {nextGroupTypeCamelCaseName} = new {nextGroupTypeCodeName}();");
                                             }
 
                                             foreach (AutoRestParameter outputParameter in nextMethod.InputParameterTransformation.Select(transformation => transformation.OutputParameter))
@@ -4187,18 +4168,18 @@ namespace AutoRest.Java
                                                     }
                                                     outputParameterName = $"{caller}.{clientPropertyName}()";
                                                 }
-                                                subFunction.Line($"{nextGroupTypeCamelCaseName}.with{outputParameterName.ToPascalCase()}({groupedTypeCamelCaseName}.{outputParameterName.ToCamelCase()}());");
+                                                lambda.Line($"{nextGroupTypeCamelCaseName}.with{outputParameterName.ToPascalCase()}({groupedTypeCamelCaseName}.{outputParameterName.ToCamelCase()}());");
                                             }
 
                                             if (!groupedType.IsRequired)
                                             {
-                                                subFunction.DecreaseIndent();
-                                                subFunction.Line("}");
+                                                lambda.DecreaseIndent();
+                                                lambda.Line("}");
                                             }
                                         }
                                     }
 
-                                    subFunction.Return($"Observable.just(page).concatWith({nextMethodInvocation}Async({nextMethodParameterInvocation}))");
+                                    lambda.Return($"Observable.just(page).concatWith({nextMethodInvocation}Async({nextMethodParameterInvocation}))");
                                 });
                                 function.Line(");");
                             });
@@ -4299,9 +4280,17 @@ namespace AutoRest.Java
                                 function.Line($"String nextUrl = {builder.ToString()};");
                             }
 
+                            IType returnValueTypeArgumentType = ((GenericType)restAPIMethod.ReturnType).TypeArguments.Single();
+
                             string restAPIMethodArgumentList = GetRestAPIMethodArgumentList(autoRestMethodOrderedRetrofitParameters, settings);
 
-                            function.Return($"service.{restAPIMethod.Name}({restAPIMethodArgumentList}).map(res -> res.body())");
+                            function.Line($"return service.{restAPIMethod.Name}({restAPIMethodArgumentList})");
+                            function.Indent(() =>
+                            {
+                                function.Text(".map(");
+                                function.Lambda(returnValueTypeArgumentType.ToString(), "res", "res.body()");
+                                function.Line(");");
+                            });
                         });
                         break;
 
@@ -4353,8 +4342,16 @@ namespace AutoRest.Java
                             ApplyParameterTransformations(function, clientMethod, settings);
                             ConvertClientTypesToWireTypes(function, autoRestMethodRetrofitParameters, methodClientReference, settings);
 
+                            IType returnValueTypeArgumentType = ((GenericType)restAPIMethod.ReturnType).TypeArguments.Single();
                             string restAPIMethodArgumentList = GetRestAPIMethodArgumentList(autoRestMethodOrderedRetrofitParameters, settings);
-                            function.Return($"service.{clientMethod.RestAPIMethod.Name}({restAPIMethodArgumentList}).map(res -> res.body()).toObservable()");
+                            function.Line($"return service.{clientMethod.RestAPIMethod.Name}({restAPIMethodArgumentList})");
+                            function.Indent(() =>
+                            {
+                                function.Text(".map(");
+                                function.Lambda(returnValueTypeArgumentType.ToString(), "res", "res.body()");
+                                function.Line(")");
+                                function.Line(".toObservable();");
+                            });
                         });
                         break;
 
@@ -4553,13 +4550,19 @@ namespace AutoRest.Java
                             function.Line($"return {GetSimpleAsyncRestResponseMethodName(clientMethod.RestAPIMethod)}({clientMethod.ArgumentList})");
                             function.Indent(() =>
                             {
+                                GenericType restAPIMethodClientReturnType = (GenericType)ConvertToClientType(restAPIMethod.ReturnType);
+                                IType returnValueTypeArgumentClientType = restAPIMethodClientReturnType.TypeArguments.Single();
                                 if (restAPIMethodReturnBodyClientType != PrimitiveType.Void)
                                 {
-                                    function.Line($".flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));");
+                                    function.Text($".flatMapMaybe(");
+                                    function.Lambda(returnValueTypeArgumentClientType.ToString(), "res", "res.body() == null ? Maybe.empty() : Maybe.just(res.body())");
+                                    function.Line(");");
                                 }
                                 else if (isFluentDelete)
                                 {
-                                    function.Line($".flatMapMaybe(res -> Maybe.empty());");
+                                    function.Text($".flatMapMaybe(");
+                                    function.Lambda(returnValueTypeArgumentClientType.ToString(), "res", "Maybe.empty()");
+                                    function.Line(");");
                                 }
                                 else
                                 {
@@ -4771,8 +4774,7 @@ namespace AutoRest.Java
 
                             IEnumerable<string> expressionsToValidate = GetExpressionsToValidate(restAPIMethod, onlyRequiredParameters, settings);
 
-                            bool parametersAreFinal = settings.JavaVersion == JavaVersion.Java7;
-                            IEnumerable<Parameter> parameters = ParseClientMethodParameters(autoRestParameters, parametersAreFinal, settings);
+                            IEnumerable<Parameter> parameters = ParseClientMethodParameters(autoRestParameters, false, settings);
 
                             clientMethods.Add(new ClientMethod(
                                 description: restAPIMethod.Description,
@@ -5392,34 +5394,8 @@ namespace AutoRest.Java
                 });
             return string.Join(", ", restAPIMethodArguments);
         }
-
+        
         private static string AddClientTypePrefix(string clientType, JavaSettings settings)
             => string.IsNullOrEmpty(settings.ClientTypePrefix) ? clientType : settings.ClientTypePrefix + clientType;
-
-        private static void Lambda(JavaBlock function, IType parameterType, string parameterName, IType returnType, JavaSettings settings, Action<JavaBlock> lambdaBody)
-        {
-            if (settings.JavaVersion == JavaVersion.Java7)
-            {
-                function.Line($"new {GenericType.Function(parameterType, returnType)}() {{");
-                function.Indent(() =>
-                {
-                    function.Annotation("Override");
-                    function.Block($"public {returnType} apply({parameterType} {parameterName})", subFunction =>
-                    {
-                        lambdaBody.Invoke(subFunction);
-                    });
-                });
-                function.Text("}");
-            }
-            else
-            {
-                function.Line($"({parameterType} {parameterName}) -> {{");
-                function.Indent(() =>
-                {
-                    lambdaBody.Invoke(function);
-                });
-                function.Text("}");
-            }
-        }
     }
 }

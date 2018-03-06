@@ -32,7 +32,6 @@ namespace AutoRest.Java
         /// <param name="implementationSubpackage">The sub-package that the Service and Method Group client implementation classes will be put into.</param>
         /// <param name="modelsSubpackage">The sub-package that Enums, Exceptions, and Model types will be put into.</param>
         /// <param name="requiredParameterClientMethods">Whether or not Service and Method Group client method overloads that omit optional parameters will be created.</param>
-        /// <param name="javaVersion">The version of Java the generated code will target.</param>
         public JavaSettings(
             Action<bool> setAddCredentials,
             bool isAzure,
@@ -50,8 +49,7 @@ namespace AutoRest.Java
             bool generateClientInterfaces,
             string implementationSubpackage,
             string modelsSubpackage,
-            bool requiredParameterClientMethods,
-            JavaVersion javaVersion)
+            bool requiredParameterClientMethods)
         {
             this.setAddCredentials = setAddCredentials;
             IsAzure = isAzure;
@@ -70,7 +68,6 @@ namespace AutoRest.Java
             ImplementationSubpackage = implementationSubpackage;
             ModelsSubpackage = modelsSubpackage;
             RequiredParameterClientMethods = requiredParameterClientMethods;
-            JavaVersion = javaVersion;
         }
 
         public bool IsAzure { get; }
@@ -132,10 +129,5 @@ namespace AutoRest.Java
         /// Whether or not Service and Method Group client method overloads that omit optional parameters will be created.
         /// </summary>
         public bool RequiredParameterClientMethods { get; }
-
-        /// <summary>
-        /// The version of Java the generated code will target.
-        /// </summary>
-        public JavaVersion JavaVersion { get; }
     }
 }

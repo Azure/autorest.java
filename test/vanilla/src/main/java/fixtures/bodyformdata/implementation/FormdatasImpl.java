@@ -126,7 +126,7 @@ public final class FormdatasImpl implements Formdatas {
      */
     public Maybe<Flowable<ByteBuffer>> uploadFileAsync(@NonNull Flowable<ByteBuffer> fileContent, @NonNull String fileName) {
         return uploadFileWithRestResponseAsync(fileContent, fileName)
-            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .flatMapMaybe((StreamResponse res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -177,6 +177,6 @@ public final class FormdatasImpl implements Formdatas {
      */
     public Maybe<Flowable<ByteBuffer>> uploadFileViaBodyAsync(@NonNull Flowable<ByteBuffer> fileContent) {
         return uploadFileViaBodyWithRestResponseAsync(fileContent)
-            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .flatMapMaybe((StreamResponse res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 }

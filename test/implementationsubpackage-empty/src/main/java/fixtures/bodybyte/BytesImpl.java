@@ -122,7 +122,7 @@ public final class BytesImpl implements Bytes {
      */
     public Maybe<byte[]> getNullAsync() {
         return getNullWithRestResponseAsync()
-            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .flatMapMaybe((BodyResponse<byte[]> res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -163,7 +163,7 @@ public final class BytesImpl implements Bytes {
      */
     public Maybe<byte[]> getEmptyAsync() {
         return getEmptyWithRestResponseAsync()
-            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .flatMapMaybe((BodyResponse<byte[]> res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -204,7 +204,7 @@ public final class BytesImpl implements Bytes {
      */
     public Maybe<byte[]> getNonAsciiAsync() {
         return getNonAsciiWithRestResponseAsync()
-            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .flatMapMaybe((BodyResponse<byte[]> res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -295,6 +295,6 @@ public final class BytesImpl implements Bytes {
      */
     public Maybe<byte[]> getInvalidAsync() {
         return getInvalidWithRestResponseAsync()
-            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .flatMapMaybe((BodyResponse<byte[]> res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 }

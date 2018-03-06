@@ -119,7 +119,7 @@ public final class DurationsImpl implements Durations {
      */
     public Maybe<Period> getNullAsync() {
         return getNullWithRestResponseAsync()
-            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .flatMapMaybe((BodyResponse<Period> res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -210,7 +210,7 @@ public final class DurationsImpl implements Durations {
      */
     public Maybe<Period> getPositiveDurationAsync() {
         return getPositiveDurationWithRestResponseAsync()
-            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .flatMapMaybe((BodyResponse<Period> res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -251,6 +251,6 @@ public final class DurationsImpl implements Durations {
      */
     public Maybe<Period> getInvalidAsync() {
         return getInvalidWithRestResponseAsync()
-            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .flatMapMaybe((BodyResponse<Period> res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 }

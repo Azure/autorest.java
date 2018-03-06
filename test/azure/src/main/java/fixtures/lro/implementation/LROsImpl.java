@@ -776,7 +776,7 @@ public final class LROsImpl implements LROs {
      */
     public Maybe<Product> put200SucceededAsync() {
         return put200SucceededWithRestResponseAsync()
-            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .flatMapMaybe((BodyResponse<Product> res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -825,7 +825,7 @@ public final class LROsImpl implements LROs {
      */
     public Maybe<Product> put200SucceededAsync(Product product) {
         return put200SucceededWithRestResponseAsync(product)
-            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .flatMapMaybe((BodyResponse<Product> res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -949,7 +949,7 @@ public final class LROsImpl implements LROs {
      */
     public Maybe<Product> put200SucceededNoStateAsync() {
         return put200SucceededNoStateWithRestResponseAsync()
-            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .flatMapMaybe((BodyResponse<Product> res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -998,7 +998,7 @@ public final class LROsImpl implements LROs {
      */
     public Maybe<Product> put200SucceededNoStateAsync(Product product) {
         return put200SucceededNoStateWithRestResponseAsync(product)
-            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .flatMapMaybe((BodyResponse<Product> res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -1122,7 +1122,7 @@ public final class LROsImpl implements LROs {
      */
     public Maybe<Product> put202Retry200Async() {
         return put202Retry200WithRestResponseAsync()
-            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .flatMapMaybe((BodyResponse<Product> res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -1171,7 +1171,7 @@ public final class LROsImpl implements LROs {
      */
     public Maybe<Product> put202Retry200Async(Product product) {
         return put202Retry200WithRestResponseAsync(product)
-            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .flatMapMaybe((BodyResponse<Product> res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -1295,7 +1295,7 @@ public final class LROsImpl implements LROs {
      */
     public Maybe<Product> put201CreatingSucceeded200Async() {
         return put201CreatingSucceeded200WithRestResponseAsync()
-            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .flatMapMaybe((BodyResponse<Product> res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -1344,7 +1344,7 @@ public final class LROsImpl implements LROs {
      */
     public Maybe<Product> put201CreatingSucceeded200Async(Product product) {
         return put201CreatingSucceeded200WithRestResponseAsync(product)
-            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .flatMapMaybe((BodyResponse<Product> res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -1468,7 +1468,7 @@ public final class LROsImpl implements LROs {
      */
     public Maybe<Product> put200UpdatingSucceeded204Async() {
         return put200UpdatingSucceeded204WithRestResponseAsync()
-            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .flatMapMaybe((BodyResponse<Product> res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -1517,7 +1517,7 @@ public final class LROsImpl implements LROs {
      */
     public Maybe<Product> put200UpdatingSucceeded204Async(Product product) {
         return put200UpdatingSucceeded204WithRestResponseAsync(product)
-            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .flatMapMaybe((BodyResponse<Product> res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -1641,7 +1641,7 @@ public final class LROsImpl implements LROs {
      */
     public Maybe<Product> put201CreatingFailed200Async() {
         return put201CreatingFailed200WithRestResponseAsync()
-            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .flatMapMaybe((BodyResponse<Product> res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -1690,7 +1690,7 @@ public final class LROsImpl implements LROs {
      */
     public Maybe<Product> put201CreatingFailed200Async(Product product) {
         return put201CreatingFailed200WithRestResponseAsync(product)
-            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .flatMapMaybe((BodyResponse<Product> res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -1814,7 +1814,7 @@ public final class LROsImpl implements LROs {
      */
     public Maybe<Product> put200Acceptedcanceled200Async() {
         return put200Acceptedcanceled200WithRestResponseAsync()
-            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .flatMapMaybe((BodyResponse<Product> res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -1863,7 +1863,7 @@ public final class LROsImpl implements LROs {
      */
     public Maybe<Product> put200Acceptedcanceled200Async(Product product) {
         return put200Acceptedcanceled200WithRestResponseAsync(product)
-            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .flatMapMaybe((BodyResponse<Product> res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -1987,7 +1987,7 @@ public final class LROsImpl implements LROs {
      */
     public Maybe<Product> putNoHeaderInRetryAsync() {
         return putNoHeaderInRetryWithRestResponseAsync()
-            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .flatMapMaybe((LROsPutNoHeaderInRetryResponse res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -2036,7 +2036,7 @@ public final class LROsImpl implements LROs {
      */
     public Maybe<Product> putNoHeaderInRetryAsync(Product product) {
         return putNoHeaderInRetryWithRestResponseAsync(product)
-            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .flatMapMaybe((LROsPutNoHeaderInRetryResponse res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -2160,7 +2160,7 @@ public final class LROsImpl implements LROs {
      */
     public Maybe<Product> putAsyncRetrySucceededAsync() {
         return putAsyncRetrySucceededWithRestResponseAsync()
-            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .flatMapMaybe((LROsPutAsyncRetrySucceededResponse res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -2209,7 +2209,7 @@ public final class LROsImpl implements LROs {
      */
     public Maybe<Product> putAsyncRetrySucceededAsync(Product product) {
         return putAsyncRetrySucceededWithRestResponseAsync(product)
-            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .flatMapMaybe((LROsPutAsyncRetrySucceededResponse res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -2333,7 +2333,7 @@ public final class LROsImpl implements LROs {
      */
     public Maybe<Product> putAsyncNoRetrySucceededAsync() {
         return putAsyncNoRetrySucceededWithRestResponseAsync()
-            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .flatMapMaybe((LROsPutAsyncNoRetrySucceededResponse res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -2382,7 +2382,7 @@ public final class LROsImpl implements LROs {
      */
     public Maybe<Product> putAsyncNoRetrySucceededAsync(Product product) {
         return putAsyncNoRetrySucceededWithRestResponseAsync(product)
-            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .flatMapMaybe((LROsPutAsyncNoRetrySucceededResponse res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -2506,7 +2506,7 @@ public final class LROsImpl implements LROs {
      */
     public Maybe<Product> putAsyncRetryFailedAsync() {
         return putAsyncRetryFailedWithRestResponseAsync()
-            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .flatMapMaybe((LROsPutAsyncRetryFailedResponse res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -2555,7 +2555,7 @@ public final class LROsImpl implements LROs {
      */
     public Maybe<Product> putAsyncRetryFailedAsync(Product product) {
         return putAsyncRetryFailedWithRestResponseAsync(product)
-            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .flatMapMaybe((LROsPutAsyncRetryFailedResponse res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -2679,7 +2679,7 @@ public final class LROsImpl implements LROs {
      */
     public Maybe<Product> putAsyncNoRetrycanceledAsync() {
         return putAsyncNoRetrycanceledWithRestResponseAsync()
-            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .flatMapMaybe((LROsPutAsyncNoRetrycanceledResponse res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -2728,7 +2728,7 @@ public final class LROsImpl implements LROs {
      */
     public Maybe<Product> putAsyncNoRetrycanceledAsync(Product product) {
         return putAsyncNoRetrycanceledWithRestResponseAsync(product)
-            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .flatMapMaybe((LROsPutAsyncNoRetrycanceledResponse res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -2852,7 +2852,7 @@ public final class LROsImpl implements LROs {
      */
     public Maybe<Product> putAsyncNoHeaderInRetryAsync() {
         return putAsyncNoHeaderInRetryWithRestResponseAsync()
-            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .flatMapMaybe((LROsPutAsyncNoHeaderInRetryResponse res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -2901,7 +2901,7 @@ public final class LROsImpl implements LROs {
      */
     public Maybe<Product> putAsyncNoHeaderInRetryAsync(Product product) {
         return putAsyncNoHeaderInRetryWithRestResponseAsync(product)
-            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .flatMapMaybe((LROsPutAsyncNoHeaderInRetryResponse res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -3025,7 +3025,7 @@ public final class LROsImpl implements LROs {
      */
     public Maybe<Sku> putNonResourceAsync() {
         return putNonResourceWithRestResponseAsync()
-            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .flatMapMaybe((BodyResponse<Sku> res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -3074,7 +3074,7 @@ public final class LROsImpl implements LROs {
      */
     public Maybe<Sku> putNonResourceAsync(Sku sku) {
         return putNonResourceWithRestResponseAsync(sku)
-            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .flatMapMaybe((BodyResponse<Sku> res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -3198,7 +3198,7 @@ public final class LROsImpl implements LROs {
      */
     public Maybe<Sku> putAsyncNonResourceAsync() {
         return putAsyncNonResourceWithRestResponseAsync()
-            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .flatMapMaybe((BodyResponse<Sku> res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -3247,7 +3247,7 @@ public final class LROsImpl implements LROs {
      */
     public Maybe<Sku> putAsyncNonResourceAsync(Sku sku) {
         return putAsyncNonResourceWithRestResponseAsync(sku)
-            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .flatMapMaybe((BodyResponse<Sku> res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -3371,7 +3371,7 @@ public final class LROsImpl implements LROs {
      */
     public Maybe<SubProduct> putSubResourceAsync() {
         return putSubResourceWithRestResponseAsync()
-            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .flatMapMaybe((BodyResponse<SubProduct> res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -3420,7 +3420,7 @@ public final class LROsImpl implements LROs {
      */
     public Maybe<SubProduct> putSubResourceAsync(SubProduct product) {
         return putSubResourceWithRestResponseAsync(product)
-            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .flatMapMaybe((BodyResponse<SubProduct> res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -3544,7 +3544,7 @@ public final class LROsImpl implements LROs {
      */
     public Maybe<SubProduct> putAsyncSubResourceAsync() {
         return putAsyncSubResourceWithRestResponseAsync()
-            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .flatMapMaybe((BodyResponse<SubProduct> res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -3593,7 +3593,7 @@ public final class LROsImpl implements LROs {
      */
     public Maybe<SubProduct> putAsyncSubResourceAsync(SubProduct product) {
         return putAsyncSubResourceWithRestResponseAsync(product)
-            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .flatMapMaybe((BodyResponse<SubProduct> res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -3679,7 +3679,7 @@ public final class LROsImpl implements LROs {
      */
     public Maybe<Product> deleteProvisioning202Accepted200SucceededAsync() {
         return deleteProvisioning202Accepted200SucceededWithRestResponseAsync()
-            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .flatMapMaybe((LROsDeleteProvisioning202Accepted200SucceededResponse res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -3765,7 +3765,7 @@ public final class LROsImpl implements LROs {
      */
     public Maybe<Product> deleteProvisioning202DeletingFailed200Async() {
         return deleteProvisioning202DeletingFailed200WithRestResponseAsync()
-            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .flatMapMaybe((LROsDeleteProvisioning202DeletingFailed200Response res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -3851,7 +3851,7 @@ public final class LROsImpl implements LROs {
      */
     public Maybe<Product> deleteProvisioning202Deletingcanceled200Async() {
         return deleteProvisioning202Deletingcanceled200WithRestResponseAsync()
-            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .flatMapMaybe((LROsDeleteProvisioning202Deletingcanceled200Response res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -4021,7 +4021,7 @@ public final class LROsImpl implements LROs {
      */
     public Maybe<Product> delete202Retry200Async() {
         return delete202Retry200WithRestResponseAsync()
-            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .flatMapMaybe((LROsDelete202Retry200Response res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -4107,7 +4107,7 @@ public final class LROsImpl implements LROs {
      */
     public Maybe<Product> delete202NoRetry204Async() {
         return delete202NoRetry204WithRestResponseAsync()
-            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .flatMapMaybe((LROsDelete202NoRetry204Response res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -4697,7 +4697,7 @@ public final class LROsImpl implements LROs {
      */
     public Maybe<Sku> post200WithPayloadAsync() {
         return post200WithPayloadWithRestResponseAsync()
-            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .flatMapMaybe((BodyResponse<Sku> res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -4990,7 +4990,7 @@ public final class LROsImpl implements LROs {
      */
     public Maybe<Product> post202NoRetry204Async() {
         return post202NoRetry204WithRestResponseAsync()
-            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .flatMapMaybe((LROsPost202NoRetry204Response res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -5039,7 +5039,7 @@ public final class LROsImpl implements LROs {
      */
     public Maybe<Product> post202NoRetry204Async(Product product) {
         return post202NoRetry204WithRestResponseAsync(product)
-            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .flatMapMaybe((LROsPost202NoRetry204Response res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -5163,7 +5163,7 @@ public final class LROsImpl implements LROs {
      */
     public Maybe<Product> postAsyncRetrySucceededAsync() {
         return postAsyncRetrySucceededWithRestResponseAsync()
-            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .flatMapMaybe((LROsPostAsyncRetrySucceededResponse res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -5212,7 +5212,7 @@ public final class LROsImpl implements LROs {
      */
     public Maybe<Product> postAsyncRetrySucceededAsync(Product product) {
         return postAsyncRetrySucceededWithRestResponseAsync(product)
-            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .flatMapMaybe((LROsPostAsyncRetrySucceededResponse res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -5336,7 +5336,7 @@ public final class LROsImpl implements LROs {
      */
     public Maybe<Product> postAsyncNoRetrySucceededAsync() {
         return postAsyncNoRetrySucceededWithRestResponseAsync()
-            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .flatMapMaybe((LROsPostAsyncNoRetrySucceededResponse res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -5385,7 +5385,7 @@ public final class LROsImpl implements LROs {
      */
     public Maybe<Product> postAsyncNoRetrySucceededAsync(Product product) {
         return postAsyncNoRetrySucceededWithRestResponseAsync(product)
-            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .flatMapMaybe((LROsPostAsyncNoRetrySucceededResponse res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**

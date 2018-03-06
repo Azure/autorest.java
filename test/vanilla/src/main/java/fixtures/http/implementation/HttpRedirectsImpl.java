@@ -231,7 +231,7 @@ public final class HttpRedirectsImpl implements HttpRedirects {
      */
     public Maybe<List<String>> get300Async() {
         return get300WithRestResponseAsync()
-            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .flatMapMaybe((HttpRedirectsGet300Response res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**

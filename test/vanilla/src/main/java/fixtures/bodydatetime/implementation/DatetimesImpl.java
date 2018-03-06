@@ -194,7 +194,7 @@ public final class DatetimesImpl implements Datetimes {
      */
     public Maybe<DateTime> getNullAsync() {
         return getNullWithRestResponseAsync()
-            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .flatMapMaybe((BodyResponse<DateTime> res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -235,7 +235,7 @@ public final class DatetimesImpl implements Datetimes {
      */
     public Maybe<DateTime> getInvalidAsync() {
         return getInvalidWithRestResponseAsync()
-            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .flatMapMaybe((BodyResponse<DateTime> res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -276,7 +276,7 @@ public final class DatetimesImpl implements Datetimes {
      */
     public Maybe<DateTime> getOverflowAsync() {
         return getOverflowWithRestResponseAsync()
-            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .flatMapMaybe((BodyResponse<DateTime> res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -317,7 +317,7 @@ public final class DatetimesImpl implements Datetimes {
      */
     public Maybe<DateTime> getUnderflowAsync() {
         return getUnderflowWithRestResponseAsync()
-            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .flatMapMaybe((BodyResponse<DateTime> res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -408,7 +408,7 @@ public final class DatetimesImpl implements Datetimes {
      */
     public Maybe<DateTime> getUtcLowercaseMaxDateTimeAsync() {
         return getUtcLowercaseMaxDateTimeWithRestResponseAsync()
-            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .flatMapMaybe((BodyResponse<DateTime> res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -449,7 +449,7 @@ public final class DatetimesImpl implements Datetimes {
      */
     public Maybe<DateTime> getUtcUppercaseMaxDateTimeAsync() {
         return getUtcUppercaseMaxDateTimeWithRestResponseAsync()
-            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .flatMapMaybe((BodyResponse<DateTime> res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -540,7 +540,7 @@ public final class DatetimesImpl implements Datetimes {
      */
     public Maybe<DateTime> getLocalPositiveOffsetLowercaseMaxDateTimeAsync() {
         return getLocalPositiveOffsetLowercaseMaxDateTimeWithRestResponseAsync()
-            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .flatMapMaybe((BodyResponse<DateTime> res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -581,7 +581,7 @@ public final class DatetimesImpl implements Datetimes {
      */
     public Maybe<DateTime> getLocalPositiveOffsetUppercaseMaxDateTimeAsync() {
         return getLocalPositiveOffsetUppercaseMaxDateTimeWithRestResponseAsync()
-            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .flatMapMaybe((BodyResponse<DateTime> res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -672,7 +672,7 @@ public final class DatetimesImpl implements Datetimes {
      */
     public Maybe<DateTime> getLocalNegativeOffsetUppercaseMaxDateTimeAsync() {
         return getLocalNegativeOffsetUppercaseMaxDateTimeWithRestResponseAsync()
-            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .flatMapMaybe((BodyResponse<DateTime> res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -713,7 +713,7 @@ public final class DatetimesImpl implements Datetimes {
      */
     public Maybe<DateTime> getLocalNegativeOffsetLowercaseMaxDateTimeAsync() {
         return getLocalNegativeOffsetLowercaseMaxDateTimeWithRestResponseAsync()
-            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .flatMapMaybe((BodyResponse<DateTime> res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -804,7 +804,7 @@ public final class DatetimesImpl implements Datetimes {
      */
     public Maybe<DateTime> getUtcMinDateTimeAsync() {
         return getUtcMinDateTimeWithRestResponseAsync()
-            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .flatMapMaybe((BodyResponse<DateTime> res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -895,7 +895,7 @@ public final class DatetimesImpl implements Datetimes {
      */
     public Maybe<DateTime> getLocalPositiveOffsetMinDateTimeAsync() {
         return getLocalPositiveOffsetMinDateTimeWithRestResponseAsync()
-            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .flatMapMaybe((BodyResponse<DateTime> res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -986,6 +986,6 @@ public final class DatetimesImpl implements Datetimes {
      */
     public Maybe<DateTime> getLocalNegativeOffsetMinDateTimeAsync() {
         return getLocalNegativeOffsetMinDateTimeWithRestResponseAsync()
-            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .flatMapMaybe((BodyResponse<DateTime> res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 }

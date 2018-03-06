@@ -108,7 +108,7 @@ public final class HttpSuccessInner {
      */
     public Maybe<Boolean> head200Async() {
         return head200WithRestResponseAsync()
-            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .flatMapMaybe((BodyResponse<Boolean> res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -149,7 +149,7 @@ public final class HttpSuccessInner {
      */
     public Maybe<Boolean> head204Async() {
         return head204WithRestResponseAsync()
-            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .flatMapMaybe((BodyResponse<Boolean> res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -190,6 +190,6 @@ public final class HttpSuccessInner {
      */
     public Maybe<Boolean> head404Async() {
         return head404WithRestResponseAsync()
-            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .flatMapMaybe((BodyResponse<Boolean> res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 }

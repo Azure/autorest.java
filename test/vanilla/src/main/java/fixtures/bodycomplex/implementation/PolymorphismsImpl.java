@@ -126,7 +126,7 @@ public final class PolymorphismsImpl implements Polymorphisms {
      */
     public Maybe<Fish> getValidAsync() {
         return getValidWithRestResponseAsync()
-            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .flatMapMaybe((BodyResponse<Fish> res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -346,7 +346,7 @@ public final class PolymorphismsImpl implements Polymorphisms {
      */
     public Maybe<Salmon> getComplicatedAsync() {
         return getComplicatedWithRestResponseAsync()
-            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .flatMapMaybe((BodyResponse<Salmon> res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**

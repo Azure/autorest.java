@@ -422,5 +422,22 @@ namespace AutoRest.Java
             });
             Line($"}}");
         }
+
+        public void Lambda(string parameterType, string parameterName, Action<JavaLambda> body)
+        {
+            Text($"({parameterType} {parameterName}) -> ");
+            using (JavaLambda lambda = new JavaLambda(this))
+            {
+                body.Invoke(lambda);
+            }
+        }
+
+        public void Lambda(string parameterType, string parameterName, string returnExpression)
+        {
+            Lambda(parameterType, parameterName, lambda =>
+            {
+                lambda.Return(returnExpression);
+            });
+        }
     }
 }

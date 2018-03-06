@@ -76,5 +76,15 @@ namespace AutoRest.Java
             contents.If(condition, ifAction);
             return new JavaIfBlock(contents);
         }
+
+        public void Lambda(string parameterType, string parameterName, Action<JavaLambda> body)
+        {
+            contents.Lambda(parameterType, parameterName, body);
+        }
+
+        public void Lambda(string parameterType, string parameterName, string returnExpression)
+        {
+            contents.Lambda(parameterType, parameterName, returnExpression);
+        }
     }
 }

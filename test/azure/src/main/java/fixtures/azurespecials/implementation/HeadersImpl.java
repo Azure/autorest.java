@@ -228,6 +228,6 @@ public final class HeadersImpl implements Headers {
      */
     public Maybe<Boolean> customNamedRequestIdHeadAsync(@NonNull String fooClientRequestId) {
         return customNamedRequestIdHeadWithRestResponseAsync(fooClientRequestId)
-            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .flatMapMaybe((HeaderCustomNamedRequestIdHeadResponse res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 }

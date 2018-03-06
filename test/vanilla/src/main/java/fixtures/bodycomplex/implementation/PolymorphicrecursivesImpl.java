@@ -110,7 +110,7 @@ public final class PolymorphicrecursivesImpl implements Polymorphicrecursives {
      */
     public Maybe<Fish> getValidAsync() {
         return getValidWithRestResponseAsync()
-            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .flatMapMaybe((BodyResponse<Fish> res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**

@@ -199,30 +199,6 @@ task 'regenerate-requiredparameterclientmethods-false', '', (done) ->
     ]
   },done
 
-task 'regenerate-javaversion-7', '', (done) ->
-  regenExpected {
-    'outputDir': 'test/javaversion-7',
-    'mappings': {
-      'Paging': 'paging.json'
-    },
-    'azureArm': true,
-    'extraArguments': [
-      "--java.java-version=7"
-    ]
-  },done
-
-task 'regenerate-javaversion-8', '', (done) ->
-  regenExpected {
-    'outputDir': 'test/javaversion-8',
-    'mappings': {
-      'Paging': 'paging.json'
-    },
-    'azureArm': true,
-    'extraArguments': [
-      "--java.java-version=8"
-    ]
-  },done
-
 task 'regenerate-xml', '', (done) ->
   outputDir = 'test/xml'
 
@@ -255,8 +231,6 @@ regenerateTasks = [
   'regenerate-modelssubpackage',
   'regenerate-modelssubpackage-empty',
   'regenerate-requiredparameterclientmethods-false',
-  'regenerate-javaversion-7',
-  'regenerate-javaversion-8',
   'regenerate-xml'
 ]
 

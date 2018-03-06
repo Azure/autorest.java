@@ -119,6 +119,6 @@ public final class GroupsImpl implements Groups {
      */
     public Maybe<SampleResourceGroup> getSampleResourceGroupAsync(@NonNull String resourceGroupName) {
         return getSampleResourceGroupWithRestResponseAsync(resourceGroupName)
-            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .flatMapMaybe((BodyResponse<SampleResourceGroup> res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 }

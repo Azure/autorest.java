@@ -260,7 +260,7 @@ public final class AutoRestResourceFlatteningTestServiceImpl extends ServiceClie
      */
     public Maybe<List<FlattenedProduct>> getArrayAsync() {
         return getArrayWithRestResponseAsync()
-            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .flatMapMaybe((BodyResponse<List<FlattenedProduct>> res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -390,7 +390,7 @@ public final class AutoRestResourceFlatteningTestServiceImpl extends ServiceClie
      */
     public Maybe<List<ProductWrapper>> getWrappedArrayAsync() {
         return getWrappedArrayWithRestResponseAsync()
-            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .flatMapMaybe((BodyResponse<List<ProductWrapper>> res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -520,7 +520,7 @@ public final class AutoRestResourceFlatteningTestServiceImpl extends ServiceClie
      */
     public Maybe<Map<String, FlattenedProduct>> getDictionaryAsync() {
         return getDictionaryWithRestResponseAsync()
-            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .flatMapMaybe((BodyResponse<Map<String, FlattenedProduct>> res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -650,7 +650,7 @@ public final class AutoRestResourceFlatteningTestServiceImpl extends ServiceClie
      */
     public Maybe<ResourceCollection> getResourceCollectionAsync() {
         return getResourceCollectionWithRestResponseAsync()
-            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .flatMapMaybe((BodyResponse<ResourceCollection> res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -692,7 +692,7 @@ public final class AutoRestResourceFlatteningTestServiceImpl extends ServiceClie
      */
     public Maybe<SimpleProduct> putSimpleProductAsync() {
         return putSimpleProductWithRestResponseAsync()
-            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .flatMapMaybe((BodyResponse<SimpleProduct> res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -741,7 +741,7 @@ public final class AutoRestResourceFlatteningTestServiceImpl extends ServiceClie
      */
     public Maybe<SimpleProduct> putSimpleProductAsync(SimpleProduct simpleBodyProduct) {
         return putSimpleProductWithRestResponseAsync(simpleBodyProduct)
-            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .flatMapMaybe((BodyResponse<SimpleProduct> res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -808,7 +808,7 @@ public final class AutoRestResourceFlatteningTestServiceImpl extends ServiceClie
      */
     public Maybe<SimpleProduct> postFlattenedSimpleProductAsync(@NonNull String productId, @NonNull String maxProductDisplayName) {
         return postFlattenedSimpleProductWithRestResponseAsync(productId, maxProductDisplayName)
-            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .flatMapMaybe((BodyResponse<SimpleProduct> res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -887,7 +887,7 @@ public final class AutoRestResourceFlatteningTestServiceImpl extends ServiceClie
      */
     public Maybe<SimpleProduct> postFlattenedSimpleProductAsync(@NonNull String productId, @NonNull String maxProductDisplayName, String description, String genericValue, String odatavalue) {
         return postFlattenedSimpleProductWithRestResponseAsync(productId, maxProductDisplayName, description, genericValue, odatavalue)
-            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .flatMapMaybe((BodyResponse<SimpleProduct> res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -954,6 +954,6 @@ public final class AutoRestResourceFlatteningTestServiceImpl extends ServiceClie
      */
     public Maybe<SimpleProduct> putSimpleProductWithGroupingAsync(@NonNull FlattenParameterGroup flattenParameterGroup) {
         return putSimpleProductWithGroupingWithRestResponseAsync(flattenParameterGroup)
-            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .flatMapMaybe((BodyResponse<SimpleProduct> res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 }

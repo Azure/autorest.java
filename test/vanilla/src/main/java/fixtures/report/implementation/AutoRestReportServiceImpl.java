@@ -106,7 +106,7 @@ public final class AutoRestReportServiceImpl extends ServiceClient implements Au
      */
     public Maybe<Map<String, Integer>> getReportAsync() {
         return getReportWithRestResponseAsync()
-            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .flatMapMaybe((BodyResponse<Map<String, Integer>> res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -154,6 +154,6 @@ public final class AutoRestReportServiceImpl extends ServiceClient implements Au
      */
     public Maybe<Map<String, Integer>> getReportAsync(String qualifier) {
         return getReportWithRestResponseAsync(qualifier)
-            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .flatMapMaybe((BodyResponse<Map<String, Integer>> res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 }

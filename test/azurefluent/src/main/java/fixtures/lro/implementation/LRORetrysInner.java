@@ -290,7 +290,7 @@ public final class LRORetrysInner {
      */
     public Maybe<ProductInner> put201CreatingSucceeded200Async() {
         return put201CreatingSucceeded200WithRestResponseAsync()
-            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .flatMapMaybe((BodyResponse<ProductInner> res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -339,7 +339,7 @@ public final class LRORetrysInner {
      */
     public Maybe<ProductInner> put201CreatingSucceeded200Async(ProductInner product) {
         return put201CreatingSucceeded200WithRestResponseAsync(product)
-            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .flatMapMaybe((BodyResponse<ProductInner> res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -463,7 +463,7 @@ public final class LRORetrysInner {
      */
     public Maybe<ProductInner> putAsyncRelativeRetrySucceededAsync() {
         return putAsyncRelativeRetrySucceededWithRestResponseAsync()
-            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .flatMapMaybe((LRORetrysPutAsyncRelativeRetrySucceededResponse res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -512,7 +512,7 @@ public final class LRORetrysInner {
      */
     public Maybe<ProductInner> putAsyncRelativeRetrySucceededAsync(ProductInner product) {
         return putAsyncRelativeRetrySucceededWithRestResponseAsync(product)
-            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .flatMapMaybe((LRORetrysPutAsyncRelativeRetrySucceededResponse res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -598,7 +598,7 @@ public final class LRORetrysInner {
      */
     public Maybe<ProductInner> deleteProvisioning202Accepted200SucceededAsync() {
         return deleteProvisioning202Accepted200SucceededWithRestResponseAsync()
-            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .flatMapMaybe((LRORetrysDeleteProvisioning202Accepted200SucceededResponse res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**

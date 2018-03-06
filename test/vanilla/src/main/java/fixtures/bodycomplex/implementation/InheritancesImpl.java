@@ -110,7 +110,7 @@ public final class InheritancesImpl implements Inheritances {
      */
     public Maybe<Siamese> getValidAsync() {
         return getValidWithRestResponseAsync()
-            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .flatMapMaybe((BodyResponse<Siamese> res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**

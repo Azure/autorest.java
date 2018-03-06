@@ -192,7 +192,7 @@ public final class HttpClientFailuresImpl implements HttpClientFailures {
      */
     public Maybe<Error> head400Async() {
         return head400WithRestResponseAsync()
-            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .flatMapMaybe((BodyResponse<Error> res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -233,7 +233,7 @@ public final class HttpClientFailuresImpl implements HttpClientFailures {
      */
     public Maybe<Error> get400Async() {
         return get400WithRestResponseAsync()
-            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .flatMapMaybe((BodyResponse<Error> res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -275,7 +275,7 @@ public final class HttpClientFailuresImpl implements HttpClientFailures {
      */
     public Maybe<Error> put400Async() {
         return put400WithRestResponseAsync()
-            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .flatMapMaybe((BodyResponse<Error> res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -323,7 +323,7 @@ public final class HttpClientFailuresImpl implements HttpClientFailures {
      */
     public Maybe<Error> put400Async(Boolean booleanValue) {
         return put400WithRestResponseAsync(booleanValue)
-            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .flatMapMaybe((BodyResponse<Error> res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -365,7 +365,7 @@ public final class HttpClientFailuresImpl implements HttpClientFailures {
      */
     public Maybe<Error> patch400Async() {
         return patch400WithRestResponseAsync()
-            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .flatMapMaybe((BodyResponse<Error> res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -413,7 +413,7 @@ public final class HttpClientFailuresImpl implements HttpClientFailures {
      */
     public Maybe<Error> patch400Async(Boolean booleanValue) {
         return patch400WithRestResponseAsync(booleanValue)
-            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .flatMapMaybe((BodyResponse<Error> res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -455,7 +455,7 @@ public final class HttpClientFailuresImpl implements HttpClientFailures {
      */
     public Maybe<Error> post400Async() {
         return post400WithRestResponseAsync()
-            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .flatMapMaybe((BodyResponse<Error> res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -503,7 +503,7 @@ public final class HttpClientFailuresImpl implements HttpClientFailures {
      */
     public Maybe<Error> post400Async(Boolean booleanValue) {
         return post400WithRestResponseAsync(booleanValue)
-            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .flatMapMaybe((BodyResponse<Error> res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -545,7 +545,7 @@ public final class HttpClientFailuresImpl implements HttpClientFailures {
      */
     public Maybe<Error> delete400Async() {
         return delete400WithRestResponseAsync()
-            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .flatMapMaybe((BodyResponse<Error> res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -593,7 +593,7 @@ public final class HttpClientFailuresImpl implements HttpClientFailures {
      */
     public Maybe<Error> delete400Async(Boolean booleanValue) {
         return delete400WithRestResponseAsync(booleanValue)
-            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .flatMapMaybe((BodyResponse<Error> res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -634,7 +634,7 @@ public final class HttpClientFailuresImpl implements HttpClientFailures {
      */
     public Maybe<Error> head401Async() {
         return head401WithRestResponseAsync()
-            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .flatMapMaybe((BodyResponse<Error> res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -675,7 +675,7 @@ public final class HttpClientFailuresImpl implements HttpClientFailures {
      */
     public Maybe<Error> get402Async() {
         return get402WithRestResponseAsync()
-            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .flatMapMaybe((BodyResponse<Error> res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -716,7 +716,7 @@ public final class HttpClientFailuresImpl implements HttpClientFailures {
      */
     public Maybe<Error> get403Async() {
         return get403WithRestResponseAsync()
-            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .flatMapMaybe((BodyResponse<Error> res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -758,7 +758,7 @@ public final class HttpClientFailuresImpl implements HttpClientFailures {
      */
     public Maybe<Error> put404Async() {
         return put404WithRestResponseAsync()
-            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .flatMapMaybe((BodyResponse<Error> res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -806,7 +806,7 @@ public final class HttpClientFailuresImpl implements HttpClientFailures {
      */
     public Maybe<Error> put404Async(Boolean booleanValue) {
         return put404WithRestResponseAsync(booleanValue)
-            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .flatMapMaybe((BodyResponse<Error> res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -848,7 +848,7 @@ public final class HttpClientFailuresImpl implements HttpClientFailures {
      */
     public Maybe<Error> patch405Async() {
         return patch405WithRestResponseAsync()
-            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .flatMapMaybe((BodyResponse<Error> res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -896,7 +896,7 @@ public final class HttpClientFailuresImpl implements HttpClientFailures {
      */
     public Maybe<Error> patch405Async(Boolean booleanValue) {
         return patch405WithRestResponseAsync(booleanValue)
-            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .flatMapMaybe((BodyResponse<Error> res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -938,7 +938,7 @@ public final class HttpClientFailuresImpl implements HttpClientFailures {
      */
     public Maybe<Error> post406Async() {
         return post406WithRestResponseAsync()
-            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .flatMapMaybe((BodyResponse<Error> res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -986,7 +986,7 @@ public final class HttpClientFailuresImpl implements HttpClientFailures {
      */
     public Maybe<Error> post406Async(Boolean booleanValue) {
         return post406WithRestResponseAsync(booleanValue)
-            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .flatMapMaybe((BodyResponse<Error> res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -1028,7 +1028,7 @@ public final class HttpClientFailuresImpl implements HttpClientFailures {
      */
     public Maybe<Error> delete407Async() {
         return delete407WithRestResponseAsync()
-            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .flatMapMaybe((BodyResponse<Error> res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -1076,7 +1076,7 @@ public final class HttpClientFailuresImpl implements HttpClientFailures {
      */
     public Maybe<Error> delete407Async(Boolean booleanValue) {
         return delete407WithRestResponseAsync(booleanValue)
-            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .flatMapMaybe((BodyResponse<Error> res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -1118,7 +1118,7 @@ public final class HttpClientFailuresImpl implements HttpClientFailures {
      */
     public Maybe<Error> put409Async() {
         return put409WithRestResponseAsync()
-            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .flatMapMaybe((BodyResponse<Error> res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -1166,7 +1166,7 @@ public final class HttpClientFailuresImpl implements HttpClientFailures {
      */
     public Maybe<Error> put409Async(Boolean booleanValue) {
         return put409WithRestResponseAsync(booleanValue)
-            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .flatMapMaybe((BodyResponse<Error> res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -1207,7 +1207,7 @@ public final class HttpClientFailuresImpl implements HttpClientFailures {
      */
     public Maybe<Error> head410Async() {
         return head410WithRestResponseAsync()
-            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .flatMapMaybe((BodyResponse<Error> res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -1248,7 +1248,7 @@ public final class HttpClientFailuresImpl implements HttpClientFailures {
      */
     public Maybe<Error> get411Async() {
         return get411WithRestResponseAsync()
-            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .flatMapMaybe((BodyResponse<Error> res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -1289,7 +1289,7 @@ public final class HttpClientFailuresImpl implements HttpClientFailures {
      */
     public Maybe<Error> get412Async() {
         return get412WithRestResponseAsync()
-            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .flatMapMaybe((BodyResponse<Error> res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -1331,7 +1331,7 @@ public final class HttpClientFailuresImpl implements HttpClientFailures {
      */
     public Maybe<Error> put413Async() {
         return put413WithRestResponseAsync()
-            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .flatMapMaybe((BodyResponse<Error> res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -1379,7 +1379,7 @@ public final class HttpClientFailuresImpl implements HttpClientFailures {
      */
     public Maybe<Error> put413Async(Boolean booleanValue) {
         return put413WithRestResponseAsync(booleanValue)
-            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .flatMapMaybe((BodyResponse<Error> res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -1421,7 +1421,7 @@ public final class HttpClientFailuresImpl implements HttpClientFailures {
      */
     public Maybe<Error> patch414Async() {
         return patch414WithRestResponseAsync()
-            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .flatMapMaybe((BodyResponse<Error> res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -1469,7 +1469,7 @@ public final class HttpClientFailuresImpl implements HttpClientFailures {
      */
     public Maybe<Error> patch414Async(Boolean booleanValue) {
         return patch414WithRestResponseAsync(booleanValue)
-            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .flatMapMaybe((BodyResponse<Error> res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -1511,7 +1511,7 @@ public final class HttpClientFailuresImpl implements HttpClientFailures {
      */
     public Maybe<Error> post415Async() {
         return post415WithRestResponseAsync()
-            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .flatMapMaybe((BodyResponse<Error> res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -1559,7 +1559,7 @@ public final class HttpClientFailuresImpl implements HttpClientFailures {
      */
     public Maybe<Error> post415Async(Boolean booleanValue) {
         return post415WithRestResponseAsync(booleanValue)
-            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .flatMapMaybe((BodyResponse<Error> res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -1600,7 +1600,7 @@ public final class HttpClientFailuresImpl implements HttpClientFailures {
      */
     public Maybe<Error> get416Async() {
         return get416WithRestResponseAsync()
-            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .flatMapMaybe((BodyResponse<Error> res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -1642,7 +1642,7 @@ public final class HttpClientFailuresImpl implements HttpClientFailures {
      */
     public Maybe<Error> delete417Async() {
         return delete417WithRestResponseAsync()
-            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .flatMapMaybe((BodyResponse<Error> res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -1690,7 +1690,7 @@ public final class HttpClientFailuresImpl implements HttpClientFailures {
      */
     public Maybe<Error> delete417Async(Boolean booleanValue) {
         return delete417WithRestResponseAsync(booleanValue)
-            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .flatMapMaybe((BodyResponse<Error> res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -1731,6 +1731,6 @@ public final class HttpClientFailuresImpl implements HttpClientFailures {
      */
     public Maybe<Error> head429Async() {
         return head429WithRestResponseAsync()
-            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .flatMapMaybe((BodyResponse<Error> res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 }

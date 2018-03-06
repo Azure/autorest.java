@@ -209,7 +209,8 @@ public final class PagingsInner {
      * @return the Single&lt;Page&lt;ProductInner&gt;&gt; object if successful.
      */
     public Single<Page<ProductInner>> getSinglePagesSinglePageAsync() {
-        return service.getSinglePages(this.client.acceptLanguage()).map(res -> res.body());
+        return service.getSinglePages(this.client.acceptLanguage())
+            .map((BodyResponse<PageImpl<ProductInner>> res) -> res.body());
     }
 
     /**
@@ -256,7 +257,8 @@ public final class PagingsInner {
         final PagingGetMultiplePagesOptionsInner pagingGetMultiplePagesOptions = null;
         Integer maxresults = null;
         Integer timeout = null;
-        return service.getMultiplePages(clientRequestId, this.client.acceptLanguage(), maxresults, timeout).map(res -> res.body());
+        return service.getMultiplePages(clientRequestId, this.client.acceptLanguage(), maxresults, timeout)
+            .map((BodyResponse<PageImpl<ProductInner>> res) -> res.body());
     }
 
     /**
@@ -317,7 +319,8 @@ public final class PagingsInner {
         if (pagingGetMultiplePagesOptions != null) {
             timeout = pagingGetMultiplePagesOptions.timeout();
         }
-        return service.getMultiplePages(clientRequestId, this.client.acceptLanguage(), maxresults, timeout).map(res -> res.body());
+        return service.getMultiplePages(clientRequestId, this.client.acceptLanguage(), maxresults, timeout)
+            .map((BodyResponse<PageImpl<ProductInner>> res) -> res.body());
     }
 
     /**
@@ -364,7 +367,8 @@ public final class PagingsInner {
         final PagingGetOdataMultiplePagesOptionsInner pagingGetOdataMultiplePagesOptions = null;
         Integer maxresults = null;
         Integer timeout = null;
-        return service.getOdataMultiplePages(clientRequestId, this.client.acceptLanguage(), maxresults, timeout).map(res -> res.body());
+        return service.getOdataMultiplePages(clientRequestId, this.client.acceptLanguage(), maxresults, timeout)
+            .map((BodyResponse<PageImpl1<ProductInner>> res) -> res.body());
     }
 
     /**
@@ -425,7 +429,8 @@ public final class PagingsInner {
         if (pagingGetOdataMultiplePagesOptions != null) {
             timeout = pagingGetOdataMultiplePagesOptions.timeout();
         }
-        return service.getOdataMultiplePages(clientRequestId, this.client.acceptLanguage(), maxresults, timeout).map(res -> res.body());
+        return service.getOdataMultiplePages(clientRequestId, this.client.acceptLanguage(), maxresults, timeout)
+            .map((BodyResponse<PageImpl1<ProductInner>> res) -> res.body());
     }
 
     /**
@@ -488,7 +493,8 @@ public final class PagingsInner {
         Integer maxresults = pagingGetMultiplePagesWithOffsetOptions.maxresults();
         int offset = pagingGetMultiplePagesWithOffsetOptions.offset();
         Integer timeout = pagingGetMultiplePagesWithOffsetOptions.timeout();
-        return service.getMultiplePagesWithOffset(offset, clientRequestId, this.client.acceptLanguage(), maxresults, timeout).map(res -> res.body());
+        return service.getMultiplePagesWithOffset(offset, clientRequestId, this.client.acceptLanguage(), maxresults, timeout)
+            .map((BodyResponse<PageImpl<ProductInner>> res) -> res.body());
     }
 
     /**
@@ -553,7 +559,8 @@ public final class PagingsInner {
         Integer maxresults = pagingGetMultiplePagesWithOffsetOptions.maxresults();
         int offset = pagingGetMultiplePagesWithOffsetOptions.offset();
         Integer timeout = pagingGetMultiplePagesWithOffsetOptions.timeout();
-        return service.getMultiplePagesWithOffset(offset, clientRequestId, this.client.acceptLanguage(), maxresults, timeout).map(res -> res.body());
+        return service.getMultiplePagesWithOffset(offset, clientRequestId, this.client.acceptLanguage(), maxresults, timeout)
+            .map((BodyResponse<PageImpl<ProductInner>> res) -> res.body());
     }
 
     /**
@@ -596,7 +603,8 @@ public final class PagingsInner {
      * @return the Single&lt;Page&lt;ProductInner&gt;&gt; object if successful.
      */
     public Single<Page<ProductInner>> getMultiplePagesRetryFirstSinglePageAsync() {
-        return service.getMultiplePagesRetryFirst(this.client.acceptLanguage()).map(res -> res.body());
+        return service.getMultiplePagesRetryFirst(this.client.acceptLanguage())
+            .map((BodyResponse<PageImpl<ProductInner>> res) -> res.body());
     }
 
     /**
@@ -639,7 +647,8 @@ public final class PagingsInner {
      * @return the Single&lt;Page&lt;ProductInner&gt;&gt; object if successful.
      */
     public Single<Page<ProductInner>> getMultiplePagesRetrySecondSinglePageAsync() {
-        return service.getMultiplePagesRetrySecond(this.client.acceptLanguage()).map(res -> res.body());
+        return service.getMultiplePagesRetrySecond(this.client.acceptLanguage())
+            .map((BodyResponse<PageImpl<ProductInner>> res) -> res.body());
     }
 
     /**
@@ -682,7 +691,8 @@ public final class PagingsInner {
      * @return the Single&lt;Page&lt;ProductInner&gt;&gt; object if successful.
      */
     public Single<Page<ProductInner>> getSinglePagesFailureSinglePageAsync() {
-        return service.getSinglePagesFailure(this.client.acceptLanguage()).map(res -> res.body());
+        return service.getSinglePagesFailure(this.client.acceptLanguage())
+            .map((BodyResponse<PageImpl<ProductInner>> res) -> res.body());
     }
 
     /**
@@ -725,7 +735,8 @@ public final class PagingsInner {
      * @return the Single&lt;Page&lt;ProductInner&gt;&gt; object if successful.
      */
     public Single<Page<ProductInner>> getMultiplePagesFailureSinglePageAsync() {
-        return service.getMultiplePagesFailure(this.client.acceptLanguage()).map(res -> res.body());
+        return service.getMultiplePagesFailure(this.client.acceptLanguage())
+            .map((BodyResponse<PageImpl<ProductInner>> res) -> res.body());
     }
 
     /**
@@ -768,7 +779,8 @@ public final class PagingsInner {
      * @return the Single&lt;Page&lt;ProductInner&gt;&gt; object if successful.
      */
     public Single<Page<ProductInner>> getMultiplePagesFailureUriSinglePageAsync() {
-        return service.getMultiplePagesFailureUri(this.client.acceptLanguage()).map(res -> res.body());
+        return service.getMultiplePagesFailureUri(this.client.acceptLanguage())
+            .map((BodyResponse<PageImpl<ProductInner>> res) -> res.body());
     }
 
     /**
@@ -826,7 +838,8 @@ public final class PagingsInner {
         if (apiVersion == null) {
             throw new IllegalArgumentException("Parameter apiVersion is required and cannot be null.");
         }
-        return service.getMultiplePagesFragmentNextLink(tenant, apiVersion, this.client.acceptLanguage()).map(res -> res.body());
+        return service.getMultiplePagesFragmentNextLink(tenant, apiVersion, this.client.acceptLanguage())
+            .map((BodyResponse<PageImpl1<ProductInner>> res) -> res.body());
     }
 
     /**
@@ -881,7 +894,8 @@ public final class PagingsInner {
         Validator.validate(customParameterGroup);
         String apiVersion = customParameterGroup.apiVersion();
         String tenant = customParameterGroup.tenant();
-        return service.getMultiplePagesFragmentWithGroupingNextLink(tenant, this.client.acceptLanguage(), apiVersion).map(res -> res.body());
+        return service.getMultiplePagesFragmentWithGroupingNextLink(tenant, this.client.acceptLanguage(), apiVersion)
+            .map((BodyResponse<PageImpl1<ProductInner>> res) -> res.body());
     }
 
     /**
@@ -946,7 +960,8 @@ public final class PagingsInner {
             throw new IllegalArgumentException("Parameter apiVersion is required and cannot be null.");
         }
         String nextUrl = String.format("paging/multiple/fragment/%s/%s", tenant, nextLink);
-        return service.nextFragment(nextUrl, apiVersion, this.client.acceptLanguage()).map(res -> res.body());
+        return service.nextFragment(nextUrl, apiVersion, this.client.acceptLanguage())
+            .map((BodyResponse<PageImpl1<ProductInner>> res) -> res.body());
     }
 
     /**
@@ -1008,7 +1023,8 @@ public final class PagingsInner {
         String apiVersion = customParameterGroup.apiVersion();
         String tenant = customParameterGroup.tenant();
         String nextUrl = String.format("paging/multiple/fragmentwithgrouping/%s/%s", tenant, nextLink);
-        return service.nextFragmentWithGrouping(nextUrl, this.client.acceptLanguage(), apiVersion).map(res -> res.body());
+        return service.nextFragmentWithGrouping(nextUrl, this.client.acceptLanguage(), apiVersion)
+            .map((BodyResponse<PageImpl1<ProductInner>> res) -> res.body());
     }
 
     /**
@@ -1061,7 +1077,8 @@ public final class PagingsInner {
             throw new IllegalArgumentException("Parameter nextPageLink is required and cannot be null.");
         }
         String nextUrl = String.format("%s", nextPageLink);
-        return service.getSinglePagesNext(nextUrl, this.client.acceptLanguage()).map(res -> res.body());
+        return service.getSinglePagesNext(nextUrl, this.client.acceptLanguage())
+            .map((BodyResponse<PageImpl<ProductInner>> res) -> res.body());
     }
 
     /**
@@ -1118,7 +1135,8 @@ public final class PagingsInner {
         Integer maxresults = null;
         Integer timeout = null;
         String nextUrl = String.format("%s", nextPageLink);
-        return service.getMultiplePagesNext(nextUrl, clientRequestId, this.client.acceptLanguage(), maxresults, timeout).map(res -> res.body());
+        return service.getMultiplePagesNext(nextUrl, clientRequestId, this.client.acceptLanguage(), maxresults, timeout)
+            .map((BodyResponse<PageImpl<ProductInner>> res) -> res.body());
     }
 
     /**
@@ -1186,7 +1204,8 @@ public final class PagingsInner {
             timeout = pagingGetMultiplePagesOptions.timeout();
         }
         String nextUrl = String.format("%s", nextPageLink);
-        return service.getMultiplePagesNext(nextUrl, clientRequestId, this.client.acceptLanguage(), maxresults, timeout).map(res -> res.body());
+        return service.getMultiplePagesNext(nextUrl, clientRequestId, this.client.acceptLanguage(), maxresults, timeout)
+            .map((BodyResponse<PageImpl<ProductInner>> res) -> res.body());
     }
 
     /**
@@ -1243,7 +1262,8 @@ public final class PagingsInner {
         Integer maxresults = null;
         Integer timeout = null;
         String nextUrl = String.format("%s", nextPageLink);
-        return service.getOdataMultiplePagesNext(nextUrl, clientRequestId, this.client.acceptLanguage(), maxresults, timeout).map(res -> res.body());
+        return service.getOdataMultiplePagesNext(nextUrl, clientRequestId, this.client.acceptLanguage(), maxresults, timeout)
+            .map((BodyResponse<PageImpl1<ProductInner>> res) -> res.body());
     }
 
     /**
@@ -1311,7 +1331,8 @@ public final class PagingsInner {
             timeout = pagingGetOdataMultiplePagesOptions.timeout();
         }
         String nextUrl = String.format("%s", nextPageLink);
-        return service.getOdataMultiplePagesNext(nextUrl, clientRequestId, this.client.acceptLanguage(), maxresults, timeout).map(res -> res.body());
+        return service.getOdataMultiplePagesNext(nextUrl, clientRequestId, this.client.acceptLanguage(), maxresults, timeout)
+            .map((BodyResponse<PageImpl1<ProductInner>> res) -> res.body());
     }
 
     /**
@@ -1368,7 +1389,8 @@ public final class PagingsInner {
         Integer maxresults = null;
         Integer timeout = null;
         String nextUrl = String.format("%s", nextPageLink);
-        return service.getMultiplePagesWithOffsetNext(nextUrl, clientRequestId, this.client.acceptLanguage(), maxresults, timeout).map(res -> res.body());
+        return service.getMultiplePagesWithOffsetNext(nextUrl, clientRequestId, this.client.acceptLanguage(), maxresults, timeout)
+            .map((BodyResponse<PageImpl<ProductInner>> res) -> res.body());
     }
 
     /**
@@ -1436,7 +1458,8 @@ public final class PagingsInner {
             timeout = pagingGetMultiplePagesWithOffsetNextOptions.timeout();
         }
         String nextUrl = String.format("%s", nextPageLink);
-        return service.getMultiplePagesWithOffsetNext(nextUrl, clientRequestId, this.client.acceptLanguage(), maxresults, timeout).map(res -> res.body());
+        return service.getMultiplePagesWithOffsetNext(nextUrl, clientRequestId, this.client.acceptLanguage(), maxresults, timeout)
+            .map((BodyResponse<PageImpl<ProductInner>> res) -> res.body());
     }
 
     /**
@@ -1489,7 +1512,8 @@ public final class PagingsInner {
             throw new IllegalArgumentException("Parameter nextPageLink is required and cannot be null.");
         }
         String nextUrl = String.format("%s", nextPageLink);
-        return service.getMultiplePagesRetryFirstNext(nextUrl, this.client.acceptLanguage()).map(res -> res.body());
+        return service.getMultiplePagesRetryFirstNext(nextUrl, this.client.acceptLanguage())
+            .map((BodyResponse<PageImpl<ProductInner>> res) -> res.body());
     }
 
     /**
@@ -1542,7 +1566,8 @@ public final class PagingsInner {
             throw new IllegalArgumentException("Parameter nextPageLink is required and cannot be null.");
         }
         String nextUrl = String.format("%s", nextPageLink);
-        return service.getMultiplePagesRetrySecondNext(nextUrl, this.client.acceptLanguage()).map(res -> res.body());
+        return service.getMultiplePagesRetrySecondNext(nextUrl, this.client.acceptLanguage())
+            .map((BodyResponse<PageImpl<ProductInner>> res) -> res.body());
     }
 
     /**
@@ -1595,7 +1620,8 @@ public final class PagingsInner {
             throw new IllegalArgumentException("Parameter nextPageLink is required and cannot be null.");
         }
         String nextUrl = String.format("%s", nextPageLink);
-        return service.getSinglePagesFailureNext(nextUrl, this.client.acceptLanguage()).map(res -> res.body());
+        return service.getSinglePagesFailureNext(nextUrl, this.client.acceptLanguage())
+            .map((BodyResponse<PageImpl<ProductInner>> res) -> res.body());
     }
 
     /**
@@ -1648,7 +1674,8 @@ public final class PagingsInner {
             throw new IllegalArgumentException("Parameter nextPageLink is required and cannot be null.");
         }
         String nextUrl = String.format("%s", nextPageLink);
-        return service.getMultiplePagesFailureNext(nextUrl, this.client.acceptLanguage()).map(res -> res.body());
+        return service.getMultiplePagesFailureNext(nextUrl, this.client.acceptLanguage())
+            .map((BodyResponse<PageImpl<ProductInner>> res) -> res.body());
     }
 
     /**
@@ -1701,6 +1728,7 @@ public final class PagingsInner {
             throw new IllegalArgumentException("Parameter nextPageLink is required and cannot be null.");
         }
         String nextUrl = String.format("%s", nextPageLink);
-        return service.getMultiplePagesFailureUriNext(nextUrl, this.client.acceptLanguage()).map(res -> res.body());
+        return service.getMultiplePagesFailureUriNext(nextUrl, this.client.acceptLanguage())
+            .map((BodyResponse<PageImpl<ProductInner>> res) -> res.body());
     }
 }

@@ -139,7 +139,7 @@ public final class DatesImpl implements Dates {
      */
     public Maybe<LocalDate> getNullAsync() {
         return getNullWithRestResponseAsync()
-            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .flatMapMaybe((BodyResponse<LocalDate> res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -180,7 +180,7 @@ public final class DatesImpl implements Dates {
      */
     public Maybe<LocalDate> getInvalidDateAsync() {
         return getInvalidDateWithRestResponseAsync()
-            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .flatMapMaybe((BodyResponse<LocalDate> res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -221,7 +221,7 @@ public final class DatesImpl implements Dates {
      */
     public Maybe<LocalDate> getOverflowDateAsync() {
         return getOverflowDateWithRestResponseAsync()
-            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .flatMapMaybe((BodyResponse<LocalDate> res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -262,7 +262,7 @@ public final class DatesImpl implements Dates {
      */
     public Maybe<LocalDate> getUnderflowDateAsync() {
         return getUnderflowDateWithRestResponseAsync()
-            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .flatMapMaybe((BodyResponse<LocalDate> res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -353,7 +353,7 @@ public final class DatesImpl implements Dates {
      */
     public Maybe<LocalDate> getMaxDateAsync() {
         return getMaxDateWithRestResponseAsync()
-            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .flatMapMaybe((BodyResponse<LocalDate> res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -444,6 +444,6 @@ public final class DatesImpl implements Dates {
      */
     public Maybe<LocalDate> getMinDateAsync() {
         return getMinDateWithRestResponseAsync()
-            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .flatMapMaybe((BodyResponse<LocalDate> res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 }

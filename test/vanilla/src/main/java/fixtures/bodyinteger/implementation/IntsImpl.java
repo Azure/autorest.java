@@ -175,7 +175,7 @@ public final class IntsImpl implements Ints {
      */
     public Maybe<Integer> getNullAsync() {
         return getNullWithRestResponseAsync()
-            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .flatMapMaybe((BodyResponse<Integer> res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -216,7 +216,7 @@ public final class IntsImpl implements Ints {
      */
     public Maybe<Integer> getInvalidAsync() {
         return getInvalidWithRestResponseAsync()
-            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .flatMapMaybe((BodyResponse<Integer> res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -257,7 +257,7 @@ public final class IntsImpl implements Ints {
      */
     public Maybe<Integer> getOverflowInt32Async() {
         return getOverflowInt32WithRestResponseAsync()
-            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .flatMapMaybe((BodyResponse<Integer> res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -298,7 +298,7 @@ public final class IntsImpl implements Ints {
      */
     public Maybe<Integer> getUnderflowInt32Async() {
         return getUnderflowInt32WithRestResponseAsync()
-            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .flatMapMaybe((BodyResponse<Integer> res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -339,7 +339,7 @@ public final class IntsImpl implements Ints {
      */
     public Maybe<Long> getOverflowInt64Async() {
         return getOverflowInt64WithRestResponseAsync()
-            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .flatMapMaybe((BodyResponse<Long> res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -380,7 +380,7 @@ public final class IntsImpl implements Ints {
      */
     public Maybe<Long> getUnderflowInt64Async() {
         return getUnderflowInt64WithRestResponseAsync()
-            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .flatMapMaybe((BodyResponse<Long> res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -609,7 +609,7 @@ public final class IntsImpl implements Ints {
      */
     public Maybe<DateTime> getUnixTimeAsync() {
         return getUnixTimeWithRestResponseAsync()
-            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .flatMapMaybe((BodyResponse<DateTime> res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -698,7 +698,7 @@ public final class IntsImpl implements Ints {
      */
     public Maybe<DateTime> getInvalidUnixTimeAsync() {
         return getInvalidUnixTimeWithRestResponseAsync()
-            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .flatMapMaybe((BodyResponse<DateTime> res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -739,6 +739,6 @@ public final class IntsImpl implements Ints {
      */
     public Maybe<DateTime> getNullUnixTimeAsync() {
         return getNullUnixTimeWithRestResponseAsync()
-            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .flatMapMaybe((BodyResponse<DateTime> res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 }

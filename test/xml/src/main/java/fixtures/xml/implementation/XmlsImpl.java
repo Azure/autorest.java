@@ -160,7 +160,7 @@ public final class XmlsImpl implements Xmls {
      */
     public Maybe<Slideshow> getSimpleAsync() {
         return getSimpleWithRestResponseAsync()
-            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .flatMapMaybe((BodyResponse<Slideshow> res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -251,7 +251,7 @@ public final class XmlsImpl implements Xmls {
      */
     public Maybe<AppleBarrel> getWrappedListsAsync() {
         return getWrappedListsWithRestResponseAsync()
-            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .flatMapMaybe((BodyResponse<AppleBarrel> res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -381,7 +381,7 @@ public final class XmlsImpl implements Xmls {
      */
     public Maybe<Slideshow> getEmptyListAsync() {
         return getEmptyListWithRestResponseAsync()
-            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .flatMapMaybe((BodyResponse<Slideshow> res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -421,7 +421,7 @@ public final class XmlsImpl implements Xmls {
      */
     public Maybe<AppleBarrel> getEmptyWrappedListsAsync() {
         return getEmptyWrappedListsWithRestResponseAsync()
-            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .flatMapMaybe((BodyResponse<AppleBarrel> res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -461,7 +461,7 @@ public final class XmlsImpl implements Xmls {
      */
     public Maybe<List<Banana>> getRootListAsync() {
         return getRootListWithRestResponseAsync()
-            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .flatMapMaybe((BodyResponse<List<Banana>> res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -551,7 +551,7 @@ public final class XmlsImpl implements Xmls {
      */
     public Maybe<List<Banana>> getEmptyRootListAsync() {
         return getEmptyRootListWithRestResponseAsync()
-            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .flatMapMaybe((BodyResponse<List<Banana>> res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -641,7 +641,7 @@ public final class XmlsImpl implements Xmls {
      */
     public Maybe<Banana> getEmptyChildElementAsync() {
         return getEmptyChildElementWithRestResponseAsync()
-            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .flatMapMaybe((BodyResponse<Banana> res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**

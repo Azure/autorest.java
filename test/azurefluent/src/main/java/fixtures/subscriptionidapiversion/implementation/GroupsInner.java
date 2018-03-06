@@ -117,6 +117,6 @@ public final class GroupsInner {
      */
     public Maybe<SampleResourceGroupInner> getSampleResourceGroupAsync(@NonNull String resourceGroupName) {
         return getSampleResourceGroupWithRestResponseAsync(resourceGroupName)
-            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .flatMapMaybe((BodyResponse<SampleResourceGroupInner> res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 }

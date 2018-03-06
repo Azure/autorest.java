@@ -56,8 +56,6 @@ call :AutoRest implementationsubpackage-empty bodybyte %autoRestSwaggerPrefix%/b
 call :AutoRest modelssubpackage bodybyte %autoRestSwaggerPrefix%/body-byte.json "--java.models-subpackage=spam"
 call :AutoRest modelssubpackage-empty bodybyte %autoRestSwaggerPrefix%/body-byte.json "--java.models-subpackage=''"
 call :AutoRest xml xml test/swagger/xml-service.json "--enable-xml=true"
-call :AutoRest javaversion-7 paging %autoRestSwaggerPrefix%/paging.json %javaAzureArmFlag% "--java.java-version=7"
-call :AutoRest javaversion-8 paging %autoRestSwaggerPrefix%/paging.json %javaAzureArmFlag% "--java.java-version=8"
 goto :EOF
 
 :AutoRest
