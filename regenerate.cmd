@@ -55,6 +55,7 @@ call :AutoRest implementationsubpackage bodybyte %autoRestSwaggerPrefix%/body-by
 call :AutoRest implementationsubpackage-empty bodybyte %autoRestSwaggerPrefix%/body-byte.json "--java.implementation-subpackage=''"
 call :AutoRest modelssubpackage bodybyte %autoRestSwaggerPrefix%/body-byte.json "--java.models-subpackage=spam"
 call :AutoRest modelssubpackage-empty bodybyte %autoRestSwaggerPrefix%/body-byte.json "--java.models-subpackage=''"
+call :AutoRest requiredparameterclientmethods-false requiredoptional %autoRestSwaggerPrefix%/required-optional.json "--java.required-parameter-client-methods=false"
 call :AutoRest xml xml test/swagger/xml-service.json "--enable-xml=true"
 goto :EOF
 
