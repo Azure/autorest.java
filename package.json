@@ -33,7 +33,7 @@
   "homepage": "https://github.com/Azure/autorest.java/blob/master/README.md",
   "devDependencies": {
     "@microsoft.azure/autorest.testserver": "2.3.14",
-    "autorest": "2.0.4220",
+    "autorest": "2.0.4245",
     "coffee-script": "1.12.7",
     "dotnet-sdk-2.0.0": "1.1.1",
     "gulp": "3.9.1",
