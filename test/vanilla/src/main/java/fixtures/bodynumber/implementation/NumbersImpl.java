@@ -27,7 +27,6 @@ import io.reactivex.Completable;
 import io.reactivex.Maybe;
 import io.reactivex.Single;
 import io.reactivex.annotations.NonNull;
-import io.reactivex.functions.Function;
 import java.math.BigDecimal;
 
 /**
@@ -220,7 +219,7 @@ public final class NumbersImpl implements Numbers {
      */
     public Maybe<Double> getNullAsync() {
         return getNullWithRestResponseAsync()
-            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .flatMapMaybe((BodyResponse<Double> res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -261,7 +260,7 @@ public final class NumbersImpl implements Numbers {
      */
     public Maybe<Double> getInvalidFloatAsync() {
         return getInvalidFloatWithRestResponseAsync()
-            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .flatMapMaybe((BodyResponse<Double> res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -302,7 +301,7 @@ public final class NumbersImpl implements Numbers {
      */
     public Maybe<Double> getInvalidDoubleAsync() {
         return getInvalidDoubleWithRestResponseAsync()
-            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .flatMapMaybe((BodyResponse<Double> res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -343,7 +342,7 @@ public final class NumbersImpl implements Numbers {
      */
     public Maybe<BigDecimal> getInvalidDecimalAsync() {
         return getInvalidDecimalWithRestResponseAsync()
-            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .flatMapMaybe((BodyResponse<BigDecimal> res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -431,7 +430,7 @@ public final class NumbersImpl implements Numbers {
      */
     public Maybe<Double> getBigFloatAsync() {
         return getBigFloatWithRestResponseAsync()
-            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .flatMapMaybe((BodyResponse<Double> res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -519,7 +518,7 @@ public final class NumbersImpl implements Numbers {
      */
     public Maybe<Double> getBigDoubleAsync() {
         return getBigDoubleWithRestResponseAsync()
-            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .flatMapMaybe((BodyResponse<Double> res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -607,7 +606,7 @@ public final class NumbersImpl implements Numbers {
      */
     public Maybe<Double> getBigDoublePositiveDecimalAsync() {
         return getBigDoublePositiveDecimalWithRestResponseAsync()
-            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .flatMapMaybe((BodyResponse<Double> res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -695,7 +694,7 @@ public final class NumbersImpl implements Numbers {
      */
     public Maybe<Double> getBigDoubleNegativeDecimalAsync() {
         return getBigDoubleNegativeDecimalWithRestResponseAsync()
-            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .flatMapMaybe((BodyResponse<Double> res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -786,7 +785,7 @@ public final class NumbersImpl implements Numbers {
      */
     public Maybe<BigDecimal> getBigDecimalAsync() {
         return getBigDecimalWithRestResponseAsync()
-            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .flatMapMaybe((BodyResponse<BigDecimal> res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -877,7 +876,7 @@ public final class NumbersImpl implements Numbers {
      */
     public Maybe<BigDecimal> getBigDecimalPositiveDecimalAsync() {
         return getBigDecimalPositiveDecimalWithRestResponseAsync()
-            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .flatMapMaybe((BodyResponse<BigDecimal> res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -968,7 +967,7 @@ public final class NumbersImpl implements Numbers {
      */
     public Maybe<BigDecimal> getBigDecimalNegativeDecimalAsync() {
         return getBigDecimalNegativeDecimalWithRestResponseAsync()
-            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .flatMapMaybe((BodyResponse<BigDecimal> res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -1056,7 +1055,7 @@ public final class NumbersImpl implements Numbers {
      */
     public Maybe<Double> getSmallFloatAsync() {
         return getSmallFloatWithRestResponseAsync()
-            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .flatMapMaybe((BodyResponse<Double> res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -1144,7 +1143,7 @@ public final class NumbersImpl implements Numbers {
      */
     public Maybe<Double> getSmallDoubleAsync() {
         return getSmallDoubleWithRestResponseAsync()
-            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .flatMapMaybe((BodyResponse<Double> res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -1235,6 +1234,6 @@ public final class NumbersImpl implements Numbers {
      */
     public Maybe<BigDecimal> getSmallDecimalAsync() {
         return getSmallDecimalWithRestResponseAsync()
-            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .flatMapMaybe((BodyResponse<BigDecimal> res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 }

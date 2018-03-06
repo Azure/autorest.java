@@ -36,7 +36,6 @@ import io.reactivex.Completable;
 import io.reactivex.Maybe;
 import io.reactivex.Observable;
 import io.reactivex.Single;
-import io.reactivex.functions.Function;
 
 /**
  * An instance of this class provides access to all the operations defined in
@@ -241,7 +240,7 @@ public final class LROsCustomHeadersImpl implements LROsCustomHeaders {
      */
     public Maybe<Product> putAsyncRetrySucceededAsync() {
         return putAsyncRetrySucceededWithRestResponseAsync()
-            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .flatMapMaybe((LROsCustomHeaderPutAsyncRetrySucceededResponse res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -290,7 +289,7 @@ public final class LROsCustomHeadersImpl implements LROsCustomHeaders {
      */
     public Maybe<Product> putAsyncRetrySucceededAsync(Product product) {
         return putAsyncRetrySucceededWithRestResponseAsync(product)
-            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .flatMapMaybe((LROsCustomHeaderPutAsyncRetrySucceededResponse res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -414,7 +413,7 @@ public final class LROsCustomHeadersImpl implements LROsCustomHeaders {
      */
     public Maybe<Product> put201CreatingSucceeded200Async() {
         return put201CreatingSucceeded200WithRestResponseAsync()
-            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .flatMapMaybe((BodyResponse<Product> res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -463,7 +462,7 @@ public final class LROsCustomHeadersImpl implements LROsCustomHeaders {
      */
     public Maybe<Product> put201CreatingSucceeded200Async(Product product) {
         return put201CreatingSucceeded200WithRestResponseAsync(product)
-            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .flatMapMaybe((BodyResponse<Product> res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**

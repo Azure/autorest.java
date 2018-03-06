@@ -32,7 +32,6 @@ import io.reactivex.Completable;
 import io.reactivex.Maybe;
 import io.reactivex.Single;
 import io.reactivex.annotations.NonNull;
-import io.reactivex.functions.Function;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -438,7 +437,7 @@ public final class DictionarysImpl implements Dictionarys {
      */
     public Maybe<Map<String, Integer>> getNullAsync() {
         return getNullWithRestResponseAsync()
-            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .flatMapMaybe((BodyResponse<Map<String, Integer>> res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -479,7 +478,7 @@ public final class DictionarysImpl implements Dictionarys {
      */
     public Maybe<Map<String, Integer>> getEmptyAsync() {
         return getEmptyWithRestResponseAsync()
-            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .flatMapMaybe((BodyResponse<Map<String, Integer>> res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -571,7 +570,7 @@ public final class DictionarysImpl implements Dictionarys {
      */
     public Maybe<Map<String, String>> getNullValueAsync() {
         return getNullValueWithRestResponseAsync()
-            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .flatMapMaybe((BodyResponse<Map<String, String>> res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -612,7 +611,7 @@ public final class DictionarysImpl implements Dictionarys {
      */
     public Maybe<Map<String, String>> getNullKeyAsync() {
         return getNullKeyWithRestResponseAsync()
-            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .flatMapMaybe((BodyResponse<Map<String, String>> res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -653,7 +652,7 @@ public final class DictionarysImpl implements Dictionarys {
      */
     public Maybe<Map<String, String>> getEmptyStringKeyAsync() {
         return getEmptyStringKeyWithRestResponseAsync()
-            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .flatMapMaybe((BodyResponse<Map<String, String>> res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -694,7 +693,7 @@ public final class DictionarysImpl implements Dictionarys {
      */
     public Maybe<Map<String, String>> getInvalidAsync() {
         return getInvalidWithRestResponseAsync()
-            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .flatMapMaybe((BodyResponse<Map<String, String>> res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -735,7 +734,7 @@ public final class DictionarysImpl implements Dictionarys {
      */
     public Maybe<Map<String, Boolean>> getBooleanTfftAsync() {
         return getBooleanTfftWithRestResponseAsync()
-            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .flatMapMaybe((BodyResponse<Map<String, Boolean>> res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -827,7 +826,7 @@ public final class DictionarysImpl implements Dictionarys {
      */
     public Maybe<Map<String, Boolean>> getBooleanInvalidNullAsync() {
         return getBooleanInvalidNullWithRestResponseAsync()
-            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .flatMapMaybe((BodyResponse<Map<String, Boolean>> res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -868,7 +867,7 @@ public final class DictionarysImpl implements Dictionarys {
      */
     public Maybe<Map<String, Boolean>> getBooleanInvalidStringAsync() {
         return getBooleanInvalidStringWithRestResponseAsync()
-            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .flatMapMaybe((BodyResponse<Map<String, Boolean>> res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -909,7 +908,7 @@ public final class DictionarysImpl implements Dictionarys {
      */
     public Maybe<Map<String, Integer>> getIntegerValidAsync() {
         return getIntegerValidWithRestResponseAsync()
-            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .flatMapMaybe((BodyResponse<Map<String, Integer>> res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -1001,7 +1000,7 @@ public final class DictionarysImpl implements Dictionarys {
      */
     public Maybe<Map<String, Integer>> getIntInvalidNullAsync() {
         return getIntInvalidNullWithRestResponseAsync()
-            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .flatMapMaybe((BodyResponse<Map<String, Integer>> res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -1042,7 +1041,7 @@ public final class DictionarysImpl implements Dictionarys {
      */
     public Maybe<Map<String, Integer>> getIntInvalidStringAsync() {
         return getIntInvalidStringWithRestResponseAsync()
-            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .flatMapMaybe((BodyResponse<Map<String, Integer>> res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -1083,7 +1082,7 @@ public final class DictionarysImpl implements Dictionarys {
      */
     public Maybe<Map<String, Long>> getLongValidAsync() {
         return getLongValidWithRestResponseAsync()
-            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .flatMapMaybe((BodyResponse<Map<String, Long>> res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -1175,7 +1174,7 @@ public final class DictionarysImpl implements Dictionarys {
      */
     public Maybe<Map<String, Long>> getLongInvalidNullAsync() {
         return getLongInvalidNullWithRestResponseAsync()
-            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .flatMapMaybe((BodyResponse<Map<String, Long>> res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -1216,7 +1215,7 @@ public final class DictionarysImpl implements Dictionarys {
      */
     public Maybe<Map<String, Long>> getLongInvalidStringAsync() {
         return getLongInvalidStringWithRestResponseAsync()
-            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .flatMapMaybe((BodyResponse<Map<String, Long>> res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -1257,7 +1256,7 @@ public final class DictionarysImpl implements Dictionarys {
      */
     public Maybe<Map<String, Double>> getFloatValidAsync() {
         return getFloatValidWithRestResponseAsync()
-            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .flatMapMaybe((BodyResponse<Map<String, Double>> res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -1349,7 +1348,7 @@ public final class DictionarysImpl implements Dictionarys {
      */
     public Maybe<Map<String, Double>> getFloatInvalidNullAsync() {
         return getFloatInvalidNullWithRestResponseAsync()
-            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .flatMapMaybe((BodyResponse<Map<String, Double>> res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -1390,7 +1389,7 @@ public final class DictionarysImpl implements Dictionarys {
      */
     public Maybe<Map<String, Double>> getFloatInvalidStringAsync() {
         return getFloatInvalidStringWithRestResponseAsync()
-            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .flatMapMaybe((BodyResponse<Map<String, Double>> res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -1431,7 +1430,7 @@ public final class DictionarysImpl implements Dictionarys {
      */
     public Maybe<Map<String, Double>> getDoubleValidAsync() {
         return getDoubleValidWithRestResponseAsync()
-            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .flatMapMaybe((BodyResponse<Map<String, Double>> res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -1523,7 +1522,7 @@ public final class DictionarysImpl implements Dictionarys {
      */
     public Maybe<Map<String, Double>> getDoubleInvalidNullAsync() {
         return getDoubleInvalidNullWithRestResponseAsync()
-            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .flatMapMaybe((BodyResponse<Map<String, Double>> res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -1564,7 +1563,7 @@ public final class DictionarysImpl implements Dictionarys {
      */
     public Maybe<Map<String, Double>> getDoubleInvalidStringAsync() {
         return getDoubleInvalidStringWithRestResponseAsync()
-            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .flatMapMaybe((BodyResponse<Map<String, Double>> res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -1605,7 +1604,7 @@ public final class DictionarysImpl implements Dictionarys {
      */
     public Maybe<Map<String, String>> getStringValidAsync() {
         return getStringValidWithRestResponseAsync()
-            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .flatMapMaybe((BodyResponse<Map<String, String>> res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -1697,7 +1696,7 @@ public final class DictionarysImpl implements Dictionarys {
      */
     public Maybe<Map<String, String>> getStringWithNullAsync() {
         return getStringWithNullWithRestResponseAsync()
-            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .flatMapMaybe((BodyResponse<Map<String, String>> res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -1738,7 +1737,7 @@ public final class DictionarysImpl implements Dictionarys {
      */
     public Maybe<Map<String, String>> getStringWithInvalidAsync() {
         return getStringWithInvalidWithRestResponseAsync()
-            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .flatMapMaybe((BodyResponse<Map<String, String>> res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -1779,7 +1778,7 @@ public final class DictionarysImpl implements Dictionarys {
      */
     public Maybe<Map<String, LocalDate>> getDateValidAsync() {
         return getDateValidWithRestResponseAsync()
-            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .flatMapMaybe((BodyResponse<Map<String, LocalDate>> res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -1871,7 +1870,7 @@ public final class DictionarysImpl implements Dictionarys {
      */
     public Maybe<Map<String, LocalDate>> getDateInvalidNullAsync() {
         return getDateInvalidNullWithRestResponseAsync()
-            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .flatMapMaybe((BodyResponse<Map<String, LocalDate>> res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -1912,7 +1911,7 @@ public final class DictionarysImpl implements Dictionarys {
      */
     public Maybe<Map<String, LocalDate>> getDateInvalidCharsAsync() {
         return getDateInvalidCharsWithRestResponseAsync()
-            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .flatMapMaybe((BodyResponse<Map<String, LocalDate>> res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -1953,7 +1952,7 @@ public final class DictionarysImpl implements Dictionarys {
      */
     public Maybe<Map<String, DateTime>> getDateTimeValidAsync() {
         return getDateTimeValidWithRestResponseAsync()
-            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .flatMapMaybe((BodyResponse<Map<String, DateTime>> res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -2045,7 +2044,7 @@ public final class DictionarysImpl implements Dictionarys {
      */
     public Maybe<Map<String, DateTime>> getDateTimeInvalidNullAsync() {
         return getDateTimeInvalidNullWithRestResponseAsync()
-            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .flatMapMaybe((BodyResponse<Map<String, DateTime>> res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -2086,7 +2085,7 @@ public final class DictionarysImpl implements Dictionarys {
      */
     public Maybe<Map<String, DateTime>> getDateTimeInvalidCharsAsync() {
         return getDateTimeInvalidCharsWithRestResponseAsync()
-            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .flatMapMaybe((BodyResponse<Map<String, DateTime>> res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -2127,7 +2126,7 @@ public final class DictionarysImpl implements Dictionarys {
      */
     public Maybe<Map<String, DateTime>> getDateTimeRfc1123ValidAsync() {
         return getDateTimeRfc1123ValidWithRestResponseAsync()
-            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .flatMapMaybe((BodyResponse<Map<String, DateTime>> res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -2224,7 +2223,7 @@ public final class DictionarysImpl implements Dictionarys {
      */
     public Maybe<Map<String, Period>> getDurationValidAsync() {
         return getDurationValidWithRestResponseAsync()
-            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .flatMapMaybe((BodyResponse<Map<String, Period>> res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -2316,7 +2315,7 @@ public final class DictionarysImpl implements Dictionarys {
      */
     public Maybe<Map<String, byte[]>> getByteValidAsync() {
         return getByteValidWithRestResponseAsync()
-            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .flatMapMaybe((BodyResponse<Map<String, byte[]>> res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -2408,7 +2407,7 @@ public final class DictionarysImpl implements Dictionarys {
      */
     public Maybe<Map<String, byte[]>> getByteInvalidNullAsync() {
         return getByteInvalidNullWithRestResponseAsync()
-            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .flatMapMaybe((BodyResponse<Map<String, byte[]>> res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -2449,7 +2448,7 @@ public final class DictionarysImpl implements Dictionarys {
      */
     public Maybe<Map<String, byte[]>> getBase64UrlAsync() {
         return getBase64UrlWithRestResponseAsync()
-            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .flatMapMaybe((BodyResponse<Map<String, byte[]>> res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -2490,7 +2489,7 @@ public final class DictionarysImpl implements Dictionarys {
      */
     public Maybe<Map<String, Widget>> getComplexNullAsync() {
         return getComplexNullWithRestResponseAsync()
-            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .flatMapMaybe((BodyResponse<Map<String, Widget>> res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -2531,7 +2530,7 @@ public final class DictionarysImpl implements Dictionarys {
      */
     public Maybe<Map<String, Widget>> getComplexEmptyAsync() {
         return getComplexEmptyWithRestResponseAsync()
-            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .flatMapMaybe((BodyResponse<Map<String, Widget>> res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -2572,7 +2571,7 @@ public final class DictionarysImpl implements Dictionarys {
      */
     public Maybe<Map<String, Widget>> getComplexItemNullAsync() {
         return getComplexItemNullWithRestResponseAsync()
-            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .flatMapMaybe((BodyResponse<Map<String, Widget>> res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -2613,7 +2612,7 @@ public final class DictionarysImpl implements Dictionarys {
      */
     public Maybe<Map<String, Widget>> getComplexItemEmptyAsync() {
         return getComplexItemEmptyWithRestResponseAsync()
-            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .flatMapMaybe((BodyResponse<Map<String, Widget>> res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -2654,7 +2653,7 @@ public final class DictionarysImpl implements Dictionarys {
      */
     public Maybe<Map<String, Widget>> getComplexValidAsync() {
         return getComplexValidWithRestResponseAsync()
-            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .flatMapMaybe((BodyResponse<Map<String, Widget>> res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -2746,7 +2745,7 @@ public final class DictionarysImpl implements Dictionarys {
      */
     public Maybe<Map<String, List<String>>> getArrayNullAsync() {
         return getArrayNullWithRestResponseAsync()
-            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .flatMapMaybe((BodyResponse<Map<String, List<String>>> res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -2787,7 +2786,7 @@ public final class DictionarysImpl implements Dictionarys {
      */
     public Maybe<Map<String, List<String>>> getArrayEmptyAsync() {
         return getArrayEmptyWithRestResponseAsync()
-            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .flatMapMaybe((BodyResponse<Map<String, List<String>>> res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -2828,7 +2827,7 @@ public final class DictionarysImpl implements Dictionarys {
      */
     public Maybe<Map<String, List<String>>> getArrayItemNullAsync() {
         return getArrayItemNullWithRestResponseAsync()
-            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .flatMapMaybe((BodyResponse<Map<String, List<String>>> res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -2869,7 +2868,7 @@ public final class DictionarysImpl implements Dictionarys {
      */
     public Maybe<Map<String, List<String>>> getArrayItemEmptyAsync() {
         return getArrayItemEmptyWithRestResponseAsync()
-            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .flatMapMaybe((BodyResponse<Map<String, List<String>>> res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -2910,7 +2909,7 @@ public final class DictionarysImpl implements Dictionarys {
      */
     public Maybe<Map<String, List<String>>> getArrayValidAsync() {
         return getArrayValidWithRestResponseAsync()
-            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .flatMapMaybe((BodyResponse<Map<String, List<String>>> res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -3002,7 +3001,7 @@ public final class DictionarysImpl implements Dictionarys {
      */
     public Maybe<Map<String, Map<String, String>>> getDictionaryNullAsync() {
         return getDictionaryNullWithRestResponseAsync()
-            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .flatMapMaybe((BodyResponse<Map<String, Map<String, String>>> res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -3043,7 +3042,7 @@ public final class DictionarysImpl implements Dictionarys {
      */
     public Maybe<Map<String, Map<String, String>>> getDictionaryEmptyAsync() {
         return getDictionaryEmptyWithRestResponseAsync()
-            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .flatMapMaybe((BodyResponse<Map<String, Map<String, String>>> res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -3084,7 +3083,7 @@ public final class DictionarysImpl implements Dictionarys {
      */
     public Maybe<Map<String, Map<String, String>>> getDictionaryItemNullAsync() {
         return getDictionaryItemNullWithRestResponseAsync()
-            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .flatMapMaybe((BodyResponse<Map<String, Map<String, String>>> res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -3125,7 +3124,7 @@ public final class DictionarysImpl implements Dictionarys {
      */
     public Maybe<Map<String, Map<String, String>>> getDictionaryItemEmptyAsync() {
         return getDictionaryItemEmptyWithRestResponseAsync()
-            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .flatMapMaybe((BodyResponse<Map<String, Map<String, String>>> res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -3166,7 +3165,7 @@ public final class DictionarysImpl implements Dictionarys {
      */
     public Maybe<Map<String, Map<String, String>>> getDictionaryValidAsync() {
         return getDictionaryValidWithRestResponseAsync()
-            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .flatMapMaybe((BodyResponse<Map<String, Map<String, String>>> res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**

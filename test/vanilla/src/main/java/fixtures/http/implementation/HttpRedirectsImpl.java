@@ -43,7 +43,6 @@ import fixtures.http.models.HttpRedirectsPut307Response;
 import io.reactivex.Completable;
 import io.reactivex.Maybe;
 import io.reactivex.Single;
-import io.reactivex.functions.Function;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -232,7 +231,7 @@ public final class HttpRedirectsImpl implements HttpRedirects {
      */
     public Maybe<List<String>> get300Async() {
         return get300WithRestResponseAsync()
-            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .flatMapMaybe((HttpRedirectsGet300Response res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**

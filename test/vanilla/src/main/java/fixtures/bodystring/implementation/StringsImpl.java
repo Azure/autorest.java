@@ -29,7 +29,6 @@ import io.reactivex.Completable;
 import io.reactivex.Maybe;
 import io.reactivex.Single;
 import io.reactivex.annotations.NonNull;
-import io.reactivex.functions.Function;
 
 /**
  * An instance of this class provides access to all the operations defined in
@@ -169,7 +168,7 @@ public final class StringsImpl implements Strings {
      */
     public Maybe<String> getNullAsync() {
         return getNullWithRestResponseAsync()
-            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .flatMapMaybe((BodyResponse<String> res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -298,7 +297,7 @@ public final class StringsImpl implements Strings {
      */
     public Maybe<String> getEmptyAsync() {
         return getEmptyWithRestResponseAsync()
-            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .flatMapMaybe((BodyResponse<String> res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -389,7 +388,7 @@ public final class StringsImpl implements Strings {
      */
     public Maybe<String> getMbcsAsync() {
         return getMbcsWithRestResponseAsync()
-            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .flatMapMaybe((BodyResponse<String> res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -480,7 +479,7 @@ public final class StringsImpl implements Strings {
      */
     public Maybe<String> getWhitespaceAsync() {
         return getWhitespaceWithRestResponseAsync()
-            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .flatMapMaybe((BodyResponse<String> res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -571,7 +570,7 @@ public final class StringsImpl implements Strings {
      */
     public Maybe<String> getNotProvidedAsync() {
         return getNotProvidedWithRestResponseAsync()
-            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .flatMapMaybe((BodyResponse<String> res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -612,7 +611,7 @@ public final class StringsImpl implements Strings {
      */
     public Maybe<byte[]> getBase64EncodedAsync() {
         return getBase64EncodedWithRestResponseAsync()
-            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .flatMapMaybe((BodyResponse<byte[]> res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -653,7 +652,7 @@ public final class StringsImpl implements Strings {
      */
     public Maybe<byte[]> getBase64UrlEncodedAsync() {
         return getBase64UrlEncodedWithRestResponseAsync()
-            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .flatMapMaybe((BodyResponse<byte[]> res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -745,6 +744,6 @@ public final class StringsImpl implements Strings {
      */
     public Maybe<byte[]> getNullBase64UrlEncodedAsync() {
         return getNullBase64UrlEncodedWithRestResponseAsync()
-            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .flatMapMaybe((BodyResponse<byte[]> res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 }

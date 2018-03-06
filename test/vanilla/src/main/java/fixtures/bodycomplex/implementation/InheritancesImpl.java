@@ -29,7 +29,6 @@ import io.reactivex.Completable;
 import io.reactivex.Maybe;
 import io.reactivex.Single;
 import io.reactivex.annotations.NonNull;
-import io.reactivex.functions.Function;
 
 /**
  * An instance of this class provides access to all the operations defined in
@@ -111,7 +110,7 @@ public final class InheritancesImpl implements Inheritances {
      */
     public Maybe<Siamese> getValidAsync() {
         return getValidWithRestResponseAsync()
-            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .flatMapMaybe((BodyResponse<Siamese> res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**

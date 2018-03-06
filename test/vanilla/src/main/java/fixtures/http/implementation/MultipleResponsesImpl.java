@@ -26,7 +26,6 @@ import fixtures.http.models.ErrorException;
 import io.reactivex.Completable;
 import io.reactivex.Maybe;
 import io.reactivex.Single;
-import io.reactivex.functions.Function;
 
 /**
  * An instance of this class provides access to all the operations defined in
@@ -245,7 +244,7 @@ public final class MultipleResponsesImpl implements MultipleResponses {
      */
     public Maybe<A> get200Model204NoModelDefaultError200ValidAsync() {
         return get200Model204NoModelDefaultError200ValidWithRestResponseAsync()
-            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .flatMapMaybe((BodyResponse<A> res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -286,7 +285,7 @@ public final class MultipleResponsesImpl implements MultipleResponses {
      */
     public Maybe<A> get200Model204NoModelDefaultError204ValidAsync() {
         return get200Model204NoModelDefaultError204ValidWithRestResponseAsync()
-            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .flatMapMaybe((BodyResponse<A> res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -327,7 +326,7 @@ public final class MultipleResponsesImpl implements MultipleResponses {
      */
     public Maybe<A> get200Model204NoModelDefaultError201InvalidAsync() {
         return get200Model204NoModelDefaultError201InvalidWithRestResponseAsync()
-            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .flatMapMaybe((BodyResponse<A> res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -368,7 +367,7 @@ public final class MultipleResponsesImpl implements MultipleResponses {
      */
     public Maybe<A> get200Model204NoModelDefaultError202NoneAsync() {
         return get200Model204NoModelDefaultError202NoneWithRestResponseAsync()
-            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .flatMapMaybe((BodyResponse<A> res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -409,7 +408,7 @@ public final class MultipleResponsesImpl implements MultipleResponses {
      */
     public Maybe<A> get200Model204NoModelDefaultError400ValidAsync() {
         return get200Model204NoModelDefaultError400ValidWithRestResponseAsync()
-            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .flatMapMaybe((BodyResponse<A> res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -450,7 +449,7 @@ public final class MultipleResponsesImpl implements MultipleResponses {
      */
     public Maybe<A> get200Model201ModelDefaultError200ValidAsync() {
         return get200Model201ModelDefaultError200ValidWithRestResponseAsync()
-            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .flatMapMaybe((BodyResponse<A> res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -491,7 +490,7 @@ public final class MultipleResponsesImpl implements MultipleResponses {
      */
     public Maybe<A> get200Model201ModelDefaultError201ValidAsync() {
         return get200Model201ModelDefaultError201ValidWithRestResponseAsync()
-            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .flatMapMaybe((BodyResponse<A> res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -532,7 +531,7 @@ public final class MultipleResponsesImpl implements MultipleResponses {
      */
     public Maybe<A> get200Model201ModelDefaultError400ValidAsync() {
         return get200Model201ModelDefaultError400ValidWithRestResponseAsync()
-            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .flatMapMaybe((BodyResponse<A> res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -573,7 +572,7 @@ public final class MultipleResponsesImpl implements MultipleResponses {
      */
     public Maybe<Object> get200ModelA201ModelC404ModelDDefaultError200ValidAsync() {
         return get200ModelA201ModelC404ModelDDefaultError200ValidWithRestResponseAsync()
-            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .flatMapMaybe((BodyResponse<Object> res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -614,7 +613,7 @@ public final class MultipleResponsesImpl implements MultipleResponses {
      */
     public Maybe<Object> get200ModelA201ModelC404ModelDDefaultError201ValidAsync() {
         return get200ModelA201ModelC404ModelDDefaultError201ValidWithRestResponseAsync()
-            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .flatMapMaybe((BodyResponse<Object> res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -655,7 +654,7 @@ public final class MultipleResponsesImpl implements MultipleResponses {
      */
     public Maybe<Object> get200ModelA201ModelC404ModelDDefaultError404ValidAsync() {
         return get200ModelA201ModelC404ModelDDefaultError404ValidWithRestResponseAsync()
-            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .flatMapMaybe((BodyResponse<Object> res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -696,7 +695,7 @@ public final class MultipleResponsesImpl implements MultipleResponses {
      */
     public Maybe<Object> get200ModelA201ModelC404ModelDDefaultError400ValidAsync() {
         return get200ModelA201ModelC404ModelDDefaultError400ValidWithRestResponseAsync()
-            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .flatMapMaybe((BodyResponse<Object> res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -1013,7 +1012,7 @@ public final class MultipleResponsesImpl implements MultipleResponses {
      */
     public Maybe<A> getDefaultModelA200ValidAsync() {
         return getDefaultModelA200ValidWithRestResponseAsync()
-            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .flatMapMaybe((BodyResponse<A> res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -1054,7 +1053,7 @@ public final class MultipleResponsesImpl implements MultipleResponses {
      */
     public Maybe<A> getDefaultModelA200NoneAsync() {
         return getDefaultModelA200NoneWithRestResponseAsync()
-            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .flatMapMaybe((BodyResponse<A> res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -1095,7 +1094,7 @@ public final class MultipleResponsesImpl implements MultipleResponses {
      */
     public Maybe<A> getDefaultModelA400ValidAsync() {
         return getDefaultModelA400ValidWithRestResponseAsync()
-            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .flatMapMaybe((BodyResponse<A> res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -1136,7 +1135,7 @@ public final class MultipleResponsesImpl implements MultipleResponses {
      */
     public Maybe<A> getDefaultModelA400NoneAsync() {
         return getDefaultModelA400NoneWithRestResponseAsync()
-            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .flatMapMaybe((BodyResponse<A> res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -1332,7 +1331,7 @@ public final class MultipleResponsesImpl implements MultipleResponses {
      */
     public Maybe<A> get200ModelA200NoneAsync() {
         return get200ModelA200NoneWithRestResponseAsync()
-            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .flatMapMaybe((BodyResponse<A> res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -1372,7 +1371,7 @@ public final class MultipleResponsesImpl implements MultipleResponses {
      */
     public Maybe<A> get200ModelA200ValidAsync() {
         return get200ModelA200ValidWithRestResponseAsync()
-            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .flatMapMaybe((BodyResponse<A> res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -1412,7 +1411,7 @@ public final class MultipleResponsesImpl implements MultipleResponses {
      */
     public Maybe<A> get200ModelA200InvalidAsync() {
         return get200ModelA200InvalidWithRestResponseAsync()
-            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .flatMapMaybe((BodyResponse<A> res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -1452,7 +1451,7 @@ public final class MultipleResponsesImpl implements MultipleResponses {
      */
     public Maybe<A> get200ModelA400NoneAsync() {
         return get200ModelA400NoneWithRestResponseAsync()
-            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .flatMapMaybe((BodyResponse<A> res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -1492,7 +1491,7 @@ public final class MultipleResponsesImpl implements MultipleResponses {
      */
     public Maybe<A> get200ModelA400ValidAsync() {
         return get200ModelA400ValidWithRestResponseAsync()
-            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .flatMapMaybe((BodyResponse<A> res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -1532,7 +1531,7 @@ public final class MultipleResponsesImpl implements MultipleResponses {
      */
     public Maybe<A> get200ModelA400InvalidAsync() {
         return get200ModelA400InvalidWithRestResponseAsync()
-            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .flatMapMaybe((BodyResponse<A> res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -1572,6 +1571,6 @@ public final class MultipleResponsesImpl implements MultipleResponses {
      */
     public Maybe<A> get200ModelA202ValidAsync() {
         return get200ModelA202ValidWithRestResponseAsync()
-            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .flatMapMaybe((BodyResponse<A> res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 }

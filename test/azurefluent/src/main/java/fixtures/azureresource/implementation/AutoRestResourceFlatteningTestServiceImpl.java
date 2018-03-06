@@ -33,7 +33,6 @@ import io.reactivex.Completable;
 import io.reactivex.Maybe;
 import io.reactivex.Single;
 import io.reactivex.annotations.NonNull;
-import io.reactivex.functions.Function;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -330,7 +329,7 @@ public final class AutoRestResourceFlatteningTestServiceImpl extends AzureServic
      */
     public Maybe<List<FlattenedProductInner>> getArrayAsync() {
         return getArrayWithRestResponseAsync()
-            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .flatMapMaybe((BodyResponse<List<FlattenedProductInner>> res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -460,7 +459,7 @@ public final class AutoRestResourceFlatteningTestServiceImpl extends AzureServic
      */
     public Maybe<Map<String, FlattenedProductInner>> getDictionaryAsync() {
         return getDictionaryWithRestResponseAsync()
-            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .flatMapMaybe((BodyResponse<Map<String, FlattenedProductInner>> res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -590,6 +589,6 @@ public final class AutoRestResourceFlatteningTestServiceImpl extends AzureServic
      */
     public Maybe<ResourceCollectionInner> getResourceCollectionAsync() {
         return getResourceCollectionWithRestResponseAsync()
-            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .flatMapMaybe((BodyResponse<ResourceCollectionInner> res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 }

@@ -26,6 +26,11 @@ namespace AutoRest.Java
             contents.DecreaseIndent();
         }
 
+        public void Text(string text)
+        {
+            contents.Text(text);
+        }
+
         public void Line(string text, params object[] formattedArguments)
         {
             contents.Line(text, formattedArguments);
@@ -70,6 +75,16 @@ namespace AutoRest.Java
         {
             contents.If(condition, ifAction);
             return new JavaIfBlock(contents);
+        }
+
+        public void Lambda(string parameterType, string parameterName, Action<JavaLambda> body)
+        {
+            contents.Lambda(parameterType, parameterName, body);
+        }
+
+        public void Lambda(string parameterType, string parameterName, string returnExpression)
+        {
+            contents.Lambda(parameterType, parameterName, returnExpression);
         }
     }
 }

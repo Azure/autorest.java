@@ -22,7 +22,6 @@ import fixtures.http.HttpFailures;
 import fixtures.http.models.ErrorException;
 import io.reactivex.Maybe;
 import io.reactivex.Single;
-import io.reactivex.functions.Function;
 
 /**
  * An instance of this class provides access to all the operations defined in
@@ -107,7 +106,7 @@ public final class HttpFailuresImpl implements HttpFailures {
      */
     public Maybe<Boolean> getEmptyErrorAsync() {
         return getEmptyErrorWithRestResponseAsync()
-            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .flatMapMaybe((BodyResponse<Boolean> res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -147,7 +146,7 @@ public final class HttpFailuresImpl implements HttpFailures {
      */
     public Maybe<Boolean> getNoModelErrorAsync() {
         return getNoModelErrorWithRestResponseAsync()
-            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .flatMapMaybe((BodyResponse<Boolean> res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -187,6 +186,6 @@ public final class HttpFailuresImpl implements HttpFailures {
      */
     public Maybe<Boolean> getNoModelEmptyAsync() {
         return getNoModelEmptyWithRestResponseAsync()
-            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .flatMapMaybe((BodyResponse<Boolean> res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 }

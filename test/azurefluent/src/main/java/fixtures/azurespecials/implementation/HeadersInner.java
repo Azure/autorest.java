@@ -28,7 +28,6 @@ import io.reactivex.Completable;
 import io.reactivex.Maybe;
 import io.reactivex.Single;
 import io.reactivex.annotations.NonNull;
-import io.reactivex.functions.Function;
 
 /**
  * An instance of this class provides access to all the operations defined in
@@ -227,6 +226,6 @@ public final class HeadersInner {
      */
     public Maybe<Boolean> customNamedRequestIdHeadAsync(@NonNull String fooClientRequestId) {
         return customNamedRequestIdHeadWithRestResponseAsync(fooClientRequestId)
-            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .flatMapMaybe((HeaderCustomNamedRequestIdHeadResponse res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 }

@@ -27,7 +27,6 @@ import fixtures.http.models.Error;
 import fixtures.http.models.ErrorException;
 import io.reactivex.Maybe;
 import io.reactivex.Single;
-import io.reactivex.functions.Function;
 
 /**
  * An instance of this class provides access to all the operations defined in
@@ -115,7 +114,7 @@ public final class HttpServerFailuresImpl implements HttpServerFailures {
      */
     public Maybe<Error> head501Async() {
         return head501WithRestResponseAsync()
-            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .flatMapMaybe((BodyResponse<Error> res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -156,7 +155,7 @@ public final class HttpServerFailuresImpl implements HttpServerFailures {
      */
     public Maybe<Error> get501Async() {
         return get501WithRestResponseAsync()
-            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .flatMapMaybe((BodyResponse<Error> res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -198,7 +197,7 @@ public final class HttpServerFailuresImpl implements HttpServerFailures {
      */
     public Maybe<Error> post505Async() {
         return post505WithRestResponseAsync()
-            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .flatMapMaybe((BodyResponse<Error> res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -246,7 +245,7 @@ public final class HttpServerFailuresImpl implements HttpServerFailures {
      */
     public Maybe<Error> post505Async(Boolean booleanValue) {
         return post505WithRestResponseAsync(booleanValue)
-            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .flatMapMaybe((BodyResponse<Error> res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -288,7 +287,7 @@ public final class HttpServerFailuresImpl implements HttpServerFailures {
      */
     public Maybe<Error> delete505Async() {
         return delete505WithRestResponseAsync()
-            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .flatMapMaybe((BodyResponse<Error> res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -336,6 +335,6 @@ public final class HttpServerFailuresImpl implements HttpServerFailures {
      */
     public Maybe<Error> delete505Async(Boolean booleanValue) {
         return delete505WithRestResponseAsync(booleanValue)
-            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .flatMapMaybe((BodyResponse<Error> res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 }

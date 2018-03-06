@@ -34,7 +34,6 @@ import io.reactivex.Completable;
 import io.reactivex.Maybe;
 import io.reactivex.Observable;
 import io.reactivex.Single;
-import io.reactivex.functions.Function;
 
 /**
  * An instance of this class provides access to all the operations defined in
@@ -239,7 +238,7 @@ public final class LROsCustomHeadersInner {
      */
     public Maybe<ProductInner> putAsyncRetrySucceededAsync() {
         return putAsyncRetrySucceededWithRestResponseAsync()
-            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .flatMapMaybe((LROsCustomHeaderPutAsyncRetrySucceededResponse res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -288,7 +287,7 @@ public final class LROsCustomHeadersInner {
      */
     public Maybe<ProductInner> putAsyncRetrySucceededAsync(ProductInner product) {
         return putAsyncRetrySucceededWithRestResponseAsync(product)
-            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .flatMapMaybe((LROsCustomHeaderPutAsyncRetrySucceededResponse res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -412,7 +411,7 @@ public final class LROsCustomHeadersInner {
      */
     public Maybe<ProductInner> put201CreatingSucceeded200Async() {
         return put201CreatingSucceeded200WithRestResponseAsync()
-            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .flatMapMaybe((BodyResponse<ProductInner> res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -461,7 +460,7 @@ public final class LROsCustomHeadersInner {
      */
     public Maybe<ProductInner> put201CreatingSucceeded200Async(ProductInner product) {
         return put201CreatingSucceeded200WithRestResponseAsync(product)
-            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .flatMapMaybe((BodyResponse<ProductInner> res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**

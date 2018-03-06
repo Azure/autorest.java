@@ -122,14 +122,6 @@ namespace AutoRest.Java.Model
                     imports.Add(ClassType.Validator.FullName);
                 }
 
-                if (Type == ClientMethodType.PagingAsync ||
-                    Type == ClientMethodType.PagingAsyncSinglePage ||
-                    Type == ClientMethodType.SimulatedPagingAsync ||
-                    (Type == ClientMethodType.SimpleAsync && ReturnValue.Type is GenericType))
-                {
-                    imports.Add(ClassType.Function.FullName);
-                }
-
                 if (Type == ClientMethodType.LongRunningAsyncServiceCallback)
                 {
                     imports.Add("com.microsoft.azure.v2.util.ServiceFutureUtil");

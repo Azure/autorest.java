@@ -29,7 +29,6 @@ import fixtures.azurereport.models.ErrorException;
 import io.reactivex.Maybe;
 import io.reactivex.Single;
 import io.reactivex.annotations.NonNull;
-import io.reactivex.functions.Function;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -211,7 +210,7 @@ public final class AutoRestReportServiceForAzureImpl extends AzureServiceClient 
      */
     public Maybe<Map<String, Integer>> getReportAsync() {
         return getReportWithRestResponseAsync()
-            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .flatMapMaybe((BodyResponse<Map<String, Integer>> res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -259,6 +258,6 @@ public final class AutoRestReportServiceForAzureImpl extends AzureServiceClient 
      */
     public Maybe<Map<String, Integer>> getReportAsync(String qualifier) {
         return getReportWithRestResponseAsync(qualifier)
-            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .flatMapMaybe((BodyResponse<Map<String, Integer>> res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 }

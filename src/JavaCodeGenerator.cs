@@ -141,6 +141,7 @@ namespace AutoRest.Java
         public override Task Generate(AutoRestCodeModel codeModel)
         {
             Settings autoRestSettings = Settings.Instance;
+
             JavaSettings javaSettings = new JavaSettings(
                 setAddCredentials: (bool value) => autoRestSettings.AddCredentials = value,
                 isAzure: GetBoolSetting(autoRestSettings, "azure-arm"),
@@ -1427,10 +1428,10 @@ namespace AutoRest.Java
                             result = ArrayType.ByteArray;
                             break;
                         case AutoRestKnownPrimaryType.Date:
-                            result = settings.StringDates ? ClassType.String : ClassType.LocalDate;
+                            result = settings.StringDates ? ClassType.String : ClassType.JodaLocalDate;
                             break;
                         case AutoRestKnownPrimaryType.DateTime:
-                            result = settings.StringDates ? ClassType.String : ClassType.DateTime;
+                            result = settings.StringDates ? ClassType.String : ClassType.JodaDateTime;
                             break;
                         case AutoRestKnownPrimaryType.DateTimeRfc1123:
                             result = settings.StringDates ? ClassType.String : ClassType.DateTimeRfc1123;
@@ -1461,7 +1462,7 @@ namespace AutoRest.Java
                             }
                             break;
                         case AutoRestKnownPrimaryType.TimeSpan:
-                            result = ClassType.Period;
+                            result = ClassType.JodaPeriod;
                             break;
                         case AutoRestKnownPrimaryType.UnixTime:
                             result = settings.StringDates ? (IType)ClassType.String : PrimitiveType.UnixTimeLong;
@@ -3031,7 +3032,7 @@ namespace AutoRest.Java
             }
             else if (modelType == ClassType.DateTimeRfc1123)
             {
-                clientType = ClassType.DateTime;
+                clientType = ClassType.JodaDateTime;
             }
             else if (modelType == PrimitiveType.UnixTimeLong)
             {
@@ -3910,6 +3911,7 @@ namespace AutoRest.Java
                 }
 
                 string nextPageLinkParameterName = null;
+                string nextPageLinkVariableName = null;
                 string nextGroupTypeName = null;
                 string groupedTypeName = null;
                 string nextMethodParameterInvocation = null;
@@ -3917,27 +3919,19 @@ namespace AutoRest.Java
                 if (nextMethod != null)
                 {
                     nextPageLinkParameterName = nextMethod.Parameters
-                        .Select((AutoRestParameter parameter) =>
-                        {
-                            string parameterName;
-                            if (!parameter.IsClientProperty)
-                            {
-                                parameterName = parameter.Name;
-                            }
-                            else
-                            {
-                                string caller = (parameter.Method != null && parameter.Method.Group.IsNullOrEmpty() ? "this" : "this.client");
-                                string clientPropertyName = parameter.ClientProperty?.Name?.ToString();
-                                if (!string.IsNullOrEmpty(clientPropertyName))
-                                {
-                                    CodeNamer codeNamer = CodeNamer.Instance;
-                                    clientPropertyName = codeNamer.CamelCase(codeNamer.RemoveInvalidCharacters(clientPropertyName));
-                                }
-                                parameterName = $"{caller}.{clientPropertyName}()";
-                            }
-                            return parameterName;
-                        })
+                        .Select((AutoRestParameter parameter) => parameter.Name.Value)
                         .First((string parameterName) => parameterName.StartsWith("next", StringComparison.OrdinalIgnoreCase));
+
+                    nextPageLinkVariableName = nextPageLinkParameterName;
+                    if (clientMethod.Type != ClientMethodType.PagingSync)
+                    {
+                        int count = 0;
+                        while (clientMethod.Parameters.Any((Parameter clientMethodParameter) => clientMethodParameter.Name == nextPageLinkVariableName))
+                        {
+                            ++count;
+                            nextPageLinkVariableName = nextPageLinkParameterName + count;
+                        }
+                    }
 
                     IEnumerable<AutoRestParameter> nextMethodRestAPIParameters = nextMethod.Parameters
                         .Where((AutoRestParameter parameter) => parameter != null && !parameter.IsClientProperty && !string.IsNullOrWhiteSpace(parameter.Name))
@@ -3946,11 +3940,14 @@ namespace AutoRest.Java
                     AutoRestParameter nextGroupType = null;
                     if (!clientMethod.OnlyRequiredParameters)
                     {
-                        nextMethodParameterInvocation = string.Join(", ", nextMethodRestAPIParameters.Where(p => !p.IsConstant).Select((AutoRestParameter parameter) => parameter.Name));
+                        nextMethodParameterInvocation = string.Join(", ", nextMethodRestAPIParameters
+                            .Where(p => !p.IsConstant)
+                            .Select((AutoRestParameter parameter) => parameter.Name == nextPageLinkParameterName ? nextPageLinkVariableName : parameter.Name.Value));
                     }
                     else if (autoRestMethod.InputParameterTransformation.IsNullOrEmpty() || nextMethod.InputParameterTransformation.IsNullOrEmpty())
                     {
-                        nextMethodParameterInvocation = string.Join(", ", nextMethodRestAPIParameters.Select((AutoRestParameter parameter) => parameter.IsRequired ? parameter.Name.ToString() : "null"));
+                        nextMethodParameterInvocation = string.Join(", ", nextMethodRestAPIParameters
+                            .Select((AutoRestParameter parameter) => parameter.IsRequired ? (parameter.Name == nextPageLinkParameterName ? nextPageLinkVariableName : parameter.Name.ToString()) : "null"));
                     }
                     else
                     {
@@ -3963,11 +3960,11 @@ namespace AutoRest.Java
 
                             if (parameter.IsRequired)
                             {
-                                invocations.Add(parameterName);
+                                invocations.Add(parameterName == nextPageLinkParameterName ? nextPageLinkVariableName : parameterName);
                             }
                             else if (parameterName == nextGroupType.Name && groupedType.IsRequired)
                             {
-                                invocations.Add(parameterName);
+                                invocations.Add(parameterName == nextPageLinkParameterName ? nextPageLinkVariableName : parameterName);
                             }
                             else
                             {
@@ -4123,72 +4120,68 @@ namespace AutoRest.Java
                             function.Indent(() =>
                             {
                                 function.Line(".toObservable()");
-                                function.Line($".concatMap(new {GenericType.Function(pageType, clientMethod.ReturnValue.Type)}() {{");
-                                function.Indent(() =>
+                                function.Text($".concatMap(");
+                                function.Lambda(pageType.ToString(), "page", lambda =>
                                 {
-                                    function.Annotation("Override");
-                                    function.Block($"public {clientMethod.ReturnValue.Type} apply({pageType} page)", subFunction =>
+                                    lambda.Line($"String {nextPageLinkVariableName} = page.nextPageLink();");
+                                    lambda.If($"{nextPageLinkVariableName} == null", ifBlock =>
                                     {
-                                        subFunction.Line($"String {nextPageLinkParameterName} = page.nextPageLink();");
-                                        subFunction.If($"{nextPageLinkParameterName} == null", ifBlock =>
-                                        {
-                                            ifBlock.Return("Observable.just(page)");
-                                        });
+                                        ifBlock.Return("Observable.just(page)");
+                                    });
 
-                                        if (clientMethod.RestAPIMethod.IsPagingOperation && !clientMethod.AutoRestMethod.InputParameterTransformation.IsNullOrEmpty() && !nextMethod.InputParameterTransformation.IsNullOrEmpty())
+                                    if (clientMethod.RestAPIMethod.IsPagingOperation && !clientMethod.AutoRestMethod.InputParameterTransformation.IsNullOrEmpty() && !nextMethod.InputParameterTransformation.IsNullOrEmpty())
+                                    {
+                                        if (nextGroupTypeName != groupedTypeName && (!clientMethod.OnlyRequiredParameters || groupedType.IsRequired))
                                         {
-                                            if (nextGroupTypeName != groupedTypeName && (!clientMethod.OnlyRequiredParameters || groupedType.IsRequired))
+                                            string nextGroupTypeCamelCaseName = nextGroupTypeName.ToCamelCase();
+                                            string groupedTypeCamelCaseName = groupedTypeName.ToCamelCase();
+
+                                            string nextGroupTypeCodeName = CodeNamer.Instance.GetTypeName(nextGroupTypeName) + (settings.IsFluent ? "Inner" : "");
+
+                                            if (!groupedType.IsRequired)
                                             {
-                                                string nextGroupTypeCamelCaseName = nextGroupTypeName.ToCamelCase();
-                                                string groupedTypeCamelCaseName = groupedTypeName.ToCamelCase();
+                                                lambda.Line($"{nextGroupTypeCodeName} {nextGroupTypeCamelCaseName} = null;");
+                                                lambda.Line($"if ({groupedTypeCamelCaseName} != null) {{");
+                                                lambda.IncreaseIndent();
+                                                lambda.Line($"{nextGroupTypeCamelCaseName} = new {nextGroupTypeCodeName}();");
+                                            }
+                                            else
+                                            {
+                                                lambda.Line($"{nextGroupTypeCodeName} {nextGroupTypeCamelCaseName} = new {nextGroupTypeCodeName}();");
+                                            }
 
-                                                string nextGroupTypeCodeName = CodeNamer.Instance.GetTypeName(nextGroupTypeName) + (settings.IsFluent ? "Inner" : "");
-
-                                                if (!groupedType.IsRequired)
+                                            foreach (AutoRestParameter outputParameter in nextMethod.InputParameterTransformation.Select(transformation => transformation.OutputParameter))
+                                            {
+                                                string outputParameterName;
+                                                if (!outputParameter.IsClientProperty)
                                                 {
-                                                    subFunction.Line($"{nextGroupTypeCodeName} {nextGroupTypeCamelCaseName} = null;");
-                                                    subFunction.Line($"if ({groupedTypeCamelCaseName} != null) {{");
-                                                    subFunction.IncreaseIndent();
-                                                    subFunction.Line($"{nextGroupTypeCamelCaseName} = new {nextGroupTypeCodeName}();");
+                                                    outputParameterName = outputParameter.Name;
                                                 }
                                                 else
                                                 {
-                                                    subFunction.Line($"{nextGroupTypeCodeName} {nextGroupTypeCamelCaseName} = new {nextGroupTypeCodeName}();");
-                                                }
-
-                                                foreach (AutoRestParameter outputParameter in nextMethod.InputParameterTransformation.Select(transformation => transformation.OutputParameter))
-                                                {
-                                                    string outputParameterName;
-                                                    if (!outputParameter.IsClientProperty)
+                                                    string caller = (outputParameter.Method != null && outputParameter.Method.Group.IsNullOrEmpty() ? "this" : "this.client");
+                                                    string clientPropertyName = outputParameter.ClientProperty?.Name?.ToString();
+                                                    if (!string.IsNullOrEmpty(clientPropertyName))
                                                     {
-                                                        outputParameterName = outputParameter.Name;
+                                                        CodeNamer codeNamer = CodeNamer.Instance;
+                                                        clientPropertyName = codeNamer.CamelCase(codeNamer.RemoveInvalidCharacters(clientPropertyName));
                                                     }
-                                                    else
-                                                    {
-                                                        string caller = (outputParameter.Method != null && outputParameter.Method.Group.IsNullOrEmpty() ? "this" : "this.client");
-                                                        string clientPropertyName = outputParameter.ClientProperty?.Name?.ToString();
-                                                        if (!string.IsNullOrEmpty(clientPropertyName))
-                                                        {
-                                                            CodeNamer codeNamer = CodeNamer.Instance;
-                                                            clientPropertyName = codeNamer.CamelCase(codeNamer.RemoveInvalidCharacters(clientPropertyName));
-                                                        }
-                                                        outputParameterName = $"{caller}.{clientPropertyName}()";
-                                                    }
-                                                    subFunction.Line($"{nextGroupTypeCamelCaseName}.with{outputParameterName.ToPascalCase()}({groupedTypeCamelCaseName}.{outputParameterName.ToCamelCase()}());");
+                                                    outputParameterName = $"{caller}.{clientPropertyName}()";
                                                 }
+                                                lambda.Line($"{nextGroupTypeCamelCaseName}.with{outputParameterName.ToPascalCase()}({groupedTypeCamelCaseName}.{outputParameterName.ToCamelCase()}());");
+                                            }
 
-                                                if (!groupedType.IsRequired)
-                                                {
-                                                    subFunction.DecreaseIndent();
-                                                    subFunction.Line("}");
-                                                }
+                                            if (!groupedType.IsRequired)
+                                            {
+                                                lambda.DecreaseIndent();
+                                                lambda.Line("}");
                                             }
                                         }
+                                    }
 
-                                        subFunction.Return($"Observable.just(page).concatWith({nextMethodInvocation}Async({nextMethodParameterInvocation}))");
-                                    });
+                                    lambda.Return($"Observable.just(page).concatWith({nextMethodInvocation}Async({nextMethodParameterInvocation}))");
                                 });
-                                function.Line("});");
+                                function.Line(");");
                             });
                         });
                         break;
@@ -4287,9 +4280,17 @@ namespace AutoRest.Java
                                 function.Line($"String nextUrl = {builder.ToString()};");
                             }
 
+                            IType returnValueTypeArgumentType = ((GenericType)restAPIMethod.ReturnType).TypeArguments.Single();
+
                             string restAPIMethodArgumentList = GetRestAPIMethodArgumentList(autoRestMethodOrderedRetrofitParameters, settings);
 
-                            function.Return($"service.{restAPIMethod.Name}({restAPIMethodArgumentList}).map(res -> res.body())");
+                            function.Line($"return service.{restAPIMethod.Name}({restAPIMethodArgumentList})");
+                            function.Indent(() =>
+                            {
+                                function.Text(".map(");
+                                function.Lambda(returnValueTypeArgumentType.ToString(), "res", "res.body()");
+                                function.Line(");");
+                            });
                         });
                         break;
 
@@ -4340,8 +4341,17 @@ namespace AutoRest.Java
                             AddOptionalAndConstantVariables(function, clientMethod, autoRestClientMethodAndConstantParameters, settings);
                             ApplyParameterTransformations(function, clientMethod, settings);
                             ConvertClientTypesToWireTypes(function, autoRestMethodRetrofitParameters, methodClientReference, settings);
+
+                            IType returnValueTypeArgumentType = ((GenericType)restAPIMethod.ReturnType).TypeArguments.Single();
                             string restAPIMethodArgumentList = GetRestAPIMethodArgumentList(autoRestMethodOrderedRetrofitParameters, settings);
-                            function.Return($"service.{clientMethod.RestAPIMethod.Name}({restAPIMethodArgumentList}).map(res -> res.body()).toObservable()");
+                            function.Line($"return service.{clientMethod.RestAPIMethod.Name}({restAPIMethodArgumentList})");
+                            function.Indent(() =>
+                            {
+                                function.Text(".map(");
+                                function.Lambda(returnValueTypeArgumentType.ToString(), "res", "res.body()");
+                                function.Line(")");
+                                function.Line(".toObservable();");
+                            });
                         });
                         break;
 
@@ -4540,13 +4550,19 @@ namespace AutoRest.Java
                             function.Line($"return {GetSimpleAsyncRestResponseMethodName(clientMethod.RestAPIMethod)}({clientMethod.ArgumentList})");
                             function.Indent(() =>
                             {
+                                GenericType restAPIMethodClientReturnType = (GenericType)ConvertToClientType(restAPIMethod.ReturnType);
+                                IType returnValueTypeArgumentClientType = restAPIMethodClientReturnType.TypeArguments.Single();
                                 if (restAPIMethodReturnBodyClientType != PrimitiveType.Void)
                                 {
-                                    function.Line($".flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));");
+                                    function.Text($".flatMapMaybe(");
+                                    function.Lambda(returnValueTypeArgumentClientType.ToString(), "res", "res.body() == null ? Maybe.empty() : Maybe.just(res.body())");
+                                    function.Line(");");
                                 }
                                 else if (isFluentDelete)
                                 {
-                                    function.Line($".flatMapMaybe(res -> Maybe.empty());");
+                                    function.Text($".flatMapMaybe(");
+                                    function.Lambda(returnValueTypeArgumentClientType.ToString(), "res", "Maybe.empty()");
+                                    function.Line(");");
                                 }
                                 else
                                 {
@@ -4581,10 +4597,10 @@ namespace AutoRest.Java
                         parameterType != ClassType.Double &&
                         parameterType != ClassType.BigDecimal &&
                         parameterType != ClassType.String &&
-                        parameterType != ClassType.DateTime &&
-                        parameterType != ClassType.LocalDate &&
+                        parameterType != ClassType.JodaDateTime &&
+                        parameterType != ClassType.JodaLocalDate &&
                         parameterType != ClassType.DateTimeRfc1123 &&
-                        parameterType != ClassType.Period &&
+                        parameterType != ClassType.JodaPeriod &&
                         parameterType != ClassType.Boolean &&
                         parameterType != ClassType.ServiceClientCredentials &&
                         parameterType != ClassType.AzureTokenCredentials &&
@@ -4758,7 +4774,7 @@ namespace AutoRest.Java
 
                             IEnumerable<string> expressionsToValidate = GetExpressionsToValidate(restAPIMethod, onlyRequiredParameters, settings);
 
-                            IEnumerable<Parameter> parameters = ParseClientMethodParameters(autoRestParameters, true, settings);
+                            IEnumerable<Parameter> parameters = ParseClientMethodParameters(autoRestParameters, false, settings);
 
                             clientMethods.Add(new ClientMethod(
                                 description: restAPIMethod.Description,
@@ -5378,7 +5394,7 @@ namespace AutoRest.Java
                 });
             return string.Join(", ", restAPIMethodArguments);
         }
-
+        
         private static string AddClientTypePrefix(string clientType, JavaSettings settings)
             => string.IsNullOrEmpty(settings.ClientTypePrefix) ? clientType : settings.ClientTypePrefix + clientType;
     }

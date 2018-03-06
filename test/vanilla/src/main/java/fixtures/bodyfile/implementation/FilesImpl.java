@@ -23,7 +23,6 @@ import fixtures.bodyfile.models.ErrorException;
 import io.reactivex.Flowable;
 import io.reactivex.Maybe;
 import io.reactivex.Single;
-import io.reactivex.functions.Function;
 import java.nio.ByteBuffer;
 
 /**
@@ -111,7 +110,7 @@ public final class FilesImpl implements Files {
      */
     public Maybe<Flowable<ByteBuffer>> getFileAsync() {
         return getFileWithRestResponseAsync()
-            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .flatMapMaybe((StreamResponse res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -152,7 +151,7 @@ public final class FilesImpl implements Files {
      */
     public Maybe<Flowable<ByteBuffer>> getFileLargeAsync() {
         return getFileLargeWithRestResponseAsync()
-            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .flatMapMaybe((StreamResponse res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -193,6 +192,6 @@ public final class FilesImpl implements Files {
      */
     public Maybe<Flowable<ByteBuffer>> getEmptyFileAsync() {
         return getEmptyFileWithRestResponseAsync()
-            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .flatMapMaybe((StreamResponse res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 }

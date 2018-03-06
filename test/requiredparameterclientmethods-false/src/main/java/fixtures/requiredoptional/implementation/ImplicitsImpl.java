@@ -31,7 +31,6 @@ import io.reactivex.Completable;
 import io.reactivex.Maybe;
 import io.reactivex.Single;
 import io.reactivex.annotations.NonNull;
-import io.reactivex.functions.Function;
 
 /**
  * An instance of this class provides access to all the operations defined in
@@ -144,7 +143,7 @@ public final class ImplicitsImpl implements Implicits {
      */
     public Maybe<Error> getRequiredPathAsync(@NonNull String pathParameter) {
         return getRequiredPathWithRestResponseAsync(pathParameter)
-            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .flatMapMaybe((BodyResponse<Error> res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -329,7 +328,7 @@ public final class ImplicitsImpl implements Implicits {
      */
     public Maybe<Error> getRequiredGlobalPathAsync() {
         return getRequiredGlobalPathWithRestResponseAsync()
-            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .flatMapMaybe((BodyResponse<Error> res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -373,7 +372,7 @@ public final class ImplicitsImpl implements Implicits {
      */
     public Maybe<Error> getRequiredGlobalQueryAsync() {
         return getRequiredGlobalQueryWithRestResponseAsync()
-            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .flatMapMaybe((BodyResponse<Error> res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -414,6 +413,6 @@ public final class ImplicitsImpl implements Implicits {
      */
     public Maybe<Error> getOptionalGlobalQueryAsync() {
         return getOptionalGlobalQueryWithRestResponseAsync()
-            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .flatMapMaybe((BodyResponse<Error> res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 }

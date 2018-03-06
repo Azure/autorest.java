@@ -27,7 +27,6 @@ import fixtures.subscriptionidapiversion.models.SampleResourceGroup;
 import io.reactivex.Maybe;
 import io.reactivex.Single;
 import io.reactivex.annotations.NonNull;
-import io.reactivex.functions.Function;
 
 /**
  * An instance of this class provides access to all the operations defined in
@@ -120,6 +119,6 @@ public final class GroupsImpl implements Groups {
      */
     public Maybe<SampleResourceGroup> getSampleResourceGroupAsync(@NonNull String resourceGroupName) {
         return getSampleResourceGroupWithRestResponseAsync(resourceGroupName)
-            .flatMapMaybe(res -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .flatMapMaybe((BodyResponse<SampleResourceGroup> res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 }
