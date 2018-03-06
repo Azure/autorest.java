@@ -26,7 +26,7 @@ public interface AutoRestDateTestService {
     /**
      * The default base URL.
      */
-    String DEFAULT_BASE_URL = "https://localhost";
+    String DEFAULT_BASE_URL = "http://localhost:3000";
 
     /**
      * Gets the Dates object to access its operations.

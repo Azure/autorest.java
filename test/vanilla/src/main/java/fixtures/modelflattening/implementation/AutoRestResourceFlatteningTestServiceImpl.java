@@ -55,7 +55,7 @@ public class AutoRestResourceFlatteningTestServiceImpl extends ServiceClient imp
      * Initializes an instance of AutoRestResourceFlatteningTestService client.
      */
     public AutoRestResourceFlatteningTestServiceImpl() {
-        this("http://localhost");
+        this("http://localhost:3000");
     }
 
     /**
@@ -75,7 +75,7 @@ public class AutoRestResourceFlatteningTestServiceImpl extends ServiceClient imp
      * @param restBuilder the builder for building an Retrofit client, bundled with user configurations
      */
     public AutoRestResourceFlatteningTestServiceImpl(OkHttpClient.Builder clientBuilder, Retrofit.Builder restBuilder) {
-        this("http://localhost", clientBuilder, restBuilder);
+        this("http://localhost:3000", clientBuilder, restBuilder);
         initialize();
     }
 

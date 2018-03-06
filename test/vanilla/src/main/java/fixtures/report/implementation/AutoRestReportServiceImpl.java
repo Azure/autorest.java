@@ -25,6 +25,7 @@ import java.util.Map;
 import okhttp3.ResponseBody;
 import retrofit2.http.GET;
 import retrofit2.http.Headers;
+import retrofit2.http.Query;
 import retrofit2.Response;
 import rx.functions.Func1;
 import rx.Observable;
@@ -42,7 +43,7 @@ public class AutoRestReportServiceImpl extends ServiceClient implements AutoRest
      * Initializes an instance of AutoRestReportService client.
      */
     public AutoRestReportServiceImpl() {
-        this("http://localhost");
+        this("http://localhost:3000");
     }
 
     /**
@@ -62,7 +63,7 @@ public class AutoRestReportServiceImpl extends ServiceClient implements AutoRest
      * @param restBuilder the builder for building an Retrofit client, bundled with user configurations
      */
     public AutoRestReportServiceImpl(OkHttpClient.Builder clientBuilder, Retrofit.Builder restBuilder) {
-        this("http://localhost", clientBuilder, restBuilder);
+        this("http://localhost:3000", clientBuilder, restBuilder);
         initialize();
     }
 
@@ -103,7 +104,7 @@ public class AutoRestReportServiceImpl extends ServiceClient implements AutoRest
     interface AutoRestReportServiceService {
         @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.report.AutoRestReportService getReport" })
         @GET("report")
-        Observable<Response<ResponseBody>> getReport();
+        Observable<Response<ResponseBody>> getReport(@Query("qualifier") String qualifier);
 
     }
 
@@ -152,7 +153,71 @@ public class AutoRestReportServiceImpl extends ServiceClient implements AutoRest
      * @return the observable to the Map&lt;String, Integer&gt; object
      */
     public Observable<ServiceResponse<Map<String, Integer>>> getReportWithServiceResponseAsync() {
-        return service.getReport()
+        final String qualifier = null;
+        return service.getReport(qualifier)
+            .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Map<String, Integer>>>>() {
+                @Override
+                public Observable<ServiceResponse<Map<String, Integer>>> call(Response<ResponseBody> response) {
+                    try {
+                        ServiceResponse<Map<String, Integer>> clientResponse = getReportDelegate(response);
+                        return Observable.just(clientResponse);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
+                    }
+                }
+            });
+    }
+
+    /**
+     * Get test coverage report.
+     *
+     * @param qualifier If specified, qualifies the generated report further (e.g. '2.7' vs '3.5' in for Python). The only effect is, that generators that run all tests several times, can distinguish the generated reports.
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws ErrorException thrown if the request is rejected by server
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
+     * @return the Map&lt;String, Integer&gt; object if successful.
+     */
+    public Map<String, Integer> getReport(String qualifier) {
+        return getReportWithServiceResponseAsync(qualifier).toBlocking().single().body();
+    }
+
+    /**
+     * Get test coverage report.
+     *
+     * @param qualifier If specified, qualifies the generated report further (e.g. '2.7' vs '3.5' in for Python). The only effect is, that generators that run all tests several times, can distinguish the generated reports.
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the {@link ServiceFuture} object
+     */
+    public ServiceFuture<Map<String, Integer>> getReportAsync(String qualifier, final ServiceCallback<Map<String, Integer>> serviceCallback) {
+        return ServiceFuture.fromResponse(getReportWithServiceResponseAsync(qualifier), serviceCallback);
+    }
+
+    /**
+     * Get test coverage report.
+     *
+     * @param qualifier If specified, qualifies the generated report further (e.g. '2.7' vs '3.5' in for Python). The only effect is, that generators that run all tests several times, can distinguish the generated reports.
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the observable to the Map&lt;String, Integer&gt; object
+     */
+    public Observable<Map<String, Integer>> getReportAsync(String qualifier) {
+        return getReportWithServiceResponseAsync(qualifier).map(new Func1<ServiceResponse<Map<String, Integer>>, Map<String, Integer>>() {
+            @Override
+            public Map<String, Integer> call(ServiceResponse<Map<String, Integer>> response) {
+                return response.body();
+            }
+        });
+    }
+
+    /**
+     * Get test coverage report.
+     *
+     * @param qualifier If specified, qualifies the generated report further (e.g. '2.7' vs '3.5' in for Python). The only effect is, that generators that run all tests several times, can distinguish the generated reports.
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the observable to the Map&lt;String, Integer&gt; object
+     */
+    public Observable<ServiceResponse<Map<String, Integer>>> getReportWithServiceResponseAsync(String qualifier) {
+        return service.getReport(qualifier)
             .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Map<String, Integer>>>>() {
                 @Override
                 public Observable<ServiceResponse<Map<String, Integer>>> call(Response<ResponseBody> response) {

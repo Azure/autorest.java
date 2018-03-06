@@ -39,7 +39,7 @@ public class AutoRestDurationTestServiceImpl extends ServiceClient implements Au
      * Initializes an instance of AutoRestDurationTestService client.
      */
     public AutoRestDurationTestServiceImpl() {
-        this("https://localhost");
+        this("http://localhost:3000");
     }
 
     /**
@@ -59,7 +59,7 @@ public class AutoRestDurationTestServiceImpl extends ServiceClient implements Au
      * @param restBuilder the builder for building an Retrofit client, bundled with user configurations
      */
     public AutoRestDurationTestServiceImpl(OkHttpClient.Builder clientBuilder, Retrofit.Builder restBuilder) {
-        this("https://localhost", clientBuilder, restBuilder);
+        this("http://localhost:3000", clientBuilder, restBuilder);
         initialize();
     }
 

@@ -126,7 +126,7 @@ public class AutoRestResourceFlatteningTestServiceImpl extends AzureServiceClien
      * @param credentials the management credentials for Azure
      */
     public AutoRestResourceFlatteningTestServiceImpl(ServiceClientCredentials credentials) {
-        this("http://localhost", credentials);
+        this("http://localhost:3000", credentials);
     }
 
     /**

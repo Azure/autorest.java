@@ -95,7 +95,7 @@ public class AutoRestValidationTestImpl extends ServiceClient implements AutoRes
      * Initializes an instance of AutoRestValidationTest client.
      */
     public AutoRestValidationTestImpl() {
-        this("http://localhost");
+        this("http://localhost:3000");
     }
 
     /**
@@ -115,7 +115,7 @@ public class AutoRestValidationTestImpl extends ServiceClient implements AutoRes
      * @param restBuilder the builder for building an Retrofit client, bundled with user configurations
      */
     public AutoRestValidationTestImpl(OkHttpClient.Builder clientBuilder, Retrofit.Builder restBuilder) {
-        this("http://localhost", clientBuilder, restBuilder);
+        this("http://localhost:3000", clientBuilder, restBuilder);
         initialize();
     }
 

@@ -39,7 +39,7 @@ public class AutoRestSwaggerBATFormDataServiceImpl extends ServiceClient impleme
      * Initializes an instance of AutoRestSwaggerBATFormDataService client.
      */
     public AutoRestSwaggerBATFormDataServiceImpl() {
-        this("http://localhost");
+        this("http://localhost:3000");
     }
 
     /**
@@ -59,7 +59,7 @@ public class AutoRestSwaggerBATFormDataServiceImpl extends ServiceClient impleme
      * @param restBuilder the builder for building an Retrofit client, bundled with user configurations
      */
     public AutoRestSwaggerBATFormDataServiceImpl(OkHttpClient.Builder clientBuilder, Retrofit.Builder restBuilder) {
-        this("http://localhost", clientBuilder, restBuilder);
+        this("http://localhost:3000", clientBuilder, restBuilder);
         initialize();
     }
 

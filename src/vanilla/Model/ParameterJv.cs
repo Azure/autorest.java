@@ -18,6 +18,18 @@ namespace AutoRest.Java.Model
                         "{0}.{1}()",
                         Method != null && true == Method.Group.IsNullOrEmpty() ? "this" : "this.client",
                         ClientProperty.Name.ToCamelCase());
+
+            DefaultValue.OnGet += defaultValue =>
+            {
+                if (ModelType is PrimaryType pt && pt.KnownPrimaryType == KnownPrimaryType.Decimal)
+                {
+                    return $"new BigDecimal(\"{defaultValue}\")";
+                }
+                else
+                {
+                    return defaultValue;
+                }
+            };
         }
 
         [JsonIgnore]
@@ -61,9 +73,9 @@ namespace AutoRest.Java.Model
                     res.Name.FixedValue = "RequestBody";
                     return res;
                 }
-                else if (!ModelType.IsPrimaryType(KnownPrimaryType.Base64Url) && 
+                else if (!ModelType.IsPrimaryType(KnownPrimaryType.Base64Url) &&
                     Location != Core.Model.ParameterLocation.Body &&
-                    Location != Core.Model.ParameterLocation.FormData && 
+                    Location != Core.Model.ParameterLocation.FormData &&
                     NeedsSpecialSerialization(ClientType))
                 {
                     return new PrimaryTypeJv(KnownPrimaryType.String);
@@ -83,8 +95,8 @@ namespace AutoRest.Java.Model
 
         public string ConvertToWireType(string source, string clientReference)
         {
-            if (Location != Core.Model.ParameterLocation.Body && 
-                Location != Core.Model.ParameterLocation.FormData && 
+            if (Location != Core.Model.ParameterLocation.Body &&
+                Location != Core.Model.ParameterLocation.FormData &&
                 NeedsSpecialSerialization(ModelType))
             {
                 var primary = ClientType as PrimaryTypeJv;
@@ -111,7 +123,7 @@ namespace AutoRest.Java.Model
                         CollectionFormat.ToString().ToUpperInvariant());
                 }
             }
-            
+
             return convertClientTypeToWireType(WireType, source, WireName, clientReference);
         }
 

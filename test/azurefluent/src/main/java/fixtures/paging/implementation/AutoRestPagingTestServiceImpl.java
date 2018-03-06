@@ -118,7 +118,7 @@ public class AutoRestPagingTestServiceImpl extends AzureServiceClient {
      * @param credentials the management credentials for Azure
      */
     public AutoRestPagingTestServiceImpl(ServiceClientCredentials credentials) {
-        this("http://localhost", credentials);
+        this("http://localhost:3000", credentials);
     }
 
     /**

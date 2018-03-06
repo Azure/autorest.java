@@ -162,7 +162,7 @@ public class AutoRestLongRunningOperationTestServiceImpl extends AzureServiceCli
      * @param credentials the management credentials for Azure
      */
     public AutoRestLongRunningOperationTestServiceImpl(ServiceClientCredentials credentials) {
-        this("http://localhost", credentials);
+        this("http://localhost:3000", credentials);
     }
 
     /**

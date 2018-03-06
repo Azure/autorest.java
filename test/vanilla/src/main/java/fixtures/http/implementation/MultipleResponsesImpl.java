@@ -18,11 +18,11 @@ import com.microsoft.rest.ServiceCallback;
 import com.microsoft.rest.ServiceFuture;
 import com.microsoft.rest.ServiceResponse;
 import fixtures.http.models.A;
+import fixtures.http.models.AException;
 import fixtures.http.models.B;
 import fixtures.http.models.C;
 import fixtures.http.models.D;
 import fixtures.http.models.ErrorException;
-import fixtures.http.models.MyException;
 import java.io.IOException;
 import okhttp3.ResponseBody;
 import retrofit2.http.GET;
@@ -1465,7 +1465,7 @@ public class MultipleResponsesImpl implements MultipleResponses {
      * Send a 200 response with valid payload: {'statusCode': '200'}.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @throws MyException thrown if the request is rejected by server
+     * @throws AException thrown if the request is rejected by server
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      * @return the A object if successful.
      */
@@ -1520,9 +1520,9 @@ public class MultipleResponsesImpl implements MultipleResponses {
             });
     }
 
-    private ServiceResponse<A> getDefaultModelA200ValidDelegate(Response<ResponseBody> response) throws MyException, IOException {
-        return this.client.restClient().responseBuilderFactory().<A, MyException>newInstance(this.client.serializerAdapter())
-                .registerError(MyException.class)
+    private ServiceResponse<A> getDefaultModelA200ValidDelegate(Response<ResponseBody> response) throws AException, IOException {
+        return this.client.restClient().responseBuilderFactory().<A, AException>newInstance(this.client.serializerAdapter())
+                .registerError(AException.class)
                 .build(response);
     }
 
@@ -1530,7 +1530,7 @@ public class MultipleResponsesImpl implements MultipleResponses {
      * Send a 200 response with no payload.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @throws MyException thrown if the request is rejected by server
+     * @throws AException thrown if the request is rejected by server
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      * @return the A object if successful.
      */
@@ -1585,9 +1585,9 @@ public class MultipleResponsesImpl implements MultipleResponses {
             });
     }
 
-    private ServiceResponse<A> getDefaultModelA200NoneDelegate(Response<ResponseBody> response) throws MyException, IOException {
-        return this.client.restClient().responseBuilderFactory().<A, MyException>newInstance(this.client.serializerAdapter())
-                .registerError(MyException.class)
+    private ServiceResponse<A> getDefaultModelA200NoneDelegate(Response<ResponseBody> response) throws AException, IOException {
+        return this.client.restClient().responseBuilderFactory().<A, AException>newInstance(this.client.serializerAdapter())
+                .registerError(AException.class)
                 .build(response);
     }
 
@@ -1595,7 +1595,7 @@ public class MultipleResponsesImpl implements MultipleResponses {
      * Send a 400 response with valid payload: {'statusCode': '400'}.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @throws MyException thrown if the request is rejected by server
+     * @throws AException thrown if the request is rejected by server
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      * @return the A object if successful.
      */
@@ -1650,9 +1650,9 @@ public class MultipleResponsesImpl implements MultipleResponses {
             });
     }
 
-    private ServiceResponse<A> getDefaultModelA400ValidDelegate(Response<ResponseBody> response) throws MyException, IOException {
-        return this.client.restClient().responseBuilderFactory().<A, MyException>newInstance(this.client.serializerAdapter())
-                .registerError(MyException.class)
+    private ServiceResponse<A> getDefaultModelA400ValidDelegate(Response<ResponseBody> response) throws AException, IOException {
+        return this.client.restClient().responseBuilderFactory().<A, AException>newInstance(this.client.serializerAdapter())
+                .registerError(AException.class)
                 .build(response);
     }
 
@@ -1660,7 +1660,7 @@ public class MultipleResponsesImpl implements MultipleResponses {
      * Send a 400 response with no payload.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @throws MyException thrown if the request is rejected by server
+     * @throws AException thrown if the request is rejected by server
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      * @return the A object if successful.
      */
@@ -1715,9 +1715,9 @@ public class MultipleResponsesImpl implements MultipleResponses {
             });
     }
 
-    private ServiceResponse<A> getDefaultModelA400NoneDelegate(Response<ResponseBody> response) throws MyException, IOException {
-        return this.client.restClient().responseBuilderFactory().<A, MyException>newInstance(this.client.serializerAdapter())
-                .registerError(MyException.class)
+    private ServiceResponse<A> getDefaultModelA400NoneDelegate(Response<ResponseBody> response) throws AException, IOException {
+        return this.client.restClient().responseBuilderFactory().<A, AException>newInstance(this.client.serializerAdapter())
+                .registerError(AException.class)
                 .build(response);
     }
 

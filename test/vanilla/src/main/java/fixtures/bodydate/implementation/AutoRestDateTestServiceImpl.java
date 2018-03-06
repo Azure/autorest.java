@@ -39,7 +39,7 @@ public class AutoRestDateTestServiceImpl extends ServiceClient implements AutoRe
      * Initializes an instance of AutoRestDateTestService client.
      */
     public AutoRestDateTestServiceImpl() {
-        this("https://localhost");
+        this("http://localhost:3000");
     }
 
     /**
@@ -59,7 +59,7 @@ public class AutoRestDateTestServiceImpl extends ServiceClient implements AutoRe
      * @param restBuilder the builder for building an Retrofit client, bundled with user configurations
      */
     public AutoRestDateTestServiceImpl(OkHttpClient.Builder clientBuilder, Retrofit.Builder restBuilder) {
-        this("https://localhost", clientBuilder, restBuilder);
+        this("http://localhost:3000", clientBuilder, restBuilder);
         initialize();
     }
 
