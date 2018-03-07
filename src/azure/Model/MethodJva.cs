@@ -780,6 +780,7 @@ namespace AutoRest.Java.Azure.Model
                 if (this.IsPagingNextOperation)
                 {
                     imports.Remove("retrofit2.http.Path");
+                    imports.Add("retrofit2.http.GET");
                     imports.Add("retrofit2.http.Url");
                 }
                 if (this.IsPagingNonPollingOperation)
