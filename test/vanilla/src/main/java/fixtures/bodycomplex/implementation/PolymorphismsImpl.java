@@ -72,10 +72,6 @@ public class PolymorphismsImpl implements Polymorphisms {
         @PUT("complex/polymorphism/complicated")
         Observable<Response<ResponseBody>> putComplicated(@Body Salmon complexBody);
 
-        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.bodycomplex.Polymorphisms putMissingDiscriminator" })
-        @PUT("complex/polymorphism/missingdiscriminator")
-        Observable<Response<ResponseBody>> putMissingDiscriminator(@Body Salmon complexBody);
-
         @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.bodycomplex.Polymorphisms putValidMissingRequired" })
         @PUT("complex/polymorphism/missingrequired/invalid")
         Observable<Response<ResponseBody>> putValidMissingRequired(@Body Fish complexBody);
@@ -484,80 +480,6 @@ public class PolymorphismsImpl implements Polymorphisms {
     private ServiceResponse<Void> putComplicatedDelegate(Response<ResponseBody> response) throws ErrorException, IOException, IllegalArgumentException {
         return this.client.restClient().responseBuilderFactory().<Void, ErrorException>newInstance(this.client.serializerAdapter())
                 .register(200, new TypeToken<Void>() { }.getType())
-                .registerError(ErrorException.class)
-                .build(response);
-    }
-
-    /**
-     * Put complex types that are polymorphic, omitting the discriminator.
-     *
-     * @param complexBody the Salmon value
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @throws ErrorException thrown if the request is rejected by server
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
-     * @return the Salmon object if successful.
-     */
-    public Salmon putMissingDiscriminator(Salmon complexBody) {
-        return putMissingDiscriminatorWithServiceResponseAsync(complexBody).toBlocking().single().body();
-    }
-
-    /**
-     * Put complex types that are polymorphic, omitting the discriminator.
-     *
-     * @param complexBody the Salmon value
-     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceFuture} object
-     */
-    public ServiceFuture<Salmon> putMissingDiscriminatorAsync(Salmon complexBody, final ServiceCallback<Salmon> serviceCallback) {
-        return ServiceFuture.fromResponse(putMissingDiscriminatorWithServiceResponseAsync(complexBody), serviceCallback);
-    }
-
-    /**
-     * Put complex types that are polymorphic, omitting the discriminator.
-     *
-     * @param complexBody the Salmon value
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the Salmon object
-     */
-    public Observable<Salmon> putMissingDiscriminatorAsync(Salmon complexBody) {
-        return putMissingDiscriminatorWithServiceResponseAsync(complexBody).map(new Func1<ServiceResponse<Salmon>, Salmon>() {
-            @Override
-            public Salmon call(ServiceResponse<Salmon> response) {
-                return response.body();
-            }
-        });
-    }
-
-    /**
-     * Put complex types that are polymorphic, omitting the discriminator.
-     *
-     * @param complexBody the Salmon value
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the Salmon object
-     */
-    public Observable<ServiceResponse<Salmon>> putMissingDiscriminatorWithServiceResponseAsync(Salmon complexBody) {
-        if (complexBody == null) {
-            throw new IllegalArgumentException("Parameter complexBody is required and cannot be null.");
-        }
-        Validator.validate(complexBody);
-        return service.putMissingDiscriminator(complexBody)
-            .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Salmon>>>() {
-                @Override
-                public Observable<ServiceResponse<Salmon>> call(Response<ResponseBody> response) {
-                    try {
-                        ServiceResponse<Salmon> clientResponse = putMissingDiscriminatorDelegate(response);
-                        return Observable.just(clientResponse);
-                    } catch (Throwable t) {
-                        return Observable.error(t);
-                    }
-                }
-            });
-    }
-
-    private ServiceResponse<Salmon> putMissingDiscriminatorDelegate(Response<ResponseBody> response) throws ErrorException, IOException, IllegalArgumentException {
-        return this.client.restClient().responseBuilderFactory().<Salmon, ErrorException>newInstance(this.client.serializerAdapter())
-                .register(200, new TypeToken<Salmon>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
     }
