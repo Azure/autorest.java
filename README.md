@@ -44,10 +44,6 @@ This project enables Java code generation in [AutoRest](https://github.com/Azure
   - With Argument (`true`): `int Plus(@NonNull Integer val1, @NonNull Integer val2)`
 - *--java.required-parameter-client-methods*: Whether or not Service and Method Group client method overloads that omit optional parameters will be created.
   - Default: `true`
-- *--java.string-dates*: Whether or not DateTime types should be represented as Strings (generally for better/different precision).
-  - Default: `false`
-  - Without Argument: `public DateTime duration(DateTime startTime, DateTime endTime)`
-  - With Argument (`true`): `public String duration(String startTime, String endTime)`
 
 # Contributing
 

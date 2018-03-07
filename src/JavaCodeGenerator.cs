@@ -154,7 +154,6 @@ namespace AutoRest.Java
                 package: codeModel.Namespace.ToLowerInvariant(),
                 shouldGenerateXmlSerialization: codeModel.ShouldGenerateXmlSerialization,
                 nonNullAnnotations: GetBoolSetting(autoRestSettings, "non-null-annotations", true),
-                stringDates: GetBoolSetting(autoRestSettings, "string-dates"),
                 clientTypePrefix: GetStringSetting(autoRestSettings, "client-type-prefix"),
                 generateClientInterfaces: GetBoolSetting(autoRestSettings, "generate-client-interfaces", true),
                 implementationSubpackage: GetStringSetting(autoRestSettings, "implementation-subpackage", "implementation"),
@@ -1428,13 +1427,13 @@ namespace AutoRest.Java
                             result = ArrayType.ByteArray;
                             break;
                         case AutoRestKnownPrimaryType.Date:
-                            result = settings.StringDates ? ClassType.String : ClassType.JodaLocalDate;
+                            result = ClassType.JodaLocalDate;
                             break;
                         case AutoRestKnownPrimaryType.DateTime:
-                            result = settings.StringDates ? ClassType.String : ClassType.JodaDateTime;
+                            result = ClassType.JodaDateTime;
                             break;
                         case AutoRestKnownPrimaryType.DateTimeRfc1123:
-                            result = settings.StringDates ? ClassType.String : ClassType.DateTimeRfc1123;
+                            result = ClassType.DateTimeRfc1123;
                             break;
                         case AutoRestKnownPrimaryType.Double:
                             result = PrimitiveType.Double;
@@ -1465,7 +1464,7 @@ namespace AutoRest.Java
                             result = ClassType.JodaPeriod;
                             break;
                         case AutoRestKnownPrimaryType.UnixTime:
-                            result = settings.StringDates ? (IType)ClassType.String : PrimitiveType.UnixTimeLong;
+                            result = PrimitiveType.UnixTimeLong;
                             break;
                         case AutoRestKnownPrimaryType.Uuid:
                             result = ClassType.UUID;
