@@ -17,9 +17,9 @@ import fixtures.url.models.ErrorException;
 import fixtures.url.models.UriColor;
 import io.reactivex.Completable;
 import io.reactivex.Single;
+import java.time.LocalDate;
+import java.time.OffsetDateTime;
 import java.util.List;
-import org.joda.time.DateTime;
-import org.joda.time.LocalDate;
 
 /**
  * An instance of this class provides access to all the operations defined in
@@ -1320,7 +1320,7 @@ public interface Queries {
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
-    void dateTimeNull(DateTime dateTimeQuery);
+    void dateTimeNull(OffsetDateTime dateTimeQuery);
 
     /**
      * Get null as date-time, should result in no query parameters in uri.
@@ -1330,7 +1330,7 @@ public interface Queries {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return a ServiceFuture which will be completed with the result of the network request.
      */
-    ServiceFuture<Void> dateTimeNullAsync(DateTime dateTimeQuery, ServiceCallback<Void> serviceCallback);
+    ServiceFuture<Void> dateTimeNullAsync(OffsetDateTime dateTimeQuery, ServiceCallback<Void> serviceCallback);
 
     /**
      * Get null as date-time, should result in no query parameters in uri.
@@ -1339,7 +1339,7 @@ public interface Queries {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return a Single which performs the network request upon subscription.
      */
-    Single<VoidResponse> dateTimeNullWithRestResponseAsync(DateTime dateTimeQuery);
+    Single<VoidResponse> dateTimeNullWithRestResponseAsync(OffsetDateTime dateTimeQuery);
 
     /**
      * Get null as date-time, should result in no query parameters in uri.
@@ -1348,7 +1348,7 @@ public interface Queries {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return a Single which performs the network request upon subscription.
      */
-    Completable dateTimeNullAsync(DateTime dateTimeQuery);
+    Completable dateTimeNullAsync(OffsetDateTime dateTimeQuery);
 
     /**
      * Get an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the csv-array format.

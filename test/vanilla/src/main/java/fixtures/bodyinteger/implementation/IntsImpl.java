@@ -29,8 +29,7 @@ import io.reactivex.Completable;
 import io.reactivex.Maybe;
 import io.reactivex.Single;
 import io.reactivex.annotations.NonNull;
-import org.joda.time.DateTime;
-import org.joda.time.DateTimeZone;
+import java.time.OffsetDateTime;
 
 /**
  * An instance of this class provides access to all the operations defined in
@@ -117,7 +116,7 @@ public final class IntsImpl implements Ints {
         @ExpectedResponses({200})
         @ReturnValueWireType(UnixTime.class)
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<BodyResponse<DateTime>> getUnixTime();
+        Single<BodyResponse<OffsetDateTime>> getUnixTime();
 
         @PUT("int/unixtime")
         @ExpectedResponses({200})
@@ -128,13 +127,13 @@ public final class IntsImpl implements Ints {
         @ExpectedResponses({200})
         @ReturnValueWireType(UnixTime.class)
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<BodyResponse<DateTime>> getInvalidUnixTime();
+        Single<BodyResponse<OffsetDateTime>> getInvalidUnixTime();
 
         @GET("int/nullunixtime")
         @ExpectedResponses({200})
         @ReturnValueWireType(UnixTime.class)
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<BodyResponse<DateTime>> getNullUnixTime();
+        Single<BodyResponse<OffsetDateTime>> getNullUnixTime();
     }
 
     /**
@@ -576,9 +575,9 @@ public final class IntsImpl implements Ints {
      *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the DateTime object if successful.
+     * @return the OffsetDateTime object if successful.
      */
-    public DateTime getUnixTime() {
+    public OffsetDateTime getUnixTime() {
         return getUnixTimeAsync().blockingGet();
     }
 
@@ -589,7 +588,7 @@ public final class IntsImpl implements Ints {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return a ServiceFuture which will be completed with the result of the network request.
      */
-    public ServiceFuture<DateTime> getUnixTimeAsync(ServiceCallback<DateTime> serviceCallback) {
+    public ServiceFuture<OffsetDateTime> getUnixTimeAsync(ServiceCallback<OffsetDateTime> serviceCallback) {
         return ServiceFuture.fromBody(getUnixTimeAsync(), serviceCallback);
     }
 
@@ -598,7 +597,7 @@ public final class IntsImpl implements Ints {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    public Single<BodyResponse<DateTime>> getUnixTimeWithRestResponseAsync() {
+    public Single<BodyResponse<OffsetDateTime>> getUnixTimeWithRestResponseAsync() {
         return service.getUnixTime();
     }
 
@@ -607,55 +606,55 @@ public final class IntsImpl implements Ints {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    public Maybe<DateTime> getUnixTimeAsync() {
+    public Maybe<OffsetDateTime> getUnixTimeAsync() {
         return getUnixTimeWithRestResponseAsync()
-            .flatMapMaybe((BodyResponse<DateTime> res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .flatMapMaybe((BodyResponse<OffsetDateTime> res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
      * Put datetime encoded as Unix time.
      *
-     * @param intBody the DateTime value.
+     * @param intBody the OffsetDateTime value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
-    public void putUnixTimeDate(@NonNull DateTime intBody) {
+    public void putUnixTimeDate(@NonNull OffsetDateTime intBody) {
         putUnixTimeDateAsync(intBody).blockingAwait();
     }
 
     /**
      * Put datetime encoded as Unix time.
      *
-     * @param intBody the DateTime value.
+     * @param intBody the OffsetDateTime value.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return a ServiceFuture which will be completed with the result of the network request.
      */
-    public ServiceFuture<Void> putUnixTimeDateAsync(@NonNull DateTime intBody, ServiceCallback<Void> serviceCallback) {
+    public ServiceFuture<Void> putUnixTimeDateAsync(@NonNull OffsetDateTime intBody, ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(putUnixTimeDateAsync(intBody), serviceCallback);
     }
 
     /**
      * Put datetime encoded as Unix time.
      *
-     * @param intBody the DateTime value.
+     * @param intBody the OffsetDateTime value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return a Single which performs the network request upon subscription.
      */
-    public Single<VoidResponse> putUnixTimeDateWithRestResponseAsync(@NonNull DateTime intBody) {
-        Long intBodyConverted = intBody.toDateTime(DateTimeZone.UTC).getMillis() / 1000;
+    public Single<VoidResponse> putUnixTimeDateWithRestResponseAsync(@NonNull OffsetDateTime intBody) {
+        Long intBodyConverted = intBody.toInstant().getEpochSecond();
         return service.putUnixTimeDate(intBodyConverted);
     }
 
     /**
      * Put datetime encoded as Unix time.
      *
-     * @param intBody the DateTime value.
+     * @param intBody the OffsetDateTime value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return a Single which performs the network request upon subscription.
      */
-    public Completable putUnixTimeDateAsync(@NonNull DateTime intBody) {
+    public Completable putUnixTimeDateAsync(@NonNull OffsetDateTime intBody) {
         return putUnixTimeDateWithRestResponseAsync(intBody)
             .toCompletable();
     }
@@ -665,9 +664,9 @@ public final class IntsImpl implements Ints {
      *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the DateTime object if successful.
+     * @return the OffsetDateTime object if successful.
      */
-    public DateTime getInvalidUnixTime() {
+    public OffsetDateTime getInvalidUnixTime() {
         return getInvalidUnixTimeAsync().blockingGet();
     }
 
@@ -678,7 +677,7 @@ public final class IntsImpl implements Ints {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return a ServiceFuture which will be completed with the result of the network request.
      */
-    public ServiceFuture<DateTime> getInvalidUnixTimeAsync(ServiceCallback<DateTime> serviceCallback) {
+    public ServiceFuture<OffsetDateTime> getInvalidUnixTimeAsync(ServiceCallback<OffsetDateTime> serviceCallback) {
         return ServiceFuture.fromBody(getInvalidUnixTimeAsync(), serviceCallback);
     }
 
@@ -687,7 +686,7 @@ public final class IntsImpl implements Ints {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    public Single<BodyResponse<DateTime>> getInvalidUnixTimeWithRestResponseAsync() {
+    public Single<BodyResponse<OffsetDateTime>> getInvalidUnixTimeWithRestResponseAsync() {
         return service.getInvalidUnixTime();
     }
 
@@ -696,9 +695,9 @@ public final class IntsImpl implements Ints {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    public Maybe<DateTime> getInvalidUnixTimeAsync() {
+    public Maybe<OffsetDateTime> getInvalidUnixTimeAsync() {
         return getInvalidUnixTimeWithRestResponseAsync()
-            .flatMapMaybe((BodyResponse<DateTime> res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .flatMapMaybe((BodyResponse<OffsetDateTime> res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -706,9 +705,9 @@ public final class IntsImpl implements Ints {
      *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the DateTime object if successful.
+     * @return the OffsetDateTime object if successful.
      */
-    public DateTime getNullUnixTime() {
+    public OffsetDateTime getNullUnixTime() {
         return getNullUnixTimeAsync().blockingGet();
     }
 
@@ -719,7 +718,7 @@ public final class IntsImpl implements Ints {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return a ServiceFuture which will be completed with the result of the network request.
      */
-    public ServiceFuture<DateTime> getNullUnixTimeAsync(ServiceCallback<DateTime> serviceCallback) {
+    public ServiceFuture<OffsetDateTime> getNullUnixTimeAsync(ServiceCallback<OffsetDateTime> serviceCallback) {
         return ServiceFuture.fromBody(getNullUnixTimeAsync(), serviceCallback);
     }
 
@@ -728,7 +727,7 @@ public final class IntsImpl implements Ints {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    public Single<BodyResponse<DateTime>> getNullUnixTimeWithRestResponseAsync() {
+    public Single<BodyResponse<OffsetDateTime>> getNullUnixTimeWithRestResponseAsync() {
         return service.getNullUnixTime();
     }
 
@@ -737,8 +736,8 @@ public final class IntsImpl implements Ints {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    public Maybe<DateTime> getNullUnixTimeAsync() {
+    public Maybe<OffsetDateTime> getNullUnixTimeAsync() {
         return getNullUnixTimeWithRestResponseAsync()
-            .flatMapMaybe((BodyResponse<DateTime> res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .flatMapMaybe((BodyResponse<OffsetDateTime> res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 }

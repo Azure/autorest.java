@@ -19,7 +19,7 @@ import io.reactivex.Completable;
 import io.reactivex.Maybe;
 import io.reactivex.Single;
 import io.reactivex.annotations.NonNull;
-import org.joda.time.Period;
+import java.time.Duration;
 
 /**
  * An instance of this class provides access to all the operations defined in
@@ -31,9 +31,9 @@ public interface Durations {
      *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the Period object if successful.
+     * @return the Duration object if successful.
      */
-    Period getNull();
+    Duration getNull();
 
     /**
      * Get null duration value.
@@ -42,121 +42,121 @@ public interface Durations {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return a ServiceFuture which will be completed with the result of the network request.
      */
-    ServiceFuture<Period> getNullAsync(ServiceCallback<Period> serviceCallback);
+    ServiceFuture<Duration> getNullAsync(ServiceCallback<Duration> serviceCallback);
 
     /**
      * Get null duration value.
      *
      * @return a Single which performs the network request upon subscription.
      */
-    Single<BodyResponse<Period>> getNullWithRestResponseAsync();
+    Single<BodyResponse<Duration>> getNullWithRestResponseAsync();
 
     /**
      * Get null duration value.
      *
      * @return a Single which performs the network request upon subscription.
      */
-    Maybe<Period> getNullAsync();
+    Maybe<Duration> getNullAsync();
 
     /**
      * Put a positive duration value.
      *
-     * @param durationBody the Period value.
+     * @param durationBody the Duration value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
-    void putPositiveDuration(@NonNull Period durationBody);
+    void putPositiveDuration(@NonNull Duration durationBody);
 
     /**
      * Put a positive duration value.
      *
-     * @param durationBody the Period value.
+     * @param durationBody the Duration value.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return a ServiceFuture which will be completed with the result of the network request.
      */
-    ServiceFuture<Void> putPositiveDurationAsync(@NonNull Period durationBody, ServiceCallback<Void> serviceCallback);
+    ServiceFuture<Void> putPositiveDurationAsync(@NonNull Duration durationBody, ServiceCallback<Void> serviceCallback);
 
     /**
      * Put a positive duration value.
      *
-     * @param durationBody the Period value.
+     * @param durationBody the Duration value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return a Single which performs the network request upon subscription.
      */
-    Single<VoidResponse> putPositiveDurationWithRestResponseAsync(@NonNull Period durationBody);
+    Single<VoidResponse> putPositiveDurationWithRestResponseAsync(@NonNull Duration durationBody);
 
     /**
      * Put a positive duration value.
      *
-     * @param durationBody the Period value.
+     * @param durationBody the Duration value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return a Single which performs the network request upon subscription.
      */
-    Completable putPositiveDurationAsync(@NonNull Period durationBody);
+    Completable putPositiveDurationAsync(@NonNull Duration durationBody);
 
     /**
      * Get a positive duration value.
      *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the Period object if successful.
+     * @return the Duration object if successful.
      */
-    Period getPositiveDuration();
+    Duration getPositiveDuration();
 
     /**
      * Get a positive duration value.
-     *
-     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a ServiceFuture which will be completed with the result of the network request.
-     */
-    ServiceFuture<Period> getPositiveDurationAsync(ServiceCallback<Period> serviceCallback);
-
-    /**
-     * Get a positive duration value.
-     *
-     * @return a Single which performs the network request upon subscription.
-     */
-    Single<BodyResponse<Period>> getPositiveDurationWithRestResponseAsync();
-
-    /**
-     * Get a positive duration value.
-     *
-     * @return a Single which performs the network request upon subscription.
-     */
-    Maybe<Period> getPositiveDurationAsync();
-
-    /**
-     * Get an invalid duration value.
-     *
-     * @throws ErrorException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the Period object if successful.
-     */
-    Period getInvalid();
-
-    /**
-     * Get an invalid duration value.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return a ServiceFuture which will be completed with the result of the network request.
      */
-    ServiceFuture<Period> getInvalidAsync(ServiceCallback<Period> serviceCallback);
+    ServiceFuture<Duration> getPositiveDurationAsync(ServiceCallback<Duration> serviceCallback);
+
+    /**
+     * Get a positive duration value.
+     *
+     * @return a Single which performs the network request upon subscription.
+     */
+    Single<BodyResponse<Duration>> getPositiveDurationWithRestResponseAsync();
+
+    /**
+     * Get a positive duration value.
+     *
+     * @return a Single which performs the network request upon subscription.
+     */
+    Maybe<Duration> getPositiveDurationAsync();
+
+    /**
+     * Get an invalid duration value.
+     *
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the Duration object if successful.
+     */
+    Duration getInvalid();
+
+    /**
+     * Get an invalid duration value.
+     *
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return a ServiceFuture which will be completed with the result of the network request.
+     */
+    ServiceFuture<Duration> getInvalidAsync(ServiceCallback<Duration> serviceCallback);
 
     /**
      * Get an invalid duration value.
      *
      * @return a Single which performs the network request upon subscription.
      */
-    Single<BodyResponse<Period>> getInvalidWithRestResponseAsync();
+    Single<BodyResponse<Duration>> getInvalidWithRestResponseAsync();
 
     /**
      * Get an invalid duration value.
      *
      * @return a Single which performs the network request upon subscription.
      */
-    Maybe<Period> getInvalidAsync();
+    Maybe<Duration> getInvalidAsync();
 }

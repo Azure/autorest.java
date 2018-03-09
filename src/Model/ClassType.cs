@@ -17,10 +17,10 @@ namespace AutoRest.Java.Model
         public static readonly ClassType Double = new ClassType("java.lang", "Double", defaultValueExpressionConverter: (string defaultValueExpression) => double.Parse(defaultValueExpression).ToString());
         public static readonly ClassType String = new ClassType("java.lang", "String", defaultValueExpressionConverter: (string defaultValueExpression) => CodeNamer.Instance.QuoteValue(defaultValueExpression));
         public static readonly ClassType Base64Url = new ClassType("com.microsoft.rest.v2", "Base64Url");
-        public static readonly ClassType JodaLocalDate = new ClassType("org.joda.time", "LocalDate", defaultValueExpressionConverter: (string defaultValueExpression) => $"LocalDate.parse(\"{defaultValueExpression}\")");
-        public static readonly ClassType JodaDateTime = new ClassType("org.joda.time", "DateTime", defaultValueExpressionConverter: (string defaultValueExpression) => $"DateTime.parse(\"{defaultValueExpression}\")");
-        public static readonly ClassType JodaPeriod = new ClassType("org.joda.time", "Period", defaultValueExpressionConverter: (string defaultValueExpression) => $"Period.parse(\"{defaultValueExpression}\")");
-        public static readonly ClassType DateTimeRfc1123 = new ClassType("com.microsoft.rest.v2", "DateTimeRfc1123", defaultValueExpressionConverter: (string defaultValueExpression) => $"DateTime.parse(\"{defaultValueExpression}\")");
+        public static readonly ClassType LocalDate = new ClassType("java.time", "LocalDate", defaultValueExpressionConverter: (string defaultValueExpression) => $"LocalDate.parse(\"{defaultValueExpression}\")");
+        public static readonly ClassType DateTime = new ClassType("java.time", "OffsetDateTime", defaultValueExpressionConverter: (string defaultValueExpression) => $"OffsetDateTime.parse(\"{defaultValueExpression}\")");
+        public static readonly ClassType Duration = new ClassType("java.time", "Duration", defaultValueExpressionConverter: (string defaultValueExpression) => $"Duration.parse(\"{defaultValueExpression}\")");
+        public static readonly ClassType DateTimeRfc1123 = new ClassType("com.microsoft.rest.v2", "DateTimeRfc1123", defaultValueExpressionConverter: (string defaultValueExpression) => $"new DateTimeRfc1123(\"{defaultValueExpression}\")");
         public static readonly ClassType BigDecimal = new ClassType("java.math", "BigDecimal");
         public static readonly ClassType UUID = new ClassType("java.util", "UUID");
         public static readonly ClassType Object = new ClassType("java.lang", "Object");
@@ -29,7 +29,7 @@ namespace AutoRest.Java.Model
         public static readonly ClassType CloudException = new ClassType("com.microsoft.azure.v2", "CloudException");
         public static readonly ClassType RestException = new ClassType("com.microsoft.azure.v2", "RestException");
         public static readonly ClassType UnixTime = new ClassType("com.microsoft.rest.v2", "UnixTime");
-        public static readonly ClassType UnixTimeDateTime = new ClassType("org.joda.time", "DateTime", new[] { "org.joda.time.DateTimeZone" });
+        public static readonly ClassType UnixTimeDateTime = new ClassType("java.time", "OffsetDateTime");
         public static readonly ClassType UnixTimeLong = new ClassType("java.lang", "Long");
         public static readonly ClassType AzureEnvironment = new ClassType("com.microsoft.azure.v2", "AzureEnvironment");
         public static readonly ClassType HttpPipeline = new ClassType("com.microsoft.rest.v2.http", "HttpPipeline");

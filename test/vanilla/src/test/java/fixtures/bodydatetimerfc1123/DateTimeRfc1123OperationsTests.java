@@ -2,11 +2,12 @@ package fixtures.bodydatetimerfc1123;
 
 import com.fasterxml.jackson.databind.JsonMappingException;
 import fixtures.bodydatetimerfc1123.implementation.AutoRestRFC1123DateTimeTestServiceImpl;
-import org.joda.time.DateTime;
-import org.joda.time.DateTimeZone;
 import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
+
+import java.time.OffsetDateTime;
+import java.time.ZoneOffset;
 
 import static org.hamcrest.core.IsInstanceOf.instanceOf;
 import static org.junit.Assert.assertThat;
@@ -21,12 +22,12 @@ public class DateTimeRfc1123OperationsTests {
     }
 
     @Test
-    public void getNull() throws Exception {
+    public void getNull() {
         Assert.assertNull(client.datetimerfc1123s().getNull());
     }
 
     @Test
-    public void getInvalidDate() throws Exception {
+    public void getInvalidDate() {
         try {
             client.datetimerfc1123s().getInvalid();
             fail();
@@ -36,15 +37,14 @@ public class DateTimeRfc1123OperationsTests {
     }
 
     @Test
-    public void getOverflowDate() throws Exception {
-        DateTime result = client.datetimerfc1123s().getOverflow();
-        DateTime expected = new DateTime(10000, 1, 1, 00, 00, 00, 0, DateTimeZone.UTC);
-        expected = expected.toDateTime(DateTimeZone.UTC);
+    public void getOverflowDate() {
+        OffsetDateTime result = client.datetimerfc1123s().getOverflow();
+        OffsetDateTime expected = OffsetDateTime.of(10000, 1, 1, 0, 0, 0, 0, ZoneOffset.UTC);
         Assert.assertEquals(expected, result);
     }
 
     @Test
-    public void getUnderflowDate() throws Exception {
+    public void getUnderflowDate() {
         try {
             client.datetimerfc1123s().getUnderflow();
             fail();
@@ -54,35 +54,35 @@ public class DateTimeRfc1123OperationsTests {
     }
 
     @Test
-    public void putUtcMaxDateTime() throws Exception {
-        DateTime body = new DateTime(9999, 12, 31, 23, 59, 59, 0, DateTimeZone.UTC);
+    public void putUtcMaxDateTime() {
+        OffsetDateTime body = OffsetDateTime.of(9999, 12, 31, 23, 59, 59, 0, ZoneOffset.UTC);
         client.datetimerfc1123s().putUtcMaxDateTime(body);
     }
 
     @Test
-    public void getUtcLowercaseMaxDateTime() throws Exception {
-        DateTime result = client.datetimerfc1123s().getUtcLowercaseMaxDateTime();
-        DateTime expected = new DateTime(9999, 12, 31, 23, 59, 59, 0, DateTimeZone.UTC);
+    public void getUtcLowercaseMaxDateTime() {
+        OffsetDateTime result = client.datetimerfc1123s().getUtcLowercaseMaxDateTime();
+        OffsetDateTime expected = OffsetDateTime.of(9999, 12, 31, 23, 59, 59, 0, ZoneOffset.UTC);
         Assert.assertEquals(expected, result);
     }
 
     @Test
-    public void getUtcUppercaseMaxDateTime() throws Exception {
-        DateTime result = client.datetimerfc1123s().getUtcUppercaseMaxDateTime();
-        DateTime expected = new DateTime(9999, 12, 31, 23, 59, 59, 0, DateTimeZone.UTC);
+    public void getUtcUppercaseMaxDateTime() {
+        OffsetDateTime result = client.datetimerfc1123s().getUtcUppercaseMaxDateTime();
+        OffsetDateTime expected = OffsetDateTime.of(9999, 12, 31, 23, 59, 59, 0, ZoneOffset.UTC);
         Assert.assertEquals(expected, result);
     }
 
     @Test
-    public void putUtcMinDateTime() throws Exception {
-        DateTime body = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeZone.UTC);
+    public void putUtcMinDateTime() {
+        OffsetDateTime body = OffsetDateTime.of(1, 1, 1, 0, 0, 0, 0, ZoneOffset.UTC);
         client.datetimerfc1123s().putUtcMinDateTime(body);
     }
 
     @Test
-    public void getUtcMinDateTime() throws Exception {
-        DateTime result = client.datetimerfc1123s().getUtcMinDateTime();
-        DateTime expected = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeZone.UTC);
+    public void getUtcMinDateTime() {
+        OffsetDateTime result = client.datetimerfc1123s().getUtcMinDateTime();
+        OffsetDateTime expected = OffsetDateTime.of(1, 1, 1, 0, 0, 0, 0, ZoneOffset.UTC);
         Assert.assertEquals(expected, result);
     }
 }

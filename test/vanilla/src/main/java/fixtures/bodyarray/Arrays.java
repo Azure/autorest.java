@@ -20,12 +20,12 @@ import io.reactivex.Completable;
 import io.reactivex.Maybe;
 import io.reactivex.Single;
 import io.reactivex.annotations.NonNull;
+import java.time.Duration;
+import java.time.LocalDate;
+import java.time.OffsetDateTime;
 import java.util.List;
 import java.util.Map;
 import java.util.UUID;
-import org.joda.time.DateTime;
-import org.joda.time.LocalDate;
-import org.joda.time.Period;
 
 /**
  * An instance of this class provides access to all the operations defined in
@@ -1211,9 +1211,9 @@ public interface Arrays {
      *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the List&lt;DateTime&gt; object if successful.
+     * @return the List&lt;OffsetDateTime&gt; object if successful.
      */
-    List<DateTime> getDateTimeValid();
+    List<OffsetDateTime> getDateTimeValid();
 
     /**
      * Get date-time array value ['2000-12-01t00:00:01z', '1980-01-02T00:11:35+01:00', '1492-10-12T10:15:01-08:00'].
@@ -1222,68 +1222,68 @@ public interface Arrays {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return a ServiceFuture which will be completed with the result of the network request.
      */
-    ServiceFuture<List<DateTime>> getDateTimeValidAsync(ServiceCallback<List<DateTime>> serviceCallback);
+    ServiceFuture<List<OffsetDateTime>> getDateTimeValidAsync(ServiceCallback<List<OffsetDateTime>> serviceCallback);
 
     /**
      * Get date-time array value ['2000-12-01t00:00:01z', '1980-01-02T00:11:35+01:00', '1492-10-12T10:15:01-08:00'].
      *
      * @return a Single which performs the network request upon subscription.
      */
-    Single<BodyResponse<List<DateTime>>> getDateTimeValidWithRestResponseAsync();
+    Single<BodyResponse<List<OffsetDateTime>>> getDateTimeValidWithRestResponseAsync();
 
     /**
      * Get date-time array value ['2000-12-01t00:00:01z', '1980-01-02T00:11:35+01:00', '1492-10-12T10:15:01-08:00'].
      *
      * @return a Single which performs the network request upon subscription.
      */
-    Maybe<List<DateTime>> getDateTimeValidAsync();
+    Maybe<List<OffsetDateTime>> getDateTimeValidAsync();
 
     /**
      * Set array value  ['2000-12-01t00:00:01z', '1980-01-02T00:11:35+01:00', '1492-10-12T10:15:01-08:00'].
      *
-     * @param arrayBody the List&lt;DateTime&gt; value.
+     * @param arrayBody the List&lt;OffsetDateTime&gt; value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
-    void putDateTimeValid(@NonNull List<DateTime> arrayBody);
+    void putDateTimeValid(@NonNull List<OffsetDateTime> arrayBody);
 
     /**
      * Set array value  ['2000-12-01t00:00:01z', '1980-01-02T00:11:35+01:00', '1492-10-12T10:15:01-08:00'].
      *
-     * @param arrayBody the List&lt;DateTime&gt; value.
+     * @param arrayBody the List&lt;OffsetDateTime&gt; value.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return a ServiceFuture which will be completed with the result of the network request.
      */
-    ServiceFuture<Void> putDateTimeValidAsync(@NonNull List<DateTime> arrayBody, ServiceCallback<Void> serviceCallback);
+    ServiceFuture<Void> putDateTimeValidAsync(@NonNull List<OffsetDateTime> arrayBody, ServiceCallback<Void> serviceCallback);
 
     /**
      * Set array value  ['2000-12-01t00:00:01z', '1980-01-02T00:11:35+01:00', '1492-10-12T10:15:01-08:00'].
      *
-     * @param arrayBody the List&lt;DateTime&gt; value.
+     * @param arrayBody the List&lt;OffsetDateTime&gt; value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return a Single which performs the network request upon subscription.
      */
-    Single<VoidResponse> putDateTimeValidWithRestResponseAsync(@NonNull List<DateTime> arrayBody);
+    Single<VoidResponse> putDateTimeValidWithRestResponseAsync(@NonNull List<OffsetDateTime> arrayBody);
 
     /**
      * Set array value  ['2000-12-01t00:00:01z', '1980-01-02T00:11:35+01:00', '1492-10-12T10:15:01-08:00'].
      *
-     * @param arrayBody the List&lt;DateTime&gt; value.
+     * @param arrayBody the List&lt;OffsetDateTime&gt; value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return a Single which performs the network request upon subscription.
      */
-    Completable putDateTimeValidAsync(@NonNull List<DateTime> arrayBody);
+    Completable putDateTimeValidAsync(@NonNull List<OffsetDateTime> arrayBody);
 
     /**
      * Get date array value ['2000-12-01t00:00:01z', null].
      *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the List&lt;DateTime&gt; object if successful.
+     * @return the List&lt;OffsetDateTime&gt; object if successful.
      */
-    List<DateTime> getDateTimeInvalidNull();
+    List<OffsetDateTime> getDateTimeInvalidNull();
 
     /**
      * Get date array value ['2000-12-01t00:00:01z', null].
@@ -1292,30 +1292,30 @@ public interface Arrays {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return a ServiceFuture which will be completed with the result of the network request.
      */
-    ServiceFuture<List<DateTime>> getDateTimeInvalidNullAsync(ServiceCallback<List<DateTime>> serviceCallback);
+    ServiceFuture<List<OffsetDateTime>> getDateTimeInvalidNullAsync(ServiceCallback<List<OffsetDateTime>> serviceCallback);
 
     /**
      * Get date array value ['2000-12-01t00:00:01z', null].
      *
      * @return a Single which performs the network request upon subscription.
      */
-    Single<BodyResponse<List<DateTime>>> getDateTimeInvalidNullWithRestResponseAsync();
+    Single<BodyResponse<List<OffsetDateTime>>> getDateTimeInvalidNullWithRestResponseAsync();
 
     /**
      * Get date array value ['2000-12-01t00:00:01z', null].
      *
      * @return a Single which performs the network request upon subscription.
      */
-    Maybe<List<DateTime>> getDateTimeInvalidNullAsync();
+    Maybe<List<OffsetDateTime>> getDateTimeInvalidNullAsync();
 
     /**
      * Get date array value ['2000-12-01t00:00:01z', 'date-time'].
      *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the List&lt;DateTime&gt; object if successful.
+     * @return the List&lt;OffsetDateTime&gt; object if successful.
      */
-    List<DateTime> getDateTimeInvalidChars();
+    List<OffsetDateTime> getDateTimeInvalidChars();
 
     /**
      * Get date array value ['2000-12-01t00:00:01z', 'date-time'].
@@ -1324,30 +1324,30 @@ public interface Arrays {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return a ServiceFuture which will be completed with the result of the network request.
      */
-    ServiceFuture<List<DateTime>> getDateTimeInvalidCharsAsync(ServiceCallback<List<DateTime>> serviceCallback);
+    ServiceFuture<List<OffsetDateTime>> getDateTimeInvalidCharsAsync(ServiceCallback<List<OffsetDateTime>> serviceCallback);
 
     /**
      * Get date array value ['2000-12-01t00:00:01z', 'date-time'].
      *
      * @return a Single which performs the network request upon subscription.
      */
-    Single<BodyResponse<List<DateTime>>> getDateTimeInvalidCharsWithRestResponseAsync();
+    Single<BodyResponse<List<OffsetDateTime>>> getDateTimeInvalidCharsWithRestResponseAsync();
 
     /**
      * Get date array value ['2000-12-01t00:00:01z', 'date-time'].
      *
      * @return a Single which performs the network request upon subscription.
      */
-    Maybe<List<DateTime>> getDateTimeInvalidCharsAsync();
+    Maybe<List<OffsetDateTime>> getDateTimeInvalidCharsAsync();
 
     /**
      * Get date-time array value ['Fri, 01 Dec 2000 00:00:01 GMT', 'Wed, 02 Jan 1980 00:11:35 GMT', 'Wed, 12 Oct 1492 10:15:01 GMT'].
      *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the List&lt;DateTime&gt; object if successful.
+     * @return the List&lt;OffsetDateTime&gt; object if successful.
      */
-    List<DateTime> getDateTimeRfc1123Valid();
+    List<OffsetDateTime> getDateTimeRfc1123Valid();
 
     /**
      * Get date-time array value ['Fri, 01 Dec 2000 00:00:01 GMT', 'Wed, 02 Jan 1980 00:11:35 GMT', 'Wed, 12 Oct 1492 10:15:01 GMT'].
@@ -1356,68 +1356,68 @@ public interface Arrays {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return a ServiceFuture which will be completed with the result of the network request.
      */
-    ServiceFuture<List<DateTime>> getDateTimeRfc1123ValidAsync(ServiceCallback<List<DateTime>> serviceCallback);
+    ServiceFuture<List<OffsetDateTime>> getDateTimeRfc1123ValidAsync(ServiceCallback<List<OffsetDateTime>> serviceCallback);
 
     /**
      * Get date-time array value ['Fri, 01 Dec 2000 00:00:01 GMT', 'Wed, 02 Jan 1980 00:11:35 GMT', 'Wed, 12 Oct 1492 10:15:01 GMT'].
      *
      * @return a Single which performs the network request upon subscription.
      */
-    Single<BodyResponse<List<DateTime>>> getDateTimeRfc1123ValidWithRestResponseAsync();
+    Single<BodyResponse<List<OffsetDateTime>>> getDateTimeRfc1123ValidWithRestResponseAsync();
 
     /**
      * Get date-time array value ['Fri, 01 Dec 2000 00:00:01 GMT', 'Wed, 02 Jan 1980 00:11:35 GMT', 'Wed, 12 Oct 1492 10:15:01 GMT'].
      *
      * @return a Single which performs the network request upon subscription.
      */
-    Maybe<List<DateTime>> getDateTimeRfc1123ValidAsync();
+    Maybe<List<OffsetDateTime>> getDateTimeRfc1123ValidAsync();
 
     /**
      * Set array value  ['Fri, 01 Dec 2000 00:00:01 GMT', 'Wed, 02 Jan 1980 00:11:35 GMT', 'Wed, 12 Oct 1492 10:15:01 GMT'].
      *
-     * @param arrayBody the List&lt;DateTime&gt; value.
+     * @param arrayBody the List&lt;OffsetDateTime&gt; value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
-    void putDateTimeRfc1123Valid(@NonNull List<DateTime> arrayBody);
+    void putDateTimeRfc1123Valid(@NonNull List<OffsetDateTime> arrayBody);
 
     /**
      * Set array value  ['Fri, 01 Dec 2000 00:00:01 GMT', 'Wed, 02 Jan 1980 00:11:35 GMT', 'Wed, 12 Oct 1492 10:15:01 GMT'].
      *
-     * @param arrayBody the List&lt;DateTime&gt; value.
+     * @param arrayBody the List&lt;OffsetDateTime&gt; value.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return a ServiceFuture which will be completed with the result of the network request.
      */
-    ServiceFuture<Void> putDateTimeRfc1123ValidAsync(@NonNull List<DateTime> arrayBody, ServiceCallback<Void> serviceCallback);
+    ServiceFuture<Void> putDateTimeRfc1123ValidAsync(@NonNull List<OffsetDateTime> arrayBody, ServiceCallback<Void> serviceCallback);
 
     /**
      * Set array value  ['Fri, 01 Dec 2000 00:00:01 GMT', 'Wed, 02 Jan 1980 00:11:35 GMT', 'Wed, 12 Oct 1492 10:15:01 GMT'].
      *
-     * @param arrayBody the List&lt;DateTime&gt; value.
+     * @param arrayBody the List&lt;OffsetDateTime&gt; value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return a Single which performs the network request upon subscription.
      */
-    Single<VoidResponse> putDateTimeRfc1123ValidWithRestResponseAsync(@NonNull List<DateTime> arrayBody);
+    Single<VoidResponse> putDateTimeRfc1123ValidWithRestResponseAsync(@NonNull List<OffsetDateTime> arrayBody);
 
     /**
      * Set array value  ['Fri, 01 Dec 2000 00:00:01 GMT', 'Wed, 02 Jan 1980 00:11:35 GMT', 'Wed, 12 Oct 1492 10:15:01 GMT'].
      *
-     * @param arrayBody the List&lt;DateTime&gt; value.
+     * @param arrayBody the List&lt;OffsetDateTime&gt; value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return a Single which performs the network request upon subscription.
      */
-    Completable putDateTimeRfc1123ValidAsync(@NonNull List<DateTime> arrayBody);
+    Completable putDateTimeRfc1123ValidAsync(@NonNull List<OffsetDateTime> arrayBody);
 
     /**
      * Get duration array value ['P123DT22H14M12.011S', 'P5DT1H0M0S'].
      *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the List&lt;Period&gt; object if successful.
+     * @return the List&lt;Duration&gt; object if successful.
      */
-    List<Period> getDurationValid();
+    List<Duration> getDurationValid();
 
     /**
      * Get duration array value ['P123DT22H14M12.011S', 'P5DT1H0M0S'].
@@ -1426,59 +1426,59 @@ public interface Arrays {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return a ServiceFuture which will be completed with the result of the network request.
      */
-    ServiceFuture<List<Period>> getDurationValidAsync(ServiceCallback<List<Period>> serviceCallback);
+    ServiceFuture<List<Duration>> getDurationValidAsync(ServiceCallback<List<Duration>> serviceCallback);
 
     /**
      * Get duration array value ['P123DT22H14M12.011S', 'P5DT1H0M0S'].
      *
      * @return a Single which performs the network request upon subscription.
      */
-    Single<BodyResponse<List<Period>>> getDurationValidWithRestResponseAsync();
+    Single<BodyResponse<List<Duration>>> getDurationValidWithRestResponseAsync();
 
     /**
      * Get duration array value ['P123DT22H14M12.011S', 'P5DT1H0M0S'].
      *
      * @return a Single which performs the network request upon subscription.
      */
-    Maybe<List<Period>> getDurationValidAsync();
+    Maybe<List<Duration>> getDurationValidAsync();
 
     /**
      * Set array value  ['P123DT22H14M12.011S', 'P5DT1H0M0S'].
      *
-     * @param arrayBody the List&lt;Period&gt; value.
+     * @param arrayBody the List&lt;Duration&gt; value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
-    void putDurationValid(@NonNull List<Period> arrayBody);
+    void putDurationValid(@NonNull List<Duration> arrayBody);
 
     /**
      * Set array value  ['P123DT22H14M12.011S', 'P5DT1H0M0S'].
      *
-     * @param arrayBody the List&lt;Period&gt; value.
+     * @param arrayBody the List&lt;Duration&gt; value.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return a ServiceFuture which will be completed with the result of the network request.
      */
-    ServiceFuture<Void> putDurationValidAsync(@NonNull List<Period> arrayBody, ServiceCallback<Void> serviceCallback);
+    ServiceFuture<Void> putDurationValidAsync(@NonNull List<Duration> arrayBody, ServiceCallback<Void> serviceCallback);
 
     /**
      * Set array value  ['P123DT22H14M12.011S', 'P5DT1H0M0S'].
      *
-     * @param arrayBody the List&lt;Period&gt; value.
+     * @param arrayBody the List&lt;Duration&gt; value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return a Single which performs the network request upon subscription.
      */
-    Single<VoidResponse> putDurationValidWithRestResponseAsync(@NonNull List<Period> arrayBody);
+    Single<VoidResponse> putDurationValidWithRestResponseAsync(@NonNull List<Duration> arrayBody);
 
     /**
      * Set array value  ['P123DT22H14M12.011S', 'P5DT1H0M0S'].
      *
-     * @param arrayBody the List&lt;Period&gt; value.
+     * @param arrayBody the List&lt;Duration&gt; value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return a Single which performs the network request upon subscription.
      */
-    Completable putDurationValidAsync(@NonNull List<Period> arrayBody);
+    Completable putDurationValidAsync(@NonNull List<Duration> arrayBody);
 
     /**
      * Get byte array value [hex(FF FF FF FA), hex(01 02 03), hex (25, 29, 43)] with each item encoded in base64.

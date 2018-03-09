@@ -1,17 +1,16 @@
 package fixtures.bodydate;
 
+import com.fasterxml.jackson.databind.exc.InvalidFormatException;
 import fixtures.bodydate.implementation.AutoRestDateTestServiceImpl;
-import org.joda.time.IllegalFieldValueException;
-import org.joda.time.LocalDate;
-import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-import java.util.concurrent.CountDownLatch;
+import java.time.LocalDate;
+
+import static org.junit.Assert.*;
 
 public class DateOperationsTests {
     private static AutoRestDateTestService client;
-    private CountDownLatch lock = new CountDownLatch(1);
 
     @BeforeClass
     public static void setup() {
@@ -19,66 +18,63 @@ public class DateOperationsTests {
     }
 
     @Test
-    public void getNull() throws Exception {
-        Assert.assertNull(client.dates().getNull());
+    public void getNull() {
+        assertNull(client.dates().getNull());
     }
 
     @Test
-    public void getInvalidDate() throws Exception {
+    public void getInvalidDate() {
         try {
             client.dates().getInvalidDate();
-            Assert.assertTrue(false);
-        } catch (Exception exception) {
-            // expected
-            Assert.assertEquals(IllegalArgumentException.class, exception.getClass());
+            fail();
+        } catch (RuntimeException exception) {
+            assertEquals(InvalidFormatException.class, exception.getCause().getClass());
         }
     }
 
     @Test
-    public void getOverflowDate() throws Exception {
+    public void getOverflowDate() {
         try {
             client.dates().getOverflowDate();
-            Assert.assertTrue(false);
-        } catch (Exception exception) {
-            // expected
-            Assert.assertEquals(IllegalArgumentException.class, exception.getClass());
+            fail();
+        } catch (RuntimeException exception) {
+            assertEquals(InvalidFormatException.class, exception.getCause().getClass());
         }
     }
 
     @Test
-    public void getUnderflowDate() throws Exception {
+    public void getUnderflowDate() {
         try {
             client.dates().getUnderflowDate();
-            Assert.assertTrue(false);
-        } catch (Exception exception) {
-            // expected
-            Assert.assertEquals(IllegalFieldValueException.class, exception.getClass());
+            fail();
+        } catch (RuntimeException exception) {
+            assertEquals(InvalidFormatException.class, exception.getCause().getClass());
         }
     }
 
     @Test
-    public void putMaxDate() throws Exception {
-        LocalDate body = new LocalDate(9999, 12, 31);
+    public void putMaxDate() {
+        LocalDate body = LocalDate.of(9999, 12, 31);
         client.dates().putMaxDate(body);
     }
 
     @Test
-    public void getMaxDate() throws Exception {
-        LocalDate expected = new LocalDate(9999, 12, 31);
+    public void getMaxDate() {
+        LocalDate expected = LocalDate.of(9999, 12, 31);
         LocalDate result = client.dates().getMaxDate();
-        Assert.assertEquals(expected, result);
+        assertEquals(expected, result);
     }
 
     @Test
-    public void putMinDate() throws Exception {
-        LocalDate body = new LocalDate(1, 1, 1);
+    public void putMinDate() {
+        LocalDate body = LocalDate.of(1, 1, 1);
         client.dates().putMinDate(body);
     }
 
     @Test
-    public void getMinDate() throws Exception {
-        LocalDate expected = new LocalDate(1, 1, 1);
+    public void getMinDate() {
+        LocalDate expected = LocalDate.of(1, 1, 1);
         LocalDate result = client.dates().getMinDate();
-        Assert.assertEquals(expected, result);
+        assertEquals(expected, result);
     }
 }

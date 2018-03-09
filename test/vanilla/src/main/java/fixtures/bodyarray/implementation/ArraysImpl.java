@@ -32,14 +32,14 @@ import io.reactivex.Completable;
 import io.reactivex.Maybe;
 import io.reactivex.Single;
 import io.reactivex.annotations.NonNull;
+import java.time.Duration;
+import java.time.LocalDate;
+import java.time.OffsetDateTime;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.UUID;
-import org.joda.time.DateTime;
-import org.joda.time.LocalDate;
-import org.joda.time.Period;
 
 /**
  * An instance of this class provides access to all the operations defined in
@@ -250,28 +250,28 @@ public final class ArraysImpl implements Arrays {
         @GET("array/prim/date-time/valid")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<BodyResponse<List<DateTime>>> getDateTimeValid();
+        Single<BodyResponse<List<OffsetDateTime>>> getDateTimeValid();
 
         @PUT("array/prim/date-time/valid")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<VoidResponse> putDateTimeValid(@BodyParam("application/json; charset=utf-8") List<DateTime> arrayBody);
+        Single<VoidResponse> putDateTimeValid(@BodyParam("application/json; charset=utf-8") List<OffsetDateTime> arrayBody);
 
         @GET("array/prim/date-time/invalidnull")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<BodyResponse<List<DateTime>>> getDateTimeInvalidNull();
+        Single<BodyResponse<List<OffsetDateTime>>> getDateTimeInvalidNull();
 
         @GET("array/prim/date-time/invalidchars")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<BodyResponse<List<DateTime>>> getDateTimeInvalidChars();
+        Single<BodyResponse<List<OffsetDateTime>>> getDateTimeInvalidChars();
 
         @GET("array/prim/date-time-rfc1123/valid")
         @ExpectedResponses({200})
         @ReturnValueWireType(DateTimeRfc1123.class)
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<BodyResponse<List<DateTime>>> getDateTimeRfc1123Valid();
+        Single<BodyResponse<List<OffsetDateTime>>> getDateTimeRfc1123Valid();
 
         @PUT("array/prim/date-time-rfc1123/valid")
         @ExpectedResponses({200})
@@ -281,12 +281,12 @@ public final class ArraysImpl implements Arrays {
         @GET("array/prim/duration/valid")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<BodyResponse<List<Period>>> getDurationValid();
+        Single<BodyResponse<List<Duration>>> getDurationValid();
 
         @PUT("array/prim/duration/valid")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<VoidResponse> putDurationValid(@BodyParam("application/json; charset=utf-8") List<Period> arrayBody);
+        Single<VoidResponse> putDurationValid(@BodyParam("application/json; charset=utf-8") List<Duration> arrayBody);
 
         @GET("array/prim/byte/valid")
         @ExpectedResponses({200})
@@ -1930,9 +1930,9 @@ public final class ArraysImpl implements Arrays {
      *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the List&lt;DateTime&gt; object if successful.
+     * @return the List&lt;OffsetDateTime&gt; object if successful.
      */
-    public List<DateTime> getDateTimeValid() {
+    public List<OffsetDateTime> getDateTimeValid() {
         return getDateTimeValidAsync().blockingGet();
     }
 
@@ -1943,7 +1943,7 @@ public final class ArraysImpl implements Arrays {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return a ServiceFuture which will be completed with the result of the network request.
      */
-    public ServiceFuture<List<DateTime>> getDateTimeValidAsync(ServiceCallback<List<DateTime>> serviceCallback) {
+    public ServiceFuture<List<OffsetDateTime>> getDateTimeValidAsync(ServiceCallback<List<OffsetDateTime>> serviceCallback) {
         return ServiceFuture.fromBody(getDateTimeValidAsync(), serviceCallback);
     }
 
@@ -1952,7 +1952,7 @@ public final class ArraysImpl implements Arrays {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    public Single<BodyResponse<List<DateTime>>> getDateTimeValidWithRestResponseAsync() {
+    public Single<BodyResponse<List<OffsetDateTime>>> getDateTimeValidWithRestResponseAsync() {
         return service.getDateTimeValid();
     }
 
@@ -1961,43 +1961,43 @@ public final class ArraysImpl implements Arrays {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    public Maybe<List<DateTime>> getDateTimeValidAsync() {
+    public Maybe<List<OffsetDateTime>> getDateTimeValidAsync() {
         return getDateTimeValidWithRestResponseAsync()
-            .flatMapMaybe((BodyResponse<List<DateTime>> res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .flatMapMaybe((BodyResponse<List<OffsetDateTime>> res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
      * Set array value  ['2000-12-01t00:00:01z', '1980-01-02T00:11:35+01:00', '1492-10-12T10:15:01-08:00'].
      *
-     * @param arrayBody the List&lt;DateTime&gt; value.
+     * @param arrayBody the List&lt;OffsetDateTime&gt; value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
-    public void putDateTimeValid(@NonNull List<DateTime> arrayBody) {
+    public void putDateTimeValid(@NonNull List<OffsetDateTime> arrayBody) {
         putDateTimeValidAsync(arrayBody).blockingAwait();
     }
 
     /**
      * Set array value  ['2000-12-01t00:00:01z', '1980-01-02T00:11:35+01:00', '1492-10-12T10:15:01-08:00'].
      *
-     * @param arrayBody the List&lt;DateTime&gt; value.
+     * @param arrayBody the List&lt;OffsetDateTime&gt; value.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return a ServiceFuture which will be completed with the result of the network request.
      */
-    public ServiceFuture<Void> putDateTimeValidAsync(@NonNull List<DateTime> arrayBody, ServiceCallback<Void> serviceCallback) {
+    public ServiceFuture<Void> putDateTimeValidAsync(@NonNull List<OffsetDateTime> arrayBody, ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(putDateTimeValidAsync(arrayBody), serviceCallback);
     }
 
     /**
      * Set array value  ['2000-12-01t00:00:01z', '1980-01-02T00:11:35+01:00', '1492-10-12T10:15:01-08:00'].
      *
-     * @param arrayBody the List&lt;DateTime&gt; value.
+     * @param arrayBody the List&lt;OffsetDateTime&gt; value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return a Single which performs the network request upon subscription.
      */
-    public Single<VoidResponse> putDateTimeValidWithRestResponseAsync(@NonNull List<DateTime> arrayBody) {
+    public Single<VoidResponse> putDateTimeValidWithRestResponseAsync(@NonNull List<OffsetDateTime> arrayBody) {
         if (arrayBody == null) {
             throw new IllegalArgumentException("Parameter arrayBody is required and cannot be null.");
         }
@@ -2008,11 +2008,11 @@ public final class ArraysImpl implements Arrays {
     /**
      * Set array value  ['2000-12-01t00:00:01z', '1980-01-02T00:11:35+01:00', '1492-10-12T10:15:01-08:00'].
      *
-     * @param arrayBody the List&lt;DateTime&gt; value.
+     * @param arrayBody the List&lt;OffsetDateTime&gt; value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return a Single which performs the network request upon subscription.
      */
-    public Completable putDateTimeValidAsync(@NonNull List<DateTime> arrayBody) {
+    public Completable putDateTimeValidAsync(@NonNull List<OffsetDateTime> arrayBody) {
         return putDateTimeValidWithRestResponseAsync(arrayBody)
             .toCompletable();
     }
@@ -2022,9 +2022,9 @@ public final class ArraysImpl implements Arrays {
      *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the List&lt;DateTime&gt; object if successful.
+     * @return the List&lt;OffsetDateTime&gt; object if successful.
      */
-    public List<DateTime> getDateTimeInvalidNull() {
+    public List<OffsetDateTime> getDateTimeInvalidNull() {
         return getDateTimeInvalidNullAsync().blockingGet();
     }
 
@@ -2035,7 +2035,7 @@ public final class ArraysImpl implements Arrays {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return a ServiceFuture which will be completed with the result of the network request.
      */
-    public ServiceFuture<List<DateTime>> getDateTimeInvalidNullAsync(ServiceCallback<List<DateTime>> serviceCallback) {
+    public ServiceFuture<List<OffsetDateTime>> getDateTimeInvalidNullAsync(ServiceCallback<List<OffsetDateTime>> serviceCallback) {
         return ServiceFuture.fromBody(getDateTimeInvalidNullAsync(), serviceCallback);
     }
 
@@ -2044,7 +2044,7 @@ public final class ArraysImpl implements Arrays {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    public Single<BodyResponse<List<DateTime>>> getDateTimeInvalidNullWithRestResponseAsync() {
+    public Single<BodyResponse<List<OffsetDateTime>>> getDateTimeInvalidNullWithRestResponseAsync() {
         return service.getDateTimeInvalidNull();
     }
 
@@ -2053,9 +2053,9 @@ public final class ArraysImpl implements Arrays {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    public Maybe<List<DateTime>> getDateTimeInvalidNullAsync() {
+    public Maybe<List<OffsetDateTime>> getDateTimeInvalidNullAsync() {
         return getDateTimeInvalidNullWithRestResponseAsync()
-            .flatMapMaybe((BodyResponse<List<DateTime>> res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .flatMapMaybe((BodyResponse<List<OffsetDateTime>> res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -2063,9 +2063,9 @@ public final class ArraysImpl implements Arrays {
      *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the List&lt;DateTime&gt; object if successful.
+     * @return the List&lt;OffsetDateTime&gt; object if successful.
      */
-    public List<DateTime> getDateTimeInvalidChars() {
+    public List<OffsetDateTime> getDateTimeInvalidChars() {
         return getDateTimeInvalidCharsAsync().blockingGet();
     }
 
@@ -2076,7 +2076,7 @@ public final class ArraysImpl implements Arrays {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return a ServiceFuture which will be completed with the result of the network request.
      */
-    public ServiceFuture<List<DateTime>> getDateTimeInvalidCharsAsync(ServiceCallback<List<DateTime>> serviceCallback) {
+    public ServiceFuture<List<OffsetDateTime>> getDateTimeInvalidCharsAsync(ServiceCallback<List<OffsetDateTime>> serviceCallback) {
         return ServiceFuture.fromBody(getDateTimeInvalidCharsAsync(), serviceCallback);
     }
 
@@ -2085,7 +2085,7 @@ public final class ArraysImpl implements Arrays {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    public Single<BodyResponse<List<DateTime>>> getDateTimeInvalidCharsWithRestResponseAsync() {
+    public Single<BodyResponse<List<OffsetDateTime>>> getDateTimeInvalidCharsWithRestResponseAsync() {
         return service.getDateTimeInvalidChars();
     }
 
@@ -2094,9 +2094,9 @@ public final class ArraysImpl implements Arrays {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    public Maybe<List<DateTime>> getDateTimeInvalidCharsAsync() {
+    public Maybe<List<OffsetDateTime>> getDateTimeInvalidCharsAsync() {
         return getDateTimeInvalidCharsWithRestResponseAsync()
-            .flatMapMaybe((BodyResponse<List<DateTime>> res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .flatMapMaybe((BodyResponse<List<OffsetDateTime>> res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -2104,9 +2104,9 @@ public final class ArraysImpl implements Arrays {
      *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the List&lt;DateTime&gt; object if successful.
+     * @return the List&lt;OffsetDateTime&gt; object if successful.
      */
-    public List<DateTime> getDateTimeRfc1123Valid() {
+    public List<OffsetDateTime> getDateTimeRfc1123Valid() {
         return getDateTimeRfc1123ValidAsync().blockingGet();
     }
 
@@ -2117,7 +2117,7 @@ public final class ArraysImpl implements Arrays {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return a ServiceFuture which will be completed with the result of the network request.
      */
-    public ServiceFuture<List<DateTime>> getDateTimeRfc1123ValidAsync(ServiceCallback<List<DateTime>> serviceCallback) {
+    public ServiceFuture<List<OffsetDateTime>> getDateTimeRfc1123ValidAsync(ServiceCallback<List<OffsetDateTime>> serviceCallback) {
         return ServiceFuture.fromBody(getDateTimeRfc1123ValidAsync(), serviceCallback);
     }
 
@@ -2126,7 +2126,7 @@ public final class ArraysImpl implements Arrays {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    public Single<BodyResponse<List<DateTime>>> getDateTimeRfc1123ValidWithRestResponseAsync() {
+    public Single<BodyResponse<List<OffsetDateTime>>> getDateTimeRfc1123ValidWithRestResponseAsync() {
         return service.getDateTimeRfc1123Valid();
     }
 
@@ -2135,49 +2135,49 @@ public final class ArraysImpl implements Arrays {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    public Maybe<List<DateTime>> getDateTimeRfc1123ValidAsync() {
+    public Maybe<List<OffsetDateTime>> getDateTimeRfc1123ValidAsync() {
         return getDateTimeRfc1123ValidWithRestResponseAsync()
-            .flatMapMaybe((BodyResponse<List<DateTime>> res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .flatMapMaybe((BodyResponse<List<OffsetDateTime>> res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
      * Set array value  ['Fri, 01 Dec 2000 00:00:01 GMT', 'Wed, 02 Jan 1980 00:11:35 GMT', 'Wed, 12 Oct 1492 10:15:01 GMT'].
      *
-     * @param arrayBody the List&lt;DateTime&gt; value.
+     * @param arrayBody the List&lt;OffsetDateTime&gt; value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
-    public void putDateTimeRfc1123Valid(@NonNull List<DateTime> arrayBody) {
+    public void putDateTimeRfc1123Valid(@NonNull List<OffsetDateTime> arrayBody) {
         putDateTimeRfc1123ValidAsync(arrayBody).blockingAwait();
     }
 
     /**
      * Set array value  ['Fri, 01 Dec 2000 00:00:01 GMT', 'Wed, 02 Jan 1980 00:11:35 GMT', 'Wed, 12 Oct 1492 10:15:01 GMT'].
      *
-     * @param arrayBody the List&lt;DateTime&gt; value.
+     * @param arrayBody the List&lt;OffsetDateTime&gt; value.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return a ServiceFuture which will be completed with the result of the network request.
      */
-    public ServiceFuture<Void> putDateTimeRfc1123ValidAsync(@NonNull List<DateTime> arrayBody, ServiceCallback<Void> serviceCallback) {
+    public ServiceFuture<Void> putDateTimeRfc1123ValidAsync(@NonNull List<OffsetDateTime> arrayBody, ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(putDateTimeRfc1123ValidAsync(arrayBody), serviceCallback);
     }
 
     /**
      * Set array value  ['Fri, 01 Dec 2000 00:00:01 GMT', 'Wed, 02 Jan 1980 00:11:35 GMT', 'Wed, 12 Oct 1492 10:15:01 GMT'].
      *
-     * @param arrayBody the List&lt;DateTime&gt; value.
+     * @param arrayBody the List&lt;OffsetDateTime&gt; value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return a Single which performs the network request upon subscription.
      */
-    public Single<VoidResponse> putDateTimeRfc1123ValidWithRestResponseAsync(@NonNull List<DateTime> arrayBody) {
+    public Single<VoidResponse> putDateTimeRfc1123ValidWithRestResponseAsync(@NonNull List<OffsetDateTime> arrayBody) {
         if (arrayBody == null) {
             throw new IllegalArgumentException("Parameter arrayBody is required and cannot be null.");
         }
         Validator.validate(arrayBody);
         List<DateTimeRfc1123> arrayBodyConverted = new ArrayList<DateTimeRfc1123>();
-        for (DateTime item : arrayBody) {
+        for (OffsetDateTime item : arrayBody) {
             DateTimeRfc1123 value = new DateTimeRfc1123(item);
             arrayBodyConverted.add(value);
         }
@@ -2187,11 +2187,11 @@ public final class ArraysImpl implements Arrays {
     /**
      * Set array value  ['Fri, 01 Dec 2000 00:00:01 GMT', 'Wed, 02 Jan 1980 00:11:35 GMT', 'Wed, 12 Oct 1492 10:15:01 GMT'].
      *
-     * @param arrayBody the List&lt;DateTime&gt; value.
+     * @param arrayBody the List&lt;OffsetDateTime&gt; value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return a Single which performs the network request upon subscription.
      */
-    public Completable putDateTimeRfc1123ValidAsync(@NonNull List<DateTime> arrayBody) {
+    public Completable putDateTimeRfc1123ValidAsync(@NonNull List<OffsetDateTime> arrayBody) {
         return putDateTimeRfc1123ValidWithRestResponseAsync(arrayBody)
             .toCompletable();
     }
@@ -2201,9 +2201,9 @@ public final class ArraysImpl implements Arrays {
      *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the List&lt;Period&gt; object if successful.
+     * @return the List&lt;Duration&gt; object if successful.
      */
-    public List<Period> getDurationValid() {
+    public List<Duration> getDurationValid() {
         return getDurationValidAsync().blockingGet();
     }
 
@@ -2214,7 +2214,7 @@ public final class ArraysImpl implements Arrays {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return a ServiceFuture which will be completed with the result of the network request.
      */
-    public ServiceFuture<List<Period>> getDurationValidAsync(ServiceCallback<List<Period>> serviceCallback) {
+    public ServiceFuture<List<Duration>> getDurationValidAsync(ServiceCallback<List<Duration>> serviceCallback) {
         return ServiceFuture.fromBody(getDurationValidAsync(), serviceCallback);
     }
 
@@ -2223,7 +2223,7 @@ public final class ArraysImpl implements Arrays {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    public Single<BodyResponse<List<Period>>> getDurationValidWithRestResponseAsync() {
+    public Single<BodyResponse<List<Duration>>> getDurationValidWithRestResponseAsync() {
         return service.getDurationValid();
     }
 
@@ -2232,43 +2232,43 @@ public final class ArraysImpl implements Arrays {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    public Maybe<List<Period>> getDurationValidAsync() {
+    public Maybe<List<Duration>> getDurationValidAsync() {
         return getDurationValidWithRestResponseAsync()
-            .flatMapMaybe((BodyResponse<List<Period>> res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .flatMapMaybe((BodyResponse<List<Duration>> res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
      * Set array value  ['P123DT22H14M12.011S', 'P5DT1H0M0S'].
      *
-     * @param arrayBody the List&lt;Period&gt; value.
+     * @param arrayBody the List&lt;Duration&gt; value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
-    public void putDurationValid(@NonNull List<Period> arrayBody) {
+    public void putDurationValid(@NonNull List<Duration> arrayBody) {
         putDurationValidAsync(arrayBody).blockingAwait();
     }
 
     /**
      * Set array value  ['P123DT22H14M12.011S', 'P5DT1H0M0S'].
      *
-     * @param arrayBody the List&lt;Period&gt; value.
+     * @param arrayBody the List&lt;Duration&gt; value.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return a ServiceFuture which will be completed with the result of the network request.
      */
-    public ServiceFuture<Void> putDurationValidAsync(@NonNull List<Period> arrayBody, ServiceCallback<Void> serviceCallback) {
+    public ServiceFuture<Void> putDurationValidAsync(@NonNull List<Duration> arrayBody, ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(putDurationValidAsync(arrayBody), serviceCallback);
     }
 
     /**
      * Set array value  ['P123DT22H14M12.011S', 'P5DT1H0M0S'].
      *
-     * @param arrayBody the List&lt;Period&gt; value.
+     * @param arrayBody the List&lt;Duration&gt; value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return a Single which performs the network request upon subscription.
      */
-    public Single<VoidResponse> putDurationValidWithRestResponseAsync(@NonNull List<Period> arrayBody) {
+    public Single<VoidResponse> putDurationValidWithRestResponseAsync(@NonNull List<Duration> arrayBody) {
         if (arrayBody == null) {
             throw new IllegalArgumentException("Parameter arrayBody is required and cannot be null.");
         }
@@ -2279,11 +2279,11 @@ public final class ArraysImpl implements Arrays {
     /**
      * Set array value  ['P123DT22H14M12.011S', 'P5DT1H0M0S'].
      *
-     * @param arrayBody the List&lt;Period&gt; value.
+     * @param arrayBody the List&lt;Duration&gt; value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return a Single which performs the network request upon subscription.
      */
-    public Completable putDurationValidAsync(@NonNull List<Period> arrayBody) {
+    public Completable putDurationValidAsync(@NonNull List<Duration> arrayBody) {
         return putDurationValidWithRestResponseAsync(arrayBody)
             .toCompletable();
     }

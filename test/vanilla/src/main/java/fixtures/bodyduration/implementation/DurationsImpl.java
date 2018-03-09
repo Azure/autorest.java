@@ -27,7 +27,7 @@ import io.reactivex.Completable;
 import io.reactivex.Maybe;
 import io.reactivex.Single;
 import io.reactivex.annotations.NonNull;
-import org.joda.time.Period;
+import java.time.Duration;
 
 /**
  * An instance of this class provides access to all the operations defined in
@@ -63,22 +63,22 @@ public final class DurationsImpl implements Durations {
         @GET("duration/null")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<BodyResponse<Period>> getNull();
+        Single<BodyResponse<Duration>> getNull();
 
         @PUT("duration/positiveduration")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<VoidResponse> putPositiveDuration(@BodyParam("application/json; charset=utf-8") Period durationBody);
+        Single<VoidResponse> putPositiveDuration(@BodyParam("application/json; charset=utf-8") Duration durationBody);
 
         @GET("duration/positiveduration")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<BodyResponse<Period>> getPositiveDuration();
+        Single<BodyResponse<Duration>> getPositiveDuration();
 
         @GET("duration/invalid")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<BodyResponse<Period>> getInvalid();
+        Single<BodyResponse<Duration>> getInvalid();
     }
 
     /**
@@ -86,9 +86,9 @@ public final class DurationsImpl implements Durations {
      *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the Period object if successful.
+     * @return the Duration object if successful.
      */
-    public Period getNull() {
+    public Duration getNull() {
         return getNullAsync().blockingGet();
     }
 
@@ -99,7 +99,7 @@ public final class DurationsImpl implements Durations {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return a ServiceFuture which will be completed with the result of the network request.
      */
-    public ServiceFuture<Period> getNullAsync(ServiceCallback<Period> serviceCallback) {
+    public ServiceFuture<Duration> getNullAsync(ServiceCallback<Duration> serviceCallback) {
         return ServiceFuture.fromBody(getNullAsync(), serviceCallback);
     }
 
@@ -108,7 +108,7 @@ public final class DurationsImpl implements Durations {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    public Single<BodyResponse<Period>> getNullWithRestResponseAsync() {
+    public Single<BodyResponse<Duration>> getNullWithRestResponseAsync() {
         return service.getNull();
     }
 
@@ -117,43 +117,43 @@ public final class DurationsImpl implements Durations {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    public Maybe<Period> getNullAsync() {
+    public Maybe<Duration> getNullAsync() {
         return getNullWithRestResponseAsync()
-            .flatMapMaybe((BodyResponse<Period> res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .flatMapMaybe((BodyResponse<Duration> res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
      * Put a positive duration value.
      *
-     * @param durationBody the Period value.
+     * @param durationBody the Duration value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
-    public void putPositiveDuration(@NonNull Period durationBody) {
+    public void putPositiveDuration(@NonNull Duration durationBody) {
         putPositiveDurationAsync(durationBody).blockingAwait();
     }
 
     /**
      * Put a positive duration value.
      *
-     * @param durationBody the Period value.
+     * @param durationBody the Duration value.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return a ServiceFuture which will be completed with the result of the network request.
      */
-    public ServiceFuture<Void> putPositiveDurationAsync(@NonNull Period durationBody, ServiceCallback<Void> serviceCallback) {
+    public ServiceFuture<Void> putPositiveDurationAsync(@NonNull Duration durationBody, ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(putPositiveDurationAsync(durationBody), serviceCallback);
     }
 
     /**
      * Put a positive duration value.
      *
-     * @param durationBody the Period value.
+     * @param durationBody the Duration value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return a Single which performs the network request upon subscription.
      */
-    public Single<VoidResponse> putPositiveDurationWithRestResponseAsync(@NonNull Period durationBody) {
+    public Single<VoidResponse> putPositiveDurationWithRestResponseAsync(@NonNull Duration durationBody) {
         if (durationBody == null) {
             throw new IllegalArgumentException("Parameter durationBody is required and cannot be null.");
         }
@@ -163,11 +163,11 @@ public final class DurationsImpl implements Durations {
     /**
      * Put a positive duration value.
      *
-     * @param durationBody the Period value.
+     * @param durationBody the Duration value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return a Single which performs the network request upon subscription.
      */
-    public Completable putPositiveDurationAsync(@NonNull Period durationBody) {
+    public Completable putPositiveDurationAsync(@NonNull Duration durationBody) {
         return putPositiveDurationWithRestResponseAsync(durationBody)
             .toCompletable();
     }
@@ -177,9 +177,9 @@ public final class DurationsImpl implements Durations {
      *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the Period object if successful.
+     * @return the Duration object if successful.
      */
-    public Period getPositiveDuration() {
+    public Duration getPositiveDuration() {
         return getPositiveDurationAsync().blockingGet();
     }
 
@@ -190,7 +190,7 @@ public final class DurationsImpl implements Durations {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return a ServiceFuture which will be completed with the result of the network request.
      */
-    public ServiceFuture<Period> getPositiveDurationAsync(ServiceCallback<Period> serviceCallback) {
+    public ServiceFuture<Duration> getPositiveDurationAsync(ServiceCallback<Duration> serviceCallback) {
         return ServiceFuture.fromBody(getPositiveDurationAsync(), serviceCallback);
     }
 
@@ -199,7 +199,7 @@ public final class DurationsImpl implements Durations {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    public Single<BodyResponse<Period>> getPositiveDurationWithRestResponseAsync() {
+    public Single<BodyResponse<Duration>> getPositiveDurationWithRestResponseAsync() {
         return service.getPositiveDuration();
     }
 
@@ -208,9 +208,9 @@ public final class DurationsImpl implements Durations {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    public Maybe<Period> getPositiveDurationAsync() {
+    public Maybe<Duration> getPositiveDurationAsync() {
         return getPositiveDurationWithRestResponseAsync()
-            .flatMapMaybe((BodyResponse<Period> res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .flatMapMaybe((BodyResponse<Duration> res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -218,9 +218,9 @@ public final class DurationsImpl implements Durations {
      *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the Period object if successful.
+     * @return the Duration object if successful.
      */
-    public Period getInvalid() {
+    public Duration getInvalid() {
         return getInvalidAsync().blockingGet();
     }
 
@@ -231,7 +231,7 @@ public final class DurationsImpl implements Durations {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return a ServiceFuture which will be completed with the result of the network request.
      */
-    public ServiceFuture<Period> getInvalidAsync(ServiceCallback<Period> serviceCallback) {
+    public ServiceFuture<Duration> getInvalidAsync(ServiceCallback<Duration> serviceCallback) {
         return ServiceFuture.fromBody(getInvalidAsync(), serviceCallback);
     }
 
@@ -240,7 +240,7 @@ public final class DurationsImpl implements Durations {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    public Single<BodyResponse<Period>> getInvalidWithRestResponseAsync() {
+    public Single<BodyResponse<Duration>> getInvalidWithRestResponseAsync() {
         return service.getInvalid();
     }
 
@@ -249,8 +249,8 @@ public final class DurationsImpl implements Durations {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    public Maybe<Period> getInvalidAsync() {
+    public Maybe<Duration> getInvalidAsync() {
         return getInvalidWithRestResponseAsync()
-            .flatMapMaybe((BodyResponse<Period> res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .flatMapMaybe((BodyResponse<Duration> res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 }

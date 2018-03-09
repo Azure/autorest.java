@@ -29,7 +29,7 @@ import io.reactivex.Completable;
 import io.reactivex.Maybe;
 import io.reactivex.Single;
 import io.reactivex.annotations.NonNull;
-import org.joda.time.DateTime;
+import java.time.OffsetDateTime;
 
 /**
  * An instance of this class provides access to all the operations defined in
@@ -66,25 +66,25 @@ public final class Datetimerfc1123sImpl implements Datetimerfc1123s {
         @ExpectedResponses({200})
         @ReturnValueWireType(DateTimeRfc1123.class)
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<BodyResponse<DateTime>> getNull();
+        Single<BodyResponse<OffsetDateTime>> getNull();
 
         @GET("datetimerfc1123/invalid")
         @ExpectedResponses({200})
         @ReturnValueWireType(DateTimeRfc1123.class)
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<BodyResponse<DateTime>> getInvalid();
+        Single<BodyResponse<OffsetDateTime>> getInvalid();
 
         @GET("datetimerfc1123/overflow")
         @ExpectedResponses({200})
         @ReturnValueWireType(DateTimeRfc1123.class)
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<BodyResponse<DateTime>> getOverflow();
+        Single<BodyResponse<OffsetDateTime>> getOverflow();
 
         @GET("datetimerfc1123/underflow")
         @ExpectedResponses({200})
         @ReturnValueWireType(DateTimeRfc1123.class)
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<BodyResponse<DateTime>> getUnderflow();
+        Single<BodyResponse<OffsetDateTime>> getUnderflow();
 
         @PUT("datetimerfc1123/max")
         @ExpectedResponses({200})
@@ -95,13 +95,13 @@ public final class Datetimerfc1123sImpl implements Datetimerfc1123s {
         @ExpectedResponses({200})
         @ReturnValueWireType(DateTimeRfc1123.class)
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<BodyResponse<DateTime>> getUtcLowercaseMaxDateTime();
+        Single<BodyResponse<OffsetDateTime>> getUtcLowercaseMaxDateTime();
 
         @GET("datetimerfc1123/max/uppercase")
         @ExpectedResponses({200})
         @ReturnValueWireType(DateTimeRfc1123.class)
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<BodyResponse<DateTime>> getUtcUppercaseMaxDateTime();
+        Single<BodyResponse<OffsetDateTime>> getUtcUppercaseMaxDateTime();
 
         @PUT("datetimerfc1123/min")
         @ExpectedResponses({200})
@@ -112,7 +112,7 @@ public final class Datetimerfc1123sImpl implements Datetimerfc1123s {
         @ExpectedResponses({200})
         @ReturnValueWireType(DateTimeRfc1123.class)
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<BodyResponse<DateTime>> getUtcMinDateTime();
+        Single<BodyResponse<OffsetDateTime>> getUtcMinDateTime();
     }
 
     /**
@@ -120,9 +120,9 @@ public final class Datetimerfc1123sImpl implements Datetimerfc1123s {
      *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the DateTime object if successful.
+     * @return the OffsetDateTime object if successful.
      */
-    public DateTime getNull() {
+    public OffsetDateTime getNull() {
         return getNullAsync().blockingGet();
     }
 
@@ -133,7 +133,7 @@ public final class Datetimerfc1123sImpl implements Datetimerfc1123s {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return a ServiceFuture which will be completed with the result of the network request.
      */
-    public ServiceFuture<DateTime> getNullAsync(ServiceCallback<DateTime> serviceCallback) {
+    public ServiceFuture<OffsetDateTime> getNullAsync(ServiceCallback<OffsetDateTime> serviceCallback) {
         return ServiceFuture.fromBody(getNullAsync(), serviceCallback);
     }
 
@@ -142,7 +142,7 @@ public final class Datetimerfc1123sImpl implements Datetimerfc1123s {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    public Single<BodyResponse<DateTime>> getNullWithRestResponseAsync() {
+    public Single<BodyResponse<OffsetDateTime>> getNullWithRestResponseAsync() {
         return service.getNull();
     }
 
@@ -151,9 +151,9 @@ public final class Datetimerfc1123sImpl implements Datetimerfc1123s {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    public Maybe<DateTime> getNullAsync() {
+    public Maybe<OffsetDateTime> getNullAsync() {
         return getNullWithRestResponseAsync()
-            .flatMapMaybe((BodyResponse<DateTime> res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .flatMapMaybe((BodyResponse<OffsetDateTime> res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -161,9 +161,9 @@ public final class Datetimerfc1123sImpl implements Datetimerfc1123s {
      *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the DateTime object if successful.
+     * @return the OffsetDateTime object if successful.
      */
-    public DateTime getInvalid() {
+    public OffsetDateTime getInvalid() {
         return getInvalidAsync().blockingGet();
     }
 
@@ -174,7 +174,7 @@ public final class Datetimerfc1123sImpl implements Datetimerfc1123s {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return a ServiceFuture which will be completed with the result of the network request.
      */
-    public ServiceFuture<DateTime> getInvalidAsync(ServiceCallback<DateTime> serviceCallback) {
+    public ServiceFuture<OffsetDateTime> getInvalidAsync(ServiceCallback<OffsetDateTime> serviceCallback) {
         return ServiceFuture.fromBody(getInvalidAsync(), serviceCallback);
     }
 
@@ -183,7 +183,7 @@ public final class Datetimerfc1123sImpl implements Datetimerfc1123s {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    public Single<BodyResponse<DateTime>> getInvalidWithRestResponseAsync() {
+    public Single<BodyResponse<OffsetDateTime>> getInvalidWithRestResponseAsync() {
         return service.getInvalid();
     }
 
@@ -192,9 +192,9 @@ public final class Datetimerfc1123sImpl implements Datetimerfc1123s {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    public Maybe<DateTime> getInvalidAsync() {
+    public Maybe<OffsetDateTime> getInvalidAsync() {
         return getInvalidWithRestResponseAsync()
-            .flatMapMaybe((BodyResponse<DateTime> res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .flatMapMaybe((BodyResponse<OffsetDateTime> res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -202,9 +202,9 @@ public final class Datetimerfc1123sImpl implements Datetimerfc1123s {
      *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the DateTime object if successful.
+     * @return the OffsetDateTime object if successful.
      */
-    public DateTime getOverflow() {
+    public OffsetDateTime getOverflow() {
         return getOverflowAsync().blockingGet();
     }
 
@@ -215,7 +215,7 @@ public final class Datetimerfc1123sImpl implements Datetimerfc1123s {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return a ServiceFuture which will be completed with the result of the network request.
      */
-    public ServiceFuture<DateTime> getOverflowAsync(ServiceCallback<DateTime> serviceCallback) {
+    public ServiceFuture<OffsetDateTime> getOverflowAsync(ServiceCallback<OffsetDateTime> serviceCallback) {
         return ServiceFuture.fromBody(getOverflowAsync(), serviceCallback);
     }
 
@@ -224,7 +224,7 @@ public final class Datetimerfc1123sImpl implements Datetimerfc1123s {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    public Single<BodyResponse<DateTime>> getOverflowWithRestResponseAsync() {
+    public Single<BodyResponse<OffsetDateTime>> getOverflowWithRestResponseAsync() {
         return service.getOverflow();
     }
 
@@ -233,9 +233,9 @@ public final class Datetimerfc1123sImpl implements Datetimerfc1123s {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    public Maybe<DateTime> getOverflowAsync() {
+    public Maybe<OffsetDateTime> getOverflowAsync() {
         return getOverflowWithRestResponseAsync()
-            .flatMapMaybe((BodyResponse<DateTime> res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .flatMapMaybe((BodyResponse<OffsetDateTime> res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -243,9 +243,9 @@ public final class Datetimerfc1123sImpl implements Datetimerfc1123s {
      *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the DateTime object if successful.
+     * @return the OffsetDateTime object if successful.
      */
-    public DateTime getUnderflow() {
+    public OffsetDateTime getUnderflow() {
         return getUnderflowAsync().blockingGet();
     }
 
@@ -256,7 +256,7 @@ public final class Datetimerfc1123sImpl implements Datetimerfc1123s {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return a ServiceFuture which will be completed with the result of the network request.
      */
-    public ServiceFuture<DateTime> getUnderflowAsync(ServiceCallback<DateTime> serviceCallback) {
+    public ServiceFuture<OffsetDateTime> getUnderflowAsync(ServiceCallback<OffsetDateTime> serviceCallback) {
         return ServiceFuture.fromBody(getUnderflowAsync(), serviceCallback);
     }
 
@@ -265,7 +265,7 @@ public final class Datetimerfc1123sImpl implements Datetimerfc1123s {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    public Single<BodyResponse<DateTime>> getUnderflowWithRestResponseAsync() {
+    public Single<BodyResponse<OffsetDateTime>> getUnderflowWithRestResponseAsync() {
         return service.getUnderflow();
     }
 
@@ -274,43 +274,43 @@ public final class Datetimerfc1123sImpl implements Datetimerfc1123s {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    public Maybe<DateTime> getUnderflowAsync() {
+    public Maybe<OffsetDateTime> getUnderflowAsync() {
         return getUnderflowWithRestResponseAsync()
-            .flatMapMaybe((BodyResponse<DateTime> res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .flatMapMaybe((BodyResponse<OffsetDateTime> res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
      * Put max datetime value Fri, 31 Dec 9999 23:59:59 GMT.
      *
-     * @param datetimeBody the DateTime value.
+     * @param datetimeBody the OffsetDateTime value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
-    public void putUtcMaxDateTime(@NonNull DateTime datetimeBody) {
+    public void putUtcMaxDateTime(@NonNull OffsetDateTime datetimeBody) {
         putUtcMaxDateTimeAsync(datetimeBody).blockingAwait();
     }
 
     /**
      * Put max datetime value Fri, 31 Dec 9999 23:59:59 GMT.
      *
-     * @param datetimeBody the DateTime value.
+     * @param datetimeBody the OffsetDateTime value.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return a ServiceFuture which will be completed with the result of the network request.
      */
-    public ServiceFuture<Void> putUtcMaxDateTimeAsync(@NonNull DateTime datetimeBody, ServiceCallback<Void> serviceCallback) {
+    public ServiceFuture<Void> putUtcMaxDateTimeAsync(@NonNull OffsetDateTime datetimeBody, ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(putUtcMaxDateTimeAsync(datetimeBody), serviceCallback);
     }
 
     /**
      * Put max datetime value Fri, 31 Dec 9999 23:59:59 GMT.
      *
-     * @param datetimeBody the DateTime value.
+     * @param datetimeBody the OffsetDateTime value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return a Single which performs the network request upon subscription.
      */
-    public Single<VoidResponse> putUtcMaxDateTimeWithRestResponseAsync(@NonNull DateTime datetimeBody) {
+    public Single<VoidResponse> putUtcMaxDateTimeWithRestResponseAsync(@NonNull OffsetDateTime datetimeBody) {
         if (datetimeBody == null) {
             throw new IllegalArgumentException("Parameter datetimeBody is required and cannot be null.");
         }
@@ -321,11 +321,11 @@ public final class Datetimerfc1123sImpl implements Datetimerfc1123s {
     /**
      * Put max datetime value Fri, 31 Dec 9999 23:59:59 GMT.
      *
-     * @param datetimeBody the DateTime value.
+     * @param datetimeBody the OffsetDateTime value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return a Single which performs the network request upon subscription.
      */
-    public Completable putUtcMaxDateTimeAsync(@NonNull DateTime datetimeBody) {
+    public Completable putUtcMaxDateTimeAsync(@NonNull OffsetDateTime datetimeBody) {
         return putUtcMaxDateTimeWithRestResponseAsync(datetimeBody)
             .toCompletable();
     }
@@ -335,9 +335,9 @@ public final class Datetimerfc1123sImpl implements Datetimerfc1123s {
      *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the DateTime object if successful.
+     * @return the OffsetDateTime object if successful.
      */
-    public DateTime getUtcLowercaseMaxDateTime() {
+    public OffsetDateTime getUtcLowercaseMaxDateTime() {
         return getUtcLowercaseMaxDateTimeAsync().blockingGet();
     }
 
@@ -348,7 +348,7 @@ public final class Datetimerfc1123sImpl implements Datetimerfc1123s {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return a ServiceFuture which will be completed with the result of the network request.
      */
-    public ServiceFuture<DateTime> getUtcLowercaseMaxDateTimeAsync(ServiceCallback<DateTime> serviceCallback) {
+    public ServiceFuture<OffsetDateTime> getUtcLowercaseMaxDateTimeAsync(ServiceCallback<OffsetDateTime> serviceCallback) {
         return ServiceFuture.fromBody(getUtcLowercaseMaxDateTimeAsync(), serviceCallback);
     }
 
@@ -357,7 +357,7 @@ public final class Datetimerfc1123sImpl implements Datetimerfc1123s {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    public Single<BodyResponse<DateTime>> getUtcLowercaseMaxDateTimeWithRestResponseAsync() {
+    public Single<BodyResponse<OffsetDateTime>> getUtcLowercaseMaxDateTimeWithRestResponseAsync() {
         return service.getUtcLowercaseMaxDateTime();
     }
 
@@ -366,9 +366,9 @@ public final class Datetimerfc1123sImpl implements Datetimerfc1123s {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    public Maybe<DateTime> getUtcLowercaseMaxDateTimeAsync() {
+    public Maybe<OffsetDateTime> getUtcLowercaseMaxDateTimeAsync() {
         return getUtcLowercaseMaxDateTimeWithRestResponseAsync()
-            .flatMapMaybe((BodyResponse<DateTime> res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .flatMapMaybe((BodyResponse<OffsetDateTime> res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -376,9 +376,9 @@ public final class Datetimerfc1123sImpl implements Datetimerfc1123s {
      *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the DateTime object if successful.
+     * @return the OffsetDateTime object if successful.
      */
-    public DateTime getUtcUppercaseMaxDateTime() {
+    public OffsetDateTime getUtcUppercaseMaxDateTime() {
         return getUtcUppercaseMaxDateTimeAsync().blockingGet();
     }
 
@@ -389,7 +389,7 @@ public final class Datetimerfc1123sImpl implements Datetimerfc1123s {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return a ServiceFuture which will be completed with the result of the network request.
      */
-    public ServiceFuture<DateTime> getUtcUppercaseMaxDateTimeAsync(ServiceCallback<DateTime> serviceCallback) {
+    public ServiceFuture<OffsetDateTime> getUtcUppercaseMaxDateTimeAsync(ServiceCallback<OffsetDateTime> serviceCallback) {
         return ServiceFuture.fromBody(getUtcUppercaseMaxDateTimeAsync(), serviceCallback);
     }
 
@@ -398,7 +398,7 @@ public final class Datetimerfc1123sImpl implements Datetimerfc1123s {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    public Single<BodyResponse<DateTime>> getUtcUppercaseMaxDateTimeWithRestResponseAsync() {
+    public Single<BodyResponse<OffsetDateTime>> getUtcUppercaseMaxDateTimeWithRestResponseAsync() {
         return service.getUtcUppercaseMaxDateTime();
     }
 
@@ -407,43 +407,43 @@ public final class Datetimerfc1123sImpl implements Datetimerfc1123s {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    public Maybe<DateTime> getUtcUppercaseMaxDateTimeAsync() {
+    public Maybe<OffsetDateTime> getUtcUppercaseMaxDateTimeAsync() {
         return getUtcUppercaseMaxDateTimeWithRestResponseAsync()
-            .flatMapMaybe((BodyResponse<DateTime> res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .flatMapMaybe((BodyResponse<OffsetDateTime> res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
      * Put min datetime value Mon, 1 Jan 0001 00:00:00 GMT.
      *
-     * @param datetimeBody the DateTime value.
+     * @param datetimeBody the OffsetDateTime value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
-    public void putUtcMinDateTime(@NonNull DateTime datetimeBody) {
+    public void putUtcMinDateTime(@NonNull OffsetDateTime datetimeBody) {
         putUtcMinDateTimeAsync(datetimeBody).blockingAwait();
     }
 
     /**
      * Put min datetime value Mon, 1 Jan 0001 00:00:00 GMT.
      *
-     * @param datetimeBody the DateTime value.
+     * @param datetimeBody the OffsetDateTime value.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return a ServiceFuture which will be completed with the result of the network request.
      */
-    public ServiceFuture<Void> putUtcMinDateTimeAsync(@NonNull DateTime datetimeBody, ServiceCallback<Void> serviceCallback) {
+    public ServiceFuture<Void> putUtcMinDateTimeAsync(@NonNull OffsetDateTime datetimeBody, ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(putUtcMinDateTimeAsync(datetimeBody), serviceCallback);
     }
 
     /**
      * Put min datetime value Mon, 1 Jan 0001 00:00:00 GMT.
      *
-     * @param datetimeBody the DateTime value.
+     * @param datetimeBody the OffsetDateTime value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return a Single which performs the network request upon subscription.
      */
-    public Single<VoidResponse> putUtcMinDateTimeWithRestResponseAsync(@NonNull DateTime datetimeBody) {
+    public Single<VoidResponse> putUtcMinDateTimeWithRestResponseAsync(@NonNull OffsetDateTime datetimeBody) {
         if (datetimeBody == null) {
             throw new IllegalArgumentException("Parameter datetimeBody is required and cannot be null.");
         }
@@ -454,11 +454,11 @@ public final class Datetimerfc1123sImpl implements Datetimerfc1123s {
     /**
      * Put min datetime value Mon, 1 Jan 0001 00:00:00 GMT.
      *
-     * @param datetimeBody the DateTime value.
+     * @param datetimeBody the OffsetDateTime value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return a Single which performs the network request upon subscription.
      */
-    public Completable putUtcMinDateTimeAsync(@NonNull DateTime datetimeBody) {
+    public Completable putUtcMinDateTimeAsync(@NonNull OffsetDateTime datetimeBody) {
         return putUtcMinDateTimeWithRestResponseAsync(datetimeBody)
             .toCompletable();
     }
@@ -468,9 +468,9 @@ public final class Datetimerfc1123sImpl implements Datetimerfc1123s {
      *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the DateTime object if successful.
+     * @return the OffsetDateTime object if successful.
      */
-    public DateTime getUtcMinDateTime() {
+    public OffsetDateTime getUtcMinDateTime() {
         return getUtcMinDateTimeAsync().blockingGet();
     }
 
@@ -481,7 +481,7 @@ public final class Datetimerfc1123sImpl implements Datetimerfc1123s {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return a ServiceFuture which will be completed with the result of the network request.
      */
-    public ServiceFuture<DateTime> getUtcMinDateTimeAsync(ServiceCallback<DateTime> serviceCallback) {
+    public ServiceFuture<OffsetDateTime> getUtcMinDateTimeAsync(ServiceCallback<OffsetDateTime> serviceCallback) {
         return ServiceFuture.fromBody(getUtcMinDateTimeAsync(), serviceCallback);
     }
 
@@ -490,7 +490,7 @@ public final class Datetimerfc1123sImpl implements Datetimerfc1123s {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    public Single<BodyResponse<DateTime>> getUtcMinDateTimeWithRestResponseAsync() {
+    public Single<BodyResponse<OffsetDateTime>> getUtcMinDateTimeWithRestResponseAsync() {
         return service.getUtcMinDateTime();
     }
 
@@ -499,8 +499,8 @@ public final class Datetimerfc1123sImpl implements Datetimerfc1123s {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    public Maybe<DateTime> getUtcMinDateTimeAsync() {
+    public Maybe<OffsetDateTime> getUtcMinDateTimeAsync() {
         return getUtcMinDateTimeWithRestResponseAsync()
-            .flatMapMaybe((BodyResponse<DateTime> res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .flatMapMaybe((BodyResponse<OffsetDateTime> res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 }
