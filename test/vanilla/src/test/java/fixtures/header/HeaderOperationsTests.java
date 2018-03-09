@@ -51,7 +51,7 @@ public class HeaderOperationsTests {
         headers.set("x-ms-client-request-id", "9C4D50EE-2D56-4CD3-8152-34347DC9F2B0");
 
         HttpPipeline httpPipeline = new HttpPipelineBuilder()
-                .withUserAgent("")
+                .withUserAgentPolicy("")
                 .withRequestPolicy(new AddHeadersPolicyFactory(headers))
                 .withRequestPolicy(new ProtocolPolicyFactory("http"))
                 .withRequestPolicy(new PortPolicyFactory(3000))
