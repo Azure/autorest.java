@@ -18,9 +18,9 @@ import fixtures.url.models.UriColor;
 import io.reactivex.Completable;
 import io.reactivex.Single;
 import io.reactivex.annotations.NonNull;
+import java.time.LocalDate;
+import java.time.OffsetDateTime;
 import java.util.List;
-import org.joda.time.DateTime;
-import org.joda.time.LocalDate;
 
 /**
  * An instance of this class provides access to all the operations defined in
@@ -759,7 +759,7 @@ public interface Paths {
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
-    void dateTimeNull(@NonNull DateTime dateTimePath);
+    void dateTimeNull(@NonNull OffsetDateTime dateTimePath);
 
     /**
      * Get null as date-time, should be disallowed or throw depending on representation of date-time.
@@ -769,7 +769,7 @@ public interface Paths {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return a ServiceFuture which will be completed with the result of the network request.
      */
-    ServiceFuture<Void> dateTimeNullAsync(@NonNull DateTime dateTimePath, ServiceCallback<Void> serviceCallback);
+    ServiceFuture<Void> dateTimeNullAsync(@NonNull OffsetDateTime dateTimePath, ServiceCallback<Void> serviceCallback);
 
     /**
      * Get null as date-time, should be disallowed or throw depending on representation of date-time.
@@ -778,7 +778,7 @@ public interface Paths {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return a Single which performs the network request upon subscription.
      */
-    Single<VoidResponse> dateTimeNullWithRestResponseAsync(@NonNull DateTime dateTimePath);
+    Single<VoidResponse> dateTimeNullWithRestResponseAsync(@NonNull OffsetDateTime dateTimePath);
 
     /**
      * Get null as date-time, should be disallowed or throw depending on representation of date-time.
@@ -787,7 +787,7 @@ public interface Paths {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return a Single which performs the network request upon subscription.
      */
-    Completable dateTimeNullAsync(@NonNull DateTime dateTimePath);
+    Completable dateTimeNullAsync(@NonNull OffsetDateTime dateTimePath);
 
     /**
      * Get 'lorem' encoded value as 'bG9yZW0' (base64url).
@@ -873,7 +873,7 @@ public interface Paths {
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
-    void unixTimeUrl(@NonNull DateTime unixTimeUrlPath);
+    void unixTimeUrl(@NonNull OffsetDateTime unixTimeUrlPath);
 
     /**
      * Get the date 2016-04-13 encoded value as '1460505600' (Unix time).
@@ -883,7 +883,7 @@ public interface Paths {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return a ServiceFuture which will be completed with the result of the network request.
      */
-    ServiceFuture<Void> unixTimeUrlAsync(@NonNull DateTime unixTimeUrlPath, ServiceCallback<Void> serviceCallback);
+    ServiceFuture<Void> unixTimeUrlAsync(@NonNull OffsetDateTime unixTimeUrlPath, ServiceCallback<Void> serviceCallback);
 
     /**
      * Get the date 2016-04-13 encoded value as '1460505600' (Unix time).
@@ -892,7 +892,7 @@ public interface Paths {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return a Single which performs the network request upon subscription.
      */
-    Single<VoidResponse> unixTimeUrlWithRestResponseAsync(@NonNull DateTime unixTimeUrlPath);
+    Single<VoidResponse> unixTimeUrlWithRestResponseAsync(@NonNull OffsetDateTime unixTimeUrlPath);
 
     /**
      * Get the date 2016-04-13 encoded value as '1460505600' (Unix time).
@@ -901,5 +901,5 @@ public interface Paths {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return a Single which performs the network request upon subscription.
      */
-    Completable unixTimeUrlAsync(@NonNull DateTime unixTimeUrlPath);
+    Completable unixTimeUrlAsync(@NonNull OffsetDateTime unixTimeUrlPath);
 }

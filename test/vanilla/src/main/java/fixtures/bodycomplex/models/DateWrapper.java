@@ -11,7 +11,7 @@
 package fixtures.bodycomplex.models;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import org.joda.time.LocalDate;
+import java.time.LocalDate;
 
 /**
  * The DateWrapper model.

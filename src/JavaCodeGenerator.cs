@@ -91,7 +91,7 @@ namespace AutoRest.Java
             "byte[]", "Byte[]",
             "String",
             "LocalDate",
-            "DateTime",
+            "OffsetDateTime",
             "DateTimeRfc1123",
             "Duration",
             "Period",
@@ -154,7 +154,6 @@ namespace AutoRest.Java
                 package: codeModel.Namespace.ToLowerInvariant(),
                 shouldGenerateXmlSerialization: codeModel.ShouldGenerateXmlSerialization,
                 nonNullAnnotations: GetBoolSetting(autoRestSettings, "non-null-annotations", true),
-                stringDates: GetBoolSetting(autoRestSettings, "string-dates"),
                 clientTypePrefix: GetStringSetting(autoRestSettings, "client-type-prefix"),
                 generateClientInterfaces: GetBoolSetting(autoRestSettings, "generate-client-interfaces", true),
                 implementationSubpackage: GetStringSetting(autoRestSettings, "implementation-subpackage", "implementation"),
@@ -1428,13 +1427,13 @@ namespace AutoRest.Java
                             result = ArrayType.ByteArray;
                             break;
                         case AutoRestKnownPrimaryType.Date:
-                            result = settings.StringDates ? ClassType.String : ClassType.JodaLocalDate;
+                            result = ClassType.LocalDate;
                             break;
                         case AutoRestKnownPrimaryType.DateTime:
-                            result = settings.StringDates ? ClassType.String : ClassType.JodaDateTime;
+                            result = ClassType.DateTime;
                             break;
                         case AutoRestKnownPrimaryType.DateTimeRfc1123:
-                            result = settings.StringDates ? ClassType.String : ClassType.DateTimeRfc1123;
+                            result = ClassType.DateTimeRfc1123;
                             break;
                         case AutoRestKnownPrimaryType.Double:
                             result = PrimitiveType.Double;
@@ -1462,10 +1461,10 @@ namespace AutoRest.Java
                             }
                             break;
                         case AutoRestKnownPrimaryType.TimeSpan:
-                            result = ClassType.JodaPeriod;
+                            result = ClassType.Duration;
                             break;
                         case AutoRestKnownPrimaryType.UnixTime:
-                            result = settings.StringDates ? (IType)ClassType.String : PrimitiveType.UnixTimeLong;
+                            result = PrimitiveType.UnixTimeLong;
                             break;
                         case AutoRestKnownPrimaryType.Uuid:
                             result = ClassType.UUID;
@@ -2684,7 +2683,7 @@ namespace AutoRest.Java
                             string propertyConversion = null;
                             switch (sourceTypeName.ToLower())
                             {
-                                case "datetime":
+                                case "offsetdatetime":
                                     switch (targetTypeName.ToLower())
                                     {
                                         case "datetimerfc1123":
@@ -2696,7 +2695,7 @@ namespace AutoRest.Java
                                 case "datetimerfc1123":
                                     switch (targetTypeName.ToLower())
                                     {
-                                        case "datetime":
+                                        case "offsetdatetime":
                                             propertyConversion = $"{expression}.dateTime()";
                                             break;
                                     }
@@ -2742,7 +2741,7 @@ namespace AutoRest.Java
                                     {
                                         switch (sourceTypeName.ToLower())
                                         {
-                                            case "datetime":
+                                            case "offsetdatetime":
                                                 switch (targetTypeName.ToLower())
                                                 {
                                                     case "datetimerfc1123":
@@ -2754,7 +2753,7 @@ namespace AutoRest.Java
                                             case "datetimerfc1123":
                                                 switch (targetTypeName.ToLower())
                                                 {
-                                                    case "datetime":
+                                                    case "offsetdatetime":
                                                         propertyConversion = $"{expression}.dateTime()";
                                                         break;
                                                 }
@@ -3032,7 +3031,7 @@ namespace AutoRest.Java
             }
             else if (modelType == ClassType.DateTimeRfc1123)
             {
-                clientType = ClassType.JodaDateTime;
+                clientType = ClassType.DateTime;
             }
             else if (modelType == PrimitiveType.UnixTimeLong)
             {
@@ -3180,7 +3179,7 @@ namespace AutoRest.Java
                             result = "LocalDate";
                             break;
                         case AutoRestKnownPrimaryType.DateTime:
-                            result = "DateTime";
+                            result = "OffsetDateTime";
                             break;
                         case AutoRestKnownPrimaryType.DateTimeRfc1123:
                             result = "DateTimeRfc1123";
@@ -3303,14 +3302,14 @@ namespace AutoRest.Java
                 {
                     if (parameterIsRequired)
                     {
-                        block.Line($"Long {target} = {source}.toDateTime(DateTimeZone.UTC).getMillis() / 1000;");
+                        block.Line($"Long {target} = {source}.toInstant().getEpochSecond();");
                     }
                     else
                     {
                         block.Line($"Long {target} = null;");
                         block.If($"{source} != null", ifBlock =>
                         {
-                            ifBlock.Line($"{target} = {source}.toDateTime(DateTimeZone.UTC).getMillis() / 1000;");
+                            ifBlock.Line($"{target} = {source}.toInstant().getEpochSecond();");
                         });
                     }
                 }
@@ -4597,10 +4596,10 @@ namespace AutoRest.Java
                         parameterType != ClassType.Double &&
                         parameterType != ClassType.BigDecimal &&
                         parameterType != ClassType.String &&
-                        parameterType != ClassType.JodaDateTime &&
-                        parameterType != ClassType.JodaLocalDate &&
+                        parameterType != ClassType.DateTime &&
+                        parameterType != ClassType.LocalDate &&
                         parameterType != ClassType.DateTimeRfc1123 &&
-                        parameterType != ClassType.JodaPeriod &&
+                        parameterType != ClassType.Duration &&
                         parameterType != ClassType.Boolean &&
                         parameterType != ClassType.ServiceClientCredentials &&
                         parameterType != ClassType.AzureTokenCredentials &&

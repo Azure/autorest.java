@@ -32,9 +32,9 @@ import fixtures.header.models.HeaderResponseStringResponse;
 import io.reactivex.Completable;
 import io.reactivex.Single;
 import io.reactivex.annotations.NonNull;
-import org.joda.time.DateTime;
-import org.joda.time.LocalDate;
-import org.joda.time.Period;
+import java.time.Duration;
+import java.time.LocalDate;
+import java.time.OffsetDateTime;
 
 /**
  * An instance of this class provides access to all the operations defined in
@@ -786,7 +786,7 @@ public interface Headers {
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
-    void paramDatetime(@NonNull String scenario, @NonNull DateTime value);
+    void paramDatetime(@NonNull String scenario, @NonNull OffsetDateTime value);
 
     /**
      * Send a post request with header values "scenario": "valid", "value": "2010-01-01T12:34:56Z" or "scenario": "min", "value": "0001-01-01T00:00:00Z".
@@ -797,7 +797,7 @@ public interface Headers {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return a ServiceFuture which will be completed with the result of the network request.
      */
-    ServiceFuture<Void> paramDatetimeAsync(@NonNull String scenario, @NonNull DateTime value, ServiceCallback<Void> serviceCallback);
+    ServiceFuture<Void> paramDatetimeAsync(@NonNull String scenario, @NonNull OffsetDateTime value, ServiceCallback<Void> serviceCallback);
 
     /**
      * Send a post request with header values "scenario": "valid", "value": "2010-01-01T12:34:56Z" or "scenario": "min", "value": "0001-01-01T00:00:00Z".
@@ -807,7 +807,7 @@ public interface Headers {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return a Single which performs the network request upon subscription.
      */
-    Single<VoidResponse> paramDatetimeWithRestResponseAsync(@NonNull String scenario, @NonNull DateTime value);
+    Single<VoidResponse> paramDatetimeWithRestResponseAsync(@NonNull String scenario, @NonNull OffsetDateTime value);
 
     /**
      * Send a post request with header values "scenario": "valid", "value": "2010-01-01T12:34:56Z" or "scenario": "min", "value": "0001-01-01T00:00:00Z".
@@ -817,7 +817,7 @@ public interface Headers {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return a Single which performs the network request upon subscription.
      */
-    Completable paramDatetimeAsync(@NonNull String scenario, @NonNull DateTime value);
+    Completable paramDatetimeAsync(@NonNull String scenario, @NonNull OffsetDateTime value);
 
     /**
      * Get a response with header values "2010-01-01T12:34:56Z" or "0001-01-01T00:00:00Z".
@@ -904,7 +904,7 @@ public interface Headers {
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
-    void paramDatetimeRfc1123(@NonNull String scenario, DateTime value);
+    void paramDatetimeRfc1123(@NonNull String scenario, OffsetDateTime value);
 
     /**
      * Send a post request with header values "scenario": "valid", "value": "Wed, 01 Jan 2010 12:34:56 GMT" or "scenario": "min", "value": "Mon, 01 Jan 0001 00:00:00 GMT".
@@ -915,7 +915,7 @@ public interface Headers {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return a ServiceFuture which will be completed with the result of the network request.
      */
-    ServiceFuture<Void> paramDatetimeRfc1123Async(@NonNull String scenario, DateTime value, ServiceCallback<Void> serviceCallback);
+    ServiceFuture<Void> paramDatetimeRfc1123Async(@NonNull String scenario, OffsetDateTime value, ServiceCallback<Void> serviceCallback);
 
     /**
      * Send a post request with header values "scenario": "valid", "value": "Wed, 01 Jan 2010 12:34:56 GMT" or "scenario": "min", "value": "Mon, 01 Jan 0001 00:00:00 GMT".
@@ -925,7 +925,7 @@ public interface Headers {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return a Single which performs the network request upon subscription.
      */
-    Single<VoidResponse> paramDatetimeRfc1123WithRestResponseAsync(@NonNull String scenario, DateTime value);
+    Single<VoidResponse> paramDatetimeRfc1123WithRestResponseAsync(@NonNull String scenario, OffsetDateTime value);
 
     /**
      * Send a post request with header values "scenario": "valid", "value": "Wed, 01 Jan 2010 12:34:56 GMT" or "scenario": "min", "value": "Mon, 01 Jan 0001 00:00:00 GMT".
@@ -935,7 +935,7 @@ public interface Headers {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return a Single which performs the network request upon subscription.
      */
-    Completable paramDatetimeRfc1123Async(@NonNull String scenario, DateTime value);
+    Completable paramDatetimeRfc1123Async(@NonNull String scenario, OffsetDateTime value);
 
     /**
      * Get a response with header values "Wed, 01 Jan 2010 12:34:56 GMT" or "Mon, 01 Jan 0001 00:00:00 GMT".
@@ -984,7 +984,7 @@ public interface Headers {
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
-    void paramDuration(@NonNull String scenario, @NonNull Period value);
+    void paramDuration(@NonNull String scenario, @NonNull Duration value);
 
     /**
      * Send a post request with header values "scenario": "valid", "value": "P123DT22H14M12.011S".
@@ -995,7 +995,7 @@ public interface Headers {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return a ServiceFuture which will be completed with the result of the network request.
      */
-    ServiceFuture<Void> paramDurationAsync(@NonNull String scenario, @NonNull Period value, ServiceCallback<Void> serviceCallback);
+    ServiceFuture<Void> paramDurationAsync(@NonNull String scenario, @NonNull Duration value, ServiceCallback<Void> serviceCallback);
 
     /**
      * Send a post request with header values "scenario": "valid", "value": "P123DT22H14M12.011S".
@@ -1005,7 +1005,7 @@ public interface Headers {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return a Single which performs the network request upon subscription.
      */
-    Single<VoidResponse> paramDurationWithRestResponseAsync(@NonNull String scenario, @NonNull Period value);
+    Single<VoidResponse> paramDurationWithRestResponseAsync(@NonNull String scenario, @NonNull Duration value);
 
     /**
      * Send a post request with header values "scenario": "valid", "value": "P123DT22H14M12.011S".
@@ -1015,7 +1015,7 @@ public interface Headers {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return a Single which performs the network request upon subscription.
      */
-    Completable paramDurationAsync(@NonNull String scenario, @NonNull Period value);
+    Completable paramDurationAsync(@NonNull String scenario, @NonNull Duration value);
 
     /**
      * Get a response with header values "P123DT22H14M12.011S".

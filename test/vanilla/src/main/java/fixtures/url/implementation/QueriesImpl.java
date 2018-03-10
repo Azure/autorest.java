@@ -26,11 +26,11 @@ import fixtures.url.models.ErrorException;
 import fixtures.url.models.UriColor;
 import io.reactivex.Completable;
 import io.reactivex.Single;
+import java.time.LocalDate;
+import java.time.OffsetDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import org.apache.commons.codec.binary.Base64;
-import org.joda.time.DateTime;
-import org.joda.time.LocalDate;
 
 /**
  * An instance of this class provides access to all the operations defined in
@@ -196,12 +196,12 @@ public final class QueriesImpl implements Queries {
         @GET("queries/datetime/2012-01-01T01%3A01%3A01Z")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<VoidResponse> dateTimeValid(@QueryParam("dateTimeQuery") DateTime dateTimeQuery);
+        Single<VoidResponse> dateTimeValid(@QueryParam("dateTimeQuery") OffsetDateTime dateTimeQuery);
 
         @GET("queries/datetime/null")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<VoidResponse> dateTimeNull(@QueryParam("dateTimeQuery") DateTime dateTimeQuery);
+        Single<VoidResponse> dateTimeNull(@QueryParam("dateTimeQuery") OffsetDateTime dateTimeQuery);
 
         @GET("queries/array/csv/string/valid")
         @ExpectedResponses({200})
@@ -1849,7 +1849,7 @@ public final class QueriesImpl implements Queries {
      * @return a Single which performs the network request upon subscription.
      */
     public Single<VoidResponse> dateTimeValidWithRestResponseAsync() {
-        final DateTime dateTimeQuery = DateTime.parse("2012-01-01T01:01:01Z");
+        final OffsetDateTime dateTimeQuery = OffsetDateTime.parse("2012-01-01T01:01:01Z");
         return service.dateTimeValid(dateTimeQuery);
     }
 
@@ -1890,7 +1890,7 @@ public final class QueriesImpl implements Queries {
      * @return a Single which performs the network request upon subscription.
      */
     public Single<VoidResponse> dateTimeNullWithRestResponseAsync() {
-        final DateTime dateTimeQuery = null;
+        final OffsetDateTime dateTimeQuery = null;
         return service.dateTimeNull(dateTimeQuery);
     }
 
@@ -1912,7 +1912,7 @@ public final class QueriesImpl implements Queries {
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
-    public void dateTimeNull(DateTime dateTimeQuery) {
+    public void dateTimeNull(OffsetDateTime dateTimeQuery) {
         dateTimeNullAsync(dateTimeQuery).blockingAwait();
     }
 
@@ -1924,7 +1924,7 @@ public final class QueriesImpl implements Queries {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return a ServiceFuture which will be completed with the result of the network request.
      */
-    public ServiceFuture<Void> dateTimeNullAsync(DateTime dateTimeQuery, ServiceCallback<Void> serviceCallback) {
+    public ServiceFuture<Void> dateTimeNullAsync(OffsetDateTime dateTimeQuery, ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(dateTimeNullAsync(dateTimeQuery), serviceCallback);
     }
 
@@ -1935,7 +1935,7 @@ public final class QueriesImpl implements Queries {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return a Single which performs the network request upon subscription.
      */
-    public Single<VoidResponse> dateTimeNullWithRestResponseAsync(DateTime dateTimeQuery) {
+    public Single<VoidResponse> dateTimeNullWithRestResponseAsync(OffsetDateTime dateTimeQuery) {
         return service.dateTimeNull(dateTimeQuery);
     }
 
@@ -1946,7 +1946,7 @@ public final class QueriesImpl implements Queries {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return a Single which performs the network request upon subscription.
      */
-    public Completable dateTimeNullAsync(DateTime dateTimeQuery) {
+    public Completable dateTimeNullAsync(OffsetDateTime dateTimeQuery) {
         return dateTimeNullWithRestResponseAsync(dateTimeQuery)
             .toCompletable();
     }

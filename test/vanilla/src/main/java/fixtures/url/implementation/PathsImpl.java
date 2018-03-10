@@ -28,12 +28,11 @@ import fixtures.url.models.UriColor;
 import io.reactivex.Completable;
 import io.reactivex.Single;
 import io.reactivex.annotations.NonNull;
+import java.time.LocalDate;
+import java.time.OffsetDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import org.apache.commons.codec.binary.Base64;
-import org.joda.time.DateTime;
-import org.joda.time.DateTimeZone;
-import org.joda.time.LocalDate;
 
 /**
  * An instance of this class provides access to all the operations defined in
@@ -174,12 +173,12 @@ public final class PathsImpl implements Paths {
         @GET("paths/datetime/2012-01-01T01%3A01%3A01Z/{dateTimePath}")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<VoidResponse> dateTimeValid(@PathParam("dateTimePath") DateTime dateTimePath);
+        Single<VoidResponse> dateTimeValid(@PathParam("dateTimePath") OffsetDateTime dateTimePath);
 
         @GET("paths/datetime/null/{dateTimePath}")
         @ExpectedResponses({400})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<VoidResponse> dateTimeNull(@PathParam("dateTimePath") DateTime dateTimePath);
+        Single<VoidResponse> dateTimeNull(@PathParam("dateTimePath") OffsetDateTime dateTimePath);
 
         @GET("paths/string/bG9yZW0/{base64UrlPath}")
         @ExpectedResponses({200})
@@ -1142,7 +1141,7 @@ public final class PathsImpl implements Paths {
      * @return a Single which performs the network request upon subscription.
      */
     public Single<VoidResponse> dateTimeValidWithRestResponseAsync() {
-        final DateTime dateTimePath = DateTime.parse("2012-01-01T01:01:01Z");
+        final OffsetDateTime dateTimePath = OffsetDateTime.parse("2012-01-01T01:01:01Z");
         return service.dateTimeValid(dateTimePath);
     }
 
@@ -1164,7 +1163,7 @@ public final class PathsImpl implements Paths {
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
-    public void dateTimeNull(@NonNull DateTime dateTimePath) {
+    public void dateTimeNull(@NonNull OffsetDateTime dateTimePath) {
         dateTimeNullAsync(dateTimePath).blockingAwait();
     }
 
@@ -1176,7 +1175,7 @@ public final class PathsImpl implements Paths {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return a ServiceFuture which will be completed with the result of the network request.
      */
-    public ServiceFuture<Void> dateTimeNullAsync(@NonNull DateTime dateTimePath, ServiceCallback<Void> serviceCallback) {
+    public ServiceFuture<Void> dateTimeNullAsync(@NonNull OffsetDateTime dateTimePath, ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(dateTimeNullAsync(dateTimePath), serviceCallback);
     }
 
@@ -1187,7 +1186,7 @@ public final class PathsImpl implements Paths {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return a Single which performs the network request upon subscription.
      */
-    public Single<VoidResponse> dateTimeNullWithRestResponseAsync(@NonNull DateTime dateTimePath) {
+    public Single<VoidResponse> dateTimeNullWithRestResponseAsync(@NonNull OffsetDateTime dateTimePath) {
         if (dateTimePath == null) {
             throw new IllegalArgumentException("Parameter dateTimePath is required and cannot be null.");
         }
@@ -1201,7 +1200,7 @@ public final class PathsImpl implements Paths {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return a Single which performs the network request upon subscription.
      */
-    public Completable dateTimeNullAsync(@NonNull DateTime dateTimePath) {
+    public Completable dateTimeNullAsync(@NonNull OffsetDateTime dateTimePath) {
         return dateTimeNullWithRestResponseAsync(dateTimePath)
             .toCompletable();
     }
@@ -1317,7 +1316,7 @@ public final class PathsImpl implements Paths {
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
-    public void unixTimeUrl(@NonNull DateTime unixTimeUrlPath) {
+    public void unixTimeUrl(@NonNull OffsetDateTime unixTimeUrlPath) {
         unixTimeUrlAsync(unixTimeUrlPath).blockingAwait();
     }
 
@@ -1329,7 +1328,7 @@ public final class PathsImpl implements Paths {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return a ServiceFuture which will be completed with the result of the network request.
      */
-    public ServiceFuture<Void> unixTimeUrlAsync(@NonNull DateTime unixTimeUrlPath, ServiceCallback<Void> serviceCallback) {
+    public ServiceFuture<Void> unixTimeUrlAsync(@NonNull OffsetDateTime unixTimeUrlPath, ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(unixTimeUrlAsync(unixTimeUrlPath), serviceCallback);
     }
 
@@ -1340,8 +1339,8 @@ public final class PathsImpl implements Paths {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return a Single which performs the network request upon subscription.
      */
-    public Single<VoidResponse> unixTimeUrlWithRestResponseAsync(@NonNull DateTime unixTimeUrlPath) {
-        Long unixTimeUrlPathConverted = unixTimeUrlPath.toDateTime(DateTimeZone.UTC).getMillis() / 1000;
+    public Single<VoidResponse> unixTimeUrlWithRestResponseAsync(@NonNull OffsetDateTime unixTimeUrlPath) {
+        Long unixTimeUrlPathConverted = unixTimeUrlPath.toInstant().getEpochSecond();
         return service.unixTimeUrl(unixTimeUrlPathConverted);
     }
 
@@ -1352,7 +1351,7 @@ public final class PathsImpl implements Paths {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return a Single which performs the network request upon subscription.
      */
-    public Completable unixTimeUrlAsync(@NonNull DateTime unixTimeUrlPath) {
+    public Completable unixTimeUrlAsync(@NonNull OffsetDateTime unixTimeUrlPath) {
         return unixTimeUrlWithRestResponseAsync(unixTimeUrlPath)
             .toCompletable();
     }

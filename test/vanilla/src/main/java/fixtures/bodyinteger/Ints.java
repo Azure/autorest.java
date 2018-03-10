@@ -19,7 +19,7 @@ import io.reactivex.Completable;
 import io.reactivex.Maybe;
 import io.reactivex.Single;
 import io.reactivex.annotations.NonNull;
-import org.joda.time.DateTime;
+import java.time.OffsetDateTime;
 
 /**
  * An instance of this class provides access to all the operations defined in
@@ -375,9 +375,9 @@ public interface Ints {
      *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the DateTime object if successful.
+     * @return the OffsetDateTime object if successful.
      */
-    DateTime getUnixTime();
+    OffsetDateTime getUnixTime();
 
     /**
      * Get datetime encoded as Unix time value.
@@ -386,121 +386,121 @@ public interface Ints {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return a ServiceFuture which will be completed with the result of the network request.
      */
-    ServiceFuture<DateTime> getUnixTimeAsync(ServiceCallback<DateTime> serviceCallback);
+    ServiceFuture<OffsetDateTime> getUnixTimeAsync(ServiceCallback<OffsetDateTime> serviceCallback);
 
     /**
      * Get datetime encoded as Unix time value.
      *
      * @return a Single which performs the network request upon subscription.
      */
-    Single<BodyResponse<DateTime>> getUnixTimeWithRestResponseAsync();
+    Single<BodyResponse<OffsetDateTime>> getUnixTimeWithRestResponseAsync();
 
     /**
      * Get datetime encoded as Unix time value.
      *
      * @return a Single which performs the network request upon subscription.
      */
-    Maybe<DateTime> getUnixTimeAsync();
+    Maybe<OffsetDateTime> getUnixTimeAsync();
 
     /**
      * Put datetime encoded as Unix time.
      *
-     * @param intBody the DateTime value.
+     * @param intBody the OffsetDateTime value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
-    void putUnixTimeDate(@NonNull DateTime intBody);
+    void putUnixTimeDate(@NonNull OffsetDateTime intBody);
 
     /**
      * Put datetime encoded as Unix time.
      *
-     * @param intBody the DateTime value.
+     * @param intBody the OffsetDateTime value.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return a ServiceFuture which will be completed with the result of the network request.
      */
-    ServiceFuture<Void> putUnixTimeDateAsync(@NonNull DateTime intBody, ServiceCallback<Void> serviceCallback);
+    ServiceFuture<Void> putUnixTimeDateAsync(@NonNull OffsetDateTime intBody, ServiceCallback<Void> serviceCallback);
 
     /**
      * Put datetime encoded as Unix time.
      *
-     * @param intBody the DateTime value.
+     * @param intBody the OffsetDateTime value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return a Single which performs the network request upon subscription.
      */
-    Single<VoidResponse> putUnixTimeDateWithRestResponseAsync(@NonNull DateTime intBody);
+    Single<VoidResponse> putUnixTimeDateWithRestResponseAsync(@NonNull OffsetDateTime intBody);
 
     /**
      * Put datetime encoded as Unix time.
      *
-     * @param intBody the DateTime value.
+     * @param intBody the OffsetDateTime value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return a Single which performs the network request upon subscription.
      */
-    Completable putUnixTimeDateAsync(@NonNull DateTime intBody);
+    Completable putUnixTimeDateAsync(@NonNull OffsetDateTime intBody);
 
     /**
      * Get invalid Unix time value.
      *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the DateTime object if successful.
+     * @return the OffsetDateTime object if successful.
      */
-    DateTime getInvalidUnixTime();
+    OffsetDateTime getInvalidUnixTime();
 
     /**
      * Get invalid Unix time value.
-     *
-     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a ServiceFuture which will be completed with the result of the network request.
-     */
-    ServiceFuture<DateTime> getInvalidUnixTimeAsync(ServiceCallback<DateTime> serviceCallback);
-
-    /**
-     * Get invalid Unix time value.
-     *
-     * @return a Single which performs the network request upon subscription.
-     */
-    Single<BodyResponse<DateTime>> getInvalidUnixTimeWithRestResponseAsync();
-
-    /**
-     * Get invalid Unix time value.
-     *
-     * @return a Single which performs the network request upon subscription.
-     */
-    Maybe<DateTime> getInvalidUnixTimeAsync();
-
-    /**
-     * Get null Unix time value.
-     *
-     * @throws ErrorException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the DateTime object if successful.
-     */
-    DateTime getNullUnixTime();
-
-    /**
-     * Get null Unix time value.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return a ServiceFuture which will be completed with the result of the network request.
      */
-    ServiceFuture<DateTime> getNullUnixTimeAsync(ServiceCallback<DateTime> serviceCallback);
+    ServiceFuture<OffsetDateTime> getInvalidUnixTimeAsync(ServiceCallback<OffsetDateTime> serviceCallback);
+
+    /**
+     * Get invalid Unix time value.
+     *
+     * @return a Single which performs the network request upon subscription.
+     */
+    Single<BodyResponse<OffsetDateTime>> getInvalidUnixTimeWithRestResponseAsync();
+
+    /**
+     * Get invalid Unix time value.
+     *
+     * @return a Single which performs the network request upon subscription.
+     */
+    Maybe<OffsetDateTime> getInvalidUnixTimeAsync();
+
+    /**
+     * Get null Unix time value.
+     *
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the OffsetDateTime object if successful.
+     */
+    OffsetDateTime getNullUnixTime();
+
+    /**
+     * Get null Unix time value.
+     *
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return a ServiceFuture which will be completed with the result of the network request.
+     */
+    ServiceFuture<OffsetDateTime> getNullUnixTimeAsync(ServiceCallback<OffsetDateTime> serviceCallback);
 
     /**
      * Get null Unix time value.
      *
      * @return a Single which performs the network request upon subscription.
      */
-    Single<BodyResponse<DateTime>> getNullUnixTimeWithRestResponseAsync();
+    Single<BodyResponse<OffsetDateTime>> getNullUnixTimeWithRestResponseAsync();
 
     /**
      * Get null Unix time value.
      *
      * @return a Single which performs the network request upon subscription.
      */
-    Maybe<DateTime> getNullUnixTimeAsync();
+    Maybe<OffsetDateTime> getNullUnixTimeAsync();
 }

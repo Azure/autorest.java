@@ -1,12 +1,12 @@
 package fixtures.bodydatetime;
 
+import com.fasterxml.jackson.databind.exc.InvalidFormatException;
 import fixtures.bodydatetime.implementation.AutoRestDateTimeTestServiceImpl;
-import org.joda.time.DateTime;
-import org.joda.time.DateTimeZone;
-import org.joda.time.IllegalFieldValueException;
 import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
+
+import java.time.*;
 
 public class DatetimeOperationsTests {
     private static AutoRestDateTimeTestService client;
@@ -17,137 +17,134 @@ public class DatetimeOperationsTests {
     }
 
     @Test
-    public void getNull() throws Exception {
+    public void getNull() {
         Assert.assertNull(client.datetimes().getNull());
     }
 
     @Test
-    public void getInvalidDate() throws Exception {
+    public void getInvalidDate() {
         try {
             client.datetimes().getInvalid();
-            Assert.assertTrue(false);
-        } catch (Exception exception) {
-            // expected
-            Assert.assertEquals(IllegalArgumentException.class, exception.getClass());
+            Assert.fail();
+        } catch (RuntimeException exception) {
+            Assert.assertEquals(InvalidFormatException.class, exception.getCause().getClass());
         }
     }
 
     @Test
-    public void getOverflowDate() throws Exception {
-        DateTime result = client.datetimes().getOverflow();
-        // 9999-12-31T23:59:59.999-14:000
-        DateTime expected = new DateTime(9999, 12, 31, 23, 59, 59, 999, DateTimeZone.forOffsetHours(-14));
-        expected = expected.toDateTime(DateTimeZone.UTC);
+    public void getOverflowDate() {
+        OffsetDateTime result = client.datetimes().getOverflow();
+        OffsetDateTime expected = OffsetDateTime.of(LocalDate.of(10000, 1, 1), LocalTime.parse("13:59:59.9999999"), ZoneOffset.UTC);
         Assert.assertEquals(expected, result);
     }
 
     @Test
-    public void getUnderflowDate() throws Exception {
+    public void getUnderflowDate() {
         try {
             client.datetimes().getUnderflow();
-            Assert.assertTrue(false);
-        } catch (Exception exception) {
+            Assert.fail();
+        } catch (RuntimeException exception) {
             // expected
-            Assert.assertEquals(IllegalFieldValueException.class, exception.getClass());
+            Assert.assertEquals(InvalidFormatException.class, exception.getCause().getClass());
          }
     }
 
     @Test
-    public void putUtcMaxDateTime() throws Exception {
-        DateTime body = new DateTime(9999, 12, 31, 23, 59, 59, 999, DateTimeZone.UTC);
+    public void putUtcMaxDateTime() {
+        OffsetDateTime body = OffsetDateTime.parse("9999-12-31T23:59:59.999-00:00");
         client.datetimes().putUtcMaxDateTime(body);
     }
 
     @Test
-    public void getUtcLowercaseMaxDateTime() throws Exception {
-        DateTime result = client.datetimes().getUtcLowercaseMaxDateTime();
-        DateTime expected = new DateTime(9999, 12, 31, 23, 59, 59, 999, DateTimeZone.UTC);
+    public void getUtcLowercaseMaxDateTime() {
+        OffsetDateTime result = client.datetimes().getUtcLowercaseMaxDateTime();
+        OffsetDateTime expected = OffsetDateTime.parse("9999-12-31T23:59:59.9999999-00:00");
         Assert.assertEquals(expected, result);
     }
 
     @Test
-    public void getUtcUppercaseMaxDateTime() throws Exception {
-        DateTime result = client.datetimes().getUtcUppercaseMaxDateTime();
-        DateTime expected = new DateTime(9999, 12, 31, 23, 59, 59, 999, DateTimeZone.UTC);
+    public void getUtcUppercaseMaxDateTime() {
+        OffsetDateTime result = client.datetimes().getUtcUppercaseMaxDateTime();
+        OffsetDateTime expected = OffsetDateTime.parse("9999-12-31T23:59:59.9999999+00:00");
         Assert.assertEquals(expected, result);
     }
 
     @Test
-    public void putLocalPositiveOffsetMaxDateTime() throws Exception {
-        DateTime body = new DateTime(9999, 12, 31, 23, 59, 59, 999, DateTimeZone.forOffsetHours(14));
+    public void putLocalPositiveOffsetMaxDateTime() {
+        OffsetDateTime body = OffsetDateTime.parse("9999-12-31T09:59:59.9999999Z");
         client.datetimes().putLocalPositiveOffsetMaxDateTime(body);
     }
 
     @Test
-    public void getLocalPositiveOffsetLowercaseMaxDateTime() throws Exception {
-        DateTime result = client.datetimes().getLocalPositiveOffsetLowercaseMaxDateTime();
-        DateTime expected = new DateTime(9999, 12, 31, 23, 59, 59, 999, DateTimeZone.forOffsetHours(14)).toDateTime(DateTimeZone.UTC);
+    public void getLocalPositiveOffsetLowercaseMaxDateTime() {
+        OffsetDateTime result = client.datetimes().getLocalPositiveOffsetLowercaseMaxDateTime();
+        OffsetDateTime expected = OffsetDateTime.parse("9999-12-31T09:59:59.9999999+00:00");
         Assert.assertEquals(expected, result);
     }
 
     @Test
-    public void getLocalPositiveOffsetUppercaseMaxDateTime() throws Exception {
-        DateTime result = client.datetimes().getLocalPositiveOffsetUppercaseMaxDateTime();
-        DateTime expected = new DateTime(9999, 12, 31, 23, 59, 59, 999, DateTimeZone.forOffsetHours(14)).toDateTime(DateTimeZone.UTC);
+    public void getLocalPositiveOffsetUppercaseMaxDateTime() {
+        OffsetDateTime result = client.datetimes().getLocalPositiveOffsetUppercaseMaxDateTime();
+        OffsetDateTime expected = OffsetDateTime.parse("9999-12-31T23:59:59.9999999+00:00").withOffsetSameLocal(ZoneOffset.ofHours(14)).withOffsetSameInstant(ZoneOffset.UTC);
         Assert.assertEquals(expected, result);
     }
 
     @Test
-    public void putLocalNegativeOffsetMaxDateTime() throws Exception {
-        DateTime body = new DateTime(9999, 12, 31, 23, 59, 59, 999, DateTimeZone.forOffsetHours(-14));
+    public void putLocalNegativeOffsetMaxDateTime() {
+        OffsetDateTime body = OffsetDateTime.of(LocalDate.of(10000, 1, 1), LocalTime.parse("13:59:59.999"), ZoneOffset.UTC);
         client.datetimes().putLocalNegativeOffsetMaxDateTime(body);
     }
 
     @Test
-    public void getLocalNegativeOffsetLowercaseMaxDateTime() throws Exception {
-        DateTime result = client.datetimes().getLocalNegativeOffsetLowercaseMaxDateTime();
-        DateTime expected = new DateTime(9999, 12, 31, 23, 59, 59, 999, DateTimeZone.forOffsetHours(-14)).toDateTime(DateTimeZone.UTC);
+    public void getLocalNegativeOffsetLowercaseMaxDateTime() {
+        OffsetDateTime result = client.datetimes().getLocalNegativeOffsetLowercaseMaxDateTime();
+        OffsetDateTime expected = OffsetDateTime.parse("9999-12-31T23:59:59.9999999-00:00").withOffsetSameLocal(ZoneOffset.ofHours(-14)).withOffsetSameInstant(ZoneOffset.UTC);
         Assert.assertEquals(expected, result);
     }
 
     @Test
-    public void getLocalNegativeOffsetUppercaseMaxDateTime() throws Exception {
-        DateTime result = client.datetimes().getLocalNegativeOffsetUppercaseMaxDateTime();
-        DateTime expected = new DateTime(9999, 12, 31, 23, 59, 59, 999, DateTimeZone.forOffsetHours(-14)).toDateTime(DateTimeZone.UTC);
+    public void getLocalNegativeOffsetUppercaseMaxDateTime() {
+        OffsetDateTime result = client.datetimes().getLocalNegativeOffsetUppercaseMaxDateTime();
+        OffsetDateTime expected = OffsetDateTime.of(LocalDate.of(10000, 1, 1), LocalTime.parse("13:59:59.9999999"), ZoneOffset.UTC);
         Assert.assertEquals(expected, result);
     }
 
     @Test
-    public void putUtcMinDateTime() throws Exception {
-        DateTime body = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeZone.UTC);
+    public void putUtcMinDateTime() {
+        OffsetDateTime body = OffsetDateTime.of(1, 1, 1, 0, 0, 0, 0, ZoneOffset.UTC);
         client.datetimes().putUtcMinDateTime(body);
     }
 
     @Test
-    public void getUtcMinDateTime() throws Exception {
-        DateTime result = client.datetimes().getUtcMinDateTime();
-        DateTime expected = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeZone.UTC);
+    public void getUtcMinDateTime() {
+        OffsetDateTime result = client.datetimes().getUtcMinDateTime();
+        OffsetDateTime expected = OffsetDateTime.of(1, 1, 1, 0, 0, 0, 0, ZoneOffset.UTC);
         Assert.assertEquals(expected, result);
     }
 
     @Test
-    public void putLocalPositiveOffsetMinDateTime() throws Exception {
-        DateTime body = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeZone.forOffsetHours(14));
+    public void putLocalPositiveOffsetMinDateTime() {
+        OffsetDateTime body = OffsetDateTime.of(1, 1, 1, 0, 0, 0, 0, ZoneOffset.ofHours(14));
         client.datetimes().putLocalPositiveOffsetMinDateTime(body);
     }
 
     @Test
-    public void getLocalPositiveOffsetMinDateTime() throws Exception {
-        DateTime result = client.datetimes().getLocalPositiveOffsetMinDateTime();
-        DateTime expected = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeZone.forOffsetHours(14)).toDateTime(DateTimeZone.UTC);
+    public void getLocalPositiveOffsetMinDateTime() {
+        OffsetDateTime result = client.datetimes().getLocalPositiveOffsetMinDateTime();
+        OffsetDateTime expected = OffsetDateTime.of(1, 1, 1, 0, 0, 0, 0, ZoneOffset.ofHours(14)).withOffsetSameInstant(ZoneOffset.UTC);
         Assert.assertEquals(expected, result);
     }
 
     @Test
-    public void putLocalNegativeOffsetMinDateTime() throws Exception {
-        DateTime body = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeZone.forOffsetHours(-14));
+    public void putLocalNegativeOffsetMinDateTime() {
+        OffsetDateTime body = OffsetDateTime.of(1, 1, 1, 0, 0, 0, 0, ZoneOffset.ofHours(-14));
         client.datetimes().putLocalNegativeOffsetMinDateTime(body);
     }
 
     @Test
-    public void getLocalNegativeOffsetMinDateTime() throws Exception {
-        DateTime result = client.datetimes().getLocalNegativeOffsetMinDateTime();
-        DateTime expected = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeZone.forOffsetHours(-14)).toDateTime(DateTimeZone.UTC);
+    public void getLocalNegativeOffsetMinDateTime() {
+        OffsetDateTime result = client.datetimes().getLocalNegativeOffsetMinDateTime();
+        OffsetDateTime expected = OffsetDateTime.of(1, 1, 1, 0, 0, 0, 0, ZoneOffset.ofHours(-14)).withOffsetSameInstant(ZoneOffset.UTC);
         Assert.assertEquals(expected, result);
     }
 }

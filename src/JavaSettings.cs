@@ -44,7 +44,6 @@ namespace AutoRest.Java
             string package,
             bool shouldGenerateXmlSerialization,
             bool nonNullAnnotations,
-            bool stringDates,
             string clientTypePrefix,
             bool generateClientInterfaces,
             string implementationSubpackage,
@@ -62,7 +61,6 @@ namespace AutoRest.Java
             Package = package;
             ShouldGenerateXmlSerialization = shouldGenerateXmlSerialization;
             NonNullAnnotations = nonNullAnnotations;
-            StringDates = stringDates;
             ClientTypePrefix = clientTypePrefix;
             GenerateClientInterfaces = generateClientInterfaces;
             ImplementationSubpackage = implementationSubpackage;
@@ -99,11 +97,6 @@ namespace AutoRest.Java
         /// Whether or not to add the @NotNull annotation to required parameters in client methods.
         /// </summary>
         public bool NonNullAnnotations { get; }
-
-        /// <summary>
-        /// Whether or not DateTime types should be represented as Strings (generally for better/different precision).
-        /// </summary>
-        public bool StringDates { get; }
 
         /// <summary>
         /// The prefix that will be added to each generated client type.

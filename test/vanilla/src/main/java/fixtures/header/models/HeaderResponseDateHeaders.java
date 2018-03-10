@@ -11,7 +11,7 @@
 package fixtures.header.models;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import org.joda.time.LocalDate;
+import java.time.LocalDate;
 
 /**
  * Defines headers for responseDate operation.

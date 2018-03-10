@@ -19,7 +19,7 @@ import io.reactivex.Completable;
 import io.reactivex.Maybe;
 import io.reactivex.Single;
 import io.reactivex.annotations.NonNull;
-import org.joda.time.DateTime;
+import java.time.OffsetDateTime;
 
 /**
  * An instance of this class provides access to all the operations defined in
@@ -31,9 +31,9 @@ public interface Datetimerfc1123s {
      *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the DateTime object if successful.
+     * @return the OffsetDateTime object if successful.
      */
-    DateTime getNull();
+    OffsetDateTime getNull();
 
     /**
      * Get null datetime value.
@@ -42,30 +42,30 @@ public interface Datetimerfc1123s {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return a ServiceFuture which will be completed with the result of the network request.
      */
-    ServiceFuture<DateTime> getNullAsync(ServiceCallback<DateTime> serviceCallback);
+    ServiceFuture<OffsetDateTime> getNullAsync(ServiceCallback<OffsetDateTime> serviceCallback);
 
     /**
      * Get null datetime value.
      *
      * @return a Single which performs the network request upon subscription.
      */
-    Single<BodyResponse<DateTime>> getNullWithRestResponseAsync();
+    Single<BodyResponse<OffsetDateTime>> getNullWithRestResponseAsync();
 
     /**
      * Get null datetime value.
      *
      * @return a Single which performs the network request upon subscription.
      */
-    Maybe<DateTime> getNullAsync();
+    Maybe<OffsetDateTime> getNullAsync();
 
     /**
      * Get invalid datetime value.
      *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the DateTime object if successful.
+     * @return the OffsetDateTime object if successful.
      */
-    DateTime getInvalid();
+    OffsetDateTime getInvalid();
 
     /**
      * Get invalid datetime value.
@@ -74,30 +74,30 @@ public interface Datetimerfc1123s {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return a ServiceFuture which will be completed with the result of the network request.
      */
-    ServiceFuture<DateTime> getInvalidAsync(ServiceCallback<DateTime> serviceCallback);
+    ServiceFuture<OffsetDateTime> getInvalidAsync(ServiceCallback<OffsetDateTime> serviceCallback);
 
     /**
      * Get invalid datetime value.
      *
      * @return a Single which performs the network request upon subscription.
      */
-    Single<BodyResponse<DateTime>> getInvalidWithRestResponseAsync();
+    Single<BodyResponse<OffsetDateTime>> getInvalidWithRestResponseAsync();
 
     /**
      * Get invalid datetime value.
      *
      * @return a Single which performs the network request upon subscription.
      */
-    Maybe<DateTime> getInvalidAsync();
+    Maybe<OffsetDateTime> getInvalidAsync();
 
     /**
      * Get overflow datetime value.
      *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the DateTime object if successful.
+     * @return the OffsetDateTime object if successful.
      */
-    DateTime getOverflow();
+    OffsetDateTime getOverflow();
 
     /**
      * Get overflow datetime value.
@@ -106,30 +106,30 @@ public interface Datetimerfc1123s {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return a ServiceFuture which will be completed with the result of the network request.
      */
-    ServiceFuture<DateTime> getOverflowAsync(ServiceCallback<DateTime> serviceCallback);
+    ServiceFuture<OffsetDateTime> getOverflowAsync(ServiceCallback<OffsetDateTime> serviceCallback);
 
     /**
      * Get overflow datetime value.
      *
      * @return a Single which performs the network request upon subscription.
      */
-    Single<BodyResponse<DateTime>> getOverflowWithRestResponseAsync();
+    Single<BodyResponse<OffsetDateTime>> getOverflowWithRestResponseAsync();
 
     /**
      * Get overflow datetime value.
      *
      * @return a Single which performs the network request upon subscription.
      */
-    Maybe<DateTime> getOverflowAsync();
+    Maybe<OffsetDateTime> getOverflowAsync();
 
     /**
      * Get underflow datetime value.
      *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the DateTime object if successful.
+     * @return the OffsetDateTime object if successful.
      */
-    DateTime getUnderflow();
+    OffsetDateTime getUnderflow();
 
     /**
      * Get underflow datetime value.
@@ -138,68 +138,68 @@ public interface Datetimerfc1123s {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return a ServiceFuture which will be completed with the result of the network request.
      */
-    ServiceFuture<DateTime> getUnderflowAsync(ServiceCallback<DateTime> serviceCallback);
+    ServiceFuture<OffsetDateTime> getUnderflowAsync(ServiceCallback<OffsetDateTime> serviceCallback);
 
     /**
      * Get underflow datetime value.
      *
      * @return a Single which performs the network request upon subscription.
      */
-    Single<BodyResponse<DateTime>> getUnderflowWithRestResponseAsync();
+    Single<BodyResponse<OffsetDateTime>> getUnderflowWithRestResponseAsync();
 
     /**
      * Get underflow datetime value.
      *
      * @return a Single which performs the network request upon subscription.
      */
-    Maybe<DateTime> getUnderflowAsync();
+    Maybe<OffsetDateTime> getUnderflowAsync();
 
     /**
      * Put max datetime value Fri, 31 Dec 9999 23:59:59 GMT.
      *
-     * @param datetimeBody the DateTime value.
+     * @param datetimeBody the OffsetDateTime value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
-    void putUtcMaxDateTime(@NonNull DateTime datetimeBody);
+    void putUtcMaxDateTime(@NonNull OffsetDateTime datetimeBody);
 
     /**
      * Put max datetime value Fri, 31 Dec 9999 23:59:59 GMT.
      *
-     * @param datetimeBody the DateTime value.
+     * @param datetimeBody the OffsetDateTime value.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return a ServiceFuture which will be completed with the result of the network request.
      */
-    ServiceFuture<Void> putUtcMaxDateTimeAsync(@NonNull DateTime datetimeBody, ServiceCallback<Void> serviceCallback);
+    ServiceFuture<Void> putUtcMaxDateTimeAsync(@NonNull OffsetDateTime datetimeBody, ServiceCallback<Void> serviceCallback);
 
     /**
      * Put max datetime value Fri, 31 Dec 9999 23:59:59 GMT.
      *
-     * @param datetimeBody the DateTime value.
+     * @param datetimeBody the OffsetDateTime value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return a Single which performs the network request upon subscription.
      */
-    Single<VoidResponse> putUtcMaxDateTimeWithRestResponseAsync(@NonNull DateTime datetimeBody);
+    Single<VoidResponse> putUtcMaxDateTimeWithRestResponseAsync(@NonNull OffsetDateTime datetimeBody);
 
     /**
      * Put max datetime value Fri, 31 Dec 9999 23:59:59 GMT.
      *
-     * @param datetimeBody the DateTime value.
+     * @param datetimeBody the OffsetDateTime value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return a Single which performs the network request upon subscription.
      */
-    Completable putUtcMaxDateTimeAsync(@NonNull DateTime datetimeBody);
+    Completable putUtcMaxDateTimeAsync(@NonNull OffsetDateTime datetimeBody);
 
     /**
      * Get max datetime value fri, 31 dec 9999 23:59:59 gmt.
      *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the DateTime object if successful.
+     * @return the OffsetDateTime object if successful.
      */
-    DateTime getUtcLowercaseMaxDateTime();
+    OffsetDateTime getUtcLowercaseMaxDateTime();
 
     /**
      * Get max datetime value fri, 31 dec 9999 23:59:59 gmt.
@@ -208,30 +208,30 @@ public interface Datetimerfc1123s {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return a ServiceFuture which will be completed with the result of the network request.
      */
-    ServiceFuture<DateTime> getUtcLowercaseMaxDateTimeAsync(ServiceCallback<DateTime> serviceCallback);
+    ServiceFuture<OffsetDateTime> getUtcLowercaseMaxDateTimeAsync(ServiceCallback<OffsetDateTime> serviceCallback);
 
     /**
      * Get max datetime value fri, 31 dec 9999 23:59:59 gmt.
      *
      * @return a Single which performs the network request upon subscription.
      */
-    Single<BodyResponse<DateTime>> getUtcLowercaseMaxDateTimeWithRestResponseAsync();
+    Single<BodyResponse<OffsetDateTime>> getUtcLowercaseMaxDateTimeWithRestResponseAsync();
 
     /**
      * Get max datetime value fri, 31 dec 9999 23:59:59 gmt.
      *
      * @return a Single which performs the network request upon subscription.
      */
-    Maybe<DateTime> getUtcLowercaseMaxDateTimeAsync();
+    Maybe<OffsetDateTime> getUtcLowercaseMaxDateTimeAsync();
 
     /**
      * Get max datetime value FRI, 31 DEC 9999 23:59:59 GMT.
      *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the DateTime object if successful.
+     * @return the OffsetDateTime object if successful.
      */
-    DateTime getUtcUppercaseMaxDateTime();
+    OffsetDateTime getUtcUppercaseMaxDateTime();
 
     /**
      * Get max datetime value FRI, 31 DEC 9999 23:59:59 GMT.
@@ -240,68 +240,68 @@ public interface Datetimerfc1123s {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return a ServiceFuture which will be completed with the result of the network request.
      */
-    ServiceFuture<DateTime> getUtcUppercaseMaxDateTimeAsync(ServiceCallback<DateTime> serviceCallback);
+    ServiceFuture<OffsetDateTime> getUtcUppercaseMaxDateTimeAsync(ServiceCallback<OffsetDateTime> serviceCallback);
 
     /**
      * Get max datetime value FRI, 31 DEC 9999 23:59:59 GMT.
      *
      * @return a Single which performs the network request upon subscription.
      */
-    Single<BodyResponse<DateTime>> getUtcUppercaseMaxDateTimeWithRestResponseAsync();
+    Single<BodyResponse<OffsetDateTime>> getUtcUppercaseMaxDateTimeWithRestResponseAsync();
 
     /**
      * Get max datetime value FRI, 31 DEC 9999 23:59:59 GMT.
      *
      * @return a Single which performs the network request upon subscription.
      */
-    Maybe<DateTime> getUtcUppercaseMaxDateTimeAsync();
+    Maybe<OffsetDateTime> getUtcUppercaseMaxDateTimeAsync();
 
     /**
      * Put min datetime value Mon, 1 Jan 0001 00:00:00 GMT.
      *
-     * @param datetimeBody the DateTime value.
+     * @param datetimeBody the OffsetDateTime value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
-    void putUtcMinDateTime(@NonNull DateTime datetimeBody);
+    void putUtcMinDateTime(@NonNull OffsetDateTime datetimeBody);
 
     /**
      * Put min datetime value Mon, 1 Jan 0001 00:00:00 GMT.
      *
-     * @param datetimeBody the DateTime value.
+     * @param datetimeBody the OffsetDateTime value.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return a ServiceFuture which will be completed with the result of the network request.
      */
-    ServiceFuture<Void> putUtcMinDateTimeAsync(@NonNull DateTime datetimeBody, ServiceCallback<Void> serviceCallback);
+    ServiceFuture<Void> putUtcMinDateTimeAsync(@NonNull OffsetDateTime datetimeBody, ServiceCallback<Void> serviceCallback);
 
     /**
      * Put min datetime value Mon, 1 Jan 0001 00:00:00 GMT.
      *
-     * @param datetimeBody the DateTime value.
+     * @param datetimeBody the OffsetDateTime value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return a Single which performs the network request upon subscription.
      */
-    Single<VoidResponse> putUtcMinDateTimeWithRestResponseAsync(@NonNull DateTime datetimeBody);
+    Single<VoidResponse> putUtcMinDateTimeWithRestResponseAsync(@NonNull OffsetDateTime datetimeBody);
 
     /**
      * Put min datetime value Mon, 1 Jan 0001 00:00:00 GMT.
      *
-     * @param datetimeBody the DateTime value.
+     * @param datetimeBody the OffsetDateTime value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return a Single which performs the network request upon subscription.
      */
-    Completable putUtcMinDateTimeAsync(@NonNull DateTime datetimeBody);
+    Completable putUtcMinDateTimeAsync(@NonNull OffsetDateTime datetimeBody);
 
     /**
      * Get min datetime value Mon, 1 Jan 0001 00:00:00 GMT.
      *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the DateTime object if successful.
+     * @return the OffsetDateTime object if successful.
      */
-    DateTime getUtcMinDateTime();
+    OffsetDateTime getUtcMinDateTime();
 
     /**
      * Get min datetime value Mon, 1 Jan 0001 00:00:00 GMT.
@@ -310,19 +310,19 @@ public interface Datetimerfc1123s {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return a ServiceFuture which will be completed with the result of the network request.
      */
-    ServiceFuture<DateTime> getUtcMinDateTimeAsync(ServiceCallback<DateTime> serviceCallback);
+    ServiceFuture<OffsetDateTime> getUtcMinDateTimeAsync(ServiceCallback<OffsetDateTime> serviceCallback);
 
     /**
      * Get min datetime value Mon, 1 Jan 0001 00:00:00 GMT.
      *
      * @return a Single which performs the network request upon subscription.
      */
-    Single<BodyResponse<DateTime>> getUtcMinDateTimeWithRestResponseAsync();
+    Single<BodyResponse<OffsetDateTime>> getUtcMinDateTimeWithRestResponseAsync();
 
     /**
      * Get min datetime value Mon, 1 Jan 0001 00:00:00 GMT.
      *
      * @return a Single which performs the network request upon subscription.
      */
-    Maybe<DateTime> getUtcMinDateTimeAsync();
+    Maybe<OffsetDateTime> getUtcMinDateTimeAsync();
 }

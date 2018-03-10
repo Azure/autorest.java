@@ -12,7 +12,7 @@ package fixtures.header.models;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.microsoft.rest.v2.DateTimeRfc1123;
-import org.joda.time.DateTime;
+import java.time.OffsetDateTime;
 
 /**
  * Defines headers for responseDatetimeRfc1123 operation.
@@ -30,7 +30,7 @@ public final class HeaderResponseDatetimeRfc1123Headers {
      *
      * @return the value value.
      */
-    public DateTime value() {
+    public OffsetDateTime value() {
         if (this.value == null) {
             return null;
         }
@@ -43,7 +43,7 @@ public final class HeaderResponseDatetimeRfc1123Headers {
      * @param value the value value to set.
      * @return the HeaderResponseDatetimeRfc1123Headers object itself.
      */
-    public HeaderResponseDatetimeRfc1123Headers withValue(DateTime value) {
+    public HeaderResponseDatetimeRfc1123Headers withValue(OffsetDateTime value) {
         if (value == null) {
             this.value = null;
         } else {

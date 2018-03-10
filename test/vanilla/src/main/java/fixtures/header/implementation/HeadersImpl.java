@@ -40,10 +40,10 @@ import fixtures.header.models.HeaderResponseStringResponse;
 import io.reactivex.Completable;
 import io.reactivex.Single;
 import io.reactivex.annotations.NonNull;
+import java.time.Duration;
+import java.time.LocalDate;
+import java.time.OffsetDateTime;
 import org.apache.commons.codec.binary.Base64;
-import org.joda.time.DateTime;
-import org.joda.time.LocalDate;
-import org.joda.time.Period;
 
 /**
  * An instance of this class provides access to all the operations defined in
@@ -169,7 +169,7 @@ public final class HeadersImpl implements Headers {
         @POST("header/param/prim/datetime")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<VoidResponse> paramDatetime(@HeaderParam("scenario") String scenario, @HeaderParam("value") DateTime value);
+        Single<VoidResponse> paramDatetime(@HeaderParam("scenario") String scenario, @HeaderParam("value") OffsetDateTime value);
 
         @POST("header/response/prim/datetime")
         @ExpectedResponses({200})
@@ -189,7 +189,7 @@ public final class HeadersImpl implements Headers {
         @POST("header/param/prim/duration")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<VoidResponse> paramDuration(@HeaderParam("scenario") String scenario, @HeaderParam("value") Period value);
+        Single<VoidResponse> paramDuration(@HeaderParam("scenario") String scenario, @HeaderParam("value") Duration value);
 
         @POST("header/response/prim/duration")
         @ExpectedResponses({200})
@@ -1193,7 +1193,7 @@ public final class HeadersImpl implements Headers {
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
-    public void paramDatetime(@NonNull String scenario, @NonNull DateTime value) {
+    public void paramDatetime(@NonNull String scenario, @NonNull OffsetDateTime value) {
         paramDatetimeAsync(scenario, value).blockingAwait();
     }
 
@@ -1206,7 +1206,7 @@ public final class HeadersImpl implements Headers {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return a ServiceFuture which will be completed with the result of the network request.
      */
-    public ServiceFuture<Void> paramDatetimeAsync(@NonNull String scenario, @NonNull DateTime value, ServiceCallback<Void> serviceCallback) {
+    public ServiceFuture<Void> paramDatetimeAsync(@NonNull String scenario, @NonNull OffsetDateTime value, ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(paramDatetimeAsync(scenario, value), serviceCallback);
     }
 
@@ -1218,7 +1218,7 @@ public final class HeadersImpl implements Headers {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return a Single which performs the network request upon subscription.
      */
-    public Single<VoidResponse> paramDatetimeWithRestResponseAsync(@NonNull String scenario, @NonNull DateTime value) {
+    public Single<VoidResponse> paramDatetimeWithRestResponseAsync(@NonNull String scenario, @NonNull OffsetDateTime value) {
         if (scenario == null) {
             throw new IllegalArgumentException("Parameter scenario is required and cannot be null.");
         }
@@ -1236,7 +1236,7 @@ public final class HeadersImpl implements Headers {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return a Single which performs the network request upon subscription.
      */
-    public Completable paramDatetimeAsync(@NonNull String scenario, @NonNull DateTime value) {
+    public Completable paramDatetimeAsync(@NonNull String scenario, @NonNull OffsetDateTime value) {
         return paramDatetimeWithRestResponseAsync(scenario, value)
             .toCompletable();
     }
@@ -1326,7 +1326,7 @@ public final class HeadersImpl implements Headers {
         if (scenario == null) {
             throw new IllegalArgumentException("Parameter scenario is required and cannot be null.");
         }
-        final DateTime value = null;
+        final OffsetDateTime value = null;
         DateTimeRfc1123 valueConverted = null;
         if (value != null) {
             valueConverted = new DateTimeRfc1123(value);
@@ -1355,7 +1355,7 @@ public final class HeadersImpl implements Headers {
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
-    public void paramDatetimeRfc1123(@NonNull String scenario, DateTime value) {
+    public void paramDatetimeRfc1123(@NonNull String scenario, OffsetDateTime value) {
         paramDatetimeRfc1123Async(scenario, value).blockingAwait();
     }
 
@@ -1368,7 +1368,7 @@ public final class HeadersImpl implements Headers {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return a ServiceFuture which will be completed with the result of the network request.
      */
-    public ServiceFuture<Void> paramDatetimeRfc1123Async(@NonNull String scenario, DateTime value, ServiceCallback<Void> serviceCallback) {
+    public ServiceFuture<Void> paramDatetimeRfc1123Async(@NonNull String scenario, OffsetDateTime value, ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(paramDatetimeRfc1123Async(scenario, value), serviceCallback);
     }
 
@@ -1380,7 +1380,7 @@ public final class HeadersImpl implements Headers {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return a Single which performs the network request upon subscription.
      */
-    public Single<VoidResponse> paramDatetimeRfc1123WithRestResponseAsync(@NonNull String scenario, DateTime value) {
+    public Single<VoidResponse> paramDatetimeRfc1123WithRestResponseAsync(@NonNull String scenario, OffsetDateTime value) {
         if (scenario == null) {
             throw new IllegalArgumentException("Parameter scenario is required and cannot be null.");
         }
@@ -1399,7 +1399,7 @@ public final class HeadersImpl implements Headers {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return a Single which performs the network request upon subscription.
      */
-    public Completable paramDatetimeRfc1123Async(@NonNull String scenario, DateTime value) {
+    public Completable paramDatetimeRfc1123Async(@NonNull String scenario, OffsetDateTime value) {
         return paramDatetimeRfc1123WithRestResponseAsync(scenario, value)
             .toCompletable();
     }
@@ -1463,7 +1463,7 @@ public final class HeadersImpl implements Headers {
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
-    public void paramDuration(@NonNull String scenario, @NonNull Period value) {
+    public void paramDuration(@NonNull String scenario, @NonNull Duration value) {
         paramDurationAsync(scenario, value).blockingAwait();
     }
 
@@ -1476,7 +1476,7 @@ public final class HeadersImpl implements Headers {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return a ServiceFuture which will be completed with the result of the network request.
      */
-    public ServiceFuture<Void> paramDurationAsync(@NonNull String scenario, @NonNull Period value, ServiceCallback<Void> serviceCallback) {
+    public ServiceFuture<Void> paramDurationAsync(@NonNull String scenario, @NonNull Duration value, ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(paramDurationAsync(scenario, value), serviceCallback);
     }
 
@@ -1488,7 +1488,7 @@ public final class HeadersImpl implements Headers {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return a Single which performs the network request upon subscription.
      */
-    public Single<VoidResponse> paramDurationWithRestResponseAsync(@NonNull String scenario, @NonNull Period value) {
+    public Single<VoidResponse> paramDurationWithRestResponseAsync(@NonNull String scenario, @NonNull Duration value) {
         if (scenario == null) {
             throw new IllegalArgumentException("Parameter scenario is required and cannot be null.");
         }
@@ -1506,7 +1506,7 @@ public final class HeadersImpl implements Headers {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return a Single which performs the network request upon subscription.
      */
-    public Completable paramDurationAsync(@NonNull String scenario, @NonNull Period value) {
+    public Completable paramDurationAsync(@NonNull String scenario, @NonNull Duration value) {
         return paramDurationWithRestResponseAsync(scenario, value)
             .toCompletable();
     }

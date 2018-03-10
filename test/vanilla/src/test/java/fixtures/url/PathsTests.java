@@ -4,10 +4,11 @@ import com.microsoft.rest.v2.http.HttpPipeline;
 import com.microsoft.rest.v2.policy.DecodingPolicyFactory;
 import fixtures.url.implementation.AutoRestUrlTestServiceImpl;
 import fixtures.url.models.UriColor;
-import org.joda.time.DateTime;
 import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
+
+import java.time.OffsetDateTime;
 
 public class PathsTests {
     private static AutoRestUrlTestService client;
@@ -166,6 +167,6 @@ public class PathsTests {
 
     @Test
     public void unixTimeUrl() throws Exception {
-        client.paths().unixTimeUrl(DateTime.parse("2016-04-13T00:00:00Z"));
+        client.paths().unixTimeUrl(OffsetDateTime.parse("2016-04-13T00:00:00Z"));
     }
 }

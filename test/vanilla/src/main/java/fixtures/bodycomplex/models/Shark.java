@@ -14,7 +14,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonSubTypes;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import com.fasterxml.jackson.annotation.JsonTypeName;
-import org.joda.time.DateTime;
+import java.time.OffsetDateTime;
 
 /**
  * The Shark model.
@@ -37,7 +37,7 @@ public class Shark extends Fish {
      * The birthday property.
      */
     @JsonProperty(value = "birthday", required = true)
-    private DateTime birthday;
+    private OffsetDateTime birthday;
 
     /**
      * Get the age value.
@@ -64,7 +64,7 @@ public class Shark extends Fish {
      *
      * @return the birthday value.
      */
-    public DateTime birthday() {
+    public OffsetDateTime birthday() {
         return this.birthday;
     }
 
@@ -74,7 +74,7 @@ public class Shark extends Fish {
      * @param birthday the birthday value to set.
      * @return the Shark object itself.
      */
-    public Shark withBirthday(DateTime birthday) {
+    public Shark withBirthday(OffsetDateTime birthday) {
         this.birthday = birthday;
         return this;
     }

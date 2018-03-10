@@ -104,11 +104,11 @@ public class XmlsTests {
 
         assertEquals("Cavendish", bananas.get(0).name());
         assertEquals("Sweet", bananas.get(0).flavor());
-        assertEquals("2018-02-28T00:40:00.000Z", bananas.get(0).expiration().toString());
+        assertEquals("2018-02-28T00:40Z", bananas.get(0).expiration().toString());
 
         assertEquals("Plantain", bananas.get(1).name());
         assertEquals("Savory", bananas.get(1).flavor());
-        assertEquals("2018-02-28T00:40:00.000Z", bananas.get(1).expiration().toString());
+        assertEquals("2018-02-28T00:40Z", bananas.get(1).expiration().toString());
     }
 
     @Test

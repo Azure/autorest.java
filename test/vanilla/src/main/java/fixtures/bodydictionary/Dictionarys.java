@@ -20,11 +20,11 @@ import io.reactivex.Completable;
 import io.reactivex.Maybe;
 import io.reactivex.Single;
 import io.reactivex.annotations.NonNull;
+import java.time.Duration;
+import java.time.LocalDate;
+import java.time.OffsetDateTime;
 import java.util.List;
 import java.util.Map;
-import org.joda.time.DateTime;
-import org.joda.time.LocalDate;
-import org.joda.time.Period;
 
 /**
  * An instance of this class provides access to all the operations defined in
@@ -1204,9 +1204,9 @@ public interface Dictionarys {
      *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the Map&lt;String, DateTime&gt; object if successful.
+     * @return the Map&lt;String, OffsetDateTime&gt; object if successful.
      */
-    Map<String, DateTime> getDateTimeValid();
+    Map<String, OffsetDateTime> getDateTimeValid();
 
     /**
      * Get date-time dictionary value {"0": "2000-12-01t00:00:01z", "1": "1980-01-02T00:11:35+01:00", "2": "1492-10-12T10:15:01-08:00"}.
@@ -1215,68 +1215,68 @@ public interface Dictionarys {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return a ServiceFuture which will be completed with the result of the network request.
      */
-    ServiceFuture<Map<String, DateTime>> getDateTimeValidAsync(ServiceCallback<Map<String, DateTime>> serviceCallback);
+    ServiceFuture<Map<String, OffsetDateTime>> getDateTimeValidAsync(ServiceCallback<Map<String, OffsetDateTime>> serviceCallback);
 
     /**
      * Get date-time dictionary value {"0": "2000-12-01t00:00:01z", "1": "1980-01-02T00:11:35+01:00", "2": "1492-10-12T10:15:01-08:00"}.
      *
      * @return a Single which performs the network request upon subscription.
      */
-    Single<BodyResponse<Map<String, DateTime>>> getDateTimeValidWithRestResponseAsync();
+    Single<BodyResponse<Map<String, OffsetDateTime>>> getDateTimeValidWithRestResponseAsync();
 
     /**
      * Get date-time dictionary value {"0": "2000-12-01t00:00:01z", "1": "1980-01-02T00:11:35+01:00", "2": "1492-10-12T10:15:01-08:00"}.
      *
      * @return a Single which performs the network request upon subscription.
      */
-    Maybe<Map<String, DateTime>> getDateTimeValidAsync();
+    Maybe<Map<String, OffsetDateTime>> getDateTimeValidAsync();
 
     /**
      * Set dictionary value  {"0": "2000-12-01t00:00:01z", "1": "1980-01-02T00:11:35+01:00", "2": "1492-10-12T10:15:01-08:00"}.
      *
-     * @param arrayBody the Map&lt;String, DateTime&gt; value.
+     * @param arrayBody the Map&lt;String, OffsetDateTime&gt; value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
-    void putDateTimeValid(@NonNull Map<String, DateTime> arrayBody);
+    void putDateTimeValid(@NonNull Map<String, OffsetDateTime> arrayBody);
 
     /**
      * Set dictionary value  {"0": "2000-12-01t00:00:01z", "1": "1980-01-02T00:11:35+01:00", "2": "1492-10-12T10:15:01-08:00"}.
      *
-     * @param arrayBody the Map&lt;String, DateTime&gt; value.
+     * @param arrayBody the Map&lt;String, OffsetDateTime&gt; value.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return a ServiceFuture which will be completed with the result of the network request.
      */
-    ServiceFuture<Void> putDateTimeValidAsync(@NonNull Map<String, DateTime> arrayBody, ServiceCallback<Void> serviceCallback);
+    ServiceFuture<Void> putDateTimeValidAsync(@NonNull Map<String, OffsetDateTime> arrayBody, ServiceCallback<Void> serviceCallback);
 
     /**
      * Set dictionary value  {"0": "2000-12-01t00:00:01z", "1": "1980-01-02T00:11:35+01:00", "2": "1492-10-12T10:15:01-08:00"}.
      *
-     * @param arrayBody the Map&lt;String, DateTime&gt; value.
+     * @param arrayBody the Map&lt;String, OffsetDateTime&gt; value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return a Single which performs the network request upon subscription.
      */
-    Single<VoidResponse> putDateTimeValidWithRestResponseAsync(@NonNull Map<String, DateTime> arrayBody);
+    Single<VoidResponse> putDateTimeValidWithRestResponseAsync(@NonNull Map<String, OffsetDateTime> arrayBody);
 
     /**
      * Set dictionary value  {"0": "2000-12-01t00:00:01z", "1": "1980-01-02T00:11:35+01:00", "2": "1492-10-12T10:15:01-08:00"}.
      *
-     * @param arrayBody the Map&lt;String, DateTime&gt; value.
+     * @param arrayBody the Map&lt;String, OffsetDateTime&gt; value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return a Single which performs the network request upon subscription.
      */
-    Completable putDateTimeValidAsync(@NonNull Map<String, DateTime> arrayBody);
+    Completable putDateTimeValidAsync(@NonNull Map<String, OffsetDateTime> arrayBody);
 
     /**
      * Get date dictionary value {"0": "2000-12-01t00:00:01z", "1": null}.
      *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the Map&lt;String, DateTime&gt; object if successful.
+     * @return the Map&lt;String, OffsetDateTime&gt; object if successful.
      */
-    Map<String, DateTime> getDateTimeInvalidNull();
+    Map<String, OffsetDateTime> getDateTimeInvalidNull();
 
     /**
      * Get date dictionary value {"0": "2000-12-01t00:00:01z", "1": null}.
@@ -1285,30 +1285,30 @@ public interface Dictionarys {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return a ServiceFuture which will be completed with the result of the network request.
      */
-    ServiceFuture<Map<String, DateTime>> getDateTimeInvalidNullAsync(ServiceCallback<Map<String, DateTime>> serviceCallback);
+    ServiceFuture<Map<String, OffsetDateTime>> getDateTimeInvalidNullAsync(ServiceCallback<Map<String, OffsetDateTime>> serviceCallback);
 
     /**
      * Get date dictionary value {"0": "2000-12-01t00:00:01z", "1": null}.
      *
      * @return a Single which performs the network request upon subscription.
      */
-    Single<BodyResponse<Map<String, DateTime>>> getDateTimeInvalidNullWithRestResponseAsync();
+    Single<BodyResponse<Map<String, OffsetDateTime>>> getDateTimeInvalidNullWithRestResponseAsync();
 
     /**
      * Get date dictionary value {"0": "2000-12-01t00:00:01z", "1": null}.
      *
      * @return a Single which performs the network request upon subscription.
      */
-    Maybe<Map<String, DateTime>> getDateTimeInvalidNullAsync();
+    Maybe<Map<String, OffsetDateTime>> getDateTimeInvalidNullAsync();
 
     /**
      * Get date dictionary value {"0": "2000-12-01t00:00:01z", "1": "date-time"}.
      *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the Map&lt;String, DateTime&gt; object if successful.
+     * @return the Map&lt;String, OffsetDateTime&gt; object if successful.
      */
-    Map<String, DateTime> getDateTimeInvalidChars();
+    Map<String, OffsetDateTime> getDateTimeInvalidChars();
 
     /**
      * Get date dictionary value {"0": "2000-12-01t00:00:01z", "1": "date-time"}.
@@ -1317,30 +1317,30 @@ public interface Dictionarys {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return a ServiceFuture which will be completed with the result of the network request.
      */
-    ServiceFuture<Map<String, DateTime>> getDateTimeInvalidCharsAsync(ServiceCallback<Map<String, DateTime>> serviceCallback);
+    ServiceFuture<Map<String, OffsetDateTime>> getDateTimeInvalidCharsAsync(ServiceCallback<Map<String, OffsetDateTime>> serviceCallback);
 
     /**
      * Get date dictionary value {"0": "2000-12-01t00:00:01z", "1": "date-time"}.
      *
      * @return a Single which performs the network request upon subscription.
      */
-    Single<BodyResponse<Map<String, DateTime>>> getDateTimeInvalidCharsWithRestResponseAsync();
+    Single<BodyResponse<Map<String, OffsetDateTime>>> getDateTimeInvalidCharsWithRestResponseAsync();
 
     /**
      * Get date dictionary value {"0": "2000-12-01t00:00:01z", "1": "date-time"}.
      *
      * @return a Single which performs the network request upon subscription.
      */
-    Maybe<Map<String, DateTime>> getDateTimeInvalidCharsAsync();
+    Maybe<Map<String, OffsetDateTime>> getDateTimeInvalidCharsAsync();
 
     /**
      * Get date-time-rfc1123 dictionary value {"0": "Fri, 01 Dec 2000 00:00:01 GMT", "1": "Wed, 02 Jan 1980 00:11:35 GMT", "2": "Wed, 12 Oct 1492 10:15:01 GMT"}.
      *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the Map&lt;String, DateTime&gt; object if successful.
+     * @return the Map&lt;String, OffsetDateTime&gt; object if successful.
      */
-    Map<String, DateTime> getDateTimeRfc1123Valid();
+    Map<String, OffsetDateTime> getDateTimeRfc1123Valid();
 
     /**
      * Get date-time-rfc1123 dictionary value {"0": "Fri, 01 Dec 2000 00:00:01 GMT", "1": "Wed, 02 Jan 1980 00:11:35 GMT", "2": "Wed, 12 Oct 1492 10:15:01 GMT"}.
@@ -1349,68 +1349,68 @@ public interface Dictionarys {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return a ServiceFuture which will be completed with the result of the network request.
      */
-    ServiceFuture<Map<String, DateTime>> getDateTimeRfc1123ValidAsync(ServiceCallback<Map<String, DateTime>> serviceCallback);
+    ServiceFuture<Map<String, OffsetDateTime>> getDateTimeRfc1123ValidAsync(ServiceCallback<Map<String, OffsetDateTime>> serviceCallback);
 
     /**
      * Get date-time-rfc1123 dictionary value {"0": "Fri, 01 Dec 2000 00:00:01 GMT", "1": "Wed, 02 Jan 1980 00:11:35 GMT", "2": "Wed, 12 Oct 1492 10:15:01 GMT"}.
      *
      * @return a Single which performs the network request upon subscription.
      */
-    Single<BodyResponse<Map<String, DateTime>>> getDateTimeRfc1123ValidWithRestResponseAsync();
+    Single<BodyResponse<Map<String, OffsetDateTime>>> getDateTimeRfc1123ValidWithRestResponseAsync();
 
     /**
      * Get date-time-rfc1123 dictionary value {"0": "Fri, 01 Dec 2000 00:00:01 GMT", "1": "Wed, 02 Jan 1980 00:11:35 GMT", "2": "Wed, 12 Oct 1492 10:15:01 GMT"}.
      *
      * @return a Single which performs the network request upon subscription.
      */
-    Maybe<Map<String, DateTime>> getDateTimeRfc1123ValidAsync();
+    Maybe<Map<String, OffsetDateTime>> getDateTimeRfc1123ValidAsync();
 
     /**
      * Set dictionary value empty {"0": "Fri, 01 Dec 2000 00:00:01 GMT", "1": "Wed, 02 Jan 1980 00:11:35 GMT", "2": "Wed, 12 Oct 1492 10:15:01 GMT"}.
      *
-     * @param arrayBody the Map&lt;String, DateTime&gt; value.
+     * @param arrayBody the Map&lt;String, OffsetDateTime&gt; value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
-    void putDateTimeRfc1123Valid(@NonNull Map<String, DateTime> arrayBody);
+    void putDateTimeRfc1123Valid(@NonNull Map<String, OffsetDateTime> arrayBody);
 
     /**
      * Set dictionary value empty {"0": "Fri, 01 Dec 2000 00:00:01 GMT", "1": "Wed, 02 Jan 1980 00:11:35 GMT", "2": "Wed, 12 Oct 1492 10:15:01 GMT"}.
      *
-     * @param arrayBody the Map&lt;String, DateTime&gt; value.
+     * @param arrayBody the Map&lt;String, OffsetDateTime&gt; value.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return a ServiceFuture which will be completed with the result of the network request.
      */
-    ServiceFuture<Void> putDateTimeRfc1123ValidAsync(@NonNull Map<String, DateTime> arrayBody, ServiceCallback<Void> serviceCallback);
+    ServiceFuture<Void> putDateTimeRfc1123ValidAsync(@NonNull Map<String, OffsetDateTime> arrayBody, ServiceCallback<Void> serviceCallback);
 
     /**
      * Set dictionary value empty {"0": "Fri, 01 Dec 2000 00:00:01 GMT", "1": "Wed, 02 Jan 1980 00:11:35 GMT", "2": "Wed, 12 Oct 1492 10:15:01 GMT"}.
      *
-     * @param arrayBody the Map&lt;String, DateTime&gt; value.
+     * @param arrayBody the Map&lt;String, OffsetDateTime&gt; value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return a Single which performs the network request upon subscription.
      */
-    Single<VoidResponse> putDateTimeRfc1123ValidWithRestResponseAsync(@NonNull Map<String, DateTime> arrayBody);
+    Single<VoidResponse> putDateTimeRfc1123ValidWithRestResponseAsync(@NonNull Map<String, OffsetDateTime> arrayBody);
 
     /**
      * Set dictionary value empty {"0": "Fri, 01 Dec 2000 00:00:01 GMT", "1": "Wed, 02 Jan 1980 00:11:35 GMT", "2": "Wed, 12 Oct 1492 10:15:01 GMT"}.
      *
-     * @param arrayBody the Map&lt;String, DateTime&gt; value.
+     * @param arrayBody the Map&lt;String, OffsetDateTime&gt; value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return a Single which performs the network request upon subscription.
      */
-    Completable putDateTimeRfc1123ValidAsync(@NonNull Map<String, DateTime> arrayBody);
+    Completable putDateTimeRfc1123ValidAsync(@NonNull Map<String, OffsetDateTime> arrayBody);
 
     /**
      * Get duration dictionary value {"0": "P123DT22H14M12.011S", "1": "P5DT1H0M0S"}.
      *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the Map&lt;String, Period&gt; object if successful.
+     * @return the Map&lt;String, Duration&gt; object if successful.
      */
-    Map<String, Period> getDurationValid();
+    Map<String, Duration> getDurationValid();
 
     /**
      * Get duration dictionary value {"0": "P123DT22H14M12.011S", "1": "P5DT1H0M0S"}.
@@ -1419,59 +1419,59 @@ public interface Dictionarys {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return a ServiceFuture which will be completed with the result of the network request.
      */
-    ServiceFuture<Map<String, Period>> getDurationValidAsync(ServiceCallback<Map<String, Period>> serviceCallback);
+    ServiceFuture<Map<String, Duration>> getDurationValidAsync(ServiceCallback<Map<String, Duration>> serviceCallback);
 
     /**
      * Get duration dictionary value {"0": "P123DT22H14M12.011S", "1": "P5DT1H0M0S"}.
      *
      * @return a Single which performs the network request upon subscription.
      */
-    Single<BodyResponse<Map<String, Period>>> getDurationValidWithRestResponseAsync();
+    Single<BodyResponse<Map<String, Duration>>> getDurationValidWithRestResponseAsync();
 
     /**
      * Get duration dictionary value {"0": "P123DT22H14M12.011S", "1": "P5DT1H0M0S"}.
      *
      * @return a Single which performs the network request upon subscription.
      */
-    Maybe<Map<String, Period>> getDurationValidAsync();
+    Maybe<Map<String, Duration>> getDurationValidAsync();
 
     /**
      * Set dictionary value  {"0": "P123DT22H14M12.011S", "1": "P5DT1H0M0S"}.
      *
-     * @param arrayBody the Map&lt;String, Period&gt; value.
+     * @param arrayBody the Map&lt;String, Duration&gt; value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
-    void putDurationValid(@NonNull Map<String, Period> arrayBody);
+    void putDurationValid(@NonNull Map<String, Duration> arrayBody);
 
     /**
      * Set dictionary value  {"0": "P123DT22H14M12.011S", "1": "P5DT1H0M0S"}.
      *
-     * @param arrayBody the Map&lt;String, Period&gt; value.
+     * @param arrayBody the Map&lt;String, Duration&gt; value.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return a ServiceFuture which will be completed with the result of the network request.
      */
-    ServiceFuture<Void> putDurationValidAsync(@NonNull Map<String, Period> arrayBody, ServiceCallback<Void> serviceCallback);
+    ServiceFuture<Void> putDurationValidAsync(@NonNull Map<String, Duration> arrayBody, ServiceCallback<Void> serviceCallback);
 
     /**
      * Set dictionary value  {"0": "P123DT22H14M12.011S", "1": "P5DT1H0M0S"}.
      *
-     * @param arrayBody the Map&lt;String, Period&gt; value.
+     * @param arrayBody the Map&lt;String, Duration&gt; value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return a Single which performs the network request upon subscription.
      */
-    Single<VoidResponse> putDurationValidWithRestResponseAsync(@NonNull Map<String, Period> arrayBody);
+    Single<VoidResponse> putDurationValidWithRestResponseAsync(@NonNull Map<String, Duration> arrayBody);
 
     /**
      * Set dictionary value  {"0": "P123DT22H14M12.011S", "1": "P5DT1H0M0S"}.
      *
-     * @param arrayBody the Map&lt;String, Period&gt; value.
+     * @param arrayBody the Map&lt;String, Duration&gt; value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return a Single which performs the network request upon subscription.
      */
-    Completable putDurationValidAsync(@NonNull Map<String, Period> arrayBody);
+    Completable putDurationValidAsync(@NonNull Map<String, Duration> arrayBody);
 
     /**
      * Get byte dictionary value {"0": hex(FF FF FF FA), "1": hex(01 02 03), "2": hex (25, 29, 43)} with each item encoded in base64.

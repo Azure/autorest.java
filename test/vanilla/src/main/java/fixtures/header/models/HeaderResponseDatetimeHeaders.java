@@ -11,7 +11,7 @@
 package fixtures.header.models;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import org.joda.time.DateTime;
+import java.time.OffsetDateTime;
 
 /**
  * Defines headers for responseDatetime operation.
@@ -22,14 +22,14 @@ public final class HeaderResponseDatetimeHeaders {
      * "0001-01-01T00:00:00Z".
      */
     @JsonProperty(value = "value")
-    private DateTime value;
+    private OffsetDateTime value;
 
     /**
      * Get the value value.
      *
      * @return the value value.
      */
-    public DateTime value() {
+    public OffsetDateTime value() {
         return this.value;
     }
 
@@ -39,7 +39,7 @@ public final class HeaderResponseDatetimeHeaders {
      * @param value the value value to set.
      * @return the HeaderResponseDatetimeHeaders object itself.
      */
-    public HeaderResponseDatetimeHeaders withValue(DateTime value) {
+    public HeaderResponseDatetimeHeaders withValue(OffsetDateTime value) {
         this.value = value;
         return this;
     }

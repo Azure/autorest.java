@@ -6,12 +6,12 @@ import fixtures.bodycomplex.models.Goblinshark;
 import fixtures.bodycomplex.models.Salmon;
 import fixtures.bodycomplex.models.Sawshark;
 import fixtures.bodycomplex.models.Shark;
-import org.joda.time.DateTime;
-import org.joda.time.DateTimeZone;
 import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
+import java.time.OffsetDateTime;
+import java.time.ZoneOffset;
 import java.util.ArrayList;
 
 public class PolymorphismTests {
@@ -23,7 +23,7 @@ public class PolymorphismTests {
     }
 
     @Test
-    public void getValid() throws Exception {
+    public void getValid() {
         Fish result = client.polymorphisms().getValid();
         Assert.assertEquals(Salmon.class, result.getClass());
         Salmon salmon = (Salmon) result;
@@ -32,7 +32,7 @@ public class PolymorphismTests {
         Assert.assertEquals(3, salmon.siblings().size());
         Assert.assertEquals(Shark.class, salmon.siblings().get(0).getClass());
         Shark sib1 = (Shark) (salmon.siblings().get(0));
-        Assert.assertEquals(new DateTime(2012, 1, 5, 1, 0, 0, DateTimeZone.UTC), sib1.birthday());
+        Assert.assertEquals(OffsetDateTime.of(2012, 1, 5, 1, 0, 0, 0, ZoneOffset.UTC), sib1.birthday());
         Assert.assertEquals(Sawshark.class, salmon.siblings().get(1).getClass());
         Sawshark sib2 = (Sawshark) (salmon.siblings().get(1));
         Assert.assertArrayEquals(
@@ -44,24 +44,24 @@ public class PolymorphismTests {
     }
 
     @Test
-    public void putValid() throws Exception {
+    public void putValid() {
         Salmon body = new Salmon();
         body.withLocation("alaska");
         body.withIswild(true);
         body.withSpecies("king");
         body.withLength(1.0);
-        body.withSiblings(new ArrayList<Fish>());
+        body.withSiblings(new ArrayList<>());
 
         Shark sib1 = new Shark();
         sib1.withAge(6);
-        sib1.withBirthday(new DateTime(2012, 1, 5, 1, 0, 0, DateTimeZone.UTC));
+        sib1.withBirthday(OffsetDateTime.of(2012, 1, 5, 1, 0, 0, 0, ZoneOffset.UTC));
         sib1.withLength(20.0);
         sib1.withSpecies("predator");
         body.siblings().add(sib1);
 
         Sawshark sib2 = new Sawshark();
         sib2.withAge(105);
-        sib2.withBirthday(new DateTime(1900, 1, 5, 1, 0, 0, DateTimeZone.UTC));
+        sib2.withBirthday(OffsetDateTime.of(1900, 1, 5, 1, 0, 0, 0, ZoneOffset.UTC));
         sib2.withLength(10.0);
         sib2.withPicture(new byte[] {(byte) 255, (byte) 255, (byte) 255, (byte) 255, (byte) 254});
         sib2.withSpecies("dangerous");
@@ -69,7 +69,7 @@ public class PolymorphismTests {
 
         Goblinshark sib3 = new Goblinshark();
         sib3.withAge(1);
-        sib3.withBirthday(new DateTime(2015, 8, 8, 0, 0, 0, DateTimeZone.UTC));
+        sib3.withBirthday(OffsetDateTime.of(2015, 8, 8, 0, 0, 0, 0, ZoneOffset.UTC));
         sib3.withLength(30.0);
         sib3.withSpecies("scary");
         sib3.withJawsize(5);
@@ -79,18 +79,18 @@ public class PolymorphismTests {
     }
 
     @Test
-    public void putValidMissingRequired() throws Exception {
+    public void putValidMissingRequired() {
         try {
             Salmon body = new Salmon();
             body.withLocation("alaska");
             body.withIswild(true);
             body.withSpecies("king");
             body.withLength(1.0);
-            body.withSiblings(new ArrayList<Fish>());
+            body.withSiblings(new ArrayList<>());
 
             Shark sib1 = new Shark();
             sib1.withAge(6);
-            sib1.withBirthday(new DateTime(2012, 1, 5, 1, 0, 0, DateTimeZone.UTC));
+            sib1.withBirthday(OffsetDateTime.of(2012, 1, 5, 1, 0, 0, 0, ZoneOffset.UTC));
             sib1.withLength(20.0);
             sib1.withSpecies("predator");
             body.siblings().add(sib1);

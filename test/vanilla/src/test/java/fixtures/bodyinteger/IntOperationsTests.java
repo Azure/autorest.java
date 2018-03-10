@@ -1,25 +1,19 @@
 package fixtures.bodyinteger;
 
 import com.fasterxml.jackson.core.JsonParseException;
-import com.microsoft.rest.v2.RestException;
 import com.microsoft.rest.v2.ServiceCallback;
-import com.microsoft.rest.v2.http.HttpPipeline;
-import com.microsoft.rest.v2.policy.DecodingPolicyFactory;
 import fixtures.bodyinteger.implementation.AutoRestIntegerTestServiceImpl;
 import io.reactivex.Observable;
 import io.reactivex.Observer;
 import io.reactivex.disposables.Disposable;
-import org.joda.time.DateTime;
-import org.joda.time.DateTimeZone;
 import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
+import java.time.OffsetDateTime;
+import java.time.ZoneOffset;
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.TimeUnit;
-
-import static org.junit.Assert.assertThat;
-import static org.junit.Assert.fail;
 
 public class IntOperationsTests {
     private static AutoRestIntegerTestService client;
@@ -31,17 +25,17 @@ public class IntOperationsTests {
     }
 
     @Test
-    public void getNull() throws Exception {
+    public void getNull() {
         try {
-            int i = client.ints().getNull();
-            fail();
+            client.ints().getNull();
+            Assert.fail();
         } catch (NullPointerException e) {
             // expected
         }
     }
 
     @Test
-    public void getNullAsync() throws Exception {
+    public void getNullAsync() {
         Observable.fromFuture(client.ints().getNullAsync(null)).subscribe(new Observer<Integer>() {
             @Override
             public void onSubscribe(Disposable disposable) {}
@@ -65,37 +59,37 @@ public class IntOperationsTests {
     }
 
     @Test
-    public void getInvalid() throws Exception {
+    public void getInvalid() {
         try {
             client.ints().getInvalid();
-            Assert.assertTrue(false);
+            Assert.fail();
         } catch (Exception exception) {
             Assert.assertEquals(JsonParseException.class, exception.getCause().getClass());
         }
     }
 
     @Test
-    public void getOverflowInt32() throws Exception {
+    public void getOverflowInt32() {
         try {
             client.ints().getOverflowInt32();
-            Assert.assertTrue(false);
+            Assert.fail();
         } catch (Exception exception) {
             Assert.assertEquals(JsonParseException.class, exception.getCause().getClass());
         }
     }
 
     @Test
-    public void getUnderflowInt32() throws Exception {
+    public void getUnderflowInt32() {
         try {
             client.ints().getUnderflowInt32();
-            Assert.assertTrue(false);
+            Assert.fail();
         } catch (Exception exception) {
             Assert.assertEquals(JsonParseException.class, exception.getCause().getClass());
         }
     }
 
     @Test
-    public void getOverflowInt64() throws Exception {
+    public void getOverflowInt64() {
         try {
             long value = client.ints().getOverflowInt64();
             Assert.assertEquals(Long.MAX_VALUE, value);
@@ -105,7 +99,7 @@ public class IntOperationsTests {
     }
 
     @Test
-    public void getUnderflowInt64() throws Exception {
+    public void getUnderflowInt64() {
         try {
             long value = client.ints().getUnderflowInt64();
             Assert.assertEquals(Long.MIN_VALUE, value);
@@ -175,29 +169,28 @@ public class IntOperationsTests {
     }
 
     @Test
-    public void getUnixTime() throws Exception {
-        DateTime result = client.ints().getUnixTime();
-        Assert.assertEquals(new DateTime(2016, 4, 13, 0, 0, 0, DateTimeZone.UTC), result);
+    public void getUnixTime() {
+        OffsetDateTime result = client.ints().getUnixTime();
+        Assert.assertEquals(OffsetDateTime.of(2016, 4, 13, 0, 0, 0, 0, ZoneOffset.UTC), result);
     }
 
     @Test
-    public void putUnixTimeDate() throws Exception {
-        client.ints().putUnixTimeDate(new DateTime(2016, 4, 13, 0, 0, 0, DateTimeZone.UTC));
+    public void putUnixTimeDate() {
+        client.ints().putUnixTimeDate(OffsetDateTime.of(2016, 4, 13, 0, 0, 0, 0, ZoneOffset.UTC));
     }
 
     @Test
-    public void getInvalidUnixTime() throws Exception {
+    public void getInvalidUnixTime() {
         try {
             client.ints().getInvalidUnixTime();
-            fail();
+            Assert.fail();
         } catch (RuntimeException e) {
             Assert.assertTrue(e.getMessage().contains("HTTP response has a malformed body"));
         }
     }
 
     @Test
-    public void getNullUnixTime() throws Exception {
-        DateTime result = client.ints().getNullUnixTime();
-        Assert.assertNull(result);
+    public void getNullUnixTime() {
+        Assert.assertNull(client.ints().getNullUnixTime());
     }
 }

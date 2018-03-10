@@ -12,13 +12,14 @@ import fixtures.bodycomplex.models.FloatWrapper;
 import fixtures.bodycomplex.models.IntWrapper;
 import fixtures.bodycomplex.models.LongWrapper;
 import fixtures.bodycomplex.models.StringWrapper;
-import org.joda.time.DateTime;
-import org.joda.time.DateTimeZone;
-import org.joda.time.LocalDate;
-import org.joda.time.Period;
 import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
+
+import java.time.Duration;
+import java.time.LocalDate;
+import java.time.OffsetDateTime;
+import java.time.ZoneOffset;
 
 public class PrimitiveTests {
     private static AutoRestComplexTestService client;
@@ -124,58 +125,58 @@ public class PrimitiveTests {
     @Test
     public void getDate() throws Exception {
         DateWrapper result = client.primitives().getDate();
-        Assert.assertEquals(new LocalDate(1, 1, 1), result.field());
-        Assert.assertEquals(new LocalDate(2016, 2, 29), result.leap());
+        Assert.assertEquals(LocalDate.of(1, 1, 1), result.field());
+        Assert.assertEquals(LocalDate.of(2016, 2, 29), result.leap());
     }
 
     @Test
     public void putDate() throws Exception {
         DateWrapper body = new DateWrapper();
-        body.withField(new LocalDate(1, 1, 1));
-        body.withLeap(new LocalDate(2016, 2, 29));
+        body.withField(LocalDate.of(1, 1, 1));
+        body.withLeap(LocalDate.of(2016, 2, 29));
         client.primitives().putDate(body);
     }
 
     @Test
     public void getDateTime() throws Exception {
         DatetimeWrapper result = client.primitives().getDateTime();
-        Assert.assertEquals(new DateTime(1, 1, 1, 0, 0, 0, DateTimeZone.UTC), result.field());
-        Assert.assertEquals(new DateTime(2015, 5, 18, 18, 38, 0, DateTimeZone.UTC), result.now());
+        Assert.assertEquals(OffsetDateTime.of(1, 1, 1, 0, 0, 0, 0, ZoneOffset.UTC), result.field());
+        Assert.assertEquals(OffsetDateTime.of(2015, 5, 18, 18, 38, 0, 0, ZoneOffset.UTC), result.now());
     }
 
     @Test
     public void putDateTime() throws Exception {
         DatetimeWrapper body = new DatetimeWrapper();
-        body.withField(new DateTime(1, 1, 1, 0, 0, 0, DateTimeZone.UTC));
-        body.withNow(new DateTime(2015, 5, 18, 18, 38, 0, DateTimeZone.UTC));
+        body.withField(OffsetDateTime.of(1, 1, 1, 0, 0, 0, 0, ZoneOffset.UTC));
+        body.withNow(OffsetDateTime.of(2015, 5, 18, 18, 38, 0, 0, ZoneOffset.UTC));
         client.primitives().putDateTime(body);
     }
 
     @Test
     public void getDateTimeRfc1123() throws Exception {
         Datetimerfc1123Wrapper result = client.primitives().getDateTimeRfc1123();
-        Assert.assertEquals(new DateTime(1, 1, 1, 0, 0, 0, DateTimeZone.UTC), result.field());
-        Assert.assertEquals(new DateTime(2015, 5, 18, 11, 38, 0, DateTimeZone.UTC), result.now());
+        Assert.assertEquals(OffsetDateTime.of(1, 1, 1, 0, 0, 0, 0, ZoneOffset.UTC), result.field());
+        Assert.assertEquals(OffsetDateTime.of(2015, 5, 18, 11, 38, 0, 0, ZoneOffset.UTC), result.now());
     }
 
     @Test
     public void putDateTimeRfc1123() throws Exception {
         Datetimerfc1123Wrapper body = new Datetimerfc1123Wrapper();
-        body.withField(new DateTime(1, 1, 1, 0, 0, 0, DateTimeZone.UTC));
-        body.withNow(new DateTime(2015, 5, 18, 11, 38, 0, DateTimeZone.UTC));
+        body.withField(OffsetDateTime.of(1, 1, 1, 0, 0, 0, 0, ZoneOffset.UTC));
+        body.withNow(OffsetDateTime.of(2015, 5, 18, 11, 38, 0, 0, ZoneOffset.UTC));
         client.primitives().putDateTimeRfc1123(body);
     }
 
     @Test
     public void getDuration() throws Exception {
         DurationWrapper result = client.primitives().getDuration();
-        Assert.assertEquals(new Period(0, 0, 0, 123, 22, 14, 12, 11), result.field());
+        Assert.assertEquals(Duration.ofDays(123).plusHours(22).plusMinutes(14).plusSeconds(12).plusMillis(11), result.field());
     }
 
     @Test
     public void putDuration() throws Exception {
         DurationWrapper body = new DurationWrapper();
-        body.withField(new Period(0, 0, 0, 123, 22, 14, 12, 11));
+        body.withField(Duration.ofDays(123).plusHours(22).plusMinutes(14).plusSeconds(12).plusMillis(11));
         client.primitives().putDuration(body);
     }
 

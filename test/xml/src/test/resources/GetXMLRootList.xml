@@ -3,11 +3,11 @@
     <banana>
         <name>Cavendish</name>
         <flavor>Sweet</flavor>
-        <expiration>2018-02-28T00:40:00.000Z</expiration>
+        <expiration>2018-02-28T00:40:00Z</expiration>
     </banana>
     <banana>
         <name>Plantain</name>
         <flavor>Savory</flavor>
-        <expiration>2018-02-28T00:40:00.000Z</expiration>
+        <expiration>2018-02-28T00:40:00Z</expiration>
     </banana>
 </bananas>
