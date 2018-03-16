@@ -3,7 +3,8 @@
 @using AutoRest.Java
 @using AutoRest.Java.Model
 @using AutoRest.Java.Azure.Model
-@inherits AutoRest.Core.Template<AutoRest.Java.Azure.Model.CodeModelJva>
+@using AutoRest.Java.Azure.Fluent.Model
+@inherits AutoRest.Core.Template<AutoRest.Java.Azure.Fluent.Model.CodeModelJvaf>
 @{
     var serviceName = Model.ServiceName;
 }
@@ -12,15 +13,19 @@
 -->
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <groupId>com.microsoft.azure</groupId>
+        <artifactId>azure-parent</artifactId>
+        <version>@Model.PomVersion</version>
+        <relativePath>../pom.xml</relativePath>
+    </parent>
 
-    <groupId>com.microsoft.azure</groupId>
-    <artifactId>azure-@serviceName.ToLower()</artifactId>
-    <version>@Model.PomVersion</version>
+    <artifactId>azure-mgmt-@serviceName.ToLower()</artifactId>
     <packaging>jar</packaging>
 
-    <name>Microsoft Azure SDK for @serviceName</name>
-    <description>This package contains Microsoft @serviceName SDK.</description>
-    <url>https://github.com/Azure/azure-sdk-for-java</url>
+    <name>Microsoft Azure SDK for @serviceName Management</name>
+    <description>This package contains Microsoft @serviceName Management SDK.</description>
+    <url>https://github.com/Azure/azure-libraries-for-java</url>
 
     <licenses>
         <license>
@@ -31,7 +36,7 @@
     </licenses>
 
     <scm>
-        <url>scm:git:https://github.com/Azure/azure-sdk-for-java</url>
+        <url>scm:git:https://github.com/Azure/azure-libraries-for-java</url>
         <connection>scm:git:git@github.com:Azure/azure-sdk-for-java.git</connection>
         <tag>HEAD</tag>
     </scm>

@@ -13,6 +13,7 @@ using AutoRest.Extensions;
 using AutoRest.Extensions.Azure;
 using AutoRest.Java.Azure.Fluent.Model;
 using AutoRest.Java.azure.Templates;
+using AutoRest.Java.azurefluent.Templates;
 using AutoRest.Java.Model;
 using AutoRest.Java.vanilla.Templates;
 using System;
@@ -22,7 +23,7 @@ namespace AutoRest.Java.Azure.Fluent
 {
     public class CodeGeneratorJvaf : CodeGeneratorJva
     {
-        private const string ClientRuntimePackage = "com.microsoft.azure:azure-client-runtime:1.0.0-beta6-SNAPSHOT";
+        private const string ClientRuntimePackage = "com.microsoft.azure:azure-client-runtime:1.3.0";
         private const string _packageInfoFileName = "package-info.java";
 
         public override bool IsSingleFileGenerationSupported => true;
@@ -117,11 +118,11 @@ namespace AutoRest.Java.Azure.Fluent
             {
                 // Manager
                 await Write(
-                    new AzureServiceManagerTemplate { Model = codeModel },
+                    new AzureFluentServiceManagerTemplate { Model = codeModel },
                     $"{packagePath}/implementation/{codeModel.ServiceName}Manager{ImplementationFileExtension}");
 
                 // POM
-                await Write(new AzurePomTemplate { Model = codeModel }, "pom.xml");
+                await Write(new AzureFluentPomTemplate { Model = codeModel }, "pom.xml");
             }
         }
     }

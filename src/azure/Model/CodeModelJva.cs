@@ -89,7 +89,7 @@ namespace AutoRest.Java.Azure.Model
         }
 
 
-        const string targetVersion = "1.1.3";
+        const string targetVersion = "1.7.1";
         /// <summary>
         /// The Azure SDK version to reference in the generated POM.
         /// </summary>
