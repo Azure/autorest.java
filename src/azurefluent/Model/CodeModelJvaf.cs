@@ -33,6 +33,14 @@ namespace AutoRest.Java.Azure.Fluent.Model
             }
         }
 
+        public override string ModuleName
+        {
+            get
+            {
+                return "azure-mgmt-" + ServiceName.ToLower();
+            }
+        }
+
         [JsonIgnore]
         public override List<string> InterfaceImports
         {

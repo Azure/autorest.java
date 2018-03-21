@@ -88,6 +88,13 @@ namespace AutoRest.Java.Azure.Model
             }
         }
 
+        public virtual string ModuleName
+        {
+            get
+            {
+                return "azure-" + ServiceName.ToLower();
+            }
+        }
 
         const string targetVersion = "1.7.1";
         /// <summary>
