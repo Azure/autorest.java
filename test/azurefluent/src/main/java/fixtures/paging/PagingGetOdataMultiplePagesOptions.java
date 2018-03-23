@@ -8,14 +8,14 @@
  * regenerated.
  */
 
-package fixtures.paging.implementation;
+package fixtures.paging;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 /**
- * Additional parameters for getMultiplePages operation.
+ * Additional parameters for getOdataMultiplePages operation.
  */
-public class PagingGetMultiplePagesOptionsInner {
+public class PagingGetOdataMultiplePagesOptions {
     /**
      * Sets the maximum number of items to return in the response.
      */
@@ -42,9 +42,9 @@ public class PagingGetMultiplePagesOptionsInner {
      * Set the maxresults value.
      *
      * @param maxresults the maxresults value to set
-     * @return the PagingGetMultiplePagesOptionsInner object itself.
+     * @return the PagingGetOdataMultiplePagesOptions object itself.
      */
-    public PagingGetMultiplePagesOptionsInner withMaxresults(Integer maxresults) {
+    public PagingGetOdataMultiplePagesOptions withMaxresults(Integer maxresults) {
         this.maxresults = maxresults;
         return this;
     }
@@ -62,9 +62,9 @@ public class PagingGetMultiplePagesOptionsInner {
      * Set the timeout value.
      *
      * @param timeout the timeout value to set
-     * @return the PagingGetMultiplePagesOptionsInner object itself.
+     * @return the PagingGetOdataMultiplePagesOptions object itself.
      */
-    public PagingGetMultiplePagesOptionsInner withTimeout(Integer timeout) {
+    public PagingGetOdataMultiplePagesOptions withTimeout(Integer timeout) {
         this.timeout = timeout;
         return this;
     }

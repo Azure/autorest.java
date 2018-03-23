@@ -8,14 +8,14 @@
  * regenerated.
  */
 
-package fixtures.azureparametergrouping.implementation;
+package fixtures.azureparametergrouping;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 /**
  * Additional parameters for postMultiParamGroups operation.
  */
-public class ParameterGroupingPostMultiParamGroupsSecondParamGroupInner {
+public class ParameterGroupingPostMultiParamGroupsSecondParamGroup {
     /**
      * The headerTwo property.
      */
@@ -41,9 +41,9 @@ public class ParameterGroupingPostMultiParamGroupsSecondParamGroupInner {
      * Set the headerTwo value.
      *
      * @param headerTwo the headerTwo value to set
-     * @return the ParameterGroupingPostMultiParamGroupsSecondParamGroupInner object itself.
+     * @return the ParameterGroupingPostMultiParamGroupsSecondParamGroup object itself.
      */
-    public ParameterGroupingPostMultiParamGroupsSecondParamGroupInner withHeaderTwo(String headerTwo) {
+    public ParameterGroupingPostMultiParamGroupsSecondParamGroup withHeaderTwo(String headerTwo) {
         this.headerTwo = headerTwo;
         return this;
     }
@@ -61,9 +61,9 @@ public class ParameterGroupingPostMultiParamGroupsSecondParamGroupInner {
      * Set the queryTwo value.
      *
      * @param queryTwo the queryTwo value to set
-     * @return the ParameterGroupingPostMultiParamGroupsSecondParamGroupInner object itself.
+     * @return the ParameterGroupingPostMultiParamGroupsSecondParamGroup object itself.
      */
-    public ParameterGroupingPostMultiParamGroupsSecondParamGroupInner withQueryTwo(Integer queryTwo) {
+    public ParameterGroupingPostMultiParamGroupsSecondParamGroup withQueryTwo(Integer queryTwo) {
         this.queryTwo = queryTwo;
         return this;
     }

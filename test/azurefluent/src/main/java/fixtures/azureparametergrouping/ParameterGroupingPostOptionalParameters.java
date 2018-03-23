@@ -8,14 +8,14 @@
  * regenerated.
  */
 
-package fixtures.azureparametergrouping.implementation;
+package fixtures.azureparametergrouping;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 /**
  * Additional parameters for postOptional operation.
  */
-public class ParameterGroupingPostOptionalParametersInner {
+public class ParameterGroupingPostOptionalParameters {
     /**
      * The customHeader property.
      */
@@ -41,9 +41,9 @@ public class ParameterGroupingPostOptionalParametersInner {
      * Set the customHeader value.
      *
      * @param customHeader the customHeader value to set
-     * @return the ParameterGroupingPostOptionalParametersInner object itself.
+     * @return the ParameterGroupingPostOptionalParameters object itself.
      */
-    public ParameterGroupingPostOptionalParametersInner withCustomHeader(String customHeader) {
+    public ParameterGroupingPostOptionalParameters withCustomHeader(String customHeader) {
         this.customHeader = customHeader;
         return this;
     }
@@ -61,9 +61,9 @@ public class ParameterGroupingPostOptionalParametersInner {
      * Set the query value.
      *
      * @param query the query value to set
-     * @return the ParameterGroupingPostOptionalParametersInner object itself.
+     * @return the ParameterGroupingPostOptionalParameters object itself.
      */
-    public ParameterGroupingPostOptionalParametersInner withQuery(Integer query) {
+    public ParameterGroupingPostOptionalParameters withQuery(Integer query) {
         this.query = query;
         return this;
     }

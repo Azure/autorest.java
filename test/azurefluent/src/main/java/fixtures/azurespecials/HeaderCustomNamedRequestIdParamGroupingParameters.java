@@ -8,14 +8,14 @@
  * regenerated.
  */
 
-package fixtures.azurespecials.implementation;
+package fixtures.azurespecials;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 /**
  * Additional parameters for customNamedRequestIdParamGrouping operation.
  */
-public class HeaderCustomNamedRequestIdParamGroupingParametersInner {
+public class HeaderCustomNamedRequestIdParamGroupingParameters {
     /**
      * The fooRequestId.
      */
@@ -35,9 +35,9 @@ public class HeaderCustomNamedRequestIdParamGroupingParametersInner {
      * Set the fooClientRequestId value.
      *
      * @param fooClientRequestId the fooClientRequestId value to set
-     * @return the HeaderCustomNamedRequestIdParamGroupingParametersInner object itself.
+     * @return the HeaderCustomNamedRequestIdParamGroupingParameters object itself.
      */
-    public HeaderCustomNamedRequestIdParamGroupingParametersInner withFooClientRequestId(String fooClientRequestId) {
+    public HeaderCustomNamedRequestIdParamGroupingParameters withFooClientRequestId(String fooClientRequestId) {
         this.fooClientRequestId = fooClientRequestId;
         return this;
     }

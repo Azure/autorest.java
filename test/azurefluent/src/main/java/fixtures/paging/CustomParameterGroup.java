@@ -8,7 +8,7 @@
  * regenerated.
  */
 
-package fixtures.paging.implementation;
+package fixtures.paging;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
@@ -17,7 +17,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
  * Paging_getMultiplePagesFragmentWithGroupingNextLink,
  * Paging_nextFragmentWithGrouping.
  */
-public class CustomParameterGroupInner {
+public class CustomParameterGroup {
     /**
      * Sets the api version to use.
      */
@@ -43,9 +43,9 @@ public class CustomParameterGroupInner {
      * Set the apiVersion value.
      *
      * @param apiVersion the apiVersion value to set
-     * @return the CustomParameterGroupInner object itself.
+     * @return the CustomParameterGroup object itself.
      */
-    public CustomParameterGroupInner withApiVersion(String apiVersion) {
+    public CustomParameterGroup withApiVersion(String apiVersion) {
         this.apiVersion = apiVersion;
         return this;
     }
@@ -63,9 +63,9 @@ public class CustomParameterGroupInner {
      * Set the tenant value.
      *
      * @param tenant the tenant value to set
-     * @return the CustomParameterGroupInner object itself.
+     * @return the CustomParameterGroup object itself.
      */
-    public CustomParameterGroupInner withTenant(String tenant) {
+    public CustomParameterGroup withTenant(String tenant) {
         this.tenant = tenant;
         return this;
     }

@@ -8,19 +8,25 @@
  * regenerated.
  */
 
-package fixtures.paging.implementation;
+package fixtures.paging;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 /**
- * Additional parameters for getMultiplePagesWithOffsetNext operation.
+ * Additional parameters for getMultiplePagesWithOffset operation.
  */
-public class PagingGetMultiplePagesWithOffsetNextOptionsInner {
+public class PagingGetMultiplePagesWithOffsetOptions {
     /**
      * Sets the maximum number of items to return in the response.
      */
     @JsonProperty(value = "")
     private Integer maxresults;
+
+    /**
+     * Offset of return value.
+     */
+    @JsonProperty(value = "", required = true)
+    private int offset;
 
     /**
      * Sets the maximum time that the server can spend processing the request,
@@ -42,10 +48,30 @@ public class PagingGetMultiplePagesWithOffsetNextOptionsInner {
      * Set the maxresults value.
      *
      * @param maxresults the maxresults value to set
-     * @return the PagingGetMultiplePagesWithOffsetNextOptionsInner object itself.
+     * @return the PagingGetMultiplePagesWithOffsetOptions object itself.
      */
-    public PagingGetMultiplePagesWithOffsetNextOptionsInner withMaxresults(Integer maxresults) {
+    public PagingGetMultiplePagesWithOffsetOptions withMaxresults(Integer maxresults) {
         this.maxresults = maxresults;
+        return this;
+    }
+
+    /**
+     * Get the offset value.
+     *
+     * @return the offset value
+     */
+    public int offset() {
+        return this.offset;
+    }
+
+    /**
+     * Set the offset value.
+     *
+     * @param offset the offset value to set
+     * @return the PagingGetMultiplePagesWithOffsetOptions object itself.
+     */
+    public PagingGetMultiplePagesWithOffsetOptions withOffset(int offset) {
+        this.offset = offset;
         return this;
     }
 
@@ -62,9 +88,9 @@ public class PagingGetMultiplePagesWithOffsetNextOptionsInner {
      * Set the timeout value.
      *
      * @param timeout the timeout value to set
-     * @return the PagingGetMultiplePagesWithOffsetNextOptionsInner object itself.
+     * @return the PagingGetMultiplePagesWithOffsetOptions object itself.
      */
-    public PagingGetMultiplePagesWithOffsetNextOptionsInner withTimeout(Integer timeout) {
+    public PagingGetMultiplePagesWithOffsetOptions withTimeout(Integer timeout) {
         this.timeout = timeout;
         return this;
     }

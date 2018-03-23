@@ -8,14 +8,14 @@
  * regenerated.
  */
 
-package fixtures.azureparametergrouping.implementation;
+package fixtures.azureparametergrouping;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 /**
  * Additional parameters for postRequired operation.
  */
-public class ParameterGroupingPostRequiredParametersInner {
+public class ParameterGroupingPostRequiredParameters {
     /**
      * The body property.
      */
@@ -53,9 +53,9 @@ public class ParameterGroupingPostRequiredParametersInner {
      * Set the body value.
      *
      * @param body the body value to set
-     * @return the ParameterGroupingPostRequiredParametersInner object itself.
+     * @return the ParameterGroupingPostRequiredParameters object itself.
      */
-    public ParameterGroupingPostRequiredParametersInner withBody(int body) {
+    public ParameterGroupingPostRequiredParameters withBody(int body) {
         this.body = body;
         return this;
     }
@@ -73,9 +73,9 @@ public class ParameterGroupingPostRequiredParametersInner {
      * Set the customHeader value.
      *
      * @param customHeader the customHeader value to set
-     * @return the ParameterGroupingPostRequiredParametersInner object itself.
+     * @return the ParameterGroupingPostRequiredParameters object itself.
      */
-    public ParameterGroupingPostRequiredParametersInner withCustomHeader(String customHeader) {
+    public ParameterGroupingPostRequiredParameters withCustomHeader(String customHeader) {
         this.customHeader = customHeader;
         return this;
     }
@@ -93,9 +93,9 @@ public class ParameterGroupingPostRequiredParametersInner {
      * Set the query value.
      *
      * @param query the query value to set
-     * @return the ParameterGroupingPostRequiredParametersInner object itself.
+     * @return the ParameterGroupingPostRequiredParameters object itself.
      */
-    public ParameterGroupingPostRequiredParametersInner withQuery(Integer query) {
+    public ParameterGroupingPostRequiredParameters withQuery(Integer query) {
         this.query = query;
         return this;
     }
@@ -113,9 +113,9 @@ public class ParameterGroupingPostRequiredParametersInner {
      * Set the path value.
      *
      * @param path the path value to set
-     * @return the ParameterGroupingPostRequiredParametersInner object itself.
+     * @return the ParameterGroupingPostRequiredParameters object itself.
      */
-    public ParameterGroupingPostRequiredParametersInner withPath(String path) {
+    public ParameterGroupingPostRequiredParameters withPath(String path) {
         this.path = path;
         return this;
     }

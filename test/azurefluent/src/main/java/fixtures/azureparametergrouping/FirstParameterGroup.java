@@ -8,7 +8,7 @@
  * regenerated.
  */
 
-package fixtures.azureparametergrouping.implementation;
+package fixtures.azureparametergrouping;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
@@ -17,7 +17,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
  * ParameterGrouping_postMultiParamGroups,
  * ParameterGrouping_postSharedParameterGroupObject.
  */
-public class FirstParameterGroupInner {
+public class FirstParameterGroup {
     /**
      * The headerOne property.
      */
@@ -43,9 +43,9 @@ public class FirstParameterGroupInner {
      * Set the headerOne value.
      *
      * @param headerOne the headerOne value to set
-     * @return the FirstParameterGroupInner object itself.
+     * @return the FirstParameterGroup object itself.
      */
-    public FirstParameterGroupInner withHeaderOne(String headerOne) {
+    public FirstParameterGroup withHeaderOne(String headerOne) {
         this.headerOne = headerOne;
         return this;
     }
@@ -63,9 +63,9 @@ public class FirstParameterGroupInner {
      * Set the queryOne value.
      *
      * @param queryOne the queryOne value to set
-     * @return the FirstParameterGroupInner object itself.
+     * @return the FirstParameterGroup object itself.
      */
-    public FirstParameterGroupInner withQueryOne(Integer queryOne) {
+    public FirstParameterGroup withQueryOne(Integer queryOne) {
         this.queryOne = queryOne;
         return this;
     }
