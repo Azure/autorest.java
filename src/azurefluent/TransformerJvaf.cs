@@ -40,6 +40,7 @@ namespace AutoRest.Java.Azure
             AddLongRunningOperations(codeModel);
             AzureExtensions.AddAzureProperties(codeModel);
             AzureExtensions.SetDefaultResponses(codeModel);
+            MoveResourceTypeProperties(codeModel);
 
             // set Parent on responses (required for pageable)
             foreach (MethodJva method in codeModel.Methods)

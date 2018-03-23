@@ -26,11 +26,11 @@ regenExpected = (opts,done) ->
 
     if (opts.azureArm)
       args.push("--java.azure-arm=true")
+    else
+      args.push("--clear-output-folder") # doesn't work for fluent since the output-folder you specify is higher up
 
     if (opts.fluent)
       args.push("--java.fluent=true")
-    else
-      args.push("--clear-output-folder") # doesn't work for fluent since the output-folder you specify is higher up
 
     autorest args,() =>
       instances--
@@ -82,7 +82,7 @@ task 'regenerate-javaazure', '', (done) ->
   regenExpected {
     'outputBaseDir': 'test/azure',
     'mappings': defaultAzureMappings,
-    'outputDir': 'src/main/java/fixtures',
+    'outputDir': '',
     'azureArm': true
   },done
   return null

@@ -46,7 +46,7 @@ namespace AutoRest.Java.Azure
 
             // Service client
             var serviceClientTemplate = new AzureServiceClientTemplate { Model = codeModel };
-            await Write(serviceClientTemplate, $"{packagePath}/{Path.Combine("implementation", codeModel.Name.ToPascalCase() + "Impl")}{ImplementationFileExtension}");
+            await Write(serviceClientTemplate, $"{packagePath}/implementation/{codeModel.Name.ToPascalCase()}Impl{ImplementationFileExtension}");
 
             // Service client interface
             var serviceClientInterfaceTemplate = new AzureServiceClientInterfaceTemplate { Model = codeModel };
@@ -57,7 +57,7 @@ namespace AutoRest.Java.Azure
             {
                 // Operation
                 var operationsTemplate = new AzureMethodGroupTemplate { Model = methodGroup };
-                await Write(operationsTemplate, $"{packagePath}/{Path.Combine("implementation", methodGroup.TypeName.ToPascalCase())}Impl{ImplementationFileExtension}");
+                await Write(operationsTemplate, $"{packagePath}/implementation/{methodGroup.TypeName.ToPascalCase()}Impl{ImplementationFileExtension}");
                 
                 // Operation interface
                 var operationsInterfaceTemplate = new AzureMethodGroupInterfaceTemplate { Model = methodGroup };
@@ -78,14 +78,14 @@ namespace AutoRest.Java.Azure
                 }
 
                 var modelTemplate = new ModelTemplate { Model = modelType };
-                await Write(modelTemplate, Path.Combine(packagePath, "models", $"{modelType.Name.ToPascalCase()}{ImplementationFileExtension}"));
+                await Write(modelTemplate, $"{packagePath}/models/{modelType.Name.ToPascalCase()}{ImplementationFileExtension}");
             }
 
             //Enums
             foreach (EnumTypeJva enumType in cm.EnumTypes)
             {
                 var enumTemplate = new EnumTemplate { Model = enumType };
-                await Write(enumTemplate, Path.Combine(packagePath, "models", $"{enumTemplate.Model.Name.ToPascalCase()}{ImplementationFileExtension}"));
+                await Write(enumTemplate, $"{packagePath}/models/{enumTemplate.Model.Name.ToPascalCase()}{ImplementationFileExtension}");
             }
 
             // Page class
@@ -95,7 +95,7 @@ namespace AutoRest.Java.Azure
                 {
                     Model = new PageJva(pageClass.Value, pageClass.Key.Key, pageClass.Key.Value),
                 };
-                await Write(pageTemplate, Path.Combine(packagePath, "models", $"{pageTemplate.Model.TypeDefinitionName.ToPascalCase()}{ImplementationFileExtension}"));
+                await Write(pageTemplate, $"{packagePath}/models/{pageTemplate.Model.TypeDefinitionName.ToPascalCase()}{ImplementationFileExtension}");
             }
 
             // Exceptions
@@ -107,22 +107,22 @@ namespace AutoRest.Java.Azure
                 }
 
                 var exceptionTemplate = new ExceptionTemplate { Model = exceptionType };
-                await Write(exceptionTemplate, Path.Combine(packagePath, "models", $"{exceptionTemplate.Model.ExceptionTypeDefinitionName}{ImplementationFileExtension}"));
+                await Write(exceptionTemplate, $"{packagePath}/models/{exceptionTemplate.Model.ExceptionTypeDefinitionName}{ImplementationFileExtension}");
             }
 
             // package-info.java
             await Write(new PackageInfoTemplate
             {
                 Model = new PackageInfoTemplateModel(cm)
-            }, Path.Combine(packagePath, _packageInfoFileName));
+            }, $"{packagePath}/{_packageInfoFileName}");
             await Write(new PackageInfoTemplate
             {
                 Model = new PackageInfoTemplateModel(cm, "implementation")
-            }, Path.Combine(packagePath, "implementation", _packageInfoFileName));
+            }, $"{packagePath}/implementation/{_packageInfoFileName}");
             await Write(new PackageInfoTemplate
             {
                 Model = new PackageInfoTemplateModel(cm, "models")
-            }, Path.Combine(packagePath, "models", _packageInfoFileName));
+            }, $"{packagePath}/models/{_packageInfoFileName}");
 
             if (true == AutoRest.Core.Settings.Instance.Host?.GetValue<bool?>("regenerate-manager").Result)
             {
