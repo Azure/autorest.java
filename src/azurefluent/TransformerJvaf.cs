@@ -26,6 +26,8 @@ namespace AutoRest.Java.Azure
     public class TransformerJvaf : TransformerJva, ITransformer<CodeModelJvaf>
     {
         private PluralizationServiceInstance pluralizer = new PluralizationServiceInstance();
+        private List<string> addInner = new List<string>();
+        private List<string> removeInner = new List<string>();
 
         public override CodeModelJv TransformCodeModel(CodeModel cm)
         {
@@ -94,10 +96,30 @@ namespace AutoRest.Java.Azure
             return TransformCodeModel(cm) as CodeModelJvaf;
         }
 
+        /**
+         * Adding inners to model types to preserve the good name for the fluent interface.
+         * 
+         * -	Add “inner” to all method responses and types extending “Resource” (e.g. VirtualMachine)
+         * -	Otherwise add “inner” to all model types whose plural form is a collection name (e.g. Deployment)
+         * -	Otherwise add “inner” to all model types containing properties of above types
+         * 
+         * If any of this missed a type you want to add “inner”, you can provide them on the AutoRest command line with --add-inner=<comma separated model names>.
+         * If any of this added an unnecessary “inner”, you can exclude them with --remove-inner=<comma separated model names>.
+         */
         public void NormalizeTopLevelTypes(CodeModel serviceClient)
         {
+            var included = AutoRest.Core.Settings.Instance.Host?.GetValue<string>("add-inner").Result;
+            if (included != null)
+            {
+                included.Split(',', StringSplitOptions.RemoveEmptyEntries).ForEach(addInner.Add);
+            }
+            var excluded = AutoRest.Core.Settings.Instance.Host?.GetValue<string>("remove-inner").Result;
+            if (excluded != null)
+            {
+                excluded.Split(',', StringSplitOptions.RemoveEmptyEntries).ForEach(removeInner.Add);
+            }
+
             foreach (var response in serviceClient.Methods
-                .Where(m => m.HttpMethod == HttpMethod.Put || m.HttpMethod == HttpMethod.Get || m.Name.ToPascalCase().StartsWith("Get") || m.Name.ToPascalCase().StartsWith("Create"))
                 .SelectMany(m => m.Responses)
                 .Select(r => r.Value))
             {
@@ -105,6 +127,10 @@ namespace AutoRest.Java.Azure
             }
             foreach (var model in serviceClient.ModelTypes)
             {
+                if (addInner.Contains(model.Name))
+                {
+                    AppendInnerToTopLevelType(model, serviceClient);
+                }
                 if (model.BaseModelType != null && model.BaseModelType.IsResource())
                 {
                     AppendInnerToTopLevelType(model, serviceClient);
@@ -118,7 +144,7 @@ namespace AutoRest.Java.Azure
 
         private void AppendInnerToTopLevelType(IModelType type, CodeModel serviceClient)
         {
-            if (type == null)
+            if (type == null || removeInner.Contains(type.Name))
             {
                 return;
             }
