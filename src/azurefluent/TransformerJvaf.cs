@@ -17,15 +17,14 @@ using AutoRest.Java.Azure.Model;
 using AutoRest.Java.Model;
 using static AutoRest.Core.Utilities.DependencyInjection;
 using AutoRest.Java.Azure.Fluent.Model;
-using PluralizationService;
-using PluralizationService.English;
 using AutoRest.Java.Azure.Fluent;
+using Pluralize.NET;
 
 namespace AutoRest.Java.Azure
 {
     public class TransformerJvaf : TransformerJva, ITransformer<CodeModelJvaf>
     {
-        private PluralizationServiceInstance pluralizer = new PluralizationServiceInstance();
+        private Pluralizer pluralizer = new Pluralizer();
         private List<string> addInner = new List<string>();
         private List<string> removeInner = new List<string>();
 
@@ -99,12 +98,12 @@ namespace AutoRest.Java.Azure
         /**
          * Adding inners to model types to preserve the good name for the fluent interface.
          * 
-         * -	Add “inner” to all method responses and types extending “Resource” (e.g. VirtualMachine)
-         * -	Otherwise add “inner” to all model types whose plural form is a collection name (e.g. Deployment)
-         * -	Otherwise add “inner” to all model types containing properties of above types
+         * -	Add "inner" to all method responses and types extending "Resource" (e.g. VirtualMachine)
+         * -	Otherwise add "inner" to all model types whose plural form is a collection name (e.g. Deployment)
+         * -	Otherwise add "inner" to all model types containing properties of above types
          * 
-         * If any of this missed a type you want to add “inner”, you can provide them on the AutoRest command line with --add-inner=<comma separated model names>.
-         * If any of this added an unnecessary “inner”, you can exclude them with --remove-inner=<comma separated model names>.
+         * If any of this missed a type you want to add "inner", you can provide them on the AutoRest command line with --add-inner=<comma separated model names>.
+         * If any of this added an unnecessary "inner", you can exclude them with --remove-inner=<comma separated model names>.
          */
         public void NormalizeTopLevelTypes(CodeModel serviceClient)
         {
@@ -209,32 +208,6 @@ namespace AutoRest.Java.Azure
         {
             // When parameters are optional we generate more methods.
             return method.Parameters.Count(x => !x.IsClientProperty && !x.IsConstant && x.IsRequired) == requiredParameterCount;
-        }
-    }
-
-    public class PluralizationServiceInstance
-    {
-        private static readonly IPluralizationApi Api;
-        private static readonly CultureInfo CultureInfo;
-
-        static PluralizationServiceInstance()
-        {
-            var builder = new PluralizationApiBuilder();
-            builder.AddEnglishProvider();
-
-            Api = builder.Build();
-            CultureInfo = new CultureInfo("en-US");
-        }
-
-
-        public string Pluralize(string name)
-        {
-            return Api.Pluralize(name, CultureInfo) ?? name;
-        }
-
-        public string Singularize(string name)
-        {
-            return Api.Singularize(name, CultureInfo) ?? name;
         }
     }
 }
