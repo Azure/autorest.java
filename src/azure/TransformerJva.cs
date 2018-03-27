@@ -258,14 +258,14 @@ namespace AutoRest.Java.Azure
             foreach (var subtype in client.ModelTypes.Where(t => t.BaseModelType.IsResource()))
             {
                 var baseType = subtype.BaseModelType as CompositeTypeJva;
-                if (baseType.ModelResourceType == CompositeTypeJva.ResourceType.SubResource)
+                if (baseType.ModelResourceType == ResourceType.SubResource)
                 {
                     foreach (var prop in baseType.Properties.Where(p => p.Name != "id"))
                     {
                         subtype.Add(prop);
                     }
                 }
-                else if (baseType.ModelResourceType == CompositeTypeJva.ResourceType.ProxyResource)
+                else if (baseType.ModelResourceType == ResourceType.ProxyResource)
                 {
                     foreach (var prop in baseType.Properties.Where(p => p.Name != "id" && p.Name != "name" && p.Name != "type"))
                     {
@@ -279,7 +279,7 @@ namespace AutoRest.Java.Azure
                         }
                     }
                 }
-                else if (baseType.ModelResourceType == CompositeTypeJva.ResourceType.Resource)
+                else if (baseType.ModelResourceType == ResourceType.Resource)
                 {
                     foreach (var prop in baseType.Properties.Where(p => p.Name != "id" && p.Name != "name" && p.Name != "type" && p.Name != "location" && p.Name != "tags"))
                     {

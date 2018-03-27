@@ -23,14 +23,6 @@ namespace AutoRest.Java.Azure.Model
 
         protected string _azureRuntimePackage = "com.microsoft.azure";
 
-        public enum ResourceType
-        {
-            Resource,
-            ProxyResource,
-            SubResource,
-            None
-        }
-
         [JsonIgnore]
         public override string Package => IsResource
             ? _azureRuntimePackage
@@ -137,5 +129,13 @@ namespace AutoRest.Java.Azure.Model
                 return imports.Distinct();
             }
         }
+    }
+
+    public enum ResourceType
+    {
+        Resource,
+        ProxyResource,
+        SubResource,
+        None
     }
 }

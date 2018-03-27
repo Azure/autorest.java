@@ -17,6 +17,9 @@ import com.microsoft.rest.ServiceFuture;
 import com.microsoft.rest.ServiceResponseWithHeaders;
 import com.microsoft.rest.Validator;
 import fixtures.azurespecials.ErrorException;
+import fixtures.azurespecials.HeaderCustomNamedRequestIdHeaders;
+import fixtures.azurespecials.HeaderCustomNamedRequestIdHeadHeaders;
+import fixtures.azurespecials.HeaderCustomNamedRequestIdParamGroupingHeaders;
 import fixtures.azurespecials.HeaderCustomNamedRequestIdParamGroupingParameters;
 import java.io.IOException;
 import okhttp3.ResponseBody;
@@ -100,9 +103,9 @@ public class HeadersInner {
      * @return the {@link ServiceResponseWithHeaders} object if successful.
      */
     public Observable<Void> customNamedRequestIdAsync(String fooClientRequestId) {
-        return customNamedRequestIdWithServiceResponseAsync(fooClientRequestId).map(new Func1<ServiceResponseWithHeaders<Void, HeaderCustomNamedRequestIdHeadersInner>, Void>() {
+        return customNamedRequestIdWithServiceResponseAsync(fooClientRequestId).map(new Func1<ServiceResponseWithHeaders<Void, HeaderCustomNamedRequestIdHeaders>, Void>() {
             @Override
-            public Void call(ServiceResponseWithHeaders<Void, HeaderCustomNamedRequestIdHeadersInner> response) {
+            public Void call(ServiceResponseWithHeaders<Void, HeaderCustomNamedRequestIdHeaders> response) {
                 return response.body();
             }
         });
@@ -115,16 +118,16 @@ public class HeadersInner {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponseWithHeaders} object if successful.
      */
-    public Observable<ServiceResponseWithHeaders<Void, HeaderCustomNamedRequestIdHeadersInner>> customNamedRequestIdWithServiceResponseAsync(String fooClientRequestId) {
+    public Observable<ServiceResponseWithHeaders<Void, HeaderCustomNamedRequestIdHeaders>> customNamedRequestIdWithServiceResponseAsync(String fooClientRequestId) {
         if (fooClientRequestId == null) {
             throw new IllegalArgumentException("Parameter fooClientRequestId is required and cannot be null.");
         }
         return service.customNamedRequestId(fooClientRequestId, this.client.acceptLanguage(), this.client.userAgent())
-            .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponseWithHeaders<Void, HeaderCustomNamedRequestIdHeadersInner>>>() {
+            .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponseWithHeaders<Void, HeaderCustomNamedRequestIdHeaders>>>() {
                 @Override
-                public Observable<ServiceResponseWithHeaders<Void, HeaderCustomNamedRequestIdHeadersInner>> call(Response<ResponseBody> response) {
+                public Observable<ServiceResponseWithHeaders<Void, HeaderCustomNamedRequestIdHeaders>> call(Response<ResponseBody> response) {
                     try {
-                        ServiceResponseWithHeaders<Void, HeaderCustomNamedRequestIdHeadersInner> clientResponse = customNamedRequestIdDelegate(response);
+                        ServiceResponseWithHeaders<Void, HeaderCustomNamedRequestIdHeaders> clientResponse = customNamedRequestIdDelegate(response);
                         return Observable.just(clientResponse);
                     } catch (Throwable t) {
                         return Observable.error(t);
@@ -133,11 +136,11 @@ public class HeadersInner {
             });
     }
 
-    private ServiceResponseWithHeaders<Void, HeaderCustomNamedRequestIdHeadersInner> customNamedRequestIdDelegate(Response<ResponseBody> response) throws ErrorException, IOException, IllegalArgumentException {
+    private ServiceResponseWithHeaders<Void, HeaderCustomNamedRequestIdHeaders> customNamedRequestIdDelegate(Response<ResponseBody> response) throws ErrorException, IOException, IllegalArgumentException {
         return this.client.restClient().responseBuilderFactory().<Void, ErrorException>newInstance(this.client.serializerAdapter())
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
-                .buildWithHeaders(response, HeaderCustomNamedRequestIdHeadersInner.class);
+                .buildWithHeaders(response, HeaderCustomNamedRequestIdHeaders.class);
     }
 
     /**
@@ -172,9 +175,9 @@ public class HeadersInner {
      * @return the {@link ServiceResponseWithHeaders} object if successful.
      */
     public Observable<Void> customNamedRequestIdParamGroupingAsync(HeaderCustomNamedRequestIdParamGroupingParameters headerCustomNamedRequestIdParamGroupingParameters) {
-        return customNamedRequestIdParamGroupingWithServiceResponseAsync(headerCustomNamedRequestIdParamGroupingParameters).map(new Func1<ServiceResponseWithHeaders<Void, HeaderCustomNamedRequestIdParamGroupingHeadersInner>, Void>() {
+        return customNamedRequestIdParamGroupingWithServiceResponseAsync(headerCustomNamedRequestIdParamGroupingParameters).map(new Func1<ServiceResponseWithHeaders<Void, HeaderCustomNamedRequestIdParamGroupingHeaders>, Void>() {
             @Override
-            public Void call(ServiceResponseWithHeaders<Void, HeaderCustomNamedRequestIdParamGroupingHeadersInner> response) {
+            public Void call(ServiceResponseWithHeaders<Void, HeaderCustomNamedRequestIdParamGroupingHeaders> response) {
                 return response.body();
             }
         });
@@ -187,18 +190,18 @@ public class HeadersInner {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponseWithHeaders} object if successful.
      */
-    public Observable<ServiceResponseWithHeaders<Void, HeaderCustomNamedRequestIdParamGroupingHeadersInner>> customNamedRequestIdParamGroupingWithServiceResponseAsync(HeaderCustomNamedRequestIdParamGroupingParameters headerCustomNamedRequestIdParamGroupingParameters) {
+    public Observable<ServiceResponseWithHeaders<Void, HeaderCustomNamedRequestIdParamGroupingHeaders>> customNamedRequestIdParamGroupingWithServiceResponseAsync(HeaderCustomNamedRequestIdParamGroupingParameters headerCustomNamedRequestIdParamGroupingParameters) {
         if (headerCustomNamedRequestIdParamGroupingParameters == null) {
             throw new IllegalArgumentException("Parameter headerCustomNamedRequestIdParamGroupingParameters is required and cannot be null.");
         }
         Validator.validate(headerCustomNamedRequestIdParamGroupingParameters);
         String fooClientRequestId = headerCustomNamedRequestIdParamGroupingParameters.fooClientRequestId();
         return service.customNamedRequestIdParamGrouping(this.client.acceptLanguage(), fooClientRequestId, this.client.userAgent())
-            .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponseWithHeaders<Void, HeaderCustomNamedRequestIdParamGroupingHeadersInner>>>() {
+            .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponseWithHeaders<Void, HeaderCustomNamedRequestIdParamGroupingHeaders>>>() {
                 @Override
-                public Observable<ServiceResponseWithHeaders<Void, HeaderCustomNamedRequestIdParamGroupingHeadersInner>> call(Response<ResponseBody> response) {
+                public Observable<ServiceResponseWithHeaders<Void, HeaderCustomNamedRequestIdParamGroupingHeaders>> call(Response<ResponseBody> response) {
                     try {
-                        ServiceResponseWithHeaders<Void, HeaderCustomNamedRequestIdParamGroupingHeadersInner> clientResponse = customNamedRequestIdParamGroupingDelegate(response);
+                        ServiceResponseWithHeaders<Void, HeaderCustomNamedRequestIdParamGroupingHeaders> clientResponse = customNamedRequestIdParamGroupingDelegate(response);
                         return Observable.just(clientResponse);
                     } catch (Throwable t) {
                         return Observable.error(t);
@@ -207,11 +210,11 @@ public class HeadersInner {
             });
     }
 
-    private ServiceResponseWithHeaders<Void, HeaderCustomNamedRequestIdParamGroupingHeadersInner> customNamedRequestIdParamGroupingDelegate(Response<ResponseBody> response) throws ErrorException, IOException, IllegalArgumentException {
+    private ServiceResponseWithHeaders<Void, HeaderCustomNamedRequestIdParamGroupingHeaders> customNamedRequestIdParamGroupingDelegate(Response<ResponseBody> response) throws ErrorException, IOException, IllegalArgumentException {
         return this.client.restClient().responseBuilderFactory().<Void, ErrorException>newInstance(this.client.serializerAdapter())
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
-                .buildWithHeaders(response, HeaderCustomNamedRequestIdParamGroupingHeadersInner.class);
+                .buildWithHeaders(response, HeaderCustomNamedRequestIdParamGroupingHeaders.class);
     }
 
     /**
@@ -247,9 +250,9 @@ public class HeadersInner {
      * @return the observable to the Boolean object
      */
     public Observable<Boolean> customNamedRequestIdHeadAsync(String fooClientRequestId) {
-        return customNamedRequestIdHeadWithServiceResponseAsync(fooClientRequestId).map(new Func1<ServiceResponseWithHeaders<Boolean, HeaderCustomNamedRequestIdHeadHeadersInner>, Boolean>() {
+        return customNamedRequestIdHeadWithServiceResponseAsync(fooClientRequestId).map(new Func1<ServiceResponseWithHeaders<Boolean, HeaderCustomNamedRequestIdHeadHeaders>, Boolean>() {
             @Override
-            public Boolean call(ServiceResponseWithHeaders<Boolean, HeaderCustomNamedRequestIdHeadHeadersInner> response) {
+            public Boolean call(ServiceResponseWithHeaders<Boolean, HeaderCustomNamedRequestIdHeadHeaders> response) {
                 return response.body();
             }
         });
@@ -262,16 +265,16 @@ public class HeadersInner {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the Boolean object
      */
-    public Observable<ServiceResponseWithHeaders<Boolean, HeaderCustomNamedRequestIdHeadHeadersInner>> customNamedRequestIdHeadWithServiceResponseAsync(String fooClientRequestId) {
+    public Observable<ServiceResponseWithHeaders<Boolean, HeaderCustomNamedRequestIdHeadHeaders>> customNamedRequestIdHeadWithServiceResponseAsync(String fooClientRequestId) {
         if (fooClientRequestId == null) {
             throw new IllegalArgumentException("Parameter fooClientRequestId is required and cannot be null.");
         }
         return service.customNamedRequestIdHead(fooClientRequestId, this.client.acceptLanguage(), this.client.userAgent())
-            .flatMap(new Func1<Response<Void>, Observable<ServiceResponseWithHeaders<Boolean, HeaderCustomNamedRequestIdHeadHeadersInner>>>() {
+            .flatMap(new Func1<Response<Void>, Observable<ServiceResponseWithHeaders<Boolean, HeaderCustomNamedRequestIdHeadHeaders>>>() {
                 @Override
-                public Observable<ServiceResponseWithHeaders<Boolean, HeaderCustomNamedRequestIdHeadHeadersInner>> call(Response<Void> response) {
+                public Observable<ServiceResponseWithHeaders<Boolean, HeaderCustomNamedRequestIdHeadHeaders>> call(Response<Void> response) {
                     try {
-                        ServiceResponseWithHeaders<Boolean, HeaderCustomNamedRequestIdHeadHeadersInner> clientResponse = customNamedRequestIdHeadDelegate(response);
+                        ServiceResponseWithHeaders<Boolean, HeaderCustomNamedRequestIdHeadHeaders> clientResponse = customNamedRequestIdHeadDelegate(response);
                         return Observable.just(clientResponse);
                     } catch (Throwable t) {
                         return Observable.error(t);
@@ -280,12 +283,12 @@ public class HeadersInner {
             });
     }
 
-    private ServiceResponseWithHeaders<Boolean, HeaderCustomNamedRequestIdHeadHeadersInner> customNamedRequestIdHeadDelegate(Response<Void> response) throws ErrorException, IOException, IllegalArgumentException {
+    private ServiceResponseWithHeaders<Boolean, HeaderCustomNamedRequestIdHeadHeaders> customNamedRequestIdHeadDelegate(Response<Void> response) throws ErrorException, IOException, IllegalArgumentException {
         return this.client.restClient().responseBuilderFactory().<Boolean, ErrorException>newInstance(this.client.serializerAdapter())
                 .register(200, new TypeToken<Void>() { }.getType())
                 .register(404, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
-                .buildEmptyWithHeaders(response, HeaderCustomNamedRequestIdHeadHeadersInner.class);
+                .buildEmptyWithHeaders(response, HeaderCustomNamedRequestIdHeadHeaders.class);
     }
 
 }
