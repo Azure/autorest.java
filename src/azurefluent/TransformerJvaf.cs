@@ -17,11 +17,16 @@ using AutoRest.Java.Azure.Model;
 using AutoRest.Java.Model;
 using static AutoRest.Core.Utilities.DependencyInjection;
 using AutoRest.Java.Azure.Fluent.Model;
+using PluralizationService;
+using PluralizationService.English;
+using AutoRest.Java.Azure.Fluent;
 
 namespace AutoRest.Java.Azure
 {
     public class TransformerJvaf : TransformerJva, ITransformer<CodeModelJvaf>
     {
+        private PluralizationServiceInstance pluralizer = new PluralizationServiceInstance();
+
         public override CodeModelJv TransformCodeModel(CodeModel cm)
         {
             var codeModel = cm as CodeModelJva;
@@ -41,6 +46,7 @@ namespace AutoRest.Java.Azure
             AzureExtensions.AddAzureProperties(codeModel);
             AzureExtensions.SetDefaultResponses(codeModel);
             MoveResourceTypeProperties(codeModel);
+            NormalizeListMethods(codeModel);
 
             // set Parent on responses (required for pageable)
             foreach (MethodJva method in codeModel.Methods)
@@ -90,15 +96,23 @@ namespace AutoRest.Java.Azure
 
         public void NormalizeTopLevelTypes(CodeModel serviceClient)
         {
-            foreach (var response in serviceClient.Methods.SelectMany(m => m.Responses).Select(r => r.Value))
+            foreach (var response in serviceClient.Methods
+                .Where(m => m.HttpMethod == HttpMethod.Put || m.HttpMethod == HttpMethod.Get || m.Name.ToPascalCase().StartsWith("Get") || m.Name.ToPascalCase().StartsWith("Create"))
+                .SelectMany(m => m.Responses)
+                .Select(r => r.Value))
             {
                 AppendInnerToTopLevelType(response.Body, serviceClient);
-                AppendInnerToTopLevelType(response.Headers, serviceClient);
             }
             foreach (var model in serviceClient.ModelTypes)
             {
                 if (model.BaseModelType != null && model.BaseModelType.IsResource())
+                {
                     AppendInnerToTopLevelType(model, serviceClient);
+                }
+                else if (serviceClient.Operations.Any(o => o.Name.EqualsIgnoreCase(model.Name) || o.Name.EqualsIgnoreCase(pluralizer.Pluralize(model.Name)))) // Naive plural check
+                {
+                    AppendInnerToTopLevelType(model, serviceClient);
+                }
             }
         }
 
@@ -114,6 +128,19 @@ namespace AutoRest.Java.Azure
             if (compositeType != null && !compositeType.IsResource)
             {
                 compositeType.IsInnerModel = true;
+                foreach (var t in serviceClient.ModelTypes)
+                {
+                    foreach (var p in t.Properties.Where(p => p.ModelType is CompositeTypeJvaf && !((CompositeTypeJvaf)p.ModelType).IsInnerModel))
+                    {
+                        if (p.ModelTypeName.EqualsIgnoreCase(compositeType.Name)
+                            || (p.ModelType is SequenceType && ((SequenceType)p.ModelType).ElementType.Name.EqualsIgnoreCase(compositeType.Name))
+                            || (p.ModelType is DictionaryType && ((DictionaryType)p.ModelType).ValueType.Name.EqualsIgnoreCase(compositeType.Name)))
+                        {
+                            AppendInnerToTopLevelType(t, serviceClient);
+                            break;
+                        }
+                    }
+                }
             }
             else if (sequenceType != null)
             {
@@ -123,6 +150,65 @@ namespace AutoRest.Java.Azure
             {
                 AppendInnerToTopLevelType(dictionaryType.ValueType, serviceClient);
             }
+        }
+
+        public virtual void NormalizeListMethods(CodeModel client)
+        {
+            if (client == null)
+            {
+                throw new ArgumentNullException("client");
+            }
+
+            foreach (var method in client.Methods)
+            {
+                if ((method.Name.EqualsIgnoreCase(WellKnownMethodNames.ListAll) || method.Name.EqualsIgnoreCase(WellKnownMethodNames.ListBySubscription))
+                    && HasNonClientNonConstantRequiredParameters(method, 0))
+                {
+                    method.Name = WellKnownMethodNames.List;
+                }
+
+                if (method.Name.EqualsIgnoreCase(WellKnownMethodNames.List) && HasNonClientNonConstantRequiredParameters(method, 1) && method.Parameters.First().Name.StartsWith("resourceGroup"))
+                {
+                    method.Name = WellKnownMethodNames.ListByResourceGroup;
+                }
+            }
+        }
+
+        private static Method FindFirstMethodByName(IEnumerable<Method> methods, String methodName)
+        {
+            return methods.FirstOrDefault(method => method.Name.EqualsIgnoreCase(methodName));
+        }
+
+        private static bool HasNonClientNonConstantRequiredParameters(Method method, int requiredParameterCount)
+        {
+            // When parameters are optional we generate more methods.
+            return method.Parameters.Count(x => !x.IsClientProperty && !x.IsConstant && x.IsRequired) == requiredParameterCount;
+        }
+    }
+
+    public class PluralizationServiceInstance
+    {
+        private static readonly IPluralizationApi Api;
+        private static readonly CultureInfo CultureInfo;
+
+        static PluralizationServiceInstance()
+        {
+            var builder = new PluralizationApiBuilder();
+            builder.AddEnglishProvider();
+
+            Api = builder.Build();
+            CultureInfo = new CultureInfo("en-US");
+        }
+
+
+        public string Pluralize(string name)
+        {
+            return Api.Pluralize(name, CultureInfo) ?? name;
+        }
+
+        public string Singularize(string name)
+        {
+            return Api.Singularize(name, CultureInfo) ?? name;
         }
     }
 }
