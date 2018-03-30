@@ -57,7 +57,23 @@ namespace AutoRest.Java.Azure.Model
                     }
                     else if (Name.RawValue == "Resource")
                     {
-                        return (Properties.Any(p => p.Name == "location") && Properties.Any(p => p.Name == "tags")) ? ResourceType.Resource : ResourceType.ProxyResource;
+                        var locationProperty = Properties.Where(p => p.Name == "location").FirstOrDefault();
+                        var tagsProperty = Properties.Where(p => p.Name == "tags").FirstOrDefault();
+                        // Otherwise location will be validated
+                        if (locationProperty == null || !locationProperty.IsRequired || tagsProperty == null)
+                        {
+                            var idProperty = Properties.Where(p => p.Name == "id").FirstOrDefault();
+                            var nameProperty = Properties.Where(p => p.Name == "name").FirstOrDefault();
+                            var typeProperty = Properties.Where(p => p.Name == "type").FirstOrDefault();
+                            if (idProperty == null || !idProperty.IsReadOnly || 
+                                nameProperty == null || !nameProperty.IsReadOnly ||
+                                typeProperty == null || !typeProperty.IsReadOnly)
+                            {
+                                return ResourceType.SubResource;
+                            }
+                            return ResourceType.ProxyResource;
+                        }
+                        return ResourceType.Resource;
                     }
                     else
                     {
