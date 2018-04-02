@@ -89,6 +89,9 @@ namespace AutoRest.Java.Model
         }
 
         [JsonIgnore]
+        public bool SkipParentValidation { get; set; }
+
+        [JsonIgnore]
         public virtual IEnumerable<string> Imports
         {
             get
@@ -131,6 +134,10 @@ namespace AutoRest.Java.Model
                 if (NeedsFlatten)
                 {
                     classes.Add("com.microsoft.rest.serializer.JsonFlatten");
+                }
+                if (SkipParentValidation)
+                {
+                    classes.Add("com.microsoft.rest.SkipParentValidation");
                 }
                 return classes.AsEnumerable();
             }

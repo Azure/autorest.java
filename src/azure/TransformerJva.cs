@@ -255,7 +255,7 @@ namespace AutoRest.Java.Azure
                 throw new ArgumentNullException("client");
             }
 
-            foreach (var subtype in client.ModelTypes.Where(t => t.BaseModelType.IsResource()))
+            foreach (CompositeTypeJva subtype in client.ModelTypes.Where(t => t.BaseModelType.IsResource()))
             {
                 var baseType = subtype.BaseModelType as CompositeTypeJva;
                 if (baseType.ModelResourceType == ResourceType.SubResource)
@@ -291,6 +291,10 @@ namespace AutoRest.Java.Azure
                         {
                             subtype.Add(prop);
                         }
+                    }
+                    if (!baseType.Properties.First(p => p.Name == "location").IsRequired)
+                    {
+                        subtype.SkipParentValidation = true;
                     }
                 }
             }

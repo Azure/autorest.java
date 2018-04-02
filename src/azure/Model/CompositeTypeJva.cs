@@ -59,15 +59,12 @@ namespace AutoRest.Java.Azure.Model
                     {
                         var locationProperty = Properties.Where(p => p.Name == "location").FirstOrDefault();
                         var tagsProperty = Properties.Where(p => p.Name == "tags").FirstOrDefault();
-                        // Otherwise location will be validated
-                        if (locationProperty == null || !locationProperty.IsRequired || tagsProperty == null)
+                        if (locationProperty == null || tagsProperty == null)
                         {
                             var idProperty = Properties.Where(p => p.Name == "id").FirstOrDefault();
                             var nameProperty = Properties.Where(p => p.Name == "name").FirstOrDefault();
                             var typeProperty = Properties.Where(p => p.Name == "type").FirstOrDefault();
-                            if (idProperty == null || !idProperty.IsReadOnly || 
-                                nameProperty == null || !nameProperty.IsReadOnly ||
-                                typeProperty == null || !typeProperty.IsReadOnly)
+                            if (idProperty == null || nameProperty == null || typeProperty == null)
                             {
                                 return ResourceType.SubResource;
                             }
