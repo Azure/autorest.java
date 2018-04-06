@@ -253,7 +253,7 @@ namespace AutoRest.Java
                 Line();
             }
         }
-        
+
         public void LineComment(string text)
         {
             LineComment(comment =>
@@ -319,9 +319,20 @@ namespace AutoRest.Java
             Indent(() =>
             {
                 JavaClass javaClass = new JavaClass(this);
-                anonymousClassBlock.Invoke(javaClass);
+                anonymousClassBlock(javaClass);
             });
             Line("};");
+        }
+
+        public void AnonymousClass(string anonymousClassDeclaration, Action<JavaClass> anonymousClassBlock)
+        {
+            Line($"{anonymousClassDeclaration} {{");
+            Indent(() =>
+            {
+                JavaClass javaClass = new JavaClass(this);
+                anonymousClassBlock(javaClass);
+            });
+            Line("}");
         }
 
         public void Annotation(params string[] annotations)

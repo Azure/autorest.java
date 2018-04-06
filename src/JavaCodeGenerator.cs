@@ -4280,6 +4280,8 @@ namespace AutoRest.Java
                             }
 
                             IType returnValueTypeArgumentType = ((GenericType)restAPIMethod.ReturnType).TypeArguments.Single();
+                            // TODO: generate anonymous classes for paging
+                            IType mapperReturnType = ((GenericType)returnValueTypeArgumentType).TypeArguments.Last();
 
                             string restAPIMethodArgumentList = GetRestAPIMethodArgumentList(autoRestMethodOrderedRetrofitParameters, settings);
 
@@ -4287,7 +4289,10 @@ namespace AutoRest.Java
                             function.Indent(() =>
                             {
                                 function.Text(".map(");
-                                function.Lambda(returnValueTypeArgumentType.ToString(), "res", "res.body()");
+                                function.AnonymousClass($"new Function<{returnValueTypeArgumentType}, {mapperReturnType}>()", anonymousClass =>
+                                {
+                                    anonymousClass.PublicMethod($"{mapperReturnType} apply(RestResponse<?, ?> res)", method => method.Return("res.body()"));
+                                });
                                 function.Line(");");
                             });
                         });
@@ -4342,12 +4347,18 @@ namespace AutoRest.Java
                             ConvertClientTypesToWireTypes(function, autoRestMethodRetrofitParameters, methodClientReference, settings);
 
                             IType returnValueTypeArgumentType = ((GenericType)restAPIMethod.ReturnType).TypeArguments.Single();
+                            IType mapperReturnType = clientMethod.ReturnValue.Type;
+
                             string restAPIMethodArgumentList = GetRestAPIMethodArgumentList(autoRestMethodOrderedRetrofitParameters, settings);
                             function.Line($"return service.{clientMethod.RestAPIMethod.Name}({restAPIMethodArgumentList})");
                             function.Indent(() =>
                             {
                                 function.Text(".map(");
-                                function.Lambda(returnValueTypeArgumentType.ToString(), "res", "res.body()");
+
+                                function.AnonymousClass($"new Function<{returnValueTypeArgumentType}, {mapperReturnType}>()", anonymousClass =>
+                                {
+                                    anonymousClass.PublicMethod($"{mapperReturnType} apply(RestResponse<?, {mapperReturnType}> res)", method => method.Return("res.body()"));
+                                });
                                 function.Line(")");
                                 function.Line(".toObservable();");
                             });
@@ -4551,16 +4562,27 @@ namespace AutoRest.Java
                             {
                                 GenericType restAPIMethodClientReturnType = (GenericType)ConvertToClientType(restAPIMethod.ReturnType);
                                 IType returnValueTypeArgumentClientType = restAPIMethodClientReturnType.TypeArguments.Single();
+                                IType mapperReturnType = clientMethod.ReturnValue.Type;
                                 if (restAPIMethodReturnBodyClientType != PrimitiveType.Void)
                                 {
                                     function.Text($".flatMapMaybe(");
-                                    function.Lambda(returnValueTypeArgumentClientType.ToString(), "res", "res.body() == null ? Maybe.empty() : Maybe.just(res.body())");
+                                    function.AnonymousClass($"new Function<{returnValueTypeArgumentClientType}, {mapperReturnType}>()", anonymousClassBlock =>
+                                    {
+                                        anonymousClassBlock.PublicMethod(
+                                            $"{mapperReturnType} apply({returnValueTypeArgumentClientType} res)",
+                                            method => method.Return($"res.body() == null ? Maybe.<{restAPIMethodReturnBodyClientType.AsNullable()}>empty() : Maybe.just(res.body())"));
+                                    });
                                     function.Line(");");
                                 }
                                 else if (isFluentDelete)
                                 {
                                     function.Text($".flatMapMaybe(");
-                                    function.Lambda(returnValueTypeArgumentClientType.ToString(), "res", "Maybe.empty()");
+                                    function.AnonymousClass($"new Function<{returnValueTypeArgumentClientType}, {GenericType.Maybe(ClassType.Void)}>()", anonymousClassBlock =>
+                                    {
+                                        anonymousClassBlock.PublicMethod(
+                                            $"{GenericType.Maybe(ClassType.Void)} apply({returnValueTypeArgumentClientType} res)",
+                                            method => method.Return("Maybe.empty()"));
+                                    });
                                     function.Line(");");
                                 }
                                 else
@@ -5393,7 +5415,7 @@ namespace AutoRest.Java
                 });
             return string.Join(", ", restAPIMethodArguments);
         }
-        
+
         private static string AddClientTypePrefix(string clientType, JavaSettings settings)
             => string.IsNullOrEmpty(settings.ClientTypePrefix) ? clientType : settings.ClientTypePrefix + clientType;
     }

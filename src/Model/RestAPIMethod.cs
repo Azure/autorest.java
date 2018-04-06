@@ -154,6 +154,8 @@ namespace AutoRest.Java.Model
 
             if (includeImplementationImports)
             {
+                imports.Add("io.reactivex.functions.Function");
+
                 if (IsResumable)
                 {
                     imports.Add("com.microsoft.rest.v2.annotations.ResumeOperation");

@@ -71,6 +71,11 @@ namespace AutoRest.Java
             contents.ReturnAnonymousClass(anonymousClassDeclaration, anonymousClassBlock);
         }
 
+        public void AnonymousClass(string anonymousClassDeclaration, Action<JavaClass> anonymousClassBlock)
+        {
+            contents.AnonymousClass(anonymousClassDeclaration, anonymousClassBlock);
+        }
+
         public JavaIfBlock If(string condition, Action<JavaBlock> ifAction)
         {
             contents.If(condition, ifAction);
