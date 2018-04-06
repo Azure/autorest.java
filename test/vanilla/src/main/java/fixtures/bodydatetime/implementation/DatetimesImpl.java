@@ -199,8 +199,7 @@ public final class DatetimesImpl implements Datetimes {
                 public Maybe<OffsetDateTime> apply(BodyResponse<OffsetDateTime> res) {
                     return res.body() == null ? Maybe.<OffsetDateTime>empty() : Maybe.just(res.body());
                 }
-            }
-            );
+            });
     }
 
     /**
@@ -245,8 +244,7 @@ public final class DatetimesImpl implements Datetimes {
                 public Maybe<OffsetDateTime> apply(BodyResponse<OffsetDateTime> res) {
                     return res.body() == null ? Maybe.<OffsetDateTime>empty() : Maybe.just(res.body());
                 }
-            }
-            );
+            });
     }
 
     /**
@@ -291,8 +289,7 @@ public final class DatetimesImpl implements Datetimes {
                 public Maybe<OffsetDateTime> apply(BodyResponse<OffsetDateTime> res) {
                     return res.body() == null ? Maybe.<OffsetDateTime>empty() : Maybe.just(res.body());
                 }
-            }
-            );
+            });
     }
 
     /**
@@ -337,8 +334,7 @@ public final class DatetimesImpl implements Datetimes {
                 public Maybe<OffsetDateTime> apply(BodyResponse<OffsetDateTime> res) {
                     return res.body() == null ? Maybe.<OffsetDateTime>empty() : Maybe.just(res.body());
                 }
-            }
-            );
+            });
     }
 
     /**
@@ -433,8 +429,7 @@ public final class DatetimesImpl implements Datetimes {
                 public Maybe<OffsetDateTime> apply(BodyResponse<OffsetDateTime> res) {
                     return res.body() == null ? Maybe.<OffsetDateTime>empty() : Maybe.just(res.body());
                 }
-            }
-            );
+            });
     }
 
     /**
@@ -479,8 +474,7 @@ public final class DatetimesImpl implements Datetimes {
                 public Maybe<OffsetDateTime> apply(BodyResponse<OffsetDateTime> res) {
                     return res.body() == null ? Maybe.<OffsetDateTime>empty() : Maybe.just(res.body());
                 }
-            }
-            );
+            });
     }
 
     /**
@@ -575,8 +569,7 @@ public final class DatetimesImpl implements Datetimes {
                 public Maybe<OffsetDateTime> apply(BodyResponse<OffsetDateTime> res) {
                     return res.body() == null ? Maybe.<OffsetDateTime>empty() : Maybe.just(res.body());
                 }
-            }
-            );
+            });
     }
 
     /**
@@ -621,8 +614,7 @@ public final class DatetimesImpl implements Datetimes {
                 public Maybe<OffsetDateTime> apply(BodyResponse<OffsetDateTime> res) {
                     return res.body() == null ? Maybe.<OffsetDateTime>empty() : Maybe.just(res.body());
                 }
-            }
-            );
+            });
     }
 
     /**
@@ -717,8 +709,7 @@ public final class DatetimesImpl implements Datetimes {
                 public Maybe<OffsetDateTime> apply(BodyResponse<OffsetDateTime> res) {
                     return res.body() == null ? Maybe.<OffsetDateTime>empty() : Maybe.just(res.body());
                 }
-            }
-            );
+            });
     }
 
     /**
@@ -763,8 +754,7 @@ public final class DatetimesImpl implements Datetimes {
                 public Maybe<OffsetDateTime> apply(BodyResponse<OffsetDateTime> res) {
                     return res.body() == null ? Maybe.<OffsetDateTime>empty() : Maybe.just(res.body());
                 }
-            }
-            );
+            });
     }
 
     /**
@@ -859,8 +849,7 @@ public final class DatetimesImpl implements Datetimes {
                 public Maybe<OffsetDateTime> apply(BodyResponse<OffsetDateTime> res) {
                     return res.body() == null ? Maybe.<OffsetDateTime>empty() : Maybe.just(res.body());
                 }
-            }
-            );
+            });
     }
 
     /**
@@ -955,8 +944,7 @@ public final class DatetimesImpl implements Datetimes {
                 public Maybe<OffsetDateTime> apply(BodyResponse<OffsetDateTime> res) {
                     return res.body() == null ? Maybe.<OffsetDateTime>empty() : Maybe.just(res.body());
                 }
-            }
-            );
+            });
     }
 
     /**
@@ -1051,7 +1039,6 @@ public final class DatetimesImpl implements Datetimes {
                 public Maybe<OffsetDateTime> apply(BodyResponse<OffsetDateTime> res) {
                     return res.body() == null ? Maybe.<OffsetDateTime>empty() : Maybe.just(res.body());
                 }
-            }
-            );
+            });
     }
 }

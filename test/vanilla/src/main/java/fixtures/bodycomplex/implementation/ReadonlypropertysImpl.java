@@ -115,8 +115,7 @@ public final class ReadonlypropertysImpl implements Readonlypropertys {
                 public Maybe<ReadonlyObj> apply(BodyResponse<ReadonlyObj> res) {
                     return res.body() == null ? Maybe.<ReadonlyObj>empty() : Maybe.just(res.body());
                 }
-            }
-            );
+            });
     }
 
     /**

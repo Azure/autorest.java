@@ -236,8 +236,7 @@ public final class HttpSuccessImpl implements HttpSuccess {
                 public Maybe<Boolean> apply(BodyResponse<Boolean> res) {
                     return res.body() == null ? Maybe.<Boolean>empty() : Maybe.just(res.body());
                 }
-            }
-            );
+            });
     }
 
     /**

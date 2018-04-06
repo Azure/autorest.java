@@ -223,8 +223,7 @@ public final class ExplicitsImpl implements Explicits {
                 public Maybe<Error> apply(BodyResponse<Error> res) {
                     return res.body() == null ? Maybe.<Error>empty() : Maybe.just(res.body());
                 }
-            }
-            );
+            });
     }
 
     /**
@@ -368,8 +367,7 @@ public final class ExplicitsImpl implements Explicits {
                 public Maybe<Error> apply(BodyResponse<Error> res) {
                     return res.body() == null ? Maybe.<Error>empty() : Maybe.just(res.body());
                 }
-            }
-            );
+            });
     }
 
     /**
@@ -510,8 +508,7 @@ public final class ExplicitsImpl implements Explicits {
                 public Maybe<Error> apply(BodyResponse<Error> res) {
                     return res.body() == null ? Maybe.<Error>empty() : Maybe.just(res.body());
                 }
-            }
-            );
+            });
     }
 
     /**
@@ -654,8 +651,7 @@ public final class ExplicitsImpl implements Explicits {
                 public Maybe<Error> apply(BodyResponse<Error> res) {
                     return res.body() == null ? Maybe.<Error>empty() : Maybe.just(res.body());
                 }
-            }
-            );
+            });
     }
 
     /**
@@ -799,8 +795,7 @@ public final class ExplicitsImpl implements Explicits {
                 public Maybe<Error> apply(BodyResponse<Error> res) {
                     return res.body() == null ? Maybe.<Error>empty() : Maybe.just(res.body());
                 }
-            }
-            );
+            });
     }
 
     /**
@@ -944,8 +939,7 @@ public final class ExplicitsImpl implements Explicits {
                 public Maybe<Error> apply(BodyResponse<Error> res) {
                     return res.body() == null ? Maybe.<Error>empty() : Maybe.just(res.body());
                 }
-            }
-            );
+            });
     }
 
     /**
@@ -1089,8 +1083,7 @@ public final class ExplicitsImpl implements Explicits {
                 public Maybe<Error> apply(BodyResponse<Error> res) {
                     return res.body() == null ? Maybe.<Error>empty() : Maybe.just(res.body());
                 }
-            }
-            );
+            });
     }
 
     /**
@@ -1235,8 +1228,7 @@ public final class ExplicitsImpl implements Explicits {
                 public Maybe<Error> apply(BodyResponse<Error> res) {
                     return res.body() == null ? Maybe.<Error>empty() : Maybe.just(res.body());
                 }
-            }
-            );
+            });
     }
 
     /**
@@ -1381,8 +1373,7 @@ public final class ExplicitsImpl implements Explicits {
                 public Maybe<Error> apply(BodyResponse<Error> res) {
                     return res.body() == null ? Maybe.<Error>empty() : Maybe.just(res.body());
                 }
-            }
-            );
+            });
     }
 
     /**
@@ -1527,8 +1518,7 @@ public final class ExplicitsImpl implements Explicits {
                 public Maybe<Error> apply(BodyResponse<Error> res) {
                     return res.body() == null ? Maybe.<Error>empty() : Maybe.just(res.body());
                 }
-            }
-            );
+            });
     }
 
     /**
@@ -1674,8 +1664,7 @@ public final class ExplicitsImpl implements Explicits {
                 public Maybe<Error> apply(BodyResponse<Error> res) {
                     return res.body() == null ? Maybe.<Error>empty() : Maybe.just(res.body());
                 }
-            }
-            );
+            });
     }
 
     /**

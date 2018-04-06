@@ -115,8 +115,7 @@ public final class PolymorphicrecursivesImpl implements Polymorphicrecursives {
                 public Maybe<Fish> apply(BodyResponse<Fish> res) {
                     return res.body() == null ? Maybe.<Fish>empty() : Maybe.just(res.body());
                 }
-            }
-            );
+            });
     }
 
     /**

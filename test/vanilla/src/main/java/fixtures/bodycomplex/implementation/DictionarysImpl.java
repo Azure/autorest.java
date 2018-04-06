@@ -135,8 +135,7 @@ public final class DictionarysImpl implements Dictionarys {
                 public Maybe<DictionaryWrapper> apply(BodyResponse<DictionaryWrapper> res) {
                     return res.body() == null ? Maybe.<DictionaryWrapper>empty() : Maybe.just(res.body());
                 }
-            }
-            );
+            });
     }
 
     /**
@@ -232,8 +231,7 @@ public final class DictionarysImpl implements Dictionarys {
                 public Maybe<DictionaryWrapper> apply(BodyResponse<DictionaryWrapper> res) {
                     return res.body() == null ? Maybe.<DictionaryWrapper>empty() : Maybe.just(res.body());
                 }
-            }
-            );
+            });
     }
 
     /**
@@ -329,8 +327,7 @@ public final class DictionarysImpl implements Dictionarys {
                 public Maybe<DictionaryWrapper> apply(BodyResponse<DictionaryWrapper> res) {
                     return res.body() == null ? Maybe.<DictionaryWrapper>empty() : Maybe.just(res.body());
                 }
-            }
-            );
+            });
     }
 
     /**
@@ -375,7 +372,6 @@ public final class DictionarysImpl implements Dictionarys {
                 public Maybe<DictionaryWrapper> apply(BodyResponse<DictionaryWrapper> res) {
                     return res.body() == null ? Maybe.<DictionaryWrapper>empty() : Maybe.just(res.body());
                 }
-            }
-            );
+            });
     }
 }

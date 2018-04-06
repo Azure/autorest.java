@@ -148,8 +148,7 @@ public final class ImplicitsImpl implements Implicits {
                 public Maybe<Error> apply(BodyResponse<Error> res) {
                     return res.body() == null ? Maybe.<Error>empty() : Maybe.just(res.body());
                 }
-            }
-            );
+            });
     }
 
     /**
@@ -461,8 +460,7 @@ public final class ImplicitsImpl implements Implicits {
                 public Maybe<Error> apply(BodyResponse<Error> res) {
                     return res.body() == null ? Maybe.<Error>empty() : Maybe.just(res.body());
                 }
-            }
-            );
+            });
     }
 
     /**
@@ -510,8 +508,7 @@ public final class ImplicitsImpl implements Implicits {
                 public Maybe<Error> apply(BodyResponse<Error> res) {
                     return res.body() == null ? Maybe.<Error>empty() : Maybe.just(res.body());
                 }
-            }
-            );
+            });
     }
 
     /**
@@ -556,7 +553,6 @@ public final class ImplicitsImpl implements Implicits {
                 public Maybe<Error> apply(BodyResponse<Error> res) {
                     return res.body() == null ? Maybe.<Error>empty() : Maybe.just(res.body());
                 }
-            }
-            );
+            });
     }
 }

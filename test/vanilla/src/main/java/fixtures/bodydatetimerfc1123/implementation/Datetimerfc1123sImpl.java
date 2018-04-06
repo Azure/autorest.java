@@ -158,8 +158,7 @@ public final class Datetimerfc1123sImpl implements Datetimerfc1123s {
                 public Maybe<OffsetDateTime> apply(BodyResponse<OffsetDateTime> res) {
                     return res.body() == null ? Maybe.<OffsetDateTime>empty() : Maybe.just(res.body());
                 }
-            }
-            );
+            });
     }
 
     /**
@@ -204,8 +203,7 @@ public final class Datetimerfc1123sImpl implements Datetimerfc1123s {
                 public Maybe<OffsetDateTime> apply(BodyResponse<OffsetDateTime> res) {
                     return res.body() == null ? Maybe.<OffsetDateTime>empty() : Maybe.just(res.body());
                 }
-            }
-            );
+            });
     }
 
     /**
@@ -250,8 +248,7 @@ public final class Datetimerfc1123sImpl implements Datetimerfc1123s {
                 public Maybe<OffsetDateTime> apply(BodyResponse<OffsetDateTime> res) {
                     return res.body() == null ? Maybe.<OffsetDateTime>empty() : Maybe.just(res.body());
                 }
-            }
-            );
+            });
     }
 
     /**
@@ -296,8 +293,7 @@ public final class Datetimerfc1123sImpl implements Datetimerfc1123s {
                 public Maybe<OffsetDateTime> apply(BodyResponse<OffsetDateTime> res) {
                     return res.body() == null ? Maybe.<OffsetDateTime>empty() : Maybe.just(res.body());
                 }
-            }
-            );
+            });
     }
 
     /**
@@ -393,8 +389,7 @@ public final class Datetimerfc1123sImpl implements Datetimerfc1123s {
                 public Maybe<OffsetDateTime> apply(BodyResponse<OffsetDateTime> res) {
                     return res.body() == null ? Maybe.<OffsetDateTime>empty() : Maybe.just(res.body());
                 }
-            }
-            );
+            });
     }
 
     /**
@@ -439,8 +434,7 @@ public final class Datetimerfc1123sImpl implements Datetimerfc1123s {
                 public Maybe<OffsetDateTime> apply(BodyResponse<OffsetDateTime> res) {
                     return res.body() == null ? Maybe.<OffsetDateTime>empty() : Maybe.just(res.body());
                 }
-            }
-            );
+            });
     }
 
     /**
@@ -536,7 +530,6 @@ public final class Datetimerfc1123sImpl implements Datetimerfc1123s {
                 public Maybe<OffsetDateTime> apply(BodyResponse<OffsetDateTime> res) {
                     return res.body() == null ? Maybe.<OffsetDateTime>empty() : Maybe.just(res.body());
                 }
-            }
-            );
+            });
     }
 }

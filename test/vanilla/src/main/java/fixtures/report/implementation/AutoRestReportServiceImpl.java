@@ -111,8 +111,7 @@ public final class AutoRestReportServiceImpl extends ServiceClient implements Au
                 public Maybe<Map<String, Integer>> apply(BodyResponse<Map<String, Integer>> res) {
                     return res.body() == null ? Maybe.<Map<String, Integer>>empty() : Maybe.just(res.body());
                 }
-            }
-            );
+            });
     }
 
     /**
@@ -164,7 +163,6 @@ public final class AutoRestReportServiceImpl extends ServiceClient implements Au
                 public Maybe<Map<String, Integer>> apply(BodyResponse<Map<String, Integer>> res) {
                     return res.body() == null ? Maybe.<Map<String, Integer>>empty() : Maybe.just(res.body());
                 }
-            }
-            );
+            });
     }
 }

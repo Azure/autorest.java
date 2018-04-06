@@ -179,8 +179,7 @@ public final class IntsImpl implements Ints {
                 public Maybe<Integer> apply(BodyResponse<Integer> res) {
                     return res.body() == null ? Maybe.<Integer>empty() : Maybe.just(res.body());
                 }
-            }
-            );
+            });
     }
 
     /**
@@ -225,8 +224,7 @@ public final class IntsImpl implements Ints {
                 public Maybe<Integer> apply(BodyResponse<Integer> res) {
                     return res.body() == null ? Maybe.<Integer>empty() : Maybe.just(res.body());
                 }
-            }
-            );
+            });
     }
 
     /**
@@ -271,8 +269,7 @@ public final class IntsImpl implements Ints {
                 public Maybe<Integer> apply(BodyResponse<Integer> res) {
                     return res.body() == null ? Maybe.<Integer>empty() : Maybe.just(res.body());
                 }
-            }
-            );
+            });
     }
 
     /**
@@ -317,8 +314,7 @@ public final class IntsImpl implements Ints {
                 public Maybe<Integer> apply(BodyResponse<Integer> res) {
                     return res.body() == null ? Maybe.<Integer>empty() : Maybe.just(res.body());
                 }
-            }
-            );
+            });
     }
 
     /**
@@ -363,8 +359,7 @@ public final class IntsImpl implements Ints {
                 public Maybe<Long> apply(BodyResponse<Long> res) {
                     return res.body() == null ? Maybe.<Long>empty() : Maybe.just(res.body());
                 }
-            }
-            );
+            });
     }
 
     /**
@@ -409,8 +404,7 @@ public final class IntsImpl implements Ints {
                 public Maybe<Long> apply(BodyResponse<Long> res) {
                     return res.body() == null ? Maybe.<Long>empty() : Maybe.just(res.body());
                 }
-            }
-            );
+            });
     }
 
     /**
@@ -643,8 +637,7 @@ public final class IntsImpl implements Ints {
                 public Maybe<OffsetDateTime> apply(BodyResponse<OffsetDateTime> res) {
                     return res.body() == null ? Maybe.<OffsetDateTime>empty() : Maybe.just(res.body());
                 }
-            }
-            );
+            });
     }
 
     /**
@@ -737,8 +730,7 @@ public final class IntsImpl implements Ints {
                 public Maybe<OffsetDateTime> apply(BodyResponse<OffsetDateTime> res) {
                     return res.body() == null ? Maybe.<OffsetDateTime>empty() : Maybe.just(res.body());
                 }
-            }
-            );
+            });
     }
 
     /**
@@ -783,7 +775,6 @@ public final class IntsImpl implements Ints {
                 public Maybe<OffsetDateTime> apply(BodyResponse<OffsetDateTime> res) {
                     return res.body() == null ? Maybe.<OffsetDateTime>empty() : Maybe.just(res.body());
                 }
-            }
-            );
+            });
     }
 }

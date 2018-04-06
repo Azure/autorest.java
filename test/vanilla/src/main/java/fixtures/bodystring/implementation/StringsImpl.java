@@ -173,8 +173,7 @@ public final class StringsImpl implements Strings {
                 public Maybe<String> apply(BodyResponse<String> res) {
                     return res.body() == null ? Maybe.<String>empty() : Maybe.just(res.body());
                 }
-            }
-            );
+            });
     }
 
     /**
@@ -307,8 +306,7 @@ public final class StringsImpl implements Strings {
                 public Maybe<String> apply(BodyResponse<String> res) {
                     return res.body() == null ? Maybe.<String>empty() : Maybe.just(res.body());
                 }
-            }
-            );
+            });
     }
 
     /**
@@ -403,8 +401,7 @@ public final class StringsImpl implements Strings {
                 public Maybe<String> apply(BodyResponse<String> res) {
                     return res.body() == null ? Maybe.<String>empty() : Maybe.just(res.body());
                 }
-            }
-            );
+            });
     }
 
     /**
@@ -499,8 +496,7 @@ public final class StringsImpl implements Strings {
                 public Maybe<String> apply(BodyResponse<String> res) {
                     return res.body() == null ? Maybe.<String>empty() : Maybe.just(res.body());
                 }
-            }
-            );
+            });
     }
 
     /**
@@ -595,8 +591,7 @@ public final class StringsImpl implements Strings {
                 public Maybe<String> apply(BodyResponse<String> res) {
                     return res.body() == null ? Maybe.<String>empty() : Maybe.just(res.body());
                 }
-            }
-            );
+            });
     }
 
     /**
@@ -641,8 +636,7 @@ public final class StringsImpl implements Strings {
                 public Maybe<byte[]> apply(BodyResponse<byte[]> res) {
                     return res.body() == null ? Maybe.<byte[]>empty() : Maybe.just(res.body());
                 }
-            }
-            );
+            });
     }
 
     /**
@@ -687,8 +681,7 @@ public final class StringsImpl implements Strings {
                 public Maybe<byte[]> apply(BodyResponse<byte[]> res) {
                     return res.body() == null ? Maybe.<byte[]>empty() : Maybe.just(res.body());
                 }
-            }
-            );
+            });
     }
 
     /**
@@ -784,7 +777,6 @@ public final class StringsImpl implements Strings {
                 public Maybe<byte[]> apply(BodyResponse<byte[]> res) {
                     return res.body() == null ? Maybe.<byte[]>empty() : Maybe.just(res.body());
                 }
-            }
-            );
+            });
     }
 }

@@ -115,8 +115,7 @@ public final class FilesImpl implements Files {
                 public Maybe<Flowable<ByteBuffer>> apply(StreamResponse res) {
                     return res.body() == null ? Maybe.<Flowable<ByteBuffer>>empty() : Maybe.just(res.body());
                 }
-            }
-            );
+            });
     }
 
     /**
@@ -161,8 +160,7 @@ public final class FilesImpl implements Files {
                 public Maybe<Flowable<ByteBuffer>> apply(StreamResponse res) {
                     return res.body() == null ? Maybe.<Flowable<ByteBuffer>>empty() : Maybe.just(res.body());
                 }
-            }
-            );
+            });
     }
 
     /**
@@ -207,7 +205,6 @@ public final class FilesImpl implements Files {
                 public Maybe<Flowable<ByteBuffer>> apply(StreamResponse res) {
                     return res.body() == null ? Maybe.<Flowable<ByteBuffer>>empty() : Maybe.just(res.body());
                 }
-            }
-            );
+            });
     }
 }

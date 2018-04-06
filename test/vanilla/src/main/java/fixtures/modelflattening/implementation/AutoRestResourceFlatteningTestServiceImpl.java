@@ -265,8 +265,7 @@ public final class AutoRestResourceFlatteningTestServiceImpl extends ServiceClie
                 public Maybe<List<FlattenedProduct>> apply(BodyResponse<List<FlattenedProduct>> res) {
                     return res.body() == null ? Maybe.<List<FlattenedProduct>>empty() : Maybe.just(res.body());
                 }
-            }
-            );
+            });
     }
 
     /**
@@ -400,8 +399,7 @@ public final class AutoRestResourceFlatteningTestServiceImpl extends ServiceClie
                 public Maybe<List<ProductWrapper>> apply(BodyResponse<List<ProductWrapper>> res) {
                     return res.body() == null ? Maybe.<List<ProductWrapper>>empty() : Maybe.just(res.body());
                 }
-            }
-            );
+            });
     }
 
     /**
@@ -535,8 +533,7 @@ public final class AutoRestResourceFlatteningTestServiceImpl extends ServiceClie
                 public Maybe<Map<String, FlattenedProduct>> apply(BodyResponse<Map<String, FlattenedProduct>> res) {
                     return res.body() == null ? Maybe.<Map<String, FlattenedProduct>>empty() : Maybe.just(res.body());
                 }
-            }
-            );
+            });
     }
 
     /**
@@ -670,8 +667,7 @@ public final class AutoRestResourceFlatteningTestServiceImpl extends ServiceClie
                 public Maybe<ResourceCollection> apply(BodyResponse<ResourceCollection> res) {
                     return res.body() == null ? Maybe.<ResourceCollection>empty() : Maybe.just(res.body());
                 }
-            }
-            );
+            });
     }
 
     /**
@@ -717,8 +713,7 @@ public final class AutoRestResourceFlatteningTestServiceImpl extends ServiceClie
                 public Maybe<SimpleProduct> apply(BodyResponse<SimpleProduct> res) {
                     return res.body() == null ? Maybe.<SimpleProduct>empty() : Maybe.just(res.body());
                 }
-            }
-            );
+            });
     }
 
     /**
@@ -771,8 +766,7 @@ public final class AutoRestResourceFlatteningTestServiceImpl extends ServiceClie
                 public Maybe<SimpleProduct> apply(BodyResponse<SimpleProduct> res) {
                     return res.body() == null ? Maybe.<SimpleProduct>empty() : Maybe.just(res.body());
                 }
-            }
-            );
+            });
     }
 
     /**
@@ -843,8 +837,7 @@ public final class AutoRestResourceFlatteningTestServiceImpl extends ServiceClie
                 public Maybe<SimpleProduct> apply(BodyResponse<SimpleProduct> res) {
                     return res.body() == null ? Maybe.<SimpleProduct>empty() : Maybe.just(res.body());
                 }
-            }
-            );
+            });
     }
 
     /**
@@ -927,8 +920,7 @@ public final class AutoRestResourceFlatteningTestServiceImpl extends ServiceClie
                 public Maybe<SimpleProduct> apply(BodyResponse<SimpleProduct> res) {
                     return res.body() == null ? Maybe.<SimpleProduct>empty() : Maybe.just(res.body());
                 }
-            }
-            );
+            });
     }
 
     /**
@@ -999,7 +991,6 @@ public final class AutoRestResourceFlatteningTestServiceImpl extends ServiceClie
                 public Maybe<SimpleProduct> apply(BodyResponse<SimpleProduct> res) {
                     return res.body() == null ? Maybe.<SimpleProduct>empty() : Maybe.just(res.body());
                 }
-            }
-            );
+            });
     }
 }

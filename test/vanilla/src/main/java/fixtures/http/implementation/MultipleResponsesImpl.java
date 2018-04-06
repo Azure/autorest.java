@@ -249,8 +249,7 @@ public final class MultipleResponsesImpl implements MultipleResponses {
                 public Maybe<A> apply(BodyResponse<A> res) {
                     return res.body() == null ? Maybe.<A>empty() : Maybe.just(res.body());
                 }
-            }
-            );
+            });
     }
 
     /**
@@ -295,8 +294,7 @@ public final class MultipleResponsesImpl implements MultipleResponses {
                 public Maybe<A> apply(BodyResponse<A> res) {
                     return res.body() == null ? Maybe.<A>empty() : Maybe.just(res.body());
                 }
-            }
-            );
+            });
     }
 
     /**
@@ -341,8 +339,7 @@ public final class MultipleResponsesImpl implements MultipleResponses {
                 public Maybe<A> apply(BodyResponse<A> res) {
                     return res.body() == null ? Maybe.<A>empty() : Maybe.just(res.body());
                 }
-            }
-            );
+            });
     }
 
     /**
@@ -387,8 +384,7 @@ public final class MultipleResponsesImpl implements MultipleResponses {
                 public Maybe<A> apply(BodyResponse<A> res) {
                     return res.body() == null ? Maybe.<A>empty() : Maybe.just(res.body());
                 }
-            }
-            );
+            });
     }
 
     /**
@@ -433,8 +429,7 @@ public final class MultipleResponsesImpl implements MultipleResponses {
                 public Maybe<A> apply(BodyResponse<A> res) {
                     return res.body() == null ? Maybe.<A>empty() : Maybe.just(res.body());
                 }
-            }
-            );
+            });
     }
 
     /**
@@ -479,8 +474,7 @@ public final class MultipleResponsesImpl implements MultipleResponses {
                 public Maybe<A> apply(BodyResponse<A> res) {
                     return res.body() == null ? Maybe.<A>empty() : Maybe.just(res.body());
                 }
-            }
-            );
+            });
     }
 
     /**
@@ -525,8 +519,7 @@ public final class MultipleResponsesImpl implements MultipleResponses {
                 public Maybe<A> apply(BodyResponse<A> res) {
                     return res.body() == null ? Maybe.<A>empty() : Maybe.just(res.body());
                 }
-            }
-            );
+            });
     }
 
     /**
@@ -571,8 +564,7 @@ public final class MultipleResponsesImpl implements MultipleResponses {
                 public Maybe<A> apply(BodyResponse<A> res) {
                     return res.body() == null ? Maybe.<A>empty() : Maybe.just(res.body());
                 }
-            }
-            );
+            });
     }
 
     /**
@@ -617,8 +609,7 @@ public final class MultipleResponsesImpl implements MultipleResponses {
                 public Maybe<Object> apply(BodyResponse<Object> res) {
                     return res.body() == null ? Maybe.<Object>empty() : Maybe.just(res.body());
                 }
-            }
-            );
+            });
     }
 
     /**
@@ -663,8 +654,7 @@ public final class MultipleResponsesImpl implements MultipleResponses {
                 public Maybe<Object> apply(BodyResponse<Object> res) {
                     return res.body() == null ? Maybe.<Object>empty() : Maybe.just(res.body());
                 }
-            }
-            );
+            });
     }
 
     /**
@@ -709,8 +699,7 @@ public final class MultipleResponsesImpl implements MultipleResponses {
                 public Maybe<Object> apply(BodyResponse<Object> res) {
                     return res.body() == null ? Maybe.<Object>empty() : Maybe.just(res.body());
                 }
-            }
-            );
+            });
     }
 
     /**
@@ -755,8 +744,7 @@ public final class MultipleResponsesImpl implements MultipleResponses {
                 public Maybe<Object> apply(BodyResponse<Object> res) {
                     return res.body() == null ? Maybe.<Object>empty() : Maybe.just(res.body());
                 }
-            }
-            );
+            });
     }
 
     /**
@@ -1077,8 +1065,7 @@ public final class MultipleResponsesImpl implements MultipleResponses {
                 public Maybe<A> apply(BodyResponse<A> res) {
                     return res.body() == null ? Maybe.<A>empty() : Maybe.just(res.body());
                 }
-            }
-            );
+            });
     }
 
     /**
@@ -1123,8 +1110,7 @@ public final class MultipleResponsesImpl implements MultipleResponses {
                 public Maybe<A> apply(BodyResponse<A> res) {
                     return res.body() == null ? Maybe.<A>empty() : Maybe.just(res.body());
                 }
-            }
-            );
+            });
     }
 
     /**
@@ -1169,8 +1155,7 @@ public final class MultipleResponsesImpl implements MultipleResponses {
                 public Maybe<A> apply(BodyResponse<A> res) {
                     return res.body() == null ? Maybe.<A>empty() : Maybe.just(res.body());
                 }
-            }
-            );
+            });
     }
 
     /**
@@ -1215,8 +1200,7 @@ public final class MultipleResponsesImpl implements MultipleResponses {
                 public Maybe<A> apply(BodyResponse<A> res) {
                     return res.body() == null ? Maybe.<A>empty() : Maybe.just(res.body());
                 }
-            }
-            );
+            });
     }
 
     /**
@@ -1416,8 +1400,7 @@ public final class MultipleResponsesImpl implements MultipleResponses {
                 public Maybe<A> apply(BodyResponse<A> res) {
                     return res.body() == null ? Maybe.<A>empty() : Maybe.just(res.body());
                 }
-            }
-            );
+            });
     }
 
     /**
@@ -1461,8 +1444,7 @@ public final class MultipleResponsesImpl implements MultipleResponses {
                 public Maybe<A> apply(BodyResponse<A> res) {
                     return res.body() == null ? Maybe.<A>empty() : Maybe.just(res.body());
                 }
-            }
-            );
+            });
     }
 
     /**
@@ -1506,8 +1488,7 @@ public final class MultipleResponsesImpl implements MultipleResponses {
                 public Maybe<A> apply(BodyResponse<A> res) {
                     return res.body() == null ? Maybe.<A>empty() : Maybe.just(res.body());
                 }
-            }
-            );
+            });
     }
 
     /**
@@ -1551,8 +1532,7 @@ public final class MultipleResponsesImpl implements MultipleResponses {
                 public Maybe<A> apply(BodyResponse<A> res) {
                     return res.body() == null ? Maybe.<A>empty() : Maybe.just(res.body());
                 }
-            }
-            );
+            });
     }
 
     /**
@@ -1596,8 +1576,7 @@ public final class MultipleResponsesImpl implements MultipleResponses {
                 public Maybe<A> apply(BodyResponse<A> res) {
                     return res.body() == null ? Maybe.<A>empty() : Maybe.just(res.body());
                 }
-            }
-            );
+            });
     }
 
     /**
@@ -1641,8 +1620,7 @@ public final class MultipleResponsesImpl implements MultipleResponses {
                 public Maybe<A> apply(BodyResponse<A> res) {
                     return res.body() == null ? Maybe.<A>empty() : Maybe.just(res.body());
                 }
-            }
-            );
+            });
     }
 
     /**
@@ -1686,7 +1664,6 @@ public final class MultipleResponsesImpl implements MultipleResponses {
                 public Maybe<A> apply(BodyResponse<A> res) {
                     return res.body() == null ? Maybe.<A>empty() : Maybe.just(res.body());
                 }
-            }
-            );
+            });
     }
 }

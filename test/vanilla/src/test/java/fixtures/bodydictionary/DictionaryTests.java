@@ -72,7 +72,7 @@ public class DictionaryTests {
 
     @Test
     public void getBooleanTfft() {
-        Map<String, Boolean>  result = client.dictionarys().getBooleanTfft();
+        Map<String, Boolean> result = client.dictionarys().getBooleanTfft();
         Map<String, Boolean> expected = new HashMap<>();
         expected.put("0", true);
         expected.put("1", false);

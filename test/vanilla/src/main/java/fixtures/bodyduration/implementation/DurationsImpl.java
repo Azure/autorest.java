@@ -124,8 +124,7 @@ public final class DurationsImpl implements Durations {
                 public Maybe<Duration> apply(BodyResponse<Duration> res) {
                     return res.body() == null ? Maybe.<Duration>empty() : Maybe.just(res.body());
                 }
-            }
-            );
+            });
     }
 
     /**
@@ -220,8 +219,7 @@ public final class DurationsImpl implements Durations {
                 public Maybe<Duration> apply(BodyResponse<Duration> res) {
                     return res.body() == null ? Maybe.<Duration>empty() : Maybe.just(res.body());
                 }
-            }
-            );
+            });
     }
 
     /**
@@ -266,7 +264,6 @@ public final class DurationsImpl implements Durations {
                 public Maybe<Duration> apply(BodyResponse<Duration> res) {
                     return res.body() == null ? Maybe.<Duration>empty() : Maybe.just(res.body());
                 }
-            }
-            );
+            });
     }
 }

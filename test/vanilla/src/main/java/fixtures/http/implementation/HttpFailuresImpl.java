@@ -111,8 +111,7 @@ public final class HttpFailuresImpl implements HttpFailures {
                 public Maybe<Boolean> apply(BodyResponse<Boolean> res) {
                     return res.body() == null ? Maybe.<Boolean>empty() : Maybe.just(res.body());
                 }
-            }
-            );
+            });
     }
 
     /**
@@ -156,8 +155,7 @@ public final class HttpFailuresImpl implements HttpFailures {
                 public Maybe<Boolean> apply(BodyResponse<Boolean> res) {
                     return res.body() == null ? Maybe.<Boolean>empty() : Maybe.just(res.body());
                 }
-            }
-            );
+            });
     }
 
     /**
@@ -201,7 +199,6 @@ public final class HttpFailuresImpl implements HttpFailures {
                 public Maybe<Boolean> apply(BodyResponse<Boolean> res) {
                     return res.body() == null ? Maybe.<Boolean>empty() : Maybe.just(res.body());
                 }
-            }
-            );
+            });
     }
 }

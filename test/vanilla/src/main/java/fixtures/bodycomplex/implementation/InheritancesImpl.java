@@ -115,8 +115,7 @@ public final class InheritancesImpl implements Inheritances {
                 public Maybe<Siamese> apply(BodyResponse<Siamese> res) {
                     return res.body() == null ? Maybe.<Siamese>empty() : Maybe.just(res.body());
                 }
-            }
-            );
+            });
     }
 
     /**

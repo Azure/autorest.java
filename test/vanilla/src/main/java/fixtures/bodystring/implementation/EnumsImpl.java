@@ -136,8 +136,7 @@ public final class EnumsImpl implements Enums {
                 public Maybe<Colors> apply(BodyResponse<Colors> res) {
                     return res.body() == null ? Maybe.<Colors>empty() : Maybe.just(res.body());
                 }
-            }
-            );
+            });
     }
 
     /**
@@ -232,8 +231,7 @@ public final class EnumsImpl implements Enums {
                 public Maybe<Colors> apply(BodyResponse<Colors> res) {
                     return res.body() == null ? Maybe.<Colors>empty() : Maybe.just(res.body());
                 }
-            }
-            );
+            });
     }
 
     /**
@@ -328,8 +326,7 @@ public final class EnumsImpl implements Enums {
                 public Maybe<RefColorConstant> apply(BodyResponse<RefColorConstant> res) {
                     return res.body() == null ? Maybe.<RefColorConstant>empty() : Maybe.just(res.body());
                 }
-            }
-            );
+            });
     }
 
     /**

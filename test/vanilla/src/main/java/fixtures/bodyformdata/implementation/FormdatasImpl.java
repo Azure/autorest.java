@@ -131,8 +131,7 @@ public final class FormdatasImpl implements Formdatas {
                 public Maybe<Flowable<ByteBuffer>> apply(StreamResponse res) {
                     return res.body() == null ? Maybe.<Flowable<ByteBuffer>>empty() : Maybe.just(res.body());
                 }
-            }
-            );
+            });
     }
 
     /**
@@ -187,7 +186,6 @@ public final class FormdatasImpl implements Formdatas {
                 public Maybe<Flowable<ByteBuffer>> apply(StreamResponse res) {
                     return res.body() == null ? Maybe.<Flowable<ByteBuffer>>empty() : Maybe.just(res.body());
                 }
-            }
-            );
+            });
     }
 }

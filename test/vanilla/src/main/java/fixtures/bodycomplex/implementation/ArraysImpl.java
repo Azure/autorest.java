@@ -130,8 +130,7 @@ public final class ArraysImpl implements Arrays {
                 public Maybe<ArrayWrapper> apply(BodyResponse<ArrayWrapper> res) {
                     return res.body() == null ? Maybe.<ArrayWrapper>empty() : Maybe.just(res.body());
                 }
-            }
-            );
+            });
     }
 
     /**
@@ -227,8 +226,7 @@ public final class ArraysImpl implements Arrays {
                 public Maybe<ArrayWrapper> apply(BodyResponse<ArrayWrapper> res) {
                     return res.body() == null ? Maybe.<ArrayWrapper>empty() : Maybe.just(res.body());
                 }
-            }
-            );
+            });
     }
 
     /**
@@ -324,7 +322,6 @@ public final class ArraysImpl implements Arrays {
                 public Maybe<ArrayWrapper> apply(BodyResponse<ArrayWrapper> res) {
                     return res.body() == null ? Maybe.<ArrayWrapper>empty() : Maybe.just(res.body());
                 }
-            }
-            );
+            });
     }
 }

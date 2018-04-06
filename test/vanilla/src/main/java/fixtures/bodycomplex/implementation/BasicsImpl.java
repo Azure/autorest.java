@@ -136,8 +136,7 @@ public final class BasicsImpl implements Basics {
                 public Maybe<Basic> apply(BodyResponse<Basic> res) {
                     return res.body() == null ? Maybe.<Basic>empty() : Maybe.just(res.body());
                 }
-            }
-            );
+            });
     }
 
     /**
@@ -233,8 +232,7 @@ public final class BasicsImpl implements Basics {
                 public Maybe<Basic> apply(BodyResponse<Basic> res) {
                     return res.body() == null ? Maybe.<Basic>empty() : Maybe.just(res.body());
                 }
-            }
-            );
+            });
     }
 
     /**
@@ -279,8 +277,7 @@ public final class BasicsImpl implements Basics {
                 public Maybe<Basic> apply(BodyResponse<Basic> res) {
                     return res.body() == null ? Maybe.<Basic>empty() : Maybe.just(res.body());
                 }
-            }
-            );
+            });
     }
 
     /**
@@ -325,8 +322,7 @@ public final class BasicsImpl implements Basics {
                 public Maybe<Basic> apply(BodyResponse<Basic> res) {
                     return res.body() == null ? Maybe.<Basic>empty() : Maybe.just(res.body());
                 }
-            }
-            );
+            });
     }
 
     /**
@@ -371,7 +367,6 @@ public final class BasicsImpl implements Basics {
                 public Maybe<Basic> apply(BodyResponse<Basic> res) {
                     return res.body() == null ? Maybe.<Basic>empty() : Maybe.just(res.body());
                 }
-            }
-            );
+            });
     }
 }

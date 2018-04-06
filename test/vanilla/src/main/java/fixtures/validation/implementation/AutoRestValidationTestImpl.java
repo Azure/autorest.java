@@ -199,8 +199,7 @@ public final class AutoRestValidationTestImpl extends ServiceClient implements A
                 public Maybe<Product> apply(BodyResponse<Product> res) {
                     return res.body() == null ? Maybe.<Product>empty() : Maybe.just(res.body());
                 }
-            }
-            );
+            });
     }
 
     /**
@@ -266,8 +265,7 @@ public final class AutoRestValidationTestImpl extends ServiceClient implements A
                 public Maybe<Product> apply(BodyResponse<Product> res) {
                     return res.body() == null ? Maybe.<Product>empty() : Maybe.just(res.body());
                 }
-            }
-            );
+            });
     }
 
     /**
@@ -337,8 +335,7 @@ public final class AutoRestValidationTestImpl extends ServiceClient implements A
                 public Maybe<Product> apply(BodyResponse<Product> res) {
                     return res.body() == null ? Maybe.<Product>empty() : Maybe.just(res.body());
                 }
-            }
-            );
+            });
     }
 
     /**
@@ -408,8 +405,7 @@ public final class AutoRestValidationTestImpl extends ServiceClient implements A
                 public Maybe<Product> apply(BodyResponse<Product> res) {
                     return res.body() == null ? Maybe.<Product>empty() : Maybe.just(res.body());
                 }
-            }
-            );
+            });
     }
 
     /**
@@ -454,7 +450,6 @@ public final class AutoRestValidationTestImpl extends ServiceClient implements A
                 public Maybe<Product> apply(BodyResponse<Product> res) {
                     return res.body() == null ? Maybe.<Product>empty() : Maybe.just(res.body());
                 }
-            }
-            );
+            });
     }
 }

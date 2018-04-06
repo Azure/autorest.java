@@ -442,8 +442,7 @@ public final class DictionarysImpl implements Dictionarys {
                 public Maybe<Map<String, Integer>> apply(BodyResponse<Map<String, Integer>> res) {
                     return res.body() == null ? Maybe.<Map<String, Integer>>empty() : Maybe.just(res.body());
                 }
-            }
-            );
+            });
     }
 
     /**
@@ -488,8 +487,7 @@ public final class DictionarysImpl implements Dictionarys {
                 public Maybe<Map<String, Integer>> apply(BodyResponse<Map<String, Integer>> res) {
                     return res.body() == null ? Maybe.<Map<String, Integer>>empty() : Maybe.just(res.body());
                 }
-            }
-            );
+            });
     }
 
     /**
@@ -585,8 +583,7 @@ public final class DictionarysImpl implements Dictionarys {
                 public Maybe<Map<String, String>> apply(BodyResponse<Map<String, String>> res) {
                     return res.body() == null ? Maybe.<Map<String, String>>empty() : Maybe.just(res.body());
                 }
-            }
-            );
+            });
     }
 
     /**
@@ -631,8 +628,7 @@ public final class DictionarysImpl implements Dictionarys {
                 public Maybe<Map<String, String>> apply(BodyResponse<Map<String, String>> res) {
                     return res.body() == null ? Maybe.<Map<String, String>>empty() : Maybe.just(res.body());
                 }
-            }
-            );
+            });
     }
 
     /**
@@ -677,8 +673,7 @@ public final class DictionarysImpl implements Dictionarys {
                 public Maybe<Map<String, String>> apply(BodyResponse<Map<String, String>> res) {
                     return res.body() == null ? Maybe.<Map<String, String>>empty() : Maybe.just(res.body());
                 }
-            }
-            );
+            });
     }
 
     /**
@@ -723,8 +718,7 @@ public final class DictionarysImpl implements Dictionarys {
                 public Maybe<Map<String, String>> apply(BodyResponse<Map<String, String>> res) {
                     return res.body() == null ? Maybe.<Map<String, String>>empty() : Maybe.just(res.body());
                 }
-            }
-            );
+            });
     }
 
     /**
@@ -769,8 +763,7 @@ public final class DictionarysImpl implements Dictionarys {
                 public Maybe<Map<String, Boolean>> apply(BodyResponse<Map<String, Boolean>> res) {
                     return res.body() == null ? Maybe.<Map<String, Boolean>>empty() : Maybe.just(res.body());
                 }
-            }
-            );
+            });
     }
 
     /**
@@ -866,8 +859,7 @@ public final class DictionarysImpl implements Dictionarys {
                 public Maybe<Map<String, Boolean>> apply(BodyResponse<Map<String, Boolean>> res) {
                     return res.body() == null ? Maybe.<Map<String, Boolean>>empty() : Maybe.just(res.body());
                 }
-            }
-            );
+            });
     }
 
     /**
@@ -912,8 +904,7 @@ public final class DictionarysImpl implements Dictionarys {
                 public Maybe<Map<String, Boolean>> apply(BodyResponse<Map<String, Boolean>> res) {
                     return res.body() == null ? Maybe.<Map<String, Boolean>>empty() : Maybe.just(res.body());
                 }
-            }
-            );
+            });
     }
 
     /**
@@ -958,8 +949,7 @@ public final class DictionarysImpl implements Dictionarys {
                 public Maybe<Map<String, Integer>> apply(BodyResponse<Map<String, Integer>> res) {
                     return res.body() == null ? Maybe.<Map<String, Integer>>empty() : Maybe.just(res.body());
                 }
-            }
-            );
+            });
     }
 
     /**
@@ -1055,8 +1045,7 @@ public final class DictionarysImpl implements Dictionarys {
                 public Maybe<Map<String, Integer>> apply(BodyResponse<Map<String, Integer>> res) {
                     return res.body() == null ? Maybe.<Map<String, Integer>>empty() : Maybe.just(res.body());
                 }
-            }
-            );
+            });
     }
 
     /**
@@ -1101,8 +1090,7 @@ public final class DictionarysImpl implements Dictionarys {
                 public Maybe<Map<String, Integer>> apply(BodyResponse<Map<String, Integer>> res) {
                     return res.body() == null ? Maybe.<Map<String, Integer>>empty() : Maybe.just(res.body());
                 }
-            }
-            );
+            });
     }
 
     /**
@@ -1147,8 +1135,7 @@ public final class DictionarysImpl implements Dictionarys {
                 public Maybe<Map<String, Long>> apply(BodyResponse<Map<String, Long>> res) {
                     return res.body() == null ? Maybe.<Map<String, Long>>empty() : Maybe.just(res.body());
                 }
-            }
-            );
+            });
     }
 
     /**
@@ -1244,8 +1231,7 @@ public final class DictionarysImpl implements Dictionarys {
                 public Maybe<Map<String, Long>> apply(BodyResponse<Map<String, Long>> res) {
                     return res.body() == null ? Maybe.<Map<String, Long>>empty() : Maybe.just(res.body());
                 }
-            }
-            );
+            });
     }
 
     /**
@@ -1290,8 +1276,7 @@ public final class DictionarysImpl implements Dictionarys {
                 public Maybe<Map<String, Long>> apply(BodyResponse<Map<String, Long>> res) {
                     return res.body() == null ? Maybe.<Map<String, Long>>empty() : Maybe.just(res.body());
                 }
-            }
-            );
+            });
     }
 
     /**
@@ -1336,8 +1321,7 @@ public final class DictionarysImpl implements Dictionarys {
                 public Maybe<Map<String, Double>> apply(BodyResponse<Map<String, Double>> res) {
                     return res.body() == null ? Maybe.<Map<String, Double>>empty() : Maybe.just(res.body());
                 }
-            }
-            );
+            });
     }
 
     /**
@@ -1433,8 +1417,7 @@ public final class DictionarysImpl implements Dictionarys {
                 public Maybe<Map<String, Double>> apply(BodyResponse<Map<String, Double>> res) {
                     return res.body() == null ? Maybe.<Map<String, Double>>empty() : Maybe.just(res.body());
                 }
-            }
-            );
+            });
     }
 
     /**
@@ -1479,8 +1462,7 @@ public final class DictionarysImpl implements Dictionarys {
                 public Maybe<Map<String, Double>> apply(BodyResponse<Map<String, Double>> res) {
                     return res.body() == null ? Maybe.<Map<String, Double>>empty() : Maybe.just(res.body());
                 }
-            }
-            );
+            });
     }
 
     /**
@@ -1525,8 +1507,7 @@ public final class DictionarysImpl implements Dictionarys {
                 public Maybe<Map<String, Double>> apply(BodyResponse<Map<String, Double>> res) {
                     return res.body() == null ? Maybe.<Map<String, Double>>empty() : Maybe.just(res.body());
                 }
-            }
-            );
+            });
     }
 
     /**
@@ -1622,8 +1603,7 @@ public final class DictionarysImpl implements Dictionarys {
                 public Maybe<Map<String, Double>> apply(BodyResponse<Map<String, Double>> res) {
                     return res.body() == null ? Maybe.<Map<String, Double>>empty() : Maybe.just(res.body());
                 }
-            }
-            );
+            });
     }
 
     /**
@@ -1668,8 +1648,7 @@ public final class DictionarysImpl implements Dictionarys {
                 public Maybe<Map<String, Double>> apply(BodyResponse<Map<String, Double>> res) {
                     return res.body() == null ? Maybe.<Map<String, Double>>empty() : Maybe.just(res.body());
                 }
-            }
-            );
+            });
     }
 
     /**
@@ -1714,8 +1693,7 @@ public final class DictionarysImpl implements Dictionarys {
                 public Maybe<Map<String, String>> apply(BodyResponse<Map<String, String>> res) {
                     return res.body() == null ? Maybe.<Map<String, String>>empty() : Maybe.just(res.body());
                 }
-            }
-            );
+            });
     }
 
     /**
@@ -1811,8 +1789,7 @@ public final class DictionarysImpl implements Dictionarys {
                 public Maybe<Map<String, String>> apply(BodyResponse<Map<String, String>> res) {
                     return res.body() == null ? Maybe.<Map<String, String>>empty() : Maybe.just(res.body());
                 }
-            }
-            );
+            });
     }
 
     /**
@@ -1857,8 +1834,7 @@ public final class DictionarysImpl implements Dictionarys {
                 public Maybe<Map<String, String>> apply(BodyResponse<Map<String, String>> res) {
                     return res.body() == null ? Maybe.<Map<String, String>>empty() : Maybe.just(res.body());
                 }
-            }
-            );
+            });
     }
 
     /**
@@ -1903,8 +1879,7 @@ public final class DictionarysImpl implements Dictionarys {
                 public Maybe<Map<String, LocalDate>> apply(BodyResponse<Map<String, LocalDate>> res) {
                     return res.body() == null ? Maybe.<Map<String, LocalDate>>empty() : Maybe.just(res.body());
                 }
-            }
-            );
+            });
     }
 
     /**
@@ -2000,8 +1975,7 @@ public final class DictionarysImpl implements Dictionarys {
                 public Maybe<Map<String, LocalDate>> apply(BodyResponse<Map<String, LocalDate>> res) {
                     return res.body() == null ? Maybe.<Map<String, LocalDate>>empty() : Maybe.just(res.body());
                 }
-            }
-            );
+            });
     }
 
     /**
@@ -2046,8 +2020,7 @@ public final class DictionarysImpl implements Dictionarys {
                 public Maybe<Map<String, LocalDate>> apply(BodyResponse<Map<String, LocalDate>> res) {
                     return res.body() == null ? Maybe.<Map<String, LocalDate>>empty() : Maybe.just(res.body());
                 }
-            }
-            );
+            });
     }
 
     /**
@@ -2092,8 +2065,7 @@ public final class DictionarysImpl implements Dictionarys {
                 public Maybe<Map<String, OffsetDateTime>> apply(BodyResponse<Map<String, OffsetDateTime>> res) {
                     return res.body() == null ? Maybe.<Map<String, OffsetDateTime>>empty() : Maybe.just(res.body());
                 }
-            }
-            );
+            });
     }
 
     /**
@@ -2189,8 +2161,7 @@ public final class DictionarysImpl implements Dictionarys {
                 public Maybe<Map<String, OffsetDateTime>> apply(BodyResponse<Map<String, OffsetDateTime>> res) {
                     return res.body() == null ? Maybe.<Map<String, OffsetDateTime>>empty() : Maybe.just(res.body());
                 }
-            }
-            );
+            });
     }
 
     /**
@@ -2235,8 +2206,7 @@ public final class DictionarysImpl implements Dictionarys {
                 public Maybe<Map<String, OffsetDateTime>> apply(BodyResponse<Map<String, OffsetDateTime>> res) {
                     return res.body() == null ? Maybe.<Map<String, OffsetDateTime>>empty() : Maybe.just(res.body());
                 }
-            }
-            );
+            });
     }
 
     /**
@@ -2281,8 +2251,7 @@ public final class DictionarysImpl implements Dictionarys {
                 public Maybe<Map<String, OffsetDateTime>> apply(BodyResponse<Map<String, OffsetDateTime>> res) {
                     return res.body() == null ? Maybe.<Map<String, OffsetDateTime>>empty() : Maybe.just(res.body());
                 }
-            }
-            );
+            });
     }
 
     /**
@@ -2383,8 +2352,7 @@ public final class DictionarysImpl implements Dictionarys {
                 public Maybe<Map<String, Duration>> apply(BodyResponse<Map<String, Duration>> res) {
                     return res.body() == null ? Maybe.<Map<String, Duration>>empty() : Maybe.just(res.body());
                 }
-            }
-            );
+            });
     }
 
     /**
@@ -2480,8 +2448,7 @@ public final class DictionarysImpl implements Dictionarys {
                 public Maybe<Map<String, byte[]>> apply(BodyResponse<Map<String, byte[]>> res) {
                     return res.body() == null ? Maybe.<Map<String, byte[]>>empty() : Maybe.just(res.body());
                 }
-            }
-            );
+            });
     }
 
     /**
@@ -2577,8 +2544,7 @@ public final class DictionarysImpl implements Dictionarys {
                 public Maybe<Map<String, byte[]>> apply(BodyResponse<Map<String, byte[]>> res) {
                     return res.body() == null ? Maybe.<Map<String, byte[]>>empty() : Maybe.just(res.body());
                 }
-            }
-            );
+            });
     }
 
     /**
@@ -2623,8 +2589,7 @@ public final class DictionarysImpl implements Dictionarys {
                 public Maybe<Map<String, byte[]>> apply(BodyResponse<Map<String, byte[]>> res) {
                     return res.body() == null ? Maybe.<Map<String, byte[]>>empty() : Maybe.just(res.body());
                 }
-            }
-            );
+            });
     }
 
     /**
@@ -2669,8 +2634,7 @@ public final class DictionarysImpl implements Dictionarys {
                 public Maybe<Map<String, Widget>> apply(BodyResponse<Map<String, Widget>> res) {
                     return res.body() == null ? Maybe.<Map<String, Widget>>empty() : Maybe.just(res.body());
                 }
-            }
-            );
+            });
     }
 
     /**
@@ -2715,8 +2679,7 @@ public final class DictionarysImpl implements Dictionarys {
                 public Maybe<Map<String, Widget>> apply(BodyResponse<Map<String, Widget>> res) {
                     return res.body() == null ? Maybe.<Map<String, Widget>>empty() : Maybe.just(res.body());
                 }
-            }
-            );
+            });
     }
 
     /**
@@ -2761,8 +2724,7 @@ public final class DictionarysImpl implements Dictionarys {
                 public Maybe<Map<String, Widget>> apply(BodyResponse<Map<String, Widget>> res) {
                     return res.body() == null ? Maybe.<Map<String, Widget>>empty() : Maybe.just(res.body());
                 }
-            }
-            );
+            });
     }
 
     /**
@@ -2807,8 +2769,7 @@ public final class DictionarysImpl implements Dictionarys {
                 public Maybe<Map<String, Widget>> apply(BodyResponse<Map<String, Widget>> res) {
                     return res.body() == null ? Maybe.<Map<String, Widget>>empty() : Maybe.just(res.body());
                 }
-            }
-            );
+            });
     }
 
     /**
@@ -2853,8 +2814,7 @@ public final class DictionarysImpl implements Dictionarys {
                 public Maybe<Map<String, Widget>> apply(BodyResponse<Map<String, Widget>> res) {
                     return res.body() == null ? Maybe.<Map<String, Widget>>empty() : Maybe.just(res.body());
                 }
-            }
-            );
+            });
     }
 
     /**
@@ -2950,8 +2910,7 @@ public final class DictionarysImpl implements Dictionarys {
                 public Maybe<Map<String, List<String>>> apply(BodyResponse<Map<String, List<String>>> res) {
                     return res.body() == null ? Maybe.<Map<String, List<String>>>empty() : Maybe.just(res.body());
                 }
-            }
-            );
+            });
     }
 
     /**
@@ -2996,8 +2955,7 @@ public final class DictionarysImpl implements Dictionarys {
                 public Maybe<Map<String, List<String>>> apply(BodyResponse<Map<String, List<String>>> res) {
                     return res.body() == null ? Maybe.<Map<String, List<String>>>empty() : Maybe.just(res.body());
                 }
-            }
-            );
+            });
     }
 
     /**
@@ -3042,8 +3000,7 @@ public final class DictionarysImpl implements Dictionarys {
                 public Maybe<Map<String, List<String>>> apply(BodyResponse<Map<String, List<String>>> res) {
                     return res.body() == null ? Maybe.<Map<String, List<String>>>empty() : Maybe.just(res.body());
                 }
-            }
-            );
+            });
     }
 
     /**
@@ -3088,8 +3045,7 @@ public final class DictionarysImpl implements Dictionarys {
                 public Maybe<Map<String, List<String>>> apply(BodyResponse<Map<String, List<String>>> res) {
                     return res.body() == null ? Maybe.<Map<String, List<String>>>empty() : Maybe.just(res.body());
                 }
-            }
-            );
+            });
     }
 
     /**
@@ -3134,8 +3090,7 @@ public final class DictionarysImpl implements Dictionarys {
                 public Maybe<Map<String, List<String>>> apply(BodyResponse<Map<String, List<String>>> res) {
                     return res.body() == null ? Maybe.<Map<String, List<String>>>empty() : Maybe.just(res.body());
                 }
-            }
-            );
+            });
     }
 
     /**
@@ -3231,8 +3186,7 @@ public final class DictionarysImpl implements Dictionarys {
                 public Maybe<Map<String, Map<String, String>>> apply(BodyResponse<Map<String, Map<String, String>>> res) {
                     return res.body() == null ? Maybe.<Map<String, Map<String, String>>>empty() : Maybe.just(res.body());
                 }
-            }
-            );
+            });
     }
 
     /**
@@ -3277,8 +3231,7 @@ public final class DictionarysImpl implements Dictionarys {
                 public Maybe<Map<String, Map<String, String>>> apply(BodyResponse<Map<String, Map<String, String>>> res) {
                     return res.body() == null ? Maybe.<Map<String, Map<String, String>>>empty() : Maybe.just(res.body());
                 }
-            }
-            );
+            });
     }
 
     /**
@@ -3323,8 +3276,7 @@ public final class DictionarysImpl implements Dictionarys {
                 public Maybe<Map<String, Map<String, String>>> apply(BodyResponse<Map<String, Map<String, String>>> res) {
                     return res.body() == null ? Maybe.<Map<String, Map<String, String>>>empty() : Maybe.just(res.body());
                 }
-            }
-            );
+            });
     }
 
     /**
@@ -3369,8 +3321,7 @@ public final class DictionarysImpl implements Dictionarys {
                 public Maybe<Map<String, Map<String, String>>> apply(BodyResponse<Map<String, Map<String, String>>> res) {
                     return res.body() == null ? Maybe.<Map<String, Map<String, String>>>empty() : Maybe.just(res.body());
                 }
-            }
-            );
+            });
     }
 
     /**
@@ -3415,8 +3366,7 @@ public final class DictionarysImpl implements Dictionarys {
                 public Maybe<Map<String, Map<String, String>>> apply(BodyResponse<Map<String, Map<String, String>>> res) {
                     return res.body() == null ? Maybe.<Map<String, Map<String, String>>>empty() : Maybe.just(res.body());
                 }
-            }
-            );
+            });
     }
 
     /**

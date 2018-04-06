@@ -224,8 +224,7 @@ public final class NumbersImpl implements Numbers {
                 public Maybe<Double> apply(BodyResponse<Double> res) {
                     return res.body() == null ? Maybe.<Double>empty() : Maybe.just(res.body());
                 }
-            }
-            );
+            });
     }
 
     /**
@@ -270,8 +269,7 @@ public final class NumbersImpl implements Numbers {
                 public Maybe<Double> apply(BodyResponse<Double> res) {
                     return res.body() == null ? Maybe.<Double>empty() : Maybe.just(res.body());
                 }
-            }
-            );
+            });
     }
 
     /**
@@ -316,8 +314,7 @@ public final class NumbersImpl implements Numbers {
                 public Maybe<Double> apply(BodyResponse<Double> res) {
                     return res.body() == null ? Maybe.<Double>empty() : Maybe.just(res.body());
                 }
-            }
-            );
+            });
     }
 
     /**
@@ -362,8 +359,7 @@ public final class NumbersImpl implements Numbers {
                 public Maybe<BigDecimal> apply(BodyResponse<BigDecimal> res) {
                     return res.body() == null ? Maybe.<BigDecimal>empty() : Maybe.just(res.body());
                 }
-            }
-            );
+            });
     }
 
     /**
@@ -455,8 +451,7 @@ public final class NumbersImpl implements Numbers {
                 public Maybe<Double> apply(BodyResponse<Double> res) {
                     return res.body() == null ? Maybe.<Double>empty() : Maybe.just(res.body());
                 }
-            }
-            );
+            });
     }
 
     /**
@@ -548,8 +543,7 @@ public final class NumbersImpl implements Numbers {
                 public Maybe<Double> apply(BodyResponse<Double> res) {
                     return res.body() == null ? Maybe.<Double>empty() : Maybe.just(res.body());
                 }
-            }
-            );
+            });
     }
 
     /**
@@ -641,8 +635,7 @@ public final class NumbersImpl implements Numbers {
                 public Maybe<Double> apply(BodyResponse<Double> res) {
                     return res.body() == null ? Maybe.<Double>empty() : Maybe.just(res.body());
                 }
-            }
-            );
+            });
     }
 
     /**
@@ -734,8 +727,7 @@ public final class NumbersImpl implements Numbers {
                 public Maybe<Double> apply(BodyResponse<Double> res) {
                     return res.body() == null ? Maybe.<Double>empty() : Maybe.just(res.body());
                 }
-            }
-            );
+            });
     }
 
     /**
@@ -830,8 +822,7 @@ public final class NumbersImpl implements Numbers {
                 public Maybe<BigDecimal> apply(BodyResponse<BigDecimal> res) {
                     return res.body() == null ? Maybe.<BigDecimal>empty() : Maybe.just(res.body());
                 }
-            }
-            );
+            });
     }
 
     /**
@@ -926,8 +917,7 @@ public final class NumbersImpl implements Numbers {
                 public Maybe<BigDecimal> apply(BodyResponse<BigDecimal> res) {
                     return res.body() == null ? Maybe.<BigDecimal>empty() : Maybe.just(res.body());
                 }
-            }
-            );
+            });
     }
 
     /**
@@ -1022,8 +1012,7 @@ public final class NumbersImpl implements Numbers {
                 public Maybe<BigDecimal> apply(BodyResponse<BigDecimal> res) {
                     return res.body() == null ? Maybe.<BigDecimal>empty() : Maybe.just(res.body());
                 }
-            }
-            );
+            });
     }
 
     /**
@@ -1115,8 +1104,7 @@ public final class NumbersImpl implements Numbers {
                 public Maybe<Double> apply(BodyResponse<Double> res) {
                     return res.body() == null ? Maybe.<Double>empty() : Maybe.just(res.body());
                 }
-            }
-            );
+            });
     }
 
     /**
@@ -1208,8 +1196,7 @@ public final class NumbersImpl implements Numbers {
                 public Maybe<Double> apply(BodyResponse<Double> res) {
                     return res.body() == null ? Maybe.<Double>empty() : Maybe.just(res.body());
                 }
-            }
-            );
+            });
     }
 
     /**
@@ -1304,7 +1291,6 @@ public final class NumbersImpl implements Numbers {
                 public Maybe<BigDecimal> apply(BodyResponse<BigDecimal> res) {
                     return res.body() == null ? Maybe.<BigDecimal>empty() : Maybe.just(res.body());
                 }
-            }
-            );
+            });
     }
 }

@@ -443,8 +443,7 @@ public final class ArraysImpl implements Arrays {
                 public Maybe<List<Integer>> apply(BodyResponse<List<Integer>> res) {
                     return res.body() == null ? Maybe.<List<Integer>>empty() : Maybe.just(res.body());
                 }
-            }
-            );
+            });
     }
 
     /**
@@ -489,8 +488,7 @@ public final class ArraysImpl implements Arrays {
                 public Maybe<List<Integer>> apply(BodyResponse<List<Integer>> res) {
                     return res.body() == null ? Maybe.<List<Integer>>empty() : Maybe.just(res.body());
                 }
-            }
-            );
+            });
     }
 
     /**
@@ -535,8 +533,7 @@ public final class ArraysImpl implements Arrays {
                 public Maybe<List<Integer>> apply(BodyResponse<List<Integer>> res) {
                     return res.body() == null ? Maybe.<List<Integer>>empty() : Maybe.just(res.body());
                 }
-            }
-            );
+            });
     }
 
     /**
@@ -632,8 +629,7 @@ public final class ArraysImpl implements Arrays {
                 public Maybe<List<Boolean>> apply(BodyResponse<List<Boolean>> res) {
                     return res.body() == null ? Maybe.<List<Boolean>>empty() : Maybe.just(res.body());
                 }
-            }
-            );
+            });
     }
 
     /**
@@ -729,8 +725,7 @@ public final class ArraysImpl implements Arrays {
                 public Maybe<List<Boolean>> apply(BodyResponse<List<Boolean>> res) {
                     return res.body() == null ? Maybe.<List<Boolean>>empty() : Maybe.just(res.body());
                 }
-            }
-            );
+            });
     }
 
     /**
@@ -775,8 +770,7 @@ public final class ArraysImpl implements Arrays {
                 public Maybe<List<Boolean>> apply(BodyResponse<List<Boolean>> res) {
                     return res.body() == null ? Maybe.<List<Boolean>>empty() : Maybe.just(res.body());
                 }
-            }
-            );
+            });
     }
 
     /**
@@ -821,8 +815,7 @@ public final class ArraysImpl implements Arrays {
                 public Maybe<List<Integer>> apply(BodyResponse<List<Integer>> res) {
                     return res.body() == null ? Maybe.<List<Integer>>empty() : Maybe.just(res.body());
                 }
-            }
-            );
+            });
     }
 
     /**
@@ -918,8 +911,7 @@ public final class ArraysImpl implements Arrays {
                 public Maybe<List<Integer>> apply(BodyResponse<List<Integer>> res) {
                     return res.body() == null ? Maybe.<List<Integer>>empty() : Maybe.just(res.body());
                 }
-            }
-            );
+            });
     }
 
     /**
@@ -964,8 +956,7 @@ public final class ArraysImpl implements Arrays {
                 public Maybe<List<Integer>> apply(BodyResponse<List<Integer>> res) {
                     return res.body() == null ? Maybe.<List<Integer>>empty() : Maybe.just(res.body());
                 }
-            }
-            );
+            });
     }
 
     /**
@@ -1010,8 +1001,7 @@ public final class ArraysImpl implements Arrays {
                 public Maybe<List<Long>> apply(BodyResponse<List<Long>> res) {
                     return res.body() == null ? Maybe.<List<Long>>empty() : Maybe.just(res.body());
                 }
-            }
-            );
+            });
     }
 
     /**
@@ -1107,8 +1097,7 @@ public final class ArraysImpl implements Arrays {
                 public Maybe<List<Long>> apply(BodyResponse<List<Long>> res) {
                     return res.body() == null ? Maybe.<List<Long>>empty() : Maybe.just(res.body());
                 }
-            }
-            );
+            });
     }
 
     /**
@@ -1153,8 +1142,7 @@ public final class ArraysImpl implements Arrays {
                 public Maybe<List<Long>> apply(BodyResponse<List<Long>> res) {
                     return res.body() == null ? Maybe.<List<Long>>empty() : Maybe.just(res.body());
                 }
-            }
-            );
+            });
     }
 
     /**
@@ -1199,8 +1187,7 @@ public final class ArraysImpl implements Arrays {
                 public Maybe<List<Double>> apply(BodyResponse<List<Double>> res) {
                     return res.body() == null ? Maybe.<List<Double>>empty() : Maybe.just(res.body());
                 }
-            }
-            );
+            });
     }
 
     /**
@@ -1296,8 +1283,7 @@ public final class ArraysImpl implements Arrays {
                 public Maybe<List<Double>> apply(BodyResponse<List<Double>> res) {
                     return res.body() == null ? Maybe.<List<Double>>empty() : Maybe.just(res.body());
                 }
-            }
-            );
+            });
     }
 
     /**
@@ -1342,8 +1328,7 @@ public final class ArraysImpl implements Arrays {
                 public Maybe<List<Double>> apply(BodyResponse<List<Double>> res) {
                     return res.body() == null ? Maybe.<List<Double>>empty() : Maybe.just(res.body());
                 }
-            }
-            );
+            });
     }
 
     /**
@@ -1388,8 +1373,7 @@ public final class ArraysImpl implements Arrays {
                 public Maybe<List<Double>> apply(BodyResponse<List<Double>> res) {
                     return res.body() == null ? Maybe.<List<Double>>empty() : Maybe.just(res.body());
                 }
-            }
-            );
+            });
     }
 
     /**
@@ -1485,8 +1469,7 @@ public final class ArraysImpl implements Arrays {
                 public Maybe<List<Double>> apply(BodyResponse<List<Double>> res) {
                     return res.body() == null ? Maybe.<List<Double>>empty() : Maybe.just(res.body());
                 }
-            }
-            );
+            });
     }
 
     /**
@@ -1531,8 +1514,7 @@ public final class ArraysImpl implements Arrays {
                 public Maybe<List<Double>> apply(BodyResponse<List<Double>> res) {
                     return res.body() == null ? Maybe.<List<Double>>empty() : Maybe.just(res.body());
                 }
-            }
-            );
+            });
     }
 
     /**
@@ -1577,8 +1559,7 @@ public final class ArraysImpl implements Arrays {
                 public Maybe<List<String>> apply(BodyResponse<List<String>> res) {
                     return res.body() == null ? Maybe.<List<String>>empty() : Maybe.just(res.body());
                 }
-            }
-            );
+            });
     }
 
     /**
@@ -1674,8 +1655,7 @@ public final class ArraysImpl implements Arrays {
                 public Maybe<List<String>> apply(BodyResponse<List<String>> res) {
                     return res.body() == null ? Maybe.<List<String>>empty() : Maybe.just(res.body());
                 }
-            }
-            );
+            });
     }
 
     /**
@@ -1720,8 +1700,7 @@ public final class ArraysImpl implements Arrays {
                 public Maybe<List<String>> apply(BodyResponse<List<String>> res) {
                     return res.body() == null ? Maybe.<List<String>>empty() : Maybe.just(res.body());
                 }
-            }
-            );
+            });
     }
 
     /**
@@ -1766,8 +1745,7 @@ public final class ArraysImpl implements Arrays {
                 public Maybe<List<UUID>> apply(BodyResponse<List<UUID>> res) {
                     return res.body() == null ? Maybe.<List<UUID>>empty() : Maybe.just(res.body());
                 }
-            }
-            );
+            });
     }
 
     /**
@@ -1863,8 +1841,7 @@ public final class ArraysImpl implements Arrays {
                 public Maybe<List<UUID>> apply(BodyResponse<List<UUID>> res) {
                     return res.body() == null ? Maybe.<List<UUID>>empty() : Maybe.just(res.body());
                 }
-            }
-            );
+            });
     }
 
     /**
@@ -1909,8 +1886,7 @@ public final class ArraysImpl implements Arrays {
                 public Maybe<List<LocalDate>> apply(BodyResponse<List<LocalDate>> res) {
                     return res.body() == null ? Maybe.<List<LocalDate>>empty() : Maybe.just(res.body());
                 }
-            }
-            );
+            });
     }
 
     /**
@@ -2006,8 +1982,7 @@ public final class ArraysImpl implements Arrays {
                 public Maybe<List<LocalDate>> apply(BodyResponse<List<LocalDate>> res) {
                     return res.body() == null ? Maybe.<List<LocalDate>>empty() : Maybe.just(res.body());
                 }
-            }
-            );
+            });
     }
 
     /**
@@ -2052,8 +2027,7 @@ public final class ArraysImpl implements Arrays {
                 public Maybe<List<LocalDate>> apply(BodyResponse<List<LocalDate>> res) {
                     return res.body() == null ? Maybe.<List<LocalDate>>empty() : Maybe.just(res.body());
                 }
-            }
-            );
+            });
     }
 
     /**
@@ -2098,8 +2072,7 @@ public final class ArraysImpl implements Arrays {
                 public Maybe<List<OffsetDateTime>> apply(BodyResponse<List<OffsetDateTime>> res) {
                     return res.body() == null ? Maybe.<List<OffsetDateTime>>empty() : Maybe.just(res.body());
                 }
-            }
-            );
+            });
     }
 
     /**
@@ -2195,8 +2168,7 @@ public final class ArraysImpl implements Arrays {
                 public Maybe<List<OffsetDateTime>> apply(BodyResponse<List<OffsetDateTime>> res) {
                     return res.body() == null ? Maybe.<List<OffsetDateTime>>empty() : Maybe.just(res.body());
                 }
-            }
-            );
+            });
     }
 
     /**
@@ -2241,8 +2213,7 @@ public final class ArraysImpl implements Arrays {
                 public Maybe<List<OffsetDateTime>> apply(BodyResponse<List<OffsetDateTime>> res) {
                     return res.body() == null ? Maybe.<List<OffsetDateTime>>empty() : Maybe.just(res.body());
                 }
-            }
-            );
+            });
     }
 
     /**
@@ -2287,8 +2258,7 @@ public final class ArraysImpl implements Arrays {
                 public Maybe<List<OffsetDateTime>> apply(BodyResponse<List<OffsetDateTime>> res) {
                     return res.body() == null ? Maybe.<List<OffsetDateTime>>empty() : Maybe.just(res.body());
                 }
-            }
-            );
+            });
     }
 
     /**
@@ -2389,8 +2359,7 @@ public final class ArraysImpl implements Arrays {
                 public Maybe<List<Duration>> apply(BodyResponse<List<Duration>> res) {
                     return res.body() == null ? Maybe.<List<Duration>>empty() : Maybe.just(res.body());
                 }
-            }
-            );
+            });
     }
 
     /**
@@ -2486,8 +2455,7 @@ public final class ArraysImpl implements Arrays {
                 public Maybe<List<byte[]>> apply(BodyResponse<List<byte[]>> res) {
                     return res.body() == null ? Maybe.<List<byte[]>>empty() : Maybe.just(res.body());
                 }
-            }
-            );
+            });
     }
 
     /**
@@ -2583,8 +2551,7 @@ public final class ArraysImpl implements Arrays {
                 public Maybe<List<byte[]>> apply(BodyResponse<List<byte[]>> res) {
                     return res.body() == null ? Maybe.<List<byte[]>>empty() : Maybe.just(res.body());
                 }
-            }
-            );
+            });
     }
 
     /**
@@ -2629,8 +2596,7 @@ public final class ArraysImpl implements Arrays {
                 public Maybe<List<byte[]>> apply(BodyResponse<List<byte[]>> res) {
                     return res.body() == null ? Maybe.<List<byte[]>>empty() : Maybe.just(res.body());
                 }
-            }
-            );
+            });
     }
 
     /**
@@ -2675,8 +2641,7 @@ public final class ArraysImpl implements Arrays {
                 public Maybe<List<Product>> apply(BodyResponse<List<Product>> res) {
                     return res.body() == null ? Maybe.<List<Product>>empty() : Maybe.just(res.body());
                 }
-            }
-            );
+            });
     }
 
     /**
@@ -2721,8 +2686,7 @@ public final class ArraysImpl implements Arrays {
                 public Maybe<List<Product>> apply(BodyResponse<List<Product>> res) {
                     return res.body() == null ? Maybe.<List<Product>>empty() : Maybe.just(res.body());
                 }
-            }
-            );
+            });
     }
 
     /**
@@ -2767,8 +2731,7 @@ public final class ArraysImpl implements Arrays {
                 public Maybe<List<Product>> apply(BodyResponse<List<Product>> res) {
                     return res.body() == null ? Maybe.<List<Product>>empty() : Maybe.just(res.body());
                 }
-            }
-            );
+            });
     }
 
     /**
@@ -2813,8 +2776,7 @@ public final class ArraysImpl implements Arrays {
                 public Maybe<List<Product>> apply(BodyResponse<List<Product>> res) {
                     return res.body() == null ? Maybe.<List<Product>>empty() : Maybe.just(res.body());
                 }
-            }
-            );
+            });
     }
 
     /**
@@ -2859,8 +2821,7 @@ public final class ArraysImpl implements Arrays {
                 public Maybe<List<Product>> apply(BodyResponse<List<Product>> res) {
                     return res.body() == null ? Maybe.<List<Product>>empty() : Maybe.just(res.body());
                 }
-            }
-            );
+            });
     }
 
     /**
@@ -2956,8 +2917,7 @@ public final class ArraysImpl implements Arrays {
                 public Maybe<List<List<String>>> apply(BodyResponse<List<List<String>>> res) {
                     return res.body() == null ? Maybe.<List<List<String>>>empty() : Maybe.just(res.body());
                 }
-            }
-            );
+            });
     }
 
     /**
@@ -3002,8 +2962,7 @@ public final class ArraysImpl implements Arrays {
                 public Maybe<List<List<String>>> apply(BodyResponse<List<List<String>>> res) {
                     return res.body() == null ? Maybe.<List<List<String>>>empty() : Maybe.just(res.body());
                 }
-            }
-            );
+            });
     }
 
     /**
@@ -3048,8 +3007,7 @@ public final class ArraysImpl implements Arrays {
                 public Maybe<List<List<String>>> apply(BodyResponse<List<List<String>>> res) {
                     return res.body() == null ? Maybe.<List<List<String>>>empty() : Maybe.just(res.body());
                 }
-            }
-            );
+            });
     }
 
     /**
@@ -3094,8 +3052,7 @@ public final class ArraysImpl implements Arrays {
                 public Maybe<List<List<String>>> apply(BodyResponse<List<List<String>>> res) {
                     return res.body() == null ? Maybe.<List<List<String>>>empty() : Maybe.just(res.body());
                 }
-            }
-            );
+            });
     }
 
     /**
@@ -3140,8 +3097,7 @@ public final class ArraysImpl implements Arrays {
                 public Maybe<List<List<String>>> apply(BodyResponse<List<List<String>>> res) {
                     return res.body() == null ? Maybe.<List<List<String>>>empty() : Maybe.just(res.body());
                 }
-            }
-            );
+            });
     }
 
     /**
@@ -3237,8 +3193,7 @@ public final class ArraysImpl implements Arrays {
                 public Maybe<List<Map<String, String>>> apply(BodyResponse<List<Map<String, String>>> res) {
                     return res.body() == null ? Maybe.<List<Map<String, String>>>empty() : Maybe.just(res.body());
                 }
-            }
-            );
+            });
     }
 
     /**
@@ -3283,8 +3238,7 @@ public final class ArraysImpl implements Arrays {
                 public Maybe<List<Map<String, String>>> apply(BodyResponse<List<Map<String, String>>> res) {
                     return res.body() == null ? Maybe.<List<Map<String, String>>>empty() : Maybe.just(res.body());
                 }
-            }
-            );
+            });
     }
 
     /**
@@ -3329,8 +3283,7 @@ public final class ArraysImpl implements Arrays {
                 public Maybe<List<Map<String, String>>> apply(BodyResponse<List<Map<String, String>>> res) {
                     return res.body() == null ? Maybe.<List<Map<String, String>>>empty() : Maybe.just(res.body());
                 }
-            }
-            );
+            });
     }
 
     /**
@@ -3375,8 +3328,7 @@ public final class ArraysImpl implements Arrays {
                 public Maybe<List<Map<String, String>>> apply(BodyResponse<List<Map<String, String>>> res) {
                     return res.body() == null ? Maybe.<List<Map<String, String>>>empty() : Maybe.just(res.body());
                 }
-            }
-            );
+            });
     }
 
     /**
@@ -3421,8 +3373,7 @@ public final class ArraysImpl implements Arrays {
                 public Maybe<List<Map<String, String>>> apply(BodyResponse<List<Map<String, String>>> res) {
                     return res.body() == null ? Maybe.<List<Map<String, String>>>empty() : Maybe.just(res.body());
                 }
-            }
-            );
+            });
     }
 
     /**

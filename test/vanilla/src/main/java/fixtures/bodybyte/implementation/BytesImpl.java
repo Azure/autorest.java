@@ -128,8 +128,7 @@ public final class BytesImpl implements Bytes {
                 public Maybe<byte[]> apply(BodyResponse<byte[]> res) {
                     return res.body() == null ? Maybe.<byte[]>empty() : Maybe.just(res.body());
                 }
-            }
-            );
+            });
     }
 
     /**
@@ -174,8 +173,7 @@ public final class BytesImpl implements Bytes {
                 public Maybe<byte[]> apply(BodyResponse<byte[]> res) {
                     return res.body() == null ? Maybe.<byte[]>empty() : Maybe.just(res.body());
                 }
-            }
-            );
+            });
     }
 
     /**
@@ -220,8 +218,7 @@ public final class BytesImpl implements Bytes {
                 public Maybe<byte[]> apply(BodyResponse<byte[]> res) {
                     return res.body() == null ? Maybe.<byte[]>empty() : Maybe.just(res.body());
                 }
-            }
-            );
+            });
     }
 
     /**
@@ -316,7 +313,6 @@ public final class BytesImpl implements Bytes {
                 public Maybe<byte[]> apply(BodyResponse<byte[]> res) {
                     return res.body() == null ? Maybe.<byte[]>empty() : Maybe.just(res.body());
                 }
-            }
-            );
+            });
     }
 }

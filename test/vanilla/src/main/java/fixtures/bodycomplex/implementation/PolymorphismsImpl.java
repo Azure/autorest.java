@@ -131,8 +131,7 @@ public final class PolymorphismsImpl implements Polymorphisms {
                 public Maybe<Fish> apply(BodyResponse<Fish> res) {
                     return res.body() == null ? Maybe.<Fish>empty() : Maybe.just(res.body());
                 }
-            }
-            );
+            });
     }
 
     /**
@@ -356,8 +355,7 @@ public final class PolymorphismsImpl implements Polymorphisms {
                 public Maybe<Salmon> apply(BodyResponse<Salmon> res) {
                     return res.body() == null ? Maybe.<Salmon>empty() : Maybe.just(res.body());
                 }
-            }
-            );
+            });
     }
 
     /**

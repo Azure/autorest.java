@@ -144,8 +144,7 @@ public final class DatesImpl implements Dates {
                 public Maybe<LocalDate> apply(BodyResponse<LocalDate> res) {
                     return res.body() == null ? Maybe.<LocalDate>empty() : Maybe.just(res.body());
                 }
-            }
-            );
+            });
     }
 
     /**
@@ -190,8 +189,7 @@ public final class DatesImpl implements Dates {
                 public Maybe<LocalDate> apply(BodyResponse<LocalDate> res) {
                     return res.body() == null ? Maybe.<LocalDate>empty() : Maybe.just(res.body());
                 }
-            }
-            );
+            });
     }
 
     /**
@@ -236,8 +234,7 @@ public final class DatesImpl implements Dates {
                 public Maybe<LocalDate> apply(BodyResponse<LocalDate> res) {
                     return res.body() == null ? Maybe.<LocalDate>empty() : Maybe.just(res.body());
                 }
-            }
-            );
+            });
     }
 
     /**
@@ -282,8 +279,7 @@ public final class DatesImpl implements Dates {
                 public Maybe<LocalDate> apply(BodyResponse<LocalDate> res) {
                     return res.body() == null ? Maybe.<LocalDate>empty() : Maybe.just(res.body());
                 }
-            }
-            );
+            });
     }
 
     /**
@@ -378,8 +374,7 @@ public final class DatesImpl implements Dates {
                 public Maybe<LocalDate> apply(BodyResponse<LocalDate> res) {
                     return res.body() == null ? Maybe.<LocalDate>empty() : Maybe.just(res.body());
                 }
-            }
-            );
+            });
     }
 
     /**
@@ -474,7 +469,6 @@ public final class DatesImpl implements Dates {
                 public Maybe<LocalDate> apply(BodyResponse<LocalDate> res) {
                     return res.body() == null ? Maybe.<LocalDate>empty() : Maybe.just(res.body());
                 }
-            }
-            );
+            });
     }
 }

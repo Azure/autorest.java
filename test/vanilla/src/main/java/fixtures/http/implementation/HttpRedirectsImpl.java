@@ -236,8 +236,7 @@ public final class HttpRedirectsImpl implements HttpRedirects {
                 public Maybe<List<String>> apply(HttpRedirectsGet300Response res) {
                     return res.body() == null ? Maybe.<List<String>>empty() : Maybe.just(res.body());
                 }
-            }
-            );
+            });
     }
 
     /**
