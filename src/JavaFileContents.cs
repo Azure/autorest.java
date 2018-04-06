@@ -324,15 +324,15 @@ namespace AutoRest.Java
             Line("};");
         }
 
-        public void AnonymousClass(string anonymousClassDeclaration, Action<JavaClass> anonymousClassBlock)
+        public void AnonymousFunction(string parameterType, string parameterName, string returnType, Action<JavaBlock> methodBlock)
         {
-            Line($"{anonymousClassDeclaration} {{");
+            Line($"new Function<{parameterType}, {returnType}>() {{");
             Indent(() =>
             {
                 JavaClass javaClass = new JavaClass(this);
-                anonymousClassBlock(javaClass);
+                javaClass.PublicMethod($"{returnType} apply({parameterType} {parameterName})", methodBlock);
             });
-            Line("}");
+            Text("}");
         }
 
         public void Annotation(params string[] annotations)

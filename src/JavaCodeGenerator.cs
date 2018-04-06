@@ -4289,10 +4289,7 @@ namespace AutoRest.Java
                             function.Indent(() =>
                             {
                                 function.Text(".map(");
-                                function.AnonymousClass($"new Function<{returnValueTypeArgumentType}, {mapperReturnType}>()", anonymousClass =>
-                                {
-                                    anonymousClass.PublicMethod($"{mapperReturnType} apply(RestResponse<?, ?> res)", method => method.Return("res.body()"));
-                                });
+                                function.AnonymousFunction(returnValueTypeArgumentType.ToString(), "res", mapperReturnType.ToString(), method => method.Return("res.body()"));
                                 function.Line(");");
                             });
                         });
@@ -4355,10 +4352,7 @@ namespace AutoRest.Java
                             {
                                 function.Text(".map(");
 
-                                function.AnonymousClass($"new Function<{returnValueTypeArgumentType}, {mapperReturnType}>()", anonymousClass =>
-                                {
-                                    anonymousClass.PublicMethod($"{mapperReturnType} apply(RestResponse<?, {mapperReturnType}> res)", method => method.Return("res.body()"));
-                                });
+                                function.AnonymousFunction(returnValueTypeArgumentType.ToString(), "res", mapperReturnType.ToString(), method => method.Return("res.body()"));
                                 function.Line(")");
                                 function.Line(".toObservable();");
                             });
@@ -4566,23 +4560,15 @@ namespace AutoRest.Java
                                 if (restAPIMethodReturnBodyClientType != PrimitiveType.Void)
                                 {
                                     function.Text($".flatMapMaybe(");
-                                    function.AnonymousClass($"new Function<{returnValueTypeArgumentClientType}, {mapperReturnType}>()", anonymousClassBlock =>
-                                    {
-                                        anonymousClassBlock.PublicMethod(
-                                            $"{mapperReturnType} apply({returnValueTypeArgumentClientType} res)",
+                                    function.AnonymousFunction(returnValueTypeArgumentClientType.ToString(), "res", mapperReturnType.ToString(),
                                             method => method.Return($"res.body() == null ? Maybe.<{restAPIMethodReturnBodyClientType.AsNullable()}>empty() : Maybe.just(res.body())"));
-                                    });
                                     function.Line(");");
                                 }
                                 else if (isFluentDelete)
                                 {
                                     function.Text($".flatMapMaybe(");
-                                    function.AnonymousClass($"new Function<{returnValueTypeArgumentClientType}, {GenericType.Maybe(ClassType.Void)}>()", anonymousClassBlock =>
-                                    {
-                                        anonymousClassBlock.PublicMethod(
-                                            $"{GenericType.Maybe(ClassType.Void)} apply({returnValueTypeArgumentClientType} res)",
+                                    function.AnonymousFunction(returnValueTypeArgumentClientType.ToString(), "res", GenericType.Maybe(ClassType.Void).ToString(),
                                             method => method.Return("Maybe.empty()"));
-                                    });
                                     function.Line(");");
                                 }
                                 else

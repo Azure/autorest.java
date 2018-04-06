@@ -154,7 +154,7 @@ namespace AutoRest.Java.Model
 
             if (includeImplementationImports)
             {
-                imports.Add("io.reactivex.functions.Function");
+                ClassType.Function.AddImportsTo(imports, includeImplementationImports);
 
                 if (IsResumable)
                 {

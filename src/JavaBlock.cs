@@ -71,9 +71,9 @@ namespace AutoRest.Java
             contents.ReturnAnonymousClass(anonymousClassDeclaration, anonymousClassBlock);
         }
 
-        public void AnonymousClass(string anonymousClassDeclaration, Action<JavaClass> anonymousClassBlock)
+        public void AnonymousFunction(string parameterType, string parameterName, string returnType, Action<JavaBlock> methodBlock)
         {
-            contents.AnonymousClass(anonymousClassDeclaration, anonymousClassBlock);
+            contents.AnonymousFunction(parameterType, parameterName, returnType, methodBlock);
         }
 
         public JavaIfBlock If(string condition, Action<JavaBlock> ifAction)
