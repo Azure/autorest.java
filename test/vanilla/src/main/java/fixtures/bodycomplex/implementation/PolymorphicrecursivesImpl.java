@@ -29,6 +29,7 @@ import io.reactivex.Completable;
 import io.reactivex.Maybe;
 import io.reactivex.Single;
 import io.reactivex.annotations.NonNull;
+import io.reactivex.functions.Function;
 
 /**
  * An instance of this class provides access to all the operations defined in
@@ -110,7 +111,12 @@ public final class PolymorphicrecursivesImpl implements Polymorphicrecursives {
      */
     public Maybe<Fish> getValidAsync() {
         return getValidWithRestResponseAsync()
-            .flatMapMaybe((BodyResponse<Fish> res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .flatMapMaybe(new Function<BodyResponse<Fish>, Maybe<Fish>>() {
+                public Maybe<Fish> apply(BodyResponse<Fish> res) {
+                    return res.body() == null ? Maybe.<Fish>empty() : Maybe.just(res.body());
+                }
+            }
+            );
     }
 
     /**

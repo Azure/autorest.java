@@ -11,7 +11,7 @@
 package fixtures.header.models;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import java.time.LocalDate;
+import org.threeten.bp.LocalDate;
 
 /**
  * Defines headers for responseDate operation.

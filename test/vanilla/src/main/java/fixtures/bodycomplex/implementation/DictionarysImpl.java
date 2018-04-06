@@ -29,6 +29,7 @@ import io.reactivex.Completable;
 import io.reactivex.Maybe;
 import io.reactivex.Single;
 import io.reactivex.annotations.NonNull;
+import io.reactivex.functions.Function;
 
 /**
  * An instance of this class provides access to all the operations defined in
@@ -130,7 +131,12 @@ public final class DictionarysImpl implements Dictionarys {
      */
     public Maybe<DictionaryWrapper> getValidAsync() {
         return getValidWithRestResponseAsync()
-            .flatMapMaybe((BodyResponse<DictionaryWrapper> res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .flatMapMaybe(new Function<BodyResponse<DictionaryWrapper>, Maybe<DictionaryWrapper>>() {
+                public Maybe<DictionaryWrapper> apply(BodyResponse<DictionaryWrapper> res) {
+                    return res.body() == null ? Maybe.<DictionaryWrapper>empty() : Maybe.just(res.body());
+                }
+            }
+            );
     }
 
     /**
@@ -222,7 +228,12 @@ public final class DictionarysImpl implements Dictionarys {
      */
     public Maybe<DictionaryWrapper> getEmptyAsync() {
         return getEmptyWithRestResponseAsync()
-            .flatMapMaybe((BodyResponse<DictionaryWrapper> res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .flatMapMaybe(new Function<BodyResponse<DictionaryWrapper>, Maybe<DictionaryWrapper>>() {
+                public Maybe<DictionaryWrapper> apply(BodyResponse<DictionaryWrapper> res) {
+                    return res.body() == null ? Maybe.<DictionaryWrapper>empty() : Maybe.just(res.body());
+                }
+            }
+            );
     }
 
     /**
@@ -314,7 +325,12 @@ public final class DictionarysImpl implements Dictionarys {
      */
     public Maybe<DictionaryWrapper> getNullAsync() {
         return getNullWithRestResponseAsync()
-            .flatMapMaybe((BodyResponse<DictionaryWrapper> res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .flatMapMaybe(new Function<BodyResponse<DictionaryWrapper>, Maybe<DictionaryWrapper>>() {
+                public Maybe<DictionaryWrapper> apply(BodyResponse<DictionaryWrapper> res) {
+                    return res.body() == null ? Maybe.<DictionaryWrapper>empty() : Maybe.just(res.body());
+                }
+            }
+            );
     }
 
     /**
@@ -355,6 +371,11 @@ public final class DictionarysImpl implements Dictionarys {
      */
     public Maybe<DictionaryWrapper> getNotProvidedAsync() {
         return getNotProvidedWithRestResponseAsync()
-            .flatMapMaybe((BodyResponse<DictionaryWrapper> res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .flatMapMaybe(new Function<BodyResponse<DictionaryWrapper>, Maybe<DictionaryWrapper>>() {
+                public Maybe<DictionaryWrapper> apply(BodyResponse<DictionaryWrapper> res) {
+                    return res.body() == null ? Maybe.<DictionaryWrapper>empty() : Maybe.just(res.body());
+                }
+            }
+            );
     }
 }

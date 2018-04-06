@@ -29,7 +29,8 @@ import io.reactivex.Completable;
 import io.reactivex.Maybe;
 import io.reactivex.Single;
 import io.reactivex.annotations.NonNull;
-import java.time.OffsetDateTime;
+import io.reactivex.functions.Function;
+import org.threeten.bp.OffsetDateTime;
 
 /**
  * An instance of this class provides access to all the operations defined in
@@ -153,7 +154,12 @@ public final class Datetimerfc1123sImpl implements Datetimerfc1123s {
      */
     public Maybe<OffsetDateTime> getNullAsync() {
         return getNullWithRestResponseAsync()
-            .flatMapMaybe((BodyResponse<OffsetDateTime> res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .flatMapMaybe(new Function<BodyResponse<OffsetDateTime>, Maybe<OffsetDateTime>>() {
+                public Maybe<OffsetDateTime> apply(BodyResponse<OffsetDateTime> res) {
+                    return res.body() == null ? Maybe.<OffsetDateTime>empty() : Maybe.just(res.body());
+                }
+            }
+            );
     }
 
     /**
@@ -194,7 +200,12 @@ public final class Datetimerfc1123sImpl implements Datetimerfc1123s {
      */
     public Maybe<OffsetDateTime> getInvalidAsync() {
         return getInvalidWithRestResponseAsync()
-            .flatMapMaybe((BodyResponse<OffsetDateTime> res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .flatMapMaybe(new Function<BodyResponse<OffsetDateTime>, Maybe<OffsetDateTime>>() {
+                public Maybe<OffsetDateTime> apply(BodyResponse<OffsetDateTime> res) {
+                    return res.body() == null ? Maybe.<OffsetDateTime>empty() : Maybe.just(res.body());
+                }
+            }
+            );
     }
 
     /**
@@ -235,7 +246,12 @@ public final class Datetimerfc1123sImpl implements Datetimerfc1123s {
      */
     public Maybe<OffsetDateTime> getOverflowAsync() {
         return getOverflowWithRestResponseAsync()
-            .flatMapMaybe((BodyResponse<OffsetDateTime> res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .flatMapMaybe(new Function<BodyResponse<OffsetDateTime>, Maybe<OffsetDateTime>>() {
+                public Maybe<OffsetDateTime> apply(BodyResponse<OffsetDateTime> res) {
+                    return res.body() == null ? Maybe.<OffsetDateTime>empty() : Maybe.just(res.body());
+                }
+            }
+            );
     }
 
     /**
@@ -276,7 +292,12 @@ public final class Datetimerfc1123sImpl implements Datetimerfc1123s {
      */
     public Maybe<OffsetDateTime> getUnderflowAsync() {
         return getUnderflowWithRestResponseAsync()
-            .flatMapMaybe((BodyResponse<OffsetDateTime> res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .flatMapMaybe(new Function<BodyResponse<OffsetDateTime>, Maybe<OffsetDateTime>>() {
+                public Maybe<OffsetDateTime> apply(BodyResponse<OffsetDateTime> res) {
+                    return res.body() == null ? Maybe.<OffsetDateTime>empty() : Maybe.just(res.body());
+                }
+            }
+            );
     }
 
     /**
@@ -368,7 +389,12 @@ public final class Datetimerfc1123sImpl implements Datetimerfc1123s {
      */
     public Maybe<OffsetDateTime> getUtcLowercaseMaxDateTimeAsync() {
         return getUtcLowercaseMaxDateTimeWithRestResponseAsync()
-            .flatMapMaybe((BodyResponse<OffsetDateTime> res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .flatMapMaybe(new Function<BodyResponse<OffsetDateTime>, Maybe<OffsetDateTime>>() {
+                public Maybe<OffsetDateTime> apply(BodyResponse<OffsetDateTime> res) {
+                    return res.body() == null ? Maybe.<OffsetDateTime>empty() : Maybe.just(res.body());
+                }
+            }
+            );
     }
 
     /**
@@ -409,7 +435,12 @@ public final class Datetimerfc1123sImpl implements Datetimerfc1123s {
      */
     public Maybe<OffsetDateTime> getUtcUppercaseMaxDateTimeAsync() {
         return getUtcUppercaseMaxDateTimeWithRestResponseAsync()
-            .flatMapMaybe((BodyResponse<OffsetDateTime> res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .flatMapMaybe(new Function<BodyResponse<OffsetDateTime>, Maybe<OffsetDateTime>>() {
+                public Maybe<OffsetDateTime> apply(BodyResponse<OffsetDateTime> res) {
+                    return res.body() == null ? Maybe.<OffsetDateTime>empty() : Maybe.just(res.body());
+                }
+            }
+            );
     }
 
     /**
@@ -501,6 +532,11 @@ public final class Datetimerfc1123sImpl implements Datetimerfc1123s {
      */
     public Maybe<OffsetDateTime> getUtcMinDateTimeAsync() {
         return getUtcMinDateTimeWithRestResponseAsync()
-            .flatMapMaybe((BodyResponse<OffsetDateTime> res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .flatMapMaybe(new Function<BodyResponse<OffsetDateTime>, Maybe<OffsetDateTime>>() {
+                public Maybe<OffsetDateTime> apply(BodyResponse<OffsetDateTime> res) {
+                    return res.body() == null ? Maybe.<OffsetDateTime>empty() : Maybe.just(res.body());
+                }
+            }
+            );
     }
 }

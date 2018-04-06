@@ -39,6 +39,7 @@ import io.reactivex.Completable;
 import io.reactivex.Maybe;
 import io.reactivex.Single;
 import io.reactivex.annotations.NonNull;
+import io.reactivex.functions.Function;
 
 /**
  * An instance of this class provides access to all the operations defined in
@@ -220,7 +221,12 @@ public final class PrimitivesImpl implements Primitives {
      */
     public Maybe<IntWrapper> getIntAsync() {
         return getIntWithRestResponseAsync()
-            .flatMapMaybe((BodyResponse<IntWrapper> res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .flatMapMaybe(new Function<BodyResponse<IntWrapper>, Maybe<IntWrapper>>() {
+                public Maybe<IntWrapper> apply(BodyResponse<IntWrapper> res) {
+                    return res.body() == null ? Maybe.<IntWrapper>empty() : Maybe.just(res.body());
+                }
+            }
+            );
     }
 
     /**
@@ -312,7 +318,12 @@ public final class PrimitivesImpl implements Primitives {
      */
     public Maybe<LongWrapper> getLongAsync() {
         return getLongWithRestResponseAsync()
-            .flatMapMaybe((BodyResponse<LongWrapper> res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .flatMapMaybe(new Function<BodyResponse<LongWrapper>, Maybe<LongWrapper>>() {
+                public Maybe<LongWrapper> apply(BodyResponse<LongWrapper> res) {
+                    return res.body() == null ? Maybe.<LongWrapper>empty() : Maybe.just(res.body());
+                }
+            }
+            );
     }
 
     /**
@@ -404,7 +415,12 @@ public final class PrimitivesImpl implements Primitives {
      */
     public Maybe<FloatWrapper> getFloatAsync() {
         return getFloatWithRestResponseAsync()
-            .flatMapMaybe((BodyResponse<FloatWrapper> res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .flatMapMaybe(new Function<BodyResponse<FloatWrapper>, Maybe<FloatWrapper>>() {
+                public Maybe<FloatWrapper> apply(BodyResponse<FloatWrapper> res) {
+                    return res.body() == null ? Maybe.<FloatWrapper>empty() : Maybe.just(res.body());
+                }
+            }
+            );
     }
 
     /**
@@ -496,7 +512,12 @@ public final class PrimitivesImpl implements Primitives {
      */
     public Maybe<DoubleWrapper> getDoubleAsync() {
         return getDoubleWithRestResponseAsync()
-            .flatMapMaybe((BodyResponse<DoubleWrapper> res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .flatMapMaybe(new Function<BodyResponse<DoubleWrapper>, Maybe<DoubleWrapper>>() {
+                public Maybe<DoubleWrapper> apply(BodyResponse<DoubleWrapper> res) {
+                    return res.body() == null ? Maybe.<DoubleWrapper>empty() : Maybe.just(res.body());
+                }
+            }
+            );
     }
 
     /**
@@ -588,7 +609,12 @@ public final class PrimitivesImpl implements Primitives {
      */
     public Maybe<BooleanWrapper> getBoolAsync() {
         return getBoolWithRestResponseAsync()
-            .flatMapMaybe((BodyResponse<BooleanWrapper> res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .flatMapMaybe(new Function<BodyResponse<BooleanWrapper>, Maybe<BooleanWrapper>>() {
+                public Maybe<BooleanWrapper> apply(BodyResponse<BooleanWrapper> res) {
+                    return res.body() == null ? Maybe.<BooleanWrapper>empty() : Maybe.just(res.body());
+                }
+            }
+            );
     }
 
     /**
@@ -680,7 +706,12 @@ public final class PrimitivesImpl implements Primitives {
      */
     public Maybe<StringWrapper> getStringAsync() {
         return getStringWithRestResponseAsync()
-            .flatMapMaybe((BodyResponse<StringWrapper> res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .flatMapMaybe(new Function<BodyResponse<StringWrapper>, Maybe<StringWrapper>>() {
+                public Maybe<StringWrapper> apply(BodyResponse<StringWrapper> res) {
+                    return res.body() == null ? Maybe.<StringWrapper>empty() : Maybe.just(res.body());
+                }
+            }
+            );
     }
 
     /**
@@ -772,7 +803,12 @@ public final class PrimitivesImpl implements Primitives {
      */
     public Maybe<DateWrapper> getDateAsync() {
         return getDateWithRestResponseAsync()
-            .flatMapMaybe((BodyResponse<DateWrapper> res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .flatMapMaybe(new Function<BodyResponse<DateWrapper>, Maybe<DateWrapper>>() {
+                public Maybe<DateWrapper> apply(BodyResponse<DateWrapper> res) {
+                    return res.body() == null ? Maybe.<DateWrapper>empty() : Maybe.just(res.body());
+                }
+            }
+            );
     }
 
     /**
@@ -864,7 +900,12 @@ public final class PrimitivesImpl implements Primitives {
      */
     public Maybe<DatetimeWrapper> getDateTimeAsync() {
         return getDateTimeWithRestResponseAsync()
-            .flatMapMaybe((BodyResponse<DatetimeWrapper> res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .flatMapMaybe(new Function<BodyResponse<DatetimeWrapper>, Maybe<DatetimeWrapper>>() {
+                public Maybe<DatetimeWrapper> apply(BodyResponse<DatetimeWrapper> res) {
+                    return res.body() == null ? Maybe.<DatetimeWrapper>empty() : Maybe.just(res.body());
+                }
+            }
+            );
     }
 
     /**
@@ -956,7 +997,12 @@ public final class PrimitivesImpl implements Primitives {
      */
     public Maybe<Datetimerfc1123Wrapper> getDateTimeRfc1123Async() {
         return getDateTimeRfc1123WithRestResponseAsync()
-            .flatMapMaybe((BodyResponse<Datetimerfc1123Wrapper> res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .flatMapMaybe(new Function<BodyResponse<Datetimerfc1123Wrapper>, Maybe<Datetimerfc1123Wrapper>>() {
+                public Maybe<Datetimerfc1123Wrapper> apply(BodyResponse<Datetimerfc1123Wrapper> res) {
+                    return res.body() == null ? Maybe.<Datetimerfc1123Wrapper>empty() : Maybe.just(res.body());
+                }
+            }
+            );
     }
 
     /**
@@ -1048,7 +1094,12 @@ public final class PrimitivesImpl implements Primitives {
      */
     public Maybe<DurationWrapper> getDurationAsync() {
         return getDurationWithRestResponseAsync()
-            .flatMapMaybe((BodyResponse<DurationWrapper> res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .flatMapMaybe(new Function<BodyResponse<DurationWrapper>, Maybe<DurationWrapper>>() {
+                public Maybe<DurationWrapper> apply(BodyResponse<DurationWrapper> res) {
+                    return res.body() == null ? Maybe.<DurationWrapper>empty() : Maybe.just(res.body());
+                }
+            }
+            );
     }
 
     /**
@@ -1140,7 +1191,12 @@ public final class PrimitivesImpl implements Primitives {
      */
     public Maybe<ByteWrapper> getByteAsync() {
         return getByteWithRestResponseAsync()
-            .flatMapMaybe((BodyResponse<ByteWrapper> res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .flatMapMaybe(new Function<BodyResponse<ByteWrapper>, Maybe<ByteWrapper>>() {
+                public Maybe<ByteWrapper> apply(BodyResponse<ByteWrapper> res) {
+                    return res.body() == null ? Maybe.<ByteWrapper>empty() : Maybe.just(res.body());
+                }
+            }
+            );
     }
 
     /**

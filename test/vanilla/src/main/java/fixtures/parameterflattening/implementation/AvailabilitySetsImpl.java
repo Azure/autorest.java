@@ -25,6 +25,7 @@ import fixtures.parameterflattening.models.AvailabilitySetUpdateParameters;
 import io.reactivex.Completable;
 import io.reactivex.Single;
 import io.reactivex.annotations.NonNull;
+import io.reactivex.functions.Function;
 import java.util.HashMap;
 import java.util.Map;
 

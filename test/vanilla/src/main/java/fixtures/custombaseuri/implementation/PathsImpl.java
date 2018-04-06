@@ -24,6 +24,7 @@ import fixtures.custombaseuri.models.ErrorException;
 import io.reactivex.Completable;
 import io.reactivex.Single;
 import io.reactivex.annotations.NonNull;
+import io.reactivex.functions.Function;
 
 /**
  * An instance of this class provides access to all the operations defined in

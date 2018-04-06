@@ -18,9 +18,9 @@ import fixtures.url.models.UriColor;
 import io.reactivex.Completable;
 import io.reactivex.Single;
 import io.reactivex.annotations.NonNull;
-import java.time.LocalDate;
-import java.time.OffsetDateTime;
 import java.util.List;
+import org.threeten.bp.LocalDate;
+import org.threeten.bp.OffsetDateTime;
 
 /**
  * An instance of this class provides access to all the operations defined in

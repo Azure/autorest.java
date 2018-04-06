@@ -12,7 +12,7 @@ package fixtures.header.models;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.microsoft.rest.v2.DateTimeRfc1123;
-import java.time.OffsetDateTime;
+import org.threeten.bp.OffsetDateTime;
 
 /**
  * Defines headers for responseDatetimeRfc1123 operation.

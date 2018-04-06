@@ -11,7 +11,7 @@
 package fixtures.bodycomplex.models;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import java.time.Duration;
+import org.threeten.bp.Duration;
 
 /**
  * The DurationWrapper model.

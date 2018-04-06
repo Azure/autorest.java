@@ -27,7 +27,8 @@ import io.reactivex.Completable;
 import io.reactivex.Maybe;
 import io.reactivex.Single;
 import io.reactivex.annotations.NonNull;
-import java.time.LocalDate;
+import io.reactivex.functions.Function;
+import org.threeten.bp.LocalDate;
 
 /**
  * An instance of this class provides access to all the operations defined in
@@ -139,7 +140,12 @@ public final class DatesImpl implements Dates {
      */
     public Maybe<LocalDate> getNullAsync() {
         return getNullWithRestResponseAsync()
-            .flatMapMaybe((BodyResponse<LocalDate> res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .flatMapMaybe(new Function<BodyResponse<LocalDate>, Maybe<LocalDate>>() {
+                public Maybe<LocalDate> apply(BodyResponse<LocalDate> res) {
+                    return res.body() == null ? Maybe.<LocalDate>empty() : Maybe.just(res.body());
+                }
+            }
+            );
     }
 
     /**
@@ -180,7 +186,12 @@ public final class DatesImpl implements Dates {
      */
     public Maybe<LocalDate> getInvalidDateAsync() {
         return getInvalidDateWithRestResponseAsync()
-            .flatMapMaybe((BodyResponse<LocalDate> res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .flatMapMaybe(new Function<BodyResponse<LocalDate>, Maybe<LocalDate>>() {
+                public Maybe<LocalDate> apply(BodyResponse<LocalDate> res) {
+                    return res.body() == null ? Maybe.<LocalDate>empty() : Maybe.just(res.body());
+                }
+            }
+            );
     }
 
     /**
@@ -221,7 +232,12 @@ public final class DatesImpl implements Dates {
      */
     public Maybe<LocalDate> getOverflowDateAsync() {
         return getOverflowDateWithRestResponseAsync()
-            .flatMapMaybe((BodyResponse<LocalDate> res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .flatMapMaybe(new Function<BodyResponse<LocalDate>, Maybe<LocalDate>>() {
+                public Maybe<LocalDate> apply(BodyResponse<LocalDate> res) {
+                    return res.body() == null ? Maybe.<LocalDate>empty() : Maybe.just(res.body());
+                }
+            }
+            );
     }
 
     /**
@@ -262,7 +278,12 @@ public final class DatesImpl implements Dates {
      */
     public Maybe<LocalDate> getUnderflowDateAsync() {
         return getUnderflowDateWithRestResponseAsync()
-            .flatMapMaybe((BodyResponse<LocalDate> res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .flatMapMaybe(new Function<BodyResponse<LocalDate>, Maybe<LocalDate>>() {
+                public Maybe<LocalDate> apply(BodyResponse<LocalDate> res) {
+                    return res.body() == null ? Maybe.<LocalDate>empty() : Maybe.just(res.body());
+                }
+            }
+            );
     }
 
     /**
@@ -353,7 +374,12 @@ public final class DatesImpl implements Dates {
      */
     public Maybe<LocalDate> getMaxDateAsync() {
         return getMaxDateWithRestResponseAsync()
-            .flatMapMaybe((BodyResponse<LocalDate> res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .flatMapMaybe(new Function<BodyResponse<LocalDate>, Maybe<LocalDate>>() {
+                public Maybe<LocalDate> apply(BodyResponse<LocalDate> res) {
+                    return res.body() == null ? Maybe.<LocalDate>empty() : Maybe.just(res.body());
+                }
+            }
+            );
     }
 
     /**
@@ -444,6 +470,11 @@ public final class DatesImpl implements Dates {
      */
     public Maybe<LocalDate> getMinDateAsync() {
         return getMinDateWithRestResponseAsync()
-            .flatMapMaybe((BodyResponse<LocalDate> res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .flatMapMaybe(new Function<BodyResponse<LocalDate>, Maybe<LocalDate>>() {
+                public Maybe<LocalDate> apply(BodyResponse<LocalDate> res) {
+                    return res.body() == null ? Maybe.<LocalDate>empty() : Maybe.just(res.body());
+                }
+            }
+            );
     }
 }

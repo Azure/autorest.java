@@ -11,7 +11,7 @@
 package fixtures.header.models;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import java.time.OffsetDateTime;
+import org.threeten.bp.OffsetDateTime;
 
 /**
  * Defines headers for responseDatetime operation.

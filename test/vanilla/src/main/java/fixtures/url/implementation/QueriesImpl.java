@@ -26,11 +26,12 @@ import fixtures.url.models.ErrorException;
 import fixtures.url.models.UriColor;
 import io.reactivex.Completable;
 import io.reactivex.Single;
-import java.time.LocalDate;
-import java.time.OffsetDateTime;
+import io.reactivex.functions.Function;
 import java.util.ArrayList;
 import java.util.List;
 import org.apache.commons.codec.binary.Base64;
+import org.threeten.bp.LocalDate;
+import org.threeten.bp.OffsetDateTime;
 
 /**
  * An instance of this class provides access to all the operations defined in

@@ -11,7 +11,7 @@
 package fixtures.header.models;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import java.time.Duration;
+import org.threeten.bp.Duration;
 
 /**
  * Defines headers for responseDuration operation.

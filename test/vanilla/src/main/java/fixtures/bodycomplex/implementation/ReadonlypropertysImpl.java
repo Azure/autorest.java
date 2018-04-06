@@ -29,6 +29,7 @@ import io.reactivex.Completable;
 import io.reactivex.Maybe;
 import io.reactivex.Single;
 import io.reactivex.annotations.NonNull;
+import io.reactivex.functions.Function;
 
 /**
  * An instance of this class provides access to all the operations defined in
@@ -110,7 +111,12 @@ public final class ReadonlypropertysImpl implements Readonlypropertys {
      */
     public Maybe<ReadonlyObj> getValidAsync() {
         return getValidWithRestResponseAsync()
-            .flatMapMaybe((BodyResponse<ReadonlyObj> res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .flatMapMaybe(new Function<BodyResponse<ReadonlyObj>, Maybe<ReadonlyObj>>() {
+                public Maybe<ReadonlyObj> apply(BodyResponse<ReadonlyObj> res) {
+                    return res.body() == null ? Maybe.<ReadonlyObj>empty() : Maybe.just(res.body());
+                }
+            }
+            );
     }
 
     /**

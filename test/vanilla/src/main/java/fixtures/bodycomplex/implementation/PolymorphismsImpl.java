@@ -30,6 +30,7 @@ import io.reactivex.Completable;
 import io.reactivex.Maybe;
 import io.reactivex.Single;
 import io.reactivex.annotations.NonNull;
+import io.reactivex.functions.Function;
 
 /**
  * An instance of this class provides access to all the operations defined in
@@ -126,7 +127,12 @@ public final class PolymorphismsImpl implements Polymorphisms {
      */
     public Maybe<Fish> getValidAsync() {
         return getValidWithRestResponseAsync()
-            .flatMapMaybe((BodyResponse<Fish> res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .flatMapMaybe(new Function<BodyResponse<Fish>, Maybe<Fish>>() {
+                public Maybe<Fish> apply(BodyResponse<Fish> res) {
+                    return res.body() == null ? Maybe.<Fish>empty() : Maybe.just(res.body());
+                }
+            }
+            );
     }
 
     /**
@@ -346,7 +352,12 @@ public final class PolymorphismsImpl implements Polymorphisms {
      */
     public Maybe<Salmon> getComplicatedAsync() {
         return getComplicatedWithRestResponseAsync()
-            .flatMapMaybe((BodyResponse<Salmon> res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .flatMapMaybe(new Function<BodyResponse<Salmon>, Maybe<Salmon>>() {
+                public Maybe<Salmon> apply(BodyResponse<Salmon> res) {
+                    return res.body() == null ? Maybe.<Salmon>empty() : Maybe.just(res.body());
+                }
+            }
+            );
     }
 
     /**

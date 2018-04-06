@@ -23,6 +23,7 @@ import fixtures.bodyfile.models.ErrorException;
 import io.reactivex.Flowable;
 import io.reactivex.Maybe;
 import io.reactivex.Single;
+import io.reactivex.functions.Function;
 import java.nio.ByteBuffer;
 
 /**
@@ -110,7 +111,12 @@ public final class FilesImpl implements Files {
      */
     public Maybe<Flowable<ByteBuffer>> getFileAsync() {
         return getFileWithRestResponseAsync()
-            .flatMapMaybe((StreamResponse res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .flatMapMaybe(new Function<StreamResponse, Maybe<Flowable<ByteBuffer>>>() {
+                public Maybe<Flowable<ByteBuffer>> apply(StreamResponse res) {
+                    return res.body() == null ? Maybe.<Flowable<ByteBuffer>>empty() : Maybe.just(res.body());
+                }
+            }
+            );
     }
 
     /**
@@ -151,7 +157,12 @@ public final class FilesImpl implements Files {
      */
     public Maybe<Flowable<ByteBuffer>> getFileLargeAsync() {
         return getFileLargeWithRestResponseAsync()
-            .flatMapMaybe((StreamResponse res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .flatMapMaybe(new Function<StreamResponse, Maybe<Flowable<ByteBuffer>>>() {
+                public Maybe<Flowable<ByteBuffer>> apply(StreamResponse res) {
+                    return res.body() == null ? Maybe.<Flowable<ByteBuffer>>empty() : Maybe.just(res.body());
+                }
+            }
+            );
     }
 
     /**
@@ -192,6 +203,11 @@ public final class FilesImpl implements Files {
      */
     public Maybe<Flowable<ByteBuffer>> getEmptyFileAsync() {
         return getEmptyFileWithRestResponseAsync()
-            .flatMapMaybe((StreamResponse res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .flatMapMaybe(new Function<StreamResponse, Maybe<Flowable<ByteBuffer>>>() {
+                public Maybe<Flowable<ByteBuffer>> apply(StreamResponse res) {
+                    return res.body() == null ? Maybe.<Flowable<ByteBuffer>>empty() : Maybe.just(res.body());
+                }
+            }
+            );
     }
 }

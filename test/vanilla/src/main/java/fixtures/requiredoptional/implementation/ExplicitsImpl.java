@@ -39,6 +39,7 @@ import io.reactivex.Completable;
 import io.reactivex.Maybe;
 import io.reactivex.Single;
 import io.reactivex.annotations.NonNull;
+import io.reactivex.functions.Function;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -218,7 +219,12 @@ public final class ExplicitsImpl implements Explicits {
      */
     public Maybe<Error> postRequiredIntegerParameterAsync(@NonNull int bodyParameter) {
         return postRequiredIntegerParameterWithRestResponseAsync(bodyParameter)
-            .flatMapMaybe((BodyResponse<Error> res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .flatMapMaybe(new Function<BodyResponse<Error>, Maybe<Error>>() {
+                public Maybe<Error> apply(BodyResponse<Error> res) {
+                    return res.body() == null ? Maybe.<Error>empty() : Maybe.just(res.body());
+                }
+            }
+            );
     }
 
     /**
@@ -358,7 +364,12 @@ public final class ExplicitsImpl implements Explicits {
      */
     public Maybe<Error> postRequiredIntegerPropertyAsync(@NonNull IntWrapper bodyParameter) {
         return postRequiredIntegerPropertyWithRestResponseAsync(bodyParameter)
-            .flatMapMaybe((BodyResponse<Error> res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .flatMapMaybe(new Function<BodyResponse<Error>, Maybe<Error>>() {
+                public Maybe<Error> apply(BodyResponse<Error> res) {
+                    return res.body() == null ? Maybe.<Error>empty() : Maybe.just(res.body());
+                }
+            }
+            );
     }
 
     /**
@@ -495,7 +506,12 @@ public final class ExplicitsImpl implements Explicits {
      */
     public Maybe<Error> postRequiredIntegerHeaderAsync(@NonNull int headerParameter) {
         return postRequiredIntegerHeaderWithRestResponseAsync(headerParameter)
-            .flatMapMaybe((BodyResponse<Error> res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .flatMapMaybe(new Function<BodyResponse<Error>, Maybe<Error>>() {
+                public Maybe<Error> apply(BodyResponse<Error> res) {
+                    return res.body() == null ? Maybe.<Error>empty() : Maybe.just(res.body());
+                }
+            }
+            );
     }
 
     /**
@@ -634,7 +650,12 @@ public final class ExplicitsImpl implements Explicits {
      */
     public Maybe<Error> postRequiredStringParameterAsync(@NonNull String bodyParameter) {
         return postRequiredStringParameterWithRestResponseAsync(bodyParameter)
-            .flatMapMaybe((BodyResponse<Error> res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .flatMapMaybe(new Function<BodyResponse<Error>, Maybe<Error>>() {
+                public Maybe<Error> apply(BodyResponse<Error> res) {
+                    return res.body() == null ? Maybe.<Error>empty() : Maybe.just(res.body());
+                }
+            }
+            );
     }
 
     /**
@@ -774,7 +795,12 @@ public final class ExplicitsImpl implements Explicits {
      */
     public Maybe<Error> postRequiredStringPropertyAsync(@NonNull StringWrapper bodyParameter) {
         return postRequiredStringPropertyWithRestResponseAsync(bodyParameter)
-            .flatMapMaybe((BodyResponse<Error> res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .flatMapMaybe(new Function<BodyResponse<Error>, Maybe<Error>>() {
+                public Maybe<Error> apply(BodyResponse<Error> res) {
+                    return res.body() == null ? Maybe.<Error>empty() : Maybe.just(res.body());
+                }
+            }
+            );
     }
 
     /**
@@ -914,7 +940,12 @@ public final class ExplicitsImpl implements Explicits {
      */
     public Maybe<Error> postRequiredStringHeaderAsync(@NonNull String headerParameter) {
         return postRequiredStringHeaderWithRestResponseAsync(headerParameter)
-            .flatMapMaybe((BodyResponse<Error> res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .flatMapMaybe(new Function<BodyResponse<Error>, Maybe<Error>>() {
+                public Maybe<Error> apply(BodyResponse<Error> res) {
+                    return res.body() == null ? Maybe.<Error>empty() : Maybe.just(res.body());
+                }
+            }
+            );
     }
 
     /**
@@ -1054,7 +1085,12 @@ public final class ExplicitsImpl implements Explicits {
      */
     public Maybe<Error> postRequiredClassParameterAsync(@NonNull Product bodyParameter) {
         return postRequiredClassParameterWithRestResponseAsync(bodyParameter)
-            .flatMapMaybe((BodyResponse<Error> res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .flatMapMaybe(new Function<BodyResponse<Error>, Maybe<Error>>() {
+                public Maybe<Error> apply(BodyResponse<Error> res) {
+                    return res.body() == null ? Maybe.<Error>empty() : Maybe.just(res.body());
+                }
+            }
+            );
     }
 
     /**
@@ -1195,7 +1231,12 @@ public final class ExplicitsImpl implements Explicits {
      */
     public Maybe<Error> postRequiredClassPropertyAsync(@NonNull ClassWrapper bodyParameter) {
         return postRequiredClassPropertyWithRestResponseAsync(bodyParameter)
-            .flatMapMaybe((BodyResponse<Error> res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .flatMapMaybe(new Function<BodyResponse<Error>, Maybe<Error>>() {
+                public Maybe<Error> apply(BodyResponse<Error> res) {
+                    return res.body() == null ? Maybe.<Error>empty() : Maybe.just(res.body());
+                }
+            }
+            );
     }
 
     /**
@@ -1336,7 +1377,12 @@ public final class ExplicitsImpl implements Explicits {
      */
     public Maybe<Error> postRequiredArrayParameterAsync(@NonNull List<String> bodyParameter) {
         return postRequiredArrayParameterWithRestResponseAsync(bodyParameter)
-            .flatMapMaybe((BodyResponse<Error> res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .flatMapMaybe(new Function<BodyResponse<Error>, Maybe<Error>>() {
+                public Maybe<Error> apply(BodyResponse<Error> res) {
+                    return res.body() == null ? Maybe.<Error>empty() : Maybe.just(res.body());
+                }
+            }
+            );
     }
 
     /**
@@ -1477,7 +1523,12 @@ public final class ExplicitsImpl implements Explicits {
      */
     public Maybe<Error> postRequiredArrayPropertyAsync(@NonNull ArrayWrapper bodyParameter) {
         return postRequiredArrayPropertyWithRestResponseAsync(bodyParameter)
-            .flatMapMaybe((BodyResponse<Error> res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .flatMapMaybe(new Function<BodyResponse<Error>, Maybe<Error>>() {
+                public Maybe<Error> apply(BodyResponse<Error> res) {
+                    return res.body() == null ? Maybe.<Error>empty() : Maybe.just(res.body());
+                }
+            }
+            );
     }
 
     /**
@@ -1619,7 +1670,12 @@ public final class ExplicitsImpl implements Explicits {
      */
     public Maybe<Error> postRequiredArrayHeaderAsync(@NonNull List<String> headerParameter) {
         return postRequiredArrayHeaderWithRestResponseAsync(headerParameter)
-            .flatMapMaybe((BodyResponse<Error> res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .flatMapMaybe(new Function<BodyResponse<Error>, Maybe<Error>>() {
+                public Maybe<Error> apply(BodyResponse<Error> res) {
+                    return res.body() == null ? Maybe.<Error>empty() : Maybe.just(res.body());
+                }
+            }
+            );
     }
 
     /**

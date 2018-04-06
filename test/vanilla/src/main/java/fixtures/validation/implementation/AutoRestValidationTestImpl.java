@@ -34,6 +34,7 @@ import io.reactivex.Completable;
 import io.reactivex.Maybe;
 import io.reactivex.Single;
 import io.reactivex.annotations.NonNull;
+import io.reactivex.functions.Function;
 
 /**
  * Initializes a new instance of the AutoRestValidationTest type.
@@ -194,7 +195,12 @@ public final class AutoRestValidationTestImpl extends ServiceClient implements A
      */
     public Maybe<Product> validationOfMethodParametersAsync(@NonNull String resourceGroupName, @NonNull int id) {
         return validationOfMethodParametersWithRestResponseAsync(resourceGroupName, id)
-            .flatMapMaybe((BodyResponse<Product> res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .flatMapMaybe(new Function<BodyResponse<Product>, Maybe<Product>>() {
+                public Maybe<Product> apply(BodyResponse<Product> res) {
+                    return res.body() == null ? Maybe.<Product>empty() : Maybe.just(res.body());
+                }
+            }
+            );
     }
 
     /**
@@ -256,7 +262,12 @@ public final class AutoRestValidationTestImpl extends ServiceClient implements A
      */
     public Maybe<Product> validationOfBodyAsync(@NonNull String resourceGroupName, @NonNull int id) {
         return validationOfBodyWithRestResponseAsync(resourceGroupName, id)
-            .flatMapMaybe((BodyResponse<Product> res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .flatMapMaybe(new Function<BodyResponse<Product>, Maybe<Product>>() {
+                public Maybe<Product> apply(BodyResponse<Product> res) {
+                    return res.body() == null ? Maybe.<Product>empty() : Maybe.just(res.body());
+                }
+            }
+            );
     }
 
     /**
@@ -322,7 +333,12 @@ public final class AutoRestValidationTestImpl extends ServiceClient implements A
      */
     public Maybe<Product> validationOfBodyAsync(@NonNull String resourceGroupName, @NonNull int id, Product body) {
         return validationOfBodyWithRestResponseAsync(resourceGroupName, id, body)
-            .flatMapMaybe((BodyResponse<Product> res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .flatMapMaybe(new Function<BodyResponse<Product>, Maybe<Product>>() {
+                public Maybe<Product> apply(BodyResponse<Product> res) {
+                    return res.body() == null ? Maybe.<Product>empty() : Maybe.just(res.body());
+                }
+            }
+            );
     }
 
     /**
@@ -388,7 +404,12 @@ public final class AutoRestValidationTestImpl extends ServiceClient implements A
      */
     public Maybe<Product> postWithConstantInBodyAsync() {
         return postWithConstantInBodyWithRestResponseAsync()
-            .flatMapMaybe((BodyResponse<Product> res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .flatMapMaybe(new Function<BodyResponse<Product>, Maybe<Product>>() {
+                public Maybe<Product> apply(BodyResponse<Product> res) {
+                    return res.body() == null ? Maybe.<Product>empty() : Maybe.just(res.body());
+                }
+            }
+            );
     }
 
     /**
@@ -429,6 +450,11 @@ public final class AutoRestValidationTestImpl extends ServiceClient implements A
      */
     public Maybe<Product> postWithConstantInBodyAsync(Product body) {
         return postWithConstantInBodyWithRestResponseAsync(body)
-            .flatMapMaybe((BodyResponse<Product> res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .flatMapMaybe(new Function<BodyResponse<Product>, Maybe<Product>>() {
+                public Maybe<Product> apply(BodyResponse<Product> res) {
+                    return res.body() == null ? Maybe.<Product>empty() : Maybe.just(res.body());
+                }
+            }
+            );
     }
 }

@@ -30,6 +30,7 @@ import io.reactivex.Completable;
 import io.reactivex.Maybe;
 import io.reactivex.Single;
 import io.reactivex.annotations.NonNull;
+import io.reactivex.functions.Function;
 
 /**
  * An instance of this class provides access to all the operations defined in
@@ -131,7 +132,12 @@ public final class EnumsImpl implements Enums {
      */
     public Maybe<Colors> getNotExpandableAsync() {
         return getNotExpandableWithRestResponseAsync()
-            .flatMapMaybe((BodyResponse<Colors> res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .flatMapMaybe(new Function<BodyResponse<Colors>, Maybe<Colors>>() {
+                public Maybe<Colors> apply(BodyResponse<Colors> res) {
+                    return res.body() == null ? Maybe.<Colors>empty() : Maybe.just(res.body());
+                }
+            }
+            );
     }
 
     /**
@@ -222,7 +228,12 @@ public final class EnumsImpl implements Enums {
      */
     public Maybe<Colors> getReferencedAsync() {
         return getReferencedWithRestResponseAsync()
-            .flatMapMaybe((BodyResponse<Colors> res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .flatMapMaybe(new Function<BodyResponse<Colors>, Maybe<Colors>>() {
+                public Maybe<Colors> apply(BodyResponse<Colors> res) {
+                    return res.body() == null ? Maybe.<Colors>empty() : Maybe.just(res.body());
+                }
+            }
+            );
     }
 
     /**
@@ -313,7 +324,12 @@ public final class EnumsImpl implements Enums {
      */
     public Maybe<RefColorConstant> getReferencedConstantAsync() {
         return getReferencedConstantWithRestResponseAsync()
-            .flatMapMaybe((BodyResponse<RefColorConstant> res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .flatMapMaybe(new Function<BodyResponse<RefColorConstant>, Maybe<RefColorConstant>>() {
+                public Maybe<RefColorConstant> apply(BodyResponse<RefColorConstant> res) {
+                    return res.body() == null ? Maybe.<RefColorConstant>empty() : Maybe.just(res.body());
+                }
+            }
+            );
     }
 
     /**

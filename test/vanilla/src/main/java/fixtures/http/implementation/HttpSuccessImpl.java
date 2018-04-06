@@ -30,6 +30,7 @@ import fixtures.http.models.ErrorException;
 import io.reactivex.Completable;
 import io.reactivex.Maybe;
 import io.reactivex.Single;
+import io.reactivex.functions.Function;
 
 /**
  * An instance of this class provides access to all the operations defined in
@@ -231,7 +232,12 @@ public final class HttpSuccessImpl implements HttpSuccess {
      */
     public Maybe<Boolean> get200Async() {
         return get200WithRestResponseAsync()
-            .flatMapMaybe((BodyResponse<Boolean> res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .flatMapMaybe(new Function<BodyResponse<Boolean>, Maybe<Boolean>>() {
+                public Maybe<Boolean> apply(BodyResponse<Boolean> res) {
+                    return res.body() == null ? Maybe.<Boolean>empty() : Maybe.just(res.body());
+                }
+            }
+            );
     }
 
     /**

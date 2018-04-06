@@ -26,6 +26,7 @@ import fixtures.report.models.ErrorException;
 import io.reactivex.Maybe;
 import io.reactivex.Single;
 import io.reactivex.annotations.NonNull;
+import io.reactivex.functions.Function;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -106,7 +107,12 @@ public final class AutoRestReportServiceImpl extends ServiceClient implements Au
      */
     public Maybe<Map<String, Integer>> getReportAsync() {
         return getReportWithRestResponseAsync()
-            .flatMapMaybe((BodyResponse<Map<String, Integer>> res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .flatMapMaybe(new Function<BodyResponse<Map<String, Integer>>, Maybe<Map<String, Integer>>>() {
+                public Maybe<Map<String, Integer>> apply(BodyResponse<Map<String, Integer>> res) {
+                    return res.body() == null ? Maybe.<Map<String, Integer>>empty() : Maybe.just(res.body());
+                }
+            }
+            );
     }
 
     /**
@@ -154,6 +160,11 @@ public final class AutoRestReportServiceImpl extends ServiceClient implements Au
      */
     public Maybe<Map<String, Integer>> getReportAsync(String qualifier) {
         return getReportWithRestResponseAsync(qualifier)
-            .flatMapMaybe((BodyResponse<Map<String, Integer>> res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .flatMapMaybe(new Function<BodyResponse<Map<String, Integer>>, Maybe<Map<String, Integer>>>() {
+                public Maybe<Map<String, Integer>> apply(BodyResponse<Map<String, Integer>> res) {
+                    return res.body() == null ? Maybe.<Map<String, Integer>>empty() : Maybe.just(res.body());
+                }
+            }
+            );
     }
 }
