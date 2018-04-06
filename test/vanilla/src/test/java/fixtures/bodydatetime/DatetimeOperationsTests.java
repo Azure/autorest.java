@@ -6,7 +6,7 @@ import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-import java.time.*;
+import org.threeten.bp.*;
 
 public class DatetimeOperationsTests {
     private static AutoRestDateTimeTestService client;

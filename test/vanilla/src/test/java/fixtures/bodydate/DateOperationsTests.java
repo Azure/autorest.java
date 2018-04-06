@@ -5,7 +5,7 @@ import fixtures.bodydate.implementation.AutoRestDateTestServiceImpl;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-import java.time.LocalDate;
+import org.threeten.bp.LocalDate;
 
 import static org.junit.Assert.*;
 

@@ -6,10 +6,10 @@ import fixtures.bodyarray.models.Product;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-import java.time.Duration;
-import java.time.LocalDate;
-import java.time.OffsetDateTime;
-import java.time.ZoneOffset;
+import org.threeten.bp.Duration;
+import org.threeten.bp.LocalDate;
+import org.threeten.bp.OffsetDateTime;
+import org.threeten.bp.ZoneOffset;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
@@ -52,7 +52,7 @@ public class ArrayTests {
 
     @Test
     public void putEmpty() {
-        client.arrays().putEmpty(new ArrayList<>());
+        client.arrays().putEmpty(new ArrayList<String>());
     }
 
     @Test

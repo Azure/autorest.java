@@ -6,7 +6,7 @@ import fixtures.bodydictionary.models.Widget;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-import java.time.*;
+import org.threeten.bp.*;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
@@ -45,7 +45,7 @@ public class DictionaryTests {
 
     @Test
     public void putEmpty() {
-        client.dictionarys().putEmpty(new HashMap<>());
+        client.dictionarys().putEmpty(new HashMap<String, String>());
     }
 
     @Test

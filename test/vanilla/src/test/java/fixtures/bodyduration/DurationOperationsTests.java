@@ -7,7 +7,7 @@ import org.junit.Test;
 
 import fixtures.bodyduration.implementation.AutoRestDurationTestServiceImpl;
 
-import java.time.Duration;
+import org.threeten.bp.Duration;
 
 import static org.junit.Assert.*;
 

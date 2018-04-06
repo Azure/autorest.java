@@ -8,7 +8,7 @@ import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-import java.time.OffsetDateTime;
+import org.threeten.bp.OffsetDateTime;
 
 public class PathsTests {
     private static AutoRestUrlTestService client;

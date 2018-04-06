@@ -10,8 +10,8 @@ import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-import java.time.OffsetDateTime;
-import java.time.ZoneOffset;
+import org.threeten.bp.OffsetDateTime;
+import org.threeten.bp.ZoneOffset;
 import java.util.ArrayList;
 
 public class PolymorphismTests {
@@ -50,7 +50,7 @@ public class PolymorphismTests {
         body.withIswild(true);
         body.withSpecies("king");
         body.withLength(1.0);
-        body.withSiblings(new ArrayList<>());
+        body.withSiblings(new ArrayList<Fish>());
 
         Shark sib1 = new Shark();
         sib1.withAge(6);
@@ -86,7 +86,7 @@ public class PolymorphismTests {
             body.withIswild(true);
             body.withSpecies("king");
             body.withLength(1.0);
-            body.withSiblings(new ArrayList<>());
+            body.withSiblings(new ArrayList<Fish>());
 
             Shark sib1 = new Shark();
             sib1.withAge(6);
