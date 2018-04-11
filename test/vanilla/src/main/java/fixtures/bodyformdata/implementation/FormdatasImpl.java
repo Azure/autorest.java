@@ -16,6 +16,7 @@ import com.microsoft.rest.v2.ServiceFuture;
 import com.microsoft.rest.v2.StreamResponse;
 import com.microsoft.rest.v2.annotations.BodyParam;
 import com.microsoft.rest.v2.annotations.ExpectedResponses;
+import com.microsoft.rest.v2.annotations.HeaderParam;
 import com.microsoft.rest.v2.annotations.Host;
 import com.microsoft.rest.v2.annotations.POST;
 import com.microsoft.rest.v2.annotations.PUT;
@@ -68,7 +69,7 @@ public final class FormdatasImpl implements Formdatas {
         @PUT("formdata/stream/uploadfile")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<StreamResponse> uploadFileViaBody(@BodyParam("application/octet-stream") Flowable<ByteBuffer> fileContent);
+        Single<StreamResponse> uploadFileViaBody(@HeaderParam("Content-Length") long contentLength, @BodyParam("application/octet-stream") Flowable<ByteBuffer> fileContent);
     }
 
     /**
@@ -132,51 +133,55 @@ public final class FormdatasImpl implements Formdatas {
     /**
      * Upload file.
      *
+     * @param contentLength The content length.
      * @param fileContent File to upload.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the Flowable&lt;ByteBuffer&gt; object if successful.
      */
-    public Flowable<ByteBuffer> uploadFileViaBody(@NonNull Flowable<ByteBuffer> fileContent) {
-        return uploadFileViaBodyAsync(fileContent).blockingGet();
+    public Flowable<ByteBuffer> uploadFileViaBody(@NonNull long contentLength, @NonNull Flowable<ByteBuffer> fileContent) {
+        return uploadFileViaBodyAsync(contentLength, fileContent).blockingGet();
     }
 
     /**
      * Upload file.
      *
+     * @param contentLength The content length.
      * @param fileContent File to upload.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return a ServiceFuture which will be completed with the result of the network request.
      */
-    public ServiceFuture<Flowable<ByteBuffer>> uploadFileViaBodyAsync(@NonNull Flowable<ByteBuffer> fileContent, ServiceCallback<Flowable<ByteBuffer>> serviceCallback) {
-        return ServiceFuture.fromBody(uploadFileViaBodyAsync(fileContent), serviceCallback);
+    public ServiceFuture<Flowable<ByteBuffer>> uploadFileViaBodyAsync(@NonNull long contentLength, @NonNull Flowable<ByteBuffer> fileContent, ServiceCallback<Flowable<ByteBuffer>> serviceCallback) {
+        return ServiceFuture.fromBody(uploadFileViaBodyAsync(contentLength, fileContent), serviceCallback);
     }
 
     /**
      * Upload file.
      *
+     * @param contentLength The content length.
      * @param fileContent File to upload.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return a Single which performs the network request upon subscription.
      */
-    public Single<StreamResponse> uploadFileViaBodyWithRestResponseAsync(@NonNull Flowable<ByteBuffer> fileContent) {
+    public Single<StreamResponse> uploadFileViaBodyWithRestResponseAsync(@NonNull long contentLength, @NonNull Flowable<ByteBuffer> fileContent) {
         if (fileContent == null) {
             throw new IllegalArgumentException("Parameter fileContent is required and cannot be null.");
         }
-        return service.uploadFileViaBody(fileContent);
+        return service.uploadFileViaBody(contentLength, fileContent);
     }
 
     /**
      * Upload file.
      *
+     * @param contentLength The content length.
      * @param fileContent File to upload.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return a Single which performs the network request upon subscription.
      */
-    public Maybe<Flowable<ByteBuffer>> uploadFileViaBodyAsync(@NonNull Flowable<ByteBuffer> fileContent) {
-        return uploadFileViaBodyWithRestResponseAsync(fileContent)
+    public Maybe<Flowable<ByteBuffer>> uploadFileViaBodyAsync(@NonNull long contentLength, @NonNull Flowable<ByteBuffer> fileContent) {
+        return uploadFileViaBodyWithRestResponseAsync(contentLength, fileContent)
             .flatMapMaybe((StreamResponse res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 }

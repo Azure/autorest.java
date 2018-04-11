@@ -36,15 +36,13 @@ public class FormdataTests {
         Assert.assertEquals(new String(bytes, Charsets.UTF_8), new String(allContent, Charsets.UTF_8));
     }
 
-    // FIXME: nothing here is actually applying Transfer-Encoding: chunked
-    @Ignore("Transfer-Encoding: chunked not currently supported")
     @Test
     public void uploadFileViaBody() throws Exception {
         ClassLoader classLoader = getClass().getClassLoader();
         try (InputStream stream = classLoader.getResourceAsStream("upload.txt")) {
             byte[] bytes = IOUtils.toByteArray(stream);
             stream.close();
-            byte[] actual = FlowableUtil.collectBytesInArray(client.formdatas().uploadFileViaBody(Flowable.just(ByteBuffer.wrap(bytes)))).blockingGet();
+            byte[] actual = FlowableUtil.collectBytesInArray(client.formdatas().uploadFileViaBody(bytes.length, Flowable.just(ByteBuffer.wrap(bytes)))).blockingGet();
             Assert.assertEquals(new String(bytes, StandardCharsets.UTF_8), new String(actual, StandardCharsets.UTF_8));
         }
     }
