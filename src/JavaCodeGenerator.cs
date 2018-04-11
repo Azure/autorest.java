@@ -1066,6 +1066,30 @@ namespace AutoRest.Java
                 pagedListTypes.Add(responseBodyWireListType);
             }
 
+            // If there is a stream body and no Content-Length header parameter, add one automatically
+            // Convert to list so we can use methods like FindIndex and Insert(int, T)
+            List<AutoRestParameter> autoRestMethodParameters = new List<AutoRestParameter>(autoRestMethod.Parameters);
+            int streamBodyParameterIndex = autoRestMethodParameters.FindIndex(p => p.Location == AutoRestParameterLocation.Body && p.ModelType is AutoRestPrimaryType mt && mt.KnownPrimaryType == AutoRestKnownPrimaryType.Stream);
+            if (streamBodyParameterIndex != -1 &&
+                !autoRestMethodParameters.Any(p =>
+                    p.Location == AutoRestParameterLocation.Header && p.SerializedName.EqualsIgnoreCase("Content-Type")))
+            {
+                AutoRestParameter contentLengthParameter = DependencyInjection.New<AutoRestParameter>();
+                contentLengthParameter.Method = autoRestMethod;
+                contentLengthParameter.IsRequired = true;
+                contentLengthParameter.Location = AutoRestParameterLocation.Header;
+                contentLengthParameter.SerializedName = "Content-Length";
+                contentLengthParameter.Name = "contentLength";
+                contentLengthParameter.Documentation = "The content length";
+                contentLengthParameter.ModelType = DependencyInjection.New<AutoRestPrimaryType>(AutoRestKnownPrimaryType.Long);
+
+                // Add the Content-Length parameter before the body parameter
+                autoRestMethodParameters.Insert(streamBodyParameterIndex, contentLengthParameter);
+            }
+
+            autoRestMethod.ClearParameters();
+            autoRestMethod.AddRange(autoRestMethodParameters);
+
             IType restAPIMethodReturnType;
             if (restAPIMethodIsLongRunningOperation)
             {
@@ -5393,7 +5417,7 @@ namespace AutoRest.Java
                 });
             return string.Join(", ", restAPIMethodArguments);
         }
-        
+
         private static string AddClientTypePrefix(string clientType, JavaSettings settings)
             => string.IsNullOrEmpty(settings.ClientTypePrefix) ? clientType : settings.ClientTypePrefix + clientType;
     }

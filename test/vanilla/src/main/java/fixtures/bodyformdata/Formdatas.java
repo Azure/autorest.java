@@ -71,39 +71,43 @@ public interface Formdatas {
     /**
      * Upload file.
      *
+     * @param contentLength The content length.
      * @param fileContent File to upload.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the Flowable&lt;ByteBuffer&gt; object if successful.
      */
-    Flowable<ByteBuffer> uploadFileViaBody(@NonNull Flowable<ByteBuffer> fileContent);
+    Flowable<ByteBuffer> uploadFileViaBody(@NonNull long contentLength, @NonNull Flowable<ByteBuffer> fileContent);
 
     /**
      * Upload file.
      *
+     * @param contentLength The content length.
      * @param fileContent File to upload.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return a ServiceFuture which will be completed with the result of the network request.
      */
-    ServiceFuture<Flowable<ByteBuffer>> uploadFileViaBodyAsync(@NonNull Flowable<ByteBuffer> fileContent, ServiceCallback<Flowable<ByteBuffer>> serviceCallback);
+    ServiceFuture<Flowable<ByteBuffer>> uploadFileViaBodyAsync(@NonNull long contentLength, @NonNull Flowable<ByteBuffer> fileContent, ServiceCallback<Flowable<ByteBuffer>> serviceCallback);
 
     /**
      * Upload file.
      *
+     * @param contentLength The content length.
      * @param fileContent File to upload.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return a Single which performs the network request upon subscription.
      */
-    Single<StreamResponse> uploadFileViaBodyWithRestResponseAsync(@NonNull Flowable<ByteBuffer> fileContent);
+    Single<StreamResponse> uploadFileViaBodyWithRestResponseAsync(@NonNull long contentLength, @NonNull Flowable<ByteBuffer> fileContent);
 
     /**
      * Upload file.
      *
+     * @param contentLength The content length.
      * @param fileContent File to upload.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return a Single which performs the network request upon subscription.
      */
-    Maybe<Flowable<ByteBuffer>> uploadFileViaBodyAsync(@NonNull Flowable<ByteBuffer> fileContent);
+    Maybe<Flowable<ByteBuffer>> uploadFileViaBodyAsync(@NonNull long contentLength, @NonNull Flowable<ByteBuffer> fileContent);
 }
