@@ -1085,10 +1085,9 @@ namespace AutoRest.Java
 
                 // Add the Content-Length parameter before the body parameter
                 autoRestMethodParameters.Insert(streamBodyParameterIndex, contentLengthParameter);
+                autoRestMethod.ClearParameters();
+                autoRestMethod.AddRange(autoRestMethodParameters);
             }
-
-            autoRestMethod.ClearParameters();
-            autoRestMethod.AddRange(autoRestMethodParameters);
 
             IType restAPIMethodReturnType;
             if (restAPIMethodIsLongRunningOperation)
