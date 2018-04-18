@@ -12,12 +12,14 @@ package fixtures.azureresource.models;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.microsoft.rest.serializer.JsonFlatten;
+import com.microsoft.rest.SkipParentValidation;
 import com.microsoft.azure.Resource;
 
 /**
  * The FlattenedProduct model.
  */
 @JsonFlatten
+@SkipParentValidation
 public class FlattenedProduct extends Resource {
     /**
      * The pname property.
