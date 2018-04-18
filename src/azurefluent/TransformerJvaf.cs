@@ -186,15 +186,15 @@ namespace AutoRest.Java.Azure
 
             foreach (var method in client.Methods)
             {
-                if ((method.Name.EqualsIgnoreCase(WellKnownMethodNames.ListAll) || method.Name.EqualsIgnoreCase(WellKnownMethodNames.ListBySubscription))
-                    && HasNonClientNonConstantRequiredParameters(method, 0))
-                {
-                    method.Name = WellKnownMethodNames.List;
-                }
-
                 if (method.Name.EqualsIgnoreCase(WellKnownMethodNames.List) && HasNonClientNonConstantRequiredParameters(method, 1) && method.Parameters.First().Name.StartsWith("resourceGroup"))
                 {
                     method.Name = WellKnownMethodNames.ListByResourceGroup;
+                }
+
+                if ((method.Name.EqualsIgnoreCase(WellKnownMethodNames.ListAll) || method.Name.EqualsIgnoreCase(WellKnownMethodNames.ListBySubscription))
+                    && HasNonClientNonConstantRequiredParameters(method, 0) && !client.Methods.Any(m => m.Name.RawValue == WellKnownMethodNames.List))
+                {
+                    method.Name = WellKnownMethodNames.List;
                 }
             }
         }
