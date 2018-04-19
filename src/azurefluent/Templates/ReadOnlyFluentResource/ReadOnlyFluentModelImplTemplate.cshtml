@@ -1,0 +1,40 @@
+﻿@using AutoRest.Java.azure.Templates
+@using System.Linq
+@using AutoRest.Core.Utilities
+@using AutoRest.Java.Model
+@using AutoRest.Java.Azure.Model
+@using  AutoRest.Java.Azure.Fluent.Model;
+@inherits AutoRest.Core.Template<AutoRest.Java.Azure.Fluent.Model.ReadOnlyFluentModelImpl>
+/**
+@Header(" * ").TrimMultilineHeader()
+ */
+@EmptyLine
+
+package @(Settings.Namespace.ToLower()).implementation;
+
+@EmptyLine
+
+@foreach (var importClass in Model.Imports)
+{
+@:import @importClass;
+}
+@EmptyLine
+
+class @(Model.JvaClassName)@(Model.ExtendsFrom)@(Model.Implements) {
+    @Model.DeclareManagerVariable
+
+@foreach (var jvaMethod in Model.JavaMethods)
+{
+@:    @jvaMethod
+@:    @EmptyLine
+}
+
+@foreach (PropertyJv property in Model.Interface.LocalProperties)
+{
+@:    @@Override
+@:    public @(((IModelTypeJv)property.ModelType).ResponseVariant.Name) @(property.Name.ToCamelCase())() {
+@:        return this.inner().@(property.Name.ToCamelCase())();
+@:    }
+@EmptyLine
+}
+}

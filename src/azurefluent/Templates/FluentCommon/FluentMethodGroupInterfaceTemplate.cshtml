@@ -1,0 +1,158 @@
+﻿@using System
+@using AutoRest.Java
+@using AutoRest.Java.vanilla.Templates
+@using AutoRest.Java.azure.Templates
+@using System.Linq
+@using AutoRest.Core.Utilities
+@using AutoRest.Java.Model
+@using AutoRest.Java.Azure.Model
+@using AutoRest.Java.Azure.Fluent.Model
+@inherits AutoRest.Core.Template<AutoRest.Java.Azure.Fluent.Model.FluentMethodGroup>
+
+/**
+@Header(" * ").TrimMultilineHeader()
+ */
+@EmptyLine
+
+package @(Settings.Namespace.ToLower());
+
+@EmptyLine
+
+@foreach (var importClass in Model.Imports)
+{
+@:import @importClass;
+}
+@EmptyLine
+
+/**
+ * Type representing @(Model.JavaInterfaceName).
+ */
+public interface @(Model.JavaInterfaceName)@(Model.ExtendsFrom) {
+
+@foreach (var nestedFluentMethodGroup in Model.ChildFluentMethodGroups)
+{
+@EmptyLine
+    <text>
+    /**
+     * @@return Entry point to manage @(Model.LocalSingularNameInPascalCase) @(nestedFluentMethodGroup.LocalSingularNameInPascalCase).
+     */
+    </text>
+    @:@(nestedFluentMethodGroup.JavaInterfaceName) @(nestedFluentMethodGroup.LocalNameInCamelCase.ToCamelCase())();
+}
+
+@if (@Model.ResourceListingDescription.SupportsListByImmediateParent)
+{
+    @EmptyLine
+    var returnModel = Model.ResourceListingDescription.ListByImmediateParentMethod.ReturnModel;
+    var innerMethod = Model.ResourceListingDescription.ListByImmediateParentMethod.InnerMethod;
+
+    <text>
+    /**
+    @if (!string.IsNullOrEmpty(innerMethod.Summary))
+    {
+     @:* @innerMethod.Summary.EscapeXmlComment().Period()
+    }
+    @if (!string.IsNullOrEmpty(innerMethod.Description))
+    {
+ @:* @innerMethod.Description.EscapeXmlComment().Period()
+    }
+     *
+    @foreach (var param in innerMethod.LocalParameters.Where(p => !p.IsConstant && p.IsRequired))
+    {
+     @:* @@param @param.Name @(param.Documentation.Else("the " + param.ModelType.Name + " value").EscapeXmlComment().Trim())
+    }
+     * @@throws IllegalArgumentException thrown if parameters fail the validation
+     * @@return the observable for the request
+     */
+    </text>
+    @:Observable<@(returnModel.JavaInterfaceName)> listBy@(Model.ParentFluentMethodGroup.LocalSingularNameInPascalCase)Async(@innerMethod.MethodRequiredParameterDeclaration);
+}
+@if (@Model.ResourceGetDescription.SupportsGetByImmediateParent)
+{
+    @EmptyLine
+    var returnModel = Model.ResourceGetDescription.GetByImmediateParentMethod.ReturnModel;
+    var innerMethod = Model.ResourceGetDescription.GetByImmediateParentMethod.InnerMethod;
+
+    <text>
+    /**
+    @if (!string.IsNullOrEmpty(innerMethod.Summary))
+    {
+     @:* @innerMethod.Summary.EscapeXmlComment().Period()
+    }
+    @if (!string.IsNullOrEmpty(innerMethod.Description))
+    {
+ @:* @innerMethod.Description.EscapeXmlComment().Period()
+    }
+    *
+    @foreach (var param in innerMethod.LocalParameters.Where(p => !p.IsConstant && p.IsRequired))
+    {
+     @:* @@param @param.Name @(param.Documentation.Else("the " + param.ModelType.Name + " value").EscapeXmlComment().Trim())
+    }
+     * @@throws IllegalArgumentException thrown if parameters fail the validation
+     * @@return the observable for the request
+     */
+    </text>
+    @:Observable<@(returnModel.JavaInterfaceName)> getBy@(Model.ParentFluentMethodGroup.LocalSingularNameInPascalCase)Async(@innerMethod.MethodRequiredParameterDeclaration);
+}
+@if (@Model.ResourceDeleteDescription.SupportsDeleteByImmediateParent)
+{
+    @EmptyLine
+    var innerMethod = Model.ResourceDeleteDescription.DeleteByImmediateParentMethod.InnerMethod;
+
+    <text>
+    /**
+    @if (!string.IsNullOrEmpty(innerMethod.Summary))
+    {
+     @:* @innerMethod.Summary.EscapeXmlComment().Period()
+    }
+    @if (!string.IsNullOrEmpty(innerMethod.Description))
+    {
+ @:* @innerMethod.Description.EscapeXmlComment().Period()
+    }
+     *
+    @foreach (var param in innerMethod.LocalParameters.Where(p => !p.IsConstant && p.IsRequired))
+    {
+     @:* @@param @param.Name @(param.Documentation.Else("the " + param.ModelType.Name + " value").EscapeXmlComment().Trim())
+    }
+     * @@throws IllegalArgumentException thrown if parameters fail the validation
+     * @@return the observable for the request
+     */
+    </text>
+    @:Completable deleteBy@(Model.ParentFluentMethodGroup.LocalSingularNameInPascalCase)Async(@innerMethod.MethodRequiredParameterDeclaration);
+}
+@foreach (var method in Model.OtherMethods)
+{
+    <text>
+    /**
+    @if (!string.IsNullOrEmpty(method.InnerMethod.Summary))
+    {
+     @:* @method.InnerMethod.Summary.EscapeXmlComment().Period()
+    }
+    @if (!string.IsNullOrEmpty(method.InnerMethod.Description))
+    {
+ @:* @method.InnerMethod.Description.EscapeXmlComment().Period()
+    }
+     *
+    @foreach (var param in method.InnerMethod.LocalParameters.Where(p => !p.IsConstant && p.IsRequired))
+    {
+     @:* @@param @param.Name @(param.Documentation.Else("the " + param.ModelType.Name + " value").EscapeXmlComment().Trim())
+    }
+     * @@throws IllegalArgumentException thrown if parameters fail the validation
+     * @@return the observable for the request
+     */
+    </text>
+    @if (method.InnerMethod.HttpMethod == AutoRest.Core.Model.HttpMethod.Delete)
+    {
+@:Completable @(method.Name)Async(@method.InnerMethod.MethodRequiredParameterDeclaration);
+    }
+    else if (method.ReturnModel is PrimtiveFluentModel)
+    {
+@:Completable @(method.Name)Async(@method.InnerMethod.MethodRequiredParameterDeclaration);
+    }
+    else
+    {
+@:Observable<@method.ReturnModel.JavaInterfaceName> @(method.Name)Async(@method.InnerMethod.MethodRequiredParameterDeclaration);
+    }
+    @EmptyLine
+}
+}

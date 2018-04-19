@@ -1,0 +1,39 @@
+﻿@using System
+@using AutoRest.Java
+@using AutoRest.Java.vanilla.Templates
+@using AutoRest.Java.azure.Templates
+@using System.Linq
+@using AutoRest.Core.Utilities
+@using AutoRest.Java.Model
+@using AutoRest.Java.Azure.Model
+@inherits AutoRest.Core.Template<AutoRest.Java.Azure.Fluent.Model.ReadOnlyFluentModelInterface>
+/**
+@Header(" * ").TrimMultilineHeader()
+ */
+@EmptyLine
+
+package @(Settings.Namespace.ToLower());
+
+@EmptyLine
+
+@foreach (var importClass in Model.Imports)
+{
+@:import @importClass;
+}
+@EmptyLine
+
+/**
+ * Type representing @(Model.JavaInterfaceName).
+ */
+public interface @(Model.JavaInterfaceName)@(Model.ExtendsFrom) {
+@foreach (PropertyJv property in Model.LocalProperties)
+{
+    <text>
+    /**
+     * @@return the @property.Name value.
+     */
+    </text>
+@:    @(((IModelTypeJv)property.ModelType).ResponseVariant.Name) @(property.Name.ToCamelCase())();
+@EmptyLine
+}
+}
